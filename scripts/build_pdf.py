@@ -17,20 +17,168 @@ _project_root = Path(__file__).resolve().parent.parent
 if str(_project_root) not in sys.path:
     sys.path.insert(0, str(_project_root))
 
-from data.monasteries import IMAGES_SUBFOLDER, MONASTERIES
-from data.qa import QA
-
 MIN_IMAGE_BYTES = 500
 IMAGES_PER_PLACE = 4
 MAPS_PER_PLACE = 1
 
-# Файлы, которые не использовать в гиде (неверные места или низкое качество)
+# Файлы, которые не использовать в гиде монастырей
 BANNED_IMAGE_BASENAMES = frozenset([
     "andreevsky_3.jpg", "andreevsky_4.jpg", "andronikov_3.jpg",
     "danilov_4.jpg", "donskoy_cathedral.jpg", "krutitsy_1.jpg",
     "novo_alekseevsky_4.jpg", "simonov_3.jpg", "zachatievsky_1.jpg",
     "zachatievsky_4.jpg", "vysoko_petrovsky_3.jpg", "vysoko_petrovsky_4.jpg",
 ])
+
+
+GUIDE_EXPECTED_COUNTS: dict[str, int] = {
+    "monasteries": 20,
+    "churches": 60,
+    "parks": 20,
+    "museums": 30,
+    "palaces": 20,
+    "buildings": 50,
+    "sculptures": 60,
+    "places": 50,
+}
+
+
+def _load_guide_config(guide: str) -> None:
+    """Загружает конфиг для гида (глобальные переменные)."""
+    global IMAGES_SUBFOLDER, PLACES, IMAGE_DOWNLOADS, IMAGE_FALLBACKS
+    global QA, BANNED, HTML_NAME, PDF_NAME, INTRO_TITLE, INTRO_SUBTITLE
+    if guide == "churches":
+        from data.churches import CHURCHES, IMAGES_SUBFOLDER as _SUB
+        from data.church_image_urls import (
+            CHURCH_IMAGE_DOWNLOADS,
+            CHURCH_IMAGE_FALLBACKS,
+        )
+        from data.qa_churches import QA as _QA
+        IMAGES_SUBFOLDER = _SUB
+        PLACES = CHURCHES
+        IMAGE_DOWNLOADS = CHURCH_IMAGE_DOWNLOADS
+        IMAGE_FALLBACKS = CHURCH_IMAGE_FALLBACKS
+        QA = _QA
+        BANNED = frozenset()
+        HTML_NAME = "churches_guide.html"
+        PDF_NAME = "churches_guide.pdf"
+        INTRO_TITLE = "Храмы Москвы"
+        INTRO_SUBTITLE = "60 значимых храмов"
+    elif guide == "parks":
+        from data.parks import PARKS, IMAGES_SUBFOLDER as _SUB
+        from data.park_image_urls import (
+            PARK_IMAGE_DOWNLOADS,
+            PARK_IMAGE_FALLBACKS,
+        )
+        from data.qa_parks import QA as _QA
+        IMAGES_SUBFOLDER = _SUB
+        PLACES = PARKS
+        IMAGE_DOWNLOADS = PARK_IMAGE_DOWNLOADS
+        IMAGE_FALLBACKS = PARK_IMAGE_FALLBACKS
+        QA = _QA
+        BANNED = frozenset()
+        HTML_NAME = "parks_guide.html"
+        PDF_NAME = "parks_guide.pdf"
+        INTRO_TITLE = "Парки Москвы"
+        INTRO_SUBTITLE = "20 лучших парков"
+    elif guide == "museums":
+        from data.museums import MUSEUMS, IMAGES_SUBFOLDER as _SUB
+        from data.museum_image_urls import (
+            MUSEUM_IMAGE_DOWNLOADS,
+            MUSEUM_IMAGE_FALLBACKS,
+        )
+        from data.qa_museums import QA as _QA
+        IMAGES_SUBFOLDER = _SUB
+        PLACES = MUSEUMS
+        IMAGE_DOWNLOADS = MUSEUM_IMAGE_DOWNLOADS
+        IMAGE_FALLBACKS = MUSEUM_IMAGE_FALLBACKS
+        QA = _QA
+        BANNED = frozenset()
+        HTML_NAME = "museums_guide.html"
+        PDF_NAME = "museums_guide.pdf"
+        INTRO_TITLE = "Музеи Москвы"
+        INTRO_SUBTITLE = "30 лучших музеев"
+    elif guide == "palaces":
+        from data.palaces import PALACES, IMAGES_SUBFOLDER as _SUB
+        from data.palace_image_urls import (
+            PALACE_IMAGE_DOWNLOADS,
+            PALACE_IMAGE_FALLBACKS,
+        )
+        from data.qa_palaces import QA as _QA
+        IMAGES_SUBFOLDER = _SUB
+        PLACES = PALACES
+        IMAGE_DOWNLOADS = PALACE_IMAGE_DOWNLOADS
+        IMAGE_FALLBACKS = PALACE_IMAGE_FALLBACKS
+        QA = _QA
+        BANNED = frozenset()
+        HTML_NAME = "palaces_guide.html"
+        PDF_NAME = "palaces_guide.pdf"
+        INTRO_TITLE = "Усадьбы и дворцы Москвы"
+        INTRO_SUBTITLE = "20 лучших усадеб и дворцов"
+    elif guide == "buildings":
+        from data.buildings import BUILDINGS, IMAGES_SUBFOLDER as _SUB
+        from data.building_image_urls import (
+            BUILDING_IMAGE_DOWNLOADS,
+            BUILDING_IMAGE_FALLBACKS,
+        )
+        from data.qa_buildings import QA as _QA
+        IMAGES_SUBFOLDER = _SUB
+        PLACES = BUILDINGS
+        IMAGE_DOWNLOADS = BUILDING_IMAGE_DOWNLOADS
+        IMAGE_FALLBACKS = BUILDING_IMAGE_FALLBACKS
+        QA = _QA
+        BANNED = frozenset()
+        HTML_NAME = "buildings_guide.html"
+        PDF_NAME = "buildings_guide.pdf"
+        INTRO_TITLE = "Знаменитые здания Москвы"
+        INTRO_SUBTITLE = "50 знаменитых зданий"
+    elif guide == "sculptures":
+        from data.sculptures import SCULPTURES, IMAGES_SUBFOLDER as _SUB
+        from data.sculpture_image_urls import (
+            SCULPTURE_IMAGE_DOWNLOADS,
+            SCULPTURE_IMAGE_FALLBACKS,
+        )
+        from data.qa_sculptures import QA as _QA
+        IMAGES_SUBFOLDER = _SUB
+        PLACES = SCULPTURES
+        IMAGE_DOWNLOADS = SCULPTURE_IMAGE_DOWNLOADS
+        IMAGE_FALLBACKS = SCULPTURE_IMAGE_FALLBACKS
+        QA = _QA
+        BANNED = frozenset()
+        HTML_NAME = "sculptures_guide.html"
+        PDF_NAME = "sculptures_guide.pdf"
+        INTRO_TITLE = "Скульптуры и памятники Москвы"
+        INTRO_SUBTITLE = "60 скульптур и памятников"
+    elif guide == "places":
+        from data.places import PLACES as _PLACES, IMAGES_SUBFOLDER as _SUB
+        from data.place_image_urls import (
+            PLACE_IMAGE_DOWNLOADS,
+            PLACE_IMAGE_FALLBACKS,
+        )
+        from data.qa_places import QA as _QA
+        IMAGES_SUBFOLDER = _SUB
+        PLACES = _PLACES
+        IMAGE_DOWNLOADS = PLACE_IMAGE_DOWNLOADS
+        IMAGE_FALLBACKS = PLACE_IMAGE_FALLBACKS
+        QA = _QA
+        BANNED = frozenset()
+        HTML_NAME = "places_guide.html"
+        PDF_NAME = "places_guide.pdf"
+        INTRO_TITLE = "Места Москвы"
+        INTRO_SUBTITLE = "50 лучших мест (улицы, площади, районы)"
+    else:
+        from data.monasteries import MONASTERIES, IMAGES_SUBFOLDER as _SUB
+        from data.image_urls import IMAGE_DOWNLOADS as _DL, IMAGE_FALLBACKS as _FB
+        from data.qa import QA as _QA
+        IMAGES_SUBFOLDER = _SUB
+        PLACES = MONASTERIES
+        IMAGE_DOWNLOADS = _DL
+        IMAGE_FALLBACKS = _FB
+        QA = _QA
+        BANNED = BANNED_IMAGE_BASENAMES
+        HTML_NAME = "monasteries_guide.html"
+        PDF_NAME = "monasteries_guide.pdf"
+        INTRO_TITLE = "Монастыри Москвы"
+        INTRO_SUBTITLE = "маршруты созерцания и памяти"
 
 
 def _map_img_url(lon: float, lat: float, width: int = 380, height: int = 200) -> str:
@@ -75,9 +223,6 @@ def download_images(output_dir: Path) -> None:
     except ImportError:
         return
 
-    from data.image_urls import IMAGE_DOWNLOADS
-    from data.image_urls import IMAGE_FALLBACKS
-
     images_dir = output_dir / "images" / IMAGES_SUBFOLDER
     images_dir.mkdir(parents=True, exist_ok=True)
     max_rounds = 8
@@ -85,14 +230,14 @@ def download_images(output_dir: Path) -> None:
     for _round in range(max_rounds):
         downloaded = 0
         for filename, main_url in IMAGE_DOWNLOADS.items():
-            if filename in BANNED_IMAGE_BASENAMES:
+            if filename in BANNED:
                 continue
             path = images_dir / filename
             if path.exists() and path.stat().st_size >= MIN_IMAGE_BYTES:
                 continue
             if path.exists():
                 path.unlink()
-            urls_to_try = [main_url] + IMAGE_FALLBACKS.get(filename, [])
+            urls_to_try = [main_url] + list(IMAGE_FALLBACKS.get(filename, []))
             for url in urls_to_try:
                 try:
                     req = urllib.request.Request(
@@ -151,9 +296,8 @@ def check_duplicate_images(images_dir: Path) -> list[tuple[str, list[str]]]:
     return duplicates
 
 
-def _unique_images_for_monastery(
+def _unique_images_for_place(
     image_rels: list[str], output_dir: Path,
-    banned: frozenset[str] = BANNED_IMAGE_BASENAMES,
 ) -> list[str]:
     """Возвращает до IMAGES_PER_PLACE уникальных путей (разный контент)."""
     seen_hashes: set[str] = set()
@@ -162,7 +306,7 @@ def _unique_images_for_monastery(
         if len(result) >= IMAGES_PER_PLACE:
             break
         basename = img_rel.split("/")[-1] if "/" in img_rel else img_rel
-        if basename in banned:
+        if basename in BANNED:
             continue
         path = output_dir / img_rel
         if not path.exists() or path.stat().st_size < MIN_IMAGE_BYTES:
@@ -178,11 +322,11 @@ def _unique_images_for_monastery(
 def get_used_image_basenames(output_dir: Path) -> set[str]:
     """Имена файлов изображений, реально используемых в путеводителе."""
     used: set[str] = set()
-    for m in MONASTERIES:
-        rels = _unique_images_for_monastery(m["images"], output_dir)
+    for place in PLACES:
+        rels = _unique_images_for_place(place["images"], output_dir)
         for r in rels:
             basename = r.split("/")[-1] if "/" in r else r
-            if basename not in BANNED_IMAGE_BASENAMES:
+            if basename not in BANNED:
                 used.add(basename)
     return used
 
@@ -206,10 +350,10 @@ def delete_unused_images(output_dir: Path) -> int:
     return deleted
 
 
-def _section_monastery(
+def _section_place(
     number: int, m: dict, output_dir: Path
 ) -> str:
-    """HTML-блок для одного монастыря: номер 1..20, 3–4 фото + 1 карта."""
+    """HTML-блок для одного места (монастырь или храм): фото + карта."""
     name = _escape(m["name"])
     address = _escape(m["address"])
     style = _escape(m["style"])
@@ -222,7 +366,7 @@ def _section_monastery(
     )
     facts_html = "".join("<li>{}</li>".format(_escape(f)) for f in m["facts"])
 
-    unique_rels = _unique_images_for_monastery(m["images"], output_dir)
+    unique_rels = _unique_images_for_place(m["images"], output_dir)
     imgs_html_parts = [
         '<img src="{}" alt="" class="monastery-img" />'.format(
             img_rel.replace("\\", "/")
@@ -234,9 +378,10 @@ def _section_monastery(
         "  <div class=\"images-row\">\n    {}\n  </div>".format(imgs_html)
         if imgs_html else ""
     )
+    name_str = m.get("name", "")
     title_class = (
         "monastery-title source-serif-title"
-        if "я" in m["name"] else "monastery-title"
+        if "я" in name_str.lower() else "monastery-title"
     )
 
     return """
@@ -374,8 +519,8 @@ def build_html(output_dir: Path) -> str:
     intro = """
     <div class="intro-block">
     <p class="otium-brand">OTIUM / Sacred</p>
-    <h1 class="otium-title">Монастыри Москвы</h1>
-    <p class="otium-subtitle">маршруты созерцания и памяти</p>
+    <h1 class="otium-title">{intro_title}</h1>
+    <p class="otium-subtitle">{intro_subtitle}</p>
     <p>OTIUM — это практика осмысленного досуга.
     В античной традиции otium означало не отдых от труда, а время, в котором
     человек возвращается к взгляду, памяти и мышлению. Это время без
@@ -392,17 +537,20 @@ def build_html(output_dir: Path) -> str:
     К месту, где можно задержаться.</p>
     <p>OTIUM существует для тех, кто хочет смотреть медленно.</p>
     </div>
-    """
+    """.format(
+        intro_title=INTRO_TITLE,
+        intro_subtitle=INTRO_SUBTITLE,
+    )
     sections = [intro]
-    for i, m in enumerate(MONASTERIES, 1):
-        sections.append(_section_monastery(i, m, output_dir))
+    for i, m in enumerate(PLACES, 1):
+        sections.append(_section_place(i, m, output_dir))
     sections.append(_section_qa())
 
     return """<!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <title>Московские монастыри</title>
+  <title>{page_title}</title>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;0,600&amp;family=EB+Garamond:ital,wght@0,400;0,600&amp;family=Pochaevsk&amp;family=Source+Serif+4:ital,wght@0,400;0,600&amp;family=Inter:wght@400;500;600&amp;display=swap&amp;subset=latin,cyrillic"
         rel="stylesheet" />
   <style>{css}</style>
@@ -414,16 +562,17 @@ def build_html(output_dir: Path) -> str:
 """.format(
         css=css,
         body="\n".join(sections),
+        page_title=INTRO_TITLE,
     )
 
 
 def validate_yandex_maps() -> list[str]:
     """
-    Проверяет, что статические карты Яндекса для каждого монастыря
+    Проверяет, что статические карты Яндекса для каждого места
     доступны (URL возвращает 200). Возвращает список сообщений об ошибках.
     """
     errors: list[str] = []
-    for m in MONASTERIES:
+    for m in PLACES:
         name = m.get("name", "?")
         lon = m.get("lon")
         lat = m.get("lat")
@@ -513,7 +662,7 @@ def _pdf_via_playwright(html_path: Path, pdf_path: Path) -> bool:
             browser = p.chromium.launch()
             page = browser.new_page()
             if server is not None:
-                url = "http://127.0.0.1:{}/monasteries_guide.html".format(port)
+                url = "http://127.0.0.1:{}/{}".format(port, html_path.name)
                 page.goto(url, wait_until="networkidle")
             else:
                 page.goto(
@@ -575,15 +724,32 @@ def _strip_pdf_metadata(pdf_path: Path) -> None:
 
 def main() -> None:
     """Создаёт подкаталог, скачивает фото, проверяет дубликаты, генерирует PDF."""
+    import argparse
+    parser = argparse.ArgumentParser(description="Build PDF guide (monasteries or churches)")
+    parser.add_argument(
+        "--guide",
+        choices=[
+            "monasteries", "churches", "parks", "museums", "palaces",
+            "buildings", "sculptures", "places",
+        ],
+        default="monasteries",
+        help="Guide: monasteries(20), churches(60), parks(20), museums(30), "
+             "palaces(20), buildings(50), sculptures(60), places(50)",
+    )
+    args = parser.parse_args()
+    _load_guide_config(args.guide)
+
     output_dir = _project_root / "output"
     output_dir.mkdir(exist_ok=True)
 
     images_subdir = ensure_images_subdir(output_dir)
     print("Images subdir: {}".format(images_subdir))
+    print("Guide: {} ({} places)".format(args.guide, len(PLACES)))
 
-    if len(MONASTERIES) != 20:
+    expected = GUIDE_EXPECTED_COUNTS.get(args.guide, 20)
+    if len(PLACES) != expected:
         print(
-            "Warning: expected 20 places, got {}.".format(len(MONASTERIES)),
+            "Warning: expected {} places, got {}.".format(expected, len(PLACES)),
             file=sys.stderr,
         )
 
@@ -604,10 +770,10 @@ def main() -> None:
         for e in map_errors:
             print("  -", e, file=sys.stderr)
     else:
-        print("  All monastery map URLs OK.")
+        print("  All map URLs OK.")
 
-    html_path = output_dir / "monasteries_guide.html"
-    pdf_path = output_dir / "monasteries_guide.pdf"
+    html_path = output_dir / HTML_NAME
+    pdf_path = output_dir / PDF_NAME
 
     html_content = build_html(output_dir)
     html_path.write_text(html_content, encoding="utf-8")

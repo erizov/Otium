@@ -48,13 +48,48 @@ python scripts/build_pdf.py
 древнерусской письменности (Pochaevsk / Source Serif 4), один объект — новая
 страница, карты по координатам (Яндекс). В конце — раздел «Вопросы и ответы».
 
+### Excursion — 60 значимых храмов Москвы
+
+Отдельный путеводитель по 60 храмам: те же шрифты, цвета и вёрстка, что и у гида
+по монастырям. Изображения — в **output/images/moscow_churches/**; для каждого
+храма свой файл, дубликаты по содержимому (SHA256) проверяются.
+
+```bash
+python scripts/build_pdf.py --guide churches
+```
+
+- **output/churches_guide.html**, **output/churches_guide.pdf**
+- Данные: **data/churches.py** (60 храмов), **data/church_image_urls.py** (URL Commons),
+  **data/qa_churches.py** (вопросы и ответы). URL изображений при необходимости
+  уточняют по Commons для соответствия храму.
+
+### Другие путеводители (тот же принцип, отдельные подпапки для изображений)
+
+| Гиды | Команда | Мест | Подпапка изображений |
+|------|---------|------|----------------------|
+| Парки | `--guide parks` | 20 | moscow_parks |
+| Музеи | `--guide museums` | 30 | moscow_museums |
+| Усадьбы и дворцы | `--guide palaces` | 20 | moscow_palaces |
+| Знаменитые здания | `--guide buildings` | 50 | moscow_buildings |
+| Скульптуры и памятники | `--guide sculptures` | 60 | moscow_sculptures |
+| Места (улицы, площади, районы) | `--guide places` | 50 | moscow_places |
+
+Данные: **data/parks.py**, **data/museums.py**, **data/palaces.py**, **data/buildings.py**,
+**data/sculptures.py**, **data/places.py** и соответствующие `*_image_urls.py`, `qa_*.py`.
+
 ### Структура проекта
 
-- `data/monasteries.py` — каталог (20 объектов), `IMAGES_SUBFOLDER`
-- `data/qa.py`, `data/image_urls.py`
-- `scripts/build_pdf.py` — сборка HTML/PDF, загрузка фото, проверка карт Яндекса
+- `data/monasteries.py`, `data/churches.py`, `data/parks.py`, `data/museums.py`,
+  `data/palaces.py`, `data/buildings.py`, `data/sculptures.py`, `data/places.py` —
+  каталоги объектов и `IMAGES_SUBFOLDER`
+- `data/qa.py`, `data/qa_churches.py`, `data/qa_parks.py`, … — вопросы и ответы
+- `data/image_urls.py`, `data/church_image_urls.py`, `data/park_image_urls.py`, … —
+  URL изображений (Commons)
+- `scripts/build_pdf.py` — сборка HTML/PDF (`--guide` с выбором гида)
 - `scripts/download_images.py` — цикл загрузки фото в `moscow_monasteries` до успеха
-- `output/images/moscow_monasteries/` — фото для путеводителя по Москве
+- `output/images/moscow_monasteries/`, `moscow_churches/`, `moscow_parks/`,
+  `moscow_museums/`, `moscow_palaces/`, `moscow_buildings/`, `moscow_sculptures/`,
+  `moscow_places/`
 - `requirements.txt` — playwright
 
 Кодировка UTF-8, стиль кода PEP 8.
