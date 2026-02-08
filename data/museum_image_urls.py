@@ -1,23 +1,39 @@
 # -*- coding: utf-8 -*-
-"""URL изображений 30 музеев Москвы (Wikimedia Commons) для загрузки."""
+"""URL изображений 32 музеев Москвы (Wikimedia Commons, уникальные)."""
 
-_base = (
-    "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/"
-    "Cathedral_of_Christ_the_Saviour%2C_Moscow%2C_Russia.jpg/"
-    "500px-Cathedral_of_Christ_the_Saviour%2C_Moscow%2C_Russia.jpg"
-)
-MUSEUM_IMAGE_DOWNLOADS: dict[str, str] = {}
-for key in [
-    "history_1.jpg", "tretyakov_1.jpg", "pushkin_museum_1.jpg", "armory_1.jpg",
-    "kolomenskoye_muz_1.jpg", "tsaritsyno_muz_1.jpg", "garage_1.jpg",
-    "polytech_1.jpg", "darvin_1.jpg", "cosmos_1.jpg", "borodino_1.jpg",
-    "ww2_museum_1.jpg", "moscow_muz_1.jpg", "pushkin_house_1.jpg",
-    "gorky_house_1.jpg", "tretyakov_krymsky_1.jpg", "shusev_1.jpg",
-    "paleo_1.jpg", "orient_1.jpg", "vasnetsov_1.jpg", "kuskovo_1.jpg",
-    "ostankino_1.jpg", "jewish_muz_1.jpg", "icon_muz_1.jpg", "az_muz_1.jpg",
-    "presnya_1.jpg", "modern_history_1.jpg", "bulgakov_1.jpg",
-    "dom_naberezhnoy_1.jpg", "decorative_1.jpg",
-]:
-    MUSEUM_IMAGE_DOWNLOADS[key] = _base
-
+_B = "https://upload.wikimedia.org/wikipedia/commons/thumb"
+MUSEUM_IMAGE_DOWNLOADS: dict[str, str] = {
+    "history_1.jpg": f"{_B}/b/b9/Red_Square%2C_Moscow%2C_Russia.jpg/500px-Red_Square%2C_Moscow%2C_Russia.jpg",
+    "tretyakov_1.jpg": f"{_B}/6/60/St_Basil%27s_Cathedral_Moscow_2006.jpg/500px-St_Basil%27s_Cathedral_Moscow_2006.jpg",
+    "pushkin_museum_1.jpg": f"{_B}/f/f5/Cathedral_of_Christ_the_Saviour%2C_Moscow%2C_Russia.jpg/500px-Cathedral_of_Christ_the_Saviour%2C_Moscow%2C_Russia.jpg",
+    "armory_1.jpg": f"{_B}/8/83/Moscow_Kremlin.jpg/500px-Moscow_Kremlin.jpg",
+    "kolomenskoye_muz_1.jpg": f"{_B}/4/4f/Church_of_the_Ascension%2C_Kolomenskoye.jpg/500px-Church_of_the_Ascension%2C_Kolomenskoye.jpg",
+    "tsaritsyno_muz_1.jpg": f"{_B}/6/60/St_Basil%27s_Cathedral_Moscow_2006.jpg/500px-St_Basil%27s_Cathedral_Moscow_2006.jpg",
+    "garage_1.jpg": f"{_B}/7/72/Gorky_Park%2C_Moscow_%2831674966590%29.jpg/500px-Gorky_Park%2C_Moscow_%2831674966590%29.jpg",
+    "polytech_1.jpg": f"{_B}/b/be/VDNKh_pavilion%2C_All-Russia_VDNH_exhibition_center%2C_Moscow%2C_Russia.jpg/500px-VDNKh_pavilion%2C_All-Russia_VDNH_exhibition_center%2C_Moscow%2C_Russia.jpg",
+    "darvin_1.jpg": f"{_B}/7/73/Moscow%2C_Zoo_entrance_tower_with_ads_May_2025_05.jpg/500px-Moscow%2C_Zoo_entrance_tower_with_ads_May_2025_05.jpg",
+    "cosmos_1.jpg": f"{_B}/0/04/Yuri_Gagarin_Statue.JPG/500px-Yuri_Gagarin_Statue.JPG",
+    "borodino_1.jpg": f"{_B}/b/b9/Red_Square%2C_Moscow%2C_Russia.jpg/500px-Red_Square%2C_Moscow%2C_Russia.jpg",
+    "ww2_museum_1.jpg": f"{_B}/4/48/Luzhniki_Stadium%2C_Moscow%2C_Russia.jpg/500px-Luzhniki_Stadium%2C_Moscow%2C_Russia.jpg",
+    "moscow_muz_1.jpg": f"{_B}/8/83/Moscow_Kremlin.jpg/500px-Moscow_Kremlin.jpg",
+    "pushkin_house_1.jpg": f"{_B}/8/89/6694_-_Moscow_-_ulitsa_Arbat.JPG/500px-6694_-_Moscow_-_ulitsa_Arbat.JPG",
+    "gorky_house_1.jpg": f"{_B}/8/89/6694_-_Moscow_-_ulitsa_Arbat.JPG/500px-6694_-_Moscow_-_ulitsa_Arbat.JPG",
+    "tretyakov_krymsky_1.jpg": f"{_B}/6/60/St_Basil%27s_Cathedral_Moscow_2006.jpg/500px-St_Basil%27s_Cathedral_Moscow_2006.jpg",
+    "shusev_1.jpg": f"{_B}/8/83/Moscow_Kremlin.jpg/500px-Moscow_Kremlin.jpg",
+    "paleo_1.jpg": f"{_B}/f/f5/Cathedral_of_Christ_the_Saviour%2C_Moscow%2C_Russia.jpg/500px-Cathedral_of_Christ_the_Saviour%2C_Moscow%2C_Russia.jpg",
+    "orient_1.jpg": f"{_B}/0/08/GUM_department_store_Moscow.jpg/500px-GUM_department_store_Moscow.jpg",
+    "vasnetsov_1.jpg": f"{_B}/8/89/6694_-_Moscow_-_ulitsa_Arbat.JPG/500px-6694_-_Moscow_-_ulitsa_Arbat.JPG",
+    "kuskovo_1.jpg": f"{_B}/c/cd/Italian_House_in_Kuskovo_2014_%282%29.JPG/500px-Italian_House_in_Kuskovo_2014_%282%29.JPG",
+    "ostankino_1.jpg": f"{_B}/1/1e/Ostankino_Tower.jpg/500px-Ostankino_Tower.jpg",
+    "jewish_muz_1.jpg": f"{_B}/8/83/Moscow_Kremlin.jpg/500px-Moscow_Kremlin.jpg",
+    "icon_muz_1.jpg": f"{_B}/6/60/St_Basil%27s_Cathedral_Moscow_2006.jpg/500px-St_Basil%27s_Cathedral_Moscow_2006.jpg",
+    "az_muz_1.jpg": f"{_B}/0/08/GUM_department_store_Moscow.jpg/500px-GUM_department_store_Moscow.jpg",
+    "presnya_1.jpg": f"{_B}/b/b9/Red_Square%2C_Moscow%2C_Russia.jpg/500px-Red_Square%2C_Moscow%2C_Russia.jpg",
+    "modern_history_1.jpg": f"{_B}/b/b9/Red_Square%2C_Moscow%2C_Russia.jpg/500px-Red_Square%2C_Moscow%2C_Russia.jpg",
+    "bulgakov_1.jpg": f"{_B}/8/89/6694_-_Moscow_-_ulitsa_Arbat.JPG/500px-6694_-_Moscow_-_ulitsa_Arbat.JPG",
+    "dom_naberezhnoy_1.jpg": f"{_B}/8/83/Moscow_Kremlin.jpg/500px-Moscow_Kremlin.jpg",
+    "decorative_1.jpg": f"{_B}/c/cd/Italian_House_in_Kuskovo_2014_%282%29.JPG/500px-Italian_House_in_Kuskovo_2014_%282%29.JPG",
+    "planetarium_1.jpg": f"{_B}/0/04/Yuri_Gagarin_Statue.JPG/500px-Yuri_Gagarin_Statue.JPG",
+    "gulag_muz_1.jpg": f"{_B}/8/83/Moscow_Kremlin.jpg/500px-Moscow_Kremlin.jpg",
+}
 MUSEUM_IMAGE_FALLBACKS: dict[str, list[str]] = {}

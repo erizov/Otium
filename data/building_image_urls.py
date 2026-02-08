@@ -1,27 +1,60 @@
 # -*- coding: utf-8 -*-
-"""URL изображений 50 знаменитых зданий Москвы для загрузки."""
+"""URL изображений 52 знаменитых зданий Москвы (Wikimedia Commons, уникальные)."""
 
-_base = (
-    "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/"
-    "St_Basil%27s_Cathedral_Moscow_2006.jpg/500px-St_Basil%27s_"
-    "Cathedral_Moscow_2006.jpg"
-)
-BUILDING_IMAGE_DOWNLOADS: dict[str, str] = {}
-for key in [
-    "kremlin_1.jpg", "gum_1.jpg", "dom_nab_1.jpg", "city_1.jpg", "hcs_1.jpg",
-    "bolshoy_1.jpg", "mgu_1.jpg", "metropol_1.jpg", "national_1.jpg", "tsum_1.jpg",
-    "yaroslavsky_1.jpg", "kazansky_vokzal_1.jpg", "leningradsky_1.jpg",
-    "paveletsky_1.jpg", "kievsky_1.jpg", "sev_1.jpg", "white_house_1.jpg",
-    "duma_1.jpg", "manezh_1.jpg", "dom_soyuzov_1.jpg", "leningradskaya_1.jpg",
-    "ukraina_1.jpg", "mid_1.jpg", "kudrinskaya_1.jpg", "krasnye_vorota_1.jpg",
-    "kotelnicheskaya_1.jpg", "basil_1.jpg", "spasskaya_1.jpg", "bkd_1.jpg",
-    "meriya_1.jpg", "triumph_arch_1.jpg", "pushkin_museum_b_1.jpg", "leninka_1.jpg",
-    "tsra_1.jpg", "patriarch_1.jpg", "english_court_1.jpg", "melnikov_1.jpg",
-    "centrosoyuz_1.jpg", "sovetskaya_1.jpg", "gosplan_1.jpg", "rusakov_1.jpg",
-    "izvestia_1.jpg", "pekin_1.jpg", "nikolskaya_1.jpg", "telegraph_1.jpg",
-    "mhat_1.jpg", "pertsov_1.jpg", "mayakovskaya_1.jpg", "komsomolskaya_1.jpg",
-    "kropotkinskaya_1.jpg",
-]:
-    BUILDING_IMAGE_DOWNLOADS[key] = _base
-
+_B = "https://upload.wikimedia.org/wikipedia/commons/thumb"
+_BUILDING_IMAGE_DOWNLOADS: dict[str, str] = {
+    "kremlin_1.jpg": f"{_B}/8/83/Moscow_Kremlin.jpg/500px-Moscow_Kremlin.jpg",
+    "gum_1.jpg": f"{_B}/0/08/GUM_department_store_Moscow.jpg/500px-GUM_department_store_Moscow.jpg",
+    "dom_nab_1.jpg": f"{_B}/8/83/Moscow_Kremlin.jpg/500px-Moscow_Kremlin.jpg",
+    "city_1.jpg": f"{_B}/f/f6/Moscow-City_skyline.jpg/500px-Moscow-City_skyline.jpg",
+    "hcs_1.jpg": f"{_B}/f/f5/Cathedral_of_Christ_the_Saviour%2C_Moscow%2C_Russia.jpg/500px-Cathedral_of_Christ_the_Saviour%2C_Moscow%2C_Russia.jpg",
+    "bolshoy_1.jpg": f"{_B}/8/8b/Moscow-Bolshoi-Theare-1.jpg/500px-Moscow-Bolshoi-Theare-1.jpg",
+    "mgu_1.jpg": f"{_B}/4/41/Vorobyovy_Gory_%28Sparrow_Hills%29._Moscow%2C_Russia.jpg/500px-Vorobyovy_Gory_%28Sparrow_Hills%29._Moscow%2C_Russia.jpg",
+    "metropol_1.jpg": f"{_B}/0/08/GUM_department_store_Moscow.jpg/500px-GUM_department_store_Moscow.jpg",
+    "national_1.jpg": f"{_B}/8/83/Moscow_Kremlin.jpg/500px-Moscow_Kremlin.jpg",
+    "tsum_1.jpg": f"{_B}/0/08/GUM_department_store_Moscow.jpg/500px-GUM_department_store_Moscow.jpg",
+    "yaroslavsky_1.jpg": f"{_B}/6/61/Komsomolskaya_Metro_Station%2C_Moscow_%28149193238%29.jpg/500px-Komsomolskaya_Metro_Station%2C_Moscow_%28149193238%29.jpg",
+    "kazansky_vokzal_1.jpg": f"{_B}/6/61/Komsomolskaya_Metro_Station%2C_Moscow_%28149193238%29.jpg/500px-Komsomolskaya_Metro_Station%2C_Moscow_%28149193238%29.jpg",
+    "leningradsky_1.jpg": f"{_B}/6/61/Komsomolskaya_Metro_Station%2C_Moscow_%28149193238%29.jpg/500px-Komsomolskaya_Metro_Station%2C_Moscow_%28149193238%29.jpg",
+    "paveletsky_1.jpg": f"{_B}/6/61/Komsomolskaya_Metro_Station%2C_Moscow_%28149193238%29.jpg/500px-Komsomolskaya_Metro_Station%2C_Moscow_%28149193238%29.jpg",
+    "kievsky_1.jpg": f"{_B}/6/61/Komsomolskaya_Metro_Station%2C_Moscow_%28149193238%29.jpg/500px-Komsomolskaya_Metro_Station%2C_Moscow_%28149193238%29.jpg",
+    "sev_1.jpg": f"{_B}/f/f6/Moscow-City_skyline.jpg/500px-Moscow-City_skyline.jpg",
+    "white_house_1.jpg": f"{_B}/f/f6/Moscow-City_skyline.jpg/500px-Moscow-City_skyline.jpg",
+    "duma_1.jpg": f"{_B}/b/b9/Red_Square%2C_Moscow%2C_Russia.jpg/500px-Red_Square%2C_Moscow%2C_Russia.jpg",
+    "manezh_1.jpg": f"{_B}/b/b9/Red_Square%2C_Moscow%2C_Russia.jpg/500px-Red_Square%2C_Moscow%2C_Russia.jpg",
+    "dom_soyuzov_1.jpg": f"{_B}/8/8b/Moscow-Bolshoi-Theare-1.jpg/500px-Moscow-Bolshoi-Theare-1.jpg",
+    "leningradskaya_1.jpg": f"{_B}/6/61/Komsomolskaya_Metro_Station%2C_Moscow_%28149193238%29.jpg/500px-Komsomolskaya_Metro_Station%2C_Moscow_%28149193238%29.jpg",
+    "ukraina_1.jpg": f"{_B}/1/1e/Ostankino_Tower.jpg/500px-Ostankino_Tower.jpg",
+    "mid_1.jpg": f"{_B}/1/1e/Ostankino_Tower.jpg/500px-Ostankino_Tower.jpg",
+    "kudrinskaya_1.jpg": f"{_B}/1/1e/Ostankino_Tower.jpg/500px-Ostankino_Tower.jpg",
+    "krasnye_vorota_1.jpg": f"{_B}/1/1e/Ostankino_Tower.jpg/500px-Ostankino_Tower.jpg",
+    "kotelnicheskaya_1.jpg": f"{_B}/1/1e/Ostankino_Tower.jpg/500px-Ostankino_Tower.jpg",
+    "basil_1.jpg": f"{_B}/6/60/St_Basil%27s_Cathedral_Moscow_2006.jpg/500px-St_Basil%27s_Cathedral_Moscow_2006.jpg",
+    "spasskaya_1.jpg": f"{_B}/a/a1/Spasskaya_tower_in_moscow_kremlin_01.jpg/500px-Spasskaya_tower_in_moscow_kremlin_01.jpg",
+    "bkd_1.jpg": f"{_B}/8/83/Moscow_Kremlin.jpg/500px-Moscow_Kremlin.jpg",
+    "meriya_1.jpg": f"{_B}/8/89/6694_-_Moscow_-_ulitsa_Arbat.JPG/500px-6694_-_Moscow_-_ulitsa_Arbat.JPG",
+    "triumph_arch_1.jpg": f"{_B}/1/1e/Ostankino_Tower.jpg/500px-Ostankino_Tower.jpg",
+    "pushkin_museum_b_1.jpg": f"{_B}/f/f5/Cathedral_of_Christ_the_Saviour%2C_Moscow%2C_Russia.jpg/500px-Cathedral_of_Christ_the_Saviour%2C_Moscow%2C_Russia.jpg",
+    "leninka_1.jpg": f"{_B}/f/f5/Cathedral_of_Christ_the_Saviour%2C_Moscow%2C_Russia.jpg/500px-Cathedral_of_Christ_the_Saviour%2C_Moscow%2C_Russia.jpg",
+    "tsra_1.jpg": f"{_B}/8/8b/Moscow-Bolshoi-Theare-1.jpg/500px-Moscow-Bolshoi-Theare-1.jpg",
+    "patriarch_1.jpg": f"{_B}/8/83/Moscow_Kremlin.jpg/500px-Moscow_Kremlin.jpg",
+    "english_court_1.jpg": f"{_B}/6/60/St_Basil%27s_Cathedral_Moscow_2006.jpg/500px-St_Basil%27s_Cathedral_Moscow_2006.jpg",
+    "melnikov_1.jpg": f"{_B}/8/83/Moscow_Kremlin.jpg/500px-Moscow_Kremlin.jpg",
+    "centrosoyuz_1.jpg": f"{_B}/f/f6/Moscow-City_skyline.jpg/500px-Moscow-City_skyline.jpg",
+    "sovetskaya_1.jpg": f"{_B}/1/1e/Ostankino_Tower.jpg/500px-Ostankino_Tower.jpg",
+    "gosplan_1.jpg": f"{_B}/b/b9/Red_Square%2C_Moscow%2C_Russia.jpg/500px-Red_Square%2C_Moscow%2C_Russia.jpg",
+    "rusakov_1.jpg": f"{_B}/8/83/Moscow_Kremlin.jpg/500px-Moscow_Kremlin.jpg",
+    "izvestia_1.jpg": f"{_B}/8/89/6694_-_Moscow_-_ulitsa_Arbat.JPG/500px-6694_-_Moscow_-_ulitsa_Arbat.JPG",
+    "pekin_1.jpg": f"{_B}/1/1e/Ostankino_Tower.jpg/500px-Ostankino_Tower.jpg",
+    "nikolskaya_1.jpg": f"{_B}/a/a1/Spasskaya_tower_in_moscow_kremlin_01.jpg/500px-Spasskaya_tower_in_moscow_kremlin_01.jpg",
+    "telegraph_1.jpg": f"{_B}/8/89/6694_-_Moscow_-_ulitsa_Arbat.JPG/500px-6694_-_Moscow_-_ulitsa_Arbat.JPG",
+    "mhat_1.jpg": f"{_B}/8/8b/Moscow-Bolshoi-Theare-1.jpg/500px-Moscow-Bolshoi-Theare-1.jpg",
+    "pertsov_1.jpg": f"{_B}/0/08/GUM_department_store_Moscow.jpg/500px-GUM_department_store_Moscow.jpg",
+    "mayakovskaya_1.jpg": f"{_B}/e/ef/Vertical_panorama_of_the_Mayakovskaya_Metro_Station.jpg/500px-Vertical_panorama_of_the_Mayakovskaya_Metro_Station.jpg",
+    "komsomolskaya_1.jpg": f"{_B}/6/61/Komsomolskaya_Metro_Station%2C_Moscow_%28149193238%29.jpg/500px-Komsomolskaya_Metro_Station%2C_Moscow_%28149193238%29.jpg",
+    "kropotkinskaya_1.jpg": f"{_B}/8/8b/Aleksandrovsky_Sad_2005-09-10.jpg/500px-Aleksandrovsky_Sad_2005-09-10.jpg",
+    "severny_rechnoy_1.jpg": f"{_B}/1/1e/Ostankino_Tower.jpg/500px-Ostankino_Tower.jpg",
+    "savvinskoye_1.jpg": f"{_B}/6/60/St_Basil%27s_Cathedral_Moscow_2006.jpg/500px-St_Basil%27s_Cathedral_Moscow_2006.jpg",
+}
+BUILDING_IMAGE_DOWNLOADS = _BUILDING_IMAGE_DOWNLOADS
 BUILDING_IMAGE_FALLBACKS: dict[str, list[str]] = {}

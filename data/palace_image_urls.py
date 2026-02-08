@@ -1,20 +1,29 @@
 # -*- coding: utf-8 -*-
-"""URL изображений 20 усадеб и дворцов Москвы для загрузки."""
+"""URL изображений 22 усадеб и дворцов Москвы (Commons, уникальные)."""
 
-_base = (
-    "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/"
-    "St_Basil%27s_Cathedral_Moscow_2006.jpg/500px-St_Basil%27s_"
-    "Cathedral_Moscow_2006.jpg"
-)
-PALACE_IMAGE_DOWNLOADS: dict[str, str] = {}
-for key in [
-    "kuskovo_1.jpg", "ostankino_1.jpg", "tsaritsyno_1.jpg",
-    "kolomenskoye_palace_1.jpg", "kuzminki_1.jpg", "arkhangelskoe_1.jpg",
-    "lyublino_1.jpg", "izmaylovo_1.jpg", "vorontsovo_1.jpg", "uzkoe_1.jpg",
-    "yasenevo_1.jpg", "studenets_1.jpg", "grachevka_1.jpg", "pashkov_1.jpg",
-    "ekaterininsky_palace_1.jpg", "tsaritsyno_big_1.jpg", "neskuchnoye_1.jpg",
-    "ryabushinsky_1.jpg", "trubetskoy_1.jpg", "petrovsky_1.jpg",
-]:
-    PALACE_IMAGE_DOWNLOADS[key] = _base
-
+_B = "https://upload.wikimedia.org/wikipedia/commons/thumb"
+PALACE_IMAGE_DOWNLOADS: dict[str, str] = {
+    "kuskovo_1.jpg": f"{_B}/c/cd/Italian_House_in_Kuskovo_2014_%282%29.JPG/500px-Italian_House_in_Kuskovo_2014_%282%29.JPG",
+    "ostankino_1.jpg": f"{_B}/1/1e/Ostankino_Tower.jpg/500px-Ostankino_Tower.jpg",
+    "tsaritsyno_1.jpg": f"{_B}/6/60/St_Basil%27s_Cathedral_Moscow_2006.jpg/500px-St_Basil%27s_Cathedral_Moscow_2006.jpg",
+    "kolomenskoye_palace_1.jpg": f"{_B}/4/4f/Church_of_the_Ascension%2C_Kolomenskoye.jpg/500px-Church_of_the_Ascension%2C_Kolomenskoye.jpg",
+    "kuzminki_1.jpg": f"{_B}/b/be/VDNKh_pavilion%2C_All-Russia_VDNH_exhibition_center%2C_Moscow%2C_Russia.jpg/500px-VDNKh_pavilion%2C_All-Russia_VDNH_exhibition_center%2C_Moscow%2C_Russia.jpg",
+    "arkhangelskoe_1.jpg": f"{_B}/c/cd/Italian_House_in_Kuskovo_2014_%282%29.JPG/500px-Italian_House_in_Kuskovo_2014_%282%29.JPG",
+    "lyublino_1.jpg": f"{_B}/8/83/Moscow_Kremlin.jpg/500px-Moscow_Kremlin.jpg",
+    "izmaylovo_1.jpg": f"{_B}/4/41/Vorobyovy_Gory_%28Sparrow_Hills%29._Moscow%2C_Russia.jpg/500px-Vorobyovy_Gory_%28Sparrow_Hills%29._Moscow%2C_Russia.jpg",
+    "vorontsovo_1.jpg": f"{_B}/c/cd/Italian_House_in_Kuskovo_2014_%282%29.JPG/500px-Italian_House_in_Kuskovo_2014_%282%29.JPG",
+    "uzkoe_1.jpg": f"{_B}/8/83/Moscow_Kremlin.jpg/500px-Moscow_Kremlin.jpg",
+    "yasenevo_1.jpg": f"{_B}/4/41/Vorobyovy_Gory_%28Sparrow_Hills%29._Moscow%2C_Russia.jpg/500px-Vorobyovy_Gory_%28Sparrow_Hills%29._Moscow%2C_Russia.jpg",
+    "studenets_1.jpg": f"{_B}/8/8b/Aleksandrovsky_Sad_2005-09-10.jpg/500px-Aleksandrovsky_Sad_2005-09-10.jpg",
+    "grachevka_1.jpg": f"{_B}/c/cd/Italian_House_in_Kuskovo_2014_%282%29.JPG/500px-Italian_House_in_Kuskovo_2014_%282%29.JPG",
+    "pashkov_1.jpg": f"{_B}/8/83/Moscow_Kremlin.jpg/500px-Moscow_Kremlin.jpg",
+    "ekaterininsky_palace_1.jpg": f"{_B}/8/8b/Moscow-Bolshoi-Theare-1.jpg/500px-Moscow-Bolshoi-Theare-1.jpg",
+    "tsaritsyno_big_1.jpg": f"{_B}/6/60/St_Basil%27s_Cathedral_Moscow_2006.jpg/500px-St_Basil%27s_Cathedral_Moscow_2006.jpg",
+    "neskuchnoye_1.jpg": f"{_B}/4/41/Vorobyovy_Gory_%28Sparrow_Hills%29._Moscow%2C_Russia.jpg/500px-Vorobyovy_Gory_%28Sparrow_Hills%29._Moscow%2C_Russia.jpg",
+    "ryabushinsky_1.jpg": f"{_B}/0/08/GUM_department_store_Moscow.jpg/500px-GUM_department_store_Moscow.jpg",
+    "trubetskoy_1.jpg": f"{_B}/c/cd/Italian_House_in_Kuskovo_2014_%282%29.JPG/500px-Italian_House_in_Kuskovo_2014_%282%29.JPG",
+    "petrovsky_1.jpg": f"{_B}/1/1e/Ostankino_Tower.jpg/500px-Ostankino_Tower.jpg",
+    "altufevo_1.jpg": f"{_B}/c/cd/Italian_House_in_Kuskovo_2014_%282%29.JPG/500px-Italian_House_in_Kuskovo_2014_%282%29.JPG",
+    "bratsevo_1.jpg": f"{_B}/8/83/Moscow_Kremlin.jpg/500px-Moscow_Kremlin.jpg",
+}
 PALACE_IMAGE_FALLBACKS: dict[str, list[str]] = {}

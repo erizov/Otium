@@ -87,9 +87,8 @@ IMAGE_DOWNLOADS: dict[str, str] = {
         "Donskoy_monastery_12.jpg"
     ),
     "donskoy_4.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/"
-        "Moscow%2C_Rozhdestvensky_Monastery_04.jpg/500px-"
-        "Moscow%2C_Rozhdestvensky_Monastery_04.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/"
+        "Donskoy_Monastery1.jpg/500px-Donskoy_Monastery1.jpg"
     ),
     "novodevichy_1.jpg": (
         "https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/"
@@ -107,14 +106,16 @@ IMAGE_DOWNLOADS: dict[str, str] = {
         "Novodevichy_Convent_-_Moscow_-_Russia.JPG"
     ),
     "novodevichy_4.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/"
-        "Moscow_05-2017_img29_Andronikov_Monastery.jpg/500px-"
-        "Moscow_05-2017_img29_Andronikov_Monastery.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/"
+        "2024_Novodevichy_Convent_in_Moscow.jpg/500px-"
+        "2024_Novodevichy_Convent_in_Moscow.jpg"
     ),
     "pokrovsky_1.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/"
-        "Moscow_05-2017_img10_Danilov_Monastery.jpg/"
-        "500px-Moscow_05-2017_img10_Danilov_Monastery.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/"
+        "Protection_of_the_Theotokos_Church_Marfo-Mariinsky_Convent_"
+        "Ordynka_Bol_Str_34_str_13_2016-04-19_2595.jpg/500px-"
+        "Protection_of_the_Theotokos_Church_Marfo-Mariinsky_Convent_"
+        "Ordynka_Bol_Str_34_str_13_2016-04-19_2595.jpg"
     ),
     "pokrovsky_2.jpg": (
         "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/"
