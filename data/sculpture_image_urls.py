@@ -27,7 +27,12 @@ _KEYS = [
     "menschikov_1.jpg", "ayvazovsky_1.jpg", "glinka_1.jpg", "skryabin_1.jpg",
 ]
 _URLS = (_MININ, _GAGARIN, _SPASSKAYA, _BASIL, _RED)
-SCULPTURE_IMAGE_DOWNLOADS: dict[str, str] = {
-    k: _URLS[i % len(_URLS)] for i, k in enumerate(_KEYS)
-}
+SCULPTURE_IMAGE_DOWNLOADS: dict[str, str] = {}
+for i, k in enumerate(_KEYS):
+    url = _URLS[i % len(_URLS)]
+    SCULPTURE_IMAGE_DOWNLOADS[k] = url
+    if k.endswith("_1.jpg"):
+        SCULPTURE_IMAGE_DOWNLOADS[k.replace("_1.jpg", "_2.jpg")] = url
+    elif k.endswith("_2.jpg"):
+        SCULPTURE_IMAGE_DOWNLOADS[k.replace("_2.jpg", "_1.jpg")] = url
 SCULPTURE_IMAGE_FALLBACKS: dict[str, list[str]] = {}

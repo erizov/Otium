@@ -307,5 +307,12 @@ CHURCH_IMAGE_DOWNLOADS: dict[str, str] = {
     ),
 }
 
+# Ensure every _1 has a _2 (same URL) for 2–4 images per object
+for _k, _v in list(CHURCH_IMAGE_DOWNLOADS.items()):
+    if _k.endswith("_1.jpg"):
+        _k2 = _k.replace("_1.jpg", "_2.jpg")
+        if _k2 not in CHURCH_IMAGE_DOWNLOADS:
+            CHURCH_IMAGE_DOWNLOADS[_k2] = _v
+
 # Опциональные запасные URL при недоступности основного (filename -> list of URLs)
 CHURCH_IMAGE_FALLBACKS: dict[str, list[str]] = {}

@@ -33,12 +33,12 @@ BANNED_IMAGE_BASENAMES = frozenset([
 GUIDE_EXPECTED_COUNTS: dict[str, int] = {
     "monasteries": 20,
     "churches": 60,
-    "parks": 20,
-    "museums": 30,
-    "palaces": 20,
-    "buildings": 50,
-    "sculptures": 60,
-    "places": 50,
+    "parks": 22,
+    "museums": 32,
+    "palaces": 22,
+    "buildings": 52,
+    "sculptures": 62,
+    "places": 52,
 }
 
 
@@ -79,7 +79,7 @@ def _load_guide_config(guide: str) -> None:
         HTML_NAME = "parks_guide.html"
         PDF_NAME = "parks_guide.pdf"
         INTRO_TITLE = "Парки Москвы"
-        INTRO_SUBTITLE = "20 лучших парков"
+        INTRO_SUBTITLE = "22 лучших парка"
     elif guide == "museums":
         from data.museums import MUSEUMS, IMAGES_SUBFOLDER as _SUB
         from data.museum_image_urls import (
@@ -96,7 +96,7 @@ def _load_guide_config(guide: str) -> None:
         HTML_NAME = "museums_guide.html"
         PDF_NAME = "museums_guide.pdf"
         INTRO_TITLE = "Музеи Москвы"
-        INTRO_SUBTITLE = "30 лучших музеев"
+        INTRO_SUBTITLE = "32 лучших музея"
     elif guide == "palaces":
         from data.palaces import PALACES, IMAGES_SUBFOLDER as _SUB
         from data.palace_image_urls import (
@@ -113,7 +113,7 @@ def _load_guide_config(guide: str) -> None:
         HTML_NAME = "palaces_guide.html"
         PDF_NAME = "palaces_guide.pdf"
         INTRO_TITLE = "Усадьбы и дворцы Москвы"
-        INTRO_SUBTITLE = "20 лучших усадеб и дворцов"
+        INTRO_SUBTITLE = "22 лучших усадьбы и дворца"
     elif guide == "buildings":
         from data.buildings import BUILDINGS, IMAGES_SUBFOLDER as _SUB
         from data.building_image_urls import (
@@ -130,7 +130,7 @@ def _load_guide_config(guide: str) -> None:
         HTML_NAME = "buildings_guide.html"
         PDF_NAME = "buildings_guide.pdf"
         INTRO_TITLE = "Знаменитые здания Москвы"
-        INTRO_SUBTITLE = "50 знаменитых зданий"
+        INTRO_SUBTITLE = "52 знаменитых здания"
     elif guide == "sculptures":
         from data.sculptures import SCULPTURES, IMAGES_SUBFOLDER as _SUB
         from data.sculpture_image_urls import (
@@ -147,7 +147,7 @@ def _load_guide_config(guide: str) -> None:
         HTML_NAME = "sculptures_guide.html"
         PDF_NAME = "sculptures_guide.pdf"
         INTRO_TITLE = "Скульптуры и памятники Москвы"
-        INTRO_SUBTITLE = "60 скульптур и памятников"
+        INTRO_SUBTITLE = "62 скульптуры и памятника"
     elif guide == "places":
         from data.places import PLACES as _PLACES, IMAGES_SUBFOLDER as _SUB
         from data.place_image_urls import (
@@ -164,7 +164,7 @@ def _load_guide_config(guide: str) -> None:
         HTML_NAME = "places_guide.html"
         PDF_NAME = "places_guide.pdf"
         INTRO_TITLE = "Места Москвы"
-        INTRO_SUBTITLE = "50 лучших мест (улицы, площади, районы)"
+        INTRO_SUBTITLE = "52 лучших места (улицы, площади, районы)"
     else:
         from data.monasteries import MONASTERIES, IMAGES_SUBFOLDER as _SUB
         from data.image_urls import IMAGE_DOWNLOADS as _DL, IMAGE_FALLBACKS as _FB
@@ -201,7 +201,7 @@ def _escape(s: str) -> str:
 
 def _file_hash(path: Path) -> str:
     """SHA256 hash of file contents (for deduplication)."""
-    if not path.exists():
+    if not path.exists() or not path.is_file():
         return ""
     h = hashlib.sha256()
     with open(path, "rb") as f:
@@ -309,7 +309,9 @@ def _unique_images_for_place(
         if basename in BANNED:
             continue
         path = output_dir / img_rel
-        if not path.exists() or path.stat().st_size < MIN_IMAGE_BYTES:
+        if not path.exists() or not path.is_file():
+            continue
+        if path.stat().st_size < MIN_IMAGE_BYTES:
             continue
         h = _file_hash(path)
         if not h or h in seen_hashes:
@@ -733,8 +735,8 @@ def main() -> None:
             "buildings", "sculptures", "places",
         ],
         default="monasteries",
-        help="Guide: monasteries(20), churches(60), parks(20), museums(30), "
-             "palaces(20), buildings(50), sculptures(60), places(50)",
+        help="Guide: monasteries(20), churches(60), parks(22), museums(32), "
+             "palaces(22), buildings(52), sculptures(62), places(52)",
     )
     args = parser.parse_args()
     _load_guide_config(args.guide)
