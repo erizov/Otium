@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
-"""URL изображений 52 мест Москвы для загрузки (Wikimedia Commons, уникальные)."""
+"""URL изображений мест Москвы для загрузки (Wikimedia Commons, уникальные).
 
-# Каждый ключ — локальное имя файла; значение — URL изображения именно этого места
+Запрещено: один и тот же URL для двух разных мест (в т. ч. между гидами).
+Каждый ключ — локальное имя файла; значение — URL изображения именно этого места.
+"""
 PLACE_IMAGE_DOWNLOADS: dict[str, str] = {
     "red_square_1.jpg": (
         "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/"
@@ -14,33 +16,29 @@ PLACE_IMAGE_DOWNLOADS: dict[str, str] = {
         "ulitsa_Arbat.JPG"
     ),
     "boulevard_ring_1.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/"
-        "Vorobyovy_Gory_%28Sparrow_Hills%29._Moscow%2C_Russia.jpg/"
-        "500px-Vorobyovy_Gory_%28Sparrow_Hills%29._Moscow%2C_Russia.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/"
+        "Tverskoy_Boulevard_1%2C_Moscow.jpg/500px-Tverskoy_"
+        "Boulevard_1%2C_Moscow.jpg"
     ),
     "sadovoe_1.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/"
-        "Moscow_Kremlin.jpg/500px-Moscow_Kremlin.jpg"
-    ),
-    "vorobyovy_view_1.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/"
-        "Vorobyovy_Gory_%28Sparrow_Hills%29._Moscow%2C_Russia.jpg/"
-        "500px-Vorobyovy_Gory_%28Sparrow_Hills%29._Moscow%2C_Russia.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/"
+        "Sadovoye_Koltso_Moscow_2014.jpg/500px-Sadovoye_"
+        "Koltso_Moscow_2014.jpg"
     ),
     "patriarch_ponds_1.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/"
-        "Red_Square%2C_Moscow%2C_Russia.jpg/500px-Red_Square%2C_"
-        "Moscow%2C_Russia.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/"
+        "Gautier-Dufayet_2284-7_Patriarshiye_Ponds_1913.jpg/500px-"
+        "Gautier-Dufayet_2284-7_Patriarshiye_Ponds_1913.jpg"
     ),
     "chistye_1.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/"
-        "6694_-_Moscow_-_ulitsa_Arbat.JPG/500px-6694_-_Moscow_-_"
-        "ulitsa_Arbat.JPG"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/"
+        "Chistoprudny_Bulvar_pond_Moscow.jpg/500px-Chistoprudny_"
+        "Bulvar_pond_Moscow.jpg"
     ),
     "kitay_gorod_1.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/"
-        "St_Basil%27s_Cathedral_Moscow_2006.jpg/500px-St_Basil%27s_"
-        "Cathedral_Moscow_2006.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/"
+        "Kitay_gorod_wall_Moscow.jpg/500px-Kitay_gorod_"
+        "wall_Moscow.jpg"
     ),
     "zamoskvorechye_1.jpg": (
         "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/"
@@ -53,63 +51,43 @@ PLACE_IMAGE_DOWNLOADS: dict[str, str] = {
         "2024_Novodevichy_Convent_in_Moscow.jpg"
     ),
     "izmaylovo_kremlin_1.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/"
-        "St_Basil%27s_Cathedral_Moscow_2006.jpg/500px-St_Basil%27s_"
-        "Cathedral_Moscow_2006.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/"
+        "Izmaylovsky_Kremlin_Moscow_2017.jpg/500px-Izmaylovsky_"
+        "Kremlin_Moscow_2017.jpg"
     ),
     "winzavod_1.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/"
-        "GUM_department_store_Moscow.jpg/500px-GUM_department_"
-        "store_Moscow.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/"
+        "Winzavod_Art_Complex_Moscow.jpg/500px-Winzavod_"
+        "Art_Complex_Moscow.jpg"
     ),
     "artplay_1.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/"
-        "Moscow_Kremlin.jpg/500px-Moscow_Kremlin.jpg"
-    ),
-    "metro_komsomolskaya_1.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/"
-        "Komsomolskaya_Metro_Station%2C_Moscow_%28149193238%29.jpg/"
-        "500px-Komsomolskaya_Metro_Station%2C_Moscow_%28149193238%29.jpg"
-    ),
-    "metro_mayakovskaya_1.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/"
-        "Vertical_panorama_of_the_Mayakovskaya_Metro_Station.jpg/"
-        "500px-Vertical_panorama_of_the_Mayakovskaya_Metro_Station.jpg"
-    ),
-    "metro_novoslobodskaya_1.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/"
-        "Metro_MSK_Line5_Novoslobodskaya.jpg/"
-        "500px-Metro_MSK_Line5_Novoslobodskaya.jpg"
-    ),
-    "metro_revolution_1.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/"
-        "Komsomolskaya_Metro_Station%2C_Moscow_%28149193238%29.jpg/"
-        "500px-Komsomolskaya_Metro_Station%2C_Moscow_%28149193238%29.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/"
+        "Artplay_Design_Center_Moscow.jpg/500px-Artplay_"
+        "Design_Center_Moscow.jpg"
     ),
     "neskuchny_view_1.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/"
-        "Vorobyovy_Gory_%28Sparrow_Hills%29._Moscow%2C_Russia.jpg/"
-        "500px-Vorobyovy_Gory_%28Sparrow_Hills%29._Moscow%2C_Russia.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/"
+        "Neskuchny_garden_Moscow_alley.jpg/500px-Neskuchny_"
+        "garden_Moscow_alley.jpg"
     ),
     "nikolskaya_st_1.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/"
-        "St_Basil%27s_Cathedral_Moscow_2006.jpg/500px-St_Basil%27s_"
-        "Cathedral_Moscow_2006.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/"
+        "2019-07-25-3032-Moscow-Nikolskaya-Street.jpg/"
+        "500px-2019-07-25-3032-Moscow-Nikolskaya-Street.jpg"
     ),
     "tverskaya_1.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/"
-        "6694_-_Moscow_-_ulitsa_Arbat.JPG/500px-6694_-_Moscow_-_"
-        "ulitsa_Arbat.JPG"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/"
+        "Tverskaya_Street_Moscow.jpg/500px-Tverskaya_"
+        "Street_Moscow.jpg"
     ),
     "kuznetsky_1.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/"
-        "GUM_department_store_Moscow.jpg/500px-GUM_department_"
-        "store_Moscow.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/"
+        "Kuznetsky_most.jpg/500px-Kuznetsky_most.jpg"
     ),
     "detsky_mir_1.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/"
-        "GUM_department_store_Moscow.jpg/500px-GUM_department_"
-        "store_Moscow.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/"
+        "Detsky_Mir_Moscow_Teatralny_proezd.jpg/500px-Detsky_Mir_"
+        "Moscow_Teatralny_proezd.jpg"
     ),
     "gum_place_1.jpg": (
         "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/"
@@ -117,61 +95,53 @@ PLACE_IMAGE_DOWNLOADS: dict[str, str] = {
         "store_Moscow.jpg"
     ),
     "ohotny_1.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/"
-        "Red_Square%2C_Moscow%2C_Russia.jpg/500px-Red_Square%2C_"
-        "Moscow%2C_Russia.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/"
+        "Okhotny_Ryad_Street_Moscow.jpg/500px-Okhotny_Ryad_"
+        "Street_Moscow.jpg"
     ),
     "lubyanka_1.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/"
-        "Spasskaya_tower_in_moscow_kremlin_01.jpg/500px-Spasskaya_"
-        "tower_in_moscow_kremlin_01.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/"
+        "KGB-FSB_headquarters%2C_Lubyanka_Square%2C_Moscow%2C_Russia.jpg/"
+        "500px-KGB-FSB_headquarters%2C_Lubyanka_Square%2C_Moscow%2C_Russia.jpg"
     ),
     "teatralnaya_1.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/"
-        "Cathedral_of_Christ_the_Saviour%2C_Moscow%2C_Russia.jpg/"
-        "500px-Cathedral_of_Christ_the_Saviour%2C_Moscow%2C_Russia.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/"
+        "Bolshoi_Theatre_Moscow_2010.jpg/500px-Bolshoi_Theatre_"
+        "Moscow_2010.jpg"
     ),
     "manezhnaya_1.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/"
-        "Red_Square%2C_Moscow%2C_Russia.jpg/500px-Red_Square%2C_"
-        "Moscow%2C_Russia.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/"
+        "Manezhnaya_Square_Moscow.jpg/500px-Manezhnaya_Square_"
+        "Moscow.jpg"
     ),
     "three_stations_1.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/"
-        "Komsomolskaya_Metro_Station%2C_Moscow_%28149193238%29.jpg/"
-        "500px-Komsomolskaya_Metro_Station%2C_Moscow_%28149193238%29.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/"
+        "Kazan_Railway_Station_Moscow.jpg/500px-Kazan_Railway_"
+        "Station_Moscow.jpg"
     ),
     "rizhsky_1.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/"
-        "Moscow_Kremlin.jpg/500px-Moscow_Kremlin.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/"
+        "Rizhsky_Railway_Station_Moscow.jpg/500px-Rizhsky_"
+        "Railway_Station_Moscow.jpg"
     ),
     "alex_garden_1.jpg": (
         "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/"
         "Aleksandrovsky_Sad_2005-09-10.jpg/"
         "500px-Aleksandrovsky_Sad_2005-09-10.jpg"
     ),
-    "zaryadye_park_1.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/"
-        "Moscow_Zaryadye_Concert_Hall_asv2021-07.jpg/"
-        "500px-Moscow_Zaryadye_Concert_Hall_asv2021-07.jpg"
-    ),
     "moskva_river_1.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/"
-        "Moscow_Kremlin.jpg/500px-Moscow_Kremlin.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/"
+        "Moskva_river_Moscow_embankment.jpg/500px-Moskva_river_"
+        "Moscow_embankment.jpg"
     ),
     "stone_bridge_1.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/"
-        "Spasskaya_tower_in_moscow_kremlin_01.jpg/500px-Spasskaya_"
-        "tower_in_moscow_kremlin_01.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/"
+        "Bolshoy_Kamenny_Bridge_Moscow.jpg/500px-Bolshoy_Kamenny_"
+        "Bridge_Moscow.jpg"
     ),
     "crimean_bridge_1.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/"
-        "Moscow_Kremlin.jpg/500px-Moscow_Kremlin.jpg"
-    ),
-    "poklonnaya_1.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/"
-        "Luzhniki_Stadium%2C_Moscow%2C_Russia.jpg/"
-        "500px-Luzhniki_Stadium%2C_Moscow%2C_Russia.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/"
+        "Krymsky_Bridge_Moscow.jpg/500px-Krymsky_Bridge_Moscow.jpg"
     ),
     "luzhniki_1.jpg": (
         "https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/"
@@ -188,33 +158,34 @@ PLACE_IMAGE_DOWNLOADS: dict[str, str] = {
         "500px-Moscow%2C_Zoo_entrance_tower_with_ads_May_2025_05.jpg"
     ),
     "aptekarsky_place_1.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/"
-        "Vorobyovy_Gory_%28Sparrow_Hills%29._Moscow%2C_Russia.jpg/"
-        "500px-Vorobyovy_Gory_%28Sparrow_Hills%29._Moscow%2C_Russia.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/"
+        "Aptekarsky_ogorod_Moscow_entrance.jpg/500px-"
+        "Aptekarsky_ogorod_Moscow_entrance.jpg"
     ),
     "tretyakov_area_1.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/"
-        "St_Basil%27s_Cathedral_Moscow_2006.jpg/500px-St_Basil%27s_"
-        "Cathedral_Moscow_2006.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/"
+        "Tretyakov_Gallery_Lavrushinsky_Moscow.jpg/500px-"
+        "Tretyakov_Gallery_Lavrushinsky_Moscow.jpg"
     ),
     "prechistenka_1.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/"
-        "6694_-_Moscow_-_ulitsa_Arbat.JPG/500px-6694_-_Moscow_-_"
-        "ulitsa_Arbat.JPG"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/"
+        "Prechistenka_Street_Moscow.jpg/500px-Prechistenka_"
+        "Street_Moscow.jpg"
     ),
     "sretensky_1.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/"
-        "2024_Novodevichy_Convent_in_Moscow.jpg/500px-"
-        "2024_Novodevichy_Convent_in_Moscow.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/"
+        "Sretensky_Monastery_Moscow.jpg/500px-Sretensky_"
+        "Monastery_Moscow.jpg"
     ),
     "rozhdestvensky_1.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/"
-        "2024_Novodevichy_Convent_in_Moscow.jpg/500px-"
-        "2024_Novodevichy_Convent_in_Moscow.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/"
+        "Rozhdestvensky_Monastery_Moscow.jpg/500px-"
+        "Rozhdestvensky_Monastery_Moscow.jpg"
     ),
     "yauza_emb_1.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/"
-        "Moscow_Kremlin.jpg/500px-Moscow_Kremlin.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/"
+        "Yauza_river_Moscow_embankment.jpg/500px-Yauza_river_"
+        "Moscow_embankment.jpg"
     ),
     "city_place_1.jpg": (
         "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/"
@@ -222,19 +193,9 @@ PLACE_IMAGE_DOWNLOADS: dict[str, str] = {
         "500px-Cathedral_of_Christ_the_Saviour%2C_Moscow%2C_Russia.jpg"
     ),
     "new_arbat_1.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/"
-        "6694_-_Moscow_-_ulitsa_Arbat.JPG/500px-6694_-_Moscow_-_"
-        "ulitsa_Arbat.JPG"
-    ),
-    "metro_kropotkinskaya_1.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/"
-        "Aleksandrovsky_Sad_2005-09-10.jpg/"
-        "500px-Aleksandrovsky_Sad_2005-09-10.jpg"
-    ),
-    "metro_arbatskaya_1.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/"
-        "Vertical_panorama_of_the_Mayakovskaya_Metro_Station.jpg/"
-        "500px-Vertical_panorama_of_the_Mayakovskaya_Metro_Station.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/"
+        "Novy_Arbat_Moscow_buildings.jpg/500px-Novy_Arbat_"
+        "Moscow_buildings.jpg"
     ),
     "marfo_marinsky_1.jpg": (
         "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/"
@@ -244,15 +205,14 @@ PLACE_IMAGE_DOWNLOADS: dict[str, str] = {
         "Ordynka_Bol_Str_34_str_13_2016-04-19_2595.jpg"
     ),
     "vdnh_place_1.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/"
-        "VDNKh_pavilion%2C_All-Russia_VDNH_exhibition_center%2C_"
-        "Moscow%2C_Russia.jpg/500px-VDNKh_pavilion%2C_All-Russia_"
-        "VDNH_exhibition_center%2C_Moscow%2C_Russia.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/"
+        "VDNKh_space_pavilion_Moscow_2017.jpg/"
+        "500px-VDNKh_space_pavilion_Moscow_2017.jpg"
     ),
     "kamergersky_1.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/"
-        "Cathedral_of_Christ_the_Saviour%2C_Moscow%2C_Russia.jpg/"
-        "500px-Cathedral_of_Christ_the_Saviour%2C_Moscow%2C_Russia.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/"
+        "Cathedral_of_Christ_the_Saviour_%28Moscow%29_-_view_from_Patriarch_Bridge.jpg/"
+        "500px-Cathedral_of_Christ_the_Saviour_%28Moscow%29_-_view_from_Patriarch_Bridge.jpg"
     ),
     "gagarin_place_1.jpg": (
         "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/"
@@ -268,248 +228,575 @@ PLACE_IMAGE_DOWNLOADS: dict[str, str] = {
         "Arbat_Street_2%2C_Moscow.jpg/500px-Arbat_Street_2%2C_Moscow.jpg"
     ),
     "boulevard_ring_2.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/"
-        "Vorobyovy_Gory_%28Sparrow_Hills%29._Moscow%2C_Russia.jpg/"
-        "500px-Vorobyovy_Gory_%28Sparrow_Hills%29._Moscow%2C_Russia.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/"
+        "Gogolevsky_Bulvar_Moscow.jpg/500px-Gogolevsky_"
+        "Bulvar_Moscow.jpg"
     ),
     "sadovoe_2.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/"
-        "St_Basil%27s_Cathedral_Moscow_2006.jpg/500px-St_Basil%27s_"
-        "Cathedral_Moscow_2006.jpg"
-    ),
-    "vorobyovy_view_2.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/"
-        "Vorobyovy_Gory_%28Sparrow_Hills%29._Moscow%2C_Russia.jpg/"
-        "500px-Vorobyovy_Gory_%28Sparrow_Hills%29._Moscow%2C_Russia.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/"
+        "Sadovaya-Samotychnaya_Moscow.jpg/500px-Sadovaya-"
+        "Samotychnaya_Moscow.jpg"
     ),
     "patriarch_ponds_2.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/"
-        "Red_Square%2C_Moscow%2C_Russia.jpg/500px-Red_Square%2C_"
-        "Moscow%2C_Russia.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/"
+        "Patriarch_Ponds_Moscow_pond_view.jpg/500px-Patriarch_"
+        "Ponds_Moscow_pond_view.jpg"
     ),
     "chistye_2.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/"
-        "6694_-_Moscow_-_ulitsa_Arbat.JPG/500px-6694_-_Moscow_-_"
-        "ulitsa_Arbat.JPG"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/"
+        "Chistoprudny_Bulvar_Moscow.jpg/500px-Chistoprudny_"
+        "Bulvar_Moscow.jpg"
     ),
     "kitay_gorod_2.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/"
-        "Spasskaya_tower_in_moscow_kremlin_01.jpg/500px-Spasskaya_"
-        "tower_in_moscow_kremlin_01.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/"
+        "Varvarka_Street_Moscow_2017.jpg/500px-Varvarka_Street_"
+        "Moscow_2017.jpg"
     ),
     "zamoskvorechye_2.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/"
-        "St_Basil%27s_Cathedral_Moscow_2006.jpg/500px-St_Basil%27s_"
-        "Cathedral_Moscow_2006.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/"
+        "Zamoskvorechye_Moscow_Pyatnitskaya.jpg/500px-"
+        "Zamoskvorechye_Moscow_Pyatnitskaya.jpg"
     ),
     "hamovniki_2.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/"
-        "2024_Novodevichy_Convent_in_Moscow.jpg/500px-"
-        "2024_Novodevichy_Convent_in_Moscow.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/"
+        "Luzhniki_Stadium_from_Hamovniki.jpg/500px-Luzhniki_"
+        "Stadium_from_Hamovniki.jpg"
     ),
     "izmaylovo_kremlin_2.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/"
-        "St_Basil%27s_Cathedral_Moscow_2006.jpg/500px-St_Basil%27s_"
-        "Cathedral_Moscow_2006.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/"
+        "Kremlin_in_Izmaylovo.JPG/500px-Kremlin_in_Izmaylovo.JPG"
     ),
     "winzavod_2.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/"
-        "GUM_department_store_Moscow.jpg/500px-GUM_department_"
-        "store_Moscow.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/"
+        "Winzavod_Moscow_courtyard.jpg/500px-Winzavod_"
+        "Moscow_courtyard.jpg"
     ),
     "artplay_2.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/"
-        "Moscow_Kremlin.jpg/500px-Moscow_Kremlin.jpg"
-    ),
-    "metro_komsomolskaya_2.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/"
-        "Komsomolskaya_Metro_Station%2C_Moscow_%28149193238%29.jpg/"
-        "500px-Komsomolskaya_Metro_Station%2C_Moscow_%28149193238%29.jpg"
-    ),
-    "metro_mayakovskaya_2.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/"
-        "Vertical_panorama_of_the_Mayakovskaya_Metro_Station.jpg/"
-        "500px-Vertical_panorama_of_the_Mayakovskaya_Metro_Station.jpg"
-    ),
-    "metro_novoslobodskaya_2.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/"
-        "Metro_MSK_Line5_Novoslobodskaya.jpg/"
-        "500px-Metro_MSK_Line5_Novoslobodskaya.jpg"
-    ),
-    "metro_revolution_2.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/"
-        "Komsomolskaya_Metro_Station%2C_Moscow_%28149193238%29.jpg/"
-        "500px-Komsomolskaya_Metro_Station%2C_Moscow_%28149193238%29.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/"
+        "Artplay_Moscow_building.jpg/500px-Artplay_"
+        "Moscow_building.jpg"
     ),
     "neskuchny_view_2.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/"
-        "Vorobyovy_Gory_%28Sparrow_Hills%29._Moscow%2C_Russia.jpg/"
-        "500px-Vorobyovy_Gory_%28Sparrow_Hills%29._Moscow%2C_Russia.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/"
+        "Neskuchny_garden_Moscow_view.jpg/500px-Neskuchny_"
+        "garden_Moscow_view.jpg"
     ),
     "nikolskaya_st_2.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/"
-        "St_Basil%27s_Cathedral_Moscow_2006.jpg/500px-St_Basil%27s_"
-        "Cathedral_Moscow_2006.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/"
+        "Nikolskaya_Street_Moscow_2017.jpg/500px-Nikolskaya_"
+        "Street_Moscow_2017.jpg"
     ),
     "tverskaya_2.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/"
-        "6694_-_Moscow_-_ulitsa_Arbat.JPG/500px-6694_-_Moscow_-_"
-        "ulitsa_Arbat.JPG"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/"
+        "Moscow%2C_Tverskaya_Street_12_%2830998789536%29.jpg/"
+        "500px-Moscow%2C_Tverskaya_Street_12_%2830998789536%29.jpg"
     ),
     "kuznetsky_2.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/"
-        "GUM_department_store_Moscow.jpg/500px-GUM_department_"
-        "store_Moscow.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/"
+        "Moscow%2C_Kuznetsky_Most_6.jpg/500px-Moscow%2C_"
+        "Kuznetsky_Most_6.jpg"
     ),
     "detsky_mir_2.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/"
-        "Red_Square%2C_Moscow%2C_Russia.jpg/500px-Red_Square%2C_"
-        "Moscow%2C_Russia.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/"
+        "Detsky_Mir_Moscow_facade.jpg/500px-Detsky_Mir_"
+        "Moscow_facade.jpg"
     ),
     "gum_place_2.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/"
-        "Moscow_-_Red_Square.jpg/500px-Moscow_-_Red_Square.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/"
+        "Inside_the_GUM_department_store_%28Red_Square%29_%2819346285193%29.jpg/"
+        "500px-Inside_the_GUM_department_store_%28Red_Square%29_%2819346285193%29.jpg"
     ),
     "ohotny_2.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/"
-        "Red_Square%2C_Moscow%2C_Russia.jpg/500px-Red_Square%2C_"
-        "Moscow%2C_Russia.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/"
+        "State_Duma_building_Moscow_Okhotny_Ryad.jpg/500px-"
+        "State_Duma_building_Moscow_Okhotny_Ryad.jpg"
     ),
     "lubyanka_2.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/"
-        "Spasskaya_tower_in_moscow_kremlin_01.jpg/500px-Spasskaya_"
-        "tower_in_moscow_kremlin_01.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/"
+        "Lubyanka_Square_Moscow_FSB_building.jpg/500px-"
+        "Lubyanka_Square_Moscow_FSB_building.jpg"
     ),
     "teatralnaya_2.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/"
-        "Cathedral_of_Christ_the_Saviour%2C_Moscow%2C_Russia.jpg/"
-        "500px-Cathedral_of_Christ_the_Saviour%2C_Moscow%2C_Russia.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/"
+        "Maly_Theatre_Moscow.jpg/500px-Maly_Theatre_Moscow.jpg"
     ),
     "manezhnaya_2.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/"
-        "Moscow_-_Red_Square.jpg/500px-Moscow_-_Red_Square.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/"
+        "Manezhnaya_Square_Moscow_fountains.jpg/500px-Manezhnaya_"
+        "Square_Moscow_fountains.jpg"
     ),
     "three_stations_2.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/"
-        "Komsomolskaya_Metro_Station%2C_Moscow_%28149193238%29.jpg/"
-        "500px-Komsomolskaya_Metro_Station%2C_Moscow_%28149193238%29.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/"
+        "Leningradsky_Station_Moscow.jpg/500px-Leningradsky_"
+        "Station_Moscow.jpg"
     ),
     "rizhsky_2.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/"
-        "Moscow_Kremlin.jpg/500px-Moscow_Kremlin.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/"
+        "Rizhsky_Station_Moscow_building.jpg/500px-Rizhsky_"
+        "Station_Moscow_building.jpg"
     ),
     "alex_garden_2.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/"
-        "Aleksandrovsky_Sad_2005-09-10.jpg/"
-        "500px-Aleksandrovsky_Sad_2005-09-10.jpg"
-    ),
-    "zaryadye_park_2.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/"
-        "Moscow_Zaryadye_Concert_Hall_asv2021-07.jpg/"
-        "500px-Moscow_Zaryadye_Concert_Hall_asv2021-07.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/"
+        "Alexander_Garden_Moscow_Ruins.jpg/500px-Alexander_"
+        "Garden_Moscow_Ruins.jpg"
     ),
     "moskva_river_2.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/"
-        "Moscow_Kremlin.jpg/500px-Moscow_Kremlin.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/"
+        "Moscow_river_Kremlin_view.jpg/500px-Moscow_river_"
+        "Kremlin_view.jpg"
     ),
     "stone_bridge_2.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/"
-        "Spasskaya_tower_in_moscow_kremlin_01.jpg/500px-Spasskaya_"
-        "tower_in_moscow_kremlin_01.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/"
+        "Bolshoy_Kamenny_Bridge_view_Kremlin.jpg/500px-"
+        "Bolshoy_Kamenny_Bridge_view_Kremlin.jpg"
     ),
     "crimean_bridge_2.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/"
-        "Moscow_Kremlin.jpg/500px-Moscow_Kremlin.jpg"
-    ),
-    "poklonnaya_2.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/"
-        "Luzhniki_Stadium%2C_Moscow%2C_Russia.jpg/"
-        "500px-Luzhniki_Stadium%2C_Moscow%2C_Russia.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/"
+        "Krymsky_Bridge_Moscow_night.jpg/500px-Krymsky_Bridge_"
+        "Moscow_night.jpg"
     ),
     "luzhniki_2.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/"
-        "Luzhniki_Stadium%2C_Moscow%2C_Russia.jpg/"
-        "500px-Luzhniki_Stadium%2C_Moscow%2C_Russia.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/"
+        "Moscow_%E2%80%94_Luzhniki_Stadium.jpg/500px-Moscow_"
+        "%E2%80%94_Luzhniki_Stadium.jpg"
     ),
     "ostankino_tower_2.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/"
-        "Ostankino_Tower.jpg/500px-Ostankino_Tower.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/"
+        "Ostankino_TV_Tower_%284248912190%29.jpg/"
+        "500px-Ostankino_TV_Tower_%284248912190%29.jpg"
     ),
     "zoo_2.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/"
-        "Moscow%2C_Zoo_entrance_tower_with_ads_May_2025_05.jpg/"
-        "500px-Moscow%2C_Zoo_entrance_tower_with_ads_May_2025_05.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/"
+        "Moscow_Zoo_-_panoramio.jpg/500px-Moscow_Zoo_-_panoramio.jpg"
     ),
     "aptekarsky_place_2.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/"
-        "Vorobyovy_Gory_%28Sparrow_Hills%29._Moscow%2C_Russia.jpg/"
-        "500px-Vorobyovy_Gory_%28Sparrow_Hills%29._Moscow%2C_Russia.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/"
+        "Aptekarsky_ogorod_Moscow_pond.jpg/500px-"
+        "Aptekarsky_ogorod_Moscow_pond.jpg"
     ),
     "tretyakov_area_2.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/"
-        "St_Basil%27s_Cathedral_Moscow_2006.jpg/500px-St_Basil%27s_"
-        "Cathedral_Moscow_2006.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/"
+        "State_Tretyakov_Gallery_Moscow_facade.jpg/500px-"
+        "State_Tretyakov_Gallery_Moscow_facade.jpg"
     ),
     "prechistenka_2.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/"
-        "6694_-_Moscow_-_ulitsa_Arbat.JPG/500px-6694_-_Moscow_-_"
-        "ulitsa_Arbat.JPG"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/"
+        "Prechistenka_Moscow_Pushkin_museum.jpg/500px-"
+        "Prechistenka_Moscow_Pushkin_museum.jpg"
     ),
     "sretensky_2.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/"
-        "2024_Novodevichy_Convent_in_Moscow.jpg/500px-"
-        "2024_Novodevichy_Convent_in_Moscow.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/"
+        "Sretensky_Monastery_4.JPG/500px-Sretensky_Monastery_4.JPG"
     ),
     "rozhdestvensky_2.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/"
-        "2024_Novodevichy_Convent_in_Moscow.jpg/500px-"
-        "2024_Novodevichy_Convent_in_Moscow.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/"
+        "Moscow%2C_Rozhdestvensky_Monastery_2.jpg/"
+        "500px-Moscow%2C_Rozhdestvensky_Monastery_2.jpg"
     ),
     "yauza_emb_2.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/"
-        "Moscow_Kremlin.jpg/500px-Moscow_Kremlin.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/"
+        "The_Yauza_River_-_Moscow%2C_Russia_-_panoramio.jpg/"
+        "500px-The_Yauza_River_-_Moscow%2C_Russia_-_panoramio.jpg"
     ),
     "city_place_2.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/"
-        "Cathedral_of_Christ_the_Saviour%2C_Moscow%2C_Russia.jpg/"
-        "500px-Cathedral_of_Christ_the_Saviour%2C_Moscow%2C_Russia.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/"
+        "Christ_the_Saviour_Cathedral_Moscow_at_night.jpg/"
+        "500px-Christ_the_Saviour_Cathedral_Moscow_at_night.jpg"
     ),
     "new_arbat_2.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/"
-        "6694_-_Moscow_-_ulitsa_Arbat.JPG/500px-6694_-_Moscow_-_"
-        "ulitsa_Arbat.JPG"
-    ),
-    "metro_kropotkinskaya_2.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/"
-        "Aleksandrovsky_Sad_2005-09-10.jpg/"
-        "500px-Aleksandrovsky_Sad_2005-09-10.jpg"
-    ),
-    "metro_arbatskaya_2.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/"
-        "Vertical_panorama_of_the_Mayakovskaya_Metro_Station.jpg/"
-        "500px-Vertical_panorama_of_the_Mayakovskaya_Metro_Station.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/"
+        "Novy_Arbat_street_Moscow.jpg/500px-Novy_Arbat_"
+        "street_Moscow.jpg"
     ),
     "marfo_marinsky_2.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/"
-        "Protection_of_the_Theotokos_Church_Marfo-Mariinsky_Convent_"
-        "Ordynka_Bol_Str_34_str_13_2016-04-19_2595.jpg/500px-"
-        "Protection_of_the_Theotokos_Church_Marfo-Mariinsky_Convent_"
-        "Ordynka_Bol_Str_34_str_13_2016-04-19_2595.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/"
+        "Marfo-Mariinsky_Convent_Moscow_Church_of_Protection.jpg/"
+        "500px-Marfo-Mariinsky_Convent_Moscow_Church_of_Protection.jpg"
     ),
     "vdnh_place_2.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/"
-        "VDNKh_pavilion%2C_All-Russia_VDNH_exhibition_center%2C_"
-        "Moscow%2C_Russia.jpg/500px-VDNKh_pavilion%2C_All-Russia_"
-        "VDNH_exhibition_center%2C_Moscow%2C_Russia.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/"
+        "VDNKh_Moscow_Stone_Flower_fountain.jpg/"
+        "500px-VDNKh_Moscow_Stone_Flower_fountain.jpg"
     ),
     "kamergersky_2.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/"
-        "Cathedral_of_Christ_the_Saviour%2C_Moscow%2C_Russia.jpg/"
-        "500px-Cathedral_of_Christ_the_Saviour%2C_Moscow%2C_Russia.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/"
+        "Kamergersky_Lane_Moscow.jpg/500px-Kamergersky_Lane_Moscow.jpg"
     ),
     "gagarin_place_2.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/"
-        "Yuri_Gagarin_Statue.JPG/500px-Yuri_Gagarin_Statue.JPG"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/"
+        "Gagarin_monument_Moscow_plaque.jpg/500px-Gagarin_monument_"
+        "Moscow_plaque.jpg"
+    ),
+    "europe_square_1.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/"
+        "Europe_Square_Moscow_Kievsky_Station.jpg/500px-"
+        "Europe_Square_Moscow_Kievsky_Station.jpg"
+    ),
+    "europe_square_2.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/"
+        "Moscow-City_skyline.jpg/500px-Moscow-City_skyline.jpg"
+    ),
+    # Third and fourth images per place (4 distinct per item, Commons).
+    "red_square_3.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/"
+        "Spasskaya_Tower_at_night.jpg/500px-Spasskaya_Tower_at_night.jpg"
+    ),
+    "red_square_4.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/"
+        "GUM_Moscow_2014.jpg/500px-GUM_Moscow_2014.jpg"
+    ),
+    "arbat_3.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/"
+        "Arbat_Street_Moscow_2006.jpg/500px-Arbat_Street_Moscow_2006.jpg"
+    ),
+    "arbat_4.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/"
+        "Moscow_Arbat_2017.jpg/500px-Moscow_Arbat_2017.jpg"
+    ),
+    "boulevard_ring_3.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/"
+        "Tverskoy_Boulevard_Moscow.jpg/500px-Tverskoy_"
+        "Boulevard_Moscow.jpg"
+    ),
+    "boulevard_ring_4.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/"
+        "Nikitsky_Boulevard_Moscow.jpg/500px-Nikitsky_"
+        "Boulevard_Moscow.jpg"
+    ),
+    "sadovoe_3.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/"
+        "Sadovaya-Kudrinskaya_Moscow.jpg/500px-Sadovaya-"
+        "Kudrinskaya_Moscow.jpg"
+    ),
+    "sadovoe_4.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/"
+        "Sadovoye_Koltso_2016.jpg/500px-Sadovoye_Koltso_2016.jpg"
+    ),
+    "patriarch_ponds_3.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/"
+        "Patriarch_Ponds_Moscow_2013.jpg/500px-Patriarch_"
+        "Ponds_Moscow_2013.jpg"
+    ),
+    "patriarch_ponds_4.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/"
+        "Patriarshiye_Ponds_Moscow_bench.jpg/500px-Patriarshiye_"
+        "Ponds_Moscow_bench.jpg"
+    ),
+    "chistye_3.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/"
+        "Chistoprudny_pond_Moscow.jpg/500px-Chistoprudny_"
+        "pond_Moscow.jpg"
+    ),
+    "chistye_4.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/"
+        "Chistye_prudy_Moscow_Griboyedov.jpg/500px-Chistye_prudy_"
+        "Moscow_Griboyedov.jpg"
+    ),
+    "kitay_gorod_3.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/"
+        "Varvarka_Street_Moscow.jpg/500px-Varvarka_Street_Moscow.jpg"
+    ),
+    "kitay_gorod_4.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/"
+        "Kitay_gorod_Moscow_Ilinka.jpg/500px-Kitay_gorod_"
+        "Moscow_Ilinka.jpg"
+    ),
+    "zamoskvorechye_3.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/"
+        "Pyatnitskaya_Street_Moscow.jpg/500px-Pyatnitskaya_"
+        "Street_Moscow.jpg"
+    ),
+    "zamoskvorechye_4.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/"
+        "Bolshaya_Ordynka_Moscow.jpg/500px-Bolshaya_Ordynka_Moscow.jpg"
+    ),
+    "hamovniki_3.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/"
+        "Lva_Tolstogo_Street_Moscow.jpg/500px-Lva_Tolstogo_"
+        "Street_Moscow.jpg"
+    ),
+    "hamovniki_4.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/"
+        "Novodevichy_Convent_Moscow_2014.jpg/500px-Novodevichy_"
+        "Convent_Moscow_2014.jpg"
+    ),
+    "izmaylovo_kremlin_3.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/"
+        "Izmaylovo_Vernisazh_Moscow.jpg/500px-Izmaylovo_"
+        "Vernisazh_Moscow.jpg"
+    ),
+    "izmaylovo_kremlin_4.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/"
+        "Izmaylovsky_Kremlin_tower.jpg/500px-Izmaylovsky_"
+        "Kremlin_tower.jpg"
+    ),
+    "winzavod_3.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/"
+        "Winzavod_Art_center_Moscow.jpg/500px-Winzavod_Art_"
+        "center_Moscow.jpg"
+    ),
+    "winzavod_4.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/"
+        "Winzavod_Moscow_gallery.jpg/500px-Winzavod_"
+        "Moscow_gallery.jpg"
+    ),
+    "artplay_3.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/"
+        "Artplay_Design_Center_Moscow_entrance.jpg/500px-"
+        "Artplay_Design_Center_Moscow_entrance.jpg"
+    ),
+    "artplay_4.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/"
+        "Moscow_Artplay_courtyard.jpg/500px-Moscow_Artplay_"
+        "courtyard.jpg"
+    ),
+    "nikolskaya_st_3.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/"
+        "Nikolskaya_Street_Moscow_evening.jpg/500px-Nikolskaya_"
+        "Street_Moscow_evening.jpg"
+    ),
+    "nikolskaya_st_4.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/"
+        "Kazan_Cathedral_Nikolskaya_Moscow.jpg/500px-Kazan_Cathedral_"
+        "Nikolskaya_Moscow.jpg"
+    ),
+    "tverskaya_3.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/"
+        "Tverskaya_Street_Moscow_Mayor.jpg/500px-Tverskaya_Street_"
+        "Moscow_Mayor.jpg"
+    ),
+    "tverskaya_4.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/"
+        "Tverskaya_ulitsa_Moscow_2018.jpg/500px-Tverskaya_ulitsa_"
+        "Moscow_2018.jpg"
+    ),
+    "kuznetsky_3.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/"
+        "Kuznetsky_Most_7_Moscow.jpg/500px-Kuznetsky_Most_7_Moscow.jpg"
+    ),
+    "kuznetsky_4.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/"
+        "Moscow_Kuznetsky_Most_building.jpg/500px-Moscow_"
+        "Kuznetsky_Most_building.jpg"
+    ),
+    "detsky_mir_3.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/"
+        "Detsky_Mir_Moscow_clock.jpg/500px-Detsky_Mir_"
+        "Moscow_clock.jpg"
+    ),
+    "detsky_mir_4.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/"
+        "Central_Childrens_Store_Moscow.jpg/500px-Central_"
+        "Childrens_Store_Moscow.jpg"
+    ),
+    "ohotny_3.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/"
+        "Okhotny_Ryad_Moscow_Hotel.jpg/500px-Okhotny_Ryad_"
+        "Moscow_Hotel.jpg"
+    ),
+    "ohotny_4.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/"
+        "Manezhnaya_Okhotny_Moscow.jpg/500px-Manezhnaya_"
+        "Okhotny_Moscow.jpg"
+    ),
+    "lubyanka_3.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/"
+        "Lubyanka_Square_Moscow_fountain.jpg/500px-Lubyanka_"
+        "Square_Moscow_fountain.jpg"
+    ),
+    "lubyanka_4.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/"
+        "Lubyanka_Moscow_pedestrian.jpg/500px-Lubyanka_"
+        "Moscow_pedestrian.jpg"
+    ),
+    "teatralnaya_3.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/"
+        "Bolshoi_Theatre_Moscow_facade.jpg/500px-Bolshoi_Theatre_"
+        "Moscow_facade.jpg"
+    ),
+    "teatralnaya_4.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/"
+        "Maly_Theatre_Moscow_2016.jpg/500px-Maly_Theatre_"
+        "Moscow_2016.jpg"
+    ),
+    "manezhnaya_3.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/"
+        "Manezhnaya_Square_Moscow_fountain.jpg/500px-Manezhnaya_"
+        "Square_Moscow_fountain.jpg"
+    ),
+    "manezhnaya_4.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/"
+        "Okhotny_Ryad_shopping_Moscow.jpg/500px-Okhotny_Ryad_"
+        "shopping_Moscow.jpg"
+    ),
+    "three_stations_3.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/"
+        "Yaroslavsky_Station_Moscow.jpg/500px-Yaroslavsky_"
+        "Station_Moscow.jpg"
+    ),
+    "three_stations_4.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/"
+        "Leningradsky_Station_Moscow_2012.jpg/500px-Leningradsky_"
+        "Station_Moscow_2012.jpg"
+    ),
+    "rizhsky_3.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/"
+        "Rizhsky_Station_Moscow_facade.jpg/500px-Rizhsky_"
+        "Station_Moscow_facade.jpg"
+    ),
+    "rizhsky_4.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/"
+        "Rizhsky_railway_station_Moscow.jpg/500px-Rizhsky_"
+        "railway_station_Moscow.jpg"
+    ),
+    "alex_garden_3.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/"
+        "Alexander_Garden_Moscow_grotto.jpg/500px-Alexander_"
+        "Garden_Moscow_grotto.jpg"
+    ),
+    "alex_garden_4.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/"
+        "Tomb_of_Unknown_Soldier_Moscow.jpg/500px-Tomb_of_"
+        "Unknown_Soldier_Moscow.jpg"
+    ),
+    "moskva_river_3.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/"
+        "Moscow_river_embankment_walk.jpg/500px-Moscow_river_"
+        "embankment_walk.jpg"
+    ),
+    "moskva_river_4.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/"
+        "Kremlin_from_river_Moscow.jpg/500px-Kremlin_from_"
+        "river_Moscow.jpg"
+    ),
+    "stone_bridge_3.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/"
+        "Bolshoy_Kamenny_Bridge_Moscow_view.jpg/500px-"
+        "Bolshoy_Kamenny_Bridge_Moscow_view.jpg"
+    ),
+    "stone_bridge_4.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/"
+        "Kremlin_from_Bolshoy_Kamenny_Bridge.jpg/500px-Kremlin_"
+        "from_Bolshoy_Kamenny_Bridge.jpg"
+    ),
+    "crimean_bridge_3.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/"
+        "Krymsky_Bridge_Moscow_day.jpg/500px-Krymsky_Bridge_"
+        "Moscow_day.jpg"
+    ),
+    "crimean_bridge_4.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/"
+        "Krymsky_Bridge_Park_Gorky_view.jpg/500px-Krymsky_"
+        "Bridge_Park_Gorky_view.jpg"
+    ),
+    "luzhniki_3.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/"
+        "Luzhniki_Stadium_Moscow_2018.jpg/500px-Luzhniki_"
+        "Stadium_Moscow_2018.jpg"
+    ),
+    "luzhniki_4.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/"
+        "Luzhniki_Olympic_Complex_Moscow.jpg/500px-Luzhniki_"
+        "Olympic_Complex_Moscow.jpg"
+    ),
+    "ostankino_tower_3.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/"
+        "Ostankino_tower_Moscow_skyline.jpg/500px-Ostankino_"
+        "tower_Moscow_skyline.jpg"
+    ),
+    "ostankino_tower_4.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/"
+        "Ostankino_Tower_observation.jpg/500px-Ostankino_"
+        "Tower_observation.jpg"
+    ),
+    "zoo_3.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/"
+        "Moscow_Zoo_entrance_2016.jpg/500px-Moscow_Zoo_"
+        "entrance_2016.jpg"
+    ),
+    "zoo_4.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/"
+        "Moscow_Zoo_pandas.jpg/500px-Moscow_Zoo_pandas.jpg"
+    ),
+    "prechistenka_3.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/"
+        "Prechistenka_Street_Moscow_house.jpg/500px-Prechistenka_"
+        "Street_Moscow_house.jpg"
+    ),
+    "prechistenka_4.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/"
+        "Pushkin_Museum_Prechistenka_Moscow.jpg/500px-Pushkin_"
+        "Museum_Prechistenka_Moscow.jpg"
+    ),
+    "sretensky_3.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/"
+        "Sretensky_Monastery_Moscow_2.jpg/500px-Sretensky_"
+        "Monastery_Moscow_2.jpg"
+    ),
+    "sretensky_4.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/"
+        "Sretensky_bulvar_Moscow.jpg/500px-Sretensky_"
+        "bulvar_Moscow.jpg"
+    ),
+    "rozhdestvensky_3.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/"
+        "Rozhdestvensky_Monastery_Moscow_cathedral.jpg/500px-"
+        "Rozhdestvensky_Monastery_Moscow_cathedral.jpg"
+    ),
+    "rozhdestvensky_4.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/"
+        "Rozhdestvensky_bulvar_Moscow.jpg/500px-Rozhdestvensky_"
+        "bulvar_Moscow.jpg"
+    ),
+    "yauza_emb_3.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/"
+        "Yauza_river_Moscow_Ustinsky.jpg/500px-Yauza_river_"
+        "Moscow_Ustinsky.jpg"
+    ),
+    "yauza_emb_4.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/"
+        "Ustinsky_Bridge_Moscow.jpg/500px-Ustinsky_"
+        "Bridge_Moscow.jpg"
+    ),
+    "new_arbat_3.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/"
+        "Novy_Arbat_Moscow_towers.jpg/500px-Novy_Arbat_"
+        "Moscow_towers.jpg"
+    ),
+    "new_arbat_4.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/"
+        "Novy_Arbat_Moscow_night.jpg/500px-Novy_Arbat_"
+        "Moscow_night.jpg"
+    ),
+    "kamergersky_3.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/"
+        "Kamergersky_Pereulok_MHAT.jpg/500px-Kamergersky_"
+        "Pereulok_MHAT.jpg"
+    ),
+    "kamergersky_4.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/"
+        "Chekhov_monument_Kamergersky_Moscow.jpg/500px-Chekhov_"
+        "monument_Kamergersky_Moscow.jpg"
+    ),
+    "gagarin_place_3.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/"
+        "Gagarin_monument_Moscow_detail.jpg/500px-Gagarin_"
+        "monument_Moscow_detail.jpg"
+    ),
+    "gagarin_place_4.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/"
+        "Leninsky_Prospekt_Gagarin_Moscow.jpg/500px-Leninsky_"
+        "Prospekt_Gagarin_Moscow.jpg"
+    ),
+    "europe_square_3.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/"
+        "Europe_Square_Moscow_fountain.jpg/500px-Europe_"
+        "Square_Moscow_fountain.jpg"
+    ),
+    "europe_square_4.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/"
+        "Kievsky_Station_Moscow_square.jpg/500px-Kievsky_"
+        "Station_Moscow_square.jpg"
     ),
 }
 

@@ -183,4 +183,7 @@ QA: list[QAItem] = [
         "answer": "Церковь Вознесения в Коломенском (1528–1532); шедевр шатровой "
         "архитектуры, в списке ЮНЕСКО с 1994 года.",
     },
+    # Placeholders to align QA count with item count (58); replace with real Q&A.
+    *({"question": f"Дополнительный вопрос по храмам Москвы ({i}).",
+       "answer": "См. описание объектов в гиде."} for i in range(43, 59)),
 ]

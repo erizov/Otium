@@ -23,9 +23,9 @@ IMAGE_DOWNLOADS: dict[str, str] = {
         "Andronikov_Monastery_%283%29.jpg/500px-Andronikov_Monastery_%283%29.jpg"
     ),
     "andronikov_3.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/"
-        "Moscow_05-2017_img10_Danilov_Monastery.jpg/500px-"
-        "Moscow_05-2017_img10_Danilov_Monastery.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/"
+        "Moscow_05-2017_img29_Andronikov_Monastery.jpg/"
+        "500px-Moscow_05-2017_img29_Andronikov_Monastery.jpg"
     ),
     "vysoko_petrovsky_1.jpg": (
         "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/"
@@ -49,12 +49,25 @@ IMAGE_DOWNLOADS: dict[str, str] = {
         "%D0%BB%D0%B8%D1%82%D0%B0._IMG_2298.3_e2v.jpg"
     ),
     "vysoko_petrovsky_3.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/"
-        "2024_Novodevichy_Convent_in_Moscow.jpg/500px-"
-        "2024_Novodevichy_Convent_in_Moscow.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/"
+        "Moscow._%D0%92%D1%8B%D1%81%D0%BE%D0%BA%D0%BE-%D0%9F%D0%B5%D1%82%D1%80"
+        "%D0%BE%D0%B2%D1%81%D0%BA%D0%B8%D0%B9_%D0%BC%D0%BE%D0%BD%D0%B0%D1%81"
+        "%D1%82%D1%8B%D1%80%D1%8C._%D0%97%D0%B2%D0%BE%D0%BD%D0%BD%D0%B8%D1%86"
+        "%D0%B0_IMG_2311.3_e1.jpg/500px-Moscow._%D0%92%D1%8B%D1%81%D0%BE%D0%BA"
+        "%D0%BE-%D0%9F%D0%B5%D1%82%D1%80%D0%BE%D0%B2%D1%81%D0%BA%D0%B8%D0%B9_"
+        "%D0%BC%D0%BE%D0%BD%D0%B0%D1%81%D1%82%D1%8B%D1%80%D1%8C._%D0%97%D0%B2%D0%BE"
+        "%D0%BD%D0%BD%D0%B8%D1%86%D0%B0_IMG_2311.3_e1.jpg"
     ),
     "vysoko_petrovsky_4.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/d/d7/Krutitsy_teremok.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/"
+        "Moscow._%D0%92%D1%8B%D1%81%D0%BE%D0%BA%D0%BE-%D0%9F%D0%B5%D1%82%D1%80"
+        "%D0%BE%D0%B2%D1%81%D0%BA%D0%B8%D0%B9_%D0%BC%D0%BE%D0%BD._%D0%A1%D0%BE%D0%B1"
+        "%D0%BE%D1%80_%D0%9F%D0%B5%D1%82%D1%80%D0%B0_%D0%9C%D0%B8%D1%82%D1%80%D0%BE"
+        "%D0%BF%D0%BE%D0%BB%D0%B8%D1%82%D0%B0._IMG_2298.3_e2v.jpg/500px-Moscow._"
+        "%D0%92%D1%8B%D1%81%D0%BE%D0%BA%D0%BE-%D0%9F%D0%B5%D1%82%D1%80%D0%BE%D0%B2"
+        "%D1%81%D0%BA%D0%B8%D0%B9_%D0%BC%D0%BE%D0%BD._%D0%A1%D0%BE%D0%B1%D0%BE%D1%80_"
+        "%D0%9F%D0%B5%D1%82%D1%80%D0%B0_%D0%9C%D0%B8%D1%82%D1%80%D0%BE%D0%BF%D0%BE"
+        "%D0%BB%D0%B8%D1%82%D0%B0._IMG_2298.3_e2v.jpg"
     ),
     "andreevsky_1.jpg": (
         "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/"
@@ -67,12 +80,14 @@ IMAGE_DOWNLOADS: dict[str, str] = {
         "Moscow_05-2017_img24_Andreevsky_Monastery.jpg"
     ),
     "andreevsky_3.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/"
-        "Simonov_monastery_01.jpg/500px-Simonov_monastery_01.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/"
+        "Moscow_05-2017_img23_Andreevsky_Monastery.jpg/500px-"
+        "Moscow_05-2017_img23_Andreevsky_Monastery.jpg"
     ),
     "andreevsky_4.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/"
-        "Conception_Monastery_1882.jpg/500px-Conception_Monastery_1882.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/"
+        "Moscow_05-2017_img24_Andreevsky_Monastery.jpg/500px-"
+        "Moscow_05-2017_img24_Andreevsky_Monastery.jpg"
     ),
     "donskoy_1.jpg": (
         "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/"
@@ -163,43 +178,35 @@ IMAGE_DOWNLOADS: dict[str, str] = {
         "500px-Moscow_05-2017_img10_Danilov_Monastery.jpg"
     ),
     "danilov_2.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/"
-        "%D0%9D%D0%BE%D0%B2%D0%BE%D1%81%D0%BF%D0%B0%D1%81%D1%81%D0%BA%D0%B8%D0%B9_"
-        "%D0%BC%D0%BE%D0%BD%D0%B0%D1%81%D1%82%D1%8B%D1%80%D1%8C_%D0%B8_%D1%86%D0%B5"
-        "%D1%80%D0%BA%D0%BE%D0%B2%D1%8C_%D0%A1%D0%BE%D1%80%D0%BE%D0%BA%D0%B0_%D0%BC"
-        "%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D0%BA%D0%BE%D0%B2_%D0%A1%D0%B5%D0%B2%D0%B0"
-        "%D1%81%D1%82%D0%B8%D0%B9%D1%81%D0%BA%D0%B8%D1%85.jpg/500px-"
-        "%D0%9D%D0%BE%D0%B2%D0%BE%D1%81%D0%BF%D0%B0%D1%81%D1%81%D0%BA%D0%B8%D0%B9_"
-        "%D0%BC%D0%BE%D0%BD%D0%B0%D1%81%D1%82%D1%8B%D1%80%D1%8C_%D0%B8_%D1%86%D0%B5"
-        "%D1%80%D0%BA%D0%BE%D0%B2%D1%8C_%D0%A1%D0%BE%D1%80%D0%BE%D0%BA%D0%B0_%D0%BC"
-        "%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D0%BA%D0%BE%D0%B2_%D0%A1%D0%B5%D0%B2%D0%B0"
-        "%D1%81%D1%82%D0%B8%D0%B9%D1%81%D0%BA%D0%B8%D1%85.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/"
+        "Moscow_05-2017_img10_Danilov_Monastery.jpg/500px-"
+        "Moscow_05-2017_img10_Danilov_Monastery.jpg"
     ),
     "danilov_3.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/"
-        "2024_Novodevichy_Convent_in_Moscow.jpg/500px-"
-        "2024_Novodevichy_Convent_in_Moscow.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/"
+        "Moscow_05-2017_img10_Danilov_Monastery.jpg/500px-"
+        "Moscow_05-2017_img10_Danilov_Monastery.jpg"
     ),
     "danilov_4.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/"
-        "Simonov_monastery_01.jpg/500px-Simonov_monastery_01.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/"
+        "Moscow_05-2017_img10_Danilov_Monastery.jpg/500px-"
+        "Moscow_05-2017_img10_Danilov_Monastery.jpg"
     ),
     "zachatievsky_1.jpg": (
         "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/"
         "Conception_Monastery_1882.jpg/500px-Conception_Monastery_1882.jpg"
     ),
     "zachatievsky_2.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/"
-        "Moscow%2C_Novospassky_Monastery%2C_August_2012.jpg/500px-"
-        "Moscow%2C_Novospassky_Monastery%2C_August_2012.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/"
+        "Conception_Monastery_1882.jpg/500px-Conception_Monastery_1882.jpg"
     ),
     "zachatievsky_3.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/"
-        "Moscow_05-2017_img29_Andronikov_Monastery.jpg/500px-"
-        "Moscow_05-2017_img29_Andronikov_Monastery.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/"
+        "Conception_Monastery_1882.jpg/500px-Conception_Monastery_1882.jpg"
     ),
     "zachatievsky_4.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/d/d7/Krutitsy_teremok.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/"
+        "Conception_Monastery_1882.jpg/500px-Conception_Monastery_1882.jpg"
     ),
     "novospassky_1.jpg": (
         "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/"
@@ -220,13 +227,14 @@ IMAGE_DOWNLOADS: dict[str, str] = {
         "Moscow%2C_Novospassky_Monastery%2C_August_2012.jpg"
     ),
     "novospassky_3.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/"
-        "Moscow_05-2017_img10_Danilov_Monastery.jpg/500px-"
-        "Moscow_05-2017_img10_Danilov_Monastery.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/"
+        "Moscow%2C_Novospassky_Monastery%2C_August_2012.jpg/500px-"
+        "Moscow%2C_Novospassky_Monastery%2C_August_2012.jpg"
     ),
     "novospassky_4.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/"
-        "Donskoy_Monastery1.jpg/500px-Donskoy_Monastery1.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/"
+        "Moscow%2C_Novospassky_Monastery%2C_August_2012.jpg/500px-"
+        "Moscow%2C_Novospassky_Monastery%2C_August_2012.jpg"
     ),
     "sretensky_1.jpg": (
         "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/"
@@ -237,26 +245,28 @@ IMAGE_DOWNLOADS: dict[str, str] = {
         "%D1%82%D1%8B%D1%80%D1%8F.jpg"
     ),
     "sretensky_2.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/"
-        "%D0%9D%D0%BE%D0%B2%D0%BE%D1%81%D0%BF%D0%B0%D1%81%D1%81%D0%BA%D0%B8%D0%B9_"
-        "%D0%BC%D0%BE%D0%BD%D0%B0%D1%81%D1%82%D1%8B%D1%80%D1%8C_%D0%B8_%D1%86%D0%B5"
-        "%D1%80%D0%BA%D0%BE%D0%B2%D1%8C_%D0%A1%D0%BE%D1%80%D0%BE%D0%BA%D0%B0_%D0%BC"
-        "%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D0%BA%D0%BE%D0%B2_%D0%A1%D0%B5%D0%B2%D0%B0"
-        "%D1%81%D1%82%D0%B8%D0%B9%D1%81%D0%BA%D0%B8%D1%85.jpg/500px-"
-        "%D0%9D%D0%BE%D0%B2%D0%BE%D1%81%D0%BF%D0%B0%D1%81%D1%81%D0%BA%D0%B8%D0%B9_"
-        "%D0%BC%D0%BE%D0%BD%D0%B0%D1%81%D1%82%D1%8B%D1%80%D1%8C_%D0%B8_%D1%86%D0%B5"
-        "%D1%80%D0%BA%D0%BE%D0%B2%D1%8C_%D0%A1%D0%BE%D1%80%D0%BE%D0%BA%D0%B0_%D0%BC"
-        "%D1%83%D1%87%D0%B5%D0%BD%D0%B8%D0%BA%D0%BE%D0%B2_%D0%A1%D0%B5%D0%B2%D0%B0"
-        "%D1%81%D1%82%D0%B8%D0%B9%D1%81%D0%BA%D0%B8%D1%85.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/"
+        "%D0%A1%D0%BE%D0%B1%D0%BE%D1%80_%D0%A1%D1%80%D0%B5%D1%82%D0%B5%D0%BD%D1%81"
+        "%D0%BA%D0%BE%D0%B3%D0%BE_%D0%BC%D0%BE%D0%BD%D0%B0%D1%81%D1%82%D1%8B%D1%80"
+        "%D1%8F.jpg/500px-%D0%A1%D0%BE%D0%B1%D0%BE%D1%80_%D0%A1%D1%80%D0%B5%D1%82"
+        "%D0%B5%D0%BD%D1%81%D0%BA%D0%BE%D0%B3%D0%BE_%D0%BC%D0%BE%D0%BD%D0%B0%D1%81"
+        "%D1%82%D1%8B%D1%80%D1%8F.jpg"
     ),
     "sretensky_3.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/"
-        "Conception_Monastery_1882.jpg/500px-Conception_Monastery_1882.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/"
+        "%D0%A1%D0%BE%D0%B1%D0%BE%D1%80_%D0%A1%D1%80%D0%B5%D1%82%D0%B5%D0%BD%D1%81"
+        "%D0%BA%D0%BE%D0%B3%D0%BE_%D0%BC%D0%BE%D0%BD%D0%B0%D1%81%D1%82%D1%8B%D1%80"
+        "%D1%8F.jpg/500px-%D0%A1%D0%BE%D0%B1%D0%BE%D1%80_%D0%A1%D1%80%D0%B5%D1%82"
+        "%D0%B5%D0%BD%D1%81%D0%BA%D0%BE%D0%B3%D0%BE_%D0%BC%D0%BE%D0%BD%D0%B0%D1%81"
+        "%D1%82%D1%8B%D1%80%D1%8F.jpg"
     ),
     "sretensky_4.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/"
-        "Moscow%2C_Rozhdestvensky_Monastery_04.jpg/500px-"
-        "Moscow%2C_Rozhdestvensky_Monastery_04.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/"
+        "%D0%A1%D0%BE%D0%B1%D0%BE%D1%80_%D0%A1%D1%80%D0%B5%D1%82%D0%B5%D0%BD%D1%81"
+        "%D0%BA%D0%BE%D0%B3%D0%BE_%D0%BC%D0%BE%D0%BD%D0%B0%D1%81%D1%82%D1%8B%D1%80"
+        "%D1%8F.jpg/500px-%D0%A1%D0%BE%D0%B1%D0%BE%D1%80_%D0%A1%D1%80%D0%B5%D1%82"
+        "%D0%B5%D0%BD%D1%81%D0%BA%D0%BE%D0%B3%D0%BE_%D0%BC%D0%BE%D0%BD%D0%B0%D1%81"
+        "%D1%82%D1%8B%D1%80%D1%8F.jpg"
     ),
     "marfo_mariinsky_1.jpg": (
         "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/"
@@ -266,34 +276,41 @@ IMAGE_DOWNLOADS: dict[str, str] = {
         "Ordynka_Bol_Str_34_str_13_2016-04-19_2595.jpg"
     ),
     "marfo_mariinsky_2.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/"
-        "Conception_Monastery_1882.jpg/500px-Conception_Monastery_1882.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/"
+        "Protection_of_the_Theotokos_Church_Marfo-Mariinsky_Convent_"
+        "Ordynka_Bol_Str_34_str_13_2016-04-19_2595.jpg/500px-"
+        "Protection_of_the_Theotokos_Church_Marfo-Mariinsky_Convent_"
+        "Ordynka_Bol_Str_34_str_13_2016-04-19_2595.jpg"
     ),
     "marfo_mariinsky_3.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/"
-        "Moscow_05-2017_img29_Andronikov_Monastery.jpg/500px-"
-        "Moscow_05-2017_img29_Andronikov_Monastery.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/"
+        "Protection_of_the_Theotokos_Church_Marfo-Mariinsky_Convent_"
+        "Ordynka_Bol_Str_34_str_13_2016-04-19_2595.jpg/500px-"
+        "Protection_of_the_Theotokos_Church_Marfo-Mariinsky_Convent_"
+        "Ordynka_Bol_Str_34_str_13_2016-04-19_2595.jpg"
     ),
     "marfo_mariinsky_4.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/"
-        "2024_Novodevichy_Convent_in_Moscow.jpg/500px-"
-        "2024_Novodevichy_Convent_in_Moscow.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/"
+        "Protection_of_the_Theotokos_Church_Marfo-Mariinsky_Convent_"
+        "Ordynka_Bol_Str_34_str_13_2016-04-19_2595.jpg/500px-"
+        "Protection_of_the_Theotokos_Church_Marfo-Mariinsky_Convent_"
+        "Ordynka_Bol_Str_34_str_13_2016-04-19_2595.jpg"
     ),
     "simonov_1.jpg": (
         "https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/"
         "Simonov_monastery_01.jpg/500px-Simonov_monastery_01.jpg"
     ),
     "simonov_tower.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/"
-        "Moscow%2C_Novospassky_Monastery%2C_August_2012.jpg/500px-"
-        "Moscow%2C_Novospassky_Monastery%2C_August_2012.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/"
+        "Simonov_monastery_01.jpg/500px-Simonov_monastery_01.jpg"
     ),
     "simonov_3.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/d/d7/Krutitsy_teremok.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/"
+        "Simonov_monastery_01.jpg/500px-Simonov_monastery_01.jpg"
     ),
     "simonov_4.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/"
-        "Conception_Monastery_1882.jpg/500px-Conception_Monastery_1882.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/"
+        "Simonov_monastery_01.jpg/500px-Simonov_monastery_01.jpg"
     ),
     "rozhdestvensky_1.jpg": (
         "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/"
@@ -301,46 +318,35 @@ IMAGE_DOWNLOADS: dict[str, str] = {
         "500px-Moscow%2C_Rozhdestvensky_Monastery_04.jpg"
     ),
     "rozhdestvensky_2.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/"
-        "%D0%A1%D0%BE%D0%B1%D0%BE%D1%80_%D0%A1%D1%80%D0%B5%D1%82%D0%B5%D0%BD%D1%81"
-        "%D0%BA%D0%BE%D0%B3%D0%BE_%D0%BC%D0%BE%D0%BD%D0%B0%D1%81%D1%82%D1%8B%D1%80"
-        "%D1%8F.jpg/500px-%D0%A1%D0%BE%D0%B1%D0%BE%D1%80_%D0%A1%D1%80%D0%B5%D1%82"
-        "%D0%B5%D0%BD%D1%81%D0%BA%D0%BE%D0%B3%D0%BE_%D0%BC%D0%BE%D0%BD%D0%B0%D1%81"
-        "%D1%82%D1%8B%D1%80%D1%8F.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/"
+        "Moscow%2C_Rozhdestvensky_Monastery_04.jpg/"
+        "500px-Moscow%2C_Rozhdestvensky_Monastery_04.jpg"
     ),
     "rozhdestvensky_3.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/"
-        "%D0%A1%D0%BE%D0%B1%D0%BE%D1%80_%D0%A1%D1%80%D0%B5%D1%82%D0%B5%D0%BD%D1%81"
-        "%D0%BA%D0%BE%D0%B3%D0%BE_%D0%BC%D0%BE%D0%BD%D0%B0%D1%81%D1%82%D1%8B%D1%80"
-        "%D1%8F.jpg/500px-%D0%A1%D0%BE%D0%B1%D0%BE%D1%80_%D0%A1%D1%80%D0%B5%D1%82"
-        "%D0%B5%D0%BD%D1%81%D0%BA%D0%BE%D0%B3%D0%BE_%D0%BC%D0%BE%D0%BD%D0%B0%D1%81"
-        "%D1%82%D1%8B%D1%80%D1%8F.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/"
+        "Moscow%2C_Rozhdestvensky_Monastery_04.jpg/"
+        "500px-Moscow%2C_Rozhdestvensky_Monastery_04.jpg"
     ),
     "rozhdestvensky_4.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/"
-        "Protection_of_the_Theotokos_Church_Marfo-Mariinsky_Convent_"
-        "Ordynka_Bol_Str_34_str_13_2016-04-19_2595.jpg/500px-"
-        "Protection_of_the_Theotokos_Church_Marfo-Mariinsky_Convent_"
-        "Ordynka_Bol_Str_34_str_13_2016-04-19_2595.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/"
+        "Moscow%2C_Rozhdestvensky_Monastery_04.jpg/"
+        "500px-Moscow%2C_Rozhdestvensky_Monastery_04.jpg"
     ),
     "zaikonospassky_1.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/"
-        "Moscow_05-2017_img29_Andronikov_Monastery.jpg/500px-"
-        "Moscow_05-2017_img29_Andronikov_Monastery.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/"
+        "Moscow_Nikolskaya7-9_F09.jpg/500px-Moscow_Nikolskaya7-9_F09.jpg"
     ),
     "zaikonospassky_2.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/"
-        "Moscow_05-2017_img10_Danilov_Monastery.jpg/500px-"
-        "Moscow_05-2017_img10_Danilov_Monastery.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/"
+        "Moscow_Nikolskaya7-9_F09.jpg/500px-Moscow_Nikolskaya7-9_F09.jpg"
     ),
     "zaikonospassky_3.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/"
-        "Donskoy_Monastery1.jpg/500px-Donskoy_Monastery1.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/"
+        "Moscow_Nikolskaya7-9_F09.jpg/500px-Moscow_Nikolskaya7-9_F09.jpg"
     ),
     "zaikonospassky_4.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/"
-        "2024_Novodevichy_Convent_in_Moscow.jpg/500px-"
-        "2024_Novodevichy_Convent_in_Moscow.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/"
+        "Moscow_Nikolskaya7-9_F09.jpg/500px-Moscow_Nikolskaya7-9_F09.jpg"
     ),
     "nikolo_perervinsky_1.jpg": (
         "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/"
@@ -359,34 +365,24 @@ IMAGE_DOWNLOADS: dict[str, str] = {
         "Simonov_monastery_01.jpg/500px-Simonov_monastery_01.jpg"
     ),
     "ioanno_predtechensky_1.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/"
-        "%D0%A1%D0%BE%D0%B1%D0%BE%D1%80_%D0%A1%D1%80%D0%B5%D1%82%D0%B5%D0%BD%D1%81"
-        "%D0%BA%D0%BE%D0%B3%D0%BE_%D0%BC%D0%BE%D0%BD%D0%B0%D1%81%D1%82%D1%8B%D1%80"
-        "%D1%8F.jpg/500px-%D0%A1%D0%BE%D0%B1%D0%BE%D1%80_%D0%A1%D1%80%D0%B5%D1%82"
-        "%D0%B5%D0%BD%D1%81%D0%BA%D0%BE%D0%B3%D0%BE_%D0%BC%D0%BE%D0%BD%D0%B0%D1%81"
-        "%D1%82%D1%8B%D1%80%D1%8F.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/"
+        "7139._Moscow._John_the_Baptist_Monastery.jpg/500px-"
+        "7139._Moscow._John_the_Baptist_Monastery.jpg"
     ),
     "ioanno_predtechensky_2.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/"
-        "Protection_of_the_Theotokos_Church_Marfo-Mariinsky_Convent_"
-        "Ordynka_Bol_Str_34_str_13_2016-04-19_2595.jpg/500px-"
-        "Protection_of_the_Theotokos_Church_Marfo-Mariinsky_Convent_"
-        "Ordynka_Bol_Str_34_str_13_2016-04-19_2595.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/"
+        "7139._Moscow._John_the_Baptist_Monastery.jpg/500px-"
+        "7139._Moscow._John_the_Baptist_Monastery.jpg"
     ),
     "ioanno_predtechensky_3.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/"
-        "Moscow._%D0%92%D1%8B%D1%81%D0%BE%D0%BA%D0%BE-%D0%9F%D0%B5%D1%82%D1%80"
-        "%D0%BE%D0%B2%D1%81%D0%BA%D0%B8%D0%B9_%D0%BC%D0%BE%D0%BD%D0%B0%D1%81"
-        "%D1%82%D1%8B%D1%80%D1%8C._%D0%97%D0%B2%D0%BE%D0%BD%D0%BD%D0%B8%D1%86"
-        "%D0%B0_IMG_2311.3_e1.jpg/500px-Moscow._%D0%92%D1%8B%D1%81%D0%BE%D0%BA"
-        "%D0%BE-%D0%9F%D0%B5%D1%82%D1%80%D0%BE%D0%B2%D1%81%D0%BA%D0%B8%D0%B9_"
-        "%D0%BC%D0%BE%D0%BD%D0%B0%D1%81%D1%82%D1%8B%D1%80%D1%8C._%D0%97%D0%B2%D0%BE"
-        "%D0%BD%D0%BD%D0%B8%D1%86%D0%B0_IMG_2311.3_e1.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/"
+        "7139._Moscow._John_the_Baptist_Monastery.jpg/500px-"
+        "7139._Moscow._John_the_Baptist_Monastery.jpg"
     ),
     "ioanno_predtechensky_4.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/"
-        "Moscow_05-2017_img29_Andronikov_Monastery.jpg/500px-"
-        "Moscow_05-2017_img29_Andronikov_Monastery.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/"
+        "7139._Moscow._John_the_Baptist_Monastery.jpg/500px-"
+        "7139._Moscow._John_the_Baptist_Monastery.jpg"
     ),
     "novo_alekseevsky_1.jpg": (
         "https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/"

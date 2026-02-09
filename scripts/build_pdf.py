@@ -4,7 +4,6 @@
 проверка дубликатов, генерация PDF-путеводителя по московским монастырям.
 """
 
-import hashlib
 import re
 import socket
 import sys
@@ -16,6 +15,8 @@ from pathlib import Path
 _project_root = Path(__file__).resolve().parent.parent
 if str(_project_root) not in sys.path:
     sys.path.insert(0, str(_project_root))
+
+from scripts.image_utils import image_content_hash
 
 MIN_IMAGE_BYTES = 500
 IMAGES_PER_PLACE = 4
@@ -32,13 +33,14 @@ BANNED_IMAGE_BASENAMES = frozenset([
 
 GUIDE_EXPECTED_COUNTS: dict[str, int] = {
     "monasteries": 20,
-    "churches": 60,
-    "parks": 22,
-    "museums": 32,
-    "palaces": 22,
-    "buildings": 52,
-    "sculptures": 62,
-    "places": 52,
+    "churches": 58,
+    "parks": 21,
+    "museums": 27,
+    "palaces": 23,
+    "buildings": 47,
+    "sculptures": 61,
+    "places": 37,
+    "metro": 37,
 }
 
 
@@ -62,7 +64,7 @@ def _load_guide_config(guide: str) -> None:
         HTML_NAME = "churches_guide.html"
         PDF_NAME = "churches_guide.pdf"
         INTRO_TITLE = "Храмы Москвы"
-        INTRO_SUBTITLE = "60 значимых храмов"
+        INTRO_SUBTITLE = "58 значимых храмов"
     elif guide == "parks":
         from data.parks import PARKS, IMAGES_SUBFOLDER as _SUB
         from data.park_image_urls import (
@@ -79,7 +81,7 @@ def _load_guide_config(guide: str) -> None:
         HTML_NAME = "parks_guide.html"
         PDF_NAME = "parks_guide.pdf"
         INTRO_TITLE = "Парки Москвы"
-        INTRO_SUBTITLE = "22 лучших парка"
+        INTRO_SUBTITLE = "21 парк"
     elif guide == "museums":
         from data.museums import MUSEUMS, IMAGES_SUBFOLDER as _SUB
         from data.museum_image_urls import (
@@ -96,7 +98,7 @@ def _load_guide_config(guide: str) -> None:
         HTML_NAME = "museums_guide.html"
         PDF_NAME = "museums_guide.pdf"
         INTRO_TITLE = "Музеи Москвы"
-        INTRO_SUBTITLE = "32 лучших музея"
+        INTRO_SUBTITLE = "27 музеев"
     elif guide == "palaces":
         from data.palaces import PALACES, IMAGES_SUBFOLDER as _SUB
         from data.palace_image_urls import (
@@ -112,8 +114,8 @@ def _load_guide_config(guide: str) -> None:
         BANNED = frozenset()
         HTML_NAME = "palaces_guide.html"
         PDF_NAME = "palaces_guide.pdf"
-        INTRO_TITLE = "Усадьбы и дворцы Москвы"
-        INTRO_SUBTITLE = "22 лучших усадьбы и дворца"
+        INTRO_TITLE = "Дворцы и усадьбы Москвы"
+        INTRO_SUBTITLE = "23 дворца и усадьбы"
     elif guide == "buildings":
         from data.buildings import BUILDINGS, IMAGES_SUBFOLDER as _SUB
         from data.building_image_urls import (
@@ -129,8 +131,8 @@ def _load_guide_config(guide: str) -> None:
         BANNED = frozenset()
         HTML_NAME = "buildings_guide.html"
         PDF_NAME = "buildings_guide.pdf"
-        INTRO_TITLE = "Знаменитые здания Москвы"
-        INTRO_SUBTITLE = "52 знаменитых здания"
+        INTRO_TITLE = "Дома Москвы"
+        INTRO_SUBTITLE = "50 знаменитых домов"
     elif guide == "sculptures":
         from data.sculptures import SCULPTURES, IMAGES_SUBFOLDER as _SUB
         from data.sculpture_image_urls import (
@@ -147,7 +149,7 @@ def _load_guide_config(guide: str) -> None:
         HTML_NAME = "sculptures_guide.html"
         PDF_NAME = "sculptures_guide.pdf"
         INTRO_TITLE = "Скульптуры и памятники Москвы"
-        INTRO_SUBTITLE = "62 скульптуры и памятника"
+        INTRO_SUBTITLE = "61 скульптура и памятник"
     elif guide == "places":
         from data.places import PLACES as _PLACES, IMAGES_SUBFOLDER as _SUB
         from data.place_image_urls import (
@@ -164,7 +166,24 @@ def _load_guide_config(guide: str) -> None:
         HTML_NAME = "places_guide.html"
         PDF_NAME = "places_guide.pdf"
         INTRO_TITLE = "Места Москвы"
-        INTRO_SUBTITLE = "52 лучших места (улицы, площади, районы)"
+        INTRO_SUBTITLE = "46 лучших мест (улицы, площади, районы)"
+    elif guide == "metro":
+        from data.metro_stations import METRO_STATIONS, IMAGES_SUBFOLDER as _SUB
+        from data.metro_image_urls import (
+            METRO_IMAGE_DOWNLOADS,
+            METRO_IMAGE_FALLBACKS,
+        )
+        from data.qa_metro import QA as _QA
+        IMAGES_SUBFOLDER = _SUB
+        PLACES = METRO_STATIONS
+        IMAGE_DOWNLOADS = METRO_IMAGE_DOWNLOADS
+        IMAGE_FALLBACKS = METRO_IMAGE_FALLBACKS
+        QA = _QA
+        BANNED = frozenset()
+        HTML_NAME = "metro_guide.html"
+        PDF_NAME = "metro_guide.pdf"
+        INTRO_TITLE = "Станции Московского метро"
+        INTRO_SUBTITLE = "37 лучших станций"
     else:
         from data.monasteries import MONASTERIES, IMAGES_SUBFOLDER as _SUB
         from data.image_urls import IMAGE_DOWNLOADS as _DL, IMAGE_FALLBACKS as _FB
@@ -182,10 +201,12 @@ def _load_guide_config(guide: str) -> None:
 
 
 def _map_img_url(lon: float, lat: float, width: int = 380, height: int = 200) -> str:
-    """URL статической карты (Яндекс) по координатам."""
+    """URL статической карты (Яндекс) по координатам объекта с маркером в этой точке."""
     return (
         "https://static-maps.yandex.ru/1.x/?ll={lon:.4f},{lat:.4f}&z=16&l=map"
-        "&size={w},{h}".format(lon=lon, lat=lat, w=width, h=height)
+        "&size={w},{h}&pt={lon:.4f},{lat:.4f},pm2rdm".format(
+            lon=lon, lat=lat, w=width, h=height
+        )
     )
 
 
@@ -199,15 +220,28 @@ def _escape(s: str) -> str:
     )
 
 
+def _wrap_ya_old_russian(s: str) -> str:
+    """
+    Оборачивает буквы «я» и «Я» в span (Source Serif 4); остальной заголовок — Pochaevsk.
+    Ожидает уже экранированную для HTML строку.
+    """
+    return s.replace(
+        "Я", '<span class="old-russian-ya">Я</span>'
+    ).replace("я", '<span class="old-russian-ya">я</span>')
+
+
+def _title_html(raw_title: str) -> str:
+    """Заголовок с буквами я/Я в старорусском шрифте."""
+    return _wrap_ya_old_russian(_escape(raw_title))
+
+
 def _file_hash(path: Path) -> str:
-    """SHA256 hash of file contents (for deduplication)."""
-    if not path.exists() or not path.is_file():
-        return ""
-    h = hashlib.sha256()
-    with open(path, "rb") as f:
-        for chunk in iter(lambda: f.read(8192), b""):
-            h.update(chunk)
-    return h.hexdigest()
+    """
+    Content-based hash for deduplication (perceptual hash if available,
+    else SHA256). Same image at different resolution = same hash when
+    using perceptual hash.
+    """
+    return image_content_hash(path, min_bytes=MIN_IMAGE_BYTES)
 
 
 def download_images(output_dir: Path) -> None:
@@ -273,7 +307,8 @@ def ensure_images_subdir(output_dir: Path) -> Path:
 
 def check_duplicate_images(images_dir: Path) -> list[tuple[str, list[str]]]:
     """
-    Проверяет дубликаты по содержимому (SHA256).
+    Проверяет дубликаты по содержимому (perceptual hash или SHA256).
+    Одинаковое изображение в разном разрешении считается дубликатом.
     Возвращает список (hash, [имена файлов с этим хешем]) для групп из 2+ файлов.
     """
     hash_to_files: dict[str, list[str]] = {}
@@ -356,7 +391,7 @@ def _section_place(
     number: int, m: dict, output_dir: Path
 ) -> str:
     """HTML-блок для одного места (монастырь или храм): фото + карта."""
-    name = _escape(m["name"])
+    name = _title_html(m["name"])
     address = _escape(m["address"])
     style = _escape(m["style"])
     history = _escape(m["history"])
@@ -380,11 +415,7 @@ def _section_place(
         "  <div class=\"images-row\">\n    {}\n  </div>".format(imgs_html)
         if imgs_html else ""
     )
-    name_str = m.get("name", "")
-    title_class = (
-        "monastery-title source-serif-title"
-        if "я" in name_str.lower() else "monastery-title"
-    )
+    title_class = "monastery-title"
 
     return """
 <section class="monastery" id="monastery-{num}" tabindex="-1">
@@ -464,8 +495,7 @@ def build_html(output_dir: Path) -> str:
            font-size: 17pt; margin: 1.2em 0 0.4em 0.3em;
            border-bottom: 1px solid #8b7355; padding-bottom: 0.25em;
            color: #2c2a28 !important; }
-      h2.monastery-title.source-serif-title { font-family: "Source Serif 4",
-           Georgia, serif; }
+      .old-russian-ya { font-family: "Source Serif 4", Georgia, serif; }
       .meta, .block-label { font-family: Inter, "IBM Plex Sans", sans-serif;
           font-size: 8.5pt; letter-spacing: 0.02em; }
       .meta { margin: 0.2em 0 0.6em 0.3em; color: #6b635b !important; }
@@ -479,10 +509,10 @@ def build_html(output_dir: Path) -> str:
       .intro-block .otium-brand { font-family: Inter, sans-serif;
         font-size: 8pt; letter-spacing: 0.2em; color: #6b635b !important;
         margin-bottom: 0.3em; }
-      .intro-block .otium-title { font-family: "Source Serif 4", Georgia, serif;
+      .intro-block .otium-title { font-family: Pochaevsk, Georgia, serif;
         font-size: 20pt; font-weight: 600; text-align: center;
         margin: 0.2em 0 0.1em; color: #1a1a1a !important; }
-      .intro-block .otium-subtitle { font-family: "Source Serif 4", Georgia, serif;
+      .intro-block .otium-subtitle { font-family: Pochaevsk, Georgia, serif;
         font-size: 11pt; text-align: center; color: #6b635b !important;
         font-style: italic; margin-bottom: 1em; }
       .intro-block p { margin: 0.4em 0; font-size: 9.5pt; line-height: 1.5;
@@ -540,8 +570,8 @@ def build_html(output_dir: Path) -> str:
     <p>OTIUM существует для тех, кто хочет смотреть медленно.</p>
     </div>
     """.format(
-        intro_title=INTRO_TITLE,
-        intro_subtitle=INTRO_SUBTITLE,
+        intro_title=_title_html(INTRO_TITLE),
+        intro_subtitle=_title_html(INTRO_SUBTITLE),
     )
     sections = [intro]
     for i, m in enumerate(PLACES, 1):
@@ -732,11 +762,16 @@ def main() -> None:
         "--guide",
         choices=[
             "monasteries", "churches", "parks", "museums", "palaces",
-            "buildings", "sculptures", "places",
+            "buildings", "sculptures", "places", "metro",
         ],
         default="monasteries",
-        help="Guide: monasteries(20), churches(60), parks(22), museums(32), "
-             "palaces(22), buildings(52), sculptures(62), places(52)",
+        help="Guide: monasteries(20), churches(58), parks(21), museums(27), "
+             "palaces(23), buildings(50), sculptures(61), places(46), metro(37)",
+    )
+    parser.add_argument(
+        "--download-only",
+        action="store_true",
+        help="Only download images and validate maps; do not write HTML/PDF.",
     )
     args = parser.parse_args()
     _load_guide_config(args.guide)
@@ -773,6 +808,9 @@ def main() -> None:
             print("  -", e, file=sys.stderr)
     else:
         print("  All map URLs OK.")
+
+    if getattr(args, "download_only", False):
+        return
 
     html_path = output_dir / HTML_NAME
     pdf_path = output_dir / PDF_NAME

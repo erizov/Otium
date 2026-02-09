@@ -186,9 +186,8 @@ CHURCH_IMAGE_DOWNLOADS: dict[str, str] = {
         "500px-Moscow_Church_of_Nativity_in_Putinki.jpg"
     ),
     "varvara_1.jpg": (
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/"
-        "Church_of_St._John_the_Warrior_Moscow.jpg/"
-        "500px-Church_of_St._John_the_Warrior_Moscow.jpg"
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/"
+        "Moscow_St_Varvara_Church.JPG/500px-Moscow_St_Varvara_Church.JPG"
     ),
     "maksim_blazhenny_1.jpg": (
         "https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/"
@@ -305,6 +304,8 @@ CHURCH_IMAGE_DOWNLOADS: dict[str, str] = {
         "Church_of_the_Intercession_at_Fili_Moscow.jpg/"
         "500px-Church_of_the_Intercession_at_Fili_Moscow.jpg"
     ),
+    # ioann_voin_1.jpg: correct URL is above (Church of St. John the Warrior);
+    # do not overwrite with another church (e.g. Nativity in Putinki).
 }
 
 # Ensure every _1 has a _2 (same URL) for 2–4 images per object
