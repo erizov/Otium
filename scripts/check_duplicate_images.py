@@ -31,7 +31,7 @@ def _load_all_downloads() -> dict[str, list[tuple[str, str]]]:
         ("place", "data.place_image_urls", "PLACE_IMAGE_DOWNLOADS"),
         ("park", "data.park_image_urls", "PARK_IMAGE_DOWNLOADS"),
         ("metro", "data.metro_image_urls", "METRO_IMAGE_DOWNLOADS"),
-        ("church", "data.church_image_urls", "CHURCH_IMAGE_DOWNLOADS"),
+        ("places_of_worship", "data.places_of_worship_image_urls", "PLACES_OF_WORSHIP_IMAGE_DOWNLOADS"),
         ("building", "data.building_image_urls", "BUILDING_IMAGE_DOWNLOADS"),
         ("palace", "data.palace_image_urls", "PALACE_IMAGE_DOWNLOADS"),
         ("museum", "data.museum_image_urls", "MUSEUM_IMAGE_DOWNLOADS"),

@@ -16,7 +16,7 @@ _SCRIPT_DIR = Path(__file__).resolve().parent
 _PROJECT_ROOT = _SCRIPT_DIR.parent
 GUIDES = [
     "monasteries",
-    "churches",
+    "places_of_worship",
     "parks",
     "museums",
     "palaces",

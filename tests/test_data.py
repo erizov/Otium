@@ -17,9 +17,9 @@ EXPECTED_COUNTS = {
     "buildings": 47,
     "parks": 21,
     "museums": 27,
-    "palaces": 23,
+    "palaces": 24,
     "sculptures": 61,
-    "churches": 58,
+    "places_of_worship": 66,
     "monasteries": 20,
     "metro": 37,
 }
@@ -61,10 +61,10 @@ def test_sculptures_count() -> None:
     assert len(SCULPTURES) == EXPECTED_COUNTS["sculptures"]
 
 
-def test_churches_count() -> None:
-    """Churches list length matches build_pdf expected count."""
-    from data.churches import CHURCHES
-    assert len(CHURCHES) == EXPECTED_COUNTS["churches"]
+def test_places_of_worship_count() -> None:
+    """Places of worship list length matches build_pdf expected count."""
+    from data.places_of_worship import PLACES_OF_WORSHIP
+    assert len(PLACES_OF_WORSHIP) == EXPECTED_COUNTS["places_of_worship"]
 
 
 def test_monasteries_count() -> None:
@@ -107,7 +107,7 @@ def _all_places_by_guide() -> list[tuple[str, list[dict]]]:
     from data.museums import MUSEUMS
     from data.palaces import PALACES
     from data.sculptures import SCULPTURES
-    from data.churches import CHURCHES
+    from data.places_of_worship import PLACES_OF_WORSHIP
     from data.monasteries import MONASTERIES
     from data.metro_stations import METRO_STATIONS
 
@@ -118,7 +118,7 @@ def _all_places_by_guide() -> list[tuple[str, list[dict]]]:
         ("museums", MUSEUMS),
         ("palaces", PALACES),
         ("sculptures", SCULPTURES),
-        ("churches", CHURCHES),
+        ("places_of_worship", PLACES_OF_WORSHIP),
         ("monasteries", MONASTERIES),
         ("metro", METRO_STATIONS),
     ]
@@ -183,7 +183,7 @@ def test_no_duplicate_image_urls_in_places_metro_parks() -> None:
 
 
 @pytest.mark.xfail(
-    reason="Museum/building/palace/church/sculpture/monastery image URLs "
+        reason="Museum/building/palace/places_of_worship/sculpture/monastery image URLs "
            "still share Commons URLs; replace duplicates in *_image_urls.py",
     strict=False,
 )
@@ -198,7 +198,7 @@ def test_no_duplicate_image_urls_across_all_guides() -> None:
         ("place", "data.place_image_urls", "PLACE_IMAGE_DOWNLOADS"),
         ("park", "data.park_image_urls", "PARK_IMAGE_DOWNLOADS"),
         ("metro", "data.metro_image_urls", "METRO_IMAGE_DOWNLOADS"),
-        ("church", "data.church_image_urls", "CHURCH_IMAGE_DOWNLOADS"),
+        ("places_of_worship", "data.places_of_worship_image_urls", "PLACES_OF_WORSHIP_IMAGE_DOWNLOADS"),
         ("building", "data.building_image_urls", "BUILDING_IMAGE_DOWNLOADS"),
         ("palace", "data.palace_image_urls", "PALACE_IMAGE_DOWNLOADS"),
         ("museum", "data.museum_image_urls", "MUSEUM_IMAGE_DOWNLOADS"),

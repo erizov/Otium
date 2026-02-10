@@ -25,7 +25,7 @@ if _PROJECT_ROOT not in sys.path:
 # Highest (0) to lowest (8)
 GUIDE_PRIORITY = {
     "monastery": 0,
-    "church": 1,
+    "places_of_worship": 1,
     "palace": 2,
     "building": 3,
     "park": 4,
@@ -39,7 +39,7 @@ CONFIGS = [
     ("place", "data.place_image_urls", "PLACE_IMAGE_DOWNLOADS"),
     ("park", "data.park_image_urls", "PARK_IMAGE_DOWNLOADS"),
     ("metro", "data.metro_image_urls", "METRO_IMAGE_DOWNLOADS"),
-    ("church", "data.church_image_urls", "CHURCH_IMAGE_DOWNLOADS"),
+    ("places_of_worship", "data.places_of_worship_image_urls", "PLACES_OF_WORSHIP_IMAGE_DOWNLOADS"),
     ("building", "data.building_image_urls", "BUILDING_IMAGE_DOWNLOADS"),
     ("palace", "data.palace_image_urls", "PALACE_IMAGE_DOWNLOADS"),
     ("museum", "data.museum_image_urls", "MUSEUM_IMAGE_DOWNLOADS"),

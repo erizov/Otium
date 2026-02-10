@@ -6,10 +6,13 @@ URLs within an item.
 
 Run after download + cross-guide dedup; exit 1 if validation fails.
 Use --strict or STRICT_IMAGE_VALIDATION=1 to require exactly 4 images per item.
+Use --check-slugs to ensure every image file in output/images/ has a (guide, slug)
+that matches an item in the slug–item map (name-aware consistency).
 
 Usage:
   python scripts/validate_images_per_item.py
   python scripts/validate_images_per_item.py --strict
+  python scripts/validate_images_per_item.py --check-slugs
 
   PowerShell (strict): $env:STRICT_IMAGE_VALIDATION="1"; python scripts/validate_images_per_item.py
 """
@@ -35,10 +38,12 @@ def _basename(img_path: str) -> str:
 
 def _load_guide(guide: str) -> tuple[list[dict], dict[str, str]]:
     """Load places list and DOWNLOADS dict for a guide."""
-    if guide == "churches":
-        from data.churches import CHURCHES
-        from data.church_image_urls import CHURCH_IMAGE_DOWNLOADS
-        return CHURCHES, CHURCH_IMAGE_DOWNLOADS
+    if guide == "places_of_worship":
+        from data.places_of_worship import PLACES_OF_WORSHIP
+        from data.places_of_worship_image_urls import (
+            PLACES_OF_WORSHIP_IMAGE_DOWNLOADS,
+        )
+        return PLACES_OF_WORSHIP, PLACES_OF_WORSHIP_IMAGE_DOWNLOADS
     if guide == "parks":
         from data.parks import PARKS
         from data.park_image_urls import PARK_IMAGE_DOWNLOADS
@@ -75,9 +80,22 @@ def _load_guide(guide: str) -> tuple[list[dict], dict[str, str]]:
 
 
 GUIDES = [
-    "monasteries", "churches", "parks", "museums", "palaces",
+    "monasteries", "places_of_worship", "parks", "museums", "palaces",
     "buildings", "sculptures", "places", "metro",
 ]
+
+# Subdir under output/images/ -> guide key (must match workflow SUBDIR_TO_GUIDE)
+SUBDIR_TO_GUIDE = {
+    "moscow_monasteries": "monasteries",
+    "moscow_places_of_worship": "places_of_worship",
+    "moscow_parks": "parks",
+    "moscow_museums": "museums",
+    "moscow_palaces": "palaces",
+    "moscow_buildings": "buildings",
+    "moscow_sculptures": "sculptures",
+    "moscow_places": "places",
+    "moscow_metro": "metro",
+}
 
 
 def validate_guide(guide: str, strict: bool) -> list[str]:
@@ -134,14 +152,50 @@ def validate_guide(guide: str, strict: bool) -> list[str]:
     return errors
 
 
+def validate_slugs_against_files(output_images: Path) -> list[str]:
+    """
+    Check that every image file in output/images/<subdir> has (guide, slug)
+    in the slug–item map. Returns list of errors.
+    """
+    from scripts.slug_item_map import basename_to_slug, get_slug_to_item_name
+
+    errors: list[str] = []
+    if not output_images.exists() or not output_images.is_dir():
+        return errors
+    slug_to_name = get_slug_to_item_name(_PROJECT_ROOT)
+    for subdir_path in output_images.iterdir():
+        if not subdir_path.is_dir():
+            continue
+        guide = SUBDIR_TO_GUIDE.get(subdir_path.name)
+        if guide is None:
+            continue
+        for path in subdir_path.iterdir():
+            if not path.is_file():
+                continue
+            if path.suffix.lower() not in (".jpg", ".jpeg", ".png", ".webp"):
+                continue
+            slug = basename_to_slug(path.name)
+            if (guide, slug) not in slug_to_name:
+                errors.append(
+                    "{}: file {!r} has slug {!r} not tied to any item in guide "
+                    "{!r}".format(subdir_path.name, path.name, slug, guide),
+                )
+    return errors
+
+
 def main() -> int:
     strict_env = os.environ.get("STRICT_IMAGE_VALIDATION", "").strip().lower() in (
         "1", "true", "yes",
     )
     strict = strict_env or ("--strict" in sys.argv)
+    check_slugs = "--check-slugs" in sys.argv
     all_errors: list[str] = []
     for guide in GUIDES:
         all_errors.extend(validate_guide(guide, strict=strict))
+
+    if check_slugs:
+        output_images = _PROJECT_ROOT / "output" / "images"
+        all_errors.extend(validate_slugs_against_files(output_images))
 
     if all_errors:
         print("Image validation failed:", file=sys.stderr)

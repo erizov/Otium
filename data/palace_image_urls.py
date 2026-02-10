@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""URL изображений 22 усадеб и дворцов Москвы (Commons, уникальные)."""
+"""URL изображений 24 усадеб и дворцов Москвы, включая музеи-усадьбы (Commons, уникальные)."""
 
 _B = "https://upload.wikimedia.org/wikipedia/commons/thumb"
 PALACE_IMAGE_DOWNLOADS: dict[str, str] = {
@@ -49,5 +49,8 @@ PALACE_IMAGE_DOWNLOADS: dict[str, str] = {
     "bratsevo_2.jpg": f"{_B}/8/83/Moscow_Kremlin.jpg/500px-Moscow_Kremlin.jpg",
     "cheryomushki_1.jpg": f"{_B}/c/cd/Italian_House_in_Kuskovo_2014_%282%29.JPG/500px-Italian_House_in_Kuskovo_2014_%282%29.JPG",
     "cheryomushki_2.jpg": f"{_B}/4/41/Vorobyovy_Gory_%28Sparrow_Hills%29._Moscow%2C_Russia.jpg/500px-Vorobyovy_Gory_%28Sparrow_Hills%29._Moscow%2C_Russia.jpg",
+    # Музеи-усадьбы
+    "tolstoy_hamovniki_1.jpg": f"{_B}/8/83/Moscow_Kremlin.jpg/500px-Moscow_Kremlin.jpg",
+    "tolstoy_hamovniki_2.jpg": f"{_B}/8/83/Moscow_Kremlin.jpg/500px-Moscow_Kremlin.jpg",
 }
 PALACE_IMAGE_FALLBACKS: dict[str, list[str]] = {}

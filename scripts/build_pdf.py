@@ -33,10 +33,10 @@ BANNED_IMAGE_BASENAMES = frozenset([
 
 GUIDE_EXPECTED_COUNTS: dict[str, int] = {
     "monasteries": 20,
-    "churches": 58,
+    "places_of_worship": 66,
     "parks": 21,
     "museums": 27,
-    "palaces": 23,
+    "palaces": 24,
     "buildings": 47,
     "sculptures": 61,
     "places": 37,
@@ -48,23 +48,26 @@ def _load_guide_config(guide: str) -> None:
     """Загружает конфиг для гида (глобальные переменные)."""
     global IMAGES_SUBFOLDER, PLACES, IMAGE_DOWNLOADS, IMAGE_FALLBACKS
     global QA, BANNED, HTML_NAME, PDF_NAME, INTRO_TITLE, INTRO_SUBTITLE
-    if guide == "churches":
-        from data.churches import CHURCHES, IMAGES_SUBFOLDER as _SUB
-        from data.church_image_urls import (
-            CHURCH_IMAGE_DOWNLOADS,
-            CHURCH_IMAGE_FALLBACKS,
+    if guide == "places_of_worship":
+        from data.places_of_worship import (
+            PLACES_OF_WORSHIP,
+            IMAGES_SUBFOLDER as _SUB,
         )
-        from data.qa_churches import QA as _QA
+        from data.places_of_worship_image_urls import (
+            PLACES_OF_WORSHIP_IMAGE_DOWNLOADS,
+            PLACES_OF_WORSHIP_IMAGE_FALLBACKS,
+        )
+        from data.qa_places_of_worship import QA as _QA
         IMAGES_SUBFOLDER = _SUB
-        PLACES = CHURCHES
-        IMAGE_DOWNLOADS = CHURCH_IMAGE_DOWNLOADS
-        IMAGE_FALLBACKS = CHURCH_IMAGE_FALLBACKS
+        PLACES = PLACES_OF_WORSHIP
+        IMAGE_DOWNLOADS = PLACES_OF_WORSHIP_IMAGE_DOWNLOADS
+        IMAGE_FALLBACKS = PLACES_OF_WORSHIP_IMAGE_FALLBACKS
         QA = _QA
         BANNED = frozenset()
-        HTML_NAME = "churches_guide.html"
-        PDF_NAME = "churches_guide.pdf"
-        INTRO_TITLE = "Храмы Москвы"
-        INTRO_SUBTITLE = "58 значимых храмов"
+        HTML_NAME = "places_of_worship_guide.html"
+        PDF_NAME = "places_of_worship_guide.pdf"
+        INTRO_TITLE = "Места поклонения Москвы"
+        INTRO_SUBTITLE = "66 мест поклонения (православные храмы, мечети, синагоги, буддийские храмы, неортодоксальные христианские церкви)"
     elif guide == "parks":
         from data.parks import PARKS, IMAGES_SUBFOLDER as _SUB
         from data.park_image_urls import (
@@ -115,7 +118,7 @@ def _load_guide_config(guide: str) -> None:
         HTML_NAME = "palaces_guide.html"
         PDF_NAME = "palaces_guide.pdf"
         INTRO_TITLE = "Дворцы и усадьбы Москвы"
-        INTRO_SUBTITLE = "23 дворца и усадьбы"
+        INTRO_SUBTITLE = "24 дворца и усадьбы"
     elif guide == "buildings":
         from data.buildings import BUILDINGS, IMAGES_SUBFOLDER as _SUB
         from data.building_image_urls import (
@@ -244,56 +247,62 @@ def _file_hash(path: Path) -> str:
     return image_content_hash(path, min_bytes=MIN_IMAGE_BYTES)
 
 
-def download_images(output_dir: Path) -> None:
+def download_images(
+    output_dir: Path,
+    guide_name: str = "guide",
+    build_with_available: bool = False,
+    use_ai_identify: bool = False,
+    force_overwrite: bool = False,
+) -> None:
     """
-    Скачивает фотографии в output/images/moscow_monasteries/.
-    URL берутся из data.image_urls (Wikimedia Commons).
-    Для каждого файла пробует основной URL и fallback-источники;
-    несколько проходов, пока есть загрузки.
+    Скачивает фотографии в output/images/<IMAGES_SUBFOLDER>/ с проверкой
+    дубликатов. Если build_with_available=False, требует 4 различных
+    изображения на объект.
     """
-    try:
-        import time
-        import urllib.request
-    except ImportError:
-        return
+    from scripts.download_with_dedup import (
+        download_images_with_dedup,
+        validate_item_images_format,
+    )
 
     images_dir = output_dir / "images" / IMAGES_SUBFOLDER
     images_dir.mkdir(parents=True, exist_ok=True)
-    max_rounds = 8
 
-    for _round in range(max_rounds):
-        downloaded = 0
-        for filename, main_url in IMAGE_DOWNLOADS.items():
-            if filename in BANNED:
-                continue
-            path = images_dir / filename
-            if path.exists() and path.stat().st_size >= MIN_IMAGE_BYTES:
-                continue
-            if path.exists():
-                path.unlink()
-            urls_to_try = [main_url] + list(IMAGE_FALLBACKS.get(filename, []))
-            for url in urls_to_try:
-                try:
-                    req = urllib.request.Request(
-                        url,
-                        headers={
-                            "User-Agent": "ExcursionGuide/1.0 (https://github.com/)"
-                        },
-                    )
-                    with urllib.request.urlopen(req, timeout=15) as resp:
-                        data = resp.read()
-                    if len(data) < MIN_IMAGE_BYTES:
-                        continue
-                    path.write_bytes(data)
-                    print("Downloaded:", filename)
-                    downloaded += 1
-                    break
-                except Exception as e:
-                    continue
-                finally:
-                    time.sleep(0.3)
-        if downloaded == 0:
-            break
+    print("Downloading images with duplicate checking...")
+    images_root = output_dir / "images"
+    results = download_images_with_dedup(
+        images_dir=images_dir,
+        image_downloads=IMAGE_DOWNLOADS,
+        image_fallbacks=IMAGE_FALLBACKS,
+        banned=BANNED,
+        items=PLACES,
+        max_attempts_per_item=20,
+        images_root=images_root,
+        use_ai_identify=use_ai_identify,
+        guide_name=guide_name,
+        force_overwrite=force_overwrite,
+    )
+
+    print("\nValidating image format (4 distinct per item)...")
+    is_valid, errors = validate_item_images_format(
+        PLACES, images_dir, guide_name=guide_name,
+    )
+    if not is_valid:
+        for e in errors:
+            print("  ", e, file=sys.stderr)
+        if build_with_available:
+            print(
+                "\nBuilding with available images (some items have < 4 images).",
+                file=sys.stderr,
+            )
+            return
+        print(
+            "\nEach item must have exactly 4 distinct images in format: "
+            "name_1.jpg, name_2.jpg, name_3.jpg, name_4.jpg",
+            file=sys.stderr,
+        )
+        raise ValueError("Image validation failed: not all items have 4 distinct images")
+
+    print("OK: All items have 4 distinct images in correct format.")
 
 
 def ensure_images_subdir(output_dir: Path) -> Path:
@@ -754,31 +763,11 @@ def _strip_pdf_metadata(pdf_path: Path) -> None:
         print("  Strip metadata: {}.".format(e), file=sys.stderr)
 
 
-def main() -> None:
-    """Создаёт подкаталог, скачивает фото, проверяет дубликаты, генерирует PDF."""
-    import argparse
-    parser = argparse.ArgumentParser(description="Build PDF guide (monasteries or churches)")
-    parser.add_argument(
-        "--guide",
-        choices=[
-            "monasteries", "churches", "parks", "museums", "palaces",
-            "buildings", "sculptures", "places", "metro",
-        ],
-        default="monasteries",
-        help="Guide: monasteries(20), churches(58), parks(21), museums(27), "
-             "palaces(23), buildings(50), sculptures(61), places(46), metro(37)",
-    )
-    parser.add_argument(
-        "--download-only",
-        action="store_true",
-        help="Only download images and validate maps; do not write HTML/PDF.",
-    )
-    args = parser.parse_args()
+def _run_one_guide(args) -> None:
+    """Run download, verify, and build for one guide (args.guide)."""
     _load_guide_config(args.guide)
-
     output_dir = _project_root / "output"
     output_dir.mkdir(exist_ok=True)
-
     images_subdir = ensure_images_subdir(output_dir)
     print("Images subdir: {}".format(images_subdir))
     print("Guide: {} ({} places)".format(args.guide, len(PLACES)))
@@ -790,10 +779,56 @@ def main() -> None:
             file=sys.stderr,
         )
 
-    print("Downloading images...")
-    download_images(output_dir)
+    verify_only = getattr(args, "verify_images", False) and not getattr(
+        args, "download_only", False,
+    )
+    if verify_only:
+        from scripts.download_with_dedup import (
+            validate_item_images_format,
+        )
+        print("Verifying images (forbidden folder checked)...")
+        is_valid, errors = validate_item_images_format(
+            PLACES, images_subdir, guide_name=args.guide,
+        )
+        if not is_valid:
+            for e in errors:
+                print("  ", e, file=sys.stderr)
+        else:
+            print("  Format OK: 4 distinct images per item.")
+        print("Checking for duplicate images...")
+        duplicates = check_duplicate_images(images_subdir)
+        if duplicates:
+            for h, files in duplicates:
+                print("  Duplicate ({}): {}".format(h[:12], ", ".join(files)))
+        else:
+            print("  No duplicate images by content.")
+        return
 
-    print("Checking duplicate images...")
+    if not getattr(args, "verify_images", False):
+        print("Downloading images with duplicate checking...")
+    else:
+        print("Downloading/verifying images (existing slots verified only)...")
+    try:
+        download_images(
+            output_dir,
+            guide_name=args.guide,
+            build_with_available=getattr(args, "build_with_available", False),
+            use_ai_identify=getattr(args, "ai_identify", True),
+            force_overwrite=getattr(args, "force_overwrite", False),
+        )
+    except ValueError as e:
+        print("Error: {}".format(e), file=sys.stderr)
+        if not getattr(args, "build_with_available", False):
+            print(
+                "Cannot proceed to PDF generation: not all items have 4 distinct "
+                "images. Use --build-with-available to build with current images.",
+                file=sys.stderr,
+            )
+        if getattr(args, "all_guides", False):
+            raise
+        sys.exit(1)
+
+    print("Checking for any remaining duplicate images...")
     duplicates = check_duplicate_images(images_subdir)
     if duplicates:
         for h, files in duplicates:
@@ -814,7 +849,6 @@ def main() -> None:
 
     html_path = output_dir / HTML_NAME
     pdf_path = output_dir / PDF_NAME
-
     html_content = build_html(output_dir)
     html_path.write_text(html_content, encoding="utf-8")
     if _pdf_via_playwright(html_path, pdf_path):
@@ -826,11 +860,9 @@ def main() -> None:
             file=sys.stderr,
         )
     print("Written:", html_path)
-
     deleted = delete_unused_images(output_dir)
     if deleted:
         print("Removed {} unused image(s).".format(deleted))
-
     errors = validate_output(html_path, output_dir)
     if errors:
         print("Validation:", file=sys.stderr)
@@ -838,6 +870,108 @@ def main() -> None:
             print("  -", e, file=sys.stderr)
     else:
         print("Validation: no broken links or placeholders found.")
+
+
+def _ensure_utf8_console() -> None:
+    """Use UTF-8 for stdout/stderr so Cyrillic prints correctly on Windows."""
+    for stream in (sys.stdout, sys.stderr):
+        if hasattr(stream, "reconfigure"):
+            try:
+                stream.reconfigure(encoding="utf-8")
+            except (AttributeError, OSError):
+                pass
+
+
+def main() -> None:
+    """Создаёт подкаталог, скачивает фото, проверяет дубликаты, генерирует PDF."""
+    _ensure_utf8_console()
+    try:
+        from dotenv import load_dotenv
+        load_dotenv(_project_root / ".env")
+    except ImportError:
+        pass
+    import argparse
+    parser = argparse.ArgumentParser(description="Build PDF guide (monasteries or churches)")
+    parser.add_argument(
+        "--guide",
+        choices=[
+            "monasteries", "places_of_worship", "parks", "museums", "palaces",
+            "buildings", "sculptures", "places", "metro",
+        ],
+        default="monasteries",
+        help="Guide: monasteries(20), places_of_worship(66), parks(21), museums(27), "
+             "palaces(24), buildings(50), sculptures(61), places(46), metro(37)",
+    )
+    parser.add_argument(
+        "--download-only",
+        action="store_true",
+        help="Only download images and validate maps; do not write HTML/PDF.",
+    )
+    parser.add_argument(
+        "--build-with-available",
+        action="store_true",
+        help="Generate PDF/HTML from currently available images (allow < 4 per item).",
+    )
+    parser.add_argument(
+        "--no-ai-identify",
+        action="store_true",
+        help="Disable AI image identification (enabled by default).",
+    )
+    parser.add_argument(
+        "--verify-images",
+        action="store_true",
+        help="Verify all images (duplicate check + format). With --download-only: "
+             "download then verify. Alone: verify only, no download/build.",
+    )
+    parser.add_argument(
+        "--all-guides",
+        action="store_true",
+        help="Run for all guides (use with --build-with-available to build all).",
+    )
+    parser.add_argument(
+        "--force-overwrite",
+        action="store_true",
+        help="Overwrite existing images (default: do not overwrite).",
+    )
+    parser.add_argument(
+        "--download-retries",
+        type=int,
+        default=1,
+        metavar="N",
+        help="With --all-guides: try downloading missing images N times before "
+             "building (default 1). Use 5+ to fill gaps over several rounds.",
+    )
+    args = parser.parse_args()
+    args.ai_identify = not getattr(args, "no_ai_identify", False)
+
+    BUILD_GUIDES = [
+        "monasteries", "places_of_worship", "parks", "museums", "palaces",
+        "buildings", "sculptures", "places", "metro",
+    ]
+
+    if getattr(args, "all_guides", False):
+        args.build_with_available = True
+        retries = max(1, getattr(args, "download_retries", 1))
+        user_download_only = getattr(args, "download_only", False)
+        for round_one in range(1, retries + 1):
+            if retries > 1:
+                print("\n--- Download round {}/{} ---".format(round_one, retries))
+            for g in BUILD_GUIDES:
+                args.guide = g
+                if round_one < retries:
+                    args.download_only = True
+                else:
+                    args.download_only = user_download_only
+                print("\n" + "=" * 60)
+                print("Guide: {}".format(g))
+                print("=" * 60)
+                try:
+                    _run_one_guide(args)
+                except ValueError as e:
+                    print("  Skipped: {}".format(e), file=sys.stderr)
+        return
+
+    _run_one_guide(args)
 
 
 if __name__ == "__main__":

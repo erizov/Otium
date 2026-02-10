@@ -60,7 +60,8 @@ MONASTERIES: list[Monastery] = [
         "images": [
             _img("andronikov_1.jpg"),
             _img("andronikov_2.jpg"),
-            _img("andronikov_cathedral.jpg"),
+            _img("andronikov_3.jpg"),
+            _img("andronikov_4.jpg"),
         ],
         "map_url": "",
         "lat": 55.7497,
@@ -93,6 +94,8 @@ MONASTERIES: list[Monastery] = [
         "images": [
             _img("vysoko_petrovsky_1.jpg"),
             _img("vysoko_petrovsky_2.jpg"),
+            _img("vysoko_petrovsky_3.jpg"),
+            _img("vysoko_petrovsky_4.jpg"),
         ],
         "map_url": "",
         "lat": 55.7678,
@@ -127,6 +130,8 @@ MONASTERIES: list[Monastery] = [
         "images": [
             _img("andreevsky_1.jpg"),
             _img("andreevsky_2.jpg"),
+            _img("andreevsky_3.jpg"),
+            _img("andreevsky_4.jpg"),
         ],
         "map_url": "",
         "lat": 55.7103,
@@ -164,6 +169,7 @@ MONASTERIES: list[Monastery] = [
         "images": [
             _img("donskoy_1.jpg"),
             _img("donskoy_2.jpg"),
+            _img("donskoy_3.jpg"),
             _img("donskoy_4.jpg"),
         ],
         "map_url": "",
@@ -203,7 +209,8 @@ MONASTERIES: list[Monastery] = [
         ],
         "images": [
             _img("novodevichy_1.jpg"),
-            _img("novodevichy_tower.jpg"),
+            _img("novodevichy_2.jpg"),
+            _img("novodevichy_3.jpg"),
             _img("novodevichy_4.jpg"),
         ],
         "map_url": "",
@@ -237,6 +244,7 @@ MONASTERIES: list[Monastery] = [
         ],
         "images": [
             _img("pokrovsky_1.jpg"),
+            _img("pokrovsky_2.jpg"),
             _img("pokrovsky_3.jpg"),
             _img("pokrovsky_4.jpg"),
         ],
@@ -270,7 +278,8 @@ MONASTERIES: list[Monastery] = [
             "Успенский собор перестроен в XVII веке.",
         ],
         "images": [
-            _img("krutitsy_terem.jpg"),
+            _img("krutitsy_1.jpg"),
+            _img("krutitsy_2.jpg"),
             _img("krutitsy_3.jpg"),
             _img("krutitsy_4.jpg"),
         ],
@@ -312,6 +321,7 @@ MONASTERIES: list[Monastery] = [
             _img("danilov_1.jpg"),
             _img("danilov_2.jpg"),
             _img("danilov_3.jpg"),
+            _img("danilov_4.jpg"),
         ],
         "map_url": "",
         "lat": 55.7106,
@@ -343,8 +353,10 @@ MONASTERIES: list[Monastery] = [
             "Основан митрополитом Алексием.",
         ],
         "images": [
+            _img("zachatievsky_1.jpg"),
             _img("zachatievsky_2.jpg"),
             _img("zachatievsky_3.jpg"),
+            _img("zachatievsky_4.jpg"),
         ],
         "map_url": "",
         "lat": 55.7422,
@@ -413,6 +425,7 @@ MONASTERIES: list[Monastery] = [
         ],
         "images": [
             _img("sretensky_1.jpg"),
+            _img("sretensky_2.jpg"),
             _img("sretensky_3.jpg"),
             _img("sretensky_4.jpg"),
         ],
@@ -448,6 +461,7 @@ MONASTERIES: list[Monastery] = [
         ],
         "images": [
             _img("marfo_mariinsky_1.jpg"),
+            _img("marfo_mariinsky_2.jpg"),
             _img("marfo_mariinsky_3.jpg"),
             _img("marfo_mariinsky_4.jpg"),
         ],
@@ -483,6 +497,9 @@ MONASTERIES: list[Monastery] = [
             "Упомянут в повести Карамзина «Бедная Лиза».",
         ],
         "images": [
+            _img("simonov_1.jpg"),
+            _img("simonov_2.jpg"),
+            _img("simonov_3.jpg"),
             _img("simonov_4.jpg"),
         ],
         "map_url": "",
@@ -516,6 +533,7 @@ MONASTERIES: list[Monastery] = [
         ],
         "images": [
             _img("rozhdestvensky_1.jpg"),
+            _img("rozhdestvensky_2.jpg"),
             _img("rozhdestvensky_3.jpg"),
             _img("rozhdestvensky_4.jpg"),
         ],
@@ -582,7 +600,12 @@ MONASTERIES: list[Monastery] = [
             "Иверский собор построен в 1904–1908 годах.",
             "Расположен в районе Печатники.",
         ],
-        "images": [_img("nikolo_perervinsky_1.jpg")],
+        "images": [
+            _img("nikolo_perervinsky_1.jpg"),
+            _img("nikolo_perervinsky_2.jpg"),
+            _img("nikolo_perervinsky_3.jpg"),
+            _img("nikolo_perervinsky_4.jpg"),
+        ],
         "map_url": "",
         "lat": 55.6833,
         "lon": 37.6917,
@@ -649,6 +672,8 @@ MONASTERIES: list[Monastery] = [
         "images": [
             _img("novo_alekseevsky_1.jpg"),
             _img("novo_alekseevsky_2.jpg"),
+            _img("novo_alekseevsky_3.jpg"),
+            _img("novo_alekseevsky_4.jpg"),
         ],
         "map_url": "",
         "lat": 55.7803,
@@ -680,6 +705,9 @@ MONASTERIES: list[Monastery] = [
         ],
         "images": [
             _img("bogoyavlensky_1.jpg"),
+            _img("bogoyavlensky_2.jpg"),
+            _img("bogoyavlensky_3.jpg"),
+            _img("bogoyavlensky_4.jpg"),
         ],
         "map_url": "",
         "lat": 55.7561,
@@ -708,7 +736,12 @@ MONASTERIES: list[Monastery] = [
             "Собор построен в 1679–1684 годах.",
             "Монастырь не возрождён, действует собор.",
         ],
-        "images": [_img("znamensky_1.jpg")],
+        "images": [
+            _img("znamensky_1.jpg"),
+            _img("znamensky_2.jpg"),
+            _img("znamensky_3.jpg"),
+            _img("znamensky_4.jpg"),
+        ],
         "map_url": "",
         "lat": 55.7525,
         "lon": 37.6286,

@@ -31,7 +31,7 @@ MIN_IMAGE_BYTES = 500
 # Subdir name (under output/images/) -> guide key for priority
 SUBDIR_TO_GUIDE = {
     "moscow_monasteries": "monastery",
-    "moscow_churches": "church",
+    "moscow_places_of_worship": "places_of_worship",
     "moscow_parks": "park",
     "moscow_museums": "museum",
     "moscow_palaces": "palace",
@@ -44,7 +44,7 @@ SUBDIR_TO_GUIDE = {
 # Highest (0) to lowest (8)
 GUIDE_PRIORITY = {
     "monastery": 0,
-    "church": 1,
+    "places_of_worship": 1,
     "palace": 2,
     "building": 3,
     "park": 4,
@@ -56,7 +56,7 @@ GUIDE_PRIORITY = {
 
 GUIDES = [
     "monasteries",
-    "churches",
+    "places_of_worship",
     "parks",
     "museums",
     "palaces",
@@ -132,13 +132,14 @@ def cross_guide_dedup(images_root: Path) -> int:
     """
     Find duplicate images across guides by content hash. Keep the file from
     the highest-priority guide as canonical; for every other path with the
-    same hash, overwrite it with a copy of the canonical file so each guide
-    still has its expected image files (builds do not break). Returns number
-    of files replaced.
+    same hash, overwrite only if the target has the same slug (same logical
+    item). If canonical and target slugs differ, skip replace and log.
+    Returns number of files replaced.
     """
     if str(_PROJECT_ROOT) not in sys.path:
         sys.path.insert(0, str(_PROJECT_ROOT))
     from scripts.image_utils import image_content_hash
+    from scripts.slug_item_map import basename_to_slug
 
     hash_to_entries: dict[str, list[tuple[str, Path]]] = {}
     if not images_root.exists():
@@ -169,7 +170,18 @@ def cross_guide_dedup(images_root: Path) -> int:
         # Sort by priority (lower number = keep first as canonical)
         entries.sort(key=lambda x: (GUIDE_PRIORITY.get(x[0], 99), x[1].name))
         keep_guide, keep_path = entries[0]
+        keep_slug = basename_to_slug(keep_path.name)
         for guide, path in entries[1:]:
+            path_slug = basename_to_slug(path.name)
+            if keep_slug != path_slug:
+                print(
+                    "  Same content, different items — skipped replace: "
+                    "{} ({} from {}) vs {} ({} from {})".format(
+                        path.name, path_slug, guide,
+                        keep_path.name, keep_slug, keep_guide,
+                    ),
+                )
+                continue
             try:
                 shutil.copy2(keep_path, path)
                 replaced += 1
