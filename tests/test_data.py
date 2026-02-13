@@ -15,13 +15,19 @@ if str(ROOT) not in sys.path:
 EXPECTED_COUNTS = {
     "places": 37,
     "buildings": 47,
-    "parks": 21,
-    "museums": 27,
+    "parks": 26,
+    "museums": 32,
     "palaces": 24,
     "sculptures": 61,
     "places_of_worship": 66,
     "monasteries": 20,
     "metro": 37,
+    "theaters": 12,
+    "viewpoints": 13,
+    "bridges": 10,
+    "squares": 12,
+    "markets": 9,
+    "cemeteries": 7,
 }
 
 
@@ -79,6 +85,42 @@ def test_metro_count() -> None:
     assert len(METRO_STATIONS) == EXPECTED_COUNTS["metro"]
 
 
+def test_theaters_count() -> None:
+    """Theaters list length matches build_pdf expected count."""
+    from data.theaters import THEATERS
+    assert len(THEATERS) == EXPECTED_COUNTS["theaters"]
+
+
+def test_viewpoints_count() -> None:
+    """Viewpoints list length matches build_pdf expected count."""
+    from data.viewpoints import VIEWPOINTS
+    assert len(VIEWPOINTS) == EXPECTED_COUNTS["viewpoints"]
+
+
+def test_bridges_count() -> None:
+    """Bridges list length matches build_pdf expected count."""
+    from data.bridges import BRIDGES
+    assert len(BRIDGES) == EXPECTED_COUNTS["bridges"]
+
+
+def test_squares_count() -> None:
+    """Squares list length matches build_pdf expected count."""
+    from data.squares import SQUARES
+    assert len(SQUARES) == EXPECTED_COUNTS["squares"]
+
+
+def test_markets_count() -> None:
+    """Markets list length matches build_pdf expected count."""
+    from data.markets import MARKETS
+    assert len(MARKETS) == EXPECTED_COUNTS["markets"]
+
+
+def test_cemeteries_count() -> None:
+    """Cemeteries list length matches build_pdf expected count."""
+    from data.cemeteries import CEMETERIES
+    assert len(CEMETERIES) == EXPECTED_COUNTS["cemeteries"]
+
+
 def test_place_has_required_keys() -> None:
     """Each place has name, images, lat, lon."""
     from data.places import PLACES
@@ -110,6 +152,12 @@ def _all_places_by_guide() -> list[tuple[str, list[dict]]]:
     from data.places_of_worship import PLACES_OF_WORSHIP
     from data.monasteries import MONASTERIES
     from data.metro_stations import METRO_STATIONS
+    from data.theaters import THEATERS
+    from data.viewpoints import VIEWPOINTS
+    from data.bridges import BRIDGES
+    from data.squares import SQUARES
+    from data.markets import MARKETS
+    from data.cemeteries import CEMETERIES
 
     return [
         ("places", PLACES),
@@ -121,13 +169,21 @@ def _all_places_by_guide() -> list[tuple[str, list[dict]]]:
         ("places_of_worship", PLACES_OF_WORSHIP),
         ("monasteries", MONASTERIES),
         ("metro", METRO_STATIONS),
+        ("theaters", THEATERS),
+        ("viewpoints", VIEWPOINTS),
+        ("bridges", BRIDGES),
+        ("squares", SQUARES),
+        ("markets", MARKETS),
+        ("cemeteries", CEMETERIES),
     ]
 
 
 def test_no_duplicate_map_urls_across_guides() -> None:
-    """No two different items (across all guides) share the same map URL.
+    """No two different items (within same guide) share the same map URL.
 
-    Map URL is determined by (lat, lon). Same coords => same map => forbidden.
+    Map URL is determined by (lat, lon). Same coords in different guides are
+    allowed (e.g. Theatre Square in places and squares). Duplicates within
+    one guide indicate a data error.
     """
     map_to_sources: dict[str, list[tuple[str, str]]] = {}
     for guide_name, places in _all_places_by_guide():

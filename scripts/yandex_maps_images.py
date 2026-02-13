@@ -48,8 +48,10 @@ def search_place_by_name(
         )
         return []
 
-    query = f"{name} {city}".strip()
-    url = f"https://yandex.ru/maps/?text={quote(query)}"
+    query = "{} {}".format(name, city).strip()
+    url = "https://yandex.ru/maps/?text={}".format(
+        quote(query, encoding="utf-8"),
+    )
 
     image_urls: list[str] = []
 
@@ -59,7 +61,7 @@ def search_place_by_name(
 
         try:
             page.goto(url, wait_until="domcontentloaded", timeout=30000)
-            time.sleep(3)  # Wait for search results and map
+            time.sleep(5)  # Wait for search results and map
 
             # Try to find photos section
             # Yandex Maps photos are often in a carousel or gallery
@@ -71,14 +73,17 @@ def search_place_by_name(
             found_urls: set[str] = set()
 
             # Pattern 1: Yandex CDN image URLs
-            # avatars.mds.yandex.net/get-images-cbir/..., get-altay/..., get-images/...
+            # avatars.mds.yandex.net/get-images-cbir/..., get-altay/..., i?id=...
             cdn_pattern = r'https://avatars\.mds\.yandex\.net/[^"\s<>\)]+'
             cdn_matches = re.findall(cdn_pattern, content, re.IGNORECASE)
             for url in cdn_matches:
                 clean_url = url.split("?")[0]
                 if any(
                     p in clean_url
-                    for p in ["/get-images-cbir/", "/get-altay/", "/get-images/"]
+                    for p in [
+                        "/get-images-cbir/", "/get-altay/", "/get-images/",
+                        "/get-vh/", "/i?id=",
+                    ]
                 ):
                     found_urls.add(clean_url)
 
@@ -130,18 +135,21 @@ def search_place_by_name(
                     except Exception:
                         pass
                 if clicked:
-                    time.sleep(3)
+                    time.sleep(5)
                     content = page.content()
                     cdn_matches = re.findall(cdn_pattern, content, re.IGNORECASE)
                     if not cdn_matches:
-                        time.sleep(2)
+                        time.sleep(3)
                         content = page.content()
                         cdn_matches = re.findall(cdn_pattern, content, re.IGNORECASE)
                     for url in cdn_matches:
                         clean_url = url.split("?")[0]
                         if any(
                             p in clean_url
-                            for p in ["/get-images-cbir/", "/get-altay/", "/get-images/"]
+                            for p in [
+                                "/get-images-cbir/", "/get-altay/", "/get-images/",
+                                "/get-vh/", "/i?id=",
+                            ]
                         ):
                             found_urls.add(clean_url)
                     img_matches = re.findall(img_pattern, content, re.IGNORECASE)
@@ -170,13 +178,18 @@ def search_place_by_name(
                         element = page.query_selector(selector)
                         if element:
                             element.click()
-                            time.sleep(2)
+                            time.sleep(3)
                             content_after = page.content()
-                            for url in re.findall(cdn_pattern, content_after, re.IGNORECASE):
+                            for url in re.findall(
+                                cdn_pattern, content_after, re.IGNORECASE
+                            ):
                                 clean_url = url.split("?")[0]
                                 if any(
                                     p in clean_url
-                                    for p in ["/get-images-cbir/", "/get-altay/", "/get-images/"]
+                                    for p in [
+                                        "/get-images-cbir/", "/get-altay/",
+                                        "/get-images/", "/get-vh/", "/i?id=",
+                                    ]
                                 ):
                                     found_urls.add(clean_url)
                             for url in re.findall(img_pattern, content_after, re.IGNORECASE):
@@ -247,6 +260,59 @@ def get_place_images(
         if attempt < retry:
             time.sleep(3)
     return []
+
+
+def search_yandex_images(
+    name: str,
+    city: str = "Москва",
+    max_images: int = 10,
+) -> list[str]:
+    """
+    Search Yandex Images (yandex.ru/images) by place name.
+
+    Alternative to Maps; may return more URLs when Maps finds none.
+    """
+    try:
+        from playwright.sync_api import sync_playwright, TimeoutError as PWTimeout
+    except ImportError:
+        return []
+
+    query = "{} {}".format(name, city).strip()
+    search_url = (
+        "https://yandex.ru/images/search?text="
+        + quote(query, encoding="utf-8")
+    )
+    found_urls: set[str] = set()
+    cdn_pattern = r'https://avatars\.mds\.yandex\.net/[^"\s<>\)]+'
+    path_patterns = [
+        "/get-images-cbir/", "/get-altay/", "/get-images/",
+        "/get-vh/", "/i?id=",
+    ]
+
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True)
+        page = browser.new_page()
+        try:
+            page.goto(search_url, wait_until="domcontentloaded", timeout=30000)
+            time.sleep(4)
+            content = page.content()
+            for url in re.findall(cdn_pattern, content, re.IGNORECASE):
+                clean_url = url.split("?")[0]
+                if any(p in clean_url for p in path_patterns):
+                    found_urls.add(clean_url)
+            if not found_urls:
+                time.sleep(3)
+                content = page.content()
+                for url in re.findall(cdn_pattern, content, re.IGNORECASE):
+                    clean_url = url.split("?")[0]
+                    if any(p in clean_url for p in path_patterns):
+                        found_urls.add(clean_url)
+        except (PWTimeout, Exception):
+            pass
+        finally:
+            browser.close()
+
+    return list(found_urls)[:max_images]
 
 
 def main() -> int:

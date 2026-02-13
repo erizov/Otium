@@ -47,5 +47,9 @@ PARK_IMAGE_DOWNLOADS: dict[str, str] = {
     "fili_park_2.jpg": f"{_B}/a/a8/Church_of_Intercession_Fili_Moscow.jpg/500px-Church_of_Intercession_Fili_Moscow.jpg",
     "troparevo_1.jpg": f"{_B}/2/2e/Troparevo_park_Moscow_ponds.jpg/500px-Troparevo_park_Moscow_ponds.jpg",
     "troparevo_2.jpg": f"{_B}/b/be/Troparevo_forest_park_Moscow.jpg/500px-Troparevo_forest_park_Moscow.jpg",
+    "olympic_village_1.jpg": f"{_B}/4/41/Olympic_Village_Moscow_1980.jpg/500px-Olympic_Village_Moscow_1980.jpg",
+    "olympic_village_2.jpg": f"{_B}/8/88/Olympic_Village_park_Moscow.jpg/500px-Olympic_Village_park_Moscow.jpg",
+    "lilac_garden_1.jpg": f"{_B}/2/2e/Lilac_garden_Moscow.jpg/500px-Lilac_garden_Moscow.jpg",
+    "lilac_garden_2.jpg": f"{_B}/b/be/Lilac_bloom_Moscow.jpg/500px-Lilac_bloom_Moscow.jpg",
 }
 PARK_IMAGE_FALLBACKS: dict[str, list[str]] = {}

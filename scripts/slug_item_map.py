@@ -15,7 +15,9 @@ from pathlib import Path
 
 GUIDES = [
     "monasteries", "places_of_worship", "parks", "museums", "palaces",
-    "buildings", "sculptures", "places", "metro",
+    "buildings", "sculptures", "places", "squares", "metro", "theaters",
+    "viewpoints", "bridges", "markets", "libraries", "railway_stations",
+    "cemeteries", "landmarks", "cafes",
 ]
 
 
@@ -57,12 +59,42 @@ def _load_places(guide: str) -> list[dict]:
     if guide == "places":
         from data.places import PLACES
         return PLACES
+    if guide == "squares":
+        from data.squares import SQUARES
+        return SQUARES
     if guide == "metro":
         from data.metro_stations import METRO_STATIONS
         return METRO_STATIONS
     if guide == "monasteries":
         from data.monasteries import MONASTERIES
         return MONASTERIES
+    if guide == "theaters":
+        from data.theaters import THEATERS
+        return THEATERS
+    if guide == "viewpoints":
+        from data.viewpoints import VIEWPOINTS
+        return VIEWPOINTS
+    if guide == "bridges":
+        from data.bridges import BRIDGES
+        return BRIDGES
+    if guide == "markets":
+        from data.markets import MARKETS
+        return MARKETS
+    if guide == "libraries":
+        from data.libraries import LIBRARIES
+        return LIBRARIES
+    if guide == "railway_stations":
+        from data.railway_stations import RAILWAY_STATIONS
+        return RAILWAY_STATIONS
+    if guide == "cemeteries":
+        from data.cemeteries import CEMETERIES
+        return CEMETERIES
+    if guide == "landmarks":
+        from data.landmarks import LANDMARKS
+        return LANDMARKS
+    if guide == "cafes":
+        from data.cafes import CAFES
+        return CAFES
     raise ValueError("Unknown guide: {}".format(guide))
 
 
@@ -103,3 +135,50 @@ def get_slugs_per_guide(project_root: Path | str) -> dict[str, set[str]]:
     for (guide, slug), _ in slug_to_name.items():
         per_guide.setdefault(guide, set()).add(slug)
     return per_guide
+
+
+def get_slug_to_item(project_root: Path | str) -> dict[tuple[str, str], dict]:
+    """
+    Build (guide, slug) -> full item dict from all guides.
+
+    Enables richer tracking: address, highlights, etc. for logging and validation.
+    """
+    root = Path(project_root)
+    if str(root) not in sys.path:
+        sys.path.insert(0, str(root))
+
+    result: dict[tuple[str, str], dict] = {}
+    for guide in GUIDES:
+        try:
+            places = _load_places(guide)
+        except Exception:
+            continue
+        for item in places:
+            images = item.get("images") or []
+            for img in images:
+                bn = _basename(img)
+                slug = basename_to_slug(bn)
+                key = (guide, slug)
+                if key not in result:
+                    result[key] = dict(item)
+    return result
+
+
+def get_item_slug(item: dict) -> str | None:
+    """
+    Return canonical slug for an item (from first image basename or explicit).
+
+    Prefers item.get("slug") when present for stable identification. Returns
+    None if item has no images and no slug. Use slug for tracking and
+    name-aware deduplication across guides.
+    """
+    slug = item.get("slug")
+    if slug is not None and isinstance(slug, str):
+        s = slug.strip()
+        if s:
+            return s
+    images = item.get("images") or []
+    if not images:
+        return None
+    bn = _basename(images[0])
+    return basename_to_slug(bn)

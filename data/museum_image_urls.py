@@ -69,5 +69,9 @@ MUSEUM_IMAGE_DOWNLOADS: dict[str, str] = {
     "gulag_muz_2.jpg": f"{_B}/8/83/Moscow_Kremlin.jpg/500px-Moscow_Kremlin.jpg",
     "russian_impressionism_1.jpg": f"{_B}/6/60/St_Basil%27s_Cathedral_Moscow_2006.jpg/500px-St_Basil%27s_Cathedral_Moscow_2006.jpg",
     "russian_impressionism_2.jpg": f"{_B}/f/f5/Cathedral_of_Christ_the_Saviour%2C_Moscow%2C_Russia.jpg/500px-Cathedral_of_Christ_the_Saviour%2C_Moscow%2C_Russia.jpg",
+    "tsaritsyno_palace_1.jpg": f"{_B}/5/5e/Tsaritsyno_Moscow_Grand_Palace.jpg/500px-Tsaritsyno_Moscow_Grand_Palace.jpg",
+    "tsaritsyno_palace_2.jpg": f"{_B}/d/d9/Moscow%2C_Russia%2C_Tsaritsyno%2C_Lawns.jpg/500px-Moscow%2C_Russia%2C_Tsaritsyno%2C_Lawns.jpg",
+    "dom_na_naberezhnoj_1.jpg": f"{_B}/8/83/Moscow_Kremlin.jpg/500px-Moscow_Kremlin.jpg",
+    "dom_na_naberezhnoj_2.jpg": f"{_B}/8/83/Moscow_Kremlin.jpg/500px-Moscow_Kremlin.jpg",
 }
 MUSEUM_IMAGE_FALLBACKS: dict[str, list[str]] = {}

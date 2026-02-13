@@ -50,3 +50,29 @@ def image_content_hash(path: Path, min_bytes: int = 500) -> str:
         for chunk in iter(lambda: f.read(8192), b""):
             h.update(chunk)
     return "sha256:" + h.hexdigest()
+
+
+def image_content_hash_from_bytes(
+    data: bytes,
+    min_bytes: int = 500,
+) -> str:
+    """
+    Content-based hash from raw bytes (e.g. downloaded image).
+
+    Same semantics as image_content_hash; use to check for duplicates
+    before writing to disk.
+    """
+    if not data or len(data) < min_bytes:
+        return ""
+    if _perceptual_hash_available():
+        try:
+            import imagehash
+            from PIL import Image
+            from io import BytesIO
+            img = Image.open(BytesIO(data))
+            h = imagehash.phash(img)
+            return str(h)
+        except Exception:
+            pass
+    import hashlib
+    return "sha256:" + hashlib.sha256(data).hexdigest()

@@ -33,6 +33,8 @@ GUIDE_PRIORITY = {
     "metro": 6,
     "place": 7,
     "sculpture": 8,
+    "theater": 9,
+    "viewpoint": 10,
 }
 
 CONFIGS = [
@@ -45,6 +47,8 @@ CONFIGS = [
     ("museum", "data.museum_image_urls", "MUSEUM_IMAGE_DOWNLOADS"),
     ("sculpture", "data.sculpture_image_urls", "SCULPTURE_IMAGE_DOWNLOADS"),
     ("monastery", "data.image_urls", "IMAGE_DOWNLOADS"),
+    ("theater", "data.theater_image_urls", "THEATER_IMAGE_DOWNLOADS"),
+    ("viewpoint", "data.viewpoint_image_urls", "VIEWPOINT_IMAGE_DOWNLOADS"),
 ]
 
 

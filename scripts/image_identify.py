@@ -23,6 +23,7 @@ def image_matches_item(
     image_path: Path,
     item_name: str,
     guide_context: str = "",
+    aliases: Optional[list[str]] = None,
 ) -> bool:
     """
     Return True if the image appears to show the given item (e.g. place name).
@@ -52,12 +53,40 @@ def image_matches_item(
     except OSError:
         return False
 
+    ctx = guide_context or "place"
+    _ctx_map = {
+        "places_of_worship": "church or place of worship in Moscow",
+        "monasteries": "monastery in Moscow",
+        "parks": "park in Moscow",
+        "museums": "museum in Moscow",
+        "palaces": "palace in Moscow",
+        "buildings": "building in Moscow",
+        "sculptures": "sculpture or monument in Moscow",
+        "places": "place or landmark in Moscow",
+        "squares": "square or plaza in Moscow",
+        "metro": "metro station in Moscow",
+        "theaters": "theater building in Moscow",
+        "viewpoints": "viewpoint or observation deck in Moscow",
+        "bridges": "bridge in Moscow",
+        "markets": "market or food hall in Moscow",
+        "libraries": "library building in Moscow",
+        "railway_stations": "railway station in Moscow",
+        "cemeteries": "cemetery or necropolis in Moscow",
+        "landmarks": "iconic landmark or building in Moscow",
+        "cafes": "cafe or restaurant in Moscow",
+    }
+    ctx = _ctx_map.get(ctx, ctx)
+    place_desc = item_name
+    if aliases:
+        extra = " (also known as: {})".format(", ".join(aliases[:5]))
+        place_desc = item_name + extra
     prompt = (
-        "Does this image show the following place or object? "
-        "Answer only yes or no. Place/object: {}. {}".format(
-            item_name,
-            "Context: " + guide_context if guide_context else "",
-        ).strip()
+        "Does this image show THIS SPECIFIC place (and not a different similar "
+        "building)? Reject if the image appears AI-generated, synthetic, or a "
+        "digital rendering. Reject if the image contains people or crowds. "
+        "Answer only yes or no. Place: {}. Context: {}.".format(
+            place_desc, ctx,
+        )
     )
     payload = {
         "model": "gpt-4o-mini",

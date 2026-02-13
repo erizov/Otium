@@ -39,9 +39,15 @@ SUBDIR_TO_GUIDE = {
     "moscow_sculptures": "sculpture",
     "moscow_places": "place",
     "moscow_metro": "metro",
+    "moscow_theaters": "theater",
+    "moscow_viewpoints": "viewpoint",
+    "moscow_bridges": "bridge",
+    "moscow_markets": "market",
+    "moscow_libraries": "library",
+    "moscow_railway_stations": "railway_station",
 }
 
-# Highest (0) to lowest (8)
+# Highest (0) to lowest (13)
 GUIDE_PRIORITY = {
     "monastery": 0,
     "places_of_worship": 1,
@@ -52,6 +58,12 @@ GUIDE_PRIORITY = {
     "metro": 6,
     "place": 7,
     "sculpture": 8,
+    "theater": 9,
+    "viewpoint": 10,
+    "bridge": 11,
+    "market": 12,
+    "library": 13,
+    "railway_station": 14,
 }
 
 GUIDES = [
@@ -63,7 +75,17 @@ GUIDES = [
     "buildings",
     "sculptures",
     "places",
+    "squares",
     "metro",
+    "theaters",
+    "viewpoints",
+    "bridges",
+    "markets",
+    "libraries",
+    "railway_stations",
+    "cemeteries",
+    "landmarks",
+    "cafes",
 ]
 
 

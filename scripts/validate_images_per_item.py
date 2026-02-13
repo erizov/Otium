@@ -68,6 +68,10 @@ def _load_guide(guide: str) -> tuple[list[dict], dict[str, str]]:
         from data.places import PLACES
         from data.place_image_urls import PLACE_IMAGE_DOWNLOADS
         return PLACES, PLACE_IMAGE_DOWNLOADS
+    if guide == "squares":
+        from data.squares import SQUARES
+        from data.squares_image_urls import SQUARES_IMAGE_DOWNLOADS
+        return SQUARES, SQUARES_IMAGE_DOWNLOADS
     if guide == "metro":
         from data.metro_stations import METRO_STATIONS
         from data.metro_image_urls import METRO_IMAGE_DOWNLOADS
@@ -76,12 +80,52 @@ def _load_guide(guide: str) -> tuple[list[dict], dict[str, str]]:
         from data.monasteries import MONASTERIES
         from data.image_urls import IMAGE_DOWNLOADS
         return MONASTERIES, IMAGE_DOWNLOADS
+    if guide == "theaters":
+        from data.theaters import THEATERS
+        from data.theater_image_urls import THEATER_IMAGE_DOWNLOADS
+        return THEATERS, THEATER_IMAGE_DOWNLOADS
+    if guide == "viewpoints":
+        from data.viewpoints import VIEWPOINTS
+        from data.viewpoint_image_urls import VIEWPOINT_IMAGE_DOWNLOADS
+        return VIEWPOINTS, VIEWPOINT_IMAGE_DOWNLOADS
+    if guide == "bridges":
+        from data.bridges import BRIDGES
+        from data.bridge_image_urls import BRIDGE_IMAGE_DOWNLOADS
+        return BRIDGES, BRIDGE_IMAGE_DOWNLOADS
+    if guide == "markets":
+        from data.markets import MARKETS
+        from data.market_image_urls import MARKET_IMAGE_DOWNLOADS
+        return MARKETS, MARKET_IMAGE_DOWNLOADS
+    if guide == "libraries":
+        from data.libraries import LIBRARIES
+        from data.library_image_urls import LIBRARY_IMAGE_DOWNLOADS
+        return LIBRARIES, LIBRARY_IMAGE_DOWNLOADS
+    if guide == "railway_stations":
+        from data.railway_stations import RAILWAY_STATIONS
+        from data.railway_station_image_urls import (
+            RAILWAY_STATION_IMAGE_DOWNLOADS,
+        )
+        return RAILWAY_STATIONS, RAILWAY_STATION_IMAGE_DOWNLOADS
+    if guide == "cemeteries":
+        from data.cemeteries import CEMETERIES
+        from data.cemetery_image_urls import CEMETERY_IMAGE_DOWNLOADS
+        return CEMETERIES, CEMETERY_IMAGE_DOWNLOADS
+    if guide == "landmarks":
+        from data.landmarks import LANDMARKS
+        from data.landmarks_image_urls import LANDMARK_IMAGE_DOWNLOADS
+        return LANDMARKS, LANDMARK_IMAGE_DOWNLOADS
+    if guide == "cafes":
+        from data.cafes import CAFES
+        from data.cafe_image_urls import CAFE_IMAGE_DOWNLOADS
+        return CAFES, CAFE_IMAGE_DOWNLOADS
     raise ValueError("Unknown guide: {}".format(guide))
 
 
 GUIDES = [
     "monasteries", "places_of_worship", "parks", "museums", "palaces",
-    "buildings", "sculptures", "places", "metro",
+    "buildings", "sculptures", "places", "squares", "metro", "theaters",
+    "viewpoints", "bridges", "markets", "libraries", "railway_stations",
+    "cemeteries", "landmarks", "cafes",
 ]
 
 # Subdir under output/images/ -> guide key (must match workflow SUBDIR_TO_GUIDE)
@@ -94,7 +138,17 @@ SUBDIR_TO_GUIDE = {
     "moscow_buildings": "buildings",
     "moscow_sculptures": "sculptures",
     "moscow_places": "places",
+    "moscow_squares": "squares",
     "moscow_metro": "metro",
+    "moscow_theaters": "theaters",
+    "moscow_viewpoints": "viewpoints",
+    "moscow_bridges": "bridges",
+    "moscow_markets": "markets",
+    "moscow_libraries": "libraries",
+    "moscow_railway_stations": "railway_stations",
+    "moscow_cemeteries": "cemeteries",
+    "moscow_landmarks": "landmarks",
+    "moscow_cafes": "cafes",
 }
 
 

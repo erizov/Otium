@@ -150,6 +150,9 @@ def main() -> int:
         "sculptures": ("SCULPTURE_IMAGE_DOWNLOADS", "sculpture_image_urls.py"),
         "places": ("PLACE_IMAGE_DOWNLOADS", "place_image_urls.py"),
         "metro": ("METRO_IMAGE_DOWNLOADS", "metro_image_urls.py"),
+        "theaters": ("THEATER_IMAGE_DOWNLOADS", "theater_image_urls.py"),
+        "viewpoints": ("VIEWPOINT_IMAGE_DOWNLOADS", "viewpoint_image_urls.py"),
+        "cemeteries": ("CEMETERY_IMAGE_DOWNLOADS", "cemetery_image_urls.py"),
     }
 
     for guide in guides_to_process:

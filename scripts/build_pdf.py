@@ -4,23 +4,37 @@
 проверка дубликатов, генерация PDF-путеводителя по московским монастырям.
 """
 
+import io
 import re
 import socket
 import sys
 import threading
 import urllib.request
 from pathlib import Path
+from typing import Optional
 
 # Добавляем корень проекта в путь для импорт data
 _project_root = Path(__file__).resolve().parent.parent
 if str(_project_root) not in sys.path:
     sys.path.insert(0, str(_project_root))
 
+# Fix Windows console encoding for Cyrillic (run before any prints)
+if sys.platform == "win32":
+    for _name, _s in [("stdout", sys.stdout), ("stderr", sys.stderr)]:
+        if hasattr(_s, "buffer"):
+            try:
+                _w = io.TextIOWrapper(_s.buffer, encoding="utf-8", errors="replace")
+                setattr(sys, _name, _w)
+            except (AttributeError, OSError):
+                pass
+
 from scripts.image_utils import image_content_hash
 
 MIN_IMAGE_BYTES = 500
 IMAGES_PER_PLACE = 4
 MAPS_PER_PLACE = 1
+# Include item in guide if it has at least this many distinct images
+MIN_IMAGES_TO_BUILD = 2
 
 # Файлы, которые не использовать в гиде монастырей
 BANNED_IMAGE_BASENAMES = frozenset([
@@ -34,13 +48,23 @@ BANNED_IMAGE_BASENAMES = frozenset([
 GUIDE_EXPECTED_COUNTS: dict[str, int] = {
     "monasteries": 20,
     "places_of_worship": 66,
-    "parks": 21,
-    "museums": 27,
+    "parks": 28,
+    "museums": 32,
     "palaces": 24,
     "buildings": 47,
     "sculptures": 61,
     "places": 37,
     "metro": 37,
+    "theaters": 12,
+    "viewpoints": 14,
+    "bridges": 12,
+    "squares": 12,
+    "markets": 9,
+    "libraries": 5,
+    "railway_stations": 9,
+    "cemeteries": 7,
+    "landmarks": 8,
+    "cafes": 6,
 }
 
 
@@ -84,7 +108,7 @@ def _load_guide_config(guide: str) -> None:
         HTML_NAME = "parks_guide.html"
         PDF_NAME = "parks_guide.pdf"
         INTRO_TITLE = "Парки Москвы"
-        INTRO_SUBTITLE = "21 парк"
+        INTRO_SUBTITLE = "28 парков"
     elif guide == "museums":
         from data.museums import MUSEUMS, IMAGES_SUBFOLDER as _SUB
         from data.museum_image_urls import (
@@ -101,7 +125,7 @@ def _load_guide_config(guide: str) -> None:
         HTML_NAME = "museums_guide.html"
         PDF_NAME = "museums_guide.pdf"
         INTRO_TITLE = "Музеи Москвы"
-        INTRO_SUBTITLE = "27 музеев"
+        INTRO_SUBTITLE = "32 музея"
     elif guide == "palaces":
         from data.palaces import PALACES, IMAGES_SUBFOLDER as _SUB
         from data.palace_image_urls import (
@@ -187,6 +211,179 @@ def _load_guide_config(guide: str) -> None:
         PDF_NAME = "metro_guide.pdf"
         INTRO_TITLE = "Станции Московского метро"
         INTRO_SUBTITLE = "37 лучших станций"
+    elif guide == "theaters":
+        from data.theaters import THEATERS, IMAGES_SUBFOLDER as _SUB
+        from data.theater_image_urls import (
+            THEATER_IMAGE_DOWNLOADS,
+            THEATER_IMAGE_FALLBACKS,
+        )
+        from data.qa_theaters import QA as _QA
+        IMAGES_SUBFOLDER = _SUB
+        PLACES = THEATERS
+        IMAGE_DOWNLOADS = THEATER_IMAGE_DOWNLOADS
+        IMAGE_FALLBACKS = THEATER_IMAGE_FALLBACKS
+        QA = _QA
+        BANNED = frozenset()
+        HTML_NAME = "theaters_guide.html"
+        PDF_NAME = "theaters_guide.pdf"
+        INTRO_TITLE = "Театры Москвы"
+        INTRO_SUBTITLE = "12 театров"
+    elif guide == "viewpoints":
+        from data.viewpoints import VIEWPOINTS, IMAGES_SUBFOLDER as _SUB
+        from data.viewpoint_image_urls import (
+            VIEWPOINT_IMAGE_DOWNLOADS,
+            VIEWPOINT_IMAGE_FALLBACKS,
+        )
+        from data.qa_viewpoints import QA as _QA
+        IMAGES_SUBFOLDER = _SUB
+        PLACES = VIEWPOINTS
+        IMAGE_DOWNLOADS = VIEWPOINT_IMAGE_DOWNLOADS
+        IMAGE_FALLBACKS = VIEWPOINT_IMAGE_FALLBACKS
+        QA = _QA
+        BANNED = frozenset()
+        HTML_NAME = "viewpoints_guide.html"
+        PDF_NAME = "viewpoints_guide.pdf"
+        INTRO_TITLE = "Смотровые площадки Москвы"
+        INTRO_SUBTITLE = "13 смотровых площадок"
+    elif guide == "bridges":
+        from data.bridges import BRIDGES, IMAGES_SUBFOLDER as _SUB
+        from data.bridge_image_urls import (
+            BRIDGE_IMAGE_DOWNLOADS,
+            BRIDGE_IMAGE_FALLBACKS,
+        )
+        from data.qa_bridges import QA as _QA
+        IMAGES_SUBFOLDER = _SUB
+        PLACES = BRIDGES
+        IMAGE_DOWNLOADS = BRIDGE_IMAGE_DOWNLOADS
+        IMAGE_FALLBACKS = BRIDGE_IMAGE_FALLBACKS
+        QA = _QA
+        BANNED = frozenset()
+        HTML_NAME = "bridges_guide.html"
+        PDF_NAME = "bridges_guide.pdf"
+        INTRO_TITLE = "Мосты Москвы"
+        INTRO_SUBTITLE = "10 знаменитых мостов"
+    elif guide == "squares":
+        from data.squares import SQUARES, IMAGES_SUBFOLDER as _SUB
+        from data.squares_image_urls import (
+            SQUARES_IMAGE_DOWNLOADS,
+            SQUARES_IMAGE_FALLBACKS,
+        )
+        from data.qa_squares import QA as _QA
+        IMAGES_SUBFOLDER = _SUB
+        PLACES = SQUARES
+        IMAGE_DOWNLOADS = SQUARES_IMAGE_DOWNLOADS
+        IMAGE_FALLBACKS = SQUARES_IMAGE_FALLBACKS
+        QA = _QA
+        BANNED = frozenset()
+        HTML_NAME = "squares_guide.html"
+        PDF_NAME = "squares_guide.pdf"
+        INTRO_TITLE = "Площади Москвы"
+        INTRO_SUBTITLE = "12 площадей"
+    elif guide == "markets":
+        from data.markets import MARKETS, IMAGES_SUBFOLDER as _SUB
+        from data.market_image_urls import (
+            MARKET_IMAGE_DOWNLOADS,
+            MARKET_IMAGE_FALLBACKS,
+        )
+        from data.qa_markets import QA as _QA
+        IMAGES_SUBFOLDER = _SUB
+        PLACES = MARKETS
+        IMAGE_DOWNLOADS = MARKET_IMAGE_DOWNLOADS
+        IMAGE_FALLBACKS = MARKET_IMAGE_FALLBACKS
+        QA = _QA
+        BANNED = frozenset()
+        HTML_NAME = "markets_guide.html"
+        PDF_NAME = "markets_guide.pdf"
+        INTRO_TITLE = "Рынки и гастрономические центры Москвы"
+        INTRO_SUBTITLE = "7 рынков и гастрономических центров"
+    elif guide == "libraries":
+        from data.libraries import LIBRARIES, IMAGES_SUBFOLDER as _SUB
+        from data.library_image_urls import (
+            LIBRARY_IMAGE_DOWNLOADS,
+            LIBRARY_IMAGE_FALLBACKS,
+        )
+        from data.qa_libraries import QA as _QA
+        IMAGES_SUBFOLDER = _SUB
+        PLACES = LIBRARIES
+        IMAGE_DOWNLOADS = LIBRARY_IMAGE_DOWNLOADS
+        IMAGE_FALLBACKS = LIBRARY_IMAGE_FALLBACKS
+        QA = _QA
+        BANNED = frozenset()
+        HTML_NAME = "libraries_guide.html"
+        PDF_NAME = "libraries_guide.pdf"
+        INTRO_TITLE = "Библиотеки Москвы"
+        INTRO_SUBTITLE = "5 знаменитых библиотек"
+    elif guide == "railway_stations":
+        from data.railway_stations import (
+            RAILWAY_STATIONS,
+            IMAGES_SUBFOLDER as _SUB,
+        )
+        from data.railway_station_image_urls import (
+            RAILWAY_STATION_IMAGE_DOWNLOADS,
+            RAILWAY_STATION_IMAGE_FALLBACKS,
+        )
+        from data.qa_railway_stations import QA as _QA
+        IMAGES_SUBFOLDER = _SUB
+        PLACES = RAILWAY_STATIONS
+        IMAGE_DOWNLOADS = RAILWAY_STATION_IMAGE_DOWNLOADS
+        IMAGE_FALLBACKS = RAILWAY_STATION_IMAGE_FALLBACKS
+        QA = _QA
+        BANNED = frozenset()
+        HTML_NAME = "railway_stations_guide.html"
+        PDF_NAME = "railway_stations_guide.pdf"
+        INTRO_TITLE = "Вокзалы Москвы"
+        INTRO_SUBTITLE = "9 главных вокзалов"
+    elif guide == "cemeteries":
+        from data.cemeteries import CEMETERIES, IMAGES_SUBFOLDER as _SUB
+        from data.cemetery_image_urls import (
+            CEMETERY_IMAGE_DOWNLOADS,
+            CEMETERY_IMAGE_FALLBACKS,
+        )
+        from data.qa_cemeteries import QA as _QA
+        IMAGES_SUBFOLDER = _SUB
+        PLACES = CEMETERIES
+        IMAGE_DOWNLOADS = CEMETERY_IMAGE_DOWNLOADS
+        IMAGE_FALLBACKS = CEMETERY_IMAGE_FALLBACKS
+        QA = _QA
+        BANNED = frozenset()
+        HTML_NAME = "cemeteries_guide.html"
+        PDF_NAME = "cemeteries_guide.pdf"
+        INTRO_TITLE = "Некрополи Москвы"
+        INTRO_SUBTITLE = "7 знаменитых некрополей и кладбищ"
+    elif guide == "landmarks":
+        from data.landmarks import LANDMARKS, IMAGES_SUBFOLDER as _SUB
+        from data.landmarks_image_urls import (
+            LANDMARK_IMAGE_DOWNLOADS,
+            LANDMARK_IMAGE_FALLBACKS,
+        )
+        from data.qa_landmarks import QA as _QA
+        IMAGES_SUBFOLDER = _SUB
+        PLACES = LANDMARKS
+        IMAGE_DOWNLOADS = LANDMARK_IMAGE_DOWNLOADS
+        IMAGE_FALLBACKS = LANDMARK_IMAGE_FALLBACKS
+        QA = _QA
+        BANNED = frozenset()
+        HTML_NAME = "landmarks_guide.html"
+        PDF_NAME = "landmarks_guide.pdf"
+        INTRO_TITLE = "Iconic landmarks Москвы"
+        INTRO_SUBTITLE = "10 символов города: Москва-Сити, Лужники, Василий Блаженный"
+    elif guide == "cafes":
+        from data.cafes import CAFES, IMAGES_SUBFOLDER as _SUB
+        from data.cafe_image_urls import (
+            CAFE_IMAGE_DOWNLOADS,
+            CAFE_IMAGE_FALLBACKS,
+        )
+        from data.qa_cafes import QA as _QA
+        IMAGES_SUBFOLDER = _SUB
+        PLACES = CAFES
+        IMAGE_DOWNLOADS = CAFE_IMAGE_DOWNLOADS
+        IMAGE_FALLBACKS = CAFE_IMAGE_FALLBACKS
+        QA = _QA
+        BANNED = frozenset()
+        HTML_NAME = "cafes_guide.html"
+        PDF_NAME = "cafes_guide.pdf"
+        INTRO_TITLE = "Исторические кафе Москвы"
+        INTRO_SUBTITLE = "6 легендарных кафе и ресторанов"
     else:
         from data.monasteries import MONASTERIES, IMAGES_SUBFOLDER as _SUB
         from data.image_urls import IMAGE_DOWNLOADS as _DL, IMAGE_FALLBACKS as _FB
@@ -253,6 +450,7 @@ def download_images(
     build_with_available: bool = False,
     use_ai_identify: bool = False,
     force_overwrite: bool = False,
+    stats_out: Optional[dict] = None,
 ) -> None:
     """
     Скачивает фотографии в output/images/<IMAGES_SUBFOLDER>/ с проверкой
@@ -269,7 +467,7 @@ def download_images(
 
     print("Downloading images with duplicate checking...")
     images_root = output_dir / "images"
-    results = download_images_with_dedup(
+    results, stats = download_images_with_dedup(
         images_dir=images_dir,
         image_downloads=IMAGE_DOWNLOADS,
         image_fallbacks=IMAGE_FALLBACKS,
@@ -281,6 +479,9 @@ def download_images(
         guide_name=guide_name,
         force_overwrite=force_overwrite,
     )
+    if stats_out is not None:
+        for k, v in stats.items():
+            stats_out[k] = stats_out.get(k, 0) + v
 
     print("\nValidating image format (4 distinct per item)...")
     is_valid, errors = validate_item_images_format(
@@ -343,15 +544,17 @@ def check_duplicate_images(images_dir: Path) -> list[tuple[str, list[str]]]:
 def _unique_images_for_place(
     image_rels: list[str], output_dir: Path,
 ) -> list[str]:
-    """Возвращает до IMAGES_PER_PLACE уникальных путей (разный контент)."""
+    """Возвращает до IMAGES_PER_PLACE уникальных путей (разный контент).
+    Skip only by hash: if file hash matches forbidden/ folder, exclude."""
+    from scripts.download_with_dedup import _load_forbidden_hashes
+    forbidden_hashes = _load_forbidden_hashes(
+        output_dir / "images" / IMAGES_SUBFOLDER,
+    )
     seen_hashes: set[str] = set()
     result: list[str] = []
     for img_rel in image_rels:
         if len(result) >= IMAGES_PER_PLACE:
             break
-        basename = img_rel.split("/")[-1] if "/" in img_rel else img_rel
-        if basename in BANNED:
-            continue
         path = output_dir / img_rel
         if not path.exists() or not path.is_file():
             continue
@@ -359,6 +562,8 @@ def _unique_images_for_place(
             continue
         h = _file_hash(path)
         if not h or h in seen_hashes:
+            continue
+        if h in forbidden_hashes:
             continue
         seen_hashes.add(h)
         result.append(img_rel)
@@ -370,10 +575,11 @@ def get_used_image_basenames(output_dir: Path) -> set[str]:
     used: set[str] = set()
     for place in PLACES:
         rels = _unique_images_for_place(place["images"], output_dir)
+        if len(rels) < MIN_IMAGES_TO_BUILD:
+            continue
         for r in rels:
             basename = r.split("/")[-1] if "/" in r else r
-            if basename not in BANNED:
-                used.add(basename)
+            used.add(basename)
     return used
 
 
@@ -583,8 +789,13 @@ def build_html(output_dir: Path) -> str:
         intro_subtitle=_title_html(INTRO_SUBTITLE),
     )
     sections = [intro]
-    for i, m in enumerate(PLACES, 1):
-        sections.append(_section_place(i, m, output_dir))
+    placed = []
+    for m in PLACES:
+        rels = _unique_images_for_place(m["images"], output_dir)
+        if len(rels) >= MIN_IMAGES_TO_BUILD:
+            placed.append(m)
+    for num, m in enumerate(placed, 1):
+        sections.append(_section_place(num, m, output_dir))
     sections.append(_section_qa())
 
     return """<!DOCTYPE html>
@@ -763,7 +974,27 @@ def _strip_pdf_metadata(pdf_path: Path) -> None:
         print("  Strip metadata: {}.".format(e), file=sys.stderr)
 
 
-def _run_one_guide(args) -> None:
+def _print_download_stats(stats: dict) -> None:
+    """Print running total: downloaded, banned, dups, no URLs, etc."""
+    parts = [str(stats.get("downloaded", 0)) + " downloaded"]
+    for k, label in [
+        ("banned", "banned"), ("moved", "moved"), ("dups", "dups"),
+        ("no_urls", "no URLs"), ("network", "network"), ("timeout", "timeout"),
+        ("forbidden", "forbidden"), ("ai_reject", "AI reject"),
+        ("too_small", "too small"), ("non_image", "non-image"),
+        ("other", "other"),
+    ]:
+        n = stats.get(k, 0)
+        if n > 0:
+            parts.append("{} {}".format(n, label))
+    if len(parts) > 1:
+        print("\n--- Running total ({}): ---".format(
+            __import__("time").strftime("%H:%M:%S"),
+        ))
+        print("  {}".format(", ".join(parts)))
+
+
+def _run_one_guide(args, stats_out: Optional[dict] = None) -> None:
     """Run download, verify, and build for one guide (args.guide)."""
     _load_guide_config(args.guide)
     output_dir = _project_root / "output"
@@ -815,6 +1046,7 @@ def _run_one_guide(args) -> None:
             build_with_available=getattr(args, "build_with_available", False),
             use_ai_identify=getattr(args, "ai_identify", True),
             force_overwrite=getattr(args, "force_overwrite", False),
+            stats_out=stats_out,
         )
     except ValueError as e:
         print("Error: {}".format(e), file=sys.stderr)
@@ -825,7 +1057,9 @@ def _run_one_guide(args) -> None:
                 file=sys.stderr,
             )
         if getattr(args, "all_guides", False):
-            raise
+            raise  # Caller catches and continues to next guide
+        if getattr(args, "download_only", False):
+            return  # With download-only, no PDF to build; exit normally
         sys.exit(1)
 
     print("Checking for any remaining duplicate images...")
@@ -860,9 +1094,12 @@ def _run_one_guide(args) -> None:
             file=sys.stderr,
         )
     print("Written:", html_path)
-    deleted = delete_unused_images(output_dir)
-    if deleted:
-        print("Removed {} unused image(s).".format(deleted))
+    # Do not delete any existing images automatically. We still compute which
+    # images are used for validation, but keep extra files in place so that
+    # the user can move bad ones into the forbidden/ folder manually.
+    # deleted = delete_unused_images(output_dir)
+    # if deleted:
+    #     print("Removed {} unused image(s).".format(deleted))
     errors = validate_output(html_path, output_dir)
     if errors:
         print("Validation:", file=sys.stderr)
@@ -874,10 +1111,22 @@ def _run_one_guide(args) -> None:
 
 def _ensure_utf8_console() -> None:
     """Use UTF-8 for stdout/stderr so Cyrillic prints correctly on Windows."""
-    for stream in (sys.stdout, sys.stderr):
-        if hasattr(stream, "reconfigure"):
+    if sys.platform != "win32":
+        return
+    for name, stream in [("stdout", sys.stdout), ("stderr", sys.stderr)]:
+        reconfigure = getattr(stream, "reconfigure", None)
+        if reconfigure is not None:
             try:
-                stream.reconfigure(encoding="utf-8")
+                reconfigure(encoding="utf-8")
+                continue
+            except (AttributeError, OSError):
+                pass
+        if hasattr(stream, "buffer"):
+            try:
+                wrapper = io.TextIOWrapper(
+                    stream.buffer, encoding="utf-8", errors="replace",
+                )
+                setattr(sys, name, wrapper)
             except (AttributeError, OSError):
                 pass
 
@@ -896,11 +1145,14 @@ def main() -> None:
         "--guide",
         choices=[
             "monasteries", "places_of_worship", "parks", "museums", "palaces",
-            "buildings", "sculptures", "places", "metro",
+            "buildings", "sculptures", "places", "squares", "metro",
+            "theaters", "viewpoints", "bridges", "markets",
+            "libraries", "railway_stations",
         ],
         default="monasteries",
-        help="Guide: monasteries(20), places_of_worship(66), parks(21), museums(27), "
-             "palaces(24), buildings(50), sculptures(61), places(46), metro(37)",
+        help="Guide: monasteries, places_of_worship, parks, museums, palaces, "
+             "buildings, sculptures, places, squares, metro, theaters, viewpoints, "
+             "bridges, markets, libraries, railway_stations",
     )
     parser.add_argument(
         "--download-only",
@@ -939,36 +1191,81 @@ def main() -> None:
         default=1,
         metavar="N",
         help="With --all-guides: try downloading missing images N times before "
-             "building (default 1). Use 5+ to fill gaps over several rounds.",
+             "building (default 2).",
     )
     args = parser.parse_args()
     args.ai_identify = not getattr(args, "no_ai_identify", False)
 
     BUILD_GUIDES = [
         "monasteries", "places_of_worship", "parks", "museums", "palaces",
-        "buildings", "sculptures", "places", "metro",
+        "buildings", "sculptures", "places", "squares", "metro", "theaters",
+        "viewpoints", "bridges", "markets", "libraries", "railway_stations",
+        "cemeteries", "landmarks", "cafes",
     ]
 
     if getattr(args, "all_guides", False):
+        # For --all-guides: if the user did not explicitly pass
+        # --download-retries, default to 2 rounds.
+        argv = sys.argv[1:]
+        user_set_retries = any(
+            a == "--download-retries" or a.startswith("--download-retries=")
+            for a in argv
+        )
+        if not user_set_retries:
+            args.download_retries = 2
+        # For --all-guides: process each guide sequentially. For every guide,
+        # run all download rounds (to try to get 4 images per item) before
+        # moving on to the next guide.
         args.build_with_available = True
         retries = max(1, getattr(args, "download_retries", 1))
         user_download_only = getattr(args, "download_only", False)
-        for round_one in range(1, retries + 1):
+
+        cumulative_stats = {
+            "downloaded": 0, "banned": 0, "moved": 0, "dups": 0,
+            "no_urls": 0, "network": 0, "timeout": 0, "forbidden": 0,
+            "ai_reject": 0, "too_small": 0, "non_image": 0, "other": 0,
+        }
+        stats_done = threading.Event()
+
+        def _stats_timer() -> None:
+            while not stats_done.wait(timeout=300):
+                _print_download_stats(cumulative_stats)
+
+        timer = threading.Thread(target=_stats_timer, daemon=True)
+        timer.start()
+
+        for g in BUILD_GUIDES:
+            args.guide = g
             if retries > 1:
-                print("\n--- Download round {}/{} ---".format(round_one, retries))
-            for g in BUILD_GUIDES:
-                args.guide = g
-                if round_one < retries:
-                    args.download_only = True
-                else:
-                    args.download_only = user_download_only
+                print("\n=== Guide: {} (download rounds: {}) ===".format(g, retries))
+
+            # First N-1 rounds: download-only (no build), to fill missing slots.
+            for round_one in range(1, retries):
+                args.download_only = True
                 print("\n" + "=" * 60)
-                print("Guide: {}".format(g))
+                print("Guide: {} — download round {}/{}".format(g, round_one, retries))
                 print("=" * 60)
                 try:
-                    _run_one_guide(args)
+                    _run_one_guide(args, stats_out=cumulative_stats)
                 except ValueError as e:
                     print("  Skipped: {}".format(e), file=sys.stderr)
+
+            # Final round: obey user's --download-only flag (default False),
+            # so by default we download then build this guide before the next.
+            args.download_only = user_download_only
+            print("\n" + "=" * 60)
+            print("Guide: {} — final round".format(g))
+            print("=" * 60)
+            try:
+                _run_one_guide(args, stats_out=cumulative_stats)
+            except ValueError as e:
+                print("  Skipped: {}".format(e), file=sys.stderr)
+
+        stats_done.set()
+        print("\n" + "=" * 60)
+        print("Process finished. Final stats:")
+        _print_download_stats(cumulative_stats)
+        print("=" * 60)
         return
 
     _run_one_guide(args)

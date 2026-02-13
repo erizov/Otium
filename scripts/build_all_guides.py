@@ -23,7 +23,17 @@ GUIDES = [
     "buildings",
     "sculptures",
     "places",
+    "squares",
     "metro",
+    "theaters",
+    "viewpoints",
+    "bridges",
+    "markets",
+    "libraries",
+    "railway_stations",
+    "cemeteries",
+    "landmarks",
+    "cafes",
 ]
 
 
@@ -35,13 +45,14 @@ def main() -> int:
         print("Error: build_pdf.py not found.", file=sys.stderr)
         return 1
 
+    use_available = "--build-with-available" in sys.argv
     failed: list[str] = []
     for guide in GUIDES:
         print("\n--- Building guide: {} ---".format(guide))
-        ret = subprocess.call(
-            [python, str(build_script), "--guide", guide],
-            cwd=str(_PROJECT_ROOT),
-        )
+        cmd = [python, str(build_script), "--guide", guide]
+        if use_available:
+            cmd.append("--build-with-available")
+        ret = subprocess.call(cmd, cwd=str(_PROJECT_ROOT))
         if ret != 0:
             failed.append(guide)
 
