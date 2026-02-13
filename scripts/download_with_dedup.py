@@ -23,6 +23,11 @@ import urllib.error
 from pathlib import Path
 from typing import Callable, Optional, Tuple
 
+from scripts.core import ensure_utf8_console, load_env, project_root
+
+ensure_utf8_console()
+load_env()
+
 logger = logging.getLogger(__name__)
 if not logger.handlers:
     h = logging.StreamHandler(sys.stderr)
@@ -42,47 +47,9 @@ FAIL_BANNED = "banned"
 FAIL_MOVED = "moved to forbidden"
 FAIL_EXISTING_DUP = "existing duplicate of {}"  # .format(dup_basename)
 
-_PROJECT_ROOT = Path(__file__).resolve().parent.parent
+_PROJECT_ROOT = project_root()
 if str(_PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(_PROJECT_ROOT))
-
-
-def _ensure_utf8_output() -> None:
-    """Ensure stdout/stderr can print Cyrillic on Windows."""
-    import io
-    if sys.platform != "win32":
-        return
-    for name, stream in [("stdout", sys.stdout), ("stderr", sys.stderr)]:
-        reconfigure = getattr(stream, "reconfigure", None)
-        if reconfigure is not None:
-            try:
-                reconfigure(encoding="utf-8")
-                continue
-            except (AttributeError, OSError):
-                pass
-        if hasattr(stream, "buffer"):
-            try:
-                wrapper = io.TextIOWrapper(
-                    stream.buffer, encoding="utf-8", errors="replace",
-                )
-                setattr(sys, name, wrapper)
-            except (AttributeError, OSError):
-                pass
-
-
-_ensure_utf8_output()
-
-# Load .env so PIXABAY_API_KEY, PEXELS_API_KEY, FLICKR_API_KEY,
-# UNSPLASH_ACCESS_KEY etc. are available
-def _load_env() -> None:
-    try:
-        from dotenv import load_dotenv
-        load_dotenv(_PROJECT_ROOT / ".env")
-    except ImportError:
-        pass
-
-
-_load_env()
 
 from scripts.image_utils import (
     image_content_hash,
@@ -1245,7 +1212,6 @@ def download_images_with_dedup(
         Tuple of (results, stats): results is {item_name: count}, stats is
         {downloaded, banned, dups, no_urls, network, timeout, ...}.
     """
-    _load_env()
     images_dir.mkdir(parents=True, exist_ok=True)
     forbidden_dir = images_dir / FORBIDDEN_SUBDIR_NAME
     forbidden_dir.mkdir(parents=True, exist_ok=True)
@@ -1501,7 +1467,6 @@ def download_images_with_dedup(
                         print("  Skipped {} (no URLs, cached)".format(basename))
                         continue
                 else:
-                    _load_env()
                     from scripts.translate_place_name import get_search_names
                     name_en_data = item.get("name_en", "").strip() or None
                     if name_en_data and name_en_data != item_name:

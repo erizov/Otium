@@ -46,6 +46,7 @@ BANNED_IMAGE_BASENAMES = frozenset([
 
 
 GUIDE_EXPECTED_COUNTS: dict[str, int] = {
+    "test_e2e": 5,
     "monasteries": 20,
     "places_of_worship": 66,
     "parks": 28,
@@ -384,6 +385,23 @@ def _load_guide_config(guide: str) -> None:
         PDF_NAME = "cafes_guide.pdf"
         INTRO_TITLE = "Исторические кафе Москвы"
         INTRO_SUBTITLE = "6 легендарных кафе и ресторанов"
+    elif guide == "test_e2e":
+        from data.test_e2e_guide import TEST_E2E_PLACES, IMAGES_SUBFOLDER as _SUB
+        from data.test_e2e_image_urls import (
+            TEST_E2E_IMAGE_DOWNLOADS,
+            TEST_E2E_IMAGE_FALLBACKS,
+        )
+        from data.qa_test_e2e import QA as _QA
+        IMAGES_SUBFOLDER = _SUB
+        PLACES = TEST_E2E_PLACES
+        IMAGE_DOWNLOADS = TEST_E2E_IMAGE_DOWNLOADS
+        IMAGE_FALLBACKS = TEST_E2E_IMAGE_FALLBACKS
+        QA = _QA
+        BANNED = frozenset()
+        HTML_NAME = "test_e2e_guide.html"
+        PDF_NAME = "test_e2e_guide.pdf"
+        INTRO_TITLE = "E2E Test Guide"
+        INTRO_SUBTITLE = "5 test places"
     else:
         from data.monasteries import MONASTERIES, IMAGES_SUBFOLDER as _SUB
         from data.image_urls import IMAGE_DOWNLOADS as _DL, IMAGE_FALLBACKS as _FB
@@ -997,7 +1015,11 @@ def _print_download_stats(stats: dict) -> None:
 def _run_one_guide(args, stats_out: Optional[dict] = None) -> None:
     """Run download, verify, and build for one guide (args.guide)."""
     _load_guide_config(args.guide)
-    output_dir = _project_root / "output"
+    output_dir = (
+        Path(args.output_dir)
+        if getattr(args, "output_dir", None)
+        else _project_root / "output"
+    )
     output_dir.mkdir(exist_ok=True)
     images_subdir = ensure_images_subdir(output_dir)
     print("Images subdir: {}".format(images_subdir))
@@ -1147,12 +1169,18 @@ def main() -> None:
             "monasteries", "places_of_worship", "parks", "museums", "palaces",
             "buildings", "sculptures", "places", "squares", "metro",
             "theaters", "viewpoints", "bridges", "markets",
-            "libraries", "railway_stations",
+            "libraries", "railway_stations", "cemeteries", "landmarks", "cafes",
+            "test_e2e",
         ],
         default="monasteries",
-        help="Guide: monasteries, places_of_worship, parks, museums, palaces, "
-             "buildings, sculptures, places, squares, metro, theaters, viewpoints, "
-             "bridges, markets, libraries, railway_stations",
+        help="Guide name (test_e2e for E2E tests).",
+    )
+    parser.add_argument(
+        "--output-dir",
+        type=str,
+        default=None,
+        metavar="DIR",
+        help="Output directory (default: output/).",
     )
     parser.add_argument(
         "--download-only",
