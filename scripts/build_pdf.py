@@ -52,20 +52,20 @@ GUIDE_EXPECTED_COUNTS: dict[str, int] = {
     "parks": 28,
     "museums": 32,
     "palaces": 24,
-    "buildings": 47,
+    "buildings": 42,
     "sculptures": 61,
-    "places": 37,
+    "places": 30,
     "metro": 37,
-    "theaters": 12,
+    "theaters": 14,
     "viewpoints": 14,
     "bridges": 12,
     "squares": 12,
-    "markets": 9,
-    "libraries": 5,
+    "markets": 8,
+    "libraries": 7,
     "railway_stations": 9,
-    "cemeteries": 7,
-    "landmarks": 8,
-    "cafes": 6,
+    "cemeteries": 9,
+    "landmarks": 14,
+    "cafes": 11,
 }
 
 
@@ -621,7 +621,7 @@ def delete_unused_images(output_dir: Path) -> int:
 
 
 def _section_place(
-    number: int, m: dict, output_dir: Path
+    number: int, m: dict, output_dir: Path, story: str | None = None,
 ) -> str:
     """HTML-блок для одного места (монастырь или храм): фото + карта."""
     name = _title_html(m["name"])
@@ -637,18 +637,28 @@ def _section_place(
     facts_html = "".join("<li>{}</li>".format(_escape(f)) for f in m["facts"])
 
     unique_rels = _unique_images_for_place(m["images"], output_dir)
-    imgs_html_parts = [
-        '<img src="{}" alt="" class="monastery-img" />'.format(
-            img_rel.replace("\\", "/")
+    # No placeholders: if no images, output nothing for images block
+    if not unique_rels:
+        images_block = ""
+    else:
+        imgs_html_parts = [
+            '<img src="{}" alt="" class="monastery-img" />'.format(
+                img_rel.replace("\\", "/")
+            )
+            for img_rel in unique_rels
+        ]
+        imgs_html = "\n".join(imgs_html_parts)
+        images_block = "  <div class=\"images-row\">\n    {}\n  </div>".format(
+            imgs_html,
         )
-        for img_rel in unique_rels
-    ]
-    imgs_html = "\n".join(imgs_html_parts) if imgs_html_parts else ""
-    images_block = (
-        "  <div class=\"images-row\">\n    {}\n  </div>".format(imgs_html)
-        if imgs_html else ""
-    )
     title_class = "monastery-title"
+
+    story_block = ""
+    if story and story.strip():
+        story_block = (
+            '  <p class="block-label">Заметка</p>\n'
+            '  <p class="body-text story-text">{}</p>\n'
+        ).format(_escape(story.strip()))
 
     return """
 <section class="monastery" id="monastery-{num}" tabindex="-1">
@@ -662,6 +672,7 @@ def _section_place(
   <ul>{highlights_html}</ul>
   <p class="block-label">Факты</p>
   <ul>{facts_html}</ul>
+{story_block}
   <div class="visual-block">
 {images_block}
   <div class="map-block">
@@ -681,6 +692,7 @@ def _section_place(
         significance=significance,
         highlights_html=highlights_html,
         facts_html=facts_html,
+        story_block=story_block,
     )
 
 
@@ -706,8 +718,8 @@ def _section_qa() -> str:
     )
 
 
-def build_html(output_dir: Path) -> str:
-    """Собирает полный HTML (~1 страница на монастырь)."""
+def build_html(output_dir: Path, guide_name: str | None = None) -> str:
+    """Собирает полный HTML (~1 страница на место). guide_name для подгрузки историй."""
     # Single braces: CSS is inserted as-is into HTML (no .format on this string)
     css = """
       @page { size: A4; margin: 2cm 1.5cm 1.5cm 1.8cm; }
@@ -736,6 +748,7 @@ def build_html(output_dir: Path) -> str:
                      font-weight: 600; color: #6b7b8a !important; }
       .body-text { margin: 0 0 0.4em 0.3em; text-align: left; max-width: 42em;
                    color: #1c1b19; font-family: "Source Serif 4", Georgia, serif; }
+      .story-text { font-style: italic; color: #4a5568; }
       ul, li, p { color: #1c1b19; font-family: "Source Serif 4", Georgia, serif; }
       .intro-block { page-break-after: always; padding: 2.5em 1em 0 1.2em;
                      background-color: #faf8f5; }
@@ -806,14 +819,20 @@ def build_html(output_dir: Path) -> str:
         intro_title=_title_html(INTRO_TITLE),
         intro_subtitle=_title_html(INTRO_SUBTITLE),
     )
+    stories: dict[str, str] = {}
+    if guide_name:
+        try:
+            from scripts.guide_loader import load_stories
+            stories = load_stories(guide_name)
+        except Exception:
+            pass
     sections = [intro]
     placed = []
     for m in PLACES:
-        rels = _unique_images_for_place(m["images"], output_dir)
-        if len(rels) >= MIN_IMAGES_TO_BUILD:
-            placed.append(m)
+        placed.append(m)
     for num, m in enumerate(placed, 1):
-        sections.append(_section_place(num, m, output_dir))
+        story = stories.get(m.get("name") or "")
+        sections.append(_section_place(num, m, output_dir, story=story))
     sections.append(_section_qa())
 
     return """<!DOCTYPE html>
@@ -1057,40 +1076,41 @@ def _run_one_guide(args, stats_out: Optional[dict] = None) -> None:
             print("  No duplicate images by content.")
         return
 
-    if not getattr(args, "verify_images", False):
-        print("Downloading images with duplicate checking...")
-    else:
-        print("Downloading/verifying images (existing slots verified only)...")
-    try:
-        download_images(
-            output_dir,
-            guide_name=args.guide,
-            build_with_available=getattr(args, "build_with_available", False),
-            use_ai_identify=getattr(args, "ai_identify", True),
-            force_overwrite=getattr(args, "force_overwrite", False),
-            stats_out=stats_out,
-        )
-    except ValueError as e:
-        print("Error: {}".format(e), file=sys.stderr)
-        if not getattr(args, "build_with_available", False):
-            print(
-                "Cannot proceed to PDF generation: not all items have 4 distinct "
-                "images. Use --build-with-available to build with current images.",
-                file=sys.stderr,
+    if not getattr(args, "build_only", False):
+        if not getattr(args, "verify_images", False):
+            print("Downloading images with duplicate checking...")
+        else:
+            print("Downloading/verifying images (existing slots verified only)...")
+        try:
+            download_images(
+                output_dir,
+                guide_name=args.guide,
+                build_with_available=getattr(args, "build_with_available", False),
+                use_ai_identify=getattr(args, "ai_identify", True),
+                force_overwrite=getattr(args, "force_overwrite", False),
+                stats_out=stats_out,
             )
-        if getattr(args, "all_guides", False):
-            raise  # Caller catches and continues to next guide
-        if getattr(args, "download_only", False):
-            return  # With download-only, no PDF to build; exit normally
-        sys.exit(1)
+        except ValueError as e:
+            print("Error: {}".format(e), file=sys.stderr)
+            if not getattr(args, "build_with_available", False):
+                print(
+                    "Cannot proceed to PDF generation: not all items have 4 distinct "
+                    "images. Use --build-with-available to build with current images.",
+                    file=sys.stderr,
+                )
+            if getattr(args, "all_guides", False):
+                raise  # Caller catches and continues to next guide
+            if getattr(args, "download_only", False):
+                return  # With download-only, no PDF to build; exit normally
+            sys.exit(1)
 
-    print("Checking for any remaining duplicate images...")
-    duplicates = check_duplicate_images(images_subdir)
-    if duplicates:
-        for h, files in duplicates:
-            print("  Duplicate ({}): {}".format(h[:12], ", ".join(files)))
-    else:
-        print("  No duplicate images by content.")
+        print("Checking for any remaining duplicate images...")
+        duplicates = check_duplicate_images(images_subdir)
+        if duplicates:
+            for h, files in duplicates:
+                print("  Duplicate ({}): {}".format(h[:12], ", ".join(files)))
+        else:
+            print("  No duplicate images by content.")
 
     print("Validating Yandex map URLs...")
     map_errors = validate_yandex_maps()
@@ -1105,7 +1125,7 @@ def _run_one_guide(args, stats_out: Optional[dict] = None) -> None:
 
     html_path = output_dir / HTML_NAME
     pdf_path = output_dir / PDF_NAME
-    html_content = build_html(output_dir)
+    html_content = build_html(output_dir, guide_name=args.guide)
     html_path.write_text(html_content, encoding="utf-8")
     if _pdf_via_playwright(html_path, pdf_path):
         _strip_pdf_metadata(pdf_path)
@@ -1188,6 +1208,11 @@ def main() -> None:
         help="Only download images and validate maps; do not write HTML/PDF.",
     )
     parser.add_argument(
+        "--build-only",
+        action="store_true",
+        help="Skip image download; only generate HTML/PDF from existing images.",
+    )
+    parser.add_argument(
         "--build-with-available",
         action="store_true",
         help="Generate PDF/HTML from currently available images (allow < 4 per item).",
@@ -1232,8 +1257,24 @@ def main() -> None:
     ]
 
     if getattr(args, "all_guides", False):
-        # For --all-guides: if the user did not explicitly pass
-        # --download-retries, default to 2 rounds.
+        args.build_with_available = True
+        user_build_only = getattr(args, "build_only", False)
+
+        if user_build_only:
+            # Build only: one pass per guide, no download rounds.
+            for g in BUILD_GUIDES:
+                args.guide = g
+                print("\n" + "=" * 60)
+                print("Guide: {} (build only)".format(g))
+                print("=" * 60)
+                try:
+                    _run_one_guide(args)
+                except ValueError as e:
+                    print("  Skipped: {}".format(e), file=sys.stderr)
+            print("\nAll guides built.")
+            return
+
+        # For --all-guides with download: default to 2 rounds.
         argv = sys.argv[1:]
         user_set_retries = any(
             a == "--download-retries" or a.startswith("--download-retries=")
@@ -1241,10 +1282,6 @@ def main() -> None:
         )
         if not user_set_retries:
             args.download_retries = 2
-        # For --all-guides: process each guide sequentially. For every guide,
-        # run all download rounds (to try to get 4 images per item) before
-        # moving on to the next guide.
-        args.build_with_available = True
         retries = max(1, getattr(args, "download_retries", 1))
         user_download_only = getattr(args, "download_only", False)
 
@@ -1267,7 +1304,6 @@ def main() -> None:
             if retries > 1:
                 print("\n=== Guide: {} (download rounds: {}) ===".format(g, retries))
 
-            # First N-1 rounds: download-only (no build), to fill missing slots.
             for round_one in range(1, retries):
                 args.download_only = True
                 print("\n" + "=" * 60)
@@ -1278,8 +1314,6 @@ def main() -> None:
                 except ValueError as e:
                     print("  Skipped: {}".format(e), file=sys.stderr)
 
-            # Final round: obey user's --download-only flag (default False),
-            # so by default we download then build this guide before the next.
             args.download_only = user_download_only
             print("\n" + "=" * 60)
             print("Guide: {} — final round".format(g))
