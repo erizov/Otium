@@ -105,8 +105,15 @@ OTIUM_CONTACT = {
 }
 
 _COMBINED_CSS = """
-  @page { size: A4; margin: 2cm 1.5cm 1.5cm 1.8cm; }
+  @page { size: A4; margin: 1.25cm; margin-bottom: 1.5cm; }
   *, html, body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page-footer { display: none; }
+  @media print {
+    .page-footer { display: block; position: fixed; bottom: 0; left: 0; right: 0;
+      text-align: center; font-size: 8pt; color: #6b635b;
+      font-family: Inter, sans-serif; padding: 0.25em 0; }
+    .page-footer::after { content: " · " counter(page) " / " counter(pages); }
+  }
   html { background-color: #faf8f5; }
   html, body { margin: 0; padding: 0; font-family: "Source Serif 4",
     Georgia, "Times New Roman", serif; font-size: 10pt; line-height: 1.45;
@@ -115,19 +122,21 @@ _COMBINED_CSS = """
   h1 { font-family: "Source Serif 4", Georgia, serif; font-size: 18pt;
        text-align: center; margin: 0 0 0.5em; color: #1c1b19 !important; }
   h2 { font-family: "Source Serif 4", Georgia, serif; color: #1c1b19 !important; }
-  h2.monastery-title { font-family: Pochaevsk, Georgia, serif; font-size: 17pt;
-    margin: 1.2em 0 0.4em 0.3em; border-bottom: 1px solid #8b7355;
-    padding-bottom: 0.25em; color: #2c2a28 !important; }
+  h2.monastery-title { font-family: Pochaevsk, Georgia, serif; font-size: 14pt;
+    margin: 0.5em 0 0.2em 0.2em; border-bottom: 1px solid #8b7355;
+    padding-bottom: 0.15em; color: #2c2a28 !important; }
   h2.chapter-title { font-family: Pochaevsk, Georgia, serif; font-size: 16pt;
     margin: 1.5em 0 0.4em 0; color: #2c2a28 !important;
     page-break-after: avoid; }
-  .meta, .block-label { font-family: Inter, sans-serif; font-size: 8.5pt; }
-  .meta { margin: 0.2em 0 0.6em 0.3em; color: #6b635b !important; }
+  .meta, .block-label { font-family: Inter, sans-serif; font-size: 8pt; }
+  .meta { margin: 0.1em 0 0.35em 0.2em; color: #6b635b !important; }
   .block-label { margin: 0.6em 0 0.15em 0.3em; text-transform: uppercase;
     font-weight: 600; color: #6b7b8a !important; }
-  .body-text { margin: 0 0 0.4em 0.3em; text-align: left; max-width: 42em;
-    color: #1c1b19; font-family: "Source Serif 4", Georgia, serif; }
-  .story-text { font-style: italic; color: #4a5568; }
+  .body-text { margin: 0 0 0.25em 0.2em; font-size: 9pt; line-height: 1.4;
+    text-align: left; max-width: 42em; color: #1c1b19;
+    font-family: "Source Serif 4", Georgia, serif; }
+  .story-text { font-style: italic; color: #4a5568; font-size: 9pt;
+    margin: 0 0 0.25em 0.2em; line-height: 1.4; }
   ul, li, p { color: #1c1b19; font-family: "Source Serif 4", Georgia, serif; }
   .front-page { min-height: 100vh; display: flex; flex-direction: column;
     justify-content: center; align-items: center; text-align: center;
@@ -135,11 +144,13 @@ _COMBINED_CSS = """
     background: linear-gradient(165deg, #f8f6f2 0%, #ebe8e2 35%, #e8e4dc 70%,
       #f5f2ec 100%);
     page-break-after: always; box-sizing: border-box; }
-  .front-page .fp-inner { max-width: 28em; padding: 3em 2.5em;
+  .front-page .fp-inner { max-width: 42em; padding: 3em 2.5em;
     border: 1px solid #d4cfc4; border-radius: 4px;
     box-shadow: 0 4px 24px rgba(44, 42, 40, 0.08),
       0 1px 0 rgba(255, 255, 255, 0.6) inset;
     background: rgba(255, 255, 255, 0.75); }
+  .front-page .fp-emblem { width: 4.5em; height: 4.5em; margin: 0 auto 0.6em;
+    display: block; }
   .front-page .fp-logo { font-size: 36pt; font-weight: 600; letter-spacing: 0.32em;
     color: #1c1b19 !important; margin: 0 0 0.2em; }
   .front-page .fp-rule { width: 5em; height: 2px; background: linear-gradient(
@@ -151,9 +162,9 @@ _COMBINED_CSS = """
   .front-page .fp-tagline { font-size: 12.5pt; font-style: italic; color: #6b635b;
     margin-bottom: 0.4em; }
   .front-page .fp-tagline + .fp-rule { margin: 0.4em auto 1.2em; width: 3em; }
-  .front-page .fp-desc { font-size: 10pt; color: #2c2a28; max-width: 24em;
+  .front-page .fp-desc { font-size: 10pt; color: #2c2a28; max-width: 32em;
     margin: 0 auto 1.6em; line-height: 1.6; }
-  .front-page .fp-board { font-size: 9pt; text-align: left; max-width: 24em;
+  .front-page .fp-board { font-size: 9pt; text-align: left; max-width: 38em;
     margin: 0 auto; padding: 1.2em 1.4em;
     background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(248,246,242,0.8));
     border: 1px solid #e0ddd8; border-radius: 3px;
@@ -163,7 +174,8 @@ _COMBINED_CSS = """
     text-align: center; letter-spacing: 0.04em; color: #4a5568;
     padding-bottom: 0.4em; border-bottom: 1px solid #e0ddd8; }
   .front-page .fp-board ul { list-style: none; padding: 0; margin: 0; }
-  .front-page .fp-board li { margin: 0.25em 0; padding-left: 0; }
+  .front-page .fp-board li { margin: 0.25em 0; padding-left: 0;
+    white-space: nowrap; }
   .preface-block, .chapter-intro { padding: 2em 1em 1em 1.2em;
     background-color: #faf8f5; page-break-after: always; }
   .preface-block h1 { margin-bottom: 0.5em; }
@@ -178,9 +190,18 @@ _COMBINED_CSS = """
   .preface-block .contact-block p { margin: 0.25em 0; text-align: left; }
   .preface-block .famous-places { margin: 0.6em 0 0 1.2em; }
   .preface-block .famous-places li { margin: 0.2em 0; }
-  .chapter-intro { page-break-after: avoid; padding-bottom: 0.5em; }
+  .chapter-intro { page-break-after: avoid; padding-bottom: 0.5em;
+    border-left: 3px solid #c9c4b8; padding-left: 1.35em; }
   .chapter-intro .place-list { margin: 0.4em 0 0 1.2em; font-size: 9pt;
     columns: 2; column-gap: 2em; list-style: disc; }
+  .toc-block { padding: 2em 1.5em; background-color: #faf8f5;
+    page-break-after: always; }
+  .toc-block h2 { font-family: "Source Serif 4", Georgia, serif; font-size: 14pt;
+    margin: 0 0 1em; color: #1c1b19 !important; }
+  .toc-block ul { list-style: none; padding: 0; margin: 0; }
+  .toc-block li { margin: 0.35em 0; font-size: 10pt; }
+  .toc-block a { color: #2c2a28; text-decoration: none; }
+  .toc-block a:hover { text-decoration: underline; color: #8b7355; }
   .references-chapter { page-break-before: always; padding: 2.2em 1.8em 2em;
     background-color: #fff; font-family: "Source Serif 4", Georgia, serif;
     font-size: 10pt; line-height: 1.5; color: #1c1b19; }
@@ -192,23 +213,27 @@ _COMBINED_CSS = """
   .references-chapter .ref-body p { margin: 0 0 0.75em; font-size: 10pt;
     line-height: 1.5; text-align: justify; color: #1c1b19; }
   .references-chapter .ref-body p strong { font-weight: 600; color: #2c2a28; }
-  .references-chapter .ref-colophon { margin-top: 2.5em; padding-top: 1.25em;
+  .references-chapter .ref-colophon { margin-top: 3em; padding-top: 1.35em;
     border-top: 1px solid #c9c4b8; font-size: 8.5pt; line-height: 1.5;
     color: #5c5549; text-align: center; max-width: 28em; margin-left: auto;
     margin-right: auto; }
   .references-chapter .ref-colophon p { margin: 0.35em 0; font-size: inherit;
     line-height: inherit; text-align: center; }
   .references-chapter .ref-colophon .ref-year { font-weight: 500; color: #2c2a28; }
-  .monastery { display: block; page-break-before: always; padding: 1.5em 0 0; }
+  .monastery { display: block; page-break-before: always; padding: 0.5em 0 0; }
   .monastery:first-of-type { page-break-before: auto; }
-  .visual-block { margin: 0.8em 0 0; page-break-after: always; }
-  .images-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2em;
-    margin: 1.2em; max-width: 100%; }
-  .monastery-img { width: 100%; height: auto; max-height: 220px;
+  .visual-block { margin: 0.45em 0 0; page-break-after: always; }
+  .images-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6em;
+    margin: 0.5em; max-width: 100%; }
+  .monastery-img { width: 100%; height: auto; max-height: 155px;
     object-fit: contain; display: block; margin: 0 auto;
     border: 1px solid #e0ddd8; box-sizing: border-box; }
-  .map-block { margin: 1em; }
-  .map-img { max-width: 100%; height: auto; max-height: 160px;
+  .images-caption { font-size: 8pt; color: #6b635b; margin: 0.25em 0.5em 0;
+    font-family: Inter, sans-serif; }
+  .map-block { margin: 0.5em; }
+  .map-caption { font-size: 8pt; color: #6b635b; margin: 0.25em 0 0;
+    font-family: Inter, sans-serif; }
+  .map-img { max-width: 100%; height: auto; max-height: 115px;
     border: 1px solid #e0ddd8; }
   @media print {
     html, body { color: #1c1b19 !important; background: #faf8f5 !important; }
@@ -221,6 +246,8 @@ _COMBINED_CSS = """
     border-radius: 4px; cursor: pointer; }
   .edit-toolbar button:hover { background: #4a5568; }
   .img-wrap { position: relative; display: block; width: 100%; }
+  .img-wrap.img-dragging { opacity: 0.6; }
+  .img-wrap.img-drop-target { outline: 2px dashed #8b7355; outline-offset: 2px; }
   .img-del { position: absolute; top: 4px; right: 4px; width: 22px; height: 22px;
     font-size: 16px; line-height: 20px; text-align: center; background: rgba(0,0,0,.6);
     color: #fff; border: none; border-radius: 3px; cursor: pointer; }
@@ -230,7 +257,9 @@ _COMBINED_CSS = """
     border: 1px solid #8b7355; border-radius: 3px; cursor: pointer; }
   .add-img-btn:hover { background: #d0cdc8; }
   .add-img-btn.hidden { display: none; }
-  @media print { .edit-toolbar, .img-del, .add-img-btn { display: none !important; } }
+  .img-count { font-size: 9pt; color: #6b635b; margin-left: 0.25em;
+    font-family: Inter, sans-serif; }
+  @media print { .edit-toolbar, .img-del, .add-img-btn, .img-count { display: none !important; } }
 """
 
 # Front page: title, subtitle, tagline, short description
@@ -239,6 +268,20 @@ FRONT_PAGE_SUBTITLE = "Institute of Narrative Geography"
 FRONT_PAGE_TAGLINE = "Otium cum dignitate"
 FRONT_PAGE_DESC = (
     "Leisure with dignity — intellectual engagement with place"
+)
+# Emblem: laurel wreath (Latin dignity) + Kremlin tower (Moscow), professional seal
+FRONT_PAGE_EMBLEM_SVG = (
+    '<svg class="fp-emblem" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"'
+    ' role="img">'
+    '<title>OTIUM: emblem — laurel wreath (dignity) and Kremlin tower (Moscow)</title>'
+    '<circle cx="32" cy="32" r="29" fill="none" stroke="#8b7355" stroke-width="1.2"/>'
+    '<circle cx="32" cy="32" r="25" fill="none" stroke="#c9c4b8" stroke-width="0.6"/>'
+    '<path fill="none" stroke="#8b7355" stroke-width="0.8" d="M20 36 Q20 22 32 18 Q44 22 44 36"/>'
+    '<path fill="none" stroke="#8b7355" stroke-width="0.8" d="M20 36 Q32 42 44 36"/>'
+    '<path fill="#2c2a28" d="M29 24 h6 v20 h-6 z"/>'
+    '<path fill="#2c2a28" d="M27 24 L32 18 L37 24 L37 26 L27 26 z"/>'
+    '<circle fill="#8b7355" cx="32" cy="16" r="1.8"/>'
+    '</svg>'
 )
 # Editorial board: literature-inspired names (Russian & English), plausible
 EDITORIAL_BOARD = [
@@ -282,6 +325,7 @@ REFERENCES_BODY = """
 <div class="ref-colophon">
 <p>© <span class="ref-year">2025</span> OTIUM — Institute of Narrative Geography</p>
 <p>Москва</p>
+<p>Вёрстка: OTIUM. Печать: Москва, 2025.</p>
 <p>Издание для личного использования. Тираж не для продажи.</p>
 </div>
 """
@@ -289,6 +333,14 @@ REFERENCES_BODY = """
 # Chapters per PDF chunk to avoid Chromium string size limit (~536M).
 # Use 2; if still failing, set to 1 (one chapter per chunk).
 CHUNK_CHAPTERS = 2
+
+# Footer for chunk PDFs: Playwright replaces pageNumber and totalPages.
+PDF_FOOTER_TEMPLATE = (
+    '<div style="font-size:9px;color:#6b635b;width:100%;text-align:center;'
+    'font-family:Inter,sans-serif">'
+    '<span class="pageNumber"></span> / <span class="totalPages"></span>'
+    '</div>'
+)
 
 # Script for editable HTML: contenteditable, image delete/upload (max 4 per item), export
 _EDITABLE_SCRIPT = """
@@ -308,6 +360,8 @@ _EDITABLE_SCRIPT = """
         if (img.closest('.img-wrap')) return;
         var wrap = document.createElement('span');
         wrap.className = 'img-wrap';
+        wrap.draggable = true;
+        wrap.title = 'Drag to reorder';
         img.parentNode.insertBefore(wrap, img);
         wrap.appendChild(img);
         var delBtn = document.createElement('button');
@@ -317,14 +371,22 @@ _EDITABLE_SCRIPT = """
         delBtn.title = 'Delete image';
         delBtn.onclick = function(){ wrap.remove(); updateAddBtn(row); };
         wrap.appendChild(delBtn);
+        wrap.ondragstart = function(e){ e.dataTransfer.setData('text/plain',''); e.dataTransfer.effectAllowed = 'move'; window._dragSrc = wrap; wrap.classList.add('img-dragging'); };
+        wrap.ondragend = function(){ wrap.classList.remove('img-dragging'); };
+        wrap.ondragover = function(e){ e.preventDefault(); e.dataTransfer.dropEffect = 'move'; if (e.currentTarget !== window._dragSrc) e.currentTarget.classList.add('img-drop-target'); };
+        wrap.ondragleave = function(e){ e.currentTarget.classList.remove('img-drop-target'); };
+        wrap.ondrop = function(e){ e.preventDefault(); e.currentTarget.classList.remove('img-drop-target'); var src = window._dragSrc; if (src && src !== e.currentTarget) { row.insertBefore(src, e.currentTarget); updateAddBtn(row); } };
       });
       var addBtn = row.querySelector('.add-img-btn');
       if (!addBtn) {
         addBtn = document.createElement('button');
         addBtn.className = 'add-img-btn';
         addBtn.type = 'button';
-        addBtn.textContent = '+ Add image';
-        addBtn.onclick = function(){ var inp = document.createElement('input'); inp.type = 'file'; inp.accept = 'image/*'; inp.multiple = true; inp.onchange = function(){ [].slice.call(inp.files).forEach(function(file){ if (row.querySelectorAll('.monastery-img').length >= MAX_IMAGES_PER_ROW) return; var r = new FileReader(); r.onload = function(){ var i = document.createElement('img'); i.className = 'monastery-img'; i.src = r.result; i.alt = ''; var w = document.createElement('span'); w.className = 'img-wrap'; var dB = document.createElement('button'); dB.className = 'img-del'; dB.type = 'button'; dB.textContent = '×'; dB.onclick = function(){ w.remove(); updateAddBtn(row); }; w.appendChild(i); w.appendChild(dB); row.insertBefore(w, addBtn); updateAddBtn(row); }; r.readAsDataURL(file); }); }; inp.click(); };
+        addBtn.appendChild(document.createTextNode('+ Add image '));
+        var countSpan = document.createElement('span');
+        countSpan.className = 'img-count';
+        addBtn.appendChild(countSpan);
+        addBtn.onclick = function(){ var inp = document.createElement('input'); inp.type = 'file'; inp.accept = 'image/*'; inp.multiple = true; inp.onchange = function(){ [].slice.call(inp.files).forEach(function(file){ if (row.querySelectorAll('.monastery-img').length >= MAX_IMAGES_PER_ROW) return; var r = new FileReader(); r.onload = function(){ var i = document.createElement('img'); i.className = 'monastery-img'; i.src = r.result; i.alt = ''; var w = document.createElement('span'); w.className = 'img-wrap'; w.draggable = true; w.title = 'Drag to reorder'; var dB = document.createElement('button'); dB.className = 'img-del'; dB.type = 'button'; dB.textContent = '×'; dB.onclick = function(){ w.remove(); updateAddBtn(row); }; w.appendChild(i); w.appendChild(dB); w.ondragstart = function(e){ e.dataTransfer.setData('text/plain',''); e.dataTransfer.effectAllowed = 'move'; window._dragSrc = w; w.classList.add('img-dragging'); }; w.ondragend = function(){ w.classList.remove('img-dragging'); }; w.ondragover = function(e){ e.preventDefault(); e.dataTransfer.dropEffect = 'move'; if (e.currentTarget !== window._dragSrc) e.currentTarget.classList.add('img-drop-target'); }; w.ondragleave = function(e){ e.currentTarget.classList.remove('img-drop-target'); }; w.ondrop = function(e){ e.preventDefault(); e.currentTarget.classList.remove('img-drop-target'); var src = window._dragSrc; if (src && src !== e.currentTarget) { row.insertBefore(src, e.currentTarget); updateAddBtn(row); } }; row.insertBefore(w, addBtn); updateAddBtn(row); }; r.readAsDataURL(file); }); }; inp.click(); };
         row.appendChild(addBtn);
       }
       updateAddBtn(row);
@@ -333,6 +395,8 @@ _EDITABLE_SCRIPT = """
   function updateAddBtn(row) {
     var n = row.querySelectorAll('.monastery-img').length;
     var addBtn = row.querySelector('.add-img-btn');
+    var countSpan = addBtn ? addBtn.querySelector('.img-count') : null;
+    if (countSpan) { countSpan.textContent = n + ' \u0438\u0437 4'; }
     if (addBtn) { addBtn.classList.toggle('hidden', n >= MAX_IMAGES_PER_ROW); }
   }
   function addExportButton() {
@@ -385,7 +449,8 @@ def _build_front_page_html() -> str:
     return (
         '<div class="front-page">'
         '<div class="fp-inner">'
-        '<p class="fp-logo">{}</p>'
+        + FRONT_PAGE_EMBLEM_SVG
+        + '<p class="fp-logo">{}</p>'
         '<div class="fp-rule"></div>'
         '<p class="fp-subtitle">{}</p>'
         '<p class="fp-tagline">{}</p>'
@@ -563,6 +628,7 @@ def _wrap_html(body_blocks: list[str], editable: bool = True) -> str:
 </head>
 <body>
 {body}
+<div class="page-footer" aria-hidden="true">— Moscow Complete Guide · OTIUM</div>
 </body>
 </html>
 """.format(
@@ -633,11 +699,13 @@ def build_combined_parts(output_dir: Path) -> list[str]:
     blocks.append(_build_front_page_html())
     blocks.append(preface)
 
+    toc_entries: list[tuple[int, str]] = []
     chapter_num = 0
     for guide_key, chapter_title, chapter_desc in CHAPTER_CONFIG:
         if guide_key not in GUIDES:
             continue
         chapter_num += 1
+        toc_entries.append((chapter_num, chapter_title))
         try:
             places = load_places(guide_key)
         except Exception:
@@ -646,33 +714,62 @@ def build_combined_parts(output_dir: Path) -> list[str]:
         html_path = output_dir / "{}_guide.html".format(guide_key)
         if not html_path.is_file():
             blocks.append(
-                '<div class="chapter-intro">'
+                '<div class="chapter-intro" id="ch-{}">'
                 "<h2 class=\"chapter-title\">{}. {}</h2>"
                 "<p>{}</p>"
                 "<p class=\"block-label\">Места в главе (файл гида отсутствует)"
                 "</p></div>".format(
-                    chapter_num, _escape(chapter_title), _escape(chapter_desc),
+                    chapter_num, chapter_num, _escape(chapter_title),
+                    _escape(chapter_desc),
                 )
             )
             continue
         html = html_path.read_text(encoding="utf-8")
         sections = _extract_place_sections(html)
+        # Unique id per place for anchors (ch-1-p1, ch-1-p2, ...)
+        out_sections = []
+        for idx, s in enumerate(sections):
+            place_id = ' id="ch-{}-p{}"'.format(chapter_num, idx + 1)
+            if re.search(r'\sid="monastery-', s):
+                s = re.sub(r'\s+id="monastery-\d+"', place_id, s, count=1)
+            else:
+                s = re.sub(
+                    r'<section\s+class="monastery"',
+                    '<section class="monastery"' + place_id,
+                    s, count=1,
+                )
+            out_sections.append(s)
+        sections = out_sections
         list_items = "".join(
             "<li>{}</li>".format(_escape(n)) for n in place_names
         )
         intro = (
-            '<div class="chapter-intro">'
+            '<div class="chapter-intro" id="ch-{}">'
             "<h2 class=\"chapter-title\">{}. {}</h2>"
             "<p>{}</p>"
             "<p class=\"block-label\">Объекты в этой главе</p>"
             "<ul class=\"place-list\">{}</ul>"
             "</div>"
         ).format(
+            chapter_num,
             chapter_num, _escape(chapter_title), _escape(chapter_desc),
             list_items,
         )
         chapter_block = "\n".join([intro] + sections)
         blocks.append(chapter_block)
+
+    toc_html = (
+        '<div class="toc-block">'
+        "<h2>Содержание</h2><ul>"
+        + "".join(
+            '<li><a href="#ch-{}">{}. {}</a></li>'.format(
+                n, n, _escape(title),
+            )
+            for n, title in toc_entries
+        )
+        + "</ul></div>"
+    )
+    blocks.insert(2, toc_html)
 
     refs = (
         '<div class="references-chapter">'
@@ -737,6 +834,8 @@ def _build_combined_pdf_chunked(
                 chunk_html_path,
                 chunk_pdf_path,
                 image_wait_timeout_ms=image_wait_timeout_ms,
+                display_header_footer=True,
+                footer_template=PDF_FOOTER_TEMPLATE,
             ):
                 return False
             chunk_pdfs.append(chunk_pdf_path)
@@ -745,6 +844,12 @@ def _build_combined_pdf_chunked(
             reader = PdfReader(str(p))
             for page in reader.pages:
                 writer.add_page(page)
+        writer.add_metadata({
+            "/Title": "Полный путеводитель по Москве / Moscow Complete Guide",
+            "/Author": "OTIUM — Institute of Narrative Geography",
+            "/Subject": "Moscow guide, places, monasteries, museums, parks",
+            "/Creator": "build_full_guide.py",
+        })
         writer.write(str(pdf_path))
         return True
     finally:

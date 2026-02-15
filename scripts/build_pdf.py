@@ -625,6 +625,7 @@ def _section_place(
 ) -> str:
     """HTML-блок для одного места (монастырь или храм): фото + карта."""
     name = _title_html(m["name"])
+    name_alt = _escape(m["name"])
     address = _escape(m["address"])
     style = _escape(m["style"])
     history = _escape(m["history"])
@@ -642,15 +643,18 @@ def _section_place(
         images_block = ""
     else:
         imgs_html_parts = [
-            '<img src="{}" alt="" class="monastery-img" />'.format(
-                img_rel.replace("\\", "/")
+            '<img src="{}" alt="{} — фото {}" class="monastery-img" />'.format(
+                img_rel.replace("\\", "/"),
+                name_alt,
+                i + 1,
             )
-            for img_rel in unique_rels
+            for i, img_rel in enumerate(unique_rels)
         ]
         imgs_html = "\n".join(imgs_html_parts)
-        images_block = "  <div class=\"images-row\">\n    {}\n  </div>".format(
-            imgs_html,
-        )
+        images_block = (
+            "  <div class=\"images-row\">\n    {}\n  </div>\n"
+            "  <p class=\"images-caption\">Фото: {}</p>"
+        ).format(imgs_html, name_alt)
     title_class = "monastery-title"
 
     story_block = ""
@@ -676,13 +680,15 @@ def _section_place(
   <div class="visual-block">
 {images_block}
   <div class="map-block">
-    <img src="{map_url}" alt="" class="map-img" />
+    <img src="{map_url}" alt="Карта: {name_alt}" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
   </div>
   </div>
 </section>
 """.format(
         num=number,
         name=name,
+        name_alt=name_alt,
         title_class=title_class,
         address=address,
         style=style,
@@ -774,7 +780,11 @@ def build_html(output_dir: Path, guide_name: str | None = None) -> str:
       .images-row { display: flex; gap: 10px; margin: 1em; flex-wrap: wrap; }
       .monastery-img { flex: 1 1 200px; max-width: 100%; height: 150px;
                         object-fit: cover; }
+      .images-caption { font-size: 8pt; color: #6b635b; margin: 0.25em 1em 0;
+        font-family: Inter, sans-serif; }
       .map-block { margin: 1em; }
+      .map-caption { font-size: 8pt; color: #6b635b; margin: 0.25em 0 0;
+        font-family: Inter, sans-serif; }
       .map-img { max-width: 100%; height: auto; max-height: 160px;
                   border: 1px solid #e0ddd8; }
       .qa-section { margin-top: 2em; page-break-before: always;
@@ -922,12 +932,16 @@ def _pdf_via_playwright(
     html_path: Path,
     pdf_path: Path,
     image_wait_timeout_ms: int = 15000,
+    display_header_footer: bool = False,
+    footer_template: Optional[str] = None,
 ) -> bool:
     """
     Генерирует PDF из HTML через Playwright.
     Отдаёт страницу по HTTP, чтобы Google Fonts загружались; ждёт шрифты.
     image_wait_timeout_ms: таймаут ожидания загрузки всех изображений (для
     больших документов увеличьте, например 60000).
+    display_header_footer: если True и задан footer_template, добавляет футер
+    с номерами страниц (Playwright подставляет pageNumber и totalPages).
     """
     try:
         from playwright.sync_api import sync_playwright
@@ -982,13 +996,21 @@ def _pdf_via_playwright(
             page.wait_for_timeout(500)
             # Use screen media so background colors and images are not stripped
             page.emulate_media(media="screen")
-            page.pdf(
-                path=str(pdf_path),
-                format="A4",
-                margin={"top": "1.2cm", "right": "1.2cm",
-                        "bottom": "1.2cm", "left": "1.2cm"},
-                print_background=True,
-            )
+            margin = {
+                "top": "1.2cm", "right": "1.2cm",
+                "bottom": "1.5cm" if display_header_footer else "1.2cm",
+                "left": "1.2cm",
+            }
+            pdf_options = {
+                "path": str(pdf_path),
+                "format": "A4",
+                "margin": margin,
+                "print_background": True,
+            }
+            if display_header_footer and footer_template:
+                pdf_options["display_header_footer"] = True
+                pdf_options["footer_template"] = footer_template
+            page.pdf(**pdf_options)
             browser.close()
         return True
     except Exception as e:
