@@ -918,10 +918,16 @@ def _free_port() -> int:
         return s.getsockname()[1]
 
 
-def _pdf_via_playwright(html_path: Path, pdf_path: Path) -> bool:
+def _pdf_via_playwright(
+    html_path: Path,
+    pdf_path: Path,
+    image_wait_timeout_ms: int = 15000,
+) -> bool:
     """
     Генерирует PDF из HTML через Playwright.
     Отдаёт страницу по HTTP, чтобы Google Fonts загружались; ждёт шрифты.
+    image_wait_timeout_ms: таймаут ожидания загрузки всех изображений (для
+    больших документов увеличьте, например 60000).
     """
     try:
         from playwright.sync_api import sync_playwright
@@ -960,13 +966,19 @@ def _pdf_via_playwright(html_path: Path, pdf_path: Path) -> bool:
                 )
             page.evaluate("document.fonts.ready")
             page.wait_for_timeout(800)
-            # Wait for all images (including maps) to load so they appear in PDF
-            page.wait_for_function(
-                "() => { const imgs = document.querySelectorAll('img'); "
-                "return imgs.length === 0 || Array.from(imgs).every("
-                "i => i.complete && i.naturalWidth > 0); }",
-                timeout=15000,
-            )
+            # Wait for images to load; on timeout still generate PDF (best-effort)
+            try:
+                page.wait_for_function(
+                    "() => { const imgs = document.querySelectorAll('img'); "
+                    "return imgs.length === 0 || Array.from(imgs).every("
+                    "i => i.complete && i.naturalWidth > 0); }",
+                    timeout=image_wait_timeout_ms,
+                )
+            except Exception:
+                print(
+                    "  Note: some images may still be loading; generating PDF.",
+                    file=sys.stderr,
+                )
             page.wait_for_timeout(500)
             # Use screen media so background colors and images are not stripped
             page.emulate_media(media="screen")

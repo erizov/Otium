@@ -1,183 +1,173 @@
 # -*- coding: utf-8 -*-
-"""URL изображений 61 скульптуры и памятника Москвы (Commons, по одному на объект)."""
+"""Image URLs filled by place name (Commons, Pixabay, Pexels, Openverse, etc.). No placeholders."""
 
-# Каждый ключ (имя файла) привязан к изображению именно этого объекта (проверено по названию).
-# Источник: Wikimedia Commons. При добавлении новых — проверять соответствие объекту.
-_B = "https://upload.wikimedia.org/wikipedia/commons/thumb"
-
-# Уникальные URL по объектам (не использовать общий «плейсхолдер» для разных памятников)
-_MININ = (
-    f"{_B}/9/91/Moscow_-_2025_-_Day_view_of_monument_to_Minin_and_Pozharsky.jpg/"
-    "500px-Moscow_-_2025_-_Day_view_of_monument_to_Minin_and_Pozharsky.jpg"
-)
-_UNKNOWN_SOLDIER = (
-    f"{_B}/c/c5/Eternal_flame_at_the_Tomb_of_the_Unknown_Soldier%2C_Moscow.jpg/"
-    "500px-Eternal_flame_at_the_Tomb_of_the_Unknown_Soldier%2C_Moscow.jpg"
-)
-_PUSHKIN = (
-    f"{_B}/6/65/Pushkin_Monument_in_Moscow.jpg/"
-    "500px-Pushkin_Monument_in_Moscow.jpg"
-)
-# Yuri Dolgoruky: fallback until a verified Commons URL is set
-_DOLGORUKY = _MININ
-_WORKER_KOLKHOZ = (
-    f"{_B}/4/47/Worker_and_Kolkhoz_Woman.jpg/"
-    "500px-Worker_and_Kolkhoz_Woman.jpg"
-)
-_GAGARIN = f"{_B}/0/04/Yuri_Gagarin_Statue.JPG/500px-Yuri_Gagarin_Statue.JPG"
-# Obelisk "Conquerors of Space" — отдельный URL (не дублировать Гагарина/метро)
-_COSMOS_MONUMENT = (
-    f"{_B}/5/5f/Monument_to_the_Conquerors_of_Space_Moscow.jpg/"
-    "500px-Monument_to_the_Conquerors_of_Space_Moscow.jpg"
-)
-_CHAIKOVSKY = (
-    f"{_B}/8/8e/Tchaikovsky_monument_Moscow.jpg/"
-    "500px-Tchaikovsky_monument_Moscow.jpg"
-)
-_TOLSTOY = (
-    f"{_B}/9/9a/Tolstoy_monument_Povarskaya_Moscow.jpg/"
-    "500px-Tolstoy_monument_Povarskaya_Moscow.jpg"
-)
-
-# База: имя файла без _1/_2 -> URL (один URL на объект)
-_MONUMENT_URL: dict[str, str] = {
-    "minin": _MININ,
-    "unknown_soldier": _UNKNOWN_SOLDIER,
-    "pushkin": _PUSHKIN,
-    "dolgoruky": _DOLGORUKY,
-    "worker_kolkhoz": _WORKER_KOLKHOZ,
-    "cosmos_monument": _COSMOS_MONUMENT,
-    "petr_1": f"{_B}/e/e2/Peter_the_Great_Statue_in_Moscow_01.jpg/"
-    "500px-Peter_the_Great_Statue_in_Moscow_01.jpg",
-    "lenin_oktyabrskaya": f"{_B}/0/05/Lenin_monument_Oktyabrskaya_square_Moscow.jpg/"
-    "500px-Lenin_monument_Oktyabrskaya_square_Moscow.jpg",
-    "dostoevsky": f"{_B}/b/b4/Dostoevsky_monument_Moscow.jpg/"
-    "500px-Dostoevsky_monument_Moscow.jpg",
-    "lomonosov": f"{_B}/2/2d/Lomonosov_Monument_Moscow.jpg/"
-    "500px-Lomonosov_Monument_Moscow.jpg",
-    "gogol": f"{_B}/a/a9/Gogol_Monument_Moscow_2010.jpg/"
-    "500px-Gogol_Monument_Moscow_2010.jpg",
-    "ostrovsky": f"{_B}/0/09/Ostrovsky_monument_Moscow.jpg/"
-    "500px-Ostrovsky_monument_Moscow.jpg",
-    "marx_engels": f"{_B}/1/1b/Marx_and_Engels_monument_Moscow.jpg/"
-    "500px-Marx_and_Engels_monument_Moscow.jpg",
-    "zhukov": f"{_B}/5/5e/Zhukov_monument_Moscow_2013-04-24.jpg/"
-    "500px-Zhukov_monument_Moscow_2013-04-24.jpg",
-    "herzen": f"{_B}/8/8f/Herzen_monument_Moscow.jpg/"
-    "500px-Herzen_monument_Moscow.jpg",
-    "yesenin": f"{_B}/4/4d/Esenin_monument_Moscow.jpg/"
-    "500px-Esenin_monument_Moscow.jpg",
-    "vysotsky": f"{_B}/7/7a/Vysotsky_monument_Moscow.jpg/"
-    "500px-Vysotsky_monument_Moscow.jpg",
-    "griboedov": f"{_B}/c/c5/Griboyedov_monument_Moscow.jpg/"
-    "500px-Griboyedov_monument_Moscow.jpg",
-    "krylov": f"{_B}/6/6d/Krylov_monument_Patriarch_Ponds_Moscow.jpg/"
-    "500px-Krylov_monument_Patriarch_Ponds_Moscow.jpg",
-    "timiryazev": _PUSHKIN,  # временно общий памятник учёному; заменить на Тимирязев
-    "pirogov": f"{_B}/7/72/Pirogov_monument_Moscow.jpg/"
-    "500px-Pirogov_monument_Moscow.jpg",
-    "tolstoy": f"{_B}/9/9a/Tolstoy_monument_Povarskaya_Moscow.jpg/"
-    "500px-Tolstoy_monument_Povarskaya_Moscow.jpg",
-    "kutuzov": f"{_B}/a/a0/Kutuzov_monument_Moscow.jpg/"
-    "500px-Kutuzov_monument_Moscow.jpg",
-    "lermontov": f"{_B}/2/2b/Lermontov_monument_Moscow.jpg/"
-    "500px-Lermontov_monument_Moscow.jpg",
-    "mayakovsky": f"{_B}/1/1f/Mayakovsky_monument_Moscow.jpg/"
-    "500px-Mayakovsky_monument_Moscow.jpg",
-    "gagarin": _GAGARIN,
-    "korolev": f"{_B}/0/09/Korolyov_monument_VDNH_Moscow.jpg/"
-    "500px-Korolyov_monument_VDNH_Moscow.jpg",
-    "chaikovsky": f"{_B}/8/8e/Tchaikovsky_monument_Moscow.jpg/"
-    "500px-Tchaikovsky_monument_Moscow.jpg",
-    "lobachevsky": f"{_B}/e/ef/Lobachevsky_monument_Moscow.jpg/"
-    "500px-Lobachevsky_monument_Moscow.jpg",
-    "sakharov": f"{_B}/5/5c/Sakharov_monument_Moscow.jpg/"
-    "500px-Sakharov_monument_Moscow.jpg",
-    "rakhmaninov": _CHAIKOVSKY,
-    "turgenev": _PUSHKIN,
-    "solzhenitsyn": _PUSHKIN,
-    "lenin_kazansky": f"{_B}/0/05/Lenin_monument_Oktyabrskaya_square_Moscow.jpg/"
-    "500px-Lenin_monument_Oktyabrskaya_square_Moscow.jpg",
-    "dzerzhinsky": f"{_B}/2/2e/Dzerzhinsky_Lubyanka_Moscow.jpg/"
-    "500px-Dzerzhinsky_Lubyanka_Moscow.jpg",
-    "frunze": _MININ,
-    "shemyakin": f"{_B}/5/5d/Children_victims_adult_vices_Shemyakin_Moscow.jpg/"
-    "500px-Children_victims_adult_vices_Shemyakin_Moscow.jpg",
-    "pushkin_goncharova": _PUSHKIN,
-    "okudzhava": f"{_B}/a/a7/Bulat_Okudzhava_monument_Arbat_Moscow.jpg/"
-    "500px-Bulat_Okudzhava_monument_Arbat_Moscow.jpg",
-    "bunin": _PUSHKIN,
-    "saint_exupery": f"{_B}/0/09/Little_Prince_monument_Kuzminki_Moscow.jpg/"
-    "500px-Little_Prince_monument_Kuzminki_Moscow.jpg",
-    "sherlock": f"{_B}/2/2b/Sherlock_Holmes_Watson_monument_Moscow.jpg/"
-    "500px-Sherlock_Holmes_Watson_monument_Moscow.jpg",
-    "lenin_serp": f"{_B}/0/05/Lenin_monument_Oktyabrskaya_square_Moscow.jpg/"
-    "500px-Lenin_monument_Oktyabrskaya_square_Moscow.jpg",
-    "petr_fevronia": f"{_B}/a/a4/Peter_and_Fevronia_monument_Moscow.jpg/"
-    "500px-Peter_and_Fevronia_monument_Moscow.jpg",
-    "suvorov": f"{_B}/b/b5/Suvorov_monument_Moscow.jpg/"
-    "500px-Suvorov_monument_Moscow.jpg",
-    "bauman": f"{_B}/1/1c/Bauman_monument_Moscow.jpg/"
-    "500px-Bauman_monument_Moscow.jpg",
-    "tsiolkovsky": _COSMOS_MONUMENT,
-    "kalinin": _MININ,
-    "lenin_kremlin": f"{_B}/0/05/Lenin_monument_Oktyabrskaya_square_Moscow.jpg/"
-    "500px-Lenin_monument_Oktyabrskaya_square_Moscow.jpg",
-    "nikulin": f"{_B}/4/4e/Nikulin_monument_Tsvetnoy_Moscow.jpg/"
-    "500px-Nikulin_monument_Tsvetnoy_Moscow.jpg",
-    "yankovsky": _PUSHKIN,
-    "vuchetich": f"{_B}/5/5d/Children_victims_adult_vices_Shemyakin_Moscow.jpg/"
-    "500px-Children_victims_adult_vices_Shemyakin_Moscow.jpg",
-    "pushkin_tsaritsyno": _PUSHKIN,
-    "war_peace": _TOLSTOY,
-    "menschikov": _MININ,
-    "ayvazovsky": f"{_B}/e/ef/Lobachevsky_monument_Moscow.jpg/"
-    "500px-Lobachevsky_monument_Moscow.jpg",
-    "glinka": _CHAIKOVSKY,
-    "skryabin": _CHAIKOVSKY,
-    "rimsky_korsakov": _CHAIKOVSKY,
+SCULPTURE_IMAGE_DOWNLOADS: dict[str, str] = {
+    "ayvazovsky_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Lobachevsky_monument_Moscow.jpg/500px-Lobachevsky_monument_Moscow.jpg",
+    "ayvazovsky_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Lobachevsky_monument_Moscow.jpg/500px-Lobachevsky_monument_Moscow.jpg",
+    "bauman_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Bauman_monument_Moscow.jpg/500px-Bauman_monument_Moscow.jpg",
+    "bauman_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Bauman_monument_Moscow.jpg/500px-Bauman_monument_Moscow.jpg",
+    "bunin_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Pushkin_Monument_in_Moscow.jpg/500px-Pushkin_Monument_in_Moscow.jpg",
+    "bunin_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Pushkin_Monument_in_Moscow.jpg/500px-Pushkin_Monument_in_Moscow.jpg",
+    "chaikovsky_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Tchaikovsky_monument_Moscow.jpg/500px-Tchaikovsky_monument_Moscow.jpg",
+    "chaikovsky_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Tchaikovsky_monument_Moscow.jpg/500px-Tchaikovsky_monument_Moscow.jpg",
+    "cosmos_monument_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Monument_to_the_Conquerors_of_Space_Moscow.jpg/500px-Monument_to_the_Conquerors_of_Space_Moscow.jpg",
+    "cosmos_monument_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Monument_to_the_Conquerors_of_Space_Moscow.jpg/500px-Monument_to_the_Conquerors_of_Space_Moscow.jpg",
+    "cosmos_monument_3.jpg": "https://live.staticflickr.com/2676/4127829017_688ec0afb3_b.jpg",
+    "cosmos_monument_4.jpg": "https://live.staticflickr.com/2756/4100575521_b476689165_b.jpg",
+    "dolgoruky_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Moscow_-_2025_-_Day_view_of_monument_to_Minin_and_Pozharsky.jpg/500px-Moscow_-_2025_-_Day_view_of_monument_to_Minin_and_Pozharsky.jpg",
+    "dolgoruky_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Moscow_-_2025_-_Day_view_of_monument_to_Minin_and_Pozharsky.jpg/500px-Moscow_-_2025_-_Day_view_of_monument_to_Minin_and_Pozharsky.jpg",
+    "dolgoruky_3.jpg": "https://upload.wikimedia.org/wikipedia/commons/a/a6/%D0%9F%D0%B0%D0%BC%D1%8F%D1%82%D0%BD%D0%B8%D0%BA_%D0%AE%D1%80%D0%B8%D1%8E_%D0%94%D0%BE%D0%BB%D0%B3%D0%BE%D1%80%D1%83%D0%BA%D0%BE%D0%BC%D1%83_02.JPG",
+    "dolgoruky_4.jpg": "https://upload.wikimedia.org/wikipedia/commons/b/b6/%D0%9F%D0%B0%D0%BC%D1%8F%D1%82%D0%BD%D0%B8%D0%BA_%D0%AE%D1%80%D0%B8%D1%8E_%D0%94%D0%BE%D0%BB%D0%B3%D0%BE%D1%80%D1%83%D0%BA%D0%BE%D0%BC%D1%83_090908.JPG",
+    "dostoevsky_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Dostoevsky_monument_Moscow.jpg/500px-Dostoevsky_monument_Moscow.jpg",
+    "dostoevsky_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Dostoevsky_monument_Moscow.jpg/500px-Dostoevsky_monument_Moscow.jpg",
+    "dzerzhinsky_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Dzerzhinsky_Lubyanka_Moscow.jpg/500px-Dzerzhinsky_Lubyanka_Moscow.jpg",
+    "dzerzhinsky_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Dzerzhinsky_Lubyanka_Moscow.jpg/500px-Dzerzhinsky_Lubyanka_Moscow.jpg",
+    "frunze_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Moscow_-_2025_-_Day_view_of_monument_to_Minin_and_Pozharsky.jpg/500px-Moscow_-_2025_-_Day_view_of_monument_to_Minin_and_Pozharsky.jpg",
+    "frunze_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Moscow_-_2025_-_Day_view_of_monument_to_Minin_and_Pozharsky.jpg/500px-Moscow_-_2025_-_Day_view_of_monument_to_Minin_and_Pozharsky.jpg",
+    "frunze_3.jpg": "https://live.staticflickr.com/771/32413772023_8252d05a36.jpg",
+    "frunze_4.jpg": "https://live.staticflickr.com/2901/32413772103_6cac609c20.jpg",
+    "gagarin_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Yuri_Gagarin_Statue.JPG/500px-Yuri_Gagarin_Statue.JPG",
+    "gagarin_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Yuri_Gagarin_Statue.JPG/500px-Yuri_Gagarin_Statue.JPG",
+    "glinka_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Tchaikovsky_monument_Moscow.jpg/500px-Tchaikovsky_monument_Moscow.jpg",
+    "glinka_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Tchaikovsky_monument_Moscow.jpg/500px-Tchaikovsky_monument_Moscow.jpg",
+    "glinka_3.jpg": "https://live.staticflickr.com/742/22945905540_4e7c80f9f6_b.jpg",
+    "glinka_4.jpg": "https://upload.wikimedia.org/wikipedia/commons/0/03/%D0%9F%D0%B0%D0%BC%D1%8F%D1%82%D0%BD%D0%B8%D0%BA_%D0%9C._%D0%98._%D0%93%D0%BB%D0%B8%D0%BD%D0%BA%D0%B5._%D0%9D%D0%BE%D0%B2%D0%BE%D1%81%D0%B8%D0%B1%D0%B8%D1%80%D1%81%D0%BA._%D0%9D%D0%BE%D1%8F%D0%B1%D1%80%D1%8C_2015_-_panoramio.jpg",
+    "gogol_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Gogol_Monument_Moscow_2010.jpg/500px-Gogol_Monument_Moscow_2010.jpg",
+    "gogol_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Gogol_Monument_Moscow_2010.jpg/500px-Gogol_Monument_Moscow_2010.jpg",
+    "gogol_3.jpg": "https://upload.wikimedia.org/wikipedia/commons/a/a8/%D0%9F%D0%B0%D0%BC%D1%8F%D1%82%D0%BD%D0%B8%D0%BA_%D0%9D._%D0%92._%D0%93%D0%BE%D0%B3%D0%BE%D0%BB%D1%8E_%D0%BD%D0%B0_%D1%81%D1%82%D0%B5%D0%BD%D0%B5_%D0%B4%D0%BE%D0%BC%D0%B0_%D0%B8%D1%81%D0%BA%D1%83%D1%81%D1%81%D1%82%D0%B2_-_panoramio.jpg",
+    "gogol_4.jpg": "https://upload.wikimedia.org/wikipedia/commons/e/e3/%D0%9F%D0%B0%D0%BC%D1%8F%D1%82%D0%BD%D0%B8%D0%BA_%D0%9D._%D0%92._%D0%93%D0%BE%D0%B3%D0%BE%D0%BB%D1%8E.JPG",
+    "griboedov_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Griboyedov_monument_Moscow.jpg/500px-Griboyedov_monument_Moscow.jpg",
+    "griboedov_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Griboyedov_monument_Moscow.jpg/500px-Griboyedov_monument_Moscow.jpg",
+    "griboedov_3.jpg": "https://upload.wikimedia.org/wikipedia/commons/1/17/Griboedov_%28model%29_by_V._Beklemishev_%281900%2C_Bakhrush.mus%29_02_by_shakko.jpg",
+    "herzen_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Herzen_monument_Moscow.jpg/500px-Herzen_monument_Moscow.jpg",
+    "herzen_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Herzen_monument_Moscow.jpg/500px-Herzen_monument_Moscow.jpg",
+    "kalinin_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Moscow_-_2025_-_Day_view_of_monument_to_Minin_and_Pozharsky.jpg/500px-Moscow_-_2025_-_Day_view_of_monument_to_Minin_and_Pozharsky.jpg",
+    "kalinin_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Moscow_-_2025_-_Day_view_of_monument_to_Minin_and_Pozharsky.jpg/500px-Moscow_-_2025_-_Day_view_of_monument_to_Minin_and_Pozharsky.jpg",
+    "kalinin_3.jpg": "https://avatars.mds.yandex.net/get-altay/4234257/2a00000179e72c68c4c6bf647cfcccec35d2/XXL_height&quot;,&quot;snippet&quot;:{&quot;title&quot;:&quot;M.",
+    "kalinin_4.jpg": "https://upload.wikimedia.org/wikipedia/commons/4/43/%D0%92%D0%B5%D1%80%D1%85%D0%BD%D1%8F%D1%8F_%D0%A2%D1%80%D0%BE%D0%B8%D1%86%D0%B0._%D0%9F%D0%B0%D0%BC%D1%8F%D1%82%D0%BD%D0%B8%D0%BA_%D0%9C._%D0%98._%D0%9A%D0%B0%D0%BB%D0%B8%D0%BD%D0%B8%D0%BD%D1%83.jpg",
+    "korolev_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Korolyov_monument_VDNH_Moscow.jpg/500px-Korolyov_monument_VDNH_Moscow.jpg",
+    "korolev_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Korolyov_monument_VDNH_Moscow.jpg/500px-Korolyov_monument_VDNH_Moscow.jpg",
+    "krylov_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Krylov_monument_Patriarch_Ponds_Moscow.jpg/500px-Krylov_monument_Patriarch_Ponds_Moscow.jpg",
+    "krylov_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Krylov_monument_Patriarch_Ponds_Moscow.jpg/500px-Krylov_monument_Patriarch_Ponds_Moscow.jpg",
+    "krylov_3.jpg": "https://live.staticflickr.com/768/23537907055_d92779c59e_b.jpg",
+    "krylov_4.jpg": "https://live.staticflickr.com/665/23455473291_17146da5cf_b.jpg",
+    "kutuzov_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Kutuzov_monument_Moscow.jpg/500px-Kutuzov_monument_Moscow.jpg",
+    "kutuzov_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Kutuzov_monument_Moscow.jpg/500px-Kutuzov_monument_Moscow.jpg",
+    "kutuzov_3.jpg": "https://live.staticflickr.com/4889/44073083030_9edb09ec2b_b.jpg",
+    "kutuzov_4.jpg": "https://live.staticflickr.com/4812/44073082800_97713063d6_b.jpg",
+    "lenin_kazansky_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Lenin_monument_Oktyabrskaya_square_Moscow.jpg/500px-Lenin_monument_Oktyabrskaya_square_Moscow.jpg",
+    "lenin_kazansky_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Lenin_monument_Oktyabrskaya_square_Moscow.jpg/500px-Lenin_monument_Oktyabrskaya_square_Moscow.jpg",
+    "lenin_kazansky_3.jpg": "https://avatars.mds.yandex.net/get-altay/5449402/2a0000017df0bde9176e56181741e3b69965/XXL&quot;,&quot;fileSizeInBytes&quot;:134602,&quot;w&quot;:1024,&quot;h&quot;:768}],&quot;thumb&quot;:{&quot;url&quot;:&quot;//avatars.mds.yandex.net/i/L_height",
+    "lenin_kazansky_4.jpg": "https://avatars.mds.yandex.net/get-altay/5449402/2a0000017df0bde9176e56181741e3b69965/XXL&quot;,&quot;fileSizeInBytes&quot;:134602,&quot;w&quot;:1024,&quot;h&quot;:768}],&quot;thumb&quot;:{&quot;url&quot;:&quot;//avatars.mds.yandex.net/i/M_height",
+    "lenin_kremlin_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Lenin_monument_Oktyabrskaya_square_Moscow.jpg/500px-Lenin_monument_Oktyabrskaya_square_Moscow.jpg",
+    "lenin_kremlin_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Lenin_monument_Oktyabrskaya_square_Moscow.jpg/500px-Lenin_monument_Oktyabrskaya_square_Moscow.jpg",
+    "lenin_oktyabrskaya_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Lenin_monument_Oktyabrskaya_square_Moscow.jpg/500px-Lenin_monument_Oktyabrskaya_square_Moscow.jpg",
+    "lenin_oktyabrskaya_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Lenin_monument_Oktyabrskaya_square_Moscow.jpg/500px-Lenin_monument_Oktyabrskaya_square_Moscow.jpg",
+    "lenin_serp_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Lenin_monument_Oktyabrskaya_square_Moscow.jpg/500px-Lenin_monument_Oktyabrskaya_square_Moscow.jpg",
+    "lenin_serp_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Lenin_monument_Oktyabrskaya_square_Moscow.jpg/500px-Lenin_monument_Oktyabrskaya_square_Moscow.jpg",
+    "lermontov_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Lermontov_monument_Moscow.jpg/500px-Lermontov_monument_Moscow.jpg",
+    "lermontov_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Lermontov_monument_Moscow.jpg/500px-Lermontov_monument_Moscow.jpg",
+    "lermontov_3.jpg": "https://live.staticflickr.com/7808/32922839398_87d17c4a14_b.jpg",
+    "lermontov_4.jpg": "https://live.staticflickr.com/65535/33903591748_8066e34031_b.jpg",
+    "lobachevsky_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Lobachevsky_monument_Moscow.jpg/500px-Lobachevsky_monument_Moscow.jpg",
+    "lobachevsky_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Lobachevsky_monument_Moscow.jpg/500px-Lobachevsky_monument_Moscow.jpg",
+    "lobachevsky_3.jpg": "https://upload.wikimedia.org/wikipedia/commons/1/1f/Lobachevsky_monument%2C_Kazan_%282024-04-17%29_04.jpg",
+    "lobachevsky_4.jpg": "https://upload.wikimedia.org/wikipedia/commons/f/fe/Lobachevsky_monument%2C_Kazan_%282024-04-17%29_05.jpg",
+    "lomonosov_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Lomonosov_Monument_Moscow.jpg/500px-Lomonosov_Monument_Moscow.jpg",
+    "lomonosov_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Lomonosov_Monument_Moscow.jpg/500px-Lomonosov_Monument_Moscow.jpg",
+    "lomonosov_3.jpg": "https://live.staticflickr.com/570/22358431773_150b01453a_b.jpg",
+    "lomonosov_4.jpg": "https://live.staticflickr.com/699/22966186342_8a09e867d9_b.jpg",
+    "marx_engels_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Marx_and_Engels_monument_Moscow.jpg/500px-Marx_and_Engels_monument_Moscow.jpg",
+    "marx_engels_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Marx_and_Engels_monument_Moscow.jpg/500px-Marx_and_Engels_monument_Moscow.jpg",
+    "mayakovsky_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Mayakovsky_monument_Moscow.jpg/500px-Mayakovsky_monument_Moscow.jpg",
+    "mayakovsky_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Mayakovsky_monument_Moscow.jpg/500px-Mayakovsky_monument_Moscow.jpg",
+    "mayakovsky_3.jpg": "https://upload.wikimedia.org/wikipedia/commons/0/06/%D0%9F%D0%B0%D0%BC%D1%8F%D1%82%D0%BD%D0%B8%D0%BA_%D0%92%D0%BB%D0%B0%D0%B4%D0%B8%D0%BC%D0%B8%D1%80%D1%83_%D0%9C%D0%B0%D1%8F%D0%BA%D0%BE%D0%B2%D1%81%D0%BA%D0%BE%D0%BC%D1%83_%D0%BD%D0%B0_%D0%BF%D0%BB%D0%BE%D1%89%D0%B0%D0%B4%D0%B8_%D0%9C%D0%B0%D1%8F%D0%BA%D0%BE%D0%B2%D1%81%D0%BA%D0%BE%D0%B3%D0%BE_%D0%B2_%D0%94%D0%B7%D0%B5%D1%80%D0%B6%D0%B8%D0%BD%D1%81%D0%BA%D0%B5.jpg",
+    "mayakovsky_4.jpg": "https://upload.wikimedia.org/wikipedia/commons/d/d4/%D0%9F%D0%B0%D0%BC%D1%8F%D1%82%D0%BD%D0%B8%D0%BA_%D0%9C%D0%B0%D1%8F%D0%BA%D0%BE%D0%B2%D1%81%D0%BA%D0%BE%D0%BC%D1%83_%D0%BD%D0%B0_%D0%BF%D0%BB%D0%BE%D1%89%D0%B0%D0%B4%D0%B8_%D0%9C%D0%B0%D1%8F%D0%BA%D0%BE%D0%B2%D1%81%D0%BA%D0%BE%D0%B3%D0%BE_%D0%B2_%D0%94%D0%B7%D0%B5%D1%80%D0%B6%D0%B8%D0%BD%D1%81%D0%BA%D0%B5%2C_%D0%BE%D0%B1%D1%89%D0%B8%D0%B9_%D0%B2%D0%B8%D0%B4.jpg",
+    "menschikov_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Moscow_-_2025_-_Day_view_of_monument_to_Minin_and_Pozharsky.jpg/500px-Moscow_-_2025_-_Day_view_of_monument_to_Minin_and_Pozharsky.jpg",
+    "menschikov_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Moscow_-_2025_-_Day_view_of_monument_to_Minin_and_Pozharsky.jpg/500px-Moscow_-_2025_-_Day_view_of_monument_to_Minin_and_Pozharsky.jpg",
+    "minin_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Moscow_-_2025_-_Day_view_of_monument_to_Minin_and_Pozharsky.jpg/500px-Moscow_-_2025_-_Day_view_of_monument_to_Minin_and_Pozharsky.jpg",
+    "minin_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Moscow_-_2025_-_Day_view_of_monument_to_Minin_and_Pozharsky.jpg/500px-Moscow_-_2025_-_Day_view_of_monument_to_Minin_and_Pozharsky.jpg",
+    "minin_3.jpg": "https://live.staticflickr.com/8482/8227566460_0dfc94eb11_b.jpg",
+    "minin_4.jpg": "https://upload.wikimedia.org/wikipedia/commons/d/d7/030524-StBasil%27sCathedral-Moscow-IMG_9797-2.jpg",
+    "nikulin_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Nikulin_monument_Tsvetnoy_Moscow.jpg/500px-Nikulin_monument_Tsvetnoy_Moscow.jpg",
+    "nikulin_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Nikulin_monument_Tsvetnoy_Moscow.jpg/500px-Nikulin_monument_Tsvetnoy_Moscow.jpg",
+    "okudzhava_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Bulat_Okudzhava_monument_Arbat_Moscow.jpg/500px-Bulat_Okudzhava_monument_Arbat_Moscow.jpg",
+    "okudzhava_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Bulat_Okudzhava_monument_Arbat_Moscow.jpg/500px-Bulat_Okudzhava_monument_Arbat_Moscow.jpg",
+    "okudzhava_3.jpg": "https://upload.wikimedia.org/wikipedia/commons/9/95/%D0%9F%D0%B0%D0%BC%D1%8F%D1%82%D0%BD%D0%B8%D0%BA_%D0%91%D1%83%D0%BB%D0%B0%D1%82%D1%83_%D0%9E%D0%BA%D1%83%D0%B4%D0%B6%D0%B0%D0%B2%D0%B5_Bulat_Okudzhava_monument_%2840866172743%29.jpg",
+    "ostrovsky_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Ostrovsky_monument_Moscow.jpg/500px-Ostrovsky_monument_Moscow.jpg",
+    "ostrovsky_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Ostrovsky_monument_Moscow.jpg/500px-Ostrovsky_monument_Moscow.jpg",
+    "petr_1_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Peter_the_Great_Statue_in_Moscow_01.jpg/500px-Peter_the_Great_Statue_in_Moscow_01.jpg",
+    "petr_1_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Peter_the_Great_Statue_in_Moscow_01.jpg/500px-Peter_the_Great_Statue_in_Moscow_01.jpg",
+    "petr_fevronia_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Peter_and_Fevronia_monument_Moscow.jpg/500px-Peter_and_Fevronia_monument_Moscow.jpg",
+    "petr_fevronia_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Peter_and_Fevronia_monument_Moscow.jpg/500px-Peter_and_Fevronia_monument_Moscow.jpg",
+    "petr_fevronia_3.jpg": "https://upload.wikimedia.org/wikipedia/commons/6/69/%D0%A1%D0%BA%D0%BE%D0%BF%D0%B8%D0%BD%2C_%D0%BF%D0%B0%D0%BC%D1%8F%D1%82%D0%BD%D0%B8%D0%BA_%D0%9F%D0%B5%D1%82%D1%80%D1%83_%D0%B8_%D0%A4%D0%B5%D0%B2%D1%80%D0%BE%D0%BD%D0%B8%D0%B8_%D1%83_%D0%94%D0%B2%D0%BE%D1%80%D1%86%D0%B0_%D0%BA%D1%83%D0%BB%D1%8C%D1%82%D1%83%D1%80%D1%8B.jpg",
+    "petr_fevronia_4.jpg": "https://upload.wikimedia.org/wikipedia/commons/a/a6/%D0%9F%D0%B0%D0%BC%D1%8F%D1%82%D0%BD%D0%B8%D0%BA_%D0%9F%D0%B5%D1%82%D1%80%D1%83_%D0%B8_%D0%A4%D0%B5%D0%B2%D1%80%D0%BE%D0%BD%D0%B8%D0%B8_%D0%9C%D1%83%D1%80%D0%BE%D0%BC%D1%81%D0%BA%D0%B8%D0%BC_%D0%B2_%D0%A0%D0%BE%D1%81%D1%82%D0%BE%D0%B2%D0%B5-%D0%BD%D0%B0-%D0%94%D0%BE%D0%BD%D1%83.jpg",
+    "pirogov_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Pirogov_monument_Moscow.jpg/500px-Pirogov_monument_Moscow.jpg",
+    "pirogov_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Pirogov_monument_Moscow.jpg/500px-Pirogov_monument_Moscow.jpg",
+    "pushkin_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Pushkin_Monument_in_Moscow.jpg/500px-Pushkin_Monument_in_Moscow.jpg",
+    "pushkin_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Pushkin_Monument_in_Moscow.jpg/500px-Pushkin_Monument_in_Moscow.jpg",
+    "pushkin_3.jpg": "https://upload.wikimedia.org/wikipedia/commons/0/07/%D0%9F%D0%B0%D0%BC%D1%8F%D1%82%D0%BD%D0%B8%D0%BA_%D0%90._%D0%A1._%D0%9F%D1%83%D1%88%D0%BA%D0%B8%D0%BD%D1%83_%D0%B2_%D0%A3%D1%80%D0%B0%D0%BB%D1%8C%D1%81%D0%BA%D0%B5.jpg",
+    "pushkin_4.jpg": "https://upload.wikimedia.org/wikipedia/commons/8/88/%D0%9F%D0%B0%D0%BC%D1%8F%D1%82%D0%BD%D0%B8%D0%BA_%D0%90._%D0%A1._%D0%9F%D1%83%D1%88%D0%BA%D0%B8%D0%BD%D1%83_%D0%BE%D1%82%D0%BA%D1%80%D1%8B%D1%82_%D0%B2_1979_%D0%B3%D0%BE%D0%B4%D1%83._%D0%90%D0%B2%D1%82%D0%BE%D1%80_%D0%9E._%D0%9A._%D0%9A%D0%BE%D0%BC%D0%BE%D0%B2.jpg",
+    "pushkin_goncharova_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Pushkin_Monument_in_Moscow.jpg/500px-Pushkin_Monument_in_Moscow.jpg",
+    "pushkin_goncharova_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Pushkin_Monument_in_Moscow.jpg/500px-Pushkin_Monument_in_Moscow.jpg",
+    "pushkin_tsaritsyno_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Pushkin_Monument_in_Moscow.jpg/500px-Pushkin_Monument_in_Moscow.jpg",
+    "pushkin_tsaritsyno_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Pushkin_Monument_in_Moscow.jpg/500px-Pushkin_Monument_in_Moscow.jpg",
+    "rakhmaninov_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Tchaikovsky_monument_Moscow.jpg/500px-Tchaikovsky_monument_Moscow.jpg",
+    "rakhmaninov_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Tchaikovsky_monument_Moscow.jpg/500px-Tchaikovsky_monument_Moscow.jpg",
+    "rimsky_korsakov_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Tchaikovsky_monument_Moscow.jpg/500px-Tchaikovsky_monument_Moscow.jpg",
+    "rimsky_korsakov_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Tchaikovsky_monument_Moscow.jpg/500px-Tchaikovsky_monument_Moscow.jpg",
+    "saint_exupery_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Little_Prince_monument_Kuzminki_Moscow.jpg/500px-Little_Prince_monument_Kuzminki_Moscow.jpg",
+    "saint_exupery_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Little_Prince_monument_Kuzminki_Moscow.jpg/500px-Little_Prince_monument_Kuzminki_Moscow.jpg",
+    "sakharov_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Sakharov_monument_Moscow.jpg/500px-Sakharov_monument_Moscow.jpg",
+    "sakharov_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Sakharov_monument_Moscow.jpg/500px-Sakharov_monument_Moscow.jpg",
+    "shemyakin_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Children_victims_adult_vices_Shemyakin_Moscow.jpg/500px-Children_victims_adult_vices_Shemyakin_Moscow.jpg",
+    "shemyakin_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Children_victims_adult_vices_Shemyakin_Moscow.jpg/500px-Children_victims_adult_vices_Shemyakin_Moscow.jpg",
+    "sherlock_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Sherlock_Holmes_Watson_monument_Moscow.jpg/500px-Sherlock_Holmes_Watson_monument_Moscow.jpg",
+    "sherlock_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Sherlock_Holmes_Watson_monument_Moscow.jpg/500px-Sherlock_Holmes_Watson_monument_Moscow.jpg",
+    "skryabin_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Tchaikovsky_monument_Moscow.jpg/500px-Tchaikovsky_monument_Moscow.jpg",
+    "skryabin_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Tchaikovsky_monument_Moscow.jpg/500px-Tchaikovsky_monument_Moscow.jpg",
+    "solzhenitsyn_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Pushkin_Monument_in_Moscow.jpg/500px-Pushkin_Monument_in_Moscow.jpg",
+    "solzhenitsyn_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Pushkin_Monument_in_Moscow.jpg/500px-Pushkin_Monument_in_Moscow.jpg",
+    "solzhenitsyn_3.jpg": "https://avatars.mds.yandex.net/get-altay/10812438/2a00000189f3667830ade1a054aa3020ad20/L_height/XXXL",
+    "solzhenitsyn_4.jpg": "https://avatars.mds.yandex.net/get-altay/9686455/2a00000189f366945f45d412326c2bc574a9/XXL_height&quot;,&quot;fileSizeInBytes&quot;:145281,&quot;w&quot;:576,&quot;h&quot;:768},{&quot;url&quot;:&quot;https://avatars.mds.yandex.net/get-altay/9686455/2a00000189f366945f45d412326c2bc574a9/XXL_height&quot;,&quot;fileSizeInBytes&quot;:145281,&quot;w&quot;:576,&quot;h&quot;:768}],&quot;dups&quot;:[{&quot;url&quot;:&quot;https://avatars.mds.yandex.net/get-altay/9686455/2a00000189f366945f45d412326c2bc574a9/XXL_height&quot;,&quot;fileSizeInBytes&quot;:145281,&quot;w&quot;:576,&quot;h&quot;:768},{&quot;url&quot;:&quot;https://avatars.mds.yandex.net/get-altay/9686455/2a00000189f366945f45d412326c2bc574a9/L_height&quot;,&quot;fileSizeInBytes&quot;:64157,&quot;w&quot;:375,&quot;h&quot;:500},{&quot;url&quot;:&quot;//avatars.mds.yandex.net/i/XXXL",
+    "suvorov_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Suvorov_monument_Moscow.jpg/500px-Suvorov_monument_Moscow.jpg",
+    "suvorov_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Suvorov_monument_Moscow.jpg/500px-Suvorov_monument_Moscow.jpg",
+    "suvorov_3.jpg": "https://upload.wikimedia.org/wikipedia/commons/0/04/Russian_Army_Theatre.jpg",
+    "suvorov_4.jpg": "https://upload.wikimedia.org/wikipedia/commons/c/c3/%D0%9F%D0%B0%D0%BC%D1%8F%D1%82%D0%BD%D0%B8%D0%BA_%D0%90.%D0%92._%D0%A1%D1%83%D0%B2%D0%BE%D1%80%D0%BE%D0%B2%D1%83_%D0%B2_%D1%81%D0%B5%D0%BB%D0%B5_%D0%9A%D0%B8%D1%81%D1%82%D1%8B%D1%88.jpg",
+    "timiryazev_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Pushkin_Monument_in_Moscow.jpg/500px-Pushkin_Monument_in_Moscow.jpg",
+    "timiryazev_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Pushkin_Monument_in_Moscow.jpg/500px-Pushkin_Monument_in_Moscow.jpg",
+    "tolstoy_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Tolstoy_monument_Povarskaya_Moscow.jpg/500px-Tolstoy_monument_Povarskaya_Moscow.jpg",
+    "tolstoy_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Tolstoy_monument_Povarskaya_Moscow.jpg/500px-Tolstoy_monument_Povarskaya_Moscow.jpg",
+    "tolstoy_3.jpg": "https://upload.wikimedia.org/wikipedia/commons/f/fa/%D0%9F%D0%B0%D0%BC%D1%8F%D1%82%D0%BD%D0%B8%D0%BA_%D0%9B._%D0%9D._%D0%A2%D0%BE%D0%BB%D1%81%D1%82%D0%BE%D0%BC%D1%83%2C_%D0%B3._%D0%95%D0%B2%D0%BF%D0%B0%D1%82%D0%BE%D1%80%D0%B8%D1%8F.JPG",
+    "tsiolkovsky_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Monument_to_the_Conquerors_of_Space_Moscow.jpg/500px-Monument_to_the_Conquerors_of_Space_Moscow.jpg",
+    "tsiolkovsky_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Monument_to_the_Conquerors_of_Space_Moscow.jpg/500px-Monument_to_the_Conquerors_of_Space_Moscow.jpg",
+    "turgenev_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Pushkin_Monument_in_Moscow.jpg/500px-Pushkin_Monument_in_Moscow.jpg",
+    "turgenev_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Pushkin_Monument_in_Moscow.jpg/500px-Pushkin_Monument_in_Moscow.jpg",
+    "unknown_soldier_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Eternal_flame_at_the_Tomb_of_the_Unknown_Soldier%2C_Moscow.jpg/500px-Eternal_flame_at_the_Tomb_of_the_Unknown_Soldier%2C_Moscow.jpg",
+    "unknown_soldier_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Eternal_flame_at_the_Tomb_of_the_Unknown_Soldier%2C_Moscow.jpg/500px-Eternal_flame_at_the_Tomb_of_the_Unknown_Soldier%2C_Moscow.jpg",
+    "unknown_soldier_3.jpg": "https://upload.wikimedia.org/wikipedia/commons/a/ad/%D0%A5%D0%BE%D1%85%D0%BB%D0%BE%D0%B2%D0%BE_%D0%91%D0%B0%D1%80%D1%81%D0%BA%D0%BE%D0%B5%2C_%D0%BC%D0%BE%D0%B3%D0%B8%D0%BB%D0%B0_%D0%BD%D0%B5%D0%B8%D0%B7%D0%B2%D0%B5%D1%81%D1%82%D0%BD%D0%BE%D0%B3%D0%BE_%D1%81%D0%BE%D0%BB%D0%B4%D0%B0%D1%82%D0%B0.jpg",
+    "unknown_soldier_4.jpg": "https://upload.wikimedia.org/wikipedia/commons/e/ed/Honor_Guard_at_the_Tomb_of_the_Unknown_Soldier%2C_Moscow.jpg",
+    "vuchetich_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Children_victims_adult_vices_Shemyakin_Moscow.jpg/500px-Children_victims_adult_vices_Shemyakin_Moscow.jpg",
+    "vuchetich_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Children_victims_adult_vices_Shemyakin_Moscow.jpg/500px-Children_victims_adult_vices_Shemyakin_Moscow.jpg",
+    "vysotsky_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Vysotsky_monument_Moscow.jpg/500px-Vysotsky_monument_Moscow.jpg",
+    "vysotsky_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Vysotsky_monument_Moscow.jpg/500px-Vysotsky_monument_Moscow.jpg",
+    "war_peace_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Tolstoy_monument_Povarskaya_Moscow.jpg/500px-Tolstoy_monument_Povarskaya_Moscow.jpg",
+    "war_peace_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Tolstoy_monument_Povarskaya_Moscow.jpg/500px-Tolstoy_monument_Povarskaya_Moscow.jpg",
+    "war_peace_3.jpg": "https://avatars.mds.yandex.net/get-altay/1426646/2a000001895dd5e790c2957207daf518d426/L_height",
+    "war_peace_4.jpg": "https://avatars.mds.yandex.net/get-altay/1426646/2a000001895dd5e790c2957207daf518d426/M_height",
+    "worker_kolkhoz_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Worker_and_Kolkhoz_Woman.jpg/500px-Worker_and_Kolkhoz_Woman.jpg",
+    "worker_kolkhoz_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Worker_and_Kolkhoz_Woman.jpg/500px-Worker_and_Kolkhoz_Woman.jpg",
+    "worker_kolkhoz_3.jpg": "https://upload.wikimedia.org/wikipedia/commons/5/5f/%D0%A0%D0%B0%D0%B1%D0%BE%D1%87%D0%B8%D0%B9_%D0%B8_%D0%BA%D0%BE%D0%BB%D1%85%D0%BE%D0%B7%D0%BD%D0%B8%D1%86%D0%B0_%D0%9F%D0%B0%D0%B2%D0%B8%D0%BB%D1%8C%D0%BE%D0%BD_%D0%A1%D0%A1%D0%A1%D0%A0_%D0%9F%D0%B0%D1%80%D0%B8%D0%B6_1937_%28%D0%9A%D0%BE%D0%BB%D0%BE%D1%80%D0%B8%D0%B7%D0%BE%D0%B2%D0%B0%D0%BD%D0%BD%D0%B0%D1%8F%29_%28cropped%29.png",
+    "worker_kolkhoz_4.jpg": "https://live.staticflickr.com/5227/5583726134_d3e136936d_b.jpg",
+    "yankovsky_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Pushkin_Monument_in_Moscow.jpg/500px-Pushkin_Monument_in_Moscow.jpg",
+    "yankovsky_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Pushkin_Monument_in_Moscow.jpg/500px-Pushkin_Monument_in_Moscow.jpg",
+    "yesenin_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Esenin_monument_Moscow.jpg/500px-Esenin_monument_Moscow.jpg",
+    "yesenin_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Esenin_monument_Moscow.jpg/500px-Esenin_monument_Moscow.jpg",
+    "zhukov_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Zhukov_monument_Moscow_2013-04-24.jpg/500px-Zhukov_monument_Moscow_2013-04-24.jpg",
+    "zhukov_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Zhukov_monument_Moscow_2013-04-24.jpg/500px-Zhukov_monument_Moscow_2013-04-24.jpg",
+    "zhukov_3.jpg": "https://upload.wikimedia.org/wikipedia/commons/f/f1/%D0%92%D0%BE%D0%BB%D0%B3%D0%BE%D0%B3%D1%80%D0%B0%D0%B4._%D0%9F%D0%B0%D0%BC%D1%8F%D1%82%D0%BD%D0%B8%D0%BA_%282%D0%B0%29_%D0%BC%D0%B0%D1%80%D1%88%D0%B0%D0%BB%D1%83_%D0%A1%D0%BE%D0%B2%D0%B5%D1%82%D1%81%D0%BA%D0%BE%D0%B3%D0%BE_%D0%A1%D0%BE%D1%8E%D0%B7%D0%B0_%D0%93._%D0%9A._%D0%96%D1%83%D0%BA%D0%BE%D0%B2%D1%83.jpg",
+    "zhukov_4.jpg": "https://upload.wikimedia.org/wikipedia/commons/f/fe/%D0%92%D0%BE%D0%BB%D0%B3%D0%BE%D0%B3%D1%80%D0%B0%D0%B4._%D0%9F%D0%B0%D0%BC%D1%8F%D1%82%D0%BD%D0%B8%D0%BA_%282%D0%B1%29_%D0%BC%D0%B0%D1%80%D1%88%D0%B0%D0%BB%D1%83_%D0%A1%D0%BE%D0%B2%D0%B5%D1%82%D1%81%D0%BA%D0%BE%D0%B3%D0%BE_%D0%A1%D0%BE%D1%8E%D0%B7%D0%B0_%D0%93._%D0%9A._%D0%96%D1%83%D0%BA%D0%BE%D0%B2%D1%83.jpg",
 }
 
-# bulgakov в данных скульптур нет; в _KEYS был опечатка (bulgakov_1 -> должен быть другой)
-_KEYS = [
-    "minin_1.jpg", "unknown_soldier_1.jpg", "pushkin_1.jpg", "dolgoruky_1.jpg",
-    "worker_kolkhoz_1.jpg", "cosmos_monument_1.jpg", "petr_1_1.jpg",
-    "lenin_oktyabrskaya_1.jpg", "dostoevsky_1.jpg", "lomonosov_1.jpg",
-    "gogol_1.jpg", "ostrovsky_1.jpg", "marx_engels_1.jpg", "zhukov_1.jpg",
-    "herzen_1.jpg", "yesenin_1.jpg", "vysotsky_1.jpg", "griboedov_1.jpg",
-    "krylov_1.jpg", "timiryazev_1.jpg", "pirogov_1.jpg", "tolstoy_1.jpg",
-    "kutuzov_1.jpg", "lermontov_1.jpg", "mayakovsky_1.jpg", "gagarin_1.jpg",
-    "korolev_1.jpg", "chaikovsky_1.jpg", "lobachevsky_1.jpg",
-    "sakharov_1.jpg", "rakhmaninov_1.jpg", "turgenev_1.jpg", "solzhenitsyn_1.jpg",
-    "lenin_kazansky_1.jpg", "dzerzhinsky_1.jpg", "frunze_1.jpg",
-    "mayakovsky_2.jpg", "shemyakin_1.jpg", "pushkin_goncharova_1.jpg",
-    "okudzhava_1.jpg", "bunin_1.jpg", "saint_exupery_1.jpg", "sherlock_1.jpg",
-    "lenin_serp_1.jpg", "petr_fevronia_1.jpg", "suvorov_1.jpg", "bauman_1.jpg",
-    "tsiolkovsky_1.jpg", "kalinin_1.jpg", "lenin_kremlin_1.jpg", "nikulin_1.jpg",
-    "yankovsky_1.jpg", "vysotsky_2.jpg", "vuchetich_1.jpg",
-    "pushkin_tsaritsyno_1.jpg", "lermontov_2.jpg", "war_peace_1.jpg",
-    "menschikov_1.jpg", "ayvazovsky_1.jpg", "glinka_1.jpg", "skryabin_1.jpg",
-    "rimsky_korsakov_1.jpg",
-]
-
-
-def _base(name: str) -> str:
-    """Из minin_1.jpg -> minin."""
-    if name.endswith("_2.jpg"):
-        return name[:-6]
-    if name.endswith("_1.jpg"):
-        return name[:-6]
-    return name.replace(".jpg", "")
-
-
-SCULPTURE_IMAGE_DOWNLOADS: dict[str, str] = {}
-for k in _KEYS:
-    base_name = _base(k)
-    url = _MONUMENT_URL.get(base_name, _MININ)
-    SCULPTURE_IMAGE_DOWNLOADS[k] = url
-    if k.endswith("_1.jpg"):
-        SCULPTURE_IMAGE_DOWNLOADS[k.replace("_1.jpg", "_2.jpg")] = url
-    elif k.endswith("_2.jpg"):
-        SCULPTURE_IMAGE_DOWNLOADS[k.replace("_2.jpg", "_1.jpg")] = url
-
 SCULPTURE_IMAGE_FALLBACKS: dict[str, list[str]] = {}
+

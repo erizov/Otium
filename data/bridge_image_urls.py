@@ -1,5 +1,48 @@
 # -*- coding: utf-8 -*-
-"""URL изображений мостов Москвы (заполняется при загрузке)."""
+"""Image URLs filled by place name (Commons, Pixabay, Pexels, Openverse, etc.). No placeholders."""
 
-BRIDGE_IMAGE_DOWNLOADS: dict[str, str] = {}
+BRIDGE_IMAGE_DOWNLOADS: dict[str, str] = {
+    "andreevsky_1.jpg": "https://live.staticflickr.com/65535/49269262282_7b44a5f1d5_b.jpg",
+    "andreevsky_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/c/ce/%D0%90%D0%BD%D0%B4%D1%80%D0%B5%D0%B5%D0%B2%D1%81%D0%BA%D0%B8%D0%B9_%D0%BC%D0%BE%D1%81%D1%82_%D1%82%D0%B0%D0%B1%D0%BB%D0%B8%D1%87%D0%BA%D0%B0.JPG",
+    "andreevsky_3.jpg": "https://live.staticflickr.com/4141/4817138696_3dd22c41f8_b.jpg",
+    "andreevsky_4.jpg": "https://upload.wikimedia.org/wikipedia/commons/5/5b/%D0%90%D0%BD%D0%B4%D1%80%D0%B5%D0%B5%D0%B2%D1%81%D0%BA%D0%B8%D0%B9_%D0%BC%D0%BE%D1%81%D1%82_%D0%A1%D0%9F%D0%B1_01.jpg",
+    "bolshoy_kamenny_1.jpg": "https://live.staticflickr.com/1599/25946503591_83dd2c17ce_b.jpg",
+    "bolshoy_kamenny_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/e/e7/%D0%91%D0%BE%D0%BB%D1%8C%D1%88%D0%BE%D0%B9_%D0%9A%D0%B0%D0%BC%D0%B5%D0%BD%D0%BD%D1%8B%D0%B9_%D0%BC%D0%BE%D1%81%D1%82_%D1%87%D0%B5%D1%80%D0%B5%D0%B7_%D1%80%D0%B5%D0%BA%D1%83_%D0%A1%D0%BB%D1%8F%D0%B2%D1%8F%D0%BD%D0%BA%D1%83_2%2C_%D0%9F%D0%B0%D0%B2%D0%BB%D0%BE%D0%B2%D1%81%D0%BA.jpg",
+    "bolshoy_kamenny_3.jpg": "https://live.staticflickr.com/1632/25410747403_0a92155d98_b.jpg",
+    "bolshoy_kamenny_4.jpg": "https://upload.wikimedia.org/wikipedia/commons/b/b6/%D0%91%D0%BE%D0%BB%D1%8C%D1%88%D0%BE%D0%B9_%D0%9A%D0%B0%D0%BC%D0%B5%D0%BD%D0%BD%D1%8B%D0%B9_%D0%BC%D0%BE%D1%81%D1%82_%D1%87%D0%B5%D1%80%D0%B5%D0%B7_%D1%80%D0%B5%D0%BA%D1%83_%D0%A1%D0%BB%D1%8F%D0%B2%D1%8F%D0%BD%D0%BA%D1%83_3%2C_%D0%9F%D0%B0%D0%B2%D0%BB%D0%BE%D0%B2%D1%81%D0%BA.jpg",
+    "borodinsky_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/b/bf/%D0%91%D0%BE%D1%80%D0%BE%D0%B4%D0%B8%D0%BD%D1%81%D0%BA%D0%B8%D0%B9_%D0%BC%D0%BE%D1%81%D1%82%2C_%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0.jpg",
+    "borodinsky_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/f/f2/%D0%A0%D0%BE%D1%81%D1%82%D0%BE%D0%B2%D1%81%D0%BA%D0%B0%D1%8F_%D0%BD%D0%B0%D0%B1%D0%B5%D1%80%D0%B5%D0%B6%D0%BD%D0%B0%D1%8F%2C_%D0%B2%D0%B8%D0%B4_%D0%BD%D0%B0_%D0%91%D0%BE%D1%80%D0%BE%D0%B4%D0%B8%D0%BD%D1%81%D0%BA%D0%B8%D0%B9_%D0%BC%D0%BE%D1%81%D1%82.jpg",
+    "borodinsky_3.jpg": "https://live.staticflickr.com/1639/26390491765_34d67fe0ca_b.jpg",
+    "borodinsky_4.jpg": "https://upload.wikimedia.org/wikipedia/commons/c/c9/%D0%91%D0%BE%D1%80%D0%BE%D0%B4%D0%B8%D0%BD%D1%81%D0%BA%D0%B8%D0%B9_%D0%BC%D0%BE%D1%81%D1%82_2021.jpg",
+    "khmelnitsky_1.jpg": "https://live.staticflickr.com/4112/5172329454_8f2d560812_b.jpg",
+    "khmelnitsky_2.jpg": "https://live.staticflickr.com/4151/5171730209_43572d9c39_b.jpg",
+    "khmelnitsky_3.jpg": "https://live.staticflickr.com/4090/5171725307_b746f00daa_b.jpg",
+    "khmelnitsky_4.jpg": "https://live.staticflickr.com/4110/5172327986_86d7f1c73f_b.jpg",
+    "krymsky_1.jpg": "https://live.staticflickr.com/8544/29193920104_2a0453c36c_b.jpg",
+    "krymsky_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/f/f9/%D0%9A%D1%80%D1%8B%D0%BC%D1%81%D0%BA%D0%B8%D0%B9_%D0%BC%D0%BE%D1%81%D1%82_13_%D1%81%D0%B5%D0%BD%D1%82%D1%8F%D0%B1%D1%80%D1%8F_2019_%D0%B3%D0%BE%D0%B4%D0%B0_%281%29.jpg",
+    "krymsky_3.jpg": "https://live.staticflickr.com/65535/8539294023_340dfeac17_b.jpg",
+    "krymsky_4.jpg": "https://upload.wikimedia.org/wikipedia/commons/e/e3/%D0%9A%D1%80%D1%8B%D0%BC%D1%81%D0%BA%D0%B8%D0%B9_%D0%BC%D0%BE%D1%81%D1%82_21_%D0%B4%D0%B5%D0%BA%D0%B0%D0%B1%D1%80%D1%8F_2019_%D0%B3%D0%BE%D0%B4%D0%B0.jpg",
+    "novospassky_bridge_1.jpg": "https://live.staticflickr.com/5146/5748224625_0a4f69f7ba_b.jpg",
+    "novospassky_bridge_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/9/90/%D0%9F%D1%80%D0%B8%D1%87%D0%B0%D0%BB_%D0%9D%D0%BE%D0%B2%D0%BE%D1%81%D0%BF%D0%B0%D1%81%D1%81%D0%BA%D0%B8%D0%B9_%D0%BC%D0%BE%D1%81%D1%82_%D1%8447.jpg",
+    "novospassky_bridge_3.jpg": "https://upload.wikimedia.org/wikipedia/commons/4/40/Moscow%2C_Novospassky_Bridge_August_2012_01.jpg",
+    "novospassky_bridge_4.jpg": "https://upload.wikimedia.org/wikipedia/commons/6/6f/%D0%9D%D0%BE%D0%B2%D0%BE%D1%81%D0%BF%D0%B0%D1%81%D1%81%D0%BA%D0%B8%D0%B9_%D0%BC%D0%BE%D1%81%D1%82.jpg",
+    "patriarshy_1.jpg": "https://live.staticflickr.com/4151/5155149326_0f196876af_b.jpg",
+    "patriarshy_2.jpg": "https://live.staticflickr.com/2635/4160214254_eb0038727f_b.jpg",
+    "patriarshy_3.jpg": "https://live.staticflickr.com/2555/4160214830_4ac013eb0d_b.jpg",
+    "patriarshy_4.jpg": "https://live.staticflickr.com/2672/4159457335_50dc882a05_b.jpg",
+    "pushkinsky_1.jpg": "https://live.staticflickr.com/8544/29193920104_2a0453c36c_b.jpg",
+    "pushkinsky_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/0/01/%D0%9F%D1%83%D1%88%D0%BA%D0%B8%D0%BD%D1%81%D0%BA%D0%B8%D0%B9_%D0%BC%D0%BE%D1%81%D1%82.JPG",
+    "pushkinsky_3.jpg": "https://live.staticflickr.com/8779/28794266911_b059603cea_b.jpg",
+    "pushkinsky_4.jpg": "https://upload.wikimedia.org/wikipedia/commons/0/01/%D0%9F%D1%83%D1%88%D0%BA%D0%B8%D0%BD%D1%81%D0%BA%D0%B8%D0%B9_%D0%BC%D0%BE%D1%81%D1%82_%28%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%29.jpg",
+    "tretyakovsky_bridge_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/6/6e/Moscow_-_2025_-_Tretyakovsky_Bridge.jpg",
+    "tretyakovsky_bridge_2.jpg": "https://live.staticflickr.com/5821/22326916559_263b75d484_b.jpg",
+    "tretyakovsky_bridge_3.jpg": "https://upload.wikimedia.org/wikipedia/commons/3/3e/Moscow_-_Tretyakov_Bridge1.jpg",
+    "tretyakovsky_bridge_4.jpg": "https://live.staticflickr.com/5633/22326916449_25a31b0f93_b.jpg",
+    "zhivopisny_1.jpg": "https://live.staticflickr.com/3250/3035196009_6476d3072d_b.jpg",
+    "zhivopisny_2.jpg": "https://live.staticflickr.com/65535/51385550551_302aa96498_b.jpg",
+    "zhivopisny_3.jpg": "https://upload.wikimedia.org/wikipedia/commons/5/54/%D0%96%D0%B8%D0%B2%D0%BE%D0%BF%D0%B8%D1%81%D0%BD%D1%8B%D0%B9_%D0%BC%D0%BE%D1%81%D1%82_%D1%87%D0%B5%D1%80%D0%B5%D0%B7_%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D1%83-%D1%80%D0%B5%D0%BA%D1%83_%D0%B2_%D0%A1%D0%B5%D1%80%D0%B5%D0%B1%D1%80%D1%8F%D0%BD%D0%BE%D0%BC_%D0%91%D0%BE%D1%80%D1%83_%D0%B2_%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B5_%282007_%D0%B3.%29.jpg",
+    "zhivopisny_4.jpg": "https://live.staticflickr.com/65535/51390385314_6d7b4aa9bd_b.jpg",
+}
+
 BRIDGE_IMAGE_FALLBACKS: dict[str, list[str]] = {}
+

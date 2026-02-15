@@ -82,6 +82,36 @@ python scripts/build_pdf.py --guide places_of_worship
 стадионы, планетарии, галереи, усадьбы (отдельно от дворцов), фонтаны,
 памятники архитектуры, сады и оранжереи, улицы и бульвары.
 
+### Полный путеводитель по Москве (Moscow Complete Guide)
+
+Скрипт **scripts/build_full_guide.py** собирает один сводный HTML и PDF из всех
+тематических гидов: титульная страница, предисловие, главы по темам, примечания.
+
+```bash
+# Сборка по имеющимся изображениям (без загрузки)
+python scripts/build_full_guide.py
+
+# С предварительной загрузкой недостающих изображений
+python scripts/build_full_guide.py --download-images
+```
+
+Результат: **output/Moscow_Complete_Guide.html**, **output/Moscow_Complete_Guide.pdf**.
+При наличии старого PDF создаётся бэкап в **output/backup/** (до 3 копий).
+
+### User workflow — редактирование и пересборка PDF
+
+Кратко: **собрать → открыть HTML в браузере → править текст/картинки → Export HTML → сохранить файл → пересобрать PDF** (`--use-existing-html`).
+
+| Шаг | Действие |
+|-----|----------|
+| 1 | Соберите полный путеводитель: `python scripts/build_full_guide.py` |
+| 2 | Откройте **output/Moscow_Complete_Guide.html** в браузере |
+| 3 | Редактируйте: меняйте текст в ячейках, удаляйте фото (× на изображении), добавляйте свои (кнопка «+ Add image», до 4 на объект) |
+| 4 | Нажмите **Export HTML** (кнопка справа вверху), сохраните скачанный файл поверх **output/Moscow_Complete_Guide.html** |
+| 5 | Пересоберите только PDF: `python scripts/build_full_guide.py --use-existing-html` |
+
+Итог: **output/Moscow_Complete_Guide.pdf** будет содержать все ваши правки. Шрифты и вёрстка не меняются.
+
 ### Структура проекта
 
 - `data/monasteries.py`, `data/churches.py`, `data/parks.py`, `data/museums.py`,
@@ -91,6 +121,7 @@ python scripts/build_pdf.py --guide places_of_worship
 - `data/image_urls.py`, `data/church_image_urls.py`, `data/park_image_urls.py`, … —
   URL изображений (Commons)
 - `scripts/build_pdf.py` — сборка HTML/PDF (`--guide` с выбором гида)
+- `scripts/build_full_guide.py` — полный путеводитель (Moscow_Complete_Guide), редактируемый HTML
 - `scripts/download_images.py` — цикл загрузки фото в `moscow_monasteries` до успеха
 - `output/images/moscow_monasteries/`, `moscow_churches/`, `moscow_parks/`,
   `moscow_museums/`, `moscow_palaces/`, `moscow_buildings/`, `moscow_sculptures/`,
@@ -284,6 +315,7 @@ pytest -q
 
 - **scripts/core.py** — базовые утилиты: исключения, логирование, валидация
 - **scripts/build_pdf.py** — сборка HTML/PDF
+- **scripts/build_full_guide.py** — полный путеводитель, редактируемый HTML, PDF по частям
 - **scripts/download_with_dedup.py** — загрузка с дедупликацией
 - **scripts/guide_loader.py** — загрузка данных гидов
 - **scripts/helpers/** — вспомогательные скрипты (legacy)

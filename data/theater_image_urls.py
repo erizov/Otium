@@ -1,5 +1,50 @@
 # -*- coding: utf-8 -*-
-"""URL изображений театров Москвы (заполняется при загрузке)."""
+"""Image URLs filled by place name (Commons, Pixabay, Pexels, Openverse, etc.). No placeholders."""
 
-THEATER_IMAGE_DOWNLOADS: dict[str, str] = {}
+THEATER_IMAGE_DOWNLOADS: dict[str, str] = {
+    "bolshoy_1.jpg": "https://live.staticflickr.com/21/32169333_e1b3b2036d_b.jpg",
+    "bolshoy_2.jpg": "https://live.staticflickr.com/6170/6155810670_d57f50ee2f_b.jpg",
+    "bolshoy_3.jpg": "https://live.staticflickr.com/5515/10574699743_d479116b4b_b.jpg",
+    "bolshoy_4.jpg": "https://upload.wikimedia.org/wikipedia/commons/9/94/Line_11_%28Moscow%29.svg",
+    "et_cetera_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/2/22/Et_Cetera_theatre._Moscow_2_%2849185612683%29.jpg",
+    "et_cetera_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/f/f7/%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0._%D0%A4%D1%80%D0%BE%D0%BB%D0%BE%D0%B2_%D0%BF%D0%B5%D1%80%D0%B5%D1%83%D0%BB%D0%BE%D0%BA%2C_2_%28%D0%AD%D0%BB%D0%A1%D0%B5%D1%82%D0%B5%D1%80%D0%B0%2C_%D0%B2%D0%B8%D0%B4_%D1%81%D0%BE_%D0%A1%D1%80%D0%B5%D1%82.%D0%B1%D1%83%D0%BB%29_IMG_2107.3_e1.jpg",
+    "et_cetera_3.jpg": "https://live.staticflickr.com/65535/32723016677_1b05b495b4_b.jpg",
+    "et_cetera_4.jpg": "https://live.staticflickr.com/65535/48053918896_f454c6bd09_b.jpg",
+    "fomenko_1.jpg": "https://live.staticflickr.com/669/22558213988_9ab6a4e9fb_b.jpg",
+    "gogol_center_1.jpg": "https://live.staticflickr.com/5747/22987676991_42ddc88d2d_b.jpg",
+    "gogol_center_2.jpg": "https://avatars.mds.yandex.net/get-altay/1583511/2a0000016c3e52e4b985658d1d2a1f873c7c/orig",
+    "gogol_center_3.jpg": "https://live.staticflickr.com/748/22558202377_ab8e61e159_b.jpg",
+    "gogol_center_4.jpg": "https://avatars.mds.yandex.net/get-altay/1583511/2a0000016c3e52e4b985658d1d2a1f873c7c/XXXL",
+    "helikon_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/a/a3/%D0%9F%D0%B0%D0%B2%D0%B5%D0%BB_%D0%91%D1%8B%D0%BA%D0%BE%D0%B2%2C_%22%D0%93%D0%B5%D0%BB%D0%B8%D0%BA%D0%BE%D0%BD-%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%22.jpg",
+    "helikon_2.jpg": "https://live.staticflickr.com/5669/22987648281_8c7271e8dc_b.jpg",
+    "helikon_3.jpg": "https://live.staticflickr.com/5804/22788511780_8c23e556cc_b.jpg",
+    "lenkom_1.jpg": "https://live.staticflickr.com/4085/5204113799_f30bf9743a_b.jpg",
+    "lenkom_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/4/46/%D0%A2%D0%B5%D0%B0%D1%82%D1%80_%C2%AB%D0%9B%D0%B5%D0%BD%D0%BA%D0%BE%D0%BC%C2%BB_2011-05-12_%D0%9F%D0%B5%D1%80%D0%B5%D0%BA%D1%80%D1%91%D1%81%D1%82%D0%BE%D0%BA_%D0%9D%D0%B0%D1%81%D1%82%D0%B0%D1%81%D1%8C%D0%B8%D0%BD%D1%81%D0%BA%D0%BE%D0%B3%D0%BE_%D0%BF%D0%B5_-_panoramio.jpg",
+    "lenkom_3.jpg": "https://upload.wikimedia.org/wikipedia/commons/3/36/%D0%A0%D0%B5%D0%BF%D0%B5%D1%82%D0%B8%D1%86%D0%B8%D1%8F_%D1%81%D0%BF%D0%B5%D0%BA%D1%82%D0%B0%D0%BA%D0%BB%D1%8F_%D0%94%D1%80%D0%B0%D0%BA%D0%BE%D0%BD_%D1%82%D0%B5%D0%B0%D1%82%D1%80_%D0%9B%D0%B5%D0%BD%D0%B8%D0%BD%D0%B3%D1%80%D0%B0%D0%B4%D1%81%D0%BA%D0%B8%D0%B9_%D0%9B%D0%B5%D0%BD%D0%BA%D0%BE%D0%BC_%D0%B2_%D1%80%D0%BE%D0%BB%D0%B8_%D0%9A%D0%BE%D1%82%D0%B0_%D0%92._%D0%A1%D1%83%D1%85%D0%BE%D1%80%D1%83%D0%BA%D0%BE%D0%B2_%D0%B2_%D1%80%D0%BE%D0%BB%D0%B8_%D0%AD%D0%BB%D1%8C%D0%B7%D1%8B_%D0%9B._%D0%9B%D1%83%D0%BF%D0%BF%D0%B8%D0%B0%D0%BD.JPG",
+    "lenkom_4.jpg": "https://upload.wikimedia.org/wikipedia/commons/4/45/Vladimir_Putin_at_award_ceremonies_%282007-12-13%29_05.jpg",
+    "maly_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/b/b2/Moscow%2C_Maly_Kislovsky_Lane%2C_Mayakovsky_Theater_%2830273460683%29.jpg",
+    "maly_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/0/0e/%D0%9F%D0%BE%D0%B5%D0%B7%D0%B4_%C2%AB%D0%9C%D0%B0%D0%BB%D1%8B%D0%B9_%D1%82%D0%B5%D0%B0%D1%82%D1%80%C2%BB.jpg",
+    "maly_3.jpg": "https://upload.wikimedia.org/wikipedia/commons/1/1a/Maly_Theatre_in_Moscow.jpg",
+    "maly_4.jpg": "https://upload.wikimedia.org/wikipedia/commons/e/e3/%D0%9F%D0%BE%D0%B5%D0%B7%D0%B4_%C2%AB%D0%9C%D0%B0%D0%BB%D1%8B%D0%B9_%D1%82%D0%B5%D0%B0%D1%82%D1%80%C2%BB%2C_%D1%81%D0%B0%D0%BB%D0%BE%D0%BD.jpg",
+    "mhat_1.jpg": "https://live.staticflickr.com/3945/15348964547_5a042d62a3_b.jpg",
+    "mhat_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/6/6f/Vladimir_Putin_and_Oleg_Tabakov_%282004-01-25%29.jpg",
+    "practika_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/2/28/%D0%A1%D0%BF%D0%B5%D0%BA%D1%82%D0%B0%D0%BA%D0%BB%D1%8C_%C2%AB%D0%9C%D0%B0%D0%BC%D0%B0%2C_%D1%8F_%D0%B2_%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B5%C2%BB_%D1%82%D0%B5%D0%B0%D1%82%D1%80_%D0%9F%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%BA%D0%B0%2C_%D0%BC%D1%83%D0%B7%D0%B5%D0%B9_%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D1%8B_07.jpg",
+    "practika_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/3/39/%D0%A1%D0%BF%D0%B5%D0%BA%D1%82%D0%B0%D0%BA%D0%BB%D1%8C_%C2%AB%D0%9C%D0%B0%D0%BC%D0%B0%2C_%D1%8F_%D0%B2_%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B5%C2%BB_%D1%82%D0%B5%D0%B0%D1%82%D1%80_%D0%9F%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%BA%D0%B0%2C_%D0%BC%D1%83%D0%B7%D0%B5%D0%B9_%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D1%8B_05.jpg",
+    "practika_3.jpg": "https://upload.wikimedia.org/wikipedia/commons/3/3e/%D0%A1%D0%BF%D0%B5%D0%BA%D1%82%D0%B0%D0%BA%D0%BB%D1%8C_%D0%9E%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0_%D1%82%D0%B5%D0%B0%D1%82%D1%80_%D0%9F%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%BA%D0%B0_02.jpg",
+    "practika_4.jpg": "https://upload.wikimedia.org/wikipedia/commons/3/37/%D0%A1%D0%BF%D0%B5%D0%BA%D1%82%D0%B0%D0%BA%D0%BB%D1%8C_%D0%9E%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0_%D1%82%D0%B5%D0%B0%D1%82%D1%80_%D0%9F%D1%80%D0%B0%D0%BA%D1%82%D0%B8%D0%BA%D0%B0_03.jpg",
+    "satirikon_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/e/e0/Moscow%2C_Satyrikon_Theater_building_%28later_demolished%29_%2830699831700%29.jpg",
+    "satirikon_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/3/3a/%D0%A1%D0%BF%D0%B5%D0%BA%D1%82%D0%B0%D0%BA%D0%BB%D1%8C_%22%D0%A0%22_%D1%82%D0%B5%D0%B0%D1%82%D1%80_%D0%A1%D0%B0%D1%82%D0%B8%D1%80%D0%B8%D0%BA%D0%BE%D0%BD_%D0%A0%D0%B5%D0%B6%D0%B8%D1%81%D1%81%D0%B5%D1%80_%D0%AE%D1%80%D0%B8%D0%B9_%D0%91%D1%83%D1%82%D1%83%D1%81%D0%BE%D0%B2_01.jpg",
+    "satirikon_3.jpg": "https://upload.wikimedia.org/wikipedia/commons/d/d6/%C2%AB%D0%A8%D1%83%D1%82%D0%BD%D0%B8%D0%BA%D0%B8%C2%BB%2C_%D0%A2%D0%B5%D0%B0%D1%82%D1%80_%C2%AB%D0%A1%D0%B0%D1%82%D0%B8%D1%80%D0%B8%D0%BA%D0%BE%D0%BD%C2%BB_%D0%B8%D0%BC%D0%B5%D0%BD%D0%B8_%D0%90%D1%80%D0%BA%D0%B0%D0%B4%D0%B8%D1%8F_%D0%A0%D0%B0%D0%B9%D0%BA%D0%B8%D0%BD%D0%B0%2C_%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0_17.jpg",
+    "satirikon_4.jpg": "https://upload.wikimedia.org/wikipedia/commons/5/5b/%C2%AB%D0%A8%D1%83%D1%82%D0%BD%D0%B8%D0%BA%D0%B8%C2%BB%2C_%D0%A2%D0%B5%D0%B0%D1%82%D1%80_%C2%AB%D0%A1%D0%B0%D1%82%D0%B8%D1%80%D0%B8%D0%BA%D0%BE%D0%BD%C2%BB_%D0%B8%D0%BC%D0%B5%D0%BD%D0%B8_%D0%90%D1%80%D0%BA%D0%B0%D0%B4%D0%B8%D1%8F_%D0%A0%D0%B0%D0%B9%D0%BA%D0%B8%D0%BD%D0%B0%2C_%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0_15.jpg",
+    "sovremennik_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/c/cb/Moscow%2C_Chistoprudny_Boulevard_19%2C_January_2014.jpg",
+    "sovremennik_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/6/6f/%C2%AB%D0%A1%D0%BE%D0%B1%D1%80%D0%B0%D0%BD%D0%B8%D0%B5_%D1%81%D0%BE%D1%87%D0%B8%D0%BD%D0%B5%D0%BD%D0%B8%D0%B9%C2%BB%2C_%D0%A2%D0%B5%D0%B0%D1%82%D1%80_%C2%AB%D0%A1%D0%BE%D0%B2%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%BD%D0%B8%D0%BA%C2%BB%2C_%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0_95.jpg",
+    "sovremennik_3.jpg": "https://upload.wikimedia.org/wikipedia/commons/0/05/%C2%AB%D0%A1%D0%BE%D0%B1%D1%80%D0%B0%D0%BD%D0%B8%D0%B5_%D1%81%D0%BE%D1%87%D0%B8%D0%BD%D0%B5%D0%BD%D0%B8%D0%B9%C2%BB%2C_%D0%A2%D0%B5%D0%B0%D1%82%D1%80_%C2%AB%D0%A1%D0%BE%D0%B2%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%BD%D0%B8%D0%BA%C2%BB%2C_%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0_94.jpg",
+    "sovremennik_4.jpg": "https://upload.wikimedia.org/wikipedia/commons/e/e2/%C2%AB%D0%A1%D0%BE%D0%B1%D1%80%D0%B0%D0%BD%D0%B8%D0%B5_%D1%81%D0%BE%D1%87%D0%B8%D0%BD%D0%B5%D0%BD%D0%B8%D0%B9%C2%BB%2C_%D0%A2%D0%B5%D0%B0%D1%82%D1%80_%C2%AB%D0%A1%D0%BE%D0%B2%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D0%BD%D0%B8%D0%BA%C2%BB%2C_%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0_99.jpg",
+    "taganka_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/8/8e/Moscow%2C_V_Radischevskaya_Street_-_east_end_at_Taganka_Theatre_%281%29.jpg",
+    "taganka_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/8/89/%D0%A2%D0%B5%D0%B0%D1%82%D1%80_%D0%BD%D0%B0_%D0%A2%D0%B0%D0%B3%D0%B0%D0%BD%D0%BA%D0%B5._%D0%90%D1%84%D0%B8%D1%88%D0%B8_6.jpg",
+    "taganka_3.jpg": "https://upload.wikimedia.org/wikipedia/commons/c/cb/%D0%A2%D0%B5%D0%B0%D1%82%D1%80_%D0%BD%D0%B0_%D0%A2%D0%B0%D0%B3%D0%B0%D0%BD%D0%BA%D0%B5._%D0%90%D1%84%D0%B8%D1%88%D0%B0_%D0%9F%D1%83%D0%B3%D0%B0%D1%87%D1%91%D0%B2_%28cropped%29.jpg",
+    "taganka_4.jpg": "https://upload.wikimedia.org/wikipedia/commons/4/4d/%D0%A2%D0%B5%D0%B0%D1%82%D1%80_%D0%BD%D0%B0_%D0%A2%D0%B0%D0%B3%D0%B0%D0%BD%D0%BA%D0%B5._%D0%90%D1%84%D0%B8%D1%88%D0%B0_%D0%9F%D0%BE%D1%81%D0%BB%D1%83%D1%88%D0%B0%D0%B9%D1%82%D0%B5%21.jpg",
+}
+
 THEATER_IMAGE_FALLBACKS: dict[str, list[str]] = {}
+

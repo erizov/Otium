@@ -179,3 +179,31 @@ def load_guide_with_downloads(guide: str) -> tuple[list[dict[str, Any]], dict]:
         from data.cafe_image_urls import CAFE_IMAGE_DOWNLOADS
         return places, CAFE_IMAGE_DOWNLOADS
     raise ValueError("Unknown guide: {}".format(guide))
+
+
+# Variable name for stories dict per guide (must match fetch_place_stories.py)
+_GUIDE_STORIES_VAR: dict[str, str] = {}
+for _g in GUIDES:
+    _b = _g.rstrip("s") if _g.endswith("s") else _g
+    _GUIDE_STORIES_VAR[_g] = "{}_STORIES".format(
+        _b.upper().replace("-", "_")
+    )
+_GUIDE_STORIES_VAR["places_of_worship"] = "PLACES_OF_WORSHIP_STORIES"
+_GUIDE_STORIES_VAR["railway_stations"] = "RAILWAY_STATION_STORIES"
+
+
+def load_stories(guide: str) -> dict[str, str]:
+    """
+    Load optional place stories (name -> story text) for a guide.
+    Returns {} if no stories file or on import error.
+    """
+    if guide not in _GUIDE_STORIES_VAR:
+        return {}
+    var_name = _GUIDE_STORIES_VAR[guide]
+    mod_name = "data.{}_stories".format(guide)
+    try:
+        import importlib
+        mod = importlib.import_module(mod_name)
+        return getattr(mod, var_name, {}) or {}
+    except Exception:
+        return {}

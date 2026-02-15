@@ -1,5 +1,56 @@
 # -*- coding: utf-8 -*-
-"""URL изображений площадей Москвы (заполняется при загрузке)."""
+"""Image URLs filled by place name (Commons, Pixabay, Pexels, Openverse, etc.). No placeholders."""
 
-SQUARES_IMAGE_DOWNLOADS: dict[str, str] = {}
+SQUARES_IMAGE_DOWNLOADS: dict[str, str] = {
+    "arbatskaya_square_1.jpg": "https://live.staticflickr.com/4108/5211584874_e862ff5baa_b.jpg",
+    "arbatskaya_square_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/f/f6/Moscow%2C_Arbatskie_Vorota_Square_%28569%29.jpg",
+    "arbatskaya_square_3.jpg": "https://upload.wikimedia.org/wikipedia/commons/8/8f/%D0%90%D1%80%D0%B1%D0%B0%D1%82%D1%81%D0%BA%D0%B0%D1%8F_%D0%BF%D0%BB%D0%BE%D1%89%D0%B0%D0%B4%D1%8C_%2820221104162840%29.jpg",
+    "arbatskaya_square_4.jpg": "https://upload.wikimedia.org/wikipedia/commons/6/69/Moscow%2C_Arbatskaya_Square_chapel_%2830998470966%29.jpg",
+    "kaluzhskaya_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/a/aa/Kaluzhskaya_Square_in_Moscow.jpeg",
+    "kaluzhskaya_2.jpg": "https://live.staticflickr.com/1723/28521175358_2ce4a64b36_b.jpg",
+    "kaluzhskaya_3.jpg": "https://live.staticflickr.com/1117/5154519155_53a59e9677_b.jpg",
+    "kaluzhskaya_4.jpg": "https://live.staticflickr.com/8537/8684449303_67c5265bd9_b.jpg",
+    "lubyanka_1.jpg": "https://live.staticflickr.com/4119/4907424799_5e083e1ea0.jpg",
+    "lubyanka_2.jpg": "https://live.staticflickr.com/1326/1330487025_4c5d84c0cf_b.jpg",
+    "lubyanka_3.jpg": "https://live.staticflickr.com/634/21250422041_0d5abaf074_b.jpg",
+    "lubyanka_4.jpg": "https://upload.wikimedia.org/wikipedia/commons/1/1c/Moscow%2C_Lubyanka_Square_to_Pushechnaya_Street_%2843265291412%29.jpg",
+    "manezhnaya_1.jpg": "https://live.staticflickr.com/65535/49874856696_f88dcc2a43_b.jpg",
+    "manezhnaya_2.jpg": "https://live.staticflickr.com/8403/29629886971_ea8ee28ea5_b.jpg",
+    "manezhnaya_3.jpg": "https://upload.wikimedia.org/wikipedia/commons/e/e1/Moscow_Manezhnaya_ploshad.JPG",
+    "manezhnaya_4.jpg": "https://upload.wikimedia.org/wikipedia/commons/e/ec/%D0%9C%D0%B0%D0%BD%D0%B5%D0%B6%D0%BD%D0%B0%D1%8F_%D0%BF%D0%BB%D0%BE%D1%89%D0%B0%D0%B4%D1%8C_-_panoramio_%281%29.jpg",
+    "pushkinskaya_1.jpg": "https://live.staticflickr.com/7041/6956956121_cdd88c6faa_b.jpg",
+    "pushkinskaya_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/9/95/%D0%A2%D0%B2%D0%B5%D1%80%D1%81%D0%BA%D0%BE%D0%B9_%D0%B1-%D1%80%2C_%D0%9F%D1%83%D1%88%D0%BA%D0%B8%D0%BD%D1%81%D0%BA%D0%B0%D1%8F_%D0%BF%D0%BB%D0%BE%D1%89%D0%B0%D0%B4%D1%8C_20210123_135707.jpg",
+    "pushkinskaya_3.jpg": "https://live.staticflickr.com/7046/6956957867_7f1903baa3_b.jpg",
+    "pushkinskaya_4.jpg": "https://upload.wikimedia.org/wikipedia/commons/1/11/%D0%98%D0%B7%D0%B2%D0%B5%D1%81%D1%82%D0%B8%D1%8F_%D0%9F%D1%83%D1%88%D0%BA%D0%B8%D0%BD%D1%81%D0%BA%D0%B0%D1%8F_%D0%BF%D0%BB%D0%BE%D1%89%D0%B0%D0%B4%D1%8C.jpg",
+    "revolution_square_1.jpg": "https://live.staticflickr.com/5642/22062983870_e0a3a57ff0_b.jpg",
+    "revolution_square_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Ploshchad_Revolyutsii_%28%D0%9F%D0%BB%D0%BE%D1%89%D0%B0%D0%B4%D1%8C_%D0%A0%D0%B5%D0%B2%D0%BE%D0%BB%D1%8E%D1%86%D0%B8%D0%B8%29_%285087251262%29.jpg",
+    "revolution_square_3.jpg": "https://live.staticflickr.com/5663/22224956406_fed305cac4_b.jpg",
+    "revolution_square_4.jpg": "https://upload.wikimedia.org/wikipedia/commons/a/a4/%D0%9F%D0%B0%D0%BC%D1%8F%D1%82%D0%BD%D0%B8%D0%BA_%D0%B1%D0%BE%D1%80%D1%86%D0%B0%D0%BC_%D0%B7%D0%B0_%D0%B2%D0%BB%D0%B0%D1%81%D1%82%D1%8C_%D0%A1%D0%BE%D0%B2%D0%B5%D1%82%D0%BE%D0%B2%2C_%D0%BF%D0%BB%D0%BE%D1%89%D0%B0%D0%B4%D1%8C_%D0%A0%D0%B5%D0%B2%D0%BE%D0%BB%D1%8E%D1%86%D0%B8%D0%B8%2C_%D0%A3%D0%BB%D0%B0%D0%BD-%D0%A3%D0%B4%D1%8D..jpg",
+    "rizhskaya_square_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/7/7d/Moscow_Riga_Railway_Terminal_2011.JPG",
+    "rizhskaya_square_2.jpg": "https://live.staticflickr.com/5242/5196008320_d76d608430_b.jpg",
+    "rizhskaya_square_3.jpg": "https://upload.wikimedia.org/wikipedia/commons/5/51/%D0%A0%D0%B8%D0%B6%D1%81%D0%BA%D0%B0%D1%8F_%D0%BF%D0%BB%D0%BE%D1%89%D0%B0%D0%B4%D1%8C_17_%D0%B4%D0%B5%D0%BA%D0%B0%D0%B1%D1%80%D1%8F_2025_%D0%B3%D0%BE%D0%B4%D0%B0.jpg",
+    "rizhskaya_square_4.jpg": "https://upload.wikimedia.org/wikipedia/commons/4/4d/Moscow_Square_near_Riga_Railway_Terminal_2011.JPG",
+    "slavyanskaya_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/7/7f/Moscow%2C_Radisson-Slavyanskaya_hotel_%282015%29_by_shakko_01.JPG",
+    "slavyanskaya_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/8/88/%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C_%D0%A1%D0%BB%D0%B0%D0%B2%D1%8F%D0%BD%D1%81%D0%BA%D0%B0%D1%8F_%D0%BF%D0%BB%D0%BE%D1%89%D0%B0%D0%B4%D1%8C%2C_2.jpg",
+    "slavyanskaya_3.jpg": "https://upload.wikimedia.org/wikipedia/commons/0/07/Moscow%2C_Slavyanskaya_Square_-_Kitaigorod_bus_terminal_01.jpg",
+    "slavyanskaya_4.jpg": "https://upload.wikimedia.org/wikipedia/commons/6/6f/%D0%A1%D0%BB%D0%B0%D0%B2%D1%8F%D0%BD%D1%81%D0%BA%D0%B0%D1%8F_%D0%BF%D0%BB%D0%BE%D1%89%D0%B0%D0%B4%D1%8C_%D0%BF%D0%BB%D0%B8%D1%82%D0%B0_%D0%A1%D0%B0%D1%80%D0%B0%D1%82%D0%BE%D0%B2.jpg",
+    "sukharevskaya_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/c/c4/Krasnoselsky_District%2C_Moscow%2C_Russia_-_panoramio_%2862%29.jpg",
+    "sukharevskaya_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/9/9e/%D0%91%D0%BE%D0%BB%D1%8C%D1%88%D0%B0%D1%8F_%D0%A1%D1%83%D1%85%D0%B0%D1%80%D0%B5%D0%B2%D1%81%D0%BA%D0%B0%D1%8F_%D0%BF%D0%BB%D0%BE%D1%89%D0%B0%D0%B4%D1%8C.jpg",
+    "sukharevskaya_3.jpg": "https://core-renderer-tiles.maps.yandex.ru/tiles",
+    "sukharevskaya_4.jpg": "https://upload.wikimedia.org/wikipedia/commons/d/d4/Meshchansky_District%2C_Moscow%2C_Russia_-_panoramio_%28214%29.jpg",
+    "teatralnaya_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/1/16/Moscow%2C_Teatralnaya_Square_%2830920404961%29.jpg",
+    "teatralnaya_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/a/af/%D0%A2%D0%B5%D0%B0%D1%82%D1%80%D0%B0%D0%BB%D1%8C%D0%BD%D0%B0%D1%8F_%D0%BF%D0%BB%D0%BE%D1%89%D0%B0%D0%B4%D1%8C_%D0%B2_%D0%9D%D0%BE%D0%B2%D0%BE%D1%83%D1%80%D0%B0%D0%BB%D1%8C%D1%81%D0%BA%D0%B5.JPG",
+    "teatralnaya_3.jpg": "https://live.staticflickr.com/4134/4856024640_4d3135464c_b.jpg",
+    "teatralnaya_4.jpg": "https://upload.wikimedia.org/wikipedia/commons/c/c7/%D0%A2%D0%B5%D0%B0%D1%82%D1%80%D0%B0%D0%BB%D1%8C%D0%BD%D0%B0%D1%8F_%D0%BF%D0%BB%D0%BE%D1%89%D0%B0%D0%B4%D1%8C_017.JPG",
+    "triumfalnaya_1.jpg": "https://live.staticflickr.com/65535/49965383327_1ae64de64c_b.jpg",
+    "triumfalnaya_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/1/18/%D0%A2%D1%80%D0%B8%D1%83%D0%BC%D1%84%D0%B0%D0%BB%D1%8C%D0%BD%D0%B0%D1%8F_%D0%BF%D0%BB%D0%BE%D1%89%D0%B0%D0%B4%D1%8C_%D0%B2_%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B5_%D0%BD%D0%BE%D1%87%D1%8C%D1%8E_%2829.12.2024%29.jpg",
+    "triumfalnaya_3.jpg": "https://live.staticflickr.com/65535/49964601913_640a3fc2ff_b.jpg",
+    "triumfalnaya_4.jpg": "https://live.staticflickr.com/65535/47005563534_35ce127ce8_b.jpg",
+    "tverskaya_square_1.jpg": "https://live.staticflickr.com/8677/16459707388_11478058e2_b.jpg",
+    "tverskaya_square_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/6/6f/%D0%A2%D0%B2%D0%B5%D1%80%D1%8C%2C_%D0%A2%D0%B2%D0%B5%D1%80%D1%81%D0%BA%D0%B0%D1%8F_%D0%BF%D0%BB%D0%BE%D1%89%D0%B0%D0%B4%D1%8C%2C_1_%282%29.jpg",
+    "tverskaya_square_3.jpg": "https://upload.wikimedia.org/wikipedia/commons/b/be/%D0%9F%D0%BB%D0%BE%D1%89%D0%B0%D0%B4%D1%8C_%D0%A2%D0%B2%D0%B5%D1%80%D1%81%D0%BA%D0%B0%D1%8F_%D0%97%D0%B0%D1%81%D1%82%D0%B0%D0%B2%D0%B0_%28%D0%B2%D0%B8%D0%B4_%D1%81%D0%B2%D0%B5%D1%80%D1%85%D1%83%29.jpg",
+    "tverskaya_square_4.jpg": "https://live.staticflickr.com/1425/950935410_5b80208ff2.jpg",
+}
+
 SQUARES_IMAGE_FALLBACKS: dict[str, list[str]] = {}
+
