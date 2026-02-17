@@ -934,6 +934,7 @@ def _pdf_via_playwright(
     image_wait_timeout_ms: int = 15000,
     display_header_footer: bool = False,
     footer_template: Optional[str] = None,
+    header_template: Optional[str] = None,
 ) -> bool:
     """
     Генерирует PDF из HTML через Playwright.
@@ -942,6 +943,7 @@ def _pdf_via_playwright(
     больших документов увеличьте, например 60000).
     display_header_footer: если True и задан footer_template, добавляет футер
     с номерами страниц (Playwright подставляет pageNumber и totalPages).
+    header_template: если задан, подставляет шапку (убирает дату/время по умол.).
     """
     try:
         from playwright.sync_api import sync_playwright
@@ -1010,6 +1012,8 @@ def _pdf_via_playwright(
             if display_header_footer and footer_template:
                 pdf_options["display_header_footer"] = True
                 pdf_options["footer_template"] = footer_template
+                if header_template is not None:
+                    pdf_options["header_template"] = header_template
             page.pdf(**pdf_options)
             browser.close()
         return True
@@ -1063,6 +1067,15 @@ def _print_download_stats(stats: dict) -> None:
             __import__("time").strftime("%H:%M:%S"),
         ))
         print("  {}".format(", ".join(parts)))
+
+
+def _all_images_complete(images_subdir: Path, guide_name: str) -> bool:
+    """Check if all items have all 4 images downloaded."""
+    from scripts.download_with_dedup import validate_item_images_format
+    is_valid, errors = validate_item_images_format(
+        PLACES, images_subdir, guide_name=guide_name,
+    )
+    return is_valid and len(errors) == 0
 
 
 def _run_one_guide(args, stats_out: Optional[dict] = None) -> None:
@@ -1335,6 +1348,27 @@ def main() -> None:
 
         for g in BUILD_GUIDES:
             args.guide = g
+            _load_guide_config(g)
+            output_dir = (
+                Path(args.output_dir)
+                if getattr(args, "output_dir", None)
+                else _project_root / "output"
+            )
+            images_subdir = ensure_images_subdir(output_dir)
+            
+            # Check if all images already downloaded - skip rounds if complete
+            if _all_images_complete(images_subdir, g):
+                print("\n=== Guide: {} (all images complete, skipping download rounds) ===".format(g))
+                args.download_only = user_download_only
+                print("\n" + "=" * 60)
+                print("Guide: {} — build only (all images present)".format(g))
+                print("=" * 60)
+                try:
+                    _run_one_guide(args, stats_out=cumulative_stats)
+                except ValueError as e:
+                    print("  Skipped: {}".format(e), file=sys.stderr)
+                continue
+            
             if retries > 1:
                 print("\n=== Guide: {} (download rounds: {}) ===".format(g, retries))
 
@@ -1347,15 +1381,31 @@ def main() -> None:
                     _run_one_guide(args, stats_out=cumulative_stats)
                 except ValueError as e:
                     print("  Skipped: {}".format(e), file=sys.stderr)
+                # Check after round completes - if all images complete, skip remaining rounds
+                if _all_images_complete(images_subdir, g):
+                    print("\n  All images complete after round {}, skipping remaining rounds".format(round_one))
+                    break
 
-            args.download_only = user_download_only
-            print("\n" + "=" * 60)
-            print("Guide: {} — final round".format(g))
-            print("=" * 60)
-            try:
-                _run_one_guide(args, stats_out=cumulative_stats)
-            except ValueError as e:
-                print("  Skipped: {}".format(e), file=sys.stderr)
+            # Final round: check again before building
+            if not _all_images_complete(images_subdir, g):
+                args.download_only = user_download_only
+                print("\n" + "=" * 60)
+                print("Guide: {} — final round".format(g))
+                print("=" * 60)
+                try:
+                    _run_one_guide(args, stats_out=cumulative_stats)
+                except ValueError as e:
+                    print("  Skipped: {}".format(e), file=sys.stderr)
+            else:
+                # All complete, just build
+                args.download_only = user_download_only
+                print("\n" + "=" * 60)
+                print("Guide: {} — build only (all images complete)".format(g))
+                print("=" * 60)
+                try:
+                    _run_one_guide(args, stats_out=cumulative_stats)
+                except ValueError as e:
+                    print("  Skipped: {}".format(e), file=sys.stderr)
 
         stats_done.set()
         print("\n" + "=" * 60)
