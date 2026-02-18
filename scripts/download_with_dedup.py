@@ -1439,6 +1439,7 @@ def download_images_with_dedup(
 
         # Check upfront if all 4 images already exist and are valid
         # (skip entire item immediately if complete, unless force_overwrite)
+        # This skips ALL delays (time.sleep calls) by skipping before download loop
         if not force_overwrite:
             all_exist_and_valid = True
             existing_hashes_check = _get_existing_hashes(images_dir, images_root=images_root)
@@ -1464,7 +1465,8 @@ def download_images_with_dedup(
                     break
             
             if all_exist_and_valid:
-                print("  SKIP {}: all 4 images exist and valid, skipping item".format(item_name), flush=True)
+                # Skip immediately - no delays, no URL fetching, no downloads
+                print("  SKIP {}: all 4 images exist and valid, skipping item (no delays)".format(item_name), flush=True)
                 results[item_name] = 4
                 continue
 
