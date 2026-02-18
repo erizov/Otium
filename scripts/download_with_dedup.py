@@ -69,7 +69,7 @@ MAX_SOURCES_FOR_DELAY_SCALE = 20
 SOURCE_FAILURE_THRESHOLD = 3
 # When one variant fails, exclude all variants of same site (e.g. Pixabay*)
 _SITE_PREFIXES = ("Pixabay", "Pexels", "Unsplash", "Flickr", "Commons",
-                  "Openverse", "Yandex")
+                  "Openverse", "Yandex", "Pastvu")
 
 
 class SourceFetchError(Exception):
@@ -163,6 +163,9 @@ _ALL_SOURCE_NAMES = frozenset({
     "PixabayNameOnly", "FlickrNameOnly", "Openverse", "OpenverseNameOnly",
     "CommonsRussia", "PixabayRussia", "PexelsRussia", "UnsplashRussia",
     "YandexMaps", "YandexImages",
+    "CommonsCityRu", "OpenverseCityRu", "Pastvu", "PastvuMoscow",
+    "FlickrRussia", "FlickrCityRu", "PixabayCityRu", "PexelsCityRu",
+    "UnsplashCityRu",
 })
 
 
@@ -687,10 +690,70 @@ def _fetch_openverse_urls_for_place(
     return urls_list[:20]
 
 
+# Moscow center for Pastvu (historical photos)
+_PASTVU_MOSCOW_LAT = 55.7558
+_PASTVU_MOSCOW_LON = 37.6173
+
+
+def _fetch_pastvu_urls_for_place(
+    item_name: str,
+    city: str = "Moscow",
+    max_images: int = 10,
+) -> list[str]:
+    """
+    Fetch image URLs from Pastvu (historical photos) for Moscow/Москва.
+    Uses photo.giveNearestPhotos near city center; free, Russian-friendly.
+    """
+    city_lower = (city or "").lower()
+    if "москва" not in (city or "") and "moscow" not in city_lower:
+        return []
+    params = json.dumps({
+        "geo": [_PASTVU_MOSCOW_LAT, _PASTVU_MOSCOW_LON],
+        "limit": min(max_images, 30),
+        "distance": 15000,
+    })
+    url = (
+        "https://api.pastvu.com/api2?"
+        + urllib.parse.urlencode({"method": "photo.giveNearestPhotos",
+                                  "params": params})
+    )
+    req = urllib.request.Request(
+        url,
+        headers={"User-Agent": "ExcursionGuide/Pastvu/1.0"},
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            data = resp.read()
+    except (urllib.error.URLError, urllib.error.HTTPError, socket.timeout,
+            TimeoutError, OSError) as e:
+        logger.warning("Pastvu API failed: %s", e)
+        raise SourceFetchError(str(e))
+    try:
+        payload = json.loads(data.decode("utf-8", errors="ignore"))
+    except Exception:
+        return []
+    result = payload.get("result") or {}
+    photos = result.get("photos") or []
+    urls_list: list[str] = []
+    seen: set[str] = set()
+    for p in photos:
+        f = p.get("file")
+        if not f or not isinstance(f, str):
+            continue
+        # Standard size: https://img.pastvu.com/d/{file}
+        src = "https://img.pastvu.com/d/{}".format(f.strip())
+        if src not in seen:
+            urls_list.append(src)
+            seen.add(src)
+        if len(urls_list) >= max_images:
+            break
+    return urls_list[:20]
+
+
 def _source_api_family(name: str) -> str:
     """Return API family: Pixabay* -> Pixabay, Flickr* -> Flickr, etc."""
     for prefix in ("Pixabay", "Flickr", "Commons", "Pexels", "Unsplash",
-                   "Openverse", "Yandex"):
+                   "Openverse", "Yandex", "Pastvu"):
         if name.startswith(prefix):
             return prefix
     return name
@@ -778,11 +841,39 @@ def _fetch_urls_round_robin(
         ("UnsplashRussia", lambda q: _fetch_unsplash_urls_for_place(
             q, city="Russia", max_images=max_per_source,
         )),
+        ("FlickrRussia", lambda q: _fetch_flickr_urls_for_place(
+            q, city="Russia", max_images=max_per_source,
+        )),
+        ("FlickrCityRu", lambda q: _fetch_flickr_urls_for_place(
+            q, city=city_ru, max_images=max_per_source,
+        )),
+        ("PixabayCityRu", lambda q: _fetch_pixabay_urls_for_place(
+            q, city=city_ru, max_images=max_per_source,
+        )),
+        ("PexelsCityRu", lambda q: _fetch_pexels_urls_for_place(
+            q, city=city_ru, max_images=max_per_source,
+        )),
+        ("UnsplashCityRu", lambda q: _fetch_unsplash_urls_for_place(
+            q, city=city_ru, max_images=max_per_source,
+        )),
         ("YandexMaps", lambda q: _fetch_yandex_urls_for_place(
             q, city=city_ru, max_images=max_per_source,
         )),
         ("YandexImages", lambda q: _fetch_yandex_images_urls(
             q, city=city_ru, max_images=max_per_source,
+        )),
+        # Russian and free-image sources (Moscow/Москва)
+        ("CommonsCityRu", lambda q: _fetch_commons_urls_for_place(
+            q, city=city_ru, max_images=max_per_source,
+        )),
+        ("OpenverseCityRu", lambda q: _fetch_openverse_urls_for_place(
+            q, city=city_ru, max_images=max_per_source,
+        )),
+        ("Pastvu", lambda q: _fetch_pastvu_urls_for_place(
+            q, city=city_ru, max_images=max_per_source,
+        )),
+        ("PastvuMoscow", lambda q: _fetch_pastvu_urls_for_place(
+            q, city="Moscow", max_images=max_per_source,
         )),
     ]
     sources = [
@@ -832,7 +923,9 @@ def _fetch_urls_round_robin(
                     seen.add(u)
     # Scale delay by N: configured sources = each site called every Nth try
     num_configured = len(sources)
-    return interleaved[:60], max(1, min(num_configured, MAX_SOURCES_FOR_DELAY_SCALE))
+    # Allow more URLs when many sources (improve chance of at least one download)
+    max_urls = 80 if num_configured > 20 else 60
+    return interleaved[:max_urls], max(1, min(num_configured, MAX_SOURCES_FOR_DELAY_SCALE))
 
 
 def _fetch_yandex_images_urls(
@@ -1307,8 +1400,9 @@ def download_images_with_dedup(
     _failure_counts: dict[str, int] = {}
 
     # Process each item to get 4 distinct images
-    for item in items:
+    for item_idx, item in enumerate(items, 1):
         item_name = item.get("name", "?")
+        print("\n[{}/{}] Processing: {}".format(item_idx, len(items), item_name), flush=True)
         basenames = item_to_basenames.get(item_name, [])
 
         # Filter to only _1, _2, _3, _4 images (standard format)
@@ -1343,6 +1437,37 @@ def download_images_with_dedup(
                 ),
             )
 
+        # Check upfront if all 4 images already exist and are valid
+        # (skip entire item immediately if complete, unless force_overwrite)
+        if not force_overwrite:
+            all_exist_and_valid = True
+            existing_hashes_check = _get_existing_hashes(images_dir, images_root=images_root)
+            for basename in required_slots:
+                path = images_dir / basename
+                if not path.exists() or path.stat().st_size < MIN_IMAGE_BYTES:
+                    all_exist_and_valid = False
+                    break
+                this_hash = image_content_hash(path, min_bytes=MIN_IMAGE_BYTES)
+                if not this_hash or this_hash in forbidden_hashes:
+                    all_exist_and_valid = False
+                    break
+                # Check for duplicates against other files
+                is_dup = False
+                for existing_name, existing_hash in existing_hashes_check.items():
+                    if existing_name == basename:
+                        continue
+                    if existing_hash == this_hash:
+                        is_dup = True
+                        break
+                if is_dup:
+                    all_exist_and_valid = False
+                    break
+            
+            if all_exist_and_valid:
+                print("  SKIP {}: all 4 images exist and valid, skipping item".format(item_name), flush=True)
+                results[item_name] = 4
+                continue
+
         distinct_count = 0
 
         for basename in required_slots:
@@ -1353,16 +1478,31 @@ def download_images_with_dedup(
             # Refresh hash list to include any files downloaded for previous items
             existing_hashes = _get_existing_hashes(images_dir, images_root=images_root)
             
-            # If file already exists and is valid, check if distinct
+            # If file already exists and is valid, skip unless force_overwrite
             if path.exists() and path.stat().st_size >= MIN_IMAGE_BYTES:
                 this_hash = image_content_hash(path, min_bytes=MIN_IMAGE_BYTES)
-                if not this_hash:
-                    # Invalid file: only replace if force_overwrite
-                    if force_overwrite:
-                        path.unlink()
-                    else:
+                if not force_overwrite:
+                    # Skip existing valid files (do not overwrite)
+                    if this_hash and this_hash not in forbidden_hashes:
+                        # Valid file: count it and skip download
+                        distinct_count += 1
+                        if basename not in existing_hashes:
+                            existing_hashes[basename] = this_hash
+                        print("  SKIP {}: exists, valid (dedup: unique)".format(basename), flush=True)
                         continue
-                if this_hash in forbidden_hashes:
+                    # Invalid or forbidden: skip (don't try to replace without force_overwrite)
+                    if not this_hash:
+                        print("  SKIP {}: exists, invalid hash".format(basename), flush=True)
+                    elif this_hash in forbidden_hashes:
+                        print("  SKIP {}: exists, forbidden hash".format(basename), flush=True)
+                    continue
+                
+                # force_overwrite=True: check and possibly replace
+                if not this_hash:
+                    # Invalid file: delete and try to replace
+                    path.unlink()
+                    print("  SKIP {}: exists, invalid hash (force_overwrite: will replace)".format(basename), flush=True)
+                elif this_hash in forbidden_hashes:
                     # Content matches forbidden image: delete and try to replace
                     dest = forbidden_dir / "rejected_{}_{}.jpg".format(
                         path.stem, this_hash[:8],
@@ -1373,9 +1513,10 @@ def download_images_with_dedup(
                         pass
                     path.unlink()
                     print(
-                        "  Removed {} (forbidden hash), trying to replace".format(
+                        "  SKIP {}: exists, forbidden hash (force_overwrite: will replace)".format(
                             basename,
                         ),
+                        flush=True,
                     )
                     if basename in existing_hashes:
                         del existing_hashes[basename]
@@ -1403,11 +1544,11 @@ def download_images_with_dedup(
                         if path_to_remove.exists():
                             path_to_remove.unlink()
                             print(
-                                "  Removed {} (same hash as {}), "
-                                "will try to replace".format(
+                                "  SKIP {}: exists, duplicate of {} (force_overwrite: will replace)".format(
                                     to_remove,
                                     dup_of_name if to_remove == basename else basename,
                                 ),
+                                flush=True,
                             )
                         if to_remove in existing_hashes:
                             del existing_hashes[to_remove]
@@ -1419,6 +1560,8 @@ def download_images_with_dedup(
                             distinct_count += 1
                             if basename not in existing_hashes:
                                 existing_hashes[basename] = this_hash
+                            print("  SKIP {}: exists, valid (dedup: kept, duplicate {} removed)".format(
+                                basename, to_remove), flush=True)
                             continue
 
                     if not is_dup:
@@ -1426,6 +1569,7 @@ def download_images_with_dedup(
                         distinct_count += 1
                         if basename not in existing_hashes:
                             existing_hashes[basename] = this_hash
+                        print("  SKIP {}: exists, valid (dedup: unique)".format(basename), flush=True)
                         continue
 
             # Try to download (either missing file or duplicate that was deleted)
@@ -1464,7 +1608,7 @@ def download_images_with_dedup(
                     if not urls_to_try:
                         # Already tried all sources for this item, got 0
                         failed_slots.append((basename, item_name, FAIL_NO_URLS))
-                        print("  Skipped {} (no URLs, cached)".format(basename))
+                        print("  SKIP {}: no URLs found (cached)".format(basename), flush=True)
                         continue
                 else:
                     from scripts.translate_place_name import get_search_names
@@ -1514,7 +1658,7 @@ def download_images_with_dedup(
                     if not urls_to_try:
                         failed_slots.append((basename, item_name, FAIL_NO_URLS))
                         stats["no_urls"] += 1
-                        print("  Skipped {} (no URLs)".format(basename))
+                        print("  SKIP {}: no URLs found".format(basename), flush=True)
                         continue
 
             downloaded_this_slot = False
@@ -1525,7 +1669,11 @@ def download_images_with_dedup(
                 MAX_SOURCES_FOR_DELAY_SCALE,
             )
             delay_sec = DELAY_BETWEEN_REQUESTS_SEC / scale
-            for url in urls_to_try:
+            # File missing or needs replacement: try to download
+            print("  DOWNLOAD {}: attempting ({} URL(s) available)".format(
+                basename, len(urls_to_try)), flush=True)
+            for url_idx, url in enumerate(urls_to_try, 1):
+                url_idx_str = str(url_idx)
                 time.sleep(delay_sec)
                 attempts_for_this_basename += 1
                 # Max URLs per slot scales with sources (round-robin = less
@@ -1553,6 +1701,12 @@ def download_images_with_dedup(
                                 "application/json" in ct
                             ):
                                 last_fail_reason = "non-image content-type"
+                                print(
+                                    "  DOWNLOAD {}: URL {}/{} failed (non-image content-type: {})".format(
+                                        basename, url_idx_str, total_urls_tried, ct,
+                                    ),
+                                    flush=True,
+                                )
                                 stats["non_image"] += 1
                                 fail_log_lines.append(
                                     "{}\t{}\t{}\t{}".format(
@@ -1577,20 +1731,43 @@ def download_images_with_dedup(
                         else:
                             if last_fail_reason == FAIL_TIMEOUT:
                                 stats["timeout"] += 1
+                                print(
+                                    "  DOWNLOAD {}: URL {}/{} failed ({})".format(
+                                        basename, url_idx_str, total_urls_tried, FAIL_TIMEOUT,
+                                    ),
+                                )
                             else:
                                 stats["network"] += 1
+                                print(
+                                    "  DOWNLOAD {}: URL {}/{} failed ({})".format(
+                                        basename, url_idx_str, total_urls_tried, last_fail_reason or FAIL_NETWORK,
+                                    ),
+                                )
                             break
                 try:
                     if data is None or len(data) < MIN_IMAGE_BYTES:
                         if not last_fail_reason:
                             last_fail_reason = FAIL_TOO_SMALL
                         if data is not None and len(data) < MIN_IMAGE_BYTES:
+                            print(
+                                "  DOWNLOAD {}: URL {}/{} failed ({})".format(
+                                    basename, url_idx_str, total_urls_tried, FAIL_TOO_SMALL,
+                                ),
+                                flush=True,
+                            )
                             stats["too_small"] += 1
                             fail_log_lines.append(
                                 "{}\t{}\t{}\t{}".format(
                                     basename, item_name,
                                     FAIL_TOO_SMALL, url,
                                 ),
+                            )
+                        elif data is None:
+                            print(
+                                "  DOWNLOAD {}: URL {}/{} failed ({})".format(
+                                    basename, url_idx_str, total_urls_tried, last_fail_reason or "no data",
+                                ),
+                                flush=True,
                             )
                         continue
 
@@ -1605,9 +1782,10 @@ def download_images_with_dedup(
                         )
                         if dup_of:
                             print(
-                                "  Skipped (duplicate of {}), trying next URL".format(
-                                    dup_of,
+                                "  DOWNLOAD {}: URL {}/{} failed (dedup: duplicate of {})".format(
+                                    basename, url_idx_str, total_urls_tried, dup_of,
                                 ),
+                                flush=True,
                             )
                             last_fail_reason = FAIL_DUPLICATE.format(dup_of)
                             stats["dups"] += 1
@@ -1640,9 +1818,10 @@ def download_images_with_dedup(
                                 pass
                             temp_path.unlink()
                             print(
-                                "  Skipped (forbidden hash): {}, trying next URL".format(
-                                    basename,
+                                "  DOWNLOAD {}: URL {}/{} failed (dedup: forbidden hash)".format(
+                                    basename, url_idx_str, total_urls_tried,
                                 ),
+                                flush=True,
                             )
                             last_fail_reason = FAIL_FORBIDDEN
                             stats["forbidden"] += 1
@@ -1658,8 +1837,10 @@ def download_images_with_dedup(
                         )
                         if not is_unique and dup_of:
                             print(
-                                "  Validation failed (duplicate, same as {}), "
-                                "trying next URL".format(dup_of),
+                                "  DOWNLOAD {}: URL {}/{} failed (dedup: duplicate of {})".format(
+                                    basename, url_idx_str, total_urls_tried, dup_of,
+                                ),
+                                flush=True,
                             )
                             temp_path.unlink()
                             last_fail_reason = FAIL_DUPLICATE.format(dup_of)
@@ -1689,8 +1870,10 @@ def download_images_with_dedup(
                                 aliases=_aliases if _aliases else None,
                             ):
                                 print(
-                                    "  AI: image does not match '{}', "
-                                    "trying next URL".format(item_name),
+                                    "  DOWNLOAD {}: URL {}/{} failed (AI reject: does not match '{}')".format(
+                                        basename, url_idx_str, total_urls_tried, item_name,
+                                    ),
+                                    flush=True,
                                 )
                                 temp_path.unlink()
                                 last_fail_reason = FAIL_AI_REJECT
@@ -1714,11 +1897,19 @@ def download_images_with_dedup(
                     if path.exists() and not force_overwrite:
                         temp_path.unlink()
                         print(
-                            "  Skipping overwrite of existing image: {} "
-                            "(use --force-overwrite to replace)".format(basename),
+                            "  DOWNLOAD {}: URL {}/{} skipped (file exists, use --force-overwrite)".format(
+                                basename, url_idx_str, total_urls_tried,
+                            ),
+                            flush=True,
                         )
                         continue
                     temp_path.rename(path)
+                    print(
+                        "  DOWNLOAD {}: URL {}/{} SUCCESS (dedup: unique)".format(
+                            basename, url_idx_str, total_urls_tried,
+                        ),
+                        flush=True,
+                    )
                     # Validate again after save (ensure still unique)
                     current_hashes = _get_existing_hashes(
                         images_dir, images_root=images_root,
@@ -1726,8 +1917,9 @@ def download_images_with_dedup(
                     ok, dup_of = _validate_uniqueness(path, current_hashes, basename)
                     if not ok and dup_of:
                         print(
-                            "  Validation failed after save (duplicate of {}), "
-                            "trying next URL".format(dup_of),
+                            "  DOWNLOAD {}: validation failed after save (dedup: duplicate of {}), "
+                            "trying next URL".format(basename, dup_of),
+                            flush=True,
                         )
                         path.unlink()
                         if basename in existing_hashes:
@@ -1744,9 +1936,10 @@ def download_images_with_dedup(
                     stats["downloaded"] += 1
                     downloaded_this_slot = True
                     print(
-                        "  Downloaded distinct image: {} ({}/4 for {})".format(
+                        "  DOWNLOAD {}: SUCCESS (dedup: unique, {}/4 for {})".format(
                             basename, distinct_count, item_name,
                         ),
+                        flush=True,
                     )
                     time.sleep(DELAY_AFTER_DOWNLOAD_SEC)
                     break
@@ -1759,8 +1952,20 @@ def download_images_with_dedup(
                         reason, (socket.timeout, TimeoutError),
                     ):
                         last_fail_reason = FAIL_TIMEOUT
+                        print(
+                            "  DOWNLOAD {}: URL {}/{} failed ({})".format(
+                                basename, url_idx_str, total_urls_tried, FAIL_TIMEOUT,
+                            ),
+                            flush=True,
+                        )
                     else:
                         last_fail_reason = FAIL_NETWORK
+                        print(
+                            "  DOWNLOAD {}: URL {}/{} failed ({})".format(
+                                basename, url_idx_str, total_urls_tried, FAIL_NETWORK,
+                            ),
+                            flush=True,
+                        )
                     continue
                 except (socket.timeout, TimeoutError, OSError) as e:
                     temp_path = images_dir / (basename + ".tmp")
@@ -1768,14 +1973,32 @@ def download_images_with_dedup(
                         temp_path.unlink()
                     if isinstance(e, (socket.timeout, TimeoutError)):
                         last_fail_reason = FAIL_TIMEOUT
+                        print(
+                            "  DOWNLOAD {}: URL {}/{} failed ({})".format(
+                                basename, url_idx_str, total_urls_tried, FAIL_TIMEOUT,
+                            ),
+                            flush=True,
+                        )
                     else:
                         last_fail_reason = FAIL_NETWORK
+                        print(
+                            "  DOWNLOAD {}: URL {}/{} failed ({})".format(
+                                basename, url_idx_str, total_urls_tried, FAIL_NETWORK,
+                            ),
+                            flush=True,
+                        )
                     continue
                 except Exception as e:
                     temp_path = images_dir / (basename + ".tmp")
                     if temp_path.exists():
                         temp_path.unlink()
                     last_fail_reason = "error: {}".format(e)
+                    print(
+                        "  DOWNLOAD {}: URL {}/{} failed (error: {})".format(
+                            basename, url_idx_str, total_urls_tried, str(e)[:50],
+                        ),
+                        flush=True,
+                    )
                     continue
 
             # Second chance: if we had URLs but all failed (e.g. duplicate), try
@@ -1877,10 +2100,10 @@ def download_images_with_dedup(
                     stats["downloaded"] += 1
                     downloaded_this_slot = True
                     print(
-                        "  Downloaded distinct image: {} ({}/4 for {}) "
-                        "(from Yandex)".format(
+                        "  DOWNLOAD {}: SUCCESS (dedup: unique, {}/4 for {}, from Yandex)".format(
                             basename, distinct_count, item_name,
                         ),
+                        flush=True,
                     )
                     time.sleep(DELAY_AFTER_DOWNLOAD_SEC)
                     break
@@ -1894,9 +2117,10 @@ def download_images_with_dedup(
                     )
                 failed_slots.append((basename, item_name, reason))
                 print(
-                    "  Warning: {} — {} ({} URLs tried)".format(
+                    "  DOWNLOAD {}: FAILED (reason: {}, {} URLs tried)".format(
                         basename, reason, total_urls_tried,
                     ),
+                    flush=True,
                 )
 
         results[item_name] = distinct_count
