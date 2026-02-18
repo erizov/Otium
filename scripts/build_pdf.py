@@ -785,8 +785,7 @@ def build_html(output_dir: Path, guide_name: str | None = None) -> str:
       .map-block { margin: 1em; }
       .map-caption { font-size: 8pt; color: #6b635b; margin: 0.25em 0 0;
         font-family: Inter, sans-serif; }
-      .map-img { max-width: 100%; height: auto; max-height: 160px;
-                  border: 1px solid #e0ddd8; }
+      .map-img { max-width: 100%; height: auto; max-height: 160px; }
       .qa-section { margin-top: 2em; page-break-before: always;
                      break-before: page; padding-top: 1.5em; }
       .qa-item { margin-bottom: 0.6em; font-size: 9pt; color: #1c1b19; }

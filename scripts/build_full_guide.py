@@ -203,7 +203,7 @@ _COMBINED_CSS = """
   .toc-block a { color: #2c2a28; text-decoration: none; }
   .toc-block a:hover { text-decoration: underline; color: #8b7355; }
   .references-chapter { page-break-before: always; padding: 2.2em 1.8em 2em;
-    background-color: #fff; font-family: "Source Serif 4", Georgia, serif;
+    background-color: #faf8f5; font-family: "Source Serif 4", Georgia, serif;
     font-size: 10pt; line-height: 1.5; color: #1c1b19; }
   .references-chapter h2 { font-family: "Source Serif 4", Georgia, serif;
     font-size: 12pt; font-weight: 600; margin: 0 0 1.25em;
@@ -217,6 +217,9 @@ _COMBINED_CSS = """
     border-top: 1px solid #c9c4b8; font-size: 8.5pt; line-height: 1.5;
     color: #5c5549; text-align: center; max-width: 28em; margin-left: auto;
     margin-right: auto; }
+  .references-chapter .ref-colophon-emblem { margin-bottom: 0.6em; }
+  .references-chapter .ref-emblem { width: 2.8em; height: 2.8em;
+    display: block; margin: 0 auto; }
   .references-chapter .ref-colophon p { margin: 0.35em 0; font-size: inherit;
     line-height: inherit; text-align: center; }
   .references-chapter .ref-colophon .ref-year { font-weight: 500; color: #2c2a28; }
@@ -227,14 +230,13 @@ _COMBINED_CSS = """
     margin: 0.5em; max-width: 100%; }
   .monastery-img { width: 100%; height: auto; max-height: 155px;
     object-fit: contain; display: block; margin: 0 auto;
-    border: 1px solid #e0ddd8; box-sizing: border-box; }
+    box-sizing: border-box; }
   .images-caption { font-size: 8pt; color: #6b635b; margin: 0.25em 0.5em 0;
     font-family: Inter, sans-serif; }
   .map-block { margin: 0.5em; }
   .map-caption { font-size: 8pt; color: #6b635b; margin: 0.25em 0 0;
     font-family: Inter, sans-serif; }
-  .map-img { max-width: 100%; height: auto; max-height: 115px;
-    border: 1px solid #e0ddd8; }
+  .map-img { max-width: 100%; height: auto; max-height: 115px; }
   @media print {
     html, body { color: #1c1b19 !important; background: #faf8f5 !important; }
     .monastery { page-break-before: always; }
@@ -269,20 +271,112 @@ FRONT_PAGE_TAGLINE = "Otium cum dignitate"
 FRONT_PAGE_DESC = (
     "Leisure with dignity — intellectual engagement with place"
 )
-# Emblem: laurel wreath (Latin dignity) + Kremlin tower (Moscow), professional seal
-FRONT_PAGE_EMBLEM_SVG = (
-    '<svg class="fp-emblem" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"'
-    ' role="img">'
-    '<title>OTIUM: emblem — laurel wreath (dignity) and Kremlin tower (Moscow)</title>'
-    '<circle cx="32" cy="32" r="29" fill="none" stroke="#8b7355" stroke-width="1.2"/>'
-    '<circle cx="32" cy="32" r="25" fill="none" stroke="#c9c4b8" stroke-width="0.6"/>'
-    '<path fill="none" stroke="#8b7355" stroke-width="0.8" d="M20 36 Q20 22 32 18 Q44 22 44 36"/>'
-    '<path fill="none" stroke="#8b7355" stroke-width="0.8" d="M20 36 Q32 42 44 36"/>'
-    '<path fill="#2c2a28" d="M29 24 h6 v20 h-6 z"/>'
-    '<path fill="#2c2a28" d="M27 24 L32 18 L37 24 L37 26 L27 26 z"/>'
-    '<circle fill="#8b7355" cx="32" cy="16" r="1.8"/>'
-    '</svg>'
-)
+# Emblem variants (A–E). Set EMBLEM_CHOICE to the key you want.
+# Each SVG uses {{class}} for fp-emblem (front) or ref-emblem (last page).
+EMBLEM_VARIANTS = {
+    "A": (
+        '<svg class="{{class}}" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"'
+        ' role="img"><title>OTIUM — laurel wreath and Kremlin tower</title>'
+        '<circle cx="32" cy="32" r="29" fill="none" stroke="#8b7355" stroke-width="1.2"/>'
+        '<circle cx="32" cy="32" r="25" fill="none" stroke="#c9c4b8" stroke-width="0.6"/>'
+        '<path fill="none" stroke="#8b7355" stroke-width="0.8" '
+        'd="M20 36 Q20 22 32 18 Q44 22 44 36"/>'
+        '<path fill="none" stroke="#8b7355" stroke-width="0.8" d="M20 36 Q32 42 44 36"/>'
+        '<path fill="#2c2a28" d="M29 24 h6 v20 h-6 z"/>'
+        '<path fill="#2c2a28" d="M27 24 L32 18 L37 24 L37 26 L27 26 z"/>'
+        '<circle fill="#8b7355" cx="32" cy="16" r="1.8"/>'
+        "</svg>"
+    ),
+    "B": (
+        '<svg class="{{class}}" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"'
+        ' role="img"><title>OTIUM — Kremlin tower seal</title>'
+        '<circle cx="32" cy="32" r="28" fill="none" stroke="#8b7355" stroke-width="1.5"/>'
+        '<path fill="#2c2a28" d="M28 20 h8 v24 h-8 z"/>'
+        '<path fill="#2c2a28" d="M26 20 L32 14 L38 20 L38 22 L26 22 z"/>'
+        '<circle fill="#8b7355" cx="32" cy="12" r="2.5"/>'
+        '<path fill="none" stroke="#8b7355" stroke-width="0.7" '
+        'd="M32 8 L32 6 M28 10 L26 8 M36 10 L38 8"/>'
+        "</svg>"
+    ),
+    "C": (
+        '<svg class="{{class}}" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"'
+        ' role="img"><title>OTIUM — laurel wreath (dignity)</title>'
+        '<circle cx="32" cy="32" r="28" fill="none" stroke="#8b7355" stroke-width="1.2"/>'
+        '<circle cx="32" cy="32" r="24" fill="none" stroke="#c9c4b8" stroke-width="0.5"/>'
+        '<path fill="none" stroke="#8b7355" stroke-width="0.9" '
+        'd="M16 32 Q16 20 32 14 Q48 20 48 32 Q32 44 16 32"/>'
+        '<path fill="none" stroke="#8b7355" stroke-width="0.9" d="M16 32 Q32 42 48 32"/>'
+        '<path fill="none" stroke="#8b7355" stroke-width="0.6" '
+        'd="M24 28 Q32 24 40 28 M24 36 Q32 40 40 36"/>'
+        "</svg>"
+    ),
+    "D": (
+        '<svg class="{{class}}" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"'
+        ' role="img"><title>OTIUM — letter O and tower</title>'
+        '<circle cx="32" cy="32" r="26" fill="none" stroke="#8b7355" stroke-width="1.2"/>'
+        '<text x="32" y="38" font-family="Georgia,serif" font-size="22" font-weight="600" '
+        'fill="#2c2a28" text-anchor="middle">O</text>'
+        '<path fill="none" stroke="#8b7355" stroke-width="0.6" '
+        'd="M32 44 L32 48 M28 46 L32 50 L36 46"/>'
+        "</svg>"
+    ),
+    "E": (
+        '<svg class="{{class}}" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"'
+        ' role="img"><title>OTIUM — shield, tower and laurel</title>'
+        '<path fill="none" stroke="#8b7355" stroke-width="1.2" '
+        'd="M32 6 L52 18 L52 46 Q52 54 32 58 Q12 54 12 46 L12 18 Z"/>'
+        '<path fill="#2c2a28" d="M28 24 h8 v18 h-8 z"/>'
+        '<path fill="#2c2a28" d="M26 24 L32 18 L38 24 L38 26 L26 26 z"/>'
+        '<circle fill="#8b7355" cx="32" cy="16" r="1.5"/>'
+        '<path fill="none" stroke="#8b7355" stroke-width="0.6" '
+        'd="M20 38 Q32 34 44 38 M20 42 Q32 46 44 42"/>'
+        "</svg>"
+    ),
+}
+EMBLEM_CHOICE = "A"
+
+
+def _emblem_svg(css_class: str) -> str:
+    """Return the chosen emblem SVG with the given CSS class."""
+    svg = EMBLEM_VARIANTS.get(EMBLEM_CHOICE, EMBLEM_VARIANTS["A"])
+    return svg.replace("{{class}}", css_class)
+
+
+def _write_emblem_preview(output_dir: Path) -> None:
+    """Write output/emblem_variants.html to compare emblem variants A–E."""
+    parts = []
+    for key in ("A", "B", "C", "D", "E"):
+        svg = EMBLEM_VARIANTS[key].replace("{{class}}", "emblem-preview")
+        parts.append(
+            (
+                '<div class="variant">'
+                '<span class="label">Variant {}</span>'
+                "{}"
+                "</div>"
+            ).format(key, svg)
+        )
+    body = "\n".join(parts)
+    css = (
+        "body { font-family: Georgia, serif; background: #f5f2eb; "
+        "color: #2c2a28; padding: 2em; }\n"
+        "h1 { font-size: 1.4em; margin-bottom: 1em; }\n"
+        ".grid { display: flex; flex-wrap: wrap; gap: 2em; }\n"
+        ".variant { text-align: center; }\n"
+        ".label { display: block; margin-bottom: 0.5em; font-weight: 600; }\n"
+        ".emblem-preview { width: 120px; height: 120px; display: block; "
+        "margin: 0 auto; }\n"
+    )
+    html = (
+        "<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'>"
+        "<title>OTIUM emblem variants</title><style>{}</style></head>"
+        "<body><h1>OTIUM emblem variants — choose one, set EMBLEM_CHOICE "
+        "in scripts/build_full_guide.py</h1>"
+        "<div class='grid'>{}</div></body></html>"
+    ).format(css, body)
+    path = output_dir / "emblem_variants.html"
+    path.write_text(html, encoding="utf-8")
+
+
 # Editorial board: literature-inspired names (Russian & English), plausible
 EDITORIAL_BOARD = [
     ("Е. В. Облонская", "главный редактор"),
@@ -323,6 +417,7 @@ REFERENCES_BODY = """
 посещения уточняйте на официальных сайтах.</p>
 </div>
 <div class="ref-colophon">
+<div class="ref-colophon-emblem">{colophon_emblem}</div>
 <p>© <span class="ref-year">2025</span> OTIUM — Institute of Narrative Geography</p>
 <p>Москва</p>
 <p>Вёрстка: OTIUM. Печать: Москва, 2025.</p>
@@ -341,6 +436,24 @@ PDF_FOOTER_TEMPLATE = (
     '<span class="pageNumber"></span> / <span class="totalPages"></span>'
     '</div>'
 )
+
+
+def _strip_moscow_from_title(chapter_title: str) -> str:
+    """Remove Moscow-related words so header does not repeat 'Москва'."""
+    s = chapter_title
+    for word in ("Москвы", "Москве", "Московского", "Москва", "Moscow"):
+        s = re.sub(re.escape(word), "", s, flags=re.IGNORECASE)
+    return re.sub(r"\s+", " ", s).strip().strip(" ,—–")
+
+
+def _pdf_header_html(header_text: str) -> str:
+    """Build Playwright header template HTML (no date/time)."""
+    return (
+        '<div style="font-size:9px;color:#6b635b;width:100%;text-align:center;'
+        'font-family:Inter,sans-serif">'
+        "{}"
+        "</div>"
+    ).format(_escape(header_text))
 
 # Script for editable HTML: contenteditable, image delete/upload (max 4 per item), export
 _EDITABLE_SCRIPT = """
@@ -449,7 +562,7 @@ def _build_front_page_html() -> str:
     return (
         '<div class="front-page">'
         '<div class="fp-inner">'
-        + FRONT_PAGE_EMBLEM_SVG
+        + _emblem_svg("fp-emblem")
         + '<p class="fp-logo">{}</p>'
         '<div class="fp-rule"></div>'
         '<p class="fp-subtitle">{}</p>'
@@ -778,7 +891,9 @@ def build_combined_parts(output_dir: Path) -> list[str]:
         "</div>"
     ).format(
         _escape(REFERENCES_CHAPTER_TITLE),
-        REFERENCES_BODY.strip(),
+        REFERENCES_BODY.strip().format(
+            colophon_emblem=_emblem_svg("ref-emblem"),
+        ),
     )
     blocks.append(refs)
     return blocks
@@ -822,6 +937,22 @@ def _build_combined_pdf_chunked(
     try:
         for idx, chunk_blocks in enumerate(chunk_list):
             print("  PDF chunk {}/{}...".format(idx + 1, len(chunk_list)))
+            # No header (and no date) on title page or last page (references).
+            if idx == 0 or idx == len(chunk_list) - 1:
+                header_template = '<div></div>'
+            else:
+                if idx >= 2:
+                    first_chapter_idx = (idx - 2) * CHUNK_CHAPTERS
+                    if first_chapter_idx < len(CHAPTER_CONFIG):
+                        short = _strip_moscow_from_title(
+                            CHAPTER_CONFIG[first_chapter_idx][1],
+                        )
+                        header_text = "{} : {}".format(PREFACE_TITLE, short)
+                    else:
+                        header_text = PREFACE_TITLE
+                else:
+                    header_text = PREFACE_TITLE
+                header_template = _pdf_header_html(header_text)
             chunk_html = _wrap_html(chunk_blocks, editable=False)
             chunk_html_path = output_dir / "{}_chunk_{}.html".format(
                 OUTPUT_BASENAME, idx,
@@ -836,6 +967,7 @@ def _build_combined_pdf_chunked(
                 image_wait_timeout_ms=image_wait_timeout_ms,
                 display_header_footer=True,
                 footer_template=PDF_FOOTER_TEMPLATE,
+                header_template=header_template,
             ):
                 return False
             chunk_pdfs.append(chunk_pdf_path)
@@ -891,6 +1023,7 @@ def main() -> int:
 
     output_dir = OUTPUT_DIR
     output_dir.mkdir(parents=True, exist_ok=True)
+    _write_emblem_preview(output_dir)
     html_path = output_dir / "{}.html".format(OUTPUT_BASENAME)
     pdf_path = output_dir / "{}.pdf".format(OUTPUT_BASENAME)
 
