@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Image URLs filled by place name (Commons, Pixabay, Pexels, Openverse, etc.). No placeholders."""
+"""Image URLs filled by place name (Commons, Pixabay, Pexels, Openverse, Pastvu, etc.). Round-robin fallbacks per slot."""
 
 METRO_IMAGE_DOWNLOADS: dict[str, str] = {
     "arbatskaya_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Arbatskaya_metro_station_Moscow.jpg/500px-Arbatskaya_metro_station_Moscow.jpg",
@@ -64,6 +64,8 @@ METRO_IMAGE_DOWNLOADS: dict[str, str] = {
     "lubyanka_4.jpg": "https://live.staticflickr.com/4050/4513517349_9189995bfc_b.jpg",
     "marina_roshcha_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Marina_Roshcha_metro_Moscow.jpg/500px-Marina_Roshcha_metro_Moscow.jpg",
     "marina_roshcha_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Marina_Roshcha_station.jpg/500px-Marina_Roshcha_station.jpg",
+    "marina_roshcha_3.jpg": "https://img.pastvu.com/d/z/x/u/zxumo325cqiefnvzq1.jpg",
+    "marina_roshcha_4.jpg": "https://images.pexels.com/photos/33333682/pexels-photo-33333682.jpeg",
     "mayakovskaya_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Mayakovskaya_Metro_Moscow.jpg/500px-Mayakovskaya_Metro_Moscow.jpg",
     "mayakovskaya_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Moscow_Metro_Mayakovskaya_ceiling.jpg/500px-Moscow_Metro_Mayakovskaya_ceiling.jpg",
     "mayakovskaya_3.jpg": "https://live.staticflickr.com/5581/14888820660_ac2d19f9eb_b.jpg",
@@ -150,5 +152,26 @@ METRO_IMAGE_DOWNLOADS: dict[str, str] = {
     "vorobyovy_metro_4.jpg": "https://upload.wikimedia.org/wikipedia/commons/2/23/%D0%94%D0%B2%D0%BE%D1%80%D0%B5%D1%86_%D0%BF%D0%B8%D0%BE%D0%BD%D0%B5%D1%80%D0%BE%D0%B2_%28%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C_%D0%92%D0%BE%D1%80%D0%BE%D0%B1%D1%8C%D1%91%D0%B2%D1%8B_%D0%B3%D0%BE%D1%80%D1%8B%29.jpg",
 }
 
-METRO_IMAGE_FALLBACKS: dict[str, list[str]] = {}
+METRO_IMAGE_FALLBACKS: dict[str, list[str]] = {
+    "marina_roshcha_1.jpg": [
+        "https://images.pexels.com/photos/33333686/pexels-photo-33333686.jpeg",
+        "https://img.pastvu.com/d/z/x/u/zxumo325cqiefnvzq1.jpg",
+        "https://images.pexels.com/photos/33333682/pexels-photo-33333682.jpeg",
+    ],
+    "marina_roshcha_2.jpg": [
+        "https://images.pexels.com/photos/31946792/pexels-photo-31946792.jpeg",
+        "https://img.pastvu.com/d/z/x/u/zxumo325cqiefnvzq1.jpg",
+        "https://images.pexels.com/photos/33333682/pexels-photo-33333682.jpeg",
+    ],
+    "marina_roshcha_3.jpg": [
+        "https://images.pexels.com/photos/31946792/pexels-photo-31946792.jpeg",
+        "https://images.pexels.com/photos/33333686/pexels-photo-33333686.jpeg",
+        "https://images.pexels.com/photos/33333682/pexels-photo-33333682.jpeg",
+    ],
+    "marina_roshcha_4.jpg": [
+        "https://images.pexels.com/photos/31946792/pexels-photo-31946792.jpeg",
+        "https://images.pexels.com/photos/33333686/pexels-photo-33333686.jpeg",
+        "https://img.pastvu.com/d/z/x/u/zxumo325cqiefnvzq1.jpg",
+    ],
+}
 

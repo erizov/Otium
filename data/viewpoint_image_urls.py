@@ -1,7 +1,27 @@
 # -*- coding: utf-8 -*-
-"""Image URLs filled by place name (Commons, Pixabay, Pexels, Openverse, etc.). No placeholders."""
+"""Image URLs filled by place name (Commons, Pixabay, Pexels, Openverse, Pastvu, etc.). Round-robin fallbacks per slot."""
 
 VIEWPOINT_IMAGE_DOWNLOADS: dict[str, str] = {
+    "christ_saviour_viewpoint_1.jpg": "https://images.pexels.com/photos/10626762/pexels-photo-10626762.jpeg",
+    "christ_saviour_viewpoint_2.jpg": "https://img.pastvu.com/d/z/x/u/zxumo325cqiefnvzq1.jpg",
+    "christ_saviour_viewpoint_3.jpg": "https://images.pexels.com/photos/9214461/pexels-photo-9214461.jpeg",
+    "christ_saviour_viewpoint_4.jpg": "https://images.pexels.com/photos/10291912/pexels-photo-10291912.jpeg",
+    "kolomenskoye_viewpoint_1.jpg": "https://images.pexels.com/photos/10160896/pexels-photo-10160896.jpeg",
+    "kolomenskoye_viewpoint_2.jpg": "https://images.pexels.com/photos/9293527/pexels-photo-9293527.jpeg",
+    "kolomenskoye_viewpoint_3.jpg": "https://img.pastvu.com/d/z/x/u/zxumo325cqiefnvzq1.jpg",
+    "kolomenskoye_viewpoint_4.jpg": "https://images.pexels.com/photos/8759002/pexels-photo-8759002.jpeg",
+    "krymsky_bridge_1.jpg": "https://images.pexels.com/photos/31946770/pexels-photo-31946770.jpeg",
+    "krymsky_bridge_2.jpg": "https://images.pexels.com/photos/17065911/pexels-photo-17065911.jpeg",
+    "krymsky_bridge_3.jpg": "https://images.pexels.com/photos/11955313/pexels-photo-11955313.jpeg",
+    "krymsky_bridge_4.jpg": "https://img.pastvu.com/d/z/x/u/zxumo325cqiefnvzq1.jpg",
+    "luzhniki_viewpoint_1.jpg": "https://images.pexels.com/photos/9504283/pexels-photo-9504283.jpeg",
+    "luzhniki_viewpoint_2.jpg": "https://img.pastvu.com/d/z/x/u/zxumo325cqiefnvzq1.jpg",
+    "luzhniki_viewpoint_3.jpg": "https://images.pexels.com/photos/9946859/pexels-photo-9946859.jpeg",
+    "luzhniki_viewpoint_4.jpg": "https://images.pexels.com/photos/9946860/pexels-photo-9946860.jpeg",
+    "moscow_city_viewpoint_1.jpg": "https://images.pexels.com/photos/18217622/pexels-photo-18217622.jpeg",
+    "moscow_city_viewpoint_2.jpg": "https://images.pexels.com/photos/8412311/pexels-photo-8412311.jpeg",
+    "moscow_city_viewpoint_3.jpg": "https://images.pexels.com/photos/31946792/pexels-photo-31946792.jpeg",
+    "moscow_city_viewpoint_4.jpg": "https://img.pastvu.com/d/z/x/u/zxumo325cqiefnvzq1.jpg",
     "ostankino_tower_1.jpg": "https://live.staticflickr.com/1076/5142171521_405b5db16c_b.jpg",
     "ostankino_tower_2.jpg": "https://avatars.mds.yandex.net/get-vh/15386257/2a0000019a6429172b3ca241f89907b5a974/orig",
     "ostankino_tower_3.jpg": "https://live.staticflickr.com/3890/14639125081_e2ec2a4397_b.jpg",
@@ -14,6 +34,18 @@ VIEWPOINT_IMAGE_DOWNLOADS: dict[str, str] = {
     "poklonnaya_viewpoint_2.jpg": "https://avatars.mds.yandex.net/get-altay/14372341/2a00000196bf34878ee07ab9d3ad49e291bd/L_height&quot;,&quot;snippet&quot;:{&quot;title&quot;:&quot;Временно/XXXL",
     "poklonnaya_viewpoint_3.jpg": "https://avatars.mds.yandex.net/get-altay/14372341/2a00000196bf34878ee07ab9d3ad49e291bd/L_height&quot;,&quot;snippet&quot;:{&quot;title&quot;:&quot;Временно/M_height",
     "poklonnaya_viewpoint_4.jpg": "https://avatars.mds.yandex.net/get-altay/14372341/2a00000196bf34878ee07ab9d3ad49e291bd/L_height&quot;,&quot;snippet&quot;:{&quot;title&quot;:&quot;Временно/orig",
+    "sokolniki_viewpoint_1.jpg": "https://images.pexels.com/photos/12083849/pexels-photo-12083849.jpeg",
+    "sokolniki_viewpoint_2.jpg": "https://img.pastvu.com/d/z/x/u/zxumo325cqiefnvzq1.jpg",
+    "sokolniki_viewpoint_3.jpg": "https://images.pexels.com/photos/31946792/pexels-photo-31946792.jpeg",
+    "sokolniki_viewpoint_4.jpg": "https://images.pexels.com/photos/8880353/pexels-photo-8880353.jpeg",
+    "tsaritsyno_viewpoint_1.jpg": "https://images.pexels.com/photos/8942282/pexels-photo-8942282.jpeg",
+    "tsaritsyno_viewpoint_2.jpg": "https://images.pexels.com/photos/23355100/pexels-photo-23355100.jpeg",
+    "tsaritsyno_viewpoint_3.jpg": "https://img.pastvu.com/d/z/x/u/zxumo325cqiefnvzq1.jpg",
+    "tsaritsyno_viewpoint_4.jpg": "https://images.pexels.com/photos/31946792/pexels-photo-31946792.jpeg",
+    "vdnh_viewpoint_1.jpg": "https://images.pexels.com/photos/10181120/pexels-photo-10181120.jpeg",
+    "vdnh_viewpoint_2.jpg": "https://images.pexels.com/photos/17833254/pexels-photo-17833254.jpeg",
+    "vdnh_viewpoint_3.jpg": "https://img.pastvu.com/d/z/x/u/zxumo325cqiefnvzq1.jpg",
+    "vdnh_viewpoint_4.jpg": "https://img.pastvu.com/d/8/f/3/8f389b60ef66ec3fa2fbab46e6feaf0b.jpg",
     "vorobyovy_gory_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/e/e1/%D0%92%D0%B8%D0%B4_%D0%BD%D0%B0_%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5_%D0%9F%D1%80%D0%B5%D0%B7%D0%B8%D0%B4%D0%B8%D1%83%D0%BC%D0%B0_%D0%A0%D0%90%D0%A5_%D0%B8_%D0%90%D0%BD%D0%B4%D1%80%D0%B5%D0%B5%D0%B2%D1%81%D0%BA%D0%B8%D0%B9_%D0%BC%D0%BE%D0%BD%D0%B0%D1%81%D1%82%D1%8B%D1%80%D1%8C._%D0%92%D0%BE%D1%80%D0%BE%D0%B1%D1%8C%D1%91%D0%B2%D1%8B_%D0%B3%D0%BE%D1%80%D1%8B._Moscow%2C_Russia._-_panoramio.jpg",
     "vorobyovy_gory_2.jpg": "https://live.staticflickr.com/8750/17030393505_b18d5e35df_b.jpg",
     "vorobyovy_gory_3.jpg": "https://upload.wikimedia.org/wikipedia/commons/a/ad/%D0%92%D0%BE%D1%80%D0%BE%D0%B1%D1%8C%D1%91%D0%B2%D1%8B_%D0%B3%D0%BE%D1%80%D1%8B._Moscow%2C_Russia._-_panoramio_-_Oleg_Yu.Novikov_%281%29.jpg",
@@ -22,7 +54,192 @@ VIEWPOINT_IMAGE_DOWNLOADS: dict[str, str] = {
     "vorobyovy_tramplin_2.jpg": "https://live.staticflickr.com/7526/16011370476_670c75041c_b.jpg",
     "vorobyovy_tramplin_3.jpg": "https://live.staticflickr.com/7640/16407988034_79e658a6ea_b.jpg",
     "vorobyovy_tramplin_4.jpg": "https://upload.wikimedia.org/wikipedia/commons/8/8b/%D0%92%D0%BE%D1%80%D0%BE%D0%B1%D1%8C%D1%91%D0%B2%D1%8B_%D0%B3%D0%BE%D1%80%D1%8B._%D0%A2%D1%80%D0%B0%D0%BC%D0%BF%D0%BB%D0%B8%D0%BD_%2816030267085%29.jpg",
+    "zaryadye_viewpoint_1.jpg": "https://images.pexels.com/photos/34322841/pexels-photo-34322841.jpeg",
+    "zaryadye_viewpoint_2.jpg": "https://images.pexels.com/photos/4514101/pexels-photo-4514101.jpeg",
+    "zaryadye_viewpoint_3.jpg": "https://img.pastvu.com/d/z/x/u/zxumo325cqiefnvzq1.jpg",
+    "zaryadye_viewpoint_4.jpg": "https://images.pexels.com/photos/35124747/pexels-photo-35124747.jpeg",
 }
 
-VIEWPOINT_IMAGE_FALLBACKS: dict[str, list[str]] = {}
+VIEWPOINT_IMAGE_FALLBACKS: dict[str, list[str]] = {
+    "christ_saviour_viewpoint_1.jpg": [
+        "https://img.pastvu.com/d/z/x/u/zxumo325cqiefnvzq1.jpg",
+        "https://images.pexels.com/photos/9214461/pexels-photo-9214461.jpeg",
+        "https://images.pexels.com/photos/10291912/pexels-photo-10291912.jpeg",
+    ],
+    "christ_saviour_viewpoint_2.jpg": [
+        "https://images.pexels.com/photos/10626762/pexels-photo-10626762.jpeg",
+        "https://images.pexels.com/photos/9214461/pexels-photo-9214461.jpeg",
+        "https://images.pexels.com/photos/10291912/pexels-photo-10291912.jpeg",
+    ],
+    "christ_saviour_viewpoint_3.jpg": [
+        "https://images.pexels.com/photos/10626762/pexels-photo-10626762.jpeg",
+        "https://img.pastvu.com/d/z/x/u/zxumo325cqiefnvzq1.jpg",
+        "https://images.pexels.com/photos/10291912/pexels-photo-10291912.jpeg",
+    ],
+    "christ_saviour_viewpoint_4.jpg": [
+        "https://images.pexels.com/photos/10626762/pexels-photo-10626762.jpeg",
+        "https://img.pastvu.com/d/z/x/u/zxumo325cqiefnvzq1.jpg",
+        "https://images.pexels.com/photos/9214461/pexels-photo-9214461.jpeg",
+    ],
+    "kolomenskoye_viewpoint_1.jpg": [
+        "https://images.pexels.com/photos/9293527/pexels-photo-9293527.jpeg",
+        "https://img.pastvu.com/d/z/x/u/zxumo325cqiefnvzq1.jpg",
+        "https://images.pexels.com/photos/8759002/pexels-photo-8759002.jpeg",
+    ],
+    "kolomenskoye_viewpoint_2.jpg": [
+        "https://images.pexels.com/photos/10160896/pexels-photo-10160896.jpeg",
+        "https://img.pastvu.com/d/z/x/u/zxumo325cqiefnvzq1.jpg",
+        "https://images.pexels.com/photos/8759002/pexels-photo-8759002.jpeg",
+    ],
+    "kolomenskoye_viewpoint_3.jpg": [
+        "https://images.pexels.com/photos/10160896/pexels-photo-10160896.jpeg",
+        "https://images.pexels.com/photos/9293527/pexels-photo-9293527.jpeg",
+        "https://images.pexels.com/photos/8759002/pexels-photo-8759002.jpeg",
+    ],
+    "kolomenskoye_viewpoint_4.jpg": [
+        "https://images.pexels.com/photos/10160896/pexels-photo-10160896.jpeg",
+        "https://images.pexels.com/photos/9293527/pexels-photo-9293527.jpeg",
+        "https://img.pastvu.com/d/z/x/u/zxumo325cqiefnvzq1.jpg",
+    ],
+    "krymsky_bridge_1.jpg": [
+        "https://images.pexels.com/photos/17065911/pexels-photo-17065911.jpeg",
+        "https://images.pexels.com/photos/11955313/pexels-photo-11955313.jpeg",
+        "https://img.pastvu.com/d/z/x/u/zxumo325cqiefnvzq1.jpg",
+    ],
+    "krymsky_bridge_2.jpg": [
+        "https://images.pexels.com/photos/31946770/pexels-photo-31946770.jpeg",
+        "https://images.pexels.com/photos/11955313/pexels-photo-11955313.jpeg",
+        "https://img.pastvu.com/d/z/x/u/zxumo325cqiefnvzq1.jpg",
+    ],
+    "krymsky_bridge_3.jpg": [
+        "https://images.pexels.com/photos/31946770/pexels-photo-31946770.jpeg",
+        "https://images.pexels.com/photos/17065911/pexels-photo-17065911.jpeg",
+        "https://img.pastvu.com/d/z/x/u/zxumo325cqiefnvzq1.jpg",
+    ],
+    "krymsky_bridge_4.jpg": [
+        "https://images.pexels.com/photos/31946770/pexels-photo-31946770.jpeg",
+        "https://images.pexels.com/photos/17065911/pexels-photo-17065911.jpeg",
+        "https://images.pexels.com/photos/11955313/pexels-photo-11955313.jpeg",
+    ],
+    "luzhniki_viewpoint_1.jpg": [
+        "https://img.pastvu.com/d/z/x/u/zxumo325cqiefnvzq1.jpg",
+        "https://images.pexels.com/photos/9946859/pexels-photo-9946859.jpeg",
+        "https://images.pexels.com/photos/9946860/pexels-photo-9946860.jpeg",
+    ],
+    "luzhniki_viewpoint_2.jpg": [
+        "https://images.pexels.com/photos/9504283/pexels-photo-9504283.jpeg",
+        "https://images.pexels.com/photos/9946859/pexels-photo-9946859.jpeg",
+        "https://images.pexels.com/photos/9946860/pexels-photo-9946860.jpeg",
+    ],
+    "luzhniki_viewpoint_3.jpg": [
+        "https://images.pexels.com/photos/9504283/pexels-photo-9504283.jpeg",
+        "https://img.pastvu.com/d/z/x/u/zxumo325cqiefnvzq1.jpg",
+        "https://images.pexels.com/photos/9946860/pexels-photo-9946860.jpeg",
+    ],
+    "luzhniki_viewpoint_4.jpg": [
+        "https://images.pexels.com/photos/9504283/pexels-photo-9504283.jpeg",
+        "https://img.pastvu.com/d/z/x/u/zxumo325cqiefnvzq1.jpg",
+        "https://images.pexels.com/photos/9946859/pexels-photo-9946859.jpeg",
+    ],
+    "moscow_city_viewpoint_1.jpg": [
+        "https://images.pexels.com/photos/8412311/pexels-photo-8412311.jpeg",
+        "https://images.pexels.com/photos/31946792/pexels-photo-31946792.jpeg",
+        "https://img.pastvu.com/d/z/x/u/zxumo325cqiefnvzq1.jpg",
+    ],
+    "moscow_city_viewpoint_2.jpg": [
+        "https://images.pexels.com/photos/18217622/pexels-photo-18217622.jpeg",
+        "https://images.pexels.com/photos/31946792/pexels-photo-31946792.jpeg",
+        "https://img.pastvu.com/d/z/x/u/zxumo325cqiefnvzq1.jpg",
+    ],
+    "moscow_city_viewpoint_3.jpg": [
+        "https://images.pexels.com/photos/18217622/pexels-photo-18217622.jpeg",
+        "https://images.pexels.com/photos/8412311/pexels-photo-8412311.jpeg",
+        "https://img.pastvu.com/d/z/x/u/zxumo325cqiefnvzq1.jpg",
+    ],
+    "moscow_city_viewpoint_4.jpg": [
+        "https://images.pexels.com/photos/18217622/pexels-photo-18217622.jpeg",
+        "https://images.pexels.com/photos/8412311/pexels-photo-8412311.jpeg",
+        "https://images.pexels.com/photos/31946792/pexels-photo-31946792.jpeg",
+    ],
+    "sokolniki_viewpoint_1.jpg": [
+        "https://img.pastvu.com/d/z/x/u/zxumo325cqiefnvzq1.jpg",
+        "https://images.pexels.com/photos/31946792/pexels-photo-31946792.jpeg",
+        "https://images.pexels.com/photos/8880353/pexels-photo-8880353.jpeg",
+    ],
+    "sokolniki_viewpoint_2.jpg": [
+        "https://images.pexels.com/photos/12083849/pexels-photo-12083849.jpeg",
+        "https://images.pexels.com/photos/31946792/pexels-photo-31946792.jpeg",
+        "https://images.pexels.com/photos/8880353/pexels-photo-8880353.jpeg",
+    ],
+    "sokolniki_viewpoint_3.jpg": [
+        "https://images.pexels.com/photos/12083849/pexels-photo-12083849.jpeg",
+        "https://img.pastvu.com/d/z/x/u/zxumo325cqiefnvzq1.jpg",
+        "https://images.pexels.com/photos/8880353/pexels-photo-8880353.jpeg",
+    ],
+    "sokolniki_viewpoint_4.jpg": [
+        "https://images.pexels.com/photos/12083849/pexels-photo-12083849.jpeg",
+        "https://img.pastvu.com/d/z/x/u/zxumo325cqiefnvzq1.jpg",
+        "https://images.pexels.com/photos/31946792/pexels-photo-31946792.jpeg",
+    ],
+    "tsaritsyno_viewpoint_1.jpg": [
+        "https://images.pexels.com/photos/23355100/pexels-photo-23355100.jpeg",
+        "https://img.pastvu.com/d/z/x/u/zxumo325cqiefnvzq1.jpg",
+        "https://images.pexels.com/photos/31946792/pexels-photo-31946792.jpeg",
+    ],
+    "tsaritsyno_viewpoint_2.jpg": [
+        "https://images.pexels.com/photos/8942282/pexels-photo-8942282.jpeg",
+        "https://img.pastvu.com/d/z/x/u/zxumo325cqiefnvzq1.jpg",
+        "https://images.pexels.com/photos/31946792/pexels-photo-31946792.jpeg",
+    ],
+    "tsaritsyno_viewpoint_3.jpg": [
+        "https://images.pexels.com/photos/8942282/pexels-photo-8942282.jpeg",
+        "https://images.pexels.com/photos/23355100/pexels-photo-23355100.jpeg",
+        "https://images.pexels.com/photos/31946792/pexels-photo-31946792.jpeg",
+    ],
+    "tsaritsyno_viewpoint_4.jpg": [
+        "https://images.pexels.com/photos/8942282/pexels-photo-8942282.jpeg",
+        "https://images.pexels.com/photos/23355100/pexels-photo-23355100.jpeg",
+        "https://img.pastvu.com/d/z/x/u/zxumo325cqiefnvzq1.jpg",
+    ],
+    "vdnh_viewpoint_1.jpg": [
+        "https://images.pexels.com/photos/17833254/pexels-photo-17833254.jpeg",
+        "https://img.pastvu.com/d/z/x/u/zxumo325cqiefnvzq1.jpg",
+        "https://img.pastvu.com/d/8/f/3/8f389b60ef66ec3fa2fbab46e6feaf0b.jpg",
+    ],
+    "vdnh_viewpoint_2.jpg": [
+        "https://images.pexels.com/photos/10181120/pexels-photo-10181120.jpeg",
+        "https://img.pastvu.com/d/z/x/u/zxumo325cqiefnvzq1.jpg",
+        "https://img.pastvu.com/d/8/f/3/8f389b60ef66ec3fa2fbab46e6feaf0b.jpg",
+    ],
+    "vdnh_viewpoint_3.jpg": [
+        "https://images.pexels.com/photos/10181120/pexels-photo-10181120.jpeg",
+        "https://images.pexels.com/photos/17833254/pexels-photo-17833254.jpeg",
+        "https://img.pastvu.com/d/8/f/3/8f389b60ef66ec3fa2fbab46e6feaf0b.jpg",
+    ],
+    "vdnh_viewpoint_4.jpg": [
+        "https://images.pexels.com/photos/10181120/pexels-photo-10181120.jpeg",
+        "https://images.pexels.com/photos/17833254/pexels-photo-17833254.jpeg",
+        "https://img.pastvu.com/d/z/x/u/zxumo325cqiefnvzq1.jpg",
+    ],
+    "zaryadye_viewpoint_1.jpg": [
+        "https://images.pexels.com/photos/4514101/pexels-photo-4514101.jpeg",
+        "https://img.pastvu.com/d/z/x/u/zxumo325cqiefnvzq1.jpg",
+        "https://images.pexels.com/photos/35124747/pexels-photo-35124747.jpeg",
+    ],
+    "zaryadye_viewpoint_2.jpg": [
+        "https://images.pexels.com/photos/34322841/pexels-photo-34322841.jpeg",
+        "https://img.pastvu.com/d/z/x/u/zxumo325cqiefnvzq1.jpg",
+        "https://images.pexels.com/photos/35124747/pexels-photo-35124747.jpeg",
+    ],
+    "zaryadye_viewpoint_3.jpg": [
+        "https://images.pexels.com/photos/34322841/pexels-photo-34322841.jpeg",
+        "https://images.pexels.com/photos/4514101/pexels-photo-4514101.jpeg",
+        "https://images.pexels.com/photos/35124747/pexels-photo-35124747.jpeg",
+    ],
+    "zaryadye_viewpoint_4.jpg": [
+        "https://images.pexels.com/photos/34322841/pexels-photo-34322841.jpeg",
+        "https://images.pexels.com/photos/4514101/pexels-photo-4514101.jpeg",
+        "https://img.pastvu.com/d/z/x/u/zxumo325cqiefnvzq1.jpg",
+    ],
+}
 

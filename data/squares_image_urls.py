@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Image URLs filled by place name (Commons, Pixabay, Pexels, Openverse, etc.). No placeholders."""
+"""Image URLs filled by place name (Commons, Pixabay, Pexels, Openverse, Pastvu, etc.). Round-robin fallbacks per slot."""
 
 SQUARES_IMAGE_DOWNLOADS: dict[str, str] = {
     "arbatskaya_square_1.jpg": "https://live.staticflickr.com/4108/5211584874_e862ff5baa_b.jpg",
@@ -52,5 +52,6 @@ SQUARES_IMAGE_DOWNLOADS: dict[str, str] = {
     "tverskaya_square_4.jpg": "https://live.staticflickr.com/1425/950935410_5b80208ff2.jpg",
 }
 
-SQUARES_IMAGE_FALLBACKS: dict[str, list[str]] = {}
+SQUARES_IMAGE_FALLBACKS: dict[str, list[str]] = {
+}
 

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Image URLs filled by place name (Commons, Pixabay, Pexels, Openverse, etc.). No placeholders."""
+"""Image URLs filled by place name (Commons, Pixabay, Pexels, Openverse, Pastvu, etc.). Round-robin fallbacks per slot."""
 
 BUILDING_IMAGE_DOWNLOADS: dict[str, str] = {
     "basil_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/St_Basil%27s_Cathedral_Moscow_2006.jpg/500px-St_Basil%27s_Cathedral_Moscow_2006.jpg",
@@ -116,6 +116,8 @@ BUILDING_IMAGE_DOWNLOADS: dict[str, str] = {
     "mgu_4.jpg": "https://images.pexels.com/photos/31946792/pexels-photo-31946792.jpeg",
     "mhat_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Moscow-Bolshoi-Theare-1.jpg/500px-Moscow-Bolshoi-Theare-1.jpg",
     "mhat_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Moscow-Bolshoi-Theare-1.jpg/500px-Moscow-Bolshoi-Theare-1.jpg",
+    "mhat_3.jpg": "https://images.pexels.com/photos/11907612/pexels-photo-11907612.jpeg",
+    "mhat_4.jpg": "https://avatars.mds.yandex.net/get-altay/1632633/2a0000016995e3a28db47dd6524bfa659240/orig",
     "mid_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Ostankino_Tower.jpg/500px-Ostankino_Tower.jpg",
     "mid_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Ostankino_Tower.jpg/500px-Ostankino_Tower.jpg",
     "mid_3.jpg": "https://live.staticflickr.com/4003/4668455799_857d28d976_b.jpg",
@@ -202,5 +204,26 @@ BUILDING_IMAGE_DOWNLOADS: dict[str, str] = {
     "yaroslavsky_4.jpg": "https://images.pexels.com/photos/31638816/pexels-photo-31638816.jpeg",
 }
 
-BUILDING_IMAGE_FALLBACKS: dict[str, list[str]] = {}
+BUILDING_IMAGE_FALLBACKS: dict[str, list[str]] = {
+    "mhat_1.jpg": [
+        "https://images.pexels.com/photos/21558695/pexels-photo-21558695.jpeg",
+        "https://images.pexels.com/photos/11907612/pexels-photo-11907612.jpeg",
+        "https://avatars.mds.yandex.net/get-altay/1632633/2a0000016995e3a28db47dd6524bfa659240/orig",
+    ],
+    "mhat_2.jpg": [
+        "https://images.pexels.com/photos/34322841/pexels-photo-34322841.jpeg",
+        "https://images.pexels.com/photos/11907612/pexels-photo-11907612.jpeg",
+        "https://avatars.mds.yandex.net/get-altay/1632633/2a0000016995e3a28db47dd6524bfa659240/orig",
+    ],
+    "mhat_3.jpg": [
+        "https://images.pexels.com/photos/34322841/pexels-photo-34322841.jpeg",
+        "https://images.pexels.com/photos/21558695/pexels-photo-21558695.jpeg",
+        "https://avatars.mds.yandex.net/get-altay/1632633/2a0000016995e3a28db47dd6524bfa659240/orig",
+    ],
+    "mhat_4.jpg": [
+        "https://images.pexels.com/photos/34322841/pexels-photo-34322841.jpeg",
+        "https://images.pexels.com/photos/21558695/pexels-photo-21558695.jpeg",
+        "https://images.pexels.com/photos/11907612/pexels-photo-11907612.jpeg",
+    ],
+}
 

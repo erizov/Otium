@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Image URLs filled by place name (Commons, Pixabay, Pexels, Openverse, etc.). No placeholders."""
+"""Image URLs filled by place name (Commons, Pixabay, Pexels, Openverse, Pastvu, etc.). Round-robin fallbacks per slot."""
 
 PLACES_OF_WORSHIP_IMAGE_DOWNLOADS: dict[str, str] = {
     "anglican_church_1.jpg": "https://images.pexels.com/photos/6024542/pexels-photo-6024542.jpeg",
@@ -264,5 +264,6 @@ PLACES_OF_WORSHIP_IMAGE_DOWNLOADS: dict[str, str] = {
     "zachatiya_anny_4.jpg": "https://images.pexels.com/photos/9040894/pexels-photo-9040894.jpeg",
 }
 
-PLACES_OF_WORSHIP_IMAGE_FALLBACKS: dict[str, list[str]] = {}
+PLACES_OF_WORSHIP_IMAGE_FALLBACKS: dict[str, list[str]] = {
+}
 

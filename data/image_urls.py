@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Image URLs filled by place name (Commons, Pixabay, Pexels, Openverse, etc.). No placeholders."""
+"""Image URLs filled by place name (Commons, Pixabay, Pexels, Openverse, Pastvu, etc.). Round-robin fallbacks per slot."""
 
 IMAGE_DOWNLOADS: dict[str, str] = {
     "andreevsky_1.jpg": "https://avatars.mds.yandex.net/get-altay/223006/2a0000015b1771c4f4567be74ba32d71b83f/%s",
@@ -84,5 +84,6 @@ IMAGE_DOWNLOADS: dict[str, str] = {
     "znamensky_4.jpg": "https://upload.wikimedia.org/wikipedia/commons/d/dc/Panoramio_-_V%26A_Dudush_-_%D0%97%D0%BD%D0%B0%D0%BC%D0%B5%D0%BD%D1%81%D0%BA%D0%B8%D0%B9_%D0%BC%D0%BE%D0%BD%D0%B0%D1%81%D1%82%D1%8B%D1%80%D1%8C.jpg",
 }
 
-IMAGE_FALLBACKS: dict[str, list[str]] = {}
+IMAGE_FALLBACKS: dict[str, list[str]] = {
+}
 

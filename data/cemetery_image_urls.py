@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Image URLs filled by place name (Commons, Pixabay, Pexels, Openverse, etc.). No placeholders."""
+"""Image URLs filled by place name (Commons, Pixabay, Pexels, Openverse, Pastvu, etc.). Round-robin fallbacks per slot."""
 
 CEMETERY_IMAGE_DOWNLOADS: dict[str, str] = {
     "armyanskoe_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/9/9d/20220223_Armenian_Cemetery_%28Moscow%29_12.jpg",
@@ -12,6 +12,8 @@ CEMETERY_IMAGE_DOWNLOADS: dict[str, str] = {
     "donskoy_cemetery_4.jpg": "https://upload.wikimedia.org/wikipedia/commons/a/a8/Donskoye_Cemetery_20201219_173032.jpg",
     "kuntsevo_cemetery_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/3/36/%D0%9D%D0%B0%D0%B4%D0%B3%D1%80%D0%BE%D0%B1%D0%BD%D1%8B%D0%B9_%D0%BF%D0%B0%D0%BC%D1%8F%D1%82%D0%BD%D0%B8%D0%BA_%D0%B0%D0%BB%D1%8C%D0%BF%D0%B8%D0%BD%D0%B8%D1%81%D1%82%D1%83_%D0%92%D0%B8%D1%82%D0%B0%D0%BB%D0%B8%D1%8E_%D0%90%D0%B1%D0%B0%D0%BB%D0%B0%D0%BA%D0%BE%D0%B2%D1%83%2C_1993._%D0%91%D1%80%D0%BE%D0%BD%D0%B7%D0%B0%2C_%D0%BA%D0%B0%D0%BC%D0%B5%D0%BD%D1%8C._%D0%9A%D1%83%D0%BD%D1%86%D0%B5%D0%B2%D1%81%D0%BA%D0%BE%D0%B5_%D0%BA%D0%BB%D0%B0%D0%B4%D0%B1%D0%B8%D1%89%D0%B5%2C_%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0.jpg",
     "kuntsevo_cemetery_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/4/4c/%D0%9F%D0%B0%D0%BC%D1%8F%D1%82%D0%BD%D0%B8%D0%BA-%D1%81%D0%BA%D1%83%D0%BB%D1%8C%D0%BF%D1%82%D1%83%D1%80%D0%B0_%D0%BF%D0%BE%D1%8D%D1%82%D0%B0_%D0%92%D0%B0%D1%81%D0%B8%D0%BB%D0%B8%D1%8F_%D0%A4%D1%91%D0%B4%D0%BE%D1%80%D0%BE%D0%B2%D0%B0.jpg",
+    "kuntsevo_cemetery_3.jpg": "https://img.pastvu.com/d/z/x/u/zxumo325cqiefnvzq1.jpg",
+    "kuntsevo_cemetery_4.jpg": "https://images.pexels.com/photos/15402746/pexels-photo-15402746.jpeg",
     "mitinskoe_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/0/0c/%D0%9C%D0%B8%D1%82%D0%B8%D0%BD%D1%81%D0%BA%D0%BE%D0%B5_%D0%BA%D0%BB%D0%B0%D0%B4%D0%B1%D0%B8%D1%89%D0%B5%2C%D0%BC.%D0%9C%D0%B8%D1%82%D0%B8%D0%BD%D0%BE%2C_%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C_%D0%A0%D0%BE%D1%81%D1%81%D0%B8%D1%8F._-_panoramio_-_Oleg_Yu.Novikov_%2818%29.jpg",
     "mitinskoe_2.jpg": "https://avatars.mds.yandex.net/get-altay/14306621/2a000001934adddb8c0ada762ba63e17cb43/orig",
     "mitinskoe_3.jpg": "https://upload.wikimedia.org/wikipedia/commons/b/bc/%D0%9C%D0%B8%D1%82%D0%B8%D0%BD%D1%81%D0%BA%D0%BE%D0%B5_%D0%BA%D0%BB%D0%B0%D0%B4%D0%B1%D0%B8%D1%89%D0%B5%2C%D0%BC.%D0%9C%D0%B8%D1%82%D0%B8%D0%BD%D0%BE%2C_%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C_%D0%A0%D0%BE%D1%81%D1%81%D0%B8%D1%8F._-_panoramio_-_Oleg_Yu.Novikov_%2826%29.jpg",
@@ -38,5 +40,25 @@ CEMETERY_IMAGE_DOWNLOADS: dict[str, str] = {
     "vvedenskoe_4.jpg": "https://upload.wikimedia.org/wikipedia/commons/1/1e/%D0%92%D0%B0%D1%81%D0%BD%D0%B5%D1%86%D0%BE%D0%B2_%D0%92%D0%B8%D0%BA%D1%82%D0%BE%D1%80%2C_%D1%85%D1%83%D0%B4%D0%BE%D0%B6%D0%BD%D0%B8%D0%BA._%D0%92%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D1%81%D0%BA%D0%BE%D0%B5_%D0%BA%D0%BB%D0%B0%D0%B4%D0%B1%D0%B8%D1%89%D0%B5.jpg",
 }
 
-CEMETERY_IMAGE_FALLBACKS: dict[str, list[str]] = {}
+CEMETERY_IMAGE_FALLBACKS: dict[str, list[str]] = {
+    "kuntsevo_cemetery_1.jpg": [
+        "https://img.pastvu.com/d/z/x/u/zxumo325cqiefnvzq1.jpg",
+        "https://images.pexels.com/photos/15402746/pexels-photo-15402746.jpeg",
+    ],
+    "kuntsevo_cemetery_2.jpg": [
+        "https://images.pexels.com/photos/5059248/pexels-photo-5059248.jpeg",
+        "https://img.pastvu.com/d/z/x/u/zxumo325cqiefnvzq1.jpg",
+        "https://images.pexels.com/photos/15402746/pexels-photo-15402746.jpeg",
+    ],
+    "kuntsevo_cemetery_3.jpg": [
+        "https://images.pexels.com/photos/5059248/pexels-photo-5059248.jpeg",
+        "https://upload.wikimedia.org/wikipedia/commons/3/36/%D0%9D%D0%B0%D0%B4%D0%B3%D1%80%D0%BE%D0%B1%D0%BD%D1%8B%D0%B9_%D0%BF%D0%B0%D0%BC%D1%8F%D1%82%D0%BD%D0%B8%D0%BA_%D0%B0%D0%BB%D1%8C%D0%BF%D0%B8%D0%BD%D0%B8%D1%81%D1%82%D1%83_%D0%92%D0%B8%D1%82%D0%B0%D0%BB%D0%B8%D1%8E_%D0%90%D0%B1%D0%B0%D0%BB%D0%B0%D0%BA%D0%BE%D0%B2%D1%83%2C_1993._%D0%91%D1%80%D0%BE%D0%BD%D0%B7%D0%B0%2C_%D0%BA%D0%B0%D0%BC%D0%B5%D0%BD%D1%8C._%D0%9A%D1%83%D0%BD%D1%86%D0%B5%D0%B2%D1%81%D0%BA%D0%BE%D0%B5_%D0%BA%D0%BB%D0%B0%D0%B4%D0%B1%D0%B8%D1%89%D0%B5%2C_%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0.jpg",
+        "https://images.pexels.com/photos/15402746/pexels-photo-15402746.jpeg",
+    ],
+    "kuntsevo_cemetery_4.jpg": [
+        "https://images.pexels.com/photos/5059248/pexels-photo-5059248.jpeg",
+        "https://upload.wikimedia.org/wikipedia/commons/3/36/%D0%9D%D0%B0%D0%B4%D0%B3%D1%80%D0%BE%D0%B1%D0%BD%D1%8B%D0%B9_%D0%BF%D0%B0%D0%BC%D1%8F%D1%82%D0%BD%D0%B8%D0%BA_%D0%B0%D0%BB%D1%8C%D0%BF%D0%B8%D0%BD%D0%B8%D1%81%D1%82%D1%83_%D0%92%D0%B8%D1%82%D0%B0%D0%BB%D0%B8%D1%8E_%D0%90%D0%B1%D0%B0%D0%BB%D0%B0%D0%BA%D0%BE%D0%B2%D1%83%2C_1993._%D0%91%D1%80%D0%BE%D0%BD%D0%B7%D0%B0%2C_%D0%BA%D0%B0%D0%BC%D0%B5%D0%BD%D1%8C._%D0%9A%D1%83%D0%BD%D1%86%D0%B5%D0%B2%D1%81%D0%BA%D0%BE%D0%B5_%D0%BA%D0%BB%D0%B0%D0%B4%D0%B1%D0%B8%D1%89%D0%B5%2C_%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0.jpg",
+        "https://img.pastvu.com/d/z/x/u/zxumo325cqiefnvzq1.jpg",
+    ],
+}
 

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Image URLs filled by place name (Commons, Pixabay, Pexels, Openverse, etc.). No placeholders."""
+"""Image URLs filled by place name (Commons, Pixabay, Pexels, Openverse, Pastvu, etc.). Round-robin fallbacks per slot."""
 
 LANDMARK_IMAGE_DOWNLOADS: dict[str, str] = {
     "basil_1.jpg": "https://live.staticflickr.com/20/72006874_4574f35716_b.jpg",
@@ -52,11 +52,33 @@ LANDMARK_IMAGE_DOWNLOADS: dict[str, str] = {
     "worker_kolkhoz_4.jpg": "https://live.staticflickr.com/7857/40300538793_b9dfef7545_b.jpg",
     "zaryadye_bridge_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/1/1d/Moscow._Floating_bridge_in_Zaryadye_Park.jpg",
     "zaryadye_bridge_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/8/81/Moscow._Traffic_in_Moskvoretskaya_Embankment._On_background_are_seen_Floating_bridge_in_Zaryadye_Park%2C_the_Kremlin_and_scyscrapers.jpg",
+    "zaryadye_bridge_3.jpg": "https://img.pastvu.com/d/z/x/u/zxumo325cqiefnvzq1.jpg",
+    "zaryadye_bridge_4.jpg": "https://images.pexels.com/photos/12353504/pexels-photo-12353504.jpeg",
     "zaryadye_park_1.jpg": "https://live.staticflickr.com/1944/31298637278_b628fcb237_b.jpg",
     "zaryadye_park_2.jpg": "https://live.staticflickr.com/4394/36490843264_b1c6636c78_b.jpg",
     "zaryadye_park_3.jpg": "https://live.staticflickr.com/4635/39344901082_d64a692112.jpg",
     "zaryadye_park_4.jpg": "https://live.staticflickr.com/5727/20656224675_7e3336a497_b.jpg",
 }
 
-LANDMARK_IMAGE_FALLBACKS: dict[str, list[str]] = {}
+LANDMARK_IMAGE_FALLBACKS: dict[str, list[str]] = {
+    "zaryadye_bridge_1.jpg": [
+        "https://img.pastvu.com/d/z/x/u/zxumo325cqiefnvzq1.jpg",
+        "https://images.pexels.com/photos/12353504/pexels-photo-12353504.jpeg",
+    ],
+    "zaryadye_bridge_2.jpg": [
+        "https://images.pexels.com/photos/12083883/pexels-photo-12083883.jpeg",
+        "https://img.pastvu.com/d/z/x/u/zxumo325cqiefnvzq1.jpg",
+        "https://images.pexels.com/photos/12353504/pexels-photo-12353504.jpeg",
+    ],
+    "zaryadye_bridge_3.jpg": [
+        "https://images.pexels.com/photos/12083883/pexels-photo-12083883.jpeg",
+        "https://upload.wikimedia.org/wikipedia/commons/1/1d/Moscow._Floating_bridge_in_Zaryadye_Park.jpg",
+        "https://images.pexels.com/photos/12353504/pexels-photo-12353504.jpeg",
+    ],
+    "zaryadye_bridge_4.jpg": [
+        "https://images.pexels.com/photos/12083883/pexels-photo-12083883.jpeg",
+        "https://upload.wikimedia.org/wikipedia/commons/1/1d/Moscow._Floating_bridge_in_Zaryadye_Park.jpg",
+        "https://img.pastvu.com/d/z/x/u/zxumo325cqiefnvzq1.jpg",
+    ],
+}
 

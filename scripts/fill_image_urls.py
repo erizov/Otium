@@ -219,13 +219,27 @@ def _required_slots(images: list[str]) -> list[str]:
     ]
 
 
+def _load_existing_fallbacks(data_file: str, fallbacks_var: str) -> dict[str, list[str]]:
+    """Load existing FALLBACKS dict from data module (for merge)."""
+    import importlib
+    mod_name = "data.{}".format(data_file.replace(".py", ""))
+    try:
+        mod = importlib.import_module(mod_name)
+        existing = getattr(mod, fallbacks_var, None)
+        if isinstance(existing, dict):
+            return {k: list(v) for k, v in existing.items() if v}
+    except Exception:
+        pass
+    return {}
+
+
 def fill_guide(
     guide: str,
     dry_run: bool,
     excluded_sources: set[str],
     failure_counts: dict[str, int],
 ) -> int:
-    """Fill DOWNLOADS for one guide. Returns number of URLs written."""
+    """Fill DOWNLOADS and FALLBACKS for one guide. Returns number of URLs written."""
     if guide not in _GUIDE_TO_CONFIG:
         print("Unknown guide: {}.".format(guide), file=sys.stderr)
         return 0
@@ -236,6 +250,8 @@ def fill_guide(
     for bn, url in (existing_downloads or {}).items():
         if url and not _is_placeholder(url):
             downloads[bn] = url
+    fallbacks: dict[str, list[str]] = _load_existing_fallbacks(data_file,
+                                                               fallbacks_var)
     added = 0
     for place in places:
         name = place.get("name") or "?"
@@ -254,15 +270,26 @@ def fill_guide(
             failure_counts,
             _PROJECT_ROOT,
         )
+        valid_urls = [u for u in urls if u and not _is_placeholder(u)]
         for i, bn in enumerate(slots):
-            if bn not in downloads and i < len(urls) and not _is_placeholder(urls[i]):
-                downloads[bn] = urls[i]
+            if bn not in downloads and i < len(valid_urls):
+                downloads[bn] = valid_urls[i]
                 added += 1
+            # Round-robin fallbacks: other URLs for this slot (try if primary fails)
+            if bn in downloads and len(valid_urls) > 1:
+                others = [valid_urls[j] for j in range(len(valid_urls))
+                          if j != i and valid_urls[j] != downloads.get(bn)]
+                existing_list = fallbacks.get(bn, [])
+                for u in others:
+                    if u not in existing_list:
+                        existing_list.append(u)
+                if existing_list:
+                    fallbacks[bn] = existing_list[:10]
         time.sleep(_DELAY_BETWEEN_PLACES_SEC)
     if dry_run:
         print(
-            "[dry-run] {}: {} total ({} added).".format(
-                guide, len(downloads), added,
+            "[dry-run] {}: {} total ({} added), {} fallbacks.".format(
+                guide, len(downloads), added, len(fallbacks),
             ),
         )
         for k, v in sorted(downloads.items()):
@@ -272,22 +299,31 @@ def fill_guide(
     lines = [
         "# -*- coding: utf-8 -*-",
         '"""Image URLs filled by place name (Commons, Pixabay, Pexels, '
-        'Openverse, etc.). No placeholders."""',
+        'Openverse, Pastvu, etc.). Round-robin fallbacks per slot."""',
         "",
         "{}: dict[str, str] = {{".format(downloads_var),
     ]
     for k in sorted(downloads.keys()):
         url = downloads[k]
-        # Escape backslash and quote in URL for Python string
         url_esc = url.replace("\\", "\\\\").replace('"', '\\"')
         lines.append('    "{}": "{}",'.format(k, url_esc))
     lines.append("}")
     if fallbacks_var:
         lines.append("")
-        lines.append("{}: dict[str, list[str]] = {{}}".format(fallbacks_var))
+        lines.append("{}: dict[str, list[str]] = {{".format(fallbacks_var))
+        for k in sorted(fallbacks.keys()):
+            url_list = fallbacks[k]
+            lines.append('    "{}": ['.format(k))
+            for u in url_list:
+                u_esc = u.replace("\\", "\\\\").replace('"', '\\"')
+                lines.append('        "{}",'.format(u_esc))
+            lines.append("    ],")
+        lines.append("}")
     lines.append("")
     data_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
-    print("Wrote {} ({} entries, {} new).".format(data_path, len(downloads), added))
+    print("Wrote {} ({} entries, {} new, {} fallbacks).".format(
+        data_path, len(downloads), added, len(fallbacks),
+    ))
     return len(downloads)
 
 

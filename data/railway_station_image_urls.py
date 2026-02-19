@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Image URLs filled by place name (Commons, Pixabay, Pexels, Openverse, etc.). No placeholders."""
+"""Image URLs filled by place name (Commons, Pixabay, Pexels, Openverse, Pastvu, etc.). Round-robin fallbacks per slot."""
 
 RAILWAY_STATION_IMAGE_DOWNLOADS: dict[str, str] = {
     "belorussky_1.jpg": "https://live.staticflickr.com/3870/14284718169_2c3de612d0_b.jpg",
@@ -40,5 +40,6 @@ RAILWAY_STATION_IMAGE_DOWNLOADS: dict[str, str] = {
     "yaroslavsky_4.jpg": "https://upload.wikimedia.org/wikipedia/commons/c/c8/Pammene_rhediella_%2826411680347%29.jpg",
 }
 
-RAILWAY_STATION_IMAGE_FALLBACKS: dict[str, list[str]] = {}
+RAILWAY_STATION_IMAGE_FALLBACKS: dict[str, list[str]] = {
+}
 

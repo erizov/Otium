@@ -1,11 +1,15 @@
 # -*- coding: utf-8 -*-
-"""Image URLs filled by place name (Commons, Pixabay, Pexels, Openverse, etc.). No placeholders."""
+"""Image URLs filled by place name (Commons, Pixabay, Pexels, Openverse, Pastvu, etc.). Round-robin fallbacks per slot."""
 
 BRIDGE_IMAGE_DOWNLOADS: dict[str, str] = {
     "andreevsky_1.jpg": "https://live.staticflickr.com/65535/49269262282_7b44a5f1d5_b.jpg",
     "andreevsky_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/c/ce/%D0%90%D0%BD%D0%B4%D1%80%D0%B5%D0%B5%D0%B2%D1%81%D0%BA%D0%B8%D0%B9_%D0%BC%D0%BE%D1%81%D1%82_%D1%82%D0%B0%D0%B1%D0%BB%D0%B8%D1%87%D0%BA%D0%B0.JPG",
     "andreevsky_3.jpg": "https://live.staticflickr.com/4141/4817138696_3dd22c41f8_b.jpg",
     "andreevsky_4.jpg": "https://upload.wikimedia.org/wikipedia/commons/5/5b/%D0%90%D0%BD%D0%B4%D1%80%D0%B5%D0%B5%D0%B2%D1%81%D0%BA%D0%B8%D0%B9_%D0%BC%D0%BE%D1%81%D1%82_%D0%A1%D0%9F%D0%B1_01.jpg",
+    "bagration_1.jpg": "https://images.pexels.com/photos/31946792/pexels-photo-31946792.jpeg",
+    "bagration_2.jpg": "https://images.pexels.com/photos/11427629/pexels-photo-11427629.jpeg",
+    "bagration_3.jpg": "https://images.pexels.com/photos/28972378/pexels-photo-28972378.jpeg",
+    "bagration_4.jpg": "https://images.pexels.com/photos/8920327/pexels-photo-8920327.jpeg",
     "bolshoy_kamenny_1.jpg": "https://live.staticflickr.com/1599/25946503591_83dd2c17ce_b.jpg",
     "bolshoy_kamenny_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/e/e7/%D0%91%D0%BE%D0%BB%D1%8C%D1%88%D0%BE%D0%B9_%D0%9A%D0%B0%D0%BC%D0%B5%D0%BD%D0%BD%D1%8B%D0%B9_%D0%BC%D0%BE%D1%81%D1%82_%D1%87%D0%B5%D1%80%D0%B5%D0%B7_%D1%80%D0%B5%D0%BA%D1%83_%D0%A1%D0%BB%D1%8F%D0%B2%D1%8F%D0%BD%D0%BA%D1%83_2%2C_%D0%9F%D0%B0%D0%B2%D0%BB%D0%BE%D0%B2%D1%81%D0%BA.jpg",
     "bolshoy_kamenny_3.jpg": "https://live.staticflickr.com/1632/25410747403_0a92155d98_b.jpg",
@@ -22,6 +26,10 @@ BRIDGE_IMAGE_DOWNLOADS: dict[str, str] = {
     "krymsky_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/f/f9/%D0%9A%D1%80%D1%8B%D0%BC%D1%81%D0%BA%D0%B8%D0%B9_%D0%BC%D0%BE%D1%81%D1%82_13_%D1%81%D0%B5%D0%BD%D1%82%D1%8F%D0%B1%D1%80%D1%8F_2019_%D0%B3%D0%BE%D0%B4%D0%B0_%281%29.jpg",
     "krymsky_3.jpg": "https://live.staticflickr.com/65535/8539294023_340dfeac17_b.jpg",
     "krymsky_4.jpg": "https://upload.wikimedia.org/wikipedia/commons/e/e3/%D0%9A%D1%80%D1%8B%D0%BC%D1%81%D0%BA%D0%B8%D0%B9_%D0%BC%D0%BE%D1%81%D1%82_21_%D0%B4%D0%B5%D0%BA%D0%B0%D0%B1%D1%80%D1%8F_2019_%D0%B3%D0%BE%D0%B4%D0%B0.jpg",
+    "luzhniki_metromost_1.jpg": "https://images.pexels.com/photos/31946792/pexels-photo-31946792.jpeg",
+    "luzhniki_metromost_2.jpg": "https://images.pexels.com/photos/3663024/pexels-photo-3663024.jpeg",
+    "luzhniki_metromost_3.jpg": "https://images.pexels.com/photos/31946770/pexels-photo-31946770.jpeg",
+    "luzhniki_metromost_4.jpg": "https://images.pexels.com/photos/8997931/pexels-photo-8997931.jpeg",
     "novospassky_bridge_1.jpg": "https://live.staticflickr.com/5146/5748224625_0a4f69f7ba_b.jpg",
     "novospassky_bridge_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/9/90/%D0%9F%D1%80%D0%B8%D1%87%D0%B0%D0%BB_%D0%9D%D0%BE%D0%B2%D0%BE%D1%81%D0%BF%D0%B0%D1%81%D1%81%D0%BA%D0%B8%D0%B9_%D0%BC%D0%BE%D1%81%D1%82_%D1%8447.jpg",
     "novospassky_bridge_3.jpg": "https://upload.wikimedia.org/wikipedia/commons/4/40/Moscow%2C_Novospassky_Bridge_August_2012_01.jpg",
@@ -44,5 +52,46 @@ BRIDGE_IMAGE_DOWNLOADS: dict[str, str] = {
     "zhivopisny_4.jpg": "https://live.staticflickr.com/65535/51390385314_6d7b4aa9bd_b.jpg",
 }
 
-BRIDGE_IMAGE_FALLBACKS: dict[str, list[str]] = {}
+BRIDGE_IMAGE_FALLBACKS: dict[str, list[str]] = {
+    "bagration_1.jpg": [
+        "https://images.pexels.com/photos/11427629/pexels-photo-11427629.jpeg",
+        "https://images.pexels.com/photos/28972378/pexels-photo-28972378.jpeg",
+        "https://images.pexels.com/photos/8920327/pexels-photo-8920327.jpeg",
+    ],
+    "bagration_2.jpg": [
+        "https://images.pexels.com/photos/31946792/pexels-photo-31946792.jpeg",
+        "https://images.pexels.com/photos/28972378/pexels-photo-28972378.jpeg",
+        "https://images.pexels.com/photos/8920327/pexels-photo-8920327.jpeg",
+    ],
+    "bagration_3.jpg": [
+        "https://images.pexels.com/photos/31946792/pexels-photo-31946792.jpeg",
+        "https://images.pexels.com/photos/11427629/pexels-photo-11427629.jpeg",
+        "https://images.pexels.com/photos/8920327/pexels-photo-8920327.jpeg",
+    ],
+    "bagration_4.jpg": [
+        "https://images.pexels.com/photos/31946792/pexels-photo-31946792.jpeg",
+        "https://images.pexels.com/photos/11427629/pexels-photo-11427629.jpeg",
+        "https://images.pexels.com/photos/28972378/pexels-photo-28972378.jpeg",
+    ],
+    "luzhniki_metromost_1.jpg": [
+        "https://images.pexels.com/photos/3663024/pexels-photo-3663024.jpeg",
+        "https://images.pexels.com/photos/31946770/pexels-photo-31946770.jpeg",
+        "https://images.pexels.com/photos/8997931/pexels-photo-8997931.jpeg",
+    ],
+    "luzhniki_metromost_2.jpg": [
+        "https://images.pexels.com/photos/31946792/pexels-photo-31946792.jpeg",
+        "https://images.pexels.com/photos/31946770/pexels-photo-31946770.jpeg",
+        "https://images.pexels.com/photos/8997931/pexels-photo-8997931.jpeg",
+    ],
+    "luzhniki_metromost_3.jpg": [
+        "https://images.pexels.com/photos/31946792/pexels-photo-31946792.jpeg",
+        "https://images.pexels.com/photos/3663024/pexels-photo-3663024.jpeg",
+        "https://images.pexels.com/photos/8997931/pexels-photo-8997931.jpeg",
+    ],
+    "luzhniki_metromost_4.jpg": [
+        "https://images.pexels.com/photos/31946792/pexels-photo-31946792.jpeg",
+        "https://images.pexels.com/photos/3663024/pexels-photo-3663024.jpeg",
+        "https://images.pexels.com/photos/31946770/pexels-photo-31946770.jpeg",
+    ],
+}
 

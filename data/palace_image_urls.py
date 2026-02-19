@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Image URLs filled by place name (Commons, Pixabay, Pexels, Openverse, etc.). No placeholders."""
+"""Image URLs filled by place name (Commons, Pixabay, Pexels, Openverse, Pastvu, etc.). Round-robin fallbacks per slot."""
 
 PALACE_IMAGE_DOWNLOADS: dict[str, str] = {
     "altufevo_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Italian_House_in_Kuskovo_2014_%282%29.JPG/500px-Italian_House_in_Kuskovo_2014_%282%29.JPG",
@@ -100,5 +100,6 @@ PALACE_IMAGE_DOWNLOADS: dict[str, str] = {
     "yasenevo_4.jpg": "https://images.pexels.com/photos/4911731/pexels-photo-4911731.jpeg",
 }
 
-PALACE_IMAGE_FALLBACKS: dict[str, list[str]] = {}
+PALACE_IMAGE_FALLBACKS: dict[str, list[str]] = {
+}
 
