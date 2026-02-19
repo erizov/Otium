@@ -23,6 +23,7 @@ if str(_PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(_PROJECT_ROOT))
 
 from scripts.guide_loader import GUIDES, GUIDE_TO_SUBDIR, load_places
+from scripts.slug_item_map import basename_to_slug
 
 OUTPUT_DIR = _PROJECT_ROOT / "output"
 
@@ -36,6 +37,38 @@ def _has_any_image(place: dict[str, Any], img_dir: Path) -> bool:
     """Check if place has at least one image file (map not counted)."""
     images = place.get("images") or []
     return any((img_dir / _basename(p)).is_file() for p in images)
+
+
+def _get_expected_image_names(place: dict[str, Any]) -> list[str]:
+    """
+    Get expected image filenames for a place (_1.jpg, _2.jpg, _3.jpg, _4.jpg).
+    
+    Returns empty list if no standard-format images found in data (can't determine slug).
+    """
+    images = place.get("images") or []
+    basenames = [_basename(img) for img in images]
+    
+    # Filter to only standard format (_1, _2, _3, _4)
+    standard_basenames = sorted([
+        bn for bn in basenames
+        if bn.endswith("_1.jpg") or bn.endswith("_2.jpg") or
+        bn.endswith("_3.jpg") or bn.endswith("_4.jpg")
+    ])
+    
+    if not standard_basenames:
+        # No standard-format slot in data; cannot derive slug
+        return []
+    
+    # Derive slug from first basename
+    slug = basename_to_slug(standard_basenames[0])
+    
+    # Return expected 4 slots
+    return [
+        "{}_1.jpg".format(slug),
+        "{}_2.jpg".format(slug),
+        "{}_3.jpg".format(slug),
+        "{}_4.jpg".format(slug),
+    ]
 
 
 def main() -> int:
@@ -59,7 +92,7 @@ def main() -> int:
     args = parser.parse_args()
 
     guides_to_check = [args.guide] if args.guide else GUIDES
-    places_without: list[tuple[str, str]] = []  # (guide, place_name)
+    places_without: list[tuple[str, str, list[str]]] = []  # (guide, name, expected_images)
 
     for guide in guides_to_check:
         if guide == "test_e2e":
@@ -76,7 +109,8 @@ def main() -> int:
         for place in places:
             name = place.get("name") or "?"
             if not _has_any_image(place, img_dir):
-                places_without.append((guide, name))
+                expected_images = _get_expected_image_names(place)
+                places_without.append((guide, name, expected_images))
 
     # Build output
     lines: list[str] = []
@@ -91,20 +125,28 @@ def main() -> int:
         lines.append("All places have at least one image.")
     else:
         if args.guide:
-            for _, name in places_without:
-                lines.append("  - {}".format(name))
+            for _, name, expected_images in places_without:
+                if expected_images:
+                    images_str = ", ".join(expected_images)
+                    lines.append("  - {} (expected: {})".format(name, images_str))
+                else:
+                    lines.append("  - {} (no image slots in data)".format(name))
         else:
             # Group by guide
-            by_guide: dict[str, list[str]] = {}
-            for guide, name in places_without:
+            by_guide: dict[str, list[tuple[str, list[str]]]] = {}
+            for guide, name, expected_images in places_without:
                 if guide not in by_guide:
                     by_guide[guide] = []
-                by_guide[guide].append(name)
+                by_guide[guide].append((name, expected_images))
 
             for guide in sorted(by_guide.keys()):
                 lines.append("{} ({}):".format(guide, len(by_guide[guide])))
-                for name in sorted(by_guide[guide]):
-                    lines.append("  - {}".format(name))
+                for name, expected_images in sorted(by_guide[guide]):
+                    if expected_images:
+                        images_str = ", ".join(expected_images)
+                        lines.append("  - {} (expected: {})".format(name, images_str))
+                    else:
+                        lines.append("  - {} (no image slots in data)".format(name))
                 lines.append("")
 
         lines.append("")

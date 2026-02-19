@@ -112,6 +112,129 @@ python scripts/build_full_guide.py --download-images
 
 Итог: **output/Moscow_Complete_Guide.pdf** будет содержать все ваши правки. Шрифты и вёрстка не меняются.
 
+### Quick Reference — быстрая справка по командам
+
+#### Редактирование индивидуальных гидов (например, viewpoints)
+
+```bash
+# 1. Сгенерировать редактируемый HTML
+python scripts/build_pdf.py --guide viewpoints
+
+# 2. Открыть output/viewpoints_guide.html в браузере
+#    - Редактировать текст (клик и ввод)
+#    - Удалять изображения (× на изображении)
+#    - Загружать новые изображения (кнопка "+ Add image", до 4 на место)
+#    - Переупорядочивать изображения (перетаскивание)
+#    - Нажать "Export HTML" и сохранить поверх output/viewpoints_guide.html
+
+# 3. Пересобрать PDF из отредактированного HTML
+python scripts/build_pdf.py --guide viewpoints --build-only
+```
+
+#### Редактирование полного путеводителя
+
+```bash
+# 1. Сгенерировать редактируемый HTML
+python scripts/build_full_guide.py
+
+# 2. Открыть output/Moscow_Complete_Guide.html в браузере
+#    - Редактировать текст (клик и ввод)
+#    - Удалять изображения (× на изображении)
+#    - Загружать новые изображения (кнопка "+ Add image", до 4 на место)
+#    - Переупорядочивать изображения (перетаскивание)
+#    - Нажать "Export HTML" и сохранить поверх output/Moscow_Complete_Guide.html
+
+# 3. Пересобрать PDF из отредактированного HTML
+python scripts/build_full_guide.py --use-existing-html
+```
+
+#### Сборка гидов
+
+```bash
+# Один гид (например, монастыри)
+python scripts/build_pdf.py --guide monasteries
+
+# Все гиды (без загрузки изображений)
+python scripts/build_pdf.py --all-guides
+
+# Все гиды с несколькими раундами загрузки
+python scripts/build_pdf.py --all-guides --download-retries 5
+
+# Только сборка PDF (без загрузки изображений)
+python scripts/build_pdf.py --guide monasteries --build-only
+
+# Сборка по имеющимся изображениям (даже если меньше 4)
+python scripts/build_pdf.py --guide monasteries --build-with-available
+```
+
+#### Полный путеводитель
+
+```bash
+# Сборка по имеющимся изображениям (без загрузки)
+python scripts/build_full_guide.py
+
+# С предварительной загрузкой недостающих изображений
+python scripts/build_full_guide.py --download-images
+
+# Пересборка PDF из существующего HTML (после редактирования)
+python scripts/build_full_guide.py --use-existing-html
+```
+
+#### Загрузка изображений
+
+```bash
+# Загрузка для одного гида
+python scripts/build_pdf.py --guide monasteries
+
+# Загрузка для всех гидов (5 раундов)
+python scripts/build_pdf.py --all-guides --download-retries 5
+
+# Только загрузка (без сборки PDF)
+python scripts/build_pdf.py --all-guides --download-retries 5 --download-only
+
+# Загрузка с перезаписью существующих
+python scripts/build_pdf.py --guide monasteries --force-overwrite
+```
+
+#### Заполнение URL изображений
+
+```bash
+# Автоматическое заполнение URL из всех источников (round-robin)
+python scripts/fill_image_urls.py
+
+# Генерация URL из Yandex Maps
+python scripts/generate_yandex_image_urls.py
+
+# Для конкретного гида
+python scripts/generate_yandex_image_urls.py --guide places
+```
+
+#### Проверка и валидация
+
+```bash
+# Проверка изображений (дубликаты + формат)
+python scripts/build_pdf.py --guide monasteries --verify-images
+
+# Список мест без изображений
+python scripts/list_no_images.py
+
+# Детальный отчёт по изображениям
+python scripts/list_places_without_images.py
+
+# Валидация данных (строгий режим: ровно 4 изображения)
+python scripts/validate_images_per_item.py --strict
+```
+
+#### Тестирование
+
+```bash
+# Запуск всех тестов
+pytest -q
+
+# E2E тест (проверка всех гидов)
+pytest tests/test_e2e_workflow.py -v
+```
+
 ### Структура проекта
 
 - `data/monasteries.py`, `data/churches.py`, `data/parks.py`, `data/museums.py`,
