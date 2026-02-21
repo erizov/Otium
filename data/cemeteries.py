@@ -77,8 +77,7 @@ CEMETERIES: list[Cemetery] = [
        "Некрополь деятелей культуры; могилы Есенина, Высоцкого; "
        "памятник истории и надгробного искусства.",
        ["Основано в 1771 году.", "Площадь около 50 га."],
-       ["vagankovo_1.jpg", "vagankovo_2.jpg", "vagankovo_3.jpg",
-        "vagankovo_4.jpg"],
+       ["vagankovo_1.jpg", "vagankovo_2.jpg", "vagankovo_4.jpg"],
        55.7689, 37.5519),
     _c("Донское кладбище", "Донская пл., 1",
        "исторический некрополь",
@@ -114,8 +113,7 @@ CEMETERIES: list[Cemetery] = [
        "Исторический некрополь на западе Москвы; парковая зона; "
        "вид на Москву-реку.",
        ["Известно с XVII века.", "Рядом — Троекуровское кладбище."],
-       ["kuntsevo_cemetery_1.jpg", "kuntsevo_cemetery_2.jpg",
-        "kuntsevo_cemetery_3.jpg", "kuntsevo_cemetery_4.jpg"],
+       ["kuntsevo_cemetery_1.jpg", "kuntsevo_cemetery_2.jpg"],
        55.6819, 37.3989),
     _c("Введенское кладбище", "ул. Наличная, 1",
        "исторический некрополь",
@@ -135,8 +133,7 @@ CEMETERIES: list[Cemetery] = [
        "благоустроенная территория.",
        "Мемориальный некрополь на северо-западе; память о войне.",
        ["Создано в 1978 году.", "Площадь около 100 га."],
-       ["mitinskoe_1.jpg", "mitinskoe_2.jpg", "mitinskoe_3.jpg",
-        "mitinskoe_4.jpg"], 55.8489, 37.3589),
+       ["mitinskoe_1.jpg", "mitinskoe_2.jpg", "mitinskoe_3.jpg", "mitinskoe_4.jpg"], 55.8489, 37.3589),
     _c("Армянское кладбище", "ул. Сергия Радонежского, 1",
        "исторический некрополь",
        ["армянская община", "памятники XIX–XX вв.", "церковь Сурб Хач"],
@@ -155,7 +152,6 @@ CEMETERIES: list[Cemetery] = [
        "Церковь Троицы в Вешняках рядом; памятники XIX века.",
        "Исторический некрополь Замоскворечья; купеческие захоронения.",
        ["Известно с 1771 года.", "Рядом — церковь Троицы."],
-       ["pyatnitskoe_1.jpg", "pyatnitskoe_2.jpg",
-        "pyatnitskoe_3.jpg", "pyatnitskoe_4.jpg"],
+       ["pyatnitskoe_1.jpg", "pyatnitskoe_2.jpg", "pyatnitskoe_4.jpg"],
        55.7219, 37.6289),
 ]

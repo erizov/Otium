@@ -23,6 +23,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import json
 import re
 import shutil
 import subprocess
@@ -176,6 +177,11 @@ _COMBINED_CSS = """
   .front-page .fp-board ul { list-style: none; padding: 0; margin: 0; }
   .front-page .fp-board li { margin: 0.25em 0; padding-left: 0;
     white-space: nowrap; }
+  .pg2-image-block { page-break-after: always; min-height: 100vh; margin: 0;
+    padding: 0; display: flex; align-items: center; justify-content: center;
+    box-sizing: border-box; background: #1c1b19; }
+  .pg2-image-block img { max-width: 100%; max-height: 100vh; width: auto;
+    height: auto; object-fit: contain; display: block; }
   .preface-block, .chapter-intro { padding: 2em 1em 1em 1.2em;
     background-color: #faf8f5; page-break-after: always; }
   .preface-block h1 { margin-bottom: 0.5em; }
@@ -425,9 +431,10 @@ REFERENCES_BODY = """
 </div>
 """
 
-# Chapters per PDF chunk to avoid Chromium string size limit (~536M).
-# Use 2; if still failing, set to 1 (one chapter per chunk).
-CHUNK_CHAPTERS = 2
+# Blocks per PDF chunk to avoid "Cannot create a string longer than 0x1fffffe8".
+CHUNK_CHAPTERS = 1
+# Max place sections per chapter sub-block so each PDF chunk stays small.
+MAX_PLACES_PER_PDF_BLOCK = 4
 
 # Footer for chunk PDFs: Playwright replaces pageNumber and totalPages.
 PDF_FOOTER_TEMPLATE = (
@@ -456,9 +463,18 @@ def _pdf_header_html(header_text: str) -> str:
     ).format(_escape(header_text))
 
 # Script for editable HTML: contenteditable, image delete/upload (max 4 per item), export
+# Deleted image paths (relative) are embedded on export so next build moves them to forbidden/
 _EDITABLE_SCRIPT = """
 (function(){
   var MAX_IMAGES_PER_ROW = 4;
+  window._deletedImagePaths = window._deletedImagePaths || [];
+  function recordDeleted(src) {
+    if (typeof src !== 'string') return;
+    var s = src.split('?')[0].replace(/\\\\/g, '/');
+    var idx = s.indexOf('images/');
+    if (idx === 0) window._deletedImagePaths.push(s);
+    else if (idx > 0) window._deletedImagePaths.push(s.substring(idx));
+  }
   function initEditable() {
     var sel = '.preface-block p,.preface-block h1,.preface-block li,.chapter-intro p,' +
       '.chapter-intro h2,.chapter-intro li,.monastery .monastery-title,.monastery .meta,' +
@@ -482,7 +498,7 @@ _EDITABLE_SCRIPT = """
         delBtn.type = 'button';
         delBtn.textContent = '×';
         delBtn.title = 'Delete image';
-        delBtn.onclick = function(){ wrap.remove(); updateAddBtn(row); };
+        delBtn.onclick = function(){ recordDeleted(img.src); wrap.remove(); updateAddBtn(row); };
         wrap.appendChild(delBtn);
         wrap.ondragstart = function(e){ e.dataTransfer.setData('text/plain',''); e.dataTransfer.effectAllowed = 'move'; window._dragSrc = wrap; wrap.classList.add('img-dragging'); };
         wrap.ondragend = function(){ wrap.classList.remove('img-dragging'); };
@@ -526,6 +542,14 @@ _EDITABLE_SCRIPT = """
         if (img) { wrap.parentNode.insertBefore(img, wrap); }
         wrap.remove();
       });
+      var deleted = window._deletedImagePaths || [];
+      if (deleted.length) {
+        var script = root.ownerDocument.createElement('script');
+        script.type = 'application/json';
+        script.id = 'otium-deleted-images';
+        script.textContent = JSON.stringify(deleted);
+        root.querySelector('body').appendChild(script);
+      }
       var html = '<!DOCTYPE html>\\n' + root.outerHTML;
       var blob = new Blob([html], { type: 'text/html;charset=utf-8' });
       var a = document.createElement('a');
@@ -546,6 +570,27 @@ _EDITABLE_SCRIPT = """
   }
 })();
 """
+
+
+PG2_IMAGE_REL = "images/pg2.jpg"
+
+
+def _build_pg2_image_html(output_dir: Path) -> str:
+    """
+    Build page-2 block: single full-page image from output/images/pg2.jpg.
+    Second page of the PDF will be just this image.
+    """
+    pg2_path = output_dir / PG2_IMAGE_REL
+    if not pg2_path.is_file():
+        return (
+            '<div class="pg2-image-block">'
+            '<p style="color:#888;margin:2em;">[{}]</p></div>'
+        ).format(_escape("Изображение не найдено: " + PG2_IMAGE_REL))
+    return (
+        '<div class="pg2-image-block" aria-hidden="true">'
+        '<img src="{}" alt="" />'
+        "</div>"
+    ).format(_escape(PG2_IMAGE_REL))
 
 
 def _build_front_page_html() -> str:
@@ -721,6 +766,64 @@ def rotate_backup_full_guide(output_dir: Path, backup_dir: Path) -> None:
         print("Backed up {} -> {}".format(src.name, dest1.name))
 
 
+OTIUM_DELETED_IMAGES_ID = "otium-deleted-images"
+
+
+def _process_deleted_images_and_strip_script(
+    html_content: str,
+    output_dir: Path,
+) -> tuple[str, int]:
+    """
+    If HTML contains otium-deleted-images script, move those image files to
+    forbidden/ so they won't be re-downloaded. Return (cleaned_html, moved_count).
+    """
+    pattern = re.compile(
+        r'<script[^>]*\s+id="' + re.escape(OTIUM_DELETED_IMAGES_ID) + r'"[^>]*>'
+        r'([^<]*)</script>',
+        re.IGNORECASE | re.DOTALL,
+    )
+    match = pattern.search(html_content)
+    if not match:
+        return html_content, 0
+    try:
+        paths = json.loads(match.group(1).strip())
+    except (json.JSONDecodeError, ValueError):
+        return html_content, 0
+    if not isinstance(paths, list):
+        return html_content, 0
+    moved = 0
+    for rel_path in paths:
+        if not isinstance(rel_path, str) or ".." in rel_path:
+            continue
+        if not rel_path.replace("\\", "/").startswith("images/"):
+            continue
+        src = output_dir / rel_path.replace("\\", "/")
+        if not src.is_file():
+            continue
+        forbidden_dir = src.parent / "forbidden"
+        forbidden_dir.mkdir(parents=True, exist_ok=True)
+        dest = forbidden_dir / src.name
+        try:
+            shutil.copy2(str(src), str(dest))
+            src.unlink()
+            moved += 1
+        except OSError:
+            pass
+    cleaned = pattern.sub("", html_content)
+    return cleaned, moved
+
+
+def _inject_editable_script_before_body_close(html: str) -> str:
+    """Insert editable script before </body>. Idempotent (single insertion)."""
+    if "initEditable" in html:
+        return html
+    script_tag = "\n<script>\n" + _EDITABLE_SCRIPT.strip() + "\n</script>\n"
+    marker = "</body>"
+    if marker in html:
+        return html.replace(marker, script_tag + marker, 1)
+    return html
+
+
 def _wrap_html(body_blocks: list[str], editable: bool = True) -> str:
     """Wrap body blocks in full HTML document. If editable=True, add edit script."""
     body = "\n".join(body_blocks)
@@ -752,12 +855,14 @@ def _wrap_html(body_blocks: list[str], editable: bool = True) -> str:
     )
 
 
-def build_combined_parts(output_dir: Path) -> list[str]:
+def build_combined_parts(output_dir: Path) -> tuple[list[str], list[int]]:
     """
-    Build list of body blocks: [preface, ch1_block, ch2_block, ..., refs].
-    Each block is one or more divs; used for full HTML and chunked PDF.
+    Build list of body blocks and chapter index per block for chunked PDF.
+    Returns (blocks, chapter_for_block): chapter_for_block[i] is -1 for front,
+    -2 for pg2/preface/toc, 0-based chapter index for chapter blocks.
     """
     blocks: list[str] = []
+    chapter_for_block: list[int] = []
 
     # Preface
     famous_li = "".join(
@@ -810,7 +915,11 @@ def build_combined_parts(output_dir: Path) -> list[str]:
         preface_body.strip(),
     )
     blocks.append(_build_front_page_html())
+    chapter_for_block.append(-1)
+    blocks.append(_build_pg2_image_html(output_dir))
+    chapter_for_block.append(-2)
     blocks.append(preface)
+    chapter_for_block.append(-2)
 
     toc_entries: list[tuple[int, str]] = []
     chapter_num = 0
@@ -836,6 +945,7 @@ def build_combined_parts(output_dir: Path) -> list[str]:
                     _escape(chapter_desc),
                 )
             )
+            chapter_for_block.append(chapter_num - 1)
             continue
         html = html_path.read_text(encoding="utf-8")
         sections = _extract_place_sections(html)
@@ -868,8 +978,12 @@ def build_combined_parts(output_dir: Path) -> list[str]:
             chapter_num, _escape(chapter_title), _escape(chapter_desc),
             list_items,
         )
-        chapter_block = "\n".join([intro] + sections)
-        blocks.append(chapter_block)
+        blocks.append(intro)
+        chapter_for_block.append(chapter_num - 1)
+        for i in range(0, len(sections), MAX_PLACES_PER_PDF_BLOCK):
+            group = sections[i : i + MAX_PLACES_PER_PDF_BLOCK]
+            blocks.append("\n".join(group))
+            chapter_for_block.append(chapter_num - 1)
 
     toc_html = (
         '<div class="toc-block">'
@@ -882,7 +996,8 @@ def build_combined_parts(output_dir: Path) -> list[str]:
         )
         + "</ul></div>"
     )
-    blocks.insert(2, toc_html)
+    blocks.insert(3, toc_html)
+    chapter_for_block.insert(3, -2)
 
     refs = (
         '<div class="references-chapter">'
@@ -896,12 +1011,14 @@ def build_combined_parts(output_dir: Path) -> list[str]:
         ),
     )
     blocks.append(refs)
-    return blocks
+    chapter_for_block.append(-2)
+    return blocks, chapter_for_block
 
 
 def build_combined_html(output_dir: Path) -> str:
     """Build one HTML: preface (6 places + OTIUM) + chapters + references."""
-    return _wrap_html(build_combined_parts(output_dir))
+    blocks, _ = build_combined_parts(output_dir)
+    return _wrap_html(blocks)
 
 
 def _build_combined_pdf_chunked(
@@ -909,6 +1026,7 @@ def _build_combined_pdf_chunked(
     blocks: list[str],
     pdf_path: Path,
     image_wait_timeout_ms: int = 60000,
+    chapter_for_block: list[int] | None = None,
 ) -> bool:
     """
     Generate combined PDF by rendering chunks (to avoid Chromium string limit)
@@ -921,13 +1039,15 @@ def _build_combined_pdf_chunked(
         print("pypdf required for merging chunk PDFs.", file=sys.stderr)
         return False
 
-    # Chunk: [preface], [ch1..ch4], [ch5..ch8], ..., [refs]
     n = len(blocks)
     if n < 2:
         return False
+    if chapter_for_block is None:
+        chapter_for_block = [-1] * n
     preface = [blocks[0]]
     refs = [blocks[-1]]
     middle = blocks[1:-1]
+    middle_chapter = chapter_for_block[1:-1] if len(chapter_for_block) >= 2 else []
     chunk_list: list[list[str]] = [preface]
     for i in range(0, len(middle), CHUNK_CHAPTERS):
         chunk_list.append(middle[i : i + CHUNK_CHAPTERS])
@@ -941,15 +1061,16 @@ def _build_combined_pdf_chunked(
             if idx == 0 or idx == len(chunk_list) - 1:
                 header_template = '<div></div>'
             else:
-                if idx >= 2:
-                    first_chapter_idx = (idx - 2) * CHUNK_CHAPTERS
-                    if first_chapter_idx < len(CHAPTER_CONFIG):
-                        short = _strip_moscow_from_title(
-                            CHAPTER_CONFIG[first_chapter_idx][1],
-                        )
-                        header_text = "{} : {}".format(PREFACE_TITLE, short)
-                    else:
-                        header_text = PREFACE_TITLE
+                ch_idx = (
+                    middle_chapter[idx - 1]
+                    if 0 <= idx - 1 < len(middle_chapter)
+                    else -2
+                )
+                if ch_idx >= 0 and ch_idx < len(CHAPTER_CONFIG):
+                    short = _strip_moscow_from_title(
+                        CHAPTER_CONFIG[ch_idx][1],
+                    )
+                    header_text = "{} : {}".format(PREFACE_TITLE, short)
                 else:
                     header_text = PREFACE_TITLE
                 header_template = _pdf_header_html(header_text)
@@ -1035,14 +1156,41 @@ def main() -> int:
         return 1
 
     if args.use_existing_html:
-        if not html_path.is_file():
+        edit_path = output_dir / "{}_edit.html".format(OUTPUT_BASENAME)
+        # Prefer edit copy if user saved exported HTML there
+        if edit_path.is_file():
+            current = edit_path.read_text(encoding="utf-8")
+            cleaned, moved = _process_deleted_images_and_strip_script(
+                current, output_dir,
+            )
+            if moved > 0:
+                print("Moved {} deleted image(s) to forbidden/.".format(moved))
+            if cleaned != current or moved > 0:
+                html_path.write_text(cleaned, encoding="utf-8")
+                edit_path.write_text(
+                    _inject_editable_script_before_body_close(cleaned),
+                    encoding="utf-8",
+                )
+                print("Using edited content from {} for PDF.".format(edit_path.name))
+            blocks = _parse_html_to_blocks(html_path)
+        elif html_path.is_file():
+            current = html_path.read_text(encoding="utf-8")
+            cleaned, moved = _process_deleted_images_and_strip_script(
+                current, output_dir,
+            )
+            if moved > 0:
+                print("Moved {} deleted image(s) to forbidden/.".format(moved))
+                html_path.write_text(cleaned, encoding="utf-8")
+            elif cleaned != current:
+                html_path.write_text(cleaned, encoding="utf-8")
+            blocks = _parse_html_to_blocks(html_path)
+        else:
             print(
                 "Moscow_Complete_Guide.html not found. Run without "
                 "--use-existing-html first.",
                 file=sys.stderr,
             )
             return 1
-        blocks = _parse_html_to_blocks(html_path)
         if not blocks:
             print(
                 "Could not parse existing HTML into blocks.",
@@ -1097,9 +1245,12 @@ def main() -> int:
 
     # Step 3: build combined HTML and PDF (chunked to avoid Chromium size limit)
     print("--- Building combined Moscow guide ---")
-    blocks = build_combined_parts(output_dir)
-    html_path.write_text(_wrap_html(blocks), encoding="utf-8")
+    blocks, chapter_for_block = build_combined_parts(output_dir)
+    html_path.write_text(_wrap_html(blocks, editable=False), encoding="utf-8")
     print("Written: {}".format(html_path))
+    edit_path = output_dir / "{}_edit.html".format(OUTPUT_BASENAME)
+    edit_path.write_text(_wrap_html(blocks, editable=True), encoding="utf-8")
+    print("Written: {}".format(edit_path))
 
     try:
         if _build_combined_pdf_chunked(
@@ -1107,6 +1258,7 @@ def main() -> int:
             blocks,
             pdf_path,
             image_wait_timeout_ms=60000,
+            chapter_for_block=chapter_for_block,
         ):
             print("Written: {}".format(pdf_path))
         else:

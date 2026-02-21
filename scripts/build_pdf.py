@@ -5,7 +5,9 @@
 """
 
 import io
+import json
 import re
+import shutil
 import socket
 import sys
 import threading
@@ -621,9 +623,19 @@ def delete_unused_images(output_dir: Path) -> int:
 
 
 # Script for editable HTML: contenteditable, image delete/upload (max 4 per item), export
+# Deleted image paths (relative, e.g. images/moscow_monasteries/foo.jpg) are stored
+# and embedded on export so next build can move them to forbidden/
 _EDITABLE_SCRIPT = """
 (function(){
   var MAX_IMAGES_PER_ROW = 4;
+  window._deletedImagePaths = window._deletedImagePaths || [];
+  function recordDeleted(src) {
+    if (typeof src !== 'string') return;
+    var s = src.split('?')[0].replace(/\\\\/g, '/');
+    var idx = s.indexOf('images/');
+    if (idx === 0) window._deletedImagePaths.push(s);
+    else if (idx > 0) window._deletedImagePaths.push(s.substring(idx));
+  }
   function initEditable() {
     var sel = '.intro-block p,.intro-block h1,.monastery .monastery-title,.monastery .meta,' +
       '.monastery .body-text,.monastery .story-text,.qa-section p,.qa-section h2,' +
@@ -646,7 +658,7 @@ _EDITABLE_SCRIPT = """
         delBtn.type = 'button';
         delBtn.textContent = '×';
         delBtn.title = 'Delete image';
-        delBtn.onclick = function(){ wrap.remove(); updateAddBtn(row); };
+        delBtn.onclick = function(){ recordDeleted(img.src); wrap.remove(); updateAddBtn(row); };
         wrap.appendChild(delBtn);
         wrap.ondragstart = function(e){ e.dataTransfer.setData('text/plain',''); e.dataTransfer.effectAllowed = 'move'; window._dragSrc = wrap; wrap.classList.add('img-dragging'); };
         wrap.ondragend = function(){ wrap.classList.remove('img-dragging'); };
@@ -690,6 +702,14 @@ _EDITABLE_SCRIPT = """
         if (img) { wrap.parentNode.insertBefore(img, wrap); }
         wrap.remove();
       });
+      var deleted = window._deletedImagePaths || [];
+      if (deleted.length) {
+        var script = root.ownerDocument.createElement('script');
+        script.type = 'application/json';
+        script.id = 'otium-deleted-images';
+        script.textContent = JSON.stringify(deleted);
+        root.querySelector('body').appendChild(script);
+      }
       var html = '<!DOCTYPE html>\\n' + root.outerHTML;
       var blob = new Blob([html], { type: 'text/html;charset=utf-8' });
       var a = document.createElement('a');
@@ -816,8 +836,13 @@ def _section_qa() -> str:
     )
 
 
-def build_html(output_dir: Path, guide_name: str | None = None) -> str:
-    """Собирает полный HTML (~1 страница на место). guide_name для подгрузки историй."""
+def build_html(
+    output_dir: Path,
+    guide_name: str | None = None,
+    editable: bool = False,
+) -> str:
+    """Собирает полный HTML (~1 страница на место). guide_name для подгрузки историй.
+    editable=True добавляет скрипт редактирования и запись удалённых изображений."""
     # Single braces: CSS is inserted as-is into HTML (no .format on this string)
     css = """
       @page { size: A4; margin: 2cm 1.5cm 1.5cm 1.8cm; }
@@ -957,9 +982,11 @@ def build_html(output_dir: Path, guide_name: str | None = None) -> str:
     sections.append(_section_qa())
 
     body_content = "\n".join(sections)
-    # Add editable script for client-side editing
-    body_content = body_content + "\n<script>\n" + _EDITABLE_SCRIPT.strip() + "\n</script>"
-    
+    if editable:
+        body_content = (
+            body_content + "\n<script>\n" + _EDITABLE_SCRIPT.strip() + "\n</script>"
+        )
+
     return """<!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -1010,10 +1037,28 @@ def validate_yandex_maps() -> list[str]:
     return errors
 
 
+# Patterns that indicate placeholder Q&A; validation must fail if present.
+_QA_PLACEHOLDER_QUESTION = "Дополнительный вопрос"
+_QA_PLACEHOLDER_ANSWER = "См. описание объектов в гиде."
+
+
 def validate_output(html_path: Path, output_dir: Path) -> list[str]:
     """Проверяет HTML на битые ссылки и плейсхолдеры. Возвращает список ошибок."""
     errors: list[str] = []
     html = html_path.read_text(encoding="utf-8")
+
+    if _QA_PLACEHOLDER_QUESTION in html:
+        errors.append(
+            "QA placeholder found (question): '{}'".format(
+                _QA_PLACEHOLDER_QUESTION
+            )
+        )
+    if _QA_PLACEHOLDER_ANSWER in html:
+        errors.append(
+            "QA placeholder found (answer): '{}'".format(
+                _QA_PLACEHOLDER_ANSWER
+            )
+        )
 
     for m in re.finditer(r'<img[^>]+src="([^"]+)"', html):
         src = m.group(1)
@@ -1193,6 +1238,66 @@ def _all_images_complete(images_subdir: Path, guide_name: str) -> bool:
     return is_valid and len(errors) == 0
 
 
+# Script id embedded by editable export; images listed here are moved to forbidden/
+OTIUM_DELETED_IMAGES_ID = "otium-deleted-images"
+
+
+def _inject_editable_script_before_body_close(html: str) -> str:
+    """Insert editable script before </body>. Idempotent (single insertion)."""
+    marker = "</body>"
+    if "_EDITABLE_SCRIPT" in html or "initEditable" in html:
+        return html
+    script_tag = "\n<script>\n" + _EDITABLE_SCRIPT.strip() + "\n</script>\n"
+    if marker in html:
+        return html.replace(marker, script_tag + marker, 1)
+    return html
+
+
+def _process_deleted_images_and_strip_script(
+    html_content: str,
+    output_dir: Path,
+) -> tuple[str, int]:
+    """
+    If HTML contains otium-deleted-images script, move those image files to
+    forbidden/ so they won't be re-downloaded. Return (cleaned_html, moved_count).
+    """
+    pattern = re.compile(
+        r'<script[^>]*\s+id="' + re.escape(OTIUM_DELETED_IMAGES_ID) + r'"[^>]*>'
+        r'([^<]*)</script>',
+        re.IGNORECASE | re.DOTALL,
+    )
+    match = pattern.search(html_content)
+    if not match:
+        return html_content, 0
+    try:
+        paths = json.loads(match.group(1).strip())
+    except (json.JSONDecodeError, ValueError):
+        return html_content, 0
+    if not isinstance(paths, list):
+        return html_content, 0
+    moved = 0
+    for rel_path in paths:
+        if not isinstance(rel_path, str) or ".." in rel_path:
+            continue
+        if not rel_path.replace("\\", "/").startswith("images/"):
+            continue
+        src = output_dir / rel_path.replace("\\", "/")
+        if not src.is_file():
+            continue
+        # Move to same directory's forbidden/ subdir
+        forbidden_dir = src.parent / "forbidden"
+        forbidden_dir.mkdir(parents=True, exist_ok=True)
+        dest = forbidden_dir / src.name
+        try:
+            shutil.copy2(str(src), str(dest))
+            src.unlink()
+            moved += 1
+        except OSError:
+            pass
+    cleaned = pattern.sub("", html_content)
+    return cleaned, moved
+
+
 def _run_one_guide(args, stats_out: Optional[dict] = None) -> None:
     """Run download, verify, and build for one guide (args.guide)."""
     _load_guide_config(args.guide)
@@ -1287,8 +1392,48 @@ def _run_one_guide(args, stats_out: Optional[dict] = None) -> None:
 
     html_path = output_dir / HTML_NAME
     pdf_path = output_dir / PDF_NAME
-    html_content = build_html(output_dir, guide_name=args.guide)
-    html_path.write_text(html_content, encoding="utf-8")
+    edit_name = HTML_NAME.replace("_guide.html", "_edit.html")
+    if edit_name == HTML_NAME:
+        edit_name = Path(HTML_NAME).stem + "_edit.html"
+    edit_path = output_dir / edit_name
+
+    # If user saved exported HTML as *_edit.html, process it: move deleted images
+    # to forbidden/ and use edited content for guide/PDF. Keep edit file editable.
+    if edit_path.exists():
+        edit_content = edit_path.read_text(encoding="utf-8")
+        cleaned, moved = _process_deleted_images_and_strip_script(
+            edit_content, output_dir,
+        )
+        if moved > 0:
+            print("Moved {} deleted image(s) to forbidden/.".format(moved))
+        if cleaned != edit_content or moved > 0:
+            html_path.write_text(cleaned, encoding="utf-8")
+            edit_path.write_text(
+                _inject_editable_script_before_body_close(cleaned),
+                encoding="utf-8",
+            )
+            print("Using edited content from {} for PDF.".format(edit_path.name))
+    else:
+        # Guide HTML (clean, for PDF) and editable copy
+        html_content = build_html(
+            output_dir, guide_name=args.guide, editable=False,
+        )
+        html_path.write_text(html_content, encoding="utf-8")
+        edit_content = build_html(
+            output_dir, guide_name=args.guide, editable=True,
+        )
+        edit_path.write_text(edit_content, encoding="utf-8")
+        print("Written:", edit_path)
+
+    # If guide HTML (not edit) was overwritten with exported HTML, process it too
+    current = html_path.read_text(encoding="utf-8")
+    cleaned, moved = _process_deleted_images_and_strip_script(current, output_dir)
+    if moved > 0:
+        print("Moved {} deleted image(s) to forbidden/.".format(moved))
+        html_path.write_text(cleaned, encoding="utf-8")
+    elif cleaned != current:
+        html_path.write_text(cleaned, encoding="utf-8")
+
     if _pdf_via_playwright(html_path, pdf_path):
         _strip_pdf_metadata(pdf_path)
         print("Written:", pdf_path)
