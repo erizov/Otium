@@ -34,9 +34,13 @@ from scripts.image_utils import image_content_hash
 
 MIN_IMAGE_BYTES = 500
 IMAGES_PER_PLACE = 4
+# Optimized guide: 3 photos + 1 map = 2x2 grid per place
+OPT_IMAGES_PER_PLACE = 3
 MAPS_PER_PLACE = 1
 # Include item in guide if it has at least this many distinct images
 MIN_IMAGES_TO_BUILD = 2
+# Optimized: include place if it has at least 1 image
+MIN_IMAGES_OPT = 1
 
 # Файлы, которые не использовать в гиде монастырей
 BANNED_IMAGE_BASENAMES = frozenset([
@@ -562,18 +566,21 @@ def check_duplicate_images(images_dir: Path) -> list[tuple[str, list[str]]]:
 
 
 def _unique_images_for_place(
-    image_rels: list[str], output_dir: Path,
+    image_rels: list[str],
+    output_dir: Path,
+    max_images: int | None = None,
 ) -> list[str]:
-    """Возвращает до IMAGES_PER_PLACE уникальных путей (разный контент).
-    Skip only by hash: if file hash matches forbidden/ folder, exclude."""
+    """Return up to max_images (default IMAGES_PER_PLACE) unique image paths.
+    Skip by hash: if file hash matches forbidden/ folder, exclude."""
     from scripts.download_with_dedup import _load_forbidden_hashes
+    limit = max_images if max_images is not None else IMAGES_PER_PLACE
     forbidden_hashes = _load_forbidden_hashes(
         output_dir / "images" / IMAGES_SUBFOLDER,
     )
     seen_hashes: set[str] = set()
     result: list[str] = []
     for img_rel in image_rels:
-        if len(result) >= IMAGES_PER_PLACE:
+        if len(result) >= limit:
             break
         path = output_dir / img_rel
         if not path.exists() or not path.is_file():
@@ -733,9 +740,13 @@ _EDITABLE_SCRIPT = """
 
 
 def _section_place(
-    number: int, m: dict, output_dir: Path, story: str | None = None,
+    number: int,
+    m: dict,
+    output_dir: Path,
+    story: str | None = None,
+    images_max: int | None = None,
 ) -> str:
-    """HTML-блок для одного места (монастырь или храм): фото + карта."""
+    """HTML block for one place: photos + map. If images_max=3, use 2x2 grid."""
     name = _title_html(m["name"])
     name_alt = _escape(m["name"])
     address = _escape(m["address"])
@@ -749,16 +760,36 @@ def _section_place(
     )
     facts_html = "".join("<li>{}</li>".format(_escape(f)) for f in m["facts"])
 
-    unique_rels = _unique_images_for_place(m["images"], output_dir)
-    # No placeholders: if no images, output nothing for images block
+    limit = images_max if images_max is not None else IMAGES_PER_PLACE
+    unique_rels = _unique_images_for_place(
+        m["images"], output_dir, max_images=limit
+    )
     if not unique_rels:
         images_block = ""
+    elif images_max == OPT_IMAGES_PER_PLACE:
+        # 2x2 grid: row1 = img1, img2; row2 = img3, map
+        cells = []
+        for i, img_rel in enumerate(unique_rels):
+            cells.append(
+                '    <img src="{}" alt="{} — фото {}" class="monastery-img" />'
+                .format(
+                    img_rel.replace("\\", "/"), name_alt, i + 1,
+                )
+            )
+        cells.append(
+            '    <div class="map-cell">'
+            '<img src="{}" alt="Карта: {}" class="map-img" />'
+            '<p class="map-caption">Схема · Яндекс.Карты</p></div>'
+            .format(map_url, name_alt)
+        )
+        images_block = (
+            '  <div class="visual-grid-2x2">\n{}\n  </div>\n'
+            '  <p class="images-caption">Фото: {}</p>'
+        ).format("\n".join(cells), name_alt)
     else:
         imgs_html_parts = [
             '<img src="{}" alt="{} — фото {}" class="monastery-img" />'.format(
-                img_rel.replace("\\", "/"),
-                name_alt,
-                i + 1,
+                img_rel.replace("\\", "/"), name_alt, i + 1,
             )
             for i, img_rel in enumerate(unique_rels)
         ]
@@ -776,6 +807,21 @@ def _section_place(
             '  <p class="body-text story-text">{}</p>\n'
         ).format(_escape(story.strip()))
 
+    if images_max == OPT_IMAGES_PER_PLACE:
+        visual_inner = images_block
+    else:
+        visual_inner = (
+            "{images_block}\n"
+            "  <div class=\"map-block\">\n"
+            "    <img src=\"{map_url}\" alt=\"Карта: {name_alt}\" "
+            "class=\"map-img\" />\n"
+            "    <p class=\"map-caption\">Схема расположения · "
+            "Яндекс.Карты</p>\n  </div>"
+        ).format(
+            images_block=images_block,
+            map_url=map_url, name_alt=name_alt,
+        )
+
     return """
 <section class="monastery" id="monastery-{num}" tabindex="-1">
   <h2 class="{title_class}">{num}. {name}</h2>
@@ -790,11 +836,7 @@ def _section_place(
   <ul>{facts_html}</ul>
 {story_block}
   <div class="visual-block">
-{images_block}
-  <div class="map-block">
-    <img src="{map_url}" alt="Карта: {name_alt}" class="map-img" />
-    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
-  </div>
+{visual_inner}
   </div>
 </section>
 """.format(
@@ -804,8 +846,7 @@ def _section_place(
         title_class=title_class,
         address=address,
         style=style,
-        images_block=images_block,
-        map_url=map_url,
+        visual_inner=visual_inner,
         history=history,
         significance=significance,
         highlights_html=highlights_html,
@@ -840,9 +881,11 @@ def build_html(
     output_dir: Path,
     guide_name: str | None = None,
     editable: bool = False,
+    optimized: bool = False,
 ) -> str:
-    """Собирает полный HTML (~1 страница на место). guide_name для подгрузки историй.
-    editable=True добавляет скрипт редактирования и запись удалённых изображений."""
+    """Build full HTML (~1 page per place). guide_name for stories.
+    editable=True adds edit script. optimized=True: only places with >=1 image,
+    3 images + map in 2x2 grid, smaller output."""
     # Single braces: CSS is inserted as-is into HTML (no .format on this string)
     css = """
       @page { size: A4; margin: 2cm 1.5cm 1.5cm 1.8cm; }
@@ -897,6 +940,15 @@ def build_html(
       .images-row { display: flex; gap: 10px; margin: 1em; flex-wrap: wrap; }
       .monastery-img { flex: 1 1 200px; max-width: 100%; height: 150px;
                         object-fit: cover; }
+      .visual-grid-2x2 { display: grid; grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto; gap: 10px; margin: 1em; }
+      .visual-grid-2x2 .monastery-img,
+      .visual-grid-2x2 .map-cell .map-img { width: 100%; height: 150px;
+        object-fit: cover; }
+      .visual-grid-2x2 .map-cell { display: flex; flex-direction: column; }
+      .visual-grid-2x2 .map-cell .map-img { max-height: 160px; height: auto; }
+      .visual-grid-2x2 .map-caption { font-size: 8pt; color: #6b635b;
+        margin: 0.25em 0 0; font-family: Inter, sans-serif; }
       .images-caption { font-size: 8pt; color: #6b635b; margin: 0.25em 1em 0;
         font-family: Inter, sans-serif; }
       .map-block { margin: 1em; }
@@ -973,12 +1025,27 @@ def build_html(
         except Exception:
             pass
     sections = [intro]
-    placed = []
-    for m in PLACES:
-        placed.append(m)
+    if optimized:
+        placed = [
+            m for m in PLACES
+            if len(_unique_images_for_place(
+                m["images"], output_dir,
+                max_images=OPT_IMAGES_PER_PLACE,
+            )) >= MIN_IMAGES_OPT
+        ]
+        images_max = OPT_IMAGES_PER_PLACE
+    else:
+        placed = list(PLACES)
+        images_max = None
     for num, m in enumerate(placed, 1):
         story = stories.get(m.get("name") or "")
-        sections.append(_section_place(num, m, output_dir, story=story))
+        sections.append(
+            _section_place(
+                num, m, output_dir,
+                story=story,
+                images_max=images_max,
+            )
+        )
     sections.append(_section_qa())
 
     body_content = "\n".join(sections)
@@ -1300,7 +1367,11 @@ def _process_deleted_images_and_strip_script(
 
 def _run_one_guide(args, stats_out: Optional[dict] = None) -> None:
     """Run download, verify, and build for one guide (args.guide)."""
+    global HTML_NAME, PDF_NAME
     _load_guide_config(args.guide)
+    if getattr(args, "optimized", False):
+        HTML_NAME = HTML_NAME.replace("_guide.html", "_guide_opt.html")
+        PDF_NAME = PDF_NAME.replace("_guide.pdf", "_guide_opt.pdf")
     output_dir = (
         Path(args.output_dir)
         if getattr(args, "output_dir", None)
@@ -1390,11 +1461,10 @@ def _run_one_guide(args, stats_out: Optional[dict] = None) -> None:
     if getattr(args, "download_only", False):
         return
 
+    # HTML_NAME/PDF_NAME already set to *_opt.* when --optimized
     html_path = output_dir / HTML_NAME
     pdf_path = output_dir / PDF_NAME
-    edit_name = HTML_NAME.replace("_guide.html", "_edit.html")
-    if edit_name == HTML_NAME:
-        edit_name = Path(HTML_NAME).stem + "_edit.html"
+    edit_name = Path(HTML_NAME).stem + "_edit.html"
     edit_path = output_dir / edit_name
 
     # If user saved exported HTML as *_edit.html, process it: move deleted images
@@ -1414,13 +1484,19 @@ def _run_one_guide(args, stats_out: Optional[dict] = None) -> None:
             )
             print("Using edited content from {} for PDF.".format(edit_path.name))
     else:
-        # Guide HTML (clean, for PDF) and editable copy
+        opt = getattr(args, "optimized", False)
         html_content = build_html(
-            output_dir, guide_name=args.guide, editable=False,
+            output_dir,
+            guide_name=args.guide,
+            editable=False,
+            optimized=opt,
         )
         html_path.write_text(html_content, encoding="utf-8")
         edit_content = build_html(
-            output_dir, guide_name=args.guide, editable=True,
+            output_dir,
+            guide_name=args.guide,
+            editable=True,
+            optimized=opt,
         )
         edit_path.write_text(edit_content, encoding="utf-8")
         print("Written:", edit_path)
@@ -1544,6 +1620,12 @@ def main() -> None:
         "--force-overwrite",
         action="store_true",
         help="Overwrite existing images (default: do not overwrite).",
+    )
+    parser.add_argument(
+        "--optimized",
+        action="store_true",
+        help="Build optimized guide: only places with >=1 image, 3 photos + map "
+             "(2x2 grid), output *_guide_opt.html / *_guide_opt.pdf.",
     )
     parser.add_argument(
         "--download-retries",

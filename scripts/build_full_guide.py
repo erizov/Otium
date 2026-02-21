@@ -855,14 +855,18 @@ def _wrap_html(body_blocks: list[str], editable: bool = True) -> str:
     )
 
 
-def build_combined_parts(output_dir: Path) -> tuple[list[str], list[int]]:
+def build_combined_parts(
+    output_dir: Path,
+    optimized: bool = False,
+) -> tuple[list[str], list[int]]:
     """
     Build list of body blocks and chapter index per block for chunked PDF.
-    Returns (blocks, chapter_for_block): chapter_for_block[i] is -1 for front,
-    -2 for pg2/preface/toc, 0-based chapter index for chapter blocks.
+    If optimized=True, read from *_guide_opt.html. Returns (blocks,
+    chapter_for_block).
     """
     blocks: list[str] = []
     chapter_for_block: list[int] = []
+    guide_suffix = "_opt" if optimized else ""
 
     # Preface
     famous_li = "".join(
@@ -933,7 +937,7 @@ def build_combined_parts(output_dir: Path) -> tuple[list[str], list[int]]:
         except Exception:
             places = []
         place_names = [p.get("name") or "?" for p in places]
-        html_path = output_dir / "{}_guide.html".format(guide_key)
+        html_path = output_dir / "{}_guide{}.html".format(guide_key, guide_suffix)
         if not html_path.is_file():
             blocks.append(
                 '<div class="chapter-intro" id="ch-{}">'
@@ -1140,13 +1144,20 @@ def main() -> int:
         "Moscow_Complete_Guide.html. After editing in browser, use "
         "'Export HTML' and save over the file, then run with this flag.",
     )
+    parser.add_argument(
+        "--optimized",
+        action="store_true",
+        help="Build optimized guide: only places with >=1 image, "
+        "3 photos + map (2x2 grid). Output: *_opt.html / *_opt.pdf.",
+    )
     args = parser.parse_args()
 
     output_dir = OUTPUT_DIR
     output_dir.mkdir(parents=True, exist_ok=True)
     _write_emblem_preview(output_dir)
-    html_path = output_dir / "{}.html".format(OUTPUT_BASENAME)
-    pdf_path = output_dir / "{}.pdf".format(OUTPUT_BASENAME)
+    out_suffix = "_opt" if args.optimized else ""
+    html_path = output_dir / "{}{}.html".format(OUTPUT_BASENAME, out_suffix)
+    pdf_path = output_dir / "{}{}.pdf".format(OUTPUT_BASENAME, out_suffix)
 
     if not ensure_deps():
         print(
@@ -1226,6 +1237,8 @@ def main() -> int:
             "--all-guides",
             "--build-with-available",
         ]
+        if args.optimized:
+            cmd.append("--optimized")
     else:
         print("--- Building all guides (no image download) ---")
         cmd = [
@@ -1235,6 +1248,8 @@ def main() -> int:
             "--build-only",
             "--build-with-available",
         ]
+    if args.optimized:
+        cmd.append("--optimized")
     ret = subprocess.call(cmd, cwd=str(_PROJECT_ROOT))
     if ret != 0:
         return ret
@@ -1245,10 +1260,12 @@ def main() -> int:
 
     # Step 3: build combined HTML and PDF (chunked to avoid Chromium size limit)
     print("--- Building combined Moscow guide ---")
-    blocks, chapter_for_block = build_combined_parts(output_dir)
+    blocks, chapter_for_block = build_combined_parts(
+        output_dir, optimized=args.optimized,
+    )
     html_path.write_text(_wrap_html(blocks, editable=False), encoding="utf-8")
     print("Written: {}".format(html_path))
-    edit_path = output_dir / "{}_edit.html".format(OUTPUT_BASENAME)
+    edit_path = output_dir / "{}{}_edit.html".format(OUTPUT_BASENAME, out_suffix)
     edit_path.write_text(_wrap_html(blocks, editable=True), encoding="utf-8")
     print("Written: {}".format(edit_path))
 

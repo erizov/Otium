@@ -98,6 +98,21 @@ python scripts/build_full_guide.py --download-images
 Результат: **output/Moscow_Complete_Guide.html**, **output/Moscow_Complete_Guide.pdf**.
 При наличии старого PDF создаётся бэкап в **output/backup/** (до 3 копий).
 
+### Оптимизированные PDF (меньше размер: только места с фото, 3 фото + карта, сетка 2×2)
+
+```bash
+# Один гид (например парки): только места с ≥1 фото, 3 фото + карта на объект
+python scripts/build_pdf.py --guide parks --optimized --build-with-available --build-only
+
+# Все тематические гиды в оптимизированном виде
+python scripts/build_pdf.py --all-guides --optimized --build-only --build-with-available
+
+# Сводный путеводитель по Москве (оптимизированный)
+python scripts/build_full_guide.py --optimized
+```
+
+Результат: **\*_guide_opt.html** / **\*_guide_opt.pdf** и **Moscow_Complete_Guide_opt.html** / **Moscow_Complete_Guide_opt.pdf**. Подробнее: **docs/OPTIMIZED_GUIDES.md**.
+
 ### User workflow — редактирование и пересборка PDF
 
 Кратко: **собрать → открыть HTML в браузере → править текст/картинки → Export HTML → сохранить файл → пересобрать PDF** (`--use-existing-html`).
@@ -112,37 +127,54 @@ python scripts/build_full_guide.py --download-images
 
 Итог: **output/Moscow_Complete_Guide.pdf** будет содержать все ваши правки. Шрифты и вёрстка не меняются.
 
+### User workflow: Parks — пошагово
+
+Пошаговый сценарий для гида «Парки Москвы»: сборка, правки в браузере, перенос удалённых фото в forbidden, пересборка PDF.
+
+| Шаг | Действие |
+|-----|----------|
+| **1** | В корне проекта выполнить: `python scripts/build_pdf.py --guide parks` |
+| | В каталоге **output/** появятся **parks_guide.html** (для PDF) и **parks_edit.html** (для правок). При необходимости скрипт скачает недостающие фото в **output/images/moscow_parks/**. |
+| **2** | Открыть в браузере файл **output/parks_edit.html** (двойной клик или «Открыть с помощью»). |
+| **3** | В странице: править текст (клик по абзацу/заголовку и ввод), удалять фото (кнопка × на изображении), добавлять свои (кнопка «+ Add image», до 4 фото на парк), менять порядок фото (перетаскивание). |
+| **4** | Нажать кнопку **Export HTML** (справа вверху). В диалоге сохранения сохранить файл как **output/parks_edit.html** (заменить существующий). |
+| **5** | В терминале выполнить: `python scripts/build_pdf.py --guide parks --build-only` |
+| | Скрипт прочитает **parks_edit.html**, перенесёт удалённые изображения в **output/images/moscow_parks/forbidden/** (чтобы они не подтягивались при следующих загрузках), обновит **parks_guide.html** и соберёт **output/parks_guide.pdf** из отредактированного контента. |
+
+Итог: **output/parks_guide.pdf** и **output/parks_edit.html** содержат ваши правки; удалённые картинки лежат в **forbidden/** и при следующих запусках не загружаются заново.
+
 ### Quick Reference — быстрая справка по командам
 
 #### Редактирование индивидуальных гидов (например, viewpoints)
 
+Для каждого гида создаётся два файла: **\*_guide.html** (для PDF) и **\*_edit.html** (редактируемая копия). Открывайте **\*_edit.html** для правок; при удалении изображения оно при следующей сборке переносится в **forbidden/** и больше не будет загружаться.
+
 ```bash
-# 1. Сгенерировать редактируемый HTML
+# 1. Сгенерировать HTML (создаётся viewpoints_guide.html и viewpoints_edit.html)
 python scripts/build_pdf.py --guide viewpoints
 
-# 2. Открыть output/viewpoints_guide.html в браузере
+# 2. Открыть output/viewpoints_edit.html в браузере
 #    - Редактировать текст (клик и ввод)
-#    - Удалять изображения (× на изображении)
+#    - Удалять изображения (×) — при следующей сборке они переместятся в forbidden/
 #    - Загружать новые изображения (кнопка "+ Add image", до 4 на место)
 #    - Переупорядочивать изображения (перетаскивание)
-#    - Нажать "Export HTML" и сохранить поверх output/viewpoints_guide.html
+#    - Нажать "Export HTML" и сохранить как output/viewpoints_edit.html
 
-# 3. Пересобрать PDF из отредактированного HTML
+# 3. Пересобрать PDF (используется отредактированный контент, удалённые — в forbidden/)
 python scripts/build_pdf.py --guide viewpoints --build-only
 ```
 
 #### Редактирование полного путеводителя
 
+Аналогично создаётся **Moscow_Complete_Guide.html** и **Moscow_Complete_Guide_edit.html**. Редактируйте **\*_edit.html**; при экспорте сохраняйте как **\*_edit.html**, затем пересоберите PDF.
+
 ```bash
-# 1. Сгенерировать редактируемый HTML
+# 1. Сгенерировать полный путеводитель (создаётся .html и _edit.html)
 python scripts/build_full_guide.py
 
-# 2. Открыть output/Moscow_Complete_Guide.html в браузере
-#    - Редактировать текст (клик и ввод)
-#    - Удалять изображения (× на изображении)
-#    - Загружать новые изображения (кнопка "+ Add image", до 4 на место)
-#    - Переупорядочивать изображения (перетаскивание)
-#    - Нажать "Export HTML" и сохранить поверх output/Moscow_Complete_Guide.html
+# 2. Открыть output/Moscow_Complete_Guide_edit.html в браузере
+#    - Редактировать текст и изображения (удалённые при следующем запуске уйдут в forbidden/)
+#    - Нажать "Export HTML" и сохранить как output/Moscow_Complete_Guide_edit.html
 
 # 3. Пересобрать PDF из отредактированного HTML
 python scripts/build_full_guide.py --use-existing-html
