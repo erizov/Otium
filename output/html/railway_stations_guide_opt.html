@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Вокзалы Москвы</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;0,600&amp;family=EB+Garamond:ital,wght@0,400;0,600&amp;family=Pochaevsk&amp;family=Source+Serif+4:ital,wght@0,400;0,600&amp;family=Inter:wght@400;500;600&amp;display=swap&amp;subset=latin,cyrillic"
+        rel="stylesheet" />
+  <style>
+      @page { size: A4; margin: 2cm 1.5cm 1.5cm 1.8cm; }
+      *, html, body { -webkit-print-color-adjust: exact;
+                      print-color-adjust: exact; }
+      html { background-color: #faf8f5; }
+      html, body { margin: 0; padding: 0; font-family: "Source Serif 4",
+        Georgia, "Times New Roman", serif;
+        font-size: 10pt; line-height: 1.45; color: #1c1b19;
+        background-color: #faf8f5; }
+      body { color: #1c1b19 !important; background-color: #faf8f5 !important; }
+      h1 { font-family: "Source Serif 4", Georgia, serif;
+           font-size: 18pt; text-align: center; margin: 0 0 0.5em;
+           color: #1c1b19 !important; }
+      h2 { font-family: "Source Serif 4", Georgia, serif;
+           color: #1c1b19 !important; }
+      h2.monastery-title { font-family: Pochaevsk, Georgia, serif;
+           font-size: 17pt; margin: 1.2em 0 0.4em 0.3em;
+           border-bottom: 1px solid #8b7355; padding-bottom: 0.25em;
+           color: #2c2a28 !important; }
+      .old-russian-ya { font-family: "Source Serif 4", Georgia, serif; }
+      .meta, .block-label { font-family: Inter, "IBM Plex Sans", sans-serif;
+          font-size: 8.5pt; letter-spacing: 0.02em; }
+      .meta { margin: 0.2em 0 0.6em 0.3em; color: #6b635b !important; }
+      .block-label { margin: 0.6em 0 0.15em 0.3em; text-transform: uppercase;
+                     font-weight: 600; color: #6b7b8a !important; }
+      .body-text { margin: 0 0 0.4em 0.3em; text-align: left; max-width: 42em;
+                   color: #1c1b19; font-family: "Source Serif 4", Georgia, serif; }
+      .story-text { font-style: italic; color: #4a5568; }
+      ul, li, p { color: #1c1b19; font-family: "Source Serif 4", Georgia, serif; }
+      .intro-block { page-break-after: always; padding: 2.5em 1em 0 1.2em;
+                     background-color: #faf8f5; }
+      .intro-block .otium-brand { font-family: Inter, sans-serif;
+        font-size: 8pt; letter-spacing: 0.2em; color: #6b635b !important;
+        margin-bottom: 0.3em; }
+      .intro-block .otium-title { font-family: Pochaevsk, Georgia, serif;
+        font-size: 20pt; font-weight: 600; text-align: center;
+        margin: 0.2em 0 0.1em; color: #1a1a1a !important; }
+      .intro-block .otium-subtitle { font-family: Pochaevsk, Georgia, serif;
+        font-size: 11pt; text-align: center; color: #6b635b !important;
+        font-style: italic; margin-bottom: 1em; }
+      .intro-block p { margin: 0.4em 0; font-size: 9.5pt; line-height: 1.5;
+        text-align: justify; max-width: 38em; margin-left: auto;
+        margin-right: auto; color: #1c1b19;
+        font-family: "Source Serif 4", Georgia, serif; }
+      .monastery { display: block; page-break-before: always;
+                    break-before: page; padding: 1.5em 0 0; }
+      .monastery:first-of-type { page-break-before: auto; break-before: auto; }
+      .monastery:last-of-type { padding-bottom: 0.5em; }
+      .visual-block { margin: 0.8em 0 0; page-break-after: always; }
+      .monastery:last-of-type .visual-block { page-break-after: auto; }
+      .images-row { display: flex; gap: 10px; margin: 1em; flex-wrap: wrap; }
+      .monastery-img { flex: 1 1 200px; max-width: 100%; height: 150px;
+                        object-fit: cover; }
+      .visual-grid-2x2 { display: grid; grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto; gap: 10px; margin: 1em; }
+      .visual-grid-2x2 .monastery-img,
+      .visual-grid-2x2 .map-cell .map-img { width: 100%; height: 150px;
+        object-fit: cover; }
+      .visual-grid-2x2 .map-cell { display: flex; flex-direction: column; }
+      .visual-grid-2x2 .map-cell .map-img { max-height: 160px; height: auto; }
+      .visual-grid-2x2 .map-caption { font-size: 8pt; color: #6b635b;
+        margin: 0.25em 0 0; font-family: Inter, sans-serif; }
+      .images-caption { font-size: 8pt; color: #6b635b; margin: 0.25em 1em 0;
+        font-family: Inter, sans-serif; }
+      .map-block { margin: 1em; }
+      .map-caption { font-size: 8pt; color: #6b635b; margin: 0.25em 0 0;
+        font-family: Inter, sans-serif; }
+      .map-img { max-width: 100%; height: auto; max-height: 160px; }
+      .qa-section { margin-top: 2em; page-break-before: always;
+                     break-before: page; padding-top: 1.5em; }
+      .qa-item { margin-bottom: 0.6em; font-size: 9pt; color: #1c1b19; }
+      .question { margin-bottom: 0.1em; color: #1c1b19; }
+      .answer { margin-left: 0.5em; color: #2c2a28;
+        font-family: "Source Serif 4", Georgia, serif; }
+      ul { margin: 0.2em 0 0.4em 0.3em; padding-left: 1.2em; color: #1c1b19; }
+      p { margin: 0.2em 0; color: #1c1b19; }
+      .map-block { background: transparent; }
+      .edit-toolbar { position: fixed; top: 8px; right: 8px; z-index: 9999; }
+      .edit-toolbar button { font-family: Inter, sans-serif; font-size: 11px;
+        padding: 6px 10px; background: #2c2a28; color: #faf8f5; border: none;
+        border-radius: 4px; cursor: pointer; }
+      .edit-toolbar button:hover { background: #4a5568; }
+      .img-wrap { position: relative; display: inline-block; }
+      .img-wrap.img-dragging { opacity: 0.6; }
+      .img-wrap.img-drop-target { outline: 2px dashed #8b7355; outline-offset: 2px; }
+      .img-del { position: absolute; top: 4px; right: 4px; width: 22px; height: 22px;
+        font-size: 16px; line-height: 20px; text-align: center; background: rgba(0,0,0,.6);
+        color: #fff; border: none; border-radius: 3px; cursor: pointer; }
+      .img-del:hover { background: #c53030; }
+      .add-img-btn { font-family: Inter, sans-serif; font-size: 10px;
+        padding: 4px 8px; margin: 4px 0 0 4px; background: #e0ddd8; color: #2c2a28;
+        border: 1px solid #8b7355; border-radius: 3px; cursor: pointer; }
+      .add-img-btn:hover { background: #d0cdc8; }
+      .add-img-btn.hidden { display: none; }
+      .img-count { font-size: 9pt; color: #6b635b; margin-left: 0.25em;
+        font-family: Inter, sans-serif; }
+      @media print {
+        html, body { color: #1c1b19 !important; background: #faf8f5 !important; }
+        .block-label { color: #6b7b8a !important; }
+        .meta { color: #6b635b !important; }
+        .monastery { page-break-before: always; break-before: page; }
+        .monastery:first-of-type { page-break-before: auto; break-before: auto; }
+        .edit-toolbar, .img-del, .add-img-btn, .img-count { display: none !important; }
+      }
+    </style>
+</head>
+<body>
+
+    <div class="intro-block">
+    <p class="otium-brand">OTIUM / Sacred</p>
+    <h1 class="otium-title">Вокзалы Москвы</h1>
+    <p class="otium-subtitle">9 главных вокзалов</p>
+    <p>OTIUM — это практика осмысленного досуга.
+    В античной традиции otium означало не отдых от труда, а время, в котором
+    человек возвращается к взгляду, памяти и мышлению. Это время без
+    утилитарной цели, без спешки, без требования результата.</p>
+    <p>Мы создаём маршруты не для «посещения», а для пребывания.
+    Не для потребления культуры, а для внимательного присутствия в ней.</p>
+    <p>OTIUM работает с пространствами, где время уплотняется:
+    архитектурой, сакральными местами, кино, памятью, ландшафтом.
+    Мы не стремимся охватить всё и не обещаем «лучшее».
+    Мы отбираем немногое — то, что выдерживает тишину и повторный взгляд.</p>
+    <p>OTIUM — это не гид и не сервис.
+    Это приглашение к прогулке без обязательств.
+    К маршруту, который можно прервать.
+    К месту, где можно задержаться.</p>
+    <p>OTIUM существует для тех, кто хочет смотреть медленно.</p>
+    </div>
+    
+
+<section class="monastery" id="monastery-1" tabindex="-1">
+  <h2 class="monastery-title">1. Казанский вокзал</h2>
+  <p class="meta"><strong>Адрес:</strong> Комсомольская пл., 2 &nbsp;|&nbsp; <strong>Стиль:</strong> неорусский стиль</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Построен в 1862–1864; нынешнее здание — 1913–1940 по проекту А. В. Щусева. Башня в стиле казанского кремля; мозаики Рериха. Поезда на Казань, Уфу, Среднюю Азию.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Памятник архитектуры; башня Сююмбике; мозаики Рериха.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>башня Сююмбике</li><li>архитектура Щусева</li><li>Казань, Средняя Азия</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Архитектор — А. В. Щусев.</li><li>Башня — стилизация казанского кремля.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">9 in a list of Europe's best train stations by the Consumer Choice Centre in 2020.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <img src="images/moscow_railway_stations/kazansky_2.jpg" alt="Казанский вокзал — фото 1" class="monastery-img" />
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6564,55.7742&z=16&l=map&size=380,200&pt=37.6564,55.7742,pm2rdm" alt="Карта: Казанский вокзал" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Казанский вокзал</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-2" tabindex="-1">
+  <h2 class="monastery-title">2. Ленинградский вокзал</h2>
+  <p class="meta"><strong>Адрес:</strong> Комсомольская пл., 3 &nbsp;|&nbsp; <strong>Стиль:</strong> исторический вокзал</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Построен в 1849 году (архитектор К. А. Тон). Старейший вокзал Москвы; единственный, принадлежащий Октябрьской железной дороге. Поезда на Санкт-Петербург, Тверь, Хельсинки.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Старейший вокзал Москвы; Санкт-Петербург; памятник архитектуры.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>старейший вокзал Москвы</li><li>Санкт-Петербург</li><li>Николаевская ж/д</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Построен в 1849 году.</li><li>Архитектор — К. А. Тон.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Moscow Leningradsky railway station (IATA: ZKD) (Russian: Ленинградский вокзал, Leningradsky vokzal) is the oldest of Moscow's ten railway terminals. Situated on Komsomolskaya Square, the station serves north-western directions, notably Saint Petersburg. International services from the station include Tallinn, Estonia, operated by GoRail, and Helsinki, Finland.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <img src="images/moscow_railway_stations/leningradsky_1.jpg" alt="Ленинградский вокзал — фото 1" class="monastery-img" />
+    <img src="images/moscow_railway_stations/leningradsky_3.jpg" alt="Ленинградский вокзал — фото 2" class="monastery-img" />
+    <img src="images/moscow_railway_stations/leningradsky_4.jpg" alt="Ленинградский вокзал — фото 3" class="monastery-img" />
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6553,55.7758&z=16&l=map&size=380,200&pt=37.6553,55.7758,pm2rdm" alt="Карта: Ленинградский вокзал" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Ленинградский вокзал</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-3" tabindex="-1">
+  <h2 class="monastery-title">3. Киевский вокзал</h2>
+  <p class="meta"><strong>Адрес:</strong> пл. Киевского Вокзала, 1 &nbsp;|&nbsp; <strong>Стиль:</strong> неоклассицизм</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Построен в 1899 году; нынешнее здание — 1914–1920 по проекту И. И. Рерберга при участии Щусева. Арка и часовая башня; поезда на Киев, Вену, Будапешт.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Памятник архитектуры; арка и башня; юго-западное направление.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>арка и башня</li><li>архитектура Щусева</li><li>Украина, Киев</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Архитекторы — Рерберг, Щусев.</li><li>Построен в 1914–1920.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Kiyevsky railway terminal (Russian: Ки́евский вокза́л, Kievskiy vokzal, pronounced [ˈkʲi(j)ɪfskʲɪj vɐɡˈzaɫ]) also known as Moscow Kiyevskaya railway station (Russian: Москва́–Ки́евская, Moskva-Kievskaya) is one of the nine railway terminals of Moscow, Russia. It is the only railway station in Moscow to have a frontage on the Moskva River.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <img src="images/moscow_railway_stations/kievsky_1.jpg" alt="Киевский вокзал — фото 1" class="monastery-img" />
+    <img src="images/moscow_railway_stations/kievsky_2.jpg" alt="Киевский вокзал — фото 2" class="monastery-img" />
+    <img src="images/moscow_railway_stations/kievsky_3.jpg" alt="Киевский вокзал — фото 3" class="monastery-img" />
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.5653,55.7436&z=16&l=map&size=380,200&pt=37.5653,55.7436,pm2rdm" alt="Карта: Киевский вокзал" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Киевский вокзал</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-4" tabindex="-1">
+  <h2 class="monastery-title">4. Белорусский вокзал</h2>
+  <p class="meta"><strong>Адрес:</strong> пл. Тверская Застава, 7 &nbsp;|&nbsp; <strong>Стиль:</strong> модерн, сталинский ампир</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Построен в 1870 году; нынешнее здание — 1907–1912 (модерн), реконструкция 1938–1940. Поезда на Минск, Смоленск, Европу; аэроэкспресс в Шереметьево.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Западное направление; аэроэкспресс; памятник архитектуры.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>Минск, Смоленск</li><li>аэроэкспресс в Шереметьево</li><li>историческое здание</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Аэроэкспресс до Шереметьево.</li><li>Реконструкция — 1938–1940.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">It was opened in 1870 and rebuilt in its current form in 1907–1912.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <img src="images/moscow_railway_stations/belorussky_3.jpg" alt="Белорусский вокзал — фото 1" class="monastery-img" />
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.5822,55.7764&z=16&l=map&size=380,200&pt=37.5822,55.7764,pm2rdm" alt="Карта: Белорусский вокзал" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Белорусский вокзал</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-5" tabindex="-1">
+  <h2 class="monastery-title">5. Курский вокзал</h2>
+  <p class="meta"><strong>Адрес:</strong> ул. Земляной Вал, 29 &nbsp;|&nbsp; <strong>Стиль:</strong> советская архитектура</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Построен в 1896 году; нынешнее здание — 1972 год. Крупнейший транзитный вокзал Москвы; поезда на Курск, Тулу, Крым, Нижний Новгород, Казань.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Крупнейший транзитный вокзал; юг и восток; Курск, Крым.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>южное и восточное направление</li><li>Крым</li><li>Нижний Новгород</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Здание — 1972 год.</li><li>Транзитные поезда через Москву.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">The Gorkovsky suburban railway line or Gorkovskoye line (Russian: Горьковское направление Московской железной дороги) is one of eleven suburban railway lines used for suburban railway connections between Moscow, Russia, and surrounding areas, mostly in Moscow Oblast.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <img src="images/moscow_railway_stations/kursky_1.jpg" alt="Курский вокзал — фото 1" class="monastery-img" />
+    <img src="images/moscow_railway_stations/kursky_3.jpg" alt="Курский вокзал — фото 2" class="monastery-img" />
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6611,55.7569&z=16&l=map&size=380,200&pt=37.6611,55.7569,pm2rdm" alt="Карта: Курский вокзал" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Курский вокзал</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-6" tabindex="-1">
+  <h2 class="monastery-title">6. Павелецкий вокзал</h2>
+  <p class="meta"><strong>Адрес:</strong> Павелецкая пл., 1 &nbsp;|&nbsp; <strong>Стиль:</strong> сталинский ампир</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Построен в 1900 году; нынешнее здание — 1987. Поезда на Волгоград, Астрахань, Донбасс; аэроэкспресс в Домодедово.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Южное направление; аэроэкспресс в Домодедово; центр Москвы.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>южное направление</li><li>Донбасс</li><li>Волгоград</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Аэроэкспресс до Домодедово.</li><li>Здание — 1987 год.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">The station's ornate original building, designed by architect Alexander Krasovsky, was built in 1900 and extensively reconstructed in the 1980s, and remains one of the biggest Moscow railway stations.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <img src="images/moscow_railway_stations/paveletsky_2.jpg" alt="Павелецкий вокзал — фото 1" class="monastery-img" />
+    <img src="images/moscow_railway_stations/paveletsky_3.jpg" alt="Павелецкий вокзал — фото 2" class="monastery-img" />
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6392,55.7314&z=16&l=map&size=380,200&pt=37.6392,55.7314,pm2rdm" alt="Карта: Павелецкий вокзал" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Павелецкий вокзал</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-7" tabindex="-1">
+  <h2 class="monastery-title">7. Рижский вокзал</h2>
+  <p class="meta"><strong>Адрес:</strong> пл. Рижского Вокзала, 1 &nbsp;|&nbsp; <strong>Стиль:</strong> исторический вокзал</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Построен в 1901 году как Виндавский вокзал. Поезда на Ригу, Псков; на территории — Музей железнодорожной техники.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Северо-западное направление; музей ж/д; памятник архитектуры.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>Рига</li><li>Прибалтика</li><li>музей ж/д</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Музей ж/д на территории.</li><li>Построен в 1901 году.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Rizhsky station (Russian: Рижский вокзал, Rizhsky vokzal, Riga station) is one of the ten main railway stations in Moscow, Russia. It was built in 1901. As well as being an active station it also houses the Moscow Railway Museum. The station is operated by the Moscow Railway. It is located at Rizhskaya Square, at the crossing of Mira Avenue and Sushchyovsky Val.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <img src="images/moscow_railway_stations/rizhsky_station_1.jpg" alt="Рижский вокзал — фото 1" class="monastery-img" />
+    <img src="images/moscow_railway_stations/rizhsky_station_4.jpg" alt="Рижский вокзал — фото 2" class="monastery-img" />
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6336,55.7936&z=16&l=map&size=380,200&pt=37.6336,55.7936,pm2rdm" alt="Карта: Рижский вокзал" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Рижский вокзал</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-8" tabindex="-1">
+  <h2 class="monastery-title">8. Савёловский вокзал</h2>
+  <p class="meta"><strong>Адрес:</strong> пл. Савёловского Вокзала, 1 &nbsp;|&nbsp; <strong>Стиль:</strong> модерн</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Построен в 1902 году; нынешнее здание — 1987–1992. Поезда на Дмитров, Кимры; аэроэкспресс в Шереметьево (часть рейсов).</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Северное направление; аэроэкспресс; модерн.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>северное направление</li><li>Дмитров</li><li>аэроэкспресс в Шереметьево</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Часть аэроэкспрессов в Шереметьево.</li><li>Здание — 1987–1992.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Savyolovsky station (Russian: Савёловский вокза́л, Savyolovsky vokzal), alternatively spelled Savyolovskiy, Savelovsky or Savelovskiy, is one of the ten main railway stations in the Maryina roshcha District of Moscow. It serves suburban directions north of the city.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <img src="images/moscow_railway_stations/savyolovsky_1.jpg" alt="Савёловский вокзал — фото 1" class="monastery-img" />
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.5881,55.7931&z=16&l=map&size=380,200&pt=37.5881,55.7931,pm2rdm" alt="Карта: Савёловский вокзал" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Савёловский вокзал</p>
+  </div>
+</section>
+
+
+<section class="qa-section" id="qa" tabindex="-1">
+  <h2>Вопросы и ответы по фактам</h2>
+  <div class="qa-item"><p class="question"><strong>Вопрос 1. С какого вокзала отправляется Транссибирский экспресс?</strong></p><p class="answer">Ответ: Ярославский вокзал — поезда на Владивосток через всю Россию.</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 2. Какой вокзал Москвы самый старый?</strong></p><p class="answer">Ответ: Ленинградский — построен в 1849 году по проекту К. А. Тона.</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 3. Где находится башня в стиле казанского кремля?</strong></p><p class="answer">Ответ: Казанский вокзал — башня Сююмбике, архитектор А. В. Щусев.</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 4. С какого вокзала идёт аэроэкспресс в Домодедово?</strong></p><p class="answer">Ответ: Павелецкий вокзал — аэроэкспресс до аэропорта Домодедово.</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 5. Какой вокзал на Комсомольской площади?</strong></p><p class="answer">Ответ: Три вокзала: Ярославский, Казанский и Ленинградский.</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 6. Где музей железнодорожной техники?</strong></p><p class="answer">Ответ: На территории Рижского вокзала — паровозы и вагоны.</p></div>
+</section>
+
+</body>
+</html>

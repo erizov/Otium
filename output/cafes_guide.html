@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Исторические кафе Москвы</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;0,600&amp;family=EB+Garamond:ital,wght@0,400;0,600&amp;family=Pochaevsk&amp;family=Source+Serif+4:ital,wght@0,400;0,600&amp;family=Inter:wght@400;500;600&amp;display=swap&amp;subset=latin,cyrillic"
+        rel="stylesheet" />
+  <style>
+      @page { size: A4; margin: 2cm 1.5cm 1.5cm 1.8cm; }
+      *, html, body { -webkit-print-color-adjust: exact;
+                      print-color-adjust: exact; }
+      html { background-color: #faf8f5; }
+      html, body { margin: 0; padding: 0; font-family: "Source Serif 4",
+        Georgia, "Times New Roman", serif;
+        font-size: 10pt; line-height: 1.45; color: #1c1b19;
+        background-color: #faf8f5; }
+      body { color: #1c1b19 !important; background-color: #faf8f5 !important; }
+      h1 { font-family: "Source Serif 4", Georgia, serif;
+           font-size: 18pt; text-align: center; margin: 0 0 0.5em;
+           color: #1c1b19 !important; }
+      h2 { font-family: "Source Serif 4", Georgia, serif;
+           color: #1c1b19 !important; }
+      h2.monastery-title { font-family: Pochaevsk, Georgia, serif;
+           font-size: 17pt; margin: 1.2em 0 0.4em 0.3em;
+           border-bottom: 1px solid #8b7355; padding-bottom: 0.25em;
+           color: #2c2a28 !important; }
+      .old-russian-ya { font-family: "Source Serif 4", Georgia, serif; }
+      .meta, .block-label { font-family: Inter, "IBM Plex Sans", sans-serif;
+          font-size: 8.5pt; letter-spacing: 0.02em; }
+      .meta { margin: 0.2em 0 0.6em 0.3em; color: #6b635b !important; }
+      .block-label { margin: 0.6em 0 0.15em 0.3em; text-transform: uppercase;
+                     font-weight: 600; color: #6b7b8a !important; }
+      .body-text { margin: 0 0 0.4em 0.3em; text-align: left; max-width: 42em;
+                   color: #1c1b19; font-family: "Source Serif 4", Georgia, serif; }
+      .story-text { font-style: italic; color: #4a5568; }
+      ul, li, p { color: #1c1b19; font-family: "Source Serif 4", Georgia, serif; }
+      .intro-block { page-break-after: always; padding: 2.5em 1em 0 1.2em;
+                     background-color: #faf8f5; }
+      .intro-block .otium-brand { font-family: Inter, sans-serif;
+        font-size: 8pt; letter-spacing: 0.2em; color: #6b635b !important;
+        margin-bottom: 0.3em; }
+      .intro-block .otium-title { font-family: Pochaevsk, Georgia, serif;
+        font-size: 20pt; font-weight: 600; text-align: center;
+        margin: 0.2em 0 0.1em; color: #1a1a1a !important; }
+      .intro-block .otium-subtitle { font-family: Pochaevsk, Georgia, serif;
+        font-size: 11pt; text-align: center; color: #6b635b !important;
+        font-style: italic; margin-bottom: 1em; }
+      .intro-block p { margin: 0.4em 0; font-size: 9.5pt; line-height: 1.5;
+        text-align: justify; max-width: 38em; margin-left: auto;
+        margin-right: auto; color: #1c1b19;
+        font-family: "Source Serif 4", Georgia, serif; }
+      .monastery { display: block; page-break-inside: avoid;
+                    break-inside: avoid; padding: 1.5em 0 0; }
+      .monastery:last-of-type { padding-bottom: 0.5em; }
+      .visual-block { margin: 0.8em 0 0; page-break-after: auto; }
+      body > *:last-child { page-break-after: auto !important; }
+      .images-row { display: flex; gap: 10px; margin: 1em; flex-wrap: wrap; }
+      .monastery-img { flex: 1 1 200px; max-width: 100%; height: 150px;
+                        object-fit: cover; }
+      .visual-grid-2x2 { display: grid; grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto; gap: 10px; margin: 1em; }
+      .visual-grid-2x2 .grid-cell,
+      .visual-grid-2x2 .map-cell { min-width: 0; }
+      .visual-grid-2x2 .grid-cell .monastery-img,
+      .visual-grid-2x2 .map-cell .map-img { width: 100%; height: 150px;
+        object-fit: cover; display: block; }
+      .visual-grid-2x2 .map-cell .map-img { max-height: 160px; height: auto; }
+      .visual-grid-2x2 .map-cell { display: flex; flex-direction: column; }
+      .visual-grid-2x2 .map-caption { font-size: 8pt; color: #6b635b;
+        margin: 0.25em 0 0; font-family: Inter, sans-serif; }
+      .images-caption { font-size: 8pt; color: #6b635b; margin: 0.25em 1em 0;
+        font-family: Inter, sans-serif; }
+      .map-block { margin: 1em; }
+      .map-caption { font-size: 8pt; color: #6b635b; margin: 0.25em 0 0;
+        font-family: Inter, sans-serif; }
+      .map-img { max-width: 100%; height: auto; max-height: 160px; }
+      .qa-section { margin-top: 2em; page-break-before: always;
+                     break-before: page; padding-top: 1.5em;
+                     page-break-inside: avoid; }
+      .qa-item { margin-bottom: 0.6em; font-size: 9pt; color: #1c1b19; }
+      .question { margin-bottom: 0.1em; color: #1c1b19; }
+      .answer { margin-left: 0.5em; color: #2c2a28;
+        font-family: "Source Serif 4", Georgia, serif; }
+      ul { margin: 0.2em 0 0.4em 0.3em; padding-left: 1.2em; color: #1c1b19; }
+      p { margin: 0.2em 0; color: #1c1b19; }
+      .map-block { background: transparent; }
+      .edit-toolbar { position: fixed; top: 8px; right: 8px; z-index: 9999; }
+      .edit-toolbar button { font-family: Inter, sans-serif; font-size: 11px;
+        padding: 6px 10px; background: #2c2a28; color: #faf8f5; border: none;
+        border-radius: 4px; cursor: pointer; }
+      .edit-toolbar button:hover { background: #4a5568; }
+      .img-wrap { position: relative; display: inline-block; }
+      .img-wrap.img-dragging { opacity: 0.6; }
+      .img-wrap.img-drop-target { outline: 2px dashed #8b7355; outline-offset: 2px; }
+      .img-del { position: absolute; top: 4px; right: 4px; width: 22px; height: 22px;
+        font-size: 16px; line-height: 20px; text-align: center; background: rgba(0,0,0,.6);
+        color: #fff; border: none; border-radius: 3px; cursor: pointer; }
+      .img-del:hover { background: #c53030; }
+      .add-img-btn { font-family: Inter, sans-serif; font-size: 10px;
+        padding: 4px 8px; margin: 4px 0 0 4px; background: #e0ddd8; color: #2c2a28;
+        border: 1px solid #8b7355; border-radius: 3px; cursor: pointer; }
+      .add-img-btn:hover { background: #d0cdc8; }
+      .add-img-btn.hidden { display: none; }
+      .img-count { font-size: 9pt; color: #6b635b; margin-left: 0.25em;
+        font-family: Inter, sans-serif; }
+      @media print {
+        html, body { color: #1c1b19 !important; background: #faf8f5 !important; }
+        .block-label { color: #6b7b8a !important; }
+        .meta { color: #6b635b !important; }
+        .monastery { page-break-inside: avoid; break-inside: avoid; }
+        .edit-toolbar, .img-del, .add-img-btn, .img-count { display: none !important; }
+      }
+    </style>
+</head>
+<body>
+
+    <div class="intro-block">
+    <p class="otium-brand">OTIUM / Sacred</p>
+    <h1 class="otium-title">Исторические кафе Москвы</h1>
+    <p class="otium-subtitle">6 легендарных кафе и ресторанов</p>
+    <p>OTIUM — это практика осмысленного досуга.
+    В античной традиции otium означало не отдых от труда, а время, в котором
+    человек возвращается к взгляду, памяти и мышлению. Это время без
+    утилитарной цели, без спешки, без требования результата.</p>
+    <p>Мы создаём маршруты не для «посещения», а для пребывания.
+    Не для потребления культуры, а для внимательного присутствия в ней.</p>
+    <p>OTIUM работает с пространствами, где время уплотняется:
+    архитектурой, сакральными местами, кино, памятью, ландшафтом.
+    Мы не стремимся охватить всё и не обещаем «лучшее».
+    Мы отбираем немногое — то, что выдерживает тишину и повторный взгляд.</p>
+    <p>OTIUM — это не гид и не сервис.
+    Это приглашение к прогулке без обязательств.
+    К маршруту, который можно прервать.
+    К месту, где можно задержаться.</p>
+    <p>OTIUM существует для тех, кто хочет смотреть медленно.</p>
+    </div>
+    
+
+<section class="monastery" id="monastery-1" tabindex="-1">
+  <h2 class="monastery-title">1. Кафе «Пушкин»</h2>
+  <p class="meta"><strong>Адрес:</strong> Тверской бульвар, 26а &nbsp;|&nbsp; <strong>Стиль:</strong> историческое кафе</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Открыто в 1999 году; интерьер стилизован под дворянскую усадьбу XIX века. Название — в честь А. С. Пушкина; атмосфера «старого города». Русская кухня, десерты, завтраки; популярно у туристов и москвичей.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Легендарное кафе Москвы; атмосфера XIX века; русская кухня.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>интерьер в стиле дворянской усадьбы</li><li>русская кухня</li><li>десерты</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Открыто в 1999 году.</li><li>Тверской бульвар — центр города.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">In Russian grammar, the system of declension is elaborate and complex. Nouns, pronouns, adjectives, demonstratives, most numerals and other particles are declined for two grammatical numbers (singular and plural) and six grammatical cases (see below); some of these parts of speech in the singular are also declined by three grammatical genders (masculine, feminine and neuter).</p>
+
+  <div class="visual-block">
+  <div class="images-row">
+    <img src="images/moscow_cafes/pushkin_cafe_1.jpg" alt="Кафе «Пушкин» — фото 1" class="monastery-img" />
+<img src="images/moscow_cafes/pushkin_cafe_2.jpg" alt="Кафе «Пушкин» — фото 2" class="monastery-img" />
+  </div>
+  <p class="images-caption">Фото: Кафе «Пушкин»</p>
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.6019,55.7642&z=16&l=map&size=380,200&pt=37.6019,55.7642,pm2rdm" alt="Карта: Кафе «Пушкин»" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-2" tabindex="-1">
+  <h2 class="monastery-title">2. «Муму» на Пречистенке</h2>
+  <p class="meta"><strong>Адрес:</strong> Пречистенка, 29 &nbsp;|&nbsp; <strong>Стиль:</strong> трактир</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Сеть кафе в стиле русского трактира; филиал на Пречистенке в историческом здании. Русская кухня, блины, сбитень; атмосфера XIX века.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Русский трактир в центре; блины и традиционная кухня.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>русская кухня</li><li>интерьер в стиле трактира</li><li>блины</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Пречистенка — одна из старейших улиц Москвы.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Варва́ра Петро́вна Турге́нева, урождённая Лутовинова (30 декабря 1787 — 16 ноября 1850) — богатая помещица из Орловской губернии, владелица усадьбы «Спасское-Лутовиново». Мать писателя Ивана Тургенева, выведенная им в образе безымянной властной барыни в повести «Муму», также он наделил чертами её характера образ матушки из «Первой любви» и бабушку в «Пунине и Бабурине».</p>
+
+  <div class="visual-block">
+  <div class="images-row">
+    <img src="images/moscow_cafes/mumu_4.jpg" alt="«Муму» на Пречистенке — фото 1" class="monastery-img" />
+  </div>
+  <p class="images-caption">Фото: «Муму» на Пречистенке</p>
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.5936,55.7464&z=16&l=map&size=380,200&pt=37.5936,55.7464,pm2rdm" alt="Карта: «Муму» на Пречистенке" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-3" tabindex="-1">
+  <h2 class="monastery-title">3. «Марьина роща»</h2>
+  <p class="meta"><strong>Адрес:</strong> Шереметьевская ул., 47 &nbsp;|&nbsp; <strong>Стиль:</strong> ресторан русской кухни</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Ресторан русской кухни в районе Марьина роща. Традиционные блюда, интерьер в русском стиле; популярен у гостей города.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Русская кухня на севере Москвы; атмосфера традиционного ресторана.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>русская кухня</li><li>интерьер</li><li>традиционные блюда</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Марьина роща — исторический район Москвы.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">As of the 2010 Census, the total population of the district was 65,973.</p>
+
+  <div class="visual-block">
+  <div class="images-row">
+    <img src="images/moscow_cafes/maryina_roshcha_1.jpg" alt="«Марьина роща» — фото 1" class="monastery-img" />
+<img src="images/moscow_cafes/maryina_roshcha_2.jpg" alt="«Марьина роща» — фото 2" class="monastery-img" />
+<img src="images/moscow_cafes/maryina_roshcha_3.jpg" alt="«Марьина роща» — фото 3" class="monastery-img" />
+<img src="images/moscow_cafes/maryina_roshcha_4.jpg" alt="«Марьина роща» — фото 4" class="monastery-img" />
+  </div>
+  <p class="images-caption">Фото: «Марьина роща»</p>
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.6164,55.7936&z=16&l=map&size=380,200&pt=37.6164,55.7936,pm2rdm" alt="Карта: «Марьина роща»" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-4" tabindex="-1">
+  <h2 class="monastery-title">4. «У Палыча»</h2>
+  <p class="meta"><strong>Адрес:</strong> ул. Тверская, 12 &nbsp;|&nbsp; <strong>Стиль:</strong> трактир</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Сеть трактиров; филиал на Тверской. Русская кухня, пельмени, традиционные закуски; интерьер в стиле дореволюционного трактира.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Трактир на главной улице Москвы; пельмени и русская кухня.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>русская кухня</li><li>пельмени</li><li>исторический интерьер</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Тверская — главная улица Москвы.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">6 февраля 1926, Кременчуг, Украинская ССР, СССР) — советский и российский актёр театра и кино.</p>
+
+  <div class="visual-block">
+  <div class="images-row">
+    <img src="images/moscow_cafes/u_palycha_1.jpg" alt="«У Палыча» — фото 1" class="monastery-img" />
+<img src="images/moscow_cafes/u_palycha_2.jpg" alt="«У Палыча» — фото 2" class="monastery-img" />
+  </div>
+  <p class="images-caption">Фото: «У Палыча»</p>
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.6053,55.7636&z=16&l=map&size=380,200&pt=37.6053,55.7636,pm2rdm" alt="Карта: «У Палыча»" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-5" tabindex="-1">
+  <h2 class="monastery-title">5. «<span class="old-russian-ya">Я</span>р»</h2>
+  <p class="meta"><strong>Адрес:</strong> ул. Ленинградский пр., 32/2 &nbsp;|&nbsp; <strong>Стиль:</strong> исторический ресторан</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Основан в 1826 году; один из старейших ресторанов Москвы. В советское время — гостиница «Советская». Восстановлен как ресторан; интерьер в стиле модерн; русская и европейская кухня.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Легендарный ресторан Москвы; история с 1826 года; Ленинградский проспект.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>русская кухня</li><li>интерьер в стиле модерн</li><li>история с 1826 года</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Основан в 1826 году.</li><li>Здание — памятник архитектуры.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">In January 2022, it had a population of 12,250, though RBC News claimed the population in May 2024 had been reduced to 600 due to evacuations from Russian shelling and fighting within the city.</p>
+
+  <div class="visual-block">
+  <div class="images-row">
+    <img src="images/moscow_cafes/yar_2.jpg" alt="«Яр» — фото 1" class="monastery-img" />
+<img src="images/moscow_cafes/yar_3.jpg" alt="«Яр» — фото 2" class="monastery-img" />
+<img src="images/moscow_cafes/yar_4.jpg" alt="«Яр» — фото 3" class="monastery-img" />
+  </div>
+  <p class="images-caption">Фото: «Яр»</p>
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.5831,55.7792&z=16&l=map&size=380,200&pt=37.5831,55.7792,pm2rdm" alt="Карта: «Яр»" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-6" tabindex="-1">
+  <h2 class="monastery-title">6. «Элитный» (ВДНХ)</h2>
+  <p class="meta"><strong>Адрес:</strong> пр. Мира, 119, пав. 12 &nbsp;|&nbsp; <strong>Стиль:</strong> советский ресторан</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Ресторан в павильоне ВДНХ; сохраняет атмосферу советской эпохи. Русская кухня; залы в стиле павильона «Вычислительная техника»; популярен у гостей выставки.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Ресторан на территории ВДНХ; советская атмосфера; русская кухня.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>интерьер ВДНХ</li><li>русская кухня</li><li>исторический павильон</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Павильон ВДНХ.</li><li>Территория выставки — с 1939 года.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Исто́рия Москвы́ — крупнейшего города и столицы России — насчитывает, по крайней мере, 878 лет. Первое письменное упоминание о Москве относится к 1147 году. Археологические работы, проведённые в районе Кремля, свидетельствуют, что в XI веке на этом месте уже существовало поселение, защищённое валом и рвом, что позволяет отнести его к категории городских.</p>
+
+  <div class="visual-block">
+  <div class="images-row">
+    <img src="images/moscow_cafes/elitny_vdnkh_1.jpg" alt="«Элитный» (ВДНХ) — фото 1" class="monastery-img" />
+<img src="images/moscow_cafes/elitny_vdnkh_3.jpg" alt="«Элитный» (ВДНХ) — фото 2" class="monastery-img" />
+<img src="images/moscow_cafes/elitny_vdnkh_4.jpg" alt="«Элитный» (ВДНХ) — фото 3" class="monastery-img" />
+  </div>
+  <p class="images-caption">Фото: «Элитный» (ВДНХ)</p>
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.6219,55.8303&z=16&l=map&size=380,200&pt=37.6219,55.8303,pm2rdm" alt="Карта: «Элитный» (ВДНХ)" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-7" tabindex="-1">
+  <h2 class="monastery-title">7. «Большой» ресторан в ГУМе</h2>
+  <p class="meta"><strong>Адрес:</strong> Красная пл., 3, ГУМ &nbsp;|&nbsp; <strong>Стиль:</strong> исторический ресторан</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Ресторан в здании ГУМа с видом на Красную площадь и Храм Василия Блаженного. Русская и европейская кухня; атмосфера исторического центра.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Ресторан с видом на Красную площадь; ГУМ; центр Москвы.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>вид на Красную площадь</li><li>русская кухня</li><li>интерьер</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Здание ГУМа — 1893 год.</li><li>Вид на Кремль и соборы.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">29 декабря 1955, Москва) — российский художник, декоратор, предприниматель; московский ресторатор, почётный член Российской академии художеств, кавалер ордена Почётного легиона, награждён знаком отличия «За безупречную службу городу Москве XX лет».</p>
+
+  <div class="visual-block">
+  <div class="images-row">
+    <img src="images/moscow_cafes/gum_restaurant_4.jpg" alt="«Большой» ресторан в ГУМе — фото 1" class="monastery-img" />
+  </div>
+  <p class="images-caption">Фото: «Большой» ресторан в ГУМе</p>
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.6214,55.7547&z=16&l=map&size=380,200&pt=37.6214,55.7547,pm2rdm" alt="Карта: «Большой» ресторан в ГУМе" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-8" tabindex="-1">
+  <h2 class="monastery-title">8. «Грузинска<span class="old-russian-ya">я</span> лавка»</h2>
+  <p class="meta"><strong>Адрес:</strong> ул. Пятницкая, 17 &nbsp;|&nbsp; <strong>Стиль:</strong> грузинская кухня</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Грузинский ресторан на Пятницкой. Аутентичная кухня, винный погреб; популярен у ценителей грузинской кухни в Москве.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Грузинская кухня в Замоскворечье; Пятницкая.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>хачапури</li><li>хариссо</li><li>грузинские вина</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Пятницкая — историческая улица Замоскворечья.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Третий по счёту московский католический храм, построенный до революции 1917 года, один из трёх действующих в настоящее время католических храмов Москвы наряду с храмом святого Людовика и храмом святой Ольги.</p>
+
+  <div class="visual-block">
+  <div class="images-row">
+    <img src="images/moscow_cafes/gruzinskaya_1.jpg" alt="«Грузинская лавка» — фото 1" class="monastery-img" />
+<img src="images/moscow_cafes/gruzinskaya_2.jpg" alt="«Грузинская лавка» — фото 2" class="monastery-img" />
+<img src="images/moscow_cafes/gruzinskaya_4.jpg" alt="«Грузинская лавка» — фото 3" class="monastery-img" />
+  </div>
+  <p class="images-caption">Фото: «Грузинская лавка»</p>
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.6281,55.7411&z=16&l=map&size=380,200&pt=37.6281,55.7411,pm2rdm" alt="Карта: «Грузинская лавка»" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-9" tabindex="-1">
+  <h2 class="monastery-title">9. «Столова<span class="old-russian-ya">я</span> №57» в ГУМе</h2>
+  <p class="meta"><strong>Адрес:</strong> Красная пл., 3, ГУМ &nbsp;|&nbsp; <strong>Стиль:</strong> советская столовая</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Столовая в стиле советских заведений общепита; расположена в ГУМе. Котлеты, борщ, компот; ностальгическая атмосфера и доступные цены.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Советская столовая в ГУМе; центр Москвы.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>советская кухня</li><li>демократичные цены</li><li>интерьер в стиле СССР</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>ГУМ — памятник архитектуры на Красной площади.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Транслировался в эфире телеканала ТНТ с 8 ноября 2010 года по 2 ноября 2023 года.</p>
+
+  <div class="visual-block">
+  <div class="images-row">
+    <img src="images/moscow_cafes/stolovaya57_1.jpg" alt="«Столовая №57» в ГУМе — фото 1" class="monastery-img" />
+  </div>
+  <p class="images-caption">Фото: «Столовая №57» в ГУМе</p>
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.6214,55.7547&z=16&l=map&size=380,200&pt=37.6214,55.7547,pm2rdm" alt="Карта: «Столовая №57» в ГУМе" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="qa-section" id="qa" tabindex="-1">
+  <h2>Вопросы и ответы по фактам</h2>
+  <div class="qa-item"><p class="question"><strong>Вопрос 1. Какое кафе стилизовано под дворянскую усадьбу XIX века?</strong></p><p class="answer">Ответ: Кафе «Пушкин» на Тверском бульваре — открыто в 1999 году.</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 2. Где находится кофейня у Патриарших прудов?</strong></p><p class="answer">Ответ: «Кофемания» на Малой Бронной — место из «Мастера и Маргариты».</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 3. Какое кафе славится варениками на Арбате?</strong></p><p class="answer">Ответ: «Вареничная №1» на пешеходном Арбате.</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 4. Где попробовать пельмени на Тверской?</strong></p><p class="answer">Ответ: Трактир «У Палыча» — русская кухня на главной улице.</p></div>
+</section>
+
+</body>
+</html>

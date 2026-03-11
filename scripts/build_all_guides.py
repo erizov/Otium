@@ -7,34 +7,16 @@
 
 from __future__ import annotations
 
-import os
 import subprocess
 import sys
 from pathlib import Path
 
 _SCRIPT_DIR = Path(__file__).resolve().parent
 _PROJECT_ROOT = _SCRIPT_DIR.parent
-GUIDES = [
-    "monasteries",
-    "places_of_worship",
-    "parks",
-    "museums",
-    "palaces",
-    "buildings",
-    "sculptures",
-    "places",
-    "squares",
-    "metro",
-    "theaters",
-    "viewpoints",
-    "bridges",
-    "markets",
-    "libraries",
-    "railway_stations",
-    "cemeteries",
-    "landmarks",
-    "cafes",
-]
+if str(_PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(_PROJECT_ROOT))
+
+from scripts.guide_constants import BUILD_GUIDES
 
 
 def main() -> int:
@@ -47,7 +29,7 @@ def main() -> int:
 
     use_available = "--build-with-available" in sys.argv
     failed: list[str] = []
-    for guide in GUIDES:
+    for guide in BUILD_GUIDES:
         print("\n--- Building guide: {} ---".format(guide))
         cmd = [python, str(build_script), "--guide", guide]
         if use_available:

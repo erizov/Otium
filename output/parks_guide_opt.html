@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Парки Москвы</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;0,600&amp;family=EB+Garamond:ital,wght@0,400;0,600&amp;family=Pochaevsk&amp;family=Source+Serif+4:ital,wght@0,400;0,600&amp;family=Inter:wght@400;500;600&amp;display=swap&amp;subset=latin,cyrillic"
+        rel="stylesheet" />
+  <style>
+      @page { size: A4; margin: 2cm 1.5cm 1.5cm 1.8cm; }
+      *, html, body { -webkit-print-color-adjust: exact;
+                      print-color-adjust: exact; }
+      html { background-color: #faf8f5; }
+      html, body { margin: 0; padding: 0; font-family: "Source Serif 4",
+        Georgia, "Times New Roman", serif;
+        font-size: 10pt; line-height: 1.45; color: #1c1b19;
+        background-color: #faf8f5; }
+      body { color: #1c1b19 !important; background-color: #faf8f5 !important; }
+      h1 { font-family: "Source Serif 4", Georgia, serif;
+           font-size: 18pt; text-align: center; margin: 0 0 0.5em;
+           color: #1c1b19 !important; }
+      h2 { font-family: "Source Serif 4", Georgia, serif;
+           color: #1c1b19 !important; }
+      h2.monastery-title { font-family: Pochaevsk, Georgia, serif;
+           font-size: 17pt; margin: 1.2em 0 0.4em 0.3em;
+           border-bottom: 1px solid #8b7355; padding-bottom: 0.25em;
+           color: #2c2a28 !important; }
+      .old-russian-ya { font-family: "Source Serif 4", Georgia, serif; }
+      .meta, .block-label { font-family: Inter, "IBM Plex Sans", sans-serif;
+          font-size: 8.5pt; letter-spacing: 0.02em; }
+      .meta { margin: 0.2em 0 0.6em 0.3em; color: #6b635b !important; }
+      .block-label { margin: 0.6em 0 0.15em 0.3em; text-transform: uppercase;
+                     font-weight: 600; color: #6b7b8a !important; }
+      .body-text { margin: 0 0 0.4em 0.3em; text-align: left; max-width: 42em;
+                   color: #1c1b19; font-family: "Source Serif 4", Georgia, serif; }
+      .story-text { font-style: italic; color: #4a5568; }
+      ul, li, p { color: #1c1b19; font-family: "Source Serif 4", Georgia, serif; }
+      .intro-block { page-break-after: always; padding: 2.5em 1em 0 1.2em;
+                     background-color: #faf8f5; }
+      .intro-block .otium-brand { font-family: Inter, sans-serif;
+        font-size: 8pt; letter-spacing: 0.2em; color: #6b635b !important;
+        margin-bottom: 0.3em; }
+      .intro-block .otium-title { font-family: Pochaevsk, Georgia, serif;
+        font-size: 20pt; font-weight: 600; text-align: center;
+        margin: 0.2em 0 0.1em; color: #1a1a1a !important; }
+      .intro-block .otium-subtitle { font-family: Pochaevsk, Georgia, serif;
+        font-size: 11pt; text-align: center; color: #6b635b !important;
+        font-style: italic; margin-bottom: 1em; }
+      .intro-block p { margin: 0.4em 0; font-size: 9.5pt; line-height: 1.5;
+        text-align: justify; max-width: 38em; margin-left: auto;
+        margin-right: auto; color: #1c1b19;
+        font-family: "Source Serif 4", Georgia, serif; }
+      .monastery { display: block; page-break-inside: avoid;
+                    break-inside: avoid; padding: 1.5em 0 0; }
+      .monastery:last-of-type { padding-bottom: 0.5em; }
+      .visual-block { margin: 0.8em 0 0; page-break-after: auto; }
+      body > *:last-child { page-break-after: auto !important; }
+      .images-row { display: flex; gap: 10px; margin: 1em; flex-wrap: wrap; }
+      .monastery-img { flex: 1 1 200px; max-width: 100%; height: 150px;
+                        object-fit: cover; }
+      .visual-grid-2x2 { display: grid; grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto; gap: 10px; margin: 1em; }
+      .visual-grid-2x2 .grid-cell,
+      .visual-grid-2x2 .map-cell { min-width: 0; }
+      .visual-grid-2x2 .grid-cell .monastery-img,
+      .visual-grid-2x2 .map-cell .map-img { width: 100%; height: 150px;
+        object-fit: cover; display: block; }
+      .visual-grid-2x2 .map-cell .map-img { max-height: 160px; height: auto; }
+      .visual-grid-2x2 .map-cell { display: flex; flex-direction: column; }
+      .visual-grid-2x2 .map-caption { font-size: 8pt; color: #6b635b;
+        margin: 0.25em 0 0; font-family: Inter, sans-serif; }
+      .images-caption { font-size: 8pt; color: #6b635b; margin: 0.25em 1em 0;
+        font-family: Inter, sans-serif; }
+      .map-block { margin: 1em; }
+      .map-caption { font-size: 8pt; color: #6b635b; margin: 0.25em 0 0;
+        font-family: Inter, sans-serif; }
+      .map-img { max-width: 100%; height: auto; max-height: 160px; }
+      .qa-section { margin-top: 2em; page-break-before: always;
+                     break-before: page; padding-top: 1.5em;
+                     page-break-inside: avoid; }
+      .qa-item { margin-bottom: 0.6em; font-size: 9pt; color: #1c1b19; }
+      .question { margin-bottom: 0.1em; color: #1c1b19; }
+      .answer { margin-left: 0.5em; color: #2c2a28;
+        font-family: "Source Serif 4", Georgia, serif; }
+      ul { margin: 0.2em 0 0.4em 0.3em; padding-left: 1.2em; color: #1c1b19; }
+      p { margin: 0.2em 0; color: #1c1b19; }
+      .map-block { background: transparent; }
+      .edit-toolbar { position: fixed; top: 8px; right: 8px; z-index: 9999; }
+      .edit-toolbar button { font-family: Inter, sans-serif; font-size: 11px;
+        padding: 6px 10px; background: #2c2a28; color: #faf8f5; border: none;
+        border-radius: 4px; cursor: pointer; }
+      .edit-toolbar button:hover { background: #4a5568; }
+      .img-wrap { position: relative; display: inline-block; }
+      .img-wrap.img-dragging { opacity: 0.6; }
+      .img-wrap.img-drop-target { outline: 2px dashed #8b7355; outline-offset: 2px; }
+      .img-del { position: absolute; top: 4px; right: 4px; width: 22px; height: 22px;
+        font-size: 16px; line-height: 20px; text-align: center; background: rgba(0,0,0,.6);
+        color: #fff; border: none; border-radius: 3px; cursor: pointer; }
+      .img-del:hover { background: #c53030; }
+      .add-img-btn { font-family: Inter, sans-serif; font-size: 10px;
+        padding: 4px 8px; margin: 4px 0 0 4px; background: #e0ddd8; color: #2c2a28;
+        border: 1px solid #8b7355; border-radius: 3px; cursor: pointer; }
+      .add-img-btn:hover { background: #d0cdc8; }
+      .add-img-btn.hidden { display: none; }
+      .img-count { font-size: 9pt; color: #6b635b; margin-left: 0.25em;
+        font-family: Inter, sans-serif; }
+      @media print {
+        html, body { color: #1c1b19 !important; background: #faf8f5 !important; }
+        .block-label { color: #6b7b8a !important; }
+        .meta { color: #6b635b !important; }
+        .monastery { page-break-inside: avoid; break-inside: avoid; }
+        .edit-toolbar, .img-del, .add-img-btn, .img-count { display: none !important; }
+      }
+    </style>
+</head>
+<body>
+
+    <div class="intro-block">
+    <p class="otium-brand">OTIUM / Sacred</p>
+    <h1 class="otium-title">Парки Москвы</h1>
+    <p class="otium-subtitle">28 парков</p>
+    <p>OTIUM — это практика осмысленного досуга.
+    В античной традиции otium означало не отдых от труда, а время, в котором
+    человек возвращается к взгляду, памяти и мышлению. Это время без
+    утилитарной цели, без спешки, без требования результата.</p>
+    <p>Мы создаём маршруты не для «посещения», а для пребывания.
+    Не для потребления культуры, а для внимательного присутствия в ней.</p>
+    <p>OTIUM работает с пространствами, где время уплотняется:
+    архитектурой, сакральными местами, кино, памятью, ландшафтом.
+    Мы не стремимся охватить всё и не обещаем «лучшее».
+    Мы отбираем немногое — то, что выдерживает тишину и повторный взгляд.</p>
+    <p>OTIUM — это не гид и не сервис.
+    Это приглашение к прогулке без обязательств.
+    К маршруту, который можно прервать.
+    К месту, где можно задержаться.</p>
+    <p>OTIUM существует для тех, кто хочет смотреть медленно.</p>
+    </div>
+    
+
+<section class="monastery" id="monastery-1" tabindex="-1">
+  <h2 class="monastery-title">1. Парк Горького</h2>
+  <p class="meta"><strong>Адрес:</strong> Крымский Вал, 9 &nbsp;|&nbsp; <strong>Стиль:</strong> ландшафтный парк культуры</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Открыт в 1928 году на месте Всероссийской сельскохозяйственной выставки. Идея «фабрики счастливого человека» принадлежала партийному руководству — парк как единое пространство отдыха, спорта и культуры. Здесь проходили массовые гуляния, парады физкультурников; в 2011 парк объединён с Нескучным садом и Воробьёвыми горами в единый кластер.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Главный парк культуры и отдыха Москвы; символ советского и современного паркового искусства; образец рекреационной инфраструктуры.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>Нескучный сад</li><li>набережная Москвы-реки</li><li>музеи</li><li>зимний каток</li><li>галерея «Гараж»</li><li>обсерватория</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Площадь около 120 га.</li><li>ЦПКиО имени Горького — с 1932 года.</li><li>В парке работают Музей современного искусства «Гараж» и обсерватория.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">In August 2018, the Park's 90th anniversary was celebrated.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_parks/gorky_1.jpg" alt="Парк Горького — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_parks/gorky_2.jpg" alt="Парк Горького — фото 2" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_parks/gorky_4.jpg" alt="Парк Горького — фото 3" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6010,55.7313&z=16&l=map&size=380,200&pt=37.6010,55.7313,pm2rdm" alt="Карта: Парк Горького" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Парк Горького</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-2" tabindex="-1">
+  <h2 class="monastery-title">2. ВДНХ</h2>
+  <p class="meta"><strong>Адрес:</strong> пр. Мира, 119 &nbsp;|&nbsp; <strong>Стиль:</strong> выставочный парк, монументальная архитектура</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Всероссийская сельскохозяйственная выставка открыта в 1939 году. После войны комплекс расширен, добавлены павильоны союзных республик. С 1959 — Выставка достижений народного хозяйства (ВДНХ). С 2010-х — масштабная реставрация павильонов и фонтанов.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Крупнейший выставочный и парковый комплекс России; памятник советской архитектуры и символ достижений страны; зона отдыха и культуры.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>павильоны республик и отраслей</li><li>фонтаны «Дружба народов», «Каменный цветок»</li><li>павильон «Космос»</li><li>арка главного входа</li><li>оранжереи</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Площадь более 325 га.</li><li>Павильон «Космос» — музей космонавтики и макет ракеты.</li><li>Фонтан «Дружба народов» — 16 фигур девушек (республики СССР).</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Between 1991 and 2014, it was also called the All-Russia Exhibition Centre (Russian: Всероссийский выставочный центр, romanized: Vserossiyskiy vystavochnyy tsentr).</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_parks/vdnh_1.jpg" alt="ВДНХ — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_parks/vdnh_2.jpg" alt="ВДНХ — фото 2" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_parks/vdnh_3.jpg" alt="ВДНХ — фото 3" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6250,55.8304&z=16&l=map&size=380,200&pt=37.6250,55.8304,pm2rdm" alt="Карта: ВДНХ" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: ВДНХ</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-3" tabindex="-1">
+  <h2 class="monastery-title">3. Коломенское</h2>
+  <p class="meta"><strong>Адрес:</strong> пр. Андропова, 39 &nbsp;|&nbsp; <strong>Стиль:</strong> музей-заповедник, царская усадьба</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Бывшая царская усадьба; село Коломенское известно с XIV века. Расцвет при Алексее Михайловиче: деревянный дворец, церковь Вознесения. Юный Пётр I нашёл в амбаре старый ботик — «дедушку русского флота» — и катался на нём по Яузе и Просяному пруду. Музей-заповедник с 1923 года; деревянный дворец воссоздан в 2007–2010.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Объект ЮНЕСКО (церковь Вознесения — первый каменный шатровый храм); памятник садово-паркового искусства; музей истории и природы.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>церковь Вознесения (ЮНЕСКО)</li><li>дворец Алексея Михайловича (воссоздан)</li><li>яблоневые сады</li><li>домик Петра I</li><li>передние ворота</li><li>пруды</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Площадь около 390 га.</li><li>Церковь Вознесения (1528–1532) — шедевр шатрового зодчества.</li><li>В Коломенском юный Пётр нашёл ботик — «дедушку русского флота».</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Kolomenskoye (Russian: Коло́менское) is a former royal estate situated several kilometers to the southeast of the city center of Moscow, Russia, on the ancient road leading to the town of Kolomna (hence the name). The 390 hectare scenic area overlooks the steep banks of the Moskva River. It became a part of Moscow in the 1960s.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_parks/kolomenskoye_park_2.jpg" alt="Коломенское — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_parks/kolomenskoye_park_3.jpg" alt="Коломенское — фото 2" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_parks/kolomenskoye_park_4.jpg" alt="Коломенское — фото 3" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6696,55.6672&z=16&l=map&size=380,200&pt=37.6696,55.6672,pm2rdm" alt="Карта: Коломенское" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Коломенское</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-4" tabindex="-1">
+  <h2 class="monastery-title">4. Царицыно</h2>
+  <p class="meta"><strong>Адрес:</strong> ул. Дольская, 1 &nbsp;|&nbsp; <strong>Стиль:</strong> музей-заповедник, пейзажный парк</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Усадьба с XVIII века; строительство велось для Екатерины II по проектам Баженова и Казакова в стиле псевдоготики. Дворцы долго стояли недостроенными; музей-заповедник создан в 1984 году. Масштабная реставрация в 2000-х вернула ансамблю вид и открыла дворцы для посещения.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Крупнейший музей-заповедник Москвы; дворцово-парковый ансамбль в стиле псевдоготики; место прогулок, концертов и знакомства с эпохой Екатерины II.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>Большой дворец</li><li>операционный дом</li><li>оранжереи</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Площадь более 400 га.</li><li>Архитекторы Баженов и Казаков.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Tsaritsyno (Russian: Царицыно, IPA: [tsɐˈrʲitsɨnə], lit. 'Tsaritsa's property') is a palace museum and park reserve in the south of Moscow. It was founded in 1775 as the summer residence of Empress Catherine II, but the construction remained incomplete. For most of its history, it was a half-abandoned park with picturesque ruins. In the 2000s, the palace was restored according to the original plans.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_parks/tsaritsyno_2.jpg" alt="Царицыно — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_parks/tsaritsyno_3.jpg" alt="Царицыно — фото 2" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_parks/tsaritsyno_4.jpg" alt="Царицыно — фото 3" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6833,55.6204&z=16&l=map&size=380,200&pt=37.6833,55.6204,pm2rdm" alt="Карта: Царицыно" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Царицыно</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-5" tabindex="-1">
+  <h2 class="monastery-title">5. Сокольники</h2>
+  <p class="meta"><strong>Адрес:</strong> ул. Сокольнический Вал, 1, стр. 1 &nbsp;|&nbsp; <strong>Стиль:</strong> исторический парк</p>
+  <p class="block-label">История</p>
+  <p class="body-text">История места с XV века — здесь проходила соколиная охота московских князей. В XIX веке территория использовалась для гуляний и праздников. С 1931 года — парк культуры и отдыха «Сокольники» с рощами и павильонами.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Один из старейших и крупнейших парков Москвы; памятник истории и садово-паркового искусства; место выставок, фестивалей и тихого отдыха.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>липовая роща</li><li>планетарий</li><li>выставочные павильоны</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Площадь около 516 га.</li><li>Парк «Сокольники» — место проведения выставок и фестивалей.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">The federal city of Moscow, Russia is divided into administrative districts called administrative okrugs, which are a subdivision of state administration. They are further divided into municipal formations called districts (raions) and settlements (poseleniy), which are local self-government entities.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_parks/sokolniki_1.jpg" alt="Сокольники — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_parks/sokolniki_2.jpg" alt="Сокольники — фото 2" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_parks/sokolniki_3.jpg" alt="Сокольники — фото 3" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6736,55.7944&z=16&l=map&size=380,200&pt=37.6736,55.7944,pm2rdm" alt="Карта: Сокольники" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Сокольники</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-6" tabindex="-1">
+  <h2 class="monastery-title">6. Измайловский парк</h2>
+  <p class="meta"><strong>Адрес:</strong> аллея Большого Круга, 7 &nbsp;|&nbsp; <strong>Стиль:</strong> природно-исторический парк</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Территория входит в бывшую царскую усадьбу Измайлово, где провёл детство Пётр I. В 1930-х годах здесь заложен парк культуры и отдыха. Сохранились пруды, остатки усадьбы; рядом — Измайловский кремль и вернисаж.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Один из крупнейших парков Европы по площади; природный массив в черте города; сочетание истории, природы и современной инфраструктуры.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>Измайловский кремль</li><li>верёвочный парк</li><li>пруды</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Площадь более 1200 га.</li><li>Измайловский остров — памятник истории.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">The monorail with six stations was also closed in June 2025.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_parks/izmaylovo_park_1.jpg" alt="Измайловский парк — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_parks/izmaylovo_park_2.jpg" alt="Измайловский парк — фото 2" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_parks/izmaylovo_park_3.jpg" alt="Измайловский парк — фото 3" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.8015,55.7913&z=16&l=map&size=380,200&pt=37.8015,55.7913,pm2rdm" alt="Карта: Измайловский парк" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Измайловский парк</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-7" tabindex="-1">
+  <h2 class="monastery-title">7. Лосиный Остров</h2>
+  <p class="meta"><strong>Адрес:</strong> попадение с разных сторон (Мытищи, Балашиха, Москва) &nbsp;|&nbsp; <strong>Стиль:</strong> национальный парк</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Охраняемая территория с XV века — здесь охотились московские князья. В советское время лес сохранялся как зелёный пояс. В 1983 году создан первый в России национальный парк «Лосиный Остров»; действует лосиная биостанция.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Первый национальный парк России; крупнейший лесной массив в мегаполисе; место обитания лосей, кабанов и редких видов.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>лосиная биостанция</li><li>лесные тропы</li><li>исторические места</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Площадь около 128 км².</li><li>Обитают лоси, кабаны, олени.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Losiny Ostrov National Park (Russian: Национальный парк &quot;Лосиный Остров&quot;, literally - Elk (Moose) Island ) is the second oldest national park of Russia (after Sochi National Park). It is located in Moscow and Moscow Oblast. It is the largest urban park in Europe. Losiny Ostrov is one of a few locations in Moscow where one can see wild animals in their natural environment, including the moose.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_parks/losiny_3.jpg" alt="Лосиный Остров — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_parks/losiny_4.jpg" alt="Лосиный Остров — фото 2" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.8833,55.8833&z=16&l=map&size=380,200&pt=37.8833,55.8833,pm2rdm" alt="Карта: Лосиный Остров" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Лосиный Остров</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-8" tabindex="-1">
+  <h2 class="monastery-title">8. Парк Победы на Поклонной горе</h2>
+  <p class="meta"><strong>Адрес:</strong> ул. Братьев Фонченко, 7 &nbsp;|&nbsp; <strong>Стиль:</strong> мемориальный парк</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Парк открыт к 50-летию Победы в 1995 году на Поклонной горе — историческом месте, где останавливались путники и войска. Центр ансамбля — обелиск высотой 141,8 м (1418 дней войны); музей ВОВ, храмы, мечеть, синагога.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Главный мемориал Победы в Великой Отечественной войне; место памяти и патриотических церемоний; музейно-парковый комплекс федерального значения.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>музей Великой Отечественной войны</li><li>монумент Победы</li><li>храм Георгия Победоносца</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Высота обелиска 141,8 м (1418 дней войны).</li><li>Парк площадью 135 га.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">It covered the period from 1955 to 1991.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_parks/poklonnaya_1.jpg" alt="Парк Победы на Поклонной горе — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_parks/poklonnaya_2.jpg" alt="Парк Победы на Поклонной горе — фото 2" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_parks/poklonnaya_3.jpg" alt="Парк Победы на Поклонной горе — фото 3" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.5063,55.7308&z=16&l=map&size=380,200&pt=37.5063,55.7308,pm2rdm" alt="Карта: Парк Победы на Поклонной горе" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Парк Победы на Поклонной горе</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-9" tabindex="-1">
+  <h2 class="monastery-title">9. Воробьёвы горы</h2>
+  <p class="meta"><strong>Адрес:</strong> Воробьёвы горы, 1 &nbsp;|&nbsp; <strong>Стиль:</strong> природный парк, смотровая площадка</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Историческая местность на высоком берегу Москвы-реки; название — от села Воробьёво. Здесь планировали заложить храм Христа Спасителя (первый проект). С 2011 года парк входит в состав Парка Горького; смотровая — главная видовая точка.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Главная смотровая площадка Москвы; вид на центр, МГУ и стадион «Лужники»; символ города и обязательная точка маршрута туристов.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>смотровая площадка</li><li>МГУ</li><li>трамплины</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Высота до 80 м над уровнем Москвы-реки.</li><li>Здесь заложен храм Христа Спасителя (первоначально).</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">The Central Lenin Stadium, where the opening and closing ceremonies for the 1980 Summer Olympics took place, is right below, across the Moskva River.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_parks/vorobyovy_1.jpg" alt="Воробьёвы горы — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_parks/vorobyovy_2.jpg" alt="Воробьёвы горы — фото 2" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_parks/vorobyovy_3.jpg" alt="Воробьёвы горы — фото 3" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.5453,55.7108&z=16&l=map&size=380,200&pt=37.5453,55.7108,pm2rdm" alt="Карта: Воробьёвы горы" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Воробьёвы горы</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-10" tabindex="-1">
+  <h2 class="monastery-title">10. Кузьминки</h2>
+  <p class="meta"><strong>Адрес:</strong> Кузьминский парк, 1 &nbsp;|&nbsp; <strong>Стиль:</strong> природно-исторический парк</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Усадьба Голицыных с XVIII века; парк с прудами, конный двор, господский дом. В советское время территория использовалась под нужды города. С 1977 года — парк культуры; музей русской усадебной культуры в усадьбе «Влахернское-Кузьминки».</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Памятник садово-парковой архитектуры; музей русской усадебной культуры; один из крупнейших парков на юго-востоке Москвы.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>усадьба Кузьминки</li><li>конный двор</li><li>пруды</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Площадь около 375 га.</li><li>Усадьба «Влахернское-Кузьминки» — одна из крупнейших в Подмосковье.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">The federal city of Moscow, Russia is divided into administrative districts called administrative okrugs, which are a subdivision of state administration. They are further divided into municipal formations called districts (raions) and settlements (poseleniy), which are local self-government entities.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_parks/kuzminki_2.jpg" alt="Кузьминки — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_parks/kuzminki_3.jpg" alt="Кузьминки — фото 2" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_parks/kuzminki_4.jpg" alt="Кузьминки — фото 3" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.7878,55.6892&z=16&l=map&size=380,200&pt=37.7878,55.6892,pm2rdm" alt="Карта: Кузьминки" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Кузьминки</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-11" tabindex="-1">
+  <h2 class="monastery-title">11. Битцевский лес</h2>
+  <p class="meta"><strong>Адрес:</strong> Новоясеневский тупик, 1 &nbsp;|&nbsp; <strong>Стиль:</strong> природный парк</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Природный парк создан в 1992 году на базе Битцевского лесного массива. Крупнейший парк на юго-западе Москвы; здесь сохранились усадьбы Ясенево, Узкое, Знаменское-Садки. Экологические тропы, конный двор, тихие аллеи.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Второй по величине парк Москвы после «Лосиного Острова»; «лёгкие юго-запада»; памятник природы и усадебной истории.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>экологические тропы</li><li>конноспортивный комплекс</li><li>исторические усадьбы</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Площадь около 2208 га.</li><li>Усадьбы Ясенево, Узкое, Знаменское-Садки.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Bitsevski Park (Russian: Битцевский парк), or Bitsa Park, is one of the largest natural parks (forests) in Moscow, Russia. The park, traversed by the Chertanovka River and the Bitsa River, sprawls for some 10 km (6.2 mi) from north to south and covers an area of 18 km2 (6.9 mi2). The park is elongated from north to south and is bounded by Balaklavsky Avenue from the north.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_parks/bitsevsky_1.jpg" alt="Битцевский лес — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_parks/bitsevsky_2.jpg" alt="Битцевский лес — фото 2" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_parks/bitsevsky_3.jpg" alt="Битцевский лес — фото 3" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.5567,55.6233&z=16&l=map&size=380,200&pt=37.5567,55.6233,pm2rdm" alt="Карта: Битцевский лес" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Битцевский лес</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-12" tabindex="-1">
+  <h2 class="monastery-title">12. Парк «Зар<span class="old-russian-ya">я</span>дье»</h2>
+  <p class="meta"><strong>Адрес:</strong> ул. Варварка, 6 &nbsp;|&nbsp; <strong>Стиль:</strong> ландшафтный парк нового типа</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Парк открыт в 2017 году на месте снесённой гостиницы «Россия». Ландшафтный парк нового типа: климатические зоны, «Парящий мост» над рекой, ледяная пещера, концертный зал. Архитектура и технологии сочетаются с зеленью.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Уникальный парк у стен Кремля; современные технологии и природа; «Парящий мост» — одна из самых узнаваемых видовых точек Москвы.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>«Парящий мост»</li><li>ледяная пещера</li><li>концертный зал</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Площадь около 13 га.</li><li>«Парящий мост» — видовая площадка над Москвой-рекой.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">The park was inaugurated on 9 September 2017 by Russian president Vladimir Putin and Moscow Mayor Sergey Sobyanin.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_parks/zaryadye_1.jpg" alt="Парк «Зарядье» — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_parks/zaryadye_2.jpg" alt="Парк «Зарядье» — фото 2" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_parks/zaryadye_3.jpg" alt="Парк «Зарядье» — фото 3" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6289,55.7514&z=16&l=map&size=380,200&pt=37.6289,55.7514,pm2rdm" alt="Карта: Парк «Зарядье»" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Парк «Зарядье»</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-13" tabindex="-1">
+  <h2 class="monastery-title">13. Аптекарский огород</h2>
+  <p class="meta"><strong>Адрес:</strong> пр. Мира, 26, стр. 1 &nbsp;|&nbsp; <strong>Стиль:</strong> ботанический сад</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Основан в 1706 году при военном госпитале как аптекарский огород для выращивания лекарственных трав. С 1805 года — ботанический сад Московского университета. Сохранились старые аллеи, оранжереи, коллекция растений.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Старейший ботанический сад России; научная и просветительская деятельность МГУ; оазис тишины и зелени в центре города.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>оранжереи</li><li>коллекция растений</li><li>исторические аллеи</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Площадь около 6,5 га.</li><li>Пальмовая оранжерея — одна из старейших в стране.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Population: 58,002 (2010 census); 56,077 (2002 census).</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_parks/aptekarsky_1.jpg" alt="Аптекарский огород — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_parks/aptekarsky_2.jpg" alt="Аптекарский огород — фото 2" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_parks/aptekarsky_3.jpg" alt="Аптекарский огород — фото 3" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6342,55.7811&z=16&l=map&size=380,200&pt=37.6342,55.7811,pm2rdm" alt="Карта: Аптекарский огород" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Аптекарский огород</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-14" tabindex="-1">
+  <h2 class="monastery-title">14. Парк «Красна<span class="old-russian-ya">я</span> Пресн<span class="old-russian-ya">я</span>»</h2>
+  <p class="meta"><strong>Адрес:</strong> Мантулинская ул., 5 &nbsp;|&nbsp; <strong>Стиль:</strong> парк культуры и отдыха</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Усадьба «Студенец» известна с XVIII века; здесь были пруды, каналы, павильоны. С 1932 года — парк культуры и отдыха «Красная Пресня». Сохранились элементы планировки, Головинский канал и пруды; благоустроены аллеи и площадки.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Памятник садово-паркового искусства; тихий парк в центре города; место отдыха с историей и современной инфраструктурой.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>пруды</li><li>детские площадки</li><li>историческая усадьба</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Площадь около 16 га.</li><li>Канал «Головинский» и пруды — элементы старой усадьбы.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Основан в 1978 году под названием «Красная Пресня».</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_parks/krasnaya_presnya_1.jpg" alt="Парк «Красная Пресня» — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_parks/krasnaya_presnya_2.jpg" alt="Парк «Красная Пресня» — фото 2" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_parks/krasnaya_presnya_3.jpg" alt="Парк «Красная Пресня» — фото 3" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.5736,55.7639&z=16&l=map&size=380,200&pt=37.5736,55.7639,pm2rdm" alt="Карта: Парк «Красная Пресня»" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Парк «Красная Пресня»</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-15" tabindex="-1">
+  <h2 class="monastery-title">15. Екатерининский парк</h2>
+  <p class="meta"><strong>Адрес:</strong> ул. Большая Екатерининская, 27 &nbsp;|&nbsp; <strong>Стиль:</strong> исторический парк</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Территория принадлежала графу Румянцеву-Задунайскому; в XIX веке здесь располагался Екатерининский институт благородных девиц. Парк культуры и отдыха создан в 1970-х годах; пруды, аллеи, памятники сохраняют дух исторического места.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Образец усадебного парка в центре Москвы; место отдыха в Мещанском районе; тихие аллеи и пруды рядом с оживлёнными улицами.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>пруды</li><li>памятники</li><li>тихие аллеи</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Площадь около 16 га.</li><li>Екатерининский институт располагался в усадьбе в XIX веке.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">The Milkmaid of Tsarskoye Selo (also known as Girl with a pitcher) (Russian: Девушка с кувшином; other names: Milkwoman, Tsarskoye Selo Statue, Peretta) is a fountain in the Catherine Park of Tsarskoye Selo in St. Petersburg (designed by Augustin Betancourt, sculpted by Pavel Sokolov).</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_parks/ekaterininsky_1.jpg" alt="Екатерининский парк — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_parks/ekaterininsky_2.jpg" alt="Екатерининский парк — фото 2" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_parks/ekaterininsky_3.jpg" alt="Екатерининский парк — фото 3" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6314,55.7817&z=16&l=map&size=380,200&pt=37.6314,55.7817,pm2rdm" alt="Карта: Екатерининский парк" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Екатерининский парк</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-16" tabindex="-1">
+  <h2 class="monastery-title">16. Парк «Садовники»</h2>
+  <p class="meta"><strong>Адрес:</strong> просп. Андропова, 58 &nbsp;|&nbsp; <strong>Стиль:</strong> ландшафтный парк</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Парк создан в 2010-х годах на месте промышленных территорий у проспекта Андропова. Ландшафтный дизайн с розарием, набережной, видами на Коломенское и Москву-реку. Один из примеров рекультивации и современного паркостроения.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Современный парк с крупным розарием и видами на Москву-реку; связующее звено между жилыми районами и музеем-заповедником Коломенское.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>розарий</li><li>набережная</li><li>вид на Коломенское</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Площадь около 33 га.</li><li>Розарий — один из крупнейших в Москве.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">The federal city of Moscow, Russia is divided into administrative districts called administrative okrugs, which are a subdivision of state administration. They are further divided into municipal formations called districts (raions) and settlements (poseleniy), which are local self-government entities.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_parks/sadovniki_1.jpg" alt="Парк «Садовники» — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_parks/sadovniki_2.jpg" alt="Парк «Садовники» — фото 2" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_parks/sadovniki_3.jpg" alt="Парк «Садовники» — фото 3" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6642,55.6567&z=16&l=map&size=380,200&pt=37.6642,55.6567,pm2rdm" alt="Карта: Парк «Садовники»" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Парк «Садовники»</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-17" tabindex="-1">
+  <h2 class="monastery-title">17. Лианозовский парк</h2>
+  <p class="meta"><strong>Адрес:</strong> ул. Угличская, 13 &nbsp;|&nbsp; <strong>Стиль:</strong> парк культуры и отдыха</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Парк создан в середине XX века в районе Лианозово на северо-востоке Москвы. Территория связана с историей Лианозовского питомника и дачного посёлка. Благоустроен прудами, катком, детскими и спортивными площадками.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Крупный зелёный массив на севере Москвы; место отдыха жителей района; парк с прудами и круглогодичной инфраструктурой.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>пруды</li><li>каток</li><li>детские площадки</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Площадь около 30 га.</li><li>Лианозовский питомник — история района.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Bibirevo ethnographic village  (Russian: Этнографическая деревня Бибирево) is a park in the &quot;Green zone of the Chermyanka river&quot; in Moscow, stylized as an ethnographic village. The area of the park (green area) is 9.58 ha (23.7 acres), the total area is 12 ha (30 acres). It is located between Belozerskaya, Leskov and Korneychuka Streets in Bibirevo District.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_parks/lianozovo_1.jpg" alt="Лианозовский парк — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_parks/lianozovo_2.jpg" alt="Лианозовский парк — фото 2" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_parks/lianozovo_3.jpg" alt="Лианозовский парк — фото 3" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.5486,55.8989&z=16&l=map&size=380,200&pt=37.5486,55.8989,pm2rdm" alt="Карта: Лианозовский парк" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Лианозовский парк</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-18" tabindex="-1">
+  <h2 class="monastery-title">18. Парк «Северное Тушино»</h2>
+  <p class="meta"><strong>Адрес:</strong> ул. Свободы, 56 &nbsp;|&nbsp; <strong>Стиль:</strong> парк у водохранилища</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Парк создан на берегу Химкинского водохранилища в 1990-х годах. Главная достопримечательность — подводная лодка Б-396 «Новосибирский комсомолец», установленная у причала как музей ВМФ. Набережная и зоны отдыха благоустроены в 2000-х.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Уникальный парк с подводной лодкой-музеем и видом на водохранилище; место семейного отдыха и познавательного туризма на северо-западе Москвы.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>музей подводной лодки</li><li>набережная Химкинского водохранилища</li><li>пляж</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Подлодка Б-396 «Новосибирский комсомолец» — музей с 2003 года.</li><li>Площадь около 75 га.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">The federal city of Moscow, Russia is divided into administrative districts called administrative okrugs, which are a subdivision of state administration. They are further divided into municipal formations called districts (raions) and settlements (poseleniy), which are local self-government entities.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_parks/tushino_1.jpg" alt="Парк «Северное Тушино» — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_parks/tushino_2.jpg" alt="Парк «Северное Тушино» — фото 2" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_parks/tushino_4.jpg" alt="Парк «Северное Тушино» — фото 3" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.4589,55.8486&z=16&l=map&size=380,200&pt=37.4589,55.8486,pm2rdm" alt="Карта: Парк «Северное Тушино»" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Парк «Северное Тушино»</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-19" tabindex="-1">
+  <h2 class="monastery-title">19. Парк «Ходынское поле»</h2>
+  <p class="meta"><strong>Адрес:</strong> Ходынский бульвар, 1 &nbsp;|&nbsp; <strong>Стиль:</strong> современный парк</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Ходынское поле — место исторических событий: военные смотры, коронация Николая II (1896), авиационные праздники. В советское время — аэродром, затем застройка. Парк открыт в 2018 году как зона отдыха.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Парк на месте легендарного поля; память о трагических событиях 1896 года; современная инфраструктура для жителей района.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>историческое поле</li><li>детские и спортивные зоны</li><li>аллеи</li><li>скейт-парк</li><li>вёлодорожки</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Площадь около 43 га.</li><li>В 1896 году на Ходынке произошла давка во время раздачи подарков.</li><li>Парк благоустроен с сохранением памяти об истории места.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Ходы́нское по́ле — местность на севере Москвы между современным Ленинградским проспектом, Беговой улицей и Хорошёвским шоссе. Своё название поле получило по реке Ходынке, ныне заключённой в трубу.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_parks/khodynka_1.jpg" alt="Парк «Ходынское поле» — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_parks/khodynka_2.jpg" alt="Парк «Ходынское поле» — фото 2" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_parks/khodynka_3.jpg" alt="Парк «Ходынское поле» — фото 3" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.5319,55.7878&z=16&l=map&size=380,200&pt=37.5319,55.7878,pm2rdm" alt="Карта: Парк «Ходынское поле»" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Парк «Ходынское поле»</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-20" tabindex="-1">
+  <h2 class="monastery-title">20. Парк «Фили»</h2>
+  <p class="meta"><strong>Адрес:</strong> ул. Большая Филёвская, 22 &nbsp;|&nbsp; <strong>Стиль:</strong> природно-исторический парк</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Историческая местность Фили известна с XVI века; здесь проходил военный совет в избе Кутузова в 1812 году. Парк создан в 1930-х годах на берегу Москвы-реки; сохранились лесные массивы и аллеи. Рядом — знаменитая церковь Покрова в Филях (1690–1694), шедевр нарышкинского барокко (ныне филиал Музея имени Андрея Рублёва). Парк благоустроен детскими и спортивными площадками, дорожками для прогулок.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Крупный парк на западе Москвы; сочетание природы и памятника архитектуры (церковь Покрова). Зона отдыха с видом на Москву-реку; место связано с историей Отечественной войны 1812 года и русским зодчеством.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>парк у Москвы-реки</li><li>церковь Покрова в Филях (нарышкинское барокко)</li><li>детские и спортивные площадки</li><li>аллеи</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Площадь около 280 га.</li><li>В Филях в 1812 году проходил военный совет (изба Кутузова).</li><li>Церковь Покрова — филиал Музея имени Андрея Рублёва.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">The federal city of Moscow, Russia is divided into administrative districts called administrative okrugs, which are a subdivision of state administration. They are further divided into municipal formations called districts (raions) and settlements (poseleniy), which are local self-government entities.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_parks/fili_park_1.jpg" alt="Парк «Фили» — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_parks/fili_park_2.jpg" alt="Парк «Фили» — фото 2" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_parks/fili_park_3.jpg" alt="Парк «Фили» — фото 3" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.5142,55.7485&z=16&l=map&size=380,200&pt=37.5142,55.7485,pm2rdm" alt="Карта: Парк «Фили»" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Парк «Фили»</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-21" tabindex="-1">
+  <h2 class="monastery-title">21. Парк «Тропарёво»</h2>
+  <p class="meta"><strong>Адрес:</strong> ул. Академика Виноградова, 12 &nbsp;|&nbsp; <strong>Стиль:</strong> природный парк</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Парк создан в 1960–1970-х годах на юго-западе Москвы как часть Тропарёвского лесопарка; территория примыкает к проспекту Вернадского и жилым районам. Каскад Тропарёвских прудов и лесные аллеи сохранили природный характер. В 2000-х годах проведено благоустройство: дорожки, детские и спортивные площадки, лыжные трассы зимой. Парк популярен у бегунов, семей с детьми и любителей тихого отдыха.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Крупный зелёный массив на юго-западе Москвы; популярное место для прогулок, бега и зимнего отдыха (лыжи, каток). Пруды и лесные тропы создают ощущение природы в черте города; инфраструктура рассчитана на круглогодичное использование.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>пруды Тропарёвской зоны отдыха</li><li>лыжные трассы</li><li>детские площадки</li><li>тихие аллеи</li><li>спортивные зоны</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Площадь около 350 га (вместе с прилегающим лесопарком).</li><li>Тропарёвские пруды — каскад из нескольких водоёмов.</li><li>Зимой работают лыжные трассы и каток.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">The federal city of Moscow, Russia is divided into administrative districts called administrative okrugs, which are a subdivision of state administration. They are further divided into municipal formations called districts (raions) and settlements (poseleniy), which are local self-government entities.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_parks/troparevo_1.jpg" alt="Парк «Тропарёво» — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_parks/troparevo_2.jpg" alt="Парк «Тропарёво» — фото 2" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_parks/troparevo_3.jpg" alt="Парк «Тропарёво» — фото 3" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.4722,55.6456&z=16&l=map&size=380,200&pt=37.4722,55.6456,pm2rdm" alt="Карта: Парк «Тропарёво»" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Парк «Тропарёво»</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-22" tabindex="-1">
+  <h2 class="monastery-title">22. Парк «Олимпийска<span class="old-russian-ya">я</span> деревн<span class="old-russian-ya">я</span>»</h2>
+  <p class="meta"><strong>Адрес:</strong> Мичуринский пр., Олимпийская деревня, 1 &nbsp;|&nbsp; <strong>Стиль:</strong> спортивный парк</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Парк создан на территории Олимпийской деревни — жилого комплекса для участников Олимпиады 1980 года. Территория благоустроена прудами, аллеями и спортивными объектами. Популярен у жителей района Тропарёво-Никулино.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Парк на территории Олимпийской деревни 1980 года; зелёная зона на юго-западе Москвы; сочетание истории Олимпиады и современного отдыха.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>олимпийские объекты 1980</li><li>пруды</li><li>лыжные трассы</li><li>детские площадки</li><li>велодорожки</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Площадь около 50 га.</li><li>Олимпийская деревня построена к Играм 1980.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Олимпийская деревня — жилой микрорайон на западе Москвы в районе Тропарёво-Никулино, возведённый в 1977—1980 годах в рамках программы по подготовке к XXII Летним Олимпийским играм для проживания их участников. При его проектировании была использована типовая серия жилых панельных домов, а предусмотренное проектом возведение бытовых зданий позволило после окончания Олимпиады передать микрорайон городу.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_parks/olympic_village_1.jpg" alt="Парк «Олимпийская деревня» — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_parks/olympic_village_2.jpg" alt="Парк «Олимпийская деревня» — фото 2" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_parks/olympic_village_3.jpg" alt="Парк «Олимпийская деревня» — фото 3" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.4689,55.6567&z=16&l=map&size=380,200&pt=37.4689,55.6567,pm2rdm" alt="Карта: Парк «Олимпийская деревня»" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Парк «Олимпийская деревня»</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-23" tabindex="-1">
+  <h2 class="monastery-title">23. Сиреневый сад</h2>
+  <p class="meta"><strong>Адрес:</strong> Щёлковское ш., 100 &nbsp;|&nbsp; <strong>Стиль:</strong> ботанический сад</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Создан в 1954 году селекционером Л. А. Колесниковым. Более 200 сортов сирени; коллекция уникальна. В мае — цветение сирени; популярен у фотографов и любителей природы.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Сад сирени Л. А. Колесникова; более 200 сортов; цветение в мае; оазис на северо-востоке Москвы.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>сирень</li><li>коллекция сортов</li><li>тихие аллеи</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Более 200 сортов сирени.</li><li>Основан Л. А. Колесниковым в 1954.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Сире́невый бульва́р — одна из центральных магистралей в Восточном административном округе (ВАО) г. Москвы, разделяющая районы Восточное Измайлово и Северное Измайлово. Это самый протяженный бульвар Москвы. Проходит почти строго с запада на восток, начинаясь как ответвление Щёлковского шоссе.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_parks/lilac_garden_2.jpg" alt="Сиреневый сад — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_parks/lilac_garden_3.jpg" alt="Сиреневый сад — фото 2" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_parks/lilac_garden_4.jpg" alt="Сиреневый сад — фото 3" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.8319,55.8689&z=16&l=map&size=380,200&pt=37.8319,55.8689,pm2rdm" alt="Карта: Сиреневый сад" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Сиреневый сад</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-24" tabindex="-1">
+  <h2 class="monastery-title">24. Парк 50-лети<span class="old-russian-ya">я</span> Окт<span class="old-russian-ya">я</span>бр<span class="old-russian-ya">я</span></h2>
+  <p class="meta"><strong>Адрес:</strong> ул. Удальцова, 22а &nbsp;|&nbsp; <strong>Стиль:</strong> парк культуры и отдыха</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Парк создан в 1967 году к 50-летию Октябрьской революции. Расположен на юго-западе Москвы; благоустроен прудами, аллеями и инфраструктурой для отдыха. В 2010-х проведена реконструкция.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Крупный парк на юго-западе Москвы; место отдыха жителей района; пруды и зелёные зоны.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>пруды</li><li>детские площадки</li><li>велодорожки</li><li>тихие аллеи</li><li>спортивные зоны</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Площадь около 50 га.</li><li>Создан в 1967 году.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Парк 50-летия Октября — лесопарк на западе Москвы, расположенный на территории муниципального округа Проспект Вернадского, между проспектом Вернадского, улицами Удальцова и Раменки. Площадь парка — 67 га.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_parks/park_50_let_1.jpg" alt="Парк 50-летия Октября — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_parks/park_50_let_2.jpg" alt="Парк 50-летия Октября — фото 2" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_parks/park_50_let_3.jpg" alt="Парк 50-летия Октября — фото 3" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.5019,55.6689&z=16&l=map&size=380,200&pt=37.5019,55.6689,pm2rdm" alt="Карта: Парк 50-летия Октября" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Парк 50-летия Октября</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-25" tabindex="-1">
+  <h2 class="monastery-title">25. Парк «Покровское-Стрешнево»</h2>
+  <p class="meta"><strong>Адрес:</strong> 5-й Войковский пр., 2а &nbsp;|&nbsp; <strong>Стиль:</strong> природно-исторический парк</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Территория усадьбы Покровское-Стрешнево известна с XVII века. Парк создан на базе усадебного парка; сохранились пруды, аллеи, остатки усадебных построек. Благоустроен в 2000-х годах.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Природно-исторический парк на северо-западе Москвы; усадьба Покровское-Стрешнево; лесные тропы и пруды.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>усадьба Покровское-Стрешнево</li><li>пруды</li><li>лесные тропы</li><li>исторические постройки</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Площадь около 230 га.</li><li>Усадьба Покровское-Стрешнево — памятник.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">The federal city of Moscow, Russia is divided into administrative districts called administrative okrugs, which are a subdivision of state administration. They are further divided into municipal formations called districts (raions) and settlements (poseleniy), which are local self-government entities.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_parks/pokrovskoe_1.jpg" alt="Парк «Покровское-Стрешнево» — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_parks/pokrovskoe_2.jpg" alt="Парк «Покровское-Стрешнево» — фото 2" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_parks/pokrovskoe_3.jpg" alt="Парк «Покровское-Стрешнево» — фото 3" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.4689,55.8189&z=16&l=map&size=380,200&pt=37.4689,55.8189,pm2rdm" alt="Карта: Парк «Покровское-Стрешнево»" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Парк «Покровское-Стрешнево»</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-26" tabindex="-1">
+  <h2 class="monastery-title">26. Бутовский лесопарк</h2>
+  <p class="meta"><strong>Адрес:</strong> ул. Старокачаловская, 25 &nbsp;|&nbsp; <strong>Стиль:</strong> природный парк</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Природный парк на юге Москвы в районе Северное Бутово. Создан на базе лесного массива; благоустроен тропами, площадками и зимней инфраструктурой. Популярен у жителей района.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Крупный зелёный массив на юге Москвы; место для прогулок и зимнего отдыха; экологические тропы.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>лесные тропы</li><li>лыжные трассы</li><li>детские площадки</li><li>тихие аллеи</li><li>экологические маршруты</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Площадь около 140 га.</li><li>Лыжные трассы зимой.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Бутовский лесопарк — лесопарк в Москве и Московской области. Расположен на обширной территории от Калужского до Симферопольского шоссе, на юго-западе Лесопаркового защитного пояса, на территории  районов Коммунарка, Северное Бутово и Южное Бутово города Москвы, а также Ленинского городского округа Московской области. Создан в 1935 году.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_parks/butovo_forest_1.jpg" alt="Бутовский лесопарк — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_parks/butovo_forest_2.jpg" alt="Бутовский лесопарк — фото 2" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_parks/butovo_forest_3.jpg" alt="Бутовский лесопарк — фото 3" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.5689,55.5519&z=16&l=map&size=380,200&pt=37.5689,55.5519,pm2rdm" alt="Карта: Бутовский лесопарк" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Бутовский лесопарк</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-27" tabindex="-1">
+  <h2 class="monastery-title">27. Сад «Эрмитаж»</h2>
+  <p class="meta"><strong>Адрес:</strong> Каретный ряд, 3 &nbsp;|&nbsp; <strong>Стиль:</strong> исторический сад</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Создан в 1894 году театральным антрепренёром Я. В. Щукиным на месте бывшего манежа. Здесь выступали Шаляпин, Собинов; работали театры. Сад сохранил планировку; сейчас — театр «Новая опера», летняя эстрада, тихие аллеи в центре города.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Исторический сад в центре Москвы; театр «Новая опера»; место концертов и прогулок; оазис тишины у Садового кольца.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>театр «Новая опера»</li><li>летняя эстрада</li><li>тихие аллеи</li><li>исторические скульптуры</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Основан в 1894 году Я. В. Щукиным.</li><li>Здесь выступали Шаляпин и Собинов.</li><li>Театр «Новая опера» — с 1997 года.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Moscow Hermitage Garden (Russian: Сад Эрмитаж), a popular recreation spot, is a park in the central part of Moscow, Russia on Karetny Ryad Street. It is known for its cultural attractions and adjacent theaters. Regular events include opera, ballet and concerts.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_parks/hermitage_garden_1.jpg" alt="Сад «Эрмитаж» — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_parks/hermitage_garden_2.jpg" alt="Сад «Эрмитаж» — фото 2" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_parks/hermitage_garden_3.jpg" alt="Сад «Эрмитаж» — фото 3" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6114,55.7736&z=16&l=map&size=380,200&pt=37.6114,55.7736,pm2rdm" alt="Карта: Сад «Эрмитаж»" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Сад «Эрмитаж»</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-28" tabindex="-1">
+  <h2 class="monastery-title">28. Парк «Хамовники»</h2>
+  <p class="meta"><strong>Адрес:</strong> ул. Льва Толстого, 23 &nbsp;|&nbsp; <strong>Стиль:</strong> парк культуры и отдыха</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Парк создан в 1930-х годах в районе Хамовники. Рядом — музей-усадьба Л. Н. Толстого. Благоустроен прудами, аллеями, детскими и спортивными площадками. Популярен у жителей района и гостей усадьбы Толстого.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Парк в историческом районе Хамовники; рядом усадьба Толстого; тихие аллеи и пруды в центре города.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>пруды</li><li>детские площадки</li><li>тихие аллеи</li><li>рядом усадьба Толстого</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Рядом — музей-усадьба Л. Н. Толстого.</li><li>Хамовники — исторический район Москвы.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">The federal city of Moscow, Russia is divided into administrative districts called administrative okrugs, which are a subdivision of state administration. They are further divided into municipal formations called districts (raions) and settlements (poseleniy), which are local self-government entities.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_parks/hamovniki_park_1.jpg" alt="Парк «Хамовники» — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_parks/hamovniki_park_2.jpg" alt="Парк «Хамовники» — фото 2" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_parks/hamovniki_park_3.jpg" alt="Парк «Хамовники» — фото 3" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.5889,55.7342&z=16&l=map&size=380,200&pt=37.5889,55.7342,pm2rdm" alt="Карта: Парк «Хамовники»" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Парк «Хамовники»</p>
+  </div>
+</section>
+
+
+<section class="qa-section" id="qa" tabindex="-1">
+  <h2>Вопросы и ответы по фактам</h2>
+  <div class="qa-item"><p class="question"><strong>Вопрос 1. Какой парк является главным парком культуры Москвы?</strong></p><p class="answer">Ответ: Парк Горького (ЦПКиО).</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 2. Где находится ВДНХ и что там можно увидеть?</strong></p><p class="answer">Ответ: На проспекте Мира, 119. Павильоны, фонтаны «Дружба народов» и «Каменный цветок», павильон «Космос», парк «Останкино».</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 3. В каком парке находится церковь Вознесения (ЮНЕСКО)?</strong></p><p class="answer">Ответ: В музее-заповеднике Коломенское.</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 4. Какой музей-заповедник связан с Екатериной II?</strong></p><p class="answer">Ответ: Царицыно (дворцы Баженова и Казакова).</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 5. Какой национальный парк находится в Москве и области?</strong></p><p class="answer">Ответ: Лосиный Остров — первый национальный парк России (с 1983).</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 6. Где главный мемориал Победы в Великой Отечественной войне?</strong></p><p class="answer">Ответ: Парк Победы на Поклонной горе (открыт в 1995).</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 7. Какой парк открыт на месте гостиницы «Россия»?</strong></p><p class="answer">Ответ: Парк «Зарядье» (2017), с «Парящим мостом» и ледяной пещерой.</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 8. Где находится старейший ботанический сад России?</strong></p><p class="answer">Ответ: Аптекарский огород на проспекте Мира (основан в 1706).</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 9. В каком парке можно посетить подводную лодку-музей?</strong></p><p class="answer">Ответ: В парке «Северное Тушино» — подлодка Б-396 «Новосибирский комсомолец».</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 10. Какое трагическое событие связано с Ходынским полем?</strong></p><p class="answer">Ответ: В 1896 году во время коронации Николая II произошла давка при раздаче подарков; погибли сотни людей.</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 11. Где в Москве парк с церковью Покрова в Филях?</strong></p><p class="answer">Ответ: Парк «Фили» на Большой Филёвской; церковь — шедевр нарышкинского барокко.</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 12. Какой парк на юго-западе славится прудами и лыжными трассами?</strong></p><p class="answer">Ответ: Парк «Тропарёво» (Тропарёвская зона отдыха).</p></div>
+</section>
+
+</body>
+</html>

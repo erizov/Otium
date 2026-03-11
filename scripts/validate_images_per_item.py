@@ -178,6 +178,9 @@ def validate_guide(guide: str, strict: bool) -> list[str]:
                 )
             )
             continue
+        # Non-strict: allow 0 images (item will be skipped in build, no error)
+        if not strict and len(basenames) == 0:
+            continue
         if not strict and len(basenames) < MIN_IMAGES_PER_ITEM:
             errors.append(
                 "{} item {} ({!r}): expected at least {} images, got {}: "

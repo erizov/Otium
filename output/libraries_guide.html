@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Библиотеки Москвы</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;0,600&amp;family=EB+Garamond:ital,wght@0,400;0,600&amp;family=Pochaevsk&amp;family=Source+Serif+4:ital,wght@0,400;0,600&amp;family=Inter:wght@400;500;600&amp;display=swap&amp;subset=latin,cyrillic"
+        rel="stylesheet" />
+  <style>
+      @page { size: A4; margin: 2cm 1.5cm 1.5cm 1.8cm; }
+      *, html, body { -webkit-print-color-adjust: exact;
+                      print-color-adjust: exact; }
+      html { background-color: #faf8f5; }
+      html, body { margin: 0; padding: 0; font-family: "Source Serif 4",
+        Georgia, "Times New Roman", serif;
+        font-size: 10pt; line-height: 1.45; color: #1c1b19;
+        background-color: #faf8f5; }
+      body { color: #1c1b19 !important; background-color: #faf8f5 !important; }
+      h1 { font-family: "Source Serif 4", Georgia, serif;
+           font-size: 18pt; text-align: center; margin: 0 0 0.5em;
+           color: #1c1b19 !important; }
+      h2 { font-family: "Source Serif 4", Georgia, serif;
+           color: #1c1b19 !important; }
+      h2.monastery-title { font-family: Pochaevsk, Georgia, serif;
+           font-size: 17pt; margin: 1.2em 0 0.4em 0.3em;
+           border-bottom: 1px solid #8b7355; padding-bottom: 0.25em;
+           color: #2c2a28 !important; }
+      .old-russian-ya { font-family: "Source Serif 4", Georgia, serif; }
+      .meta, .block-label { font-family: Inter, "IBM Plex Sans", sans-serif;
+          font-size: 8.5pt; letter-spacing: 0.02em; }
+      .meta { margin: 0.2em 0 0.6em 0.3em; color: #6b635b !important; }
+      .block-label { margin: 0.6em 0 0.15em 0.3em; text-transform: uppercase;
+                     font-weight: 600; color: #6b7b8a !important; }
+      .body-text { margin: 0 0 0.4em 0.3em; text-align: left; max-width: 42em;
+                   color: #1c1b19; font-family: "Source Serif 4", Georgia, serif; }
+      .story-text { font-style: italic; color: #4a5568; }
+      ul, li, p { color: #1c1b19; font-family: "Source Serif 4", Georgia, serif; }
+      .intro-block { page-break-after: always; padding: 2.5em 1em 0 1.2em;
+                     background-color: #faf8f5; }
+      .intro-block .otium-brand { font-family: Inter, sans-serif;
+        font-size: 8pt; letter-spacing: 0.2em; color: #6b635b !important;
+        margin-bottom: 0.3em; }
+      .intro-block .otium-title { font-family: Pochaevsk, Georgia, serif;
+        font-size: 20pt; font-weight: 600; text-align: center;
+        margin: 0.2em 0 0.1em; color: #1a1a1a !important; }
+      .intro-block .otium-subtitle { font-family: Pochaevsk, Georgia, serif;
+        font-size: 11pt; text-align: center; color: #6b635b !important;
+        font-style: italic; margin-bottom: 1em; }
+      .intro-block p { margin: 0.4em 0; font-size: 9.5pt; line-height: 1.5;
+        text-align: justify; max-width: 38em; margin-left: auto;
+        margin-right: auto; color: #1c1b19;
+        font-family: "Source Serif 4", Georgia, serif; }
+      .monastery { display: block; page-break-inside: avoid;
+                    break-inside: avoid; padding: 1.5em 0 0; }
+      .monastery:last-of-type { padding-bottom: 0.5em; }
+      .visual-block { margin: 0.8em 0 0; page-break-after: auto; }
+      body > *:last-child { page-break-after: auto !important; }
+      .images-row { display: flex; gap: 10px; margin: 1em; flex-wrap: wrap; }
+      .monastery-img { flex: 1 1 200px; max-width: 100%; height: 150px;
+                        object-fit: cover; }
+      .visual-grid-2x2 { display: grid; grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto; gap: 10px; margin: 1em; }
+      .visual-grid-2x2 .grid-cell,
+      .visual-grid-2x2 .map-cell { min-width: 0; }
+      .visual-grid-2x2 .grid-cell .monastery-img,
+      .visual-grid-2x2 .map-cell .map-img { width: 100%; height: 150px;
+        object-fit: cover; display: block; }
+      .visual-grid-2x2 .map-cell .map-img { max-height: 160px; height: auto; }
+      .visual-grid-2x2 .map-cell { display: flex; flex-direction: column; }
+      .visual-grid-2x2 .map-caption { font-size: 8pt; color: #6b635b;
+        margin: 0.25em 0 0; font-family: Inter, sans-serif; }
+      .images-caption { font-size: 8pt; color: #6b635b; margin: 0.25em 1em 0;
+        font-family: Inter, sans-serif; }
+      .map-block { margin: 1em; }
+      .map-caption { font-size: 8pt; color: #6b635b; margin: 0.25em 0 0;
+        font-family: Inter, sans-serif; }
+      .map-img { max-width: 100%; height: auto; max-height: 160px; }
+      .qa-section { margin-top: 2em; page-break-before: always;
+                     break-before: page; padding-top: 1.5em;
+                     page-break-inside: avoid; }
+      .qa-item { margin-bottom: 0.6em; font-size: 9pt; color: #1c1b19; }
+      .question { margin-bottom: 0.1em; color: #1c1b19; }
+      .answer { margin-left: 0.5em; color: #2c2a28;
+        font-family: "Source Serif 4", Georgia, serif; }
+      ul { margin: 0.2em 0 0.4em 0.3em; padding-left: 1.2em; color: #1c1b19; }
+      p { margin: 0.2em 0; color: #1c1b19; }
+      .map-block { background: transparent; }
+      .edit-toolbar { position: fixed; top: 8px; right: 8px; z-index: 9999; }
+      .edit-toolbar button { font-family: Inter, sans-serif; font-size: 11px;
+        padding: 6px 10px; background: #2c2a28; color: #faf8f5; border: none;
+        border-radius: 4px; cursor: pointer; }
+      .edit-toolbar button:hover { background: #4a5568; }
+      .img-wrap { position: relative; display: inline-block; }
+      .img-wrap.img-dragging { opacity: 0.6; }
+      .img-wrap.img-drop-target { outline: 2px dashed #8b7355; outline-offset: 2px; }
+      .img-del { position: absolute; top: 4px; right: 4px; width: 22px; height: 22px;
+        font-size: 16px; line-height: 20px; text-align: center; background: rgba(0,0,0,.6);
+        color: #fff; border: none; border-radius: 3px; cursor: pointer; }
+      .img-del:hover { background: #c53030; }
+      .add-img-btn { font-family: Inter, sans-serif; font-size: 10px;
+        padding: 4px 8px; margin: 4px 0 0 4px; background: #e0ddd8; color: #2c2a28;
+        border: 1px solid #8b7355; border-radius: 3px; cursor: pointer; }
+      .add-img-btn:hover { background: #d0cdc8; }
+      .add-img-btn.hidden { display: none; }
+      .img-count { font-size: 9pt; color: #6b635b; margin-left: 0.25em;
+        font-family: Inter, sans-serif; }
+      @media print {
+        html, body { color: #1c1b19 !important; background: #faf8f5 !important; }
+        .block-label { color: #6b7b8a !important; }
+        .meta { color: #6b635b !important; }
+        .monastery { page-break-inside: avoid; break-inside: avoid; }
+        .edit-toolbar, .img-del, .add-img-btn, .img-count { display: none !important; }
+      }
+    </style>
+</head>
+<body>
+
+    <div class="intro-block">
+    <p class="otium-brand">OTIUM / Sacred</p>
+    <h1 class="otium-title">Библиотеки Москвы</h1>
+    <p class="otium-subtitle">5 знаменитых библиотек</p>
+    <p>OTIUM — это практика осмысленного досуга.
+    В античной традиции otium означало не отдых от труда, а время, в котором
+    человек возвращается к взгляду, памяти и мышлению. Это время без
+    утилитарной цели, без спешки, без требования результата.</p>
+    <p>Мы создаём маршруты не для «посещения», а для пребывания.
+    Не для потребления культуры, а для внимательного присутствия в ней.</p>
+    <p>OTIUM работает с пространствами, где время уплотняется:
+    архитектурой, сакральными местами, кино, памятью, ландшафтом.
+    Мы не стремимся охватить всё и не обещаем «лучшее».
+    Мы отбираем немногое — то, что выдерживает тишину и повторный взгляд.</p>
+    <p>OTIUM — это не гид и не сервис.
+    Это приглашение к прогулке без обязательств.
+    К маршруту, который можно прервать.
+    К месту, где можно задержаться.</p>
+    <p>OTIUM существует для тех, кто хочет смотреть медленно.</p>
+    </div>
+    
+
+<section class="monastery" id="monastery-1" tabindex="-1">
+  <h2 class="monastery-title">1. Российска<span class="old-russian-ya">я</span> государственна<span class="old-russian-ya">я</span> библиотека</h2>
+  <p class="meta"><strong>Адрес:</strong> ул. Воздвиженка, 3/5 &nbsp;|&nbsp; <strong>Стиль:</strong> сталинский ампир</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Основана в 1862 году как Румянцевский музей. Главное здание на Воздвиженке построено в 1928–1958 годах. Крупнейшая библиотека России; хранит более 47 млн единиц хранения.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Крупнейшая библиотека России; памятник сталинской архитектуры; национальное книгохранилище.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>читальные залы</li><li>главное здание</li><li>ротонда</li><li>исторические интерьеры</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Более 47 млн единиц хранения.</li><li>Главное здание — 1928–1958.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Its holdings crossed over 47 million units in 2017.</p>
+
+  <div class="visual-block">
+  <div class="images-row">
+    <img src="images/moscow_libraries/rgb_1.jpg" alt="Российская государственная библиотека — фото 1" class="monastery-img" />
+<img src="images/moscow_libraries/rgb_2.jpg" alt="Российская государственная библиотека — фото 2" class="monastery-img" />
+<img src="images/moscow_libraries/rgb_3.jpg" alt="Российская государственная библиотека — фото 3" class="monastery-img" />
+<img src="images/moscow_libraries/rgb_4.jpg" alt="Российская государственная библиотека — фото 4" class="monastery-img" />
+  </div>
+  <p class="images-caption">Фото: Российская государственная библиотека</p>
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.6097,55.7522&z=16&l=map&size=380,200&pt=37.6097,55.7522,pm2rdm" alt="Карта: Российская государственная библиотека" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-2" tabindex="-1">
+  <h2 class="monastery-title">2. Всероссийска<span class="old-russian-ya">я</span> государственна<span class="old-russian-ya">я</span> библиотека иностранной литературы</h2>
+  <p class="meta"><strong>Адрес:</strong> ул. Николоямская, 1 &nbsp;|&nbsp; <strong>Стиль:</strong> современная архитектура</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Основана в 1921 году; с 1967 года — в здании на Николоямской. Крупнейшее собрание иностранной литературы в России; центр международного культурного обмена.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Главная библиотека иностранной литературы; центр культуры; выставки и концерты.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>иностранная литература</li><li>выставки</li><li>концерты</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Более 4,5 млн изданий на 140 языках.</li><li>Здание — 1967 год.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Abdulla Issa (Arabic: عبدالله عيسى, Russian Abedalla Iesa or Abdalla Isa;  born 15 January 1964) is a Palestinian poet, First Secretary of the Embassy of the State of Palestine, journalist, political analyst, film producer, winner of several literary awards, and recognized as a national Palestinian poet. He is known as one of the representatives of &quot;the poetry of updates&quot;.</p>
+
+  <div class="visual-block">
+  <div class="images-row">
+    <img src="images/moscow_libraries/inostranka_1.jpg" alt="Всероссийская государственная библиотека иностранной литературы — фото 1" class="monastery-img" />
+<img src="images/moscow_libraries/inostranka_2.jpg" alt="Всероссийская государственная библиотека иностранной литературы — фото 2" class="monastery-img" />
+<img src="images/moscow_libraries/inostranka_3.jpg" alt="Всероссийская государственная библиотека иностранной литературы — фото 3" class="monastery-img" />
+<img src="images/moscow_libraries/inostranka_4.jpg" alt="Всероссийская государственная библиотека иностранной литературы — фото 4" class="monastery-img" />
+  </div>
+  <p class="images-caption">Фото: Всероссийская государственная библиотека иностранной литературы</p>
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.6386,55.7472&z=16&l=map&size=380,200&pt=37.6386,55.7472,pm2rdm" alt="Карта: Всероссийская государственная библиотека иностранной литературы" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-3" tabindex="-1">
+  <h2 class="monastery-title">3. Библиотека-читальн<span class="old-russian-ya">я</span> им. И. С. Тургенева</h2>
+  <p class="meta"><strong>Адрес:</strong> Бобров пер., 6 &nbsp;|&nbsp; <strong>Стиль:</strong> историческое здание</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Открыта в 1885 году как первая бесплатная народная библиотека Москвы. Названа в честь И. С. Тургенева. Здание в Бобровом переулке — памятник истории и культуры.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Первая бесплатная народная библиотека Москвы; память о Тургеневе.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>мемориальная библиотека</li><li>Тургенев</li><li>исторические интерьеры</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Основана в 1885 году.</li><li>Памятник истории и культуры.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Varvara Alekseevna Morozova (1848-1917) was a Russian industrialist. She was the daughter of Aleksey Khludov and married to Abram Abramovich Morozov and Vasily Mikhailovich Sobolevsky. She was the acting president of the Tver Manufactory Association from 1882.</p>
+
+  <div class="visual-block">
+  <div class="images-row">
+    <img src="images/moscow_libraries/turgenev_lib_1.jpg" alt="Библиотека-читальня им. И. С. Тургенева — фото 1" class="monastery-img" />
+  </div>
+  <p class="images-caption">Фото: Библиотека-читальня им. И. С. Тургенева</p>
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.6386,55.7636&z=16&l=map&size=380,200&pt=37.6386,55.7636,pm2rdm" alt="Карта: Библиотека-читальня им. И. С. Тургенева" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-4" tabindex="-1">
+  <h2 class="monastery-title">4. Дом Пашкова</h2>
+  <p class="meta"><strong>Адрес:</strong> ул. Воздвиженка, 3/5, стр. 1 &nbsp;|&nbsp; <strong>Стиль:</strong> классицизм</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Построен в 1784–1786 годах по проекту В. И. Баженова. Один из самых знаменитых особняков Москвы; с 1921 года — часть РГБ. С 2007 года — отдел рукописей и нот.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Шедевр московского классицизма; вид на Кремль; отдел РГБ.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>памятник архитектуры</li><li>читальный зал РГБ</li><li>вид на Кремль</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Архитектор — В. И. Баженов.</li><li>С 2007 — отдел рукописей РГБ.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">In 2014 it was held only as a blitz tournament and the classical event was replaced by the TASHIR Petrosian Memorial.</p>
+
+  <div class="visual-block">
+  <div class="images-row">
+    <img src="images/moscow_libraries/pashkov_house_1.jpg" alt="Дом Пашкова — фото 1" class="monastery-img" />
+<img src="images/moscow_libraries/pashkov_house_2.jpg" alt="Дом Пашкова — фото 2" class="monastery-img" />
+<img src="images/moscow_libraries/pashkov_house_3.jpg" alt="Дом Пашкова — фото 3" class="monastery-img" />
+<img src="images/moscow_libraries/pashkov_house_4.jpg" alt="Дом Пашкова — фото 4" class="monastery-img" />
+  </div>
+  <p class="images-caption">Фото: Дом Пашкова</p>
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.6053,55.7508&z=16&l=map&size=380,200&pt=37.6053,55.7508,pm2rdm" alt="Карта: Дом Пашкова" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-5" tabindex="-1">
+  <h2 class="monastery-title">5. Центральна<span class="old-russian-ya">я</span> городска<span class="old-russian-ya">я</span> библиотека им. Н. А. Некрасова</h2>
+  <p class="meta"><strong>Адрес:</strong> ул. Бауманская, 58/25 &nbsp;|&nbsp; <strong>Стиль:</strong> современная библиотека</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Крупнейшая публичная библиотека Москвы; основана в 1919 году. Современный формат: медиатека, коворкинг, лекции и выставки. Здание на Бауманской — культурный центр района.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Крупнейшая публичная библиотека Москвы; современный формат; культурный центр.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>медиатека</li><li>коворкинг</li><li>выставки</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Основана в 1919 году.</li><li>Более 2 млн единиц хранения.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Библиотека была основана в 1919 году на фондах частных коллекций как организующий и руководящий центр для всех библиотек Москвы.</p>
+
+  <div class="visual-block">
+  <div class="images-row">
+    <img src="images/moscow_libraries/nekrasov_lib_2.jpg" alt="Центральная городская библиотека им. Н. А. Некрасова — фото 1" class="monastery-img" />
+<img src="images/moscow_libraries/nekrasov_lib_3.jpg" alt="Центральная городская библиотека им. Н. А. Некрасова — фото 2" class="monastery-img" />
+<img src="images/moscow_libraries/nekrasov_lib_4.jpg" alt="Центральная городская библиотека им. Н. А. Некрасова — фото 3" class="monastery-img" />
+  </div>
+  <p class="images-caption">Фото: Центральная городская библиотека им. Н. А. Некрасова</p>
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.6786,55.7722&z=16&l=map&size=380,200&pt=37.6786,55.7722,pm2rdm" alt="Карта: Центральная городская библиотека им. Н. А. Некрасова" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-6" tabindex="-1">
+  <h2 class="monastery-title">6. Российска<span class="old-russian-ya">я</span> государственна<span class="old-russian-ya">я</span> библиотека дл<span class="old-russian-ya">я</span> молодёжи</h2>
+  <p class="meta"><strong>Адрес:</strong> ул. Большая Черкизовская, 4, корп. 1 &nbsp;|&nbsp; <strong>Стиль:</strong> современная библиотека</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Основана в 1966 году; с 2009 — в новом здании на Большой Черкизовской. Крупнейшая молодёжная библиотека России; современный формат: коворкинг, лекции, киноклуб, выставки.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Главная молодёжная библиотека России; современный культурный центр.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>молодёжный центр</li><li>коворкинг</li><li>лекции</li><li>выставки</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Основана в 1966 году.</li><li>Здание — 2009 год.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Российская госуда́рственная библиоте́ка для молодёжи (РГБМ) — федеральное государственное бюджетное учреждение культуры, специализированная библиотека, обслуживающая молодёжь в возрасте 14—30 лет, а также физические и юридические лица, профессионально занимающиеся проблемами молодёжи. Научный, информационно-консалтинговый центр для публичных библиотек страны по работе с молодыми пользователями.</p>
+
+  <div class="visual-block">
+  <div class="images-row">
+    <img src="images/moscow_libraries/rgub_1.jpg" alt="Российская государственная библиотека для молодёжи — фото 1" class="monastery-img" />
+<img src="images/moscow_libraries/rgub_2.jpg" alt="Российская государственная библиотека для молодёжи — фото 2" class="monastery-img" />
+<img src="images/moscow_libraries/rgub_3.jpg" alt="Российская государственная библиотека для молодёжи — фото 3" class="monastery-img" />
+  </div>
+  <p class="images-caption">Фото: Российская государственная библиотека для молодёжи</p>
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.7953,55.7986&z=16&l=map&size=380,200&pt=37.7953,55.7986,pm2rdm" alt="Карта: Российская государственная библиотека для молодёжи" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-7" tabindex="-1">
+  <h2 class="monastery-title">7. Библиотека им. Ф. М. Достоевского</h2>
+  <p class="meta"><strong>Адрес:</strong> Чистопрудный бул., 23 &nbsp;|&nbsp; <strong>Стиль:</strong> современная библиотека</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Одна из старейших публичных библиотек Москвы; с 1907 года — библиотека им. Достоевского. Современный культурный центр на Чистых прудах; лекции, кинопоказы, выставки.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Культурный центр на Чистых прудах; имя Достоевского.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>культурный центр</li><li>лекции</li><li>выставки</li><li>Белый круг</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>История с 1907 года.</li><li>Чистопрудный бульвар — центр Москвы.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">In psychology and sociology, socionics is a pseudoscientific theory of information processing and personality types. It incorporates Carl Jung's work on Psychological Types with Antoni Kępiński's theory of information metabolism.</p>
+
+  <div class="visual-block">
+  <div class="images-row">
+    <img src="images/moscow_libraries/dostoevsky_lib_1.jpg" alt="Библиотека им. Ф. М. Достоевского — фото 1" class="monastery-img" />
+  </div>
+  <p class="images-caption">Фото: Библиотека им. Ф. М. Достоевского</p>
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.6392,55.7658&z=16&l=map&size=380,200&pt=37.6392,55.7658,pm2rdm" alt="Карта: Библиотека им. Ф. М. Достоевского" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="qa-section" id="qa" tabindex="-1">
+  <h2>Вопросы и ответы по фактам</h2>
+  <div class="qa-item"><p class="question"><strong>Вопрос 1. Какая библиотека считается крупнейшей в России?</strong></p><p class="answer">Ответ: Российская государственная библиотека (РГБ) — более 47 млн единиц.</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 2. Где находится Дом Пашкова?</strong></p><p class="answer">Ответ: На Воздвиженке, напротив Кремля; с 2007 года — отдел рукописей РГБ.</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 3. Какая библиотека специализируется на иностранной литературе?</strong></p><p class="answer">Ответ: ВГБИЛ на Николоямской — более 4,5 млн изданий на 140 языках.</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 4. Какой архитектор построил Дом Пашкова?</strong></p><p class="answer">Ответ: В. И. Баженов (1784–1786); шедевр московского классицизма.</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 5. Какая библиотека была первой бесплатной народной в Москве?</strong></p><p class="answer">Ответ: Библиотека-читальня им. И. С. Тургенева — открыта в 1885 году.</p></div>
+</section>
+
+</body>
+</html>

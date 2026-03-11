@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Станции Московского метро</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;0,600&amp;family=EB+Garamond:ital,wght@0,400;0,600&amp;family=Pochaevsk&amp;family=Source+Serif+4:ital,wght@0,400;0,600&amp;family=Inter:wght@400;500;600&amp;display=swap&amp;subset=latin,cyrillic"
+        rel="stylesheet" />
+  <style>
+      @page { size: A4; margin: 2cm 1.5cm 1.5cm 1.8cm; }
+      *, html, body { -webkit-print-color-adjust: exact;
+                      print-color-adjust: exact; }
+      html { background-color: #faf8f5; }
+      html, body { margin: 0; padding: 0; font-family: "Source Serif 4",
+        Georgia, "Times New Roman", serif;
+        font-size: 10pt; line-height: 1.45; color: #1c1b19;
+        background-color: #faf8f5; }
+      body { color: #1c1b19 !important; background-color: #faf8f5 !important; }
+      h1 { font-family: "Source Serif 4", Georgia, serif;
+           font-size: 18pt; text-align: center; margin: 0 0 0.5em;
+           color: #1c1b19 !important; }
+      h2 { font-family: "Source Serif 4", Georgia, serif;
+           color: #1c1b19 !important; }
+      h2.monastery-title { font-family: Pochaevsk, Georgia, serif;
+           font-size: 17pt; margin: 1.2em 0 0.4em 0.3em;
+           border-bottom: 1px solid #8b7355; padding-bottom: 0.25em;
+           color: #2c2a28 !important; }
+      .old-russian-ya { font-family: "Source Serif 4", Georgia, serif; }
+      .meta, .block-label { font-family: Inter, "IBM Plex Sans", sans-serif;
+          font-size: 8.5pt; letter-spacing: 0.02em; }
+      .meta { margin: 0.2em 0 0.6em 0.3em; color: #6b635b !important; }
+      .block-label { margin: 0.6em 0 0.15em 0.3em; text-transform: uppercase;
+                     font-weight: 600; color: #6b7b8a !important; }
+      .body-text { margin: 0 0 0.4em 0.3em; text-align: left; max-width: 42em;
+                   color: #1c1b19; font-family: "Source Serif 4", Georgia, serif; }
+      .story-text { font-style: italic; color: #4a5568; }
+      ul, li, p { color: #1c1b19; font-family: "Source Serif 4", Georgia, serif; }
+      .intro-block { page-break-after: always; padding: 2.5em 1em 0 1.2em;
+                     background-color: #faf8f5; }
+      .intro-block .otium-brand { font-family: Inter, sans-serif;
+        font-size: 8pt; letter-spacing: 0.2em; color: #6b635b !important;
+        margin-bottom: 0.3em; }
+      .intro-block .otium-title { font-family: Pochaevsk, Georgia, serif;
+        font-size: 20pt; font-weight: 600; text-align: center;
+        margin: 0.2em 0 0.1em; color: #1a1a1a !important; }
+      .intro-block .otium-subtitle { font-family: Pochaevsk, Georgia, serif;
+        font-size: 11pt; text-align: center; color: #6b635b !important;
+        font-style: italic; margin-bottom: 1em; }
+      .intro-block p { margin: 0.4em 0; font-size: 9.5pt; line-height: 1.5;
+        text-align: justify; max-width: 38em; margin-left: auto;
+        margin-right: auto; color: #1c1b19;
+        font-family: "Source Serif 4", Georgia, serif; }
+      .monastery { display: block; page-break-inside: avoid;
+                    break-inside: avoid; padding: 1.5em 0 0; }
+      .monastery:last-of-type { padding-bottom: 0.5em; }
+      .visual-block { margin: 0.8em 0 0; page-break-after: auto; }
+      body > *:last-child { page-break-after: auto !important; }
+      .images-row { display: flex; gap: 10px; margin: 1em; flex-wrap: wrap; }
+      .monastery-img { flex: 1 1 200px; max-width: 100%; height: 150px;
+                        object-fit: cover; }
+      .visual-grid-2x2 { display: grid; grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto; gap: 10px; margin: 1em; }
+      .visual-grid-2x2 .grid-cell,
+      .visual-grid-2x2 .map-cell { min-width: 0; }
+      .visual-grid-2x2 .grid-cell .monastery-img,
+      .visual-grid-2x2 .map-cell .map-img { width: 100%; height: 150px;
+        object-fit: cover; display: block; }
+      .visual-grid-2x2 .map-cell .map-img { max-height: 160px; height: auto; }
+      .visual-grid-2x2 .map-cell { display: flex; flex-direction: column; }
+      .visual-grid-2x2 .map-caption { font-size: 8pt; color: #6b635b;
+        margin: 0.25em 0 0; font-family: Inter, sans-serif; }
+      .images-caption { font-size: 8pt; color: #6b635b; margin: 0.25em 1em 0;
+        font-family: Inter, sans-serif; }
+      .map-block { margin: 1em; }
+      .map-caption { font-size: 8pt; color: #6b635b; margin: 0.25em 0 0;
+        font-family: Inter, sans-serif; }
+      .map-img { max-width: 100%; height: auto; max-height: 160px; }
+      .qa-section { margin-top: 2em; page-break-before: always;
+                     break-before: page; padding-top: 1.5em;
+                     page-break-inside: avoid; }
+      .qa-item { margin-bottom: 0.6em; font-size: 9pt; color: #1c1b19; }
+      .question { margin-bottom: 0.1em; color: #1c1b19; }
+      .answer { margin-left: 0.5em; color: #2c2a28;
+        font-family: "Source Serif 4", Georgia, serif; }
+      ul { margin: 0.2em 0 0.4em 0.3em; padding-left: 1.2em; color: #1c1b19; }
+      p { margin: 0.2em 0; color: #1c1b19; }
+      .map-block { background: transparent; }
+      .edit-toolbar { position: fixed; top: 8px; right: 8px; z-index: 9999; }
+      .edit-toolbar button { font-family: Inter, sans-serif; font-size: 11px;
+        padding: 6px 10px; background: #2c2a28; color: #faf8f5; border: none;
+        border-radius: 4px; cursor: pointer; }
+      .edit-toolbar button:hover { background: #4a5568; }
+      .img-wrap { position: relative; display: inline-block; }
+      .img-wrap.img-dragging { opacity: 0.6; }
+      .img-wrap.img-drop-target { outline: 2px dashed #8b7355; outline-offset: 2px; }
+      .img-del { position: absolute; top: 4px; right: 4px; width: 22px; height: 22px;
+        font-size: 16px; line-height: 20px; text-align: center; background: rgba(0,0,0,.6);
+        color: #fff; border: none; border-radius: 3px; cursor: pointer; }
+      .img-del:hover { background: #c53030; }
+      .add-img-btn { font-family: Inter, sans-serif; font-size: 10px;
+        padding: 4px 8px; margin: 4px 0 0 4px; background: #e0ddd8; color: #2c2a28;
+        border: 1px solid #8b7355; border-radius: 3px; cursor: pointer; }
+      .add-img-btn:hover { background: #d0cdc8; }
+      .add-img-btn.hidden { display: none; }
+      .img-count { font-size: 9pt; color: #6b635b; margin-left: 0.25em;
+        font-family: Inter, sans-serif; }
+      @media print {
+        html, body { color: #1c1b19 !important; background: #faf8f5 !important; }
+        .block-label { color: #6b7b8a !important; }
+        .meta { color: #6b635b !important; }
+        .monastery { page-break-inside: avoid; break-inside: avoid; }
+        .edit-toolbar, .img-del, .add-img-btn, .img-count { display: none !important; }
+      }
+    </style>
+</head>
+<body>
+
+    <div class="intro-block">
+    <p class="otium-brand">OTIUM / Sacred</p>
+    <h1 class="otium-title">Станции Московского метро</h1>
+    <p class="otium-subtitle">37 лучших станций</p>
+    <p>OTIUM — это практика осмысленного досуга.
+    В античной традиции otium означало не отдых от труда, а время, в котором
+    человек возвращается к взгляду, памяти и мышлению. Это время без
+    утилитарной цели, без спешки, без требования результата.</p>
+    <p>Мы создаём маршруты не для «посещения», а для пребывания.
+    Не для потребления культуры, а для внимательного присутствия в ней.</p>
+    <p>OTIUM работает с пространствами, где время уплотняется:
+    архитектурой, сакральными местами, кино, памятью, ландшафтом.
+    Мы не стремимся охватить всё и не обещаем «лучшее».
+    Мы отбираем немногое — то, что выдерживает тишину и повторный взгляд.</p>
+    <p>OTIUM — это не гид и не сервис.
+    Это приглашение к прогулке без обязательств.
+    К маршруту, который можно прервать.
+    К месту, где можно задержаться.</p>
+    <p>OTIUM существует для тех, кто хочет смотреть медленно.</p>
+    </div>
+    
+
+<section class="monastery" id="monastery-1" tabindex="-1">
+  <h2 class="monastery-title">1. Ма<span class="old-russian-ya">я</span>ковска<span class="old-russian-ya">я</span></h2>
+  <p class="meta"><strong>Адрес:</strong> Замоскворецкая линия (зелёная) &nbsp;|&nbsp; <strong>Стиль:</strong> ар-деко</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Открыта в 1938 году в составе второй очереди метро по проекту А. Н. Душкина. Колонны из нержавеющей стали и купола с мозаиками А. А. Дейнеки на тему «Сутки страны Советов» (небо, самолёты, парашютисты). В 1939 году проект получил Гран-при Всемирной выставки в Нью-Йорке. Во время войны станция использовалась как бомбоубежище и место проведения мероприятий.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Шедевр метростроя и ар-деко; одна из красивейших станций мира. Мозаики Дейнеки под куполами — образец синтеза искусства и архитектуры. Символ советского метро и визитная карточка московского подземелья.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>колонны из нержавеющей стали</li><li>мозаики Дейнеки «Сутки страны Советов»</li><li>купола</li><li>Гран-при Всемирной выставки в Нью-Йорке 1939</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Глубокое заложение.</li><li>Мозаики по эскизам А. А. Дейнеки.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Lyudmila Vladimirovna Mayakovskaya (Russian: Людми́ла Влади́мировна Маяко́вская; 24 August 1884— 12 September 1972) was a Russian and Soviet textile designer and teacher. She was the elder sister of the poet Vladimir Mayakovsky.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_metro/mayakovskaya_1.jpg" alt="Маяковская — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_metro/mayakovskaya_2.jpg" alt="Маяковская — фото 2" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.5958,55.7697&z=16&l=map&size=380,200&pt=37.5958,55.7697,pm2rdm" alt="Карта: Маяковская" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Маяковская</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-2" tabindex="-1">
+  <h2 class="monastery-title">2. Комсомольска<span class="old-russian-ya">я</span> (кольцева<span class="old-russian-ya">я</span>)</h2>
+  <p class="meta"><strong>Адрес:</strong> Кольцевая линия (коричневая) &nbsp;|&nbsp; <strong>Стиль:</strong> сталинский ампир</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Открыта в 1952 году по проекту А. В. Щусева и соавторов. Сталинский ампир: сводчатые потолки, люстры, мозаики на тему победы и славы России (Александр Невский, Дмитрий Донской, Суворов, Кутузов). Станцию называют «подземным дворцом»; расположена под Комсомольской площадью у трёх вокзалов.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">«Подземный дворец»; памятник послевоенного метростроя; символ победы и монументального искусства. Мозаики на сводах — одна из визитных карточек московского метро.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>своды</li><li>люстры</li><li>мозаики на тему победы и славы России</li><li>«подземный дворец»</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Тема мозаик — победа и слава России.</li><li>У площади трёх вокзалов.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">The line was built in 1950–1954 as a circle route orbiting central Moscow, and became crucial to the transfer patterns of passengers.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_metro/komsomolskaya_1.jpg" alt="Комсомольская (кольцевая) — фото 1" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6553,55.7747&z=16&l=map&size=380,200&pt=37.6553,55.7747,pm2rdm" alt="Карта: Комсомольская (кольцевая)" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Комсомольская (кольцевая)</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-3" tabindex="-1">
+  <h2 class="monastery-title">3. Площадь Революции</h2>
+  <p class="meta"><strong>Адрес:</strong> Арбатско-Покровская линия (синяя) &nbsp;|&nbsp; <strong>Стиль:</strong> соцреализм</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Открыта в 1938 году по проекту А. Н. Душкина. В арках установлены 76 бронзовых скульптур (М. Г. Манизер): красноармейцы, рабочие, студенты, спортсмены. Один из псов у скульптуры пограничника с собакой отполирован до блеска — по поверью, приносит удачу на экзаменах, если потереть нос.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Станция-галерея скульптуры; один из символов московского метро. Фигуры в арках отражают образы советского общества 1930-х годов; место студенческих примет.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>бронзовые скульптуры</li><li>76 фигур</li><li>арки</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>76 бронзовых скульптур.</li><li>«Счастливый» пёс у пограничника.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Revolution Square (Russian: Площадь Революции, romanized: Ploshchad Revolyutsii), known as Resurrection Square (Russian: Воскресенская площадь, romanized: Voskresenskaya ploshchad) until 1918, is a square located in the center of Moscow, in Tverskoy District, northwest of Red Square.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_metro/ploshchad_revolyutsii_1.jpg" alt="Площадь Революции — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_metro/ploshchad_revolyutsii_2.jpg" alt="Площадь Революции — фото 2" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6229,55.7564&z=16&l=map&size=380,200&pt=37.6229,55.7564,pm2rdm" alt="Карта: Площадь Революции" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Площадь Революции</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-4" tabindex="-1">
+  <h2 class="monastery-title">4. Электрозаводска<span class="old-russian-ya">я</span></h2>
+  <p class="meta"><strong>Адрес:</strong> Арбатско-Покровская линия (синяя) &nbsp;|&nbsp; <strong>Стиль:</strong> индустриальный неоклассицизм</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Открыта в 1944 году по проекту В. А. Щуко и В. Г. Гельфрейха. Название — по Электрозаводу рядом. Свод украшен шестью рядами круглых светильников (более 300); барельефы на тему труда (скульптор Г. И. Мотовилов). Строгий и торжественный стиль.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Памятник индустриальной темы в метро; уникальное световое решение. Барельефы прославляют труд и победу; одна из ярких станций военного времени.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>светильники в своде</li><li>барельефы тружеников</li><li>мрамор</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Более 300 светильников в своде.</li><li>Открыта в 1944.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">The station was opened on 31 December 2020 as a one-station extension from Lefortovo and provisionally functions as part of Nekrasovskaya line.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_metro/elektrozavodskaya_1.jpg" alt="Электрозаводская — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_metro/elektrozavodskaya_2.jpg" alt="Электрозаводская — фото 2" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.7046,55.7822&z=16&l=map&size=380,200&pt=37.7046,55.7822,pm2rdm" alt="Карта: Электрозаводская" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Электрозаводская</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-5" tabindex="-1">
+  <h2 class="monastery-title">5. Киевска<span class="old-russian-ya">я</span> (кольцева<span class="old-russian-ya">я</span>)</h2>
+  <p class="meta"><strong>Адрес:</strong> Кольцевая линия (коричневая) &nbsp;|&nbsp; <strong>Стиль:</strong> украинская тема</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Открыта в 1954 году по проекту Е. И. Катонина и др. Мозаики и росписи посвящены Украине и дружбе народов СССР; богатый декор, люстры. Оформление утверждал Н. С. Хрущёв.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Станция-памятник дружбы народов; украинская тема в московском метро. Один из парадных «дворцов» Кольцевой линии.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>мозаики о дружбе народов</li><li>украинские мотивы</li><li>люстры</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Тема — Украина и единство народов.</li><li>У Киевского вокзала.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">The line was built in 1950–1954 as a circle route orbiting central Moscow, and became crucial to the transfer patterns of passengers.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_metro/kievskaya_ring_1.jpg" alt="Киевская (кольцевая) — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_metro/kievskaya_ring_2.jpg" alt="Киевская (кольцевая) — фото 2" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.5661,55.7438&z=16&l=map&size=380,200&pt=37.5661,55.7438,pm2rdm" alt="Карта: Киевская (кольцевая)" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Киевская (кольцевая)</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-6" tabindex="-1">
+  <h2 class="monastery-title">6. Белорусска<span class="old-russian-ya">я</span> (кольцева<span class="old-russian-ya">я</span>)</h2>
+  <p class="meta"><strong>Адрес:</strong> Кольцевая линия (коричневая) &nbsp;|&nbsp; <strong>Стиль:</strong> белорусская тема</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Открыта в 1952 году по проекту И. Г. Таранова и Н. А. Быковой. Мозаики и барельефы на тему Белоруссии: труд, природа, орнамент. Своды, люстры, мрамор; пересадка на радиальную «Белорусскую» и выход к Белорусскому вокзалу.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Памятник «дружбы народов» в метро; белорусская тема. Часть транспортного узла у Белорусского вокзала.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>мозаики и барельефы</li><li>белорусский орнамент</li><li>своды</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Пересадка на Замоскворецкую линию.</li><li>Выход к Белорусскому вокзалу.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">The line was built in 1950–1954 as a circle route orbiting central Moscow, and became crucial to the transfer patterns of passengers.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_metro/belorusskaya_ring_1.jpg" alt="Белорусская (кольцевая) — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_metro/belorusskaya_ring_2.jpg" alt="Белорусская (кольцевая) — фото 2" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.5817,55.7772&z=16&l=map&size=380,200&pt=37.5817,55.7772,pm2rdm" alt="Карта: Белорусская (кольцевая)" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Белорусская (кольцевая)</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-7" tabindex="-1">
+  <h2 class="monastery-title">7. Проспект Мира (кольцева<span class="old-russian-ya">я</span>)</h2>
+  <p class="meta"><strong>Адрес:</strong> Кольцевая линия (коричневая) &nbsp;|&nbsp; <strong>Стиль:</strong> сталинский ампир</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Открыта в 1952 году как часть Кольцевой линии. Мозаики посвящены сельскому хозяйству и изобилию (ВДНХ рядом). Первоначально называлась «Ботанический сад». Своды, мрамор, люстры в духе «подземных дворцов».</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Станция у ВДНХ и Ботанического сада; тема изобилия и труда. Памятник послевоенного метростроя и сталинского стиля.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>мозаики о сельском хозяйстве</li><li>своды</li><li>люстры</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Изначально «Ботанический сад».</li><li>Пересадка на радиальную «Проспект Мира».</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">The line was built in 1950–1954 as a circle route orbiting central Moscow, and became crucial to the transfer patterns of passengers.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_metro/prospekt_mira_ring_1.jpg" alt="Проспект Мира (кольцевая) — фото 1" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6324,55.7794&z=16&l=map&size=380,200&pt=37.6324,55.7794,pm2rdm" alt="Карта: Проспект Мира (кольцевая)" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Проспект Мира (кольцевая)</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-8" tabindex="-1">
+  <h2 class="monastery-title">8. Павелецка<span class="old-russian-ya">я</span> (кольцева<span class="old-russian-ya">я</span>)</h2>
+  <p class="meta"><strong>Адрес:</strong> Кольцевая линия (коричневая) &nbsp;|&nbsp; <strong>Стиль:</strong> мозаики, тема урожая</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Открыта в 1950 году по проекту А. Н. Душкина и др. Мозаики на тему урожая и труда колхозников; своды, мрамор. Расположена у Павелецкого вокзала; пересадка на радиальную «Павелецкую».</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Станция у Павелецкого вокзала; тема сельского труда в декоре. Часть кольцевой линии и транспортного узла.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>мозаики</li><li>своды</li><li>Павелецкий вокзал</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Открыта в 1950.</li><li>Пересадка на Замоскворецкую линию.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">The line was built in 1950–1954 as a circle route orbiting central Moscow, and became crucial to the transfer patterns of passengers.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_metro/paveletskaya_ring_1.jpg" alt="Павелецкая (кольцевая) — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_metro/paveletskaya_ring_2.jpg" alt="Павелецкая (кольцевая) — фото 2" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6361,55.7314&z=16&l=map&size=380,200&pt=37.6361,55.7314,pm2rdm" alt="Карта: Павелецкая (кольцевая)" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Павелецкая (кольцевая)</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-9" tabindex="-1">
+  <h2 class="monastery-title">9. Курска<span class="old-russian-ya">я</span> (кольцева<span class="old-russian-ya">я</span>)</h2>
+  <p class="meta"><strong>Адрес:</strong> Кольцевая линия (коричневая) &nbsp;|&nbsp; <strong>Стиль:</strong> сталинский ампир</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Открыта в 1950 году по проекту Г. А. Захарова и З. С. Чернышёвой. Своды, арки, мрамор; расположена у Курского вокзала. Пересадка на Арбатско-Покровскую и Люблинско-Дмитровскую линии.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Станция у Курского вокзала; памятник сталинского метростроя. Важный пересадочный узел на востоке центра.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>своды</li><li>арки</li><li>Курский вокзал</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>У Курского вокзала.</li><li>Пересадка на две радиальные линии.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">The line was built in 1950–1954 as a circle route orbiting central Moscow, and became crucial to the transfer patterns of passengers.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_metro/kurskaya_ring_1.jpg" alt="Курская (кольцевая) — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_metro/kurskaya_ring_2.jpg" alt="Курская (кольцевая) — фото 2" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6597,55.7583&z=16&l=map&size=380,200&pt=37.6597,55.7583,pm2rdm" alt="Карта: Курская (кольцевая)" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Курская (кольцевая)</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-10" tabindex="-1">
+  <h2 class="monastery-title">10. Римска<span class="old-russian-ya">я</span></h2>
+  <p class="meta"><strong>Адрес:</strong> Люблинско-Дмитровская линия (салатовая) &nbsp;|&nbsp; <strong>Стиль:</strong> итальянская тема</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Открыта в 1995 году по проекту Л. Л. Борзенкова и др. Оформление в римском духе: колонны, фонтан «Римский» в вестибюле, светильники-факелы. Название — по городу-побратиму Риму; станция в районе Лефортово.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Уникальная «римская» станция московского метро; фонтан и колонны. Памятник метростроя 1990-х годов.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>фонтан</li><li>колонны</li><li>римские мотивы</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Фонтан «Римский» в вестибюле.</li><li>Город-побратим Рим.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">The monorail with six stations was also closed in June 2025.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_metro/rimskaya_2.jpg" alt="Римская — фото 1" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6818,55.7479&z=16&l=map&size=380,200&pt=37.6818,55.7479,pm2rdm" alt="Карта: Римская" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Римская</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-11" tabindex="-1">
+  <h2 class="monastery-title">11. Библиотека имени Ленина</h2>
+  <p class="meta"><strong>Адрес:</strong> Сокольническая линия (красная) &nbsp;|&nbsp; <strong>Стиль:</strong> первая очередь</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Открыта в 1935 году в составе первой очереди. Название — по Российской государственной библиотеке (Ленинке). Пересадка на Арбатскую, Александровский сад и Боровицкую; выход к Кремлю, Манежу и Волхонке.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Ключевая станция в центре; у главной библиотеки страны. Крупный пересадочный узел с выходом к Кремлю и музеям.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>у Российской государственной библиотеки</li><li>пересадки</li><li>центр</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>У РГБ (Ленинка).</li><li>Пересадка на три линии.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">The station was opened on 15 May 1935 as a part of the first stage of the Metro.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_metro/lenina_1.jpg" alt="Библиотека имени Ленина — фото 1" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6106,55.7522&z=16&l=map&size=380,200&pt=37.6106,55.7522,pm2rdm" alt="Карта: Библиотека имени Ленина" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Библиотека имени Ленина</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-12" tabindex="-1">
+  <h2 class="monastery-title">12. Театральна<span class="old-russian-ya">я</span></h2>
+  <p class="meta"><strong>Адрес:</strong> Замоскворецкая линия (зелёная) &nbsp;|&nbsp; <strong>Стиль:</strong> театральная тема</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Открыта в 1938 году под названием «Площадь Свердлова». Барельефы и скульптуры на тему театра и искусства народов СССР. Расположена у Большого театра и Театральной площади; пересадка на Охотный Ряд и Площадь Революции.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Станция у Большого театра; театральная тема в декоре. Часть центрального пересадочного узла.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>барельефы театра</li><li>скульптуры</li><li>Большой театр</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>У Большого театра.</li><li>Барельефы — театр народов СССР.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Theatre Square or Teatralnaya Square (Russian: Театральная площадь, Teatralnaya ploshchad), known as Sverdlov Square between 1919 and 1991, is a city square in the Tverskoy District of central Moscow, Russia. It is at the junction of Kuznetsky Bridge Street, Petrovka Street, and Theatre Drive (north-west of the latter; the square south-east of Theatre Drive is the separate Revolution Square).</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_metro/teatralnaya_1.jpg" alt="Театральная — фото 1" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6178,55.7590&z=16&l=map&size=380,200&pt=37.6178,55.7590,pm2rdm" alt="Карта: Театральная" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Театральная</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-13" tabindex="-1">
+  <h2 class="monastery-title">13. Чкаловска<span class="old-russian-ya">я</span></h2>
+  <p class="meta"><strong>Адрес:</strong> Люблинско-Дмитровская линия (салатовая) &nbsp;|&nbsp; <strong>Стиль:</strong> авиационная тема</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Открыта в 1995 году. Название — в честь лётчика В. П. Чкалова; мозаики и декор на авиационную тему. Станция в районе Лефортово; современный дизайн с элементами исторической темы.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Памятник авиации и Чкалову в метро; современная станция на салатовой линии. Тематическое оформление и удобная пересадка.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>мозаики о лётчиках</li><li>Валерий Чкалов</li><li>современный стиль</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Тема — авиация и Чкалов.</li><li>Открыта в 1995.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">The monorail with six stations was also closed in June 2025.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_metro/chkalovskaya_1.jpg" alt="Чкаловская — фото 1" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6593,55.7549&z=16&l=map&size=380,200&pt=37.6593,55.7549,pm2rdm" alt="Карта: Чкаловская" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Чкаловская</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-14" tabindex="-1">
+  <h2 class="monastery-title">14. Воробьёвы горы</h2>
+  <p class="meta"><strong>Адрес:</strong> Сокольническая линия (красная) &nbsp;|&nbsp; <strong>Стиль:</strong> надземная станция</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Открыта в 1959 году на метромосту через Москву-реку; единственная станция на мосту. Вид на реку, Воробьёвы горы и МГУ. Реконструирована в 1999–2002 годах; остекление и современный облик.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Уникальная станция на метромосту; панорама Москвы-реки и МГУ. Обязательная точка маршрута для туристов и любителей видов.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>вид на Москву-реку</li><li>метромост</li><li>МГУ</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Станция на мосту.</li><li>Вид на МГУ и реку.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">The Central Lenin Stadium, where the opening and closing ceremonies for the 1980 Summer Olympics took place, is right below, across the Moskva River.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_metro/vorobyovy_metro_1.jpg" alt="Воробьёвы горы — фото 1" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.5345,55.7104&z=16&l=map&size=380,200&pt=37.5345,55.7104,pm2rdm" alt="Карта: Воробьёвы горы" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Воробьёвы горы</p>
+  </div>
+</section>
+
+
+<section class="qa-section" id="qa" tabindex="-1">
+  <h2>Вопросы и ответы по фактам</h2>
+  <div class="qa-item"><p class="question"><strong>Вопрос 1. Какая станция московского метро получила Гран-при в Нью-Йорке?</strong></p><p class="answer">Ответ: «Маяковская» — в 1939 году на Всемирной выставке.</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 2. Где в метро находятся витражные панно в готическом стиле?</strong></p><p class="answer">Ответ: На станции «Новослободская» (Кольцевая линия) — 32 витража по эскизам П. Д. Корина.</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 3. Какая станция самая глубокая в Москве?</strong></p><p class="answer">Ответ: «Парк Победы» (Арбатско-Покровская) — около 84 м.</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 4. Где в метро установлен памятник бездомным животным?</strong></p><p class="answer">Ответ: На «Менделеевской» — скульптура «Сочувствие» псу Мальчику.</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 5. Какая станция стоит на мосту через Москву-реку?</strong></p><p class="answer">Ответ: «Воробьёвы горы» — единственная станция на метромосту.</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 6. Где в метро можно «потереть пса на удачу»?</strong></p><p class="answer">Ответ: На «Площади Революции» — бронзовый пёс у скульптуры пограничника.</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 7. Какая станция изначально называлась «Дворец Советов»?</strong></p><p class="answer">Ответ: «Кропоткинская» — рядом планировали построить Дворец Советов.</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 8. Где мозаики делали в блокадном Ленинграде?</strong></p><p class="answer">Ответ: Для станции «Новокузнецкая» по эскизам А. А. Дейнеки.</p></div>
+</section>
+
+<script>
+(function(){
+  var MAX_IMAGES_PER_ROW = 4;
+  window._deletedImagePaths = window._deletedImagePaths || [];
+  function recordDeleted(src) {
+    if (typeof src !== 'string') return;
+    var s = src.split('?')[0].replace(/\\/g, '/');
+    var idx = s.indexOf('images/');
+    if (idx === 0) window._deletedImagePaths.push(s);
+    else if (idx > 0) window._deletedImagePaths.push(s.substring(idx));
+  }
+  function initEditable() {
+    var sel = '.intro-block p,.intro-block h1,.monastery .monastery-title,.monastery .meta,' +
+      '.monastery .body-text,.monastery .story-text,.qa-section p,.qa-section h2,' +
+      '.monastery ul li';
+    document.querySelectorAll(sel).forEach(function(el){ el.contentEditable = 'true'; });
+  }
+  function setupImages() {
+    document.querySelectorAll('.images-row').forEach(function(row){
+      var imgs = row.querySelectorAll('.monastery-img');
+      imgs.forEach(function(img){
+        if (img.closest('.img-wrap')) return;
+        var wrap = document.createElement('span');
+        wrap.className = 'img-wrap';
+        wrap.draggable = true;
+        wrap.title = 'Drag to reorder';
+        img.parentNode.insertBefore(wrap, img);
+        wrap.appendChild(img);
+        var delBtn = document.createElement('button');
+        delBtn.className = 'img-del';
+        delBtn.type = 'button';
+        delBtn.textContent = '×';
+        delBtn.title = 'Delete image';
+        delBtn.onclick = function(){ recordDeleted(img.src); wrap.remove(); updateAddBtn(row); };
+        wrap.appendChild(delBtn);
+        wrap.ondragstart = function(e){ e.dataTransfer.setData('text/plain',''); e.dataTransfer.effectAllowed = 'move'; window._dragSrc = wrap; wrap.classList.add('img-dragging'); };
+        wrap.ondragend = function(){ wrap.classList.remove('img-dragging'); };
+        wrap.ondragover = function(e){ e.preventDefault(); e.dataTransfer.dropEffect = 'move'; if (e.currentTarget !== window._dragSrc) e.currentTarget.classList.add('img-drop-target'); };
+        wrap.ondragleave = function(e){ e.currentTarget.classList.remove('img-drop-target'); };
+        wrap.ondrop = function(e){ e.preventDefault(); e.currentTarget.classList.remove('img-drop-target'); var src = window._dragSrc; if (src && src !== e.currentTarget) { row.insertBefore(src, e.currentTarget); updateAddBtn(row); } };
+      });
+      var addBtn = row.querySelector('.add-img-btn');
+      if (!addBtn) {
+        addBtn = document.createElement('button');
+        addBtn.className = 'add-img-btn';
+        addBtn.type = 'button';
+        addBtn.appendChild(document.createTextNode('+ Add image '));
+        var countSpan = document.createElement('span');
+        countSpan.className = 'img-count';
+        addBtn.appendChild(countSpan);
+        addBtn.onclick = function(){ var inp = document.createElement('input'); inp.type = 'file'; inp.accept = 'image/*'; inp.multiple = true; inp.onchange = function(){ [].slice.call(inp.files).forEach(function(file){ if (row.querySelectorAll('.monastery-img').length >= MAX_IMAGES_PER_ROW) return; var r = new FileReader(); r.onload = function(){ var i = document.createElement('img'); i.className = 'monastery-img'; i.src = r.result; i.alt = ''; var w = document.createElement('span'); w.className = 'img-wrap'; w.draggable = true; w.title = 'Drag to reorder'; var dB = document.createElement('button'); dB.className = 'img-del'; dB.type = 'button'; dB.textContent = '×'; dB.onclick = function(){ w.remove(); updateAddBtn(row); }; w.appendChild(i); w.appendChild(dB); w.ondragstart = function(e){ e.dataTransfer.setData('text/plain',''); e.dataTransfer.effectAllowed = 'move'; window._dragSrc = w; w.classList.add('img-dragging'); }; w.ondragend = function(){ w.classList.remove('img-dragging'); }; w.ondragover = function(e){ e.preventDefault(); e.dataTransfer.dropEffect = 'move'; if (e.currentTarget !== window._dragSrc) e.currentTarget.classList.add('img-drop-target'); }; w.ondragleave = function(e){ e.currentTarget.classList.remove('img-drop-target'); }; w.ondrop = function(e){ e.preventDefault(); e.currentTarget.classList.remove('img-drop-target'); var src = window._dragSrc; if (src && src !== e.currentTarget) { row.insertBefore(src, e.currentTarget); updateAddBtn(row); } }; row.insertBefore(w, addBtn); updateAddBtn(row); }; r.readAsDataURL(file); }); }; inp.click(); };
+        row.appendChild(addBtn);
+      }
+      updateAddBtn(row);
+    });
+  }
+  function updateAddBtn(row) {
+    var n = row.querySelectorAll('.monastery-img').length;
+    var addBtn = row.querySelector('.add-img-btn');
+    var countSpan = addBtn ? addBtn.querySelector('.img-count') : null;
+    if (countSpan) { countSpan.textContent = n + ' из 4'; }
+    if (addBtn) { addBtn.classList.toggle('hidden', n >= MAX_IMAGES_PER_ROW); }
+  }
+  function addExportButton() {
+    var bar = document.createElement('div');
+    bar.className = 'edit-toolbar';
+    var btn = document.createElement('button');
+    btn.textContent = 'Export HTML';
+    btn.onclick = function() {
+      var root = document.documentElement.cloneNode(true);
+      root.querySelectorAll('.edit-toolbar').forEach(function(el){ el.remove(); });
+      root.querySelectorAll('.img-del, .add-img-btn').forEach(function(el){ el.remove(); });
+      root.querySelectorAll('.img-wrap').forEach(function(wrap){
+        var img = wrap.querySelector('.monastery-img');
+        if (img) { wrap.parentNode.insertBefore(img, wrap); }
+        wrap.remove();
+      });
+      var deleted = window._deletedImagePaths || [];
+      if (deleted.length) {
+        var script = root.ownerDocument.createElement('script');
+        script.type = 'application/json';
+        script.id = 'otium-deleted-images';
+        script.textContent = JSON.stringify(deleted);
+        root.querySelector('body').appendChild(script);
+      }
+      var html = '<!DOCTYPE html>\n' + root.outerHTML;
+      var blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = document.title.replace(/[^a-z0-9]/gi, '_') + '.html';
+      a.click();
+      URL.revokeObjectURL(a.href);
+    };
+    bar.appendChild(btn);
+    document.body.appendChild(bar);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run);
+  else run();
+  function run() {
+    initEditable();
+    setupImages();
+    addExportButton();
+  }
+})();
+</script>
+</body>
+</html>

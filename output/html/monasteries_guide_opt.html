@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Монастыри Москвы</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;0,600&amp;family=EB+Garamond:ital,wght@0,400;0,600&amp;family=Pochaevsk&amp;family=Source+Serif+4:ital,wght@0,400;0,600&amp;family=Inter:wght@400;500;600&amp;display=swap&amp;subset=latin,cyrillic"
+        rel="stylesheet" />
+  <style>
+      @page { size: A4; margin: 2cm 1.5cm 1.5cm 1.8cm; }
+      *, html, body { -webkit-print-color-adjust: exact;
+                      print-color-adjust: exact; }
+      html { background-color: #faf8f5; }
+      html, body { margin: 0; padding: 0; font-family: "Source Serif 4",
+        Georgia, "Times New Roman", serif;
+        font-size: 10pt; line-height: 1.45; color: #1c1b19;
+        background-color: #faf8f5; }
+      body { color: #1c1b19 !important; background-color: #faf8f5 !important; }
+      h1 { font-family: "Source Serif 4", Georgia, serif;
+           font-size: 18pt; text-align: center; margin: 0 0 0.5em;
+           color: #1c1b19 !important; }
+      h2 { font-family: "Source Serif 4", Georgia, serif;
+           color: #1c1b19 !important; }
+      h2.monastery-title { font-family: Pochaevsk, Georgia, serif;
+           font-size: 17pt; margin: 1.2em 0 0.4em 0.3em;
+           border-bottom: 1px solid #8b7355; padding-bottom: 0.25em;
+           color: #2c2a28 !important; }
+      .old-russian-ya { font-family: "Source Serif 4", Georgia, serif; }
+      .meta, .block-label { font-family: Inter, "IBM Plex Sans", sans-serif;
+          font-size: 8.5pt; letter-spacing: 0.02em; }
+      .meta { margin: 0.2em 0 0.6em 0.3em; color: #6b635b !important; }
+      .block-label { margin: 0.6em 0 0.15em 0.3em; text-transform: uppercase;
+                     font-weight: 600; color: #6b7b8a !important; }
+      .body-text { margin: 0 0 0.4em 0.3em; text-align: left; max-width: 42em;
+                   color: #1c1b19; font-family: "Source Serif 4", Georgia, serif; }
+      .story-text { font-style: italic; color: #4a5568; }
+      ul, li, p { color: #1c1b19; font-family: "Source Serif 4", Georgia, serif; }
+      .intro-block { page-break-after: always; padding: 2.5em 1em 0 1.2em;
+                     background-color: #faf8f5; }
+      .intro-block .otium-brand { font-family: Inter, sans-serif;
+        font-size: 8pt; letter-spacing: 0.2em; color: #6b635b !important;
+        margin-bottom: 0.3em; }
+      .intro-block .otium-title { font-family: Pochaevsk, Georgia, serif;
+        font-size: 20pt; font-weight: 600; text-align: center;
+        margin: 0.2em 0 0.1em; color: #1a1a1a !important; }
+      .intro-block .otium-subtitle { font-family: Pochaevsk, Georgia, serif;
+        font-size: 11pt; text-align: center; color: #6b635b !important;
+        font-style: italic; margin-bottom: 1em; }
+      .intro-block p { margin: 0.4em 0; font-size: 9.5pt; line-height: 1.5;
+        text-align: justify; max-width: 38em; margin-left: auto;
+        margin-right: auto; color: #1c1b19;
+        font-family: "Source Serif 4", Georgia, serif; }
+      .monastery { display: block; page-break-before: always;
+                    break-before: page; padding: 1.5em 0 0; }
+      .monastery:first-of-type { page-break-before: auto; break-before: auto; }
+      .monastery:last-of-type { padding-bottom: 0.5em; }
+      .visual-block { margin: 0.8em 0 0; page-break-after: always; }
+      .monastery:last-of-type .visual-block { page-break-after: auto; }
+      .images-row { display: flex; gap: 10px; margin: 1em; flex-wrap: wrap; }
+      .monastery-img { flex: 1 1 200px; max-width: 100%; height: 150px;
+                        object-fit: cover; }
+      .visual-grid-2x2 { display: grid; grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto; gap: 10px; margin: 1em; }
+      .visual-grid-2x2 .monastery-img,
+      .visual-grid-2x2 .map-cell .map-img { width: 100%; height: 150px;
+        object-fit: cover; }
+      .visual-grid-2x2 .map-cell { display: flex; flex-direction: column; }
+      .visual-grid-2x2 .map-cell .map-img { max-height: 160px; height: auto; }
+      .visual-grid-2x2 .map-caption { font-size: 8pt; color: #6b635b;
+        margin: 0.25em 0 0; font-family: Inter, sans-serif; }
+      .images-caption { font-size: 8pt; color: #6b635b; margin: 0.25em 1em 0;
+        font-family: Inter, sans-serif; }
+      .map-block { margin: 1em; }
+      .map-caption { font-size: 8pt; color: #6b635b; margin: 0.25em 0 0;
+        font-family: Inter, sans-serif; }
+      .map-img { max-width: 100%; height: auto; max-height: 160px; }
+      .qa-section { margin-top: 2em; page-break-before: always;
+                     break-before: page; padding-top: 1.5em; }
+      .qa-item { margin-bottom: 0.6em; font-size: 9pt; color: #1c1b19; }
+      .question { margin-bottom: 0.1em; color: #1c1b19; }
+      .answer { margin-left: 0.5em; color: #2c2a28;
+        font-family: "Source Serif 4", Georgia, serif; }
+      ul { margin: 0.2em 0 0.4em 0.3em; padding-left: 1.2em; color: #1c1b19; }
+      p { margin: 0.2em 0; color: #1c1b19; }
+      .map-block { background: transparent; }
+      .edit-toolbar { position: fixed; top: 8px; right: 8px; z-index: 9999; }
+      .edit-toolbar button { font-family: Inter, sans-serif; font-size: 11px;
+        padding: 6px 10px; background: #2c2a28; color: #faf8f5; border: none;
+        border-radius: 4px; cursor: pointer; }
+      .edit-toolbar button:hover { background: #4a5568; }
+      .img-wrap { position: relative; display: inline-block; }
+      .img-wrap.img-dragging { opacity: 0.6; }
+      .img-wrap.img-drop-target { outline: 2px dashed #8b7355; outline-offset: 2px; }
+      .img-del { position: absolute; top: 4px; right: 4px; width: 22px; height: 22px;
+        font-size: 16px; line-height: 20px; text-align: center; background: rgba(0,0,0,.6);
+        color: #fff; border: none; border-radius: 3px; cursor: pointer; }
+      .img-del:hover { background: #c53030; }
+      .add-img-btn { font-family: Inter, sans-serif; font-size: 10px;
+        padding: 4px 8px; margin: 4px 0 0 4px; background: #e0ddd8; color: #2c2a28;
+        border: 1px solid #8b7355; border-radius: 3px; cursor: pointer; }
+      .add-img-btn:hover { background: #d0cdc8; }
+      .add-img-btn.hidden { display: none; }
+      .img-count { font-size: 9pt; color: #6b635b; margin-left: 0.25em;
+        font-family: Inter, sans-serif; }
+      @media print {
+        html, body { color: #1c1b19 !important; background: #faf8f5 !important; }
+        .block-label { color: #6b7b8a !important; }
+        .meta { color: #6b635b !important; }
+        .monastery { page-break-before: always; break-before: page; }
+        .monastery:first-of-type { page-break-before: auto; break-before: auto; }
+        .edit-toolbar, .img-del, .add-img-btn, .img-count { display: none !important; }
+      }
+    </style>
+</head>
+<body>
+
+    <div class="intro-block">
+    <p class="otium-brand">OTIUM / Sacred</p>
+    <h1 class="otium-title">Монастыри Москвы</h1>
+    <p class="otium-subtitle">маршруты созерцани<span class="old-russian-ya">я</span> и пам<span class="old-russian-ya">я</span>ти</p>
+    <p>OTIUM — это практика осмысленного досуга.
+    В античной традиции otium означало не отдых от труда, а время, в котором
+    человек возвращается к взгляду, памяти и мышлению. Это время без
+    утилитарной цели, без спешки, без требования результата.</p>
+    <p>Мы создаём маршруты не для «посещения», а для пребывания.
+    Не для потребления культуры, а для внимательного присутствия в ней.</p>
+    <p>OTIUM работает с пространствами, где время уплотняется:
+    архитектурой, сакральными местами, кино, памятью, ландшафтом.
+    Мы не стремимся охватить всё и не обещаем «лучшее».
+    Мы отбираем немногое — то, что выдерживает тишину и повторный взгляд.</p>
+    <p>OTIUM — это не гид и не сервис.
+    Это приглашение к прогулке без обязательств.
+    К маршруту, который можно прервать.
+    К месту, где можно задержаться.</p>
+    <p>OTIUM существует для тех, кто хочет смотреть медленно.</p>
+    </div>
+    
+
+<section class="monastery" id="monastery-1" tabindex="-1">
+  <h2 class="monastery-title">1. Спасо-Андроников монастырь</h2>
+  <p class="meta"><strong>Адрес:</strong> Андроньевская площадь, 10 &nbsp;|&nbsp; <strong>Стиль:</strong> древнерусское зодчество</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Основан около 1357 года митрополитом Алексием и преподобным Андроником на берегу Яузы; назван по имени первого игумена. Спасский собор построен в 1420–1427 годах — в нём трудился Андрей Рублёв; здесь он скончался и был погребён (1430). В XVI–XVII веках ансамбль дополняли трапезная, стены и башни. В 1918 году обитель закрыли; в 1947 году создан Музей древнерусского искусства имени Андрея Рублёва; с 1989 года — Центральный музей древнерусской культуры и искусства.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Спасский собор — старейший сохранившийся храм Москвы; единственный памятник, связанный с жизнью и творчеством Андрея Рублёва; крупнейший музей русской иконописи и фрески; ансамбль на Андроньевской площади — объект культурного наследия.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>Спасский собор (1420–1427)</li><li>Роспись Андрея Рублева</li><li>Музей древнерусского искусства</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Спасский собор — древнейший из сохранившихся храмов Москвы.</li><li>Андрей Рублёв был иноком монастыря и здесь скончался (1430).</li><li>В соборе сохранились фрагменты фресок рублёвского времени.</li><li>Музей имени Андрея Рублёва открыт с 1960 года.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Andronikov Monastery of the Saviour (Russian: Андро́ников монасты́рь, romanized: Andrónikov monastýr', Russian: Спа́со-Андро́ников монасты́рь, romanized: Spáso-Andrónikov monastýr', or Russian: Андро́ников Нерукотво́рного Спа́са монасты́рь, romanized: Andrónikov Nyerukotvórnogo Spása monastýr') is a former monastery on the left bank of the Yauza River in Moscow, consecrated to the Holy Image of Saviour Not Made by...</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <img src="images/moscow_monasteries/andronikov_1.jpg" alt="Спасо-Андроников монастырь — фото 1" class="monastery-img" />
+    <img src="images/moscow_monasteries/andronikov_2.jpg" alt="Спасо-Андроников монастырь — фото 2" class="monastery-img" />
+    <img src="images/moscow_monasteries/andronikov_3.jpg" alt="Спасо-Андроников монастырь — фото 3" class="monastery-img" />
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6708,55.7497&z=16&l=map&size=380,200&pt=37.6708,55.7497,pm2rdm" alt="Карта: Спасо-Андроников монастырь" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Спасо-Андроников монастырь</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-2" tabindex="-1">
+  <h2 class="monastery-title">2. Высоко-Петровский монастырь</h2>
+  <p class="meta"><strong>Адрес:</strong> ул. Петровка, 28, стр. 9 &nbsp;|&nbsp; <strong>Стиль:</strong> нарышкинское барокко</p>
+  <p class="block-label">История</p>
+  <p class="body-text">По преданию основан в 1315 году святителем Петром, митрополитом Киевским и всея Руси, на высоком берегу Неглинной. Расцвет — при Нарышкиных в конце XVII века: построены Боголюбский собор, церковь Сергия Радонежского, трапезная в стиле нарышкинского барокко. В советское время закрыт; здания использовались под учреждения, склады, спортивную школу. Возвращён Церкви в 1990-х; проведена реставрация.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Один из старейших монастырей Москвы; образец нарышкинского барокко; родовой монастырь Нарышкиных; ансамбль на Петровке — памятник зодчества XVII века.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>Собор святителя Петра</li><li>Боголюбский собор</li><li>Церковь Сергия Радонежского</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Основание относят к 1315 году — эпохе митрополита Петра.</li><li>В XVII веке обитель перестроена на средства рода Нарышкиных.</li><li>Под трапезной сохранились палаты XVII века.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Высо́ко-Петро́вский монасты́рь (Петропа́вловский, Петровский, Петра́ митрополи́та, Петровский Высо́кий, с начала XVIII века — Высоко-Петровский) — мужской ставропигиальный монастырь Русской православной церкви в Москве; расположен на улице Петровке. Предположительно, основан в 1315 году святителем Петром, митрополитом Киевским, Владимирским и всея Руси. Известен по письменным источникам с 1317 года.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <img src="images/moscow_monasteries/vysoko_petrovsky_1.jpg" alt="Высоко-Петровский монастырь — фото 1" class="monastery-img" />
+    <img src="images/moscow_monasteries/vysoko_petrovsky_2.jpg" alt="Высоко-Петровский монастырь — фото 2" class="monastery-img" />
+    <img src="images/moscow_monasteries/vysoko_petrovsky_3.jpg" alt="Высоко-Петровский монастырь — фото 3" class="monastery-img" />
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6142,55.7678&z=16&l=map&size=380,200&pt=37.6142,55.7678,pm2rdm" alt="Карта: Высоко-Петровский монастырь" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Высоко-Петровский монастырь</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-3" tabindex="-1">
+  <h2 class="monastery-title">3. Андреевский монастырь</h2>
+  <p class="meta"><strong>Адрес:</strong> Андреевская набережная, 2 &nbsp;|&nbsp; <strong>Стиль:</strong> барокко, классицизм</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Основан в 1648 году царём Алексеем Михайловичем на месте древней Андреевской пустыни; изначально — «училищный монастырь» для «учения книжного». В XVIII веке обитель упразднили; здесь размещалась богадельня, затем пересыльная тюрьма и учреждения. Храмы и колокольня сохранились; в 2013 году монастырь возрождён как ставропигиальный мужской; проведена реставрация.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Расположен на склоне Воробьёвых гор с видом на Москву-реку; архитектура переходного периода от барокко к классицизму. С 2013 года — ставропигиальный мужской монастырь; в истории — училищный монастырь, богадельня, тюрьма; уникальная судьба обители.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>Церковь Андрея Стратилата</li><li>Колокольня с церковью Иоанна Богослова</li><li>Собор Воскресения Христова</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>В 1648 году царь Алексей Михайлович учредил здесь «училищный монастырь».</li><li>В XIX веке в зданиях обители находилась пересыльная тюрьма.</li><li>Собор Воскресения построен в 1689–1701 годах.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Андре́евский монасты́рь в Пленницах — ставропигиальный мужской монастырь Русской православной церкви, расположенный в Москве, у подножья Воробьёвых гор. В зданиях монастыря расположены Синодальная библиотека, Синодальный отдел по взаимоотношениям Церкви с обществом и средствами массовой информации, учебный комитет и институт перевода Библии.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <img src="images/moscow_monasteries/andreevsky_1.jpg" alt="Андреевский монастырь — фото 1" class="monastery-img" />
+    <img src="images/moscow_monasteries/andreevsky_2.jpg" alt="Андреевский монастырь — фото 2" class="monastery-img" />
+    <img src="images/moscow_monasteries/andreevsky_3.jpg" alt="Андреевский монастырь — фото 3" class="monastery-img" />
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.5831,55.7103&z=16&l=map&size=380,200&pt=37.5831,55.7103,pm2rdm" alt="Карта: Андреевский монастырь" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Андреевский монастырь</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-4" tabindex="-1">
+  <h2 class="monastery-title">4. Донской монастырь</h2>
+  <p class="meta"><strong>Адрес:</strong> Донская площадь, 1–3 &nbsp;|&nbsp; <strong>Стиль:</strong> барокко, классицизм</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Основан в 1591 году царём Фёдором Иоанновичем в память избавления Москвы от набега крымского хана Казы-Гирея. На этом месте стояла походная церковь с Донской иконой Божией Матери. Малый собор построен сразу после победы; в XVII–XIX веках ансамбль расширялся: Большой собор, стены, башни, храмы и усыпальницы знатных родов. В советское время часть территории использовалась под крематорий; монастырь возвращён Церкви в 1991 году.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Родовая усыпальница Голицыных, Долгоруковых, Трубецких и др.; Некрополь Донского монастыря — выдающийся музей надгробной пластики и скульптуры; памятник победе над крымским набегом 1591 года.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>Малый собор Донской иконы (1591–1593)</li><li>Большой собор (1684–1698)</li><li>Церковь Михаила Архангела</li><li>Некрополь (Голицыны, Долгоруковы, Трубецкие)</li><li>Стены и башни (1680–1710-е)</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Малый собор (1591–1593) — древнейшее здание ансамбля.</li><li>Большой собор строился в 1684–1698 годах на средства царевны Екатерины Алексеевны.</li><li>В Некрополе — могилы В. Л. Пушкина, архитектора О. И. Бове.</li><li>В 1920–1930-х на территории был первый в Москве крематорий.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Donskoy Monastery (Russian: Донско́й монасты́рь) is a major monastery in Moscow, founded in 1591 in commemoration of Moscow's deliverance from the threat of an invasion by the Crimean Khan Kazy-Girey. Commanding a highway to the Crimea, the monastery was intended to defend southern approaches to the Moscow Kremlin.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <img src="images/moscow_monasteries/donskoy_1.jpg" alt="Донской монастырь — фото 1" class="monastery-img" />
+    <img src="images/moscow_monasteries/donskoy_2.jpg" alt="Донской монастырь — фото 2" class="monastery-img" />
+    <img src="images/moscow_monasteries/donskoy_3.jpg" alt="Донской монастырь — фото 3" class="monastery-img" />
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6014,55.7144&z=16&l=map&size=380,200&pt=37.6014,55.7144,pm2rdm" alt="Карта: Донской монастырь" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Донской монастырь</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-5" tabindex="-1">
+  <h2 class="monastery-title">5. Новодевичий монастырь</h2>
+  <p class="meta"><strong>Адрес:</strong> Новодевичий проезд, 1 &nbsp;|&nbsp; <strong>Стиль:</strong> московское барокко</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Основан в 1524 году великим князем Василием III в память возвращения Смоленска в состав Руси. Здесь постригались и жили знатные женщины; в 1689 году сюда была заточена царевна Софья Алексеевна после поражения стрелецкого бунта. Ансамбль сложился в XVI–XVII веках в стиле московского барокко. С 1922 года — музей; с 1994 — действующий монастырь и филиал ГИМ. С 2004 года — объект Всемирного наследия ЮНЕСКО.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Образец московского барокко; ансамбль в списке ЮНЕСКО; один из самых посещаемых музеев и монастырей Москвы; место заточения царевны Софьи; связь с Смоленском и династией Романовых.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>Смоленский собор (1524–1525)</li><li>Шестиярусная колокольня (72 м)</li><li>Трапезная с Успенской церковью</li><li>Палаты царевны Софьи</li><li>Новодевичье кладбище (рядом)</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Смоленский собор (1524–1525) — старейшая постройка ансамбля; фрески XVI в.</li><li>Колокольня (1689–1690) высотой 72 м — одна из самых высоких в Москве.</li><li>В монастыре провела последние 15 лет жизни царевна Софья Алексеевна (ум. 1704).</li><li>Ансамбль включён в список ЮНЕСКО в 2004 году.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">In 2004, it was proclaimed a UNESCO World Heritage Site.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <img src="images/moscow_monasteries/novodevichy_1.jpg" alt="Новодевичий монастырь — фото 1" class="monastery-img" />
+    <img src="images/moscow_monasteries/novodevichy_2.jpg" alt="Новодевичий монастырь — фото 2" class="monastery-img" />
+    <img src="images/moscow_monasteries/novodevichy_3.jpg" alt="Новодевичий монастырь — фото 3" class="monastery-img" />
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.5563,55.7261&z=16&l=map&size=380,200&pt=37.5563,55.7261,pm2rdm" alt="Карта: Новодевичий монастырь" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Новодевичий монастырь</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-6" tabindex="-1">
+  <h2 class="monastery-title">6. Покровский монастырь</h2>
+  <p class="meta"><strong>Адрес:</strong> Таганская улица, 58 &nbsp;|&nbsp; <strong>Стиль:</strong> классицизм, барокко</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Основан в 1635 году царём Михаилом Фёдоровичем в память отца — патриарха Филарета; изначально мужской, на окраине Москвы у Таганки. В XIX веке ансамбль перестроен в духе классицизма. В 1920-х закрыт; здания использовались под склады и учреждения. В 1994 году монастырь возрождён как женский; сюда перенесены мощи блаженной Матроны Московской (1998); построен храм Петра и Февронии.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Один из самых посещаемых монастырей России благодаря мощам святой Матроны Московской; место паломничества для тысяч верующих; храм Петра и Февронии — символ семьи и верности.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>Храм Покрова Пресвятой Богородицы</li><li>Храм Петра и Февронии</li><li>Мощи Матроны Московской</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Мощи блаженной Матроны перенесены в обитель в 1998 году.</li><li>Храм Петра и Февронии — памятник семьи и верности.</li><li>Ежедневно монастырь посещают тысячи паломников.</li><li>Основан в 1635 году царём Михаилом Фёдоровичем.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Intercession (Pokrovsky) Monastery (Покровский монастырь) is a Russian Orthodox convent situated in Moscow, in the neighbourhood of Taganka. It was named after the Intercession of the Theotokos. The monastery has been known since 1635 and long remained a poor monastic abode outside the city proper, neighbouring a large cemetery for commoners.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <img src="images/moscow_monasteries/pokrovsky_1.jpg" alt="Покровский монастырь — фото 1" class="monastery-img" />
+    <img src="images/moscow_monasteries/pokrovsky_2.jpg" alt="Покровский монастырь — фото 2" class="monastery-img" />
+    <img src="images/moscow_monasteries/pokrovsky_3.jpg" alt="Покровский монастырь — фото 3" class="monastery-img" />
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6714,55.7414&z=16&l=map&size=380,200&pt=37.6714,55.7414,pm2rdm" alt="Карта: Покровский монастырь" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Покровский монастырь</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-7" tabindex="-1">
+  <h2 class="monastery-title">7. Крутицкое подворье</h2>
+  <p class="meta"><strong>Адрес:</strong> Крутицкая улица, 17 &nbsp;|&nbsp; <strong>Стиль:</strong> древнерусское зодчество</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Возник в XIII веке как подворье Сарайской (позже Крутицкой) епархии — епископы окормляли русских в Золотой Орде. В XV–XVII веках построены Успенский собор, Крутицкий терем с изразцовым убранством (1693–1694). В 1785 году епархия упразднена; постройки использовались под казармы и военные склады. Реставрация с 1950-х; с 1991 года — действующее подворье Патриарха, богослужения в Успенском соборе.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Уникальный памятник древнерусского зодчества; Крутицкий терем — шедевр изразцового декора XVII века; малоизвестный уголок старой Москвы у Таганки; резиденция епископов Сарских и Подонских в прошлом.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>Успенский собор</li><li>Крутицкий терем</li><li>Изразцовое убранство</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Крутицкий терем (1693–1694) украшен поливными изразцами.</li><li>Подворье было резиденцией епископов Сарских и Подонских.</li><li>В советское время здесь располагались военные склады.</li><li>Успенский собор перестроен в XVII веке.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Krutitsy Metochion (Russian: Крути́цкое подворье), full name: Krutitsy Patriarchal Metochion (Russian: Крутицкое Патриаршее подворье) is an operating ecclesiastical estate of Russian Orthodox Church, located in Tagansky District of Moscow, Russia, 3 kilometers south-east from the Kremlin. The name Krutitsy (pl.), i.e. steep river banks, originally meant the hills immediately east from Yauza River.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <img src="images/moscow_monasteries/krutitsy_1.jpg" alt="Крутицкое подворье — фото 1" class="monastery-img" />
+    <img src="images/moscow_monasteries/krutitsy_2.jpg" alt="Крутицкое подворье — фото 2" class="monastery-img" />
+    <img src="images/moscow_monasteries/krutitsy_3.jpg" alt="Крутицкое подворье — фото 3" class="monastery-img" />
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6553,55.7319&z=16&l=map&size=380,200&pt=37.6553,55.7319,pm2rdm" alt="Карта: Крутицкое подворье" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Крутицкое подворье</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-8" tabindex="-1">
+  <h2 class="monastery-title">8. Данилов монастырь</h2>
+  <p class="meta"><strong>Адрес:</strong> ул. Даниловский Вал, 22 &nbsp;|&nbsp; <strong>Стиль:</strong> классицизм, русско-византийский</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Основан в конце XIII века князем Даниилом Московским — первый монастырь в Москве. В 1330 году братию перевели в Кремль (Спас на Бору); обитель запустела. Возрождена при Иване Грозном (1560-е). В Смуту разорена; отстроена заново в XVII–XIX веках. В 1930 году закрыта; на территории — детприёмник, склады. В 1983 году возвращена Церкви; до 1988 года — резиденция Патриарха; здесь отмечали 1000-летие Крещения Руси.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Старейший монастырь Москвы; основан святым князем Даниилом; с 1980-х — духовно-административный центр РПЦ; исторический некрополь.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>Троицкий собор (1833–1838)</li><li>Храм Святых Отцов семи Вселенских соборов</li><li>Надвратная церковь Симеона Столпника</li><li>Некрополь (исторические захоронения)</li><li>Резиденция Патриарха (1983–1988)</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Данилов монастырь — первый монастырь в Москве (конец XIII в.).</li><li>В 1988 году здесь широко отмечали 1000-летие Крещения Руси.</li><li>В некрополе были похоронены Гоголь, Языков, Хомяков (часть останков перенесена).</li><li>Резиденция Патриарха в 1983–1988 годах; затем — в Даниловской слободе.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Since 1983, it has functioned as the headquarters of the Russian Orthodox church and the official residence of the Patriarch of Moscow and all Rus'.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <img src="images/moscow_monasteries/danilov_1.jpg" alt="Данилов монастырь — фото 1" class="monastery-img" />
+    <img src="images/moscow_monasteries/danilov_2.jpg" alt="Данилов монастырь — фото 2" class="monastery-img" />
+    <img src="images/moscow_monasteries/danilov_3.jpg" alt="Данилов монастырь — фото 3" class="monastery-img" />
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6292,55.7106&z=16&l=map&size=380,200&pt=37.6292,55.7106,pm2rdm" alt="Карта: Данилов монастырь" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Данилов монастырь</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-9" tabindex="-1">
+  <h2 class="monastery-title">9. Зачатьевский монастырь</h2>
+  <p class="meta"><strong>Адрес:</strong> 2-й Зачатьевский переулок, 2, стр. 2 &nbsp;|&nbsp; <strong>Стиль:</strong> барокко, неоготика</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Основан в 1360 году митрополитом Алексием; первый женский монастырь в Москве. Название — по церкви Зачатия святой Анны. В XVI–XIX веках ансамбль перестраивался; сохранились надвратная церковь и фрагменты старых зданий. В 1920-х закрыт; постройки частично снесены, использовались под тюрьму и учреждения. Возрождён в 1995 году как женский; новый собор Рождества Богородицы построен в 2008–2012 годах.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Первый женский монастырь Москвы; место паломничества для пар, мечтающих о детях (молитвы у мощей и икон); новый собор — образец современной храмовой архитектуры в духе традиций.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>Надвратная церковь</li><li>Собор Рождества Богородицы</li><li>Церковь Сошествия Святого Духа</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Первый женский монастырь в Москве (1360).</li><li>Собор Рождества Богородицы построен в 2008–2012 годах.</li><li>Обитель особо почитается как место молитвы о даровании детей.</li><li>Основан митрополитом Алексием.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">The convent was closed by the Bolsheviks in 1918 and did not reopen until 1995.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <img src="images/moscow_monasteries/zachatievsky_1.jpg" alt="Зачатьевский монастырь — фото 1" class="monastery-img" />
+    <img src="images/moscow_monasteries/zachatievsky_2.jpg" alt="Зачатьевский монастырь — фото 2" class="monastery-img" />
+    <img src="images/moscow_monasteries/zachatievsky_3.jpg" alt="Зачатьевский монастырь — фото 3" class="monastery-img" />
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.5972,55.7422&z=16&l=map&size=380,200&pt=37.5972,55.7422,pm2rdm" alt="Карта: Зачатьевский монастырь" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Зачатьевский монастырь</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-10" tabindex="-1">
+  <h2 class="monastery-title">10. Новоспасский монастырь</h2>
+  <p class="meta"><strong>Адрес:</strong> Крестьянская площадь, 10 &nbsp;|&nbsp; <strong>Стиль:</strong> барокко, классицизм</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Ведёт историю от Спасского монастыря, основанного князем Даниилом в конце XIII века. В 1330 году перенесён в Кремль; в 1490 году при Иване III перенесён на Крутицы («Спас на Новом»). Спасо-Преображенский собор и усыпальница Романовых построены в XVII веке. В 1612 году здесь формировалось ополчение Минина и Пожарского. Закрыт в 1918 году; на территории — исправительное учреждение. Возрождён в 1991 году.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Родовая усыпальница бояр Романовых (предки династии); место подготовки ополчения 1612 года; один из южных форпостов Москвы; Спасо-Преображенский собор — памятник XVII века.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>Спасо-Преображенский собор</li><li>Усыпальница Романовых</li><li>Колокольня</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Окончательно основан на нынешнем месте в 1490 году.</li><li>В усыпальнице покоятся предки династии Романовых.</li><li>В 1612 году здесь формировалось ополчение Минина и Пожарского.</li><li>Спасо-Преображенский собор освящён в 1647 году.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">This is a list of tallest Orthodox church buildings in the world, all those higher than 70 metres (230 feet). Traditionally, an Orthodox church building is crowned by one or several domes with Orthodox crosses on the top of each. The overall height of the temple is measured by the highest point of the cross above the main temple. The number of domes on individual churches often serve a symbolic purpose.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <img src="images/moscow_monasteries/novospassky_1.jpg" alt="Новоспасский монастырь — фото 1" class="monastery-img" />
+    <img src="images/moscow_monasteries/novospassky_2.jpg" alt="Новоспасский монастырь — фото 2" class="monastery-img" />
+    <img src="images/moscow_monasteries/novospassky_3.jpg" alt="Новоспасский монастырь — фото 3" class="monastery-img" />
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6569,55.7311&z=16&l=map&size=380,200&pt=37.6569,55.7311,pm2rdm" alt="Карта: Новоспасский монастырь" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Новоспасский монастырь</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-11" tabindex="-1">
+  <h2 class="monastery-title">11. Сретенский монастырь</h2>
+  <p class="meta"><strong>Адрес:</strong> ул. Большая Лубянка, 19 &nbsp;|&nbsp; <strong>Стиль:</strong> русское зодчество, современный храм</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Основан в 1397 году на Кучковом поле в память избавления Москвы от нашествия Тамерлана (1395): по преданию, крестный ход с Владимирской иконой встретил войско, и хан отступил после видения. В XVI–XVII веках ансамбль перестраивался. В 1925 году закрыт; часть построек снесена под расширение улицы. С 1995 года — ставропигиальный мужской монастырь; новый собор Новомучеников и исповедников Церкви Русской освящён в 2017 году; при монастыре — Сретенская духовная семинария.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Основан в память чудесного спасения от Тамерлана; крупный духовный и образовательный центр (Сретенская семинария); новый собор — один из крупнейших в Москве (до 3000 человек); на Большой Лубянке.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>Собор Сретения Владимирской иконы</li><li>Собор Новомучеников и исповедников Церкви Русской</li><li>Духовная семинария</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Основан в 1397 году в память встречи Владимирской иконы.</li><li>Тамерлан отступил после видения Божией Матери (по преданию).</li><li>Новый собор Новомучеников (2017) вмещает до 3000 человек.</li><li>При монастыре действует Сретенская духовная семинария.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Sretensky Monastery (Russian: Сретенский монастырь, romanized: Sretenskiy monastyr')  is an Orthodox monastery in Moscow, founded by Grand Prince Vasili I in 1397. It used to be located close to the present-day Red Square, but in the early 16th century it was moved northeast to what is now Bolshaya Lubyanka Street.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <img src="images/moscow_monasteries/sretensky_1.jpg" alt="Сретенский монастырь — фото 1" class="monastery-img" />
+    <img src="images/moscow_monasteries/sretensky_2.jpg" alt="Сретенский монастырь — фото 2" class="monastery-img" />
+    <img src="images/moscow_monasteries/sretensky_3.jpg" alt="Сретенский монастырь — фото 3" class="monastery-img" />
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6253,55.7642&z=16&l=map&size=380,200&pt=37.6253,55.7642,pm2rdm" alt="Карта: Сретенский монастырь" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Сретенский монастырь</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-12" tabindex="-1">
+  <h2 class="monastery-title">12. Марфо-Мариинска<span class="old-russian-ya">я</span> обитель</h2>
+  <p class="meta"><strong>Адрес:</strong> ул. Большая Ордынка, 34 &nbsp;|&nbsp; <strong>Стиль:</strong> неорусский стиль, модерн</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Основана в 1909 году великой княгиней Елизаветой Фёдоровной после гибели мужа, великого князя Сергея Александровича (1905). Устав обители уникален: сестры не давали строгих обетов, совмещали молитву с помощью больным, бедным, детям (больница, приют, амбулатория). Покровский собор и храм Марфы и Марии построены по проектам А. В. Щусева; росписи — М. В. Нестерова. Закрыта в 1928 году; Елизавету Фёдоровну казнили в Алапаевске (1918). Возрождена в 1992 году; с 2009 года — ставропигиальный монастырь.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Уникальная обитель милосердия; основана св. прмц. Елизаветой Фёдоровной; храмы построены по проектам Щусева, росписи — Нестерова; образец неорусского стиля и социального служения начала XX века.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>Собор Покрова Пресвятой Богородицы</li><li>Храм Марфы и Марии</li><li>Парк и сад</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Основана в 1909 году великой княгиней Елизаветой Фёдоровной.</li><li>Сестры не давали строгих монашеских обетов — могли выйти замуж.</li><li>Покровский собор расписывал М. В. Нестеров.</li><li>Архитектор А. В. Щусев строил храмы обители.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">The convent was founded in 1908 by Grand Duchess Elizabeth Feodorovna (sister of Alexandra Feodorovna, the last Empress of Russia—both of whom are counted among the Russian New Martyrs) to assist sick, wounded, and maimed soldiers in their recovery, and to provide for the needs of the poor and orphans.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <img src="images/moscow_monasteries/marfo_mariinsky_1.jpg" alt="Марфо-Мариинская обитель — фото 1" class="monastery-img" />
+    <img src="images/moscow_monasteries/marfo_mariinsky_2.jpg" alt="Марфо-Мариинская обитель — фото 2" class="monastery-img" />
+    <img src="images/moscow_monasteries/marfo_mariinsky_3.jpg" alt="Марфо-Мариинская обитель — фото 3" class="monastery-img" />
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6264,55.7364&z=16&l=map&size=380,200&pt=37.6264,55.7364,pm2rdm" alt="Карта: Марфо-Мариинская обитель" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Марфо-Мариинская обитель</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-13" tabindex="-1">
+  <h2 class="monastery-title">13. Симонов монастырь (остатки)</h2>
+  <p class="meta"><strong>Адрес:</strong> ул. Восточная, 4 &nbsp;|&nbsp; <strong>Стиль:</strong> древнерусское зодчество</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Основан в 1370-х годах племянником Сергия Радонежского — преподобным Фёдором; назван по имени боярина Симона (Степана Ховрина), пожертвовавшего землю. Один из крупнейших и богатейших монастырей Москвы; здесь постригся Кирилл Белозерский. Успенский собор (1405) и другие постройки неоднократно перестраивались. В 1920 году закрыт; в 1930-х большинство построек, включая Успенский собор, снесено при строительстве завода. Сохранились трапезная с церковью, башни «Дуло» и «Кузнечная», фрагменты стены, «Сушило».</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Сохранились трапезная, башни, фрагменты стены — памятники оборонного зодчества; здесь учился и постригся Кирилл Белозерский; место действия повести Карамзина «Бедная Лиза»; «Сушило» — высотная доминанта допетровской Москвы.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>Трапезная палата с церковью Тихвинской иконы</li><li>Башня «Дуло»</li><li>Сушило</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Основан в 1370-х, в монастыре постригся Кирилл Белозерский.</li><li>Успенский собор (1405) был разрушен в 1930 году.</li><li>«Сушило» — самое высокое нецерковное здание допетровской Москвы.</li><li>Упомянут в повести Карамзина «Бедная Лиза».</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Новодевичий Ставропигиальный женский монастырь города Москвы Русской православной церкви — православный ставропигиальный женский монастырь в Москве на Девичьем поле в излучине Москвы-реки, близ Лужников, в самом конце исторической Пречистенки (в настоящее время — Большой Пироговской улицы).</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <img src="images/moscow_monasteries/simonov_1.jpg" alt="Симонов монастырь (остатки) — фото 1" class="monastery-img" />
+    <img src="images/moscow_monasteries/simonov_2.jpg" alt="Симонов монастырь (остатки) — фото 2" class="monastery-img" />
+    <img src="images/moscow_monasteries/simonov_3.jpg" alt="Симонов монастырь (остатки) — фото 3" class="monastery-img" />
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6653,55.7317&z=16&l=map&size=380,200&pt=37.6653,55.7317,pm2rdm" alt="Карта: Симонов монастырь (остатки)" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Симонов монастырь (остатки)</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-14" tabindex="-1">
+  <h2 class="monastery-title">14. Богородице-Рождественский монастырь</h2>
+  <p class="meta"><strong>Адрес:</strong> ул. Рождественка, 20 &nbsp;|&nbsp; <strong>Стиль:</strong> барокко, классицизм</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Основан в 1386 году княгиней Марией — матерью князя Владимира Храброго (Серпуховского); расположен на крутом берегу Неглинной. Улица Рождественка получила название по монастырю. В XVI–XIX веках ансамбль перестраивался: собор Рождества Богородицы, церковь Иоанна Златоуста, колокольня. В советское время закрыт; в зданиях — учреждения, склады. Возвращён Церкви в 1993 году; возрождён как женский.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Один из старейших женских монастырей Москвы; расположен в центре города на Рождественке; архитектура XVII–XIX веков; в монастыре хранилась икона «Троеручица» (ныне в Третьяковской галерее).</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>Собор Рождества Пресвятой Богородицы</li><li>Церковь Иоанна Златоуста</li><li>Колокольня</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Основан в 1386 году княгиней Марией Серпуховской.</li><li>Улица Рождественка получила название по монастырю.</li><li>В монастыре хранилась икона «Троеручица» (ныне в Третьяковке).</li><li>Один из старейших женских монастырей Москвы.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Rozhdestvensky Convent, or the Convent of Nativity of Theotokos (Russian: Богородице-Рождественский монастырь, romanized: Bogoroditsye-Rozhdestvyenskiy monastyr'), is one of the oldest nunneries in Moscow, located inside the Boulevard Ring, on the left bank of the Neglinnaya River. Rozhdestvensky Boulevard and Rozhdestvenka Street owe their names to the convent.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <img src="images/moscow_monasteries/rozhdestvensky_1.jpg" alt="Богородице-Рождественский монастырь — фото 1" class="monastery-img" />
+    <img src="images/moscow_monasteries/rozhdestvensky_2.jpg" alt="Богородице-Рождественский монастырь — фото 2" class="monastery-img" />
+    <img src="images/moscow_monasteries/rozhdestvensky_3.jpg" alt="Богородице-Рождественский монастырь — фото 3" class="monastery-img" />
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6242,55.7628&z=16&l=map&size=380,200&pt=37.6242,55.7628,pm2rdm" alt="Карта: Богородице-Рождественский монастырь" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Богородице-Рождественский монастырь</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-15" tabindex="-1">
+  <h2 class="monastery-title">15. Заиконоспасский монастырь</h2>
+  <p class="meta"><strong>Адрес:</strong> ул. Никольская, 7–9 &nbsp;|&nbsp; <strong>Стиль:</strong> барокко</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Основан в 1600 году Борисом Годуновым на Никольской улице; название — «за иконным рядом» (торговали иконами). В 1687 году здесь открыта Славяно-греко-латинская академия — первое в России высшее учебное заведение европейского типа; в ней учились М. В. Ломоносов, В. К. Тредиаковский и др. Собор Спаса Нерукотворного перестроен в начале XVIII века. Закрыт в 1929 году; в зданиях — военные учреждения. Возрождён в 1992 году.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Место первого высшего учебного заведения России — Славяно-греко-латинской академии; здесь учился М. В. Ломоносов; памятник просвещения и барокко на Никольской.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>Собор Спаса Нерукотворного</li><li>Здание Славяно-греко-латинской академии</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Славяно-греко-латинская академия — первое высшее учебное заведение в России (1687).</li><li>В академии учился М. В. Ломоносов.</li><li>Название связано с иконными рядами Китай-города.</li><li>Собор перестроен в начале XVIII века.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">The Monastery of the Holy Mandylion or Zaikonospassky Monastery (Russian: Заиконоспасский монастырь, romanized: Zaikonospasskiy monastyr') is an Orthodox monastery on the Nikolskaya Street in Kitai-gorod, Moscow, just one block away from the Kremlin. It was founded in 1600 by Boris Godunov.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <img src="images/moscow_monasteries/zaikonospassky_1.jpg" alt="Заиконоспасский монастырь — фото 1" class="monastery-img" />
+    <img src="images/moscow_monasteries/zaikonospassky_2.jpg" alt="Заиконоспасский монастырь — фото 2" class="monastery-img" />
+    <img src="images/moscow_monasteries/zaikonospassky_3.jpg" alt="Заиконоспасский монастырь — фото 3" class="monastery-img" />
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6228,55.7556&z=16&l=map&size=380,200&pt=37.6228,55.7556,pm2rdm" alt="Карта: Заиконоспасский монастырь" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Заиконоспасский монастырь</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-16" tabindex="-1">
+  <h2 class="monastery-title">16. Николо-Перервинский монастырь</h2>
+  <p class="meta"><strong>Адрес:</strong> Шоссейная улица, 82 &nbsp;|&nbsp; <strong>Стиль:</strong> барокко, классицизм</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Известен с 1623 года; название — от «перерыва» (излучины) Москвы-реки в районе Печатников. В XVII–XIX веках ансамбль перестраивался; Иверский собор построен в 1904–1908 годах. В советское время монастырь не закрывался — богослужения продолжались; здания использовались под жильё и учреждения, но храмы действовали. Статус монастыря восстановлен в 1990-х.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Один из немногих монастырей, не прекращавших богослужения в советское время; архитектура XVII–XIX веков; Иверский собор — памятник начала XX века; расположен в районе Печатники.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>Собор Иверской иконы Божией Матери</li><li>Никольский собор</li><li>Колокольня</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Упоминается с 1623 года.</li><li>В годы гонений сохранял богослужебную жизнь.</li><li>Иверский собор построен в 1904–1908 годах.</li><li>Расположен в районе Печатники.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Nikolo-Perervinsky Monastery (Николо-Перервинский монастырь in Russian) is the southernmost historical monastery of Moscow. It is dedicated to Saint Nicholas the Miracle-Worker. It is situated at south of the district of Pechatniki between the Moscow river and the Lublino railroad classification yard.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <img src="images/moscow_monasteries/nikolo_perervinsky_1.jpg" alt="Николо-Перервинский монастырь — фото 1" class="monastery-img" />
+    <img src="images/moscow_monasteries/nikolo_perervinsky_2.jpg" alt="Николо-Перервинский монастырь — фото 2" class="monastery-img" />
+    <img src="images/moscow_monasteries/nikolo_perervinsky_3.jpg" alt="Николо-Перервинский монастырь — фото 3" class="monastery-img" />
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6917,55.6833&z=16&l=map&size=380,200&pt=37.6917,55.6833,pm2rdm" alt="Карта: Николо-Перервинский монастырь" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Николо-Перервинский монастырь</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-17" tabindex="-1">
+  <h2 class="monastery-title">17. Иоанно-Предтеченский монастырь</h2>
+  <p class="meta"><strong>Адрес:</strong> Малый Ивановский переулок, 2 &nbsp;|&nbsp; <strong>Стиль:</strong> барокко</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Известен с XV века; находится в историческом районе Ивановская горка (один из семи холмов Москвы). В XVI–XIX веках ансамбль перестраивался; собор Усекновения главы Иоанна Предтечи, церковь Елисаветы. Закрыт в 1918 году; в зданиях — учреждения и жильё. Возрождён в 2000 году как женский ставропигиальный монастырь; в обители хранится частица мощей Иоанна Крестителя.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Расположен в историческом районе Ивановская горка; святыня — частица мощей Иоанна Крестителя; собор и церкви — памятники барокко и классицизма в центре Москвы.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>Собор Усекновения главы Иоанна Предтечи</li><li>Церковь Елисаветы</li><li>Часовня Иоанна Предтечи</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Упоминается в летописях с XV века.</li><li>Ивановская горка — один из семи холмов Москвы.</li><li>В монастыре хранится частица мощей Иоанна Предтечи.</li><li>Возрождён как женский в 2000 году.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">August 7 - Eastern Orthodox liturgical calendar - August 9 All fixed commemorations below are observed on August 21 by Eastern Orthodox Churches on the Old Calendar. For August 8, Orthodox Churches on the Old Calendar commemorate the Saints listed on July 26.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <img src="images/moscow_monasteries/ioanno_predtechensky_1.jpg" alt="Иоанно-Предтеченский монастырь — фото 1" class="monastery-img" />
+    <img src="images/moscow_monasteries/ioanno_predtechensky_2.jpg" alt="Иоанно-Предтеченский монастырь — фото 2" class="monastery-img" />
+    <img src="images/moscow_monasteries/ioanno_predtechensky_3.jpg" alt="Иоанно-Предтеченский монастырь — фото 3" class="monastery-img" />
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6353,55.7542&z=16&l=map&size=380,200&pt=37.6353,55.7542,pm2rdm" alt="Карта: Иоанно-Предтеченский монастырь" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Иоанно-Предтеченский монастырь</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-18" tabindex="-1">
+  <h2 class="monastery-title">18. Ново-Алексеевский монастырь</h2>
+  <p class="meta"><strong>Адрес:</strong> 2-й Красносельский переулок, 5 &nbsp;|&nbsp; <strong>Стиль:</strong> русско-византийский</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Старый Алексеевский монастырь стоял на Волхонке; в 1837 году его перенесли в Красное Село (ныне 2-й Красносельский пер.) в связи со строительством храма Христа Спасителя на прежнем месте. Построены храмы Всех Святых, Крестовоздвиженский, Алексия человека Божия. Закрыт в 1926 году; в зданиях — учреждения, детский дом. Возрождён в 2013 году как женский монастырь.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">История связана с храмом Христа Спасителя — перенесён с места его строительства; памятник русско-византийского стиля XIX века; ансамбль в Красносельском переулке.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>Храм Всех Святых</li><li>Крестовоздвиженский храм</li><li>Храм Алексия, человека Божия</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Перенесён в 1837 году при строительстве храма Христа Спасителя.</li><li>Старый Алексеевский монастырь стоял на Волхонке.</li><li>Возрождён в 2013 году как женский.</li><li>Крестовоздвиженский храм построен в 1853 году.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">В 2013 году возобновлен с названием Алексеевский ставропигиальный женский монастырь.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <img src="images/moscow_monasteries/novo_alekseevsky_1.jpg" alt="Ново-Алексеевский монастырь — фото 1" class="monastery-img" />
+    <img src="images/moscow_monasteries/novo_alekseevsky_2.jpg" alt="Ново-Алексеевский монастырь — фото 2" class="monastery-img" />
+    <img src="images/moscow_monasteries/novo_alekseevsky_3.jpg" alt="Ново-Алексеевский монастырь — фото 3" class="monastery-img" />
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6686,55.7803&z=16&l=map&size=380,200&pt=37.6686,55.7803,pm2rdm" alt="Карта: Ново-Алексеевский монастырь" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Ново-Алексеевский монастырь</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-19" tabindex="-1">
+  <h2 class="monastery-title">19. Бого<span class="old-russian-ya">я</span>вленский монастырь</h2>
+  <p class="meta"><strong>Адрес:</strong> Богоявленский переулок, 2 &nbsp;|&nbsp; <strong>Стиль:</strong> барокко</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Основан в 1296 году князем Даниилом Московским; второй по древности монастырь Москвы после Данилова. По преданию, здесь принял постриг юный Варфоломей (будущий преподобный Сергий Радонежский). Богоявленский собор построен в стиле нарышкинского барокко (XVII в.). В 1929 году закрыт; в зданиях — учреждения. Собор возвращён Церкви в 1991 году; монастырь как обитель не возрождён, действует приход при соборе.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Второй по древности монастырь Москвы; собор — памятник нарышкинского барокко; по преданию — место пострига Сергия Радонежского; расположен в Богоявленском переулке у Никольской.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>Богоявленский собор</li><li>Колокольня</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Основан в 1296 году, второй после Данилова.</li><li>В монастыре постригся Сергий Радонежский (по преданию).</li><li>Собор в стиле нарышкинского барокко (XVII в.).</li><li>Монастырь не возрождён, действует только собор.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">This is a list of tallest Orthodox church buildings in the world, all those higher than 70 metres (230 feet). Traditionally, an Orthodox church building is crowned by one or several domes with Orthodox crosses on the top of each. The overall height of the temple is measured by the highest point of the cross above the main temple. The number of domes on individual churches often serve a symbolic purpose.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <img src="images/moscow_monasteries/bogoyavlensky_1.jpg" alt="Богоявленский монастырь — фото 1" class="monastery-img" />
+    <img src="images/moscow_monasteries/bogoyavlensky_2.jpg" alt="Богоявленский монастырь — фото 2" class="monastery-img" />
+    <img src="images/moscow_monasteries/bogoyavlensky_3.jpg" alt="Богоявленский монастырь — фото 3" class="monastery-img" />
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6214,55.7561&z=16&l=map&size=380,200&pt=37.6214,55.7561,pm2rdm" alt="Карта: Богоявленский монастырь" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Богоявленский монастырь</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-20" tabindex="-1">
+  <h2 class="monastery-title">20. Знаменский монастырь</h2>
+  <p class="meta"><strong>Адрес:</strong> ул. Варварка, 8–12 &nbsp;|&nbsp; <strong>Стиль:</strong> барокко</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Основан в 1631 году на месте усадьбы бояр Романовых в Зарядье; родовая святыня династии, икона Знамения почиталась как покровительница рода. Знаменский собор построен в 1679–1684 годах в стиле барокко. Закрыт в 1923 году; в зданиях — жильё и учреждения. Собор возвращён Церкви в 1992 году; монастырь как обитель не возрождён, действует приход при соборе.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Родовой монастырь Романовых; на Варварке в Зарядье; икона Знамения — родовая святыня династии; собор — памятник московского барокко XVII века.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>Знаменский собор</li><li>Корпуса палат</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Основан на территории усадьбы Романовых (1631).</li><li>Икона Знамения — родовая святыня Романовых.</li><li>Собор построен в 1679–1684 годах.</li><li>Монастырь не возрождён, действует собор.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Cathedral of Our Lady of the &quot;Omen&quot; (Russian: Кафедральный собор иконы Божией Матери &quot;Знамение&quot;; romanization: Kafedral'nyy sobor ikony Bozhiyey Materi &quot;Znameniye&quot;) is an Orthodox church in Kursk, Russia. It is the main cathedral of the Kursk Metropolitanate and Eparchy of the Russian Orthodox Church. It is located in the historical center of the city, on the territory of the Cathedral of Our Lady of the &quot;Omen&quot;.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <img src="images/moscow_monasteries/znamensky_1.jpg" alt="Знаменский монастырь — фото 1" class="monastery-img" />
+    <img src="images/moscow_monasteries/znamensky_2.jpg" alt="Знаменский монастырь — фото 2" class="monastery-img" />
+    <img src="images/moscow_monasteries/znamensky_3.jpg" alt="Знаменский монастырь — фото 3" class="monastery-img" />
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6286,55.7525&z=16&l=map&size=380,200&pt=37.6286,55.7525,pm2rdm" alt="Карта: Знаменский монастырь" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Знаменский монастырь</p>
+  </div>
+</section>
+
+
+<section class="qa-section" id="qa" tabindex="-1">
+  <h2>Вопросы и ответы по фактам</h2>
+  <div class="qa-item"><p class="question"><strong>Вопрос 1. Какой собор является древнейшим из сохранившихся храмов Москвы?</strong></p><p class="answer">Ответ: Спасский собор Спасо-Андроникова монастыря (1420–1427).</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 2. В каком монастыре жил и скончался иконописец Андрей Рублёв?</strong></p><p class="answer">Ответ: В Спасо-Андрониковом монастыре (скончался в 1430 году).</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 3. К какому архитектурному стилю относят Высоко-Петровский монастырь?</strong></p><p class="answer">Ответ: К нарышкинскому барокко (перестроен на средства Нарышкиных).</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 4. В каком году и кем основан Донской монастырь?</strong></p><p class="answer">Ответ: В 1591 году царём Фёдором Иоанновичем в память избавления от набега Казы-Гирея.</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 5. Какой монастырь входит в список Всемирного наследия ЮНЕСКО?</strong></p><p class="answer">Ответ: Новодевичий монастырь (с 2004 года).</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 6. Где находятся мощи блаженной Матроны Московской?</strong></p><p class="answer">Ответ: В Покровском монастыре на Таганской улице (с 1998 года).</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 7. Чем знаменит Крутицкий терем?</strong></p><p class="answer">Ответ: Уникальным изразцовым убранством (поливные изразцы, 1693–1694).</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 8. Какой монастырь считается первым в Москве?</strong></p><p class="answer">Ответ: Данилов монастырь (конец XIII века, основан князем Даниилом Московским).</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 9. Какой монастырь является первым женским в Москве?</strong></p><p class="answer">Ответ: Зачатьевский монастырь (основан в 1360 году).</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 10. В каком году Новоспасский монастырь был перенесён на Крутицкий холм?</strong></p><p class="answer">Ответ: В 1490 году при великом князе Иване III.</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 11. Почему был основан Сретенский монастырь?</strong></p><p class="answer">Ответ: В память избавления Москвы от нашествия Тамерлана в 1395 году (встреча Владимирской иконы на Кучковом поле).</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 12. Кто основал Марфо-Мариинскую обитель и в каком году?</strong></p><p class="answer">Ответ: Великая княгиня Елизавета Фёдоровна в 1909 году.</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 13. Какой храм Симонова монастыря был разрушен в 1930 году?</strong></p><p class="answer">Ответ: Успенский собор (1405 года постройки).</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 14. Кем и когда основан Богородице-Рождественский монастырь?</strong></p><p class="answer">Ответ: Княгиней Марией Серпуховской в 1386 году.</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 15. Где располагалась Славяно-греко-латинская академия?</strong></p><p class="answer">Ответ: В Заиконоспасском монастыре на Никольской (1687).</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 16. Какой монастырь не закрывался в советское время?</strong></p><p class="answer">Ответ: Николо-Перервинский (сохранял богослужебную жизнь).</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 17. Почему Ново-Алексеевский монастырь перенесли с Волхонки?</strong></p><p class="answer">Ответ: В 1837 году при строительстве храма Христа Спасителя.</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 18. Какой монастырь второй по древности в Москве?</strong></p><p class="answer">Ответ: Богоявленский (основан в 1296 году).</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 19. На территории какой усадьбы основан Знаменский монастырь?</strong></p><p class="answer">Ответ: На территории усадьбы Романовых (1631).</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 20. Почему Донской монастырь назван Донским?</strong></p><p class="answer">Ответ: В память Донской иконы Божией Матери, с которой молились перед битвой; монастырь основан на месте походной церкви после отражения набега Казы-Гирея в 1591 году.</p></div>
+</section>
+
+</body>
+</html>

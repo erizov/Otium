@@ -30,6 +30,7 @@ if sys.platform == "win32":
             except (AttributeError, OSError):
                 pass
 
+from scripts.guide_constants import BUILD_GUIDES, GUIDE_EXPECTED_COUNTS
 from scripts.image_utils import image_content_hash
 
 MIN_IMAGE_BYTES = 500
@@ -49,30 +50,6 @@ BANNED_IMAGE_BASENAMES = frozenset([
     "novo_alekseevsky_4.jpg", "simonov_3.jpg", "zachatievsky_1.jpg",
     "zachatievsky_4.jpg", "vysoko_petrovsky_3.jpg", "vysoko_petrovsky_4.jpg",
 ])
-
-
-GUIDE_EXPECTED_COUNTS: dict[str, int] = {
-    "test_e2e": 5,
-    "monasteries": 20,
-    "places_of_worship": 66,
-    "parks": 28,
-    "museums": 32,
-    "palaces": 24,
-    "buildings": 42,
-    "sculptures": 61,
-    "places": 30,
-    "metro": 37,
-    "theaters": 14,
-    "viewpoints": 14,
-    "bridges": 12,
-    "squares": 12,
-    "markets": 8,
-    "libraries": 7,
-    "railway_stations": 9,
-    "cemeteries": 9,
-    "landmarks": 14,
-    "cafes": 11,
-}
 
 
 def _load_guide_config(guide: str) -> None:
@@ -746,7 +723,7 @@ def _section_place(
     story: str | None = None,
     images_max: int | None = None,
 ) -> str:
-    """HTML block for one place: photos + map. If images_max=3, use 2x2 grid."""
+    """HTML block for one place: 2x2 grid (3 images + map)."""
     name = _title_html(m["name"])
     name_alt = _escape(m["name"])
     address = _escape(m["address"])
@@ -760,44 +737,33 @@ def _section_place(
     )
     facts_html = "".join("<li>{}</li>".format(_escape(f)) for f in m["facts"])
 
-    limit = images_max if images_max is not None else IMAGES_PER_PLACE
+    # Always render 2x2: 3 images + map (ignore 4th image if present)
+    limit = OPT_IMAGES_PER_PLACE
     unique_rels = _unique_images_for_place(
         m["images"], output_dir, max_images=limit
     )
-    if not unique_rels:
-        images_block = ""
-    elif images_max == OPT_IMAGES_PER_PLACE:
-        # 2x2 grid: row1 = img1, img2; row2 = img3, map
-        cells = []
-        for i, img_rel in enumerate(unique_rels):
+    # 2x2 grid: row1 = img1, img2; row2 = img3, map (2 per row)
+    cells: list[str] = []
+    for i in range(OPT_IMAGES_PER_PLACE):
+        if i < len(unique_rels):
+            img_rel = unique_rels[i]
             cells.append(
-                '    <img src="{}" alt="{} — фото {}" class="monastery-img" />'
-                .format(
-                    img_rel.replace("\\", "/"), name_alt, i + 1,
-                )
+                '    <div class="grid-cell">'
+                '<img src="{}" alt="{} — фото {}" class="monastery-img" />'
+                "</div>".format(img_rel.replace("\\", "/"), name_alt, i + 1)
             )
-        cells.append(
-            '    <div class="map-cell">'
-            '<img src="{}" alt="Карта: {}" class="map-img" />'
-            '<p class="map-caption">Схема · Яндекс.Карты</p></div>'
-            .format(map_url, name_alt)
-        )
-        images_block = (
-            '  <div class="visual-grid-2x2">\n{}\n  </div>\n'
-            '  <p class="images-caption">Фото: {}</p>'
-        ).format("\n".join(cells), name_alt)
-    else:
-        imgs_html_parts = [
-            '<img src="{}" alt="{} — фото {}" class="monastery-img" />'.format(
-                img_rel.replace("\\", "/"), name_alt, i + 1,
-            )
-            for i, img_rel in enumerate(unique_rels)
-        ]
-        imgs_html = "\n".join(imgs_html_parts)
-        images_block = (
-            "  <div class=\"images-row\">\n    {}\n  </div>\n"
-            "  <p class=\"images-caption\">Фото: {}</p>"
-        ).format(imgs_html, name_alt)
+        else:
+            cells.append('    <div class="grid-cell"></div>')
+    cells.append(
+        '    <div class="map-cell">'
+        '<img src="{}" alt="Карта: {}" class="map-img" />'
+        '<p class="map-caption">Схема · Яндекс.Карты</p></div>'
+        .format(map_url, name_alt)
+    )
+    images_block = (
+        '  <div class="visual-grid-2x2">\n{}\n  </div>\n'
+        '  <p class="images-caption">Фото: {}</p>'
+    ).format("\n".join(cells), name_alt)
     title_class = "monastery-title"
 
     story_block = ""
@@ -807,20 +773,7 @@ def _section_place(
             '  <p class="body-text story-text">{}</p>\n'
         ).format(_escape(story.strip()))
 
-    if images_max == OPT_IMAGES_PER_PLACE:
-        visual_inner = images_block
-    else:
-        visual_inner = (
-            "{images_block}\n"
-            "  <div class=\"map-block\">\n"
-            "    <img src=\"{map_url}\" alt=\"Карта: {name_alt}\" "
-            "class=\"map-img\" />\n"
-            "    <p class=\"map-caption\">Схема расположения · "
-            "Яндекс.Карты</p>\n  </div>"
-        ).format(
-            images_block=images_block,
-            map_url=map_url, name_alt=name_alt,
-        )
+    visual_inner = images_block
 
     return """
 <section class="monastery" id="monastery-{num}" tabindex="-1">
@@ -931,22 +884,23 @@ def build_html(
         text-align: justify; max-width: 38em; margin-left: auto;
         margin-right: auto; color: #1c1b19;
         font-family: "Source Serif 4", Georgia, serif; }
-      .monastery { display: block; page-break-before: always;
-                    break-before: page; padding: 1.5em 0 0; }
-      .monastery:first-of-type { page-break-before: auto; break-before: auto; }
+      .monastery { display: block; page-break-inside: avoid;
+                    break-inside: avoid; padding: 1.5em 0 0; }
       .monastery:last-of-type { padding-bottom: 0.5em; }
-      .visual-block { margin: 0.8em 0 0; page-break-after: always; }
-      .monastery:last-of-type .visual-block { page-break-after: auto; }
+      .visual-block { margin: 0.8em 0 0; page-break-after: auto; }
+      body > *:last-child { page-break-after: auto !important; }
       .images-row { display: flex; gap: 10px; margin: 1em; flex-wrap: wrap; }
       .monastery-img { flex: 1 1 200px; max-width: 100%; height: 150px;
                         object-fit: cover; }
       .visual-grid-2x2 { display: grid; grid-template-columns: 1fr 1fr;
         grid-template-rows: auto auto; gap: 10px; margin: 1em; }
-      .visual-grid-2x2 .monastery-img,
+      .visual-grid-2x2 .grid-cell,
+      .visual-grid-2x2 .map-cell { min-width: 0; }
+      .visual-grid-2x2 .grid-cell .monastery-img,
       .visual-grid-2x2 .map-cell .map-img { width: 100%; height: 150px;
-        object-fit: cover; }
-      .visual-grid-2x2 .map-cell { display: flex; flex-direction: column; }
+        object-fit: cover; display: block; }
       .visual-grid-2x2 .map-cell .map-img { max-height: 160px; height: auto; }
+      .visual-grid-2x2 .map-cell { display: flex; flex-direction: column; }
       .visual-grid-2x2 .map-caption { font-size: 8pt; color: #6b635b;
         margin: 0.25em 0 0; font-family: Inter, sans-serif; }
       .images-caption { font-size: 8pt; color: #6b635b; margin: 0.25em 1em 0;
@@ -956,7 +910,8 @@ def build_html(
         font-family: Inter, sans-serif; }
       .map-img { max-width: 100%; height: auto; max-height: 160px; }
       .qa-section { margin-top: 2em; page-break-before: always;
-                     break-before: page; padding-top: 1.5em; }
+                     break-before: page; padding-top: 1.5em;
+                     page-break-inside: avoid; }
       .qa-item { margin-bottom: 0.6em; font-size: 9pt; color: #1c1b19; }
       .question { margin-bottom: 0.1em; color: #1c1b19; }
       .answer { margin-left: 0.5em; color: #2c2a28;
@@ -987,8 +942,7 @@ def build_html(
         html, body { color: #1c1b19 !important; background: #faf8f5 !important; }
         .block-label { color: #6b7b8a !important; }
         .meta { color: #6b635b !important; }
-        .monastery { page-break-before: always; break-before: page; }
-        .monastery:first-of-type { page-break-before: auto; break-before: auto; }
+        .monastery { page-break-inside: avoid; break-inside: avoid; }
         .edit-toolbar, .img-del, .add-img-btn, .img-count { display: none !important; }
       }
     """
@@ -1035,8 +989,15 @@ def build_html(
         ]
         images_max = OPT_IMAGES_PER_PLACE
     else:
-        placed = list(PLACES)
-        images_max = None
+        # Skip items with no images (use existing only; no empty blocks)
+        placed = [
+            m for m in PLACES
+            if len(_unique_images_for_place(
+                m["images"], output_dir,
+                max_images=IMAGES_PER_PLACE,
+            )) >= 1
+        ]
+        images_max = OPT_IMAGES_PER_PLACE
     for num, m in enumerate(placed, 1):
         story = stories.get(m.get("name") or "")
         sections.append(
@@ -1181,11 +1142,17 @@ def _pdf_via_playwright(
     port = _free_port()
     thread = server = None
     try:
+        from functools import partial
         from http.server import HTTPServer
         from http.server import SimpleHTTPRequestHandler
-        from functools import partial
+
+        class _QuietHTTPHandler(SimpleHTTPRequestHandler):
+            """Serve local files for PDF render; no request logging (not downloads)."""
+            def log_message(self, format: str, *args: object) -> None:
+                pass
+
         handler = partial(
-            SimpleHTTPRequestHandler,
+            _QuietHTTPHandler,
             directory=str(output_dir.resolve()),
         )
         server = HTTPServer(("127.0.0.1", port), handler)
@@ -1250,6 +1217,81 @@ def _pdf_via_playwright(
     finally:
         if server is not None:
             server.shutdown()
+
+
+def _is_pdf_page_empty(page) -> bool:
+    """
+    True if page has no meaningful content (only header/footer).
+    Used to drop empty pages from the PDF.
+    """
+    try:
+        text = (page.extract_text() or "").strip()
+    except Exception:
+        return False
+    if not text:
+        return True
+    lines = [ln.strip() for ln in text.splitlines() if ln.strip()]
+
+    def _is_page_number_line(s: str) -> bool:
+        return bool(re.match(r"^\d+\s*/\s*\d+$", s))
+
+    def _is_header_line(s: str) -> bool:
+        # Header text from build_full_guide (Russian + chapter title)
+        return s.startswith("Полный путеводитель по Москве")
+
+    filtered = [
+        ln for ln in lines
+        if not _is_page_number_line(ln) and not _is_header_line(ln)
+    ]
+    if not filtered:
+        return True
+
+    remaining = "\n".join(filtered).strip()
+    if not remaining:
+        return True
+
+    # Map caption only (happens when map/image failed to render on that page)
+    map_captions = {
+        "Схема расположения · Яндекс.Карты",
+        "Схема · Яндекс.Карты",
+    }
+    if remaining in map_captions:
+        return True
+
+    # Only punctuation / page numbers left
+    if len(remaining) < 60 and re.match(r"^[\d\s\/\-\.·]+$", remaining):
+        return True
+    return False
+
+
+def _strip_empty_pdf_pages(
+    pdf_path: Path,
+    metadata: Optional[dict] = None,
+) -> None:
+    """
+    Remove pages that have only header/footer (no body text or images).
+    Overwrites the file. If metadata is provided, it is applied to the writer.
+    """
+    try:
+        from pypdf import PdfReader, PdfWriter
+    except ImportError:
+        return
+    try:
+        reader = PdfReader(str(pdf_path))
+        writer = PdfWriter()
+        kept = 0
+        for p in reader.pages:
+            if _is_pdf_page_empty(p):
+                continue
+            writer.add_page(p)
+            kept += 1
+        if kept < len(reader.pages):
+            if metadata:
+                writer.add_metadata(metadata)
+            with open(pdf_path, "wb") as f:
+                writer.write(f)
+    except Exception as e:
+        print("  Strip empty pages: {}.".format(e), file=sys.stderr)
 
 
 def _strip_pdf_metadata(pdf_path: Path) -> None:
@@ -1510,7 +1552,20 @@ def _run_one_guide(args, stats_out: Optional[dict] = None) -> None:
     elif cleaned != current:
         html_path.write_text(cleaned, encoding="utf-8")
 
-    if _pdf_via_playwright(html_path, pdf_path):
+    _footer = (
+        "<div style='font-size:9px;text-align:center;width:100%'>"
+        "<span class='pageNumber'></span> / <span class='totalPages'></span>"
+        "</div>"
+    )
+    _header = "<div style='font-size:9px;width:100%'></div>"
+    if _pdf_via_playwright(
+        html_path,
+        pdf_path,
+        display_header_footer=True,
+        footer_template=_footer,
+        header_template=_header,
+    ):
+        _strip_empty_pdf_pages(pdf_path)
         _strip_pdf_metadata(pdf_path)
         print("Written:", pdf_path)
     else:
@@ -1637,13 +1692,6 @@ def main() -> None:
     )
     args = parser.parse_args()
     args.ai_identify = not getattr(args, "no_ai_identify", False)
-
-    BUILD_GUIDES = [
-        "monasteries", "places_of_worship", "parks", "museums", "palaces",
-        "buildings", "sculptures", "places", "squares", "metro", "theaters",
-        "viewpoints", "bridges", "markets", "libraries", "railway_stations",
-        "cemeteries", "landmarks", "cafes",
-    ]
 
     if getattr(args, "all_guides", False):
         args.build_with_available = True

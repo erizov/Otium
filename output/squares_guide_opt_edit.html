@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Площади Москвы</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;0,600&amp;family=EB+Garamond:ital,wght@0,400;0,600&amp;family=Pochaevsk&amp;family=Source+Serif+4:ital,wght@0,400;0,600&amp;family=Inter:wght@400;500;600&amp;display=swap&amp;subset=latin,cyrillic"
+        rel="stylesheet" />
+  <style>
+      @page { size: A4; margin: 2cm 1.5cm 1.5cm 1.8cm; }
+      *, html, body { -webkit-print-color-adjust: exact;
+                      print-color-adjust: exact; }
+      html { background-color: #faf8f5; }
+      html, body { margin: 0; padding: 0; font-family: "Source Serif 4",
+        Georgia, "Times New Roman", serif;
+        font-size: 10pt; line-height: 1.45; color: #1c1b19;
+        background-color: #faf8f5; }
+      body { color: #1c1b19 !important; background-color: #faf8f5 !important; }
+      h1 { font-family: "Source Serif 4", Georgia, serif;
+           font-size: 18pt; text-align: center; margin: 0 0 0.5em;
+           color: #1c1b19 !important; }
+      h2 { font-family: "Source Serif 4", Georgia, serif;
+           color: #1c1b19 !important; }
+      h2.monastery-title { font-family: Pochaevsk, Georgia, serif;
+           font-size: 17pt; margin: 1.2em 0 0.4em 0.3em;
+           border-bottom: 1px solid #8b7355; padding-bottom: 0.25em;
+           color: #2c2a28 !important; }
+      .old-russian-ya { font-family: "Source Serif 4", Georgia, serif; }
+      .meta, .block-label { font-family: Inter, "IBM Plex Sans", sans-serif;
+          font-size: 8.5pt; letter-spacing: 0.02em; }
+      .meta { margin: 0.2em 0 0.6em 0.3em; color: #6b635b !important; }
+      .block-label { margin: 0.6em 0 0.15em 0.3em; text-transform: uppercase;
+                     font-weight: 600; color: #6b7b8a !important; }
+      .body-text { margin: 0 0 0.4em 0.3em; text-align: left; max-width: 42em;
+                   color: #1c1b19; font-family: "Source Serif 4", Georgia, serif; }
+      .story-text { font-style: italic; color: #4a5568; }
+      ul, li, p { color: #1c1b19; font-family: "Source Serif 4", Georgia, serif; }
+      .intro-block { page-break-after: always; padding: 2.5em 1em 0 1.2em;
+                     background-color: #faf8f5; }
+      .intro-block .otium-brand { font-family: Inter, sans-serif;
+        font-size: 8pt; letter-spacing: 0.2em; color: #6b635b !important;
+        margin-bottom: 0.3em; }
+      .intro-block .otium-title { font-family: Pochaevsk, Georgia, serif;
+        font-size: 20pt; font-weight: 600; text-align: center;
+        margin: 0.2em 0 0.1em; color: #1a1a1a !important; }
+      .intro-block .otium-subtitle { font-family: Pochaevsk, Georgia, serif;
+        font-size: 11pt; text-align: center; color: #6b635b !important;
+        font-style: italic; margin-bottom: 1em; }
+      .intro-block p { margin: 0.4em 0; font-size: 9.5pt; line-height: 1.5;
+        text-align: justify; max-width: 38em; margin-left: auto;
+        margin-right: auto; color: #1c1b19;
+        font-family: "Source Serif 4", Georgia, serif; }
+      .monastery { display: block; page-break-inside: avoid;
+                    break-inside: avoid; padding: 1.5em 0 0; }
+      .monastery:last-of-type { padding-bottom: 0.5em; }
+      .visual-block { margin: 0.8em 0 0; page-break-after: auto; }
+      body > *:last-child { page-break-after: auto !important; }
+      .images-row { display: flex; gap: 10px; margin: 1em; flex-wrap: wrap; }
+      .monastery-img { flex: 1 1 200px; max-width: 100%; height: 150px;
+                        object-fit: cover; }
+      .visual-grid-2x2 { display: grid; grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto; gap: 10px; margin: 1em; }
+      .visual-grid-2x2 .grid-cell,
+      .visual-grid-2x2 .map-cell { min-width: 0; }
+      .visual-grid-2x2 .grid-cell .monastery-img,
+      .visual-grid-2x2 .map-cell .map-img { width: 100%; height: 150px;
+        object-fit: cover; display: block; }
+      .visual-grid-2x2 .map-cell .map-img { max-height: 160px; height: auto; }
+      .visual-grid-2x2 .map-cell { display: flex; flex-direction: column; }
+      .visual-grid-2x2 .map-caption { font-size: 8pt; color: #6b635b;
+        margin: 0.25em 0 0; font-family: Inter, sans-serif; }
+      .images-caption { font-size: 8pt; color: #6b635b; margin: 0.25em 1em 0;
+        font-family: Inter, sans-serif; }
+      .map-block { margin: 1em; }
+      .map-caption { font-size: 8pt; color: #6b635b; margin: 0.25em 0 0;
+        font-family: Inter, sans-serif; }
+      .map-img { max-width: 100%; height: auto; max-height: 160px; }
+      .qa-section { margin-top: 2em; page-break-before: always;
+                     break-before: page; padding-top: 1.5em;
+                     page-break-inside: avoid; }
+      .qa-item { margin-bottom: 0.6em; font-size: 9pt; color: #1c1b19; }
+      .question { margin-bottom: 0.1em; color: #1c1b19; }
+      .answer { margin-left: 0.5em; color: #2c2a28;
+        font-family: "Source Serif 4", Georgia, serif; }
+      ul { margin: 0.2em 0 0.4em 0.3em; padding-left: 1.2em; color: #1c1b19; }
+      p { margin: 0.2em 0; color: #1c1b19; }
+      .map-block { background: transparent; }
+      .edit-toolbar { position: fixed; top: 8px; right: 8px; z-index: 9999; }
+      .edit-toolbar button { font-family: Inter, sans-serif; font-size: 11px;
+        padding: 6px 10px; background: #2c2a28; color: #faf8f5; border: none;
+        border-radius: 4px; cursor: pointer; }
+      .edit-toolbar button:hover { background: #4a5568; }
+      .img-wrap { position: relative; display: inline-block; }
+      .img-wrap.img-dragging { opacity: 0.6; }
+      .img-wrap.img-drop-target { outline: 2px dashed #8b7355; outline-offset: 2px; }
+      .img-del { position: absolute; top: 4px; right: 4px; width: 22px; height: 22px;
+        font-size: 16px; line-height: 20px; text-align: center; background: rgba(0,0,0,.6);
+        color: #fff; border: none; border-radius: 3px; cursor: pointer; }
+      .img-del:hover { background: #c53030; }
+      .add-img-btn { font-family: Inter, sans-serif; font-size: 10px;
+        padding: 4px 8px; margin: 4px 0 0 4px; background: #e0ddd8; color: #2c2a28;
+        border: 1px solid #8b7355; border-radius: 3px; cursor: pointer; }
+      .add-img-btn:hover { background: #d0cdc8; }
+      .add-img-btn.hidden { display: none; }
+      .img-count { font-size: 9pt; color: #6b635b; margin-left: 0.25em;
+        font-family: Inter, sans-serif; }
+      @media print {
+        html, body { color: #1c1b19 !important; background: #faf8f5 !important; }
+        .block-label { color: #6b7b8a !important; }
+        .meta { color: #6b635b !important; }
+        .monastery { page-break-inside: avoid; break-inside: avoid; }
+        .edit-toolbar, .img-del, .add-img-btn, .img-count { display: none !important; }
+      }
+    </style>
+</head>
+<body>
+
+    <div class="intro-block">
+    <p class="otium-brand">OTIUM / Sacred</p>
+    <h1 class="otium-title">Площади Москвы</h1>
+    <p class="otium-subtitle">12 площадей</p>
+    <p>OTIUM — это практика осмысленного досуга.
+    В античной традиции otium означало не отдых от труда, а время, в котором
+    человек возвращается к взгляду, памяти и мышлению. Это время без
+    утилитарной цели, без спешки, без требования результата.</p>
+    <p>Мы создаём маршруты не для «посещения», а для пребывания.
+    Не для потребления культуры, а для внимательного присутствия в ней.</p>
+    <p>OTIUM работает с пространствами, где время уплотняется:
+    архитектурой, сакральными местами, кино, памятью, ландшафтом.
+    Мы не стремимся охватить всё и не обещаем «лучшее».
+    Мы отбираем немногое — то, что выдерживает тишину и повторный взгляд.</p>
+    <p>OTIUM — это не гид и не сервис.
+    Это приглашение к прогулке без обязательств.
+    К маршруту, который можно прервать.
+    К месту, где можно задержаться.</p>
+    <p>OTIUM существует для тех, кто хочет смотреть медленно.</p>
+    </div>
+    
+
+<section class="monastery" id="monastery-1" tabindex="-1">
+  <h2 class="monastery-title">1. Манежна<span class="old-russian-ya">я</span> площадь</h2>
+  <p class="meta"><strong>Адрес:</strong> Манежная пл. &nbsp;|&nbsp; <strong>Стиль:</strong> исторический центр</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Образована в 1930-х при сносе Охотного ряда. Под площадью — торговый центр «Охотный Ряд» и Музей археологии Москвы. Фонтаны и скульптуры; связь с Красной площадью и Александровским садом.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Площадь между Кремлём и Тверской; подземный музей; место гуляний.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>торговый центр «Охотный Ряд»</li><li>фонтаны</li><li>подземный музей</li><li>вид на Кремль</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Под площадью — Музей археологии Москвы.</li><li>Фонтаны — 1997 год.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Manezhnaya (Russian: Манежная площадь, IPA: [mɐˈnʲeʐnəjə ˈploɕːɪtʲ], lit. 'Manege Square') is a pedestrian open space in the Tverskoy District, at the heart of Moscow. It is bound by the Hotel Moskva to the east, the State Historical Museum and the Alexander Garden to the south, the Moscow Manege to the west, and the 18th-century headquarters of the Moscow State University to the north.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_squares/manezhnaya_1.jpg" alt="Манежная площадь — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_squares/manezhnaya_2.jpg" alt="Манежная площадь — фото 2" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_squares/manezhnaya_3.jpg" alt="Манежная площадь — фото 3" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6175,55.7544&z=16&l=map&size=380,200&pt=37.6175,55.7544,pm2rdm" alt="Карта: Манежная площадь" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Манежная площадь</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-2" tabindex="-1">
+  <h2 class="monastery-title">2. Тверска<span class="old-russian-ya">я</span> площадь</h2>
+  <p class="meta"><strong>Адрес:</strong> Тверская пл. &nbsp;|&nbsp; <strong>Стиль:</strong> административный центр</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Историческая площадь на Тверской; здесь стоял памятник генералу Скобелеву (1912–1918). С 1954 — памятник Юрию Долгорукому. Здание Мэрии Москвы (бывш. Моссовет) — классицизм.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Площадь у Мэрии; памятник основателю Москвы; начало Тверской.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>памятник Юрию Долгорукому</li><li>Мэрия Москвы</li><li>Тверская улица</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Памятник Долгорукому — 1954 год.</li><li>Мэрия — бывш. Моссовет.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">The monorail with six stations was also closed in June 2025.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_squares/tverskaya_square_1.jpg" alt="Тверская площадь — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_squares/tverskaya_square_2.jpg" alt="Тверская площадь — фото 2" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_squares/tverskaya_square_3.jpg" alt="Тверская площадь — фото 3" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6058,55.7647&z=16&l=map&size=380,200&pt=37.6058,55.7647,pm2rdm" alt="Карта: Тверская площадь" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Тверская площадь</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-3" tabindex="-1">
+  <h2 class="monastery-title">3. Пушкинска<span class="old-russian-ya">я</span> площадь</h2>
+  <p class="meta"><strong>Адрес:</strong> Пушкинская пл. &nbsp;|&nbsp; <strong>Стиль:</strong> культурный центр</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Центр площади — памятник А. С. Пушкину (1880, скульптор Опекушин). Здесь проходили митинги и гуляния. Кинотеатр «Пушкинский»; рядом — Страстной монастырь (не сохранился).</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Памятник Пушкину; культурный центр; место встреч.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>памятник Пушкину</li><li>кинотеатр «Пушкинский»</li><li>страстной монастырь</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Памятник перенесён с Тверского бульвара в 1950 году.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Historically, it was known as Strastnaya Square (Russian: Страстная площадь) before being renamed for Alexander Pushkin in 1937.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_squares/pushkinskaya_1.jpg" alt="Пушкинская площадь — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_squares/pushkinskaya_2.jpg" alt="Пушкинская площадь — фото 2" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_squares/pushkinskaya_3.jpg" alt="Пушкинская площадь — фото 3" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6053,55.7653&z=16&l=map&size=380,200&pt=37.6053,55.7653,pm2rdm" alt="Карта: Пушкинская площадь" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Пушкинская площадь</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-4" tabindex="-1">
+  <h2 class="monastery-title">4. Театральна<span class="old-russian-ya">я</span> площадь</h2>
+  <p class="meta"><strong>Адрес:</strong> Театральная пл. &nbsp;|&nbsp; <strong>Стиль:</strong> театральный центр</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Центр театральной Москвы. Большой театр (1825) и Малый театр (1824) — главные сцены страны. Фонтаны перед Большим; памятник Карлу Марксу. Историческое место парадов и праздников.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Театральный центр Москвы; Большой и Малый театры.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>Большой театр</li><li>Малый театр</li><li>фонтаны</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Большой театр — 1825 год.</li><li>Малый — «дом Островского».</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Theatre Square or Teatralnaya Square (Russian: Театральная площадь, Teatralnaya ploshchad), known as Sverdlov Square between 1919 and 1991, is a city square in the Tverskoy District of central Moscow, Russia. It is at the junction of Kuznetsky Bridge Street, Petrovka Street, and Theatre Drive (north-west of the latter; the square south-east of Theatre Drive is the separate Revolution Square).</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_squares/teatralnaya_1.jpg" alt="Театральная площадь — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_squares/teatralnaya_2.jpg" alt="Театральная площадь — фото 2" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_squares/teatralnaya_3.jpg" alt="Театральная площадь — фото 3" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6186,55.7602&z=16&l=map&size=380,200&pt=37.6186,55.7602,pm2rdm" alt="Карта: Театральная площадь" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Театральная площадь</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-5" tabindex="-1">
+  <h2 class="monastery-title">5. Луб<span class="old-russian-ya">я</span>нска<span class="old-russian-ya">я</span> площадь</h2>
+  <p class="meta"><strong>Адрес:</strong> Лубянская пл. &nbsp;|&nbsp; <strong>Стиль:</strong> исторический центр</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Название — от новгородской Лубяницы. С 1926 — площадь Дзержинского. Здание органов госбезопасности (бывш. ВЧК); памятник Дзержинскому демонтирован в 1991. Метро «Лубянка» — одна из первых станций.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Исторический центр; здание ФСБ; метро Лубянка.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>здание ФСБ</li><li>памятник Дзержинскому (демонтирован)</li><li>метро Лубянка</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Станция метро «Лубянка» — 1935 год.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Lubyanskaya Square (Russian: Лубянская площадь, Lubyanskaya ploshchad'), or simply Lubyanka in Moscow lies about 900 metres (980 yd) north-east of Red Square. History first records its name in 1480, when Grand Prince Ivan III of Moscow, who had conquered Novgorod in 1471, settled many Novgorodians in the area.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_squares/lubyanka_1.jpg" alt="Лубянская площадь — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_squares/lubyanka_2.jpg" alt="Лубянская площадь — фото 2" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_squares/lubyanka_3.jpg" alt="Лубянская площадь — фото 3" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6253,55.7597&z=16&l=map&size=380,200&pt=37.6253,55.7597,pm2rdm" alt="Карта: Лубянская площадь" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Лубянская площадь</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-6" tabindex="-1">
+  <h2 class="monastery-title">6. Слав<span class="old-russian-ya">я</span>нска<span class="old-russian-ya">я</span> площадь</h2>
+  <p class="meta"><strong>Адрес:</strong> Славянская пл. &nbsp;|&nbsp; <strong>Стиль:</strong> исторический центр</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Площадь у Китай-города; памятник святым Кириллу и Мефодию (1992). Рядом — Варварка, Зарядье. Название — в честь славянской письменности.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Памятник создателям азбуки; ворота в Китай-город.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>памятник Кириллу и Мефодию</li><li>Китай-город</li><li>Варварка</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Памятник Кириллу и Мефодию — 1992 год.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Slavyanskaya Square (Russian: Славянская площадь) is a square in central Moscow, renamed in 1924–1990 as northern side of Nogina Square (Площадь Ногина); the southern side of Soviet-era Nogina Square reverted to its old name Varvarka Gates Square (Площадь Варварских Ворот). These two square separates central Kitai-gorod from eastward Tagansky District.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_squares/slavyanskaya_1.jpg" alt="Славянская площадь — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_squares/slavyanskaya_2.jpg" alt="Славянская площадь — фото 2" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_squares/slavyanskaya_3.jpg" alt="Славянская площадь — фото 3" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6286,55.7522&z=16&l=map&size=380,200&pt=37.6286,55.7522,pm2rdm" alt="Карта: Славянская площадь" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Славянская площадь</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-7" tabindex="-1">
+  <h2 class="monastery-title">7. Сухаревска<span class="old-russian-ya">я</span> площадь</h2>
+  <p class="meta"><strong>Адрес:</strong> Сухаревская пл. &nbsp;|&nbsp; <strong>Стиль:</strong> транспортный узел</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Название — от Сухаревой башни (1695–1934), школы навигации. Площадь на Садовом кольце; крупный транспортный узел. Рынок «Сухаревский» — историческое место торговли.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Транспортный узел на Садовом кольце; историческое место.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>Сухарева башня (не сохранилась)</li><li>Садовое кольцо</li><li>рынок</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Сухарева башня снесена в 1934 году.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">The monorail with six stations was also closed in June 2025.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_squares/sukharevskaya_1.jpg" alt="Сухаревская площадь — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_squares/sukharevskaya_2.jpg" alt="Сухаревская площадь — фото 2" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_squares/sukharevskaya_3.jpg" alt="Сухаревская площадь — фото 3" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6322,55.7722&z=16&l=map&size=380,200&pt=37.6322,55.7722,pm2rdm" alt="Карта: Сухаревская площадь" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Сухаревская площадь</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-8" tabindex="-1">
+  <h2 class="monastery-title">8. Калужска<span class="old-russian-ya">я</span> площадь</h2>
+  <p class="meta"><strong>Адрес:</strong> Калужская пл. &nbsp;|&nbsp; <strong>Стиль:</strong> исторический район</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Площадь на Садовом кольце в районе Якиманка. Название — от Калужской дороги. Храм Иоанна Воина (XVIII в.) — памятник барокко. Транспортный узел; связь с югом Москвы.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Площадь на Садовом кольце; храм Иоанна Воина.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>Якиманка</li><li>храм Иоанна Воина</li><li>Садовое кольцо</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Храм Иоанна Воина — 1717 год.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">The monorail with six stations was also closed in June 2025.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_squares/kaluzhskaya_1.jpg" alt="Калужская площадь — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_squares/kaluzhskaya_2.jpg" alt="Калужская площадь — фото 2" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_squares/kaluzhskaya_3.jpg" alt="Калужская площадь — фото 3" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6178,55.7372&z=16&l=map&size=380,200&pt=37.6178,55.7372,pm2rdm" alt="Карта: Калужская площадь" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Калужская площадь</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-9" tabindex="-1">
+  <h2 class="monastery-title">9. Площадь Революции</h2>
+  <p class="meta"><strong>Адрес:</strong> пл. Революции &nbsp;|&nbsp; <strong>Стиль:</strong> исторический центр</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Площадь у здания Исторического музея; станция метро «Площадь Революции» (1938) — знаменита бронзовыми скульптурами в вестибюле. Связь Красной площади с Манежной.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Станция метро со скульптурами; связь с Красной площадью.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>метро «Площадь Революции»</li><li>скульптуры в вестибюле</li><li>Кремль</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Станция метро — 1938 год.</li><li>Скульптуры — 20 штук.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Revolution Square (Russian: Площадь Революции, romanized: Ploshchad Revolyutsii), known as Resurrection Square (Russian: Воскресенская площадь, romanized: Voskresenskaya ploshchad) until 1918, is a square located in the center of Moscow, in Tverskoy District, northwest of Red Square.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_squares/revolution_square_1.jpg" alt="Площадь Революции — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_squares/revolution_square_2.jpg" alt="Площадь Революции — фото 2" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_squares/revolution_square_3.jpg" alt="Площадь Революции — фото 3" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6228,55.7564&z=16&l=map&size=380,200&pt=37.6228,55.7564,pm2rdm" alt="Карта: Площадь Революции" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Площадь Революции</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-10" tabindex="-1">
+  <h2 class="monastery-title">10. Арбатска<span class="old-russian-ya">я</span> площадь</h2>
+  <p class="meta"><strong>Адрес:</strong> Арбатская пл. &nbsp;|&nbsp; <strong>Стиль:</strong> транспортный узел</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Площадь у входа на Старый Арбат; несколько станций метро. Театр Вахтангова; кинотеатр «Художественный». Транспортный узел между центром и западом Москвы.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Ворота на Арбат; транспортный узел.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>станции метро</li><li>Вахтанговский театр</li><li>Арбат</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Станции «Арбатская» — две линии.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Arbatskaya Square or Arbat Square (Russian: Арба́тская пло́щадь) is one of the oldest squares of Moscow, located on the junction of Gogolevsky Boulevard, Znamenka Street and Arbat Gates Square (in 1925–1993 – part of Arbatskaya Square). The square is home to the Arbatskaya metro station, on Filyovskaya Line.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_squares/arbatskaya_square_1.jpg" alt="Арбатская площадь — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_squares/arbatskaya_square_2.jpg" alt="Арбатская площадь — фото 2" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_squares/arbatskaya_square_3.jpg" alt="Арбатская площадь — фото 3" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6003,55.7522&z=16&l=map&size=380,200&pt=37.6003,55.7522,pm2rdm" alt="Карта: Арбатская площадь" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Арбатская площадь</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-11" tabindex="-1">
+  <h2 class="monastery-title">11. Триумфальна<span class="old-russian-ya">я</span> площадь</h2>
+  <p class="meta"><strong>Адрес:</strong> Триумфальная пл. &nbsp;|&nbsp; <strong>Стиль:</strong> культурный центр</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Площадь у Садового кольца; памятник В. В. Маяковскому (1958). Рядом — театр «Сатирикон», Концертный зал им. Чайковского. Историческое место митингов и выступлений.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Памятник Маяковскому; театральный и концертный центр.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>памятник Маяковскому</li><li>театр «Сатирикон»</li><li>Концертный зал им. Чайковского</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Памятник Маяковскому — 1958 год.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Triumfalnaya Square (Russian: Триумфальная площадь, romanized: Triumfalnaya ploshchad; formerly Mayakovsky Square, colloquially Mayakovka) is a public square in the Tverskoy District of the Central Administrative Okrug of Moscow. It is located in the Garden Ring between the Big Garden street, 1st Brest street and 2nd Brest street, 1st Tverskaya Yamskaya street, Armory alley, Building Arc and Tverskaya Street.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_squares/triumfalnaya_1.jpg" alt="Триумфальная площадь — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_squares/triumfalnaya_2.jpg" alt="Триумфальная площадь — фото 2" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_squares/triumfalnaya_3.jpg" alt="Триумфальная площадь — фото 3" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.5956,55.7736&z=16&l=map&size=380,200&pt=37.5956,55.7736,pm2rdm" alt="Карта: Триумфальная площадь" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Триумфальная площадь</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-12" tabindex="-1">
+  <h2 class="monastery-title">12. Рижска<span class="old-russian-ya">я</span> площадь</h2>
+  <p class="meta"><strong>Адрес:</strong> Рижская пл. &nbsp;|&nbsp; <strong>Стиль:</strong> транспортный узел</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Площадь у Рижского вокзала; станция метро «Рижская» (1958). Рядом — ВДНХ, Ростокинский акведук. Транспортный узел на севере Москвы; отправная точка поездов в Ригу.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Транспортный узел на севере; Рижский вокзал; связь с ВДНХ.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>станция метро «Рижская»</li><li>Рижский вокзал</li><li>ВДНХ</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Рижский вокзал — с 1864 года.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">The monorail with six stations was also closed in June 2025.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_squares/rizhskaya_square_1.jpg" alt="Рижская площадь — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_squares/rizhskaya_square_2.jpg" alt="Рижская площадь — фото 2" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_squares/rizhskaya_square_3.jpg" alt="Рижская площадь — фото 3" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6336,55.7936&z=16&l=map&size=380,200&pt=37.6336,55.7936,pm2rdm" alt="Карта: Рижская площадь" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Рижская площадь</p>
+  </div>
+</section>
+
+
+<section class="qa-section" id="qa" tabindex="-1">
+  <h2>Вопросы и ответы по фактам</h2>
+  <div class="qa-item"><p class="question"><strong>Вопрос 1. Какая площадь находится между Кремлём и Тверской?</strong></p><p class="answer">Ответ: Манежная площадь — под ней торговый центр «Охотный Ряд».</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 2. Где стоит памятник Юрию Долгорукому?</strong></p><p class="answer">Ответ: На Тверской площади у здания Мэрии Москвы (1954).</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 3. На какой площади памятник Пушкину?</strong></p><p class="answer">Ответ: Пушкинская площадь — памятник перенесён с Тверского бульвара в 1950.</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 4. Где находятся Большой и Малый театры?</strong></p><p class="answer">Ответ: На Театральной площади — центр театральной Москвы.</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 5. Какая площадь названа в честь славянской письменности?</strong></p><p class="answer">Ответ: Славянская площадь — памятник Кириллу и Мефодию (1992).</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 6. Где была Сухарева башня?</strong></p><p class="answer">Ответ: На Сухаревской площади (снесена в 1934).</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 7. Какая станция метро знаменита бронзовыми скульптурами?</strong></p><p class="answer">Ответ: «Площадь Революции» — 20 скульптур в вестибюле (1938).</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 8. Где площадь у входа на Старый Арбат?</strong></p><p class="answer">Ответ: Арбатская площадь — транспортный узел, театр Вахтангова.</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 9. Какая площадь на Садовом кольце в Якиманке?</strong></p><p class="answer">Ответ: Калужская площадь — рядом храм Иоанна Воина (1717).</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 10. Какую площадь переименовали из площади Дзержинского?</strong></p><p class="answer">Ответ: Лубянская площадь — памятник Дзержинскому демонтирован в 1991.</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 11. Где стоит памятник Маяковскому?</strong></p><p class="answer">Ответ: На Триумфальной площади (1958); рядом театр «Сатирикон».</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 12. Какая площадь находится у Рижского вокзала?</strong></p><p class="answer">Ответ: Рижская площадь — рядом ВДНХ и Ростокинский акведук.</p></div>
+</section>
+
+<script>
+(function(){
+  var MAX_IMAGES_PER_ROW = 4;
+  window._deletedImagePaths = window._deletedImagePaths || [];
+  function recordDeleted(src) {
+    if (typeof src !== 'string') return;
+    var s = src.split('?')[0].replace(/\\/g, '/');
+    var idx = s.indexOf('images/');
+    if (idx === 0) window._deletedImagePaths.push(s);
+    else if (idx > 0) window._deletedImagePaths.push(s.substring(idx));
+  }
+  function initEditable() {
+    var sel = '.intro-block p,.intro-block h1,.monastery .monastery-title,.monastery .meta,' +
+      '.monastery .body-text,.monastery .story-text,.qa-section p,.qa-section h2,' +
+      '.monastery ul li';
+    document.querySelectorAll(sel).forEach(function(el){ el.contentEditable = 'true'; });
+  }
+  function setupImages() {
+    document.querySelectorAll('.images-row').forEach(function(row){
+      var imgs = row.querySelectorAll('.monastery-img');
+      imgs.forEach(function(img){
+        if (img.closest('.img-wrap')) return;
+        var wrap = document.createElement('span');
+        wrap.className = 'img-wrap';
+        wrap.draggable = true;
+        wrap.title = 'Drag to reorder';
+        img.parentNode.insertBefore(wrap, img);
+        wrap.appendChild(img);
+        var delBtn = document.createElement('button');
+        delBtn.className = 'img-del';
+        delBtn.type = 'button';
+        delBtn.textContent = '×';
+        delBtn.title = 'Delete image';
+        delBtn.onclick = function(){ recordDeleted(img.src); wrap.remove(); updateAddBtn(row); };
+        wrap.appendChild(delBtn);
+        wrap.ondragstart = function(e){ e.dataTransfer.setData('text/plain',''); e.dataTransfer.effectAllowed = 'move'; window._dragSrc = wrap; wrap.classList.add('img-dragging'); };
+        wrap.ondragend = function(){ wrap.classList.remove('img-dragging'); };
+        wrap.ondragover = function(e){ e.preventDefault(); e.dataTransfer.dropEffect = 'move'; if (e.currentTarget !== window._dragSrc) e.currentTarget.classList.add('img-drop-target'); };
+        wrap.ondragleave = function(e){ e.currentTarget.classList.remove('img-drop-target'); };
+        wrap.ondrop = function(e){ e.preventDefault(); e.currentTarget.classList.remove('img-drop-target'); var src = window._dragSrc; if (src && src !== e.currentTarget) { row.insertBefore(src, e.currentTarget); updateAddBtn(row); } };
+      });
+      var addBtn = row.querySelector('.add-img-btn');
+      if (!addBtn) {
+        addBtn = document.createElement('button');
+        addBtn.className = 'add-img-btn';
+        addBtn.type = 'button';
+        addBtn.appendChild(document.createTextNode('+ Add image '));
+        var countSpan = document.createElement('span');
+        countSpan.className = 'img-count';
+        addBtn.appendChild(countSpan);
+        addBtn.onclick = function(){ var inp = document.createElement('input'); inp.type = 'file'; inp.accept = 'image/*'; inp.multiple = true; inp.onchange = function(){ [].slice.call(inp.files).forEach(function(file){ if (row.querySelectorAll('.monastery-img').length >= MAX_IMAGES_PER_ROW) return; var r = new FileReader(); r.onload = function(){ var i = document.createElement('img'); i.className = 'monastery-img'; i.src = r.result; i.alt = ''; var w = document.createElement('span'); w.className = 'img-wrap'; w.draggable = true; w.title = 'Drag to reorder'; var dB = document.createElement('button'); dB.className = 'img-del'; dB.type = 'button'; dB.textContent = '×'; dB.onclick = function(){ w.remove(); updateAddBtn(row); }; w.appendChild(i); w.appendChild(dB); w.ondragstart = function(e){ e.dataTransfer.setData('text/plain',''); e.dataTransfer.effectAllowed = 'move'; window._dragSrc = w; w.classList.add('img-dragging'); }; w.ondragend = function(){ w.classList.remove('img-dragging'); }; w.ondragover = function(e){ e.preventDefault(); e.dataTransfer.dropEffect = 'move'; if (e.currentTarget !== window._dragSrc) e.currentTarget.classList.add('img-drop-target'); }; w.ondragleave = function(e){ e.currentTarget.classList.remove('img-drop-target'); }; w.ondrop = function(e){ e.preventDefault(); e.currentTarget.classList.remove('img-drop-target'); var src = window._dragSrc; if (src && src !== e.currentTarget) { row.insertBefore(src, e.currentTarget); updateAddBtn(row); } }; row.insertBefore(w, addBtn); updateAddBtn(row); }; r.readAsDataURL(file); }); }; inp.click(); };
+        row.appendChild(addBtn);
+      }
+      updateAddBtn(row);
+    });
+  }
+  function updateAddBtn(row) {
+    var n = row.querySelectorAll('.monastery-img').length;
+    var addBtn = row.querySelector('.add-img-btn');
+    var countSpan = addBtn ? addBtn.querySelector('.img-count') : null;
+    if (countSpan) { countSpan.textContent = n + ' из 4'; }
+    if (addBtn) { addBtn.classList.toggle('hidden', n >= MAX_IMAGES_PER_ROW); }
+  }
+  function addExportButton() {
+    var bar = document.createElement('div');
+    bar.className = 'edit-toolbar';
+    var btn = document.createElement('button');
+    btn.textContent = 'Export HTML';
+    btn.onclick = function() {
+      var root = document.documentElement.cloneNode(true);
+      root.querySelectorAll('.edit-toolbar').forEach(function(el){ el.remove(); });
+      root.querySelectorAll('.img-del, .add-img-btn').forEach(function(el){ el.remove(); });
+      root.querySelectorAll('.img-wrap').forEach(function(wrap){
+        var img = wrap.querySelector('.monastery-img');
+        if (img) { wrap.parentNode.insertBefore(img, wrap); }
+        wrap.remove();
+      });
+      var deleted = window._deletedImagePaths || [];
+      if (deleted.length) {
+        var script = root.ownerDocument.createElement('script');
+        script.type = 'application/json';
+        script.id = 'otium-deleted-images';
+        script.textContent = JSON.stringify(deleted);
+        root.querySelector('body').appendChild(script);
+      }
+      var html = '<!DOCTYPE html>\n' + root.outerHTML;
+      var blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = document.title.replace(/[^a-z0-9]/gi, '_') + '.html';
+      a.click();
+      URL.revokeObjectURL(a.href);
+    };
+    bar.appendChild(btn);
+    document.body.appendChild(bar);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run);
+  else run();
+  function run() {
+    initEditable();
+    setupImages();
+    addExportButton();
+  }
+})();
+</script>
+</body>
+</html>

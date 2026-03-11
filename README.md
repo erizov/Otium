@@ -109,9 +109,31 @@ python scripts/build_pdf.py --all-guides --optimized --build-only --build-with-a
 
 # Сводный путеводитель по Москве (оптимизированный)
 python scripts/build_full_guide.py --optimized
+
+# Только объединить уже собранные гиды в один PDF (без пересборки гидов и без загрузки)
+# Требуется: в output/ уже есть *_guide.html (или *_guide_opt.html при --optimized)
+python scripts/build_full_guide.py --combined-only
+python scripts/build_full_guide.py --combined-only --optimized
 ```
 
-Результат: **\*_guide_opt.html** / **\*_guide_opt.pdf** и **Moscow_Complete_Guide_opt.html** / **Moscow_Complete_Guide_opt.pdf**. Подробнее: **docs/OPTIMIZED_GUIDES.md**.
+Результат: **\*_guide_opt.html** / **\*_guide_opt.pdf** и **Moscow_Complete_Guide_opt.html** / **Moscow_Complete_Guide_opt.pdf**. Подробнее: **docs/OPTIMIZED_GUIDES.md**. Флаг **--combined-only** несовместим с **--download-images**.
+
+#### Обёртки: сборка всех гидов в оптимизированном виде (3 фото + карта)
+
+| Скрипт | Назначение |
+|--------|------------|
+| **build_all_guides_opt.py** | Сборка всех гидов по имеющимся изображениям: 3 фото + карта на объект, без проверки дубликатов и без сжатия. |
+| **build_all_guides_opt_dedup.py** | То же + проверка дубликатов (dedup), сжатие изображений >500 KB (оригиналы в **large_orig/**), затем сборка. |
+
+```bash
+# Только сборка (без загрузки, без dedup, без сжатия)
+python scripts/build_all_guides_opt.py
+
+# Dedup → сжатие больших файлов → сборка
+python scripts/build_all_guides_opt_dedup.py
+```
+
+В обоих случаях создаются **output/\<guide\>_guide_opt.html** и **output/\<guide\>_guide_opt.pdf** для каждого гида.
 
 ### User workflow — редактирование и пересборка PDF
 

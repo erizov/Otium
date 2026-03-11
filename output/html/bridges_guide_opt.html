@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Мосты Москвы</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;0,600&amp;family=EB+Garamond:ital,wght@0,400;0,600&amp;family=Pochaevsk&amp;family=Source+Serif+4:ital,wght@0,400;0,600&amp;family=Inter:wght@400;500;600&amp;display=swap&amp;subset=latin,cyrillic"
+        rel="stylesheet" />
+  <style>
+      @page { size: A4; margin: 2cm 1.5cm 1.5cm 1.8cm; }
+      *, html, body { -webkit-print-color-adjust: exact;
+                      print-color-adjust: exact; }
+      html { background-color: #faf8f5; }
+      html, body { margin: 0; padding: 0; font-family: "Source Serif 4",
+        Georgia, "Times New Roman", serif;
+        font-size: 10pt; line-height: 1.45; color: #1c1b19;
+        background-color: #faf8f5; }
+      body { color: #1c1b19 !important; background-color: #faf8f5 !important; }
+      h1 { font-family: "Source Serif 4", Georgia, serif;
+           font-size: 18pt; text-align: center; margin: 0 0 0.5em;
+           color: #1c1b19 !important; }
+      h2 { font-family: "Source Serif 4", Georgia, serif;
+           color: #1c1b19 !important; }
+      h2.monastery-title { font-family: Pochaevsk, Georgia, serif;
+           font-size: 17pt; margin: 1.2em 0 0.4em 0.3em;
+           border-bottom: 1px solid #8b7355; padding-bottom: 0.25em;
+           color: #2c2a28 !important; }
+      .old-russian-ya { font-family: "Source Serif 4", Georgia, serif; }
+      .meta, .block-label { font-family: Inter, "IBM Plex Sans", sans-serif;
+          font-size: 8.5pt; letter-spacing: 0.02em; }
+      .meta { margin: 0.2em 0 0.6em 0.3em; color: #6b635b !important; }
+      .block-label { margin: 0.6em 0 0.15em 0.3em; text-transform: uppercase;
+                     font-weight: 600; color: #6b7b8a !important; }
+      .body-text { margin: 0 0 0.4em 0.3em; text-align: left; max-width: 42em;
+                   color: #1c1b19; font-family: "Source Serif 4", Georgia, serif; }
+      .story-text { font-style: italic; color: #4a5568; }
+      ul, li, p { color: #1c1b19; font-family: "Source Serif 4", Georgia, serif; }
+      .intro-block { page-break-after: always; padding: 2.5em 1em 0 1.2em;
+                     background-color: #faf8f5; }
+      .intro-block .otium-brand { font-family: Inter, sans-serif;
+        font-size: 8pt; letter-spacing: 0.2em; color: #6b635b !important;
+        margin-bottom: 0.3em; }
+      .intro-block .otium-title { font-family: Pochaevsk, Georgia, serif;
+        font-size: 20pt; font-weight: 600; text-align: center;
+        margin: 0.2em 0 0.1em; color: #1a1a1a !important; }
+      .intro-block .otium-subtitle { font-family: Pochaevsk, Georgia, serif;
+        font-size: 11pt; text-align: center; color: #6b635b !important;
+        font-style: italic; margin-bottom: 1em; }
+      .intro-block p { margin: 0.4em 0; font-size: 9.5pt; line-height: 1.5;
+        text-align: justify; max-width: 38em; margin-left: auto;
+        margin-right: auto; color: #1c1b19;
+        font-family: "Source Serif 4", Georgia, serif; }
+      .monastery { display: block; page-break-before: always;
+                    break-before: page; padding: 1.5em 0 0; }
+      .monastery:first-of-type { page-break-before: auto; break-before: auto; }
+      .monastery:last-of-type { padding-bottom: 0.5em; }
+      .visual-block { margin: 0.8em 0 0; page-break-after: always; }
+      .monastery:last-of-type .visual-block { page-break-after: auto; }
+      .images-row { display: flex; gap: 10px; margin: 1em; flex-wrap: wrap; }
+      .monastery-img { flex: 1 1 200px; max-width: 100%; height: 150px;
+                        object-fit: cover; }
+      .visual-grid-2x2 { display: grid; grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto; gap: 10px; margin: 1em; }
+      .visual-grid-2x2 .monastery-img,
+      .visual-grid-2x2 .map-cell .map-img { width: 100%; height: 150px;
+        object-fit: cover; }
+      .visual-grid-2x2 .map-cell { display: flex; flex-direction: column; }
+      .visual-grid-2x2 .map-cell .map-img { max-height: 160px; height: auto; }
+      .visual-grid-2x2 .map-caption { font-size: 8pt; color: #6b635b;
+        margin: 0.25em 0 0; font-family: Inter, sans-serif; }
+      .images-caption { font-size: 8pt; color: #6b635b; margin: 0.25em 1em 0;
+        font-family: Inter, sans-serif; }
+      .map-block { margin: 1em; }
+      .map-caption { font-size: 8pt; color: #6b635b; margin: 0.25em 0 0;
+        font-family: Inter, sans-serif; }
+      .map-img { max-width: 100%; height: auto; max-height: 160px; }
+      .qa-section { margin-top: 2em; page-break-before: always;
+                     break-before: page; padding-top: 1.5em; }
+      .qa-item { margin-bottom: 0.6em; font-size: 9pt; color: #1c1b19; }
+      .question { margin-bottom: 0.1em; color: #1c1b19; }
+      .answer { margin-left: 0.5em; color: #2c2a28;
+        font-family: "Source Serif 4", Georgia, serif; }
+      ul { margin: 0.2em 0 0.4em 0.3em; padding-left: 1.2em; color: #1c1b19; }
+      p { margin: 0.2em 0; color: #1c1b19; }
+      .map-block { background: transparent; }
+      .edit-toolbar { position: fixed; top: 8px; right: 8px; z-index: 9999; }
+      .edit-toolbar button { font-family: Inter, sans-serif; font-size: 11px;
+        padding: 6px 10px; background: #2c2a28; color: #faf8f5; border: none;
+        border-radius: 4px; cursor: pointer; }
+      .edit-toolbar button:hover { background: #4a5568; }
+      .img-wrap { position: relative; display: inline-block; }
+      .img-wrap.img-dragging { opacity: 0.6; }
+      .img-wrap.img-drop-target { outline: 2px dashed #8b7355; outline-offset: 2px; }
+      .img-del { position: absolute; top: 4px; right: 4px; width: 22px; height: 22px;
+        font-size: 16px; line-height: 20px; text-align: center; background: rgba(0,0,0,.6);
+        color: #fff; border: none; border-radius: 3px; cursor: pointer; }
+      .img-del:hover { background: #c53030; }
+      .add-img-btn { font-family: Inter, sans-serif; font-size: 10px;
+        padding: 4px 8px; margin: 4px 0 0 4px; background: #e0ddd8; color: #2c2a28;
+        border: 1px solid #8b7355; border-radius: 3px; cursor: pointer; }
+      .add-img-btn:hover { background: #d0cdc8; }
+      .add-img-btn.hidden { display: none; }
+      .img-count { font-size: 9pt; color: #6b635b; margin-left: 0.25em;
+        font-family: Inter, sans-serif; }
+      @media print {
+        html, body { color: #1c1b19 !important; background: #faf8f5 !important; }
+        .block-label { color: #6b7b8a !important; }
+        .meta { color: #6b635b !important; }
+        .monastery { page-break-before: always; break-before: page; }
+        .monastery:first-of-type { page-break-before: auto; break-before: auto; }
+        .edit-toolbar, .img-del, .add-img-btn, .img-count { display: none !important; }
+      }
+    </style>
+</head>
+<body>
+
+    <div class="intro-block">
+    <p class="otium-brand">OTIUM / Sacred</p>
+    <h1 class="otium-title">Мосты Москвы</h1>
+    <p class="otium-subtitle">10 знаменитых мостов</p>
+    <p>OTIUM — это практика осмысленного досуга.
+    В античной традиции otium означало не отдых от труда, а время, в котором
+    человек возвращается к взгляду, памяти и мышлению. Это время без
+    утилитарной цели, без спешки, без требования результата.</p>
+    <p>Мы создаём маршруты не для «посещения», а для пребывания.
+    Не для потребления культуры, а для внимательного присутствия в ней.</p>
+    <p>OTIUM работает с пространствами, где время уплотняется:
+    архитектурой, сакральными местами, кино, памятью, ландшафтом.
+    Мы не стремимся охватить всё и не обещаем «лучшее».
+    Мы отбираем немногое — то, что выдерживает тишину и повторный взгляд.</p>
+    <p>OTIUM — это не гид и не сервис.
+    Это приглашение к прогулке без обязательств.
+    К маршруту, который можно прервать.
+    К месту, где можно задержаться.</p>
+    <p>OTIUM существует для тех, кто хочет смотреть медленно.</p>
+    </div>
+    
+
+<section class="monastery" id="monastery-1" tabindex="-1">
+  <h2 class="monastery-title">1. Крымский мост</h2>
+  <p class="meta"><strong>Адрес:</strong> Крымская наб. — Крымский Вал &nbsp;|&nbsp; <strong>Стиль:</strong> висячий мост</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Построен в 1938 году по проекту инженера Б. П. Константинова. Висячий мост через Москву-реку; длина 688 м. Реконструирован в 2001 году. Соединяет Заморьево с Парком Горького и Крымским Валом.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Один из узнаваемых мостов Москвы; вид на Парк Горького и центр города; пешеходная зона и проезд.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>пешеходный и автомобильный</li><li>вид на Парк Горького</li><li>подвесная конструкция</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Длина 688 м.</li><li>Реконструирован в 2001 году.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Built by the Russian Federation after its annexation of Crimea at the start of 2014, the bridge cost ₽227.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <img src="images/moscow_bridges/krymsky_1.jpg" alt="Крымский мост — фото 1" class="monastery-img" />
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6019,55.7331&z=16&l=map&size=380,200&pt=37.6019,55.7331,pm2rdm" alt="Карта: Крымский мост" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Крымский мост</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-2" tabindex="-1">
+  <h2 class="monastery-title">2. Большой Каменный мост</h2>
+  <p class="meta"><strong>Адрес:</strong> ул. Серафимовича — ул. Ленивка &nbsp;|&nbsp; <strong>Стиль:</strong> арковый мост</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Первый каменный мост на этом месте — Всехсвятский (1680-е). Нынешний построен в 1938 году по проекту В. Г. Шухова и др. Соединяет Боровицкую площадь с Берсеневской набережной; открывает вид на Кремль и Храм Христа Спасителя.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Главный мост с видом на Кремль; обязательная точка маршрута; символ центра Москвы.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>вид на Кремль</li><li>исторический центр</li><li>пешеходная зона</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Построен в 1938 году.</li><li>Вид на Кремль и Храм Христа Спасителя.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">This is a partial list of bridges of Moscow, Russia, including existing rail, road and foot bridges over Moskva River, Moscow Canal, Vodootvodny Canal within the MKAD beltway limits and the bridges over Yauza River downstream from Rostokino.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <img src="images/moscow_bridges/bolshoy_kamenny_1.jpg" alt="Большой Каменный мост — фото 1" class="monastery-img" />
+    <img src="images/moscow_bridges/bolshoy_kamenny_2.jpg" alt="Большой Каменный мост — фото 2" class="monastery-img" />
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6125,55.7478&z=16&l=map&size=380,200&pt=37.6125,55.7478,pm2rdm" alt="Карта: Большой Каменный мост" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Большой Каменный мост</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-3" tabindex="-1">
+  <h2 class="monastery-title">3. Патриарший мост</h2>
+  <p class="meta"><strong>Адрес:</strong> Берсеневская наб. — Пречистенская наб. &nbsp;|&nbsp; <strong>Стиль:</strong> пешеходный мост</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Построен в 2004 году по проекту М. Посохина. Пешеходный мост через Москву-реку и Водоотводный канал; соединяет Храм Христа Спасителя с Болотным островом и Якиманкой. Популярен у туристов и фотографов.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Пешеходный мост с лучшим видом на Храм Христа Спасителя; связка центра и Замоскворечья; место для прогулок и фото.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>пешеходный</li><li>вид на Храм Христа Спасителя</li><li>Храм Христа Спасителя</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Построен в 2004 году.</li><li>Пешеходный; проходит над рекой и каналом.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">This is a partial list of bridges of Moscow, Russia, including existing rail, road and foot bridges over Moskva River, Moscow Canal, Vodootvodny Canal within the MKAD beltway limits and the bridges over Yauza River downstream from Rostokino.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <img src="images/moscow_bridges/patriarshy_1.jpg" alt="Патриарший мост — фото 1" class="monastery-img" />
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6053,55.7442&z=16&l=map&size=380,200&pt=37.6053,55.7442,pm2rdm" alt="Карта: Патриарший мост" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Патриарший мост</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-4" tabindex="-1">
+  <h2 class="monastery-title">4. Пушкинский мост</h2>
+  <p class="meta"><strong>Адрес:</strong> Пушкинская наб. — Андреевская наб. &nbsp;|&nbsp; <strong>Стиль:</strong> пешеходный мост</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Построен в 1999–2000 годах. Пешеходный мост через Москву-реку; соединяет Нескучный сад с Парком Горького и Фрунзенской набережной. Вид на Воробьёвы горы, МГУ и Лужники.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Пешеходный мост с видом на МГУ и Воробьёвы горы; связка парков; популярен у бегунов и велосипедистов.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>пешеходный</li><li>вид на Воробьёвы горы</li><li>МГУ</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Построен в 2000 году.</li><li>Пешеходный и велосипедный.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">This is a partial list of bridges of Moscow, Russia, including existing rail, road and foot bridges over Moskva River, Moscow Canal, Vodootvodny Canal within the MKAD beltway limits and the bridges over Yauza River downstream from Rostokino.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <img src="images/moscow_bridges/pushkinsky_1.jpg" alt="Пушкинский мост — фото 1" class="monastery-img" />
+    <img src="images/moscow_bridges/pushkinsky_2.jpg" alt="Пушкинский мост — фото 2" class="monastery-img" />
+    <img src="images/moscow_bridges/pushkinsky_3.jpg" alt="Пушкинский мост — фото 3" class="monastery-img" />
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.5836,55.7192&z=16&l=map&size=380,200&pt=37.5836,55.7192,pm2rdm" alt="Карта: Пушкинский мост" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Пушкинский мост</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-5" tabindex="-1">
+  <h2 class="monastery-title">5. Живописный мост</h2>
+  <p class="meta"><strong>Адрес:</strong> Серебряный Бор — Крылатское &nbsp;|&nbsp; <strong>Стиль:</strong> вантовый мост</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Открыт в 2007 году. Вантовый мост с красной арочной опорой высотой 105 м; через Москву-реку в районе Серебряного Бора. На арке — смотровая площадка и ресторан (закрыт). Уникальная архитектура.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Самый узнаваемый современный мост Москвы; красная арка; вантовая конструкция; символ северо-запада города.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>красная арка</li><li>смотровая площадка</li><li>вантовая конструкция</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Высота арки 105 м.</li><li>Открыт в 2007 году.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">This is a partial list of bridges of Moscow, Russia, including existing rail, road and foot bridges over Moskva River, Moscow Canal, Vodootvodny Canal within the MKAD beltway limits and the bridges over Yauza River downstream from Rostokino.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <img src="images/moscow_bridges/zhivopisny_1.jpg" alt="Живописный мост — фото 1" class="monastery-img" />
+    <img src="images/moscow_bridges/zhivopisny_2.jpg" alt="Живописный мост — фото 2" class="monastery-img" />
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.4436,55.7786&z=16&l=map&size=380,200&pt=37.4436,55.7786,pm2rdm" alt="Карта: Живописный мост" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Живописный мост</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-6" tabindex="-1">
+  <h2 class="monastery-title">6. Бородинский мост</h2>
+  <p class="meta"><strong>Адрес:</strong> Кутузовский пр. — Большая Дорогомиловская ул. &nbsp;|&nbsp; <strong>Стиль:</strong> арковый мост</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Построен в 1868 году; перестроен в 1912 к 100-летию Бородинской битвы. Украшен скульптурами воинов и горельефами. Соединяет Кутузовский проспект с Дорогомиловом; рядом — Бородинская панорама.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Мемориальный мост в честь войны 1812 года; скульптуры и горельефы; связка с Бородинской панорамой.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>мемориал 1812 года</li><li>скульптуры</li><li>Кутузовский проспект</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Перестроен к 100-летию Бородинской битвы (1912).</li><li>Скульптуры воинов.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">This is a partial list of bridges of Moscow, Russia, including existing rail, road and foot bridges over Moskva River, Moscow Canal, Vodootvodny Canal within the MKAD beltway limits and the bridges over Yauza River downstream from Rostokino.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <img src="images/moscow_bridges/borodinsky_1.jpg" alt="Бородинский мост — фото 1" class="monastery-img" />
+    <img src="images/moscow_bridges/borodinsky_2.jpg" alt="Бородинский мост — фото 2" class="monastery-img" />
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.5319,55.7403&z=16&l=map&size=380,200&pt=37.5319,55.7403,pm2rdm" alt="Карта: Бородинский мост" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Бородинский мост</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-7" tabindex="-1">
+  <h2 class="monastery-title">7. Андреевский мост</h2>
+  <p class="meta"><strong>Адрес:</strong> Фрунзенская наб. — Пушкинская наб. &nbsp;|&nbsp; <strong>Стиль:</strong> пешеходный мост</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Построен в 1999–2000 годах как пешеходный мост. Соединяет Нескучный сад с Фрунзенской набережной. Вид на Воробьёвы горы, МГУ, Лужники. Популярен у бегунов и велосипедистов.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Пешеходный мост с видом на МГУ; связка парков; тихая зона.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>пешеходный</li><li>вид на МГУ</li><li>Лужники</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Построен в 2000 году.</li><li>Рядом — Пушкинский мост.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">This is a partial list of bridges of Moscow, Russia, including existing rail, road and foot bridges over Moskva River, Moscow Canal, Vodootvodny Canal within the MKAD beltway limits and the bridges over Yauza River downstream from Rostokino.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <img src="images/moscow_bridges/andreevsky_1.jpg" alt="Андреевский мост — фото 1" class="monastery-img" />
+    <img src="images/moscow_bridges/andreevsky_2.jpg" alt="Андреевский мост — фото 2" class="monastery-img" />
+    <img src="images/moscow_bridges/andreevsky_3.jpg" alt="Андреевский мост — фото 3" class="monastery-img" />
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.5836,55.7192&z=16&l=map&size=380,200&pt=37.5836,55.7192,pm2rdm" alt="Карта: Андреевский мост" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Андреевский мост</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-8" tabindex="-1">
+  <h2 class="monastery-title">8. Новоспасский мост</h2>
+  <p class="meta"><strong>Адрес:</strong> Кожевническая ул. — Дербеневская наб. &nbsp;|&nbsp; <strong>Стиль:</strong> арковый мост</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Построен в 1911 году; реконструирован в 2000-х. Соединяет Замоскворечье с районом Кожухово. Вид на Новоспасский монастырь и южную часть центра.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Мост с видом на Новоспасский монастырь; связка юга Москвы.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>вид на Новоспасский монастырь</li><li>Москва-река</li><li>юг центра</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Построен в 1911 году.</li><li>Реконструкция — 2000-е годы.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">This is a partial list of bridges of Moscow, Russia, including existing rail, road and foot bridges over Moskva River, Moscow Canal, Vodootvodny Canal within the MKAD beltway limits and the bridges over Yauza River downstream from Rostokino.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <img src="images/moscow_bridges/novospassky_bridge_1.jpg" alt="Новоспасский мост — фото 1" class="monastery-img" />
+    <img src="images/moscow_bridges/novospassky_bridge_2.jpg" alt="Новоспасский мост — фото 2" class="monastery-img" />
+    <img src="images/moscow_bridges/novospassky_bridge_3.jpg" alt="Новоспасский мост — фото 3" class="monastery-img" />
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6569,55.7311&z=16&l=map&size=380,200&pt=37.6569,55.7311,pm2rdm" alt="Карта: Новоспасский мост" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Новоспасский мост</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-9" tabindex="-1">
+  <h2 class="monastery-title">9. Лужниковский метромост</h2>
+  <p class="meta"><strong>Адрес:</strong> Лужники — Воробьёвы горы &nbsp;|&nbsp; <strong>Стиль:</strong> метромост</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Уникальный метромост (1959) — станция «Воробьёвы горы» расположена на мосту над Москвой-рекой. Вид на стадион «Лужники», МГУ, реку. Один из самых живописных участков Сокольнической линии.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Метро на мосту; вид на Лужники и МГУ; уникальная конструкция.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>метро на мосту</li><li>вид на стадион</li><li>Москва-река</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Станция на мосту — с 1959 года.</li><li>Реконструкция — 2000-е.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Мост, открытый 12 января 1959 года, быстро пришёл в негодность; в 1998—2002 годах он был фактически выстроен заново с использованием сохранившихся несущих арок и русловых опор.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <img src="images/moscow_bridges/luzhniki_metromost_1.jpg" alt="Лужниковский метромост — фото 1" class="monastery-img" />
+    <img src="images/moscow_bridges/luzhniki_metromost_2.jpg" alt="Лужниковский метромост — фото 2" class="monastery-img" />
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.5453,55.7108&z=16&l=map&size=380,200&pt=37.5453,55.7108,pm2rdm" alt="Карта: Лужниковский метромост" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Лужниковский метромост</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-10" tabindex="-1">
+  <h2 class="monastery-title">10. Багратионовский мост</h2>
+  <p class="meta"><strong>Адрес:</strong> Кутузовский пр. — ул. Барклая &nbsp;|&nbsp; <strong>Стиль:</strong> вантовый мост</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Построен в 1997 году; пешеходный вантовый мост через Москву-реку. Соединяет Кутузовский проспект с парком «Фили»; вид на Москва-Сити и деловой центр. Популярен у пешеходов и фотографов.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Пешеходный мост с видом на Москва-Сити; связка Кутузовского и Филей; вантовая конструкция.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>пешеходный</li><li>вид на Москва-Сити</li><li>Кутузовский проспект</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Построен в 1997 году.</li><li>Пешеходный и велосипедный.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Ко́рнево (до 1946 года — Ци́нтен, нем. Zinten) — посёлок в Багратионовском муниципальном округе Калининградской области России. До Великой Отечественной войны имел статус города. Расположен в нескольких километрах от государственной границы с Польшей. Посёлок стоит на небольшой реке Корневке.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <img src="images/moscow_bridges/bagration_2.jpg" alt="Багратионовский мост — фото 1" class="monastery-img" />
+    <img src="images/moscow_bridges/bagration_3.jpg" alt="Багратионовский мост — фото 2" class="monastery-img" />
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.5436,55.7442&z=16&l=map&size=380,200&pt=37.5436,55.7442,pm2rdm" alt="Карта: Багратионовский мост" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Багратионовский мост</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-11" tabindex="-1">
+  <h2 class="monastery-title">11. Мост Богдана Хмельницкого</h2>
+  <p class="meta"><strong>Адрес:</strong> Бережковская наб. — Киевская ул. &nbsp;|&nbsp; <strong>Стиль:</strong> арковый мост</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Построен в 2001 году. Автомобильный и пешеходный мост через Москву-реку; соединяет район Раменки с Дорогомиловом. Вид на Киевский вокзал и юго-западную часть города.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Мост с видом на Киевский вокзал; связка юго-запада Москвы.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>вид на Киевский вокзал</li><li>Москва-река</li><li>юго-запад</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Построен в 2001 году.</li><li>Длина — около 250 м.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">This is a partial list of bridges of Moscow, Russia, including existing rail, road and foot bridges over Moskva River, Moscow Canal, Vodootvodny Canal within the MKAD beltway limits and the bridges over Yauza River downstream from Rostokino.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <img src="images/moscow_bridges/khmelnitsky_1.jpg" alt="Мост Богдана Хмельницкого — фото 1" class="monastery-img" />
+    <img src="images/moscow_bridges/khmelnitsky_2.jpg" alt="Мост Богдана Хмельницкого — фото 2" class="monastery-img" />
+    <img src="images/moscow_bridges/khmelnitsky_3.jpg" alt="Мост Богдана Хмельницкого — фото 3" class="monastery-img" />
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.5653,55.7411&z=16&l=map&size=380,200&pt=37.5653,55.7411,pm2rdm" alt="Карта: Мост Богдана Хмельницкого" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Мост Богдана Хмельницкого</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-12" tabindex="-1">
+  <h2 class="monastery-title">12. Треть<span class="old-russian-ya">я</span>ковский мост</h2>
+  <p class="meta"><strong>Адрес:</strong> Лаврушинский пер. — Кадашёвская наб. &nbsp;|&nbsp; <strong>Стиль:</strong> пешеходный мост</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Пешеходный мост через Водоотводный канал (2000-е). Соединяет Лаврушинский переулок (Третьяковская галерея) с Кадашёвской набережной. Вид на храмы Замоскворечья и канал.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Пешеходный мост у Третьяковской галереи; Замоскворечье.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>Водоотводный канал</li><li>Третьяковская галерея</li><li>Замоскворечье</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Рядом — Третьяковская галерея.</li><li>Водоотводный канал.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Лужко́в мост (официальное название Третьяко́вский мост) — один из пешеходных мостов через Водоотводный канал. Соединяет Болотную площадь с Кадашёвской набережной. Со стороны Болотной площади мост выходит к памятнику И. Е. Репину, с противоположной стороны — к Лаврушинскому переулку.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <img src="images/moscow_bridges/tretyakovsky_bridge_1.jpg" alt="Третьяковский мост — фото 1" class="monastery-img" />
+    <img src="images/moscow_bridges/tretyakovsky_bridge_2.jpg" alt="Третьяковский мост — фото 2" class="monastery-img" />
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6211,55.7414&z=16&l=map&size=380,200&pt=37.6211,55.7414,pm2rdm" alt="Карта: Третьяковский мост" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Третьяковский мост</p>
+  </div>
+</section>
+
+
+<section class="qa-section" id="qa" tabindex="-1">
+  <h2>Вопросы и ответы по фактам</h2>
+  <div class="qa-item"><p class="question"><strong>Вопрос 1. Какой мост даёт лучший вид на Храм Христа Спасителя?</strong></p><p class="answer">Ответ: Патриарший мост (построен в 2004 году).</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 2. Какой мост Москвы имеет красную арочную опору?</strong></p><p class="answer">Ответ: Живописный мост (открыт в 2007, высота арки 105 м).</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 3. Какой мост соединяет Боровицкую площадь с Берсеневской набережной?</strong></p><p class="answer">Ответ: Большой Каменный мост (построен в 1938).</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 4. Какой мост украшен скульптурами в честь войны 1812 года?</strong></p><p class="answer">Ответ: Бородинский мост (перестроен к 100-летию битвы в 1912).</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 5. Какой висячий мост ведёт к Парку Горького?</strong></p><p class="answer">Ответ: Крымский мост (длина 688 м, реконструирован в 2001).</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 6. Какой пешеходный мост открывает вид на МГУ и Воробьёвы горы?</strong></p><p class="answer">Ответ: Пушкинский мост (построен в 2000 году).</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 7. Какой мост соединяет Нескучный сад с Фрунзенской набережной?</strong></p><p class="answer">Ответ: Андреевский мост (пешеходный, 2000 год).</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 8. С какого моста вид на Новоспасский монастырь?</strong></p><p class="answer">Ответ: Новоспасский мост (построен в 1911 году).</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 9. Где станция метро расположена на мосту над рекой?</strong></p><p class="answer">Ответ: Лужниковский метромост — станция «Воробьёвы горы» (1959).</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 10. Какой пешеходный мост даёт вид на Москва-Сити?</strong></p><p class="answer">Ответ: Багратионовский мост (1997) — вантовый, у Кутузовского проспекта.</p></div>
+</section>
+
+</body>
+</html>

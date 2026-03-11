@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Театры Москвы</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;0,600&amp;family=EB+Garamond:ital,wght@0,400;0,600&amp;family=Pochaevsk&amp;family=Source+Serif+4:ital,wght@0,400;0,600&amp;family=Inter:wght@400;500;600&amp;display=swap&amp;subset=latin,cyrillic"
+        rel="stylesheet" />
+  <style>
+      @page { size: A4; margin: 2cm 1.5cm 1.5cm 1.8cm; }
+      *, html, body { -webkit-print-color-adjust: exact;
+                      print-color-adjust: exact; }
+      html { background-color: #faf8f5; }
+      html, body { margin: 0; padding: 0; font-family: "Source Serif 4",
+        Georgia, "Times New Roman", serif;
+        font-size: 10pt; line-height: 1.45; color: #1c1b19;
+        background-color: #faf8f5; }
+      body { color: #1c1b19 !important; background-color: #faf8f5 !important; }
+      h1 { font-family: "Source Serif 4", Georgia, serif;
+           font-size: 18pt; text-align: center; margin: 0 0 0.5em;
+           color: #1c1b19 !important; }
+      h2 { font-family: "Source Serif 4", Georgia, serif;
+           color: #1c1b19 !important; }
+      h2.monastery-title { font-family: Pochaevsk, Georgia, serif;
+           font-size: 17pt; margin: 1.2em 0 0.4em 0.3em;
+           border-bottom: 1px solid #8b7355; padding-bottom: 0.25em;
+           color: #2c2a28 !important; }
+      .old-russian-ya { font-family: "Source Serif 4", Georgia, serif; }
+      .meta, .block-label { font-family: Inter, "IBM Plex Sans", sans-serif;
+          font-size: 8.5pt; letter-spacing: 0.02em; }
+      .meta { margin: 0.2em 0 0.6em 0.3em; color: #6b635b !important; }
+      .block-label { margin: 0.6em 0 0.15em 0.3em; text-transform: uppercase;
+                     font-weight: 600; color: #6b7b8a !important; }
+      .body-text { margin: 0 0 0.4em 0.3em; text-align: left; max-width: 42em;
+                   color: #1c1b19; font-family: "Source Serif 4", Georgia, serif; }
+      .story-text { font-style: italic; color: #4a5568; }
+      ul, li, p { color: #1c1b19; font-family: "Source Serif 4", Georgia, serif; }
+      .intro-block { page-break-after: always; padding: 2.5em 1em 0 1.2em;
+                     background-color: #faf8f5; }
+      .intro-block .otium-brand { font-family: Inter, sans-serif;
+        font-size: 8pt; letter-spacing: 0.2em; color: #6b635b !important;
+        margin-bottom: 0.3em; }
+      .intro-block .otium-title { font-family: Pochaevsk, Georgia, serif;
+        font-size: 20pt; font-weight: 600; text-align: center;
+        margin: 0.2em 0 0.1em; color: #1a1a1a !important; }
+      .intro-block .otium-subtitle { font-family: Pochaevsk, Georgia, serif;
+        font-size: 11pt; text-align: center; color: #6b635b !important;
+        font-style: italic; margin-bottom: 1em; }
+      .intro-block p { margin: 0.4em 0; font-size: 9.5pt; line-height: 1.5;
+        text-align: justify; max-width: 38em; margin-left: auto;
+        margin-right: auto; color: #1c1b19;
+        font-family: "Source Serif 4", Georgia, serif; }
+      .monastery { display: block; page-break-before: always;
+                    break-before: page; padding: 1.5em 0 0; }
+      .monastery:first-of-type { page-break-before: auto; break-before: auto; }
+      .monastery:last-of-type { padding-bottom: 0.5em; }
+      .visual-block { margin: 0.8em 0 0; page-break-after: always; }
+      .monastery:last-of-type .visual-block { page-break-after: auto; }
+      .images-row { display: flex; gap: 10px; margin: 1em; flex-wrap: wrap; }
+      .monastery-img { flex: 1 1 200px; max-width: 100%; height: 150px;
+                        object-fit: cover; }
+      .visual-grid-2x2 { display: grid; grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto; gap: 10px; margin: 1em; }
+      .visual-grid-2x2 .monastery-img,
+      .visual-grid-2x2 .map-cell .map-img { width: 100%; height: 150px;
+        object-fit: cover; }
+      .visual-grid-2x2 .map-cell { display: flex; flex-direction: column; }
+      .visual-grid-2x2 .map-cell .map-img { max-height: 160px; height: auto; }
+      .visual-grid-2x2 .map-caption { font-size: 8pt; color: #6b635b;
+        margin: 0.25em 0 0; font-family: Inter, sans-serif; }
+      .images-caption { font-size: 8pt; color: #6b635b; margin: 0.25em 1em 0;
+        font-family: Inter, sans-serif; }
+      .map-block { margin: 1em; }
+      .map-caption { font-size: 8pt; color: #6b635b; margin: 0.25em 0 0;
+        font-family: Inter, sans-serif; }
+      .map-img { max-width: 100%; height: auto; max-height: 160px; }
+      .qa-section { margin-top: 2em; page-break-before: always;
+                     break-before: page; padding-top: 1.5em; }
+      .qa-item { margin-bottom: 0.6em; font-size: 9pt; color: #1c1b19; }
+      .question { margin-bottom: 0.1em; color: #1c1b19; }
+      .answer { margin-left: 0.5em; color: #2c2a28;
+        font-family: "Source Serif 4", Georgia, serif; }
+      ul { margin: 0.2em 0 0.4em 0.3em; padding-left: 1.2em; color: #1c1b19; }
+      p { margin: 0.2em 0; color: #1c1b19; }
+      .map-block { background: transparent; }
+      .edit-toolbar { position: fixed; top: 8px; right: 8px; z-index: 9999; }
+      .edit-toolbar button { font-family: Inter, sans-serif; font-size: 11px;
+        padding: 6px 10px; background: #2c2a28; color: #faf8f5; border: none;
+        border-radius: 4px; cursor: pointer; }
+      .edit-toolbar button:hover { background: #4a5568; }
+      .img-wrap { position: relative; display: inline-block; }
+      .img-wrap.img-dragging { opacity: 0.6; }
+      .img-wrap.img-drop-target { outline: 2px dashed #8b7355; outline-offset: 2px; }
+      .img-del { position: absolute; top: 4px; right: 4px; width: 22px; height: 22px;
+        font-size: 16px; line-height: 20px; text-align: center; background: rgba(0,0,0,.6);
+        color: #fff; border: none; border-radius: 3px; cursor: pointer; }
+      .img-del:hover { background: #c53030; }
+      .add-img-btn { font-family: Inter, sans-serif; font-size: 10px;
+        padding: 4px 8px; margin: 4px 0 0 4px; background: #e0ddd8; color: #2c2a28;
+        border: 1px solid #8b7355; border-radius: 3px; cursor: pointer; }
+      .add-img-btn:hover { background: #d0cdc8; }
+      .add-img-btn.hidden { display: none; }
+      .img-count { font-size: 9pt; color: #6b635b; margin-left: 0.25em;
+        font-family: Inter, sans-serif; }
+      @media print {
+        html, body { color: #1c1b19 !important; background: #faf8f5 !important; }
+        .block-label { color: #6b7b8a !important; }
+        .meta { color: #6b635b !important; }
+        .monastery { page-break-before: always; break-before: page; }
+        .monastery:first-of-type { page-break-before: auto; break-before: auto; }
+        .edit-toolbar, .img-del, .add-img-btn, .img-count { display: none !important; }
+      }
+    </style>
+</head>
+<body>
+
+    <div class="intro-block">
+    <p class="otium-brand">OTIUM / Sacred</p>
+    <h1 class="otium-title">Театры Москвы</h1>
+    <p class="otium-subtitle">12 театров</p>
+    <p>OTIUM — это практика осмысленного досуга.
+    В античной традиции otium означало не отдых от труда, а время, в котором
+    человек возвращается к взгляду, памяти и мышлению. Это время без
+    утилитарной цели, без спешки, без требования результата.</p>
+    <p>Мы создаём маршруты не для «посещения», а для пребывания.
+    Не для потребления культуры, а для внимательного присутствия в ней.</p>
+    <p>OTIUM работает с пространствами, где время уплотняется:
+    архитектурой, сакральными местами, кино, памятью, ландшафтом.
+    Мы не стремимся охватить всё и не обещаем «лучшее».
+    Мы отбираем немногое — то, что выдерживает тишину и повторный взгляд.</p>
+    <p>OTIUM — это не гид и не сервис.
+    Это приглашение к прогулке без обязательств.
+    К маршруту, который можно прервать.
+    К месту, где можно задержаться.</p>
+    <p>OTIUM существует для тех, кто хочет смотреть медленно.</p>
+    </div>
+    
+
+<section class="monastery" id="monastery-1" tabindex="-1">
+  <h2 class="monastery-title">1. Большой театр</h2>
+  <p class="meta"><strong>Адрес:</strong> Театральная пл., 1 &nbsp;|&nbsp; <strong>Стиль:</strong> классицизм</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Основан в 1776 году; нынешнее здание на Театральной площади построено в 1825 году по проекту О. И. Бове (восстановлено после пожара 1853). Главная сцена страны — балет и опера мирового уровня.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Главный театр России; символ русского балета и оперы; памятник архитектуры на Театральной площади.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>историческая сцена</li><li>балет</li><li>опера</li><li>императорский театр</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Историческая сцена и Новая сцена.</li><li>Балетная труппа — одна из ведущих в мире.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">The Bolshoi Theatre (Russian: Большо́й теа́тр, romanized: Bol'shoy teatr, IPA: [bɐlʲˈʂoj tʲɪˈat(ə)r], lit. 'Large Theater') is a historic opera house in Moscow, Russia, originally designed by architect Joseph Bové.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <img src="images/moscow_theaters/bolshoy_1.jpg" alt="Большой театр — фото 1" class="monastery-img" />
+    <img src="images/moscow_theaters/bolshoy_2.jpg" alt="Большой театр — фото 2" class="monastery-img" />
+    <img src="images/moscow_theaters/bolshoy_4.jpg" alt="Большой театр — фото 3" class="monastery-img" />
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6186,55.7602&z=16&l=map&size=380,200&pt=37.6186,55.7602,pm2rdm" alt="Карта: Большой театр" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Большой театр</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-2" tabindex="-1">
+  <h2 class="monastery-title">2. Малый театр</h2>
+  <p class="meta"><strong>Адрес:</strong> Театральная пл., 1/6 &nbsp;|&nbsp; <strong>Стиль:</strong> классицизм</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Основан в 1824 году; здание на Театральной площади — «второй дом Островского».</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Старейший драматический театр Москвы; дом Островского; классицизм.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>драма</li><li>историческая сцена</li><li>дом Островского</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>С 1824 года на Театральной площади.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Maly Theatre (Малый театр, literally Small Theatre as opposed to nearby Bolshoi, or Grand, opera theatre) is a theatre in Moscow, Russia, principally associated with the production of plays. Established in 1806 and operating on its present site on the Theatre Square since 1824, the theatre traces its history to the Moscow University drama company, established in 1756.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <img src="images/moscow_theaters/maly_1.jpg" alt="Малый театр — фото 1" class="monastery-img" />
+    <img src="images/moscow_theaters/maly_2.jpg" alt="Малый театр — фото 2" class="monastery-img" />
+    <img src="images/moscow_theaters/maly_3.jpg" alt="Малый театр — фото 3" class="monastery-img" />
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6186,55.7600&z=16&l=map&size=380,200&pt=37.6186,55.7600,pm2rdm" alt="Карта: Малый театр" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Малый театр</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-3" tabindex="-1">
+  <h2 class="monastery-title">3. МХТ им. А. П. Чехова</h2>
+  <p class="meta"><strong>Адрес:</strong> Камергерский пер., 3 &nbsp;|&nbsp; <strong>Стиль:</strong> модерн</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Основан в 1898 году К. С. Станиславским и В. И. Немировичем-Данченко. Здание в Камергерском переулке — с 1902 года. Революция в театральном искусстве; система Станиславского.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Родина системы Станиславского; театр Чехова и Горького; символ русского драматического театра.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>МХТ</li><li>Чехов</li><li>Станиславский</li><li>Немирович-Данченко</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Премьера «Чайки» — 1898 год.</li><li>Камергерский переулок — пешеходный.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">It is a state educational institution that has existed since 1943.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <img src="images/moscow_theaters/mhat_1.jpg" alt="МХТ им. А. П. Чехова — фото 1" class="monastery-img" />
+    <img src="images/moscow_theaters/mhat_2.jpg" alt="МХТ им. А. П. Чехова — фото 2" class="monastery-img" />
+    <img src="images/moscow_theaters/mhat_3.jpg" alt="МХТ им. А. П. Чехова — фото 3" class="monastery-img" />
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6142,55.7642&z=16&l=map&size=380,200&pt=37.6142,55.7642,pm2rdm" alt="Карта: МХТ им. А. П. Чехова" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: МХТ им. А. П. Чехова</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-4" tabindex="-1">
+  <h2 class="monastery-title">4. Театр «Сатирикон»</h2>
+  <p class="meta"><strong>Адрес:</strong> ул. Шереметьевская, 8 &nbsp;|&nbsp; <strong>Стиль:</strong> драма, комедия</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Основан в 1987 году на базе театра Аркадия Райкина. Современная драма и комедия; здание на Шереметьевской.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Преемник театра Райкина; комедия и драма; популярный репертуар.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>Аркадий Райкин</li><li>театр комедии</li><li>современный репертуар</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Основан в 1987 году.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">He was best known for his satirical comedies, including The Evening Labyrinth (1981), 100 Grams for Courage ( 1976), and Our American Borya (1992).</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <img src="images/moscow_theaters/satirikon_1.jpg" alt="Театр «Сатирикон» — фото 1" class="monastery-img" />
+    <img src="images/moscow_theaters/satirikon_2.jpg" alt="Театр «Сатирикон» — фото 2" class="monastery-img" />
+    <img src="images/moscow_theaters/satirikon_3.jpg" alt="Театр «Сатирикон» — фото 3" class="monastery-img" />
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6164,55.7986&z=16&l=map&size=380,200&pt=37.6164,55.7986,pm2rdm" alt="Карта: Театр «Сатирикон»" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Театр «Сатирикон»</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-5" tabindex="-1">
+  <h2 class="monastery-title">5. Театр «Современник»</h2>
+  <p class="meta"><strong>Адрес:</strong> Чистопрудный бульвар, 19а &nbsp;|&nbsp; <strong>Стиль:</strong> драма</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Основан в 1956 году как театр-студия молодых актёров. С 1964 года — на Чистопрудном бульваре. Один из ведущих драматических театров Москвы.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Театр «оттепели»; современная драма; здание на Чистых прудах.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>театр-студия</li><li>Галина Волчек</li><li>современная драма</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Основан в 1956 году.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Moscow Sovremennik Theatre (Russian: Московский театр «Современник») is a theatre company in Moscow founded in 1956. &quot;Sovremennik&quot; means &quot;Contemporary&quot;.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <img src="images/moscow_theaters/sovremennik_1.jpg" alt="Театр «Современник» — фото 1" class="monastery-img" />
+    <img src="images/moscow_theaters/sovremennik_2.jpg" alt="Театр «Современник» — фото 2" class="monastery-img" />
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6386,55.7647&z=16&l=map&size=380,200&pt=37.6386,55.7647,pm2rdm" alt="Карта: Театр «Современник»" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Театр «Современник»</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-6" tabindex="-1">
+  <h2 class="monastery-title">6. Театр «Ленком»</h2>
+  <p class="meta"><strong>Адрес:</strong> ул. Малая Дмитровка, 6 &nbsp;|&nbsp; <strong>Стиль:</strong> драма, мюзикл</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Основан в 1927 году как ТРАМ; с 1938 — Театр имени Ленинского комсомола. С 1973 года — под руководством Марка Захарова. Легендарные постановки «Юнона и Авось», «Тиль».</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Театр Марка Захарова; мюзиклы и драма; «Юнона и Авось».</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>Марк Захаров</li><li>мюзиклы</li><li>«Юнона и Авось»</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>«Юнона и Авось» — с 1981 года.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Winner of the All-Russian Theater Prize Seagull Award in 2002.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <img src="images/moscow_theaters/lenkom_1.jpg" alt="Театр «Ленком» — фото 1" class="monastery-img" />
+    <img src="images/moscow_theaters/lenkom_2.jpg" alt="Театр «Ленком» — фото 2" class="monastery-img" />
+    <img src="images/moscow_theaters/lenkom_3.jpg" alt="Театр «Ленком» — фото 3" class="monastery-img" />
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6097,55.7692&z=16&l=map&size=380,200&pt=37.6097,55.7692,pm2rdm" alt="Карта: Театр «Ленком»" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Театр «Ленком»</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-7" tabindex="-1">
+  <h2 class="monastery-title">7. Театр им. Евгени<span class="old-russian-ya">я</span> Вахтангова</h2>
+  <p class="meta"><strong>Адрес:</strong> ул. Арбат, 26 &nbsp;|&nbsp; <strong>Стиль:</strong> драма</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Основан в 1921 году учениками Евгения Вахтангова. Здание на Арбате построено в 1947 году. Один из ведущих драматических театров Москвы.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Театр Вахтангова; драма и комедия; здание на Старом Арбате.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>Вахтангов</li><li>система Вахтангова</li><li>историческое здание</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Основан в 1921 году.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">It was founded in 1913 as the Student Drama Studio, headed by Yevgeny Vakhtangov.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <img src="images/moscow_theaters/vakhtangov_1.jpg" alt="Театр им. Евгения Вахтангова — фото 1" class="monastery-img" />
+    <img src="images/moscow_theaters/vakhtangov_2.jpg" alt="Театр им. Евгения Вахтангова — фото 2" class="monastery-img" />
+    <img src="images/moscow_theaters/vakhtangov_3.jpg" alt="Театр им. Евгения Вахтангова — фото 3" class="monastery-img" />
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.5914,55.7508&z=16&l=map&size=380,200&pt=37.5914,55.7508,pm2rdm" alt="Карта: Театр им. Евгения Вахтангова" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Театр им. Евгения Вахтангова</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-8" tabindex="-1">
+  <h2 class="monastery-title">8. Театр «Et Cetera»</h2>
+  <p class="meta"><strong>Адрес:</strong> Фролов пер., 2 &nbsp;|&nbsp; <strong>Стиль:</strong> драма</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Основан в 1993 году Александром Калягиным. Камерный театр в центре Москвы; современная драма и классика.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Театр Александра Калягина; камерные постановки; центр Москвы.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>Александр Калягин</li><li>современная драма</li><li>камерный театр</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Основан в 1993 году.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Aleksandr Georgievich Filippenko (Russian: Александр Георгиевич Филиппенко; born September 2, 1944) is a Soviet and Russian actor, People's Artist of Russia (2000).</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <img src="images/moscow_theaters/et_cetera_1.jpg" alt="Театр «Et Cetera» — фото 1" class="monastery-img" />
+    <img src="images/moscow_theaters/et_cetera_2.jpg" alt="Театр «Et Cetera» — фото 2" class="monastery-img" />
+    <img src="images/moscow_theaters/et_cetera_3.jpg" alt="Театр «Et Cetera» — фото 3" class="monastery-img" />
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6325,55.7589&z=16&l=map&size=380,200&pt=37.6325,55.7589,pm2rdm" alt="Карта: Театр «Et Cetera»" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Театр «Et Cetera»</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-9" tabindex="-1">
+  <h2 class="monastery-title">9. Театр «Практика»</h2>
+  <p class="meta"><strong>Адрес:</strong> ул. Малая Дмитровка, 8/4 &nbsp;|&nbsp; <strong>Стиль:</strong> современная драма</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Основан в 2005 году; фокус на новой драме и документальном театре. Премьеры современных российских и зарубежных авторов.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Театр новой драмы; документальный театр; центр Москвы.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>новая драма</li><li>документальный театр</li><li>современная пьеса</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Основан в 2005 году.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Aleksandr Georgievich Filippenko (Russian: Александр Георгиевич Филиппенко; born September 2, 1944) is a Soviet and Russian actor, People's Artist of Russia (2000).</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <img src="images/moscow_theaters/practika_1.jpg" alt="Театр «Практика» — фото 1" class="monastery-img" />
+    <img src="images/moscow_theaters/practika_2.jpg" alt="Театр «Практика» — фото 2" class="monastery-img" />
+    <img src="images/moscow_theaters/practika_3.jpg" alt="Театр «Практика» — фото 3" class="monastery-img" />
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6095,55.7695&z=16&l=map&size=380,200&pt=37.6095,55.7695,pm2rdm" alt="Карта: Театр «Практика»" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Театр «Практика»</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-10" tabindex="-1">
+  <h2 class="monastery-title">10. «Гоголь-центр»</h2>
+  <p class="meta"><strong>Адрес:</strong> ул. Казакова, 8а &nbsp;|&nbsp; <strong>Стиль:</strong> современный театр</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Создан в 2013 году на базе Театра им. Гоголя под руководством Кирилла Серебренникова. Современная режиссура, эксперимент, синтез театра и кино.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Театр Кирилла Серебренникова; современная режиссура; эксперимент.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>Кирилл Серебренников</li><li>современная режиссура</li><li>эксперимент</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Основан в 2013 году.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Dmitry Alexandrovich Markov (Russian: Дмитрий Александрович Марков; 23 April 1982 – 15 February 2024) was a Russian journalist and photographer. Gained fame by creating genre shots of &quot;provincial Russia&quot; on a regular smartphone camera and publishing them on his Instagram account.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <img src="images/moscow_theaters/gogol_center_1.jpg" alt="«Гоголь-центр» — фото 1" class="monastery-img" />
+    <img src="images/moscow_theaters/gogol_center_2.jpg" alt="«Гоголь-центр» — фото 2" class="monastery-img" />
+    <img src="images/moscow_theaters/gogol_center_3.jpg" alt="«Гоголь-центр» — фото 3" class="monastery-img" />
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6689,55.7658&z=16&l=map&size=380,200&pt=37.6689,55.7658,pm2rdm" alt="Карта: «Гоголь-центр»" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: «Гоголь-центр»</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-11" tabindex="-1">
+  <h2 class="monastery-title">11. Театр на Таганке</h2>
+  <p class="meta"><strong>Адрес:</strong> ул. Земляной Вал, 76/21 &nbsp;|&nbsp; <strong>Стиль:</strong> драма</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Основан в 1964 году при реорганизации Театра драмы и комедии. С 1964 по 2011 — под руководством Юрия Любимова. Легендарные постановки «Добрый человек из Сезуана», «Мастер и Маргарита».</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Театр Юрия Любимова; легендарные постановки; Таганская площадь.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>Юрий Любимов</li><li>«Добрый человек из Сезуана»</li><li>историческое здание</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Основан в 1964 году.</li><li>«Добрый человек из Сезуана» — 1964.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Taganka Theatre (Russian: Театр на Таганке, Театр драмы и комедии на Таганке, &quot;Таганка&quot;) is a theater located in the Art Nouveau building on Taganka Square in Moscow.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <img src="images/moscow_theaters/taganka_1.jpg" alt="Театр на Таганке — фото 1" class="monastery-img" />
+    <img src="images/moscow_theaters/taganka_2.jpg" alt="Театр на Таганке — фото 2" class="monastery-img" />
+    <img src="images/moscow_theaters/taganka_3.jpg" alt="Театр на Таганке — фото 3" class="monastery-img" />
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6525,55.7414&z=16&l=map&size=380,200&pt=37.6525,55.7414,pm2rdm" alt="Карта: Театр на Таганке" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Театр на Таганке</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-12" tabindex="-1">
+  <h2 class="monastery-title">12. Театр «Табакерка»</h2>
+  <p class="meta"><strong>Адрес:</strong> ул. Чехова, 6 &nbsp;|&nbsp; <strong>Стиль:</strong> драма</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Основан в 1987 году Олегом Табаковым как театр-студия. С 1990 года — в здании на Чеховской (бывш. «Современник»). Камерные постановки; одна из самых популярных сцен Москвы.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Театр Олега Табакова; камерные постановки; центр Москвы.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>Олег Табаков</li><li>МХТ</li><li>камерный театр</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Основан в 1987 году.</li><li>Здание — бывш. «Современник».</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Московский театр Олега Табакова («Табакерка», Подвал, Подвальный театр) — театральный комплекс, основанный в 1987 году народным артистом СССР Олегом Табаковым. Театр включает в себя две сцены: на Малой Сухаревской площади и улице Чаплыгина, художественно-производственный комбинат и театральную школу. Официально театр открылся в 1987 году.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <img src="images/moscow_theaters/tabakerka_1.jpg" alt="Театр «Табакерка» — фото 1" class="monastery-img" />
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6086,55.7653&z=16&l=map&size=380,200&pt=37.6086,55.7653,pm2rdm" alt="Карта: Театр «Табакерка»" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Театр «Табакерка»</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-13" tabindex="-1">
+  <h2 class="monastery-title">13. Театр «Геликон-опера»</h2>
+  <p class="meta"><strong>Адрес:</strong> ул. Большая Никитская, 19/16 &nbsp;|&nbsp; <strong>Стиль:</strong> опера</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Основан в 1990 году Дмитрием Бертманом. Расположен в усадьбе Салтыковых-Чертковых на Большой Никитской. Камерная опера; уникальные постановки; один из ведущих оперных театров Москвы.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Камерная опера в центре Москвы; усадьба Салтыковых-Чертковых; оригинальные постановки.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>опера</li><li>камерная опера</li><li>историческое здание</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Основан в 1990 году.</li><li>Здание — усадьба XVIII–XIX веков.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">This is a list of notable opera houses listed by continent, then by country with the name of the opera house and city. The opera company is sometimes named for clarity.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <img src="images/moscow_theaters/helikon_1.jpg" alt="Театр «Геликон-опера» — фото 1" class="monastery-img" />
+    <img src="images/moscow_theaters/helikon_2.jpg" alt="Театр «Геликон-опера» — фото 2" class="monastery-img" />
+    <img src="images/moscow_theaters/helikon_4.jpg" alt="Театр «Геликон-опера» — фото 3" class="monastery-img" />
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.5942,55.7564&z=16&l=map&size=380,200&pt=37.5942,55.7564,pm2rdm" alt="Карта: Театр «Геликон-опера»" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Театр «Геликон-опера»</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-14" tabindex="-1">
+  <h2 class="monastery-title">14. Театр «Мастерска<span class="old-russian-ya">я</span> Петра Фоменко»</h2>
+  <p class="meta"><strong>Адрес:</strong> Кутузовский пр., 30/32 &nbsp;|&nbsp; <strong>Стиль:</strong> драма</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Основан в 1993 году Петром Фоменко как театральная мастерская при ГИТИСе. С 2008 года — в здании на Кутузовском проспекте. Один из самых востребованных театров Москвы; современная режиссура.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Театр Петра Фоменко; современная драма; здание на Кутузовском.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>Пётр Фоменко</li><li>современная режиссура</li><li>молодой театр</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Основан в 1993 году.</li><li>Новое здание — с 2008 года.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Television productions are peculiar director in-depth psychology, strict adherence to the idea of the author's and style  ю In 2000 he taught at the Paris Conservatoire, then staged performances at the Comédie Française (2003).</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <img src="images/moscow_theaters/fomenko_1.jpg" alt="Театр «Мастерская Петра Фоменко» — фото 1" class="monastery-img" />
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.5419,55.7442&z=16&l=map&size=380,200&pt=37.5419,55.7442,pm2rdm" alt="Карта: Театр «Мастерская Петра Фоменко»" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Театр «Мастерская Петра Фоменко»</p>
+  </div>
+</section>
+
+
+<section class="qa-section" id="qa" tabindex="-1">
+  <h2>Вопросы и ответы по фактам</h2>
+  <div class="qa-item"><p class="question"><strong>Вопрос 1. Какой театр является главным театром России?</strong></p><p class="answer">Ответ: Большой театр на Театральной площади — балет и опера.</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 2. Какой театр называют «домом Островского»?</strong></p><p class="answer">Ответ: Малый театр на Театральной площади.</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 3. Где родилась система Станиславского?</strong></p><p class="answer">Ответ: МХТ им. А. П. Чехова в Камергерском переулке (основан в 1898).</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 4. Какой театр основал Аркадий Райкин?</strong></p><p class="answer">Ответ: Театр «Сатирикон» (основан в 1987).</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 5. Какой театр расположен на Чистопрудном бульваре?</strong></p><p class="answer">Ответ: Театр «Современник» (с 1964 года).</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 6. В каком театре идёт «Юнона и Авось»?</strong></p><p class="answer">Ответ: Театр «Ленком» (с 1981 года).</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 7. Какой театр основал Евгений Вахтангов?</strong></p><p class="answer">Ответ: Театр им. Евгения Вахтангова на Арбате (основан в 1921).</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 8. Какой театр фокусируется на новой драме?</strong></p><p class="answer">Ответ: Театр «Практика» на Малой Дмитровке (основан в 2005).</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 9. Какой театр создал Кирилл Серебренников?</strong></p><p class="answer">Ответ: «Гоголь-центр» на ул. Казакова (создан в 2013).</p></div>
+</section>
+
+</body>
+</html>

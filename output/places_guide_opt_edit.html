@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Места Москвы</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;0,600&amp;family=EB+Garamond:ital,wght@0,400;0,600&amp;family=Pochaevsk&amp;family=Source+Serif+4:ital,wght@0,400;0,600&amp;family=Inter:wght@400;500;600&amp;display=swap&amp;subset=latin,cyrillic"
+        rel="stylesheet" />
+  <style>
+      @page { size: A4; margin: 2cm 1.5cm 1.5cm 1.8cm; }
+      *, html, body { -webkit-print-color-adjust: exact;
+                      print-color-adjust: exact; }
+      html { background-color: #faf8f5; }
+      html, body { margin: 0; padding: 0; font-family: "Source Serif 4",
+        Georgia, "Times New Roman", serif;
+        font-size: 10pt; line-height: 1.45; color: #1c1b19;
+        background-color: #faf8f5; }
+      body { color: #1c1b19 !important; background-color: #faf8f5 !important; }
+      h1 { font-family: "Source Serif 4", Georgia, serif;
+           font-size: 18pt; text-align: center; margin: 0 0 0.5em;
+           color: #1c1b19 !important; }
+      h2 { font-family: "Source Serif 4", Georgia, serif;
+           color: #1c1b19 !important; }
+      h2.monastery-title { font-family: Pochaevsk, Georgia, serif;
+           font-size: 17pt; margin: 1.2em 0 0.4em 0.3em;
+           border-bottom: 1px solid #8b7355; padding-bottom: 0.25em;
+           color: #2c2a28 !important; }
+      .old-russian-ya { font-family: "Source Serif 4", Georgia, serif; }
+      .meta, .block-label { font-family: Inter, "IBM Plex Sans", sans-serif;
+          font-size: 8.5pt; letter-spacing: 0.02em; }
+      .meta { margin: 0.2em 0 0.6em 0.3em; color: #6b635b !important; }
+      .block-label { margin: 0.6em 0 0.15em 0.3em; text-transform: uppercase;
+                     font-weight: 600; color: #6b7b8a !important; }
+      .body-text { margin: 0 0 0.4em 0.3em; text-align: left; max-width: 42em;
+                   color: #1c1b19; font-family: "Source Serif 4", Georgia, serif; }
+      .story-text { font-style: italic; color: #4a5568; }
+      ul, li, p { color: #1c1b19; font-family: "Source Serif 4", Georgia, serif; }
+      .intro-block { page-break-after: always; padding: 2.5em 1em 0 1.2em;
+                     background-color: #faf8f5; }
+      .intro-block .otium-brand { font-family: Inter, sans-serif;
+        font-size: 8pt; letter-spacing: 0.2em; color: #6b635b !important;
+        margin-bottom: 0.3em; }
+      .intro-block .otium-title { font-family: Pochaevsk, Georgia, serif;
+        font-size: 20pt; font-weight: 600; text-align: center;
+        margin: 0.2em 0 0.1em; color: #1a1a1a !important; }
+      .intro-block .otium-subtitle { font-family: Pochaevsk, Georgia, serif;
+        font-size: 11pt; text-align: center; color: #6b635b !important;
+        font-style: italic; margin-bottom: 1em; }
+      .intro-block p { margin: 0.4em 0; font-size: 9.5pt; line-height: 1.5;
+        text-align: justify; max-width: 38em; margin-left: auto;
+        margin-right: auto; color: #1c1b19;
+        font-family: "Source Serif 4", Georgia, serif; }
+      .monastery { display: block; page-break-inside: avoid;
+                    break-inside: avoid; padding: 1.5em 0 0; }
+      .monastery:last-of-type { padding-bottom: 0.5em; }
+      .visual-block { margin: 0.8em 0 0; page-break-after: auto; }
+      body > *:last-child { page-break-after: auto !important; }
+      .images-row { display: flex; gap: 10px; margin: 1em; flex-wrap: wrap; }
+      .monastery-img { flex: 1 1 200px; max-width: 100%; height: 150px;
+                        object-fit: cover; }
+      .visual-grid-2x2 { display: grid; grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto; gap: 10px; margin: 1em; }
+      .visual-grid-2x2 .grid-cell,
+      .visual-grid-2x2 .map-cell { min-width: 0; }
+      .visual-grid-2x2 .grid-cell .monastery-img,
+      .visual-grid-2x2 .map-cell .map-img { width: 100%; height: 150px;
+        object-fit: cover; display: block; }
+      .visual-grid-2x2 .map-cell .map-img { max-height: 160px; height: auto; }
+      .visual-grid-2x2 .map-cell { display: flex; flex-direction: column; }
+      .visual-grid-2x2 .map-caption { font-size: 8pt; color: #6b635b;
+        margin: 0.25em 0 0; font-family: Inter, sans-serif; }
+      .images-caption { font-size: 8pt; color: #6b635b; margin: 0.25em 1em 0;
+        font-family: Inter, sans-serif; }
+      .map-block { margin: 1em; }
+      .map-caption { font-size: 8pt; color: #6b635b; margin: 0.25em 0 0;
+        font-family: Inter, sans-serif; }
+      .map-img { max-width: 100%; height: auto; max-height: 160px; }
+      .qa-section { margin-top: 2em; page-break-before: always;
+                     break-before: page; padding-top: 1.5em;
+                     page-break-inside: avoid; }
+      .qa-item { margin-bottom: 0.6em; font-size: 9pt; color: #1c1b19; }
+      .question { margin-bottom: 0.1em; color: #1c1b19; }
+      .answer { margin-left: 0.5em; color: #2c2a28;
+        font-family: "Source Serif 4", Georgia, serif; }
+      ul { margin: 0.2em 0 0.4em 0.3em; padding-left: 1.2em; color: #1c1b19; }
+      p { margin: 0.2em 0; color: #1c1b19; }
+      .map-block { background: transparent; }
+      .edit-toolbar { position: fixed; top: 8px; right: 8px; z-index: 9999; }
+      .edit-toolbar button { font-family: Inter, sans-serif; font-size: 11px;
+        padding: 6px 10px; background: #2c2a28; color: #faf8f5; border: none;
+        border-radius: 4px; cursor: pointer; }
+      .edit-toolbar button:hover { background: #4a5568; }
+      .img-wrap { position: relative; display: inline-block; }
+      .img-wrap.img-dragging { opacity: 0.6; }
+      .img-wrap.img-drop-target { outline: 2px dashed #8b7355; outline-offset: 2px; }
+      .img-del { position: absolute; top: 4px; right: 4px; width: 22px; height: 22px;
+        font-size: 16px; line-height: 20px; text-align: center; background: rgba(0,0,0,.6);
+        color: #fff; border: none; border-radius: 3px; cursor: pointer; }
+      .img-del:hover { background: #c53030; }
+      .add-img-btn { font-family: Inter, sans-serif; font-size: 10px;
+        padding: 4px 8px; margin: 4px 0 0 4px; background: #e0ddd8; color: #2c2a28;
+        border: 1px solid #8b7355; border-radius: 3px; cursor: pointer; }
+      .add-img-btn:hover { background: #d0cdc8; }
+      .add-img-btn.hidden { display: none; }
+      .img-count { font-size: 9pt; color: #6b635b; margin-left: 0.25em;
+        font-family: Inter, sans-serif; }
+      @media print {
+        html, body { color: #1c1b19 !important; background: #faf8f5 !important; }
+        .block-label { color: #6b7b8a !important; }
+        .meta { color: #6b635b !important; }
+        .monastery { page-break-inside: avoid; break-inside: avoid; }
+        .edit-toolbar, .img-del, .add-img-btn, .img-count { display: none !important; }
+      }
+    </style>
+</head>
+<body>
+
+    <div class="intro-block">
+    <p class="otium-brand">OTIUM / Sacred</p>
+    <h1 class="otium-title">Места Москвы</h1>
+    <p class="otium-subtitle">46 лучших мест (улицы, площади, районы)</p>
+    <p>OTIUM — это практика осмысленного досуга.
+    В античной традиции otium означало не отдых от труда, а время, в котором
+    человек возвращается к взгляду, памяти и мышлению. Это время без
+    утилитарной цели, без спешки, без требования результата.</p>
+    <p>Мы создаём маршруты не для «посещения», а для пребывания.
+    Не для потребления культуры, а для внимательного присутствия в ней.</p>
+    <p>OTIUM работает с пространствами, где время уплотняется:
+    архитектурой, сакральными местами, кино, памятью, ландшафтом.
+    Мы не стремимся охватить всё и не обещаем «лучшее».
+    Мы отбираем немногое — то, что выдерживает тишину и повторный взгляд.</p>
+    <p>OTIUM — это не гид и не сервис.
+    Это приглашение к прогулке без обязательств.
+    К маршруту, который можно прервать.
+    К месту, где можно задержаться.</p>
+    <p>OTIUM существует для тех, кто хочет смотреть медленно.</p>
+    </div>
+    
+
+<section class="monastery" id="monastery-1" tabindex="-1">
+  <h2 class="monastery-title">1. Арбат (Старый Арбат)</h2>
+  <p class="meta"><strong>Адрес:</strong> ул. Арбат &nbsp;|&nbsp; <strong>Стиль:</strong> пешеходная улица</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Одна из старейших улиц Москвы; упоминается с XV века. В XIX в. — аристократический район; здесь жили Пушкин, Толстой. В доме 53 Пушкин снял квартиру после свадьбы с Н. Гончаровой; сейчас музей. В 1986 Арбат стал первой пешеходной улицей Москвы. Сохранились доходные дома и особняки; атмосфера «старого города».</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Главная пешеходная улица города; символ московской культуры и туризма; место прогулок, кафе и уличных концертов.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>сувениры</li><li>уличные артисты</li><li>историческая застройка</li><li>рестораны</li><li>музеи</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Упоминается с XV в.; название — от араб. «арбад» (предместье) или от «горбат».</li><li>Дом 53 — музей-квартира Пушкина (жил после свадьбы с Гончаровой).</li><li>Первый пешеходный Арбат — 1986 год.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Arbat Street (Russian: Арба́т, IPA: [ɐrˈbat] ), mainly referred to in English as the Arbat, is a pedestrian street about one kilometer long in the historical centre of Moscow, Russia. The Arbat has existed since at least the 15th century, which makes it one of the oldest surviving streets of the Russian capital. It forms the heart of the Arbat District of Moscow.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_places/arbat_1.jpg" alt="Арбат (Старый Арбат) — фото 1" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.5919,55.7522&z=16&l=map&size=380,200&pt=37.5919,55.7522,pm2rdm" alt="Карта: Арбат (Старый Арбат)" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Арбат (Старый Арбат)</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-2" tabindex="-1">
+  <h2 class="monastery-title">2. Чистые пруды</h2>
+  <p class="meta"><strong>Адрес:</strong> Чистопрудный бульвар &nbsp;|&nbsp; <strong>Стиль:</strong> бульвар и пруд</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Пруд очищен в XVIII веке при Меншикове (отсюда название «Чистые»; ранее — «Поганая лужа»). Чистопрудный бульвар — часть Бульварного кольца. Сейчас здесь памятник Грибоедову, кафе, прогулки и катание на лодках летом.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Популярное место отдыха в центре; бульвар и пруд с историей; памятник Грибоедову и атмосфера «старого» города.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>пруд</li><li>бульвар</li><li>памятник Грибоедову</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Изначально «Поганая лужа».</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Clean Ponds (Russian: Чистые пруды, romanized: Chistye prudy) is a 1965 Soviet drama film directed by Aleksey Sakharov.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_places/chistye_1.jpg" alt="Чистые пруды — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_places/chistye_4.jpg" alt="Чистые пруды — фото 2" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6386,55.7647&z=16&l=map&size=380,200&pt=37.6386,55.7647,pm2rdm" alt="Карта: Чистые пруды" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Чистые пруды</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-3" tabindex="-1">
+  <h2 class="monastery-title">3. Китай-город</h2>
+  <p class="meta"><strong>Адрес:</strong> Китай-город &nbsp;|&nbsp; <strong>Стиль:</strong> исторический район</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Исторический район с XVI века; стена Китай-города защищала торговый и ремесленный посад. Улицы Варварка, Ильинка, Никольская — старинные трассы. Сейчас Китай-город — деловой и туристический центр с храмами, музеями и офисами.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Сердце деловой Москвы; исторический район с Варваркой, Ильинкой, Никольской; название не от Китая — от «кита» (связка жердей).</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>стена Китай-города</li><li>Варварка</li><li>Ильинка</li><li>Никольская</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Название не от Китая — от «кита» (связка жердей).</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Rather, the territory has been part of Tverskoy District, and the Central Administrative Okrug authorities have managed the area directly since 2003.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_places/kitay_gorod_2.jpg" alt="Китай-город — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_places/kitay_gorod_3.jpg" alt="Китай-город — фото 2" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6281,55.7542&z=16&l=map&size=380,200&pt=37.6281,55.7542,pm2rdm" alt="Карта: Китай-город" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Китай-город</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-4" tabindex="-1">
+  <h2 class="monastery-title">4. Замоскворечье</h2>
+  <p class="meta"><strong>Адрес:</strong> район за Москвой-рекой &nbsp;|&nbsp; <strong>Стиль:</strong> исторический район</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Исторический район к югу от Кремля, за Москвой-рекой. Сохранилась купеческая застройка, усадьбы, храмы (Климент, Марфо-Мариинская обитель). Здесь Третьяковская галерея, театры, тихие переулки. Замоскворечье — «остров» старой Москвы.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Район музеев и храмов; купеческая застройка и тихие переулки; Третьяковская галерея, Климент, Марфо-Мариинская обитель.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>усадьбы</li><li>храмы</li><li>музеи</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Третьяковская галерея, Климент, Марфо-Мариинская обитель.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">The federal city of Moscow, Russia is divided into administrative districts called administrative okrugs, which are a subdivision of state administration. They are further divided into municipal formations called districts (raions) and settlements (poseleniy), which are local self-government entities.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_places/zamoskvorechye_1.jpg" alt="Замоскворечье — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_places/zamoskvorechye_3.jpg" alt="Замоскворечье — фото 2" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6208,55.7415&z=16&l=map&size=380,200&pt=37.6208,55.7415,pm2rdm" alt="Карта: Замоскворечье" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Замоскворечье</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-5" tabindex="-1">
+  <h2 class="monastery-title">5. Хамовники</h2>
+  <p class="meta"><strong>Адрес:</strong> район Хамовники &nbsp;|&nbsp; <strong>Стиль:</strong> исторический район</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Район ткачей (хамовников) с XVII века; здесь селились ремесленники. Сейчас Хамовники — престижный район: Новодевичий монастырь, стадион «Лужники», улица Льва Толстого, музеи. Сохранилась историческая застройка и зелёные зоны.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Район музеев и спорта; Новодевичий монастырь и Лужники; тихие улицы и престижная жилая среда.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>Новодевичий монастырь</li><li>стадион «Лужники»</li><li>улица Льва Толстого</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Лужники — крупнейший стадион страны.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">The federal city of Moscow, Russia is divided into administrative districts called administrative okrugs, which are a subdivision of state administration. They are further divided into municipal formations called districts (raions) and settlements (poseleniy), which are local self-government entities.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_places/hamovniki_1.jpg" alt="Хамовники — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_places/hamovniki_2.jpg" alt="Хамовники — фото 2" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_places/hamovniki_4.jpg" alt="Хамовники — фото 3" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.5764,55.7186&z=16&l=map&size=380,200&pt=37.5764,55.7186,pm2rdm" alt="Карта: Хамовники" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Хамовники</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-6" tabindex="-1">
+  <h2 class="monastery-title">6. Измайловский кремль</h2>
+  <p class="meta"><strong>Адрес:</strong> Измайловское ш., 73ж &nbsp;|&nbsp; <strong>Стиль:</strong> современный комплекс</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Построен в 2000-х годах в стиле древнерусского зодчества как культурно-развлекательный комплекс. Деревянные башни, вернисаж, музеи (хлеба, водки и др.), рестораны. Не исторический Кремль — стилизация под старину; популярен у туристов и семей.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Современная достопримечательность; вернисаж и музеи; стилизация древнерусского кремля в Измайлове.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>деревянный кремль</li><li>вернисаж</li><li>музеи</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Не исторический Кремль — стилизация.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">This is a list of tallest Orthodox church buildings in the world, all those higher than 70 metres (230 feet). Traditionally, an Orthodox church building is crowned by one or several domes with Orthodox crosses on the top of each. The overall height of the temple is measured by the highest point of the cross above the main temple. The number of domes on individual churches often serve a symbolic purpose.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_places/izmaylovo_kremlin_2.jpg" alt="Измайловский кремль — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_places/izmaylovo_kremlin_3.jpg" alt="Измайловский кремль — фото 2" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_places/izmaylovo_kremlin_4.jpg" alt="Измайловский кремль — фото 3" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.8015,55.7912&z=16&l=map&size=380,200&pt=37.8015,55.7912,pm2rdm" alt="Карта: Измайловский кремль" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Измайловский кремль</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-7" tabindex="-1">
+  <h2 class="monastery-title">7. Артплей</h2>
+  <p class="meta"><strong>Адрес:</strong> ул. Малая Никитская, 12 &nbsp;|&nbsp; <strong>Стиль:</strong> арт-пространство</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Бывшая фабрика переоборудована в арт-пространство и дизайн-завод. Выставки, дизайн-бутики, кафе, мероприятия. Расположен рядом с Патриаршими прудами; часть креативного пояса центра Москвы.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Креативное пространство; выставки и дизайн; удобное расположение у Патриарших прудов.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>выставки</li><li>дизайн</li><li>кафе</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Рядом с Патриаршими.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">22 июля 1957, Тирасполь) — российский архитектор, художник, куратор.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_places/artplay_2.jpg" alt="Артплей — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_places/artplay_3.jpg" alt="Артплей — фото 2" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.5942,55.7642&z=16&l=map&size=380,200&pt=37.5942,55.7642,pm2rdm" alt="Карта: Артплей" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Артплей</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-8" tabindex="-1">
+  <h2 class="monastery-title">8. Никольска<span class="old-russian-ya">я</span> улица</h2>
+  <p class="meta"><strong>Адрес:</strong> ул. Никольская &nbsp;|&nbsp; <strong>Стиль:</strong> пешеходная улица</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Одна из главных улиц Китай-города; ведёт от Красной площади. Историческая застройка, Казанский собор, здание ГИМ. С 2013 года — пешеходная; восстановлена после реконструкции. Место прогулок и фото.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Улица от Красной площади; пешеходная зона Китай-города; историческая застройка и Казанский собор.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>историческая застройка</li><li>Казанский собор</li><li>ГИМ</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Восстановлена после реконструкции.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">In 1935, it was renamed from Nikolskaya Street to Street of the 25th of October before its original name was restored in 1990.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_places/nikolskaya_st_1.jpg" alt="Никольская улица — фото 1" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6197,55.7553&z=16&l=map&size=380,200&pt=37.6197,55.7553,pm2rdm" alt="Карта: Никольская улица" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Никольская улица</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-9" tabindex="-1">
+  <h2 class="monastery-title">9. Центральный детский мир</h2>
+  <p class="meta"><strong>Адрес:</strong> Театральный пр., 5 &nbsp;|&nbsp; <strong>Стиль:</strong> универмаг</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Открыт в 1957 году на Театральном проезде; здание с часами и витражами стало символом «Детского мира». В 2010-х проведена масштабная реконструкция: сохранён исторический облик, расширены торговые и развлекательные зоны. Легендарный магазин для детей и семей.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Символ детства советской и постсоветской эпохи; крупнейший детский универмаг страны; историческое здание у Лубянки и Театральной площади.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>часы</li><li>историческое здание</li><li>детские товары</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Крупнейший детский магазин страны.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Центральный детский магазин на Лубянке (до 2015 г. — центральный универмаг «Детский мир») — самый большой специализированный детский торговый комплекс в России, расположенный по адресу: г. Москва, Театральный пр., д. 5, стр. 1.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_places/detsky_mir_1.jpg" alt="Центральный детский мир — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_places/detsky_mir_3.jpg" alt="Центральный детский мир — фото 2" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_places/detsky_mir_4.jpg" alt="Центральный детский мир — фото 3" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6242,55.7619&z=16&l=map&size=380,200&pt=37.6242,55.7619,pm2rdm" alt="Карта: Центральный детский мир" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Центральный детский мир</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-10" tabindex="-1">
+  <h2 class="monastery-title">10. Рижский вокзал (вид и рынок)</h2>
+  <p class="meta"><strong>Адрес:</strong> Рижская пл., 1 &nbsp;|&nbsp; <strong>Стиль:</strong> вокзал</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Построен в 1897–1901 годах как Виндавский (Рижско-Виндавский); здание в псевдорусском стиле, архитектор С. А. Брожозов. Связывал Москву с Ригой и Прибалтикой; после распада СССР дальние поезда переведены. Сейчас в основном пригородное сообщение (Рижское направление); в здании — музей железнодорожного транспорта и торговые точки. Один из девяти вокзалов Москвы.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Один из девяти вокзалов Москвы; памятник псевдорусской архитектуры; пригородное сообщение и музей железных дорог; историческая связь с Прибалтикой.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>здание вокзала</li><li>пригородные поезда</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Сейчас в основном пригородное сообщение.</li><li>Рядом станция метро «Рижская».</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Комсомо́льская пло́щадь (до сентября 1932 года — Каланчёвская пло́щадь) — площадь в Москве, на которой расположены сразу три железнодорожных вокзала: Ленинградский, Ярославский и Казанский, из-за чего она в народе называется «площадью трёх вокзалов».</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_places/rizhsky_1.jpg" alt="Рижский вокзал (вид и рынок) — фото 1" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6331,55.7936&z=16&l=map&size=380,200&pt=37.6331,55.7936,pm2rdm" alt="Карта: Рижский вокзал (вид и рынок)" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Рижский вокзал (вид и рынок)</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-11" tabindex="-1">
+  <h2 class="monastery-title">11. Александровский сад</h2>
+  <p class="meta"><strong>Адрес:</strong> Кремлёвская наб., у Кремля &nbsp;|&nbsp; <strong>Стиль:</strong> сад</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Заложен в 1820-х годах на месте заключённой в трубу реки Неглинной; три части — Верхний, Средний, Нижний сад. Вечный огонь у Могилы Неизвестного Солдата, грот, исторические ворота. Парк у стен Кремля — место прогулок и церемоний.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Парк у стен Кремля; Вечный огонь и мемориалы; тихая зона в самом центре города.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>Вечный огонь</li><li>постамент грот</li><li>исторические ворота</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Три части: Верхний, Средний, Нижний сад.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Alexander Gardens (Russian: Александровский сад) was one of the first urban public parks in Moscow, Russia. The park comprises three separate gardens, which stretch along all the length of the western Kremlin wall for 865 metres (2,838 ft) between the building of the Moscow Manege and the Kremlin.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_places/alex_garden_1.jpg" alt="Александровский сад — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_places/alex_garden_3.jpg" alt="Александровский сад — фото 2" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6142,55.7522&z=16&l=map&size=380,200&pt=37.6142,55.7522,pm2rdm" alt="Карта: Александровский сад" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Александровский сад</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-12" tabindex="-1">
+  <h2 class="monastery-title">12. Лужники (стадион и район)</h2>
+  <p class="meta"><strong>Адрес:</strong> Лужники, 24 &nbsp;|&nbsp; <strong>Стиль:</strong> спортивный комплекс</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Построен в 1955–1956. Реконструирован к ЧМ-2018.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Главный стадион страны.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>большая спортивная арена</li><li>олимпийский комплекс</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Вместимость 81 тыс. зрителей.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">В 1980 году спортивный комплекс принял несколько этапов Олимпиады.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_places/luzhniki_1.jpg" alt="Лужники (стадион и район) — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_places/luzhniki_4.jpg" alt="Лужники (стадион и район) — фото 2" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.5536,55.7158&z=16&l=map&size=380,200&pt=37.5536,55.7158,pm2rdm" alt="Карта: Лужники (стадион и район)" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Лужники (стадион и район)</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-13" tabindex="-1">
+  <h2 class="monastery-title">13. Останкинска<span class="old-russian-ya">я</span> телебашн<span class="old-russian-ya">я</span> (вид)</h2>
+  <p class="meta"><strong>Адрес:</strong> ул. Академика Королёва, 12 &nbsp;|&nbsp; <strong>Стиль:</strong> телебашня</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Построена в 1960–1967. Высота 540 м.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Символ советского ТВ и одна из высочайших башен мира.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>высота 540 м</li><li>смотровая площадка</li><li>ресторан «Седьмое небо»</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Открыта после пожара 2000 года для посещения.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">По состоянию на весну 2022 года телебашня — 15-е по высоте сооружение из когда-либо существовавших, а также высочайшее сооружение в Европе и в России.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_places/ostankino_tower_1.jpg" alt="Останкинская телебашня (вид) — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_places/ostankino_tower_2.jpg" alt="Останкинская телебашня (вид) — фото 2" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_places/ostankino_tower_3.jpg" alt="Останкинская телебашня (вид) — фото 3" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6114,55.8219&z=16&l=map&size=380,200&pt=37.6114,55.8219,pm2rdm" alt="Карта: Останкинская телебашня (вид)" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Останкинская телебашня (вид)</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-14" tabindex="-1">
+  <h2 class="monastery-title">14. Московский зоопарк</h2>
+  <p class="meta"><strong>Адрес:</strong> ул. Большая Грузинская, 1 &nbsp;|&nbsp; <strong>Стиль:</strong> зоопарк</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Основан в 1864. Один из старейших зоопарков Европы.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Главный зоопарк страны.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>один из старейших в Европе</li><li>более 1000 видов</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Площадь около 21 га.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">The Moscow Zoo or Moskovsky Zoopark (Russian: Московский зоопарк) is a 21.5-hectare (53-acre) zoo, one of the largest in Russia and one of the oldest in Europe.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_places/zoo_1.jpg" alt="Московский зоопарк — фото 1" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.5786,55.7631&z=16&l=map&size=380,200&pt=37.5786,55.7631,pm2rdm" alt="Карта: Московский зоопарк" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Московский зоопарк</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-15" tabindex="-1">
+  <h2 class="monastery-title">15. Площадь Гагарина</h2>
+  <p class="meta"><strong>Адрес:</strong> пл. Гагарина &nbsp;|&nbsp; <strong>Стиль:</strong> площадь с памятником</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Площадь на юго-западе Москвы. Памятник Гагарину установлен в 1980 году (скульптор П. И. Бондаренко); титановая фигура на высоком постаменте — один из символов космической эпохи. Транспортный узел и место встреч.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Памятник первому космонавту; видовая доминанта Ленинского проспекта.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>памятник Ю. А. Гагарину (42,5 м)</li><li>вид на Ленинский проспект</li><li>метро «Ленинский проспект»</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Высота памятника 42,5 м (длительность полёта Гагарина — 108 мин ≈ 1,5 оборота).</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">The line is rebuilt from the Little Ring of the Moscow Railway (MKZD), opened to passengers on 10 September 2016 and is operated by the Moscow Government owned company MKZD through the Moscow Metro, with the state-run Russian Railways selected as the operation subcontractor.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_places/gagarin_place_1.jpg" alt="Площадь Гагарина — фото 1" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.5853,55.7064&z=16&l=map&size=380,200&pt=37.5853,55.7064,pm2rdm" alt="Карта: Площадь Гагарина" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Площадь Гагарина</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-16" tabindex="-1">
+  <h2 class="monastery-title">16. Площадь Европы</h2>
+  <p class="meta"><strong>Адрес:</strong> Киевский вокзал, площадь &nbsp;|&nbsp; <strong>Стиль:</strong> площадь у вокзала</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Образована при реконструкции площади у Киевского вокзала в 2000-х. В центре — скульптурная композиция «Похищение Европы» (Зураб Церетели). Подземный торговый центр «Европейский»; удобная пересадка с метро на поезда.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Западные «ворота» Москвы; современная площадь с фонтаном и скульптурой.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>фонтан «Похищение Европы»</li><li>Киевский вокзал</li><li>вид на Москву-Сити</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Скульптура «Похищение Европы» установлена в 2002.</li><li>Рядом — Киевский вокзал (1914–1918).</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">The Rape of Europa is an oil on canvas painting by Claude Lorrain, from 1655. With its pendant The Battle of the Milvian Bridge, it is now in the Pushkin Museum, in Moscow.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_places/europe_square_2.jpg" alt="Площадь Европы — фото 1" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.5661,55.7436&z=16&l=map&size=380,200&pt=37.5661,55.7436,pm2rdm" alt="Карта: Площадь Европы" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Площадь Европы</p>
+  </div>
+</section>
+
+
+<section class="qa-section" id="qa" tabindex="-1">
+  <h2>Вопросы и ответы по фактам</h2>
+  <div class="qa-item"><p class="question"><strong>Вопрос 1. Как называется главная площадь Москвы?</strong></p><p class="answer">Ответ: Красная площадь. Объект Всемирного наследия ЮНЕСКО.</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 2. Какая улица стала первой пешеходной в Москве?</strong></p><p class="answer">Ответ: Старый Арбат (1986).</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 3. Где место действия начала романа «Мастер и Маргарита»?</strong></p><p class="answer">Ответ: Патриаршие пруды.</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 4. Сколько бульваров в Бульварном кольце?</strong></p><p class="answer">Ответ: 10 бульваров (от Арбата до Яузы).</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 5. Какой парк открыт на месте гостиницы «Россия»?</strong></p><p class="answer">Ответ: Парк «Зарядье» (2017).</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 6. Где в Москве стоит памятник Юрию Гагарину и какой он высоты?</strong></p><p class="answer">Ответ: На площади Гагарина (Ленинский проспект). Высота памятника 42,5 м (символизирует 108 минут полёта).</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 7. Какой переулок связан с МХТ и Чеховым?</strong></p><p class="answer">Ответ: Камергерский переулок. Здесь с 1902 года располагается МХТ им. А. П. Чехова; у театра — памятник писателю.</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 8. Что такое Лобное место на Красной площади?</strong></p><p class="answer">Ответ: Каменная трибуна XVI века для объявления царских указов и проведения церемоний; казни у Лобного места не проводились.</p></div>
+</section>
+
+<script>
+(function(){
+  var MAX_IMAGES_PER_ROW = 4;
+  window._deletedImagePaths = window._deletedImagePaths || [];
+  function recordDeleted(src) {
+    if (typeof src !== 'string') return;
+    var s = src.split('?')[0].replace(/\\/g, '/');
+    var idx = s.indexOf('images/');
+    if (idx === 0) window._deletedImagePaths.push(s);
+    else if (idx > 0) window._deletedImagePaths.push(s.substring(idx));
+  }
+  function initEditable() {
+    var sel = '.intro-block p,.intro-block h1,.monastery .monastery-title,.monastery .meta,' +
+      '.monastery .body-text,.monastery .story-text,.qa-section p,.qa-section h2,' +
+      '.monastery ul li';
+    document.querySelectorAll(sel).forEach(function(el){ el.contentEditable = 'true'; });
+  }
+  function setupImages() {
+    document.querySelectorAll('.images-row').forEach(function(row){
+      var imgs = row.querySelectorAll('.monastery-img');
+      imgs.forEach(function(img){
+        if (img.closest('.img-wrap')) return;
+        var wrap = document.createElement('span');
+        wrap.className = 'img-wrap';
+        wrap.draggable = true;
+        wrap.title = 'Drag to reorder';
+        img.parentNode.insertBefore(wrap, img);
+        wrap.appendChild(img);
+        var delBtn = document.createElement('button');
+        delBtn.className = 'img-del';
+        delBtn.type = 'button';
+        delBtn.textContent = '×';
+        delBtn.title = 'Delete image';
+        delBtn.onclick = function(){ recordDeleted(img.src); wrap.remove(); updateAddBtn(row); };
+        wrap.appendChild(delBtn);
+        wrap.ondragstart = function(e){ e.dataTransfer.setData('text/plain',''); e.dataTransfer.effectAllowed = 'move'; window._dragSrc = wrap; wrap.classList.add('img-dragging'); };
+        wrap.ondragend = function(){ wrap.classList.remove('img-dragging'); };
+        wrap.ondragover = function(e){ e.preventDefault(); e.dataTransfer.dropEffect = 'move'; if (e.currentTarget !== window._dragSrc) e.currentTarget.classList.add('img-drop-target'); };
+        wrap.ondragleave = function(e){ e.currentTarget.classList.remove('img-drop-target'); };
+        wrap.ondrop = function(e){ e.preventDefault(); e.currentTarget.classList.remove('img-drop-target'); var src = window._dragSrc; if (src && src !== e.currentTarget) { row.insertBefore(src, e.currentTarget); updateAddBtn(row); } };
+      });
+      var addBtn = row.querySelector('.add-img-btn');
+      if (!addBtn) {
+        addBtn = document.createElement('button');
+        addBtn.className = 'add-img-btn';
+        addBtn.type = 'button';
+        addBtn.appendChild(document.createTextNode('+ Add image '));
+        var countSpan = document.createElement('span');
+        countSpan.className = 'img-count';
+        addBtn.appendChild(countSpan);
+        addBtn.onclick = function(){ var inp = document.createElement('input'); inp.type = 'file'; inp.accept = 'image/*'; inp.multiple = true; inp.onchange = function(){ [].slice.call(inp.files).forEach(function(file){ if (row.querySelectorAll('.monastery-img').length >= MAX_IMAGES_PER_ROW) return; var r = new FileReader(); r.onload = function(){ var i = document.createElement('img'); i.className = 'monastery-img'; i.src = r.result; i.alt = ''; var w = document.createElement('span'); w.className = 'img-wrap'; w.draggable = true; w.title = 'Drag to reorder'; var dB = document.createElement('button'); dB.className = 'img-del'; dB.type = 'button'; dB.textContent = '×'; dB.onclick = function(){ w.remove(); updateAddBtn(row); }; w.appendChild(i); w.appendChild(dB); w.ondragstart = function(e){ e.dataTransfer.setData('text/plain',''); e.dataTransfer.effectAllowed = 'move'; window._dragSrc = w; w.classList.add('img-dragging'); }; w.ondragend = function(){ w.classList.remove('img-dragging'); }; w.ondragover = function(e){ e.preventDefault(); e.dataTransfer.dropEffect = 'move'; if (e.currentTarget !== window._dragSrc) e.currentTarget.classList.add('img-drop-target'); }; w.ondragleave = function(e){ e.currentTarget.classList.remove('img-drop-target'); }; w.ondrop = function(e){ e.preventDefault(); e.currentTarget.classList.remove('img-drop-target'); var src = window._dragSrc; if (src && src !== e.currentTarget) { row.insertBefore(src, e.currentTarget); updateAddBtn(row); } }; row.insertBefore(w, addBtn); updateAddBtn(row); }; r.readAsDataURL(file); }); }; inp.click(); };
+        row.appendChild(addBtn);
+      }
+      updateAddBtn(row);
+    });
+  }
+  function updateAddBtn(row) {
+    var n = row.querySelectorAll('.monastery-img').length;
+    var addBtn = row.querySelector('.add-img-btn');
+    var countSpan = addBtn ? addBtn.querySelector('.img-count') : null;
+    if (countSpan) { countSpan.textContent = n + ' из 4'; }
+    if (addBtn) { addBtn.classList.toggle('hidden', n >= MAX_IMAGES_PER_ROW); }
+  }
+  function addExportButton() {
+    var bar = document.createElement('div');
+    bar.className = 'edit-toolbar';
+    var btn = document.createElement('button');
+    btn.textContent = 'Export HTML';
+    btn.onclick = function() {
+      var root = document.documentElement.cloneNode(true);
+      root.querySelectorAll('.edit-toolbar').forEach(function(el){ el.remove(); });
+      root.querySelectorAll('.img-del, .add-img-btn').forEach(function(el){ el.remove(); });
+      root.querySelectorAll('.img-wrap').forEach(function(wrap){
+        var img = wrap.querySelector('.monastery-img');
+        if (img) { wrap.parentNode.insertBefore(img, wrap); }
+        wrap.remove();
+      });
+      var deleted = window._deletedImagePaths || [];
+      if (deleted.length) {
+        var script = root.ownerDocument.createElement('script');
+        script.type = 'application/json';
+        script.id = 'otium-deleted-images';
+        script.textContent = JSON.stringify(deleted);
+        root.querySelector('body').appendChild(script);
+      }
+      var html = '<!DOCTYPE html>\n' + root.outerHTML;
+      var blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = document.title.replace(/[^a-z0-9]/gi, '_') + '.html';
+      a.click();
+      URL.revokeObjectURL(a.href);
+    };
+    bar.appendChild(btn);
+    document.body.appendChild(bar);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run);
+  else run();
+  function run() {
+    initEditable();
+    setupImages();
+    addExportButton();
+  }
+})();
+</script>
+</body>
+</html>

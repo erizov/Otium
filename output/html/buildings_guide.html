@@ -1,0 +1,1292 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Дома Москвы</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;0,600&amp;family=EB+Garamond:ital,wght@0,400;0,600&amp;family=Pochaevsk&amp;family=Source+Serif+4:ital,wght@0,400;0,600&amp;family=Inter:wght@400;500;600&amp;display=swap&amp;subset=latin,cyrillic"
+        rel="stylesheet" />
+  <style>
+      @page { size: A4; margin: 2cm 1.5cm 1.5cm 1.8cm; }
+      *, html, body { -webkit-print-color-adjust: exact;
+                      print-color-adjust: exact; }
+      html { background-color: #faf8f5; }
+      html, body { margin: 0; padding: 0; font-family: "Source Serif 4",
+        Georgia, "Times New Roman", serif;
+        font-size: 10pt; line-height: 1.45; color: #1c1b19;
+        background-color: #faf8f5; }
+      body { color: #1c1b19 !important; background-color: #faf8f5 !important; }
+      h1 { font-family: "Source Serif 4", Georgia, serif;
+           font-size: 18pt; text-align: center; margin: 0 0 0.5em;
+           color: #1c1b19 !important; }
+      h2 { font-family: "Source Serif 4", Georgia, serif;
+           color: #1c1b19 !important; }
+      h2.monastery-title { font-family: Pochaevsk, Georgia, serif;
+           font-size: 17pt; margin: 1.2em 0 0.4em 0.3em;
+           border-bottom: 1px solid #8b7355; padding-bottom: 0.25em;
+           color: #2c2a28 !important; }
+      .old-russian-ya { font-family: "Source Serif 4", Georgia, serif; }
+      .meta, .block-label { font-family: Inter, "IBM Plex Sans", sans-serif;
+          font-size: 8.5pt; letter-spacing: 0.02em; }
+      .meta { margin: 0.2em 0 0.6em 0.3em; color: #6b635b !important; }
+      .block-label { margin: 0.6em 0 0.15em 0.3em; text-transform: uppercase;
+                     font-weight: 600; color: #6b7b8a !important; }
+      .body-text { margin: 0 0 0.4em 0.3em; text-align: left; max-width: 42em;
+                   color: #1c1b19; font-family: "Source Serif 4", Georgia, serif; }
+      .story-text { font-style: italic; color: #4a5568; }
+      ul, li, p { color: #1c1b19; font-family: "Source Serif 4", Georgia, serif; }
+      .intro-block { page-break-after: always; padding: 2.5em 1em 0 1.2em;
+                     background-color: #faf8f5; }
+      .intro-block .otium-brand { font-family: Inter, sans-serif;
+        font-size: 8pt; letter-spacing: 0.2em; color: #6b635b !important;
+        margin-bottom: 0.3em; }
+      .intro-block .otium-title { font-family: Pochaevsk, Georgia, serif;
+        font-size: 20pt; font-weight: 600; text-align: center;
+        margin: 0.2em 0 0.1em; color: #1a1a1a !important; }
+      .intro-block .otium-subtitle { font-family: Pochaevsk, Georgia, serif;
+        font-size: 11pt; text-align: center; color: #6b635b !important;
+        font-style: italic; margin-bottom: 1em; }
+      .intro-block p { margin: 0.4em 0; font-size: 9.5pt; line-height: 1.5;
+        text-align: justify; max-width: 38em; margin-left: auto;
+        margin-right: auto; color: #1c1b19;
+        font-family: "Source Serif 4", Georgia, serif; }
+      .monastery { display: block; page-break-before: always;
+                    break-before: page; padding: 1.5em 0 0; }
+      .monastery:first-of-type { page-break-before: auto; break-before: auto; }
+      .monastery:last-of-type { padding-bottom: 0.5em; }
+      .visual-block { margin: 0.8em 0 0; page-break-after: always; }
+      .monastery:last-of-type .visual-block { page-break-after: auto; }
+      .images-row { display: flex; gap: 10px; margin: 1em; flex-wrap: wrap; }
+      .monastery-img { flex: 1 1 200px; max-width: 100%; height: 150px;
+                        object-fit: cover; }
+      .images-caption { font-size: 8pt; color: #6b635b; margin: 0.25em 1em 0;
+        font-family: Inter, sans-serif; }
+      .map-block { margin: 1em; }
+      .map-caption { font-size: 8pt; color: #6b635b; margin: 0.25em 0 0;
+        font-family: Inter, sans-serif; }
+      .map-img { max-width: 100%; height: auto; max-height: 160px; }
+      .qa-section { margin-top: 2em; page-break-before: always;
+                     break-before: page; padding-top: 1.5em; }
+      .qa-item { margin-bottom: 0.6em; font-size: 9pt; color: #1c1b19; }
+      .question { margin-bottom: 0.1em; color: #1c1b19; }
+      .answer { margin-left: 0.5em; color: #2c2a28;
+        font-family: "Source Serif 4", Georgia, serif; }
+      ul { margin: 0.2em 0 0.4em 0.3em; padding-left: 1.2em; color: #1c1b19; }
+      p { margin: 0.2em 0; color: #1c1b19; }
+      .map-block { background: transparent; }
+      .edit-toolbar { position: fixed; top: 8px; right: 8px; z-index: 9999; }
+      .edit-toolbar button { font-family: Inter, sans-serif; font-size: 11px;
+        padding: 6px 10px; background: #2c2a28; color: #faf8f5; border: none;
+        border-radius: 4px; cursor: pointer; }
+      .edit-toolbar button:hover { background: #4a5568; }
+      .img-wrap { position: relative; display: inline-block; }
+      .img-wrap.img-dragging { opacity: 0.6; }
+      .img-wrap.img-drop-target { outline: 2px dashed #8b7355; outline-offset: 2px; }
+      .img-del { position: absolute; top: 4px; right: 4px; width: 22px; height: 22px;
+        font-size: 16px; line-height: 20px; text-align: center; background: rgba(0,0,0,.6);
+        color: #fff; border: none; border-radius: 3px; cursor: pointer; }
+      .img-del:hover { background: #c53030; }
+      .add-img-btn { font-family: Inter, sans-serif; font-size: 10px;
+        padding: 4px 8px; margin: 4px 0 0 4px; background: #e0ddd8; color: #2c2a28;
+        border: 1px solid #8b7355; border-radius: 3px; cursor: pointer; }
+      .add-img-btn:hover { background: #d0cdc8; }
+      .add-img-btn.hidden { display: none; }
+      .img-count { font-size: 9pt; color: #6b635b; margin-left: 0.25em;
+        font-family: Inter, sans-serif; }
+      @media print {
+        html, body { color: #1c1b19 !important; background: #faf8f5 !important; }
+        .block-label { color: #6b7b8a !important; }
+        .meta { color: #6b635b !important; }
+        .monastery { page-break-before: always; break-before: page; }
+        .monastery:first-of-type { page-break-before: auto; break-before: auto; }
+        .edit-toolbar, .img-del, .add-img-btn, .img-count { display: none !important; }
+      }
+    </style>
+</head>
+<body>
+
+    <div class="intro-block">
+    <p class="otium-brand">OTIUM / Sacred</p>
+    <h1 class="otium-title">Дома Москвы</h1>
+    <p class="otium-subtitle">50 знаменитых домов</p>
+    <p>OTIUM — это практика осмысленного досуга.
+    В античной традиции otium означало не отдых от труда, а время, в котором
+    человек возвращается к взгляду, памяти и мышлению. Это время без
+    утилитарной цели, без спешки, без требования результата.</p>
+    <p>Мы создаём маршруты не для «посещения», а для пребывания.
+    Не для потребления культуры, а для внимательного присутствия в ней.</p>
+    <p>OTIUM работает с пространствами, где время уплотняется:
+    архитектурой, сакральными местами, кино, памятью, ландшафтом.
+    Мы не стремимся охватить всё и не обещаем «лучшее».
+    Мы отбираем немногое — то, что выдерживает тишину и повторный взгляд.</p>
+    <p>OTIUM — это не гид и не сервис.
+    Это приглашение к прогулке без обязательств.
+    К маршруту, который можно прервать.
+    К месту, где можно задержаться.</p>
+    <p>OTIUM существует для тех, кто хочет смотреть медленно.</p>
+    </div>
+    
+
+<section class="monastery" id="monastery-1" tabindex="-1">
+  <h2 class="monastery-title">1. Московский Кремль</h2>
+  <p class="meta"><strong>Адрес:</strong> Кремль &nbsp;|&nbsp; <strong>Стиль:</strong> крепость, соборы</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Крепость на Боровицком холме известна с 1147 года; при Дмитрии Донском в 1366–1368 годах возвели первые каменные стены. Современные стены и башни построены в 1485–1516 годах итальянскими зодчими (Марк Руффо, Пьетро Антонио Солари, Алевиз Фрязин). В Успенском соборе венчались на царство все русские государи; здесь же хоронили митрополитов и патриархов. С 1991 года Кремль — резиденция президента России. Ансамбль объединяет соборы XV–XVI вв., Большой Кремлёвский дворец (1838–1849), Оружейную палату и Грановитую палату.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Кремль — символ российской государственности и объект Всемирного наследия ЮНЕСКО. Крупнейшая в Европе действующая крепость (27,7 га); политический и духовный центр страны; ансамбль памятников XV–XIX вв. и музеи-сокровищницы.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>стены и башни (XV–XVI вв.)</li><li>Успенский, Благовещенский, Архангельский соборы</li><li>Оружейная палата</li><li>Большой Кремлёвский дворец</li><li>Царь-пушка и Царь-колокол</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Площадь Кремля 27,7 га.</li><li>В Успенском соборе венчались на царство.</li><li>Оружейная палата и Алмазный фонд — сокровищницы.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">The Moscow Kremlin, commonly known as just the Kremlin, is a fortified complex in Moscow, Russia. Located in the centre of the country's capital city, the Moscow Kremlin comprises five palaces, four cathedrals, and the enclosing Kremlin Wall along with the Kremlin towers.</p>
+
+  <div class="visual-block">
+  <div class="images-row">
+    <img src="images/moscow_buildings/kremlin_1.jpg" alt="Московский Кремль — фото 1" class="monastery-img" />
+<img src="images/moscow_buildings/kremlin_2.jpg" alt="Московский Кремль — фото 2" class="monastery-img" />
+  </div>
+  <p class="images-caption">Фото: Московский Кремль</p>
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.6175,55.7520&z=16&l=map&size=380,200&pt=37.6175,55.7520,pm2rdm" alt="Карта: Московский Кремль" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-2" tabindex="-1">
+  <h2 class="monastery-title">2. ГУМ</h2>
+  <p class="meta"><strong>Адрес:</strong> Красная пл., 3 &nbsp;|&nbsp; <strong>Стиль:</strong> псевдорусский</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Верхние торговые ряды возведены в 1890–1893 годах по проекту А. Н. Померанцева и инженера В. Г. Шухова. Шухов спроектировал уникальные арочные металлические фермы: остеклённая крыша над тремя продольными и тремя поперечными галереями не имела аналогов в мире. После революции здесь размещались учреждения; в 1953 открылся ГУМ — главный универмаг страны. В 1990-х здание приватизировали, провели реставрацию, сохранив псевдорусский фасад и внутреннюю планировку.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">ГУМ — главный универмаг России и памятник архитектуры на Красной площади. Уникальная остеклённая крыша Шухова, три яруса галерей, фонтаны и исторические фасады делают его символом московской торговли и одной из визитных карточек города.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>галерея с стеклянной крышей</li><li>три линии торговых рядов</li><li>исторические фасады</li><li>фонтаны внутри</li><li>рестораны и бутики</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Галерея с стеклянной крышей (инж. В. Г. Шухов).</li><li>Более 200 магазинов и точек общепита.</li><li>Исторические фасады выходят на Красную площадь и Варварку.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">GUM (Russian: ГУМ) is a shopping center in Moscow, Russia. It was also the main department store in many cities of the former Soviet Union; similarly named stores operated in some Soviet republics and in post-Soviet states. The most famous GUM is the large store facing Red Square in the Kitai-gorod area – itself traditionally a mall of Moscow. Originally, and today again, the building functions as a shopping mall.</p>
+
+  <div class="visual-block">
+  <div class="images-row">
+    <img src="images/moscow_buildings/gum_1.jpg" alt="ГУМ — фото 1" class="monastery-img" />
+<img src="images/moscow_buildings/gum_2.jpg" alt="ГУМ — фото 2" class="monastery-img" />
+  </div>
+  <p class="images-caption">Фото: ГУМ</p>
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.6214,55.7547&z=16&l=map&size=380,200&pt=37.6214,55.7547,pm2rdm" alt="Карта: ГУМ" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-3" tabindex="-1">
+  <h2 class="monastery-title">3. Дом на набережной</h2>
+  <p class="meta"><strong>Адрес:</strong> ул. Серафимовича, 2 &nbsp;|&nbsp; <strong>Стиль:</strong> конструктивизм</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Жилой комплекс построен в 1927–1931 годах по проекту Б. М. Иофана для высшего партийного и советского руководства. В 505 квартирах жили Ворошилов, Микоян, Хрущёв, Косыгин; здесь же — кинотеатр «Ударник», универмаг, поликлиника, столовая. В 1930-х многие жильцы пали жертвами репрессий. С 1989 года в одном из подъездов работает музей «Дом на набережной», рассказывающий о судьбах обитателей дома.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Дом на набережной — выдающийся памятник конструктивизма и символ жизни советской номенклатуры 1930-х годов. Монументальный объём у Болотной набережной сохранил внутреннюю инфраструктуру (кинотеатр, магазины) и остаётся жилым.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>жилой комплекс правительства</li><li>музей</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>500+ квартир для элиты.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">It was built from 1965 to 1981 according to the design of architect Dmitry Chechulin to house the People's Control Committee and the Supreme Soviet of Russia.</p>
+
+  <div class="visual-block">
+  <div class="images-row">
+    <img src="images/moscow_buildings/dom_nab_1.jpg" alt="Дом на набережной — фото 1" class="monastery-img" />
+<img src="images/moscow_buildings/dom_nab_2.jpg" alt="Дом на набережной — фото 2" class="monastery-img" />
+  </div>
+  <p class="images-caption">Фото: Дом на набережной</p>
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.6119,55.7442&z=16&l=map&size=380,200&pt=37.6119,55.7442,pm2rdm" alt="Карта: Дом на набережной" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-4" tabindex="-1">
+  <h2 class="monastery-title">4. Москва-Сити</h2>
+  <p class="meta"><strong>Адрес:</strong> Пресненская наб. &nbsp;|&nbsp; <strong>Стиль:</strong> небоскрёбы</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Строительство международного делового центра на Пресненской набережной началось в 1990-х; первые башни сданы в 2000-х. Башня «Федерация» (374 м) — одна из высочайших в Европе; в комплексе — «Эволюция», «Око», «Империя», «Город столиц» и др. Здесь размещаются офисы, гостиницы, апартаменты, торговые галереи и смотровые площадки. Москва-Сити формирует силуэт западного въезда в город.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Москва-Сити — главный деловой кластер России и символ современной Москвы. Высотные башни с остеклёнными фасадами образуют видную издалека группу; на территории — офисы, гостиницы, рестораны и общественные пространства.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>башни</li><li>«Эволюция»</li><li>«Федерация»</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Высота «Федерации» 374 м.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">The Government of Moscow first conceived the project in 1992, as a mixed development of office, residential, retail and entertainment facilities.</p>
+
+  <div class="visual-block">
+  <div class="images-row">
+    <img src="images/moscow_buildings/city_1.jpg" alt="Москва-Сити — фото 1" class="monastery-img" />
+<img src="images/moscow_buildings/city_2.jpg" alt="Москва-Сити — фото 2" class="monastery-img" />
+  </div>
+  <p class="images-caption">Фото: Москва-Сити</p>
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.5394,55.7495&z=16&l=map&size=380,200&pt=37.5394,55.7495,pm2rdm" alt="Карта: Москва-Сити" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-5" tabindex="-1">
+  <h2 class="monastery-title">5. Большой театр</h2>
+  <p class="meta"><strong>Адрес:</strong> Театральная пл., 1 &nbsp;|&nbsp; <strong>Стиль:</strong> классицизм</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Театр основан в 1776 году князем Урусовым и Меддоксом; неоднократно горел (1805, 1812, 1853). После пожара 1853 года здание отстроено за три года по проекту А. К. Кавоса; фасад с колоннадой и квадригой Аполлона стал одним из символов Москвы. На сцене Большого шли премьеры опер Глинки, Мусоргского, Чайковского; здесь сформировалась русская балетная школа. В 2005–2011 годах проведена масштабная реставрация с воссозданием акустики и интерьеров.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Большой театр — главный театр России и символ русского балета и оперы. Здание в стиле классицизма на Театральной площади — объект культурного наследия; труппа и сцена имеют мировую известность.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>историческая сцена</li><li>здание А. Кавоса</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>ЮНЕСКО (в составе объекта).</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">The Bolshoi Theatre (Russian: Большо́й теа́тр, romanized: Bol'shoy teatr, IPA: [bɐlʲˈʂoj tʲɪˈat(ə)r], lit. 'Large Theater') is a historic opera house in Moscow, Russia, originally designed by architect Joseph Bové.</p>
+
+  <div class="visual-block">
+  <div class="images-row">
+    <img src="images/moscow_buildings/bolshoy_1.jpg" alt="Большой театр — фото 1" class="monastery-img" />
+<img src="images/moscow_buildings/bolshoy_2.jpg" alt="Большой театр — фото 2" class="monastery-img" />
+  </div>
+  <p class="images-caption">Фото: Большой театр</p>
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.6186,55.7603&z=16&l=map&size=380,200&pt=37.6186,55.7603,pm2rdm" alt="Карта: Большой театр" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-6" tabindex="-1">
+  <h2 class="monastery-title">6. МГУ (главное здание)</h2>
+  <p class="meta"><strong>Адрес:</strong> Воробьёвы горы, 1 &nbsp;|&nbsp; <strong>Стиль:</strong> сталинский ампир</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Главное здание МГУ построено в 1949–1953 годах по проекту Л. В. Руднева, С. Е. Чернышёва, П. В. Абросимова при участии В. И. Назина. Высота со шпилем и звездой — 240 м; центральный корпус с башней и боковые крылья образуют парадный фасад. В оформлении — скульптура (Ломоносов, аллегории наук), герб СССР; внутри — аудитории, общежития, актовый зал. Центр студгородка на Воробьёвых горах; одна из семи сталинских высоток.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">МГУ — символ советского и российского высшего образования; архитектурная доминанта юго-запада Москвы; одна из семи сталинских высоток; крупнейший университетский комплекс страны.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>высота 240 м</li><li>звезда</li><li>смотровая</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Центр комплекса на Воробьёвых горах.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">It was designed by Lev Rudnev as the headquarters of Moscow State University, and is the tallest among the &quot;Seven Sisters&quot; constructed in Moscow between 1947 and 1953 in the Stalinist architectural style.</p>
+
+  <div class="visual-block">
+  <div class="images-row">
+    <img src="images/moscow_buildings/mgu_1.jpg" alt="МГУ (главное здание) — фото 1" class="monastery-img" />
+<img src="images/moscow_buildings/mgu_2.jpg" alt="МГУ (главное здание) — фото 2" class="monastery-img" />
+  </div>
+  <p class="images-caption">Фото: МГУ (главное здание)</p>
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.5303,55.7030&z=16&l=map&size=380,200&pt=37.5303,55.7030,pm2rdm" alt="Карта: МГУ (главное здание)" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-7" tabindex="-1">
+  <h2 class="monastery-title">7. Гостиница «Метрополь»</h2>
+  <p class="meta"><strong>Адрес:</strong> Театральный пр., 1/4 &nbsp;|&nbsp; <strong>Стиль:</strong> модерн</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Гостиница построена в 1899–1905 годах по инициативе Саввы Мамонтова; авторы проекта — В. Ф. Валькот, Л. Н. Кекушев, В. В. Воейков. Мозаика «Принцесса Грёза» и панно на фасаде выполнены по эскизам М. А. Врубеля и А. Я. Головина. В 1918 в банкетном зале проходили заседания V Всероссийского съезда Советов; здесь приняли первую Конституцию РСФСР. После реставрации 1990–2010-х — премиальный отель.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Метрополь — выдающийся памятник модерна с керамическим и майоликовым декором на фасаде. Историческая гостиница у Театральной площади; мозаики Врубеля и Головина — одна из визитных карточек московской архитектуры.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>майолика</li><li>«Принцесса Грёза»</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Мозаики по эскизам Врубеля.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">It is the largest extant Moscow hotel built before the Russian Revolution of 1917.</p>
+
+  <div class="visual-block">
+  <div class="images-row">
+    <img src="images/moscow_buildings/metropol_1.jpg" alt="Гостиница «Метрополь» — фото 1" class="monastery-img" />
+<img src="images/moscow_buildings/metropol_2.jpg" alt="Гостиница «Метрополь» — фото 2" class="monastery-img" />
+  </div>
+  <p class="images-caption">Фото: Гостиница «Метрополь»</p>
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.6181,55.7622&z=16&l=map&size=380,200&pt=37.6181,55.7622,pm2rdm" alt="Карта: Гостиница «Метрополь»" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-8" tabindex="-1">
+  <h2 class="monastery-title">8. Гостиница «Националь»</h2>
+  <p class="meta"><strong>Адрес:</strong> ул. Моховая, 15/1 &nbsp;|&nbsp; <strong>Стиль:</strong> эклектика</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Гостиница возведена в 1900–1903 годах по проекту А. В. Иванова на месте снесённой гостиницы «Националь». Стиль — эклектика с элементами модерна; интерьеры оформлены живописью и лепниной. В 1905 году с балкона обстреливали демонстрацию; в 1918 здесь жили члены Совнаркома (Ленин — в номере 107). В 1932 вошла в «Интурист»; после реставрации 1990–2000-х восстановлены исторические интерьеры и люксы.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">«Националь» — одна из старейших и самых престижных гостиниц Москвы с видом на Кремль. Памятник архитектуры; место событий революций 1905 и 1917 годов; сохранившиеся интерьеры и коллекция живописи.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>историческая гостиница</li><li>вид на Кремль</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Реконструкция 1990–2000-х.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">The Hotel National, Moscow (Russian: гости́ница «Националь») is a five-star hotel in Moscow, Russia, opened in 1903. It has 202 bedrooms and 56 suites and is located on Manege Square, directly across from The Kremlin.</p>
+
+  <div class="visual-block">
+  <div class="images-row">
+    <img src="images/moscow_buildings/national_1.jpg" alt="Гостиница «Националь» — фото 1" class="monastery-img" />
+<img src="images/moscow_buildings/national_2.jpg" alt="Гостиница «Националь» — фото 2" class="monastery-img" />
+  </div>
+  <p class="images-caption">Фото: Гостиница «Националь»</p>
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.6131,55.7561&z=16&l=map&size=380,200&pt=37.6131,55.7561,pm2rdm" alt="Карта: Гостиница «Националь»" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-9" tabindex="-1">
+  <h2 class="monastery-title">9. ЦУМ</h2>
+  <p class="meta"><strong>Адрес:</strong> ул. Петровка, 2 &nbsp;|&nbsp; <strong>Стиль:</strong> модерн, неоготика</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Здание Верхних торговых рядов на Петровке построено в 1906–1908 годах по проекту Р. И. Клейна для «Мюр и Мерилиз» в неоготическом стиле. Изначально — пассаж с галереями и лифтами; после революции национализировано, использовалось как склад и универмаг ЦУМ. В 2000-х проведена реконструкция: сохранён фасад, внутри — современный торговый центр премиум-класса; знаменитые часы на углу сохранены.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">ЦУМ — памятник неоготической архитектуры и крупный торговый центр на Петровке. Узнаваемый силуэт с башенками и остеклёнными галереями; исторический пассаж и современный ритейл под одной крышей.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>универмаг</li><li>часы</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Часы на фасаде — символ ЦУМа.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">The TsUM interiors have been refurbished many times, most recently in 2007.</p>
+
+  <div class="visual-block">
+
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.6175,55.7642&z=16&l=map&size=380,200&pt=37.6175,55.7642,pm2rdm" alt="Карта: ЦУМ" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-10" tabindex="-1">
+  <h2 class="monastery-title">10. Здание СЭВ</h2>
+  <p class="meta"><strong>Адрес:</strong> ул. Новый Арбат, 36 &nbsp;|&nbsp; <strong>Стиль:</strong> модернизм</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Комплекс построен в 1963–1970 годах для Секретариата Совета экономической взаимопомощи (СЭВ) — организации социалистических стран. Несколько высотных корпусов-«книжек» с остеклёнными фасадами формируют силуэт Нового Арбата. После роспуска СЭВ в 1991 году здание передано правительству Москвы; здесь размещаются мэрия, префектура и административные службы.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Здание СЭВ — символ Нового Арбата и образец советского модернизма 1960-х. Резиденция городской власти; узнаваемые «книжки» — одна из доминант центра Москвы.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>«книжки»</li><li>высотное здание</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>До 1991 — СЭВ.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Здания были возведены в 1963—1970 годах для размещения органов Совета экономической взаимопомощи, в 1991—1992 годах отчуждены в пользу мэрии Москвы вместе с другим недвижимым имуществом СЭВ.</p>
+
+  <div class="visual-block">
+  <div class="images-row">
+    <img src="images/moscow_buildings/sev_1.jpg" alt="Здание СЭВ — фото 1" class="monastery-img" />
+<img src="images/moscow_buildings/sev_2.jpg" alt="Здание СЭВ — фото 2" class="monastery-img" />
+  </div>
+  <p class="images-caption">Фото: Здание СЭВ</p>
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.5831,55.7523&z=16&l=map&size=380,200&pt=37.5831,55.7523,pm2rdm" alt="Карта: Здание СЭВ" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-11" tabindex="-1">
+  <h2 class="monastery-title">11. Белый дом (Росси<span class="old-russian-ya">я</span>)</h2>
+  <p class="meta"><strong>Адрес:</strong> Краснопресненская наб., 2 &nbsp;|&nbsp; <strong>Стиль:</strong> модернизм</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Построено в 1965–1981 годах по проекту Д. Н. Чечулина как Дом Советов РСФСР; стиль — поздний советский модернизм, белый мрамор фасадов. С 1993 года — здание Правительства Российской Федерации. В октябре 1993 года здание стало эпицентром вооружённого противостояния; после штурма и пожара восстановлено. Высота 119 м.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Белый дом — здание Правительства России; символ исполнительной власти; памятник истории и архитектуры; трагические события октября 1993 года сделали его узнаваемым символом современной российской истории.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>здание правительства РФ</li><li>1993</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>События октября 1993.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">It was built from 1965 to 1981 according to the design of architect Dmitry Chechulin to house the People's Control Committee and the Supreme Soviet of Russia.</p>
+
+  <div class="visual-block">
+
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.5786,55.7522&z=16&l=map&size=380,200&pt=37.5786,55.7522,pm2rdm" alt="Карта: Белый дом (Россия)" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-12" tabindex="-1">
+  <h2 class="monastery-title">12. Государственна<span class="old-russian-ya">я</span> Дума</h2>
+  <p class="meta"><strong>Адрес:</strong> Охотный ряд, 1 &nbsp;|&nbsp; <strong>Стиль:</strong> советский неоклассицизм</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Построено в 1932–1935 годах по проекту А. Я. Лангмана для Совета труда и обороны (СТО). Советский неоклассицизм: колонны, рустовка, симметричный фасад. Здание стоит в центре города, напротив входа в Александровский сад. До 1993 года здесь заседал Верховный Совет СССР и РСФСР; с 1994 года — Государственная Дума РФ; рядом — здание Совета Федерации.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Государственная Дума — здание парламента России; символ законодательной власти; памятник советской официальной архитектуры 1930-х; ключевая точка политической карты Москвы.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>здание Госдумы</li><li>исторический центр</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>До 1993 — Верховный Совет.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">It was established by the Constitution of the Russian Federation in 1993.</p>
+
+  <div class="visual-block">
+  <div class="images-row">
+    <img src="images/moscow_buildings/duma_1.jpg" alt="Государственная Дума — фото 1" class="monastery-img" />
+  </div>
+  <p class="images-caption">Фото: Государственная Дума</p>
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.6175,55.7558&z=16&l=map&size=380,200&pt=37.6175,55.7558,pm2rdm" alt="Карта: Государственная Дума" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-13" tabindex="-1">
+  <h2 class="monastery-title">13. Манеж</h2>
+  <p class="meta"><strong>Адрес:</strong> Манежная пл., 1 &nbsp;|&nbsp; <strong>Стиль:</strong> классицизм</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Построен в 1817 году по проекту О. И. Бове для парадов и смотров кавалерии в честь победы над Наполеоном. Деревянные стропила системы А. Я. Карбонье перекрывали пролёт 45 м без промежуточных опор — для того времени рекорд. С XIX века использовался как выставочный и концертный зал. 14 марта 2004 года пожар за несколько часов уничтожил кровлю и перекрытия; два человека погибли. Восстановление заняло около года; интерьеры и экспозиционная функция воссозданы.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Манеж — центральный выставочный зал Москвы; памятник классицизма и инженерного искусства; символ восстановления после пожара 2004 года; место крупных выставок и общественных событий.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>выставочный зал</li><li>деревянные стропила</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Один из крупнейших безопорных залов своего времени.</li><li>Пожар 14 марта 2004 — два человека погибли.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">It is the site of Moscow Design Museum since 2012.</p>
+
+  <div class="visual-block">
+  <div class="images-row">
+    <img src="images/moscow_buildings/manezh_1.jpg" alt="Манеж — фото 1" class="monastery-img" />
+  </div>
+  <p class="images-caption">Фото: Манеж</p>
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.6172,55.7553&z=16&l=map&size=380,200&pt=37.6172,55.7553,pm2rdm" alt="Карта: Манеж" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-14" tabindex="-1">
+  <h2 class="monastery-title">14. Дом Союзов (Колонный зал)</h2>
+  <p class="meta"><strong>Адрес:</strong> ул. Большая Дмитровка, 1 &nbsp;|&nbsp; <strong>Стиль:</strong> классицизм</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Усадьба князей Долгоруковых (XVIII в.) неоднократно перестраивалась; в 1784 здесь открылся Благородный (дворянский) клуб с знаменитым Колонным залом. Зал с белыми колоннами — один из крупнейших в стране (без опор в центре). Здесь проходили съезды РКП(б)—ВКП(б), концерты (Рахманинов, Шаляпин), прощания со Сталиным, Лениным, Высоцким; ныне — концерты, форумы, официальные церемонии.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Дом Союзов (Колонный зал) — место ключевых официальных и культурных мероприятий России; памятник истории и архитектуры; символ общественной и политической жизни Москвы на протяжении более двух веков.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>Колонный зал</li><li>исторические события</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Здесь проходили съезды, концерты.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">The House of the Unions (Russian: Дом Союзов, romanized: Dom Soyuzov, also called Palace of the Unions) is a historic building in the Tverskoy District in central Moscow, Russia. It is situated on the corner of Bolshaya Dmitrovka and Okhotny Ryad streets.</p>
+
+  <div class="visual-block">
+  <div class="images-row">
+    <img src="images/moscow_buildings/dom_soyuzov_1.jpg" alt="Дом Союзов (Колонный зал) — фото 1" class="monastery-img" />
+  </div>
+  <p class="images-caption">Фото: Дом Союзов (Колонный зал)</p>
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.6142,55.7653&z=16&l=map&size=380,200&pt=37.6142,55.7653,pm2rdm" alt="Карта: Дом Союзов (Колонный зал)" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-15" tabindex="-1">
+  <h2 class="monastery-title">15. Гостиница «Ленинградска<span class="old-russian-ya">я</span>»</h2>
+  <p class="meta"><strong>Адрес:</strong> Каланчёвская ул., 21/40 &nbsp;|&nbsp; <strong>Стиль:</strong> сталинская высотка</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Построена в 1949–1954 годах по проекту Л. М. Полякова и А. Б. Борецкого. Одна из семи сталинских высоток; самая низкая (136 м со шпилем), но с богатым интерьером в духе неорусского стиля: мозаики, люстры, лепнина. Расположена у Комсомольской площади (площади трёх вокзалов). После реконструкции 2000-х — гостиница «Хилтон».</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">«Ленинградская» — сталинская высотка; памятник послевоенной архитектуры; символ вокзального узла и гостиничного сервиса советской эпохи; узнаваемый силуэт у вокзалов.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>высотка</li><li>интерьеры</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Самая низкая из семи высоток (136 м).</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">The hotel, completed in 1954, was designed to be the finest luxury hotel in Moscow.</p>
+
+  <div class="visual-block">
+  <div class="images-row">
+    <img src="images/moscow_buildings/leningradskaya_1.jpg" alt="Гостиница «Ленинградская» — фото 1" class="monastery-img" />
+  </div>
+  <p class="images-caption">Фото: Гостиница «Ленинградская»</p>
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.6514,55.7756&z=16&l=map&size=380,200&pt=37.6514,55.7756,pm2rdm" alt="Карта: Гостиница «Ленинградская»" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-16" tabindex="-1">
+  <h2 class="monastery-title">16. Гостиница «Украина»</h2>
+  <p class="meta"><strong>Адрес:</strong> Кутузовский пр., 2/1 &nbsp;|&nbsp; <strong>Стиль:</strong> сталинская высотка</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Построена в 1953–1957 годах по проекту А. Г. Мордвинова, В. К. Олтаржевского и др. Одна из семи сталинских высоток; центральная башня 206 м, боковые корпуса образуют парадный курдонёр у Кутузовского проспекта. В советское время — гостиница «Украина»; после масштабной реконструкции 2007–2010 годов — гостиница «Рэдиссон Коллекшн» с восстановленными интерьерами.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">«Украина» — сталинская высотка на Кутузовском проспекте; доминанта западного въезда в город; памятник послевоенного монументального строительства; одна из главных видовых точек Москвы.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>высотка</li><li>вид на Москву-реку</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Высота 206 м.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Hotel Ukraina (Russian: Гостиница Украина, romanized: Gostinitsa Ukraina), also known as the Radisson Collection Hotel, Moscow (Russian: Рэдиссон Коллекшен Отель, Москва), is a five-star luxury hotel in the city centre of Moscow, situated on a bend of the Moskva River. The hotel is one of the &quot;Seven Sisters&quot;, a group of Stalin-era skyscrapers of Moscow, and stands 206 metres (676 ft) tall.</p>
+
+  <div class="visual-block">
+  <div class="images-row">
+    <img src="images/moscow_buildings/ukraina_1.jpg" alt="Гостиница «Украина» — фото 1" class="monastery-img" />
+  </div>
+  <p class="images-caption">Фото: Гостиница «Украина»</p>
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.5650,55.7556&z=16&l=map&size=380,200&pt=37.5650,55.7556,pm2rdm" alt="Карта: Гостиница «Украина»" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-17" tabindex="-1">
+  <h2 class="monastery-title">17. Здание МИД</h2>
+  <p class="meta"><strong>Адрес:</strong> Смоленская-Сенная пл., 32/34 &nbsp;|&nbsp; <strong>Стиль:</strong> сталинская высотка</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Построено в 1948–1953 годах по проекту В. Г. Гельфрейха и М. А. Минкуса. Одна из семи сталинских высоток; ступенчатый объём со шпилем, высота 172 м. Единственная высотка без пятиконечной звезды наверху — установлен герб СССР. В здании размещается Министерство иностранных дел России; вход по пропускам.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Здание МИД — сталинская высотка на Смоленской площади; символ советской и российской дипломатии; памятник монументальной архитектуры; видовая доминанта района.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>высотка</li><li>шпиль</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Высота 172 м.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Tensions between Georgia, Ukraine, the United States and the NATO on one side and Russia, South Ossetia and Abkhazia on the other side remained high in 2008–2009.</p>
+
+  <div class="visual-block">
+  <div class="images-row">
+    <img src="images/moscow_buildings/mid_1.jpg" alt="Здание МИД — фото 1" class="monastery-img" />
+  </div>
+  <p class="images-caption">Фото: Здание МИД</p>
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.5836,55.7478&z=16&l=map&size=380,200&pt=37.5836,55.7478,pm2rdm" alt="Карта: Здание МИД" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-18" tabindex="-1">
+  <h2 class="monastery-title">18. Высотка на Кудринской</h2>
+  <p class="meta"><strong>Адрес:</strong> Кудринская пл., 1 &nbsp;|&nbsp; <strong>Стиль:</strong> сталинская высотка</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Построена в 1948–1954 годах по проекту М. В. Посохина и А. А. Мндоянца. Жилая высотка (176 м со шпилем и звездой); в нижних этажах — магазины, кинотеатр «Пламя», почта. Одна из семи сталинских высоток; квартиры предназначались для авиаторов, учёных, партийной элиты. Дом до сих пор жилой; часть помещений занята офисами и коммерцией.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Высотка на Кудринской — жилая сталинская высотка; образец элитного жилья середины XX века; памятник архитектуры и символ Кудринской площади; одна из самых узнаваемых высоток Москвы.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>жилая высотка</li><li>смотровая</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Высота 156 м.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">«Ста́линские высо́тки» — семь высотных зданий, строившихся в Москве в 1947—1957 годах. Иногда «сталинскими высотками» также называют здания, построенные в похожем стиле примерно в тот же период в ряде других городов СССР и других стран. Во многих иностранных путеводителях эти здания называют «семь сестёр».</p>
+
+  <div class="visual-block">
+  <div class="images-row">
+    <img src="images/moscow_buildings/kudrinskaya_1.jpg" alt="Высотка на Кудринской — фото 1" class="monastery-img" />
+  </div>
+  <p class="images-caption">Фото: Высотка на Кудринской</p>
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.5814,55.7603&z=16&l=map&size=380,200&pt=37.5814,55.7603,pm2rdm" alt="Карта: Высотка на Кудринской" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-19" tabindex="-1">
+  <h2 class="monastery-title">19. Высотка на пл. Восстани<span class="old-russian-ya">я</span> (Красные Ворота)</h2>
+  <p class="meta"><strong>Адрес:</strong> пл. Красных Ворот &nbsp;|&nbsp; <strong>Стиль:</strong> сталинская высотка</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Построена в 1947–1952 годах по проекту А. Н. Душкина и Б. С. Мезенцева. Уникальная технология: каркас возводили с расчётным наклоном, так как под площадью прокладывали тоннель метро «Красные Ворота»; после откопки котлована здание «выровнялось». В нижней части — административные помещения, выше — жилые этажи. Одна из семи сталинских высоток; высота 133 м.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Высотка на Красных Воротах — сталинская высотка с уникальной технологией строительства; памятник инженерной мысли и монументальной архитектуры; доминанта площади и въезда с Садового кольца.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>административно-жилая</li><li>наклон при строительстве</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Строилась с учётом наклона под метро.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">«Ста́линские высо́тки» — семь высотных зданий, строившихся в Москве в 1947—1957 годах. Иногда «сталинскими высотками» также называют здания, построенные в похожем стиле примерно в тот же период в ряде других городов СССР и других стран. Во многих иностранных путеводителях эти здания называют «семь сестёр».</p>
+
+  <div class="visual-block">
+  <div class="images-row">
+    <img src="images/moscow_buildings/krasnye_vorota_1.jpg" alt="Высотка на пл. Восстания (Красные Ворота) — фото 1" class="monastery-img" />
+<img src="images/moscow_buildings/krasnye_vorota_2.jpg" alt="Высотка на пл. Восстания (Красные Ворота) — фото 2" class="monastery-img" />
+  </div>
+  <p class="images-caption">Фото: Высотка на пл. Восстания (Красные Ворота)</p>
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.6492,55.7692&z=16&l=map&size=380,200&pt=37.6492,55.7692,pm2rdm" alt="Карта: Высотка на пл. Восстания (Красные Ворота)" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-20" tabindex="-1">
+  <h2 class="monastery-title">20. Котельническа<span class="old-russian-ya">я</span> набережна<span class="old-russian-ya">я</span> (высотка)</h2>
+  <p class="meta"><strong>Адрес:</strong> Котельническая наб., 1/15 &nbsp;|&nbsp; <strong>Стиль:</strong> сталинская высотка</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Построена в 1938–1952 годах по проекту Д. Н. Чечулина и А. К. Ростковского. Стоит у слияния Яузы и Москвы-реки; центральная башня 176 м со шпилем и звездой, боковые корпуса обрамляют набережную. В советское время здесь жили Г. Уланова, Ф. Раневская, К. Симонов, А. Райкин и др.; до сих пор престижный жилой дом с магазинами и кинотеатром.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Котельническая высотка — жилая сталинская высотка у слияния Яузы и Москвы-реки; видовая доминанта Замоскворечья; памятник элитного жилищного строительства; один из самых узнаваемых силуэтов Москвы.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>жилая высотка</li><li>вид на Кремль</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Высота 176 м.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">«Ста́линские высо́тки» — семь высотных зданий, строившихся в Москве в 1947—1957 годах. Иногда «сталинскими высотками» также называют здания, построенные в похожем стиле примерно в тот же период в ряде других городов СССР и других стран. Во многих иностранных путеводителях эти здания называют «семь сестёр».</p>
+
+  <div class="visual-block">
+  <div class="images-row">
+    <img src="images/moscow_buildings/kotelnicheskaya_1.jpg" alt="Котельническая набережная (высотка) — фото 1" class="monastery-img" />
+<img src="images/moscow_buildings/kotelnicheskaya_2.jpg" alt="Котельническая набережная (высотка) — фото 2" class="monastery-img" />
+  </div>
+  <p class="images-caption">Фото: Котельническая набережная (высотка)</p>
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.6442,55.7472&z=16&l=map&size=380,200&pt=37.6442,55.7472,pm2rdm" alt="Карта: Котельническая набережная (высотка)" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-21" tabindex="-1">
+  <h2 class="monastery-title">21. Спасска<span class="old-russian-ya">я</span> башн<span class="old-russian-ya">я</span></h2>
+  <p class="meta"><strong>Адрес:</strong> Кремль &nbsp;|&nbsp; <strong>Стиль:</strong> готика, классицизм</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Построена в 1491 году итальянским зодчим Пьетро Антонио Солари; изначально — Фроловская башня. Часы на башне установлены в 1625 году; современные куранты (диаметр циферблата 6 м) — с 1851–1852 годов. С 1935 года на вершине — рубиновая звезда (до того — двуглавый орёл). Спасские ворота — главный въезд в Кремль; через них проходят парады и кортежи.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Спасская башня — символ Кремля и Нового года; главные ворота крепости; бой курантов — знак времени для всей страны; одна из самых узнаваемых башен мира.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>куранты</li><li>главные ворота Кремля</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Звезда с 1935.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">The Spasskaya Tower (Russian: Спасская башня, romanized: Spasskaya bashnya), also translated as the Saviour Tower, is the main tower on the eastern wall of the Moscow Kremlin which overlooks Red Square.</p>
+
+  <div class="visual-block">
+  <div class="images-row">
+    <img src="images/moscow_buildings/spasskaya_1.jpg" alt="Спасская башня — фото 1" class="monastery-img" />
+<img src="images/moscow_buildings/spasskaya_2.jpg" alt="Спасская башня — фото 2" class="monastery-img" />
+  </div>
+  <p class="images-caption">Фото: Спасская башня</p>
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.6215,55.7522&z=16&l=map&size=380,200&pt=37.6215,55.7522,pm2rdm" alt="Карта: Спасская башня" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-22" tabindex="-1">
+  <h2 class="monastery-title">22. Большой Кремлёвский дворец</h2>
+  <p class="meta"><strong>Адрес:</strong> Кремль &nbsp;|&nbsp; <strong>Стиль:</strong> историзм</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Построен в 1838–1849 годах по проекту К. А. Тона на месте разобранного дворца XVIII века. Фасад обращён к Москве-реке; длина по фасаду 125 м. Внутри — парадные залы (Георгиевский, Владимирский, Андреевский и др.), личные покои императора, резиденция президента России. Более 700 залов и помещений; залы используются для инаугураций, наград и приёмов.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Большой Кремлёвский дворец — резиденция президента России; памятник дворцовой архитектуры XIX века; центр государственных церемоний и приёмов; символ верховной власти.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>парадные залы</li><li>резиденция президента</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>700+ залов и помещений.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">The Grand Kremlin Palace (Russian: Большой Кремлёвский дворец, romanized: Bolshoy Kremlyovskiy dvorets) is a building in the Moscow Kremlin. For much of the 19th century, it served as the official residence of the Russian emperor in Moscow, which was not then the capital of the Russian Empire.</p>
+
+  <div class="visual-block">
+  <div class="images-row">
+    <img src="images/moscow_buildings/bkd_1.jpg" alt="Большой Кремлёвский дворец — фото 1" class="monastery-img" />
+<img src="images/moscow_buildings/bkd_2.jpg" alt="Большой Кремлёвский дворец — фото 2" class="monastery-img" />
+  </div>
+  <p class="images-caption">Фото: Большой Кремлёвский дворец</p>
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.6164,55.7519&z=16&l=map&size=380,200&pt=37.6164,55.7519,pm2rdm" alt="Карта: Большой Кремлёвский дворец" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-23" tabindex="-1">
+  <h2 class="monastery-title">23. Здание мэрии Москвы (быв. СЭВ)</h2>
+  <p class="meta"><strong>Адрес:</strong> Тверская ул., 13 &nbsp;|&nbsp; <strong>Стиль:</strong> советский неоклассицизм</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Построено в 1946 году по проекту Д. Н. Чечулина для Московского городского совета (Моссовет). При расширении Тверской в 1939 году историческое здание Моссовета (XVIII в.) передвинули вглубь квартала на 13,6 м — уникальная операция. С 1993 года — резиденция мэра и правительства Москвы; фасад в духе советского неоклассицизма.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Здание мэрии — резиденция мэра Москвы; символ городской власти; памятник советского неоклассицизма на главной улице города; история с передвижкой здания — пример инженерного искусства.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>здание мэрии</li><li>Тверская</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Перемещено в 1939 при расширении Тверской.</li></ul>
+
+  <div class="visual-block">
+  <div class="images-row">
+    <img src="images/moscow_buildings/meriya_2.jpg" alt="Здание мэрии Москвы (быв. СЭВ) — фото 1" class="monastery-img" />
+  </div>
+  <p class="images-caption">Фото: Здание мэрии Москвы (быв. СЭВ)</p>
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.6053,55.7643&z=16&l=map&size=380,200&pt=37.6053,55.7643,pm2rdm" alt="Карта: Здание мэрии Москвы (быв. СЭВ)" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-24" tabindex="-1">
+  <h2 class="monastery-title">24. Триумфальна<span class="old-russian-ya">я</span> арка</h2>
+  <p class="meta"><strong>Адрес:</strong> Кутузовский пр. &nbsp;|&nbsp; <strong>Стиль:</strong> классицизм</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Оригинальная арка в честь победы над Наполеоном сооружена у Тверской заставы в 1829–1834 годах по проекту О. И. Бове; скульптуры — И. П. Витали, И. Т. Тимофеев. В 1936 году разобрана при реконструкции площади. В 1968 году воссоздана на Кутузовском проспекте у Поклонной горы с использованием чертежей и обмеров; колесница Славы, фигуры воинов, надписи о победе 1812 года.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Триумфальная арка — памятник победе в Отечественной войне 1812 года; символ воинской славы; важная видовая точка на западе Москвы; образец русской триумфальной архитектуры.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>арка Победы</li><li>воссоздание 1968</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Скульптуры Б. И. Орловского.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">The third and the oldest surviving triumphal arch in Moscow was built in 1829–34 on Tverskaya Zastava Square to Joseph Bové's designs in order to commemorate Russia's victory over Napoleon during the French invasion of Russia in 1812. It replaced an earlier wooden structure built by the veterans of the Napoleonic Wars in 1814. The arch was built in brick and lined with ashlar.</p>
+
+  <div class="visual-block">
+  <div class="images-row">
+    <img src="images/moscow_buildings/triumph_arch_1.jpg" alt="Триумфальная арка — фото 1" class="monastery-img" />
+<img src="images/moscow_buildings/triumph_arch_2.jpg" alt="Триумфальная арка — фото 2" class="monastery-img" />
+  </div>
+  <p class="images-caption">Фото: Триумфальная арка</p>
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.5189,55.7364&z=16&l=map&size=380,200&pt=37.5189,55.7364,pm2rdm" alt="Карта: Триумфальная арка" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-25" tabindex="-1">
+  <h2 class="monastery-title">25. Пушкинский музей (ГМИИ)</h2>
+  <p class="meta"><strong>Адрес:</strong> ул. Волхонка, 12 &nbsp;|&nbsp; <strong>Стиль:</strong> неоклассицизм</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Открыт в 1912 году как Музей изящных искусств имени Александра III; инициатор и создатель — И. В. Цветаев, архитектор Р. И. Клейн. Изначально — учебный музей слепков при Московском университете; постепенно собрание пополнялось подлинниками. Сейчас ГМИИ — крупнейшее в России собрание зарубежного искусства от античности до XX века; колоннада и портик в духе античного храма.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Пушкинский музей — крупнейший музей зарубежного искусства в России; памятник архитектуры и просвещения; колоннада на Волхонке — один из символов Москвы; центр выставок и образовательных программ.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>колоннада</li><li>античное искусство</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Главное здание ГМИИ.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Цветаева, музей был открыт в 1912 году под названием «Музей изящных искусств имени императора Александра III при Императорском Московском университете».</p>
+
+  <div class="visual-block">
+  <div class="images-row">
+    <img src="images/moscow_buildings/pushkin_museum_b_1.jpg" alt="Пушкинский музей (ГМИИ) — фото 1" class="monastery-img" />
+<img src="images/moscow_buildings/pushkin_museum_b_2.jpg" alt="Пушкинский музей (ГМИИ) — фото 2" class="monastery-img" />
+  </div>
+  <p class="images-caption">Фото: Пушкинский музей (ГМИИ)</p>
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.6052,55.7474&z=16&l=map&size=380,200&pt=37.6052,55.7474,pm2rdm" alt="Карта: Пушкинский музей (ГМИИ)" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-26" tabindex="-1">
+  <h2 class="monastery-title">26. Театр Российской армии</h2>
+  <p class="meta"><strong>Адрес:</strong> Суворовская пл., 2 &nbsp;|&nbsp; <strong>Стиль:</strong> советский неоклассицизм</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Построен в 1934–1940 годах по проекту К. С. Алабяна и В. Н. Симбирцева. Здание в плане имеет форму пятиконечной звезды — символ Красной армии; лучи «звезды» — корпуса с репетиционными залами и служебными помещениями. Большой зал на 1520 мест; один из крупнейших театральных комплексов Европы. С 1951 года — Центральный театр Советской (затем Российской) армии.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Театр Российской армии — центральный театр Вооружённых сил; памятник советской монументальной архитектуры; уникальное здание в форме звезды; крупнейшая сцена Европы.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>здание в форме звезды</li><li>крупнейший театр Европы</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Здание в плане — пятиконечная звезда.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">It was established on 6 February 1930 as the Red Army Theatre, was renamed the Soviet Army Theatre in 1951 and has always specialized in war-themed productions.</p>
+
+  <div class="visual-block">
+  <div class="images-row">
+    <img src="images/moscow_buildings/tsra_1.jpg" alt="Театр Российской армии — фото 1" class="monastery-img" />
+<img src="images/moscow_buildings/tsra_2.jpg" alt="Театр Российской армии — фото 2" class="monastery-img" />
+  </div>
+  <p class="images-caption">Фото: Театр Российской армии</p>
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.6131,55.7819&z=16&l=map&size=380,200&pt=37.6131,55.7819,pm2rdm" alt="Карта: Театр Российской армии" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-27" tabindex="-1">
+  <h2 class="monastery-title">27. Патриаршие палаты</h2>
+  <p class="meta"><strong>Адрес:</strong> Кремль &nbsp;|&nbsp; <strong>Стиль:</strong> русское зодчество</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Построены в 1653–1655 годах для патриарха Никона как часть патриаршего двора в Кремле. Образец гражданского зодчества XVII века: палаты в три этажа, Крестовая палата (приёмная), домовая церковь Двенадцати апостолов. Сохранились интерьеры, росписи, изразцовые печи. С 1960-х в здании — Музей прикладного искусства и быта XVII века (иконы, утварь, ткани).</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Патриаршие палаты — памятник гражданской архитектуры Кремля; свидетельство эпохи патриарха Никона; музей русской культуры и быта XVII века; единственные в Кремле полностью сохранившиеся патриаршие покои.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>резиденция патриарха</li><li>музей</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Музей прикладного искусства.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">The Patriarchal Chambers and the Church of the Twelve Apostles (Russian: церковь Двенадцати Апостолов, romanized: tserkov' Dvenadtsati Apostolov) is a minor cathedral of the Moscow Kremlin, commissioned by Patriarch Nikon as part of his stately residence in 1653 and dedicated to Philip the Apostle three years later. Today, it is used by Moscow Kremlin Museums.</p>
+
+  <div class="visual-block">
+  <div class="images-row">
+    <img src="images/moscow_buildings/patriarch_1.jpg" alt="Патриаршие палаты — фото 1" class="monastery-img" />
+  </div>
+  <p class="images-caption">Фото: Патриаршие палаты</p>
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.6172,55.7514&z=16&l=map&size=380,200&pt=37.6172,55.7514,pm2rdm" alt="Карта: Патриаршие палаты" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-28" tabindex="-1">
+  <h2 class="monastery-title">28. Старый английский двор</h2>
+  <p class="meta"><strong>Адрес:</strong> ул. Варварка, 4а &nbsp;|&nbsp; <strong>Стиль:</strong> палаты XVI в.</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Палаты возведены в конце XV — XVI веке; с 1556 года здесь располагалась резиденция английской Московской компании (торговля, дипломатические миссии). Старейшее гражданское здание Москвы за стенами Кремля; в 1992–1994 годах отреставрированы по проекту П. Д. Барановского. С 1994 года — музей «Старый английский двор» с экспозицией о русско-английских связях.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Старый английский двор — старейшее гражданское здание Москвы за стенами Кремля; памятник дипломатических и торговых связей с Англией; музей истории и архитектуры XVI–XVII веков на Варварке.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>музей</li><li>старейшее гражданское здание</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Английский торговый двор.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Здание, в котором располагается музей, входило ранее в Музейное объединение «Музей Москвы», с сентября 2020 года — объект ландшафтно-архитектурного комплекса парка Зарядье.</p>
+
+  <div class="visual-block">
+  <div class="images-row">
+    <img src="images/moscow_buildings/english_court_1.jpg" alt="Старый английский двор — фото 1" class="monastery-img" />
+  </div>
+  <p class="images-caption">Фото: Старый английский двор</p>
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.6281,55.7528&z=16&l=map&size=380,200&pt=37.6281,55.7528,pm2rdm" alt="Карта: Старый английский двор" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-29" tabindex="-1">
+  <h2 class="monastery-title">29. Дом Мельникова</h2>
+  <p class="meta"><strong>Адрес:</strong> Кривоарбатский пер., 10 &nbsp;|&nbsp; <strong>Стиль:</strong> авангард</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Построен в 1927–1929 годах по проекту К. С. Мельникова как собственный жилой дом-мастерская. Мельников выиграл участок в «жилтовариществе» и возвёл здание из двух врезанных цилиндров с шестиугольными окнами (более 60); каркас — деревянный. Внутри — мастерская, жилые комнаты, солярий на крыше. Долгие годы дом ветшал; с 2014 года — филиал Музея архитектуры им. Щусева, проводятся экскурсии.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Дом Мельникова — шедевр советского авангарда; единственный в мире жилой дом такой формы; памятник конструктивизма и личного творчества архитектора; объект культурного наследия.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>цилиндрические объёмы</li><li>музей</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Два врезанных цилиндра; более 60 шестиугольных окон.</li><li>Музей с 2014 года.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">It was built in 1927–1929 in Krivoarbatsky Lane in Moscow by the outstanding Soviet architect Konstantin Melnikov for himself and his family.</p>
+
+  <div class="visual-block">
+  <div class="images-row">
+    <img src="images/moscow_buildings/melnikov_1.jpg" alt="Дом Мельникова — фото 1" class="monastery-img" />
+<img src="images/moscow_buildings/melnikov_2.jpg" alt="Дом Мельникова — фото 2" class="monastery-img" />
+  </div>
+  <p class="images-caption">Фото: Дом Мельникова</p>
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.5914,55.7486&z=16&l=map&size=380,200&pt=37.5914,55.7486,pm2rdm" alt="Карта: Дом Мельникова" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-30" tabindex="-1">
+  <h2 class="monastery-title">30. Здание Центросоюза</h2>
+  <p class="meta"><strong>Адрес:</strong> ул. Мясницкая, 39 &nbsp;|&nbsp; <strong>Стиль:</strong> конструктивизм</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Построено в 1928–1936 годах по проекту Ле Корбюзье и П. Жаннере для Центрального союза потребительских обществ (Центросоюз). Единственная реализованная в России постройка Ле Корбюзье: свободная планировка, ленточные окна, опоры-пилоти, плоская крыша. Здание стало эталоном международного модернизма; сейчас здесь Росстат и другие ведомства.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Здание Центросоюза — единственная постройка Ле Корбюзье в России; памятник конструктивизма и международного модернизма; эталон офисного здания XX века; объект культурного наследия на Мясницкой.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>Ле Корбюзье</li><li>офисное здание</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Памятник конструктивизма.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Построено в 1928—1936 годах в интернациональном стиле по проекту французского архитектора Ле Корбюзье при участии Пьера Жаннере и Николая Колли под руководством инженера С.</p>
+
+  <div class="visual-block">
+  <div class="images-row">
+    <img src="images/moscow_buildings/centrosoyuz_1.jpg" alt="Здание Центросоюза — фото 1" class="monastery-img" />
+  </div>
+  <p class="images-caption">Фото: Здание Центросоюза</p>
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.6322,55.7703&z=16&l=map&size=380,200&pt=37.6322,55.7703,pm2rdm" alt="Карта: Здание Центросоюза" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-31" tabindex="-1">
+  <h2 class="monastery-title">31. Гостиница «Советска<span class="old-russian-ya">я</span>»</h2>
+  <p class="meta"><strong>Адрес:</strong> Ленинградский пр., 32/2 &nbsp;|&nbsp; <strong>Стиль:</strong> сталинский ампир</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Построена в 1950 году в стиле сталинского ампира по проекту А. Б. Борецкого и др. В составе комплекса — легендарный ресторан «Яр», известный с 1826 года (на историческом месте у Триумфальной площади, затем перенесён). Здесь бывали Чехов, Шаляпин, Горький, купеческая и артистическая Москва. Гостиница и ресторан продолжают традицию светской жизни и приёмов.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Гостиница «Советская» — памятник советской гостиничной архитектуры на Ленинградском проспекте; символ преемственности «Яра» и места светской жизни; сочетание сталинского ампира и исторического ресторана.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>гостиница</li><li>ресторан «Яр»</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>«Яр» — легендарный ресторан с XIX в.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">The Sovietsky Hotel (Russian: гостиница «Сове́тская») is a historic Soviet-styled hotel built in 1952 and located in Moscow on Leningradsky Prospect.</p>
+
+  <div class="visual-block">
+  <div class="images-row">
+    <img src="images/moscow_buildings/sovetskaya_1.jpg" alt="Гостиница «Советская» — фото 1" class="monastery-img" />
+<img src="images/moscow_buildings/sovetskaya_2.jpg" alt="Гостиница «Советская» — фото 2" class="monastery-img" />
+  </div>
+  <p class="images-caption">Фото: Гостиница «Советская»</p>
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.5564,55.7942&z=16&l=map&size=380,200&pt=37.5564,55.7942,pm2rdm" alt="Карта: Гостиница «Советская»" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-32" tabindex="-1">
+  <h2 class="monastery-title">32. Здание Госплана</h2>
+  <p class="meta"><strong>Адрес:</strong> ул. Охотный ряд, 6 &nbsp;|&nbsp; <strong>Стиль:</strong> советский неоклассицизм</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Построено в 1934–1938 годах по проекту А. Я. Лангмана для Госплана СССР — Государственной комиссии по планированию народного хозяйства. Советский неоклассицизм: колонны, рустовка, симметричный объём на Охотном ряду. В здании работали видные экономисты и министры; с 1990-х здесь размещаются подразделения Государственной Думы, комитеты и аппарат.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Здание Госплана — памятник советской архитектуры 1930-х; символ эпохи плановой экономики; часть правительственного квартала в центре Москвы; образец административного неоклассицизма.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>административное здание</li><li>исторический центр</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Здание на Охотном ряду.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Здание Совета труда и обороны (здание Госплана, здание Госдумы) — здание в Москве по адресу: улица Охотный Ряд, дом 1. В настоящее время в нём располагается Государственная Дума Российской Федерации. Выявленный объект культурного наследия.</p>
+
+  <div class="visual-block">
+  <div class="images-row">
+    <img src="images/moscow_buildings/gosplan_1.jpg" alt="Здание Госплана — фото 1" class="monastery-img" />
+<img src="images/moscow_buildings/gosplan_2.jpg" alt="Здание Госплана — фото 2" class="monastery-img" />
+  </div>
+  <p class="images-caption">Фото: Здание Госплана</p>
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.6153,55.7565&z=16&l=map&size=380,200&pt=37.6153,55.7565,pm2rdm" alt="Карта: Здание Госплана" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-33" tabindex="-1">
+  <h2 class="monastery-title">33. Дом культуры им. Русакова</h2>
+  <p class="meta"><strong>Адрес:</strong> ул. Стромынка, 6 &nbsp;|&nbsp; <strong>Стиль:</strong> конструктивизм</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Построен в 1927–1929 годах по проекту К. С. Мельникова для клуба работников коммунального хозяйства (трамвайщики и др.). Три консольных объёма зрительного зала вынесены на фасад — по форме напоминают шестерни; внутри — зал на 800 мест, кружковые комнаты. Один из главных шедевров советского авангарда; после реставрации 2000-х — снова действует как культурный центр.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">ДК им. Русакова — шедевр конструктивизма Мельникова; памятник клубного строительства 1920-х; образец архитектуры как искусства формы; вынесенные объёмы зала — уникальное решение в мировой архитектуре.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>клуб</li><li>консольные объёмы</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Вынесенные балконы зрительного зала.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Было построено в 1929 году для работников Союза коммунальников по проекту архитектора Константина Мельникова.</p>
+
+  <div class="visual-block">
+  <div class="images-row">
+    <img src="images/moscow_buildings/rusakov_1.jpg" alt="Дом культуры им. Русакова — фото 1" class="monastery-img" />
+<img src="images/moscow_buildings/rusakov_2.jpg" alt="Дом культуры им. Русакова — фото 2" class="monastery-img" />
+  </div>
+  <p class="images-caption">Фото: Дом культуры им. Русакова</p>
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.7142,55.7914&z=16&l=map&size=380,200&pt=37.7142,55.7914,pm2rdm" alt="Карта: Дом культуры им. Русакова" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-34" tabindex="-1">
+  <h2 class="monastery-title">34. Здание «Известий»</h2>
+  <p class="meta"><strong>Адрес:</strong> пл. Пушкина, 5 &nbsp;|&nbsp; <strong>Стиль:</strong> конструктивизм</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Построено в 1925–1927 годах по проекту Г. Б. Бархина для газеты «Известия ВЦИК» (позже «Известия»). Угловое здание в стиле конструктивизма: остекление, чёткие объёмы, ленточные окна. Долгие годы здесь размещалась редакция одной из главных газет страны; в 2010-х здание реконструировано, часть помещений отдана под офисы.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Здание «Известий» — памятник конструктивизма; символ советской прессы; важная постройка площади Пушкина и Тверской; образец газетного здания 1920-х годов.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>редакция «Известий»</li><li>угловое здание</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Легендарная газета.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">С 1927 по 2011 год в здании размещалась редакция газеты «Известия».</p>
+
+  <div class="visual-block">
+  <div class="images-row">
+    <img src="images/moscow_buildings/izvestia_1.jpg" alt="Здание «Известий» — фото 1" class="monastery-img" />
+  </div>
+  <p class="images-caption">Фото: Здание «Известий»</p>
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.6053,55.7656&z=16&l=map&size=380,200&pt=37.6053,55.7656,pm2rdm" alt="Карта: Здание «Известий»" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-35" tabindex="-1">
+  <h2 class="monastery-title">35. Гостиница «Пекин»</h2>
+  <p class="meta"><strong>Адрес:</strong> ул. Большая Садовая, 5/1 &nbsp;|&nbsp; <strong>Стиль:</strong> сталинский ампир</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Построена в 1953–1956 годах по проекту Д. Н. Чечулина, А. К. Ростковского и др. Одна из последних сталинских высоток (101 м со шпилем); расположена у площади Маяковского. Название — в честь дружбы СССР с КНР; гостиница принимала делегации, туристов, артистов. После реконструкции 2000-х — гостиница «Пекин» с сохранением фасада и стиля.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Гостиница «Пекин» — сталинская высотка на Садовой; памятник послевоенной архитектуры; символ района Маяковской и Тверской; одна из «малых» высоток Москвы.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>высотка</li><li>Маяковская</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Высота 101 м.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">The Peking Hotel (Russian: гостиница Пекин) is a building in Moscow which houses a four-star hotel and an office complex.</p>
+
+  <div class="visual-block">
+  <div class="images-row">
+    <img src="images/moscow_buildings/pekin_1.jpg" alt="Гостиница «Пекин» — фото 1" class="monastery-img" />
+  </div>
+  <p class="images-caption">Фото: Гостиница «Пекин»</p>
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.5953,55.7697&z=16&l=map&size=380,200&pt=37.5953,55.7697,pm2rdm" alt="Карта: Гостиница «Пекин»" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-36" tabindex="-1">
+  <h2 class="monastery-title">36. Никольска<span class="old-russian-ya">я</span> башн<span class="old-russian-ya">я</span></h2>
+  <p class="meta"><strong>Адрес:</strong> Кремль &nbsp;|&nbsp; <strong>Стиль:</strong> готика</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Построена в 1491 году итальянским зодчим Пьетро Антонио Солари; название — по иконе Николая Чудотворца над воротами. В 1812 году отступавшие французы взорвали башню; восстановлена в 1816–1819 годах О. И. Бове в неоготическом духе (стрельчатые арки, декоративные башенки). Ворота ведут на Никольскую улицу; единственная кремлёвская башня в готическом стиле.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Никольская башня — ворота Кремля на Никольскую улицу; памятник оборонного и восстановительного зодчества; символ связи Кремля и Китай-города; единственная башня в готическом оформлении.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>башня Кремля</li><li>Никольская улица</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>В 1812 повреждена, восстановлена.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">The following is a list of towers of the Moscow Kremlin. The Kremlin Wall is a defensive wall that surrounds the Moscow Kremlin, recognizable by the characteristic notches and its towers. The original walls were likely a simple wooden fence with guard towers built in 1156. The Kremlin is flanked by 19 towers with a 20th, the Kutafya Tower, not part of its walls.</p>
+
+  <div class="visual-block">
+  <div class="images-row">
+    <img src="images/moscow_buildings/nikolskaya_1.jpg" alt="Никольская башня — фото 1" class="monastery-img" />
+  </div>
+  <p class="images-caption">Фото: Никольская башня</p>
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.6175,55.7542&z=16&l=map&size=380,200&pt=37.6175,55.7542,pm2rdm" alt="Карта: Никольская башня" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-37" tabindex="-1">
+  <h2 class="monastery-title">37. Здание Центрального телеграфа</h2>
+  <p class="meta"><strong>Адрес:</strong> Тверская ул., 7 &nbsp;|&nbsp; <strong>Стиль:</strong> конструктивизм</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Построено в 1925–1927 годах по проекту И. И. Рерберга для Центрального телеграфа. Конструктивизм: остекление, чёткие горизонтали; на фасаде — большие часы и глобус как символы всемирной связи. Долгое время здание было главным узлом телеграфной и телетайпной связи страны; здесь передавали сводки с фронтов. Сейчас — офисы и узлы связи.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Здание Центрального телеграфа — памятник конструктивизма; символ связи и коммуникаций; узнаваемая постройка на Тверской с часами и глобусом; образец общественного здания 1920-х годов.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>часы</li><li>глобус</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Часы и глобус на фасаде.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Построено в 1925—1927 годах по проекту архитектора Ивана Рерберга.</p>
+
+  <div class="visual-block">
+  <div class="images-row">
+    <img src="images/moscow_buildings/telegraph_1.jpg" alt="Здание Центрального телеграфа — фото 1" class="monastery-img" />
+<img src="images/moscow_buildings/telegraph_2.jpg" alt="Здание Центрального телеграфа — фото 2" class="monastery-img" />
+  </div>
+  <p class="images-caption">Фото: Здание Центрального телеграфа</p>
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.6050,55.7650&z=16&l=map&size=380,200&pt=37.6050,55.7650,pm2rdm" alt="Карта: Здание Центрального телеграфа" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-38" tabindex="-1">
+  <h2 class="monastery-title">38. Здание МХАТ им. Горького</h2>
+  <p class="meta"><strong>Адрес:</strong> Тверской бульвар, 22 &nbsp;|&nbsp; <strong>Стиль:</strong> эклектика</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Новое здание МХАТ построено в 1973 году на Тверском бульваре по проекту В. С. Кубанова и др.; историческое здание Художественного театра (Камергерский пер.) осталось за МХАТ им. Чехова. После разделения МХАТ в 1987 году в здании на бульваре обосновался МХАТ им. Горького (худрук — Т. В. Доронина). Большая сцена и малая; репертуар — классика и современная драма.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">МХАТ им. Горького — один из главных театров страны; памятник театральной архитектуры 1970-х; символ преемственности традиций Художественного театра; сцена на Тверском бульваре.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>театр</li><li>историческое здание</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Разделение МХАТ в 1987.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">С 1901 года — Московский Художественный театр (МХТ), с 1919 года — Московский Художественный академический театр (МХАТ), с 1932 года — Московский Художественный академический театр СССР имени М.</p>
+
+  <div class="visual-block">
+  <div class="images-row">
+    <img src="images/moscow_buildings/mhat_1.jpg" alt="Здание МХАТ им. Горького — фото 1" class="monastery-img" />
+<img src="images/moscow_buildings/mhat_2.jpg" alt="Здание МХАТ им. Горького — фото 2" class="monastery-img" />
+  </div>
+  <p class="images-caption">Фото: Здание МХАТ им. Горького</p>
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.6019,55.7642&z=16&l=map&size=380,200&pt=37.6019,55.7642,pm2rdm" alt="Карта: Здание МХАТ им. Горького" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-39" tabindex="-1">
+  <h2 class="monastery-title">39. Дом Перцовой</h2>
+  <p class="meta"><strong>Адрес:</strong> Соймоновский пр., 1 &nbsp;|&nbsp; <strong>Стиль:</strong> модерн, неорусский</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Построен в 1905–1907 годах по проекту С. В. Малютина и Н. К. Жукова для инженера П. Н. Перцова. Доходный дом в неорусском стиле: керамические панно по эскизам Малютина, сказочные звери, солнце, башенки. Расположен у Пречистенской набережной и Соймоновского проезда; в нижнем этаже — квартиры, в верхних — жильё и мастерские. Один из самых узнаваемых домов Москвы.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Дом Перцовой — шедевр московского модерна и неорусского стиля; памятник синтеза архитектуры и декора; один из самых узнаваемых домов Москвы; керамика Малютина — визитная карточка фасада.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>доходный дом</li><li>сказочный стиль</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Керамика по эскизам Малютина.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Было построено в 1907 году и принадлежало Зинаиде Алексеевне Перцовой, жене инженера путей сообщения Петра Николаевича Перцова.</p>
+
+  <div class="visual-block">
+  <div class="images-row">
+    <img src="images/moscow_buildings/pertsov_1.jpg" alt="Дом Перцовой — фото 1" class="monastery-img" />
+  </div>
+  <p class="images-caption">Фото: Дом Перцовой</p>
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.6086,55.7442&z=16&l=map&size=380,200&pt=37.6086,55.7442,pm2rdm" alt="Карта: Дом Перцовой" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-40" tabindex="-1">
+  <h2 class="monastery-title">40. Северный речной вокзал</h2>
+  <p class="meta"><strong>Адрес:</strong> Ленинградское ш., 51 &nbsp;|&nbsp; <strong>Стиль:</strong> сталинский ампир</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Построен в 1937 году по проекту А. М. Рухлядева и В. Ф. Кринского как ворота канала Москва–Волга (ныне канал имени Москвы). Центральная башня со шпилем и звездой (как на кремлёвских башнях); симметричные крылья с галереями; фонтаны и террасы. В 2018–2020 годах проведена масштабная реставрация; вокзал снова принимает речные суда и экскурсии.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Северный речной вокзал — памятник сталинской архитектуры; символ водного транспорта и канала Москва–Волга; видовая площадка и место отдыха; после реставрации — одна из красивейших построек на воде в Москве.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>башня со шпилем</li><li>звезда</li><li>фонтаны</li><li>террасы</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Высота башни со шпилем 27 м; звезда — как на Кремлёвских башнях.</li><li>Канал имени Москвы открыт в 1937.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">The North River Terminal or Rechnoy Vokzal (Russian: Речной вокзал, meaning &quot;River Station&quot;), is one of two passenger terminals of river transport in Moscow. It is also the main hub for long-range and intercity routes. The terminal was built in 1937. The facility was renovated and upgraded from 2018 to 2020.</p>
+
+  <div class="visual-block">
+  <div class="images-row">
+    <img src="images/moscow_buildings/severny_rechnoy_1.jpg" alt="Северный речной вокзал — фото 1" class="monastery-img" />
+<img src="images/moscow_buildings/severny_rechnoy_2.jpg" alt="Северный речной вокзал — фото 2" class="monastery-img" />
+  </div>
+  <p class="images-caption">Фото: Северный речной вокзал</p>
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.4536,55.8719&z=16&l=map&size=380,200&pt=37.4536,55.8719,pm2rdm" alt="Карта: Северный речной вокзал" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-41" tabindex="-1">
+  <h2 class="monastery-title">41. Саввинское подворье</h2>
+  <p class="meta"><strong>Адрес:</strong> ул. Тверская, 6 &nbsp;|&nbsp; <strong>Стиль:</strong> неорусский стиль</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Построено в 1905–1907 годах по проекту И. С. Кузнецова для Саввинского подворья Саввино-Сторожевского монастыря (Звенигород). Неорусский стиль: башня с часами, керамика, шатры. В 1939 году при расширении Тверской здание передвинули вглубь квартала на 50 м и надстроили двумя этажами — уникальная операция. Сейчас в здании — офисы и учреждения.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Саввинское подворье — памятник неорусского стиля; пример «переезда» здания в 1930-х при реконструкции Тверской; башня с часами — узнаваемый элемент панорамы улицы.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>башня с часами</li><li>керамика</li><li>историческое здание</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Здание передвинули на 50 м вглубь при реконструкции Тверской (1939).</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Ivan Sergeyevich Kuznetsov (Russian: Иван Серге́евич Кузнецов) (May 27, 1867 – June 3, 1942) was a Russian architect primarily known for his pre-1917 works in Moscow and Vichuga. Born into a working-class family, Kuznetsov independently broke into the elite architecture society of Moscow. He worked in many different styles but was most successful in Neoclassical architecture and Russian Revival.</p>
+
+  <div class="visual-block">
+  <div class="images-row">
+    <img src="images/moscow_buildings/savvinskoye_1.jpg" alt="Саввинское подворье — фото 1" class="monastery-img" />
+  </div>
+  <p class="images-caption">Фото: Саввинское подворье</p>
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.6053,55.7644&z=16&l=map&size=380,200&pt=37.6053,55.7644,pm2rdm" alt="Карта: Саввинское подворье" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-42" tabindex="-1">
+  <h2 class="monastery-title">42. Павильон «Космос» (ВДНХ)</h2>
+  <p class="meta"><strong>Адрес:</strong> пр. Мира, 119, ВДНХ &nbsp;|&nbsp; <strong>Стиль:</strong> сталинский ампир</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Построен в 1939 для сельскохозяйственной выставки как «Механизация». В 1954 перестроен под тему космоса; после реставрации 2018 здесь открыт центр «Космонавтика и авиация» с макетами ракет и спутников.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Символ советской космической эпохи; крупнейший космический музей под куполом.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>купол</li><li>макет ракеты</li><li>Музей космонавтики</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Высота купола 36 м.</li><li>В 2018 открыт после многолетней реставрации.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">1 августа 2019 года выставка отпраздновала 80-летний юбилей.</p>
+
+  <div class="visual-block">
+  <div class="images-row">
+    <img src="images/moscow_buildings/cosmos_pavilion_1.jpg" alt="Павильон «Космос» (ВДНХ) — фото 1" class="monastery-img" />
+<img src="images/moscow_buildings/cosmos_pavilion_2.jpg" alt="Павильон «Космос» (ВДНХ) — фото 2" class="monastery-img" />
+  </div>
+  <p class="images-caption">Фото: Павильон «Космос» (ВДНХ)</p>
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.6250,55.8305&z=16&l=map&size=380,200&pt=37.6250,55.8305,pm2rdm" alt="Карта: Павильон «Космос» (ВДНХ)" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="qa-section" id="qa" tabindex="-1">
+  <h2>Вопросы и ответы по фактам</h2>
+  <div class="qa-item"><p class="question"><strong>Вопрос 1. Какое здание является символом России на Красной площади?</strong></p><p class="answer">Ответ: Храм Василия Блаженного (собор Покрова на Рву).</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 2. Сколько сталинских высоток в Москве и какая самая высокая?</strong></p><p class="answer">Ответ: Семь. Самая высокая — главное здание МГУ (240 м).</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 3. Кто архитектор Дома Мельникова?</strong></p><p class="answer">Ответ: Константин Степанович Мельников (1927–1929).</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 4. Где единственная постройка Ле Корбюзье в России?</strong></p><p class="answer">Ответ: Здание Центросоюза на ул. Мясницкой, 39.</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 5. Какая станция метро получила Гран-при на Всемирной выставке 1939?</strong></p><p class="answer">Ответ: Станция «Маяковская» (мозаики Дейнеки).</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 6. Какое здание на Красной площади имеет стеклянную крышу работы Шухова?</strong></p><p class="answer">Ответ: ГУМ (Верхние торговые ряды, 1890–1893).</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 7. Какое здание передвинули при расширении Тверской улицы?</strong></p><p class="answer">Ответ: Саввинское подворье (ул. Тверская, 6) — передвинуто в 1939 на 50 м.</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 8. Где находится Северный речной вокзал и когда он построен?</strong></p><p class="answer">Ответ: Ленинградское шоссе, 51; построен в 1937 как ворота канала Москва–Волга.</p></div>
+</section>
+
+</body>
+</html>

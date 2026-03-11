@@ -231,7 +231,8 @@ _COMBINED_CSS = """
   .references-chapter .ref-colophon .ref-year { font-weight: 500; color: #2c2a28; }
   .monastery { display: block; page-break-before: always; padding: 0.5em 0 0; }
   .monastery:first-of-type { page-break-before: auto; }
-  .visual-block { margin: 0.45em 0 0; page-break-after: always; }
+  .visual-block { margin: 0.45em 0 0; page-break-after: auto; }
+  body > *:last-child { page-break-after: auto !important; }
   .images-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6em;
     margin: 0.5em; max-width: 100%; }
   .monastery-img { width: 100%; height: auto; max-height: 155px;
@@ -247,6 +248,7 @@ _COMBINED_CSS = """
     html, body { color: #1c1b19 !important; background: #faf8f5 !important; }
     .monastery { page-break-before: always; }
     .monastery:first-of-type { page-break-before: auto; }
+    body > *:last-child { page-break-after: auto !important; }
   }
   .edit-toolbar { position: fixed; top: 8px; right: 8px; z-index: 9999; }
   .edit-toolbar button { font-family: Inter, sans-serif; font-size: 11px;
@@ -1101,13 +1103,16 @@ def _build_combined_pdf_chunked(
             reader = PdfReader(str(p))
             for page in reader.pages:
                 writer.add_page(page)
-        writer.add_metadata({
+        full_metadata = {
             "/Title": "Полный путеводитель по Москве / Moscow Complete Guide",
             "/Author": "OTIUM — Institute of Narrative Geography",
             "/Subject": "Moscow guide, places, monasteries, museums, parks",
             "/Creator": "build_full_guide.py",
-        })
+        }
+        writer.add_metadata(full_metadata)
         writer.write(str(pdf_path))
+        from scripts.build_pdf import _strip_empty_pdf_pages
+        _strip_empty_pdf_pages(pdf_path, metadata=full_metadata)
         return True
     finally:
         for p in chunk_pdfs:
@@ -1150,7 +1155,23 @@ def main() -> int:
         help="Build optimized guide: only places with >=1 image, "
         "3 photos + map (2x2 grid). Output: *_opt.html / *_opt.pdf.",
     )
+    parser.add_argument(
+        "--combined-only",
+        action="store_true",
+        help=(
+            "Build combined Moscow guide from existing per-guide HTML only; "
+            "do not rebuild individual guides or download images."
+        ),
+    )
     args = parser.parse_args()
+
+    if args.combined_only and args.download_images:
+        print(
+            "Error: --combined-only and --download-images cannot be used "
+            "together. Combined-only builds from existing HTML only.",
+            file=sys.stderr,
+        )
+        return 1
 
     output_dir = OUTPUT_DIR
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -1228,31 +1249,37 @@ def main() -> int:
         return 0
 
     build_script = _PROJECT_ROOT / "scripts" / "build_pdf.py"
-    # Step 1: build all single-guide HTML/PDF (with or without download)
-    if args.download_images:
-        print("--- Downloading images and building all guides ---")
-        cmd = [
-            sys.executable,
-            str(build_script),
-            "--all-guides",
-            "--build-with-available",
-        ]
+    # Step 1: optionally (re)build all single-guide HTML/PDF
+    if not args.combined_only:
+        if args.download_images:
+            print("--- Downloading images and building all guides ---")
+            cmd = [
+                sys.executable,
+                str(build_script),
+                "--all-guides",
+                "--build-with-available",
+            ]
+            if args.optimized:
+                cmd.append("--optimized")
+        else:
+            print("--- Building all guides (no image download) ---")
+            cmd = [
+                sys.executable,
+                str(build_script),
+                "--all-guides",
+                "--build-only",
+                "--build-with-available",
+            ]
         if args.optimized:
             cmd.append("--optimized")
+        ret = subprocess.call(cmd, cwd=str(_PROJECT_ROOT))
+        if ret != 0:
+            return ret
     else:
-        print("--- Building all guides (no image download) ---")
-        cmd = [
-            sys.executable,
-            str(build_script),
-            "--all-guides",
-            "--build-only",
-            "--build-with-available",
-        ]
-    if args.optimized:
-        cmd.append("--optimized")
-    ret = subprocess.call(cmd, cwd=str(_PROJECT_ROOT))
-    if ret != 0:
-        return ret
+        print(
+            "--- Skipping per-guide build (combined-only; using existing "
+            "guide HTML files) ---"
+        )
 
     # Step 2: backup existing full guide if present
     if pdf_path.is_file():

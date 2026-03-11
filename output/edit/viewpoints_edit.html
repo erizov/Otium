@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Смотровые площадки Москвы</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;0,600&amp;family=EB+Garamond:ital,wght@0,400;0,600&amp;family=Pochaevsk&amp;family=Source+Serif+4:ital,wght@0,400;0,600&amp;family=Inter:wght@400;500;600&amp;display=swap&amp;subset=latin,cyrillic"
+        rel="stylesheet" />
+  <style>
+      @page { size: A4; margin: 2cm 1.5cm 1.5cm 1.8cm; }
+      *, html, body { -webkit-print-color-adjust: exact;
+                      print-color-adjust: exact; }
+      html { background-color: #faf8f5; }
+      html, body { margin: 0; padding: 0; font-family: "Source Serif 4",
+        Georgia, "Times New Roman", serif;
+        font-size: 10pt; line-height: 1.45; color: #1c1b19;
+        background-color: #faf8f5; }
+      body { color: #1c1b19 !important; background-color: #faf8f5 !important; }
+      h1 { font-family: "Source Serif 4", Georgia, serif;
+           font-size: 18pt; text-align: center; margin: 0 0 0.5em;
+           color: #1c1b19 !important; }
+      h2 { font-family: "Source Serif 4", Georgia, serif;
+           color: #1c1b19 !important; }
+      h2.monastery-title { font-family: Pochaevsk, Georgia, serif;
+           font-size: 17pt; margin: 1.2em 0 0.4em 0.3em;
+           border-bottom: 1px solid #8b7355; padding-bottom: 0.25em;
+           color: #2c2a28 !important; }
+      .old-russian-ya { font-family: "Source Serif 4", Georgia, serif; }
+      .meta, .block-label { font-family: Inter, "IBM Plex Sans", sans-serif;
+          font-size: 8.5pt; letter-spacing: 0.02em; }
+      .meta { margin: 0.2em 0 0.6em 0.3em; color: #6b635b !important; }
+      .block-label { margin: 0.6em 0 0.15em 0.3em; text-transform: uppercase;
+                     font-weight: 600; color: #6b7b8a !important; }
+      .body-text { margin: 0 0 0.4em 0.3em; text-align: left; max-width: 42em;
+                   color: #1c1b19; font-family: "Source Serif 4", Georgia, serif; }
+      .story-text { font-style: italic; color: #4a5568; }
+      ul, li, p { color: #1c1b19; font-family: "Source Serif 4", Georgia, serif; }
+      .intro-block { page-break-after: always; padding: 2.5em 1em 0 1.2em;
+                     background-color: #faf8f5; }
+      .intro-block .otium-brand { font-family: Inter, sans-serif;
+        font-size: 8pt; letter-spacing: 0.2em; color: #6b635b !important;
+        margin-bottom: 0.3em; }
+      .intro-block .otium-title { font-family: Pochaevsk, Georgia, serif;
+        font-size: 20pt; font-weight: 600; text-align: center;
+        margin: 0.2em 0 0.1em; color: #1a1a1a !important; }
+      .intro-block .otium-subtitle { font-family: Pochaevsk, Georgia, serif;
+        font-size: 11pt; text-align: center; color: #6b635b !important;
+        font-style: italic; margin-bottom: 1em; }
+      .intro-block p { margin: 0.4em 0; font-size: 9.5pt; line-height: 1.5;
+        text-align: justify; max-width: 38em; margin-left: auto;
+        margin-right: auto; color: #1c1b19;
+        font-family: "Source Serif 4", Georgia, serif; }
+      .monastery { display: block; page-break-before: always;
+                    break-before: page; padding: 1.5em 0 0; }
+      .monastery:first-of-type { page-break-before: auto; break-before: auto; }
+      .monastery:last-of-type { padding-bottom: 0.5em; }
+      .visual-block { margin: 0.8em 0 0; page-break-after: always; }
+      .monastery:last-of-type .visual-block { page-break-after: auto; }
+      .images-row { display: flex; gap: 10px; margin: 1em; flex-wrap: wrap; }
+      .monastery-img { flex: 1 1 200px; max-width: 100%; height: 150px;
+                        object-fit: cover; }
+      .images-caption { font-size: 8pt; color: #6b635b; margin: 0.25em 1em 0;
+        font-family: Inter, sans-serif; }
+      .map-block { margin: 1em; }
+      .map-caption { font-size: 8pt; color: #6b635b; margin: 0.25em 0 0;
+        font-family: Inter, sans-serif; }
+      .map-img { max-width: 100%; height: auto; max-height: 160px; }
+      .qa-section { margin-top: 2em; page-break-before: always;
+                     break-before: page; padding-top: 1.5em; }
+      .qa-item { margin-bottom: 0.6em; font-size: 9pt; color: #1c1b19; }
+      .question { margin-bottom: 0.1em; color: #1c1b19; }
+      .answer { margin-left: 0.5em; color: #2c2a28;
+        font-family: "Source Serif 4", Georgia, serif; }
+      ul { margin: 0.2em 0 0.4em 0.3em; padding-left: 1.2em; color: #1c1b19; }
+      p { margin: 0.2em 0; color: #1c1b19; }
+      .map-block { background: transparent; }
+      .edit-toolbar { position: fixed; top: 8px; right: 8px; z-index: 9999; }
+      .edit-toolbar button { font-family: Inter, sans-serif; font-size: 11px;
+        padding: 6px 10px; background: #2c2a28; color: #faf8f5; border: none;
+        border-radius: 4px; cursor: pointer; }
+      .edit-toolbar button:hover { background: #4a5568; }
+      .img-wrap { position: relative; display: inline-block; }
+      .img-wrap.img-dragging { opacity: 0.6; }
+      .img-wrap.img-drop-target { outline: 2px dashed #8b7355; outline-offset: 2px; }
+      .img-del { position: absolute; top: 4px; right: 4px; width: 22px; height: 22px;
+        font-size: 16px; line-height: 20px; text-align: center; background: rgba(0,0,0,.6);
+        color: #fff; border: none; border-radius: 3px; cursor: pointer; }
+      .img-del:hover { background: #c53030; }
+      .add-img-btn { font-family: Inter, sans-serif; font-size: 10px;
+        padding: 4px 8px; margin: 4px 0 0 4px; background: #e0ddd8; color: #2c2a28;
+        border: 1px solid #8b7355; border-radius: 3px; cursor: pointer; }
+      .add-img-btn:hover { background: #d0cdc8; }
+      .add-img-btn.hidden { display: none; }
+      .img-count { font-size: 9pt; color: #6b635b; margin-left: 0.25em;
+        font-family: Inter, sans-serif; }
+      @media print {
+        html, body { color: #1c1b19 !important; background: #faf8f5 !important; }
+        .block-label { color: #6b7b8a !important; }
+        .meta { color: #6b635b !important; }
+        .monastery { page-break-before: always; break-before: page; }
+        .monastery:first-of-type { page-break-before: auto; break-before: auto; }
+        .edit-toolbar, .img-del, .add-img-btn, .img-count { display: none !important; }
+      }
+    </style>
+</head>
+<body>
+
+    <div class="intro-block">
+    <p class="otium-brand">OTIUM / Sacred</p>
+    <h1 class="otium-title">Смотровые площадки Москвы</h1>
+    <p class="otium-subtitle">13 смотровых площадок</p>
+    <p>OTIUM — это практика осмысленного досуга.
+    В античной традиции otium означало не отдых от труда, а время, в котором
+    человек возвращается к взгляду, памяти и мышлению. Это время без
+    утилитарной цели, без спешки, без требования результата.</p>
+    <p>Мы создаём маршруты не для «посещения», а для пребывания.
+    Не для потребления культуры, а для внимательного присутствия в ней.</p>
+    <p>OTIUM работает с пространствами, где время уплотняется:
+    архитектурой, сакральными местами, кино, памятью, ландшафтом.
+    Мы не стремимся охватить всё и не обещаем «лучшее».
+    Мы отбираем немногое — то, что выдерживает тишину и повторный взгляд.</p>
+    <p>OTIUM — это не гид и не сервис.
+    Это приглашение к прогулке без обязательств.
+    К маршруту, который можно прервать.
+    К месту, где можно задержаться.</p>
+    <p>OTIUM существует для тех, кто хочет смотреть медленно.</p>
+    </div>
+    
+
+<section class="monastery" id="monastery-1" tabindex="-1">
+  <h2 class="monastery-title">1. Воробьёвы горы</h2>
+  <p class="meta"><strong>Адрес:</strong> Воробьёвы горы, ул. Косыгина &nbsp;|&nbsp; <strong>Стиль:</strong> смотровая площадка</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Смотровая площадка на правом берегу Москвы-реки напротив Лужников. Отсюда открывается панорама центра Москвы, стадиона «Лужники», Москва-Сити. Рядом — главное здание МГУ (1949–1953).</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Главная смотровая площадка Москвы; панорама центра и Москва-Сити; символ студенчества и науки.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>панорама Москвы</li><li>МГУ</li><li>Лужники</li><li>Москва-река</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Высота над уровнем реки около 80 м.</li><li>Рядом — главное здание МГУ.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">The Central Lenin Stadium, where the opening and closing ceremonies for the 1980 Summer Olympics took place, is right below, across the Moskva River.</p>
+
+  <div class="visual-block">
+  <div class="images-row">
+    <img src="images/moscow_viewpoints/vorobyovy_gory_1.jpg" alt="Воробьёвы горы — фото 1" class="monastery-img" />
+<img src="images/moscow_viewpoints/vorobyovy_gory_2.jpg" alt="Воробьёвы горы — фото 2" class="monastery-img" />
+<img src="images/moscow_viewpoints/vorobyovy_gory_3.jpg" alt="Воробьёвы горы — фото 3" class="monastery-img" />
+  </div>
+  <p class="images-caption">Фото: Воробьёвы горы</p>
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.5450,55.7104&z=16&l=map&size=380,200&pt=37.5450,55.7104,pm2rdm" alt="Карта: Воробьёвы горы" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-2" tabindex="-1">
+  <h2 class="monastery-title">2. Парк «Зар<span class="old-russian-ya">я</span>дье» (панорамна<span class="old-russian-ya">я</span> палуба)</h2>
+  <p class="meta"><strong>Адрес:</strong> ул. Варварка, 6 &nbsp;|&nbsp; <strong>Стиль:</strong> современная смотровая</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Панорамная палуба над Москвой-рекой в парке «Зарядье» (открыт 2017). «Парящий мост» — консольная конструкция без опор над водой; вид на Кремль, Васильевский спуск, храм Христа Спасителя.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Лучший вид на Кремль с воды; «Парящий мост» — символ нового Зарядья; бесплатный доступ.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>панорама Кремля</li><li>«Парящий мост»</li><li>Москва-река</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Мост выступает на 70 м над набережной.</li><li>Парк открыт в 2017 году.</li></ul>
+
+  <div class="visual-block">
+  <div class="images-row">
+    <img src="images/moscow_viewpoints/zaryadye_viewpoint_1.jpg" alt="Парк «Зарядье» (панорамная палуба) — фото 1" class="monastery-img" />
+<img src="images/moscow_viewpoints/zaryadye_viewpoint_2.jpg" alt="Парк «Зарядье» (панорамная палуба) — фото 2" class="monastery-img" />
+  </div>
+  <p class="images-caption">Фото: Парк «Зарядье» (панорамная палуба)</p>
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.6286,55.7514&z=16&l=map&size=380,200&pt=37.6286,55.7514,pm2rdm" alt="Карта: Парк «Зарядье» (панорамная палуба)" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-3" tabindex="-1">
+  <h2 class="monastery-title">3. Останкинска<span class="old-russian-ya">я</span> телебашн<span class="old-russian-ya">я</span></h2>
+  <p class="meta"><strong>Адрес:</strong> ул. Академика Королёва, 12 &nbsp;|&nbsp; <strong>Стиль:</strong> телебашня, смотровая</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Телебашня построена в 1967 году; высота 540 м (смотровая на 337 м). Панорама Москвы на 360°; в ясную погоду видно до 60 км. Ресторан «Седьмое небо» на смотровой.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Высочайшая смотровая Москвы; панорама на 360°; символ советского ТВ.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>панорама 360°</li><li>высота 337 м</li><li>«Седьмое небо»</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Высота смотровой — 337 м.</li><li>Видимость до 60 км в ясную погоду.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">As of 2026, it is the tallest free-standing structure in Europe and 15th tallest in the world.</p>
+
+  <div class="visual-block">
+  <div class="images-row">
+    <img src="images/moscow_viewpoints/ostankino_tower_1.jpg" alt="Останкинская телебашня — фото 1" class="monastery-img" />
+<img src="images/moscow_viewpoints/ostankino_tower_2.jpg" alt="Останкинская телебашня — фото 2" class="monastery-img" />
+<img src="images/moscow_viewpoints/ostankino_tower_3.jpg" alt="Останкинская телебашня — фото 3" class="monastery-img" />
+<img src="images/moscow_viewpoints/ostankino_tower_4.jpg" alt="Останкинская телебашня — фото 4" class="monastery-img" />
+  </div>
+  <p class="images-caption">Фото: Останкинская телебашня</p>
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.6114,55.8215&z=16&l=map&size=380,200&pt=37.6114,55.8215,pm2rdm" alt="Карта: Останкинская телебашня" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-4" tabindex="-1">
+  <h2 class="monastery-title">4. Парк Победы (смотрова<span class="old-russian-ya">я</span>)</h2>
+  <p class="meta"><strong>Адрес:</strong> пл. Победы, 3 &nbsp;|&nbsp; <strong>Стиль:</strong> мемориальный парк</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Поклонная гора — историческое место; с неё Наполеон смотрел на Москву в 1812 году. Парк Победы создан к 50-летию Победы (1995). Смотровая у монумента Победы — вид на запад Москвы.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Историческая Поклонная гора; панорама западной части города; мемориал Великой Отечественной.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>панорама Москвы</li><li>Поклонная гора</li><li>музей Победы</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Высота Поклонной горы — 171 м.</li><li>Монумент Победы — 141,8 м.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Партерная часть парка появилась в 1923 году после организации на месте свалки Орловского луга Всероссийской сельскохозяйственной выставки (ВСХВ), планировку которой от входа до Нескучного сада выполнил архитектор-авангардист Константин Мельников.</p>
+
+  <div class="visual-block">
+  <div class="images-row">
+    <img src="images/moscow_viewpoints/poklonnaya_viewpoint_1.jpg" alt="Парк Победы (смотровая) — фото 1" class="monastery-img" />
+<img src="images/moscow_viewpoints/poklonnaya_viewpoint_2.jpg" alt="Парк Победы (смотровая) — фото 2" class="monastery-img" />
+  </div>
+  <p class="images-caption">Фото: Парк Победы (смотровая)</p>
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.5063,55.7308&z=16&l=map&size=380,200&pt=37.5063,55.7308,pm2rdm" alt="Карта: Парк Победы (смотровая)" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-5" tabindex="-1">
+  <h2 class="monastery-title">5. Коломенское (смотрова<span class="old-russian-ya">я</span> у церкви Вознесени<span class="old-russian-ya">я</span>)</h2>
+  <p class="meta"><strong>Адрес:</strong> пр. Андропова, 39 &nbsp;|&nbsp; <strong>Стиль:</strong> историческая смотровая</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Смотровая у церкви Вознесения (ЮНЕСКО) на высоком берегу Москвы-реки. Вид на реку, Голосов овраг, южные районы. Место, откуда царь осматривал окрестности.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Историческая смотровая музея-заповедника; вид на Москву-реку; рядом — объект ЮНЕСКО.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>Москва-река</li><li>церковь Вознесения</li><li>панорама юга</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Церковь Вознесения — 1532 год.</li><li>Высота берега над рекой — 25 м.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Существующее здание, построенное в 1990-х годах, является воссозданием одноимённого храма, разрушенного в 1931 году.</p>
+
+  <div class="visual-block">
+  <div class="images-row">
+    <img src="images/moscow_viewpoints/kolomenskoye_viewpoint_1.jpg" alt="Коломенское (смотровая у церкви Вознесения) — фото 1" class="monastery-img" />
+<img src="images/moscow_viewpoints/kolomenskoye_viewpoint_2.jpg" alt="Коломенское (смотровая у церкви Вознесения) — фото 2" class="monastery-img" />
+  </div>
+  <p class="images-caption">Фото: Коломенское (смотровая у церкви Вознесения)</p>
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.6702,55.6675&z=16&l=map&size=380,200&pt=37.6702,55.6675,pm2rdm" alt="Карта: Коломенское (смотровая у церкви Вознесения)" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-6" tabindex="-1">
+  <h2 class="monastery-title">6. Москва-Сити (панорама с башен)</h2>
+  <p class="meta"><strong>Адрес:</strong> Пресненская наб., 8 &nbsp;|&nbsp; <strong>Стиль:</strong> деловой центр</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Комплекс «Москва-Сити» — небоскрёбы на Пресненской набережной. Смотровые на башнях «Империя», «Федерация» и др. — панорама центра Москвы, Кремля, Воробьёвых гор.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Современный вид на исторический центр; высотные смотровые; символ деловой Москвы.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>панорама центра</li><li>башни</li><li>Москва-река</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Башня «Федерация» — 374 м.</li><li>Смотровая на 89 этаже.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Московский международный деловой центр «Москва-Сити» (ММДЦ «Москва-Сити») — развивающийся деловой район в Москве на Пресненской набережной. Является частью Пресненского района Центрального административного округа Москвы. В рамках «Москва-Сити» создаётся зона деловой активности, которая объединит бизнес, апартаменты проживания и досуг.</p>
+
+  <div class="visual-block">
+
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.5370,55.7500&z=16&l=map&size=380,200&pt=37.5370,55.7500,pm2rdm" alt="Карта: Москва-Сити (панорама с башен)" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-7" tabindex="-1">
+  <h2 class="monastery-title">7. Лужники (смотрова<span class="old-russian-ya">я</span> у стадиона)</h2>
+  <p class="meta"><strong>Адрес:</strong> Лужники, 24 &nbsp;|&nbsp; <strong>Стиль:</strong> спортивный комплекс</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Смотровая у стадиона «Лужники» — вид на арену, Москву-реку, Воробьёвы горы и МГУ. Реконструкция 2017 года; открытая площадка для посетителей.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Вид на главный стадион страны; панорама Москвы-реки; символ спортивной Москвы.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>панорама стадиона</li><li>Москва-река</li><li>Воробьёвы горы</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Стадион открыт в 1956 году.</li><li>Вместимость — 81 тыс. зрителей.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Был открыт 31 июля 1956 года товарищеским футбольным матчем между сборными РСФСР и КНР.</p>
+
+  <div class="visual-block">
+  <div class="images-row">
+    <img src="images/moscow_viewpoints/luzhniki_viewpoint_1.jpg" alt="Лужники (смотровая у стадиона) — фото 1" class="monastery-img" />
+<img src="images/moscow_viewpoints/luzhniki_viewpoint_2.jpg" alt="Лужники (смотровая у стадиона) — фото 2" class="monastery-img" />
+<img src="images/moscow_viewpoints/luzhniki_viewpoint_3.jpg" alt="Лужники (смотровая у стадиона) — фото 3" class="monastery-img" />
+<img src="images/moscow_viewpoints/luzhniki_viewpoint_4.jpg" alt="Лужники (смотровая у стадиона) — фото 4" class="monastery-img" />
+  </div>
+  <p class="images-caption">Фото: Лужники (смотровая у стадиона)</p>
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.5517,55.7158&z=16&l=map&size=380,200&pt=37.5517,55.7158,pm2rdm" alt="Карта: Лужники (смотровая у стадиона)" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-8" tabindex="-1">
+  <h2 class="monastery-title">8. Крымский мост (пешеходна<span class="old-russian-ya">я</span> зона)</h2>
+  <p class="meta"><strong>Адрес:</strong> Крымский Вал &nbsp;|&nbsp; <strong>Стиль:</strong> мост, набережная</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Крымский мост (1938) — висячий мост через Москву-реку. Пешеходная зона на мосту — вид на Парк Горького, Храм Христа Спасителя, небоскрёбы Москва-Сити вдали.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Панорама с моста; связь Парка Горького и центра; популярное место прогулок.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>панорама Москвы-реки</li><li>Парк Горького</li><li>Храм Христа Спасителя</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Длина моста — 688 м.</li><li>Пешеходная зона — бесплатный доступ.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">В список включаются существующие мосты (автомобильные, железнодорожные, трамвайные, метромосты, пешеходные) через водные преграды, расположенные на территории Москвы. Мосты упорядочены по водным объектам, через которые они переброшены, в порядке от истока к устью.</p>
+
+  <div class="visual-block">
+
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.6015,55.7335&z=16&l=map&size=380,200&pt=37.6015,55.7335,pm2rdm" alt="Карта: Крымский мост (пешеходная зона)" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-9" tabindex="-1">
+  <h2 class="monastery-title">9. Патриарший мост</h2>
+  <p class="meta"><strong>Адрес:</strong> Берсеневская наб. — Якиманская наб. &nbsp;|&nbsp; <strong>Стиль:</strong> пешеходный мост</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Пешеходный мост через Москву-реку и Водоотводный канал (2004). Вид на Храм Христа Спасителя, Кремль, «Дом на набережной». Популярное место для фото и прогулок.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Лучший вид на Храм Христа Спасителя; пешеходный мост; центр Москвы.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>панорама Храма Христа Спасителя</li><li>Кремль</li><li>Москва-река</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Мост открыт в 2004 году.</li><li>Длина — 203 м.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">This is a partial list of bridges of Moscow, Russia, including existing rail, road and foot bridges over Moskva River, Moscow Canal, Vodootvodny Canal within the MKAD beltway limits and the bridges over Yauza River downstream from Rostokino.</p>
+
+  <div class="visual-block">
+  <div class="images-row">
+    <img src="images/moscow_viewpoints/patriarshy_bridge_1.jpg" alt="Патриарший мост — фото 1" class="monastery-img" />
+<img src="images/moscow_viewpoints/patriarshy_bridge_2.jpg" alt="Патриарший мост — фото 2" class="monastery-img" />
+<img src="images/moscow_viewpoints/patriarshy_bridge_3.jpg" alt="Патриарший мост — фото 3" class="monastery-img" />
+<img src="images/moscow_viewpoints/patriarshy_bridge_4.jpg" alt="Патриарший мост — фото 4" class="monastery-img" />
+  </div>
+  <p class="images-caption">Фото: Патриарший мост</p>
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.6058,55.7442&z=16&l=map&size=380,200&pt=37.6058,55.7442,pm2rdm" alt="Карта: Патриарший мост" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-10" tabindex="-1">
+  <h2 class="monastery-title">10. Воробьёвы горы (трамплин)</h2>
+  <p class="meta"><strong>Адрес:</strong> Воробьёвы горы, 1 &nbsp;|&nbsp; <strong>Стиль:</strong> спортивная смотровая</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Смотровая у трамплина на Воробьёвых горах — вид на МГУ, Лужники, Москву-реку. Трамплин построен в 1953 году; реконструирован в 2019.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Вид на МГУ и Лужники; спортивная история; бесплатный доступ.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>трамплин</li><li>панорама МГУ</li><li>Москва-река</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Трамплин — 1953 год.</li><li>Реконструкция — 2019 год.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Был построен в 1953 году и демонтирован в 2016 году для строительства нового 75-метрового трамплина.</p>
+
+  <div class="visual-block">
+  <div class="images-row">
+    <img src="images/moscow_viewpoints/vorobyovy_tramplin_1.jpg" alt="Воробьёвы горы (трамплин) — фото 1" class="monastery-img" />
+<img src="images/moscow_viewpoints/vorobyovy_tramplin_3.jpg" alt="Воробьёвы горы (трамплин) — фото 2" class="monastery-img" />
+  </div>
+  <p class="images-caption">Фото: Воробьёвы горы (трамплин)</p>
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.5425,55.7092&z=16&l=map&size=380,200&pt=37.5425,55.7092,pm2rdm" alt="Карта: Воробьёвы горы (трамплин)" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-11" tabindex="-1">
+  <h2 class="monastery-title">11. ВДНХ (смотрова<span class="old-russian-ya">я</span> у павильона «Космос»)</h2>
+  <p class="meta"><strong>Адрес:</strong> пр. Мира, 119 &nbsp;|&nbsp; <strong>Стиль:</strong> выставочный комплекс</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Смотровая зона у павильона «Космос» на ВДНХ. Вид на главную аллею, фонтаны «Дружба народов» и «Каменный цветок», арку главного входа. Высота павильона позволяет обозревать территорию выставки.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Панорама ВДНХ; вид на фонтаны и павильоны; символ советской выставки.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>панорама ВДНХ</li><li>павильон Космос</li><li>фонтаны</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Павильон «Космос» — музей космонавтики.</li><li>ВДНХ — с 1959 года.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">В статье представлен список основных павильонов и сооружений на ВДНХ.</p>
+
+  <div class="visual-block">
+  <div class="images-row">
+    <img src="images/moscow_viewpoints/vdnh_viewpoint_1.jpg" alt="ВДНХ (смотровая у павильона «Космос») — фото 1" class="monastery-img" />
+<img src="images/moscow_viewpoints/vdnh_viewpoint_3.jpg" alt="ВДНХ (смотровая у павильона «Космос») — фото 2" class="monastery-img" />
+  </div>
+  <p class="images-caption">Фото: ВДНХ (смотровая у павильона «Космос»)</p>
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.6250,55.8304&z=16&l=map&size=380,200&pt=37.6250,55.8304,pm2rdm" alt="Карта: ВДНХ (смотровая у павильона «Космос»)" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-12" tabindex="-1">
+  <h2 class="monastery-title">12. Царицыно (смотрова<span class="old-russian-ya">я</span> у Большого дворца)</h2>
+  <p class="meta"><strong>Адрес:</strong> ул. Дольская, 1 &nbsp;|&nbsp; <strong>Стиль:</strong> музей-заповедник</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Смотровая у Большого дворца в музее-заповеднике «Царицыно». Вид на пруды, операционный дом, оранжереи и пейзажный парк. Архитектура Баженова и Казакова в псевдоготическом стиле.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Панорама дворцово-паркового ансамбля; вид на пруды; Царицыно.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>панорама парка</li><li>Большой дворец</li><li>пруды</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Большой дворец — проект Казакова.</li><li>Площадь парка более 400 га.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Находится в ведении музея-заповедника «Царицыно», основанного в 1984 году.</p>
+
+  <div class="visual-block">
+  <div class="images-row">
+    <img src="images/moscow_viewpoints/tsaritsyno_viewpoint_1.jpg" alt="Царицыно (смотровая у Большого дворца) — фото 1" class="monastery-img" />
+  </div>
+  <p class="images-caption">Фото: Царицыно (смотровая у Большого дворца)</p>
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.6833,55.6204&z=16&l=map&size=380,200&pt=37.6833,55.6204,pm2rdm" alt="Карта: Царицыно (смотровая у Большого дворца)" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-13" tabindex="-1">
+  <h2 class="monastery-title">13. Сокольники (смотрова<span class="old-russian-ya">я</span> у планетари<span class="old-russian-ya">я</span>)</h2>
+  <p class="meta"><strong>Адрес:</strong> ул. Сокольнический Вал, 1 &nbsp;|&nbsp; <strong>Стиль:</strong> парк культуры</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Смотровая зона в парке «Сокольники» — вид на липовую рощу, аллеи, выставочные павильоны. Планетарий и историческая планировка парка создают атмосферу одного из старейших парков Москвы.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Панорама Сокольников; планетарий; один из крупнейших парков Москвы.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>панорама парка</li><li>планетарий</li><li>липовая роща</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Парк — с 1931 года.</li><li>Площадь около 516 га.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">«Ла́хта-центр» (официальное название — «Ла́хта Центр») — многофункциональный комплекс, расположенный на берегу Финского залива в Приморском районе Санкт-Петербурга. Является центральным офисом компании Газпром. Комплекс состоит из башни, многофункционального здания (МФЗ), арки главного входа и административного здания. Объекты расположены на стилобате (подиум с подземной парковкой).</p>
+
+  <div class="visual-block">
+  <div class="images-row">
+    <img src="images/moscow_viewpoints/sokolniki_viewpoint_1.jpg" alt="Сокольники (смотровая у планетария) — фото 1" class="monastery-img" />
+<img src="images/moscow_viewpoints/sokolniki_viewpoint_4.jpg" alt="Сокольники (смотровая у планетария) — фото 2" class="monastery-img" />
+  </div>
+  <p class="images-caption">Фото: Сокольники (смотровая у планетария)</p>
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.6736,55.7944&z=16&l=map&size=380,200&pt=37.6736,55.7944,pm2rdm" alt="Карта: Сокольники (смотровая у планетария)" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-14" tabindex="-1">
+  <h2 class="monastery-title">14. Смотрова<span class="old-russian-ya">я</span> площадка Храма Христа Спасител<span class="old-russian-ya">я</span></h2>
+  <p class="meta"><strong>Адрес:</strong> ул. Волхонка, 15 &nbsp;|&nbsp; <strong>Стиль:</strong> храм, смотровая</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Смотровая площадка на колоннаде Храма Христа Спасителя (высота 40 м). Панорама Кремля, Москвы-реки, центра города. Открыта с 2000 года после воссоздания храма.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Панорама Кремля с высоты храма; центр Москвы; платный вход.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>панорама центра</li><li>Кремль</li><li>Москва-река</li><li>40 м высоты</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Высота смотровой — 40 м.</li><li>Храм воссоздан в 1994–2000.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Существующее здание, построенное в 1990-х годах, является воссозданием одноимённого храма, разрушенного в 1931 году.</p>
+
+  <div class="visual-block">
+
+  <div class="map-block">
+    <img src="https://static-maps.yandex.ru/1.x/?ll=37.6053,55.7444&z=16&l=map&size=380,200&pt=37.6053,55.7444,pm2rdm" alt="Карта: Смотровая площадка Храма Христа Спасителя" class="map-img" />
+    <p class="map-caption">Схема расположения · Яндекс.Карты</p>
+  </div>
+  </div>
+</section>
+
+
+<section class="qa-section" id="qa" tabindex="-1">
+  <h2>Вопросы и ответы по фактам</h2>
+  <div class="qa-item"><p class="question"><strong>Вопрос 1. Где лучший вид на Кремль с воды?</strong></p><p class="answer">Ответ: Панорамная палуба в парке «Зарядье» («Парящий мост»).</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 2. Какая смотровая самая высокая в Москве?</strong></p><p class="answer">Ответ: Останкинская телебашня (смотровая на высоте 337 м).</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 3. Откуда Наполеон смотрел на Москву в 1812 году?</strong></p><p class="answer">Ответ: С Поклонной горы (сейчас парк Победы).</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 4. Где главная смотровая площадка Москвы?</strong></p><p class="answer">Ответ: Воробьёвы горы — панорама центра и Москва-Сити.</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 5. Где вид на стадион «Лужники» и МГУ?</strong></p><p class="answer">Ответ: Смотровая у стадиона «Лужники» на юге Москвы.</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 6. С какого моста лучший вид на Храм Христа Спасителя?</strong></p><p class="answer">Ответ: Патриарший мост (открыт в 2004 году).</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 7. Где смотровая у трамплина на Воробьёвых горах?</strong></p><p class="answer">Ответ: У трамплина на Воробьёвых горах — вид на МГУ и Лужники.</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 8. Где панорама ВДНХ с фонтанами?</strong></p><p class="answer">Ответ: Смотровая у павильона «Космос» на ВДНХ.</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 9. Где вид на дворцы Царицыно и пруды?</strong></p><p class="answer">Ответ: Смотровая у Большого дворца в музее-заповеднике «Царицыно».</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 10. Где панорама парка Сокольники?</strong></p><p class="answer">Ответ: Смотровая зона у планетария в парке «Сокольники».</p></div>
+</section>
+
+<script>
+(function(){
+  var MAX_IMAGES_PER_ROW = 4;
+  window._deletedImagePaths = window._deletedImagePaths || [];
+  function recordDeleted(src) {
+    if (typeof src !== 'string') return;
+    var s = src.split('?')[0].replace(/\\/g, '/');
+    var idx = s.indexOf('images/');
+    if (idx === 0) window._deletedImagePaths.push(s);
+    else if (idx > 0) window._deletedImagePaths.push(s.substring(idx));
+  }
+  function initEditable() {
+    var sel = '.intro-block p,.intro-block h1,.monastery .monastery-title,.monastery .meta,' +
+      '.monastery .body-text,.monastery .story-text,.qa-section p,.qa-section h2,' +
+      '.monastery ul li';
+    document.querySelectorAll(sel).forEach(function(el){ el.contentEditable = 'true'; });
+  }
+  function setupImages() {
+    document.querySelectorAll('.images-row').forEach(function(row){
+      var imgs = row.querySelectorAll('.monastery-img');
+      imgs.forEach(function(img){
+        if (img.closest('.img-wrap')) return;
+        var wrap = document.createElement('span');
+        wrap.className = 'img-wrap';
+        wrap.draggable = true;
+        wrap.title = 'Drag to reorder';
+        img.parentNode.insertBefore(wrap, img);
+        wrap.appendChild(img);
+        var delBtn = document.createElement('button');
+        delBtn.className = 'img-del';
+        delBtn.type = 'button';
+        delBtn.textContent = '×';
+        delBtn.title = 'Delete image';
+        delBtn.onclick = function(){ recordDeleted(img.src); wrap.remove(); updateAddBtn(row); };
+        wrap.appendChild(delBtn);
+        wrap.ondragstart = function(e){ e.dataTransfer.setData('text/plain',''); e.dataTransfer.effectAllowed = 'move'; window._dragSrc = wrap; wrap.classList.add('img-dragging'); };
+        wrap.ondragend = function(){ wrap.classList.remove('img-dragging'); };
+        wrap.ondragover = function(e){ e.preventDefault(); e.dataTransfer.dropEffect = 'move'; if (e.currentTarget !== window._dragSrc) e.currentTarget.classList.add('img-drop-target'); };
+        wrap.ondragleave = function(e){ e.currentTarget.classList.remove('img-drop-target'); };
+        wrap.ondrop = function(e){ e.preventDefault(); e.currentTarget.classList.remove('img-drop-target'); var src = window._dragSrc; if (src && src !== e.currentTarget) { row.insertBefore(src, e.currentTarget); updateAddBtn(row); } };
+      });
+      var addBtn = row.querySelector('.add-img-btn');
+      if (!addBtn) {
+        addBtn = document.createElement('button');
+        addBtn.className = 'add-img-btn';
+        addBtn.type = 'button';
+        addBtn.appendChild(document.createTextNode('+ Add image '));
+        var countSpan = document.createElement('span');
+        countSpan.className = 'img-count';
+        addBtn.appendChild(countSpan);
+        addBtn.onclick = function(){ var inp = document.createElement('input'); inp.type = 'file'; inp.accept = 'image/*'; inp.multiple = true; inp.onchange = function(){ [].slice.call(inp.files).forEach(function(file){ if (row.querySelectorAll('.monastery-img').length >= MAX_IMAGES_PER_ROW) return; var r = new FileReader(); r.onload = function(){ var i = document.createElement('img'); i.className = 'monastery-img'; i.src = r.result; i.alt = ''; var w = document.createElement('span'); w.className = 'img-wrap'; w.draggable = true; w.title = 'Drag to reorder'; var dB = document.createElement('button'); dB.className = 'img-del'; dB.type = 'button'; dB.textContent = '×'; dB.onclick = function(){ w.remove(); updateAddBtn(row); }; w.appendChild(i); w.appendChild(dB); w.ondragstart = function(e){ e.dataTransfer.setData('text/plain',''); e.dataTransfer.effectAllowed = 'move'; window._dragSrc = w; w.classList.add('img-dragging'); }; w.ondragend = function(){ w.classList.remove('img-dragging'); }; w.ondragover = function(e){ e.preventDefault(); e.dataTransfer.dropEffect = 'move'; if (e.currentTarget !== window._dragSrc) e.currentTarget.classList.add('img-drop-target'); }; w.ondragleave = function(e){ e.currentTarget.classList.remove('img-drop-target'); }; w.ondrop = function(e){ e.preventDefault(); e.currentTarget.classList.remove('img-drop-target'); var src = window._dragSrc; if (src && src !== e.currentTarget) { row.insertBefore(src, e.currentTarget); updateAddBtn(row); } }; row.insertBefore(w, addBtn); updateAddBtn(row); }; r.readAsDataURL(file); }); }; inp.click(); };
+        row.appendChild(addBtn);
+      }
+      updateAddBtn(row);
+    });
+  }
+  function updateAddBtn(row) {
+    var n = row.querySelectorAll('.monastery-img').length;
+    var addBtn = row.querySelector('.add-img-btn');
+    var countSpan = addBtn ? addBtn.querySelector('.img-count') : null;
+    if (countSpan) { countSpan.textContent = n + ' из 4'; }
+    if (addBtn) { addBtn.classList.toggle('hidden', n >= MAX_IMAGES_PER_ROW); }
+  }
+  function addExportButton() {
+    var bar = document.createElement('div');
+    bar.className = 'edit-toolbar';
+    var btn = document.createElement('button');
+    btn.textContent = 'Export HTML';
+    btn.onclick = function() {
+      var root = document.documentElement.cloneNode(true);
+      root.querySelectorAll('.edit-toolbar').forEach(function(el){ el.remove(); });
+      root.querySelectorAll('.img-del, .add-img-btn').forEach(function(el){ el.remove(); });
+      root.querySelectorAll('.img-wrap').forEach(function(wrap){
+        var img = wrap.querySelector('.monastery-img');
+        if (img) { wrap.parentNode.insertBefore(img, wrap); }
+        wrap.remove();
+      });
+      var deleted = window._deletedImagePaths || [];
+      if (deleted.length) {
+        var script = root.ownerDocument.createElement('script');
+        script.type = 'application/json';
+        script.id = 'otium-deleted-images';
+        script.textContent = JSON.stringify(deleted);
+        root.querySelector('body').appendChild(script);
+      }
+      var html = '<!DOCTYPE html>\n' + root.outerHTML;
+      var blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = document.title.replace(/[^a-z0-9]/gi, '_') + '.html';
+      a.click();
+      URL.revokeObjectURL(a.href);
+    };
+    bar.appendChild(btn);
+    document.body.appendChild(bar);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run);
+  else run();
+  function run() {
+    initEditable();
+    setupImages();
+    addExportButton();
+  }
+})();
+</script>
+</body>
+</html>
