@@ -11,3 +11,7 @@ Follows the same layout as `smolensk/`: `prague/data/*.json`, `prague/images/`,
 
 Title page uses coat of arms and flag from Wikimedia Commons when present under
 `prague/images/`.
+
+**Images in git:** Prague rasters are usually fetched locally or in CI; from
+**Budapest onward** raster files under `*/images/` are committed for
+reproducibility (see `budapest/README.md`).

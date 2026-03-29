@@ -173,6 +173,9 @@
 - [x] `scripts/download_prague_images.py` — Прага: реестр, титул (герб/флаг), оптимизация растра.
 - [x] `scripts/validate_prague_sources.py` — whitelist `prague/docs/SOURCES_WHITELIST.md`.
 - [x] `scripts/build_prague_pdf.py` — HTML/PDF, `--html-only`, титул (символы города).
+- [x] `scripts/download_budapest_images.py` — Будапешт: реестр, титул (герб/флаг).
+- [x] `scripts/validate_budapest_sources.py` — whitelist `budapest/docs/SOURCES_WHITELIST.md`.
+- [x] `scripts/build_budapest_pdf.py` — EN + `subtitle_hu`, растры в git.
 
 ### Уже существующие скрипты (не трогать без нужды)
 
@@ -183,7 +186,8 @@
 ### Документация и CI (по желанию)
 
 - [x] `docs/PRAGUE_GUIDE.md` и `prague/README.md` — как собрать Прагу.
-- [x] CI: `.github/workflows/city_guides.yml` — валидация + `download_prague_images` + `build_prague_pdf.py --html-only`; валидация Смоленска.
+- [x] `docs/BUDAPEST_GUIDE.md` и `budapest/README.md` — Будапешт; **растры в репозитории**.
+- [x] CI: Prague — validate + download + HTML; Budapest — validate + HTML (картинки в git); Smolensk — validate.
 
 ## Техническая унификация (следующий шаг после плана)
 

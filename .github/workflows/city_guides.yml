@@ -22,6 +22,18 @@ jobs:
       - name: Build Prague HTML
         run: python scripts/build_prague_pdf.py --html-only
 
+  budapest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Validate Budapest image sources
+        run: python scripts/validate_budapest_sources.py
+      - name: Build Budapest HTML (images in repo)
+        run: python scripts/build_budapest_pdf.py --html-only
+
   smolensk-validate:
     runs-on: ubuntu-latest
     steps:
