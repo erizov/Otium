@@ -2,6 +2,10 @@
 
 Guides by themes.
 
+**City guides** (Berlin, Budapest, Prague, Smolensk, SPB — JSON + `images/`,
+whitelist, separate `build_*_pdf` scripts): command cheat sheet in
+[docs/CITY_GUIDES_README.md](docs/CITY_GUIDES_README.md) (example: **Budapest**).
+
 ---
 
 ## Excursion — московские монастыри

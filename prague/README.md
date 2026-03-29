@@ -2,6 +2,9 @@
 
 Flat `images/<slug>.jpg`, JSON registry, whitelist, and scripts in `scripts/`.
 
+Raster images under `prague/images/` are **committed** for reproducible builds
+(like Budapest and Berlin).
+
 ## Build
 
 From the repository root:

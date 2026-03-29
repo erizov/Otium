@@ -176,6 +176,8 @@
 - [x] `scripts/download_budapest_images.py` — Будапешт: реестр, титул (герб/флаг).
 - [x] `scripts/validate_budapest_sources.py` — whitelist `budapest/docs/SOURCES_WHITELIST.md`.
 - [x] `scripts/build_budapest_pdf.py` — EN + `subtitle_hu`, растры в git.
+- [x] `scripts/download_berlin_images.py`, `validate_berlin_sources.py`,
+  `build_berlin_pdf.py` — Берлин: EN + `subtitle_de`, растры в git.
 
 ### Уже существующие скрипты (не трогать без нужды)
 
@@ -187,7 +189,8 @@
 
 - [x] `docs/PRAGUE_GUIDE.md` и `prague/README.md` — как собрать Прагу.
 - [x] `docs/BUDAPEST_GUIDE.md` и `budapest/README.md` — Будапешт; **растры в репозитории**.
-- [x] CI: Prague — validate + download + HTML; Budapest — validate + HTML (картинки в git); Smolensk — validate.
+- [x] `docs/BERLIN_GUIDE.md` и `berlin/README.md` — Берлин; **растры в репозитории**.
+- [x] CI: Prague, Budapest, Berlin — validate + HTML (растры в git); Smolensk — validate.
 
 ## Техническая унификация (следующий шаг после плана)
 
