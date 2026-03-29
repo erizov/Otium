@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""HTML + PDF for Berlin from files under berlin/images/."""
+"""HTML + PDF for Rome from files under rome/images/."""
 
 from __future__ import annotations
 
@@ -12,7 +12,7 @@ _PROJECT_ROOT = Path(__file__).resolve().parent.parent
 if str(_PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(_PROJECT_ROOT))
 
-from berlin.data.places_registry import BERLIN_PLACES, BerlinPlace
+from rome.data.places_registry import ROME_PLACES, RomePlace
 
 from scripts.build_pdf import (
     _pdf_via_playwright,
@@ -22,17 +22,17 @@ from scripts.build_pdf import (
 from scripts.city_guide_core import MIN_IMAGE_BYTES, smallest_same_stem_image_rel
 from scripts.city_guide_typography import guide_inline_css, typography_triple
 
-BERLIN_HTML_NAME = "berlin_guide.html"
-BERLIN_PDF_NAME = "berlin_guide.pdf"
+ROME_HTML_NAME = "rome_guide.html"
+ROME_PDF_NAME = "rome_guide.pdf"
 
 _TITLE_SYMBOLS: tuple[tuple[str, str], ...] = (
     (
         "images/guide_coat_of_arms.svg",
-        "Coat of arms of Berlin (Wikimedia Commons)",
+        "Coat of arms of Rome (Wikimedia Commons)",
     ),
     (
         "images/guide_flag.svg",
-        "Flag of Berlin (Wikimedia Commons)",
+        "Flag of Rome (Wikimedia Commons)",
     ),
 )
 
@@ -48,7 +48,7 @@ _OTIUM_PARAS_EN: tuple[str, ...] = (
 )
 
 
-def _place_has_displayable_body(p: BerlinPlace) -> bool:
+def _place_has_displayable_body(p: RomePlace) -> bool:
     if _nonempty(p.get("description")):
         return True
     if _nonempty(p.get("history")):
@@ -62,9 +62,9 @@ def _place_has_displayable_body(p: BerlinPlace) -> bool:
     return any(str(x).strip() for x in stories)
 
 
-def _places_with_local_images(root: Path) -> list[BerlinPlace]:
-    out: list[BerlinPlace] = []
-    for p in BERLIN_PLACES:
+def _places_with_local_images(root: Path) -> list[RomePlace]:
+    out: list[RomePlace] = []
+    for p in ROME_PLACES:
         if p.get("suppress_images_for_pdf"):
             if _place_has_displayable_body(p):
                 out.append(p)
@@ -82,7 +82,7 @@ def _nonempty(s: str | None) -> bool:
     return bool(s and str(s).strip())
 
 
-def _place_meta_line(p: BerlinPlace) -> str | None:
+def _place_meta_line(p: RomePlace) -> str | None:
     parts: list[str] = []
     if _nonempty(p.get("address")):
         parts.append("Address: {}".format(p["address"].strip()))
@@ -106,7 +106,7 @@ def _rel_to_src(rel: str) -> str:
     return "../{}".format(rel.lstrip("/").replace("\\", "/"))
 
 
-def _image_srcs_for_place(root: Path, p: BerlinPlace) -> list[str]:
+def _image_srcs_for_place(root: Path, p: RomePlace) -> list[str]:
     if p.get("suppress_images_for_pdf"):
         return []
     out: list[str] = []
@@ -125,13 +125,13 @@ def _image_srcs_for_place(root: Path, p: BerlinPlace) -> list[str]:
     return out
 
 
-def _place_block(p: BerlinPlace, img_srcs: list[str]) -> str:
+def _place_block(p: RomePlace, img_srcs: list[str]) -> str:
     name_en = escape(p.get("name_en", ""))
     name_plain = p.get("name_en", "")
-    sub_de = p.get("subtitle_de", "")
+    sub_it = p.get("subtitle_it", "")
     sub_html = (
-        '<p class="sub-de">{}</p>'.format(escape(sub_de))
-        if _nonempty(sub_de)
+        '<p class="sub-it">{}</p>'.format(escape(sub_it))
+        if _nonempty(sub_it)
         else ""
     )
     meta = _place_meta_line(p)
@@ -216,8 +216,8 @@ def _fig_if_exists(root: Path, rel: str, alt: str, extra_class: str) -> str:
 
 def _heraldry_html(root: Path) -> str:
     chunks: list[str] = [
-        '<div class="berlin-title-symbols" '
-        'aria-label="Berlin coat of arms and flag">',
+        '<div class="rome-title-symbols" '
+        'aria-label="Rome coat of arms and flag">',
         '<p class="title-strip-label">City symbols</p>',
         '<div class="heraldry-strip heraldry-official">',
     ]
@@ -241,13 +241,13 @@ def _cover_otium_html() -> str:
     ).format(paras)
 
 
-def _build_html(root: Path, places: list[BerlinPlace]) -> str:
-    font_href, _, _ = typography_triple("berlin")
+def _build_html(root: Path, places: list[RomePlace]) -> str:
+    font_href, _, _ = typography_triple("rome")
     blocks: list[str] = [_cover_otium_html()]
     blocks.append(
         '<header class="guide-title">'
         "{}"
-        "<h1 class=\"guide-title-main\">Berlin</h1>"
+        "<h1 class=\"guide-title-main\">Rome</h1>"
         "<p class=\"lead\">Guide. Places in this edition: {}.</p>"
         "</header>".format(_heraldry_html(root), len(places)),
     )
@@ -259,12 +259,12 @@ def _build_html(root: Path, places: list[BerlinPlace]) -> str:
             continue
         blocks.append(_place_block(p, srcs))
     body_inner = "\n".join(blocks)
-    css = guide_inline_css("berlin-title-symbols", "berlin")
+    css = guide_inline_css("rome-title-symbols", "rome")
     return (
         "<!DOCTYPE html>\n"
         '<html lang="en">\n<head>\n'
         '<meta charset="utf-8"/>\n'
-        "<title>Guide · Berlin · OTIUM</title>\n"
+        "<title>Guide · Rome · OTIUM</title>\n"
         '<link rel="stylesheet" href="{}"/>\n'
         "<style>\n{}</style>\n</head>\n<body>\n{}\n</body>\n</html>\n"
     ).format(font_href, css, body_inner)
@@ -273,20 +273,20 @@ def _build_html(root: Path, places: list[BerlinPlace]) -> str:
 def main() -> int:
     parser = argparse.ArgumentParser(
         description=(
-            "Build Berlin HTML/PDF using files under berlin/images."
+            "Build Rome HTML/PDF using files under rome/images."
         ),
     )
     parser.add_argument(
-        "--berlin-root",
+        "--rome-root",
         type=Path,
-        default=_PROJECT_ROOT / "berlin",
-        help="Berlin tree root (default: berlin/)",
+        default=_PROJECT_ROOT / "rome",
+        help="Rome tree root (default: rome/)",
     )
     parser.add_argument(
         "--output-dir",
         type=Path,
         default=None,
-        help="Output directory (default: berlin/output/)",
+        help="Output directory (default: rome/output/)",
     )
     parser.add_argument(
         "--html-only",
@@ -301,33 +301,33 @@ def main() -> int:
         help="Playwright wait for images (default 30000).",
     )
     args = parser.parse_args()
-    berlin_root = args.berlin_root.resolve()
+    rome_root = args.rome_root.resolve()
     out_dir = (
         args.output_dir.resolve()
         if args.output_dir
-        else berlin_root / "output"
+        else rome_root / "output"
     )
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    places = _places_with_local_images(berlin_root)
+    places = _places_with_local_images(rome_root)
     if not places:
         print(
             "No places with local images (>= {} bytes). "
-            "Fill berlin_places.json and run "
-            "scripts/download_berlin_images.py.".format(MIN_IMAGE_BYTES),
+            "Fill rome_places.json and run "
+            "scripts/download_rome_images.py.".format(MIN_IMAGE_BYTES),
             file=sys.stderr,
         )
         return 2
 
-    html_path = out_dir / BERLIN_HTML_NAME
-    html_path.write_text(_build_html(berlin_root, places), encoding="utf-8")
+    html_path = out_dir / ROME_HTML_NAME
+    html_path.write_text(_build_html(rome_root, places), encoding="utf-8")
     print("Written:", html_path)
 
     if args.html_only:
         print("Places in HTML: {}".format(len(places)))
         return 0
 
-    pdf_path = out_dir / BERLIN_PDF_NAME
+    pdf_path = out_dir / ROME_PDF_NAME
     footer = (
         "<div style='font-size:9px;text-align:center;width:100%'>"
         "<span class='pageNumber'></span> / <span class='totalPages'></span>"
@@ -341,7 +341,7 @@ def main() -> int:
         display_header_footer=True,
         footer_template=footer,
         header_template=header,
-        static_site_root=berlin_root,
+        static_site_root=rome_root,
     ):
         _strip_empty_pdf_pages(pdf_path)
         _strip_pdf_metadata(pdf_path)

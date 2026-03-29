@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""HTML + PDF for Berlin from files under berlin/images/."""
+"""HTML + PDF for Philadelphia from files under philadelphia/images/."""
 
 from __future__ import annotations
 
@@ -12,7 +12,10 @@ _PROJECT_ROOT = Path(__file__).resolve().parent.parent
 if str(_PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(_PROJECT_ROOT))
 
-from berlin.data.places_registry import BERLIN_PLACES, BerlinPlace
+from philadelphia.data.places_registry import (
+    PHILADELPHIA_PLACES,
+    PhiladelphiaPlace,
+)
 
 from scripts.build_pdf import (
     _pdf_via_playwright,
@@ -22,17 +25,17 @@ from scripts.build_pdf import (
 from scripts.city_guide_core import MIN_IMAGE_BYTES, smallest_same_stem_image_rel
 from scripts.city_guide_typography import guide_inline_css, typography_triple
 
-BERLIN_HTML_NAME = "berlin_guide.html"
-BERLIN_PDF_NAME = "berlin_guide.pdf"
+PHILADELPHIA_HTML_NAME = "philadelphia_guide.html"
+PHILADELPHIA_PDF_NAME = "philadelphia_guide.pdf"
 
 _TITLE_SYMBOLS: tuple[tuple[str, str], ...] = (
     (
         "images/guide_coat_of_arms.svg",
-        "Coat of arms of Berlin (Wikimedia Commons)",
+        "Seal of Philadelphia, Pennsylvania (Wikimedia Commons)",
     ),
     (
         "images/guide_flag.svg",
-        "Flag of Berlin (Wikimedia Commons)",
+        "Flag of Philadelphia, Pennsylvania (Wikimedia Commons)",
     ),
 )
 
@@ -48,7 +51,7 @@ _OTIUM_PARAS_EN: tuple[str, ...] = (
 )
 
 
-def _place_has_displayable_body(p: BerlinPlace) -> bool:
+def _place_has_displayable_body(p: PhiladelphiaPlace) -> bool:
     if _nonempty(p.get("description")):
         return True
     if _nonempty(p.get("history")):
@@ -62,9 +65,9 @@ def _place_has_displayable_body(p: BerlinPlace) -> bool:
     return any(str(x).strip() for x in stories)
 
 
-def _places_with_local_images(root: Path) -> list[BerlinPlace]:
-    out: list[BerlinPlace] = []
-    for p in BERLIN_PLACES:
+def _places_with_local_images(root: Path) -> list[PhiladelphiaPlace]:
+    out: list[PhiladelphiaPlace] = []
+    for p in PHILADELPHIA_PLACES:
         if p.get("suppress_images_for_pdf"):
             if _place_has_displayable_body(p):
                 out.append(p)
@@ -82,7 +85,7 @@ def _nonempty(s: str | None) -> bool:
     return bool(s and str(s).strip())
 
 
-def _place_meta_line(p: BerlinPlace) -> str | None:
+def _place_meta_line(p: PhiladelphiaPlace) -> str | None:
     parts: list[str] = []
     if _nonempty(p.get("address")):
         parts.append("Address: {}".format(p["address"].strip()))
@@ -106,7 +109,7 @@ def _rel_to_src(rel: str) -> str:
     return "../{}".format(rel.lstrip("/").replace("\\", "/"))
 
 
-def _image_srcs_for_place(root: Path, p: BerlinPlace) -> list[str]:
+def _image_srcs_for_place(root: Path, p: PhiladelphiaPlace) -> list[str]:
     if p.get("suppress_images_for_pdf"):
         return []
     out: list[str] = []
@@ -125,13 +128,13 @@ def _image_srcs_for_place(root: Path, p: BerlinPlace) -> list[str]:
     return out
 
 
-def _place_block(p: BerlinPlace, img_srcs: list[str]) -> str:
+def _place_block(p: PhiladelphiaPlace, img_srcs: list[str]) -> str:
     name_en = escape(p.get("name_en", ""))
     name_plain = p.get("name_en", "")
-    sub_de = p.get("subtitle_de", "")
+    sub_es = p.get("subtitle_en", "")
     sub_html = (
-        '<p class="sub-de">{}</p>'.format(escape(sub_de))
-        if _nonempty(sub_de)
+        '<p class="sub-en">{}</p>'.format(escape(sub_es))
+        if _nonempty(sub_es)
         else ""
     )
     meta = _place_meta_line(p)
@@ -216,8 +219,8 @@ def _fig_if_exists(root: Path, rel: str, alt: str, extra_class: str) -> str:
 
 def _heraldry_html(root: Path) -> str:
     chunks: list[str] = [
-        '<div class="berlin-title-symbols" '
-        'aria-label="Berlin coat of arms and flag">',
+        '<div class="philadelphia-title-symbols" '
+        'aria-label="Philadelphia seal and city flag">',
         '<p class="title-strip-label">City symbols</p>',
         '<div class="heraldry-strip heraldry-official">',
     ]
@@ -241,13 +244,13 @@ def _cover_otium_html() -> str:
     ).format(paras)
 
 
-def _build_html(root: Path, places: list[BerlinPlace]) -> str:
-    font_href, _, _ = typography_triple("berlin")
+def _build_html(root: Path, places: list[PhiladelphiaPlace]) -> str:
+    font_href, _, _ = typography_triple("philadelphia")
     blocks: list[str] = [_cover_otium_html()]
     blocks.append(
         '<header class="guide-title">'
         "{}"
-        "<h1 class=\"guide-title-main\">Berlin</h1>"
+        "<h1 class=\"guide-title-main\">Philadelphia</h1>"
         "<p class=\"lead\">Guide. Places in this edition: {}.</p>"
         "</header>".format(_heraldry_html(root), len(places)),
     )
@@ -259,12 +262,12 @@ def _build_html(root: Path, places: list[BerlinPlace]) -> str:
             continue
         blocks.append(_place_block(p, srcs))
     body_inner = "\n".join(blocks)
-    css = guide_inline_css("berlin-title-symbols", "berlin")
+    css = guide_inline_css("philadelphia-title-symbols", "philadelphia")
     return (
         "<!DOCTYPE html>\n"
         '<html lang="en">\n<head>\n'
         '<meta charset="utf-8"/>\n'
-        "<title>Guide · Berlin · OTIUM</title>\n"
+        "<title>Guide · Philadelphia · OTIUM</title>\n"
         '<link rel="stylesheet" href="{}"/>\n'
         "<style>\n{}</style>\n</head>\n<body>\n{}\n</body>\n</html>\n"
     ).format(font_href, css, body_inner)
@@ -273,20 +276,20 @@ def _build_html(root: Path, places: list[BerlinPlace]) -> str:
 def main() -> int:
     parser = argparse.ArgumentParser(
         description=(
-            "Build Berlin HTML/PDF using files under berlin/images."
+            "Build Philadelphia HTML/PDF using files under philadelphia/images."
         ),
     )
     parser.add_argument(
-        "--berlin-root",
+        "--philadelphia-root",
         type=Path,
-        default=_PROJECT_ROOT / "berlin",
-        help="Berlin tree root (default: berlin/)",
+        default=_PROJECT_ROOT / "philadelphia",
+        help="Philadelphia tree root (default: philadelphia/)",
     )
     parser.add_argument(
         "--output-dir",
         type=Path,
         default=None,
-        help="Output directory (default: berlin/output/)",
+        help="Output directory (default: philadelphia/output/)",
     )
     parser.add_argument(
         "--html-only",
@@ -301,33 +304,33 @@ def main() -> int:
         help="Playwright wait for images (default 30000).",
     )
     args = parser.parse_args()
-    berlin_root = args.berlin_root.resolve()
+    philadelphia_root = args.philadelphia_root.resolve()
     out_dir = (
         args.output_dir.resolve()
         if args.output_dir
-        else berlin_root / "output"
+        else philadelphia_root / "output"
     )
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    places = _places_with_local_images(berlin_root)
+    places = _places_with_local_images(philadelphia_root)
     if not places:
         print(
             "No places with local images (>= {} bytes). "
-            "Fill berlin_places.json and run "
-            "scripts/download_berlin_images.py.".format(MIN_IMAGE_BYTES),
+            "Fill philadelphia_places.json and run "
+            "scripts/download_philadelphia_images.py.".format(MIN_IMAGE_BYTES),
             file=sys.stderr,
         )
         return 2
 
-    html_path = out_dir / BERLIN_HTML_NAME
-    html_path.write_text(_build_html(berlin_root, places), encoding="utf-8")
+    html_path = out_dir / PHILADELPHIA_HTML_NAME
+    html_path.write_text(_build_html(philadelphia_root, places), encoding="utf-8")
     print("Written:", html_path)
 
     if args.html_only:
         print("Places in HTML: {}".format(len(places)))
         return 0
 
-    pdf_path = out_dir / BERLIN_PDF_NAME
+    pdf_path = out_dir / PHILADELPHIA_PDF_NAME
     footer = (
         "<div style='font-size:9px;text-align:center;width:100%'>"
         "<span class='pageNumber'></span> / <span class='totalPages'></span>"
@@ -341,7 +344,7 @@ def main() -> int:
         display_header_footer=True,
         footer_template=footer,
         header_template=header,
-        static_site_root=berlin_root,
+        static_site_root=philadelphia_root,
     ):
         _strip_empty_pdf_pages(pdf_path)
         _strip_pdf_metadata(pdf_path)

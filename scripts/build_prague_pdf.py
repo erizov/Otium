@@ -20,6 +20,7 @@ from scripts.build_pdf import (
     _strip_pdf_metadata,
 )
 from scripts.city_guide_core import MIN_IMAGE_BYTES, smallest_same_stem_image_rel
+from scripts.city_guide_typography import guide_inline_css, typography_triple
 
 PRAGUE_HTML_NAME = "prague_guide.html"
 PRAGUE_PDF_NAME = "prague_guide.pdf"
@@ -241,11 +242,7 @@ def _cover_otium_html() -> str:
 
 
 def _build_html(root: Path, places: list[PraguePlace]) -> str:
-    font_href = (
-        "https://fonts.googleapis.com/css2?"
-        "family=Cormorant+Garamond:wght@600&"
-        "family=Source+Sans+3:wght@400;600&display=swap"
-    )
+    font_href, _, _ = typography_triple("prague")
     blocks: list[str] = [_cover_otium_html()]
     blocks.append(
         '<header class="guide-title">'
@@ -262,45 +259,7 @@ def _build_html(root: Path, places: list[PraguePlace]) -> str:
             continue
         blocks.append(_place_block(p, srcs))
     body_inner = "\n".join(blocks)
-    css = """
-body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
-  color: #1a1a1a; font-size: 11pt; }
-.cover-otium { page-break-after: always; min-height: auto;
-  padding: 1.15rem 0.85rem 1.35rem; box-sizing: border-box; }
-.otium-logo { font-family: 'Cormorant Garamond', serif; font-size: 2.15rem;
-  font-weight: 600; letter-spacing: 0.18em; margin-bottom: 0.85rem; }
-.otiump { margin: 0.42rem 0; line-height: 1.42; text-align: justify;
-  max-width: 38rem; font-size: 0.95rem; }
-.guide-title { page-break-after: auto; margin-bottom: 0.55rem;
-  page-break-inside: avoid; }
-.prague-title-symbols { margin-bottom: 0.28rem; }
-.title-strip-label { font-size: 0.72rem; text-transform: uppercase;
-  letter-spacing: 0.08em; color: #555; margin: 0.5rem 0 0.25rem;
-  text-align: center; width: 100%; }
-.heraldry-strip { display: flex; flex-wrap: wrap; align-items: center;
-  justify-content: center; gap: 0.35rem 0.55rem; margin: 0.2rem 0 0.45rem; }
-.heraldry-fig { margin: 0; }
-.heraldry-fig img { width: auto; display: block; margin: 0 auto;
-  border-radius: 2px; }
-.heraldry-coat-book img { max-height: 3.35rem; object-fit: contain; }
-.guide-title h1.guide-title-main { font-family: 'Cormorant Garamond',
-  serif; font-size: 2.35rem; margin-bottom: 0.5rem; font-weight: 600; }
-.lead { color: #444; font-size: 1.05rem; }
-.place { margin-bottom: 2.2rem; page-break-inside: auto; }
-h3 { font-size: 1.22rem; margin: 1.2rem 0 0.35rem; }
-h4 { font-size: 0.95rem; text-transform: uppercase;
-  letter-spacing: 0.06em; margin: 1rem 0 0.4rem; color: #333; }
-.sub-cs { color: #555; font-size: 0.95rem; margin: 0 0 0.5rem;
-  font-style: italic; }
-.place-meta { font-size: 0.92rem; color: #353535; margin: 0 0 0.75rem;
-  line-height: 1.4; }
-.place-fig { margin: 0.5rem 0 1rem; }
-img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
-.prose, .place-desc p { margin: 0.45rem 0; line-height: 1.5;
-  text-align: justify; }
-ul.facts, ul.stories { margin: 0.3rem 0 0.6rem 1.2rem; padding: 0; }
-ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
-"""
+    css = guide_inline_css("prague-title-symbols", "prague")
     return (
         "<!DOCTYPE html>\n"
         '<html lang="en">\n<head>\n'
