@@ -4,6 +4,8 @@ Single script to build the full Moscow guide PDF from parts.
 
 By default does not download images (uses existing guide HTML/PDFs).
 Use --download-images to run image download for all guides first, then build.
+With --download-images, title-page heraldry and SPb university logos are
+fetched into output/images/ as well.
 
 - Backs up existing full guide (PDF + HTML) before overwriting; keeps up to 3.
 - Ensures Playwright/Chromium and pypdf are available (installs if needed).
@@ -34,6 +36,7 @@ _PROJECT_ROOT = Path(__file__).resolve().parent.parent
 if str(_PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(_PROJECT_ROOT))
 
+from scripts.build_spb_pdf import _TITLE_UNIVERSITIES
 from scripts.guide_loader import GUIDES, load_places
 
 OUTPUT_BASENAME = "Moscow_Complete_Guide"
@@ -105,6 +108,27 @@ OTIUM_CONTACT = {
     "edition": "Редакция путеводителей OTIUM",
 }
 
+MIN_TITLE_ASSET_BYTES = 500
+
+_MOSCOW_TITLE_HERALDRY: tuple[tuple[str, str], ...] = (
+    (
+        "images/title_msk_russian_empire_lesser.svg",
+        "Малый герб Российской империи (Commons)",
+    ),
+    (
+        "images/title_msk_bolshoi_basrelief_2025.jpg",
+        "Барельеф герба на фасаде Большого театра (Commons)",
+    ),
+    (
+        "images/title_msk_moscow_coat_soviet.svg",
+        "Герб Москвы, советский (Commons)",
+    ),
+    (
+        "images/title_msk_moscow_coat_empire.jpg",
+        "Герб Москвы, Российская империя (Commons)",
+    ),
+)
+
 _COMBINED_CSS = """
   @page { size: A4; margin: 1.25cm; margin-bottom: 1.5cm; }
   *, html, body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
@@ -139,18 +163,40 @@ _COMBINED_CSS = """
   .story-text { font-style: italic; color: #4a5568; font-size: 9pt;
     margin: 0 0 0.25em 0.2em; line-height: 1.4; }
   ul, li, p { color: #1c1b19; font-family: "Source Serif 4", Georgia, serif; }
-  .front-page { min-height: 100vh; display: flex; flex-direction: column;
+  .front-page { min-height: 0; display: flex; flex-direction: column;
     justify-content: center; align-items: center; text-align: center;
-    padding: 3em 2em; font-family: "Source Serif 4", Georgia, serif;
+    padding: 1.35em 1.1em; font-family: "Source Serif 4", Georgia, serif;
     background: linear-gradient(165deg, #f8f6f2 0%, #ebe8e2 35%, #e8e4dc 70%,
       #f5f2ec 100%);
-    page-break-after: always; box-sizing: border-box; }
-  .front-page .fp-inner { max-width: 42em; padding: 3em 2.5em;
+    page-break-after: always; page-break-inside: avoid; box-sizing: border-box; }
+  .front-page .fp-inner { max-width: 42em; padding: 1.45em 1.75em;
     border: 1px solid #d4cfc4; border-radius: 4px;
     box-shadow: 0 4px 24px rgba(44, 42, 40, 0.08),
       0 1px 0 rgba(255, 255, 255, 0.6) inset;
-    background: rgba(255, 255, 255, 0.75); }
-  .front-page .fp-emblem { width: 4.5em; height: 4.5em; margin: 0 auto 0.6em;
+    background: rgba(255, 255, 255, 0.75);
+    page-break-inside: avoid; }
+  .front-page .moscow-title-strip { width: 100%; margin: 0 0 0.4em; }
+  .front-page .title-heraldry-row { display: flex; flex-wrap: wrap;
+    align-items: center; justify-content: center; gap: 0.2rem 0.38rem;
+    margin: 0 0 0.22rem; }
+  .front-page .title-univ-row { display: flex; flex-wrap: wrap;
+    align-items: flex-start; justify-content: center; gap: 0.2rem 0.35rem;
+    margin: 0 0 0.22rem; }
+  .front-page .title-univ-cell { flex: 0 1 5.6rem; max-width: 5.85rem;
+    display: flex; justify-content: center; }
+  .front-page .title-strip-label { font-family: Inter, sans-serif;
+    font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.06em;
+    color: #6b635b; margin: 0.06rem 0 0.05rem; text-align: center; }
+  .front-page .title-asset-fig { margin: 0; }
+  .front-page .title-heraldry-item img { max-height: 1.65rem;
+    max-width: 2.35rem; object-fit: contain; display: block; margin: 0 auto; }
+  .front-page .title-univ-item { width: 100%; }
+  .front-page .title-univ-item img { max-height: 0.85rem; max-width: 100%;
+    object-fit: contain; display: block; margin: 0 auto; }
+  .front-page .title-univ-caption { font-family: Inter, sans-serif;
+    font-size: 0.52rem; line-height: 1.18; margin: 0.1rem 0 0;
+    padding: 0 0.06rem; color: #252525; text-align: center; font-weight: 500; }
+  .front-page .fp-emblem { width: 3.75em; height: 3.75em; margin: 0 auto 0.45em;
     display: block; }
   .front-page .fp-logo { font-size: 36pt; font-weight: 600; letter-spacing: 0.32em;
     color: #1c1b19 !important; margin: 0 0 0.2em; }
@@ -243,13 +289,23 @@ _COMBINED_CSS = """
   .map-block { margin: 0.5em; }
   .map-caption { font-size: 8pt; color: #6b635b; margin: 0.25em 0 0;
     font-family: Inter, sans-serif; }
-  .map-img { max-width: 100%; height: auto; max-height: 115px; }
+  .map-img { max-width: 100%; height: auto; max-height: 115px;
+    display: block; margin: 0 auto; }
   @media print {
     html, body { color: #1c1b19 !important; background: #faf8f5 !important; }
     .monastery { page-break-before: always; }
     .monastery:first-of-type { page-break-before: auto; }
     body > *:last-child { page-break-after: auto !important; }
   }
+  /* Rotate specific vertical monument photos */
+  img.monastery-img[src$="herzen_2.jpg"],
+  img.monastery-img[src$="tolstoy_2.jpg"],
+  img.monastery-img[src$="tsiolkovsky_1.jpg"] {
+    transform: rotate(90deg);
+    transform-origin: 50% 50%;
+  }
+  /* Hide third image for Сухаревская площадь */
+  img.monastery-img[src$="sukharevskaya_3.jpg"] { display: none; }
   .edit-toolbar { position: fixed; top: 8px; right: 8px; z-index: 9999; }
   .edit-toolbar button { font-family: Inter, sans-serif; font-size: 11px;
     padding: 6px 10px; background: #2c2a28; color: #faf8f5; border: none;
@@ -595,8 +651,92 @@ def _build_pg2_image_html(output_dir: Path) -> str:
     ).format(_escape(PG2_IMAGE_REL))
 
 
-def _build_front_page_html() -> str:
-    """Build front page block: logo, subtitle, tagline, description, editorial board."""
+def _title_figure_if_exists(
+    output_dir: Path,
+    rel: str,
+    alt: str,
+    item_class: str,
+) -> str:
+    path = output_dir / rel
+    if not path.is_file() or path.stat().st_size < MIN_TITLE_ASSET_BYTES:
+        return ""
+    return (
+        '<figure class="title-asset-fig {}" title="{}">'
+        '<img src="{}" alt="{}"/>'
+        "</figure>"
+    ).format(
+        item_class,
+        _escape(alt),
+        _escape(rel),
+        _escape(alt),
+    )
+
+
+def _title_univ_figure_if_exists(
+    output_dir: Path,
+    rel: str,
+    alt: str,
+) -> str:
+    """Вуз на обложке: эмблема + видимая подпись (как в build_spb_pdf)."""
+    path = output_dir / rel
+    if not path.is_file() or path.stat().st_size < MIN_TITLE_ASSET_BYTES:
+        return ""
+    ea = _escape(alt)
+    er = _escape(rel)
+    return (
+        '<div class="title-univ-cell">'
+        '<figure class="title-asset-fig title-univ-item" title="{}">'
+        '<img src="{}" alt="{}"/>'
+        '<figcaption class="title-univ-caption">{}</figcaption>'
+        "</figure></div>"
+    ).format(ea, er, ea, ea)
+
+
+def _build_moscow_title_strips_html(output_dir: Path) -> str:
+    """
+    Heraldry + SPb university strip for the front page (only existing files).
+    """
+    herald_figs: list[str] = []
+    for rel, alt in _MOSCOW_TITLE_HERALDRY:
+        fig = _title_figure_if_exists(
+            output_dir,
+            rel,
+            alt,
+            "title-heraldry-item",
+        )
+        if fig:
+            herald_figs.append(fig)
+    univ_figs: list[str] = []
+    for rel, alt in _TITLE_UNIVERSITIES:
+        fig = _title_univ_figure_if_exists(output_dir, rel, alt)
+        if fig:
+            univ_figs.append(fig)
+    if not herald_figs and not univ_figs:
+        return ""
+    parts: list[str] = [
+        '<div class="moscow-title-strip" '
+        'aria-label="Геральдика и эмблемы вузов Санкт-Петербурга">',
+    ]
+    if herald_figs:
+        parts.append('<p class="title-strip-label">Геральдика</p>')
+        parts.append('<div class="title-heraldry-row">')
+        parts.extend(herald_figs)
+        parts.append("</div>")
+    if univ_figs:
+        parts.append(
+            '<p class="title-strip-label">'
+            "Ведущие вузы Санкт-Петербурга"
+            "</p>"
+        )
+        parts.append('<div class="title-univ-row">')
+        parts.extend(univ_figs)
+        parts.append("</div>")
+    parts.append("</div>")
+    return "".join(parts)
+
+
+def _build_front_page_html(output_dir: Path) -> str:
+    """Front page: title strips, logo, subtitle, tagline, description, board."""
     board_items = []
     for name, role in EDITORIAL_BOARD:
         if role:
@@ -606,9 +746,11 @@ def _build_front_page_html() -> str:
         else:
             board_items.append("<li>{}</li>".format(_escape(name)))
     board_list = "\n    ".join(board_items)
+    strips = _build_moscow_title_strips_html(output_dir)
     return (
         '<div class="front-page">'
         '<div class="fp-inner">'
+        + strips
         + _emblem_svg("fp-emblem")
         + '<p class="fp-logo">{}</p>'
         '<div class="fp-rule"></div>'
@@ -920,7 +1062,7 @@ def build_combined_parts(
         _escape(PREFACE_SUBTITLE),
         preface_body.strip(),
     )
-    blocks.append(_build_front_page_html())
+    blocks.append(_build_front_page_html(output_dir))
     chapter_for_block.append(-1)
     blocks.append(_build_pg2_image_html(output_dir))
     chapter_for_block.append(-2)
@@ -1140,7 +1282,11 @@ def main() -> int:
     parser.add_argument(
         "--download-images",
         action="store_true",
-        help="Download missing images for all guides before building.",
+        help=(
+            "Download missing images for all guides before building; "
+            "also Moscow title heraldry and SPb university logos into "
+            "output/images/."
+        ),
     )
     parser.add_argument(
         "--use-existing-html",
@@ -1252,6 +1398,17 @@ def main() -> int:
     # Step 1: optionally (re)build all single-guide HTML/PDF
     if not args.combined_only:
         if args.download_images:
+            print("--- Moscow title-page assets (output/images/) ---")
+            from scripts.download_moscow_title_assets import (
+                download_moscow_title_assets,
+            )
+            ta_ret = download_moscow_title_assets(output_dir)
+            if ta_ret != 0:
+                print(
+                    "Warning: some title assets failed; "
+                    "front page will omit missing files.",
+                    file=sys.stderr,
+                )
             print("--- Downloading images and building all guides ---")
             cmd = [
                 sys.executable,

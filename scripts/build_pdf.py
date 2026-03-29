@@ -13,7 +13,7 @@ import sys
 import threading
 import urllib.request
 from pathlib import Path
-from typing import Optional
+from typing import Any, Optional
 
 # Добавляем корень проекта в путь для импорт data
 _project_root = Path(__file__).resolve().parent.parent
@@ -716,83 +716,148 @@ _EDITABLE_SCRIPT = """
 """
 
 
+# Heuristic: item content length above this may overflow one A4 page (with margins)
+_FIT_PAGE_CHAR_THRESHOLD = 2400
+_FIT_PAGE_LIST_ITEMS_THRESHOLD = 10
+
+def _place_needs_fit_page(m: Any, story: str | None) -> bool:
+    """True if this place's content is likely to overflow one PDF page."""
+    history = (m.get("history") or "")
+    significance = (m.get("significance") or "")
+    highlights = m.get("highlights") or []
+    facts = m.get("facts") or []
+    story_text = (story or "").strip()
+    total_chars = (
+        len(history) + len(significance) + len(story_text)
+        + sum(len(str(h)) for h in highlights)
+        + sum(len(str(f)) for f in facts)
+    )
+    num_items = len(highlights) + len(facts)
+    return (
+        total_chars >= _FIT_PAGE_CHAR_THRESHOLD
+        or num_items >= _FIT_PAGE_LIST_ITEMS_THRESHOLD
+    )
+
+
 def _section_place(
     number: int,
-    m: dict,
+    m: Any,
     output_dir: Path,
     story: str | None = None,
     images_max: int | None = None,
+    fit_page: bool = False,
+    use_simple_images_table: bool = False,
 ) -> str:
     """HTML block for one place: 2x2 grid (3 images + map)."""
     name = _title_html(m["name"])
     name_alt = _escape(m["name"])
     address = _escape(m["address"])
     style = _escape(m["style"])
-    history = _escape(m["history"])
-    significance = _escape(m["significance"])
+    # Merge additional info (highlights / facts / story) into history/significance,
+    # so we don't need separate ОБЪЕКТЫ / ФАКТЫ / ЗАМЕТКА блоки.
+    base_history = m.get("history") or ""
+    base_significance = m.get("significance") or ""
+    highlights = [str(h).strip() for h in m.get("highlights") or [] if h]
+    facts = [str(f).strip() for f in m.get("facts") or [] if f]
+
+    extra_history = " ".join(facts).strip()
+    extra_significance_parts: list[str] = []
+    if highlights:
+        extra_significance_parts.append("; ".join(highlights))
+    if story and story.strip():
+        extra_significance_parts.append(story.strip())
+    extra_significance = " ".join(extra_significance_parts).strip()
+
+    history_text = base_history
+    if extra_history:
+        history_text = (history_text + " " + extra_history).strip()
+    significance_text = base_significance
+    if extra_significance:
+        significance_text = (significance_text + " " + extra_significance).strip()
+
+    history = _escape(history_text)
+    significance = _escape(significance_text)
     map_url = _map_img_url(m["lon"], m["lat"])
 
-    highlights_html = "".join(
-        "<li>{}</li>".format(_escape(h)) for h in m["highlights"]
-    )
-    facts_html = "".join("<li>{}</li>".format(_escape(f)) for f in m["facts"])
-
-    # Always render 2x2: 3 images + map (ignore 4th image if present)
+    # Always render 2x2: up to 3 images + map (ignore 4th image if present)
     limit = OPT_IMAGES_PER_PLACE
     unique_rels = _unique_images_for_place(
         m["images"], output_dir, max_images=limit
     )
-    # 2x2 grid: row1 = img1, img2; row2 = img3, map (2 per row)
+    # 2x2 grid:
+    # - If there is 1 image: row1 = [img1, map], row2 = [empty, empty].
+    # - Otherwise: row1 = [img1, img2], row2 = [img3, map] (2 per row).
     cells: list[str] = []
-    for i in range(OPT_IMAGES_PER_PLACE):
-        if i < len(unique_rels):
-            img_rel = unique_rels[i]
+    n = len(unique_rels)
+    if use_simple_images_table:
+        # For sculptures: use only the first image and give it all available height.
+        imgs = unique_rels[:1]
+        if imgs:
+            img_rel = imgs[0]
+            images_block = (
+                '  <div class="visual-block">\n'
+                '  <img src="{}" alt="{} — фото 1" class="monastery-img" />\n'
+                '  <p class="images-caption">Фото: {}</p>\n'
+                '  </div>'
+            ).format(img_rel.replace("\\", "/"), name_alt, name_alt)
+        else:
+            images_block = ""
+    else:
+        if n == 1:
+            img_rel = unique_rels[0]
             cells.append(
                 '    <div class="grid-cell">'
-                '<img src="{}" alt="{} — фото {}" class="monastery-img" />'
-                "</div>".format(img_rel.replace("\\", "/"), name_alt, i + 1)
+                '<img src="{}" alt="{} — фото 1" class="monastery-img" />'
+                "</div>".format(img_rel.replace("\\", "/"), name_alt)
             )
-        else:
+            cells.append(
+                '    <div class="map-cell">'
+                '<img src="{}" alt="Карта: {}" class="map-img" />'
+                '<p class="map-caption">Схема · Яндекс.Карты</p></div>'
+                .format(map_url, name_alt)
+            )
             cells.append('    <div class="grid-cell"></div>')
-    cells.append(
-        '    <div class="map-cell">'
-        '<img src="{}" alt="Карта: {}" class="map-img" />'
-        '<p class="map-caption">Схема · Яндекс.Карты</p></div>'
-        .format(map_url, name_alt)
-    )
-    images_block = (
-        '  <div class="visual-grid-2x2">\n{}\n  </div>\n'
-        '  <p class="images-caption">Фото: {}</p>'
-    ).format("\n".join(cells), name_alt)
+            cells.append('    <div class="grid-cell"></div>')
+        else:
+            for i in range(OPT_IMAGES_PER_PLACE):
+                if i < n:
+                    img_rel = unique_rels[i]
+                    cells.append(
+                        '    <div class="grid-cell">'
+                        '<img src="{}" alt="{} — фото {}" class="monastery-img" />'
+                        "</div>".format(img_rel.replace("\\", "/"), name_alt, i + 1)
+                    )
+                else:
+                    cells.append('    <div class="grid-cell"></div>')
+            cells.append(
+                '    <div class="map-cell">'
+                '<img src="{}" alt="Карта: {}" class="map-img" />'
+                '<p class="map-caption">Схема · Яндекс.Карты</p></div>'
+                .format(map_url, name_alt)
+            )
+        images_block = (
+            '  <div class="visual-block">\n'
+            '  <div class="visual-grid-2x2">\n{}\n  </div>\n'
+            '  <p class="images-caption">Фото: {}</p>\n'
+            '  </div>'
+        ).format("\n".join(cells), name_alt)
     title_class = "monastery-title"
 
-    story_block = ""
-    if story and story.strip():
-        story_block = (
-            '  <p class="block-label">Заметка</p>\n'
-            '  <p class="body-text story-text">{}</p>\n'
-        ).format(_escape(story.strip()))
-
     visual_inner = images_block
+    section_class = "monastery monastery-fit-page" if fit_page else "monastery"
 
     return """
-<section class="monastery" id="monastery-{num}" tabindex="-1">
+<section class="{section_class}" id="monastery-{num}" tabindex="-1">
   <h2 class="{title_class}">{num}. {name}</h2>
   <p class="meta"><strong>Адрес:</strong> {address} &nbsp;|&nbsp; <strong>Стиль:</strong> {style}</p>
   <p class="block-label">История</p>
   <p class="body-text">{history}</p>
   <p class="block-label">Значение</p>
   <p class="body-text">{significance}</p>
-  <p class="block-label">Объекты</p>
-  <ul>{highlights_html}</ul>
-  <p class="block-label">Факты</p>
-  <ul>{facts_html}</ul>
-{story_block}
-  <div class="visual-block">
 {visual_inner}
-  </div>
 </section>
 """.format(
+        section_class=section_class,
         num=number,
         name=name,
         name_alt=name_alt,
@@ -802,9 +867,6 @@ def _section_place(
         visual_inner=visual_inner,
         history=history,
         significance=significance,
-        highlights_html=highlights_html,
-        facts_html=facts_html,
-        story_block=story_block,
     )
 
 
@@ -884,23 +946,42 @@ def build_html(
         text-align: justify; max-width: 38em; margin-left: auto;
         margin-right: auto; color: #1c1b19;
         font-family: "Source Serif 4", Georgia, serif; }
-      .monastery { display: block; page-break-inside: avoid;
-                    break-inside: avoid; padding: 1.5em 0 0; }
+      .monastery { display: block; page-break-before: always;
+                    page-break-inside: avoid; break-inside: avoid;
+                    padding: 1.5em 0 0; }
       .monastery:last-of-type { padding-bottom: 0.5em; }
+      /* Fit long items on one PDF page: tighter spacing and smaller visuals */
+      .monastery-fit-page { padding: 0.8em 0 0; }
+      .monastery-fit-page .monastery-title { margin: 0.8em 0 0.25em 0.3em;
+                                             font-size: 15pt; }
+      .monastery-fit-page .meta { margin: 0.1em 0 0.4em 0.3em; font-size: 8pt; }
+      .monastery-fit-page .block-label { margin: 0.35em 0 0.08em 0.3em;
+                                         font-size: 8pt; }
+      .monastery-fit-page .body-text { margin: 0 0 0.25em 0.3em; font-size: 9pt;
+                                       line-height: 1.35; }
+      .monastery-fit-page .story-text { font-size: 8.5pt; line-height: 1.35; }
+      .monastery-fit-page ul { margin: 0.1em 0 0.25em 0.3em; padding-left: 1em;
+                               font-size: 9pt; line-height: 1.35; }
+      .monastery-fit-page .visual-block { margin: 0.5em 0 0; }
+      .monastery-fit-page .visual-grid-2x2 { gap: 6px; margin: 0.5em; }
+      .monastery-fit-page .grid-cell .monastery-img,
+      .monastery-fit-page .map-cell .map-img { height: 110px; }
+      .monastery-fit-page .map-cell .map-img { max-height: 120px; }
+      .monastery-fit-page .images-caption { margin: 0.15em 1em 0; font-size: 7.5pt; }
       .visual-block { margin: 0.8em 0 0; page-break-after: auto; }
       body > *:last-child { page-break-after: auto !important; }
-      .images-row { display: flex; gap: 10px; margin: 1em; flex-wrap: wrap; }
-      .monastery-img { flex: 1 1 200px; max-width: 100%; height: 150px;
-                        object-fit: cover; }
+      .images-row { margin: 1em 0; }
+      .monastery-img { max-width: 100%; height: auto; }
       .visual-grid-2x2 { display: grid; grid-template-columns: 1fr 1fr;
         grid-template-rows: auto auto; gap: 10px; margin: 1em; }
       .visual-grid-2x2 .grid-cell,
       .visual-grid-2x2 .map-cell { min-width: 0; }
       .visual-grid-2x2 .grid-cell .monastery-img,
-      .visual-grid-2x2 .map-cell .map-img { width: 100%; height: 150px;
-        object-fit: cover; display: block; }
+      .visual-grid-2x2 .map-cell .map-img { max-width: 100%; height: auto;
+        display: block; }
       .visual-grid-2x2 .map-cell .map-img { max-height: 160px; height: auto; }
-      .visual-grid-2x2 .map-cell { display: flex; flex-direction: column; }
+      .visual-grid-2x2 .map-cell { display: flex; flex-direction: column;
+        align-items: center; justify-content: flex-start; }
       .visual-grid-2x2 .map-caption { font-size: 8pt; color: #6b635b;
         margin: 0.25em 0 0; font-family: Inter, sans-serif; }
       .images-caption { font-size: 8pt; color: #6b635b; margin: 0.25em 1em 0;
@@ -909,6 +990,8 @@ def build_html(
       .map-caption { font-size: 8pt; color: #6b635b; margin: 0.25em 0 0;
         font-family: Inter, sans-serif; }
       .map-img { max-width: 100%; height: auto; max-height: 160px; }
+      /* Hide third image for Сухаревская площадь */
+      img.monastery-img[src$="sukharevskaya_3.jpg"] { display: none; }
       .qa-section { margin-top: 2em; page-break-before: always;
                      break-before: page; padding-top: 1.5em;
                      page-break-inside: avoid; }
@@ -1000,11 +1083,15 @@ def build_html(
         images_max = OPT_IMAGES_PER_PLACE
     for num, m in enumerate(placed, 1):
         story = stories.get(m.get("name") or "")
+        fit_page = _place_needs_fit_page(m, story)
+        use_simple_images_table = guide_name == "sculptures"
         sections.append(
             _section_place(
                 num, m, output_dir,
                 story=story,
                 images_max=images_max,
+                fit_page=fit_page,
+                use_simple_images_table=use_simple_images_table,
             )
         )
     sections.append(_section_qa())
@@ -1024,7 +1111,7 @@ def build_html(
         rel="stylesheet" />
   <style>{css}</style>
 </head>
-<body>
+<body class="guide-{guide}">
 {body}
 </body>
 </html>
@@ -1032,6 +1119,7 @@ def build_html(
         css=css,
         body=body_content,
         page_title=INTRO_TITLE,
+        guide=(guide_name or ""),
     )
 
 
@@ -1123,6 +1211,7 @@ def _pdf_via_playwright(
     display_header_footer: bool = False,
     footer_template: Optional[str] = None,
     header_template: Optional[str] = None,
+    static_site_root: Optional[Path] = None,
 ) -> bool:
     """
     Генерирует PDF из HTML через Playwright.
@@ -1132,6 +1221,8 @@ def _pdf_via_playwright(
     display_header_footer: если True и задан footer_template, добавляет футер
     с номерами страниц (Playwright подставляет pageNumber и totalPages).
     header_template: если задан, подставляет шапку (убирает дату/время по умол.).
+    static_site_root: если задан, HTTP-сервер отдаёт этот каталог, а в URL
+    подставляется путь html относительно него (для SPB: output/*.html + ../images).
     """
     try:
         from playwright.sync_api import sync_playwright
@@ -1139,6 +1230,11 @@ def _pdf_via_playwright(
         return False
 
     output_dir = html_path.parent
+    url_suffix = html_path.name
+    if static_site_root is not None:
+        root = static_site_root.resolve()
+        output_dir = root
+        url_suffix = html_path.resolve().relative_to(root).as_posix()
     port = _free_port()
     thread = server = None
     try:
@@ -1167,7 +1263,7 @@ def _pdf_via_playwright(
             browser = p.chromium.launch()
             page = browser.new_page()
             if server is not None:
-                url = "http://127.0.0.1:{}/{}".format(port, html_path.name)
+                url = "http://127.0.0.1:{}/{}".format(port, url_suffix)
                 page.goto(url, wait_until="networkidle")
             else:
                 page.goto(
@@ -1224,6 +1320,13 @@ def _is_pdf_page_empty(page) -> bool:
     True if page has no meaningful content (only header/footer).
     Used to drop empty pages from the PDF.
     """
+    # Страница только с картинкой: extract_text() пуст, но изображение есть —
+    # иначе pypdf ошибочно считает страницу пустой и выкидывает её (баг SPB PDF).
+    try:
+        if hasattr(page, "images") and len(page.images) > 0:
+            return False
+    except Exception:
+        pass
     try:
         text = (page.extract_text() or "").strip()
     except Exception:

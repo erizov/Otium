@@ -20,6 +20,7 @@ class SmolenskPlace(TypedDict, total=False):
 
     slug: str
     category: str
+    suppress_images_for_pdf: bool
     name_ru: str
     subtitle_en: str
     image_rel_path: str

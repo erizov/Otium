@@ -3,7 +3,7 @@
 Корень дерева: **`spb/`** (отдельно от Москвы).  
 Данные: **`spb/data/spb_places.json`** (список объектов; в коде — `SPB_PLACES` из `places_registry.py`).  
 Тексты для PDF/HTML (адрес, стиль, годы, описание, история, значение, факты, истории): опционально **`spb/data/spb_place_details.json`** — объекты по ключу `slug` подмешиваются к записям при загрузке.  
-Сейчас в v1 **64** объекта (≥ 50 по плану).  
+Сейчас в каталоге **104** объекта (с фото по `image_source_url` из whitelist).  
 Фото: `spb/images/...` (пути в поле `image_rel_path`).  
 Whitelist URL: `spb/docs/SOURCES_WHITELIST.md`.
 
@@ -26,6 +26,8 @@ python scripts/validate_spb_sources.py
 ```bash
 python scripts/download_spb_images.py
 ```
+
+Перед объектами скрипт подтягивает **герб и флаг** города в `spb/images/guide_coat_of_arms.png` и `guide_flag.svg` (для титула в `build_spb_pdf.py`).
 
 По умолчанию скрипт качает **превью Commons** (`/thumb/.../1280px-...`), делает **паузу ~3.5 с** между файлами и при **HTTP 429** ждёт и повторяет запрос — так реже режет rate limit Wikimedia. Оригиналы (выше риск 429):
 
