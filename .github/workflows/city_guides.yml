@@ -1,0 +1,33 @@
+name: City guides
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  prague:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install image tooling (download optimizer)
+        run: pip install pillow
+      - name: Validate Prague image sources
+        run: python scripts/validate_prague_sources.py
+      - name: Download Prague images
+        run: python scripts/download_prague_images.py --delay 4
+      - name: Build Prague HTML
+        run: python scripts/build_prague_pdf.py --html-only
+
+  smolensk-validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Validate Smolensk image sources
+        run: python scripts/validate_smolensk_sources.py

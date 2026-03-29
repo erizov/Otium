@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Скачивание фото Смоленска из image_source_url (плоская папка images/)."""
+"""Download Prague guide images from image_source_url (flat images/)."""
 
 from __future__ import annotations
 
@@ -15,79 +15,25 @@ _PROJECT_ROOT = Path(__file__).resolve().parent.parent
 if str(_PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(_PROJECT_ROOT))
 
-from smolensk.data.places_registry import SMOLENSK_PLACES
+from prague.data.places_registry import PRAGUE_PLACES
+from prague.whitelist import default_whitelist_path, url_is_whitelisted
 from smolensk.image_optimize import optimize_raster_image_if_large
-from smolensk.whitelist import default_whitelist_path, url_is_whitelisted
 from scripts.city_guide_core import min_bytes_for_filename
-# Титул гида (не в smolensk_places.json); только upload.wikimedia.org.
+
 _TITLE_PAGE_ASSETS: tuple[tuple[str, str], ...] = (
     (
-        "images/title_coat_governorate_1856.svg",
-        "https://upload.wikimedia.org/wikipedia/commons/b/b0/"
-        "Coat_of_arms_of_Smolensk_governorate_1856.svg",
+        "images/guide_coat_of_arms.svg",
+        "https://upload.wikimedia.org/wikipedia/commons/d/d3/"
+        "Coat_of_arms_of_Prague.svg",
     ),
     (
-        "images/title_coat_city_2000_il76m.jpg",
-        "https://upload.wikimedia.org/wikipedia/commons/7/72/"
-        "Coat_of_arms_of_Smolensk_%282000%2C_Il-76M%29.jpg",
-    ),
-    (
-        "images/title_coat_oblast.svg",
-        "https://upload.wikimedia.org/wikipedia/commons/9/9e/"
-        "Coat_of_arms_of_Smolensk_oblast.svg",
-    ),
-    (
-        "images/title_coat_vinkler.gif",
-        "https://upload.wikimedia.org/wikipedia/commons/e/e2/"
-        "Coat_of_Arms_of_Smolensk_%28Vinkler%29.gif",
-    ),
-    (
-        "images/title_coat_soviet.png",
-        "https://upload.wikimedia.org/wikipedia/commons/2/28/"
-        "Coat_of_Arms_of_Smolensk_soviet.png",
-    ),
-    (
-        "images/title_univ_smolgu.jpg",
-        "https://upload.wikimedia.org/wikipedia/commons/6/6c/"
-        "SmolGUIMG_20230528_140527.jpg",
-    ),
-    (
-        "images/title_univ_ped_institute.jpg",
-        "https://upload.wikimedia.org/wikipedia/commons/4/4c/"
-        "SmolenskStateUniversityIMG_20230528_133900.jpg",
-    ),
-    (
-        "images/title_univ_medical.jpg",
-        "https://upload.wikimedia.org/wikipedia/commons/d/d9/"
-        "Smolensk-state-medical-university-buiding.jpg",
-    ),
-    (
-        "images/title_univ_sgafkst.jpg",
-        "https://upload.wikimedia.org/wikipedia/commons/0/01/"
-        "Smolensk_State_Academy_of_Physical_Culture%2C_Sport_and_Tourism_-_01.jpg",
-    ),
-    (
-        "images/title_univ_arts.jpg",
-        "https://upload.wikimedia.org/wikipedia/commons/e/ef/"
-        "%D0%A1%D0%BC%D0%BE%D0%BB%D0%B5%D0%BD%D1%81%D0%BA%D0%B8%D0%B9_"
-        "%D0%B3%D0%BE%D1%81%D1%83%D0%B4%D0%B0%D1%80%D1%81%D1%82%D0%B2%D0%B5"
-        "%D0%BD%D0%BD%D1%8B%D0%B9_%D0%B8%D0%BD%D1%81%D1%82%D0%B8%D1%82%D1%83"
-        "%D1%82_%D0%B8%D1%81%D0%BA%D1%83%D1%81%D1%81%D1%82%D0%B2.jpg",
-    ),
-    (
-        "images/title_univ_rgutis_filial.jpg",
-        "https://upload.wikimedia.org/wikipedia/commons/1/13/"
-        "Filial_RGUTiS_v_Smolenske.JPG",
-    ),
-    (
-        "images/title_univ_mei_filial.jpg",
-        "https://upload.wikimedia.org/wikipedia/commons/3/32/"
-        "%D0%A4%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB_%D0%9C%D0%AD%D0%98_%D0%B2_"
-        "%D0%B3._%D0%A1%D0%BC%D0%BE%D0%BB%D0%B5%D0%BD%D1%81%D0%BA%D0%B5.jpg",
+        "images/guide_flag.svg",
+        "https://upload.wikimedia.org/wikipedia/commons/d/d2/"
+        "Flag_of_Prague.svg",
     ),
 )
 _USER_AGENT = (
-    "ExcursionGuide-Smolensk/1.0 (batch download for local guide; "
+    "ExcursionGuide-Prague/1.0 (batch download for local guide; "
     "Python urllib; respectful throttling)"
 )
 
@@ -193,13 +139,13 @@ def _download_place_image(
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Download Smolensk guide images into smolensk/images/.",
+        description="Download Prague guide images into prague/images/.",
     )
     parser.add_argument(
-        "--smolensk-root",
+        "--prague-root",
         type=Path,
-        default=_PROJECT_ROOT / "smolensk",
-        help="Smolensk tree root (default: smolensk/)",
+        default=_PROJECT_ROOT / "prague",
+        help="Prague tree root (default: prague/)",
     )
     parser.add_argument(
         "--force",
@@ -257,7 +203,7 @@ def main() -> int:
         help="Do not recompress local files over ~350 KiB after download.",
     )
     args = parser.parse_args()
-    root = args.smolensk_root.resolve()
+    root = args.prague_root.resolve()
     wpath = default_whitelist_path()
 
     if args.full_size:
@@ -288,7 +234,7 @@ def main() -> int:
             return
         todo.append((label, url, dest))
 
-    for place in SMOLENSK_PLACES:
+    for place in PRAGUE_PLACES:
         slug = place.get("slug", "?")
         url = place.get("image_source_url")
         rel = place.get("image_rel_path")
@@ -316,10 +262,10 @@ def main() -> int:
         _queue(url, rel, "title:{}".format(short))
 
     if not todo:
-        n = len(SMOLENSK_PLACES)
+        n = len(PRAGUE_PLACES)
         if n == 0:
             print(
-                "No entries in SMOLENSK_PLACES — add smolensk_places.json.",
+                "No entries in PRAGUE_PLACES — add prague_places.json.",
                 file=sys.stderr,
             )
         elif n_already_on_disk == n and n_incomplete == 0 and n_not_whitelisted == 0:

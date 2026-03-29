@@ -19,38 +19,7 @@ from scripts.build_pdf import (
     _strip_empty_pdf_pages,
     _strip_pdf_metadata,
 )
-
-MIN_IMAGE_BYTES = 500
-
-
-def _smallest_same_stem_image_rel(root: Path, rel: str) -> str | None:
-    """
-    Среди файлов с тем же stem (foo.jpg, foo.webp, …) взять самый лёгкий
-    по байтам, не меньше MIN_IMAGE_BYTES.
-    """
-    rel_clean = rel.replace("\\", "/").lstrip("/")
-    base = root / rel_clean
-    parent = base.parent
-    stem = base.stem
-    if not parent.is_dir():
-        return None
-    sized: list[tuple[Path, int]] = []
-    try:
-        for path in parent.iterdir():
-            if not path.is_file() or path.stem != stem:
-                continue
-            size = path.stat().st_size
-            if size >= MIN_IMAGE_BYTES:
-                sized.append((path, size))
-    except OSError:
-        return None
-    if not sized:
-        return None
-    best = min(sized, key=lambda t: t[1])[0]
-    try:
-        return best.relative_to(root.resolve()).as_posix()
-    except ValueError:
-        return None
+from scripts.city_guide_core import MIN_IMAGE_BYTES, smallest_same_stem_image_rel
 
 
 # Компактные иллюстрации для ранних карточек (стр. PDF 4–6 после титула).
@@ -181,7 +150,7 @@ def _places_with_local_images(root: Path) -> list[SmolenskPlace]:
         rel = p.get("image_rel_path")
         if not rel:
             continue
-        if _smallest_same_stem_image_rel(root, rel) is not None:
+        if smallest_same_stem_image_rel(root, rel) is not None:
             out.append(p)
     out.sort(key=lambda x: (x.get("name_ru", ""), x.get("slug", "")))
     return out
@@ -222,14 +191,14 @@ def _image_srcs_for_place(root: Path, p: SmolenskPlace) -> list[str]:
     out: list[str] = []
     rel = p.get("image_rel_path")
     if rel:
-        chosen = _smallest_same_stem_image_rel(root, rel)
+        chosen = smallest_same_stem_image_rel(root, rel)
         if chosen:
             out.append(_rel_to_src(chosen))
     for item in p.get("additional_images") or []:
         er = item.get("image_rel_path")
         if not er:
             continue
-        chosen_extra = _smallest_same_stem_image_rel(root, er)
+        chosen_extra = smallest_same_stem_image_rel(root, er)
         if chosen_extra:
             out.append(_rel_to_src(chosen_extra))
     return out
@@ -318,7 +287,7 @@ def _place_block(p: SmolenskPlace, img_srcs: list[str]) -> str:
 
 
 def _fig_if_exists(root: Path, rel: str, alt: str, extra_class: str) -> str:
-    resolved = _smallest_same_stem_image_rel(root, rel)
+    resolved = smallest_same_stem_image_rel(root, rel)
     if not resolved:
         return ""
     src = _rel_to_src(resolved)
