@@ -83,16 +83,14 @@ def _nonempty(s: str | None) -> bool:
 
 
 def _place_meta_line(p: ViennaPlace) -> str | None:
-    parts: list[str] = []
-    if _nonempty(p.get("address")):
-        parts.append("Address: {}".format(p["address"].strip()))
-    if _nonempty(p.get("architecture_style")):
-        parts.append("Style: {}".format(p["architecture_style"].strip()))
-    if _nonempty(p.get("year_built")):
-        parts.append("Period: {}".format(str(p["year_built"]).strip()))
-    if not parts:
-        return None
-    return " | ".join(parts)
+    address = p.get("address", "")
+    style = p.get("architecture_style", "")
+    period = p.get("year_built", "")
+    return "Address: {} | Style: {} | Period: {}".format(
+        address.strip() if _nonempty(address) else "—",
+        style.strip() if _nonempty(style) else "—",
+        str(period).strip() if _nonempty(period) else "—",
+    )
 
 
 def _html_paragraphs(text: str) -> str:
@@ -164,17 +162,17 @@ def _place_block(p: ViennaPlace, img_srcs: list[str]) -> str:
             )
         )
     facts = p.get("facts") or []
-    if facts:
-        lis = "\n".join(
-            "<li>{}</li>".format(escape(str(f).strip()))
-            for f in facts
-            if str(f).strip()
-        )
-        if lis:
-            chunks.append(
-                "<h4>Facts and details</h4>\n"
-                "<ul class=\"facts\">{}</ul>".format(lis)
-            )
+    lis = "\n".join(
+        "<li>{}</li>".format(escape(str(f).strip()))
+        for f in facts
+        if str(f).strip()
+    )
+    if not lis:
+        lis = "<li>—</li>"
+    chunks.append(
+        "<h4>Facts and details</h4>\n"
+        "<ul class=\"facts\">{}</ul>".format(lis)
+    )
     stories = p.get("stories") or []
     if stories:
         st_li = "\n".join(
@@ -187,12 +185,16 @@ def _place_block(p: ViennaPlace, img_srcs: list[str]) -> str:
                 "<h4>Stories and legends</h4>\n"
                 "<ul class=\"stories\">{}</ul>".format(st_li),
             )
+    chunks.append("<h4>History</h4>")
     if _nonempty(p.get("history")):
-        chunks.append("<h4>History</h4>")
         chunks.append(_html_paragraphs(p["history"]))
+    else:
+        chunks.append("<p class=\"prose\">—</p>")
+    chunks.append("<h4>Significance</h4>")
     if _nonempty(p.get("significance")):
-        chunks.append("<h4>Significance</h4>")
         chunks.append(_html_paragraphs(p["significance"]))
+    else:
+        chunks.append("<p class=\"prose\">—</p>")
     chunks.append("</section>")
     return "\n".join(chunks)
 
