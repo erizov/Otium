@@ -38,18 +38,40 @@
   .story-text { font-style: italic; color: #4a5568; font-size: 9pt;
     margin: 0 0 0.25em 0.2em; line-height: 1.4; }
   ul, li, p { color: #1c1b19; font-family: "Source Serif 4", Georgia, serif; }
-  .front-page { min-height: 100vh; display: flex; flex-direction: column;
+  .front-page { min-height: 0; display: flex; flex-direction: column;
     justify-content: center; align-items: center; text-align: center;
-    padding: 3em 2em; font-family: "Source Serif 4", Georgia, serif;
+    padding: 1.35em 1.1em; font-family: "Source Serif 4", Georgia, serif;
     background: linear-gradient(165deg, #f8f6f2 0%, #ebe8e2 35%, #e8e4dc 70%,
       #f5f2ec 100%);
-    page-break-after: always; box-sizing: border-box; }
-  .front-page .fp-inner { max-width: 42em; padding: 3em 2.5em;
+    page-break-after: always; page-break-inside: avoid; box-sizing: border-box; }
+  .front-page .fp-inner { max-width: 42em; padding: 1.45em 1.75em;
     border: 1px solid #d4cfc4; border-radius: 4px;
     box-shadow: 0 4px 24px rgba(44, 42, 40, 0.08),
       0 1px 0 rgba(255, 255, 255, 0.6) inset;
-    background: rgba(255, 255, 255, 0.75); }
-  .front-page .fp-emblem { width: 4.5em; height: 4.5em; margin: 0 auto 0.6em;
+    background: rgba(255, 255, 255, 0.75);
+    page-break-inside: avoid; }
+  .front-page .moscow-title-strip { width: 100%; margin: 0 0 0.4em; }
+  .front-page .title-heraldry-row { display: flex; flex-wrap: wrap;
+    align-items: center; justify-content: center; gap: 0.2rem 0.38rem;
+    margin: 0 0 0.22rem; }
+  .front-page .title-univ-row { display: flex; flex-wrap: wrap;
+    align-items: flex-start; justify-content: center; gap: 0.2rem 0.35rem;
+    margin: 0 0 0.22rem; }
+  .front-page .title-univ-cell { flex: 0 1 5.6rem; max-width: 5.85rem;
+    display: flex; justify-content: center; }
+  .front-page .title-strip-label { font-family: Inter, sans-serif;
+    font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.06em;
+    color: #6b635b; margin: 0.06rem 0 0.05rem; text-align: center; }
+  .front-page .title-asset-fig { margin: 0; }
+  .front-page .title-heraldry-item img { max-height: 1.65rem;
+    max-width: 2.35rem; object-fit: contain; display: block; margin: 0 auto; }
+  .front-page .title-univ-item { width: 100%; }
+  .front-page .title-univ-item img { max-height: 0.85rem; max-width: 100%;
+    object-fit: contain; display: block; margin: 0 auto; }
+  .front-page .title-univ-caption { font-family: Inter, sans-serif;
+    font-size: 0.52rem; line-height: 1.18; margin: 0.1rem 0 0;
+    padding: 0 0.06rem; color: #252525; text-align: center; font-weight: 500; }
+  .front-page .fp-emblem { width: 3.75em; height: 3.75em; margin: 0 auto 0.45em;
     display: block; }
   .front-page .fp-logo { font-size: 36pt; font-weight: 600; letter-spacing: 0.32em;
     color: #1c1b19 !important; margin: 0 0 0.2em; }
@@ -142,13 +164,23 @@
   .map-block { margin: 0.5em; }
   .map-caption { font-size: 8pt; color: #6b635b; margin: 0.25em 0 0;
     font-family: Inter, sans-serif; }
-  .map-img { max-width: 100%; height: auto; max-height: 115px; }
+  .map-img { max-width: 100%; height: auto; max-height: 115px;
+    display: block; margin: 0 auto; }
   @media print {
     html, body { color: #1c1b19 !important; background: #faf8f5 !important; }
     .monastery { page-break-before: always; }
     .monastery:first-of-type { page-break-before: auto; }
     body > *:last-child { page-break-after: auto !important; }
   }
+  /* Rotate specific vertical monument photos */
+  img.monastery-img[src$="herzen_2.jpg"],
+  img.monastery-img[src$="tolstoy_2.jpg"],
+  img.monastery-img[src$="tsiolkovsky_1.jpg"] {
+    transform: rotate(90deg);
+    transform-origin: 50% 50%;
+  }
+  /* Hide third image for Сухаревская площадь */
+  img.monastery-img[src$="sukharevskaya_3.jpg"] { display: none; }
   .edit-toolbar { position: fixed; top: 8px; right: 8px; z-index: 9999; }
   .edit-toolbar button { font-family: Inter, sans-serif; font-size: 11px;
     padding: 6px 10px; background: #2c2a28; color: #faf8f5; border: none;
@@ -172,7 +204,7 @@
 </style>
 </head>
 <body>
-<div class="front-page"><div class="fp-inner"><svg class="fp-emblem" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img"><title>OTIUM — laurel wreath and Kremlin tower</title><circle cx="32" cy="32" r="29" fill="none" stroke="#8b7355" stroke-width="1.2"/><circle cx="32" cy="32" r="25" fill="none" stroke="#c9c4b8" stroke-width="0.6"/><path fill="none" stroke="#8b7355" stroke-width="0.8" d="M20 36 Q20 22 32 18 Q44 22 44 36"/><path fill="none" stroke="#8b7355" stroke-width="0.8" d="M20 36 Q32 42 44 36"/><path fill="#2c2a28" d="M29 24 h6 v20 h-6 z"/><path fill="#2c2a28" d="M27 24 L32 18 L37 24 L37 26 L27 26 z"/><circle fill="#8b7355" cx="32" cy="16" r="1.8"/></svg><p class="fp-logo">OTIUM</p><div class="fp-rule"></div><p class="fp-subtitle">Institute of Narrative Geography</p><p class="fp-tagline">Otium cum dignitate</p><div class="fp-rule"></div><p class="fp-desc">Leisure with dignity — intellectual engagement with place</p><div class="fp-board"><h3>Редакционная коллегия / Editorial Board</h3><ul>
+<div class="front-page"><div class="fp-inner"><div class="moscow-title-strip" aria-label="Геральдика и эмблемы вузов Санкт-Петербурга"><p class="title-strip-label">Геральдика</p><div class="title-heraldry-row"><figure class="title-asset-fig title-heraldry-item" title="Малый герб Российской империи (Commons)"><img src="images/title_msk_russian_empire_lesser.svg" alt="Малый герб Российской империи (Commons)"/></figure><figure class="title-asset-fig title-heraldry-item" title="Барельеф герба на фасаде Большого театра (Commons)"><img src="images/title_msk_bolshoi_basrelief_2025.jpg" alt="Барельеф герба на фасаде Большого театра (Commons)"/></figure><figure class="title-asset-fig title-heraldry-item" title="Герб Москвы, советский (Commons)"><img src="images/title_msk_moscow_coat_soviet.svg" alt="Герб Москвы, советский (Commons)"/></figure><figure class="title-asset-fig title-heraldry-item" title="Герб Москвы, Российская империя (Commons)"><img src="images/title_msk_moscow_coat_empire.jpg" alt="Герб Москвы, Российская империя (Commons)"/></figure></div><p class="title-strip-label">Ведущие вузы Санкт-Петербурга</p><div class="title-univ-row"><div class="title-univ-cell"><figure class="title-asset-fig title-univ-item" title="Санкт-Петербургский государственный университет (здание Двенадцати коллегий)"><img src="images/title_univ_spbgu.jpg" alt="Санкт-Петербургский государственный университет (здание Двенадцати коллегий)"/><figcaption class="title-univ-caption">Санкт-Петербургский государственный университет (здание Двенадцати коллегий)</figcaption></figure></div><div class="title-univ-cell"><figure class="title-asset-fig title-univ-item" title="Национальный исследовательский университет ИТМО"><img src="images/title_univ_itmo.png" alt="Национальный исследовательский университет ИТМО"/><figcaption class="title-univ-caption">Национальный исследовательский университет ИТМО</figcaption></figure></div><div class="title-univ-cell"><figure class="title-asset-fig title-univ-item" title="Санкт-Петербургский политехнический университет Петра Великого"><img src="images/title_univ_spbpu.png" alt="Санкт-Петербургский политехнический университет Петра Великого"/><figcaption class="title-univ-caption">Санкт-Петербургский политехнический университет Петра Великого</figcaption></figure></div><div class="title-univ-cell"><figure class="title-asset-fig title-univ-item" title="Санкт-Петербургский национальный исследовательский электротехнический университет им. В. И. Ульянова (Ленина)"><img src="images/title_univ_leti.svg" alt="Санкт-Петербургский национальный исследовательский электротехнический университет им. В. И. Ульянова (Ленина)"/><figcaption class="title-univ-caption">Санкт-Петербургский национальный исследовательский электротехнический университет им. В. И. Ульянова (Ленина)</figcaption></figure></div><div class="title-univ-cell"><figure class="title-asset-fig title-univ-item" title="Российский государственный педагогический университет им. А. И. Герцена"><img src="images/title_univ_herzen.jpg" alt="Российский государственный педагогический университет им. А. И. Герцена"/><figcaption class="title-univ-caption">Российский государственный педагогический университет им. А. И. Герцена</figcaption></figure></div><div class="title-univ-cell"><figure class="title-asset-fig title-univ-item" title="Санкт-Петербургский государственный экономический университет"><img src="images/title_univ_unecon.jpg" alt="Санкт-Петербургский государственный экономический университет"/><figcaption class="title-univ-caption">Санкт-Петербургский государственный экономический университет</figcaption></figure></div><div class="title-univ-cell"><figure class="title-asset-fig title-univ-item" title="Первый Санкт-Петербургский государственный медицинский университет им. академика И. П. Павлова"><img src="images/title_univ_pavlov.jpg" alt="Первый Санкт-Петербургский государственный медицинский университет им. академика И. П. Павлова"/><figcaption class="title-univ-caption">Первый Санкт-Петербургский государственный медицинский университет им. академика И. П. Павлова</figcaption></figure></div><div class="title-univ-cell"><figure class="title-asset-fig title-univ-item" title="Российский государственный гидрометеорологический университет"><img src="images/title_univ_rshu.jpg" alt="Российский государственный гидрометеорологический университет"/><figcaption class="title-univ-caption">Российский государственный гидрометеорологический университет</figcaption></figure></div><div class="title-univ-cell"><figure class="title-asset-fig title-univ-item" title="Национальный государственный университет физической культуры, спорта и здоровья им. П. Ф. Лесгафта"><img src="images/title_univ_lesgaft.png" alt="Национальный государственный университет физической культуры, спорта и здоровья им. П. Ф. Лесгафта"/><figcaption class="title-univ-caption">Национальный государственный университет физической культуры, спорта и здоровья им. П. Ф. Лесгафта</figcaption></figure></div><div class="title-univ-cell"><figure class="title-asset-fig title-univ-item" title="Санкт-Петербургский государственный университет (г. Пушкин)"><img src="images/title_univ_pushkin.jpg" alt="Санкт-Петербургский государственный университет (г. Пушкин)"/><figcaption class="title-univ-caption">Санкт-Петербургский государственный университет (г. Пушкин)</figcaption></figure></div></div></div><svg class="fp-emblem" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img"><title>OTIUM — laurel wreath and Kremlin tower</title><circle cx="32" cy="32" r="29" fill="none" stroke="#8b7355" stroke-width="1.2"/><circle cx="32" cy="32" r="25" fill="none" stroke="#c9c4b8" stroke-width="0.6"/><path fill="none" stroke="#8b7355" stroke-width="0.8" d="M20 36 Q20 22 32 18 Q44 22 44 36"/><path fill="none" stroke="#8b7355" stroke-width="0.8" d="M20 36 Q32 42 44 36"/><path fill="#2c2a28" d="M29 24 h6 v20 h-6 z"/><path fill="#2c2a28" d="M27 24 L32 18 L37 24 L37 26 L27 26 z"/><circle fill="#8b7355" cx="32" cy="16" r="1.8"/></svg><p class="fp-logo">OTIUM</p><div class="fp-rule"></div><p class="fp-subtitle">Institute of Narrative Geography</p><p class="fp-tagline">Otium cum dignitate</p><div class="fp-rule"></div><p class="fp-desc">Leisure with dignity — intellectual engagement with place</p><div class="fp-board"><h3>Редакционная коллегия / Editorial Board</h3><ul>
     <li>Е. В. Облонская, главный редактор</li>
     <li>А. П. Чебоевский, заместитель главного редактора</li>
     <li>Ф. К. Карамазов</li>
@@ -8362,7 +8394,7 @@
   <p class="block-label">Факты</p>
   <ul><li>Мост открыт в 2004 году.</li><li>Длина — 203 м.</li></ul>
   <p class="block-label">Заметка</p>
-  <p class="body-text story-text">This is a partial list of bridges of Moscow, Russia, including existing rail, road and foot bridges over Moskva River, Moscow Canal, Vodootvodny Canal within the MKAD beltway limits and the bridges over Yauza River downstream from Rostokino.</p>
+  
 
   <div class="visual-block">
   <div class="images-row">
@@ -8492,7 +8524,7 @@
   <p class="block-label">Факты</p>
   <ul><li>Построен в 1938 году.</li><li>Вид на Кремль и Храм Христа Спасителя.</li></ul>
   <p class="block-label">Заметка</p>
-  <p class="body-text story-text">This is a partial list of bridges of Moscow, Russia, including existing rail, road and foot bridges over Moskva River, Moscow Canal, Vodootvodny Canal within the MKAD beltway limits and the bridges over Yauza River downstream from Rostokino.</p>
+  
 
   <div class="visual-block">
   <div class="images-row">
@@ -8518,7 +8550,7 @@
   <p class="block-label">Факты</p>
   <ul><li>Построен в 2004 году.</li><li>Пешеходный; проходит над рекой и каналом.</li></ul>
   <p class="block-label">Заметка</p>
-  <p class="body-text story-text">This is a partial list of bridges of Moscow, Russia, including existing rail, road and foot bridges over Moskva River, Moscow Canal, Vodootvodny Canal within the MKAD beltway limits and the bridges over Yauza River downstream from Rostokino.</p>
+  
 
   <div class="visual-block">
   <div class="images-row">
@@ -8543,7 +8575,7 @@
   <p class="block-label">Факты</p>
   <ul><li>Построен в 2000 году.</li><li>Пешеходный и велосипедный.</li></ul>
   <p class="block-label">Заметка</p>
-  <p class="body-text story-text">This is a partial list of bridges of Moscow, Russia, including existing rail, road and foot bridges over Moskva River, Moscow Canal, Vodootvodny Canal within the MKAD beltway limits and the bridges over Yauza River downstream from Rostokino.</p>
+  
 
   <div class="visual-block">
   <div class="images-row">
@@ -8571,7 +8603,7 @@
   <p class="block-label">Факты</p>
   <ul><li>Высота арки 105 м.</li><li>Открыт в 2007 году.</li></ul>
   <p class="block-label">Заметка</p>
-  <p class="body-text story-text">This is a partial list of bridges of Moscow, Russia, including existing rail, road and foot bridges over Moskva River, Moscow Canal, Vodootvodny Canal within the MKAD beltway limits and the bridges over Yauza River downstream from Rostokino.</p>
+  
 
   <div class="visual-block">
   <div class="images-row">
@@ -8597,7 +8629,7 @@
   <p class="block-label">Факты</p>
   <ul><li>Перестроен к 100-летию Бородинской битвы (1912).</li><li>Скульптуры воинов.</li></ul>
   <p class="block-label">Заметка</p>
-  <p class="body-text story-text">This is a partial list of bridges of Moscow, Russia, including existing rail, road and foot bridges over Moskva River, Moscow Canal, Vodootvodny Canal within the MKAD beltway limits and the bridges over Yauza River downstream from Rostokino.</p>
+  
 
   <div class="visual-block">
   <div class="images-row">
@@ -8623,7 +8655,7 @@
   <p class="block-label">Факты</p>
   <ul><li>Построен в 2000 году.</li><li>Рядом — Пушкинский мост.</li></ul>
   <p class="block-label">Заметка</p>
-  <p class="body-text story-text">This is a partial list of bridges of Moscow, Russia, including existing rail, road and foot bridges over Moskva River, Moscow Canal, Vodootvodny Canal within the MKAD beltway limits and the bridges over Yauza River downstream from Rostokino.</p>
+  
 
   <div class="visual-block">
   <div class="images-row">
@@ -8651,7 +8683,7 @@
   <p class="block-label">Факты</p>
   <ul><li>Построен в 1911 году.</li><li>Реконструкция — 2000-е годы.</li></ul>
   <p class="block-label">Заметка</p>
-  <p class="body-text story-text">This is a partial list of bridges of Moscow, Russia, including existing rail, road and foot bridges over Moskva River, Moscow Canal, Vodootvodny Canal within the MKAD beltway limits and the bridges over Yauza River downstream from Rostokino.</p>
+  
 
   <div class="visual-block">
   <div class="images-row">
@@ -8730,7 +8762,7 @@
   <p class="block-label">Факты</p>
   <ul><li>Построен в 2001 году.</li><li>Длина — около 250 м.</li></ul>
   <p class="block-label">Заметка</p>
-  <p class="body-text story-text">This is a partial list of bridges of Moscow, Russia, including existing rail, road and foot bridges over Moskva River, Moscow Canal, Vodootvodny Canal within the MKAD beltway limits and the bridges over Yauza River downstream from Rostokino.</p>
+  
 
   <div class="visual-block">
   <div class="images-row">
