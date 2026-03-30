@@ -98,4 +98,7 @@ Replace the slug in script names and flags:
 `validate_florence_sources.py`, `build_florence_pdf.py` (`--florence-root`).
 See `florence/README.md`.
 
+**Montreal** (`montreal/`): `download_montreal_images.py`,
+`validate_montreal_sources.py`, `build_montreal_pdf.py` (`--montreal-root`).
+
 Expansion plan (more place ideas): `docs/CITY_GUIDES_EXPANSION_PLAN.md`.

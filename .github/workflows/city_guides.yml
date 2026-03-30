@@ -114,6 +114,18 @@ jobs:
       - name: Build Florence HTML (images in repo)
         run: python scripts/build_florence_pdf.py --html-only
 
+  montreal:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Validate Montreal image sources
+        run: python scripts/validate_montreal_sources.py
+      - name: Build Montreal HTML (images in repo)
+        run: python scripts/build_montreal_pdf.py --html-only
+
   smolensk-validate:
     runs-on: ubuntu-latest
     steps:
