@@ -46,46 +46,8 @@ _TITLE_PAGE_ASSETS: tuple[tuple[str, str], ...] = (
         "https://upload.wikimedia.org/wikipedia/commons/2/28/"
         "Coat_of_Arms_of_Smolensk_soviet.png",
     ),
-    (
-        "images/title_univ_smolgu.jpg",
-        "https://upload.wikimedia.org/wikipedia/commons/6/6c/"
-        "SmolGUIMG_20230528_140527.jpg",
-    ),
-    (
-        "images/title_univ_ped_institute.jpg",
-        "https://upload.wikimedia.org/wikipedia/commons/4/4c/"
-        "SmolenskStateUniversityIMG_20230528_133900.jpg",
-    ),
-    (
-        "images/title_univ_medical.jpg",
-        "https://upload.wikimedia.org/wikipedia/commons/d/d9/"
-        "Smolensk-state-medical-university-buiding.jpg",
-    ),
-    (
-        "images/title_univ_sgafkst.jpg",
-        "https://upload.wikimedia.org/wikipedia/commons/0/01/"
-        "Smolensk_State_Academy_of_Physical_Culture%2C_Sport_and_Tourism_-_01.jpg",
-    ),
-    (
-        "images/title_univ_arts.jpg",
-        "https://upload.wikimedia.org/wikipedia/commons/e/ef/"
-        "%D0%A1%D0%BC%D0%BE%D0%BB%D0%B5%D0%BD%D1%81%D0%BA%D0%B8%D0%B9_"
-        "%D0%B3%D0%BE%D1%81%D1%83%D0%B4%D0%B0%D1%80%D1%81%D1%82%D0%B2%D0%B5"
-        "%D0%BD%D0%BD%D1%8B%D0%B9_%D0%B8%D0%BD%D1%81%D1%82%D0%B8%D1%82%D1%83"
-        "%D1%82_%D0%B8%D1%81%D0%BA%D1%83%D1%81%D1%81%D1%82%D0%B2.jpg",
-    ),
-    (
-        "images/title_univ_rgutis_filial.jpg",
-        "https://upload.wikimedia.org/wikipedia/commons/1/13/"
-        "Filial_RGUTiS_v_Smolenske.JPG",
-    ),
-    (
-        "images/title_univ_mei_filial.jpg",
-        "https://upload.wikimedia.org/wikipedia/commons/3/32/"
-        "%D0%A4%D0%B8%D0%BB%D0%B8%D0%B0%D0%BB_%D0%9C%D0%AD%D0%98_%D0%B2_"
-        "%D0%B3._%D0%A1%D0%BC%D0%BE%D0%BB%D0%B5%D0%BD%D1%81%D0%BA%D0%B5.jpg",
-    ),
 )
+# Логотипы «Региональные вузы»: scripts/download_smolensk_vuzopedia_logos.py
 _USER_AGENT = (
     "ExcursionGuide-Smolensk/1.0 (batch download for local guide; "
     "Python urllib; respectful throttling)"

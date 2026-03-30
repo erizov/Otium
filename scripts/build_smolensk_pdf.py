@@ -69,41 +69,59 @@ _TITLE_HISTORY_COATS: tuple[tuple[str, str], ...] = (
 )
 _TITLE_UNIVERSITIES: tuple[tuple[str, str], ...] = (
     (
-        "images/title_univ_smolgu.jpg",
+        "images/title_univ_regional_3810.jpg",
         "Смоленский государственный университет",
     ),
     (
-        "images/title_univ_ped_institute.jpg",
-        (
-            "Смоленский государственный университет "
-            "(учебный корпус)"
-        ),
+        "images/title_univ_regional_3827.jpg",
+        "Смоленская государственная сельскохозяйственная академия",
     ),
     (
-        "images/title_univ_medical.jpg",
-        "Смоленский государственный медицинский университет",
-    ),
-    (
-        "images/title_univ_sgafkst.jpg",
-        (
-            "Смоленская государственная академия физической культуры, "
-            "спорта и туризма"
-        ),
-    ),
-    (
-        "images/title_univ_arts.jpg",
+        "images/title_univ_regional_3840.jpg",
         "Смоленский государственный институт искусств",
     ),
     (
-        "images/title_univ_rgutis_filial.jpg",
+        "images/title_univ_regional_3866.jpg",
         (
-            "Филиал Российского государственного университета "
-            "им. А. Н. Косыгина в г. Смоленске"
+            "Смоленский государственный медицинский университет "
+            "Министерства здравоохранения Российской Федерации"
         ),
     ),
     (
-        "images/title_univ_mei_filial.jpg",
-        "Смоленский филиал НИУ «МЭИ»",
+        "images/title_univ_regional_3868.jpg",
+        "Смоленский государственный университет спорта",
+    ),
+    (
+        "images/title_univ_regional_3870.jpg",
+        "Смоленская Православная Духовная Семинария",
+    ),
+    (
+        "images/title_univ_regional_3986.jpg",
+        (
+            "Смоленский филиал Национального исследовательского "
+            "университета «МЭИ»"
+        ),
+    ),
+    (
+        "images/title_univ_regional_4031.jpg",
+        (
+            "Смоленский филиал Российского экономического университета "
+            "имени Г.В. Плеханова"
+        ),
+    ),
+    (
+        "images/title_univ_regional_4092.jpg",
+        (
+            "Смоленский филиал Финансового университета при Правительстве "
+            "Российской Федерации"
+        ),
+    ),
+    (
+        "images/title_univ_regional_4337.jpg",
+        (
+            "Смоленский филиал Российской академии народного хозяйства и "
+            "государственной службы при Президенте РФ"
+        ),
     ),
 )
 
@@ -303,11 +321,60 @@ def _fig_if_exists(root: Path, rel: str, alt: str, extra_class: str) -> str:
     )
 
 
+def _univ_caption_text(alt: object) -> str:
+    """Текст подписи вуза (как в _TITLE_UNIVERSITIES)."""
+    if isinstance(alt, tuple):
+        return "".join(alt)
+    return str(alt)
+
+
+def _university_figure_html(root: Path, rel: str, alt: object) -> str:
+    """Логотип вуза с официальным названием под изображением."""
+    resolved = smallest_same_stem_image_rel(root, rel)
+    if not resolved:
+        return ""
+    caption = _univ_caption_text(alt)
+    src = _rel_to_src(resolved)
+    return (
+        '<figure class="heraldry-fig heraldry-univ heraldry-univ-captioned" '
+        'title="{}">'
+        '<img src="{}" alt="{}"/>'
+        '<figcaption class="univ-name-caption">{}</figcaption>'
+        "</figure>".format(
+            escape(caption),
+            escape(src),
+            escape(caption),
+            escape(caption),
+        )
+    )
+
+
+def _universities_section_html(root: Path) -> str:
+    """Блок «Региональные вузы» в конце путеводителя."""
+    figs: list[str] = []
+    for rel, alt in _TITLE_UNIVERSITIES:
+        fig = _university_figure_html(root, rel, alt)
+        if fig:
+            figs.append(fig)
+    if not figs:
+        return ""
+    inner = "\n".join(figs)
+    return (
+        '<section class="guide-universities" aria-label="Региональные вузы">'
+        '<p class="title-strip-label title-strip-label-univ">'
+        "Региональные вузы</p>"
+        '<div class="heraldry-strip heraldry-universities">'
+        "{}"
+        "</div>"
+        "</section>"
+    ).format(inner)
+
+
 def _heraldry_html(root: Path) -> str:
-    """Титул: исторические гербы, девиз, герб/флаг области, вузы."""
+    """Титул: исторические гербы, девиз, герб/флаг области."""
     chunks: list[str] = [
         '<div class="smolensk-title-symbols" '
-        'aria-label="Гербы, флаг и вузы Смоленска">',
+        'aria-label="Исторические гербы и символика области">',
         '<p class="title-strip-label">Исторические и справочные гербы</p>',
         '<div class="heraldry-strip heraldry-history">',
     ]
@@ -340,16 +407,6 @@ def _heraldry_html(root: Path) -> str:
     )
     if flag_fig:
         chunks.append(flag_fig)
-    chunks.append("</div>")
-    chunks.append(
-        '<p class="title-strip-label title-strip-label-univ">'
-        "Региональные вузы</p>"
-    )
-    chunks.append('<div class="heraldry-strip heraldry-universities">')
-    for rel, alt in _TITLE_UNIVERSITIES:
-        fig = _fig_if_exists(root, rel, alt, "heraldry-univ")
-        if fig:
-            chunks.append(fig)
     chunks.append("</div></div>")
     return "\n".join(chunks)
 
@@ -387,6 +444,9 @@ def _build_html(root: Path, places: list[SmolenskPlace]) -> str:
         ):
             continue
         blocks.append(_place_block(p, srcs))
+    univ = _universities_section_html(root)
+    if univ:
+        blocks.append(univ)
     body_inner = "\n".join(blocks)
     css = """
 body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
@@ -400,25 +460,33 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
 .guide-title { page-break-after: auto; margin-bottom: 0.55rem;
   page-break-inside: avoid; }
 .smolensk-title-symbols { margin-bottom: 0.28rem; }
+.guide-universities { margin-top: 2rem; page-break-inside: avoid; }
 .title-strip-label { font-size: 0.72rem; text-transform: uppercase;
   letter-spacing: 0.08em; color: #555; margin: 0.5rem 0 0.25rem;
   text-align: center; width: 100%; }
 .title-strip-label-univ { margin-top: 0.12rem; margin-bottom: 0.04rem;
   font-size: 0.58rem; }
 .heraldry-strip { display: flex; flex-wrap: wrap; align-items: center;
-  justify-content: center; gap: 0.35rem 0.55rem; margin: 0.2rem 0 0.45rem; }
+  justify-content: center; gap: 0.45rem 0.65rem; margin: 0.2rem 0 0.45rem; }
 .heraldry-strip.heraldry-universities { gap: 0.04rem 0.1rem;
   margin: 0.02rem 0 0.08rem; }
 .heraldry-fig { margin: 0; }
 .heraldry-fig img { width: auto; display: block; margin: 0 auto;
   border-radius: 2px; }
-.heraldry-coat-hist img { max-height: 2.2rem; max-width: 2.45rem;
+.heraldry-coat-hist img { max-height: 3.2rem; max-width: 3.5rem;
   object-fit: contain; }
-.heraldry-coat-book img, .heraldry-flag-book img { max-height: 3.35rem;
+.heraldry-coat-book img, .heraldry-flag-book img { max-height: 4.75rem;
   object-fit: contain; }
-.heraldry-flag-book img { max-height: 2.35rem; }
-.heraldry-univ .heraldry-fig img { max-height: 0.62rem; max-width: 1.85rem;
+.heraldry-flag-book img { max-height: 3.35rem; }
+.heraldry-fig.heraldry-univ img { max-height: 0.62rem; max-width: 1.85rem;
   object-fit: contain; }
+figure.heraldry-fig.heraldry-univ.heraldry-univ-captioned {
+  display: flex; flex-direction: column; align-items: center;
+  max-width: 5.85rem; margin: 0.02rem 0.05rem; }
+figure.heraldry-fig.heraldry-univ .univ-name-caption {
+  font-family: 'Source Sans 3', sans-serif; font-size: 0.4rem;
+  line-height: 1.14; text-align: center; margin: 0.06rem 0 0;
+  padding: 0 0.05rem; max-width: 5.65rem; color: #2a2a2a; }
 .heraldry-motto { text-align: center; max-width: 16rem; margin: 0.12rem auto;
   width: 100%; }
 .motto-oldslav { font-family: 'Ponomar', 'Cormorant Garamond', serif;
