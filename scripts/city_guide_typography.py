@@ -150,7 +150,7 @@ body {{ font-family: {body}; margin: 2rem;
 .place {{ margin-bottom: 2.2rem; page-break-inside: auto; }}
 h3 {{ font-family: {title}; font-size: 1.22rem; margin: 1.2rem 0 0.35rem;
   font-weight: 600; }}
-h4 {{ font-family: {body}; font-size: 0.95rem; text-transform: uppercase;
+h4 {{ font-family: {title}; font-size: 0.95rem; text-transform: uppercase;
   letter-spacing: 0.06em; margin: 1rem 0 0.4rem; color: #333;
   font-weight: 600; }}
 .sub-de, .sub-en, .sub-es, .sub-fr, .sub-ca, .sub-it, .sub-hu, .sub-cs {{

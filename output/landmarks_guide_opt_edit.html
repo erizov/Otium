@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Iconic landmarks Москвы</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;0,600&amp;family=EB+Garamond:ital,wght@0,400;0,600&amp;family=Pochaevsk&amp;family=Source+Serif+4:ital,wght@0,400;0,600&amp;family=Inter:wght@400;500;600&amp;display=swap&amp;subset=latin,cyrillic"
+        rel="stylesheet" />
+  <style>
+      @page { size: A4; margin: 2cm 1.5cm 1.5cm 1.8cm; }
+      *, html, body { -webkit-print-color-adjust: exact;
+                      print-color-adjust: exact; }
+      html { background-color: #faf8f5; }
+      html, body { margin: 0; padding: 0; font-family: "Source Serif 4",
+        Georgia, "Times New Roman", serif;
+        font-size: 10pt; line-height: 1.45; color: #1c1b19;
+        background-color: #faf8f5; }
+      body { color: #1c1b19 !important; background-color: #faf8f5 !important; }
+      h1 { font-family: "Source Serif 4", Georgia, serif;
+           font-size: 18pt; text-align: center; margin: 0 0 0.5em;
+           color: #1c1b19 !important; }
+      h2 { font-family: "Source Serif 4", Georgia, serif;
+           color: #1c1b19 !important; }
+      h2.monastery-title { font-family: Pochaevsk, Georgia, serif;
+           font-size: 17pt; margin: 1.2em 0 0.4em 0.3em;
+           border-bottom: 1px solid #8b7355; padding-bottom: 0.25em;
+           color: #2c2a28 !important; }
+      .old-russian-ya { font-family: "Source Serif 4", Georgia, serif; }
+      .meta, .block-label { font-family: Inter, "IBM Plex Sans", sans-serif;
+          font-size: 8.5pt; letter-spacing: 0.02em; }
+      .meta { margin: 0.2em 0 0.6em 0.3em; color: #6b635b !important; }
+      .block-label { margin: 0.6em 0 0.15em 0.3em; text-transform: uppercase;
+                     font-weight: 600; color: #6b7b8a !important; }
+      .body-text { margin: 0 0 0.4em 0.3em; text-align: left; max-width: 42em;
+                   color: #1c1b19; font-family: "Source Serif 4", Georgia, serif; }
+      .story-text { font-style: italic; color: #4a5568; }
+      ul, li, p { color: #1c1b19; font-family: "Source Serif 4", Georgia, serif; }
+      .intro-block { page-break-after: always; padding: 2.5em 1em 0 1.2em;
+                     background-color: #faf8f5; }
+      .intro-block .otium-brand { font-family: Inter, sans-serif;
+        font-size: 8pt; letter-spacing: 0.2em; color: #6b635b !important;
+        margin-bottom: 0.3em; }
+      .intro-block .otium-title { font-family: Pochaevsk, Georgia, serif;
+        font-size: 20pt; font-weight: 600; text-align: center;
+        margin: 0.2em 0 0.1em; color: #1a1a1a !important; }
+      .intro-block .otium-subtitle { font-family: Pochaevsk, Georgia, serif;
+        font-size: 11pt; text-align: center; color: #6b635b !important;
+        font-style: italic; margin-bottom: 1em; }
+      .intro-block p { margin: 0.4em 0; font-size: 9.5pt; line-height: 1.5;
+        text-align: justify; max-width: 38em; margin-left: auto;
+        margin-right: auto; color: #1c1b19;
+        font-family: "Source Serif 4", Georgia, serif; }
+      .monastery { display: block; page-break-inside: avoid;
+                    break-inside: avoid; padding: 1.5em 0 0; }
+      .monastery:last-of-type { padding-bottom: 0.5em; }
+      .visual-block { margin: 0.8em 0 0; page-break-after: auto; }
+      body > *:last-child { page-break-after: auto !important; }
+      .images-row { display: flex; gap: 10px; margin: 1em; flex-wrap: wrap; }
+      .monastery-img { flex: 1 1 200px; max-width: 100%; height: 150px;
+                        object-fit: cover; }
+      .visual-grid-2x2 { display: grid; grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto; gap: 10px; margin: 1em; }
+      .visual-grid-2x2 .grid-cell,
+      .visual-grid-2x2 .map-cell { min-width: 0; }
+      .visual-grid-2x2 .grid-cell .monastery-img,
+      .visual-grid-2x2 .map-cell .map-img { width: 100%; height: 150px;
+        object-fit: cover; display: block; }
+      .visual-grid-2x2 .map-cell .map-img { max-height: 160px; height: auto; }
+      .visual-grid-2x2 .map-cell { display: flex; flex-direction: column;
+        align-items: center; justify-content: flex-start; }
+      .visual-grid-2x2 .map-caption { font-size: 8pt; color: #6b635b;
+        margin: 0.25em 0 0; font-family: Inter, sans-serif; }
+      .images-caption { font-size: 8pt; color: #6b635b; margin: 0.25em 1em 0;
+        font-family: Inter, sans-serif; }
+      .map-block { margin: 1em; }
+      .map-caption { font-size: 8pt; color: #6b635b; margin: 0.25em 0 0;
+        font-family: Inter, sans-serif; }
+      .map-img { max-width: 100%; height: auto; max-height: 160px; }
+      /* Rotate specific images that were shot vertically */
+      img.monastery-img[src$="herzen_2.jpg"],
+      img.monastery-img[src$="tolstoy_2.jpg"],
+      img.monastery-img[src$="tsiolkovsky_1.jpg"] {
+        transform: rotate(90deg);
+        transform-origin: 50% 50%;
+      }
+      /* Hide third image for Сухаревская площадь */
+      img.monastery-img[src$="sukharevskaya_3.jpg"] { display: none; }
+      .qa-section { margin-top: 2em; page-break-before: always;
+                     break-before: page; padding-top: 1.5em;
+                     page-break-inside: avoid; }
+      .qa-item { margin-bottom: 0.6em; font-size: 9pt; color: #1c1b19; }
+      .question { margin-bottom: 0.1em; color: #1c1b19; }
+      .answer { margin-left: 0.5em; color: #2c2a28;
+        font-family: "Source Serif 4", Georgia, serif; }
+      ul { margin: 0.2em 0 0.4em 0.3em; padding-left: 1.2em; color: #1c1b19; }
+      p { margin: 0.2em 0; color: #1c1b19; }
+      .map-block { background: transparent; }
+      .edit-toolbar { position: fixed; top: 8px; right: 8px; z-index: 9999; }
+      .edit-toolbar button { font-family: Inter, sans-serif; font-size: 11px;
+        padding: 6px 10px; background: #2c2a28; color: #faf8f5; border: none;
+        border-radius: 4px; cursor: pointer; }
+      .edit-toolbar button:hover { background: #4a5568; }
+      .img-wrap { position: relative; display: inline-block; }
+      .img-wrap.img-dragging { opacity: 0.6; }
+      .img-wrap.img-drop-target { outline: 2px dashed #8b7355; outline-offset: 2px; }
+      .img-del { position: absolute; top: 4px; right: 4px; width: 22px; height: 22px;
+        font-size: 16px; line-height: 20px; text-align: center; background: rgba(0,0,0,.6);
+        color: #fff; border: none; border-radius: 3px; cursor: pointer; }
+      .img-del:hover { background: #c53030; }
+      .add-img-btn { font-family: Inter, sans-serif; font-size: 10px;
+        padding: 4px 8px; margin: 4px 0 0 4px; background: #e0ddd8; color: #2c2a28;
+        border: 1px solid #8b7355; border-radius: 3px; cursor: pointer; }
+      .add-img-btn:hover { background: #d0cdc8; }
+      .add-img-btn.hidden { display: none; }
+      .img-count { font-size: 9pt; color: #6b635b; margin-left: 0.25em;
+        font-family: Inter, sans-serif; }
+      @media print {
+        html, body { color: #1c1b19 !important; background: #faf8f5 !important; }
+        .block-label { color: #6b7b8a !important; }
+        .meta { color: #6b635b !important; }
+        .monastery { page-break-inside: avoid; break-inside: avoid; }
+        .edit-toolbar, .img-del, .add-img-btn, .img-count { display: none !important; }
+      }
+    </style>
+</head>
+<body>
+
+    <div class="intro-block">
+    <p class="otium-brand">OTIUM / Sacred</p>
+    <h1 class="otium-title">Iconic landmarks Москвы</h1>
+    <p class="otium-subtitle">10 символов города: Москва-Сити, Лужники, Василий Блаженный</p>
+    <p>OTIUM — это практика осмысленного досуга.
+    В античной традиции otium означало не отдых от труда, а время, в котором
+    человек возвращается к взгляду, памяти и мышлению. Это время без
+    утилитарной цели, без спешки, без требования результата.</p>
+    <p>Мы создаём маршруты не для «посещения», а для пребывания.
+    Не для потребления культуры, а для внимательного присутствия в ней.</p>
+    <p>OTIUM работает с пространствами, где время уплотняется:
+    архитектурой, сакральными местами, кино, памятью, ландшафтом.
+    Мы не стремимся охватить всё и не обещаем «лучшее».
+    Мы отбираем немногое — то, что выдерживает тишину и повторный взгляд.</p>
+    <p>OTIUM — это не гид и не сервис.
+    Это приглашение к прогулке без обязательств.
+    К маршруту, который можно прервать.
+    К месту, где можно задержаться.</p>
+    <p>OTIUM существует для тех, кто хочет смотреть медленно.</p>
+    </div>
+    
+
+<section class="monastery" id="monastery-1" tabindex="-1">
+  <h2 class="monastery-title">1. Москва-Сити</h2>
+  <p class="meta"><strong>Адрес:</strong> Пресненская наб., 8 &nbsp;|&nbsp; <strong>Стиль:</strong> деловой центр, небоскрёбы</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Комплекс небоскрёбов на Пресненской набережной; строительство с 1995 года. Башня «Федерация» — 374 м; «Империя» — 239 м. Символ современной Москвы.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Символ деловой Москвы; панорама с высоты; современная архитектура.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>башня «Федерация»</li><li>башня «Империя»</li><li>панорама</li><li>смотровые</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Башня «Федерация» — одна из высочайших в Европе.</li><li>Смотровая на 89 этаже.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">The Government of Moscow first conceived the project in 1992, as a mixed development of office, residential, retail and entertainment facilities.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_landmarks/moscow_city_2.jpg" alt="Москва-Сити — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_landmarks/moscow_city_3.jpg" alt="Москва-Сити — фото 2" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_landmarks/moscow_city_4.jpg" alt="Москва-Сити — фото 3" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.5370,55.7500&z=16&l=map&size=380,200&pt=37.5370,55.7500,pm2rdm" alt="Карта: Москва-Сити" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Москва-Сити</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-2" tabindex="-1">
+  <h2 class="monastery-title">2. Останкинска<span class="old-russian-ya">я</span> телебашн<span class="old-russian-ya">я</span></h2>
+  <p class="meta"><strong>Адрес:</strong> ул. Академика Королёва, 12 &nbsp;|&nbsp; <strong>Стиль:</strong> телебашня</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Построена в 1960–1967 годах. Высота 540 м — высочайшая в Европе на момент постройки. Смотровая на 337 м; ресторан «Седьмое небо» с вращающимся полом.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Символ советского ТВ; высочайшая смотровая Москвы; панорама 360°.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>высота 540 м</li><li>смотровая 337 м</li><li>ресторан «Седьмое небо»</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Высота 540 м.</li><li>Смотровая открыта после реставрации 2019 года.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">As of 2026, it is the tallest free-standing structure in Europe and 15th tallest in the world.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_landmarks/ostankino_landmark_1.jpg" alt="Останкинская телебашня — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_landmarks/ostankino_landmark_2.jpg" alt="Останкинская телебашня — фото 2" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_landmarks/ostankino_landmark_3.jpg" alt="Останкинская телебашня — фото 3" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6114,55.8219&z=16&l=map&size=380,200&pt=37.6114,55.8219,pm2rdm" alt="Карта: Останкинская телебашня" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Останкинская телебашня</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-3" tabindex="-1">
+  <h2 class="monastery-title">3. Главное здание МГУ</h2>
+  <p class="meta"><strong>Адрес:</strong> Воробьёвы горы, 1 &nbsp;|&nbsp; <strong>Стиль:</strong> сталинская высотка</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Построено в 1949–1953 годах по проекту Л. В. Руднева. Одна из семи сталинских высоток; главный корпус Московского университета. Высота 240 м со шпилем; 36 этажей.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Символ советской науки; сталинская высотка; доминанта Воробьёвых гор.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>высота 240 м</li><li>звезда на шпиле</li><li>панорама Москвы-реки</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Высота 240 м.</li><li>Одна из семи сталинских высоток.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">It was designed by Lev Rudnev as the headquarters of Moscow State University, and is the tallest among the &quot;Seven Sisters&quot; constructed in Moscow between 1947 and 1953 in the Stalinist architectural style.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_landmarks/msu_main_1.jpg" alt="Главное здание МГУ — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_landmarks/msu_main_2.jpg" alt="Главное здание МГУ — фото 2" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_landmarks/msu_main_3.jpg" alt="Главное здание МГУ — фото 3" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.5305,55.7034&z=16&l=map&size=380,200&pt=37.5305,55.7034,pm2rdm" alt="Карта: Главное здание МГУ" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Главное здание МГУ</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-4" tabindex="-1">
+  <h2 class="monastery-title">4. Гостиница «Украина»</h2>
+  <p class="meta"><strong>Адрес:</strong> Кутузовский пр., 2/1 &nbsp;|&nbsp; <strong>Стиль:</strong> сталинская высотка</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Построена в 1953–1957 годах; одна из семи сталинских высоток. Высота 206 м; 34 этажа. Расположена на Кутузовском проспекте у Москвы-реки.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Сталинская высотка; символ послевоенной Москвы; видовая доминанта.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>высота 206 м</li><li>гостиница</li><li>вид на Москву-реку</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Высота 206 м.</li><li>Реконструирована в 2010 году.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Hotel Ukraina (Russian: Гостиница Украина, romanized: Gostinitsa Ukraina), also known as the Radisson Collection Hotel, Moscow (Russian: Рэдиссон Коллекшен Отель, Москва), is a five-star luxury hotel in the city centre of Moscow, situated on a bend of the Moskva River. The hotel is one of the &quot;Seven Sisters&quot;, a group of Stalin-era skyscrapers of Moscow, and stands 206 metres (676 ft) tall.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_landmarks/ukraina_hotel_1.jpg" alt="Гостиница «Украина» — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_landmarks/ukraina_hotel_2.jpg" alt="Гостиница «Украина» — фото 2" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_landmarks/ukraina_hotel_4.jpg" alt="Гостиница «Украина» — фото 3" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.5650,55.7550&z=16&l=map&size=380,200&pt=37.5650,55.7550,pm2rdm" alt="Карта: Гостиница «Украина»" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Гостиница «Украина»</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-5" tabindex="-1">
+  <h2 class="monastery-title">5. Здание МИД</h2>
+  <p class="meta"><strong>Адрес:</strong> Смоленская-Сенная пл., 32/34 &nbsp;|&nbsp; <strong>Стиль:</strong> сталинская высотка</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Построено в 1948–1953 годах для Министерства иностранных дел. Одна из семи сталинских высоток; высота 172 м. Шпиль без звезды (по легенде — не выдержал бы ветров).</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Сталинская высотка; символ дипломатии; доминанта Арбата.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>высота 172 м</li><li>МИД России</li><li>шпиль</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Высота 172 м.</li><li>Единственная высотка без звезды на шпиле.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Tensions between Georgia, Ukraine, the United States and the NATO on one side and Russia, South Ossetia and Abkhazia on the other side remained high in 2008–2009.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_landmarks/mid_building_1.jpg" alt="Здание МИД — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_landmarks/mid_building_2.jpg" alt="Здание МИД — фото 2" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_landmarks/mid_building_4.jpg" alt="Здание МИД — фото 3" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.5842,55.7478&z=16&l=map&size=380,200&pt=37.5842,55.7478,pm2rdm" alt="Карта: Здание МИД" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Здание МИД</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-6" tabindex="-1">
+  <h2 class="monastery-title">6. Храм Христа Спасител<span class="old-russian-ya">я</span></h2>
+  <p class="meta"><strong>Адрес:</strong> ул. Волхонка, 15 &nbsp;|&nbsp; <strong>Стиль:</strong> храм-памятник</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Воссоздан в 1994–2000 годах на месте снесённого в 1931 году. Оригинал построен в 1839–1883 в память о победе 1812 года. Высота 103 м.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Главный храм России; памятник победе 1812 года; видовая точка.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>воссозданный храм</li><li>панорама с колоннады</li><li>музей</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Высота 103 м.</li><li>Воссоздан в 1994–2000.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">It was destroyed in 1931 on the order of the Soviet Politburo.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_landmarks/christ_saviour_1.jpg" alt="Храм Христа Спасителя — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_landmarks/christ_saviour_2.jpg" alt="Храм Христа Спасителя — фото 2" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_landmarks/christ_saviour_3.jpg" alt="Храм Христа Спасителя — фото 3" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6053,55.7444&z=16&l=map&size=380,200&pt=37.6053,55.7444,pm2rdm" alt="Карта: Храм Христа Спасителя" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Храм Христа Спасителя</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-7" tabindex="-1">
+  <h2 class="monastery-title">7. Пам<span class="old-russian-ya">я</span>тник «Рабочий и колхозница»</h2>
+  <p class="meta"><strong>Адрес:</strong> пр. Мира, 123б &nbsp;|&nbsp; <strong>Стиль:</strong> скульптура, ВДНХ</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Создана В. И. Мухиной для павильона СССР на Всемирной выставке в Париже 1937 года. Высота 24,5 м; нержавеющая сталь. С 2009 — на постаменте у северного входа ВДНХ.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Символ советской эпохи; шедевр Веры Мухиной; визитная карточка ВДНХ.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>Вера Мухина</li><li>символ СССР</li><li>24 м высота</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Высота 24,5 м.</li><li>Париж 1937 — золотая медаль выставки.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Монумент предназначался для павильона СССР на международной выставке в Париже в 1937 году, его спроектировали и собрали в Москве, затем разделили на 65 частей и перевезли во Францию, где провели монтаж вторично.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_landmarks/worker_kolkhoz_1.jpg" alt="Памятник «Рабочий и колхозница» — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_landmarks/worker_kolkhoz_3.jpg" alt="Памятник «Рабочий и колхозница» — фото 2" class="monastery-img" /></div>
+    <div class="grid-cell"></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6197,55.8292&z=16&l=map&size=380,200&pt=37.6197,55.8292,pm2rdm" alt="Карта: Памятник «Рабочий и колхозница»" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Памятник «Рабочий и колхозница»</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-8" tabindex="-1">
+  <h2 class="monastery-title">8. «Пар<span class="old-russian-ya">я</span>щий мост» в Зар<span class="old-russian-ya">я</span>дье</h2>
+  <p class="meta"><strong>Адрес:</strong> ул. Варварка, 6 &nbsp;|&nbsp; <strong>Стиль:</strong> современная архитектура</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Открыт в 2017 году в парке «Зарядье». Консольная конструкция без опор над Москвой-рекой; выступает на 70 м. Вид на Кремль, Васильевский спуск.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Символ нового Зарядья; лучший вид на Кремль; бесплатный доступ.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>консольный мост</li><li>вид на Кремль</li><li>70 м над водой</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Выступает на 70 м над набережной.</li><li>Парк открыт в 2017.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Построен в 2014—2017 годы по проекту консорциума во главе с нью-йоркским архитектурным бюро Diller Scofidio + Renfro c ландшафтными архитекторами Hargreaves Associates, также из Нью-Йорка, и московскими урбанистами Citymakers, выигравшими в 2013 году международный конкурс на разработку ландшафтно-архитектурной концепции территории.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_landmarks/zaryadye_bridge_1.jpg" alt="«Парящий мост» в Зарядье — фото 1" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6286,55.7514&z=16&l=map&size=380,200&pt=37.6286,55.7514,pm2rdm" alt="Карта: «Парящий мост» в Зарядье" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+    <div class="grid-cell"></div>
+    <div class="grid-cell"></div>
+  </div>
+  <p class="images-caption">Фото: «Парящий мост» в Зарядье</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-9" tabindex="-1">
+  <h2 class="monastery-title">9. Стадион «Лужники»</h2>
+  <p class="meta"><strong>Адрес:</strong> Лужники, 24 &nbsp;|&nbsp; <strong>Стиль:</strong> спортивный комплекс</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Построен в 1955–1956 годах; главная арена страны. Здесь проходили Олимпиада 1980, Чемпионат мира по футболу 2018, концерты мировых звёзд. Реконструирован в 2010-х; вместимость около 81 тыс. зрителей.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Главный стадион России; символ спортивной Москвы; арена Олимпиады и ЧМ.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>главная арена</li><li>Олимпиада 1980</li><li>ЧМ-2018</li><li>концерты</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Вместимость около 81 тыс.</li><li>Олимпиада 1980, ЧМ-2018.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">The Grand Sports Arena of the Luzhniki Olympic Complex, commonly known as Luzhniki Stadium, is the national stadium of Russia, located in its capital city, Moscow. Its total seating capacity of 81,000 makes it the largest football stadium in Russia and the ninth-largest stadium in Europe.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_landmarks/luzhniki_1.jpg" alt="Стадион «Лужники» — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_landmarks/luzhniki_2.jpg" alt="Стадион «Лужники» — фото 2" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_landmarks/luzhniki_4.jpg" alt="Стадион «Лужники» — фото 3" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.5517,55.7158&z=16&l=map&size=380,200&pt=37.5517,55.7158,pm2rdm" alt="Карта: Стадион «Лужники»" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Стадион «Лужники»</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-10" tabindex="-1">
+  <h2 class="monastery-title">10. Собор Васили<span class="old-russian-ya">я</span> Блаженного</h2>
+  <p class="meta"><strong>Адрес:</strong> Красная пл., 2 &nbsp;|&nbsp; <strong>Стиль:</strong> шатровое зодчество</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Построен в 1555–1561 годах по приказу Ивана Грозного в память взятия Казани. Архитекторы Барма и Постник (по преданию — ослеплены). Девять церквей на одном основании; уникальный памятник шатрового зодчества.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Символ Москвы и России; объект ЮНЕСКО; главный храм Красной площади.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>9 церквей</li><li>покровский собор</li><li>символ Москвы</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Построен в 1555–1561.</li><li>Объект Всемирного наследия ЮНЕСКО.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">The Cathedral of Vasily the Blessed (Russian: Собор Василия Блаженного, romanized: Sobor Vasiliya Blazhennogo), commonly known as Saint Basil's Cathedral, is a Russian Orthodox church in Red Square of Moscow. It is one of the most popular cultural symbols of Russia. The building, now a museum, is officially known as the Cathedral of the Intercession of the Most Holy Theotokos on the Moat, or Pokrovsky Cathedral.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_landmarks/basil_1.jpg" alt="Собор Василия Блаженного — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_landmarks/basil_2.jpg" alt="Собор Василия Блаженного — фото 2" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_landmarks/basil_3.jpg" alt="Собор Василия Блаженного — фото 3" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6231,55.7525&z=16&l=map&size=380,200&pt=37.6231,55.7525,pm2rdm" alt="Карта: Собор Василия Блаженного" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Собор Василия Блаженного</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-11" tabindex="-1">
+  <h2 class="monastery-title">11. Парк «Зар<span class="old-russian-ya">я</span>дье»</h2>
+  <p class="meta"><strong>Адрес:</strong> ул. Варварка, 6 &nbsp;|&nbsp; <strong>Стиль:</strong> ландшафтный парк</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Открыт в 2017 году на месте снесённой гостиницы «Россия». Парк с природными зонами (тундра, степь, лес), подземный музей, «Парящий мост», концертный зал «Зарядье». Вид на Кремль и Красную площадь.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Современный парк у Кремля; «Парящий мост»; символ новой Москвы.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>подземный музей</li><li>«Парящий мост»</li><li>ледяная пещера</li><li>павильоны</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Открыт в 2017 году.</li><li>Площадь около 10 га.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">The park was inaugurated on 9 September 2017 by Russian president Vladimir Putin and Moscow Mayor Sergey Sobyanin.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_landmarks/zaryadye_park_1.jpg" alt="Парк «Зарядье» — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_landmarks/zaryadye_park_2.jpg" alt="Парк «Зарядье» — фото 2" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_landmarks/zaryadye_park_3.jpg" alt="Парк «Зарядье» — фото 3" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6286,55.7514&z=16&l=map&size=380,200&pt=37.6286,55.7514,pm2rdm" alt="Карта: Парк «Зарядье»" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Парк «Зарядье»</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-12" tabindex="-1">
+  <h2 class="monastery-title">12. Большой театр</h2>
+  <p class="meta"><strong>Адрес:</strong> Театральная пл., 1 &nbsp;|&nbsp; <strong>Стиль:</strong> классицизм</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Построен в 1825 году по проекту О. И. Бове; восстанавливался после пожаров. Главный театр страны; опера и балет; символ русской культуры.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Символ русского театра; Театральная площадь; опера и балет.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>историческое здание</li><li>опера и балет</li><li>портик с квадригой</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Открыт в 1825 году.</li><li>Квадрига Аполлона на портике.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">The Bolshoi Theatre (Russian: Большо́й теа́тр, romanized: Bol'shoy teatr, IPA: [bɐlʲˈʂoj tʲɪˈat(ə)r], lit. 'Large Theater') is a historic opera house in Moscow, Russia, originally designed by architect Joseph Bové.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_landmarks/bolshoi_1.jpg" alt="Большой театр — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_landmarks/bolshoi_2.jpg" alt="Большой театр — фото 2" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_landmarks/bolshoi_3.jpg" alt="Большой театр — фото 3" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6186,55.7602&z=16&l=map&size=380,200&pt=37.6186,55.7602,pm2rdm" alt="Карта: Большой театр" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Большой театр</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-13" tabindex="-1">
+  <h2 class="monastery-title">13. Красна<span class="old-russian-ya">я</span> площадь</h2>
+  <p class="meta"><strong>Адрес:</strong> Красная пл. &nbsp;|&nbsp; <strong>Стиль:</strong> исторический ансамбль</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Главная площадь Москвы; формировалась с XV века. Ансамбль: Кремль, Собор Василия Блаженного, ГУМ, Мавзолей, Исторический музей. Объект ЮНЕСКО; место парадов и праздников.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Главная площадь России; объект ЮНЕСКО; символ Москвы.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>Кремль</li><li>ГУМ</li><li>Собор Василия Блаженного</li><li>Мавзолей</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Объект Всемирного наследия ЮНЕСКО.</li><li>Площадь — около 7,5 га.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">It has been a UNESCO World Heritage Site since 1990.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_landmarks/red_square_1.jpg" alt="Красная площадь — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_landmarks/red_square_3.jpg" alt="Красная площадь — фото 2" class="monastery-img" /></div>
+    <div class="grid-cell"></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.6208,55.7539&z=16&l=map&size=380,200&pt=37.6208,55.7539,pm2rdm" alt="Карта: Красная площадь" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Красная площадь</p>
+  </div>
+</section>
+
+
+<section class="monastery" id="monastery-14" tabindex="-1">
+  <h2 class="monastery-title">14. Патриаршие пруды</h2>
+  <p class="meta"><strong>Адрес:</strong> Патриаршие пруды &nbsp;|&nbsp; <strong>Стиль:</strong> сквер и пруды</p>
+  <p class="block-label">История</p>
+  <p class="body-text">Сквер с прудом в Пресненском районе; место действия романа «Мастер и Маргарита» (встреча Берлиоза и Бездомного с Воландом). Памятник М. А. Булгакову; тихий уголок в центре Москвы.</p>
+  <p class="block-label">Значение</p>
+  <p class="body-text">Место из «Мастера и Маргариты»; памятник Булгакову; центр Москвы.</p>
+  <p class="block-label">Объекты</p>
+  <ul><li>место из «Мастера и Маргариты»</li><li>сквер</li><li>памятник Булгакову</li></ul>
+  <p class="block-label">Факты</p>
+  <ul><li>Упоминаются в романе Булгакова.</li><li>Памятник Булгакову — 2007 год.</li></ul>
+  <p class="block-label">Заметка</p>
+  <p class="body-text story-text">Patriarch's Ponds (Russian: Патриаршие пруды, romanized: Patriarshiye prudy) is a park, pond and an affluent residential area in downtown Presnensky District of Moscow, Russia. For the last 200 years, there has been only one pond, although, as the name of Tryokhprudny Pereulok (Трёхпрудный переулок, lit. Three-Pond Lane) suggests, there used to be more.</p>
+
+  <div class="visual-block">
+  <div class="visual-grid-2x2">
+    <div class="grid-cell"><img src="images/moscow_landmarks/patriarch_ponds_1.jpg" alt="Патриаршие пруды — фото 1" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_landmarks/patriarch_ponds_2.jpg" alt="Патриаршие пруды — фото 2" class="monastery-img" /></div>
+    <div class="grid-cell"><img src="images/moscow_landmarks/patriarch_ponds_3.jpg" alt="Патриаршие пруды — фото 3" class="monastery-img" /></div>
+    <div class="map-cell"><img src="https://static-maps.yandex.ru/1.x/?ll=37.5936,55.7653&z=16&l=map&size=380,200&pt=37.5936,55.7653,pm2rdm" alt="Карта: Патриаршие пруды" class="map-img" /><p class="map-caption">Схема · Яндекс.Карты</p></div>
+  </div>
+  <p class="images-caption">Фото: Патриаршие пруды</p>
+  </div>
+</section>
+
+
+<section class="qa-section" id="qa" tabindex="-1">
+  <h2>Вопросы и ответы по фактам</h2>
+  <div class="qa-item"><p class="question"><strong>Вопрос 1. Какая телебашня — самая высокая в Европе?</strong></p><p class="answer">Ответ: Останкинская телебашня (540 м).</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 2. Сколько сталинских высоток в Москве?</strong></p><p class="answer">Ответ: Семь: МГУ, гостиница «Украина», МИД, жилые на Кудринской, Котельнической, Красных Воротах, гостиница «Ленинградская».</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 3. Где находится «Парящий мост»?</strong></p><p class="answer">Ответ: В парке «Зарядье» у стен Кремля.</p></div>
+<div class="qa-item"><p class="question"><strong>Вопрос 4. Кто автор скульптуры «Рабочий и колхозница»?</strong></p><p class="answer">Ответ: Вера Мухина; создана для павильона СССР в Париже 1937 года.</p></div>
+</section>
+
+<script>
+(function(){
+  var MAX_IMAGES_PER_ROW = 4;
+  window._deletedImagePaths = window._deletedImagePaths || [];
+  function recordDeleted(src) {
+    if (typeof src !== 'string') return;
+    var s = src.split('?')[0].replace(/\\/g, '/');
+    var idx = s.indexOf('images/');
+    if (idx === 0) window._deletedImagePaths.push(s);
+    else if (idx > 0) window._deletedImagePaths.push(s.substring(idx));
+  }
+  function initEditable() {
+    var sel = '.intro-block p,.intro-block h1,.monastery .monastery-title,.monastery .meta,' +
+      '.monastery .body-text,.monastery .story-text,.qa-section p,.qa-section h2,' +
+      '.monastery ul li';
+    document.querySelectorAll(sel).forEach(function(el){ el.contentEditable = 'true'; });
+  }
+  function setupImages() {
+    document.querySelectorAll('.images-row').forEach(function(row){
+      var imgs = row.querySelectorAll('.monastery-img');
+      imgs.forEach(function(img){
+        if (img.closest('.img-wrap')) return;
+        var wrap = document.createElement('span');
+        wrap.className = 'img-wrap';
+        wrap.draggable = true;
+        wrap.title = 'Drag to reorder';
+        img.parentNode.insertBefore(wrap, img);
+        wrap.appendChild(img);
+        var delBtn = document.createElement('button');
+        delBtn.className = 'img-del';
+        delBtn.type = 'button';
+        delBtn.textContent = '×';
+        delBtn.title = 'Delete image';
+        delBtn.onclick = function(){ recordDeleted(img.src); wrap.remove(); updateAddBtn(row); };
+        wrap.appendChild(delBtn);
+        wrap.ondragstart = function(e){ e.dataTransfer.setData('text/plain',''); e.dataTransfer.effectAllowed = 'move'; window._dragSrc = wrap; wrap.classList.add('img-dragging'); };
+        wrap.ondragend = function(){ wrap.classList.remove('img-dragging'); };
+        wrap.ondragover = function(e){ e.preventDefault(); e.dataTransfer.dropEffect = 'move'; if (e.currentTarget !== window._dragSrc) e.currentTarget.classList.add('img-drop-target'); };
+        wrap.ondragleave = function(e){ e.currentTarget.classList.remove('img-drop-target'); };
+        wrap.ondrop = function(e){ e.preventDefault(); e.currentTarget.classList.remove('img-drop-target'); var src = window._dragSrc; if (src && src !== e.currentTarget) { row.insertBefore(src, e.currentTarget); updateAddBtn(row); } };
+      });
+      var addBtn = row.querySelector('.add-img-btn');
+      if (!addBtn) {
+        addBtn = document.createElement('button');
+        addBtn.className = 'add-img-btn';
+        addBtn.type = 'button';
+        addBtn.appendChild(document.createTextNode('+ Add image '));
+        var countSpan = document.createElement('span');
+        countSpan.className = 'img-count';
+        addBtn.appendChild(countSpan);
+        addBtn.onclick = function(){ var inp = document.createElement('input'); inp.type = 'file'; inp.accept = 'image/*'; inp.multiple = true; inp.onchange = function(){ [].slice.call(inp.files).forEach(function(file){ if (row.querySelectorAll('.monastery-img').length >= MAX_IMAGES_PER_ROW) return; var r = new FileReader(); r.onload = function(){ var i = document.createElement('img'); i.className = 'monastery-img'; i.src = r.result; i.alt = ''; var w = document.createElement('span'); w.className = 'img-wrap'; w.draggable = true; w.title = 'Drag to reorder'; var dB = document.createElement('button'); dB.className = 'img-del'; dB.type = 'button'; dB.textContent = '×'; dB.onclick = function(){ w.remove(); updateAddBtn(row); }; w.appendChild(i); w.appendChild(dB); w.ondragstart = function(e){ e.dataTransfer.setData('text/plain',''); e.dataTransfer.effectAllowed = 'move'; window._dragSrc = w; w.classList.add('img-dragging'); }; w.ondragend = function(){ w.classList.remove('img-dragging'); }; w.ondragover = function(e){ e.preventDefault(); e.dataTransfer.dropEffect = 'move'; if (e.currentTarget !== window._dragSrc) e.currentTarget.classList.add('img-drop-target'); }; w.ondragleave = function(e){ e.currentTarget.classList.remove('img-drop-target'); }; w.ondrop = function(e){ e.preventDefault(); e.currentTarget.classList.remove('img-drop-target'); var src = window._dragSrc; if (src && src !== e.currentTarget) { row.insertBefore(src, e.currentTarget); updateAddBtn(row); } }; row.insertBefore(w, addBtn); updateAddBtn(row); }; r.readAsDataURL(file); }); }; inp.click(); };
+        row.appendChild(addBtn);
+      }
+      updateAddBtn(row);
+    });
+  }
+  function updateAddBtn(row) {
+    var n = row.querySelectorAll('.monastery-img').length;
+    var addBtn = row.querySelector('.add-img-btn');
+    var countSpan = addBtn ? addBtn.querySelector('.img-count') : null;
+    if (countSpan) { countSpan.textContent = n + ' из 4'; }
+    if (addBtn) { addBtn.classList.toggle('hidden', n >= MAX_IMAGES_PER_ROW); }
+  }
+  function addExportButton() {
+    var bar = document.createElement('div');
+    bar.className = 'edit-toolbar';
+    var btn = document.createElement('button');
+    btn.textContent = 'Export HTML';
+    btn.onclick = function() {
+      var root = document.documentElement.cloneNode(true);
+      root.querySelectorAll('.edit-toolbar').forEach(function(el){ el.remove(); });
+      root.querySelectorAll('.img-del, .add-img-btn').forEach(function(el){ el.remove(); });
+      root.querySelectorAll('.img-wrap').forEach(function(wrap){
+        var img = wrap.querySelector('.monastery-img');
+        if (img) { wrap.parentNode.insertBefore(img, wrap); }
+        wrap.remove();
+      });
+      var deleted = window._deletedImagePaths || [];
+      if (deleted.length) {
+        var script = root.ownerDocument.createElement('script');
+        script.type = 'application/json';
+        script.id = 'otium-deleted-images';
+        script.textContent = JSON.stringify(deleted);
+        root.querySelector('body').appendChild(script);
+      }
+      var html = '<!DOCTYPE html>\n' + root.outerHTML;
+      var blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = document.title.replace(/[^a-z0-9]/gi, '_') + '.html';
+      a.click();
+      URL.revokeObjectURL(a.href);
+    };
+    bar.appendChild(btn);
+    document.body.appendChild(bar);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run);
+  else run();
+  function run() {
+    initEditable();
+    setupImages();
+    addExportButton();
+  }
+})();
+</script>
+</body>
+</html>

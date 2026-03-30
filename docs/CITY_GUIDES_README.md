@@ -79,7 +79,7 @@ Replace the slug in script names and flags:
 
 **Cities in this repo:** `smolensk/`, `spb/` (e.g. `download_spb_images.py`,
 `validate_spb_sources.py`, `build_spb_pdf.py`), `prague/`, `budapest/`, `berlin/`,
-`paris/`, `rome/`, `barcelona/`, `madrid/`.
+`paris/`, `rome/`, `venice/`, `florence/`, `barcelona/`, `madrid/`.
 **Berlin** (same command pattern as Budapest): `download_berlin_images.py`,
 `validate_berlin_sources.py`, `build_berlin_pdf.py` (`--berlin-root`).
 **Paris:** `download_paris_images.py`, `validate_paris_sources.py`,
@@ -91,11 +91,11 @@ Replace the slug in script names and flags:
 **Madrid:** `download_madrid_images.py`, `validate_madrid_sources.py`,
 `build_madrid_pdf.py` (`--madrid-root`).
 
-**Venice** (`venice/`) and **Florence** (`florence/`) are on the same OTIUM
-pattern in `docs/CITY_GUIDES_EXPANSION_PLAN.md` (§§6–7: San Marco / Grand Canal;
-Duomo, Ponte Vecchio, Uffizi façade, etc.). Package trees and
-`download_<city>_images.py` / `validate_<city>_sources.py` /
-`build_<city>_pdf.py` for these slugs are **not** in the repository yet—add them
-when you start those guides.
+**Venice** (`venice/`): `download_venice_images.py`, `validate_venice_sources.py`,
+`build_venice_pdf.py` (`--venice-root`). See `venice/README.md`.
 
-Expansion plan: `docs/CITY_GUIDES_EXPANSION_PLAN.md`.
+**Florence** (`florence/`): `download_florence_images.py`,
+`validate_florence_sources.py`, `build_florence_pdf.py` (`--florence-root`).
+See `florence/README.md`.
+
+Expansion plan (more place ideas): `docs/CITY_GUIDES_EXPANSION_PLAN.md`.
