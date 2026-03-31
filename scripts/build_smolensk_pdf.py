@@ -66,6 +66,18 @@ _TITLE_HISTORY_COATS: tuple[tuple[str, str], ...] = (
         "images/title_coat_soviet.png",
         "Герб Смоленска (советский вариант), Commons",
     ),
+    (
+        "images/18415.jpg",
+        "Справочный герб (локальный файл 18415.jpg)",
+    ),
+    (
+        "images/90be6efda8f849dcdc4a47588_1639732371.png",
+        "Справочный герб (локальное изображение)",
+    ),
+    (
+        "images/img1669454700.jpg",
+        "Справочный герб (локальный файл img1669454700.jpg)",
+    ),
 )
 _TITLE_UNIVERSITIES: tuple[tuple[str, str], ...] = (
     (
@@ -477,13 +489,13 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
 .heraldry-fig { margin: 0; }
 .heraldry-fig img { width: auto; display: block; margin: 0 auto;
   border-radius: 2px; }
-.heraldry-coat-hist img { max-height: 3.2rem; max-width: 3.5rem;
+.heraldry-coat-hist img { max-height: 6.4rem; max-width: 7rem;
   object-fit: contain; }
 .heraldry-coat-book img, .heraldry-flag-book img { max-height: 4.75rem;
   object-fit: contain; }
 .heraldry-flag-book img { max-height: 3.35rem; }
 .heraldry-fig.heraldry-univ img {
-  max-height: 6.75rem; max-width: 100%; width: auto; object-fit: contain; }
+  max-height: 8.1rem; max-width: 100%; width: auto; object-fit: contain; }
 figure.heraldry-fig.heraldry-univ.heraldry-univ-captioned {
   display: flex; flex-direction: column; align-items: center;
   width: 100%; max-width: 100%; margin: 0; page-break-inside: avoid;
