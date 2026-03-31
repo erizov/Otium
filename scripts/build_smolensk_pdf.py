@@ -460,7 +460,9 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
 .guide-title { page-break-after: auto; margin-bottom: 0.55rem;
   page-break-inside: avoid; }
 .smolensk-title-symbols { margin-bottom: 0.28rem; }
-.guide-universities { margin-top: 2rem; page-break-inside: avoid; }
+.guide-universities {
+  margin-top: 1.35rem; padding-bottom: 0.25rem; page-break-inside: avoid;
+  break-inside: avoid; }
 .title-strip-label { font-size: 0.72rem; text-transform: uppercase;
   letter-spacing: 0.08em; color: #555; margin: 0.5rem 0 0.25rem;
   text-align: center; width: 100%; }
@@ -468,8 +470,10 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
   font-size: 0.58rem; }
 .heraldry-strip { display: flex; flex-wrap: wrap; align-items: center;
   justify-content: center; gap: 0.45rem 0.65rem; margin: 0.2rem 0 0.45rem; }
-.heraldry-strip.heraldry-universities { gap: 0.35rem 0.55rem;
-  margin: 0.2rem 0 0.45rem; }
+.heraldry-strip.heraldry-universities {
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-auto-rows: auto; gap: 0.34rem 0.45rem; margin: 0.15rem 0 0.35rem;
+  align-items: start; justify-items: center; }
 .heraldry-fig { margin: 0; }
 .heraldry-fig img { width: auto; display: block; margin: 0 auto;
   border-radius: 2px; }
@@ -478,15 +482,17 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
 .heraldry-coat-book img, .heraldry-flag-book img { max-height: 4.75rem;
   object-fit: contain; }
 .heraldry-flag-book img { max-height: 3.35rem; }
-.heraldry-fig.heraldry-univ img { max-height: 2.45rem; max-width: 6.25rem;
-  object-fit: contain; }
+.heraldry-fig.heraldry-univ img {
+  max-height: 6.9rem; max-width: 100%; width: auto; object-fit: contain; }
 figure.heraldry-fig.heraldry-univ.heraldry-univ-captioned {
   display: flex; flex-direction: column; align-items: center;
-  max-width: 10.5rem; margin: 0.05rem 0.12rem; }
+  width: 100%; max-width: 100%; margin: 0; page-break-inside: avoid;
+  break-inside: avoid; }
 figure.heraldry-fig.heraldry-univ .univ-name-caption {
-  font-family: 'Source Sans 3', sans-serif; font-size: 0.58rem;
-  line-height: 1.18; text-align: center; margin: 0.12rem 0 0;
-  padding: 0 0.08rem; max-width: 10.25rem; color: #2a2a2a; }
+  font-family: 'Source Sans 3', sans-serif; font-size: 0.54rem;
+  line-height: 1.14; text-align: center; margin: 0.1rem 0 0;
+  padding: 0 0.06rem; width: 100%; max-width: 100%; color: #2a2a2a;
+  hyphens: auto; overflow-wrap: anywhere; }
 .heraldry-motto { text-align: center; max-width: 16rem; margin: 0.12rem auto;
   width: 100%; }
 .motto-oldslav { font-family: 'Ponomar', 'Cormorant Garamond', serif;
