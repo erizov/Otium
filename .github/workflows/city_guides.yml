@@ -126,6 +126,18 @@ jobs:
       - name: Build Montreal HTML (images in repo)
         run: python scripts/build_montreal_pdf.py --html-only
 
+  jerusalem:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Validate Jerusalem image sources
+        run: python scripts/validate_jerusalem_sources.py
+      - name: Build Jerusalem HTML (images in repo)
+        run: python scripts/build_jerusalem_pdf.py --html-only
+
   smolensk-validate:
     runs-on: ubuntu-latest
     steps:

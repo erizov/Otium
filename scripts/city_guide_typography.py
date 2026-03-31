@@ -104,6 +104,13 @@ _TYPO: dict[str, tuple[str, str, str]] = {
         "'Cormorant', serif",
         "'Source Sans 3', sans-serif",
     ),
+    "jerusalem": (
+        "https://fonts.googleapis.com/css2?"
+        "family=David+Libre:wght@400;500&"
+        "family=Rubik:ital,wght@0,400;0,500;0,600&display=swap",
+        "'David Libre', serif",
+        "'Rubik', sans-serif",
+    ),
 }
 
 _DEFAULT = (
@@ -123,6 +130,12 @@ def typography_triple(city_slug: str) -> tuple[str, str, str]:
 def guide_inline_css(title_symbols_class: str, city_slug: str) -> str:
     """Inline CSS for Latin-script city guides (not Smolensk/SPB)."""
     _, title, body = typography_triple(city_slug)
+    hebrew_sub = ""
+    if city_slug == "jerusalem":
+        hebrew_sub = (
+            ".sub-he {{ font-family: {body}, {title}, sans-serif; "
+            "font-style: normal; font-size: 1.02rem; }}\n"
+        ).format(body=body, title=title)
     return """
 body {{ font-family: {body}; margin: 2rem;
   color: #1a1a1a; font-size: 11pt; }}
@@ -153,7 +166,7 @@ h3 {{ font-family: {title}; font-size: 1.22rem; margin: 1.2rem 0 0.35rem;
 h4 {{ font-family: {title}; font-size: 0.95rem; text-transform: uppercase;
   letter-spacing: 0.06em; margin: 1rem 0 0.4rem; color: #333;
   font-weight: 600; }}
-.sub-de, .sub-en, .sub-es, .sub-fr, .sub-ca, .sub-it, .sub-hu, .sub-cs {{
+.sub-de, .sub-en, .sub-es, .sub-fr, .sub-ca, .sub-it, .sub-hu, .sub-cs, .sub-he {{
   color: #555; font-size: 0.95rem; margin: 0 0 0.5rem; font-style: italic; }}
 .place-meta {{ font-size: 0.92rem; color: #353535; margin: 0 0 0.75rem;
   line-height: 1.4; }}
@@ -163,8 +176,9 @@ img {{ max-width: 100%; height: auto; display: block; border-radius: 4px; }}
   text-align: justify; }}
 ul.facts, ul.stories {{ margin: 0.3rem 0 0.6rem 1.2rem; padding: 0; }}
 ul.facts li, ul.stories li {{ margin: 0.25rem 0; line-height: 1.45; }}
-""".format(
+{hebrew_sub}""".format(
         body=body,
         title=title,
         tclass=title_symbols_class,
+        hebrew_sub=hebrew_sub,
     )

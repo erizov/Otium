@@ -8,6 +8,39 @@ from pathlib import Path
 MIN_IMAGE_BYTES = 500
 _MIN_VECTOR_BYTES = 32
 
+# Lone filler tokens in JSON/detail merges — omit section if only this.
+_PLACEHOLDER_TOKENS: frozenset[str] = frozenset({
+    "—",
+    "–",
+    "-",
+    "…",
+    "...",
+    "n/a",
+    "na",
+    "n.a.",
+    "tbd",
+    "tbc",
+})
+
+
+def is_substantive_text(value: str | None) -> bool:
+    """
+    True when value is non-empty and not a single placeholder token.
+
+    Used so Facts / History / Significance (and meta lines) stay hidden
+    when source data only contains an em dash or similar stub.
+    """
+    if value is None:
+        return False
+    s = str(value).strip()
+    if not s:
+        return False
+    if s in _PLACEHOLDER_TOKENS:
+        return False
+    if s.lower() in _PLACEHOLDER_TOKENS:
+        return False
+    return True
+
 
 def min_bytes_for_filename(filename: str) -> int:
     """Raster images need a size floor; tiny SVG/GIF are still valid."""

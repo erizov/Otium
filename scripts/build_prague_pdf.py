@@ -19,7 +19,7 @@ from scripts.build_pdf import (
     _strip_empty_pdf_pages,
     _strip_pdf_metadata,
 )
-from scripts.city_guide_core import MIN_IMAGE_BYTES, smallest_same_stem_image_rel
+from scripts.city_guide_core import MIN_IMAGE_BYTES, is_substantive_text, smallest_same_stem_image_rel
 from scripts.city_guide_typography import guide_inline_css, typography_triple
 
 PRAGUE_HTML_NAME = "prague_guide.html"
@@ -49,17 +49,17 @@ _OTIUM_PARAS_EN: tuple[str, ...] = (
 
 
 def _place_has_displayable_body(p: PraguePlace) -> bool:
-    if _nonempty(p.get("description")):
+    if is_substantive_text(p.get("description")):
         return True
-    if _nonempty(p.get("history")):
+    if is_substantive_text(p.get("history")):
         return True
-    if _nonempty(p.get("significance")):
+    if is_substantive_text(p.get("significance")):
         return True
     facts = p.get("facts") or []
-    if any(str(x).strip() for x in facts):
+    if any(is_substantive_text(str(x)) for x in facts):
         return True
     stories = p.get("stories") or []
-    return any(str(x).strip() for x in stories)
+    return any(is_substantive_text(str(x)) for x in stories)
 
 
 def _places_with_local_images(root: Path) -> list[PraguePlace]:
@@ -84,11 +84,11 @@ def _nonempty(s: str | None) -> bool:
 
 def _place_meta_line(p: PraguePlace) -> str | None:
     parts: list[str] = []
-    if _nonempty(p.get("address")):
+    if is_substantive_text(p.get("address")):
         parts.append("Address: {}".format(p["address"].strip()))
-    if _nonempty(p.get("architecture_style")):
+    if is_substantive_text(p.get("architecture_style")):
         parts.append("Style: {}".format(p["architecture_style"].strip()))
-    if _nonempty(p.get("year_built")):
+    if is_substantive_text(p.get("year_built")):
         parts.append("Period: {}".format(str(p["year_built"]).strip()))
     if not parts:
         return None
@@ -96,7 +96,10 @@ def _place_meta_line(p: PraguePlace) -> str | None:
 
 
 def _html_paragraphs(text: str) -> str:
-    chunks = [t.strip() for t in text.split("\n\n") if t.strip()]
+    chunks = [
+        t.strip() for t in text.split("\n\n")
+        if is_substantive_text(t.strip())
+    ]
     return "\n".join(
         "<p class=\"prose\">{}</p>".format(escape(c)) for c in chunks
     )
@@ -131,7 +134,7 @@ def _place_block(p: PraguePlace, img_srcs: list[str]) -> str:
     sub_cs = p.get("subtitle_cs", "")
     sub_html = (
         '<p class="sub-cs">{}</p>'.format(escape(sub_cs))
-        if _nonempty(sub_cs)
+        if is_substantive_text(sub_cs)
         else ""
     )
     meta = _place_meta_line(p)
@@ -157,7 +160,7 @@ def _place_block(p: PraguePlace, img_srcs: list[str]) -> str:
                 escape(alt),
             )
         )
-    if _nonempty(p.get("description")):
+    if is_substantive_text(p.get("description")):
         chunks.append(
             '<div class="place-desc">{}</div>'.format(
                 _html_paragraphs(p["description"]),
@@ -168,7 +171,7 @@ def _place_block(p: PraguePlace, img_srcs: list[str]) -> str:
         lis = "\n".join(
             "<li>{}</li>".format(escape(str(f).strip()))
             for f in facts
-            if str(f).strip()
+            if is_substantive_text(str(f).strip())
         )
         if lis:
             chunks.append(
@@ -180,17 +183,17 @@ def _place_block(p: PraguePlace, img_srcs: list[str]) -> str:
         st_li = "\n".join(
             "<li>{}</li>".format(escape(str(s).strip()))
             for s in stories
-            if str(s).strip()
+            if is_substantive_text(str(s).strip())
         )
         if st_li:
             chunks.append(
                 "<h4>Stories and legends</h4>\n"
                 "<ul class=\"stories\">{}</ul>".format(st_li),
             )
-    if _nonempty(p.get("history")):
+    if is_substantive_text(p.get("history")):
         chunks.append("<h4>History</h4>")
         chunks.append(_html_paragraphs(p["history"]))
-    if _nonempty(p.get("significance")):
+    if is_substantive_text(p.get("significance")):
         chunks.append("<h4>Significance</h4>")
         chunks.append(_html_paragraphs(p["significance"]))
     chunks.append("</section>")

@@ -468,8 +468,8 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
   font-size: 0.58rem; }
 .heraldry-strip { display: flex; flex-wrap: wrap; align-items: center;
   justify-content: center; gap: 0.45rem 0.65rem; margin: 0.2rem 0 0.45rem; }
-.heraldry-strip.heraldry-universities { gap: 0.04rem 0.1rem;
-  margin: 0.02rem 0 0.08rem; }
+.heraldry-strip.heraldry-universities { gap: 0.35rem 0.55rem;
+  margin: 0.2rem 0 0.45rem; }
 .heraldry-fig { margin: 0; }
 .heraldry-fig img { width: auto; display: block; margin: 0 auto;
   border-radius: 2px; }
@@ -478,15 +478,15 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
 .heraldry-coat-book img, .heraldry-flag-book img { max-height: 4.75rem;
   object-fit: contain; }
 .heraldry-flag-book img { max-height: 3.35rem; }
-.heraldry-fig.heraldry-univ img { max-height: 0.62rem; max-width: 1.85rem;
+.heraldry-fig.heraldry-univ img { max-height: 2.45rem; max-width: 6.25rem;
   object-fit: contain; }
 figure.heraldry-fig.heraldry-univ.heraldry-univ-captioned {
   display: flex; flex-direction: column; align-items: center;
-  max-width: 5.85rem; margin: 0.02rem 0.05rem; }
+  max-width: 10.5rem; margin: 0.05rem 0.12rem; }
 figure.heraldry-fig.heraldry-univ .univ-name-caption {
-  font-family: 'Source Sans 3', sans-serif; font-size: 0.4rem;
-  line-height: 1.14; text-align: center; margin: 0.06rem 0 0;
-  padding: 0 0.05rem; max-width: 5.65rem; color: #2a2a2a; }
+  font-family: 'Source Sans 3', sans-serif; font-size: 0.58rem;
+  line-height: 1.18; text-align: center; margin: 0.12rem 0 0;
+  padding: 0 0.08rem; max-width: 10.25rem; color: #2a2a2a; }
 .heraldry-motto { text-align: center; max-width: 16rem; margin: 0.12rem auto;
   width: 100%; }
 .motto-oldslav { font-family: 'Ponomar', 'Cormorant Garamond', serif;

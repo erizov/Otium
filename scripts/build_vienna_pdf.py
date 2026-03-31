@@ -19,7 +19,7 @@ from scripts.build_pdf import (
     _strip_empty_pdf_pages,
     _strip_pdf_metadata,
 )
-from scripts.city_guide_core import MIN_IMAGE_BYTES, smallest_same_stem_image_rel
+from scripts.city_guide_core import MIN_IMAGE_BYTES, is_substantive_text, smallest_same_stem_image_rel
 from scripts.city_guide_typography import guide_inline_css, typography_triple
 
 VIENNA_HTML_NAME = "vienna_guide.html"
@@ -49,17 +49,17 @@ _OTIUM_PARAS_EN: tuple[str, ...] = (
 
 
 def _place_has_displayable_body(p: ViennaPlace) -> bool:
-    if _nonempty(p.get("description")):
+    if is_substantive_text(p.get("description")):
         return True
-    if _nonempty(p.get("history")):
+    if is_substantive_text(p.get("history")):
         return True
-    if _nonempty(p.get("significance")):
+    if is_substantive_text(p.get("significance")):
         return True
     facts = p.get("facts") or []
-    if any(str(x).strip() for x in facts):
+    if any(is_substantive_text(str(x)) for x in facts):
         return True
     stories = p.get("stories") or []
-    return any(str(x).strip() for x in stories)
+    return any(is_substantive_text(str(x)) for x in stories)
 
 
 def _places_with_local_images(root: Path) -> list[ViennaPlace]:
@@ -83,18 +83,23 @@ def _nonempty(s: str | None) -> bool:
 
 
 def _place_meta_line(p: ViennaPlace) -> str | None:
-    address = p.get("address", "")
-    style = p.get("architecture_style", "")
-    period = p.get("year_built", "")
-    return "Address: {} | Style: {} | Period: {}".format(
-        address.strip() if _nonempty(address) else "—",
-        style.strip() if _nonempty(style) else "—",
-        str(period).strip() if _nonempty(period) else "—",
-    )
+    parts: list[str] = []
+    if is_substantive_text(p.get("address")):
+        parts.append("Address: {}".format(p["address"].strip()))
+    if is_substantive_text(p.get("architecture_style")):
+        parts.append("Style: {}".format(p["architecture_style"].strip()))
+    if is_substantive_text(p.get("year_built")):
+        parts.append("Period: {}".format(str(p["year_built"]).strip()))
+    if not parts:
+        return None
+    return " | ".join(parts)
 
 
 def _html_paragraphs(text: str) -> str:
-    chunks = [t.strip() for t in text.split("\n\n") if t.strip()]
+    chunks = [
+        t.strip() for t in text.split("\n\n")
+        if is_substantive_text(t.strip())
+    ]
     return "\n".join(
         "<p class=\"prose\">{}</p>".format(escape(c)) for c in chunks
     )
@@ -129,7 +134,7 @@ def _place_block(p: ViennaPlace, img_srcs: list[str]) -> str:
     sub_de = p.get("subtitle_de", "")
     sub_html = (
         '<p class="sub-de">{}</p>'.format(escape(sub_de))
-        if _nonempty(sub_de)
+        if is_substantive_text(sub_de)
         else ""
     )
     meta = _place_meta_line(p)
@@ -155,46 +160,42 @@ def _place_block(p: ViennaPlace, img_srcs: list[str]) -> str:
                 escape(alt),
             )
         )
-    if _nonempty(p.get("description")):
+    if is_substantive_text(p.get("description")):
         chunks.append(
             '<div class="place-desc">{}</div>'.format(
                 _html_paragraphs(p["description"]),
             )
         )
     facts = p.get("facts") or []
-    lis = "\n".join(
-        "<li>{}</li>".format(escape(str(f).strip()))
-        for f in facts
-        if str(f).strip()
-    )
-    if not lis:
-        lis = "<li>—</li>"
-    chunks.append(
-        "<h4>Facts and details</h4>\n"
-        "<ul class=\"facts\">{}</ul>".format(lis)
-    )
+    if facts:
+        lis = "\n".join(
+            "<li>{}</li>".format(escape(str(f).strip()))
+            for f in facts
+            if is_substantive_text(str(f).strip())
+        )
+        if lis:
+            chunks.append(
+                "<h4>Facts and details</h4>\n"
+                "<ul class=\"facts\">{}</ul>".format(lis)
+            )
     stories = p.get("stories") or []
     if stories:
         st_li = "\n".join(
             "<li>{}</li>".format(escape(str(s).strip()))
             for s in stories
-            if str(s).strip()
+            if is_substantive_text(str(s).strip())
         )
         if st_li:
             chunks.append(
                 "<h4>Stories and legends</h4>\n"
                 "<ul class=\"stories\">{}</ul>".format(st_li),
             )
-    chunks.append("<h4>History</h4>")
-    if _nonempty(p.get("history")):
+    if is_substantive_text(p.get("history")):
+        chunks.append("<h4>History</h4>")
         chunks.append(_html_paragraphs(p["history"]))
-    else:
-        chunks.append("<p class=\"prose\">—</p>")
-    chunks.append("<h4>Significance</h4>")
-    if _nonempty(p.get("significance")):
+    if is_substantive_text(p.get("significance")):
+        chunks.append("<h4>Significance</h4>")
         chunks.append(_html_paragraphs(p["significance"]))
-    else:
-        chunks.append("<p class=\"prose\">—</p>")
     chunks.append("</section>")
     return "\n".join(chunks)
 

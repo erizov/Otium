@@ -58,6 +58,35 @@ Cormorant for Cyrillic).
 | `vienna` | Vollkorn |
 | `boston`, `philadelphia`, `new_york` | Libre Baskerville |
 | `montreal` | Cormorant |
+| `jerusalem` | David Libre (titles) · Rubik (body, Hebrew subtitles) |
+
+<!-- city-guide-stats -->
+## Registry statistics
+
+Merged registries (`*places.json` + detail JSON where applicable). **Images** = raster/SVG files under `<city>/images/` (recursive). Columns **no year** through **no sig.** count places where that field is missing or placeholder-only (`—`, `-`, `n/a`, …), using `is_substantive_text()` in `scripts/city_guide_core.py`. **no facts** means no substantive `facts` list item.
+
+Refresh: `python scripts/report_city_guide_stats.py --write`
+
+| City | Places | Images | no year | no style | no addr | no desc | no facts | no history | no sig. |
+|------|-------:|-------:|--------:|---------:|--------:|---------:|----------:|-----------:|---------:|
+| `barcelona` | 32 | 34 | 32 | 12 | 12 | 12 | 12 | 12 | 12 |
+| `berlin` | 35 | 37 | 35 | 15 | 15 | 15 | 15 | 15 | 15 |
+| `boston` | 29 | 31 | 29 | 29 | 29 | 29 | 29 | 29 | 29 |
+| `budapest` | 30 | 32 | 30 | 10 | 10 | 10 | 10 | 10 | 10 |
+| `florence` | 33 | 35 | 33 | 33 | 33 | 33 | 33 | 33 | 33 |
+| `jerusalem` | 22 | 24 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| `madrid` | 32 | 34 | 32 | 12 | 12 | 12 | 12 | 12 | 12 |
+| `montreal` | 37 | 39 | 37 | 37 | 37 | 37 | 37 | 37 | 37 |
+| `new_york` | 36 | 38 | 36 | 36 | 36 | 36 | 36 | 36 | 36 |
+| `paris` | 34 | 36 | 34 | 13 | 13 | 13 | 13 | 13 | 13 |
+| `philadelphia` | 29 | 31 | 29 | 0 | 0 | 29 | 0 | 0 | 0 |
+| `prague` | 33 | 35 | 33 | 13 | 13 | 13 | 13 | 13 | 13 |
+| `rome` | 35 | 37 | 35 | 15 | 15 | 15 | 15 | 15 | 15 |
+| `smolensk` | 50 | 116 | 19 | 3 | 0 | 0 | 0 | 0 | 0 |
+| `spb` | 313 | 354 | 249 | 249 | 249 | 249 | 249 | 249 | 249 |
+| `venice` | 34 | 36 | 34 | 34 | 34 | 34 | 34 | 34 | 34 |
+| `vienna` | 32 | 34 | 32 | 0 | 0 | 32 | 0 | 0 | 0 |
+<!-- /city-guide-stats -->
 
 ---
 
@@ -79,7 +108,7 @@ Replace the slug in script names and flags:
 
 **Cities in this repo:** `smolensk/`, `spb/` (e.g. `download_spb_images.py`,
 `validate_spb_sources.py`, `build_spb_pdf.py`), `prague/`, `budapest/`, `berlin/`,
-`paris/`, `rome/`, `venice/`, `florence/`, `barcelona/`, `madrid/`.
+`paris/`, `rome/`, `venice/`, `florence/`, `jerusalem/`, `barcelona/`, `madrid/`.
 **Berlin** (same command pattern as Budapest): `download_berlin_images.py`,
 `validate_berlin_sources.py`, `build_berlin_pdf.py` (`--berlin-root`).
 **Paris:** `download_paris_images.py`, `validate_paris_sources.py`,
@@ -100,5 +129,9 @@ See `florence/README.md`.
 
 **Montreal** (`montreal/`): `download_montreal_images.py`,
 `validate_montreal_sources.py`, `build_montreal_pdf.py` (`--montreal-root`).
+
+**Jerusalem** (`jerusalem/`): `download_jerusalem_images.py`,
+`validate_jerusalem_sources.py`, `build_jerusalem_pdf.py` (`--jerusalem-root`).
+See `jerusalem/README.md`.
 
 Expansion plan (more place ideas): `docs/CITY_GUIDES_EXPANSION_PLAN.md`.
