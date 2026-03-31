@@ -444,10 +444,10 @@ def _build_html(root: Path, places: list[SmolenskPlace]) -> str:
     blocks: list[str] = [_cover_otium_html()]
     blocks.append(
         '<header class="guide-title">'
-        "{}"
         "<h1 class=\"guide-title-main\">Смоленск</h1>"
         "<p class=\"lead\">Путеводитель. Объектов в этом выпуске: {}.</p>"
-        "</header>".format(_heraldry_html(root), len(places)),
+        "{}"
+        "</header>".format(len(places), _heraldry_html(root)),
     )
     for p in places:
         srcs = _image_srcs_for_place(root, p)
@@ -471,6 +471,7 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
   max-width: 38rem; font-size: 0.95rem; }
 .guide-title { page-break-after: auto; margin-bottom: 0.55rem;
   page-break-inside: avoid; }
+.guide-title > .guide-title-main { margin-top: 0; }
 .smolensk-title-symbols { margin-bottom: 0.28rem; }
 .guide-universities {
   margin-top: 1.35rem; padding-bottom: 0.25rem; page-break-inside: avoid;
@@ -483,8 +484,8 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
 .heraldry-strip { display: flex; flex-wrap: wrap; align-items: center;
   justify-content: center; gap: 0.45rem 0.65rem; margin: 0.2rem 0 0.45rem; }
 .heraldry-strip.heraldry-universities {
-  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
-  grid-auto-rows: auto; gap: 0.34rem 0.45rem; margin: 0.15rem 0 0.35rem;
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-auto-rows: auto; gap: 0.38rem 0.5rem; margin: 0.15rem 0 0.35rem;
   align-items: start; justify-items: center; }
 .heraldry-fig { margin: 0; }
 .heraldry-fig img { width: auto; display: block; margin: 0 auto;
@@ -495,7 +496,7 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
   object-fit: contain; }
 .heraldry-flag-book img { max-height: 3.35rem; }
 .heraldry-fig.heraldry-univ img {
-  max-height: 8.1rem; max-width: 100%; width: auto; object-fit: contain; }
+  max-height: 12.15rem; max-width: 100%; width: auto; object-fit: contain; }
 figure.heraldry-fig.heraldry-univ.heraldry-univ-captioned {
   display: flex; flex-direction: column; align-items: center;
   width: 100%; max-width: 100%; margin: 0; page-break-inside: avoid;
