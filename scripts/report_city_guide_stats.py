@@ -59,6 +59,24 @@ def _no_substantive_facts(place: dict) -> bool:
     return not any(is_substantive_text(str(f)) for f in facts)
 
 
+def _substantive_list_count(place: dict, key: str) -> int:
+    items = place.get(key) or []
+    if not isinstance(items, list):
+        return 0
+    return sum(1 for x in items if is_substantive_text(str(x)))
+
+
+def _list_len(place: dict, key: str) -> int:
+    items = place.get(key) or []
+    return len(items) if isinstance(items, list) else 0
+
+
+def _fmt_avg(numer: int, denom: int) -> str:
+    if denom <= 0:
+        return "0.0"
+    return "{:.1f}".format(numer / denom)
+
+
 def _missing_count(places: list[dict], key: str) -> int:
     return sum(
         1 for p in places if not is_substantive_text(p.get(key))
@@ -73,12 +91,12 @@ def _load_places(module_name: str, attr: str) -> list[dict]:
 
 def _markdown_table(rows: list[tuple[str, ...]]) -> str:
     header = (
-        "| City | Places | Images | "
+        "| City | Places | Images | obj/place | "
         "no year | no style | no addr | no desc | "
         "no facts | no history | no sig. |\n"
     )
     sep = (
-        "|------|-------:|-------:|"
+        "|------|-------:|-------:|----------:|"
         "--------:|---------:|--------:|---------:|"
         "----------:|-----------:|---------:|\n"
     )
@@ -95,11 +113,16 @@ def build_chart_section() -> str:
         places = _load_places(mod, attr)
         n_pl = len(places)
         n_im = _count_images(city_root)
+        n_facts = sum(_substantive_list_count(p, "facts") for p in places)
+        n_stories = sum(_substantive_list_count(p, "stories") for p in places)
+        n_extra = sum(_list_len(p, "additional_images") for p in places)
+        n_objects = n_facts + n_stories + n_extra
         out_rows.append(
             (
                 "`{}`".format(slug),
                 str(n_pl),
                 str(n_im),
+                _fmt_avg(n_objects, n_pl),
                 str(_missing_count(places, "year_built")),
                 str(_missing_count(places, "architecture_style")),
                 str(_missing_count(places, "address")),
@@ -114,6 +137,8 @@ def build_chart_section() -> str:
         "## Registry statistics\n\n"
         "Merged registries (`*places.json` + detail JSON where applicable). "
         "**Images** = raster/SVG files under `<city>/images/` (recursive). "
+        "**obj/place** = average count of substantive list items per place "
+        "(facts + stories + additional_images). "
         "Columns **no year** through **no sig.** count places where that "
         "field is missing or placeholder-only (`—`, `-`, `n/a`, …), using "
         "`is_substantive_text()` in `scripts/city_guide_core.py`. "

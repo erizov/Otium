@@ -63,29 +63,29 @@ Cormorant for Cyrillic).
 <!-- city-guide-stats -->
 ## Registry statistics
 
-Merged registries (`*places.json` + detail JSON where applicable). **Images** = raster/SVG files under `<city>/images/` (recursive). Columns **no year** through **no sig.** count places where that field is missing or placeholder-only (`—`, `-`, `n/a`, …), using `is_substantive_text()` in `scripts/city_guide_core.py`. **no facts** means no substantive `facts` list item.
+Merged registries (`*places.json` + detail JSON where applicable). **Images** = raster/SVG files under `<city>/images/` (recursive). **obj/place** = average count of substantive list items per place (facts + stories + additional_images). Columns **no year** through **no sig.** count places where that field is missing or placeholder-only (`—`, `-`, `n/a`, …), using `is_substantive_text()` in `scripts/city_guide_core.py`. **no facts** means no substantive `facts` list item.
 
 Refresh: `python scripts/report_city_guide_stats.py --write`
 
-| City | Places | Images | no year | no style | no addr | no desc | no facts | no history | no sig. |
-|------|-------:|-------:|--------:|---------:|--------:|---------:|----------:|-----------:|---------:|
-| `barcelona` | 32 | 34 | 32 | 12 | 12 | 12 | 12 | 12 | 12 |
-| `berlin` | 35 | 37 | 35 | 15 | 15 | 15 | 15 | 15 | 15 |
-| `boston` | 29 | 31 | 29 | 29 | 29 | 29 | 29 | 29 | 29 |
-| `budapest` | 30 | 32 | 30 | 10 | 10 | 10 | 10 | 10 | 10 |
-| `florence` | 33 | 35 | 33 | 33 | 33 | 33 | 33 | 33 | 33 |
-| `jerusalem` | 22 | 24 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
-| `madrid` | 32 | 34 | 32 | 12 | 12 | 12 | 12 | 12 | 12 |
-| `montreal` | 37 | 39 | 37 | 37 | 37 | 37 | 37 | 37 | 37 |
-| `new_york` | 36 | 38 | 36 | 36 | 36 | 36 | 36 | 36 | 36 |
-| `paris` | 34 | 36 | 34 | 13 | 13 | 13 | 13 | 13 | 13 |
-| `philadelphia` | 29 | 31 | 29 | 0 | 0 | 29 | 0 | 0 | 0 |
-| `prague` | 33 | 35 | 33 | 13 | 13 | 13 | 13 | 13 | 13 |
-| `rome` | 35 | 37 | 35 | 15 | 15 | 15 | 15 | 15 | 15 |
-| `smolensk` | 50 | 116 | 19 | 3 | 0 | 0 | 0 | 0 | 0 |
-| `spb` | 313 | 354 | 249 | 249 | 249 | 249 | 249 | 249 | 249 |
-| `venice` | 34 | 36 | 34 | 34 | 34 | 34 | 34 | 34 | 34 |
-| `vienna` | 32 | 34 | 32 | 0 | 0 | 32 | 0 | 0 | 0 |
+| City | Places | Images | obj/place | no year | no style | no addr | no desc | no facts | no history | no sig. |
+|------|-------:|-------:|----------:|--------:|---------:|--------:|---------:|----------:|-----------:|---------:|
+| `barcelona` | 33 | 34 | 1.2 | 33 | 13 | 13 | 13 | 13 | 13 | 13 |
+| `berlin` | 36 | 37 | 1.1 | 36 | 16 | 16 | 16 | 16 | 16 | 16 |
+| `boston` | 30 | 31 | 1.9 | 1 | 1 | 1 | 1 | 1 | 1 | 1 |
+| `budapest` | 31 | 32 | 1.3 | 31 | 11 | 11 | 11 | 11 | 11 | 11 |
+| `florence` | 34 | 35 | 1.9 | 1 | 1 | 1 | 1 | 1 | 1 | 1 |
+| `jerusalem` | 23 | 24 | 1.9 | 1 | 1 | 1 | 1 | 1 | 1 | 1 |
+| `madrid` | 33 | 34 | 1.2 | 33 | 13 | 13 | 13 | 13 | 13 | 13 |
+| `montreal` | 38 | 39 | 1.9 | 1 | 1 | 1 | 1 | 1 | 1 | 1 |
+| `new_york` | 37 | 38 | 1.9 | 1 | 1 | 1 | 1 | 1 | 1 | 1 |
+| `paris` | 35 | 36 | 1.2 | 35 | 14 | 14 | 14 | 14 | 14 | 14 |
+| `philadelphia` | 30 | 31 | 1.9 | 30 | 1 | 1 | 30 | 1 | 1 | 1 |
+| `prague` | 34 | 35 | 1.2 | 34 | 14 | 14 | 14 | 14 | 14 | 14 |
+| `rome` | 36 | 37 | 1.1 | 36 | 16 | 16 | 16 | 16 | 16 | 16 |
+| `smolensk` | 51 | 116 | 2.1 | 19 | 4 | 1 | 1 | 1 | 1 | 1 |
+| `spb` | 314 | 354 | 0.5 | 250 | 250 | 250 | 250 | 250 | 250 | 250 |
+| `venice` | 35 | 36 | 1.9 | 1 | 1 | 1 | 1 | 1 | 1 | 1 |
+| `vienna` | 33 | 34 | 1.9 | 33 | 1 | 1 | 33 | 1 | 1 | 1 |
 <!-- /city-guide-stats -->
 
 ---
