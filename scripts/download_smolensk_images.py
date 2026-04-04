@@ -47,6 +47,35 @@ _TITLE_PAGE_ASSETS: tuple[tuple[str, str], ...] = (
         "Coat_of_Arms_of_Smolensk_soviet.png",
     ),
 )
+# Гостиницы — глава «Современный Смоленск» (не в smolensk_places.json).
+_MODERN_HOTEL_ASSETS: tuple[tuple[str, str], ...] = (
+    (
+        "images/Smolensk_Hotel_Rossiya.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/6/68/"
+        "Hotel_Rossiya%2C_Smolensk%2C_2006_%2801%29.jpg",
+    ),
+    (
+        "images/Smolensk_Hotel_Grand.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/b/b4/"
+        "Smolensk%2C_Bolshaya_Sovetskaya_street_29_-_1.jpg",
+    ),
+    (
+        "images/Smolensk_Hotel_Konenkov.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/b/ba/"
+        "Smolensk_hotel.jpg",
+    ),
+    (
+        "images/Smolensk_Hotel_Evropeyskaya.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/5/58/"
+        "Smolensk_by_Ginsburg_-_01679c._Europeyskaya.jpg",
+    ),
+    (
+        "images/Smolensk_Hotel_Verzilov.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/d/d5/"
+        "Smolensk_by_Verzilov_Store_Publication_-_067._"
+        "House_of_Mutual_Credit.jpg",
+    ),
+)
 # Логотипы «Региональные вузы»: scripts/download_smolensk_vuzopedia_logos.py
 _USER_AGENT = (
     "ExcursionGuide-Smolensk/1.0 (batch download for local guide; "
@@ -276,6 +305,10 @@ def main() -> int:
     for rel, url in _TITLE_PAGE_ASSETS:
         short = rel.replace("images/", "").replace("/", "_")[:24]
         _queue(url, rel, "title:{}".format(short))
+
+    for rel, url in _MODERN_HOTEL_ASSETS:
+        short = rel.replace("images/", "").replace("/", "_")[:20]
+        _queue(url, rel, "hotel:{}".format(short))
 
     if not todo:
         n = len(SMOLENSK_PLACES)
