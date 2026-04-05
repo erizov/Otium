@@ -83,6 +83,10 @@ _USER_AGENT = (
 )
 
 
+def _nonempty_url(url: str | None) -> bool:
+    return bool(url and str(url).strip())
+
+
 def _commons_thumb_url(original: str, width_px: int) -> str | None:
     """Commons -> /thumb/.../Wpx-name."""
     parsed = urllib.parse.urlparse(original)
@@ -283,24 +287,28 @@ def main() -> int:
         slug = place.get("slug", "?")
         url = place.get("image_source_url")
         rel = place.get("image_rel_path")
-        if not url or not rel:
+        if not rel:
             n_incomplete += 1
             print(
-                "skip {}: need image_source_url and image_rel_path".format(slug),
+                "skip {}: need image_rel_path".format(slug),
                 file=sys.stderr,
             )
             continue
-        _queue(url, rel, slug)
+        if _nonempty_url(url):
+            _queue(url, rel, slug)
         for j, extra in enumerate(place.get("additional_images") or [], start=1):
             eu = extra.get("image_source_url")
             er = extra.get("image_rel_path")
-            if not eu or not er:
+            if not er:
                 print(
-                    "skip {} additional #{}: need URL and path".format(slug, j),
+                    "skip {} additional #{}: need image_rel_path".format(
+                        slug, j,
+                    ),
                     file=sys.stderr,
                 )
                 continue
-            _queue(eu, er, "{}:extra{}".format(slug, j))
+            if _nonempty_url(eu):
+                _queue(eu, er, "{}:extra{}".format(slug, j))
 
     for rel, url in _TITLE_PAGE_ASSETS:
         short = rel.replace("images/", "").replace("/", "_")[:24]

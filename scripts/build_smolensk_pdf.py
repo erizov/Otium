@@ -26,6 +26,19 @@ from scripts.city_guide_core import MIN_IMAGE_BYTES, smallest_same_stem_image_re
 _COMPACT_FIGURE_SLUGS: frozenset[str] = frozenset()
 SMOL_HTML_NAME = "smolensk_guide.html"
 SMOL_PDF_NAME = "smolensk_guide.pdf"
+_GUIDE_INTRO_FOLLOW_RU = (
+    "Фёдор Конь и Михаил Шеин, Павел Нахимов и Григорий Потемкин, Михаил "
+    "Кутузов и Георгий Жуков, Михаил Глинка, Александр Даргомыжский и "
+    "Александр Грибоедов, Василий Докучаев и Александр Энгельгардт, Николай "
+    "Пржевальский и Пётр Козлов, Михаил Микешин и Сергей Коненков, Никифор "
+    "Мурзакевич и Мария Тенишева, Семён Лавочкин и Юрий Гагарин, Айзек Азимов "
+    "и Александр Беляев, Александр Твардовский и Михаил Исаковский, Юрий "
+    "Никулин и Анатолий Папанов, Михаил Егоров и Семён Пегов, домонгольские "
+    "храмы и крупнейшая в Европе крепостная стена, Днепр и Соборная гора. "
+    "Смоленск — город древний, тихий, «ламповый», но эта кроткость обманчива: "
+    "это ключ Москвы, железный кулак в бархатной перчатке. Приезжайте, не "
+    "пожалеете: что в тебе заложено - вот так он тебе и понравится."
+)
 _HERALD_COAT_REL = "images/guide_coat_of_arms.png"
 _HERALD_FLAG_REL = "images/guide_flag.png"
 # Исторические гербы и флаги — титул (файлы из download_smolensk_images).
@@ -123,6 +136,12 @@ _TITLE_UNIVERSITIES: tuple[tuple[str, str], ...] = (
 _WELCOME_CLOSING_VIEWS: tuple[tuple[str, str], ...] = (
     ("images/Smolensk_View1.jpg", "хороший человек запомнит,"),
     ("images/Smolensk_View2.jpg", "а плохой не забудет"),
+)
+# Финальная глава «Добро пожаловать…»: ряд из трёх локальных кадров.
+_WELCOME_CLOSING_DOM_SBASHNEY: tuple[str, ...] = (
+    "images/Smolensk_DomSBashney1.jpg",
+    "images/Smolensk_DomSBashney2.jpg",
+    "images/Smolensk_DomSBashney3.jpg",
 )
 _MODERN_SMOLENSK_TITLE = "Современный Смоленск"
 # Торговые центры — только в главе «Современный Смоленск» (локальные кадры).
@@ -274,6 +293,8 @@ def _collect_guide_image_keys(root: Path) -> tuple[frozenset[str], frozenset[str
         add(rel)
     for rel, _cap in _WELCOME_CLOSING_VIEWS:
         add(rel)
+    for rel in _WELCOME_CLOSING_DOM_SBASHNEY:
+        add(rel)
     return frozenset(paths), frozenset(stems)
 
 
@@ -322,6 +343,67 @@ def _place_figure_row_html(
     return "\n".join(parts)
 
 
+def _place_figure_rows_max_three_html(
+    indexed: list[tuple[int, str]],
+    name_plain: str,
+) -> str:
+    """Ряды по ≤3 снимка (без «many» на четыре и более в одной строке)."""
+    if not indexed:
+        return ""
+    if len(indexed) == 1:
+        seq_i, src_one = indexed[0]
+        idx0 = max(seq_i - 1, 0)
+        alt_one = (
+            name_plain
+            if idx0 == 0
+            else "{} — вид {}".format(name_plain, seq_i)
+        )
+        return (
+            '<figure class="place-fig"><img src="{}" alt="{}"/>'
+            "</figure>".format(escape(src_one), escape(alt_one))
+        )
+    row_chunks: list[str] = []
+    i = 0
+    n = len(indexed)
+    while i < n:
+        remaining = n - i
+        if remaining >= 3:
+            row_chunks.append(
+                _place_figure_row_html(
+                    indexed[i : i + 3],
+                    name_plain,
+                    row_kind="triple",
+                )
+            )
+            i += 3
+        elif remaining == 2:
+            row_chunks.append(
+                _place_figure_row_html(
+                    indexed[i : i + 2],
+                    name_plain,
+                    row_kind="pair",
+                )
+            )
+            i += 2
+        else:
+            seq_i, src_one = indexed[i]
+            idx0 = max(seq_i - 1, 0)
+            alt_one = (
+                name_plain
+                if idx0 == 0
+                else "{} — вид {}".format(name_plain, seq_i)
+            )
+            row_chunks.append(
+                '<figure class="place-fig"><img src="{}" alt="{}"/>'
+                "</figure>".format(escape(src_one), escape(alt_one))
+            )
+            i += 1
+    inner = "\n".join(row_chunks)
+    return (
+        '<div class="place-pdf-fig-rows-stack">\n{}\n</div>'.format(inner)
+    )
+
+
 def _place_block(p: SmolenskPlace, img_srcs: list[str]) -> str:
     name_ru = escape(p.get("name_ru", ""))
     name_plain = p.get("name_ru", "")
@@ -348,62 +430,9 @@ def _place_block(p: SmolenskPlace, img_srcs: list[str]) -> str:
         meta_html,
     ]
     indexed = list(enumerate(img_srcs, start=1))
-    if slug == "dormition_cathedral" and len(indexed) >= 4:
-        top = _place_figure_row_html(
-            indexed[:3],
-            name_plain,
-            row_kind="triple",
-        )
-        tail = indexed[3:]
-        tail_parts: list[str] = [top]
-        if len(tail) == 1:
-            seq_i, src_one = tail[0]
-            idx0 = max(seq_i - 1, 0)
-            alt_one = (
-                name_plain
-                if idx0 == 0
-                else "{} — вид {}".format(name_plain, seq_i)
-            )
-            tail_parts.append(
-                '<figure class="place-fig"><img src="{}" alt="{}"/>'
-                "</figure>".format(escape(src_one), escape(alt_one))
-            )
-        else:
-            tail_parts.append(
-                _place_figure_row_html(
-                    tail,
-                    name_plain,
-                    row_kind="pair" if len(tail) == 2 else "many",
-                )
-            )
-        chunks.append(
-            '<div class="place-pdf-fig-rows-stack">\n{}\n</div>'.format(
-                "\n".join(tail_parts),
-            )
-        )
-    else:
-        row_open = len(img_srcs) > 1
-        row_class = "place-pdf-fig-row"
-        if row_open and len(img_srcs) == 2:
-            row_class = "place-pdf-fig-row place-pdf-fig-row--pair"
-        elif row_open:
-            row_class = "place-pdf-fig-row place-pdf-fig-row--many"
-        if row_open:
-            chunks.append('<div class="{}">'.format(row_class))
-        for i, src in enumerate(img_srcs):
-            alt = name_plain if i == 0 else "{} — вид {}".format(
-                name_plain,
-                i + 1,
-            )
-            chunks.append(
-                '<figure class="place-fig"><img src="{}" alt="{}"/>'
-                "</figure>".format(
-                    escape(src),
-                    escape(alt),
-                )
-            )
-        if row_open:
-            chunks.append("</div>")
+    fig_html = _place_figure_rows_max_three_html(indexed, name_plain)
+    if fig_html:
+        chunks.append(fig_html)
     if _nonempty(p.get("description")):
         chunks.append(
             '<div class="place-desc">{}</div>'.format(
@@ -727,9 +756,24 @@ def _welcome_closing_section_html(root: Path) -> str:
             '<figcaption class="welcome-closing-cap">{}</figcaption>'
             "</figure>".format(escape(src), cap_esc, cap_esc)
         )
-    if not figs:
+    tower_indexed: list[tuple[int, str]] = []
+    tseq = 1
+    for rel in _WELCOME_CLOSING_DOM_SBASHNEY:
+        resolved = smallest_same_stem_image_rel(root, rel)
+        if resolved:
+            tower_indexed.append((tseq, _rel_to_src(resolved)))
+            tseq += 1
+    tower_html = ""
+    if tower_indexed:
+        tower_html = "\n{}".format(
+            _place_figure_rows_max_three_html(
+                tower_indexed,
+                "Смоленск, дом с башней",
+            )
+        )
+    if not figs and not tower_html:
         return ""
-    inner = "\n".join(figs)
+    inner = "\n".join(figs) + tower_html
     return (
         '<section class="guide-welcome-closing" '
         'aria-label="Добро пожаловать в Смоленск">'
@@ -796,7 +840,7 @@ def _cover_otium_html() -> str:
 def _build_html(root: Path, places: list[SmolenskPlace]) -> str:
     font_href = (
         "https://fonts.googleapis.com/css2?"
-        "family=Cormorant+Garamond:wght@600&family=Ponomar&"
+        "family=Cormorant+Garamond:wght@600&family=Ponomar&family=Triodion&"
         "family=Source+Sans+3:wght@400;600&display=swap"
     )
     blocks: list[str] = [_cover_otium_html()]
@@ -804,8 +848,13 @@ def _build_html(root: Path, places: list[SmolenskPlace]) -> str:
         '<header class="guide-title">'
         "<h1 class=\"guide-title-main\">Смоленск</h1>"
         "<p class=\"lead\">Путеводитель. Объектов в этом выпуске: {}.</p>"
+        "<p class=\"lead-follow\">{}</p>"
         "{}"
-        "</header>".format(len(places), _heraldry_html(root)),
+        "</header>".format(
+            len(places),
+            escape(_GUIDE_INTRO_FOLLOW_RU),
+            _heraldry_html(root),
+        ),
     )
     for p in places:
         srcs = _image_srcs_for_place(root, p)
@@ -829,8 +878,9 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
   color: #1a1a1a; font-size: 11pt; }
 .cover-otium { page-break-after: always; min-height: auto;
   padding: 1.15rem 0.85rem 1.35rem; box-sizing: border-box; }
-.otium-logo { font-family: 'Cormorant Garamond', serif; font-size: 2.15rem;
-  font-weight: 600; letter-spacing: 0.18em; margin-bottom: 0.85rem; }
+.otium-logo { font-family: 'Triodion', 'Ponomar', 'Cormorant Garamond', serif;
+  font-size: 2.15rem; font-weight: 400; letter-spacing: 0.14em;
+  margin-bottom: 0.85rem; }
 .otiump { margin: 0.42rem 0; line-height: 1.42; text-align: justify;
   max-width: 38rem; font-size: 0.95rem; }
 .guide-title { page-break-after: auto; margin-bottom: 0.55rem;
@@ -847,9 +897,9 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
   margin-top: 1.25rem; padding-bottom: 0.35rem; page-break-inside: avoid;
   break-inside: avoid; }
 .welcome-closing-head {
-  font-family: 'Ponomar', 'Cormorant Garamond', serif; font-size: 1.32rem;
-  text-align: center; margin: 0.45rem 0 0.65rem; font-weight: 600;
-  line-height: 1.2; }
+  font-family: 'Triodion', 'Ponomar', 'Cormorant Garamond', serif;
+  font-size: 1.32rem; text-align: center; margin: 0.45rem 0 0.65rem;
+  font-weight: 400; line-height: 1.2; }
 .welcome-closing-fig { margin: 0.55rem auto 0.95rem; max-width: 100%; }
 .welcome-closing-fig img {
   max-height: 14rem; width: auto; max-width: 100%; object-fit: contain;
@@ -858,9 +908,10 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
   font-family: 'Source Sans 3', sans-serif; font-size: 0.74rem;
   text-align: center; margin: 0.38rem 0 0; color: #333;
   font-style: italic; line-height: 1.35; }
-.title-strip-label { font-size: 0.72rem; text-transform: uppercase;
-  letter-spacing: 0.08em; color: #555; margin: 0.5rem 0 0.25rem;
-  text-align: center; width: 100%; }
+.title-strip-label {
+  font-family: 'Triodion', 'Ponomar', 'Cormorant Garamond', serif;
+  font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em;
+  color: #555; margin: 0.5rem 0 0.25rem; text-align: center; width: 100%; }
 .title-strip-label-univ { margin-top: 0.12rem; margin-bottom: 0.04rem;
   font-size: 0.58rem; }
 .title-strip-label-modern-malls { margin-top: 0.65rem; margin-bottom: 0.06rem;
@@ -911,17 +962,26 @@ figure.heraldry-fig.heraldry-univ .univ-name-caption {
   hyphens: auto; overflow-wrap: anywhere; }
 .heraldry-motto { text-align: center; max-width: 16rem; margin: 0.12rem auto;
   width: 100%; }
-.motto-oldslav { font-family: 'Ponomar', 'Cormorant Garamond', serif;
+.motto-oldslav {
+  font-family: 'Triodion', 'Ponomar', 'Cormorant Garamond', serif;
   font-size: 1.02rem; line-height: 1.12; margin: 0 0 0.12rem; }
-.motto-region { font-family: 'Ponomar', 'Cormorant Garamond', serif;
+.motto-region {
+  font-family: 'Triodion', 'Ponomar', 'Cormorant Garamond', serif;
   font-size: 0.82rem; line-height: 1.15; margin: 0; color: #2a2a2a; }
-.guide-title h1.guide-title-main { font-family: 'Ponomar', 'Cormorant Garamond',
-  serif; font-size: 2.35rem; margin-bottom: 0.5rem; font-weight: 600; }
+.guide-title h1.guide-title-main {
+  font-family: 'Triodion', 'Ponomar', 'Cormorant Garamond', serif;
+  font-size: 2.35rem; margin-bottom: 0.5rem; font-weight: 400; }
 .lead { color: #444; font-size: 1.05rem; }
+.lead-follow { color: #333; font-size: 0.98rem; margin: 0.45rem 0 0.72rem;
+  line-height: 1.45; text-align: justify; max-width: 42rem; }
 .place { margin-bottom: 2.2rem; page-break-inside: auto; }
-h3 { font-size: 1.22rem; margin: 1.2rem 0 0.35rem; }
-h4 { font-size: 0.95rem; text-transform: uppercase;
-  letter-spacing: 0.06em; margin: 1rem 0 0.4rem; color: #333; }
+h3 {
+  font-family: 'Triodion', 'Ponomar', 'Cormorant Garamond', serif;
+  font-size: 1.22rem; margin: 1.2rem 0 0.35rem; font-weight: 400; }
+h4 {
+  font-family: 'Triodion', 'Ponomar', 'Cormorant Garamond', serif;
+  font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.05em;
+  margin: 1rem 0 0.4rem; color: #333; font-weight: 400; }
 .sub-en { color: #555; font-size: 0.95rem; margin: 0 0 0.5rem;
   font-style: italic; }
 .place-meta { font-size: 0.92rem; color: #353535; margin: 0 0 0.75rem;
