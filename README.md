@@ -4,9 +4,48 @@ Guides by themes.
 
 **City guides** (Barcelona, Berlin, Budapest, Madrid, Paris, Prague, Rome, Smolensk, SPB; roadmap: **Venice**,
 **Florence** — JSON + `images/`, whitelist, separate `build_*_pdf` scripts): command cheat sheet in
-[docs/CITY_GUIDES_README.md](docs/CITY_GUIDES_README.md) (example: **Budapest**).
+[docs/CITY_GUIDES_README.md](docs/CITY_GUIDES_README.md) (example: **Budapest**). Editorial rules for
+facts and sources (omit unsourced year, style, history, significance): same doc, section **Editorial policy**.
+One-shot **download → validate → build** for all cities:
+[docs/REBUILD_ALL_CITY_GUIDES.md](docs/REBUILD_ALL_CITY_GUIDES.md).
 
 ---
+
+## Local web editor (city guides + LLM)
+
+This repo includes a small local web app for **viewing and editing** city guides.
+
+- **UI**: place list + images + current text
+- **Edits persist**: saved into `<city>/data/<city>_place_details_more.json`
+- **LLM assist**:
+  - **Ollama (local)**: lists your installed models and auto-selects the most
+    powerful available by default.
+  - **OpenAI (optional)**: appears as the last provider choice when
+    `OPENAI_API_KEY` is set.
+
+### Run
+
+From repo root:
+
+```powershell
+pip install -r requirements.txt
+
+# start (writes .webapp.pid)
+powershell -ExecutionPolicy Bypass -File scripts/webapp_start.ps1 [-BindHost 127.0.0.1] [-Port 8000]
+
+# open (example)
+# http://127.0.0.1:8000/smolensk
+
+# stop
+powershell -ExecutionPolicy Bypass -File scripts/webapp_stop.ps1
+```
+
+### Notes
+
+- **Extendable for all cities**: any folder matching
+  `<city>/data/<city>_places.json` automatically appears in the City dropdown.
+- **Rebuild HTML/PDF** after edits:
+  - `python scripts/build_<city>_pdf.py --html-only`
 
 ## Excursion — московские монастыри
 

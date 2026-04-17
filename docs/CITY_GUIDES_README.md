@@ -5,6 +5,65 @@ OTIUM-style **per-city** guides live in their own folder: JSON registry, flat
 `scripts/` named after the city slug (`prague`, `budapest`, `berlin`, `paris`,
 `rome`, `barcelona`, `smolensk`, …).
 
+**Rebuild every city in one workflow:** [REBUILD_ALL_CITY_GUIDES.md](REBUILD_ALL_CITY_GUIDES.md).
+
+---
+
+## Local web editor (LLM-assisted)
+
+The repo includes a lightweight local web app to browse a city guide and persist
+edits into an overlay detail file.
+
+- **Persistent edits**: written to `<city>/data/<city>_place_details_more.json`
+  (auto-merged by existing `*_place_details*.json` logic).
+- **LLM draft**:
+  - Default: **Ollama (local)**, with model list shown in UI and strongest model
+    auto-selected.
+  - Optional: **OpenAI** appears as the last provider choice when
+    `OPENAI_API_KEY` is set.
+
+### Run
+
+From repo root:
+
+```powershell
+pip install -r requirements.txt
+powershell -ExecutionPolicy Bypass -File scripts/webapp_start.ps1 [-BindHost 127.0.0.1] [-Port 8000]
+```
+
+Open `http://127.0.0.1:8000/<city>` (example: `/smolensk`) and use **Apply** to
+save edits.
+
+Stop:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/webapp_stop.ps1
+```
+
+### Extend to another city
+
+Any city folder that contains `data/<city>_places.json` will automatically show
+up in the UI’s City dropdown (no code changes needed).
+
+## Editorial policy (facts and sources)
+
+Applies to **all** per-city guides (JSON registries, detail files, and any prose
+that ships in HTML/PDF).
+
+- **Do not invent or imply facts.** Statements in `description`, `history`,
+  `significance`, `facts`, `stories`, and meta fields (`year_built`,
+  `architecture_style`, `address` when used as a factual claim) must come from
+  **valid sources** (e.g. cited reference, museum or official site, reputable
+  reference work with a stable link, or `docs/SOURCES_WHITELIST.md`-compliant
+  image metadata). If it cannot be verified, **omit** it.
+- **Omit empty sections.** If there is no reliable information for a field, leave
+  the key **absent** or use a single placeholder token (`—`, `-`, etc.) only
+  where tooling expects a stub; see `is_substantive_text()` in
+  `scripts/city_guide_core.py`. Do **not** pad with generic filler.
+- **Skip `year_built`, `architecture_style`, `history`, and `significance`**
+  when sources do not supply them. Builders omit empty blocks; meta lines omit
+  missing parts.
+
 ---
 
 ## Example: Budapest

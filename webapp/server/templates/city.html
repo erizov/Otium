@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Guide editor · {{ city_slug }}</title>
+    <link rel="stylesheet" href="{{ fonts.google_fonts_href }}" />
+    <link rel="stylesheet" href="/static/app.css" />
+    <style>
+      :root {
+        --city-title-font: {{ fonts.title_font_family }};
+        --city-body-font: {{ fonts.body_font_family }};
+
+        --bg: {{ theme.bg_base }};
+        --flag-a: {{ theme.flag_a }};
+        --flag-b: {{ theme.flag_b }};
+        --flag-c: {{ theme.flag_c or "transparent" }};
+        --accent: {{ theme.accent }};
+        --accent-2: {{ theme.accent_2 }};
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-row">
+            <div class="brand-country-emblems">
+              {% if emblems.country_flag_url %}
+              <img
+                class="emblem emblem-brand emblem-country"
+                src="{{ emblems.country_flag_url }}"
+                alt="Country flag"
+                loading="lazy"
+              />
+              {% endif %}
+              {% if emblems.country_emblem_url %}
+              <img
+                class="emblem emblem-brand emblem-country"
+                src="{{ emblems.country_emblem_url }}"
+                alt="Country emblem"
+                loading="lazy"
+              />
+              {% endif %}
+            </div>
+            <div class="brand-text">
+              <div class="brand-title-row">
+                <div class="brand-title">Excursion</div>
+              </div>
+              <div class="brand-subtitle">Guide editor</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="control">
+          <button id="buildPdfBtn" class="button primary">Build PDF</button>
+          <div id="buildPdfStatus" class="status muted"></div>
+        </div>
+
+        <div class="control">
+          <label class="label" for="citySelect">City</label>
+          <select id="citySelect" class="select">
+            {% for c in cities %}
+            <option value="{{ c }}" {% if c == city_slug %}selected{% endif %}>
+              {{ c | city_dropdown_label }}
+            </option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="control">
+          <label class="label" for="search">Search places</label>
+          <input id="search" class="input" placeholder="Type to filter…" />
+        </div>
+
+        <div id="placeList" class="place-list"></div>
+      </aside>
+
+      <main class="main">
+        <header class="topbar">
+          <div class="topbar-left">
+            <div class="title-row">
+              <div class="title-emblems">
+                {% if emblems.city_flag_url %}
+                <img
+                  class="emblem emblem-title emblem-city-flag"
+                  src="{{ emblems.city_flag_url }}"
+                  alt="City flag"
+                  loading="lazy"
+                />
+                {% endif %}
+              </div>
+              <div class="title-text">
+                <div id="placeTitle" class="place-title">Loading…</div>
+                <div id="placeSubtitle" class="place-subtitle"></div>
+              </div>
+              <div class="title-emblems title-emblems-right">
+                {% if emblems.city_emblem_url %}
+                <img
+                  class="emblem emblem-title emblem-city"
+                  src="{{ emblems.city_emblem_url }}"
+                  alt="City emblem"
+                  loading="lazy"
+                />
+                {% endif %}
+              </div>
+            </div>
+          </div>
+          <div class="topbar-right">
+            <a class="link" href="/api/{{ city_slug }}/places" target="_blank"
+              >raw places</a
+            >
+          </div>
+        </header>
+
+        <section class="content">
+          <div id="placeImages" class="images"></div>
+
+          <div class="grid">
+            <section class="card">
+              <h2>Current content</h2>
+              <div id="currentContent" class="prose muted"></div>
+            </section>
+
+            <section class="card">
+              <h2>LLM draft</h2>
+              <div class="row">
+                <div class="control grow">
+                  <label class="label" for="providerSelect">Provider</label>
+                  <select id="providerSelect" class="select"></select>
+                </div>
+                <div class="control grow">
+                  <label class="label" for="modelSelect">Model</label>
+                  <select id="modelSelect" class="select"></select>
+                </div>
+                <div class="control">
+                  <label class="label">&nbsp;</label>
+                  <button id="generateBtn" class="button">Generate</button>
+                </div>
+              </div>
+
+              <div id="draftArea" class="draft"></div>
+            </section>
+
+            <section class="card">
+              <h2>Apply edits</h2>
+              <div class="row">
+                <div class="control grow">
+                  <label class="label" for="descEdit">Description</label>
+                  <textarea id="descEdit" class="textarea" rows="4"></textarea>
+                  <div class="row compact">
+                    <label class="radio"
+                      ><input
+                        type="radio"
+                        name="descMode"
+                        value="replace"
+                        checked
+                      />
+                      Replace</label
+                    >
+                    <label class="radio"
+                      ><input type="radio" name="descMode" value="append" />
+                      Append</label
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="control grow">
+                  <label class="label" for="historyEdit">History</label>
+                  <textarea id="historyEdit" class="textarea" rows="5"></textarea>
+                  <div class="row compact">
+                    <label class="radio"
+                      ><input
+                        type="radio"
+                        name="historyMode"
+                        value="replace"
+                        checked
+                      />
+                      Replace</label
+                    >
+                    <label class="radio"
+                      ><input type="radio" name="historyMode" value="append" />
+                      Append</label
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="control grow">
+                  <label class="label" for="sigEdit">Significance</label>
+                  <textarea id="sigEdit" class="textarea" rows="5"></textarea>
+                  <div class="row compact">
+                    <label class="radio"
+                      ><input
+                        type="radio"
+                        name="sigMode"
+                        value="replace"
+                        checked
+                      />
+                      Replace</label
+                    >
+                    <label class="radio"
+                      ><input type="radio" name="sigMode" value="append" />
+                      Append</label
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="control grow">
+                  <label class="label" for="factsEdit">Facts (one per line)</label>
+                  <textarea id="factsEdit" class="textarea" rows="6"></textarea>
+                </div>
+                <div class="control grow">
+                  <label class="label" for="storiesEdit"
+                    >Stories (one per line)</label
+                  >
+                  <textarea id="storiesEdit" class="textarea" rows="6"></textarea>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="control grow">
+                  <label class="label" for="linksEdit"
+                    >More information links (one per line: `label | url`)</label
+                  >
+                  <textarea id="linksEdit" class="textarea" rows="4"></textarea>
+                </div>
+              </div>
+
+              <div class="row">
+                <button id="applyBtn" class="button primary">Apply</button>
+                <div id="applyStatus" class="status muted"></div>
+              </div>
+            </section>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script>
+      window.__CITY__ = "{{ city_slug }}";
+    </script>
+    <script src="/static/app.js"></script>
+  </body>
+</html>
+
