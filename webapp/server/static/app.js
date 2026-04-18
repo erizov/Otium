@@ -136,6 +136,166 @@ async function jsonPost(url, body) {
   return await res.json();
 }
 
+const APPEARANCE_LS_KEY = "excursionEditorAppearance";
+const APPEARANCE_VERSION = 1;
+const EMPTY_FONT_STYLESHEET = "data:text/css,body{}";
+
+let appearancePresets = null;
+
+function loadSavedAppearance() {
+  try {
+    const raw = localStorage.getItem(APPEARANCE_LS_KEY);
+    if (!raw) return null;
+    const o = JSON.parse(raw);
+    if (o.v !== APPEARANCE_VERSION) return null;
+    return {
+      palette: o.palette || "flag",
+      fontProfile: o.fontProfile || "city_default",
+      scale: o.scale != null ? String(o.scale) : "1",
+    };
+  } catch {
+    return null;
+  }
+}
+
+function persistAppearance(cur) {
+  localStorage.setItem(
+    APPEARANCE_LS_KEY,
+    JSON.stringify({
+      v: APPEARANCE_VERSION,
+      palette: cur.palette,
+      fontProfile: cur.fontProfile,
+      scale: cur.scale,
+    })
+  );
+}
+
+function readAppearanceFromForm() {
+  const p = document.querySelector(
+    'input[name="appearancePalette"]:checked'
+  );
+  const f = document.querySelector('input[name="appearanceFont"]:checked');
+  const s = document.querySelector('input[name="appearanceScale"]:checked');
+  return {
+    palette: (p && p.value) || "flag",
+    fontProfile: (f && f.value) || "city_default",
+    scale: (s && s.value) || "1",
+  };
+}
+
+function setAppearanceFormValues(cur) {
+  const names = [
+    ["appearancePalette", cur.palette],
+    ["appearanceFont", cur.fontProfile],
+    ["appearanceScale", cur.scale],
+  ];
+  names.forEach(([name, val]) => {
+    const elRadio = document.querySelector(
+      `input[name="${name}"][value="${val}"]`
+    );
+    if (elRadio) elRadio.checked = true;
+  });
+}
+
+function applyThemeColors(paletteId) {
+  if (!appearancePresets) return;
+  const root = document.documentElement;
+  if (paletteId === "paper") {
+    root.setAttribute("data-palette", "paper");
+  } else {
+    root.removeAttribute("data-palette");
+  }
+  let theme;
+  if (paletteId === "flag") {
+    theme = appearancePresets.flag_theme;
+  } else if (paletteId === "neutral") {
+    theme = appearancePresets.palettes.neutral;
+  } else {
+    theme = appearancePresets.palettes.paper;
+  }
+  root.style.setProperty("--bg", theme.bg_base);
+  root.style.setProperty("--flag-a", theme.flag_a);
+  root.style.setProperty("--flag-b", theme.flag_b);
+  root.style.setProperty("--flag-c", theme.flag_c);
+  root.style.setProperty("--accent", theme.accent);
+  root.style.setProperty("--accent-2", theme.accent_2);
+}
+
+function applyFontProfile(profileId) {
+  if (!appearancePresets) return;
+  const profs = appearancePresets.font_profiles || [];
+  const p = profs.find((x) => x.id === profileId);
+  if (!p) return;
+  const root = document.documentElement;
+  root.style.setProperty("--city-title-font", p.title_font_family);
+  root.style.setProperty("--city-body-font", p.body_font_family);
+  const link = document.getElementById("editor-fonts-link");
+  if (link) {
+    if (p.google_fonts_href) {
+      link.href = p.google_fonts_href;
+    } else {
+      link.href = EMPTY_FONT_STYLESHEET;
+    }
+  }
+}
+
+function applyScale(scaleStr) {
+  document.documentElement.style.setProperty(
+    "--editor-scale",
+    scaleStr || "1"
+  );
+}
+
+function refreshAppearanceFromForm() {
+  const cur = readAppearanceFromForm();
+  applyThemeColors(cur.palette);
+  applyFontProfile(cur.fontProfile);
+  applyScale(cur.scale);
+  persistAppearance(cur);
+}
+
+async function initAppearance() {
+  appearancePresets = await jsonGet(
+    `/api/${encodeURIComponent(state.city)}/editor-presets`
+  );
+  const defaults = {
+    palette: "flag",
+    fontProfile: "city_default",
+    scale: "1",
+  };
+  const saved = loadSavedAppearance();
+  const cur = saved
+    ? {
+        palette: saved.palette,
+        fontProfile: saved.fontProfile,
+        scale: saved.scale,
+      }
+    : defaults;
+  setAppearanceFormValues(cur);
+  applyThemeColors(cur.palette);
+  applyFontProfile(cur.fontProfile);
+  applyScale(cur.scale);
+
+  ["appearancePalette", "appearanceFont", "appearanceScale"].forEach(
+    (name) => {
+      document.querySelectorAll(`input[name="${name}"]`).forEach((inp) => {
+        inp.addEventListener("change", () => refreshAppearanceFromForm());
+      });
+    }
+  );
+  const resetBtn = document.getElementById("appearanceResetBtn");
+  if (resetBtn) {
+    resetBtn.addEventListener("click", () => {
+      localStorage.removeItem(APPEARANCE_LS_KEY);
+      setAppearanceFormValues(defaults);
+      applyThemeColors(defaults.palette);
+      applyFontProfile(defaults.fontProfile);
+      applyScale(defaults.scale);
+      persistAppearance(defaults);
+    });
+  }
+}
+
 let state = {
   city: window.__CITY__ || "smolensk",
   places: [],
@@ -559,6 +719,8 @@ async function applyEdits() {
 }
 
 async function init() {
+  await initAppearance();
+
   el("citySelect").addEventListener("change", () => {
     const city = el("citySelect").value;
     window.location.href = `/${encodeURIComponent(city)}`;

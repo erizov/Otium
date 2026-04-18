@@ -1,6 +1,8 @@
 /* Minimal, elegant UI. No build step. */
 
 :root {
+  --editor-scale: 1;
+
   --panel: rgba(255, 255, 255, 0.06);
   --panel-2: rgba(255, 255, 255, 0.08);
   --text: rgba(255, 255, 255, 0.92);
@@ -8,6 +10,10 @@
   --border: rgba(255, 255, 255, 0.12);
   --danger: #ff7a7a;
   --shadow: 0 18px 45px rgba(0, 0, 0, 0.45);
+}
+
+html {
+  font-size: calc(15px * var(--editor-scale));
 }
 
 * {
@@ -171,7 +177,7 @@ a {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  height: calc(100vh - 240px);
+  height: calc(100vh - 320px);
   overflow: auto;
   padding-right: 6px;
 }
@@ -371,6 +377,112 @@ a {
     rgba(255, 255, 255, 0.1)
   );
   background: color-mix(in srgb, var(--accent) 20%, rgba(255, 255, 255, 0.02));
+}
+
+.button.small {
+  padding: 6px 10px;
+  font-size: 0.82rem;
+  width: 100%;
+}
+
+.appearance-panel {
+  margin: 8px 0 4px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.appearance-summary {
+  padding: 10px 12px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: var(--muted);
+  list-style: none;
+}
+
+.appearance-summary::-webkit-details-marker {
+  display: none;
+}
+
+.appearance-body {
+  padding: 0 12px 12px;
+}
+
+.control.tight {
+  margin: 8px 0;
+}
+
+.appearance-radios {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+  margin-top: 4px;
+}
+
+.appearance-radios-col {
+  flex-direction: column;
+  gap: 6px;
+}
+
+html[data-palette="paper"] {
+  --panel: rgba(255, 255, 255, 0.78);
+  --panel-2: rgba(255, 255, 255, 0.62);
+  --text: rgba(22, 20, 18, 0.92);
+  --muted: rgba(45, 42, 38, 0.62);
+  --border: rgba(0, 0, 0, 0.12);
+  --shadow: 0 14px 36px rgba(0, 0, 0, 0.12);
+}
+
+html[data-palette="paper"] .sidebar {
+  background: color-mix(in srgb, var(--bg) 88%, rgba(255, 255, 255, 0.35));
+}
+
+html[data-palette="paper"] .input,
+html[data-palette="paper"] .select,
+html[data-palette="paper"] .textarea {
+  background: rgba(255, 255, 255, 0.92);
+  color: rgba(22, 20, 18, 0.94);
+  color-scheme: light;
+}
+
+html[data-palette="paper"] .select option {
+  background: #ffffff;
+  color: rgba(22, 20, 18, 0.94);
+}
+
+html[data-palette="paper"] .place-item {
+  background: rgba(255, 255, 255, 0.45);
+}
+
+html[data-palette="paper"] .place-item:hover {
+  background: rgba(255, 255, 255, 0.72);
+}
+
+html[data-palette="paper"] .place-item.active {
+  background: color-mix(in srgb, var(--accent) 14%, rgba(255, 255, 255, 0.5));
+}
+
+html[data-palette="paper"] .card h2 {
+  color: rgba(40, 38, 35, 0.78);
+}
+
+html[data-palette="paper"] .pill {
+  background: rgba(255, 255, 255, 0.55);
+  color: rgba(45, 42, 38, 0.72);
+}
+
+html[data-palette="paper"] .place-image button {
+  background: rgba(255, 255, 255, 0.75);
+  color: rgba(22, 20, 18, 0.9);
+}
+
+html[data-palette="paper"] .appearance-panel {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+html[data-palette="paper"] .emblem {
+  background: rgba(255, 255, 255, 0.55);
 }
 
 .muted {

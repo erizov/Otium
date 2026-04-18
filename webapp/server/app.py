@@ -28,6 +28,7 @@ from webapp.server.city_store import (
 )
 from webapp.server.city_fonts import fonts_for_city
 from webapp.server.city_emblems import emblems_for_city
+from webapp.server.city_theme import CityTheme
 from webapp.server.city_theme import theme_for_city
 from webapp.server.llm import ollama_client
 from webapp.server.llm import openai_client
@@ -35,7 +36,23 @@ from webapp.server.llm.types import PlaceDraft
 from webapp.server.llm.types import coerce_links
 from webapp.server.llm.types import coerce_str_list
 
+from scripts.guide_editor_presets import NEUTRAL_PALETTE
+from scripts.guide_editor_presets import PAPER_PALETTE
+from scripts.guide_editor_presets import static_font_profiles
+
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
+
+
+def _theme_css_dict(theme: CityTheme) -> dict[str, str]:
+    fc = theme.flag_c
+    return {
+        "bg_base": theme.bg_base,
+        "flag_a": theme.flag_a,
+        "flag_b": theme.flag_b,
+        "flag_c": fc if fc else "transparent",
+        "accent": theme.accent,
+        "accent_2": theme.accent_2,
+    }
 
 
 def _city_dropdown_label(slug: str) -> str:
@@ -67,6 +84,33 @@ def home() -> RedirectResponse:
 @app.get("/api/cities")
 def api_cities() -> dict[str, Any]:
     return {"cities": discover_cities(PROJECT_ROOT)}
+
+
+@app.get("/api/{city_slug}/editor-presets")
+def api_editor_presets(city_slug: str) -> dict[str, Any]:
+    cities = discover_cities(PROJECT_ROOT)
+    if city_slug not in cities:
+        raise HTTPException(status_code=404, detail="Unknown city")
+    fonts = fonts_for_city(city_slug)
+    theme = theme_for_city(city_slug)
+    city_default = {
+        "id": "city_default",
+        "label": "City default",
+        "google_fonts_href": fonts.google_fonts_href,
+        "title_font_family": fonts.title_font_family,
+        "body_font_family": fonts.body_font_family,
+    }
+    return {
+        "version": 1,
+        "city_slug": city_slug,
+        "flag_theme": _theme_css_dict(theme),
+        "palettes": {
+            "flag": None,
+            "neutral": dict(NEUTRAL_PALETTE),
+            "paper": dict(PAPER_PALETTE),
+        },
+        "font_profiles": [city_default] + static_font_profiles(),
+    }
 
 
 @app.get("/{city_slug}", response_class=HTMLResponse, include_in_schema=False)

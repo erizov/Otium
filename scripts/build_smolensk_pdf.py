@@ -20,6 +20,7 @@ from scripts.build_pdf import (
     _strip_pdf_metadata,
 )
 from scripts.city_guide_core import MIN_IMAGE_BYTES, smallest_same_stem_image_rel
+from scripts.guide_editor_presets import SMOLENSK_GOOGLE_FONTS_HREF
 
 
 # Компактные иллюстрации для ранних карточек (стр. PDF 4–6 после титула).
@@ -1060,11 +1061,7 @@ def _cover_otium_html() -> str:
 
 
 def _build_html(root: Path, places: list[SmolenskPlace]) -> str:
-    font_href = (
-        "https://fonts.googleapis.com/css2?"
-        "family=Cormorant+Garamond:wght@600&family=Ponomar&family=Triodion&"
-        "family=Source+Sans+3:wght@400;600&display=swap"
-    )
+    font_href = SMOLENSK_GOOGLE_FONTS_HREF
     blocks: list[str] = [_cover_otium_html()]
     blocks.append(
         '<header class="guide-title">'

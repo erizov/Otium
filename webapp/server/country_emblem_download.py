@@ -28,6 +28,18 @@ _COMMONS_TITLE_BY_CODE: dict[str, str] = {
     "us": "File:Greater_coat_of_arms_of_the_United_States.svg",
     "ca": "File:Royal_Coat_of_arms_of_Canada.svg",
     "il": "File:Emblem_of_Israel.svg",
+    "va": "File:Coat of arms of the Holy See.svg",
+    "gb": "File:Royal Coat of Arms of the United Kingdom.svg",
+    "nl": "File:State coat of arms of the Netherlands.svg",
+    "tr": "File:National emblem of Turkey.svg",
+    "jp": "File:Imperial Seal of Japan.svg",
+    "ae": "File:Emblem of the United Arab Emirates.svg",
+    "gr": "File:Coat of arms of Greece.svg",
+    "pt": "File:Coat of arms of Portugal.svg",
+    "sg": "File:Coat of arms of Singapore.svg",
+    "th": "File:Garuda Emblem of Thailand.svg",
+    "ie": "File:Coat of arms of Ireland.svg",
+    "dk": "File:National coat of arms of Denmark.svg",
 }
 
 

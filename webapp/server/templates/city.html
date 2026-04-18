@@ -4,10 +4,16 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Guide editor · {{ city_slug }}</title>
-    <link rel="stylesheet" href="{{ fonts.google_fonts_href }}" />
+    <link
+      id="editor-fonts-link"
+      rel="stylesheet"
+      href="{{ fonts.google_fonts_href }}"
+    />
     <link rel="stylesheet" href="/static/app.css" />
     <style>
       :root {
+        --editor-scale: 1;
+
         --city-title-font: {{ fonts.title_font_family }};
         --city-body-font: {{ fonts.body_font_family }};
 
@@ -72,6 +78,85 @@
           <label class="label" for="search">Search places</label>
           <input id="search" class="input" placeholder="Type to filter…" />
         </div>
+
+        <details class="appearance-panel">
+          <summary class="appearance-summary">Appearance</summary>
+          <div class="appearance-body">
+            <div class="control tight">
+              <span class="label">Palette</span>
+              <div class="appearance-radios">
+                <label class="radio"
+                  ><input
+                    type="radio"
+                    name="appearancePalette"
+                    value="flag"
+                    checked
+                  />
+                  Flag</label
+                >
+                <label class="radio"
+                  ><input
+                    type="radio"
+                    name="appearancePalette"
+                    value="neutral"
+                  />
+                  Neutral</label
+                >
+                <label class="radio"
+                  ><input type="radio" name="appearancePalette" value="paper" />
+                  Paper</label
+                >
+              </div>
+            </div>
+            <div class="control tight">
+              <span class="label">Fonts</span>
+              <div class="appearance-radios appearance-radios-col">
+                <label class="radio"
+                  ><input
+                    type="radio"
+                    name="appearanceFont"
+                    value="city_default"
+                    checked
+                  />
+                  City default</label
+                >
+                <label class="radio"
+                  ><input type="radio" name="appearanceFont" value="editorial" />
+                  Editorial</label
+                >
+                <label class="radio"
+                  ><input type="radio" name="appearanceFont" value="system" />
+                  System</label
+                >
+              </div>
+            </div>
+            <div class="control tight">
+              <span class="label">Text size</span>
+              <div class="appearance-radios">
+                <label class="radio"
+                  ><input type="radio" name="appearanceScale" value="0.9" />
+                  Small</label
+                >
+                <label class="radio"
+                  ><input
+                    type="radio"
+                    name="appearanceScale"
+                    value="1"
+                    checked
+                  />
+                  Medium</label
+                >
+                <label class="radio"
+                  ><input type="radio" name="appearanceScale" value="1.12" />
+                  Large</label
+                >
+              </div>
+            </div>
+            <button type="button" id="appearanceResetBtn" class="button small">
+              Reset appearance
+            </button>
+          </div>
+        </details>
 
         <div id="placeList" class="place-list"></div>
       </aside>

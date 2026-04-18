@@ -6,6 +6,9 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 from scripts.city_guide_typography import typography_triple
+from scripts.guide_editor_presets import SMOLENSK_BODY_FONT_FAMILY
+from scripts.guide_editor_presets import SMOLENSK_GOOGLE_FONTS_HREF
+from scripts.guide_editor_presets import SMOLENSK_TITLE_FONT_FAMILY
 
 
 @dataclass(frozen=True)
@@ -24,15 +27,9 @@ def fonts_for_city(city_slug: str) -> CityFonts:
     """
     if city_slug == "smolensk":
         return CityFonts(
-            google_fonts_href=(
-                "https://fonts.googleapis.com/css2?"
-                "family=Cormorant+Garamond:wght@600&family=Ponomar&family=Triodion&"
-                "family=Source+Sans+3:wght@400;600&display=swap"
-            ),
-            title_font_family=(
-                "'Triodion', 'Ponomar', 'Cormorant Garamond', serif"
-            ),
-            body_font_family="'Source Sans 3', sans-serif",
+            google_fonts_href=SMOLENSK_GOOGLE_FONTS_HREF,
+            title_font_family=SMOLENSK_TITLE_FONT_FAMILY,
+            body_font_family=SMOLENSK_BODY_FONT_FAMILY,
         )
     if city_slug == "spb":
         return CityFonts(

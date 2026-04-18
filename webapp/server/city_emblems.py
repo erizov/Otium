@@ -107,6 +107,20 @@ def _country_code_for_city(city_slug: str) -> str | None:
         "new_york": "us",
         "montreal": "ca",
         "jerusalem": "il",
+        "vatican": "va",
+        "london": "gb",
+        "amsterdam": "nl",
+        "istanbul": "tr",
+        "tokyo": "jp",
+        "dubai": "ae",
+        "athens": "gr",
+        "lisbon": "pt",
+        "singapore": "sg",
+        "bangkok": "th",
+        "los_angeles": "us",
+        "san_francisco": "us",
+        "dublin": "ie",
+        "copenhagen": "dk",
     }
     return city_to_country.get(city_slug)
 

@@ -111,6 +111,104 @@ _TYPO: dict[str, tuple[str, str, str]] = {
         "'David Libre', serif",
         "'Rubik', sans-serif",
     ),
+    "vatican": (
+        "https://fonts.googleapis.com/css2?"
+        "family=Cinzel:wght@500;600&"
+        "family=Source+Sans+3:wght@400;600&display=swap",
+        "'Cinzel', serif",
+        "'Source Sans 3', sans-serif",
+    ),
+    "london": (
+        "https://fonts.googleapis.com/css2?"
+        "family=Libre+Baskerville:wght@400;700&"
+        "family=Source+Sans+3:wght@400;600&display=swap",
+        "'Libre Baskerville', serif",
+        "'Source Sans 3', sans-serif",
+    ),
+    "amsterdam": (
+        "https://fonts.googleapis.com/css2?"
+        "family=Spectral:wght@500;600&"
+        "family=Source+Sans+3:wght@400;600&display=swap",
+        "'Spectral', serif",
+        "'Source Sans 3', sans-serif",
+    ),
+    "istanbul": (
+        "https://fonts.googleapis.com/css2?"
+        "family=Spectral:wght@500;600&"
+        "family=Source+Sans+3:wght@400;600&display=swap",
+        "'Spectral', serif",
+        "'Source Sans 3', sans-serif",
+    ),
+    "tokyo": (
+        "https://fonts.googleapis.com/css2?"
+        "family=Shippori+Mincho:wght@500;600&"
+        "family=Noto+Sans+JP:wght@400;500;600&display=swap",
+        "'Shippori Mincho', serif",
+        "'Noto Sans JP', sans-serif",
+    ),
+    "dubai": (
+        "https://fonts.googleapis.com/css2?"
+        "family=Marcellus&"
+        "family=Source+Sans+3:wght@400;600&display=swap",
+        "'Marcellus', serif",
+        "'Source Sans 3', sans-serif",
+    ),
+    "athens": (
+        "https://fonts.googleapis.com/css2?"
+        "family=Cinzel:wght@500;600&"
+        "family=Source+Sans+3:wght@400;600&display=swap",
+        "'Cinzel', serif",
+        "'Source Sans 3', sans-serif",
+    ),
+    "lisbon": (
+        "https://fonts.googleapis.com/css2?"
+        "family=Playfair+Display:wght@500;600&"
+        "family=Source+Sans+3:wght@400;600&display=swap",
+        "'Playfair Display', serif",
+        "'Source Sans 3', sans-serif",
+    ),
+    "singapore": (
+        "https://fonts.googleapis.com/css2?"
+        "family=Source+Serif+4:opsz,wght@8..60,500;600&"
+        "family=Source+Sans+3:wght@400;600&display=swap",
+        "'Source Serif 4', serif",
+        "'Source Sans 3', sans-serif",
+    ),
+    "bangkok": (
+        "https://fonts.googleapis.com/css2?"
+        "family=Spectral:wght@500;600&"
+        "family=Source+Sans+3:wght@400;600&display=swap",
+        "'Spectral', serif",
+        "'Source Sans 3', sans-serif",
+    ),
+    "los_angeles": (
+        "https://fonts.googleapis.com/css2?"
+        "family=Libre+Baskerville:wght@400;700&"
+        "family=Source+Sans+3:wght@400;600&display=swap",
+        "'Libre Baskerville', serif",
+        "'Source Sans 3', sans-serif",
+    ),
+    "san_francisco": (
+        "https://fonts.googleapis.com/css2?"
+        "family=Libre+Baskerville:wght@400;700&"
+        "family=Source+Sans+3:wght@400;600&display=swap",
+        "'Libre Baskerville', serif",
+        "'Source Sans 3', sans-serif",
+    ),
+    "dublin": (
+        "https://fonts.googleapis.com/css2?"
+        "family=Libre+Baskerville:wght@400;700&"
+        "family=Source+Sans+3:wght@400;600&display=swap",
+        "'Libre Baskerville', serif",
+        "'Source Sans 3', sans-serif",
+    ),
+    "copenhagen": (
+        "https://fonts.googleapis.com/css2?"
+        "family=Vollkorn:wght@500;600&"
+        "family=Source+Sans+3:wght@400;600&display=swap",
+        "'Vollkorn', serif",
+        "'Source Sans 3', sans-serif",
+    ),
 }
 
 _DEFAULT = (
@@ -134,6 +232,11 @@ def guide_inline_css(title_symbols_class: str, city_slug: str) -> str:
     if city_slug == "jerusalem":
         hebrew_sub = (
             ".sub-he {{ font-family: {body}, {title}, sans-serif; "
+            "font-style: normal; font-size: 1.02rem; }}\n"
+        ).format(body=body, title=title)
+    elif city_slug == "tokyo":
+        hebrew_sub = (
+            ".sub-ja {{ font-family: {body}, {title}, sans-serif; "
             "font-style: normal; font-size: 1.02rem; }}\n"
         ).format(body=body, title=title)
     return """
@@ -166,7 +269,8 @@ h3 {{ font-family: {title}; font-size: 1.22rem; margin: 1.2rem 0 0.35rem;
 h4 {{ font-family: {title}; font-size: 0.95rem; text-transform: uppercase;
   letter-spacing: 0.06em; margin: 1rem 0 0.4rem; color: #333;
   font-weight: 600; }}
-.sub-de, .sub-en, .sub-es, .sub-fr, .sub-ca, .sub-it, .sub-hu, .sub-cs, .sub-he {{
+.sub-de, .sub-en, .sub-es, .sub-fr, .sub-ca, .sub-it, .sub-hu, .sub-cs, .sub-he,
+.sub-ja {{
   color: #555; font-size: 0.95rem; margin: 0 0 0.5rem; font-style: italic; }}
 .place-meta {{ font-size: 0.92rem; color: #353535; margin: 0 0 0.75rem;
   line-height: 1.4; }}

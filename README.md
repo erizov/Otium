@@ -7,7 +7,15 @@ Guides by themes.
 [docs/CITY_GUIDES_README.md](docs/CITY_GUIDES_README.md) (example: **Budapest**). Editorial rules for
 facts and sources (omit unsourced year, style, history, significance): same doc, section **Editorial policy**.
 One-shot **download → validate → build** for all cities:
-[docs/REBUILD_ALL_CITY_GUIDES.md](docs/REBUILD_ALL_CITY_GUIDES.md).
+[docs/REBUILD_ALL_CITY_GUIDES.md](docs/REBUILD_ALL_CITY_GUIDES.md). **Stale PDF
+only:** `python scripts/rebuild_stale_city_guide_pdfs.py` (see
+[docs/CITY_GUIDES_README.md](docs/CITY_GUIDES_README.md) for flags).
+**PDF inventory** (sizes, dates, place counts, image counts; optional
+`output/` tree): `python scripts/report_city_pdf_inventory.py --write`
+writes [docs/CITY_GUIDE_PDF_INVENTORY.md](docs/CITY_GUIDE_PDF_INVENTORY.md);
+omit `--write` to print Markdown to stdout. Use `--no-output-tree` to skip
+the `output/` PDF listing. Custom path:
+`python scripts/report_city_pdf_inventory.py --out path/to/report.md`.
 
 ---
 

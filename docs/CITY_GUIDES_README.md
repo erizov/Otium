@@ -7,6 +7,47 @@ OTIUM-style **per-city** guides live in their own folder: JSON registry, flat
 
 **Rebuild every city in one workflow:** [REBUILD_ALL_CITY_GUIDES.md](REBUILD_ALL_CITY_GUIDES.md).
 
+**Rebuild PDFs only when inputs changed:** after you edit JSON, images, the
+city whitelist, or `scripts/build_<slug>_pdf.py`, run
+[`scripts/rebuild_stale_city_guide_pdfs.py`](../scripts/rebuild_stale_city_guide_pdfs.py).
+It compares the latest modification time under `<slug>/data/*.json`,
+`<slug>/images/**` (common image extensions), `<slug>/docs/SOURCES_WHITELIST.md`,
+and the per-city builder against `<slug>/output/<slug>_guide.pdf`, then invokes
+Playwright builds only for stale slugs (same requirements as a normal PDF
+build: `playwright` + Chromium).
+
+```powershell
+# Preview which guides would rebuild (no builds)
+python scripts/rebuild_stale_city_guide_pdfs.py --dry-run
+
+# Rebuild every auto-discovered city that is out of date
+python scripts/rebuild_stale_city_guide_pdfs.py
+
+# Only some cities
+python scripts/rebuild_stale_city_guide_pdfs.py --cities london tokyo vatican
+
+# Also treat shared modules as inputs (typography, Jerusalem-style PDF glue)
+python scripts/rebuild_stale_city_guide_pdfs.py --include-shared
+```
+
+### Minimum place count (25) and growth tooling
+
+Newer per-city guides target **at least 25** curated places, each with a
+primary `image_rel_path` and `image_source_url` (usually Wikimedia Commons).
+
+- **Grow legacy 12-place packs to 25:** from repo root,
+  `python scripts/grow_city_guides_to_25.py` (uses Commons search; optional
+  `scripts/grow_existing_static_commons.json` overrides search when populated).
+  With only bootstrap runs:
+  `python scripts/grow_city_guides_to_25.py --no-grow --bootstrap minsk kyiv`.
+- **Build the static Commons map** (slow; avoids search rate limits once
+  filled): `python scripts/build_grow_existing_static_commons.py --pause 3.0`.
+- **Scaffold a new city package** (registry + download/validate/build stubs):
+  `python scripts/scaffold_city_guide_package.py <slug> "Display Name"`.
+- **Check every place has an image file on disk:**
+  `python scripts/verify_city_guide_place_images.py` (optional
+  `--min-places 25` to enforce counts).
+
 ---
 
 ## Local web editor (LLM-assisted)
@@ -33,6 +74,13 @@ powershell -ExecutionPolicy Bypass -File scripts/webapp_start.ps1 [-BindHost 127
 
 Open `http://127.0.0.1:8000/<city>` (example: `/smolensk`) and use **Apply** to
 save edits.
+
+**Appearance** (sidebar): choose a **palette** (flag-themed, neutral dark, or
+paper/light), a **font profile** (city default matches guide typography for that
+city; editorial/system are editor-only), and **text size**. Settings are stored
+in the browser (`localStorage`) and do **not** change rebuilt HTML/PDF output;
+guides still use `scripts/city_guide_typography.py` (and Smolensk’s shared font
+href in `scripts/guide_editor_presets.py`).
 
 Stop:
 
@@ -109,15 +157,17 @@ Cormorant for Cyrillic).
 | City slug | Title font (headings) |
 |-----------|------------------------|
 | `berlin` | Grenze Gotisch |
-| `paris` | Playfair Display |
-| `rome`, `venice` | Cinzel |
+| `paris`, `lisbon` | Playfair Display |
+| `rome`, `venice`, `athens`, `vatican` | Cinzel |
 | `florence` | Cormorant Infant |
-| `barcelona`, `madrid` | Marcellus |
-| `budapest`, `prague` | Spectral |
-| `vienna` | Vollkorn |
-| `boston`, `philadelphia`, `new_york` | Libre Baskerville |
+| `barcelona`, `madrid`, `dubai` | Marcellus |
+| `budapest`, `prague`, `amsterdam`, `istanbul`, `bangkok` | Spectral |
+| `vienna`, `copenhagen` | Vollkorn |
+| `boston`, `philadelphia`, `new_york`, `london`, `los_angeles`, `san_francisco`, `dublin` | Libre Baskerville |
 | `montreal` | Cormorant |
 | `jerusalem` | David Libre (titles) · Rubik (body, Hebrew subtitles) |
+| `tokyo` | Shippori Mincho · Noto Sans JP |
+| `singapore` | Source Serif 4 |
 
 <!-- city-guide-stats -->
 ## Registry statistics
@@ -128,12 +178,22 @@ Refresh: `python scripts/report_city_guide_stats.py --write`
 
 | City | Places | Images | obj/place | no year | no style | no addr | no desc | no facts | no history | no sig. |
 |------|-------:|-------:|----------:|--------:|---------:|--------:|---------:|----------:|-----------:|---------:|
+| `amsterdam` | 6 | 8 | 2.0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| `athens` | 5 | 7 | 2.0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| `bangkok` | 5 | 7 | 2.0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 |
 | `barcelona` | 33 | 34 | 1.2 | 33 | 13 | 13 | 13 | 13 | 13 | 13 |
 | `berlin` | 36 | 37 | 1.1 | 36 | 16 | 16 | 16 | 16 | 16 | 16 |
 | `boston` | 30 | 31 | 1.9 | 1 | 1 | 1 | 1 | 1 | 1 | 1 |
 | `budapest` | 31 | 32 | 1.3 | 31 | 11 | 11 | 11 | 11 | 11 | 11 |
+| `copenhagen` | 5 | 7 | 2.0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| `dubai` | 5 | 7 | 2.0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 |
+| `dublin` | 5 | 7 | 2.0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 | `florence` | 34 | 35 | 1.9 | 1 | 1 | 1 | 1 | 1 | 1 | 1 |
+| `istanbul` | 6 | 8 | 2.0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 |
 | `jerusalem` | 23 | 24 | 1.9 | 1 | 1 | 1 | 1 | 1 | 1 | 1 |
+| `lisbon` | 5 | 7 | 2.0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| `london` | 8 | 10 | 2.0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| `los_angeles` | 5 | 7 | 2.0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 |
 | `madrid` | 33 | 34 | 1.2 | 33 | 13 | 13 | 13 | 13 | 13 | 13 |
 | `montreal` | 38 | 39 | 1.9 | 1 | 1 | 1 | 1 | 1 | 1 | 1 |
 | `new_york` | 37 | 38 | 1.9 | 1 | 1 | 1 | 1 | 1 | 1 | 1 |
@@ -141,8 +201,12 @@ Refresh: `python scripts/report_city_guide_stats.py --write`
 | `philadelphia` | 30 | 31 | 1.9 | 30 | 1 | 1 | 30 | 1 | 1 | 1 |
 | `prague` | 34 | 35 | 1.2 | 34 | 14 | 14 | 14 | 14 | 14 | 14 |
 | `rome` | 36 | 37 | 1.1 | 36 | 16 | 16 | 16 | 16 | 16 | 16 |
-| `smolensk` | 51 | 116 | 2.1 | 19 | 4 | 1 | 1 | 1 | 1 | 1 |
+| `san_francisco` | 5 | 7 | 2.0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| `singapore` | 5 | 7 | 2.0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| `smolensk` | 70 | 319 | 3.5 | 35 | 2 | 0 | 0 | 1 | 0 | 0 |
 | `spb` | 314 | 354 | 0.5 | 250 | 250 | 250 | 250 | 250 | 250 | 250 |
+| `tokyo` | 6 | 8 | 2.0 | 1 | 1 | 0 | 0 | 0 | 0 | 0 |
+| `vatican` | 8 | 10 | 2.0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 | `venice` | 35 | 36 | 1.9 | 1 | 1 | 1 | 1 | 1 | 1 | 1 |
 | `vienna` | 33 | 34 | 1.9 | 33 | 1 | 1 | 33 | 1 | 1 | 1 |
 <!-- /city-guide-stats -->
@@ -167,7 +231,10 @@ Replace the slug in script names and flags:
 
 **Cities in this repo:** `smolensk/`, `spb/` (e.g. `download_spb_images.py`,
 `validate_spb_sources.py`, `build_spb_pdf.py`), `prague/`, `budapest/`, `berlin/`,
-`paris/`, `rome/`, `venice/`, `florence/`, `jerusalem/`, `barcelona/`, `madrid/`.
+`paris/`, `rome/`, `venice/`, `florence/`, `jerusalem/`, `barcelona/`, `madrid/`,
+`vatican/`, `london/`, `amsterdam/`, `istanbul/`, `tokyo/`, `dubai/`, `athens/`,
+`lisbon/`, `singapore/`, `bangkok/`, `los_angeles/`, `san_francisco/`, `dublin/`,
+`copenhagen/`.
 **Berlin** (same command pattern as Budapest): `download_berlin_images.py`,
 `validate_berlin_sources.py`, `build_berlin_pdf.py` (`--berlin-root`).
 **Paris:** `download_paris_images.py`, `validate_paris_sources.py`,
