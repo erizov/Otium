@@ -19,6 +19,11 @@ from scripts.city_guide_core import (
     is_substantive_text,
     smallest_same_stem_image_rel,
 )
+from scripts.city_guide_historical_reference_ru import (
+    HERALDRY_CHAPTER_LABEL_RU,
+    historical_reference_section_html,
+    reference_text_ru_for_city,
+)
 from scripts.city_guide_typography import guide_inline_css
 from scripts.city_guide_typography import typography_triple
 
@@ -229,11 +234,13 @@ def heraldry_html(
     title_symbols_class: str,
     title_symbols: tuple[tuple[str, str], ...],
 ) -> str:
+    label_esc = escape(HERALDRY_CHAPTER_LABEL_RU)
     chunks: list[str] = [
-        '<div class="{}" aria-label="City emblem and flag">'.format(
+        '<div class="{}" aria-label="{}">'.format(
             title_symbols_class,
+            label_esc,
         ),
-        '<p class="title-strip-label">City symbols</p>',
+        '<p class="title-strip-label">{}</p>'.format(label_esc),
         '<div class="heraldry-strip heraldry-official">',
     ]
     for rel, alt in title_symbols:
@@ -279,6 +286,11 @@ def build_html(
             len(places),
         ),
     )
+    hist = historical_reference_section_html(
+        reference_text_ru_for_city(city_slug),
+    )
+    if hist:
+        blocks.append(hist)
     for p in places:
         srcs = _image_srcs_for_place(root, p)
         if not srcs and not (

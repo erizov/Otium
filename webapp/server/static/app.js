@@ -297,9 +297,11 @@ async function initAppearance() {
 }
 
 let state = {
-  city: window.__CITY__ || "smolensk",
+  city: window.__CITY__ || "moscow",
   places: [],
   place: null,
+  activeNav: null,
+  guideSections: null,
   providers: [],
   ollamaModels: [],
   openaiModels: [],
@@ -401,18 +403,30 @@ function renderPlaceList(filterText) {
     );
   });
 
-  list.innerHTML = items
-    .map((p) => {
-      const active = state.place && state.place.slug === p.slug ? "active" : "";
-      const meta = [p.category, p.slug].filter(Boolean).join(" · ");
-      return `<div class="place-item ${active}" data-slug="${escapeAttr(
-        p.slug || ""
-      )}">
+  let chapterHtml = "";
+  if (state.guideSections) {
+    const gs = state.guideSections;
+    const hAct = state.activeNav === "__heraldry__" ? "active" : "";
+    const hiAct = state.activeNav === "__history__" ? "active" : "";
+    const ht = escapeHtml(gs.heraldry_title || "");
+    const hit = escapeHtml(gs.history_title || "");
+    chapterHtml = `<div class="place-item nav-chapter ${hAct}" data-slug="__heraldry__"><div class="name">${ht}</div><div class="meta">титул PDF</div></div><div class="place-item nav-chapter ${hiAct}" data-slug="__history__"><div class="name">${hit}</div><div class="meta">титул PDF</div></div>`;
+  }
+
+  list.innerHTML =
+    chapterHtml +
+    items
+      .map((p) => {
+        const active = state.activeNav === p.slug ? "active" : "";
+        const meta = [p.category, p.slug].filter(Boolean).join(" · ");
+        return `<div class="place-item ${active}" data-slug="${escapeAttr(
+          p.slug || ""
+        )}">
         <div class="name">${escapeHtml(placeName(p))}</div>
         <div class="meta">${escapeHtml(meta)}</div>
       </div>`;
-    })
-    .join("");
+      })
+      .join("");
 
   list.querySelectorAll(".place-item").forEach((node) => {
     node.addEventListener("click", () => {
@@ -422,7 +436,71 @@ function renderPlaceList(filterText) {
   });
 }
 
+function showPlaceWorkspace() {
+  const pw = el("placeWorkspace");
+  const cw = el("chapterWorkspace");
+  if (pw) pw.hidden = false;
+  if (cw) cw.hidden = true;
+}
+
+function showChapterWorkspace() {
+  const pw = el("placeWorkspace");
+  const cw = el("chapterWorkspace");
+  if (pw) pw.hidden = true;
+  if (cw) cw.hidden = false;
+}
+
+function renderChapter(navSlug) {
+  showChapterWorkspace();
+  const gs = state.guideSections;
+  if (!gs) {
+    el("placeTitle").textContent = "Главы гида";
+    el("placeSubtitle").textContent = "Нет данных";
+    return;
+  }
+  if (navSlug === "__heraldry__") {
+    el("placeTitle").textContent = gs.heraldry_title || "";
+    el("placeSubtitle").textContent = "Просмотр · как в PDF";
+    const hch = el("chapterCardHeading");
+    if (hch) {
+      hch.textContent = "";
+      hch.style.display = "none";
+    }
+    const imgs = gs.heraldry_images || [];
+    el("chapterImages").innerHTML = imgs.length
+      ? imgs
+          .map(
+            (im) =>
+              `<figure class="chapter-herald-fig"><div class="place-image chapter-herald"><img src="${escapeAttr(
+                im.src
+              )}" alt="${escapeAttr(im.alt || "")}" loading="lazy" /></div><figcaption class="chapter-herald-cap">${escapeHtml(
+                im.alt || ""
+              )}</figcaption></figure>`
+          )
+          .join("")
+      : '<div class="muted">Нет изображений герба или флага в каталоге images/.</div>';
+    el("chapterCardBody").innerHTML = "";
+    return;
+  }
+  if (navSlug === "__history__") {
+    const htt = gs.history_title || "";
+    el("placeTitle").textContent = htt;
+    el("placeSubtitle").textContent = "Просмотр · как в PDF";
+    const hch2 = el("chapterCardHeading");
+    if (hch2) {
+      hch2.style.display = "";
+      hch2.textContent = htt;
+    }
+    el("chapterImages").innerHTML = "";
+    const paras = gs.history_paragraphs || [];
+    el("chapterCardBody").innerHTML = paras.length
+      ? paras.map((p) => `<p>${escapeHtml(p)}</p>`).join("")
+      : '<div class="muted">Нет текста.</div>';
+  }
+}
+
 function renderPlace(place) {
+  showPlaceWorkspace();
   el("placeTitle").textContent = placeName(place);
   el("placeSubtitle").textContent = placeSubtitle(place);
 
@@ -531,7 +609,22 @@ async function addExtraImage() {
 }
 
 function selectPlace(slug) {
+  if (slug === "__heraldry__" || slug === "__history__") {
+    state.activeNav = slug;
+    state.place = null;
+    renderPlaceList(el("search").value);
+    renderChapter(slug);
+    setStatus("", "ok");
+    return;
+  }
   const place = state.places.find((p) => p.slug === slug) || state.places[0];
+  if (!place) {
+    state.activeNav = null;
+    state.place = null;
+    renderPlaceList(el("search").value);
+    return;
+  }
+  state.activeNav = place.slug;
   state.place = place;
   renderPlaceList(el("search").value);
   renderPlace(place);
@@ -641,11 +734,27 @@ async function generateDraft() {
   }
 }
 
+async function loadGuideSections() {
+  try {
+    state.guideSections = await jsonGet(
+      `/api/${state.city}/guide-sections`
+    );
+  } catch {
+    state.guideSections = null;
+  }
+}
+
 async function loadPlaces() {
   const data = await jsonGet(`/api/${state.city}/places`);
   state.places = data.places || [];
   renderPlaceList("");
-  selectPlace((state.places[0] || {}).slug);
+  const first = (state.places[0] || {}).slug;
+  if (first) {
+    selectPlace(first);
+  } else {
+    state.activeNav = null;
+    state.place = null;
+  }
 }
 
 function getModeValue(name) {
@@ -751,6 +860,7 @@ async function init() {
 
   await loadProviders();
   await loadModelsForProvider(el("providerSelect").value);
+  await loadGuideSections();
   await loadPlaces();
 }
 

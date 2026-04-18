@@ -83,6 +83,16 @@ def _fetch_bytes(
     return "ok", data
 
 
+def _dedupe_urls_keep_order(urls: list[str]) -> list[str]:
+    seen: set[str] = set()
+    out: list[str] = []
+    for u in urls:
+        if u not in seen:
+            seen.add(u)
+            out.append(u)
+    return out
+
+
 def _download_place_image(
     urls: list[str],
     dest: Path,
@@ -126,7 +136,7 @@ def download_jerusalem_style_images(
     city_root: Path,
     places: Sequence[dict[str, Any]],
     whitelist_path: Path,
-    title_page_assets: Sequence[tuple[str, str]],
+    title_page_assets: Sequence[tuple[str, str | Sequence[str]]],
     args: argparse.Namespace,
     url_is_whitelisted_fn: Callable[..., bool],
 ) -> int:
@@ -139,28 +149,33 @@ def download_jerusalem_style_images(
     else:
         thumb_w = args.thumb_width if args.thumb_width > 0 else None
 
-    todo: list[tuple[str, str, Path]] = []
+    todo: list[tuple[str, list[str], Path]] = []
     n_incomplete = 0
     n_not_whitelisted = 0
     n_already_on_disk = 0
 
-    def _queue(url: str, rel: str, label: str) -> None:
+    def _queue_urls(label: str, rel: str, source_urls: Sequence[str]) -> None:
         nonlocal n_not_whitelisted, n_already_on_disk
-        if not args.no_whitelist_check and not url_is_whitelisted_fn(
-            url, whitelist_path=wpath,
-        ):
-            n_not_whitelisted += 1
-            print(
-                "skip {}: URL not whitelisted: {}".format(label, url),
-                file=sys.stderr,
-            )
+        allowed: list[str] = []
+        for url in source_urls:
+            if not args.no_whitelist_check and not url_is_whitelisted_fn(
+                url, whitelist_path=wpath,
+            ):
+                n_not_whitelisted += 1
+                print(
+                    "skip {}: URL not whitelisted: {}".format(label, url),
+                    file=sys.stderr,
+                )
+                continue
+            allowed.append(url)
+        if not allowed:
             return
         dest = root / rel
         if dest.is_file() and not args.force:
             n_already_on_disk += 1
             print("exists: {}".format(rel))
             return
-        todo.append((label, url, dest))
+        todo.append((label, allowed, dest))
 
     for place in places:
         slug = place.get("slug", "?")
@@ -173,7 +188,7 @@ def download_jerusalem_style_images(
                 file=sys.stderr,
             )
             continue
-        _queue(url, rel, str(slug))
+        _queue_urls(str(slug), rel, (url,))
         for j, extra in enumerate(place.get("additional_images") or [], start=1):
             eu = extra.get("image_source_url")
             er = extra.get("image_rel_path")
@@ -183,18 +198,29 @@ def download_jerusalem_style_images(
                     file=sys.stderr,
                 )
                 continue
-            _queue(eu, er, "{}:extra{}".format(slug, j))
+            _queue_urls("{}:extra{}".format(slug, j), er, (eu,))
 
-    for rel, url in title_page_assets:
+    for rel, url_spec in title_page_assets:
         short = rel.replace("images/", "").replace("/", "_")[:24]
-        _queue(url, rel, "title:{}".format(short))
+        if isinstance(url_spec, str):
+            urls = (url_spec,)
+        else:
+            urls = tuple(url_spec)
+        _queue_urls("title:{}".format(short), rel, urls)
 
     if not todo:
         n = len(places)
-        if n == 0:
+        n_title_specs = len(title_page_assets)
+        if n == 0 and n_title_specs == 0:
             print("No places in registry.", file=sys.stderr)
+        elif n_title_specs > 0 and n_already_on_disk >= n_title_specs:
+            print(
+                "All {} title asset(s) already on disk; use --force to "
+                "re-download.".format(n_title_specs),
+            )
         elif (
-            n_already_on_disk == n
+            n > 0
+            and n_already_on_disk == n
             and n_incomplete == 0
             and n_not_whitelisted == 0
         ):
@@ -223,11 +249,14 @@ def download_jerusalem_style_images(
         print("Full-size URLs + {:.1f}s delay.".format(args.delay))
 
     ok_n = err_n = 0
-    for i, (slug, url, dest) in enumerate(todo):
+    for i, (slug, source_urls, dest) in enumerate(todo):
         if slug.startswith("title:"):
-            cands = [url]
+            cands: list[str] = []
+            for u in source_urls:
+                cands.extend(_candidate_urls(u, thumb_w))
+            cands = _dedupe_urls_keep_order(cands)
         else:
-            cands = _candidate_urls(url, thumb_w)
+            cands = _candidate_urls(source_urls[0], thumb_w)
         ok, msg = _download_place_image(
             cands,
             dest,

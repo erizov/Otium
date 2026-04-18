@@ -21,6 +21,11 @@ from scripts.build_pdf import (
 )
 from scripts.city_guide_core import MIN_IMAGE_BYTES, is_substantive_text, smallest_same_stem_image_rel
 from scripts.city_guide_typography import guide_inline_css, typography_triple
+from scripts.city_guide_historical_reference_ru import (
+    HERALDRY_CHAPTER_LABEL_RU,
+    historical_reference_section_html,
+    reference_text_ru_for_city,
+)
 
 VENICE_HTML_NAME = "venice_guide.html"
 VENICE_PDF_NAME = "venice_guide.pdf"
@@ -28,11 +33,11 @@ VENICE_PDF_NAME = "venice_guide.pdf"
 _TITLE_SYMBOLS: tuple[tuple[str, str], ...] = (
     (
         "images/guide_coat_of_arms.svg",
-        "Coat of arms of the Republic of Venice (Wikimedia Commons)",
+        "Coat of arms of the Republic of Venice",
     ),
     (
         "images/guide_flag.svg",
-        "Flag of the Republic of Venice (Wikimedia Commons)",
+        "Flag of the Republic of Venice",
     ),
 )
 
@@ -221,7 +226,7 @@ def _heraldry_html(root: Path) -> str:
     chunks: list[str] = [
         '<div class="venice-title-symbols" '
         'aria-label="Venice historical coat of arms and flag">',
-        '<p class="title-strip-label">City symbols</p>',
+        '<p class="title-strip-label">{}</p>'.format(escape(HERALDRY_CHAPTER_LABEL_RU)),
         '<div class="heraldry-strip heraldry-official">',
     ]
     for rel, alt in _TITLE_SYMBOLS:
@@ -254,6 +259,11 @@ def _build_html(root: Path, places: list[VenicePlace]) -> str:
         "<p class=\"lead\">Guide. Places in this edition: {}.</p>"
         "</header>".format(_heraldry_html(root), len(places)),
     )
+    hist = historical_reference_section_html(
+        reference_text_ru_for_city("venice"),
+    )
+    if hist:
+        blocks.append(hist)
     for p in places:
         srcs = _image_srcs_for_place(root, p)
         if not srcs and not (

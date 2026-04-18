@@ -11,6 +11,8 @@ from webapp.server.country_emblem_download import (
     is_placeholder_emblem,
 )
 
+from scripts.city_guide_heraldry_images import collect_moscow_heraldry_from_output
+
 
 @dataclass(frozen=True)
 class CityEmblems:
@@ -34,6 +36,9 @@ def emblems_for_city(project_root: Path, city_slug: str) -> CityEmblems:
 
     Convention used by the per-city guide builders: `images/guide_coat_of_arms.*`
     and `images/guide_flag.*` inside each `<city>/images/` directory.
+
+    For Moscow, if those files are missing, titul assets under `output/images/`
+    are used when present (same set as the combined PDF titul).
 
     Note: `images/guide_flag.*` is often a city flag in this repo; the country
     flag is provided by this webapp from `webapp/server/static/flags/`.
@@ -80,6 +85,12 @@ def emblems_for_city(project_root: Path, city_slug: str) -> CityEmblems:
     city_flag_url = None
     if city_flag_rel and (city_root / city_flag_rel).is_file():
         city_flag_url = f"/city/{city_slug}/{city_flag_rel}"
+    if city_slug == "moscow":
+        strip = collect_moscow_heraldry_from_output(project_root)
+        if strip and not city_url:
+            city_url = strip[0]["src"]
+        if strip and len(strip) > 1 and not city_flag_url:
+            city_flag_url = strip[1]["src"]
     return CityEmblems(
         city_emblem_url=city_url,
         city_flag_url=city_flag_url,
@@ -92,6 +103,7 @@ def _country_code_for_city(city_slug: str) -> str | None:
     city_to_country: dict[str, str] = {
         "smolensk": "ru",
         "spb": "ru",
+        "moscow": "ru",
         "berlin": "de",
         "paris": "fr",
         "rome": "it",

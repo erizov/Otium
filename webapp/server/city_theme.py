@@ -46,7 +46,7 @@ def theme_for_city(city_slug: str) -> CityTheme:
     This is intentionally approximate and UI-focused (not a vexillology tool).
     """
     # Russia (Smolensk, Saint Petersburg)
-    if city_slug in {"smolensk", "spb"}:
+    if city_slug in {"smolensk", "spb", "moscow"}:
         return _theme_for_flag("#ffffff", "#1c57c8", "#d11f2d", accent="#7cc7ff")
     # Germany
     if city_slug == "berlin":

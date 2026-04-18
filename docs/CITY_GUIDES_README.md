@@ -93,6 +93,24 @@ powershell -ExecutionPolicy Bypass -File scripts/webapp_stop.ps1
 Any city folder that contains `data/<city>_places.json` will automatically show
 up in the UI’s City dropdown (no code changes needed).
 
+### Moscow titul assets and heraldry in the editor
+
+Moscow follows the same `data/<slug>_places.json` + `scripts/build_<slug>_pdf.py`
+layout (`scripts/build_moscow_pdf.py`). The PDF titul and the web chapter
+**«Исторические и справочные гербы»** use heraldry files under **`output/images/`**
+(for example `title_msk_*.svg` / `.jpg`). The dev server mounts that tree at
+**`/moscow-media/<path relative to output/>`**, so the editor can show coats
+even when **`moscow/images/guide_coat_of_arms.*`** is absent (see
+`scripts/city_guide_heraldry_images.py` and `webapp/server/city_emblems.py`).
+
+Download titul images into `output/images/`:
+
+```powershell
+python scripts/download_moscow_title_assets.py
+```
+
+Use `--help` for output directory and file list.
+
 ## Editorial policy (facts and sources)
 
 Applies to **all** per-city guides (JSON registries, detail files, and any prose

@@ -19,6 +19,11 @@ from scripts.build_pdf import (
     _strip_empty_pdf_pages,
     _strip_pdf_metadata,
 )
+from scripts.city_guide_historical_reference_ru import (
+    HERALDRY_CHAPTER_LABEL_RU,
+    historical_reference_section_html,
+    reference_text_ru_for_city,
+)
 
 MIN_IMAGE_BYTES = 500
 SPB_HTML_NAME = "spb_guide.html"
@@ -410,7 +415,9 @@ def _heraldry_html(spb_root: Path) -> str:
     chunks: list[str] = [
         '<div class="spb-title-symbols" aria-label="Гербы, флаг и вузы '
         'Санкт-Петербурга">',
-        '<p class="title-strip-label">Исторические гербы</p>',
+        '<p class="title-strip-label">{}</p>'.format(
+            escape(HERALDRY_CHAPTER_LABEL_RU),
+        ),
         '<div class="heraldry-strip heraldry-history">',
     ]
     for rel, alt in _TITLE_HISTORY_COATS:
@@ -490,6 +497,11 @@ def _build_html(spb_root: Path, places: list[SpbPlace]) -> str:
         "<p class=\"lead\">Путеводитель. Объектов в этом выпуске: {}.</p>"
         "</header>".format(_heraldry_html(spb_root), len(places)),
     )
+    hist = historical_reference_section_html(
+        reference_text_ru_for_city("spb"),
+    )
+    if hist:
+        blocks.append(hist)
     last_cat: str | None = None
     for p in places:
         cat = p.get("category", "misc")
@@ -518,6 +530,10 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
   max-width: 40rem; }
 .guide-title { page-break-after: always; margin-bottom: 1rem;
   page-break-inside: avoid; }
+.historical-reference { margin: 0.75rem 0 1.15rem;
+  page-break-inside: auto; }
+.historical-reference h2 { font-family: 'Cormorant Garamond', serif;
+  font-size: 1.28rem; font-weight: 600; margin: 0.4rem 0 0.55rem; }
 .spb-title-symbols { margin-bottom: 0.45rem; }
 .title-strip-label { font-size: 0.72rem; text-transform: uppercase;
   letter-spacing: 0.08em; color: #555; margin: 0.5rem 0 0.25rem;

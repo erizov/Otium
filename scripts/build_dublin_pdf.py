@@ -13,17 +13,11 @@ if str(_PROJECT_ROOT) not in sys.path:
 from dublin.data.places_registry import DUBLIN_PLACES
 
 from scripts.city_guide_jerusalem_style_pdf import run_build_pdf_main
-
-_TITLE_SYMBOLS: tuple[tuple[str, str], ...] = (
-    (
-        "images/guide_coat_of_arms.svg",
-        "City emblem (local seed SVG)",
-    ),
-    (
-        "images/guide_flag.svg",
-        "Flag (local seed SVG)",
-    ),
+from scripts.city_guide_title_heraldry_assets import (
+    title_symbols_for_slug,
 )
+
+_TITLE_SYMBOLS = title_symbols_for_slug("dublin")
 
 
 def main() -> int:

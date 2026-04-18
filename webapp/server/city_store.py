@@ -52,6 +52,14 @@ def discover_cities(project_root: Path) -> list[str]:
     return sorted(out)
 
 
+def cities_ui_order(project_root: Path) -> list[str]:
+    """Same slugs as ``discover_cities``, with Moscow first when present."""
+    cities = discover_cities(project_root)
+    if "moscow" in cities:
+        return ["moscow"] + sorted(c for c in cities if c != "moscow")
+    return cities
+
+
 def city_paths(project_root: Path, city_slug: str) -> CityPaths:
     root = project_root / city_slug
     return CityPaths(city_slug=city_slug, city_root=root)

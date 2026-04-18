@@ -17,11 +17,11 @@ from scripts.city_guide_jerusalem_style_pdf import run_build_pdf_main
 _TITLE_SYMBOLS: tuple[tuple[str, str], ...] = (
     (
         "images/guide_coat_of_arms.svg",
-        "Coat of arms of Vatican City (Wikimedia Commons)",
+        "Coat of arms of Vatican City",
     ),
     (
         "images/guide_flag.svg",
-        "Flag of Vatican City (Wikimedia Commons)",
+        "Flag of Vatican City",
     ),
 )
 

@@ -22,6 +22,7 @@ from fastapi.templating import Jinja2Templates
 
 from webapp.server.city_store import (
     apply_place_patch,
+    cities_ui_order,
     city_paths,
     discover_cities,
     load_city_places,
@@ -36,6 +37,12 @@ from webapp.server.llm.types import PlaceDraft
 from webapp.server.llm.types import coerce_links
 from webapp.server.llm.types import coerce_str_list
 
+from scripts.city_guide_heraldry_images import collect_heraldry_images
+from scripts.city_guide_historical_reference_ru import (
+    HERALDRY_CHAPTER_LABEL_RU,
+    HISTORICAL_SECTION_TITLE_RU,
+    reference_text_ru_for_any_city,
+)
 from scripts.guide_editor_presets import NEUTRAL_PALETTE
 from scripts.guide_editor_presets import PAPER_PALETTE
 from scripts.guide_editor_presets import static_font_profiles
@@ -75,15 +82,25 @@ app.mount(
     name="static",
 )
 
+_output_dir = PROJECT_ROOT / "output"
+if _output_dir.is_dir():
+    app.mount(
+        "/moscow-media",
+        StaticFiles(directory=str(_output_dir)),
+        name="moscow-media",
+    )
+
 
 @app.get("/", include_in_schema=False)
 def home() -> RedirectResponse:
-    return RedirectResponse(url="/smolensk", status_code=307)
+    cities = discover_cities(PROJECT_ROOT)
+    default = "moscow" if "moscow" in cities else "smolensk"
+    return RedirectResponse(url="/{}".format(default), status_code=307)
 
 
 @app.get("/api/cities")
 def api_cities() -> dict[str, Any]:
-    return {"cities": discover_cities(PROJECT_ROOT)}
+    return {"cities": cities_ui_order(PROJECT_ROOT)}
 
 
 @app.get("/api/{city_slug}/editor-presets")
@@ -126,12 +143,45 @@ def city_page(request: Request, city_slug: str) -> HTMLResponse:
         {
             "request": request,
             "city_slug": city_slug,
-            "cities": cities,
+            "cities": cities_ui_order(PROJECT_ROOT),
             "fonts": fonts,
             "theme": theme,
             "emblems": emblems,
         },
     )
+
+
+@app.get("/api/{city_slug}/guide-sections")
+def api_guide_sections(city_slug: str) -> dict[str, Any]:
+    """Heraldry assets + Russian historical blurb (same sources as PDF titul)."""
+    cities = discover_cities(PROJECT_ROOT)
+    if city_slug not in cities:
+        raise HTTPException(status_code=404, detail="Unknown city")
+    heraldry_images = collect_heraldry_images(PROJECT_ROOT, city_slug)
+    if not heraldry_images:
+        emblems = emblems_for_city(PROJECT_ROOT, city_slug)
+        if emblems.city_emblem_url:
+            heraldry_images.append(
+                {
+                    "src": emblems.city_emblem_url,
+                    "alt": "Герб (guide_coat_of_arms)",
+                }
+            )
+        if emblems.city_flag_url:
+            heraldry_images.append(
+                {
+                    "src": emblems.city_flag_url,
+                    "alt": "Флаг (guide_flag)",
+                }
+            )
+    body = reference_text_ru_for_any_city(city_slug)
+    paras = [p.strip() for p in body.split("\n\n") if p.strip()]
+    return {
+        "heraldry_title": HERALDRY_CHAPTER_LABEL_RU,
+        "heraldry_images": heraldry_images,
+        "history_title": HISTORICAL_SECTION_TITLE_RU,
+        "history_paragraphs": paras,
+    }
 
 
 @app.get("/api/{city_slug}/places")
@@ -141,10 +191,16 @@ def api_places(city_slug: str) -> dict[str, Any]:
         raise HTTPException(status_code=404, detail="Unknown city")
     places = load_city_places(PROJECT_ROOT, city_slug)
     paths = city_paths(PROJECT_ROOT, city_slug)
+    if city_slug == "moscow":
+        media_base = "/moscow-media"
+        images_root = str(PROJECT_ROOT / "output")
+    else:
+        media_base = "/city/{}".format(city_slug)
+        images_root = str(paths.images_dir)
     for p in places:
         rel = str(p.get("image_rel_path") or "").replace("\\", "/").lstrip("/")
         if rel:
-            p["image_url"] = f"/city/{city_slug}/{rel}"
+            p["image_url"] = "{}/{}".format(media_base, rel)
         extra = p.get("additional_images") or []
         if isinstance(extra, list):
             for it in extra:
@@ -156,8 +212,12 @@ def api_places(city_slug: str) -> dict[str, Any]:
                     .lstrip("/")
                 )
                 if r2:
-                    it["image_url"] = f"/city/{city_slug}/{r2}"
-    return {"city": city_slug, "places": places, "images_root": str(paths.images_dir)}
+                    it["image_url"] = "{}/{}".format(media_base, r2)
+    return {
+        "city": city_slug,
+        "places": places,
+        "images_root": images_root,
+    }
 
 
 @app.post("/api/{city_slug}/places/{slug}/apply")

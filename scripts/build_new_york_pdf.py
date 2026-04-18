@@ -21,6 +21,11 @@ from scripts.build_pdf import (
 )
 from scripts.city_guide_core import MIN_IMAGE_BYTES, is_substantive_text, smallest_same_stem_image_rel
 from scripts.city_guide_typography import guide_inline_css, typography_triple
+from scripts.city_guide_historical_reference_ru import (
+    HERALDRY_CHAPTER_LABEL_RU,
+    historical_reference_section_html,
+    reference_text_ru_for_city,
+)
 
 NEW_YORK_HTML_NAME = "new_york_guide.html"
 NEW_YORK_PDF_NAME = "new_york_guide.pdf"
@@ -28,11 +33,11 @@ NEW_YORK_PDF_NAME = "new_york_guide.pdf"
 _TITLE_SYMBOLS: tuple[tuple[str, str], ...] = (
     (
         "images/guide_coat_of_arms.svg",
-        "Seal of New York City (Wikimedia Commons)",
+        "Seal of New York City",
     ),
     (
         "images/guide_flag.svg",
-        "Flag of New York City (Wikimedia Commons)",
+        "Flag of New York City",
     ),
 )
 
@@ -221,7 +226,7 @@ def _heraldry_html(root: Path) -> str:
     chunks: list[str] = [
         '<div class="new-york-title-symbols" '
         'aria-label="New York City seal and flag">',
-        '<p class="title-strip-label">City symbols</p>',
+        '<p class="title-strip-label">{}</p>'.format(escape(HERALDRY_CHAPTER_LABEL_RU)),
         '<div class="heraldry-strip heraldry-official">',
     ]
     for rel, alt in _TITLE_SYMBOLS:
@@ -254,6 +259,11 @@ def _build_html(root: Path, places: list[NewYorkPlace]) -> str:
         "<p class=\"lead\">Guide. Places in this edition: {}.</p>"
         "</header>".format(_heraldry_html(root), len(places)),
     )
+    hist = historical_reference_section_html(
+        reference_text_ru_for_city("new_york"),
+    )
+    if hist:
+        blocks.append(hist)
     for p in places:
         srcs = _image_srcs_for_place(root, p)
         if not srcs and not (

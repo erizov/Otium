@@ -23,9 +23,10 @@ def fonts_for_city(city_slug: str) -> CityFonts:
     Pick the same title/body fonts as the city guide generators.
 
     Most Latin-script cities are configured in `scripts/city_guide_typography.py`.
-    Smolensk and SPB have dedicated styles, so we mirror their known stacks.
+    Smolensk, Moscow, and SPB have dedicated stacks; Moscow matches Smolensk
+    Cyrillic-friendly fonts. Other cities use ``city_guide_typography``.
     """
-    if city_slug == "smolensk":
+    if city_slug in {"smolensk", "moscow"}:
         return CityFonts(
             google_fonts_href=SMOLENSK_GOOGLE_FONTS_HREF,
             title_font_family=SMOLENSK_TITLE_FONT_FAMILY,

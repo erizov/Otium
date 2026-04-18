@@ -142,9 +142,10 @@ from {slug}.whitelist import url_is_whitelisted
 
 from scripts.city_guide_jerusalem_style_images import (
     add_download_image_args,
-)
-from scripts.city_guide_jerusalem_style_images import (
     download_jerusalem_style_images,
+)
+from scripts.city_guide_title_heraldry_assets import (
+    title_page_assets_for_download_arg,
 )
 
 
@@ -165,7 +166,7 @@ def main() -> int:
         city_root=args.city_root,
         places={attr},
         whitelist_path=default_whitelist_path(),
-        title_page_assets=(),
+        title_page_assets=title_page_assets_for_download_arg("{slug}"),
         args=args,
         url_is_whitelisted_fn=url_is_whitelisted,
     )
@@ -235,17 +236,11 @@ if str(_PROJECT_ROOT) not in sys.path:
 from {slug}.data.places_registry import {attr}
 
 from scripts.city_guide_jerusalem_style_pdf import run_build_pdf_main
-
-_TITLE_SYMBOLS: tuple[tuple[str, str], ...] = (
-    (
-        "images/guide_coat_of_arms.svg",
-        "City emblem (local seed SVG)",
-    ),
-    (
-        "images/guide_flag.svg",
-        "Flag (local seed SVG)",
-    ),
+from scripts.city_guide_title_heraldry_assets import (
+    title_symbols_for_slug,
 )
+
+_TITLE_SYMBOLS = title_symbols_for_slug("{slug}")
 
 
 def main() -> int:
@@ -313,6 +308,11 @@ def scaffold(slug: str, display: str) -> None:
         encoding="utf-8",
     )
     print("scaffolded", slug)
+    print(
+        "Add REFERENCE_TEXT_RU['{}'] in "
+        "scripts/city_guide_historical_reference_ru.py "
+        "before building PDF.".format(slug),
+    )
 
 
 def main() -> int:

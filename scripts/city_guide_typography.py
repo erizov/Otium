@@ -250,6 +250,10 @@ body {{ font-family: {body}; margin: 2rem;
   max-width: 38rem; font-size: 0.95rem; }}
 .guide-title {{ page-break-after: auto; margin-bottom: 0.55rem;
   page-break-inside: avoid; }}
+.historical-reference {{ margin: 0.75rem 0 1.15rem;
+  page-break-inside: auto; }}
+.historical-reference h2 {{ font-family: {title}; font-size: 1.28rem;
+  font-weight: 600; margin: 0.4rem 0 0.55rem; }}
 .{tclass} {{ margin-bottom: 0.28rem; }}
 .title-strip-label {{ font-size: 0.72rem; text-transform: uppercase;
   letter-spacing: 0.08em; color: #555; margin: 0.5rem 0 0.25rem;

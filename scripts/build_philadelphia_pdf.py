@@ -24,6 +24,11 @@ from scripts.build_pdf import (
 )
 from scripts.city_guide_core import MIN_IMAGE_BYTES, is_substantive_text, smallest_same_stem_image_rel
 from scripts.city_guide_typography import guide_inline_css, typography_triple
+from scripts.city_guide_historical_reference_ru import (
+    HERALDRY_CHAPTER_LABEL_RU,
+    historical_reference_section_html,
+    reference_text_ru_for_city,
+)
 
 PHILADELPHIA_HTML_NAME = "philadelphia_guide.html"
 PHILADELPHIA_PDF_NAME = "philadelphia_guide.pdf"
@@ -31,11 +36,11 @@ PHILADELPHIA_PDF_NAME = "philadelphia_guide.pdf"
 _TITLE_SYMBOLS: tuple[tuple[str, str], ...] = (
     (
         "images/guide_coat_of_arms.svg",
-        "Seal of Philadelphia, Pennsylvania (Wikimedia Commons)",
+        "Seal of Philadelphia, Pennsylvania",
     ),
     (
         "images/guide_flag.svg",
-        "Flag of Philadelphia, Pennsylvania (Wikimedia Commons)",
+        "Flag of Philadelphia, Pennsylvania",
     ),
 )
 
@@ -224,7 +229,7 @@ def _heraldry_html(root: Path) -> str:
     chunks: list[str] = [
         '<div class="philadelphia-title-symbols" '
         'aria-label="Philadelphia seal and city flag">',
-        '<p class="title-strip-label">City symbols</p>',
+        '<p class="title-strip-label">{}</p>'.format(escape(HERALDRY_CHAPTER_LABEL_RU)),
         '<div class="heraldry-strip heraldry-official">',
     ]
     for rel, alt in _TITLE_SYMBOLS:
@@ -257,6 +262,11 @@ def _build_html(root: Path, places: list[PhiladelphiaPlace]) -> str:
         "<p class=\"lead\">Guide. Places in this edition: {}.</p>"
         "</header>".format(_heraldry_html(root), len(places)),
     )
+    hist = historical_reference_section_html(
+        reference_text_ru_for_city("philadelphia"),
+    )
+    if hist:
+        blocks.append(hist)
     for p in places:
         srcs = _image_srcs_for_place(root, p)
         if not srcs and not (

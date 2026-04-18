@@ -52,6 +52,10 @@ powershell -ExecutionPolicy Bypass -File scripts/webapp_stop.ps1
 
 - **Extendable for all cities**: any folder matching
   `<city>/data/<city>_places.json` automatically appears in the City dropdown.
+- **Moscow**: titul / heraldry files for the editor and PDF often live under
+  **`output/images/`** and are served as **`/moscow-media/…`**. If the heraldry
+  chapter is empty, run **`python scripts/download_moscow_title_assets.py`**
+  (see `docs/CITY_GUIDES_README.md`, *Moscow titul assets*).
 - **Rebuild HTML/PDF** after edits:
   - `python scripts/build_<city>_pdf.py --html-only`
 
