@@ -7,6 +7,11 @@ OTIUM-style **per-city** guides live in their own folder: JSON registry, flat
 
 **Rebuild every city in one workflow:** [REBUILD_ALL_CITY_GUIDES.md](REBUILD_ALL_CITY_GUIDES.md).
 
+After a successful PDF build, each ``scripts/build_<slug>_pdf.py`` (and the
+shared Jerusalem-style helper) copies the PDF to **`final_guides/<same
+filename>.pdf`** at the repo root so all city guides collect in one folder
+(local only; **`final_guides/`** is gitignored).
+
 **Rebuild PDFs only when inputs changed:** after you edit JSON, images, the
 city whitelist, or `scripts/build_<slug>_pdf.py`, run
 [`scripts/rebuild_stale_city_guide_pdfs.py`](../scripts/rebuild_stale_city_guide_pdfs.py).

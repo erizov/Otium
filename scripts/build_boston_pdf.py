@@ -19,7 +19,12 @@ from scripts.build_pdf import (
     _strip_empty_pdf_pages,
     _strip_pdf_metadata,
 )
-from scripts.city_guide_core import MIN_IMAGE_BYTES, is_substantive_text, smallest_same_stem_image_rel
+from scripts.city_guide_core import (
+    MIN_IMAGE_BYTES,
+    copy_built_guide_pdf_to_final_guides,
+    is_substantive_text,
+    smallest_same_stem_image_rel,
+)
 from scripts.city_guide_typography import guide_inline_css, typography_triple
 from scripts.city_guide_historical_reference_ru import (
     HERALDRY_CHAPTER_LABEL_RU,
@@ -358,6 +363,7 @@ def main() -> int:
     ):
         _strip_empty_pdf_pages(pdf_path)
         _strip_pdf_metadata(pdf_path)
+        copy_built_guide_pdf_to_final_guides(_PROJECT_ROOT, pdf_path)
         print("Written:", pdf_path)
         print("Places in PDF: {}".format(len(places)))
         return 0

@@ -37,6 +37,7 @@ if str(_PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(_PROJECT_ROOT))
 
 from scripts.build_spb_pdf import _TITLE_UNIVERSITIES
+from scripts.city_guide_core import copy_built_guide_pdf_to_final_guides
 from scripts.guide_loader import GUIDES, load_places
 
 OUTPUT_BASENAME = "Moscow_Complete_Guide"
@@ -1386,6 +1387,7 @@ def main() -> int:
                 image_wait_timeout_ms=60000,
             ):
                 print("Written: {}".format(pdf_path))
+                copy_built_guide_pdf_to_final_guides(_PROJECT_ROOT, pdf_path)
             else:
                 print("PDF generation failed.", file=sys.stderr)
                 return 1
@@ -1462,6 +1464,7 @@ def main() -> int:
             chapter_for_block=chapter_for_block,
         ):
             print("Written: {}".format(pdf_path))
+            copy_built_guide_pdf_to_final_guides(_PROJECT_ROOT, pdf_path)
         else:
             print("PDF generation failed.", file=sys.stderr)
             return 1

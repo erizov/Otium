@@ -1,4 +1,4 @@
-# Odessa guide
+# Odesa guide (repo folder ``odessa``)
 
 ```bash
 python scripts/download_odessa_images.py

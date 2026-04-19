@@ -22,6 +22,7 @@ _PROJECT_ROOT = Path(__file__).resolve().parent.parent
 if str(_PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(_PROJECT_ROOT))
 
+from scripts.city_guide_core import copy_built_guide_pdf_to_final_guides
 from scripts.guide_loader import GUIDES, load_places
 
 OUTPUT_BASENAME = "Moscow_Complete_Guide"
@@ -312,6 +313,7 @@ def main() -> int:
             image_wait_timeout_ms=90000,
         ):
             print("Written: {}".format(pdf_path))
+            copy_built_guide_pdf_to_final_guides(_PROJECT_ROOT, pdf_path)
         else:
             print(
                 "PDF: install playwright and run 'playwright install chromium'.",

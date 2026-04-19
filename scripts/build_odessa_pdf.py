@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""HTML + PDF for Odessa."""
+"""HTML + PDF for Odesa (folder slug ``odessa``)."""
 
 from __future__ import annotations
 
@@ -25,7 +25,7 @@ def main() -> int:
         project_root=_PROJECT_ROOT,
         city_slug="odessa",
         city_root=_PROJECT_ROOT / "odessa",
-        display_title="Odessa",
+        display_title="Odesa",
         title_symbols_class="odessa-title-symbols",
         title_symbols=_TITLE_SYMBOLS,
         places=list(ODESSA_PLACES),

@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import shutil
 from pathlib import Path
 
 MIN_IMAGE_BYTES = 500
@@ -40,6 +41,26 @@ def is_substantive_text(value: str | None) -> bool:
     if s.lower() in _PLACEHOLDER_TOKENS:
         return False
     return True
+
+
+def copy_built_guide_pdf_to_final_guides(
+    project_root: Path,
+    pdf_path: Path,
+) -> None:
+    """
+    Mirror a finished city-guide PDF under ``<repo>/final_guides/``.
+
+    Called after Playwright PDF + strip steps so ``final_guides/`` stays a
+    single folder of latest builds (filenames match ``*_guide.pdf``, etc.).
+    """
+    src = pdf_path.resolve()
+    if not src.is_file():
+        return
+    dest_dir = project_root.resolve() / "final_guides"
+    dest_dir.mkdir(parents=True, exist_ok=True)
+    dest = dest_dir / src.name
+    shutil.copy2(src, dest)
+    print("Copied to final_guides:", dest.as_posix())
 
 
 def min_bytes_for_filename(filename: str) -> int:

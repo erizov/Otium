@@ -16,6 +16,7 @@ from scripts.build_pdf import (
 )
 from scripts.city_guide_core import (
     MIN_IMAGE_BYTES,
+    copy_built_guide_pdf_to_final_guides,
     is_substantive_text,
     smallest_same_stem_image_rel,
 )
@@ -406,6 +407,7 @@ def run_build_pdf_main(
     ):
         _strip_empty_pdf_pages(pdf_path)
         _strip_pdf_metadata(pdf_path)
+        copy_built_guide_pdf_to_final_guides(project_root, pdf_path)
         print("Written:", pdf_path)
         print("Places in PDF: {}".format(len(built)))
         return 0
