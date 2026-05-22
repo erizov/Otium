@@ -12,6 +12,20 @@ shared Jerusalem-style helper) copies the PDF to **`final_guides/<same
 filename>.pdf`** at the repo root so all city guides collect in one folder
 (local only; **`final_guides/`** is gitignored).
 
+**Bilingual PDFs (en / ru):** Jerusalem-style builders
+(`scripts/city_guide_jerusalem_style_pdf.py`) write
+**`<slug>/output/<slug>_guide_en.html|.pdf`** and **`…_guide_ru…`** on each
+run (default), then copy the **English** edition onto the legacy names
+**`<slug>_guide.html`** / **`<slug>_guide.pdf`** for compatibility. Use
+`--lang en`, `--lang ru`, or `--lang en ru` to restrict editions. Place text
+still comes from the JSON fields (`name_en`, `description`, …); Russian
+edition uses Russian UI chrome and the historical chapter from
+`REFERENCE_TEXT_RU`; English edition uses English chrome and omits that
+chapter until `REFERENCE_TEXT_EN` has an entry for the slug. **Tokyo** keeps
+`<html lang="ja">` via `html_lang_attr="ja"` on `run_build_pdf_main`.
+**Smolensk** and **Saint Petersburg** (`build_smolensk_pdf.py`,
+`build_spb_pdf.py`) still emit a single `*_guide.pdf` today (custom titul HTML).
+
 **Rebuild PDFs only when inputs changed:** after you edit JSON, images, the
 city whitelist, or `scripts/build_<slug>_pdf.py`, run
 [`scripts/rebuild_stale_city_guide_pdfs.py`](../scripts/rebuild_stale_city_guide_pdfs.py).
@@ -28,6 +42,10 @@ python scripts/rebuild_stale_city_guide_pdfs.py --dry-run
 # Rebuild every auto-discovered city that is out of date
 python scripts/rebuild_stale_city_guide_pdfs.py
 
+# Same, but keep 2 timestamped backups per PDF before overwriting
+python scripts/rebuild_stale_city_guide_pdfs.py --archive-keep 2
+python scripts/deploy_final_guides.py --archive-keep 2
+
 # Only some cities
 python scripts/rebuild_stale_city_guide_pdfs.py --cities london tokyo vatican
 
@@ -35,13 +53,15 @@ python scripts/rebuild_stale_city_guide_pdfs.py --cities london tokyo vatican
 python scripts/rebuild_stale_city_guide_pdfs.py --include-shared
 ```
 
-### Minimum place count (25) and growth tooling
+### Minimum place count (30) and growth tooling
 
-Newer per-city guides target **at least 25** curated places, each with a
+Newer per-city guides target **at least 30** curated places, each with a
 primary `image_rel_path` and `image_source_url` (usually Wikimedia Commons).
 
-- **Grow legacy 12-place packs to 25:** from repo root,
-  `python scripts/grow_city_guides_to_25.py` (uses Commons search; optional
+- **Grow cities below 30:** from repo root,
+  `python scripts/grow_city_guides_to_25.py --grow-all` (uses Commons search;
+  extra historic/religious seeds in `scripts/grow_city_guides_extra_seeds.py`).
+- **Grow legacy 12-place packs:** same script without `--grow-all` (uses Commons search; optional
   `scripts/grow_existing_static_commons.json` overrides search when populated).
   With only bootstrap runs:
   `python scripts/grow_city_guides_to_25.py --no-grow --bootstrap minsk kyiv`.
@@ -80,6 +100,12 @@ powershell -ExecutionPolicy Bypass -File scripts/webapp_start.ps1 [-BindHost 127
 Open `http://127.0.0.1:8000/<city>` (example: `/smolensk`) and use **Apply** to
 save edits.
 
+**Images in the editor:** use **Upload main image…** / **Upload image…** (not
+manual paths). Files are saved as JPEG under canonical names
+`images/<place_slug>.jpg` or `images/<place_slug>_02.jpg` … `_05.jpg`, then
+optimized via `scripts/city_guide_image_optimize.py` (350 KiB / 1600px caps).
+Manual path edits in the overlay are normalized and re-optimized on **Apply**.
+
 **Appearance** (sidebar): choose a **palette** (flag-themed, neutral dark, or
 paper/light), a **font profile** (city default matches guide typography for that
 city; editorial/system are editor-only), and **text size**. Settings are stored
@@ -101,7 +127,11 @@ up in the UI’s City dropdown (no code changes needed).
 ### Moscow titul assets and heraldry in the editor
 
 Moscow follows the same `data/<slug>_places.json` + `scripts/build_<slug>_pdf.py`
-layout (`scripts/build_moscow_pdf.py`). The PDF titul and the web chapter
+layout (`scripts/build_moscow_pdf.py`): by default it builds
+**`moscow/output/moscow_guide*.html|.pdf`** from merged JSON (like other city
+guides). For the legacy **combined** book under `output/Moscow_Complete_Guide.*`,
+run **`python scripts/build_moscow_pdf.py --moscow-complete-guide`** (same extra
+flags as `scripts/build_full_guide.py`). The PDF titul and the web chapter
 **«Исторические и справочные гербы»** use heraldry files under **`output/images/`**
 (for example `title_msk_*.svg` / `.jpg`). The dev server mounts that tree at
 **`/moscow-media/<path relative to output/>`**, so the editor can show coats
@@ -115,6 +145,35 @@ python scripts/download_moscow_title_assets.py
 ```
 
 Use `--help` for output directory and file list.
+
+## Image naming and paths
+
+Canonical rules (enforced by `scripts/lint_image_paths.py` and
+`scripts/city_guide_naming.py`):
+
+| Role | Slug pattern | `image_rel_path` |
+|------|--------------|------------------|
+| Curated place | `{city_slug}_{short_id}` (ASCII, lowercase, underscores) | `images/{slug}.jpg` |
+| Heraldry | fixed | `images/guide_coat_of_arms.svg`, `images/guide_flag.svg` |
+| PDF size filler | `{city_slug}_filler_{category}_{nn}` (`nn` = 01, 02, … per category) | `images/{slug}.jpg` |
+| Legacy multi-photo | `{slug}` + `_02`, `_03` when needed | subfolders only for SPB/Smolensk/Moscow until migrated |
+
+- **City prefix:** new places use `{city}_` in the slug (e.g. `barcelona_sagrada_familia`).
+  Legacy packs without a prefix (Barcelona, Madrid) are migrated with
+  `scripts/migrate_legacy_city_slugs.py`.
+- **PDF fillers** live in `<city>/data/<city>_places_pdf_expand.json` (merged at load
+  time), not in the main `<city>_places.json` curated list. Commons query metadata
+  stays in the sidecar row (`expand_commons_query`), not in the slug.
+- **Same-stem pick:** at build time, `smallest_same_stem_image_rel()` in
+  `scripts/city_guide_core.py` prefers the smallest on-disk file sharing the same
+  basename (`.jpg`, `.webp`, `.png`).
+- **Optimization:** post-download and batch passes use
+  `scripts/city_guide_image_optimize.py` (default **350 KiB**, longest side **1600px**).
+
+```powershell
+python scripts/optimize_all_city_images.py --cities barcelona kyiv
+python scripts/lint_image_paths.py --cities barcelona
+```
 
 ## Editorial policy (facts and sources)
 
@@ -134,6 +193,23 @@ that ships in HTML/PDF).
 - **Skip `year_built`, `architecture_style`, `history`, and `significance`**
   when sources do not supply them. Builders omit empty blocks; meta lines omit
   missing parts.
+- **Banned template phrases** (auto-generated stubs): e.g. “Notable city landmark”,
+  “See Commons file page”, “See official visitor information”. Checked by
+  `python scripts/city_guide_text_lint.py`.
+- **`content_lang`:** optional `en` or `ru` on detail overlays — language of body
+  fields (`description`, `history`, …). Bilingual PDF chrome does not duplicate
+  body text; add `description_ru` / `history_ru` only after human review.
+- **RAG-assisted drafts:** web editor and `scripts/rag/export_place_fields.py`
+  should use retrieved Wikipedia/Wikidata chunks; provenance stays in `.rag_cache`,
+  not in PDF-facing JSON.
+
+```powershell
+python scripts/city_guide_text_lint.py
+python scripts/report_city_guide_stats.py --write --fail-desc-pct 40
+# Bulk-replace banned template prose (Wikipedia/Wikidata-backed):
+python scripts/fix_banned_place_text.py
+python scripts/fix_banned_place_text.py --cities kyiv --dry-run
+```
 
 ---
 

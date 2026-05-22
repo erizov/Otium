@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import shutil
 import sys
 from html import escape
 from pathlib import Path
@@ -24,7 +25,20 @@ from scripts.city_guide_core import (
     copy_built_guide_pdf_to_final_guides,
     smallest_same_stem_image_rel,
 )
+from scripts.city_guide_historical_reference_ru import (
+    HERALDRY_CHAPTER_LABEL_EN,
+    HERALDRY_CHAPTER_LABEL_RU,
+    HISTORICAL_SECTION_TITLE_EN,
+    HISTORICAL_SECTION_TITLE_RU,
+    historical_reference_section_html,
+    reference_text_ru_for_any_city,
+)
+from scripts.city_guide_jerusalem_style_pdf import (
+    _OTIUM_PARAS_EN,
+    guide_ui_strings,
+)
 from scripts.guide_editor_presets import SMOLENSK_GOOGLE_FONTS_HREF
+from scripts.lint_image_paths import lint_city_blocking_errors
 
 
 # Компактные иллюстрации для ранних карточек (стр. PDF 4–6 после титула).
@@ -160,29 +174,55 @@ _HISTORICAL_REFERENCE_RU = (
     "известной древнерусской кириллической надписью. Гнездовская надпись является "
     "свидетельством самой ранней записи на древнерусском языке."
 )
+_HISTORICAL_REFERENCE_EN = (
+    "Smolensk is among the oldest cities of Russia, named in chronicles by "
+    "the ninth century and emerging as a major settlement on the “from the "
+    "Varangians to the Greeks” trade route.\n\n"
+    "For centuries it guarded the western approaches to Rus and later "
+    "Russia: a walled citadel on the Dnieper, contested by Lithuanian and "
+    "Polish armies, returned to Moscow’s orbit in 1667 after a long Polish "
+    "occupation. The sixteenth-century fortress ring—exceptionally dense "
+    "with towers—still frames the old town beside churches from the "
+    "pre-Mongol era and baroque ensembles.\n\n"
+    "In August 1812 a battle near Smolensk disrupted Napoleon’s march on "
+    "Moscow; in 1941–1943 the region saw heavy fighting that slowed the "
+    "German advance toward the Soviet capital. Post-war reconstruction "
+    "restored museums, theatres, and memorial parks while new quarters "
+    "spread beyond the kremlin hills.\n\n"
+    "Today Smolensk remains a regional centre of education and culture on "
+    "the Moscow–Minsk corridor, with festivals, river landscapes, and a "
+    "layered memory of trade, faith, and frontier defence."
+)
+_GUIDE_INTRO_FOLLOW_EN = (
+    "Smolensk is an ancient, quiet city of fortress walls, river terraces, "
+    "and church domes—yet its history is loud: a key to Moscow’s western "
+    "gate, a witness to 1812 and the Second World War, a birthplace of "
+    "musicians, writers, and explorers. This guide lingers on places where "
+    "that depth is visible in stone, bronze, and everyday streets."
+)
 _HERALD_COAT_REL = "images/guide_coat_of_arms.png"
 _HERALD_FLAG_REL = "images/guide_flag.png"
 # Исторические гербы и флаги — титул (файлы из download_smolensk_images).
 _TITLE_HISTORY_COATS: tuple[tuple[str, str], ...] = (
     (
         "images/title_coat_governorate_1856.svg",
-        "Герб смоленской губернии, 1856 (Commons)",
+        "Герб смоленской губернии, 1856",
     ),
     (
         "images/title_coat_city_2000_il76m.jpg",
-        "Герб города Смоленска, 2000 (Ил-76М), Commons",
+        "Герб города Смоленска, 2000 (Ил-76М)",
     ),
     (
         "images/title_coat_oblast.svg",
-        "Герб Смоленской области (SVG), Commons",
+        "Герб Смоленской области (SVG)",
     ),
     (
         "images/title_coat_vinkler.gif",
-        "Герб Смоленска по Винклеру, Commons",
+        "Герб Смоленска по Винклеру",
     ),
     (
         "images/title_coat_soviet.png",
-        "Герб Смоленска (советский вариант), Commons",
+        "Герб Смоленска (советский вариант)",
     ),
     (
         "images/18415.jpg",
@@ -254,17 +294,28 @@ _TITLE_UNIVERSITIES: tuple[tuple[str, str], ...] = (
         ),
     ),
 )
-_WELCOME_CLOSING_VIEWS: tuple[tuple[str, str], ...] = (
+_WELCOME_CLOSING_VIEWS_RU: tuple[tuple[str, str], ...] = (
     ("images/Smolensk_View1.jpg", "хороший человек запомнит,"),
     ("images/Smolensk_View2.jpg", "а плохой не забудет"),
 )
+_WELCOME_CLOSING_VIEWS_EN: tuple[tuple[str, str], ...] = (
+    ("images/Smolensk_View1.jpg", "A kind person will remember,"),
+    ("images/Smolensk_View2.jpg", "and a careless one will not forget"),
+)
+_WELCOME_HEAD_RU = "Добро пожаловать в Смоленск!"
+_WELCOME_HEAD_EN = "Welcome to Smolensk!"
+_WELCOME_ARIA_RU = "Добро пожаловать в Смоленск"
+_WELCOME_ARIA_EN = "Welcome to Smolensk"
+_TOWER_ROW_NAME_RU = "Смоленск, дом с башней"
+_TOWER_ROW_NAME_EN = "Smolensk, house with a tower"
 # Финальная глава «Добро пожаловать…»: ряд из трёх локальных кадров.
 _WELCOME_CLOSING_DOM_SBASHNEY: tuple[str, ...] = (
     "images/Smolensk_DomSBashney1.jpg",
     "images/Smolensk_DomSBashney2.jpg",
     "images/Smolensk_DomSBashney3.jpg",
 )
-_MODERN_SMOLENSK_TITLE = "Современный Смоленск"
+_MODERN_SMOLENSK_TITLE_RU = "Современный Смоленск"
+_MODERN_SMOLENSK_TITLE_EN = "Contemporary Smolensk"
 # Торговые центры — только в главе «Современный Смоленск» (локальные кадры).
 # Глава «Современный Смоленск»: кадры без подписей (смысл только в alt).
 _MODERN_SHOPPING_MALLS: tuple[tuple[str, str], ...] = (
@@ -350,16 +401,27 @@ def _nonempty(s: str | None) -> bool:
     return bool(s and str(s).strip())
 
 
-def _place_meta_line(p: SmolenskPlace) -> str | None:
+def _place_meta_line(p: SmolenskPlace, edition: str) -> str | None:
+    s = guide_ui_strings(edition)
     parts: list[str] = []
     if _nonempty(p.get("address")):
-        parts.append("Адрес: {}".format(str(p.get("address", "")).strip()))
+        parts.append(
+            "{} {}".format(s["address"], str(p.get("address", "")).strip()),
+        )
     if _nonempty(p.get("architecture_style")):
         parts.append(
-            "Стиль: {}".format(str(p.get("architecture_style", "")).strip())
+            "{} {}".format(
+                s["style"],
+                str(p.get("architecture_style", "")).strip(),
+            ),
         )
     if _nonempty(p.get("year_built")):
-        parts.append("Годы: {}".format(str(p.get("year_built", "")).strip()))
+        parts.append(
+            "{} {}".format(
+                s["period"],
+                str(p.get("year_built", "")).strip(),
+            ),
+        )
     if not parts:
         return None
     return " | ".join(parts)
@@ -414,7 +476,7 @@ def _collect_guide_image_keys(root: Path) -> tuple[frozenset[str], frozenset[str
     add(_HERALD_FLAG_REL)
     for rel, _cap in _TITLE_UNIVERSITIES:
         add(rel)
-    for rel, _cap in _WELCOME_CLOSING_VIEWS:
+    for rel, _cap in _WELCOME_CLOSING_VIEWS_RU:
         add(rel)
     for rel in _WELCOME_CLOSING_DOM_SBASHNEY:
         add(rel)
@@ -467,6 +529,7 @@ def _place_figures_html(
     p: SmolenskPlace,
     name_plain: str,
     rels: list[str],
+    edition: str,
 ) -> str:
     """Сетка фото; для Лопатинского — отдельный последний ряд из 11, 16, 17."""
     slug = p.get("slug", "")
@@ -476,7 +539,11 @@ def _place_figures_html(
             main_rels, final_rels = split
             main_srcs = [_rel_to_src(r) for r in main_rels]
             indexed_main = list(enumerate(main_srcs, start=1))
-            part1 = _place_figure_rows_max_three_html(indexed_main, name_plain)
+            part1 = _place_figure_rows_max_three_html(
+                indexed_main,
+                name_plain,
+                edition,
+            )
             n_main = len(main_srcs)
             indexed_final = [
                 (n_main + i, _rel_to_src(r))
@@ -486,6 +553,7 @@ def _place_figures_html(
                 indexed_final,
                 name_plain,
                 row_kind="triple",
+                edition=edition,
             )
             if not part1:
                 return (
@@ -501,7 +569,7 @@ def _place_figures_html(
             ).format(part1, final_row)
     srcs = [_rel_to_src(r) for r in rels]
     indexed = list(enumerate(srcs, start=1))
-    return _place_figure_rows_max_three_html(indexed, name_plain)
+    return _place_figure_rows_max_three_html(indexed, name_plain, edition)
 
 
 def _place_figure_row_html(
@@ -509,15 +577,18 @@ def _place_figure_row_html(
     name_plain: str,
     *,
     row_kind: str,
+    edition: str,
 ) -> str:
     """Собирает один ряд figure; row_kind: pair | many | triple."""
+    s = guide_ui_strings(edition)
     row_class = "place-pdf-fig-row place-pdf-fig-row--{}".format(row_kind)
     parts: list[str] = ['<div class="{}">'.format(row_class)]
     for seq_i, src in img_slice:
         idx0 = max(seq_i - 1, 0)
-        alt = name_plain if idx0 == 0 else "{} — вид {}".format(
-            name_plain,
-            seq_i,
+        alt = (
+            name_plain
+            if idx0 == 0
+            else s["img_alt_extra"].format(name_plain, seq_i)
         )
         parts.append(
             '<figure class="place-fig"><img src="{}" alt="{}"/></figure>'.format(
@@ -532,8 +603,10 @@ def _place_figure_row_html(
 def _place_figure_rows_max_three_html(
     indexed: list[tuple[int, str]],
     name_plain: str,
+    edition: str,
 ) -> str:
     """Ряды по ≤3 снимка (без «many» на четыре и более в одной строке)."""
+    s = guide_ui_strings(edition)
     if not indexed:
         return ""
     if len(indexed) == 1:
@@ -542,7 +615,7 @@ def _place_figure_rows_max_three_html(
         alt_one = (
             name_plain
             if idx0 == 0
-            else "{} — вид {}".format(name_plain, seq_i)
+            else s["img_alt_extra"].format(name_plain, seq_i)
         )
         return (
             '<figure class="place-fig"><img src="{}" alt="{}"/>'
@@ -559,6 +632,7 @@ def _place_figure_rows_max_three_html(
                     indexed[i : i + 3],
                     name_plain,
                     row_kind="triple",
+                    edition=edition,
                 )
             )
             i += 3
@@ -568,6 +642,7 @@ def _place_figure_rows_max_three_html(
                     indexed[i : i + 2],
                     name_plain,
                     row_kind="pair",
+                    edition=edition,
                 )
             )
             i += 2
@@ -577,7 +652,7 @@ def _place_figure_rows_max_three_html(
             alt_one = (
                 name_plain
                 if idx0 == 0
-                else "{} — вид {}".format(name_plain, seq_i)
+                else s["img_alt_extra"].format(name_plain, seq_i)
             )
             row_chunks.append(
                 '<figure class="place-fig"><img src="{}" alt="{}"/>'
@@ -590,16 +665,28 @@ def _place_figure_rows_max_three_html(
     )
 
 
-def _place_block(root: Path, p: SmolenskPlace) -> str:
-    name_ru = escape(p.get("name_ru", ""))
-    name_plain = p.get("name_ru", "")
+def _place_block(root: Path, p: SmolenskPlace, edition: str) -> str:
+    s = guide_ui_strings(edition)
+    name_ru_raw = p.get("name_ru", "")
     sub_en = p.get("subtitle_en", "")
-    sub_html = (
-        '<p class="sub-en">{}</p>'.format(escape(sub_en))
-        if _nonempty(sub_en)
-        else ""
-    )
-    meta = _place_meta_line(p)
+    if edition == "ru":
+        name_plain = name_ru_raw
+        title_html = escape(name_ru_raw)
+        sub_html = (
+            '<p class="sub-en">{}</p>'.format(escape(sub_en))
+            if _nonempty(sub_en)
+            else ""
+        )
+    else:
+        title_plain = sub_en.strip() if _nonempty(sub_en) else name_ru_raw
+        name_plain = title_plain
+        title_html = escape(title_plain)
+        sub_html = (
+            '<p class="sub-en">{}</p>'.format(escape(name_ru_raw))
+            if _nonempty(sub_en) and _nonempty(name_ru_raw)
+            else ""
+        )
+    meta = _place_meta_line(p, edition)
     meta_html = (
         '<p class="place-meta">{}</p>'.format(escape(meta))
         if meta
@@ -613,12 +700,12 @@ def _place_block(root: Path, p: SmolenskPlace) -> str:
         place_cls = "{} place-tight-title-fig".format(place_cls)
     chunks: list[str] = [
         '<section class="{}" id="{}">'.format(place_cls, escape(slug)),
-        "<h3>{}</h3>".format(name_ru),
+        "<h3>{}</h3>".format(title_html),
         sub_html,
         meta_html,
     ]
     rels = _rel_list_resolved_for_place(root, p)
-    fig_html = _place_figures_html(p, name_plain, rels)
+    fig_html = _place_figures_html(p, name_plain, rels, edition)
     if fig_html:
         chunks.append(fig_html)
     if _nonempty(p.get("description")):
@@ -637,7 +724,8 @@ def _place_block(root: Path, p: SmolenskPlace) -> str:
         )
         if lis:
             chunks.append(
-                "<ul class=\"facts\">{}</ul>".format(
+                "<h4>{}</h4>\n<ul class=\"facts\">{}</ul>".format(
+                    escape(s["facts_heading"]),
                     lis,
                 )
             )
@@ -650,16 +738,21 @@ def _place_block(root: Path, p: SmolenskPlace) -> str:
         )
         if st_li:
             chunks.append(
-                "<h4>Истории и легенды</h4>\n"
-                "<ul class=\"stories\">{}</ul>".format(st_li),
+                "<h4>{}</h4>\n"
+                "<ul class=\"stories\">{}</ul>".format(
+                    escape(s["stories_heading"]),
+                    st_li,
+                )
             )
     if _nonempty(p.get("history")):
         hist = str(p.get("history", "") or "")
-        chunks.append("<h4>История</h4>")
+        chunks.append("<h4>{}</h4>".format(escape(s["history_heading"])))
         chunks.append(_html_paragraphs(hist))
     if _nonempty(p.get("significance")):
         sig = str(p.get("significance", "") or "")
-        chunks.append("<h4>Значение</h4>")
+        chunks.append(
+            "<h4>{}</h4>".format(escape(s["significance_heading"])),
+        )
         chunks.append(_html_paragraphs(sig))
     more_info = p.get("more_information") or []
     if isinstance(more_info, list):
@@ -748,7 +841,7 @@ def _modern_plain_figure(root: Path, rel: str, alt: str) -> str:
     )
 
 
-def _universities_section_html(root: Path) -> str:
+def _universities_section_html(root: Path, edition: str) -> str:
     """Блок «Региональные вузы» в конце путеводителя."""
     figs: list[str] = []
     for rel, alt in _TITLE_UNIVERSITIES:
@@ -758,15 +851,21 @@ def _universities_section_html(root: Path) -> str:
     if not figs:
         return ""
     inner = "\n".join(figs)
+    if edition == "ru":
+        aria = "Региональные вузы"
+        lbl = "Региональные вузы"
+    else:
+        aria = "Regional universities"
+        lbl = "Regional universities"
     return (
-        '<section class="guide-universities" aria-label="Региональные вузы">'
+        '<section class="guide-universities" aria-label="{}">'
         '<p class="title-strip-label title-strip-label-univ">'
-        "Региональные вузы</p>"
+        "{}</p>"
         '<div class="heraldry-strip heraldry-universities">'
         "{}"
         "</div>"
         "</section>"
-    ).format(inner)
+    ).format(escape(aria), escape(lbl), inner)
 
 
 def _modern_smolensk_gallery_paths(root: Path) -> list[Path]:
@@ -873,7 +972,7 @@ def _modern_smolensk_pair_rows_html(fig_chunks: list[str]) -> str:
     return "\n".join(rows)
 
 
-def _modern_smolensk_section_html(root: Path) -> str:
+def _modern_smolensk_section_html(root: Path, edition: str) -> str:
     """Глава перед «Добро пожаловать…»: ТЦ + гостиницы + smolensk_*.jpg."""
     root_res = root.resolve()
     used_paths, used_stems = _collect_guide_image_keys(root)
@@ -943,7 +1042,12 @@ def _modern_smolensk_section_html(root: Path) -> str:
         ).format(_modern_smolensk_pair_rows_html(gallery_figs))
     if not mall_block and not gallery_block:
         return ""
-    t_esc = escape(_MODERN_SMOLENSK_TITLE)
+    title = (
+        _MODERN_SMOLENSK_TITLE_RU
+        if edition == "ru"
+        else _MODERN_SMOLENSK_TITLE_EN
+    )
+    t_esc = escape(title)
     inner_body = "".join(
         x for x in (mall_block, gallery_block) if x
     )
@@ -957,10 +1061,15 @@ def _modern_smolensk_section_html(root: Path) -> str:
     ).format(t_esc, t_esc, inner_body)
 
 
-def _welcome_closing_section_html(root: Path) -> str:
+def _welcome_closing_section_html(root: Path, edition: str) -> str:
     """Финальный блок с видами Смоленска (локальные снимки в smolensk/images/)."""
+    views = (
+        _WELCOME_CLOSING_VIEWS_RU
+        if edition == "ru"
+        else _WELCOME_CLOSING_VIEWS_EN
+    )
     figs: list[str] = []
-    for rel, caption in _WELCOME_CLOSING_VIEWS:
+    for rel, caption in views:
         resolved = smallest_same_stem_image_rel(root, rel)
         if not resolved:
             continue
@@ -981,31 +1090,53 @@ def _welcome_closing_section_html(root: Path) -> str:
             tseq += 1
     tower_html = ""
     if tower_indexed:
+        tower_name = (
+            _TOWER_ROW_NAME_RU if edition == "ru" else _TOWER_ROW_NAME_EN
+        )
         tower_html = "\n{}".format(
             _place_figure_rows_max_three_html(
                 tower_indexed,
-                "Смоленск, дом с башней",
+                tower_name,
+                edition,
             )
         )
     if not figs and not tower_html:
         return ""
     inner = "\n".join(figs) + tower_html
+    aria = _WELCOME_ARIA_RU if edition == "ru" else _WELCOME_ARIA_EN
+    head = _WELCOME_HEAD_RU if edition == "ru" else _WELCOME_HEAD_EN
     return (
         '<section class="guide-welcome-closing" '
-        'aria-label="Добро пожаловать в Смоленск">'
+        'aria-label="{}">'
         '<h2 class="welcome-closing-head">'
-        "Добро пожаловать в Смоленск!</h2>\n"
+        "{}</h2>\n"
         "{}"
         "</section>"
-    ).format(inner)
+    ).format(escape(aria), escape(head), inner)
 
 
-def _heraldry_html(root: Path) -> str:
+def _heraldry_html(root: Path, edition: str) -> str:
     """Титул: исторические гербы, девиз, герб/флаг области."""
+    if edition == "ru":
+        aria = "Исторические гербы и символика области"
+        strip_lbl = HERALDRY_CHAPTER_LABEL_RU
+        motto1 = "Руси сторожевый градъ"
+        motto2 = "Смоленщина — край солнечный"
+        oblast_lbl = "Область (книжный герб и флаг)"
+        coat_alt = "Герб Смоленской области"
+        flag_alt = "Флаг Смоленской области"
+    else:
+        aria = "Historical coats of arms and oblast symbols"
+        strip_lbl = HERALDRY_CHAPTER_LABEL_EN
+        motto1 = "Smolensk, sentinel city of Rus"
+        motto2 = "Smolensk land — sunny country"
+        oblast_lbl = "Oblast (book coat of arms and flag)"
+        coat_alt = "Coat of arms of Smolensk Oblast"
+        flag_alt = "Flag of Smolensk Oblast"
     chunks: list[str] = [
         '<div class="smolensk-title-symbols" '
-        'aria-label="Исторические гербы и символика области">',
-        '<p class="title-strip-label">Исторические и справочные гербы</p>',
+        'aria-label="{}">'.format(escape(aria)),
+        '<p class="title-strip-label">{}</p>'.format(escape(strip_lbl)),
         '<div class="heraldry-strip heraldry-history">',
     ]
     for rel, alt in _TITLE_HISTORY_COATS:
@@ -1015,16 +1146,18 @@ def _heraldry_html(root: Path) -> str:
     chunks.append("</div>")
     chunks.append(
         '<div class="heraldry-motto">'
-        '<p class="motto-oldslav">Руси сторожевый градъ</p>'
-        '<p class="motto-region">Смоленщина — край солнечный</p>'
-        "</div>"
+        '<p class="motto-oldslav">{}</p>'
+        '<p class="motto-region">{}</p>'
+        "</div>".format(escape(motto1), escape(motto2))
     )
-    chunks.append('<p class="title-strip-label">Область (книжный герб и флаг)</p>')
+    chunks.append(
+        '<p class="title-strip-label">{}</p>'.format(escape(oblast_lbl)),
+    )
     chunks.append('<div class="heraldry-strip heraldry-official">')
     coat_fig = _fig_if_exists(
         root,
         _HERALD_COAT_REL,
-        "Герб Смоленской области",
+        coat_alt,
         "heraldry-coat-book",
     )
     if coat_fig:
@@ -1032,7 +1165,7 @@ def _heraldry_html(root: Path) -> str:
     flag_fig = _fig_if_exists(
         root,
         _HERALD_FLAG_REL,
-        "Флаг Смоленской области",
+        flag_alt,
         "heraldry-flag-book",
     )
     if flag_fig:
@@ -1041,20 +1174,21 @@ def _heraldry_html(root: Path) -> str:
     return "\n".join(chunks)
 
 
-def _historical_reference_html() -> str:
+def _historical_reference_html(edition: str) -> str:
     """Текстовая глава между титулом и списком мест."""
-    return (
-        '<section class="historical-reference" '
-        'aria-label="Историческая справка">'
-        "<h2>Историческая справка</h2>\n"
-        "{}"
-        "</section>"
-    ).format(_html_paragraphs(_HISTORICAL_REFERENCE_RU))
+    if edition == "ru":
+        body = reference_text_ru_for_any_city("smolensk", _PROJECT_ROOT)
+        title = HISTORICAL_SECTION_TITLE_RU
+    else:
+        body = _HISTORICAL_REFERENCE_EN
+        title = HISTORICAL_SECTION_TITLE_EN
+    return historical_reference_section_html(body, section_title=title)
 
 
-def _cover_otium_html() -> str:
+def _cover_otium_html(edition: str) -> str:
+    src = _OTIUM_PARAS if edition == "ru" else _OTIUM_PARAS_EN
     paras = "\n".join(
-        '<p class="otiump">{}</p>'.format(escape(t)) for t in _OTIUM_PARAS
+        '<p class="otiump">{}</p>'.format(escape(t)) for t in src
     )
     return (
         '<section class="cover-otium">'
@@ -1064,36 +1198,46 @@ def _cover_otium_html() -> str:
     ).format(paras)
 
 
-def _build_html(root: Path, places: list[SmolenskPlace]) -> str:
+def _build_html(root: Path, places: list[SmolenskPlace], edition: str) -> str:
     font_href = SMOLENSK_GOOGLE_FONTS_HREF
-    blocks: list[str] = [_cover_otium_html()]
+    s = guide_ui_strings(edition)
+    blocks: list[str] = [_cover_otium_html(edition)]
+    if edition == "ru":
+        city_h1 = "Смоленск"
+        intro = _GUIDE_INTRO_FOLLOW_RU
+        doc_lang = "ru"
+    else:
+        city_h1 = "Smolensk"
+        intro = _GUIDE_INTRO_FOLLOW_EN
+        doc_lang = "en"
     blocks.append(
         '<header class="guide-title">'
-        "<h1 class=\"guide-title-main\">Смоленск</h1>"
-        "<p class=\"lead\">Путеводитель. Объектов в этом выпуске: {}.</p>"
+        "<h1 class=\"guide-title-main\">{}</h1>"
+        "<p class=\"lead\">{}</p>"
         "<p class=\"lead-follow\">{}</p>"
         "{}"
         "</header>".format(
-            len(places),
-            escape(_GUIDE_INTRO_FOLLOW_RU),
-            _heraldry_html(root),
+            escape(city_h1),
+            escape(s["lead"].format(len(places))),
+            escape(intro),
+            _heraldry_html(root, edition),
         ),
     )
-    blocks.append(_historical_reference_html())
+    blocks.append(_historical_reference_html(edition))
     for p in places:
         srcs = _image_srcs_for_place(root, p)
         if not srcs and not (
             p.get("suppress_images_for_pdf") and _place_has_displayable_body(p)
         ):
             continue
-        blocks.append(_place_block(root, p))
-    univ = _universities_section_html(root)
+        blocks.append(_place_block(root, p, edition))
+    univ = _universities_section_html(root, edition)
     if univ:
         blocks.append(univ)
-    modern = _modern_smolensk_section_html(root)
+    modern = _modern_smolensk_section_html(root, edition)
     if modern:
         blocks.append(modern)
-    closing = _welcome_closing_section_html(root)
+    closing = _welcome_closing_section_html(root, edition)
     if closing:
         blocks.append(closing)
     body_inner = "\n".join(blocks)
@@ -1284,21 +1428,22 @@ ul.more-information li { margin: 0.25rem 0; line-height: 1.45; }
 ul.more-information a { color: #1f4fa8; text-decoration: none; }
 ul.more-information a:hover { text-decoration: underline; }
 """
+    doc_title = s["html_title"].format(city_h1)
     return (
         "<!DOCTYPE html>\n"
-        '<html lang="ru">\n<head>\n'
+        '<html lang="{}">\n<head>\n'
         '<meta charset="utf-8"/>\n'
-        "<title>Путеводитель · Смоленск · OTIUM</title>\n"
+        "<title>{}</title>\n"
         '<link rel="stylesheet" href="{}"/>\n'
         "<style>\n{}</style>\n</head>\n<body>\n{}\n</body>\n</html>\n"
-    ).format(font_href, css, body_inner)
+    ).format(doc_lang, escape(doc_title), font_href, css, body_inner)
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(
         description=(
             "Build Smolensk HTML/PDF using only existing files under "
-            "smolensk/images."
+            "smolensk/images (en/ru editions)."
         ),
     )
     parser.add_argument(
@@ -1320,7 +1465,38 @@ def main() -> int:
         metavar="MS",
         help="Playwright wait for images (default 30000).",
     )
+    parser.add_argument(
+        "--lang",
+        dest="langs",
+        nargs="+",
+        choices=("en", "ru"),
+        default=("en", "ru"),
+        metavar="LANG",
+        help="Guide edition language(s): en, ru (default: both).",
+    )
+    parser.add_argument(
+        "--skip-image-lint",
+        action="store_true",
+        help="Build even when lint_image_paths reports missing files.",
+    )
     args = parser.parse_args()
+    if not args.skip_image_lint:
+        img_errs = lint_city_blocking_errors(
+            "smolensk",
+            "smolensk.data.places_registry",
+            "SMOLENSK_PLACES",
+        )
+        if img_errs:
+            for line in img_errs:
+                print(line, file=sys.stderr)
+            print(
+                "Abort: {} Smolensk image issue(s). "
+                "Fix paths/files or run scripts/download_smolensk_images.py.".format(
+                    len(img_errs),
+                ),
+                file=sys.stderr,
+            )
+            return 2
     smol_root = args.smolensk_root.resolve()
     out_dir = (
         args.output_dir.resolve()
@@ -1339,37 +1515,54 @@ def main() -> int:
         )
         return 2
 
-    html_path = out_dir / SMOL_HTML_NAME
-    pdf_path = out_dir / SMOL_PDF_NAME
-    html_path.write_text(_build_html(smol_root, places), encoding="utf-8")
-    print("Written:", html_path)
-
+    stem = SMOL_PDF_NAME[:-4]
+    langs: tuple[str, ...] = tuple(dict.fromkeys(args.langs))
     footer = (
         "<div style='font-size:9px;text-align:center;width:100%'>"
         "<span class='pageNumber'></span> / <span class='totalPages'></span>"
         "</div>"
     )
     header = "<div style='font-size:9px;width:100%'></div>"
-    if _pdf_via_playwright(
-        html_path,
-        pdf_path,
-        image_wait_timeout_ms=args.image_wait_ms,
-        display_header_footer=True,
-        footer_template=footer,
-        header_template=header,
-        static_site_root=smol_root,
-    ):
-        _strip_empty_pdf_pages(pdf_path)
-        _strip_pdf_metadata(pdf_path)
-        copy_built_guide_pdf_to_final_guides(_PROJECT_ROOT, pdf_path)
-        print("Written:", pdf_path)
-        print("Places in PDF: {}".format(len(places)))
-        return 0
-    print(
-        "PDF failed: pip install playwright && playwright install chromium",
-        file=sys.stderr,
+    for edition in langs:
+        html_path = out_dir / "{}_{}.html".format(stem, edition)
+        pdf_path = out_dir / "{}_{}.pdf".format(stem, edition)
+        html_path.write_text(
+            _build_html(smol_root, places, edition),
+            encoding="utf-8",
+        )
+        print("Written:", html_path)
+        if _pdf_via_playwright(
+            html_path,
+            pdf_path,
+            image_wait_timeout_ms=args.image_wait_ms,
+            display_header_footer=True,
+            footer_template=footer,
+            header_template=header,
+            static_site_root=smol_root,
+        ):
+            _strip_empty_pdf_pages(pdf_path)
+            _strip_pdf_metadata(pdf_path)
+            copy_built_guide_pdf_to_final_guides(_PROJECT_ROOT, pdf_path)
+            print("Written:", pdf_path)
+        else:
+            print(
+                "PDF failed ({}): pip install playwright && "
+                "playwright install chromium".format(edition),
+                file=sys.stderr,
+            )
+            return 1
+    print("Places in PDF: {}".format(len(places)))
+    primary = "en" if "en" in langs else langs[0]
+    shutil.copy2(
+        out_dir / "{}_{}.html".format(stem, primary),
+        out_dir / SMOL_HTML_NAME,
     )
-    return 1
+    shutil.copy2(
+        out_dir / "{}_{}.pdf".format(stem, primary),
+        out_dir / SMOL_PDF_NAME,
+    )
+    print("Primary edition ({}): {}".format(primary, out_dir / SMOL_PDF_NAME))
+    return 0
 
 
 if __name__ == "__main__":

@@ -163,6 +163,8 @@ def apply_place_patch(
     city_slug: str,
     slug: str,
     patch: dict[str, Any],
+    *,
+    finalize_images: bool = True,
 ) -> dict[str, dict[str, Any]]:
     """
     Merge a patch dict into the overlay details for one place.
@@ -172,6 +174,15 @@ def apply_place_patch(
     - Empty values are pruned (so user can delete by sending empty string/list).
     """
     paths = city_paths(project_root, city_slug)
+    if finalize_images:
+        from webapp.server.place_image_ingest import finalize_image_fields_in_patch
+
+        patch = finalize_image_fields_in_patch(
+            paths.city_root,
+            city_slug,
+            slug,
+            patch,
+        )
     overlay = load_overlay_details(project_root, city_slug)
     current = dict(overlay.get(slug, {}))
     for key, val in patch.items():

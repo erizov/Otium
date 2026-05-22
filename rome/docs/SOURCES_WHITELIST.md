@@ -1,25 +1,22 @@
-# Whitelist sources (Rome)
+# Allowed sources — Rome
 
-As for Paris: prefer Commons; **`https://upload.wikimedia.org/...`**
-is always allowed (see `rome/whitelist.py`).
+## Images (validated by validate_rome_sources.py)
 
----
+- https://upload.wikimedia.org/
+- https://commons.wikimedia.org/
 
-## A. Official portals
+## Facts (editors / RAG fetch_sources allowlist)
 
-| URL | Use |
-|-----|-----|
-| https://www.turismo.roma.it/ | City tourism |
-| https://www.vatican.va/ | Vatican (use Commons for images where possible) |
+Use for dates, names, and history — not for long verbatim copy.
 
----
+- https://www.unesco.org/
+- https://www.wikidata.org/
+- https://en.wikipedia.org/
+- https://ru.wikipedia.org/
+- https://www.turismoroma.it/
+- https://www.museivaticani.va/
+- https://www.beniculturali.it/
+## Do not use for facts
 
-## B. Encyclopedias and Commons
-
-| URL | Use |
-|-----|-----|
-| https://en.wikipedia.org/wiki/ | Articles (`/wiki/...` only) |
-| https://it.wikipedia.org/wiki/ | Italian Wikipedia (`/wiki/...`) |
-| https://upload.wikimedia.org/wikipedia/commons/ | Commons files |
-
-Add new `https://...` prefixes here before using them outside Commons.
+- TripAdvisor, Pinterest, random blogs, unattributed social posts
+- Stock photo sites for factual claims (images only if ever whitelisted)

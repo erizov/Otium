@@ -453,9 +453,11 @@ function showChapterWorkspace() {
 function renderChapter(navSlug) {
   showChapterWorkspace();
   const gs = state.guideSections;
+  const topRow = el("placeImages");
   if (!gs) {
     el("placeTitle").textContent = "Главы гида";
     el("placeSubtitle").textContent = "Нет данных";
+    if (topRow) topRow.innerHTML = "";
     return;
   }
   if (navSlug === "__heraldry__") {
@@ -465,6 +467,28 @@ function renderChapter(navSlug) {
     if (hch) {
       hch.textContent = "";
       hch.style.display = "none";
+    }
+    const topImgs = gs.heraldry_top_images || [];
+    function safeSrc(u) {
+      try {
+        return new URL(u, window.location.origin).href;
+      } catch {
+        return u || "";
+      }
+    }
+    if (topRow) {
+      topRow.innerHTML = topImgs.length
+        ? topImgs
+            .map(
+              (im) =>
+                `<div class="place-image heraldry-top"><img src="${escapeAttr(
+                  safeSrc(im.src)
+                )}" alt="${escapeAttr(
+                  im.alt || ""
+                )}" loading="lazy" onerror="this.closest('.place-image')?.classList.add('broken'); this.title='Broken image: ' + this.src;" /></div>`
+            )
+            .join("")
+        : "";
     }
     const imgs = gs.heraldry_images || [];
     el("chapterImages").innerHTML = imgs.length
@@ -478,24 +502,43 @@ function renderChapter(navSlug) {
               )}</figcaption></figure>`
           )
           .join("")
-      : '<div class="muted">Нет изображений герба или флага в каталоге images/.</div>';
+      : topImgs.length
+        ? ""
+        : '<div class="muted">Нет изображений герба или флага в каталоге images/.</div>';
     el("chapterCardBody").innerHTML = "";
+    const chwH = el("chapterHistoryWrap");
+    const cswH = el("chapterStandardWrap");
+    const cimgH = el("chapterImages");
+    if (chwH) chwH.hidden = true;
+    if (cswH) cswH.hidden = false;
+    if (cimgH) {
+      cimgH.hidden = false;
+    }
     return;
   }
   if (navSlug === "__history__") {
     const htt = gs.history_title || "";
     el("placeTitle").textContent = htt;
-    el("placeSubtitle").textContent = "Просмотр · как в PDF";
-    const hch2 = el("chapterCardHeading");
-    if (hch2) {
-      hch2.style.display = "";
-      hch2.textContent = htt;
+    el("placeSubtitle").textContent = "Редактирование · параграфы через пустую строку";
+    if (topRow) topRow.innerHTML = "";
+    const cimg = el("chapterImages");
+    if (cimg) {
+      cimg.innerHTML = "";
+      cimg.hidden = true;
     }
-    el("chapterImages").innerHTML = "";
-    const paras = gs.history_paragraphs || [];
-    el("chapterCardBody").innerHTML = paras.length
-      ? paras.map((p) => `<p>${escapeHtml(p)}</p>`).join("")
-      : '<div class="muted">Нет текста.</div>';
+    const chw = el("chapterHistoryWrap");
+    const csw = el("chapterStandardWrap");
+    if (csw) csw.hidden = true;
+    if (chw) chw.hidden = false;
+    const hH = el("chapterHistoryHeading");
+    if (hH) hH.textContent = htt;
+    const hre = el("historyRefEdit");
+    if (hre) {
+      hre.value = (gs.history_source_text || "").toString();
+    }
+    const hrs = el("historyRefSaveStatus");
+    if (hrs) hrs.textContent = "";
+    return;
   }
 }
 
@@ -505,6 +548,13 @@ function renderPlace(place) {
   el("placeSubtitle").textContent = placeSubtitle(place);
 
   const imgWrap = el("placeImages");
+  function safeSrc(u) {
+    try {
+      return new URL(u, window.location.origin).href;
+    } catch {
+      return u || "";
+    }
+  }
   const images = [];
   if (place.image_url) images.push({ url: place.image_url, kind: "main" });
   const extras = place.additional_images || [];
@@ -521,9 +571,9 @@ function renderPlace(place) {
           : "";
       return `<div class="place-image">
         ${btn}
-        <img src="${escapeAttr(img.url)}" loading="lazy" alt="${escapeAttr(
+        <img src="${escapeAttr(safeSrc(img.url))}" loading="lazy" alt="${escapeAttr(
           placeName(place)
-        )}" />
+        )}" onerror="this.closest('.place-image')?.classList.add('broken'); this.title='Broken image: ' + this.src;" />
       </div>`;
     })
     .join("");
@@ -535,11 +585,18 @@ function renderPlace(place) {
     });
   });
 
+  if (!place.image_url) {
+    const mainBtn = document.createElement("button");
+    mainBtn.className = "button";
+    mainBtn.textContent = "Upload main image…";
+    mainBtn.addEventListener("click", () => uploadPlaceImage("primary"));
+    imgWrap.appendChild(mainBtn);
+  }
   if (images.length < 5) {
     const addBtn = document.createElement("button");
     addBtn.className = "button";
-    addBtn.textContent = "Add image…";
-    addBtn.addEventListener("click", () => addExtraImage());
+    addBtn.textContent = "Upload image…";
+    addBtn.addEventListener("click", () => uploadPlaceImage("additional"));
     imgWrap.appendChild(addBtn);
   }
 
@@ -580,32 +637,41 @@ async function deleteExtraImage(idx) {
   selectPlace(state.place.slug);
 }
 
-async function addExtraImage() {
+function uploadPlaceImage(slot) {
   if (!state.place) return;
-  const rel = (
-    window.prompt("Image rel path (e.g. images/foo.jpg)") || ""
-  ).trim();
-  if (!rel) return;
-  const src = (window.prompt("Image source URL (optional)") || "").trim();
-  const existing = (state.place.additional_images || []).filter(
-    (x) => x && x.image_rel_path
-  );
-  const editor = existing
-    .map((x) => ({
-      image_rel_path: x.image_rel_path,
-      image_source_url: x.image_source_url || "",
-    }))
-    .filter((x) => x.image_rel_path);
-  if (editor.length >= 4) {
-    window.alert("Max 5 images total (1 main + 4 extra).");
-    return;
-  }
-  editor.push({ image_rel_path: rel, image_source_url: src });
-  await jsonPost(`/api/${state.city}/places/${state.place.slug}/apply`, {
-    editor_images: editor,
+  const input = document.createElement("input");
+  input.type = "file";
+  input.accept = "image/jpeg,image/png,image/webp,image/gif";
+  input.addEventListener("change", async () => {
+    const file = input.files && input.files[0];
+    if (!file) return;
+    const src = (
+      window.prompt("Image source URL (optional)", "") || ""
+    ).trim();
+    const form = new FormData();
+    form.append("file", file);
+    form.append("slot", slot);
+    if (src) form.append("image_source_url", src);
+    setStatus("Uploading image…", "busy");
+    try {
+      const res = await fetch(
+        `/api/${state.city}/places/${encodeURIComponent(
+          state.place.slug
+        )}/upload-image`,
+        { method: "POST", body: form }
+      );
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err.detail || res.statusText);
+      }
+      await loadPlaces();
+      selectPlace(state.place.slug);
+      setStatus("Image saved and optimized.", "ok");
+    } catch (e) {
+      setStatus(String(e.message || e), "err");
+    }
   });
-  await loadPlaces();
-  selectPlace(state.place.slug);
+  input.click();
 }
 
 function selectPlace(slug) {
@@ -690,10 +756,30 @@ async function loadModelsForProvider(providerId) {
   }
 }
 
+function loadPromptPresets() {
+  const presets = [
+    { id: "overview", label: "Tell me more (overview)" },
+    { id: "history", label: "History (facts-first)" },
+    { id: "architecture", label: "Architecture (style + details)" },
+    { id: "significance", label: "Significance (why it matters)" },
+    { id: "stories", label: "Stories and legends" },
+  ];
+  const sel = el("promptPresetSelect");
+  if (!sel) return;
+  sel.innerHTML = presets
+    .map(
+      (p) =>
+        `<option value="${escapeAttr(p.id)}">${escapeHtml(p.label)}</option>`
+    )
+    .join("");
+  sel.value = "overview";
+}
+
 async function generateDraft() {
   if (!state.place) return;
   const provider = el("providerSelect").value;
   let model = el("modelSelect").value;
+  const prompt_id = (el("promptPresetSelect") || {}).value || "overview";
   if (model === "__custom__") {
     model = window.prompt("Enter model name") || "";
   }
@@ -704,6 +790,7 @@ async function generateDraft() {
       slug: state.place.slug,
       provider,
       model,
+      prompt_id,
     });
     el("draftArea").innerHTML = renderDraft(draft);
 
@@ -741,6 +828,27 @@ async function loadGuideSections() {
     );
   } catch {
     state.guideSections = null;
+  }
+}
+
+async function saveHistoryReference() {
+  const ta = el("historyRefEdit");
+  const st = el("historyRefSaveStatus");
+  if (!ta) return;
+  if (st) st.textContent = "Сохранение…";
+  try {
+    await jsonPost(`/api/${state.city}/guide-sections/history`, {
+      text: ta.value,
+    });
+    await loadGuideSections();
+    if (state.activeNav === "__history__") {
+      renderChapter("__history__");
+    }
+    if (st) st.textContent = "Сохранено.";
+  } catch (err) {
+    if (st) {
+      st.textContent = `Ошибка: ${err.message || err}`;
+    }
   }
 }
 
@@ -843,6 +951,13 @@ async function init() {
     applyEdits();
   });
 
+  const histSave = el("historyRefSaveBtn");
+  if (histSave) {
+    histSave.addEventListener("click", () => {
+      saveHistoryReference();
+    });
+  }
+
   el("providerSelect").addEventListener("change", async () => {
     await loadModelsForProvider(el("providerSelect").value);
   });
@@ -859,6 +974,7 @@ async function init() {
   }
 
   await loadProviders();
+  loadPromptPresets();
   await loadModelsForProvider(el("providerSelect").value);
   await loadGuideSections();
   await loadPlaces();

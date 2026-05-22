@@ -1,7 +1,21 @@
-# Allowed image source prefixes
+# Allowed sources — Istanbul
 
-Wikimedia Commons and Wikipedia are allowed by the shared validator.
+## Images (validated by validate_istanbul_sources.py)
 
-Add HTTPS prefixes below as you expand sources:
+- https://upload.wikimedia.org/
+- https://commons.wikimedia.org/
 
-https://www.example.org/
+## Facts (editors / RAG fetch_sources allowlist)
+
+Use for dates, names, and history — not for long verbatim copy.
+
+- https://www.unesco.org/
+- https://www.wikidata.org/
+- https://en.wikipedia.org/
+- https://ru.wikipedia.org/
+- https://www.istanbultouristpass.com/
+- https://www.kultur.gov.tr/
+## Do not use for facts
+
+- TripAdvisor, Pinterest, random blogs, unattributed social posts
+- Stock photo sites for factual claims (images only if ever whitelisted)

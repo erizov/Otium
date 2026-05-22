@@ -1,25 +1,22 @@
-# Whitelist sources (Madrid)
+# Allowed sources — Madrid
 
-As for Barcelona: prefer Commons; **`https://upload.wikimedia.org/...`**
-is always allowed (see `madrid/whitelist.py`).
+## Images (validated by validate_madrid_sources.py)
 
----
+- https://upload.wikimedia.org/
+- https://commons.wikimedia.org/
 
-## A. Official portals
+## Facts (editors / RAG fetch_sources allowlist)
 
-| URL | Use |
-|-----|-----|
-| https://www.madrid.es/ | City administration |
+Use for dates, names, and history — not for long verbatim copy.
 
----
+- https://www.unesco.org/
+- https://www.wikidata.org/
+- https://en.wikipedia.org/
+- https://ru.wikipedia.org/
+- https://www.esmadrid.com/
+- https://www.museodelprado.es/
+- https://www.museoreinasofia.es/
+## Do not use for facts
 
-## B. Encyclopedias and Commons
-
-| URL | Use |
-|-----|-----|
-| https://en.wikipedia.org/wiki/ | Articles (`/wiki/...` only) |
-| https://es.wikipedia.org/wiki/ | Spanish Wikipedia (`/wiki/...`) |
-| https://ca.wikipedia.org/wiki/ | Catalan Wikipedia (`/wiki/...`) |
-| https://upload.wikimedia.org/wikipedia/commons/ | Commons files |
-
-Add new `https://...` prefixes here before using them outside Commons.
+- TripAdvisor, Pinterest, random blogs, unattributed social posts
+- Stock photo sites for factual claims (images only if ever whitelisted)

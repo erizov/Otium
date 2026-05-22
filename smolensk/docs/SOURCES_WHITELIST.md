@@ -1,46 +1,20 @@
-# Whitelist источников (Смоленск)
+# Allowed sources — Smolensk
 
-Как в проекте SPB: новые объекты и картинки — с перечисленных доменов
-или с явной ссылкой на одну из них. Дополнительно **разрешены** любые
-`https://upload.wikimedia.org/...` и `https://commons.wikimedia.org/...`
-(см. `smolensk/whitelist.py`).
+## Images (validated by validate_smolensk_sources.py)
 
----
+- https://upload.wikimedia.org/
+- https://commons.wikimedia.org/
 
-## A. Город и регион
+## Facts (editors / RAG fetch_sources allowlist)
 
-| URL | Назначение |
-|-----|------------|
-| https://www.smoladmin.ru/ | Официальный портал администрации |
-| https://www.smolensk.ru/ | Информационный ресурс (при наличии) |
-| https://culture.ru/ | Объекты культурного наследия |
-| https://www.culture.ru/ | Портал Культура.РФ (страницы учреждений) |
-| https://cdn.culture.ru/ | CDN изображений Культура.РФ |
+Use for dates, names, and history — not for long verbatim copy.
 
----
+- https://www.unesco.org/
+- https://www.wikidata.org/
+- https://en.wikipedia.org/
+- https://ru.wikipedia.org/
+- https://www.museum.smolensk.ru/
+## Do not use for facts
 
-## B. Энциклопедии и Commons
-
-| URL | Назначение |
-|-----|------------|
-| https://ru.wikipedia.org/wiki/ | Статьи (только путь `/wiki/...`) |
-| https://upload.wikimedia.org/wikipedia/commons/ | Файлы Commons |
-
----
-
-## C. Федеральные музейные сети (при ссылках на объекты в Смоленске)
-
-| URL | Назначение |
-|-----|------------|
-| https://www.museum.ru/ | Каталог музеев |
-
----
-
-## D. Vuzopedia (логотипы «Региональные вузы»)
-
-| URL | Назначение |
-|-----|------------|
-| https://i.vuzopedia.ru/ | CDN логотипов вузов (resize) |
-
-Добавляйте новые префиксы `https://...` в эту таблицу перед использованием
-в `image_source_url` вне Commons и ru.wikipedia.
+- TripAdvisor, Pinterest, random blogs, unattributed social posts
+- Stock photo sites for factual claims (images only if ever whitelisted)

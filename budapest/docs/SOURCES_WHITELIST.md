@@ -1,27 +1,21 @@
-# Whitelist sources (Budapest)
+# Allowed sources — Budapest
 
-As for Prague: new objects should use URLs from listed hosts or Commons.
-**`https://upload.wikimedia.org/...`** and **`https://commons.wikimedia.org/...`**
-are always allowed (see `budapest/whitelist.py`).
+## Images (validated by validate_budapest_sources.py)
 
----
+- https://upload.wikimedia.org/
+- https://commons.wikimedia.org/
 
-## A. Official and visitor portals
+## Facts (editors / RAG fetch_sources allowlist)
 
-| URL | Use |
-|-----|-----|
-| https://www.budapestinfo.hu/ | Visitor information |
-| https://budapest.hu/ | Municipality (when linking pages) |
+Use for dates, names, and history — not for long verbatim copy.
 
----
+- https://www.unesco.org/
+- https://www.wikidata.org/
+- https://en.wikipedia.org/
+- https://ru.wikipedia.org/
+- https://www.budapestinfo.hu/
+- https://www.mnm.hu/
+## Do not use for facts
 
-## B. Encyclopedias and Commons
-
-| URL | Use |
-|-----|-----|
-| https://en.wikipedia.org/wiki/ | Articles (`/wiki/...` only) |
-| https://hu.wikipedia.org/wiki/ | Hungarian Wikipedia (`/wiki/...`) |
-| https://upload.wikimedia.org/wikipedia/commons/ | Commons files |
-
-Add new `https://...` prefixes here before using them in `image_source_url`
-outside Commons.
+- TripAdvisor, Pinterest, random blogs, unattributed social posts
+- Stock photo sites for factual claims (images only if ever whitelisted)

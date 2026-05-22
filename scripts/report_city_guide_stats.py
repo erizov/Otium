@@ -12,6 +12,7 @@ _PROJECT_ROOT = Path(__file__).resolve().parent.parent
 if str(_PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(_PROJECT_ROOT))
 
+from scripts.city_guide_core import is_curated_place_row
 from scripts.city_guide_core import is_substantive_text
 
 _README = _PROJECT_ROOT / "docs" / "CITY_GUIDES_README.md"
@@ -137,7 +138,8 @@ def build_chart_section() -> str:
     out_rows: list[tuple[str, ...]] = []
     for slug, mod, attr in _REGISTRY:
         city_root = _PROJECT_ROOT / slug
-        places = _load_places(mod, attr)
+        all_places = _load_places(mod, attr)
+        places = [p for p in all_places if is_curated_place_row(p)]
         n_pl = len(places)
         n_im = _count_images(city_root)
         n_facts = sum(_substantive_list_count(p, "facts") for p in places)
@@ -162,7 +164,7 @@ def build_chart_section() -> str:
     table = _markdown_table(out_rows)
     intro = (
         "## Registry statistics\n\n"
-        "Merged registries (`*places.json` + detail JSON where applicable). "
+        "Merged registries (`*places.json` + detail JSON; PDF fillers excluded). "
         "**Images** = raster/SVG files under `<city>/images/` (recursive). "
         "**obj/place** = average count of substantive list items per place "
         "(facts + stories + additional_images). "
@@ -182,8 +184,35 @@ def main() -> int:
         action="store_true",
         help="Update docs/CITY_GUIDES_README.md with this chart.",
     )
+    parser.add_argument(
+        "--fail-desc-pct",
+        type=float,
+        default=None,
+        metavar="PCT",
+        help="Exit 1 if any city has more than PCT%% missing descriptions.",
+    )
     args = parser.parse_args()
     section = build_chart_section()
+    if args.fail_desc_pct is not None:
+        threshold = float(args.fail_desc_pct)
+        for slug, mod, attr in _REGISTRY:
+            places = [
+                p for p in _load_places(mod, attr) if is_curated_place_row(p)
+            ]
+            if not places:
+                continue
+            n_miss = _missing_count(places, "description")
+            pct = 100.0 * n_miss / len(places)
+            if pct > threshold:
+                print(
+                    "FAIL {}: {:.0f}%% missing description (> {:.0f}%%)".format(
+                        slug,
+                        pct,
+                        threshold,
+                    ),
+                    file=sys.stderr,
+                )
+                return 1
     if args.write:
         old = _README.read_text(encoding="utf-8") if _README.is_file() else ""
         if _SECTION_START in old and _SECTION_END in old:

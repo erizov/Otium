@@ -1,24 +1,22 @@
-# Whitelist sources (Paris)
+# Allowed sources — Paris
 
-As for Berlin and Prague: prefer Commons; **`https://upload.wikimedia.org/...`**
-is always allowed (see `paris/whitelist.py`).
+## Images (validated by validate_paris_sources.py)
 
----
+- https://upload.wikimedia.org/
+- https://commons.wikimedia.org/
 
-## A. Official portals
+## Facts (editors / RAG fetch_sources allowlist)
 
-| URL | Use |
-|-----|-----|
-| https://www.paris.fr/ | City administration |
+Use for dates, names, and history — not for long verbatim copy.
 
----
+- https://www.unesco.org/
+- https://www.wikidata.org/
+- https://en.wikipedia.org/
+- https://ru.wikipedia.org/
+- https://www.louvre.fr/
+- https://www.paris.fr/
+- https://www.musee-orsay.fr/
+## Do not use for facts
 
-## B. Encyclopedias and Commons
-
-| URL | Use |
-|-----|-----|
-| https://en.wikipedia.org/wiki/ | Articles (`/wiki/...` only) |
-| https://fr.wikipedia.org/wiki/ | French Wikipedia (`/wiki/...`) |
-| https://upload.wikimedia.org/wikipedia/commons/ | Commons files |
-
-Add new `https://...` prefixes here before using them outside Commons.
+- TripAdvisor, Pinterest, random blogs, unattributed social posts
+- Stock photo sites for factual claims (images only if ever whitelisted)

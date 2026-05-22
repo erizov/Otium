@@ -5,6 +5,8 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+from scripts.city_guide_registry_common import drop_empty_place_rows
+from scripts.city_guide_registry_common import load_pdf_expand_rows
 from typing import TypedDict, cast
 
 
@@ -81,10 +83,16 @@ def _merge_additional_images(rows: list[dict]) -> list[dict]:
 def _load_places() -> list[SpbPlace]:
     path = Path(__file__).with_name("spb_places.json")
     raw: list[dict] = json.loads(path.read_text(encoding="utf-8"))
-    for more_name in ("spb_places_more.json", "spb_places_expansion_m2026.json"):
+    raw.extend(load_pdf_expand_rows(Path(__file__).parent, "spb"))
+    for more_name in (
+        "spb_places_more.json",
+        "spb_places_expansion_m2026.json",
+        "spb_places_pdf_size_expand.json",
+    ):
         more_path = Path(__file__).with_name(more_name)
         if more_path.is_file():
             raw.extend(json.loads(more_path.read_text(encoding="utf-8")))
+    raw = drop_empty_place_rows(raw)
     raw = _merge_details(raw)
     raw = _merge_additional_images(raw)
     return cast(list[SpbPlace], raw)

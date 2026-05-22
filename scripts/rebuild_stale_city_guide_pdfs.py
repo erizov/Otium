@@ -16,9 +16,14 @@ import subprocess
 import sys
 from pathlib import Path
 
+from scripts.archive_city_guide_pdfs import archive_city_output_pdfs
+
 
 def _project_root() -> Path:
-    return Path(__file__).resolve().parent.parent
+    root = Path(__file__).resolve().parent.parent
+    if str(root) not in sys.path:
+        sys.path.insert(0, str(root))
+    return root
 
 
 def _discover_slugs(project_root: Path) -> list[str]:
@@ -158,6 +163,16 @@ def main() -> int:
             "(typography, PDF helpers, Playwright wrapper)."
         ),
     )
+    parser.add_argument(
+        "--archive-keep",
+        type=int,
+        default=2,
+        metavar="N",
+        help=(
+            "Before each rebuild, copy live PDFs to timestamped names "
+            "and keep N archives per file (default 2). Use 0 to skip."
+        ),
+    )
     args = parser.parse_args()
     root = (
         args.project_root.resolve()
@@ -194,6 +209,16 @@ def main() -> int:
 
     failed = 0
     for slug in stale:
+        if args.archive_keep > 0:
+            archived = archive_city_output_pdfs(
+                root,
+                slug,
+                keep=args.archive_keep,
+            )
+            if archived:
+                print(
+                    "Archived {} PDF(s) for {}.".format(len(archived), slug),
+                )
         print("Rebuilding {} ...".format(slug))
         code = _run_build(root, slug)
         if code != 0:

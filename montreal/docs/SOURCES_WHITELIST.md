@@ -1,15 +1,21 @@
-# Whitelist sources (Montreal)
+# Allowed sources — Montreal
 
-Prefer Commons; **`https://upload.wikimedia.org/...`** is always allowed.
+## Images (validated by validate_montreal_sources.py)
 
----
+- https://upload.wikimedia.org/
+- https://commons.wikimedia.org/
 
-## Encyclopedias and Commons
+## Facts (editors / RAG fetch_sources allowlist)
 
-| URL | Use |
-|-----|-----|
-| https://en.wikipedia.org/wiki/ | Articles (`/wiki/...` only) |
-| https://fr.wikipedia.org/wiki/ | French Wikipedia |
-| https://upload.wikimedia.org/wikipedia/commons/ | Commons files |
+Use for dates, names, and history — not for long verbatim copy.
 
-Add new `https://...` prefixes here before using them outside Commons.
+- https://www.unesco.org/
+- https://www.wikidata.org/
+- https://en.wikipedia.org/
+- https://ru.wikipedia.org/
+- https://www.mtl.org/
+- https://www.mbam.qc.ca/
+## Do not use for facts
+
+- TripAdvisor, Pinterest, random blogs, unattributed social posts
+- Stock photo sites for factual claims (images only if ever whitelisted)

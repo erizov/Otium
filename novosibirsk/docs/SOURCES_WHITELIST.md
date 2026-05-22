@@ -1,7 +1,20 @@
-# Allowed image source prefixes
+# Allowed sources — Novosibirsk
 
-Wikimedia Commons and Wikipedia are allowed by the shared validator.
+## Images (validated by validate_novosibirsk_sources.py)
 
-Add HTTPS prefixes below as you expand sources:
+- https://upload.wikimedia.org/
+- https://commons.wikimedia.org/
 
-https://www.example.org/
+## Facts (editors / RAG fetch_sources allowlist)
+
+Use for dates, names, and history — not for long verbatim copy.
+
+- https://www.unesco.org/
+- https://www.wikidata.org/
+- https://en.wikipedia.org/
+- https://ru.wikipedia.org/
+- https://novosibirsk.ru/
+## Do not use for facts
+
+- TripAdvisor, Pinterest, random blogs, unattributed social posts
+- Stock photo sites for factual claims (images only if ever whitelisted)

@@ -32,13 +32,23 @@ def default_whitelist_path() -> Path:
     return Path(__file__).resolve().parent / "docs" / "SOURCES_WHITELIST.md"
 '''
 
-_SOURCES_MD = """# Allowed image source prefixes
+_SOURCES_MD = """# Allowed sources — {display}
 
-Wikimedia Commons and Wikipedia are allowed by the shared validator.
+## Images (validated by validate_{slug}_sources.py)
 
-Add HTTPS prefixes below as you expand sources:
+- https://upload.wikimedia.org/
+- https://commons.wikimedia.org/
 
-https://www.example.org/
+## Facts (editors / RAG fetch_sources allowlist)
+
+- https://www.unesco.org/
+- https://www.wikidata.org/
+- https://en.wikipedia.org/
+- https://ru.wikipedia.org/
+
+## Do not use for facts
+
+- TripAdvisor, Pinterest, random blogs
 """
 
 _README_TEMPLATE = """# {display} guide
@@ -61,6 +71,8 @@ from __future__ import annotations
 import json
 from pathlib import Path
 from typing import TypedDict, cast
+
+from scripts.city_guide_registry_common import load_pdf_expand_rows
 
 
 class CityPlace(TypedDict, total=False):
@@ -112,7 +124,9 @@ def _merge_details(rows: list[dict]) -> list[dict]:
 
 def _load_places() -> list[CityPlace]:
     path = Path(__file__).with_name("{slug}_places.json")
+    data_dir = Path(__file__).parent
     raw: list[dict] = json.loads(path.read_text(encoding="utf-8"))
+    raw.extend(load_pdf_expand_rows(data_dir, "{slug}"))
     raw = _merge_details(raw)
     return cast(list[CityPlace], raw)
 
@@ -279,7 +293,7 @@ def scaffold(slug: str, display: str) -> None:
         encoding="utf-8",
     )
     (root / "docs" / "SOURCES_WHITELIST.md").write_text(
-        _SOURCES_MD,
+        _SOURCES_MD.format(slug=slug, display=display),
         encoding="utf-8",
     )
     (root / "data" / "places_registry.py").write_text(

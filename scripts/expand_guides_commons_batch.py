@@ -80,8 +80,6 @@ def _place_record(
         subtitle_key: subtitle_val,
         "image_source_url": image_url,
         "image_rel_path": "images/{}.jpg".format(slug),
-        "license_note": "See Wikimedia Commons file page for license.",
-        "attribution": "Wikimedia Commons contributors",
     }
 
 

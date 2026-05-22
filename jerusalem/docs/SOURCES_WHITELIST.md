@@ -1,26 +1,21 @@
-# Whitelist sources (Jerusalem)
+# Allowed sources — Jerusalem
 
-As for other OTIUM city guides: prefer Commons;
-**`https://upload.wikimedia.org/...`** is always allowed (see
-`jerusalem/whitelist.py`).
+## Images (validated by validate_jerusalem_sources.py)
 
----
+- https://upload.wikimedia.org/
+- https://commons.wikimedia.org/
 
-## A. Official portals
+## Facts (editors / RAG fetch_sources allowlist)
 
-| URL | Use |
-|-----|-----|
-| https://www.gov.il/ | Government portals (when linking pages) |
-| https://www.jerusalem.muni.il/ | Municipality (when linking pages) |
+Use for dates, names, and history — not for long verbatim copy.
 
----
+- https://www.unesco.org/
+- https://www.wikidata.org/
+- https://en.wikipedia.org/
+- https://ru.wikipedia.org/
+- https://www.itraveljerusalem.com/
+- https://www.imj.org.il/
+## Do not use for facts
 
-## B. Encyclopedias and Commons
-
-| URL | Use |
-|-----|-----|
-| https://en.wikipedia.org/wiki/ | Articles (`/wiki/...` only) |
-| https://he.wikipedia.org/wiki/ | Hebrew Wikipedia (`/wiki/...`) |
-| https://upload.wikimedia.org/wikipedia/commons/ | Commons files |
-
-Add new `https://...` prefixes here before using them outside Commons.
+- TripAdvisor, Pinterest, random blogs, unattributed social posts
+- Stock photo sites for factual claims (images only if ever whitelisted)

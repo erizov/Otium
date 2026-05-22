@@ -6,6 +6,8 @@ from __future__ import annotations
 import shutil
 from pathlib import Path
 
+from scripts.city_guide_naming import is_pdf_filler_slug
+
 MIN_IMAGE_BYTES = 500
 _MIN_VECTOR_BYTES = 32
 
@@ -22,6 +24,11 @@ _PLACEHOLDER_TOKENS: frozenset[str] = frozenset({
     "tbd",
     "tbc",
 })
+
+
+def is_curated_place_row(place: dict) -> bool:
+    """Exclude PDF size-band filler rows from editorial stats."""
+    return not is_pdf_filler_slug(str(place.get("slug") or ""))
 
 
 def is_substantive_text(value: str | None) -> bool:

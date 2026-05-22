@@ -5,6 +5,8 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+from scripts.city_guide_registry_common import drop_empty_place_rows
+from scripts.city_guide_registry_common import load_pdf_expand_rows
 from typing import TypedDict, cast
 
 
@@ -68,6 +70,8 @@ def _merge_details(rows: list[dict]) -> list[dict]:
 def _load_places() -> list[NewYorkPlace]:
     path = Path(__file__).with_name("new_york_places.json")
     raw: list[dict] = json.loads(path.read_text(encoding="utf-8"))
+    raw.extend(load_pdf_expand_rows(Path(__file__).parent, "new_york"))
+    raw = drop_empty_place_rows(raw)
     raw = _merge_details(raw)
     return cast(list[NewYorkPlace], raw)
 

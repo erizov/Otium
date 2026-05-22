@@ -27,10 +27,17 @@ def test_each_place_has_required_image_fields() -> None:
 
 
 def test_chapter_heading_sculptures_plural() -> None:
-    h2, sub = _chapter_heading("sculptures", 3)
+    h2, sub = _chapter_heading("sculptures", 3, "ru")
     assert "Скульптуры и памятники" in h2
     assert "Санкт-Петербурга" in h2
     assert sub == "3 скульптуры и памятника"
+
+
+def test_chapter_heading_sculptures_en() -> None:
+    h2, sub = _chapter_heading("sculptures", 3, "en")
+    assert "Sculptures and monuments" in h2
+    assert "Saint Petersburg" in h2
+    assert sub == "3 sculptures and monuments"
 
 
 def test_ru_plural_museums_phrase() -> None:

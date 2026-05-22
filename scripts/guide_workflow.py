@@ -18,11 +18,13 @@ _PROJECT_ROOT = _SCRIPT_DIR.parent
 if str(_PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(_PROJECT_ROOT))
 
+from scripts.city_guide_image_optimize import CITY_GUIDE_IMAGE_MAX_BYTES
+from scripts.city_guide_image_optimize import optimize_raster_image_if_large
 from scripts.guide_constants import PROJECT_ROOT, get_images_root
 
 BUILD_PDF_SCRIPT = _SCRIPT_DIR / "build_pdf.py"
 DEDUP_SCRIPT = _SCRIPT_DIR / "dedup_all_folders.py"
-DEFAULT_SIZE_LIMIT_BYTES = 500 * 1024
+DEFAULT_SIZE_LIMIT_BYTES = CITY_GUIDE_IMAGE_MAX_BYTES
 SKIP_SUBDIRS = frozenset({"forbidden", "large_orig", "duplicates"})
 
 
@@ -77,15 +79,10 @@ def run_compress_large(
     size_limit_bytes: int = DEFAULT_SIZE_LIMIT_BYTES,
 ) -> int:
     """
-    Compress JPGs larger than size_limit; copy originals to large_orig/.
-    Returns number of files compressed.
-    """
-    try:
-        from PIL import Image
-    except ImportError:
-        print("PIL/Pillow required for image compression.", file=sys.stderr)
-        return 0
+    Optimize rasters larger than size_limit via city_guide_image_optimize.
 
+    Copies originals to large_orig/ before rewrite. Returns files optimized.
+    """
     root = images_root or get_images_root()
     if not root.is_dir():
         return 0
@@ -94,22 +91,32 @@ def run_compress_large(
         if not subdir.is_dir() or subdir.name in SKIP_SUBDIRS:
             continue
         large_orig = subdir / "large_orig"
-        for path in subdir.iterdir():
-            if not path.is_file() or path.suffix.lower() not in (".jpg", ".jpeg"):
+        for path in subdir.rglob("*"):
+            if not path.is_file():
                 continue
-            if path.stat().st_size <= size_limit_bytes:
+            if path.suffix.lower() not in (".jpg", ".jpeg", ".png", ".webp"):
+                continue
+            try:
+                if path.stat().st_size <= size_limit_bytes:
+                    continue
+            except OSError:
                 continue
             try:
                 large_orig.mkdir(parents=True, exist_ok=True)
                 backup = large_orig / path.name
                 if not backup.exists():
                     shutil.copy2(path, backup)
-                img = Image.open(path)
-                if img.mode in ("RGBA", "P"):
-                    img = img.convert("RGB")
-                img.save(path, "JPEG", optimize=True, quality=85)
-                count += 1
-                print("  Compressed: {}".format(path.relative_to(PROJECT_ROOT)))
+                if optimize_raster_image_if_large(
+                    path,
+                    max_bytes=size_limit_bytes,
+                    verbose=True,
+                ):
+                    count += 1
+                    print(
+                        "  Compressed: {}".format(
+                            path.relative_to(PROJECT_ROOT),
+                        ),
+                    )
             except Exception as e:
                 print("  Skip {}: {}".format(path.name, e), file=sys.stderr)
     return count

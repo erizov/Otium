@@ -1,89 +1,21 @@
-# Whitelist источников (Санкт-Петербург)
+# Allowed sources — Spb
 
-Фиксированный перечень URL для текста и изображений гида SPB.
-Новые объекты и картинки — только с перечисленных доменов/страниц
-или с явной ссылкой на одну из них.
+## Images (validated by validate_spb_sources.py)
 
----
+- https://upload.wikimedia.org/
+- https://commons.wikimedia.org/
 
-## A. Город и туризм
+## Facts (editors / RAG fetch_sources allowlist)
 
-| URL | Назначение |
-|-----|------------|
-| https://www.gov.spb.ru/ | Официальный портал СПб |
-| https://visit-petersburg.ru/ | Туристический портал |
+Use for dates, names, and history — not for long verbatim copy.
 
----
+- https://www.unesco.org/
+- https://www.wikidata.org/
+- https://en.wikipedia.org/
+- https://ru.wikipedia.org/
+- https://www.visit-petersburg.ru/
+- https://www.hermitagemuseum.org/
+## Do not use for facts
 
-## B. Крупные музеи и объекты
-
-| URL | Назначение |
-|-----|------------|
-| https://www.hermitagemuseum.org/ | Эрмитаж |
-| https://rusmuseum.ru/ | Русский музей |
-| https://peterhofmuseum.ru/ | Петергоф |
-| https://www.tzar.ru/ | ГМЗ «Царское Село» |
-| https://www.spbmuseum.ru/ | Музей истории СПб |
-| https://www.kunstkamera.ru/ | Кунсткамера / МАЭ РАН |
-| https://www.pavlovskmuseum.ru/ | Павловск |
-| https://yusupov-palace.ru/ | Дворец Юсуповых |
-| https://www.mariinsky.ru/ | Мариинский театр |
-
----
-
-## C. Федеральные справочники
-
-| URL | Назначение |
-|-----|------------|
-| https://culture.ru/ | Объекты культурного наследия |
-| https://www.museum.ru/ | Каталог музеев России |
-
----
-
-## D. Транспорт
-
-| URL | Назначение |
-|-----|------------|
-| https://www.metro.spb.ru/ | Официальный сайт метрополитена |
-
----
-
-## E. Wikimedia Commons (категории)
-
-| URL |
-|-----|
-| https://commons.wikimedia.org/wiki/Category:Saint_Petersburg |
-| https://commons.wikimedia.org/wiki/Category:Buildings_in_Saint_Petersburg |
-| https://commons.wikimedia.org/wiki/Category:Palaces_in_Saint_Petersburg |
-| https://commons.wikimedia.org/wiki/Category:Churches_in_Saint_Petersburg |
-| https://commons.wikimedia.org/wiki/Category:Bridges_in_Saint_Petersburg |
-| https://commons.wikimedia.org/wiki/Category:Museums_in_Saint_Petersburg |
-| https://commons.wikimedia.org/wiki/Category:Parks_in_Saint_Petersburg |
-| https://commons.wikimedia.org/wiki/Category:Theatres_in_Saint_Petersburg |
-| https://commons.wikimedia.org/wiki/Category:Railway_stations_in_Saint_Petersburg |
-| https://commons.wikimedia.org/wiki/Category:Monasteries_in_Saint_Petersburg |
-| https://commons.wikimedia.org/wiki/Category:Cemeteries_in_Saint_Petersburg |
-| https://commons.wikimedia.org/wiki/Category:Sculptures_in_Saint_Petersburg |
-| https://commons.wikimedia.org/wiki/Category:Libraries_in_Saint_Petersburg |
-| https://commons.wikimedia.org/wiki/Category:Squares_in_Saint_Petersburg |
-| https://commons.wikimedia.org/wiki/Category:Metro_stations_in_Saint_Petersburg |
-
-Если категория пустая или переименована — допускается ближайшая
-родительская категория в том же проекте Commons.
-
----
-
-## F. Справочно (текст)
-
-| URL | Правило |
-|-----|---------|
-| https://ru.wikipedia.org/wiki/Санкт-Петербург | Только как справочник формулировок; для изображений предпочтительнее файлы с Commons |
-| https://www.encspb.ru/ | Энциклопедия СПб — проверять актуальность страницы и условия использования текстов |
-
----
-
-## Версия
-
-- **v1** — список согласован; изменения только через правку этого файла и явное обновление версии ниже.
-
-`Whitelist-версия: 1.0` (2026-03-28)
+- TripAdvisor, Pinterest, random blogs, unattributed social posts
+- Stock photo sites for factual claims (images only if ever whitelisted)

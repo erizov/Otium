@@ -12,12 +12,16 @@ from typing import Any
 
 from fastapi import Body
 from fastapi import FastAPI
+from fastapi import File
+from fastapi import Form
 from fastapi import HTTPException
 from fastapi import Request
+from fastapi import UploadFile
 from fastapi.responses import JSONResponse
 from fastapi.responses import HTMLResponse
 from fastapi.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
+from urllib.parse import quote
 from fastapi.templating import Jinja2Templates
 
 from webapp.server.city_store import (
@@ -26,6 +30,11 @@ from webapp.server.city_store import (
     city_paths,
     discover_cities,
     load_city_places,
+)
+from webapp.server.place_image_ingest import (
+    next_additional_rel_path,
+    primary_image_rel_path,
+    save_uploaded_image,
 )
 from webapp.server.city_fonts import fonts_for_city
 from webapp.server.city_emblems import emblems_for_city
@@ -41,6 +50,7 @@ from scripts.city_guide_heraldry_images import collect_heraldry_images
 from scripts.city_guide_historical_reference_ru import (
     HERALDRY_CHAPTER_LABEL_RU,
     HISTORICAL_SECTION_TITLE_RU,
+    historical_reference_ru_override_path,
     reference_text_ru_for_any_city,
 )
 from scripts.guide_editor_presets import NEUTRAL_PALETTE
@@ -158,8 +168,8 @@ def api_guide_sections(city_slug: str) -> dict[str, Any]:
     if city_slug not in cities:
         raise HTTPException(status_code=404, detail="Unknown city")
     heraldry_images = collect_heraldry_images(PROJECT_ROOT, city_slug)
+    emblems = emblems_for_city(PROJECT_ROOT, city_slug)
     if not heraldry_images:
-        emblems = emblems_for_city(PROJECT_ROOT, city_slug)
         if emblems.city_emblem_url:
             heraldry_images.append(
                 {
@@ -174,14 +184,56 @@ def api_guide_sections(city_slug: str) -> dict[str, Any]:
                     "alt": "Флаг (guide_flag)",
                 }
             )
-    body = reference_text_ru_for_any_city(city_slug)
+    heraldry_top: list[dict[str, str]] = []
+    if emblems.city_emblem_url:
+        heraldry_top.append(
+            {
+                "src": emblems.city_emblem_url,
+                "alt": "Герб (книжный)",
+            },
+        )
+    if emblems.city_flag_url:
+        heraldry_top.append(
+            {
+                "src": emblems.city_flag_url,
+                "alt": "Флаг (книжный)",
+            },
+        )
+    top_srcs = {item["src"] for item in heraldry_top}
+    heraldry_gallery = [
+        im for im in heraldry_images if im.get("src") not in top_srcs
+    ]
+    body = reference_text_ru_for_any_city(city_slug, PROJECT_ROOT)
     paras = [p.strip() for p in body.split("\n\n") if p.strip()]
     return {
         "heraldry_title": HERALDRY_CHAPTER_LABEL_RU,
-        "heraldry_images": heraldry_images,
+        "heraldry_top_images": heraldry_top,
+        "heraldry_images": heraldry_gallery,
         "history_title": HISTORICAL_SECTION_TITLE_RU,
+        "history_source_text": body,
         "history_paragraphs": paras,
     }
+
+
+@app.post("/api/{city_slug}/guide-sections/history")
+def api_save_history_reference(
+    city_slug: str,
+    body: dict[str, Any] = Body(...),
+) -> dict[str, bool]:
+    """Persist RU historical reference to per-city override file (UTF-8)."""
+    cities = discover_cities(PROJECT_ROOT)
+    if city_slug not in cities:
+        raise HTTPException(status_code=404, detail="Unknown city")
+    raw = body.get("text")
+    if not isinstance(raw, str):
+        raise HTTPException(
+            status_code=400,
+            detail="JSON body must include string field 'text'",
+        )
+    path = historical_reference_ru_override_path(PROJECT_ROOT, city_slug)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(raw, encoding="utf-8")
+    return {"ok": True}
 
 
 @app.get("/api/{city_slug}/places")
@@ -200,7 +252,10 @@ def api_places(city_slug: str) -> dict[str, Any]:
     for p in places:
         rel = str(p.get("image_rel_path") or "").replace("\\", "/").lstrip("/")
         if rel:
-            p["image_url"] = "{}/{}".format(media_base, rel)
+            if rel.startswith("http://") or rel.startswith("https://"):
+                p["image_url"] = rel
+            else:
+                p["image_url"] = "{}/{}".format(media_base, quote(rel, safe="/"))
         extra = p.get("additional_images") or []
         if isinstance(extra, list):
             for it in extra:
@@ -212,7 +267,12 @@ def api_places(city_slug: str) -> dict[str, Any]:
                     .lstrip("/")
                 )
                 if r2:
-                    it["image_url"] = "{}/{}".format(media_base, r2)
+                    if r2.startswith("http://") or r2.startswith("https://"):
+                        it["image_url"] = r2
+                    else:
+                        it["image_url"] = "{}/{}".format(
+                            media_base, quote(r2, safe="/")
+                        )
     return {
         "city": city_slug,
         "places": places,
@@ -233,6 +293,88 @@ def api_apply_patch(
         raise HTTPException(status_code=400, detail="Missing slug")
     overlay = apply_place_patch(PROJECT_ROOT, city_slug, slug, patch)
     return {"ok": True, "overlay": overlay.get(slug, {})}
+
+
+@app.post("/api/{city_slug}/places/{slug}/upload-image")
+async def api_upload_place_image(
+    city_slug: str,
+    slug: str,
+    file: UploadFile = File(...),
+    slot: str = Form("additional"),
+    image_source_url: str = Form(""),
+) -> dict[str, Any]:
+    """
+    Save an uploaded raster under ``images/{slug}.jpg`` or ``images/{slug}_NN.jpg``.
+
+    File is converted to JPEG, optimized, and merged into the place overlay.
+    """
+    if city_slug not in discover_cities(PROJECT_ROOT):
+        raise HTTPException(status_code=404, detail="Unknown city")
+    if not slug:
+        raise HTTPException(status_code=400, detail="Missing slug")
+    places = load_city_places(PROJECT_ROOT, city_slug)
+    place = next((p for p in places if p.get("slug") == slug), None)
+    if place is None:
+        raise HTTPException(status_code=404, detail="Unknown place slug")
+    data = await file.read()
+    if not data:
+        raise HTTPException(status_code=400, detail="Empty upload")
+    paths = city_paths(PROJECT_ROOT, city_slug)
+    slot_norm = (slot or "additional").strip().lower()
+    if slot_norm == "primary":
+        rel = primary_image_rel_path(slug)
+        patch: dict[str, Any] = {
+            "image_rel_path": rel,
+        }
+        if image_source_url.strip():
+            patch["image_source_url"] = image_source_url.strip()
+    elif slot_norm == "additional":
+        extras = [
+            dict(x)
+            for x in (place.get("additional_images") or [])
+            if isinstance(x, dict)
+        ]
+        rel = next_additional_rel_path(paths.city_root, slug, extras)
+        if rel is None:
+            raise HTTPException(
+                status_code=400,
+                detail="Max 4 additional images (slots _02.._05 used)",
+            )
+        editor = [
+            {
+                "image_rel_path": str(x.get("image_rel_path") or ""),
+                "image_source_url": str(x.get("image_source_url") or ""),
+            }
+            for x in extras
+            if x.get("image_rel_path")
+        ]
+        editor.append(
+            {
+                "image_rel_path": rel,
+                "image_source_url": image_source_url.strip(),
+            },
+        )
+        patch = {"editor_images": editor}
+    else:
+        raise HTTPException(
+            status_code=400,
+            detail="slot must be 'primary' or 'additional'",
+        )
+    save_uploaded_image(paths.city_root, rel, data, optimize=True)
+    overlay = apply_place_patch(
+        PROJECT_ROOT,
+        city_slug,
+        slug,
+        patch,
+        finalize_images=True,
+    )
+    media_base = "/city/{}".format(city_slug)
+    return {
+        "ok": True,
+        "image_rel_path": rel,
+        "image_url": "{}/{}".format(media_base, quote(rel, safe="/")),
+        "overlay": overlay.get(slug, {}),
+    }
 
 
 def _mount_city_static() -> None:
@@ -372,7 +514,12 @@ def _find_place(city_slug: str, slug: str) -> dict[str, Any]:
     raise HTTPException(status_code=404, detail="Unknown place slug")
 
 
-def _draft_prompt(place: dict[str, Any]) -> list[dict[str, str]]:
+def _draft_prompt(
+    place: dict[str, Any],
+    prompt_id: str,
+    *,
+    rag_context: str = "",
+) -> list[dict[str, str]]:
     name = str(place.get("name_ru") or place.get("name_en") or place.get("slug") or "")
     subtitle = (
         str(place.get("subtitle_en") or "")
@@ -385,13 +532,44 @@ def _draft_prompt(place: dict[str, Any]) -> list[dict[str, str]]:
         if val:
             context_bits.append(f"{key}: {val}")
     context = "\n".join(context_bits).strip()
+    preset = (prompt_id or "").strip().lower() or "overview"
+    preset = preset if preset in {"overview", "history", "architecture", "significance", "stories"} else "overview"
+    focus_map: dict[str, str] = {
+        "overview": (
+            "Tell me more about this place. Provide a concise description, then "
+            "add optional history and significance if you are confident."
+        ),
+        "history": (
+            "Tell me more about the history of this place. Focus on timeline, "
+            "key events, and dates when known."
+        ),
+        "architecture": (
+            "Tell me more about the architecture of this place. Focus on style, "
+            "materials, layout, notable elements, and restorations when known."
+        ),
+        "significance": (
+            "What is the significance of this place? Explain why it matters "
+            "(culture, religion, politics, urban fabric, UNESCO, community role)."
+        ),
+        "stories": (
+            "Tell me stories about this place (legends, folklore, notable anecdotes). "
+            "Keep them clearly separated from facts."
+        ),
+    }
+    rag_block = ""
+    if rag_context.strip():
+        rag_block = "\n\n" + rag_context.strip() + "\n\n"
     user = (
-        "Tell me more about this place.\n\n"
+        f"{focus_map[preset]}\n\n"
         f"Place name: {name}\n"
         f"Subtitle: {subtitle}\n"
-        f"{context}\n\n"
-        "Separate facts from stories.\n"
-        "Return JSON with this shape:\n"
+        f"{context}{rag_block}"
+        "Rules:\n"
+        "- Avoid inventing facts.\n"
+        "- If unsure, omit the claim or put it under stories.\n"
+        "- Keep facts short and verifiable.\n"
+        "- Do not repeat the same sentence across description/history/significance.\n\n"
+        "Return JSON with this exact shape:\n"
         "{\n"
         '  \"facts\": [\"...\"],\n'
         '  \"stories\": [\"...\"],\n'
@@ -401,8 +579,7 @@ def _draft_prompt(place: dict[str, Any]) -> list[dict[str, str]]:
         '    \"significance\": \"...\"\n'
         "  },\n"
         '  \"suggested_links\": [{\"label\": \"...\", \"url\": \"...\"}]\n'
-        "}\n\n"
-        "If you are unsure about a claim, put it under stories (not facts) or omit it."
+        "}\n"
     )
     return [
         {
@@ -422,13 +599,27 @@ def api_llm_draft(payload: dict[str, Any] = Body(...)) -> PlaceDraft:
     slug = str(payload.get("slug") or "").strip()
     provider = str(payload.get("provider") or "ollama").strip()
     model = str(payload.get("model") or "").strip()
+    prompt_id = str(payload.get("prompt_id") or "overview").strip()
     if not city_slug or city_slug not in discover_cities(PROJECT_ROOT):
         raise HTTPException(status_code=404, detail="Unknown city")
     if not slug:
         raise HTTPException(status_code=400, detail="Missing slug")
 
     place = _find_place(city_slug, slug)
-    messages = _draft_prompt(place)
+    rag_context = ""
+    try:
+        from scripts.city_guide_rag_context import rag_context_for_place
+
+        lang = "ru" if place.get("name_ru") and not place.get("name_en") else "en"
+        rag_context = rag_context_for_place(
+            PROJECT_ROOT,
+            city_slug=city_slug,
+            place=place,
+            lang=lang,
+        )
+    except Exception:
+        rag_context = ""
+    messages = _draft_prompt(place, prompt_id, rag_context=rag_context)
 
     parsed: dict[str, Any] | None = None
     raw_text = ""

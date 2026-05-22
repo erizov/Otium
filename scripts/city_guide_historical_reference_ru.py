@@ -4,9 +4,201 @@
 from __future__ import annotations
 
 from html import escape
+from pathlib import Path
 
 HERALDRY_CHAPTER_LABEL_RU = "Исторические и справочные гербы"
+HERALDRY_CHAPTER_LABEL_EN = "Historical and reference coats of arms"
 HISTORICAL_SECTION_TITLE_RU = "Историческая справка"
+HISTORICAL_SECTION_TITLE_EN = "Historical overview"
+
+# Optional English counterparts to REFERENCE_TEXT_RU (fill per city as
+# needed). Long entries may mirror base + _REFERENCE_EXTRA via merge below.
+REFERENCE_TEXT_EN: dict[str, str] = {
+    "spb": (
+        "Saint Petersburg is Russia’s second-largest city and a Baltic "
+        "seaport, long shaped as an imperial capital of culture and "
+        "engineering.\n\n"
+        "Founded on the Neva marshes in 1703, it became the seat of tsars, "
+        "a window on Europe, and a laboratory of urban form—from the "
+        "regular Baroque grid to riverside ensembles and metro palaces. "
+        "Today it balances heritage conservation with universities, "
+        "theatres, and maritime traffic as the country’s “northern capital.”"
+    ),
+    "moscow": (
+        "Moscow is the capital of Russia and its principal political, "
+        "economic, and transport hub on the Moskva River.\n\n"
+        "From a medieval fortress town to the centre of an empire and a "
+        "twentieth-century megacity, its rings, embankments, and towers "
+        "carry layered memory. Contemporary Moscow remains a dense network "
+        "of museums, performance halls, and everyday neighbourhoods."
+    ),
+    "kyiv": (
+        "Kyiv is the capital of Ukraine and one of Eastern Europe’s oldest "
+        "continuously inhabited cities, set on the Dnieper hills.\n\n"
+        "As a centre of Kyivan Rus, later Polish-Lithuanian, imperial, "
+        "Soviet, and independent eras, it combines monastic cliffs, "
+        "boulevards, and modern quarters. Its history is inseparable from "
+        "the wider region’s faith, trade, and statecraft."
+    ),
+    "berlin": (
+        "Berlin is the capital of Germany and its largest city—a focal point "
+        "of Prussian, republican, divided, and reunified Europe.\n\n"
+        "From a trading settlement to a royal residence, through war and "
+        "partition, Berlin carries visible memory in monuments and voids. "
+        "It is now a multilingual centre of museums, research, and civic "
+        "experiment on a generous park landscape."
+    ),
+    "jerusalem": (
+        "Jerusalem stands on the Judaean hills as a holy city for Judaism, "
+        "Christianity, and Islam and as Israel’s seat of government.\n\n"
+        "Successive kingdoms, empires, and communities inscribed their "
+        "architecture and rites into its ridges. The walled Old City and "
+        "newer quarters together form a compact arena where archaeology, "
+        "pilgrimage, and daily life continually intersect."
+    ),
+    "kazan": (
+        "Kazan is the capital of Tatarstan and a major Volga metropolis "
+        "where Tatar and Russian cultures meet.\n\n"
+        "The kremlin’s Kul Sharif Mosque and Orthodox cathedrals symbolise "
+        "that dialogue across centuries. Kazan is also a university, "
+        "sporting, and industrial centre for the wider Volga region."
+    ),
+    "volgograd": (
+        "Volgograd stretches along the Volga as a southern Russian "
+        "industrial and river port city.\n\n"
+        "Its modern name recalls the river; its wartime name, Stalingrad, "
+        "recalls a turning point of the Second World War. Memorial hills, "
+        "museums, and embankments keep that memory in public space while the "
+        "city continues as a regional hub."
+    ),
+    "vologda": (
+        "Vologda is a regional centre of Russia’s north, known for "
+        "wooden lace architecture and Orthodox heritage.\n\n"
+        "Trade routes to the White Sea, stone building in the sixteenth and "
+        "seventeenth centuries, and ties to church reformers shaped its "
+        "character. Kremlin walls, carved houses, and literary traditions "
+        "sustain an image of the “Russian North.”"
+    ),
+    "tver": (
+        "Tver lies between Moscow and Saint Petersburg on the upper Volga, "
+        "an old principality town turned regional capital.\n\n"
+        "Medieval rivalry with Moscow, imperial roads, and Soviet industry "
+        "left a mixed fabric of embankments, churches, and transport "
+        "corridors. It remains a practical gateway and a keeper of regional "
+        "memory."
+    ),
+    "yaroslavl": (
+        "Yaroslavl is the administrative centre of Yaroslavl Oblast and "
+        "one of the oldest cities of the Volga Golden Ring.\n\n"
+        "Founded in the eleventh century, it grew through trade and "
+        "seventeenth-century church ensembles. Theatre, embankments, and "
+        "industry later anchored its role on the Upper Volga."
+    ),
+    "minsk": (
+        "Minsk is the capital of Belarus and its largest city on the "
+        "Svislach River.\n\n"
+        "Mentioned by the eleventh century, rebuilt after twentieth-century "
+        "destruction, it is known for broad avenues and green wedges. "
+        "Industry, technology, and national institutions define its present "
+        "rhythm."
+    ),
+    "amsterdam": (
+        "Amsterdam is the capital of the Netherlands and the kingdom’s "
+        "largest city, historically a North Sea trading power.\n\n"
+        "Canals, mercantile townhouses, and civic tolerance shaped its "
+        "Golden Age. Today it pairs compact heritage quarters with "
+        "contemporary design, museums, and waterborne mobility."
+    ),
+    "athens": (
+        "Athens is the capital of Greece and one of Europe’s oldest "
+        "continuously settled cities.\n\n"
+        "Classical polis, Roman and Byzantine layers, Ottoman rule, and the "
+        "modern Greek state created a stratified cityscape around the "
+        "Acropolis. Athens remains a Mediterranean metropolis of culture, "
+        "education, and migration."
+    ),
+}
+
+_REFERENCE_EXTRA_EN: dict[str, str] = {
+    "spb": (
+        "The revolution of 1917 moved the capital to Moscow; the "
+        "1941–1944 siege became a symbol of endurance. After 1991 the city "
+        "reclaimed its historic name, developing tourism, port traffic, and "
+        "culture as a showcase of eighteenth- and nineteenth-century "
+        "Russian heritage."
+    ),
+    "moscow": (
+        "The fire of 1812 and later reconstruction reshaped the centre; "
+        "Stalin-era skyscrapers and metro halls added a monumental scale. "
+        "Since 1991 new business clusters and transport megaprojects have "
+        "grown alongside older districts as the country’s principal gateway."
+    ),
+    "kyiv": (
+        "Kyiv endured the Mongol sack, Polish-Lithuanian rule, imperial "
+        "administration, and the Soviet era as Ukraine’s capital. "
+        "Independence from 1991 and events after 2014 reframed its political "
+        "role as a European capital on the Dnieper."
+    ),
+    "berlin": (
+        "After 1990 institutions returned to a reunified centre; Berlin "
+        "became a stage for major cultural forums. Start-ups, migration, "
+        "and memorial sites now coexist as the city tests models of "
+        "affordable housing and climate-aware growth."
+    ),
+    "jerusalem": (
+        "Partition between 1948 and 1967 and later municipal unification "
+        "complicated its political map. Contemporary Jerusalem mixes "
+        "research campuses, tech firms, and diverse religious communities "
+        "while remaining a tense but indispensable meeting ground."
+    ),
+    "kazan": (
+        "Imperial and Soviet industry strengthened transport on the Volga; "
+        "the 2013 Universiade renewed infrastructure. Kazan stresses "
+        "intercultural dialogue inside Russia and promotes science, sport, "
+        "and tourism across the Volga macro-region."
+    ),
+    "volgograd": (
+        "Post-war rebuilding turned Stalingrad into a victory symbol; "
+        "renaming to Volgograd reflected de-Stalinisation. The city now "
+        "combines riverfront life, metallurgy, and memorial landscapes that "
+        "argue for the price of peace."
+    ),
+    "vologda": (
+        "Imperial and Soviet periods preserved wooden carving and rail "
+        "links; the Great Patriotic War touched the region. Vologda now "
+        "cultivates Golden Ring tourism and northern folk heritage."
+    ),
+    "tver": (
+        "Imperial and Soviet eras reinforced roads and light industry; the "
+        "Great Patriotic War left scars. Tver today emphasises corridors "
+        "between Moscow and Saint Petersburg while recalling medieval "
+        "rivalry with the growing Muscovite state."
+    ),
+    "yaroslavl": (
+        "Soviet industrialisation changed the skyline; after 1991 the city "
+        "joined Golden Ring itineraries, foregrounding Volkov’s theatre, "
+        "Volga embankments, and seventeenth-century churches as part of "
+        "shared Russian history."
+    ),
+    "minsk": (
+        "The world wars and post-war reconstruction produced wide prospekty; "
+        "independence after 1991 made Minsk the capital of a sovereign "
+        "Belarus mixing manufacturing, IT, and multinational memory of the "
+        "borderlands."
+    ),
+    "amsterdam": (
+        "Nineteenth- and twentieth-century port wealth and colonial trade "
+        "enriched the city; after the Second World War Amsterdam favoured "
+        "humane urbanism. It is now a hub of international law, design, and "
+        "sustainable mobility on the water."
+    ),
+    "athens": (
+        "The capital moved to Athens in the nineteenth century; "
+        "independence restored classical emblems over Ottoman fabric. The "
+        "twentieth century brought sprawl, the 2004 Olympics, and renewed "
+        "infrastructure as Athens anchors the Eastern Mediterranean."
+    ),
+}
 
 # Базовые абзацы; полный текст главы для PDF/UI = база + _REFERENCE_EXTRA
 # (кроме Смоленска: там отдельный текст в build_smolensk_pdf).
@@ -647,8 +839,50 @@ def reference_text_ru_for_city(slug: str) -> str:
     return base
 
 
-def reference_text_ru_for_any_city(slug: str) -> str:
-    """Historical blurb for PDF/UI, including Smolensk (from PDF builder)."""
+def reference_text_en_for_city(slug: str) -> str:
+    """English historical blurb for PDF; empty when no English is defined."""
+    base = (REFERENCE_TEXT_EN.get(slug) or "").strip()
+    if not base:
+        return ""
+    extra = (_REFERENCE_EXTRA_EN.get(slug) or "").strip()
+    if extra:
+        return "{}\n\n{}".format(base, extra)
+    return base
+
+
+def reference_text_en_for_any_city(slug: str) -> str:
+    """English historical blurb, including Smolensk (from PDF builder)."""
+    if slug == "smolensk":
+        from scripts.build_smolensk_pdf import _HISTORICAL_REFERENCE_EN
+
+        return _HISTORICAL_REFERENCE_EN.strip()
+    return reference_text_en_for_city(slug)
+
+
+def historical_reference_ru_override_path(
+    project_root: Path,
+    slug: str,
+) -> Path:
+    """Per-city UTF-8 file; when present, replaces built-in RU historical text."""
+    return project_root / slug / "data" / "{}_historical_reference_ru.txt".format(
+        slug,
+    )
+
+
+def reference_text_ru_for_any_city(
+    slug: str,
+    project_root: Path | None = None,
+) -> str:
+    """Historical blurb for PDF/UI, including Smolensk (from PDF builder).
+
+    If ``project_root`` is set and
+    ``<slug>/data/<slug>_historical_reference_ru.txt`` exists, its contents
+    are used (even when empty).
+    """
+    if project_root is not None:
+        path = historical_reference_ru_override_path(project_root, slug)
+        if path.is_file():
+            return path.read_text(encoding="utf-8")
     if slug == "smolensk":
         from scripts.build_smolensk_pdf import _HISTORICAL_REFERENCE_RU
 
@@ -656,11 +890,16 @@ def reference_text_ru_for_any_city(slug: str) -> str:
     return reference_text_ru_for_city(slug)
 
 
-def historical_reference_section_html(body_ru: str) -> str:
-    """Smolensk-style chapter block, or empty string when there is no text."""
-    text = (body_ru or "").strip()
+def historical_reference_section_html(
+    body: str,
+    *,
+    section_title: str | None = None,
+) -> str:
+    """Chapter block for historical blurb, or empty when there is no text."""
+    text = (body or "").strip()
     if not text:
         return ""
+    title = (section_title or HISTORICAL_SECTION_TITLE_RU).strip()
     chunks = [t.strip() for t in text.split("\n\n") if t.strip()]
     inner = "\n".join(
         "<p class=\"prose\">{}</p>".format(escape(c)) for c in chunks
@@ -672,7 +911,7 @@ def historical_reference_section_html(body_ru: str) -> str:
         "{}"
         "</section>"
     ).format(
-        escape(HISTORICAL_SECTION_TITLE_RU),
-        escape(HISTORICAL_SECTION_TITLE_RU),
+        escape(title),
+        escape(title),
         inner,
     )

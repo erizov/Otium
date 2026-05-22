@@ -32,7 +32,7 @@ def main() -> int:
         html_name="tokyo_guide.html",
         pdf_name="tokyo_guide.pdf",
         argv=sys.argv[1:],
-        html_lang="ja",
+        html_lang_attr="ja",
     )
 
 

@@ -22,6 +22,24 @@ _USER_AGENT = (
     "ExcursionGuide/1.0 (batch download for local guide; Python urllib)"
 )
 
+# https://w.wiki/GHai — hotlinking non-standard widths returns 400/429.
+COMMONS_STANDARD_THUMB_WIDTHS: tuple[int, ...] = (
+    330,
+    500,
+    960,
+    1280,
+)
+
+
+def snap_commons_thumb_width(requested_px: int) -> int:
+    """Pick the smallest standard width still >= requested (max 1280)."""
+    if requested_px <= 0:
+        return COMMONS_STANDARD_THUMB_WIDTHS[0]
+    for w in COMMONS_STANDARD_THUMB_WIDTHS:
+        if requested_px <= w:
+            return w
+    return COMMONS_STANDARD_THUMB_WIDTHS[-1]
+
 
 def _commons_thumb_url(original: str, width_px: int) -> str | None:
     parsed = urllib.parse.urlparse(original)
@@ -46,13 +64,19 @@ def _commons_thumb_url(original: str, width_px: int) -> str | None:
     return urllib.parse.urlunparse(parsed._replace(path=thumb_path))
 
 
-def _candidate_urls(source_url: str, thumb_width: int | None) -> list[str]:
+def _candidate_urls(
+    source_url: str,
+    thumb_width: int | None,
+    *,
+    thumbs_only: bool = False,
+) -> list[str]:
     out: list[str] = []
     if thumb_width and thumb_width > 0:
-        t = _commons_thumb_url(source_url, thumb_width)
+        w = snap_commons_thumb_width(thumb_width)
+        t = _commons_thumb_url(source_url, w)
         if t and t != source_url:
             out.append(t)
-    if source_url not in out:
+    if not thumbs_only and source_url not in out:
         out.append(source_url)
     return out
 
@@ -148,6 +172,13 @@ def download_jerusalem_style_images(
         thumb_w: int | None = None
     else:
         thumb_w = args.thumb_width if args.thumb_width > 0 else None
+        if thumb_w:
+            thumb_w = snap_commons_thumb_width(thumb_w)
+    thumbs_only = not args.full_size and not getattr(
+        args,
+        "allow_original",
+        False,
+    )
 
     todo: list[tuple[str, list[str], Path]] = []
     n_incomplete = 0
@@ -239,24 +270,33 @@ def download_jerusalem_style_images(
         return 0
 
     if thumb_w:
+        mode = "thumbs only" if thumbs_only else "thumb then original"
         print(
-            "Commons thumbnails ~{}px + {:.1f}s between files; "
+            "Commons {} @ {}px + {:.1f}s between files; "
             "429 -> up to {} retries.".format(
-                thumb_w, args.delay, args.retries_429,
+                mode, thumb_w, args.delay, args.retries_429,
             ),
         )
     else:
-        print("Full-size URLs + {:.1f}s delay.".format(args.delay))
+        print(
+            "Full-size URLs + {:.1f}s delay (429-prone).".format(args.delay),
+        )
 
     ok_n = err_n = 0
     for i, (slug, source_urls, dest) in enumerate(todo):
         if slug.startswith("title:"):
             cands: list[str] = []
             for u in source_urls:
-                cands.extend(_candidate_urls(u, thumb_w))
+                cands.extend(
+                    _candidate_urls(u, thumb_w, thumbs_only=thumbs_only),
+                )
             cands = _dedupe_urls_keep_order(cands)
         else:
-            cands = _candidate_urls(source_urls[0], thumb_w)
+            cands = _candidate_urls(
+                source_urls[0],
+                thumb_w,
+                thumbs_only=thumbs_only,
+            )
         ok, msg = _download_place_image(
             cands,
             dest,
@@ -265,7 +305,7 @@ def download_jerusalem_style_images(
             pause_429_sec=args.pause_429,
         )
         if ok:
-            print("OK {} -> {}".format(slug, dest.relative_to(root)))
+            print("OK {} -> {}".format(slug, dest.relative_to(root)), flush=True)
             if not args.no_optimize and optimize_raster_image_if_large(dest):
                 print(
                     "  (optimized >350 KiB) {}".format(
@@ -274,7 +314,7 @@ def download_jerusalem_style_images(
                 )
             ok_n += 1
         else:
-            print("FAIL {}: {}".format(slug, msg), file=sys.stderr)
+            print("FAIL {}: {}".format(slug, msg), file=sys.stderr, flush=True)
             err_n += 1
         if i + 1 < len(todo) and args.delay > 0:
             time.sleep(args.delay)
@@ -303,9 +343,20 @@ def add_download_image_args(p: argparse.ArgumentParser) -> None:
     p.add_argument(
         "--thumb-width",
         type=int,
-        default=1280,
+        default=330,
         metavar="PX",
-        help="Commons /thumb/ width (default 1280). 0 = originals only.",
+        help=(
+            "Commons /thumb/ width; snapped to 330/500/960/1280 "
+            "(default 330). 0 = originals only."
+        ),
+    )
+    p.add_argument(
+        "--allow-original",
+        action="store_true",
+        help=(
+            "If thumb fails, try full upload.wikimedia.org URL "
+            "(often 429; not recommended for batch)."
+        ),
     )
     p.add_argument(
         "--full-size",

@@ -13,6 +13,9 @@ if str(_PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(_PROJECT_ROOT))
 
 from scripts.city_guide_core import min_bytes_for_filename
+from scripts.city_guide_image_optimize import CITY_GUIDE_IMAGE_WARN_BYTES
+from scripts.city_guide_image_optimize import CITY_GUIDE_IMAGE_WARN_SIDE_PX
+from scripts.city_guide_image_optimize import raster_dimensions
 
 _REGISTRY: tuple[tuple[str, str, str], ...] = (
     ("amsterdam", "amsterdam.data.places_registry", "AMSTERDAM_PLACES"),
@@ -73,6 +76,8 @@ def _check_city(
     module_name: str,
     attr: str,
     min_places: int,
+    *,
+    fail_on_oversize: bool,
 ) -> list[str]:
     errs: list[str] = []
     root = _PROJECT_ROOT / slug
@@ -87,6 +92,8 @@ def _check_city(
             ),
         )
     for i, p in enumerate(places):
+        if p.get("suppress_images_for_pdf"):
+            continue
         name = p.get("name_en", p.get("slug", "?"))
         rel = p.get("image_rel_path")
         if not rel:
@@ -121,6 +128,34 @@ def _check_city(
                     slug, i + 1, name, rel, size, floor,
                 ),
             )
+            continue
+        if path.suffix.lower() in (".jpg", ".jpeg", ".png", ".webp"):
+            if size > CITY_GUIDE_IMAGE_WARN_BYTES:
+                msg = "{} place {} ({!r}): {} exceeds {} KiB (run optimize)".format(
+                    slug,
+                    i + 1,
+                    name,
+                    rel,
+                    CITY_GUIDE_IMAGE_WARN_BYTES // 1024,
+                )
+                if fail_on_oversize:
+                    errs.append(msg)
+                else:
+                    print("WARN:", msg, file=sys.stderr)
+            dims = raster_dimensions(path)
+            if dims and max(dims) > CITY_GUIDE_IMAGE_WARN_SIDE_PX:
+                msg = "{} place {} ({!r}): {} max side {} > {} px".format(
+                    slug,
+                    i + 1,
+                    name,
+                    rel,
+                    max(dims),
+                    CITY_GUIDE_IMAGE_WARN_SIDE_PX,
+                )
+                if fail_on_oversize:
+                    errs.append(msg)
+                else:
+                    print("WARN:", msg, file=sys.stderr)
     return errs
 
 
@@ -139,6 +174,11 @@ def main() -> int:
         metavar="N",
         help="fail if any selected city has fewer than N places (default 0)",
     )
+    parser.add_argument(
+        "--fail-on-oversize",
+        action="store_true",
+        help="Fail when referenced rasters exceed 400 KiB or 2048px.",
+    )
     args = parser.parse_args()
     want = frozenset(args.cities) if args.cities else None
     all_errs: list[str] = []
@@ -146,7 +186,13 @@ def main() -> int:
         if want is not None and slug not in want:
             continue
         all_errs.extend(
-            _check_city(slug, mod, attr, args.min_places),
+            _check_city(
+                slug,
+                mod,
+                attr,
+                args.min_places,
+                fail_on_oversize=args.fail_on_oversize,
+            ),
         )
     if all_errs:
         for line in all_errs:

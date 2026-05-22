@@ -8,6 +8,16 @@ output: `playwright install chromium`.
 **Editorial policy** (facts, omitting unsourced fields): see
 [City guides README — Editorial policy](CITY_GUIDES_README.md#editorial-policy-facts-and-sources).
 
+**Before PDF rebuild** (recommended):
+
+```powershell
+python scripts/dedup_all_folders.py
+python scripts/optimize_all_city_images.py
+python scripts/lint_image_paths.py
+python scripts/city_guide_text_lint.py
+python scripts/verify_city_guide_place_images.py
+```
+
 ---
 
 ## All cities (31)

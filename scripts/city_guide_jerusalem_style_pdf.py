@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import shutil
 import sys
 from html import escape
 from pathlib import Path
@@ -21,9 +22,12 @@ from scripts.city_guide_core import (
     smallest_same_stem_image_rel,
 )
 from scripts.city_guide_historical_reference_ru import (
+    HERALDRY_CHAPTER_LABEL_EN,
     HERALDRY_CHAPTER_LABEL_RU,
+    HISTORICAL_SECTION_TITLE_EN,
     historical_reference_section_html,
-    reference_text_ru_for_city,
+    reference_text_en_for_city,
+    reference_text_ru_for_any_city,
 )
 from scripts.city_guide_typography import guide_inline_css
 from scripts.city_guide_typography import typography_triple
@@ -38,6 +42,54 @@ _OTIUM_PARAS_EN: tuple[str, ...] = (
     "and leave a route unfinished if the light on a façade deserves "
     "another minute.",
 )
+
+_OTIUM_PARAS_RU: tuple[str, ...] = (
+    "OTIUM — практика нарочитого досуга. В античном смысле otium — не "
+    "побег от работы, а время, когда внимание возвращается к памяти, "
+    "пейзажу и мысли — без прикладного дедлайна.",
+    "Мы выстраиваем маршруты для неспешного присутствия, а не для "
+    "чек-листа достопримечательностей: важно быть в месте, а не "
+    "«потреблять» виды.",
+    "OTIUM — не туроператор. Это приглашение пройтись, остановиться "
+    "и оставить маршрут незавершённым, если свет на фасаде заслуживает "
+    "ещё минуты.",
+)
+
+
+def _guide_strings(edition: str) -> dict[str, str]:
+    """UI chrome for one PDF language edition (en or ru)."""
+    if edition == "ru":
+        return {
+            "lead": "Путеводитель. Объектов в этом выпуске: {}.",
+            "facts_heading": "Факты и детали",
+            "stories_heading": "Истории и легенды",
+            "history_heading": "История",
+            "significance_heading": "Значение",
+            "address": "Адрес:",
+            "style": "Стиль:",
+            "period": "Период:",
+            "img_alt_extra": "{} — вид {}",
+            "html_title": "Путеводитель · {} · OTIUM",
+        }
+    return {
+        "lead": "Guide. Places in this edition: {}.",
+        "facts_heading": "Facts and details",
+        "stories_heading": "Stories and legends",
+        "history_heading": "History",
+        "significance_heading": "Significance",
+        "address": "Address:",
+        "style": "Style:",
+        "period": "Period:",
+        "img_alt_extra": "{} — view {}",
+        "html_title": "Guide · {} · OTIUM",
+    }
+
+
+def _place_sort_key(p: dict[str, Any]) -> tuple[str, str]:
+    name = (p.get("name_en") or "").strip()
+    if not name:
+        name = (p.get("name_ru") or "").strip()
+    return (name.lower(), str(p.get("slug", "")))
 
 
 def _place_has_displayable_body(p: dict[str, Any]) -> bool:
@@ -69,19 +121,28 @@ def places_with_local_images(
             continue
         if smallest_same_stem_image_rel(root, rel) is not None:
             out.append(p)
-    key_fn = lambda x: (str(x.get("name_en", "")), str(x.get("slug", "")))
-    out.sort(key=key_fn)
+    out.sort(key=_place_sort_key)
     return out
 
 
-def _place_meta_line(p: dict[str, Any]) -> str | None:
+def _place_meta_line(p: dict[str, Any], edition: str) -> str | None:
+    s = _guide_strings(edition)
     parts: list[str] = []
     if is_substantive_text(p.get("address")):
-        parts.append("Address: {}".format(str(p["address"]).strip()))
+        parts.append(
+            "{} {}".format(s["address"], str(p["address"]).strip()),
+        )
     if is_substantive_text(p.get("architecture_style")):
-        parts.append("Style: {}".format(str(p["architecture_style"]).strip()))
+        parts.append(
+            "{} {}".format(
+                s["style"],
+                str(p["architecture_style"]).strip(),
+            ),
+        )
     if is_substantive_text(p.get("year_built")):
-        parts.append("Period: {}".format(str(p["year_built"]).strip()))
+        parts.append(
+            "{} {}".format(s["period"], str(p["year_built"]).strip()),
+        )
     if not parts:
         return None
     return " | ".join(parts)
@@ -124,28 +185,58 @@ def _image_srcs_for_place(
 
 
 def _subtitle_html(p: dict[str, Any]) -> str:
-    if is_substantive_text(p.get("subtitle_en")):
-        t = str(p["subtitle_en"])
-        return '<p class="sub-en">{}</p>'.format(escape(t))
-    if is_substantive_text(p.get("subtitle_it")):
-        t = str(p["subtitle_it"])
-        return '<p class="sub-it">{}</p>'.format(escape(t))
-    if is_substantive_text(p.get("subtitle_ja")):
-        t = str(p["subtitle_ja"])
-        return '<p class="sub-ja" lang="ja">{}</p>'.format(escape(t))
-    if is_substantive_text(p.get("subtitle_he")):
-        t = str(p["subtitle_he"])
-        return '<p class="sub-he" dir="rtl" lang="he">{}</p>'.format(
-            escape(t),
-        )
+    pairs: tuple[tuple[str, str, str | None], ...] = (
+        ("subtitle_en", "sub-en", None),
+        ("subtitle_de", "sub-de", None),
+        ("subtitle_fr", "sub-fr", None),
+        ("subtitle_es", "sub-es", None),
+        ("subtitle_it", "sub-it", None),
+        ("subtitle_ca", "sub-ca", None),
+        ("subtitle_hu", "sub-hu", None),
+        ("subtitle_cs", "sub-cs", None),
+        ("subtitle_ja", "sub-ja", "ja"),
+        ("subtitle_he", "sub-he", "he"),
+    )
+    for key, cls, lang_attr in pairs:
+        if not is_substantive_text(p.get(key)):
+            continue
+        t = str(p[key])
+        if lang_attr:
+            return '<p class="{}" dir="{}" lang="{}">{}</p>'.format(
+                cls,
+                "rtl" if lang_attr == "he" else "ltr",
+                lang_attr,
+                escape(t),
+            )
+        return '<p class="{}">{}</p>'.format(cls, escape(t))
     return ""
 
 
-def place_block(p: dict[str, Any], img_srcs: list[str]) -> str:
-    name_en = escape(str(p.get("name_en", "")))
-    name_plain = str(p.get("name_en", ""))
+def _place_title_parts(p: dict[str, Any], edition: str) -> tuple[str, str]:
+    """(escaped heading HTML, plain string for img alt)."""
+    if edition == "ru":
+        nr = (p.get("name_ru") or "").strip()
+        if nr:
+            return escape(nr), nr
+        ne = (p.get("name_en") or "").strip()
+        if ne:
+            return escape(ne), ne
+    else:
+        ne = (p.get("name_en") or "").strip()
+        if ne:
+            return escape(ne), ne
+        nr = (p.get("name_ru") or "").strip()
+        if nr:
+            return escape(nr), nr
+    slug = str(p.get("slug", "place"))
+    return escape(slug), slug
+
+
+def place_block(p: dict[str, Any], img_srcs: list[str], edition: str) -> str:
+    s = _guide_strings(edition)
+    name_h, name_plain = _place_title_parts(p, edition)
     sub_html = _subtitle_html(p)
-    meta = _place_meta_line(p)
+    meta = _place_meta_line(p, edition)
     meta_html = (
         '<p class="place-meta">{}</p>'.format(escape(meta))
         if meta
@@ -154,13 +245,15 @@ def place_block(p: dict[str, Any], img_srcs: list[str]) -> str:
     slug = str(p.get("slug", "x"))
     chunks: list[str] = [
         '<section class="place" id="{}">'.format(escape(slug)),
-        "<h3>{}</h3>".format(name_en),
+        "<h3>{}</h3>".format(name_h),
         sub_html,
         meta_html,
     ]
     for i, src in enumerate(img_srcs):
-        alt = name_plain if i == 0 else "{} — view {}".format(
-            name_plain, i + 1,
+        alt = (
+            name_plain
+            if i == 0
+            else s["img_alt_extra"].format(name_plain, i + 1)
         )
         chunks.append(
             '<figure class="place-fig"><img src="{}" alt="{}"/></figure>'.format(
@@ -183,8 +276,11 @@ def place_block(p: dict[str, Any], img_srcs: list[str]) -> str:
         )
         if lis:
             chunks.append(
-                "<h4>Facts and details</h4>\n"
-                "<ul class=\"facts\">{}</ul>".format(lis)
+                "<h4>{}</h4>\n"
+                "<ul class=\"facts\">{}</ul>".format(
+                    escape(s["facts_heading"]),
+                    lis,
+                )
             )
     stories = p.get("stories") or []
     if stories:
@@ -195,14 +291,19 @@ def place_block(p: dict[str, Any], img_srcs: list[str]) -> str:
         )
         if st_li:
             chunks.append(
-                "<h4>Stories and legends</h4>\n"
-                "<ul class=\"stories\">{}</ul>".format(st_li)
+                "<h4>{}</h4>\n"
+                "<ul class=\"stories\">{}</ul>".format(
+                    escape(s["stories_heading"]),
+                    st_li,
+                )
             )
     if is_substantive_text(p.get("history")):
-        chunks.append("<h4>History</h4>")
+        chunks.append("<h4>{}</h4>".format(escape(s["history_heading"])))
         chunks.append(_html_paragraphs(str(p["history"])))
     if is_substantive_text(p.get("significance")):
-        chunks.append("<h4>Significance</h4>")
+        chunks.append(
+            "<h4>{}</h4>".format(escape(s["significance_heading"])),
+        )
         chunks.append(_html_paragraphs(str(p["significance"])))
     chunks.append("</section>")
     return "\n".join(chunks)
@@ -234,8 +335,14 @@ def heraldry_html(
     root: Path,
     title_symbols_class: str,
     title_symbols: tuple[tuple[str, str], ...],
+    edition: str,
 ) -> str:
-    label_esc = escape(HERALDRY_CHAPTER_LABEL_RU)
+    label = (
+        HERALDRY_CHAPTER_LABEL_RU
+        if edition == "ru"
+        else HERALDRY_CHAPTER_LABEL_EN
+    )
+    label_esc = escape(label)
     chunks: list[str] = [
         '<div class="{}" aria-label="{}">'.format(
             title_symbols_class,
@@ -252,9 +359,10 @@ def heraldry_html(
     return "\n".join(chunks)
 
 
-def cover_otium_html() -> str:
+def cover_otium_html(edition: str) -> str:
+    paras_src = _OTIUM_PARAS_RU if edition == "ru" else _OTIUM_PARAS_EN
     paras = "\n".join(
-        '<p class="otiump">{}</p>'.format(escape(t)) for t in _OTIUM_PARAS_EN
+        '<p class="otiump">{}</p>'.format(escape(t)) for t in paras_src
     )
     return (
         '<section class="cover-otium">'
@@ -272,24 +380,42 @@ def build_html(
     title_symbols_class: str,
     title_symbols: tuple[tuple[str, str], ...],
     places: list[dict[str, Any]],
-    html_lang: str,
+    edition: str,
+    html_lang_attr: str | None = None,
+    project_root: Path | None = None,
 ) -> str:
+    s = _guide_strings(edition)
     font_href, _, _ = typography_triple(city_slug)
-    blocks: list[str] = [cover_otium_html()]
+    blocks: list[str] = [cover_otium_html(edition)]
     blocks.append(
         '<header class="guide-title">'
         "{}"
         "<h1 class=\"guide-title-main\">{}</h1>"
-        "<p class=\"lead\">Guide. Places in this edition: {}.</p>"
+        "<p class=\"lead\">{}</p>"
         "</header>".format(
-            heraldry_html(root, title_symbols_class, title_symbols),
+            heraldry_html(
+                root,
+                title_symbols_class,
+                title_symbols,
+                edition,
+            ),
             escape(display_title),
-            len(places),
+            escape(s["lead"].format(len(places))),
         ),
     )
-    hist = historical_reference_section_html(
-        reference_text_ru_for_city(city_slug),
-    )
+    if edition == "ru":
+        hist = historical_reference_section_html(
+            reference_text_ru_for_any_city(city_slug, project_root),
+        )
+    else:
+        body_en = reference_text_en_for_city(city_slug)
+        if body_en:
+            hist = historical_reference_section_html(
+                body_en,
+                section_title=HISTORICAL_SECTION_TITLE_EN,
+            )
+        else:
+            hist = ""
     if hist:
         blocks.append(hist)
     for p in places:
@@ -298,17 +424,24 @@ def build_html(
             p.get("suppress_images_for_pdf") and _place_has_displayable_body(p)
         ):
             continue
-        blocks.append(place_block(p, srcs))
+        blocks.append(place_block(p, srcs, edition))
     body_inner = "\n".join(blocks)
     css = guide_inline_css(title_symbols_class, city_slug)
+    root_lang = html_lang_attr if html_lang_attr else edition
     return (
         "<!DOCTYPE html>\n"
         '<html lang="{}">\n<head>\n'
         '<meta charset="utf-8"/>\n'
-        "<title>Guide · {} · OTIUM</title>\n"
+        "<title>{}</title>\n"
         '<link rel="stylesheet" href="{}"/>\n'
         "<style>\n{}</style>\n</head>\n<body>\n{}\n</body>\n</html>\n"
-    ).format(html_lang, escape(display_title), font_href, css, body_inner)
+    ).format(
+        root_lang,
+        escape(s["html_title"].format(display_title)),
+        font_href,
+        css,
+        body_inner,
+    )
 
 
 def run_build_pdf_main(
@@ -323,10 +456,10 @@ def run_build_pdf_main(
     html_name: str,
     pdf_name: str,
     argv: list[str] | None,
-    html_lang: str = "en",
+    html_lang_attr: str | None = None,
 ) -> int:
     parser = argparse.ArgumentParser(
-        description="Build {} HTML/PDF.".format(display_title),
+        description="Build {} HTML/PDF (en/ru editions).".format(display_title),
     )
     parser.add_argument(
         "--city-root",
@@ -352,6 +485,15 @@ def run_build_pdf_main(
         metavar="MS",
         help="Playwright wait for images (default 30000).",
     )
+    parser.add_argument(
+        "--lang",
+        dest="langs",
+        nargs="+",
+        choices=("en", "ru"),
+        default=("en", "ru"),
+        metavar="LANG",
+        help="Guide edition language(s): en, ru (default: both).",
+    )
     args = parser.parse_args(argv)
     root = args.city_root.resolve()
     out_dir = (
@@ -360,6 +502,22 @@ def run_build_pdf_main(
         else root / "output"
     )
     out_dir.mkdir(parents=True, exist_ok=True)
+
+    if not pdf_name.endswith(".pdf") or not html_name.endswith(".html"):
+        print(
+            "pdf_name must end with .pdf and html_name with .html "
+            "(e.g. berlin_guide.pdf).",
+            file=sys.stderr,
+        )
+        return 2
+    stem = pdf_name[:-4]
+    if html_name[:-5] != stem:
+        print(
+            "html_name stem must match pdf_name stem (e.g. "
+            "berlin_guide.html + berlin_guide.pdf).",
+            file=sys.stderr,
+        )
+        return 2
 
     built = places_with_local_images(root, places)
     if not built:
@@ -370,49 +528,74 @@ def run_build_pdf_main(
         )
         return 2
 
-    html_path = out_dir / html_name
-    html_path.write_text(
-        build_html(
-            root,
-            city_slug=city_slug,
-            display_title=display_title,
-            title_symbols_class=title_symbols_class,
-            title_symbols=title_symbols,
-            places=built,
-            html_lang=html_lang,
-        ),
-        encoding="utf-8",
-    )
-    print("Written:", html_path)
-
-    if args.html_only:
-        print("Places in HTML: {}".format(len(built)))
-        return 0
-
-    pdf_path = out_dir / pdf_name
+    langs: tuple[str, ...] = tuple(dict.fromkeys(args.langs))
     footer = (
         "<div style='font-size:9px;text-align:center;width:100%'>"
         "<span class='pageNumber'></span> / <span class='totalPages'></span>"
         "</div>"
     )
     header = "<div style='font-size:9px;width:100%'></div>"
-    if _pdf_via_playwright(
-        html_path,
-        pdf_path,
-        image_wait_timeout_ms=args.image_wait_ms,
-        display_header_footer=True,
-        footer_template=footer,
-        header_template=header,
-        static_site_root=root,
-    ):
-        _strip_empty_pdf_pages(pdf_path)
-        _strip_pdf_metadata(pdf_path)
-        copy_built_guide_pdf_to_final_guides(project_root, pdf_path)
-        print("Written:", pdf_path)
+
+    for edition in langs:
+        html_path = out_dir / "{}_{}.html".format(stem, edition)
+        pdf_path = out_dir / "{}_{}.pdf".format(stem, edition)
+        html_path.write_text(
+            build_html(
+                root,
+                city_slug=city_slug,
+                display_title=display_title,
+                title_symbols_class=title_symbols_class,
+                title_symbols=title_symbols,
+                places=built,
+                edition=edition,
+                html_lang_attr=html_lang_attr,
+                project_root=project_root,
+            ),
+            encoding="utf-8",
+        )
+        print("Written:", html_path)
+        if args.html_only:
+            continue
+        if _pdf_via_playwright(
+            html_path,
+            pdf_path,
+            image_wait_timeout_ms=args.image_wait_ms,
+            display_header_footer=True,
+            footer_template=footer,
+            header_template=header,
+            static_site_root=root,
+        ):
+            _strip_empty_pdf_pages(pdf_path)
+            _strip_pdf_metadata(pdf_path)
+            copy_built_guide_pdf_to_final_guides(project_root, pdf_path)
+            print("Written:", pdf_path)
+        else:
+            print(
+                "PDF failed ({}): pip install playwright && "
+                "playwright install chromium".format(edition),
+                file=sys.stderr,
+            )
+            return 1
+
+    if args.html_only:
+        print("Places in HTML: {}".format(len(built)))
+    else:
         print("Places in PDF: {}".format(len(built)))
-        return 0
-    print(
-        "PDF failed: pip install playwright && playwright install chromium",
-        file=sys.stderr,
+
+    primary = "en" if "en" in langs else langs[0]
+    shutil.copy2(
+        out_dir / "{}_{}.html".format(stem, primary),
+        out_dir / html_name,
     )
-    return 1
+    if not args.html_only:
+        shutil.copy2(
+            out_dir / "{}_{}.pdf".format(stem, primary),
+            out_dir / pdf_name,
+        )
+        print("Primary edition ({}): {}".format(primary, out_dir / pdf_name))
+
+    return 0
+
+
+# Stable import name for SPB/Smolensk builders (same mapping as _guide_strings).
+guide_ui_strings = _guide_strings

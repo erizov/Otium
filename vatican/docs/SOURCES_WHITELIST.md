@@ -1,7 +1,20 @@
-# Vatican guide — allowed image source prefixes
+# Allowed sources — Vatican
 
-Wikimedia Commons and Wikipedia are allowed by the shared validator.
+## Images (validated by validate_vatican_sources.py)
 
-Additional HTTPS prefixes (one URL per line):
+- https://upload.wikimedia.org/
+- https://commons.wikimedia.org/
 
-https://www.vatican.va/
+## Facts (editors / RAG fetch_sources allowlist)
+
+Use for dates, names, and history — not for long verbatim copy.
+
+- https://www.unesco.org/
+- https://www.wikidata.org/
+- https://en.wikipedia.org/
+- https://ru.wikipedia.org/
+- https://www.museivaticani.va/
+## Do not use for facts
+
+- TripAdvisor, Pinterest, random blogs, unattributed social posts
+- Stock photo sites for factual claims (images only if ever whitelisted)

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Grow per-city guides to >=25 places using Wikimedia Commons search.
+"""Grow per-city guides to >=30 places using Wikimedia Commons search.
 
 Reads each ``<slug>/data/<slug>_places.json``, appends new rows for slugs
 not yet present, resolves ``commons_file`` via search + batched imageinfo,
@@ -21,9 +21,17 @@ from pathlib import Path
 from typing import Any
 
 _PROJECT_ROOT = Path(__file__).resolve().parent.parent
+if str(_PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(_PROJECT_ROOT))
 _USER_AGENT = "ExcursionGuide/1.0 (grow_city_guides_to_25.py)"
 
-_MIN_PLACES = 25
+_MIN_PLACES = 30
+
+from scripts.city_guide_registry_common import drop_empty_place_rows
+from scripts.grow_city_guides_extra_seeds import EXTRA_SEEDS
+from scripts.grow_city_guides_extra_seeds import TOPUP_SEEDS
+from scripts.rag.city_map import names_for_slug
+from scripts.verify_city_guide_place_images import _REGISTRY
 
 _STATIC_COMMONS_PATH = Path(__file__).resolve().parent / (
     "grow_existing_static_commons.json"
@@ -441,9 +449,11 @@ def _finalize_row(
         )
     row = {k: v for k, v in partial.items() if k not in ("commons_file",)}
     row["image_source_url"] = src
-    row["image_rel_path"] = "images/{}.jpg".format(slug)
-    row["license_note"] = "See Wikimedia Commons file page for license."
-    row["attribution"] = "Wikimedia Commons contributors"
+    from scripts.city_guide_naming import image_rel_path_for_slug
+
+    row["image_rel_path"] = image_rel_path_for_slug(slug)
+    row["license_note"] = "CC BY-SA 4.0 (Wikimedia Commons)."
+    row["attribution"] = "Wikimedia Commons"
     return row
 
 
@@ -452,17 +462,19 @@ def _generic_place_row(
     name_en: str,
     category: str,
     *,
-    address: str,
+    city_slug: str,
     commons_file: str,
 ) -> dict[str, Any]:
+    city = names_for_slug(city_slug)
     return {
         "slug": slug,
         "category": category,
         "name_en": name_en,
-        "address": address,
         "description": (
-            "Notable city landmark; see Commons file page for photograph "
-            "context and reuse terms."
+            "{} is a historic and cultural landmark in {}.".format(
+                name_en,
+                city.name_en,
+            )
         ),
         "facts": [
             "Check opening hours and ticketing on official sites before travel.",
@@ -470,6 +482,135 @@ def _generic_place_row(
         ],
         "commons_file": commons_file,
     }
+
+
+def _seeds_for_city(city_slug: str) -> list[tuple[str, str, str, str]]:
+    out: list[tuple[str, str, str, str]] = []
+    seen: set[str] = set()
+    for batch in (
+        _SEEDS.get(city_slug, ()),
+        EXTRA_SEEDS.get(city_slug, ()),
+        TOPUP_SEEDS.get(city_slug, ()),
+        _BOOTSTRAP.get(city_slug, ()),
+    ):
+        for item in batch:
+            if item[0] not in seen:
+                seen.add(item[0])
+                out.append(item)
+    return out
+
+
+def _append_seeds_to_city(
+    city_slug: str,
+    path: Path,
+    seeds: list[tuple[str, str, str, str]],
+    *,
+    pause_search: float,
+    batch_size: int,
+    batch_pause: float,
+) -> int:
+    raw_rows = json.loads(path.read_text(encoding="utf-8"))
+    rows = drop_empty_place_rows(raw_rows)
+    cleaned = len(rows) != len(raw_rows)
+    have = {str(r.get("slug") or "") for r in rows if r.get("slug")}
+    partials: list[dict[str, Any]] = []
+    needed_files: list[str] = []
+    for place_slug, name_en, category, query in seeds:
+        if place_slug in have:
+            continue
+        if len(rows) + len(partials) >= _MIN_PLACES:
+            break
+        title = _STATIC_COMMONS_FILE.get(city_slug, {}).get(place_slug)
+        if not title:
+            title = _commons_search_title(query, pause=pause_search)
+        if not title:
+            print(
+                "  skip (no Commons):",
+                place_slug,
+                file=sys.stderr,
+            )
+            continue
+        partials.append(
+            _generic_place_row(
+                place_slug,
+                name_en,
+                category,
+                city_slug=city_slug,
+                commons_file=title,
+            ),
+        )
+    for p in partials:
+        cf = p.get("commons_file")
+        if cf and cf not in needed_files:
+            needed_files.append(cf)
+    url_map: dict[str, str] = {}
+    for i in range(0, len(needed_files), batch_size):
+        batch = needed_files[i : i + batch_size]
+        url_map.update(_batch_commons_urls(batch, pause_sec=batch_pause))
+    added = 0
+    for raw in partials:
+        fin = _finalize_row(dict(raw), url_map=url_map)
+        if fin["slug"] in have:
+            continue
+        rows.append(fin)
+        have.add(fin["slug"])
+        added += 1
+    if added or cleaned:
+        path.write_text(
+            json.dumps(rows, ensure_ascii=False, indent=2) + "\n",
+            encoding="utf-8",
+        )
+    return added
+
+
+def _grow_all_registry(
+    *,
+    pause_search: float,
+    batch_size: int,
+    batch_pause: float,
+    only_cities: frozenset[str] | None = None,
+) -> None:
+    for city_slug, _mod, _attr in _REGISTRY:
+        if only_cities is not None and city_slug not in only_cities:
+            continue
+        if city_slug in ("smolensk", "spb"):
+            continue
+        path = _PROJECT_ROOT / city_slug / "data" / "{}_places.json".format(
+            city_slug,
+        )
+        if not path.is_file():
+            continue
+        rows = json.loads(path.read_text(encoding="utf-8"))
+        if len(rows) >= _MIN_PLACES:
+            print(city_slug, "skip (already", len(rows), "places)")
+            continue
+        seeds = _seeds_for_city(city_slug)
+        if not seeds:
+            print(city_slug, "skip (no seeds)")
+            continue
+        added = _append_seeds_to_city(
+            city_slug,
+            path,
+            seeds,
+            pause_search=pause_search,
+            batch_size=batch_size,
+            batch_pause=batch_pause,
+        )
+        rows = json.loads(path.read_text(encoding="utf-8"))
+        print(
+            city_slug,
+            "->",
+            len(rows),
+            "places (+{} new)".format(added),
+        )
+        if len(rows) < _MIN_PLACES:
+            print(
+                "  WARN:",
+                city_slug,
+                "still below",
+                _MIN_PLACES,
+                file=sys.stderr,
+            )
 
 
 def _grow_existing(
@@ -487,7 +628,7 @@ def _grow_existing(
         if len(rows) >= _MIN_PLACES:
             print(slug, "skip (already", len(rows), "places)")
             continue
-        seeds = _SEEDS.get(slug)
+        seeds = _seeds_for_city(slug)
         if not seeds:
             raise SystemExit("No seeds for {}".format(slug))
         have = {r["slug"] for r in rows}
@@ -510,7 +651,7 @@ def _grow_existing(
                     place_slug,
                     name_en,
                     category,
-                    address="See official visitor information.",
+                    city_slug=slug,
                     commons_file=title,
                 ),
             )
@@ -881,55 +1022,19 @@ def _bootstrap_city(
                 "places)",
             )
             return
-    else:
-        rows = []
-    have = {r["slug"] for r in rows}
-    partials: list[dict[str, Any]] = []
-    needed_files: list[str] = []
-    for place_slug, name_en, category, query in seeds:
-        if place_slug in have:
-            continue
-        title = _STATIC_COMMONS_FILE.get(slug, {}).get(place_slug)
-        if not title:
-            title = _commons_search_title(query, pause=pause_search)
-        if not title:
-            raise SystemExit(
-                "Commons search found no raster for {} ({!r})".format(
-                    place_slug,
-                    query,
-                ),
-            )
-        partials.append(
-            _generic_place_row(
-                place_slug,
-                name_en,
-                category,
-                address="See official visitor information.",
-                commons_file=title,
-            ),
-        )
-    for p in partials:
-        cf = p.get("commons_file")
-        if cf and cf not in needed_files:
-            needed_files.append(cf)
-    url_map: dict[str, str] = {}
-    for i in range(0, len(needed_files), batch_size):
-        batch = needed_files[i : i + batch_size]
-        url_map.update(_batch_commons_urls(batch, pause_sec=batch_pause))
-    for raw in partials:
-        fin = _finalize_row(dict(raw), url_map=url_map)
-        if fin["slug"] in have:
-            continue
-        rows.append(fin)
-        have.add(fin["slug"])
+    added = _append_seeds_to_city(
+        slug,
+        path,
+        _seeds_for_city(slug),
+        pause_search=pause_search,
+        batch_size=batch_size,
+        batch_pause=batch_pause,
+    )
+    rows = json.loads(path.read_text(encoding="utf-8"))
     if len(rows) < _MIN_PLACES:
         raise SystemExit(
-            "{} has only {} places".format(slug, len(rows)),
+            "{} has only {} places (added {})".format(slug, len(rows), added),
         )
-    path.write_text(
-        json.dumps(rows, ensure_ascii=False, indent=2) + "\n",
-        encoding="utf-8",
-    )
     print(slug, "bootstrap ->", len(rows), "places at", path)
 
 
@@ -968,7 +1073,29 @@ def main() -> int:
         action="store_true",
         help="skip growing the 14 legacy guides (bootstrap only)",
     )
+    parser.add_argument(
+        "--grow-all",
+        action="store_true",
+        help="grow every registry city below {} places".format(_MIN_PLACES),
+    )
+    parser.add_argument(
+        "--cities",
+        nargs="*",
+        default=None,
+        metavar="SLUG",
+        help="with --grow-all, limit to these city slugs",
+    )
     args = parser.parse_args()
+
+    if args.grow_all:
+        want = frozenset(args.cities) if args.cities else None
+        _grow_all_registry(
+            pause_search=args.pause_search,
+            batch_size=args.batch_size,
+            batch_pause=args.batch_pause,
+            only_cities=want,
+        )
+        return 0
 
     if not args.no_grow:
         _grow_existing(

@@ -198,9 +198,10 @@
           </div>
         </header>
 
+        <div id="placeImages" class="images images-top"></div>
+
         <section class="content">
           <div id="placeWorkspace">
-          <div id="placeImages" class="images"></div>
 
           <div class="grid">
             <section class="card">
@@ -211,6 +212,10 @@
             <section class="card">
               <h2>LLM draft</h2>
               <div class="row">
+                <div class="control grow">
+                  <label class="label" for="promptPresetSelect">Preset</label>
+                  <select id="promptPresetSelect" class="select"></select>
+                </div>
                 <div class="control grow">
                   <label class="label" for="providerSelect">Provider</label>
                   <select id="providerSelect" class="select"></select>
@@ -328,7 +333,34 @@
 
           <div id="chapterWorkspace" hidden>
             <div id="chapterImages" class="images chapter-images"></div>
-            <div class="grid">
+            <div id="chapterHistoryWrap" hidden>
+              <section class="card">
+                <h2 id="chapterHistoryHeading"></h2>
+                <p class="muted">
+                  Параграфы отделяйте пустой строкой. Файл:
+                  <code>{{ city_slug }}_historical_reference_ru.txt</code> в
+                  <code>{{ city_slug }}/data/</code> (входит в сборку PDF).
+                </p>
+                <label class="label" for="historyRefEdit">Текст</label>
+                <textarea
+                  id="historyRefEdit"
+                  class="textarea"
+                  rows="18"
+                  spellcheck="true"
+                ></textarea>
+                <div class="row" style="margin-top: 12px; align-items: center">
+                  <button
+                    type="button"
+                    id="historyRefSaveBtn"
+                    class="button primary"
+                  >
+                    Сохранить
+                  </button>
+                  <span id="historyRefSaveStatus" class="status muted"></span>
+                </div>
+              </section>
+            </div>
+            <div id="chapterStandardWrap" class="grid">
               <section class="card">
                 <h2 id="chapterCardHeading"></h2>
                 <div id="chapterCardBody" class="prose muted"></div>
