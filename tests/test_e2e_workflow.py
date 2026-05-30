@@ -227,7 +227,7 @@ def test_image_files_exist_and_valid() -> None:
     """Check images exist, are valid size, and not too small."""
     from scripts.guide_loader import GUIDES, GUIDE_TO_SUBDIR
 
-    output_dir = _PROJECT_ROOT / "output"
+    output_dir = _PROJECT_ROOT / "moscow" / "output"
     errors: list[str] = []
     images_dir = output_dir / "images"
 
@@ -295,7 +295,7 @@ def test_links_in_html() -> None:
     """Check HTML files for broken image links."""
     import re
 
-    output_dir = _PROJECT_ROOT / "output"
+    output_dir = _PROJECT_ROOT / "moscow" / "output"
     if not output_dir.exists():
         pytest.skip("output directory not found - run build first")
 
@@ -328,7 +328,7 @@ def test_links_in_html() -> None:
 
 
 @pytest.mark.skipif(
-    not (_PROJECT_ROOT / "output").exists(),
+    not (_PROJECT_ROOT / "moscow" / "output").exists(),
     reason="output directory not found - run build first",
 )
 def test_e2e_validation() -> None:

@@ -85,7 +85,7 @@ def _rotate_backup(backup_dir: Path, guide: str, ext: str) -> None:
     is copied to backup/<guide>_guide_1<ext>; previous _1 -> _2, _2 -> _3;
     _3 is removed. Keeps at most MAX_BACKUPS_PER_GUIDE.
     """
-    output_dir = PROJECT_ROOT / "output"
+    output_dir = PROJECT_ROOT / "moscow" / "output"
     base = "{}_guide".format(guide)
     src = output_dir / (base + ext)
     if not src.exists():
@@ -262,10 +262,10 @@ def main() -> int:
     )
     args = parser.parse_args()
 
-    output_dir = PROJECT_ROOT / "output"
+    output_dir = PROJECT_ROOT / "moscow" / "output"
     output_dir.mkdir(exist_ok=True)
     backup_dir = output_dir / BACKUP_DIR_NAME
-    images_root = output_dir / "images"
+    images_root = PROJECT_ROOT / "moscow" / "images"
 
     print("Step 1: Backing up existing guides (keep {} per guide)...".format(
         MAX_BACKUPS_PER_GUIDE,

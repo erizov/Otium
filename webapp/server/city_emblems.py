@@ -37,7 +37,7 @@ def emblems_for_city(project_root: Path, city_slug: str) -> CityEmblems:
     Convention used by the per-city guide builders: `images/guide_coat_of_arms.*`
     and `images/guide_flag.*` inside each `<city>/images/` directory.
 
-    For Moscow, if those files are missing, titul assets under `output/images/`
+    For Moscow, if those files are missing, titul assets under ``moscow/images/``
     are used when present (same set as the combined PDF titul).
 
     Note: `images/guide_flag.*` is often a city flag in this repo; the country

@@ -16,14 +16,15 @@ import subprocess
 import sys
 from pathlib import Path
 
+_PROJECT_ROOT = Path(__file__).resolve().parent.parent
+if str(_PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(_PROJECT_ROOT))
+
 from scripts.archive_city_guide_pdfs import archive_city_output_pdfs
 
 
 def _project_root() -> Path:
-    root = Path(__file__).resolve().parent.parent
-    if str(root) not in sys.path:
-        sys.path.insert(0, str(root))
-    return root
+    return _PROJECT_ROOT
 
 
 def _discover_slugs(project_root: Path) -> list[str]:

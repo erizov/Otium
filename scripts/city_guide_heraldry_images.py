@@ -112,7 +112,7 @@ def collect_moscow_heraldry_from_output(
     project_root: Path,
 ) -> list[dict[str, str]]:
     """Heraldry strip files under ``output/images/`` (URLs use ``/moscow-media``)."""
-    out_root = project_root / "output"
+    out_root = project_root / "moscow"
     seen: set[str] = set()
     rows: list[dict[str, str]] = []
     for rel, alt in MOSCOW_OUTPUT_TITLE_STRIP:

@@ -41,7 +41,7 @@ from scripts.city_guide_core import copy_built_guide_pdf_to_final_guides
 from scripts.guide_loader import GUIDES, load_places
 
 OUTPUT_BASENAME = "Moscow_Complete_Guide"
-OUTPUT_DIR = _PROJECT_ROOT / "output"
+OUTPUT_DIR = _PROJECT_ROOT / "moscow" / "output"
 BACKUP_DIR = OUTPUT_DIR / "backup"
 MAX_BACKUPS = 3
 

@@ -26,7 +26,7 @@ from scripts.city_guide_core import copy_built_guide_pdf_to_final_guides
 from scripts.guide_loader import GUIDES, load_places
 
 OUTPUT_BASENAME = "Moscow_Complete_Guide"
-OUTPUT_DIR = _PROJECT_ROOT / "output"
+OUTPUT_DIR = _PROJECT_ROOT / "moscow" / "output"
 
 # Chapter order and unique Moscow-themed intro (title, description).
 # Description is specific to Moscow and the chapter topic; not repeated.

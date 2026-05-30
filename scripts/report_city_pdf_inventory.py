@@ -102,7 +102,7 @@ def _collect_city_rows(root: Path) -> list[dict[str, Any]]:
 
 
 def _collect_output_pdf_rows(root: Path) -> list[dict[str, Any]]:
-    out_root = root / "output"
+    out_root = root / "moscow" / "output"
     if not out_root.is_dir():
         return []
     rows: list[dict[str, Any]] = []

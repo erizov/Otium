@@ -92,11 +92,11 @@ app.mount(
     name="static",
 )
 
-_output_dir = PROJECT_ROOT / "output"
-if _output_dir.is_dir():
+_moscow_root = PROJECT_ROOT / "moscow"
+if _moscow_root.is_dir():
     app.mount(
         "/moscow-media",
-        StaticFiles(directory=str(_output_dir)),
+        StaticFiles(directory=str(_moscow_root)),
         name="moscow-media",
     )
 
@@ -245,7 +245,7 @@ def api_places(city_slug: str) -> dict[str, Any]:
     paths = city_paths(PROJECT_ROOT, city_slug)
     if city_slug == "moscow":
         media_base = "/moscow-media"
-        images_root = str(PROJECT_ROOT / "output")
+        images_root = str(PROJECT_ROOT / "moscow")
     else:
         media_base = "/city/{}".format(city_slug)
         images_root = str(paths.images_dir)

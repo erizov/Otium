@@ -25,7 +25,7 @@ if str(_PROJECT_ROOT) not in sys.path:
 from scripts.guide_loader import GUIDES, GUIDE_TO_SUBDIR, load_places
 from scripts.slug_item_map import basename_to_slug
 
-OUTPUT_DIR = _PROJECT_ROOT / "output"
+OUTPUT_DIR = _PROJECT_ROOT / "moscow" / "output"
 
 
 def _basename(rel_path: str) -> str:

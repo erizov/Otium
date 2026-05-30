@@ -10,7 +10,7 @@ _PROJECT_ROOT = Path(__file__).resolve().parent.parent
 if str(_PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(_PROJECT_ROOT))
 
-OUTPUT_IMAGES_DIR = _PROJECT_ROOT / "output" / "images"
+OUTPUT_IMAGES_DIR = _PROJECT_ROOT / "moscow" / "images"
 FORBIDDEN_SUBDIR = "forbidden"
 
 

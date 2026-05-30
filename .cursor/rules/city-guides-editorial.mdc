@@ -1,0 +1,19 @@
+---
+description: >-
+  City guide JSON: no invented facts; valid sources only; omit year, style,
+  history, significance when unsourced; canonical image slugs and no template filler.
+globs: "**/*place*.json"
+alwaysApply: false
+---
+
+# City guides — editorial policy
+
+When editing per-city guide data (`*places.json`, `*place_details*.json`, or similar under `*/data/`):
+
+1. **Do not invent or imply facts.** Every claim in `description`, `history`, `significance`, `facts`, `stories`, and factual meta fields (`year_built`, `architecture_style`, address as a claim) must be traceable to a **valid source** (official or museum site, cited reference, reputable encyclopedia, or project-approved image sources per `docs/SOURCES_WHITELIST.md`). If unsure, **omit** the sentence or field.
+2. **Omit missing fields.** If there is no sourced information for `year_built`, `architecture_style`, `history`, or `significance`, **leave the key out** or use an approved placeholder token (`—`) only where tooling expects stubs. See `is_substantive_text()` in `scripts/city_guide_core.py`.
+3. **Do not** fill gaps with generic “typical period” or vague filler unless the source states it.
+4. **No banned templates** in prose: “Notable city landmark”, “see Commons file page”, “See official visitor information”, etc. Run `python scripts/city_guide_text_lint.py`.
+5. **Image slugs:** curated places use `{city}_{short_id}`; PDF fillers use `{city}_filler_{category}_{nn}` in `<city>_places_pdf_expand.json` only. See `docs/CITY_GUIDES_README.md` (Image naming).
+
+Human-readable detail: `docs/CITY_GUIDES_README.md` (sections **Image naming** and **Editorial policy**).

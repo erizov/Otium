@@ -26,6 +26,11 @@ chapter until `REFERENCE_TEXT_EN` has an entry for the slug. **Tokyo** keeps
 **Smolensk** and **Saint Petersburg** (`build_smolensk_pdf.py`,
 `build_spb_pdf.py`) still emit a single `*_guide.pdf` today (custom titul HTML).
 
+**PDF place filter:** every guide PDF includes only places with a local
+image file on disk (``>= 500`` bytes raster, or valid SVG/GIF). Rows without
+``image_rel_path`` or without a matching file under ``<city>/images/`` are
+skipped; ``suppress_images_for_pdf`` no longer adds text-only sections.
+
 **Rebuild PDFs only when inputs changed:** after you edit JSON, images, the
 city whitelist, or `scripts/build_<slug>_pdf.py`, run
 [`scripts/rebuild_stale_city_guide_pdfs.py`](../scripts/rebuild_stale_city_guide_pdfs.py).

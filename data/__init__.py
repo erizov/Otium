@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-"""Пакет данных для экскурсий."""
+"""Shared repo data (official domains). Moscow registries: ``moscow.data``."""
 
-from data.monasteries import MONASTERIES, Monastery
-from data.qa import QA, QAItem
+from moscow.data.monasteries import MONASTERIES, Monastery
+from moscow.data.qa import QA, QAItem
 
 __all__ = ["MONASTERIES", "Monastery", "QA", "QAItem"]

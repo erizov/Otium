@@ -20,7 +20,10 @@ from scripts.build_pdf import (
     _strip_empty_pdf_pages,
     _strip_pdf_metadata,
 )
-from scripts.city_guide_core import copy_built_guide_pdf_to_final_guides
+from scripts.city_guide_core import (
+    copy_built_guide_pdf_to_final_guides,
+    places_for_pdf,
+)
 from scripts.city_guide_historical_reference_ru import (
     HERALDRY_CHAPTER_LABEL_EN,
     HERALDRY_CHAPTER_LABEL_RU,
@@ -296,21 +299,11 @@ def _chapter_heading(cat: str, count: int, edition: str) -> tuple[str, str]:
 
 
 def _places_with_local_images(spb_root: Path) -> list[SpbPlace]:
-    out: list[SpbPlace] = []
-    for p in SPB_PLACES:
-        rel = p.get("image_rel_path")
-        if not rel:
-            continue
-        path = spb_root / rel
-        if path.is_file() and path.stat().st_size >= MIN_IMAGE_BYTES:
-            out.append(p)
-    out.sort(
-        key=lambda x: (
-            x.get("category", ""),
-            x.get("name_ru", ""),
-        ),
+    return places_for_pdf(
+        spb_root,
+        SPB_PLACES,
+        sort_key=lambda x: (x.get("category", ""), x.get("name_ru", "")),
     )
-    return out
 
 
 def _counts_by_category(places: list[SpbPlace]) -> dict[str, int]:
@@ -793,6 +786,11 @@ def main() -> int:
     out_dir.mkdir(parents=True, exist_ok=True)
 
     places = _places_with_local_images(spb_root)
+    skipped = len(SPB_PLACES) - len(places)
+    if skipped:
+        print(
+            "Skipped {} place(s) without a local image.".format(skipped),
+        )
     if not places:
         print(
             "No places with local images (>= {} bytes). "

@@ -28,8 +28,8 @@ from pathlib import Path
 from typing import Dict, List, Tuple
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
-DATA_DIR = PROJECT_ROOT / "data"
-OUTPUT_IMAGES_DIR = PROJECT_ROOT / "output" / "images"
+DATA_DIR = PROJECT_ROOT / "moscow" / "data"
+OUTPUT_IMAGES_DIR = PROJECT_ROOT / "moscow" / "images"
 
 # Mapping from guide name -> module / variable names / images subdir
 GUIDE_CONFIG: Dict[str, Dict[str, str]] = {
@@ -190,7 +190,7 @@ def load_image_url_module(guide: str) -> Tuple[Path, Dict[str, str], Dict[str, L
 
     sys.path.insert(0, str(PROJECT_ROOT))
     try:
-        mod = __import__(f"data.{module_name}", fromlist=[downloads_name, fallbacks_name])
+        mod = __import__(f"moscow.data.{module_name}", fromlist=[downloads_name, fallbacks_name])
     finally:
         if str(PROJECT_ROOT) in sys.path:
             sys.path.remove(str(PROJECT_ROOT))

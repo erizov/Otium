@@ -39,84 +39,84 @@ def _basename(img_path: str) -> str:
 def _load_guide(guide: str) -> tuple[list[dict], dict[str, str]]:
     """Load places list and DOWNLOADS dict for a guide."""
     if guide == "places_of_worship":
-        from data.places_of_worship import PLACES_OF_WORSHIP
-        from data.places_of_worship_image_urls import (
+        from moscow.data.places_of_worship import PLACES_OF_WORSHIP
+        from moscow.data.places_of_worship_image_urls import (
             PLACES_OF_WORSHIP_IMAGE_DOWNLOADS,
         )
         return PLACES_OF_WORSHIP, PLACES_OF_WORSHIP_IMAGE_DOWNLOADS
     if guide == "parks":
-        from data.parks import PARKS
-        from data.park_image_urls import PARK_IMAGE_DOWNLOADS
+        from moscow.data.parks import PARKS
+        from moscow.data.park_image_urls import PARK_IMAGE_DOWNLOADS
         return PARKS, PARK_IMAGE_DOWNLOADS
     if guide == "museums":
-        from data.museums import MUSEUMS
-        from data.museum_image_urls import MUSEUM_IMAGE_DOWNLOADS
+        from moscow.data.museums import MUSEUMS
+        from moscow.data.museum_image_urls import MUSEUM_IMAGE_DOWNLOADS
         return MUSEUMS, MUSEUM_IMAGE_DOWNLOADS
     if guide == "palaces":
-        from data.palaces import PALACES
-        from data.palace_image_urls import PALACE_IMAGE_DOWNLOADS
+        from moscow.data.palaces import PALACES
+        from moscow.data.palace_image_urls import PALACE_IMAGE_DOWNLOADS
         return PALACES, PALACE_IMAGE_DOWNLOADS
     if guide == "buildings":
-        from data.buildings import BUILDINGS
-        from data.building_image_urls import BUILDING_IMAGE_DOWNLOADS
+        from moscow.data.buildings import BUILDINGS
+        from moscow.data.building_image_urls import BUILDING_IMAGE_DOWNLOADS
         return BUILDINGS, BUILDING_IMAGE_DOWNLOADS
     if guide == "sculptures":
-        from data.sculptures import SCULPTURES
-        from data.sculpture_image_urls import SCULPTURE_IMAGE_DOWNLOADS
+        from moscow.data.sculptures import SCULPTURES
+        from moscow.data.sculpture_image_urls import SCULPTURE_IMAGE_DOWNLOADS
         return SCULPTURES, SCULPTURE_IMAGE_DOWNLOADS
     if guide == "places":
-        from data.places import PLACES
-        from data.place_image_urls import PLACE_IMAGE_DOWNLOADS
+        from moscow.data.places import PLACES
+        from moscow.data.place_image_urls import PLACE_IMAGE_DOWNLOADS
         return PLACES, PLACE_IMAGE_DOWNLOADS
     if guide == "squares":
-        from data.squares import SQUARES
-        from data.squares_image_urls import SQUARES_IMAGE_DOWNLOADS
+        from moscow.data.squares import SQUARES
+        from moscow.data.squares_image_urls import SQUARES_IMAGE_DOWNLOADS
         return SQUARES, SQUARES_IMAGE_DOWNLOADS
     if guide == "metro":
-        from data.metro_stations import METRO_STATIONS
-        from data.metro_image_urls import METRO_IMAGE_DOWNLOADS
+        from moscow.data.metro_stations import METRO_STATIONS
+        from moscow.data.metro_image_urls import METRO_IMAGE_DOWNLOADS
         return METRO_STATIONS, METRO_IMAGE_DOWNLOADS
     if guide == "monasteries":
-        from data.monasteries import MONASTERIES
-        from data.image_urls import IMAGE_DOWNLOADS
+        from moscow.data.monasteries import MONASTERIES
+        from moscow.data.image_urls import IMAGE_DOWNLOADS
         return MONASTERIES, IMAGE_DOWNLOADS
     if guide == "theaters":
-        from data.theaters import THEATERS
-        from data.theater_image_urls import THEATER_IMAGE_DOWNLOADS
+        from moscow.data.theaters import THEATERS
+        from moscow.data.theater_image_urls import THEATER_IMAGE_DOWNLOADS
         return THEATERS, THEATER_IMAGE_DOWNLOADS
     if guide == "viewpoints":
-        from data.viewpoints import VIEWPOINTS
-        from data.viewpoint_image_urls import VIEWPOINT_IMAGE_DOWNLOADS
+        from moscow.data.viewpoints import VIEWPOINTS
+        from moscow.data.viewpoint_image_urls import VIEWPOINT_IMAGE_DOWNLOADS
         return VIEWPOINTS, VIEWPOINT_IMAGE_DOWNLOADS
     if guide == "bridges":
-        from data.bridges import BRIDGES
-        from data.bridge_image_urls import BRIDGE_IMAGE_DOWNLOADS
+        from moscow.data.bridges import BRIDGES
+        from moscow.data.bridge_image_urls import BRIDGE_IMAGE_DOWNLOADS
         return BRIDGES, BRIDGE_IMAGE_DOWNLOADS
     if guide == "markets":
-        from data.markets import MARKETS
-        from data.market_image_urls import MARKET_IMAGE_DOWNLOADS
+        from moscow.data.markets import MARKETS
+        from moscow.data.market_image_urls import MARKET_IMAGE_DOWNLOADS
         return MARKETS, MARKET_IMAGE_DOWNLOADS
     if guide == "libraries":
-        from data.libraries import LIBRARIES
-        from data.library_image_urls import LIBRARY_IMAGE_DOWNLOADS
+        from moscow.data.libraries import LIBRARIES
+        from moscow.data.library_image_urls import LIBRARY_IMAGE_DOWNLOADS
         return LIBRARIES, LIBRARY_IMAGE_DOWNLOADS
     if guide == "railway_stations":
-        from data.railway_stations import RAILWAY_STATIONS
-        from data.railway_station_image_urls import (
+        from moscow.data.railway_stations import RAILWAY_STATIONS
+        from moscow.data.railway_station_image_urls import (
             RAILWAY_STATION_IMAGE_DOWNLOADS,
         )
         return RAILWAY_STATIONS, RAILWAY_STATION_IMAGE_DOWNLOADS
     if guide == "cemeteries":
-        from data.cemeteries import CEMETERIES
-        from data.cemetery_image_urls import CEMETERY_IMAGE_DOWNLOADS
+        from moscow.data.cemeteries import CEMETERIES
+        from moscow.data.cemetery_image_urls import CEMETERY_IMAGE_DOWNLOADS
         return CEMETERIES, CEMETERY_IMAGE_DOWNLOADS
     if guide == "landmarks":
-        from data.landmarks import LANDMARKS
-        from data.landmarks_image_urls import LANDMARK_IMAGE_DOWNLOADS
+        from moscow.data.landmarks import LANDMARKS
+        from moscow.data.landmarks_image_urls import LANDMARK_IMAGE_DOWNLOADS
         return LANDMARKS, LANDMARK_IMAGE_DOWNLOADS
     if guide == "cafes":
-        from data.cafes import CAFES
-        from data.cafe_image_urls import CAFE_IMAGE_DOWNLOADS
+        from moscow.data.cafes import CAFES
+        from moscow.data.cafe_image_urls import CAFE_IMAGE_DOWNLOADS
         return CAFES, CAFE_IMAGE_DOWNLOADS
     raise ValueError("Unknown guide: {}".format(guide))
 
@@ -251,7 +251,7 @@ def main() -> int:
         all_errors.extend(validate_guide(guide, strict=strict))
 
     if check_slugs:
-        output_images = _PROJECT_ROOT / "output" / "images"
+        output_images = _PROJECT_ROOT / "moscow" / "images"
         all_errors.extend(validate_slugs_against_files(output_images))
 
     if all_errors:

@@ -150,7 +150,7 @@ def _write_stories_file(
     if guide not in _GUIDE_STORIES_VAR:
         return
     var_name = _GUIDE_STORIES_VAR[guide]
-    path = _PROJECT_ROOT / "data" / "{}_stories.py".format(guide)
+    path = _PROJECT_ROOT / "moscow" / "data" / "{}_stories.py".format(guide)
     lines = [
         "# -*- coding: utf-8 -*-",
         '"""Optional short stories per place (Wikipedia)."""',

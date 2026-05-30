@@ -21,27 +21,27 @@ from scripts.download_yandex_common import download_yandex_for_guide
 
 # (guide_key, label for log, data_module, places_attr, extra_query_word or None)
 _GUIDES = [
-    ("monasteries", "Monastery", "data.monasteries", "MONASTERIES", None),
-    ("places_of_worship", "Place of worship", "data.places_of_worship",
+    ("monasteries", "Monastery", "moscow.data.monasteries", "MONASTERIES", None),
+    ("places_of_worship", "Place of worship", "moscow.data.places_of_worship",
      "PLACES_OF_WORSHIP", None),
-    ("parks", "Park", "data.parks", "PARKS", "парк"),
-    ("museums", "Museum", "data.museums", "MUSEUMS", None),
-    ("palaces", "Palace", "data.palaces", "PALACES", None),
-    ("buildings", "Building", "data.buildings", "BUILDINGS", None),
-    ("sculptures", "Sculpture", "data.sculptures", "SCULPTURES", None),
-    ("places", "Place", "data.places", "PLACES", None),
-    ("squares", "Square", "data.squares", "SQUARES", None),
-    ("metro", "Metro", "data.metro_stations", "METRO_STATIONS", None),
-    ("theaters", "Theater", "data.theaters", "THEATERS", None),
-    ("viewpoints", "Viewpoint", "data.viewpoints", "VIEWPOINTS", None),
-    ("bridges", "Bridge", "data.bridges", "BRIDGES", None),
-    ("markets", "Market", "data.markets", "MARKETS", None),
-    ("libraries", "Library", "data.libraries", "LIBRARIES", None),
-    ("railway_stations", "Station", "data.railway_stations",
+    ("parks", "Park", "moscow.data.parks", "PARKS", "парк"),
+    ("museums", "Museum", "moscow.data.museums", "MUSEUMS", None),
+    ("palaces", "Palace", "moscow.data.palaces", "PALACES", None),
+    ("buildings", "Building", "moscow.data.buildings", "BUILDINGS", None),
+    ("sculptures", "Sculpture", "moscow.data.sculptures", "SCULPTURES", None),
+    ("places", "Place", "moscow.data.places", "PLACES", None),
+    ("squares", "Square", "moscow.data.squares", "SQUARES", None),
+    ("metro", "Metro", "moscow.data.metro_stations", "METRO_STATIONS", None),
+    ("theaters", "Theater", "moscow.data.theaters", "THEATERS", None),
+    ("viewpoints", "Viewpoint", "moscow.data.viewpoints", "VIEWPOINTS", None),
+    ("bridges", "Bridge", "moscow.data.bridges", "BRIDGES", None),
+    ("markets", "Market", "moscow.data.markets", "MARKETS", None),
+    ("libraries", "Library", "moscow.data.libraries", "LIBRARIES", None),
+    ("railway_stations", "Station", "moscow.data.railway_stations",
      "RAILWAY_STATIONS", None),
-    ("cemeteries", "Cemetery", "data.cemeteries", "CEMETERIES", None),
-    ("landmarks", "Landmark", "data.landmarks", "LANDMARKS", None),
-    ("cafes", "Cafe", "data.cafes", "CAFES", None),
+    ("cemeteries", "Cemetery", "moscow.data.cemeteries", "CEMETERIES", None),
+    ("landmarks", "Landmark", "moscow.data.landmarks", "LANDMARKS", None),
+    ("cafes", "Cafe", "moscow.data.cafes", "CAFES", None),
 ]
 
 
@@ -65,7 +65,7 @@ def main() -> int:
     parser.add_argument(
         "--output-dir",
         type=Path,
-        default=_PROJECT_ROOT / "output",
+        default=_PROJECT_ROOT / "moscow",
         help="Output directory (default: output/).",
     )
     parser.add_argument("--dry-run", action="store_true")

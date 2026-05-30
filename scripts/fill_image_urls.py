@@ -222,7 +222,7 @@ def _required_slots(images: list[str]) -> list[str]:
 def _load_existing_fallbacks(data_file: str, fallbacks_var: str) -> dict[str, list[str]]:
     """Load existing FALLBACKS dict from data module (for merge)."""
     import importlib
-    mod_name = "data.{}".format(data_file.replace(".py", ""))
+    mod_name = "moscow.data.{}".format(data_file.replace(".py", ""))
     try:
         mod = importlib.import_module(mod_name)
         existing = getattr(mod, fallbacks_var, None)
@@ -295,7 +295,7 @@ def fill_guide(
         for k, v in sorted(downloads.items()):
             print("  {} -> {}".format(k, v[:60] + "..." if len(v) > 60 else v))
         return len(downloads)
-    data_path = _PROJECT_ROOT / "data" / data_file
+    data_path = _PROJECT_ROOT / "moscow" / "data" / data_file
     lines = [
         "# -*- coding: utf-8 -*-",
         '"""Image URLs filled by place name (Commons, Pixabay, Pexels, '

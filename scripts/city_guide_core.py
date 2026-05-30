@@ -4,9 +4,13 @@
 from __future__ import annotations
 
 import shutil
+from collections.abc import Callable, Sequence
 from pathlib import Path
+from typing import Any, TypeVar
 
 from scripts.city_guide_naming import is_pdf_filler_slug
+
+_P = TypeVar("_P", bound=dict[str, Any])
 
 MIN_IMAGE_BYTES = 500
 _MIN_VECTOR_BYTES = 32
@@ -106,3 +110,28 @@ def smallest_same_stem_image_rel(root: Path, rel: str) -> str | None:
         return best.relative_to(root.resolve()).as_posix()
     except ValueError:
         return None
+
+
+def place_has_pdf_image(root: Path, place: _P) -> bool:
+    """True when ``image_rel_path`` resolves to a usable file under *root*."""
+    rel = place.get("image_rel_path")
+    if not rel:
+        return False
+    return smallest_same_stem_image_rel(root, rel) is not None
+
+
+def places_for_pdf(
+    root: Path,
+    places: Sequence[_P],
+    *,
+    sort_key: Callable[[_P], Any] | None = None,
+) -> list[_P]:
+    """
+    Places eligible for PDF/HTML export: must have a local image on disk.
+
+    ``suppress_images_for_pdf`` rows are omitted (no text-only fallback).
+    """
+    out = [p for p in places if place_has_pdf_image(root, p)]
+    if sort_key is not None:
+        out.sort(key=sort_key)
+    return out

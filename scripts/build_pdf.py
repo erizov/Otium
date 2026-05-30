@@ -15,10 +15,26 @@ import urllib.request
 from pathlib import Path
 from typing import Any, Optional
 
-# Добавляем корень проекта в путь для импорт data
+from scripts.guide_constants import get_output_dir, moscow_city_root_from_html_dir
+
+# Добавляем корень проекта в путь для импорт moscow.data
 _project_root = Path(__file__).resolve().parent.parent
 if str(_project_root) not in sys.path:
     sys.path.insert(0, str(_project_root))
+
+
+def _city_root(html_output_dir: Path) -> Path:
+    """Images live under ``moscow/images/``; HTML under ``moscow/output/``."""
+    return moscow_city_root_from_html_dir(html_output_dir)
+
+
+def _html_img_src(img_rel: str, html_output_dir: Path) -> str:
+    rel = img_rel.replace("\\", "/")
+    if html_output_dir.name == "output" and html_output_dir.parent.name == "moscow":
+        if rel.startswith("images/"):
+            return "../{}".format(rel)
+    return rel
+
 
 # Fix Windows console encoding for Cyrillic (run before any prints)
 if sys.platform == "win32":
@@ -57,15 +73,15 @@ def _load_guide_config(guide: str) -> None:
     global IMAGES_SUBFOLDER, PLACES, IMAGE_DOWNLOADS, IMAGE_FALLBACKS
     global QA, BANNED, HTML_NAME, PDF_NAME, INTRO_TITLE, INTRO_SUBTITLE
     if guide == "places_of_worship":
-        from data.places_of_worship import (
+        from moscow.data.places_of_worship import (
             PLACES_OF_WORSHIP,
             IMAGES_SUBFOLDER as _SUB,
         )
-        from data.places_of_worship_image_urls import (
+        from moscow.data.places_of_worship_image_urls import (
             PLACES_OF_WORSHIP_IMAGE_DOWNLOADS,
             PLACES_OF_WORSHIP_IMAGE_FALLBACKS,
         )
-        from data.qa_places_of_worship import QA as _QA
+        from moscow.data.qa_places_of_worship import QA as _QA
         IMAGES_SUBFOLDER = _SUB
         PLACES = PLACES_OF_WORSHIP
         IMAGE_DOWNLOADS = PLACES_OF_WORSHIP_IMAGE_DOWNLOADS
@@ -77,12 +93,12 @@ def _load_guide_config(guide: str) -> None:
         INTRO_TITLE = "Места поклонения Москвы"
         INTRO_SUBTITLE = "66 мест поклонения (православные храмы, мечети, синагоги, буддийские храмы, неортодоксальные христианские церкви)"
     elif guide == "parks":
-        from data.parks import PARKS, IMAGES_SUBFOLDER as _SUB
-        from data.park_image_urls import (
+        from moscow.data.parks import PARKS, IMAGES_SUBFOLDER as _SUB
+        from moscow.data.park_image_urls import (
             PARK_IMAGE_DOWNLOADS,
             PARK_IMAGE_FALLBACKS,
         )
-        from data.qa_parks import QA as _QA
+        from moscow.data.qa_parks import QA as _QA
         IMAGES_SUBFOLDER = _SUB
         PLACES = PARKS
         IMAGE_DOWNLOADS = PARK_IMAGE_DOWNLOADS
@@ -94,12 +110,12 @@ def _load_guide_config(guide: str) -> None:
         INTRO_TITLE = "Парки Москвы"
         INTRO_SUBTITLE = "28 парков"
     elif guide == "museums":
-        from data.museums import MUSEUMS, IMAGES_SUBFOLDER as _SUB
-        from data.museum_image_urls import (
+        from moscow.data.museums import MUSEUMS, IMAGES_SUBFOLDER as _SUB
+        from moscow.data.museum_image_urls import (
             MUSEUM_IMAGE_DOWNLOADS,
             MUSEUM_IMAGE_FALLBACKS,
         )
-        from data.qa_museums import QA as _QA
+        from moscow.data.qa_museums import QA as _QA
         IMAGES_SUBFOLDER = _SUB
         PLACES = MUSEUMS
         IMAGE_DOWNLOADS = MUSEUM_IMAGE_DOWNLOADS
@@ -111,12 +127,12 @@ def _load_guide_config(guide: str) -> None:
         INTRO_TITLE = "Музеи Москвы"
         INTRO_SUBTITLE = "32 музея"
     elif guide == "palaces":
-        from data.palaces import PALACES, IMAGES_SUBFOLDER as _SUB
-        from data.palace_image_urls import (
+        from moscow.data.palaces import PALACES, IMAGES_SUBFOLDER as _SUB
+        from moscow.data.palace_image_urls import (
             PALACE_IMAGE_DOWNLOADS,
             PALACE_IMAGE_FALLBACKS,
         )
-        from data.qa_palaces import QA as _QA
+        from moscow.data.qa_palaces import QA as _QA
         IMAGES_SUBFOLDER = _SUB
         PLACES = PALACES
         IMAGE_DOWNLOADS = PALACE_IMAGE_DOWNLOADS
@@ -128,12 +144,12 @@ def _load_guide_config(guide: str) -> None:
         INTRO_TITLE = "Дворцы и усадьбы Москвы"
         INTRO_SUBTITLE = "24 дворца и усадьбы"
     elif guide == "buildings":
-        from data.buildings import BUILDINGS, IMAGES_SUBFOLDER as _SUB
-        from data.building_image_urls import (
+        from moscow.data.buildings import BUILDINGS, IMAGES_SUBFOLDER as _SUB
+        from moscow.data.building_image_urls import (
             BUILDING_IMAGE_DOWNLOADS,
             BUILDING_IMAGE_FALLBACKS,
         )
-        from data.qa_buildings import QA as _QA
+        from moscow.data.qa_buildings import QA as _QA
         IMAGES_SUBFOLDER = _SUB
         PLACES = BUILDINGS
         IMAGE_DOWNLOADS = BUILDING_IMAGE_DOWNLOADS
@@ -145,12 +161,12 @@ def _load_guide_config(guide: str) -> None:
         INTRO_TITLE = "Дома Москвы"
         INTRO_SUBTITLE = "50 знаменитых домов"
     elif guide == "sculptures":
-        from data.sculptures import SCULPTURES, IMAGES_SUBFOLDER as _SUB
-        from data.sculpture_image_urls import (
+        from moscow.data.sculptures import SCULPTURES, IMAGES_SUBFOLDER as _SUB
+        from moscow.data.sculpture_image_urls import (
             SCULPTURE_IMAGE_DOWNLOADS,
             SCULPTURE_IMAGE_FALLBACKS,
         )
-        from data.qa_sculptures import QA as _QA
+        from moscow.data.qa_sculptures import QA as _QA
         IMAGES_SUBFOLDER = _SUB
         PLACES = SCULPTURES
         IMAGE_DOWNLOADS = SCULPTURE_IMAGE_DOWNLOADS
@@ -162,12 +178,12 @@ def _load_guide_config(guide: str) -> None:
         INTRO_TITLE = "Скульптуры и памятники Москвы"
         INTRO_SUBTITLE = "61 скульптура и памятник"
     elif guide == "places":
-        from data.places import PLACES as _PLACES, IMAGES_SUBFOLDER as _SUB
-        from data.place_image_urls import (
+        from moscow.data.places import PLACES as _PLACES, IMAGES_SUBFOLDER as _SUB
+        from moscow.data.place_image_urls import (
             PLACE_IMAGE_DOWNLOADS,
             PLACE_IMAGE_FALLBACKS,
         )
-        from data.qa_places import QA as _QA
+        from moscow.data.qa_places import QA as _QA
         IMAGES_SUBFOLDER = _SUB
         PLACES = _PLACES
         IMAGE_DOWNLOADS = PLACE_IMAGE_DOWNLOADS
@@ -179,12 +195,12 @@ def _load_guide_config(guide: str) -> None:
         INTRO_TITLE = "Места Москвы"
         INTRO_SUBTITLE = "46 лучших мест (улицы, площади, районы)"
     elif guide == "metro":
-        from data.metro_stations import METRO_STATIONS, IMAGES_SUBFOLDER as _SUB
-        from data.metro_image_urls import (
+        from moscow.data.metro_stations import METRO_STATIONS, IMAGES_SUBFOLDER as _SUB
+        from moscow.data.metro_image_urls import (
             METRO_IMAGE_DOWNLOADS,
             METRO_IMAGE_FALLBACKS,
         )
-        from data.qa_metro import QA as _QA
+        from moscow.data.qa_metro import QA as _QA
         IMAGES_SUBFOLDER = _SUB
         PLACES = METRO_STATIONS
         IMAGE_DOWNLOADS = METRO_IMAGE_DOWNLOADS
@@ -196,12 +212,12 @@ def _load_guide_config(guide: str) -> None:
         INTRO_TITLE = "Станции Московского метро"
         INTRO_SUBTITLE = "37 лучших станций"
     elif guide == "theaters":
-        from data.theaters import THEATERS, IMAGES_SUBFOLDER as _SUB
-        from data.theater_image_urls import (
+        from moscow.data.theaters import THEATERS, IMAGES_SUBFOLDER as _SUB
+        from moscow.data.theater_image_urls import (
             THEATER_IMAGE_DOWNLOADS,
             THEATER_IMAGE_FALLBACKS,
         )
-        from data.qa_theaters import QA as _QA
+        from moscow.data.qa_theaters import QA as _QA
         IMAGES_SUBFOLDER = _SUB
         PLACES = THEATERS
         IMAGE_DOWNLOADS = THEATER_IMAGE_DOWNLOADS
@@ -213,12 +229,12 @@ def _load_guide_config(guide: str) -> None:
         INTRO_TITLE = "Театры Москвы"
         INTRO_SUBTITLE = "12 театров"
     elif guide == "viewpoints":
-        from data.viewpoints import VIEWPOINTS, IMAGES_SUBFOLDER as _SUB
-        from data.viewpoint_image_urls import (
+        from moscow.data.viewpoints import VIEWPOINTS, IMAGES_SUBFOLDER as _SUB
+        from moscow.data.viewpoint_image_urls import (
             VIEWPOINT_IMAGE_DOWNLOADS,
             VIEWPOINT_IMAGE_FALLBACKS,
         )
-        from data.qa_viewpoints import QA as _QA
+        from moscow.data.qa_viewpoints import QA as _QA
         IMAGES_SUBFOLDER = _SUB
         PLACES = VIEWPOINTS
         IMAGE_DOWNLOADS = VIEWPOINT_IMAGE_DOWNLOADS
@@ -230,12 +246,12 @@ def _load_guide_config(guide: str) -> None:
         INTRO_TITLE = "Смотровые площадки Москвы"
         INTRO_SUBTITLE = "13 смотровых площадок"
     elif guide == "bridges":
-        from data.bridges import BRIDGES, IMAGES_SUBFOLDER as _SUB
-        from data.bridge_image_urls import (
+        from moscow.data.bridges import BRIDGES, IMAGES_SUBFOLDER as _SUB
+        from moscow.data.bridge_image_urls import (
             BRIDGE_IMAGE_DOWNLOADS,
             BRIDGE_IMAGE_FALLBACKS,
         )
-        from data.qa_bridges import QA as _QA
+        from moscow.data.qa_bridges import QA as _QA
         IMAGES_SUBFOLDER = _SUB
         PLACES = BRIDGES
         IMAGE_DOWNLOADS = BRIDGE_IMAGE_DOWNLOADS
@@ -247,12 +263,12 @@ def _load_guide_config(guide: str) -> None:
         INTRO_TITLE = "Мосты Москвы"
         INTRO_SUBTITLE = "10 знаменитых мостов"
     elif guide == "squares":
-        from data.squares import SQUARES, IMAGES_SUBFOLDER as _SUB
-        from data.squares_image_urls import (
+        from moscow.data.squares import SQUARES, IMAGES_SUBFOLDER as _SUB
+        from moscow.data.squares_image_urls import (
             SQUARES_IMAGE_DOWNLOADS,
             SQUARES_IMAGE_FALLBACKS,
         )
-        from data.qa_squares import QA as _QA
+        from moscow.data.qa_squares import QA as _QA
         IMAGES_SUBFOLDER = _SUB
         PLACES = SQUARES
         IMAGE_DOWNLOADS = SQUARES_IMAGE_DOWNLOADS
@@ -264,12 +280,12 @@ def _load_guide_config(guide: str) -> None:
         INTRO_TITLE = "Площади Москвы"
         INTRO_SUBTITLE = "12 площадей"
     elif guide == "markets":
-        from data.markets import MARKETS, IMAGES_SUBFOLDER as _SUB
-        from data.market_image_urls import (
+        from moscow.data.markets import MARKETS, IMAGES_SUBFOLDER as _SUB
+        from moscow.data.market_image_urls import (
             MARKET_IMAGE_DOWNLOADS,
             MARKET_IMAGE_FALLBACKS,
         )
-        from data.qa_markets import QA as _QA
+        from moscow.data.qa_markets import QA as _QA
         IMAGES_SUBFOLDER = _SUB
         PLACES = MARKETS
         IMAGE_DOWNLOADS = MARKET_IMAGE_DOWNLOADS
@@ -281,12 +297,12 @@ def _load_guide_config(guide: str) -> None:
         INTRO_TITLE = "Рынки и гастрономические центры Москвы"
         INTRO_SUBTITLE = "7 рынков и гастрономических центров"
     elif guide == "libraries":
-        from data.libraries import LIBRARIES, IMAGES_SUBFOLDER as _SUB
-        from data.library_image_urls import (
+        from moscow.data.libraries import LIBRARIES, IMAGES_SUBFOLDER as _SUB
+        from moscow.data.library_image_urls import (
             LIBRARY_IMAGE_DOWNLOADS,
             LIBRARY_IMAGE_FALLBACKS,
         )
-        from data.qa_libraries import QA as _QA
+        from moscow.data.qa_libraries import QA as _QA
         IMAGES_SUBFOLDER = _SUB
         PLACES = LIBRARIES
         IMAGE_DOWNLOADS = LIBRARY_IMAGE_DOWNLOADS
@@ -298,15 +314,15 @@ def _load_guide_config(guide: str) -> None:
         INTRO_TITLE = "Библиотеки Москвы"
         INTRO_SUBTITLE = "5 знаменитых библиотек"
     elif guide == "railway_stations":
-        from data.railway_stations import (
+        from moscow.data.railway_stations import (
             RAILWAY_STATIONS,
             IMAGES_SUBFOLDER as _SUB,
         )
-        from data.railway_station_image_urls import (
+        from moscow.data.railway_station_image_urls import (
             RAILWAY_STATION_IMAGE_DOWNLOADS,
             RAILWAY_STATION_IMAGE_FALLBACKS,
         )
-        from data.qa_railway_stations import QA as _QA
+        from moscow.data.qa_railway_stations import QA as _QA
         IMAGES_SUBFOLDER = _SUB
         PLACES = RAILWAY_STATIONS
         IMAGE_DOWNLOADS = RAILWAY_STATION_IMAGE_DOWNLOADS
@@ -318,12 +334,12 @@ def _load_guide_config(guide: str) -> None:
         INTRO_TITLE = "Вокзалы Москвы"
         INTRO_SUBTITLE = "9 главных вокзалов"
     elif guide == "cemeteries":
-        from data.cemeteries import CEMETERIES, IMAGES_SUBFOLDER as _SUB
-        from data.cemetery_image_urls import (
+        from moscow.data.cemeteries import CEMETERIES, IMAGES_SUBFOLDER as _SUB
+        from moscow.data.cemetery_image_urls import (
             CEMETERY_IMAGE_DOWNLOADS,
             CEMETERY_IMAGE_FALLBACKS,
         )
-        from data.qa_cemeteries import QA as _QA
+        from moscow.data.qa_cemeteries import QA as _QA
         IMAGES_SUBFOLDER = _SUB
         PLACES = CEMETERIES
         IMAGE_DOWNLOADS = CEMETERY_IMAGE_DOWNLOADS
@@ -335,12 +351,12 @@ def _load_guide_config(guide: str) -> None:
         INTRO_TITLE = "Некрополи Москвы"
         INTRO_SUBTITLE = "7 знаменитых некрополей и кладбищ"
     elif guide == "landmarks":
-        from data.landmarks import LANDMARKS, IMAGES_SUBFOLDER as _SUB
-        from data.landmarks_image_urls import (
+        from moscow.data.landmarks import LANDMARKS, IMAGES_SUBFOLDER as _SUB
+        from moscow.data.landmarks_image_urls import (
             LANDMARK_IMAGE_DOWNLOADS,
             LANDMARK_IMAGE_FALLBACKS,
         )
-        from data.qa_landmarks import QA as _QA
+        from moscow.data.qa_landmarks import QA as _QA
         IMAGES_SUBFOLDER = _SUB
         PLACES = LANDMARKS
         IMAGE_DOWNLOADS = LANDMARK_IMAGE_DOWNLOADS
@@ -352,12 +368,12 @@ def _load_guide_config(guide: str) -> None:
         INTRO_TITLE = "Iconic landmarks Москвы"
         INTRO_SUBTITLE = "10 символов города: Москва-Сити, Лужники, Василий Блаженный"
     elif guide == "cafes":
-        from data.cafes import CAFES, IMAGES_SUBFOLDER as _SUB
-        from data.cafe_image_urls import (
+        from moscow.data.cafes import CAFES, IMAGES_SUBFOLDER as _SUB
+        from moscow.data.cafe_image_urls import (
             CAFE_IMAGE_DOWNLOADS,
             CAFE_IMAGE_FALLBACKS,
         )
-        from data.qa_cafes import QA as _QA
+        from moscow.data.qa_cafes import QA as _QA
         IMAGES_SUBFOLDER = _SUB
         PLACES = CAFES
         IMAGE_DOWNLOADS = CAFE_IMAGE_DOWNLOADS
@@ -369,12 +385,12 @@ def _load_guide_config(guide: str) -> None:
         INTRO_TITLE = "Исторические кафе Москвы"
         INTRO_SUBTITLE = "6 легендарных кафе и ресторанов"
     elif guide == "test_e2e":
-        from data.test_e2e_guide import TEST_E2E_PLACES, IMAGES_SUBFOLDER as _SUB
-        from data.test_e2e_image_urls import (
+        from moscow.data.test_e2e_guide import TEST_E2E_PLACES, IMAGES_SUBFOLDER as _SUB
+        from moscow.data.test_e2e_image_urls import (
             TEST_E2E_IMAGE_DOWNLOADS,
             TEST_E2E_IMAGE_FALLBACKS,
         )
-        from data.qa_test_e2e import QA as _QA
+        from moscow.data.qa_test_e2e import QA as _QA
         IMAGES_SUBFOLDER = _SUB
         PLACES = TEST_E2E_PLACES
         IMAGE_DOWNLOADS = TEST_E2E_IMAGE_DOWNLOADS
@@ -386,9 +402,9 @@ def _load_guide_config(guide: str) -> None:
         INTRO_TITLE = "E2E Test Guide"
         INTRO_SUBTITLE = "5 test places"
     else:
-        from data.monasteries import MONASTERIES, IMAGES_SUBFOLDER as _SUB
-        from data.image_urls import IMAGE_DOWNLOADS as _DL, IMAGE_FALLBACKS as _FB
-        from data.qa import QA as _QA
+        from moscow.data.monasteries import MONASTERIES, IMAGES_SUBFOLDER as _SUB
+        from moscow.data.image_urls import IMAGE_DOWNLOADS as _DL, IMAGE_FALLBACKS as _FB
+        from moscow.data.qa import QA as _QA
         IMAGES_SUBFOLDER = _SUB
         PLACES = MONASTERIES
         IMAGE_DOWNLOADS = _DL
@@ -463,11 +479,12 @@ def download_images(
         validate_item_images_format,
     )
 
-    images_dir = output_dir / "images" / IMAGES_SUBFOLDER
+    city_root = _city_root(output_dir)
+    images_dir = city_root / "images" / IMAGES_SUBFOLDER
     images_dir.mkdir(parents=True, exist_ok=True)
 
     print("Downloading images with duplicate checking...")
-    images_root = output_dir / "images"
+    images_root = city_root / "images"
     results, stats = download_images_with_dedup(
         images_dir=images_dir,
         image_downloads=IMAGE_DOWNLOADS,
@@ -507,9 +524,10 @@ def download_images(
     print("OK: All items have 4 distinct images in correct format.")
 
 
-def ensure_images_subdir(output_dir: Path) -> Path:
-    """Создаёт output/images и output/images/<IMAGES_SUBFOLDER> при отсутствии."""
-    images_dir = output_dir / "images"
+def ensure_images_subdir(html_output_dir: Path) -> Path:
+    """Create ``moscow/images/<IMAGES_SUBFOLDER>/`` if missing."""
+    city_root = _city_root(html_output_dir)
+    images_dir = city_root / "images"
     images_dir.mkdir(parents=True, exist_ok=True)
     subdir = images_dir / IMAGES_SUBFOLDER
     subdir.mkdir(parents=True, exist_ok=True)
@@ -550,16 +568,17 @@ def _unique_images_for_place(
     """Return up to max_images (default IMAGES_PER_PLACE) unique image paths.
     Skip by hash: if file hash matches forbidden/ folder, exclude."""
     from scripts.download_with_dedup import _load_forbidden_hashes
+    city_root = _city_root(output_dir)
     limit = max_images if max_images is not None else IMAGES_PER_PLACE
     forbidden_hashes = _load_forbidden_hashes(
-        output_dir / "images" / IMAGES_SUBFOLDER,
+        city_root / "images" / IMAGES_SUBFOLDER,
     )
     seen_hashes: set[str] = set()
     result: list[str] = []
     for img_rel in image_rels:
         if len(result) >= limit:
             break
-        path = output_dir / img_rel
+        path = city_root / img_rel
         if not path.exists() or not path.is_file():
             continue
         if path.stat().st_size < MIN_IMAGE_BYTES:
@@ -593,7 +612,8 @@ def delete_unused_images(output_dir: Path) -> int:
     Возвращает количество удалённых файлов.
     """
     used = get_used_image_basenames(output_dir)
-    images_dir = output_dir / "images" / IMAGES_SUBFOLDER
+    city_root = _city_root(output_dir)
+    images_dir = city_root / "images" / IMAGES_SUBFOLDER
     if not images_dir.exists():
         return 0
     deleted = 0
@@ -799,7 +819,7 @@ def _section_place(
                 '  <img src="{}" alt="{} — фото 1" class="monastery-img" />\n'
                 '  <p class="images-caption">Фото: {}</p>\n'
                 '  </div>'
-            ).format(img_rel.replace("\\", "/"), name_alt, name_alt)
+            ).format(_html_img_src(img_rel, output_dir), name_alt, name_alt)
         else:
             images_block = ""
     else:
@@ -808,7 +828,7 @@ def _section_place(
             cells.append(
                 '    <div class="grid-cell">'
                 '<img src="{}" alt="{} — фото 1" class="monastery-img" />'
-                "</div>".format(img_rel.replace("\\", "/"), name_alt)
+                "</div>".format(_html_img_src(img_rel, output_dir), name_alt)
             )
             cells.append(
                 '    <div class="map-cell">'
@@ -825,7 +845,9 @@ def _section_place(
                     cells.append(
                         '    <div class="grid-cell">'
                         '<img src="{}" alt="{} — фото {}" class="monastery-img" />'
-                        "</div>".format(img_rel.replace("\\", "/"), name_alt, i + 1)
+                        "</div>".format(
+                            _html_img_src(img_rel, output_dir), name_alt, i + 1,
+                        )
                     )
                 else:
                     cells.append('    <div class="grid-cell"></div>')
@@ -1520,7 +1542,7 @@ def _run_one_guide(args, stats_out: Optional[dict] = None) -> None:
     output_dir = (
         Path(args.output_dir)
         if getattr(args, "output_dir", None)
-        else _project_root / "output"
+        else get_output_dir()
     )
     output_dir.mkdir(exist_ok=True)
     images_subdir = ensure_images_subdir(output_dir)
@@ -1845,7 +1867,7 @@ def main() -> None:
             output_dir = (
                 Path(args.output_dir)
                 if getattr(args, "output_dir", None)
-                else _project_root / "output"
+                else get_output_dir()
             )
             images_subdir = ensure_images_subdir(output_dir)
             

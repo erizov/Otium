@@ -22,7 +22,7 @@ if str(_PROJECT_ROOT) not in sys.path:
 
 from scripts.guide_loader import GUIDES, GUIDE_TO_SUBDIR, load_places
 
-OUTPUT_DIR = _PROJECT_ROOT / "output"
+OUTPUT_DIR = _PROJECT_ROOT / "moscow" / "output"
 
 
 def _basename(rel_path: str) -> str:

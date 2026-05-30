@@ -71,12 +71,15 @@ def _candidate_urls(
     thumbs_only: bool = False,
 ) -> list[str]:
     out: list[str] = []
-    if thumb_width and thumb_width > 0:
+    is_commons = "upload.wikimedia.org" in source_url.lower()
+    if is_commons and thumb_width and thumb_width > 0:
         w = snap_commons_thumb_width(thumb_width)
         t = _commons_thumb_url(source_url, w)
         if t and t != source_url:
             out.append(t)
-    if not thumbs_only and source_url not in out:
+    if not is_commons:
+        out.append(source_url)
+    elif not thumbs_only and source_url not in out:
         out.append(source_url)
     return out
 

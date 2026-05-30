@@ -14,7 +14,7 @@ _PROJECT_ROOT = Path(__file__).resolve().parent.parent
 if str(_PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(_PROJECT_ROOT))
 
-from data.parks import PARKS, IMAGES_SUBFOLDER
+from moscow.data.parks import PARKS, IMAGES_SUBFOLDER
 from scripts.download_yandex_common import download_yandex_for_guide
 
 
@@ -26,7 +26,7 @@ def main() -> int:
     parser.add_argument(
         "--output-dir",
         type=Path,
-        default=_PROJECT_ROOT / "output",
+        default=_PROJECT_ROOT / "moscow",
         help="Output directory (default: output/).",
     )
     parser.add_argument("--dry-run", action="store_true")

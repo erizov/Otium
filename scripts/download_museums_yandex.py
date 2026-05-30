@@ -10,7 +10,7 @@ _PROJECT_ROOT = Path(__file__).resolve().parent.parent
 if str(_PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(_PROJECT_ROOT))
 
-from data.museums import MUSEUMS, IMAGES_SUBFOLDER
+from moscow.data.museums import MUSEUMS, IMAGES_SUBFOLDER
 from scripts.download_yandex_common import download_yandex_for_guide
 
 
@@ -19,7 +19,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(
         description="Download first 4 Yandex images for museums."
     )
-    parser.add_argument("--output-dir", type=Path, default=_PROJECT_ROOT / "output")
+    parser.add_argument("--output-dir", type=Path, default=_PROJECT_ROOT / "moscow")
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--no-headless", action="store_true")
     args = parser.parse_args()

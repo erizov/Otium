@@ -8,6 +8,7 @@ import shutil
 import sys
 from html import escape
 from pathlib import Path
+from typing import Any, cast
 
 _PROJECT_ROOT = Path(__file__).resolve().parent.parent
 if str(_PROJECT_ROOT) not in sys.path:
@@ -23,6 +24,7 @@ from scripts.build_pdf import (
 from scripts.city_guide_core import (
     MIN_IMAGE_BYTES,
     copy_built_guide_pdf_to_final_guides,
+    places_for_pdf,
     smallest_same_stem_image_rel,
 )
 from scripts.city_guide_historical_reference_ru import (
@@ -366,35 +368,15 @@ _OTIUM_PARAS: tuple[str, ...] = (
 )
 
 
-def _place_has_displayable_body(p: SmolenskPlace) -> bool:
-    """True if the place has text blocks worth a PDF section without photos."""
-    if _nonempty(p.get("description")):
-        return True
-    if _nonempty(p.get("history")):
-        return True
-    if _nonempty(p.get("significance")):
-        return True
-    facts = p.get("facts") or []
-    if any(str(x).strip() for x in facts):
-        return True
-    stories = p.get("stories") or []
-    return any(str(x).strip() for x in stories)
-
-
 def _places_with_local_images(root: Path) -> list[SmolenskPlace]:
-    out: list[SmolenskPlace] = []
-    for p in SMOLENSK_PLACES:
-        if p.get("suppress_images_for_pdf"):
-            if _place_has_displayable_body(p):
-                out.append(p)
-            continue
-        rel = p.get("image_rel_path")
-        if not rel:
-            continue
-        if smallest_same_stem_image_rel(root, rel) is not None:
-            out.append(p)
-    out.sort(key=lambda x: (x.get("name_ru", ""), x.get("slug", "")))
-    return out
+    return cast(
+        list[SmolenskPlace],
+        places_for_pdf(
+            root,
+            cast(list[dict[str, Any]], SMOLENSK_PLACES),
+            sort_key=lambda x: (x.get("name_ru", ""), x.get("slug", "")),
+        ),
+    )
 
 
 def _nonempty(s: str | None) -> bool:
@@ -1226,9 +1208,7 @@ def _build_html(root: Path, places: list[SmolenskPlace], edition: str) -> str:
     blocks.append(_historical_reference_html(edition))
     for p in places:
         srcs = _image_srcs_for_place(root, p)
-        if not srcs and not (
-            p.get("suppress_images_for_pdf") and _place_has_displayable_body(p)
-        ):
+        if not srcs:
             continue
         blocks.append(_place_block(root, p, edition))
     univ = _universities_section_html(root, edition)
@@ -1506,6 +1486,11 @@ def main() -> int:
     out_dir.mkdir(parents=True, exist_ok=True)
 
     places = _places_with_local_images(smol_root)
+    skipped = len(SMOLENSK_PLACES) - len(places)
+    if skipped:
+        print(
+            "Skipped {} place(s) without a local image.".format(skipped),
+        )
     if not places:
         print(
             "No places with local images (>= {} bytes). "

@@ -4,8 +4,8 @@
 This script appends new entries to each <city>/data/*_places.json and writes
 matching detail blocks into <city>/data/*_place_details.json.
 
-New places are added with suppress_images_for_pdf=true so PDF builds do not
-depend on downloading additional images.
+New places are added with suppress_images_for_pdf=true so they stay in the
+registry until images are added (PDF builds skip them automatically).
 """
 
 from __future__ import annotations

@@ -39,61 +39,61 @@ def _basename(img_path: str) -> str:
 def _load_places(guide: str) -> list[dict]:
     """Load list of items (dict with 'name' and 'images') for a guide."""
     if guide == "places_of_worship":
-        from data.places_of_worship import PLACES_OF_WORSHIP
+        from moscow.data.places_of_worship import PLACES_OF_WORSHIP
         return PLACES_OF_WORSHIP
     if guide == "parks":
-        from data.parks import PARKS
+        from moscow.data.parks import PARKS
         return PARKS
     if guide == "museums":
-        from data.museums import MUSEUMS
+        from moscow.data.museums import MUSEUMS
         return MUSEUMS
     if guide == "palaces":
-        from data.palaces import PALACES
+        from moscow.data.palaces import PALACES
         return PALACES
     if guide == "buildings":
-        from data.buildings import BUILDINGS
+        from moscow.data.buildings import BUILDINGS
         return BUILDINGS
     if guide == "sculptures":
-        from data.sculptures import SCULPTURES
+        from moscow.data.sculptures import SCULPTURES
         return SCULPTURES
     if guide == "places":
-        from data.places import PLACES
+        from moscow.data.places import PLACES
         return PLACES
     if guide == "squares":
-        from data.squares import SQUARES
+        from moscow.data.squares import SQUARES
         return SQUARES
     if guide == "metro":
-        from data.metro_stations import METRO_STATIONS
+        from moscow.data.metro_stations import METRO_STATIONS
         return METRO_STATIONS
     if guide == "monasteries":
-        from data.monasteries import MONASTERIES
+        from moscow.data.monasteries import MONASTERIES
         return MONASTERIES
     if guide == "theaters":
-        from data.theaters import THEATERS
+        from moscow.data.theaters import THEATERS
         return THEATERS
     if guide == "viewpoints":
-        from data.viewpoints import VIEWPOINTS
+        from moscow.data.viewpoints import VIEWPOINTS
         return VIEWPOINTS
     if guide == "bridges":
-        from data.bridges import BRIDGES
+        from moscow.data.bridges import BRIDGES
         return BRIDGES
     if guide == "markets":
-        from data.markets import MARKETS
+        from moscow.data.markets import MARKETS
         return MARKETS
     if guide == "libraries":
-        from data.libraries import LIBRARIES
+        from moscow.data.libraries import LIBRARIES
         return LIBRARIES
     if guide == "railway_stations":
-        from data.railway_stations import RAILWAY_STATIONS
+        from moscow.data.railway_stations import RAILWAY_STATIONS
         return RAILWAY_STATIONS
     if guide == "cemeteries":
-        from data.cemeteries import CEMETERIES
+        from moscow.data.cemeteries import CEMETERIES
         return CEMETERIES
     if guide == "landmarks":
-        from data.landmarks import LANDMARKS
+        from moscow.data.landmarks import LANDMARKS
         return LANDMARKS
     if guide == "cafes":
-        from data.cafes import CAFES
+        from moscow.data.cafes import CAFES
         return CAFES
     raise ValueError("Unknown guide: {}".format(guide))
 

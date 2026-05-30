@@ -19,6 +19,7 @@ from scripts.city_guide_core import (
     MIN_IMAGE_BYTES,
     copy_built_guide_pdf_to_final_guides,
     is_substantive_text,
+    places_for_pdf,
     smallest_same_stem_image_rel,
 )
 from scripts.city_guide_historical_reference_ru import (
@@ -42,6 +43,9 @@ _OTIUM_PARAS_EN: tuple[str, ...] = (
     "and leave a route unfinished if the light on a façade deserves "
     "another minute.",
 )
+
+# Max place sections per Playwright pass (avoids Chromium string limit).
+PDF_CHUNK_MAX_PLACES = 35
 
 _OTIUM_PARAS_RU: tuple[str, ...] = (
     "OTIUM — практика нарочитого досуга. В античном смысле otium — не "
@@ -92,37 +96,11 @@ def _place_sort_key(p: dict[str, Any]) -> tuple[str, str]:
     return (name.lower(), str(p.get("slug", "")))
 
 
-def _place_has_displayable_body(p: dict[str, Any]) -> bool:
-    if is_substantive_text(p.get("description")):
-        return True
-    if is_substantive_text(p.get("history")):
-        return True
-    if is_substantive_text(p.get("significance")):
-        return True
-    facts = p.get("facts") or []
-    if any(is_substantive_text(str(x)) for x in facts):
-        return True
-    stories = p.get("stories") or []
-    return any(is_substantive_text(str(x)) for x in stories)
-
-
 def places_with_local_images(
     root: Path,
     places: list[dict[str, Any]],
 ) -> list[dict[str, Any]]:
-    out: list[dict[str, Any]] = []
-    for p in places:
-        if p.get("suppress_images_for_pdf"):
-            if _place_has_displayable_body(p):
-                out.append(p)
-            continue
-        rel = p.get("image_rel_path")
-        if not rel:
-            continue
-        if smallest_same_stem_image_rel(root, rel) is not None:
-            out.append(p)
-    out.sort(key=_place_sort_key)
-    return out
+    return places_for_pdf(root, places, sort_key=_place_sort_key)
 
 
 def _place_meta_line(p: dict[str, Any], edition: str) -> str | None:
@@ -372,20 +350,36 @@ def cover_otium_html(edition: str) -> str:
     ).format(paras)
 
 
-def build_html(
+def _historical_reference_block(
+    city_slug: str,
+    edition: str,
+    project_root: Path | None,
+) -> str:
+    if edition == "ru":
+        return historical_reference_section_html(
+            reference_text_ru_for_any_city(city_slug, project_root),
+        )
+    body_en = reference_text_en_for_city(city_slug)
+    if not body_en:
+        return ""
+    return historical_reference_section_html(
+        body_en,
+        section_title=HISTORICAL_SECTION_TITLE_EN,
+    )
+
+
+def _preamble_blocks(
     root: Path,
     *,
     city_slug: str,
     display_title: str,
     title_symbols_class: str,
     title_symbols: tuple[tuple[str, str], ...],
-    places: list[dict[str, Any]],
+    places_count: int,
     edition: str,
-    html_lang_attr: str | None = None,
-    project_root: Path | None = None,
-) -> str:
+    project_root: Path | None,
+) -> list[str]:
     s = _guide_strings(edition)
-    font_href, _, _ = typography_triple(city_slug)
     blocks: list[str] = [cover_otium_html(edition)]
     blocks.append(
         '<header class="guide-title">'
@@ -400,34 +394,43 @@ def build_html(
                 edition,
             ),
             escape(display_title),
-            escape(s["lead"].format(len(places))),
+            escape(s["lead"].format(places_count)),
         ),
     )
-    if edition == "ru":
-        hist = historical_reference_section_html(
-            reference_text_ru_for_any_city(city_slug, project_root),
-        )
-    else:
-        body_en = reference_text_en_for_city(city_slug)
-        if body_en:
-            hist = historical_reference_section_html(
-                body_en,
-                section_title=HISTORICAL_SECTION_TITLE_EN,
-            )
-        else:
-            hist = ""
+    hist = _historical_reference_block(city_slug, edition, project_root)
     if hist:
         blocks.append(hist)
+    return blocks
+
+
+def _place_section_blocks(
+    root: Path,
+    places: list[dict[str, Any]],
+    edition: str,
+) -> list[str]:
+    out: list[str] = []
     for p in places:
         srcs = _image_srcs_for_place(root, p)
-        if not srcs and not (
-            p.get("suppress_images_for_pdf") and _place_has_displayable_body(p)
-        ):
+        if not srcs:
             continue
-        blocks.append(place_block(p, srcs, edition))
-    body_inner = "\n".join(blocks)
+        out.append(place_block(p, srcs, edition))
+    return out
+
+
+def _wrap_guide_html(
+    body_blocks: list[str],
+    *,
+    city_slug: str,
+    display_title: str,
+    title_symbols_class: str,
+    edition: str,
+    html_lang_attr: str | None = None,
+) -> str:
+    s = _guide_strings(edition)
+    font_href, _, _ = typography_triple(city_slug)
     css = guide_inline_css(title_symbols_class, city_slug)
     root_lang = html_lang_attr if html_lang_attr else edition
+    body_inner = "\n".join(body_blocks)
     return (
         "<!DOCTYPE html>\n"
         '<html lang="{}">\n<head>\n'
@@ -442,6 +445,148 @@ def build_html(
         css,
         body_inner,
     )
+
+
+def build_html(
+    root: Path,
+    *,
+    city_slug: str,
+    display_title: str,
+    title_symbols_class: str,
+    title_symbols: tuple[tuple[str, str], ...],
+    places: list[dict[str, Any]],
+    edition: str,
+    html_lang_attr: str | None = None,
+    project_root: Path | None = None,
+) -> str:
+    blocks = _preamble_blocks(
+        root,
+        city_slug=city_slug,
+        display_title=display_title,
+        title_symbols_class=title_symbols_class,
+        title_symbols=title_symbols,
+        places_count=len(places),
+        edition=edition,
+        project_root=project_root,
+    )
+    blocks.extend(_place_section_blocks(root, places, edition))
+    return _wrap_guide_html(
+        blocks,
+        city_slug=city_slug,
+        display_title=display_title,
+        title_symbols_class=title_symbols_class,
+        edition=edition,
+        html_lang_attr=html_lang_attr,
+    )
+
+
+def _pdf_via_playwright_chunked(
+    *,
+    root: Path,
+    out_dir: Path,
+    stem: str,
+    edition: str,
+    places: list[dict[str, Any]],
+    pdf_path: Path,
+    city_slug: str,
+    display_title: str,
+    title_symbols_class: str,
+    title_symbols: tuple[tuple[str, str], ...],
+    html_lang_attr: str | None,
+    project_root: Path | None,
+    image_wait_timeout_ms: int,
+    footer: str,
+    header: str,
+) -> bool:
+    try:
+        from pypdf import PdfReader, PdfWriter
+    except ImportError:
+        print("pypdf required for chunked PDF merge.", file=sys.stderr)
+        return False
+
+    place_blocks = _place_section_blocks(root, places, edition)
+    preface = _preamble_blocks(
+        root,
+        city_slug=city_slug,
+        display_title=display_title,
+        title_symbols_class=title_symbols_class,
+        title_symbols=title_symbols,
+        places_count=len(places),
+        edition=edition,
+        project_root=project_root,
+    )
+    chunk_list: list[list[str]] = []
+    for i in range(0, len(place_blocks), PDF_CHUNK_MAX_PLACES):
+        section = place_blocks[i : i + PDF_CHUNK_MAX_PLACES]
+        if i == 0:
+            chunk_list.append(preface + section)
+        else:
+            chunk_list.append(section)
+
+    chunk_pdfs: list[Path] = []
+    try:
+        for idx, chunk_blocks in enumerate(chunk_list):
+            print(
+                "  PDF chunk {}/{}...".format(idx + 1, len(chunk_list)),
+            )
+            chunk_html_path = out_dir / "{}_{}_chunk_{}.html".format(
+                stem,
+                edition,
+                idx,
+            )
+            chunk_pdf_path = out_dir / "{}_{}_chunk_{}.pdf".format(
+                stem,
+                edition,
+                idx,
+            )
+            chunk_html_path.write_text(
+                _wrap_guide_html(
+                    chunk_blocks,
+                    city_slug=city_slug,
+                    display_title=display_title,
+                    title_symbols_class=title_symbols_class,
+                    edition=edition,
+                    html_lang_attr=html_lang_attr,
+                ),
+                encoding="utf-8",
+            )
+            if not _pdf_via_playwright(
+                chunk_html_path,
+                chunk_pdf_path,
+                image_wait_timeout_ms=image_wait_timeout_ms,
+                display_header_footer=True,
+                footer_template=footer,
+                header_template=header,
+                static_site_root=root,
+            ):
+                return False
+            chunk_pdfs.append(chunk_pdf_path)
+
+        writer = PdfWriter()
+        for chunk_pdf in chunk_pdfs:
+            reader = PdfReader(str(chunk_pdf))
+            for page in reader.pages:
+                writer.add_page(page)
+        writer.write(str(pdf_path))
+        return True
+    finally:
+        for chunk_pdf in chunk_pdfs:
+            if chunk_pdf.is_file():
+                try:
+                    chunk_pdf.unlink()
+                except OSError:
+                    pass
+        for idx in range(len(chunk_list)):
+            chunk_html = out_dir / "{}_{}_chunk_{}.html".format(
+                stem,
+                edition,
+                idx,
+            )
+            if chunk_html.is_file():
+                try:
+                    chunk_html.unlink()
+                except OSError:
+                    pass
 
 
 def run_build_pdf_main(
@@ -520,6 +665,11 @@ def run_build_pdf_main(
         return 2
 
     built = places_with_local_images(root, places)
+    skipped = len(places) - len(built)
+    if skipped:
+        print(
+            "Skipped {} place(s) without a local image.".format(skipped),
+        )
     if not built:
         print(
             "No places with local images (>= {} bytes). "
@@ -556,15 +706,36 @@ def run_build_pdf_main(
         print("Written:", html_path)
         if args.html_only:
             continue
-        if _pdf_via_playwright(
-            html_path,
-            pdf_path,
-            image_wait_timeout_ms=args.image_wait_ms,
-            display_header_footer=True,
-            footer_template=footer,
-            header_template=header,
-            static_site_root=root,
-        ):
+        use_chunked = len(built) > PDF_CHUNK_MAX_PLACES
+        if use_chunked:
+            pdf_ok = _pdf_via_playwright_chunked(
+                root=root,
+                out_dir=out_dir,
+                stem=stem,
+                edition=edition,
+                places=built,
+                pdf_path=pdf_path,
+                city_slug=city_slug,
+                display_title=display_title,
+                title_symbols_class=title_symbols_class,
+                title_symbols=title_symbols,
+                html_lang_attr=html_lang_attr,
+                project_root=project_root,
+                image_wait_timeout_ms=args.image_wait_ms,
+                footer=footer,
+                header=header,
+            )
+        else:
+            pdf_ok = _pdf_via_playwright(
+                html_path,
+                pdf_path,
+                image_wait_timeout_ms=args.image_wait_ms,
+                display_header_footer=True,
+                footer_template=footer,
+                header_template=header,
+                static_site_root=root,
+            )
+        if pdf_ok:
             _strip_empty_pdf_pages(pdf_path)
             _strip_pdf_metadata(pdf_path)
             copy_built_guide_pdf_to_final_guides(project_root, pdf_path)

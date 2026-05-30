@@ -16,7 +16,7 @@ _project_root = Path(__file__).resolve().parent.parent
 if str(_project_root) not in sys.path:
     sys.path.insert(0, str(_project_root))
 
-from data.monasteries import IMAGES_SUBFOLDER, MONASTERIES
+from moscow.data.monasteries import IMAGES_SUBFOLDER, MONASTERIES
 
 MIN_IMAGE_BYTES = 500
 PAUSE_MINUTES = 3
@@ -40,7 +40,7 @@ def _required_filenames() -> set[str]:
 
 
 def _target_dir() -> Path:
-    return _project_root / "output" / "images" / IMAGES_SUBFOLDER
+    return _project_root / "moscow" / "images" / IMAGES_SUBFOLDER
 
 
 def _all_downloaded() -> bool:
@@ -62,7 +62,7 @@ def _download_round() -> int:
     except ImportError:
         return 0
 
-    from data.image_urls import IMAGE_DOWNLOADS
+    from moscow.data.image_urls import IMAGE_DOWNLOADS
 
     target = _target_dir()
     target.mkdir(parents=True, exist_ok=True)

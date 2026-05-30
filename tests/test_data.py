@@ -33,97 +33,97 @@ EXPECTED_COUNTS = {
 
 def test_places_count() -> None:
     """Places list length matches build_pdf expected count."""
-    from data.places import PLACES
+    from moscow.data.places import PLACES
     assert len(PLACES) == EXPECTED_COUNTS["places"]
 
 
 def test_buildings_count() -> None:
     """Buildings list length matches build_pdf expected count."""
-    from data.buildings import BUILDINGS
+    from moscow.data.buildings import BUILDINGS
     assert len(BUILDINGS) == EXPECTED_COUNTS["buildings"]
 
 
 def test_parks_count() -> None:
     """Parks list length matches build_pdf expected count."""
-    from data.parks import PARKS
+    from moscow.data.parks import PARKS
     assert len(PARKS) == EXPECTED_COUNTS["parks"]
 
 
 def test_museums_count() -> None:
     """Museums list length matches build_pdf expected count."""
-    from data.museums import MUSEUMS
+    from moscow.data.museums import MUSEUMS
     assert len(MUSEUMS) == EXPECTED_COUNTS["museums"]
 
 
 def test_palaces_count() -> None:
     """Palaces list length matches build_pdf expected count."""
-    from data.palaces import PALACES
+    from moscow.data.palaces import PALACES
     assert len(PALACES) == EXPECTED_COUNTS["palaces"]
 
 
 def test_sculptures_count() -> None:
     """Sculptures list length matches build_pdf expected count."""
-    from data.sculptures import SCULPTURES
+    from moscow.data.sculptures import SCULPTURES
     assert len(SCULPTURES) == EXPECTED_COUNTS["sculptures"]
 
 
 def test_places_of_worship_count() -> None:
     """Places of worship list length matches build_pdf expected count."""
-    from data.places_of_worship import PLACES_OF_WORSHIP
+    from moscow.data.places_of_worship import PLACES_OF_WORSHIP
     assert len(PLACES_OF_WORSHIP) == EXPECTED_COUNTS["places_of_worship"]
 
 
 def test_monasteries_count() -> None:
     """Monasteries list length matches build_pdf expected count."""
-    from data.monasteries import MONASTERIES
+    from moscow.data.monasteries import MONASTERIES
     assert len(MONASTERIES) == EXPECTED_COUNTS["monasteries"]
 
 
 def test_metro_count() -> None:
     """Metro stations list length matches build_pdf expected count."""
-    from data.metro_stations import METRO_STATIONS
+    from moscow.data.metro_stations import METRO_STATIONS
     assert len(METRO_STATIONS) == EXPECTED_COUNTS["metro"]
 
 
 def test_theaters_count() -> None:
     """Theaters list length matches build_pdf expected count."""
-    from data.theaters import THEATERS
+    from moscow.data.theaters import THEATERS
     assert len(THEATERS) == EXPECTED_COUNTS["theaters"]
 
 
 def test_viewpoints_count() -> None:
     """Viewpoints list length matches build_pdf expected count."""
-    from data.viewpoints import VIEWPOINTS
+    from moscow.data.viewpoints import VIEWPOINTS
     assert len(VIEWPOINTS) == EXPECTED_COUNTS["viewpoints"]
 
 
 def test_bridges_count() -> None:
     """Bridges list length matches build_pdf expected count."""
-    from data.bridges import BRIDGES
+    from moscow.data.bridges import BRIDGES
     assert len(BRIDGES) == EXPECTED_COUNTS["bridges"]
 
 
 def test_squares_count() -> None:
     """Squares list length matches build_pdf expected count."""
-    from data.squares import SQUARES
+    from moscow.data.squares import SQUARES
     assert len(SQUARES) == EXPECTED_COUNTS["squares"]
 
 
 def test_markets_count() -> None:
     """Markets list length matches build_pdf expected count."""
-    from data.markets import MARKETS
+    from moscow.data.markets import MARKETS
     assert len(MARKETS) == EXPECTED_COUNTS["markets"]
 
 
 def test_cemeteries_count() -> None:
     """Cemeteries list length matches build_pdf expected count."""
-    from data.cemeteries import CEMETERIES
+    from moscow.data.cemeteries import CEMETERIES
     assert len(CEMETERIES) == EXPECTED_COUNTS["cemeteries"]
 
 
 def test_place_has_required_keys() -> None:
     """Each place has name, images, lat, lon."""
-    from data.places import PLACES
+    from moscow.data.places import PLACES
     for p in PLACES[:3]:
         assert "name" in p
         assert "images" in p
@@ -143,21 +143,21 @@ def _map_url(lon: float, lat: float) -> str:
 
 def _all_places_by_guide() -> list[tuple[str, list[dict]]]:
     """Returns [(guide_name, list of place dicts with name, lat, lon), ...]."""
-    from data.places import PLACES
-    from data.buildings import BUILDINGS
-    from data.parks import PARKS
-    from data.museums import MUSEUMS
-    from data.palaces import PALACES
-    from data.sculptures import SCULPTURES
-    from data.places_of_worship import PLACES_OF_WORSHIP
-    from data.monasteries import MONASTERIES
-    from data.metro_stations import METRO_STATIONS
-    from data.theaters import THEATERS
-    from data.viewpoints import VIEWPOINTS
-    from data.bridges import BRIDGES
-    from data.squares import SQUARES
-    from data.markets import MARKETS
-    from data.cemeteries import CEMETERIES
+    from moscow.data.places import PLACES
+    from moscow.data.buildings import BUILDINGS
+    from moscow.data.parks import PARKS
+    from moscow.data.museums import MUSEUMS
+    from moscow.data.palaces import PALACES
+    from moscow.data.sculptures import SCULPTURES
+    from moscow.data.places_of_worship import PLACES_OF_WORSHIP
+    from moscow.data.monasteries import MONASTERIES
+    from moscow.data.metro_stations import METRO_STATIONS
+    from moscow.data.theaters import THEATERS
+    from moscow.data.viewpoints import VIEWPOINTS
+    from moscow.data.bridges import BRIDGES
+    from moscow.data.squares import SQUARES
+    from moscow.data.markets import MARKETS
+    from moscow.data.cemeteries import CEMETERIES
 
     return [
         ("places", PLACES),
@@ -211,9 +211,9 @@ def test_no_duplicate_map_urls_across_guides() -> None:
 
 def test_no_duplicate_image_urls_in_places_metro_parks() -> None:
     """No image URL is shared between two different items in places/metro/parks."""
-    from data.place_image_urls import PLACE_IMAGE_DOWNLOADS
-    from data.metro_image_urls import METRO_IMAGE_DOWNLOADS
-    from data.park_image_urls import PARK_IMAGE_DOWNLOADS
+    from moscow.data.place_image_urls import PLACE_IMAGE_DOWNLOADS
+    from moscow.data.metro_image_urls import METRO_IMAGE_DOWNLOADS
+    from moscow.data.park_image_urls import PARK_IMAGE_DOWNLOADS
 
     url_to_sources: dict[str, list[tuple[str, str]]] = {}
     for guide_name, downloads in [
@@ -251,15 +251,15 @@ def test_no_duplicate_image_urls_across_all_guides() -> None:
     from collections import defaultdict
 
     configs = [
-        ("place", "data.place_image_urls", "PLACE_IMAGE_DOWNLOADS"),
-        ("park", "data.park_image_urls", "PARK_IMAGE_DOWNLOADS"),
-        ("metro", "data.metro_image_urls", "METRO_IMAGE_DOWNLOADS"),
-        ("places_of_worship", "data.places_of_worship_image_urls", "PLACES_OF_WORSHIP_IMAGE_DOWNLOADS"),
-        ("building", "data.building_image_urls", "BUILDING_IMAGE_DOWNLOADS"),
-        ("palace", "data.palace_image_urls", "PALACE_IMAGE_DOWNLOADS"),
-        ("museum", "data.museum_image_urls", "MUSEUM_IMAGE_DOWNLOADS"),
-        ("sculpture", "data.sculpture_image_urls", "SCULPTURE_IMAGE_DOWNLOADS"),
-        ("monastery", "data.image_urls", "IMAGE_DOWNLOADS"),
+        ("place", "moscow.data.place_image_urls", "PLACE_IMAGE_DOWNLOADS"),
+        ("park", "moscow.data.park_image_urls", "PARK_IMAGE_DOWNLOADS"),
+        ("metro", "moscow.data.metro_image_urls", "METRO_IMAGE_DOWNLOADS"),
+        ("places_of_worship", "moscow.data.places_of_worship_image_urls", "PLACES_OF_WORSHIP_IMAGE_DOWNLOADS"),
+        ("building", "moscow.data.building_image_urls", "BUILDING_IMAGE_DOWNLOADS"),
+        ("palace", "moscow.data.palace_image_urls", "PALACE_IMAGE_DOWNLOADS"),
+        ("museum", "moscow.data.museum_image_urls", "MUSEUM_IMAGE_DOWNLOADS"),
+        ("sculpture", "moscow.data.sculpture_image_urls", "SCULPTURE_IMAGE_DOWNLOADS"),
+        ("monastery", "moscow.data.image_urls", "IMAGE_DOWNLOADS"),
     ]
     url_to_sources: dict[str, list[tuple[str, str]]] = defaultdict(list)
     for guide, module_name, attr in configs:

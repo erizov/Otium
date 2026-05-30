@@ -28,15 +28,15 @@ def _load_all_downloads() -> dict[str, list[tuple[str, str]]]:
     url_to_sources: dict[str, list[tuple[str, str]]] = defaultdict(list)
 
     configs = [
-        ("place", "data.place_image_urls", "PLACE_IMAGE_DOWNLOADS"),
-        ("park", "data.park_image_urls", "PARK_IMAGE_DOWNLOADS"),
-        ("metro", "data.metro_image_urls", "METRO_IMAGE_DOWNLOADS"),
-        ("places_of_worship", "data.places_of_worship_image_urls", "PLACES_OF_WORSHIP_IMAGE_DOWNLOADS"),
-        ("building", "data.building_image_urls", "BUILDING_IMAGE_DOWNLOADS"),
-        ("palace", "data.palace_image_urls", "PALACE_IMAGE_DOWNLOADS"),
-        ("museum", "data.museum_image_urls", "MUSEUM_IMAGE_DOWNLOADS"),
-        ("sculpture", "data.sculpture_image_urls", "SCULPTURE_IMAGE_DOWNLOADS"),
-        ("monastery", "data.image_urls", "IMAGE_DOWNLOADS"),
+        ("place", "moscow.data.place_image_urls", "PLACE_IMAGE_DOWNLOADS"),
+        ("park", "moscow.data.park_image_urls", "PARK_IMAGE_DOWNLOADS"),
+        ("metro", "moscow.data.metro_image_urls", "METRO_IMAGE_DOWNLOADS"),
+        ("places_of_worship", "moscow.data.places_of_worship_image_urls", "PLACES_OF_WORSHIP_IMAGE_DOWNLOADS"),
+        ("building", "moscow.data.building_image_urls", "BUILDING_IMAGE_DOWNLOADS"),
+        ("palace", "moscow.data.palace_image_urls", "PALACE_IMAGE_DOWNLOADS"),
+        ("museum", "moscow.data.museum_image_urls", "MUSEUM_IMAGE_DOWNLOADS"),
+        ("sculpture", "moscow.data.sculpture_image_urls", "SCULPTURE_IMAGE_DOWNLOADS"),
+        ("monastery", "moscow.data.image_urls", "IMAGE_DOWNLOADS"),
     ]
 
     for guide, module_name, attr in configs:

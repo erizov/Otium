@@ -134,7 +134,7 @@ def main() -> int:
     parser.add_argument(
         "--output-dir",
         type=Path,
-        default=_PROJECT_ROOT / "output",
+        default=_PROJECT_ROOT / "moscow",
         help="Guide output root (default: output/)",
     )
     parser.add_argument(
