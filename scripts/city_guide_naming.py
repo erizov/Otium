@@ -63,3 +63,89 @@ def short_id_from_title(city_slug: str, title: str) -> str:
     if raw.startswith(city_slug + "_"):
         return raw[len(city_slug) + 1 :]
     return raw[:48] or "place"
+
+
+_IMAGE_FILE_SUFFIX_RE = re.compile(
+    r"\.(?:jpe?g|png|gif|webp|svg|tiff?)\s*$",
+    re.IGNORECASE,
+)
+_WIKIMEDIA_DISAMBIG_SUFFIX_RE = re.compile(r"\s*\([I]\)\s*$")
+_WIKIMEDIA_DATE_SUFFIX_RE = re.compile(r"\s+\d{4}\s+\d{2}\s*$")
+_WIKIMEDIA_TRAILING_INDEX_RE = re.compile(r"\s+\d+\s*$")
+_WIKIMEDIA_TRAILING_YEAR_RE = re.compile(r"\s+\d{4}\s*$")
+_COMMONS_UPLOAD_META_RE = re.compile(
+    r"\s*--\s*\d{4}\s*--\s*\d+\s*$",
+)
+_COMMONS_LOCATION_PREFIX_RE = re.compile(
+    r"^[A-Za-zÀ-ÿ\s\-]+(?:\([A-Z]{2}\))?\s*,\s*",
+)
+_PHOTOCHROM_SUFFIX_DIGIT_RE = re.compile(
+    r"(photochrom)\d+$",
+    re.IGNORECASE,
+)
+
+
+def clean_wikimedia_display_title(text: str) -> str:
+    """
+    Strip Commons filename artifacts from a place title or subtitle.
+
+    Examples:
+    - ``Scala Cinema (I).jpg`` → ``Scala Cinema``
+    - ``St Louis Church Bangkok 2018 02.jpg`` → ``St Louis Church Bangkok``
+    - ``Amsterdam (NL), Koninklijk Paleis -- 2015 -- 7193.jpg``
+      → ``Koninklijk Paleis``
+    - ``Amsterdam photochrom2.jpg`` → ``Amsterdam photochrom``
+    """
+    s = str(text).strip()
+    if not s:
+        return s
+    s = _IMAGE_FILE_SUFFIX_RE.sub("", s)
+    s = _COMMONS_UPLOAD_META_RE.sub("", s)
+    s = _COMMONS_LOCATION_PREFIX_RE.sub("", s)
+    s = _WIKIMEDIA_DISAMBIG_SUFFIX_RE.sub("", s)
+    s = _WIKIMEDIA_DATE_SUFFIX_RE.sub("", s)
+    s = _WIKIMEDIA_TRAILING_YEAR_RE.sub("", s)
+    s = _WIKIMEDIA_TRAILING_INDEX_RE.sub("", s)
+    s = _PHOTOCHROM_SUFFIX_DIGIT_RE.sub(r"\1", s)
+    return s.strip()
+
+
+def title_from_place_slug(slug: str) -> str:
+    """
+    Human title from a place slug: ``dubai_gold_souk`` → ``Dubai Gold Souk``.
+
+    PDF-band filler slugs are left unchanged.
+    """
+    s = str(slug).strip()
+    if not s:
+        return s
+    if is_pdf_filler_slug(s):
+        return s
+    words = s.replace("_", " ").strip()
+    return clean_wikimedia_display_title(words.title())
+
+
+def looks_like_slug_title(text: str) -> bool:
+    """True when *text* is a lowercase slug token (``city_place_name``)."""
+    s = str(text).strip()
+    return bool(re.fullmatch(r"[a-z0-9_]+", s)) and "_" in s
+
+
+def place_heading_dedupe_key(text: str) -> str:
+    """Normalized heading key for cross-row PDF deduplication."""
+    from scripts.city_guide_narrative import normalize_sentence_key
+
+    cleaned = clean_wikimedia_display_title(str(text).strip())
+    return normalize_sentence_key(cleaned)
+
+
+def place_row_heading_dedupe_key(place: dict) -> str:
+    """Dedupe key from the best available place title fields."""
+    for key in ("name_en", "name_ru", "name", "subtitle_en", "subtitle_ru"):
+        raw = str(place.get(key) or "").strip()
+        if raw:
+            return place_heading_dedupe_key(raw)
+    slug = str(place.get("slug") or "").strip()
+    if slug and not is_pdf_filler_slug(slug):
+        return place_heading_dedupe_key(title_from_place_slug(slug))
+    return place_heading_dedupe_key(slug)

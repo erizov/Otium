@@ -27,6 +27,14 @@ from scripts.city_guide_core import (
     places_for_pdf,
     smallest_same_stem_image_rel,
 )
+from scripts.city_guide_narrative import (
+    GuideNarrativeDeduper,
+    filter_stories,
+    merge_narrative_html,
+    place_heading_plain,
+    place_meta_line,
+    subtitle_html_for_edition,
+)
 from scripts.city_guide_historical_reference_ru import (
     HERALDRY_CHAPTER_LABEL_EN,
     HERALDRY_CHAPTER_LABEL_RU,
@@ -384,29 +392,7 @@ def _nonempty(s: str | None) -> bool:
 
 
 def _place_meta_line(p: SmolenskPlace, edition: str) -> str | None:
-    s = guide_ui_strings(edition)
-    parts: list[str] = []
-    if _nonempty(p.get("address")):
-        parts.append(
-            "{} {}".format(s["address"], str(p.get("address", "")).strip()),
-        )
-    if _nonempty(p.get("architecture_style")):
-        parts.append(
-            "{} {}".format(
-                s["style"],
-                str(p.get("architecture_style", "")).strip(),
-            ),
-        )
-    if _nonempty(p.get("year_built")):
-        parts.append(
-            "{} {}".format(
-                s["period"],
-                str(p.get("year_built", "")).strip(),
-            ),
-        )
-    if not parts:
-        return None
-    return " | ".join(parts)
+    return place_meta_line(p, edition, guide_ui_strings(edition))
 
 
 def _html_paragraphs(text: str) -> str:
@@ -647,27 +633,16 @@ def _place_figure_rows_max_three_html(
     )
 
 
-def _place_block(root: Path, p: SmolenskPlace, edition: str) -> str:
+def _place_block(
+    root: Path,
+    p: SmolenskPlace,
+    edition: str,
+    deduper: GuideNarrativeDeduper,
+) -> str:
     s = guide_ui_strings(edition)
-    name_ru_raw = p.get("name_ru", "")
-    sub_en = p.get("subtitle_en", "")
-    if edition == "ru":
-        name_plain = name_ru_raw
-        title_html = escape(name_ru_raw)
-        sub_html = (
-            '<p class="sub-en">{}</p>'.format(escape(sub_en))
-            if _nonempty(sub_en)
-            else ""
-        )
-    else:
-        title_plain = sub_en.strip() if _nonempty(sub_en) else name_ru_raw
-        name_plain = title_plain
-        title_html = escape(title_plain)
-        sub_html = (
-            '<p class="sub-en">{}</p>'.format(escape(name_ru_raw))
-            if _nonempty(sub_en) and _nonempty(name_ru_raw)
-            else ""
-        )
+    name_plain = place_heading_plain(p, edition)
+    title_html = escape(name_plain)
+    sub_html = subtitle_html_for_edition(p, edition)
     meta = _place_meta_line(p, edition)
     meta_html = (
         '<p class="place-meta">{}</p>'.format(escape(meta))
@@ -690,33 +665,15 @@ def _place_block(root: Path, p: SmolenskPlace, edition: str) -> str:
     fig_html = _place_figures_html(p, name_plain, rels, edition)
     if fig_html:
         chunks.append(fig_html)
-    if _nonempty(p.get("description")):
-        desc = str(p.get("description", "") or "")
-        chunks.append(
-            '<div class="place-desc">{}</div>'.format(
-                _html_paragraphs(desc),
-            )
-        )
-    facts = p.get("facts") or []
-    if facts:
-        lis = "\n".join(
-            "<li>{}</li>".format(escape(str(f).strip()))
-            for f in facts
-            if str(f).strip()
-        )
-        if lis:
-            chunks.append(
-                "<h4>{}</h4>\n<ul class=\"facts\">{}</ul>".format(
-                    escape(s["facts_heading"]),
-                    lis,
-                )
-            )
-    stories = p.get("stories") or []
+    narrative = merge_narrative_html(p, edition, deduper)
+    if narrative:
+        chunks.append(narrative)
+    stories = filter_stories(p, edition)
     if stories:
         st_li = "\n".join(
-            "<li>{}</li>".format(escape(str(s).strip()))
-            for s in stories
-            if str(s).strip()
+            "<li>{}</li>".format(escape(str(st).strip()))
+            for st in stories
+            if str(st).strip()
         )
         if st_li:
             chunks.append(
@@ -726,16 +683,6 @@ def _place_block(root: Path, p: SmolenskPlace, edition: str) -> str:
                     st_li,
                 )
             )
-    if _nonempty(p.get("history")):
-        hist = str(p.get("history", "") or "")
-        chunks.append("<h4>{}</h4>".format(escape(s["history_heading"])))
-        chunks.append(_html_paragraphs(hist))
-    if _nonempty(p.get("significance")):
-        sig = str(p.get("significance", "") or "")
-        chunks.append(
-            "<h4>{}</h4>".format(escape(s["significance_heading"])),
-        )
-        chunks.append(_html_paragraphs(sig))
     more_info = p.get("more_information") or []
     if isinstance(more_info, list):
         links: list[str] = []
@@ -1180,7 +1127,13 @@ def _cover_otium_html(edition: str) -> str:
     ).format(paras)
 
 
-def _build_html(root: Path, places: list[SmolenskPlace], edition: str) -> str:
+def _build_html(
+    root: Path,
+    places: list[SmolenskPlace],
+    edition: str,
+    deduper: GuideNarrativeDeduper | None = None,
+) -> str:
+    narrative_deduper = deduper or GuideNarrativeDeduper()
     font_href = SMOLENSK_GOOGLE_FONTS_HREF
     s = guide_ui_strings(edition)
     blocks: list[str] = [_cover_otium_html(edition)]
@@ -1210,7 +1163,7 @@ def _build_html(root: Path, places: list[SmolenskPlace], edition: str) -> str:
         srcs = _image_srcs_for_place(root, p)
         if not srcs:
             continue
-        blocks.append(_place_block(root, p, edition))
+        blocks.append(_place_block(root, p, edition, narrative_deduper))
     univ = _universities_section_html(root, edition)
     if univ:
         blocks.append(univ)
@@ -1511,8 +1464,9 @@ def main() -> int:
     for edition in langs:
         html_path = out_dir / "{}_{}.html".format(stem, edition)
         pdf_path = out_dir / "{}_{}.pdf".format(stem, edition)
+        narrative_deduper = GuideNarrativeDeduper()
         html_path.write_text(
-            _build_html(smol_root, places, edition),
+            _build_html(smol_root, places, edition, deduper=narrative_deduper),
             encoding="utf-8",
         )
         print("Written:", html_path)

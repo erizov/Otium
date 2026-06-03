@@ -24,13 +24,21 @@ from scripts.city_guide_core import (
     copy_built_guide_pdf_to_final_guides,
     places_for_pdf,
 )
+from scripts.city_guide_narrative import (
+    GuideNarrativeDeduper,
+    filter_stories,
+    merge_narrative_html,
+    place_heading_plain,
+    place_meta_line,
+    subtitle_html_for_edition,
+)
 from scripts.city_guide_historical_reference_ru import (
     HERALDRY_CHAPTER_LABEL_EN,
     HERALDRY_CHAPTER_LABEL_RU,
     HISTORICAL_SECTION_TITLE_EN,
     HISTORICAL_SECTION_TITLE_RU,
     historical_reference_section_html,
-    reference_text_en_for_city,
+    reference_text_en_for_any_city,
     reference_text_ru_for_any_city,
 )
 from scripts.city_guide_jerusalem_style_pdf import guide_ui_strings
@@ -319,21 +327,7 @@ def _nonempty(s: str | None) -> bool:
 
 
 def _place_meta_line(p: SpbPlace, edition: str) -> str | None:
-    s = guide_ui_strings(edition)
-    parts: list[str] = []
-    if _nonempty(p.get("address")):
-        parts.append("{} {}".format(s["address"], p["address"].strip()))
-    if _nonempty(p.get("architecture_style")):
-        parts.append(
-            "{} {}".format(s["style"], p["architecture_style"].strip()),
-        )
-    if _nonempty(p.get("year_built")):
-        parts.append(
-            "{} {}".format(s["period"], str(p["year_built"]).strip()),
-        )
-    if not parts:
-        return None
-    return " | ".join(parts)
+    return place_meta_line(p, edition, guide_ui_strings(edition))
 
 
 def _html_paragraphs(text: str) -> str:
@@ -386,27 +380,16 @@ def _place_figures_html(
     return '<div class="place-fig-row">\n{}\n</div>'.format("\n".join(figs))
 
 
-def _place_block(p: SpbPlace, img_srcs: list[str], edition: str) -> str:
+def _place_block(
+    p: SpbPlace,
+    img_srcs: list[str],
+    edition: str,
+    deduper: GuideNarrativeDeduper,
+) -> str:
     s = guide_ui_strings(edition)
-    name_ru = p.get("name_ru", "")
-    sub_en = p.get("subtitle_en", "")
-    if edition == "ru":
-        name_plain = name_ru
-        title_plain = name_ru
-        title_html = escape(name_ru)
-        sub_html = (
-            '<p class="sub-en">{}</p>'.format(escape(sub_en))
-            if _nonempty(sub_en)
-            else ""
-        )
-    else:
-        title_plain = sub_en.strip() if _nonempty(sub_en) else name_ru
-        title_html = escape(title_plain)
-        sub_html = (
-            '<p class="sub-en">{}</p>'.format(escape(name_ru))
-            if _nonempty(sub_en) and _nonempty(name_ru)
-            else ""
-        )
+    title_plain = place_heading_plain(p, edition)
+    title_html = escape(title_plain)
+    sub_html = subtitle_html_for_edition(p, edition)
     meta = _place_meta_line(p, edition)
     meta_html = (
         '<p class="place-meta">{}</p>'.format(escape(meta))
@@ -420,32 +403,15 @@ def _place_block(p: SpbPlace, img_srcs: list[str], edition: str) -> str:
         meta_html,
         _place_figures_html(title_plain, img_srcs, edition),
     ]
-    if _nonempty(p.get("description")):
-        chunks.append(
-            '<div class="place-desc">{}</div>'.format(
-                _html_paragraphs(p["description"]),
-            )
-        )
-    facts = p.get("facts") or []
-    if facts:
-        lis = "\n".join(
-            "<li>{}</li>".format(escape(str(f).strip()))
-            for f in facts
-            if str(f).strip()
-        )
-        if lis:
-            chunks.append(
-                "<h4>{}</h4>\n<ul class=\"facts\">{}</ul>".format(
-                    escape(s["facts_heading"]),
-                    lis,
-                )
-            )
-    stories = p.get("stories") or []
+    narrative = merge_narrative_html(p, edition, deduper)
+    if narrative:
+        chunks.append(narrative)
+    stories = filter_stories(p, edition)
     if stories:
         st_li = "\n".join(
-            "<li>{}</li>".format(escape(str(s).strip()))
-            for s in stories
-            if str(s).strip()
+            "<li>{}</li>".format(escape(str(st).strip()))
+            for st in stories
+            if str(st).strip()
         )
         if st_li:
             chunks.append(
@@ -455,14 +421,6 @@ def _place_block(p: SpbPlace, img_srcs: list[str], edition: str) -> str:
                     st_li,
                 )
             )
-    if _nonempty(p.get("history")):
-        chunks.append("<h4>{}</h4>".format(escape(s["history_heading"])))
-        chunks.append(_html_paragraphs(p["history"]))
-    if _nonempty(p.get("significance")):
-        chunks.append(
-            "<h4>{}</h4>".format(escape(s["significance_heading"])),
-        )
-        chunks.append(_html_paragraphs(p["significance"]))
     chunks.append("</section>")
     return "\n".join(chunks)
 
@@ -598,7 +556,9 @@ def _build_html(
     edition: str,
     *,
     project_root: Path,
+    deduper: GuideNarrativeDeduper | None = None,
 ) -> str:
+    narrative_deduper = deduper or GuideNarrativeDeduper()
     font_href = (
         "https://fonts.googleapis.com/css2?"
         "family=Cormorant+Garamond:wght@600&family=Source+Sans+3:wght@400;600"
@@ -628,7 +588,7 @@ def _build_html(
         hist_body = reference_text_ru_for_any_city("spb", project_root)
         hist_title = HISTORICAL_SECTION_TITLE_RU
     else:
-        hist_body = reference_text_en_for_city("spb")
+        hist_body = reference_text_en_for_any_city("spb", project_root)
         hist_title = HISTORICAL_SECTION_TITLE_EN
     hist = historical_reference_section_html(
         hist_body,
@@ -651,7 +611,7 @@ def _build_html(
         srcs = _image_srcs_for_place(spb_root, p)
         if not srcs:
             continue
-        blocks.append(_place_block(p, srcs, edition))
+        blocks.append(_place_block(p, srcs, edition, narrative_deduper))
     body_inner = "\n".join(blocks)
     css = """
 body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
@@ -812,8 +772,15 @@ def main() -> int:
     for edition in langs:
         html_path = out_dir / "{}_{}.html".format(stem, edition)
         pdf_path = out_dir / "{}_{}.pdf".format(stem, edition)
+        narrative_deduper = GuideNarrativeDeduper()
         html_path.write_text(
-            _build_html(spb_root, places, edition, project_root=_PROJECT_ROOT),
+            _build_html(
+                spb_root,
+                places,
+                edition,
+                project_root=_PROJECT_ROOT,
+                deduper=narrative_deduper,
+            ),
             encoding="utf-8",
         )
         print("Written:", html_path)

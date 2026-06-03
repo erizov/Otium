@@ -16,6 +16,15 @@ python scripts/optimize_all_city_images.py
 python scripts/lint_image_paths.py
 python scripts/city_guide_text_lint.py
 python scripts/verify_city_guide_place_images.py
+python scripts/export_guide_translation_queue.py --cities bangkok
+# … Google Colab: translate collab/en_to_ru + ru_to_en → results/*.jsonl …
+python scripts/apply_guide_translation_results.py
+python scripts/fill_sparse_guide_narratives.py --dry-run-only --cities bangkok
+python scripts/fill_sparse_guide_narratives.py --cities bangkok --limit 3
+python scripts/fill_sparse_guide_narratives.py
+python scripts/rebuild_stale_city_guide_pdfs.py --dry-run
+python scripts/rebuild_stale_city_guide_pdfs.py
+python scripts/rebuild_stale_city_guide_pdfs.py --with-translate
 ```
 
 ---

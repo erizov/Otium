@@ -17,6 +17,22 @@ omit `--write` to print Markdown to stdout. Use `--no-output-tree` to skip
 the `output/` PDF listing. Custom path:
 `python scripts/report_city_pdf_inventory.py --out path/to/report.md`.
 
+### Quick chooser — build scripts
+
+Two pipelines: **Moscow category guides** (`build_pdf.py`) vs **international city
+guides** (`build_<city>_pdf.py` → `city_guide_jerusalem_style_pdf.py`).
+
+| Goal | Script |
+|------|--------|
+| All city PDFs (Berlin, Kyiv, Moscow unified, …) | `python scripts/build_all_city_guide_pdfs.py` |
+| All Moscow thematic guides (bridges, metro, …), standard layout | `python scripts/build_all_guides.py` |
+| Moscow thematic guides, optimized (3 images + map per place) | `python scripts/build_all_guides_opt.py` |
+| Same + dedup images and compress >500 KB first | `python scripts/build_all_guides_opt_dedup.py` |
+
+Moscow is in both systems: category guides → `moscow/output/<category>_guide.*`;
+unified city guide → `build_moscow_pdf.py` (picked up by
+`build_all_city_guide_pdfs.py`).
+
 ---
 
 ## Local web editor (city guides + LLM)

@@ -120,18 +120,84 @@ def place_has_pdf_image(root: Path, place: _P) -> bool:
     return smallest_same_stem_image_rel(root, rel) is not None
 
 
+def _pdfband_duplicates_curated(
+    filler: _P,
+    curated: Sequence[_P],
+) -> bool:
+    """True when a PDF sidecar row repeats an existing curated place."""
+    from scripts.city_guide_naming import (
+        clean_wikimedia_display_title,
+        is_pdf_filler_slug,
+        place_row_heading_dedupe_key,
+    )
+
+    if not is_pdf_filler_slug(str(filler.get("slug") or "")):
+        return False
+    filler_key = place_row_heading_dedupe_key(filler)
+    desc = str(filler.get("description") or "").lower()
+    for row in curated:
+        if place_row_heading_dedupe_key(row) == filler_key:
+            return True
+        for key in ("name_en", "name_ru", "name", "subtitle_en"):
+            cname = clean_wikimedia_display_title(
+                str(row.get(key) or ""),
+            ).lower()
+            if len(cname) >= 8 and cname in desc:
+                return True
+        cur_key = place_row_heading_dedupe_key(row)
+        ft = {w for w in filler_key.split() if len(w) >= 6}
+        ct = {w for w in cur_key.split() if len(w) >= 6}
+        if ft & ct:
+            return True
+    return False
+
+
+def dedupe_pdf_sidecar_places(places: Sequence[_P]) -> list[_P]:
+    """
+    Drop PDF expand rows whose title/subject duplicates a curated place.
+
+    Curated rows (non-pdfband/filler slugs) are kept; sidecar rows that
+    match an existing heading or describe the same landmark are omitted.
+    """
+    from scripts.city_guide_naming import (
+        is_pdf_filler_slug,
+        place_row_heading_dedupe_key,
+    )
+
+    curated = [
+        p for p in places
+        if not is_pdf_filler_slug(str(p.get("slug") or ""))
+    ]
+    out: list[_P] = list(curated)
+    seen = {place_row_heading_dedupe_key(p) for p in curated}
+    for p in places:
+        slug = str(p.get("slug") or "")
+        if not is_pdf_filler_slug(slug):
+            continue
+        key = place_row_heading_dedupe_key(p)
+        if key in seen or _pdfband_duplicates_curated(p, curated):
+            continue
+        seen.add(key)
+        out.append(p)
+    return out
+
+
 def places_for_pdf(
     root: Path,
     places: Sequence[_P],
     *,
     sort_key: Callable[[_P], Any] | None = None,
+    dedupe_sidecar: bool = True,
 ) -> list[_P]:
     """
     Places eligible for PDF/HTML export: must have a local image on disk.
 
     ``suppress_images_for_pdf`` rows are omitted (no text-only fallback).
     """
-    out = [p for p in places if place_has_pdf_image(root, p)]
+    rows = list(places)
+    if dedupe_sidecar:
+        rows = dedupe_pdf_sidecar_places(rows)
+    out = [p for p in rows if place_has_pdf_image(root, p)]
     if sort_key is not None:
         out.sort(key=sort_key)
     return out

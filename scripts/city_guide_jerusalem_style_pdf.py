@@ -22,12 +22,21 @@ from scripts.city_guide_core import (
     places_for_pdf,
     smallest_same_stem_image_rel,
 )
+from scripts.city_guide_narrative import (
+    GuideNarrativeDeduper,
+    filter_stories,
+    merge_narrative_html,
+    place_heading_plain,
+    place_meta_line,
+    subtitle_html_for_edition,
+)
 from scripts.city_guide_historical_reference_ru import (
     HERALDRY_CHAPTER_LABEL_EN,
     HERALDRY_CHAPTER_LABEL_RU,
     HISTORICAL_SECTION_TITLE_EN,
     historical_reference_section_html,
     reference_text_en_for_city,
+    reference_text_en_for_any_city,
     reference_text_ru_for_any_city,
 )
 from scripts.city_guide_typography import guide_inline_css
@@ -104,26 +113,7 @@ def places_with_local_images(
 
 
 def _place_meta_line(p: dict[str, Any], edition: str) -> str | None:
-    s = _guide_strings(edition)
-    parts: list[str] = []
-    if is_substantive_text(p.get("address")):
-        parts.append(
-            "{} {}".format(s["address"], str(p["address"]).strip()),
-        )
-    if is_substantive_text(p.get("architecture_style")):
-        parts.append(
-            "{} {}".format(
-                s["style"],
-                str(p["architecture_style"]).strip(),
-            ),
-        )
-    if is_substantive_text(p.get("year_built")):
-        parts.append(
-            "{} {}".format(s["period"], str(p["year_built"]).strip()),
-        )
-    if not parts:
-        return None
-    return " | ".join(parts)
+    return place_meta_line(p, edition, _guide_strings(edition))
 
 
 def _html_paragraphs(text: str) -> str:
@@ -162,58 +152,21 @@ def _image_srcs_for_place(
     return out
 
 
-def _subtitle_html(p: dict[str, Any]) -> str:
-    pairs: tuple[tuple[str, str, str | None], ...] = (
-        ("subtitle_en", "sub-en", None),
-        ("subtitle_de", "sub-de", None),
-        ("subtitle_fr", "sub-fr", None),
-        ("subtitle_es", "sub-es", None),
-        ("subtitle_it", "sub-it", None),
-        ("subtitle_ca", "sub-ca", None),
-        ("subtitle_hu", "sub-hu", None),
-        ("subtitle_cs", "sub-cs", None),
-        ("subtitle_ja", "sub-ja", "ja"),
-        ("subtitle_he", "sub-he", "he"),
-    )
-    for key, cls, lang_attr in pairs:
-        if not is_substantive_text(p.get(key)):
-            continue
-        t = str(p[key])
-        if lang_attr:
-            return '<p class="{}" dir="{}" lang="{}">{}</p>'.format(
-                cls,
-                "rtl" if lang_attr == "he" else "ltr",
-                lang_attr,
-                escape(t),
-            )
-        return '<p class="{}">{}</p>'.format(cls, escape(t))
-    return ""
-
-
 def _place_title_parts(p: dict[str, Any], edition: str) -> tuple[str, str]:
     """(escaped heading HTML, plain string for img alt)."""
-    if edition == "ru":
-        nr = (p.get("name_ru") or "").strip()
-        if nr:
-            return escape(nr), nr
-        ne = (p.get("name_en") or "").strip()
-        if ne:
-            return escape(ne), ne
-    else:
-        ne = (p.get("name_en") or "").strip()
-        if ne:
-            return escape(ne), ne
-        nr = (p.get("name_ru") or "").strip()
-        if nr:
-            return escape(nr), nr
-    slug = str(p.get("slug", "place"))
-    return escape(slug), slug
+    plain = place_heading_plain(p, edition)
+    return escape(plain), plain
 
 
-def place_block(p: dict[str, Any], img_srcs: list[str], edition: str) -> str:
+def place_block(
+    p: dict[str, Any],
+    img_srcs: list[str],
+    edition: str,
+    deduper: GuideNarrativeDeduper,
+) -> str:
     s = _guide_strings(edition)
     name_h, name_plain = _place_title_parts(p, edition)
-    sub_html = _subtitle_html(p)
+    sub_html = subtitle_html_for_edition(p, edition)
     meta = _place_meta_line(p, edition)
     meta_html = (
         '<p class="place-meta">{}</p>'.format(escape(meta))
@@ -239,33 +192,15 @@ def place_block(p: dict[str, Any], img_srcs: list[str], edition: str) -> str:
                 escape(alt),
             )
         )
-    if is_substantive_text(p.get("description")):
-        chunks.append(
-            '<div class="place-desc">{}</div>'.format(
-                _html_paragraphs(str(p["description"])),
-            )
-        )
-    facts = p.get("facts") or []
-    if facts:
-        lis = "\n".join(
-            "<li>{}</li>".format(escape(str(f).strip()))
-            for f in facts
-            if is_substantive_text(str(f).strip())
-        )
-        if lis:
-            chunks.append(
-                "<h4>{}</h4>\n"
-                "<ul class=\"facts\">{}</ul>".format(
-                    escape(s["facts_heading"]),
-                    lis,
-                )
-            )
-    stories = p.get("stories") or []
+    narrative = merge_narrative_html(p, edition, deduper)
+    if narrative:
+        chunks.append(narrative)
+    stories = filter_stories(p, edition)
     if stories:
         st_li = "\n".join(
-            "<li>{}</li>".format(escape(str(s).strip()))
-            for s in stories
-            if is_substantive_text(str(s).strip())
+            "<li>{}</li>".format(escape(str(st).strip()))
+            for st in stories
+            if is_substantive_text(str(st).strip())
         )
         if st_li:
             chunks.append(
@@ -275,14 +210,6 @@ def place_block(p: dict[str, Any], img_srcs: list[str], edition: str) -> str:
                     st_li,
                 )
             )
-    if is_substantive_text(p.get("history")):
-        chunks.append("<h4>{}</h4>".format(escape(s["history_heading"])))
-        chunks.append(_html_paragraphs(str(p["history"])))
-    if is_substantive_text(p.get("significance")):
-        chunks.append(
-            "<h4>{}</h4>".format(escape(s["significance_heading"])),
-        )
-        chunks.append(_html_paragraphs(str(p["significance"])))
     chunks.append("</section>")
     return "\n".join(chunks)
 
@@ -359,7 +286,7 @@ def _historical_reference_block(
         return historical_reference_section_html(
             reference_text_ru_for_any_city(city_slug, project_root),
         )
-    body_en = reference_text_en_for_city(city_slug)
+    body_en = reference_text_en_for_any_city(city_slug, project_root)
     if not body_en:
         return ""
     return historical_reference_section_html(
@@ -407,13 +334,14 @@ def _place_section_blocks(
     root: Path,
     places: list[dict[str, Any]],
     edition: str,
+    deduper: GuideNarrativeDeduper,
 ) -> list[str]:
     out: list[str] = []
     for p in places:
         srcs = _image_srcs_for_place(root, p)
         if not srcs:
             continue
-        out.append(place_block(p, srcs, edition))
+        out.append(place_block(p, srcs, edition, deduper))
     return out
 
 
@@ -458,7 +386,9 @@ def build_html(
     edition: str,
     html_lang_attr: str | None = None,
     project_root: Path | None = None,
+    deduper: GuideNarrativeDeduper | None = None,
 ) -> str:
+    narrative_deduper = deduper or GuideNarrativeDeduper()
     blocks = _preamble_blocks(
         root,
         city_slug=city_slug,
@@ -469,7 +399,9 @@ def build_html(
         edition=edition,
         project_root=project_root,
     )
-    blocks.extend(_place_section_blocks(root, places, edition))
+    blocks.extend(
+        _place_section_blocks(root, places, edition, narrative_deduper),
+    )
     return _wrap_guide_html(
         blocks,
         city_slug=city_slug,
@@ -497,6 +429,7 @@ def _pdf_via_playwright_chunked(
     image_wait_timeout_ms: int,
     footer: str,
     header: str,
+    deduper: GuideNarrativeDeduper,
 ) -> bool:
     try:
         from pypdf import PdfReader, PdfWriter
@@ -504,7 +437,7 @@ def _pdf_via_playwright_chunked(
         print("pypdf required for chunked PDF merge.", file=sys.stderr)
         return False
 
-    place_blocks = _place_section_blocks(root, places, edition)
+    place_blocks = _place_section_blocks(root, places, edition, deduper)
     preface = _preamble_blocks(
         root,
         city_slug=city_slug,
@@ -689,6 +622,7 @@ def run_build_pdf_main(
     for edition in langs:
         html_path = out_dir / "{}_{}.html".format(stem, edition)
         pdf_path = out_dir / "{}_{}.pdf".format(stem, edition)
+        narrative_deduper = GuideNarrativeDeduper()
         html_path.write_text(
             build_html(
                 root,
@@ -700,6 +634,7 @@ def run_build_pdf_main(
                 edition=edition,
                 html_lang_attr=html_lang_attr,
                 project_root=project_root,
+                deduper=narrative_deduper,
             ),
             encoding="utf-8",
         )
@@ -724,6 +659,7 @@ def run_build_pdf_main(
                 image_wait_timeout_ms=args.image_wait_ms,
                 footer=footer,
                 header=header,
+                deduper=narrative_deduper,
             )
         else:
             pdf_ok = _pdf_via_playwright(

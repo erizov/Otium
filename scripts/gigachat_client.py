@@ -54,27 +54,44 @@ def get_gigachat_access_token(*, force_refresh: bool = False) -> str:
 
     credentials = _load_credentials()
     body = urllib.parse.urlencode({"scope": _DEFAULT_SCOPE}).encode("utf-8")
-    req = urllib.request.Request(
-        _OAUTH_URL,
-        data=body,
-        method="POST",
-        headers={
-            "Content-Type": "application/x-www-form-urlencoded",
-            "Accept": "application/json",
-            "RqUID": str(uuid.uuid4()),
-            "Authorization": "Basic {}".format(credentials),
-        },
-    )
-    try:
-        with urllib.request.urlopen(
-            req, context=_ssl_context(), timeout=90,
-        ) as resp:
-            raw = json.loads(resp.read().decode("utf-8"))
-    except urllib.error.HTTPError as exc:
-        detail = exc.read().decode("utf-8", errors="replace")
+    last_net_err: Exception | None = None
+    for attempt in range(4):
+        req = urllib.request.Request(
+            _OAUTH_URL,
+            data=body,
+            method="POST",
+            headers={
+                "Content-Type": "application/x-www-form-urlencoded",
+                "Accept": "application/json",
+                "RqUID": str(uuid.uuid4()),
+                "Authorization": "Basic {}".format(credentials),
+            },
+        )
+        try:
+            with urllib.request.urlopen(
+                req, context=_ssl_context(), timeout=90,
+            ) as resp:
+                raw = json.loads(resp.read().decode("utf-8"))
+            last_net_err = None
+            break
+        except urllib.error.HTTPError as exc:
+            detail = exc.read().decode("utf-8", errors="replace")
+            raise RuntimeError(
+                "GigaChat OAuth failed ({}): {}".format(exc.code, detail),
+            ) from exc
+        except (urllib.error.URLError, ssl.SSLError, OSError, TimeoutError) as exc:
+            last_net_err = exc
+            if attempt < 3:
+                time.sleep(2.0 * (attempt + 1))
+                continue
+            raise RuntimeError(
+                "GigaChat OAuth network error: {}".format(exc),
+            ) from exc
+
+    if last_net_err is not None:
         raise RuntimeError(
-            "GigaChat OAuth failed ({}): {}".format(exc.code, detail),
-        ) from exc
+            "GigaChat OAuth network error: {}".format(last_net_err),
+        )
 
     token = str(raw.get("access_token") or "").strip()
     if not token:
@@ -84,7 +101,12 @@ def get_gigachat_access_token(*, force_refresh: bool = False) -> str:
     return token
 
 
-def ask_gigachat(question: str, model: str = "GigaChat") -> str:
+def ask_gigachat(
+    question: str,
+    model: str = "GigaChat",
+    *,
+    max_tokens: int = 512,
+) -> str:
     """
     Send one user message to GigaChat and return assistant text.
 
@@ -95,7 +117,7 @@ def ask_gigachat(question: str, model: str = "GigaChat") -> str:
         "model": model,
         "messages": [{"role": "user", "content": question}],
         "temperature": 0.7,
-        "max_tokens": 512,
+        "max_tokens": max_tokens,
         "stream": False,
     }
 
@@ -115,19 +137,38 @@ def ask_gigachat(question: str, model: str = "GigaChat") -> str:
         ) as resp:
             return json.loads(resp.read().decode("utf-8"))
 
-    try:
-        raw = _post(token)
-    except urllib.error.HTTPError as exc:
-        if exc.code == 401:
-            token = get_gigachat_access_token(force_refresh=True)
+    last_net_err: Exception | None = None
+    for attempt in range(4):
+        try:
             try:
                 raw = _post(token)
-            except urllib.error.HTTPError as exc2:
-                detail = exc2.read().decode("utf-8", errors="replace")
-                return "Ошибка {}: {}".format(exc2.code, detail)
-        else:
-            detail = exc.read().decode("utf-8", errors="replace")
-            return "Ошибка {}: {}".format(exc.code, detail)
+            except urllib.error.HTTPError as exc:
+                if exc.code == 401:
+                    token = get_gigachat_access_token(force_refresh=True)
+                    try:
+                        raw = _post(token)
+                    except urllib.error.HTTPError as exc2:
+                        detail = exc2.read().decode("utf-8", errors="replace")
+                        return "Ошибка {}: {}".format(exc2.code, detail)
+                else:
+                    detail = exc.read().decode("utf-8", errors="replace")
+                    return "Ошибка {}: {}".format(exc.code, detail)
+            last_net_err = None
+            break
+        except (urllib.error.URLError, ssl.SSLError, OSError, TimeoutError) as exc:
+            last_net_err = exc
+            if attempt < 3:
+                time.sleep(2.0 * (attempt + 1))
+                try:
+                    token = get_gigachat_access_token(force_refresh=True)
+                except RuntimeError as oauth_exc:
+                    logger.warning("GigaChat OAuth retry failed: %s", oauth_exc)
+                continue
+            logger.warning("GigaChat network error after retries: %s", exc)
+            return "Ошибка: сеть GigaChat ({})".format(exc)
+
+    if last_net_err is not None:
+        return "Ошибка: сеть GigaChat ({})".format(last_net_err)
 
     choices = raw.get("choices") or []
     if not choices:

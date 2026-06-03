@@ -850,13 +850,32 @@ def reference_text_en_for_city(slug: str) -> str:
     return base
 
 
-def reference_text_en_for_any_city(slug: str) -> str:
-    """English historical blurb, including Smolensk (from PDF builder)."""
+def reference_text_en_for_any_city(
+    slug: str,
+    project_root: Path | None = None,
+) -> str:
+    """English historical blurb; Smolensk builtin, else EN dict, else RU translate."""
     if slug == "smolensk":
         from scripts.build_smolensk_pdf import _HISTORICAL_REFERENCE_EN
 
         return _HISTORICAL_REFERENCE_EN.strip()
-    return reference_text_en_for_city(slug)
+    en = reference_text_en_for_city(slug)
+    if en:
+        return en
+    try:
+        ru = reference_text_ru_for_any_city(slug, project_root)
+    except KeyError:
+        return ""
+    ru = (ru or "").strip()
+    if not ru:
+        return ""
+    from scripts.city_guide_translate import get_edition_translator
+
+    tr = get_edition_translator(project_root)
+    if tr is None:
+        return ""
+    translated = tr.translate(ru, src="ru", dst="en", kind="prose")
+    return (translated or "").strip()
 
 
 def historical_reference_ru_override_path(

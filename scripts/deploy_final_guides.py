@@ -17,6 +17,9 @@ from scripts.rebuild_stale_city_guide_pdfs import (
     _input_paths,
     _max_mtime,
     _run_build,
+    merged_input_paths,
+    needs_rebuild,
+    stale_pdf_targets,
 )
 
 
@@ -37,18 +40,11 @@ def _merged_input_paths(
     *,
     include_shared: bool,
 ) -> list[Path]:
-    paths = _input_paths(
+    return merged_input_paths(
         project_root,
         slug,
         include_shared=include_shared,
     )
-    paths.extend(_extra_stale_input_paths(project_root))
-    data_dir = project_root / slug / "data"
-    if data_dir.is_dir():
-        paths.extend(
-            p for p in data_dir.glob("*registry*.py") if p.is_file()
-        )
-    return paths
 
 
 def _stale_check_targets(
@@ -57,17 +53,15 @@ def _stale_check_targets(
     scope: str,
 ) -> list[Path]:
     """PDF paths that must be fresh together for this deploy scope."""
+    all_targets = stale_pdf_targets(output_dir, slug)
     base = output_dir / "{}_guide.pdf".format(slug)
     en = output_dir / "{}_guide_en.pdf".format(slug)
     ru = output_dir / "{}_guide_ru.pdf".format(slug)
-    dual = en.is_file() or ru.is_file()
     if scope == "en":
-        return [en]
+        return [en] if en.is_file() else [en]
     if scope == "ru":
-        return [ru]
-    if dual:
-        return [en, ru, base]
-    return [base]
+        return [ru] if ru.is_file() else [ru]
+    return all_targets
 
 
 def _needs_rebuild_for_targets(
@@ -91,7 +85,7 @@ def _needs_rebuild_for_targets(
     for pdf in targets:
         if not pdf.is_file():
             return True, "missing {}".format(pdf.name)
-    oldest = min(p.stat().st_mtime for p in targets)
+    oldest = min(p.stat().st_mtime for p in targets if p.is_file())
     if newest > oldest:
         return True, "inputs newer than output PDF(s)"
     return False, "up to date"

@@ -26,6 +26,36 @@ chapter until `REFERENCE_TEXT_EN` has an entry for the slug. **Tokyo** keeps
 **Smolensk** and **Saint Petersburg** (`build_smolensk_pdf.py`,
 `build_spb_pdf.py`) still emit a single `*_guide.pdf` today (custom titul HTML).
 
+**Cross-edition fallback (EN↔RU):** when a place has text in only one language,
+the builder can translate at PDF time (Ollama / OpenAI) unless
+**`CITY_GUIDE_NO_TRANSLATE=1`**. Prefer **batch translation before rebuild**:
+[GUIDE_TRANSLATION_BATCH.md](GUIDE_TRANSLATION_BATCH.md) (`export_guide_translation_queue.py`
+→ Google Colab → `apply_guide_translation_results.py`). Audit gaps:
+`python scripts/audit_guide_edition_gaps.py --cities bangkok`
+
+**Sparse narrative fill (before bulk rebuild):** cards that would show only a
+title (and maybe address/style) are filled in JSON first:
+
+```powershell
+python scripts/fill_sparse_guide_narratives.py --dry-run-only --cities bangkok
+python scripts/fill_sparse_guide_narratives.py --cities bangkok
+```
+
+| Edition | Order |
+|---------|--------|
+| **EN** | 1. `OPENAI_API_KEY` → 2. `GIGA_AUTH_KEY` → 3. `PIXABAY_API_KEY` (if both LLMs failed) → 4. Ollama translate from RU |
+| **RU** | 1. `OPENAI_API_KEY` → 2. `GIGA_AUTH_KEY` → 3. Ollama translate from EN |
+
+Both LLM steps use the same JSON prompt; output language is set in the prompt
+(English for EN, Russian for RU). `--delay` pauses between API calls (default
+2 s). Ollama (`OLLAMA_HOST` / `OLLAMA_MODEL`) is used **only** for cross-edition
+translation when the opposite edition already has usable text.
+
+RU is filled **before** EN so freshly written Russian text can be translated into English.
+
+Updates `<city>/data/<city>_places.json` and PDF expand sidecars. Then rebuild
+PDFs as usual.
+
 **PDF place filter:** every guide PDF includes only places with a local
 image file on disk (``>= 500`` bytes raster, or valid SVG/GIF). Rows without
 ``image_rel_path`` or without a matching file under ``<city>/images/`` are
@@ -35,10 +65,10 @@ skipped; ``suppress_images_for_pdf`` no longer adds text-only sections.
 city whitelist, or `scripts/build_<slug>_pdf.py`, run
 [`scripts/rebuild_stale_city_guide_pdfs.py`](../scripts/rebuild_stale_city_guide_pdfs.py).
 It compares the latest modification time under `<slug>/data/*.json`,
-`<slug>/images/**` (common image extensions), `<slug>/docs/SOURCES_WHITELIST.md`,
-and the per-city builder against `<slug>/output/<slug>_guide.pdf`, then invokes
-Playwright builds only for stale slugs (same requirements as a normal PDF
-build: `playwright` + Chromium).
+`<slug>/images/**`, `<slug>/docs/SOURCES_WHITELIST.md`, the per-city builder,
+and shared historical-reference text against **all** guide PDFs for that city
+(``*_guide_en.pdf``, ``*_guide_ru.pdf``, and/or legacy ``*_guide.pdf``). Only
+stale cities are rebuilt (Playwright + Chromium).
 
 ```powershell
 # Preview which guides would rebuild (no builds)

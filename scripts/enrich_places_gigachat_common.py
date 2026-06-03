@@ -24,23 +24,41 @@ def load_dotenv(project_root: Path) -> None:
 
 def extract_json(text: str) -> dict[str, Any] | None:
     text = text.strip()
-    if text.startswith("```"):
+    fence = re.search(r"```(?:json)?\s*(\{.*?\})\s*```", text, re.DOTALL)
+    if fence:
+        text = fence.group(1).strip()
+    elif text.startswith("```"):
         text = re.sub(r"^```(?:json)?\s*", "", text)
         text = re.sub(r"\s*```$", "", text)
-    try:
-        obj = json.loads(text)
-        return obj if isinstance(obj, dict) else None
-    except json.JSONDecodeError:
-        pass
+    candidates = [text]
     start = text.find("{")
     end = text.rfind("}")
-    if start < 0 or end <= start:
-        return None
-    try:
-        obj = json.loads(text[start : end + 1])
-        return obj if isinstance(obj, dict) else None
-    except json.JSONDecodeError:
-        return None
+    if start >= 0 and end > start:
+        candidates.append(text[start : end + 1])
+    for candidate in candidates:
+        cleaned = candidate.strip()
+        cleaned = re.sub(r",\s*}", "}", cleaned)
+        cleaned = re.sub(r",\s*]", "]", cleaned)
+        try:
+            obj = json.loads(cleaned)
+            if isinstance(obj, dict):
+                return obj
+        except json.JSONDecodeError:
+            continue
+    return None
+
+
+def gigachat_refusal(text: str) -> bool:
+    """True when GigaChat declined (policy / safety), not a JSON payload."""
+    low = text.lower()
+    markers = (
+        "генеративные языковые модели",
+        "чувствительными темами",
+        "временно ограничены",
+        "не могу ответить",
+        "не могу предоставить",
+    )
+    return any(m in low for m in markers)
 
 
 def has_cyrillic(text: str) -> bool:
@@ -54,6 +72,10 @@ def field_is_stub(field: str | None) -> bool:
     if not text:
         return True
     if _CULTURE_RU_STUB in text:
+        return True
+    from scripts.city_guide_narrative import is_landmark_boilerplate
+
+    if is_landmark_boilerplate(text):
         return True
     return not is_substantive_text(text)
 

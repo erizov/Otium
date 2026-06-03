@@ -16,7 +16,6 @@ from __future__ import annotations
 
 import argparse
 import json
-import re
 import sys
 import time
 from pathlib import Path
@@ -27,6 +26,13 @@ if str(_PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(_PROJECT_ROOT))
 
 from scripts.city_guide_core import is_substantive_text
+from scripts.enrich_places_gigachat_common import (
+    discover_cities,
+    extract_json,
+    gigachat_failed,
+    gigachat_refusal,
+    load_dotenv,
+)
 from scripts.gigachat_client import ask_gigachat
 
 _CULTURE_RU_STUB = "Архитектурный объект из каталога"
@@ -56,6 +62,10 @@ def _field_is_stub(field: str | None) -> bool:
         return True
     if _CULTURE_RU_STUB in text:
         return True
+    from scripts.city_guide_narrative import is_landmark_boilerplate
+
+    if is_landmark_boilerplate(text):
+        return True
     return not is_substantive_text(text)
 
 
@@ -78,28 +88,24 @@ def place_needs_ru_narrative(place: dict[str, Any]) -> bool:
     return True
 
 
-def _extract_json(text: str) -> dict[str, Any] | None:
-    text = text.strip()
-    if text.startswith("```"):
-        text = re.sub(r"^```(?:json)?\s*", "", text)
-        text = re.sub(r"\s*```$", "", text)
+def _load_place_details(city_slug: str) -> dict[str, Any]:
+    path = _PROJECT_ROOT / city_slug / "data" / "{}_place_details.json".format(
+        city_slug,
+    )
+    if not path.is_file():
+        return {}
     try:
-        obj = json.loads(text)
-        return obj if isinstance(obj, dict) else None
+        raw = json.loads(path.read_text(encoding="utf-8"))
+        return raw if isinstance(raw, dict) else {}
     except json.JSONDecodeError:
-        pass
-    start = text.find("{")
-    end = text.rfind("}")
-    if start < 0 or end <= start:
-        return None
-    try:
-        obj = json.loads(text[start : end + 1])
-        return obj if isinstance(obj, dict) else None
-    except json.JSONDecodeError:
-        return None
+        return {}
 
 
-def _build_prompt(place: dict[str, Any], city_slug: str) -> str:
+def _build_prompt(
+    place: dict[str, Any],
+    city_slug: str,
+    details: dict[str, Any] | None = None,
+) -> str:
     name = _place_display_name(place)
     lines = [
         "Ты редактор русскоязычного путеводителя ({}).".format(city_slug),
@@ -119,6 +125,21 @@ def _build_prompt(place: dict[str, Any], city_slug: str) -> str:
     url = str(place.get("culture_ru_url") or "").strip()
     if url:
         lines.append("- Источник: {}".format(url))
+    if details:
+        for label, key in (
+            ("Описание (справка)", "description"),
+            ("История (справка)", "history"),
+            ("Значение (справка)", "significance"),
+        ):
+            val = str(details.get(key) or "").strip()
+            if val:
+                lines.append("- {}: {}".format(label, val[:400]))
+        dfacts = details.get("facts")
+        if isinstance(dfacts, list):
+            for fact in dfacts[:4]:
+                val = str(fact).strip()
+                if val:
+                    lines.append("- Факт (справка): {}".format(val[:200]))
     lines.extend(
         [
             "",
@@ -148,32 +169,65 @@ def _apply_enrichment(
     if data.get("skip"):
         return False
     changed = False
+
+    description = str(data.get("description") or "").strip()
+    if description and not _field_is_stub(description):
+        if _field_is_stub(place.get("description_ru")):
+            place["description_ru"] = description
+            changed = True
+        elif _field_is_stub(place.get("description")):
+            place["description"] = description
+            changed = True
+
     history = str(data.get("history") or "").strip()
-    if history and _field_is_stub(place.get("history")):
-        place["history"] = history
-        changed = True
+    if history and not _field_is_stub(history):
+        if _field_is_stub(place.get("history_ru")):
+            place["history_ru"] = history
+            changed = True
+        elif _field_is_stub(place.get("history")):
+            place["history"] = history
+            changed = True
+
     significance = str(data.get("significance") or "").strip()
-    if significance and _field_is_stub(place.get("significance")):
-        place["significance"] = significance
-        changed = True
+    if significance and not _field_is_stub(significance):
+        if _field_is_stub(place.get("significance_ru")):
+            place["significance_ru"] = significance
+            changed = True
+        elif _field_is_stub(place.get("significance")):
+            place["significance"] = significance
+            changed = True
+
     facts_in = data.get("facts")
     if isinstance(facts_in, list):
         facts = [
             str(x).strip() for x in facts_in if is_substantive_text(str(x))
         ]
-        if facts and not any(
-            is_substantive_text(str(x)) for x in (place.get("facts") or [])
-        ):
+        existing_ru = place.get("facts_ru") or []
+        existing = place.get("facts") or []
+        has_ru = any(is_substantive_text(str(x)) for x in existing_ru)
+        has_any = any(is_substantive_text(str(x)) for x in existing)
+        if facts and not has_ru:
+            place["facts_ru"] = facts[:6]
+            changed = True
+        elif facts and not has_any:
             place["facts"] = facts[:6]
             changed = True
+
     year = str(data.get("year_built") or "").strip()
-    if year and _field_is_stub(place.get("year_built")):
-        place["year_built"] = year
-        changed = True
+    if year and not _field_is_stub(year):
+        if _field_is_stub(place.get("year_built")):
+            place["year_built"] = year
+            changed = True
+
     style = str(data.get("architecture_style") or "").strip()
-    if style and _field_is_stub(place.get("architecture_style")):
-        place["architecture_style"] = style
-        changed = True
+    if style and not _field_is_stub(style):
+        if _field_is_stub(place.get("architecture_style_ru")):
+            place["architecture_style_ru"] = style
+            changed = True
+        elif _field_is_stub(place.get("architecture_style")):
+            place["architecture_style"] = style
+            changed = True
+
     return changed
 
 
@@ -204,6 +258,7 @@ def _process_city(
     places: list[dict[str, Any]] = json.loads(
         path.read_text(encoding="utf-8"),
     )
+    details_map = _load_place_details(city_slug)
     targets = [p for p in places if place_needs_ru_narrative(p)]
     if limit is not None:
         targets = targets[:limit]
@@ -212,20 +267,33 @@ def _process_city(
     for place in targets:
         slug = str(place.get("slug") or "?")
         name = _place_display_name(place)
-        prompt = _build_prompt(place, city_slug)
+        detail = details_map.get(slug)
+        detail_dict = detail if isinstance(detail, dict) else None
+        prompt = _build_prompt(place, city_slug, detail_dict)
         if dry_run:
             print("[dry-run] {} / {} — {}".format(city_slug, slug, name))
             continue
 
-        raw = ask_gigachat(prompt, model=model)
-        if raw.startswith("Ошибка"):
+        raw = ask_gigachat(prompt, model=model, max_tokens=1200)
+        if gigachat_failed(raw):
             print("{} / {}: {}".format(city_slug, slug, raw), file=sys.stderr)
             errors += 1
             if delay > 0:
                 time.sleep(delay)
             continue
 
-        parsed = _extract_json(raw)
+        if gigachat_refusal(raw):
+            print(
+                "{} / {}: skip (GigaChat policy refusal)".format(
+                    city_slug, slug,
+                ),
+            )
+            skipped += 1
+            if delay > 0:
+                time.sleep(delay)
+            continue
+
+        parsed = extract_json(raw)
         if not parsed:
             print(
                 "{} / {}: cannot parse JSON".format(city_slug, slug),
