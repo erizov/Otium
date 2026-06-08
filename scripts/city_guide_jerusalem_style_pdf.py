@@ -30,6 +30,7 @@ from scripts.city_guide_narrative import (
     place_meta_line,
     subtitle_html_for_edition,
 )
+from scripts.city_guide_front_matter import front_matter_html_blocks
 from scripts.city_guide_historical_reference_ru import (
     HERALDRY_CHAPTER_LABEL_EN,
     HERALDRY_CHAPTER_LABEL_RU,
@@ -302,10 +303,11 @@ def _preamble_blocks(
     display_title: str,
     title_symbols_class: str,
     title_symbols: tuple[tuple[str, str], ...],
-    places_count: int,
+    places: list[dict[str, Any]],
     edition: str,
     project_root: Path | None,
 ) -> list[str]:
+    pdf_places = places_for_pdf(root, places, sort_key=_place_sort_key)
     s = _guide_strings(edition)
     blocks: list[str] = [cover_otium_html(edition)]
     blocks.append(
@@ -321,12 +323,20 @@ def _preamble_blocks(
                 edition,
             ),
             escape(display_title),
-            escape(s["lead"].format(places_count)),
+            escape(s["lead"].format(len(pdf_places))),
         ),
     )
     hist = _historical_reference_block(city_slug, edition, project_root)
     if hist:
         blocks.append(hist)
+    blocks.extend(
+        front_matter_html_blocks(
+            project_root,
+            city_slug,
+            edition,
+            pdf_places,
+        ),
+    )
     return blocks
 
 
@@ -395,7 +405,7 @@ def build_html(
         display_title=display_title,
         title_symbols_class=title_symbols_class,
         title_symbols=title_symbols,
-        places_count=len(places),
+        places=places,
         edition=edition,
         project_root=project_root,
     )
@@ -444,7 +454,7 @@ def _pdf_via_playwright_chunked(
         display_title=display_title,
         title_symbols_class=title_symbols_class,
         title_symbols=title_symbols,
-        places_count=len(places),
+        places=places,
         edition=edition,
         project_root=project_root,
     )

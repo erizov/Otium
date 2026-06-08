@@ -19,7 +19,12 @@ def load_dotenv(project_root: Path) -> None:
         from dotenv import load_dotenv as _ld
     except ImportError:
         return
-    _ld(project_root / ".env")
+    root_env = project_root / ".env"
+    if root_env.is_file():
+        _ld(root_env, override=False)
+    scripts_env = project_root / "scripts" / ".env"
+    if scripts_env.is_file():
+        _ld(scripts_env, override=True)
 
 
 def extract_json(text: str) -> dict[str, Any] | None:

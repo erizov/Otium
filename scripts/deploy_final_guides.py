@@ -25,7 +25,10 @@ from scripts.rebuild_stale_city_guide_pdfs import (
 
 def _extra_stale_input_paths(project_root: Path) -> list[Path]:
     """Shared modules that affect guide text/layout beyond per-city data."""
-    rels = ("scripts/city_guide_historical_reference_ru.py",)
+    rels = (
+        "scripts/city_guide_historical_reference_ru.py",
+        "scripts/city_guide_front_matter.py",
+    )
     out: list[Path] = []
     for rel in rels:
         p = project_root / rel

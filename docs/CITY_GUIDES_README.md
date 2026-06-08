@@ -56,6 +56,26 @@ RU is filled **before** EN so freshly written Russian text can be translated int
 Updates `<city>/data/<city>_places.json` and PDF expand sidecars. Then rebuild
 PDFs as usual.
 
+**City primer + trip plans (front matter, baked into PDF):** generate once per
+city into ``<city>/data/<city>_guide_front.json`` (climate, transport,
+etiquette, and itineraries for **4h / 1d / 2d / 5d**). Jerusalem-style
+builders insert these sections after the historical chapter and before place
+cards. Stops link to place anchors (``#slug``).
+
+```powershell
+# Preview (needs OPENAI_API_KEY and/or GIGA_AUTH_KEY in .env)
+python scripts/generate_city_guide_front_matter.py --dry-run --cities dubai
+
+# Generate EN + RU for one city
+python scripts/generate_city_guide_front_matter.py --cities dubai
+
+# Regenerate even if JSON exists
+python scripts/generate_city_guide_front_matter.py --cities dubai --force
+
+# Rebuild PDFs (picks up new *_guide_front.json automatically)
+python scripts/rebuild_stale_city_guide_pdfs.py --cities dubai
+```
+
 **PDF place filter:** every guide PDF includes only places with a local
 image file on disk (``>= 500`` bytes raster, or valid SVG/GIF). Rows without
 ``image_rel_path`` or without a matching file under ``<city>/images/`` are
