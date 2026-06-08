@@ -77,6 +77,73 @@ _GENERIC_FACT_STUBS = frozenset(
     },
 )
 
+_PIXABAY_REF_RE = re.compile(
+    r"Reference image context:\s*https?://\S+",
+    re.IGNORECASE,
+)
+_PHOTO_TAGS_RE = re.compile(r"Photo tags:", re.IGNORECASE)
+_PUBLIC_ARCHIVE_RE = re.compile(
+    r"Public photo archives",
+    re.IGNORECASE,
+)
+_WORTH_A_STOP_RE = re.compile(
+    r"^Worth a stop when exploring .+\.\s*$",
+    re.IGNORECASE,
+)
+_MINIMAL_CATEGORY_RE = re.compile(
+    r"^.+ is a [a-z ]+ in .+\.\s*$",
+    re.IGNORECASE,
+)
+_URL_RE = re.compile(r"https?://\S+")
+
+
+def clean_pixabay_artifacts(text: str) -> str:
+    """Strip Pixabay filler phrases and URLs from guide prose."""
+    s = str(text).strip()
+    if not s:
+        return s
+    s = _PIXABAY_REF_RE.sub("", s)
+    s = re.sub(
+        r"Photo tags:[^.]*\.?\s*",
+        "",
+        s,
+        flags=re.IGNORECASE,
+    )
+    s = re.sub(
+        r"Public photo archives[^.]*\.?\s*",
+        "",
+        s,
+        flags=re.IGNORECASE,
+    )
+    s = _URL_RE.sub("", s)
+    s = re.sub(r"\s+", " ", s).strip(" .")
+    return s
+
+
+def is_pixabay_stub(text: str) -> bool:
+    """True for Pixabay tag/url filler or minimal category one-liners."""
+    s = str(text).strip()
+    if not s:
+        return False
+    if _WORTH_A_STOP_RE.match(s):
+        return True
+    if _PUBLIC_ARCHIVE_RE.search(s):
+        return True
+    if _PIXABAY_REF_RE.search(s):
+        return True
+    cleaned = clean_pixabay_artifacts(s)
+    if not cleaned:
+        return True
+    if _PHOTO_TAGS_RE.search(s):
+        if len(cleaned) < 40:
+            return True
+        if _MINIMAL_CATEGORY_RE.match(cleaned) and len(cleaned) < 100:
+            return True
+        return False
+    if _MINIMAL_CATEGORY_RE.match(s) and len(s) < 100:
+        return True
+    return False
+
 
 def has_cyrillic(text: str) -> bool:
     return bool(_CYRILLIC_RE.search(text))
@@ -118,6 +185,8 @@ def is_usable_narrative_text(text: str) -> bool:
     if is_landmark_boilerplate(text):
         return False
     if is_generic_fact(text):
+        return False
+    if is_pixabay_stub(text):
         return False
     return True
 

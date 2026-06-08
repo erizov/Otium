@@ -56,7 +56,13 @@ def merge_detail_overlays(
     if not merged:
         return rows
     for row in rows:
-        block = merged.get(row.get("slug"))
+        slug = str(row.get("slug") or "")
+        block = merged.get(slug)
+        if block is None and city_slug:
+            prefixed = "{}_{}".format(city_slug, slug)
+            block = merged.get(prefixed)
+            if block is None and slug.startswith("{}_".format(city_slug)):
+                block = merged.get(slug[len(city_slug) + 1:])
         if not block:
             continue
         for key, val in block.items():

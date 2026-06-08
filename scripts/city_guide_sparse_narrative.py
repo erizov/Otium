@@ -537,14 +537,9 @@ def fill_edition_place(
             _progress("    EN: Pixabay hints…")
             hints = fetch_pixabay_hints(name, city_title) if name else None
             if hints:
-                pix = compose_en_from_pixabay_hints(place, city_slug, hints)
-                if (
-                    apply_en_fields(place, pix)
-                    and not place_edition_needs_fill(place, "en")
-                ):
-                    if breaker is not None:
-                        breaker.record_success("pixabay")
-                    return "pixabay"
+                _progress(
+                    "    EN: Pixabay hints skipped (Colab EN fill)",
+                )
             if breaker is not None:
                 breaker.record_failure("pixabay")
             if delay > 0:
@@ -663,10 +658,6 @@ def compose_en_from_pixabay_hints(
     facts = [
         "Photo tags: {}.".format(tag_phrase),
     ]
-    if hints.get("page_url"):
-        facts.append(
-            "Reference image context: {}.".format(hints["page_url"][:120]),
-        )
     return {
         "description": description,
         "history": history,

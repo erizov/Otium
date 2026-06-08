@@ -6,7 +6,9 @@ from __future__ import annotations
 from scripts.city_guide_naming import clean_wikimedia_display_title
 from scripts.city_guide_narrative import (
     GuideNarrativeDeduper,
+    clean_pixabay_artifacts,
     group_into_paragraphs,
+    is_pixabay_stub,
     merge_narrative_html,
     narrative_sentence_blocks,
     place_heading_plain,
@@ -306,3 +308,22 @@ def test_en_ru_dedupe_parity_with_translation_keys() -> None:
         assert second_ru == ""
     finally:
         set_edition_translator(None)
+
+
+def test_pixabay_stub_detection_and_cleaning() -> None:
+    stub = (
+        "Photo tags: church, tower. "
+        "Reference image context: https://pixabay.com/photos/foo/"
+    )
+    assert is_pixabay_stub(stub)
+    assert clean_pixabay_artifacts(stub) == ""
+    minimal = "St Paul's is a church in London."
+    assert is_pixabay_stub(minimal)
+    real = (
+        "St Paul's Cathedral dominates the City skyline. "
+        "Photo tags: dome, church."
+    )
+    assert not is_pixabay_stub(real)
+    cleaned = clean_pixabay_artifacts(real)
+    assert "Photo tags" not in cleaned
+    assert "St Paul's Cathedral" in cleaned

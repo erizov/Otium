@@ -8,6 +8,7 @@ import re
 from pathlib import Path
 from typing import Any, Iterator, Mapping
 
+from scripts.city_guide_core import place_has_pdf_image
 from scripts.city_guide_naming import (
     is_pdf_filler_slug,
     title_from_place_slug,
@@ -137,15 +138,20 @@ def build_en_significance_prompt(
 def iter_en_narrative_fill_jobs(
     project_root: Path,
     city_slug: str,
+    *,
+    require_image: bool = True,
 ) -> Iterator[dict[str, Any]]:
     """Places missing usable English narrative in JSON."""
     data_dir = project_root / city_slug / "data"
+    city_root = project_root / city_slug
     names = names_for_slug(city_slug)
     for path in _place_files(data_dir, city_slug):
         rel = path.relative_to(project_root).as_posix()
         for place in _load_places(path):
             slug = str(place.get("slug") or "").strip()
             if not slug or is_pdf_filler_slug(slug):
+                continue
+            if require_image and not place_has_pdf_image(city_root, place):
                 continue
             if not place_edition_needs_fill(place, "en"):
                 continue
