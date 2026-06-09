@@ -127,7 +127,8 @@ def run_deploy(
     dry_run: bool = False,
     no_build: bool = False,
     include_shared: bool = False,
-    archive_keep: int = 2,
+    archive_keep: int = 3,
+    allow_translate: bool = False,
 ) -> int:
     """
     Rebuild stale guides, then copy into project_root/final_guides.
@@ -179,7 +180,11 @@ def run_deploy(
                     print(
                         "  archived {} PDF(s).".format(len(archived)),
                     )
-            code = _run_build(root, slug)
+            code = _run_build(
+                root,
+                slug,
+                allow_translate=allow_translate,
+            )
             if code != 0:
                 print(
                     "Build failed for {} (exit {}).".format(slug, code),
@@ -267,6 +272,14 @@ def main(argv: list[str] | None = None) -> int:
         help="Show stale slugs; do not build or copy.",
     )
     parser.add_argument(
+        "--with-translate",
+        action="store_true",
+        help=(
+            "Allow EN↔RU translation during PDF/HTML build "
+            "(uses cache, Ollama, or OpenAI)."
+        ),
+    )
+    parser.add_argument(
         "--no-build",
         action="store_true",
         help="Copy only; skip staleness rebuild (not recommended).",
@@ -282,9 +295,9 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument(
         "--archive-keep",
         type=int,
-        default=2,
+        default=3,
         metavar="N",
-        help="Keep N timestamped PDF backups per file before rebuild (0=off).",
+        help="Keep N distinct timestamped PDF backups per file (0=off).",
     )
     args = parser.parse_args(argv)
     root = (
@@ -299,6 +312,7 @@ def main(argv: list[str] | None = None) -> int:
         no_build=args.no_build,
         include_shared=args.include_shared,
         archive_keep=args.archive_keep,
+        allow_translate=args.with_translate,
     )
 
 

@@ -264,6 +264,26 @@ def test_place_heading_from_slug() -> None:
     assert place_heading_plain(place, "ru") == "Dubai Gold Souk"
 
 
+def test_pdfband_heading_uses_cleaned_name_not_slug() -> None:
+    place = {
+        "slug": "chernivtsi_pdfband_10_99e791d5",
+        "name_en": "Будинок з левами.jpg",
+        "subtitle_en": "Будинок з левами.jpg",
+    }
+    assert place_heading_plain(place, "en") == "Будинок з левами"
+    assert place_heading_plain(place, "ru") == "Будинок з левами"
+
+
+def test_pdfband_slug_fallback_without_name() -> None:
+    from scripts.city_guide_naming import title_from_pdf_filler_slug
+
+    assert title_from_pdf_filler_slug(
+        "chernivtsi_pdfband_10_99e791d5",
+    ) == "Chernivtsi"
+    place = {"slug": "chernivtsi_pdfband_10_99e791d5"}
+    assert place_heading_plain(place, "en") == "Chernivtsi"
+
+
 def test_place_heading_strips_filename_artifacts() -> None:
     place = {
         "name_en": "Scala Cinema (I).jpg",
@@ -327,3 +347,69 @@ def test_pixabay_stub_detection_and_cleaning() -> None:
     cleaned = clean_pixabay_artifacts(real)
     assert "Photo tags" not in cleaned
     assert "St Paul's Cathedral" in cleaned
+
+
+def test_guide_illustration_meta_cleaning() -> None:
+    text = (
+        "Особняк купца Будникова конца XIX века. "
+        "Иллюстрации в гиде — локальные снимки Smolensk_Budnikov*."
+    )
+    cleaned = clean_pixabay_artifacts(text)
+    assert "Иллюстрации в гиде" not in cleaned
+    assert cleaned.startswith("Особняк купца")
+    inline = (
+        "Свято-Троицкий монастырь: ансамбль с собором; "
+        "на иллюстрации — общий вид обители."
+    )
+    cleaned_inline = clean_pixabay_artifacts(inline)
+    assert "на иллюстрации" not in cleaned_inline
+    assert cleaned_inline.endswith("собором")
+    fact = "На иллюстрации — кадр серии Commons 2013 года."
+    assert clean_pixabay_artifacts(fact) == ""
+    extra = (
+        "Режим работы магазина лучше уточнять на сайте. "
+        "Дополнительный кадр в гиде — локальный снимок Smolensk_Knigi1."
+    )
+    cleaned_extra = clean_pixabay_artifacts(extra)
+    assert "Дополнительный кадр" not in cleaned_extra
+    assert cleaned_extra.endswith("на сайте")
+    assert clean_pixabay_artifacts(
+        "Дополнительные кадры в гиде — ещё два исторических вида крепости",
+    ) == ""
+    bridge = (
+        "Пешим туристам удобнее смотреть мост с набережной. "
+        "Дополнительный кадр — современный вид мостов через Днепр (Commons, 2013)."
+    )
+    cleaned_bridge = clean_pixabay_artifacts(bridge)
+    assert "Дополнительный кадр" not in cleaned_bridge
+    assert cleaned_bridge.endswith("набережной")
+    park = (
+        "Городской парк с аллеями и прудами; "
+        "в гиде — семнадцать локальных кадров Smolensk_Lopatinskiy*."
+    )
+    cleaned_park = clean_pixabay_artifacts(park)
+    assert "в гиде" not in cleaned_park
+    assert cleaned_park.endswith("прудами")
+    assert clean_pixabay_artifacts(
+        "Фото в гиде — сам монумент в красном граните; "
+        "виды площади перенесены в карточку театра",
+    ) == ""
+    fountain = "Работает сезонно; в гиде — локальные кадры"
+    cleaned_fountain = clean_pixabay_artifacts(fountain)
+    assert "в гиде" not in cleaned_fountain
+    assert cleaned_fountain == "Работает сезонно"
+    commons = (
+        "Фасад с проспекта Ленина (Commons) и дополнительный кадр."
+    )
+    cleaned_commons = clean_pixabay_artifacts(commons)
+    assert "(Commons)" not in cleaned_commons
+    assert cleaned_commons.startswith("Фасад с проспекта")
+    assert clean_pixabay_artifacts(
+        "Иллюстрация — летний ракурс (Commons: «Памятник…»)",
+    ) == ""
+    obelisk = (
+        "Обелиск в честь защитников; на Commons отнесён к мемориалу в парке"
+    )
+    cleaned_obelisk = clean_pixabay_artifacts(obelisk)
+    assert "Commons" not in cleaned_obelisk
+    assert cleaned_obelisk.endswith("защитников")

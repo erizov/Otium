@@ -114,19 +114,19 @@ MIN_TITLE_ASSET_BYTES = 500
 _MOSCOW_TITLE_HERALDRY: tuple[tuple[str, str], ...] = (
     (
         "images/title_msk_russian_empire_lesser.svg",
-        "Малый герб Российской империи (Commons)",
+        "Малый герб Российской империи",
     ),
     (
         "images/title_msk_bolshoi_basrelief_2025.jpg",
-        "Барельеф герба на фасаде Большого театра (Commons)",
+        "Барельеф герба на фасаде Большого театра",
     ),
     (
         "images/title_msk_moscow_coat_soviet.svg",
-        "Герб Москвы, советский (Commons)",
+        "Герб Москвы, советский",
     ),
     (
         "images/title_msk_moscow_coat_empire.jpg",
-        "Герб Москвы, Российская империя (Commons)",
+        "Герб Москвы, Российская империя",
     ),
 )
 

@@ -96,6 +96,21 @@ def main() -> int:
         "--results-dir",
         type=Path,
         default=_PROJECT_ROOT / "translations" / "results",
+        help=(
+            "Directory containing en_to_ru_results.jsonl (used when "
+            "--results is not set)."
+        ),
+    )
+    parser.add_argument(
+        "--results",
+        type=Path,
+        nargs="*",
+        default=None,
+        metavar="PATH",
+        help=(
+            "Result JSONL file(s), e.g. "
+            "translations/collab/en_to_ru_results.jsonl"
+        ),
     )
     parser.add_argument(
         "--dry-run",
@@ -118,15 +133,31 @@ def main() -> int:
         print("Missing queue: {}".format(queue_path), file=sys.stderr)
         return 2
 
-    res_dir = args.results_dir.resolve()
-    result_paths = [
-        res_dir / "en_to_ru_results.jsonl",
-        res_dir / "ru_to_en_results.jsonl",
-        res_dir / "results.jsonl",
-    ]
+    if args.results:
+        result_paths = [p.resolve() for p in args.results]
+        missing = [p for p in result_paths if not p.is_file()]
+        if missing:
+            for path in missing:
+                print("Missing results file: {}".format(path), file=sys.stderr)
+            return 2
+    else:
+        res_dir = args.results_dir.resolve()
+        result_paths = [
+            res_dir / "en_to_ru_results.jsonl",
+            res_dir / "ru_to_en_results.jsonl",
+            res_dir / "results.jsonl",
+        ]
     translated_by_id = _load_results(result_paths)
     if not translated_by_id:
-        print("No results found in {}".format(res_dir), file=sys.stderr)
+        if args.results:
+            print(
+                "No translations loaded from {}.".format(
+                    ", ".join(str(p) for p in result_paths),
+                ),
+                file=sys.stderr,
+            )
+        else:
+            print("No results found in {}".format(res_dir), file=sys.stderr)
         return 2
 
     jobs = read_jsonl(queue_path)

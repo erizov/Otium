@@ -96,7 +96,29 @@ def _place_files(data_dir: Path, city_slug: str) -> list[Path]:
     if main.is_file():
         paths.append(main)
     paths.extend(pdf_expand_sidecar_paths(data_dir, city_slug))
+    for path in sorted(data_dir.glob("{}_place_details*.json".format(city_slug))):
+        if path.is_file():
+            paths.append(path)
     return paths
+
+
+def _scrub_places(raw: Any) -> tuple[int, bool]:
+    """Scrub list or slug-keyed dict of places; return (count, changed)."""
+    changed = False
+    places_changed = 0
+    if isinstance(raw, dict):
+        items = raw.values()
+    elif isinstance(raw, list):
+        items = raw
+    else:
+        return 0, False
+    for place in items:
+        if not isinstance(place, dict):
+            continue
+        if scrub_place(place):
+            places_changed += 1
+            changed = True
+    return places_changed, changed
 
 
 def scrub_city(project_root: Path, city_slug: str, *, dry_run: bool) -> int:
@@ -104,15 +126,8 @@ def scrub_city(project_root: Path, city_slug: str, *, dry_run: bool) -> int:
     places_changed = 0
     for path in _place_files(data_dir, city_slug):
         raw = json.loads(path.read_text(encoding="utf-8"))
-        if not isinstance(raw, list):
-            continue
-        file_changed = False
-        for place in raw:
-            if not isinstance(place, dict):
-                continue
-            if scrub_place(place):
-                places_changed += 1
-                file_changed = True
+        n, file_changed = _scrub_places(raw)
+        places_changed += n
         if file_changed and not dry_run:
             path.write_text(
                 json.dumps(raw, ensure_ascii=False, indent=2) + "\n",

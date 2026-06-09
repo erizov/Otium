@@ -97,9 +97,10 @@ python scripts/rebuild_stale_city_guide_pdfs.py --dry-run
 # Rebuild every auto-discovered city that is out of date
 python scripts/rebuild_stale_city_guide_pdfs.py
 
-# Same, but keep 2 timestamped backups per PDF before overwriting
-python scripts/rebuild_stale_city_guide_pdfs.py --archive-keep 2
-python scripts/deploy_final_guides.py --archive-keep 2
+# Same, but keep 3 distinct timestamped backups per PDF before overwriting
+python scripts/rebuild_stale_city_guide_pdfs.py --archive-keep 3
+python scripts/deploy_final_guides.py --archive-keep 3
+python scripts/archive_city_guide_pdfs.py
 
 # Only some cities
 python scripts/rebuild_stale_city_guide_pdfs.py --cities london tokyo vatican

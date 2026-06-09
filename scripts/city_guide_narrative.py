@@ -10,7 +10,10 @@ from typing import Any, Mapping
 from scripts.city_guide_core import is_substantive_text
 from scripts.city_guide_naming import (
     clean_wikimedia_display_title,
+    filler_display_title,
+    is_pdf_filler_slug,
     looks_like_slug_title,
+    title_from_pdf_filler_slug,
     title_from_place_slug,
 )
 from scripts.city_guide_translate import (
@@ -95,6 +98,74 @@ _MINIMAL_CATEGORY_RE = re.compile(
     re.IGNORECASE,
 )
 _URL_RE = re.compile(r"https?://\S+")
+_GUIDE_ILLUSTRATION_RE = re.compile(
+    r"Иллюстрации в гиде[^.]*\.?\s*",
+    re.IGNORECASE,
+)
+_ILLUSTRATION_META_RE = re.compile(
+    r"[;.]?\s*на иллюстрации[^.]*\.?\s*",
+    re.IGNORECASE,
+)
+_ILLUSTRATION_META_START_RE = re.compile(
+    r"^На иллюстрации[^.]*\.?\s*",
+    re.IGNORECASE,
+)
+_GUIDE_EXTRA_FRAME_RE = re.compile(
+    r"[;.]?\s*Дополнительн(?:ый кадр|ые кадры)(?: в гиде)?[^.]*\.?\s*",
+    re.IGNORECASE,
+)
+_GUIDE_EXTRA_FRAME_START_RE = re.compile(
+    r"^Дополнительн(?:ый кадр|ые кадры)(?: в гиде)?[^.]*\.?\s*",
+    re.IGNORECASE,
+)
+_GUIDE_AMONG_ILLUSTRATIONS_RE = re.compile(
+    r"Среди иллюстраций в гиде[^.]*\.?\s*",
+    re.IGNORECASE,
+)
+_GUIDE_ON_PHOTO_RE = re.compile(
+    r"На фото в гиде[^.]*\.?\s*",
+    re.IGNORECASE,
+)
+_GUIDE_PHOTO_RE = re.compile(
+    r"Фото в гиде[^.]*\.?\s*",
+    re.IGNORECASE,
+)
+_GUIDE_ILLUSTRATION_SINGULAR_RE = re.compile(
+    r"Иллюстрация в гиде[^.]*\.?\s*",
+    re.IGNORECASE,
+)
+_GUIDE_IN_GUIDE_INLINE_RE = re.compile(
+    r";\s*в гиде[^.]*\.?\s*",
+    re.IGNORECASE,
+)
+_GUIDE_IN_GUIDE_START_RE = re.compile(
+    r"^в гиде[^.]*\.?\s*",
+    re.IGNORECASE,
+)
+_COMMONS_PAREN_RE = re.compile(
+    r"\s*\([^)]*\bCommons\b[^)]*\)",
+    re.IGNORECASE,
+)
+_NA_COMMONS_INLINE_RE = re.compile(
+    r";\s*на Commons[^.]*\.?\s*",
+    re.IGNORECASE,
+)
+_NA_COMMONS_START_RE = re.compile(
+    r"^На Commons[^.]*\.?\s*",
+    re.IGNORECASE,
+)
+_ILLUSTRATION_DASH_START_RE = re.compile(
+    r"^Иллюстрация —[^.]*\.?\s*",
+    re.IGNORECASE,
+)
+_WIKIMEDIA_COMMONS_START_RE = re.compile(
+    r"^(?:Кадр|Три кадра|Главный кадр)[^.]*\bCommons\b[^.]*\.?\s*",
+    re.IGNORECASE,
+)
+_WIKIMEDIA_COMMONS_INLINE_RE = re.compile(
+    r"[;,]\s*на Wikimedia Commons[^.]*\.?\s*",
+    re.IGNORECASE,
+)
 
 
 def clean_pixabay_artifacts(text: str) -> str:
@@ -102,6 +173,23 @@ def clean_pixabay_artifacts(text: str) -> str:
     s = str(text).strip()
     if not s:
         return s
+    s = _GUIDE_AMONG_ILLUSTRATIONS_RE.sub("", s)
+    s = _GUIDE_ON_PHOTO_RE.sub("", s)
+    s = _GUIDE_PHOTO_RE.sub("", s)
+    s = _GUIDE_ILLUSTRATION_SINGULAR_RE.sub("", s)
+    s = _GUIDE_ILLUSTRATION_RE.sub("", s)
+    s = _GUIDE_EXTRA_FRAME_RE.sub("", s)
+    s = _GUIDE_EXTRA_FRAME_START_RE.sub("", s)
+    s = _ILLUSTRATION_META_RE.sub("", s)
+    s = _ILLUSTRATION_META_START_RE.sub("", s)
+    s = _GUIDE_IN_GUIDE_INLINE_RE.sub("", s)
+    s = _GUIDE_IN_GUIDE_START_RE.sub("", s)
+    s = _COMMONS_PAREN_RE.sub("", s)
+    s = _NA_COMMONS_INLINE_RE.sub("", s)
+    s = _NA_COMMONS_START_RE.sub("", s)
+    s = _ILLUSTRATION_DASH_START_RE.sub("", s)
+    s = _WIKIMEDIA_COMMONS_START_RE.sub("", s)
+    s = _WIKIMEDIA_COMMONS_INLINE_RE.sub("", s)
     s = _PIXABAY_REF_RE.sub("", s)
     s = re.sub(
         r"Photo tags:[^.]*\.?\s*",
@@ -704,6 +792,12 @@ def place_heading_plain(
     translator: EditionTranslator | None = None,
 ) -> str:
     """Primary h3 title in the requested edition language."""
+    slug = str(place.get("slug") or "place")
+    if is_pdf_filler_slug(slug):
+        filler = filler_display_title(dict(place))
+        if filler:
+            return filler
+
     if edition == "ru":
         keys = ("name_ru", "name")
         alt_keys = ("name_en", "subtitle_en", "name")
@@ -736,7 +830,8 @@ def place_heading_plain(
             )
             if translated:
                 return polish_display_title(translated)
-    slug = str(place.get("slug", "place"))
+    if is_pdf_filler_slug(slug):
+        return title_from_pdf_filler_slug(slug)
     if "_" in slug:
         return title_from_place_slug(slug)
     return slug

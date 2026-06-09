@@ -110,17 +110,48 @@ def clean_wikimedia_display_title(text: str) -> str:
     return s.strip()
 
 
+def filler_display_title(place: dict) -> str | None:
+    """Display title for PDF-band rows from name/subtitle (any language)."""
+    from scripts.city_guide_core import is_substantive_text
+
+    for key in ("name_ru", "name_en", "subtitle_ru", "subtitle_en", "name"):
+        raw = place.get(key)
+        if raw is None:
+            continue
+        cleaned = clean_wikimedia_display_title(str(raw).strip())
+        if not cleaned or not is_substantive_text(cleaned):
+            continue
+        if looks_like_slug_title(cleaned) or is_pdf_filler_slug(cleaned):
+            continue
+        return cleaned
+    return None
+
+
+def title_from_pdf_filler_slug(slug: str) -> str:
+    """
+    Last-resort title for PDF-band slugs without usable name fields.
+
+    Never returns the raw slug (no ``pdfband``, hash suffix, or underscores).
+    """
+    s = str(slug).strip().lower()
+    match = re.match(r"^([a-z0-9_]+)_(?:pdfband|filler)_(\d+)", s)
+    if match:
+        city = match.group(1).replace("_", " ").title()
+        return city
+    return "Landmark"
+
+
 def title_from_place_slug(slug: str) -> str:
     """
     Human title from a place slug: ``dubai_gold_souk`` → ``Dubai Gold Souk``.
 
-    PDF-band filler slugs are left unchanged.
+    PDF-band filler slugs fall back to ``title_from_pdf_filler_slug``.
     """
     s = str(slug).strip()
     if not s:
         return s
     if is_pdf_filler_slug(s):
-        return s
+        return title_from_pdf_filler_slug(s)
     words = s.replace("_", " ").strip()
     return clean_wikimedia_display_title(words.title())
 
@@ -141,6 +172,10 @@ def place_heading_dedupe_key(text: str) -> str:
 
 def place_row_heading_dedupe_key(place: dict) -> str:
     """Dedupe key from the best available place title fields."""
+    if is_pdf_filler_slug(str(place.get("slug") or "")):
+        filler = filler_display_title(place)
+        if filler:
+            return place_heading_dedupe_key(filler)
     for key in ("name_en", "name_ru", "name", "subtitle_en", "subtitle_ru"):
         raw = str(place.get(key) or "").strip()
         if raw:

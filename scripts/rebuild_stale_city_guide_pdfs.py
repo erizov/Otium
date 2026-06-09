@@ -240,11 +240,11 @@ def main() -> int:
     parser.add_argument(
         "--archive-keep",
         type=int,
-        default=2,
+        default=3,
         metavar="N",
         help=(
             "Before each rebuild, copy live PDFs to timestamped names "
-            "and keep N archives per file (default 2). Use 0 to skip."
+            "and keep N distinct archives per file (default 3). Use 0 to skip."
         ),
     )
     args = parser.parse_args()
