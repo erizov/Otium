@@ -1181,7 +1181,7 @@ def _build_combined_pdf_chunked(
     Generate combined PDF by rendering chunks (to avoid Chromium string limit)
     and merging with pypdf.
     """
-    from scripts.build_pdf import _pdf_via_playwright
+    from scripts.build_pdf import PDF_FOOTER_EMPTY, _pdf_via_playwright
     try:
         from pypdf import PdfReader, PdfWriter
     except ImportError:
@@ -1236,7 +1236,7 @@ def _build_combined_pdf_chunked(
                 chunk_pdf_path,
                 image_wait_timeout_ms=image_wait_timeout_ms,
                 display_header_footer=True,
-                footer_template=PDF_FOOTER_TEMPLATE,
+                footer_template=PDF_FOOTER_EMPTY,
                 header_template=header_template,
             ):
                 return False
@@ -1254,6 +1254,9 @@ def _build_combined_pdf_chunked(
         }
         writer.add_metadata(full_metadata)
         writer.write(str(pdf_path))
+        from scripts.build_pdf import apply_continuous_page_footers
+
+        apply_continuous_page_footers(pdf_path)
         from scripts.build_pdf import _strip_empty_pdf_pages
         _strip_empty_pdf_pages(pdf_path, metadata=full_metadata)
         return True

@@ -168,9 +168,7 @@ for _slug, _items in (
     ("odessa", [
         ("odessa_spaso_preobrazhensky", "Spaso-Preobrazhensky Cathedral", "places_of_worship", "Spaso Preobrazhensky Cathedral Odessa"),
         ("odessa_st_paul_lutheran", "St Paul Lutheran Cathedral", "places_of_worship", "Lutheran cathedral Odessa"),
-        ("odessa_archeological_museum", "Odessa Archaeology Museum", "museums", "Odessa Archaeological Museum"),
-        ("odessa_potemkin", "Potemkin Stairs", "landmarks", "Potemkin Stairs Odessa"),
-        ("odessa_primorsky", "Primorsky Boulevard", "public_space", "Primorsky Boulevard Odessa"),
+        ("odessa_archeology_museum", "Odessa Archaeology Museum", "museums", "Odessa Archaeological Museum"),
     ]),
     ("tver", [
         ("tver_white_trinity", "White Trinity Church", "places_of_worship", "White Trinity Church Tver"),
@@ -350,7 +348,6 @@ TOPUP_SEEDS: dict[str, list[tuple[str, str, str, str]]] = {
         ("novosibirsk_zoo_ext", "Novosibirsk Zoo", "parks", "Novosibirsk Zoo"),
     ],
     "odessa": [
-        ("odessa_potemkin_ext", "Potemkin Stairs", "landmarks", "Potemkin Stairs Odessa"),
         ("odessa_opera_ext", "Odessa Opera", "theaters", "Odessa Opera and Ballet Theater"),
     ],
     "san_francisco": [

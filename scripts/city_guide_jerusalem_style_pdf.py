@@ -11,9 +11,11 @@ from pathlib import Path
 from typing import Any
 
 from scripts.build_pdf import (
+    PDF_FOOTER_EMPTY,
     _pdf_via_playwright,
     _strip_empty_pdf_pages,
     _strip_pdf_metadata,
+    apply_continuous_page_footers,
 )
 from scripts.city_guide_core import (
     MIN_IMAGE_BYTES,
@@ -109,8 +111,15 @@ def _place_sort_key(p: dict[str, Any]) -> tuple[str, str]:
 def places_with_local_images(
     root: Path,
     places: list[dict[str, Any]],
+    *,
+    city_slug: str = "",
 ) -> list[dict[str, Any]]:
-    return places_for_pdf(root, places, sort_key=_place_sort_key)
+    return places_for_pdf(
+        root,
+        places,
+        city_slug=city_slug,
+        sort_key=_place_sort_key,
+    )
 
 
 def _place_meta_line(p: dict[str, Any], edition: str) -> str | None:
@@ -307,7 +316,12 @@ def _preamble_blocks(
     edition: str,
     project_root: Path | None,
 ) -> list[str]:
-    pdf_places = places_for_pdf(root, places, sort_key=_place_sort_key)
+    pdf_places = places_for_pdf(
+        root,
+        places,
+        city_slug=city_slug,
+        sort_key=_place_sort_key,
+    )
     s = _guide_strings(edition)
     blocks: list[str] = [cover_otium_html(edition)]
     blocks.append(
@@ -498,7 +512,7 @@ def _pdf_via_playwright_chunked(
                 chunk_pdf_path,
                 image_wait_timeout_ms=image_wait_timeout_ms,
                 display_header_footer=True,
-                footer_template=footer,
+                footer_template=PDF_FOOTER_EMPTY,
                 header_template=header,
                 static_site_root=root,
             ):
@@ -511,6 +525,7 @@ def _pdf_via_playwright_chunked(
             for page in reader.pages:
                 writer.add_page(page)
         writer.write(str(pdf_path))
+        apply_continuous_page_footers(pdf_path)
         return True
     finally:
         for chunk_pdf in chunk_pdfs:
@@ -607,7 +622,7 @@ def run_build_pdf_main(
         )
         return 2
 
-    built = places_with_local_images(root, places)
+    built = places_with_local_images(root, places, city_slug=city_slug)
     skipped = len(places) - len(built)
     if skipped:
         print(

@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import importlib
+import json
 import sys
 from pathlib import Path
 
@@ -18,6 +19,10 @@ from scripts.city_guide_core import is_substantive_text
 _README = _PROJECT_ROOT / "docs" / "CITY_GUIDES_README.md"
 _SECTION_START = "<!-- city-guide-stats -->\n"
 _SECTION_END = "<!-- /city-guide-stats -->\n"
+
+_ROOT_README = _PROJECT_ROOT / "README.md"
+_PLACE_COUNTS_START = "<!-- city-guide-place-counts -->\n"
+_PLACE_COUNTS_END = "<!-- /city-guide-place-counts -->\n"
 
 _IMAGE_SUFFIXES = frozenset({
     ".jpg", ".jpeg", ".png", ".webp", ".gif", ".svg",
@@ -134,6 +139,73 @@ def _markdown_table(rows: list[tuple[str, ...]]) -> str:
     return "".join(lines)
 
 
+def _curated_counts_from_json() -> list[tuple[str, int, int]]:
+    """Return (city_slug, curated_count, expand_count) sorted by city."""
+    from scripts.city_guide_registry_common import pdf_expand_sidecar_paths
+
+    rows: list[tuple[str, int, int]] = []
+    for main in sorted(_PROJECT_ROOT.glob("*/data/*_places.json")):
+        city = main.parent.parent.name
+        raw = json.loads(main.read_text(encoding="utf-8"))
+        if not isinstance(raw, list):
+            continue
+        curated = sum(
+            1
+            for p in raw
+            if isinstance(p, dict) and is_curated_place_row(p)
+        )
+        expand_n = 0
+        for expand_path in pdf_expand_sidecar_paths(main.parent, city):
+            if not expand_path.is_file():
+                continue
+            expand_raw = json.loads(expand_path.read_text(encoding="utf-8"))
+            if isinstance(expand_raw, list):
+                expand_n += len(expand_raw)
+        rows.append((city, curated, expand_n))
+    return rows
+
+
+def build_place_counts_section() -> str:
+    """Markdown table of unique curated places per city (from ``*_places.json``)."""
+    rows = _curated_counts_from_json()
+    total_places = sum(n for _city, n, _ex in rows)
+    total_expand = sum(ex for _city, _n, ex in rows)
+    intro = (
+        "## Unique places per city\n\n"
+        "Curated rows in ``<city>/data/<city>_places.json`` after heading/image "
+        "dedup (PDF size-band fillers excluded). Run global dedup first: "
+        "``python scripts/dedupe_city_guide_places.py --write``.\n\n"
+        "Refresh: ``python scripts/report_city_guide_stats.py --write-readme``\n\n"
+    )
+    header = "| City | Places |\n|------|-------:|\n"
+    body = "".join(
+        "| `{}` | {} |\n".format(city, n)
+        for city, n, _ex in rows
+    )
+    footer = (
+        "\n**Totals:** {} cities · **{}** unique curated places · "
+        "{} PDF expand sidecar rows (filler images; not counted in Places).\n"
+    ).format(len(rows), total_places, total_expand)
+    return _PLACE_COUNTS_START + intro + header + body + footer + _PLACE_COUNTS_END
+
+
+def _write_marked_section(
+    path: Path,
+    section: str,
+    start: str,
+    end: str,
+) -> None:
+    old = path.read_text(encoding="utf-8") if path.is_file() else ""
+    if start in old and end in old:
+        head, _, tail = old.partition(start)
+        _, _, tail = tail.partition(end)
+        new = head + section + tail
+    else:
+        sep = "" if old.endswith("\n\n") or not old.strip() else "\n\n"
+        new = old.rstrip() + sep + section + "\n"
+    path.write_text(new, encoding="utf-8")
+
+
 def build_chart_section() -> str:
     out_rows: list[tuple[str, ...]] = []
     for slug, mod, attr in _REGISTRY:
@@ -182,7 +254,12 @@ def main() -> int:
     parser.add_argument(
         "--write",
         action="store_true",
-        help="Update docs/CITY_GUIDES_README.md with this chart.",
+        help="Update docs/CITY_GUIDES_README.md with the registry chart.",
+    )
+    parser.add_argument(
+        "--write-readme",
+        action="store_true",
+        help="Update README.md with the unique-places-per-city table.",
     )
     parser.add_argument(
         "--fail-desc-pct",
@@ -214,18 +291,20 @@ def main() -> int:
                 )
                 return 1
     if args.write:
-        old = _README.read_text(encoding="utf-8") if _README.is_file() else ""
-        if _SECTION_START in old and _SECTION_END in old:
-            head, _, tail = old.partition(_SECTION_START)
-            _, _, tail = tail.partition(_SECTION_END)
-            new = head + section + tail
-        else:
-            sep = "" if old.endswith("\n\n") or not old.strip() else "\n\n"
-            new = old.rstrip() + sep + section + "\n"
-        _README.write_text(new, encoding="utf-8")
+        _write_marked_section(_README, section, _SECTION_START, _SECTION_END)
         print("Wrote chart into", _README, file=sys.stderr)
-    else:
-        sys.stdout.write(section)
+    if args.write_readme:
+        counts = build_place_counts_section()
+        _write_marked_section(
+            _ROOT_README,
+            counts,
+            _PLACE_COUNTS_START,
+            _PLACE_COUNTS_END,
+        )
+        print("Wrote place counts into", _ROOT_README, file=sys.stderr)
+    if not args.write and not args.write_readme:
+        if args.fail_desc_pct is None:
+            sys.stdout.write(section)
     return 0
 
 

@@ -152,32 +152,96 @@ def _pdfband_duplicates_curated(
     return False
 
 
-def dedupe_pdf_sidecar_places(places: Sequence[_P]) -> list[_P]:
+def dedupe_curated_places(
+    places: Sequence[_P],
+    city_slug: str,
+) -> list[_P]:
     """
-    Drop PDF expand rows whose title/subject duplicates a curated place.
+    Drop curated rows that repeat the same heading or image in one guide.
 
-    Curated rows (non-pdfband/filler slugs) are kept; sidecar rows that
-    match an existing heading or describe the same landmark are omitted.
+    Keeps the first row in list order.
     """
     from scripts.city_guide_naming import (
+        guide_heading_dedupe_keys,
+        image_identity_key,
+        is_pdf_filler_slug,
+    )
+
+    out: list[_P] = []
+    seen_heading: set[str] = set()
+    seen_image: set[str] = set()
+    for p in places:
+        slug = str(p.get("slug") or "")
+        if is_pdf_filler_slug(slug):
+            out.append(p)
+            continue
+        headings = guide_heading_dedupe_keys(p, city_slug)
+        image = image_identity_key(p)
+        if headings & seen_heading:
+            continue
+        if image and image in seen_image:
+            continue
+        seen_heading.update(headings)
+        if image:
+            seen_image.add(image)
+        out.append(p)
+    return out
+
+
+def dedupe_pdf_sidecar_places(
+    places: Sequence[_P],
+    *,
+    city_slug: str = "",
+) -> list[_P]:
+    """
+    Drop duplicate curated rows and PDF sidecar rows within one guide.
+
+    Keeps the first row in source order per heading (city-aware) or image URL.
+    """
+    from scripts.city_guide_naming import (
+        guide_heading_dedupe_key,
+        guide_heading_dedupe_keys,
+        image_identity_key,
         is_pdf_filler_slug,
         place_row_heading_dedupe_key,
     )
 
-    curated = [
-        p for p in places
-        if not is_pdf_filler_slug(str(p.get("slug") or ""))
-    ]
-    out: list[_P] = list(curated)
-    seen = {place_row_heading_dedupe_key(p) for p in curated}
+    out: list[_P] = []
+    seen_heading: set[str] = set()
+    seen_image: set[str] = set()
+    curated: list[_P] = []
     for p in places:
         slug = str(p.get("slug") or "")
         if not is_pdf_filler_slug(slug):
+            headings = (
+                guide_heading_dedupe_keys(p, city_slug)
+                if city_slug
+                else {place_row_heading_dedupe_key(p)}
+            )
+            image = image_identity_key(p)
+            if headings & seen_heading:
+                continue
+            if image and image in seen_image:
+                continue
+            seen_heading.update(headings)
+            if image:
+                seen_image.add(image)
+            curated.append(p)
+            out.append(p)
             continue
-        key = place_row_heading_dedupe_key(p)
-        if key in seen or _pdfband_duplicates_curated(p, curated):
+        heading = place_row_heading_dedupe_key(p)
+        if city_slug:
+            heading = guide_heading_dedupe_key(p, city_slug)
+        image = image_identity_key(p)
+        if (
+            heading in seen_heading
+            or (image and image in seen_image)
+            or _pdfband_duplicates_curated(p, curated)
+        ):
             continue
-        seen.add(key)
+        seen_heading.add(heading)
+        if image:
+            seen_image.add(image)
         out.append(p)
     return out
 
@@ -186,6 +250,7 @@ def places_for_pdf(
     root: Path,
     places: Sequence[_P],
     *,
+    city_slug: str = "",
     sort_key: Callable[[_P], Any] | None = None,
     dedupe_sidecar: bool = True,
 ) -> list[_P]:
@@ -196,7 +261,7 @@ def places_for_pdf(
     """
     rows = list(places)
     if dedupe_sidecar:
-        rows = dedupe_pdf_sidecar_places(rows)
+        rows = dedupe_pdf_sidecar_places(rows, city_slug=city_slug)
     out = [p for p in rows if place_has_pdf_image(root, p)]
     if sort_key is not None:
         out.sort(key=sort_key)

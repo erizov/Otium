@@ -250,9 +250,47 @@ def test_dedupe_pdf_sidecar_drops_duplicate_headings() -> None:
             "image_rel_path": "images/amsterdam_pdfband_1.jpg",
         },
     ]
-    out = dedupe_pdf_sidecar_places(places)
+    out = dedupe_pdf_sidecar_places(places, city_slug="amsterdam")
     assert len(out) == 1
     assert out[0]["slug"] == "amsterdam_noorderkerk"
+
+
+def test_dedupe_curated_drops_city_suffix_heading_dupes() -> None:
+    from scripts.city_guide_core import dedupe_curated_places
+
+    url = (
+        "https://upload.wikimedia.org/wikipedia/commons/1/1a/"
+        "Assumption_Cathedral_in_Yaroslavl_01.jpg"
+    )
+    places = [
+        {
+            "slug": "yaroslavl_assumption_cathedral",
+            "name_en": "Assumption Cathedral",
+            "image_source_url": url,
+        },
+        {
+            "slug": "yaroslavl_assumption_ext",
+            "name_en": "Assumption Cathedral",
+            "image_source_url": url,
+        },
+        {
+            "slug": "yaroslavl_assumption",
+            "name_en": "Assumption Cathedral Yaroslavl",
+            "image_source_url": url,
+        },
+    ]
+    out = dedupe_curated_places(places, "yaroslavl")
+    assert len(out) == 1
+    assert out[0]["slug"] == "yaroslavl_assumption_cathedral"
+
+
+def test_en_heading_falls_back_to_name_ru() -> None:
+    place = {
+        "slug": "moscow_monasteries_0",
+        "name_ru": "Спасо-Андроников монастырь",
+        "name_en": "",
+    }
+    assert place_heading_plain(place, "en") == "Спасо-Андроников монастырь"
 
 
 def test_place_heading_from_slug() -> None:

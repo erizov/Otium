@@ -93,6 +93,7 @@ def _extra_stale_input_paths(project_root: Path) -> list[Path]:
         "scripts/city_guide_naming.py",
         "scripts/city_guide_narrative.py",
         "scripts/city_guide_front_matter.py",
+        "scripts/city_guide_proximity_routes.py",
     )
     out: list[Path] = []
     for rel in rels:

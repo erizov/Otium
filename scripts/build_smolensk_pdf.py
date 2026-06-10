@@ -382,6 +382,7 @@ def _places_with_local_images(root: Path) -> list[SmolenskPlace]:
         places_for_pdf(
             root,
             cast(list[dict[str, Any]], SMOLENSK_PLACES),
+            city_slug="smolensk",
             sort_key=lambda x: (x.get("name_ru", ""), x.get("slug", "")),
         ),
     )

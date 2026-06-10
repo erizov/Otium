@@ -589,3 +589,65 @@ pytest -q
 - **scripts/download_with_dedup.py** — загрузка с дедупликацией
 - **scripts/guide_loader.py** — загрузка данных гидов
 - **scripts/helpers/** — вспомогательные скрипты (legacy)
+
+<!-- city-guide-place-counts -->
+## Unique places per city
+
+Curated rows in ``<city>/data/<city>_places.json`` after heading/image dedup (PDF size-band fillers excluded). Run global dedup first: ``python scripts/dedupe_city_guide_places.py --write``.
+
+Refresh: ``python scripts/report_city_guide_stats.py --write-readme``
+
+| City | Places |
+|------|-------:|
+| `amsterdam` | 30 |
+| `athens` | 27 |
+| `bangkok` | 30 |
+| `barcelona` | 32 |
+| `berlin` | 35 |
+| `boston` | 25 |
+| `budapest` | 30 |
+| `chernivtsi` | 29 |
+| `copenhagen` | 26 |
+| `dubai` | 29 |
+| `dublin` | 21 |
+| `florence` | 33 |
+| `istanbul` | 29 |
+| `jerusalem` | 30 |
+| `kazan` | 27 |
+| `kharkiv` | 26 |
+| `kyiv` | 26 |
+| `lisbon` | 27 |
+| `london` | 24 |
+| `los_angeles` | 26 |
+| `lviv` | 26 |
+| `madrid` | 32 |
+| `minsk` | 29 |
+| `montreal` | 37 |
+| `moscow` | 319 |
+| `new_york` | 31 |
+| `novosibirsk` | 25 |
+| `odessa` | 24 |
+| `paris` | 34 |
+| `philadelphia` | 23 |
+| `prague` | 33 |
+| `rome` | 35 |
+| `san_francisco` | 23 |
+| `singapore` | 26 |
+| `smolensk` | 68 |
+| `spb` | 99 |
+| `tokyo` | 26 |
+| `tver` | 25 |
+| `vatican` | 25 |
+| `venice` | 35 |
+| `vienna` | 32 |
+| `vladivostok` | 24 |
+| `volgograd` | 25 |
+| `vologda` | 21 |
+| `yaroslavl` | 25 |
+
+**Totals:** 45 cities · **1664** unique curated places · 113 PDF expand sidecar rows (filler images; not counted in Places).
+<!-- /city-guide-place-counts -->
+Refresh after dedup or grow:
+python scripts/report_city_guide_stats.py --write-readme
+
+python scripts/warm_route_coords_cache.py

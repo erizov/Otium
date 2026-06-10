@@ -55,7 +55,11 @@ def main() -> int:
             continue
         inner: dict[str, str] = {}
         for place_slug, _name, _cat, query in _SEEDS[slug]:
-            title = _commons_search_title(query, pause=args.pause)
+            title = _commons_search_title(
+                query,
+                pause=args.pause,
+                city_slug=slug,
+            )
             if not title:
                 print(
                     "MISSING",

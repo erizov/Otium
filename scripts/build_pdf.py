@@ -1389,6 +1389,71 @@ def _is_pdf_page_empty(page) -> bool:
     return False
 
 
+PDF_FOOTER_PAGE_NUMBERS = (
+    "<div style='font-size:9px;text-align:center;width:100%'>"
+    "<span class='pageNumber'></span> / <span class='totalPages'></span>"
+    "</div>"
+)
+PDF_FOOTER_EMPTY = (
+    "<div style='font-size:9px;text-align:center;width:100%'></div>"
+)
+
+
+def apply_continuous_page_footers(
+    pdf_path: Path,
+    *,
+    font_size: float = 9,
+    bottom_pt: float = 18,
+) -> None:
+    """
+    Stamp ``current / total`` footers after merging chunk PDFs.
+
+    Playwright resets ``pageNumber`` per chunk; call this once on the merged
+    file so numbering runs 1…n across the whole guide.
+    """
+    try:
+        from io import BytesIO
+
+        from pypdf import PdfReader, PdfWriter
+        from reportlab.pdfgen import canvas
+    except ImportError as exc:
+        print(
+            "  Continuous page footers skipped (need pypdf + reportlab): "
+            "{}.".format(exc),
+            file=sys.stderr,
+        )
+        return
+    try:
+        reader = PdfReader(str(pdf_path))
+        total = len(reader.pages)
+        if total == 0:
+            return
+        writer = PdfWriter()
+        for index, page in enumerate(reader.pages, start=1):
+            width = float(page.mediabox.width)
+            height = float(page.mediabox.height)
+            packet = BytesIO()
+            overlay = canvas.Canvas(packet, pagesize=(width, height))
+            overlay.setFont("Helvetica", font_size)
+            overlay.drawCentredString(
+                width / 2,
+                bottom_pt,
+                "{} / {}".format(index, total),
+            )
+            overlay.save()
+            packet.seek(0)
+            stamp = PdfReader(packet)
+            page.merge_page(stamp.pages[0])
+            writer.add_page(page)
+        with open(pdf_path, "wb") as out:
+            writer.write(out)
+    except Exception as exc:
+        print(
+            "  Continuous page footers failed: {}.".format(exc),
+            file=sys.stderr,
+        )
+
+
 def _strip_empty_pdf_pages(
     pdf_path: Path,
     metadata: Optional[dict] = None,

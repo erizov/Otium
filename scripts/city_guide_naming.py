@@ -184,3 +184,50 @@ def place_row_heading_dedupe_key(place: dict) -> str:
     if slug and not is_pdf_filler_slug(slug):
         return place_heading_dedupe_key(title_from_place_slug(slug))
     return place_heading_dedupe_key(slug)
+
+
+def _strip_city_suffix(key: str, city_slug: str) -> str:
+    from scripts.city_guide_narrative import normalize_sentence_key
+    from scripts.rag.city_map import names_for_slug
+
+    base = normalize_sentence_key(key)
+    names = names_for_slug(city_slug)
+    suffixes: set[str] = set()
+    for raw in (names.name_en, names.name_ru, city_slug.replace("_", " ")):
+        if raw:
+            suffixes.add(normalize_sentence_key(raw))
+    for suffix in sorted(suffixes, key=len, reverse=True):
+        if not suffix or base == suffix:
+            continue
+        tail = " {}".format(suffix)
+        if base.endswith(tail):
+            return base[: -len(tail)].strip()
+    return base
+
+
+def guide_heading_dedupe_key(place: dict, city_slug: str) -> str:
+    """
+    Primary heading key for deduplication within one city guide.
+
+    Strips trailing city name tokens so
+    ``Assumption Cathedral Yaroslavl`` matches ``Assumption Cathedral``.
+    """
+    return _strip_city_suffix(place_row_heading_dedupe_key(place), city_slug)
+
+
+def guide_heading_dedupe_keys(place: dict, city_slug: str) -> set[str]:
+    """All normalized heading keys for a row (EN, RU, subtitles, slug)."""
+    keys: set[str] = {guide_heading_dedupe_key(place, city_slug)}
+    for key in ("name_en", "name_ru", "name", "subtitle_en", "subtitle_ru"):
+        raw = clean_wikimedia_display_title(str(place.get(key) or ""))
+        if raw and not is_pdf_filler_slug(raw):
+            keys.add(_strip_city_suffix(place_heading_dedupe_key(raw), city_slug))
+    return {k for k in keys if k}
+
+
+def image_identity_key(place: dict) -> str:
+    """Normalized image URL or rel path for duplicate detection."""
+    url = str(place.get("image_source_url") or "").strip().lower()
+    if url:
+        return url
+    return str(place.get("image_rel_path") or "").strip().lower()

@@ -16,10 +16,14 @@ if str(_PROJECT_ROOT) not in sys.path:
 from spb.data.places_registry import SPB_PLACES, SpbPlace
 
 from scripts.build_pdf import (
+    PDF_FOOTER_EMPTY,
+    PDF_FOOTER_PAGE_NUMBERS,
     _pdf_via_playwright,
     _strip_empty_pdf_pages,
     _strip_pdf_metadata,
+    apply_continuous_page_footers,
 )
+from scripts.city_guide_jerusalem_style_pdf import PDF_CHUNK_MAX_PLACES
 from scripts.city_guide_core import (
     copy_built_guide_pdf_to_final_guides,
     places_for_pdf,
@@ -310,6 +314,7 @@ def _places_with_local_images(spb_root: Path) -> list[SpbPlace]:
     return places_for_pdf(
         spb_root,
         SPB_PLACES,
+        city_slug="spb",
         sort_key=lambda x: (x.get("category", ""), x.get("name_ru", "")),
     )
 
@@ -557,6 +562,10 @@ def _build_html(
     *,
     project_root: Path,
     deduper: GuideNarrativeDeduper | None = None,
+    include_front_matter: bool = True,
+    initial_last_cat: str | None = None,
+    category_counts: dict[str, int] | None = None,
+    lead_place_count: int | None = None,
 ) -> str:
     narrative_deduper = deduper or GuideNarrativeDeduper()
     font_href = (
@@ -565,38 +574,44 @@ def _build_html(
         "&display=swap"
     )
     s = guide_ui_strings(edition)
-    counts = _counts_by_category(places)
-    blocks: list[str] = [_cover_otium_html(edition)]
+    counts = category_counts if category_counts is not None else _counts_by_category(
+        places,
+    )
+    lead_n = lead_place_count if lead_place_count is not None else len(places)
+    blocks: list[str] = []
+    if include_front_matter:
+        blocks.append(_cover_otium_html(edition))
     if edition == "ru":
         city_h1 = "Санкт-Петербург"
         doc_lang = "ru"
     else:
         city_h1 = "Saint Petersburg"
         doc_lang = "en"
-    blocks.append(
-        '<header class="guide-title">'
-        "{}"
-        "<h1>{}</h1>"
-        "<p class=\"lead\">{}</p>"
-        "</header>".format(
-            _heraldry_html(spb_root, edition),
-            escape(city_h1),
-            escape(s["lead"].format(len(places))),
-        ),
-    )
-    if edition == "ru":
-        hist_body = reference_text_ru_for_any_city("spb", project_root)
-        hist_title = HISTORICAL_SECTION_TITLE_RU
-    else:
-        hist_body = reference_text_en_for_any_city("spb", project_root)
-        hist_title = HISTORICAL_SECTION_TITLE_EN
-    hist = historical_reference_section_html(
-        hist_body,
-        section_title=hist_title,
-    )
-    if hist:
-        blocks.append(hist)
-    last_cat: str | None = None
+    if include_front_matter:
+        blocks.append(
+            '<header class="guide-title">'
+            "{}"
+            "<h1>{}</h1>"
+            "<p class=\"lead\">{}</p>"
+            "</header>".format(
+                _heraldry_html(spb_root, edition),
+                escape(city_h1),
+                escape(s["lead"].format(lead_n)),
+            ),
+        )
+        if edition == "ru":
+            hist_body = reference_text_ru_for_any_city("spb", project_root)
+            hist_title = HISTORICAL_SECTION_TITLE_RU
+        else:
+            hist_body = reference_text_en_for_any_city("spb", project_root)
+            hist_title = HISTORICAL_SECTION_TITLE_EN
+        hist = historical_reference_section_html(
+            hist_body,
+            section_title=hist_title,
+        )
+        if hist:
+            blocks.append(hist)
+    last_cat: str | None = initial_last_cat
     for p in places:
         cat = p.get("category", "misc")
         if cat != last_cat:
@@ -701,6 +716,106 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
     ).format(doc_lang, escape(doc_title), font_href, css, body_inner)
 
 
+def _pdf_via_playwright_chunked_spb(
+    *,
+    spb_root: Path,
+    out_dir: Path,
+    stem: str,
+    edition: str,
+    places: list[SpbPlace],
+    pdf_path: Path,
+    project_root: Path,
+    image_wait_timeout_ms: int,
+    header: str,
+    deduper: GuideNarrativeDeduper,
+) -> bool:
+    """Render large SPB guides in chunks; stamp continuous page numbers."""
+    try:
+        from pypdf import PdfReader, PdfWriter
+    except ImportError:
+        print("pypdf required for chunked SPB PDF merge.", file=sys.stderr)
+        return False
+
+    category_counts = _counts_by_category(places)
+    chunk_places_list = [
+        places[i : i + PDF_CHUNK_MAX_PLACES]
+        for i in range(0, len(places), PDF_CHUNK_MAX_PLACES)
+    ]
+    chunk_pdfs: list[Path] = []
+    last_cat: str | None = None
+    try:
+        for idx, chunk_places in enumerate(chunk_places_list):
+            print(
+                "  PDF chunk {}/{}...".format(idx + 1, len(chunk_places_list)),
+            )
+            chunk_html_path = out_dir / "{}_{}_chunk_{}.html".format(
+                stem,
+                edition,
+                idx,
+            )
+            chunk_pdf_path = out_dir / "{}_{}_chunk_{}.pdf".format(
+                stem,
+                edition,
+                idx,
+            )
+            chunk_html_path.write_text(
+                _build_html(
+                    spb_root,
+                    chunk_places,
+                    edition,
+                    project_root=project_root,
+                    deduper=deduper,
+                    include_front_matter=(idx == 0),
+                    initial_last_cat=last_cat,
+                    category_counts=category_counts,
+                    lead_place_count=len(places),
+                ),
+                encoding="utf-8",
+            )
+            if chunk_places:
+                last_cat = str(chunk_places[-1].get("category") or "misc")
+            if not _pdf_via_playwright(
+                chunk_html_path,
+                chunk_pdf_path,
+                image_wait_timeout_ms=image_wait_timeout_ms,
+                display_header_footer=True,
+                footer_template=PDF_FOOTER_EMPTY,
+                header_template=header,
+                static_site_root=spb_root,
+            ):
+                return False
+            chunk_pdfs.append(chunk_pdf_path)
+
+        writer = PdfWriter()
+        for chunk_pdf in chunk_pdfs:
+            reader = PdfReader(str(chunk_pdf))
+            for page in reader.pages:
+                writer.add_page(page)
+        writer.write(str(pdf_path))
+        apply_continuous_page_footers(pdf_path)
+        return True
+    finally:
+        for chunk_pdf in chunk_pdfs:
+            if chunk_pdf.is_file():
+                try:
+                    chunk_pdf.unlink()
+                except OSError:
+                    pass
+        for idx in range(len(chunk_places_list)):
+            for suffix in (".html", ".pdf"):
+                path = out_dir / "{}_{}_chunk_{}{}".format(
+                    stem,
+                    edition,
+                    idx,
+                    suffix,
+                )
+                if path.is_file():
+                    try:
+                        path.unlink()
+                    except OSError:
+                        pass
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(
         description=(
@@ -763,12 +878,9 @@ def main() -> int:
 
     stem = SPB_PDF_NAME[:-4]
     langs: tuple[str, ...] = tuple(dict.fromkeys(args.langs))
-    footer = (
-        "<div style='font-size:9px;text-align:center;width:100%'>"
-        "<span class='pageNumber'></span> / <span class='totalPages'></span>"
-        "</div>"
-    )
+    footer = PDF_FOOTER_PAGE_NUMBERS
     header = "<div style='font-size:9px;width:100%'></div>"
+    use_chunked = len(places) > PDF_CHUNK_MAX_PLACES
     for edition in langs:
         html_path = out_dir / "{}_{}.html".format(stem, edition)
         pdf_path = out_dir / "{}_{}.pdf".format(stem, edition)
@@ -784,15 +896,30 @@ def main() -> int:
             encoding="utf-8",
         )
         print("Written:", html_path)
-        if _pdf_via_playwright(
-            html_path,
-            pdf_path,
-            image_wait_timeout_ms=args.image_wait_ms,
-            display_header_footer=True,
-            footer_template=footer,
-            header_template=header,
-            static_site_root=spb_root,
-        ):
+        if use_chunked:
+            pdf_ok = _pdf_via_playwright_chunked_spb(
+                spb_root=spb_root,
+                out_dir=out_dir,
+                stem=stem,
+                edition=edition,
+                places=places,
+                pdf_path=pdf_path,
+                project_root=_PROJECT_ROOT,
+                image_wait_timeout_ms=args.image_wait_ms,
+                header=header,
+                deduper=narrative_deduper,
+            )
+        else:
+            pdf_ok = _pdf_via_playwright(
+                html_path,
+                pdf_path,
+                image_wait_timeout_ms=args.image_wait_ms,
+                display_header_footer=True,
+                footer_template=footer,
+                header_template=header,
+                static_site_root=spb_root,
+            )
+        if pdf_ok:
             _strip_empty_pdf_pages(pdf_path)
             _strip_pdf_metadata(pdf_path)
             copy_built_guide_pdf_to_final_guides(_PROJECT_ROOT, pdf_path)

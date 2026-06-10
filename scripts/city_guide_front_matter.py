@@ -12,7 +12,10 @@ from scripts.city_guide_core import is_substantive_text
 from scripts.city_guide_naming import is_pdf_filler_slug
 from scripts.city_guide_narrative import place_heading_plain
 
-ITINERARY_KEYS: tuple[str, ...] = ("4h", "1d", "2d", "5d")
+ITINERARY_KEYS: tuple[str, ...] = ("1d", "3d1", "3d2", "3d3")
+
+# Large chapter-based guides: no proximity trip section in PDF/HTML.
+CITIES_WITHOUT_TRIP_ROUTES: frozenset[str] = frozenset({"moscow", "spb"})
 
 _PRIMER_HEADINGS_EN: dict[str, str] = {
     "section": "City primer",
@@ -28,17 +31,17 @@ _PRIMER_HEADINGS_RU: dict[str, str] = {
 }
 _TRIP_HEADINGS_EN: dict[str, str] = {
     "section": "Trip ideas",
-    "4h": "Four hours",
     "1d": "One day",
-    "2d": "Two days",
-    "5d": "Five days",
+    "3d1": "Three days — day 1",
+    "3d2": "Three days — day 2",
+    "3d3": "Three days — day 3",
 }
 _TRIP_HEADINGS_RU: dict[str, str] = {
     "section": "Маршруты",
-    "4h": "Четыре часа",
     "1d": "Один день",
-    "2d": "Два дня",
-    "5d": "Пять дней",
+    "3d1": "Три дня — день 1",
+    "3d2": "Три дня — день 2",
+    "3d3": "Три дня — день 3",
 }
 
 
@@ -208,7 +211,7 @@ def trip_plans_section_html(
     edition: str,
     places: Sequence[Mapping[str, Any]],
 ) -> str:
-    """Trip planning block (4h / 1d / 2d / 5d) for one edition."""
+    """Trip planning block (1d / 3d1–3d3) for one edition."""
     root = data.get("itineraries")
     if not isinstance(root, dict):
         return ""
@@ -249,25 +252,59 @@ def trip_plans_section_html(
     )
 
 
+def proximity_trip_plans_section_html(
+    city_slug: str,
+    edition: str,
+    places: Sequence[Mapping[str, Any]],
+    *,
+    project_root: Path | None,
+) -> str:
+    """Proximity-optimised 1-day and 3-day routes from guide places."""
+    from scripts.city_guide_proximity_routes import (
+        proximity_itineraries_for_edition,
+    )
+
+    if not places:
+        return ""
+    block = proximity_itineraries_for_edition(
+        places,
+        city_slug,
+        edition,
+        project_root=project_root,
+    )
+    if not block:
+        return ""
+    wrapper = {"itineraries": {edition: block}}
+    return trip_plans_section_html(wrapper, edition, places)
+
+
 def front_matter_html_blocks(
     project_root: Path | None,
     city_slug: str,
     edition: str,
     places: Sequence[Mapping[str, Any]],
 ) -> list[str]:
-    """Primer + trip sections, or empty when JSON is missing."""
+    """Primer (optional JSON) + proximity trip routes for one edition."""
     if project_root is None:
         return []
-    data = load_front_matter(project_root, city_slug)
-    if not data:
-        return []
     blocks: list[str] = []
-    primer = primer_section_html(data, edition)
-    if primer:
-        blocks.append(primer)
-    trips = trip_plans_section_html(data, edition, places)
-    if trips:
-        blocks.append(trips)
+    data = load_front_matter(project_root, city_slug)
+    if data:
+        primer = primer_section_html(data, edition)
+        if primer:
+            blocks.append(primer)
+    slug = city_slug.strip().lower()
+    if slug not in CITIES_WITHOUT_TRIP_ROUTES:
+        trips = proximity_trip_plans_section_html(
+            city_slug,
+            edition,
+            places,
+            project_root=project_root,
+        )
+        if not trips and data:
+            trips = trip_plans_section_html(data, edition, places)
+        if trips:
+            blocks.append(trips)
     return blocks
 
 

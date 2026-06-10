@@ -5,7 +5,10 @@ from __future__ import annotations
 
 from pathlib import Path
 
+import pytest
+
 from scripts.city_guide_front_matter import (
+    CITIES_WITHOUT_TRIP_ROUTES,
     ITINERARY_KEYS,
     front_matter_html_blocks,
     front_matter_json_path,
@@ -33,8 +36,8 @@ _SAMPLE_FRONT = {
     },
     "itineraries": {
         "en": {
-            "4h": {
-                "title": "Four hours downtown",
+            "1d": {
+                "title": "One day downtown",
                 "intro": "A short loop near the river.",
                 "stops": [
                     {
@@ -49,15 +52,10 @@ _SAMPLE_FRONT = {
                     },
                 ],
             },
-            "1d": {
-                "title": "One day",
-                "intro": "Core sights.",
-                "stops": [{"slug": "sample_tower", "note": "Morning"}],
-            },
         },
         "ru": {
-            "4h": {
-                "title": "Четыре часа",
+            "1d": {
+                "title": "Один день",
                 "intro": "Короткий маршрут.",
                 "stops": [
                     {"slug": "sample_tower", "minutes": 60, "note": "Вид"},
@@ -96,13 +94,15 @@ def test_trip_plans_anchors_and_durations() -> None:
     assert "Trip ideas" in html
     assert 'href="#sample_tower"' in html
     assert "Old Tower" in html
-    assert "Four hours downtown" in html
-    for key in ITINERARY_KEYS:
-        if key in ("4h", "1d"):
-            assert 'id="trip-{}"'.format(key) in html
+    assert "One day downtown" in html
+    assert 'id="trip-1d"' in html
 
 
-def test_front_matter_html_blocks_roundtrip(tmp_path: Path) -> None:
+def test_front_matter_html_blocks_roundtrip(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setenv("CITY_GUIDE_NO_GEOCODE", "1")
     save_front_matter(tmp_path, "sample", _SAMPLE_FRONT)
     assert front_matter_json_path(tmp_path, "sample").is_file()
     blocks = front_matter_html_blocks(
@@ -111,9 +111,8 @@ def test_front_matter_html_blocks_roundtrip(tmp_path: Path) -> None:
         "en",
         _PLACES,
     )
-    assert len(blocks) == 2
+    assert len(blocks) >= 1
     assert "guide-primer" in blocks[0]
-    assert "guide-trip-plans" in blocks[1]
 
 
 def test_top_places_ranking() -> None:
@@ -122,3 +121,35 @@ def test_top_places_ranking() -> None:
     slugs = {r["slug"] for r in rows}
     assert slugs == {"sample_tower", "sample_market"}
     assert place_prominence_score(_PLACES[0], "en") >= 0
+
+
+def test_front_matter_html_blocks_includes_proximity_routes(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setenv("CITY_GUIDE_NO_GEOCODE", "1")
+    save_front_matter(tmp_path, "sample", _SAMPLE_FRONT)
+    blocks = front_matter_html_blocks(
+        tmp_path,
+        "sample",
+        "en",
+        _PLACES,
+    )
+    assert len(blocks) >= 1
+    assert any("guide-trip-plans" in b for b in blocks)
+
+
+def test_front_matter_skips_trip_routes_for_moscow_spb(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setenv("CITY_GUIDE_NO_GEOCODE", "1")
+    save_front_matter(tmp_path, "moscow", _SAMPLE_FRONT)
+    for slug in CITIES_WITHOUT_TRIP_ROUTES:
+        blocks = front_matter_html_blocks(
+            tmp_path,
+            slug,
+            "en",
+            _PLACES,
+        )
+        assert not any("guide-trip-plans" in b for b in blocks)

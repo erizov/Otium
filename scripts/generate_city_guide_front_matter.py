@@ -92,16 +92,16 @@ def _build_prompt(
         '    "overview_paragraphs": ["optional 1-2 short paragraphs tying the city"]\n'
         "  }},\n"
         '  "itineraries": {{\n'
-        '    "4h": {{"title": "...", "intro": "1-2 sentences", '
+        '    "1d": {{"title": "...", "intro": "1-2 sentences", '
         '"stops": [{{"slug": "...", "minutes": 45, "note": "why"}}]}},\n'
-        '    "1d": {{...}},\n'
-        '    "2d": {{...}},\n'
-        '    "5d": {{...}}\n'
+        '    "3d1": {{...}},\n'
+        '    "3d2": {{...}},\n'
+        '    "3d3": {{...}}\n'
         "  }}\n"
         "}}\n\n"
         "Rules:\n"
         "- Itinerary keys must be exactly: {durations}.\n"
-        "- 4h: 2-4 stops; 1d: 4-6; 2d: 6-9; 5d: 10-14.\n"
+        "- 1d: 4-6 stops; 3d1/3d2/3d3: 4-6 stops each (three walking days).\n"
         "- Every stop.slug MUST be from the featured list.\n"
         "- Do not invent museums or sites not in the list.\n"
         "- minutes is optional integer (visit time).\n"

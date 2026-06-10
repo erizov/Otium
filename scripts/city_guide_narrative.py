@@ -830,6 +830,10 @@ def place_heading_plain(
             )
             if translated:
                 return polish_display_title(translated)
+    if edition != "ru":
+        ru_plain = pick_first_text(place, "ru", ("name_ru", "name"))
+        if ru_plain:
+            return ru_plain
     if is_pdf_filler_slug(slug):
         return title_from_pdf_filler_slug(slug)
     if "_" in slug:

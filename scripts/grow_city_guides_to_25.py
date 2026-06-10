@@ -306,8 +306,27 @@ _SEEDS["vatican"] = [
 ]
 
 
-def _commons_search_title(query: str, *, pause: float) -> str | None:
-    """Return first raster-like Commons file *title* (no ``File:`` prefix)."""
+def _commons_search_title(
+    query: str,
+    *,
+    pause: float,
+    city_slug: str | None = None,
+) -> str | None:
+    """Return first city-scoped raster Commons file title (no ``File:``)."""
+    from scripts.city_guide_commons_fetch import (
+        commons_search_raster_title_for_city,
+    )
+
+    if city_slug:
+        title = None
+        for attempt in range(5):
+            title = commons_search_raster_title_for_city(query, city_slug)
+            if title:
+                break
+            time.sleep(2.0 + attempt * 3.0)
+        time.sleep(pause)
+        return title
+
     q = urllib.parse.urlencode(
         {
             "action": "query",
@@ -522,7 +541,11 @@ def _append_seeds_to_city(
             break
         title = _STATIC_COMMONS_FILE.get(city_slug, {}).get(place_slug)
         if not title:
-            title = _commons_search_title(query, pause=pause_search)
+            title = _commons_search_title(
+                query,
+                pause=pause_search,
+                city_slug=city_slug,
+            )
         if not title:
             print(
                 "  skip (no Commons):",
@@ -638,7 +661,11 @@ def _grow_existing(
                 continue
             title = _STATIC_COMMONS_FILE.get(slug, {}).get(place_slug)
             if not title:
-                title = _commons_search_title(query, pause=pause_search)
+                title = _commons_search_title(
+                    query,
+                    pause=pause_search,
+                    city_slug=slug,
+                )
             if not title:
                 raise SystemExit(
                     "Commons search found no raster for {} ({!r})".format(
