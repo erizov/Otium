@@ -133,11 +133,16 @@ def primer_section_html(
     if not parts:
         return ""
     return (
-        '<section class="guide-primer" aria-label="{}">'
+        '<section class="guide-primer" id="{}" aria-label="{}">'
         "<h2>{}</h2>\n"
         "{}"
         "</section>"
-    ).format(escape(h["section"]), escape(h["section"]), "\n".join(parts))
+    ).format(
+        "guide-primer",
+        escape(h["section"]),
+        escape(h["section"]),
+        "\n".join(parts),
+    )
 
 
 def _stop_display_name(
@@ -241,7 +246,7 @@ def trip_plans_section_html(
     if not articles:
         return ""
     return (
-        '<section class="guide-trip-plans" aria-label="{}">'
+        '<section class="guide-trip-plans" id="guide-trips" aria-label="{}">'
         "<h2>{}</h2>\n"
         "{}"
         "</section>"

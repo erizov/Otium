@@ -2,6 +2,7 @@
 """Run every scripts/build_<slug>_pdf.py for cities with data/<slug>_places.json."""
 from __future__ import annotations
 
+import argparse
 import os
 import subprocess
 import sys
@@ -25,6 +26,15 @@ def _discover_slugs(project_root: Path) -> list[str]:
 
 
 def main() -> int:
+    parser = argparse.ArgumentParser(
+        description="Build all city guide PDFs discovered under scripts/.",
+    )
+    parser.add_argument(
+        "--html-only",
+        action="store_true",
+        help="Pass --html-only to each city build script.",
+    )
+    args = parser.parse_args()
     root = Path(__file__).resolve().parent.parent
     slugs = _discover_slugs(root)
     if not slugs:
@@ -39,8 +49,11 @@ def main() -> int:
             "[{}/{}] Building {} ...".format(i, len(slugs), slug),
             flush=True,
         )
+        cmd = [sys.executable, str(script)]
+        if args.html_only:
+            cmd.append("--html-only")
         proc = subprocess.run(
-            [sys.executable, str(script)],
+            cmd,
             cwd=str(root),
             check=False,
             env=env,

@@ -939,11 +939,13 @@ def historical_reference_section_html(
     )
     return (
         '<section class="historical-reference" '
+        'id="{}" '
         'aria-label="{}">'
         "<h2>{}</h2>\n"
         "{}"
         "</section>"
     ).format(
+        "guide-historical",
         escape(title),
         escape(title),
         inner,

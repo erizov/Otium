@@ -304,6 +304,15 @@ ol.trip-stops a:hover {{ text-decoration: underline; }}
 .guide-title h1.guide-title-main {{ font-family: {title};
   font-size: 2.35rem; margin-bottom: 0.5rem; font-weight: 600; }}
 .lead {{ color: #444; font-size: 1.05rem; }}
+.guide-toc {{ margin: 0.85rem 0 1.15rem; page-break-inside: avoid; }}
+.guide-toc h2 {{ font-family: {title}; font-size: 1.28rem;
+  font-weight: 600; margin: 0.4rem 0 0.55rem; }}
+.guide-toc ol {{ margin: 0.35rem 0 0.65rem 1.25rem; padding: 0;
+  columns: 2; column-gap: 1.5rem; }}
+.guide-toc li {{ margin: 0.18rem 0; line-height: 1.35;
+  font-size: 0.88rem; break-inside: avoid; }}
+.guide-toc a {{ color: #1a5276; text-decoration: none; }}
+.guide-toc li.toc-item--sub {{ font-size: 0.82rem; margin-left: 0.35rem; }}
 .place {{ margin-bottom: 2.2rem; page-break-inside: auto; }}
 h3 {{ font-family: {title}; font-size: 1.22rem; margin: 1.2rem 0 0.35rem;
   font-weight: 600; }}

@@ -26,11 +26,11 @@ def main() -> int:
         ),
     )
     parser.add_argument(
-        "--html-only",
+        "--export-places",
         action="store_true",
         help=(
             "Regenerate moscow/data/moscow_places.json from data/*.py "
-            "registries (no PDF)."
+            "registries (no guide build)."
         ),
     )
     parser.add_argument(
@@ -42,7 +42,7 @@ def main() -> int:
         ),
     )
     args, rest = parser.parse_known_args()
-    if args.html_only:
+    if args.export_places:
         return subprocess.call(
             [
                 sys.executable,

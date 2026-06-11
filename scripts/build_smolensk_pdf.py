@@ -47,6 +47,7 @@ from scripts.city_guide_jerusalem_style_pdf import (
     _OTIUM_PARAS_EN,
     guide_ui_strings,
 )
+from scripts.city_guide_toc import GuideTocEntry, guide_toc_html
 from scripts.guide_editor_presets import SMOLENSK_GOOGLE_FONTS_HREF
 from scripts.lint_image_paths import lint_city_blocking_errors
 
@@ -788,7 +789,8 @@ def _universities_section_html(root: Path, edition: str) -> str:
         aria = "Regional universities"
         lbl = "Regional universities"
     return (
-        '<section class="guide-universities" aria-label="{}">'
+        '<section class="guide-universities" id="guide-universities" '
+        'aria-label="{}">'
         '<p class="title-strip-label title-strip-label-univ">'
         "{}</p>"
         '<div class="heraldry-strip heraldry-universities">'
@@ -983,6 +985,7 @@ def _modern_smolensk_section_html(root: Path, edition: str) -> str:
     )
     return (
         '<section class="guide-modern-smolensk" '
+        'id="guide-modern-smolensk" '
         'aria-label="{}">'
         '<h2 class="welcome-closing-head">'
         "{}</h2>\n"
@@ -1037,6 +1040,7 @@ def _welcome_closing_section_html(root: Path, edition: str) -> str:
     head = _WELCOME_HEAD_RU if edition == "ru" else _WELCOME_HEAD_EN
     return (
         '<section class="guide-welcome-closing" '
+        'id="guide-welcome-closing" '
         'aria-label="{}">'
         '<h2 class="welcome-closing-head">'
         "{}</h2>\n"
@@ -1128,6 +1132,49 @@ def _cover_otium_html(edition: str) -> str:
     ).format(paras)
 
 
+def _smolensk_toc_entries(
+    root: Path,
+    places: list[SmolenskPlace],
+    edition: str,
+) -> list[GuideTocEntry]:
+    """TOC rows mirroring Smolensk guide section order."""
+    entries: list[GuideTocEntry] = []
+    if _historical_reference_html(edition).strip():
+        title = (
+            HISTORICAL_SECTION_TITLE_RU
+            if edition == "ru"
+            else HISTORICAL_SECTION_TITLE_EN
+        )
+        entries.append(GuideTocEntry("guide-historical", title))
+    for place in places:
+        if not _image_srcs_for_place(root, place):
+            continue
+        slug = str(place.get("slug") or "").strip()
+        if not slug:
+            continue
+        entries.append(
+            GuideTocEntry(slug, place_heading_plain(place, edition)),
+        )
+    if _universities_section_html(root, edition):
+        label = (
+            "Региональные вузы"
+            if edition == "ru"
+            else "Regional universities"
+        )
+        entries.append(GuideTocEntry("guide-universities", label))
+    if _modern_smolensk_section_html(root, edition):
+        title = (
+            _MODERN_SMOLENSK_TITLE_RU
+            if edition == "ru"
+            else _MODERN_SMOLENSK_TITLE_EN
+        )
+        entries.append(GuideTocEntry("guide-modern-smolensk", title))
+    if _welcome_closing_section_html(root, edition):
+        head = _WELCOME_HEAD_RU if edition == "ru" else _WELCOME_HEAD_EN
+        entries.append(GuideTocEntry("guide-welcome-closing", head))
+    return entries
+
+
 def _build_html(
     root: Path,
     places: list[SmolenskPlace],
@@ -1160,6 +1207,9 @@ def _build_html(
         ),
     )
     blocks.append(_historical_reference_html(edition))
+    toc_html = guide_toc_html(_smolensk_toc_entries(root, places, edition), edition)
+    if toc_html:
+        blocks.append(toc_html)
     for p in places:
         srcs = _image_srcs_for_place(root, p)
         if not srcs:
@@ -1274,6 +1324,14 @@ figure.heraldry-fig.heraldry-univ .univ-name-caption {
   font-family: 'Triodion', 'Ponomar', 'Cormorant Garamond', serif;
   font-size: 2.35rem; margin-bottom: 0.5rem; font-weight: 400; }
 .lead { color: #444; font-size: 1.05rem; }
+.guide-toc { margin: 0.85rem 0 1.15rem; page-break-inside: avoid; }
+.guide-toc h2 { font-family: 'Triodion', 'Ponomar', 'Cormorant Garamond', serif;
+  font-size: 1.28rem; font-weight: 600; margin: 0.4rem 0 0.55rem; }
+.guide-toc ol { margin: 0.35rem 0 0.65rem 1.25rem; padding: 0;
+  columns: 2; column-gap: 1.5rem; }
+.guide-toc li { margin: 0.18rem 0; line-height: 1.35;
+  font-size: 0.88rem; break-inside: avoid; }
+.guide-toc a { color: #1a5276; text-decoration: none; }
 .lead-follow { color: #333; font-size: 0.98rem; margin: 0.45rem 0 0.72rem;
   line-height: 1.45; text-align: justify; max-width: 42rem; }
 .place { margin-bottom: 2.2rem; page-break-inside: auto; }
@@ -1413,6 +1471,11 @@ def main() -> int:
         action="store_true",
         help="Build even when lint_image_paths reports missing files.",
     )
+    parser.add_argument(
+        "--html-only",
+        action="store_true",
+        help="Write HTML only; skip Playwright PDF.",
+    )
     args = parser.parse_args()
     if not args.skip_image_lint:
         img_errs = lint_city_blocking_errors(
@@ -1471,6 +1534,8 @@ def main() -> int:
             encoding="utf-8",
         )
         print("Written:", html_path)
+        if args.html_only:
+            continue
         if _pdf_via_playwright(
             html_path,
             pdf_path,
@@ -1497,11 +1562,12 @@ def main() -> int:
         out_dir / "{}_{}.html".format(stem, primary),
         out_dir / SMOL_HTML_NAME,
     )
-    shutil.copy2(
-        out_dir / "{}_{}.pdf".format(stem, primary),
-        out_dir / SMOL_PDF_NAME,
-    )
-    print("Primary edition ({}): {}".format(primary, out_dir / SMOL_PDF_NAME))
+    if not args.html_only:
+        shutil.copy2(
+            out_dir / "{}_{}.pdf".format(stem, primary),
+            out_dir / SMOL_PDF_NAME,
+        )
+        print("Primary edition ({}): {}".format(primary, out_dir / SMOL_PDF_NAME))
     return 0
 
 

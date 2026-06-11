@@ -45,6 +45,10 @@ from scripts.city_guide_historical_reference_ru import (
 from scripts.city_guide_moscow_heraldry import moscow_heraldry_html
 from scripts.city_guide_typography import guide_inline_css
 from scripts.city_guide_typography import typography_triple
+from scripts.city_guide_toc import (
+    guide_toc_html,
+    toc_entries_for_jerusalem_guide,
+)
 
 _OTIUM_PARAS_EN: tuple[str, ...] = (
     "OTIUM is the practice of deliberate leisure. In the classical sense, "
@@ -357,7 +361,23 @@ def _preamble_blocks(
             pdf_places,
         ),
     )
+    toc_entries = toc_entries_for_jerusalem_guide(
+        root,
+        places,
+        edition,
+        city_slug=city_slug,
+        project_root=project_root,
+        sort_key=_place_sort_key,
+        has_section=_place_has_section,
+    )
+    toc_html = guide_toc_html(toc_entries, edition)
+    if toc_html:
+        blocks.append(toc_html)
     return blocks
+
+
+def _place_has_section(root: Path, place: dict[str, Any]) -> bool:
+    return bool(_image_srcs_for_place(root, place))
 
 
 def _place_section_blocks(

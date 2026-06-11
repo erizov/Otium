@@ -47,6 +47,12 @@ from scripts.city_guide_historical_reference_ru import (
     reference_text_ru_for_any_city,
 )
 from scripts.city_guide_jerusalem_style_pdf import guide_ui_strings
+from scripts.city_guide_toc import (
+    GuideTocEntry,
+    category_chapter_anchor,
+    guide_toc_html,
+    toc_entries_for_category_guide,
+)
 
 MIN_IMAGE_BYTES = 500
 SPB_HTML_NAME = "spb_guide.html"
@@ -602,16 +608,44 @@ def _build_html(
         )
         if hist:
             blocks.append(hist)
+        hist_title = (
+            HISTORICAL_SECTION_TITLE_RU
+            if edition == "ru"
+            else HISTORICAL_SECTION_TITLE_EN
+        )
+        toc_entries: list[GuideTocEntry] = []
+        if hist:
+            toc_entries.append(
+                GuideTocEntry("guide-historical", hist_title),
+            )
+        toc_entries.extend(
+            toc_entries_for_category_guide(
+                places,
+                edition,
+                chapter_title=_chapter_heading,
+                counts_by_category=counts,
+                has_section=lambda p: bool(
+                    _image_srcs_for_place(spb_root, p),
+                ),
+            ),
+        )
+        toc_html = guide_toc_html(toc_entries, edition)
+        if toc_html:
+            blocks.append(toc_html)
     last_cat: str | None = initial_last_cat
     for p in places:
         cat = p.get("category", "misc")
         if cat != last_cat:
             h2, sub = _chapter_heading(cat, counts.get(cat, 0), edition)
             blocks.append(
-                '<div class="chapter-head">'
+                '<div class="chapter-head" id="{}">'
                 "<h2>{}</h2>"
                 '<p class="chapter-count">{}</p>'
-                "</div>".format(escape(h2), escape(sub)),
+                "</div>".format(
+                    escape(category_chapter_anchor(str(cat))),
+                    escape(h2),
+                    escape(sub),
+                ),
             )
             last_cat = cat
         srcs = _image_srcs_for_place(spb_root, p)
@@ -667,6 +701,15 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
 .guide-title h1 { font-family: 'Cormorant Garamond', serif; font-size: 2.4rem;
   margin-bottom: 0.5rem; }
 .lead { color: #444; font-size: 1.05rem; }
+.guide-toc { margin: 0.85rem 0 1.15rem; page-break-inside: avoid; }
+.guide-toc h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.28rem;
+  font-weight: 600; margin: 0.4rem 0 0.55rem; }
+.guide-toc ol { margin: 0.35rem 0 0.65rem 1.25rem; padding: 0;
+  columns: 2; column-gap: 1.5rem; }
+.guide-toc li { margin: 0.18rem 0; line-height: 1.35;
+  font-size: 0.88rem; break-inside: avoid; }
+.guide-toc a { color: #1a5276; text-decoration: none; }
+.guide-toc li.toc-item--sub { font-size: 0.82rem; margin-left: 0.35rem; }
 .chapter-head { margin-top: 2.2rem; border-bottom: 1px solid #bbb;
   padding-bottom: 0.35rem;
   page-break-after: avoid; break-after: avoid; }
@@ -844,6 +887,11 @@ def main() -> int:
         metavar="LANG",
         help="Guide edition language(s): en, ru (default: both).",
     )
+    parser.add_argument(
+        "--html-only",
+        action="store_true",
+        help="Write HTML only; skip Playwright PDF.",
+    )
     args = parser.parse_args()
     spb_root = args.spb_root.resolve()
     out_dir = (
@@ -889,6 +937,8 @@ def main() -> int:
             encoding="utf-8",
         )
         print("Written:", html_path)
+        if args.html_only:
+            continue
         if use_chunked:
             pdf_ok = _pdf_via_playwright_chunked_spb(
                 spb_root=spb_root,
@@ -930,11 +980,12 @@ def main() -> int:
         out_dir / "{}_{}.html".format(stem, primary),
         out_dir / SPB_HTML_NAME,
     )
-    shutil.copy2(
-        out_dir / "{}_{}.pdf".format(stem, primary),
-        out_dir / SPB_PDF_NAME,
-    )
-    print("Primary edition ({}): {}".format(primary, out_dir / SPB_PDF_NAME))
+    if not args.html_only:
+        shutil.copy2(
+            out_dir / "{}_{}.pdf".format(stem, primary),
+            out_dir / SPB_PDF_NAME,
+        )
+        print("Primary edition ({}): {}".format(primary, out_dir / SPB_PDF_NAME))
     return 0
 
 
