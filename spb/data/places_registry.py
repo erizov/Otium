@@ -54,7 +54,8 @@ def _merge_details(rows: list[dict]) -> list[dict]:
     if not extra:
         return rows
     for row in rows:
-        block = extra.get(row.get("slug"))
+        slug = row.get("slug")
+        block = extra.get(slug) or extra.get("spb_{}".format(slug))
         if not block:
             continue
         for key, val in block.items():

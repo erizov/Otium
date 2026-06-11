@@ -283,11 +283,15 @@ ol.trip-stops a:hover {{ text-decoration: underline; }}
 .heraldry-flag-book img {{ max-height: 6.25rem; max-width: 7rem;
   object-fit: contain; }}
 .heraldry-univ-cell {{ flex: 0 1 5.6rem; max-width: 5.85rem;
-  display: flex; justify-content: center; }}
-.heraldry-univ .heraldry-fig {{ width: 100%; }}
+  display: flex; flex-direction: column; align-items: stretch; }}
+.heraldry-univ-cell--large {{ flex: 0 0 10.5rem; min-width: 10.5rem;
+  max-width: 11rem; }}
+.heraldry-univ .heraldry-fig {{ width: 100%; margin: 0; }}
 .heraldry-univ .heraldry-fig img {{ max-height: 1.2rem; max-width: 100%;
+  width: 100%; object-fit: contain; }}
+.heraldry-univ .heraldry-fig img.heraldry-univ-img--large {{
+  max-height: 2.65rem; width: 100%; height: auto;
   object-fit: contain; }}
-.heraldry-univ-img--large {{ max-height: 2.5rem; }}
 .heraldry-univ-img--on-dark {{ background: #1a3a5f; border-radius: 2px;
   padding: 1px 3px; box-sizing: border-box; }}
 .heraldry-univ-caption {{ font-size: 0.52rem; line-height: 1.18;

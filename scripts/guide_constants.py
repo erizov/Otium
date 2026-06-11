@@ -30,7 +30,6 @@ BUILD_GUIDES = [
     "railway_stations",
     "cemeteries",
     "landmarks",
-    "cafes",
 ]
 
 GUIDE_EXPECTED_COUNTS: dict[str, int] = {
@@ -53,7 +52,6 @@ GUIDE_EXPECTED_COUNTS: dict[str, int] = {
     "railway_stations": 9,
     "cemeteries": 9,
     "landmarks": 14,
-    "cafes": 11,
 }
 
 

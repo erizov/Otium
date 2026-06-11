@@ -12,7 +12,8 @@ _PROJECT_ROOT = Path(__file__).resolve().parent.parent
 if str(_PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(_PROJECT_ROOT))
 
-from scripts.guide_loader import GUIDES, load_places
+from scripts.guide_loader import GUIDES, load_places, load_stories
+from scripts.merge_moscow_guide_stories import classify_story_edition
 
 
 def _place_dict(guide: str, idx: int, row: dict[str, Any]) -> dict[str, Any]:
@@ -32,10 +33,11 @@ def _place_dict(guide: str, idx: int, row: dict[str, Any]) -> dict[str, Any]:
         hi_txt = " · ".join(str(x) for x in highlights[:12])
     addr = str(row.get("address") or "").strip()
     subtitle = addr if addr else hi_txt
+    name = str(row.get("name") or "").strip()
     out: dict[str, Any] = {
         "slug": slug,
         "category": guide,
-        "name_ru": str(row.get("name") or "").strip(),
+        "name_ru": name,
         "name_en": "",
         "subtitle_en": subtitle,
         "history": str(row.get("history") or "").strip(),
@@ -44,6 +46,12 @@ def _place_dict(guide: str, idx: int, row: dict[str, Any]) -> dict[str, Any]:
         "architecture_style": str(row.get("style") or "").strip(),
         "address": addr,
     }
+    story = str(load_stories(guide).get(name) or "").strip()
+    if story:
+        if classify_story_edition(story) == "ru":
+            out["stories_ru"] = [story]
+        else:
+            out["stories_en"] = [story]
     if main:
         out["image_rel_path"] = main
     if extras:

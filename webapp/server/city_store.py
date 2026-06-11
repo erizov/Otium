@@ -8,6 +8,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
+from scripts.city_guide_core import drop_excluded_category_places
+
 
 @dataclass(frozen=True)
 class CityPaths:
@@ -125,7 +127,7 @@ def load_city_places(project_root: Path, city_slug: str) -> list[dict[str, Any]]
                     }
                 )
             row["additional_images"] = filtered[:4]
-    return rows
+    return drop_excluded_category_places(rows)
 
 
 def load_overlay_details(project_root: Path, city_slug: str) -> dict[str, dict[str, Any]]:

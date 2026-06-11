@@ -67,5 +67,6 @@ PLACES_OF_WORSHIP_STORIES: dict[str, str] = {
     "Церковь Успения в Печатниках": "The majority of the population belongs to the Russian Orthodox Church, which consequently has by far the largest number of churches; (1154 in 2017) compared to over 1600 before the 1917 revolution; much smaller numbers belong to various Eastern and Western denominations.",
     "Церковь Успения в Путинках": "The majority of the population belongs to the Russian Orthodox Church, which consequently has by far the largest number of churches; (1154 in 2017) compared to over 1600 before the 1917 revolution; much smaller numbers belong to various Eastern and Western denominations.",
     "Церковь Флора и Лавра на Зацепе": "The majority of the population belongs to the Russian Orthodox Church, which consequently has by far the largest number of churches; (1154 in 2017) compared to over 1600 before the 1917 revolution; much smaller numbers belong to various Eastern and Western denominations.",
+    "Буддийский храм Тубден Шеддублинг": "В 2008 году в Останкино открыли единственный полноценный буддийский храм Москвы в тибетской традиции — с главным залом, ступой и библиотекой; сюда приходят на медитации и праздники по лунному календарю.",
 }
 

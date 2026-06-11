@@ -28,6 +28,30 @@ _SENTENCE_SPLIT_RE = re.compile(
     r"(?<=[.!?…])\s+(?=[\"«(A-ZА-ЯЁ0-9])",
 )
 _NEUTRAL_META_RE = re.compile(r"^[\d\s\u2013\-–—.,/()+]+$")
+_SYNTHETIC_RU_STORY_RE = re.compile(
+    r"место, которое стоит увидеть в контексте",
+    re.IGNORECASE,
+)
+_SYNTHETIC_EN_STORY_RE = re.compile(
+    r"^A notable (?:Moscow|Saint Petersburg) .+, part of the city's .+\.",
+    re.IGNORECASE,
+)
+
+
+def is_synthetic_tourist_story(text: str) -> bool:
+    """True for auto-generated category filler, not curated place stories."""
+    s = str(text).strip()
+    if not s:
+        return False
+    if _SYNTHETIC_RU_STORY_RE.search(s):
+        return True
+    if _SYNTHETIC_EN_STORY_RE.match(s):
+        return True
+    if s.startswith("Заметный объект Санкт-Петербурга в контексте"):
+        return True
+    if "Его история связана с" in s and _SYNTHETIC_RU_STORY_RE.search(s):
+        return True
+    return False
 _LANDMARK_STUB_RE = re.compile(
     r"^.+\s[—–-]\slandmark in [^.]+\.?\s*$",
     re.IGNORECASE,
@@ -763,7 +787,111 @@ def merge_narrative_html(
 
 
 def filter_stories(place: Mapping[str, Any], edition: str) -> list[str]:
-    return pick_list_items(place, edition, "stories")
+    items = pick_list_items(place, edition, "stories")
+    kept = [
+        str(st).strip()
+        for st in items
+        if str(st).strip() and not is_synthetic_tourist_story(str(st))
+    ]
+    return kept
+
+
+def _extract_english_lead(text: str) -> str:
+    """First English clause from a mixed RU/EN Wikipedia snippet."""
+    from scripts.fetch_place_stories import MIN_STORY_CHARS
+
+    s = str(text).strip()
+    if not s:
+        return ""
+    if text_for_edition(s, "en"):
+        return s
+    for marker in ("(Russian:", "(Russian", "(рус.", "(Рус."):
+        idx = s.find(marker)
+        if idx >= MIN_STORY_CHARS:
+            lead = s[:idx].strip().rstrip("(").strip()
+            if text_for_edition(lead, "en"):
+                return lead
+    parts = re.split(r"\s[—–-]\s", s, maxsplit=1)
+    if len(parts) == 2 and text_for_edition(parts[0], "en"):
+        return parts[0].strip()
+    return ""
+
+
+def _tourist_story_fallback(
+    place: Mapping[str, Any],
+    edition: str,
+) -> str:
+    """
+    Short tourist-style note when no curated ``stories_*`` list exists.
+
+    Uses the first sentence of history / significance for this edition.
+    """
+    from scripts.fetch_place_stories import MAX_STORY_CHARS, MIN_STORY_CHARS
+
+    chunks: list[str] = []
+    for base in ("history", "significance", "description"):
+        text = pick_text_field(place, edition, base)
+        if text:
+            chunks.append(text)
+    if not chunks:
+        alt = opposite_edition(edition)
+        alt_items = pick_list_items(place, alt, "stories")
+        if alt_items:
+            tr = get_edition_translator()
+            if tr is not None:
+                translated = translate_for_edition(
+                    alt_items[0],
+                    edition,
+                    kind="prose",
+                    translator=tr,
+                )
+                if translated:
+                    chunks.append(translated)
+            elif edition == "en":
+                lead = _extract_english_lead(alt_items[0])
+                if lead:
+                    chunks.append(lead)
+        if not chunks:
+            alt_raw = place.get("stories_ru" if alt == "ru" else "stories_en")
+            if isinstance(alt_raw, list) and alt_raw:
+                if edition == "en":
+                    lead = _extract_english_lead(str(alt_raw[0]))
+                    if lead:
+                        chunks.append(lead)
+    if not chunks and edition == "en":
+        bits: list[str] = []
+        year = str(place.get("year_built") or "").strip()
+        if year and year.isdigit():
+            bits.append("Dating from {}.".format(year))
+        for key in ("subtitle_en", "address", "architecture_style"):
+            text = str(place.get(key) or "").strip()
+            if text_for_edition(text, "en"):
+                bits.append(text.rstrip(".") + ".")
+        cat = str(place.get("category") or "").replace("_", " ")
+        if cat and text_for_edition(cat, "en"):
+            bits.append("A notable Moscow {}.".format(cat))
+        if bits:
+            chunks.append(" ".join(bits))
+    if not chunks:
+        return ""
+    combined = " ".join(chunks).strip()
+    parts = _SENTENCE_SPLIT_RE.split(combined)
+    out: list[str] = []
+    for part in parts:
+        sentence = part.strip()
+        if not is_substantive_text(sentence):
+            continue
+        if not text_for_edition(sentence, edition):
+            continue
+        out.append(sentence)
+        if len(" ".join(out)) >= MIN_STORY_CHARS:
+            break
+    snippet = " ".join(out).strip()
+    if len(snippet) < MIN_STORY_CHARS:
+        return ""
+    if len(snippet) > MAX_STORY_CHARS:
+        snippet = snippet[: MAX_STORY_CHARS - 3].rsplit(" ", 1)[0] + "..."
+    return snippet
 
 
 def subtitle_html_for_edition(place: Mapping[str, Any], edition: str) -> str:

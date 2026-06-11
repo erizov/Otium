@@ -6,6 +6,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+from scripts.city_guide_core import is_excluded_place_category
 from scripts.city_guide_naming import pdf_expand_sidecar_filename
 
 
@@ -36,8 +37,15 @@ def load_pdf_expand_rows(data_dir: Path, city_slug: str) -> list[dict]:
 
 
 def drop_empty_place_rows(rows: list[dict]) -> list[dict]:
-    """Remove stray ``{}`` entries from JSON arrays."""
-    return [r for r in rows if r.get("slug") or r.get("image_rel_path")]
+    """Remove stray ``{}`` entries and excluded food categories."""
+    out: list[dict] = []
+    for row in rows:
+        if not (row.get("slug") or row.get("image_rel_path")):
+            continue
+        if is_excluded_place_category(str(row.get("category") or "")):
+            continue
+        out.append(row)
+    return out
 
 
 def merge_detail_overlays(

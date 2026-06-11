@@ -38,6 +38,19 @@ def moscow_history_coats(edition: str) -> tuple[tuple[str, str], ...]:
     return tuple(rows)
 
 
+def _university_image_rel(item: dict[str, Any], edition: str) -> str | None:
+    """Edition-specific logo path; RU may reuse ``image_en`` (e.g. MFTI)."""
+    if edition == "ru":
+        keys = ("image_ru", "image_en", "image")
+    else:
+        keys = ("image_en", "image")
+    for key in keys:
+        value = item.get(key)
+        if isinstance(value, str) and value.strip():
+            return value.strip()
+    return None
+
+
 def moscow_universities(
     edition: str,
 ) -> tuple[tuple[str, str, bool, bool], ...]:
@@ -52,13 +65,43 @@ def moscow_universities(
     for item in load_moscow_title_assets().get("universities", []):
         if not isinstance(item, dict):
             continue
-        image = item.get("image")
+        image = _university_image_rel(item, edition)
         caption = item.get(key) or item.get("name_ru")
         dark_bg = bool(item.get("dark_bg"))
         large_logo = bool(item.get("large_logo"))
         if isinstance(image, str) and isinstance(caption, str):
             rows.append((image, caption, dark_bg, large_logo))
     return tuple(rows)
+
+
+def moscow_bundled_asset_pairs() -> tuple[tuple[str, str], ...]:
+    """(images/dest rel, data/bundled rel) copied into ``moscow/images/``."""
+    pairs: list[tuple[str, str]] = []
+    for item in load_moscow_title_assets().get("universities", []):
+        if not isinstance(item, dict):
+            continue
+        bundled = item.get("bundled")
+        if not isinstance(bundled, str) or not bundled.strip():
+            continue
+        dest = _university_image_rel(item, "en") or item.get("image")
+        if isinstance(dest, str) and dest.strip():
+            pairs.append((dest.strip(), bundled.strip()))
+    return tuple(pairs)
+
+
+def install_moscow_bundled_assets(output_dir: Path) -> int:
+    """Copy git-tracked bundled logos into ``moscow/images/``."""
+    root = output_dir.resolve()
+    installed = 0
+    for dest_rel, bundled_rel in moscow_bundled_asset_pairs():
+        src = root / bundled_rel.replace("\\", "/")
+        dest = root / dest_rel.replace("\\", "/")
+        if not src.is_file():
+            continue
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        dest.write_bytes(src.read_bytes())
+        installed += 1
+    return installed
 
 
 def moscow_download_pairs() -> tuple[tuple[str, list[str]], ...]:
@@ -69,7 +112,9 @@ def moscow_download_pairs() -> tuple[tuple[str, list[str]], ...]:
         for item in data.get(block_key, []):
             if not isinstance(item, dict):
                 continue
-            image = item.get("image")
+            if item.get("bundled"):
+                continue
+            image = _university_image_rel(item, "en") or item.get("image")
             urls = item.get("urls")
             if not isinstance(image, str) or not isinstance(urls, list):
                 continue

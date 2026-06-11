@@ -15,7 +15,10 @@ if str(_PROJECT_ROOT) not in sys.path:
 from spb.whitelist import default_whitelist_path, url_is_whitelisted
 
 from scripts.download_spb_images import MIN_IMAGE_BYTES, _download_place_image
-from scripts.moscow_title_assets_data import moscow_download_pairs
+from scripts.moscow_title_assets_data import (
+    install_moscow_bundled_assets,
+    moscow_download_pairs,
+)
 
 
 def download_moscow_title_assets(
@@ -35,6 +38,9 @@ def download_moscow_title_assets(
     """
     wpath = default_whitelist_path()
     root = output_dir.resolve()
+    bundled = install_moscow_bundled_assets(root)
+    if bundled:
+        print("bundled: {} logo(s)".format(bundled))
     pairs = moscow_download_pairs()
     failures = 0
     for i, (rel, urls) in enumerate(pairs):

@@ -110,9 +110,13 @@ def _univ_fig_if_exists(
 
         img_class += " heraldry-univ-img--large"
 
+    cell_class = "heraldry-univ-cell"
+    if large_logo:
+        cell_class += " heraldry-univ-cell--large"
+
     return (
 
-        '<div class="heraldry-univ-cell">'
+        '<div class="{}">'
 
         '<figure class="heraldry-fig heraldry-univ" title="{}">'
 
@@ -123,6 +127,8 @@ def _univ_fig_if_exists(
         "</figure></div>"
 
     ).format(
+
+        cell_class,
 
         escape(alt),
 

@@ -26,6 +26,7 @@ from scripts.build_pdf import (
 from scripts.city_guide_jerusalem_style_pdf import PDF_CHUNK_MAX_PLACES
 from scripts.city_guide_core import (
     copy_built_guide_pdf_to_final_guides,
+    is_substantive_text,
     places_for_pdf,
 )
 from scripts.city_guide_narrative import (
@@ -108,13 +109,6 @@ _TITLE_UNIVERSITIES: tuple[tuple[str, str], ...] = (
         (
             "Первый Санкт-Петербургский государственный медицинский "
             "университет им. академика И. П. Павлова"
-        ),
-    ),
-    (
-        "images/title_univ_rshu.jpg",
-        (
-            "Российский государственный гидрометеорологический "
-            "университет"
         ),
     ),
     (
@@ -412,20 +406,17 @@ def _place_block(
     if narrative:
         chunks.append(narrative)
     stories = filter_stories(p, edition)
-    if stories:
-        st_li = "\n".join(
-            "<li>{}</li>".format(escape(str(st).strip()))
-            for st in stories
-            if str(st).strip()
+    story_lines = [
+        str(st).strip()
+        for st in stories
+        if is_substantive_text(str(st).strip())
+    ]
+    if story_lines:
+        inner = "\n".join(
+            '<p class="prose place-story">{}</p>'.format(escape(line))
+            for line in story_lines
         )
-        if st_li:
-            chunks.append(
-                "<h4>{}</h4>\n"
-                "<ul class=\"stories\">{}</ul>".format(
-                    escape(s["stories_heading"]),
-                    st_li,
-                )
-            )
+        chunks.append('<div class="place-story-block">{}</div>'.format(inner))
     chunks.append("</section>")
     return "\n".join(chunks)
 
@@ -702,8 +693,10 @@ h4 { font-size: 0.95rem; text-transform: uppercase;
 img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
 .prose, .place-desc p { margin: 0.45rem 0; line-height: 1.5;
   text-align: justify; }
-ul.facts, ul.stories { margin: 0.3rem 0 0.6rem 1.2rem; padding: 0; }
-ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
+.place-story-block { margin: 0.5rem 0 0.75rem 0; }
+.place-story-block .place-story { font-style: italic; color: #4a5568; }
+ul.facts { margin: 0.3rem 0 0.6rem 1.2rem; padding: 0; }
+ul.facts li { margin: 0.25rem 0; line-height: 1.45; }
 """
     doc_title = s["html_title"].format(city_h1)
     return (

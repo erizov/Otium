@@ -605,7 +605,7 @@ Refresh: ``python scripts/report_city_guide_stats.py --write-readme``
 | `barcelona` | 32 |
 | `berlin` | 35 |
 | `boston` | 25 |
-| `budapest` | 30 |
+| `budapest` | 29 |
 | `chernivtsi` | 29 |
 | `copenhagen` | 26 |
 | `dubai` | 29 |
@@ -623,7 +623,7 @@ Refresh: ``python scripts/report_city_guide_stats.py --write-readme``
 | `madrid` | 32 |
 | `minsk` | 29 |
 | `montreal` | 37 |
-| `moscow` | 319 |
+| `moscow` | 311 |
 | `new_york` | 31 |
 | `novosibirsk` | 25 |
 | `odessa` | 24 |
@@ -634,7 +634,7 @@ Refresh: ``python scripts/report_city_guide_stats.py --write-readme``
 | `san_francisco` | 23 |
 | `singapore` | 26 |
 | `smolensk` | 68 |
-| `spb` | 99 |
+| `spb` | 98 |
 | `tokyo` | 26 |
 | `tver` | 25 |
 | `vatican` | 25 |
@@ -645,7 +645,7 @@ Refresh: ``python scripts/report_city_guide_stats.py --write-readme``
 | `vologda` | 21 |
 | `yaroslavl` | 25 |
 
-**Totals:** 45 cities · **1664** unique curated places · 113 PDF expand sidecar rows (filler images; not counted in Places).
+**Totals:** 45 cities · **1654** unique curated places · 113 PDF expand sidecar rows (filler images; not counted in Places).
 <!-- /city-guide-place-counts -->
 Refresh after dedup or grow:
 python scripts/report_city_guide_stats.py --write-readme

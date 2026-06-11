@@ -124,20 +124,28 @@ def _pick_story_snippet(text: str) -> str:
     return result[:MAX_STORY_CHARS]
 
 
+def fetch_story_for_place_lang(place_name: str, lang: str) -> str:
+    """Fetch one tourist-style snippet from Wikipedia (*lang*: ``en`` or ``ru``)."""
+    time.sleep(REQUEST_DELAY_SEC)
+    page_ids = _wikipedia_search(place_name, lang=lang)
+    for pid in page_ids:
+        time.sleep(REQUEST_DELAY_SEC * 0.5)
+        extract = _wikipedia_extract(pid, lang=lang)
+        if extract:
+            story = _pick_story_snippet(extract)
+            if story:
+                return story
+    return ""
+
+
 def _fetch_story_for_place(place_name: str) -> str:
     """
     Try Wikipedia en then ru (round-robin); return story snippet or empty.
     """
     for lang in ("en", "ru"):
-        time.sleep(REQUEST_DELAY_SEC)
-        page_ids = _wikipedia_search(place_name, lang=lang)
-        for pid in page_ids:
-            time.sleep(REQUEST_DELAY_SEC * 0.5)
-            extract = _wikipedia_extract(pid, lang=lang)
-            if extract:
-                story = _pick_story_snippet(extract)
-                if story:
-                    return story
+        story = fetch_story_for_place_lang(place_name, lang)
+        if story:
+            return story
     return ""
 
 

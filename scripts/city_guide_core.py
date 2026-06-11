@@ -15,6 +15,30 @@ _P = TypeVar("_P", bound=dict[str, Any])
 MIN_IMAGE_BYTES = 500
 _MIN_VECTOR_BYTES = 32
 
+# Food venues are out of scope for curated sightseeing guides.
+EXCLUDED_PLACE_CATEGORIES: frozenset[str] = frozenset({
+    "cafes",
+    "restaurants",
+    "cafe",
+    "restaurant",
+})
+
+
+def is_excluded_place_category(category: str | None) -> bool:
+    """True when a place row should not appear in city guides."""
+    if not category:
+        return False
+    return str(category).strip().lower() in EXCLUDED_PLACE_CATEGORIES
+
+
+def drop_excluded_category_places(places: Sequence[_P]) -> list[_P]:
+    """Remove cafe/restaurant category rows from a place list."""
+    return [
+        p for p in places
+        if not is_excluded_place_category(str(p.get("category") or ""))
+    ]
+
+
 # Lone filler tokens in JSON/detail merges — omit section if only this.
 _PLACEHOLDER_TOKENS: frozenset[str] = frozenset({
     "—",
@@ -259,7 +283,7 @@ def places_for_pdf(
 
     ``suppress_images_for_pdf`` rows are omitted (no text-only fallback).
     """
-    rows = list(places)
+    rows = drop_excluded_category_places(list(places))
     if dedupe_sidecar:
         rows = dedupe_pdf_sidecar_places(rows, city_slug=city_slug)
     out = [p for p in rows if place_has_pdf_image(root, p)]

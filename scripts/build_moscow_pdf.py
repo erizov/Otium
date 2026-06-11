@@ -14,6 +14,7 @@ if str(_PROJECT_ROOT) not in sys.path:
 
 from scripts.city_guide_jerusalem_style_pdf import run_build_pdf_main
 from scripts.city_guide_title_heraldry_assets import title_symbols_for_slug
+from scripts.moscow_title_assets_data import install_moscow_bundled_assets
 from webapp.server.city_store import load_city_places
 
 
@@ -55,6 +56,8 @@ def main() -> int:
             cmd.extend(rest)
         return subprocess.call(cmd, cwd=str(_PROJECT_ROOT))
 
+    moscow_root = _PROJECT_ROOT / "moscow"
+    install_moscow_bundled_assets(moscow_root)
     places = load_city_places(_PROJECT_ROOT, "moscow")
     return run_build_pdf_main(
         project_root=_PROJECT_ROOT,

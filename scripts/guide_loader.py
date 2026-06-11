@@ -20,7 +20,7 @@ GUIDES = [
     "monasteries", "places_of_worship", "parks", "museums", "palaces",
     "buildings", "sculptures", "places", "squares", "metro", "theaters",
     "viewpoints", "bridges", "markets", "libraries", "railway_stations",
-    "cemeteries", "landmarks", "cafes",
+    "cemeteries", "landmarks",
 ]
 
 SUBDIR_TO_GUIDE = {
@@ -42,7 +42,6 @@ SUBDIR_TO_GUIDE = {
     "moscow_railway_stations": "railway_stations",
     "moscow_cemeteries": "cemeteries",
     "moscow_landmarks": "landmarks",
-    "moscow_cafes": "cafes",
 }
 
 GUIDE_TO_SUBDIR = {v: k for k, v in SUBDIR_TO_GUIDE.items()}
