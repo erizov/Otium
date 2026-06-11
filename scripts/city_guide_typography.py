@@ -274,7 +274,29 @@ ol.trip-stops a:hover {{ text-decoration: underline; }}
 .heraldry-fig {{ margin: 0; }}
 .heraldry-fig img {{ width: auto; display: block; margin: 0 auto;
   border-radius: 2px; }}
-.heraldry-coat-book img {{ max-height: 3.35rem; object-fit: contain; }}
+.heraldry-coat-book img {{ max-height: 6.25rem; max-width: 7rem;
+  object-fit: contain; }}
+.heraldry-strip.heraldry-universities {{ gap: 0.2rem 0.35rem;
+  margin: 0.12rem 0 0.35rem; align-items: flex-start; }}
+.heraldry-coat-hist img {{ max-height: 6.25rem; max-width: 7rem;
+  object-fit: contain; }}
+.heraldry-flag-book img {{ max-height: 6.25rem; max-width: 7rem;
+  object-fit: contain; }}
+.heraldry-univ-cell {{ flex: 0 1 5.6rem; max-width: 5.85rem;
+  display: flex; justify-content: center; }}
+.heraldry-univ .heraldry-fig {{ width: 100%; }}
+.heraldry-univ .heraldry-fig img {{ max-height: 1.2rem; max-width: 100%;
+  object-fit: contain; }}
+.heraldry-univ-img--large {{ max-height: 2.5rem; }}
+.heraldry-univ-img--on-dark {{ background: #1a3a5f; border-radius: 2px;
+  padding: 1px 3px; box-sizing: border-box; }}
+.heraldry-univ-caption {{ font-size: 0.52rem; line-height: 1.18;
+  margin: 0.12rem 0 0; padding: 0 0.06rem; color: #252525;
+  text-align: center; font-weight: 500; }}
+.heraldry-motto {{ text-align: center; max-width: 18rem; margin: 0.18rem auto;
+  width: 100%; }}
+.motto-line {{ font-family: {title}; font-size: 1rem;
+  margin: 0; color: #333; line-height: 1.35; }}
 .guide-title h1.guide-title-main {{ font-family: {title};
   font-size: 2.35rem; margin-bottom: 0.5rem; font-weight: 600; }}
 .lead {{ color: #444; font-size: 1.05rem; }}
@@ -293,6 +315,8 @@ h4 {{ font-family: {title}; font-size: 0.95rem; text-transform: uppercase;
 img {{ max-width: 100%; height: auto; display: block; border-radius: 4px; }}
 .prose, .place-desc p {{ margin: 0.45rem 0; line-height: 1.5;
   text-align: justify; }}
+.place-story-block {{ margin: 0.5rem 0 0.75rem 0; }}
+.place-story-block .place-story {{ font-style: italic; color: #4a5568; }}
 ul.facts, ul.stories {{ margin: 0.3rem 0 0.6rem 1.2rem; padding: 0; }}
 ul.facts li, ul.stories li {{ margin: 0.25rem 0; line-height: 1.45; }}
 {hebrew_sub}""".format(

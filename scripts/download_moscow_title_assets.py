@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
-"""Wikimedia assets for the Moscow combined guide title page (output/images/)."""
+"""Title-page heraldry and university logos for the Moscow guide."""
 
 from __future__ import annotations
 
 import argparse
-import shutil
 import sys
 import time
 from pathlib import Path
@@ -15,62 +14,8 @@ if str(_PROJECT_ROOT) not in sys.path:
 
 from spb.whitelist import default_whitelist_path, url_is_whitelisted
 
-from scripts.download_spb_images import (
-    MIN_IMAGE_BYTES,
-    _TITLE_PAGE_ASSETS,
-    _download_place_image,
-)
-
-_MOSCOW_HERALDRY_URLS: tuple[tuple[str, str], ...] = (
-    (
-        "images/title_msk_russian_empire_lesser.svg",
-        (
-            "https://upload.wikimedia.org/wikipedia/commons/b/be/"
-            "Lesser_coat_of_arms_of_the_Russian_Empire.svg"
-        ),
-    ),
-    (
-        "images/title_msk_bolshoi_basrelief_2025.jpg",
-        (
-            "https://upload.wikimedia.org/wikipedia/commons/6/60/"
-            "Moscow_-_2025_-_The_bas-relief_of_Coat_of_Arms_of_the_Russian_"
-            "Empire_on_facade_of_Bolshoi_Theatre1.jpg"
-        ),
-    ),
-    (
-        "images/title_msk_moscow_coat_soviet.svg",
-        (
-            "https://upload.wikimedia.org/wikipedia/commons/9/91/"
-            "Coat_of_Arms_of_Moscow_%28Soviet%29.svg"
-        ),
-    ),
-    (
-        "images/title_msk_moscow_coat_empire.jpg",
-        (
-            "https://upload.wikimedia.org/wikipedia/commons/5/5c/"
-            "Coat_of_Arms_of_Moscow_%28Russian_Empire%29.jpg"
-        ),
-    ),
-)
-
-
-def _univ_assets() -> tuple[tuple[str, str], ...]:
-    return tuple(
-        x for x in _TITLE_PAGE_ASSETS if x[0].startswith("images/title_univ_")
-    )
-
-
-def _copy_univ_from_spb(output_root: Path, rel: str) -> bool:
-    """Reuse files from spb/images/ when the user already ran download_spb_images."""
-    if not rel.startswith("images/title_univ_"):
-        return False
-    spb_file = _PROJECT_ROOT / "spb" / rel.replace("\\", "/")
-    if not spb_file.is_file() or spb_file.stat().st_size < MIN_IMAGE_BYTES:
-        return False
-    dest = output_root / rel.replace("\\", "/")
-    dest.parent.mkdir(parents=True, exist_ok=True)
-    shutil.copy2(spb_file, dest)
-    return True
+from scripts.download_spb_images import MIN_IMAGE_BYTES, _download_place_image
+from scripts.moscow_title_assets_data import moscow_download_pairs
 
 
 def download_moscow_title_assets(
@@ -84,34 +29,33 @@ def download_moscow_title_assets(
     delay_sec: float = 3.5,
 ) -> int:
     """
-    Download Moscow heraldry + SPb university logos into output_dir.
+    Download Moscow heraldry, city symbols, and university logos.
 
     Returns 0 if all attempted downloads succeeded or were skipped (exists).
     """
     wpath = default_whitelist_path()
     root = output_dir.resolve()
-    pairs = _MOSCOW_HERALDRY_URLS + _univ_assets()
+    pairs = moscow_download_pairs()
     failures = 0
-    for i, (rel, url) in enumerate(pairs):
+    for i, (rel, urls) in enumerate(pairs):
         dest = root / rel.replace("\\", "/")
         if dest.is_file() and not force:
             print("exists: {}".format(rel))
             continue
-        if not force and _copy_univ_from_spb(root, rel.replace("\\", "/")):
-            print("copy spb -> {}".format(rel))
-            continue
-        if not no_whitelist_check and not url_is_whitelisted(
-            url,
-            whitelist_path=wpath,
-        ):
-            print(
-                "skip {}: URL not whitelisted".format(rel),
-                file=sys.stderr,
-            )
-            failures += 1
-            continue
+        allowed_urls = urls
+        if not no_whitelist_check:
+            allowed_urls = [
+                u for u in urls if url_is_whitelisted(u, whitelist_path=wpath)
+            ]
+            if not allowed_urls:
+                print(
+                    "skip {}: URL not whitelisted".format(rel),
+                    file=sys.stderr,
+                )
+                failures += 1
+                continue
         ok, msg = _download_place_image(
-            [url],
+            allowed_urls,
             dest,
             timeout_sec=timeout_sec,
             retries_429=retries_429,
@@ -135,7 +79,7 @@ def main() -> int:
         "--output-dir",
         type=Path,
         default=_PROJECT_ROOT / "moscow",
-        help="Guide output root (default: output/)",
+        help="Guide output root (default: moscow/)",
     )
     parser.add_argument(
         "--force",

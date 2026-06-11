@@ -90,20 +90,20 @@ def _scan_guide_emblem_files(city_root: Path) -> list[tuple[str, str]]:
 # ``scripts.download_moscow_title_assets._MOSCOW_HERALDRY_URLS``.
 MOSCOW_OUTPUT_TITLE_STRIP: tuple[tuple[str, str], ...] = (
     (
-        "images/title_msk_russian_empire_lesser.svg",
-        "Малый герб Российской империи",
-    ),
-    (
-        "images/title_msk_bolshoi_basrelief_2025.jpg",
-        "Барельеф герба на фасаде Большого театра",
-    ),
-    (
-        "images/title_msk_moscow_coat_soviet.svg",
-        "Герб Москвы (советский вариант)",
+        "images/title_msk_coat_1781.png",
+        "Герб Москвы, 1781",
     ),
     (
         "images/title_msk_moscow_coat_empire.jpg",
-        "Герб Москвы (Российская империя)",
+        "Герб Москвы, 1883",
+    ),
+    (
+        "images/title_msk_coat_gubernia.png",
+        "Герб Московской губернии",
+    ),
+    (
+        "images/title_msk_moscow_coat_soviet.svg",
+        "Герб Москвы, 1924",
     ),
 )
 

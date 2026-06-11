@@ -855,6 +855,10 @@ def reference_text_en_for_any_city(
     project_root: Path | None = None,
 ) -> str:
     """English historical blurb; Smolensk builtin, else EN dict, else RU translate."""
+    if project_root is not None:
+        path = historical_reference_en_override_path(project_root, slug)
+        if path.is_file():
+            return path.read_text(encoding="utf-8")
     if slug == "smolensk":
         from scripts.build_smolensk_pdf import _HISTORICAL_REFERENCE_EN
 
@@ -884,6 +888,16 @@ def historical_reference_ru_override_path(
 ) -> Path:
     """Per-city UTF-8 file; when present, replaces built-in RU historical text."""
     return project_root / slug / "data" / "{}_historical_reference_ru.txt".format(
+        slug,
+    )
+
+
+def historical_reference_en_override_path(
+    project_root: Path,
+    slug: str,
+) -> Path:
+    """Per-city UTF-8 file; when present, replaces built-in EN historical text."""
+    return project_root / slug / "data" / "{}_historical_reference_en.txt".format(
         slug,
     )
 

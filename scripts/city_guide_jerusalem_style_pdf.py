@@ -42,6 +42,7 @@ from scripts.city_guide_historical_reference_ru import (
     reference_text_en_for_any_city,
     reference_text_ru_for_any_city,
 )
+from scripts.city_guide_moscow_heraldry import moscow_heraldry_html
 from scripts.city_guide_typography import guide_inline_css
 from scripts.city_guide_typography import typography_triple
 
@@ -78,7 +79,7 @@ def _guide_strings(edition: str) -> dict[str, str]:
         return {
             "lead": "Путеводитель. Объектов в этом выпуске: {}.",
             "facts_heading": "Факты и детали",
-            "stories_heading": "Истории и легенды",
+            "stories_heading": "Интересно знать",
             "history_heading": "История",
             "significance_heading": "Значение",
             "address": "Адрес:",
@@ -90,7 +91,7 @@ def _guide_strings(edition: str) -> dict[str, str]:
     return {
         "lead": "Guide. Places in this edition: {}.",
         "facts_heading": "Facts and details",
-        "stories_heading": "Stories and legends",
+        "stories_heading": "Did you know?",
         "history_heading": "History",
         "significance_heading": "Significance",
         "address": "Address:",
@@ -206,20 +207,17 @@ def place_block(
     if narrative:
         chunks.append(narrative)
     stories = filter_stories(p, edition)
-    if stories:
-        st_li = "\n".join(
-            "<li>{}</li>".format(escape(str(st).strip()))
-            for st in stories
-            if is_substantive_text(str(st).strip())
+    story_lines = [
+        str(st).strip()
+        for st in stories
+        if is_substantive_text(str(st).strip())
+    ]
+    if story_lines:
+        inner = "\n".join(
+            '<p class="prose place-story">{}</p>'.format(escape(line))
+            for line in story_lines
         )
-        if st_li:
-            chunks.append(
-                "<h4>{}</h4>\n"
-                "<ul class=\"stories\">{}</ul>".format(
-                    escape(s["stories_heading"]),
-                    st_li,
-                )
-            )
+        chunks.append('<div class="place-story-block">{}</div>'.format(inner))
     chunks.append("</section>")
     return "\n".join(chunks)
 
@@ -324,18 +322,26 @@ def _preamble_blocks(
     )
     s = _guide_strings(edition)
     blocks: list[str] = [cover_otium_html(edition)]
+    if city_slug == "moscow":
+        heraldry_block = moscow_heraldry_html(
+            root,
+            title_symbols_class,
+            edition,
+        )
+    else:
+        heraldry_block = heraldry_html(
+            root,
+            title_symbols_class,
+            title_symbols,
+            edition,
+        )
     blocks.append(
         '<header class="guide-title">'
         "{}"
         "<h1 class=\"guide-title-main\">{}</h1>"
         "<p class=\"lead\">{}</p>"
         "</header>".format(
-            heraldry_html(
-                root,
-                title_symbols_class,
-                title_symbols,
-                edition,
-            ),
+            heraldry_block,
             escape(display_title),
             escape(s["lead"].format(len(pdf_places))),
         ),
