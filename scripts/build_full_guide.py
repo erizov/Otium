@@ -87,6 +87,8 @@ CHAPTER_CONFIG: list[tuple[str, str, str]] = [
      "Iconic места: от Красной площади до Москва-Сити."),
     ("cafes", "Исторические кафе Москвы",
      "Легендарные кафе и рестораны Москвы."),
+    ("osobnjaki", "Особняки Москвы",
+     "50 городских особняков и усадебных домов Москвы."),
 ]
 
 # 6 famous Moscow places for preface
@@ -159,7 +161,7 @@ _COMBINED_CSS = """
   .block-label { margin: 0.6em 0 0.15em 0.3em; text-transform: uppercase;
     font-weight: 600; color: #6b7b8a !important; }
   .body-text { margin: 0 0 0.25em 0.2em; font-size: 9pt; line-height: 1.4;
-    text-align: left; max-width: 42em; color: #1c1b19;
+    text-align: left; color: #1c1b19;
     font-family: "Source Serif 4", Georgia, serif; }
   .story-text { font-style: italic; color: #4a5568; font-size: 9pt;
     margin: 0 0 0.25em 0.2em; line-height: 1.4; }
@@ -170,7 +172,7 @@ _COMBINED_CSS = """
     background: linear-gradient(165deg, #f8f6f2 0%, #ebe8e2 35%, #e8e4dc 70%,
       #f5f2ec 100%);
     page-break-after: always; page-break-inside: avoid; box-sizing: border-box; }
-  .front-page .fp-inner { max-width: 42em; padding: 1.45em 1.75em;
+  .front-page .fp-inner { padding: 1.45em 1.75em;
     border: 1px solid #d4cfc4; border-radius: 4px;
     box-shadow: 0 4px 24px rgba(44, 42, 40, 0.08),
       0 1px 0 rgba(255, 255, 255, 0.6) inset;
@@ -210,9 +212,9 @@ _COMBINED_CSS = """
   .front-page .fp-tagline { font-size: 12.5pt; font-style: italic; color: #6b635b;
     margin-bottom: 0.4em; }
   .front-page .fp-tagline + .fp-rule { margin: 0.4em auto 1.2em; width: 3em; }
-  .front-page .fp-desc { font-size: 10pt; color: #2c2a28; max-width: 32em;
+  .front-page .fp-desc { font-size: 10pt; color: #2c2a28;
     margin: 0 auto 1.6em; line-height: 1.6; }
-  .front-page .fp-board { font-size: 9pt; text-align: left; max-width: 38em;
+  .front-page .fp-board { font-size: 9pt; text-align: left;
     margin: 0 auto; padding: 1.2em 1.4em;
     background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(248,246,242,0.8));
     border: 1px solid #e0ddd8; border-radius: 3px;
@@ -235,11 +237,10 @@ _COMBINED_CSS = """
   .preface-block .subtitle { font-size: 11pt; text-align: center;
     color: #6b635b; font-style: italic; margin-bottom: 1em; }
   .preface-block p, .chapter-intro p { margin: 0.4em 0; font-size: 9.5pt;
-    line-height: 1.5; text-align: justify; max-width: 38em;
-    margin-left: auto; margin-right: auto; }
+    line-height: 1.5; text-align: justify; }
   .preface-block .contact-block { margin-top: 1.5em; font-size: 9pt;
     padding: 0.8em 1em; background: #f0ede8; border-radius: 4px;
-    max-width: 28em; margin-left: auto; margin-right: auto; }
+    margin-left: auto; margin-right: auto; }
   .preface-block .contact-block p { margin: 0.25em 0; text-align: left; }
   .preface-block .famous-places { margin: 0.6em 0 0 1.2em; }
   .preface-block .famous-places li { margin: 0.2em 0; }
@@ -262,13 +263,13 @@ _COMBINED_CSS = """
     font-size: 12pt; font-weight: 600; margin: 0 0 1.25em;
     color: #1c1b19 !important; letter-spacing: 0.02em;
     padding-bottom: 0.4em; border-bottom: 1px solid #c9c4b8; }
-  .references-chapter .ref-body { max-width: 38em; }
+  .references-chapter .ref-body { width: 100%; }
   .references-chapter .ref-body p { margin: 0 0 0.75em; font-size: 10pt;
     line-height: 1.5; text-align: justify; color: #1c1b19; }
   .references-chapter .ref-body p strong { font-weight: 600; color: #2c2a28; }
   .references-chapter .ref-colophon { margin-top: 3em; padding-top: 1.35em;
     border-top: 1px solid #c9c4b8; font-size: 8.5pt; line-height: 1.5;
-    color: #5c5549; text-align: center; max-width: 28em; margin-left: auto;
+    color: #5c5549; text-align: center; margin-left: auto;
     margin-right: auto; }
   .references-chapter .ref-colophon-emblem { margin-bottom: 0.6em; }
   .references-chapter .ref-emblem { width: 2.8em; height: 2.8em;

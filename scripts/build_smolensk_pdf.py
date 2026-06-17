@@ -35,6 +35,15 @@ from scripts.city_guide_narrative import (
     place_meta_line,
     subtitle_html_for_edition,
 )
+from scripts.city_guide_place_figures import (
+    figure_img_dimension_attrs,
+    figure_res_class_suffix,
+    inject_figure_img_extra,
+    row_equal_img_styles,
+    place_figure_row_html,
+    place_figure_rows_max_three_html,
+    place_figures_layout_html,
+)
 from scripts.city_guide_historical_reference_ru import (
     HERALDRY_CHAPTER_LABEL_EN,
     HERALDRY_CHAPTER_LABEL_RU,
@@ -47,8 +56,9 @@ from scripts.city_guide_jerusalem_style_pdf import (
     _OTIUM_PARAS_EN,
     guide_ui_strings,
 )
-from scripts.city_guide_toc import GuideTocEntry, guide_toc_html
+from scripts.city_guide_toc import GuideTocEntry, guide_toc_back_link_html, guide_toc_html
 from scripts.guide_editor_presets import SMOLENSK_GOOGLE_FONTS_HREF
+from scripts.city_guide_typography import guide_pdf_pagination_css
 from scripts.lint_image_paths import lint_city_blocking_errors
 
 
@@ -358,6 +368,10 @@ _MODERN_SMOLENSK_EXTRA_MALLS: tuple[tuple[str, str], ...] = (
 )
 # Последние N файлов smolensk_* (после исключений) в конце главы.
 _MODERN_SMOLENSK_GALLERY_TAIL_N = 7
+# Не включать в галерею «Современный Смоленск» (stems без расширения).
+_MODERN_SMOLENSK_GALLERY_SKIP_STEMS: frozenset[str] = frozenset(
+    {"smolensk_youth_creativity_palace_smolensk"},
+)
 
 _OTIUM_PARAS: tuple[str, ...] = (
     "OTIUM — это практика осмысленного досуга. В античной традиции otium "
@@ -406,6 +420,14 @@ def _html_paragraphs(text: str) -> str:
 
 def _rel_to_src(rel: str) -> str:
     return "../{}".format(rel.lstrip("/").replace("\\", "/"))
+
+
+def _abs_path_for_rel(root: Path, rel: str) -> Path | None:
+    resolved = smallest_same_stem_image_rel(root, rel)
+    if not resolved:
+        return None
+    path = root / _norm_rel(resolved)
+    return path if path.is_file() else None
 
 
 def _norm_rel(rel: str) -> str:
@@ -496,34 +518,39 @@ def _lopatinsky_split_final_three(
 
 
 def _place_figures_html(
+    root: Path,
     p: SmolenskPlace,
     name_plain: str,
     rels: list[str],
     edition: str,
 ) -> str:
     """Сетка фото; для Лопатинского — отдельный последний ряд из 11, 16, 17."""
+    paths = [root / r for r in rels]
     slug = p.get("slug", "")
     if slug == "lopatinsky_garden":
         split = _lopatinsky_split_final_three(rels)
         if split is not None:
             main_rels, final_rels = split
             main_srcs = [_rel_to_src(r) for r in main_rels]
-            indexed_main = list(enumerate(main_srcs, start=1))
-            part1 = _place_figure_rows_max_three_html(
-                indexed_main,
+            main_paths = [root / r for r in main_rels]
+            part1 = place_figures_layout_html(
+                main_srcs,
                 name_plain,
                 edition,
+                image_paths=main_paths,
             )
             n_main = len(main_srcs)
             indexed_final = [
                 (n_main + i, _rel_to_src(r))
                 for i, r in enumerate(final_rels, start=1)
             ]
-            final_row = _place_figure_row_html(
+            final_paths = [root / r for r in final_rels]
+            final_row = place_figure_row_html(
                 indexed_final,
                 name_plain,
                 row_kind="triple",
                 edition=edition,
+                row_paths=final_paths,
             )
             if not part1:
                 return (
@@ -538,100 +565,11 @@ def _place_figures_html(
                 "{}\n</div>"
             ).format(part1, final_row)
     srcs = [_rel_to_src(r) for r in rels]
-    indexed = list(enumerate(srcs, start=1))
-    return _place_figure_rows_max_three_html(indexed, name_plain, edition)
-
-
-def _place_figure_row_html(
-    img_slice: list[tuple[int, str]],
-    name_plain: str,
-    *,
-    row_kind: str,
-    edition: str,
-) -> str:
-    """Собирает один ряд figure; row_kind: pair | many | triple."""
-    s = guide_ui_strings(edition)
-    row_class = "place-pdf-fig-row place-pdf-fig-row--{}".format(row_kind)
-    parts: list[str] = ['<div class="{}">'.format(row_class)]
-    for seq_i, src in img_slice:
-        idx0 = max(seq_i - 1, 0)
-        alt = (
-            name_plain
-            if idx0 == 0
-            else s["img_alt_extra"].format(name_plain, seq_i)
-        )
-        parts.append(
-            '<figure class="place-fig"><img src="{}" alt="{}"/></figure>'.format(
-                escape(src),
-                escape(alt),
-            )
-        )
-    parts.append("</div>")
-    return "\n".join(parts)
-
-
-def _place_figure_rows_max_three_html(
-    indexed: list[tuple[int, str]],
-    name_plain: str,
-    edition: str,
-) -> str:
-    """Ряды по ≤3 снимка (без «many» на четыре и более в одной строке)."""
-    s = guide_ui_strings(edition)
-    if not indexed:
-        return ""
-    if len(indexed) == 1:
-        seq_i, src_one = indexed[0]
-        idx0 = max(seq_i - 1, 0)
-        alt_one = (
-            name_plain
-            if idx0 == 0
-            else s["img_alt_extra"].format(name_plain, seq_i)
-        )
-        return (
-            '<figure class="place-fig"><img src="{}" alt="{}"/>'
-            "</figure>".format(escape(src_one), escape(alt_one))
-        )
-    row_chunks: list[str] = []
-    i = 0
-    n = len(indexed)
-    while i < n:
-        remaining = n - i
-        if remaining >= 3:
-            row_chunks.append(
-                _place_figure_row_html(
-                    indexed[i : i + 3],
-                    name_plain,
-                    row_kind="triple",
-                    edition=edition,
-                )
-            )
-            i += 3
-        elif remaining == 2:
-            row_chunks.append(
-                _place_figure_row_html(
-                    indexed[i : i + 2],
-                    name_plain,
-                    row_kind="pair",
-                    edition=edition,
-                )
-            )
-            i += 2
-        else:
-            seq_i, src_one = indexed[i]
-            idx0 = max(seq_i - 1, 0)
-            alt_one = (
-                name_plain
-                if idx0 == 0
-                else s["img_alt_extra"].format(name_plain, seq_i)
-            )
-            row_chunks.append(
-                '<figure class="place-fig"><img src="{}" alt="{}"/>'
-                "</figure>".format(escape(src_one), escape(alt_one))
-            )
-            i += 1
-    inner = "\n".join(row_chunks)
-    return (
-        '<div class="place-pdf-fig-rows-stack">\n{}\n</div>'.format(inner)
+    return place_figures_layout_html(
+        srcs,
+        name_plain,
+        edition,
+        image_paths=paths,
     )
 
 
@@ -659,14 +597,18 @@ def _place_block(
         place_cls = "{} place-tight-title-fig".format(place_cls)
     chunks: list[str] = [
         '<section class="{}" id="{}">'.format(place_cls, escape(slug)),
+        '<div class="place-lead">',
         "<h3>{}</h3>".format(title_html),
+        guide_toc_back_link_html(edition),
         sub_html,
         meta_html,
     ]
     rels = _rel_list_resolved_for_place(root, p)
-    fig_html = _place_figures_html(p, name_plain, rels, edition)
-    if fig_html:
-        chunks.append(fig_html)
+    if rels:
+        chunks.append(
+            _place_figures_html(root, p, name_plain, rels, edition)
+        )
+    chunks.append("</div>")
     narrative = merge_narrative_html(p, edition, deduper)
     if narrative:
         chunks.append(narrative)
@@ -759,16 +701,31 @@ def _university_figure_html(root: Path, rel: str, alt: object) -> str:
     )
 
 
-def _modern_plain_figure(root: Path, rel: str, alt: str) -> str:
+def _modern_plain_figure(
+    root: Path,
+    rel: str,
+    alt: str,
+    *,
+    img_extra: str = "",
+) -> str:
     """Кадр без подписи под ним (глава «Современный Смоленск»)."""
     resolved = smallest_same_stem_image_rel(root, rel)
     if not resolved:
         return ""
     src = _rel_to_src(resolved)
+    abs_path = _abs_path_for_rel(root, rel)
+    res_cls = figure_res_class_suffix(abs_path)
+    attrs = figure_img_dimension_attrs(abs_path)
     return (
-        '<figure class="place-fig modern-smolensk-fig">'
-        '<img src="{}" alt="{}" loading="eager" decoding="async"/>'
-        "</figure>".format(escape(src), escape(alt))
+        '<figure class="place-fig modern-smolensk-fig{}">'
+        '<img src="{}" alt="{}"{}{} loading="eager" decoding="async"/>'
+        "</figure>".format(
+            res_cls,
+            escape(src),
+            escape(alt),
+            attrs,
+            img_extra,
+        )
     )
 
 
@@ -850,6 +807,7 @@ def _modern_smolensk_eligible_gallery_paths(
             res_lower in used_paths
             or stem_lower in used_stems
             or res_lower in curated_skip
+            or stem_lower in _MODERN_SMOLENSK_GALLERY_SKIP_STEMS
         ):
             continue
         out.append(abs_path)
@@ -860,6 +818,8 @@ def _modern_smolensk_figure_html_for_path(
     root: Path,
     root_res: Path,
     abs_path: Path,
+    *,
+    img_extra: str = "",
 ) -> str | None:
     """Один кадр для произвольного файла под smolensk/images/."""
     try:
@@ -871,36 +831,53 @@ def _modern_smolensk_figure_html_for_path(
         return None
     src = _rel_to_src(resolved)
     cap_esc = escape(abs_path.stem.replace("_", " "))
+    abs_file = abs_path if abs_path.is_file() else None
+    res_cls = figure_res_class_suffix(abs_file)
+    attrs = figure_img_dimension_attrs(abs_file)
     return (
-        '<figure class="place-fig modern-smolensk-fig">'
-        '<img src="{}" alt="{}" loading="eager" decoding="async"/>'
-        "</figure>".format(escape(src), cap_esc)
+        '<figure class="place-fig modern-smolensk-fig{}">'
+        '<img src="{}" alt="{}"{}{} loading="eager" decoding="async"/>'
+        "</figure>".format(
+            res_cls,
+            escape(src),
+            cap_esc,
+            attrs,
+            img_extra,
+        )
     )
 
 
-def _modern_smolensk_pair_rows_html(fig_chunks: list[str]) -> str:
-    """По два кадра в ряд; PDF не рвёт строку между страницами."""
+def _modern_smolensk_trim_to_even(
+    fig_items: list[tuple[str, Path | None]],
+) -> list[tuple[str, Path | None]]:
+    """Drop trailing figure so pair rows never end with a lone image."""
+    if len(fig_items) % 2 == 1:
+        return fig_items[:-1]
+    return fig_items
+
+
+def _modern_smolensk_pair_rows_html(
+    fig_items: list[tuple[str, Path | None]],
+) -> str:
+    """По два кадра в ряд; входной список должен быть чётной длины."""
+    fig_items = _modern_smolensk_trim_to_even(fig_items)
     rows: list[str] = []
     i = 0
-    n = len(fig_chunks)
+    n = len(fig_items)
     while i < n:
-        first = fig_chunks[i]
-        second = fig_chunks[i + 1] if i + 1 < n else ""
-        if second:
-            rows.append(
-                '<div class="modern-smolensk-pair-row">'
-                "{}\n{}"
-                "</div>".format(first, second)
-            )
-            i += 2
-        else:
-            rows.append(
-                '<div class="modern-smolensk-pair-row '
-                'modern-smolensk-pair-row--orphan">'
-                "{}"
-                "</div>".format(first)
-            )
-            i += 1
+        first_html, first_path = fig_items[i]
+        if i + 1 >= n:
+            break
+        second_html, second_path = fig_items[i + 1]
+        styles = row_equal_img_styles([first_path, second_path], row_kind="pair")
+        first_html = inject_figure_img_extra(first_html, styles[0])
+        second_html = inject_figure_img_extra(second_html, styles[1])
+        rows.append(
+            '<div class="modern-smolensk-pair-row">'
+            "{}\n{}"
+            "</div>".format(first_html, second_html)
+        )
+        i += 2
     return "\n".join(rows)
 
 
@@ -909,28 +886,28 @@ def _modern_smolensk_section_html(root: Path, edition: str) -> str:
     root_res = root.resolve()
     used_paths, used_stems = _collect_guide_image_keys(root)
     curated_skip: set[str] = set()
-    modern_figs: list[str] = []
+    modern_figs: list[tuple[str, Path | None]] = []
     for rel, cap in _MODERN_SHOPPING_MALLS:
         picked = smallest_same_stem_image_rel(root, rel)
         if picked:
             curated_skip.add(_norm_rel(picked).lower())
         fig = _modern_plain_figure(root, rel, cap)
         if fig:
-            modern_figs.append(fig)
+            modern_figs.append((fig, _abs_path_for_rel(root, rel)))
     for rel, cap in _MODERN_HOTELS:
         picked = smallest_same_stem_image_rel(root, rel)
         if picked:
             curated_skip.add(_norm_rel(picked).lower())
         fig = _modern_plain_figure(root, rel, cap)
         if fig:
-            modern_figs.append(fig)
+            modern_figs.append((fig, _abs_path_for_rel(root, rel)))
     for rel, cap in _MODERN_SMOLENSK_EXTRA_MALLS:
         picked = smallest_same_stem_image_rel(root, rel)
         if picked:
             curated_skip.add(_norm_rel(picked).lower())
         fig = _modern_plain_figure(root, rel, cap)
         if fig:
-            modern_figs.append(fig)
+            modern_figs.append((fig, _abs_path_for_rel(root, rel)))
     eligible = _modern_smolensk_eligible_gallery_paths(
         root,
         root_res,
@@ -938,51 +915,29 @@ def _modern_smolensk_section_html(root: Path, edition: str) -> str:
         used_paths=used_paths,
         used_stems=used_stems,
     )
-    need_fill = (
-        len(modern_figs) % 2 == 1
-        and len(eligible) >= _MODERN_SMOLENSK_GALLERY_TAIL_N + 1
-    )
-    if need_fill:
-        fill_path = eligible[-(_MODERN_SMOLENSK_GALLERY_TAIL_N + 1)]
-        fill_html = _modern_smolensk_figure_html_for_path(
-            root,
-            root_res,
-            fill_path,
-        )
-        if fill_html:
-            modern_figs.append(fill_html)
-
     tail_paths = eligible[-_MODERN_SMOLENSK_GALLERY_TAIL_N:]
-    gallery_figs: list[str] = []
+    gallery_figs: list[tuple[str, Path | None]] = []
     for abs_path in tail_paths:
         gh = _modern_smolensk_figure_html_for_path(root, root_res, abs_path)
         if gh:
-            gallery_figs.append(gh)
+            abs_file = abs_path if abs_path.is_file() else None
+            gallery_figs.append((gh, abs_file))
 
-    mall_block = ""
-    if modern_figs:
-        mall_block = (
-            '<div class="heraldry-strip heraldry-modern-malls">'
-            "{}\n</div>\n"
-        ).format(_modern_smolensk_pair_rows_html(modern_figs))
-    gallery_block = ""
-    if gallery_figs:
-        gallery_block = (
-            '<div class="heraldry-strip heraldry-modern-malls '
-            'heraldry-modern-gallery">'
-            "{}\n</div>\n"
-        ).format(_modern_smolensk_pair_rows_html(gallery_figs))
-    if not mall_block and not gallery_block:
+    all_figs = _modern_smolensk_trim_to_even(modern_figs + gallery_figs)
+    if not all_figs:
         return ""
+    rows_html = _modern_smolensk_pair_rows_html(all_figs)
+    inner_body = (
+        '<div class="heraldry-strip heraldry-modern-malls '
+        'heraldry-modern-gallery">'
+        "{}\n</div>\n"
+    ).format(rows_html)
     title = (
         _MODERN_SMOLENSK_TITLE_RU
         if edition == "ru"
         else _MODERN_SMOLENSK_TITLE_EN
     )
     t_esc = escape(title)
-    inner_body = "".join(
-        x for x in (mall_block, gallery_block) if x
-    )
     return (
         '<section class="guide-modern-smolensk" '
         'id="guide-modern-smolensk" '
@@ -1007,19 +962,30 @@ def _welcome_closing_section_html(root: Path, edition: str) -> str:
         if not resolved:
             continue
         src = _rel_to_src(resolved)
+        abs_path = _abs_path_for_rel(root, rel)
+        res_cls = figure_res_class_suffix(abs_path)
+        attrs = figure_img_dimension_attrs(abs_path)
         cap_esc = escape(caption)
         figs.append(
-            '<figure class="place-fig welcome-closing-fig">'
-            '<img src="{}" alt="{}"/>'
+            '<figure class="place-fig welcome-closing-fig{}">'
+            '<img src="{}" alt="{}"{} loading="eager" decoding="async"/>'
             '<figcaption class="welcome-closing-cap">{}</figcaption>'
-            "</figure>".format(escape(src), cap_esc, cap_esc)
+            "</figure>".format(
+                res_cls,
+                escape(src),
+                cap_esc,
+                attrs,
+                cap_esc,
+            )
         )
     tower_indexed: list[tuple[int, str]] = []
+    tower_paths: list[Path | None] = []
     tseq = 1
     for rel in _WELCOME_CLOSING_DOM_SBASHNEY:
         resolved = smallest_same_stem_image_rel(root, rel)
         if resolved:
             tower_indexed.append((tseq, _rel_to_src(resolved)))
+            tower_paths.append(_abs_path_for_rel(root, rel))
             tseq += 1
     tower_html = ""
     if tower_indexed:
@@ -1027,10 +993,11 @@ def _welcome_closing_section_html(root: Path, edition: str) -> str:
             _TOWER_ROW_NAME_RU if edition == "ru" else _TOWER_ROW_NAME_EN
         )
         tower_html = "\n{}".format(
-            _place_figure_rows_max_three_html(
+            place_figure_rows_max_three_html(
                 tower_indexed,
                 tower_name,
                 edition,
+                image_paths=tower_paths,
             )
         )
     if not figs and not tower_html:
@@ -1116,7 +1083,11 @@ def _historical_reference_html(edition: str) -> str:
     else:
         body = _HISTORICAL_REFERENCE_EN
         title = HISTORICAL_SECTION_TITLE_EN
-    return historical_reference_section_html(body, section_title=title)
+    return historical_reference_section_html(
+        body,
+        section_title=title,
+        edition=edition,
+    )
 
 
 def _cover_otium_html(edition: str) -> str:
@@ -1228,38 +1199,59 @@ def _build_html(
     css = """
 body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
   color: #1a1a1a; font-size: 11pt; }
+.cover-otium, .guide-title, .guide-modern-smolensk, .guide-welcome-closing {
+  margin-left: -2rem; margin-right: -2rem; padding-left: 2rem;
+  padding-right: 2rem; box-sizing: border-box; }
 .cover-otium { page-break-after: always; min-height: auto;
-  padding: 1.15rem 0.85rem 1.35rem; box-sizing: border-box; }
+  padding-top: 1.15rem; padding-bottom: 1.35rem; }
 .otium-logo { font-family: 'Triodion', 'Ponomar', 'Cormorant Garamond', serif;
   font-size: 2.15rem; font-weight: 400; letter-spacing: 0.14em;
   margin-bottom: 0.85rem; }
 .otiump { margin: 0.42rem 0; line-height: 1.42; text-align: justify;
-  max-width: 38rem; font-size: 0.95rem; }
+  font-size: 0.95rem; }
 .guide-title { page-break-after: auto; margin-bottom: 0.55rem;
   page-break-inside: avoid; }
 .guide-title > .guide-title-main { margin-top: 0; }
 .smolensk-title-symbols { margin-bottom: 0.28rem; }
 .guide-universities {
-  margin-top: 1.35rem; padding-bottom: 0.25rem; page-break-inside: avoid;
-  break-inside: avoid; }
+  margin-top: 2.25rem; padding-top: 0.35rem; padding-bottom: 0.55rem;
+  page-break-inside: avoid; break-inside: avoid; }
 .guide-modern-smolensk {
-  margin-top: 1.15rem; padding-bottom: 0.3rem; page-break-inside: auto;
-  break-inside: auto; }
+  margin-top: 2.05rem; padding-top: 0.35rem; padding-bottom: 2.85rem;
+  page-break-inside: auto; break-inside: auto; }
+.guide-modern-smolensk .heraldry-strip.heraldry-modern-malls {
+  margin-bottom: 1.45rem; }
 .guide-welcome-closing {
-  margin-top: 1.25rem; padding-bottom: 0.35rem; page-break-inside: avoid;
-  break-inside: avoid; }
+  margin-top: 2.35rem; padding-top: 0.55rem; padding-bottom: 0.55rem;
+  page-break-inside: avoid; break-inside: avoid; }
 .welcome-closing-head {
   font-family: 'Triodion', 'Ponomar', 'Cormorant Garamond', serif;
   font-size: 1.32rem; text-align: center; margin: 0.45rem 0 0.65rem;
   font-weight: 400; line-height: 1.2; }
-.welcome-closing-fig { margin: 0.55rem auto 0.95rem; max-width: 100%; }
+.guide-universities .title-strip-label-univ {
+  font-size: 1.42rem; letter-spacing: 0.04em; margin: 0.35rem 0 0.75rem;
+  color: #2a2a2a; }
+.guide-modern-smolensk .welcome-closing-head {
+  font-size: 1.58rem; margin: 0.55rem 0 0.85rem; }
+.welcome-closing-fig { margin: 0.55rem auto 0.95rem; width: 100%; }
 .welcome-closing-fig img {
-  max-height: 14rem; width: auto; max-width: 100%; object-fit: contain;
+  max-height: 56vh; width: auto; max-width: 100%; object-fit: contain;
   margin: 0 auto; display: block; }
+.welcome-closing-fig.place-fig--hi-res img {
+  max-height: 68vh; width: 100%; max-width: 100%; }
+.welcome-closing-fig.place-fig--lo-res img { max-height: 38vh; }
+.guide-welcome-closing .place-pdf-fig-row--triple .place-fig img {
+  max-height: 44vh; }
+.guide-welcome-closing .place-pdf-fig-row--triple .place-fig--hi-res img {
+  max-height: 54vh; }
+.guide-welcome-closing .place-pdf-fig-row--triple .place-fig--lo-res img {
+  max-height: 30vh; }
 .welcome-closing-cap {
-  font-family: 'Source Sans 3', sans-serif; font-size: 0.74rem;
-  text-align: center; margin: 0.38rem 0 0; color: #333;
-  font-style: italic; line-height: 1.35; }
+  font-family: 'Source Sans 3', sans-serif; font-size: 1.08rem;
+  text-align: center; margin: 0.42rem 0 0; color: #333;
+  font-style: italic; line-height: 1.4; }
+.guide-welcome-closing .welcome-closing-cap {
+  font-size: 1.12rem; }
 .title-strip-label {
   font-family: 'Triodion', 'Ponomar', 'Cormorant Garamond', serif;
   font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em;
@@ -1286,13 +1278,13 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
 .modern-smolensk-pair-row .modern-smolensk-fig {
   margin: 0; width: 100%; max-width: 100%; }
 .modern-smolensk-pair-row .modern-smolensk-fig img {
-  margin-left: auto; margin-right: auto; }
+  margin-left: auto; margin-right: auto; width: 100%; max-width: 100%; }
 .modern-smolensk-pair-row--orphan .modern-smolensk-fig {
   grid-column: 1 / -1;
   justify-self: center;
   max-width: calc(50% - 0.19rem); }
 .heraldry-strip.heraldry-modern-gallery {
-  margin-top: 0.35rem; }
+  margin-top: 0.35rem; margin-bottom: 0.65rem; }
 .heraldry-fig { margin: 0; }
 .heraldry-fig img { width: auto; display: block; margin: 0 auto;
   border-radius: 2px; }
@@ -1302,17 +1294,19 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
   object-fit: contain; }
 .heraldry-flag-book img { max-height: 3.35rem; }
 .heraldry-fig.heraldry-univ img {
-  max-height: 12.15rem; max-width: 100%; width: auto; object-fit: contain; }
+  max-height: 26rem; max-width: 100%; width: auto; object-fit: contain; }
+.guide-universities .heraldry-fig.heraldry-univ img {
+  max-height: 30rem; }
 figure.heraldry-fig.heraldry-univ.heraldry-univ-captioned {
   display: flex; flex-direction: column; align-items: center;
   width: 100%; max-width: 100%; margin: 0; page-break-inside: avoid;
   break-inside: avoid; }
 figure.heraldry-fig.heraldry-univ .univ-name-caption {
-  font-family: 'Source Sans 3', sans-serif; font-size: 0.54rem;
-  line-height: 1.14; text-align: center; margin: 0.1rem 0 0;
-  padding: 0 0.06rem; width: 100%; max-width: 100%; color: #2a2a2a;
+  font-family: 'Source Sans 3', sans-serif; font-size: 0.92rem;
+  line-height: 1.28; text-align: center; margin: 0.22rem 0 0;
+  padding: 0 0.12rem; width: 100%; max-width: 100%; color: #2a2a2a;
   hyphens: auto; overflow-wrap: anywhere; }
-.heraldry-motto { text-align: center; max-width: 16rem; margin: 0.12rem auto;
+.heraldry-motto { text-align: center; margin: 0.12rem auto;
   width: 100%; }
 .motto-oldslav {
   font-family: 'Triodion', 'Ponomar', 'Cormorant Garamond', serif;
@@ -1324,16 +1318,15 @@ figure.heraldry-fig.heraldry-univ .univ-name-caption {
   font-family: 'Triodion', 'Ponomar', 'Cormorant Garamond', serif;
   font-size: 2.35rem; margin-bottom: 0.5rem; font-weight: 400; }
 .lead { color: #444; font-size: 1.05rem; }
-.guide-toc { margin: 0.85rem 0 1.15rem; page-break-inside: avoid; }
-.guide-toc h2 { font-family: 'Triodion', 'Ponomar', 'Cormorant Garamond', serif;
-  font-size: 1.28rem; font-weight: 600; margin: 0.4rem 0 0.55rem; }
-.guide-toc ol { margin: 0.35rem 0 0.65rem 1.25rem; padding: 0;
-  columns: 2; column-gap: 1.5rem; }
-.guide-toc li { margin: 0.18rem 0; line-height: 1.35;
-  font-size: 0.88rem; break-inside: avoid; }
-.guide-toc a { color: #1a5276; text-decoration: none; }
+"""
+    css += guide_pdf_pagination_css(
+        toc_h2_extra=(
+            "font-family: 'Triodion', 'Ponomar', 'Cormorant Garamond', serif"
+        ),
+    )
+    css += """
 .lead-follow { color: #333; font-size: 0.98rem; margin: 0.45rem 0 0.72rem;
-  line-height: 1.45; text-align: justify; max-width: 42rem; }
+  line-height: 1.45; text-align: justify; }
 .place { margin-bottom: 2.2rem; page-break-inside: auto; }
 .place.place-tight-title-fig h3 {
   margin: 0.55rem 0 0.18rem; }
@@ -1356,60 +1349,20 @@ h4 {
   font-style: italic; }
 .place-meta { font-size: 0.92rem; color: #353535; margin: 0 0 0.75rem;
   line-height: 1.4; }
-.place h3 {
-  page-break-after: avoid; break-after: avoid-page; }
-.place .place-meta { page-break-after: avoid; break-after: avoid-page; }
-.place-fig { margin: 0.5rem 0 1rem; }
-.place > .place-fig img {
-  max-height: 12.5rem; width: auto; max-width: 100%; object-fit: contain;
-  margin: 0 auto; }
 .place-pdf-compact-fig .place-fig { margin: 0.22rem 0 0.38rem; }
 .place-pdf-compact-fig .place-fig img {
   max-height: 8.6rem; width: auto; max-width: 100%; object-fit: contain;
   margin: 0 auto; }
-.place-pdf-fig-row {
-  display: flex; flex-direction: row; flex-wrap: wrap;
-  align-items: flex-end; justify-content: center;
-  gap: 0.45rem 0.55rem; margin: 0.55rem 0 1.05rem;
-  page-break-inside: avoid; break-inside: avoid-page; }
-.place-pdf-fig-row .place-fig {
-  flex: 1 1 30%; margin: 0; min-width: 26%; max-width: 100%; }
-.place-pdf-fig-row .place-fig img {
-  width: 100%; height: auto; max-height: 12rem; object-fit: contain;
-  margin: 0 auto; }
-.place-pdf-fig-row--pair {
-  flex-wrap: nowrap; justify-content: space-between;
-  align-items: flex-end; gap: 0.5rem 0.65rem; }
-.place-pdf-fig-row--pair .place-fig {
-  flex: 1 1 47%; min-width: 0; max-width: 50%; }
-.place-pdf-fig-row--pair .place-fig img {
-  max-height: 11rem; }
-.place-pdf-fig-row--many {
-  flex-wrap: nowrap; justify-content: center; align-items: flex-end;
-  gap: 0.35rem 0.42rem; }
-.place-pdf-fig-row--many .place-fig {
-  flex: 1 1 0; margin: 0; min-width: 0; max-width: none; }
-.place-pdf-fig-row--many .place-fig img {
-  max-height: 8.75rem; width: 100%; height: auto; object-fit: contain;
-  margin: 0 auto; }
-.place-pdf-fig-rows-stack {
-  display: flex; flex-direction: column; gap: 0.5rem;
-  margin: 0.55rem 0 1.05rem;
-  page-break-inside: avoid; break-inside: avoid-page; }
-.place-pdf-fig-row--triple {
-  display: flex; flex-direction: row; flex-wrap: nowrap;
-  align-items: flex-end; justify-content: center;
-  gap: 0.4rem 0.48rem; margin: 0;
-  page-break-inside: avoid; break-inside: avoid-page; }
-.place-pdf-fig-row--triple .place-fig {
-  flex: 1 1 0; margin: 0; min-width: 0; max-width: none; }
-.place-pdf-fig-row--triple .place-fig img {
-  width: 100%; height: auto; max-height: 11.5rem;
-  object-fit: contain; margin: 0 auto; }
 .modern-smolensk-fig { margin: 0.4rem auto; max-width: 100%; }
 .modern-smolensk-fig img {
-  max-height: 12rem; width: auto; max-width: 100%; object-fit: contain;
+  max-height: 20rem; width: auto; max-width: 100%; object-fit: contain;
   margin: 0 auto; display: block; }
+.guide-modern-smolensk .modern-smolensk-fig img {
+  max-height: 56vh; }
+.guide-modern-smolensk .modern-smolensk-fig.place-fig--hi-res img {
+  max-height: 64vh; width: 100%; }
+.guide-modern-smolensk .modern-smolensk-fig.place-fig--lo-res img {
+  max-height: 36vh; }
 img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
 .prose, .place-desc p { margin: 0.45rem 0; line-height: 1.5;
   text-align: justify; }
