@@ -7,12 +7,42 @@ from pathlib import Path
 
 from scripts.city_guide_toc import (
     GuideTocEntry,
+    GUIDE_TOC_ID,
     category_chapter_anchor,
+    guide_toc_back_link_html,
     guide_toc_html,
     guide_toc_title,
+    normalize_title_for_sort,
+    place_sort_key,
     toc_entries_for_flat_places,
     toc_entries_for_jerusalem_guide,
 )
+from scripts.city_guide_typography import guide_pdf_pagination_css
+
+
+def test_normalize_title_for_sort_strips_guillemets() -> None:
+    assert normalize_title_for_sort("«Гоголь-центр»") == "гоголь-центр"
+    assert normalize_title_for_sort("«Депо Москва»") == "депо москва"
+    assert (
+        normalize_title_for_sort("«Рабочий и колхозница»")
+        == "рабочий и колхозница"
+    )
+
+
+def test_place_sort_key_ignores_quotes() -> None:
+    places = [
+        {
+            "slug": "quoted",
+            "name_ru": "«Гоголь-центр»",
+        },
+        {
+            "slug": "alpha",
+            "name_ru": "Александровский сад",
+        },
+    ]
+    key = place_sort_key("ru")
+    ordered = sorted(places, key=key)
+    assert [p["slug"] for p in ordered] == ["alpha", "quoted"]
 
 
 def test_guide_toc_title_localized() -> None:
@@ -29,9 +59,18 @@ def test_guide_toc_html_links_to_anchors() -> None:
         "en",
     )
     assert 'class="guide-toc"' in html
+    assert 'id="{}"'.format(GUIDE_TOC_ID) in html
     assert 'href="#berlin_gate"' in html
     assert 'href="#berlin_wall"' in html
     assert "toc-item--sub" in html
+
+
+def test_guide_toc_back_link_points_to_contents() -> None:
+    en = guide_toc_back_link_html("en")
+    ru = guide_toc_back_link_html("ru")
+    assert 'href="#{}"'.format(GUIDE_TOC_ID) in en
+    assert "Contents" in en
+    assert "Содержание" in ru
 
 
 def test_toc_entries_follow_place_list(tmp_path: Path) -> None:
@@ -96,3 +135,10 @@ def test_toc_reflects_renamed_place() -> None:
 
 def test_category_chapter_anchor() -> None:
     assert category_chapter_anchor("railway_stations") == "cat-railway-stations"
+
+
+def test_guide_pdf_pagination_css_toc_page_breaks() -> None:
+    css = guide_pdf_pagination_css()
+    assert "page-break-before: always" in css
+    assert "page-break-after: always" in css
+    assert ".place-lead" in css

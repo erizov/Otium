@@ -13,7 +13,7 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
 .otium-logo { font-family: 'Cormorant Garamond', serif; font-size: 2.15rem;
   font-weight: 600; letter-spacing: 0.18em; margin-bottom: 0.85rem; }
 .otiump { margin: 0.42rem 0; line-height: 1.42; text-align: justify;
-  max-width: 38rem; font-size: 0.95rem; }
+  font-size: 0.95rem; }
 .guide-title { page-break-after: auto; margin-bottom: 0.55rem;
   page-break-inside: avoid; }
 .historical-reference { margin: 0.75rem 0 1.15rem;
@@ -63,22 +63,103 @@ ol.trip-stops a:hover { text-decoration: underline; }
 .heraldry-univ-caption { font-size: 0.52rem; line-height: 1.18;
   margin: 0.12rem 0 0; padding: 0 0.06rem; color: #252525;
   text-align: center; font-weight: 500; }
-.heraldry-motto { text-align: center; max-width: 18rem; margin: 0.18rem auto;
+.heraldry-motto { text-align: center; margin: 0.18rem auto;
   width: 100%; }
 .motto-line { font-family: 'Cormorant Garamond', serif; font-size: 1rem;
   margin: 0; color: #333; line-height: 1.35; }
 .guide-title h1.guide-title-main { font-family: 'Cormorant Garamond', serif;
   font-size: 2.35rem; margin-bottom: 0.5rem; font-weight: 600; }
 .lead { color: #444; font-size: 1.05rem; }
-.guide-toc { margin: 0.85rem 0 1.15rem; page-break-inside: avoid; }
-.guide-toc h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.28rem;
-  font-weight: 600; margin: 0.4rem 0 0.55rem; }
+
+.guide-toc { page-break-before: always; break-before: page;
+  page-break-after: always; break-after: page;
+  margin: 0; padding: 0.2rem 0 0.45rem; page-break-inside: auto; }
+.guide-toc h2 { font-family: 'Cormorant Garamond', serif;
+  font-size: 1.28rem; font-weight: 600; margin: 0.4rem 0 0.55rem; }
 .guide-toc ol { margin: 0.35rem 0 0.65rem 1.25rem; padding: 0;
   columns: 2; column-gap: 1.5rem; }
 .guide-toc li { margin: 0.18rem 0; line-height: 1.35;
   font-size: 0.88rem; break-inside: avoid; }
-.guide-toc a { color: #1a5276; text-decoration: none; }
+.guide-toc a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.guide-toc a:hover { color: #0d3d56; }
 .guide-toc li.toc-item--sub { font-size: 0.82rem; margin-left: 0.35rem; }
+.toc-back { font-size: 0.78rem; margin: 0 0 0.35rem; text-align: right; }
+.toc-back a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.toc-back a:hover { color: #0d3d56; }
+.place, .historical-reference, .guide-primer, .guide-trip-plans {
+  scroll-margin-top: 1.25rem; }
+.historical-reference h2, .guide-primer h2, .guide-trip-plans h2,
+.chapter-head h2, .place-lead h3 { position: relative; }
+.guide-toc + .place, .guide-toc + .chapter-head {
+  page-break-before: avoid; break-before: avoid-page; }
+.place-lead { page-break-inside: avoid; break-inside: avoid-page;
+  page-break-after: auto; }
+.place-lead > h3 { page-break-after: avoid; break-after: avoid-page; }
+.place-lead > .place-meta { page-break-after: avoid; break-after: avoid-page; }
+
+.place-fig { page-break-inside: avoid; break-inside: avoid-page;
+  margin: 0.5rem 0 1rem; }
+.place-fig img {
+  page-break-inside: avoid; break-inside: avoid-page;
+  max-height: 48vh; width: auto; max-width: 100%;
+  object-fit: contain; margin-left: auto; margin-right: auto; }
+.place-fig--hi-res img { max-height: 52vh; }
+.place-fig--lo-res img { max-height: 30vh; }
+.place-pdf-fig-row {
+  display: flex; flex-direction: row; flex-wrap: wrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.45rem 0.55rem; margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row .place-fig {
+  flex: 1 1 30%; margin: 0; min-width: 26%; max-width: 100%; }
+.place-pdf-fig-row .place-fig img {
+  width: auto; max-width: 100%; height: auto; max-height: 44vh;
+  object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--pair {
+  flex-wrap: nowrap; justify-content: space-between;
+  align-items: flex-end; gap: 0.5rem 0.65rem; }
+.place-pdf-fig-row--pair .place-fig {
+  flex: 1 1 47%; min-width: 0; max-width: 50%;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--pair .place-fig img {
+  max-height: 44vh; object-fit: contain; }
+.place-pdf-fig-row--pair .place-fig--hi-res img { max-height: 52vh; }
+.place-pdf-fig-row--pair .place-fig--lo-res img { max-height: 26vh; }
+.place-pdf-fig-row--pair .place-fig--row-sized img,
+.place-pdf-fig-row--triple .place-fig--row-sized img,
+.place-pdf-fig-row--many .place-fig--row-sized img {
+  width: auto; max-width: 100%; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row .place-fig--row-sized.place-fig--hi-res img,
+.place-pdf-fig-row .place-fig--row-sized.place-fig--lo-res img {
+  max-height: unset; }
+.place-pdf-fig-rows-stack {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple {
+  display: flex; flex-direction: row; flex-wrap: nowrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.4rem 0.48rem; margin: 0;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--triple .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--triple .place-fig--hi-res img { max-height: 42vh; }
+.place-pdf-fig-row--triple .place-fig--lo-res img { max-height: 18vh; }
+.place-pdf-fig-row--many {
+  flex-wrap: nowrap; justify-content: center; align-items: flex-end;
+  gap: 0.35rem 0.42rem; }
+.place-pdf-fig-row--many .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--many .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+
+
 .place { margin-bottom: 2.2rem; page-break-inside: auto; }
 h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.22rem; margin: 1.2rem 0 0.35rem;
   font-weight: 600; }
@@ -90,7 +171,6 @@ h4 { font-family: 'Cormorant Garamond', serif; font-size: 0.95rem; text-transfor
   color: #555; font-size: 0.95rem; margin: 0 0 0.5rem; font-style: italic; }
 .place-meta { font-size: 0.92rem; color: #353535; margin: 0 0 0.75rem;
   line-height: 1.4; }
-.place-fig { margin: 0.5rem 0 1rem; }
 img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
 .prose, .place-desc p { margin: 0.45rem 0; line-height: 1.5;
   text-align: justify; }
@@ -110,7 +190,9 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <figure class="heraldry-fig heraldry-coat-book" title="Coat of arms of Lviv"><img src="../images/guide_coat_of_arms.svg" alt="Coat of arms of Lviv"/></figure>
 <figure class="heraldry-fig heraldry-coat-book" title="Flag of Lviv"><img src="../images/guide_flag.svg" alt="Flag of Lviv"/></figure>
 </div></div><h1 class="guide-title-main">Lviv</h1><p class="lead">Guide. Places in this edition: 30.</p></header>
+<nav class="guide-toc" id="guide-toc" aria-label="Contents"><h2>Contents</h2><ol><li class="toc-item"><a href="#guide-trips">Trip ideas</a></li><li class="toc-item"><a href="#lviv_0204_han_cami">0204-Han Cami</a></li><li class="toc-item"><a href="#lviv_armenian_cathedral">Armenian Cathedral</a></li><li class="toc-item"><a href="#lviv_arsenal_museum">Arsenal Museum</a></li><li class="toc-item"><a href="#lviv_bandinelli_palace">Bandinelli Palace</a></li><li class="toc-item"><a href="#lviv_basilian_monastery">Basilian monastery</a></li><li class="toc-item"><a href="#lviv_brewery_museum">Beer brewing museum Lviv</a></li><li class="toc-item"><a href="#lviv_bernardine_church">Bernardine church</a></li><li class="toc-item"><a href="#lviv_boitsov">Boim Chapel</a></li><li class="toc-item"><a href="#lviv_carmelite">Carmelite church</a></li><li class="toc-item"><a href="#lviv_dianafountain_lviv">DianaFountain Lviv</a></li><li class="toc-item"><a href="#lviv_dominican_church">Dominican church Lviv</a></li><li class="toc-item"><a href="#lviv_jewish_hospital">Golden Rose synagogue area</a></li><li class="toc-item"><a href="#lviv_high_castle">High Castle Hill</a></li><li class="toc-item"><a href="#lviv_italian_courtyard">Italian Courtyard</a></li><li class="toc-item"><a href="#lviv_jesuit_church">Jesuit church Lviv</a></li><li class="toc-item"><a href="#lviv_korniakt_tower">Korniakt Tower</a></li><li class="toc-item"><a href="#lviv_latin_cathedral">Latin Cathedral</a></li><li class="toc-item"><a href="#lviv_landmark">Lviv Landmark</a></li><li class="toc-item"><a href="#lviv_opera_house">Lviv Opera House</a></li><li class="toc-item"><a href="#lviv_lvivrynek1941">LvivRynek1941</a></li><li class="toc-item"><a href="#lviv_lychakiv_cemetery">Lychakiv Cemetery</a></li><li class="toc-item"><a href="#lviv_ploshcha_mickiewicz">Mickiewicz Square</a></li><li class="toc-item"><a href="#lviv_villa_biennale">Palace of Culture Lviv</a></li><li class="toc-item"><a href="#lviv_pharmacy_museum">Pharmacy Museum</a></li><li class="toc-item"><a href="#lviv_potocki_palace">Potocki Palace</a></li><li class="toc-item"><a href="#lviv_rynok_square">Rynok Square</a></li><li class="toc-item"><a href="#lviv_solomiya_krushelnytska">Solomiya Krushelnytska Lviv Opera</a></li><li class="toc-item"><a href="#lviv_st_george_cathedral">St Georges Cathedral</a></li><li class="toc-item"><a href="#lviv_stryi_park">Stryi Park</a></li><li class="toc-item"><a href="#lviv_ivan_franko_university">University of Lviv main</a></li></ol></nav>
 <section class="guide-trip-plans" id="guide-trips" aria-label="Trip ideas"><h2>Trip ideas</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 <article class="trip-plan" id="trip-1d"><h3>One day</h3>
 <p class="prose">A compact loop linking the strongest cards in this guide, ordered to minimise backtracking on foot.</p>
 <ol class="trip-stops"><li><a href="#lviv_armenian_cathedral">Armenian Cathedral</a> (~75min)</li>
@@ -133,236 +215,403 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <li><a href="#lviv_arsenal_museum">Arsenal Museum</a> (~75min)</li>
 <li><a href="#lviv_bernardine_church">Bernardine church</a> (~75min)</li>
 <li><a href="#lviv_brewery_museum">Beer brewing museum Lviv</a> (~75min)</li></ol></article></section>
-<nav class="guide-toc" aria-label="Contents"><h2>Contents</h2><ol><li class="toc-item"><a href="#guide-trips">Trip ideas</a></li><li class="toc-item"><a href="#lviv_pdfband_2_5ffecd0e">0204-Han Cami</a></li><li class="toc-item"><a href="#lviv_armenian_cathedral">Armenian Cathedral</a></li><li class="toc-item"><a href="#lviv_arsenal_museum">Arsenal Museum</a></li><li class="toc-item"><a href="#lviv_bandinelli_palace">Bandinelli Palace</a></li><li class="toc-item"><a href="#lviv_basilian_monastery">Basilian monastery</a></li><li class="toc-item"><a href="#lviv_brewery_museum">Beer brewing museum Lviv</a></li><li class="toc-item"><a href="#lviv_bernardine_church">Bernardine church</a></li><li class="toc-item"><a href="#lviv_boitsov">Boim Chapel</a></li><li class="toc-item"><a href="#lviv_carmelite">Carmelite church</a></li><li class="toc-item"><a href="#lviv_pdfband_3_73244fd6">DianaFountain Lviv</a></li><li class="toc-item"><a href="#lviv_dominican_church">Dominican church Lviv</a></li><li class="toc-item"><a href="#lviv_jewish_hospital">Golden Rose synagogue area</a></li><li class="toc-item"><a href="#lviv_high_castle">High Castle Hill</a></li><li class="toc-item"><a href="#lviv_italian_courtyard">Italian Courtyard</a></li><li class="toc-item"><a href="#lviv_jesuit_church">Jesuit church Lviv</a></li><li class="toc-item"><a href="#lviv_korniakt_tower">Korniakt Tower</a></li><li class="toc-item"><a href="#lviv_latin_cathedral">Latin Cathedral</a></li><li class="toc-item"><a href="#lviv_opera_house">Lviv Opera House</a></li><li class="toc-item"><a href="#lviv_pdfband_9_af31338a">LvivRynek1941</a></li><li class="toc-item"><a href="#lviv_lychakiv_cemetery">Lychakiv Cemetery</a></li><li class="toc-item"><a href="#lviv_ploshcha_mickiewicz">Mickiewicz Square</a></li><li class="toc-item"><a href="#lviv_villa_biennale">Palace of Culture Lviv</a></li><li class="toc-item"><a href="#lviv_pharmacy_museum">Pharmacy Museum</a></li><li class="toc-item"><a href="#lviv_potocki_palace">Potocki Palace</a></li><li class="toc-item"><a href="#lviv_rynok_square">Rynok Square</a></li><li class="toc-item"><a href="#lviv_solomiya_krushelnytska">Solomiya Krushelnytska Lviv Opera</a></li><li class="toc-item"><a href="#lviv_st_george_cathedral">St Georges Cathedral</a></li><li class="toc-item"><a href="#lviv_stryi_park">Stryi Park</a></li><li class="toc-item"><a href="#lviv_ivan_franko_university">University of Lviv main</a></li><li class="toc-item"><a href="#lviv_pdfband_0_c7ae57f7">Львівська ратуша вночі</a></li></ol></nav>
-<section class="place" id="lviv_pdfband_2_5ffecd0e">
+<section class="place" id="lviv_0204_han_cami">
+<div class="place-lead">
 <h3>0204-Han Cami</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/lviv_pdfband_2_5ffecd0e.jpg" alt="0204-Han Cami"/></figure>
+<figure class="place-fig place-fig--hi-res"><img src="../images/lviv_0204_han_cami.jpg" alt="0204-Han Cami" width="975" height="1600"/></figure>
+</div>
 </section>
 <section class="place" id="lviv_armenian_cathedral">
+<div class="place-lead">
 <h3>Armenian Cathedral</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/lviv_armenian_cathedral.jpg" alt="Armenian Cathedral"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lviv_armenian_cathedral.jpg" alt="Armenian Cathedral" width="1200" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lviv_armenian_cathedral_b.jpg" alt="Armenian Cathedral — view 2" width="330" height="425" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Armenian Cathedral of Lviv is a stunning example of medieval architecture, showcasing the rich heritage of the Armenian community in Ukraine. This historic church, with its intricate stone carvings and beautiful frescoes, serves as a testament to the cultural and religious traditions of Armenians in the region. Visitors can admire its unique architectural style and serene atmosphere, making it a must-see landmark in Lviv. Founded in the 14th century, around 1363. Features a blend of Gothic and Renaissance architectural styles. Home to notable frescoes and intricate stone carvings.</p>
 <p class="prose">The Armenian Cathedral was founded in the 14th century, with its construction believed to have begun around 1363. It was built to serve the growing Armenian population in Lviv, which flourished as a significant trade center. Over the centuries, the cathedral has undergone various renovations and restorations, reflecting the changing artistic styles and influences of the times. The Armenian Cathedral holds considerable cultural significance as a symbol of the Armenian heritage in Lviv, contributing to the city&#x27;s diverse religious landscape. It is an important site for the Armenian community, hosting religious ceremonies and cultural events that preserve their traditions. The cathedral&#x27;s unique architectural features and artworks also enhance Lviv&#x27;s status as a UNESCO World Heritage site, showcasing the city&#x27;s historical richness.</p></div>
 </section>
 <section class="place" id="lviv_arsenal_museum">
+<div class="place-lead">
 <h3>Arsenal Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/lviv_arsenal_museum.jpg" alt="Arsenal Museum"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lviv_arsenal_museum.jpg" alt="Arsenal Museum" width="1200" height="1600" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lviv_arsenal_museum_b.jpg" alt="Arsenal Museum — view 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Arsenal Museum in Lviv is a captivating destination that showcases the city&#x27;s rich military history and heritage. Housed in a historic 16th-century arsenal building, the museum features an extensive collection of weaponry, armor, and military artifacts, providing visitors with a glimpse into the past. It serves as a testament to Lviv&#x27;s strategic importance throughout history and its role in various military conflicts. The museum was founded in 1951. The building was originally constructed in the mid-16th century.</p>
 <p class="prose">The Arsenal Museum was established in 1951, situated in a building that dates back to the mid-16th century. Originally constructed as an armory for the city&#x27;s defense, the structure has witnessed numerous historical events, including wars and territorial changes that shaped Lviv&#x27;s identity. Culturally, the Arsenal Museum plays a vital role in preserving the military heritage of Lviv and Ukraine. It reflects the city&#x27;s historical significance as a military stronghold, showcasing the evolution of weaponry and defense strategies over the centuries. The museum also contributes to the understanding of Lviv&#x27;s place in the broader context of European military history.</p></div>
 </section>
 <section class="place" id="lviv_bandinelli_palace">
+<div class="place-lead">
 <h3>Bandinelli Palace</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: neo-Renaissance | Period: 1875–1880</p>
-<figure class="place-fig"><img src="../images/lviv_bandinelli_palace.jpg" alt="Bandinelli Palace"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lviv_bandinelli_palace.jpg" alt="Bandinelli Palace" width="1200" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lviv_bandinelli_palace_b.jpg" alt="Bandinelli Palace — view 2" width="330" height="498" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Built in the late 19th century, Bandinelli Palace is a neo-Renaissance masterpiece standing proudly on Lvov&#x27;s main square. Its elegant façade and ornate interior reflect the city&#x27;s rich cultural heritage. Designed in the neo-Renaissance style with elaborate details inspired by Italian architecture. Located at Rynok Square, one of Europe&#x27;s largest medieval marketplaces. The palace features exquisite frescoes depicting scenes from classical mythology. It houses a museum showcasing artworks and artifacts reflecting Lvov&#x27;s multicultural past. Opened to the public in 1964 after extensive restoration work.</p>
 <p class="prose">Constructed between 1875 and 1880 by Italian architect Francesco Bandinelli, the palace was originally intended as a residence for wealthy merchants. Over time, it became a symbol of Lvov’s architectural diversity and cultural significance. Visitors come to admire its intricate decorations, stunning murals, and historical value within the vibrant heart of Lvov.</p></div>
 </section>
 <section class="place" id="lviv_basilian_monastery">
+<div class="place-lead">
 <h3>Basilian monastery</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/lviv_basilian_monastery.jpg" alt="Basilian monastery"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lviv_basilian_monastery.jpg" alt="Basilian monastery" width="1280" height="1280" style="height: 462px; max-height: 462px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lviv_basilian_monastery_b.jpg" alt="Basilian monastery — view 2" width="330" height="511" style="height: 462px; max-height: 462px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Basilian monks are Eastern Christian monks who follow the rule of Basil the Great, bishop of Caesarea (330–379). The term &#x27;Basilian&#x27; is typically used only in the Catholic Church to distinguish Greek Catholic monks from other forms of monastic life in the Catholic Church. In the Eastern Orthodox Church, all monks follow the Rule of Saint Basil, and so do not distinguish themselves as &#x27;Basilian&#x27;.</p></div>
 </section>
 <section class="place" id="lviv_brewery_museum">
+<div class="place-lead">
 <h3>Beer brewing museum Lviv</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/lviv_brewery_museum.jpg" alt="Beer brewing museum Lviv"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lviv_brewery_museum.jpg" alt="Beer brewing museum Lviv" width="1280" height="853" style="height: 280px; max-height: 280px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lviv_brewery_museum_b.jpg" alt="Beer brewing museum Lviv — view 2" width="330" height="200" style="height: 280px; max-height: 280px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Beer Brewing Museum in Lviv offers a fascinating glimpse into the rich history of beer production in the region. Housed in a historic building, the museum showcases traditional brewing techniques and the evolution of beer culture in Lviv. Visitors can explore interactive exhibits, taste local brews, and learn about the significance of beer in Ukrainian heritage. The museum is located in a historic building that dates back to the 19th century. It features exhibits on traditional brewing methods and the history of local breweries.</p>
 <p class="prose">The Beer Brewing Museum was established to preserve and promote the long-standing brewing traditions of Lviv, a city known for its vibrant beer culture since the Middle Ages. The museum&#x27;s collection includes artifacts and documents that trace the history of brewing in the region, highlighting key developments and local breweries that have shaped Lviv&#x27;s identity. Culturally, the Beer Brewing Museum plays an important role in celebrating Lviv&#x27;s heritage and its longstanding relationship with beer. Beer has been an integral part of daily life and social gatherings in the city, reflecting local traditions and communal values. The museum not only educates visitors about brewing techniques but also fosters appreciation for Lviv&#x27;s unique contributions to the beer industry.</p></div>
 </section>
 <section class="place" id="lviv_bernardine_church">
+<div class="place-lead">
 <h3>Bernardine church</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/lviv_bernardine_church.jpg" alt="Bernardine church"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lviv_bernardine_church.jpg" alt="Bernardine church" width="1171" height="1600" style="height: 351px; max-height: 351px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lviv_bernardine_church_b.jpg" alt="Bernardine church — view 2" width="330" height="251" style="height: 351px; max-height: 351px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Bernardine Church in Lviv is a stunning example of Baroque architecture, renowned for its intricate facade and beautiful interior. Originally built in the 17th century, it serves as a significant landmark in the city, attracting visitors with its rich history and artistic heritage. The church is not only a place of worship but also a cultural hub, hosting various events and exhibitions throughout the year. Founded in 1600 by the Order of the Bernardines. Completed in 1630 and renovated after World War II.</p>
 <p class="prose">The Bernardine Church was founded in 1600 by the Order of the Bernardines and completed in 1630. It was built on the site of an earlier wooden church and has undergone various renovations over the centuries, particularly after damage during World War II. The church has been a witness to many historical events in Lviv, reflecting the city&#x27;s diverse cultural influences. Culturally, the Bernardine Church is an important symbol of Lviv&#x27;s architectural heritage, showcasing the Baroque style that characterizes much of the city&#x27;s historical buildings. It plays a vital role in the daily life of the local community, serving not only as a religious site but also as a venue for cultural events. The church&#x27;s significance is further highlighted by its association with various traditions and rituals that continue to be observed by the faithful.</p></div>
 </section>
 <section class="place" id="lviv_boitsov">
+<div class="place-lead">
 <h3>Boim Chapel</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Ukrainian Baroque | Period: 1876–1884</p>
-<figure class="place-fig"><img src="../images/lviv_boitsov.jpg" alt="Boim Chapel"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lviv_boitsov.jpg" alt="Boim Chapel" width="1050" height="1400" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lviv_boitsov_b.jpg" alt="Boim Chapel — view 2" width="330" height="247" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Built in the late 19th century, it stands as a testament to the city&#x27;s rich architectural heritage. The chapel was commissioned by wealthy merchant Ivan Boim and his wife Oksana. It showcases exquisite carvings and frescoes that reflect the artistic style of the time. Boim Chapel is one of the few surviving examples of Ukrainian Baroque churches in Lvov. Its interior is notable for its golden iconostasis and ornate altar. Today, the chapel serves both as a place of worship and a cultural landmark.</p>
 <p class="prose">Constructed between 1876 and 1884 by architect Ivan Hryhorovych Boim, the chapel was originally intended for private worship by the Boim family. It features intricate interior designs and decorative elements typical of Ukrainian Baroque architecture. Visitors come here to appreciate its unique blend of traditional religious art and architectural elegance.</p></div>
 </section>
 <section class="place" id="lviv_carmelite">
+<div class="place-lead">
 <h3>Carmelite church</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/lviv_carmelite.jpg" alt="Carmelite church"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lviv_carmelite.jpg" alt="Carmelite church" width="330" height="440" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lviv_carmelite_b.jpg" alt="Carmelite church — view 2" width="330" height="498" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Carmelite Church in Lviv is a stunning example of Baroque architecture, known for its intricate interior and serene atmosphere. This historic church, originally built in the 17th century, serves as a peaceful retreat for both locals and visitors alike. Its beautiful altars and artwork reflect the rich spiritual heritage of the city. Founded in 1630 by the Carmelite Order. Renovated in the 18th century, showcasing Baroque architecture.</p>
 <p class="prose">The Carmelite Church was founded in 1630 by the Order of the Brothers of Our Lady of Mount Carmel. It was constructed on the site of an earlier wooden church and underwent significant renovations in the 18th century, particularly under the guidance of architect Johann Georg Pinsel. The church has witnessed various historical events, including the tumultuous periods of war and political change in Lviv. Culturally, the Carmelite Church is an important landmark in Lviv, contributing to the city&#x27;s architectural heritage and attracting numerous visitors. It plays a role in the daily life of the community, hosting religious services and cultural events. The church&#x27;s artistic elements, including its altars and frescoes, are significant to the local heritage and reflect the city&#x27;s diverse history.</p></div>
 </section>
-<section class="place" id="lviv_pdfband_3_73244fd6">
+<section class="place" id="lviv_dianafountain_lviv">
+<div class="place-lead">
 <h3>DianaFountain Lviv</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/lviv_pdfband_3_73244fd6.jpg" alt="DianaFountain Lviv"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/lviv_dianafountain_lviv_b.jpg" alt="DianaFountain Lviv" width="330" height="247"/></figure>
+</div>
 </section>
 <section class="place" id="lviv_dominican_church">
+<div class="place-lead">
 <h3>Dominican church Lviv</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/lviv_dominican_church.jpg" alt="Dominican church Lviv"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lviv_dominican_church.jpg" alt="Dominican church Lviv" width="1163" height="1600" style="height: 351px; max-height: 351px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lviv_dominican_church_b.jpg" alt="Dominican church Lviv — view 2" width="330" height="251" style="height: 351px; max-height: 351px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Dominican Church in Lviv, also known as the Church of the Assumption of the Blessed Virgin Mary, is a stunning example of Baroque architecture. Its intricate façade and richly decorated interior make it a must-visit for anyone exploring the city&#x27;s historical and cultural heritage. Visitors can admire the beautiful altars, frescoes, and the impressive organ that enhance the church&#x27;s serene atmosphere. Founded in 1749 and completed in 1763. Architectural style: Baroque. Significant for the local Catholic community.</p>
 <p class="prose">The Dominican Church was founded in 1749 by the Dominican Order, with construction completing in 1763. The church was built on the site of an earlier wooden church and has undergone several renovations over the years, particularly after damage during World War II. It has served as a significant religious site for the local Catholic community. Culturally, the Dominican Church is an integral part of Lviv&#x27;s architectural heritage, reflecting the city&#x27;s rich history and the influence of various artistic styles. It is a site of religious importance for the Catholic community, hosting regular services and special events. The church also contributes to Lviv&#x27;s status as a UNESCO World Heritage site, showcasing the city&#x27;s unique blend of Eastern and Western European influences.</p></div>
 </section>
 <section class="place" id="lviv_jewish_hospital">
+<div class="place-lead">
 <h3>Golden Rose synagogue area</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/lviv_jewish_hospital.jpg" alt="Golden Rose synagogue area"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lviv_jewish_hospital.jpg" alt="Golden Rose synagogue area" width="1060" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lviv_jewish_hospital_b.jpg" alt="Golden Rose synagogue area — view 2" width="330" height="478" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Golden Rose Synagogue area in Lviv is a poignant reminder of the city&#x27;s rich Jewish heritage. Once home to one of the most significant synagogues in Eastern Europe, this site reflects the historical and cultural tapestry of Lviv&#x27;s Jewish community. Visitors can explore the remnants of this sacred space and appreciate its architectural beauty amidst the vibrant city. The Golden Rose Synagogue was established in the early 17th century. The synagogue was destroyed during World War II, along with much of Lviv&#x27;s Jewish heritage.</p>
 <p class="prose">The Golden Rose Synagogue was founded in the early 17th century, with its construction attributed to the flourishing Jewish community in Lviv during this period. It became a central place of worship and community life until it was destroyed during World War II. The area surrounding the synagogue has since been a focal point for remembering and honoring the Jewish history of Lviv. Culturally, the Golden Rose Synagogue area is significant as it represents the historical presence of Jewish life in Lviv, which has influenced the city’s cultural landscape. The site serves as a testament to the rich traditions and contributions of the Jewish community, which have been integral to Lviv&#x27;s identity. Although the synagogue itself no longer stands, the area remains a place of reflection and remembrance.</p></div>
 </section>
 <section class="place" id="lviv_high_castle">
+<div class="place-lead">
 <h3>High Castle Hill</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/lviv_high_castle.jpg" alt="High Castle Hill"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lviv_high_castle.jpg" alt="High Castle Hill" width="1280" height="960" style="height: 338px; max-height: 338px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lviv_high_castle_b.jpg" alt="High Castle Hill — view 2" width="330" height="242" style="height: 338px; max-height: 338px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">High Castle Hill offers breathtaking panoramic views of Lviv and its surrounding landscape, making it a must-visit for anyone exploring the city. The hill is home to the ruins of the High Castle, a historical fortress that dates back to the 14th century. Visitors can enjoy a leisurely hike to the summit, where they can immerse themselves in the natural beauty and rich history of the area. High Castle Hill is the highest point in Lviv, reaching an elevation of 409 meters. The ruins of the High Castle are all that remain of the original fortress, which was constructed in the 14th century.</p>
 <p class="prose">High Castle Hill, known as Vysokyi Zamok, was established in the mid-14th century as a strategic fortification by the Polish King Casimir III. The castle played a significant role in the defense of Lviv against various invaders throughout its history. Although the original structure has largely disappeared, the site remains a testament to the city&#x27;s medieval past. The hill is not only a historical landmark but also a cultural symbol for the people of Lviv. It has been a gathering place for locals and tourists alike, fostering a sense of community and connection to the city&#x27;s heritage. The views from the hill have inspired countless artists and writers, contributing to Lviv&#x27;s rich cultural tapestry.</p></div>
 </section>
 <section class="place" id="lviv_italian_courtyard">
+<div class="place-lead">
 <h3>Italian Courtyard</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/lviv_italian_courtyard.jpg" alt="Italian Courtyard"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lviv_italian_courtyard.jpg" alt="Italian Courtyard" width="1280" height="854" style="height: 259px; max-height: 259px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lviv_italian_courtyard_b.jpg" alt="Italian Courtyard — view 2" width="330" height="185" style="height: 259px; max-height: 259px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Italian Courtyard in Lviv is a stunning architectural gem that showcases a blend of Renaissance and Baroque styles. Nestled within the historic city center, it serves as a picturesque spot for visitors to relax and admire the intricate details of its design. The courtyard is surrounded by charming cafes and shops, making it a vibrant hub of activity. Constructed in the late 16th century. Features a blend of Renaissance and Baroque architectural styles. Part of the UNESCO World Heritage Site for Lviv.</p>
 <p class="prose">The Italian Courtyard was constructed in the late 16th century as part of the Italian-style palaces built by wealthy merchants. It has undergone various renovations over the centuries, reflecting the changing architectural trends and the city&#x27;s rich history. The courtyard has been a silent witness to many significant events in Lviv&#x27;s past, including periods of cultural flourishing and political turmoil. Culturally, the Italian Courtyard is an important landmark that reflects Lviv&#x27;s diverse heritage, showcasing the city&#x27;s historical connections with Italy and its role in the broader European context. It is a popular gathering place that embodies the daily life of Lviv&#x27;s residents and visitors alike, contributing to the city&#x27;s vibrant atmosphere. The courtyard is also a part of the UNESCO World Heritage Site designation for the city, highlighting its architectural and historical value.</p></div>
 </section>
 <section class="place" id="lviv_jesuit_church">
+<div class="place-lead">
 <h3>Jesuit church Lviv</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/lviv_jesuit_church.jpg" alt="Jesuit church Lviv"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lviv_jesuit_church.jpg" alt="Jesuit church Lviv" width="330" height="498" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lviv_jesuit_church_b.jpg" alt="Jesuit church Lviv — view 2" width="330" height="229" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Jesuit Church in Lviv, also known as the Church of the Holy Apostles Peter and Paul, is a stunning example of Baroque architecture. Its intricate interior and grand façade make it a must-visit for those exploring the city&#x27;s rich historical and cultural landscape. Visitors can admire the beautiful frescoes and sculptures that adorn the church, reflecting its artistic heritage. Founded in 1610 by the Society of Jesus. Completed in 1630, it is a prime example of Baroque architecture. The church has been a site for significant religious ceremonies and community events.</p>
 <p class="prose">The Jesuit Church was founded in 1610 by the Society of Jesus and was completed in 1630. It served as a significant religious center for the Jesuits in Lviv, playing a crucial role in the Counter-Reformation. The church has undergone various restorations and changes in ownership over the centuries, reflecting the city&#x27;s turbulent history. Culturally, the Jesuit Church is an important landmark in Lviv, showcasing Baroque art and architecture. It has been a site of various religious ceremonies and community gatherings, contributing to the city&#x27;s spiritual life. The church&#x27;s historical relevance is further underscored by its inclusion in the UNESCO World Heritage list as part of the Lviv Historic Center.</p></div>
 </section>
 <section class="place" id="lviv_korniakt_tower">
+<div class="place-lead">
 <h3>Korniakt Tower</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/lviv_korniakt_tower.jpg" alt="Korniakt Tower"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lviv_korniakt_tower.jpg" alt="Korniakt Tower" width="1073" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lviv_korniakt_tower_b.jpg" alt="Korniakt Tower — view 2" width="330" height="454" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Korniakt Tower, an iconic landmark in Lviv, stands as a testament to the city&#x27;s rich architectural heritage. Rising majestically from the skyline, it is part of the Dominican Church complex and offers stunning views of the city from its observation deck. Visitors can explore its intricate design and learn about its historical significance. The tower is approximately 65 meters tall. It features a unique combination of Gothic and Renaissance architectural styles.</p>
 <p class="prose">Constructed in the late 16th century, the Korniakt Tower was built by the wealthy merchant and philanthropist, Konstanty Korniakt, as part of the Dominican Monastery. The tower was completed in 1570 and has since become one of Lviv&#x27;s most recognizable structures, reflecting the city&#x27;s Renaissance architectural style. The Korniakt Tower holds cultural significance as a symbol of Lviv&#x27;s historical wealth and artistic heritage. It is a prominent feature in the city&#x27;s skyline and attracts numerous visitors, contributing to Lviv&#x27;s status as a UNESCO World Heritage site. The tower also reflects the city&#x27;s diverse cultural influences, showcasing the blend of Ukrainian, Polish, and Jewish traditions.</p></div>
 </section>
 <section class="place" id="lviv_latin_cathedral">
+<div class="place-lead">
 <h3>Latin Cathedral</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/lviv_latin_cathedral.jpg" alt="Latin Cathedral"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lviv_latin_cathedral.jpg" alt="Latin Cathedral" width="1280" height="889" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lviv_latin_cathedral_b.jpg" alt="Latin Cathedral — view 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Latin Cathedral in Lviv, also known as the Cathedral of the Assumption of the Blessed Virgin Mary, is a stunning example of Gothic architecture and a key landmark in the city. Visitors can admire its intricate façade and beautiful interior, which houses remarkable artworks and historical artifacts. The cathedral serves as a vital place of worship and a testament to Lviv&#x27;s rich cultural heritage. The cathedral was originally built as a Catholic church and later became the seat of the Latin Rite Bishop of Lviv. It features a 70-meter tall bell tower, which is one of the tallest structures in Lviv.</p>
 <p class="prose">The Latin Cathedral was founded in the mid-14th century, with its construction beginning in 1360 and completed in 1481. It has undergone various renovations and restorations over the centuries, reflecting the changing architectural styles and influences in Lviv. The cathedral has also witnessed significant historical events, including the tumultuous periods of the Polish-Lithuanian Commonwealth and the Austro-Hungarian Empire. The Latin Cathedral holds considerable cultural significance as a symbol of Lviv&#x27;s diverse heritage, blending Gothic, Renaissance, and Baroque elements. It is part of the UNESCO World Heritage Site that recognizes the city&#x27;s historical architecture. The cathedral remains an active place of worship, hosting various religious ceremonies and events, and is a focal point for local traditions and community gatherings.</p></div>
 </section>
+<section class="place" id="lviv_landmark">
+<div class="place-lead">
+<h3>Lviv Landmark</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
+
+
+<figure class="place-fig place-fig--hi-res"><img src="../images/lviv_landmark.jpg" alt="Lviv Landmark" width="1280" height="853"/></figure>
+</div>
+</section>
 <section class="place" id="lviv_opera_house">
+<div class="place-lead">
 <h3>Lviv Opera House</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/lviv_opera_house.jpg" alt="Lviv Opera House"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lviv_opera_house.jpg" alt="Lviv Opera House" width="1280" height="1453" style="height: 300px; max-height: 300px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lviv_opera_house_b.jpg" alt="Lviv Opera House — view 2" width="4608" height="3000" style="height: 300px; max-height: 300px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Lviv Opera House is a stunning architectural masterpiece located in the heart of Lviv, renowned for its opulent design and rich cultural offerings. Opened in 1900, it serves as a premier venue for opera, ballet, and classical music performances, attracting both locals and tourists alike. Its grand facade and lavish interiors make it a must-visit destination for anyone exploring the city&#x27;s vibrant arts scene. Opened on October 4, 1900. Designed by architect Zygmunt Gorgolewski. Located in the city center of Lviv.</p>
 <p class="prose">The Lviv Opera House was inaugurated on October 4, 1900, designed by the architect Zygmunt Gorgolewski in the Neo-Renaissance style. It replaced the earlier wooden theater that had stood on the site since the 18th century. Over the years, the opera house has hosted numerous significant performances and events, contributing to Lviv&#x27;s reputation as a cultural hub. Culturally, the Lviv Opera House is a cornerstone of the city&#x27;s artistic life, showcasing a diverse range of performances that reflect both local traditions and international influences. It plays a vital role in preserving the region&#x27;s musical heritage and is a focal point for the community, hosting various festivals and events throughout the year. Although primarily a secular institution, it embodies the rich cultural tapestry of Lviv, which has been shaped by various historical influences.</p></div>
 </section>
-<section class="place" id="lviv_pdfband_9_af31338a">
+<section class="place" id="lviv_lvivrynek1941">
+<div class="place-lead">
 <h3>LvivRynek1941</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/lviv_pdfband_9_af31338a.jpg" alt="LvivRynek1941"/></figure>
+<figure class="place-fig place-fig--hi-res"><img src="../images/lviv_lvivrynek1941.jpg" alt="LvivRynek1941" width="1280" height="960"/></figure>
+</div>
 </section>
 <section class="place" id="lviv_lychakiv_cemetery">
+<div class="place-lead">
 <h3>Lychakiv Cemetery</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Neoclassical, Baroque, Art Nouveau | Period: 1786</p>
-<figure class="place-fig"><img src="../images/lviv_lychakiv_cemetery.jpg" alt="Lychakiv Cemetery"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lviv_lychakiv_cemetery.jpg" alt="Lychakiv Cemetery" width="1280" height="822" style="height: 296px; max-height: 296px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lviv_lychakiv_cemetery_b.jpg" alt="Lychakiv Cemetery — view 2" width="330" height="220" style="height: 296px; max-height: 296px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Perched on a hill above Lvov&#x27;s old town, the Lychakiv Cemetery is one of Ukraine&#x27;s most celebrated burial grounds. Established in the late 18th century, it has become a cultural and historical landmark, home to thousands of graves, monuments, and mausoleums. It covers over 49 hectares, making it one of Europe’s largest cemeteries. The cemetery contains more than 300,000 burials. Notable interments include Ivan Franko, a prominent Ukrainian writer, and Yuri Andrukhovych, a contemporary poet. Its design includes scenic paths, fountains, and parks that create a serene atmosphere. Several famous buildings and monuments are located within the cemetery, such as the Mausoleum of Taras Shevchenko.</p>
 <p class="prose">Founded in 1786 by Polish nobles, the cemetery quickly became a symbol of Lvov&#x27;s multicultural heritage. Over time, it grew into a vast necropolis, hosting notable figures from various fields—including writers, artists, scientists, and politicians. Its architecture reflects a mix of neoclassical, baroque, and art nouveau styles, making it a unique blend of history and art. Visitors come here to explore its rich history, admire the intricate tombstones, and reflect on the lives of those buried within.</p></div>
 </section>
 <section class="place" id="lviv_ploshcha_mickiewicz">
+<div class="place-lead">
 <h3>Mickiewicz Square</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/lviv_ploshcha_mickiewicz.jpg" alt="Mickiewicz Square"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lviv_ploshcha_mickiewicz.jpg" alt="Mickiewicz Square" width="1280" height="661" style="height: 238px; max-height: 238px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lviv_ploshcha_mickiewicz_b.jpg" alt="Mickiewicz Square — view 2" width="330" height="440" style="height: 238px; max-height: 238px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Mickiewicz Square is a charming public space located in the heart of Lviv, surrounded by historical architecture and vibrant city life. Named after the renowned Polish poet Adam Mickiewicz, the square features a prominent statue of him, making it a popular gathering spot for locals and visitors alike. The square serves as a venue for cultural events and festivals, reflecting the city&#x27;s rich artistic heritage. Mickiewicz Square is named after the Polish poet Adam Mickiewicz. The statue of Mickiewicz was unveiled in 1904 and is a notable feature of the square. The square has been a site for various cultural events and public gatherings.</p>
 <p class="prose">Mickiewicz Square was established in the mid-19th century and has since become a significant landmark in Lviv. The statue of Adam Mickiewicz, unveiled in 1904, commemorates the poet&#x27;s influence on Polish literature and culture. Over the years, the square has witnessed various historical events, including public gatherings and celebrations. Culturally, Mickiewicz Square plays a vital role in Lviv&#x27;s identity, serving as a hub for artistic expression and community activities. It reflects the city&#x27;s multicultural heritage, where Polish, Ukrainian, and Jewish influences converge. The square is often used for public events, fostering a sense of community and continuity in Lviv&#x27;s rich traditions.</p></div>
 </section>
 <section class="place" id="lviv_villa_biennale">
+<div class="place-lead">
 <h3>Palace of Culture Lviv</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/lviv_villa_biennale.jpg" alt="Palace of Culture Lviv"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lviv_villa_biennale.jpg" alt="Palace of Culture Lviv" width="1280" height="960" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lviv_villa_biennale_b.jpg" alt="Palace of Culture Lviv — view 2" width="330" height="247" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Palace of Culture Lviv, a stunning architectural gem, serves as a vibrant hub for arts and culture in the heart of Lviv. Originally built in the early 20th century, it hosts a variety of performances, exhibitions, and community events, making it a key destination for both locals and tourists. The palace&#x27;s rich history and diverse programming reflect the city&#x27;s dynamic cultural landscape. Established in the early 1900s. Hosts a variety of cultural events, including theater performances and exhibitions.</p>
 <p class="prose">The Palace of Culture Lviv was established in the early 1900s, originally serving as a venue for social gatherings and cultural events. Over the decades, it has undergone various renovations and adaptations, continuing to play a significant role in the cultural life of Lviv. Key events have included performances by renowned artists and local theater productions, contributing to the city&#x27;s artistic heritage. Culturally, the Palace of Culture Lviv is a cornerstone of the city&#x27;s artistic expression, showcasing local talent and hosting international events. It plays a vital role in preserving Lviv&#x27;s rich heritage and fostering community engagement through the arts. The venue is a testament to the city&#x27;s commitment to cultural development and serves as a gathering place for diverse traditions and modern artistic endeavors.</p></div>
 </section>
 <section class="place" id="lviv_pharmacy_museum">
+<div class="place-lead">
 <h3>Pharmacy Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/lviv_pharmacy_museum.jpg" alt="Pharmacy Museum"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lviv_pharmacy_museum.jpg" alt="Pharmacy Museum" width="1280" height="960" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lviv_pharmacy_museum_b.jpg" alt="Pharmacy Museum — view 2" width="330" height="255" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Pharmacy Museum in Lviv is a unique destination that showcases the rich history of pharmacy and medicine in Ukraine. Housed in a historic building that dates back to the 18th century, the museum features an extensive collection of artifacts, including ancient pharmaceutical tools, apothecary jars, and historical documents. Visitors can explore the evolution of medicinal practices and the role of pharmacists throughout the ages. Established in 1966. Located in a historic building dating back to the 18th century. Features a collection of ancient pharmaceutical tools and apothecary jars.</p>
 <p class="prose">The Pharmacy Museum was established in 1966, making it one of the oldest museums dedicated to pharmacy in Ukraine. It is located in a building that originally served as a pharmacy in the 18th century, reflecting the long-standing tradition of pharmaceutical practice in Lviv. The museum has since become a key institution for preserving and showcasing the history of medicine in the region. Culturally, the Pharmacy Museum plays an important role in preserving Lviv&#x27;s rich heritage in medicine and pharmacy. It highlights the city&#x27;s historical significance as a center of education and healthcare in Eastern Europe. The museum not only serves as an educational resource but also contributes to the understanding of local traditions and the development of medicinal practices over time.</p></div>
 </section>
 <section class="place" id="lviv_potocki_palace">
+<div class="place-lead">
 <h3>Potocki Palace</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/lviv_potocki_palace.jpg" alt="Potocki Palace"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lviv_potocki_palace.jpg" alt="Potocki Palace" width="952" height="1600" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lviv_potocki_palace_b.jpg" alt="Potocki Palace — view 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Potocki Palace — former presidential residence in Lviv, Ukraine.</p></div>
 </section>
 <section class="place" id="lviv_rynok_square">
+<div class="place-lead">
 <h3>Rynok Square</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/lviv_rynok_square.jpg" alt="Rynok Square"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lviv_rynok_square.jpg" alt="Rynok Square" width="1059" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lviv_rynok_square_b.jpg" alt="Rynok Square — view 2" width="330" height="401" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Rynok Square, the heart of Lviv, is a vibrant public space surrounded by stunning Renaissance architecture and bustling cafes. This UNESCO World Heritage site serves as a hub for locals and tourists alike, offering a glimpse into the city&#x27;s rich history and cultural life. Visitors can explore the various market stalls, enjoy street performances, and appreciate the square&#x27;s historical significance. Rynok Square was founded in the 13th century. It is designated as a UNESCO World Heritage site due to its architectural and historical importance.</p>
 <p class="prose">Rynok Square was established in the 13th century as the central marketplace of Lviv, serving as a focal point for trade and commerce. Over the centuries, it has witnessed numerous key events, including public gatherings and celebrations, reflecting the city&#x27;s evolving identity. The square has undergone various renovations, preserving its architectural beauty while adapting to modern needs. Rynok Square holds immense cultural significance as a symbol of Lviv&#x27;s heritage and daily life. It is a gathering place for festivals, art exhibitions, and local traditions, showcasing the city&#x27;s vibrant community spirit. The square&#x27;s architectural ensemble is a testament to the city&#x27;s diverse influences and is a key part of Lviv&#x27;s status as a UNESCO World Heritage site.</p></div>
 </section>
 <section class="place" id="lviv_solomiya_krushelnytska">
+<div class="place-lead">
 <h3>Solomiya Krushelnytska Lviv Opera</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/lviv_solomiya_krushelnytska.jpg" alt="Solomiya Krushelnytska Lviv Opera"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lviv_solomiya_krushelnytska.jpg" alt="Solomiya Krushelnytska Lviv Opera" width="1280" height="960" style="height: 298px; max-height: 298px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lviv_solomiya_krushelnytska_b.jpg" alt="Solomiya Krushelnytska Lviv Opera — view 2" width="330" height="213" style="height: 298px; max-height: 298px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Solomiya Krushelnytska Lviv Opera is a stunning architectural gem located in the heart of Lviv, renowned for its exquisite performances and rich cultural heritage. This opera house not only showcases the best of Ukrainian and international opera but also serves as a vibrant hub for the city&#x27;s artistic community. Visitors can enjoy a diverse program of operas, ballets, and concerts in a beautifully restored setting that reflects Lviv&#x27;s historical charm. Inaugurated in 1900, the opera house is a key example of Neo-Renaissance architecture. It was named after the renowned Ukrainian opera singer Solomiya Krushelnytska.</p>
 <p class="prose">The Solomiya Krushelnytska Lviv Opera was inaugurated in 1900, designed by architect Zygmunt Gorgolewski in the Neo-Renaissance style. It was named after the famous Ukrainian opera singer Solomiya Krushelnytska, who was a prominent figure in the early 20th century. The opera house has witnessed numerous significant performances and events throughout its history, contributing to the cultural landscape of Lviv. Culturally, the Lviv Opera plays a crucial role in preserving and promoting Ukrainian artistic traditions, making it a centerpiece of the city&#x27;s vibrant cultural life. It hosts a variety of performances that attract both locals and tourists, reflecting Lviv&#x27;s rich heritage and artistic diversity. The opera house is also a symbol of national pride and identity, showcasing the talents of Ukrainian artists and composers.</p></div>
 </section>
 <section class="place" id="lviv_st_george_cathedral">
+<div class="place-lead">
 <h3>St Georges Cathedral</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/lviv_st_george_cathedral.jpg" alt="St Georges Cathedral"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lviv_st_george_cathedral.jpg" alt="St Georges Cathedral" width="1280" height="879" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lviv_st_george_cathedral_b.jpg" alt="St Georges Cathedral — view 2" width="330" height="219" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">St. This historic cathedral, dedicated to Saint George, serves as a significant religious site and a symbol of the city&#x27;s rich cultural heritage. Visitors can admire its intricate frescoes and impressive bell tower, which offer a glimpse into Lviv&#x27;s artistic past. Constructed between 1744 and 1761. Designed by architect Bartolomeo Rastrelli. Serves as a major site for the Ukrainian Greek Catholic Church.</p>
 <p class="prose">Construction of St. George&#x27;s Cathedral began in 1744 and was completed in 1761. It was designed by architect Bartolomeo Rastrelli and has since been a prominent landmark in Lviv. The cathedral has undergone various restorations and played a key role in the religious life of the city, particularly for the Ukrainian Greek Catholic Church. St. George&#x27;s Cathedral holds significant cultural and religious importance in Lviv. As a major site of worship for the Ukrainian Greek Catholic community, it has been a focal point for various religious rites and ceremonies. The cathedral&#x27;s architectural beauty and historical value contribute to Lviv&#x27;s designation as a UNESCO World Heritage Site, reflecting the city&#x27;s diverse heritage and traditions.</p></div>
 </section>
 <section class="place" id="lviv_stryi_park">
+<div class="place-lead">
 <h3>Stryi Park</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/lviv_stryi_park.jpg" alt="Stryi Park"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lviv_stryi_park.jpg" alt="Stryi Park" width="1200" height="1600" style="height: 260px; max-height: 260px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lviv_stryi_park_b.jpg" alt="Stryi Park — view 2" width="330" height="186" style="height: 260px; max-height: 260px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Stryi Park is a serene oasis in the heart of Lviv, offering visitors a lush landscape of greenery, walking paths, and tranquil ponds. Established in the late 19th century, this park is a perfect spot for leisurely strolls, picnics, and enjoying nature&#x27;s beauty. With its diverse flora and historical monuments, Stryi Park is a beloved retreat for both locals and tourists alike. Stryi Park was established in 1887. The park covers an area of approximately 60 hectares.</p>
 <p class="prose">Stryi Park was founded in 1887 and designed by the renowned landscape architect Alfred Zheglinsky. The park was originally part of the city&#x27;s expansion plans and has since evolved into a key recreational space for Lviv&#x27;s residents. Over the years, it has hosted various cultural events and gatherings, contributing to its historical significance. Culturally, Stryi Park serves as a vital green space that enhances the quality of urban life in Lviv. It is a popular venue for community events, art exhibitions, and festivals, reflecting the city&#x27;s rich heritage and vibrant traditions. The park is also a cherished spot for daily leisure activities, making it an integral part of Lviv&#x27;s social fabric.</p></div>
 </section>
 <section class="place" id="lviv_ivan_franko_university">
+<div class="place-lead">
 <h3>University of Lviv main</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/lviv_ivan_franko_university.jpg" alt="University of Lviv main"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lviv_ivan_franko_university.jpg" alt="University of Lviv main" width="1280" height="854" style="height: 285px; max-height: 285px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lviv_ivan_franko_university_b.jpg" alt="University of Lviv main — view 2" width="330" height="204" style="height: 285px; max-height: 285px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Ivan Franko National University of Lviv is a prestigious institution located in the heart of Lviv, known for its stunning architecture and rich academic heritage. Founded in 1661, it has played a pivotal role in shaping the intellectual landscape of Ukraine. Visitors can admire its grand façade and explore the lush university grounds, which are steeped in history. Founded in 1661 as a Jesuit College. Became a university in 1784 under the Austrian Empire. Renamed in honor of Ivan Franko in 1940.</p>
 <p class="prose">The university was established in 1661 as the Jesuit College and has undergone several transformations over the centuries. It became a university in 1784 under the Austrian Empire and was named after the prominent Ukrainian writer Ivan Franko in 1940. Key events in its history include the establishment of various faculties and the university&#x27;s role in the promotion of Ukrainian culture and education. The university holds significant cultural importance as a center of learning and intellectual discourse in Ukraine. It has contributed to the development of Ukrainian literature, science, and arts, making it a cornerstone of the nation&#x27;s cultural heritage. The institution has also been a site for various political movements and protests, reflecting its role in the broader socio-political landscape of the region.</p></div>
-</section>
-<section class="place" id="lviv_pdfband_0_c7ae57f7">
-<h3>Львівська ратуша вночі</h3>
-
-
-<figure class="place-fig"><img src="../images/lviv_pdfband_0_c7ae57f7.jpg" alt="Львівська ратуша вночі"/></figure>
 </section>
 </body>
 </html>

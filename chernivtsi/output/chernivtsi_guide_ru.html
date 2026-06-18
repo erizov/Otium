@@ -13,7 +13,7 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
 .otium-logo { font-family: 'Cormorant Garamond', serif; font-size: 2.15rem;
   font-weight: 600; letter-spacing: 0.18em; margin-bottom: 0.85rem; }
 .otiump { margin: 0.42rem 0; line-height: 1.42; text-align: justify;
-  max-width: 38rem; font-size: 0.95rem; }
+  font-size: 0.95rem; }
 .guide-title { page-break-after: auto; margin-bottom: 0.55rem;
   page-break-inside: avoid; }
 .historical-reference { margin: 0.75rem 0 1.15rem;
@@ -63,22 +63,103 @@ ol.trip-stops a:hover { text-decoration: underline; }
 .heraldry-univ-caption { font-size: 0.52rem; line-height: 1.18;
   margin: 0.12rem 0 0; padding: 0 0.06rem; color: #252525;
   text-align: center; font-weight: 500; }
-.heraldry-motto { text-align: center; max-width: 18rem; margin: 0.18rem auto;
+.heraldry-motto { text-align: center; margin: 0.18rem auto;
   width: 100%; }
 .motto-line { font-family: 'Cormorant Garamond', serif; font-size: 1rem;
   margin: 0; color: #333; line-height: 1.35; }
 .guide-title h1.guide-title-main { font-family: 'Cormorant Garamond', serif;
   font-size: 2.35rem; margin-bottom: 0.5rem; font-weight: 600; }
 .lead { color: #444; font-size: 1.05rem; }
-.guide-toc { margin: 0.85rem 0 1.15rem; page-break-inside: avoid; }
-.guide-toc h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.28rem;
-  font-weight: 600; margin: 0.4rem 0 0.55rem; }
+
+.guide-toc { page-break-before: always; break-before: page;
+  page-break-after: always; break-after: page;
+  margin: 0; padding: 0.2rem 0 0.45rem; page-break-inside: auto; }
+.guide-toc h2 { font-family: 'Cormorant Garamond', serif;
+  font-size: 1.28rem; font-weight: 600; margin: 0.4rem 0 0.55rem; }
 .guide-toc ol { margin: 0.35rem 0 0.65rem 1.25rem; padding: 0;
   columns: 2; column-gap: 1.5rem; }
 .guide-toc li { margin: 0.18rem 0; line-height: 1.35;
   font-size: 0.88rem; break-inside: avoid; }
-.guide-toc a { color: #1a5276; text-decoration: none; }
+.guide-toc a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.guide-toc a:hover { color: #0d3d56; }
 .guide-toc li.toc-item--sub { font-size: 0.82rem; margin-left: 0.35rem; }
+.toc-back { font-size: 0.78rem; margin: 0 0 0.35rem; text-align: right; }
+.toc-back a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.toc-back a:hover { color: #0d3d56; }
+.place, .historical-reference, .guide-primer, .guide-trip-plans {
+  scroll-margin-top: 1.25rem; }
+.historical-reference h2, .guide-primer h2, .guide-trip-plans h2,
+.chapter-head h2, .place-lead h3 { position: relative; }
+.guide-toc + .place, .guide-toc + .chapter-head {
+  page-break-before: avoid; break-before: avoid-page; }
+.place-lead { page-break-inside: avoid; break-inside: avoid-page;
+  page-break-after: auto; }
+.place-lead > h3 { page-break-after: avoid; break-after: avoid-page; }
+.place-lead > .place-meta { page-break-after: avoid; break-after: avoid-page; }
+
+.place-fig { page-break-inside: avoid; break-inside: avoid-page;
+  margin: 0.5rem 0 1rem; }
+.place-fig img {
+  page-break-inside: avoid; break-inside: avoid-page;
+  max-height: 48vh; width: auto; max-width: 100%;
+  object-fit: contain; margin-left: auto; margin-right: auto; }
+.place-fig--hi-res img { max-height: 52vh; }
+.place-fig--lo-res img { max-height: 30vh; }
+.place-pdf-fig-row {
+  display: flex; flex-direction: row; flex-wrap: wrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.45rem 0.55rem; margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row .place-fig {
+  flex: 1 1 30%; margin: 0; min-width: 26%; max-width: 100%; }
+.place-pdf-fig-row .place-fig img {
+  width: auto; max-width: 100%; height: auto; max-height: 44vh;
+  object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--pair {
+  flex-wrap: nowrap; justify-content: space-between;
+  align-items: flex-end; gap: 0.5rem 0.65rem; }
+.place-pdf-fig-row--pair .place-fig {
+  flex: 1 1 47%; min-width: 0; max-width: 50%;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--pair .place-fig img {
+  max-height: 44vh; object-fit: contain; }
+.place-pdf-fig-row--pair .place-fig--hi-res img { max-height: 52vh; }
+.place-pdf-fig-row--pair .place-fig--lo-res img { max-height: 26vh; }
+.place-pdf-fig-row--pair .place-fig--row-sized img,
+.place-pdf-fig-row--triple .place-fig--row-sized img,
+.place-pdf-fig-row--many .place-fig--row-sized img {
+  width: auto; max-width: 100%; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row .place-fig--row-sized.place-fig--hi-res img,
+.place-pdf-fig-row .place-fig--row-sized.place-fig--lo-res img {
+  max-height: unset; }
+.place-pdf-fig-rows-stack {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple {
+  display: flex; flex-direction: row; flex-wrap: nowrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.4rem 0.48rem; margin: 0;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--triple .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--triple .place-fig--hi-res img { max-height: 42vh; }
+.place-pdf-fig-row--triple .place-fig--lo-res img { max-height: 18vh; }
+.place-pdf-fig-row--many {
+  flex-wrap: nowrap; justify-content: center; align-items: flex-end;
+  gap: 0.35rem 0.42rem; }
+.place-pdf-fig-row--many .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--many .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+
+
 .place { margin-bottom: 2.2rem; page-break-inside: auto; }
 h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.22rem; margin: 1.2rem 0 0.35rem;
   font-weight: 600; }
@@ -90,7 +171,6 @@ h4 { font-family: 'Cormorant Garamond', serif; font-size: 0.95rem; text-transfor
   color: #555; font-size: 0.95rem; margin: 0 0 0.5rem; font-style: italic; }
 .place-meta { font-size: 0.92rem; color: #353535; margin: 0 0 0.75rem;
   line-height: 1.4; }
-.place-fig { margin: 0.5rem 0 1rem; }
 img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
 .prose, .place-desc p { margin: 0.45rem 0; line-height: 1.5;
   text-align: justify; }
@@ -109,12 +189,15 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <div class="heraldry-strip heraldry-official">
 <figure class="heraldry-fig heraldry-coat-book" title="Coat of arms of Chernivtsi"><img src="../images/guide_coat_of_arms.svg" alt="Coat of arms of Chernivtsi"/></figure>
 <figure class="heraldry-fig heraldry-coat-book" title="Flag of Chernivtsi"><img src="../images/guide_flag.svg" alt="Flag of Chernivtsi"/></figure>
-</div></div><h1 class="guide-title-main">Chernivtsi</h1><p class="lead">Путеводитель. Объектов в этом выпуске: 33.</p></header>
+</div></div><h1 class="guide-title-main">Chernivtsi</h1><p class="lead">Путеводитель. Объектов в этом выпуске: 32.</p></header>
+<nav class="guide-toc" id="guide-toc" aria-label="Содержание"><h2>Содержание</h2><ol><li class="toc-item"><a href="#guide-historical">Историческая справка</a></li><li class="toc-item"><a href="#guide-trips">Маршруты</a></li><li class="toc-item"><a href="#chernivtsi_central_square">Chernivtsi Central Square</a></li><li class="toc-item"><a href="#chernivtsi_khotin">Chernivtsi Khotin</a></li><li class="toc-item"><a href="#chernivtsi_landmark">Chernivtsi Landmark</a></li><li class="toc-item"><a href="#chernivtsi_romanian_orthodox">Chernivtsi Romanian Orthodox</a></li><li class="toc-item"><a href="#chernivtsi_st_nicholas">Chernivtsi St Nicholas</a></li><li class="toc-item"><a href="#chernivtsi_train_station">Chernivtsi Train Station</a></li><li class="toc-item"><a href="#chernivtsi_czerniowcy_462">Czerniowcy 462</a></li><li class="toc-item"><a href="#chernivtsi_place_2">Place 2</a></li><li class="toc-item"><a href="#chernivtsi_armenian_church">Армянская церковь Черновцы</a></li><li class="toc-item"><a href="#chernivtsi_regional_museum">Буковинский музей</a></li><li class="toc-item"><a href="#chernivtsi_music_drama">Буковинский музыкально-драматический театр</a></li><li class="toc-item"><a href="#chernivtsi_villa">Вилла Правосудия</a></li><li class="toc-item"><a href="#chernivtsi_jewish_cemetery">Еврейское кладбище Черновцы</a></li><li class="toc-item"><a href="#chernivtsi_catholic_church">Католическая церковь Святого Креста</a></li><li class="toc-item"><a href="#chernivtsi_shevchenko_monument">Монумент Шевченко</a></li><li class="toc-item"><a href="#chernivtsi_paper_museum">Музей бумаги</a></li><li class="toc-item"><a href="#chernivtsi_park_popa">Парк Попа</a></li><li class="toc-item"><a href="#chernivtsi_market">Площадь музыкального фонтана</a></li><li class="toc-item"><a href="#chernivtsi_polish_church">Польская церковь Черновцы</a></li><li class="toc-item"><a href="#chernivtsi_town_hall">Ратуша Черновцы</a></li><li class="toc-item"><a href="#chernivtsi_university">Резиденция Черновицкого университета</a></li><li class="toc-item"><a href="#chernivtsi_synagogue_tempel">Темпльная синагога Черновцы</a></li><li class="toc-item"><a href="#chernivtsi_olha_kobylianska">Улица Ольги Кобылянской</a></li><li class="toc-item"><a href="#chernivtsi_unesco_gate">Университетские ворота Черновцы</a></li><li class="toc-item"><a href="#chernivtsi_bukovyna_art">Филиал Буковинского художественного музея</a></li><li class="toc-item"><a href="#chernivtsi_resurrection_church">Церковь Воскресения</a></li><li class="toc-item"><a href="#chernivtsi_st_onesimus">Церковь Святого Онуфрия</a></li><li class="toc-item"><a href="#chernivtsi_assumption_church">Церковь Успения</a></li><li class="toc-item"><a href="#chernivtsi_public_library">Черновицкая областная библиотека</a></li><li class="toc-item"><a href="#chernivtsi_theatre">Черновицкий драматический театр</a></li><li class="toc-item"><a href="#chernivtsi_art_museum">Черновицкий художественный музей</a></li><li class="toc-item"><a href="#chernivtsi_historical_museum">Экспонаты краеведения Черновицкой области</a></li></ol></nav>
 <section class="historical-reference" id="guide-historical" aria-label="Историческая справка"><h2>Историческая справка</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 <p class="prose">Черновцы — административный центр Черновицкой области Украины, город на перекрёстке культур восточной Европы.</p>
 <p class="prose">В составе Австро-Венгрии получил университетский кампус и многоэтничную застройку; исторический центр отражает влияние румынского, украинского, еврейского и немецкого наследия. Сегодня Черновцы — региональный узел образования и туризма.</p>
 <p class="prose">Межвоенный период и Вторая мировая сменили государственные границы; советский и постсоветский этапы укрепили университет и театр. Сегодня Черновцы подчёркивают культурное многообразие Буковины и роль образования на западе Украины.</p></section>
 <section class="guide-trip-plans" id="guide-trips" aria-label="Маршруты"><h2>Маршруты</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 <article class="trip-plan" id="trip-1d"><h3>Один день</h3>
 <p class="prose">Компактный маршрут по главным точкам путеводителя с минимальным возвратом назад пешком.</p>
 <ol class="trip-stops"><li><a href="#chernivtsi_bukovyna_art">Филиал Буковинского художественного музея</a> (~75мин)</li>
@@ -127,276 +210,444 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <p class="prose">День 1 — центральный кластер.</p>
 <ol class="trip-stops"><li><a href="#chernivtsi_art_museum">Черновицкий художественный музей</a> (~75мин)</li>
 <li><a href="#chernivtsi_assumption_church">Церковь Успения</a> (~75мин)</li>
-<li><a href="#chernivtsi_bridge">Пешеходный мост через Прут</a> (~75мин)</li>
 <li><a href="#chernivtsi_catholic_church">Католическая церковь Святого Креста</a> (~75мин)</li>
-<li><a href="#chernivtsi_jewish_cemetery">Еврейское кладбище Черновцы</a> (~75мин)</li></ol></article>
+<li><a href="#chernivtsi_jewish_cemetery">Еврейское кладбище Черновцы</a> (~75мин)</li>
+<li><a href="#chernivtsi_market">Площадь музыкального фонтана</a> (~75мин)</li></ol></article>
 <article class="trip-plan" id="trip-3d2"><h3>Три дня — день 2</h3>
 <p class="prose">День 2 — следующая группа районов.</p>
-<ol class="trip-stops"><li><a href="#chernivtsi_market">Площадь музыкального фонтана</a> (~75мин)</li>
-<li><a href="#chernivtsi_music_drama">Буковинский музыкально-драматический театр</a> (~75мин)</li>
+<ol class="trip-stops"><li><a href="#chernivtsi_music_drama">Буковинский музыкально-драматический театр</a> (~75мин)</li>
 <li><a href="#chernivtsi_olha_kobylianska">Улица Ольги Кобылянской</a> (~75мин)</li>
 <li><a href="#chernivtsi_paper_museum">Музей бумаги</a> (~75мин)</li>
-<li><a href="#chernivtsi_park_popa">Парк Попа</a> (~75мин)</li></ol></article>
+<li><a href="#chernivtsi_park_popa">Парк Попа</a> (~75мин)</li>
+<li><a href="#chernivtsi_polish_church">Польская церковь Черновцы</a> (~75мин)</li></ol></article>
 <article class="trip-plan" id="trip-3d3"><h3>Три дня — день 3</h3>
 <p class="prose">День 3 — оставшиеся близкие объекты.</p>
-<ol class="trip-stops"><li><a href="#chernivtsi_polish_church">Польская церковь Черновцы</a> (~75мин)</li>
-<li><a href="#chernivtsi_public_library">Черновицкая областная библиотека</a> (~75мин)</li>
+<ol class="trip-stops"><li><a href="#chernivtsi_public_library">Черновицкая областная библиотека</a> (~75мин)</li>
 <li><a href="#chernivtsi_resurrection_church">Церковь Воскресения</a> (~75мин)</li>
 <li><a href="#chernivtsi_shevchenko_monument">Монумент Шевченко</a> (~75мин)</li>
-<li><a href="#chernivtsi_st_onesimus">Церковь Святого Онуфрия</a> (~75мин)</li></ol></article></section>
-<nav class="guide-toc" aria-label="Содержание"><h2>Содержание</h2><ol><li class="toc-item"><a href="#guide-historical">Историческая справка</a></li><li class="toc-item"><a href="#guide-trips">Маршруты</a></li><li class="toc-item"><a href="#chernivtsi_armenian_church">Армянская церковь Черновцы</a></li><li class="toc-item"><a href="#chernivtsi_regional_museum">Буковинский музей</a></li><li class="toc-item"><a href="#chernivtsi_music_drama">Буковинский музыкально-драматический театр</a></li><li class="toc-item"><a href="#chernivtsi_bukovyna_art">Филиал Буковинского художественного музея</a></li><li class="toc-item"><a href="#chernivtsi_romanian_orthodox">Chernivtsi Romanian Orthodox</a></li><li class="toc-item"><a href="#chernivtsi_catholic_church">Католическая церковь Святого Креста</a></li><li class="toc-item"><a href="#chernivtsi_central_square">Chernivtsi Central Square</a></li><li class="toc-item"><a href="#chernivtsi_art_museum">Черновицкий художественный музей</a></li><li class="toc-item"><a href="#chernivtsi_theatre">Черновицкий драматический театр</a></li><li class="toc-item"><a href="#chernivtsi_train_station">Chernivtsi Train Station</a></li><li class="toc-item"><a href="#chernivtsi_public_library">Черновицкая областная библиотека</a></li><li class="toc-item"><a href="#chernivtsi_historical_museum">Экспонаты краеведения Черновицкой области</a></li><li class="toc-item"><a href="#chernivtsi_university">Резиденция Черновицкого университета</a></li><li class="toc-item"><a href="#chernivtsi_st_onesimus">Церковь Святого Онуфрия</a></li><li class="toc-item"><a href="#chernivtsi_assumption_church">Церковь Успения</a></li><li class="toc-item"><a href="#chernivtsi_pdfband_4_f58908da">Czerniowcy (462)</a></li><li class="toc-item"><a href="#chernivtsi_jewish_cemetery">Еврейское кладбище Черновцы</a></li><li class="toc-item"><a href="#chernivtsi_pdfband_2_a07be18a">Khotin</a></li><li class="toc-item"><a href="#chernivtsi_market">Площадь музыкального фонтана</a></li><li class="toc-item"><a href="#chernivtsi_olha_kobylianska">Улица Ольги Кобылянской</a></li><li class="toc-item"><a href="#chernivtsi_paper_museum">Музей бумаги</a></li><li class="toc-item"><a href="#chernivtsi_bridge">Пешеходный мост через Прут</a></li><li class="toc-item"><a href="#chernivtsi_polish_church">Польская церковь Черновцы</a></li><li class="toc-item"><a href="#chernivtsi_park_popa">Парк Попа</a></li><li class="toc-item"><a href="#chernivtsi_resurrection_church">Церковь Воскресения</a></li><li class="toc-item"><a href="#chernivtsi_shevchenko_monument">Монумент Шевченко</a></li><li class="toc-item"><a href="#chernivtsi_st_nicholas">Chernivtsi St Nicholas</a></li><li class="toc-item"><a href="#chernivtsi_synagogue_tempel">Темпльная синагога Черновцы</a></li><li class="toc-item"><a href="#chernivtsi_town_hall">Ратуша Черновцы</a></li><li class="toc-item"><a href="#chernivtsi_unesco_gate">Университетские ворота Черновцы</a></li><li class="toc-item"><a href="#chernivtsi_villa">Вилла Правосудия</a></li><li class="toc-item"><a href="#chernivtsi_pdfband_10_99e791d5">Будинок з левами</a></li><li class="toc-item"><a href="#chernivtsi_pdfband_0_67b04f74">Чернівці, Головна,</a></li></ol></nav>
+<li><a href="#chernivtsi_st_onesimus">Церковь Святого Онуфрия</a> (~75мин)</li>
+<li><a href="#chernivtsi_theatre">Черновицкий драматический театр</a> (~75мин)</li></ol></article></section>
+<section class="place" id="chernivtsi_central_square">
+<div class="place-lead">
+<h3>Chernivtsi Central Square</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/chernivtsi_central_square.jpg" alt="Chernivtsi Central Square" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/chernivtsi_central_square_b.jpg" alt="Chernivtsi Central Square — вид 2" width="330" height="238" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Тсентральна Площадь (Центральная Площадь) — историческое сердце Черновцов, обрамленное зданием ратуши, подъездами университета и оживленными пешеходными маршрутами по старому городу.</p></div>
+</section>
+<section class="place" id="chernivtsi_khotin">
+<div class="place-lead">
+<h3>Chernivtsi Khotin</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/chernivtsi_khotin.jpg" alt="Chernivtsi Khotin" width="1280" height="960" style="height: 331px; max-height: 331px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/chernivtsi_khotin_b.jpg" alt="Chernivtsi Khotin — вид 2" width="330" height="237" style="height: 331px; max-height: 331px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+</section>
+<section class="place" id="chernivtsi_landmark">
+<div class="place-lead">
+<h3>Chernivtsi Landmark</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/chernivtsi_landmark.jpg" alt="Chernivtsi Landmark" width="1280" height="960" style="height: 333px; max-height: 333px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/chernivtsi_landmark_b.jpg" alt="Chernivtsi Landmark — вид 2" width="330" height="238" style="height: 333px; max-height: 333px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+</section>
+<section class="place" id="chernivtsi_romanian_orthodox">
+<div class="place-lead">
+<h3>Chernivtsi Romanian Orthodox</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/chernivtsi_romanian_orthodox.jpg" alt="Chernivtsi Romanian Orthodox" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/chernivtsi_romanian_orthodox_b.jpg" alt="Chernivtsi Romanian Orthodox — вид 2" width="330" height="238" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Румынский православный собор Святого Духа (1844) расположен на месте бывшего румынского национального дома в центре Черновцов, имеет неоклассический фасад и богато украшенный интерьер.</p></div>
+</section>
+<section class="place" id="chernivtsi_st_nicholas">
+<div class="place-lead">
+<h3>Chernivtsi St Nicholas</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/chernivtsi_st_nicholas.jpg" alt="Chernivtsi St Nicholas" width="1280" height="957" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/chernivtsi_st_nicholas_b.jpg" alt="Chernivtsi St Nicholas — вид 2" width="330" height="219" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Следующие соборы, церкви и часовни посвящены Святому Николаю: Церковь Святого Николая в Албании, Церковь Святого Николая в Курджане, Церковь Святого Николая в Москополе.</p></div>
+</section>
+<section class="place" id="chernivtsi_train_station">
+<div class="place-lead">
+<h3>Chernivtsi Train Station</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Период: 1874</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/chernivtsi_train_station.jpg" alt="Chernivtsi Train Station" width="1280" height="871" style="height: 260px; max-height: 260px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/chernivtsi_train_station_b.jpg" alt="Chernivtsi Train Station — вид 2" width="330" height="186" style="height: 260px; max-height: 260px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">В центре оживленного центра города Черновцы находится его исторический железнодорожный вокзал — символ богатого культурного наследия и транспортный узел города с конца XIX века. Открыт в 1874 году во время правления императора Франца Иосифа I. Обладает замысловатыми декоративными элементами, характерными для неоренессанского стиля. Выступает в качестве ключевого сообщения между Украиной и соседними странами, такими как Румыния и Молдова. В этом городе есть небольшой музей, посвященный местной истории и железнодорожному транспорту. Проводил значительные политические собрания и события на протяжении всей своей истории.</p>
+<p class="prose">Построенная в 1874 году, железнодорожная станция Черновцы играла ключевую роль в развитии региона как крупный транзитный узел для пассажиров и товаров. Её неоренессанская архитектура отражает эпоху, когда город входил в состав Австро-Венгерской империи, демонстрируя богато украшенные фасады и элегантные интерьеры, сочетающие классические и восточноевропейские элементы дизайна. Посетители могут оценить историческое значение вокзала, наслаждаясь при этом современными удобствами, такими как комфортные зоны ожидания и кафе.</p></div>
+</section>
+<section class="place" id="chernivtsi_czerniowcy_462">
+<div class="place-lead">
+<h3>Czerniowcy 462</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<figure class="place-fig place-fig--hi-res"><img src="../images/chernivtsi_czerniowcy_462.jpg" alt="Czerniowcy 462" width="1200" height="1600"/></figure>
+</div>
+</section>
+<section class="place" id="chernivtsi_place_2">
+<div class="place-lead">
+<h3>Place 2</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<figure class="place-fig place-fig--hi-res"><img src="../images/chernivtsi_place_2.jpg" alt="Place 2" width="1280" height="594"/></figure>
+</div>
+</section>
 <section class="place" id="chernivtsi_armenian_church">
+<div class="place-lead">
 <h3>Армянская церковь Черновцы</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/chernivtsi_armenian_church.jpg" alt="Армянская церковь Черновцы"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/chernivtsi_armenian_church.jpg" alt="Армянская церковь Черновцы" width="1057" height="1600" style="height: 333px; max-height: 333px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/chernivtsi_armenian_church_b.jpg" alt="Армянская церковь Черновцы — вид 2" width="330" height="238" style="height: 333px; max-height: 333px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Армянская церковь в Черновцах является великолепным примером армянской архитектуры, отличающейся сложными каменными резьбами и уникальным дизайном. Расположенная в самом сердце города, она служит спокойным местом для поклонения и свидетельством богатого культурного наследия армянской общины в регионе. Посетители могут полюбоваться её красивыми фресками и умиротворяющей атмосферой. Основан в 1865 году. Архитектурный стиль отражает традиционный армянский дизайн.</p>
 <p class="prose">Армянская церковь в Черновцах была основана в 19 веке, а именно в 1865 году, в период значительного роста армянской общины в городе. Она была построена для удовлетворения духовных нужд местного армянского населения, которое обосновалось в Черновцах на протяжении веков. Церковь стала свидетелем различных исторических событий, включая изменения в политическом ландшафте города. Культурно Армянская церковь является важной частью наследия Черновцов, отражая разнообразную религиозную историю города. Она служит символом вклада армянской общины в местную культуру и традиции. Церковь является не только местом поклонения, но и площадкой для общественных собраний и культурных мероприятий, укрепляя армянскую идентичность в городе.</p></div>
 </section>
 <section class="place" id="chernivtsi_regional_museum">
+<div class="place-lead">
 <h3>Буковинский музей</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/chernivtsi_regional_museum.jpg" alt="Буковинский музей"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/chernivtsi_regional_museum_b.jpg" alt="Буковинский музей" width="330" height="251"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Буковинский музей в Черновцах является сокровищницей региональной истории и культуры, демонстрируя разнообразную коллекцию артефактов, отражающих богатое наследие Буковины. Посетители могут исследовать выставки, которые подчеркивают художественные традиции региона, исторические вехи и повседневную жизнь. Архитектура музея сама по себе является великолепным примером эклектичных стилей региона. Основан в 1940 году, с корнями в коллекциях 19 века. Содержит разнообразную коллекцию артефактов, связанных с историей и культурой Буковины. Архитектура музея демонстрирует эклектичные стили, отражая разнообразные влияния региона.</p>
 <p class="prose">Буковинский музей был основан в 1940 году, хотя его корни можно проследить до более ранних коллекций, созданных в 19 веке. Он претерпел различные трансформации и расширения, особенно после Второй мировой войны, чтобы удовлетворить растущий интерес к культурному и историческому наследию региона. Культурно Буковинский музей играет ключевую роль в сохранении и продвижении разнообразного наследия Черновцов и окружающего региона. Он служит центром местных традиций, искусства и истории, способствуя формированию идентичности сообщества. Коллекция музея включает значимые произведения, которые отражают мультикультурные влияния Буковины, формировавшейся под воздействием различных этнических групп на протяжении веков.</p></div>
 </section>
 <section class="place" id="chernivtsi_music_drama">
+<div class="place-lead">
 <h3>Буковинский музыкально-драматический театр</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/chernivtsi_music_drama.jpg" alt="Буковинский музыкально-драматический театр"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/chernivtsi_music_drama.jpg" alt="Буковинский музыкально-драматический театр" width="1280" height="951" style="height: 333px; max-height: 333px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/chernivtsi_music_drama_b.jpg" alt="Буковинский музыкально-драматический театр — вид 2" width="330" height="238" style="height: 333px; max-height: 333px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Буковинский музыкально-драматический театр в Черновцах — это потрясающий архитектурный шедевр, который демонстрирует богатое культурное наследие региона. Известный своими яркими выступлениями и историческим значением, театр служит центральным узлом для искусств в городе, привлекая как местных жителей, так и туристов. Его красиво оформленные интерьеры и разнообразная программа делают его обязательным местом для посещения для всех, кто интересуется сценическими искусствами. Основанный в 1905 году, театр изначально принимал как оперные, так и драматические представления. Театр известен своей потрясающей архитектурой, которая отражает эклектичные стили начала 20 века.</p>
 <p class="prose">Буковинский музыкально-драматический театр был основан в 1905 году и изначально служил площадкой как для оперы, так и для драмы. На протяжении многих лет он подвергался различным реконструкциям и реставрациям, сохраняя свою архитектурную красоту и адаптируясь к современным театральным нуждам. Театр стал значимой культурной институцией в Черновцах, принимая множество спектаклей и мероприятий, которые способствовали художественному ландшафту города. Культурно Буковинский музыкально-драматический театр играет жизненно важную роль в художественной жизни Черновцов, отражая разнообразное наследие и традиции города. Он служит платформой для местных художников и исполнителей, способствуя созданию яркого сообщества вокруг исполнительского искусства. Программа театра часто включает произведения, которые подчеркивают фольклор и историю региона, что делает его ключевым игроком в сохранении и продвижении буковинской культуры.</p></div>
 </section>
-<section class="place" id="chernivtsi_bukovyna_art">
-<h3>Филиал Буковинского художественного музея</h3>
+<section class="place" id="chernivtsi_villa">
+<div class="place-lead">
+<h3>Вилла Правосудия</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/chernivtsi_bukovyna_art.jpg" alt="Филиал Буковинского художественного музея"/></figure>
-<div class="place-desc"><p class="prose">Буковинский художественный музей в Черновцах демонстрирует богатую коллекцию украинского искусства, с акцентом на культурное наследие региона Буковина. Расположенный в потрясающем историческом здании, музей предлагает посетителям возможность заглянуть в художественные традиции и современные работы, отражающие разнообразные влияния этого края. Он служит ярким культурным центром, проводя выставки, мастер-классы и мероприятия, которые привлекают как местных жителей, так и туристов. Музей был основан в 1988 году. Он расположен в историческом здании, датируемом концом 19 века. Музей сосредоточен на искусстве и культурном наследии региона Буковина.</p>
-<p class="prose">Буковинский художественный музей был основан в 1988 году, эволюционировав из более ранних художественных коллекций и инициатив в регионе. Здание музея, изначально построенное в конце 19 века, на протяжении многих лет выполняло различные функции, что способствует его исторической значимости в Черновцах. Культурно, Художественный музей Буковины играет важную роль в сохранении и продвижении художественного наследия региона Буковина. Он хранит работы известных украинских художников и отражает разнообразные культурные влияния этого района, что делает его значимым местом для понимания местных традиций и современного искусства. Музей также вносит вклад в идентичность города и культурную жизнь, способствуя чувству общности через различные художественные программы.</p></div>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/chernivtsi_villa.jpg" alt="Вилла Правосудия" width="1280" height="853" style="height: 278px; max-height: 278px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/chernivtsi_villa_b.jpg" alt="Вилла Правосудия — вид 2" width="330" height="199" style="height: 278px; max-height: 278px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Вилла Правосудия в Черновцах является ярким примером архитектурной элегантности, демонстрируя сочетание неоренессанса и ар-деко. Это историческое здание, изначально построенное в конце 19 века, служит символом богатого культурного наследия города. Посетители могут полюбоваться его сложными фасадами и зелеными садами, что делает его популярным местом как для местных жителей, так и для туристов. Построено в 1895 году архитектором Францем фон Нойманом. Изначально служил штаб-квартирой местной судебной власти.</p>
+<p class="prose">Вилла Правосудия была построена в 1895 году по проекту знаменитого архитектора Франца фон Ноймана. Изначально она служила штаб-квартирой местного судебного органа, отражая административное значение Черновцов во время Австро-Венгерской империи. На протяжении многих лет здание стало свидетелем различных исторических событий, включая изменения в управлении и последствия Первой мировой войны. Культурно Вилла Правосудия является свидетельством архитектурного наследия Черновцов и его исторической роли как центра юридической и административной деятельности. Здание вносит вклад в идентичность города, которая формировалась под влиянием различных факторов на протяжении веков. Хотя оно не имеет религиозного значения, его присутствие обогащает культурный ландшафт Черновцов, привлекая тех, кто интересуется историей и архитектурой.</p></div>
 </section>
-<section class="place" id="chernivtsi_romanian_orthodox">
-<h3>Chernivtsi Romanian Orthodox</h3>
+<section class="place" id="chernivtsi_jewish_cemetery">
+<div class="place-lead">
+<h3>Еврейское кладбище Черновцы</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/chernivtsi_romanian_orthodox.jpg" alt="Chernivtsi Romanian Orthodox"/></figure>
-<div class="place-desc"><p class="prose">Румынский православный собор Святого Духа (1844) расположен на месте бывшего румынского национального дома в центре Черновцов, имеет неоклассический фасад и богато украшенный интерьер.</p></div>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/chernivtsi_jewish_cemetery.jpg" alt="Еврейское кладбище Черновцы" width="1280" height="666" style="height: 240px; max-height: 240px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/chernivtsi_jewish_cemetery_b.jpg" alt="Еврейское кладбище Черновцы — вид 2" width="330" height="238" style="height: 240px; max-height: 240px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Еврейское кладбище в Черновцах является трогательным свидетельством богатого еврейского наследия города. Основанное в 19 веке, оно отличается сложными надгробиями и мемориалами, которые отражают художественное мастерство и культурное значение еврейской общины в регионе. Посетители могут исследовать спокойные просторы, которые служат напоминанием о историческом присутствии и вкладе евреев в Черновцах. Основан в начале 19 века. Самая старая зафиксированная надгробная плита датируется 1840 годом.</p>
+<p class="prose">Еврейское кладбище в Черновцах было основано в начале 19 века, а самая старая зафиксированная надгробная плита датируется 1840 годом. Оно стало значительным местом захоронения для еврейской общины, которая процветала в городе до середины 20 века. Кладбище стало свидетелем ключевых исторических событий, включая последствия Второй мировой войны и Холокоста, которые сильно повлияли на еврейское население Черновцов. Культурно, кладбище является важным объектом наследия, отражающим художественные и архитектурные стили еврейских погребальных практик. Оно служит символом яркой еврейской жизни, которая когда-то процветала в Черновцах, внося вклад в разнообразную культурную ткань города. Кладбище также является местом памяти, почитая жизни и традиции тех, кто был частью еврейской общины.</p></div>
 </section>
 <section class="place" id="chernivtsi_catholic_church">
+<div class="place-lead">
 <h3>Католическая церковь Святого Креста</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/chernivtsi_catholic_church.jpg" alt="Католическая церковь Святого Креста"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--row-sized"><img src="../images/chernivtsi_catholic_church.jpg" alt="Католическая церковь Святого Креста" width="1004" height="932" style="height: 333px; max-height: 333px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/chernivtsi_catholic_church_b.jpg" alt="Католическая церковь Святого Креста — вид 2" width="330" height="238" style="height: 333px; max-height: 333px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Католическая церковь Святого Креста в Черновцах является впечатляющим примером неоготической архитектуры, завораживая посетителей своим сложным дизайном и спокойной атмосферой. Эта церковь служит важным местом поклонения для местной католической общины и является яркой достопримечательностью города, отражая его богатое религиозное наследие. Построен в период с 1883 по 1886 год. Сделанный в неоготическом архитектурном стиле.</p>
 <p class="prose">Католическая церковь Святого Креста была построена в конце 19 века, строительство завершилось в 1886 году. Она была спроектирована архитектором Францем фон Нойманом и с тех пор стала значимым религиозным местом в Черновцах, став свидетелем множества важных событий в духовной жизни сообщества. Церковь имеет культурное значение как символ католической веры в регионе, который на протяжении многих лет испытывал разнообразные религиозные влияния. Она вносит вклад в архитектурное наследие города и является частью повседневной жизни многих жителей, служа не только местом поклонения, но и площадкой для общественных собраний и празднований.</p></div>
 </section>
-<section class="place" id="chernivtsi_central_square">
-<h3>Chernivtsi Central Square</h3>
+<section class="place" id="chernivtsi_shevchenko_monument">
+<div class="place-lead">
+<h3>Монумент Шевченко</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/chernivtsi_central_square.jpg" alt="Chernivtsi Central Square"/></figure>
-<div class="place-desc"><p class="prose">Тсентральна Площадь (Центральная Площадь) — историческое сердце Черновцов, обрамленное зданием ратуши, подъездами университета и оживленными пешеходными маршрутами по старому городу.</p></div>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/chernivtsi_shevchenko_monument.jpg" alt="Монумент Шевченко" width="1280" height="960" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/chernivtsi_shevchenko_monument_b.jpg" alt="Монумент Шевченко — вид 2" width="330" height="440" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Монумент Шевченко в Черновцах является данью уважения известному украинскому поэту и художнику Тарасу Шевченко. Расположенный на живописной площади, монумент является популярным местом встречи как для местных жителей, так и для туристов, олицетворяя дух украинской культуры и наследия. Его впечатляющий дизайн и исторический контекст делают его обязательным для посещения всем, кто исследует город. Памятник был открыт в 1992 году. Это отмечает 181-ю годовщину со дня рождения Тараса Шевченко.</p>
+<p class="prose">Монумент Шевченко был открыт в 1992 году в честь 181-й годовщины со дня рождения Тараса Шевченко. Эта дата имеет особое значение, так как она совпадает с возрождением украинской национальной идентичности после независимости страны от Советского Союза в 1991 году. Монумент отражает неугасимое наследие работы Шевченко и его влияние на украинскую литературу и культуру. Политически памятник символизирует восстановление украинской культурной идентичности в период национального пробуждения. Он служит напоминанием о борьбе за независимость и важности вклада Шевченко в украинский национализм. Культурно памятник является центром различных мероприятий и празднований, укрепляя связь сообщества с их наследием и традициями.</p></div>
 </section>
-<section class="place" id="chernivtsi_art_museum">
-<h3>Черновицкий художественный музей</h3>
+<section class="place" id="chernivtsi_paper_museum">
+<div class="place-lead">
+<h3>Музей бумаги</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/chernivtsi_art_museum.jpg" alt="Черновицкий художественный музей"/></figure>
-<div class="place-desc"><p class="prose">Черновицкий художественный музей, расположенный в великолепной бывшей резиденции буковинских митрополитов, демонстрирует богатую коллекцию украинского и европейского искусства. Посетители могут исследовать разнообразные выставки, которые подчеркивают художественное наследие региона, что делает его обязательным местом для посещения как для любителей искусства, так и для энтузиастов истории. Архитектура музея сама по себе является произведением искусства, отражающим уникальное культурное смешение города. Музей расположен в здании, которое когда-то было резиденцией митрополита Буковины. Он включает в себя коллекцию, которая содержит украинские и европейские произведения искусства различных периодов.</p>
-<p class="prose">Черновицкий художественный музей был основан в 1973 году, но его здание датируется концом 19 века, когда оно служило резиденцией митрополита Буковины и Далмации. Этот архитектурный шедевр был спроектирован знаменитым чешским архитектором Йозефом Хлавкой и отражает величие Австро-Венгерской империи. С тех пор музей стал ключевым учреждением для сохранения и демонстрации художественного наследия региона. Культурно, Черновицкий художественный музей играет важную роль в продвижении художественного наследия Буковины, региона, известного своими разнообразными влияниями и традициями. Он хранит значительные произведения, которые отражают исторические нарративы и художественные движения этого региона, способствуя пониманию украинского искусства в более широком европейском контексте. Музей также служит культурным центром, проводя различные выставки и мероприятия, которые вовлекают местное сообщество и посетителей.</p></div>
+<figure class="place-fig place-fig--lo-res"><img src="../images/chernivtsi_paper_museum_b.jpg" alt="Музей бумаги" width="330" height="219"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Музей бумаги в Черновцах — это уникальное культурное учреждение, посвященное истории и искусству производства бумаги. Посетители могут узнать о захватывающих процессах, связанных с созданием бумаги, а также о различных применениях и значении этого важного материала на протяжении истории. Музей демонстрирует разнообразные экспонаты, включая традиционные инструменты и техники, что делает его обязательным для посещения для тех, кто интересуется ремеслом и наследием. Музей предлагает выставки, посвященные традиционным техникам производства бумаги. Черновцы имеют историческую связь с производством бумаги, которая охватывает несколько столетий.</p>
+<p class="prose">Музей бумаги был основан для сохранения и популяризации богатой истории производства бумаги в регионе. Черновцы имеют давнюю традицию производства бумаги, которая восходит к нескольким векам назад, отражая историческую роль города как центра образования и культуры в Восточной Европе. С культурной точки зрения, Музей бумаги играет важную роль в подчеркивании мастерства и художественной значимости бумаги в повседневной жизни и наследии. Он служит напоминанием о традиционных навыках, которые сформировали местную культуру, и вносит вклад в более широкую нарративу о ремеслах в Украине. Музей также способствует оценке искусства изготовления бумаги среди посетителей, улучшая культурный туризм в Черновцах.</p></div>
 </section>
-<section class="place" id="chernivtsi_theatre">
-<h3>Черновицкий драматический театр</h3>
+<section class="place" id="chernivtsi_park_popa">
+<div class="place-lead">
+<h3>Парк Попа</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/chernivtsi_theatre.jpg" alt="Черновицкий драматический театр"/></figure>
-<div class="place-desc"><p class="prose">Черновицкий драматический театр, потрясающее архитектурное сокровище в сердце Черновцов, предлагает посетителям возможность погрузиться в богатую культурную ткань города. Известный своими яркими выступлениями и художественным стилем, театр служит центром местного таланта и площадкой для различных культурных мероприятий. Его изысканный фасад и историческое значение делают его обязательным для посещения всем, кто исследует город. Основанный в 1905 году, театр имеет богатую историю выступлений. Здание сочетает в себе различные архитектурные стили, отражая мультикультурное наследие города.</p>
-<p class="prose">Черновицкий драматический театр был основан в 1905 году и изначально служил площадкой для немецких и румынских спектаклей. На протяжении многих лет он стал свидетелем множества ключевых событий, включая развитие театрального искусства в регионе и влияние различных политических изменений на протяжении 20 века. Культурно театр играет жизненно важную роль в сохранении и продвижении художественного наследия Черновцов, города, известного своими разнообразными культурными влияниями. Он принимает различные представления, отражающие местные традиции и современные проблемы, способствуя яркой повседневной жизни сообщества. Театр является символом приверженности города искусству и служит местом встречи для жителей и гостей.</p></div>
+<figure class="place-fig place-fig--lo-res"><img src="../images/chernivtsi_park_popa_b.jpg" alt="Парк Попа" width="330" height="159"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Парк Попа — это спокойное зеленое пространство в сердце Черновцов, предлагающее посетителям мирное убежище от городской суеты. С его ухоженными дорожками, зелеными деревьями и яркими цветниками парк идеально подходит для неспешных прогулок, пикников и семейных выездов. Он служит популярным местом встречи как для местных жителей, так и для туристов, предоставляя возможность насладиться природной красотой города. Основан в конце 19 века. Изначально часть поместья видной местной семьи.</p>
+<p class="prose">Парк Попа был основан в конце 19 века, отражая развитие города в период культурного и архитектурного роста. Изначально часть поместья выдающейся местной семьи, парк со временем преобразился, став любимым общественным пространством для отдыха и расслабления. Культурно Парк Попа играет жизненно важную роль в повседневной жизни жителей Черновцов, служа местом для общественных мероприятий и встреч. Он олицетворяет приверженность города к сохранению зеленых зон на фоне городской застройки, способствуя общему качеству жизни. Парк также является свидетельством богатого наследия Черновцов, демонстрируя исторический ландшафт города и предоставляя фон для различных культурных мероприятий.</p></div>
 </section>
-<section class="place" id="chernivtsi_train_station">
-<h3>Chernivtsi Train Station</h3>
+<section class="place" id="chernivtsi_market">
+<div class="place-lead">
+<h3>Площадь музыкального фонтана</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1874</p>
-<figure class="place-fig"><img src="../images/chernivtsi_train_station.jpg" alt="Chernivtsi Train Station"/></figure>
-<div class="place-desc"><p class="prose">В центре оживленного центра города Черновцы находится его исторический железнодорожный вокзал — символ богатого культурного наследия и транспортный узел города с конца XIX века. Открыт в 1874 году во время правления императора Франца Иосифа I. Обладает замысловатыми декоративными элементами, характерными для неоренессанского стиля. Выступает в качестве ключевого сообщения между Украиной и соседними странами, такими как Румыния и Молдова. В этом городе есть небольшой музей, посвященный местной истории и железнодорожному транспорту. Проводил значительные политические собрания и события на протяжении всей своей истории.</p>
-<p class="prose">Построенная в 1874 году, железнодорожная станция Черновцы играла ключевую роль в развитии региона как крупный транзитный узел для пассажиров и товаров. Её неоренессанская архитектура отражает эпоху, когда город входил в состав Австро-Венгерской империи, демонстрируя богато украшенные фасады и элегантные интерьеры, сочетающие классические и восточноевропейские элементы дизайна. Посетители могут оценить историческое значение вокзала, наслаждаясь при этом современными удобствами, такими как комфортные зоны ожидания и кафе.</p></div>
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/chernivtsi_market.jpg" alt="Площадь музыкального фонтана" width="1280" height="875" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/chernivtsi_market_b.jpg" alt="Площадь музыкального фонтана — вид 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Музыкальная площадь фонтанов в Черновцах — это яркое место для встреч, которое сочетает в себе потрясающие водные шоу с музыкой, создавая волшебную атмосферу для посетителей и местных жителей. Эта оживленная площадь служит центром общественных мероприятий и культурных активностей, что делает её обязательным местом для посещения в городе. С живописными окрестностями и динамичными выступлениями, площадь фонтанов предлагает уникальный опыт, отражающий дух Черновцов. Музыкальный фонтан находится в сердце Черновцов. Фонтан предлагает синхронизированные водные шоу, которые хореографированы под музыку.</p>
+<p class="prose">Музыкальная фонтанная площадь была создана в начале 21 века в рамках более широкой инициативы по улучшению общественных пространств в Черновцах. Сам фонтан имеет современный дизайн и быстро стал центром притяжения как для местных жителей, так и для туристов, символизируя стремление города к культурному развитию и благоустройству городской среды. Культурно Музыкальный фонтанный сквер играет значительную роль в повседневной жизни Черновцов, принимая различные мероприятия, концерты и фестивали, которые отмечают местные традиции и художественное выражение. Он стал символом вовлеченности сообщества и пространством, где жители собираются, чтобы наслаждаться выступлениями и общаться, отражая богатое культурное наследие города.</p></div>
 </section>
-<section class="place" id="chernivtsi_public_library">
-<h3>Черновицкая областная библиотека</h3>
+<section class="place" id="chernivtsi_polish_church">
+<div class="place-lead">
+<h3>Польская церковь Черновцы</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/chernivtsi_public_library.jpg" alt="Черновицкая областная библиотека"/></figure>
-<div class="place-desc"><p class="prose">Черновицкая областная библиотека — это выдающееся культурное учреждение, расположенное в самом сердце Черновцов. Известная своей потрясающей архитектурой и обширной коллекцией книг, она служит центром литературы и обучения в регионе. Посетители могут исследовать её исторические читальные залы и участвовать в различных культурных мероприятиях и выставках. Основана в 1871 году как публичная библиотека. Здание библиотеки является архитектурной достопримечательностью конца 19 века.</p>
-<p class="prose">Черновицкая областная библиотека была основана в 1871 году, изначально созданная как публичная библиотека для обслуживания растущего населения города. На протяжении многих лет она претерпела несколько трансформаций, отражая изменяющиеся политические ландшафты и культурные приоритеты региона. Здание библиотеки, спроектированное в конце 19 века, является архитектурным жемчужиной, демонстрирующей богатое наследие города. Культурно Черновицкая областная библиотека играет важную роль в сохранении литературного наследия региона и продвижении чтения среди местного населения. Она проводит различные культурные мероприятия, включая презентации книг и литературные дискуссии, способствуя яркой культурной жизни Черновцов. Библиотека также служит пространством для общественного участия и образовательных программ, что делает её неотъемлемой частью повседневной жизни города.</p></div>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/chernivtsi_polish_church.jpg" alt="Польская церковь Черновцы" width="1280" height="960" style="height: 333px; max-height: 333px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/chernivtsi_polish_church_b.jpg" alt="Польская церковь Черновцы — вид 2" width="330" height="238" style="height: 333px; max-height: 333px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Польская церковь в Черновцах, известная своей впечатляющей архитектурой, является примечательной достопримечательностью, отражающей разнообразное культурное наследие города. Эта церковь служит свидетельством исторического присутствия польской общины в регионе. Посетители могут восхищаться её сложным дизайном и спокойной атмосферой, что делает это место идеальным для размышлений. Завершенная в 1905 году, Польская церковь является ярким примером церковной архитектуры начала 20 века. Церковь обслуживает польскую общину в Черновцах и является местом проведения различных религиозных служб и культурных мероприятий.</p>
+<p class="prose">Польская церковь в Черновцах была построена в начале 20 века, а именно завершена в 1905 году. Она была основана для обслуживания местного польского сообщества, которое сыграло значительную роль в развитии города во время Австро-Венгерской империи. Церковь стала свидетелем различных исторических изменений, особенно в бурные периоды 20 века. Культурно Польская церковь является важным символом польского наследия в Черновцах, внося вклад в богатую палитру религиозного и этнического разнообразия города. Она служит напоминанием о историческом сосуществовании различных общин в регионе. Церковь также играет роль в религиозной практике местного сообщества, проводя службы и мероприятия, которые способствуют чувству принадлежности и преемственности.</p></div>
 </section>
-<section class="place" id="chernivtsi_historical_museum">
-<h3>Экспонаты краеведения Черновицкой области</h3>
+<section class="place" id="chernivtsi_town_hall">
+<div class="place-lead">
+<h3>Ратуша Черновцы</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/chernivtsi_historical_museum.jpg" alt="Экспонаты краеведения Черновицкой области"/></figure>
-<div class="place-desc"><p class="prose">Выставки Черновицкого краеведческого музея предлагают увлекательный взгляд на богатую историю и культуру Черновицкого региона. Расположенные в историческом здании Черновицкого исторического музея, экспонаты представляют собой разнообразную коллекцию артефактов, документов и произведений искусства, отражающих наследие этого края. Посетители могут исследовать эволюцию местных традиций, обычаев и повседневной жизни через различные тематические экспозиции. Основан в 1940 году. Расположено в здании, изначально построенном для православного епископа в конце 19 века. Включает в себя разнообразную коллекцию артефактов, связанных с историей и культурой Черновицкого региона.</p>
-<p class="prose">Черновицкий исторический музей был основан в 1940 году, хотя здание само по себе имеет богатую историю, уходящую корнями в конец 19 века. Изначально построенное как резиденция православного епископа, оно впоследствии стало центром культурной и образовательной деятельности в регионе. Музей сыграл значительную роль в сохранении истории Черновцов и окружающих территорий. Культурно музей служит важным хранилищем наследия региона, демонстрируя разнообразные влияния, которые формировали Черновцы на протяжении веков. Он подчеркивает уникальные традиции и художественные выражения этого района, способствуя пониманию его идентичности. Коллекции музея также отражают исторические взаимодействия различных этнических групп, подчеркивая многокультурную ткань Черновцов.</p></div>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/chernivtsi_town_hall.jpg" alt="Ратуша Черновцы" width="1280" height="960" style="height: 333px; max-height: 333px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/chernivtsi_town_hall_b.jpg" alt="Ратуша Черновцы — вид 2" width="330" height="238" style="height: 333px; max-height: 333px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Ратуша Черновцов — архитектурное сокровище, расположенное в самом сердце города, демонстрирующее сочетание готического и ренессансного стилей. Ее знаковая钟овая башня и сложный фасад делают ее выдающимся ориентиром, привлекая посетителей, желающих исследовать богатую историю и культуру Черновцов. Здание служит центром гражданской активности и местного управления, отражая яркую общественную жизнь города. Ратуша была построена в период с 1880 по 1882 год. Он включает в себя часовую башню высотой 65 метров.</p>
+<p class="prose">Ратуша была построена в период с 1880 по 1882 год, спроектирована архитектором Йозефом Хлавкой. Она была возведена как административный центр Черновцов, который тогда входил в состав Австро-Венгерской империи. Здание стало свидетелем значительных исторических событий, включая переходы города через различные политические режимы на протяжении многих лет. Политически Ратуша служила символом местного управления и гражданской гордости на протяжении всей истории Черновцов. Культурно она является свидетельством архитектурного наследия города и центром общественных мероприятий и празднований, отражая разнообразные традиции его жителей. Ратуша также является частью объекта Всемирного наследия ЮНЕСКО в историческом центре Черновцов, подчеркивая ее важность в контексте культурного сохранения.</p></div>
 </section>
 <section class="place" id="chernivtsi_university">
+<div class="place-lead">
 <h3>Резиденция Черновицкого университета</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/chernivtsi_university.jpg" alt="Резиденция Черновицкого университета"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/chernivtsi_university.jpg" alt="Резиденция Черновицкого университета" width="1280" height="901" style="height: 325px; max-height: 325px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/chernivtsi_university_b.jpg" alt="Резиденция Черновицкого университета — вид 2" width="330" height="350" style="height: 325px; max-height: 325px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Резиденция Черновицкого университета, архитектурный шедевр, известна своим великолепным сочетанием готического, византийского и мавританского стилей. Этот объект Всемирного наследия ЮНЕСКО служит свидетельством богатой образовательной и культурной истории Черновцов, что делает его обязательным для посещения всем, кто исследует город. Резиденция была спроектирована архитектором Йозефом Хлавкой и завершена в 1882 году. Он был объявлен объектом Всемирного наследия ЮНЕСКО в 2011 году.</p>
 <p class="prose">Основанный в 1875 году, Черновицкий университет был создан как центр высшего образования в Австро-Венгерской империи. Резиденция, спроектированная архитектором Йозефом Хлавкой, была завершена в 1882 году и с тех пор играет ключевую роль в академической и культурной жизни региона. Культурно, Резиденция Черновицкого университета является символом разнообразного наследия города, отражая слияние различных архитектурных стилей и историческую значимость образования в регионе. Будучи объектом Всемирного наследия ЮНЕСКО, она подчеркивает важность сохранения культурных памятников, представляющих богатые традиции и историю Черновцов.</p></div>
 </section>
+<section class="place" id="chernivtsi_synagogue_tempel">
+<div class="place-lead">
+<h3>Темпльная синагога Черновцы</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/chernivtsi_synagogue_tempel.jpg" alt="Темпльная синагога Черновцы" width="1280" height="829" style="height: 299px; max-height: 299px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/chernivtsi_synagogue_tempel_b.jpg" alt="Темпльная синагога Черновцы — вид 2" width="330" height="378" style="height: 299px; max-height: 299px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Храмовая синагога в Черновцах является потрясающим примером архитектуры начала 20 века, характеризующимся сложным дизайном и яркими мозаиками. Эта историческая синагога служит свидетельством богатого еврейского наследия города и продолжает быть центром культурной и религиозной жизни в сообществе. Посетители могут восхищаться её красивым интерьером и узнать о значительной роли, которую она сыграла в жизни еврейского населения Черновцов. Построен в период с 1905 по 1909 год. Разработано архитектором А. Г. Г. В. В. Х. Х. Служит центром еврейской общины в Черновцах.</p>
+<p class="prose">Синагога Темпл была построена в период с 1905 по 1909 год, спроектирована архитектором А. Г. Г. В. В. Х. Х. Она была основана в эпоху процветающей еврейской жизни в Черновцах, которые были частью Австро-Венгерской империи. Синагога стала свидетелем значительных событий на протяжении своей истории, включая периоды как процветания, так и трудностей для еврейской общины. Культурно Синагога Темпл является символом богатого еврейского наследия Черновцов, отражая разнообразную историю города. Она была важным местом для различных культурных мероприятий и религиозных обрядов, способствуя формированию идентичности местного сообщества. Архитектурная красота синагоги также обогащает культурный ландшафт Черновцов, делая её заметной достопримечательностью как для местных жителей, так и для туристов.</p></div>
+</section>
+<section class="place" id="chernivtsi_olha_kobylianska">
+<div class="place-lead">
+<h3>Улица Ольги Кобылянской</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/chernivtsi_olha_kobylianska.jpg" alt="Улица Ольги Кобылянской" width="1280" height="1569" style="height: 333px; max-height: 333px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/chernivtsi_olha_kobylianska_b.jpg" alt="Улица Ольги Кобылянской — вид 2" width="330" height="238" style="height: 333px; max-height: 333px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Улица Ольги Кобылянской — это очаровательная улица в Черновцах, известная своей яркой атмосферой и исторической архитектурой. Украсившаяся красивыми зданиями, отражающими богатое культурное наследие города, эта улица является популярным местом для исследования как местными жителями, так и туристами. Она служит центром для кафе, магазинов и культурных мероприятий, что делает её живой частью повседневной жизни в Черновцах. Названо в честь Ольги Кобылянской, выдающейся украинской писательницы. Содержит смесь архитектурных стилей периода Австро-Венгрии.</p>
+<p class="prose">Улица Ольги Кобылянской, названная в честь выдающейся украинской писательницы Ольги Кобылянской, имеет корни, уходящие в конец 19 века, когда Черновцы были культурным центром Австро-Венгерской империи. Улица стала свидетелем значительных изменений и событий на протяжении 20 века, отражая меняющуюся идентичность города. Культурно улица Ольги Кобылянской играет ключевую роль в художественной жизни Черновцов, принимая различные культурные мероприятия и фестивали, которые отмечают местные традиции. Улица также значима своими архитектурными стилями, которые демонстрируют разнообразное наследие города. Хотя она не имеет заметного политического или религиозного значения, она остается важной частью повседневной жизни и культурного самовыражения сообщества.</p></div>
+</section>
+<section class="place" id="chernivtsi_unesco_gate">
+<div class="place-lead">
+<h3>Университетские ворота Черновцы</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/chernivtsi_unesco_gate.jpg" alt="Университетские ворота Черновцы" width="1042" height="1600" style="height: 333px; max-height: 333px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/chernivtsi_unesco_gate_b.jpg" alt="Университетские ворота Черновцы — вид 2" width="330" height="238" style="height: 333px; max-height: 333px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Университетские ворота в Черновцах — это потрясающий архитектурный шедевр, который служит главным входом в Черновицкий национальный университет, объект Всемирного наследия ЮНЕСКО. Эти украшенные ворота демонстрируют сочетание готического, мавританского и византийского стилей, отражая богатую культурную палитру региона. Посетители часто очарованы их сложными деталями и историческим значением университета, который они охраняют. Университетские ворота были завершены в 1864 году. Черновицкий национальный университет был внесен в список объектов Всемирного наследия ЮНЕСКО в 2011 году.</p>
+<p class="prose">Университетские ворота были построены в конце 19 века как часть комплекса Черновицкого университета, который был основан в 1875 году. Сам университет имеет богатую историю, будучи основанным во время Австро-Венгерской империи и служа центром образования и культуры для различных этнических групп региона. Ворота стали свидетелями множества исторических событий, включая изменения политических режимов и влияние Первой и Второй мировых войн. Культурно Университетские ворота символизируют богатое академическое наследие Черновцов и их роль как центра образования и интеллектуального обмена. Как часть объекта Всемирного наследия ЮНЕСКО, они подчеркивают архитектурное и историческое значение университета, который значительно способствовал культурной идентичности региона. Ворота также отражают разнообразные влияния, которые сформировали Черновцы, делая их центром внимания как для местных жителей, так и для туристов.</p></div>
+</section>
+<section class="place" id="chernivtsi_bukovyna_art">
+<div class="place-lead">
+<h3>Филиал Буковинского художественного музея</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--row-sized"><img src="../images/chernivtsi_bukovyna_art.jpg" alt="Филиал Буковинского художественного музея" width="1024" height="828" style="height: 333px; max-height: 333px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/chernivtsi_bukovyna_art_b.jpg" alt="Филиал Буковинского художественного музея — вид 2" width="330" height="238" style="height: 333px; max-height: 333px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Буковинский художественный музей в Черновцах демонстрирует богатую коллекцию украинского искусства, с акцентом на культурное наследие региона Буковина. Расположенный в потрясающем историческом здании, музей предлагает посетителям возможность заглянуть в художественные традиции и современные работы, отражающие разнообразные влияния этого края. Он служит ярким культурным центром, проводя выставки, мастер-классы и мероприятия, которые привлекают как местных жителей, так и туристов. Музей был основан в 1988 году. Он расположен в историческом здании, датируемом концом 19 века. Музей сосредоточен на искусстве и культурном наследии региона Буковина.</p>
+<p class="prose">Буковинский художественный музей был основан в 1988 году, эволюционировав из более ранних художественных коллекций и инициатив в регионе. Здание музея, изначально построенное в конце 19 века, на протяжении многих лет выполняло различные функции, что способствует его исторической значимости в Черновцах. Культурно, Художественный музей Буковины играет важную роль в сохранении и продвижении художественного наследия региона Буковина. Он хранит работы известных украинских художников и отражает разнообразные культурные влияния этого района, что делает его значимым местом для понимания местных традиций и современного искусства. Музей также вносит вклад в идентичность города и культурную жизнь, способствуя чувству общности через различные художественные программы.</p></div>
+</section>
+<section class="place" id="chernivtsi_resurrection_church">
+<div class="place-lead">
+<h3>Церковь Воскресения</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/chernivtsi_resurrection_church.jpg" alt="Церковь Воскресения" width="1600" height="1067" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/chernivtsi_resurrection_church_b.jpg" alt="Церковь Воскресения — вид 2" width="330" height="227" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Церковь Воскресения в Черновцах является потрясающим примером византийской архитектуры, известной своими яркими фресками и сложными мозаиками. Это святое место служит центром для местного сообщества, предлагая спокойную атмосферу для поклонения и размышлений. Посетители могут восхищаться её уникальным дизайном и узнать о её историческом и культурном значении в регионе. Построен в 1882 году, спроектирован архитектором Василием Н. Ковальчуком. Сочетает в себе византийский и готический архитектурные стили.</p>
+<p class="prose">Церковь Воскресения была построена в конце 19 века, её строительство завершилось в 1882 году. Она была спроектирована архитектором Василием Н. Ковальчуком и отражает богатое архитектурное наследие Черновцов, подвергнувшись влиянию различных стилей, включая византийские и готические элементы. Церковь прошла несколько реставраций на протяжении лет, чтобы сохранить свою красоту и целостность. Культурно, Церковь Воскресения является неотъемлемой частью идентичности Черновцов, демонстрируя историческое разнообразие и художественное наследие города. Она играет важную роль в повседневной жизни местных жителей, служа не только местом поклонения, но и площадкой для общественных собраний и культурных мероприятий. Архитектурная красота церкви способствует признанию Черновцов как объекта Всемирного наследия ЮНЕСКО.</p></div>
+</section>
 <section class="place" id="chernivtsi_st_onesimus">
+<div class="place-lead">
 <h3>Церковь Святого Онуфрия</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/chernivtsi_st_onesimus.jpg" alt="Церковь Святого Онуфрия"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/chernivtsi_st_onesimus.jpg" alt="Церковь Святого Онуфрия" width="1280" height="854" style="height: 277px; max-height: 277px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/chernivtsi_st_onesimus_b.jpg" alt="Церковь Святого Онуфрия — вид 2" width="330" height="198" style="height: 277px; max-height: 277px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Церковь Святого Онуфрия в Черновцах является ярким примером восточно-православной архитектуры, известной своими сложными фресками и спокойной атмосферой. Уютно расположенная в живом районе, она служит как духовным убежищем, так и культурной достопримечательностью для местных жителей и туристов. Уникальный дизайн церкви и исторический контекст делают её обязательным местом для посещения тем, кто исследует богатое наследие города. Построен в период с 1885 по 1889 год. Посвящён святому Онуприю, святому в восточном православии.</p>
 <p class="prose">Церковь святого Онуфрия была построена в конце 19 века, а именно с 1885 по 1889 год, под руководством архитектора Василя Н. Ковальчука. Она была возведена в честь святого Онуфрия, почитаемого деятеля восточно-православного христианства, и с тех пор стала значимым местом для поклонения и общественных собраний. Церковь Святого Онуфрия является неотъемлемой частью идентичности Черновцов, отражая разнообразное религиозное наследие города. Она играет важную роль в повседневной жизни местной православной общины, проводя различные религиозные обряды и празднования на протяжении всего года. Художественные элементы церкви вносят вклад в культурный ландшафт города, привлекая посетителей, интересующихся как духовностью, так и искусством.</p></div>
 </section>
 <section class="place" id="chernivtsi_assumption_church">
+<div class="place-lead">
 <h3>Церковь Успения</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/chernivtsi_assumption_church.jpg" alt="Церковь Успения"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/chernivtsi_assumption_church.jpg" alt="Церковь Успения" width="1200" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/chernivtsi_assumption_church_b.jpg" alt="Церковь Успения — вид 2" width="330" height="497" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Церковь Успения в Черновцах является великолепным примером византийской архитектуры, известной своими сложными фресками и ярким интерьером. Эта историческая церковь служит центром для местного сообщества, привлекая посетителей своей духовной атмосферой и художественной красотой. Её спокойная обстановка делает её идеальным местом для размышлений и оценки богатого культурного наследия города. Церковь была завершена в 1882 году. Он включает в себя византийские архитектурные элементы и сложные фрески.</p>
 <p class="prose">Церковь Успения была построена в конце 19 века, строительство завершилось в 1882 году. Она была спроектирована архитектором А. Г. К. З. и отражает архитектурный стиль, преобладающий в регионе в тот период. Церковь прошла несколько реставраций для сохранения ее художественной и структурной целостности. Культурно Церковь Успения является важной достопримечательностью Черновцов, представляя собой разнообразное религиозное наследие города. Она играет значительную роль в повседневной жизни местных жителей, служа не только местом поклонения, но и площадкой для общественных собраний и культурных мероприятий. Художественные элементы церкви способствуют формированию идентичности города и привлекают туристов, интересующихся его историческим и архитектурным значением.</p></div>
 </section>
-<section class="place" id="chernivtsi_pdfband_4_f58908da">
-<h3>Czerniowcy (462)</h3>
+<section class="place" id="chernivtsi_public_library">
+<div class="place-lead">
+<h3>Черновицкая областная библиотека</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/chernivtsi_pdfband_4_f58908da.jpg" alt="Czerniowcy (462)"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/chernivtsi_public_library.jpg" alt="Черновицкая областная библиотека" width="1280" height="960" style="height: 333px; max-height: 333px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/chernivtsi_public_library_b.jpg" alt="Черновицкая областная библиотека — вид 2" width="330" height="238" style="height: 333px; max-height: 333px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Черновицкая областная библиотека — это выдающееся культурное учреждение, расположенное в самом сердце Черновцов. Известная своей потрясающей архитектурой и обширной коллекцией книг, она служит центром литературы и обучения в регионе. Посетители могут исследовать её исторические читальные залы и участвовать в различных культурных мероприятиях и выставках. Основана в 1871 году как публичная библиотека. Здание библиотеки является архитектурной достопримечательностью конца 19 века.</p>
+<p class="prose">Черновицкая областная библиотека была основана в 1871 году, изначально созданная как публичная библиотека для обслуживания растущего населения города. На протяжении многих лет она претерпела несколько трансформаций, отражая изменяющиеся политические ландшафты и культурные приоритеты региона. Здание библиотеки, спроектированное в конце 19 века, является архитектурным жемчужиной, демонстрирующей богатое наследие города. Культурно Черновицкая областная библиотека играет важную роль в сохранении литературного наследия региона и продвижении чтения среди местного населения. Она проводит различные культурные мероприятия, включая презентации книг и литературные дискуссии, способствуя яркой культурной жизни Черновцов. Библиотека также служит пространством для общественного участия и образовательных программ, что делает её неотъемлемой частью повседневной жизни города.</p></div>
 </section>
-<section class="place" id="chernivtsi_jewish_cemetery">
-<h3>Еврейское кладбище Черновцы</h3>
+<section class="place" id="chernivtsi_theatre">
+<div class="place-lead">
+<h3>Черновицкий драматический театр</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/chernivtsi_jewish_cemetery.jpg" alt="Еврейское кладбище Черновцы"/></figure>
-<div class="place-desc"><p class="prose">Еврейское кладбище в Черновцах является трогательным свидетельством богатого еврейского наследия города. Основанное в 19 веке, оно отличается сложными надгробиями и мемориалами, которые отражают художественное мастерство и культурное значение еврейской общины в регионе. Посетители могут исследовать спокойные просторы, которые служат напоминанием о историческом присутствии и вкладе евреев в Черновцах. Основан в начале 19 века. Самая старая зафиксированная надгробная плита датируется 1840 годом.</p>
-<p class="prose">Еврейское кладбище в Черновцах было основано в начале 19 века, а самая старая зафиксированная надгробная плита датируется 1840 годом. Оно стало значительным местом захоронения для еврейской общины, которая процветала в городе до середины 20 века. Кладбище стало свидетелем ключевых исторических событий, включая последствия Второй мировой войны и Холокоста, которые сильно повлияли на еврейское население Черновцов. Культурно, кладбище является важным объектом наследия, отражающим художественные и архитектурные стили еврейских погребальных практик. Оно служит символом яркой еврейской жизни, которая когда-то процветала в Черновцах, внося вклад в разнообразную культурную ткань города. Кладбище также является местом памяти, почитая жизни и традиции тех, кто был частью еврейской общины.</p></div>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/chernivtsi_theatre.jpg" alt="Черновицкий драматический театр" width="1280" height="958" style="height: 291px; max-height: 291px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/chernivtsi_theatre_b.jpg" alt="Черновицкий драматический театр — вид 2" width="330" height="208" style="height: 291px; max-height: 291px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Черновицкий драматический театр, потрясающее архитектурное сокровище в сердце Черновцов, предлагает посетителям возможность погрузиться в богатую культурную ткань города. Известный своими яркими выступлениями и художественным стилем, театр служит центром местного таланта и площадкой для различных культурных мероприятий. Его изысканный фасад и историческое значение делают его обязательным для посещения всем, кто исследует город. Основанный в 1905 году, театр имеет богатую историю выступлений. Здание сочетает в себе различные архитектурные стили, отражая мультикультурное наследие города.</p>
+<p class="prose">Черновицкий драматический театр был основан в 1905 году и изначально служил площадкой для немецких и румынских спектаклей. На протяжении многих лет он стал свидетелем множества ключевых событий, включая развитие театрального искусства в регионе и влияние различных политических изменений на протяжении 20 века. Культурно театр играет жизненно важную роль в сохранении и продвижении художественного наследия Черновцов, города, известного своими разнообразными культурными влияниями. Он принимает различные представления, отражающие местные традиции и современные проблемы, способствуя яркой повседневной жизни сообщества. Театр является символом приверженности города искусству и служит местом встречи для жителей и гостей.</p></div>
 </section>
-<section class="place" id="chernivtsi_pdfband_2_a07be18a">
-<h3>Khotin</h3>
+<section class="place" id="chernivtsi_art_museum">
+<div class="place-lead">
+<h3>Черновицкий художественный музей</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/chernivtsi_pdfband_2_a07be18a.jpg" alt="Khotin"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/chernivtsi_art_museum.jpg" alt="Черновицкий художественный музей" width="1280" height="850" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/chernivtsi_art_museum_b.jpg" alt="Черновицкий художественный музей — вид 2" width="330" height="267" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Черновицкий художественный музей, расположенный в великолепной бывшей резиденции буковинских митрополитов, демонстрирует богатую коллекцию украинского и европейского искусства. Посетители могут исследовать разнообразные выставки, которые подчеркивают художественное наследие региона, что делает его обязательным местом для посещения как для любителей искусства, так и для энтузиастов истории. Архитектура музея сама по себе является произведением искусства, отражающим уникальное культурное смешение города. Музей расположен в здании, которое когда-то было резиденцией митрополита Буковины. Он включает в себя коллекцию, которая содержит украинские и европейские произведения искусства различных периодов.</p>
+<p class="prose">Черновицкий художественный музей был основан в 1973 году, но его здание датируется концом 19 века, когда оно служило резиденцией митрополита Буковины и Далмации. Этот архитектурный шедевр был спроектирован знаменитым чешским архитектором Йозефом Хлавкой и отражает величие Австро-Венгерской империи. С тех пор музей стал ключевым учреждением для сохранения и демонстрации художественного наследия региона. Культурно, Черновицкий художественный музей играет важную роль в продвижении художественного наследия Буковины, региона, известного своими разнообразными влияниями и традициями. Он хранит значительные произведения, которые отражают исторические нарративы и художественные движения этого региона, способствуя пониманию украинского искусства в более широком европейском контексте. Музей также служит культурным центром, проводя различные выставки и мероприятия, которые вовлекают местное сообщество и посетителей.</p></div>
 </section>
-<section class="place" id="chernivtsi_market">
-<h3>Площадь музыкального фонтана</h3>
+<section class="place" id="chernivtsi_historical_museum">
+<div class="place-lead">
+<h3>Экспонаты краеведения Черновицкой области</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/chernivtsi_market.jpg" alt="Площадь музыкального фонтана"/></figure>
-<div class="place-desc"><p class="prose">Музыкальная площадь фонтанов в Черновцах — это яркое место для встреч, которое сочетает в себе потрясающие водные шоу с музыкой, создавая волшебную атмосферу для посетителей и местных жителей. Эта оживленная площадь служит центром общественных мероприятий и культурных активностей, что делает её обязательным местом для посещения в городе. С живописными окрестностями и динамичными выступлениями, площадь фонтанов предлагает уникальный опыт, отражающий дух Черновцов. Музыкальный фонтан находится в сердце Черновцов. Фонтан предлагает синхронизированные водные шоу, которые хореографированы под музыку.</p>
-<p class="prose">Музыкальная фонтанная площадь была создана в начале 21 века в рамках более широкой инициативы по улучшению общественных пространств в Черновцах. Сам фонтан имеет современный дизайн и быстро стал центром притяжения как для местных жителей, так и для туристов, символизируя стремление города к культурному развитию и благоустройству городской среды. Культурно Музыкальный фонтанный сквер играет значительную роль в повседневной жизни Черновцов, принимая различные мероприятия, концерты и фестивали, которые отмечают местные традиции и художественное выражение. Он стал символом вовлеченности сообщества и пространством, где жители собираются, чтобы наслаждаться выступлениями и общаться, отражая богатое культурное наследие города.</p></div>
-</section>
-<section class="place" id="chernivtsi_olha_kobylianska">
-<h3>Улица Ольги Кобылянской</h3>
-
-
-<figure class="place-fig"><img src="../images/chernivtsi_olha_kobylianska.jpg" alt="Улица Ольги Кобылянской"/></figure>
-<div class="place-desc"><p class="prose">Улица Ольги Кобылянской — это очаровательная улица в Черновцах, известная своей яркой атмосферой и исторической архитектурой. Украсившаяся красивыми зданиями, отражающими богатое культурное наследие города, эта улица является популярным местом для исследования как местными жителями, так и туристами. Она служит центром для кафе, магазинов и культурных мероприятий, что делает её живой частью повседневной жизни в Черновцах. Названо в честь Ольги Кобылянской, выдающейся украинской писательницы. Содержит смесь архитектурных стилей периода Австро-Венгрии.</p>
-<p class="prose">Улица Ольги Кобылянской, названная в честь выдающейся украинской писательницы Ольги Кобылянской, имеет корни, уходящие в конец 19 века, когда Черновцы были культурным центром Австро-Венгерской империи. Улица стала свидетелем значительных изменений и событий на протяжении 20 века, отражая меняющуюся идентичность города. Культурно улица Ольги Кобылянской играет ключевую роль в художественной жизни Черновцов, принимая различные культурные мероприятия и фестивали, которые отмечают местные традиции. Улица также значима своими архитектурными стилями, которые демонстрируют разнообразное наследие города. Хотя она не имеет заметного политического или религиозного значения, она остается важной частью повседневной жизни и культурного самовыражения сообщества.</p></div>
-</section>
-<section class="place" id="chernivtsi_paper_museum">
-<h3>Музей бумаги</h3>
-
-
-<figure class="place-fig"><img src="../images/chernivtsi_paper_museum.jpg" alt="Музей бумаги"/></figure>
-<div class="place-desc"><p class="prose">Музей бумаги в Черновцах — это уникальное культурное учреждение, посвященное истории и искусству производства бумаги. Посетители могут узнать о захватывающих процессах, связанных с созданием бумаги, а также о различных применениях и значении этого важного материала на протяжении истории. Музей демонстрирует разнообразные экспонаты, включая традиционные инструменты и техники, что делает его обязательным для посещения для тех, кто интересуется ремеслом и наследием. Музей предлагает выставки, посвященные традиционным техникам производства бумаги. Черновцы имеют историческую связь с производством бумаги, которая охватывает несколько столетий.</p>
-<p class="prose">Музей бумаги был основан для сохранения и популяризации богатой истории производства бумаги в регионе. Черновцы имеют давнюю традицию производства бумаги, которая восходит к нескольким векам назад, отражая историческую роль города как центра образования и культуры в Восточной Европе. С культурной точки зрения, Музей бумаги играет важную роль в подчеркивании мастерства и художественной значимости бумаги в повседневной жизни и наследии. Он служит напоминанием о традиционных навыках, которые сформировали местную культуру, и вносит вклад в более широкую нарративу о ремеслах в Украине. Музей также способствует оценке искусства изготовления бумаги среди посетителей, улучшая культурный туризм в Черновцах.</p></div>
-</section>
-<section class="place" id="chernivtsi_bridge">
-<h3>Пешеходный мост через Прут</h3>
-
-
-<figure class="place-fig"><img src="../images/chernivtsi_bridge.jpg" alt="Пешеходный мост через Прут"/></figure>
-<div class="place-desc"><p class="prose">Пешеходный мост через реку Прут в Черновцах — это очаровательное место, которое предлагает потрясающие виды на окружающий ландшафт. Этот мост служит важной связью для пешеходов, позволяя им пересекать реку, наслаждаясь красотой района. Это популярное место встречи как для местных жителей, так и для туристов, что делает его яркой частью социальной жизни города. Мост пересекает реку Прут, соединяя различные районы Черновцов. Он был открыт для публики в конце 1990-х годов.</p>
-<p class="prose">Пешеходный мост был построен в конце 20 века, отражая архитектурные тенденции того времени. С тех пор он стал знаковым элементом Черновцов, символизируя приверженность города улучшению общественных пространств и содействию пешеходному доступу. Культурно мост играет значительную роль в повседневной жизни, служа местом встречи для жителей и живописным маршрутом для туристов, исследующих город. Он вносит вклад в городской ландшафт и часто фигурирует в местном искусстве и фотографии, подчеркивая его важность как культурной достопримечательности.</p></div>
-</section>
-<section class="place" id="chernivtsi_polish_church">
-<h3>Польская церковь Черновцы</h3>
-
-
-<figure class="place-fig"><img src="../images/chernivtsi_polish_church.jpg" alt="Польская церковь Черновцы"/></figure>
-<div class="place-desc"><p class="prose">Польская церковь в Черновцах, известная своей впечатляющей архитектурой, является примечательной достопримечательностью, отражающей разнообразное культурное наследие города. Эта церковь служит свидетельством исторического присутствия польской общины в регионе. Посетители могут восхищаться её сложным дизайном и спокойной атмосферой, что делает это место идеальным для размышлений. Завершенная в 1905 году, Польская церковь является ярким примером церковной архитектуры начала 20 века. Церковь обслуживает польскую общину в Черновцах и является местом проведения различных религиозных служб и культурных мероприятий.</p>
-<p class="prose">Польская церковь в Черновцах была построена в начале 20 века, а именно завершена в 1905 году. Она была основана для обслуживания местного польского сообщества, которое сыграло значительную роль в развитии города во время Австро-Венгерской империи. Церковь стала свидетелем различных исторических изменений, особенно в бурные периоды 20 века. Культурно Польская церковь является важным символом польского наследия в Черновцах, внося вклад в богатую палитру религиозного и этнического разнообразия города. Она служит напоминанием о историческом сосуществовании различных общин в регионе. Церковь также играет роль в религиозной практике местного сообщества, проводя службы и мероприятия, которые способствуют чувству принадлежности и преемственности.</p></div>
-</section>
-<section class="place" id="chernivtsi_park_popa">
-<h3>Парк Попа</h3>
-
-
-<figure class="place-fig"><img src="../images/chernivtsi_park_popa.jpg" alt="Парк Попа"/></figure>
-<div class="place-desc"><p class="prose">Парк Попа — это спокойное зеленое пространство в сердце Черновцов, предлагающее посетителям мирное убежище от городской суеты. С его ухоженными дорожками, зелеными деревьями и яркими цветниками парк идеально подходит для неспешных прогулок, пикников и семейных выездов. Он служит популярным местом встречи как для местных жителей, так и для туристов, предоставляя возможность насладиться природной красотой города. Основан в конце 19 века. Изначально часть поместья видной местной семьи.</p>
-<p class="prose">Парк Попа был основан в конце 19 века, отражая развитие города в период культурного и архитектурного роста. Изначально часть поместья выдающейся местной семьи, парк со временем преобразился, став любимым общественным пространством для отдыха и расслабления. Культурно Парк Попа играет жизненно важную роль в повседневной жизни жителей Черновцов, служа местом для общественных мероприятий и встреч. Он олицетворяет приверженность города к сохранению зеленых зон на фоне городской застройки, способствуя общему качеству жизни. Парк также является свидетельством богатого наследия Черновцов, демонстрируя исторический ландшафт города и предоставляя фон для различных культурных мероприятий.</p></div>
-</section>
-<section class="place" id="chernivtsi_resurrection_church">
-<h3>Церковь Воскресения</h3>
-
-
-<figure class="place-fig"><img src="../images/chernivtsi_resurrection_church.jpg" alt="Церковь Воскресения"/></figure>
-<div class="place-desc"><p class="prose">Церковь Воскресения в Черновцах является потрясающим примером византийской архитектуры, известной своими яркими фресками и сложными мозаиками. Это святое место служит центром для местного сообщества, предлагая спокойную атмосферу для поклонения и размышлений. Посетители могут восхищаться её уникальным дизайном и узнать о её историческом и культурном значении в регионе. Построен в 1882 году, спроектирован архитектором Василием Н. Сочетает в себе византийский и готический архитектурные стили.</p>
-<p class="prose">Церковь Воскресения была построена в конце 19 века, её строительство завершилось в 1882 году. Она была спроектирована архитектором Василием Н. Ковальчуком и отражает богатое архитектурное наследие Черновцов, подвергнувшись влиянию различных стилей, включая византийские и готические элементы. Церковь прошла несколько реставраций на протяжении лет, чтобы сохранить свою красоту и целостность. Культурно, Церковь Воскресения является неотъемлемой частью идентичности Черновцов, демонстрируя историческое разнообразие и художественное наследие города. Она играет важную роль в повседневной жизни местных жителей, служа не только местом поклонения, но и площадкой для общественных собраний и культурных мероприятий. Архитектурная красота церкви способствует признанию Черновцов как объекта Всемирного наследия ЮНЕСКО.</p></div>
-</section>
-<section class="place" id="chernivtsi_shevchenko_monument">
-<h3>Монумент Шевченко</h3>
-
-
-<figure class="place-fig"><img src="../images/chernivtsi_shevchenko_monument.jpg" alt="Монумент Шевченко"/></figure>
-<div class="place-desc"><p class="prose">Монумент Шевченко в Черновцах является данью уважения известному украинскому поэту и художнику Тарасу Шевченко. Расположенный на живописной площади, монумент является популярным местом встречи как для местных жителей, так и для туристов, олицетворяя дух украинской культуры и наследия. Его впечатляющий дизайн и исторический контекст делают его обязательным для посещения всем, кто исследует город. Памятник был открыт в 1992 году. Это отмечает 181-ю годовщину со дня рождения Тараса Шевченко.</p>
-<p class="prose">Монумент Шевченко был открыт в 1992 году в честь 181-й годовщины со дня рождения Тараса Шевченко. Эта дата имеет особое значение, так как она совпадает с возрождением украинской национальной идентичности после независимости страны от Советского Союза в 1991 году. Монумент отражает неугасимое наследие работы Шевченко и его влияние на украинскую литературу и культуру. Политически памятник символизирует восстановление украинской культурной идентичности в период национального пробуждения. Он служит напоминанием о борьбе за независимость и важности вклада Шевченко в украинский национализм. Культурно памятник является центром различных мероприятий и празднований, укрепляя связь сообщества с их наследием и традициями.</p></div>
-</section>
-<section class="place" id="chernivtsi_st_nicholas">
-<h3>Chernivtsi St Nicholas</h3>
-
-
-<figure class="place-fig"><img src="../images/chernivtsi_st_nicholas.jpg" alt="Chernivtsi St Nicholas"/></figure>
-<div class="place-desc"><p class="prose">Следующие соборы, церкви и часовни посвящены Святому Николаю: Церковь Святого Николая в Албании, Церковь Святого Николая в Курджане, Церковь Святого Николая в Москополе.</p></div>
-</section>
-<section class="place" id="chernivtsi_synagogue_tempel">
-<h3>Темпльная синагога Черновцы</h3>
-
-
-<figure class="place-fig"><img src="../images/chernivtsi_synagogue_tempel.jpg" alt="Темпльная синагога Черновцы"/></figure>
-<div class="place-desc"><p class="prose">Храмовая синагога в Черновцах является потрясающим примером архитектуры начала 20 века, характеризующимся сложным дизайном и яркими мозаиками. Эта историческая синагога служит свидетельством богатого еврейского наследия города и продолжает быть центром культурной и религиозной жизни в сообществе. Посетители могут восхищаться её красивым интерьером и узнать о значительной роли, которую она сыграла в жизни еврейского населения Черновцов. Построен в период с 1905 по 1909 год. Разработано архитектором А. Служит центром еврейской общины в Черновцах.</p>
-<p class="prose">Синагога Темпл была построена в период с 1905 по 1909 год, спроектирована архитектором А. Г. В. Х. Она была основана в эпоху процветающей еврейской жизни в Черновцах, которые были частью Австро-Венгерской империи. Синагога стала свидетелем значительных событий на протяжении своей истории, включая периоды как процветания, так и трудностей для еврейской общины. Культурно Синагога Темпл является символом богатого еврейского наследия Черновцов, отражая разнообразную историю города. Она была важным местом для различных культурных мероприятий и религиозных обрядов, способствуя формированию идентичности местного сообщества. Архитектурная красота синагоги также обогащает культурный ландшафт Черновцов, делая её заметной достопримечательностью как для местных жителей, так и для туристов.</p></div>
-</section>
-<section class="place" id="chernivtsi_town_hall">
-<h3>Ратуша Черновцы</h3>
-
-
-<figure class="place-fig"><img src="../images/chernivtsi_town_hall.jpg" alt="Ратуша Черновцы"/></figure>
-<div class="place-desc"><p class="prose">Ратуша Черновцов — архитектурное сокровище, расположенное в самом сердце города, демонстрирующее сочетание готического и ренессансного стилей. Ее знаковая钟овая башня и сложный фасад делают ее выдающимся ориентиром, привлекая посетителей, желающих исследовать богатую историю и культуру Черновцов. Здание служит центром гражданской активности и местного управления, отражая яркую общественную жизнь города. Ратуша была построена в период с 1880 по 1882 год. Он включает в себя часовую башню высотой 65 метров.</p>
-<p class="prose">Ратуша была построена в период с 1880 по 1882 год, спроектирована архитектором Йозефом Хлавкой. Она была возведена как административный центр Черновцов, который тогда входил в состав Австро-Венгерской империи. Здание стало свидетелем значительных исторических событий, включая переходы города через различные политические режимы на протяжении многих лет. Политически Ратуша служила символом местного управления и гражданской гордости на протяжении всей истории Черновцов. Культурно она является свидетельством архитектурного наследия города и центром общественных мероприятий и празднований, отражая разнообразные традиции его жителей. Ратуша также является частью объекта Всемирного наследия ЮНЕСКО в историческом центре Черновцов, подчеркивая ее важность в контексте культурного сохранения.</p></div>
-</section>
-<section class="place" id="chernivtsi_unesco_gate">
-<h3>Университетские ворота Черновцы</h3>
-
-
-<figure class="place-fig"><img src="../images/chernivtsi_unesco_gate.jpg" alt="Университетские ворота Черновцы"/></figure>
-<div class="place-desc"><p class="prose">Университетские ворота в Черновцах — это потрясающий архитектурный шедевр, который служит главным входом в Черновицкий национальный университет, объект Всемирного наследия ЮНЕСКО. Эти украшенные ворота демонстрируют сочетание готического, мавританского и византийского стилей, отражая богатую культурную палитру региона. Посетители часто очарованы их сложными деталями и историческим значением университета, который они охраняют. Университетские ворота были завершены в 1864 году. Черновицкий национальный университет был внесен в список объектов Всемирного наследия ЮНЕСКО в 2011 году.</p>
-<p class="prose">Университетские ворота были построены в конце 19 века как часть комплекса Черновицкого университета, который был основан в 1875 году. Сам университет имеет богатую историю, будучи основанным во время Австро-Венгерской империи и служа центром образования и культуры для различных этнических групп региона. Ворота стали свидетелями множества исторических событий, включая изменения политических режимов и влияние Первой и Второй мировых войн. Культурно Университетские ворота символизируют богатое академическое наследие Черновцов и их роль как центра образования и интеллектуального обмена. Как часть объекта Всемирного наследия ЮНЕСКО, они подчеркивают архитектурное и историческое значение университета, который значительно способствовал культурной идентичности региона. Ворота также отражают разнообразные влияния, которые сформировали Черновцы, делая их центром внимания как для местных жителей, так и для туристов.</p></div>
-</section>
-<section class="place" id="chernivtsi_villa">
-<h3>Вилла Правосудия</h3>
-
-
-<figure class="place-fig"><img src="../images/chernivtsi_villa.jpg" alt="Вилла Правосудия"/></figure>
-<div class="place-desc"><p class="prose">Вилла Правосудия в Черновцах является ярким примером архитектурной элегантности, демонстрируя сочетание неоренессанса и ар-деко. Это историческое здание, изначально построенное в конце 19 века, служит символом богатого культурного наследия города. Посетители могут полюбоваться его сложными фасадами и зелеными садами, что делает его популярным местом как для местных жителей, так и для туристов. Построено в 1895 году архитектором Францем фон Нойманом. Изначально служил штаб-квартирой местной судебной власти.</p>
-<p class="prose">Вилла Правосудия была построена в 1895 году по проекту знаменитого архитектора Франца фон Ноймана. Изначально она служила штаб-квартирой местного судебного органа, отражая административное значение Черновцов во время Австро-Венгерской империи. На протяжении многих лет здание стало свидетелем различных исторических событий, включая изменения в управлении и последствия Первой мировой войны. Культурно Вилла Правосудия является свидетельством архитектурного наследия Черновцов и его исторической роли как центра юридической и административной деятельности. Здание вносит вклад в идентичность города, которая формировалась под влиянием различных факторов на протяжении веков. Хотя оно не имеет религиозного значения, его присутствие обогащает культурный ландшафт Черновцов, привлекая тех, кто интересуется историей и архитектурой.</p></div>
-</section>
-<section class="place" id="chernivtsi_pdfband_10_99e791d5">
-<h3>Будинок з левами</h3>
-
-
-<figure class="place-fig"><img src="../images/chernivtsi_pdfband_10_99e791d5.jpg" alt="Будинок з левами"/></figure>
-</section>
-<section class="place" id="chernivtsi_pdfband_0_67b04f74">
-<h3>Чернівці, Головна,</h3>
-
-
-<figure class="place-fig"><img src="../images/chernivtsi_pdfband_0_67b04f74.jpg" alt="Чернівці, Головна,"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/chernivtsi_historical_museum.jpg" alt="Экспонаты краеведения Черновицкой области" width="1280" height="958" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/chernivtsi_historical_museum_b.jpg" alt="Экспонаты краеведения Черновицкой области — вид 2" width="330" height="251" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Выставки Черновицкого краеведческого музея предлагают увлекательный взгляд на богатую историю и культуру Черновицкого региона. Расположенные в историческом здании Черновицкого исторического музея, экспонаты представляют собой разнообразную коллекцию артефактов, документов и произведений искусства, отражающих наследие этого края. Посетители могут исследовать эволюцию местных традиций, обычаев и повседневной жизни через различные тематические экспозиции. Основан в 1940 году. Расположено в здании, изначально построенном для православного епископа в конце 19 века. Включает в себя разнообразную коллекцию артефактов, связанных с историей и культурой Черновицкого региона.</p>
+<p class="prose">Черновицкий исторический музей был основан в 1940 году, хотя здание само по себе имеет богатую историю, уходящую корнями в конец 19 века. Изначально построенное как резиденция православного епископа, оно впоследствии стало центром культурной и образовательной деятельности в регионе. Музей сыграл значительную роль в сохранении истории Черновцов и окружающих территорий. Культурно музей служит важным хранилищем наследия региона, демонстрируя разнообразные влияния, которые формировали Черновцы на протяжении веков. Он подчеркивает уникальные традиции и художественные выражения этого района, способствуя пониманию его идентичности. Коллекции музея также отражают исторические взаимодействия различных этнических групп, подчеркивая многокультурную ткань Черновцов.</p></div>
 </section>
 </body>
 </html>

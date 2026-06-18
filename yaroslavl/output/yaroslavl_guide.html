@@ -13,7 +13,7 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
 .otium-logo { font-family: 'Cormorant Garamond', serif; font-size: 2.15rem;
   font-weight: 600; letter-spacing: 0.18em; margin-bottom: 0.85rem; }
 .otiump { margin: 0.42rem 0; line-height: 1.42; text-align: justify;
-  max-width: 38rem; font-size: 0.95rem; }
+  font-size: 0.95rem; }
 .guide-title { page-break-after: auto; margin-bottom: 0.55rem;
   page-break-inside: avoid; }
 .historical-reference { margin: 0.75rem 0 1.15rem;
@@ -63,22 +63,103 @@ ol.trip-stops a:hover { text-decoration: underline; }
 .heraldry-univ-caption { font-size: 0.52rem; line-height: 1.18;
   margin: 0.12rem 0 0; padding: 0 0.06rem; color: #252525;
   text-align: center; font-weight: 500; }
-.heraldry-motto { text-align: center; max-width: 18rem; margin: 0.18rem auto;
+.heraldry-motto { text-align: center; margin: 0.18rem auto;
   width: 100%; }
 .motto-line { font-family: 'Cormorant Garamond', serif; font-size: 1rem;
   margin: 0; color: #333; line-height: 1.35; }
 .guide-title h1.guide-title-main { font-family: 'Cormorant Garamond', serif;
   font-size: 2.35rem; margin-bottom: 0.5rem; font-weight: 600; }
 .lead { color: #444; font-size: 1.05rem; }
-.guide-toc { margin: 0.85rem 0 1.15rem; page-break-inside: avoid; }
-.guide-toc h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.28rem;
-  font-weight: 600; margin: 0.4rem 0 0.55rem; }
+
+.guide-toc { page-break-before: always; break-before: page;
+  page-break-after: always; break-after: page;
+  margin: 0; padding: 0.2rem 0 0.45rem; page-break-inside: auto; }
+.guide-toc h2 { font-family: 'Cormorant Garamond', serif;
+  font-size: 1.28rem; font-weight: 600; margin: 0.4rem 0 0.55rem; }
 .guide-toc ol { margin: 0.35rem 0 0.65rem 1.25rem; padding: 0;
   columns: 2; column-gap: 1.5rem; }
 .guide-toc li { margin: 0.18rem 0; line-height: 1.35;
   font-size: 0.88rem; break-inside: avoid; }
-.guide-toc a { color: #1a5276; text-decoration: none; }
+.guide-toc a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.guide-toc a:hover { color: #0d3d56; }
 .guide-toc li.toc-item--sub { font-size: 0.82rem; margin-left: 0.35rem; }
+.toc-back { font-size: 0.78rem; margin: 0 0 0.35rem; text-align: right; }
+.toc-back a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.toc-back a:hover { color: #0d3d56; }
+.place, .historical-reference, .guide-primer, .guide-trip-plans {
+  scroll-margin-top: 1.25rem; }
+.historical-reference h2, .guide-primer h2, .guide-trip-plans h2,
+.chapter-head h2, .place-lead h3 { position: relative; }
+.guide-toc + .place, .guide-toc + .chapter-head {
+  page-break-before: avoid; break-before: avoid-page; }
+.place-lead { page-break-inside: avoid; break-inside: avoid-page;
+  page-break-after: auto; }
+.place-lead > h3 { page-break-after: avoid; break-after: avoid-page; }
+.place-lead > .place-meta { page-break-after: avoid; break-after: avoid-page; }
+
+.place-fig { page-break-inside: avoid; break-inside: avoid-page;
+  margin: 0.5rem 0 1rem; }
+.place-fig img {
+  page-break-inside: avoid; break-inside: avoid-page;
+  max-height: 48vh; width: auto; max-width: 100%;
+  object-fit: contain; margin-left: auto; margin-right: auto; }
+.place-fig--hi-res img { max-height: 52vh; }
+.place-fig--lo-res img { max-height: 30vh; }
+.place-pdf-fig-row {
+  display: flex; flex-direction: row; flex-wrap: wrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.45rem 0.55rem; margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row .place-fig {
+  flex: 1 1 30%; margin: 0; min-width: 26%; max-width: 100%; }
+.place-pdf-fig-row .place-fig img {
+  width: auto; max-width: 100%; height: auto; max-height: 44vh;
+  object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--pair {
+  flex-wrap: nowrap; justify-content: space-between;
+  align-items: flex-end; gap: 0.5rem 0.65rem; }
+.place-pdf-fig-row--pair .place-fig {
+  flex: 1 1 47%; min-width: 0; max-width: 50%;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--pair .place-fig img {
+  max-height: 44vh; object-fit: contain; }
+.place-pdf-fig-row--pair .place-fig--hi-res img { max-height: 50vh; }
+.place-pdf-fig-row--pair .place-fig--lo-res img { max-height: 26vh; }
+.place-pdf-fig-row--pair .place-fig--row-sized img,
+.place-pdf-fig-row--triple .place-fig--row-sized img,
+.place-pdf-fig-row--many .place-fig--row-sized img {
+  width: auto; max-width: 100%; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row .place-fig--row-sized.place-fig--hi-res img,
+.place-pdf-fig-row .place-fig--row-sized.place-fig--lo-res img {
+  max-height: unset; }
+.place-pdf-fig-rows-stack {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple {
+  display: flex; flex-direction: row; flex-wrap: nowrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.4rem 0.48rem; margin: 0;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--triple .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--triple .place-fig--hi-res img { max-height: 38vh; }
+.place-pdf-fig-row--triple .place-fig--lo-res img { max-height: 18vh; }
+.place-pdf-fig-row--many {
+  flex-wrap: nowrap; justify-content: center; align-items: flex-end;
+  gap: 0.35rem 0.42rem; }
+.place-pdf-fig-row--many .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--many .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+
+
 .place { margin-bottom: 2.2rem; page-break-inside: auto; }
 h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.22rem; margin: 1.2rem 0 0.35rem;
   font-weight: 600; }
@@ -90,7 +171,6 @@ h4 { font-family: 'Cormorant Garamond', serif; font-size: 0.95rem; text-transfor
   color: #555; font-size: 0.95rem; margin: 0 0 0.5rem; font-style: italic; }
 .place-meta { font-size: 0.92rem; color: #353535; margin: 0 0 0.75rem;
   line-height: 1.4; }
-.place-fig { margin: 0.5rem 0 1rem; }
 img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
 .prose, .place-desc p { margin: 0.45rem 0; line-height: 1.5;
   text-align: justify; }
@@ -110,11 +190,14 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <figure class="heraldry-fig heraldry-coat-book" title="Coat of arms of Yaroslavl"><img src="../images/guide_coat_of_arms.svg" alt="Coat of arms of Yaroslavl"/></figure>
 <figure class="heraldry-fig heraldry-coat-book" title="Flag of Yaroslavl"><img src="../images/guide_flag.svg" alt="Flag of Yaroslavl"/></figure>
 </div></div><h1 class="guide-title-main">Yaroslavl</h1><p class="lead">Guide. Places in this edition: 26.</p></header>
+<nav class="guide-toc" id="guide-toc" aria-label="Contents"><h2>Contents</h2><ol><li class="toc-item"><a href="#guide-historical">Historical overview</a></li><li class="toc-item"><a href="#guide-trips">Trip ideas</a></li><li class="toc-item"><a href="#yaroslavl_assumption_cathedral">Assumption Cathedral</a></li><li class="toc-item"><a href="#yaroslavl_bear_intersection">Bear monument</a></li><li class="toc-item"><a href="#yaroslavl_st_elijah">Church of Elijah the Prophet</a></li><li class="toc-item"><a href="#yaroslavl_fedorovskiy">Church of Fedorovskaya Icon</a></li><li class="toc-item"><a href="#yaroslavl_university">Demidov pillar Yaroslavl State University</a></li><li class="toc-item"><a href="#yaroslavl_demidov_pillar">Demidovsky Pillar</a></li><li class="toc-item"><a href="#yaroslavl_korovniky">Korovniki churches</a></li><li class="toc-item"><a href="#yaroslavl_muslim_mosque">Muslim mosque</a></li><li class="toc-item"><a href="#yaroslavl_volga_bridge">Oktyabrsky bridge</a></li><li class="toc-item"><a href="#yaroslavl_red_square">Red Square Yaroslavl</a></li><li class="toc-item"><a href="#yaroslavl_ring_street">Ring Boulevard</a></li><li class="toc-item"><a href="#yaroslavl_motor_ship_museum">River ship museum</a></li><li class="toc-item"><a href="#yaroslavl_spassky_monastery">Spassky Monastery</a></li><li class="toc-item"><a href="#yaroslavl_strelka">Strelka park</a></li><li class="toc-item"><a href="#yaroslavl_tolga_monastery">Tolga Monastery</a></li><li class="toc-item"><a href="#yaroslavl_transfiguration_monastery">Transfiguration Monastery</a></li><li class="toc-item"><a href="#yaroslavl_mashinostroiteley">Victory park Yaroslavl</a></li><li class="toc-item"><a href="#yaroslavl_volga_embankment">Volga embankment</a></li><li class="toc-item"><a href="#yaroslavl_volkov_theatre">Volkov Theatre</a></li><li class="toc-item"><a href="#yaroslavl_art_museum">Yaroslavl Art Museum</a></li><li class="toc-item"><a href="#yaroslavl_kremlin">Yaroslavl Kremlin</a></li><li class="toc-item"><a href="#yaroslavl_museum_reserve">Yaroslavl Museum-Reserve</a></li><li class="toc-item"><a href="#yaroslavl_planetarium">Yaroslavl Planetarium</a></li><li class="toc-item"><a href="#yaroslavl_railway_station">Yaroslavl railway station</a></li><li class="toc-item"><a href="#yaroslavl_meteorological_tower">Yaroslavl tower museum</a></li><li class="toc-item"><a href="#yaroslavl_pereslavl_gate">Znamenskaya Tower</a></li></ol></nav>
 <section class="historical-reference" id="guide-historical" aria-label="Historical overview"><h2>Historical overview</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 <p class="prose">Yaroslavl is the administrative centre of Yaroslavl Oblast and one of the oldest cities of the Volga Golden Ring.</p>
 <p class="prose">Founded in the eleventh century, it grew through trade and seventeenth-century church ensembles. Theatre, embankments, and industry later anchored its role on the Upper Volga.</p>
 <p class="prose">Soviet industrialisation changed the skyline; after 1991 the city joined Golden Ring itineraries, foregrounding Volkov’s theatre, Volga embankments, and seventeenth-century churches as part of shared Russian history.</p></section>
 <section class="guide-trip-plans" id="guide-trips" aria-label="Trip ideas"><h2>Trip ideas</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 <article class="trip-plan" id="trip-1d"><h3>One day</h3>
 <p class="prose">A compact loop linking the strongest cards in this guide, ordered to minimise backtracking on foot.</p>
 <ol class="trip-stops"><li><a href="#yaroslavl_transfiguration_monastery">Transfiguration Monastery</a> (~75min)</li>
@@ -140,210 +223,353 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <article class="trip-plan" id="trip-3d3"><h3>Three days — day 3</h3>
 <p class="prose">Day 3 — remaining highlights nearby.</p>
 <ol class="trip-stops"><li><a href="#yaroslavl_assumption_cathedral">Assumption Cathedral</a> (~75min)</li></ol></article></section>
-<nav class="guide-toc" aria-label="Contents"><h2>Contents</h2><ol><li class="toc-item"><a href="#guide-historical">Historical overview</a></li><li class="toc-item"><a href="#guide-trips">Trip ideas</a></li><li class="toc-item"><a href="#yaroslavl_assumption_cathedral">Assumption Cathedral</a></li><li class="toc-item"><a href="#yaroslavl_bear_intersection">Bear monument</a></li><li class="toc-item"><a href="#yaroslavl_st_elijah">Church of Elijah the Prophet</a></li><li class="toc-item"><a href="#yaroslavl_fedorovskiy">Church of Fedorovskaya Icon</a></li><li class="toc-item"><a href="#yaroslavl_university">Demidov pillar Yaroslavl State University</a></li><li class="toc-item"><a href="#yaroslavl_demidov_pillar">Demidovsky Pillar</a></li><li class="toc-item"><a href="#yaroslavl_korovniky">Korovniki churches</a></li><li class="toc-item"><a href="#yaroslavl_pdfband_2_3091e738">Muslim mosque</a></li><li class="toc-item"><a href="#yaroslavl_volga_bridge">Oktyabrsky bridge</a></li><li class="toc-item"><a href="#yaroslavl_red_square">Red Square Yaroslavl</a></li><li class="toc-item"><a href="#yaroslavl_ring_street">Ring Boulevard</a></li><li class="toc-item"><a href="#yaroslavl_motor_ship_museum">River ship museum</a></li><li class="toc-item"><a href="#yaroslavl_spassky_monastery">Spassky Monastery</a></li><li class="toc-item"><a href="#yaroslavl_strelka">Strelka park</a></li><li class="toc-item"><a href="#yaroslavl_tolga_monastery">Tolga Monastery</a></li><li class="toc-item"><a href="#yaroslavl_transfiguration_monastery">Transfiguration Monastery</a></li><li class="toc-item"><a href="#yaroslavl_mashinostroiteley">Victory park Yaroslavl</a></li><li class="toc-item"><a href="#yaroslavl_volga_embankment">Volga embankment</a></li><li class="toc-item"><a href="#yaroslavl_volkov_theatre">Volkov Theatre</a></li><li class="toc-item"><a href="#yaroslavl_art_museum">Yaroslavl Art Museum</a></li><li class="toc-item"><a href="#yaroslavl_kremlin">Yaroslavl Kremlin</a></li><li class="toc-item"><a href="#yaroslavl_museum_reserve">Yaroslavl Museum-Reserve</a></li><li class="toc-item"><a href="#yaroslavl_planetarium">Yaroslavl Planetarium</a></li><li class="toc-item"><a href="#yaroslavl_railway_station">Yaroslavl railway station</a></li><li class="toc-item"><a href="#yaroslavl_meteorological_tower">Yaroslavl tower museum</a></li><li class="toc-item"><a href="#yaroslavl_pereslavl_gate">Znamenskaya Tower</a></li></ol></nav>
 <section class="place" id="yaroslavl_assumption_cathedral">
+<div class="place-lead">
 <h3>Assumption Cathedral</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/yaroslavl_assumption_cathedral.jpg" alt="Assumption Cathedral"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/yaroslavl_assumption_cathedral.jpg" alt="Assumption Cathedral" width="1280" height="960" style="height: 250px; max-height: 250px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--row-sized"><img src="../images/yaroslavl_assumption_cathedral_b.jpg" alt="Assumption Cathedral — view 2" width="330" height="529" style="height: 250px; max-height: 250px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Assumption Cathedral in Yaroslavl is a stunning example of Russian architecture, renowned for its striking blue and gold domes. This iconic structure is not only a centerpiece of the city&#x27;s skyline but also a significant historical and cultural landmark. Visitors can admire its intricate frescoes and learn about its rich history dating back to the 12th century. Founded in 1215, making it one of the oldest churches in Yaroslavl. Renovated in the 17th century with intricate frescoes and a distinctive architectural style.</p>
 <p class="prose">The Assumption Cathedral was founded in 1215, making it one of the oldest churches in Yaroslavl. It has undergone several reconstructions, with the most notable being in the 17th century, when it was expanded and adorned with beautiful frescoes. The cathedral has witnessed many key events in the region&#x27;s history, including the establishment of Yaroslavl as a significant cultural and religious center. Culturally, the Assumption Cathedral is a UNESCO World Heritage site, recognized for its architectural beauty and historical importance. It serves as a vital part of Yaroslavl&#x27;s heritage, reflecting the city&#x27;s artistic traditions and religious practices. The cathedral continues to play a role in the daily life of the community, hosting religious services and cultural events.</p></div>
 </section>
 <section class="place" id="yaroslavl_bear_intersection">
+<div class="place-lead">
 <h3>Bear monument</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/yaroslavl_bear_intersection.jpg" alt="Bear monument"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/yaroslavl_bear_intersection.jpg" alt="Bear monument" width="1280" height="856" style="height: 222px; max-height: 222px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/yaroslavl_bear_intersection_b.jpg" alt="Bear monument — view 2" width="330" height="220" style="height: 222px; max-height: 222px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Bear Monument in Yaroslavl is a charming sculpture that symbolizes the city&#x27;s rich history and cultural heritage. Located at a bustling intersection, it serves as a popular meeting point and photo opportunity for both locals and tourists. The statue captures the essence of Yaroslavl&#x27;s connection to its natural surroundings and folklore. The Bear Monument was unveiled in 2006. Yaroslavl was founded in 1010.</p>
 <p class="prose">The Bear Monument was unveiled in 2006 as part of the city&#x27;s efforts to enhance public spaces and celebrate local culture. It reflects Yaroslavl&#x27;s longstanding relationship with the bear, an animal often associated with strength and resilience in Russian folklore. The monument is a modern addition to the city&#x27;s historical landscape, which dates back to its founding in 1010. Culturally, the Bear Monument represents Yaroslavl&#x27;s identity and serves as a testament to the city&#x27;s artistic endeavors. It highlights the importance of public art in daily life and contributes to the city&#x27;s charm, attracting visitors and fostering a sense of community. The monument aligns with Yaroslavl&#x27;s recognition as a UNESCO World Heritage site, emphasizing the city&#x27;s commitment to preserving its cultural legacy.</p></div>
 </section>
 <section class="place" id="yaroslavl_st_elijah">
+<div class="place-lead">
 <h3>Church of Elijah the Prophet</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/yaroslavl_st_elijah.jpg" alt="Church of Elijah the Prophet"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/yaroslavl_st_elijah.jpg" alt="Church of Elijah the Prophet" width="1280" height="855" style="height: 223px; max-height: 223px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/yaroslavl_st_elijah_b.jpg" alt="Church of Elijah the Prophet — view 2" width="330" height="497" style="height: 223px; max-height: 223px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Church of Elijah the Prophet in Yaroslavl is a stunning example of 17th-century Russian architecture, renowned for its vibrant frescoes and intricate details. Nestled in the heart of the city, this church is a must-visit for those interested in the rich cultural and religious heritage of the region. Its striking onion domes and beautifully preserved interiors offer a glimpse into the artistic achievements of the time. Constructed between 1650 and 1660. Designated as a UNESCO World Heritage Site. Features stunning frescoes and intricate architectural details.</p>
 <p class="prose">The Church of Elijah the Prophet was built between 1650 and 1660, commissioned by local merchants as a testament to their faith and prosperity. It is one of the most significant architectural monuments in Yaroslavl and reflects the city&#x27;s historical importance as a trading hub during the 17th century. The church has undergone various restorations to preserve its grandeur and artistic elements. Culturally, the Church of Elijah the Prophet is a vital part of Yaroslavl&#x27;s heritage, contributing to its recognition as a UNESCO World Heritage Site. The church is not only a place of worship but also a center for community gatherings and cultural events, reflecting the traditions and daily life of the locals. Its artistic significance is highlighted by the remarkable frescoes that adorn its walls, showcasing the skill of Russian artisans.</p></div>
 </section>
 <section class="place" id="yaroslavl_fedorovskiy">
+<div class="place-lead">
 <h3>Church of Fedorovskaya Icon</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/yaroslavl_fedorovskiy.jpg" alt="Church of Fedorovskaya Icon"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/yaroslavl_fedorovskiy.jpg" alt="Church of Fedorovskaya Icon" width="1280" height="757" style="height: 197px; max-height: 197px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/yaroslavl_fedorovskiy_b.jpg" alt="Church of Fedorovskaya Icon — view 2" width="330" height="244" style="height: 197px; max-height: 197px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Church of the Fedorovskaya Icon in Yaroslavl is a stunning example of Russian Orthodox architecture, known for its intricate design and vibrant frescoes. This church serves as a serene place of worship and a cultural landmark, attracting visitors with its historical significance and artistic beauty. Constructed between 1684 and 1694. Part of the UNESCO World Heritage Site of Yaroslavl. Dedicated to the Fedorovskaya Icon of the Mother of God.</p>
 <p class="prose">The Church of the Fedorovskaya Icon was constructed in the early 17th century, specifically between 1684 and 1694. It was built to commemorate the miraculous appearance of the Fedorovskaya Icon of the Mother of God, which is believed to have played a significant role in the spiritual life of the region. Culturally, the church is an important part of Yaroslavl&#x27;s architectural heritage and reflects the artistic trends of its time. It is part of the UNESCO World Heritage Site that recognizes the historical center of Yaroslavl, highlighting its significance in Russian history and culture. The church continues to be a place of worship, embodying the religious traditions of the Orthodox faith.</p></div>
 </section>
 <section class="place" id="yaroslavl_university">
+<div class="place-lead">
 <h3>Demidov pillar Yaroslavl State University</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/yaroslavl_university.jpg" alt="Demidov pillar Yaroslavl State University"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/yaroslavl_university.jpg" alt="Demidov pillar Yaroslavl State University" width="1280" height="960" style="height: 250px; max-height: 250px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/yaroslavl_university_b.jpg" alt="Demidov pillar Yaroslavl State University — view 2" width="330" height="365" style="height: 250px; max-height: 250px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Demidov Pillar at Yaroslavl State University is a prominent landmark that symbolizes the rich educational heritage of the city. This impressive structure stands as a testament to the university&#x27;s commitment to academic excellence and serves as a gathering point for students and visitors alike. Its architectural elegance and historical significance make it a must-visit site for anyone exploring Yaroslavl. The Demidov Pillar was erected in 1970. It commemorates the contributions of the Demidov family to education in Yaroslavl. Yaroslavl State University was founded in the same year.</p>
 <p class="prose">The Demidov Pillar was established in 1970 to commemorate the legacy of the Demidov family, who were instrumental in the development of education in Yaroslavl. The university itself was founded in 1970, marking a significant milestone in the city&#x27;s educational landscape. The pillar has since become an iconic representation of the university&#x27;s mission and values. Culturally, the Demidov Pillar is a symbol of Yaroslavl&#x27;s dedication to learning and intellectual advancement. It reflects the city&#x27;s historical role as a center of education and culture in Russia. The university and its landmark contribute to the daily life of the community, fostering a sense of pride and continuity in Yaroslavl&#x27;s educational traditions.</p></div>
 </section>
 <section class="place" id="yaroslavl_demidov_pillar">
+<div class="place-lead">
 <h3>Demidovsky Pillar</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/yaroslavl_demidov_pillar.jpg" alt="Demidovsky Pillar"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/yaroslavl_demidov_pillar.jpg" alt="Demidovsky Pillar" width="1280" height="736" style="height: 192px; max-height: 192px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--row-sized"><img src="../images/yaroslavl_demidov_pillar_b.jpg" alt="Demidovsky Pillar — view 2" width="330" height="525" style="height: 192px; max-height: 192px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Demidovsky Pillar is a striking monument located in Yaroslavl, symbolizing the city&#x27;s rich industrial heritage. Erected in honor of the Demidov family, prominent industrialists of the 18th and 19th centuries, this pillar stands as a testament to their contributions to the region&#x27;s economic development. Visitors can admire its impressive architecture and learn about the influential role the Demidovs played in shaping Yaroslavl&#x27;s history. The Demidovsky Pillar was built in 1820. It commemorates the Demidov family, influential industrialists in Russia.</p>
 <p class="prose">The Demidovsky Pillar was constructed in 1820 to commemorate the Demidov family, who were significant figures in Russian metallurgy and industry. The monument reflects the prosperity brought to Yaroslavl by the Demidovs, particularly through their ironworks and other enterprises, which played a crucial role in the city&#x27;s growth during the 18th and 19th centuries. Culturally, the Demidovsky Pillar is an important landmark that highlights the industrial heritage of Yaroslavl, contributing to the city&#x27;s identity. It serves as a reminder of the Demidov family&#x27;s impact on local traditions and economic life, making it a point of interest for both residents and visitors. The monument is also part of the broader narrative of Yaroslavl&#x27;s development, reflecting the city&#x27;s historical significance within Russia.</p></div>
 </section>
 <section class="place" id="yaroslavl_korovniky">
+<div class="place-lead">
 <h3>Korovniki churches</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/yaroslavl_korovniky.jpg" alt="Korovniki churches"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/yaroslavl_korovniky.jpg" alt="Korovniki churches" width="1280" height="853" style="height: 222px; max-height: 222px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/yaroslavl_korovniky_b.jpg" alt="Korovniki churches — view 2" width="330" height="472" style="height: 222px; max-height: 222px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Korovniki churches in Yaroslavl are a remarkable ensemble of religious architecture that showcases the city&#x27;s rich spiritual heritage. Nestled in a picturesque area, these churches are notable for their intricate designs and vibrant frescoes, attracting visitors interested in history and art alike. The site serves as a testament to the city&#x27;s longstanding religious traditions and cultural significance. The Church of St. The Korovniki churches are part of the UNESCO World Heritage site of Yaroslavl. The architectural style of the churches reflects 17th-century Russian ecclesiastical design.</p>
 <p class="prose">The Korovniki churches date back to the 17th century, with the most prominent among them being the Church of St. Nicholas, built in 1650. This period marked a flourishing of ecclesiastical architecture in Yaroslavl, reflecting the city&#x27;s growing importance as a center of trade and culture. Over the years, the churches have witnessed various historical events, including changes in religious practices and the impact of political shifts in Russia. Culturally, the Korovniki churches are integral to Yaroslavl&#x27;s identity, contributing to its recognition as a UNESCO World Heritage site. They embody the artistic styles of the time, featuring elaborate frescoes and unique architectural elements that reflect the local traditions. The churches continue to play a role in the daily life of the community, hosting religious services and cultural events that reinforce their significance in the spiritual and social fabric of Yaroslavl.</p></div>
 </section>
-<section class="place" id="yaroslavl_pdfband_2_3091e738">
+<section class="place" id="yaroslavl_muslim_mosque">
+<div class="place-lead">
 <h3>Muslim mosque</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/yaroslavl_pdfband_2_3091e738.jpg" alt="Muslim mosque"/></figure>
+<figure class="place-fig place-fig--hi-res"><img src="../images/yaroslavl_muslim_mosque.jpg" alt="Muslim mosque" width="1280" height="1206"/></figure>
+</div>
 </section>
 <section class="place" id="yaroslavl_volga_bridge">
+<div class="place-lead">
 <h3>Oktyabrsky bridge</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/yaroslavl_volga_bridge.jpg" alt="Oktyabrsky bridge"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/yaroslavl_volga_bridge.jpg" alt="Oktyabrsky bridge" width="1280" height="848" style="height: 221px; max-height: 221px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/yaroslavl_volga_bridge_b.jpg" alt="Oktyabrsky bridge — view 2" width="330" height="220" style="height: 221px; max-height: 221px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Oktyabrsky Bridge is a striking architectural feature in Yaroslavl, spanning the Volga River and connecting key areas of the city. This bridge not only serves as a vital transportation link but also offers picturesque views of the river and surrounding landscapes, making it a popular spot for both locals and visitors. The bridge spans approximately 1,200 meters over the Volga River.</p>
 <p class="prose">The Oktyabrsky Bridge was completed in 1970, marking a significant development in Yaroslavl&#x27;s infrastructure. It replaced an older structure and has since played a crucial role in facilitating traffic and commerce across the Volga River. Culturally, the Oktyabrsky Bridge is integral to daily life in Yaroslavl, symbolizing progress and connectivity in the region. It is often featured in local art and photography, reflecting the city&#x27;s modern identity while also serving as a backdrop for various community events and celebrations.</p></div>
 </section>
 <section class="place" id="yaroslavl_red_square">
+<div class="place-lead">
 <h3>Red Square Yaroslavl</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/yaroslavl_red_square.jpg" alt="Red Square Yaroslavl"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/yaroslavl_red_square.jpg" alt="Red Square Yaroslavl" width="1280" height="960" style="height: 250px; max-height: 250px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/yaroslavl_red_square_b.jpg" alt="Red Square Yaroslavl — view 2" width="330" height="462" style="height: 250px; max-height: 250px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Red Square in Yaroslavl is a vibrant public space that serves as a central hub for both locals and visitors. Surrounded by historical architecture and lively markets, it is an ideal spot to experience the city&#x27;s rich culture and community spirit. The square often hosts various events, making it a focal point for social gatherings and celebrations. Red Square is located in the heart of Yaroslavl, surrounded by historical buildings. It has been a central gathering place for the community since the city&#x27;s establishment.</p>
 <p class="prose">Red Square has been a significant part of Yaroslavl since the city&#x27;s founding in the 11th century. It has witnessed numerous key events throughout its history, including trade activities that contributed to the city&#x27;s economic growth and development. The square has evolved over the centuries, reflecting the changing dynamics of Yaroslavl. Culturally, Red Square is integral to Yaroslavl&#x27;s identity, often serving as a venue for festivals, markets, and public celebrations. The square is surrounded by notable buildings that showcase the city&#x27;s architectural heritage, contributing to Yaroslavl&#x27;s designation as a UNESCO World Heritage site. It plays a vital role in daily life, acting as a gathering place for the community and a showcase for local traditions.</p></div>
 </section>
 <section class="place" id="yaroslavl_ring_street">
+<div class="place-lead">
 <h3>Ring Boulevard</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/yaroslavl_ring_street.jpg" alt="Ring Boulevard"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/yaroslavl_ring_street.jpg" alt="Ring Boulevard" width="1280" height="946" style="height: 167px; max-height: 167px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/yaroslavl_ring_street_b.jpg" alt="Ring Boulevard — view 2" width="330" height="165" style="height: 167px; max-height: 167px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Ring Boulevard in Yaroslavl is a picturesque circular park that encircles the historic city center, offering visitors a serene escape amidst lush greenery and vibrant flowerbeds. This scenic promenade is ideal for leisurely strolls, providing stunning views of the city’s architectural gems and the Volga River. It serves as a hub for both locals and tourists, showcasing the charm of Yaroslavl&#x27;s rich heritage. Ring Boulevard was established in the early 19th century. The boulevard replaced the old fortifications of Yaroslavl. It is part of the UNESCO World Heritage site recognizing Yaroslavl&#x27;s historical significance.</p>
 <p class="prose">The Ring Boulevard was established in the early 19th century, initially as a part of the city&#x27;s urban planning efforts to enhance the aesthetic appeal of Yaroslavl. It was designed to replace the old fortifications that once surrounded the city, transforming the area into a public space for recreation and social gatherings. The boulevard has since evolved, reflecting the city&#x27;s growth and development over the years. Culturally, Ring Boulevard plays a vital role in the daily life of Yaroslavl&#x27;s residents, serving as a popular gathering place for community events, festivals, and leisurely activities. It is a part of the UNESCO World Heritage site that recognizes the historical significance of Yaroslavl&#x27;s architecture and urban planning. The boulevard is also a testament to the city&#x27;s commitment to preserving its natural beauty while fostering a vibrant urban environment.</p></div>
 </section>
 <section class="place" id="yaroslavl_motor_ship_museum">
+<div class="place-lead">
 <h3>River ship museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/yaroslavl_motor_ship_museum.jpg" alt="River ship museum"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/yaroslavl_motor_ship_museum.jpg" alt="River ship museum" width="1280" height="854" style="height: 222px; max-height: 222px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/yaroslavl_motor_ship_museum_b.jpg" alt="River ship museum — view 2" width="330" height="462" style="height: 222px; max-height: 222px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The River Ship Museum in Yaroslavl offers a unique glimpse into the maritime history of Russia, showcasing a variety of historic vessels that once navigated the country&#x27;s rivers. Visitors can explore the museum&#x27;s collection of ships, including riverboats and cargo vessels, and learn about their significance in trade and transportation. The museum is situated along the scenic Volga River, providing a picturesque backdrop for an engaging cultural experience. Established in 2002. Located in a former river port that dates back to the 17th century. Showcases a variety of historic vessels, including riverboats and cargo ships.</p>
 <p class="prose">The River Ship Museum was established in 2002, capitalizing on Yaroslavl&#x27;s rich maritime heritage. The museum is located in a former river port, which has been a hub of trade and transportation since the 17th century. Over the years, the museum has expanded its collection to include various types of vessels that reflect the evolution of river navigation in Russia. Culturally, the River Ship Museum plays a vital role in preserving Yaroslavl&#x27;s maritime traditions and heritage. It highlights the importance of river transport in the region&#x27;s economic development and daily life. The museum also contributes to the city&#x27;s identity as a UNESCO World Heritage Site, emphasizing the historical significance of its waterways and their impact on Russian culture.</p></div>
 </section>
 <section class="place" id="yaroslavl_spassky_monastery">
+<div class="place-lead">
 <h3>Spassky Monastery</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/yaroslavl_spassky_monastery.jpg" alt="Spassky Monastery"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/yaroslavl_spassky_monastery.jpg" alt="Spassky Monastery" width="1280" height="767" style="height: 200px; max-height: 200px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/yaroslavl_spassky_monastery_b.jpg" alt="Spassky Monastery — view 2" width="330" height="220" style="height: 200px; max-height: 200px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Spassky Monastery in Yaroslavl is a stunning example of Russian ecclesiastical architecture, showcasing intricate designs and rich history. Visitors can explore its serene grounds, which offer a glimpse into the spiritual and cultural life of the region. The monastery is not only a place of worship but also a significant landmark that reflects the city&#x27;s heritage. Founded in the early 16th century. Renovated extensively in the 17th century.</p>
 <p class="prose">Founded in the early 16th century, the Spassky Monastery was established by the local clergy and has played a vital role in the religious life of Yaroslavl. Throughout its history, the monastery has undergone various renovations and expansions, particularly in the 17th century, when it became a prominent center for monastic life and education. Culturally, the Spassky Monastery is an important symbol of Yaroslavl&#x27;s heritage, contributing to the city&#x27;s recognition as a UNESCO World Heritage site. It has served as a hub for artistic expression and religious practices, influencing local traditions and daily life. The monastery&#x27;s architecture and artworks reflect the rich spiritual and cultural tapestry of the region.</p></div>
 </section>
 <section class="place" id="yaroslavl_strelka">
+<div class="place-lead">
 <h3>Strelka park</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/yaroslavl_strelka.jpg" alt="Strelka park"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/yaroslavl_strelka.jpg" alt="Strelka park" width="1280" height="848" style="height: 221px; max-height: 221px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/yaroslavl_strelka_b.jpg" alt="Strelka park — view 2" width="330" height="219" style="height: 221px; max-height: 221px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Strelka Park, located at the confluence of the Volga and Kotorosl rivers in Yaroslavl, offers a picturesque retreat for both locals and visitors. This scenic park features walking paths, lush greenery, and stunning views of the rivers, making it a popular spot for relaxation and leisure activities. With its historical monuments and vibrant atmosphere, Strelka Park is a central hub for cultural events and community gatherings. Strelka Park is located at the confluence of the Volga and Kotorosl rivers. The park was established in the early 20th century.</p>
 <p class="prose">Strelka Park was established in the early 20th century and has since become a significant recreational area in Yaroslavl. The park&#x27;s location at the confluence of two rivers has historical importance, as it has been a gathering place for centuries, reflecting the city&#x27;s rich heritage. Culturally, Strelka Park plays a vital role in the daily life of Yaroslavl residents, serving as a venue for festivals, concerts, and public events. The park&#x27;s natural beauty and historical context contribute to its status as a cherished landmark in the city. It is also part of the UNESCO World Heritage site that recognizes the historical architecture of Yaroslavl, highlighting its importance in Russian heritage.</p></div>
 </section>
 <section class="place" id="yaroslavl_tolga_monastery">
+<div class="place-lead">
 <h3>Tolga Monastery</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/yaroslavl_tolga_monastery.jpg" alt="Tolga Monastery"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/yaroslavl_tolga_monastery.jpg" alt="Tolga Monastery" width="1280" height="853" style="height: 222px; max-height: 222px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/yaroslavl_tolga_monastery_b.jpg" alt="Tolga Monastery — view 2" width="330" height="220" style="height: 222px; max-height: 222px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Tolga Monastery, located on the banks of the Volga River in Yaroslavl, is a serene and historic site known for its stunning architecture and spiritual ambiance. Founded in the 17th century, the monastery features beautiful frescoes and a tranquil setting that attracts both pilgrims and tourists alike. Visitors can explore its rich history and enjoy the peaceful surroundings that have made it a significant place of worship. Founded in 1547 by monk Afonasy. Renovated and expanded in the 17th century.</p>
 <p class="prose">Tolga Monastery was founded in 1547 by a monk named Afonasy, following a vision he had of the Virgin Mary. The monastery gained prominence in the 17th century, particularly during the Time of Troubles, when it served as a refuge for those seeking solace and safety. Over the centuries, it has undergone various renovations and expansions, reflecting the architectural styles of different periods. The monastery holds cultural significance as a symbol of Russian Orthodox heritage and has been an important pilgrimage site for centuries. Its architectural beauty and artistic treasures, including intricate frescoes, contribute to Yaroslavl&#x27;s status as a UNESCO World Heritage site. The Tolga Monastery continues to play a vital role in the spiritual life of the community, hosting religious services and festivals that celebrate local traditions.</p></div>
 </section>
 <section class="place" id="yaroslavl_transfiguration_monastery">
+<div class="place-lead">
 <h3>Transfiguration Monastery</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Russian Baroque and traditional Russian church architecture | Period: late 16th century</p>
-<figure class="place-fig"><img src="../images/yaroslavl_transfiguration_monastery.jpg" alt="Transfiguration Monastery"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/yaroslavl_transfiguration_monastery.jpg" alt="Transfiguration Monastery" width="1280" height="880" style="height: 229px; max-height: 229px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/yaroslavl_transfiguration_monastery_b.jpg" alt="Transfiguration Monastery — view 2" width="330" height="462" style="height: 229px; max-height: 229px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Perched on a hilltop overlooking the Volga River, Transfiguration Monastery is one of Yaroslavl&#x27;s most iconic landmarks. Its soaring bell towers and majestic domes are visible from miles around, making it a striking symbol of faith and heritage. The monastery was originally constructed during the reign of Tsar Ivan IV (&#x27;Ivan the Terrible&#x27;). It houses several important relics, including those of Saint Job himself. Notable architectural features include the Assumption Cathedral and the Church of All Saints. Restoration work in the early 20th century preserved much of the original structure while adding modern safety measures. Today, the monastery continues to serve as an active place of worship.</p>
 <p class="prose">Founded in the late 16th century by Archbishop Job of Moscow, the monastery played a pivotal role in spreading Orthodox Christianity throughout northern Russia. Over the centuries, its architecture has been shaped by various restorations and renovations, reflecting both traditional Russian styles and Baroque influences. Visitors come to Transfiguration Monastery for its breathtaking views, rich historical significance, and spiritual atmosphere.</p></div>
 </section>
 <section class="place" id="yaroslavl_mashinostroiteley">
+<div class="place-lead">
 <h3>Victory park Yaroslavl</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/yaroslavl_mashinostroiteley.jpg" alt="Victory park Yaroslavl"/></figure>
+<figure class="place-fig place-fig--hi-res"><img src="../images/yaroslavl_mashinostroiteley.jpg" alt="Victory park Yaroslavl" width="1280" height="960"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Victory Park in Yaroslavl is a serene green space dedicated to commemorating the sacrifices made during World War II. It features beautiful landscapes, walking paths, and monuments that reflect the city&#x27;s rich history and resilience. This park serves as a gathering place for locals and visitors alike, offering a tranquil retreat from the urban bustle. Victory Park is dedicated to the memory of World War II veterans. The park features several monuments and memorials honoring those who served.</p>
 <p class="prose">Victory Park was established in the late 20th century as a tribute to the heroes of World War II. The park features monuments and memorials that honor the soldiers and civilians who contributed to the war effort, reflecting the city&#x27;s commitment to preserving its historical memory. Culturally, Victory Park plays a vital role in Yaroslavl&#x27;s community life, serving as a venue for commemorative events and celebrations, particularly on Victory Day. The park is a symbol of national pride and remembrance, embodying the collective memory of the city&#x27;s residents regarding their historical struggles and triumphs.</p></div>
 </section>
 <section class="place" id="yaroslavl_volga_embankment">
+<div class="place-lead">
 <h3>Volga embankment</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/yaroslavl_volga_embankment.jpg" alt="Volga embankment"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/yaroslavl_volga_embankment.jpg" alt="Volga embankment" width="1280" height="960" style="height: 249px; max-height: 249px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/yaroslavl_volga_embankment_b.jpg" alt="Volga embankment — view 2" width="330" height="247" style="height: 249px; max-height: 249px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Volga Embankment in Yaroslavl offers a picturesque stroll along the banks of the mighty Volga River, where visitors can enjoy stunning views of the water and the city&#x27;s historic architecture. This vibrant public space is perfect for leisurely walks, picnics, and cultural events, making it a popular gathering spot for both locals and tourists alike. The Volga Embankment is part of the UNESCO World Heritage Site designated for Yaroslavl&#x27;s historic city center. The embankment features several monuments and sculptures that celebrate the city&#x27;s history and culture.</p>
 <p class="prose">The Volga Embankment has been a central part of Yaroslavl since the city’s founding in 1010. Over the centuries, it has evolved into a significant thoroughfare and recreational area, reflecting the city&#x27;s growth and development. The embankment has witnessed numerous historical events, including celebrations and gatherings that highlight the city&#x27;s rich heritage. Culturally, the Volga Embankment is integral to Yaroslavl&#x27;s identity, serving as a venue for festivals, art exhibitions, and community events. It is recognized for its architectural beauty and is part of the UNESCO World Heritage Site that includes the historic city center. The embankment also plays a role in daily life, where locals engage in leisure activities and social gatherings, reinforcing community bonds.</p></div>
 </section>
 <section class="place" id="yaroslavl_volkov_theatre">
+<div class="place-lead">
 <h3>Volkov Theatre</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/yaroslavl_volkov_theatre.jpg" alt="Volkov Theatre"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/yaroslavl_volkov_theatre.jpg" alt="Volkov Theatre" width="1280" height="848" style="height: 221px; max-height: 221px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/yaroslavl_volkov_theatre_b.jpg" alt="Volkov Theatre — view 2" width="330" height="220" style="height: 221px; max-height: 221px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Volkov Theatre in Yaroslavl is a prominent cultural landmark known for its rich history and vibrant performances. Established in the 18th century, it stands as one of the oldest professional theaters in Russia, showcasing a variety of theatrical productions that reflect both classical and contemporary works. Visitors can enjoy a unique blend of artistry and heritage in this beautifully preserved venue. Founded in 1750, making it the oldest professional theater in Russia. Renovated and reopened in 1940, continuing to serve as a cultural hub.</p>
 <p class="prose">The Volkov Theatre was founded in 1750 by the actor and playwright Fyodor Volkov, making it the first professional theater in Russia. The theater has undergone several renovations and expansions over the years, with significant events including its reopening in 1940 after major renovations and its designation as a cultural heritage site in the 21st century. Culturally, the Volkov Theatre plays a vital role in Yaroslavl&#x27;s artistic landscape, contributing to the city&#x27;s reputation as a center for performing arts. It is a key venue for festivals and cultural events, fostering local talent and attracting visitors from across the region. The theater&#x27;s rich history and ongoing performances are integral to the city&#x27;s identity and community life.</p></div>
 </section>
 <section class="place" id="yaroslavl_art_museum">
+<div class="place-lead">
 <h3>Yaroslavl Art Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/yaroslavl_art_museum.jpg" alt="Yaroslavl Art Museum"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/yaroslavl_art_museum.jpg" alt="Yaroslavl Art Museum" width="1280" height="853" style="height: 222px; max-height: 222px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--row-sized"><img src="../images/yaroslavl_art_museum_b.jpg" alt="Yaroslavl Art Museum — view 2" width="330" height="705" style="height: 222px; max-height: 222px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Yaroslavl Art Museum is a prominent cultural institution located in the heart of Yaroslavl, showcasing a diverse collection of Russian art from the 18th century to the present. Housed in a historic building, the museum offers visitors a glimpse into the rich artistic heritage of the region, with exhibitions that include paintings, sculptures, and decorative arts. Its serene atmosphere and engaging displays make it a must-visit for art enthusiasts and casual visitors alike. Established in 1974. Houses a collection of Russian art from the 18th century to the present.</p>
 <p class="prose">The Yaroslavl Art Museum was established in 1974, evolving from the city&#x27;s rich artistic traditions and the need to preserve its cultural heritage. The museum&#x27;s collection has grown significantly over the years, reflecting the artistic movements and historical events that have shaped the region. Key milestones include the acquisition of notable works and the expansion of exhibition spaces to accommodate a wider audience. Culturally, the Yaroslavl Art Museum plays a vital role in promoting the artistic legacy of Yaroslavl and the surrounding areas. It serves as a hub for cultural events, educational programs, and exhibitions that celebrate both local and national art. The museum contributes to the preservation of Yaroslavl&#x27;s heritage, which is recognized as part of the UNESCO World Heritage Site of Historic Monuments of Vladimir and Suzdal, highlighting the city&#x27;s importance in Russian history and culture.</p></div>
 </section>
 <section class="place" id="yaroslavl_kremlin">
+<div class="place-lead">
 <h3>Yaroslavl Kremlin</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/yaroslavl_kremlin.jpg" alt="Yaroslavl Kremlin"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/yaroslavl_kremlin.jpg" alt="Yaroslavl Kremlin" width="1280" height="848" style="height: 221px; max-height: 221px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/yaroslavl_kremlin_b.jpg" alt="Yaroslavl Kremlin — view 2" width="330" height="430" style="height: 221px; max-height: 221px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Yaroslavl Kremlin is a stunning architectural ensemble located in the heart of Yaroslavl, showcasing the city&#x27;s rich history and cultural heritage. Surrounded by picturesque landscapes along the banks of the Volga River, this landmark features impressive structures, including the iconic Spassky Tower and the Cathedral of the Assumption. Visitors can explore its historical significance while enjoying the vibrant atmosphere of this UNESCO World Heritage site. The Yaroslavl Kremlin was designated a UNESCO World Heritage site in 2005. Key structures within the Kremlin include the Spassky Tower and the Cathedral of the Assumption.</p>
 <p class="prose">The Yaroslavl Kremlin was founded in the early 12th century, with its origins linked to Prince Yaroslav the Wise. Over the centuries, it has served as a fortified center for the region, witnessing key events such as the Mongol invasion and the establishment of the Grand Duchy of Moscow. The Kremlin&#x27;s structures were built and rebuilt, reflecting the architectural styles of different eras, particularly during the 17th century. Politically, the Yaroslavl Kremlin has played a crucial role in the defense and governance of the region, serving as a symbol of power and resilience. Culturally, it stands as a testament to the artistic achievements of Yaroslavl, with its intricate designs and historical buildings contributing to the city&#x27;s identity. As a UNESCO World Heritage site, it attracts visitors who come to appreciate its architectural beauty and the traditions that have flourished within its walls.</p></div>
 </section>
 <section class="place" id="yaroslavl_museum_reserve">
+<div class="place-lead">
 <h3>Yaroslavl Museum-Reserve</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/yaroslavl_museum_reserve.jpg" alt="Yaroslavl Museum-Reserve"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/yaroslavl_museum_reserve_b.jpg" alt="Yaroslavl Museum-Reserve" width="330" height="220"/></figure>
+</div>
 <div class="place-desc"><p class="prose">The Yaroslavl Museum-Reserve is a cultural treasure located in the heart of Yaroslavl, showcasing the rich history and artistic heritage of this ancient city. Visitors can explore a variety of exhibits that highlight the region&#x27;s development from its founding to the present day, including its remarkable architecture and significant contributions to Russian culture. The museum complex is a UNESCO World Heritage site, making it a must-visit for anyone interested in the historical narratives of Russia. The museum was officially founded in 1960. Yaroslavl is one of the oldest cities in Russia, founded in 1010. The city is part of the UNESCO World Heritage site known as &#x27;The Historic Centre of Yaroslavl&#x27;.</p>
 <p class="prose">The Yaroslavl Museum-Reserve was established in 1960, though the city&#x27;s history dates back to 1010 when it was founded by Prince Yaroslav the Wise. Over the centuries, Yaroslavl has played a crucial role in the development of the Russian state, particularly during the 17th and 18th centuries when it became a significant trade and cultural center. Culturally, the Yaroslavl Museum-Reserve is vital for preserving the artistic and architectural heritage of the city, which is reflected in its numerous historical buildings and collections. As a UNESCO World Heritage site, it emphasizes the importance of Yaroslavl&#x27;s role in Russian history and its unique blend of architectural styles. The museum not only serves as a repository of art and history but also as a vibrant center for cultural activities and community engagement.</p></div>
 </section>
 <section class="place" id="yaroslavl_planetarium">
+<div class="place-lead">
 <h3>Yaroslavl Planetarium</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/yaroslavl_planetarium.jpg" alt="Yaroslavl Planetarium"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/yaroslavl_planetarium.jpg" alt="Yaroslavl Planetarium" width="1280" height="736" style="height: 192px; max-height: 192px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/yaroslavl_planetarium_b.jpg" alt="Yaroslavl Planetarium — view 2" width="330" height="247" style="height: 192px; max-height: 192px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Yaroslavl Planetarium offers a fascinating glimpse into the cosmos, featuring state-of-the-art equipment that allows visitors to explore the wonders of the universe. With a variety of shows and educational programs, it caters to astronomy enthusiasts of all ages. Located in the historic city of Yaroslavl, the planetarium serves as both an educational facility and a cultural attraction. Established in 1970. Features a range of educational programs and astronomical shows.</p>
 <p class="prose">The Yaroslavl Planetarium was established in 1970, making it one of the key institutions for astronomical education in the region. It has since become a center for public engagement with science, hosting numerous exhibitions and events that promote interest in astronomy. Culturally, the Yaroslavl Planetarium plays a vital role in fostering interest in science and astronomy within the community. It serves as a hub for educational outreach, inspiring future generations to explore the universe and understand their place within it. The planetarium also contributes to Yaroslavl&#x27;s status as a center for cultural and scientific advancement.</p></div>
 </section>
 <section class="place" id="yaroslavl_railway_station">
+<div class="place-lead">
 <h3>Yaroslavl railway station</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Neoclassical | Period: 1897</p>
-<figure class="place-fig"><img src="../images/yaroslavl_railway_station.jpg" alt="Yaroslavl railway station"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/yaroslavl_railway_station.jpg" alt="Yaroslavl railway station" width="1280" height="960" style="height: 250px; max-height: 250px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/yaroslavl_railway_station_b.jpg" alt="Yaroslavl railway station — view 2" width="330" height="462" style="height: 250px; max-height: 250px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Yaroslavl Railway Station is the main hub for rail travel in Yaroslavl, a historic city nestled on the banks of the Volga River. Established in the late 19th century, it serves as a vital transportation link between northern Russia and central European regions. Constructed in 1897 to support the rapidly expanding Trans-Siberian Railroad network. The station features a grand hall with marble floors and intricate decorative elements. It served as a key point for travelers connecting Moscow and St. Today, it remains one of the most iconic landmarks in Yaroslavl. Regularly hosts cultural events showcasing local arts and traditions.</p>
 <p class="prose">Built in the late 1890s during the height of Russia&#x27;s railroad expansion, the station was designed to accommodate growing traffic needs. It has undergone several renovations over the years but retains its original neoclassical architecture, characterized by columns, arches, and ornate facades. Visitors should stop here to experience the historical grandeur of Yaroslavl&#x27;s architectural heritage and appreciate the city&#x27;s strategic importance as a transportation crossroads.</p></div>
 </section>
 <section class="place" id="yaroslavl_meteorological_tower">
+<div class="place-lead">
 <h3>Yaroslavl tower museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/yaroslavl_meteorological_tower.jpg" alt="Yaroslavl tower museum"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/yaroslavl_meteorological_tower.jpg" alt="Yaroslavl tower museum" width="1279" height="1110" style="height: 204px; max-height: 204px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/yaroslavl_meteorological_tower_b.jpg" alt="Yaroslavl tower museum — view 2" width="330" height="202" style="height: 204px; max-height: 204px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Yaroslavl Tower Museum, housed in the historic meteorological tower, offers visitors a unique glimpse into the city&#x27;s scientific and cultural heritage. This museum showcases various exhibits related to meteorology and the history of weather observation in Yaroslavl, making it an intriguing stop for both history buffs and science enthusiasts. The tower itself is a striking architectural feature that stands as a testament to the city&#x27;s past. The tower was constructed in 1892. It served as a meteorological observation point for over a century. The museum features exhibits on the history of meteorology and weather instruments.</p>
 <p class="prose">The Yaroslavl meteorological tower was built in the late 19th century, specifically in 1892, to facilitate weather observations and contribute to the growing field of meteorology. Over the years, it has served various purposes, reflecting the technological advancements and scientific interests of the time. Culturally, the Yaroslavl Tower Museum plays a vital role in preserving the city&#x27;s scientific heritage, emphasizing the importance of weather observation in daily life and its impact on agriculture and navigation. As part of Yaroslavl, a UNESCO World Heritage site, the tower contributes to the city&#x27;s recognition as a center of historical and cultural significance in Russia.</p></div>
 </section>
 <section class="place" id="yaroslavl_pereslavl_gate">
+<div class="place-lead">
 <h3>Znamenskaya Tower</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/yaroslavl_pereslavl_gate.jpg" alt="Znamenskaya Tower"/></figure>
+<figure class="place-fig place-fig--hi-res"><img src="../images/yaroslavl_pereslavl_gate.jpg" alt="Znamenskaya Tower" width="1280" height="848"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Znamenskaya Tower is a striking landmark in Yaroslavl, known for its impressive architecture and historical significance. As part of the city&#x27;s fortifications, it offers visitors a glimpse into the past while providing stunning views of the surrounding area. This tower is not only a symbol of Yaroslavl&#x27;s rich heritage but also a popular spot for photography and exploration. Constructed in the late 17th century. Part of Yaroslavl&#x27;s defensive fortifications. Included in the UNESCO World Heritage Site designation.</p>
 <p class="prose">Znamenskaya Tower was constructed in the late 17th century as part of the city&#x27;s defensive fortifications. It played a crucial role in protecting Yaroslavl from invasions and has witnessed various historical events over the centuries, including the expansion of the city and its development as a significant trade center. The tower holds cultural importance as a symbol of Yaroslavl&#x27;s architectural heritage and is a part of the UNESCO World Heritage Site that encompasses the historic city center. It reflects the city&#x27;s historical role in trade and defense, contributing to its identity and daily life. The tower also serves as a reminder of the region&#x27;s past and its evolution over time.</p></div>
 </section>

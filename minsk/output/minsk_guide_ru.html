@@ -13,7 +13,7 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
 .otium-logo { font-family: 'Cormorant Garamond', serif; font-size: 2.15rem;
   font-weight: 600; letter-spacing: 0.18em; margin-bottom: 0.85rem; }
 .otiump { margin: 0.42rem 0; line-height: 1.42; text-align: justify;
-  max-width: 38rem; font-size: 0.95rem; }
+  font-size: 0.95rem; }
 .guide-title { page-break-after: auto; margin-bottom: 0.55rem;
   page-break-inside: avoid; }
 .historical-reference { margin: 0.75rem 0 1.15rem;
@@ -63,22 +63,96 @@ ol.trip-stops a:hover { text-decoration: underline; }
 .heraldry-univ-caption { font-size: 0.52rem; line-height: 1.18;
   margin: 0.12rem 0 0; padding: 0 0.06rem; color: #252525;
   text-align: center; font-weight: 500; }
-.heraldry-motto { text-align: center; max-width: 18rem; margin: 0.18rem auto;
+.heraldry-motto { text-align: center; margin: 0.18rem auto;
   width: 100%; }
 .motto-line { font-family: 'Cormorant Garamond', serif; font-size: 1rem;
   margin: 0; color: #333; line-height: 1.35; }
 .guide-title h1.guide-title-main { font-family: 'Cormorant Garamond', serif;
   font-size: 2.35rem; margin-bottom: 0.5rem; font-weight: 600; }
 .lead { color: #444; font-size: 1.05rem; }
-.guide-toc { margin: 0.85rem 0 1.15rem; page-break-inside: avoid; }
-.guide-toc h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.28rem;
-  font-weight: 600; margin: 0.4rem 0 0.55rem; }
+
+.guide-toc { page-break-before: always; break-before: page;
+  page-break-after: always; break-after: page;
+  margin: 0; padding: 0.2rem 0 0.45rem; page-break-inside: auto; }
+.guide-toc h2 { font-family: 'Cormorant Garamond', serif;
+  font-size: 1.28rem; font-weight: 600; margin: 0.4rem 0 0.55rem; }
 .guide-toc ol { margin: 0.35rem 0 0.65rem 1.25rem; padding: 0;
   columns: 2; column-gap: 1.5rem; }
 .guide-toc li { margin: 0.18rem 0; line-height: 1.35;
   font-size: 0.88rem; break-inside: avoid; }
-.guide-toc a { color: #1a5276; text-decoration: none; }
+.guide-toc a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.guide-toc a:hover { color: #0d3d56; }
 .guide-toc li.toc-item--sub { font-size: 0.82rem; margin-left: 0.35rem; }
+.toc-back { font-size: 0.78rem; margin: 0 0 0.35rem; text-align: right; }
+.toc-back a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.toc-back a:hover { color: #0d3d56; }
+.place, .historical-reference, .guide-primer, .guide-trip-plans {
+  scroll-margin-top: 1.25rem; }
+.historical-reference h2, .guide-primer h2, .guide-trip-plans h2,
+.chapter-head h2, .place-lead h3 { position: relative; }
+.guide-toc + .place, .guide-toc + .chapter-head {
+  page-break-before: avoid; break-before: avoid-page; }
+.place-lead { page-break-inside: avoid; break-inside: avoid-page;
+  page-break-after: auto; }
+.place-lead > h3 { page-break-after: avoid; break-after: avoid-page; }
+.place-lead > .place-meta { page-break-after: avoid; break-after: avoid-page; }
+
+.place-fig { page-break-inside: avoid; break-inside: avoid-page;
+  margin: 0.5rem 0 1rem; }
+.place-fig img {
+  page-break-inside: avoid; break-inside: avoid-page;
+  max-height: 48vh; width: auto; max-width: 100%;
+  object-fit: contain; margin-left: auto; margin-right: auto; }
+.place-fig--hi-res img { max-height: 52vh; }
+.place-fig--lo-res img { max-height: 30vh; }
+.place-pdf-fig-row {
+  display: flex; flex-direction: row; flex-wrap: wrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.45rem 0.55rem; margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row .place-fig {
+  flex: 1 1 30%; margin: 0; min-width: 26%; max-width: 100%; }
+.place-pdf-fig-row .place-fig img {
+  width: auto; max-width: 100%; height: auto; max-height: 44vh;
+  object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--pair {
+  flex-wrap: nowrap; justify-content: space-between;
+  align-items: flex-end; gap: 0.5rem 0.65rem; }
+.place-pdf-fig-row--pair .place-fig {
+  flex: 1 1 47%; min-width: 0; max-width: 50%;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--pair .place-fig img {
+  max-height: 44vh; object-fit: contain; }
+.place-pdf-fig-row--pair .place-fig--hi-res img { max-height: 50vh; }
+.place-pdf-fig-row--pair .place-fig--lo-res img { max-height: 26vh; }
+.place-pdf-fig-rows-stack {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple {
+  display: flex; flex-direction: row; flex-wrap: nowrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.4rem 0.48rem; margin: 0;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--triple .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--triple .place-fig--hi-res img { max-height: 38vh; }
+.place-pdf-fig-row--triple .place-fig--lo-res img { max-height: 18vh; }
+.place-pdf-fig-row--many {
+  flex-wrap: nowrap; justify-content: center; align-items: flex-end;
+  gap: 0.35rem 0.42rem; }
+.place-pdf-fig-row--many .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--many .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+
+
 .place { margin-bottom: 2.2rem; page-break-inside: auto; }
 h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.22rem; margin: 1.2rem 0 0.35rem;
   font-weight: 600; }
@@ -90,7 +164,6 @@ h4 { font-family: 'Cormorant Garamond', serif; font-size: 0.95rem; text-transfor
   color: #555; font-size: 0.95rem; margin: 0 0 0.5rem; font-style: italic; }
 .place-meta { font-size: 0.92rem; color: #353535; margin: 0 0 0.75rem;
   line-height: 1.4; }
-.place-fig { margin: 0.5rem 0 1rem; }
 img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
 .prose, .place-desc p { margin: 0.45rem 0; line-height: 1.5;
   text-align: justify; }
@@ -110,296 +183,479 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <figure class="heraldry-fig heraldry-coat-book" title="Coat of arms of Minsk"><img src="../images/guide_coat_of_arms.svg" alt="Coat of arms of Minsk"/></figure>
 <figure class="heraldry-fig heraldry-coat-book" title="Flag of Minsk"><img src="../images/guide_flag.svg" alt="Flag of Minsk"/></figure>
 </div></div><h1 class="guide-title-main">Minsk</h1><p class="lead">Путеводитель. Объектов в этом выпуске: 34.</p></header>
+<nav class="guide-toc" id="guide-toc" aria-label="Содержание"><h2>Содержание</h2><ol><li class="toc-item"><a href="#guide-historical">Историческая справка</a></li><li class="toc-item"><a href="#guide-trips">Маршруты</a></li><li class="toc-item"><a href="#minsk_landmark_2">Landmark 2</a></li><li class="toc-item"><a href="#minsk_aircraft_carrier">Minsk Aircraft Carrier</a></li><li class="toc-item"><a href="#minsk_gorky_park">Minsk Gorky Park</a></li><li class="toc-item"><a href="#minsk_holy_spirit_cathedral">Minsk Holy Spirit Cathedral</a></li><li class="toc-item"><a href="#minsk_independence_square">Minsk Independence Square</a></li><li class="toc-item"><a href="#minsk_landmark">Minsk Landmark</a></li><li class="toc-item"><a href="#minsk_minsk_arena">Minsk Minsk Arena</a></li><li class="toc-item"><a href="#minsk_mosque">Minsk Mosque</a></li><li class="toc-item"><a href="#minsk_national_library">Minsk National Library</a></li><li class="toc-item"><a href="#minsk_new_minsk_mosque_p01">Minsk New Minsk Mosque P01</a></li><li class="toc-item"><a href="#minsk_palace_republic">Minsk Palace Republic</a></li><li class="toc-item"><a href="#minsk_red_church">Minsk Red Church</a></li><li class="toc-item"><a href="#minsk_victory_square">Minsk Victory Square</a></li><li class="toc-item"><a href="#minsk_yakub_kolas">Minsk Yakub Kolas</a></li><li class="toc-item"><a href="#minsk_catholic_cathedral">Архикафедральный собор Благословенной Девы Марии</a></li><li class="toc-item"><a href="#minsk_belarusian_state_circus">Белорусский государственный цирк</a></li><li class="toc-item"><a href="#minsk_national_history">Белорусский музей истории</a></li><li class="toc-item"><a href="#minsk_upper_town">Верхний город Минска</a></li><li class="toc-item"><a href="#minsk_sts_simon_helena">Красная церковь</a></li><li class="toc-item"><a href="#minsk_belarus_station">Минский железнодорожный вокзал</a></li><li class="toc-item"><a href="#minsk_city_gate">Минский триумфальный арка</a></li><li class="toc-item"><a href="#minsk_war_museum">Музей Великой Отечественной войны</a></li><li class="toc-item"><a href="#minsk_opera_ballet">Национальная опера и балет</a></li><li class="toc-item"><a href="#minsk_national_art_museum">Национальный художественный музей</a></li><li class="toc-item"><a href="#minsk_october_square">Октябрьская площадь</a></li><li class="toc-item"><a href="#minsk_island_tears">Остров слез</a></li><li class="toc-item"><a href="#minsk_chelyuskinites">Парк Челюскинцев</a></li><li class="toc-item"><a href="#minsk_drozdy">Резервуар Дрозды</a></li><li class="toc-item"><a href="#minsk_st_elizabeth">Сестринский монастырь Святой Елизаветы</a></li><li class="toc-item"><a href="#minsk_trinity_hill">Тринити-Хилл</a></li><li class="toc-item"><a href="#minsk_kastrycnickaja">Улица Октября</a></li><li class="toc-item"><a href="#minsk_all_saints">Церковь Всех Святых</a></li><li class="toc-item"><a href="#minsk_st_roch">Церковь Святого Роха</a></li><li class="toc-item"><a href="#minsk_sts_peter_paul">Церковь святых Петра и Павла</a></li></ol></nav>
 <section class="historical-reference" id="guide-historical" aria-label="Историческая справка"><h2>Историческая справка</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 <p class="prose">Минск — столица Беларуси, крупнейший город страны на реке Свислочь.</p>
 <p class="prose">Первые упоминания в XI веке, положение на торговых путях, войны XX века и послевоенное восстановление сформировали широкие проспекты и зелёные зоны. Минск — центр промышленности, IT и культурной жизни республики.</p>
 <p class="prose">Вторая мировая война почти уничтожила центр; послевоенная реконструкция создала широкие проспекты. После 1991 года Минск стал столицей суверенной Беларуси, сочетая промышленность, IT и память о многонациональном прошлом региона.</p></section>
 <section class="guide-trip-plans" id="guide-trips" aria-label="Маршруты"><h2>Маршруты</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 <article class="trip-plan" id="trip-1d"><h3>Один день</h3>
 <p class="prose">Компактный маршрут по главным точкам путеводителя с минимальным возвратом назад пешком.</p>
-<ol class="trip-stops"><li><a href="#minsk_chelyuskinites">Парк Челюскинцев</a> (~75мин)</li>
-<li><a href="#minsk_yakub_kolas">Minsk Yakub Kolas</a> (~75мин)</li>
-<li><a href="#minsk_trinity_hill">Тринити-Хилл</a> (~75мин)</li>
-<li><a href="#minsk_holy_spirit_cathedral">Minsk Holy Spirit Cathedral</a> (~60мин)</li>
+<ol class="trip-stops"><li><a href="#minsk_red_church">Minsk Red Church</a> (~75мин)</li>
+<li><a href="#minsk_belarus_station">Минский железнодорожный вокзал</a> (~75мин)</li>
+<li><a href="#minsk_october_square">Октябрьская площадь</a> (~75мин)</li>
 <li><a href="#minsk_palace_republic">Minsk Palace Republic</a> (~60мин)</li>
-<li><a href="#minsk_october_square">Октябрьская площадь</a> (~75мин)</li></ol></article>
+<li><a href="#minsk_holy_spirit_cathedral">Minsk Holy Spirit Cathedral</a> (~60мин)</li>
+<li><a href="#minsk_trinity_hill">Тринити-Хилл</a> (~75мин)</li></ol></article>
 <article class="trip-plan" id="trip-3d1"><h3>Три дня — день 1</h3>
 <p class="prose">День 1 — центральный кластер.</p>
 <ol class="trip-stops"><li><a href="#minsk_belarusian_state_circus">Белорусский государственный цирк</a> (~75мин)</li>
 <li><a href="#minsk_catholic_cathedral">Архикафедральный собор Благословенной Девы Марии</a> (~75мин)</li>
+<li><a href="#minsk_chelyuskinites">Парк Челюскинцев</a> (~75мин)</li>
 <li><a href="#minsk_island_tears">Остров слез</a> (~75мин)</li>
-<li><a href="#minsk_minsk_arena">Minsk Minsk Arena</a> (~75мин)</li>
-<li><a href="#minsk_national_art_museum">Национальный художественный музей</a> (~75мин)</li></ol></article>
+<li><a href="#minsk_minsk_arena">Minsk Minsk Arena</a> (~75мин)</li></ol></article>
 <article class="trip-plan" id="trip-3d2"><h3>Три дня — день 2</h3>
 <p class="prose">День 2 — следующая группа районов.</p>
 <ol class="trip-stops"><li><a href="#minsk_opera_ballet">Национальная опера и балет</a> (~75мин)</li>
+<li><a href="#minsk_national_art_museum">Национальный художественный музей</a> (~75мин)</li>
 <li><a href="#minsk_national_library">Minsk National Library</a> (~75мин)</li>
-<li><a href="#minsk_red_church">Minsk Red Church</a> (~75мин)</li>
 <li><a href="#minsk_st_elizabeth">Сестринский монастырь Святой Елизаветы</a> (~75мин)</li>
 <li><a href="#minsk_sts_peter_paul">Церковь святых Петра и Павла</a> (~75мин)</li></ol></article>
 <article class="trip-plan" id="trip-3d3"><h3>Три дня — день 3</h3>
 <p class="prose">День 3 — оставшиеся близкие объекты.</p>
 <ol class="trip-stops"><li><a href="#minsk_war_museum">Музей Великой Отечественной войны</a> (~75мин)</li>
 <li><a href="#minsk_sts_simon_helena">Красная церковь</a> (~75мин)</li>
-<li><a href="#minsk_victory_square">Minsk Victory Square</a> (~75мин)</li></ol></article></section>
-<nav class="guide-toc" aria-label="Содержание"><h2>Содержание</h2><ol><li class="toc-item"><a href="#guide-historical">Историческая справка</a></li><li class="toc-item"><a href="#guide-trips">Маршруты</a></li><li class="toc-item"><a href="#minsk_catholic_cathedral">Архикафедральный собор Благословенной Девы Марии</a></li><li class="toc-item"><a href="#minsk_national_history">Белорусский музей истории</a></li><li class="toc-item"><a href="#minsk_belarusian_state_circus">Белорусский государственный цирк</a></li><li class="toc-item"><a href="#minsk_chelyuskinites">Парк Челюскинцев</a></li><li class="toc-item"><a href="#minsk_all_saints">Церковь Всех Святых</a></li><li class="toc-item"><a href="#minsk_red_church">Minsk Red Church</a></li><li class="toc-item"><a href="#minsk_sts_peter_paul">Церковь святых Петра и Павла</a></li><li class="toc-item"><a href="#minsk_drozdy">Резервуар Дрозды</a></li><li class="toc-item"><a href="#minsk_gorky_park">Minsk Gorky Park</a></li><li class="toc-item"><a href="#minsk_war_museum">Музей Великой Отечественной войны</a></li><li class="toc-item"><a href="#minsk_holy_spirit_cathedral">Minsk Holy Spirit Cathedral</a></li><li class="toc-item"><a href="#minsk_independence_square">Minsk Independence Square</a></li><li class="toc-item"><a href="#minsk_island_tears">Остров слез</a></li><li class="toc-item"><a href="#minsk_pdfband_15_91916483">Minsk -</a></li><li class="toc-item"><a href="#minsk_pdfband_4_91916483">Minsk aircraft carrier</a></li><li class="toc-item"><a href="#minsk_minsk_arena">Minsk Minsk Arena</a></li><li class="toc-item"><a href="#minsk_pdfband_2_7101e6f9">Minsk mosque</a></li><li class="toc-item"><a href="#minsk_belarus_station">Минский железнодорожный вокзал</a></li><li class="toc-item"><a href="#minsk_city_gate">Минский триумфальный арка</a></li><li class="toc-item"><a href="#minsk_national_art_museum">Национальный художественный музей</a></li><li class="toc-item"><a href="#minsk_national_library">Minsk National Library</a></li><li class="toc-item"><a href="#minsk_opera_ballet">Национальная опера и балет</a></li><li class="toc-item"><a href="#minsk_pdfband_0_29c5ad91">New Minsk mosque p01</a></li><li class="toc-item"><a href="#minsk_october_square">Октябрьская площадь</a></li><li class="toc-item"><a href="#minsk_kastrycnickaja">Улица Октября</a></li><li class="toc-item"><a href="#minsk_palace_republic">Minsk Palace Republic</a></li><li class="toc-item"><a href="#minsk_sts_simon_helena">Красная церковь</a></li><li class="toc-item"><a href="#minsk_st_elizabeth">Сестринский монастырь Святой Елизаветы</a></li><li class="toc-item"><a href="#minsk_st_roch">Церковь Святого Роха</a></li><li class="toc-item"><a href="#minsk_trinity_hill">Тринити-Хилл</a></li><li class="toc-item"><a href="#minsk_upper_town">Верхний город Минска</a></li><li class="toc-item"><a href="#minsk_victory_square">Minsk Victory Square</a></li><li class="toc-item"><a href="#minsk_yakub_kolas">Minsk Yakub Kolas</a></li><li class="toc-item"><a href="#minsk_pdfband_1_2e13651f">МЦ1</a></li></ol></nav>
-<section class="place" id="minsk_catholic_cathedral">
-<h3>Архикафедральный собор Благословенной Девы Марии</h3>
+<li><a href="#minsk_victory_square">Minsk Victory Square</a> (~75мин)</li>
+<li><a href="#minsk_yakub_kolas">Minsk Yakub Kolas</a> (~75мин)</li></ol></article></section>
+<section class="place" id="minsk_landmark_2">
+<div class="place-lead">
+<h3>Landmark 2</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/minsk_catholic_cathedral.jpg" alt="Архикафедральный собор Благословенной Девы Марии"/></figure>
-<div class="place-desc"><p class="prose">Архикафедральный собор Благословенной Девы Марии, расположенный в сердце Минска, является великолепным примером архитектуры готического возрождения. Этот выдающийся католический собор служит духовным центром для местного сообщества и известен своими впечатляющими двойными шпилями и красивым интерьером. Посетители могут полюбоваться его замысловатыми витражами и участвовать в различных религиозных службах в течение недели. Основана в 1710 году как церковь иезуитов. Стал собором в 1991 году с образованием Минско-Могилёвской епархии. Особенности готического возрождения архитектуры с двойными шпилями.</p>
-<p class="prose">Архикафедральный собор был основан в 1710 году и с тех пор претерпел несколько ремонтов и реставраций. Изначально построенный как церковь для иезуитов, он стал кафедральным собором в 1991 году, когда была основана Минско-Магилевская епархия. Ключевыми событиями в его истории являются последствия Второй мировой войны, во время которой собор понес повреждения, и его последующая реставрация в послевоенный период. Архикафедральный собор имеет культурное значение как символ католической веры в Беларуси, особенно в стране с преобладающим православием. Он служит местом проведения важных религиозных церемоний и общественных собраний, отражая традиции и наследие местного католического населения. Собор также играет роль в более широком культурном ландшафте Минска, привлекая как паломников, так и туристов.</p></div>
+<figure class="place-fig"><img src="../images/minsk_landmark_2.jpg" alt="Landmark 2" width="1140" height="847"/></figure>
+</div>
 </section>
-<section class="place" id="minsk_national_history">
-<h3>Белорусский музей истории</h3>
+<section class="place" id="minsk_aircraft_carrier">
+<div class="place-lead">
+<h3>Minsk Aircraft Carrier</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/minsk_national_history.jpg" alt="Белорусский музей истории"/></figure>
-<div class="place-desc"><p class="prose">Белорусский музей истории в Минске предлагает всестороннее путешествие по богатому полотну белорусской истории, демонстрируя артефакты и экспонаты, охватывающие от древних времен до современности. Посетители могут исследовать культурное наследие, значимые события и эволюцию нации через различные интерактивные выставки и коллекции. Музей служит важным образовательным ресурсом как для местных жителей, так и для туристов, подчеркивая важность сохранения исторического нарратива Беларуси. Основанный в 1957 году, музей сосредоточен на белорусской истории и культуре. Музей предлагает широкий ассортимент артефактов, включая археологические находки, исторические документы и традиционные ремесла.</p>
-<p class="prose">Белорусский исторический музей был основан в 1957 году с целью сбора, сохранения и展示 исторических артефактов Беларуси. За годы своего существования музей прошел несколько ремонтов и расширений, что усилило его роль как ключевого учреждения для исторического образования и исследований в стране. Музей играет ключевую роль в формировании чувства национальной идентичности и гордости среди белорусов, подчеркивая значимые культурные и исторические вехи. Он служит платформой для понимания сложностей прошлого Беларуси, включая ее борьбу за независимость и влияние различных политических режимов. Через свои выставки музей также отражает культурное разнообразие и традиции белорусского народа.</p></div>
-</section>
-<section class="place" id="minsk_belarusian_state_circus">
-<h3>Белорусский государственный цирк</h3>
-
-
-<figure class="place-fig"><img src="../images/minsk_belarusian_state_circus.jpg" alt="Белорусский государственный цирк"/></figure>
-<div class="place-desc"><p class="prose">Белорусский государственный цирк в Минске — это яркое заведение, которое демонстрирует разнообразные представления, включая акробатику, номера с животными и шоу клоунов. Со своей уникальной архитектурой и живой атмосферой он является популярной достопримечательностью как для местных жителей, так и для туристов. Цирк известен своей приверженностью к сохранению традиционных цирковых искусств, одновременно принимая современные выступления. Основан в 1959 году. Находится в центре Минска. Представляет разнообразные выступления, включая акробатику и клоунские шоу.</p>
-<p class="prose">Белорусский государственный цирк был основан в 1959 году и стал значимым культурным учреждением в Минске. На протяжении многих лет он подвергался различным реконструкциям и расширениям, адаптируясь к изменяющимся вкусам зрителей, сохраняя при этом свою основную миссию — развлекать и демонстрировать цирковое искусство. Культурно, Белорусский государственный цирк играет важную роль в художественном ландшафте Минска, внося вклад в наследие и развлекательную сцену города. Он отражает традиции циркового искусства в Беларуси, способствуя чувству общности и радости среди своих посетителей. Цирк также служит платформой для местных талантов, помогая продвигать искусство в регионе.</p></div>
-</section>
-<section class="place" id="minsk_chelyuskinites">
-<h3>Парк Челюскинцев</h3>
-
-
-<figure class="place-fig"><img src="../images/minsk_chelyuskinites.jpg" alt="Парк Челюскинцев"/></figure>
-<div class="place-desc"><p class="prose">Парк Челюскинцев — это спокойное зеленое пространство в Минске, идеально подходящее для неспешных прогулок и семейных выездов. С его живописными пейзажами, игровыми площадками и зонами для отдыха, он служит ярким центром как для местных жителей, так и для туристов. Парк особенно популярен в теплые месяцы, предлагая мирное убежище от городской суеты. Основан в 1957 году. Названо в честь челюскинцев, советских исследователей. Включает игровые площадки, пешеходные дорожки и рекреационные зоны.</p>
-<p class="prose">Парк Челюскинцев был основан в 1957 году и назван в честь челюскинцев, группы советских исследователей, которые совершили значительные арктические экспедиции. Парк претерпел различные renovations на протяжении лет, что повысило его привлекательность и доступность для публики. Культурно парк Челюскинцев играет важную роль в повседневной жизни жителей Минска, служа местом для общественных мероприятий, фестивалей и рекреационных активностей. Дизайн и планировка парка отражают акцент советской эпохи на общественных пространствах, способствующих социальному взаимодействию и отдыху.</p></div>
-</section>
-<section class="place" id="minsk_all_saints">
-<h3>Церковь Всех Святых</h3>
-
-
-<figure class="place-fig"><img src="../images/minsk_all_saints.jpg" alt="Церковь Всех Святых"/></figure>
-<div class="place-desc"><p class="prose">Церковь Всех Святых в Минске является ярким примером современной церковной архитектуры, известной своим уникальным дизайном и яркими витражами. Эта церковь служит духовным центром для местного сообщества и является популярным местом как для богослужений, так и для культурных мероприятий. Посетители могут восхищаться её красивым интерьером и участвовать в различных религиозных мероприятиях в течение года. Освящен в 2009 году. Построен в честь жертв политических репрессий.</p>
-<p class="prose">Церковь Всех Святых была освящена в 2009 году, что делает её одной из новых религиозных построек в Минске. Она была построена в честь памяти жертв политических репрессий в Беларуси, отражая сложный исторический нарратив страны. Культурно Церковь Всех Святых играет важную роль в повседневной жизни многих белорусов, служа местом сбора для общественных мероприятий и религиозных церемоний. Она является символом стойкости и памяти, внося вклад в культурное наследие Минска. Церковь также отражает более широкий религиозный ландшафт Беларуси, где преобладает православное христианство.</p></div>
-</section>
-<section class="place" id="minsk_red_church">
-<h3>Minsk Red Church</h3>
-
-
-<figure class="place-fig"><img src="../images/minsk_red_church.jpg" alt="Minsk Red Church"/></figure>
-<div class="place-desc"><p class="prose">Церковь святых Симеона и Елены — выдающаяся православная церковь, расположенная в самом сердце исторического центра Минска. Её неоклассическая архитектура, отличающаяся чистыми линиями и симметричными фасадами, выделяется среди соседних зданий. Построенная в конце 1800-х годов, церковь претерпела значительную реставрацию после Второй мировой войны. Он украшен изящными колоннами и куполом, типичными для неоклассической архитектуры. Внутри посетители могут полюбоваться замысловатыми фресками, изображающими сцены из библейских повествований. В церкви регулярно проходят службы, а также время от времени проводятся культурные мероприятия для публики. Расположен недалеко от таких крупных достопримечательностей, как Национальный академический театр Беларуси.</p>
-<p class="prose">Построенный в конце XIX века, храм первоначально был посвящен святой Елене, но позже был переименован в честь святых Симона и Елены. Он служил местом поклонения для местных жителей до того, как был частично разрушен во время Второй мировой войны. После войны он был реконструирован и снова открыт для общины. Посетители приезжают сюда, чтобы оценить его архитектурную красоту и историческое значение, а также чтобы насладиться спокойствием его умиротворенного внутреннего пространства.</p></div>
-</section>
-<section class="place" id="minsk_sts_peter_paul">
-<h3>Церковь святых Петра и Павла</h3>
-
-
-<figure class="place-fig"><img src="../images/minsk_sts_peter_paul.jpg" alt="Церковь святых Петра и Павла"/></figure>
-<div class="place-desc"><p class="prose">Церковь святых Петра и Павла, расположенная в сердце Минска, является ярким примером барочной архитектуры. Эта прекрасная церковь служит духовным центром для местного сообщества и известна своим сложным интерьером и спокойной атмосферой, что делает её обязательным местом для посещения как паломниками, так и туристами. Основан в начале 17 века, завершён в 1705 году. Претерпел значительную реставрацию после Второй мировой войны. Представляет барочный архитектурный стиль.</p>
-<p class="prose">Церковь святых Петра и Павла была основана в начале 17 века, а её строительство завершилось в 1705 году. На протяжении многих лет она подвергалась нескольким реставрациям, особенно после повреждений, полученных во время Второй мировой войны. Церковь сыграла значительную роль в религиозной жизни Минска и продолжает оставаться центром для католической общины. Культурно, Церковь святых Петра и Павла является важной достопримечательностью Минска, отражая богатое архитектурное наследие города. Это место регулярного богослужения и общественных встреч, что вносит вклад в повседневную жизнь ее прихожан. Церковь также символизирует историческое присутствие католицизма в Беларуси, которое сформировало культурный ландшафт региона.</p></div>
-</section>
-<section class="place" id="minsk_drozdy">
-<h3>Резервуар Дрозды</h3>
-
-
-<figure class="place-fig"><img src="../images/minsk_drozdy.jpg" alt="Резервуар Дрозды"/></figure>
-<div class="place-desc"><p class="prose">Водохранилище Дрозды — живописное место, расположенное на окраине Минска, предлагающее потрясающие виды и спокойную атмосферу. Эта популярная рекреационная зона идеально подходит для активного отдыха, такого как прогулки, велоспорт и рыбалка, что делает её любимым местом как для местных жителей, так и для туристов. Окружающая природа и спокойные воды создают идеальное убежище от суеты города. Водохранилище было построено в 1980-х годах в рамках более широкой стратегии управления водными ресурсами. Он охватывает площадь примерно 1,5 квадратных километра.</p>
-<p class="prose">Водохранилище Дрозды было построено в конце 20 века, в первую очередь для контроля наводнений и в качестве источника водоснабжения для города Минска. С течением времени оно превратилось в рекреационную зону, привлекая жителей и туристов своими живописными берегами. Хотя Дроздовый водоем в первую очередь является рекреационным объектом, он имеет культурное значение для жителей Минска, служа местом встречи для семей и друзей. Он отражает приверженность города сохранению зеленых зон и продвижению активного отдыха, что способствует качеству жизни в городской среде.</p></div>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/minsk_aircraft_carrier.jpg" alt="Minsk Aircraft Carrier" width="1280" height="569" style="height: 148px; max-height: 148px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/minsk_aircraft_carrier_b.jpg" alt="Minsk Aircraft Carrier — вид 2" width="330" height="221" style="height: 148px; max-height: 148px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 </section>
 <section class="place" id="minsk_gorky_park">
+<div class="place-lead">
 <h3>Minsk Gorky Park</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/minsk_gorky_park.jpg" alt="Minsk Gorky Park"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/minsk_gorky_park_b.jpg" alt="Minsk Gorky Park" width="330" height="247"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Парк Горького (Центральный детский парк) в Минске — это большое набережное зеленое пространство, где есть дорожки, аттракционы и памятники, и которое популярно для прогулок вдоль Свислочи.</p></div>
 </section>
-<section class="place" id="minsk_war_museum">
-<h3>Музей Великой Отечественной войны</h3>
-
-
-<figure class="place-fig"><img src="../images/minsk_war_museum.jpg" alt="Музей Великой Отечественной войны"/></figure>
-<div class="place-desc"><p class="prose">Музей Великой Отечественной войны в Минске является трогательным данью уважения роли Беларуси во Второй мировой войне, демонстрируя обширную коллекцию артефактов, экспонатов и мультимедийных презентаций. Посетители могут исследовать обширные галереи музея, которые подробно рассказывают о тяжелых переживаниях белорусского народа во время войны, а также о более широком воздействии конфликта на страну. Музей служит как образовательным ресурсом, так и мемориалом, приглашая к размышлениям о жертвах, принесенных в этот бурный период. Музей был официально открыт 3 июля 2014 года. В нем представлено более 30 000 экспонатов, связанных с Великой Отечественной войной. Музей расположен рядом с исторической Площадью Победы в Минске.</p>
-<p class="prose">Музей Великой Отечественной войны был основан в 2014 году, чтобы увековечить значимые события Второй мировой войны, особенно влияние Восточного фронта на Беларусь. Основание музея отражает стремление страны сохранить память о тех, кто сражался и страдал во время войны, с акцентом на битву под Сталинградом и освобождение Беларуси. С политической точки зрения музей играет ключевую роль в формировании национальной идентичности и памяти о Второй мировой войне, подчеркивая борьбу и стойкость Беларуси. Культурно он служит важным хранилищем белорусского наследия, демонстрируя искусство и нарративы, возникшие из военного опыта. Музей также способствует чувству единства и памяти среди населения, укрепляя традиции почитания ветеранов и тех, кто был потерян во время конфликта.</p></div>
-</section>
 <section class="place" id="minsk_holy_spirit_cathedral">
+<div class="place-lead">
 <h3>Minsk Holy Spirit Cathedral</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/minsk_holy_spirit_cathedral.jpg" alt="Minsk Holy Spirit Cathedral"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/minsk_holy_spirit_cathedral.jpg" alt="Minsk Holy Spirit Cathedral" width="1280" height="929" style="height: 242px; max-height: 242px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/minsk_holy_spirit_cathedral_b.jpg" alt="Minsk Holy Spirit Cathedral — вид 2" width="330" height="447" style="height: 242px; max-height: 242px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Собор Святого Духа в Верхнем городе — главная белорусская православная церковь Минска, перестроенная в XVIII веке в стиле барокко и обладающая знаменитым белым фасадом.</p></div>
 </section>
 <section class="place" id="minsk_independence_square">
+<div class="place-lead">
 <h3>Minsk Independence Square</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/minsk_independence_square.jpg" alt="Minsk Independence Square"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/minsk_independence_square.jpg" alt="Minsk Independence Square" width="1280" height="720" style="height: 187px; max-height: 187px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/minsk_independence_square_b.jpg" alt="Minsk Independence Square — вид 2" width="330" height="220" style="height: 187px; max-height: 187px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Площадь Независимости (Неззалежнасці) — церемониальный центр Минска, который связывает Красную Церковь, правительственные здания и основные проспекты через послевоенный городской центр.</p></div>
 </section>
-<section class="place" id="minsk_island_tears">
-<h3>Остров слез</h3>
+<section class="place" id="minsk_landmark">
+<div class="place-lead">
+<h3>Minsk Landmark</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/minsk_island_tears.jpg" alt="Остров слез"/></figure>
-<div class="place-desc"><p class="prose">Остров слез — это трогательный мемориал, расположенный в сердце Минска, посвященный белорусским солдатам, которые погибли в Афганской войне. Окруженный рекой Свислочь, этот памятник включает в себя впечатляющую скульптуру скорбящих матерей и предлагает спокойное пространство для размышлений и памяти. Посетители могут исследовать эмоциональную глубину этого памятника, наслаждаясь живописными видами реки и города. Памятник был открыт в 1996 году. Он увековечивает память белорусских солдат, погибших в Советско-афганской войне. На сайте расположена скульптура скорбящих матерей, символизирующая утрату и память.</p>
-<p class="prose">Остров слез был основан в 1996 году в честь белорусских солдат, погибших во время Советско-афганской войны с 1979 по 1989 год. Мемориал был спроектирован архитектором Андреем Михайловым и включает в себя уникальную скульптуру, созданную художником Алесеем Соколовым. С тех пор это место стало значимым для проведения памятных мероприятий и собраний. Политически, Остров Слез служит напоминанием о жертвах, принесенных белорусскими солдатами во время спорного конфликта, отражая сложности национальной идентичности и памяти в Беларуси. Культурно, он стал местом для скорби и памяти, резонируя с коллективной печалью семей и нации. Мемориал также является центром обсуждений о войне, мире и влиянии конфликта на общество.</p></div>
-</section>
-<section class="place" id="minsk_pdfband_15_91916483">
-<h3>Minsk -</h3>
-
-
-<figure class="place-fig"><img src="../images/minsk_pdfband_15_91916483.jpg" alt="Minsk -"/></figure>
-</section>
-<section class="place" id="minsk_pdfband_4_91916483">
-<h3>Minsk aircraft carrier</h3>
-
-
-<figure class="place-fig"><img src="../images/minsk_pdfband_4_91916483.jpg" alt="Minsk aircraft carrier"/></figure>
+<figure class="place-fig place-fig--hi-res"><img src="../images/minsk_landmark.jpg" alt="Minsk Landmark" width="1280" height="878"/></figure>
+</div>
 </section>
 <section class="place" id="minsk_minsk_arena">
+<div class="place-lead">
 <h3>Minsk Minsk Arena</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Период: 2006–2008</p>
-<figure class="place-fig"><img src="../images/minsk_minsk_arena.jpg" alt="Minsk Minsk Arena"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/minsk_minsk_arena.jpg" alt="Minsk Minsk Arena" width="1280" height="960" style="height: 186px; max-height: 186px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/minsk_minsk_arena_b.jpg" alt="Minsk Minsk Arena — вид 2" width="330" height="186" style="height: 186px; max-height: 186px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Расположенный в самом центре Минска, Минская Арена — это многофункциональный спортивный и развлекательный комплекс, который стал одной из самых знаковых достопримечательностей города. Арена вмещает до 14 700 зрителей во время крупных мероприятий. Он включает две катки, одна из которых предназначена исключительно для соревнований по фигурному катанию. На Арене «Минск» проходят регулярные домашние матчи национальной хоккейной сборной. С момента своего открытия площадка принимала многочисленные международные мероприятия высокого уровня, привлекая ведущих спортсменов и артистов. Уникальный дизайн включает складскую крышу, что является примером инновационного инженерного решения.</p>
 <p class="prose">Построенная в период с 2006 по 2008 год, арена &quot;Минск Арена&quot; была спроектирована архитектором Сергеем Киреевым для проведения крупных спортивных мероприятий, таких как матчи по хоккею с шайбой, концерты и культурные представления. Она быстро приобрела известность благодаря своей современной архитектуре и новейшим объектам инфраструктуры, став центром как для местных, так и для международных мероприятий. Посетители приезжают сюда, чтобы стать свидетелями первоклассных выступлений, будь то захватывающая хоккейная игра, концерт популярных исполнителей или яркий культурный фестиваль.</p></div>
 </section>
-<section class="place" id="minsk_pdfband_2_7101e6f9">
-<h3>Minsk mosque</h3>
+<section class="place" id="minsk_mosque">
+<div class="place-lead">
+<h3>Minsk Mosque</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/minsk_pdfband_2_7101e6f9.jpg" alt="Minsk mosque"/></figure>
-</section>
-<section class="place" id="minsk_belarus_station">
-<h3>Минский железнодорожный вокзал</h3>
-
-
-<figure class="place-fig"><img src="../images/minsk_belarus_station.jpg" alt="Минский железнодорожный вокзал"/></figure>
-<div class="place-desc"><p class="prose">Минский железнодорожный вокзал является важным транспортным узлом в сердце белорусской столицы, соединяя город с различными внутренними и международными направлениями. Его впечатляющая архитектура и оживленная атмосфера отражают яркую энергетику города, что делает его ключевой точкой интереса как для путешественников, так и для местных жителей. Вокзал не только является воротами в город, но и символом роста и модернизации Минска. Открытая в 1873 году, станция является ключевым транспортным узлом более века. Станция претерпела значительную реконструкцию в 1950-х годах, чтобы приспособиться к современным железнодорожным услугам.</p>
-<p class="prose">Минский железнодорожный вокзал был открыт в 1873 году, что стало значительным событием в транспортной сети города. Изначально построенный для содействия торговле и пассажирским перевозкам, вокзал за годы претерпел несколько реконструкций и расширений, адаптируясь к растущим требованиям железнодорожных поездок. Ключевыми событиями в его истории являются его реконструкция в 1950-х годах и его роль в различные исторические периоды, включая Вторую мировую войну. Станция играет важную роль в повседневной жизни жителей Минска, служа центральной точкой для поездок и путешествий. Она стала свидетелем множества политических событий, включая протесты и демонстрации, отражая динамичную политическую обстановку города. Культурно станция является местом встречи людей из различных слоев общества, что способствует богатому разнообразию белорусского общества.</p></div>
-</section>
-<section class="place" id="minsk_city_gate">
-<h3>Минский триумфальный арка</h3>
-
-
-<figure class="place-fig"><img src="../images/minsk_city_gate.jpg" alt="Минский триумфальный арка"/></figure>
-<div class="place-desc"><p class="prose">Минский Триумфальная арка, также известная как Минские городские ворота, является ярким ориентиром, символизирующим историческое и культурное наследие города. Построенная в середине 20 века, она служит вратами в столицу и напоминанием о прошлом Беларуси. Посетители могут восхищаться её впечатляющей архитектурой и окружающим парком, который предлагает спокойную обстановку для отдыха и размышлений. Построен в 1957 году в честь побед Второй мировой войны. Расположен у входа в центр города, служит ярким ориентиром.</p>
-<p class="prose">Минский Триумфальный Арк был построен в 1957 году в честь победы Советского Союза во Второй мировой войне. Он был создан, чтобы отметить стойкость и силу белорусского народа во время войны и с тех пор стал знаковым элементом города. Арка имеет культурное значение как символ национальной идентичности и гордости, отражая исторический нарратив Беларуси. Она служит напоминанием о бурном прошлом страны и жертвах, принесенных во время войны. Это место часто используется для общественных собраний и церемоний, что подчеркивает его роль в современной гражданской жизни.</p></div>
-</section>
-<section class="place" id="minsk_national_art_museum">
-<h3>Национальный художественный музей</h3>
-
-
-<figure class="place-fig"><img src="../images/minsk_national_art_museum.jpg" alt="Национальный художественный музей"/></figure>
-<div class="place-desc"><p class="prose">Национальный художественный музей в Минске — это главная достопримечательность для любителей искусства, представляющая обширную коллекцию белорусского и международного искусства. Музей расположен в впечатляющем здании и предлагает разнообразные выставки, от классических до современных произведений. Посетители могут исследовать богатое художественное наследие Беларуси и наслаждаться различными культурными событиями в течение года. Основан в 1939 году как Музей изобразительных искусств. Текущая постройка завершена в 1984 году. В доме находится более 30 000 произведений искусства.</p>
-<p class="prose">Национальный художественный музей был основан в 1939 году, изначально как Музей изобразительных искусств. Он претерпел несколько трансформаций и расширений, отражая развивающуюся художественную сцену в Беларуси. Текущее здание музея, завершенное в 1984 году, было спроектировано для размещения его растущей коллекции и для того, чтобы служить культурным центром столицы. С культурной точки зрения Национальный художественный музей играет важную роль в сохранении и продвижении белорусского искусства и наследия. Он служит платформой для художников и центром культурного диалога, способствуя пониманию белорусской идентичности через искусство. Музей также взаимодействует с общественностью через образовательные программы и выставки, способствуя более глубокому восприятию искусства в повседневной жизни.</p></div>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/minsk_mosque.jpg" alt="Minsk Mosque" width="1280" height="966" style="height: 252px; max-height: 252px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/minsk_mosque_b.jpg" alt="Minsk Mosque — вид 2" width="330" height="389" style="height: 252px; max-height: 252px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 </section>
 <section class="place" id="minsk_national_library">
+<div class="place-lead">
 <h3>Minsk National Library</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Адрес: проспект Независимости, 116 | Период: 1921</p>
-<figure class="place-fig"><img src="../images/minsk_national_library.jpg" alt="Minsk National Library"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/minsk_national_library.jpg" alt="Minsk National Library" width="1280" height="720" style="height: 187px; max-height: 187px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/minsk_national_library_b.jpg" alt="Minsk National Library — вид 2" width="330" height="220" style="height: 187px; max-height: 187px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Национальная библиотека Беларуси — крупнейшая и главная библиотека в стране, насчитывающая более трех миллионов книг и документов. Основанная в 1921 году как часть Белорусской центральной научной библиотеки, с тех пор она превратилась в один из ведущих исследовательских институтов Европы. Содержит более трех миллионов предметов, включая книги, журналы, карты и рукописи. Само здание является архитектурной достопримечательностью, спроектированное выдающимся местным архитектором Иваном Полозковым. Библиотека предоставляет бесплатный доступ к онлайн-ресурсам и цифровым базам данных для академических исследований. В регулярных выставках представлены редкие издания и артефакты, связанные с белорусской литературой и историей. Сотрудничает с международными организациями, такими как ЮНЕСКО, для содействия обмену знаниями.</p>
 <p class="prose">Основанная в 1921 году в советский период, Национальная библиотека Беларуси изначально называлась Белорусской центральной научной библиотекой. Со временем она расширила свои коллекции, включив редкие рукописи, исторические архивы и современные публикации. Сегодня она служит крупным культурный центр для ученых, исследователей и студентов. Посетители могут изучить обширную коллекцию исторических текстов, редких книг и произведений искусства, что делает это место значимым для тех, кто интересуется белоруской культурой и наследием.</p></div>
 </section>
-<section class="place" id="minsk_opera_ballet">
-<h3>Национальная опера и балет</h3>
+<section class="place" id="minsk_new_minsk_mosque_p01">
+<div class="place-lead">
+<h3>Minsk New Minsk Mosque P01</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/minsk_opera_ballet.jpg" alt="Национальная опера и балет"/></figure>
-<div class="place-desc"><p class="prose">Национальный театр оперы и балета Беларуси, расположенный в сердце Минска, является великолепным архитектурным шедевром, который демонстрирует богатое культурное наследие страны. С его грандиозными выступлениями и постановками мирового уровня он служит ярким центром искусств, привлекая как местных жителей, так и туристов. Посетители могут насладиться разнообразным репертуаром, начиная от классических опер и заканчивая современным балетом, все это исполняется талантливыми артистами. Основан в 1933 году как Белорусский государственный театр оперы и балета. Здание было завершено в 1939 году и выполнено в неоклассическом архитектурном стиле. В 1995 году ему было присвоено Национальное академическое звание.</p>
-<p class="prose">Национальная опера и балет Беларуси была основана в 1933 году, изначально как Белорусский государственный театр оперы и балета. Само здание, спроектированное в неоклассическом стиле, было завершено в 1939 году и с тех пор претерпело несколько ремонтов. Ключевыми вехами являются присвоение Национального академического звания в 1995 году, что подчеркивает его значимость в культурном ландшафте Беларуси. Театр играет ключевую роль в культурной жизни Минска, служа платформой как для традиционных, так и для современных художественных выражений. Он способствует сохранению белорусского наследия через свои выступления и образовательные программы, воспитывая любовь к искусству среди сообщества. Хотя театр в основном сосредоточен на искусстве, он также отражает более широкий социальный и политический контекст страны, часто являясь пространством для культурного диалога.</p></div>
-</section>
-<section class="place" id="minsk_pdfband_0_29c5ad91">
-<h3>New Minsk mosque p01</h3>
-
-
-<figure class="place-fig"><img src="../images/minsk_pdfband_0_29c5ad91.jpg" alt="New Minsk mosque p01"/></figure>
-</section>
-<section class="place" id="minsk_october_square">
-<h3>Октябрьская площадь</h3>
-
-
-<figure class="place-fig"><img src="../images/minsk_october_square.jpg" alt="Октябрьская площадь"/></figure>
-<div class="place-desc"><p class="prose">Октябрьская площадь — это выдающееся общественное пространство в Минске, служащее центральным узлом как для местных жителей, так и для гостей города. Окруженная значительными зданиями, она часто становится местом проведения культурных мероприятий и общественных собраний, отражая яркую жизнь города. Площадь особенно известна своей впечатляющей архитектурой и близлежащим Домом Правительства, что добавляет ей исторического и политического значения. Октябрьская площадь расположена в самом сердце Минска, Беларусь. Он граничит с Домом правительства и Белорусским государственным цирком.</p>
-<p class="prose">Площадь Октября была основана в начале 20 века и на протяжении своей истории претерпела различные трансформации. Изначально названная в честь Октябрьской революции, она стала местом проведения множества значительных событий, включая празднования и протесты, особенно в конце 20 века. Площадь имеет значительное политическое значение как место для общественных демонстраций и собраний, особенно в периоды политической нестабильности. Культурно она является центром общественных мероприятий и празднований, олицетворяя дух Минска и его жителей. Архитектура и планировка площади отражают историческую эволюцию города и являются неотъемлемой частью его городской идентичности.</p></div>
-</section>
-<section class="place" id="minsk_kastrycnickaja">
-<h3>Улица Октября</h3>
-
-
-<figure class="place-fig"><img src="../images/minsk_kastrycnickaja.jpg" alt="Улица Октября"/></figure>
-<div class="place-desc"><p class="prose">Улица Октября — одна из центральных магистралей Минска, известная своей яркой атмосферой и исторической архитектурой. Улица усеяна магазинами, кафе и культурными заведениями, она служит центром как для местных жителей, так и для туристов. Улица является популярным местом для неспешных прогулок и предлагает возможность заглянуть в городскую жизнь. Улица была названа в честь Октябрьской революции.</p>
-<p class="prose">Улица Октября имеет свои корни в начале 20 века, отражая архитектурные стили той эпохи. Она претерпела различные трансформации, особенно в советский период, когда стала центром городского развития в Минске. Улица была названа в честь Октябрьской революции, символизируя её историческую связь с важными политическими событиями. Культурно Октябрьская улица играет важную роль в повседневной жизни Минска, служа местом сбора для социальных мероприятий и событий. Здесь расположено несколько культурных учреждений, и улица часто ассоциируется с художественным самовыражением, что делает её яркой частью наследия города. Значимость улицы дополнительно подчеркивается её ролью в местных традициях и праздниках.</p></div>
+<figure class="place-fig place-fig--hi-res"><img src="../images/minsk_new_minsk_mosque_p01.jpg" alt="Minsk New Minsk Mosque P01" width="1280" height="853"/></figure>
+</div>
 </section>
 <section class="place" id="minsk_palace_republic">
+<div class="place-lead">
 <h3>Minsk Palace Republic</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/minsk_palace_republic.jpg" alt="Minsk Palace Republic"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/minsk_palace_republic.jpg" alt="Minsk Palace Republic" width="1280" height="929" style="height: 242px; max-height: 242px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/minsk_palace_republic_b.jpg" alt="Minsk Palace Republic — вид 2" width="330" height="247" style="height: 242px; max-height: 242px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Дворец Республики на Площади Независимости — главный концертный и конгресс-зал Минска, который используется для проведения государственных мероприятий, выступлений и крупных публичных собраний.</p></div>
 </section>
-<section class="place" id="minsk_sts_simon_helena">
-<h3>Красная церковь</h3>
+<section class="place" id="minsk_red_church">
+<div class="place-lead">
+<h3>Minsk Red Church</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/minsk_sts_simon_helena.jpg" alt="Красная церковь"/></figure>
-<div class="place-desc"><p class="prose">Красная церковь, официально известная как Церковь святых Симона и Елены, является ярким примером неороманской архитектуры, расположенной в самом сердце Минска. Её яркий красный кирпичный фасад и элегантные шпили делают её одной из самых узнаваемых достопримечательностей города. Церковь служит популярным местом как для богослужений, так и для культурных мероприятий, привлекая посетителей своим уникальным дизайном и историческим значением. Построен в период с 1905 по 1910 год. Сделано в неороманском стиле. Обслуживает католическую общину в Минске.</p>
-<p class="prose">Строительство Красной Церкви началось в 1905 году и было завершено в 1910 году. Она была построена местным сообществом как римско-католическое место поклонения, отражающее религиозные нужды польскоязычного населения Минска в тот период. Церковь стала свидетелем различных исторических событий, включая влияние Второй мировой войны и последующие изменения в белорусском обществе. Красная церковь имеет культурное значение как символ архитектурного наследия города и является свидетельством религиозного разнообразия Минска. Это место сбора местной католической общины и играет роль в различных культурных событиях, обогащая повседневную жизнь жителей. Хотя у нее нет статуса ЮНЕСКО, она признана за свою эстетическую и историческую ценность.</p></div>
-</section>
-<section class="place" id="minsk_st_elizabeth">
-<h3>Сестринский монастырь Святой Елизаветы</h3>
-
-
-<figure class="place-fig"><img src="../images/minsk_st_elizabeth.jpg" alt="Сестринский монастырь Святой Елизаветы"/></figure>
-<div class="place-desc"><p class="prose">Сестринский монастырь Святой Елизаветы, расположенный в сердце Минска, является спокойным оазисом, известным своей потрясающей архитектурой и тихими садами. Основанный в начале 20 века, монастырь служит духовным центром и местом убежища, привлекая посетителей, ищущих мир и размышления. Его красивые территории и яркая общественная жизнь делают его уникальным местом как для паломников, так и для туристов. Основан в 1910 году великой княгиней Елизаветой Фёдоровной. Служит духовным и благотворительным центром. Особенности включают красивые сады и традиционную православную архитектуру.</p>
-<p class="prose">Монастырь Святой Елизаветы был основан в 1910 году великой княгиней Елизаветой Фёдоровной, членом российской императорской семьи. Монастырь был построен как место для ухода за больными и бедными, отражая благотворительную миссию своего основателя. На протяжении многих лет он претерпел различные преобразования, особенно в периоды политических потрясений, однако остался значимой религиозной институцией в Минске. Монастырь имеет культурное значение как центр православного христианства в Беларуси, олицетворяя богатое религиозное наследие региона. Он играет важную роль в повседневной жизни многих местных жителей, предлагая духовное руководство и поддержку сообщества. Монастырь также проводит различные религиозные церемонии и мероприятия, способствуя сохранению традиций и укреплению чувства единства среди верующих.</p></div>
-</section>
-<section class="place" id="minsk_st_roch">
-<h3>Церковь Святого Роха</h3>
-
-
-<figure class="place-fig"><img src="../images/minsk_st_roch.jpg" alt="Церковь Святого Роха"/></figure>
-<div class="place-desc"><p class="prose">Церковь Святого Роха, расположенная в сердце Минска, является ярким примером неоготической архитектуры. Известная своими красивыми витражами и спокойной атмосферой, она служит мирным укрытием как для прихожан, так и для посетителей. Церковь является популярным местом для тех, кто хочет ощутить духовное и культурное наследие города. Построено в период с 1905 по 1910 год. Спроектировано в неоготическом стиле архитектором А.</p>
-<p class="prose">Церковь Святого Роха была построена в начале 20 века, закладка фундамента состоялась в 1905 году, а строительство завершилось в 1910 году. Она была спроектирована архитектором А. В. Ковальчуком и с тех пор претерпела различные ремонты, чтобы сохранить свою архитектурную целостность и адаптироваться к потребностям местного сообщества. Церковь имеет культурное значение как свидетельство архитектурных стилей своего времени и как место для общественных собраний и религиозных церемоний. Она отражает богатое религиозное наследие Минска и продолжает играть важную роль в повседневной жизни его жителей, предоставляя пространство для размышлений и поклонения.</p></div>
-</section>
-<section class="place" id="minsk_trinity_hill">
-<h3>Тринити-Хилл</h3>
-
-
-<figure class="place-fig"><img src="../images/minsk_trinity_hill.jpg" alt="Тринити-Хилл"/></figure>
-<div class="place-desc"><p class="prose">Троицкий холм — живописный район в Минске, известный своими очаровательными мощеными улицами и яркой атмосферой. Эта историческая местность характеризуется хорошо сохранившейся архитектурой и предлагает посетителям возможность заглянуть в прошлое города, наряду с современными кафе и магазинами. Прогулка по Троицкому холму раскрывает богатую культурную палитру Минска, что делает его обязательным местом для посещения для всех, кто исследует город. Троицкий холм — один из старейших районов Минска, основанный в XI веке. В этом районе расположено несколько исторических достопримечательностей, включая Собор Святого Духа и бывшие купеческие дома.</p>
-<p class="prose">Троицкий холм восходит к XI веку и является одной из старейших частей Минска. Он имел историческое значение как центр торговли и коммерции благодаря своему стратегически удобному расположению вдоль реки Свислочь. Эта местность стала свидетелем различных ключевых событий в белорусской истории, включая создание Великого княжества Литовского, а позже — Речи Посполитой. Культурно Троицкий холм является ярким центром, который отражает наследие Минска через свою архитектуру и местные традиции. В этом районе расположено несколько примечательных достопримечательностей, включая Собор Святого Духа, который демонстрирует религиозную и культурную историю региона. Троицкий холм остается неотъемлемой частью повседневной жизни в Минске, где местные жители и туристы собираются, чтобы насладиться его уникальным сочетанием истории и современности.</p></div>
-</section>
-<section class="place" id="minsk_upper_town">
-<h3>Верхний город Минска</h3>
-
-
-<figure class="place-fig"><img src="../images/minsk_upper_town.jpg" alt="Верхний город Минска"/></figure>
-<div class="place-desc"><p class="prose">Верхний город Минска — это исторический район, который демонстрирует архитектурную красоту и культурное наследие столицы Беларуси. Характеризующийся своими очаровательными улицами, яркой атмосферой и значительными достопримечательностями, этот район служит центром как для местных жителей, так и для туристов. Исследование Верхнего города предлагает возможность заглянуть в богатую историю и традиции, которые определяют Минск. Верхний город был ключевым торговым центром в XI веке. В районе расположены такие значимые достопримечательности, как Собор Святого Духа и Ратуша.</p>
-<p class="prose">Верхний город был основан в XI веке и сыграл ключевую роль в развитии Минска. Он был центром торговли и коммерции во время Великого княжества Литовского, а затем стал важной точкой в различных исторических событиях, включая разделы Польши и советскую эпоху. Культурно Верхний город значим своим смешением архитектурных стилей, отражающим разнообразную историю города. Здесь расположены несколько важных достопримечательностей, включая Собор Святого Духа и Ратушу, которые имеют важное значение для местного наследия. Этот район также играет роль в современной жизни, принимая фестивали и мероприятия, которые отмечают белорусские традиции.</p></div>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/minsk_red_church.jpg" alt="Minsk Red Church" width="1280" height="848" style="height: 221px; max-height: 221px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/minsk_red_church_b.jpg" alt="Minsk Red Church — вид 2" width="330" height="247" style="height: 221px; max-height: 221px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Церковь святых Симеона и Елены — выдающаяся православная церковь, расположенная в самом сердце исторического центра Минска. Её неоклассическая архитектура, отличающаяся чистыми линиями и симметричными фасадами, выделяется среди соседних зданий. Построенная в конце 1800-х годов, церковь претерпела значительную реставрацию после Второй мировой войны. Он украшен изящными колоннами и куполом, типичными для неоклассической архитектуры. Внутри посетители могут полюбоваться замысловатыми фресками, изображающими сцены из библейских повествований. В церкви регулярно проходят службы, а также время от времени проводятся культурные мероприятия для публики. Расположен недалеко от таких крупных достопримечательностей, как Национальный академический театр Беларуси.</p>
+<p class="prose">Построенный в конце XIX века, храм первоначально был посвящен святой Елене, но позже был переименован в честь святых Симона и Елены. Он служил местом поклонения для местных жителей до того, как был частично разрушен во время Второй мировой войны. После войны он был реконструирован и снова открыт для общины. Посетители приезжают сюда, чтобы оценить его архитектурную красоту и историческое значение, а также чтобы насладиться спокойствием его умиротворенного внутреннего пространства.</p></div>
 </section>
 <section class="place" id="minsk_victory_square">
+<div class="place-lead">
 <h3>Minsk Victory Square</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Период: 1974</p>
-<figure class="place-fig"><img src="../images/minsk_victory_square.jpg" alt="Minsk Victory Square"/></figure>
+<figure class="place-fig place-fig--hi-res"><img src="../images/minsk_victory_square.jpg" alt="Minsk Victory Square" width="1280" height="851"/></figure>
+</div>
 <div class="place-desc"><p class="prose">В самом сердце Минска находится Площадь Победы — величественное общественное пространство, которое символизирует как историческое значение, так и современную городскую жизнь. Окруженная величественными зданиями и обрамленная деревьями, она служит местом встреч для местных жителей и гостей города. На площади находится культовый Дворец независимости, в котором расположена Национальное собрание Беларуси. В нём представлены впечатляющие монументы, увековечивающие память павших солдат Великой Отечественной войны. Окрестные улицы украшены элегантными зданиями в стилях Ар-нуво и классицизма, относящимися к началу XX века. На этой территории часто проводятся мероприятия, такие как концерты, рынки и художественные выставки, что делает ее динамичной частью социальной жизни города. В крупные праздники площадь становится центром национальных торжеств.</p>
 <p class="prose">СQUARE ПОБЕДЫ, первоначально построенная в советское время, названа в честь победы над нацистской Германией во Второй мировой войне. С тех пор она превратилась в оживленный центр, где регулярно проходят культурные мероприятия, фестивали и праздники. Посещение площади Победы позволяет ощутить слияние истории и современной культуры в оживленном центре Минска.</p></div>
 </section>
 <section class="place" id="minsk_yakub_kolas">
+<div class="place-lead">
 <h3>Minsk Yakub Kolas</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/minsk_yakub_kolas.jpg" alt="Minsk Yakub Kolas"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/minsk_yakub_kolas.jpg" alt="Minsk Yakub Kolas" width="1280" height="958" style="height: 220px; max-height: 220px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/minsk_yakub_kolas_b.jpg" alt="Minsk Yakub Kolas — вид 2" width="330" height="220" style="height: 220px; max-height: 220px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Площадь Якуба Коласа — центральное место сбора в Минске, названное в честь белорусского поэта Якуба Коласа, сыгравшего значительную роль в развитии современной белорусской литературы. На площади представлена элегантная архитектура и царит атмосфера покоя посреди шумной городской жизни. Площадь окружена историческими зданиями, датируемыми началом XX века. Здесь проводятся регулярные культурные фестивали, посвященные традиционной белорусской музыке и танцам. В центре стоит статуя в честь Якуба Колоса, символизирующая его вклад в белорусскую культуру. Поблизости находится несколько кафе и ресторанов с местной кухней и напитками. Здесь регулярно проводятся такие мероприятия, как книжные ярмарки и литературные чтения.</p>
 <p class="prose">Площадь названа в честь известного белорусского писателя Якуба Коласа, творчество которого оказало огромное влияние на культурную самобытность Беларуси. Она была разработана в советскую эпоху как центральное место для гражданских собраний и празднований. С момента своего основания эта площадь служит центром политических митингов, концертов и памятных мероприятий. Гости приходят на площадь Якуба Коласа, чтобы насладиться спокойствием центра города, полюбоваться выступлениями местных артистов и оценить архитектурную красоту окружающих зданий.</p></div>
 </section>
-<section class="place" id="minsk_pdfband_1_2e13651f">
-<h3>МЦ1</h3>
+<section class="place" id="minsk_catholic_cathedral">
+<div class="place-lead">
+<h3>Архикафедральный собор Благословенной Девы Марии</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/minsk_pdfband_1_2e13651f.jpg" alt="МЦ1"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res"><img src="../images/minsk_catholic_cathedral.jpg" alt="Архикафедральный собор Благословенной Девы Марии" width="330" height="440" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/minsk_catholic_cathedral_b.jpg" alt="Архикафедральный собор Благословенной Девы Марии — вид 2" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Архикафедральный собор Благословенной Девы Марии, расположенный в сердце Минска, является великолепным примером архитектуры готического возрождения. Этот выдающийся католический собор служит духовным центром для местного сообщества и известен своими впечатляющими двойными шпилями и красивым интерьером. Посетители могут полюбоваться его замысловатыми витражами и участвовать в различных религиозных службах в течение недели. Основана в 1710 году как церковь иезуитов. Стал собором в 1991 году с образованием Минско-Могилёвской епархии. Особенности готического возрождения архитектуры с двойными шпилями.</p>
+<p class="prose">Архикафедральный собор был основан в 1710 году и с тех пор претерпел несколько ремонтов и реставраций. Изначально построенный как церковь для иезуитов, он стал кафедральным собором в 1991 году, когда была основана Минско-Магилевская епархия. Ключевыми событиями в его истории являются последствия Второй мировой войны, во время которой собор понес повреждения, и его последующая реставрация в послевоенный период. Архикафедральный собор имеет культурное значение как символ католической веры в Беларуси, особенно в стране с преобладающим православием. Он служит местом проведения важных религиозных церемоний и общественных собраний, отражая традиции и наследие местного католического населения. Собор также играет роль в более широком культурном ландшафте Минска, привлекая как паломников, так и туристов.</p></div>
+</section>
+<section class="place" id="minsk_belarusian_state_circus">
+<div class="place-lead">
+<h3>Белорусский государственный цирк</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/minsk_belarusian_state_circus.jpg" alt="Белорусский государственный цирк" width="1280" height="960" style="height: 220px; max-height: 220px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/minsk_belarusian_state_circus_b.jpg" alt="Белорусский государственный цирк — вид 2" width="330" height="220" style="height: 220px; max-height: 220px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Белорусский государственный цирк в Минске — это яркое заведение, которое демонстрирует разнообразные представления, включая акробатику, номера с животными и шоу клоунов. Со своей уникальной архитектурой и живой атмосферой он является популярной достопримечательностью как для местных жителей, так и для туристов. Цирк известен своей приверженностью к сохранению традиционных цирковых искусств, одновременно принимая современные выступления. Основан в 1959 году. Находится в центре Минска. Представляет разнообразные выступления, включая акробатику и клоунские шоу.</p>
+<p class="prose">Белорусский государственный цирк был основан в 1959 году и стал значимым культурным учреждением в Минске. На протяжении многих лет он подвергался различным реконструкциям и расширениям, адаптируясь к изменяющимся вкусам зрителей, сохраняя при этом свою основную миссию — развлекать и демонстрировать цирковое искусство. Культурно, Белорусский государственный цирк играет важную роль в художественном ландшафте Минска, внося вклад в наследие и развлекательную сцену города. Он отражает традиции циркового искусства в Беларуси, способствуя чувству общности и радости среди своих посетителей. Цирк также служит платформой для местных талантов, помогая продвигать искусство в регионе.</p></div>
+</section>
+<section class="place" id="minsk_national_history">
+<div class="place-lead">
+<h3>Белорусский музей истории</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/minsk_national_history.jpg" alt="Белорусский музей истории" width="1280" height="853" style="height: 210px; max-height: 210px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/minsk_national_history_b.jpg" alt="Белорусский музей истории — вид 2" width="330" height="210" style="height: 210px; max-height: 210px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Белорусский музей истории в Минске предлагает всестороннее путешествие по богатому полотну белорусской истории, демонстрируя артефакты и экспонаты, охватывающие от древних времен до современности. Посетители могут исследовать культурное наследие, значимые события и эволюцию нации через различные интерактивные выставки и коллекции. Музей служит важным образовательным ресурсом как для местных жителей, так и для туристов, подчеркивая важность сохранения исторического нарратива Беларуси. Основанный в 1957 году, музей сосредоточен на белорусской истории и культуре. Музей предлагает широкий ассортимент артефактов, включая археологические находки, исторические документы и традиционные ремесла.</p>
+<p class="prose">Белорусский исторический музей был основан в 1957 году с целью сбора, сохранения и展示 исторических артефактов Беларуси. За годы своего существования музей прошел несколько ремонтов и расширений, что усилило его роль как ключевого учреждения для исторического образования и исследований в стране. Музей играет ключевую роль в формировании чувства национальной идентичности и гордости среди белорусов, подчеркивая значимые культурные и исторические вехи. Он служит платформой для понимания сложностей прошлого Беларуси, включая ее борьбу за независимость и влияние различных политических режимов. Через свои выставки музей также отражает культурное разнообразие и традиции белорусского народа.</p></div>
+</section>
+<section class="place" id="minsk_upper_town">
+<div class="place-lead">
+<h3>Верхний город Минска</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/minsk_upper_town.jpg" alt="Верхний город Минска" width="1280" height="927" style="height: 164px; max-height: 164px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/minsk_upper_town_b.jpg" alt="Верхний город Минска — вид 2" width="330" height="164" style="height: 164px; max-height: 164px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Верхний город Минска — это исторический район, который демонстрирует архитектурную красоту и культурное наследие столицы Беларуси. Характеризующийся своими очаровательными улицами, яркой атмосферой и значительными достопримечательностями, этот район служит центром как для местных жителей, так и для туристов. Исследование Верхнего города предлагает возможность заглянуть в богатую историю и традиции, которые определяют Минск. Верхний город был ключевым торговым центром в XI веке. В районе расположены такие значимые достопримечательности, как Собор Святого Духа и Ратуша.</p>
+<p class="prose">Верхний город был основан в XI веке и сыграл ключевую роль в развитии Минска. Он был центром торговли и коммерции во время Великого княжества Литовского, а затем стал важной точкой в различных исторических событиях, включая разделы Польши и советскую эпоху. Культурно Верхний город значим своим смешением архитектурных стилей, отражающим разнообразную историю города. Здесь расположены несколько важных достопримечательностей, включая Собор Святого Духа и Ратушу, которые имеют важное значение для местного наследия. Этот район также играет роль в современной жизни, принимая фестивали и мероприятия, которые отмечают белорусские традиции.</p></div>
+</section>
+<section class="place" id="minsk_sts_simon_helena">
+<div class="place-lead">
+<h3>Красная церковь</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<figure class="place-fig place-fig--lo-res"><img src="../images/minsk_sts_simon_helena.jpg" alt="Красная церковь" width="330" height="231"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Красная церковь, официально известная как Церковь святых Симона и Елены, является ярким примером неороманской архитектуры, расположенной в самом сердце Минска. Её яркий красный кирпичный фасад и элегантные шпили делают её одной из самых узнаваемых достопримечательностей города. Церковь служит популярным местом как для богослужений, так и для культурных мероприятий, привлекая посетителей своим уникальным дизайном и историческим значением. Построен в период с 1905 по 1910 год. Сделано в неороманском стиле. Обслуживает католическую общину в Минске.</p>
+<p class="prose">Строительство Красной Церкви началось в 1905 году и было завершено в 1910 году. Она была построена местным сообществом как римско-католическое место поклонения, отражающее религиозные нужды польскоязычного населения Минска в тот период. Церковь стала свидетелем различных исторических событий, включая влияние Второй мировой войны и последующие изменения в белорусском обществе. Красная церковь имеет культурное значение как символ архитектурного наследия города и является свидетельством религиозного разнообразия Минска. Это место сбора местной католической общины и играет роль в различных культурных событиях, обогащая повседневную жизнь жителей. Хотя у нее нет статуса ЮНЕСКО, она признана за свою эстетическую и историческую ценность.</p></div>
+</section>
+<section class="place" id="minsk_belarus_station">
+<div class="place-lead">
+<h3>Минский железнодорожный вокзал</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/minsk_belarus_station.jpg" alt="Минский железнодорожный вокзал" width="1280" height="853" style="height: 220px; max-height: 220px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/minsk_belarus_station_b.jpg" alt="Минский железнодорожный вокзал — вид 2" width="330" height="220" style="height: 220px; max-height: 220px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Минский железнодорожный вокзал является важным транспортным узлом в сердце белорусской столицы, соединяя город с различными внутренними и международными направлениями. Его впечатляющая архитектура и оживленная атмосфера отражают яркую энергетику города, что делает его ключевой точкой интереса как для путешественников, так и для местных жителей. Вокзал не только является воротами в город, но и символом роста и модернизации Минска. Открытая в 1873 году, станция является ключевым транспортным узлом более века. Станция претерпела значительную реконструкцию в 1950-х годах, чтобы приспособиться к современным железнодорожным услугам.</p>
+<p class="prose">Минский железнодорожный вокзал был открыт в 1873 году, что стало значительным событием в транспортной сети города. Изначально построенный для содействия торговле и пассажирским перевозкам, вокзал за годы претерпел несколько реконструкций и расширений, адаптируясь к растущим требованиям железнодорожных поездок. Ключевыми событиями в его истории являются его реконструкция в 1950-х годах и его роль в различные исторические периоды, включая Вторую мировую войну. Станция играет важную роль в повседневной жизни жителей Минска, служа центральной точкой для поездок и путешествий. Она стала свидетелем множества политических событий, включая протесты и демонстрации, отражая динамичную политическую обстановку города. Культурно станция является местом встречи людей из различных слоев общества, что способствует богатому разнообразию белорусского общества.</p></div>
+</section>
+<section class="place" id="minsk_city_gate">
+<div class="place-lead">
+<h3>Минский триумфальный арка</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/minsk_city_gate.jpg" alt="Минский триумфальный арка" width="1280" height="1050" style="height: 273px; max-height: 273px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/minsk_city_gate_b.jpg" alt="Минский триумфальный арка — вид 2" width="330" height="425" style="height: 273px; max-height: 273px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Минский Триумфальная арка, также известная как Минские городские ворота, является ярким ориентиром, символизирующим историческое и культурное наследие города. Построенная в середине 20 века, она служит вратами в столицу и напоминанием о прошлом Беларуси. Посетители могут восхищаться её впечатляющей архитектурой и окружающим парком, который предлагает спокойную обстановку для отдыха и размышлений. Построен в 1957 году в честь побед Второй мировой войны. Расположен у входа в центр города, служит ярким ориентиром.</p>
+<p class="prose">Минский Триумфальный Арк был построен в 1957 году в честь победы Советского Союза во Второй мировой войне. Он был создан, чтобы отметить стойкость и силу белорусского народа во время войны и с тех пор стал знаковым элементом города. Арка имеет культурное значение как символ национальной идентичности и гордости, отражая исторический нарратив Беларуси. Она служит напоминанием о бурном прошлом страны и жертвах, принесенных во время войны. Это место часто используется для общественных собраний и церемоний, что подчеркивает его роль в современной гражданской жизни.</p></div>
+</section>
+<section class="place" id="minsk_war_museum">
+<div class="place-lead">
+<h3>Музей Великой Отечественной войны</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/minsk_war_museum.jpg" alt="Музей Великой Отечественной войны" width="1280" height="960" style="height: 247px; max-height: 247px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/minsk_war_museum_b.jpg" alt="Музей Великой Отечественной войны — вид 2" width="330" height="247" style="height: 247px; max-height: 247px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Музей Великой Отечественной войны в Минске является трогательным данью уважения роли Беларуси во Второй мировой войне, демонстрируя обширную коллекцию артефактов, экспонатов и мультимедийных презентаций. Посетители могут исследовать обширные галереи музея, которые подробно рассказывают о тяжелых переживаниях белорусского народа во время войны, а также о более широком воздействии конфликта на страну. Музей служит как образовательным ресурсом, так и мемориалом, приглашая к размышлениям о жертвах, принесенных в этот бурный период. Музей был официально открыт 3 июля 2014 года. В нем представлено более 30 000 экспонатов, связанных с Великой Отечественной войной. Музей расположен рядом с исторической Площадью Победы в Минске.</p>
+<p class="prose">Музей Великой Отечественной войны был основан в 2014 году, чтобы увековечить значимые события Второй мировой войны, особенно влияние Восточного фронта на Беларусь. Основание музея отражает стремление страны сохранить память о тех, кто сражался и страдал во время войны, с акцентом на битву под Сталинградом и освобождение Беларуси. С политической точки зрения музей играет ключевую роль в формировании национальной идентичности и памяти о Второй мировой войне, подчеркивая борьбу и стойкость Беларуси. Культурно он служит важным хранилищем белорусского наследия, демонстрируя искусство и нарративы, возникшие из военного опыта. Музей также способствует чувству единства и памяти среди населения, укрепляя традиции почитания ветеранов и тех, кто был потерян во время конфликта.</p></div>
+</section>
+<section class="place" id="minsk_opera_ballet">
+<div class="place-lead">
+<h3>Национальная опера и балет</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/minsk_opera_ballet.jpg" alt="Национальная опера и балет" width="1280" height="960" style="height: 247px; max-height: 247px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/minsk_opera_ballet_b.jpg" alt="Национальная опера и балет — вид 2" width="330" height="247" style="height: 247px; max-height: 247px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Национальный театр оперы и балета Беларуси, расположенный в сердце Минска, является великолепным архитектурным шедевром, который демонстрирует богатое культурное наследие страны. С его грандиозными выступлениями и постановками мирового уровня он служит ярким центром искусств, привлекая как местных жителей, так и туристов. Посетители могут насладиться разнообразным репертуаром, начиная от классических опер и заканчивая современным балетом, все это исполняется талантливыми артистами. Основан в 1933 году как Белорусский государственный театр оперы и балета. Здание было завершено в 1939 году и выполнено в неоклассическом архитектурном стиле. В 1995 году ему было присвоено Национальное академическое звание.</p>
+<p class="prose">Национальная опера и балет Беларуси была основана в 1933 году, изначально как Белорусский государственный театр оперы и балета. Само здание, спроектированное в неоклассическом стиле, было завершено в 1939 году и с тех пор претерпело несколько ремонтов. Ключевыми вехами являются присвоение Национального академического звания в 1995 году, что подчеркивает его значимость в культурном ландшафте Беларуси. Театр играет ключевую роль в культурной жизни Минска, служа платформой как для традиционных, так и для современных художественных выражений. Он способствует сохранению белорусского наследия через свои выступления и образовательные программы, воспитывая любовь к искусству среди сообщества. Хотя театр в основном сосредоточен на искусстве, он также отражает более широкий социальный и политический контекст страны, часто являясь пространством для культурного диалога.</p></div>
+</section>
+<section class="place" id="minsk_national_art_museum">
+<div class="place-lead">
+<h3>Национальный художественный музей</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/minsk_national_art_museum.jpg" alt="Национальный художественный музей" width="1280" height="720" style="height: 187px; max-height: 187px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/minsk_national_art_museum_b.jpg" alt="Национальный художественный музей — вид 2" width="330" height="220" style="height: 187px; max-height: 187px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Национальный художественный музей в Минске — это главная достопримечательность для любителей искусства, представляющая обширную коллекцию белорусского и международного искусства. Музей расположен в впечатляющем здании и предлагает разнообразные выставки, от классических до современных произведений. Посетители могут исследовать богатое художественное наследие Беларуси и наслаждаться различными культурными событиями в течение года. Основан в 1939 году как Музей изобразительных искусств. Текущая постройка завершена в 1984 году. В доме находится более 30 000 произведений искусства.</p>
+<p class="prose">Национальный художественный музей был основан в 1939 году, изначально как Музей изобразительных искусств. Он претерпел несколько трансформаций и расширений, отражая развивающуюся художественную сцену в Беларуси. Текущее здание музея, завершенное в 1984 году, было спроектировано для размещения его растущей коллекции и для того, чтобы служить культурным центром столицы. С культурной точки зрения Национальный художественный музей играет важную роль в сохранении и продвижении белорусского искусства и наследия. Он служит платформой для художников и центром культурного диалога, способствуя пониманию белорусской идентичности через искусство. Музей также взаимодействует с общественностью через образовательные программы и выставки, способствуя более глубокому восприятию искусства в повседневной жизни.</p></div>
+</section>
+<section class="place" id="minsk_october_square">
+<div class="place-lead">
+<h3>Октябрьская площадь</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<figure class="place-fig place-fig--hi-res"><img src="../images/minsk_october_square.jpg" alt="Октябрьская площадь" width="1280" height="960"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Октябрьская площадь — это выдающееся общественное пространство в Минске, служащее центральным узлом как для местных жителей, так и для гостей города. Окруженная значительными зданиями, она часто становится местом проведения культурных мероприятий и общественных собраний, отражая яркую жизнь города. Площадь особенно известна своей впечатляющей архитектурой и близлежащим Домом Правительства, что добавляет ей исторического и политического значения. Октябрьская площадь расположена в самом сердце Минска, Беларусь. Он граничит с Домом правительства и Белорусским государственным цирком.</p>
+<p class="prose">Площадь Октября была основана в начале 20 века и на протяжении своей истории претерпела различные трансформации. Изначально названная в честь Октябрьской революции, она стала местом проведения множества значительных событий, включая празднования и протесты, особенно в конце 20 века. Площадь имеет значительное политическое значение как место для общественных демонстраций и собраний, особенно в периоды политической нестабильности. Культурно она является центром общественных мероприятий и празднований, олицетворяя дух Минска и его жителей. Архитектура и планировка площади отражают историческую эволюцию города и являются неотъемлемой частью его городской идентичности.</p></div>
+</section>
+<section class="place" id="minsk_island_tears">
+<div class="place-lead">
+<h3>Остров слез</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/minsk_island_tears.jpg" alt="Остров слез" width="1280" height="857" style="height: 223px; max-height: 223px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/minsk_island_tears_b.jpg" alt="Остров слез — вид 2" width="330" height="247" style="height: 223px; max-height: 223px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Остров слез — это трогательный мемориал, расположенный в сердце Минска, посвященный белорусским солдатам, которые погибли в Афганской войне. Окруженный рекой Свислочь, этот памятник включает в себя впечатляющую скульптуру скорбящих матерей и предлагает спокойное пространство для размышлений и памяти. Посетители могут исследовать эмоциональную глубину этого памятника, наслаждаясь живописными видами реки и города. Памятник был открыт в 1996 году. Он увековечивает память белорусских солдат, погибших в Советско-афганской войне. На сайте расположена скульптура скорбящих матерей, символизирующая утрату и память.</p>
+<p class="prose">Остров слез был основан в 1996 году в честь белорусских солдат, погибших во время Советско-афганской войны с 1979 по 1989 год. Мемориал был спроектирован архитектором Андреем Михайловым и включает в себя уникальную скульптуру, созданную художником Алесеем Соколовым. С тех пор это место стало значимым для проведения памятных мероприятий и собраний. Политически, Остров Слез служит напоминанием о жертвах, принесенных белорусскими солдатами во время спорного конфликта, отражая сложности национальной идентичности и памяти в Беларуси. Культурно, он стал местом для скорби и памяти, резонируя с коллективной печалью семей и нации. Мемориал также является центром обсуждений о войне, мире и влиянии конфликта на общество.</p></div>
+</section>
+<section class="place" id="minsk_chelyuskinites">
+<div class="place-lead">
+<h3>Парк Челюскинцев</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/minsk_chelyuskinites.jpg" alt="Парк Челюскинцев" width="1280" height="956" style="height: 194px; max-height: 194px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/minsk_chelyuskinites_b.jpg" alt="Парк Челюскинцев — вид 2" width="330" height="194" style="height: 194px; max-height: 194px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Парк Челюскинцев — это спокойное зеленое пространство в Минске, идеально подходящее для неспешных прогулок и семейных выездов. С его живописными пейзажами, игровыми площадками и зонами для отдыха, он служит ярким центром как для местных жителей, так и для туристов. Парк особенно популярен в теплые месяцы, предлагая мирное убежище от городской суеты. Основан в 1957 году. Названо в честь челюскинцев, советских исследователей. Включает игровые площадки, пешеходные дорожки и рекреационные зоны.</p>
+<p class="prose">Парк Челюскинцев был основан в 1957 году и назван в честь челюскинцев, группы советских исследователей, которые совершили значительные арктические экспедиции. Парк претерпел различные renovations на протяжении лет, что повысило его привлекательность и доступность для публики. Культурно парк Челюскинцев играет важную роль в повседневной жизни жителей Минска, служа местом для общественных мероприятий, фестивалей и рекреационных активностей. Дизайн и планировка парка отражают акцент советской эпохи на общественных пространствах, способствующих социальному взаимодействию и отдыху.</p></div>
+</section>
+<section class="place" id="minsk_drozdy">
+<div class="place-lead">
+<h3>Резервуар Дрозды</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/minsk_drozdy.jpg" alt="Резервуар Дрозды" width="1280" height="1025" style="height: 247px; max-height: 247px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/minsk_drozdy_b.jpg" alt="Резервуар Дрозды — вид 2" width="330" height="247" style="height: 247px; max-height: 247px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Водохранилище Дрозды — живописное место, расположенное на окраине Минска, предлагающее потрясающие виды и спокойную атмосферу. Эта популярная рекреационная зона идеально подходит для активного отдыха, такого как прогулки, велоспорт и рыбалка, что делает её любимым местом как для местных жителей, так и для туристов. Окружающая природа и спокойные воды создают идеальное убежище от суеты города. Водохранилище было построено в 1980-х годах в рамках более широкой стратегии управления водными ресурсами. Он охватывает площадь примерно 1,5 квадратных километра.</p>
+<p class="prose">Водохранилище Дрозды было построено в конце 20 века, в первую очередь для контроля наводнений и в качестве источника водоснабжения для города Минска. С течением времени оно превратилось в рекреационную зону, привлекая жителей и туристов своими живописными берегами. Хотя Дроздовый водоем в первую очередь является рекреационным объектом, он имеет культурное значение для жителей Минска, служа местом встречи для семей и друзей. Он отражает приверженность города сохранению зеленых зон и продвижению активного отдыха, что способствует качеству жизни в городской среде.</p></div>
+</section>
+<section class="place" id="minsk_st_elizabeth">
+<div class="place-lead">
+<h3>Сестринский монастырь Святой Елизаветы</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res"><img src="../images/minsk_st_elizabeth.jpg" alt="Сестринский монастырь Святой Елизаветы" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/minsk_st_elizabeth_b.jpg" alt="Сестринский монастырь Святой Елизаветы — вид 2" width="330" height="257" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Сестринский монастырь Святой Елизаветы, расположенный в сердце Минска, является спокойным оазисом, известным своей потрясающей архитектурой и тихими садами. Основанный в начале 20 века, монастырь служит духовным центром и местом убежища, привлекая посетителей, ищущих мир и размышления. Его красивые территории и яркая общественная жизнь делают его уникальным местом как для паломников, так и для туристов. Основан в 1910 году великой княгиней Елизаветой Фёдоровной. Служит духовным и благотворительным центром. Особенности включают красивые сады и традиционную православную архитектуру.</p>
+<p class="prose">Монастырь Святой Елизаветы был основан в 1910 году великой княгиней Елизаветой Фёдоровной, членом российской императорской семьи. Монастырь был построен как место для ухода за больными и бедными, отражая благотворительную миссию своего основателя. На протяжении многих лет он претерпел различные преобразования, особенно в периоды политических потрясений, однако остался значимой религиозной институцией в Минске. Монастырь имеет культурное значение как центр православного христианства в Беларуси, олицетворяя богатое религиозное наследие региона. Он играет важную роль в повседневной жизни многих местных жителей, предлагая духовное руководство и поддержку сообщества. Монастырь также проводит различные религиозные церемонии и мероприятия, способствуя сохранению традиций и укреплению чувства единства среди верующих.</p></div>
+</section>
+<section class="place" id="minsk_trinity_hill">
+<div class="place-lead">
+<h3>Тринити-Хилл</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/minsk_trinity_hill.jpg" alt="Тринити-Хилл" width="1280" height="627" style="height: 163px; max-height: 163px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/minsk_trinity_hill_b.jpg" alt="Тринити-Хилл — вид 2" width="330" height="273" style="height: 163px; max-height: 163px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Троицкий холм — живописный район в Минске, известный своими очаровательными мощеными улицами и яркой атмосферой. Эта историческая местность характеризуется хорошо сохранившейся архитектурой и предлагает посетителям возможность заглянуть в прошлое города, наряду с современными кафе и магазинами. Прогулка по Троицкому холму раскрывает богатую культурную палитру Минска, что делает его обязательным местом для посещения для всех, кто исследует город. Троицкий холм — один из старейших районов Минска, основанный в XI веке. В этом районе расположено несколько исторических достопримечательностей, включая Собор Святого Духа и бывшие купеческие дома.</p>
+<p class="prose">Троицкий холм восходит к XI веку и является одной из старейших частей Минска. Он имел историческое значение как центр торговли и коммерции благодаря своему стратегически удобному расположению вдоль реки Свислочь. Эта местность стала свидетелем различных ключевых событий в белорусской истории, включая создание Великого княжества Литовского, а позже — Речи Посполитой. Культурно Троицкий холм является ярким центром, который отражает наследие Минска через свою архитектуру и местные традиции. В этом районе расположено несколько примечательных достопримечательностей, включая Собор Святого Духа, который демонстрирует религиозную и культурную историю региона. Троицкий холм остается неотъемлемой частью повседневной жизни в Минске, где местные жители и туристы собираются, чтобы насладиться его уникальным сочетанием истории и современности.</p></div>
+</section>
+<section class="place" id="minsk_kastrycnickaja">
+<div class="place-lead">
+<h3>Улица Октября</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/minsk_kastrycnickaja.jpg" alt="Улица Октября" width="1280" height="853" style="height: 220px; max-height: 220px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/minsk_kastrycnickaja_b.jpg" alt="Улица Октября — вид 2" width="330" height="220" style="height: 220px; max-height: 220px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Улица Октября — одна из центральных магистралей Минска, известная своей яркой атмосферой и исторической архитектурой. Улица усеяна магазинами, кафе и культурными заведениями, она служит центром как для местных жителей, так и для туристов. Улица является популярным местом для неспешных прогулок и предлагает возможность заглянуть в городскую жизнь. Улица была названа в честь Октябрьской революции.</p>
+<p class="prose">Улица Октября имеет свои корни в начале 20 века, отражая архитектурные стили той эпохи. Она претерпела различные трансформации, особенно в советский период, когда стала центром городского развития в Минске. Улица была названа в честь Октябрьской революции, символизируя её историческую связь с важными политическими событиями. Культурно Октябрьская улица играет важную роль в повседневной жизни Минска, служа местом сбора для социальных мероприятий и событий. Здесь расположено несколько культурных учреждений, и улица часто ассоциируется с художественным самовыражением, что делает её яркой частью наследия города. Значимость улицы дополнительно подчеркивается её ролью в местных традициях и праздниках.</p></div>
+</section>
+<section class="place" id="minsk_all_saints">
+<div class="place-lead">
+<h3>Церковь Всех Святых</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<figure class="place-fig place-fig--hi-res"><img src="../images/minsk_all_saints.jpg" alt="Церковь Всех Святых" width="1280" height="961"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Церковь Всех Святых в Минске является ярким примером современной церковной архитектуры, известной своим уникальным дизайном и яркими витражами. Эта церковь служит духовным центром для местного сообщества и является популярным местом как для богослужений, так и для культурных мероприятий. Посетители могут восхищаться её красивым интерьером и участвовать в различных религиозных мероприятиях в течение года. Освящен в 2009 году. Построен в честь жертв политических репрессий.</p>
+<p class="prose">Церковь Всех Святых была освящена в 2009 году, что делает её одной из новых религиозных построек в Минске. Она была построена в честь памяти жертв политических репрессий в Беларуси, отражая сложный исторический нарратив страны. Культурно Церковь Всех Святых играет важную роль в повседневной жизни многих белорусов, служа местом сбора для общественных мероприятий и религиозных церемоний. Она является символом стойкости и памяти, внося вклад в культурное наследие Минска. Церковь также отражает более широкий религиозный ландшафт Беларуси, где преобладает православное христианство.</p></div>
+</section>
+<section class="place" id="minsk_st_roch">
+<div class="place-lead">
+<h3>Церковь Святого Роха</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res"><img src="../images/minsk_st_roch.jpg" alt="Церковь Святого Роха" width="330" height="440" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/minsk_st_roch_b.jpg" alt="Церковь Святого Роха — вид 2" width="330" height="253" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Церковь Святого Роха, расположенная в сердце Минска, является ярким примером неоготической архитектуры. Известная своими красивыми витражами и спокойной атмосферой, она служит мирным укрытием как для прихожан, так и для посетителей. Церковь является популярным местом для тех, кто хочет ощутить духовное и культурное наследие города. Построено в период с 1905 по 1910 год. Спроектировано в неоготическом стиле архитектором А. В. Ковальчуком.</p>
+<p class="prose">Церковь Святого Роха была построена в начале 20 века, закладка фундамента состоялась в 1905 году, а строительство завершилось в 1910 году. Она была спроектирована архитектором А. В. Ковальчуком и с тех пор претерпела различные ремонты, чтобы сохранить свою архитектурную целостность и адаптироваться к потребностям местного сообщества. Церковь имеет культурное значение как свидетельство архитектурных стилей своего времени и как место для общественных собраний и религиозных церемоний. Она отражает богатое религиозное наследие Минска и продолжает играть важную роль в повседневной жизни его жителей, предоставляя пространство для размышлений и поклонения.</p></div>
+</section>
+<section class="place" id="minsk_sts_peter_paul">
+<div class="place-lead">
+<h3>Церковь святых Петра и Павла</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/minsk_sts_peter_paul.jpg" alt="Церковь святых Петра и Павла" width="1280" height="1055" style="height: 220px; max-height: 220px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/minsk_sts_peter_paul_b.jpg" alt="Церковь святых Петра и Павла — вид 2" width="330" height="220" style="height: 220px; max-height: 220px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Церковь святых Петра и Павла, расположенная в сердце Минска, является ярким примером барочной архитектуры. Эта прекрасная церковь служит духовным центром для местного сообщества и известна своим сложным интерьером и спокойной атмосферой, что делает её обязательным местом для посещения как паломниками, так и туристами. Основан в начале 17 века, завершён в 1705 году. Претерпел значительную реставрацию после Второй мировой войны. Представляет барочный архитектурный стиль.</p>
+<p class="prose">Церковь святых Петра и Павла была основана в начале 17 века, а её строительство завершилось в 1705 году. На протяжении многих лет она подвергалась нескольким реставрациям, особенно после повреждений, полученных во время Второй мировой войны. Церковь сыграла значительную роль в религиозной жизни Минска и продолжает оставаться центром для католической общины. Культурно, Церковь святых Петра и Павла является важной достопримечательностью Минска, отражая богатое архитектурное наследие города. Это место регулярного богослужения и общественных встреч, что вносит вклад в повседневную жизнь ее прихожан. Церковь также символизирует историческое присутствие католицизма в Беларуси, которое сформировало культурный ландшафт региона.</p></div>
 </section>
 </body>
 </html>

@@ -13,7 +13,7 @@ body { font-family: 'Rubik', sans-serif; margin: 2rem;
 .otium-logo { font-family: 'David Libre', serif; font-size: 2.15rem;
   font-weight: 600; letter-spacing: 0.18em; margin-bottom: 0.85rem; }
 .otiump { margin: 0.42rem 0; line-height: 1.42; text-align: justify;
-  max-width: 38rem; font-size: 0.95rem; }
+  font-size: 0.95rem; }
 .guide-title { page-break-after: auto; margin-bottom: 0.55rem;
   page-break-inside: avoid; }
 .historical-reference { margin: 0.75rem 0 1.15rem;
@@ -63,22 +63,103 @@ ol.trip-stops a:hover { text-decoration: underline; }
 .heraldry-univ-caption { font-size: 0.52rem; line-height: 1.18;
   margin: 0.12rem 0 0; padding: 0 0.06rem; color: #252525;
   text-align: center; font-weight: 500; }
-.heraldry-motto { text-align: center; max-width: 18rem; margin: 0.18rem auto;
+.heraldry-motto { text-align: center; margin: 0.18rem auto;
   width: 100%; }
 .motto-line { font-family: 'David Libre', serif; font-size: 1rem;
   margin: 0; color: #333; line-height: 1.35; }
 .guide-title h1.guide-title-main { font-family: 'David Libre', serif;
   font-size: 2.35rem; margin-bottom: 0.5rem; font-weight: 600; }
 .lead { color: #444; font-size: 1.05rem; }
-.guide-toc { margin: 0.85rem 0 1.15rem; page-break-inside: avoid; }
-.guide-toc h2 { font-family: 'David Libre', serif; font-size: 1.28rem;
-  font-weight: 600; margin: 0.4rem 0 0.55rem; }
+
+.guide-toc { page-break-before: always; break-before: page;
+  page-break-after: always; break-after: page;
+  margin: 0; padding: 0.2rem 0 0.45rem; page-break-inside: auto; }
+.guide-toc h2 { font-family: 'David Libre', serif;
+  font-size: 1.28rem; font-weight: 600; margin: 0.4rem 0 0.55rem; }
 .guide-toc ol { margin: 0.35rem 0 0.65rem 1.25rem; padding: 0;
   columns: 2; column-gap: 1.5rem; }
 .guide-toc li { margin: 0.18rem 0; line-height: 1.35;
   font-size: 0.88rem; break-inside: avoid; }
-.guide-toc a { color: #1a5276; text-decoration: none; }
+.guide-toc a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.guide-toc a:hover { color: #0d3d56; }
 .guide-toc li.toc-item--sub { font-size: 0.82rem; margin-left: 0.35rem; }
+.toc-back { font-size: 0.78rem; margin: 0 0 0.35rem; text-align: right; }
+.toc-back a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.toc-back a:hover { color: #0d3d56; }
+.place, .historical-reference, .guide-primer, .guide-trip-plans {
+  scroll-margin-top: 1.25rem; }
+.historical-reference h2, .guide-primer h2, .guide-trip-plans h2,
+.chapter-head h2, .place-lead h3 { position: relative; }
+.guide-toc + .place, .guide-toc + .chapter-head {
+  page-break-before: avoid; break-before: avoid-page; }
+.place-lead { page-break-inside: avoid; break-inside: avoid-page;
+  page-break-after: auto; }
+.place-lead > h3 { page-break-after: avoid; break-after: avoid-page; }
+.place-lead > .place-meta { page-break-after: avoid; break-after: avoid-page; }
+
+.place-fig { page-break-inside: avoid; break-inside: avoid-page;
+  margin: 0.5rem 0 1rem; }
+.place-fig img {
+  page-break-inside: avoid; break-inside: avoid-page;
+  max-height: 48vh; width: auto; max-width: 100%;
+  object-fit: contain; margin-left: auto; margin-right: auto; }
+.place-fig--hi-res img { max-height: 52vh; }
+.place-fig--lo-res img { max-height: 30vh; }
+.place-pdf-fig-row {
+  display: flex; flex-direction: row; flex-wrap: wrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.45rem 0.55rem; margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row .place-fig {
+  flex: 1 1 30%; margin: 0; min-width: 26%; max-width: 100%; }
+.place-pdf-fig-row .place-fig img {
+  width: auto; max-width: 100%; height: auto; max-height: 44vh;
+  object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--pair {
+  flex-wrap: nowrap; justify-content: space-between;
+  align-items: flex-end; gap: 0.5rem 0.65rem; }
+.place-pdf-fig-row--pair .place-fig {
+  flex: 1 1 47%; min-width: 0; max-width: 50%;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--pair .place-fig img {
+  max-height: 44vh; object-fit: contain; }
+.place-pdf-fig-row--pair .place-fig--hi-res img { max-height: 52vh; }
+.place-pdf-fig-row--pair .place-fig--lo-res img { max-height: 26vh; }
+.place-pdf-fig-row--pair .place-fig--row-sized img,
+.place-pdf-fig-row--triple .place-fig--row-sized img,
+.place-pdf-fig-row--many .place-fig--row-sized img {
+  width: auto; max-width: 100%; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row .place-fig--row-sized.place-fig--hi-res img,
+.place-pdf-fig-row .place-fig--row-sized.place-fig--lo-res img {
+  max-height: unset; }
+.place-pdf-fig-rows-stack {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple {
+  display: flex; flex-direction: row; flex-wrap: nowrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.4rem 0.48rem; margin: 0;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--triple .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--triple .place-fig--hi-res img { max-height: 42vh; }
+.place-pdf-fig-row--triple .place-fig--lo-res img { max-height: 18vh; }
+.place-pdf-fig-row--many {
+  flex-wrap: nowrap; justify-content: center; align-items: flex-end;
+  gap: 0.35rem 0.42rem; }
+.place-pdf-fig-row--many .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--many .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+
+
 .place { margin-bottom: 2.2rem; page-break-inside: auto; }
 h3 { font-family: 'David Libre', serif; font-size: 1.22rem; margin: 1.2rem 0 0.35rem;
   font-weight: 600; }
@@ -90,7 +171,6 @@ h4 { font-family: 'David Libre', serif; font-size: 0.95rem; text-transform: uppe
   color: #555; font-size: 0.95rem; margin: 0 0 0.5rem; font-style: italic; }
 .place-meta { font-size: 0.92rem; color: #353535; margin: 0 0 0.75rem;
   line-height: 1.4; }
-.place-fig { margin: 0.5rem 0 1rem; }
 img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
 .prose, .place-desc p { margin: 0.45rem 0; line-height: 1.5;
   text-align: justify; }
@@ -111,11 +191,14 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <figure class="heraldry-fig heraldry-coat-book" title="City emblem"><img src="../images/guide_coat_of_arms.svg" alt="City emblem"/></figure>
 <figure class="heraldry-fig heraldry-coat-book" title="Flag"><img src="../images/guide_flag.svg" alt="Flag"/></figure>
 </div></div><h1 class="guide-title-main">Jerusalem</h1><p class="lead">Guide. Places in this edition: 33.</p></header>
+<nav class="guide-toc" id="guide-toc" aria-label="Contents"><h2>Contents</h2><ol><li class="toc-item"><a href="#guide-historical">Historical overview</a></li><li class="toc-item"><a href="#guide-trips">Trip ideas</a></li><li class="toc-item"><a href="#jerusalem_church_of_all_nations_gethsemane">Church of All Nations (Gethsemane)</a></li><li class="toc-item"><a href="#jerusalem_church_st_anne_jerusalem">Church of St Anne</a></li><li class="toc-item"><a href="#jerusalem_church_st_peter_in_gallicantu">Church of St Peter in Gallicantu</a></li><li class="toc-item"><a href="#jerusalem_church_flagellation">Church of the Flagellation</a></li><li class="toc-item"><a href="#jerusalem_church_holy_sepulchre">Church of the Holy Sepulchre</a></li><li class="toc-item"><a href="#jerusalem_church_pater_noster">Church of the Pater Noster</a></li><li class="toc-item"><a href="#jerusalem_church_visitation">Church of the Visitation</a></li><li class="toc-item"><a href="#jerusalem_damascus_gate">Damascus Gate</a></li><li class="toc-item"><a href="#jerusalem_dome_of_the_rock">Dome of the Rock</a></li><li class="toc-item"><a href="#jerusalem_dominus_flevit">Dominus Flevit Church</a></li><li class="toc-item"><a href="#jerusalem_dormition_abbey_jerusalem">Dormition Abbey</a></li><li class="toc-item"><a href="#jerusalem_ein_kerem_village">Ein Kerem</a></li><li class="toc-item"><a href="#jerusalem_garden_tomb">Garden Tomb</a></li><li class="toc-item"><a href="#jerusalem_hamazreka">Hamazreka</a></li><li class="toc-item"><a href="#jerusalem_hurva_synagogue">Hurva Synagogue</a></li><li class="toc-item"><a href="#jerusalem_jaffa_gate">Jaffa Gate</a></li><li class="toc-item"><a href="#jerusalem_israel_museum">Jerusalem</a></li><li class="toc-item"><a href="#jerusalem_international_ymca">Jerusalem International YMCA</a></li><li class="toc-item"><a href="#jerusalem_knesset_jerusalem">Knesset (Israeli parliament)</a></li><li class="toc-item"><a href="#jerusalem_lutheran_church_of_the_redeemer_jerusalem">Lutheran Church of the Redeemer</a></li><li class="toc-item"><a href="#jerusalem_mahane_yehuda_market">Mahane Yehuda Market</a></li><li class="toc-item"><a href="#jerusalem_montefiore_windmill">Moses Montefiore Windmill</a></li><li class="toc-item"><a href="#jerusalem_mount_of_olives_view">Mount of Olives panorama</a></li><li class="toc-item"><a href="#jerusalem_mount_zion">Mount Zion</a></li><li class="toc-item"><a href="#jerusalem_old_city_ramparts_walk">Old City Ramparts Walk</a></li><li class="toc-item"><a href="#jerusalem_palace33">Palace33</a></li><li class="toc-item"><a href="#jerusalem_pool_bethesda">Pool of Bethesda</a></li><li class="toc-item"><a href="#jerusalem_shrine_of_the_book">Shrine of the Book</a></li><li class="toc-item"><a href="#jerusalem_st_george_s_cathedral">St George&#x27;s Cathedral</a></li><li class="toc-item"><a href="#jerusalem_tower_of_david">Tower of David (Jerusalem Citadel)</a></li><li class="toc-item"><a href="#jerusalem_via_dolorosa">Via Dolorosa</a></li><li class="toc-item"><a href="#jerusalem_western_wall">Western Wall</a></li><li class="toc-item"><a href="#jerusalem_yad_vashem">Yad Vashem</a></li></ol></nav>
 <section class="historical-reference" id="guide-historical" aria-label="Historical overview"><h2>Historical overview</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 <p class="prose">Jerusalem stands on the Judaean hills as a holy city for Judaism, Christianity, and Islam and as Israel’s seat of government.</p>
 <p class="prose">Successive kingdoms, empires, and communities inscribed their architecture and rites into its ridges. The walled Old City and newer quarters together form a compact arena where archaeology, pilgrimage, and daily life continually intersect.</p>
 <p class="prose">Partition between 1948 and 1967 and later municipal unification complicated its political map. Contemporary Jerusalem mixes research campuses, tech firms, and diverse religious communities while remaining a tense but indispensable meeting ground.</p></section>
 <section class="guide-trip-plans" id="guide-trips" aria-label="Trip ideas"><h2>Trip ideas</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 <article class="trip-plan" id="trip-1d"><h3>One day</h3>
 <p class="prose">A compact loop linking the strongest cards in this guide, ordered to minimise backtracking on foot.</p>
 <ol class="trip-stops"><li><a href="#jerusalem_dominus_flevit">Dominus Flevit Church</a> (~75min)</li>
@@ -142,264 +225,449 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <p class="prose">Day 3 — remaining highlights nearby.</p>
 <ol class="trip-stops"><li><a href="#jerusalem_hurva_synagogue">Hurva Synagogue</a> (~75min)</li>
 <li><a href="#jerusalem_international_ymca">Jerusalem International YMCA</a> (~75min)</li></ol></article></section>
-<nav class="guide-toc" aria-label="Contents"><h2>Contents</h2><ol><li class="toc-item"><a href="#guide-historical">Historical overview</a></li><li class="toc-item"><a href="#guide-trips">Trip ideas</a></li><li class="toc-item"><a href="#jerusalem_church_of_all_nations_gethsemane">Church of All Nations (Gethsemane)</a></li><li class="toc-item"><a href="#jerusalem_church_st_anne_jerusalem">Church of St Anne</a></li><li class="toc-item"><a href="#jerusalem_church_st_peter_in_gallicantu">Church of St Peter in Gallicantu</a></li><li class="toc-item"><a href="#jerusalem_church_flagellation">Church of the Flagellation</a></li><li class="toc-item"><a href="#jerusalem_church_holy_sepulchre">Church of the Holy Sepulchre</a></li><li class="toc-item"><a href="#jerusalem_church_pater_noster">Church of the Pater Noster</a></li><li class="toc-item"><a href="#jerusalem_church_visitation">Church of the Visitation</a></li><li class="toc-item"><a href="#jerusalem_damascus_gate">Damascus Gate</a></li><li class="toc-item"><a href="#jerusalem_dome_of_the_rock">Dome of the Rock</a></li><li class="toc-item"><a href="#jerusalem_dominus_flevit">Dominus Flevit Church</a></li><li class="toc-item"><a href="#jerusalem_dormition_abbey_jerusalem">Dormition Abbey</a></li><li class="toc-item"><a href="#jerusalem_ein_kerem_village">Ein Kerem</a></li><li class="toc-item"><a href="#jerusalem_garden_tomb">Garden Tomb</a></li><li class="toc-item"><a href="#jerusalem_pdfband_3_4ca02d45">Hamazreka</a></li><li class="toc-item"><a href="#jerusalem_hurva_synagogue">Hurva Synagogue</a></li><li class="toc-item"><a href="#jerusalem_israel_museum">Jerusalem</a></li><li class="toc-item"><a href="#jerusalem_jaffa_gate">Jaffa Gate</a></li><li class="toc-item"><a href="#jerusalem_international_ymca">Jerusalem International YMCA</a></li><li class="toc-item"><a href="#jerusalem_knesset_jerusalem">Knesset (Israeli parliament)</a></li><li class="toc-item"><a href="#jerusalem_lutheran_church_of_the_redeemer_jerusalem">Lutheran Church of the Redeemer</a></li><li class="toc-item"><a href="#jerusalem_mahane_yehuda_market">Mahane Yehuda Market</a></li><li class="toc-item"><a href="#jerusalem_montefiore_windmill">Moses Montefiore Windmill</a></li><li class="toc-item"><a href="#jerusalem_mount_of_olives_view">Mount of Olives panorama</a></li><li class="toc-item"><a href="#jerusalem_mount_zion">Mount Zion</a></li><li class="toc-item"><a href="#jerusalem_old_city_ramparts_walk">Old City Ramparts Walk</a></li><li class="toc-item"><a href="#jerusalem_pdfband_9_4d56a8e1">Palace33</a></li><li class="toc-item"><a href="#jerusalem_pool_bethesda">Pool of Bethesda</a></li><li class="toc-item"><a href="#jerusalem_shrine_of_the_book">Shrine of the Book</a></li><li class="toc-item"><a href="#jerusalem_pdfband_0_3d212d2d">St George&#x27;s Cathedral</a></li><li class="toc-item"><a href="#jerusalem_tower_of_david">Tower of David (Jerusalem Citadel)</a></li><li class="toc-item"><a href="#jerusalem_via_dolorosa">Via Dolorosa</a></li><li class="toc-item"><a href="#jerusalem_western_wall">Western Wall</a></li><li class="toc-item"><a href="#jerusalem_yad_vashem">Yad Vashem</a></li></ol></nav>
 <section class="place" id="jerusalem_church_of_all_nations_gethsemane">
+<div class="place-lead">
 <h3>Church of All Nations (Gethsemane)</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Mount of Olives, beside the Garden of Gethsemane | Style: Romanesque revival basilica; mosaics facing the Rock of Agony | Period: 1924 (Mendelssohn)</p>
-<figure class="place-fig"><img src="../images/jerusalem_church_of_all_nations_gethsemane.jpg" alt="Church of All Nations (Gethsemane)"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/jerusalem_church_of_all_nations_gethsemane.jpg" alt="Church of All Nations (Gethsemane)" width="1280" height="922" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_church_of_all_nations_gethsemane_b.jpg" alt="Church of All Nations (Gethsemane) — view 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Pilgrimage basilica over the shelf of bedrock where tradition locates Christ’s agony; the interior’s violet windows keep the nave dim and devotional. Often called the Basilica of the Agony alongside its formal name. Olive trees in the adjoining garden are venerated though their age is debated by botanists.</p>
 <p class="prose">A succession of shrines occupied the site before the present building, sponsored by several Catholic communities, framed Gethsemane for mass pilgrimage in the 20th century. A key Christian station on the Mount of Olives—paired with panoramic viewpoints and Jewish cemetery terraces above the Kidron.</p></div>
 </section>
 <section class="place" id="jerusalem_church_st_anne_jerusalem">
+<div class="place-lead">
 <h3>Church of St Anne</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Muslim Quarter near Lions’ Gate (St Stephen’s Gate) | Style: Romanesque; remarkable acoustics in the triple-vaulted nave | Period: Crusader Romanesque (12th c.)</p>
-<figure class="place-fig"><img src="../images/jerusalem_church_st_anne_jerusalem.jpg" alt="Church of St Anne"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/jerusalem_church_st_anne_jerusalem.jpg" alt="Church of St Anne" width="1280" height="900" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_church_st_anne_jerusalem_b.jpg" alt="Church of St Anne — view 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Best-preserved Crusader church in the city, traditionally marking the birthplace of Mary; its stone volumes reward slow listening when pilgrims sing. The nearby Pools of Bethesda archaeological compound is usually visited on the same ticket. Missionaries of Africa (White Fathers) administer the church.</p>
 <p class="prose">Saladin converted the building to an Islamic school; restoration recovered the crusader fabric for Christian liturgy while respecting the precinct’s layered past. For historians it is a textbook Romanesque survivor; for pilgrims it is Marian terrain at the edge of the Temple platform’s archaeology.</p></div>
 </section>
 <section class="place" id="jerusalem_church_st_peter_in_gallicantu">
+<div class="place-lead">
 <h3>Church of St Peter in Gallicantu</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Eastern slope of Mount Zion | Style: 20th-c. basilica; excavated first-century quarries and cisterns | Period: 1931 church; ancient crypt below</p>
-<figure class="place-fig"><img src="../images/jerusalem_church_st_peter_in_gallicantu.jpg" alt="Church of St Peter in Gallicantu"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/jerusalem_church_st_peter_in_gallicantu.jpg" alt="Church of St Peter in Gallicantu" width="1280" height="859" style="height: 310px; max-height: 310px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_church_st_peter_in_gallicantu_b.jpg" alt="Church of St Peter in Gallicantu — view 2" width="330" height="247" style="height: 310px; max-height: 310px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Roman Catholic complex commemorating Peter’s denial; steep staircases link upper church, chapels, and subterranean halls associated with imprisonment. The crowing rooster motif appears in mosaics and signage (before the cock crow). Scholars debate whether the crypt is the high priest’s prison; the architecture makes the debate tangible.</p>
 <p class="prose">Byzantine and crusader chapels preceded the contemporary basilica; excavations exposed Herodian masonry cut into the hillside. A southern counterweight to the Holy Sepulchre narrative—memory of fault, repentance, and dawn.</p></div>
 </section>
 <section class="place" id="jerusalem_church_flagellation">
+<div class="place-lead">
 <h3>Church of the Flagellation</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/jerusalem_church_flagellation.jpg" alt="Church of the Flagellation"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_church_flagellation.jpg" alt="Church of the Flagellation" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_church_flagellation_b.jpg" alt="Church of the Flagellation — view 2" width="330" height="221" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Church of the Flagellation is a significant religious site located in the heart of Jerusalem, commemorating the traditional location where Jesus was condemned to be crucified. This church is part of the Via Dolorosa, the path believed to have been taken by Jesus on his way to Calvary. Visitors can admire its beautiful architecture and the intricate artwork that depicts the passion of Christ. The church was built in 1863 by the Franciscans. It is located along the Via Dolorosa, the path Jesus is believed to have taken to his crucifixion.</p>
 <p class="prose">The Church of the Flagellation was built in the 19th century, specifically in 1863, by the Franciscans. It stands on the site believed to be where Jesus was scourged and condemned before his crucifixion. The church was constructed as part of the Franciscans&#x27; effort to establish and maintain Christian holy sites in Jerusalem. The Church of the Flagellation holds deep religious significance for Christians, as it marks a pivotal moment in the Passion narrative. It attracts pilgrims and tourists alike, contributing to the cultural heritage of Jerusalem. The church is also part of the broader narrative of the Via Dolorosa, which is a key pilgrimage route for many Christians.</p></div>
 </section>
 <section class="place" id="jerusalem_church_holy_sepulchre">
+<div class="place-lead">
 <h3>Church of the Holy Sepulchre</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Old City, Christian Quarter | Style: Basilica; Byzantine, Romanesque, Baroque layers | Period: 4th c. foundations; Crusader basilica 12th c.; successive rebuilds</p>
-<figure class="place-fig"><img src="../images/jerusalem_church_holy_sepulchre.jpg" alt="Church of the Holy Sepulchre"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/jerusalem_church_holy_sepulchre.jpg" alt="Church of the Holy Sepulchre" width="1280" height="1280" style="height: 301px; max-height: 301px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_church_holy_sepulchre_b.jpg" alt="Church of the Holy Sepulchre — view 2" width="330" height="215" style="height: 301px; max-height: 301px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Major pilgrimage church enclosing sites tradition associates with the crucifixion and resurrection. Several Christian communities share custodial arrangements under the Status Quo. The rotunda covers the edicule over the tomb; scheduling can affect access inside. The Immovable Ladder on a façade has been a symbol of intercommunal restraint since the 18th century.</p>
 <p class="prose">Constantine’s era complex was replaced and enlarged over centuries; the Crusaders left a lasting footprint on the Latin-rite spaces visitors see today. For many Christians worldwide, this is the symbolic heart of Jerusalem’s sacred topography.</p></div>
 </section>
 <section class="place" id="jerusalem_church_pater_noster">
+<div class="place-lead">
 <h3>Church of the Pater Noster</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/jerusalem_church_pater_noster.jpg" alt="Church of the Pater Noster"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_church_pater_noster.jpg" alt="Church of the Pater Noster" width="330" height="183" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_church_pater_noster_b.jpg" alt="Church of the Pater Noster — view 2" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Church of the Pater Noster, located on the Mount of Olives in Jerusalem, is a significant site for Christian pilgrims. It is believed to be the place where Jesus taught his disciples the Lord&#x27;s Prayer. The church features beautiful mosaics and offers stunning views of the Old City. The church is built on the traditional site where Jesus is believed to have taught the Lord&#x27;s Prayer. It features mosaics of the Lord&#x27;s Prayer in over 140 languages.</p>
 <p class="prose">The Church of the Pater Noster was originally built in the 4th century and has undergone several reconstructions, with the current structure completed in the 20th century. It is situated on a site that has long been associated with the teachings of Jesus, particularly the Lord&#x27;s Prayer. Culturally, the Church of the Pater Noster is an important pilgrimage site, attracting visitors from around the world who seek to connect with the spiritual heritage of Christianity. The church&#x27;s mosaics, depicting the Lord&#x27;s Prayer in various languages, reflect the universal nature of this prayer and its significance in Christian tradition.</p></div>
 </section>
 <section class="place" id="jerusalem_church_visitation">
+<div class="place-lead">
 <h3>Church of the Visitation</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/jerusalem_church_visitation.jpg" alt="Church of the Visitation"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_church_visitation.jpg" alt="Church of the Visitation" width="330" height="491" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_church_visitation_b.jpg" alt="Church of the Visitation — view 2" width="330" height="264" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Church of the Visitation, located in the picturesque hills of Ein Karem, is a significant site commemorating the visit of the Virgin Mary to her cousin Elizabeth. This beautiful church is renowned for its stunning architecture and vibrant mosaics, making it a must-visit for those exploring the spiritual and historical landscape of Jerusalem. The church is located in Ein Karem, a neighborhood in Jerusalem. It is dedicated to the biblical event of the Visitation, where Mary visits Elizabeth.</p>
 <p class="prose">The Church of the Visitation was built in 1955 on the site traditionally believed to be where Mary visited Elizabeth, as described in the Gospel of Luke. The church is constructed over earlier Byzantine and Crusader churches, reflecting the long-standing religious significance of the location. Culturally, the Church of the Visitation is an important pilgrimage site for Christians, particularly during the Feast of the Visitation. The church&#x27;s artwork and architecture contribute to Jerusalem&#x27;s rich heritage, and it serves as a place of worship and reflection for visitors from around the world.</p></div>
 </section>
 <section class="place" id="jerusalem_damascus_gate">
+<div class="place-lead">
 <h3>Damascus Gate</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/jerusalem_damascus_gate.jpg" alt="Damascus Gate"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_damascus_gate.jpg" alt="Damascus Gate" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_damascus_gate_b.jpg" alt="Damascus Gate — view 2" width="330" height="216" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Damascus Gate, one of the most iconic entrances to the Old City of Jerusalem, is renowned for its stunning architecture and rich history. This monumental gateway, with its striking stone facade and intricate details, serves as a bustling hub of activity, connecting various neighborhoods and cultures. Visitors can explore the vibrant market nearby and enjoy the lively atmosphere that surrounds this historic landmark. Damascus Gate is one of the eight gates of the Old City of Jerusalem. The gate is characterized by its large, pointed arch and decorative stonework.</p>
 <p class="prose">The Damascus Gate dates back to the 16th century and was built during the Ottoman period. It is situated along the ancient road leading to Damascus, which has historically made it a significant point of entry into Jerusalem. The gate has witnessed numerous key events throughout history, including military campaigns and pilgrimages. Politically, the Damascus Gate has been a focal point during various conflicts and protests, symbolizing the complex dynamics of power and territory in Jerusalem. Culturally, it is a vital part of the city&#x27;s heritage, showcasing traditional architecture and serving as a gateway to the diverse communities within the Old City. The area around the gate is filled with shops and cafes, reflecting the daily life and traditions of Jerusalem&#x27;s residents.</p></div>
 </section>
 <section class="place" id="jerusalem_dome_of_the_rock">
+<div class="place-lead">
 <h3>Dome of the Rock</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Temple Mount / Haram al-Sharif (access rules vary) | Style: Umayyad octagon; Ottoman tile revetment (16th c.) | Period: Dedicated 691 CE (Umayyad); dome rebuilt 1022–23</p>
-<figure class="place-fig"><img src="../images/jerusalem_dome_of_the_rock.jpg" alt="Dome of the Rock"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/jerusalem_dome_of_the_rock.jpg" alt="Dome of the Rock" width="1280" height="850" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_dome_of_the_rock_b.jpg" alt="Dome of the Rock — view 2" width="330" height="465" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Octagonal shrine with a gilt dome, built over the exposed rock at the summit of the Herodian platform. Non-Muslim visitor rules change; modest dress is expected when access is open. Interior Quranic inscription bands are among the earliest monumental examples of Arabic script. The drum and dome profile became an iconic silhouette in Islamic architecture.</p>
 <p class="prose">The Umayyad caliphate raised the structure as a statement of legitimacy in Jerusalem; tile and marble campaigns later reframed its appearance for Ottoman taste. The building anchors the visual and devotional identity of the Haram for Muslims and shapes skylines views across the Old City.</p></div>
 </section>
 <section class="place" id="jerusalem_dominus_flevit">
+<div class="place-lead">
 <h3>Dominus Flevit Church</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/jerusalem_dominus_flevit.jpg" alt="Dominus Flevit Church"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_dominus_flevit.jpg" alt="Dominus Flevit Church" width="330" height="295" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_dominus_flevit_b.jpg" alt="Dominus Flevit Church — view 2" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Dominus Flevit Church, located on the Mount of Olives in Jerusalem, is a striking Roman Catholic church that commemorates the site where Jesus is believed to have wept over the city. Its unique design, resembling a teardrop, offers visitors not only a place of worship but also stunning views of the Old City. The church is a serene spot for reflection and prayer, attracting both pilgrims and tourists alike. The church was completed in 1955. It is located on the Mount of Olives, offering panoramic views of Jerusalem. The architecture of the church is designed to resemble a teardrop.</p>
 <p class="prose">Dominus Flevit Church was built in 1955, designed by the Italian architect Antonio Barluzzi. It stands on the site traditionally believed to be where Jesus lamented the fate of Jerusalem, as referenced in the Gospel of Luke. The church was constructed to replace an earlier chapel that had existed in the area. The church holds significant religious importance as it is a pilgrimage site for Christians who come to reflect on the biblical narrative of Jesus&#x27; sorrow for Jerusalem. Culturally, it is an integral part of the landscape of Jerusalem, contributing to the rich tapestry of the city&#x27;s religious heritage and attracting visitors from around the world.</p></div>
 </section>
 <section class="place" id="jerusalem_dormition_abbey_jerusalem">
+<div class="place-lead">
 <h3>Dormition Abbey</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Mount Zion, Jerusalem | Style: Romanesque Revival abbey church | Period: 1900–1910</p>
-<figure class="place-fig"><img src="../images/jerusalem_dormition_abbey_jerusalem.jpg" alt="Dormition Abbey"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/jerusalem_dormition_abbey_jerusalem.jpg" alt="Dormition Abbey" width="1280" height="961" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_dormition_abbey_jerusalem_b.jpg" alt="Dormition Abbey — view 2" width="330" height="248" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Benedictine abbey crowned by a rotunda where tradition locates Mary’s ‘falling asleep’; crypt statues and the upper church balance monumentality with quiet chant. A solid stone abbey with a rounded dome near the Old City walls; a calm stop near Zion Gate. The community maintains the Latin liturgy while welcoming tourists on a tight schedule. Tiers of old-city roofscape open from the esplanade before you descend to Zion Gate. Associated with traditions of Mary’s Dormition. Interior includes crypt-level devotional spaces.</p>
 <p class="prose">Built on land linked to medieval dormition shrines; damaged in 20th-century unrest and repaired as a symbol of German–Holy See reconciliation efforts. Built as a Benedictine abbey during late Ottoman and early modern Jerusalem transformations. A major Latin pilgrimage axis on Mount Zion alongside Upper Room traditions and Jewish cemeteries on the western hill. A major Mount Zion church stop connecting medieval and modern pilgrimage routes.</p></div>
 </section>
 <section class="place" id="jerusalem_ein_kerem_village">
+<div class="place-lead">
 <h3>Ein Kerem</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Southwest Jerusalem hills | Style: Stone village lanes; hillside terraces; churches | Period: Ancient village core; modern neighborhood growth 20th c.</p>
-<figure class="place-fig"><img src="../images/jerusalem_ein_kerem_village.jpg" alt="Ein Kerem"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/jerusalem_ein_kerem_village.jpg" alt="Ein Kerem" width="1280" height="789" style="height: 284px; max-height: 284px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_ein_kerem_village_b.jpg" alt="Ein Kerem — view 2" width="330" height="328" style="height: 284px; max-height: 284px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Hillside village-neighborhood with quiet lanes, gardens, and church complexes; a slower counterpoint to the Old City density. Often visited for cafés and short scenic walks between viewpoints. Spring and early morning light make the stone textures read well in photos.</p>
 <p class="prose">Long a rural village outside Jerusalem’s walls, Ein Kerem became integrated into the city as western neighborhoods expanded. A reset point: olive terraces, air, and scale after the Old City’s compressed streets.</p></div>
 </section>
 <section class="place" id="jerusalem_garden_tomb">
+<div class="place-lead">
 <h3>Garden Tomb</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/jerusalem_garden_tomb.jpg" alt="Garden Tomb"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_garden_tomb.jpg" alt="Garden Tomb" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_garden_tomb_b.jpg" alt="Garden Tomb — view 2" width="330" height="248" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Garden Tomb is a serene site located just outside the walls of the Old City of Jerusalem, believed by many to be the burial and resurrection site of Jesus Christ. Surrounded by lush gardens, it offers a peaceful atmosphere for reflection and prayer. Visitors can explore the tomb itself and enjoy the beauty of the surrounding landscape. The Garden Tomb is located outside the Old City of Jerusalem. It was discovered in 1867 by General Charles Gordon. The site is maintained by the Garden Tomb Association, a Christian organization.</p>
 <p class="prose">The Garden Tomb was discovered in 1867 by General Charles Gordon, who proposed it as the site of Jesus&#x27; burial. The area has been a place of Christian pilgrimage since its identification, although it is not universally accepted as the authentic burial site, with the Church of the Holy Sepulchre being the more traditional location. The Garden Tomb holds profound religious significance for many Christians who view it as a symbol of Jesus&#x27; resurrection. It serves as a site of pilgrimage and worship, attracting visitors from around the world who seek to connect with their faith in a tranquil setting. The site also contributes to Jerusalem&#x27;s rich cultural heritage, reflecting the city&#x27;s diverse religious history.</p></div>
 </section>
-<section class="place" id="jerusalem_pdfband_3_4ca02d45">
+<section class="place" id="jerusalem_hamazreka">
+<div class="place-lead">
 <h3>Hamazreka</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: See official visitor information.</p>
-<figure class="place-fig"><img src="../images/jerusalem_pdfband_3_4ca02d45.jpg" alt="Hamazreka"/></figure>
+<figure class="place-fig place-fig--hi-res"><img src="../images/jerusalem_hamazreka.jpg" alt="Hamazreka" width="1280" height="960"/></figure>
+</div>
 </section>
 <section class="place" id="jerusalem_hurva_synagogue">
+<div class="place-lead">
 <h3>Hurva Synagogue</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Jewish Quarter, Old City | Style: Neo-Byzantine revival with a prominent dome | Period: 1864 (Ohri); destroyed 1948; reconstructed 2010</p>
-<figure class="place-fig"><img src="../images/jerusalem_hurva_synagogue.jpg" alt="Hurva Synagogue"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/jerusalem_hurva_synagogue.jpg" alt="Hurva Synagogue" width="1280" height="794" style="height: 286px; max-height: 286px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_hurva_synagogue_b.jpg" alt="Hurva Synagogue — view 2" width="330" height="219" style="height: 286px; max-height: 286px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Landmark synagogue on the Old City plateau, rebuilt after decades as a ruin; its dome reasserted the Jewish Quarter skyline. The name “Hurva” (ruin) recalls an older 18th-century congregation’s bankruptcy. The rebuilt interior revives the Ottoman-era monumental scheme.</p>
 <p class="prose">Cycles of building, destruction, and memorial use trace the turbulent modern history of Jerusalem’s Jewish communities. A focal point for worship and for reading the quarter’s layered archaeology and memory.</p></div>
 </section>
-<section class="place" id="jerusalem_israel_museum">
-<h3>Jerusalem</h3>
-
-<p class="place-meta">Address: Derekh Ruppin 11 | Style: Modernist campus; Shrine of the Book nearby | Period: 1965 (expansions since)</p>
-<figure class="place-fig"><img src="../images/jerusalem_israel_museum.jpg" alt="Jerusalem"/></figure>
-<div class="place-desc"><p class="prose">Israel’s flagship encyclopedic museum: archaeology, fine arts, Judaica, and temporary exhibitions on a terraced campus beside the parliament district. The campus integrates outdoor sculpture routes and stepped gardens. The Dead Sea Scrolls are exhibited in the adjacent Shrine of the Book.</p>
-<p class="prose">Founded as a national collection hub; successive wings widened its role in conservation and public education. The standard half-day anchor for visitors who want context before—or after—walking the Old City.</p></div>
-</section>
 <section class="place" id="jerusalem_jaffa_gate">
+<div class="place-lead">
 <h3>Jaffa Gate</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Old City western entrance | Style: Ottoman fortification with later traffic alterations | Period: 1537 Ottoman; 1898 opening widened</p>
-<figure class="place-fig"><img src="../images/jerusalem_jaffa_gate.jpg" alt="Jaffa Gate"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/jerusalem_jaffa_gate.jpg" alt="Jaffa Gate" width="1280" height="959" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_jaffa_gate_b.jpg" alt="Jaffa Gate — view 2" width="330" height="356" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Principal gate from western Jerusalem into the Old City; adjoins the David Street market spine toward the Church of the Holy Sepulchre. Opposite lies the Tower of David museum complex inside the citadel. Street level drops toward Otto Plaza and Mamilla, changing sightlines at dusk.</p>
 <p class="prose">Suleiman’s wall circuit defined today’s Old City gates; the breach for a carriage road belongs to the late Ottoman modernization era. Most visitors’ first tactile encounter with the Ottoman enceinte and its bustle.</p></div>
 </section>
+<section class="place" id="jerusalem_israel_museum">
+<div class="place-lead">
+<h3>Jerusalem</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
+
+<p class="place-meta">Address: Derekh Ruppin 11 | Style: Modernist campus; Shrine of the Book nearby | Period: 1965 (expansions since)</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/jerusalem_israel_museum.jpg" alt="Jerusalem" width="1280" height="960" style="height: 266px; max-height: 266px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_israel_museum_b.jpg" alt="Jerusalem — view 2" width="330" height="190" style="height: 266px; max-height: 266px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Israel’s flagship encyclopedic museum: archaeology, fine arts, Judaica, and temporary exhibitions on a terraced campus beside the parliament district. The campus integrates outdoor sculpture routes and stepped gardens. The Dead Sea Scrolls are exhibited in the adjacent Shrine of the Book.</p>
+<p class="prose">Founded as a national collection hub; successive wings widened its role in conservation and public education. The standard half-day anchor for visitors who want context before—or after—walking the Old City.</p></div>
+</section>
 <section class="place" id="jerusalem_international_ymca">
+<div class="place-lead">
 <h3>Jerusalem International YMCA</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: King David Street 26 | Style: Neo-Byzantine / Romanesque revival tower complex | Period: 1926–1933</p>
-<figure class="place-fig"><img src="../images/jerusalem_international_ymca.jpg" alt="Jerusalem International YMCA"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/jerusalem_international_ymca.jpg" alt="Jerusalem International YMCA" width="900" height="1600" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_international_ymca_b.jpg" alt="Jerusalem International YMCA — view 2" width="330" height="247" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Landmark tower and arches beside the King David Hotel; concerts, sport facilities, and language programs occupy the campus. The architect also shaped New Delhi’s central avenues—compare the muscular masonry vocabulary. The vertical emphasis offers observation points over the western valley.</p>
 <p class="prose">Built under the British Mandate as an interfaith civic gesture with monumental stone detailing. A readable Mandate-era punctuation mark between old walls and modern western districts.</p></div>
 </section>
 <section class="place" id="jerusalem_knesset_jerusalem">
+<div class="place-lead">
 <h3>Knesset (Israeli parliament)</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Givat Ram, Jerusalem | Style: Modernist public architecture; restrained monumentality | Period: 1966 (main building; later annexes)</p>
-<figure class="place-fig"><img src="../images/jerusalem_knesset_jerusalem.jpg" alt="Knesset (Israeli parliament)"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/jerusalem_knesset_jerusalem.jpg" alt="Knesset (Israeli parliament)" width="1280" height="853" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_knesset_jerusalem_b.jpg" alt="Knesset (Israeli parliament) — view 2" width="330" height="219" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Unicameral parliament of Israel, sited near the Israel Museum and national archive cluster in Givat Ram. Tours require advance booking and ID checks. Artworks donated to the plenary include tapestries after Chagall.</p>
 <p class="prose">Jerusalem became the legislative seat after 1966; nearby institutions formed a deliberate civic-cultural precinct. The working chamber where Israeli law is debated—paired in the same visit with the museum campus.</p></div>
 </section>
 <section class="place" id="jerusalem_lutheran_church_of_the_redeemer_jerusalem">
+<div class="place-lead">
 <h3>Lutheran Church of the Redeemer</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Muristan, Christian Quarter | Style: Neo-Romanesque; tall bell tower over the souk grid | Period: Consecrated 1898 (Kaiser Wilhelm visit)</p>
-<figure class="place-fig"><img src="../images/jerusalem_lutheran_church_of_the_redeemer_jerusalem.jpg" alt="Lutheran Church of the Redeemer"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/jerusalem_lutheran_church_of_the_redeemer_jerusalem.jpg" alt="Lutheran Church of the Redeemer" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_lutheran_church_of_the_redeemer_jerusalem_b.jpg" alt="Lutheran Church of the Redeemer — view 2" width="330" height="220" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Landmark of the Evangelical Church in Jerusalem—its tower climb reveals domes and minarets in compass order; the nave reflects late Victorian Protestant taste in the Old City. Combined tickets sometimes cover tower access and adjacent archaeological displays. The Muristan courtyards around it mix cafes, Orthodox choirs, and souvenir lanes.</p>
 <p class="prose">Erected on crusader-era ruins granted after diplomatic negotiations; it signaled Protestant permanence beside older Catholic and Orthodox jurisdictions. For Lutheran and wider Protestant visitors it is the ceremonial center; for any walker it is the vertical exclamation point in the Christian quarter’s roof sea.</p></div>
 </section>
 <section class="place" id="jerusalem_mahane_yehuda_market">
+<div class="place-lead">
 <h3>Mahane Yehuda Market</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Between Jaffa and Agrippas streets, Nachlaot | Style: Market lanes; metal canopies; street-art façades | Period: Late Ottoman stalls; roofed phases 20th–21st c.</p>
-<figure class="place-fig"><img src="../images/jerusalem_mahane_yehuda_market.jpg" alt="Mahane Yehuda Market"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/jerusalem_mahane_yehuda_market_b.jpg" alt="Mahane Yehuda Market" width="330" height="185"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Jerusalem’s busiest produce and prepared-food market by day; bars and live music crowd the lanes on Thursday nights. Ethiopian spice mixes share stalls with Yemenite pastries and Balkan börek. Graffiti tours highlight portraits of local musicians and rabbis.</p>
 <p class="prose">Named for a late-19th-century courtyard neighborhood; the market grew along the new city’s tram and bus axes. The most direct taste of contemporary Jerusalem outside the walls—loud, aromatic, and crowded.</p></div>
 </section>
 <section class="place" id="jerusalem_montefiore_windmill">
+<div class="place-lead">
 <h3>Moses Montefiore Windmill</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Mishkenot Sha’ananim / Yemin Moshe | Style: European-style masonry windmill | Period: 1857</p>
-<figure class="place-fig"><img src="../images/jerusalem_montefiore_windmill.jpg" alt="Moses Montefiore Windmill"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/jerusalem_montefiore_windmill.jpg" alt="Moses Montefiore Windmill" width="1280" height="854" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_montefiore_windmill_b.jpg" alt="Moses Montefiore Windmill — view 2" width="330" height="422" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Restored mill overlooking the Hinnom Valley; symbol of the first Jewish neighborhood outside the Old City walls. Grinding stopped when imported flour undercut local production. The ridge walk links to photography balconies toward the Old City walls.</p>
 <p class="prose">Financed with Montefiore’s philanthropy as part of Mishkenot Sha’ananim’s settlement experiment. A readable 19th-century hinge between walled Jerusalem and expanding western neighborhoods.</p></div>
 </section>
 <section class="place" id="jerusalem_mount_of_olives_view">
+<div class="place-lead">
 <h3>Mount of Olives panorama</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
-<p class="place-meta">Address: Mount of Olives ridge (multiple overlooks) | Style: Natural ridge; scattered chapels and cemeteries | Period: From antiquity (burials, chapels); modern roads 20th c.</p>
-<figure class="place-fig"><img src="../images/jerusalem_mount_of_olives_view.jpg" alt="Mount of Olives panorama"/></figure>
+<p class="place-meta">Location: Mount of Olives ridge (multiple overlooks) | Style: Natural ridge; scattered chapels and cemeteries | Period: From antiquity (burials, chapels); modern roads 20th c.</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/jerusalem_mount_of_olives_view.jpg" alt="Mount of Olives panorama" width="1280" height="352" style="height: 127px; max-height: 127px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_mount_of_olives_view_b.jpg" alt="Mount of Olives panorama — view 2" width="330" height="121" style="height: 127px; max-height: 127px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Classic eastward view across the Kidron Valley: Jewish cemetery tiers, mosque domes, and the golden Dome of the Rock punctuating the skyline. Sunrise and late afternoon change shadow depth on the Temple Mount platform. Christian sites on the slope include Dominus Flevati and the Garden of Gethsemane.</p>
 <p class="prose">The ridge has served burial, pilgrimage, and defensive sighting for millennia; modern roads reshape pedestrian approaches. The canonical postcard perspective that shows how tightly Old Jerusalem’s sacred focal points stack together.</p></div>
 </section>
 <section class="place" id="jerusalem_mount_zion">
+<div class="place-lead">
 <h3>Mount Zion</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/jerusalem_mount_zion.jpg" alt="Mount Zion"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_mount_zion.jpg" alt="Mount Zion" width="330" height="247" style="height: 224px; max-height: 224px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_mount_zion_b.jpg" alt="Mount Zion — view 2" width="330" height="160" style="height: 224px; max-height: 224px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Mount Zion, a prominent hill located just outside the walls of the Old City of Jerusalem, is a site of profound historical and religious significance. It is home to several key landmarks, including the Tomb of King David and the Room of the Last Supper. Visitors can explore its rich heritage, which reflects the diverse cultural and spiritual tapestry of Jerusalem. Mount Zion is traditionally believed to be the burial site of King David. The Room of the Last Supper, located on Mount Zion, is a significant Christian pilgrimage site.</p>
 <p class="prose">Mount Zion has been a focal point of Jerusalem&#x27;s history since ancient times. It is traditionally associated with the biblical King David, who established it as his city around 1000 BCE. Over the centuries, it has witnessed numerous events, including the Crusades and various conquests, shaping its identity as a symbol of resilience and faith. Culturally, Mount Zion is a melting pot of traditions and practices, reflecting the diverse communities that have inhabited Jerusalem. It plays a significant role in Jewish, Christian, and Islamic heritage, making it a vital site for pilgrimage and religious observance. The area&#x27;s historical landmarks contribute to its recognition as a UNESCO World Heritage site, underscoring its importance in the collective memory of humanity.</p></div>
 </section>
 <section class="place" id="jerusalem_old_city_ramparts_walk">
+<div class="place-lead">
 <h3>Old City Ramparts Walk</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Old City walls (entry points vary by season) | Style: Ottoman fortifications; crenellations and towers | Period: 1530s (Ottoman walls); walkway access modern</p>
-<figure class="place-fig"><img src="../images/jerusalem_old_city_ramparts_walk.jpg" alt="Old City Ramparts Walk"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/jerusalem_old_city_ramparts_walk.jpg" alt="Old City Ramparts Walk" width="933" height="1400" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_old_city_ramparts_walk_b.jpg" alt="Old City Ramparts Walk — view 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Walkable sections atop the Ottoman walls that stitch together skyline views: domes, courtyards, minarets, and the city’s layered roofscape. The northern and southern sections are usually ticketed separately. Bring water: sun exposure is strong and shade is scarce on the parapets.</p>
 <p class="prose">Suleiman’s wall circuit formalized the perimeter of today’s Old City; the ramparts later became a curated viewpoint route for visitors. One of the few ways to read Jerusalem’s geometry from above—without leaving the walls.</p></div>
 </section>
-<section class="place" id="jerusalem_pdfband_9_4d56a8e1">
+<section class="place" id="jerusalem_palace33">
+<div class="place-lead">
 <h3>Palace33</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: See official visitor information.</p>
-<figure class="place-fig"><img src="../images/jerusalem_pdfband_9_4d56a8e1.jpg" alt="Palace33"/></figure>
+<figure class="place-fig place-fig--hi-res"><img src="../images/jerusalem_palace33.jpg" alt="Palace33" width="1280" height="1289"/></figure>
+</div>
 </section>
 <section class="place" id="jerusalem_pool_bethesda">
+<div class="place-lead">
 <h3>Pool of Bethesda</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/jerusalem_pool_bethesda.jpg" alt="Pool of Bethesda"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_pool_bethesda.jpg" alt="Pool of Bethesda" width="330" height="493" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_pool_bethesda_b.jpg" alt="Pool of Bethesda — view 2" width="330" height="219" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Pool of Bethesda, located in the Old City of Jerusalem, is an ancient site known for its historical and religious significance. This large reservoir, believed to have been constructed in the 1st century BC, is associated with healing and miracles, particularly in Christian tradition. Visitors can explore the remains of the pool and its surroundings, which offer a glimpse into the city&#x27;s rich past. The Pool of Bethesda is located in the Old City of Jerusalem. It is mentioned in the Gospel of John as a site of healing.</p>
 <p class="prose">The Pool of Bethesda dates back to at least the 1st century BC and was used as a water reservoir for the nearby Temple. It is mentioned in the Gospel of John as the site where Jesus healed a paralyzed man, which has contributed to its historical prominence. Archaeological excavations have revealed remnants of the pool and its associated structures, providing insights into the city&#x27;s ancient water systems. Culturally, the Pool of Bethesda is a symbol of healing and hope, deeply embedded in the Christian faith. It attracts pilgrims and tourists alike, who come to reflect on its biblical connections and the stories of miraculous healings. The site contributes to Jerusalem&#x27;s status as a major religious center, fostering traditions of pilgrimage and reverence among various faith communities.</p></div>
 <div class="place-story-block"><p class="prose place-story">According to Christian tradition, the Pool of Bethesda was believed to have healing waters that could cure ailments, drawing many sick individuals to its shores</p></div>
 </section>
 <section class="place" id="jerusalem_shrine_of_the_book">
+<div class="place-lead">
 <h3>Shrine of the Book</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Israel Museum campus | Style: Modernist; whitewashed dome over a vault | Period: 1959–1965</p>
-<figure class="place-fig"><img src="../images/jerusalem_shrine_of_the_book.jpg" alt="Shrine of the Book"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/jerusalem_shrine_of_the_book.jpg" alt="Shrine of the Book" width="1280" height="960" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_shrine_of_the_book_b.jpg" alt="Shrine of the Book — view 2" width="330" height="247" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Museum pavilion housing the Dead Sea Scrolls and related manuscript culture; the lid recalls the jars found at Qumran. The white dome contrasts with a dark basalt wall evoking desert geology. Rotating exhibits complement the scroll fragments on display.</p>
 <p class="prose">Built as the scrolls’ permanent home after Jordanian and Israeli custody transitions; conservation labs adjoin the galleries. Essential for understanding Second Temple-era Judaism before walking Herodian remains in the Old City.</p></div>
 </section>
-<section class="place" id="jerusalem_pdfband_0_3d212d2d">
+<section class="place" id="jerusalem_st_george_s_cathedral">
+<div class="place-lead">
 <h3>St George&#x27;s Cathedral</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: See official visitor information.</p>
-<figure class="place-fig"><img src="../images/jerusalem_pdfband_0_3d212d2d.jpg" alt="St George&#x27;s Cathedral"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/jerusalem_st_george_s_cathedral.jpg" alt="St George&#x27;s Cathedral" width="1280" height="851" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_st_george_s_cathedral_b.jpg" alt="St George&#x27;s Cathedral — view 2" width="330" height="264" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">St. George&#x27;s Cathedral — Wikimedia disambiguation page.</p></div>
 </section>
 <section class="place" id="jerusalem_tower_of_david">
+<div class="place-lead">
 <h3>Tower of David (Jerusalem Citadel)</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Jaffa Gate, Old City | Style: Fortress complex; minaret from Mamluk/Ottoman phases | Period: Herodian, Crusader, Mamluk, Ottoman layers; museum 20th c.</p>
-<figure class="place-fig"><img src="../images/jerusalem_tower_of_david.jpg" alt="Tower of David (Jerusalem Citadel)"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/jerusalem_tower_of_david.jpg" alt="Tower of David (Jerusalem Citadel)" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_tower_of_david_b.jpg" alt="Tower of David (Jerusalem Citadel) — view 2" width="330" height="220" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Citadel beside Jaffa Gate with archaeological finds and evening light shows projected on the ramparts. The name “Tower of David” is traditional rather than strictly historical for the minaret. Ramparts walks reveal how Ottoman engineers tied the fort to the wall line.</p>
 <p class="prose">Successive empires refortified the spur controlling the western approach; the modern museum interprets those strata. The best single introduction to Jerusalem’s stratigraphy without descending into tunnels—yet.</p></div>
 </section>
 <section class="place" id="jerusalem_via_dolorosa">
+<div class="place-lead">
 <h3>Via Dolorosa</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Old City, Muslim &amp; Christian quarters | Style: Covered lanes, stone arches, street chapels | Period: Route tradition formalized medieval–modern</p>
-<figure class="place-fig"><img src="../images/jerusalem_via_dolorosa.jpg" alt="Via Dolorosa"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/jerusalem_via_dolorosa.jpg" alt="Via Dolorosa" width="1067" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_via_dolorosa_b.jpg" alt="Via Dolorosa — view 2" width="330" height="516" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Processional path associated with the Stations of the Cross, threading through markets and courtyards toward the Holy Sepulchre. Stations are marked by plaques and small chapels; crowds peak on Fridays. Sections double as active shopping streets—move slowly and yield space.</p>
 <p class="prose">Pilgrimage itineraries shifted over centuries; the modern station sequence reflects late medieval and later devotional mapping. A living overlap of worship and everyday commerce—Jerusalem’s sacred narratives embedded in ordinary streets.</p></div>
 </section>
 <section class="place" id="jerusalem_western_wall">
+<div class="place-lead">
 <h3>Western Wall</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Western Wall Plaza, Old City | Style: Herodian ashlar masonry | Period: Herodian retaining wall (1st c. BCE); plaza modern</p>
-<figure class="place-fig"><img src="../images/jerusalem_western_wall.jpg" alt="Western Wall"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/jerusalem_western_wall_b.jpg" alt="Western Wall" width="330" height="225"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Open-air prayer place along the Herodian temenos; men’s and women’s sections follow Orthodox practice; modest dress is expected. The visible courses are only part of the retaining system; tunnels continue north along the platform. Notes left in the cracks are collected periodically for respectful burial.</p>
 <p class="prose">The wall survived as a ruin focal point through Islamic rule; today’s plaza reflects 20th-century urban decisions after 1967. For many Jews, the chief tangible link to the destroyed Temple esplanade above.</p></div>
 </section>
 <section class="place" id="jerusalem_yad_vashem">
+<div class="place-lead">
 <h3>Yad Vashem</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Mount Herzl, Har HaZikaron | Style: Contemporary memorial architecture; prism-like museum | Period: 1953 (institution); Holocaust History Museum 2005</p>
-<figure class="place-fig"><img src="../images/jerusalem_yad_vashem.jpg" alt="Yad Vashem"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/jerusalem_yad_vashem.jpg" alt="Yad Vashem" width="1280" height="978" style="height: 347px; max-height: 347px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_yad_vashem_b.jpg" alt="Yad Vashem — view 2" width="330" height="248" style="height: 347px; max-height: 347px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Israel’s official Holocaust remembrance center: museum galleries, memorials, archives, and the Hall of Names on a pine-covered ridge. Plan time: the museum narrative is long and emotionally heavy—take breaks. Photography rules vary by hall; check signage and be respectful.</p>
 <p class="prose">Established by law as a national institution; the 2005 museum reframed the core exhibition as a chronological path through the ridge. A necessary stop for historical grounding and remembrance in modern Jerusalem.</p></div>
 </section>

@@ -13,7 +13,7 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
 .otium-logo { font-family: 'Spectral', serif; font-size: 2.15rem;
   font-weight: 600; letter-spacing: 0.18em; margin-bottom: 0.85rem; }
 .otiump { margin: 0.42rem 0; line-height: 1.42; text-align: justify;
-  max-width: 38rem; font-size: 0.95rem; }
+  font-size: 0.95rem; }
 .guide-title { page-break-after: auto; margin-bottom: 0.55rem;
   page-break-inside: avoid; }
 .historical-reference { margin: 0.75rem 0 1.15rem;
@@ -63,22 +63,103 @@ ol.trip-stops a:hover { text-decoration: underline; }
 .heraldry-univ-caption { font-size: 0.52rem; line-height: 1.18;
   margin: 0.12rem 0 0; padding: 0 0.06rem; color: #252525;
   text-align: center; font-weight: 500; }
-.heraldry-motto { text-align: center; max-width: 18rem; margin: 0.18rem auto;
+.heraldry-motto { text-align: center; margin: 0.18rem auto;
   width: 100%; }
 .motto-line { font-family: 'Spectral', serif; font-size: 1rem;
   margin: 0; color: #333; line-height: 1.35; }
 .guide-title h1.guide-title-main { font-family: 'Spectral', serif;
   font-size: 2.35rem; margin-bottom: 0.5rem; font-weight: 600; }
 .lead { color: #444; font-size: 1.05rem; }
-.guide-toc { margin: 0.85rem 0 1.15rem; page-break-inside: avoid; }
-.guide-toc h2 { font-family: 'Spectral', serif; font-size: 1.28rem;
-  font-weight: 600; margin: 0.4rem 0 0.55rem; }
+
+.guide-toc { page-break-before: always; break-before: page;
+  page-break-after: always; break-after: page;
+  margin: 0; padding: 0.2rem 0 0.45rem; page-break-inside: auto; }
+.guide-toc h2 { font-family: 'Spectral', serif;
+  font-size: 1.28rem; font-weight: 600; margin: 0.4rem 0 0.55rem; }
 .guide-toc ol { margin: 0.35rem 0 0.65rem 1.25rem; padding: 0;
   columns: 2; column-gap: 1.5rem; }
 .guide-toc li { margin: 0.18rem 0; line-height: 1.35;
   font-size: 0.88rem; break-inside: avoid; }
-.guide-toc a { color: #1a5276; text-decoration: none; }
+.guide-toc a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.guide-toc a:hover { color: #0d3d56; }
 .guide-toc li.toc-item--sub { font-size: 0.82rem; margin-left: 0.35rem; }
+.toc-back { font-size: 0.78rem; margin: 0 0 0.35rem; text-align: right; }
+.toc-back a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.toc-back a:hover { color: #0d3d56; }
+.place, .historical-reference, .guide-primer, .guide-trip-plans {
+  scroll-margin-top: 1.25rem; }
+.historical-reference h2, .guide-primer h2, .guide-trip-plans h2,
+.chapter-head h2, .place-lead h3 { position: relative; }
+.guide-toc + .place, .guide-toc + .chapter-head {
+  page-break-before: avoid; break-before: avoid-page; }
+.place-lead { page-break-inside: avoid; break-inside: avoid-page;
+  page-break-after: auto; }
+.place-lead > h3 { page-break-after: avoid; break-after: avoid-page; }
+.place-lead > .place-meta { page-break-after: avoid; break-after: avoid-page; }
+
+.place-fig { page-break-inside: avoid; break-inside: avoid-page;
+  margin: 0.5rem 0 1rem; }
+.place-fig img {
+  page-break-inside: avoid; break-inside: avoid-page;
+  max-height: 48vh; width: auto; max-width: 100%;
+  object-fit: contain; margin-left: auto; margin-right: auto; }
+.place-fig--hi-res img { max-height: 52vh; }
+.place-fig--lo-res img { max-height: 30vh; }
+.place-pdf-fig-row {
+  display: flex; flex-direction: row; flex-wrap: wrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.45rem 0.55rem; margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row .place-fig {
+  flex: 1 1 30%; margin: 0; min-width: 26%; max-width: 100%; }
+.place-pdf-fig-row .place-fig img {
+  width: auto; max-width: 100%; height: auto; max-height: 44vh;
+  object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--pair {
+  flex-wrap: nowrap; justify-content: space-between;
+  align-items: flex-end; gap: 0.5rem 0.65rem; }
+.place-pdf-fig-row--pair .place-fig {
+  flex: 1 1 47%; min-width: 0; max-width: 50%;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--pair .place-fig img {
+  max-height: 44vh; object-fit: contain; }
+.place-pdf-fig-row--pair .place-fig--hi-res img { max-height: 52vh; }
+.place-pdf-fig-row--pair .place-fig--lo-res img { max-height: 26vh; }
+.place-pdf-fig-row--pair .place-fig--row-sized img,
+.place-pdf-fig-row--triple .place-fig--row-sized img,
+.place-pdf-fig-row--many .place-fig--row-sized img {
+  width: auto; max-width: 100%; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row .place-fig--row-sized.place-fig--hi-res img,
+.place-pdf-fig-row .place-fig--row-sized.place-fig--lo-res img {
+  max-height: unset; }
+.place-pdf-fig-rows-stack {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple {
+  display: flex; flex-direction: row; flex-wrap: nowrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.4rem 0.48rem; margin: 0;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--triple .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--triple .place-fig--hi-res img { max-height: 42vh; }
+.place-pdf-fig-row--triple .place-fig--lo-res img { max-height: 18vh; }
+.place-pdf-fig-row--many {
+  flex-wrap: nowrap; justify-content: center; align-items: flex-end;
+  gap: 0.35rem 0.42rem; }
+.place-pdf-fig-row--many .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--many .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+
+
 .place { margin-bottom: 2.2rem; page-break-inside: auto; }
 h3 { font-family: 'Spectral', serif; font-size: 1.22rem; margin: 1.2rem 0 0.35rem;
   font-weight: 600; }
@@ -90,7 +171,6 @@ h4 { font-family: 'Spectral', serif; font-size: 0.95rem; text-transform: upperca
   color: #555; font-size: 0.95rem; margin: 0 0 0.5rem; font-style: italic; }
 .place-meta { font-size: 0.92rem; color: #353535; margin: 0 0 0.75rem;
   line-height: 1.4; }
-.place-fig { margin: 0.5rem 0 1rem; }
 img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
 .prose, .place-desc p { margin: 0.45rem 0; line-height: 1.5;
   text-align: justify; }
@@ -110,11 +190,14 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <figure class="heraldry-fig heraldry-coat-book" title="Coat of arms of Amsterdam"><img src="../images/guide_coat_of_arms.svg" alt="Coat of arms of Amsterdam"/></figure>
 <figure class="heraldry-fig heraldry-coat-book" title="Flag of Amsterdam"><img src="../images/guide_flag.svg" alt="Flag of Amsterdam"/></figure>
 </div></div><h1 class="guide-title-main">Amsterdam</h1><p class="lead">Guide. Places in this edition: 31.</p></header>
+<nav class="guide-toc" id="guide-toc" aria-label="Contents"><h2>Contents</h2><ol><li class="toc-item"><a href="#guide-historical">Historical overview</a></li><li class="toc-item"><a href="#guide-trips">Trip ideas</a></li><li class="toc-item"><a href="#amsterdam_adam_tower">A&#x27;DAM Tower</a></li><li class="toc-item"><a href="#amsterdam_central_station">Amsterdam Centraal</a></li><li class="toc-item"><a href="#amsterdam_anne_frank_house">Anne Frank House</a></li><li class="toc-item"><a href="#amsterdam_artis">Artis Zoo</a></li><li class="toc-item"><a href="#amsterdam_begijnhof">Begijnhof</a></li><li class="toc-item"><a href="#amsterdam_bijlmer">Bijlmer</a></li><li class="toc-item"><a href="#amsterdam_canal_ring">Canal ring walk</a></li><li class="toc-item"><a href="#amsterdam_dam_square">Dam Square</a></li><li class="toc-item"><a href="#amsterdam_de_gooyer">De Gooyer windmill</a></li><li class="toc-item"><a href="#amsterdam_eye_film">EYE Film Institute</a></li><li class="toc-item"><a href="#amsterdam_foam">Foam photography museum</a></li><li class="toc-item"><a href="#amsterdam_hermitage_amsterdam">Hermitage Amsterdam</a></li><li class="toc-item"><a href="#amsterdam_magere_brug">Magere Brug</a></li><li class="toc-item"><a href="#amsterdam_museum_het_schip">Museum Het Schip</a></li><li class="toc-item"><a href="#amsterdam_scheepvaartmuseum">National Maritime Museum</a></li><li class="toc-item"><a href="#amsterdam_national_monument">National Monument</a></li><li class="toc-item"><a href="#amsterdam_nemo">NEMO Science Museum</a></li><li class="toc-item"><a href="#amsterdam_nieuwe_kerk">Nieuwe Kerk</a></li><li class="toc-item"><a href="#amsterdam_noorderkerk">Noorderkerk</a></li><li class="toc-item"><a href="#amsterdam_oude_kerk">Oude Kerk</a></li><li class="toc-item"><a href="#amsterdam_portuguese_synagogue">Portuguese Synagogue</a></li><li class="toc-item"><a href="#amsterdam_reguliersgracht">Reguliersgracht bridges</a></li><li class="toc-item"><a href="#amsterdam_rembrandt_house">Rembrandt House Museum</a></li><li class="toc-item"><a href="#amsterdam_rijksmuseum">Rijksmuseum</a></li><li class="toc-item"><a href="#amsterdam_concertgebouw">Royal Concertgebouw</a></li><li class="toc-item"><a href="#amsterdam_royal_palace">Royal Palace of Amsterdam</a></li><li class="toc-item"><a href="#amsterdam_bloemenmarkt">Singel flower market</a></li><li class="toc-item"><a href="#amsterdam_stedelijk">Stedelijk Museum Amsterdam</a></li><li class="toc-item"><a href="#amsterdam_van_gogh_museum">Van Gogh Museum</a></li><li class="toc-item"><a href="#amsterdam_westerkerk">Westerkerk</a></li><li class="toc-item"><a href="#amsterdam_zuiderkerk">Zuiderkerk</a></li></ol></nav>
 <section class="historical-reference" id="guide-historical" aria-label="Historical overview"><h2>Historical overview</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 <p class="prose">Amsterdam is the capital of the Netherlands and the kingdom’s largest city, historically a North Sea trading power.</p>
 <p class="prose">Canals, mercantile townhouses, and civic tolerance shaped its Golden Age. Today it pairs compact heritage quarters with contemporary design, museums, and waterborne mobility.</p>
 <p class="prose">Nineteenth- and twentieth-century port wealth and colonial trade enriched the city; after the Second World War Amsterdam favoured humane urbanism. It is now a hub of international law, design, and sustainable mobility on the water.</p></section>
 <section class="guide-trip-plans" id="guide-trips" aria-label="Trip ideas"><h2>Trip ideas</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 <article class="trip-plan" id="trip-1d"><h3>One day</h3>
 <p class="prose">A compact loop linking the strongest cards in this guide, ordered to minimise backtracking on foot.</p>
 <ol class="trip-stops"><li><a href="#amsterdam_magere_brug">Magere Brug</a> (~75min)</li>
@@ -129,263 +212,439 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <li><a href="#amsterdam_nieuwe_kerk">Nieuwe Kerk</a> (~75min)</li>
 <li><a href="#amsterdam_central_station">Amsterdam Centraal</a> (~75min)</li>
 <li><a href="#amsterdam_adam_tower">A&#x27;DAM Tower</a> (~75min)</li>
-<li><a href="#amsterdam_bloemenmarkt">Singel flower market</a> (~75min)</li></ol></article>
+<li><a href="#amsterdam_bijlmer">Bijlmer</a> (~75min)</li></ol></article>
 <article class="trip-plan" id="trip-3d2"><h3>Three days — day 2</h3>
 <p class="prose">Day 2 — next neighbourhood group.</p>
 <ol class="trip-stops"><li><a href="#amsterdam_artis">Artis Zoo</a> (~60min)</li>
+<li><a href="#amsterdam_bloemenmarkt">Singel flower market</a> (~75min)</li>
 <li><a href="#amsterdam_concertgebouw">Royal Concertgebouw</a> (~75min)</li>
 <li><a href="#amsterdam_de_gooyer">De Gooyer windmill</a> (~75min)</li>
-<li><a href="#amsterdam_foam">Foam photography museum</a> (~75min)</li>
-<li><a href="#amsterdam_museum_het_schip">Museum Het Schip</a> (~75min)</li></ol></article>
+<li><a href="#amsterdam_foam">Foam photography museum</a> (~75min)</li></ol></article>
 <article class="trip-plan" id="trip-3d3"><h3>Three days — day 3</h3>
 <p class="prose">Day 3 — remaining highlights nearby.</p>
 <ol class="trip-stops"><li><a href="#amsterdam_stedelijk">Stedelijk Museum Amsterdam</a> (~75min)</li>
 <li><a href="#amsterdam_van_gogh_museum">Van Gogh Museum</a> (~75min)</li>
+<li><a href="#amsterdam_museum_het_schip">Museum Het Schip</a> (~75min)</li>
 <li><a href="#amsterdam_noorderkerk">Noorderkerk</a> (~75min)</li>
-<li><a href="#amsterdam_scheepvaartmuseum">National Maritime Museum</a> (~75min)</li>
-<li><a href="#amsterdam_anne_frank_house">Anne Frank House</a> (~75min)</li></ol></article></section>
-<nav class="guide-toc" aria-label="Contents"><h2>Contents</h2><ol><li class="toc-item"><a href="#guide-historical">Historical overview</a></li><li class="toc-item"><a href="#guide-trips">Trip ideas</a></li><li class="toc-item"><a href="#amsterdam_adam_tower">A&#x27;DAM Tower</a></li><li class="toc-item"><a href="#amsterdam_central_station">Amsterdam Centraal</a></li><li class="toc-item"><a href="#amsterdam_anne_frank_house">Anne Frank House</a></li><li class="toc-item"><a href="#amsterdam_artis">Artis Zoo</a></li><li class="toc-item"><a href="#amsterdam_begijnhof">Begijnhof</a></li><li class="toc-item"><a href="#amsterdam_pdfband_2_f2270f2e">Bijlmer</a></li><li class="toc-item"><a href="#amsterdam_canal_ring">Canal ring walk</a></li><li class="toc-item"><a href="#amsterdam_dam_square">Dam Square</a></li><li class="toc-item"><a href="#amsterdam_de_gooyer">De Gooyer windmill</a></li><li class="toc-item"><a href="#amsterdam_eye_film">EYE Film Institute</a></li><li class="toc-item"><a href="#amsterdam_foam">Foam photography museum</a></li><li class="toc-item"><a href="#amsterdam_hermitage_amsterdam">Hermitage Amsterdam</a></li><li class="toc-item"><a href="#amsterdam_magere_brug">Magere Brug</a></li><li class="toc-item"><a href="#amsterdam_museum_het_schip">Museum Het Schip</a></li><li class="toc-item"><a href="#amsterdam_scheepvaartmuseum">National Maritime Museum</a></li><li class="toc-item"><a href="#amsterdam_national_monument">National Monument</a></li><li class="toc-item"><a href="#amsterdam_nemo">NEMO Science Museum</a></li><li class="toc-item"><a href="#amsterdam_nieuwe_kerk">Nieuwe Kerk</a></li><li class="toc-item"><a href="#amsterdam_noorderkerk">Noorderkerk</a></li><li class="toc-item"><a href="#amsterdam_oude_kerk">Oude Kerk</a></li><li class="toc-item"><a href="#amsterdam_portuguese_synagogue">Portuguese Synagogue</a></li><li class="toc-item"><a href="#amsterdam_reguliersgracht">Reguliersgracht bridges</a></li><li class="toc-item"><a href="#amsterdam_rembrandt_house">Rembrandt House Museum</a></li><li class="toc-item"><a href="#amsterdam_rijksmuseum">Rijksmuseum</a></li><li class="toc-item"><a href="#amsterdam_concertgebouw">Royal Concertgebouw</a></li><li class="toc-item"><a href="#amsterdam_royal_palace">Royal Palace of Amsterdam</a></li><li class="toc-item"><a href="#amsterdam_bloemenmarkt">Singel flower market</a></li><li class="toc-item"><a href="#amsterdam_stedelijk">Stedelijk Museum Amsterdam</a></li><li class="toc-item"><a href="#amsterdam_van_gogh_museum">Van Gogh Museum</a></li><li class="toc-item"><a href="#amsterdam_westerkerk">Westerkerk</a></li><li class="toc-item"><a href="#amsterdam_zuiderkerk">Zuiderkerk</a></li></ol></nav>
+<li><a href="#amsterdam_scheepvaartmuseum">National Maritime Museum</a> (~75min)</li></ol></article></section>
 <section class="place" id="amsterdam_adam_tower">
+<div class="place-lead">
 <h3>A&#x27;DAM Tower</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Modern architecture | Period: 1996</p>
-<figure class="place-fig"><img src="../images/amsterdam_adam_tower.jpg" alt="A&#x27;DAM Tower"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/amsterdam_adam_tower.jpg" alt="A&#x27;DAM Tower" width="1600" height="1200" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/amsterdam_adam_tower_b.jpg" alt="A&#x27;DAM Tower — view 2" width="330" height="440" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Located on the banks of the IJ River, A&#x27;DAM Tower is a modern landmark that stands as one of Amsterdam&#x27;s tallest buildings. Completed in 1996, it offers panoramic views of the city&#x27;s iconic canals and historic districts. At 178 meters tall, A&#x27;DAM Tower is one of the tallest structures in Amsterdam. The tower features a revolving restaurant offering 360-degree views of the city. It houses offices, apartments, and retail spaces, blending residential and commercial uses. Its distinctive shape resembles a ship&#x27;s mast, reflecting Amsterdam&#x27;s maritime heritage. A&#x27;DAM Tower has become a popular spot for weddings and special events.</p>
 <p class="prose">Constructed between 1994 and 1996, A&#x27;DAM Tower was designed by Dutch architect Rem Koolhaas and engineer Koen Olthuis. The tower became famous for its unique design, combining elements of modern architecture with innovative engineering solutions. It served as a symbol of Amsterdam’s transformation into a contemporary metropolis. Visitors come to A&#x27;DAM Tower for its breathtaking vistas and the opportunity to experience the city from a new perspective.</p></div>
 </section>
 <section class="place" id="amsterdam_central_station">
+<div class="place-lead">
 <h3>Amsterdam Centraal</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Stationsplein | Style: Dutch neo-Renaissance station hall and iron train shed | Period: 1881–1889 (Cuypers)</p>
-<figure class="place-fig"><img src="../images/amsterdam_central_station.jpg" alt="Amsterdam Centraal"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/amsterdam_central_station.jpg" alt="Amsterdam Centraal" width="1280" height="930" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/amsterdam_central_station_b.jpg" alt="Amsterdam Centraal — view 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Principal rail terminus on an artificial island at the IJ waterfront. Metro, tram, bus, and ferry connections fan out to the city and North Amsterdam. Cuypers also designed the Rijksmuseum, giving both landmarks a family resemblance. North Sea Canal and IJ ferries depart beside the station.</p>
 <p class="prose">Built as Amsterdam&#x27;s gateway to national rail networks; recent underground lines threaded transit beneath the historic hall. The default arrival point for many visitors and a busy civic front door.</p></div>
 </section>
 <section class="place" id="amsterdam_anne_frank_house">
+<div class="place-lead">
 <h3>Anne Frank House</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Westermarkt 20 | Style: Canal house interior; concealed annex | Period: 17th c. canal house; hiding annex adapted 1940–1944</p>
-<figure class="place-fig"><img src="../images/amsterdam_anne_frank_house.jpg" alt="Anne Frank House"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/amsterdam_anne_frank_house.jpg" alt="Anne Frank House" width="1042" height="1600" style="height: 359px; max-height: 359px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/amsterdam_anne_frank_house_b.jpg" alt="Anne Frank House — view 2" width="330" height="257" style="height: 359px; max-height: 359px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Museum preserving the annexe where Anne Frank and others hid during the occupation. Narrow staircases and original rooms convey the diary&#x27;s setting. Tickets sell out weeks ahead in high season; online booking is essential. The museum stewards the diary manuscripts and related archives.</p>
 <p class="prose">Otto Frank&#x27;s office building included a concealed rear house later opened as a memorial museum. One of Amsterdam&#x27;s most visited historic sites on the western canal ring.</p></div>
 </section>
 <section class="place" id="amsterdam_artis">
+<div class="place-lead">
 <h3>Artis Zoo</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Period: 1838</p>
-<figure class="place-fig"><img src="../images/amsterdam_artis.jpg" alt="Artis Zoo"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/amsterdam_artis_b.jpg" alt="Artis Zoo" width="330" height="247"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Natura Artis Magistra (Latin for &quot;Nature is the teacher of art&quot;), commonly known just as Artis (Dutch pronunciation: [ˈɑrtɪs]), is a zoo and botanical garden in the centre of Amsterdam. It is the oldest zoo in the Netherlands and fifth oldest zoo in the world that is still operating. In addition to the zoo, Artis also contains an aquarium, a planetarium, an arboretum, Micropia, and the Groote Museum (&quot;big museum&quot; in Dutch).</p></div>
 </section>
 <section class="place" id="amsterdam_begijnhof">
+<div class="place-lead">
 <h3>Begijnhof</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/amsterdam_begijnhof.jpg" alt="Begijnhof"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/amsterdam_begijnhof.jpg" alt="Begijnhof" width="1600" height="518" style="height: 149px; max-height: 149px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/amsterdam_begijnhof_b.jpg" alt="Begijnhof — view 2" width="330" height="220" style="height: 149px; max-height: 149px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">beguinage — religious complex for Beguines.</p></div>
 </section>
-<section class="place" id="amsterdam_pdfband_2_f2270f2e">
+<section class="place" id="amsterdam_bijlmer">
+<div class="place-lead">
 <h3>Bijlmer</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Modernist | Period: 1968–1974</p>
-<figure class="place-fig"><img src="../images/amsterdam_pdfband_2_f2270f2e.jpg" alt="Bijlmer"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/amsterdam_bijlmer.jpg" alt="Bijlmer" width="1280" height="960" style="height: 289px; max-height: 289px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/amsterdam_bijlmer_b.jpg" alt="Bijlmer — view 2" width="330" height="207" style="height: 289px; max-height: 289px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Bijlmer district is a modern urban area located on the eastern outskirts of Amsterdam. It was developed in the late 1960s and early 1970s as part of ambitious post-war housing projects aimed at alleviating overcrowding in central Amsterdam. Developed between 1968 and 1974. Consists primarily of high-rise residential buildings. Features notable examples of modernist architecture. Has become home to immigrants from various countries. Serves as a hub for shopping, dining, and entertainment.</p>
 <p class="prose">Built during the mid-20th century, the Bijlmer was designed to provide affordable housing for working-class families. The neighborhood features wide streets, green spaces, and large apartment blocks. Over time, it became known for its diverse population and vibrant cultural scene. Visitors can explore the unique architecture and lively atmosphere of the Bijlmer, which has evolved into one of Amsterdam&#x27;s most dynamic districts.</p></div>
 </section>
 <section class="place" id="amsterdam_canal_ring">
+<div class="place-lead">
 <h3>Canal ring walk</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Grachtengordel | Style: Dutch gabled canal houses | Period: 17th c. primary ring</p>
-<figure class="place-fig"><img src="../images/amsterdam_canal_ring.jpg" alt="Canal ring walk"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/amsterdam_canal_ring.jpg" alt="Canal ring walk" width="1280" height="851" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/amsterdam_canal_ring_b.jpg" alt="Canal ring walk — view 2" width="330" height="286" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Slow itineraries thread the Herengracht, Keizersgracht, and Prinsengracht, linking house museums, cafés, and houseboat moorings. Houseboats require municipal mooring permits in central canals. Cycling along towpaths demands yielding to local bike traffic.</p>
 <p class="prose">Merchants built narrow deep plots along new waterways; many interiors were later modernised while façades stayed protected. The everyday scenery that makes Amsterdam legible on foot or by boat.</p></div>
 </section>
 <section class="place" id="amsterdam_dam_square">
+<div class="place-lead">
 <h3>Dam Square</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Centrum | Style: Civic open space framed by palaces | Period: Medieval dam; monuments 19th–20th c.</p>
-<figure class="place-fig"><img src="../images/amsterdam_dam_square.jpg" alt="Dam Square"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/amsterdam_dam_square.jpg" alt="Dam Square" width="1280" height="927" style="height: 334px; max-height: 334px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/amsterdam_dam_square_b.jpg" alt="Dam Square — view 2" width="330" height="247" style="height: 334px; max-height: 334px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Central square linking shopping streets, the royal palace, and the national monument to WWII victims. Pigeons and street performers concentrate near the monument. Trams cross the square—watch bike lanes at the edges.</p>
 <p class="prose">The Amstel was dammed here; the square grew into the city&#x27;s default gathering point. The symbolic heart of Amsterdam for protests and events.</p></div>
 </section>
 <section class="place" id="amsterdam_de_gooyer">
+<div class="place-lead">
 <h3>De Gooyer windmill</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Traditional Dutch windmill architecture | Period: circa 1640</p>
-<figure class="place-fig"><img src="../images/amsterdam_de_gooyer.jpg" alt="De Gooyer windmill"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/amsterdam_de_gooyer.jpg" alt="De Gooyer windmill" width="1200" height="1600" style="height: 460px; max-height: 460px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/amsterdam_de_gooyer_b.jpg" alt="De Gooyer windmill — view 2" width="330" height="329" style="height: 460px; max-height: 460px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Sitting on the banks of the Amstel River, De Gooyer Windmill is a charming historical landmark that has been meticulously restored to its former glory. This working windmill was originally constructed during the 17th century and served as a crucial part of Amsterdam&#x27;s water management system. Constructed circa 1640. Functioned both as a water pump and a grist mill. Restored to operational condition in recent years. Located along the scenic Amstel River. Operates seasonally, showcasing traditional windmill techniques.</p>
 <p class="prose">Built around 1640, De Gooyer Windmill played a vital role in controlling floods by pumping excess water out of the surrounding areas. It also acted as a grist mill, processing grain into flour for local bakeries. Over time, it became one of the most iconic symbols of traditional Dutch windmills. Visitors can experience firsthand how these remarkable structures once helped shape the city&#x27;s landscape and economy.</p></div>
 </section>
 <section class="place" id="amsterdam_eye_film">
+<div class="place-lead">
 <h3>EYE Film Institute</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/amsterdam_eye_film.jpg" alt="EYE Film Institute"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/amsterdam_eye_film.jpg" alt="EYE Film Institute" width="1600" height="907" style="height: 261px; max-height: 261px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/amsterdam_eye_film_b.jpg" alt="EYE Film Institute — view 2" width="330" height="264" style="height: 261px; max-height: 261px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Eye Filmmuseum — Dutch archive and museum for cinema.</p></div>
 </section>
 <section class="place" id="amsterdam_foam">
+<div class="place-lead">
 <h3>Foam photography museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Contemporary architecture by Rem Koolhaas</p>
-<figure class="place-fig"><img src="../images/amsterdam_foam.jpg" alt="Foam photography museum"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/amsterdam_foam_b.jpg" alt="Foam photography museum" width="330" height="404"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Foam is one of Amsterdam&#x27;s leading contemporary photography museums, showcasing the latest trends and innovations in photo art. Located on Museumplein, next to Rijksmuseum and Stedelijk Museum. Regularly hosts cutting-edge photography shows. Features both permanent collections and temporary exhibitions. Dedicated space for educational programs and workshops. Recognized as a hub for emerging photographers.</p>
 <p class="prose">Founded in 1946 as a private collection, Foam became a public institution in 1987. It moved to its current location on Museumplein in 2004, designed by architect Rem Koolhaas. The museum has hosted numerous international exhibitions and contributed significantly to the global photography scene. Visitors can explore groundbreaking photography exhibits that push boundaries and inspire new perspectives.</p></div>
 </section>
 <section class="place" id="amsterdam_hermitage_amsterdam">
+<div class="place-lead">
 <h3>Hermitage Amsterdam</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/amsterdam_hermitage_amsterdam.jpg" alt="Hermitage Amsterdam"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/amsterdam_hermitage_amsterdam.jpg" alt="Hermitage Amsterdam" width="1600" height="1059" style="height: 305px; max-height: 305px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/amsterdam_hermitage_amsterdam_b.jpg" alt="Hermitage Amsterdam — view 2" width="330" height="247" style="height: 305px; max-height: 305px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">H&#x27;ART Museum is an art museum located on the banks of the Amstel river in Amsterdam. Formerly a satellite of the Hermitage Museum of Saint Petersburg, Russia, the museum cut ties with the Hermitage after the Russian invasion of Ukraine in 2022. History The museum is housed in the former Amstelhof, a classical style building from 1681.</p></div>
 </section>
 <section class="place" id="amsterdam_magere_brug">
+<div class="place-lead">
 <h3>Magere Brug</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Modernist | Period: 1980</p>
-<figure class="place-fig"><img src="../images/amsterdam_magere_brug.jpg" alt="Magere Brug"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/amsterdam_magere_brug.jpg" alt="Magere Brug" width="1600" height="975" style="height: 281px; max-height: 281px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/amsterdam_magere_brug_b.jpg" alt="Magere Brug — view 2" width="330" height="215" style="height: 281px; max-height: 281px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Magere Brug is a picturesque suspension bridge spanning the IJ canal, connecting the districts of Amsterdam-Oost and Amsterdam-Zuid-West. Completed in 1980, it has become one of the city&#x27;s iconic landmarks. Opened in 1980. Designed by architect Jan Wils. Spanning approximately 460 meters. Supports both pedestrians and cyclists. Located near the IJ Museum.</p>
 <p class="prose">Constructed in 1980 as part of the IJ tunnel project, the Magere Brug was designed by architect Jan Wils to connect two previously disconnected parts of Amsterdam. It replaced an older wooden structure that had been in use since the early 17th century. The new bridge became famous for its modern design featuring a single suspension cable supporting the roadway, making it a symbol of contemporary Dutch engineering. Visitors come here to admire the stunning views over the IJ canal and enjoy panoramic vistas of Amsterdam&#x27;s skyline.</p></div>
 </section>
 <section class="place" id="amsterdam_museum_het_schip">
+<div class="place-lead">
 <h3>Museum Het Schip</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Industrial/Modernist | Period: 1870–1914</p>
-<figure class="place-fig"><img src="../images/amsterdam_museum_het_schip.jpg" alt="Museum Het Schip"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/amsterdam_museum_het_schip.jpg" alt="Museum Het Schip" width="1600" height="778" style="height: 224px; max-height: 224px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/amsterdam_museum_het_schip_b.jpg" alt="Museum Het Schip — view 2" width="330" height="231" style="height: 224px; max-height: 224px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Located in the heart of Amsterdam&#x27;s Jordaan neighborhood, Museum Het Schip is a unique museum housed within a former shipbuilding workshop and warehouse dating back to the early 20th century. It was originally constructed between 1870 and 1914. The building has been designated as a national monument since 1969. Today it houses exhibitions on art, design, and contemporary culture. Its distinctive brick facade and interior structure are well-preserved historical artifacts. Regularly hosts temporary exhibits highlighting local artists and designers.</p>
 <p class="prose">Originally built as a shipyard and storage space for wooden ships during the late 19th and early 20th centuries, the building later became known as &#x27;Het Schip&#x27; (&#x27;The Ship&#x27;) due to its striking resemblance to a vessel. Today it stands as one of Amsterdam’s most iconic heritage sites, showcasing the city&#x27;s rich maritime history and cultural evolution. Visitors come here to experience the fascinating transformation of industrial architecture into a vibrant cultural hub.</p></div>
 </section>
 <section class="place" id="amsterdam_scheepvaartmuseum">
+<div class="place-lead">
 <h3>National Maritime Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Period: 1937</p>
-<figure class="place-fig"><img src="../images/amsterdam_scheepvaartmuseum.jpg" alt="National Maritime Museum"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/amsterdam_scheepvaartmuseum.jpg" alt="National Maritime Museum" width="1600" height="843" style="height: 210px; max-height: 210px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/amsterdam_scheepvaartmuseum_b.jpg" alt="National Maritime Museum — view 2" width="330" height="150" style="height: 210px; max-height: 210px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The National Maritime Museum of Amsterdam is a historic institution dedicated to the exploration and preservation of Dutch maritime heritage. Established in 1937, it showcases centuries-old artifacts, ship models, and naval memorabilia that tell the story of Holland&#x27;s rich seafaring past. It houses one of the largest collections of ship models in Europe. Exhibits include replicas of famous Dutch sailing vessels like the VOC ships. The museum also features interactive displays explaining navigation techniques used by early explorers. Its collection includes rare navigational instruments and charts dating back several centuries. Regularly hosts temporary exhibitions focusing on specific aspects of maritime history.</p>
 <p class="prose">Founded in 1937, the museum was originally housed in the former Royal Palace at Dam Square before relocating to its current location on Prinsengracht in 1964. It has played a significant role in educating visitors about the Netherlands&#x27; extensive nautical history, including its pivotal role in global trade and colonial expansion. Visitors can explore the evolution of Dutch shipping, naval technology, and cultural influences through exhibits ranging from ancient maps to modern marine engineering.</p></div>
 </section>
 <section class="place" id="amsterdam_national_monument">
+<div class="place-lead">
 <h3>National Monument</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Modernist | Period: 1956</p>
-<figure class="place-fig"><img src="../images/amsterdam_national_monument.jpg" alt="National Monument"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/amsterdam_national_monument.jpg" alt="National Monument" width="1200" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/amsterdam_national_monument_b.jpg" alt="National Monument — view 2" width="330" height="495" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The National Monument is a solemn memorial dedicated to the Dutch victims of World War II and those who fought against fascism. Located on the banks of the IJ River, it stands as a poignant reminder of the country&#x27;s dark past. It is located at Keizersgracht 600, near the IJburg district. The monument&#x27;s design features a large bronze sculpture representing a kneeling figure. Each year on May 4th, Remembrance Day, thousands gather here for ceremonies honoring the fallen. Its architecture combines modernist elements with traditional Dutch aesthetics. A nearby museum provides additional context and exhibits related to WWII.</p>
 <p class="prose">Built in 1956, the monument was designed by architect Jan Woensdrecht. It originally commemorated the Resistance fighters and civilians killed during the Nazi occupation. Over time, its significance expanded to include all victims of totalitarian regimes worldwide. Visiting the National Monument allows visitors to reflect on the horrors of war and the resilience of the Dutch people.</p></div>
 </section>
 <section class="place" id="amsterdam_nemo">
+<div class="place-lead">
 <h3>NEMO Science Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Oosterdok 2 | Style: Copper-clad science centre on artificial mound | Period: 1997 (Renzo Piano)</p>
-<figure class="place-fig"><img src="../images/amsterdam_nemo.jpg" alt="NEMO Science Museum"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/amsterdam_nemo.jpg" alt="NEMO Science Museum" width="1280" height="960" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/amsterdam_nemo_b.jpg" alt="NEMO Science Museum — view 2" width="330" height="248" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Hands-on science museum shaped like a green copper ship&#x27;s hull rising above harbour bike parking. The roof terrace is free and offers wide harbour panoramas. Workshops target families and school groups on weekdays.</p>
 <p class="prose">Built on a national science outreach brief; the form echoes industrial harbour shapes. Family-friendly anchor on the eastern harbour front.</p></div>
 </section>
 <section class="place" id="amsterdam_nieuwe_kerk">
+<div class="place-lead">
 <h3>Nieuwe Kerk</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Gothic | Period: 1306–1404</p>
-<figure class="place-fig"><img src="../images/amsterdam_nieuwe_kerk.jpg" alt="Nieuwe Kerk"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/amsterdam_nieuwe_kerk.jpg" alt="Nieuwe Kerk" width="1600" height="1248" style="height: 360px; max-height: 360px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/amsterdam_nieuwe_kerk_b.jpg" alt="Nieuwe Kerk — view 2" width="330" height="284" style="height: 360px; max-height: 360px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Nieuwe Kerk is Amsterdam&#x27;s most prominent church and a testament to the city&#x27;s rich architectural heritage. Constructed in Gothic style with characteristic pointed arches and flying buttresses. The interior features intricate carvings and paintings by local artists. It has been used for royal weddings and state funerals over the centuries. Its tower offers panoramic views of the city’s canals and surrounding landmarks. Notable burials include Admiral Michiel Admiraal and Rembrandt van Rijn.</p>
 <p class="prose">Built between 1306 and 1404, the Nieuwe Kerk served as both a religious center and a venue for civic ceremonies. It was originally constructed as a parish church but later became the burial site of many notable Dutch figures, including Admiral Michiel Adriaenszoon Admiraal and the famous painter Rembrandt van Rijn. The church also played a significant role during the Dutch Revolt against Spanish rule, serving as a symbol of resistance. Visitors come here to appreciate its historical significance and stunning gothic architecture.</p></div>
 </section>
 <section class="place" id="amsterdam_noorderkerk">
+<div class="place-lead">
 <h3>Noorderkerk</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Baroque | Period: 1648–1650</p>
-<figure class="place-fig"><img src="../images/amsterdam_noorderkerk.jpg" alt="Noorderkerk"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/amsterdam_noorderkerk.jpg" alt="Noorderkerk" width="1600" height="1208" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/amsterdam_noorderkerk_b.jpg" alt="Noorderkerk — view 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Noorderkerk is a historic church located on the northern side of Dam Square in Amsterdam&#x27;s Old Town. It stands as one of the city&#x27;s most prominent landmarks and a testament to Dutch architectural heritage. It was consecrated in 1650 and originally served as a Reformed Church. The church features a distinctive tower with a copper dome, visible from various parts of the city center. Its interior boasts impressive artworks by notable Dutch artists such as Rembrandt van Rijn and Jan Lievens. During World War II, the Noorderkerk served as a refuge for Jewish families fleeing persecution. Today, it operates as a cultural venue hosting concerts, exhibitions, and special events.</p>
 <p class="prose">Built between 1648 and 1650, the Noorderkerk was designed by Pieter Post, a renowned Dutch architect known for his innovative use of classical elements. Originally constructed as a Protestant church during the Dutch Golden Age, it has since undergone several renovations and adaptations, reflecting changes in religious practices and societal shifts over time. Visitors come to admire its elegant Baroque-style architecture and rich interior decorations, which include intricate carvings and paintings.</p></div>
 </section>
 <section class="place" id="amsterdam_oude_kerk">
+<div class="place-lead">
 <h3>Oude Kerk</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Oudekerksplein | Style: Gothic hall church with wooden vaulting | Period: 13th c. hall church; later Gothic additions</p>
-<figure class="place-fig"><img src="../images/amsterdam_oude_kerk.jpg" alt="Oude Kerk"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/amsterdam_oude_kerk.jpg" alt="Oude Kerk" width="1280" height="258" style="height: 93px; max-height: 93px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/amsterdam_oude_kerk_b.jpg" alt="Oude Kerk — view 2" width="330" height="290" style="height: 93px; max-height: 93px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Amsterdam&#x27;s oldest parish church in the Red Light District courtyard, with stained glass and historic grave slabs. The leaning tower was stabilised in conservation campaigns. Concerts and exhibitions reuse the nave outside service times.</p>
 <p class="prose">Founded as a Catholic church; became Calvinist after the Reformation. Medieval core of the city amid later canal expansion.</p></div>
 </section>
 <section class="place" id="amsterdam_portuguese_synagogue">
+<div class="place-lead">
 <h3>Portuguese Synagogue</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Baroque | Period: 1671–1675</p>
-<figure class="place-fig"><img src="../images/amsterdam_portuguese_synagogue.jpg" alt="Portuguese Synagogue"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/amsterdam_portuguese_synagogue_b.jpg" alt="Portuguese Synagogue" width="330" height="334"/></figure>
+</div>
 <div class="place-desc"><p class="prose">The Portuguese Synagogue, located on Keizersgracht, is Amsterdam&#x27;s most prominent Jewish house of worship and a testament to the city&#x27;s rich multicultural heritage. It is one of the oldest surviving synagogues in Europe. Its name reflects its origins among Portuguese-Jewish immigrants. The synagogue has been used continuously since its construction. It houses a museum showcasing Jewish artifacts and historical documents. Weekly services are still held here.</p>
 <p class="prose">Built between 1671 and 1675, the synagogue was originally constructed by Sephardic Jews who had fled Portugal during the Inquisition. Designed by architect Jacob van Campen, it features Baroque-style architecture with intricate details inspired by Dutch Golden Age artistry. The interior boasts elaborate wooden ceilings and a large chandelier symbolizing unity and light. Visiting the Portuguese Synagogue offers insight into Amsterdam’s vibrant past as a haven for religious tolerance and cultural diversity.</p></div>
 </section>
 <section class="place" id="amsterdam_reguliersgracht">
+<div class="place-lead">
 <h3>Reguliersgracht bridges</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Reguliersgracht, Grachtengordel | Style: Canal houses with arched bridges | Period: 17th c. canal ring expansion</p>
-<figure class="place-fig"><img src="../images/amsterdam_reguliersgracht.jpg" alt="Reguliersgracht bridges"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/amsterdam_reguliersgracht.jpg" alt="Reguliersgracht bridges" width="1280" height="852" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/amsterdam_reguliersgracht_b.jpg" alt="Reguliersgracht bridges — view 2" width="330" height="220" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Classic view along the Reguliersgracht where multiple bridges align, framing gabled façades reflected in still water at dawn. The canal belt is UNESCO-listed as a planned extension of the medieval city. Evening boat tours pass under these low bridges in sequence.</p>
 <p class="prose">Planned during Amsterdam&#x27;s Golden Age ring of canals, the street pattern still defines walking routes between neighbourhoods. The postcard image of Amsterdam&#x27;s urban water fabric.</p></div>
 </section>
 <section class="place" id="amsterdam_rembrandt_house">
+<div class="place-lead">
 <h3>Rembrandt House Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Period: c. 1639</p>
-<figure class="place-fig"><img src="../images/amsterdam_rembrandt_house.jpg" alt="Rembrandt House Museum"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/amsterdam_rembrandt_house.jpg" alt="Rembrandt House Museum" width="1200" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/amsterdam_rembrandt_house_b.jpg" alt="Rembrandt House Museum — view 2" width="330" height="498" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Step back in time to Amsterdam&#x27;s Golden Age at the Rembrandt House Museum, where you&#x27;ll discover the life and work of one of Holland&#x27;s greatest artists. Located on Keizersgracht 408, near the city&#x27;s famous canal belt. Operates year-round with guided tours available in multiple languages. Housed within a historic building dating back to the 17th century. Features interactive exhibits that bring Rembrandt&#x27;s art to life. Offers special events and workshops during certain seasons.</p>
 <p class="prose">Once the residence of famed Dutch painter Rembrandt van Rijn, the house was built around 1639 and served as his home and studio for over a decade. Today, it showcases his personal belongings, paintings, and prints, offering visitors a unique glimpse into the artist&#x27;s creative process and daily life. Visit the museum to explore the intimate world of Rembrandt, gaining insight into his artistic genius and historical context.</p></div>
 </section>
 <section class="place" id="amsterdam_rijksmuseum">
+<div class="place-lead">
 <h3>Rijksmuseum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 <p class="sub-en">National museum of art and history</p>
 <p class="place-meta">Address: Museumstraat 1 | Style: Dutch neo-Renaissance; modern atrium passage | Period: 1885 (Cuypers); reopened 2013 after renovation</p>
-<figure class="place-fig"><img src="../images/amsterdam_rijksmuseum.jpg" alt="Rijksmuseum"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/amsterdam_rijksmuseum.jpg" alt="Rijksmuseum" width="1280" height="681" style="height: 245px; max-height: 245px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/amsterdam_rijksmuseum_b.jpg" alt="Rijksmuseum — view 2" width="330" height="220" style="height: 245px; max-height: 245px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Dutch national museum spanning Golden Age painting, Delftware, ship models, and Asian collections. The Gallery of Honour culminates at Rembrandt&#x27;s Night Watch. Cuypers&#x27; building bridges road and cycle traffic through its arched passage. Timed entry is used at peak periods for crowd management.</p>
 <p class="prose">Founded in The Hague; the Amsterdam palace of art opened in the late 19th century and was thoroughly modernised in the 2000s. The anchor of Museumplein alongside the Van Gogh Museum and Stedelijk.</p></div>
 </section>
 <section class="place" id="amsterdam_concertgebouw">
+<div class="place-lead">
 <h3>Royal Concertgebouw</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Classical Beaux-Arts | Period: 1888</p>
-<figure class="place-fig"><img src="../images/amsterdam_concertgebouw.jpg" alt="Royal Concertgebouw"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/amsterdam_concertgebouw.jpg" alt="Royal Concertgebouw" width="1067" height="1600" style="height: 291px; max-height: 291px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/amsterdam_concertgebouw_b.jpg" alt="Royal Concertgebouw — view 2" width="330" height="208" style="height: 291px; max-height: 291px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Royal Concertgebouw is Amsterdam&#x27;s iconic concert hall, renowned for its exceptional acoustics and hosting some of the world&#x27;s finest orchestras. It is home to the Royal Concertgebouw Orchestra, one of the most esteemed orchestras globally. Its interior design features intricate wooden panelling and elegant decorations. The hall boasts a seating capacity of around 1,975 people. Notable composers such as Johannes Brahms and Anton Bruckner have conducted here. Each year, the Concertgebouw hosts over 400 concerts.</p>
 <p class="prose">Built in 1888, the Concertgebouw has been a cornerstone of Dutch musical culture since its opening. Designed by architect Pierre Cuypers, it was originally intended as a venue for symphonic performances. Over time, it became one of Europe’s premier concert halls, showcasing world-class musicians and orchestras. Visitors come to experience the legendary acoustics and witness live performances by celebrated artists.</p></div>
 </section>
 <section class="place" id="amsterdam_royal_palace">
+<div class="place-lead">
 <h3>Royal Palace of Amsterdam</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Dam Square | Style: Dutch Classicism (Jacob van Campen) | Period: 1655 (town hall); royal use from 1808</p>
-<figure class="place-fig"><img src="../images/amsterdam_royal_palace.jpg" alt="Royal Palace of Amsterdam"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/amsterdam_royal_palace.jpg" alt="Royal Palace of Amsterdam" width="1280" height="960" style="height: 331px; max-height: 331px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/amsterdam_royal_palace_b.jpg" alt="Royal Palace of Amsterdam — view 2" width="330" height="237" style="height: 331px; max-height: 331px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Former city hall turned royal palace on Dam Square, with marble Citizens&#x27; Hall and sculpture programme. Used for receptions; public opening days vary by calendar. Atlas and Justice groups crown the roofline facing the square.</p>
 <p class="prose">Built as Europe&#x27;s largest secular building of its age; Louis Bonaparte&#x27;s residence began its royal phase. Dam Square&#x27;s architectural anchor and state room showcase.</p></div>
 </section>
 <section class="place" id="amsterdam_bloemenmarkt">
+<div class="place-lead">
 <h3>Singel flower market</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/amsterdam_bloemenmarkt.jpg" alt="Singel flower market"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/amsterdam_bloemenmarkt.jpg" alt="Singel flower market" width="1067" height="1600" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/amsterdam_bloemenmarkt_b.jpg" alt="Singel flower market — view 2" width="330" height="247" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Singel Flower Market is a vibrant and colorful open-air marketplace where Amsterdam&#x27;s floral enthusiasts gather to buy fresh blooms and exotic plants. Located along the picturesque Singel canal, it offers a charming blend of local flowers, seasonal produce, and handmade crafts. It operates daily except on Mondays, offering a wide selection of flowers and plants. The market features both traditional Dutch varieties and international imports. Artisanal craft stalls complement the floral offerings with handmade jewelry, ceramics, and accessories. Locals often use the market for special occasions such as weddings and birthdays. It&#x27;s one of the few remaining authentic open-air markets in central Amsterdam.</p>
 <p class="prose">Originally established as part of the city&#x27;s defensive system during the 17th century, the Singel canal was later transformed into a recreational area. The flower market has been held here since the early 20th century, showcasing a variety of Dutch tulips, roses, and lilies that have become iconic symbols of the Netherlands. Visitors come to experience the lively atmosphere, unique designs, and exquisite arrangements created by talented florists.</p></div>
 </section>
 <section class="place" id="amsterdam_stedelijk">
+<div class="place-lead">
 <h3>Stedelijk Museum Amsterdam</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Museumplein 10 | Style: Neo-Renaissance hall; modern &#x27;bathtub&#x27; wing | Period: 1895; new wing 2012</p>
-<figure class="place-fig"><img src="../images/amsterdam_stedelijk.jpg" alt="Stedelijk Museum Amsterdam"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/amsterdam_stedelijk.jpg" alt="Stedelijk Museum Amsterdam" width="1280" height="853" style="height: 260px; max-height: 260px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/amsterdam_stedelijk_b.jpg" alt="Stedelijk Museum Amsterdam — view 2" width="330" height="186" style="height: 260px; max-height: 260px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Municipal museum of modern and contemporary art and design, neighbouring the Van Gogh and Rijksmuseum on Museumplein. The collection spans De Stijl, CoBrA, and post-war movements. The lower entrance wing is nicknamed &#x27;the bathtub&#x27; by locals.</p>
 <p class="prose">Opened as a civic art museum; major expansion added underground galleries and a striking façade above ground. Amsterdam&#x27;s primary venue for 20th- and 21st-century art.</p></div>
 </section>
 <section class="place" id="amsterdam_van_gogh_museum">
+<div class="place-lead">
 <h3>Van Gogh Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Museumplein 6 | Style: Modern museum architecture | Period: 1973 (Rietveld &amp; Van Tricht); 1999 wing (Kurokawa)</p>
-<figure class="place-fig"><img src="../images/amsterdam_van_gogh_museum.jpg" alt="Van Gogh Museum"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/amsterdam_van_gogh_museum.jpg" alt="Van Gogh Museum" width="1280" height="590" style="height: 212px; max-height: 212px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--row-sized"><img src="../images/amsterdam_van_gogh_museum_b.jpg" alt="Van Gogh Museum — view 2" width="330" height="521" style="height: 212px; max-height: 212px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Dedicated museum for Vincent van Gogh and his contemporaries, holding the largest collection of his paintings and drawings. Timed entry is standard; combined tickets sometimes pair with the Rijksmuseum. The building sits on Museumplein beside the Stedelijk and Rijksmuseum.</p>
 <p class="prose">Founded from family holdings; expansions added exhibition space for temporary shows and visitor services. Essential for understanding Van Gogh&#x27;s chronology and materials up close.</p></div>
 </section>
 <section class="place" id="amsterdam_westerkerk">
+<div class="place-lead">
 <h3>Westerkerk</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Prinsengracht 279–281 | Style: Dutch Renaissance Protestant church | Period: 1620–1631</p>
-<figure class="place-fig"><img src="../images/amsterdam_westerkerk.jpg" alt="Westerkerk"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/amsterdam_westerkerk.jpg" alt="Westerkerk" width="1280" height="1114" style="height: 402px; max-height: 402px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--row-sized"><img src="../images/amsterdam_westerkerk_b.jpg" alt="Westerkerk — view 2" width="330" height="603" style="height: 402px; max-height: 402px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Protestant church beside the Prinsengracht whose tower offers views and bells familiar from city soundscapes. Anne Frank wrote about the tower chimes from the nearby annexe. Rembrandt is buried here (unmarked grave).</p>
 <p class="prose">Part of the Calvinist church provision after the Alteration; the spire became a navigation landmark. Canal-belt church tower visible from many boat routes.</p></div>
 </section>
 <section class="place" id="amsterdam_zuiderkerk">
+<div class="place-lead">
 <h3>Zuiderkerk</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/amsterdam_zuiderkerk.jpg" alt="Zuiderkerk"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/amsterdam_zuiderkerk.jpg" alt="Zuiderkerk" width="1200" height="1600" style="height: 373px; max-height: 373px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/amsterdam_zuiderkerk_b.jpg" alt="Zuiderkerk — view 2" width="330" height="267" style="height: 373px; max-height: 373px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Zuiderkerk (Dutch pronunciation: [ˈzœydərˌkɛr(ə)k], &quot;southern church&quot;) is a 17th-century Reformed Protestant church in the Nieuwmarkt area of Amsterdam, the capital of the Netherlands. The church played an important part in the life of Rembrandt and was the subject of a painting by Claude Monet. The church is open to the public and currently serves as a municipal information center with exhibitions on housing and the environment.</p></div>
 </section>
 </body>

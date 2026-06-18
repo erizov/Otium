@@ -15,22 +15,29 @@ import urllib.request
 from pathlib import Path
 from typing import Any, Optional
 
-from scripts.guide_constants import get_output_dir, moscow_city_root_from_html_dir
-
-# Добавляем корень проекта в путь для импорт moscow.data
+# Project root must be on sys.path before ``scripts.*`` imports.
 _project_root = Path(__file__).resolve().parent.parent
 if str(_project_root) not in sys.path:
     sys.path.insert(0, str(_project_root))
 
+from scripts.guide_constants import (
+    city_root_from_html_dir,
+    get_output_dir,
+)
+
+BUILD_CITY = "moscow"
+
 
 def _city_root(html_output_dir: Path) -> Path:
-    """Images live under ``moscow/images/``; HTML under ``moscow/output/``."""
-    return moscow_city_root_from_html_dir(html_output_dir)
+    """Images under ``<city>/images/``; HTML under ``<city>/output/``."""
+    return city_root_from_html_dir(html_output_dir, BUILD_CITY)
 
 
 def _html_img_src(img_rel: str, html_output_dir: Path) -> str:
     rel = img_rel.replace("\\", "/")
-    if html_output_dir.name == "output" and html_output_dir.parent.name == "moscow":
+    if html_output_dir.name == "output" and html_output_dir.parent.name in (
+        "moscow", "spb",
+    ):
         if rel.startswith("images/"):
             return "../{}".format(rel)
     return rel
@@ -50,12 +57,12 @@ from scripts.guide_constants import BUILD_GUIDES, GUIDE_EXPECTED_COUNTS
 from scripts.image_utils import image_content_hash
 
 MIN_IMAGE_BYTES = 500
-IMAGES_PER_PLACE = 4
-# Optimized guide: 3 photos + 1 map = 2x2 grid per place
-OPT_IMAGES_PER_PLACE = 3
+IMAGES_PER_PLACE = 2
+# Optimized guide: 2 photos + 1 map = 2x2 grid per place
+OPT_IMAGES_PER_PLACE = 2
 MAPS_PER_PLACE = 1
 # Include item in guide if it has at least this many distinct images
-MIN_IMAGES_TO_BUILD = 2
+MIN_IMAGES_TO_BUILD = 1
 # Optimized: include place if it has at least 1 image
 MIN_IMAGES_OPT = 1
 
@@ -384,6 +391,33 @@ def _load_guide_config(guide: str) -> None:
         PDF_NAME = "cafes_guide.pdf"
         INTRO_TITLE = "Исторические кафе Москвы"
         INTRO_SUBTITLE = "6 легендарных кафе и ресторанов"
+    elif guide == "osobnjaki":
+        if BUILD_CITY == "spb":
+            from spb.data.osobnjaki import OSOBNJAKI, IMAGES_SUBFOLDER as _SUB
+            from spb.data.osobnjaki_image_urls import (
+                OSOBNJAKI_IMAGE_DOWNLOADS,
+                OSOBNJAKI_IMAGE_FALLBACKS,
+            )
+            from spb.data.qa_osobnjaki import QA as _QA
+            INTRO_TITLE = "Особняки Санкт-Петербурга"
+            INTRO_SUBTITLE = "50 городских особняков и дворцов"
+        else:
+            from moscow.data.osobnjaki import OSOBNJAKI, IMAGES_SUBFOLDER as _SUB
+            from moscow.data.osobnjaki_image_urls import (
+                OSOBNJAKI_IMAGE_DOWNLOADS,
+                OSOBNJAKI_IMAGE_FALLBACKS,
+            )
+            from moscow.data.qa_osobnjaki import QA as _QA
+            INTRO_TITLE = "Особняки Москвы"
+            INTRO_SUBTITLE = "50 городских особняков и усадебных домов"
+        IMAGES_SUBFOLDER = _SUB
+        PLACES = OSOBNJAKI
+        IMAGE_DOWNLOADS = OSOBNJAKI_IMAGE_DOWNLOADS
+        IMAGE_FALLBACKS = OSOBNJAKI_IMAGE_FALLBACKS
+        QA = _QA
+        BANNED = frozenset()
+        HTML_NAME = "osobnjaki_guide.html"
+        PDF_NAME = "osobnjaki_guide.pdf"
     elif guide == "test_e2e":
         from moscow.data.test_e2e_guide import TEST_E2E_PLACES, IMAGES_SUBFOLDER as _SUB
         from moscow.data.test_e2e_image_urls import (
@@ -496,27 +530,33 @@ def download_images(
         use_ai_identify=use_ai_identify,
         guide_name=guide_name,
         force_overwrite=force_overwrite,
+        max_images_per_item=IMAGES_PER_PLACE,
     )
     if stats_out is not None:
         for k, v in stats.items():
             stats_out[k] = stats_out.get(k, 0) + v
 
-    print("\nValidating image format (4 distinct per item)...")
+    print("\nValidating image format (up to {} distinct per item)...".format(
+        IMAGES_PER_PLACE,
+    ))
     is_valid, errors = validate_item_images_format(
         PLACES, images_dir, guide_name=guide_name,
+        max_images_per_item=IMAGES_PER_PLACE,
     )
     if not is_valid:
         for e in errors:
             print("  ", e, file=sys.stderr)
         if build_with_available:
             print(
-                "\nBuilding with available images (some items have < 4 images).",
+                "\nBuilding with available images (some items have < {} images).".format(
+                    IMAGES_PER_PLACE,
+                ),
                 file=sys.stderr,
             )
             return
         print(
-            "\nEach item must have exactly 4 distinct images in format: "
-            "name_1.jpg, name_2.jpg, name_3.jpg, name_4.jpg",
+            "\nEach item must have up to {} distinct images in format: "
+            "name_1.jpg, name_2.jpg, ...".format(IMAGES_PER_PLACE),
             file=sys.stderr,
         )
         raise ValueError("Image validation failed: not all items have 4 distinct images")
@@ -799,8 +839,8 @@ def _section_place(
     significance = _escape(significance_text)
     map_url = _map_img_url(m["lon"], m["lat"])
 
-    # Always render 2x2: up to 3 images + map (ignore 4th image if present)
-    limit = OPT_IMAGES_PER_PLACE
+    # 2x2 grid: up to 2 photos + map (use what exists: 1 or 2 images).
+    limit = images_max if images_max is not None else IMAGES_PER_PLACE
     unique_rels = _unique_images_for_place(
         m["images"], output_dir, max_images=limit
     )
@@ -839,7 +879,8 @@ def _section_place(
             cells.append('    <div class="grid-cell"></div>')
             cells.append('    <div class="grid-cell"></div>')
         else:
-            for i in range(OPT_IMAGES_PER_PLACE):
+            photo_slots = min(limit, 2)
+            for i in range(photo_slots):
                 if i < n:
                     img_rel = unique_rels[i]
                     cells.append(
@@ -857,6 +898,7 @@ def _section_place(
                 '<p class="map-caption">Схема · Яндекс.Карты</p></div>'
                 .format(map_url, name_alt)
             )
+            cells.append('    <div class="grid-cell"></div>')
         images_block = (
             '  <div class="visual-block">\n'
             '  <div class="visual-grid-2x2">\n{}\n  </div>\n'
@@ -949,7 +991,7 @@ def build_html(
       .meta { margin: 0.2em 0 0.6em 0.3em; color: #6b635b !important; }
       .block-label { margin: 0.6em 0 0.15em 0.3em; text-transform: uppercase;
                      font-weight: 600; color: #6b7b8a !important; }
-      .body-text { margin: 0 0 0.4em 0.3em; text-align: left; max-width: 42em;
+      .body-text { margin: 0 0 0.4em 0.3em; text-align: left;
                    color: #1c1b19; font-family: "Source Serif 4", Georgia, serif; }
       .story-text { font-style: italic; color: #4a5568; }
       ul, li, p { color: #1c1b19; font-family: "Source Serif 4", Georgia, serif; }
@@ -965,8 +1007,7 @@ def build_html(
         font-size: 11pt; text-align: center; color: #6b635b !important;
         font-style: italic; margin-bottom: 1em; }
       .intro-block p { margin: 0.4em 0; font-size: 9.5pt; line-height: 1.5;
-        text-align: justify; max-width: 38em; margin-left: auto;
-        margin-right: auto; color: #1c1b19;
+        text-align: justify; color: #1c1b19;
         font-family: "Source Serif 4", Georgia, serif; }
       .monastery { display: block; page-break-before: always;
                     page-break-inside: avoid; break-inside: avoid;
@@ -1092,7 +1133,7 @@ def build_html(
                 max_images=OPT_IMAGES_PER_PLACE,
             )) >= MIN_IMAGES_OPT
         ]
-        images_max = OPT_IMAGES_PER_PLACE
+        images_max = IMAGES_PER_PLACE
     else:
         # Skip items with no images (use existing only; no empty blocks)
         placed = [
@@ -1102,7 +1143,7 @@ def build_html(
                 max_images=IMAGES_PER_PLACE,
             )) >= 1
         ]
-        images_max = OPT_IMAGES_PER_PLACE
+        images_max = IMAGES_PER_PLACE
     for num, m in enumerate(placed, 1):
         story = stories.get(m.get("name") or "")
         fit_page = _place_needs_fit_page(m, story)
@@ -1529,10 +1570,11 @@ def _print_download_stats(stats: dict) -> None:
 
 
 def _all_images_complete(images_subdir: Path, guide_name: str) -> bool:
-    """Check if all items have all 4 images downloaded."""
+    """Check if all items have target images downloaded."""
     from scripts.download_with_dedup import validate_item_images_format
     is_valid, errors = validate_item_images_format(
         PLACES, images_subdir, guide_name=guide_name,
+        max_images_per_item=IMAGES_PER_PLACE,
     )
     return is_valid and len(errors) == 0
 
@@ -1599,7 +1641,8 @@ def _process_deleted_images_and_strip_script(
 
 def _run_one_guide(args, stats_out: Optional[dict] = None) -> None:
     """Run download, verify, and build for one guide (args.guide)."""
-    global HTML_NAME, PDF_NAME
+    global HTML_NAME, PDF_NAME, BUILD_CITY
+    BUILD_CITY = getattr(args, "city", "moscow")
     _load_guide_config(args.guide)
     if getattr(args, "optimized", False):
         HTML_NAME = HTML_NAME.replace("_guide.html", "_guide_opt.html")
@@ -1607,7 +1650,7 @@ def _run_one_guide(args, stats_out: Optional[dict] = None) -> None:
     output_dir = (
         Path(args.output_dir)
         if getattr(args, "output_dir", None)
-        else get_output_dir()
+        else get_output_dir(getattr(args, "city", "moscow"))
     )
     output_dir.mkdir(exist_ok=True)
     images_subdir = ensure_images_subdir(output_dir)
@@ -1631,6 +1674,7 @@ def _run_one_guide(args, stats_out: Optional[dict] = None) -> None:
         print("Verifying images (forbidden folder checked)...")
         is_valid, errors = validate_item_images_format(
             PLACES, images_subdir, guide_name=args.guide,
+            max_images_per_item=IMAGES_PER_PLACE,
         )
         if not is_valid:
             for e in errors:
@@ -1812,12 +1856,19 @@ def main() -> None:
     import argparse
     parser = argparse.ArgumentParser(description="Build PDF guide (monasteries or churches)")
     parser.add_argument(
+        "--city",
+        choices=["moscow", "spb"],
+        default="moscow",
+        help="City package (moscow or spb); spb supports osobnjaki guide.",
+    )
+    parser.add_argument(
         "--guide",
         choices=[
             "monasteries", "places_of_worship", "parks", "museums", "palaces",
             "buildings", "sculptures", "places", "squares", "metro",
             "theaters", "viewpoints", "bridges", "markets",
             "libraries", "railway_stations", "cemeteries", "landmarks", "cafes",
+            "osobnjaki",
             "test_e2e",
         ],
         default="monasteries",
@@ -1932,7 +1983,7 @@ def main() -> None:
             output_dir = (
                 Path(args.output_dir)
                 if getattr(args, "output_dir", None)
-                else get_output_dir()
+                else get_output_dir(getattr(args, "city", "moscow"))
             )
             images_subdir = ensure_images_subdir(output_dir)
             

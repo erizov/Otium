@@ -13,7 +13,7 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
 .otium-logo { font-family: 'Playfair Display', serif; font-size: 2.15rem;
   font-weight: 600; letter-spacing: 0.18em; margin-bottom: 0.85rem; }
 .otiump { margin: 0.42rem 0; line-height: 1.42; text-align: justify;
-  max-width: 38rem; font-size: 0.95rem; }
+  font-size: 0.95rem; }
 .guide-title { page-break-after: auto; margin-bottom: 0.55rem;
   page-break-inside: avoid; }
 .historical-reference { margin: 0.75rem 0 1.15rem;
@@ -63,22 +63,103 @@ ol.trip-stops a:hover { text-decoration: underline; }
 .heraldry-univ-caption { font-size: 0.52rem; line-height: 1.18;
   margin: 0.12rem 0 0; padding: 0 0.06rem; color: #252525;
   text-align: center; font-weight: 500; }
-.heraldry-motto { text-align: center; max-width: 18rem; margin: 0.18rem auto;
+.heraldry-motto { text-align: center; margin: 0.18rem auto;
   width: 100%; }
 .motto-line { font-family: 'Playfair Display', serif; font-size: 1rem;
   margin: 0; color: #333; line-height: 1.35; }
 .guide-title h1.guide-title-main { font-family: 'Playfair Display', serif;
   font-size: 2.35rem; margin-bottom: 0.5rem; font-weight: 600; }
 .lead { color: #444; font-size: 1.05rem; }
-.guide-toc { margin: 0.85rem 0 1.15rem; page-break-inside: avoid; }
-.guide-toc h2 { font-family: 'Playfair Display', serif; font-size: 1.28rem;
-  font-weight: 600; margin: 0.4rem 0 0.55rem; }
+
+.guide-toc { page-break-before: always; break-before: page;
+  page-break-after: always; break-after: page;
+  margin: 0; padding: 0.2rem 0 0.45rem; page-break-inside: auto; }
+.guide-toc h2 { font-family: 'Playfair Display', serif;
+  font-size: 1.28rem; font-weight: 600; margin: 0.4rem 0 0.55rem; }
 .guide-toc ol { margin: 0.35rem 0 0.65rem 1.25rem; padding: 0;
   columns: 2; column-gap: 1.5rem; }
 .guide-toc li { margin: 0.18rem 0; line-height: 1.35;
   font-size: 0.88rem; break-inside: avoid; }
-.guide-toc a { color: #1a5276; text-decoration: none; }
+.guide-toc a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.guide-toc a:hover { color: #0d3d56; }
 .guide-toc li.toc-item--sub { font-size: 0.82rem; margin-left: 0.35rem; }
+.toc-back { font-size: 0.78rem; margin: 0 0 0.35rem; text-align: right; }
+.toc-back a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.toc-back a:hover { color: #0d3d56; }
+.place, .historical-reference, .guide-primer, .guide-trip-plans {
+  scroll-margin-top: 1.25rem; }
+.historical-reference h2, .guide-primer h2, .guide-trip-plans h2,
+.chapter-head h2, .place-lead h3 { position: relative; }
+.guide-toc + .place, .guide-toc + .chapter-head {
+  page-break-before: avoid; break-before: avoid-page; }
+.place-lead { page-break-inside: avoid; break-inside: avoid-page;
+  page-break-after: auto; }
+.place-lead > h3 { page-break-after: avoid; break-after: avoid-page; }
+.place-lead > .place-meta { page-break-after: avoid; break-after: avoid-page; }
+
+.place-fig { page-break-inside: avoid; break-inside: avoid-page;
+  margin: 0.5rem 0 1rem; }
+.place-fig img {
+  page-break-inside: avoid; break-inside: avoid-page;
+  max-height: 48vh; width: auto; max-width: 100%;
+  object-fit: contain; margin-left: auto; margin-right: auto; }
+.place-fig--hi-res img { max-height: 52vh; }
+.place-fig--lo-res img { max-height: 30vh; }
+.place-pdf-fig-row {
+  display: flex; flex-direction: row; flex-wrap: wrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.45rem 0.55rem; margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row .place-fig {
+  flex: 1 1 30%; margin: 0; min-width: 26%; max-width: 100%; }
+.place-pdf-fig-row .place-fig img {
+  width: auto; max-width: 100%; height: auto; max-height: 44vh;
+  object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--pair {
+  flex-wrap: nowrap; justify-content: space-between;
+  align-items: flex-end; gap: 0.5rem 0.65rem; }
+.place-pdf-fig-row--pair .place-fig {
+  flex: 1 1 47%; min-width: 0; max-width: 50%;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--pair .place-fig img {
+  max-height: 44vh; object-fit: contain; }
+.place-pdf-fig-row--pair .place-fig--hi-res img { max-height: 52vh; }
+.place-pdf-fig-row--pair .place-fig--lo-res img { max-height: 26vh; }
+.place-pdf-fig-row--pair .place-fig--row-sized img,
+.place-pdf-fig-row--triple .place-fig--row-sized img,
+.place-pdf-fig-row--many .place-fig--row-sized img {
+  width: auto; max-width: 100%; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row .place-fig--row-sized.place-fig--hi-res img,
+.place-pdf-fig-row .place-fig--row-sized.place-fig--lo-res img {
+  max-height: unset; }
+.place-pdf-fig-rows-stack {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple {
+  display: flex; flex-direction: row; flex-wrap: nowrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.4rem 0.48rem; margin: 0;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--triple .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--triple .place-fig--hi-res img { max-height: 42vh; }
+.place-pdf-fig-row--triple .place-fig--lo-res img { max-height: 18vh; }
+.place-pdf-fig-row--many {
+  flex-wrap: nowrap; justify-content: center; align-items: flex-end;
+  gap: 0.35rem 0.42rem; }
+.place-pdf-fig-row--many .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--many .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+
+
 .place { margin-bottom: 2.2rem; page-break-inside: auto; }
 h3 { font-family: 'Playfair Display', serif; font-size: 1.22rem; margin: 1.2rem 0 0.35rem;
   font-weight: 600; }
@@ -90,7 +171,6 @@ h4 { font-family: 'Playfair Display', serif; font-size: 0.95rem; text-transform:
   color: #555; font-size: 0.95rem; margin: 0 0 0.5rem; font-style: italic; }
 .place-meta { font-size: 0.92rem; color: #353535; margin: 0 0 0.75rem;
   line-height: 1.4; }
-.place-fig { margin: 0.5rem 0 1rem; }
 img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
 .prose, .place-desc p { margin: 0.45rem 0; line-height: 1.5;
   text-align: justify; }
@@ -110,11 +190,14 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <figure class="heraldry-fig heraldry-coat-book" title="Coat of arms of Lisbon"><img src="../images/guide_coat_of_arms.svg" alt="Coat of arms of Lisbon"/></figure>
 <figure class="heraldry-fig heraldry-coat-book" title="Flag of Lisbon"><img src="../images/guide_flag.svg" alt="Flag of Lisbon"/></figure>
 </div></div><h1 class="guide-title-main">Lisbon</h1><p class="lead">Путеводитель. Объектов в этом выпуске: 28.</p></header>
+<nav class="guide-toc" id="guide-toc" aria-label="Содержание"><h2>Содержание</h2><ol><li class="toc-item"><a href="#guide-historical">Историческая справка</a></li><li class="toc-item"><a href="#guide-trips">Маршруты</a></li><li class="toc-item"><a href="#lisbon_aqueduto_agua_livre">Lisbon Aqueduto Agua Livre</a></li><li class="toc-item"><a href="#lisbon_carmo_convent">Lisbon Carmo Convent</a></li><li class="toc-item"><a href="#lisbon_commerce_square">Lisbon Commerce Square</a></li><li class="toc-item"><a href="#lisbon_jeronimos_monastery">Lisbon Jeronimos Monastery</a></li><li class="toc-item"><a href="#lisbon_lx_factory">Lisbon Lx Factory</a></li><li class="toc-item"><a href="#lisbon_maat">Lisbon Maat</a></li><li class="toc-item"><a href="#lisbon_national_pantheon">Lisbon National Pantheon</a></li><li class="toc-item"><a href="#lisbon_padrao_descobrimentos">Lisbon Padrao Descobrimentos</a></li><li class="toc-item"><a href="#lisbon_pal_cio_da_bemposta">Lisbon Pal Cio Da Bemposta</a></li><li class="toc-item"><a href="#lisbon_parque_eduardo_vii">Lisbon Parque Eduardo Vii</a></li><li class="toc-item"><a href="#lisbon_rossio">Lisbon Rossio</a></li><li class="toc-item"><a href="#lisbon_santa_justa_lift">Lisbon Santa Justa Lift</a></li><li class="toc-item"><a href="#lisbon_sao_jorge_castle">Lisbon Sao Jorge Castle</a></li><li class="toc-item"><a href="#lisbon_tile_museum">Lisbon Tile Museum</a></li><li class="toc-item"><a href="#lisbon_tower_belem">Lisbon Tower Belem</a></li><li class="toc-item"><a href="#lisbon_tram_28">Tram 28</a></li><li class="toc-item"><a href="#lisbon_estrela_basilica">Базилика Эстрела</a></li><li class="toc-item"><a href="#lisbon_campo_pequeno">Бульвар Кампо Пекено</a></li><li class="toc-item"><a href="#lisbon_palacio_belem">Дворец Белен</a></li><li class="toc-item"><a href="#lisbon_cais_colunas">Кайш даш Колунас</a></li><li class="toc-item"><a href="#lisbon_se_cathedral">Лиссабонский собор</a></li><li class="toc-item"><a href="#lisbon_miradouro_graca">Мирадуру да Граса</a></li><li class="toc-item"><a href="#lisbon_miradouro_senhora_monte">Мирадуру да Сенора ду Монте</a></li><li class="toc-item"><a href="#lisbon_25_abril_bridge">Мост 25 апреля</a></li><li class="toc-item"><a href="#lisbon_gulbenkian">Музей Калусте Гульбенкяна</a></li><li class="toc-item"><a href="#lisbon_oceanario">Океанариум Лиссабона</a></li><li class="toc-item"><a href="#lisbon_praca_municipio">Площадь Муниципия</a></li><li class="toc-item"><a href="#lisbon_sao_vicente">Сан-Висенте-де-Фора</a></li></ol></nav>
 <section class="historical-reference" id="guide-historical" aria-label="Историческая справка"><h2>Историческая справка</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 <p class="prose">Лиссабон — столица Португалии, порт на Атлантике у устья Тежу.</p>
 <p class="prose">Финикийские и римские корни, эпоха Великих географических открытий и землетрясение 1755 года сформировали Помбалинский центр и трамваи на крутых улицах. Фаду, азулежу и колониальное наследие — часть идентичности города.</p>
 <p class="prose">Землетрясение и Помбал перестроили центр; колониальное прошлое сменилось революцией гвоздик 1974 года и вступлением в ЕС. Лиссабон развивает технологии и туризм, сохраняя фаду, трамваи и память о мореплавании.</p></section>
 <section class="guide-trip-plans" id="guide-trips" aria-label="Маршруты"><h2>Маршруты</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 <article class="trip-plan" id="trip-1d"><h3>Один день</h3>
 <p class="prose">Компактный маршрут по главным точкам путеводителя с минимальным возвратом назад пешком.</p>
 <ol class="trip-stops"><li><a href="#lisbon_campo_pequeno">Бульвар Кампо Пекено</a> (~75мин)</li>
@@ -141,222 +224,377 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <p class="prose">День 3 — оставшиеся близкие объекты.</p>
 <ol class="trip-stops"><li><a href="#lisbon_tower_belem">Lisbon Tower Belem</a> (~75мин)</li>
 <li><a href="#lisbon_praca_municipio">Площадь Муниципия</a> (~75мин)</li></ol></article></section>
-<nav class="guide-toc" aria-label="Содержание"><h2>Содержание</h2><ol><li class="toc-item"><a href="#guide-historical">Историческая справка</a></li><li class="toc-item"><a href="#guide-trips">Маршруты</a></li><li class="toc-item"><a href="#lisbon_25_abril_bridge">Мост 25 апреля</a></li><li class="toc-item"><a href="#lisbon_palacio_belem">Дворец Белен</a></li><li class="toc-item"><a href="#lisbon_tower_belem">Lisbon Tower Belem</a></li><li class="toc-item"><a href="#lisbon_cais_colunas">Кайш даш Колунас</a></li><li class="toc-item"><a href="#lisbon_gulbenkian">Музей Калусте Гульбенкяна</a></li><li class="toc-item"><a href="#lisbon_campo_pequeno">Бульвар Кампо Пекено</a></li><li class="toc-item"><a href="#lisbon_carmo_convent">Lisbon Carmo Convent</a></li><li class="toc-item"><a href="#lisbon_estrela_basilica">Базилика Эстрела</a></li><li class="toc-item"><a href="#lisbon_jeronimos_monastery">Lisbon Jeronimos Monastery</a></li><li class="toc-item"><a href="#lisbon_se_cathedral">Лиссабонский собор</a></li><li class="toc-item"><a href="#lisbon_lx_factory">Lisbon Lx Factory</a></li><li class="toc-item"><a href="#lisbon_maat">Lisbon Maat</a></li><li class="toc-item"><a href="#lisbon_miradouro_graca">Мирадуру да Граса</a></li><li class="toc-item"><a href="#lisbon_miradouro_senhora_monte">Мирадуру да Сенора ду Монте</a></li><li class="toc-item"><a href="#lisbon_national_pantheon">Lisbon National Pantheon</a></li><li class="toc-item"><a href="#lisbon_tile_museum">Lisbon Tile Museum</a></li><li class="toc-item"><a href="#lisbon_oceanario">Океанариум Лиссабона</a></li><li class="toc-item"><a href="#lisbon_padrao_descobrimentos">Lisbon Padrao Descobrimentos</a></li><li class="toc-item"><a href="#lisbon_pdfband_9_f20cfd3f">Palácio da Bemposta</a></li><li class="toc-item"><a href="#lisbon_parque_eduardo_vii">Lisbon Parque Eduardo Vii</a></li><li class="toc-item"><a href="#lisbon_commerce_square">Lisbon Commerce Square</a></li><li class="toc-item"><a href="#lisbon_praca_municipio">Площадь Муниципия</a></li><li class="toc-item"><a href="#lisbon_rossio">Lisbon Rossio</a></li><li class="toc-item"><a href="#lisbon_santa_justa_lift">Lisbon Santa Justa Lift</a></li><li class="toc-item"><a href="#lisbon_sao_jorge_castle">Lisbon Sao Jorge Castle</a></li><li class="toc-item"><a href="#lisbon_sao_vicente">Сан-Висенте-де-Фора</a></li><li class="toc-item"><a href="#lisbon_tram_28">Lisbon Tram</a></li><li class="toc-item"><a href="#lisbon_aqueduto_agua_livre">Lisbon Aqueduto Agua Livre</a></li></ol></nav>
-<section class="place" id="lisbon_25_abril_bridge">
-<h3>Мост 25 апреля</h3>
+<section class="place" id="lisbon_aqueduto_agua_livre">
+<div class="place-lead">
+<h3>Lisbon Aqueduto Agua Livre</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/lisbon_25_abril_bridge.jpg" alt="Мост 25 апреля"/></figure>
-<div class="place-desc"><p class="prose">Мост 25 апреля — это знаковый висячий мост в Лиссабоне, соединяющий столицу с Алмадой через реку Тежу. Часто сравниваемый с мостом Золотые Ворота в Сан-Франциско, он является впечатляющим инженерным достижением и важной транспортной артерией. Посетители могут восхищаться его ярким красным цветом и панорамными видами на город и реку с различных смотровых площадок. Мост имеет длину 2 277 метров, что делает его одним из самых длинных висячих мостов в Европе. Он был спроектирован американским инженером Эдвином Д.</p>
-<p class="prose">Строительство моста 25 апреля началось в 1962 году и было завершено в 1966 году, изначально он назывался мостом Салазара в честь португальского диктатора. Мост был открыт 6 августа 1966 года и с тех пор стал символом современности Лиссабона. Он был переименован после Революции гвоздик в 1974 году, которая положила конец авторитарному режиму в Португалии. Мост 25 апреля имеет как политическое, так и культурное значение для Лиссабона. Он символизирует переход от диктатуры к демократии после Революции гвоздик, отмечая ключевой момент в португальской истории. Культурно мост является любимой достопримечательностью, которая занимает важное место в идентичности города, часто появляется в искусстве и фотографии и служит фоном для различных мероприятий и празднований.</p></div>
-</section>
-<section class="place" id="lisbon_palacio_belem">
-<h3>Дворец Белен</h3>
-
-
-<figure class="place-fig"><img src="../images/lisbon_palacio_belem.jpg" alt="Дворец Белен"/></figure>
-<div class="place-desc"><p class="prose">Дворец Белен, расположенный в историческом районе Белен, является официальной резиденцией Президента Португалии. Этот великолепный пример мануэлиновой архитектуры окружен красивыми садами и предлагает посетителям возможность заглянуть в политическую историю страны. Хотя дворец не открыт для публичных экскурсий, его впечатляющая внешность и окружающая территория стоят того, чтобы их исследовать. Дворец Белен был построен в начале 16 века. Он стал официальной резиденцией президента в 1910 году.</p>
-<p class="prose">Дворец Белен был изначально построен в 16 веке как королевский дворец и с тех пор несколько раз подвергался реконструкции. Он служил резиденцией португальских монархов, а после установления Португальской Республики в 1910 году стал официальной резиденцией президента Португалии. В его стенах происходили ключевые события в политической истории страны. В качестве официальной резиденции Президента, Дворец Белен играет важную роль в политическом ландшафте Португалии, символизируя преемственность республики и управление нацией. Дворец также является культурной достопримечательностью, отражая богатое архитектурное наследие мануэлиновского стиля и служа фоном для государственных церемоний и официальных мероприятий.</p></div>
-</section>
-<section class="place" id="lisbon_tower_belem">
-<h3>Lisbon Tower Belem</h3>
-
-<p class="place-meta">Период: 1514–1520</p>
-<figure class="place-fig"><img src="../images/lisbon_tower_belem.jpg" alt="Lisbon Tower Belem"/></figure>
-<div class="place-desc"><p class="prose">Набережный бастион и церемониальные ворота в гавань Лиссабона, украшенные мануэлинскими мотивами веревок и королевскими щитами. Объект Всемирного наследия ЮНЕСКО в составе ансамбля с близлежащим монастырем Жеронимош. Спиральная лестница на террасу может быть очень многолюдной до полудня.</p>
-<p class="prose">Построенный из известняка лиоза в рамках программы береговой обороны и престижа короля Мануэла I. Изображение эпохи открытий Португалии.</p></div>
-</section>
-<section class="place" id="lisbon_cais_colunas">
-<h3>Кайш даш Колунас</h3>
-
-
-<figure class="place-fig"><img src="../images/lisbon_cais_colunas.jpg" alt="Кайш даш Колунас"/></figure>
-<div class="place-desc"><p class="prose">Кайш даш Колунуш — это живописная прибрежная зона в Лиссабоне, известная своими впечатляющими колоннами, которые отмечают место, где когда-то швартовались корабли. Это очаровательное место предлагает потрясающие виды на реку Тежу и является популярным местом встречи как для местных жителей, так и для туристов. Посетители могут наслаждаться неспешными прогулками по набережной, впитывая яркую атмосферу и историческое значение этого места. Кайш даш Колунаш был построен в 1776 году. Колонны служили церемониальным входом для кораблей, прибывающих в Лиссабон.</p>
-<p class="prose">Кайш даш Колунас был построен в начале 18 века, а именно в 1776 году, в рамках усилий города по модернизации своего набережной. Колонны были спроектированы для создания величественного входа для прибывающих дипломатов и торговцев, символизируя важность Лиссабона как морского центра в эпоху открытий. Эта территория стала свидетелем различных исторических событий, включая значительные морские деятельности и торговлю. Культурно, Cais das Colunas является важной частью наследия Лиссабона, представляя собой богатую морскую историю и архитектурную красоту города. Это популярное место для социальных встреч и культурных мероприятий, отражающее повседневную жизнь жителей Лиссабона. Это место способствует общему очарованию города, усиливая его привлекательность как объекта Всемирного наследия ЮНЕСКО.</p></div>
-</section>
-<section class="place" id="lisbon_gulbenkian">
-<h3>Музей Калусте Гульбенкяна</h3>
-
-
-<figure class="place-fig"><img src="../images/lisbon_gulbenkian.jpg" alt="Музей Калусте Гульбенкяна"/></figure>
-<div class="place-desc"><p class="prose">Музей Калусте Гульбенкян в Лиссабоне — это сокровищница искусства и культуры, в которой хранится обширная коллекция, охватывающая период от древности до современности. Посетители могут ознакомиться с произведениями известных художников, таких как Рембрандт, Моне и Ван Дейк, а также с артефактами различных цивилизаций. Музей расположен в красиво оформленных садах, создавая спокойную атмосферу для любителей искусства и случайных посетителей. В музее представлено более 6,000 произведений искусства, включая картины, скульптуры и декоративные искусства. Он расположен в районе Ареейру в Лиссабоне, окруженный парком площадью 7 гектаров.</p>
-<p class="prose">Музей Калусте Гюльбенкяна был основан в 1969 году по воле Калусте Гюльбенкяна, армянского нефтяного магната и мецената. Он завещал свою обширную коллекцию искусства музею, который был создан для продвижения культуры и образования в Португалии. С тех пор музей стал ключевым учреждением для искусства и культуры в стране. Культурно, Музей Гулбенкяна играет жизненно важную роль в художественном ландшафте Лиссабона, демонстрируя разнообразные произведения искусства, отражающие как европейские, так и восточные влияния. Он служит центром культурного обмена и образования, проводя выставки, концерты и лекции, которые обогащают местное сообщество. Сады музея также предлагают спокойное убежище, улучшая повседневную жизнь жителей и гостей Лиссабона.</p></div>
-</section>
-<section class="place" id="lisbon_campo_pequeno">
-<h3>Бульвар Кампо Пекено</h3>
-
-
-<figure class="place-fig"><img src="../images/lisbon_campo_pequeno.jpg" alt="Бульвар Кампо Пекено"/></figure>
-<div class="place-desc"><p class="prose">Бульвар Кампо Пекено — яркий пример неомавританской архитектуры, расположенный в самом сердце Лиссабона. Открытый в 1892 году, он служил местом для корриды, концертов и различных культурных мероприятий, что делает его живым центром активности. Посетители могут исследовать его впечатляющий фасад и насладиться оживленной атмосферой окружающей местности. Открыт 15 мая 1892 года. Спроектировано архитектором Жозе Луишем Монтейру в неомавританском стиле. Претерпел значительные renovations в начале 2000-х годов, чтобы стать многофункциональной площадкой.</p>
-<p class="prose">Кампо Пекено был открыт 15 мая 1892 года, спроектирован архитектором Жозе Луишем Монтейро. Арена для корриды претерпела несколько реконструкций, особенно в начале 2000-х годов, когда она была преобразована в многофункциональное пространство, сохранив свое историческое значение и адаптировавшись к современным нуждам. Культурно, Кампо Пекено является символом традиционной португальской корриды, практики, имеющей глубокие корни в наследии страны. Здесь проводятся различные мероприятия, от концертов до выставок, отражающие динамичную культурную жизнь Лиссабона. Хотя коррида столкнулась с критикой и снижением популярности, это место остается значимой достопримечательностью, которая передает суть местных традиций и общественных собраний.</p></div>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_aqueduto_agua_livre.jpg" alt="Lisbon Aqueduto Agua Livre" width="330" height="440" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_aqueduto_agua_livre_b.jpg" alt="Lisbon Aqueduto Agua Livre — вид 2" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Акведук Агуас Ливрес — исторический акведук в Лиссабоне, Португалия.</p></div>
 </section>
 <section class="place" id="lisbon_carmo_convent">
+<div class="place-lead">
 <h3>Lisbon Carmo Convent</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/lisbon_carmo_convent.jpg" alt="Lisbon Carmo Convent"/></figure>
+<p class="place-meta">Адрес: Chiado</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lisbon_carmo_convent.jpg" alt="Lisbon Carmo Convent" width="1280" height="960" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_carmo_convent_b.jpg" alt="Lisbon Carmo Convent — вид 2" width="330" height="329" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Лифт Санта-Жушта выходит почти прямо к воротам. Интерпретационные панели об землетрясениях выстроились вдоль латеральных часовен. Сейсмический толчок 1755 года разрушил своды; эстетика романтических руин привлекала посетителей XIX века. Физическое напоминание о сейсмической уязвимости Лиссабона.</p></div>
 </section>
-<section class="place" id="lisbon_estrela_basilica">
-<h3>Базилика Эстрела</h3>
+<section class="place" id="lisbon_commerce_square">
+<div class="place-lead">
+<h3>Lisbon Commerce Square</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/lisbon_estrela_basilica.jpg" alt="Базилика Эстрела"/></figure>
-<div class="place-desc"><p class="prose">Базилика Эштрела, потрясающий пример неоклассической архитектуры, является одной из самых знаковых достопримечательностей Лиссабона. Завершенная в конце 18 века, эта величественная церковь известна своим впечатляющим куполом и красиво оформленным интерьером, что делает ее обязательным местом для посещения как туристами, так и местными жителями. Уютно расположенная в тихом саду Эштрела, базилика предлагает спокойное убежище от шумного города. Базилика имеет большой купол, который является одним из самых высоких в Лиссабоне. Здесь находится могила королевы Марии I, монарха, который заказал его строительство.</p>
-<p class="prose">Строительство базилики Эштрела началось в 1779 году и было завершено в 1834 году. Она была заказана королевой Марией I как исполнение обета, данного во время ее беременности, что отражает глубокую связь между монархией и католической церковью в этот период. Базилика была освящена в 1789 году и с тех пор является важным местом для религиозных церемоний и общественных собраний. Базилика Эштрела имеет культурное значение как символ архитектурного наследия Лиссабона и религиозной преданности. Её потрясающий интерьер, украшенный сложными азулежу и религиозными произведениями искусства, отражает художественные традиции Португалии. Базилика также является местом паломничества, привлекая посетителей, которые приходят восхищаться её красотой и участвовать в религиозных обрядах.</p></div>
+<p class="place-meta">Адрес: Baixa riverfront</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lisbon_commerce_square.jpg" alt="Lisbon Commerce Square" width="1280" height="1280" style="height: 462px; max-height: 462px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_commerce_square_b.jpg" alt="Lisbon Commerce Square — вид 2" width="330" height="477" style="height: 462px; max-height: 462px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Жёлтая аркадная площадь, открывающаяся на Тажо, обрамлённая правительственными корпусами и триумфальной аркой Руа Аугушта. Конная статуя Иосифа I является центральной точкой на набережной. Трамваи в Алфаме огибают северную сторону площади.</p>
+<p class="prose">Заменил королевский дворец, разрушенный землетрясением 1755 года, и служит церемониальным городским речным воротами. Основная фестивальная площадка и туристический информационный центр.</p></div>
 </section>
 <section class="place" id="lisbon_jeronimos_monastery">
+<div class="place-lead">
 <h3>Lisbon Jeronimos Monastery</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1501–1601</p>
-<figure class="place-fig"><img src="../images/lisbon_jeronimos_monastery.jpg" alt="Lisbon Jeronimos Monastery"/></figure>
+<p class="place-meta">Адрес: Praça do Império, Belém | Период: 1501–1601</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lisbon_jeronimos_monastery.jpg" alt="Lisbon Jeronimos Monastery" width="1062" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_jeronimos_monastery_b.jpg" alt="Lisbon Jeronimos Monastery — вид 2" width="330" height="494" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Монастырь Херонимитов, финансировавшийся за счет богатств спецовой торговли, где хранятся гробница Васко да Гамы и филигранный каменный монастырский двор. Очереди за пастель де ната в Antiga Confeitaria de Belém находятся в небольшой пешей доступности к востоку. Нартекс церкви — свободный вход; сектора монастыря и музея требуют входной платы.</p>
 <p class="prose">Связанный с возвращением да Гамы после его первого путешествия в Индию, этот комплекс стал государственным пантеоном мореплавателей. Вершина португальской готики в резьбе.</p></div>
 </section>
-<section class="place" id="lisbon_se_cathedral">
-<h3>Лиссабонский собор</h3>
-
-
-<figure class="place-fig"><img src="../images/lisbon_se_cathedral.jpg" alt="Лиссабонский собор"/></figure>
-<div class="place-desc"><p class="prose">Лиссабонский собор, известный как Сэ де Лиссабоа, является старейшей и наиболее важной церковью города, демонстрируя сочетание архитектурных стилей от романского до готического. Его внушительный фасад и прекрасное розовое окно делают его обязательным для посещения для всех, кто исследует исторический район Алфама. Посетители могут полюбоваться изысканными капеллами и потрясающими видами на город с террасы собора. Лиссабонский собор был освящен в 1147 году. Собор представляет собой смесь архитектурных стилей, включая романский, готический и барокко.</p>
-<p class="prose">Строительство Лиссабонского собора началось в 1147 году, вскоре после того, как город был захвачен у мавров во время Реконкисты. Собор был построен в честь победы и на протяжении веков претерпел несколько ремонтов и реставраций, особенно после землетрясения 1755 года, которое нанесло значительный ущерб. Как место поклонения, Лиссабонский собор имеет огромное религиозное значение для католической общины и служит местом пребывания архиепископа. Он является символом стойкости и истории города, отражая культурное наследие Лиссабона через свою архитектуру и искусство. Собор также является центром различных религиозных церемоний и празднований, привлекая как паломников, так и туристов.</p></div>
-</section>
 <section class="place" id="lisbon_lx_factory">
+<div class="place-lead">
 <h3>Lisbon Lx Factory</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/lisbon_lx_factory.jpg" alt="Lisbon Lx Factory"/></figure>
+<p class="place-meta">Адрес: Alcântara</p>
+<figure class="place-fig place-fig--lo-res"><img src="../images/lisbon_lx_factory_b.jpg" alt="Lisbon Lx Factory" width="330" height="212"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Уличное искусство, дизайнерские магазины и бары на крышах, расположенные на территории бывшего текстильного фабричного двора под мостом. Воскресные рынки добавляют фудтраки во внутренний двор книжного магазина. Вечером очереди на Uber резко увеличиваются после концертов в «Бридж Арене».</p>
 <p class="prose">Набережная Лиссабона в постпромышленном стиле привлекла креативщиков до крупных отельных сетей. Альтернативная торговая артерия к западу от Белена.</p></div>
 </section>
 <section class="place" id="lisbon_maat">
+<div class="place-lead">
 <h3>Lisbon Maat</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/lisbon_maat.jpg" alt="Lisbon Maat"/></figure>
+<p class="place-meta">Адрес: Belém waterfront</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lisbon_maat.jpg" alt="Lisbon Maat" width="1280" height="1280" style="height: 263px; max-height: 263px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_maat_b.jpg" alt="Lisbon Maat — вид 2" width="330" height="188" style="height: 263px; max-height: 263px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Современное искусство и технологии у реки с прогулочными дорожками к мосту Понте 25 де Абриль. Закат отражается на черном зеркальном облицовании. Составные билеты иногда включают Центральный Тежу, который находится рядом.</p>
 <p class="prose">Сосед Энергетической станции EPAL договорился об общих общественных эспланадах. Современное крыло Белен за монастырную ось.</p></div>
 </section>
-<section class="place" id="lisbon_miradouro_graca">
-<h3>Мирадуру да Граса</h3>
-
-
-<figure class="place-fig"><img src="../images/lisbon_miradouro_graca.jpg" alt="Мирадуру да Граса"/></figure>
-<div class="place-desc"><p class="prose">Мирадуру да Граса предлагает потрясающие панорамные виды на Лиссабон, что делает его популярным местом как для местных жителей, так и для туристов. Уютно расположенный в районе Граса, этот смотровая площадка является идеальным местом для отдыха и наслаждения яркой атмосферой города. С его очаровательными садами и историческим окружением, он служит идеальным фоном для незабываемых фотографий. Расположен в районе Граса, известном своим историческим очарованием. Предлагает виды на ключевые достопримечательности, такие как Замок Святого Георгия и реку Тежу.</p>
-<p class="prose">Мирадуру да Граса расположен рядом с историческим районом Граса, который восходит к 12 веку. Сам смотровая площадка со временем развивалась, став популярным местом для посетителей, стремящихся полюбоваться красотой Лиссабона и его знаковыми достопримечательностями. Культурно, Miradouro da Graça является важной частью повседневной жизни Лиссабона, служа местом сбора для местных жителей и обязательным местом для посещения туристами. Эта смотровая площадка отражает богатое наследие и художественный дух города, часто представляя местных музыкантов и художников, которые вносят свой вклад в его живую атмосферу.</p></div>
-</section>
-<section class="place" id="lisbon_miradouro_senhora_monte">
-<h3>Мирадуру да Сенора ду Монте</h3>
-
-
-<figure class="place-fig"><img src="../images/lisbon_miradouro_senhora_monte.jpg" alt="Мирадуру да Сенора ду Монте"/></figure>
-<div class="place-desc"><p class="prose">Miradouro da Senhora do Monte — одна из самых захватывающих смотровых площадок Лиссабона, предлагающая панорамные виды на город и реку Тежу. Уютно расположенная в районе Граса, это место является любимым как у местных жителей, так и у туристов, предоставляя идеальный фон для потрясающих фотографий и моментов размышлений. Спокойная атмосфера, дополненная зелеными садами и историческими особенностями, делает его идеальным местом для отдыха и наслаждения красотой Лиссабона. Смотровая площадка расположена на высоте 830 футов, что делает её одной из самых высоких в Лиссабоне. Он предлагает виды на несколько знаковых достопримечательностей, включая замок Святого Георгия и Лиссабонский собор.</p>
-<p class="prose">Мирадуру да Сеньора ду Монте расположен рядом с местом старой часовни, посвященной Непорочной Деве Марии Горы, которая датируется 17 веком. На протяжении многих лет эта смотровая площадка была популярным местом сбора, особенно в 19 веке, когда она стала известна своими живописными видами и романтической атмосферой. Культурно, Miradouro da Senhora do Monte имеет значение, так как отражает традиционный образ жизни Лиссабона, где местные жители часто собираются, чтобы насладиться видами и пообщаться. Эта смотровая площадка также популярна среди художников и фотографов, запечатлевающих суть города. Хотя она не имеет специфического политического или религиозного значения, её роль как общественного пространства подчеркивает важность общественных зон в городской жизни.</p></div>
-</section>
 <section class="place" id="lisbon_national_pantheon">
+<div class="place-lead">
 <h3>Lisbon National Pantheon</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/lisbon_national_pantheon.jpg" alt="Lisbon National Pantheon"/></figure>
+<p class="place-meta">Адрес: Campo de Santa Clara</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lisbon_national_pantheon.jpg" alt="Lisbon National Pantheon" width="1280" height="1017" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_national_pantheon_b.jpg" alt="Lisbon National Pantheon — вид 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Блошиный рынок Фейра да Ладре проходит вокруг площади по вторникам. Ветер на террасе может быть сильным над крышами Альфамы. Незаконченная церковь превратилась в светский пантеон национальных героев. С высоты «плиточной четверти» открывается панорама 360°.</p></div>
 </section>
-<section class="place" id="lisbon_tile_museum">
-<h3>Lisbon Tile Museum</h3>
-
-
-<figure class="place-fig"><img src="../images/lisbon_tile_museum.jpg" alt="Lisbon Tile Museum"/></figure>
-<div class="place-desc"><p class="prose">Кафе находится в клуатре бывшего монастыря. Автобус соединит быстрее, чем прогулка от станции Санта-Аполония. Церковь Мадре-де-Дэус была включена в национальную коллекцию азулежу. Лучшая одноместная выставка португальской плиточной росписи.</p></div>
-</section>
-<section class="place" id="lisbon_oceanario">
-<h3>Океанариум Лиссабона</h3>
-
-
-<figure class="place-fig"><img src="../images/lisbon_oceanario.jpg" alt="Океанариум Лиссабона"/></figure>
-<div class="place-desc"><p class="prose">Океанариум Лиссабона — один из крупнейших аквариумов в мире, расположенный в Парке Наций. Он демонстрирует разнообразие морской жизни, включая акул, скатов и ярких тропических рыб, все это в потрясающем архитектурном дизайне. Посетители могут исследовать различные экосистемы и узнать о усилиях по охране океанов в увлекательной и образовательной обстановке. Открыт 18 мая 1998 года во время Expo 98. Спроектировано британским архитектором Ричардом Роджерсом. Вмещает более 15,000 морских животных из 450 видов.</p>
-<p class="prose">Океанариум Лиссабона был открыт 18 мая 1998 года в рамках Всемирной выставки Expo 98, которая была посвящена теме «Океаны, наследие для будущего». Спроектированный архитектором Ричардом Роджерсом, он с тех пор стал ярким ориентиром в Лиссабоне, привлекая миллионы посетителей каждый год. Культурно, Океанариум служит важным образовательным ресурсом, способствуя осведомленности о морском охране и значении защиты океанских экосистем. Он играет значительную роль в идентичности Лиссабона как города, который ценит свое морское наследие и экологическую ответственность.</p></div>
-</section>
 <section class="place" id="lisbon_padrao_descobrimentos">
+<div class="place-lead">
 <h3>Lisbon Padrao Descobrimentos</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/lisbon_padrao_descobrimentos.jpg" alt="Lisbon Padrao Descobrimentos"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_padrao_descobrimentos.jpg" alt="Lisbon Padrao Descobrimentos" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_padrao_descobrimentos_b.jpg" alt="Lisbon Padrao Descobrimentos — вид 2" width="330" height="354" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Памятник открытий (португальское название: Padrão dos Descobrimentos, португальское произношение: [pɐˈðɾɐ̃w duʒ ðɨʃkuβɾiˈmẽtuʃ]) — монумент на северном берегу устья реки Тежу, в гражданском приходе Санта-Мария-де-Белен, Лиссабон. Расположенный вдоль реки в месте, откуда отправлялись корабли для исследований и торговли с Индией и Востоком, этот памятник отмечает эпоху португальских открытий (или «эпоху исследований») в XV и XVI веках.</p></div>
 </section>
-<section class="place" id="lisbon_pdfband_9_f20cfd3f">
-<h3>Palácio da Bemposta</h3>
+<section class="place" id="lisbon_pal_cio_da_bemposta">
+<div class="place-lead">
+<h3>Lisbon Pal Cio Da Bemposta</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/lisbon_pdfband_9_f20cfd3f.jpg" alt="Palácio da Bemposta"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lisbon_pal_cio_da_bemposta.jpg" alt="Lisbon Pal Cio Da Bemposta" width="1280" height="831" style="height: 299px; max-height: 299px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--row-sized"><img src="../images/lisbon_pal_cio_da_bemposta_b.jpg" alt="Lisbon Pal Cio Da Bemposta — вид 2" width="330" height="587" style="height: 299px; max-height: 299px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 </section>
 <section class="place" id="lisbon_parque_eduardo_vii">
+<div class="place-lead">
 <h3>Lisbon Parque Eduardo Vii</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/lisbon_parque_eduardo_vii.jpg" alt="Lisbon Parque Eduardo Vii"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_parque_eduardo_vii.jpg" alt="Lisbon Parque Eduardo Vii" width="330" height="410" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_parque_eduardo_vii_b.jpg" alt="Lisbon Parque Eduardo Vii — вид 2" width="330" height="287" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Парк Эдварда VII (португальское название: Parque Eduardo VII) — это общественный парк в Лиссабоне, Португалия. Парк занимает площадь в 26 гектаров (64 акра) к северу от Авенида да Либераде и площади Маркиза де Помбаля в центре Лиссабона. Парк назван в честь короля Эдуарда VII Великобритании, который посетил Португалию в 1903 году для укрепления отношений между двумя странами и подтверждения англо-португальского альянса.</p></div>
 </section>
-<section class="place" id="lisbon_commerce_square">
-<h3>Lisbon Commerce Square</h3>
-
-
-<figure class="place-fig"><img src="../images/lisbon_commerce_square.jpg" alt="Lisbon Commerce Square"/></figure>
-<div class="place-desc"><p class="prose">Жёлтая аркадная площадь, открывающаяся на Тажо, обрамлённая правительственными корпусами и триумфальной аркой Руа Аугушта. Конная статуя Иосифа I является центральной точкой на набережной. Трамваи в Алфаме огибают северную сторону площади.</p>
-<p class="prose">Заменил королевский дворец, разрушенный землетрясением 1755 года, и служит церемониальным городским речным воротами. Основная фестивальная площадка и туристический информационный центр.</p></div>
-</section>
-<section class="place" id="lisbon_praca_municipio">
-<h3>Площадь Муниципия</h3>
-
-
-<figure class="place-fig"><img src="../images/lisbon_praca_municipio.jpg" alt="Площадь Муниципия"/></figure>
-<div class="place-desc"><p class="prose">Площадь Муниципия — это яркая общественная площадь, расположенная в сердце Лиссабона, известная своей потрясающей архитектурой и живой атмосферой. Окруженная важными муниципальными зданиями, она служит центральным узлом как для местных жителей, так и для туристов, предлагая возможность заглянуть в богатую историю и культурную жизнь города. Площадь часто наполнена событиями, рынками и встречами, что делает её обязательным местом для посещения. Площадь была перепроектирована после землетрясения 1755 года. Он окружен значительными муниципальными зданиями, включая мэрию Лиссабона.</p>
-<p class="prose">Площадь Муниципия, исторически известная как Площадь Торговли, имеет корни, уходящие в 18-й век. Она была переработана после землетрясения 1755 года, которое опустошило большую часть Лиссабона, что привело к созданию нового городского планирования. С тех пор площадь стала центром различных гражданских мероприятий и празднований. Политически Praça do Município сыграла роль в управлении Лиссабоном, служа местом для муниципальной администрации и общественных собраний. Культурно она отражает наследие города через свою архитектуру и служит площадкой для фестивалей и общественных мероприятий, внося вклад в повседневную жизнь жителей Лиссабона. Площадь является свидетельством стойкости и адаптивности города на протяжении веков.</p></div>
-</section>
 <section class="place" id="lisbon_rossio">
+<div class="place-lead">
 <h3>Lisbon Rossio</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/lisbon_rossio.jpg" alt="Lisbon Rossio"/></figure>
+<p class="place-meta">Адрес: Baixa</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lisbon_rossio.jpg" alt="Lisbon Rossio" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--row-sized"><img src="../images/lisbon_rossio_b.jpg" alt="Lisbon Rossio — вид 2" width="330" height="608" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Центральная площадь с барочными фонтанами, театром и вестибюлем станции, откуда отправляются поезда в Синтру. Традиция писателей кафе «Никола» по-прежнему привлекает журналистов. Лифт Гла́рия поднимается в Байру-Альту на западном краю.</p>
 <p class="prose">Инквизиционные аутодафе уступили место гражданским фестивалям и кафе-культуре. Основная точка сбора между Байша и районами ночной жизни.</p></div>
 </section>
 <section class="place" id="lisbon_santa_justa_lift">
+<div class="place-lead">
 <h3>Lisbon Santa Justa Lift</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/lisbon_santa_justa_lift.jpg" alt="Lisbon Santa Justa Lift"/></figure>
+<p class="place-meta">Адрес: Baixa–Chiado</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lisbon_santa_justa_lift.jpg" alt="Lisbon Santa Justa Lift" width="1200" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_santa_justa_lift_b.jpg" alt="Lisbon Santa Justa Lift — вид 2" width="330" height="495" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Вертикальная железная связь между нижней решеткой Байши и смотровыми площадками Кармо, где в загруженные дни все еще используются оригинальные вагоны. Билеты на висту на вершине могут потребовать дополнительной очереди, помимо оплаты проезда на подъемнике. Ночное освещение подчеркивает ребристую неоготическую резьбу.</p>
 <p class="prose">Лифт изначально был приводим в действие паром; электрификация позволила интегрировать его в брендинг городского транспорта Carris. Фотогеничная точка для селфи среди индустриального наследия, расположенная между районами, сетчатой застройки и холмов.</p></div>
 </section>
 <section class="place" id="lisbon_sao_jorge_castle">
+<div class="place-lead">
 <h3>Lisbon Sao Jorge Castle</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/lisbon_sao_jorge_castle.jpg" alt="Lisbon Sao Jorge Castle"/></figure>
+<p class="place-meta">Адрес: Alfama hill</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lisbon_sao_jorge_castle.jpg" alt="Lisbon Sao Jorge Castle" width="1280" height="700" style="height: 252px; max-height: 252px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_sao_jorge_castle_b.jpg" alt="Lisbon Sao Jorge Castle — вид 2" width="330" height="375" style="height: 252px; max-height: 252px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Крепости на холме с зубцами, откуда открывается вид на терракотовые крыши, круизные лайнеры на реке Тахо и павлинов в садах. Археологические траншеи выявляют слои Железного века и Римского периода внутри стен. Пик вечерней толпы на восточных зубцах.</p>
 <p class="prose">Мавританская цитадель стала королевским дворцом; нынешние руины в значительной степени средневековые и включают восстановленные элементы XX века. Компасная роза для понимания расположения Лиссабона на семи холмах.</p></div>
 </section>
-<section class="place" id="lisbon_sao_vicente">
-<h3>Сан-Висенте-де-Фора</h3>
+<section class="place" id="lisbon_tile_museum">
+<div class="place-lead">
+<h3>Lisbon Tile Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
+<p class="place-meta">Адрес: Xabregas</p>
+<figure class="place-fig place-fig--lo-res"><img src="../images/lisbon_tile_museum_b.jpg" alt="Lisbon Tile Museum" width="330" height="410"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Кафе находится в клуатре бывшего монастыря. Автобус соединит быстрее, чем прогулка от станции Санта-Аполония. Церковь Мадре-де-Дэус была включена в национальную коллекцию азулежу. Лучшая одноместная выставка португальской плиточной росписи.</p></div>
+</section>
+<section class="place" id="lisbon_tower_belem">
+<div class="place-lead">
+<h3>Lisbon Tower Belem</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<figure class="place-fig"><img src="../images/lisbon_sao_vicente.jpg" alt="Сан-Висенте-де-Фора"/></figure>
-<div class="place-desc"><p class="prose">Сан-Висенте-де-Фора — это потрясающий монастырь, расположенный в районе Алфама в Лиссабоне, известный своей впечатляющей архитектурой и спокойной атмосферой. Посетители могут полюбоваться красивыми клуатрами, сложной плиткой и захватывающими видами города с его возвышенной позиции. На территории также находятся могилы нескольких португальских монархов, что добавляет исторической привлекательности. Основанный в 1598 году, монастырь изначально был бенедиктинским учреждением. На сайте находятся могилы нескольких португальских королей и королев. Архитектура монастыря демонстрирует маньеристский стиль, особенно в его церкви и клуатрах.</p>
-<p class="prose">Монастырь Сан-Висенте-де-Фора был основан в 1598 году, изначально построенный для размещения общины бенедиктинских монахов. Позже он был преобразован в францисканский монастырь, а его строительство было завершено в середине 17 века. За века это место претерпело различные ремонты и реставрации, особенно после землетрясения 1755 года, которое разрушило большую часть Лиссабона. Сан-Висенте-де-Фора имеет культурное значение как яркий пример маньеристской архитектуры в Португалии и является важной частью религиозного наследия Лиссабона. Монастырь является местом паломничества для многих, отражая глубоко укоренившиеся католические традиции в городе. Кроме того, он служит символом исторической связи между монархией и церковью, а его королевские гробницы представляют собой неугасимое наследие прошлого Португалии.</p></div>
+<p class="place-meta">Адрес: Belém | Период: 1514–1520</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lisbon_tower_belem.jpg" alt="Lisbon Tower Belem" width="1280" height="1222" style="height: 441px; max-height: 441px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_tower_belem_b.jpg" alt="Lisbon Tower Belem — вид 2" width="330" height="354" style="height: 441px; max-height: 441px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Набережный бастион и церемониальные ворота в гавань Лиссабона, украшенные мануэлинскими мотивами веревок и королевскими щитами. Объект Всемирного наследия ЮНЕСКО в составе ансамбля с близлежащим монастырем Жеронимош. Спиральная лестница на террасу может быть очень многолюдной до полудня.</p>
+<p class="prose">Построенный из известняка лиоза в рамках программы береговой обороны и престижа короля Мануэла I. Изображение эпохи открытий Португалии.</p></div>
 </section>
 <section class="place" id="lisbon_tram_28">
-<h3>Lisbon Tram</h3>
+<div class="place-lead">
+<h3>Tram 28</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/lisbon_tram_28.jpg" alt="Lisbon Tram"/></figure>
+<p class="place-meta">Адрес: Martim Moniz to Campo Ourique</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lisbon_tram_28.jpg" alt="Tram 28" width="1280" height="960" style="height: 289px; max-height: 289px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_tram_28_b.jpg" alt="Tram 28 — вид 2" width="330" height="207" style="height: 289px; max-height: 289px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Деревянные и латунные трамваи с визгом скользят по изгибам Алфамы мимо мирадуров и подходов к соборам. Карманники нацеливаются на переполненные летние аттракционы. Раннее утро предлагает более спокойные условия для фотографии, чем дневная суматоха.</p>
 <p class="prose">Электрические линии заменили фуникулеры на некоторых холмах, сохранив узкую колею. Послание с открытки из самых крутых исторических кварталов.</p></div>
 </section>
-<section class="place" id="lisbon_aqueduto_agua_livre">
-<h3>Lisbon Aqueduto Agua Livre</h3>
+<section class="place" id="lisbon_estrela_basilica">
+<div class="place-lead">
+<h3>Базилика Эстрела</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/lisbon_aqueduto_agua_livre.jpg" alt="Lisbon Aqueduto Agua Livre"/></figure>
-<div class="place-desc"><p class="prose">Акведук Агуас Ливрес — исторический акведук в Лиссабоне, Португалия.</p></div>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_estrela_basilica.jpg" alt="Базилика Эстрела" width="330" height="475" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_estrela_basilica_b.jpg" alt="Базилика Эстрела — вид 2" width="330" height="440" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Базилика Эштрела, потрясающий пример неоклассической архитектуры, является одной из самых знаковых достопримечательностей Лиссабона. Завершенная в конце 18 века, эта величественная церковь известна своим впечатляющим куполом и красиво оформленным интерьером, что делает ее обязательным местом для посещения как туристами, так и местными жителями. Уютно расположенная в тихом саду Эштрела, базилика предлагает спокойное убежище от шумного города. Базилика имеет большой купол, который является одним из самых высоких в Лиссабоне. Здесь находится могила королевы Марии I, монарха, который заказал его строительство.</p>
+<p class="prose">Строительство базилики Эштрела началось в 1779 году и было завершено в 1834 году. Она была заказана королевой Марией I как исполнение обета, данного во время ее беременности, что отражает глубокую связь между монархией и католической церковью в этот период. Базилика была освящена в 1789 году и с тех пор является важным местом для религиозных церемоний и общественных собраний. Базилика Эштрела имеет культурное значение как символ архитектурного наследия Лиссабона и религиозной преданности. Её потрясающий интерьер, украшенный сложными азулежу и религиозными произведениями искусства, отражает художественные традиции Португалии. Базилика также является местом паломничества, привлекая посетителей, которые приходят восхищаться её красотой и участвовать в религиозных обрядах.</p></div>
+</section>
+<section class="place" id="lisbon_campo_pequeno">
+<div class="place-lead">
+<h3>Бульвар Кампо Пекено</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_campo_pequeno.jpg" alt="Бульвар Кампо Пекено" width="330" height="272" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_campo_pequeno_b.jpg" alt="Бульвар Кампо Пекено — вид 2" width="330" height="430" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Бульвар Кампо Пекено — яркий пример неомавританской архитектуры, расположенный в самом сердце Лиссабона. Открытый в 1892 году, он служил местом для корриды, концертов и различных культурных мероприятий, что делает его живым центром активности. Посетители могут исследовать его впечатляющий фасад и насладиться оживленной атмосферой окружающей местности. Открыт 15 мая 1892 года. Спроектировано архитектором Жозе Луишем Монтейру в неомавританском стиле. Претерпел значительные renovations в начале 2000-х годов, чтобы стать многофункциональной площадкой.</p>
+<p class="prose">Кампо Пекено был открыт 15 мая 1892 года, спроектирован архитектором Жозе Луишем Монтейро. Арена для корриды претерпела несколько реконструкций, особенно в начале 2000-х годов, когда она была преобразована в многофункциональное пространство, сохранив свое историческое значение и адаптировавшись к современным нуждам. Культурно, Кампо Пекено является символом традиционной португальской корриды, практики, имеющей глубокие корни в наследии страны. Здесь проводятся различные мероприятия, от концертов до выставок, отражающие динамичную культурную жизнь Лиссабона. Хотя коррида столкнулась с критикой и снижением популярности, это место остается значимой достопримечательностью, которая передает суть местных традиций и общественных собраний.</p></div>
+</section>
+<section class="place" id="lisbon_palacio_belem">
+<div class="place-lead">
+<h3>Дворец Белен</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_palacio_belem.jpg" alt="Дворец Белен" width="330" height="248" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_palacio_belem_b.jpg" alt="Дворец Белен — вид 2" width="330" height="354" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Дворец Белен, расположенный в историческом районе Белен, является официальной резиденцией Президента Португалии. Этот великолепный пример мануэлиновой архитектуры окружен красивыми садами и предлагает посетителям возможность заглянуть в политическую историю страны. Хотя дворец не открыт для публичных экскурсий, его впечатляющая внешность и окружающая территория стоят того, чтобы их исследовать. Дворец Белен был построен в начале 16 века. Он стал официальной резиденцией президента в 1910 году.</p>
+<p class="prose">Дворец Белен был изначально построен в 16 веке как королевский дворец и с тех пор несколько раз подвергался реконструкции. Он служил резиденцией португальских монархов, а после установления Португальской Республики в 1910 году стал официальной резиденцией президента Португалии. В его стенах происходили ключевые события в политической истории страны. В качестве официальной резиденции Президента, Дворец Белен играет важную роль в политическом ландшафте Португалии, символизируя преемственность республики и управление нацией. Дворец также является культурной достопримечательностью, отражая богатое архитектурное наследие мануэлиновского стиля и служа фоном для государственных церемоний и официальных мероприятий.</p></div>
+</section>
+<section class="place" id="lisbon_cais_colunas">
+<div class="place-lead">
+<h3>Кайш даш Колунас</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_cais_colunas.jpg" alt="Кайш даш Колунас" width="330" height="211" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_cais_colunas_b.jpg" alt="Кайш даш Колунас — вид 2" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Кайш даш Колунуш — это живописная прибрежная зона в Лиссабоне, известная своими впечатляющими колоннами, которые отмечают место, где когда-то швартовались корабли. Это очаровательное место предлагает потрясающие виды на реку Тежу и является популярным местом встречи как для местных жителей, так и для туристов. Посетители могут наслаждаться неспешными прогулками по набережной, впитывая яркую атмосферу и историческое значение этого места. Кайш даш Колунаш был построен в 1776 году. Колонны служили церемониальным входом для кораблей, прибывающих в Лиссабон.</p>
+<p class="prose">Кайш даш Колунас был построен в начале 18 века, а именно в 1776 году, в рамках усилий города по модернизации своего набережной. Колонны были спроектированы для создания величественного входа для прибывающих дипломатов и торговцев, символизируя важность Лиссабона как морского центра в эпоху открытий. Эта территория стала свидетелем различных исторических событий, включая значительные морские деятельности и торговлю. Культурно, Cais das Colunas является важной частью наследия Лиссабона, представляя собой богатую морскую историю и архитектурную красоту города. Это популярное место для социальных встреч и культурных мероприятий, отражающее повседневную жизнь жителей Лиссабона. Это место способствует общему очарованию города, усиливая его привлекательность как объекта Всемирного наследия ЮНЕСКО.</p></div>
+</section>
+<section class="place" id="lisbon_se_cathedral">
+<div class="place-lead">
+<h3>Лиссабонский собор</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_se_cathedral.jpg" alt="Лиссабонский собор" width="330" height="396" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_se_cathedral_b.jpg" alt="Лиссабонский собор — вид 2" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Лиссабонский собор, известный как Сэ де Лиссабоа, является старейшей и наиболее важной церковью города, демонстрируя сочетание архитектурных стилей от романского до готического. Его внушительный фасад и прекрасное розовое окно делают его обязательным для посещения для всех, кто исследует исторический район Алфама. Посетители могут полюбоваться изысканными капеллами и потрясающими видами на город с террасы собора. Лиссабонский собор был освящен в 1147 году. Собор представляет собой смесь архитектурных стилей, включая романский, готический и барокко.</p>
+<p class="prose">Строительство Лиссабонского собора началось в 1147 году, вскоре после того, как город был захвачен у мавров во время Реконкисты. Собор был построен в честь победы и на протяжении веков претерпел несколько ремонтов и реставраций, особенно после землетрясения 1755 года, которое нанесло значительный ущерб. Как место поклонения, Лиссабонский собор имеет огромное религиозное значение для католической общины и служит местом пребывания архиепископа. Он является символом стойкости и истории города, отражая культурное наследие Лиссабона через свою архитектуру и искусство. Собор также является центром различных религиозных церемоний и празднований, привлекая как паломников, так и туристов.</p></div>
+</section>
+<section class="place" id="lisbon_miradouro_graca">
+<div class="place-lead">
+<h3>Мирадуру да Граса</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_miradouro_graca.jpg" alt="Мирадуру да Граса" width="330" height="156" style="height: 218px; max-height: 218px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_miradouro_graca_b.jpg" alt="Мирадуру да Граса — вид 2" width="330" height="185" style="height: 218px; max-height: 218px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Мирадуру да Граса предлагает потрясающие панорамные виды на Лиссабон, что делает его популярным местом как для местных жителей, так и для туристов. Уютно расположенный в районе Граса, этот смотровая площадка является идеальным местом для отдыха и наслаждения яркой атмосферой города. С его очаровательными садами и историческим окружением, он служит идеальным фоном для незабываемых фотографий. Расположен в районе Граса, известном своим историческим очарованием. Предлагает виды на ключевые достопримечательности, такие как Замок Святого Георгия и реку Тежу.</p>
+<p class="prose">Мирадуру да Граса расположен рядом с историческим районом Граса, который восходит к 12 веку. Сам смотровая площадка со временем развивалась, став популярным местом для посетителей, стремящихся полюбоваться красотой Лиссабона и его знаковыми достопримечательностями. Культурно, Miradouro da Graça является важной частью повседневной жизни Лиссабона, служа местом сбора для местных жителей и обязательным местом для посещения туристами. Эта смотровая площадка отражает богатое наследие и художественный дух города, часто представляя местных музыкантов и художников, которые вносят свой вклад в его живую атмосферу.</p></div>
+</section>
+<section class="place" id="lisbon_miradouro_senhora_monte">
+<div class="place-lead">
+<h3>Мирадуру да Сенора ду Монте</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_miradouro_senhora_monte.jpg" alt="Мирадуру да Сенора ду Монте" width="330" height="247" style="height: 105px; max-height: 105px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_miradouro_senhora_monte_b.jpg" alt="Мирадуру да Сенора ду Монте — вид 2" width="330" height="75" style="height: 105px; max-height: 105px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Miradouro da Senhora do Monte — одна из самых захватывающих смотровых площадок Лиссабона, предлагающая панорамные виды на город и реку Тежу. Уютно расположенная в районе Граса, это место является любимым как у местных жителей, так и у туристов, предоставляя идеальный фон для потрясающих фотографий и моментов размышлений. Спокойная атмосфера, дополненная зелеными садами и историческими особенностями, делает его идеальным местом для отдыха и наслаждения красотой Лиссабона. Смотровая площадка расположена на высоте 830 футов, что делает её одной из самых высоких в Лиссабоне. Он предлагает виды на несколько знаковых достопримечательностей, включая замок Святого Георгия и Лиссабонский собор.</p>
+<p class="prose">Мирадуру да Сеньора ду Монте расположен рядом с местом старой часовни, посвященной Непорочной Деве Марии Горы, которая датируется 17 веком. На протяжении многих лет эта смотровая площадка была популярным местом сбора, особенно в 19 веке, когда она стала известна своими живописными видами и романтической атмосферой. Культурно, Miradouro da Senhora do Monte имеет значение, так как отражает традиционный образ жизни Лиссабона, где местные жители часто собираются, чтобы насладиться видами и пообщаться. Эта смотровая площадка также популярна среди художников и фотографов, запечатлевающих суть города. Хотя она не имеет специфического политического или религиозного значения, её роль как общественного пространства подчеркивает важность общественных зон в городской жизни.</p></div>
+</section>
+<section class="place" id="lisbon_25_abril_bridge">
+<div class="place-lead">
+<h3>Мост 25 апреля</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_25_abril_bridge.jpg" alt="Мост 25 апреля" width="330" height="500" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_25_abril_bridge_b.jpg" alt="Мост 25 апреля — вид 2" width="330" height="255" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Мост 25 апреля — это знаковый висячий мост в Лиссабоне, соединяющий столицу с Алмадой через реку Тежу. Часто сравниваемый с мостом Золотые Ворота в Сан-Франциско, он является впечатляющим инженерным достижением и важной транспортной артерией. Посетители могут восхищаться его ярким красным цветом и панорамными видами на город и реку с различных смотровых площадок. Мост имеет длину 2 277 метров, что делает его одним из самых длинных висячих мостов в Европе. Он был спроектирован американским инженером Эдвином Д. Льюисом и построен консорциумом португальских и американских компаний.</p>
+<p class="prose">Строительство моста 25 апреля началось в 1962 году и было завершено в 1966 году, изначально он назывался мостом Салазара в честь португальского диктатора. Мост был открыт 6 августа 1966 года и с тех пор стал символом современности Лиссабона. Он был переименован после Революции гвоздик в 1974 году, которая положила конец авторитарному режиму в Португалии. Мост 25 апреля имеет как политическое, так и культурное значение для Лиссабона. Он символизирует переход от диктатуры к демократии после Революции гвоздик, отмечая ключевой момент в португальской истории. Культурно мост является любимой достопримечательностью, которая занимает важное место в идентичности города, часто появляется в искусстве и фотографии и служит фоном для различных мероприятий и празднований.</p></div>
+</section>
+<section class="place" id="lisbon_gulbenkian">
+<div class="place-lead">
+<h3>Музей Калусте Гульбенкяна</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<figure class="place-fig place-fig--lo-res"><img src="../images/lisbon_gulbenkian_b.jpg" alt="Музей Калусте Гульбенкяна" width="330" height="220"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Музей Калусте Гульбенкян в Лиссабоне — это сокровищница искусства и культуры, в которой хранится обширная коллекция, охватывающая период от древности до современности. Посетители могут ознакомиться с произведениями известных художников, таких как Рембрандт, Моне и Ван Дейк, а также с артефактами различных цивилизаций. Музей расположен в красиво оформленных садах, создавая спокойную атмосферу для любителей искусства и случайных посетителей. В музее представлено более 6,000 произведений искусства, включая картины, скульптуры и декоративные искусства. Он расположен в районе Ареейру в Лиссабоне, окруженный парком площадью 7 гектаров.</p>
+<p class="prose">Музей Калусте Гюльбенкяна был основан в 1969 году по воле Калусте Гюльбенкяна, армянского нефтяного магната и мецената. Он завещал свою обширную коллекцию искусства музею, который был создан для продвижения культуры и образования в Португалии. С тех пор музей стал ключевым учреждением для искусства и культуры в стране. Культурно, Музей Гулбенкяна играет жизненно важную роль в художественном ландшафте Лиссабона, демонстрируя разнообразные произведения искусства, отражающие как европейские, так и восточные влияния. Он служит центром культурного обмена и образования, проводя выставки, концерты и лекции, которые обогащают местное сообщество. Сады музея также предлагают спокойное убежище, улучшая повседневную жизнь жителей и гостей Лиссабона.</p></div>
+</section>
+<section class="place" id="lisbon_oceanario">
+<div class="place-lead">
+<h3>Океанариум Лиссабона</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<figure class="place-fig place-fig--lo-res"><img src="../images/lisbon_oceanario_b.jpg" alt="Океанариум Лиссабона" width="330" height="220"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Океанариум Лиссабона — один из крупнейших аквариумов в мире, расположенный в Парке Наций. Он демонстрирует разнообразие морской жизни, включая акул, скатов и ярких тропических рыб, все это в потрясающем архитектурном дизайне. Посетители могут исследовать различные экосистемы и узнать о усилиях по охране океанов в увлекательной и образовательной обстановке. Открыт 18 мая 1998 года во время Expo 98. Спроектировано британским архитектором Ричардом Роджерсом. Вмещает более 15,000 морских животных из 450 видов.</p>
+<p class="prose">Океанариум Лиссабона был открыт 18 мая 1998 года в рамках Всемирной выставки Expo 98, которая была посвящена теме «Океаны, наследие для будущего». Спроектированный архитектором Ричардом Роджерсом, он с тех пор стал ярким ориентиром в Лиссабоне, привлекая миллионы посетителей каждый год. Культурно, Океанариум служит важным образовательным ресурсом, способствуя осведомленности о морском охране и значении защиты океанских экосистем. Он играет значительную роль в идентичности Лиссабона как города, который ценит свое морское наследие и экологическую ответственность.</p></div>
+</section>
+<section class="place" id="lisbon_praca_municipio">
+<div class="place-lead">
+<h3>Площадь Муниципия</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_praca_municipio.jpg" alt="Площадь Муниципия" width="330" height="264" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_praca_municipio_b.jpg" alt="Площадь Муниципия — вид 2" width="330" height="495" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Площадь Муниципия — это яркая общественная площадь, расположенная в сердце Лиссабона, известная своей потрясающей архитектурой и живой атмосферой. Окруженная важными муниципальными зданиями, она служит центральным узлом как для местных жителей, так и для туристов, предлагая возможность заглянуть в богатую историю и культурную жизнь города. Площадь часто наполнена событиями, рынками и встречами, что делает её обязательным местом для посещения. Площадь была перепроектирована после землетрясения 1755 года. Он окружен значительными муниципальными зданиями, включая мэрию Лиссабона.</p>
+<p class="prose">Площадь Муниципия, исторически известная как Площадь Торговли, имеет корни, уходящие в 18-й век. Она была переработана после землетрясения 1755 года, которое опустошило большую часть Лиссабона, что привело к созданию нового городского планирования. С тех пор площадь стала центром различных гражданских мероприятий и празднований. Политически Praça do Município сыграла роль в управлении Лиссабоном, служа местом для муниципальной администрации и общественных собраний. Культурно она отражает наследие города через свою архитектуру и служит площадкой для фестивалей и общественных мероприятий, внося вклад в повседневную жизнь жителей Лиссабона. Площадь является свидетельством стойкости и адаптивности города на протяжении веков.</p></div>
+</section>
+<section class="place" id="lisbon_sao_vicente">
+<div class="place-lead">
+<h3>Сан-Висенте-де-Фора</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_sao_vicente.jpg" alt="Сан-Висенте-де-Фора" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_sao_vicente_b.jpg" alt="Сан-Висенте-де-Фора — вид 2" width="330" height="185" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Сан-Висенте-де-Фора — это потрясающий монастырь, расположенный в районе Алфама в Лиссабоне, известный своей впечатляющей архитектурой и спокойной атмосферой. Посетители могут полюбоваться красивыми клуатрами, сложной плиткой и захватывающими видами города с его возвышенной позиции. На территории также находятся могилы нескольких португальских монархов, что добавляет исторической привлекательности. Основанный в 1598 году, монастырь изначально был бенедиктинским учреждением. На сайте находятся могилы нескольких португальских королей и королев. Архитектура монастыря демонстрирует маньеристский стиль, особенно в его церкви и клуатрах.</p>
+<p class="prose">Монастырь Сан-Висенте-де-Фора был основан в 1598 году, изначально построенный для размещения общины бенедиктинских монахов. Позже он был преобразован в францисканский монастырь, а его строительство было завершено в середине 17 века. За века это место претерпело различные ремонты и реставрации, особенно после землетрясения 1755 года, которое разрушило большую часть Лиссабона. Сан-Висенте-де-Фора имеет культурное значение как яркий пример маньеристской архитектуры в Португалии и является важной частью религиозного наследия Лиссабона. Монастырь является местом паломничества для многих, отражая глубоко укоренившиеся католические традиции в городе. Кроме того, он служит символом исторической связи между монархией и церковью, а его королевские гробницы представляют собой неугасимое наследие прошлого Португалии.</p></div>
 </section>
 </body>
 </html>

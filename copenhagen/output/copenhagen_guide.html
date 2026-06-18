@@ -13,7 +13,7 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
 .otium-logo { font-family: 'Vollkorn', serif; font-size: 2.15rem;
   font-weight: 600; letter-spacing: 0.18em; margin-bottom: 0.85rem; }
 .otiump { margin: 0.42rem 0; line-height: 1.42; text-align: justify;
-  max-width: 38rem; font-size: 0.95rem; }
+  font-size: 0.95rem; }
 .guide-title { page-break-after: auto; margin-bottom: 0.55rem;
   page-break-inside: avoid; }
 .historical-reference { margin: 0.75rem 0 1.15rem;
@@ -63,22 +63,103 @@ ol.trip-stops a:hover { text-decoration: underline; }
 .heraldry-univ-caption { font-size: 0.52rem; line-height: 1.18;
   margin: 0.12rem 0 0; padding: 0 0.06rem; color: #252525;
   text-align: center; font-weight: 500; }
-.heraldry-motto { text-align: center; max-width: 18rem; margin: 0.18rem auto;
+.heraldry-motto { text-align: center; margin: 0.18rem auto;
   width: 100%; }
 .motto-line { font-family: 'Vollkorn', serif; font-size: 1rem;
   margin: 0; color: #333; line-height: 1.35; }
 .guide-title h1.guide-title-main { font-family: 'Vollkorn', serif;
   font-size: 2.35rem; margin-bottom: 0.5rem; font-weight: 600; }
 .lead { color: #444; font-size: 1.05rem; }
-.guide-toc { margin: 0.85rem 0 1.15rem; page-break-inside: avoid; }
-.guide-toc h2 { font-family: 'Vollkorn', serif; font-size: 1.28rem;
-  font-weight: 600; margin: 0.4rem 0 0.55rem; }
+
+.guide-toc { page-break-before: always; break-before: page;
+  page-break-after: always; break-after: page;
+  margin: 0; padding: 0.2rem 0 0.45rem; page-break-inside: auto; }
+.guide-toc h2 { font-family: 'Vollkorn', serif;
+  font-size: 1.28rem; font-weight: 600; margin: 0.4rem 0 0.55rem; }
 .guide-toc ol { margin: 0.35rem 0 0.65rem 1.25rem; padding: 0;
   columns: 2; column-gap: 1.5rem; }
 .guide-toc li { margin: 0.18rem 0; line-height: 1.35;
   font-size: 0.88rem; break-inside: avoid; }
-.guide-toc a { color: #1a5276; text-decoration: none; }
+.guide-toc a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.guide-toc a:hover { color: #0d3d56; }
 .guide-toc li.toc-item--sub { font-size: 0.82rem; margin-left: 0.35rem; }
+.toc-back { font-size: 0.78rem; margin: 0 0 0.35rem; text-align: right; }
+.toc-back a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.toc-back a:hover { color: #0d3d56; }
+.place, .historical-reference, .guide-primer, .guide-trip-plans {
+  scroll-margin-top: 1.25rem; }
+.historical-reference h2, .guide-primer h2, .guide-trip-plans h2,
+.chapter-head h2, .place-lead h3 { position: relative; }
+.guide-toc + .place, .guide-toc + .chapter-head {
+  page-break-before: avoid; break-before: avoid-page; }
+.place-lead { page-break-inside: avoid; break-inside: avoid-page;
+  page-break-after: auto; }
+.place-lead > h3 { page-break-after: avoid; break-after: avoid-page; }
+.place-lead > .place-meta { page-break-after: avoid; break-after: avoid-page; }
+
+.place-fig { page-break-inside: avoid; break-inside: avoid-page;
+  margin: 0.5rem 0 1rem; }
+.place-fig img {
+  page-break-inside: avoid; break-inside: avoid-page;
+  max-height: 48vh; width: auto; max-width: 100%;
+  object-fit: contain; margin-left: auto; margin-right: auto; }
+.place-fig--hi-res img { max-height: 52vh; }
+.place-fig--lo-res img { max-height: 30vh; }
+.place-pdf-fig-row {
+  display: flex; flex-direction: row; flex-wrap: wrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.45rem 0.55rem; margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row .place-fig {
+  flex: 1 1 30%; margin: 0; min-width: 26%; max-width: 100%; }
+.place-pdf-fig-row .place-fig img {
+  width: auto; max-width: 100%; height: auto; max-height: 44vh;
+  object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--pair {
+  flex-wrap: nowrap; justify-content: space-between;
+  align-items: flex-end; gap: 0.5rem 0.65rem; }
+.place-pdf-fig-row--pair .place-fig {
+  flex: 1 1 47%; min-width: 0; max-width: 50%;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--pair .place-fig img {
+  max-height: 44vh; object-fit: contain; }
+.place-pdf-fig-row--pair .place-fig--hi-res img { max-height: 52vh; }
+.place-pdf-fig-row--pair .place-fig--lo-res img { max-height: 26vh; }
+.place-pdf-fig-row--pair .place-fig--row-sized img,
+.place-pdf-fig-row--triple .place-fig--row-sized img,
+.place-pdf-fig-row--many .place-fig--row-sized img {
+  width: auto; max-width: 100%; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row .place-fig--row-sized.place-fig--hi-res img,
+.place-pdf-fig-row .place-fig--row-sized.place-fig--lo-res img {
+  max-height: unset; }
+.place-pdf-fig-rows-stack {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple {
+  display: flex; flex-direction: row; flex-wrap: nowrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.4rem 0.48rem; margin: 0;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--triple .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--triple .place-fig--hi-res img { max-height: 42vh; }
+.place-pdf-fig-row--triple .place-fig--lo-res img { max-height: 18vh; }
+.place-pdf-fig-row--many {
+  flex-wrap: nowrap; justify-content: center; align-items: flex-end;
+  gap: 0.35rem 0.42rem; }
+.place-pdf-fig-row--many .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--many .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+
+
 .place { margin-bottom: 2.2rem; page-break-inside: auto; }
 h3 { font-family: 'Vollkorn', serif; font-size: 1.22rem; margin: 1.2rem 0 0.35rem;
   font-weight: 600; }
@@ -90,7 +171,6 @@ h4 { font-family: 'Vollkorn', serif; font-size: 0.95rem; text-transform: upperca
   color: #555; font-size: 0.95rem; margin: 0 0 0.5rem; font-style: italic; }
 .place-meta { font-size: 0.92rem; color: #353535; margin: 0 0 0.75rem;
   line-height: 1.4; }
-.place-fig { margin: 0.5rem 0 1rem; }
 img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
 .prose, .place-desc p { margin: 0.45rem 0; line-height: 1.5;
   text-align: justify; }
@@ -110,7 +190,9 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <figure class="heraldry-fig heraldry-coat-book" title="Coat of arms of Copenhagen"><img src="../images/guide_coat_of_arms.svg" alt="Coat of arms of Copenhagen"/></figure>
 <figure class="heraldry-fig heraldry-coat-book" title="Flag of Copenhagen"><img src="../images/guide_flag.svg" alt="Flag of Copenhagen"/></figure>
 </div></div><h1 class="guide-title-main">Copenhagen</h1><p class="lead">Guide. Places in this edition: 29.</p></header>
+<nav class="guide-toc" id="guide-toc" aria-label="Contents"><h2>Contents</h2><ol><li class="toc-item"><a href="#guide-trips">Trip ideas</a></li><li class="toc-item"><a href="#copenhagen_amalienborg">Amalienborg Palace</a></li><li class="toc-item"><a href="#copenhagen_assistens">Assistens Cemetery</a></li><li class="toc-item"><a href="#copenhagen_bakken">Bakken amusement park</a></li><li class="toc-item"><a href="#copenhagen_black_diamond">Black Diamond library</a></li><li class="toc-item"><a href="#copenhagen_botanical">Botanical Garden</a></li><li class="toc-item"><a href="#copenhagen_brandmuseet">Brandmuseet</a></li><li class="toc-item"><a href="#copenhagen_christiansborg_slot">Christiansborg</a></li><li class="toc-item"><a href="#copenhagen_christiansborg">Christiansborg Palace</a></li><li class="toc-item"><a href="#copenhagen_church_holmen">Church of Holmen</a></li><li class="toc-item"><a href="#copenhagen_opera_house">Copenhagen Opera House</a></li><li class="toc-item"><a href="#copenhagen_designmuseum">Designmuseum Denmark</a></li><li class="toc-item"><a href="#copenhagen_marble_church">Frederik&#x27;s Church (Marble Church)</a></li><li class="toc-item"><a href="#copenhagen_christiania">Freetown Christiania</a></li><li class="toc-item"><a href="#copenhagen_grundtvigs">Grundtvig&#x27;s Church</a></li><li class="toc-item"><a href="#copenhagen_historic_map_tranquebar">Historic map Tranquebar</a></li><li class="toc-item"><a href="#copenhagen_imamalimoskecph">ImamAliMoskeCph</a></li><li class="toc-item"><a href="#copenhagen_kastellet">Kastellet fortress</a></li><li class="toc-item"><a href="#copenhagen_church_marble">Marble Church</a></li><li class="toc-item"><a href="#copenhagen_glyptotek">Ny Carlsberg Glyptotek</a></li><li class="toc-item"><a href="#copenhagen_nyhavn">Nyhavn waterfront</a></li><li class="toc-item"><a href="#copenhagen_nytorv">Nytorv and Gammeltorv</a></li><li class="toc-item"><a href="#copenhagen_rosenborg_ext">Rosenborg</a></li><li class="toc-item"><a href="#copenhagen_rosenborg_castle">Rosenborg Castle</a></li><li class="toc-item"><a href="#copenhagen_superkilen">Superkilen park</a></li><li class="toc-item"><a href="#copenhagen_little_mermaid">The Little Mermaid statue</a></li><li class="toc-item"><a href="#copenhagen_round_tower">The Round Tower (Rundetårn)</a></li><li class="toc-item"><a href="#copenhagen_tivoli_gardens">Tivoli Gardens</a></li><li class="toc-item"><a href="#copenhagen_torvehallerne">Torvehallerne market</a></li><li class="toc-item"><a href="#copenhagen_church_trinitatis">Trinitatis Church</a></li></ol></nav>
 <section class="guide-trip-plans" id="guide-trips" aria-label="Trip ideas"><h2>Trip ideas</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 <article class="trip-plan" id="trip-1d"><h3>One day</h3>
 <p class="prose">A compact loop linking the strongest cards in this guide, ordered to minimise backtracking on foot.</p>
 <ol class="trip-stops"><li><a href="#copenhagen_church_holmen">Church of Holmen</a> (~75min)</li>
@@ -138,228 +220,389 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <ol class="trip-stops"><li><a href="#copenhagen_kastellet">Kastellet fortress</a> (~75min)</li>
 <li><a href="#copenhagen_little_mermaid">The Little Mermaid statue</a> (~75min)</li>
 <li><a href="#copenhagen_marble_church">Frederik&#x27;s Church (Marble Church)</a> (~75min)</li></ol></article></section>
-<nav class="guide-toc" aria-label="Contents"><h2>Contents</h2><ol><li class="toc-item"><a href="#guide-trips">Trip ideas</a></li><li class="toc-item"><a href="#copenhagen_amalienborg">Amalienborg Palace</a></li><li class="toc-item"><a href="#copenhagen_assistens">Assistens Cemetery</a></li><li class="toc-item"><a href="#copenhagen_bakken">Bakken amusement park</a></li><li class="toc-item"><a href="#copenhagen_black_diamond">Black Diamond library</a></li><li class="toc-item"><a href="#copenhagen_botanical">Botanical Garden</a></li><li class="toc-item"><a href="#copenhagen_pdfband_8_e3a581df">Brandmuseet</a></li><li class="toc-item"><a href="#copenhagen_christiansborg_slot">Christiansborg</a></li><li class="toc-item"><a href="#copenhagen_christiansborg">Christiansborg Palace</a></li><li class="toc-item"><a href="#copenhagen_church_holmen">Church of Holmen</a></li><li class="toc-item"><a href="#copenhagen_opera_house">Copenhagen Opera House</a></li><li class="toc-item"><a href="#copenhagen_designmuseum">Designmuseum Denmark</a></li><li class="toc-item"><a href="#copenhagen_marble_church">Frederik&#x27;s Church (Marble Church)</a></li><li class="toc-item"><a href="#copenhagen_christiania">Freetown Christiania</a></li><li class="toc-item"><a href="#copenhagen_grundtvigs">Grundtvig&#x27;s Church</a></li><li class="toc-item"><a href="#copenhagen_pdfband_3_d85700d9">Historic map Tranquebar</a></li><li class="toc-item"><a href="#copenhagen_pdfband_2_6a31905a">ImamAliMoskeCph</a></li><li class="toc-item"><a href="#copenhagen_kastellet">Kastellet fortress</a></li><li class="toc-item"><a href="#copenhagen_church_marble">Marble Church</a></li><li class="toc-item"><a href="#copenhagen_glyptotek">Ny Carlsberg Glyptotek</a></li><li class="toc-item"><a href="#copenhagen_nyhavn">Nyhavn waterfront</a></li><li class="toc-item"><a href="#copenhagen_nytorv">Nytorv and Gammeltorv</a></li><li class="toc-item"><a href="#copenhagen_rosenborg_ext">Rosenborg</a></li><li class="toc-item"><a href="#copenhagen_rosenborg_castle">Rosenborg Castle</a></li><li class="toc-item"><a href="#copenhagen_superkilen">Superkilen park</a></li><li class="toc-item"><a href="#copenhagen_little_mermaid">The Little Mermaid statue</a></li><li class="toc-item"><a href="#copenhagen_round_tower">The Round Tower (Rundetårn)</a></li><li class="toc-item"><a href="#copenhagen_tivoli_gardens">Tivoli Gardens</a></li><li class="toc-item"><a href="#copenhagen_torvehallerne">Torvehallerne market</a></li><li class="toc-item"><a href="#copenhagen_church_trinitatis">Trinitatis Church</a></li></ol></nav>
 <section class="place" id="copenhagen_amalienborg">
+<div class="place-lead">
 <h3>Amalienborg Palace</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Amalienborg Slotsplads | Style: Danish rococo around octagonal plaza | Period: 1760s rococo palaces</p>
-<figure class="place-fig"><img src="../images/copenhagen_amalienborg.jpg" alt="Amalienborg Palace"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/copenhagen_amalienborg.jpg" alt="Amalienborg Palace" width="1280" height="622" style="height: 224px; max-height: 224px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_amalienborg_b.jpg" alt="Amalienborg Palace — view 2" width="330" height="222" style="height: 224px; max-height: 224px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Queen&#x27;s winter residence of four identical palaces around equestrian statue of Frederik V. Changing of the guard marches from Rosenborg at midday. Two palaces open as museums on rotation.</p>
 <p class="prose">Planned after Christiansborg fire; royal family adopted the square in 1794. Working monarchy hub facing the opera across the harbour.</p></div>
 </section>
 <section class="place" id="copenhagen_assistens">
+<div class="place-lead">
 <h3>Assistens Cemetery</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/copenhagen_assistens.jpg" alt="Assistens Cemetery"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_assistens.jpg" alt="Assistens Cemetery" width="330" height="248" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_assistens_b.jpg" alt="Assistens Cemetery — view 2" width="330" height="440" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Assistens Cemetery is a serene and historic burial ground located in the Nørrebro district of Copenhagen. Established in 1760, it serves as the final resting place for many notable figures, including famous authors and artists. Visitors can stroll through its peaceful paths, enjoying the blend of nature and history. Founded in 1760, initially for the poor of Copenhagen. Burial site for notable figures including Hans Christian Andersen and Søren Kierkegaard.</p>
 <p class="prose">Assistens Cemetery was founded in 1760 as a burial site for the city&#x27;s poor, evolving into a prominent cemetery for notable citizens over the years. It has witnessed significant changes in burial practices and urban development, reflecting the city&#x27;s growth and cultural shifts. Culturally, Assistens Cemetery is significant as it houses the graves of renowned figures such as Hans Christian Andersen and Søren Kierkegaard, making it a site of literary and artistic heritage. The cemetery is also a popular spot for locals, serving as a park where people gather for reflection and leisure, thus integrating into the daily life of Copenhagen.</p></div>
 </section>
 <section class="place" id="copenhagen_bakken">
+<div class="place-lead">
 <h3>Bakken amusement park</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/copenhagen_bakken.jpg" alt="Bakken amusement park"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/copenhagen_bakken_b.jpg" alt="Bakken amusement park" width="330" height="247"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Bakken amusement park, located just north of Copenhagen, is the world&#x27;s oldest operating amusement park, offering a charming blend of historic rides and modern attractions. Nestled in a beautiful forest setting, it features a variety of entertainment options, from thrilling roller coasters to traditional games and performances. Visitors can enjoy a lively atmosphere filled with food stalls, restaurants, and vibrant nightlife. Bakken was founded in 1583, making it the oldest amusement park in the world. The park is located in Klampenborg, approximately 10 kilometers north of central Copenhagen. Bakken features over 30 rides and attractions, including roller coasters and a carousel.</p>
 <p class="prose">It began as a natural spring where locals gathered for leisure, and over the centuries, it evolved into a full-fledged amusement park. Key events in its history include the introduction of various rides and attractions, which have transformed it into a beloved destination for both locals and tourists. Culturally, Bakken holds a special place in Danish heritage, representing a long-standing tradition of leisure and entertainment. It reflects the evolution of amusement parks and their role in social life, showcasing both historical and contemporary Danish culture. The park is a popular venue for family outings and celebrations, contributing to the vibrant daily life of Copenhagen.</p></div>
 </section>
 <section class="place" id="copenhagen_black_diamond">
+<div class="place-lead">
 <h3>Black Diamond library</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/copenhagen_black_diamond.jpg" alt="Black Diamond library"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_black_diamond.jpg" alt="Black Diamond library" width="330" height="186" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_black_diamond_b.jpg" alt="Black Diamond library — view 2" width="330" height="184" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Black Diamond, officially known as the Royal Library&#x27;s Diamond, is a striking modern architectural gem located along the waterfront in Copenhagen. This contemporary extension of the Royal Library offers visitors not only a vast collection of books and resources but also stunning views of the harbor. With its unique design and vibrant cultural offerings, it serves as a hub for both locals and tourists alike. The Black Diamond is an extension of the Royal Library, which dates back to 1648. It was officially opened in 1999 and features a striking black glass facade. The library houses a collection of over 30 million items, including books, manuscripts, and digital resources.</p>
 <p class="prose">The Black Diamond was inaugurated in 1999 as an extension of the Royal Library, which was founded in 1648. The building was designed by Danish architect Schmidt Hammer Lassen and has become a symbol of modern Copenhagen, blending seamlessly with the city&#x27;s historical landscape while providing a space for knowledge and culture. Culturally, the Black Diamond plays a vital role in Copenhagen&#x27;s artistic scene, hosting exhibitions, concerts, and literary events that engage the public and promote the arts. Its location along the waterfront enhances its significance as a gathering place, reflecting the city&#x27;s commitment to fostering community and cultural exchange. The library also serves as a testament to Denmark&#x27;s dedication to education and public access to information.</p></div>
 </section>
 <section class="place" id="copenhagen_botanical">
+<div class="place-lead">
 <h3>Botanical Garden</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/copenhagen_botanical.jpg" alt="Botanical Garden"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_botanical.jpg" alt="Botanical Garden" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_botanical_b.jpg" alt="Botanical Garden — view 2" width="330" height="236" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Botanical Garden in Copenhagen is a lush oasis located in the heart of the city, showcasing a diverse collection of plants from around the world. Visitors can explore its beautifully landscaped grounds, historic greenhouses, and tranquil ponds, making it a perfect spot for relaxation and education. The garden is not only a haven for plant enthusiasts but also a popular destination for families and tourists alike. The garden covers an area of 10 hectares and features over 13,000 species of plants. The historic glasshouses, built in the 1870s, are a notable example of Victorian architecture.</p>
 <p class="prose">The Botanical Garden was established in 1600, originally as a medicinal herb garden for the University of Copenhagen. It has undergone several transformations, with significant expansions and the construction of the iconic glasshouses in the 19th century, reflecting the evolving understanding of botany and horticulture. Culturally, the Botanical Garden serves as a vital resource for education and research, contributing to the understanding of plant diversity and conservation. It is a cherished part of Copenhagen&#x27;s urban landscape, offering a peaceful retreat for residents and visitors, and plays a role in various cultural events and activities throughout the year.</p></div>
 </section>
-<section class="place" id="copenhagen_pdfband_8_e3a581df">
+<section class="place" id="copenhagen_brandmuseet">
+<div class="place-lead">
 <h3>Brandmuseet</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/copenhagen_pdfband_8_e3a581df.jpg" alt="Brandmuseet"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/copenhagen_brandmuseet.jpg" alt="Brandmuseet" width="1280" height="961" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_brandmuseet_b.jpg" alt="Brandmuseet — view 2" width="330" height="250" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 </section>
 <section class="place" id="copenhagen_christiansborg_slot">
+<div class="place-lead">
 <h3>Christiansborg</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/copenhagen_christiansborg_slot.jpg" alt="Christiansborg"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_christiansborg_slot.jpg" alt="Christiansborg" width="330" height="218" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_christiansborg_slot_b.jpg" alt="Christiansborg — view 2" width="330" height="495" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Christiansborg Palace (Danish: Christiansborg Slot, pronounced [kʰʁestjænsˈpɒˀ ˈslʌt, kʰʁæs-]) is a palace and government building on the islet of Slotsholmen in central Copenhagen, Denmark. It is the seat of the Danish Parliament (Folketinget), the Danish Prime Minister&#x27;s Office, and the Supreme Court of Denmark. Also, several parts of the palace are used by the Danish monarch, including the Royal Reception Rooms, the Palace Chapel and the Royal Stables.</p></div>
 </section>
 <section class="place" id="copenhagen_christiansborg">
+<div class="place-lead">
 <h3>Christiansborg Palace</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Prins Jørgens Gård | Style: Neobaroque seat of parliament, court, and PM | Period: 1928 third palace on site</p>
-<figure class="place-fig"><img src="../images/copenhagen_christiansborg.jpg" alt="Christiansborg Palace"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/copenhagen_christiansborg.jpg" alt="Christiansborg Palace" width="1178" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_christiansborg_b.jpg" alt="Christiansborg Palace — view 2" width="330" height="495" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Island palace housing Folketinget, royal reception rooms, and ruins of medieval bishops&#x27; castle. Tower viewpoint requires free timed ticket mornings. Royal stables museum sits in the northern wings.</p>
 <p class="prose">Two earlier palaces burned; Thorvald Jørgensen&#x27;s design reused foundations. Rare single site bundling all three Danish powers.</p></div>
 </section>
 <section class="place" id="copenhagen_church_holmen">
+<div class="place-lead">
 <h3>Church of Holmen</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/copenhagen_church_holmen.jpg" alt="Church of Holmen"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_church_holmen.jpg" alt="Church of Holmen" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_church_holmen_b.jpg" alt="Church of Holmen — view 2" width="330" height="186" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Church of Holmen, located in the heart of Copenhagen, is a stunning example of Baroque architecture and a significant landmark in the city. Originally built as a naval church for the Royal Danish Navy, it offers visitors a glimpse into Denmark&#x27;s maritime history and religious heritage. The church is known for its beautiful interior, including intricate woodwork and impressive altarpieces, making it a must-visit for both history buffs and architecture enthusiasts. Founded in 1695 and completed in 1699. Originally built as a naval church for the Royal Danish Navy. Features Baroque architecture with intricate woodwork and altarpieces.</p>
 <p class="prose">The Church of Holmen was founded in 1695 and completed in 1699, designed by the architect A.F. Rhediger. It served as a church for sailors and has been a central place of worship for the Danish Navy. Throughout its history, the church has undergone various renovations, particularly after a fire in 1990, which led to significant restoration efforts to preserve its Baroque features. Culturally, the Church of Holmen plays a vital role in the daily life of Copenhagen, serving not only as a place of worship but also as a venue for concerts and community events. Its historical connection to the Danish Navy adds to its cultural significance, reflecting Denmark&#x27;s maritime heritage. The church is a symbol of the city&#x27;s architectural evolution and remains a cherished part of Copenhagen&#x27;s landscape.</p></div>
 </section>
 <section class="place" id="copenhagen_opera_house">
+<div class="place-lead">
 <h3>Copenhagen Opera House</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Holmen | Style: Contemporary waterfront auditorium shell | Period: 2001–2004 (Henning Larsen)</p>
-<figure class="place-fig"><img src="../images/copenhagen_opera_house.jpg" alt="Copenhagen Opera House"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/copenhagen_opera_house.jpg" alt="Copenhagen Opera House" width="1280" height="851" style="height: 260px; max-height: 260px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_opera_house_b.jpg" alt="Copenhagen Opera House — view 2" width="330" height="186" style="height: 260px; max-height: 260px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">National opera across the harbour from Amalienborg with a cantilevered roof and public foyer walks. Harbour bus links Nyhavn to the front plaza. Backstage tours run on selected summer dates.</p>
 <p class="prose">A.P. Møller foundation gift anchored Holmen&#x27;s cultural redevelopment. Modern counterweight to historic palace axis.</p></div>
 </section>
 <section class="place" id="copenhagen_designmuseum">
+<div class="place-lead">
 <h3>Designmuseum Denmark</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/copenhagen_designmuseum.jpg" alt="Designmuseum Denmark"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_designmuseum.jpg" alt="Designmuseum Denmark" width="330" height="227" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_designmuseum_b.jpg" alt="Designmuseum Denmark — view 2" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Designmuseum Denmark is a premier destination for design enthusiasts, showcasing a rich collection of Danish and international design artifacts. Housed in a former hospital dating back to the 18th century, the museum offers visitors a glimpse into the evolution of design through various exhibitions and educational programs. With its focus on both historical and contemporary design, it serves as a vibrant hub for creativity and innovation in Copenhagen. Founded in 1893 as the Danish Museum of Decorative Art. Housed in a former hospital built in the 18th century. Underwent a major renovation completed in 2013.</p>
 <p class="prose">Designmuseum Denmark was founded in 1893, originally as the Danish Museum of Decorative Art. The museum has undergone several transformations and expansions over the years, including a significant renovation completed in 2013 that modernized its facilities while preserving its historical architecture. The museum plays a crucial role in preserving and promoting Denmark&#x27;s rich design heritage, which is recognized worldwide. It reflects the cultural importance of design in Danish society, influencing daily life and contributing to the country&#x27;s identity. The museum also engages with contemporary issues in design, fostering discussions about sustainability and innovation.</p></div>
 </section>
 <section class="place" id="copenhagen_marble_church">
+<div class="place-lead">
 <h3>Frederik&#x27;s Church (Marble Church)</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Frederiksstaden | Style: Rococo dome on Greek cross plan | Period: 1749 start; completed 1894</p>
-<figure class="place-fig"><img src="../images/copenhagen_marble_church.jpg" alt="Frederik&#x27;s Church (Marble Church)"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/copenhagen_marble_church.jpg" alt="Frederik&#x27;s Church (Marble Church)" width="1068" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_marble_church_b.jpg" alt="Frederik&#x27;s Church (Marble Church) — view 2" width="330" height="520" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Copper-green dome church facing Amalienborg axis, inspired by St Peter&#x27;s proportions. Crypt concerts use the vault acoustics. Dome climb tickets sell fewer than the tower text suggests.</p>
 <p class="prose">Eigtved&#x27;s expensive marble scheme stalled for a century before completion. Visual closure at the end of the Frederiksstaden axis.</p></div>
 </section>
 <section class="place" id="copenhagen_christiania">
+<div class="place-lead">
 <h3>Freetown Christiania</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Christianshavn | Style: Self-built timber and recycled architecture | Period: 1971 squat settlement</p>
-<figure class="place-fig"><img src="../images/copenhagen_christiania.jpg" alt="Freetown Christiania"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--row-sized"><img src="../images/copenhagen_christiania.jpg" alt="Freetown Christiania" width="1140" height="1140" style="height: 305px; max-height: 305px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_christiania_b.jpg" alt="Freetown Christiania — view 2" width="330" height="218" style="height: 305px; max-height: 305px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Car-free commune of workshops, vegetarian eateries, and lakeside paths on former barracks land. Main drag photography rules can change—read entry signs. Bike access is easier than driving to nearby streets.</p>
 <p class="prose">Activists opened fences to artists and dropouts; decades of negotiation followed. Europe&#x27;s best-known autonomous neighbourhood experiment.</p></div>
 </section>
 <section class="place" id="copenhagen_grundtvigs">
+<div class="place-lead">
 <h3>Grundtvig&#x27;s Church</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/copenhagen_grundtvigs.jpg" alt="Grundtvig&#x27;s Church"/></figure>
-<div class="place-desc"><p class="prose">Grundtvig&#x27;s Church is a striking example of Danish expressionist architecture, located in the Bispebjerg district of Copenhagen. Known for its unique brick facade and soaring tower, the church is dedicated to the Danish theologian N.F.S. Grundtvig and serves as a prominent landmark in the city. Visitors can admire its impressive interior, which features beautiful stained glass windows and intricate woodwork, making it a serene place for reflection and worship. Designed by architect P.V. The church is named after N.F.S.</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_grundtvigs.jpg" alt="Grundtvig&#x27;s Church" width="330" height="465" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_grundtvigs_b.jpg" alt="Grundtvig&#x27;s Church — view 2" width="330" height="473" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Grundtvig&#x27;s Church is a striking example of Danish expressionist architecture, located in the Bispebjerg district of Copenhagen. Known for its unique brick facade and soaring tower, the church is dedicated to the Danish theologian N.F.S. Grundtvig and serves as a prominent landmark in the city. Visitors can admire its impressive interior, which features beautiful stained glass windows and intricate woodwork, making it a serene place for reflection and worship. Designed by architect P.V. Jensen-Klint, construction began in 1921 and was completed in 1940. The church is named after N.F.S. Grundtvig, a prominent Danish theologian and educator.</p>
 <p class="prose">Construction of Grundtvig&#x27;s Church began in 1921 and was completed in 1940, designed by architect P.V. Jensen-Klint. The church was built in honor of N.F.S. Grundtvig, a significant figure in Danish history known for his contributions to education and the church. The building reflects the principles of Grundtvig&#x27;s thought, emphasizing the importance of community and spirituality. Culturally, Grundtvig&#x27;s Church is a symbol of Danish heritage and architectural innovation, representing the transition from traditional to modern church design in Denmark. It plays a vital role in the daily lives of the local community, hosting various events and services that foster a sense of belonging. The church is also a popular site for tourists, contributing to the cultural landscape of Copenhagen.</p></div>
 </section>
-<section class="place" id="copenhagen_pdfband_3_d85700d9">
+<section class="place" id="copenhagen_historic_map_tranquebar">
+<div class="place-lead">
 <h3>Historic map Tranquebar</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/copenhagen_pdfband_3_d85700d9.jpg" alt="Historic map Tranquebar"/></figure>
+<figure class="place-fig place-fig--hi-res"><img src="../images/copenhagen_historic_map_tranquebar.jpg" alt="Historic map Tranquebar" width="1280" height="1128"/></figure>
+</div>
 </section>
-<section class="place" id="copenhagen_pdfband_2_6a31905a">
+<section class="place" id="copenhagen_imamalimoskecph">
+<div class="place-lead">
 <h3>ImamAliMoskeCph</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/copenhagen_pdfband_2_6a31905a.jpg" alt="ImamAliMoskeCph"/></figure>
+<figure class="place-fig place-fig--hi-res"><img src="../images/copenhagen_imamalimoskecph.jpg" alt="ImamAliMoskeCph" width="1200" height="1600"/></figure>
+</div>
 </section>
 <section class="place" id="copenhagen_kastellet">
+<div class="place-lead">
 <h3>Kastellet fortress</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/copenhagen_kastellet.jpg" alt="Kastellet fortress"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_kastellet.jpg" alt="Kastellet fortress" width="330" height="186" style="height: 140px; max-height: 140px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_kastellet_b.jpg" alt="Kastellet fortress — view 2" width="330" height="100" style="height: 140px; max-height: 140px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Kastellet is a well-preserved star-shaped fortress located in the heart of Copenhagen, offering visitors a glimpse into Denmark&#x27;s military history. Surrounded by picturesque moats and lush green areas, it serves as a peaceful park where locals and tourists alike can stroll and enjoy the scenery. The fortress is not only an important historical site but also a vibrant part of the city&#x27;s landscape, featuring a windmill and a church. Kastellet was built between 1626 and 1629. It is one of the best-preserved star fortresses in Northern Europe.</p>
 <p class="prose">Kastellet was founded in 1626 during the reign of King Christian IV as part of a series of fortifications to protect Copenhagen. It was constructed in the shape of a star, a design that was innovative for its time. Over the centuries, Kastellet has played various roles, including serving as a military base and a garrison, and it has witnessed significant events in Danish history, including conflicts and changes in military strategy. Kastellet holds cultural significance as a symbol of Denmark&#x27;s military heritage and architectural ingenuity. It reflects the historical evolution of military defense in the region and is a popular site for cultural events and gatherings. The fortress is also a designated conservation area, emphasizing its importance in preserving Denmark&#x27;s historical landscape.</p></div>
 </section>
 <section class="place" id="copenhagen_church_marble">
+<div class="place-lead">
 <h3>Marble Church</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/copenhagen_church_marble.jpg" alt="Marble Church"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_church_marble.jpg" alt="Marble Church" width="330" height="456" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_church_marble_b.jpg" alt="Marble Church — view 2" width="330" height="520" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Marble Church, or Frederik&#x27;s Church, is a stunning example of Baroque architecture located in the heart of Copenhagen. Known for its impressive dome, one of the largest in Europe, it serves as a prominent landmark and a popular site for both tourists and locals. Visitors can admire its intricate interior and enjoy the serene atmosphere that invites reflection and contemplation. The dome of the Marble Church is 31 meters in diameter, making it one of the largest in Europe. The church was finally consecrated in 1894 after a long period of construction.</p>
 <p class="prose">Construction of the Marble Church began in 1749 under the direction of architect Nicolai Eigtved, but it was not completed until 1894 due to various financial and political challenges. The church was built on the site of a previous church and was intended to be a grand monument to the Danish royal family. The Marble Church holds cultural importance as a symbol of Denmark&#x27;s architectural heritage and is a key part of the city&#x27;s skyline. It is often associated with royal ceremonies and events, reflecting its connection to the Danish monarchy. Additionally, the church is a venue for concerts and cultural events, making it a vibrant part of daily life in Copenhagen.</p></div>
 </section>
 <section class="place" id="copenhagen_glyptotek">
+<div class="place-lead">
 <h3>Ny Carlsberg Glyptotek</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Dantes Plads | Style: Eclectic museum with palm court | Period: 1897; winter garden 1906</p>
-<figure class="place-fig"><img src="../images/copenhagen_glyptotek.jpg" alt="Ny Carlsberg Glyptotek"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/copenhagen_glyptotek.jpg" alt="Ny Carlsberg Glyptotek" width="1280" height="709" style="height: 255px; max-height: 255px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_glyptotek_b.jpg" alt="Ny Carlsberg Glyptotek — view 2" width="330" height="443" style="height: 255px; max-height: 255px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Brewery heir&#x27;s gift of antiquities and French sculpture centred on a glass winter garden. Coffee in the palm court is a quiet mid-tour break. Danish Golden Age paintings occupy upper floors.</p>
 <p class="prose">Carl Jacobsen funded successive wings to house expanding casts and marbles. Mediterranean sculpture meets Copenhagen civic pride.</p></div>
 </section>
 <section class="place" id="copenhagen_nyhavn">
+<div class="place-lead">
 <h3>Nyhavn waterfront</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Nyhavn canal | Style: Gabled townhouses in harbour colours | Period: 1673 canal; merchant houses 17th–18th c.</p>
-<figure class="place-fig"><img src="../images/copenhagen_nyhavn.jpg" alt="Nyhavn waterfront"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/copenhagen_nyhavn.jpg" alt="Nyhavn waterfront" width="1280" height="416" style="height: 150px; max-height: 150px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_nyhavn_b.jpg" alt="Nyhavn waterfront — view 2" width="330" height="220" style="height: 150px; max-height: 150px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Harbour promenade of cafés and canal boats; house #20 marks Hans Christian Andersen&#x27;s lodgings plaque. Harbour bus H9 links Nyhavn to Opera House without walking back. Evening seat heaters extend outdoor dining into cool seasons.</p>
 <p class="prose">Digging a back-port for Kongens Nytorv created a sailors&#x27; strip later gentrified into tourism spine. Copenhagen&#x27;s postcard human scale beside taller Amalienborg axis.</p></div>
 </section>
 <section class="place" id="copenhagen_nytorv">
+<div class="place-lead">
 <h3>Nytorv and Gammeltorv</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Strøget spine | Style: Neoclassical courthouse and fountain | Period: 17th c. squares</p>
-<figure class="place-fig"><img src="../images/copenhagen_nytorv.jpg" alt="Nytorv and Gammeltorv"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/copenhagen_nytorv.jpg" alt="Nytorv and Gammeltorv" width="1280" height="850" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_nytorv_b.jpg" alt="Nytorv and Gammeltorv — view 2" width="330" height="230" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Twin squares where the old city hall stood; today court building arcades and café terraces. Christmas market fills the cobbles in December. Pedestrian Strøget links Stroget crowds north toward Round Tower.</p>
 <p class="prose">Public punishments once drew crowds; modern use is overwhelmingly civic and social. Legal heritage façades amid shopping traffic.</p></div>
 </section>
 <section class="place" id="copenhagen_rosenborg_ext">
+<div class="place-lead">
 <h3>Rosenborg</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/copenhagen_rosenborg_ext.jpg" alt="Rosenborg"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_rosenborg_ext.jpg" alt="Rosenborg" width="330" height="494" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_rosenborg_ext_b.jpg" alt="Rosenborg — view 2" width="330" height="251" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Rosenborg — Wikimedia disambiguation page.</p></div>
 </section>
 <section class="place" id="copenhagen_rosenborg_castle">
+<div class="place-lead">
 <h3>Rosenborg Castle</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Øster Voldgade | Style: Christian IV summer palace with spires | Period: 1606–1624 (Dutch Renaissance)</p>
-<figure class="place-fig"><img src="../images/copenhagen_rosenborg_castle.jpg" alt="Rosenborg Castle"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/copenhagen_rosenborg_castle.jpg" alt="Rosenborg Castle" width="1280" height="851" style="height: 243px; max-height: 243px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_rosenborg_castle_b.jpg" alt="Rosenborg Castle — view 2" width="330" height="174" style="height: 243px; max-height: 243px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Royal treasury of crowns and ivory narwhal throne in compact turreted palace surrounded by King&#x27;s Garden lawns. Winter rose house in the gardens opens on reduced hours. Lockers required for backpacks before crown room circuit.</p>
 <p class="prose">Christian IV&#x27;s pleasure house became a museum of absolutist regalia under later constitutional kings. Best single-room encounter with Danish golden-age craftsmanship.</p></div>
 </section>
 <section class="place" id="copenhagen_superkilen">
+<div class="place-lead">
 <h3>Superkilen park</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/copenhagen_superkilen.jpg" alt="Superkilen park"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_superkilen.jpg" alt="Superkilen park" width="330" height="330" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_superkilen_b.jpg" alt="Superkilen park — view 2" width="330" height="218" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Superkilen Park is a vibrant urban space located in the Nørrebro district of Copenhagen, designed to celebrate the city&#x27;s multicultural diversity. Spanning over 30,000 square meters, the park features a unique blend of art, architecture, and landscaping, making it a popular destination for both locals and visitors. With its striking installations and playful design, Superkilen serves as a community hub for recreation, relaxation, and cultural exchange. Superkilen covers an area of 30,000 square meters. The park features three distinct zones: the Red Square, the Black Market, and the Green Park.</p>
 <p class="prose">Superkilen was inaugurated in 2012 as part of a larger urban renewal project aimed at revitalizing the Nørrebro area. The park was designed by the architectural firm BIG (Bjarke Ingels Group) in collaboration with Superflex and Topotek1, with the goal of reflecting the diverse cultural backgrounds of the neighborhood&#x27;s residents. Culturally, Superkilen is significant as it embodies the spirit of inclusivity and multiculturalism, showcasing elements from various countries around the world, such as a Moroccan fountain and a Russian playground. The park serves as a platform for community events and gatherings, fostering social interaction among residents of different backgrounds. Its design and purpose highlight the importance of public spaces in urban life, promoting a sense of belonging and community engagement.</p></div>
 </section>
 <section class="place" id="copenhagen_little_mermaid">
+<div class="place-lead">
 <h3>The Little Mermaid statue</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Langelinie promenade | Style: Bronze on granite boulder | Period: 1913 (Edvard Eriksen)</p>
-<figure class="place-fig"><img src="../images/copenhagen_little_mermaid.jpg" alt="The Little Mermaid statue"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/copenhagen_little_mermaid_b.jpg" alt="The Little Mermaid statue" width="330" height="412"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Small bronze based on Andersen&#x27;s tale, endlessly photographed despite its modest size on the cruise-ship walk. Crowds peak when multiple ships berth at Oceankaj. Vandalism history means occasional off-site display for repairs.</p>
 <p class="prose">Brewer Carl Jacobsen commissioned the figure after seeing a ballet adaptation of the fairy tale. Denmark&#x27;s most polarising &#x27;must-see&#x27; minute sculpture.</p></div>
 </section>
 <section class="place" id="copenhagen_round_tower">
+<div class="place-lead">
 <h3>The Round Tower (Rundetårn)</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Købmagergade | Style: Spiral ramp observatory tower | Period: 1637–1642</p>
-<figure class="place-fig"><img src="../images/copenhagen_round_tower.jpg" alt="The Round Tower (Rundetårn)"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/copenhagen_round_tower.jpg" alt="The Round Tower (Rundetårn)" width="1280" height="919" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_round_tower_b.jpg" alt="The Round Tower (Rundetårn) — view 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Equestrian spiral ramp leading to a platform observatory and library hall—no stairs until the final lantern ladder. Trinity Church organ concerts sometimes resonate up the brick cylinder. Winter ice sometimes closes the upper outdoor deck.</p>
 <p class="prose">Christian IV&#x27;s astronomical tower supported Tycho Brahe&#x27;s instrument legacy in university orbit. Europe&#x27;s oldest functioning observatory structure still open to casual climbs.</p></div>
 </section>
 <section class="place" id="copenhagen_tivoli_gardens">
+<div class="place-lead">
 <h3>Tivoli Gardens</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
-<p class="place-meta">Address: Vesterbrogade at City Hall | Style: Historicist pavilions and pleasure gardens | Period: 1843 amusement park; periodic rebuilds</p>
-<figure class="place-fig"><img src="../images/copenhagen_tivoli_gardens.jpg" alt="Tivoli Gardens"/></figure>
+<p class="place-meta">Location: Vesterbrogade at City Hall | Style: Historicist pavilions and pleasure gardens | Period: 1843 amusement park; periodic rebuilds</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/copenhagen_tivoli_gardens.jpg" alt="Tivoli Gardens" width="1280" height="854" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_tivoli_gardens_b.jpg" alt="Tivoli Gardens — view 2" width="330" height="235" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Seasonal amusement park with wooden coaster, Friday fireworks, and concert hall hosting pop and classical bills. Multi-ride wristbands beat token queues on busy Saturdays. Halloween and Christmas markets re-skin the lanes completely.</p>
 <p class="prose">Georg Carstensen persuaded Christian VIII that &#x27;when people amuse themselves, they forget politics&#x27;. Walt Disney cited Tivoli as an inspiration for Disneyland&#x27;s mix of gardens and rides.</p></div>
 </section>
 <section class="place" id="copenhagen_torvehallerne">
+<div class="place-lead">
 <h3>Torvehallerne market</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/copenhagen_torvehallerne.jpg" alt="Torvehallerne market"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_torvehallerne.jpg" alt="Torvehallerne market" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_torvehallerne_b.jpg" alt="Torvehallerne market — view 2" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Torvehallerne is a vibrant market located in the heart of Copenhagen, offering a delightful mix of fresh produce, gourmet foods, and artisanal products. With its modern glass and steel structure, it serves as a hub for both locals and tourists, showcasing the best of Danish culinary culture. Visitors can explore a variety of stalls, enjoy delicious meals, and experience the lively atmosphere of this popular destination. Torvehallerne consists of two large glass halls with over 60 vendors. The market features a variety of offerings, including fresh fruits, vegetables, meats, cheeses, and gourmet street food.</p>
 <p class="prose">Torvehallerne opened in 2011, transforming the area into a modern food market that pays homage to the historical marketplace traditions of Copenhagen. The site was previously home to the old meat market, which had been a staple in the city since the 19th century. The market&#x27;s development aimed to revitalize the urban space and promote local food producers. Culturally, Torvehallerne represents a contemporary gathering place that reflects Copenhagen&#x27;s commitment to sustainability and local food culture. It fosters community engagement and supports local artisans, making it a vital part of daily life in the city. The market has become a symbol of Copenhagen&#x27;s culinary scene, attracting food enthusiasts and tourists alike.</p></div>
 </section>
 <section class="place" id="copenhagen_church_trinitatis">
+<div class="place-lead">
 <h3>Trinitatis Church</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/copenhagen_church_trinitatis.jpg" alt="Trinitatis Church"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_church_trinitatis.jpg" alt="Trinitatis Church" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_church_trinitatis_b.jpg" alt="Trinitatis Church — view 2" width="330" height="495" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Trinitatis Church (Trinitatis Kirke) is located in central Copenhagen, Denmark. It is one of the best examples of Gothic Survival architecture in Denmark part of the 17th century Trinitatis Complex, which includes the Rundetårn astronomical observatory tower and the Copenhagen University Library, in addition to the church. Built in the time of Christian IV, the church initially served the students of Copenhagen University.</p></div>
 </section>
 </body>

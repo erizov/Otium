@@ -13,7 +13,7 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
 .otium-logo { font-family: 'Cormorant Garamond', serif; font-size: 2.15rem;
   font-weight: 600; letter-spacing: 0.18em; margin-bottom: 0.85rem; }
 .otiump { margin: 0.42rem 0; line-height: 1.42; text-align: justify;
-  max-width: 38rem; font-size: 0.95rem; }
+  font-size: 0.95rem; }
 .guide-title { page-break-after: auto; margin-bottom: 0.55rem;
   page-break-inside: avoid; }
 .historical-reference { margin: 0.75rem 0 1.15rem;
@@ -63,22 +63,103 @@ ol.trip-stops a:hover { text-decoration: underline; }
 .heraldry-univ-caption { font-size: 0.52rem; line-height: 1.18;
   margin: 0.12rem 0 0; padding: 0 0.06rem; color: #252525;
   text-align: center; font-weight: 500; }
-.heraldry-motto { text-align: center; max-width: 18rem; margin: 0.18rem auto;
+.heraldry-motto { text-align: center; margin: 0.18rem auto;
   width: 100%; }
 .motto-line { font-family: 'Cormorant Garamond', serif; font-size: 1rem;
   margin: 0; color: #333; line-height: 1.35; }
 .guide-title h1.guide-title-main { font-family: 'Cormorant Garamond', serif;
   font-size: 2.35rem; margin-bottom: 0.5rem; font-weight: 600; }
 .lead { color: #444; font-size: 1.05rem; }
-.guide-toc { margin: 0.85rem 0 1.15rem; page-break-inside: avoid; }
-.guide-toc h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.28rem;
-  font-weight: 600; margin: 0.4rem 0 0.55rem; }
+
+.guide-toc { page-break-before: always; break-before: page;
+  page-break-after: always; break-after: page;
+  margin: 0; padding: 0.2rem 0 0.45rem; page-break-inside: auto; }
+.guide-toc h2 { font-family: 'Cormorant Garamond', serif;
+  font-size: 1.28rem; font-weight: 600; margin: 0.4rem 0 0.55rem; }
 .guide-toc ol { margin: 0.35rem 0 0.65rem 1.25rem; padding: 0;
   columns: 2; column-gap: 1.5rem; }
 .guide-toc li { margin: 0.18rem 0; line-height: 1.35;
   font-size: 0.88rem; break-inside: avoid; }
-.guide-toc a { color: #1a5276; text-decoration: none; }
+.guide-toc a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.guide-toc a:hover { color: #0d3d56; }
 .guide-toc li.toc-item--sub { font-size: 0.82rem; margin-left: 0.35rem; }
+.toc-back { font-size: 0.78rem; margin: 0 0 0.35rem; text-align: right; }
+.toc-back a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.toc-back a:hover { color: #0d3d56; }
+.place, .historical-reference, .guide-primer, .guide-trip-plans {
+  scroll-margin-top: 1.25rem; }
+.historical-reference h2, .guide-primer h2, .guide-trip-plans h2,
+.chapter-head h2, .place-lead h3 { position: relative; }
+.guide-toc + .place, .guide-toc + .chapter-head {
+  page-break-before: avoid; break-before: avoid-page; }
+.place-lead { page-break-inside: avoid; break-inside: avoid-page;
+  page-break-after: auto; }
+.place-lead > h3 { page-break-after: avoid; break-after: avoid-page; }
+.place-lead > .place-meta { page-break-after: avoid; break-after: avoid-page; }
+
+.place-fig { page-break-inside: avoid; break-inside: avoid-page;
+  margin: 0.5rem 0 1rem; }
+.place-fig img {
+  page-break-inside: avoid; break-inside: avoid-page;
+  max-height: 48vh; width: auto; max-width: 100%;
+  object-fit: contain; margin-left: auto; margin-right: auto; }
+.place-fig--hi-res img { max-height: 52vh; }
+.place-fig--lo-res img { max-height: 30vh; }
+.place-pdf-fig-row {
+  display: flex; flex-direction: row; flex-wrap: wrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.45rem 0.55rem; margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row .place-fig {
+  flex: 1 1 30%; margin: 0; min-width: 26%; max-width: 100%; }
+.place-pdf-fig-row .place-fig img {
+  width: auto; max-width: 100%; height: auto; max-height: 44vh;
+  object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--pair {
+  flex-wrap: nowrap; justify-content: space-between;
+  align-items: flex-end; gap: 0.5rem 0.65rem; }
+.place-pdf-fig-row--pair .place-fig {
+  flex: 1 1 47%; min-width: 0; max-width: 50%;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--pair .place-fig img {
+  max-height: 44vh; object-fit: contain; }
+.place-pdf-fig-row--pair .place-fig--hi-res img { max-height: 52vh; }
+.place-pdf-fig-row--pair .place-fig--lo-res img { max-height: 26vh; }
+.place-pdf-fig-row--pair .place-fig--row-sized img,
+.place-pdf-fig-row--triple .place-fig--row-sized img,
+.place-pdf-fig-row--many .place-fig--row-sized img {
+  width: auto; max-width: 100%; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row .place-fig--row-sized.place-fig--hi-res img,
+.place-pdf-fig-row .place-fig--row-sized.place-fig--lo-res img {
+  max-height: unset; }
+.place-pdf-fig-rows-stack {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple {
+  display: flex; flex-direction: row; flex-wrap: nowrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.4rem 0.48rem; margin: 0;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--triple .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--triple .place-fig--hi-res img { max-height: 42vh; }
+.place-pdf-fig-row--triple .place-fig--lo-res img { max-height: 18vh; }
+.place-pdf-fig-row--many {
+  flex-wrap: nowrap; justify-content: center; align-items: flex-end;
+  gap: 0.35rem 0.42rem; }
+.place-pdf-fig-row--many .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--many .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+
+
 .place { margin-bottom: 2.2rem; page-break-inside: auto; }
 h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.22rem; margin: 1.2rem 0 0.35rem;
   font-weight: 600; }
@@ -90,7 +171,6 @@ h4 { font-family: 'Cormorant Garamond', serif; font-size: 0.95rem; text-transfor
   color: #555; font-size: 0.95rem; margin: 0 0 0.5rem; font-style: italic; }
 .place-meta { font-size: 0.92rem; color: #353535; margin: 0 0 0.75rem;
   line-height: 1.4; }
-.place-fig { margin: 0.5rem 0 1rem; }
 img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
 .prose, .place-desc p { margin: 0.45rem 0; line-height: 1.5;
   text-align: justify; }
@@ -109,12 +189,15 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <div class="heraldry-strip heraldry-official">
 <figure class="heraldry-fig heraldry-coat-book" title="Coat of arms of Kharkiv"><img src="../images/guide_coat_of_arms.svg" alt="Coat of arms of Kharkiv"/></figure>
 <figure class="heraldry-fig heraldry-coat-book" title="Flag of Kharkiv"><img src="../images/guide_flag.svg" alt="Flag of Kharkiv"/></figure>
-</div></div><h1 class="guide-title-main">Kharkiv</h1><p class="lead">Путеводитель. Объектов в этом выпуске: 29.</p></header>
+</div></div><h1 class="guide-title-main">Kharkiv</h1><p class="lead">Путеводитель. Объектов в этом выпуске: 28.</p></header>
+<nav class="guide-toc" id="guide-toc" aria-label="Содержание"><h2>Содержание</h2><ol><li class="toc-item"><a href="#guide-historical">Историческая справка</a></li><li class="toc-item"><a href="#guide-trips">Маршруты</a></li><li class="toc-item"><a href="#kharkiv_annunciation_cathedral">Kharkiv Annunciation Cathedral</a></li><li class="toc-item"><a href="#kharkiv_art_museum">Kharkiv Art Museum</a></li><li class="toc-item"><a href="#kharkiv_constitution_square">Kharkiv Constitution Square</a></li><li class="toc-item"><a href="#kharkiv_kharkov_palace_hotel">Kharkiv Kharkov Palace Hotel</a></li><li class="toc-item"><a href="#kharkiv_landmark">Kharkiv Landmark</a></li><li class="toc-item"><a href="#kharkiv_railway_station">Kharkiv Railway Station</a></li><li class="toc-item"><a href="#kharkiv_synagogue">Kharkiv Synagogue</a></li><li class="toc-item"><a href="#kharkiv_barabashov">Барабашов рынок</a></li><li class="toc-item"><a href="#kharkiv_university_yellow_building">Главный корпус Харьковского национального университета имени В. Н. Каразина</a></li><li class="toc-item"><a href="#kharkiv_derzhprom">Здание Держпром</a></li><li class="toc-item"><a href="#kharkiv_mirror_stream_ext">Зеркальный поток</a></li><li class="toc-item"><a href="#kharkiv_young_guard">Монумент Молодой Гвардии</a></li><li class="toc-item"><a href="#kharkiv_lopan_river">Набережная реки Лопань</a></li><li class="toc-item"><a href="#kharkiv_gorky_park">Парк Горького Харьков</a></li><li class="toc-item"><a href="#kharkiv_freedom_square">Площадь Свободы</a></li><li class="toc-item"><a href="#kharkiv_pokrovsky_monastery">Покровский монастырь</a></li><li class="toc-item"><a href="#kharkiv_shevchenko_garden">Сад Шевченко</a></li><li class="toc-item"><a href="#kharkiv_steel_rollers">Стадион Металлист</a></li><li class="toc-item"><a href="#kharkiv_sumskaya">Сумская улица</a></li><li class="toc-item"><a href="#kharkiv_pushkinskaya">Улица Пушкина</a></li><li class="toc-item"><a href="#kharkiv_assumption_cathedral">Успенский собор</a></li><li class="toc-item"><a href="#kharkiv_mirror_stream">Фонтан Зеркальный поток</a></li><li class="toc-item"><a href="#kharkiv_botanical_garden">Харьковский ботанический сад</a></li><li class="toc-item"><a href="#kharkiv_zoo">Харьковский зоопарк</a></li><li class="toc-item"><a href="#kharkiv_history_museum">Харьковский исторический музей</a></li><li class="toc-item"><a href="#kharkiv_opera">Харьковский оперный театр</a></li><li class="toc-item"><a href="#kharkiv_polytechnic">Харьковский политехнический институт</a></li><li class="toc-item"><a href="#kharkiv_blagoveshchensky">Харьковский цирк</a></li></ol></nav>
 <section class="historical-reference" id="guide-historical" aria-label="Историческая справка"><h2>Историческая справка</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 <p class="prose">Харьков — второй по численности город Украины, исторический центр Слобожанщины и науки.</p>
 <p class="prose">Основан в XVII веке как крепость, развивался как столица УССР в 1919–1934 гг., промышленный и университетский узел. Площади свободы, конструктивизм и парки отражают XX век; город сохраняет роль восточноукраинского культурного центра.</p>
 <p class="prose">Вторая мировая война и битва за город 1941–1943 гг. оставили глубокие раны; послевоенное восстановление сделало Харьков индустриальным гигантом. В XXI веке город проходит через испытания войны; университеты и традиции Слободской Украины остаются частью идентичности.</p></section>
 <section class="guide-trip-plans" id="guide-trips" aria-label="Маршруты"><h2>Маршруты</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 <article class="trip-plan" id="trip-1d"><h3>Один день</h3>
 <p class="prose">Компактный маршрут по главным точкам путеводителя с минимальным возвратом назад пешком.</p>
 <ol class="trip-stops"><li><a href="#kharkiv_art_museum">Kharkiv Art Museum</a> (~75мин)</li>
@@ -144,230 +227,382 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <li><a href="#kharkiv_lopan_river">Набережная реки Лопань</a> (~75мин)</li>
 <li><a href="#kharkiv_mirror_stream">Фонтан Зеркальный поток</a> (~75мин)</li>
 <li><a href="#kharkiv_mirror_stream_ext">Зеркальный поток</a> (~75мин)</li></ol></article></section>
-<nav class="guide-toc" aria-label="Содержание"><h2>Содержание</h2><ol><li class="toc-item"><a href="#guide-historical">Историческая справка</a></li><li class="toc-item"><a href="#guide-trips">Маршруты</a></li><li class="toc-item"><a href="#kharkiv_pdfband_2_c37a1d5a">Al-manar472</a></li><li class="toc-item"><a href="#kharkiv_annunciation_cathedral">Kharkiv Annunciation Cathedral</a></li><li class="toc-item"><a href="#kharkiv_barabashov">Барабашов рынок</a></li><li class="toc-item"><a href="#kharkiv_constitution_square">Kharkiv Constitution Square</a></li><li class="toc-item"><a href="#kharkiv_derzhprom">Здание Держпром</a></li><li class="toc-item"><a href="#kharkiv_assumption_cathedral">Успенский собор</a></li><li class="toc-item"><a href="#kharkiv_freedom_square">Площадь Свободы</a></li><li class="toc-item"><a href="#kharkiv_gorky_park">Парк Горького Харьков</a></li><li class="toc-item"><a href="#kharkiv_art_museum">Kharkiv Art Museum</a></li><li class="toc-item"><a href="#kharkiv_botanical_garden">Харьковский ботанический сад</a></li><li class="toc-item"><a href="#kharkiv_synagogue">Kharkiv Synagogue</a></li><li class="toc-item"><a href="#kharkiv_blagoveshchensky">Харьковский цирк</a></li><li class="toc-item"><a href="#kharkiv_history_museum">Харьковский исторический музей</a></li><li class="toc-item"><a href="#kharkiv_pdfband_0_d4074905">2018 -</a></li><li class="toc-item"><a href="#kharkiv_opera">Харьковский оперный театр</a></li><li class="toc-item"><a href="#kharkiv_polytechnic">Харьковский политехнический институт</a></li><li class="toc-item"><a href="#kharkiv_railway_station">Kharkiv Railway Station</a></li><li class="toc-item"><a href="#kharkiv_zoo">Харьковский зоопарк</a></li><li class="toc-item"><a href="#kharkiv_pdfband_10_e4a36f8f">Kharkov Palace Hotel</a></li><li class="toc-item"><a href="#kharkiv_lopan_river">Набережная реки Лопань</a></li><li class="toc-item"><a href="#kharkiv_steel_rollers">Стадион Металлист</a></li><li class="toc-item"><a href="#kharkiv_mirror_stream_ext">Зеркальный поток</a></li><li class="toc-item"><a href="#kharkiv_mirror_stream">Фонтан Зеркальный поток</a></li><li class="toc-item"><a href="#kharkiv_pokrovsky_monastery">Покровский монастырь</a></li><li class="toc-item"><a href="#kharkiv_pushkinskaya">Улица Пушкина</a></li><li class="toc-item"><a href="#kharkiv_shevchenko_garden">Сад Шевченко</a></li><li class="toc-item"><a href="#kharkiv_sumskaya">Сумская улица</a></li><li class="toc-item"><a href="#kharkiv_university_yellow_building">Главный корпус Харьковского национального университета имени В. Н. Каразина</a></li><li class="toc-item"><a href="#kharkiv_young_guard">Монумент Молодой Гвардии</a></li></ol></nav>
-<section class="place" id="kharkiv_pdfband_2_c37a1d5a">
-<h3>Al-manar472</h3>
-
-
-<figure class="place-fig"><img src="../images/kharkiv_pdfband_2_c37a1d5a.jpg" alt="Al-manar472"/></figure>
-</section>
 <section class="place" id="kharkiv_annunciation_cathedral">
+<div class="place-lead">
 <h3>Kharkiv Annunciation Cathedral</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/kharkiv_annunciation_cathedral.jpg" alt="Kharkiv Annunciation Cathedral"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/kharkiv_annunciation_cathedral.jpg" alt="Kharkiv Annunciation Cathedral" width="1280" height="958" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kharkiv_annunciation_cathedral_b.jpg" alt="Kharkiv Annunciation Cathedral — вид 2" width="330" height="494" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Собор Благовещения — православный храм в Харькове, Украина.</p></div>
 </section>
-<section class="place" id="kharkiv_barabashov">
-<h3>Барабашов рынок</h3>
-
-
-<figure class="place-fig"><img src="../images/kharkiv_barabashov.jpg" alt="Барабашов рынок"/></figure>
-<div class="place-desc"><p class="prose">Барбашовский рынок — один из крупнейших и самых оживленных рынков Харькова, предлагающий разнообразие товаров от свежих продуктов до одежды и предметов домашнего обихода. Известный своей бурлящей атмосферой, рынок привлекает как местных жителей, так и туристов, становясь центральным узлом повседневной жизни в городе. Его обширный ассортимент и живописная обстановка предоставляют уникальный взгляд на местную культуру и торговлю. Барбашовский рынок был основан в начале 1990-х годов. Это один из крупнейших рынков в Харькове, предлагающий широкий ассортимент товаров.</p>
-<p class="prose">Барбашовский рынок был основан в начале 1990-х годов, эволюционировав из небольшого рынка в значительный торговый центр Харькова. Рынок претерпел различные изменения на протяжении лет, отражая экономические изменения в Украине и регионе. Культурно, рынок Барабашова играет важную роль в повседневной жизни жителей Харькова, служа местом встречи, где люди не только делают покупки, но и общаются и обмениваются новостями. Рынок является свидетельством стойкости и адаптивности местного сообщества, демонстрируя богатые традиции украинской торговли и гостеприимства.</p></div>
-</section>
-<section class="place" id="kharkiv_constitution_square">
-<h3>Kharkiv Constitution Square</h3>
-
-
-<figure class="place-fig"><img src="../images/kharkiv_constitution_square.jpg" alt="Kharkiv Constitution Square"/></figure>
-<div class="place-desc"><p class="prose">Площадь Конституции в центральной Харькове — крупное общественное пространство с памятниками, рядом правительственными зданиями и видом на исторический центр города.</p></div>
-</section>
-<section class="place" id="kharkiv_derzhprom">
-<h3>Здание Держпром</h3>
-
-
-<figure class="place-fig"><img src="../images/kharkiv_derzhprom.jpg" alt="Здание Держпром"/></figure>
-<div class="place-desc"><p class="prose">Здание Держпрома в Харькове является знаковым примером конструктивистской архитектуры и одним из самых высоких зданий в Украине. Завершенное в 1928 году, оно служит ярким символом промышленного наследия города и модернистского дизайна. Посетители могут полюбоваться его впечатляющим фасадом и узнать о его роли в историческом развитии Харькова. Завершенный в 1928 году, он был одним из первых небоскребов в Советском Союзе. Здание было спроектировано архитектором Сергеем Серафимовым и является ярким примером конструктивистской архитектуры.</p>
-<p class="prose">Здание Дерджпром было построено в период с 1925 по 1928 год в рамках инициативы советского правительства по продвижению индустриализации и современной архитектуры. Спроектированное архитекторами Сергеем Серафимовым и его командой, оно изначально предназначалось для размещения различных государственных учреждений и офисов. Завершение строительства стало значимым моментом в истории Харькова, так как это было первое небоскреб в Советском Союзе и оно олицетворяло устремления раннего советского государства. Как памятник советской архитектуры, Дерджпром отражает политические и культурные изменения начала 20 века в Украине. Он сыграл ключевую роль в городской среде Харькова, который был столицей Украинской ССР с 1919 по 1934 год. Здание стало символом идентичности города и часто ассоциируется с наследием советского модернизма, привлекая как местных жителей, так и туристов, интересующихся архитектурной историей.</p></div>
-</section>
-<section class="place" id="kharkiv_assumption_cathedral">
-<h3>Успенский собор</h3>
-
-
-<figure class="place-fig"><img src="../images/kharkiv_assumption_cathedral.jpg" alt="Успенский собор"/></figure>
-<div class="place-desc"><p class="prose">Успенский собор, архитектурная жемчужина Харькова, является свидетельством богатого религиозного наследия города. Со своим впечатляющим нео-византийским дизайном и высокими колокольнями, он привлекает посетителей, ищущих как духовное утешение, так и художественное вдохновение. Спокойная атмосфера собора и красивые фрески делают его обязательным для посещения для всех, кто исследует Харьков. Собор был спроектирован в неовизантийском архитектурном стиле.</p>
-<p class="prose">Успенский собор был изначально построен в начале 18 века, его основание было заложено в 1689 году. На протяжении многих лет он подвергался нескольким ремонтам и реставрациям, особенно после повреждений, полученных во время Второй мировой войны. Собор был освящен в 1947 году, что подчеркивает его значимость в послевоенном возрождении религиозной жизни в регионе. Успенский собор имеет культурное и религиозное значение в Харькове, служа центральным местом поклонения для православной общины. Он является символом стойкости, отражая исторические испытания города и возрождение веры после конфликтов. Собор также играет роль в местных традициях и праздниках, привлекая как верующих, так и туристов.</p></div>
-</section>
-<section class="place" id="kharkiv_freedom_square">
-<h3>Площадь Свободы</h3>
-
-
-<figure class="place-fig"><img src="../images/kharkiv_freedom_square.jpg" alt="Площадь Свободы"/></figure>
-<div class="place-desc"><p class="prose">Площадь Свободы — это крупнейшая площадь в Украине и центральный узел Харькова, известная своей впечатляющей архитектурой советской эпохи и яркой атмосферой. Она служит местом сбора как местных жителей, так и туристов, часто принимая мероприятия, фестивали и публичные демонстрации. Площадь окружена значительными зданиями, что делает её центром социальной и культурной жизни города. Площадь Свободы — это крупнейшая городская площадь в Украине, занимающая площадь около 12 гектаров. Площадь окружена знаменитыми зданиями, включая Харьковскую областную государственную администрацию и Дом государственного промышленности.</p>
-<p class="prose">Площадь Свободы была основана в 1920-х годах и с тех пор сыграла ключевую роль в истории Харькова. Она стала местом значительных событий, включая провозглашение Харькова столицей Украинской Советской Социалистической Республики в 1921 году. На протяжении десятилетий здесь происходили многочисленные протесты и празднования, отражающие изменяющийся политический ландшафт города. Как центральное общественное пространство, Площадь Свободы имеет большое политическое значение, служа местом для протестов и демонстраций, особенно в ключевые моменты истории Украины. Культурно она является символом идентичности Харькова, окруженная важными учреждениями и часто используемая для культурных мероприятий, тем самым укрепляя свою роль в повседневной жизни города. Площадь олицетворяет дух сообщества и стойкости среди жителей.</p></div>
-</section>
-<section class="place" id="kharkiv_gorky_park">
-<h3>Парк Горького Харьков</h3>
-
-
-<figure class="place-fig"><img src="../images/kharkiv_gorky_park.jpg" alt="Парк Горького Харьков"/></figure>
-<div class="place-desc"><p class="prose">Парк Горького в Харькове — это яркий городской оазис, который предлагает сочетание рекреационных мероприятий, зелени и культурных событий. Это популярное место идеально подходит для семей, бегунов и всех, кто хочет отдохнуть на природе. С различными аттракционами и художественными инсталляциями Парк Горького является центром общественной жизни. Парк Горького занимает площадь примерно 130 гектаров. Парк предлагает разнообразные аттракционы, включая большой парк аттракционов, спортивные сооружения и пешеходные дорожки.</p>
-<p class="prose">Парк Горького был основан в начале 20 века, его официальное открытие состоялось в 1926 году. Изначально названный в честь знаменитого русского писателя Максима Горького, парк претерпел несколько трансформаций на протяжении десятилетий, особенно в советскую эпоху, когда он был преобразован в крупное общественное пространство. Культурно Парк Горького служит ключевым местом сбора для жителей Харькова, принимая множество мероприятий, концертов и фестивалей на протяжении всего года. Он отражает приверженность города общественному досугу и вовлечению сообщества, что делает его важной частью повседневной жизни в Харькове. Дизайн и особенности парка также подчеркивают архитектурное наследие города и художественные начинания.</p></div>
-</section>
 <section class="place" id="kharkiv_art_museum">
+<div class="place-lead">
 <h3>Kharkiv Art Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Адрес: вул. Жон Мироносиць 11, Харків, 61002, Україна | Период: 1893</p>
-<figure class="place-fig"><img src="../images/kharkiv_art_museum.jpg" alt="Kharkiv Art Museum"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/kharkiv_art_museum.jpg" alt="Kharkiv Art Museum" width="1280" height="842" style="height: 303px; max-height: 303px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kharkiv_art_museum_b.jpg" alt="Kharkiv Art Museum — вид 2" width="330" height="218" style="height: 303px; max-height: 303px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Харьковский художественный музей — одно из старейших и наиболее авторитетных культурных учреждений Украины, где представлена огромная коллекция произведений искусства разных эпох. В нем хранится более 40 000 произведений искусства. Среди примечательных коллекций — картины Ивана Труша, Ореста Мурашко и Василя Коппа. Регулярно проводит временные выставки с участием иностранных художников. Расположен на улице Крещатик, главной магистрали города. Работает каждый день, кроме понедельника.</p>
 <p class="prose">Основанный в 1893 году, музей был учрежден местными филантропами для продвижения образования и приобщения к изобразительным искусствам. С течением времени он превратился в значительный центр украинского художественного выражения, проводя выставки как классических, так и современных произведений. Посетители приезжают сюда, чтобы погрузиться в богатое наследие украинского искусства и получить представление о его эволюции на протяжении многих лет.</p></div>
 </section>
-<section class="place" id="kharkiv_botanical_garden">
-<h3>Харьковский ботанический сад</h3>
+<section class="place" id="kharkiv_constitution_square">
+<div class="place-lead">
+<h3>Kharkiv Constitution Square</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/kharkiv_botanical_garden.jpg" alt="Харьковский ботанический сад"/></figure>
-<div class="place-desc"><p class="prose">Харьковский ботанический сад — это спокойный оазис в самом сердце Харькова, представляющий разнообразную коллекцию растительных видов со всего мира. Посетители могут наслаждаться мирными прогулками среди красиво оформленных садов, ярких цветников и спокойных прудов. Сад является популярным местом как для отдыха, так и для образовательных мероприятий, что делает его любимым местом как для местных жителей, так и для туристов. Основанный в 1804 году, это один из старейших ботанических садов в Украине. Сад включает более 3,000 видов растений, включая редкие и находящиеся под угрозой исчезновения виды.</p>
-<p class="prose">Харьковский ботанический сад был основан в 1804 году, что делает его одним из старейших ботанических садов Украины. Основанный Харьковским университетом, он претерпел различные преобразования и расширения на протяжении своей истории, особенно в конце 19-го и начале 20-го века, когда стал центром научных исследований и образования. Культурно Харьковский ботанический сад играет важную роль в повседневной жизни города, служа местом проведения образовательных программ, общественных мероприятий и культурных фестивалей. Он вносит вклад в наследие города, способствуя повышению экологической осведомленности и ценности биологического разнообразия. Сад также является популярной зоной отдыха, отражая важность зеленых пространств в городской среде.</p></div>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/kharkiv_constitution_square.jpg" alt="Kharkiv Constitution Square" width="1280" height="722" style="height: 260px; max-height: 260px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kharkiv_constitution_square_b.jpg" alt="Kharkiv Constitution Square — вид 2" width="330" height="247" style="height: 260px; max-height: 260px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Площадь Конституции в центральной Харькове — крупное общественное пространство с памятниками, рядом правительственными зданиями и видом на исторический центр города.</p></div>
+</section>
+<section class="place" id="kharkiv_kharkov_palace_hotel">
+<div class="place-lead">
+<h3>Kharkiv Kharkov Palace Hotel</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/kharkiv_kharkov_palace_hotel.jpg" alt="Kharkiv Kharkov Palace Hotel" width="1280" height="976" style="height: 352px; max-height: 352px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kharkiv_kharkov_palace_hotel_b.jpg" alt="Kharkiv Kharkov Palace Hotel — вид 2" width="330" height="441" style="height: 352px; max-height: 352px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+</section>
+<section class="place" id="kharkiv_landmark">
+<div class="place-lead">
+<h3>Kharkiv Landmark</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/kharkiv_landmark.jpg" alt="Kharkiv Landmark" width="1280" height="826" style="height: 298px; max-height: 298px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kharkiv_landmark_b.jpg" alt="Kharkiv Landmark — вид 2" width="330" height="429" style="height: 298px; max-height: 298px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+</section>
+<section class="place" id="kharkiv_railway_station">
+<div class="place-lead">
+<h3>Kharkiv Railway Station</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Период: 1903</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/kharkiv_railway_station.jpg" alt="Kharkiv Railway Station" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kharkiv_railway_station_b.jpg" alt="Kharkiv Railway Station — вид 2" width="330" height="220" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Железнодорожный вокзал Харькова является главным транспортным узлом для поездок на поезде во втором по величине городе Украины. Расположенный в самом сердце исторического центра Харькова, он служит ключевой транспортной точкой, соединяющей региональные города и основные направления по всей стране. Открыт в 1903 году в качестве главного железнодорожного терминала для Харьковской губернии. Спроектировано в неорусском архитектурном стиле, с изящными фасадами и куполами. Обслуживает более 400 поездов ежедневно, что делает её одной из самых загруженных станций Восточной Европы. Обладает великолепным залом с мраморным полом и люстрами, что отражает его статус культурной достопримечательности. Место проведения важных политических встреч и собраний на протяжении советской и постсоветской истории.</p>
+<p class="prose">Построенный в 1903 году в период Российской империи, Харьковский вокзал был разработан архитектором Иваном Клювгером в неорусском стиле. Он стал символом модернизации и прогресса в Харькове начала XX века. После Второй мировой войны вокзал прошел масштабную реконструкцию, сохранив при этом свою уникальную архитектуру и разместив современную инфраструктуру. Посетители могут оценить архитектурную красоту и историческое значение станции, которая остается одной из самых знаковых достопримечательностей Харькова.</p></div>
 </section>
 <section class="place" id="kharkiv_synagogue">
+<div class="place-lead">
 <h3>Kharkiv Synagogue</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Период: 1894</p>
-<figure class="place-fig"><img src="../images/kharkiv_synagogue.jpg" alt="Kharkiv Synagogue"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/kharkiv_synagogue.jpg" alt="Kharkiv Synagogue" width="1280" height="1043" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kharkiv_synagogue_b.jpg" alt="Kharkiv Synagogue — вид 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Харьковская хоральная синагога — торжественное и исторически значимое место поклонения, расположенное в самом центре второго по величине города Украины. Основанная в конце XIX века, она является одной из старейших синагог в Восточной Европе. Построенная в 1894 году, это одна из самых ранних сохранившихся синагог в Украине. Это было признано историческим памятником советским правительством в 1974 году. После масштабного ремонта, завершённого в 2010 году, синагога вновь возобновила регулярные службы. Внутри расположены замысловатые деревянные резьбы и декоративные элементы, характерные для еврейских синагог. Посетители могут посетить службы или изучить его историческое значение во время экскурсий.</p>
 <p class="prose">Построенная в 1894 году, Харьковская хоральная синагога была первоначально спроектирована архитектором Йозефом Краймером для размещения растущей еврейской общины в Харькове (как тогда назывался Харьков). Здание сочетает элементы неороманской архитектуры с традиционными еврейскими архитектурными особенностями, что делает его уникальным смешением стилей. Оно служило культурным и религиозным центром для евреев до Второй мировой войны, когда многие члены общины были вынуждены эмигрировать или погибли во время Холокоста. Сегодня Харьковская хоровая синагога служит символом стойкости и преемственности в украинской еврейской общине.</p></div>
 </section>
-<section class="place" id="kharkiv_blagoveshchensky">
-<h3>Харьковский цирк</h3>
+<section class="place" id="kharkiv_barabashov">
+<div class="place-lead">
+<h3>Барабашов рынок</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/kharkiv_blagoveshchensky.jpg" alt="Харьковский цирк"/></figure>
-<div class="place-desc"><p class="prose">Харьковский цирк — это яркое заведение, расположенное в самом сердце Харькова, известное своими захватывающими выступлениями и уникальной атмосферой. Этот исторический цирк предлагает разнообразные шоу с участием акробатов, клоунов и номеров с животными, что делает его популярным местом для семей и туристов. С его впечатляющей архитектурой и богатой историей цирк является неотъемлемой частью культурного ландшафта города. Основан в 1960 году. Многоразово отремонтирован для улучшения удобств.</p>
-<p class="prose">Харьковский цирк был основан в 1960 году и с тех пор стал знаковым местом в городе. Изначально он был спроектирован для проведения широкого спектра цирковых представлений, и с тех пор прошел несколько реконструкций, чтобы улучшить свои удобства и впечатления зрителей. Цирк принимал множество национальных и международных артистов, что способствовало его репутации как одного из лучших развлекательных заведений в Украине. Харьковский цирк имеет культурное значение как центр исполнительских искусств в регионе, отражая богатое художественное наследие города. Он служит местом встречи для семей и сообществ, способствуя чувству радости и развлечения в повседневной жизни. Цирк также играет роль в сохранении традиционных цирковых искусств, внося вклад в более широкую культурную ткань Харькова.</p></div>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/kharkiv_barabashov.jpg" alt="Барабашов рынок" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kharkiv_barabashov_b.jpg" alt="Барабашов рынок — вид 2" width="330" height="247" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Барбашовский рынок — один из крупнейших и самых оживленных рынков Харькова, предлагающий разнообразие товаров от свежих продуктов до одежды и предметов домашнего обихода. Известный своей бурлящей атмосферой, рынок привлекает как местных жителей, так и туристов, становясь центральным узлом повседневной жизни в городе. Его обширный ассортимент и живописная обстановка предоставляют уникальный взгляд на местную культуру и торговлю. Барбашовский рынок был основан в начале 1990-х годов. Это один из крупнейших рынков в Харькове, предлагающий широкий ассортимент товаров.</p>
+<p class="prose">Барбашовский рынок был основан в начале 1990-х годов, эволюционировав из небольшого рынка в значительный торговый центр Харькова. Рынок претерпел различные изменения на протяжении лет, отражая экономические изменения в Украине и регионе. Культурно, рынок Барабашова играет важную роль в повседневной жизни жителей Харькова, служа местом встречи, где люди не только делают покупки, но и общаются и обмениваются новостями. Рынок является свидетельством стойкости и адаптивности местного сообщества, демонстрируя богатые традиции украинской торговли и гостеприимства.</p></div>
+</section>
+<section class="place" id="kharkiv_university_yellow_building">
+<div class="place-lead">
+<h3>Главный корпус Харьковского национального университета имени В. Н. Каразина</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/kharkiv_university_yellow_building.jpg" alt="Главный корпус Харьковского национального университета имени В. Н. Каразина" width="1280" height="960" style="height: 277px; max-height: 277px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kharkiv_university_yellow_building_b.jpg" alt="Главный корпус Харьковского национального университета имени В. Н. Каразина — вид 2" width="330" height="198" style="height: 277px; max-height: 277px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Главное здание Харьковского национального университета имени В. Н. Каразина является ярким примером неоклассической архитектуры, расположенным в самом сердце Харькова. Основанный в 1804 году, он служит выдающимся образовательным учреждением и символом богатого академического наследия города. Посетители могут полюбоваться его величественным фасадом и исследовать живописный кампус, который играет важную роль в культурной и интеллектуальной жизни города. Основанный в 1804 году, он является одним из старейших университетов Украины.</p>
+<p class="prose">Основанный в 1804 году, Харьковский национальный университет имени В. Н. Каразина является одним из старейших университетов Украины. Он был назван в честь своего основателя Василия Каразина, который сыграл ключевую роль в его создании. За годы своего существования университет претерпел значительные изменения, включая расширение факультетов и развитие исследовательских программ, что способствовало эволюции высшего образования в регионе. Харьковский национальный университет имени В. Н. Каразина имеет значительное культурное значение как центр образования и исследований в Украине. Он подготовил множество влиятельных личностей в различных областях, включая науку, литературу и политику. Роль университета в содействии интеллектуальному дискурсу и культурному развитию сделала его краеугольным камнем идентичности Харькова, отражая стремление города к образованию и прогрессу.</p></div>
+</section>
+<section class="place" id="kharkiv_derzhprom">
+<div class="place-lead">
+<h3>Здание Держпром</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/kharkiv_derzhprom.jpg" alt="Здание Держпром" width="1280" height="960" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kharkiv_derzhprom_b.jpg" alt="Здание Держпром — вид 2" width="330" height="248" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Здание Держпрома в Харькове является знаковым примером конструктивистской архитектуры и одним из самых высоких зданий в Украине. Завершенное в 1928 году, оно служит ярким символом промышленного наследия города и модернистского дизайна. Посетители могут полюбоваться его впечатляющим фасадом и узнать о его роли в историческом развитии Харькова. Завершенный в 1928 году, он был одним из первых небоскребов в Советском Союзе. Здание было спроектировано архитектором Сергеем Серафимовым и является ярким примером конструктивистской архитектуры.</p>
+<p class="prose">Здание Дерджпром было построено в период с 1925 по 1928 год в рамках инициативы советского правительства по продвижению индустриализации и современной архитектуры. Спроектированное архитекторами Сергеем Серафимовым и его командой, оно изначально предназначалось для размещения различных государственных учреждений и офисов. Завершение строительства стало значимым моментом в истории Харькова, так как это было первое небоскреб в Советском Союзе и оно олицетворяло устремления раннего советского государства. Как памятник советской архитектуры, Дерджпром отражает политические и культурные изменения начала 20 века в Украине. Он сыграл ключевую роль в городской среде Харькова, который был столицей Украинской ССР с 1919 по 1934 год. Здание стало символом идентичности города и часто ассоциируется с наследием советского модернизма, привлекая как местных жителей, так и туристов, интересующихся архитектурной историей.</p></div>
+</section>
+<section class="place" id="kharkiv_mirror_stream_ext">
+<div class="place-lead">
+<h3>Зеркальный поток</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kharkiv_mirror_stream_ext.jpg" alt="Зеркальный поток" width="330" height="443" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kharkiv_mirror_stream_ext_b.jpg" alt="Зеркальный поток — вид 2" width="330" height="198" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Зеркальный поток — это потрясающая достопримечательность, расположенная в Харькове, известная своими элегантными фонтанами и отражающими бассейнами. Эта спокойная парковая зона является популярным местом встречи как для местных жителей, так и для туристов, предлагая живописную обстановку для отдыха и общения. Его красивый дизайн и спокойная атмосфера делают его обязательным местом для посещения в городе. Зеркальный поток был спроектирован архитектором В. Г. Заболотным. Он был открыт в 1947 году в рамках послевоенного восстановления.</p>
+<p class="prose">Зеркальный поток был открыт в 1947 году в рамках усилий по восстановлению после Второй мировой войны. Спроектированный архитектором В. Г. Заболотным, он представляет собой уникальное сочетание воды и света, которое подчеркивает красоту окружающего парка. С течением времени он стал знаковым символом Харькова. Культурно Зеркальный Фонтан занимает особое место в сердцах харьковчан, часто служа фоном для общественных мероприятий и празднований. Это место также является популярной локацией для художественных выступлений и собраний, отражая яркую общественную жизнь города. Хотя он не имеет прямого политического или религиозного значения, он является свидетельством стойкости и духа народа Харькова.</p></div>
+</section>
+<section class="place" id="kharkiv_young_guard">
+<div class="place-lead">
+<h3>Монумент Молодой Гвардии</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/kharkiv_young_guard.jpg" alt="Монумент Молодой Гвардии" width="1280" height="960" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kharkiv_young_guard_b.jpg" alt="Монумент Молодой Гвардии — вид 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Монумент Молодой Гвардии в Харькове — это впечатляющая скульптура, посвященная молодым советским партизанам, которые боролись против нацистской оккупации во время Второй мировой войны. Этот мемориал служит трогательным напоминанием о мужестве и жертве, запечатлевая дух молодости и сопротивления. Расположенный в заметном месте, он привлекает как местных жителей, так и туристов, предлагая пространство для размышлений и памяти. Открыт в 1970 году. Увековечивает память молодых партизан Молодой Гвардии во время Второй мировой войны.</p>
+<p class="prose">Монумент Молодой Гвардии был открыт в 1970 году в честь членов Молодой Гвардии, группы молодых партизан, которые сыграли значительную роль в сопротивлении немецким силам во время войны. Их смелые действия отмечены в советской истории, и монумент служит данью их наследию. Политически памятник отражает советский нарратив героизма и жертвы во время Второй мировой войны, символизируя борьбу с фашизмом и доблесть молодежи. Культурно он является важной частью наследия Харькова, представляя историческую приверженность города к сохранению своей памяти и почитанию тех, кто внес вклад в его защиту. Памятник является центром для памятных мероприятий и служит местом сбора для сообщества, укрепляя коллективную память и идентичность.</p></div>
+</section>
+<section class="place" id="kharkiv_lopan_river">
+<div class="place-lead">
+<h3>Набережная реки Лопань</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<figure class="place-fig place-fig--hi-res"><img src="../images/kharkiv_lopan_river.jpg" alt="Набережная реки Лопань" width="1280" height="853"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Набережная реки Лопань в Харькове предлагает живописные пейзажи для неспешных прогулок и активного отдыха. Эта живописная зона окружена парками и рекреационными пространствами, что делает её популярным местом для местных жителей и туристов, желающих отдохнуть и насладиться природой. Набережная служит важной связью с яркой культурной жизнью города, часто принимая мероприятия и собрания. Река Лопань протекает через город Харьков, внося свой вклад в его ландшафт. Набережная предлагает парки и дорожки, которые популярны для прогулок и велоспорта.</p>
+<p class="prose">Река Лопань сыграла значительную роль в истории Харькова с момента основания города в 17 веке. Река была важна для торговли и транспортировки, способствуя росту и развитию города на протяжении веков. Ключевые события, включая различные наводнения и проекты городской застройки, сформировали набережную в ту рекреационную зону, которой она является сегодня. Культурно набережная реки Лопань является неотъемлемой частью повседневной жизни в Харькове, служа общественным пространством, где люди занимаются досугом, спортом и социальными мероприятиями. Эта территория отражает наследие города и является свидетельством его развивающихся отношений с природой. Хотя набережная не является местом религиозного значения, она часто используется для различных общественных празднований и собраний, подчеркивая свою роль в сообществе.</p></div>
+</section>
+<section class="place" id="kharkiv_gorky_park">
+<div class="place-lead">
+<h3>Парк Горького Харьков</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/kharkiv_gorky_park.jpg" alt="Парк Горького Харьков" width="1280" height="960" style="height: 239px; max-height: 239px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kharkiv_gorky_park_b.jpg" alt="Парк Горького Харьков — вид 2" width="330" height="171" style="height: 239px; max-height: 239px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Парк Горького в Харькове — это яркий городской оазис, который предлагает сочетание рекреационных мероприятий, зелени и культурных событий. Это популярное место идеально подходит для семей, бегунов и всех, кто хочет отдохнуть на природе. С различными аттракционами и художественными инсталляциями Парк Горького является центром общественной жизни. Парк Горького занимает площадь примерно 130 гектаров. Парк предлагает разнообразные аттракционы, включая большой парк аттракционов, спортивные сооружения и пешеходные дорожки.</p>
+<p class="prose">Парк Горького был основан в начале 20 века, его официальное открытие состоялось в 1926 году. Изначально названный в честь знаменитого русского писателя Максима Горького, парк претерпел несколько трансформаций на протяжении десятилетий, особенно в советскую эпоху, когда он был преобразован в крупное общественное пространство. Культурно Парк Горького служит ключевым местом сбора для жителей Харькова, принимая множество мероприятий, концертов и фестивалей на протяжении всего года. Он отражает приверженность города общественному досугу и вовлечению сообщества, что делает его важной частью повседневной жизни в Харькове. Дизайн и особенности парка также подчеркивают архитектурное наследие города и художественные начинания.</p></div>
+</section>
+<section class="place" id="kharkiv_freedom_square">
+<div class="place-lead">
+<h3>Площадь Свободы</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<figure class="place-fig place-fig--lo-res"><img src="../images/kharkiv_freedom_square_b.jpg" alt="Площадь Свободы" width="330" height="86"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Площадь Свободы — это крупнейшая площадь в Украине и центральный узел Харькова, известная своей впечатляющей архитектурой советской эпохи и яркой атмосферой. Она служит местом сбора как местных жителей, так и туристов, часто принимая мероприятия, фестивали и публичные демонстрации. Площадь окружена значительными зданиями, что делает её центром социальной и культурной жизни города. Площадь Свободы — это крупнейшая городская площадь в Украине, занимающая площадь около 12 гектаров. Площадь окружена знаменитыми зданиями, включая Харьковскую областную государственную администрацию и Дом государственного промышленности.</p>
+<p class="prose">Площадь Свободы была основана в 1920-х годах и с тех пор сыграла ключевую роль в истории Харькова. Она стала местом значительных событий, включая провозглашение Харькова столицей Украинской Советской Социалистической Республики в 1921 году. На протяжении десятилетий здесь происходили многочисленные протесты и празднования, отражающие изменяющийся политический ландшафт города. Как центральное общественное пространство, Площадь Свободы имеет большое политическое значение, служа местом для протестов и демонстраций, особенно в ключевые моменты истории Украины. Культурно она является символом идентичности Харькова, окруженная важными учреждениями и часто используемая для культурных мероприятий, тем самым укрепляя свою роль в повседневной жизни города. Площадь олицетворяет дух сообщества и стойкости среди жителей.</p></div>
+</section>
+<section class="place" id="kharkiv_pokrovsky_monastery">
+<div class="place-lead">
+<h3>Покровский монастырь</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/kharkiv_pokrovsky_monastery.jpg" alt="Покровский монастырь" width="1280" height="781" style="height: 281px; max-height: 281px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kharkiv_pokrovsky_monastery_b.jpg" alt="Покровский монастырь — вид 2" width="330" height="220" style="height: 281px; max-height: 281px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Покровский монастырь, расположенный в Харькове, является спокойным и историческим местом, которое предлагает посетителям возможность ознакомиться с богатым религиозным наследием региона. Этот действующий монастырь известен своей красивой архитектурой и тихими окрестностями, что делает его популярным местом как для паломников, так и для туристов. Место служит мирным убежищем, приглашая к размышлениям и духовным размышлениям. Основанный в 1655 году, монастырь стал центром православного христианства в Харькове. Сайт подвергся нескольким реконструкциям, особенно после конфликтов, которые нанесли ущерб.</p>
+<p class="prose">Основанный в начале 17 века, Покровский монастырь сыграл значительную роль в духовной жизни Харькова. Он был основан в 1655 году и на протяжении своей истории претерпел различные ремонты и реставрации, особенно после повреждений, полученных во время конфликтов. Монастырь на протяжении веков является центром православного христианства в регионе. Покровский монастырь имеет культурное и религиозное значение как символ православной веры в Харькове. Он служит местом поклонения и общественных собраний, отражая исторические связи города с церковью. Архитектура и искусство монастыря вносят вклад в культурное наследие Харькова, делая его значимой достопримечательностью города.</p></div>
+</section>
+<section class="place" id="kharkiv_shevchenko_garden">
+<div class="place-lead">
+<h3>Сад Шевченко</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/kharkiv_shevchenko_garden.jpg" alt="Сад Шевченко" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kharkiv_shevchenko_garden_b.jpg" alt="Сад Шевченко — вид 2" width="330" height="247" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Сад Шевченко — это спокойный городской парк, расположенный в самом сердце Харькова, предлагающий зелёное убежище от шумной городской жизни. Этот зелёный оазис включает в себя прогулочные дорожки, красивые цветочные клумбы и спокойные пруды, что делает его популярным местом как для местных жителей, так и для туристов. Парк является идеальным местом для неспешных прогулок, пикников и наслаждения культурными событиями в течение всего года. Основан в середине XIX века. Названный в честь Тараса Шевченко, выдающегося украинского поэта. Особенности: пешеходные дорожки, цветники и пруды.</p>
+<p class="prose">Сад Шевченко был основан в середине 19 века, и его создание связано с усилиями местных жителей, которые стремились создать общественное пространство для отдыха и релаксации. Парк претерпел различные реконструкции и расширения на протяжении многих лет, отражая меняющиеся потребности и вкусы жителей Харькова. Культурно, Сад Шевченко играет важную роль в повседневной жизни Харькова, служа местом проведения фестивалей, концертов и общественных собраний. Парк назван в честь знаменитого украинского поэта Тараса Шевченко, символизируя связь города с украинским наследием и литературой. Он является свидетельством важности зеленых пространств в городских условиях, способствуя взаимодействию сообщества и культурному самовыражению.</p></div>
+</section>
+<section class="place" id="kharkiv_steel_rollers">
+<div class="place-lead">
+<h3>Стадион Металлист</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/kharkiv_steel_rollers.jpg" alt="Стадион Металлист" width="1280" height="853" style="height: 259px; max-height: 259px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kharkiv_steel_rollers_b.jpg" alt="Стадион Металлист — вид 2" width="330" height="185" style="height: 259px; max-height: 259px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Стадион Металлист, расположенный в Харькове, является выдающимся спортивным объектом, известным проведением футбольных матчей и различных атлетических событий. С вместимостью более 40 000 зрителей, он служит домашним стадионом для местного футбольного клуба ФК Металлист Харьков. Стадион славится своим современным дизайном и яркой атмосферой во время матчей, что делает его ключевым местом для любителей спорта. Открытый в 1926 году, стадион Металлист вмещает более 40 000 зрителей. Стадион прошёл капитальный ремонт в 2009 году для улучшения своих удобств.</p>
+<p class="prose">Стадион Металлист был открыт в 1926 году и с тех пор претерпел несколько реконструкций, наиболее значительной из которых была в 2009 году, когда он был модернизирован в соответствии с международными стандартами. Стадион принимал множество значительных событий, включая матчи турнира UEFA Euro 2012. Как важная спортивная достопримечательность Харькова, стадион Металлист играет жизненно важную роль в культурной жизни города, служа местом сбора для болельщиков и площадкой для общественных мероприятий. Он отражает страсть города к футболу и спорту в целом, способствуя формированию местной идентичности и гордости. Значимость стадиона дополнительно усиливается его ролью в содействии общественному духу и продвижении здорового образа жизни среди жителей.</p></div>
+</section>
+<section class="place" id="kharkiv_sumskaya">
+<div class="place-lead">
+<h3>Сумская улица</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/kharkiv_sumskaya.jpg" alt="Сумская улица" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kharkiv_sumskaya_b.jpg" alt="Сумская улица — вид 2" width="330" height="247" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Сумская улица — одна из главных магистралей Харькова, известная своей яркой атмосферой и исторической архитектурой. Протянувшись через сердце города, она служит центром для шопинга, ресторанов и культурных мероприятий, что делает её обязательным местом для посещения как местными жителями, так и туристами. Улица украшена значительными зданиями, которые отражают богатое наследие города и современные достижения. Сумская улица — одна из самых длинных улиц в Харькове. Он сочетает в себе различные архитектурные стили, включая неоклассицизм и модернизм.</p>
+<p class="prose">Сумская улица имеет свои корни в раннем развитии Харькова, который был основан в 17 веке. На протяжении многих лет она стала свидетелем множества ключевых событий, включая становление города как культурного и образовательного центра в 19 веке. Улица значительно изменилась, особенно в советскую эпоху, когда она стала центром городского развития. Культурно Сумская улица имеет важное значение для идентичности Харькова, демонстрируя сочетание исторических и современных влияний. Здесь расположены различные театры, галереи и кафе, которые способствуют яркой художественной сцене города. Улица также играет роль в повседневной жизни, служа местом сбора для местных жителей и туристов, отражая динамичный дух Харькова.</p></div>
+</section>
+<section class="place" id="kharkiv_pushkinskaya">
+<div class="place-lead">
+<h3>Улица Пушкина</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/kharkiv_pushkinskaya.jpg" alt="Улица Пушкина" width="1280" height="1027" style="height: 324px; max-height: 324px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kharkiv_pushkinskaya_b.jpg" alt="Улица Пушкина — вид 2" width="330" height="232" style="height: 324px; max-height: 324px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Улица Пушкина — одна из самых известных магистралей Харькова, известная своей яркой атмосферой и исторической архитектурой. Улица, уставленная кафе, магазинами и культурными заведениями, служит центром как для местных жителей, так и для туристов. Она воплощает дух города, демонстрируя сочетание современной жизни и исторической значимости. Улица Пушкина названа в честь русского поэта Александра Пушкина. Улица представляет собой смесь архитектурных стилей, включая неоклассицизм и модернизм.</p>
+<p class="prose">Улица Пушкина имеет свои корни в начале 19 века и стала ключевой частью городской структуры Харькова. Названная в честь знаменитого русского поэта Александра Пушкина, улица стала свидетелем значительных событий в истории города, включая периоды роста и культурного расцвета. Культурно улица Пушкинская является важной частью идентичности Харькова, отражая художественное наследие города и повседневную жизнь. Здесь расположены различные культурные учреждения и мероприятия, которые отмечают местные традиции. Хотя она не имеет заметного политического значения, улица служит местом сбора для общественных мероприятий и выражения местной культуры.</p></div>
+</section>
+<section class="place" id="kharkiv_assumption_cathedral">
+<div class="place-lead">
+<h3>Успенский собор</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/kharkiv_assumption_cathedral.jpg" alt="Успенский собор" width="1280" height="787" style="height: 284px; max-height: 284px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kharkiv_assumption_cathedral_b.jpg" alt="Успенский собор — вид 2" width="330" height="482" style="height: 284px; max-height: 284px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Успенский собор, архитектурная жемчужина Харькова, является свидетельством богатого религиозного наследия города. Со своим впечатляющим нео-византийским дизайном и высокими колокольнями, он привлекает посетителей, ищущих как духовное утешение, так и художественное вдохновение. Спокойная атмосфера собора и красивые фрески делают его обязательным для посещения для всех, кто исследует Харьков. Собор был спроектирован в неовизантийском архитектурном стиле.</p>
+<p class="prose">Успенский собор был изначально построен в начале 18 века, его основание было заложено в 1689 году. На протяжении многих лет он подвергался нескольким ремонтам и реставрациям, особенно после повреждений, полученных во время Второй мировой войны. Собор был освящен в 1947 году, что подчеркивает его значимость в послевоенном возрождении религиозной жизни в регионе. Успенский собор имеет культурное и религиозное значение в Харькове, служа центральным местом поклонения для православной общины. Он является символом стойкости, отражая исторические испытания города и возрождение веры после конфликтов. Собор также играет роль в местных традициях и праздниках, привлекая как верующих, так и туристов.</p></div>
+</section>
+<section class="place" id="kharkiv_mirror_stream">
+<div class="place-lead">
+<h3>Фонтан Зеркальный поток</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/kharkiv_mirror_stream.jpg" alt="Фонтан Зеркальный поток" width="1280" height="768" style="height: 277px; max-height: 277px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kharkiv_mirror_stream_b.jpg" alt="Фонтан Зеркальный поток — вид 2" width="330" height="443" style="height: 277px; max-height: 277px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Фонтан Зеркальный Стрим, расположенный в центральном парке Харькова, является великолепным архитектурным элементом, известным своей отражающей водной поверхностью и художественным дизайном. Этот знаковый объект не только служит популярным местом встречи для местных жителей и туристов, но и подчеркивает красоту окружающего пейзажа. С его элегантными скульптурами и спокойной атмосферой это идеальное место для отдыха и размышлений. Фонтан был открыт в 1947 году. Он включает в себя серию скульптур, которые подчеркивают его эстетическую привлекательность.</p>
+<p class="prose">Фонтан Зеркальный Стрим был построен в 1947 году в рамках послевоенных восстановительных работ в Харькове. Спроектированный архитектором В. С. Колесниковым, он задумывался как символ возрождения и стойкости города. С тех пор фонтан стал любимой частью городской среды Харькова. Культурно фонтан Зеркальный Струй занимает особое место в сердцах харьковчан, часто служа фоном для различных общественных мероприятий и празднований. Он является символом художественного наследия города и часто появляется на фотографиях, представляя идентичность Харькова. Фонтан также играет роль в повседневной жизни, предоставляя спокойное пространство для отдыха и общения.</p></div>
+</section>
+<section class="place" id="kharkiv_botanical_garden">
+<div class="place-lead">
+<h3>Харьковский ботанический сад</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/kharkiv_botanical_garden.jpg" alt="Харьковский ботанический сад" width="1280" height="720" style="height: 259px; max-height: 259px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kharkiv_botanical_garden_b.jpg" alt="Харьковский ботанический сад — вид 2" width="330" height="231" style="height: 259px; max-height: 259px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Харьковский ботанический сад — это спокойный оазис в самом сердце Харькова, представляющий разнообразную коллекцию растительных видов со всего мира. Посетители могут наслаждаться мирными прогулками среди красиво оформленных садов, ярких цветников и спокойных прудов. Сад является популярным местом как для отдыха, так и для образовательных мероприятий, что делает его любимым местом как для местных жителей, так и для туристов. Основанный в 1804 году, это один из старейших ботанических садов в Украине. Сад включает более 3,000 видов растений, включая редкие и находящиеся под угрозой исчезновения виды.</p>
+<p class="prose">Харьковский ботанический сад был основан в 1804 году, что делает его одним из старейших ботанических садов Украины. Основанный Харьковским университетом, он претерпел различные преобразования и расширения на протяжении своей истории, особенно в конце 19-го и начале 20-го века, когда стал центром научных исследований и образования. Культурно Харьковский ботанический сад играет важную роль в повседневной жизни города, служа местом проведения образовательных программ, общественных мероприятий и культурных фестивалей. Он вносит вклад в наследие города, способствуя повышению экологической осведомленности и ценности биологического разнообразия. Сад также является популярной зоной отдыха, отражая важность зеленых пространств в городской среде.</p></div>
+</section>
+<section class="place" id="kharkiv_zoo">
+<div class="place-lead">
+<h3>Харьковский зоопарк</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<figure class="place-fig place-fig--lo-res"><img src="../images/kharkiv_zoo_b.jpg" alt="Харьковский зоопарк" width="330" height="247"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Харьковский зоопарк, один из старейших зоопарков Украины, предлагает приятное побегство в природу прямо в сердце города. Здесь обитает разнообразие животных, и предлагаются образовательные программы и развлекательные мероприятия для посетителей всех возрастов. Пышные ландшафты зоопарка и ухоженные среды обитания делают его популярным местом для семей и любителей животных. Основанный в 1895 году, он является одним из старейших зоопарков Украины. Дом для более чем 300 видов животных, включая как местные, так и экзотические виды.</p>
+<p class="prose">Харьковский зоопарк был основан в 1895 году, изначально как частная коллекция экзотических животных. С течением времени он значительно расширился и претерпел различные реконструкции, адаптируясь к современным стандартам ухода за животными и впечатлениям посетителей. Зоопарк сталкивался с трудностями, особенно в бурные периоды 20 века, но он остался любимым учреждением в городе. Культурно Харьковский зоопарк играет важную роль в повседневной жизни жителей города, служа рекреационным пространством и местом для обучения о дикой природе и охране окружающей среды. Он отражает приверженность города сохранению биоразнообразия и установлению связи между людьми и природой. Зоопарк также проводит мероприятия, которые отмечают местные традиции и способствуют повышению экологической осведомленности.</p></div>
 </section>
 <section class="place" id="kharkiv_history_museum">
+<div class="place-lead">
 <h3>Харьковский исторический музей</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/kharkiv_history_museum.jpg" alt="Харьковский исторический музей"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/kharkiv_history_museum.jpg" alt="Харьковский исторический музей" width="1280" height="870" style="height: 314px; max-height: 314px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kharkiv_history_museum_b.jpg" alt="Харьковский исторический музей — вид 2" width="330" height="247" style="height: 314px; max-height: 314px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Харьковский исторический музей предлагает увлекательный взгляд на богатое прошлое Харькова и окружающего региона. Расположенный в историческом здании, музей представляет собой разнообразную коллекцию артефактов, которые рассказывают о развитии города с момента его основания до настоящего времени. Посетители могут исследовать выставки, которые подчеркивают ключевые события, культурное наследие и эволюцию повседневной жизни в Харькове. Основанный в 1920 году, музей является одним из старейших в Украине. Коллекция музея включает более 200 000 предметов, связанных с историей Харькова.</p>
 <p class="prose">Основанный в 1920 году, Харьковский исторический музей сыграл ключевую роль в сохранении исторического нарратива города. Коллекция музея включает предметы из различных периодов, отражающие трансформацию города через значимые события, такие как становление Харькова как крупного промышленного центра в 19 веке и его роль в советскую эпоху. Харьковский исторический музей является важным культурным учреждением, демонстрирующим наследие города и способствующим пониманию его исторического контекста. Он играет жизненно важную роль в просвещении общественности о прошлом Харькова, способствуя формированию чувства идентичности и гордости среди жителей. Музей также отражает более широкую культурную картину Украины, подчеркивая важность местной истории в национальном нарративе.</p></div>
 </section>
-<section class="place" id="kharkiv_pdfband_0_d4074905">
-<h3>2018 -</h3>
-
-
-<figure class="place-fig"><img src="../images/kharkiv_pdfband_0_d4074905.jpg" alt="2018 -"/></figure>
-</section>
 <section class="place" id="kharkiv_opera">
+<div class="place-lead">
 <h3>Харьковский оперный театр</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/kharkiv_opera.jpg" alt="Харьковский оперный театр"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/kharkiv_opera.jpg" alt="Харьковский оперный театр" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kharkiv_opera_b.jpg" alt="Харьковский оперный театр — вид 2" width="330" height="220" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Харьковский театр оперы и балета — это потрясающий архитектурный шедевр, расположенный в самом сердце Харькова, предлагающий богатую программу опер, балетов и концертов. С его роскошными интерьерами и грандиозными выступлениями он служит культурным центром как для местных жителей, так и для туристов. Это заведение не только место для художественного самовыражения, но и символ яркой культурной жизни города. Основан в 1925 году, текущее здание было завершено в 1955 году. Архитектура включает в себя неоклассические элементы, созданные для отражения культурных устремлений того времени.</p>
 <p class="prose">Харьковский оперный театр был основан в 1925 году, хотя его корни восходят к более ранним театральным традициям города. Само здание было построено в период с 1947 по 1955 год и отличается неоклассическим дизайном, который отражает устремления послевоенной эпохи. С тех пор здесь прошло множество значительных выступлений, и театр стал ключевой площадкой для развития оперы и балета в Украине. Культурно Харьковский оперный театр играет жизненно важную роль в художественном ландшафте города, демонстрируя как национальные, так и международные таланты. Это центр культурного наследия, способствующий сохранению украинских традиций в исполнительских искусствах. Оперный театр является местом встречи для сообщества, способствуя любви к искусству и обогащая повседневную жизнь в Харькове.</p></div>
 </section>
 <section class="place" id="kharkiv_polytechnic">
+<div class="place-lead">
 <h3>Харьковский политехнический институт</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/kharkiv_polytechnic.jpg" alt="Харьковский политехнический институт"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/kharkiv_polytechnic.jpg" alt="Харьковский политехнический институт" width="1280" height="720" style="height: 259px; max-height: 259px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kharkiv_polytechnic_b.jpg" alt="Харьковский политехнический институт — вид 2" width="330" height="333" style="height: 259px; max-height: 259px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Харьковский политехнический институт, основанный в 1885 году, является одним из ведущих технических университетов Украины и выдающейся достопримечательностью Харькова. Известный своей впечатляющей архитектурой и богатой академической традицией, институт привлекает студентов со всего мира. Посетители могут исследовать его исторический кампус и оценить его роль в формировании инженерного и технологического ландшафта региона. Основан в 1885 году как техническое училище. Один из старейших технических университетов Украины. Содействует образованию инженеров и ученых.</p>
 <p class="prose">Основанный в 1885 году, Харьковский политехнический институт изначально был создан как техническое училище для удовлетворения растущего спроса на квалифицированных инженеров в индустриализирующейся Российской империи. С течением времени он превратился в полноценный университет, значительно способствуя образованию инженеров и ученых в Украине. Институт сыграл ключевую роль в различных технологических достижениях и стал центром исследований и инноваций. Харьковский политехнический институт имеет культурное значение как центр образования и инноваций в Украине. Он способствовал духу исследования и креативности, влияя на повседневную жизнь многих через своих выпускников, которые внесли значительный вклад в различные области. Архитектурный стиль института и его историческое значение отражают богатое наследие Харькова, что делает его ключевой достопримечательностью города.</p></div>
 </section>
-<section class="place" id="kharkiv_railway_station">
-<h3>Kharkiv Railway Station</h3>
-
-<p class="place-meta">Период: 1903</p>
-<figure class="place-fig"><img src="../images/kharkiv_railway_station.jpg" alt="Kharkiv Railway Station"/></figure>
-<div class="place-desc"><p class="prose">Железнодорожный вокзал Харькова является главным транспортным узлом для поездок на поезде во втором по величине городе Украины. Расположенный в самом сердце исторического центра Харькова, он служит ключевой транспортной точкой, соединяющей региональные города и основные направления по всей стране. Открыт в 1903 году в качестве главного железнодорожного терминала для Харьковской губернии. Спроектировано в неорусском архитектурном стиле, с изящными фасадами и куполами. Обслуживает более 400 поездов ежедневно, что делает её одной из самых загруженных станций Восточной Европы. Обладает великолепным залом с мраморным полом и люстрами, что отражает его статус культурной достопримечательности. Место проведения важных политических встреч и собраний на протяжении советской и постсоветской истории.</p>
-<p class="prose">Построенный в 1903 году в период Российской империи, Харьковский вокзал был разработан архитектором Иваном Клювгером в неорусском стиле. Он стал символом модернизации и прогресса в Харькове начала XX века. После Второй мировой войны вокзал прошел масштабную реконструкцию, сохранив при этом свою уникальную архитектуру и разместив современную инфраструктуру. Посетители могут оценить архитектурную красоту и историческое значение станции, которая остается одной из самых знаковых достопримечательностей Харькова.</p></div>
-</section>
-<section class="place" id="kharkiv_zoo">
-<h3>Харьковский зоопарк</h3>
+<section class="place" id="kharkiv_blagoveshchensky">
+<div class="place-lead">
+<h3>Харьковский цирк</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/kharkiv_zoo.jpg" alt="Харьковский зоопарк"/></figure>
-<div class="place-desc"><p class="prose">Харьковский зоопарк, один из старейших зоопарков Украины, предлагает приятное побегство в природу прямо в сердце города. Здесь обитает разнообразие животных, и предлагаются образовательные программы и развлекательные мероприятия для посетителей всех возрастов. Пышные ландшафты зоопарка и ухоженные среды обитания делают его популярным местом для семей и любителей животных. Основанный в 1895 году, он является одним из старейших зоопарков Украины. Дом для более чем 300 видов животных, включая как местные, так и экзотические виды.</p>
-<p class="prose">Харьковский зоопарк был основан в 1895 году, изначально как частная коллекция экзотических животных. С течением времени он значительно расширился и претерпел различные реконструкции, адаптируясь к современным стандартам ухода за животными и впечатлениям посетителей. Зоопарк сталкивался с трудностями, особенно в бурные периоды 20 века, но он остался любимым учреждением в городе. Культурно Харьковский зоопарк играет важную роль в повседневной жизни жителей города, служа рекреационным пространством и местом для обучения о дикой природе и охране окружающей среды. Он отражает приверженность города сохранению биоразнообразия и установлению связи между людьми и природой. Зоопарк также проводит мероприятия, которые отмечают местные традиции и способствуют повышению экологической осведомленности.</p></div>
-</section>
-<section class="place" id="kharkiv_pdfband_10_e4a36f8f">
-<h3>Kharkov Palace Hotel</h3>
-
-
-<figure class="place-fig"><img src="../images/kharkiv_pdfband_10_e4a36f8f.jpg" alt="Kharkov Palace Hotel"/></figure>
-</section>
-<section class="place" id="kharkiv_lopan_river">
-<h3>Набережная реки Лопань</h3>
-
-
-<figure class="place-fig"><img src="../images/kharkiv_lopan_river.jpg" alt="Набережная реки Лопань"/></figure>
-<div class="place-desc"><p class="prose">Набережная реки Лопань в Харькове предлагает живописные пейзажи для неспешных прогулок и активного отдыха. Эта живописная зона окружена парками и рекреационными пространствами, что делает её популярным местом для местных жителей и туристов, желающих отдохнуть и насладиться природой. Набережная служит важной связью с яркой культурной жизнью города, часто принимая мероприятия и собрания. Река Лопань протекает через город Харьков, внося свой вклад в его ландшафт. Набережная предлагает парки и дорожки, которые популярны для прогулок и велоспорта.</p>
-<p class="prose">Река Лопань сыграла значительную роль в истории Харькова с момента основания города в 17 веке. Река была важна для торговли и транспортировки, способствуя росту и развитию города на протяжении веков. Ключевые события, включая различные наводнения и проекты городской застройки, сформировали набережную в ту рекреационную зону, которой она является сегодня. Культурно набережная реки Лопань является неотъемлемой частью повседневной жизни в Харькове, служа общественным пространством, где люди занимаются досугом, спортом и социальными мероприятиями. Эта территория отражает наследие города и является свидетельством его развивающихся отношений с природой. Хотя набережная не является местом религиозного значения, она часто используется для различных общественных празднований и собраний, подчеркивая свою роль в сообществе.</p></div>
-</section>
-<section class="place" id="kharkiv_steel_rollers">
-<h3>Стадион Металлист</h3>
-
-
-<figure class="place-fig"><img src="../images/kharkiv_steel_rollers.jpg" alt="Стадион Металлист"/></figure>
-<div class="place-desc"><p class="prose">Стадион Металлист, расположенный в Харькове, является выдающимся спортивным объектом, известным проведением футбольных матчей и различных атлетических событий. С вместимостью более 40 000 зрителей, он служит домашним стадионом для местного футбольного клуба ФК Металлист Харьков. Стадион славится своим современным дизайном и яркой атмосферой во время матчей, что делает его ключевым местом для любителей спорта. Открытый в 1926 году, стадион Металлист вмещает более 40 000 зрителей. Стадион прошёл капитальный ремонт в 2009 году для улучшения своих удобств.</p>
-<p class="prose">Стадион Металлист был открыт в 1926 году и с тех пор претерпел несколько реконструкций, наиболее значительной из которых была в 2009 году, когда он был модернизирован в соответствии с международными стандартами. Стадион принимал множество значительных событий, включая матчи турнира UEFA Euro 2012. Как важная спортивная достопримечательность Харькова, стадион Металлист играет жизненно важную роль в культурной жизни города, служа местом сбора для болельщиков и площадкой для общественных мероприятий. Он отражает страсть города к футболу и спорту в целом, способствуя формированию местной идентичности и гордости. Значимость стадиона дополнительно усиливается его ролью в содействии общественному духу и продвижении здорового образа жизни среди жителей.</p></div>
-</section>
-<section class="place" id="kharkiv_mirror_stream_ext">
-<h3>Зеркальный поток</h3>
-
-
-<figure class="place-fig"><img src="../images/kharkiv_mirror_stream_ext.jpg" alt="Зеркальный поток"/></figure>
-<div class="place-desc"><p class="prose">Зеркальный поток — это потрясающая достопримечательность, расположенная в Харькове, известная своими элегантными фонтанами и отражающими бассейнами. Эта спокойная парковая зона является популярным местом встречи как для местных жителей, так и для туристов, предлагая живописную обстановку для отдыха и общения. Его красивый дизайн и спокойная атмосфера делают его обязательным местом для посещения в городе. Зеркальный поток был спроектирован архитектором В. Он был открыт в 1947 году в рамках послевоенного восстановления.</p>
-<p class="prose">Зеркальный поток был открыт в 1947 году в рамках усилий по восстановлению после Второй мировой войны. Спроектированный архитектором В. Г. Заболотным, он представляет собой уникальное сочетание воды и света, которое подчеркивает красоту окружающего парка. С течением времени он стал знаковым символом Харькова. Культурно Зеркальный Фонтан занимает особое место в сердцах харьковчан, часто служа фоном для общественных мероприятий и празднований. Это место также является популярной локацией для художественных выступлений и собраний, отражая яркую общественную жизнь города. Хотя он не имеет прямого политического или религиозного значения, он является свидетельством стойкости и духа народа Харькова.</p></div>
-</section>
-<section class="place" id="kharkiv_mirror_stream">
-<h3>Фонтан Зеркальный поток</h3>
-
-
-<figure class="place-fig"><img src="../images/kharkiv_mirror_stream.jpg" alt="Фонтан Зеркальный поток"/></figure>
-<div class="place-desc"><p class="prose">Фонтан Зеркальный Стрим, расположенный в центральном парке Харькова, является великолепным архитектурным элементом, известным своей отражающей водной поверхностью и художественным дизайном. Этот знаковый объект не только служит популярным местом встречи для местных жителей и туристов, но и подчеркивает красоту окружающего пейзажа. С его элегантными скульптурами и спокойной атмосферой это идеальное место для отдыха и размышлений. Фонтан был открыт в 1947 году. Он включает в себя серию скульптур, которые подчеркивают его эстетическую привлекательность.</p>
-<p class="prose">Фонтан Зеркальный Стрим был построен в 1947 году в рамках послевоенных восстановительных работ в Харькове. С. Колесниковым, он задумывался как символ возрождения и стойкости города. С тех пор фонтан стал любимой частью городской среды Харькова. Культурно фонтан Зеркальный Струй занимает особое место в сердцах харьковчан, часто служа фоном для различных общественных мероприятий и празднований. Он является символом художественного наследия города и часто появляется на фотографиях, представляя идентичность Харькова. Фонтан также играет роль в повседневной жизни, предоставляя спокойное пространство для отдыха и общения.</p></div>
-</section>
-<section class="place" id="kharkiv_pokrovsky_monastery">
-<h3>Покровский монастырь</h3>
-
-
-<figure class="place-fig"><img src="../images/kharkiv_pokrovsky_monastery.jpg" alt="Покровский монастырь"/></figure>
-<div class="place-desc"><p class="prose">Покровский монастырь, расположенный в Харькове, является спокойным и историческим местом, которое предлагает посетителям возможность ознакомиться с богатым религиозным наследием региона. Этот действующий монастырь известен своей красивой архитектурой и тихими окрестностями, что делает его популярным местом как для паломников, так и для туристов. Место служит мирным убежищем, приглашая к размышлениям и духовным размышлениям. Основанный в 1655 году, монастырь стал центром православного христианства в Харькове. Сайт подвергся нескольким реконструкциям, особенно после конфликтов, которые нанесли ущерб.</p>
-<p class="prose">Основанный в начале 17 века, Покровский монастырь сыграл значительную роль в духовной жизни Харькова. Он был основан в 1655 году и на протяжении своей истории претерпел различные ремонты и реставрации, особенно после повреждений, полученных во время конфликтов. Монастырь на протяжении веков является центром православного христианства в регионе. Покровский монастырь имеет культурное и религиозное значение как символ православной веры в Харькове. Он служит местом поклонения и общественных собраний, отражая исторические связи города с церковью. Архитектура и искусство монастыря вносят вклад в культурное наследие Харькова, делая его значимой достопримечательностью города.</p></div>
-</section>
-<section class="place" id="kharkiv_pushkinskaya">
-<h3>Улица Пушкина</h3>
-
-
-<figure class="place-fig"><img src="../images/kharkiv_pushkinskaya.jpg" alt="Улица Пушкина"/></figure>
-<div class="place-desc"><p class="prose">Улица Пушкина — одна из самых известных магистралей Харькова, известная своей яркой атмосферой и исторической архитектурой. Улица, уставленная кафе, магазинами и культурными заведениями, служит центром как для местных жителей, так и для туристов. Она воплощает дух города, демонстрируя сочетание современной жизни и исторической значимости. Улица Пушкина названа в честь русского поэта Александра Пушкина. Улица представляет собой смесь архитектурных стилей, включая неоклассицизм и модернизм.</p>
-<p class="prose">Улица Пушкина имеет свои корни в начале 19 века и стала ключевой частью городской структуры Харькова. Названная в честь знаменитого русского поэта Александра Пушкина, улица стала свидетелем значительных событий в истории города, включая периоды роста и культурного расцвета. Культурно улица Пушкинская является важной частью идентичности Харькова, отражая художественное наследие города и повседневную жизнь. Здесь расположены различные культурные учреждения и мероприятия, которые отмечают местные традиции. Хотя она не имеет заметного политического значения, улица служит местом сбора для общественных мероприятий и выражения местной культуры.</p></div>
-</section>
-<section class="place" id="kharkiv_shevchenko_garden">
-<h3>Сад Шевченко</h3>
-
-
-<figure class="place-fig"><img src="../images/kharkiv_shevchenko_garden.jpg" alt="Сад Шевченко"/></figure>
-<div class="place-desc"><p class="prose">Сад Шевченко — это спокойный городской парк, расположенный в самом сердце Харькова, предлагающий зелёное убежище от шумной городской жизни. Этот зелёный оазис включает в себя прогулочные дорожки, красивые цветочные клумбы и спокойные пруды, что делает его популярным местом как для местных жителей, так и для туристов. Парк является идеальным местом для неспешных прогулок, пикников и наслаждения культурными событиями в течение всего года. Основан в середине XIX века. Названный в честь Тараса Шевченко, выдающегося украинского поэта. Особенности: пешеходные дорожки, цветники и пруды.</p>
-<p class="prose">Сад Шевченко был основан в середине 19 века, и его создание связано с усилиями местных жителей, которые стремились создать общественное пространство для отдыха и релаксации. Парк претерпел различные реконструкции и расширения на протяжении многих лет, отражая меняющиеся потребности и вкусы жителей Харькова. Культурно, Сад Шевченко играет важную роль в повседневной жизни Харькова, служа местом проведения фестивалей, концертов и общественных собраний. Парк назван в честь знаменитого украинского поэта Тараса Шевченко, символизируя связь города с украинским наследием и литературой. Он является свидетельством важности зеленых пространств в городских условиях, способствуя взаимодействию сообщества и культурному самовыражению.</p></div>
-</section>
-<section class="place" id="kharkiv_sumskaya">
-<h3>Сумская улица</h3>
-
-
-<figure class="place-fig"><img src="../images/kharkiv_sumskaya.jpg" alt="Сумская улица"/></figure>
-<div class="place-desc"><p class="prose">Сумская улица — одна из главных магистралей Харькова, известная своей яркой атмосферой и исторической архитектурой. Протянувшись через сердце города, она служит центром для шопинга, ресторанов и культурных мероприятий, что делает её обязательным местом для посещения как местными жителями, так и туристами. Улица украшена значительными зданиями, которые отражают богатое наследие города и современные достижения. Сумская улица — одна из самых длинных улиц в Харькове. Он сочетает в себе различные архитектурные стили, включая неоклассицизм и модернизм.</p>
-<p class="prose">Сумская улица имеет свои корни в раннем развитии Харькова, который был основан в 17 веке. На протяжении многих лет она стала свидетелем множества ключевых событий, включая становление города как культурного и образовательного центра в 19 веке. Улица значительно изменилась, особенно в советскую эпоху, когда она стала центром городского развития. Культурно Сумская улица имеет важное значение для идентичности Харькова, демонстрируя сочетание исторических и современных влияний. Здесь расположены различные театры, галереи и кафе, которые способствуют яркой художественной сцене города. Улица также играет роль в повседневной жизни, служа местом сбора для местных жителей и туристов, отражая динамичный дух Харькова.</p></div>
-</section>
-<section class="place" id="kharkiv_university_yellow_building">
-<h3>Главный корпус Харьковского национального университета имени В. Н. Каразина</h3>
-
-
-<figure class="place-fig"><img src="../images/kharkiv_university_yellow_building.jpg" alt="Главный корпус Харьковского национального университета имени В. Н. Каразина"/></figure>
-<div class="place-desc"><p class="prose">Главное здание Харьковского национального университета имени В. Н. Каразина является ярким примером неоклассической архитектуры, расположенным в самом сердце Харькова. Основанный в 1804 году, он служит выдающимся образовательным учреждением и символом богатого академического наследия города. Посетители могут полюбоваться его величественным фасадом и исследовать живописный кампус, который играет важную роль в культурной и интеллектуальной жизни города. Основанный в 1804 году, он является одним из старейших университетов Украины.</p>
-<p class="prose">Основанный в 1804 году, Харьковский национальный университет имени В. Н. Каразина является одним из старейших университетов Украины. Он был назван в честь своего основателя Василия Каразина, который сыграл ключевую роль в его создании. За годы своего существования университет претерпел значительные изменения, включая расширение факультетов и развитие исследовательских программ, что способствовало эволюции высшего образования в регионе. Харьковский национальный университет имени В. Н. Каразина имеет значительное культурное значение как центр образования и исследований в Украине. Он подготовил множество влиятельных личностей в различных областях, включая науку, литературу и политику. Роль университета в содействии интеллектуальному дискурсу и культурному развитию сделала его краеугольным камнем идентичности Харькова, отражая стремление города к образованию и прогрессу.</p></div>
-</section>
-<section class="place" id="kharkiv_young_guard">
-<h3>Монумент Молодой Гвардии</h3>
-
-
-<figure class="place-fig"><img src="../images/kharkiv_young_guard.jpg" alt="Монумент Молодой Гвардии"/></figure>
-<div class="place-desc"><p class="prose">Монумент Молодой Гвардии в Харькове — это впечатляющая скульптура, посвященная молодым советским партизанам, которые боролись против нацистской оккупации во время Второй мировой войны. Этот мемориал служит трогательным напоминанием о мужестве и жертве, запечатлевая дух молодости и сопротивления. Расположенный в заметном месте, он привлекает как местных жителей, так и туристов, предлагая пространство для размышлений и памяти. Открыт в 1970 году. Увековечивает память молодых партизан Молодой Гвардии во время Второй мировой войны.</p>
-<p class="prose">Монумент Молодой Гвардии был открыт в 1970 году в честь членов Молодой Гвардии, группы молодых партизан, которые сыграли значительную роль в сопротивлении немецким силам во время войны. Их смелые действия отмечены в советской истории, и монумент служит данью их наследию. Политически памятник отражает советский нарратив героизма и жертвы во время Второй мировой войны, символизируя борьбу с фашизмом и доблесть молодежи. Культурно он является важной частью наследия Харькова, представляя историческую приверженность города к сохранению своей памяти и почитанию тех, кто внес вклад в его защиту. Памятник является центром для памятных мероприятий и служит местом сбора для сообщества, укрепляя коллективную память и идентичность.</p></div>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/kharkiv_blagoveshchensky.jpg" alt="Харьковский цирк" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kharkiv_blagoveshchensky_b.jpg" alt="Харьковский цирк — вид 2" width="330" height="230" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Харьковский цирк — это яркое заведение, расположенное в самом сердце Харькова, известное своими захватывающими выступлениями и уникальной атмосферой. Этот исторический цирк предлагает разнообразные шоу с участием акробатов, клоунов и номеров с животными, что делает его популярным местом для семей и туристов. С его впечатляющей архитектурой и богатой историей цирк является неотъемлемой частью культурного ландшафта города. Основан в 1960 году. Многоразово отремонтирован для улучшения удобств.</p>
+<p class="prose">Харьковский цирк был основан в 1960 году и с тех пор стал знаковым местом в городе. Изначально он был спроектирован для проведения широкого спектра цирковых представлений, и с тех пор прошел несколько реконструкций, чтобы улучшить свои удобства и впечатления зрителей. Цирк принимал множество национальных и международных артистов, что способствовало его репутации как одного из лучших развлекательных заведений в Украине. Харьковский цирк имеет культурное значение как центр исполнительских искусств в регионе, отражая богатое художественное наследие города. Он служит местом встречи для семей и сообществ, способствуя чувству радости и развлечения в повседневной жизни. Цирк также играет роль в сохранении традиционных цирковых искусств, внося вклад в более широкую культурную ткань Харькова.</p></div>
 </section>
 </body>
 </html>

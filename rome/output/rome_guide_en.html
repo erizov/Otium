@@ -13,7 +13,7 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
 .otium-logo { font-family: 'Cinzel', serif; font-size: 2.15rem;
   font-weight: 600; letter-spacing: 0.18em; margin-bottom: 0.85rem; }
 .otiump { margin: 0.42rem 0; line-height: 1.42; text-align: justify;
-  max-width: 38rem; font-size: 0.95rem; }
+  font-size: 0.95rem; }
 .guide-title { page-break-after: auto; margin-bottom: 0.55rem;
   page-break-inside: avoid; }
 .historical-reference { margin: 0.75rem 0 1.15rem;
@@ -63,22 +63,103 @@ ol.trip-stops a:hover { text-decoration: underline; }
 .heraldry-univ-caption { font-size: 0.52rem; line-height: 1.18;
   margin: 0.12rem 0 0; padding: 0 0.06rem; color: #252525;
   text-align: center; font-weight: 500; }
-.heraldry-motto { text-align: center; max-width: 18rem; margin: 0.18rem auto;
+.heraldry-motto { text-align: center; margin: 0.18rem auto;
   width: 100%; }
 .motto-line { font-family: 'Cinzel', serif; font-size: 1rem;
   margin: 0; color: #333; line-height: 1.35; }
 .guide-title h1.guide-title-main { font-family: 'Cinzel', serif;
   font-size: 2.35rem; margin-bottom: 0.5rem; font-weight: 600; }
 .lead { color: #444; font-size: 1.05rem; }
-.guide-toc { margin: 0.85rem 0 1.15rem; page-break-inside: avoid; }
-.guide-toc h2 { font-family: 'Cinzel', serif; font-size: 1.28rem;
-  font-weight: 600; margin: 0.4rem 0 0.55rem; }
+
+.guide-toc { page-break-before: always; break-before: page;
+  page-break-after: always; break-after: page;
+  margin: 0; padding: 0.2rem 0 0.45rem; page-break-inside: auto; }
+.guide-toc h2 { font-family: 'Cinzel', serif;
+  font-size: 1.28rem; font-weight: 600; margin: 0.4rem 0 0.55rem; }
 .guide-toc ol { margin: 0.35rem 0 0.65rem 1.25rem; padding: 0;
   columns: 2; column-gap: 1.5rem; }
 .guide-toc li { margin: 0.18rem 0; line-height: 1.35;
   font-size: 0.88rem; break-inside: avoid; }
-.guide-toc a { color: #1a5276; text-decoration: none; }
+.guide-toc a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.guide-toc a:hover { color: #0d3d56; }
 .guide-toc li.toc-item--sub { font-size: 0.82rem; margin-left: 0.35rem; }
+.toc-back { font-size: 0.78rem; margin: 0 0 0.35rem; text-align: right; }
+.toc-back a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.toc-back a:hover { color: #0d3d56; }
+.place, .historical-reference, .guide-primer, .guide-trip-plans {
+  scroll-margin-top: 1.25rem; }
+.historical-reference h2, .guide-primer h2, .guide-trip-plans h2,
+.chapter-head h2, .place-lead h3 { position: relative; }
+.guide-toc + .place, .guide-toc + .chapter-head {
+  page-break-before: avoid; break-before: avoid-page; }
+.place-lead { page-break-inside: avoid; break-inside: avoid-page;
+  page-break-after: auto; }
+.place-lead > h3 { page-break-after: avoid; break-after: avoid-page; }
+.place-lead > .place-meta { page-break-after: avoid; break-after: avoid-page; }
+
+.place-fig { page-break-inside: avoid; break-inside: avoid-page;
+  margin: 0.5rem 0 1rem; }
+.place-fig img {
+  page-break-inside: avoid; break-inside: avoid-page;
+  max-height: 48vh; width: auto; max-width: 100%;
+  object-fit: contain; margin-left: auto; margin-right: auto; }
+.place-fig--hi-res img { max-height: 52vh; }
+.place-fig--lo-res img { max-height: 30vh; }
+.place-pdf-fig-row {
+  display: flex; flex-direction: row; flex-wrap: wrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.45rem 0.55rem; margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row .place-fig {
+  flex: 1 1 30%; margin: 0; min-width: 26%; max-width: 100%; }
+.place-pdf-fig-row .place-fig img {
+  width: auto; max-width: 100%; height: auto; max-height: 44vh;
+  object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--pair {
+  flex-wrap: nowrap; justify-content: space-between;
+  align-items: flex-end; gap: 0.5rem 0.65rem; }
+.place-pdf-fig-row--pair .place-fig {
+  flex: 1 1 47%; min-width: 0; max-width: 50%;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--pair .place-fig img {
+  max-height: 44vh; object-fit: contain; }
+.place-pdf-fig-row--pair .place-fig--hi-res img { max-height: 52vh; }
+.place-pdf-fig-row--pair .place-fig--lo-res img { max-height: 26vh; }
+.place-pdf-fig-row--pair .place-fig--row-sized img,
+.place-pdf-fig-row--triple .place-fig--row-sized img,
+.place-pdf-fig-row--many .place-fig--row-sized img {
+  width: auto; max-width: 100%; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row .place-fig--row-sized.place-fig--hi-res img,
+.place-pdf-fig-row .place-fig--row-sized.place-fig--lo-res img {
+  max-height: unset; }
+.place-pdf-fig-rows-stack {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple {
+  display: flex; flex-direction: row; flex-wrap: nowrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.4rem 0.48rem; margin: 0;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--triple .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--triple .place-fig--hi-res img { max-height: 42vh; }
+.place-pdf-fig-row--triple .place-fig--lo-res img { max-height: 18vh; }
+.place-pdf-fig-row--many {
+  flex-wrap: nowrap; justify-content: center; align-items: flex-end;
+  gap: 0.35rem 0.42rem; }
+.place-pdf-fig-row--many .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--many .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+
+
 .place { margin-bottom: 2.2rem; page-break-inside: auto; }
 h3 { font-family: 'Cinzel', serif; font-size: 1.22rem; margin: 1.2rem 0 0.35rem;
   font-weight: 600; }
@@ -90,7 +171,6 @@ h4 { font-family: 'Cinzel', serif; font-size: 0.95rem; text-transform: uppercase
   color: #555; font-size: 0.95rem; margin: 0 0 0.5rem; font-style: italic; }
 .place-meta { font-size: 0.92rem; color: #353535; margin: 0 0 0.75rem;
   line-height: 1.4; }
-.place-fig { margin: 0.5rem 0 1rem; }
 img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
 .prose, .place-desc p { margin: 0.45rem 0; line-height: 1.5;
   text-align: justify; }
@@ -110,7 +190,9 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <figure class="heraldry-fig heraldry-coat-book" title="City emblem"><img src="../images/guide_coat_of_arms.svg" alt="City emblem"/></figure>
 <figure class="heraldry-fig heraldry-coat-book" title="Flag"><img src="../images/guide_flag.svg" alt="Flag"/></figure>
 </div></div><h1 class="guide-title-main">Rome</h1><p class="lead">Guide. Places in this edition: 40.</p></header>
+<nav class="guide-toc" id="guide-toc" aria-label="Contents"><h2>Contents</h2><ol><li class="toc-item"><a href="#guide-trips">Trip ideas</a></li><li class="toc-item"><a href="#rome_albert_square_johnbright">Albert-Square-JohnBright</a></li><li class="toc-item"><a href="#rome_via_appia">Appian Way</a></li><li class="toc-item"><a href="#rome_ara_pacis_museum">Ara Pacis Museum</a></li><li class="toc-item"><a href="#rome_arch_of_constantine">Arch of Constantine</a></li><li class="toc-item"><a href="#rome_basilica_san_paolo_fuori">Basilica of Saint Paul Outside the Walls</a></li><li class="toc-item"><a href="#rome_basilica_san_clemente">Basilica of San Clemente</a></li><li class="toc-item"><a href="#rome_basilica_santa_maria_maggiore">Basilica of Santa Maria Maggiore</a></li><li class="toc-item"><a href="#rome_baths_of_caracalla">Baths of Caracalla</a></li><li class="toc-item"><a href="#rome_campo_de_fiori">Campo de&#x27; Fiori</a></li><li class="toc-item"><a href="#rome_capitoline_hill">Capitoline Hill</a></li><li class="toc-item"><a href="#rome_capuchin_crypt_rome">Capuchin Crypt</a></li><li class="toc-item"><a href="#rome_castel_sant_angelo">Castel Sant&#x27;Angelo</a></li><li class="toc-item"><a href="#rome_colosseum">Colosseum</a></li><li class="toc-item"><a href="#rome_italy">Italy</a></li><li class="toc-item"><a href="#rome_largo_torre_argentina">Largo di Torre Argentina</a></li><li class="toc-item"><a href="#rome_mausoleum_of_augustus">Mausoleum of Augustus</a></li><li class="toc-item"><a href="#rome_testaccio_monte">Monte Testaccio</a></li><li class="toc-item"><a href="#rome_moschea">Moschea</a></li><li class="toc-item"><a href="#rome_bocca_della_verita">Mouth of Truth</a></li><li class="toc-item"><a href="#rome_palazzo_barberini">Palazzo Barberini</a></li><li class="toc-item"><a href="#rome_pantheon">Pantheon</a></li><li class="toc-item"><a href="#rome_piazza_del_campidoglio">Piazza del Campidoglio</a></li><li class="toc-item"><a href="#rome_piazza_del_popolo">Piazza del Popolo</a></li><li class="toc-item"><a href="#rome_piazza_navona">Piazza Navona</a></li><li class="toc-item"><a href="#rome_ponte_sant_angelo">Ponte Sant&#x27;Angelo</a></li><li class="toc-item"><a href="#rome_jewish_ghetto_portico_octavia">Portico d&#x27;Ottavia</a></li><li class="toc-item"><a href="#rome_pyramid_of_cestius">Pyramid of Cestius</a></li><li class="toc-item"><a href="#rome_rom">Rom</a></li><li class="toc-item"><a href="#rome_roman_forum">Roman Forum</a></li><li class="toc-item"><a href="#rome_san_giovanni_in_laterano">San Giovanni in Laterano</a></li><li class="toc-item"><a href="#rome_santa_maria_trastevere">Santa Maria in Trastevere</a></li><li class="toc-item"><a href="#rome_spanish_steps">Spanish Steps</a></li><li class="toc-item"><a href="#rome_st_peters_basilica">St. Peter&#x27;s Basilica</a></li><li class="toc-item"><a href="#rome_trajan_column">Trajan&#x27;s Column</a></li><li class="toc-item"><a href="#rome_trevi_fountain">Trevi Fountain</a></li><li class="toc-item"><a href="#rome_vittoriano">Victor Emmanuel II Monument</a></li><li class="toc-item"><a href="#rome_villa_borghese">Villa Borghese</a></li><li class="toc-item"><a href="#rome_park_villa_borghese_lake">Villa Borghese lake</a></li><li class="toc-item"><a href="#rome_villa_farnesina">Villa Farnesina</a></li><li class="toc-item"><a href="#rome_villa_sciarra">Villa Sciarra</a></li></ol></nav>
 <section class="guide-trip-plans" id="guide-trips" aria-label="Trip ideas"><h2>Trip ideas</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 <article class="trip-plan" id="trip-1d"><h3>One day</h3>
 <p class="prose">A compact loop linking the strongest cards in this guide, ordered to minimise backtracking on foot.</p>
 <ol class="trip-stops"><li><a href="#rome_via_appia">Appian Way</a> (~75min)</li>
@@ -138,316 +220,546 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <ol class="trip-stops"><li><a href="#rome_piazza_del_popolo">Piazza del Popolo</a> (~75min)</li>
 <li><a href="#rome_villa_farnesina">Villa Farnesina</a> (~75min)</li>
 <li><a href="#rome_villa_sciarra">Villa Sciarra</a> (~75min)</li></ol></article></section>
-<nav class="guide-toc" aria-label="Contents"><h2>Contents</h2><ol><li class="toc-item"><a href="#guide-trips">Trip ideas</a></li><li class="toc-item"><a href="#rome_pdfband_3_cb3ed22e">Albert-Square-JohnBright</a></li><li class="toc-item"><a href="#rome_via_appia">Appian Way</a></li><li class="toc-item"><a href="#rome_ara_pacis_museum">Ara Pacis Museum</a></li><li class="toc-item"><a href="#rome_arch_of_constantine">Arch of Constantine</a></li><li class="toc-item"><a href="#rome_basilica_san_paolo_fuori">Basilica of Saint Paul Outside the Walls</a></li><li class="toc-item"><a href="#rome_basilica_san_clemente">Basilica of San Clemente</a></li><li class="toc-item"><a href="#rome_basilica_santa_maria_maggiore">Basilica of Santa Maria Maggiore</a></li><li class="toc-item"><a href="#rome_baths_of_caracalla">Baths of Caracalla</a></li><li class="toc-item"><a href="#rome_campo_de_fiori">Campo de&#x27; Fiori</a></li><li class="toc-item"><a href="#rome_capitoline_hill">Capitoline Hill</a></li><li class="toc-item"><a href="#rome_capuchin_crypt_rome">Capuchin Crypt</a></li><li class="toc-item"><a href="#rome_castel_sant_angelo">Castel Sant&#x27;Angelo</a></li><li class="toc-item"><a href="#rome_colosseum">Colosseum</a></li><li class="toc-item"><a href="#rome_largo_torre_argentina">Largo di Torre Argentina</a></li><li class="toc-item"><a href="#rome_mausoleum_of_augustus">Mausoleum of Augustus</a></li><li class="toc-item"><a href="#rome_testaccio_monte">Monte Testaccio</a></li><li class="toc-item"><a href="#rome_pdfband_2_2f129e05">Moschea</a></li><li class="toc-item"><a href="#rome_bocca_della_verita">Mouth of Truth</a></li><li class="toc-item"><a href="#rome_palazzo_barberini">Palazzo Barberini</a></li><li class="toc-item"><a href="#rome_pdfband_9_c17302d7">Rom</a></li><li class="toc-item"><a href="#rome_pantheon">Pantheon</a></li><li class="toc-item"><a href="#rome_piazza_del_campidoglio">Piazza del Campidoglio</a></li><li class="toc-item"><a href="#rome_piazza_del_popolo">Piazza del Popolo</a></li><li class="toc-item"><a href="#rome_piazza_navona">Piazza Navona</a></li><li class="toc-item"><a href="#rome_ponte_sant_angelo">Ponte Sant&#x27;Angelo</a></li><li class="toc-item"><a href="#rome_jewish_ghetto_portico_octavia">Portico d&#x27;Ottavia</a></li><li class="toc-item"><a href="#rome_pyramid_of_cestius">Pyramid of Cestius</a></li><li class="toc-item"><a href="#rome_roman_forum">Roman Forum</a></li><li class="toc-item"><a href="#rome_pdfband_1_da829d8c">Italy</a></li><li class="toc-item"><a href="#rome_pdfband_0_01b7073a">San Giovanni in Laterano</a></li><li class="toc-item"><a href="#rome_santa_maria_trastevere">Santa Maria in Trastevere</a></li><li class="toc-item"><a href="#rome_spanish_steps">Spanish Steps</a></li><li class="toc-item"><a href="#rome_st_peters_basilica">St. Peter&#x27;s Basilica</a></li><li class="toc-item"><a href="#rome_trajan_column">Trajan&#x27;s Column</a></li><li class="toc-item"><a href="#rome_trevi_fountain">Trevi Fountain</a></li><li class="toc-item"><a href="#rome_vittoriano">Victor Emmanuel II Monument</a></li><li class="toc-item"><a href="#rome_villa_borghese">Villa Borghese</a></li><li class="toc-item"><a href="#rome_park_villa_borghese_lake">Villa Borghese lake</a></li><li class="toc-item"><a href="#rome_villa_farnesina">Villa Farnesina</a></li><li class="toc-item"><a href="#rome_villa_sciarra">Villa Sciarra</a></li></ol></nav>
-<section class="place" id="rome_pdfband_3_cb3ed22e">
+<section class="place" id="rome_albert_square_johnbright">
+<div class="place-lead">
 <h3>Albert-Square-JohnBright</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: See official visitor information.</p>
-<figure class="place-fig"><img src="../images/rome_pdfband_3_cb3ed22e.jpg" alt="Albert-Square-JohnBright"/></figure>
+<figure class="place-fig place-fig--hi-res"><img src="../images/rome_albert_square_johnbright.jpg" alt="Albert-Square-JohnBright" width="1067" height="1600"/></figure>
+</div>
 </section>
 <section class="place" id="rome_via_appia">
+<div class="place-lead">
 <h3>Appian Way</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Period: 4th century BC</p>
-<figure class="place-fig"><img src="../images/rome_via_appia.jpg" alt="Appian Way"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_via_appia.jpg" alt="Appian Way" width="1280" height="836" style="height: 301px; max-height: 301px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_via_appia_b.jpg" alt="Appian Way — view 2" width="330" height="247" style="height: 301px; max-height: 301px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Appian Way is one of the oldest and most famous ancient roads in Rome, dating back to the 4th century BC. Originally constructed as a military road connecting Rome with Brindisi on the Adriatic coast, it later became a major trade route and a symbol of Roman imperial power. It spans approximately 150 miles (240 km), stretching from Rome to Brindisi. Its name derives from &#x27;via Appia,&#x27; meaning &#x27;Road of Appius.&#x27;. Many notable figures, including Julius Caesar and Hannibal, traveled along this route. Remains of ancient structures such as tombs and villas can still be seen today. In modern times, parts of the Appian Way have been converted into scenic walking paths.</p>
 <p class="prose">Built by Appius Claudius Caecus around 312 BC, the Appian Way was initially designed for military purposes but soon evolved into a vital artery for commerce and communication across Italy. Over time, it grew into a grandiose monumental road lined with tombs, villas, and monuments, reflecting the wealth and influence of Rome&#x27;s ruling class. Today, the Appian Way serves as a historical reminder of Rome’s past glory and its enduring legacy as a hub of culture and commerce.</p></div>
 </section>
 <section class="place" id="rome_ara_pacis_museum">
+<div class="place-lead">
 <h3>Ara Pacis Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Lungotevere in Augusta | Style: Contemporary museum encasing ancient altar | Period: 2006</p>
-<figure class="place-fig"><img src="../images/rome_ara_pacis_museum.jpg" alt="Ara Pacis Museum"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_ara_pacis_museum.jpg" alt="Ara Pacis Museum" width="1280" height="853" style="height: 294px; max-height: 294px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_ara_pacis_museum_b.jpg" alt="Ara Pacis Museum — view 2" width="330" height="210" style="height: 294px; max-height: 294px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Ara Pacis Museum is a modern architectural marvel housing one of Rome&#x27;s most significant archaeological treasures—the Altar of Peace. Located on the banks of the Tiber River, it showcases ancient Roman artifacts and provides insight into the city&#x27;s rich historical heritage. Richard Meier glass-and-stone pavilion sheltering Augustus&#x27; altar of peace reliefs. Housed within the museum are fragments of the original Altar of Peace dating back to the time of Emperor Augustus. The museum features innovative design elements such as natural light filtering through skylights, enhancing the display of artifacts. It stands as a testament to the fusion of classical and modern architectural styles. Exhibits include sculptures, reliefs, and frescoes depicting scenes from Roman life and mythology. Located near the Palatine Hill and the Tiber River, the site offers scenic views of Rome’s historic center. Ticket separate from Forum passes. Exterior angles photograph cleanly in morning side-light.</p>
 <p class="prose">Built in 13 BC to celebrate peace under Augustus&#x27; reign, the original altar was discovered during excavations in the early 20th century. The museum opened in 2006, combining ancient ruins with contemporary architecture designed by Richard Meier, blending classical elements with modern aesthetics. Altar founded 9 BCE; 20th-century excavation and controversial modern wrapping. Visiting the Ara Pacis Museum allows visitors to experience Rome’s history firsthand through its preserved artifacts and stunning architecture. Augustan propaganda in botanical friezes—telluric calm after civil wars.</p></div>
 </section>
 <section class="place" id="rome_arch_of_constantine">
+<div class="place-lead">
 <h3>Arch of Constantine</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Beside Colosseum | Style: Late-antique triumphal arch | Period: 315 AD</p>
-<figure class="place-fig"><img src="../images/rome_arch_of_constantine.jpg" alt="Arch of Constantine"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_arch_of_constantine.jpg" alt="Arch of Constantine" width="1280" height="960" style="height: 319px; max-height: 319px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_arch_of_constantine_b.jpg" alt="Arch of Constantine — view 2" width="330" height="228" style="height: 319px; max-height: 319px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Arch of Constantine is a monumental triumphal arch located at the start of the Via Triumphalis, celebrating Emperor Constantine&#x27;s victory over Maxentius in the Battle of Milvian Bridge in 312 AD. Imperial triumphal arch recycling earlier reliefs—political collage beside the amphitheatre. Constructed during the reign of Emperor Constantine I. Consists of three arches, with the central one being larger than the side ones. Features intricate marble friezes and reliefs depicting significant moments from Roman history. Located near the Colosseum and Palatine Hill, making it easily accessible within the heart of Rome’s historic center. Symbolizes the beginning of the Via Triumphalis, a route used for triumphant processions. Cross traffic on foot carefully toward the forum. Read panels to spot Hadrianic hunting roundels reused.</p>
 <p class="prose">Built around 315 AD to commemorate Emperor Constantine’s decisive victory, the Arch of Constantine was constructed by combining elements from earlier Roman monuments and temples. It stands as a testament to the fusion of classical architecture with Christian symbolism, featuring reliefs depicting scenes from both pagan and Christian narratives. Dedicated 315 CE after Milvian Bridge victory; spolia study set for art historians. A must-visit for its historical significance and architectural ingenuity, the Arch of Constantine offers a unique glimpse into ancient Rome’s transition from paganism to Christianity. Framing element in almost every classic Colosseum postcard.</p></div>
 </section>
 <section class="place" id="rome_basilica_san_paolo_fuori">
+<div class="place-lead">
 <h3>Basilica of Saint Paul Outside the Walls</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Early Christian and Late Antique | Period: 4th century AD</p>
-<figure class="place-fig"><img src="../images/rome_basilica_san_paolo_fuori.jpg" alt="Basilica of Saint Paul Outside the Walls"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_basilica_san_paolo_fuori.jpg" alt="Basilica of Saint Paul Outside the Walls" width="1280" height="844" style="height: 304px; max-height: 304px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_basilica_san_paolo_fuori_b.jpg" alt="Basilica of Saint Paul Outside the Walls — view 2" width="330" height="247" style="height: 304px; max-height: 304px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Basilica of Saint Paul Outside the Walls is a majestic Roman basilica, standing outside the ancient city walls, dedicated to St. Paul the Apostle. It’s one of Rome&#x27;s most significant Christian sites and a testament to medieval architecture. It is located just outside the Aurelian Walls, reflecting its original purpose as a burial site. The basilica has undergone several renovations over the centuries, with notable restorations completed in the 17th and 19th centuries. Its interior features impressive mosaics and frescoes, including works by Renaissance artists such as Raphael and Perin del Vaga. Saint Paul&#x27;s remains are believed to be buried beneath the high altar, making it a sacred destination for pilgrims. The basilica also houses relics of Saints Lucia and Stephen.</p>
 <p class="prose">Built in the 4th century AD by Emperor Constantine, the basilica was originally constructed as a mausoleum for St. Paul. Over time, it evolved into a church, becoming one of the four major papal basilicas in Rome. Its design reflects both early Christian and late antique architectural styles, showcasing the transition between pagan and Christian influences. This basilica is important for its historical significance and architectural value, offering visitors a glimpse into the early days of Christianity in Rome.</p></div>
 </section>
 <section class="place" id="rome_basilica_san_clemente">
+<div class="place-lead">
 <h3>Basilica of San Clemente</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Medieval, with elements of Roman architecture | Period: (4th century)</p>
-<figure class="place-fig"><img src="../images/rome_basilica_san_clemente.jpg" alt="Basilica of San Clemente"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_basilica_san_clemente.jpg" alt="Basilica of San Clemente" width="1200" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_basilica_san_clemente_b.jpg" alt="Basilica of San Clemente — view 2" width="330" height="447" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Basilica of San Clemente is a remarkable underground complex beneath Rome&#x27;s historic center. It combines layers of ancient ruins, medieval structures, and Renaissance art, offering visitors a unique glimpse into the city&#x27;s rich history. It features three distinct levels: a modern church above ground, a medieval church below, and extensive ancient Roman ruins underneath. The lower level contains the oldest part of the structure, dating back to the 4th century. Notable highlights include the stunning mosaics and frescoes from various eras, which reflect different artistic styles. Archaeological excavations revealed evidence of a Roman domus (house), baths, and catacombs. The basilica has been designated a minor basilica by the Catholic Church.</p>
 <p class="prose">Built over several centuries, the basilica was originally constructed as a Roman house around the 4th century AD. Over time, it became a Christian church dedicated to Saint Clement, one of the earliest popes. The site underwent significant renovations during the Middle Ages and later served as a parish church until the early 20th century. Today, its underground levels showcase intricate mosaics, frescoes, and archaeological remains that provide insights into Rome’s evolution through the ages. Visiting the Basilica of San Clemente allows travelers to explore a fascinating blend of historical periods, including Roman, Byzantine, and medieval influences.</p></div>
 </section>
 <section class="place" id="rome_basilica_santa_maria_maggiore">
+<div class="place-lead">
 <h3>Basilica of Santa Maria Maggiore</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Early Christian and Renaissance | Period: 432–439 AD</p>
-<figure class="place-fig"><img src="../images/rome_basilica_santa_maria_maggiore.jpg" alt="Basilica of Santa Maria Maggiore"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_basilica_santa_maria_maggiore.jpg" alt="Basilica of Santa Maria Maggiore" width="1280" height="1131" style="height: 408px; max-height: 408px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_basilica_santa_maria_maggiore_b.jpg" alt="Basilica of Santa Maria Maggiore — view 2" width="330" height="330" style="height: 408px; max-height: 408px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Dominating the Piazza di Santa Maria Maggiore, this basilica is one of Rome&#x27;s most iconic landmarks and a major center for Christian pilgrimage. It is considered one of the four major papal basilicas in Rome. The basilica features mosaics dating back to the 5th century that depict scenes from the life of Jesus and the Virgin Mary. Its dome, designed by Bramante, is notable for its octagonal shape and distinctive appearance. Santa Maria Maggiore is also known for its impressive façade decorated with sculptures by Bernini. Legend holds that the basilica was built on the site where snow fell during summer, indicating divine approval.</p>
 <p class="prose">Built between 432 and 439 AD by Pope Sixtus III, the Basilica of Santa Maria Maggiore was originally constructed as a celebration of the Virgin Mary&#x27;s apparition to St. Elena. It has been expanded and restored numerous times over the centuries, including significant renovations under Pope Paul V in the 17th century. The basilica remains a key site in Roman Catholic liturgy and art, housing important religious relics and works of art. A must-visit for its historical significance, architectural beauty, and spiritual importance.</p></div>
 </section>
 <section class="place" id="rome_baths_of_caracalla">
+<div class="place-lead">
 <h3>Baths of Caracalla</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Via delle Terme di Caracalla | Style: Severan Roman baths | Period: 212–216 AD</p>
-<figure class="place-fig"><img src="../images/rome_baths_of_caracalla.jpg" alt="Baths of Caracalla"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_baths_of_caracalla.jpg" alt="Baths of Caracalla" width="1280" height="903" style="height: 325px; max-height: 325px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_baths_of_caracalla_b.jpg" alt="Baths of Caracalla — view 2" width="330" height="470" style="height: 325px; max-height: 325px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Baths of Caracalla are among the largest and best-preserved ancient Roman bath complexes, offering a glimpse into the opulence and social life of imperial Rome. Imperial bath complex—vaulted halls, mosaic scraps, and summer opera staging. Constructed using travertine stone and marble, the baths spanned over 39 acres. They were equipped with heated water supplied by aqueducts, ensuring comfort for users. The baths featured intricate mosaics and sculptures, many of which have been restored and can be seen today. At their peak, they served up to 1,600 visitors daily. Today, visitors can explore the ruins and imagine what it was like to enjoy these luxurious facilities. Bring sun cover; little shade among high walls. Night visits when opera runs feel otherworldly.</p>
 <p class="prose">Built during the reign of Emperor Caracalla around 212–216 AD, these baths were designed to serve as a hub for relaxation, socializing, and public health. They could accommodate thousands of people at once, showcasing advanced engineering and architectural techniques of the time. The complex included swimming pools, saunas, exercise rooms, and lavish decorations, reflecting the grandiose lifestyle of the Roman elite. Opened early 3rd century CE; water and spectacle on a neighbourhood scale. Visiting the Baths of Caracalla allows travelers to experience the grandeur of ancient Roman architecture and understand how Romans lived, worked, and entertained themselves. Open-air ruins teach Roman infrastructure without museum glass.</p></div>
 </section>
 <section class="place" id="rome_campo_de_fiori">
+<div class="place-lead">
 <h3>Campo de&#x27; Fiori</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Baroque</p>
-<figure class="place-fig"><img src="../images/rome_campo_de_fiori.jpg" alt="Campo de&#x27; Fiori"/></figure>
+<figure class="place-fig place-fig--hi-res"><img src="../images/rome_campo_de_fiori.jpg" alt="Campo de&#x27; Fiori" width="1280" height="897"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Campo de&#x27; Fiori is a vibrant square in Rome known for its lively morning market and historic significance. Located near the University of Rome, it has been a hub for intellectual exchange and political gatherings since medieval times. The morning market features fresh produce, flowers, and local crafts. It is one of the oldest markets in Rome, dating back to the Renaissance era. Nearby stands a statue commemorating Giordano Bruno&#x27;s martyrdom. The square is surrounded by elegant Baroque buildings and narrow streets. On weekends, the market expands with additional stalls selling souvenirs and handicrafts.</p>
 <p class="prose">Originally named after a Roman nobleman, Campo de&#x27; Fiori was once a marshy area used as a dumping ground. Over time, it became a popular meeting place for scholars and artists. In the 16th century, it gained prominence as a marketplace, hosting a daily flower and vegetable market that continues to attract visitors today. The square also holds historical importance due to the execution of Giordano Bruno, a philosopher and astronomer, who was burned at the stake here in 1600. Visitors come to Campo de&#x27; Fiori to experience the bustling market, enjoy the lively atmosphere, and reflect on its rich history.</p></div>
 </section>
 <section class="place" id="rome_capitoline_hill">
+<div class="place-lead">
 <h3>Capitoline Hill</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Campidoglio | Style: Renaissance civic replanning</p>
-<figure class="place-fig"><img src="../images/rome_capitoline_hill.jpg" alt="Capitoline Hill"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_capitoline_hill.jpg" alt="Capitoline Hill" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_capitoline_hill_b.jpg" alt="Capitoline Hill — view 2" width="330" height="244" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Perched high above Rome&#x27;s historic center, Capitoline Hill is one of the city&#x27;s seven hills and a key symbol of ancient Roman power. It was originally home to temples dedicated to Jupiter, Juno, and Minerva, reflecting its role as the spiritual heart of the Roman Empire. Michelangelo&#x27;s trapezoidal piazza, equestrian Marcus Aurelius, and palazzi that host the city museum. The hill is part of Rome&#x27;s seven legendary hills, each with its own historical significance. It served as the center of Roman civic life and religion for centuries. Today, the Capitoline Museums showcase artifacts dating back to the Republic and Empire periods. Notable sculptures include the &#x27;She-Wolf of Rome,&#x27; which symbolizes the founding of Rome by Romulus and Remus. Its location offers panoramic views over the city, providing a unique perspective on Rome&#x27;s layout. Museum ticket includes palazzo courtyards. Bus groups peak late morning.</p>
 <p class="prose">Founded during the early days of Rome, Capitoline Hill became the site of important religious and political structures. The Capitoline Museums, now located here, house some of the most significant artifacts from ancient Rome, including the famous &#x27;Bull of Carystos&#x27; sculpture. Its prominence in Roman mythology and history makes it a must-visit for anyone interested in understanding the roots of Western civilization. Religious centre of archaic Rome; Renaissance replanning cleared medieval clutter. Visit Capitoline Hill to explore the birthplace of Roman religion and politics, and witness firsthand the art and architecture that shaped Western culture. Balcony over the Forum remains one of the best urban belvederes.</p></div>
 </section>
 <section class="place" id="rome_capuchin_crypt_rome">
+<div class="place-lead">
 <h3>Capuchin Crypt</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Baroque | Period: 1629–1677</p>
-<figure class="place-fig"><img src="../images/rome_capuchin_crypt_rome.jpg" alt="Capuchin Crypt"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_capuchin_crypt_rome.jpg" alt="Capuchin Crypt" width="1280" height="934" style="height: 337px; max-height: 337px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_capuchin_crypt_rome_b.jpg" alt="Capuchin Crypt — view 2" width="330" height="247" style="height: 337px; max-height: 337px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Capuchin Crypt is a unique and macabre underground chapel located beneath the Church of Santa Maria della Concezione dei Cappuccini in Rome. It houses the skeletal remains of over 4,000 friars, meticulously arranged into intricate patterns and scenes. It contains approximately 4,000 skeletons arranged in elaborate designs. The crypt&#x27;s walls are decorated with bone chandeliers, benches, and even a large skull-covered altar. Each arrangement represents different themes such as resurrection, judgment day, and the transience of earthly existence. The chapel is part of a larger complex that includes the church above it, which serves as a traditional Catholic worship space. The crypt was originally intended for religious instruction and meditation on mortality.</p>
 <p class="prose">Built between 1629 and 1677 by the Order of Friars Minor Capuchin, the crypt was designed to serve as a reminder of mortality and the transient nature of life. The bones were exhumed from various Capuchin cemeteries and creatively arranged to form artistic displays, including allegorical scenes depicting the stages of life and death. Visiting the Capuchin Crypt offers a rare opportunity to witness one of the most unusual and historically significant examples of mortuary art in Europe.</p></div>
 </section>
 <section class="place" id="rome_castel_sant_angelo">
+<div class="place-lead">
 <h3>Castel Sant&#x27;Angelo</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Lungotevere Castello | Style: Ancient mausoleum with medieval bastions | Period: 139 AD</p>
-<figure class="place-fig"><img src="../images/rome_castel_sant_angelo.jpg" alt="Castel Sant&#x27;Angelo"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_castel_sant_angelo.jpg" alt="Castel Sant&#x27;Angelo" width="1280" height="811" style="height: 273px; max-height: 273px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_castel_sant_angelo_b.jpg" alt="Castel Sant&#x27;Angelo — view 2" width="330" height="195" style="height: 273px; max-height: 273px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Situated on the banks of the Tiber River, Castel Sant&#x27;Angelo was originally built as a mausoleum for Emperor Hadrian in the 2nd century AD. Over time it transformed into a fortress and later became a papal residence. Cylinder tomb of Hadrian turned fortress, prison, and museum—linked to the Vatican by the elevated passage. It is one of the best-preserved examples of Roman architecture dating back to the 2nd century. The castle features five towering cylindrical sections that symbolize the Five Wounds of Christ. During World War II, Mussolini&#x27;s Fascist regime used it as a headquarters before being captured by Allied forces. Today, visitors can ascend to the top for panoramic vistas of Rome’s historic center. Its design influenced many subsequent fortifications across Europe. Reduced crowds after sunset openings on some dates. The angels&#x27; bridge is a separate photo subject.</p>
 <p class="prose">Constructed by Emperor Hadrian around 139 AD to serve as his burial site, the structure evolved into a military stronghold during the Middle Ages. It was subsequently used as a prison and a castle by popes, including Pope Nikolay V who added defensive walls and towers. In 1527, it played a crucial role in defending Rome against attacks by Charles V&#x27;s troops. Antiquity through papal refuge in sieges; angel statue gives city its name anecdote. A must-visit for its historical significance and stunning views overlooking the Tiber River and Vatican City. Terrace views along the Tiber bend toward the dome.</p></div>
 </section>
 <section class="place" id="rome_colosseum">
+<div class="place-lead">
 <h3>Colosseum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Piazza del Colosseo, Rome | Style: Ancient Roman concrete and travertine | Period: 70-80 AD</p>
-<figure class="place-fig"><img src="../images/rome_colosseum.jpg" alt="Colosseum"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_colosseum.jpg" alt="Colosseum" width="1280" height="751" style="height: 271px; max-height: 271px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_colosseum_b.jpg" alt="Colosseum — view 2" width="330" height="194" style="height: 271px; max-height: 271px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Colosseum, also known as the Flavian Amphitheatre, is one of Rome&#x27;s most iconic landmarks and a testament to ancient Roman engineering prowess. Huge Flavian amphitheatre—symbol of imperial Rome and still a reference for crowds, games, and engineering. Constructed between 70-80 AD. Ancient Romans referred to it as &#x27;Amphitheatrum Flavium&#x27;. It hosted events such as animal hunts, mock sea battles, and executions. Today, it remains a symbol of Roman architecture and heritage. Restoration efforts continue to preserve its historical integrity. Combined tickets often include the Forum and Palatine. Underground hypogeum visits require guided slots.</p>
 <p class="prose">Built during the first century AD under Emperor Vespasian, the Colosseum was designed for gladiatorial contests, public spectacles, and ceremonies. It could accommodate up to 50,000 spectators and featured complex hydraulic systems for raising animals and scenery. Its name derives from Nero’s nearby &#x27;Golden House&#x27; (&#x27;Domus Aurea&#x27;), colloquially called &#x27;Colossus&#x27;. Opened around 80 CE; quarry for builders in later ages; modern conservation balances access with structure stress. Visit the Colosseum to witness the grandeur of ancient Rome and understand its cultural significance. UNESCO heart of the historic centre; evenings emphasize silhouette and lit arches.</p></div>
 </section>
+<section class="place" id="rome_italy">
+<div class="place-lead">
+<h3>Italy</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
+
+<p class="place-meta">Address: See official visitor information.</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_italy.jpg" alt="Italy" width="1280" height="997" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_pdfband_1_da829d8c_b.jpg" alt="Italy — view 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+</section>
 <section class="place" id="rome_largo_torre_argentina">
+<div class="place-lead">
 <h3>Largo di Torre Argentina</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Campus Martius | Style: Republican Roman sacred architecture</p>
-<figure class="place-fig"><img src="../images/rome_largo_torre_argentina.jpg" alt="Largo di Torre Argentina"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_largo_torre_argentina.jpg" alt="Largo di Torre Argentina" width="1280" height="960" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_largo_torre_argentina_b.jpg" alt="Largo di Torre Argentina — view 2" width="330" height="440" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Hidden beneath the bustling streets of Rome lies a tranquil oasis—a square where ancient ruins coexist with modern life. Largo di Torre Argentina is home to the remains of four Roman temples dedicated to the gods Jupiter, Juno, and Mars, dating back to the 3rd century BC. Sacred area with Republican temple pediments below street level—cat sanctuary in the excavation pit. The area was originally named after the nearby medieval tower, Torre Argentina. Excavated between 1929 and 1960, it has yielded significant artifacts and sculptures. Today, it&#x27;s also famous for its cat sanctuary, where numerous feline residents roam freely among the ruins. Visitors can explore the site through guided tours or self-guided walks. Adjacent to the ruins stands the Church of Santa Maria del Rosario. Viewing platforms change with renovation phases. Jewish Ghetto restaurants border the block.</p>
 <p class="prose">Discovered during excavations in the early 20th century, these ruins were once part of a vast complex known as the Regia, the official residence of Roman kings. The site gained international fame when archaeologists uncovered the remains of Julius Caesar&#x27;s assassination site, now marked by a bronze statue. Temples A–D identified by debate; Caesar fell nearby in the Curia of Pompey&#x27;s theatre. This historical site offers visitors a rare glimpse into ancient Roman civilization, blending archaeological significance with scenic charm. Archaeology meets feline charity under traffic roar.</p></div>
 </section>
 <section class="place" id="rome_mausoleum_of_augustus">
+<div class="place-lead">
 <h3>Mausoleum of Augustus</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Classical Roman | Period: 28 BC</p>
-<figure class="place-fig"><img src="../images/rome_mausoleum_of_augustus.jpg" alt="Mausoleum of Augustus"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_mausoleum_of_augustus.jpg" alt="Mausoleum of Augustus" width="1280" height="720" style="height: 259px; max-height: 259px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_mausoleum_of_augustus_b.jpg" alt="Mausoleum of Augustus — view 2" width="330" height="247" style="height: 259px; max-height: 259px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Mausoleum of Augustus is a majestic ancient monument, originally designed as the final resting place for Rome&#x27;s first emperor and his family. It stands as one of the most iconic symbols of Roman imperial power and architectural grandeur. Constructed using limestone and marble, the structure originally had a circular design with a domed roof. It stood approximately 87 meters high when complete, making it one of the tallest structures in Rome at that time. Today, only the base and part of the outer wall remain, but these ruins still evoke the grandeur of ancient Rome. The site also includes archaeological excavations revealing more about the original layout and architecture. Its location on the Via Flaminia highlights its strategic importance within the city.</p>
 <p class="prose">Built during the reign of Emperor Augustus around 28 BC, the mausoleum was intended to house his remains and those of future members of his dynasty. Designed by architect Agrippa, it served both as a tomb and a shrine to celebrate the new era of Roman rule under Augustus. Its massive scale and intricate decorations made it a focal point of Rome’s urban landscape. Visiting the Mausoleum of Augustus offers insight into the grandiose ambitions of the early Roman Empire and its enduring legacy.</p></div>
 </section>
 <section class="place" id="rome_testaccio_monte">
+<div class="place-lead">
 <h3>Monte Testaccio</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/rome_testaccio_monte.jpg" alt="Monte Testaccio"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_testaccio_monte.jpg" alt="Monte Testaccio" width="1280" height="834" style="height: 301px; max-height: 301px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_testaccio_monte_b.jpg" alt="Monte Testaccio — view 2" width="330" height="236" style="height: 301px; max-height: 301px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Monte Testaccio is a massive archaeological site and man-made hill located on the outskirts of Rome. It rises above the Tiber River, offering panoramic views of the city below. It is one of the largest artificial mounds in Europe. The hill contains over 50 million pieces of pottery. Monte Testaccio has been designated as a national monument since 1928. Today, it serves as both a tourist attraction and a nature reserve. Its location makes it an ideal spot for birdwatching.</p>
 <p class="prose">Built during the Roman Empire as a dumping ground for broken pottery and ceramics, Monte Testaccio was once a vast repository of amphora fragments. Over time, it grew into a significant landfill, reaching its current height of around 34 meters. The hill&#x27;s name derives from &#x27;testa&#x27; meaning head, referencing the ceramic heads that were commonly found here. Visiting Monte Testaccio provides insight into ancient Roman waste management practices and offers a unique perspective on the city&#x27;s historical development.</p></div>
 </section>
-<section class="place" id="rome_pdfband_2_2f129e05">
+<section class="place" id="rome_moschea">
+<div class="place-lead">
 <h3>Moschea</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: See official visitor information.</p>
-<figure class="place-fig"><img src="../images/rome_pdfband_2_2f129e05.jpg" alt="Moschea"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_moschea.jpg" alt="Moschea" width="1280" height="960" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_moschea_b.jpg" alt="Moschea — view 2" width="330" height="247" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 </section>
 <section class="place" id="rome_bocca_della_verita">
+<div class="place-lead">
 <h3>Mouth of Truth</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Santa Maria in Cosmedin porch | Style: Ancient Roman sculptural drain cover | Period: AD 14–37</p>
-<figure class="place-fig"><img src="../images/rome_bocca_della_verita.jpg" alt="Mouth of Truth"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_bocca_della_verita.jpg" alt="Mouth of Truth" width="1067" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_bocca_della_verita_b.jpg" alt="Mouth of Truth — view 2" width="330" height="439" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Mouth of Truth is a famous ancient Roman sculpture depicting the head of a woman with an open mouth, located within the Church of Santa Maria in Cosmedin on the Via del Corso. It has become one of Rome&#x27;s most iconic symbols. Ancient manhole mask carved as river god face—Hollywood made it an honesty gag. It is believed to be carved from travertine stone. Legend says the sculpture guards against liars by biting off their hand. The site also features the Bocca della Verità Fountain, which contains the sculpture. During the Middle Ages, the area became known for being haunted due to local folklore. Today, visitors can see the sculpture amidst a bustling piazza filled with cafes and shops. Arrive early or wait in sun-exposed line. Circus Maximus and Aventine are walking distance.</p>
 <p class="prose">Originally created as part of a fountain during the reign of Emperor Tiberius around AD 14–37, the sculpture was rediscovered in 1659 and moved to its current location in 1822. Its name derives from a legend that states anyone who tells lies while placing their hand inside the mouth will have it bitten off. Medieval transfer to the church porch; queue photos keep the myth alive. Visiting the Mouth of Truth offers a glimpse into Rome’s rich historical heritage and provides an opportunity to experience one of the city&#x27;s lesser-known but intriguing attractions. Quick stop beside the tiny Cosmati-floored church.</p></div>
 </section>
 <section class="place" id="rome_palazzo_barberini">
+<div class="place-lead">
 <h3>Palazzo Barberini</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Baroque | Period: 1629–1633</p>
-<figure class="place-fig"><img src="../images/rome_palazzo_barberini.jpg" alt="Palazzo Barberini"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_palazzo_barberini.jpg" alt="Palazzo Barberini" width="1280" height="960" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_palazzo_barberini_b.jpg" alt="Palazzo Barberini — view 2" width="330" height="219" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">It was commissioned by Pope Urban VIII and designed by architect Francesco Borromini between 1629 and 1633. It contains the renowned Galleria Nazionale d&#x27;Arte Antica, showcasing masterpieces by artists such as Caravaggio and Raphael. The gardens surrounding the palazzo feature beautiful fountains and statues designed by Bernini himself. Its architecture, blending classical elements with Baroque exuberance, is considered a prime example of Roman Baroque style. In addition to its art collection, the palazzo also features a library with rare manuscripts and historical documents. Today it serves as a museum open to the public, offering visitors a glimpse into the opulent lifestyle of the aristocratic families of the past.</p>
 <p class="prose">Built during the early 17th century under the patronage of Cardinal Maffeo Barberini, later Pope Urban VIII, the palazzo served as both a private residence and a cultural center for the powerful Barberini family. Its interior boasts lavish decorations, including frescoes by Pietro da Cortona and sculptures by Bernini, reflecting the opulence and artistic prowess of the era. A must-visit for art lovers, the Palazzo Barberini houses one of the most important collections of Baroque art in Rome.</p></div>
 </section>
-<section class="place" id="rome_pdfband_9_c17302d7">
-<h3>Rom</h3>
-
-<p class="place-meta">Address: See official visitor information.</p>
-<figure class="place-fig"><img src="../images/rome_pdfband_9_c17302d7.jpg" alt="Rom"/></figure>
-<div class="place-desc"><p class="prose">Rom — Wikimedia disambiguation page.</p></div>
-</section>
 <section class="place" id="rome_pantheon">
+<div class="place-lead">
 <h3>Pantheon</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Piazza della Rotonda | Style: Ancient Roman / early Christian | Period: around 126 AD</p>
-<figure class="place-fig"><img src="../images/rome_pantheon.jpg" alt="Pantheon"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_pantheon.jpg" alt="Pantheon" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_pantheon_b.jpg" alt="Pantheon — view 2" width="330" height="244" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Pantheon is Rome&#x27;s most iconic temple and one of the best-preserved ancient buildings in the world. Its domed roof, constructed without the use of mortar, stands as a testament to Roman engineering prowess. Domed temple-turned-church with the world&#x27;s largest unreinforced concrete dome and clear oculus. Its dome is the largest unreinforced concrete dome ever built. It has remained largely intact since its construction nearly two millennia ago. The building was consecrated as a Catholic church in 7th century AD. The oculus is the sole source of daylight within the structure. Restoration work began in the late 17th century under Pope Urban VIII. Mass times suspend tourist circulation briefly. Fountain in the square frames façade photos after rain.</p>
 <p class="prose">Built around 126 AD by Emperor Hadrian, the Pantheon originally served as a pagan temple dedicated to all gods. It was later converted into a Christian church during the Middle Ages. The oculus at its center allows natural light to flood the interior, creating a breathtaking effect. Hadrianic rebuilding on an earlier plan; Christian consecration saved it from spoliation. Visit the Pantheon for its architectural marvels, historical significance, and stunning interior design. Raphael&#x27;s tomb and free entry for worship balance with tourist crowding at midday.</p></div>
 </section>
 <section class="place" id="rome_piazza_del_campidoglio">
+<div class="place-lead">
 <h3>Piazza del Campidoglio</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Renaissance | Period: early 16th century</p>
-<figure class="place-fig"><img src="../images/rome_piazza_del_campidoglio.jpg" alt="Piazza del Campidoglio"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_piazza_del_campidoglio.jpg" alt="Piazza del Campidoglio" width="1280" height="815" style="height: 294px; max-height: 294px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_piazza_del_campidoglio_b.jpg" alt="Piazza del Campidoglio — view 2" width="330" height="244" style="height: 294px; max-height: 294px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Perched high above Rome&#x27;s historic center, Piazza del Campidoglio is a majestic square framed by the Palazzo Senatorio and the Capitoline Museums. It serves as one of the city&#x27;s most iconic landmarks, showcasing Renaissance architecture at its finest. The square features three imposing buildings designed by Michelangelo: the Palazzo dei Conservatori, Palazzo Nuovo, and the Capitoline Museums. It overlooks the Forum Romanum and the Colosseum, offering panoramic views of Rome&#x27;s historical core. The square is home to the famous statue of Marcus Aurelius, originally located here before being moved to the Musei Capitolini. Michelangelo&#x27;s design incorporates travertine stone, a material associated with ancient Roman monuments. In 1947, it was designated as a UNESCO World Heritage Site.</p>
 <p class="prose">Designed by Michelangelo in the early 16th century, Piazza del Campidoglio was intended to be the symbolic heart of ancient Rome. The square replaced earlier medieval structures and became a symbol of papal authority and Roman grandeur. Its symmetrical layout and grand monuments reflect the classical ideals of harmony and proportion. Visiting Piazza del Campidoglio offers a unique opportunity to immerse oneself in Rome’s rich historical heritage and admire some of the best examples of Renaissance art and architecture.</p></div>
 </section>
 <section class="place" id="rome_piazza_del_popolo">
+<div class="place-lead">
 <h3>Piazza del Popolo</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: neoclassical | Period: late 16th century</p>
-<figure class="place-fig"><img src="../images/rome_piazza_del_popolo.jpg" alt="Piazza del Popolo"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_piazza_del_popolo.jpg" alt="Piazza del Popolo" width="1280" height="919" style="height: 326px; max-height: 326px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_piazza_del_popolo_b.jpg" alt="Piazza del Popolo — view 2" width="330" height="233" style="height: 326px; max-height: 326px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">At the heart of Rome&#x27;s historic center lies Piazza del Popolo, a majestic square that has been a hub for centuries. Surrounded by ancient churches and monuments, it is one of the most iconic meeting points in the city. It is located at the northern terminus of the Via Flaminia, which once connected Rome to northern Italy and France. The square features twin neoclassical portals designed by Giacomo della Porta and Domenico Fontana. In the center stands the Egyptian Obelisk of Horus, transported from Heliopolis in 1589. Two additional obelisks were added later, representing Rome&#x27;s historical ties to Egypt and Christianity. Today, the square remains a vibrant spot for locals and tourists alike, offering panoramic views of Rome’s famous churches and streets.</p>
 <p class="prose">Built in the late 16th century during the papacy of Sixtus V, Piazza del Popolo was designed to celebrate the end of the Via Flaminia, the ancient road leading northward from Rome. The square originally featured two obelisks flanking its entrance, symbolizing Rome&#x27;s connection to Egypt and the ancient world. Over time, the piazza became known as a gathering place for festivals, processions, and public executions. Visit Piazza del Popolo to experience the fusion of classical architecture and religious art, with its iconic churches of Santa Maria dei Miracoli and Santa Maria in Montesanto.</p></div>
 </section>
 <section class="place" id="rome_piazza_navona">
+<div class="place-lead">
 <h3>Piazza Navona</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
-<p class="place-meta">Address: Historic centre | Style: Baroque square | Period: 16th century</p>
-<figure class="place-fig"><img src="../images/rome_piazza_navona.jpg" alt="Piazza Navona"/></figure>
+<p class="place-meta">Location: Historic centre | Style: Baroque square | Period: 16th century</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_piazza_navona.jpg" alt="Piazza Navona" width="1280" height="806" style="height: 290px; max-height: 290px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_piazza_navona_b.jpg" alt="Piazza Navona — view 2" width="330" height="228" style="height: 290px; max-height: 290px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">In the heart of Rome&#x27;s historic center lies Piazza Navona, a breathtaking square that was originally built as the site for Nero’s infamous Circus Games. Today it is one of the most iconic and vibrant spaces in the city. Stadium footprint turned Baroque salon—Bernini&#x27;s Four Rivers versus Borromini&#x27;s church façade story. The three famous fountains—Fontana dei Quattro Fiumi, Fontana del Moro, and Fontana del Nettuno—were designed by Bernini and his contemporaries. Pope Innocent X commissioned the construction of Palazzo Pamphili to house his family, which now houses the Galleria d’Arte Antica museum. Each Sunday morning, street vendors set up stalls selling fruits, vegetables, and handicrafts around the square. At night, Piazza Navona transforms into a bustling pedestrian zone filled with tourists, locals, and performers. It is often referred to as &#x27;the people&#x27;s square&#x27; due to its central location and frequent use by Romans. Cafés trade on the view; prices match location. Sant&#x27;Agnese in Agone balances opposite the fountain.</p>
 <p class="prose">Constructed on the ruins of Emperor Domitian’s stadium, Piazza Navona served as a circus where chariot races were held during ancient Roman times. The name &#x27;Navona&#x27; derives from the Latin word &#x27;quadrana nova,&#x27; meaning &#x27;new square.&#x27; Over time, the piazza became a hub for religious festivals, political gatherings, and social life. Ancient athletics track; Innocent X Pamphilj reshaped family palaces and fountains in the 1600s. A must-visit for its stunning Baroque architecture, lively fountains, and charming atmosphere, Piazza Navona offers visitors a glimpse into both ancient and modern Rome. Street artists, Christmas market stalls, and night façades.</p></div>
 </section>
 <section class="place" id="rome_ponte_sant_angelo">
+<div class="place-lead">
 <h3>Ponte Sant&#x27;Angelo</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
-<p class="place-meta">Address: Tiber near Castel Sant&#x27;Angelo | Style: Ancient Roman bridge / Baroque statues | Period: 136 AD</p>
-<figure class="place-fig"><img src="../images/rome_ponte_sant_angelo.jpg" alt="Ponte Sant&#x27;Angelo"/></figure>
+<p class="place-meta">Location: Tiber near Castel Sant&#x27;Angelo | Style: Ancient Roman bridge / Baroque statues | Period: 136 AD</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_ponte_sant_angelo.jpg" alt="Ponte Sant&#x27;Angelo" width="1280" height="960" style="height: 232px; max-height: 232px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_ponte_sant_angelo_b.jpg" alt="Ponte Sant&#x27;Angelo — view 2" width="330" height="166" style="height: 232px; max-height: 232px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Spanning the Tiber River and connecting Castel Sant&#x27;Angelo to the Vatican City, Ponte Sant&#x27;Angelo is one of Rome&#x27;s most iconic bridges. Angels with instruments cross the bridge—Bernini workshop sculpture lining Hadrian&#x27;s river crossing. Constructed using travertine stone, the bridge has remained largely unchanged since its initial construction. The bridge features eight marble angel sculptures designed by Giacomo della Porta in the 16th century. It was renovated extensively in the late 19th century under Pope Leo XIII. Ponte Sant&#x27;Angelo connects directly with Via del Corso, making it easily accessible from central Rome. Its location provides panoramic vistas of both the Vatican and Castel Sant&#x27;Angelo. Vehicular traffic limited—mostly pedestrian joy. Copy statues replaced weathered originals in museum care.</p>
 <p class="prose">Built by Emperor Hadrian around 136 AD, Ponte Sant&#x27;Angelo was originally named Pons Aelius. It served as a vital link between two important Roman landmarks: the mausoleum of Hadrian and St Pyotr&#x27;s Basilica. Over time, it became known for its statues of angels, which were added during the Renaissance era. Ancient core widened; Baroque promotion to pilgrimage décor. A must-visit for architecture enthusiasts and those seeking historical significance, Ponte Sant&#x27;Angelo offers stunning views of the Tiber and the surrounding cityscape. Classic dusk alignment with castle and dome backdrop.</p></div>
 </section>
 <section class="place" id="rome_jewish_ghetto_portico_octavia">
+<div class="place-lead">
 <h3>Portico d&#x27;Ottavia</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Roman Imperial Architecture | Period: 1st century AD</p>
-<figure class="place-fig"><img src="../images/rome_jewish_ghetto_portico_octavia.jpg" alt="Portico d&#x27;Ottavia"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_jewish_ghetto_portico_octavia.jpg" alt="Portico d&#x27;Ottavia" width="1280" height="960" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--row-sized"><img src="../images/rome_jewish_ghetto_portico_octavia_b.jpg" alt="Portico d&#x27;Ottavia — view 2" width="330" height="543" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Portico d’Ottavia is a grand ancient Roman portico, originally built as part of the larger complex known as the Domus Aurea by Emperor Nero. It was later reconstructed and adapted during the reign of Emperor Augustus around 1st century AD. It is located near the Palatine Hill and the Colosseum, making it easily accessible to tourists exploring these iconic sites. The portico features columns with Corinthian capitals, typical of Roman architecture. Its reconstruction during the time of Emperor Augustus highlights the enduring legacy of Roman engineering and design. Today, it serves as a peaceful oasis amidst the bustling streets of Rome. Portions of its original structure remain intact, offering historians valuable insights into ancient construction techniques.</p>
 <p class="prose">Originally constructed under Emperor Nero’s Domus Aurea, the Portico d’Ottavia was restructured and renamed after Octavia Minor, sister of Emperor Augustus. This elegant colonnaded structure served both practical and ceremonial purposes, providing shade for pedestrians while also being used for official gatherings and celebrations. A highlight of Rome&#x27;s architectural heritage, it offers visitors a glimpse into the opulence and grandeur of ancient Roman society.</p></div>
 </section>
 <section class="place" id="rome_pyramid_of_cestius">
+<div class="place-lead">
 <h3>Pyramid of Cestius</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Porta San Paolo, Testaccio | Style: Late-Roman eclectic / Egyptianizing | Period: circa 18 BC</p>
-<figure class="place-fig"><img src="../images/rome_pyramid_of_cestius.jpg" alt="Pyramid of Cestius"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_pyramid_of_cestius.jpg" alt="Pyramid of Cestius" width="1067" height="1600" style="height: 364px; max-height: 364px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_pyramid_of_cestius_b.jpg" alt="Pyramid of Cestius — view 2" width="330" height="260" style="height: 364px; max-height: 364px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Pyramid of Cestius is a unique ancient Roman tomb located on the via Nomentana, just outside the historical center of Rome. Built around 18 BC, it stands as one of the most striking examples of Roman architecture and engineering. Narrow limestone pyramid wedged into the Aurelian Wall—Egyptomania of the late Republic. Built circa 18 BC. Commissioned by Gaius Cestius Epulo. Combines Egyptian and Roman architectural styles. Made entirely of polished white marble. Located near the ancient Appian Way. Exterior only for casual visits. Combine with Testaccio food scene or Ostiense murals.</p>
 <p class="prose">Constructed during the reign of Augustus, the pyramid was commissioned by Gaius Cestius Epulo, a prominent Roman magistrate. It served as his burial monument, combining Egyptian architectural elements with Roman design principles. The structure&#x27;s precise proportions and use of polished marble make it stand out among other tombs of its time. Tomb for magistrate Caius Cestius; incorporated into defensive circuit. Visiting the Pyramid of Cestius offers insight into the fusion of Roman and Egyptian styles, showcasing how ancient Romans adapted foreign influences to create their own distinctive forms of art and architecture. Strange skyline punctuation beside the Protestant Cemetery gate.</p></div>
 </section>
+<section class="place" id="rome_rom">
+<div class="place-lead">
+<h3>Rom</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
+
+<p class="place-meta">Address: See official visitor information.</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_rom.jpg" alt="Rom" width="1280" height="865" style="height: 312px; max-height: 312px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_pdfband_9_c17302d7_b.jpg" alt="Rom — view 2" width="330" height="247" style="height: 312px; max-height: 312px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Rom — Wikimedia disambiguation page.</p></div>
+</section>
 <section class="place" id="rome_roman_forum">
+<div class="place-lead">
 <h3>Roman Forum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Between Colosseum and Capitoline Hill | Style: Ancient Roman civic architecture</p>
-<figure class="place-fig"><img src="../images/rome_roman_forum.jpg" alt="Roman Forum"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_roman_forum.jpg" alt="Roman Forum" width="1280" height="528" style="height: 168px; max-height: 168px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_roman_forum_b.jpg" alt="Roman Forum — view 2" width="330" height="120" style="height: 168px; max-height: 168px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Roman Forum is the ancient heart of Rome, where centuries of history and power were debated, decided, and celebrated. Civic core of ancient Rome—temple basements, basilica foundations, and worn Via Sacra paving. Located between the Capitoline Hill and Palatine Hill, it spans approximately 34 acres. It was the site of important rituals during the Republic and Empire periods. Archaeological excavations continue to uncover new layers of history beneath the ruins. The Forum was surrounded by notable structures such as the Temple of Saturn and the Curia Julia. Today, visitors can walk among the ruins and imagine the bustling activity that once filled these spaces. Enter from Via dei Fori Imperiali gates or combined ticket routes. Morning light throws long shadows across column stumps.</p>
 <p class="prose">Once the political, religious, and commercial center of the Roman Empire, the Roman Forum was the stage for key moments in Roman civilization, including speeches by famous orators like Cicero and Julius Caesar. It housed temples, markets, and government buildings, serving as a hub for civic life until its decline after the fall of the empire. Republican meeting place; imperial rebuilding; medieval reuse as pasture—hence &#x27;Campo Vaccino&#x27;. Visit the Roman Forum to experience the birthplace of Western democracy and the cradle of Roman law and culture. Layers from Rostra speeches to triumphal processions readable with a map.</p></div>
 </section>
-<section class="place" id="rome_pdfband_1_da829d8c">
-<h3>Italy</h3>
-
-<p class="place-meta">Address: See official visitor information.</p>
-<figure class="place-fig"><img src="../images/rome_pdfband_1_da829d8c.jpg" alt="Italy"/></figure>
-</section>
-<section class="place" id="rome_pdfband_0_01b7073a">
+<section class="place" id="rome_san_giovanni_in_laterano">
+<div class="place-lead">
 <h3>San Giovanni in Laterano</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: See official visitor information.</p>
-<figure class="place-fig"><img src="../images/rome_pdfband_0_01b7073a.jpg" alt="San Giovanni in Laterano"/></figure>
+<figure class="place-fig place-fig--hi-res"><img src="../images/rome_san_giovanni_in_laterano.jpg" alt="San Giovanni in Laterano" width="1280" height="959"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Archbasilica of St. John Lateran — cathedral in Rome, Italy.</p></div>
 </section>
 <section class="place" id="rome_santa_maria_trastevere">
+<div class="place-lead">
 <h3>Santa Maria in Trastevere</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Piazza di Santa Maria in Trastevere | Style: Medieval basilica | Period: 4th century AD</p>
-<figure class="place-fig"><img src="../images/rome_santa_maria_trastevere.jpg" alt="Santa Maria in Trastevere"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_santa_maria_trastevere.jpg" alt="Santa Maria in Trastevere" width="1280" height="1280" style="height: 462px; max-height: 462px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_santa_maria_trastevere_b.jpg" alt="Santa Maria in Trastevere — view 2" width="330" height="418" style="height: 462px; max-height: 462px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Situated in the lively and vibrant Trastevere neighborhood, Santa Maria in Trastevere is one of Rome&#x27;s oldest churches, dating back to the 4th century AD. Its intricate mosaics and ancient frescoes make it a treasure trove for art lovers. Early basilica famous for glittering 12th-century mosaics in the apse and façade crown. It is considered one of the seven historic basilicas of Rome. The interior boasts breathtaking mosaics depicting biblical scenes. Its bell tower provides panoramic views over the Tiber River and surrounding areas. The church was restored extensively after World War II bomb damage. In 1980, it was elevated to the rank of minor basilica. Interior photography—check current signage. Tram and cobbles approach from many angles.</p>
 <p class="prose">Built around 349 AD by Pope Marcellinus, Santa Maria in Trastevere was originally dedicated to Saint Stephen. Over the centuries, it has undergone several renovations and expansions, particularly during the Renaissance when its stunning mosaics were added. The church also served as a refuge for early Christians during persecutions. Legendary founding ties to pope Callixtus; medieval rebuild shapes today&#x27;s nave. Visiting Santa Maria in Trastevere offers a glimpse into Roman history and religious heritage, showcasing some of the most exquisite medieval and Renaissance artworks in Rome. Anchor of Trastevere&#x27;s evening life beyond the portraits.</p></div>
 </section>
 <section class="place" id="rome_spanish_steps">
+<div class="place-lead">
 <h3>Spanish Steps</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Piazza di Spagna | Style: Rococo urban staircase | Period: 1723–1726</p>
-<figure class="place-fig"><img src="../images/rome_spanish_steps.jpg" alt="Spanish Steps"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_spanish_steps.jpg" alt="Spanish Steps" width="1067" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_spanish_steps_b.jpg" alt="Spanish Steps — view 2" width="330" height="488" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Spanish Steps are Rome&#x27;s most iconic staircase, a breathtakingly elegant monument that connects the Piazza di Spagna with Trinità dei Monti church above. Wide staircase linking the French church of Trinità dei Monti to the Barcaccia fountain below. Consists of 135 steps leading up to the Church of Trinità dei Monti. Named after the nearby Spanish Embassy. Designed in Baroque style, reflecting the grandiose architecture typical of Rome. Located at the end of Via del Babuino, a street known for its antique shops and cafes. One of the most photographed spots in Rome. Keats-Shelley House sits at the right foot. Metro Spagna exits into constant motion.</p>
 <p class="prose">Built between 1723 and 1726 during Pope Benedict XIII’s reign, these steps were designed by architect Francesco de Sanctis to link the busy piazza below with the serene church above. The steps became famous as a meeting point for artists, intellectuals, and tourists alike, immortalized in paintings and films over the years. 18th-century design; recent rules ban sitting on the steps—polite lingering standing only. A must-visit landmark for its beauty, cultural significance, and romantic atmosphere. Fashion-week scenery and azalea ribbons in spring.</p></div>
 </section>
 <section class="place" id="rome_st_peters_basilica">
+<div class="place-lead">
 <h3>St. Peter&#x27;s Basilica</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Vatican City (Saint Peter&#x27;s Square) | Style: Renaissance / Baroque | Period: began in 1506</p>
-<figure class="place-fig"><img src="../images/rome_st_peters_basilica.jpg" alt="St. Peter&#x27;s Basilica"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_st_peters_basilica.jpg" alt="St. Peter&#x27;s Basilica" width="1280" height="896" style="height: 240px; max-height: 240px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_st_peters_basilica_b.jpg" alt="St. Peter&#x27;s Basilica — view 2" width="330" height="172" style="height: 240px; max-height: 240px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Sitting majestically at the center of Vatican City, St. Pyotr’s Basilica is one of the most iconic and revered Christian structures in the world. Its soaring dome, designed by Michelangelo, dominates the Roman skyline. Renaissance-Baroque basilica whose dome dominates the skyline; this card stresses the exterior approach. The basilica can accommodate up to 60,000 people during mass. It features four massive columns known as the &#x27;four pillars of faith&#x27;. Its interior contains numerous works of art by famous artists such as Raphael and Caravaggio. The dome, completed in 1626, is the largest brick dome in the world. Pope Benedict XVI celebrated his final Easter Mass here before resigning. Climbing the dome is a separate ticket with tight stairs. Official photo rules apply inside; façade images are less restricted.</p>
 <p class="prose">Built on the site where Saint Pyotr was believed to be buried, construction began under Pope Julius II in 1506 and continued for over a century. The basilica combines elements of Renaissance and Baroque architecture, showcasing the artistic brilliance of artists like Bernini and Michelangelo. Bramante, Michelangelo, Maderno, and Bernini shaped successive campaigns across the 16th–17th centuries. A must-visit for anyone interested in art, architecture, and Catholic history, St. Pyotr’s Basilica offers breathtaking interiors and stunning views from its lofty dome. Major pilgrimage goal; dress modestly in the piazza and expect security queues.</p></div>
 </section>
 <section class="place" id="rome_trajan_column">
+<div class="place-lead">
 <h3>Trajan&#x27;s Column</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Trajan&#x27;s Forum | Style: Imperial Roman commemorative | Period: AD 106–113</p>
-<figure class="place-fig"><img src="../images/rome_trajan_column.jpg" alt="Trajan&#x27;s Column"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_trajan_column.jpg" alt="Trajan&#x27;s Column" width="875" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--row-sized"><img src="../images/rome_trajan_column_b.jpg" alt="Trajan&#x27;s Column — view 2" width="330" height="745" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Towering above the Roman Forum, Trajan&#x27;s Column stands as a majestic monument to Emperor Trajan&#x27;s military victories and Rome&#x27;s imperial glory. Spiral relief chronicle of the Dacian wars—engineering feat inside its own courtyard. The column is approximately 30 meters tall and consists of 23 spiral levels. Each level features detailed bas-reliefs that tell the story of Trajan&#x27;s campaigns against the Dacians. It was constructed using travertine stone and decorated with sculpted figures by celebrated artists of the time. Atop the column sits a bronze statue of Emperor Trajan himself. The base of the column contains a small museum showcasing archaeological finds related to the construction and significance of the site. Street angle reveals upper bands better than distant views. Combine with nearby Imperial Fora walkways.</p>
 <p class="prose">Built between AD 106 and 113 during the reign of Emperor Trajan, the column commemorates his conquests in Dacia. Carved into its marble surface are intricate reliefs depicting battles, processions, and ceremonies, offering a vivid historical record of ancient Rome’s expansionist ambitions. Dedicated 113 CE; base once held ashes of Trajan and Plotina. Visiting Trajan&#x27;s Column allows travelers to witness firsthand the artistic and architectural achievements of ancient Rome while gaining insight into the empire&#x27;s military prowess and cultural pride. Scholars still read the helical narrative like a strip cartoon of empire.</p></div>
 </section>
 <section class="place" id="rome_trevi_fountain">
+<div class="place-lead">
 <h3>Trevi Fountain</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Piazza di Trevi | Style: Late Baroque fountain architecture | Period: 1732–1762</p>
-<figure class="place-fig"><img src="../images/rome_trevi_fountain.jpg" alt="Trevi Fountain"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_trevi_fountain.jpg" alt="Trevi Fountain" width="1280" height="850" style="height: 250px; max-height: 250px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_trevi_fountain_b.jpg" alt="Trevi Fountain — view 2" width="330" height="179" style="height: 250px; max-height: 250px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Trevi Fountain is Rome&#x27;s most iconic landmark, a masterpiece of Baroque architecture that dominates the Piazza di Trevi. Completed in 1762 after decades of construction, it stands as one of Italy’s greatest monuments. Baroque terminus of the Aqua Virgo acqueduct—Nicola Salvi&#x27;s stone theatre of sea myths. It is the largest Baroque fountain in Rome. Legend has it that throwing a coin into the fountain ensures a return to Rome. Each day, thousands of euros are collected from coins thrown into the water. The fountain underwent extensive restoration work in the late 20th century. Its design includes statues representing the four rivers of the world: Nile, Ganges, Danube, and Rio de la Plata. Stand back on Palazzo Poli steps for symmetrical shots. Peak hours need patience; dawn is almost silent.</p>
 <p class="prose">Commissioned by Pope Clement XII in 1732, the fountain was designed by Nicola Salvi and later completed by Giuseppe Niccolini. It features three tiers with sculptures symbolizing Abundance, Health, and Salus Publica Romae. The famous scene depicts Oceanus, god of the sea, surrounded by tritons and seahorses. Completed in the 1760s; coin-toss folklore funds charitable maintenance today. A must-visit for its breathtaking beauty and cultural significance, the Trevi Fountain is a magnet for tourists worldwide. Night floodlighting and cramped cobbles define the experience—pickpockets love the squeeze.</p></div>
 </section>
 <section class="place" id="rome_vittoriano">
+<div class="place-lead">
 <h3>Victor Emmanuel II Monument</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Piazza Venezia | Style: Nationalist neo-classical monumental | Period: 1885–1911</p>
-<figure class="place-fig"><img src="../images/rome_vittoriano.jpg" alt="Victor Emmanuel II Monument"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_vittoriano.jpg" alt="Victor Emmanuel II Monument" width="1280" height="720" style="height: 259px; max-height: 259px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_vittoriano_b.jpg" alt="Victor Emmanuel II Monument — view 2" width="330" height="424" style="height: 259px; max-height: 259px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Victor Emmanuel II Monument is a majestic national symbol located at the heart of Rome&#x27;s historical center, standing as a testament to Italian unification and the city&#x27;s rich political heritage. White marble &#x27;wedding cake&#x27; honouring unified Italy—wide stairs, eternal flame, and museums within. It stands on the site where Mussolini delivered his famous Fascist speeches during the 1920s. The monument is often referred to as Altare della Patria (&#x27;Altar of the Fatherland&#x27;). Its design incorporates elements of neoclassical architecture, blending Roman and Renaissance styles. At night, the monument is illuminated, making it one of Rome’s most iconic nighttime landmarks. Located near important sites such as the Roman Forum and the Colosseum, it serves as a convenient meeting point. Bright sun bleaches detail—polarizing filter helps cameras. Symbolic sentinels guard the Unknown Soldier—stay respectful.</p>
 <p class="prose">Built between 1885 and 1911, the monument was commissioned by King Victor Emmanuel II to commemorate the unity of Italy after decades of fragmentation. Designed by Giuseppe Sacconi, it features a soaring obelisk topped with a bronze statue of the king himself, overlooking the wide Piazza Venezia. The monument also houses the Tomb of the Unknown Soldier, honoring those who sacrificed their lives for the nation. Early 20th-century nationalist monument; Romans debate aesthetics but use the panorama. Visiting the monument offers a deep insight into Italy’s modern history and its transformation from separate states into a unified country. Elevator or stair access to terraces over the Forum grid.</p></div>
 </section>
 <section class="place" id="rome_villa_borghese">
+<div class="place-lead">
 <h3>Villa Borghese</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
-<p class="place-meta">Address: Pincian Hill / north of historic centre | Style: Italian landscape garden | Period: Early 17th century</p>
-<figure class="place-fig"><img src="../images/rome_villa_borghese.jpg" alt="Villa Borghese"/></figure>
+<p class="place-meta">Location: Pincian Hill / north of historic centre | Style: Italian landscape garden | Period: Early 17th century</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_villa_borghese.jpg" alt="Villa Borghese" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_villa_borghese_b.jpg" alt="Villa Borghese — view 2" width="330" height="262" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Situated on the northern outskirts of Rome, Villa Borghese is one of Italy&#x27;s most celebrated urban parks. Its vast acreage provides visitors with a serene escape from bustling city life, offering scenic vistas and tranquil walking paths. Park of shaded paths, fake ruins, lake rowboats, and the Borghese Gallery mansion. It houses the Galleria Borghese, home to some of the finest collections of ancient Roman sculpture and Baroque art in the world. The park features a variety of landscapes including formal gardens, wooded areas, and lakeside promenades. Visitors can enjoy performances at the open-air theater during summer months. Its iconic obelisk, known as the Egyptian Obelisk, stands prominently within the park’s central plaza. In addition to its cultural attractions, Villa Borghese offers a range of recreational activities like cycling, jogging, and picnicking. Gallery slots are timed and sell out. Bioparco zoo occupies part of the estate.</p>
 <p class="prose">Originally built by Pope Urban VIII Barberini in the early 17th century as a private garden for his family, Villa Borghese later became part of the extensive papal estates. Over time it was expanded and transformed into a public park under the patronage of Cardinal Scipione Borghese, who commissioned numerous sculptures and fountains to adorn its grounds. Cardinal Scipione Borghese&#x27;s 17th-century pleasure ground—opened gradually to public strolls. A must-visit for art lovers and nature enthusiasts alike, Villa Borghese showcases masterpieces by artists such as Bernini and Canova. Escapes heat; Piazza di Siena hosts equestrian events.</p></div>
 </section>
 <section class="place" id="rome_park_villa_borghese_lake">
+<div class="place-lead">
 <h3>Villa Borghese lake</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Period: late 19th century</p>
-<figure class="place-fig"><img src="../images/rome_park_villa_borghese_lake.jpg" alt="Villa Borghese lake"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_park_villa_borghese_lake.jpg" alt="Villa Borghese lake" width="1280" height="831" style="height: 299px; max-height: 299px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_park_villa_borghese_lake_b.jpg" alt="Villa Borghese lake — view 2" width="330" height="247" style="height: 299px; max-height: 299px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Nestled within the vast Villa Borghese park, the artificial lake is a tranquil oasis surrounded by lush greenery and classical sculptures. It offers a serene escape from bustling Rome, providing a picturesque setting for leisurely strolls and boating excursions. The lake covers approximately 4 hectares and is fed by underground springs. It serves as a popular spot for rowing and pedal boat rentals during warmer months. Classical statues and fountains line the shores, adding to the scenic ambiance. Boats can be hired directly on-site for leisure cruises around the lake. In autumn, the surrounding trees turn golden, creating a breathtaking backdrop.</p>
 <p class="prose">Constructed in the late 19th century as part of Pope Pius IX&#x27;s vision to enhance the beauty of Villa Borghese, the lake was originally designed to complement the park&#x27;s landscape architecture. Today it remains one of the most iconic features of the park, attracting visitors with its elegant charm and natural beauty. Visiting the Villa Borghese lake allows guests to experience the harmonious blend of nature and art, offering a peaceful retreat amidst Rome’s vibrant urban life.</p></div>
 </section>
 <section class="place" id="rome_villa_farnesina">
+<div class="place-lead">
 <h3>Villa Farnesina</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Renaissance | Period: Early 16th century</p>
-<figure class="place-fig"><img src="../images/rome_villa_farnesina.jpg" alt="Villa Farnesina"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_villa_farnesina.jpg" alt="Villa Farnesina" width="1280" height="1399" style="height: 161px; max-height: 161px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_villa_farnesina_b.jpg" alt="Villa Farnesina — view 2" width="330" height="115" style="height: 161px; max-height: 161px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Situated on the banks of the Tiber River, Villa Farnesina is a breathtaking Renaissance villa renowned for its sumptuous frescoes and lavish interiors. Designed by architect Giuliano da Sangallo and decorated by artists like Rosso Fiorentino and Pintoricchio, it was commissioned by Cardinal Alessandro Farnese during the early 16th century. The villa’s name derives from its owner, Cardinal Alessandro Farnese, who also became Pope Paul III. It features frescoes by notable artists such as Raphael’s assistant, Rosso Fiorentino, and Pinturicchio. Its architecture combines elements of classical Roman design with contemporary Renaissance aesthetics. Today, visitors can explore both the exterior gardens and the interior rooms filled with historical artifacts and paintings. Located within easy reach of Rome’s historic center, the villa offers a tranquil escape amidst the bustling city.</p>
 <p class="prose">Built around 1510, Villa Farnesina served as a luxurious residence for Cardinal Alessandro Farnese, later Pope Paul III. The villa&#x27;s interior boasts some of the most exquisite examples of Italian Renaissance art, including frescoes depicting mythological scenes and allegories painted by prominent artists of the time. Visitors come to Villa Farnesina to admire its stunning decorations and the rich artistic heritage of the Italian Renaissance.</p></div>
 </section>
 <section class="place" id="rome_villa_sciarra">
+<div class="place-lead">
 <h3>Villa Sciarra</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Baroque | Period: late 17th century</p>
-<figure class="place-fig"><img src="../images/rome_villa_sciarra.jpg" alt="Villa Sciarra"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_villa_sciarra.jpg" alt="Villa Sciarra" width="1280" height="821" style="height: 296px; max-height: 296px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_villa_sciarra_b.jpg" alt="Villa Sciarra — view 2" width="330" height="247" style="height: 296px; max-height: 296px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Situated on the Janiculum Hill, Villa Sciarra is a picturesque park offering panoramic views of Rome and its iconic landmarks. It was originally constructed as a private villa during the late 17th century by Cardinal Pietro Ottoboni, who commissioned architect Francesco de Sanctis to design it. The villa’s interior features intricate frescoes and decorative elements typical of the Baroque era. It offers unparalleled vistas over the Tiber River and St. Villa Sciarra hosts occasional cultural events and concerts during summer months. Its grounds include formal gardens, flower beds, and statues depicting Roman mythological figures. Access to the park is free and easily accessible via public transport.</p>
 <p class="prose">Built in the late 17th century for Cardinal Pietro Ottoboni, Villa Sciarra has been a prominent landmark since then. The villa&#x27;s architecture reflects the Baroque style with lavish interiors and ornate gardens. Over time, it evolved into a public park open to visitors, showcasing beautiful fountains, sculptures, and a serene atmosphere. Visitors come here to enjoy breathtaking views of Rome, relax amidst well-manicured lawns, and explore the historical significance of the site.</p></div>
 </section>

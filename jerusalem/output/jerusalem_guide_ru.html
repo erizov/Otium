@@ -13,7 +13,7 @@ body { font-family: 'Rubik', sans-serif; margin: 2rem;
 .otium-logo { font-family: 'David Libre', serif; font-size: 2.15rem;
   font-weight: 600; letter-spacing: 0.18em; margin-bottom: 0.85rem; }
 .otiump { margin: 0.42rem 0; line-height: 1.42; text-align: justify;
-  max-width: 38rem; font-size: 0.95rem; }
+  font-size: 0.95rem; }
 .guide-title { page-break-after: auto; margin-bottom: 0.55rem;
   page-break-inside: avoid; }
 .historical-reference { margin: 0.75rem 0 1.15rem;
@@ -63,22 +63,103 @@ ol.trip-stops a:hover { text-decoration: underline; }
 .heraldry-univ-caption { font-size: 0.52rem; line-height: 1.18;
   margin: 0.12rem 0 0; padding: 0 0.06rem; color: #252525;
   text-align: center; font-weight: 500; }
-.heraldry-motto { text-align: center; max-width: 18rem; margin: 0.18rem auto;
+.heraldry-motto { text-align: center; margin: 0.18rem auto;
   width: 100%; }
 .motto-line { font-family: 'David Libre', serif; font-size: 1rem;
   margin: 0; color: #333; line-height: 1.35; }
 .guide-title h1.guide-title-main { font-family: 'David Libre', serif;
   font-size: 2.35rem; margin-bottom: 0.5rem; font-weight: 600; }
 .lead { color: #444; font-size: 1.05rem; }
-.guide-toc { margin: 0.85rem 0 1.15rem; page-break-inside: avoid; }
-.guide-toc h2 { font-family: 'David Libre', serif; font-size: 1.28rem;
-  font-weight: 600; margin: 0.4rem 0 0.55rem; }
+
+.guide-toc { page-break-before: always; break-before: page;
+  page-break-after: always; break-after: page;
+  margin: 0; padding: 0.2rem 0 0.45rem; page-break-inside: auto; }
+.guide-toc h2 { font-family: 'David Libre', serif;
+  font-size: 1.28rem; font-weight: 600; margin: 0.4rem 0 0.55rem; }
 .guide-toc ol { margin: 0.35rem 0 0.65rem 1.25rem; padding: 0;
   columns: 2; column-gap: 1.5rem; }
 .guide-toc li { margin: 0.18rem 0; line-height: 1.35;
   font-size: 0.88rem; break-inside: avoid; }
-.guide-toc a { color: #1a5276; text-decoration: none; }
+.guide-toc a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.guide-toc a:hover { color: #0d3d56; }
 .guide-toc li.toc-item--sub { font-size: 0.82rem; margin-left: 0.35rem; }
+.toc-back { font-size: 0.78rem; margin: 0 0 0.35rem; text-align: right; }
+.toc-back a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.toc-back a:hover { color: #0d3d56; }
+.place, .historical-reference, .guide-primer, .guide-trip-plans {
+  scroll-margin-top: 1.25rem; }
+.historical-reference h2, .guide-primer h2, .guide-trip-plans h2,
+.chapter-head h2, .place-lead h3 { position: relative; }
+.guide-toc + .place, .guide-toc + .chapter-head {
+  page-break-before: avoid; break-before: avoid-page; }
+.place-lead { page-break-inside: avoid; break-inside: avoid-page;
+  page-break-after: auto; }
+.place-lead > h3 { page-break-after: avoid; break-after: avoid-page; }
+.place-lead > .place-meta { page-break-after: avoid; break-after: avoid-page; }
+
+.place-fig { page-break-inside: avoid; break-inside: avoid-page;
+  margin: 0.5rem 0 1rem; }
+.place-fig img {
+  page-break-inside: avoid; break-inside: avoid-page;
+  max-height: 48vh; width: auto; max-width: 100%;
+  object-fit: contain; margin-left: auto; margin-right: auto; }
+.place-fig--hi-res img { max-height: 52vh; }
+.place-fig--lo-res img { max-height: 30vh; }
+.place-pdf-fig-row {
+  display: flex; flex-direction: row; flex-wrap: wrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.45rem 0.55rem; margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row .place-fig {
+  flex: 1 1 30%; margin: 0; min-width: 26%; max-width: 100%; }
+.place-pdf-fig-row .place-fig img {
+  width: auto; max-width: 100%; height: auto; max-height: 44vh;
+  object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--pair {
+  flex-wrap: nowrap; justify-content: space-between;
+  align-items: flex-end; gap: 0.5rem 0.65rem; }
+.place-pdf-fig-row--pair .place-fig {
+  flex: 1 1 47%; min-width: 0; max-width: 50%;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--pair .place-fig img {
+  max-height: 44vh; object-fit: contain; }
+.place-pdf-fig-row--pair .place-fig--hi-res img { max-height: 52vh; }
+.place-pdf-fig-row--pair .place-fig--lo-res img { max-height: 26vh; }
+.place-pdf-fig-row--pair .place-fig--row-sized img,
+.place-pdf-fig-row--triple .place-fig--row-sized img,
+.place-pdf-fig-row--many .place-fig--row-sized img {
+  width: auto; max-width: 100%; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row .place-fig--row-sized.place-fig--hi-res img,
+.place-pdf-fig-row .place-fig--row-sized.place-fig--lo-res img {
+  max-height: unset; }
+.place-pdf-fig-rows-stack {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple {
+  display: flex; flex-direction: row; flex-wrap: nowrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.4rem 0.48rem; margin: 0;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--triple .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--triple .place-fig--hi-res img { max-height: 42vh; }
+.place-pdf-fig-row--triple .place-fig--lo-res img { max-height: 18vh; }
+.place-pdf-fig-row--many {
+  flex-wrap: nowrap; justify-content: center; align-items: flex-end;
+  gap: 0.35rem 0.42rem; }
+.place-pdf-fig-row--many .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--many .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+
+
 .place { margin-bottom: 2.2rem; page-break-inside: auto; }
 h3 { font-family: 'David Libre', serif; font-size: 1.22rem; margin: 1.2rem 0 0.35rem;
   font-weight: 600; }
@@ -90,7 +171,6 @@ h4 { font-family: 'David Libre', serif; font-size: 0.95rem; text-transform: uppe
   color: #555; font-size: 0.95rem; margin: 0 0 0.5rem; font-style: italic; }
 .place-meta { font-size: 0.92rem; color: #353535; margin: 0 0 0.75rem;
   line-height: 1.4; }
-.place-fig { margin: 0.5rem 0 1rem; }
 img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
 .prose, .place-desc p { margin: 0.45rem 0; line-height: 1.5;
   text-align: justify; }
@@ -111,294 +191,482 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <figure class="heraldry-fig heraldry-coat-book" title="City emblem"><img src="../images/guide_coat_of_arms.svg" alt="City emblem"/></figure>
 <figure class="heraldry-fig heraldry-coat-book" title="Flag"><img src="../images/guide_flag.svg" alt="Flag"/></figure>
 </div></div><h1 class="guide-title-main">Jerusalem</h1><p class="lead">Путеводитель. Объектов в этом выпуске: 33.</p></header>
+<nav class="guide-toc" id="guide-toc" aria-label="Содержание"><h2>Содержание</h2><ol><li class="toc-item"><a href="#guide-historical">Историческая справка</a></li><li class="toc-item"><a href="#guide-trips">Маршруты</a></li><li class="toc-item"><a href="#jerusalem_church_holy_sepulchre">Jerusalem Church Holy Sepulchre</a></li><li class="toc-item"><a href="#jerusalem_church_of_all_nations_gethsemane">Jerusalem Church Of All Nations Gethsemane</a></li><li class="toc-item"><a href="#jerusalem_church_st_anne_jerusalem">Jerusalem Church St Anne Jerusalem</a></li><li class="toc-item"><a href="#jerusalem_church_st_peter_in_gallicantu">Jerusalem Church St Peter In Gallicantu</a></li><li class="toc-item"><a href="#jerusalem_dome_of_the_rock">Jerusalem Dome Of The Rock</a></li><li class="toc-item"><a href="#jerusalem_dormition_abbey_jerusalem">Jerusalem Dormition Abbey Jerusalem</a></li><li class="toc-item"><a href="#jerusalem_ein_kerem_village">Jerusalem Ein Kerem Village</a></li><li class="toc-item"><a href="#jerusalem_hamazreka">Jerusalem Hamazreka</a></li><li class="toc-item"><a href="#jerusalem_hurva_synagogue">Jerusalem Hurva Synagogue</a></li><li class="toc-item"><a href="#jerusalem_international_ymca">Jerusalem International Ymca</a></li><li class="toc-item"><a href="#jerusalem_israel_museum">Jerusalem Israel Museum</a></li><li class="toc-item"><a href="#jerusalem_jaffa_gate">Jerusalem Jaffa Gate</a></li><li class="toc-item"><a href="#jerusalem_knesset_jerusalem">Jerusalem Knesset Jerusalem</a></li><li class="toc-item"><a href="#jerusalem_lutheran_church_of_the_redeemer_jerusalem">Jerusalem Lutheran Church Of The Redeemer Jerusalem</a></li><li class="toc-item"><a href="#jerusalem_mahane_yehuda_market">Jerusalem Mahane Yehuda Market</a></li><li class="toc-item"><a href="#jerusalem_montefiore_windmill">Jerusalem Montefiore Windmill</a></li><li class="toc-item"><a href="#jerusalem_mount_of_olives_view">Jerusalem Mount Of Olives View</a></li><li class="toc-item"><a href="#jerusalem_old_city_ramparts_walk">Jerusalem Old City Ramparts Walk</a></li><li class="toc-item"><a href="#jerusalem_palace33">Jerusalem Palace33</a></li><li class="toc-item"><a href="#jerusalem_shrine_of_the_book">Jerusalem Shrine Of The Book</a></li><li class="toc-item"><a href="#jerusalem_st_george_s_cathedral">Jerusalem St George S Cathedral</a></li><li class="toc-item"><a href="#jerusalem_tower_of_david">Jerusalem Tower Of David</a></li><li class="toc-item"><a href="#jerusalem_via_dolorosa">Jerusalem Via Dolorosa</a></li><li class="toc-item"><a href="#jerusalem_western_wall">Jerusalem Western Wall</a></li><li class="toc-item"><a href="#jerusalem_yad_vashem">Jerusalem Yad Vashem</a></li><li class="toc-item"><a href="#jerusalem_damascus_gate">Ворота Дамаска</a></li><li class="toc-item"><a href="#jerusalem_mount_zion">Гора Сион</a></li><li class="toc-item"><a href="#jerusalem_garden_tomb">Садовая гробница</a></li><li class="toc-item"><a href="#jerusalem_pool_bethesda">Ставка Вифезда</a></li><li class="toc-item"><a href="#jerusalem_church_flagellation">Церковь Бичевания</a></li><li class="toc-item"><a href="#jerusalem_dominus_flevit">Церковь Доминиус Флевит</a></li><li class="toc-item"><a href="#jerusalem_church_pater_noster">Церковь Отче наш</a></li><li class="toc-item"><a href="#jerusalem_church_visitation">Церковь Посещения</a></li></ol></nav>
 <section class="historical-reference" id="guide-historical" aria-label="Историческая справка"><h2>Историческая справка</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 <p class="prose">Иерусалим — древний город на Иудейских горах, святыня трёх авраамических религий и столица Израиля.</p>
 <p class="prose">История от бронзового века через иудейский Храмовый период, римско-византийскую, исламскую и османскую эпохи до современного государства. Старый город, стены и святыни соседствуют с новыми кварталами науки и искусства.</p>
 <p class="prose">Разделение 1948–1967 годов и объединение города после 1967 года усложнили политический ландшафт. Современный Иерусалим сочетает технологии, университеты и религиозные общины, оставаясь точкой напряжённого, но незаменимого диалога цивилизаций.</p></section>
 <section class="guide-trip-plans" id="guide-trips" aria-label="Маршруты"><h2>Маршруты</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 <article class="trip-plan" id="trip-1d"><h3>Один день</h3>
 <p class="prose">Компактный маршрут по главным точкам путеводителя с минимальным возвратом назад пешком.</p>
-<ol class="trip-stops"><li><a href="#jerusalem_dominus_flevit">Церковь Доминиус Флевит</a> (~75мин)</li>
-<li><a href="#jerusalem_church_pater_noster">Церковь Отче наш</a> (~75мин)</li>
-<li><a href="#jerusalem_dome_of_the_rock">Jerusalem Dome Of The Rock</a> (~75мин)</li>
-<li><a href="#jerusalem_church_flagellation">Церковь Бичевания</a> (~75мин)</li>
-<li><a href="#jerusalem_pool_bethesda">Ставка Вифезда</a> (~75мин)</li>
-<li><a href="#jerusalem_via_dolorosa">Jerusalem Via Dolorosa</a> (~75мин)</li></ol></article>
-<article class="trip-plan" id="trip-3d1"><h3>Три дня — день 1</h3>
-<p class="prose">День 1 — центральный кластер.</p>
 <ol class="trip-stops"><li><a href="#jerusalem_garden_tomb">Садовая гробница</a> (~75мин)</li>
+<li><a href="#jerusalem_via_dolorosa">Jerusalem Via Dolorosa</a> (~75мин)</li>
 <li><a href="#jerusalem_lutheran_church_of_the_redeemer_jerusalem">Jerusalem Lutheran Church Of The Redeemer Jerusalem</a> (~75мин)</li>
 <li><a href="#jerusalem_church_holy_sepulchre">Jerusalem Church Holy Sepulchre</a> (~75мин)</li>
+<li><a href="#jerusalem_church_flagellation">Церковь Бичевания</a> (~75мин)</li>
+<li><a href="#jerusalem_pool_bethesda">Ставка Вифезда</a> (~75мин)</li></ol></article>
+<article class="trip-plan" id="trip-3d1"><h3>Три дня — день 1</h3>
+<p class="prose">День 1 — центральный кластер.</p>
+<ol class="trip-stops"><li><a href="#jerusalem_dominus_flevit">Церковь Доминиус Флевит</a> (~75мин)</li>
 <li><a href="#jerusalem_church_of_all_nations_gethsemane">Jerusalem Church Of All Nations Gethsemane</a> (~75мин)</li>
-<li><a href="#jerusalem_church_st_anne_jerusalem">Jerusalem Church St Anne Jerusalem</a> (~75мин)</li></ol></article>
+<li><a href="#jerusalem_church_pater_noster">Церковь Отче наш</a> (~75мин)</li>
+<li><a href="#jerusalem_church_st_anne_jerusalem">Jerusalem Church St Anne Jerusalem</a> (~75мин)</li>
+<li><a href="#jerusalem_church_st_peter_in_gallicantu">Jerusalem Church St Peter In Gallicantu</a> (~75мин)</li></ol></article>
 <article class="trip-plan" id="trip-3d2"><h3>Три дня — день 2</h3>
 <p class="prose">День 2 — следующая группа районов.</p>
-<ol class="trip-stops"><li><a href="#jerusalem_church_st_peter_in_gallicantu">Jerusalem Church St Peter In Gallicantu</a> (~75мин)</li>
-<li><a href="#jerusalem_church_visitation">Церковь Посещения</a> (~75мин)</li>
+<ol class="trip-stops"><li><a href="#jerusalem_church_visitation">Церковь Посещения</a> (~75мин)</li>
 <li><a href="#jerusalem_damascus_gate">Ворота Дамаска</a> (~75мин)</li>
+<li><a href="#jerusalem_dome_of_the_rock">Jerusalem Dome Of The Rock</a> (~75мин)</li>
 <li><a href="#jerusalem_dormition_abbey_jerusalem">Jerusalem Dormition Abbey Jerusalem</a> (~75мин)</li>
 <li><a href="#jerusalem_ein_kerem_village">Jerusalem Ein Kerem Village</a> (~75мин)</li></ol></article>
 <article class="trip-plan" id="trip-3d3"><h3>Три дня — день 3</h3>
 <p class="prose">День 3 — оставшиеся близкие объекты.</p>
 <ol class="trip-stops"><li><a href="#jerusalem_hurva_synagogue">Jerusalem Hurva Synagogue</a> (~75мин)</li>
 <li><a href="#jerusalem_international_ymca">Jerusalem International Ymca</a> (~75мин)</li></ol></article></section>
-<nav class="guide-toc" aria-label="Содержание"><h2>Содержание</h2><ol><li class="toc-item"><a href="#guide-historical">Историческая справка</a></li><li class="toc-item"><a href="#guide-trips">Маршруты</a></li><li class="toc-item"><a href="#jerusalem_church_of_all_nations_gethsemane">Jerusalem Church Of All Nations Gethsemane</a></li><li class="toc-item"><a href="#jerusalem_church_st_anne_jerusalem">Jerusalem Church St Anne Jerusalem</a></li><li class="toc-item"><a href="#jerusalem_church_st_peter_in_gallicantu">Jerusalem Church St Peter In Gallicantu</a></li><li class="toc-item"><a href="#jerusalem_church_flagellation">Церковь Бичевания</a></li><li class="toc-item"><a href="#jerusalem_church_holy_sepulchre">Jerusalem Church Holy Sepulchre</a></li><li class="toc-item"><a href="#jerusalem_church_pater_noster">Церковь Отче наш</a></li><li class="toc-item"><a href="#jerusalem_church_visitation">Церковь Посещения</a></li><li class="toc-item"><a href="#jerusalem_damascus_gate">Ворота Дамаска</a></li><li class="toc-item"><a href="#jerusalem_dome_of_the_rock">Jerusalem Dome Of The Rock</a></li><li class="toc-item"><a href="#jerusalem_dominus_flevit">Церковь Доминиус Флевит</a></li><li class="toc-item"><a href="#jerusalem_dormition_abbey_jerusalem">Jerusalem Dormition Abbey Jerusalem</a></li><li class="toc-item"><a href="#jerusalem_ein_kerem_village">Jerusalem Ein Kerem Village</a></li><li class="toc-item"><a href="#jerusalem_garden_tomb">Садовая гробница</a></li><li class="toc-item"><a href="#jerusalem_pdfband_3_4ca02d45">Hamazreka</a></li><li class="toc-item"><a href="#jerusalem_hurva_synagogue">Jerusalem Hurva Synagogue</a></li><li class="toc-item"><a href="#jerusalem_israel_museum">Jerusalem Israel Museum</a></li><li class="toc-item"><a href="#jerusalem_jaffa_gate">Jerusalem Jaffa Gate</a></li><li class="toc-item"><a href="#jerusalem_international_ymca">Jerusalem International Ymca</a></li><li class="toc-item"><a href="#jerusalem_knesset_jerusalem">Jerusalem Knesset Jerusalem</a></li><li class="toc-item"><a href="#jerusalem_lutheran_church_of_the_redeemer_jerusalem">Jerusalem Lutheran Church Of The Redeemer Jerusalem</a></li><li class="toc-item"><a href="#jerusalem_mahane_yehuda_market">Jerusalem Mahane Yehuda Market</a></li><li class="toc-item"><a href="#jerusalem_montefiore_windmill">Jerusalem Montefiore Windmill</a></li><li class="toc-item"><a href="#jerusalem_mount_of_olives_view">Jerusalem Mount Of Olives View</a></li><li class="toc-item"><a href="#jerusalem_mount_zion">Гора Сион</a></li><li class="toc-item"><a href="#jerusalem_old_city_ramparts_walk">Jerusalem Old City Ramparts Walk</a></li><li class="toc-item"><a href="#jerusalem_pdfband_9_4d56a8e1">Palace33</a></li><li class="toc-item"><a href="#jerusalem_pool_bethesda">Ставка Вифезда</a></li><li class="toc-item"><a href="#jerusalem_shrine_of_the_book">Jerusalem Shrine Of The Book</a></li><li class="toc-item"><a href="#jerusalem_pdfband_0_3d212d2d">St George&#x27;s Cathedral</a></li><li class="toc-item"><a href="#jerusalem_tower_of_david">Jerusalem Tower Of David</a></li><li class="toc-item"><a href="#jerusalem_via_dolorosa">Jerusalem Via Dolorosa</a></li><li class="toc-item"><a href="#jerusalem_western_wall">Jerusalem Western Wall</a></li><li class="toc-item"><a href="#jerusalem_yad_vashem">Jerusalem Yad Vashem</a></li></ol></nav>
+<section class="place" id="jerusalem_church_holy_sepulchre">
+<div class="place-lead">
+<h3>Jerusalem Church Holy Sepulchre</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Old City, Christian Quarter</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/jerusalem_church_holy_sepulchre.jpg" alt="Jerusalem Church Holy Sepulchre" width="1280" height="1280" style="height: 301px; max-height: 301px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_church_holy_sepulchre_b.jpg" alt="Jerusalem Church Holy Sepulchre — вид 2" width="330" height="215" style="height: 301px; max-height: 301px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Крупная паломническая церковь, охватывающая места и традиции, связанные с распятием и воскресением. Несколько христианских общин совместно осуществляют опеку в рамках «Статус-Кво». Ротонда покрывает эдикулу над гробницей; расписание может повлиять на доступ внутрь. Лесенка (или лестница) на фасаде является символом межобщинного воздержания с XVIII века.</p>
+<p class="prose">Комплекс эпохи Константина был заменен и расширен на протяжении столетий; крестоносцы оставили заметный след в пространствах латинского обряда, которые видны сегодня. Для многих христиан по всему миру это символическое сердце священной топографии Иерусалима.</p></div>
+</section>
 <section class="place" id="jerusalem_church_of_all_nations_gethsemane">
+<div class="place-lead">
 <h3>Jerusalem Church Of All Nations Gethsemane</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/jerusalem_church_of_all_nations_gethsemane.jpg" alt="Jerusalem Church Of All Nations Gethsemane"/></figure>
+<p class="place-meta">Адрес: Mount of Olives, beside the Garden of Gethsemane</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/jerusalem_church_of_all_nations_gethsemane.jpg" alt="Jerusalem Church Of All Nations Gethsemane" width="1280" height="922" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_church_of_all_nations_gethsemane_b.jpg" alt="Jerusalem Church Of All Nations Gethsemane — вид 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Паломническая базилика, расположенная на скальном выступе, где, согласно преданию, находились муки Христа; фиолетовые окна интерьера придают нефу полумрак и благоговейное настроение. Часто называемый Базиликой Страстей Голгофы наряду с его официальным названием. Оливковые деревья в прилегающем саду почитаются, хотя их возраст оспаривается ботаниками.</p>
 <p class="prose">На этом месте до нынешнего здания располагалась череда святилищ, спонсируемых различными католическими общинами, и придавала атмосфере Гефсиманского сада обстановку для массового паломничества в XX веке. Ключевое христианское место на Горице Оливной, в сочетании с панорамными смотровыми площадками и террасами еврейского кладбища над Кидроном.</p></div>
 </section>
 <section class="place" id="jerusalem_church_st_anne_jerusalem">
+<div class="place-lead">
 <h3>Jerusalem Church St Anne Jerusalem</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/jerusalem_church_st_anne_jerusalem.jpg" alt="Jerusalem Church St Anne Jerusalem"/></figure>
+<p class="place-meta">Адрес: Muslim Quarter near Lions’ Gate (St Stephen’s Gate)</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/jerusalem_church_st_anne_jerusalem.jpg" alt="Jerusalem Church St Anne Jerusalem" width="1280" height="900" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_church_st_anne_jerusalem_b.jpg" alt="Jerusalem Church St Anne Jerusalem — вид 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Лучше сохранившаяся крестоносная церковь в городе, традиционно отмечающая место рождения Марии; ее каменные объемы вознаграждают внимательное слушание, когда поют паломники. Археологический комплекс «Бассейны Беф» обычно посещается по тому же билету. Миссионеры Африки (Белые отцы) управляют церковью.</p>
 <p class="prose">Саладин превратил здание в исламскую школу; реставрация восстановила крестоносный облик для христианской литургии, уважая многослойное прошлое этого места. Для историков это образец романского стиля; для паломников — марианская местность на краю археологии храмовой платформы.</p></div>
 </section>
 <section class="place" id="jerusalem_church_st_peter_in_gallicantu">
+<div class="place-lead">
 <h3>Jerusalem Church St Peter In Gallicantu</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/jerusalem_church_st_peter_in_gallicantu.jpg" alt="Jerusalem Church St Peter In Gallicantu"/></figure>
+<p class="place-meta">Адрес: Eastern slope of Mount Zion</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/jerusalem_church_st_peter_in_gallicantu.jpg" alt="Jerusalem Church St Peter In Gallicantu" width="1280" height="859" style="height: 310px; max-height: 310px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_church_st_peter_in_gallicantu_b.jpg" alt="Jerusalem Church St Peter In Gallicantu — вид 2" width="330" height="247" style="height: 310px; max-height: 310px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Комплекс римско-католической церкви, посвященный отречению Петра; крутые лестницы соединяют верхнюю церковь, часовни и подземные залы, связанные с тюремным заключением. Мотив кричащего петуха встречается в мозаиках и вывесках (до крика петуха). Учёные спорят, является ли крипта тюрьмой главного жреца; архитектура делает этот спор осязаемым.</p>
 <p class="prose">Византийские и крестоносные часовни предшествовали современному базилике; раскопки обнаружили иудейскую кладку, высеченную в склоне холма. Южный противовес нарративу Святой Гроба — память о вине, покаянии и рассвете.</p></div>
 </section>
-<section class="place" id="jerusalem_church_flagellation">
-<h3>Церковь Бичевания</h3>
-
-
-<figure class="place-fig"><img src="../images/jerusalem_church_flagellation.jpg" alt="Церковь Бичевания"/></figure>
-<div class="place-desc"><p class="prose">Церковь Бичевания — это значимый религиозный объект, расположенный в сердце Иерусалима, который увековечивает традиционное место, где Иисус был осужден на распятие. Эта церковь является частью Виа Долороза, пути, по которому, как считается, шел Иисус на Голгофу. Посетители могут восхищаться её красивой архитектурой и сложными произведениями искусства, изображающими страсти Христовы. Церковь была построена в 1863 году францисканцами. Он расположен вдоль Виа Долороза, пути, по которому, как считается, Иисус шел на свою казнь.</p>
-<p class="prose">Церковь Бичевания была построена в 19 веке, а именно в 1863 году, францисканцами. Она расположена на месте, где, как считается, Иисус был бичуем и осуждаем перед своей распятием. Церковь была возведена в рамках усилий францисканцев по установлению и сохранению христианских святых мест в Иерусалиме. Церковь Бичевания имеет глубокое религиозное значение для христиан, так как она отмечает ключевой момент в повествовании о Страданиях. Она привлекает паломников и туристов, внося вклад в культурное наследие Иерусалима. Церковь также является частью более широкой истории Виа Долороза, которая является важным паломническим маршрутом для многих христиан.</p></div>
-</section>
-<section class="place" id="jerusalem_church_holy_sepulchre">
-<h3>Jerusalem Church Holy Sepulchre</h3>
-
-
-<figure class="place-fig"><img src="../images/jerusalem_church_holy_sepulchre.jpg" alt="Jerusalem Church Holy Sepulchre"/></figure>
-<div class="place-desc"><p class="prose">Крупная паломническая церковь, охватывающая места и традиции, связанные с распятием и воскресением. Несколько христианских общин совместно осуществляют опеку в рамках «Статус-Кво». Ротонда покрывает эдикулу над гробницей; расписание может повлиять на доступ внутрь. Лесенка (или лестница) на фасаде является символом межобщинного воздержания с XVIII века.</p>
-<p class="prose">Комплекс эпохи Константина был заменен и расширен на протяжении столетий; крестоносцы оставили заметный след в пространствах латинского обряда, которые видны сегодня. Для многих христиан по всему миру это символическое сердце священной топографии Иерусалима.</p></div>
-</section>
-<section class="place" id="jerusalem_church_pater_noster">
-<h3>Церковь Отче наш</h3>
-
-
-<figure class="place-fig"><img src="../images/jerusalem_church_pater_noster.jpg" alt="Церковь Отче наш"/></figure>
-<div class="place-desc"><p class="prose">Церковь Отче наш, расположенная на Елеонской горе в Иерусалиме, является значимым местом для христианских паломников. Считается, что именно здесь Иисус учил своих учеников молитве Отче наш. Церковь украшена красивыми мозаиками и предлагает потрясающие виды на Старый город. Церковь построена на традиционном месте, где, как считается, Иисус учил Отче наш. Он украшен мозаиками Отче наш на более чем 140 языках.</p>
-<p class="prose">Церковь Отче наш была изначально построена в IV веке и претерпела несколько реконструкций, при этом нынешняя структура была завершена в XX веке. Она расположена на месте, которое давно связано с учениями Иисуса, особенно с молитвой Господней. С культурной точки зрения, Церковь Отче наш является важным местом паломничества, привлекая посетителей со всего мира, которые стремятся соединиться с духовным наследием христианства. Мозаики церкви, изображающие Отче наш на различных языках, отражают универсальный характер этой молитвы и ее значение в христианской традиции.</p></div>
-</section>
-<section class="place" id="jerusalem_church_visitation">
-<h3>Церковь Посещения</h3>
-
-
-<figure class="place-fig"><img src="../images/jerusalem_church_visitation.jpg" alt="Церковь Посещения"/></figure>
-<div class="place-desc"><p class="prose">Церковь Посещения, расположенная в живописных холмах Эйн-Карем, является значимым местом, посвященным визиту Девы Марии к ее кузине Елизавете. Эта прекрасная церковь известна своей впечатляющей архитектурой и яркими мозаиками, что делает ее обязательным местом для посещения теми, кто исследует духовный и исторический ландшафт Иерусалима. Церковь расположена в Эйн-Кареме, районе Иерусалима. Он посвящен библейскому событию Посещения, когда Мария посещает Елизавету.</p>
-<p class="prose">Церковь Посещения была построена в 1955 году на месте, традиционно считающемся тем, где Мария посетила Елизавету, как описано в Евангелии от Луки. Церковь построена на месте более ранних византийских и крестоносных церквей, что отражает давнюю религиозную значимость этого места. Культурно Церковь Посещения является важным местом паломничества для христиан, особенно во время Праздника Посещения. Искусство и архитектура церкви способствуют богатому наследию Иерусалима, и она служит местом поклонения и размышлений для посетителей со всего мира.</p></div>
-</section>
-<section class="place" id="jerusalem_damascus_gate">
-<h3>Ворота Дамаска</h3>
-
-
-<figure class="place-fig"><img src="../images/jerusalem_damascus_gate.jpg" alt="Ворота Дамаска"/></figure>
-<div class="place-desc"><p class="prose">Ворота Дамаска, один из самых знаковых входов в Старый город Иерусалима, славятся своей потрясающей архитектурой и богатой историей. Этот монументальный вход с его впечатляющим каменным фасадом и сложными деталями служит оживленным центром активности, соединяя различные районы и культуры. Посетители могут исследовать яркий рынок поблизости и насладиться живой атмосферой, окружающей этот исторический памятник. Дамасские ворота — одни из восьми ворот Старого города Иерусалима. Ворота отличаются своим большим заостренным аркой и декоративной каменной кладкой.</p>
-<p class="prose">Дамасские ворота относятся к 16 веку и были построены в османский период. Они расположены вдоль древнего пути, ведущего в Дамаск, что исторически сделало их важной точкой входа в Иерусалим. Ворота стали свидетелями множества ключевых событий на протяжении истории, включая военные кампании и паломничества. Политически, Ворот Дамаска был ключевой точкой во время различных конфликтов и протестов, символизируя сложную динамику власти и территории в Иерусалиме. Культурно, он является важной частью наследия города, демонстрируя традиционную архитектуру и служа вратами к разнообразным общинам внутри Старого города. Район вокруг ворот заполнен магазинами и кафе, отражая повседневную жизнь и традиции жителей Иерусалима.</p></div>
-</section>
 <section class="place" id="jerusalem_dome_of_the_rock">
+<div class="place-lead">
 <h3>Jerusalem Dome Of The Rock</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/jerusalem_dome_of_the_rock.jpg" alt="Jerusalem Dome Of The Rock"/></figure>
+<p class="place-meta">Адрес: Temple Mount / Haram al-Sharif (access rules vary)</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/jerusalem_dome_of_the_rock.jpg" alt="Jerusalem Dome Of The Rock" width="1280" height="850" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_dome_of_the_rock_b.jpg" alt="Jerusalem Dome Of The Rock — вид 2" width="330" height="465" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Восьмиугольный святилище с позолоченным куполом, построенный над обнаженной скалой на вершине геродианской платформы. Изменились правила посещения для немусульман; ожидается скромная одежда, когда доступ открыт. Интерьеры коранические надписи являются одними из самых ранних монументальных примеров арабской письменности. Профиль барабана и купола стал знаковым силуэтом в исламской архитектуре.</p>
 <p class="prose">Умайядский халифат возвёл это сооружение как доказательство своей легитимности в Иерусалиме; позже, с использованием плитки и мрамора, его внешний вид был преображён в соответствии с османским вкусом. Это здание является основой визуальной и религиозной идентичности Харама для мусульман и формирует панорамные виды над Старым городом.</p></div>
 </section>
-<section class="place" id="jerusalem_dominus_flevit">
-<h3>Церковь Доминиус Флевит</h3>
-
-
-<figure class="place-fig"><img src="../images/jerusalem_dominus_flevit.jpg" alt="Церковь Доминиус Флевит"/></figure>
-<div class="place-desc"><p class="prose">Церковь Доминиус Флевит, расположенная на Елеонской горе в Иерусалиме, является впечатляющей римско-католической церковью, которая увековечивает место, где, как считается, Иисус плакал над городом. Ее уникальный дизайн, напоминающий слезу, предлагает посетителям не только место для поклонения, но и потрясающие виды на Старый город. Церковь является спокойным местом для размышлений и молитвы, привлекая как паломников, так и туристов. Церковь была завершена в 1955 году. Он расположен на Масличной горе и предлагает панорамные виды на Иерусалим. Архитектура церкви спроектирована так, чтобы напоминать слезу.</p>
-<p class="prose">Церковь Доминиус Флевит была построена в 1955 году, спроектирована итальянским архитектором Антонио Барлуцци. Она расположена на месте, которое традиционно считается тем, где Иисус оплакивал судьбу Иерусалима, как упоминается в Евангелии от Луки. Церковь была возведена для замены ранее существовавшей часовни в этом районе. Церковь имеет значительное религиозное значение, так как является местом паломничества для христиан, которые приходят размышлять о библейском повествовании о печали Иисуса по Иерусалиму. Культурно она является неотъемлемой частью ландшафта Иерусалима, внося вклад в богатую ткань религиозного наследия города и привлекая посетителей со всего мира.</p></div>
-</section>
 <section class="place" id="jerusalem_dormition_abbey_jerusalem">
+<div class="place-lead">
 <h3>Jerusalem Dormition Abbey Jerusalem</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1900–1910</p>
-<figure class="place-fig"><img src="../images/jerusalem_dormition_abbey_jerusalem.jpg" alt="Jerusalem Dormition Abbey Jerusalem"/></figure>
+<p class="place-meta">Адрес: Mount Zion, Jerusalem | Период: 1900–1910</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/jerusalem_dormition_abbey_jerusalem.jpg" alt="Jerusalem Dormition Abbey Jerusalem" width="1280" height="961" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_dormition_abbey_jerusalem_b.jpg" alt="Jerusalem Dormition Abbey Jerusalem — вид 2" width="330" height="248" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Бенедиктинский монастырь с ротондой, где по традиции совершается «засыпание Девы Марии»; статуи в крипте и верхняя церковь сочетают монументальность с тихим пением. Сообщество сохраняет латинскую литургию, одновременно принимая туристов по расписанию. Многоуровничная панорама крыш старого города открывается с эспланады, прежде чем вы спуститесь к Воротам Сиона.</p>
 <p class="prose">Построен на землях, связанных с средневековыми святилищами Дормиции; поврежден в результате волнений XX века и восстановлен как символ усилий Германии и Святого Престола по примирению. Главная латинская паломническая ось на горе Сион, рядом с традициями Верхней Комнаты и еврейскими кладбищами на западном холме.</p></div>
 </section>
 <section class="place" id="jerusalem_ein_kerem_village">
+<div class="place-lead">
 <h3>Jerusalem Ein Kerem Village</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/jerusalem_ein_kerem_village.jpg" alt="Jerusalem Ein Kerem Village"/></figure>
+<p class="place-meta">Адрес: Southwest Jerusalem hills</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/jerusalem_ein_kerem_village.jpg" alt="Jerusalem Ein Kerem Village" width="1280" height="789" style="height: 284px; max-height: 284px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_ein_kerem_village_b.jpg" alt="Jerusalem Ein Kerem Village — вид 2" width="330" height="328" style="height: 284px; max-height: 284px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Тихий район-деревня на холме с тихими улочками, садами и церковными комплексами; более спокойная альтернатива плотности Старого города. Часто посещается ради кафе и коротких прогулок среди живописных мест. Весной и ранним утром каменная текстура хорошо смотрится на фотографиях.</p>
 <p class="prose">Долгое время являвшееся сельской деревней за стенами Иерусалима, Эйн-Керем было интегрировано в город по мере расширения западных кварталов. Место для передышки: оливковые террасы, воздух и простор, контрастирующие с тесно застроенными улочками Старого города.</p></div>
 </section>
-<section class="place" id="jerusalem_garden_tomb">
-<h3>Садовая гробница</h3>
+<section class="place" id="jerusalem_hamazreka">
+<div class="place-lead">
+<h3>Jerusalem Hamazreka</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/jerusalem_garden_tomb.jpg" alt="Садовая гробница"/></figure>
-<div class="place-desc"><p class="prose">Садовая гробница — это спокойное место, расположенное за пределами стен Старого города Иерусалима, которое многие считают местом погребения и воскресения Иисуса Христа. Окруженная зелеными садами, она предлагает мирную атмосферу для размышлений и молитвы. Посетители могут исследовать саму гробницу и насладиться красотой окружающего пейзажа. Садовая гробница расположена за пределами Старого города Иерусалима. Он был открыт в 1867 году генералом Чарльзом Гордоном. Сайт поддерживается Ассоциацией Сада Гроба, христианской организацией.</p>
-<p class="prose">Садовая гробница была обнаружена в 1867 году генералом Чарльзом Гордоном, который предложил ее как место погребения Иисуса. С тех пор этот район стал местом христианского паломничества, хотя он не является общепринятым как подлинное место захоронения, поскольку Церковь Святого Гроба считается более традиционным местом. Садовая гробница имеет глубокое религиозное значение для многих христиан, которые рассматривают её как символ воскресения Иисуса. Она служит местом паломничества и поклонения, привлекая посетителей со всего мира, которые стремятся соединиться со своей верой в спокойной обстановке. Это место также вносит вклад в богатое культурное наследие Иерусалима, отражая разнообразную религиозную историю города.</p></div>
-</section>
-<section class="place" id="jerusalem_pdfband_3_4ca02d45">
-<h3>Hamazreka</h3>
-
-
-<figure class="place-fig"><img src="../images/jerusalem_pdfband_3_4ca02d45.jpg" alt="Hamazreka"/></figure>
+<p class="place-meta">Адрес: See official visitor information.</p>
+<figure class="place-fig place-fig--hi-res"><img src="../images/jerusalem_hamazreka.jpg" alt="Jerusalem Hamazreka" width="1280" height="960"/></figure>
+</div>
 </section>
 <section class="place" id="jerusalem_hurva_synagogue">
+<div class="place-lead">
 <h3>Jerusalem Hurva Synagogue</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/jerusalem_hurva_synagogue.jpg" alt="Jerusalem Hurva Synagogue"/></figure>
+<p class="place-meta">Адрес: Jewish Quarter, Old City</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/jerusalem_hurva_synagogue.jpg" alt="Jerusalem Hurva Synagogue" width="1280" height="794" style="height: 286px; max-height: 286px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_hurva_synagogue_b.jpg" alt="Jerusalem Hurva Synagogue — вид 2" width="330" height="219" style="height: 286px; max-height: 286px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Знаменитая синагога на плато Старого города, восстановленная после десятилетий пребывания в руинах; её купол восстановил панораму Еврейского квартала. Название «Хурва» (руина) напоминает о банкротстве более ранней общины XVIII века. Восстановленный интерьер возрождает монументальный османский стиль.</p>
 <p class="prose">Циклы строительства, разрушения и мемориального использования отражают бурную современную историю еврейских общин Иерусалима. Центр паломничества и место для изучения многослойной археологии и памяти квартала.</p></div>
 </section>
+<section class="place" id="jerusalem_international_ymca">
+<div class="place-lead">
+<h3>Jerusalem International Ymca</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: King David Street 26 | Период: 1926–1933</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/jerusalem_international_ymca.jpg" alt="Jerusalem International Ymca" width="900" height="1600" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_international_ymca_b.jpg" alt="Jerusalem International Ymca — вид 2" width="330" height="247" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Панорамная башня и аркады рядом с отелем Короля Давида; на кампусе располагаются концертные залы, спортивные объекты и языковые программы. Архитектор также разработал центральные проспекты Нью-Дели — сравните мускулический образец кладки. Этот выступ обеспечивает смотровые площадки над западной долиной.</p>
+<p class="prose">Построенный в период Британского мандата как межконфессиональный гражданский жест с монументальной каменной отделкой. Заметный «пунктуационный знак» мандатовой эпохи между старыми стенами и современными западными районами.</p></div>
+</section>
 <section class="place" id="jerusalem_israel_museum">
+<div class="place-lead">
 <h3>Jerusalem Israel Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/jerusalem_israel_museum.jpg" alt="Jerusalem Israel Museum"/></figure>
+<p class="place-meta">Адрес: Derekh Ruppin 11</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/jerusalem_israel_museum.jpg" alt="Jerusalem Israel Museum" width="1280" height="960" style="height: 266px; max-height: 266px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_israel_museum_b.jpg" alt="Jerusalem Israel Museum — вид 2" width="330" height="190" style="height: 266px; max-height: 266px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Энциклопедический музей Израиля: археология, изобразительное искусство, иудаика и временные выставки на террасном кампусе рядом с районом парламента. Кампус включает маршруты открытой скульптуры и многоуровневые сады. Рукописи Мертвого моря выставлены в соседнем Храме Книги.</p>
 <p class="prose">Изначально основанный как национальный центр коллекций, строительство последовательных крыльев расширило его роль в сфере сохранения и публичного просвещения. Стандартная полудневная программа для посетителей, которые хотят получить контекст до или после прогулки по Старому городу.</p></div>
 </section>
 <section class="place" id="jerusalem_jaffa_gate">
+<div class="place-lead">
 <h3>Jerusalem Jaffa Gate</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/jerusalem_jaffa_gate.jpg" alt="Jerusalem Jaffa Gate"/></figure>
+<p class="place-meta">Адрес: Old City western entrance</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/jerusalem_jaffa_gate.jpg" alt="Jerusalem Jaffa Gate" width="1280" height="959" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_jaffa_gate_b.jpg" alt="Jerusalem Jaffa Gate — вид 2" width="330" height="356" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Главные ворота из западного Иерусалима в Старый город; примыкает к центральной торговой оси улицы Давида в сторону Храма Гроба Господня. Напротив находится музейный комплекс «Сионская цитадель» (Tower of David) внутри цитадели. Уровень улицы опускается в сторону площади Отто и Мамилли, меняя панораму в сумерках.</p>
 <p class="prose">Контур стен Сулеймана определил ворота современного Старого города; прорезь для каретного проезда относится к эпохе поздней османской модернизации. Первое знакомство большинства посетителей с османским ограждением и его суетой.</p></div>
 </section>
-<section class="place" id="jerusalem_international_ymca">
-<h3>Jerusalem International Ymca</h3>
-
-<p class="place-meta">Период: 1926–1933</p>
-<figure class="place-fig"><img src="../images/jerusalem_international_ymca.jpg" alt="Jerusalem International Ymca"/></figure>
-<div class="place-desc"><p class="prose">Панорамная башня и аркады рядом с отелем Короля Давида; на кампусе располагаются концертные залы, спортивные объекты и языковые программы. Архитектор также разработал центральные проспекты Нью-Дели — сравните мускулический образец кладки. Этот выступ обеспечивает смотровые площадки над западной долиной.</p>
-<p class="prose">Построенный в период Британского мандата как межконфессиональный гражданский жест с монументальной каменной отделкой. Заметный «пунктуационный знак» мандатовой эпохи между старыми стенами и современными западными районами.</p></div>
-</section>
 <section class="place" id="jerusalem_knesset_jerusalem">
+<div class="place-lead">
 <h3>Jerusalem Knesset Jerusalem</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/jerusalem_knesset_jerusalem.jpg" alt="Jerusalem Knesset Jerusalem"/></figure>
+<p class="place-meta">Адрес: Givat Ram, Jerusalem</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/jerusalem_knesset_jerusalem.jpg" alt="Jerusalem Knesset Jerusalem" width="1280" height="853" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_knesset_jerusalem_b.jpg" alt="Jerusalem Knesset Jerusalem — вид 2" width="330" height="219" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Однопалатный парламент Израиля, расположенный недалеко от Израильского музея и кластера национального архива в Гиват Рам. Для посещения туров требуется предварительное бронирование и предъявление документов, удостоверяющих личность. Произведения искусства, пожертвованные на пленар, включают гобелены по мотивам Шагаля.</p>
 <p class="prose">Иерусалим стал законодательным центром после 1966 года; близлежащие учреждения сформировали продуманный гражданско-культурный квартал. Заседательный зал, где обсуждается израильское законодательство — в рамках одного посещения с музейным кампусом.</p></div>
 </section>
 <section class="place" id="jerusalem_lutheran_church_of_the_redeemer_jerusalem">
+<div class="place-lead">
 <h3>Jerusalem Lutheran Church Of The Redeemer Jerusalem</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/jerusalem_lutheran_church_of_the_redeemer_jerusalem.jpg" alt="Jerusalem Lutheran Church Of The Redeemer Jerusalem"/></figure>
+<p class="place-meta">Адрес: Muristan, Christian Quarter</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/jerusalem_lutheran_church_of_the_redeemer_jerusalem.jpg" alt="Jerusalem Lutheran Church Of The Redeemer Jerusalem" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_lutheran_church_of_the_redeemer_jerusalem_b.jpg" alt="Jerusalem Lutheran Church Of The Redeemer Jerusalem — вид 2" width="330" height="220" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Комбинированные билеты иногда включают доступ к башне и прилегающим археологическим выставкам. Дворы Муристиана сочетают кафе, православные хоры и сувенирные лавки. Возведенный на руинах крестоносцев, полученных после дипломатических переговоров; он ознаменовал протестантскую постоянность рядом со старыми католическими и православными юрисдикциями. Для лютеран и приверженцев более широких протестантских конфессий это церемониальный центр; а для случайного прогуливающегося — это вертикальный акцент среди крыш христианского квартала.</p></div>
 </section>
 <section class="place" id="jerusalem_mahane_yehuda_market">
+<div class="place-lead">
 <h3>Jerusalem Mahane Yehuda Market</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/jerusalem_mahane_yehuda_market.jpg" alt="Jerusalem Mahane Yehuda Market"/></figure>
+<p class="place-meta">Адрес: Between Jaffa and Agrippas streets, Nachlaot</p>
+<figure class="place-fig place-fig--lo-res"><img src="../images/jerusalem_mahane_yehuda_market_b.jpg" alt="Jerusalem Mahane Yehuda Market" width="330" height="185"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Самый оживленный рынок свежих продуктов и готовой еды Иерусалима днем; в четверг вечером у переулков заполняют бары и живая музыка. Эфиопские пряные смеси соседствуют со стендами с йеменской выпечкой и балканским бореком. Туры по граффити выделяют портреты местных музыкантов и раввинов.</p>
 <p class="prose">Названный по дворовому кварталу конца XIX века, рынок вырос вдоль новых трамвайных и автобусных осей города. Самый непосредственный вкус современного Иерусалима за стенами — шумный, ароматный и людный.</p></div>
 </section>
 <section class="place" id="jerusalem_montefiore_windmill">
+<div class="place-lead">
 <h3>Jerusalem Montefiore Windmill</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1857</p>
-<figure class="place-fig"><img src="../images/jerusalem_montefiore_windmill.jpg" alt="Jerusalem Montefiore Windmill"/></figure>
+<p class="place-meta">Адрес: Mishkenot Sha’ananim / Yemin Moshe | Период: 1857</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/jerusalem_montefiore_windmill.jpg" alt="Jerusalem Montefiore Windmill" width="1280" height="854" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_montefiore_windmill_b.jpg" alt="Jerusalem Montefiore Windmill — вид 2" width="330" height="422" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Восстановленная мельница, с видом на долину Хинном; символ первого еврейского квартала за стенами Старого города. Производство муки прекратилось, когда импортная мука подорвала местное производство. Прогулка по хребту ведет к фотобалконам в сторону стен Старого города.</p>
 <p class="prose">Финансировалось благодаря благотворительности Монтефиоре в рамках эксперимента по поселению «Мишкенот-Шаананим». Легко различимая (или: Явно заметная) «петля» (или: связующее звено) XIX века между стенами Иерусалима и расширяющимися западными районами.</p></div>
 </section>
 <section class="place" id="jerusalem_mount_of_olives_view">
+<div class="place-lead">
 <h3>Jerusalem Mount Of Olives View</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/jerusalem_mount_of_olives_view.jpg" alt="Jerusalem Mount Of Olives View"/></figure>
+<p class="place-meta">Место: Mount of Olives ridge (multiple overlooks)</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/jerusalem_mount_of_olives_view.jpg" alt="Jerusalem Mount Of Olives View" width="1280" height="352" style="height: 127px; max-height: 127px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_mount_of_olives_view_b.jpg" alt="Jerusalem Mount Of Olives View — вид 2" width="330" height="121" style="height: 127px; max-height: 127px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Классический восточный вид на долину Кидрон: уровни еврейского кладбища, купола мечети и золотой Купол Скалы, прерывающиеся на горизонте. Восход и поздний день меняют глубину теней на платформе Храмовой Горы. На склоне расположены христианские места Доминус Флевати и Гефсиманский сад.</p>
 <p class="prose">Гребень служил целям погребений, паломничества и оборонительного наблюдения на протяжении тысячелетий; современные дороги изменяют пешеходные подходы. Каноническая вид-кадр на открытке, демонстрирующий, насколько тесно расположены священные центры Старого Иерусалима.</p></div>
 </section>
-<section class="place" id="jerusalem_mount_zion">
-<h3>Гора Сион</h3>
-
-
-<figure class="place-fig"><img src="../images/jerusalem_mount_zion.jpg" alt="Гора Сион"/></figure>
-<div class="place-desc"><p class="prose">Гора Сион, выдающийся холм, расположенный всего в нескольких шагах от стен Старого города Иерусалима, является местом глубокого исторического и религиозного значения. Здесь находятся несколько ключевых достопримечательностей, включая Гробницу царя Давида и Уголок Последней вечери. Посетители могут исследовать её богатое наследие, которое отражает разнообразную культурную и духовную ткань Иерусалима. Согласно традиции, гора Сион считается местом захоронения царя Давида. Комната Тайной Вечери, расположенная на горе Сион, является значимым местом паломничества для христиан.</p>
-<p class="prose">Гора Сион была центром истории Иерусалима с древних времен. Она традиционно ассоциируется с библейским царем Давидом, который основал здесь свой город около 1000 года до нашей эры. На протяжении веков она стала свидетелем множества событий, включая крестовые походы и различные завоевания, формируя свою идентичность как символ стойкости и веры. Культурно гора Сион является плавильным котлом традиций и практик, отражая разнообразные сообщества, которые населяли Иерусалим. Она играет значительную роль в еврейском, христианском и исламском наследии, что делает её важным местом для паломничества и религиозных обрядов. Исторические памятники этого района способствуют его признанию объектом Всемирного наследия ЮНЕСКО, подчеркивая его важность в коллективной памяти человечества.</p></div>
-</section>
 <section class="place" id="jerusalem_old_city_ramparts_walk">
+<div class="place-lead">
 <h3>Jerusalem Old City Ramparts Walk</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/jerusalem_old_city_ramparts_walk.jpg" alt="Jerusalem Old City Ramparts Walk"/></figure>
+<p class="place-meta">Адрес: Old City walls (entry points vary by season)</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/jerusalem_old_city_ramparts_walk.jpg" alt="Jerusalem Old City Ramparts Walk" width="933" height="1400" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_old_city_ramparts_walk_b.jpg" alt="Jerusalem Old City Ramparts Walk — вид 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Прогулочные участки на вершине османских стен, которые объединяют панорамные виды: купола, внутренние дворы, минареты и многосложный городской родовой пейзаж. Северная и южная части обычно приобретаются отдельными билетами. Возьмите с собой воду: солнечное излучение сильное, а тени на парапетах мало.</p>
 <p class="prose">Комплекс стен Сулеймана определил периметр современного Старого города; эти зублы впоследствии превратились в специально организованный обзорный маршрут для посетителей. Одна из немногих способов рассмотреть геометрию Иерусалима с высоты — не выходя за стены.</p></div>
 </section>
-<section class="place" id="jerusalem_pdfband_9_4d56a8e1">
-<h3>Palace33</h3>
+<section class="place" id="jerusalem_palace33">
+<div class="place-lead">
+<h3>Jerusalem Palace33</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/jerusalem_pdfband_9_4d56a8e1.jpg" alt="Palace33"/></figure>
-</section>
-<section class="place" id="jerusalem_pool_bethesda">
-<h3>Ставка Вифезда</h3>
-
-
-<figure class="place-fig"><img src="../images/jerusalem_pool_bethesda.jpg" alt="Ставка Вифезда"/></figure>
-<div class="place-desc"><p class="prose">Бассейн Вифезда, расположенный в Старом городе Иерусалима, является древним местом, известным своей исторической и религиозной значимостью. Этот большой резервуар, который, как считается, был построен в I веке до нашей эры, ассоциируется с исцелением и чудесами, особенно в христианской традиции. Посетители могут исследовать остатки бассейна и его окрестности, которые предоставляют возможность заглянуть в богатое прошлое города. Бассейн Вифезда расположен в Старом городе Иерусалима. В Евангелии от Иоанна упоминается как место исцеления.</p>
-<p class="prose">Бассейн Вифезда датируется как минимум 1 веком до нашей эры и использовался как водохранилище для близлежащего Храма. Он упоминается в Евангелии от Иоанна как место, где Иисус исцелил парализованного человека, что способствовало его исторической значимости. Археологические раскопки выявили остатки бассейна и связанных с ним сооружений, предоставив информацию о древних водных системах города. Культурно, Став воды Вифезда является символом исцеления и надежды, глубоко укоренившимся в христианской вере. Он привлекает паломников и туристов, которые приходят размышлять о его библейских связях и историях чудесных исцелений. Это место способствует статусу Иерусалима как важного религиозного центра, поддерживая традиции паломничества и почитания среди различных религиозных общин.</p></div>
+<p class="place-meta">Адрес: See official visitor information.</p>
+<figure class="place-fig place-fig--hi-res"><img src="../images/jerusalem_palace33.jpg" alt="Jerusalem Palace33" width="1280" height="1289"/></figure>
+</div>
 </section>
 <section class="place" id="jerusalem_shrine_of_the_book">
+<div class="place-lead">
 <h3>Jerusalem Shrine Of The Book</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1959–1965</p>
-<figure class="place-fig"><img src="../images/jerusalem_shrine_of_the_book.jpg" alt="Jerusalem Shrine Of The Book"/></figure>
+<p class="place-meta">Адрес: Israel Museum campus | Период: 1959–1965</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/jerusalem_shrine_of_the_book.jpg" alt="Jerusalem Shrine Of The Book" width="1280" height="960" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_shrine_of_the_book_b.jpg" alt="Jerusalem Shrine Of The Book — вид 2" width="330" height="247" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Музейный павильон, где хранятся свитки Мертвого моря и связанные с ними рукописные культуры; крышка напоминает кувшины, найденные в Кумране. Белый купол контрастирует с тёмной базальтовой стеной, напоминающей пустынную геологию. Ротационные выставки дополняют фрагменты свитка на экспозиции.</p>
 <p class="prose">Построено как постоянное место для манускриптов после передачи опеки иорданскими и израильскими властями; лаборатории консервации примыкают к галереям. Необходимо для понимания иудаизма периода Второго Храма перед прогулкой по геродовым остаткам в Старом городе.</p></div>
 </section>
-<section class="place" id="jerusalem_pdfband_0_3d212d2d">
-<h3>St George&#x27;s Cathedral</h3>
+<section class="place" id="jerusalem_st_george_s_cathedral">
+<div class="place-lead">
+<h3>Jerusalem St George S Cathedral</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/jerusalem_pdfband_0_3d212d2d.jpg" alt="St George&#x27;s Cathedral"/></figure>
+<p class="place-meta">Адрес: See official visitor information.</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/jerusalem_st_george_s_cathedral.jpg" alt="Jerusalem St George S Cathedral" width="1280" height="851" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_st_george_s_cathedral_b.jpg" alt="Jerusalem St George S Cathedral — вид 2" width="330" height="264" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 </section>
 <section class="place" id="jerusalem_tower_of_david">
+<div class="place-lead">
 <h3>Jerusalem Tower Of David</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/jerusalem_tower_of_david.jpg" alt="Jerusalem Tower Of David"/></figure>
+<p class="place-meta">Адрес: Jaffa Gate, Old City</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/jerusalem_tower_of_david.jpg" alt="Jerusalem Tower Of David" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_tower_of_david_b.jpg" alt="Jerusalem Tower Of David — вид 2" width="330" height="220" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Цитадель возле Ворот Яффы с археологическими находками и вечерним световым шоу, проецируемым на крепостные стены. Название «Башня Давида» является традиционным, а не строго историческим для минарета. Прогулка по крепостным стенам показывает, как османские инженеры связали крепость с системой городских стен.</p>
 <p class="prose">Последовательные империи укрепляли мыс, контролирующий западный подход; современный музей интерпретирует эти слои. Наилучшее одно введение в стратиграфию Иерусалима без необходимости спуска в туннели — пока.</p></div>
 </section>
 <section class="place" id="jerusalem_via_dolorosa">
+<div class="place-lead">
 <h3>Jerusalem Via Dolorosa</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/jerusalem_via_dolorosa.jpg" alt="Jerusalem Via Dolorosa"/></figure>
+<p class="place-meta">Адрес: Old City, Muslim &amp; Christian quarters</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/jerusalem_via_dolorosa.jpg" alt="Jerusalem Via Dolorosa" width="1067" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_via_dolorosa_b.jpg" alt="Jerusalem Via Dolorosa — вид 2" width="330" height="516" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Процессиональный путь, связанный со Станцией Крестного Пути, который проходит через рынки и дворы в сторону Гроба Господня. Станции отмечены мемориальными досками и небольшими часовнями; пик скопления людей приходится на пятницу. Улицы, которые также являются активными торговыми зонами, — двигайтесь не спеша и уступайте место.</p>
 <p class="prose">Паломнические маршруты менялись на протяжении столетий; современная последовательность станций отражает традиции позднесредневековой и последующей паломнической картографии. Живой переплёт поклонения и повседневной торговли — священные нарративы Иерусалима, вплетённые в обычные улицы.</p></div>
 </section>
 <section class="place" id="jerusalem_western_wall">
+<div class="place-lead">
 <h3>Jerusalem Western Wall</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/jerusalem_western_wall.jpg" alt="Jerusalem Western Wall"/></figure>
+<p class="place-meta">Адрес: Western Wall Plaza, Old City</p>
+<figure class="place-fig place-fig--lo-res"><img src="../images/jerusalem_western_wall_b.jpg" alt="Jerusalem Western Wall" width="330" height="225"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Открытая молитвенная площадка вдоль Херодиевского теменоса; мужская и женская секции следуют православной практике; ожидается скромная одежда. Видимые участки — лишь часть системы подпорных стен; туннели продолжаются на север вдоль платформы. Заметки, оставленные в трещинах, периодически собираются для достойного захоронения.</p>
 <p class="prose">Стена сохранилась в виде руин и стала центральной точкой (фокусом) в период исламского правления; современная площадь отражает решения городского планирования XX века, принятые после 1967 года. Для многих евреев главной материальной связью с разрушенным эспланадом Храма является.</p></div>
 </section>
 <section class="place" id="jerusalem_yad_vashem">
+<div class="place-lead">
 <h3>Jerusalem Yad Vashem</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/jerusalem_yad_vashem.jpg" alt="Jerusalem Yad Vashem"/></figure>
+<p class="place-meta">Адрес: Mount Herzl, Har HaZikaron</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/jerusalem_yad_vashem.jpg" alt="Jerusalem Yad Vashem" width="1280" height="978" style="height: 347px; max-height: 347px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_yad_vashem_b.jpg" alt="Jerusalem Yad Vashem — вид 2" width="330" height="248" style="height: 347px; max-height: 347px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Официальный израильский центр памяти о Холокосте: музейные галереи, мемориалы, архивы и Зал имен, расположенные на сосновом хребте. Планируйте время: повествование музея длинное и эмоционально насыщенное — делайте перерывы. Правила для фотосъемки различаются в зале; проверьте указатели и соблюдайте правила.</p>
 <p class="prose">Учрежден законом в качестве национального учреждения; музей 2005 года переформатировал основную экспозицию в хронологический путь через хребет. Обязательная остановка для погружения в историю и памяти в современном Иерусалиме.</p></div>
+</section>
+<section class="place" id="jerusalem_damascus_gate">
+<div class="place-lead">
+<h3>Ворота Дамаска</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_damascus_gate.jpg" alt="Ворота Дамаска" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_damascus_gate_b.jpg" alt="Ворота Дамаска — вид 2" width="330" height="216" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Ворота Дамаска, один из самых знаковых входов в Старый город Иерусалима, славятся своей потрясающей архитектурой и богатой историей. Этот монументальный вход с его впечатляющим каменным фасадом и сложными деталями служит оживленным центром активности, соединяя различные районы и культуры. Посетители могут исследовать яркий рынок поблизости и насладиться живой атмосферой, окружающей этот исторический памятник. Дамасские ворота — одни из восьми ворот Старого города Иерусалима. Ворота отличаются своим большим заостренным аркой и декоративной каменной кладкой.</p>
+<p class="prose">Дамасские ворота относятся к 16 веку и были построены в османский период. Они расположены вдоль древнего пути, ведущего в Дамаск, что исторически сделало их важной точкой входа в Иерусалим. Ворота стали свидетелями множества ключевых событий на протяжении истории, включая военные кампании и паломничества. Политически, Ворот Дамаска был ключевой точкой во время различных конфликтов и протестов, символизируя сложную динамику власти и территории в Иерусалиме. Культурно, он является важной частью наследия города, демонстрируя традиционную архитектуру и служа вратами к разнообразным общинам внутри Старого города. Район вокруг ворот заполнен магазинами и кафе, отражая повседневную жизнь и традиции жителей Иерусалима.</p></div>
+</section>
+<section class="place" id="jerusalem_mount_zion">
+<div class="place-lead">
+<h3>Гора Сион</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_mount_zion.jpg" alt="Гора Сион" width="330" height="247" style="height: 224px; max-height: 224px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_mount_zion_b.jpg" alt="Гора Сион — вид 2" width="330" height="160" style="height: 224px; max-height: 224px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Гора Сион, выдающийся холм, расположенный всего в нескольких шагах от стен Старого города Иерусалима, является местом глубокого исторического и религиозного значения. Здесь находятся несколько ключевых достопримечательностей, включая Гробницу царя Давида и Уголок Последней вечери. Посетители могут исследовать её богатое наследие, которое отражает разнообразную культурную и духовную ткань Иерусалима. Согласно традиции, гора Сион считается местом захоронения царя Давида. Комната Тайной Вечери, расположенная на горе Сион, является значимым местом паломничества для христиан.</p>
+<p class="prose">Гора Сион была центром истории Иерусалима с древних времен. Она традиционно ассоциируется с библейским царем Давидом, который основал здесь свой город около 1000 года до нашей эры. На протяжении веков она стала свидетелем множества событий, включая крестовые походы и различные завоевания, формируя свою идентичность как символ стойкости и веры. Культурно гора Сион является плавильным котлом традиций и практик, отражая разнообразные сообщества, которые населяли Иерусалим. Она играет значительную роль в еврейском, христианском и исламском наследии, что делает её важным местом для паломничества и религиозных обрядов. Исторические памятники этого района способствуют его признанию объектом Всемирного наследия ЮНЕСКО, подчеркивая его важность в коллективной памяти человечества.</p></div>
+</section>
+<section class="place" id="jerusalem_garden_tomb">
+<div class="place-lead">
+<h3>Садовая гробница</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_garden_tomb.jpg" alt="Садовая гробница" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_garden_tomb_b.jpg" alt="Садовая гробница — вид 2" width="330" height="248" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Садовая гробница — это спокойное место, расположенное за пределами стен Старого города Иерусалима, которое многие считают местом погребения и воскресения Иисуса Христа. Окруженная зелеными садами, она предлагает мирную атмосферу для размышлений и молитвы. Посетители могут исследовать саму гробницу и насладиться красотой окружающего пейзажа. Садовая гробница расположена за пределами Старого города Иерусалима. Он был открыт в 1867 году генералом Чарльзом Гордоном. Сайт поддерживается Ассоциацией Сада Гроба, христианской организацией.</p>
+<p class="prose">Садовая гробница была обнаружена в 1867 году генералом Чарльзом Гордоном, который предложил ее как место погребения Иисуса. С тех пор этот район стал местом христианского паломничества, хотя он не является общепринятым как подлинное место захоронения, поскольку Церковь Святого Гроба считается более традиционным местом. Садовая гробница имеет глубокое религиозное значение для многих христиан, которые рассматривают её как символ воскресения Иисуса. Она служит местом паломничества и поклонения, привлекая посетителей со всего мира, которые стремятся соединиться со своей верой в спокойной обстановке. Это место также вносит вклад в богатое культурное наследие Иерусалима, отражая разнообразную религиозную историю города.</p></div>
+</section>
+<section class="place" id="jerusalem_pool_bethesda">
+<div class="place-lead">
+<h3>Ставка Вифезда</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_pool_bethesda.jpg" alt="Ставка Вифезда" width="330" height="493" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_pool_bethesda_b.jpg" alt="Ставка Вифезда — вид 2" width="330" height="219" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Бассейн Вифезда, расположенный в Старом городе Иерусалима, является древним местом, известным своей исторической и религиозной значимостью. Этот большой резервуар, который, как считается, был построен в I веке до нашей эры, ассоциируется с исцелением и чудесами, особенно в христианской традиции. Посетители могут исследовать остатки бассейна и его окрестности, которые предоставляют возможность заглянуть в богатое прошлое города. Бассейн Вифезда расположен в Старом городе Иерусалима. В Евангелии от Иоанна упоминается как место исцеления.</p>
+<p class="prose">Бассейн Вифезда датируется как минимум 1 веком до нашей эры и использовался как водохранилище для близлежащего Храма. Он упоминается в Евангелии от Иоанна как место, где Иисус исцелил парализованного человека, что способствовало его исторической значимости. Археологические раскопки выявили остатки бассейна и связанных с ним сооружений, предоставив информацию о древних водных системах города. Культурно, Став воды Вифезда является символом исцеления и надежды, глубоко укоренившимся в христианской вере. Он привлекает паломников и туристов, которые приходят размышлять о его библейских связях и историях чудесных исцелений. Это место способствует статусу Иерусалима как важного религиозного центра, поддерживая традиции паломничества и почитания среди различных религиозных общин.</p></div>
+</section>
+<section class="place" id="jerusalem_church_flagellation">
+<div class="place-lead">
+<h3>Церковь Бичевания</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_church_flagellation.jpg" alt="Церковь Бичевания" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_church_flagellation_b.jpg" alt="Церковь Бичевания — вид 2" width="330" height="221" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Церковь Бичевания — это значимый религиозный объект, расположенный в сердце Иерусалима, который увековечивает традиционное место, где Иисус был осужден на распятие. Эта церковь является частью Виа Долороза, пути, по которому, как считается, шел Иисус на Голгофу. Посетители могут восхищаться её красивой архитектурой и сложными произведениями искусства, изображающими страсти Христовы. Церковь была построена в 1863 году францисканцами. Он расположен вдоль Виа Долороза, пути, по которому, как считается, Иисус шел на свою казнь.</p>
+<p class="prose">Церковь Бичевания была построена в 19 веке, а именно в 1863 году, францисканцами. Она расположена на месте, где, как считается, Иисус был бичуем и осуждаем перед своей распятием. Церковь была возведена в рамках усилий францисканцев по установлению и сохранению христианских святых мест в Иерусалиме. Церковь Бичевания имеет глубокое религиозное значение для христиан, так как она отмечает ключевой момент в повествовании о Страданиях. Она привлекает паломников и туристов, внося вклад в культурное наследие Иерусалима. Церковь также является частью более широкой истории Виа Долороза, которая является важным паломническим маршрутом для многих христиан.</p></div>
+</section>
+<section class="place" id="jerusalem_dominus_flevit">
+<div class="place-lead">
+<h3>Церковь Доминиус Флевит</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_dominus_flevit.jpg" alt="Церковь Доминиус Флевит" width="330" height="295" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_dominus_flevit_b.jpg" alt="Церковь Доминиус Флевит — вид 2" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Церковь Доминиус Флевит, расположенная на Елеонской горе в Иерусалиме, является впечатляющей римско-католической церковью, которая увековечивает место, где, как считается, Иисус плакал над городом. Ее уникальный дизайн, напоминающий слезу, предлагает посетителям не только место для поклонения, но и потрясающие виды на Старый город. Церковь является спокойным местом для размышлений и молитвы, привлекая как паломников, так и туристов. Церковь была завершена в 1955 году. Он расположен на Масличной горе и предлагает панорамные виды на Иерусалим. Архитектура церкви спроектирована так, чтобы напоминать слезу.</p>
+<p class="prose">Церковь Доминиус Флевит была построена в 1955 году, спроектирована итальянским архитектором Антонио Барлуцци. Она расположена на месте, которое традиционно считается тем, где Иисус оплакивал судьбу Иерусалима, как упоминается в Евангелии от Луки. Церковь была возведена для замены ранее существовавшей часовни в этом районе. Церковь имеет значительное религиозное значение, так как является местом паломничества для христиан, которые приходят размышлять о библейском повествовании о печали Иисуса по Иерусалиму. Культурно она является неотъемлемой частью ландшафта Иерусалима, внося вклад в богатую ткань религиозного наследия города и привлекая посетителей со всего мира.</p></div>
+</section>
+<section class="place" id="jerusalem_church_pater_noster">
+<div class="place-lead">
+<h3>Церковь Отче наш</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_church_pater_noster.jpg" alt="Церковь Отче наш" width="330" height="183" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_church_pater_noster_b.jpg" alt="Церковь Отче наш — вид 2" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Церковь Отче наш, расположенная на Елеонской горе в Иерусалиме, является значимым местом для христианских паломников. Считается, что именно здесь Иисус учил своих учеников молитве Отче наш. Церковь украшена красивыми мозаиками и предлагает потрясающие виды на Старый город. Церковь построена на традиционном месте, где, как считается, Иисус учил Отче наш. Он украшен мозаиками Отче наш на более чем 140 языках.</p>
+<p class="prose">Церковь Отче наш была изначально построена в IV веке и претерпела несколько реконструкций, при этом нынешняя структура была завершена в XX веке. Она расположена на месте, которое давно связано с учениями Иисуса, особенно с молитвой Господней. С культурной точки зрения, Церковь Отче наш является важным местом паломничества, привлекая посетителей со всего мира, которые стремятся соединиться с духовным наследием христианства. Мозаики церкви, изображающие Отче наш на различных языках, отражают универсальный характер этой молитвы и ее значение в христианской традиции.</p></div>
+</section>
+<section class="place" id="jerusalem_church_visitation">
+<div class="place-lead">
+<h3>Церковь Посещения</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_church_visitation.jpg" alt="Церковь Посещения" width="330" height="491" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/jerusalem_church_visitation_b.jpg" alt="Церковь Посещения — вид 2" width="330" height="264" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Церковь Посещения, расположенная в живописных холмах Эйн-Карем, является значимым местом, посвященным визиту Девы Марии к ее кузине Елизавете. Эта прекрасная церковь известна своей впечатляющей архитектурой и яркими мозаиками, что делает ее обязательным местом для посещения теми, кто исследует духовный и исторический ландшафт Иерусалима. Церковь расположена в Эйн-Кареме, районе Иерусалима. Он посвящен библейскому событию Посещения, когда Мария посещает Елизавету.</p>
+<p class="prose">Церковь Посещения была построена в 1955 году на месте, традиционно считающемся тем, где Мария посетила Елизавету, как описано в Евангелии от Луки. Церковь построена на месте более ранних византийских и крестоносных церквей, что отражает давнюю религиозную значимость этого места. Культурно Церковь Посещения является важным местом паломничества для христиан, особенно во время Праздника Посещения. Искусство и архитектура церкви способствуют богатому наследию Иерусалима, и она служит местом поклонения и размышлений для посетителей со всего мира.</p></div>
 </section>
 </body>
 </html>

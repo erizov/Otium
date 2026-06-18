@@ -7,6 +7,7 @@ import json
 from pathlib import Path
 from scripts.city_guide_registry_common import drop_empty_place_rows
 from scripts.city_guide_registry_common import load_pdf_expand_rows
+from scripts.city_guide_registry_common import merge_second_image_sidecar
 from typing import TypedDict, cast
 
 
@@ -89,6 +90,7 @@ def _load_places() -> list[SpbPlace]:
         "spb_places_more.json",
         "spb_places_expansion_m2026.json",
         "spb_places_pdf_size_expand.json",
+        "spb_places_osobnjaki.json",
     ):
         more_path = Path(__file__).with_name(more_name)
         if more_path.is_file():
@@ -96,6 +98,7 @@ def _load_places() -> list[SpbPlace]:
     raw = drop_empty_place_rows(raw)
     raw = _merge_details(raw)
     raw = _merge_additional_images(raw)
+    raw = merge_second_image_sidecar(raw, Path(__file__).parent, 'spb')
     return cast(list[SpbPlace], raw)
 
 

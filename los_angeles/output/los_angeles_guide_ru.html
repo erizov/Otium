@@ -13,7 +13,7 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
 .otium-logo { font-family: 'Libre Baskerville', serif; font-size: 2.15rem;
   font-weight: 600; letter-spacing: 0.18em; margin-bottom: 0.85rem; }
 .otiump { margin: 0.42rem 0; line-height: 1.42; text-align: justify;
-  max-width: 38rem; font-size: 0.95rem; }
+  font-size: 0.95rem; }
 .guide-title { page-break-after: auto; margin-bottom: 0.55rem;
   page-break-inside: avoid; }
 .historical-reference { margin: 0.75rem 0 1.15rem;
@@ -63,22 +63,103 @@ ol.trip-stops a:hover { text-decoration: underline; }
 .heraldry-univ-caption { font-size: 0.52rem; line-height: 1.18;
   margin: 0.12rem 0 0; padding: 0 0.06rem; color: #252525;
   text-align: center; font-weight: 500; }
-.heraldry-motto { text-align: center; max-width: 18rem; margin: 0.18rem auto;
+.heraldry-motto { text-align: center; margin: 0.18rem auto;
   width: 100%; }
 .motto-line { font-family: 'Libre Baskerville', serif; font-size: 1rem;
   margin: 0; color: #333; line-height: 1.35; }
 .guide-title h1.guide-title-main { font-family: 'Libre Baskerville', serif;
   font-size: 2.35rem; margin-bottom: 0.5rem; font-weight: 600; }
 .lead { color: #444; font-size: 1.05rem; }
-.guide-toc { margin: 0.85rem 0 1.15rem; page-break-inside: avoid; }
-.guide-toc h2 { font-family: 'Libre Baskerville', serif; font-size: 1.28rem;
-  font-weight: 600; margin: 0.4rem 0 0.55rem; }
+
+.guide-toc { page-break-before: always; break-before: page;
+  page-break-after: always; break-after: page;
+  margin: 0; padding: 0.2rem 0 0.45rem; page-break-inside: auto; }
+.guide-toc h2 { font-family: 'Libre Baskerville', serif;
+  font-size: 1.28rem; font-weight: 600; margin: 0.4rem 0 0.55rem; }
 .guide-toc ol { margin: 0.35rem 0 0.65rem 1.25rem; padding: 0;
   columns: 2; column-gap: 1.5rem; }
 .guide-toc li { margin: 0.18rem 0; line-height: 1.35;
   font-size: 0.88rem; break-inside: avoid; }
-.guide-toc a { color: #1a5276; text-decoration: none; }
+.guide-toc a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.guide-toc a:hover { color: #0d3d56; }
 .guide-toc li.toc-item--sub { font-size: 0.82rem; margin-left: 0.35rem; }
+.toc-back { font-size: 0.78rem; margin: 0 0 0.35rem; text-align: right; }
+.toc-back a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.toc-back a:hover { color: #0d3d56; }
+.place, .historical-reference, .guide-primer, .guide-trip-plans {
+  scroll-margin-top: 1.25rem; }
+.historical-reference h2, .guide-primer h2, .guide-trip-plans h2,
+.chapter-head h2, .place-lead h3 { position: relative; }
+.guide-toc + .place, .guide-toc + .chapter-head {
+  page-break-before: avoid; break-before: avoid-page; }
+.place-lead { page-break-inside: avoid; break-inside: avoid-page;
+  page-break-after: auto; }
+.place-lead > h3 { page-break-after: avoid; break-after: avoid-page; }
+.place-lead > .place-meta { page-break-after: avoid; break-after: avoid-page; }
+
+.place-fig { page-break-inside: avoid; break-inside: avoid-page;
+  margin: 0.5rem 0 1rem; }
+.place-fig img {
+  page-break-inside: avoid; break-inside: avoid-page;
+  max-height: 48vh; width: auto; max-width: 100%;
+  object-fit: contain; margin-left: auto; margin-right: auto; }
+.place-fig--hi-res img { max-height: 52vh; }
+.place-fig--lo-res img { max-height: 30vh; }
+.place-pdf-fig-row {
+  display: flex; flex-direction: row; flex-wrap: wrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.45rem 0.55rem; margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row .place-fig {
+  flex: 1 1 30%; margin: 0; min-width: 26%; max-width: 100%; }
+.place-pdf-fig-row .place-fig img {
+  width: auto; max-width: 100%; height: auto; max-height: 44vh;
+  object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--pair {
+  flex-wrap: nowrap; justify-content: space-between;
+  align-items: flex-end; gap: 0.5rem 0.65rem; }
+.place-pdf-fig-row--pair .place-fig {
+  flex: 1 1 47%; min-width: 0; max-width: 50%;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--pair .place-fig img {
+  max-height: 44vh; object-fit: contain; }
+.place-pdf-fig-row--pair .place-fig--hi-res img { max-height: 52vh; }
+.place-pdf-fig-row--pair .place-fig--lo-res img { max-height: 26vh; }
+.place-pdf-fig-row--pair .place-fig--row-sized img,
+.place-pdf-fig-row--triple .place-fig--row-sized img,
+.place-pdf-fig-row--many .place-fig--row-sized img {
+  width: auto; max-width: 100%; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row .place-fig--row-sized.place-fig--hi-res img,
+.place-pdf-fig-row .place-fig--row-sized.place-fig--lo-res img {
+  max-height: unset; }
+.place-pdf-fig-rows-stack {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple {
+  display: flex; flex-direction: row; flex-wrap: nowrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.4rem 0.48rem; margin: 0;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--triple .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--triple .place-fig--hi-res img { max-height: 42vh; }
+.place-pdf-fig-row--triple .place-fig--lo-res img { max-height: 18vh; }
+.place-pdf-fig-row--many {
+  flex-wrap: nowrap; justify-content: center; align-items: flex-end;
+  gap: 0.35rem 0.42rem; }
+.place-pdf-fig-row--many .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--many .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+
+
 .place { margin-bottom: 2.2rem; page-break-inside: auto; }
 h3 { font-family: 'Libre Baskerville', serif; font-size: 1.22rem; margin: 1.2rem 0 0.35rem;
   font-weight: 600; }
@@ -90,7 +171,6 @@ h4 { font-family: 'Libre Baskerville', serif; font-size: 0.95rem; text-transform
   color: #555; font-size: 0.95rem; margin: 0 0 0.5rem; font-style: italic; }
 .place-meta { font-size: 0.92rem; color: #353535; margin: 0 0 0.75rem;
   line-height: 1.4; }
-.place-fig { margin: 0.5rem 0 1rem; }
 img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
 .prose, .place-desc p { margin: 0.45rem 0; line-height: 1.5;
   text-align: justify; }
@@ -110,11 +190,14 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <figure class="heraldry-fig heraldry-coat-book" title="Seal of Los Angeles"><img src="../images/guide_coat_of_arms.svg" alt="Seal of Los Angeles"/></figure>
 <figure class="heraldry-fig heraldry-coat-book" title="Flag of Los Angeles"><img src="../images/guide_flag.svg" alt="Flag of Los Angeles"/></figure>
 </div></div><h1 class="guide-title-main">Los Angeles</h1><p class="lead">Путеводитель. Объектов в этом выпуске: 30.</p></header>
+<nav class="guide-toc" id="guide-toc" aria-label="Содержание"><h2>Содержание</h2><ol><li class="toc-item"><a href="#guide-historical">Историческая справка</a></li><li class="toc-item"><a href="#guide-trips">Маршруты</a></li><li class="toc-item"><a href="#los_angeles_california_science_center">Los Angeles California Science Center</a></li><li class="toc-item"><a href="#los_angeles_crypto_arena">Los Angeles Crypto Arena</a></li><li class="toc-item"><a href="#los_angeles_getty_center">Los Angeles Getty Center</a></li><li class="toc-item"><a href="#los_angeles_getty_villa">Los Angeles Getty Villa</a></li><li class="toc-item"><a href="#los_angeles_griffith_observatory">Los Angeles Griffith Observatory</a></li><li class="toc-item"><a href="#los_angeles_griffith_sign_view">Los Angeles Griffith Sign View</a></li><li class="toc-item"><a href="#los_angeles_hollywood_boulevard">Los Angeles Hollywood Boulevard</a></li><li class="toc-item"><a href="#los_angeles_hollywood_sign">Los Angeles Hollywood Sign</a></li><li class="toc-item"><a href="#los_angeles_la_brea_tar_pits">Los Angeles La Brea Tar Pits</a></li><li class="toc-item"><a href="#los_angeles_lacma">Los Angeles Lacma</a></li><li class="toc-item"><a href="#los_angeles_landmark">Los Angeles Landmark</a></li><li class="toc-item"><a href="#los_angeles_mission_san_gabriel">Los Angeles Mission San Gabriel</a></li><li class="toc-item"><a href="#los_angeles_moca_la">Los Angeles Moca La</a></li><li class="toc-item"><a href="#los_angeles_paramount_studio">Los Angeles Paramount Studio</a></li><li class="toc-item"><a href="#los_angeles_petersen">Los Angeles Petersen</a></li><li class="toc-item"><a href="#los_angeles_santa_mar_a_de_los_angeles_church">Los Angeles Santa Mar A De Los Angeles Church</a></li><li class="toc-item"><a href="#los_angeles_santa_monica_pier">Los Angeles Santa Monica Pier</a></li><li class="toc-item"><a href="#los_angeles_sayyidah_ruqayya_mosque_interior">Los Angeles Sayyidah Ruqayya Mosque Interior</a></li><li class="toc-item"><a href="#los_angeles_universal_studios">Los Angeles Universal Studios</a></li><li class="toc-item"><a href="#los_angeles_venice_beach">Los Angeles Venice Beach</a></li><li class="toc-item"><a href="#los_angeles_walt_disney_concert_hall">Los Angeles Walt Disney Concert Hall</a></li><li class="toc-item"><a href="#los_angeles_the_broad">Брод</a></li><li class="toc-item"><a href="#los_angeles_malibu_pier">Молибу Пир</a></li><li class="toc-item"><a href="#los_angeles_exposition_park">Парк Экспозиции, Розовый сад</a></li><li class="toc-item"><a href="#los_angeles_last_bookstore">Последняя книжная лавка</a></li><li class="toc-item"><a href="#los_angeles_nhm_la">Природоведческий музей Лос-Анджелеса</a></li><li class="toc-item"><a href="#los_angeles_rodeo_drive">Родео Драйв</a></li><li class="toc-item"><a href="#los_angeles_cathedral">Собор Непорочного Зачатия Пресвятой Девы Марии</a></li><li class="toc-item"><a href="#los_angeles_union_station">Станция Союз Лос-Анджелес</a></li><li class="toc-item"><a href="#los_angeles_olvera_street">Улица Ольвера</a></li></ol></nav>
 <section class="historical-reference" id="guide-historical" aria-label="Историческая справка"><h2>Историческая справка</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 <p class="prose">Лос-Анджелес — крупнейший город Калифорнии и второй по населению в США.</p>
 <p class="prose">Испанские миссии, нефть, киноиндустрия Голливуда и авиация сформировали растянутую агломерацию. Океан, каньоны и этнические кварталы сочетаются с мировым центром развлечений и технологий.</p>
 <p class="prose">Вторая мировая война усилила авиастроение; после 1945 года пригороды росли автомобильные магистрали. Лос-Анджелес остаётся центром кино, музыки и иммиграции из Азии и Латинской Америки, с постоянным поиском решений транспортных и экологических проблем.</p></section>
 <section class="guide-trip-plans" id="guide-trips" aria-label="Маршруты"><h2>Маршруты</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 <article class="trip-plan" id="trip-1d"><h3>Один день</h3>
 <p class="prose">Компактный маршрут по главным точкам путеводителя с минимальным возвратом назад пешком.</p>
 <ol class="trip-stops"><li><a href="#los_angeles_crypto_arena">Los Angeles Crypto Arena</a> (~75мин)</li>
@@ -143,235 +226,405 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <li><a href="#los_angeles_hollywood_sign">Los Angeles Hollywood Sign</a> (~75мин)</li>
 <li><a href="#los_angeles_la_brea_tar_pits">Los Angeles La Brea Tar Pits</a> (~75мин)</li>
 <li><a href="#los_angeles_last_bookstore">Последняя книжная лавка</a> (~75мин)</li></ol></article></section>
-<nav class="guide-toc" aria-label="Содержание"><h2>Содержание</h2><ol><li class="toc-item"><a href="#guide-historical">Историческая справка</a></li><li class="toc-item"><a href="#guide-trips">Маршруты</a></li><li class="toc-item"><a href="#los_angeles_california_science_center">Los Angeles California Science Center</a></li><li class="toc-item"><a href="#los_angeles_cathedral">Собор Непорочного Зачатия Пресвятой Девы Марии</a></li><li class="toc-item"><a href="#los_angeles_crypto_arena">Los Angeles Crypto Arena</a></li><li class="toc-item"><a href="#los_angeles_exposition_park">Парк Экспозиции, Розовый сад</a></li><li class="toc-item"><a href="#los_angeles_getty_center">Los Angeles Getty Center</a></li><li class="toc-item"><a href="#los_angeles_getty_villa">Los Angeles Getty Villa</a></li><li class="toc-item"><a href="#los_angeles_griffith_observatory">Los Angeles Griffith Observatory</a></li><li class="toc-item"><a href="#los_angeles_griffith_sign_view">Los Angeles Griffith Sign View</a></li><li class="toc-item"><a href="#los_angeles_hollywood_boulevard">Los Angeles Hollywood Boulevard</a></li><li class="toc-item"><a href="#los_angeles_hollywood_sign">Los Angeles Hollywood Sign</a></li><li class="toc-item"><a href="#los_angeles_la_brea_tar_pits">Los Angeles La Brea Tar Pits</a></li><li class="toc-item"><a href="#los_angeles_lacma">Los Angeles Lacma</a></li><li class="toc-item"><a href="#los_angeles_pdfband_9_2679406c">Los Angeles</a></li><li class="toc-item"><a href="#los_angeles_malibu_pier">Молибу Пир</a></li><li class="toc-item"><a href="#los_angeles_mission_san_gabriel">Los Angeles Mission San Gabriel</a></li><li class="toc-item"><a href="#los_angeles_pdfband_8_51c60506">MOCA LA</a></li><li class="toc-item"><a href="#los_angeles_nhm_la">Природоведческий музей Лос-Анджелеса</a></li><li class="toc-item"><a href="#los_angeles_olvera_street">Улица Ольвера</a></li><li class="toc-item"><a href="#los_angeles_paramount_studio">Los Angeles Paramount Studio</a></li><li class="toc-item"><a href="#los_angeles_petersen">Los Angeles Petersen</a></li><li class="toc-item"><a href="#los_angeles_rodeo_drive">Родео Драйв</a></li><li class="toc-item"><a href="#los_angeles_pdfband_1_17963c70">Santa María de los Angeles church</a></li><li class="toc-item"><a href="#los_angeles_santa_monica_pier">Los Angeles Santa Monica Pier</a></li><li class="toc-item"><a href="#los_angeles_pdfband_2_42bc37a8">Sayyidah Ruqayya Mosque interior</a></li><li class="toc-item"><a href="#los_angeles_the_broad">Брод</a></li><li class="toc-item"><a href="#los_angeles_last_bookstore">Последняя книжная лавка</a></li><li class="toc-item"><a href="#los_angeles_union_station">Станция Союз Лос-Анджелес</a></li><li class="toc-item"><a href="#los_angeles_universal_studios">Los Angeles Universal Studios</a></li><li class="toc-item"><a href="#los_angeles_venice_beach">Los Angeles Venice Beach</a></li><li class="toc-item"><a href="#los_angeles_walt_disney_concert_hall">Los Angeles Walt Disney Concert Hall</a></li></ol></nav>
 <section class="place" id="los_angeles_california_science_center">
+<div class="place-lead">
 <h3>Los Angeles California Science Center</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/los_angeles_california_science_center.jpg" alt="Los Angeles California Science Center"/></figure>
+<p class="place-meta">Адрес: Exposition Park</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/los_angeles_california_science_center.jpg" alt="Los Angeles California Science Center" width="1280" height="656" style="height: 236px; max-height: 236px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/los_angeles_california_science_center_b.jpg" alt="Los Angeles California Science Center — вид 2" width="330" height="220" style="height: 236px; max-height: 236px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Экспозиция космического шаттла «Эндейвер» с интерактивными галереями и набросанными временными шкалами миссий. Для посещения павильона для трансфера в пиковые праздничные даты по-прежнему требуется предварительное бронирование. Сад роз в Парке Экспозиция расположен к западу для пикников.</p>
 <p class="prose">Endeavour летал по улицам Лос-Анджелеса в 2012 году, прежде чем быть наклоненным в экспозицию «Вертикальная стена» (Vertical Stack). Якорь оборудования НАСА в музее-рядке ЭКСПО-парка.</p></div>
 </section>
-<section class="place" id="los_angeles_cathedral">
-<h3>Собор Непорочного Зачатия Пресвятой Девы Марии</h3>
-
-
-<figure class="place-fig"><img src="../images/los_angeles_cathedral.jpg" alt="Собор Непорочного Зачатия Пресвятой Девы Марии"/></figure>
-<div class="place-desc"><p class="prose">Собор Непорочного Зачатия Пресвятой Девы Марии, расположенный в центре Лос-Анджелеса, является великолепным примером современной церковной архитектуры. Завершенный в 2002 году, он служит материнской церковью Архиепархии Лос-Анджелеса и является живым центром для богослужений и общественных мероприятий. Посетители могут восхищаться его поразительным дизайном, красивыми произведениями искусства и спокойной атмосферой, что делает его обязательным для посещения памятником города. Собор был спроектирован испанским архитектором Рафаэлем Монео. Он украшен большими бронзовыми дверями, созданными художником Робертом Грэмом, на которых изображены сцены из жизни Девы Марии.</p>
-<p class="prose">Собор Непорочной Девы Марии был освящен 2 сентября 2002 года, заменив бывший собор Святой Вибианы, который был поврежден во время землетрясения в Нортридже в 1994 году. Спроектированный архитектором Рафаэлем Монео, собор отражает современное толкование традиционной архитектуры церквей и стал символом приверженности архиепархии разнообразному сообществу Лос-Анджелеса. Как главное место поклонения для католической общины в Лос-Анджелесе, собор играет важную роль в религиозной жизни города. Здесь проводятся значимые литургические события, включая ежегодное празднование годовщины архиепархии и различные культурные мероприятия, которые подчеркивают богатое разнообразие местного населения. Собор также служит местом для межконфессионального диалога и общественных встреч, что укрепляет его культурное значение.</p></div>
-</section>
 <section class="place" id="los_angeles_crypto_arena">
+<div class="place-lead">
 <h3>Los Angeles Crypto Arena</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Период: 2016</p>
-<figure class="place-fig"><img src="../images/los_angeles_crypto_arena.jpg" alt="Los Angeles Crypto Arena"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/los_angeles_crypto_arena.jpg" alt="Los Angeles Crypto Arena" width="330" height="186" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/los_angeles_crypto_arena_b.jpg" alt="Los Angeles Crypto Arena — вид 2" width="330" height="186" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Crypto.com Arena — современный спортивный и развлекательный комплекс, расположенный в центре Лос-Анджелеса и известный своим элегантным дизайном и современными удобствами. Обладает вместимостью более 18 000 человек на баскетбольных матчах и до 20 000 на концертах. Здание оснащено выдвижными секциями сидений и инновационными светодиодными системами освещения. Его уникальная архитектура включает большой атриум и стеклянный фасад, которые усиливают естественное освещение в течение дневных мероприятий. Арена принимала множество громких мероприятий, таких как NBA All-Star Game и церемония вручения премии «Грэмми». Это демонстрирует эко-технологии, включая энергосберегающее освещение и водосберегающие функции.</p>
 <p class="prose">Открывшийся в 2016 году Crypto.com Arena заменил Staples Center в качестве домашней арены для команд НБА «Лос-Анджелес Лейкерс» и НХЛ «Лос-Анджелес Кингс». Дизайн арены разработала компания Populous, которая придала ей футуристический вид, сочетающий передовые технологии и элементы устойчивого развития. Эта знаковая арена принимает крупные спортивные мероприятия, концерты и культурные представления, что делает ее обязательным местом для посещения как фанатами, так и туристами.</p></div>
 </section>
-<section class="place" id="los_angeles_exposition_park">
-<h3>Парк Экспозиции, Розовый сад</h3>
-
-
-<figure class="place-fig"><img src="../images/los_angeles_exposition_park.jpg" alt="Парк Экспозиции, Розовый сад"/></figure>
-<div class="place-desc"><p class="prose">Розовый сад в Экспозиционном парке в Лос-Анджелесе — это потрясающий, спокойный оазис, в котором растет более 20 000 розовых кустов. Этот прекрасно оформленный сад не только радует глаз, но и служит мирным укрытием для посетителей, стремящихся убежать от суеты города. С его яркими цветами и ароматными цветами сад является популярным местом для неспешных прогулок, фотосессий и особых мероприятий. Сад насчитывает более 20 000 кустов роз более чем 200 сортов. Он расположен в парке Экспозиции, который также включает в себя несколько музеев и Калифорнийский научный центр.</p>
-<p class="prose">Розовый сад в Экспозиционном парке был основан в 1928 году как часть более крупного Экспозиционного парка, который изначально был создан для Лос-Анджелесской выставки 1910 года. Сад, спроектированный ландшафтным архитектором Ральфом Корнеллом, за десятилетия претерпел различные реконструкции для улучшения своей красоты и доступности. Культурно Розовый сад Экспозиционного парка значим как общественное пространство, которое способствует вовлечению сообщества и оценке садоводства. В течение года здесь проводятся многочисленные мероприятия, включая образовательные программы и фестивали, способствующие связи между природой и местным сообществом. Сад также вносит вклад в культурный ландшафт Лос-Анджелеса, отражая приверженность города зеленым пространствам на фоне городской застройки.</p></div>
-</section>
 <section class="place" id="los_angeles_getty_center">
+<div class="place-lead">
 <h3>Los Angeles Getty Center</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/los_angeles_getty_center.jpg" alt="Los Angeles Getty Center"/></figure>
+<p class="place-meta">Адрес: Brentwood hilltop</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/los_angeles_getty_center.jpg" alt="Los Angeles Getty Center" width="1280" height="907" style="height: 68px; max-height: 68px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/los_angeles_getty_center_b.jpg" alt="Los Angeles Getty Center — вид 2" width="330" height="49" style="height: 68px; max-height: 68px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Объединение европейской живописи, иллюминированных манускриптов и декоративно-прикладного искусства, доступное на трамвае от подземной парковки. Вход бесплатный; в выходные дни может потребоваться бронирование транспорта по расписанию. Сад кактусов выходит окнами на взлётно-посадочные полосы и тихоокеанский морской слой.</p>
 <p class="prose">Фонд Дж. Пола Гетти объединил программы от виллы в Малибу до этого пожароустойчивого архива и галерей на вершине холма. Самое посещаемое в Лос-Анджелесе место, куда можно попасть без платы.</p></div>
 </section>
 <section class="place" id="los_angeles_getty_villa">
+<div class="place-lead">
 <h3>Los Angeles Getty Villa</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/los_angeles_getty_villa.jpg" alt="Los Angeles Getty Villa"/></figure>
+<p class="place-meta">Адрес: Pacific Palisades</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/los_angeles_getty_villa.jpg" alt="Los Angeles Getty Villa" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/los_angeles_getty_villa_b.jpg" alt="Los Angeles Getty Villa — вид 2" width="330" height="247" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Древности и сады, стилизованные под везувианские виллы, доступны по предварительному бронированию от PCH. Билеты со временем/временные билеты отделены от Brentwood Getty Center. Сад трав представляет древние средиземноморские растения.</p>
 <p class="prose">Музей Пола Гетти в Малибу был перестроен с соблюдением более строгих сейсмических и противопожарных норм. Коллекция классических объектов на побережье отличается от кампуса на холме.</p></div>
 </section>
 <section class="place" id="los_angeles_griffith_observatory">
+<div class="place-lead">
 <h3>Los Angeles Griffith Observatory</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/los_angeles_griffith_observatory.jpg" alt="Los Angeles Griffith Observatory"/></figure>
+<p class="place-meta">Адрес: Griffith Park</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/los_angeles_griffith_observatory.jpg" alt="Los Angeles Griffith Observatory" width="1280" height="853" style="height: 126px; max-height: 126px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/los_angeles_griffith_observatory_b.jpg" alt="Los Angeles Griffith Observatory — вид 2" width="330" height="90" style="height: 126px; max-height: 126px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Общественная обсерватория с демонстрациями телескопов Zeiss, шоу катушек Тесла и бесплатными астрономическими экспозициями над смогом бассейна Лос-Анджелеса. На закате террасы заполняются толпой, чтобы полюбоваться огнями центра. Парковка заполнена в выходные; шаттл DASH связывает с Vermont Metro.</p>
 <p class="prose">Здание было профинансировано по завещанию Гриффита в качестве подарка общественности. Фрески эпохи WPA посвящены науке. Железобетонная икона гражданского оптимизма эпохи Великой депрессии.</p></div>
 </section>
 <section class="place" id="los_angeles_griffith_sign_view">
+<div class="place-lead">
 <h3>Los Angeles Griffith Sign View</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/los_angeles_griffith_sign_view.jpg" alt="Los Angeles Griffith Sign View"/></figure>
+<p class="place-meta">Адрес: Griffith Park</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/los_angeles_griffith_sign_view.jpg" alt="Los Angeles Griffith Sign View" width="1280" height="960" style="height: 126px; max-height: 126px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/los_angeles_griffith_sign_view_b.jpg" alt="Los Angeles Griffith Sign View — вид 2" width="330" height="90" style="height: 126px; max-height: 126px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Вестилочные палубы позволяют сделать телеобъективные снимки знака Голливуда над хребтами Лос-Фелис. Программы планетария раскупаются в праздничные выходные. Парковка на закате может потребовать только верхних ярусов.</p>
 <p class="prose">Публичные ночи с телескопом продолжают миссии по популяризации знаний, начатые в эпоху WPA. Классическое обрамление знаками без незаконного вторжения на склоны холмов.</p></div>
 </section>
 <section class="place" id="los_angeles_hollywood_boulevard">
+<div class="place-lead">
 <h3>Los Angeles Hollywood Boulevard</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/los_angeles_hollywood_boulevard.jpg" alt="Los Angeles Hollywood Boulevard"/></figure>
+<p class="place-meta">Адрес: Hollywood</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/los_angeles_hollywood_boulevard.jpg" alt="Los Angeles Hollywood Boulevard" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/los_angeles_hollywood_boulevard_b.jpg" alt="Los Angeles Hollywood Boulevard — вид 2" width="330" height="247" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">На площади перед Театром TCL Chinese Theatre расположены принты и звездные мемориальные plaques вдоль оживленных сувенирных лавок. Уличные артисты ожидают чаевых за фотографии. Выход на линии метро B находится на пересечении улиц Hollywood и Highland.</p>
 <p class="prose">Театральный район пришел в упадок, а затем был перезапущен благодаря туризму и реинвестициям метро. Попкультурный паломнический маршрут, ведущий к холмам.</p></div>
 </section>
 <section class="place" id="los_angeles_hollywood_sign">
+<div class="place-lead">
 <h3>Los Angeles Hollywood Sign</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/los_angeles_hollywood_sign.jpg" alt="Los Angeles Hollywood Sign"/></figure>
+<p class="place-meta">Адрес: Mount Lee, Hollywood Hills</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/los_angeles_hollywood_sign.jpg" alt="Los Angeles Hollywood Sign" width="1280" height="800" style="height: 288px; max-height: 288px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/los_angeles_hollywood_sign_b.jpg" alt="Los Angeles Hollywood Sign — вид 2" width="330" height="225" style="height: 288px; max-height: 288px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">На склоне холма расположены буквы, изначально складывающиеся в надпись «Hollywoodland». Для телеобъективных снимков служат обзорные точки обсерватории Гриффита и каньона Бичвуд. Ближайшие подходы огорожены; разрешенные маршруты включают хребты Гриффит-парка. Гондолы на вертолете облетают гребень для воздушных ракурсов.</p>
 <p class="prose">Реклама недвижимости эпохи депрессии стала эмблемой киноиндустрии после признаков износа и частичного демонтажа. Глобальный синоним американской индустрии развлечений.</p></div>
 </section>
 <section class="place" id="los_angeles_la_brea_tar_pits">
+<div class="place-lead">
 <h3>Los Angeles La Brea Tar Pits</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/los_angeles_la_brea_tar_pits.jpg" alt="Los Angeles La Brea Tar Pits"/></figure>
+<p class="place-meta">Адрес: Wilshire Boulevard at Curson Avenue</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/los_angeles_la_brea_tar_pits.jpg" alt="Los Angeles La Brea Tar Pits" width="1280" height="960" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/los_angeles_la_brea_tar_pits_b.jpg" alt="Los Angeles La Brea Tar Pits — вид 2" width="330" height="330" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">На активном асфальте расположены выставки палеолитических находок и воссозданные прогулочные маршруты по плейстоценовому саду. Из проекта 23 до сих пор извлекаются кости с археологических раскопок строительного периода. Спектакль «Ice Age Encounters» показывается в 3D кинотеатре по выходным.</p>
 <p class="prose">Нефтяные просачивания замуровали животных на тысячелетия; экспедиции Хэнкока превратили ямы в общественную науку. Рабочий местонахождение окаменелостей рядом с кампусом художественного музея округа.</p></div>
 </section>
 <section class="place" id="los_angeles_lacma">
+<div class="place-lead">
 <h3>Los Angeles Lacma</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Период: 1913</p>
-<figure class="place-fig"><img src="../images/los_angeles_lacma.jpg" alt="Los Angeles Lacma"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/los_angeles_lacma_b.jpg" alt="Los Angeles Lacma" width="330" height="239"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Расположенный в самом сердце Музейного Ряда Лос-Анджелеса, LACMA — одно из самых известных художественных учреждений Америки. Обладая более чем тремя миллионами работ, охватывающих века и континенты, музей демонстрирует шедевры от древних цивилизаций до произведений современных художников. Основан Уильямом Эндрюсом Кларком-младшим, который пожертвовал его обширную художественную коллекцию округу. Музей прошел масштабную реконструкцию в конце XX века, в результате чего расширились выставочные пространства и улучшилась доступность. Значительные постоянные коллекции включают египетские артефакты, европейскую живопись и современное искусство. LACMA проводит временные выставки, посвященные новым художникам и передовым тенденциям в современном искусстве. Предлагает бесплатный вход в определенные дни каждого месяца.</p>
 <p class="prose">Основанный в 1913 году как Музей округа Лос-Анджелес (Los Angeles County Museum), LACMA превратился в глобальный центр искусства и культуры. Его коллекция включает значимые произведения как западных, так и незападных традиций, что делает его жизненно важным культурным центром для Южной Калифорнии. Посетите LACMA, чтобы погрузиться в мировое искусство, познакомиться с разнообразными культурами и насладиться выставками, вызывающими размышления.</p></div>
 </section>
-<section class="place" id="los_angeles_pdfband_9_2679406c">
-<h3>Los Angeles</h3>
+<section class="place" id="los_angeles_landmark">
+<div class="place-lead">
+<h3>Los Angeles Landmark</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/los_angeles_pdfband_9_2679406c.jpg" alt="Los Angeles"/></figure>
+<figure class="place-fig place-fig--hi-res"><img src="../images/los_angeles_landmark.jpg" alt="Los Angeles Landmark" width="1143" height="1600"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Лос-А́нджелес (англ. Los Angeles, американское произношение: [lɔːs ˈænd͡ʒələs] ; исп. Los Ángeles, МФА (исп.</p></div>
 </section>
-<section class="place" id="los_angeles_malibu_pier">
-<h3>Молибу Пир</h3>
-
-
-<figure class="place-fig"><img src="../images/los_angeles_malibu_pier.jpg" alt="Молибу Пир"/></figure>
-<div class="place-desc"><p class="prose">Мостик Малибу — это живописная достопримечательность, расположенная в самом сердце Малибу, Калифорния, предлагающая потрясающие виды на Тихий океан. Этот знаковый пирс является популярным местом для рыбалки, ужина и наслаждения прибрежными пейзажами. Посетители могут прогуливаться по деревянным настилам, наслаждаться океанским бризом и делать запоминающиеся фотографии на фоне калифорнийского побережья. Мостик Малибу был построен в 1905 году. Пирс был показан во множестве фильмов и телешоу.</p>
-<p class="prose">Мостик Малибу был изначально построен в 1905 году и служил пунктом отгрузки местных товаров. На протяжении многих лет он претерпел несколько реконструкций и реставраций, особенно после того, как пострадал от штормов и природных явлений. Мостик является важной частью истории Малибу, отражая развитие этого района как пляжного сообщества. Культурно, пирс Малибу является символом расслабленного калифорнийского образа жизни и был представлен в различных фильмах и телешоу, что способствовало его иконному статусу. Он служит местом встречи для местных жителей и туристов, воплощая дух сообщества и отдыха, который определяет Малибу. Пирс также поддерживает рекреационные активности, улучшая повседневную жизнь жителей и посетителей.</p></div>
-</section>
 <section class="place" id="los_angeles_mission_san_gabriel">
+<div class="place-lead">
 <h3>Los Angeles Mission San Gabriel</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/los_angeles_mission_san_gabriel.jpg" alt="Los Angeles Mission San Gabriel"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/los_angeles_mission_san_gabriel.jpg" alt="Los Angeles Mission San Gabriel" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/los_angeles_mission_san_gabriel_b.jpg" alt="Los Angeles Mission San Gabriel — вид 2" width="330" height="215" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Миссия Сан-Габраэль-Арканхель — католическая миссия и исторический памятник в Сан-Габраэле, Калифорния.</p></div>
 </section>
-<section class="place" id="los_angeles_pdfband_8_51c60506">
-<h3>MOCA LA</h3>
+<section class="place" id="los_angeles_moca_la">
+<div class="place-lead">
+<h3>Los Angeles Moca La</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/los_angeles_pdfband_8_51c60506.jpg" alt="MOCA LA"/></figure>
-</section>
-<section class="place" id="los_angeles_nhm_la">
-<h3>Природоведческий музей Лос-Анджелеса</h3>
-
-
-<figure class="place-fig"><img src="../images/los_angeles_nhm_la.jpg" alt="Природоведческий музей Лос-Анджелеса"/></figure>
-<div class="place-desc"><p class="prose">Естественноисторический музей округа Лос-Анджелес — это сокровищница природного мира, демонстрирующая обширную коллекцию образцов и экспонатов, охватывающих историю жизни на Земле. Посетители могут исследовать все, от ископаемых динозавров до редких драгоценных камней, что делает его обязательным для посещения как для семей, так и для любителей науки. Музей также предлагает интерактивные экспозиции и образовательные программы, которые вовлекают посетителей всех возрастов. Основанный в 1913 году, музей является одним из крупнейших музеев естественной истории на западе Соединенных Штатов. В нем хранится более 35 миллионов образцов, включая значительную коллекцию ископаемых динозавров.</p>
-<p class="prose">Природоведческий музей был основан в 1913 году, изначально созданный как Музей истории, науки и искусства округа Лос-Анджелес. За годы своего существования он претерпел несколько расширений и реконструкций, включая значительное дополнение в 2013 году, которое улучшило выставочные площади и опыт посетителей. Музей сыграл ключевую роль в сохранении и изучении природной истории Калифорнии. С культурной точки зрения, Музей естественной истории служит важным образовательным ресурсом, способствуя более глубокому пониманию биоразнообразия и окружающей среды среди населения. Он вносит свой вклад в богатую культурную ткань Лос-Анджелеса, проводя различные общественные мероприятия и программы, которые отмечают природное наследие региона. Коллекции музея также отражают разнообразные экосистемы Калифорнии, подчеркивая важность усилий по охране окружающей среды.</p></div>
-</section>
-<section class="place" id="los_angeles_olvera_street">
-<h3>Улица Ольвера</h3>
-
-
-<figure class="place-fig"><img src="../images/los_angeles_olvera_street.jpg" alt="Улица Ольвера"/></figure>
-<div class="place-desc"><p class="prose">Улица Ольвера — это яркий рынок в Лос-Анджелесе, известный своим богатым мексиканским наследием и живой атмосферой. Посетители могут исследовать красочные магазины, попробовать аутентичную уличную еду и насладиться традиционной музыкой и танцевальными выступлениями. Эта историческая улица часто называется местом рождения Лос-Анджелеса, что делает её обязательным местом для посещения тем, кто хочет ощутить культурные корни города. Улица Ольвера часто называется местом рождения Лос-Анджелеса. Улица предлагает разнообразие магазинов, ресторанов и культурных достопримечательностей.</p>
-<p class="prose">Улица Ольвера была основана в 1930 году как часть Исторического района Лос-Анджелеса, с целью сохранения мексиканского наследия города. Улица расположена в оригинальном поселении Лос-Анджелеса, основанном в 1781 году, и включает здания, датируемые 19-м веком, демонстрируя раннюю историю и развитие этого района. Культурно, улица Ольвера служит важным центром для празднования мексиканских традиций и наследия в Лос-Анджелесе. Здесь проходит множество фестивалей и мероприятий в течение года, отражающих яркую идентичность сообщества. Улица также является популярным местом для местных художников и ремесленников, вносящих вклад в разнообразный культурный ландшафт города.</p></div>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/los_angeles_moca_la.jpg" alt="Los Angeles Moca La" width="1280" height="656" style="height: 236px; max-height: 236px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/los_angeles_moca_la_b.jpg" alt="Los Angeles Moca La — вид 2" width="330" height="247" style="height: 236px; max-height: 236px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 </section>
 <section class="place" id="los_angeles_paramount_studio">
+<div class="place-lead">
 <h3>Los Angeles Paramount Studio</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/los_angeles_paramount_studio.jpg" alt="Los Angeles Paramount Studio"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/los_angeles_paramount_studio.jpg" alt="Los Angeles Paramount Studio" width="330" height="422" style="height: 414px; max-height: 414px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--row-sized"><img src="../images/los_angeles_paramount_studio_b.jpg" alt="Los Angeles Paramount Studio — вид 2" width="330" height="587" style="height: 414px; max-height: 414px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Ворота Paramount Pictures — это знаковый вход в одну из самых известных киностудий Голливуда, расположенную в Лос-Анджелесе. Посетители могут полюбоваться исторической архитектурой и знаменитым логотипом Paramount, который стал символом киноиндустрии. Хотя публичный доступ ограничен, ворота остаются популярным местом для фотографий для поклонников кино и поп-культуры. Компания Paramount Pictures была основана в 1912 году. Студия известна своими культовыми фильмами, такими как &#x27;Крёстный отец&#x27; и &#x27;Форрест Гамп&#x27;. Ворота украшены знаменитым логотипом Paramount, который стал синонимом Голливуда.</p>
 <p class="prose">Paramount Pictures была основана в 1912 году, что делает её одной из старейших киностудий в Голливуде. Студия выпустила множество классических фильмов и сыграла значительную роль в развитии американской киноиндустрии. Иконические ворота с характерной аркой студии служат ориентиром с ранних лет её существования. Культурно Paramount Pictures является краеугольным камнем индустрии развлечений, способствуя репутации Лос-Анджелеса как сердца Голливуда. Студия принимала участие в производстве многих влиятельных фильмов и телешоу, формируя ландшафт американского кино и популярной культуры. Ее присутствие подчеркивает важность кино как формы искусства и значительного аспекта повседневной жизни в Лос-Анджелесе.</p></div>
 </section>
 <section class="place" id="los_angeles_petersen">
+<div class="place-lead">
 <h3>Los Angeles Petersen</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/los_angeles_petersen.jpg" alt="Los Angeles Petersen"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/los_angeles_petersen.jpg" alt="Los Angeles Petersen" width="330" height="160" style="height: 224px; max-height: 224px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/los_angeles_petersen_b.jpg" alt="Los Angeles Petersen — вид 2" width="330" height="220" style="height: 224px; max-height: 224px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Музей автомобилей Петерсена (The Petersen Automotive Museum) — это музей автомобилей, расположенный на бульваре Уилшир (Wilshire Boulevard) вдоль Музейного проспекта (Museum Row) в районе Миракел Майл (Miracle Mile) Лос-Анджелеса. Являясь одной из крупнейших в мире коллекций, Музей автомобилей Петерсена — это некоммерческая организация, специализирующаяся на истории автомобилестроения и связанных образовательных программах. История: Основан 11 июня 1994 года издателем журналов Робертом Э.</p></div>
 </section>
-<section class="place" id="los_angeles_rodeo_drive">
-<h3>Родео Драйв</h3>
+<section class="place" id="los_angeles_santa_mar_a_de_los_angeles_church">
+<div class="place-lead">
+<h3>Los Angeles Santa Mar A De Los Angeles Church</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/los_angeles_rodeo_drive.jpg" alt="Родео Драйв"/></figure>
-<div class="place-desc"><p class="prose">Родео Драйв — это всемирно известная торговая улица, расположенная в Беверли-Хиллз, Лос-Анджелес, знаменитая своими роскошными бутиками и магазинами дизайнерской одежды. Это знаковое место привлекает посетителей со всего мира, стремящихся ощутить его гламурную атмосферу и предложения высококлассной моды. С улицами, обсаженными пальмами, и атмосферой высокого класса, Родео Драйв олицетворяет суть роскошной жизни в Лос-Анджелесе. Родео Драйв простирается примерно на 2 мили в Беверли-Хиллз. Здесь расположено более 100 бутиков и дизайнерских магазинов. Улица часто появляется в фильмах и телешоу, что повышает её мировую известность.</p>
-<p class="prose">Родео Драйв был изначально основан в 1920-х годах, его название происходит от испанского слова &#x27;rodeo&#x27;, что означает &#x27;сбор&#x27;. Улица приобрела известность в 1970-х годах, когда превратилась в роскошное торговое направление, привлекая высококлассные бренды и состоятельных клиентов. Ключевые события, такие как съемки фильма &#x27;Красотка&#x27; в 1990 году, еще больше укрепили ее статус культурной достопримечательности. Культурно Роdeo Драйв является символом богатства и роскоши, отражая образ жизни и стремления многих жителей Лос-Анджелеса. Он играет значительную роль в модной индустрии, принимая множество брендов высокого класса и модных событий. Эта улица также является популярным местом для туристов, способствуя местной экономике и служа фоном для различных культурных выражений, включая художественные инсталляции и появления знаменитостей.</p></div>
-</section>
-<section class="place" id="los_angeles_pdfband_1_17963c70">
-<h3>Santa María de los Angeles church</h3>
-
-
-<figure class="place-fig"><img src="../images/los_angeles_pdfband_1_17963c70.jpg" alt="Santa María de los Angeles church"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/los_angeles_santa_mar_a_de_los_angeles_church.jpg" alt="Los Angeles Santa Mar A De Los Angeles Church" width="1280" height="721" style="height: 260px; max-height: 260px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/los_angeles_santa_mar_a_de_los_angeles_church_b.jpg" alt="Los Angeles Santa Mar A De Los Angeles Church — вид 2" width="330" height="440" style="height: 260px; max-height: 260px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 </section>
 <section class="place" id="los_angeles_santa_monica_pier">
+<div class="place-lead">
 <h3>Los Angeles Santa Monica Pier</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/los_angeles_santa_monica_pier.jpg" alt="Los Angeles Santa Monica Pier"/></figure>
+<p class="place-meta">Адрес: Colorado Avenue ocean terminus</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/los_angeles_santa_monica_pier.jpg" alt="Los Angeles Santa Monica Pier" width="1280" height="996" style="height: 252px; max-height: 252px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/los_angeles_santa_monica_pier_b.jpg" alt="Los Angeles Santa Monica Pier — вид 2" width="330" height="180" style="height: 252px; max-height: 252px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">На колесе Ferris-wheel в Пасифик-парке и знаке «Конец тропы» Route 66 собираются толпы на закате; на тротуарах выступают уличные артисты. Велосипедная тропа начинается от пирсовой рампы. При сильных зимних волнах могут быть закрыты нижние палубы по соображениям безопасности.</p>
 <p class="prose">Мниципальный пирс пережил конкурс частных пирсов; реставрация карусели сохраняет ДНК ярмарочной культуры начала XX века. Набережная общественная зона между утесами Малибу и траекториями полетов аэропорта Лос-Анджелеса.</p></div>
 </section>
-<section class="place" id="los_angeles_pdfband_2_42bc37a8">
-<h3>Sayyidah Ruqayya Mosque interior</h3>
+<section class="place" id="los_angeles_sayyidah_ruqayya_mosque_interior">
+<div class="place-lead">
+<h3>Los Angeles Sayyidah Ruqayya Mosque Interior</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/los_angeles_pdfband_2_42bc37a8.jpg" alt="Sayyidah Ruqayya Mosque interior"/></figure>
-</section>
-<section class="place" id="los_angeles_the_broad">
-<h3>Брод</h3>
-
-
-<figure class="place-fig"><img src="../images/los_angeles_the_broad.jpg" alt="Брод"/></figure>
-<div class="place-desc"><p class="prose">Брод — это музей современного искусства, расположенный в центре Лос-Анджелеса, известный своей впечатляющей архитектурой и внушительной коллекцией послевоенного и современного искусства. Открытый в 2015 году, он вмещает более 2000 произведений, включая работы таких художников, как Джефф Кунс, Синди Шерман и Энди Уорхол. Вход бесплатный, что делает его доступным культурным местом как для местных жителей, так и для туристов. Брод хранит более 2000 произведений искусства, в основном с послевоенной эпохи до настоящего времени. Музей был спроектирован архитектурной фирмой Diller Scofidio + Renfro.</p>
-<p class="prose">Брод был основан филантропами Эли и Эдит Брод, которые стремились создать пространство для современного искусства в Лос-Анджелесе. Музей открыл свои двери для публики 20 сентября 2015 года и был спроектирован архитектурной фирмой Diller Scofidio + Renfro, отличающейся характерным внешним видом, напоминающим соты. Культурно, The Broad играет важную роль в яркой арт-сцене Лос-Анджелеса, способствуя репутации города как глобального центра современного искусства. Он не только демонстрирует значимые произведения из Коллекции Броуд, но и вовлекает сообщество через образовательные программы и выставки. Политика бесплатного входа в музей отражает приверженность доступности и инклюзивности в искусстве.</p></div>
-</section>
-<section class="place" id="los_angeles_last_bookstore">
-<h3>Последняя книжная лавка</h3>
-
-
-<figure class="place-fig"><img src="../images/los_angeles_last_bookstore.jpg" alt="Последняя книжная лавка"/></figure>
-<div class="place-desc"><p class="prose">Последняя книжная лавка — это любимая культурная достопримечательность в центре Лос-Анджелеса, известная своей обширной коллекцией новых и подержанных книг, виниловых пластинок и уникальных художественных инсталляций. Это яркое пространство приглашает посетителей исследовать свои лабиринтные полки и уютные уголки для чтения, что делает его идеальным местом для любителей книг и творческих людей. Книжная лавка также проводит различные мероприятия, включая чтения авторов и художественные выставки, обогащая местную культурную сцену. Последняя книжная лавка расположена в бывшем здании банка в центре Лос-Анджелеса. В нем представлено более 250 000 новых и подержанных книг, а также выделенная зона для виниловых пластинок.</p>
-<p class="prose">Основанная в 2005 году Джошем Спенсером, The Last Bookstore начала как небольшой магазин в другом месте, прежде чем переехать в свое текущее помещение в историческом здании банка в 2011 году. С тех пор магазин стал заметной достопримечательностью Лос-Анджелеса, известной своим креативным дизайном и ориентированным на сообщество подходом. Культурно, The Last Bookstore служит центром для любителей литературы и художников, способствуя яркой художественной сцене в Лос-Анджелесе. Его приверженность развитию общественного взаимодействия через мероприятия и выставки подчеркивает его роль в продвижении местной культуры и креативности. Книжный магазин также является свидетельством неугасимой любви к печатной литературе в все более цифровом мире.</p></div>
-</section>
-<section class="place" id="los_angeles_union_station">
-<h3>Станция Союз Лос-Анджелес</h3>
-
-
-<figure class="place-fig"><img src="../images/los_angeles_union_station.jpg" alt="Станция Союз Лос-Анджелес"/></figure>
-<div class="place-desc"><p class="prose">Юнион Стейшн в Лос-Анджелесе, великолепный пример архитектуры в стиле миссионного возрождения и арт-деко, является главной железнодорожной станцией Лос-Анджелеса. Открытая в 1939 году, она не только транспортный узел, но и культурная достопримечательность, с красивыми фресками и плиточными работами, отражающими богатую историю города. Посетители могут насладиться яркой атмосферой станции, которая соединяет различные варианты транспорта и предлагает возможности для обеда и шопинга. Юнион-Стейшн - крупнейший пассажирский железнодорожный терминал на западе Соединенных Штатов. Станция сочетает в себе элементы испанской колониальной и ар-деко архитектуры.</p>
-<p class="prose">Юнион-Стейшн была открыта 3 мая 1939 года в качестве замены нескольким старым станциям в Лос-Анджелесе. Спроектированная архитекторами Джоном и Дональдом Парккинсонами, она была построена для того, чтобы справиться с растущим числом путешественников и увеличением популярности железнодорожных поездок в начале 20 века. С тех пор станция стала свидетелем значительных событий, включая прибытие войск во время Второй мировой войны и эволюцию транспортной сети города. Культурно Юнион Стейшн является важной частью наследия Лос-Анджелеса, часто называемой «Последней из великих железнодорожных станций», построенных в Соединенных Штатах. Она служит местом встречи для местных жителей и туристов, принимая различные мероприятия и выставки, которые отмечают разнообразную историю города. Архитектурная красота и историческое значение станции делают ее ключевой достопримечательностью в городской среде Лос-Анджелеса.</p></div>
+<figure class="place-fig place-fig--hi-res"><img src="../images/los_angeles_sayyidah_ruqayya_mosque_interior.jpg" alt="Los Angeles Sayyidah Ruqayya Mosque Interior" width="1280" height="851"/></figure>
+</div>
 </section>
 <section class="place" id="los_angeles_universal_studios">
+<div class="place-lead">
 <h3>Los Angeles Universal Studios</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/los_angeles_universal_studios.jpg" alt="Los Angeles Universal Studios"/></figure>
+<p class="place-meta">Адрес: Universal City</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/los_angeles_universal_studios.jpg" alt="Los Angeles Universal Studios" width="1200" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/los_angeles_universal_studios_b.jpg" alt="Los Angeles Universal Studios — вид 2" width="330" height="421" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Метро Красная Линия выходит в ночную жизнь CityWalk перед воротами. Проездные билеты сокращают время ожидания в очереди в пиковые летние субботы. Туры по студиям времен Лью Уоссермана превратились в полноценный тематический парк над перевал Кахуенга. Аттракционы со студийным брендингом видны с шоссе 101.</p></div>
 </section>
 <section class="place" id="los_angeles_venice_beach">
+<div class="place-lead">
 <h3>Los Angeles Venice Beach</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/los_angeles_venice_beach.jpg" alt="Los Angeles Venice Beach"/></figure>
+<p class="place-meta">Адрес: Venice</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/los_angeles_venice_beach.jpg" alt="Los Angeles Venice Beach" width="1280" height="851" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/los_angeles_venice_beach_b.jpg" alt="Los Angeles Venice Beach — вид 2" width="330" height="247" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Парковка на выходные дни заполняет боковые улицы к востоку от Пасифик. Скульптура зеленой черепахи знаменует площадь скейт-танца. Каналы уменьшились, но бордвоковая культура выжила как уличная театральная полоса Лос-Анджелеса. Прибрежная контркультура рядом с офисами Силиконового пляжа.</p></div>
 </section>
 <section class="place" id="los_angeles_walt_disney_concert_hall">
+<div class="place-lead">
 <h3>Los Angeles Walt Disney Concert Hall</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/los_angeles_walt_disney_concert_hall.jpg" alt="Los Angeles Walt Disney Concert Hall"/></figure>
+<p class="place-meta">Адрес: Downtown Los Angeles</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/los_angeles_walt_disney_concert_hall.jpg" alt="Los Angeles Walt Disney Concert Hall" width="1280" height="616" style="height: 222px; max-height: 222px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/los_angeles_walt_disney_concert_hall_b.jpg" alt="Los Angeles Walt Disney Concert Hall — вид 2" width="330" height="258" style="height: 222px; max-height: 222px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Родовая сцена Филармонии ЛА с винными местами и органным остеклением, интегрированные в изогнутый деревянный интерьер Гери. Экскурсии по архитектуре объясняют настройку панелей после ранних проблем с бликами. Сезоны хора «LA Master Chorale» проходят в зале совместно с посещающими оркестрами.</p>
 <p class="prose">Пожертвование Лиллиан Диズニー стимулировало десятилетия сбора средств и инженерные работы для реализации сложной металлической обшивки. Культурный центр в центре города, расположенный после 2000 года, рядом с Музыкальным центром.</p></div>
+</section>
+<section class="place" id="los_angeles_the_broad">
+<div class="place-lead">
+<h3>Брод</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/los_angeles_the_broad.jpg" alt="Брод" width="330" height="197" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/los_angeles_the_broad_b.jpg" alt="Брод — вид 2" width="330" height="206" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Брод — это музей современного искусства, расположенный в центре Лос-Анджелеса, известный своей впечатляющей архитектурой и внушительной коллекцией послевоенного и современного искусства. Открытый в 2015 году, он вмещает более 2000 произведений, включая работы таких художников, как Джефф Кунс, Синди Шерман и Энди Уорхол. Вход бесплатный, что делает его доступным культурным местом как для местных жителей, так и для туристов. Брод хранит более 2000 произведений искусства, в основном с послевоенной эпохи до настоящего времени. Музей был спроектирован архитектурной фирмой Diller Scofidio + Renfro.</p>
+<p class="prose">Брод был основан филантропами Эли и Эдит Брод, которые стремились создать пространство для современного искусства в Лос-Анджелесе. Музей открыл свои двери для публики 20 сентября 2015 года и был спроектирован архитектурной фирмой Diller Scofidio + Renfro, отличающейся характерным внешним видом, напоминающим соты. Культурно, The Broad играет важную роль в яркой арт-сцене Лос-Анджелеса, способствуя репутации города как глобального центра современного искусства. Он не только демонстрирует значимые произведения из Коллекции Броуд, но и вовлекает сообщество через образовательные программы и выставки. Политика бесплатного входа в музей отражает приверженность доступности и инклюзивности в искусстве.</p></div>
+</section>
+<section class="place" id="los_angeles_malibu_pier">
+<div class="place-lead">
+<h3>Молибу Пир</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/los_angeles_malibu_pier.jpg" alt="Молибу Пир" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/los_angeles_malibu_pier_b.jpg" alt="Молибу Пир — вид 2" width="330" height="219" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Мостик Малибу — это живописная достопримечательность, расположенная в самом сердце Малибу, Калифорния, предлагающая потрясающие виды на Тихий океан. Этот знаковый пирс является популярным местом для рыбалки, ужина и наслаждения прибрежными пейзажами. Посетители могут прогуливаться по деревянным настилам, наслаждаться океанским бризом и делать запоминающиеся фотографии на фоне калифорнийского побережья. Мостик Малибу был построен в 1905 году. Пирс был показан во множестве фильмов и телешоу.</p>
+<p class="prose">Мостик Малибу был изначально построен в 1905 году и служил пунктом отгрузки местных товаров. На протяжении многих лет он претерпел несколько реконструкций и реставраций, особенно после того, как пострадал от штормов и природных явлений. Мостик является важной частью истории Малибу, отражая развитие этого района как пляжного сообщества. Культурно, пирс Малибу является символом расслабленного калифорнийского образа жизни и был представлен в различных фильмах и телешоу, что способствовало его иконному статусу. Он служит местом встречи для местных жителей и туристов, воплощая дух сообщества и отдыха, который определяет Малибу. Пирс также поддерживает рекреационные активности, улучшая повседневную жизнь жителей и посетителей.</p></div>
+</section>
+<section class="place" id="los_angeles_exposition_park">
+<div class="place-lead">
+<h3>Парк Экспозиции, Розовый сад</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/los_angeles_exposition_park.jpg" alt="Парк Экспозиции, Розовый сад" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/los_angeles_exposition_park_b.jpg" alt="Парк Экспозиции, Розовый сад — вид 2" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Розовый сад в Экспозиционном парке в Лос-Анджелесе — это потрясающий, спокойный оазис, в котором растет более 20 000 розовых кустов. Этот прекрасно оформленный сад не только радует глаз, но и служит мирным укрытием для посетителей, стремящихся убежать от суеты города. С его яркими цветами и ароматными цветами сад является популярным местом для неспешных прогулок, фотосессий и особых мероприятий. Сад насчитывает более 20 000 кустов роз более чем 200 сортов. Он расположен в парке Экспозиции, который также включает в себя несколько музеев и Калифорнийский научный центр.</p>
+<p class="prose">Розовый сад в Экспозиционном парке был основан в 1928 году как часть более крупного Экспозиционного парка, который изначально был создан для Лос-Анджелесской выставки 1910 года. Сад, спроектированный ландшафтным архитектором Ральфом Корнеллом, за десятилетия претерпел различные реконструкции для улучшения своей красоты и доступности. Культурно Розовый сад Экспозиционного парка значим как общественное пространство, которое способствует вовлечению сообщества и оценке садоводства. В течение года здесь проводятся многочисленные мероприятия, включая образовательные программы и фестивали, способствующие связи между природой и местным сообществом. Сад также вносит вклад в культурный ландшафт Лос-Анджелеса, отражая приверженность города зеленым пространствам на фоне городской застройки.</p></div>
+</section>
+<section class="place" id="los_angeles_last_bookstore">
+<div class="place-lead">
+<h3>Последняя книжная лавка</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/los_angeles_last_bookstore.jpg" alt="Последняя книжная лавка" width="330" height="440" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/los_angeles_last_bookstore_b.jpg" alt="Последняя книжная лавка — вид 2" width="330" height="265" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Последняя книжная лавка — это любимая культурная достопримечательность в центре Лос-Анджелеса, известная своей обширной коллекцией новых и подержанных книг, виниловых пластинок и уникальных художественных инсталляций. Это яркое пространство приглашает посетителей исследовать свои лабиринтные полки и уютные уголки для чтения, что делает его идеальным местом для любителей книг и творческих людей. Книжная лавка также проводит различные мероприятия, включая чтения авторов и художественные выставки, обогащая местную культурную сцену. Последняя книжная лавка расположена в бывшем здании банка в центре Лос-Анджелеса. В нем представлено более 250 000 новых и подержанных книг, а также выделенная зона для виниловых пластинок.</p>
+<p class="prose">Основанная в 2005 году Джошем Спенсером, The Last Bookstore начала как небольшой магазин в другом месте, прежде чем переехать в свое текущее помещение в историческом здании банка в 2011 году. С тех пор магазин стал заметной достопримечательностью Лос-Анджелеса, известной своим креативным дизайном и ориентированным на сообщество подходом. Культурно, The Last Bookstore служит центром для любителей литературы и художников, способствуя яркой художественной сцене в Лос-Анджелесе. Его приверженность развитию общественного взаимодействия через мероприятия и выставки подчеркивает его роль в продвижении местной культуры и креативности. Книжный магазин также является свидетельством неугасимой любви к печатной литературе в все более цифровом мире.</p></div>
+</section>
+<section class="place" id="los_angeles_nhm_la">
+<div class="place-lead">
+<h3>Природоведческий музей Лос-Анджелеса</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/los_angeles_nhm_la.jpg" alt="Природоведческий музей Лос-Анджелеса" width="330" height="167" style="height: 233px; max-height: 233px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/los_angeles_nhm_la_b.jpg" alt="Природоведческий музей Лос-Анджелеса — вид 2" width="330" height="247" style="height: 233px; max-height: 233px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Естественноисторический музей округа Лос-Анджелес — это сокровищница природного мира, демонстрирующая обширную коллекцию образцов и экспонатов, охватывающих историю жизни на Земле. Посетители могут исследовать все, от ископаемых динозавров до редких драгоценных камней, что делает его обязательным для посещения как для семей, так и для любителей науки. Музей также предлагает интерактивные экспозиции и образовательные программы, которые вовлекают посетителей всех возрастов. Основанный в 1913 году, музей является одним из крупнейших музеев естественной истории на западе Соединенных Штатов. В нем хранится более 35 миллионов образцов, включая значительную коллекцию ископаемых динозавров.</p>
+<p class="prose">Природоведческий музей был основан в 1913 году, изначально созданный как Музей истории, науки и искусства округа Лос-Анджелес. За годы своего существования он претерпел несколько расширений и реконструкций, включая значительное дополнение в 2013 году, которое улучшило выставочные площади и опыт посетителей. Музей сыграл ключевую роль в сохранении и изучении природной истории Калифорнии. С культурной точки зрения, Музей естественной истории служит важным образовательным ресурсом, способствуя более глубокому пониманию биоразнообразия и окружающей среды среди населения. Он вносит свой вклад в богатую культурную ткань Лос-Анджелеса, проводя различные общественные мероприятия и программы, которые отмечают природное наследие региона. Коллекции музея также отражают разнообразные экосистемы Калифорнии, подчеркивая важность усилий по охране окружающей среды.</p></div>
+</section>
+<section class="place" id="los_angeles_rodeo_drive">
+<div class="place-lead">
+<h3>Родео Драйв</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/los_angeles_rodeo_drive.jpg" alt="Родео Драйв" width="330" height="221" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/los_angeles_rodeo_drive_b.jpg" alt="Родео Драйв — вид 2" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Родео Драйв — это всемирно известная торговая улица, расположенная в Беверли-Хиллз, Лос-Анджелес, знаменитая своими роскошными бутиками и магазинами дизайнерской одежды. Это знаковое место привлекает посетителей со всего мира, стремящихся ощутить его гламурную атмосферу и предложения высококлассной моды. С улицами, обсаженными пальмами, и атмосферой высокого класса, Родео Драйв олицетворяет суть роскошной жизни в Лос-Анджелесе. Родео Драйв простирается примерно на 2 мили в Беверли-Хиллз. Здесь расположено более 100 бутиков и дизайнерских магазинов. Улица часто появляется в фильмах и телешоу, что повышает её мировую известность.</p>
+<p class="prose">Родео Драйв был изначально основан в 1920-х годах, его название происходит от испанского слова &#x27;rodeo&#x27;, что означает &#x27;сбор&#x27;. Улица приобрела известность в 1970-х годах, когда превратилась в роскошное торговое направление, привлекая высококлассные бренды и состоятельных клиентов. Ключевые события, такие как съемки фильма &#x27;Красотка&#x27; в 1990 году, еще больше укрепили ее статус культурной достопримечательности. Культурно Роdeo Драйв является символом богатства и роскоши, отражая образ жизни и стремления многих жителей Лос-Анджелеса. Он играет значительную роль в модной индустрии, принимая множество брендов высокого класса и модных событий. Эта улица также является популярным местом для туристов, способствуя местной экономике и служа фоном для различных культурных выражений, включая художественные инсталляции и появления знаменитостей.</p></div>
+</section>
+<section class="place" id="los_angeles_cathedral">
+<div class="place-lead">
+<h3>Собор Непорочного Зачатия Пресвятой Девы Марии</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/los_angeles_cathedral.jpg" alt="Собор Непорочного Зачатия Пресвятой Девы Марии" width="330" height="278" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/los_angeles_cathedral_b.jpg" alt="Собор Непорочного Зачатия Пресвятой Девы Марии — вид 2" width="330" height="243" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Собор Непорочного Зачатия Пресвятой Девы Марии, расположенный в центре Лос-Анджелеса, является великолепным примером современной церковной архитектуры. Завершенный в 2002 году, он служит материнской церковью Архиепархии Лос-Анджелеса и является живым центром для богослужений и общественных мероприятий. Посетители могут восхищаться его поразительным дизайном, красивыми произведениями искусства и спокойной атмосферой, что делает его обязательным для посещения памятником города. Собор был спроектирован испанским архитектором Рафаэлем Монео. Он украшен большими бронзовыми дверями, созданными художником Робертом Грэмом, на которых изображены сцены из жизни Девы Марии.</p>
+<p class="prose">Собор Непорочной Девы Марии был освящен 2 сентября 2002 года, заменив бывший собор Святой Вибианы, который был поврежден во время землетрясения в Нортридже в 1994 году. Спроектированный архитектором Рафаэлем Монео, собор отражает современное толкование традиционной архитектуры церквей и стал символом приверженности архиепархии разнообразному сообществу Лос-Анджелеса. Как главное место поклонения для католической общины в Лос-Анджелесе, собор играет важную роль в религиозной жизни города. Здесь проводятся значимые литургические события, включая ежегодное празднование годовщины архиепархии и различные культурные мероприятия, которые подчеркивают богатое разнообразие местного населения. Собор также служит местом для межконфессионального диалога и общественных встреч, что укрепляет его культурное значение.</p></div>
+</section>
+<section class="place" id="los_angeles_union_station">
+<div class="place-lead">
+<h3>Станция Союз Лос-Анджелес</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/los_angeles_union_station.jpg" alt="Станция Союз Лос-Анджелес" width="330" height="223" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/los_angeles_union_station_b.jpg" alt="Станция Союз Лос-Анджелес — вид 2" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Юнион Стейшн в Лос-Анджелесе, великолепный пример архитектуры в стиле миссионного возрождения и арт-деко, является главной железнодорожной станцией Лос-Анджелеса. Открытая в 1939 году, она не только транспортный узел, но и культурная достопримечательность, с красивыми фресками и плиточными работами, отражающими богатую историю города. Посетители могут насладиться яркой атмосферой станции, которая соединяет различные варианты транспорта и предлагает возможности для обеда и шопинга. Юнион-Стейшн - крупнейший пассажирский железнодорожный терминал на западе Соединенных Штатов. Станция сочетает в себе элементы испанской колониальной и ар-деко архитектуры.</p>
+<p class="prose">Юнион-Стейшн была открыта 3 мая 1939 года в качестве замены нескольким старым станциям в Лос-Анджелесе. Спроектированная архитекторами Джоном и Дональдом Парккинсонами, она была построена для того, чтобы справиться с растущим числом путешественников и увеличением популярности железнодорожных поездок в начале 20 века. С тех пор станция стала свидетелем значительных событий, включая прибытие войск во время Второй мировой войны и эволюцию транспортной сети города. Культурно Юнион Стейшн является важной частью наследия Лос-Анджелеса, часто называемой «Последней из великих железнодорожных станций», построенных в Соединенных Штатах. Она служит местом встречи для местных жителей и туристов, принимая различные мероприятия и выставки, которые отмечают разнообразную историю города. Архитектурная красота и историческое значение станции делают ее ключевой достопримечательностью в городской среде Лос-Анджелеса.</p></div>
+</section>
+<section class="place" id="los_angeles_olvera_street">
+<div class="place-lead">
+<h3>Улица Ольвера</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/los_angeles_olvera_street.jpg" alt="Улица Ольвера" width="330" height="211" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/los_angeles_olvera_street_b.jpg" alt="Улица Ольвера — вид 2" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Улица Ольвера — это яркий рынок в Лос-Анджелесе, известный своим богатым мексиканским наследием и живой атмосферой. Посетители могут исследовать красочные магазины, попробовать аутентичную уличную еду и насладиться традиционной музыкой и танцевальными выступлениями. Эта историческая улица часто называется местом рождения Лос-Анджелеса, что делает её обязательным местом для посещения тем, кто хочет ощутить культурные корни города. Улица Ольвера часто называется местом рождения Лос-Анджелеса. Улица предлагает разнообразие магазинов, ресторанов и культурных достопримечательностей.</p>
+<p class="prose">Улица Ольвера была основана в 1930 году как часть Исторического района Лос-Анджелеса, с целью сохранения мексиканского наследия города. Улица расположена в оригинальном поселении Лос-Анджелеса, основанном в 1781 году, и включает здания, датируемые 19-м веком, демонстрируя раннюю историю и развитие этого района. Культурно, улица Ольвера служит важным центром для празднования мексиканских традиций и наследия в Лос-Анджелесе. Здесь проходит множество фестивалей и мероприятий в течение года, отражающих яркую идентичность сообщества. Улица также является популярным местом для местных художников и ремесленников, вносящих вклад в разнообразный культурный ландшафт города.</p></div>
 </section>
 </body>
 </html>

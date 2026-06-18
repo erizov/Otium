@@ -13,7 +13,7 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
 .otium-logo { font-family: 'Libre Baskerville', serif; font-size: 2.15rem;
   font-weight: 600; letter-spacing: 0.18em; margin-bottom: 0.85rem; }
 .otiump { margin: 0.42rem 0; line-height: 1.42; text-align: justify;
-  max-width: 38rem; font-size: 0.95rem; }
+  font-size: 0.95rem; }
 .guide-title { page-break-after: auto; margin-bottom: 0.55rem;
   page-break-inside: avoid; }
 .historical-reference { margin: 0.75rem 0 1.15rem;
@@ -63,22 +63,103 @@ ol.trip-stops a:hover { text-decoration: underline; }
 .heraldry-univ-caption { font-size: 0.52rem; line-height: 1.18;
   margin: 0.12rem 0 0; padding: 0 0.06rem; color: #252525;
   text-align: center; font-weight: 500; }
-.heraldry-motto { text-align: center; max-width: 18rem; margin: 0.18rem auto;
+.heraldry-motto { text-align: center; margin: 0.18rem auto;
   width: 100%; }
 .motto-line { font-family: 'Libre Baskerville', serif; font-size: 1rem;
   margin: 0; color: #333; line-height: 1.35; }
 .guide-title h1.guide-title-main { font-family: 'Libre Baskerville', serif;
   font-size: 2.35rem; margin-bottom: 0.5rem; font-weight: 600; }
 .lead { color: #444; font-size: 1.05rem; }
-.guide-toc { margin: 0.85rem 0 1.15rem; page-break-inside: avoid; }
-.guide-toc h2 { font-family: 'Libre Baskerville', serif; font-size: 1.28rem;
-  font-weight: 600; margin: 0.4rem 0 0.55rem; }
+
+.guide-toc { page-break-before: always; break-before: page;
+  page-break-after: always; break-after: page;
+  margin: 0; padding: 0.2rem 0 0.45rem; page-break-inside: auto; }
+.guide-toc h2 { font-family: 'Libre Baskerville', serif;
+  font-size: 1.28rem; font-weight: 600; margin: 0.4rem 0 0.55rem; }
 .guide-toc ol { margin: 0.35rem 0 0.65rem 1.25rem; padding: 0;
   columns: 2; column-gap: 1.5rem; }
 .guide-toc li { margin: 0.18rem 0; line-height: 1.35;
   font-size: 0.88rem; break-inside: avoid; }
-.guide-toc a { color: #1a5276; text-decoration: none; }
+.guide-toc a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.guide-toc a:hover { color: #0d3d56; }
 .guide-toc li.toc-item--sub { font-size: 0.82rem; margin-left: 0.35rem; }
+.toc-back { font-size: 0.78rem; margin: 0 0 0.35rem; text-align: right; }
+.toc-back a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.toc-back a:hover { color: #0d3d56; }
+.place, .historical-reference, .guide-primer, .guide-trip-plans {
+  scroll-margin-top: 1.25rem; }
+.historical-reference h2, .guide-primer h2, .guide-trip-plans h2,
+.chapter-head h2, .place-lead h3 { position: relative; }
+.guide-toc + .place, .guide-toc + .chapter-head {
+  page-break-before: avoid; break-before: avoid-page; }
+.place-lead { page-break-inside: avoid; break-inside: avoid-page;
+  page-break-after: auto; }
+.place-lead > h3 { page-break-after: avoid; break-after: avoid-page; }
+.place-lead > .place-meta { page-break-after: avoid; break-after: avoid-page; }
+
+.place-fig { page-break-inside: avoid; break-inside: avoid-page;
+  margin: 0.5rem 0 1rem; }
+.place-fig img {
+  page-break-inside: avoid; break-inside: avoid-page;
+  max-height: 48vh; width: auto; max-width: 100%;
+  object-fit: contain; margin-left: auto; margin-right: auto; }
+.place-fig--hi-res img { max-height: 52vh; }
+.place-fig--lo-res img { max-height: 30vh; }
+.place-pdf-fig-row {
+  display: flex; flex-direction: row; flex-wrap: wrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.45rem 0.55rem; margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row .place-fig {
+  flex: 1 1 30%; margin: 0; min-width: 26%; max-width: 100%; }
+.place-pdf-fig-row .place-fig img {
+  width: auto; max-width: 100%; height: auto; max-height: 44vh;
+  object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--pair {
+  flex-wrap: nowrap; justify-content: space-between;
+  align-items: flex-end; gap: 0.5rem 0.65rem; }
+.place-pdf-fig-row--pair .place-fig {
+  flex: 1 1 47%; min-width: 0; max-width: 50%;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--pair .place-fig img {
+  max-height: 44vh; object-fit: contain; }
+.place-pdf-fig-row--pair .place-fig--hi-res img { max-height: 52vh; }
+.place-pdf-fig-row--pair .place-fig--lo-res img { max-height: 26vh; }
+.place-pdf-fig-row--pair .place-fig--row-sized img,
+.place-pdf-fig-row--triple .place-fig--row-sized img,
+.place-pdf-fig-row--many .place-fig--row-sized img {
+  width: auto; max-width: 100%; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row .place-fig--row-sized.place-fig--hi-res img,
+.place-pdf-fig-row .place-fig--row-sized.place-fig--lo-res img {
+  max-height: unset; }
+.place-pdf-fig-rows-stack {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple {
+  display: flex; flex-direction: row; flex-wrap: nowrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.4rem 0.48rem; margin: 0;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--triple .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--triple .place-fig--hi-res img { max-height: 42vh; }
+.place-pdf-fig-row--triple .place-fig--lo-res img { max-height: 18vh; }
+.place-pdf-fig-row--many {
+  flex-wrap: nowrap; justify-content: center; align-items: flex-end;
+  gap: 0.35rem 0.42rem; }
+.place-pdf-fig-row--many .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--many .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+
+
 .place { margin-bottom: 2.2rem; page-break-inside: auto; }
 h3 { font-family: 'Libre Baskerville', serif; font-size: 1.22rem; margin: 1.2rem 0 0.35rem;
   font-weight: 600; }
@@ -90,7 +171,6 @@ h4 { font-family: 'Libre Baskerville', serif; font-size: 0.95rem; text-transform
   color: #555; font-size: 0.95rem; margin: 0 0 0.5rem; font-style: italic; }
 .place-meta { font-size: 0.92rem; color: #353535; margin: 0 0 0.75rem;
   line-height: 1.4; }
-.place-fig { margin: 0.5rem 0 1rem; }
 img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
 .prose, .place-desc p { margin: 0.45rem 0; line-height: 1.5;
   text-align: justify; }
@@ -110,245 +190,402 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <figure class="heraldry-fig heraldry-coat-book" title="City emblem"><img src="../images/guide_coat_of_arms.svg" alt="City emblem"/></figure>
 <figure class="heraldry-fig heraldry-coat-book" title="Flag"><img src="../images/guide_flag.svg" alt="Flag"/></figure>
 </div></div><h1 class="guide-title-main">Philadelphia</h1><p class="lead">Путеводитель. Объектов в этом выпуске: 27.</p></header>
+<nav class="guide-toc" id="guide-toc" aria-label="Содержание"><h2>Содержание</h2><ol><li class="toc-item"><a href="#guide-historical">Историческая справка</a></li><li class="toc-item"><a href="#guide-trips">Маршруты</a></li><li class="toc-item"><a href="#philadelphia_clinton_st_historic_district_philly">Philadelphia Clinton St Historic District Philly</a></li><li class="toc-item"><a href="#philadelphia_palace_theatre_newark">Philadelphia Palace Theatre Newark</a></li><li class="toc-item"><a href="#philadelphia_philadelphiamuseumofart2017">Philadelphia Philadelphiamuseumofart2017</a></li><li class="toc-item"><a href="#philadelphia_qadiriya_small">Philadelphia Qadiriya Small</a></li><li class="toc-item"><a href="#philadelphia_elfreths_alley">Аллея Эльфрет</a></li><li class="toc-item"><a href="#philadelphia_boathouse_row">Ботхаус Роу</a></li><li class="toc-item"><a href="#philadelphia_eastern_state_penitentiary">Восточная государственная тюрьма</a></li><li class="toc-item"><a href="#philadelphia_city_hall">Городская ратуша Филадельфии</a></li><li class="toc-item"><a href="#philadelphia_betsy_ross_house">Дом Бетси Росс</a></li><li class="toc-item"><a href="#philadelphia_independence_hall">Зал Независимости</a></li><li class="toc-item"><a href="#philadelphia_franklin_institute">Институт Франклина</a></li><li class="toc-item"><a href="#philadelphia_italian_market_philadelphia">Итальянский рынок</a></li><li class="toc-item"><a href="#philadelphia_liberty_bell">Колокол Свободы</a></li><li class="toc-item"><a href="#philadelphia_mutter_museum">Музей Матерей</a></li><li class="toc-item"><a href="#philadelphia_national_constitution_center">Национальный центр Конституции</a></li><li class="toc-item"><a href="#philadelphia_wissahickon_valley_park">Парк Висахикон Вэлли</a></li><li class="toc-item"><a href="#philadelphia_love_park">Парк любви</a></li><li class="toc-item"><a href="#philadelphia_pennsylvania_academy_fine_arts">Пенсильванская академия изящных искусств</a></li><li class="toc-item"><a href="#philadelphia_reading_terminal_market">Рынок Ридинга</a></li><li class="toc-item"><a href="#philadelphia_thirtieth_street_station">Станция 30-й улицы Уильяма Х. Грея III</a></li><li class="toc-item"><a href="#philadelphia_magic_gardens">Филадельфийские магические сады</a></li><li class="toc-item"><a href="#philadelphia_zoo">Филадельфийский зоопарк</a></li><li class="toc-item"><a href="#philadelphia_museum_of_art">Филадельфийский музей искусства</a></li><li class="toc-item"><a href="#philadelphia_fort_mifflin">Форт Мифлин</a></li><li class="toc-item"><a href="#philadelphia_fairmount_water_works">Фэрмаунт Уотер Уоркс</a></li><li class="toc-item"><a href="#philadelphia_christ_church_philadelphia">Церковь Христа</a></li><li class="toc-item"><a href="#philadelphia_shofuso_house">Шофусо - японский дом и сад</a></li></ol></nav>
 <section class="historical-reference" id="guide-historical" aria-label="Историческая справка"><h2>Историческая справка</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 <p class="prose">Филадельфия — крупнейший город Пенсильвании, место подписания Декларации независимости США.</p>
 <p class="prose">Квакерские корни, планировка Уильяма Пенна, индустриальная эпоха и современный медицинский кластер. Исторический район, музеи и стадионы отражают роль «колыбели американской свободы».</p>
 <p class="prose">Конституция 1787 года и промышленная революция сделали город «мастерской» США; упадок центра в XX веке сменился ревитализацией. Филадельфия сочетает медицинские кластеры, исторические кварталы и спорт, оставаясь ключом к ранней американской истории.</p></section>
 <section class="guide-trip-plans" id="guide-trips" aria-label="Маршруты"><h2>Маршруты</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 <article class="trip-plan" id="trip-1d"><h3>Один день</h3>
 <p class="prose">Компактный маршрут по главным точкам путеводителя с минимальным возвратом назад пешком.</p>
-<ol class="trip-stops"><li><a href="#philadelphia_fort_mifflin">Форт Мифлин</a> (~75мин)</li>
-<li><a href="#philadelphia_italian_market_philadelphia">Итальянский рынок</a> (~75мин)</li>
-<li><a href="#philadelphia_independence_hall">Зал Независимости</a> (~75мин)</li>
-<li><a href="#philadelphia_liberty_bell">Колокол Свободы</a> (~75мин)</li>
-<li><a href="#philadelphia_national_constitution_center">Национальный центр Конституции</a> (~75мин)</li>
-<li><a href="#philadelphia_christ_church_philadelphia">Церковь Христа</a> (~75мин)</li></ol></article>
-<article class="trip-plan" id="trip-3d1"><h3>Три дня — день 1</h3>
-<p class="prose">День 1 — центральный кластер.</p>
 <ol class="trip-stops"><li><a href="#philadelphia_museum_of_art">Филадельфийский музей искусства</a> (~75мин)</li>
 <li><a href="#philadelphia_fairmount_water_works">Фэрмаунт Уотер Уоркс</a> (~75мин)</li>
 <li><a href="#philadelphia_eastern_state_penitentiary">Восточная государственная тюрьма</a> (~75мин)</li>
 <li><a href="#philadelphia_franklin_institute">Институт Франклина</a> (~75мин)</li>
-<li><a href="#philadelphia_mutter_museum">Музей Матерей</a> (~75мин)</li></ol></article>
+<li><a href="#philadelphia_mutter_museum">Музей Матерей</a> (~75мин)</li>
+<li><a href="#philadelphia_love_park">Парк любви</a> (~75мин)</li></ol></article>
+<article class="trip-plan" id="trip-3d1"><h3>Три дня — день 1</h3>
+<p class="prose">День 1 — центральный кластер.</p>
+<ol class="trip-stops"><li><a href="#philadelphia_fort_mifflin">Форт Мифлин</a> (~75мин)</li>
+<li><a href="#philadelphia_betsy_ross_house">Дом Бетси Росс</a> (~75мин)</li>
+<li><a href="#philadelphia_boathouse_row">Ботхаус Роу</a> (~75мин)</li>
+<li><a href="#philadelphia_christ_church_philadelphia">Церковь Христа</a> (~75мин)</li>
+<li><a href="#philadelphia_city_hall">Городская ратуша Филадельфии</a> (~75мин)</li></ol></article>
 <article class="trip-plan" id="trip-3d2"><h3>Три дня — день 2</h3>
 <p class="prose">День 2 — следующая группа районов.</p>
-<ol class="trip-stops"><li><a href="#philadelphia_betsy_ross_house">Дом Бетси Росс</a> (~75мин)</li>
-<li><a href="#philadelphia_boathouse_row">Ботхаус Роу</a> (~75мин)</li>
-<li><a href="#philadelphia_city_hall">Городская ратуша Филадельфии</a> (~75мин)</li>
-<li><a href="#philadelphia_elfreths_alley">Аллея Эльфрет</a> (~75мин)</li>
-<li><a href="#philadelphia_love_park">Парк любви</a> (~75мин)</li></ol></article>
+<ol class="trip-stops"><li><a href="#philadelphia_elfreths_alley">Аллея Эльфрет</a> (~75мин)</li>
+<li><a href="#philadelphia_independence_hall">Зал Независимости</a> (~75мин)</li>
+<li><a href="#philadelphia_italian_market_philadelphia">Итальянский рынок</a> (~75мин)</li>
+<li><a href="#philadelphia_liberty_bell">Колокол Свободы</a> (~75мин)</li>
+<li><a href="#philadelphia_magic_gardens">Филадельфийские магические сады</a> (~75мин)</li></ol></article>
 <article class="trip-plan" id="trip-3d3"><h3>Три дня — день 3</h3>
 <p class="prose">День 3 — оставшиеся близкие объекты.</p>
-<ol class="trip-stops"><li><a href="#philadelphia_wissahickon_valley_park">Парк Висахикон Вэлли</a> (~75мин)</li>
-<li><a href="#philadelphia_magic_gardens">Филадельфийские магические сады</a> (~75мин)</li></ol></article></section>
-<nav class="guide-toc" aria-label="Содержание"><h2>Содержание</h2><ol><li class="toc-item"><a href="#guide-historical">Историческая справка</a></li><li class="toc-item"><a href="#guide-trips">Маршруты</a></li><li class="toc-item"><a href="#philadelphia_betsy_ross_house">Дом Бетси Росс</a></li><li class="toc-item"><a href="#philadelphia_boathouse_row">Ботхаус Роу</a></li><li class="toc-item"><a href="#philadelphia_christ_church_philadelphia">Церковь Христа</a></li><li class="toc-item"><a href="#philadelphia_pdfband_3_de0bd467">Clinton St Historic District Philly</a></li><li class="toc-item"><a href="#philadelphia_eastern_state_penitentiary">Восточная государственная тюрьма</a></li><li class="toc-item"><a href="#philadelphia_elfreths_alley">Аллея Эльфрет</a></li><li class="toc-item"><a href="#philadelphia_fairmount_water_works">Фэрмаунт Уотер Уоркс</a></li><li class="toc-item"><a href="#philadelphia_fort_mifflin">Форт Мифлин</a></li><li class="toc-item"><a href="#philadelphia_independence_hall">Зал Независимости</a></li><li class="toc-item"><a href="#philadelphia_italian_market_philadelphia">Итальянский рынок</a></li><li class="toc-item"><a href="#philadelphia_liberty_bell">Колокол Свободы</a></li><li class="toc-item"><a href="#philadelphia_love_park">Парк любви</a></li><li class="toc-item"><a href="#philadelphia_mutter_museum">Музей Матерей</a></li><li class="toc-item"><a href="#philadelphia_national_constitution_center">Национальный центр Конституции</a></li><li class="toc-item"><a href="#philadelphia_pdfband_9_737ed763">Palace Theatre Newark</a></li><li class="toc-item"><a href="#philadelphia_pennsylvania_academy_fine_arts">Пенсильванская академия изящных искусств</a></li><li class="toc-item"><a href="#philadelphia_city_hall">Городская ратуша Филадельфии</a></li><li class="toc-item"><a href="#philadelphia_magic_gardens">Филадельфийские магические сады</a></li><li class="toc-item"><a href="#philadelphia_museum_of_art">Филадельфийский музей искусства</a></li><li class="toc-item"><a href="#philadelphia_zoo">Филадельфийский зоопарк</a></li><li class="toc-item"><a href="#philadelphia_pdfband_8_7dfa1a39">PhiladelphiaMuseumOfArt2017</a></li><li class="toc-item"><a href="#philadelphia_pdfband_2_815a01ac">Qadiriya-small</a></li><li class="toc-item"><a href="#philadelphia_reading_terminal_market">Рынок Ридинга</a></li><li class="toc-item"><a href="#philadelphia_shofuso_house">Шофусо - японский дом и сад</a></li><li class="toc-item"><a href="#philadelphia_franklin_institute">Институт Франклина</a></li><li class="toc-item"><a href="#philadelphia_thirtieth_street_station">Станция 30-й улицы Уильяма Х. Грея III</a></li><li class="toc-item"><a href="#philadelphia_wissahickon_valley_park">Парк Висахикон Вэлли</a></li></ol></nav>
-<section class="place" id="philadelphia_betsy_ross_house">
-<h3>Дом Бетси Росс</h3>
+<ol class="trip-stops"><li><a href="#philadelphia_wissahickon_valley_park">Парк Висахикон Вэлли</a> (~75мин)</li></ol></article></section>
+<section class="place" id="philadelphia_clinton_st_historic_district_philly">
+<div class="place-lead">
+<h3>Philadelphia Clinton St Historic District Philly</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/philadelphia_betsy_ross_house.JPG" alt="Дом Бетси Росс"/></figure>
-<div class="place-desc"><p class="prose">Дом Бетси Росс, расположенный на улице Арч в Филадельфии, является историческим объектом, посвященным жизни Бетси Росс, которая славится тем, что сшила первый американский флаг. Посетители могут исследовать дом, который датируется 1740 годом, и узнать о вкладе Росс в американскую историю через выставки и экскурсии. Традиция связывает Росс с ранним флагом в звезды и полосы; историки обсуждают детали. Работает как дом-музей с 19 века.</p>
-<p class="prose">Дом Бетси Росс был построен в 1740 году и, как считается, являлся резиденцией Бетси Росс с 1773 по 1786 год. Именно здесь, как утверждается, она создала первый американский флаг в 1776 году, символ независимости нации. Дом был объявлен Национальным историческим памятником в 1955 году. Культурно, дом Бетси Росс представляет собой важную часть американского наследия, символизируя дух независимости и роль женщин в Американской революции. Этот объект привлекает множество посетителей каждый год, способствуя формированию идентичности Филадельфии как города, богатого революционной историей. Он также служит местом проведения образовательных программ и мероприятий, которые отмечают американские традиции.</p></div>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/philadelphia_clinton_st_historic_district_philly.jpg" alt="Philadelphia Clinton St Historic District Philly" width="1280" height="960" style="height: 231px; max-height: 231px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/philadelphia_clinton_st_historic_district_philly_b.jpg" alt="Philadelphia Clinton St Historic District Philly — вид 2" width="330" height="165" style="height: 231px; max-height: 231px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 </section>
-<section class="place" id="philadelphia_boathouse_row">
-<h3>Ботхаус Роу</h3>
+<section class="place" id="philadelphia_palace_theatre_newark">
+<div class="place-lead">
+<h3>Philadelphia Palace Theatre Newark</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/philadelphia_boathouse_row.jpg" alt="Ботхаус Роу"/></figure>
-<div class="place-desc"><p class="prose">Ботхаус Роу — это живописная полоса вдоль реки Скукил, известная своими очаровательными викторианскими ботхаусами, в которых размещаются гребные клубы и которые служат ярким центром как для соревновательного, так и для любительского гребли. Освещенные ночью, ботхаусы создают потрясающее отражение на воде, что делает это место популярным как среди местных жителей, так и среди туристов, желающих насладиться спокойными прогулками и живописными видами. Ботхаус Роу состоит из 15 исторических ботхаусов вдоль реки Шуйкилл. Лодочные домики являются частью Исторического района реки Шуйкилл, внесенного в Национальный реестр исторических мест.</p>
-<p class="prose">История Boathouse Row начинается в конце 19 века, когда в 1860 году был построен первый дом для лодок. Эта территория стала центром гребли в Филадельфии, особенно после создания Шуйкиллского флота в 1858 году, который организовывал соревнования и мероприятия по гребле. На протяжении многих лет дома для лодок были сохранены и поддерживались, что отражает приверженность города своему спортивному наследию. Культурно, Boathouse Row является символом богатой гребной традиции Филадельфии и служит местом встречи для сообщества, способствуя чувству товарищества и соревнования. Эта территория также значима своей архитектурной красотой, демонстрируя разнообразие стилей, отражающих историю города. Хотя она не имеет политического или религиозного значения, она играет важную роль в повседневной жизни филадельфийцев, предлагая возможности для отдыха и живописное укрытие от городской жизни.</p></div>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/philadelphia_palace_theatre_newark.jpg" alt="Philadelphia Palace Theatre Newark" width="1280" height="960" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/philadelphia_palace_theatre_newark_b.jpg" alt="Philadelphia Palace Theatre Newark — вид 2" width="330" height="247" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 </section>
-<section class="place" id="philadelphia_christ_church_philadelphia">
-<h3>Церковь Христа</h3>
+<section class="place" id="philadelphia_philadelphiamuseumofart2017">
+<div class="place-lead">
+<h3>Philadelphia Philadelphiamuseumofart2017</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/philadelphia_christ_church_philadelphia.jpg" alt="Церковь Христа"/></figure>
-<div class="place-desc"><p class="prose">Церковь Христова, расположенная на 2-й улице в историческом Старом городе Филадельфии, является великолепным примером колониальной архитектуры и важной частью богатого наследия города. Основанная в 1695 году, эта англиканская церковь сыграла значительную роль в религиозной и гражданской жизни Филадельфии. Посетители могут полюбоваться её красивым интерьером, включая знаковую башню, и узнать о её исторических связях с ключевыми фигурами американской истории. Основанная в 1695 году, Христова церковь является одной из старейших церквей в Пенсильвании. Колокольня церкви была добавлена в 1754 году и является заметной особенностью филадельфийского горизонта.</p>
-<p class="prose">Церковь Христова была основана в 1695 году группой англикан, которые стремились создать место для поклонения в растущей колонии Пенсильвания. Церковь была спроектирована архитектором Робертом Смитом и завершена в 1744 году, став выдающимся местом для богослужений и общественных собраний. Именно здесь многие отцы-основатели, включая Джорджа Вашингтона и Бенджамина Франклина, посещали службы, что сделало ее значимым памятником в истории Соединенных Штатов. Как место поклонения, Церковь Христа имеет глубокое религиозное значение для англиканской общины и служит напоминанием о ранних религиозных свободах, которые искали поселенцы в Америке. Культурно она является символом колониального прошлого Филадельфии и на протяжении многих лет была местом проведения различных общественных мероприятий и праздников. Церковь также является частью Исторической Церкви Христа и Кладбища, которые вместе отражают богатое наследие города и его приверженность сохранению исторических мест.</p></div>
+<figure class="place-fig place-fig--hi-res"><img src="../images/philadelphia_philadelphiamuseumofart2017.jpg" alt="Philadelphia Philadelphiamuseumofart2017" width="1280" height="615"/></figure>
+</div>
 </section>
-<section class="place" id="philadelphia_pdfband_3_de0bd467">
-<h3>Clinton St Historic District Philly</h3>
+<section class="place" id="philadelphia_qadiriya_small">
+<div class="place-lead">
+<h3>Philadelphia Qadiriya Small</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/philadelphia_pdfband_3_de0bd467.jpg" alt="Clinton St Historic District Philly"/></figure>
-</section>
-<section class="place" id="philadelphia_eastern_state_penitentiary">
-<h3>Восточная государственная тюрьма</h3>
-
-
-<figure class="place-fig"><img src="../images/philadelphia_eastern_state_penitentiary.jpg" alt="Восточная государственная тюрьма"/></figure>
-<div class="place-desc"><p class="prose">Восточная государственная тюрьма, расположенная на авеню Фэрмаунт в Филадельфии, является исторической бывшей тюрьмой, известной своей грандиозной готической архитектурой и инновационным дизайном. Открытая в 1829 году, она стала первой тюрьмой, внедрившей систему отдельного заключения, оказав влияние на пенитенциарные системы по всему миру. Сегодня она функционирует как музей, предлагая посетителям возможность заглянуть в её богатое прошлое и эволюцию американской уголовной юстиции. Открытая в 1829 году, Восточная государственная тюрьма была первой тюрьмой, которая использовала систему одиночного заключения. Тюрьма была спроектирована для содержания до 1,700 заключенных, но в конечном итоге в пиковый период в ней находилось около 3,000 человек.</p>
-<p class="prose">Восточная государственная тюрьма была основана в 1829 году и функционировала до 1971 года. Она была спроектирована архитектором Джоном Хавиландом и была известна своим революционным подходом к заключению, акцентируя внимание на реабилитации, а не на наказании. В тюрьме содержались известные преступники, включая Аль Капоне, и она стала свидетелем значительных событий в реформе тюремной системы и обращении с заключенными на протяжении всей своей истории. В культурном плане Восточная государственная тюрьма стала символом эволюции американской пенитенциарной системы и признана за свою архитектурную значимость. Она привлекает как художников, так и историков, служа местом для художественных инсталляций и мероприятий, которые отражают вопросы справедливости и лишения свободы. Этот объект также является популярной туристической достопримечательностью, способствуя наследию Филадельфии и вовлекая общественность в обсуждения о преступности и наказании.</p></div>
+<figure class="place-fig place-fig--hi-res"><img src="../images/philadelphia_qadiriya_small.jpg" alt="Philadelphia Qadiriya Small" width="1280" height="657"/></figure>
+</div>
 </section>
 <section class="place" id="philadelphia_elfreths_alley">
+<div class="place-lead">
 <h3>Аллея Эльфрет</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/philadelphia_elfreths_alley.jpg" alt="Аллея Эльфрет"/></figure>
+<p class="place-meta">Адрес: Elfreth&#x27;s Alley, between Front &amp; 2nd, Arch &amp; Quarry</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/philadelphia_elfreths_alley.jpg" alt="Аллея Эльфрет" width="1280" height="960" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/philadelphia_elfreths_alley_b.jpg" alt="Аллея Эльфрет — вид 2" width="330" height="247" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Аллея Эльфрет, часто называемая самой старой непрерывно населенной улицей в Америке, является очаровательной исторической улочкой, расположенной в Старом городе Филадельфии. С мощеными дорожками и хорошо сохранившимися домами XVIII века она предлагает возможность заглянуть в колониальную жизнь и богатое архитектурное наследие города. Посетители могут прогуляться по этой живописной аллее, вдоль которой расположены яркие цветочные ящики и архитектура той эпохи, что делает её идеальным местом для фотографий и исследований. Основанная в 1702 году, она является самой старой постоянно населенной улицей в Америке. Включает 32 исторических дома, многие из которых датируются началом 18 века.</p>
 <p class="prose">Аллея Эльфрет была основана в 1702 году и названа в честь Иеремии Эльфрета, кузнеца, который был одним из первых жителей. Изначально аллея служила домом для ремесленников и мастеров, отражая ранние экономические активности города. На протяжении многих лет она сохранила свою историческую целостность, многие здания датируются началом 18 века, демонстрируя эволюцию архитектурных стилей Филадельфии. Культурно Эльфретс-Алли является важной частью наследия Филадельфии, представляя колониальное прошлое города и жизни его первых жителей. Она известна своей уникальной архитектурной значимостью и является популярным местом для туристов, интересующихся американской историей. В переулке также находится Музей Эльфретс-Алли, который предоставляет информацию о повседневной жизни семей, живших там, что еще больше обогащает его культурное значение.</p></div>
 </section>
-<section class="place" id="philadelphia_fairmount_water_works">
-<h3>Фэрмаунт Уотер Уоркс</h3>
+<section class="place" id="philadelphia_boathouse_row">
+<div class="place-lead">
+<h3>Ботхаус Роу</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/philadelphia_fairmount_water_works.jpg" alt="Фэрмаунт Уотер Уоркс"/></figure>
-<div class="place-desc"><p class="prose">Фэрмаунт Уотер Уоркс — это историческое место, расположенное вдоль реки Скукил в Филадельфии, известное своей живописной архитектурой и значением в развитии городских систем водоснабжения. Когда-то являвшийся важным источником питьевой воды для города, сегодня он служит прекрасным парком и образовательным центром, предлагая потрясающие виды и возможность заглянуть в историю инженерии Филадельфии. Водные сооружения Фэрмаунт были спроектированы в неоклассическом стиле и включают в себя ряд элегантных зданий и водных систем. В 1976 году он был объявлен Национальным историческим памятником из-за его исторического и архитектурного значения.</p>
-<p class="prose">Основанные в 1812 году, Водные работы Фэрмаунт были спроектированы архитектором Фредериком Граффом и стали одной из первых муниципальных систем водоснабжения в Соединенных Штатах. Они сыграли ключевую роль в обеспечении чистой водой Филадельфию, особенно во время вспышек холеры в 19 веке. Установка функционировала до 1909 года, после чего была переоборудована и восстановлена как общественное пространство. Водные работы Фэрмаунт имеют культурное значение как символ приверженности Филадельфии общественному здоровью и городской инфраструктуре. Они отражают богатое инженерное наследие города и стали популярным местом для отдыха и образования, способствуя осведомленности о сохранении воды и охране окружающей среды. На территории также расположены установки общественного искусства и проводятся мероприятия для сообщества, что еще больше укрепляет их в повседневной жизни жителей Филадельфии.</p></div>
+<p class="place-meta">Адрес: 1 Boathouse Row, Schuylkill River</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/philadelphia_boathouse_row.jpg" alt="Ботхаус Роу" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/philadelphia_boathouse_row_b.jpg" alt="Ботхаус Роу — вид 2" width="330" height="240" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Ботхаус Роу — это живописная полоса вдоль реки Скукил, известная своими очаровательными викторианскими ботхаусами, в которых размещаются гребные клубы и которые служат ярким центром как для соревновательного, так и для любительского гребли. Освещенные ночью, ботхаусы создают потрясающее отражение на воде, что делает это место популярным как среди местных жителей, так и среди туристов, желающих насладиться спокойными прогулками и живописными видами. Ботхаус Роу состоит из 15 исторических ботхаусов вдоль реки Шуйкилл. Лодочные домики являются частью Исторического района реки Шуйкилл, внесенного в Национальный реестр исторических мест.</p>
+<p class="prose">История Boathouse Row начинается в конце 19 века, когда в 1860 году был построен первый дом для лодок. Эта территория стала центром гребли в Филадельфии, особенно после создания Шуйкиллского флота в 1858 году, который организовывал соревнования и мероприятия по гребле. На протяжении многих лет дома для лодок были сохранены и поддерживались, что отражает приверженность города своему спортивному наследию. Культурно, Boathouse Row является символом богатой гребной традиции Филадельфии и служит местом встречи для сообщества, способствуя чувству товарищества и соревнования. Эта территория также значима своей архитектурной красотой, демонстрируя разнообразие стилей, отражающих историю города. Хотя она не имеет политического или религиозного значения, она играет важную роль в повседневной жизни филадельфийцев, предлагая возможности для отдыха и живописное укрытие от городской жизни.</p></div>
 </section>
-<section class="place" id="philadelphia_fort_mifflin">
-<h3>Форт Мифлин</h3>
+<section class="place" id="philadelphia_eastern_state_penitentiary">
+<div class="place-lead">
+<h3>Восточная государственная тюрьма</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
+<p class="place-meta">Адрес: 2027 Fairmount Avenue</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/philadelphia_eastern_state_penitentiary.jpg" alt="Восточная государственная тюрьма" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/philadelphia_eastern_state_penitentiary_b.jpg" alt="Восточная государственная тюрьма — вид 2" width="330" height="495" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Восточная государственная тюрьма, расположенная на авеню Фэрмаунт в Филадельфии, является исторической бывшей тюрьмой, известной своей грандиозной готической архитектурой и инновационным дизайном. Открытая в 1829 году, она стала первой тюрьмой, внедрившей систему отдельного заключения, оказав влияние на пенитенциарные системы по всему миру. Сегодня она функционирует как музей, предлагая посетителям возможность заглянуть в её богатое прошлое и эволюцию американской уголовной юстиции. Открытая в 1829 году, Восточная государственная тюрьма была первой тюрьмой, которая использовала систему одиночного заключения. Тюрьма была спроектирована для содержания до 1,700 заключенных, но в конечном итоге в пиковый период в ней находилось около 3,000 человек.</p>
+<p class="prose">Восточная государственная тюрьма была основана в 1829 году и функционировала до 1971 года. Она была спроектирована архитектором Джоном Хавиландом и была известна своим революционным подходом к заключению, акцентируя внимание на реабилитации, а не на наказании. В тюрьме содержались известные преступники, включая Аль Капоне, и она стала свидетелем значительных событий в реформе тюремной системы и обращении с заключенными на протяжении всей своей истории. В культурном плане Восточная государственная тюрьма стала символом эволюции американской пенитенциарной системы и признана за свою архитектурную значимость. Она привлекает как художников, так и историков, служа местом для художественных инсталляций и мероприятий, которые отражают вопросы справедливости и лишения свободы. Этот объект также является популярной туристической достопримечательностью, способствуя наследию Филадельфии и вовлекая общественность в обсуждения о преступности и наказании.</p></div>
+</section>
+<section class="place" id="philadelphia_city_hall">
+<div class="place-lead">
+<h3>Городская ратуша Филадельфии</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<figure class="place-fig"><img src="../images/philadelphia_fort_mifflin.jpg" alt="Форт Мифлин"/></figure>
-<div class="place-desc"><p class="prose">Форт Мифлин, расположенный вдоль реки Делавэр в Филадельфии, является исторической военной крепостью, датируемой временами Американской революционной войны. Посетители могут исследовать его хорошо сохранившиеся сооружения и узнать о его роли в защите города во время ключевых сражений. Форт предлагает возможность заглянуть в прошлое с помощью реконструкций и образовательных программ, которые подчеркивают его значимость в американской истории. Форт Мифлин был построен в период с 1771 по 1776 год. Это место было сценой осады форта Мифлин в 1777 году во время Войны за независимость. Форт был выведен из эксплуатации в 1960-х годах и теперь является историческим памятником.</p>
-<p class="prose">Форт Мифлин был построен в период с 1771 по 1776 год и сыграл ключевую роль во время Войны за независимость, особенно во время осады Форта Мифлин в 1777 году. Форт был спроектирован для защиты города Филадельфия от британских морских атак и стал местом ожесточенных боев. После войны он продолжал выполнять различные военные функции до своего закрытия в 1960-х годах. Форт имеет культурное значение как символ американской стойкости и военной истории. Он был сохранен как исторический объект, привлекая посетителей, интересующихся наследием Филадельфии и Войной за независимость. Форт Мифлин служит напоминанием о борьбе за независимость и важности обороны в формировании нации.</p></div>
+<p class="place-meta">Адрес: 1401 John F. Kennedy Boulevard</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/philadelphia_city_hall.jpg" alt="Городская ратуша Филадельфии" width="1067" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/philadelphia_city_hall_b.jpg" alt="Городская ратуша Филадельфии — вид 2" width="330" height="440" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Городская ратуша Филадельфии — это знаковая достопримечательность, расположенная в самом сердце Центра города. Завершенная в 1901 году, она является свидетельством величия архитектуры 19 века, с великолепной часовой башней, увенчанной статуей основателя города, Уильяма Пена. Посетители могут исследовать её сложную каменную отделку и наслаждаться панорамными видами города с смотровой площадки. Городская ратуша Филадельфии — крупнейшее муниципальное здание в Соединенных Штатах. Статуя Уильяма Пенна на вершине башни имеет высоту 37 футов и была самой высокой статуей на здании в Соединенных Штатах до 1987 года.</p>
+<p class="prose">Строительство мэрии Филадельфии началось в 1871 году и было завершено в 1901 году, что делает её одним из крупнейших муниципальных зданий в Соединенных Штатах. Здание, спроектированное архитектором Джоном Макаратом-младшим, отражает стиль Второй Империи и было самым высоким зданием в мире на момент его завершения. Этот участок стал центром различных исторических событий, включая политические собрания и гражданские празднования. В качестве центра правительства Филадельфии, Ратуша играет ключевую роль в политическом ландшафте города. Она стала фоном для многочисленных протестов и гражданских движений, отражая меняющиеся социальные и политические проблемы своего времени. Культурно это здание является символом богатого наследия Филадельфии, привлекая художников и фотографов, которые ценят его архитектурную красоту и исторический контекст.</p></div>
+</section>
+<section class="place" id="philadelphia_betsy_ross_house">
+<div class="place-lead">
+<h3>Дом Бетси Росс</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: 239 Arch Street</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/philadelphia_betsy_ross_house.JPG" alt="Дом Бетси Росс" width="1172" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/philadelphia_betsy_ross_house_b.jpg" alt="Дом Бетси Росс — вид 2" width="330" height="382" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Дом Бетси Росс, расположенный на улице Арч в Филадельфии, является историческим объектом, посвященным жизни Бетси Росс, которая славится тем, что сшила первый американский флаг. Посетители могут исследовать дом, который датируется 1740 годом, и узнать о вкладе Росс в американскую историю через выставки и экскурсии. Традиция связывает Росс с ранним флагом в звезды и полосы; историки обсуждают детали. Работает как дом-музей с 19 века.</p>
+<p class="prose">Дом Бетси Росс был построен в 1740 году и, как считается, являлся резиденцией Бетси Росс с 1773 по 1786 год. Именно здесь, как утверждается, она создала первый американский флаг в 1776 году, символ независимости нации. Дом был объявлен Национальным историческим памятником в 1955 году. Культурно, дом Бетси Росс представляет собой важную часть американского наследия, символизируя дух независимости и роль женщин в Американской революции. Этот объект привлекает множество посетителей каждый год, способствуя формированию идентичности Филадельфии как города, богатого революционной историей. Он также служит местом проведения образовательных программ и мероприятий, которые отмечают американские традиции.</p></div>
 </section>
 <section class="place" id="philadelphia_independence_hall">
+<div class="place-lead">
 <h3>Зал Независимости</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/philadelphia_independence_hall.jpg" alt="Зал Независимости"/></figure>
+<p class="place-meta">Адрес: 520 Chestnut Street, Philadelphia</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/philadelphia_independence_hall.jpg" alt="Зал Независимости" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/philadelphia_independence_hall_b.jpg" alt="Зал Независимости — вид 2" width="330" height="220" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Зал Независимости, расположенный на улице Честнат в Филадельфии, является исторической достопримечательностью, где обсуждались и принимались как Декларация независимости, так и Конституция Соединенных Штатов. Это знаковое здание, часть Национального исторического парка Независимости, привлекает посетителей, стремящихся исследовать колыбель американской демократии. Его великолепная георгианская архитектура и богатая история делают его обязательным для посещения для всех, кто интересуется основами Соединенных Штатов. Здесь обсуждали и подписывали как Декларацию, так и Конституцию. Объект Всемирного наследия ЮНЕСКО с сопутствующими историческими парковыми сооружениями.</p>
 <p class="prose">Зал Независимости был изначально построен как Государственный дом Пенсильвании с 1732 по 1753 год. Он служил местом встреч Второго Континентального Конгресса с 1775 по 1783 год, где Декларация независимости была принята 4 июля 1776 года. Кроме того, здесь проходил Конституционный конвент в 1787 году, что привело к разработке Конституции Соединенных Штатов. Зал Независимости имеет огромное политическое значение как место, где были созданы основополагающие документы Соединенных Штатов, ознаменовавшие разрыв страны с британским правлением и установившие рамки для управления. Здание символизирует идеалы свободы и демократии, что делает его центром различных протестов и движений, выступающих за гражданские права и социальную справедливость на протяжении всей американской истории. Его статус объекта всемирного наследия ЮНЕСКО дополнительно подчеркивает его культурное значение.</p></div>
 </section>
+<section class="place" id="philadelphia_franklin_institute">
+<div class="place-lead">
+<h3>Институт Франклина</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: 222 N 20th Street</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/philadelphia_franklin_institute.jpg" alt="Институт Франклина" width="1280" height="853" style="height: 260px; max-height: 260px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/philadelphia_franklin_institute_b.jpg" alt="Институт Франклина — вид 2" width="330" height="186" style="height: 260px; max-height: 260px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Институт Франклина — это ведущий научный музей, расположенный в Филадельфии, который стремится вдохновить любовь к науке и технологиям. С интерактивными экспонатами, планетарием и театром IMAX он предлагает увлекательные впечатления для посетителей всех возрастов. Названный в честь Бенджамина Франклина, музей служит центром научных исследований и образования. Основанный в 1824 году, Институт Франклина является одним из старейших научных музеев в Соединенных Штатах. Музей назван в честь Бенджамина Франклина, который был выдающимся ученым и государственным деятелем.</p>
+<p class="prose">Институт Франклина был основан в 1824 году, что делает его одним из старейших центров научного образования в Соединенных Штатах. Он был основан в честь Бенджамина Франклина, ключевой фигуры в американской истории, известного своими вкладом в науку и общественную жизнь. Музей прошел несколько расширений и реконструкций, среди которых значимые этапы включают открытие театра IMAX в 1996 году и обновление основных экспозиций в 2019 году. Культурно Институт Франклина играет жизненно важную роль в образовательном ландшафте Филадельфии, способствуя обучению STEM (наука, технологии, инженерия и математика) среди детей и взрослых. Он проводит различные мероприятия, мастер-классы и выставки, которые отражают приверженность города инновациям и научным исследованиям. Музей также вносит вклад в культурное наследие Филадельфии, привлекая миллионы посетителей каждый год и повышая репутацию города как центра образования и культуры.</p></div>
+</section>
 <section class="place" id="philadelphia_italian_market_philadelphia">
+<div class="place-lead">
 <h3>Итальянский рынок</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/philadelphia_italian_market_philadelphia.jpg" alt="Итальянский рынок"/></figure>
+<p class="place-meta">Адрес: S 9th Street, Bella Vista / Italian Market</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/philadelphia_italian_market_philadelphia.jpg" alt="Итальянский рынок" width="1280" height="328" style="height: 118px; max-height: 118px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/philadelphia_italian_market_philadelphia_b.jpg" alt="Итальянский рынок — вид 2" width="330" height="220" style="height: 118px; max-height: 118px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Итальянский рынок, расположенный на Южной 9-й улице в Филадельфии, является одним из старейших и самых ярких открытых рынков в Соединенных Штатах. Известный своим богатым ассортиментом свежих продуктов, мяса, сыров и аутентичных итальянских деликатесов, этот шумный рынок предлагает уникальный взгляд на разнообразное кулинарное наследие города. Посетители могут исследовать различные магазины, закусочные и торговцев, что делает его обязательным местом для посещения для любителей еды и культурных энтузиастов. Итальянский рынок — один из старейших открытых рынков в Соединенных Штатах. С тех пор как в конце 19 века здесь начала формироваться итало-американская культура, этот город стал ее центром.</p>
 <p class="prose">Итальянский рынок восходит к концу 19 века, когда итальянские иммигранты поселились в этом районе, привнеся свои кулинарные традиции. Изначально известный как Рынок 9-й улицы, он стал центром итальянских товаров и культуры, особенно в начале 20 века. На протяжении десятилетий рынок эволюционировал, но сохранил свою идентичность как центр итало-американской культуры. Культурно Итальянский рынок является свидетельством богатой иммигрантской истории Филадельфии и служит ярким местом сбора для сообщества. Он отражает разнообразное наследие города через свои кулинарные предложения и культурные мероприятия, включая ежегодный Праздник Успения, который отмечает итальянские традиции. Рынок не только играет важную роль в повседневной жизни местных жителей, но и привлекает посетителей со всего мира, способствуя репутации Филадельфии как кулинарного направления.</p></div>
 </section>
 <section class="place" id="philadelphia_liberty_bell">
+<div class="place-lead">
 <h3>Колокол Свободы</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/philadelphia_liberty_bell.jpg" alt="Колокол Свободы"/></figure>
+<p class="place-meta">Адрес: Liberty Bell Center, 6th &amp; Market Sts.</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/philadelphia_liberty_bell.jpg" alt="Колокол Свободы" width="1067" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/philadelphia_liberty_bell_b.jpg" alt="Колокол Свободы — вид 2" width="330" height="440" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Колокол Свободы, знаковый символ американской независимости, расположен в Национальном историческом парке Независимости в Филадельфии. Известный своим характерным трещиной, колокол является обязательным для посещения для туристов, интересующихся историей страны и идеалами свободы. Он привлекает миллионы посетителей каждый год, служа трогательным напоминанием о борьбе за свободу на протяжении всей американской истории. Колокол Свободы весит примерно 2,080 фунтов. Он изготовлен из бронзового сплава, состоящего на 70% из меди, на 20% из олова и на 10% из серебра.</p>
 <p class="prose">Колокол Свободы был первоначально отлит в 1752 году и предназначался для Государственного дома Пенсильвании. Он стал известен после того, как прозвонил 8 июля 1776 года в честь чтения Декларации независимости. На протяжении многих лет он стал символом Американской революции и стремления к свободе. Политически Колокол Свободы олицетворяет идеалы демократии и борьбу за независимость от британского владычества. Культурно он стал символом американского наследия и отмечается за свою роль в основании нации. Колокол также ассоциируется с различными движениями, выступающими за гражданские права и социальную справедливость, что делает его мощным эмблемой свободы и равенства.</p></div>
 </section>
-<section class="place" id="philadelphia_love_park">
-<h3>Парк любви</h3>
-
-
-<figure class="place-fig"><img src="../images/philadelphia_love_park.jpg" alt="Парк любви"/></figure>
-<div class="place-desc"><p class="prose">Парк LOVE — парк в Филадельфии, Соединенные Штаты Америки. Изображение LOVE Роберта Индианы является одним из самых фотографируемых символов в городе. Площадь была обновлена с новым фонтаном и местами для сидения.</p>
-<p class="prose">Площадь Джона Ф. Кеннеди открылась в 1965 году; LOVE был установлен к Бикентенарию и позже переработан на месте. Основная точка встречи и символ гордости Филадельфии.</p></div>
-</section>
 <section class="place" id="philadelphia_mutter_museum">
+<div class="place-lead">
 <h3>Музей Матерей</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/philadelphia_mutter_museum.jpg" alt="Музей Матерей"/></figure>
+<p class="place-meta">Адрес: 19 S 22nd Street (College of Physicians)</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/philadelphia_mutter_museum.jpg" alt="Музей Матерей" width="1050" height="1400" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/philadelphia_mutter_museum_b.jpg" alt="Музей Матерей — вид 2" width="330" height="495" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Музей Мюттера — это музей медицинской истории и науки, расположенный в центре Филадельфии. Он содержит коллекцию анатомических и патологических образцов, восковых моделей и антикварного медицинского оборудования. Музей является частью Колледжа врачей Филадельфии. Музей медицинской истории с анатомическими и патологическими образцами. Не для слабонервных; предназначено для образования и исследований.</p>
 <p class="prose">Вырастил из коллекций Колледжа врачей Филадельфии. Международно известный музей медицинских курьезов.</p></div>
 </section>
 <section class="place" id="philadelphia_national_constitution_center">
+<div class="place-lead">
 <h3>Национальный центр Конституции</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/philadelphia_national_constitution_center.jpg" alt="Национальный центр Конституции"/></figure>
+<p class="place-meta">Адрес: 525 Arch Street</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/philadelphia_national_constitution_center.jpg" alt="Национальный центр Конституции" width="1280" height="960" style="height: 317px; max-height: 317px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/philadelphia_national_constitution_center_b.jpg" alt="Национальный центр Конституции — вид 2" width="330" height="227" style="height: 317px; max-height: 317px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Национальный центр Конституции, расположенный на Молле Независимости в Филадельфии, является ведущим музеем, посвященным Конституции США. Он предлагает увлекательные выставки, интерактивные экспозиции и образовательные программы, которые исследуют историю Конституции и ее постоянное влияние на американскую демократию. Посетители также могут увидеть знаковый Зал подписантов, в котором представлены статуи Отцов-основателей в натуральную величину. Национальный центр Конституции — единственный музей в Соединенных Штатах, посвященный Конституции США. Он расположен на площади Независимости, рядом с другими историческими местами, такими как Колокол Свободы и Зал Независимости.</p>
 <p class="prose">Национальный центр Конституции был основан в 2003 году, что стало значительным дополнением к богатому историческому ландшафту Филадельфии. Он был создан для того, чтобы увековечить Конституцию и просветить общественность о ее значении, что соответствует исторической роли города как родины американской демократии. В качестве центрального узла для конституционного образования Национальный центр Конституции играет важную роль в содействии гражданскому участию и пониманию демократических принципов. Он проводит обсуждения, лекции и мероприятия, которые отражают актуальность Конституции в современном обществе, что делает его ключевым игроком в культурном и политическом дискурсе, касающемся американского управления.</p></div>
 </section>
-<section class="place" id="philadelphia_pdfband_9_737ed763">
-<h3>Palace Theatre Newark</h3>
+<section class="place" id="philadelphia_wissahickon_valley_park">
+<div class="place-lead">
+<h3>Парк Висахикон Вэлли</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
+<p class="place-meta">Место: Northwest Philadelphia, Wissahickon Creek</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/philadelphia_wissahickon_valley_park.jpg" alt="Парк Висахикон Вэлли" width="1280" height="780" style="height: 281px; max-height: 281px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/philadelphia_wissahickon_valley_park_b.jpg" alt="Парк Висахикон Вэлли — вид 2" width="330" height="495" style="height: 281px; max-height: 281px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Парк Висахикон-Валли — это потрясающий природный оазис, расположенный в районе Фэрмаунт в Филадельфии, предлагающий посетителям спокойное убежище от городской суеты. С его зелеными ландшафтами, извивающимися тропами и живописным ручьем Висахикон, парк идеально подходит для пеших прогулок, велопрогулок и наслаждения природой. Богатая история парка и разнообразные экосистемы делают его любимым местом как для местных жителей, так и для туристов. Парк Висахикон Вэлли занимает более 1,800 акров. Парк предлагает более 50 миль троп для пеших прогулок и велопрогулок.</p>
+<p class="prose">Парк Висахикон-Валли имеет богатую историю, восходящую к 17 веку, когда он был населён народом Ленапе. В 19 веке эта территория стала частью системы парков Фэрмаунт в Филадельфии, а значительное развитие произошло в 1860-х годах, когда парк был официально основан. Исторические сооружения парка, такие как знаковый отель Вэлли Грин Инн, отражают его давнюю значимость как рекреационной зоны. Культурно, парк Висахикон-Вэлли служит важным зеленым пространством, которое улучшает качество жизни жителей Филадельфии. Он является неотъемлемой частью наследия города, способствуя активному отдыху на свежем воздухе и вовлечению сообщества. Парк также известен своей природной красотой и биоразнообразием, что способствует усилиям города по охране окружающей среды.</p></div>
+</section>
+<section class="place" id="philadelphia_love_park">
+<div class="place-lead">
+<h3>Парк любви</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<figure class="place-fig"><img src="../images/philadelphia_pdfband_9_737ed763.jpg" alt="Palace Theatre Newark"/></figure>
+<p class="place-meta">Место: 1599 John F. Kennedy Boulevard</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/philadelphia_love_park.jpg" alt="Парк любви" width="1280" height="908" style="height: 327px; max-height: 327px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/philadelphia_love_park_b.jpg" alt="Парк любви — вид 2" width="330" height="247" style="height: 327px; max-height: 327px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Парк LOVE — парк в Филадельфии, Соединенные Штаты Америки. Изображение LOVE Роберта Индианы является одним из самых фотографируемых символов в городе. Площадь была обновлена с новым фонтаном и местами для сидения.</p>
+<p class="prose">Площадь Джона Ф. Кеннеди открылась в 1965 году; LOVE был установлен к Бикентенарию и позже переработан на месте. Основная точка встречи и символ гордости Филадельфии.</p></div>
 </section>
 <section class="place" id="philadelphia_pennsylvania_academy_fine_arts">
+<div class="place-lead">
 <h3>Пенсильванская академия изящных искусств</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/philadelphia_pennsylvania_academy_fine_arts.jpg" alt="Пенсильванская академия изящных искусств"/></figure>
+<p class="place-meta">Адрес: 118-128 N Broad Street</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/philadelphia_pennsylvania_academy_fine_arts.jpg" alt="Пенсильванская академия изящных искусств" width="1280" height="1002" style="height: 361px; max-height: 361px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/philadelphia_pennsylvania_academy_fine_arts_b.jpg" alt="Пенсильванская академия изящных искусств — вид 2" width="330" height="440" style="height: 361px; max-height: 361px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Пенсильванская академия изящных искусств — музей и художественная школа в Филадельфии, Пенсильвания. Первое в Америке здание, объединяющее художественный музей и школу. Фасад Фрэнка Фернесса является выдающимся памятником в стиле Высокого Викторианства.</p>
 <p class="prose">Основан в 1805 году; здание служит опорой культурным учреждениям Северного Броада. Тренировочная площадка для американских художников, включая Томаса Икинса.</p></div>
 </section>
-<section class="place" id="philadelphia_city_hall">
-<h3>Городская ратуша Филадельфии</h3>
-
-
-<figure class="place-fig"><img src="../images/philadelphia_city_hall.jpg" alt="Городская ратуша Филадельфии"/></figure>
-<div class="place-desc"><p class="prose">Городская ратуша Филадельфии — это знаковая достопримечательность, расположенная в самом сердце Центра города. Завершенная в 1901 году, она является свидетельством величия архитектуры 19 века, с великолепной часовой башней, увенчанной статуей основателя города, Уильяма Пена. Посетители могут исследовать её сложную каменную отделку и наслаждаться панорамными видами города с смотровой площадки. Городская ратуша Филадельфии — крупнейшее муниципальное здание в Соединенных Штатах. Статуя Уильяма Пенна на вершине башни имеет высоту 37 футов и была самой высокой статуей на здании в Соединенных Штатах до 1987 года.</p>
-<p class="prose">Строительство мэрии Филадельфии началось в 1871 году и было завершено в 1901 году, что делает её одним из крупнейших муниципальных зданий в Соединенных Штатах. Здание, спроектированное архитектором Джоном Макаратом-младшим, отражает стиль Второй Империи и было самым высоким зданием в мире на момент его завершения. Этот участок стал центром различных исторических событий, включая политические собрания и гражданские празднования. В качестве центра правительства Филадельфии, Ратуша играет ключевую роль в политическом ландшафте города. Она стала фоном для многочисленных протестов и гражданских движений, отражая меняющиеся социальные и политические проблемы своего времени. Культурно это здание является символом богатого наследия Филадельфии, привлекая художников и фотографов, которые ценят его архитектурную красоту и исторический контекст.</p></div>
-</section>
-<section class="place" id="philadelphia_magic_gardens">
-<h3>Филадельфийские магические сады</h3>
-
-
-<figure class="place-fig"><img src="../images/philadelphia_magic_gardens.jpg" alt="Филадельфийские магические сады"/></figure>
-<div class="place-desc"><p class="prose">Филадельфийские магические сады — это яркая, погружающая арт-инсталляция, расположенная на Саут-стрит, созданная художником Исайей Загаром. Это уникальное пространство предлагает потрясающую мозаику из плитки, стекла и найденных предметов, приглашая посетителей исследовать его извивающиеся тропинки и сложные произведения искусства. Оно служит как галереей, так и общественным пространством, демонстрируя креативность и дух Филадельфии. Сады занимают площадь примерно в половину городского квартала. Исаия Загар создал более 200 мозаик по всему городу.</p>
-<p class="prose">Филадельфийские магические сады были основаны в 2002 году Исайей Загаром, который начал создавать мозаики в этом районе в 1960-х годах. Сады занимают половину городского квартала и развивались на протяжении нескольких десятилетий, завершившись официальным открытием установки для публики в 2008 году. Волшебные Сады играют ключевую роль в культурном ландшафте Филадельфии, отражая богатое художественное наследие города и дух сообщества. Они служат местом сбора для местных мероприятий и образовательных программ, способствуя творчеству и вовлеченности как жителей, так и посетителей. Сады являются свидетельством силы общественного искусства в преобразовании городских пространств и улучшении повседневной жизни.</p></div>
-</section>
-<section class="place" id="philadelphia_museum_of_art">
-<h3>Филадельфийский музей искусства</h3>
-
-<p class="place-meta">Период: 1926</p>
-<figure class="place-fig"><img src="../images/philadelphia_museum_of_art.jpg" alt="Филадельфийский музей искусства"/></figure>
-<div class="place-desc"><p class="prose">Расположенный на холме Фэрмаунт, Филадельфийский музей искусства является одним из самых знаковых культурных учреждений Америки. Его знаменитые «ступени Рокки» стали глобальным символом упорства и вдохновения. Открытое в 1926 году, здание было спроектировано Полем Кре в стиле боз-ар. В нем хранится более 230 000 объектов в различных отделах, таких как живопись, скульптура, декоративные искусства и фотография. Знаменитые фрески музея, созданные Программой Мурального Искусства, изображают сцены из местной истории и культуры. Её обширная библиотека содержит редкие книги, печатные издания и манускрипты, датируемые веками назад. В дополнение к постоянным коллекциям, музей проводит временные выставки, представляющие современных художников.</p>
-<p class="prose">Основанный в 1876 году, музей начинал как хранилище произведений искусства, собранных состоятельными жителями Филадельфии. Со временем он расширил свою коллекцию, чтобы включить работы, охватывающие древнеегипетские артефакты, импрессионистские картины и современные шедевры. Обязательное место для посещения любителями искусства, музей демонстрирует некоторые из величайших сокровищ мира, включая &#x27;Мыслителя&#x27; Родена, &#x27;Синюю обнаженную&#x27; Матисса и &#x27;Ирисы&#x27; Ван Гога.</p></div>
-</section>
-<section class="place" id="philadelphia_zoo">
-<h3>Филадельфийский зоопарк</h3>
-
-
-<figure class="place-fig"><img src="../images/philadelphia_zoo.jpg" alt="Филадельфийский зоопарк"/></figure>
-<div class="place-desc"><p class="prose">Филадельфийский зоопарк — зоопарк в Филадельфии, штат Пенсильвания, США. Учрежденный как первый зоопарк Америки; открыт в 1874 году. Исторические ворота и животноводческие постройки разбросаны по территории.</p>
-<p class="prose">Основан на идеалах охраны окружающей среды и образования 19 века. Основное семейное направление на западной окраине парка.</p></div>
-</section>
-<section class="place" id="philadelphia_pdfband_8_7dfa1a39">
-<h3>PhiladelphiaMuseumOfArt2017</h3>
-
-
-<figure class="place-fig"><img src="../images/philadelphia_pdfband_8_7dfa1a39.jpg" alt="PhiladelphiaMuseumOfArt2017"/></figure>
-</section>
-<section class="place" id="philadelphia_pdfband_2_815a01ac">
-<h3>Qadiriya-small</h3>
-
-
-<figure class="place-fig"><img src="../images/philadelphia_pdfband_2_815a01ac.jpg" alt="Qadiriya-small"/></figure>
-</section>
 <section class="place" id="philadelphia_reading_terminal_market">
+<div class="place-lead">
 <h3>Рынок Ридинга</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/philadelphia_reading_terminal_market.jpg" alt="Рынок Ридинга"/></figure>
+<p class="place-meta">Адрес: 51 N 12th Street (under train shed)</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/philadelphia_reading_terminal_market.jpg" alt="Рынок Ридинга" width="1280" height="848" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/philadelphia_reading_terminal_market_b.jpg" alt="Рынок Ридинга — вид 2" width="330" height="236" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Рынок Ридинга — фермерский рынок в Филадельфии. Продавцы предлагают амишские продукты, пенсильванские голландские блюда и кухни со всего мира. Работает в историческом комплексе главного здания железной дороги Рединг.</p>
 <p class="prose">Открытый в 1893 году как общественный рынок в здании вокзала Reading Terminal. Работающий общественный рынок и ежедневное место для обеда для местных жителей и туристов.</p></div>
 </section>
-<section class="place" id="philadelphia_shofuso_house">
-<h3>Шофусо - японский дом и сад</h3>
-
-
-<figure class="place-fig"><img src="../images/philadelphia_shofuso_house.jpg" alt="Шофусо - японский дом и сад"/></figure>
-<div class="place-desc"><p class="prose">Японский дом и сад — традиционный сад в парке Фэрмаунт, Филадельфия. Дом в стиле никко с садом для прогулок у пруда. История, связанная с подарками, имеет связь с городом-побратимом Нагоя.</p>
-<p class="prose">Представлено в Нью-Йорке перед повторной сборкой в парке Филадельфии. Мирный культурный контраст в парке Фэрмаунт.</p></div>
-</section>
-<section class="place" id="philadelphia_franklin_institute">
-<h3>Институт Франклина</h3>
-
-
-<figure class="place-fig"><img src="../images/philadelphia_franklin_institute.jpg" alt="Институт Франклина"/></figure>
-<div class="place-desc"><p class="prose">Институт Франклина — это ведущий научный музей, расположенный в Филадельфии, который стремится вдохновить любовь к науке и технологиям. С интерактивными экспонатами, планетарием и театром IMAX он предлагает увлекательные впечатления для посетителей всех возрастов. Названный в честь Бенджамина Франклина, музей служит центром научных исследований и образования. Основанный в 1824 году, Институт Франклина является одним из старейших научных музеев в Соединенных Штатах. Музей назван в честь Бенджамина Франклина, который был выдающимся ученым и государственным деятелем.</p>
-<p class="prose">Институт Франклина был основан в 1824 году, что делает его одним из старейших центров научного образования в Соединенных Штатах. Он был основан в честь Бенджамина Франклина, ключевой фигуры в американской истории, известного своими вкладом в науку и общественную жизнь. Музей прошел несколько расширений и реконструкций, среди которых значимые этапы включают открытие театра IMAX в 1996 году и обновление основных экспозиций в 2019 году. Культурно Институт Франклина играет жизненно важную роль в образовательном ландшафте Филадельфии, способствуя обучению STEM (наука, технологии, инженерия и математика) среди детей и взрослых. Он проводит различные мероприятия, мастер-классы и выставки, которые отражают приверженность города инновациям и научным исследованиям. Музей также вносит вклад в культурное наследие Филадельфии, привлекая миллионы посетителей каждый год и повышая репутацию города как центра образования и культуры.</p></div>
-</section>
 <section class="place" id="philadelphia_thirtieth_street_station">
+<div class="place-lead">
 <h3>Станция 30-й улицы Уильяма Х. Грея III</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/philadelphia_thirtieth_street_station.jpg" alt="Станция 30-й улицы Уильяма Х. Грея III"/></figure>
+<p class="place-meta">Адрес: 2955 Market Street</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/philadelphia_thirtieth_street_station.jpg" alt="Станция 30-й улицы Уильяма Х. Грея III" width="1280" height="813" style="height: 231px; max-height: 231px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/philadelphia_thirtieth_street_station_b.jpg" alt="Станция 30-й улицы Уильяма Х. Грея III — вид 2" width="330" height="165" style="height: 231px; max-height: 231px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Станция Уильяма Х. Грея III на 30-й улице — это оживленный узел Amtrak, расположенный в Филадельфии, который служит важной транспортной связью как для региональных, так и для национальных поездок. Известная своей потрясающей архитектурой в стиле ар-деко, станция предлагает возможность заглянуть в богатую историю города, одновременно предоставляя современные удобства для путешественников. Благодаря своему центральному расположению, она является неотъемлемой частью городской инфраструктуры Филадельфии. Станция расположена на углу 30-й улицы и улицы Маркет в Филадельфии. Это одна из самых загруженных железнодорожных станций в Соединенных Штатах, обслуживающая более 4 миллионов пассажиров ежегодно.</p>
 <p class="prose">Открытая в 1933 году, станция 30th Street Station имени Уильяма Х. Грея III была спроектирована архитектурной фирмой Graham, Anderson, Probst &amp; White. Она была построена для замены старой станции Broad Street и с тех пор стала ключевым терминалом для Amtrak, SEPTA и New Jersey Transit. Станция была названа в честь Уильяма Х. Грея III, выдающегося афроамериканского политика и лидера движения за гражданские права. Станция играет ключевую роль в транспортной сети Филадельфии, способствуя перемещению людей и товаров по региону и за его пределами. Она была местом значительной политической активности, отражая роль города как транспортного узла и его историческое значение в движении за гражданские права. Культурно станция является воротами в Филадельфию, демонстрируя архитектурное наследие города и служа местом встречи для разнообразных сообществ.</p></div>
 </section>
-<section class="place" id="philadelphia_wissahickon_valley_park">
-<h3>Парк Висахикон Вэлли</h3>
+<section class="place" id="philadelphia_magic_gardens">
+<div class="place-lead">
+<h3>Филадельфийские магические сады</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
+<p class="place-meta">Адрес: 1020 South Street</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/philadelphia_magic_gardens.jpg" alt="Филадельфийские магические сады" width="1280" height="960" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/philadelphia_magic_gardens_b.jpg" alt="Филадельфийские магические сады — вид 2" width="330" height="247" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Филадельфийские магические сады — это яркая, погружающая арт-инсталляция, расположенная на Саут-стрит, созданная художником Исайей Загаром. Это уникальное пространство предлагает потрясающую мозаику из плитки, стекла и найденных предметов, приглашая посетителей исследовать его извивающиеся тропинки и сложные произведения искусства. Оно служит как галереей, так и общественным пространством, демонстрируя креативность и дух Филадельфии. Сады занимают площадь примерно в половину городского квартала. Исаия Загар создал более 200 мозаик по всему городу.</p>
+<p class="prose">Филадельфийские магические сады были основаны в 2002 году Исайей Загаром, который начал создавать мозаики в этом районе в 1960-х годах. Сады занимают половину городского квартала и развивались на протяжении нескольких десятилетий, завершившись официальным открытием установки для публики в 2008 году. Волшебные Сады играют ключевую роль в культурном ландшафте Филадельфии, отражая богатое художественное наследие города и дух сообщества. Они служат местом сбора для местных мероприятий и образовательных программ, способствуя творчеству и вовлеченности как жителей, так и посетителей. Сады являются свидетельством силы общественного искусства в преобразовании городских пространств и улучшении повседневной жизни.</p></div>
+</section>
+<section class="place" id="philadelphia_zoo">
+<div class="place-lead">
+<h3>Филадельфийский зоопарк</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<figure class="place-fig"><img src="../images/philadelphia_wissahickon_valley_park.jpg" alt="Парк Висахикон Вэлли"/></figure>
-<div class="place-desc"><p class="prose">Парк Висахикон-Валли — это потрясающий природный оазис, расположенный в районе Фэрмаунт в Филадельфии, предлагающий посетителям спокойное убежище от городской суеты. С его зелеными ландшафтами, извивающимися тропами и живописным ручьем Висахикон, парк идеально подходит для пеших прогулок, велопрогулок и наслаждения природой. Богатая история парка и разнообразные экосистемы делают его любимым местом как для местных жителей, так и для туристов. Парк Висахикон Вэлли занимает более 1,800 акров. Парк предлагает более 50 миль троп для пеших прогулок и велопрогулок.</p>
-<p class="prose">Парк Висахикон-Валли имеет богатую историю, восходящую к 17 веку, когда он был населён народом Ленапе. В 19 веке эта территория стала частью системы парков Фэрмаунт в Филадельфии, а значительное развитие произошло в 1860-х годах, когда парк был официально основан. Исторические сооружения парка, такие как знаковый отель Вэлли Грин Инн, отражают его давнюю значимость как рекреационной зоны. Культурно, парк Висахикон-Вэлли служит важным зеленым пространством, которое улучшает качество жизни жителей Филадельфии. Он является неотъемлемой частью наследия города, способствуя активному отдыху на свежем воздухе и вовлечению сообщества. Парк также известен своей природной красотой и биоразнообразием, что способствует усилиям города по охране окружающей среды.</p></div>
+<p class="place-meta">Место: 3400 W Girard Avenue, Fairmount Park</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/philadelphia_zoo.jpg" alt="Филадельфийский зоопарк" width="1280" height="960" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/philadelphia_zoo_b.jpg" alt="Филадельфийский зоопарк — вид 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Филадельфийский зоопарк — зоопарк в Филадельфии, штат Пенсильвания, США. Учрежденный как первый зоопарк Америки; открыт в 1874 году. Исторические ворота и животноводческие постройки разбросаны по территории.</p>
+<p class="prose">Основан на идеалах охраны окружающей среды и образования 19 века. Основное семейное направление на западной окраине парка.</p></div>
+</section>
+<section class="place" id="philadelphia_museum_of_art">
+<div class="place-lead">
+<h3>Филадельфийский музей искусства</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: 2600 Benjamin Franklin Parkway | Период: 1926</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/philadelphia_museum_of_art.jpg" alt="Филадельфийский музей искусства" width="1280" height="914" style="height: 329px; max-height: 329px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/philadelphia_museum_of_art_b.jpg" alt="Филадельфийский музей искусства — вид 2" width="330" height="276" style="height: 329px; max-height: 329px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Расположенный на холме Фэрмаунт, Филадельфийский музей искусства является одним из самых знаковых культурных учреждений Америки. Его знаменитые «ступени Рокки» стали глобальным символом упорства и вдохновения. Открытое в 1926 году, здание было спроектировано Полем Кре в стиле боз-ар. В нем хранится более 230 000 объектов в различных отделах, таких как живопись, скульптура, декоративные искусства и фотография. Знаменитые фрески музея, созданные Программой Мурального Искусства, изображают сцены из местной истории и культуры. Её обширная библиотека содержит редкие книги, печатные издания и манускрипты, датируемые веками назад. В дополнение к постоянным коллекциям, музей проводит временные выставки, представляющие современных художников.</p>
+<p class="prose">Основанный в 1876 году, музей начинал как хранилище произведений искусства, собранных состоятельными жителями Филадельфии. Со временем он расширил свою коллекцию, чтобы включить работы, охватывающие древнеегипетские артефакты, импрессионистские картины и современные шедевры. Обязательное место для посещения любителями искусства, музей демонстрирует некоторые из величайших сокровищ мира, включая &#x27;Мыслителя&#x27; Родена, &#x27;Синюю обнаженную&#x27; Матисса и &#x27;Ирисы&#x27; Ван Гога.</p></div>
+</section>
+<section class="place" id="philadelphia_fort_mifflin">
+<div class="place-lead">
+<h3>Форт Мифлин</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Fort Mifflin &amp; Hog Island roads, Delaware River</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/philadelphia_fort_mifflin.jpg" alt="Форт Мифлин" width="1280" height="932" style="height: 336px; max-height: 336px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/philadelphia_fort_mifflin_b.jpg" alt="Форт Мифлин — вид 2" width="330" height="247" style="height: 336px; max-height: 336px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Форт Мифлин, расположенный вдоль реки Делавэр в Филадельфии, является исторической военной крепостью, датируемой временами Американской революционной войны. Посетители могут исследовать его хорошо сохранившиеся сооружения и узнать о его роли в защите города во время ключевых сражений. Форт предлагает возможность заглянуть в прошлое с помощью реконструкций и образовательных программ, которые подчеркивают его значимость в американской истории. Форт Мифлин был построен в период с 1771 по 1776 год. Это место было сценой осады форта Мифлин в 1777 году во время Войны за независимость. Форт был выведен из эксплуатации в 1960-х годах и теперь является историческим памятником.</p>
+<p class="prose">Форт Мифлин был построен в период с 1771 по 1776 год и сыграл ключевую роль во время Войны за независимость, особенно во время осады Форта Мифлин в 1777 году. Форт был спроектирован для защиты города Филадельфия от британских морских атак и стал местом ожесточенных боев. После войны он продолжал выполнять различные военные функции до своего закрытия в 1960-х годах. Форт имеет культурное значение как символ американской стойкости и военной истории. Он был сохранен как исторический объект, привлекая посетителей, интересующихся наследием Филадельфии и Войной за независимость. Форт Мифлин служит напоминанием о борьбе за независимость и важности обороны в формировании нации.</p></div>
+</section>
+<section class="place" id="philadelphia_fairmount_water_works">
+<div class="place-lead">
+<h3>Фэрмаунт Уотер Уоркс</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: 640 Waterworks Drive, Schuylkill banks</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/philadelphia_fairmount_water_works.jpg" alt="Фэрмаунт Уотер Уоркс" width="1280" height="867" style="height: 312px; max-height: 312px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/philadelphia_fairmount_water_works_b.jpg" alt="Фэрмаунт Уотер Уоркс — вид 2" width="330" height="231" style="height: 312px; max-height: 312px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Фэрмаунт Уотер Уоркс — это историческое место, расположенное вдоль реки Скукил в Филадельфии, известное своей живописной архитектурой и значением в развитии городских систем водоснабжения. Когда-то являвшийся важным источником питьевой воды для города, сегодня он служит прекрасным парком и образовательным центром, предлагая потрясающие виды и возможность заглянуть в историю инженерии Филадельфии. Водные сооружения Фэрмаунт были спроектированы в неоклассическом стиле и включают в себя ряд элегантных зданий и водных систем. В 1976 году он был объявлен Национальным историческим памятником из-за его исторического и архитектурного значения.</p>
+<p class="prose">Основанные в 1812 году, Водные работы Фэрмаунт были спроектированы архитектором Фредериком Граффом и стали одной из первых муниципальных систем водоснабжения в Соединенных Штатах. Они сыграли ключевую роль в обеспечении чистой водой Филадельфию, особенно во время вспышек холеры в 19 веке. Установка функционировала до 1909 года, после чего была переоборудована и восстановлена как общественное пространство. Водные работы Фэрмаунт имеют культурное значение как символ приверженности Филадельфии общественному здоровью и городской инфраструктуре. Они отражают богатое инженерное наследие города и стали популярным местом для отдыха и образования, способствуя осведомленности о сохранении воды и охране окружающей среды. На территории также расположены установки общественного искусства и проводятся мероприятия для сообщества, что еще больше укрепляет их в повседневной жизни жителей Филадельфии.</p></div>
+</section>
+<section class="place" id="philadelphia_christ_church_philadelphia">
+<div class="place-lead">
+<h3>Церковь Христа</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: 20 N American Street, Old City</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/philadelphia_christ_church_philadelphia.jpg" alt="Церковь Христа" width="1258" height="1600" style="height: 457px; max-height: 457px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/philadelphia_christ_church_philadelphia_b.jpg" alt="Церковь Христа — вид 2" width="330" height="327" style="height: 457px; max-height: 457px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Церковь Христова, расположенная на 2-й улице в историческом Старом городе Филадельфии, является великолепным примером колониальной архитектуры и важной частью богатого наследия города. Основанная в 1695 году, эта англиканская церковь сыграла значительную роль в религиозной и гражданской жизни Филадельфии. Посетители могут полюбоваться её красивым интерьером, включая знаковую башню, и узнать о её исторических связях с ключевыми фигурами американской истории. Основанная в 1695 году, Христова церковь является одной из старейших церквей в Пенсильвании. Колокольня церкви была добавлена в 1754 году и является заметной особенностью филадельфийского горизонта.</p>
+<p class="prose">Церковь Христова была основана в 1695 году группой англикан, которые стремились создать место для поклонения в растущей колонии Пенсильвания. Церковь была спроектирована архитектором Робертом Смитом и завершена в 1744 году, став выдающимся местом для богослужений и общественных собраний. Именно здесь многие отцы-основатели, включая Джорджа Вашингтона и Бенджамина Франклина, посещали службы, что сделало ее значимым памятником в истории Соединенных Штатов. Как место поклонения, Церковь Христа имеет глубокое религиозное значение для англиканской общины и служит напоминанием о ранних религиозных свободах, которые искали поселенцы в Америке. Культурно она является символом колониального прошлого Филадельфии и на протяжении многих лет была местом проведения различных общественных мероприятий и праздников. Церковь также является частью Исторической Церкви Христа и Кладбища, которые вместе отражают богатое наследие города и его приверженность сохранению исторических мест.</p></div>
+</section>
+<section class="place" id="philadelphia_shofuso_house">
+<div class="place-lead">
+<h3>Шофусо - японский дом и сад</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Horticultural Drive, West Fairmount Park</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/philadelphia_shofuso_house.jpg" alt="Шофусо - японский дом и сад" width="1280" height="789" style="height: 284px; max-height: 284px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/philadelphia_shofuso_house_b.jpg" alt="Шофусо - японский дом и сад — вид 2" width="330" height="220" style="height: 284px; max-height: 284px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Японский дом и сад — традиционный сад в парке Фэрмаунт, Филадельфия. Дом в стиле никко с садом для прогулок у пруда. История, связанная с подарками, имеет связь с городом-побратимом Нагоя.</p>
+<p class="prose">Представлено в Нью-Йорке перед повторной сборкой в парке Филадельфии. Мирный культурный контраст в парке Фэрмаунт.</p></div>
 </section>
 </body>
 </html>

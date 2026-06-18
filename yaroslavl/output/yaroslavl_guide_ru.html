@@ -13,7 +13,7 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
 .otium-logo { font-family: 'Cormorant Garamond', serif; font-size: 2.15rem;
   font-weight: 600; letter-spacing: 0.18em; margin-bottom: 0.85rem; }
 .otiump { margin: 0.42rem 0; line-height: 1.42; text-align: justify;
-  max-width: 38rem; font-size: 0.95rem; }
+  font-size: 0.95rem; }
 .guide-title { page-break-after: auto; margin-bottom: 0.55rem;
   page-break-inside: avoid; }
 .historical-reference { margin: 0.75rem 0 1.15rem;
@@ -63,22 +63,103 @@ ol.trip-stops a:hover { text-decoration: underline; }
 .heraldry-univ-caption { font-size: 0.52rem; line-height: 1.18;
   margin: 0.12rem 0 0; padding: 0 0.06rem; color: #252525;
   text-align: center; font-weight: 500; }
-.heraldry-motto { text-align: center; max-width: 18rem; margin: 0.18rem auto;
+.heraldry-motto { text-align: center; margin: 0.18rem auto;
   width: 100%; }
 .motto-line { font-family: 'Cormorant Garamond', serif; font-size: 1rem;
   margin: 0; color: #333; line-height: 1.35; }
 .guide-title h1.guide-title-main { font-family: 'Cormorant Garamond', serif;
   font-size: 2.35rem; margin-bottom: 0.5rem; font-weight: 600; }
 .lead { color: #444; font-size: 1.05rem; }
-.guide-toc { margin: 0.85rem 0 1.15rem; page-break-inside: avoid; }
-.guide-toc h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.28rem;
-  font-weight: 600; margin: 0.4rem 0 0.55rem; }
+
+.guide-toc { page-break-before: always; break-before: page;
+  page-break-after: always; break-after: page;
+  margin: 0; padding: 0.2rem 0 0.45rem; page-break-inside: auto; }
+.guide-toc h2 { font-family: 'Cormorant Garamond', serif;
+  font-size: 1.28rem; font-weight: 600; margin: 0.4rem 0 0.55rem; }
 .guide-toc ol { margin: 0.35rem 0 0.65rem 1.25rem; padding: 0;
   columns: 2; column-gap: 1.5rem; }
 .guide-toc li { margin: 0.18rem 0; line-height: 1.35;
   font-size: 0.88rem; break-inside: avoid; }
-.guide-toc a { color: #1a5276; text-decoration: none; }
+.guide-toc a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.guide-toc a:hover { color: #0d3d56; }
 .guide-toc li.toc-item--sub { font-size: 0.82rem; margin-left: 0.35rem; }
+.toc-back { font-size: 0.78rem; margin: 0 0 0.35rem; text-align: right; }
+.toc-back a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.toc-back a:hover { color: #0d3d56; }
+.place, .historical-reference, .guide-primer, .guide-trip-plans {
+  scroll-margin-top: 1.25rem; }
+.historical-reference h2, .guide-primer h2, .guide-trip-plans h2,
+.chapter-head h2, .place-lead h3 { position: relative; }
+.guide-toc + .place, .guide-toc + .chapter-head {
+  page-break-before: avoid; break-before: avoid-page; }
+.place-lead { page-break-inside: avoid; break-inside: avoid-page;
+  page-break-after: auto; }
+.place-lead > h3 { page-break-after: avoid; break-after: avoid-page; }
+.place-lead > .place-meta { page-break-after: avoid; break-after: avoid-page; }
+
+.place-fig { page-break-inside: avoid; break-inside: avoid-page;
+  margin: 0.5rem 0 1rem; }
+.place-fig img {
+  page-break-inside: avoid; break-inside: avoid-page;
+  max-height: 48vh; width: auto; max-width: 100%;
+  object-fit: contain; margin-left: auto; margin-right: auto; }
+.place-fig--hi-res img { max-height: 52vh; }
+.place-fig--lo-res img { max-height: 30vh; }
+.place-pdf-fig-row {
+  display: flex; flex-direction: row; flex-wrap: wrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.45rem 0.55rem; margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row .place-fig {
+  flex: 1 1 30%; margin: 0; min-width: 26%; max-width: 100%; }
+.place-pdf-fig-row .place-fig img {
+  width: auto; max-width: 100%; height: auto; max-height: 44vh;
+  object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--pair {
+  flex-wrap: nowrap; justify-content: space-between;
+  align-items: flex-end; gap: 0.5rem 0.65rem; }
+.place-pdf-fig-row--pair .place-fig {
+  flex: 1 1 47%; min-width: 0; max-width: 50%;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--pair .place-fig img {
+  max-height: 44vh; object-fit: contain; }
+.place-pdf-fig-row--pair .place-fig--hi-res img { max-height: 50vh; }
+.place-pdf-fig-row--pair .place-fig--lo-res img { max-height: 26vh; }
+.place-pdf-fig-row--pair .place-fig--row-sized img,
+.place-pdf-fig-row--triple .place-fig--row-sized img,
+.place-pdf-fig-row--many .place-fig--row-sized img {
+  width: auto; max-width: 100%; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row .place-fig--row-sized.place-fig--hi-res img,
+.place-pdf-fig-row .place-fig--row-sized.place-fig--lo-res img {
+  max-height: unset; }
+.place-pdf-fig-rows-stack {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple {
+  display: flex; flex-direction: row; flex-wrap: nowrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.4rem 0.48rem; margin: 0;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--triple .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--triple .place-fig--hi-res img { max-height: 38vh; }
+.place-pdf-fig-row--triple .place-fig--lo-res img { max-height: 18vh; }
+.place-pdf-fig-row--many {
+  flex-wrap: nowrap; justify-content: center; align-items: flex-end;
+  gap: 0.35rem 0.42rem; }
+.place-pdf-fig-row--many .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--many .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+
+
 .place { margin-bottom: 2.2rem; page-break-inside: auto; }
 h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.22rem; margin: 1.2rem 0 0.35rem;
   font-weight: 600; }
@@ -90,7 +171,6 @@ h4 { font-family: 'Cormorant Garamond', serif; font-size: 0.95rem; text-transfor
   color: #555; font-size: 0.95rem; margin: 0 0 0.5rem; font-style: italic; }
 .place-meta { font-size: 0.92rem; color: #353535; margin: 0 0 0.75rem;
   line-height: 1.4; }
-.place-fig { margin: 0.5rem 0 1rem; }
 img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
 .prose, .place-desc p { margin: 0.45rem 0; line-height: 1.5;
   text-align: justify; }
@@ -110,11 +190,14 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <figure class="heraldry-fig heraldry-coat-book" title="Coat of arms of Yaroslavl"><img src="../images/guide_coat_of_arms.svg" alt="Coat of arms of Yaroslavl"/></figure>
 <figure class="heraldry-fig heraldry-coat-book" title="Flag of Yaroslavl"><img src="../images/guide_flag.svg" alt="Flag of Yaroslavl"/></figure>
 </div></div><h1 class="guide-title-main">Yaroslavl</h1><p class="lead">Путеводитель. Объектов в этом выпуске: 26.</p></header>
+<nav class="guide-toc" id="guide-toc" aria-label="Содержание"><h2>Содержание</h2><ol><li class="toc-item"><a href="#guide-historical">Историческая справка</a></li><li class="toc-item"><a href="#guide-trips">Маршруты</a></li><li class="toc-item"><a href="#yaroslavl_muslim_mosque">Yaroslavl Muslim Mosque</a></li><li class="toc-item"><a href="#yaroslavl_university">Демидовский столб Ярославского государственного университета</a></li><li class="toc-item"><a href="#yaroslavl_demidov_pillar">Демидовский столп</a></li><li class="toc-item"><a href="#yaroslavl_pereslavl_gate">Знаменская башня</a></li><li class="toc-item"><a href="#yaroslavl_ring_street">Кольцевой бульвар</a></li><li class="toc-item"><a href="#yaroslavl_red_square">Красная площадь Ярославля</a></li><li class="toc-item"><a href="#yaroslavl_transfiguration_monastery">Монастырь Преображения</a></li><li class="toc-item"><a href="#yaroslavl_bear_intersection">Монумент медведю</a></li><li class="toc-item"><a href="#yaroslavl_motor_ship_museum">Музей речных судов</a></li><li class="toc-item"><a href="#yaroslavl_volga_embankment">Набережная Волги</a></li><li class="toc-item"><a href="#yaroslavl_volga_bridge">Октябрьский мост</a></li><li class="toc-item"><a href="#yaroslavl_mashinostroiteley">Парк Победы Ярославль</a></li><li class="toc-item"><a href="#yaroslavl_strelka">Парк Стрелка</a></li><li class="toc-item"><a href="#yaroslavl_spassky_monastery">Спасский монастырь</a></li><li class="toc-item"><a href="#yaroslavl_volkov_theatre">Театр Волкова</a></li><li class="toc-item"><a href="#yaroslavl_tolga_monastery">Толгский монастырь</a></li><li class="toc-item"><a href="#yaroslavl_assumption_cathedral">Успенский собор</a></li><li class="toc-item"><a href="#yaroslavl_korovniky">Церкви Коровников</a></li><li class="toc-item"><a href="#yaroslavl_st_elijah">Церковь Ильи Пророка</a></li><li class="toc-item"><a href="#yaroslavl_fedorovskiy">Церковь Федоровской иконы</a></li><li class="toc-item"><a href="#yaroslavl_railway_station">Ярославльский вокзал</a></li><li class="toc-item"><a href="#yaroslavl_meteorological_tower">Ярославльский музей башни</a></li><li class="toc-item"><a href="#yaroslavl_planetarium">Ярославльский планетарий</a></li><li class="toc-item"><a href="#yaroslavl_kremlin">Ярославский Кремль</a></li><li class="toc-item"><a href="#yaroslavl_museum_reserve">Ярославский музей-заповедник</a></li><li class="toc-item"><a href="#yaroslavl_art_museum">Ярославский художественный музей</a></li></ol></nav>
 <section class="historical-reference" id="guide-historical" aria-label="Историческая справка"><h2>Историческая справка</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 <p class="prose">Ярославль — административный центр Ярославской области, один из старейших городов Золотого кольца на Волге.</p>
 <p class="prose">Основан в XI веке, входил в торговую сеть Руси; XVII век принёс церковные ансамбли и росписи. Театр имени Волкова, набережные и индустрия сделали Ярославль культурным центром Верхней Волги.</p>
 <p class="prose">Столица ГУЛАГа в советский период не касалась самого города, но эпоха индустриализации изменила облик. После 1991 года Ярославль включился в маршруты Золотого кольца, подчёркивая театр Волкова, набережные и XVII век как часть общероссийской истории.</p></section>
 <section class="guide-trip-plans" id="guide-trips" aria-label="Маршруты"><h2>Маршруты</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 <article class="trip-plan" id="trip-1d"><h3>Один день</h3>
 <p class="prose">Компактный маршрут по главным точкам путеводителя с минимальным возвратом назад пешком.</p>
 <ol class="trip-stops"><li><a href="#yaroslavl_transfiguration_monastery">Монастырь Преображения</a> (~75мин)</li>
@@ -140,212 +223,355 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <article class="trip-plan" id="trip-3d3"><h3>Три дня — день 3</h3>
 <p class="prose">День 3 — оставшиеся близкие объекты.</p>
 <ol class="trip-stops"><li><a href="#yaroslavl_assumption_cathedral">Успенский собор</a> (~75мин)</li></ol></article></section>
-<nav class="guide-toc" aria-label="Содержание"><h2>Содержание</h2><ol><li class="toc-item"><a href="#guide-historical">Историческая справка</a></li><li class="toc-item"><a href="#guide-trips">Маршруты</a></li><li class="toc-item"><a href="#yaroslavl_assumption_cathedral">Успенский собор</a></li><li class="toc-item"><a href="#yaroslavl_bear_intersection">Монумент медведю</a></li><li class="toc-item"><a href="#yaroslavl_st_elijah">Церковь Ильи Пророка</a></li><li class="toc-item"><a href="#yaroslavl_fedorovskiy">Церковь Федоровской иконы</a></li><li class="toc-item"><a href="#yaroslavl_university">Демидовский столб Ярославского государственного университета</a></li><li class="toc-item"><a href="#yaroslavl_demidov_pillar">Демидовский столп</a></li><li class="toc-item"><a href="#yaroslavl_korovniky">Церкви Коровников</a></li><li class="toc-item"><a href="#yaroslavl_pdfband_2_3091e738">Muslim mosque</a></li><li class="toc-item"><a href="#yaroslavl_volga_bridge">Октябрьский мост</a></li><li class="toc-item"><a href="#yaroslavl_red_square">Красная площадь Ярославля</a></li><li class="toc-item"><a href="#yaroslavl_ring_street">Кольцевой бульвар</a></li><li class="toc-item"><a href="#yaroslavl_motor_ship_museum">Музей речных судов</a></li><li class="toc-item"><a href="#yaroslavl_spassky_monastery">Спасский монастырь</a></li><li class="toc-item"><a href="#yaroslavl_strelka">Парк Стрелка</a></li><li class="toc-item"><a href="#yaroslavl_tolga_monastery">Толгский монастырь</a></li><li class="toc-item"><a href="#yaroslavl_transfiguration_monastery">Монастырь Преображения</a></li><li class="toc-item"><a href="#yaroslavl_mashinostroiteley">Парк Победы Ярославль</a></li><li class="toc-item"><a href="#yaroslavl_volga_embankment">Набережная Волги</a></li><li class="toc-item"><a href="#yaroslavl_volkov_theatre">Театр Волкова</a></li><li class="toc-item"><a href="#yaroslavl_art_museum">Ярославский художественный музей</a></li><li class="toc-item"><a href="#yaroslavl_kremlin">Ярославский Кремль</a></li><li class="toc-item"><a href="#yaroslavl_museum_reserve">Ярославский музей-заповедник</a></li><li class="toc-item"><a href="#yaroslavl_planetarium">Ярославльский планетарий</a></li><li class="toc-item"><a href="#yaroslavl_railway_station">Ярославльский вокзал</a></li><li class="toc-item"><a href="#yaroslavl_meteorological_tower">Ярославльский музей башни</a></li><li class="toc-item"><a href="#yaroslavl_pereslavl_gate">Знаменская башня</a></li></ol></nav>
-<section class="place" id="yaroslavl_assumption_cathedral">
-<h3>Успенский собор</h3>
+<section class="place" id="yaroslavl_muslim_mosque">
+<div class="place-lead">
+<h3>Yaroslavl Muslim Mosque</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/yaroslavl_assumption_cathedral.jpg" alt="Успенский собор"/></figure>
-<div class="place-desc"><p class="prose">Успенский собор в Ярославле является потрясающим примером русской архитектуры, известным своими яркими голубыми и золотыми куполами. Эта знаковая структура не только является центральной частью городского горизонта, но и значимым историческим и культурным памятником. Посетители могут полюбоваться его сложными фресками и узнать о его богатой истории, которая восходит к 12 веку. Основанная в 1215 году, она является одной из старейших церквей Ярославля. Отремонтированный в 17 веке с замысловатыми фресками и характерным архитектурным стилем.</p>
-<p class="prose">Успенский собор был основан в 1215 году, что делает его одной из старейших церквей в Ярославле. Он претерпел несколько реконструкций, наиболее значительная из которых произошла в 17 веке, когда собор был расширен и украшен красивыми фресками. Собор стал свидетелем многих ключевых событий в истории региона, включая становление Ярославля как значительного культурного и религиозного центра. Культурно Успенский собор является объектом Всемирного наследия ЮНЕСКО, признанным за свою архитектурную красоту и историческую значимость. Он является важной частью наследия Ярославля, отражая художественные традиции и религиозные практики города. Собор продолжает играть роль в повседневной жизни сообщества, проводя религиозные службы и культурные мероприятия.</p></div>
-</section>
-<section class="place" id="yaroslavl_bear_intersection">
-<h3>Монумент медведю</h3>
-
-
-<figure class="place-fig"><img src="../images/yaroslavl_bear_intersection.jpg" alt="Монумент медведю"/></figure>
-<div class="place-desc"><p class="prose">Монумент Медведю в Ярославле — это очаровательная скульптура, символизирующая богатую историю и культурное наследие города. Расположенный на оживленном перекрестке, он служит популярной точкой встречи и местом для фотографий как для местных жителей, так и для туристов. Статуя передает суть связи Ярославля с его природным окружением и фольклором. Монумент Медведю был открыт в 2006 году. Ярославль был основан в 1010 году.</p>
-<p class="prose">Монумент Медведю был открыт в 2006 году в рамках усилий города по улучшению общественных пространств и празднованию местной культуры. Он отражает давние отношения Ярославля с медведем, животным, часто ассоциируемым с силой и стойкостью в русском фольклоре. Монумент является современным дополнением к историческому ландшафту города, который восходит к его основанию в 1010 году. Культурно, Монумент Медведя представляет собой идентичность Ярославля и служит свидетельством художественных усилий города. Он подчеркивает важность общественного искусства в повседневной жизни и способствует очарованию города, привлекая посетителей и способствуя чувству общности. Монумент соответствует статусу Ярославля как объекта Всемирного наследия ЮНЕСКО, подчеркивая приверженность города сохранению своего культурного наследия.</p></div>
-</section>
-<section class="place" id="yaroslavl_st_elijah">
-<h3>Церковь Ильи Пророка</h3>
-
-
-<figure class="place-fig"><img src="../images/yaroslavl_st_elijah.jpg" alt="Церковь Ильи Пророка"/></figure>
-<div class="place-desc"><p class="prose">Церковь Ильи Пророка в Ярославле является потрясающим примером русской архитектуры XVII века, известной своими яркими фресками и сложными деталями. Расположенная в самом сердце города, эта церковь обязательна к посещению для тех, кто интересуется богатым культурным и религиозным наследием региона. Ее впечатляющие луковичные купола и прекрасно сохранившиеся интерьеры предлагают возможность заглянуть в художественные достижения того времени. Построен в период с 1650 по 1660 год. Объявленный объектом Всемирного наследия ЮНЕСКО. Особенности включают потрясающие фрески и сложные архитектурные детали.</p>
-<p class="prose">Церковь Ильи Пророка была построена в период с 1650 по 1660 год по заказу местных купцов в знак их веры и процветания. Она является одним из самых значительных архитектурных памятников Ярославля и отражает историческую важность города как торгового центра в 17 веке. Церковь прошла через различные реставрации, чтобы сохранить свое величие и художественные элементы. Церковь Ильи Пророка является важной частью культурного наследия Ярославля, способствуя его признанию объектом Всемирного наследия ЮНЕСКО. Церковь не только место для поклонения, но и центр общественных собраний и культурных мероприятий, отражающих традиции и повседневную жизнь местных жителей. Ее художественное значение подчеркивается замечательными фресками, украшающими стены, которые демонстрируют мастерство российских ремесленников.</p></div>
-</section>
-<section class="place" id="yaroslavl_fedorovskiy">
-<h3>Церковь Федоровской иконы</h3>
-
-
-<figure class="place-fig"><img src="../images/yaroslavl_fedorovskiy.jpg" alt="Церковь Федоровской иконы"/></figure>
-<div class="place-desc"><p class="prose">Церковь Федоровской иконы в Ярославле является великолепным примером русской православной архитектуры, известной своим сложным дизайном и яркими фресками. Эта церковь служит спокойным местом для поклонения и культурной достопримечательностью, привлекая посетителей своей исторической значимостью и художественной красотой. Построен в период с 1684 по 1694 год. Часть объекта Всемирного наследия ЮНЕСКО в Ярославле. Посвящен Федоровской иконе Божией Матери.</p>
-<p class="prose">Церковь Федоровской иконы была построена в начале 17 века, а именно в период с 1684 по 1694 год. Она была возведена в честь чудесного явления Федоровской иконы Божией Матери, которая, как считается, сыграла значительную роль в духовной жизни региона. Культурно церковь является важной частью архитектурного наследия Ярославля и отражает художественные тенденции своего времени. Она является частью объекта Всемирного наследия ЮНЕСКО, который признает исторический центр Ярославля, подчеркивая его значимость в российской истории и культуре. Церковь продолжает быть местом поклонения, воплощая религиозные традиции православной веры.</p></div>
+<figure class="place-fig place-fig--hi-res"><img src="../images/yaroslavl_muslim_mosque.jpg" alt="Yaroslavl Muslim Mosque" width="1280" height="1206"/></figure>
+</div>
 </section>
 <section class="place" id="yaroslavl_university">
+<div class="place-lead">
 <h3>Демидовский столб Ярославского государственного университета</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/yaroslavl_university.jpg" alt="Демидовский столб Ярославского государственного университета"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/yaroslavl_university.jpg" alt="Демидовский столб Ярославского государственного университета" width="1280" height="960" style="height: 250px; max-height: 250px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/yaroslavl_university_b.jpg" alt="Демидовский столб Ярославского государственного университета — вид 2" width="330" height="365" style="height: 250px; max-height: 250px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Пилон Демидова в Ярославском государственном университете является выдающимся ориентиром, символизирующим богатое образовательное наследие города. Эта впечатляющая структура служит свидетельством приверженности университета академическому совершенству и является местом встречи для студентов и посетителей. Ее архитектурная элегантность и историческое значение делают ее обязательным местом для посещения всем, кто исследует Ярославль. Столб Демидова был установлен в 1970 году. Он увековечивает вклад семьи Демидовых в образование в Ярославле. Ярославский государственный университет был основан в том же году.</p>
 <p class="prose">Пилон Демидова был установлен в 1970 году в честь наследия семьи Демидовых, которые сыграли важную роль в развитии образования в Ярославле. Сам университет был основан в 1970 году, что стало значимой вехой в образовательном ландшафте города. С тех пор пилон стал знаковым символом миссии и ценностей университета. Культурно Демидовский столп является символом преданности Ярославля обучению и интеллектуальному развитию. Он отражает историческую роль города как центра образования и культуры в России. Университет и его достопримечательность способствуют повседневной жизни сообщества, способствуя чувству гордости и преемственности в образовательных традициях Ярославля.</p></div>
 </section>
 <section class="place" id="yaroslavl_demidov_pillar">
+<div class="place-lead">
 <h3>Демидовский столп</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/yaroslavl_demidov_pillar.jpg" alt="Демидовский столп"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/yaroslavl_demidov_pillar.jpg" alt="Демидовский столп" width="1280" height="736" style="height: 192px; max-height: 192px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--row-sized"><img src="../images/yaroslavl_demidov_pillar_b.jpg" alt="Демидовский столп — вид 2" width="330" height="525" style="height: 192px; max-height: 192px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Демидовский столб — это впечатляющий памятник, расположенный в Ярославле, символизирующий богатое промышленное наследие города. Установленный в честь семьи Демидовых, видных промышленников XVIII и XIX веков, этот столб служит свидетельством их вклада в экономическое развитие региона. Посетители могут восхищаться его впечатляющей архитектурой и узнать о значительной роли, которую Демидовы сыграли в формировании истории Ярославля. Демидовская колонна была построена в 1820 году. Он увековечивает семью Демидовых, влиятельных промышленников в России.</p>
 <p class="prose">Демидовская колонна была построена в 1820 году в честь семьи Демидовых, которые были значительными фигурами в российской металлургии и промышленности. Монумент отражает процветание, которое Демидовы принесли Ярославлю, особенно через свои железоделательные заводы и другие предприятия, сыгравшие ключевую роль в росте города в 18-м и 19-м веках. Культурно Демидовский столп является важной достопримечательностью, подчеркивающей промышленное наследие Ярославля и способствующей формированию идентичности города. Он служит напоминанием о влиянии семьи Демидовых на местные традиции и экономическую жизнь, что делает его интересным как для жителей, так и для туристов. Этот памятник также является частью более широкой нарративы развития Ярославля, отражая историческую значимость города в России.</p></div>
 </section>
-<section class="place" id="yaroslavl_korovniky">
-<h3>Церкви Коровников</h3>
+<section class="place" id="yaroslavl_pereslavl_gate">
+<div class="place-lead">
+<h3>Знаменская башня</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/yaroslavl_korovniky.jpg" alt="Церкви Коровников"/></figure>
-<div class="place-desc"><p class="prose">Церкви Коровники в Ярославле представляют собой замечательный ансамбль религиозной архитектуры, который демонстрирует богатое духовное наследие города. Уютно расположенные в живописной местности, эти церкви известны своими замысловатыми дизайнами и яркими фресками, привлекающими посетителей, интересующихся историей и искусством. Это место служит свидетельством давних религиозных традиций и культурной значимости города. Церковь Святого Николая была построена в 1650 году. Церкви Коровников являются частью объекта Всемирного наследия ЮНЕСКО в Ярославле. Архитектурный стиль церквей отражает русское церковное искусство XVII века.</p>
-<p class="prose">Церкви Коровников относятся к 17 веку, среди которых наиболее выдающейся является Церковь Николая, построенная в 1650 году. Этот период ознаменовался расцветом церковной архитектуры в Ярославле, отражая растущее значение города как центра торговли и культуры. На протяжении многих лет церкви стали свидетелями различных исторических событий, включая изменения в религиозной практике и влияние политических изменений в России. Культурно церкви Коровники являются неотъемлемой частью идентичности Ярославля, способствуя его признанию объектом Всемирного наследия ЮНЕСКО. Они воплощают художественные стили своего времени, отличаясь сложными фресками и уникальными архитектурными элементами, отражающими местные традиции. Церкви продолжают играть важную роль в повседневной жизни сообщества, проводя религиозные службы и культурные мероприятия, которые укрепляют их значимость в духовной и социальной ткани Ярославля.</p></div>
-</section>
-<section class="place" id="yaroslavl_pdfband_2_3091e738">
-<h3>Muslim mosque</h3>
-
-
-<figure class="place-fig"><img src="../images/yaroslavl_pdfband_2_3091e738.jpg" alt="Muslim mosque"/></figure>
-</section>
-<section class="place" id="yaroslavl_volga_bridge">
-<h3>Октябрьский мост</h3>
-
-
-<figure class="place-fig"><img src="../images/yaroslavl_volga_bridge.jpg" alt="Октябрьский мост"/></figure>
-<div class="place-desc"><p class="prose">Октябрьский мост — это впечатляющая архитектурная особенность Ярославля, пересекающая реку Волгу и соединяющая ключевые районы города. Этот мост не только служит важной транспортной артерией, но и предлагает живописные виды на реку и окружающие пейзажи, что делает его популярным местом как для местных жителей, так и для туристов. Мост протянулся примерно на 1,200 метров через реку Волга.</p>
-<p class="prose">Октябрьский мост был завершен в 1970 году, что стало значительным событием в инфраструктуре Ярославля. Он заменил более старую конструкцию и с тех пор сыграл важную роль в обеспечении движения и торговли через реку Волга. Культурно Октябрьский мост является неотъемлемой частью повседневной жизни Ярославля, символизируя прогресс и связь в регионе. Он часто изображается в местном искусстве и фотографии, отражая современную идентичность города, а также служит фоном для различных общественных мероприятий и праздников.</p></div>
-</section>
-<section class="place" id="yaroslavl_red_square">
-<h3>Красная площадь Ярославля</h3>
-
-
-<figure class="place-fig"><img src="../images/yaroslavl_red_square.jpg" alt="Красная площадь Ярославля"/></figure>
-<div class="place-desc"><p class="prose">Красная площадь в Ярославле — это яркое общественное пространство, которое служит центральным узлом как для местных жителей, так и для туристов. Окруженная исторической архитектурой и оживленными рынками, она является идеальным местом для того, чтобы ощутить богатую культуру и дух сообщества города. Площадь часто становится местом проведения различных мероприятий, что делает её центром социальных встреч и празднований. Красная площадь расположена в сердце Ярославля, окруженная историческими зданиями. С момента основания города это было центральное место сбора для сообщества.</p>
-<p class="prose">Красная площадь является значительной частью Ярославля с момента основания города в XI веке. Она стала свидетелем множества ключевых событий на протяжении своей истории, включая торговую деятельность, способствовавшую экономическому росту и развитию города. Площадь эволюционировала на протяжении веков, отражая изменяющуюся динамику Ярославля. Культурно Красная площадь является неотъемлемой частью идентичности Ярославля, часто служа местом проведения фестивалей, рынков и общественных празднований. Площадь окружена знаменитыми зданиями, которые демонстрируют архитектурное наследие города, что способствует присвоению Ярославлю статуса объекта Всемирного наследия ЮНЕСКО. Она играет важную роль в повседневной жизни, выступая в качестве места сбора для сообщества и витрины местных традиций.</p></div>
+<figure class="place-fig place-fig--hi-res"><img src="../images/yaroslavl_pereslavl_gate.jpg" alt="Знаменская башня" width="1280" height="848"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Знаменская башня — это впечатляющая достопримечательность Ярославля, известная своей архитектурой и историческим значением. Входя в состав городских укреплений, она предлагает посетителям возможность заглянуть в прошлое, а также открывает потрясающие виды на окрестности. Эта башня является не только символом богатого наследия Ярославля, но и популярным местом для фотографирования и исследований. Построен в конце 17 века. Часть оборонительных укреплений Ярославля. Включено в список объектов Всемирного наследия ЮНЕСКО.</p>
+<p class="prose">Знаменская башня была построена в конце 17 века как часть оборонительных укреплений города. Она сыграла ключевую роль в защите Ярославля от вторжений и стала свидетелем различных исторических событий на протяжении веков, включая расширение города и его развитие как значительного торгового центра. Башня имеет культурное значение как символ архитектурного наследия Ярославля и является частью объекта Всемирного наследия ЮНЕСКО, который охватывает исторический центр города. Она отражает историческую роль города в торговле и обороне, способствуя его идентичности и повседневной жизни. Башня также служит напоминанием о прошлом региона и его эволюции с течением времени.</p></div>
 </section>
 <section class="place" id="yaroslavl_ring_street">
+<div class="place-lead">
 <h3>Кольцевой бульвар</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/yaroslavl_ring_street.jpg" alt="Кольцевой бульвар"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/yaroslavl_ring_street.jpg" alt="Кольцевой бульвар" width="1280" height="946" style="height: 167px; max-height: 167px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/yaroslavl_ring_street_b.jpg" alt="Кольцевой бульвар — вид 2" width="330" height="165" style="height: 167px; max-height: 167px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Кольцевой бульвар в Ярославле — это живописный круговой парк, который окружает исторический центр города, предлагая посетителям спокойное убежище среди зелени и ярких цветочных клумб. Эта живописная набережная идеально подходит для неспешных прогулок, открывая потрясающие виды на архитектурные жемчужины города и реку Волгу. Она служит центром как для местных жителей, так и для туристов, демонстрируя очарование богатого наследия Ярославля. Кольцевой бульвар был основан в начале 19 века. Бульвар заменил старые укрепления Ярославля. Это часть объекта Всемирного наследия ЮНЕСКО, признающего историческое значение Ярославля.</p>
 <p class="prose">Кольцевой бульвар был основан в начале 19 века, изначально как часть городских планов по улучшению эстетической привлекательности Ярославля. Он был спроектирован для замены старых укреплений, которые когда-то окружали город, преобразовав эту территорию в общественное пространство для отдыха и социальных встреч. С тех пор бульвар эволюционировал, отражая рост и развитие города на протяжении многих лет. Культурно, Ринг-Бульвар играет жизненно важную роль в повседневной жизни жителей Ярославля, служа популярным местом для общественных мероприятий, фестивалей и досуга. Он является частью объекта Всемирного наследия ЮНЕСКО, который признает историческое значение архитектуры и градостроительства Ярославля. Бульвар также является свидетельством приверженности города сохранению своей природной красоты при содействии созданию яркой городской среды.</p></div>
 </section>
-<section class="place" id="yaroslavl_motor_ship_museum">
-<h3>Музей речных судов</h3>
+<section class="place" id="yaroslavl_red_square">
+<div class="place-lead">
+<h3>Красная площадь Ярославля</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/yaroslavl_motor_ship_museum.jpg" alt="Музей речных судов"/></figure>
-<div class="place-desc"><p class="prose">Музей речного флота в Ярославле предлагает уникальный взгляд на морскую историю России, демонстрируя разнообразие исторических судов, которые когда-то плавали по рекам страны. Посетители могут исследовать коллекцию музея, включая речные суда и грузовые корабли, и узнать об их значении в торговле и транспорте. Музей расположен вдоль живописной реки Волги, что создает красивый фон для увлекательного культурного опыта. Основан в 2002 году. Расположен в бывшем речном порту, который датируется 17-м веком. Представляет разнообразие исторических судов, включая речные лодки и грузовые корабли.</p>
-<p class="prose">Музей речного судоходства был основан в 2002 году, используя богатое морское наследие Ярославля. Музей расположен в бывшем речном порту, который является центром торговли и транспортировки с 17 века. За годы существования музей расширил свою коллекцию, включив в нее различные типы судов, отражающие эволюцию речного судоходства в России. Культурно Речной музей судов играет важную роль в сохранении морских традиций и наследия Ярославля. Он подчеркивает значимость речного транспорта в экономическом развитии региона и повседневной жизни. Музей также способствует формированию идентичности города как объекта Всемирного наследия ЮНЕСКО, подчеркивая историческую значимость его водных путей и их влияние на русскую культуру.</p></div>
-</section>
-<section class="place" id="yaroslavl_spassky_monastery">
-<h3>Спасский монастырь</h3>
-
-
-<figure class="place-fig"><img src="../images/yaroslavl_spassky_monastery.jpg" alt="Спасский монастырь"/></figure>
-<div class="place-desc"><p class="prose">Спасский монастырь в Ярославле является потрясающим примером русской церковной архитектуры, демонстрируя сложные узоры и богатую историю. Посетители могут исследовать его спокойные территории, которые предлагают взгляд на духовную и культурную жизнь региона. Монастырь является не только местом поклонения, но и значимой достопримечательностью, отражающей наследие города. Основан в начале 16 века. Широко отремонтирован в 17 веке.</p>
-<p class="prose">Основанный в начале XVI века, Спасский монастырь был основан местным духовенством и сыграл важную роль в религиозной жизни Ярославля. На протяжении своей истории монастырь претерпел различные ремонты и расширения, особенно в XVII веке, когда он стал выдающимся центром монашеской жизни и образования. Культурно Спасский монастырь является важным символом наследия Ярославля, способствуя признанию города объектом Всемирного наследия ЮНЕСКО. Он служил центром художественного самовыражения и религиозных практик, влияя на местные традиции и повседневную жизнь. Архитектура монастыря и произведения искусства отражают богатую духовную и культурную ткань региона.</p></div>
-</section>
-<section class="place" id="yaroslavl_strelka">
-<h3>Парк Стрелка</h3>
-
-
-<figure class="place-fig"><img src="../images/yaroslavl_strelka.jpg" alt="Парк Стрелка"/></figure>
-<div class="place-desc"><p class="prose">Парк Стрелка, расположенный на слиянии рек Волги и Которосли в Ярославле, предлагает живописное место для отдыха как местным жителям, так и туристам. Этот живописный парк оснащен пешеходными дорожками, зелеными насаждениями и потрясающими видами на реки, что делает его популярным местом для отдыха и досуга. С его историческими памятниками и яркой атмосферой, Парк Стрелка является центральным узлом для культурных мероприятий и общественных собраний. Парк Стрелка расположен на слиянии рек Волги и Которосли. Парк был основан в начале 20 века.</p>
-<p class="prose">Парк Стрелка был основан в начале 20 века и с тех пор стал значительной зоной отдыха в Ярославле. Расположение парка на слиянии двух рек имеет историческое значение, так как он на протяжении веков служил местом сбора, отражая богатое наследие города. Культурно парк Стрелка играет важную роль в повседневной жизни жителей Ярославля, служа местом проведения фестивалей, концертов и общественных мероприятий. Природная красота парка и его исторический контекст способствуют его статусу любимой достопримечательности города. Он также является частью объекта Всемирного наследия ЮНЕСКО, который признает историческую архитектуру Ярославля, подчеркивая его важность в русском наследии.</p></div>
-</section>
-<section class="place" id="yaroslavl_tolga_monastery">
-<h3>Толгский монастырь</h3>
-
-
-<figure class="place-fig"><img src="../images/yaroslavl_tolga_monastery.jpg" alt="Толгский монастырь"/></figure>
-<div class="place-desc"><p class="prose">Толгский монастырь, расположенный на берегу реки Волги в Ярославле, является спокойным и историческим местом, известным своей великолепной архитектурой и духовной атмосферой. Основанный в 17 веке, монастырь украшен красивыми фресками и предлагает умиротворяющую обстановку, которая привлекает как паломников, так и туристов. Посетители могут исследовать его богатую историю и наслаждаться мирной атмосферой, которая сделала это место значимым для поклонения. Основан в 1547 году монахом Афонасием. Ремонтированный и расширенный в 17 веке.</p>
-<p class="prose">Толгский монастырь был основан в 1547 году монахом по имени Афонасий, после видения, которое он имел о Деве Марии. Монастырь приобрёл известность в 17 веке, особенно во время Смутного времени, когда он служил убежищем для тех, кто искал утешение и безопасность. На протяжении веков он претерпел различные реконструкции и расширения, отражая архитектурные стили разных периодов. Монастырь имеет культурное значение как символ русского православного наследия и на протяжении веков является важным местом паломничества. Его архитектурная красота и художественные сокровища, включая сложные фрески, способствуют статусу Ярославля как объекта Всемирного наследия ЮНЕСКО. Толгский монастырь продолжает играть важную роль в духовной жизни сообщества, проводя религиозные службы и фестивали, которые отмечают местные традиции.</p></div>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/yaroslavl_red_square.jpg" alt="Красная площадь Ярославля" width="1280" height="960" style="height: 250px; max-height: 250px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/yaroslavl_red_square_b.jpg" alt="Красная площадь Ярославля — вид 2" width="330" height="462" style="height: 250px; max-height: 250px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Красная площадь в Ярославле — это яркое общественное пространство, которое служит центральным узлом как для местных жителей, так и для туристов. Окруженная исторической архитектурой и оживленными рынками, она является идеальным местом для того, чтобы ощутить богатую культуру и дух сообщества города. Площадь часто становится местом проведения различных мероприятий, что делает её центром социальных встреч и празднований. Красная площадь расположена в сердце Ярославля, окруженная историческими зданиями. С момента основания города это было центральное место сбора для сообщества.</p>
+<p class="prose">Красная площадь является значительной частью Ярославля с момента основания города в XI веке. Она стала свидетелем множества ключевых событий на протяжении своей истории, включая торговую деятельность, способствовавшую экономическому росту и развитию города. Площадь эволюционировала на протяжении веков, отражая изменяющуюся динамику Ярославля. Культурно Красная площадь является неотъемлемой частью идентичности Ярославля, часто служа местом проведения фестивалей, рынков и общественных празднований. Площадь окружена знаменитыми зданиями, которые демонстрируют архитектурное наследие города, что способствует присвоению Ярославлю статуса объекта Всемирного наследия ЮНЕСКО. Она играет важную роль в повседневной жизни, выступая в качестве места сбора для сообщества и витрины местных традиций.</p></div>
 </section>
 <section class="place" id="yaroslavl_transfiguration_monastery">
+<div class="place-lead">
 <h3>Монастырь Преображения</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/yaroslavl_transfiguration_monastery.jpg" alt="Монастырь Преображения"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/yaroslavl_transfiguration_monastery.jpg" alt="Монастырь Преображения" width="1280" height="880" style="height: 229px; max-height: 229px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/yaroslavl_transfiguration_monastery_b.jpg" alt="Монастырь Преображения — вид 2" width="330" height="462" style="height: 229px; max-height: 229px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Расположенный на холме с видом на реку Волга, Спасо-Преображенский монастырь является одной из самых знаковых достопримечательностей Ярославля. Его высокие колокольни и величественные купола видны за многие мили, что делает его ярким символом веры и наследия. Монастырь был первоначально построен во время правления царя Ивана IV (&#x27;Ивана Грозного&#x27;). В нем хранятся несколько важных реликвий, включая реликвии святого Иова. Значительными архитектурными особенностями являются Успенский собор и Церковь всех святых. Реставрационные работы в начале 20-го века сохранили большую часть оригинальной структуры, добавив современные меры безопасности. Сегодня монастырь продолжает служить активным местом поклонения.</p>
 <p class="prose">Основанный в конце XVI века архиепископом Иовом Московским, монастырь сыграл ключевую роль в распространении православного христианства по северной России. На протяжении веков его архитектура формировалась под влиянием различных реставраций и ремонтов, отражая как традиционные русские стили, так и барочные влияния. Посетители приходят в Троице-Сергиеву лавру ради захватывающих видов, богатого исторического значения и духовной атмосферы.</p></div>
 </section>
-<section class="place" id="yaroslavl_mashinostroiteley">
-<h3>Парк Победы Ярославль</h3>
+<section class="place" id="yaroslavl_bear_intersection">
+<div class="place-lead">
+<h3>Монумент медведю</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/yaroslavl_mashinostroiteley.jpg" alt="Парк Победы Ярославль"/></figure>
-<div class="place-desc"><p class="prose">Парк Победы в Ярославле — это спокойное зеленое пространство, посвященное памяти жертв, павших во время Второй мировой войны. Здесь вы найдете красивые ландшафты, прогулочные дорожки и памятники, отражающие богатую историю и стойкость города. Этот парк служит местом встречи для местных жителей и туристов, предлагая тихое убежище от городской суеты. Парк Победы посвящен памяти ветеранов Второй мировой войны. В парке расположены несколько памятников и мемориалов в честь тех, кто служил.</p>
-<p class="prose">Парк Победы был основан в конце 20 века в честь героев Второй мировой войны. Парк включает в себя памятники и мемориалы, которые увековечивают память солдат и гражданских лиц, внесших вклад в усилия во время войны, отражая стремление города сохранить свою историческую память. Культурно Парк Победы играет важную роль в общественной жизни Ярославля, служа местом для памятных мероприятий и празднований, особенно в День Победы. Парк является символом национальной гордости и памяти, олицетворяя коллективную память жителей города о их исторических борьбах и победах.</p></div>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/yaroslavl_bear_intersection.jpg" alt="Монумент медведю" width="1280" height="856" style="height: 222px; max-height: 222px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/yaroslavl_bear_intersection_b.jpg" alt="Монумент медведю — вид 2" width="330" height="220" style="height: 222px; max-height: 222px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Монумент Медведю в Ярославле — это очаровательная скульптура, символизирующая богатую историю и культурное наследие города. Расположенный на оживленном перекрестке, он служит популярной точкой встречи и местом для фотографий как для местных жителей, так и для туристов. Статуя передает суть связи Ярославля с его природным окружением и фольклором. Монумент Медведю был открыт в 2006 году. Ярославль был основан в 1010 году.</p>
+<p class="prose">Монумент Медведю был открыт в 2006 году в рамках усилий города по улучшению общественных пространств и празднованию местной культуры. Он отражает давние отношения Ярославля с медведем, животным, часто ассоциируемым с силой и стойкостью в русском фольклоре. Монумент является современным дополнением к историческому ландшафту города, который восходит к его основанию в 1010 году. Культурно, Монумент Медведя представляет собой идентичность Ярославля и служит свидетельством художественных усилий города. Он подчеркивает важность общественного искусства в повседневной жизни и способствует очарованию города, привлекая посетителей и способствуя чувству общности. Монумент соответствует статусу Ярославля как объекта Всемирного наследия ЮНЕСКО, подчеркивая приверженность города сохранению своего культурного наследия.</p></div>
+</section>
+<section class="place" id="yaroslavl_motor_ship_museum">
+<div class="place-lead">
+<h3>Музей речных судов</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/yaroslavl_motor_ship_museum.jpg" alt="Музей речных судов" width="1280" height="854" style="height: 222px; max-height: 222px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/yaroslavl_motor_ship_museum_b.jpg" alt="Музей речных судов — вид 2" width="330" height="462" style="height: 222px; max-height: 222px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Музей речного флота в Ярославле предлагает уникальный взгляд на морскую историю России, демонстрируя разнообразие исторических судов, которые когда-то плавали по рекам страны. Посетители могут исследовать коллекцию музея, включая речные суда и грузовые корабли, и узнать об их значении в торговле и транспорте. Музей расположен вдоль живописной реки Волги, что создает красивый фон для увлекательного культурного опыта. Основан в 2002 году. Расположен в бывшем речном порту, который датируется 17-м веком. Представляет разнообразие исторических судов, включая речные лодки и грузовые корабли.</p>
+<p class="prose">Музей речного судоходства был основан в 2002 году, используя богатое морское наследие Ярославля. Музей расположен в бывшем речном порту, который является центром торговли и транспортировки с 17 века. За годы существования музей расширил свою коллекцию, включив в нее различные типы судов, отражающие эволюцию речного судоходства в России. Культурно Речной музей судов играет важную роль в сохранении морских традиций и наследия Ярославля. Он подчеркивает значимость речного транспорта в экономическом развитии региона и повседневной жизни. Музей также способствует формированию идентичности города как объекта Всемирного наследия ЮНЕСКО, подчеркивая историческую значимость его водных путей и их влияние на русскую культуру.</p></div>
 </section>
 <section class="place" id="yaroslavl_volga_embankment">
+<div class="place-lead">
 <h3>Набережная Волги</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/yaroslavl_volga_embankment.jpg" alt="Набережная Волги"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/yaroslavl_volga_embankment.jpg" alt="Набережная Волги" width="1280" height="960" style="height: 249px; max-height: 249px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/yaroslavl_volga_embankment_b.jpg" alt="Набережная Волги — вид 2" width="330" height="247" style="height: 249px; max-height: 249px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Набережная Волги в Ярославле предлагает живописную прогулку вдоль берегов могучей реки Волги, где посетители могут насладиться потрясающими видами на воду и историческую архитектуру города. Это яркое общественное пространство идеально подходит для неспешных прогулок, пикников и культурных мероприятий, что делает его популярным местом встречи как для местных жителей, так и для туристов. Набережная Волги является частью объекта Всемирного наследия ЮНЕСКО, обозначенного для исторического центра Ярославля. Набережная украшена несколькими памятниками и скульптурами, которые отмечают историю и культуру города.</p>
 <p class="prose">Волга набережная является центральной частью Ярославля с момента основания города в 1010 году. На протяжении веков она превратилась в значительную магистраль и рекреационную зону, отражая рост и развитие города. Набережная стала свидетелем множества исторических событий, включая празднования и собрания, которые подчеркивают богатое наследие города. Культурно набережная Волги является неотъемлемой частью идентичности Ярославля, служа местом проведения фестивалей, художественных выставок и общественных мероприятий. Она известна своей архитектурной красотой и является частью объекта Всемирного наследия ЮНЕСКО, который включает исторический центр города. Набережная также играет важную роль в повседневной жизни, где местные жители занимаются досугом и собираются на социальные мероприятия, укрепляя связи в сообществе.</p></div>
 </section>
+<section class="place" id="yaroslavl_volga_bridge">
+<div class="place-lead">
+<h3>Октябрьский мост</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/yaroslavl_volga_bridge.jpg" alt="Октябрьский мост" width="1280" height="848" style="height: 221px; max-height: 221px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/yaroslavl_volga_bridge_b.jpg" alt="Октябрьский мост — вид 2" width="330" height="220" style="height: 221px; max-height: 221px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Октябрьский мост — это впечатляющая архитектурная особенность Ярославля, пересекающая реку Волгу и соединяющая ключевые районы города. Этот мост не только служит важной транспортной артерией, но и предлагает живописные виды на реку и окружающие пейзажи, что делает его популярным местом как для местных жителей, так и для туристов. Мост протянулся примерно на 1,200 метров через реку Волга.</p>
+<p class="prose">Октябрьский мост был завершен в 1970 году, что стало значительным событием в инфраструктуре Ярославля. Он заменил более старую конструкцию и с тех пор сыграл важную роль в обеспечении движения и торговли через реку Волга. Культурно Октябрьский мост является неотъемлемой частью повседневной жизни Ярославля, символизируя прогресс и связь в регионе. Он часто изображается в местном искусстве и фотографии, отражая современную идентичность города, а также служит фоном для различных общественных мероприятий и праздников.</p></div>
+</section>
+<section class="place" id="yaroslavl_mashinostroiteley">
+<div class="place-lead">
+<h3>Парк Победы Ярославль</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<figure class="place-fig place-fig--hi-res"><img src="../images/yaroslavl_mashinostroiteley.jpg" alt="Парк Победы Ярославль" width="1280" height="960"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Парк Победы в Ярославле — это спокойное зеленое пространство, посвященное памяти жертв, павших во время Второй мировой войны. Здесь вы найдете красивые ландшафты, прогулочные дорожки и памятники, отражающие богатую историю и стойкость города. Этот парк служит местом встречи для местных жителей и туристов, предлагая тихое убежище от городской суеты. Парк Победы посвящен памяти ветеранов Второй мировой войны. В парке расположены несколько памятников и мемориалов в честь тех, кто служил.</p>
+<p class="prose">Парк Победы был основан в конце 20 века в честь героев Второй мировой войны. Парк включает в себя памятники и мемориалы, которые увековечивают память солдат и гражданских лиц, внесших вклад в усилия во время войны, отражая стремление города сохранить свою историческую память. Культурно Парк Победы играет важную роль в общественной жизни Ярославля, служа местом для памятных мероприятий и празднований, особенно в День Победы. Парк является символом национальной гордости и памяти, олицетворяя коллективную память жителей города о их исторических борьбах и победах.</p></div>
+</section>
+<section class="place" id="yaroslavl_strelka">
+<div class="place-lead">
+<h3>Парк Стрелка</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/yaroslavl_strelka.jpg" alt="Парк Стрелка" width="1280" height="848" style="height: 221px; max-height: 221px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/yaroslavl_strelka_b.jpg" alt="Парк Стрелка — вид 2" width="330" height="219" style="height: 221px; max-height: 221px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Парк Стрелка, расположенный на слиянии рек Волги и Которосли в Ярославле, предлагает живописное место для отдыха как местным жителям, так и туристам. Этот живописный парк оснащен пешеходными дорожками, зелеными насаждениями и потрясающими видами на реки, что делает его популярным местом для отдыха и досуга. С его историческими памятниками и яркой атмосферой, Парк Стрелка является центральным узлом для культурных мероприятий и общественных собраний. Парк Стрелка расположен на слиянии рек Волги и Которосли. Парк был основан в начале 20 века.</p>
+<p class="prose">Парк Стрелка был основан в начале 20 века и с тех пор стал значительной зоной отдыха в Ярославле. Расположение парка на слиянии двух рек имеет историческое значение, так как он на протяжении веков служил местом сбора, отражая богатое наследие города. Культурно парк Стрелка играет важную роль в повседневной жизни жителей Ярославля, служа местом проведения фестивалей, концертов и общественных мероприятий. Природная красота парка и его исторический контекст способствуют его статусу любимой достопримечательности города. Он также является частью объекта Всемирного наследия ЮНЕСКО, который признает историческую архитектуру Ярославля, подчеркивая его важность в русском наследии.</p></div>
+</section>
+<section class="place" id="yaroslavl_spassky_monastery">
+<div class="place-lead">
+<h3>Спасский монастырь</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/yaroslavl_spassky_monastery.jpg" alt="Спасский монастырь" width="1280" height="767" style="height: 200px; max-height: 200px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/yaroslavl_spassky_monastery_b.jpg" alt="Спасский монастырь — вид 2" width="330" height="220" style="height: 200px; max-height: 200px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Спасский монастырь в Ярославле является потрясающим примером русской церковной архитектуры, демонстрируя сложные узоры и богатую историю. Посетители могут исследовать его спокойные территории, которые предлагают взгляд на духовную и культурную жизнь региона. Монастырь является не только местом поклонения, но и значимой достопримечательностью, отражающей наследие города. Основан в начале 16 века. Широко отремонтирован в 17 веке. Часть объекта Всемирного наследия ЮНЕСКО в Ярославле.</p>
+<p class="prose">Основанный в начале XVI века, Спасский монастырь был основан местным духовенством и сыграл важную роль в религиозной жизни Ярославля. На протяжении своей истории монастырь претерпел различные ремонты и расширения, особенно в XVII веке, когда он стал выдающимся центром монашеской жизни и образования. Культурно Спасский монастырь является важным символом наследия Ярославля, способствуя признанию города объектом Всемирного наследия ЮНЕСКО. Он служил центром художественного самовыражения и религиозных практик, влияя на местные традиции и повседневную жизнь. Архитектура монастыря и произведения искусства отражают богатую духовную и культурную ткань региона.</p></div>
+</section>
 <section class="place" id="yaroslavl_volkov_theatre">
+<div class="place-lead">
 <h3>Театр Волкова</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/yaroslavl_volkov_theatre.jpg" alt="Театр Волкова"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/yaroslavl_volkov_theatre.jpg" alt="Театр Волкова" width="1280" height="848" style="height: 221px; max-height: 221px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/yaroslavl_volkov_theatre_b.jpg" alt="Театр Волкова — вид 2" width="330" height="220" style="height: 221px; max-height: 221px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Волковский театр в Ярославле — это выдающаяся культурная достопримечательность, известная своей богатой историей и яркими выступлениями. Основанный в 18 веке, он является одним из старейших профессиональных театров в России, представляя разнообразные театральные постановки, отражающие как классические, так и современные произведения. Посетители могут насладиться уникальным сочетанием искусства и наследия в этом прекрасно сохранившемся здании. Основанный в 1750 году, он является старейшим профессиональным театром в России. Отремонтированный и вновь открытый в 1940 году, продолжает служить культурным центром.</p>
 <p class="prose">Волковский театр был основан в 1750 году актером и драматургом Федором Волковым, что делает его первым профессиональным театром в России. Театр прошел несколько ремонтов и расширений на протяжении многих лет, среди значительных событий - его повторное открытие в 1940 году после капитального ремонта и его признание объектом культурного наследия в 21 веке. Культурно Театр Волкова играет жизненно важную роль в художественном ландшафте Ярославля, способствуя репутации города как центра исполнительских искусств. Это ключевое место для фестивалей и культурных мероприятий, поддерживающее местные таланты и привлекающее посетителей со всего региона. Богатая история театра и его постоянные выступления являются неотъемлемой частью идентичности города и общественной жизни.</p></div>
 </section>
-<section class="place" id="yaroslavl_art_museum">
-<h3>Ярославский художественный музей</h3>
+<section class="place" id="yaroslavl_tolga_monastery">
+<div class="place-lead">
+<h3>Толгский монастырь</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/yaroslavl_art_museum.jpg" alt="Ярославский художественный музей"/></figure>
-<div class="place-desc"><p class="prose">Ярославский художественный музей — это выдающееся культурное учреждение, расположенное в самом сердце Ярославля, представляющее разнообразную коллекцию русского искусства с 18 века до наших дней. Музей находится в историческом здании и предлагает посетителям возможность погрузиться в богатое художественное наследие региона, с выставками, включающими картины, скульптуры и декоративное искусство. Его спокойная атмосфера и увлекательные экспозиции делают его обязательным местом для посещения как для любителей искусства, так и для случайных посетителей. Основан в 1974 году. Содержит коллекцию русского искусства с 18 века до настоящего времени.</p>
-<p class="prose">Ярославский художественный музей был основан в 1974 году, развиваясь из богатых художественных традиций города и необходимости сохранить его культурное наследие. Коллекция музея значительно увеличилась за эти годы, отражая художественные движения и исторические события, которые сформировали регион. Ключевыми вехами стали приобретение значительных произведений и расширение выставочных пространств для привлечения более широкой аудитории. Культурно Ярославский художественный музей играет важную роль в продвижении художественного наследия Ярославля и окрестных районов. Он служит центром культурных мероприятий, образовательных программ и выставок, которые отмечают как местное, так и национальное искусство. Музей способствует сохранению наследия Ярославля, которое признано частью объекта Всемирного наследия ЮНЕСКО «Исторические памятники Владимира и Суздаля», подчеркивая важность города в русской истории и культуре.</p></div>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/yaroslavl_tolga_monastery.jpg" alt="Толгский монастырь" width="1280" height="853" style="height: 222px; max-height: 222px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/yaroslavl_tolga_monastery_b.jpg" alt="Толгский монастырь — вид 2" width="330" height="220" style="height: 222px; max-height: 222px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Толгский монастырь, расположенный на берегу реки Волги в Ярославле, является спокойным и историческим местом, известным своей великолепной архитектурой и духовной атмосферой. Основанный в 17 веке, монастырь украшен красивыми фресками и предлагает умиротворяющую обстановку, которая привлекает как паломников, так и туристов. Посетители могут исследовать его богатую историю и наслаждаться мирной атмосферой, которая сделала это место значимым для поклонения. Основан в 1547 году монахом Афонасием. Ремонтированный и расширенный в 17 веке.</p>
+<p class="prose">Толгский монастырь был основан в 1547 году монахом по имени Афонасий, после видения, которое он имел о Деве Марии. Монастырь приобрёл известность в 17 веке, особенно во время Смутного времени, когда он служил убежищем для тех, кто искал утешение и безопасность. На протяжении веков он претерпел различные реконструкции и расширения, отражая архитектурные стили разных периодов. Монастырь имеет культурное значение как символ русского православного наследия и на протяжении веков является важным местом паломничества. Его архитектурная красота и художественные сокровища, включая сложные фрески, способствуют статусу Ярославля как объекта Всемирного наследия ЮНЕСКО. Толгский монастырь продолжает играть важную роль в духовной жизни сообщества, проводя религиозные службы и фестивали, которые отмечают местные традиции.</p></div>
 </section>
-<section class="place" id="yaroslavl_kremlin">
-<h3>Ярославский Кремль</h3>
+<section class="place" id="yaroslavl_assumption_cathedral">
+<div class="place-lead">
+<h3>Успенский собор</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/yaroslavl_kremlin.jpg" alt="Ярославский Кремль"/></figure>
-<div class="place-desc"><p class="prose">Ярославский Кремль — это потрясающий архитектурный ансамбль, расположенный в сердце Ярославля, который демонстрирует богатую историю и культурное наследие города. Окруженный живописными пейзажами вдоль берегов реки Волги, этот памятник включает в себя впечатляющие сооружения, такие как знаковая Спасская башня и Успенский собор. Посетители могут исследовать его историческое значение, наслаждаясь яркой атмосферой этого объекта Всемирного наследия ЮНЕСКО. Ярославский Кремль был внесен в список объектов Всемирного наследия ЮНЕСКО в 2005 году. Ключевыми сооружениями внутри Кремля являются Спасская башня и Успенский собор.</p>
-<p class="prose">Ярославский Кремль был основан в начале XII века, его происхождение связано с князем Ярославом Мудрым. На протяжении веков он служил укрепленным центром региона, став свидетелем ключевых событий, таких как монгольское нашествие и основание Великого княжества Московского. Структуры Кремля строились и перестраивались, отражая архитектурные стили разных эпох, особенно в XVII веке. Политически Ярославский Кремль сыграл ключевую роль в защите и управлении регионом, служа символом власти и стойкости. Культурно он является свидетельством художественных достижений Ярославля, с его замысловатыми дизайнами и историческими зданиями, которые способствуют формированию идентичности города. Как объект Всемирного наследия ЮНЕСКО, он привлекает посетителей, которые приходят оценить его архитектурную красоту и традиции, процветавшие в его стенах.</p></div>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/yaroslavl_assumption_cathedral.jpg" alt="Успенский собор" width="1280" height="960" style="height: 250px; max-height: 250px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--row-sized"><img src="../images/yaroslavl_assumption_cathedral_b.jpg" alt="Успенский собор — вид 2" width="330" height="529" style="height: 250px; max-height: 250px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Успенский собор в Ярославле является потрясающим примером русской архитектуры, известным своими яркими голубыми и золотыми куполами. Эта знаковая структура не только является центральной частью городского горизонта, но и значимым историческим и культурным памятником. Посетители могут полюбоваться его сложными фресками и узнать о его богатой истории, которая восходит к 12 веку. Основанная в 1215 году, она является одной из старейших церквей Ярославля. Отремонтированный в 17 веке с замысловатыми фресками и характерным архитектурным стилем.</p>
+<p class="prose">Успенский собор был основан в 1215 году, что делает его одной из старейших церквей в Ярославле. Он претерпел несколько реконструкций, наиболее значительная из которых произошла в 17 веке, когда собор был расширен и украшен красивыми фресками. Собор стал свидетелем многих ключевых событий в истории региона, включая становление Ярославля как значительного культурного и религиозного центра. Культурно Успенский собор является объектом Всемирного наследия ЮНЕСКО, признанным за свою архитектурную красоту и историческую значимость. Он является важной частью наследия Ярославля, отражая художественные традиции и религиозные практики города. Собор продолжает играть роль в повседневной жизни сообщества, проводя религиозные службы и культурные мероприятия.</p></div>
 </section>
-<section class="place" id="yaroslavl_museum_reserve">
-<h3>Ярославский музей-заповедник</h3>
+<section class="place" id="yaroslavl_korovniky">
+<div class="place-lead">
+<h3>Церкви Коровников</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/yaroslavl_museum_reserve.jpg" alt="Ярославский музей-заповедник"/></figure>
-<div class="place-desc"><p class="prose">Ярославский музей-заповедник — это культурное сокровище, расположенное в сердце Ярославля, которое демонстрирует богатую историю и художественное наследие этого древнего города. Посетители могут исследовать различные экспонаты, подчеркивающие развитие региона с момента его основания до настоящего времени, включая его замечательную архитектуру и значительные вклады в русскую культуру. Музейный комплекс является объектом Всемирного наследия ЮНЕСКО, что делает его обязательным для посещения для всех, кто интересуется историческими нарративами России. Музей был официально основан в 1960 году. Ярославль — один из старейших городов России, основанный в 1010 году. Город является частью объекта Всемирного наследия ЮНЕСКО, известного как &#x27;Исторический центр Ярославля&#x27;.</p>
-<p class="prose">Ярославский музей-заповедник был основан в 1960 году, хотя история города восходит к 1010 году, когда он был основан князем Ярославом Мудрым. На протяжении веков Ярославль играл важную роль в развитии российского государства, особенно в 17 и 18 веках, когда он стал значительным торговым и культурным центром. Культурно Ярославский музей-заповедник имеет важное значение для сохранения художественного и архитектурного наследия города, что отражается в его многочисленных исторических зданиях и коллекциях. Как объект Всемирного наследия ЮНЕСКО, он подчеркивает важность роли Ярославля в российской истории и его уникальное сочетание архитектурных стилей. Музей не только служит хранилищем искусства и истории, но и является живым центром культурной деятельности и вовлечения сообщества.</p></div>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/yaroslavl_korovniky.jpg" alt="Церкви Коровников" width="1280" height="853" style="height: 222px; max-height: 222px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/yaroslavl_korovniky_b.jpg" alt="Церкви Коровников — вид 2" width="330" height="472" style="height: 222px; max-height: 222px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Церкви Коровники в Ярославле представляют собой замечательный ансамбль религиозной архитектуры, который демонстрирует богатое духовное наследие города. Уютно расположенные в живописной местности, эти церкви известны своими замысловатыми дизайнами и яркими фресками, привлекающими посетителей, интересующихся историей и искусством. Это место служит свидетельством давних религиозных традиций и культурной значимости города. Церковь Святого Николая была построена в 1650 году. Церкви Коровников являются частью объекта Всемирного наследия ЮНЕСКО в Ярославле. Архитектурный стиль церквей отражает русское церковное искусство XVII века.</p>
+<p class="prose">Церкви Коровников относятся к 17 веку, среди которых наиболее выдающейся является Церковь Николая, построенная в 1650 году. Этот период ознаменовался расцветом церковной архитектуры в Ярославле, отражая растущее значение города как центра торговли и культуры. На протяжении многих лет церкви стали свидетелями различных исторических событий, включая изменения в религиозной практике и влияние политических изменений в России. Культурно церкви Коровники являются неотъемлемой частью идентичности Ярославля, способствуя его признанию объектом Всемирного наследия ЮНЕСКО. Они воплощают художественные стили своего времени, отличаясь сложными фресками и уникальными архитектурными элементами, отражающими местные традиции. Церкви продолжают играть важную роль в повседневной жизни сообщества, проводя религиозные службы и культурные мероприятия, которые укрепляют их значимость в духовной и социальной ткани Ярославля.</p></div>
 </section>
-<section class="place" id="yaroslavl_planetarium">
-<h3>Ярославльский планетарий</h3>
+<section class="place" id="yaroslavl_st_elijah">
+<div class="place-lead">
+<h3>Церковь Ильи Пророка</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/yaroslavl_planetarium.jpg" alt="Ярославльский планетарий"/></figure>
-<div class="place-desc"><p class="prose">Ярославский планетарий предлагает увлекательный взгляд на космос, оснащенный современным оборудованием, которое позволяет посетителям исследовать чудеса вселенной. С разнообразием шоу и образовательных программ он удовлетворяет интересы любителей астрономии всех возрастов. Расположенный в историческом городе Ярославль, планетарий служит как образовательным учреждением, так и культурной достопримечательностью. Основан в 1970 году. Предлагает широкий спектр образовательных программ и астрономических шоу.</p>
-<p class="prose">Ярославский планетарий был основан в 1970 году, что делает его одним из ключевых учреждений для астрономического образования в регионе. С тех пор он стал центром общественного вовлечения в науку, проводя многочисленные выставки и мероприятия, которые способствуют интересу к астрономии. Культурно Ярославский планетарий играет важную роль в формировании интереса к науке и астрономии в сообществе. Он служит центром образовательной деятельности, вдохновляя будущие поколения исследовать вселенную и понимать свое место в ней. Планетарий также способствует статусу Ярославля как центра культурного и научного прогресса.</p></div>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/yaroslavl_st_elijah.jpg" alt="Церковь Ильи Пророка" width="1280" height="855" style="height: 223px; max-height: 223px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/yaroslavl_st_elijah_b.jpg" alt="Церковь Ильи Пророка — вид 2" width="330" height="497" style="height: 223px; max-height: 223px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Церковь Ильи Пророка в Ярославле является потрясающим примером русской архитектуры XVII века, известной своими яркими фресками и сложными деталями. Расположенная в самом сердце города, эта церковь обязательна к посещению для тех, кто интересуется богатым культурным и религиозным наследием региона. Ее впечатляющие луковичные купола и прекрасно сохранившиеся интерьеры предлагают возможность заглянуть в художественные достижения того времени. Построен в период с 1650 по 1660 год. Объявленный объектом Всемирного наследия ЮНЕСКО. Особенности включают потрясающие фрески и сложные архитектурные детали.</p>
+<p class="prose">Церковь Ильи Пророка была построена в период с 1650 по 1660 год по заказу местных купцов в знак их веры и процветания. Она является одним из самых значительных архитектурных памятников Ярославля и отражает историческую важность города как торгового центра в 17 веке. Церковь прошла через различные реставрации, чтобы сохранить свое величие и художественные элементы. Церковь Ильи Пророка является важной частью культурного наследия Ярославля, способствуя его признанию объектом Всемирного наследия ЮНЕСКО. Церковь не только место для поклонения, но и центр общественных собраний и культурных мероприятий, отражающих традиции и повседневную жизнь местных жителей. Ее художественное значение подчеркивается замечательными фресками, украшающими стены, которые демонстрируют мастерство российских ремесленников.</p></div>
+</section>
+<section class="place" id="yaroslavl_fedorovskiy">
+<div class="place-lead">
+<h3>Церковь Федоровской иконы</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/yaroslavl_fedorovskiy.jpg" alt="Церковь Федоровской иконы" width="1280" height="757" style="height: 197px; max-height: 197px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/yaroslavl_fedorovskiy_b.jpg" alt="Церковь Федоровской иконы — вид 2" width="330" height="244" style="height: 197px; max-height: 197px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Церковь Федоровской иконы в Ярославле является великолепным примером русской православной архитектуры, известной своим сложным дизайном и яркими фресками. Эта церковь служит спокойным местом для поклонения и культурной достопримечательностью, привлекая посетителей своей исторической значимостью и художественной красотой. Построен в период с 1684 по 1694 год. Посвящен Федоровской иконе Божией Матери.</p>
+<p class="prose">Церковь Федоровской иконы была построена в начале 17 века, а именно в период с 1684 по 1694 год. Она была возведена в честь чудесного явления Федоровской иконы Божией Матери, которая, как считается, сыграла значительную роль в духовной жизни региона. Культурно церковь является важной частью архитектурного наследия Ярославля и отражает художественные тенденции своего времени. Она является частью объекта Всемирного наследия ЮНЕСКО, который признает исторический центр Ярославля, подчеркивая его значимость в российской истории и культуре. Церковь продолжает быть местом поклонения, воплощая религиозные традиции православной веры.</p></div>
 </section>
 <section class="place" id="yaroslavl_railway_station">
+<div class="place-lead">
 <h3>Ярославльский вокзал</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Период: 1897</p>
-<figure class="place-fig"><img src="../images/yaroslavl_railway_station.jpg" alt="Ярославльский вокзал"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/yaroslavl_railway_station.jpg" alt="Ярославльский вокзал" width="1280" height="960" style="height: 250px; max-height: 250px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/yaroslavl_railway_station_b.jpg" alt="Ярославльский вокзал — вид 2" width="330" height="462" style="height: 250px; max-height: 250px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Ярославский железнодорожный вокзал является главным узлом железнодорожного сообщения в Ярославле, историческом городе, расположенном на берегах реки Волги. Основанный в конце 19 века, он служит важной транспортной связью между северной Россией и центральными европейскими регионами. Построенный в 1897 году для поддержки быстро развивающейся сети Транссибирской железной дороги. Станция имеет грандиозный зал с мраморными полами и сложными декоративными элементами. Он служил ключевой точкой для путешественников, соединяющих Москву и Санкт-Петербург. Сегодня он остается одной из самых знаковых достопримечательностей Ярославля. Регулярно проводит культурные мероприятия, демонстрирующие местные искусства и традиции.</p>
 <p class="prose">Построенная в конце 1890-х годов в период расцвета железнодорожного строительства в России, станция была спроектирована для удовлетворения растущих потребностей в транспортировке. На протяжении многих лет она претерпела несколько реконструкций, но сохранила свою оригинальную неоклассическую архитектуру, характеризующуюся колоннами, арками и богато украшенными фасадами. Посетители должны остановиться здесь, чтобы ощутить историческое величие архитектурного наследия Ярославля и оценить стратегическое значение города как транспортного перекрестка.</p></div>
 </section>
 <section class="place" id="yaroslavl_meteorological_tower">
+<div class="place-lead">
 <h3>Ярославльский музей башни</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/yaroslavl_meteorological_tower.jpg" alt="Ярославльский музей башни"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/yaroslavl_meteorological_tower.jpg" alt="Ярославльский музей башни" width="1279" height="1110" style="height: 204px; max-height: 204px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/yaroslavl_meteorological_tower_b.jpg" alt="Ярославльский музей башни — вид 2" width="330" height="202" style="height: 204px; max-height: 204px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Ярославльская башня-музей, расположенная в исторической метеорологической башне, предлагает посетителям уникальный взгляд на научное и культурное наследие города. Этот музей демонстрирует различные экспонаты, связанные с метеорологией и историей наблюдений за погодой в Ярославле, что делает его интересной остановкой как для любителей истории, так и для энтузиастов науки. Сама башня является ярким архитектурным элементом, который свидетельствует о прошлом города. Башня была построена в 1892 году. Он служил метеорологической наблюдательной станцией более века. Музей предлагает экспозиции по истории метеорологии и метеорологических инструментов.</p>
 <p class="prose">Ярославская метеорологическая башня была построена в конце 19 века, а именно в 1892 году, для облегчения метеорологических наблюдений и содействия развивающейся области метеорологии. На протяжении многих лет она выполняла различные функции, отражая технологические достижения и научные интересы своего времени. Культурно Ярославльская башня-музей играет важную роль в сохранении научного наследия города, подчеркивая значимость метеорологических наблюдений в повседневной жизни и их влияние на сельское хозяйство и навигацию. В качестве части Ярославля, объекта Всемирного наследия ЮНЕСКО, башня способствует признанию города как центра исторического и культурного значения в России.</p></div>
 </section>
-<section class="place" id="yaroslavl_pereslavl_gate">
-<h3>Знаменская башня</h3>
+<section class="place" id="yaroslavl_planetarium">
+<div class="place-lead">
+<h3>Ярославльский планетарий</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/yaroslavl_pereslavl_gate.jpg" alt="Знаменская башня"/></figure>
-<div class="place-desc"><p class="prose">Знаменская башня — это впечатляющая достопримечательность Ярославля, известная своей архитектурой и историческим значением. Входя в состав городских укреплений, она предлагает посетителям возможность заглянуть в прошлое, а также открывает потрясающие виды на окрестности. Эта башня является не только символом богатого наследия Ярославля, но и популярным местом для фотографирования и исследований. Построен в конце 17 века. Часть оборонительных укреплений Ярославля. Включено в список объектов Всемирного наследия ЮНЕСКО.</p>
-<p class="prose">Знаменская башня была построена в конце 17 века как часть оборонительных укреплений города. Она сыграла ключевую роль в защите Ярославля от вторжений и стала свидетелем различных исторических событий на протяжении веков, включая расширение города и его развитие как значительного торгового центра. Башня имеет культурное значение как символ архитектурного наследия Ярославля и является частью объекта Всемирного наследия ЮНЕСКО, который охватывает исторический центр города. Она отражает историческую роль города в торговле и обороне, способствуя его идентичности и повседневной жизни. Башня также служит напоминанием о прошлом региона и его эволюции с течением времени.</p></div>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/yaroslavl_planetarium.jpg" alt="Ярославльский планетарий" width="1280" height="736" style="height: 192px; max-height: 192px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/yaroslavl_planetarium_b.jpg" alt="Ярославльский планетарий — вид 2" width="330" height="247" style="height: 192px; max-height: 192px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Ярославский планетарий предлагает увлекательный взгляд на космос, оснащенный современным оборудованием, которое позволяет посетителям исследовать чудеса вселенной. С разнообразием шоу и образовательных программ он удовлетворяет интересы любителей астрономии всех возрастов. Расположенный в историческом городе Ярославль, планетарий служит как образовательным учреждением, так и культурной достопримечательностью. Основан в 1970 году. Предлагает широкий спектр образовательных программ и астрономических шоу.</p>
+<p class="prose">Ярославский планетарий был основан в 1970 году, что делает его одним из ключевых учреждений для астрономического образования в регионе. С тех пор он стал центром общественного вовлечения в науку, проводя многочисленные выставки и мероприятия, которые способствуют интересу к астрономии. Культурно Ярославский планетарий играет важную роль в формировании интереса к науке и астрономии в сообществе. Он служит центром образовательной деятельности, вдохновляя будущие поколения исследовать вселенную и понимать свое место в ней. Планетарий также способствует статусу Ярославля как центра культурного и научного прогресса.</p></div>
+</section>
+<section class="place" id="yaroslavl_kremlin">
+<div class="place-lead">
+<h3>Ярославский Кремль</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/yaroslavl_kremlin.jpg" alt="Ярославский Кремль" width="1280" height="848" style="height: 221px; max-height: 221px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/yaroslavl_kremlin_b.jpg" alt="Ярославский Кремль — вид 2" width="330" height="430" style="height: 221px; max-height: 221px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Ярославский Кремль — это потрясающий архитектурный ансамбль, расположенный в сердце Ярославля, который демонстрирует богатую историю и культурное наследие города. Окруженный живописными пейзажами вдоль берегов реки Волги, этот памятник включает в себя впечатляющие сооружения, такие как знаковая Спасская башня и Успенский собор. Посетители могут исследовать его историческое значение, наслаждаясь яркой атмосферой этого объекта Всемирного наследия ЮНЕСКО. Ярославский Кремль был внесен в список объектов Всемирного наследия ЮНЕСКО в 2005 году. Ключевыми сооружениями внутри Кремля являются Спасская башня и Успенский собор.</p>
+<p class="prose">Ярославский Кремль был основан в начале XII века, его происхождение связано с князем Ярославом Мудрым. На протяжении веков он служил укрепленным центром региона, став свидетелем ключевых событий, таких как монгольское нашествие и основание Великого княжества Московского. Структуры Кремля строились и перестраивались, отражая архитектурные стили разных эпох, особенно в XVII веке. Политически Ярославский Кремль сыграл ключевую роль в защите и управлении регионом, служа символом власти и стойкости. Культурно он является свидетельством художественных достижений Ярославля, с его замысловатыми дизайнами и историческими зданиями, которые способствуют формированию идентичности города. Как объект Всемирного наследия ЮНЕСКО, он привлекает посетителей, которые приходят оценить его архитектурную красоту и традиции, процветавшие в его стенах.</p></div>
+</section>
+<section class="place" id="yaroslavl_museum_reserve">
+<div class="place-lead">
+<h3>Ярославский музей-заповедник</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<figure class="place-fig place-fig--lo-res"><img src="../images/yaroslavl_museum_reserve_b.jpg" alt="Ярославский музей-заповедник" width="330" height="220"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Ярославский музей-заповедник — это культурное сокровище, расположенное в сердце Ярославля, которое демонстрирует богатую историю и художественное наследие этого древнего города. Посетители могут исследовать различные экспонаты, подчеркивающие развитие региона с момента его основания до настоящего времени, включая его замечательную архитектуру и значительные вклады в русскую культуру. Музейный комплекс является объектом Всемирного наследия ЮНЕСКО, что делает его обязательным для посещения для всех, кто интересуется историческими нарративами России. Музей был официально основан в 1960 году. Ярославль — один из старейших городов России, основанный в 1010 году. Город является частью объекта Всемирного наследия ЮНЕСКО, известного как &#x27;Исторический центр Ярославля&#x27;.</p>
+<p class="prose">Ярославский музей-заповедник был основан в 1960 году, хотя история города восходит к 1010 году, когда он был основан князем Ярославом Мудрым. На протяжении веков Ярославль играл важную роль в развитии российского государства, особенно в 17 и 18 веках, когда он стал значительным торговым и культурным центром. Культурно Ярославский музей-заповедник имеет важное значение для сохранения художественного и архитектурного наследия города, что отражается в его многочисленных исторических зданиях и коллекциях. Как объект Всемирного наследия ЮНЕСКО, он подчеркивает важность роли Ярославля в российской истории и его уникальное сочетание архитектурных стилей. Музей не только служит хранилищем искусства и истории, но и является живым центром культурной деятельности и вовлечения сообщества.</p></div>
+</section>
+<section class="place" id="yaroslavl_art_museum">
+<div class="place-lead">
+<h3>Ярославский художественный музей</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/yaroslavl_art_museum.jpg" alt="Ярославский художественный музей" width="1280" height="853" style="height: 222px; max-height: 222px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--row-sized"><img src="../images/yaroslavl_art_museum_b.jpg" alt="Ярославский художественный музей — вид 2" width="330" height="705" style="height: 222px; max-height: 222px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Ярославский художественный музей — это выдающееся культурное учреждение, расположенное в самом сердце Ярославля, представляющее разнообразную коллекцию русского искусства с 18 века до наших дней. Музей находится в историческом здании и предлагает посетителям возможность погрузиться в богатое художественное наследие региона, с выставками, включающими картины, скульптуры и декоративное искусство. Его спокойная атмосфера и увлекательные экспозиции делают его обязательным местом для посещения как для любителей искусства, так и для случайных посетителей. Основан в 1974 году. Содержит коллекцию русского искусства с 18 века до настоящего времени.</p>
+<p class="prose">Ярославский художественный музей был основан в 1974 году, развиваясь из богатых художественных традиций города и необходимости сохранить его культурное наследие. Коллекция музея значительно увеличилась за эти годы, отражая художественные движения и исторические события, которые сформировали регион. Ключевыми вехами стали приобретение значительных произведений и расширение выставочных пространств для привлечения более широкой аудитории. Культурно Ярославский художественный музей играет важную роль в продвижении художественного наследия Ярославля и окрестных районов. Он служит центром культурных мероприятий, образовательных программ и выставок, которые отмечают как местное, так и национальное искусство. Музей способствует сохранению наследия Ярославля, которое признано частью объекта Всемирного наследия ЮНЕСКО «Исторические памятники Владимира и Суздаля», подчеркивая важность города в русской истории и культуре.</p></div>
 </section>
 </body>
 </html>

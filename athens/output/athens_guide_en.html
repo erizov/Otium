@@ -13,7 +13,7 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
 .otium-logo { font-family: 'Cinzel', serif; font-size: 2.15rem;
   font-weight: 600; letter-spacing: 0.18em; margin-bottom: 0.85rem; }
 .otiump { margin: 0.42rem 0; line-height: 1.42; text-align: justify;
-  max-width: 38rem; font-size: 0.95rem; }
+  font-size: 0.95rem; }
 .guide-title { page-break-after: auto; margin-bottom: 0.55rem;
   page-break-inside: avoid; }
 .historical-reference { margin: 0.75rem 0 1.15rem;
@@ -63,22 +63,103 @@ ol.trip-stops a:hover { text-decoration: underline; }
 .heraldry-univ-caption { font-size: 0.52rem; line-height: 1.18;
   margin: 0.12rem 0 0; padding: 0 0.06rem; color: #252525;
   text-align: center; font-weight: 500; }
-.heraldry-motto { text-align: center; max-width: 18rem; margin: 0.18rem auto;
+.heraldry-motto { text-align: center; margin: 0.18rem auto;
   width: 100%; }
 .motto-line { font-family: 'Cinzel', serif; font-size: 1rem;
   margin: 0; color: #333; line-height: 1.35; }
 .guide-title h1.guide-title-main { font-family: 'Cinzel', serif;
   font-size: 2.35rem; margin-bottom: 0.5rem; font-weight: 600; }
 .lead { color: #444; font-size: 1.05rem; }
-.guide-toc { margin: 0.85rem 0 1.15rem; page-break-inside: avoid; }
-.guide-toc h2 { font-family: 'Cinzel', serif; font-size: 1.28rem;
-  font-weight: 600; margin: 0.4rem 0 0.55rem; }
+
+.guide-toc { page-break-before: always; break-before: page;
+  page-break-after: always; break-after: page;
+  margin: 0; padding: 0.2rem 0 0.45rem; page-break-inside: auto; }
+.guide-toc h2 { font-family: 'Cinzel', serif;
+  font-size: 1.28rem; font-weight: 600; margin: 0.4rem 0 0.55rem; }
 .guide-toc ol { margin: 0.35rem 0 0.65rem 1.25rem; padding: 0;
   columns: 2; column-gap: 1.5rem; }
 .guide-toc li { margin: 0.18rem 0; line-height: 1.35;
   font-size: 0.88rem; break-inside: avoid; }
-.guide-toc a { color: #1a5276; text-decoration: none; }
+.guide-toc a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.guide-toc a:hover { color: #0d3d56; }
 .guide-toc li.toc-item--sub { font-size: 0.82rem; margin-left: 0.35rem; }
+.toc-back { font-size: 0.78rem; margin: 0 0 0.35rem; text-align: right; }
+.toc-back a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.toc-back a:hover { color: #0d3d56; }
+.place, .historical-reference, .guide-primer, .guide-trip-plans {
+  scroll-margin-top: 1.25rem; }
+.historical-reference h2, .guide-primer h2, .guide-trip-plans h2,
+.chapter-head h2, .place-lead h3 { position: relative; }
+.guide-toc + .place, .guide-toc + .chapter-head {
+  page-break-before: avoid; break-before: avoid-page; }
+.place-lead { page-break-inside: avoid; break-inside: avoid-page;
+  page-break-after: auto; }
+.place-lead > h3 { page-break-after: avoid; break-after: avoid-page; }
+.place-lead > .place-meta { page-break-after: avoid; break-after: avoid-page; }
+
+.place-fig { page-break-inside: avoid; break-inside: avoid-page;
+  margin: 0.5rem 0 1rem; }
+.place-fig img {
+  page-break-inside: avoid; break-inside: avoid-page;
+  max-height: 48vh; width: auto; max-width: 100%;
+  object-fit: contain; margin-left: auto; margin-right: auto; }
+.place-fig--hi-res img { max-height: 52vh; }
+.place-fig--lo-res img { max-height: 30vh; }
+.place-pdf-fig-row {
+  display: flex; flex-direction: row; flex-wrap: wrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.45rem 0.55rem; margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row .place-fig {
+  flex: 1 1 30%; margin: 0; min-width: 26%; max-width: 100%; }
+.place-pdf-fig-row .place-fig img {
+  width: auto; max-width: 100%; height: auto; max-height: 44vh;
+  object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--pair {
+  flex-wrap: nowrap; justify-content: space-between;
+  align-items: flex-end; gap: 0.5rem 0.65rem; }
+.place-pdf-fig-row--pair .place-fig {
+  flex: 1 1 47%; min-width: 0; max-width: 50%;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--pair .place-fig img {
+  max-height: 44vh; object-fit: contain; }
+.place-pdf-fig-row--pair .place-fig--hi-res img { max-height: 52vh; }
+.place-pdf-fig-row--pair .place-fig--lo-res img { max-height: 26vh; }
+.place-pdf-fig-row--pair .place-fig--row-sized img,
+.place-pdf-fig-row--triple .place-fig--row-sized img,
+.place-pdf-fig-row--many .place-fig--row-sized img {
+  width: auto; max-width: 100%; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row .place-fig--row-sized.place-fig--hi-res img,
+.place-pdf-fig-row .place-fig--row-sized.place-fig--lo-res img {
+  max-height: unset; }
+.place-pdf-fig-rows-stack {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple {
+  display: flex; flex-direction: row; flex-wrap: nowrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.4rem 0.48rem; margin: 0;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--triple .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--triple .place-fig--hi-res img { max-height: 42vh; }
+.place-pdf-fig-row--triple .place-fig--lo-res img { max-height: 18vh; }
+.place-pdf-fig-row--many {
+  flex-wrap: nowrap; justify-content: center; align-items: flex-end;
+  gap: 0.35rem 0.42rem; }
+.place-pdf-fig-row--many .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--many .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+
+
 .place { margin-bottom: 2.2rem; page-break-inside: auto; }
 h3 { font-family: 'Cinzel', serif; font-size: 1.22rem; margin: 1.2rem 0 0.35rem;
   font-weight: 600; }
@@ -90,7 +171,6 @@ h4 { font-family: 'Cinzel', serif; font-size: 0.95rem; text-transform: uppercase
   color: #555; font-size: 0.95rem; margin: 0 0 0.5rem; font-style: italic; }
 .place-meta { font-size: 0.92rem; color: #353535; margin: 0 0 0.75rem;
   line-height: 1.4; }
-.place-fig { margin: 0.5rem 0 1rem; }
 img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
 .prose, .place-desc p { margin: 0.45rem 0; line-height: 1.5;
   text-align: justify; }
@@ -109,12 +189,15 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <div class="heraldry-strip heraldry-official">
 <figure class="heraldry-fig heraldry-coat-book" title="Coat of arms of Athens"><img src="../images/guide_coat_of_arms.svg" alt="Coat of arms of Athens"/></figure>
 <figure class="heraldry-fig heraldry-coat-book" title="Flag of Athens"><img src="../images/guide_flag.svg" alt="Flag of Athens"/></figure>
-</div></div><h1 class="guide-title-main">Athens</h1><p class="lead">Guide. Places in this edition: 29.</p></header>
+</div></div><h1 class="guide-title-main">Athens</h1><p class="lead">Guide. Places in this edition: 28.</p></header>
+<nav class="guide-toc" id="guide-toc" aria-label="Contents"><h2>Contents</h2><ol><li class="toc-item"><a href="#guide-historical">Historical overview</a></li><li class="toc-item"><a href="#guide-trips">Trip ideas</a></li><li class="toc-item"><a href="#athens_acropolis_museum">Acropolis Museum</a></li><li class="toc-item"><a href="#athens_ancient_agora">Ancient Agora of Athens</a></li><li class="toc-item"><a href="#athens_hadrian_arch">Arch of Hadrian</a></li><li class="toc-item"><a href="#athens_benaki_museum">Benaki Museum</a></li><li class="toc-item"><a href="#athens_byzantine_museum">Byzantine and Christian Museum</a></li><li class="toc-item"><a href="#athens_panagia_kapnikarea">Church of Panagia Kapnikarea</a></li><li class="toc-item"><a href="#athens_filopappou">Filopappou Hill</a></li><li class="toc-item"><a href="#athens_greek_old_royal_palace_on_fire">Greek Old Royal Palace on fire</a></li><li class="toc-item"><a href="#athens_hadrian_library">Hadrian&#x27;s Library</a></li><li class="toc-item"><a href="#athens_kaisariani">Kaisariani Monastery</a></li><li class="toc-item"><a href="#athens_kerameikos">Kerameikos cemetery</a></li><li class="toc-item"><a href="#athens_monastiraki">Monastiraki district</a></li><li class="toc-item"><a href="#athens_lycabettus">Mount Lycabettus</a></li><li class="toc-item"><a href="#athens_museum_of_cycladic">Museum of Cycladic Art</a></li><li class="toc-item"><a href="#athens_national_archaeological_museum">National Archaeological Museum</a></li><li class="toc-item"><a href="#athens_national_garden">National Garden</a></li><li class="toc-item"><a href="#athens_numismatic_museum">Numismatic Museum</a></li><li class="toc-item"><a href="#athens_odeon_herodes">Odeon of Herodes Atticus</a></li><li class="toc-item"><a href="#athens_panathenaic_stadium">Panathenaic Stadium</a></li><li class="toc-item"><a href="#athens_parthenon">Parthenon</a></li><li class="toc-item"><a href="#athens_psyrri">Psyrri quarter</a></li><li class="toc-item"><a href="#athens_stavros_niarchos">Stavros Niarchos Foundation</a></li><li class="toc-item"><a href="#athens_stoa_of_attalos">Stoa of Attalos (museum)</a></li><li class="toc-item"><a href="#athens_ancient_agora_temple">Temple of Hephaestus</a></li><li class="toc-item"><a href="#athens_temple_olympian_zeus">Temple of Olympian Zeus</a></li><li class="toc-item"><a href="#athens_sounion">Temple of Poseidon Sounion</a></li><li class="toc-item"><a href="#athens_tower_of_winds">Tower of the Winds</a></li><li class="toc-item"><a href="#athens_landmark">Μητρόπολη Αθηνών</a></li></ol></nav>
 <section class="historical-reference" id="guide-historical" aria-label="Historical overview"><h2>Historical overview</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 <p class="prose">Athens is the capital of Greece and one of Europe’s oldest continuously settled cities.</p>
 <p class="prose">Classical polis, Roman and Byzantine layers, Ottoman rule, and the modern Greek state created a stratified cityscape around the Acropolis. Athens remains a Mediterranean metropolis of culture, education, and migration.</p>
 <p class="prose">The capital moved to Athens in the nineteenth century; independence restored classical emblems over Ottoman fabric. The twentieth century brought sprawl, the 2004 Olympics, and renewed infrastructure as Athens anchors the Eastern Mediterranean.</p></section>
 <section class="guide-trip-plans" id="guide-trips" aria-label="Trip ideas"><h2>Trip ideas</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 <article class="trip-plan" id="trip-1d"><h3>One day</h3>
 <p class="prose">A compact loop linking the strongest cards in this guide, ordered to minimise backtracking on foot.</p>
 <ol class="trip-stops"><li><a href="#athens_byzantine_museum">Byzantine and Christian Museum</a> (~75min)</li>
@@ -143,231 +226,390 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <li><a href="#athens_temple_olympian_zeus">Temple of Olympian Zeus</a> (~75min)</li>
 <li><a href="#athens_hadrian_library">Hadrian&#x27;s Library</a> (~75min)</li>
 <li><a href="#athens_monastiraki">Monastiraki district</a> (~75min)</li></ol></article></section>
-<nav class="guide-toc" aria-label="Contents"><h2>Contents</h2><ol><li class="toc-item"><a href="#guide-historical">Historical overview</a></li><li class="toc-item"><a href="#guide-trips">Trip ideas</a></li><li class="toc-item"><a href="#athens_acropolis_museum">Acropolis Museum</a></li><li class="toc-item"><a href="#athens_ancient_agora">Ancient Agora of Athens</a></li><li class="toc-item"><a href="#athens_hadrian_arch">Arch of Hadrian</a></li><li class="toc-item"><a href="#athens_benaki_museum">Benaki Museum</a></li><li class="toc-item"><a href="#athens_byzantine_museum">Byzantine and Christian Museum</a></li><li class="toc-item"><a href="#athens_panagia_kapnikarea">Church of Panagia Kapnikarea</a></li><li class="toc-item"><a href="#athens_filopappou">Filopappou Hill</a></li><li class="toc-item"><a href="#athens_pdfband_9_85906380">Greek Old Royal Palace on fire</a></li><li class="toc-item"><a href="#athens_hadrian_library">Hadrian&#x27;s Library</a></li><li class="toc-item"><a href="#athens_kaisariani">Kaisariani Monastery</a></li><li class="toc-item"><a href="#athens_kerameikos">Kerameikos cemetery</a></li><li class="toc-item"><a href="#athens_monastiraki">Monastiraki district</a></li><li class="toc-item"><a href="#athens_lycabettus">Mount Lycabettus</a></li><li class="toc-item"><a href="#athens_museum_of_cycladic">Museum of Cycladic Art</a></li><li class="toc-item"><a href="#athens_national_archaeological_museum">National Archaeological Museum</a></li><li class="toc-item"><a href="#athens_national_garden">National Garden</a></li><li class="toc-item"><a href="#athens_numismatic_museum">Numismatic Museum</a></li><li class="toc-item"><a href="#athens_odeon_herodes">Odeon of Herodes Atticus</a></li><li class="toc-item"><a href="#athens_panathenaic_stadium">Panathenaic Stadium</a></li><li class="toc-item"><a href="#athens_parthenon">Parthenon</a></li><li class="toc-item"><a href="#athens_psyrri">Psyrri quarter</a></li><li class="toc-item"><a href="#athens_stavros_niarchos">Stavros Niarchos Foundation</a></li><li class="toc-item"><a href="#athens_stoa_of_attalos">Stoa of Attalos (museum)</a></li><li class="toc-item"><a href="#athens_syntagma_guard">Syntagma Square and Evzones</a></li><li class="toc-item"><a href="#athens_ancient_agora_temple">Temple of Hephaestus</a></li><li class="toc-item"><a href="#athens_temple_olympian_zeus">Temple of Olympian Zeus</a></li><li class="toc-item"><a href="#athens_sounion">Temple of Poseidon Sounion</a></li><li class="toc-item"><a href="#athens_tower_of_winds">Tower of the Winds</a></li><li class="toc-item"><a href="#athens_pdfband_0_40738d11">Μητρόπολη Αθηνών</a></li></ol></nav>
 <section class="place" id="athens_acropolis_museum">
+<div class="place-lead">
 <h3>Acropolis Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Dionysiou Areopagitou 15 | Style: Modern glass and concrete over archaeological site | Period: 2009 (Bernard Tschumi)</p>
-<figure class="place-fig"><img src="../images/athens_acropolis_museum.jpg" alt="Acropolis Museum"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/athens_acropolis_museum.jpg" alt="Acropolis Museum" width="1280" height="960" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/athens_acropolis_museum_b.jpg" alt="Acropolis Museum — view 2" width="330" height="453" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Purpose-built museum for Parthenon sculptures and slope finds, with views up to the Acropolis rock. Glass floors reveal excavations under the entrance. The top gallery aligns with the Parthenon across the skyline.</p>
 <p class="prose">Replaced cramped hilltop rooms; the design debates still shape discussions on repatriation of marbles. Essential context before or after climbing the Acropolis.</p></div>
 </section>
 <section class="place" id="athens_ancient_agora">
+<div class="place-lead">
 <h3>Ancient Agora of Athens</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Northwest of the Acropolis | Style: Stoa, bouleuterion, temple foundations | Period: Archaic to Roman layers</p>
-<figure class="place-fig"><img src="../images/athens_ancient_agora.jpg" alt="Ancient Agora of Athens"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/athens_ancient_agora.jpg" alt="Ancient Agora of Athens" width="1280" height="960" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/athens_ancient_agora_b.jpg" alt="Ancient Agora of Athens — view 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Civic heart where assemblies met, shops lined stoas, and philosophers taught. Hephaisteion temple rises intact on the hillock. Combined tickets often bundle Acropolis slopes with the agora on the same day. The Stoa of Attalos houses a small museum of finds.</p>
 <p class="prose">Classical democracy&#x27;s open-air offices; Roman rebuilds followed sacks and earthquakes. Walkable archaeology linking myth, democracy, and daily commerce.</p></div>
 </section>
 <section class="place" id="athens_hadrian_arch">
+<div class="place-lead">
 <h3>Arch of Hadrian</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Leoforos Vasilisis Amalias | Style: Roman triumphal arch with Corinthian columns | Period: 131 AD</p>
-<figure class="place-fig"><img src="../images/athens_hadrian_arch.jpg" alt="Arch of Hadrian"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/athens_hadrian_arch.jpg" alt="Arch of Hadrian" width="1068" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/athens_hadrian_arch_b.jpg" alt="Arch of Hadrian — view 2" width="330" height="388" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Marble gateway marking the boundary between old city of Theseus and Hadrian&#x27;s newer Athens. Inscriptions face both directions with different dedications. Illuminated at night beside busy tram lines.</p>
 <p class="prose">Erected to celebrate Hadrian&#x27;s benefactions including the nearby Olympeion completion. Readable symbol of imperial Roman urban expansion.</p></div>
 </section>
 <section class="place" id="athens_benaki_museum">
+<div class="place-lead">
 <h3>Benaki Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Neoclassical | Period: 1930</p>
-<figure class="place-fig"><img src="../images/athens_benaki_museum.jpg" alt="Benaki Museum"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/athens_benaki_museum.jpg" alt="Benaki Museum" width="1600" height="1066" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/athens_benaki_museum_b.jpg" alt="Benaki Museum — view 2" width="330" height="220" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Benaki Museum is one of Athens&#x27; most iconic cultural institutions, showcasing the rich heritage and artistry of Greece through its extensive collections. It houses over 80,000 items spanning more than two millennia of Greek history. The museum&#x27;s architecture reflects traditional Greek design with neoclassical elements. Notable exhibits include the famous Mourouzis Collection of Byzantine icons and medieval manuscripts. Regular temporary exhibitions highlight new perspectives on Greek culture and global influences. Located in the historical center of Athens, near the National Gardens.</p>
 <p class="prose">Established in 1930 by the philanthropist Constantine Benakis, the museum began as a private collection focused on Greek arts and culture. Over time it expanded to include archaeological artifacts, Byzantine treasures, and modern artworks, making it a comprehensive repository of Greek history and aesthetics. Visiting the Benaki Museum allows visitors to explore the evolution of Greek civilization, from ancient times to contemporary art.</p></div>
 </section>
 <section class="place" id="athens_byzantine_museum">
+<div class="place-lead">
 <h3>Byzantine and Christian Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Neoclassical | Period: 1889</p>
-<figure class="place-fig"><img src="../images/athens_byzantine_museum.jpg" alt="Byzantine and Christian Museum"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/athens_byzantine_museum.jpg" alt="Byzantine and Christian Museum" width="1600" height="1200" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/athens_byzantine_museum_b.jpg" alt="Byzantine and Christian Museum — view 2" width="330" height="247" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Byzantine and Christian Museum is a treasure trove of ancient artifacts showcasing the rich cultural heritage of Athens during the Byzantine era and early Christianity. It is located on Athinas Street near the Acropolis Museum. Notable exhibits include the famous &#x27;Pantocrator&#x27; icon and the extensive collection of Byzantine mosaics. The museum&#x27;s architecture reflects neoclassical design elements typical of late 19th-century Athens. Opened by Queen Olga of Greece, it was originally intended as a royal residence before being converted into a museum. Its collections are divided into several thematic sections, including ecclesiastical art, secular art, and archaeological finds.</p>
 <p class="prose">Established in 1889, the museum houses collections that span over two millennia, beginning with the Roman Empire and continuing through the Byzantine Empire and into medieval Greece. It preserves priceless relics such as mosaics, icons, sculptures, and manuscripts, offering visitors a deep insight into the evolution of religious art and architecture. Visiting the museum provides a unique opportunity to explore the fusion of Eastern Orthodox traditions and Western influences that shaped Greek culture.</p></div>
 </section>
 <section class="place" id="athens_panagia_kapnikarea">
+<div class="place-lead">
 <h3>Church of Panagia Kapnikarea</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/athens_panagia_kapnikarea.jpg" alt="Church of Panagia Kapnikarea"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/athens_panagia_kapnikarea.jpg" alt="Church of Panagia Kapnikarea" width="1068" height="1600" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/athens_panagia_kapnikarea_b.jpg" alt="Church of Panagia Kapnikarea — view 2" width="330" height="247" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Church of Panagia Kapnikarea is a stunning example of Byzantine architecture nestled in the heart of Athens. This historic church, with its intricate frescoes and serene atmosphere, offers visitors a glimpse into the city&#x27;s rich religious heritage. It serves as a peaceful retreat amidst the bustling urban landscape, making it a must-visit for both tourists and locals alike. Constructed in the 11th century, making it one of Athens&#x27; oldest churches. Features notable Byzantine frescoes and architectural elements.</p>
 <p class="prose">The Church of Panagia Kapnikarea dates back to the 11th century, making it one of the oldest churches in Athens. Originally built as a private chapel, it has undergone various renovations over the centuries, reflecting the architectural styles of different periods. The church is dedicated to the Virgin Mary and is believed to have been constructed on the site of an earlier church. Culturally, the Church of Panagia Kapnikarea is an important symbol of Athenian heritage, showcasing Byzantine art and architecture. It stands as a testament to the city&#x27;s historical evolution and continues to play a role in the daily lives of Athenians, who often visit for prayer and reflection. The church&#x27;s presence in the urban environment highlights the coexistence of historical and modern Athens.</p></div>
 </section>
 <section class="place" id="athens_filopappou">
+<div class="place-lead">
 <h3>Filopappou Hill</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/athens_filopappou.jpg" alt="Filopappou Hill"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/athens_filopappou.jpg" alt="Filopappou Hill" width="1600" height="1152" style="height: 332px; max-height: 332px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/athens_filopappou_b.jpg" alt="Filopappou Hill — view 2" width="330" height="247" style="height: 332px; max-height: 332px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Perched high above the bustling streets of Athens, Filopappou Hill offers a serene escape with panoramic views over the Acropolis and the city below. This hilltop park is an oasis of tranquility amidst the hustle and bustle of the capital. The hill provides a bird’s eye view of both the Acropolis and the modern cityscape. It houses the monumental tomb of Philopappos, which dates back to the 2nd century AD. Visitors can stroll through well-manicured gardens and enjoy the quiet atmosphere. On clear days, visitors can see as far as Mount Parnitha to the north. The hill is also known for its ancient ruins and historical significance.</p>
 <p class="prose">Named after Roman senator Gaius Julius Philopappos, who was buried here around 116 AD, Filopappou Hill has long been a site of significance. Overlooking the ancient city, it became a popular spot for viewing sunsets and contemplating life&#x27;s mysteries. To experience Athens&#x27; breathtaking vistas without the crowds, head to Filopappou Hill for unparalleled panoramas.</p></div>
 </section>
-<section class="place" id="athens_pdfband_9_85906380">
+<section class="place" id="athens_greek_old_royal_palace_on_fire">
+<div class="place-lead">
 <h3>Greek Old Royal Palace on fire</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/athens_pdfband_9_85906380.jpg" alt="Greek Old Royal Palace on fire"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/athens_greek_old_royal_palace_on_fire.jpg" alt="Greek Old Royal Palace on fire" width="1280" height="867" style="height: 312px; max-height: 312px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/athens_greek_old_royal_palace_on_fire_b.jpg" alt="Greek Old Royal Palace on fire — view 2" width="330" height="228" style="height: 312px; max-height: 312px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 </section>
 <section class="place" id="athens_hadrian_library">
+<div class="place-lead">
 <h3>Hadrian&#x27;s Library</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/athens_hadrian_library.jpg" alt="Hadrian&#x27;s Library"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/athens_hadrian_library.jpg" alt="Hadrian&#x27;s Library" width="330" height="440" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/athens_hadrian_library_b.jpg" alt="Hadrian&#x27;s Library — view 2" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Hadrian&#x27;s Library, built in 132 AD by the Roman Emperor Hadrian, is a remarkable archaeological site located in the heart of Athens. Once a hub of learning and culture, the library housed numerous scrolls and served as a gathering place for scholars and citizens alike. Today, visitors can explore the impressive ruins and imagine the vibrant intellectual life that once flourished here. Built in 132 AD by Emperor Hadrian. Once housed a vast collection of scrolls and served as a cultural hub.</p>
 <p class="prose">Hadrian&#x27;s Library was established during the reign of Emperor Hadrian, who was known for his admiration of Greek culture and philosophy. The library was part of a larger complex that included a courtyard, lecture halls, and gardens, reflecting the Roman commitment to education and the arts. It played a significant role in the cultural life of Athens until it fell into disuse after the Roman Empire&#x27;s decline. Culturally, Hadrian&#x27;s Library represents the fusion of Roman and Greek traditions, showcasing the importance of knowledge and learning in ancient society. Although it is not a UNESCO World Heritage site, it contributes to Athens&#x27; rich historical narrative and attracts scholars and tourists interested in the city&#x27;s classical heritage. The site serves as a reminder of Athens&#x27; pivotal role in the development of Western civilization.</p></div>
 </section>
 <section class="place" id="athens_kaisariani">
+<div class="place-lead">
 <h3>Kaisariani Monastery</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/athens_kaisariani.jpg" alt="Kaisariani Monastery"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/athens_kaisariani.jpg" alt="Kaisariani Monastery" width="1600" height="1200" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/athens_kaisariani_b.jpg" alt="Kaisariani Monastery — view 2" width="330" height="219" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Kaisariani Monastery (Greek: Μονή Καισαριανής) is an Eastern Orthodox monastery built on the north side of Mount Hymettus, near Athens, Greece. History The monastery was probably established in Byzantine times in ca. 1100, which is the date of construction of the surviving church (the monastery&#x27;s katholikon).</p></div>
 </section>
 <section class="place" id="athens_kerameikos">
+<div class="place-lead">
 <h3>Kerameikos cemetery</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/athens_kerameikos.jpg" alt="Kerameikos cemetery"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/athens_kerameikos.jpg" alt="Kerameikos cemetery" width="1600" height="827" style="height: 238px; max-height: 238px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/athens_kerameikos_b.jpg" alt="Kerameikos cemetery — view 2" width="330" height="247" style="height: 238px; max-height: 238px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Kerameikos (Greek: Κεραμεικός, pronounced [ce. miˈkos]) also known by its Latinized form Ceramicus, is an area of Athens, Greece, located to the northwest of the Acropolis, which includes an extensive area both within and outside the ancient city walls, on both sides of the Dipylon Gate and by the banks of the Eridanos River.</p></div>
 </section>
 <section class="place" id="athens_monastiraki">
+<div class="place-lead">
 <h3>Monastiraki district</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Plato&#x27;s footpaths near Agora | Style: Mixed Ottoman and neoclassical fabric | Period: Ottoman bazaar layers; metro 2003</p>
-<figure class="place-fig"><img src="../images/athens_monastiraki.jpg" alt="Monastiraki district"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/athens_monastiraki.jpg" alt="Monastiraki district" width="1280" height="960" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/athens_monastiraki_b.jpg" alt="Monastiraki district — view 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Flea market streets, souvlaki counters, and rooftop bars with Acropolis views around Monastiraki station. Sunday mornings are busiest for antiques and bric-a-brac. Metro exhibits behind glass line the ticket hall.</p>
 <p class="prose">Named for a small monastery demolished in the 18th century; the square stayed a commercial hinge. Transit hub between Plaka, Psiri, and the ancient Agora.</p></div>
 </section>
 <section class="place" id="athens_lycabettus">
+<div class="place-lead">
 <h3>Mount Lycabettus</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/athens_lycabettus.jpg" alt="Mount Lycabettus"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/athens_lycabettus.jpg" alt="Mount Lycabettus" width="1600" height="1068" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/athens_lycabettus_b.jpg" alt="Mount Lycabettus — view 2" width="330" height="247" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Perched high above Athens, Mount Lycabettus offers a breathtaking panoramic view of the city and its environs. From here, visitors can see the Acropolis, the Parthenon, and the bustling streets below, framed by the lush green hills that surround the capital. The peak stands at approximately 277 meters above sea level. It is accessible via cable car or a steep hike up the hillside paths. At night, the illuminated cross atop the mountain becomes a symbol of Athens&#x27; skyline. Nearby is the Church of St. In ancient times, the area was considered sacred ground.</p>
 <p class="prose">Legend has it that Mount Lycabettus was named after Lycabas, a shepherd who fell in love with Aganippe, a nymph. The summit became a popular site for Athenians to escape the hustle and bustle of daily life. Today, it&#x27;s one of the most iconic landmarks of Athens, drawing tourists seeking unparalleled vistas. Visiting Mount Lycabettus is essential for anyone wanting to experience the city&#x27;s beauty from a bird&#x27;s-eye perspective.</p></div>
 </section>
 <section class="place" id="athens_museum_of_cycladic">
+<div class="place-lead">
 <h3>Museum of Cycladic Art</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Modern</p>
-<figure class="place-fig"><img src="../images/athens_museum_of_cycladic.jpg" alt="Museum of Cycladic Art"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/athens_museum_of_cycladic.jpg" alt="Museum of Cycladic Art" width="1600" height="1339" style="height: 386px; max-height: 386px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/athens_museum_of_cycladic_b.jpg" alt="Museum of Cycladic Art — view 2" width="330" height="440" style="height: 386px; max-height: 386px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Museum of Cycladic Art is a world-renowned institution dedicated to showcasing the ancient art and culture of the Cyclades islands. Located in Athens, it houses one of the most significant collections of Cycladic sculpture and artifacts. It features over 400 pieces from the Bronze Age, ranging from small figurines to large marble statues. Notable exhibits include the famous &#x27;Dancer&#x27; statue dating back to around 2500 BC. The museum also displays examples of pottery, jewelry, and everyday objects used by early Cycladic civilizations. Its architecture combines modern design with traditional elements, creating a harmonious blend of old and new. Regular temporary exhibitions complement the permanent collection, offering insights into related archaeological discoveries.</p>
 <p class="prose">Established in 1986 by collector and philanthropist Nikolay G. Tselementes, the museum was originally housed in his private residence before moving to its current location on Voulis Street. It has since become a major cultural hub for exploring the distinctive art forms of the Aegean region. Visiting the Museum of Cycladic Art allows visitors to appreciate the elegant simplicity and refined beauty of ancient Greek sculptures and ceramics.</p></div>
 </section>
 <section class="place" id="athens_national_archaeological_museum">
+<div class="place-lead">
 <h3>National Archaeological Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: 28is Oktovriou 44 | Style: Neoclassical museum architecture | Period: 1889 museum building</p>
-<figure class="place-fig"><img src="../images/athens_national_archaeological_museum.jpg" alt="National Archaeological Museum"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/athens_national_archaeological_museum.jpg" alt="National Archaeological Museum" width="1280" height="813" style="height: 293px; max-height: 293px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/athens_national_archaeological_museum_b.jpg" alt="National Archaeological Museum — view 2" width="330" height="220" style="height: 293px; max-height: 293px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Flagship collection of Greek antiquity from prehistory through late Roman bronzes and frescoes. Mask of Agamemnon and Antikythera mechanism are star exhibits. Café courtyard offers shade before upper-floor vases.</p>
 <p class="prose">Founded to house growing national excavations after independence. The single best overview of Greek material culture.</p></div>
 </section>
 <section class="place" id="athens_national_garden">
+<div class="place-lead">
 <h3>National Garden</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/athens_national_garden.jpg" alt="National Garden"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/athens_national_garden.jpg" alt="National Garden" width="1600" height="1067" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/athens_national_garden_b.jpg" alt="National Garden — view 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">National Garden of Athens — public park in Athens, Greece.</p></div>
 </section>
 <section class="place" id="athens_numismatic_museum">
+<div class="place-lead">
 <h3>Numismatic Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/athens_numismatic_museum.jpg" alt="Numismatic Museum"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/athens_numismatic_museum.jpg" alt="Numismatic Museum" width="1600" height="1194" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/athens_numismatic_museum_b.jpg" alt="Numismatic Museum — view 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Numismatic Museum of Athens showcases the evolution of Greek coinage and its cultural significance over two millennia. Located within the historical Kerameikos district, it offers a fascinating journey through ancient monetary systems. It contains more than 40,000 exhibits, including rare gold and silver coins. The collection includes some of the earliest known coins from the island of Aegina. Exhibits are displayed chronologically, tracing the development of Greek currency from archaic times to modern-day Greece. Special temporary exhibitions often highlight specific themes related to numismatics and ancient art. The museum is part of the broader archaeological complex that also includes the Kerameikos Archaeological Site.</p>
 <p class="prose">Established in 1960, the museum houses one of the most extensive collections of Greek coins, dating back to the 7th century BC. It was originally housed at the National Archaeological Museum but later moved to its current location in 1986 to provide better exhibition space. Visiting the Numismatic Museum allows visitors to explore the intricate designs, symbols, and legends that shaped Greek society and economy throughout history.</p></div>
 </section>
 <section class="place" id="athens_odeon_herodes">
+<div class="place-lead">
 <h3>Odeon of Herodes Atticus</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: South slope, Acropolis | Style: Roman stone theatre with restored stage house | Period: 161 AD</p>
-<figure class="place-fig"><img src="../images/athens_odeon_herodes.jpg" alt="Odeon of Herodes Atticus"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/athens_odeon_herodes.jpg" alt="Odeon of Herodes Atticus" width="1280" height="960" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/athens_odeon_herodes_b.jpg" alt="Odeon of Herodes Atticus — view 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Stone Roman odeon restored for summer Athens Epidaurus Festival performances under the lit Acropolis rock face. Named for the wealthy sophist Herodes Atticus who funded it in memory of his wife. Seating is marble; cushions are allowed on rented seats for some shows.</p>
 <p class="prose">Ruined roof and upper cavea were rebuilt in the 20th century to revive large-scale music and drama. The romantic night shot every visitor recognises from the path up to the Propylaea.</p></div>
 </section>
 <section class="place" id="athens_panathenaic_stadium">
+<div class="place-lead">
 <h3>Panathenaic Stadium</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Pangrati | Style: U-shaped stadium in Pentelic marble | Period: 330 BC limestone seats; marble 144 AD; modern restoration 19th c.</p>
-<figure class="place-fig"><img src="../images/athens_panathenaic_stadium.jpg" alt="Panathenaic Stadium"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/athens_panathenaic_stadium.jpg" alt="Panathenaic Stadium" width="1280" height="876" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/athens_panathenaic_stadium_b.jpg" alt="Panathenaic Stadium — view 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">All-marble stadium that hosted the 1896 Olympic revival. Audio guides explain starting line grooves and royal boxes. You can jog the track on a quiet morning for a small fee. The tunnel mimics ancient athlete procession routes.</p>
 <p class="prose">Lycurgus-era limestone tiers were clad in Herodes Atticus marble; excavators cleared silt after centuries of burial. Physical link between ancient Panathenaia festival and modern Olympic narrative.</p></div>
 </section>
 <section class="place" id="athens_parthenon">
+<div class="place-lead">
 <h3>Parthenon</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Acropolis of Athens | Style: Doric peripteral temple; sculptural programme by Phidias workshop | Period: 447–432 BC (Classical period)</p>
-<figure class="place-fig"><img src="../images/athens_parthenon.jpg" alt="Parthenon"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/athens_parthenon.jpg" alt="Parthenon" width="1280" height="960" style="height: 288px; max-height: 288px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/athens_parthenon_b.jpg" alt="Parthenon — view 2" width="330" height="206" style="height: 288px; max-height: 288px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Temple of Athena Parthenos crowning the Acropolis. Ongoing conservation scaffolding shifts with each campaign. Some sculptures are displayed in the Acropolis Museum while casts occupy pediments on site. Summer midday heat makes dawn or late tickets more comfortable.</p>
 <p class="prose">Periclean building programme replaced older temples destroyed by the Persians; later conversions included church and mosque phases. Canonical image of Classical Greece and democratic-city identity.</p></div>
 </section>
 <section class="place" id="athens_psyrri">
+<div class="place-lead">
 <h3>Psyrri quarter</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/athens_psyrri.jpg" alt="Psyrri quarter"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/athens_psyrri.jpg" alt="Psyrri quarter" width="1600" height="1600" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/athens_psyrri_b.jpg" alt="Psyrri quarter — view 2" width="330" height="247" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Psyrri is a vibrant and lively neighborhood in Athens known for its bohemian atmosphere, narrow streets lined with bars, cafes, and art galleries. It has become one of the city&#x27;s most popular destinations for locals and tourists alike. It is home to numerous small independent businesses including restaurants, shops, and boutiques. The area is famous for its late-night scene, attracting crowds until dawn. Many traditional Greek tavernas can be found here serving authentic cuisine. Psyrri hosts various festivals throughout the year showcasing local arts and crafts. Its cobblestone streets create a charmingly old-world feel.</p>
 <p class="prose">Originally developed as a working-class district during the early 20th century, Psyrri later became a hub for artists and creatives who were drawn to its affordable rents and unique character. Over time, it evolved into a bustling cultural center filled with live music venues, street performances, and nightlife spots. Visitors come to Psyrri to experience its eclectic mix of culture, food, and entertainment, making it a must-see destination for anyone exploring Athens.</p></div>
 </section>
 <section class="place" id="athens_stavros_niarchos">
+<div class="place-lead">
 <h3>Stavros Niarchos Foundation</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/athens_stavros_niarchos.jpg" alt="Stavros Niarchos Foundation"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/athens_stavros_niarchos.jpg" alt="Stavros Niarchos Foundation" width="1600" height="1038" style="height: 299px; max-height: 299px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/athens_stavros_niarchos_b.jpg" alt="Stavros Niarchos Foundation — view 2" width="330" height="465" style="height: 299px; max-height: 299px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Stavros Niarchos Foundation Cultural Center (SNFCC) is a vibrant hub of culture and recreation located in Athens. Opened in 2016, it houses the National Library of Greece and the Greek National Opera, set within beautifully landscaped gardens. This architectural marvel, designed by Renzo Piano, serves as a focal point for artistic and community activities, making it a must-visit destination for both locals and tourists. The SNFCC includes the National Library of Greece and the Greek National Opera. The center was designed by renowned architect Renzo Piano. It features a 210,000 square meter park that is open to the public.</p>
 <p class="prose">The Stavros Niarchos Foundation Cultural Center was inaugurated in 2016, funded by the Stavros Niarchos Foundation, which has a long history of philanthropic contributions in Greece. The site was developed on the former grounds of the Faliro Coastal Zone, transforming it into a cultural landmark that reflects modern Greek identity and aspirations. The SNFCC plays a crucial role in Athens&#x27; cultural landscape, providing a venue for a variety of artistic performances and events. It promotes accessibility to the arts and serves as a gathering place for the community, fostering social interaction and cultural exchange. The center&#x27;s dedication to sustainability and innovation also highlights contemporary Greek values in urban development.</p></div>
 </section>
 <section class="place" id="athens_stoa_of_attalos">
+<div class="place-lead">
 <h3>Stoa of Attalos (museum)</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Ancient Agora | Style: Hellenistic two-aisled colonnade | Period: 1952–1956 reconstruction of Hellenistic stoa</p>
-<figure class="place-fig"><img src="../images/athens_stoa_of_attalos.jpg" alt="Stoa of Attalos (museum)"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/athens_stoa_of_attalos.jpg" alt="Stoa of Attalos (museum)" width="1280" height="960" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/athens_stoa_of_attalos_b.jpg" alt="Stoa of Attalos (museum) — view 2" width="330" height="247" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">American School reconstruction housing agora small finds—pottery, ballots, weights—with shaded upper walkway views. Gift of Attalus II of Pergamon; modern rebuild used inscriptions and foundations as guides. Air-conditioned galleries offer summer relief before returning to sunlit ruins.</p>
 <p class="prose">Original stoa displayed royal patronage; the modern copy proves controversial yet didactic for visitors. Best place to connect objects to the rubble plan below your feet.</p></div>
 </section>
-<section class="place" id="athens_syntagma_guard">
-<h3>Syntagma Square and Evzones</h3>
-
-<p class="place-meta">Address: Syntagma Square | Style: Neoclassical parliament; ceremonial guard posts | Period: Square 19th c.; tomb 1932</p>
-<figure class="place-fig"><img src="../images/athens_syntagma_guard.jpg" alt="Syntagma Square and Evzones"/></figure>
-<div class="place-desc"><p class="prose">Parliament frontage where Evzones perform the changing of the guard at the Tomb of the Unknown Soldier. Hourly ceremony draws crowds; arrive early for shade in summer. Metro lines cross beneath the square.</p>
-<p class="prose">Named after the 1843 constitution granted after popular demonstration at the palace gates. Modern Athens&#x27; default protest and celebration plaza.</p></div>
-</section>
 <section class="place" id="athens_ancient_agora_temple">
+<div class="place-lead">
 <h3>Temple of Hephaestus</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/athens_ancient_agora_temple.jpg" alt="Temple of Hephaestus"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/athens_ancient_agora_temple.jpg" alt="Temple of Hephaestus" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/athens_ancient_agora_temple_b.jpg" alt="Temple of Hephaestus — view 2" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Temple of Hephaestus, located in the Ancient Agora of Athens, is one of the best-preserved ancient Greek temples. Dedicated to Hephaestus, the god of craftsmanship and fire, this stunning structure offers visitors a glimpse into the architectural prowess of classical Greece. Surrounded by the vibrant atmosphere of the Agora, it serves as a testament to the city&#x27;s rich historical and cultural heritage. The temple is dedicated to Hephaestus and Athena Ergane. It is one of the best-preserved ancient Greek temples. The structure features Doric columns and intricate friezes.</p>
 <p class="prose">Constructed around 449-415 BC, the Temple of Hephaestus was built during the height of Athenian power and prosperity. It was designed by the architect Ictinus and is believed to have been funded by the spoils of the Persian Wars. The temple was dedicated to Hephaestus and Athena Ergane, reflecting the city&#x27;s reverence for craftsmanship and skill. Culturally, the Temple of Hephaestus stands as a symbol of Athenian artistic achievement and religious devotion. It is an important part of the Ancient Agora, which was the heart of Athenian public life, influencing daily activities, commerce, and civic engagement. The temple&#x27;s preservation allows for a deeper understanding of ancient Greek architecture and its role in society, contributing to Athens&#x27; designation as a UNESCO World Heritage site.</p></div>
 </section>
 <section class="place" id="athens_temple_olympian_zeus">
+<div class="place-lead">
 <h3>Temple of Olympian Zeus</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Archaeological site of Olympeion | Style: Corinthian colossal temple | Period: 6th c. BC start; completed 2nd c. AD (Hadrian)</p>
-<figure class="place-fig"><img src="../images/athens_temple_olympian_zeus.jpg" alt="Temple of Olympian Zeus"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/athens_temple_olympian_zeus.jpg" alt="Temple of Olympian Zeus" width="1280" height="844" style="height: 304px; max-height: 304px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/athens_temple_olympian_zeus_b.jpg" alt="Temple of Olympian Zeus — view 2" width="330" height="252" style="height: 304px; max-height: 304px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Ruined sanctuary once housing a colossal chryselephantine cult image; a few towering columns remain. Hadrian&#x27;s Arch stands beside the fence marking old and new city. Combined tickets may include the site with other central ruins.</p>
 <p class="prose">Peisistratid foundations waited centuries for Roman completion under Hadrian. Scale reference for imperial Roman Athens.</p></div>
 </section>
 <section class="place" id="athens_sounion">
+<div class="place-lead">
 <h3>Temple of Poseidon Sounion</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Doric style | Period: 5th century BC</p>
-<figure class="place-fig"><img src="../images/athens_sounion.jpg" alt="Temple of Poseidon Sounion"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/athens_sounion.jpg" alt="Temple of Poseidon Sounion" width="1293" height="1600" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/athens_sounion_b.jpg" alt="Temple of Poseidon Sounion — view 2" width="330" height="247" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Perched dramatically on the rocky cape of Sounion, the Temple of Poseidon offers breathtaking views over the Aegean Sea and a serene atmosphere that transports visitors back to ancient times. This iconic Greek temple is one of the most photographed sites in Athens. Constructed using local marble from Mount Parnes. Features twelve Doric columns arranged in a semi-circle. Ruins date back to approximately 440 BC. Overlooking the sunset-lit waters of the Aegean. Accessible by car via National Road 6.</p>
 <p class="prose">Built around the 5th century BC during the Classical era, the Temple of Poseidon was dedicated to the god of the sea, reflecting the city&#x27;s maritime importance. It served as both a religious site and a symbol of Athenian power and influence. Its columns, though partially ruined, still stand majestically, evoking memories of past glories. Visiting the Temple of Poseidon provides a unique opportunity to connect with Greece&#x27;s rich historical heritage while enjoying panoramic vistas of the Ionian Sea.</p></div>
 </section>
 <section class="place" id="athens_tower_of_winds">
+<div class="place-lead">
 <h3>Tower of the Winds</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Roman Agora, Plaka | Style: Hellenistic octagonal horologion | Period: 1st c. BC</p>
-<figure class="place-fig"><img src="../images/athens_tower_of_winds.jpg" alt="Tower of the Winds"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/athens_tower_of_winds.jpg" alt="Tower of the Winds" width="1068" height="1600" style="height: 221px; max-height: 221px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/athens_tower_of_winds_b.jpg" alt="Tower of the Winds — view 2" width="330" height="158" style="height: 221px; max-height: 221px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Marble octagon combining sundials, water clock, and wind vane personifications on each side. Each relief names a classical wind direction. Entry is often bundled with Roman Agora tickets.</p>
 <p class="prose">Attributed to Andronikos of Kyrrhos; among the best-preserved ancient timekeeping structures. Unique fusion of meteorology, astronomy, and civic pride.</p></div>
 </section>
-<section class="place" id="athens_pdfband_0_40738d11">
+<section class="place" id="athens_landmark">
+<div class="place-lead">
 <h3>Μητρόπολη Αθηνών</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/athens_pdfband_0_40738d11.jpg" alt="Μητρόπολη Αθηνών"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/athens_landmark.jpg" alt="Μητρόπολη Αθηνών" width="1280" height="1164" style="height: 408px; max-height: 408px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/athens_landmark_b.jpg" alt="Μητρόπολη Αθηνών — view 2" width="330" height="292" style="height: 408px; max-height: 408px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 </section>
 </body>
 </html>

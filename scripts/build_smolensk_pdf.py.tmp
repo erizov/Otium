@@ -1,0 +1,1529 @@
+# -*- coding: utf-8 -*-
+"""HTML + PDF для Смоленска по уже лежащим в smolensk/images файлам."""
+
+from __future__ import annotations
+
+import argparse
+import shutil
+import sys
+from html import escape
+from pathlib import Path
+from typing import Any, cast
+
+_PROJECT_ROOT = Path(__file__).resolve().parent.parent
+if str(_PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(_PROJECT_ROOT))
+
+from smolensk.data.places_registry import SMOLENSK_PLACES, SmolenskPlace
+
+from scripts.build_pdf import (
+    _pdf_via_playwright,
+    _strip_empty_pdf_pages,
+    _strip_pdf_metadata,
+)
+from scripts.city_guide_core import (
+    MIN_IMAGE_BYTES,
+    copy_built_guide_pdf_to_final_guides,
+    places_for_pdf,
+    smallest_same_stem_image_rel,
+)
+from scripts.city_guide_narrative import (
+    GuideNarrativeDeduper,
+    filter_stories,
+    merge_narrative_html,
+    place_heading_plain,
+    place_meta_line,
+    subtitle_html_for_edition,
+)
+from scripts.city_guide_place_figures import (
+    figure_img_dimension_attrs,
+    figure_res_class_suffix,
+    inject_figure_img_extra,
+    row_equal_img_styles,
+    place_figure_row_html,
+    place_figure_rows_max_three_html,
+    place_figures_layout_html,
+)
+from scripts.city_guide_historical_reference_ru import (
+    HERALDRY_CHAPTER_LABEL_EN,
+    HERALDRY_CHAPTER_LABEL_RU,
+    HISTORICAL_SECTION_TITLE_EN,
+    HISTORICAL_SECTION_TITLE_RU,
+    historical_reference_section_html,
+    reference_text_ru_for_any_city,
+)
+from scripts.city_guide_jerusalem_style_pdf import (
+    _OTIUM_PARAS_EN,
+    guide_ui_strings,
+)
+from scripts.city_guide_toc import GuideTocEntry, guide_toc_back_link_html, guide_toc_html
+from scripts.guide_editor_presets import SMOLENSK_GOOGLE_FONTS_HREF
+from scripts.city_guide_typography import guide_pdf_pagination_css
+from scripts.lint_image_paths import lint_city_blocking_errors
+
+
+# Компактные иллюстрации для ранних карточек (стр. PDF 4–6 после титула).
+_COMPACT_FIGURE_SLUGS: frozenset[str] = frozenset()
+# Меньше отступа между h3 / подзаголовком / мета и первым рядом фото.
+_TIGHT_TITLE_TO_FIG_SLUGS: frozenset[str] = frozenset(
+    {"lopatinsky_garden"},
+)
+# Финальный ряд Лопатинского сада (отдельный stack после основной сетки).
+_LOPATINSKY_FINAL_ROW_STEMS: tuple[str, ...] = (
+    "smolensk_lopatinskiy11",
+    "smolensk_lopatinskiy16",
+    "smolensk_lopatinskiy17",
+)
+SMOL_HTML_NAME = "smolensk_guide.html"
+SMOL_PDF_NAME = "smolensk_guide.pdf"
+_GUIDE_INTRO_FOLLOW_RU = (
+    "Фёдор Конь и Михаил Шеин, Павел Нахимов и Григорий Потемкин, Михаил "
+    "Кутузов и Георгий Жуков, Михаил Глинка, Александр Даргомыжский и "
+    "Александр Грибоедов, Василий Докучаев и Александр Энгельгардт, Николай "
+    "Пржевальский и Пётр Козлов, Михаил Микешин и Сергей Коненков, Никифор "
+    "Мурзакевич и Мария Тенишева, Семён Лавочкин и Юрий Гагарин, Айзек Азимов "
+    "и Александр Беляев, Александр Твардовский и Михаил Исаковский, Юрий "
+    "Никулин и Анатолий Папанов, Михаил Егоров и Семён Пегов, домонгольские "
+    "храмы и крупнейшая в Европе крепостная стена, Днепр и Соборная гора. "
+    "Смоленск — город древний, тихий, «ламповый», но эта кроткость обманчива: "
+    "это ключ Москвы, железный кулак в бархатной перчатке. Приезжайте, не "
+    "пожалеете: что в тебе заложено - вот так он тебе и понравится."
+)
+
+_HISTORICAL_REFERENCE_RU = (
+    "Смоленск - один из древнейших городов России. Упоминание о нем в русских "
+    "летописях относится к IX веку. Город известен с 863 года, в IХ-Х веках "
+    "являлся центром славянского племени кривичей, крупным торговым и ремесленным "
+    "поселением на пути из варяг в греки. На протяжении многих столетий Смоленск "
+    "был стражем западных границ русских земель. Его по праву называют "
+    "ключом-городом, щитом Русского государства. Смоляне прославились как "
+    "мужественные защитники Родины. С 882 года входил в состав Киевской Руси, "
+    "активно участвовал в торговых делах и военных походах Древнерусского "
+    "государства. В XII веке город достиг расцвета, принял от Киева эстафету "
+    "ведущего стратегического центра Руси, стал надежным форпостом ее западных "
+    "рубежей. В 1404-1514 гг. Пережил литовское, затем польское нашествие. После "
+    "двадцатимесячной осады в 1611 году был захвачен Польшей и возвращен России "
+    "в 1667 году по Андрусовскому миру. С 1708 года - губернский город. Летом "
+    "1708 года Смоленск встал на пути шведского короля Карла XII, рвавшегося к "
+    "Москве. В ходе Отечественной войны 1812 года Смоленское сражение 4-5 августа "
+    "сорвало план Наполеона разгромить русскую армию. После отступления из Москвы "
+    "в боях на Смоленской земле французская армия была окончательно разгромлена, "
+    "а М.И. Кутузов получил титул Князя Смоленского.\n\n"
+    "В июле-сентябре 1941 года в Смоленске и на Смоленщине шли ожесточенные бои с "
+    "немецко-фашистскими захватчиками, задержавшие на 2,5 месяца наступление врага "
+    "на Москву. Смоленское сражение 1941 года - самое крупное в начальный период "
+    "войны. В годы оккупации (16 июля 1941 г. - 25 сентября 1943 г.) в городе "
+    "действовало подполье, в партизанском движении участвовало более 63 тысяч "
+    "смолян. В годы войны Смоленск был разрушен на 93%.\n\n"
+    "Смоленск награжден орденом Ленина (1983 г.), орденом Отечественной войны I "
+    "степени (1966 г.). В 1985 году присвоено почетное звание «Город-Герой» с "
+    "вручением медали «Золотая Звезда».\n\n"
+    "Многочисленные памятники отражают его более чем тысячелетнюю историю.\n\n"
+    "Один из них - крепостная стена, возведенная в XVI веке (зодчий - Федор "
+    "Савельевич Конь). Длина крепостной стены - 6,5 км, ширина 4-6 метров, "
+    "высота с зубцами 12-16 метров. По количеству башен (до нашего времени "
+    "сохранилось 18), их монументальности, живописности расположения, плотности "
+    "расстановки и богатству декоративного убранства смоленская крепостная стена "
+    "не имеет себе подобных в русской архитектуре.\n\n"
+    "Самый старый храм города - церковь Петра и Павла - один из выдающихся "
+    "памятников русского зодчества XII века. До наших дней сохранились еще две "
+    "церкви - церковь Иоанна Богослова и церковь Михаила Архангела, называемая "
+    "также Свирской.\n\n"
+    "В общей панораме города главенствующую роль играет Успенский собор "
+    "(1677-1679), достроен в 1712-1740 гг., архитектор А.И. Шедель.\n\n"
+    "В многочисленных монументах Смоленска особенно яркое отражение нашли события "
+    "Отечественной войны 1812 года. Самым примечательным является памятник героям "
+    "Отечественной войны 1812 года, находящийся в Сквере Памяти героев. Он был "
+    "заложен 6 августа 1912 года, в дни празднования 100-летия Отечественной войны "
+    "(автор - инженер -подполковник Н.С. Шуцман). Памятник защитникам Смоленска в "
+    "сражении 4-5 августа 1812 года, находящийся в Центральном парке культуры и "
+    "отдыха, самый старый памятник Смоленска (открыт 5 ноября 1841 года).\n\n"
+    "Памятник Скорбящей матери, Курган Бессмертия в парке Реадовка, величественный "
+    "мемориальный комплекс на месте бывшего лагеря для советских военнопленных "
+    "(ул. Зои Космодемьянской) - сооружены в память о бессмертном подвиге миллионов "
+    "советских людей в годы Великой Отечественной войны. В Сквере Памяти героев "
+    "горит Вечный огонь.\n\n"
+    "Бронзовый бюст великого русского полководца М.И. Кутузова (скульптор Г.И. "
+    "Страховская), памятник основателю русской классической музыки М.И. Глинке "
+    "(скульптор А.Ф. Бок), бюст А.С. Пушкина (скульптор Е.Ф. Белашова), памятник "
+    "зодчему Федору Коню (скульптор О.Л. Комов), памятник А.Т. Твардовскому и его "
+    "литературному герою Василию Теркину (скульптор А.Г. Сергеев) - высокие образцы "
+    "монументальной скульптуры Смоленска.\n\n"
+    "Смоленщина – родина многих видных деятелей государства, науки и культуры. "
+    "Среди них имена государственного и военного деятеля князя Григория "
+    "Александровича Потемкина-Таврического, первого космонавта мира "
+    "Ю.А. Гагарина, прославленного путешественника Н.М. Пржевальского, одного из "
+    "первых биографов Н.М. Пржевальского, его ученика, друга, путешественника П.К. "
+    "Козлова, русского химика, публициста-народника А.Н. Энгельгардта, адмиралов "
+    "П.С. Нахимова, Э.Д. Балтина, выдающихся ученых: В.В. Докучаева, Б.Н. Петрова, "
+    "авиаконструктора С.А. Лавочкина.\n\n"
+    "В истории Российской Федерации незабываемы имена героев-смолян, выполняющих "
+    "интернациональный долг: А.Б. Буханов, С.А. Железнов, В.А. Максаков, А.А. "
+    "Панов.\n\n"
+    "В истории отечественной культуры оставили свой яркий след смоленские поэты: "
+    "М.В. Исаковский, А.Т. Твардовский, Н.И. Рыленков, писатели: "
+    "Б.Л. Васильев, А.Р. Беляев, композитор М.И. Глинка, скульпторы: С.Т. Коненков, "
+    "А.Г. Сергеев, художник Т.Н. Яблонская, художник и скульптор М.О. Микешин, "
+    "актеры: Ю.В. Никулин, А.Д. Папанов, Н.В. Румянцева, Л.И. Касаткина, эстрадный "
+    "певец, баритон Э.А. Хиль.\n\n"
+    "Смоленск с древних времен был крупным центром культуры. С момента принятия "
+    "христианства важную роль в культурной жизни играли монастыри и церкви, из "
+    "среды смоленских церковных деятелей вышли известные просветители Климентий "
+    "Смолятич, Авраамий Смоленский, Иаков Мних, из произведений литературы этой "
+    "эпохи выделяется «Житие Меркурия Смоленского».\n\n"
+    "В настоящее время Смоленск - это город музеев и библиотек, научных и "
+    "образовательных учреждений, театров; в городе действуют отделения творческих "
+    "Союзов России: писателей, художников, композиторов, архитекторов, журналистов, "
+    "театральных деятелей, дизайнеров, Фонда культуры.\n\n"
+    "Недалеко от Смоленска находится музей «Теремок», созданный известной "
+    "меценаткой, художницей, коллекционером М.К. Тенишевой. Собранная ею и "
+    "завещанная впоследствии Смоленску коллекция образцов русского народного "
+    "творчества не имеет аналогов в России и признана ценностью мирового значения.\n\n"
+    "Ежегодно в городе проводятся массовые мероприятия, посвященные дню рождения "
+    "великого русского композитора М.И. Глинки.\n\n"
+    "С 2007 года город Смоленск является центром проведения Всероссийского "
+    "кинофестиваля актеров-режиссеров «Золотой Феникс».\n\n"
+    "Ежегодно на территории археологического и природного музея-заповедника "
+    "«Гнездово» проводится международный фестиваль исторической реконструкции и "
+    "славянской культуры «Гнездово», с 2010 года проводится международный "
+    "фольклорно-этнографический фестиваль «Славянское братство», посвященный "
+    "празднованию Дня славянской письменности и культуры. Проведение фестивалей "
+    "«Гнездово», «Славянское братство» на территории музея-заповедника «Гнездово» "
+    "неслучайно. Гнездовские курганы – это один из крупнейших курганных комплексов "
+    "в Европе и один из важнейших археологических памятников. Именно здесь в 1949 "
+    "году археологом Д.А. Авдусиным был найден глиняный кувшин с древнейшей "
+    "известной древнерусской кириллической надписью. Гнездовская надпись является "
+    "свидетельством самой ранней записи на древнерусском языке."
+)
+_HISTORICAL_REFERENCE_EN = (
+    "Smolensk is among the oldest cities of Russia, named in chronicles by "
+    "the ninth century and emerging as a major settlement on the “from the "
+    "Varangians to the Greeks” trade route.\n\n"
+    "For centuries it guarded the western approaches to Rus and later "
+    "Russia: a walled citadel on the Dnieper, contested by Lithuanian and "
+    "Polish armies, returned to Moscow’s orbit in 1667 after a long Polish "
+    "occupation. The sixteenth-century fortress ring—exceptionally dense "
+    "with towers—still frames the old town beside churches from the "
+    "pre-Mongol era and baroque ensembles.\n\n"
+    "In August 1812 a battle near Smolensk disrupted Napoleon’s march on "
+    "Moscow; in 1941–1943 the region saw heavy fighting that slowed the "
+    "German advance toward the Soviet capital. Post-war reconstruction "
+    "restored museums, theatres, and memorial parks while new quarters "
+    "spread beyond the kremlin hills.\n\n"
+    "Today Smolensk remains a regional centre of education and culture on "
+    "the Moscow–Minsk corridor, with festivals, river landscapes, and a "
+    "layered memory of trade, faith, and frontier defence."
+)
+_GUIDE_INTRO_FOLLOW_EN = (
+    "Smolensk is an ancient, quiet city of fortress walls, river terraces, "
+    "and church domes—yet its history is loud: a key to Moscow’s western "
+    "gate, a witness to 1812 and the Second World War, a birthplace of "
+    "musicians, writers, and explorers. This guide lingers on places where "
+    "that depth is visible in stone, bronze, and everyday streets."
+)
+_HERALD_COAT_REL = "images/guide_coat_of_arms.png"
+_HERALD_FLAG_REL = "images/guide_flag.png"
+# Исторические гербы и флаги — титул (файлы из download_smolensk_images).
+_TITLE_HISTORY_COATS: tuple[tuple[str, str], ...] = (
+    (
+        "images/title_coat_governorate_1856.svg",
+        "Герб смоленской губернии, 1856",
+    ),
+    (
+        "images/title_coat_city_2000_il76m.jpg",
+        "Герб города Смоленска, 2000 (Ил-76М)",
+    ),
+    (
+        "images/title_coat_oblast.svg",
+        "Герб Смоленской области (SVG)",
+    ),
+    (
+        "images/title_coat_vinkler.gif",
+        "Герб Смоленска по Винклеру",
+    ),
+    (
+        "images/title_coat_soviet.png",
+        "Герб Смоленска (советский вариант)",
+    ),
+    (
+        "images/18415.jpg",
+        "Справочный герб (локальный файл 18415.jpg)",
+    ),
+    (
+        "images/90be6efda8f849dcdc4a47588_1639732371.png",
+        "Справочный герб (локальное изображение)",
+    ),
+    (
+        "images/img1669454700.jpg",
+        "Справочный герб (локальный файл img1669454700.jpg)",
+    ),
+)
+_TITLE_UNIVERSITIES: tuple[tuple[str, str], ...] = (
+    (
+        "images/title_univ_regional_3810.jpg",
+        "Смоленский государственный университет",
+    ),
+    (
+        "images/title_univ_regional_3827.jpg",
+        "Смоленская государственная сельскохозяйственная академия",
+    ),
+    (
+        "images/title_univ_regional_3840.jpg",
+        "Смоленский государственный институт искусств",
+    ),
+    (
+        "images/title_univ_regional_3866.jpg",
+        (
+            "Смоленский государственный медицинский университет "
+            "Министерства здравоохранения Российской Федерации"
+        ),
+    ),
+    (
+        "images/title_univ_regional_3868.jpg",
+        "Смоленский государственный университет спорта",
+    ),
+    (
+        "images/title_univ_regional_3870.jpg",
+        "Смоленская Православная Духовная Семинария",
+    ),
+    (
+        "images/title_univ_regional_3986.jpg",
+        (
+            "Смоленский филиал Национального исследовательского "
+            "университета «МЭИ»"
+        ),
+    ),
+    (
+        "images/title_univ_regional_4031.jpg",
+        (
+            "Смоленский филиал Российского экономического университета "
+            "имени Г.В. Плеханова"
+        ),
+    ),
+    (
+        "images/title_univ_regional_4092.jpg",
+        (
+            "Смоленский филиал Финансового университета при Правительстве "
+            "Российской Федерации"
+        ),
+    ),
+    (
+        "images/title_univ_regional_4337.jpg",
+        (
+            "Смоленский филиал Российской академии народного хозяйства и "
+            "государственной службы при Президенте РФ"
+        ),
+    ),
+)
+_WELCOME_CLOSING_VIEWS_RU: tuple[tuple[str, str], ...] = (
+    ("images/Smolensk_View1.jpg", "хороший человек запомнит,"),
+    ("images/Smolensk_View2.jpg", "а плохой не забудет"),
+)
+_WELCOME_CLOSING_VIEWS_EN: tuple[tuple[str, str], ...] = (
+    ("images/Smolensk_View1.jpg", "A kind person will remember,"),
+    ("images/Smolensk_View2.jpg", "and a careless one will not forget"),
+)
+_WELCOME_HEAD_RU = "Добро пожаловать в Смоленск!"
+_WELCOME_HEAD_EN = "Welcome to Smolensk!"
+_WELCOME_ARIA_RU = "Добро пожаловать в Смоленск"
+_WELCOME_ARIA_EN = "Welcome to Smolensk"
+_TOWER_ROW_NAME_RU = "Смоленск, дом с башней"
+_TOWER_ROW_NAME_EN = "Smolensk, house with a tower"
+# Финальная глава «Добро пожаловать…»: ряд из трёх локальных кадров.
+_WELCOME_CLOSING_DOM_SBASHNEY: tuple[str, ...] = (
+    "images/Smolensk_DomSBashney1.jpg",
+    "images/Smolensk_DomSBashney2.jpg",
+    "images/Smolensk_DomSBashney3.jpg",
+)
+_MODERN_SMOLENSK_TITLE_RU = "Современный Смоленск"
+_MODERN_SMOLENSK_TITLE_EN = "Contemporary Smolensk"
+# Торговые центры — только в главе «Современный Смоленск» (локальные кадры).
+# Глава «Современный Смоленск»: кадры без подписей (смысл только в alt).
+_MODERN_SHOPPING_MALLS: tuple[tuple[str, str], ...] = (
+    ("images/Smolensk_Centr.jpg", "«Макси»"),
+    ("images/Smolensk_Centr2.jpg", "«Галактика»"),
+    ("images/Smolensk_downtown.jpg", "«Центрум»"),
+    ("images/Smolensk_BigSovetskaya_street.jpg", "«Юнона»"),
+    ("images/Smolensk_BigSovetskaya2_street.jpg", "«Неман»"),
+    ("images/Smolensk_Glinki_street_11.jpg", "«Этажи»"),
+    ("images/Smolensk_Halery.jpg", "«Рим»"),
+    ("images/Smolensk_Night.jpg", "«Атмосфера»"),
+)
+_MODERN_HOTELS: tuple[tuple[str, str], ...] = (
+    ("images/Smolensk_Hotel_Rossiya.jpg", "«Россия»"),
+    ("images/Smolensk_Hotel_Grand.jpg", "«Гранд-отель»"),
+    ("images/Smolensk_Hotel_Konenkov.jpg", "«Смоленск», ул. Конёнкова"),
+    ("images/Smolensk_Hotel_Evropeyskaya.jpg", "«Европейская» (открытка)"),
+    (
+        "images/Smolensk_Hotel_Verzilov.jpg",
+        "«Смоленск-отель» (открытка, Дом взаимного кредита)",
+    ),
+)
+# Доп. ТЦ / торговля (локальные smolensk_*.jpg), в парных рядах как выше.
+_MODERN_SMOLENSK_EXTRA_MALLS: tuple[tuple[str, str], ...] = (
+    ("images/smolensk_euphoria.jpg", "«Эйфория»"),
+    ("images/smolensk_zum.jpg", "«Züm»"),
+    ("images/smolensk_galactica.jpg", "«Галактика»"),
+    ("images/smolensk_centrum.jpg", "«Центрум»"),
+)
+# Последние N файлов smolensk_* (после исключений) в конце главы.
+_MODERN_SMOLENSK_GALLERY_TAIL_N = 7
+# Не включать в галерею «Современный Смоленск» (stems без расширения).
+_MODERN_SMOLENSK_GALLERY_SKIP_STEMS: frozenset[str] = frozenset(
+    {"smolensk_youth_creativity_palace_smolensk"},
+)
+
+_OTIUM_PARAS: tuple[str, ...] = (
+    "OTIUM — это практика осмысленного досуга. В античной традиции otium "
+    "означало не отдых от труда, а время, в котором человек возвращается к "
+    "взгляду, памяти и мышлению. Это время без утилитарной цели, без "
+    "спешки, без требования результата.",
+    "Мы создаём маршруты не для «посещения», а для пребывания. Не для "
+    "потребления культуры, а для внимательного присутствия в ней.",
+    "OTIUM работает с пространствами, где время уплотняется: архитектурой, "
+    "сакральными местами, кино, памятью, ландшафтом. Мы не стремимся "
+    "охватить всё и не обещаем «лучшее». Мы отбираем немногое — то, что "
+    "выдерживает тишину и повторный взгляд.",
+    "OTIUM — это не гид и не сервис. Это приглашение к прогулке без "
+    "обязательств. К маршруту, который можно прервать. К месту, где можно "
+    "задержаться.",
+    "OTIUM существует для тех, кто хочет смотреть медленно.",
+)
+
+
+def _places_with_local_images(root: Path) -> list[SmolenskPlace]:
+    return cast(
+        list[SmolenskPlace],
+        places_for_pdf(
+            root,
+            cast(list[dict[str, Any]], SMOLENSK_PLACES),
+            city_slug="smolensk",
+            sort_key=lambda x: (x.get("name_ru", ""), x.get("slug", "")),
+        ),
+    )
+
+
+def _nonempty(s: str | None) -> bool:
+    return bool(s and str(s).strip())
+
+
+def _place_meta_line(p: SmolenskPlace, edition: str) -> str | None:
+    return place_meta_line(p, edition, guide_ui_strings(edition))
+
+
+def _html_paragraphs(text: str) -> str:
+    chunks = [t.strip() for t in text.split("\n\n") if t.strip()]
+    return "\n".join(
+        "<p class=\"prose\">{}</p>".format(escape(c)) for c in chunks
+    )
+
+
+def _rel_to_src(rel: str) -> str:
+    return "../{}".format(rel.lstrip("/").replace("\\", "/"))
+
+
+def _abs_path_for_rel(root: Path, rel: str) -> Path | None:
+    resolved = smallest_same_stem_image_rel(root, rel)
+    if not resolved:
+        return None
+    path = root / _norm_rel(resolved)
+    return path if path.is_file() else None
+
+
+def _norm_rel(rel: str) -> str:
+    return rel.strip().replace("\\", "/").lstrip("/")
+
+
+def _collect_guide_image_keys(root: Path) -> tuple[frozenset[str], frozenset[str]]:
+    """Пути и стемы картинок гида (всё, кроме главы «Современный Смоленск»)."""
+    paths: set[str] = set()
+    stems: set[str] = set()
+
+    def add(rel: str) -> None:
+        if not rel or not rel.strip():
+            return
+        norm = _norm_rel(rel)
+        if not norm:
+            return
+        stems.add(Path(norm).stem.lower())
+        picked = smallest_same_stem_image_rel(root, norm)
+        if picked:
+            pp = picked.replace("\\", "/").lstrip("/")
+            paths.add(pp.lower())
+            stems.add(Path(pp).stem.lower())
+        else:
+            paths.add(norm.lower())
+
+    for place in SMOLENSK_PLACES:
+        ir = place.get("image_rel_path")
+        if ir:
+            add(str(ir))
+        for extra in place.get("additional_images") or []:
+            er = extra.get("image_rel_path")
+            if er:
+                add(str(er))
+    for rel, _alt in _TITLE_HISTORY_COATS:
+        add(rel)
+    add(_HERALD_COAT_REL)
+    add(_HERALD_FLAG_REL)
+    for rel, _cap in _TITLE_UNIVERSITIES:
+        add(rel)
+    for rel, _cap in _WELCOME_CLOSING_VIEWS_RU:
+        add(rel)
+    for rel in _WELCOME_CLOSING_DOM_SBASHNEY:
+        add(rel)
+    return frozenset(paths), frozenset(stems)
+
+
+def _rel_list_resolved_for_place(root: Path, p: SmolenskPlace) -> list[str]:
+    """Порядок как в JSON: основная, затем additional_images (пути под root)."""
+    if p.get("suppress_images_for_pdf"):
+        return []
+    out: list[str] = []
+    rel = p.get("image_rel_path")
+    if rel:
+        chosen = smallest_same_stem_image_rel(root, rel)
+        if chosen:
+            out.append(chosen)
+    for item in p.get("additional_images") or []:
+        er = item.get("image_rel_path")
+        if not er:
+            continue
+        chosen_extra = smallest_same_stem_image_rel(root, er)
+        if chosen_extra:
+            out.append(chosen_extra)
+    return out
+
+
+def _image_srcs_for_place(root: Path, p: SmolenskPlace) -> list[str]:
+    """Локальные картинки объекта: основная, затем additional_images."""
+    return [_rel_to_src(r) for r in _rel_list_resolved_for_place(root, p)]
+
+
+def _lopatinsky_split_final_three(
+    rels: list[str],
+) -> tuple[list[str], list[str]] | None:
+    """Убирает 11/16/17 из общего списка; финальный ряд — в фиксированном порядке."""
+    want = frozenset(_LOPATINSKY_FINAL_ROW_STEMS)
+    by_stem: dict[str, str] = {}
+    for r in rels:
+        stem = Path(r).stem.lower()
+        if stem in want:
+            by_stem[stem] = r
+    if len(by_stem) != 3:
+        return None
+    main = [r for r in rels if Path(r).stem.lower() not in want]
+    final = [by_stem[s] for s in _LOPATINSKY_FINAL_ROW_STEMS]
+    return main, final
+
+
+def _place_figures_html(
+    root: Path,
+    p: SmolenskPlace,
+    name_plain: str,
+    rels: list[str],
+    edition: str,
+) -> str:
+    """Сетка фото; для Лопатинского — отдельный последний ряд из 11, 16, 17."""
+    paths = [root / r for r in rels]
+    slug = p.get("slug", "")
+    if slug == "lopatinsky_garden":
+        split = _lopatinsky_split_final_three(rels)
+        if split is not None:
+            main_rels, final_rels = split
+            main_srcs = [_rel_to_src(r) for r in main_rels]
+            main_paths = [root / r for r in main_rels]
+            part1 = place_figures_layout_html(
+                main_srcs,
+                name_plain,
+                edition,
+                image_paths=main_paths,
+            )
+            n_main = len(main_srcs)
+            indexed_final = [
+                (n_main + i, _rel_to_src(r))
+                for i, r in enumerate(final_rels, start=1)
+            ]
+            final_paths = [root / r for r in final_rels]
+            final_row = place_figure_row_html(
+                indexed_final,
+                name_plain,
+                row_kind="triple",
+                edition=edition,
+                row_paths=final_paths,
+            )
+            if not part1:
+                return (
+                    '<div class="place-pdf-fig-rows-stack '
+                    'place-pdf-fig-rows-stack--lopatinsky-final">\n'
+                    "{}\n</div>"
+                ).format(final_row)
+            return (
+                "{}\n"
+                '<div class="place-pdf-fig-rows-stack '
+                'place-pdf-fig-rows-stack--lopatinsky-final">\n'
+                "{}\n</div>"
+            ).format(part1, final_row)
+    srcs = [_rel_to_src(r) for r in rels]
+    return place_figures_layout_html(
+        srcs,
+        name_plain,
+        edition,
+        image_paths=paths,
+    )
+
+
+def _place_block(
+    root: Path,
+    p: SmolenskPlace,
+    edition: str,
+    deduper: GuideNarrativeDeduper,
+) -> str:
+    s = guide_ui_strings(edition)
+    name_plain = place_heading_plain(p, edition)
+    title_html = escape(name_plain)
+    sub_html = subtitle_html_for_edition(p, edition)
+    meta = _place_meta_line(p, edition)
+    meta_html = (
+        '<p class="place-meta">{}</p>'.format(escape(meta))
+        if meta
+        else ""
+    )
+    slug = p.get("slug", "x")
+    place_cls = "place"
+    if slug in _COMPACT_FIGURE_SLUGS:
+        place_cls = "place place-pdf-compact-fig"
+    if slug in _TIGHT_TITLE_TO_FIG_SLUGS:
+        place_cls = "{} place-tight-title-fig".format(place_cls)
+    chunks: list[str] = [
+        '<section class="{}" id="{}">'.format(place_cls, escape(slug)),
+        '<div class="place-lead">',
+        "<h3>{}</h3>".format(title_html),
+        guide_toc_back_link_html(edition),
+        sub_html,
+        meta_html,
+    ]
+    rels = _rel_list_resolved_for_place(root, p)
+    if rels:
+        chunks.append(
+            _place_figures_html(root, p, name_plain, rels, edition)
+        )
+    chunks.append("</div>")
+    narrative = merge_narrative_html(p, edition, deduper)
+    if narrative:
+        chunks.append(narrative)
+    stories = filter_stories(p, edition)
+    if stories:
+        st_li = "\n".join(
+            "<li>{}</li>".format(escape(str(st).strip()))
+            for st in stories
+            if str(st).strip()
+        )
+        if st_li:
+            chunks.append(
+                "<h4>{}</h4>\n"
+                "<ul class=\"stories\">{}</ul>".format(
+                    escape(s["stories_heading"]),
+                    st_li,
+                )
+            )
+    more_info = p.get("more_information") or []
+    if isinstance(more_info, list):
+        links: list[str] = []
+        for item in more_info:
+            if not isinstance(item, dict):
+                continue
+            url = str(item.get("url", "")).strip()
+            label = str(item.get("label", "")).strip()
+            if not url:
+                continue
+            if not label:
+                label = url
+            links.append(
+                '<li><a href="{}">{}</a></li>'.format(
+                    escape(url, quote=True),
+                    escape(label),
+                )
+            )
+        if links:
+            chunks.append("<h4>More information</h4>")
+            chunks.append(
+                '<ul class="more-information">{}</ul>'.format(
+                    "\n".join(links),
+                )
+            )
+    chunks.append("</section>")
+    return "\n".join(chunks)
+
+
+def _fig_if_exists(root: Path, rel: str, alt: str, extra_class: str) -> str:
+    resolved = smallest_same_stem_image_rel(root, rel)
+    if not resolved:
+        return ""
+    src = _rel_to_src(resolved)
+    return (
+        '<figure class="heraldry-fig {}" title="{}">'
+        '<img src="{}" alt="{}"/>'
+        "</figure>".format(
+            extra_class,
+            escape(alt),
+            escape(src),
+            escape(alt),
+        )
+    )
+
+
+def _univ_caption_text(alt: object) -> str:
+    """Текст подписи вуза (как в _TITLE_UNIVERSITIES)."""
+    if isinstance(alt, tuple):
+        return "".join(alt)
+    return str(alt)
+
+
+def _university_figure_html(root: Path, rel: str, alt: object) -> str:
+    """Логотип вуза с официальным названием под изображением."""
+    resolved = smallest_same_stem_image_rel(root, rel)
+    if not resolved:
+        return ""
+    caption = _univ_caption_text(alt)
+    src = _rel_to_src(resolved)
+    return (
+        '<figure class="heraldry-fig heraldry-univ heraldry-univ-captioned" '
+        'title="{}">'
+        '<img src="{}" alt="{}"/>'
+        '<figcaption class="univ-name-caption">{}</figcaption>'
+        "</figure>".format(
+            escape(caption),
+            escape(src),
+            escape(caption),
+            escape(caption),
+        )
+    )
+
+
+def _modern_plain_figure(
+    root: Path,
+    rel: str,
+    alt: str,
+    *,
+    img_extra: str = "",
+) -> str:
+    """Кадр без подписи под ним (глава «Современный Смоленск»)."""
+    resolved = smallest_same_stem_image_rel(root, rel)
+    if not resolved:
+        return ""
+    src = _rel_to_src(resolved)
+    abs_path = _abs_path_for_rel(root, rel)
+    res_cls = figure_res_class_suffix(abs_path)
+    attrs = figure_img_dimension_attrs(abs_path)
+    return (
+        '<figure class="place-fig modern-smolensk-fig{}">'
+        '<img src="{}" alt="{}"{}{} loading="eager" decoding="async"/>'
+        "</figure>".format(
+            res_cls,
+            escape(src),
+            escape(alt),
+            attrs,
+            img_extra,
+        )
+    )
+
+
+def _universities_section_html(root: Path, edition: str) -> str:
+    """Блок «Региональные вузы» в конце путеводителя."""
+    figs: list[str] = []
+    for rel, alt in _TITLE_UNIVERSITIES:
+        fig = _university_figure_html(root, rel, alt)
+        if fig:
+            figs.append(fig)
+    if not figs:
+        return ""
+    inner = "\n".join(figs)
+    if edition == "ru":
+        aria = "Региональные вузы"
+        lbl = "Региональные вузы"
+    else:
+        aria = "Regional universities"
+        lbl = "Regional universities"
+    return (
+        '<section class="guide-universities" id="guide-universities" '
+        'aria-label="{}">'
+        '<p class="title-strip-label title-strip-label-univ">'
+        "{}</p>"
+        '<div class="heraldry-strip heraldry-universities">'
+        "{}"
+        "</div>"
+        "</section>"
+    ).format(escape(aria), escape(lbl), inner)
+
+
+def _modern_smolensk_gallery_paths(root: Path) -> list[Path]:
+    """Кадры smolensk_*.jpg/.jpeg в images/, кроме видов; префикс без учёта регистра."""
+    images_dir = root / "images"
+    if not images_dir.is_dir():
+        return []
+    out: list[Path] = []
+    for path in sorted(images_dir.iterdir(), key=lambda p: p.name.lower()):
+        if not path.is_file():
+            continue
+        if path.suffix.lower() not in (".jpg", ".jpeg"):
+            continue
+        name_lower = path.name.lower()
+        if not name_lower.startswith("smolensk_"):
+            continue
+        if name_lower.startswith("smolensk_view"):
+            continue
+        try:
+            if path.stat().st_size < MIN_IMAGE_BYTES:
+                continue
+        except OSError:
+            continue
+        out.append(path)
+    return out
+
+
+def _modern_smolensk_eligible_gallery_paths(
+    root: Path,
+    root_res: Path,
+    *,
+    curated_skip: set[str],
+    used_paths: frozenset[str],
+    used_stems: frozenset[str],
+) -> list[Path]:
+    """smolensk_* в порядке сортировки имён, без дублей с карточками и ТЦ."""
+    out: list[Path] = []
+    for abs_path in _modern_smolensk_gallery_paths(root):
+        try:
+            rel_posix = abs_path.relative_to(root_res).as_posix()
+        except ValueError:
+            continue
+        resolved = smallest_same_stem_image_rel(root, rel_posix)
+        if not resolved:
+            continue
+        res_norm = _norm_rel(resolved)
+        res_lower = res_norm.lower()
+        stem_lower = Path(res_norm).stem.lower()
+        if (
+            res_lower in used_paths
+            or stem_lower in used_stems
+            or res_lower in curated_skip
+            or stem_lower in _MODERN_SMOLENSK_GALLERY_SKIP_STEMS
+        ):
+            continue
+        out.append(abs_path)
+    return out
+
+
+def _modern_smolensk_figure_html_for_path(
+    root: Path,
+    root_res: Path,
+    abs_path: Path,
+    *,
+    img_extra: str = "",
+) -> str | None:
+    """Один кадр для произвольного файла под smolensk/images/."""
+    try:
+        rel_posix = abs_path.relative_to(root_res).as_posix()
+    except ValueError:
+        return None
+    resolved = smallest_same_stem_image_rel(root, rel_posix)
+    if not resolved:
+        return None
+    src = _rel_to_src(resolved)
+    cap_esc = escape(abs_path.stem.replace("_", " "))
+    abs_file = abs_path if abs_path.is_file() else None
+    res_cls = figure_res_class_suffix(abs_file)
+    attrs = figure_img_dimension_attrs(abs_file)
+    return (
+        '<figure class="place-fig modern-smolensk-fig{}">'
+        '<img src="{}" alt="{}"{}{} loading="eager" decoding="async"/>'
+        "</figure>".format(
+            res_cls,
+            escape(src),
+            cap_esc,
+            attrs,
+            img_extra,
+        )
+    )
+
+
+def _modern_smolensk_trim_to_even(
+    fig_items: list[tuple[str, Path | None]],
+) -> list[tuple[str, Path | None]]:
+    """Drop trailing figure so pair rows never end with a lone image."""
+    if len(fig_items) % 2 == 1:
+        return fig_items[:-1]
+    return fig_items
+
+
+def _modern_smolensk_pair_rows_html(
+    fig_items: list[tuple[str, Path | None]],
+) -> str:
+    """По два кадра в ряд; входной список должен быть чётной длины."""
+    fig_items = _modern_smolensk_trim_to_even(fig_items)
+    rows: list[str] = []
+    i = 0
+    n = len(fig_items)
+    while i < n:
+        first_html, first_path = fig_items[i]
+        if i + 1 >= n:
+            break
+        second_html, second_path = fig_items[i + 1]
+        styles = row_equal_img_styles([first_path, second_path], row_kind="pair")
+        first_html = inject_figure_img_extra(first_html, styles[0])
+        second_html = inject_figure_img_extra(second_html, styles[1])
+        rows.append(
+            '<div class="modern-smolensk-pair-row">'
+            "{}\n{}"
+            "</div>".format(first_html, second_html)
+        )
+        i += 2
+    return "\n".join(rows)
+
+
+def _modern_smolensk_section_html(root: Path, edition: str) -> str:
+    """Глава перед «Добро пожаловать…»: ТЦ + гостиницы + smolensk_*.jpg."""
+    root_res = root.resolve()
+    used_paths, used_stems = _collect_guide_image_keys(root)
+    curated_skip: set[str] = set()
+    modern_figs: list[tuple[str, Path | None]] = []
+    for rel, cap in _MODERN_SHOPPING_MALLS:
+        picked = smallest_same_stem_image_rel(root, rel)
+        if picked:
+            curated_skip.add(_norm_rel(picked).lower())
+        fig = _modern_plain_figure(root, rel, cap)
+        if fig:
+            modern_figs.append((fig, _abs_path_for_rel(root, rel)))
+    for rel, cap in _MODERN_HOTELS:
+        picked = smallest_same_stem_image_rel(root, rel)
+        if picked:
+            curated_skip.add(_norm_rel(picked).lower())
+        fig = _modern_plain_figure(root, rel, cap)
+        if fig:
+            modern_figs.append((fig, _abs_path_for_rel(root, rel)))
+    for rel, cap in _MODERN_SMOLENSK_EXTRA_MALLS:
+        picked = smallest_same_stem_image_rel(root, rel)
+        if picked:
+            curated_skip.add(_norm_rel(picked).lower())
+        fig = _modern_plain_figure(root, rel, cap)
+        if fig:
+            modern_figs.append((fig, _abs_path_for_rel(root, rel)))
+    eligible = _modern_smolensk_eligible_gallery_paths(
+        root,
+        root_res,
+        curated_skip=curated_skip,
+        used_paths=used_paths,
+        used_stems=used_stems,
+    )
+    tail_paths = eligible[-_MODERN_SMOLENSK_GALLERY_TAIL_N:]
+    gallery_figs: list[tuple[str, Path | None]] = []
+    for abs_path in tail_paths:
+        gh = _modern_smolensk_figure_html_for_path(root, root_res, abs_path)
+        if gh:
+            abs_file = abs_path if abs_path.is_file() else None
+            gallery_figs.append((gh, abs_file))
+
+    all_figs = _modern_smolensk_trim_to_even(modern_figs + gallery_figs)
+    if not all_figs:
+        return ""
+    rows_html = _modern_smolensk_pair_rows_html(all_figs)
+    inner_body = (
+        '<div class="heraldry-strip heraldry-modern-malls '
+        'heraldry-modern-gallery">'
+        "{}\n</div>\n"
+    ).format(rows_html)
+    title = (
+        _MODERN_SMOLENSK_TITLE_RU
+        if edition == "ru"
+        else _MODERN_SMOLENSK_TITLE_EN
+    )
+    t_esc = escape(title)
+    return (
+        '<section class="guide-modern-smolensk" '
+        'id="guide-modern-smolensk" '
+        'aria-label="{}">'
+        '<h2 class="welcome-closing-head">'
+        "{}</h2>\n"
+        "{}"
+        "</section>"
+    ).format(t_esc, t_esc, inner_body)
+
+
+def _welcome_closing_section_html(root: Path, edition: str) -> str:
+    """Финальный блок с видами Смоленска (локальные снимки в smolensk/images/)."""
+    views = (
+        _WELCOME_CLOSING_VIEWS_RU
+        if edition == "ru"
+        else _WELCOME_CLOSING_VIEWS_EN
+    )
+    figs: list[str] = []
+    for rel, caption in views:
+        resolved = smallest_same_stem_image_rel(root, rel)
+        if not resolved:
+            continue
+        src = _rel_to_src(resolved)
+        abs_path = _abs_path_for_rel(root, rel)
+        res_cls = figure_res_class_suffix(abs_path)
+        attrs = figure_img_dimension_attrs(abs_path)
+        cap_esc = escape(caption)
+        figs.append(
+            '<figure class="place-fig welcome-closing-fig{}">'
+            '<img src="{}" alt="{}"{} loading="eager" decoding="async"/>'
+            '<figcaption class="welcome-closing-cap">{}</figcaption>'
+            "</figure>".format(
+                res_cls,
+                escape(src),
+                cap_esc,
+                attrs,
+                cap_esc,
+            )
+        )
+    tower_indexed: list[tuple[int, str]] = []
+    tower_paths: list[Path | None] = []
+    tseq = 1
+    for rel in _WELCOME_CLOSING_DOM_SBASHNEY:
+        resolved = smallest_same_stem_image_rel(root, rel)
+        if resolved:
+            tower_indexed.append((tseq, _rel_to_src(resolved)))
+            tower_paths.append(_abs_path_for_rel(root, rel))
+            tseq += 1
+    tower_html = ""
+    if tower_indexed:
+        tower_name = (
+            _TOWER_ROW_NAME_RU if edition == "ru" else _TOWER_ROW_NAME_EN
+        )
+        tower_html = "\n{}".format(
+            place_figure_rows_max_three_html(
+                tower_indexed,
+                tower_name,
+                edition,
+                image_paths=tower_paths,
+            )
+        )
+    if not figs and not tower_html:
+        return ""
+    inner = "\n".join(figs) + tower_html
+    aria = _WELCOME_ARIA_RU if edition == "ru" else _WELCOME_ARIA_EN
+    head = _WELCOME_HEAD_RU if edition == "ru" else _WELCOME_HEAD_EN
+    return (
+        '<section class="guide-welcome-closing" '
+        'id="guide-welcome-closing" '
+        'aria-label="{}">'
+        '<h2 class="welcome-closing-head">'
+        "{}</h2>\n"
+        "{}"
+        "</section>"
+    ).format(escape(aria), escape(head), inner)
+
+
+def _heraldry_html(root: Path, edition: str) -> str:
+    """Титул: исторические гербы, девиз, герб/флаг области."""
+    if edition == "ru":
+        aria = "Исторические гербы и символика области"
+        strip_lbl = HERALDRY_CHAPTER_LABEL_RU
+        motto1 = "Руси сторожевый градъ"
+        motto2 = "Смоленщина — край солнечный"
+        oblast_lbl = "Область (книжный герб и флаг)"
+        coat_alt = "Герб Смоленской области"
+        flag_alt = "Флаг Смоленской области"
+    else:
+        aria = "Historical coats of arms and oblast symbols"
+        strip_lbl = HERALDRY_CHAPTER_LABEL_EN
+        motto1 = "Smolensk, sentinel city of Rus"
+        motto2 = "Smolensk land — sunny country"
+        oblast_lbl = "Oblast (book coat of arms and flag)"
+        coat_alt = "Coat of arms of Smolensk Oblast"
+        flag_alt = "Flag of Smolensk Oblast"
+    chunks: list[str] = [
+        '<div class="smolensk-title-symbols" '
+        'aria-label="{}">'.format(escape(aria)),
+        '<p class="title-strip-label">{}</p>'.format(escape(strip_lbl)),
+        '<div class="heraldry-strip heraldry-history">',
+    ]
+    for rel, alt in _TITLE_HISTORY_COATS:
+        fig = _fig_if_exists(root, rel, alt, "heraldry-coat-hist")
+        if fig:
+            chunks.append(fig)
+    chunks.append("</div>")
+    chunks.append(
+        '<div class="heraldry-motto">'
+        '<p class="motto-oldslav">{}</p>'
+        '<p class="motto-region">{}</p>'
+        "</div>".format(escape(motto1), escape(motto2))
+    )
+    chunks.append(
+        '<p class="title-strip-label">{}</p>'.format(escape(oblast_lbl)),
+    )
+    chunks.append('<div class="heraldry-strip heraldry-official">')
+    coat_fig = _fig_if_exists(
+        root,
+        _HERALD_COAT_REL,
+        coat_alt,
+        "heraldry-coat-book",
+    )
+    if coat_fig:
+        chunks.append(coat_fig)
+    flag_fig = _fig_if_exists(
+        root,
+        _HERALD_FLAG_REL,
+        flag_alt,
+        "heraldry-flag-book",
+    )
+    if flag_fig:
+        chunks.append(flag_fig)
+    chunks.append("</div></div>")
+    return "\n".join(chunks)
+
+
+def _historical_reference_html(edition: str) -> str:
+    """Текстовая глава между титулом и списком мест."""
+    if edition == "ru":
+        body = reference_text_ru_for_any_city("smolensk", _PROJECT_ROOT)
+        title = HISTORICAL_SECTION_TITLE_RU
+    else:
+        body = _HISTORICAL_REFERENCE_EN
+        title = HISTORICAL_SECTION_TITLE_EN
+    return historical_reference_section_html(
+        body,
+        section_title=title,
+        edition=edition,
+    )
+
+
+def _cover_otium_html(edition: str) -> str:
+    src = _OTIUM_PARAS if edition == "ru" else _OTIUM_PARAS_EN
+    paras = "\n".join(
+        '<p class="otiump">{}</p>'.format(escape(t)) for t in src
+    )
+    return (
+        '<section class="cover-otium">'
+        '<h1 class="otium-logo">OTIUM</h1>'
+        "{}"
+        "</section>"
+    ).format(paras)
+
+
+def _smolensk_toc_entries(
+    root: Path,
+    places: list[SmolenskPlace],
+    edition: str,
+) -> list[GuideTocEntry]:
+    """TOC rows mirroring Smolensk guide section order."""
+    entries: list[GuideTocEntry] = []
+    if _historical_reference_html(edition).strip():
+        title = (
+            HISTORICAL_SECTION_TITLE_RU
+            if edition == "ru"
+            else HISTORICAL_SECTION_TITLE_EN
+        )
+        entries.append(GuideTocEntry("guide-historical", title))
+    for place in places:
+        if not _image_srcs_for_place(root, place):
+            continue
+        slug = str(place.get("slug") or "").strip()
+        if not slug:
+            continue
+        entries.append(
+            GuideTocEntry(slug, place_heading_plain(place, edition)),
+        )
+    if _universities_section_html(root, edition):
+        label = (
+            "Региональные вузы"
+            if edition == "ru"
+            else "Regional universities"
+        )
+        entries.append(GuideTocEntry("guide-universities", label))
+    if _modern_smolensk_section_html(root, edition):
+        title = (
+            _MODERN_SMOLENSK_TITLE_RU
+            if edition == "ru"
+            else _MODERN_SMOLENSK_TITLE_EN
+        )
+        entries.append(GuideTocEntry("guide-modern-smolensk", title))
+    if _welcome_closing_section_html(root, edition):
+        head = _WELCOME_HEAD_RU if edition == "ru" else _WELCOME_HEAD_EN
+        entries.append(GuideTocEntry("guide-welcome-closing", head))
+    return entries
+
+
+def _build_html(
+    root: Path,
+    places: list[SmolenskPlace],
+    edition: str,
+    deduper: GuideNarrativeDeduper | None = None,
+) -> str:
+    narrative_deduper = deduper or GuideNarrativeDeduper()
+    font_href = SMOLENSK_GOOGLE_FONTS_HREF
+    s = guide_ui_strings(edition)
+    blocks: list[str] = [_cover_otium_html(edition)]
+    if edition == "ru":
+        city_h1 = "Смоленск"
+        intro = _GUIDE_INTRO_FOLLOW_RU
+        doc_lang = "ru"
+    else:
+        city_h1 = "Smolensk"
+        intro = _GUIDE_INTRO_FOLLOW_EN
+        doc_lang = "en"
+    blocks.append(
+        '<header class="guide-title">'
+        "<h1 class=\"guide-title-main\">{}</h1>"
+        "<p class=\"lead\">{}</p>"
+        "<p class=\"lead-follow\">{}</p>"
+        "{}"
+        "</header>".format(
+            escape(city_h1),
+            escape(s["lead"].format(len(places))),
+            escape(intro),
+            _heraldry_html(root, edition),
+        ),
+    )
+    blocks.append(_historical_reference_html(edition))
+    toc_html = guide_toc_html(_smolensk_toc_entries(root, places, edition), edition)
+    if toc_html:
+        blocks.append(toc_html)
+    for p in places:
+        srcs = _image_srcs_for_place(root, p)
+        if not srcs:
+            continue
+        blocks.append(_place_block(root, p, edition, narrative_deduper))
+    univ = _universities_section_html(root, edition)
+    if univ:
+        blocks.append(univ)
+    modern = _modern_smolensk_section_html(root, edition)
+    if modern:
+        blocks.append(modern)
+    closing = _welcome_closing_section_html(root, edition)
+    if closing:
+        blocks.append(closing)
+    body_inner = "\n".join(blocks)
+    css = """
+body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
+  color: #1a1a1a; font-size: 11pt; }
+.cover-otium, .guide-title, .guide-modern-smolensk, .guide-welcome-closing {
+  margin-left: -2rem; margin-right: -2rem; padding-left: 2rem;
+  padding-right: 2rem; box-sizing: border-box; }
+.cover-otium { page-break-after: always; min-height: auto;
+  padding-top: 1.15rem; padding-bottom: 1.35rem; }
+.otium-logo { font-family: 'Triodion', 'Ponomar', 'Cormorant Garamond', serif;
+  font-size: 2.15rem; font-weight: 400; letter-spacing: 0.14em;
+  margin-bottom: 0.85rem; }
+.otiump { margin: 0.42rem 0; line-height: 1.42; text-align: justify;
+  font-size: 0.95rem; }
+.guide-title { page-break-after: auto; margin-bottom: 0.55rem;
+  page-break-inside: avoid; }
+.guide-title > .guide-title-main { margin-top: 0; }
+.smolensk-title-symbols { margin-bottom: 0.28rem; }
+.guide-universities {
+  margin-top: 2.25rem; padding-top: 0.35rem; padding-bottom: 0.55rem;
+  page-break-inside: avoid; break-inside: avoid; }
+.guide-modern-smolensk {
+  margin-top: 2.05rem; padding-top: 0.35rem; padding-bottom: 2.85rem;
+  page-break-inside: auto; break-inside: auto; }
+.guide-modern-smolensk .heraldry-strip.heraldry-modern-malls {
+  margin-bottom: 1.45rem; }
+.guide-welcome-closing {
+  margin-top: 2.35rem; padding-top: 0.55rem; padding-bottom: 0.55rem;
+  page-break-inside: avoid; break-inside: avoid; }
+.welcome-closing-head {
+  font-family: 'Triodion', 'Ponomar', 'Cormorant Garamond', serif;
+  font-size: 1.32rem; text-align: center; margin: 0.45rem 0 0.65rem;
+  font-weight: 400; line-height: 1.2; }
+.guide-universities .title-strip-label-univ {
+  font-size: 1.42rem; letter-spacing: 0.04em; margin: 0.35rem 0 0.75rem;
+  color: #2a2a2a; }
+.guide-modern-smolensk .welcome-closing-head {
+  font-size: 1.58rem; margin: 0.55rem 0 0.85rem; }
+.welcome-closing-fig { margin: 0.55rem auto 0.95rem; width: 100%; }
+.welcome-closing-fig img {
+  max-height: 56vh; width: auto; max-width: 100%; object-fit: contain;
+  margin: 0 auto; display: block; }
+.welcome-closing-fig.place-fig--hi-res img {
+  max-height: 68vh; width: 100%; max-width: 100%; }
+.welcome-closing-fig.place-fig--lo-res img { max-height: 38vh; }
+.guide-welcome-closing .place-pdf-fig-row--triple .place-fig img {
+  max-height: 44vh; }
+.guide-welcome-closing .place-pdf-fig-row--triple .place-fig--hi-res img {
+  max-height: 54vh; }
+.guide-welcome-closing .place-pdf-fig-row--triple .place-fig--lo-res img {
+  max-height: 30vh; }
+.welcome-closing-cap {
+  font-family: 'Source Sans 3', sans-serif; font-size: 1.08rem;
+  text-align: center; margin: 0.42rem 0 0; color: #333;
+  font-style: italic; line-height: 1.4; }
+.guide-welcome-closing .welcome-closing-cap {
+  font-size: 1.12rem; }
+.title-strip-label {
+  font-family: 'Triodion', 'Ponomar', 'Cormorant Garamond', serif;
+  font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em;
+  color: #555; margin: 0.5rem 0 0.25rem; text-align: center; width: 100%; }
+.title-strip-label-univ { margin-top: 0.12rem; margin-bottom: 0.04rem;
+  font-size: 0.58rem; }
+.title-strip-label-modern-malls { margin-top: 0.65rem; margin-bottom: 0.06rem;
+  font-size: 0.58rem; }
+.heraldry-strip { display: flex; flex-wrap: wrap; align-items: center;
+  justify-content: center; gap: 0.45rem 0.65rem; margin: 0.2rem 0 0.45rem; }
+.heraldry-strip.heraldry-universities {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-auto-rows: auto; gap: 0.38rem 0.5rem; margin: 0.15rem 0 0.35rem;
+  align-items: start; justify-items: center; }
+.heraldry-strip.heraldry-modern-malls {
+  display: flex; flex-direction: column; align-items: stretch;
+  margin: 0.12rem 0 0.55rem; }
+.modern-smolensk-pair-row {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.38rem 0.5rem; margin-bottom: 0.38rem;
+  align-items: start; justify-items: center;
+  break-inside: avoid; page-break-inside: avoid; }
+.modern-smolensk-pair-row:last-child { margin-bottom: 0; }
+.modern-smolensk-pair-row .modern-smolensk-fig {
+  margin: 0; width: 100%; max-width: 100%; }
+.modern-smolensk-pair-row .modern-smolensk-fig img {
+  margin-left: auto; margin-right: auto; width: 100%; max-width: 100%; }
+.modern-smolensk-pair-row--orphan .modern-smolensk-fig {
+  grid-column: 1 / -1;
+  justify-self: center;
+  max-width: calc(50% - 0.19rem); }
+.heraldry-strip.heraldry-modern-gallery {
+  margin-top: 0.35rem; margin-bottom: 0.65rem; }
+.heraldry-fig { margin: 0; }
+.heraldry-fig img { width: auto; display: block; margin: 0 auto;
+  border-radius: 2px; }
+.heraldry-coat-hist img { max-height: 6.4rem; max-width: 7rem;
+  object-fit: contain; }
+.heraldry-coat-book img, .heraldry-flag-book img { max-height: 4.75rem;
+  object-fit: contain; }
+.heraldry-flag-book img { max-height: 3.35rem; }
+.heraldry-fig.heraldry-univ img {
+  max-height: 26rem; max-width: 100%; width: auto; object-fit: contain; }
+.guide-universities .heraldry-fig.heraldry-univ img {
+  max-height: 30rem; }
+figure.heraldry-fig.heraldry-univ.heraldry-univ-captioned {
+  display: flex; flex-direction: column; align-items: center;
+  width: 100%; max-width: 100%; margin: 0; page-break-inside: avoid;
+  break-inside: avoid; }
+figure.heraldry-fig.heraldry-univ .univ-name-caption {
+  font-family: 'Source Sans 3', sans-serif; font-size: 0.92rem;
+  line-height: 1.28; text-align: center; margin: 0.22rem 0 0;
+  padding: 0 0.12rem; width: 100%; max-width: 100%; color: #2a2a2a;
+  hyphens: auto; overflow-wrap: anywhere; }
+.heraldry-motto { text-align: center; margin: 0.12rem auto;
+  width: 100%; }
+.motto-oldslav {
+  font-family: 'Triodion', 'Ponomar', 'Cormorant Garamond', serif;
+  font-size: 1.02rem; line-height: 1.12; margin: 0 0 0.12rem; }
+.motto-region {
+  font-family: 'Triodion', 'Ponomar', 'Cormorant Garamond', serif;
+  font-size: 0.82rem; line-height: 1.15; margin: 0; color: #2a2a2a; }
+.guide-title h1.guide-title-main {
+  font-family: 'Triodion', 'Ponomar', 'Cormorant Garamond', serif;
+  font-size: 2.35rem; margin-bottom: 0.5rem; font-weight: 400; }
+.lead { color: #444; font-size: 1.05rem; }
+"""
+    css += guide_pdf_pagination_css(
+        toc_h2_extra=(
+            "font-family: 'Triodion', 'Ponomar', 'Cormorant Garamond', serif"
+        ),
+    )
+    css += """
+.lead-follow { color: #333; font-size: 0.98rem; margin: 0.45rem 0 0.72rem;
+  line-height: 1.45; text-align: justify; }
+.place { margin-bottom: 2.2rem; page-break-inside: auto; }
+.place.place-tight-title-fig h3 {
+  margin: 0.55rem 0 0.18rem; }
+.place.place-tight-title-fig .sub-en { margin: 0; line-height: 1.2; }
+.place.place-tight-title-fig .place-meta {
+  margin: 0 0 0.32rem; line-height: 1.35; }
+.place.place-tight-title-fig .place-pdf-fig-rows-stack {
+  margin-top: 0.18rem; margin-bottom: 1.05rem; }
+.place.place-tight-title-fig
+  .place-pdf-fig-rows-stack + .place-pdf-fig-rows-stack--lopatinsky-final {
+  margin-top: 0.42rem; }
+h3 {
+  font-family: 'Triodion', 'Ponomar', 'Cormorant Garamond', serif;
+  font-size: 1.22rem; margin: 1.2rem 0 0.35rem; font-weight: 400; }
+h4 {
+  font-family: 'Triodion', 'Ponomar', 'Cormorant Garamond', serif;
+  font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.05em;
+  margin: 1rem 0 0.4rem; color: #333; font-weight: 400; }
+.sub-en { color: #555; font-size: 0.95rem; margin: 0 0 0.5rem;
+  font-style: italic; }
+.place-meta { font-size: 0.92rem; color: #353535; margin: 0 0 0.75rem;
+  line-height: 1.4; }
+.place-pdf-compact-fig .place-fig { margin: 0.22rem 0 0.38rem; }
+.place-pdf-compact-fig .place-fig img {
+  max-height: 8.6rem; width: auto; max-width: 100%; object-fit: contain;
+  margin: 0 auto; }
+.modern-smolensk-fig { margin: 0.4rem auto; max-width: 100%; }
+.modern-smolensk-fig img {
+  max-height: 20rem; width: auto; max-width: 100%; object-fit: contain;
+  margin: 0 auto; display: block; }
+.guide-modern-smolensk .modern-smolensk-fig img {
+  max-height: 56vh; }
+.guide-modern-smolensk .modern-smolensk-fig.place-fig--hi-res img {
+  max-height: 64vh; width: 100%; }
+.guide-modern-smolensk .modern-smolensk-fig.place-fig--lo-res img {
+  max-height: 36vh; }
+img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
+.prose, .place-desc p { margin: 0.45rem 0; line-height: 1.5;
+  text-align: justify; }
+ul.facts, ul.stories { margin: 0.3rem 0 0.6rem 1.2rem; padding: 0; }
+ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
+ul.more-information { margin: 0.3rem 0 0.8rem 1.2rem; padding: 0; }
+ul.more-information li { margin: 0.25rem 0; line-height: 1.45; }
+ul.more-information a { color: #1f4fa8; text-decoration: none; }
+ul.more-information a:hover { text-decoration: underline; }
+"""
+    doc_title = s["html_title"].format(city_h1)
+    return (
+        "<!DOCTYPE html>\n"
+        '<html lang="{}">\n<head>\n'
+        '<meta charset="utf-8"/>\n'
+        "<title>{}</title>\n"
+        '<link rel="stylesheet" href="{}"/>\n'
+        "<style>\n{}</style>\n</head>\n<body>\n{}\n</body>\n</html>\n"
+    ).format(doc_lang, escape(doc_title), font_href, css, body_inner)
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(
+        description=(
+            "Build Smolensk HTML/PDF using only existing files under "
+            "smolensk/images (en/ru editions)."
+        ),
+    )
+    parser.add_argument(
+        "--smolensk-root",
+        type=Path,
+        default=_PROJECT_ROOT / "smolensk",
+        help="Smolensk tree root (default: smolensk/)",
+    )
+    parser.add_argument(
+        "--output-dir",
+        type=Path,
+        default=None,
+        help="Where to write HTML/PDF (default: smolensk/output/)",
+    )
+    parser.add_argument(
+        "--image-wait-ms",
+        type=int,
+        default=30000,
+        metavar="MS",
+        help="Playwright wait for images (default 30000).",
+    )
+    parser.add_argument(
+        "--lang",
+        dest="langs",
+        nargs="+",
+        choices=("en", "ru"),
+        default=("en", "ru"),
+        metavar="LANG",
+        help="Guide edition language(s): en, ru (default: both).",
+    )
+    parser.add_argument(
+        "--skip-image-lint",
+        action="store_true",
+        help="Build even when lint_image_paths reports missing files.",
+    )
+    parser.add_argument(
+        "--html-only",
+        action="store_true",
+        help="Write HTML only; skip Playwright PDF.",
+    )
+    args = parser.parse_args()
+    if not args.skip_image_lint:
+        img_errs = lint_city_blocking_errors(
+            "smolensk",
+            "smolensk.data.places_registry",
+            "SMOLENSK_PLACES",
+        )
+        if img_errs:
+            for line in img_errs:
+                print(line, file=sys.stderr)
+            print(
+                "Abort: {} Smolensk image issue(s). "
+                "Fix paths/files or run scripts/download_smolensk_images.py.".format(
+                    len(img_errs),
+                ),
+                file=sys.stderr,
+            )
+            return 2
+    smol_root = args.smolensk_root.resolve()
+    out_dir = (
+        args.output_dir.resolve()
+        if args.output_dir
+        else smol_root / "output"
+    )
+    out_dir.mkdir(parents=True, exist_ok=True)
+
+    places = _places_with_local_images(smol_root)
+    skipped = len(SMOLENSK_PLACES) - len(places)
+    if skipped:
+        print(
+            "Skipped {} place(s) without a local image.".format(skipped),
+        )
+    if not places:
+        print(
+            "No places with local images (>= {} bytes). "
+            "Fill smolensk_places.json and run "
+            "scripts/download_smolensk_images.py.".format(MIN_IMAGE_BYTES),
+            file=sys.stderr,
+        )
+        return 2
+
+    stem = SMOL_PDF_NAME[:-4]
+    langs: tuple[str, ...] = tuple(dict.fromkeys(args.langs))
+    footer = (
+        "<div style='font-size:9px;text-align:center;width:100%'>"
+        "<span class='pageNumber'></span> / <span class='totalPages'></span>"
+        "</div>"
+    )
+    header = "<div style='font-size:9px;width:100%'></div>"
+    for edition in langs:
+        html_path = out_dir / "{}_{}.html".format(stem, edition)
+        pdf_path = out_dir / "{}_{}.pdf".format(stem, edition)
+        narrative_deduper = GuideNarrativeDeduper()
+        html_path.write_text(
+            _build_html(smol_root, places, edition, deduper=narrative_deduper),
+            encoding="utf-8",
+        )
+        print("Written:", html_path)
+        if args.html_only:
+            continue
+        if _pdf_via_playwright(
+            html_path,
+            pdf_path,
+            image_wait_timeout_ms=args.image_wait_ms,
+            display_header_footer=True,
+            footer_template=footer,
+            header_template=header,
+            static_site_root=smol_root,
+        ):
+            _strip_empty_pdf_pages(pdf_path)
+            _strip_pdf_metadata(pdf_path)
+            copy_built_guide_pdf_to_final_guides(_PROJECT_ROOT, pdf_path)
+            print("Written:", pdf_path)
+        else:
+            print(
+                "PDF failed ({}): pip install playwright && "
+                "playwright install chromium".format(edition),
+                file=sys.stderr,
+            )
+            return 1
+    print("Places in PDF: {}".format(len(places)))
+    primary = "en" if "en" in langs else langs[0]
+    shutil.copy2(
+        out_dir / "{}_{}.html".format(stem, primary),
+        out_dir / SMOL_HTML_NAME,
+    )
+    if not args.html_only:
+        shutil.copy2(
+            out_dir / "{}_{}.pdf".format(stem, primary),
+            out_dir / SMOL_PDF_NAME,
+        )
+        print("Primary edition ({}): {}".format(primary, out_dir / SMOL_PDF_NAME))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
+

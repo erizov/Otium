@@ -13,7 +13,7 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
 .otium-logo { font-family: 'Cormorant Garamond', serif; font-size: 2.15rem;
   font-weight: 600; letter-spacing: 0.18em; margin-bottom: 0.85rem; }
 .otiump { margin: 0.42rem 0; line-height: 1.42; text-align: justify;
-  max-width: 38rem; font-size: 0.95rem; }
+  font-size: 0.95rem; }
 .guide-title { page-break-after: auto; margin-bottom: 0.55rem;
   page-break-inside: avoid; }
 .historical-reference { margin: 0.75rem 0 1.15rem;
@@ -63,22 +63,103 @@ ol.trip-stops a:hover { text-decoration: underline; }
 .heraldry-univ-caption { font-size: 0.52rem; line-height: 1.18;
   margin: 0.12rem 0 0; padding: 0 0.06rem; color: #252525;
   text-align: center; font-weight: 500; }
-.heraldry-motto { text-align: center; max-width: 18rem; margin: 0.18rem auto;
+.heraldry-motto { text-align: center; margin: 0.18rem auto;
   width: 100%; }
 .motto-line { font-family: 'Cormorant Garamond', serif; font-size: 1rem;
   margin: 0; color: #333; line-height: 1.35; }
 .guide-title h1.guide-title-main { font-family: 'Cormorant Garamond', serif;
   font-size: 2.35rem; margin-bottom: 0.5rem; font-weight: 600; }
 .lead { color: #444; font-size: 1.05rem; }
-.guide-toc { margin: 0.85rem 0 1.15rem; page-break-inside: avoid; }
-.guide-toc h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.28rem;
-  font-weight: 600; margin: 0.4rem 0 0.55rem; }
+
+.guide-toc { page-break-before: always; break-before: page;
+  page-break-after: always; break-after: page;
+  margin: 0; padding: 0.2rem 0 0.45rem; page-break-inside: auto; }
+.guide-toc h2 { font-family: 'Cormorant Garamond', serif;
+  font-size: 1.28rem; font-weight: 600; margin: 0.4rem 0 0.55rem; }
 .guide-toc ol { margin: 0.35rem 0 0.65rem 1.25rem; padding: 0;
   columns: 2; column-gap: 1.5rem; }
 .guide-toc li { margin: 0.18rem 0; line-height: 1.35;
   font-size: 0.88rem; break-inside: avoid; }
-.guide-toc a { color: #1a5276; text-decoration: none; }
+.guide-toc a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.guide-toc a:hover { color: #0d3d56; }
 .guide-toc li.toc-item--sub { font-size: 0.82rem; margin-left: 0.35rem; }
+.toc-back { font-size: 0.78rem; margin: 0 0 0.35rem; text-align: right; }
+.toc-back a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.toc-back a:hover { color: #0d3d56; }
+.place, .historical-reference, .guide-primer, .guide-trip-plans {
+  scroll-margin-top: 1.25rem; }
+.historical-reference h2, .guide-primer h2, .guide-trip-plans h2,
+.chapter-head h2, .place-lead h3 { position: relative; }
+.guide-toc + .place, .guide-toc + .chapter-head {
+  page-break-before: avoid; break-before: avoid-page; }
+.place-lead { page-break-inside: avoid; break-inside: avoid-page;
+  page-break-after: auto; }
+.place-lead > h3 { page-break-after: avoid; break-after: avoid-page; }
+.place-lead > .place-meta { page-break-after: avoid; break-after: avoid-page; }
+
+.place-fig { page-break-inside: avoid; break-inside: avoid-page;
+  margin: 0.5rem 0 1rem; }
+.place-fig img {
+  page-break-inside: avoid; break-inside: avoid-page;
+  max-height: 48vh; width: auto; max-width: 100%;
+  object-fit: contain; margin-left: auto; margin-right: auto; }
+.place-fig--hi-res img { max-height: 52vh; }
+.place-fig--lo-res img { max-height: 30vh; }
+.place-pdf-fig-row {
+  display: flex; flex-direction: row; flex-wrap: wrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.45rem 0.55rem; margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row .place-fig {
+  flex: 1 1 30%; margin: 0; min-width: 26%; max-width: 100%; }
+.place-pdf-fig-row .place-fig img {
+  width: auto; max-width: 100%; height: auto; max-height: 44vh;
+  object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--pair {
+  flex-wrap: nowrap; justify-content: space-between;
+  align-items: flex-end; gap: 0.5rem 0.65rem; }
+.place-pdf-fig-row--pair .place-fig {
+  flex: 1 1 47%; min-width: 0; max-width: 50%;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--pair .place-fig img {
+  max-height: 44vh; object-fit: contain; }
+.place-pdf-fig-row--pair .place-fig--hi-res img { max-height: 52vh; }
+.place-pdf-fig-row--pair .place-fig--lo-res img { max-height: 26vh; }
+.place-pdf-fig-row--pair .place-fig--row-sized img,
+.place-pdf-fig-row--triple .place-fig--row-sized img,
+.place-pdf-fig-row--many .place-fig--row-sized img {
+  width: auto; max-width: 100%; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row .place-fig--row-sized.place-fig--hi-res img,
+.place-pdf-fig-row .place-fig--row-sized.place-fig--lo-res img {
+  max-height: unset; }
+.place-pdf-fig-rows-stack {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple {
+  display: flex; flex-direction: row; flex-wrap: nowrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.4rem 0.48rem; margin: 0;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--triple .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--triple .place-fig--hi-res img { max-height: 42vh; }
+.place-pdf-fig-row--triple .place-fig--lo-res img { max-height: 18vh; }
+.place-pdf-fig-row--many {
+  flex-wrap: nowrap; justify-content: center; align-items: flex-end;
+  gap: 0.35rem 0.42rem; }
+.place-pdf-fig-row--many .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--many .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+
+
 .place { margin-bottom: 2.2rem; page-break-inside: auto; }
 h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.22rem; margin: 1.2rem 0 0.35rem;
   font-weight: 600; }
@@ -90,7 +171,6 @@ h4 { font-family: 'Cormorant Garamond', serif; font-size: 0.95rem; text-transfor
   color: #555; font-size: 0.95rem; margin: 0 0 0.5rem; font-style: italic; }
 .place-meta { font-size: 0.92rem; color: #353535; margin: 0 0 0.75rem;
   line-height: 1.4; }
-.place-fig { margin: 0.5rem 0 1rem; }
 img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
 .prose, .place-desc p { margin: 0.45rem 0; line-height: 1.5;
   text-align: justify; }
@@ -110,11 +190,14 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <figure class="heraldry-fig heraldry-coat-book" title="Coat of arms of Vologda"><img src="../images/guide_coat_of_arms.svg" alt="Coat of arms of Vologda"/></figure>
 <figure class="heraldry-fig heraldry-coat-book" title="Flag of Vologda"><img src="../images/guide_flag.svg" alt="Flag of Vologda"/></figure>
 </div></div><h1 class="guide-title-main">Vologda</h1><p class="lead">Путеводитель. Объектов в этом выпуске: 22.</p></header>
+<nav class="guide-toc" id="guide-toc" aria-label="Содержание"><h2>Содержание</h2><ol><li class="toc-item"><a href="#guide-historical">Историческая справка</a></li><li class="toc-item"><a href="#guide-trips">Маршруты</a></li><li class="toc-item"><a href="#vologda_landmark">Vologda Landmark</a></li><li class="toc-item"><a href="#vologda_architectural_museum">Архитектурно-этнографический музей</a></li><li class="toc-item"><a href="#vologda_kremlin_courtyard">Внутри Вологодского Кремля</a></li><li class="toc-item"><a href="#vologda_regional_art">Вологодская областная художественная галерея</a></li><li class="toc-item"><a href="#vologda_regional_museum">Вологодский государственный музей</a></li><li class="toc-item"><a href="#vologda_kremlin">Вологодский Кремль</a></li><li class="toc-item"><a href="#vologda_kremlin_2024">Вологодский Кремль (недавний вид)</a></li><li class="toc-item"><a href="#vologda_house_of_peter">Дом Петра I</a></li><li class="toc-item"><a href="#vologda_church_kazan">Казанская церковь Вологды</a></li><li class="toc-item"><a href="#vologda_cathedral_square">Кафедральная площадь</a></li><li class="toc-item"><a href="#vologda_kremlin_square">Красная площадь</a></li><li class="toc-item"><a href="#vologda_lace_museum">Музей кружева</a></li><li class="toc-item"><a href="#vologda_vologda_river">Набережная реки Волгды</a></li><li class="toc-item"><a href="#vologda_regional_museum_ext">Региональный музей</a></li><li class="toc-item"><a href="#vologda_river_ext">Река Волга</a></li><li class="toc-item"><a href="#vologda_resurrection_cathedral">Собор Воскресения</a></li><li class="toc-item"><a href="#vologda_st_sophia_river">Собор Святой Софии (с реки)</a></li><li class="toc-item"><a href="#vologda_st_sophia_cathedral">Собор Святой Софии, Вологда</a></li><li class="toc-item"><a href="#vologda_spaso_preobrazhensky">Спасо-Преображенская церковь</a></li><li class="toc-item"><a href="#vologda_spaso_prilutsky">Спасо-Прилутский монастырь</a></li><li class="toc-item"><a href="#vologda_dmitry_prilutsky">Церковь Дмитрия Прилутского</a></li><li class="toc-item"><a href="#vologda_church_john">Церковь Святого Иоанна Крестителя</a></li></ol></nav>
 <section class="historical-reference" id="guide-historical" aria-label="Историческая справка"><h2>Историческая справка</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 <p class="prose">Вологда — административный центр Вологодской области, древний город на реке Вологде.</p>
 <p class="prose">Торговые пути к Белому морю, каменное зодчество XVI–XVII веков и связь с патриархом Гермогеном и Софией Палеолог. Кремль, кружева деревянных домов и литературные традиции поддерживают образ «русского Севера».</p>
 <p class="prose">Имперский и советский периоды сохранили деревянное зодчество и роль железной дороги; Великая Отечественная война затронула регион. Вологда развивает туризм по Золотому кольцу и культурное наследие русского Севера.</p></section>
 <section class="guide-trip-plans" id="guide-trips" aria-label="Маршруты"><h2>Маршруты</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 <article class="trip-plan" id="trip-1d"><h3>Один день</h3>
 <p class="prose">Компактный маршрут по главным точкам путеводителя с минимальным возвратом назад пешком.</p>
 <ol class="trip-stops"><li><a href="#vologda_kremlin_square">Красная площадь</a> (~60мин)</li>
@@ -143,173 +226,295 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <li><a href="#vologda_st_sophia_river">Собор Святой Софии (с реки)</a> (~60мин)</li>
 <li><a href="#vologda_kremlin_2024">Вологодский Кремль (недавний вид)</a> (~60мин)</li>
 <li><a href="#vologda_lace_museum">Музей кружева</a> (~60мин)</li>
-<li><a href="#vologda_vologda_river">Набережная реки Волгды</a> (~60мин)</li></ol></article></section>
-<nav class="guide-toc" aria-label="Содержание"><h2>Содержание</h2><ol><li class="toc-item"><a href="#guide-historical">Историческая справка</a></li><li class="toc-item"><a href="#guide-trips">Маршруты</a></li><li class="toc-item"><a href="#vologda_architectural_museum">Архитектурно-этнографический музей</a></li><li class="toc-item"><a href="#vologda_cathedral_square">Кафедральная площадь</a></li><li class="toc-item"><a href="#vologda_church_john">Церковь Святого Иоанна Крестителя</a></li><li class="toc-item"><a href="#vologda_dmitry_prilutsky">Церковь Дмитрия Прилутского</a></li><li class="toc-item"><a href="#vologda_house_of_peter">Дом Петра I</a></li><li class="toc-item"><a href="#vologda_kremlin_courtyard">Внутри Вологодского Кремля</a></li><li class="toc-item"><a href="#vologda_church_kazan">Казанская церковь Вологды</a></li><li class="toc-item"><a href="#vologda_kremlin_square">Красная площадь</a></li><li class="toc-item"><a href="#vologda_lace_museum">Музей кружева</a></li><li class="toc-item"><a href="#vologda_regional_museum_ext">Региональный музей</a></li><li class="toc-item"><a href="#vologda_resurrection_cathedral">Собор Воскресения</a></li><li class="toc-item"><a href="#vologda_st_sophia_river">Собор Святой Софии (с реки)</a></li><li class="toc-item"><a href="#vologda_st_sophia_cathedral">Собор Святой Софии, Вологда</a></li><li class="toc-item"><a href="#vologda_spaso_preobrazhensky">Спасо-Преображенская церковь</a></li><li class="toc-item"><a href="#vologda_spaso_prilutsky">Спасо-Прилутский монастырь</a></li><li class="toc-item"><a href="#vologda_kremlin">Вологодский Кремль</a></li><li class="toc-item"><a href="#vologda_kremlin_2024">Вологодский Кремль (недавний вид)</a></li><li class="toc-item"><a href="#vologda_regional_art">Вологодская областная художественная галерея</a></li><li class="toc-item"><a href="#vologda_river_ext">Река Волга</a></li><li class="toc-item"><a href="#vologda_vologda_river">Набережная реки Волгды</a></li><li class="toc-item"><a href="#vologda_regional_museum">Вологодский государственный музей</a></li><li class="toc-item"><a href="#vologda_pdfband_5_58404528">ДКЖ</a></li></ol></nav>
+<li><a href="#vologda_landmark">Vologda Landmark</a> (~60мин)</li></ol></article></section>
+<section class="place" id="vologda_landmark">
+<div class="place-lead">
+<h3>Vologda Landmark</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<figure class="place-fig place-fig--hi-res"><img src="../images/vologda_landmark.jpg" alt="Vologda Landmark" width="1280" height="960"/></figure>
+</div>
+<div class="place-desc"><p class="prose">ДКЖ — микрорайон в составе Дзержинского района Перми. География
+Микрорайон расположен в левобережной части города, ограничен зоной отчуждения железной дороги у станции Пермь II. Восточная граница микрорайона проходит по улице Локомотивная (граница с микрорайоном Светлый), западная по улице Зои Космодемьянской (граница с микрорайоном Парковый), южная по улице Подлесная.</p></div>
+</section>
 <section class="place" id="vologda_architectural_museum">
+<div class="place-lead">
 <h3>Архитектурно-этнографический музей</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/vologda_architectural_museum.jpg" alt="Архитектурно-этнографический музей"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vologda_architectural_museum.jpg" alt="Архитектурно-этнографический музей" width="330" height="435" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vologda_architectural_museum_b.jpg" alt="Архитектурно-этнографический музей — вид 2" width="330" height="186" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Архитектурно-этнографический музей в Вологде предлагает посетителям увлекательный взгляд на богатое архитектурное наследие региона и традиционный образ жизни. Расположенный в живописном ландшафте, музей представляет собой коллекцию деревянных сооружений, включая церкви и крестьянские дома, демонстрируя уникальные стили русской архитектуры. Посетители могут исследовать экспонаты, которые подчеркивают культурные практики и повседневную жизнь местного населения. Основан в 1960 году. Включает коллекцию из более чем 30 исторических деревянных сооружений. Представляет традиционную русскую архитектуру и сельскую жизнь.</p>
 <p class="prose">Архитектурно-этнографический музей был основан в 1960 году с целью сохранения и демонстрации архитектурного наследия Вологодской области. За годы своего существования музей расширил свою коллекцию, собрав различные исторические здания, которые представляют традиционный русский образ жизни и архитектуру. Культурно музей играет важную роль в сохранении наследия Вологодской области, отражая архитектурные стили и традиции сельской жизни. Он служит образовательным ресурсом, способствуя осведомленности о местных обычаях и практиках. Музей также вносит вклад в культурный туризм Вологды, привлекая посетителей, интересующихся историей и традициями региона.</p></div>
 </section>
-<section class="place" id="vologda_cathedral_square">
-<h3>Кафедральная площадь</h3>
+<section class="place" id="vologda_kremlin_courtyard">
+<div class="place-lead">
+<h3>Внутри Вологодского Кремля</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/vologda_cathedral_square.jpg" alt="Кафедральная площадь"/></figure>
-<div class="place-desc"><p class="prose">Бывшая Соборная площадь внутри Кремля, окруженная архитектурой соборов и открытой плиткой. Центральная часть экскурсионных туров по Кремлю. Уважайте огражденные зоны и расписания обслуживания.</p></div>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vologda_kremlin_courtyard.jpg" alt="Внутри Вологодского Кремля" width="1280" height="854" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vologda_kremlin_courtyard_b.jpg" alt="Внутри Вологодского Кремля — вид 2" width="330" height="495" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Перспектива двора с куполами и стенами, демонстрирующая плотность кремлёвских церквей. Полезная справка о том, как маршруты проходят внутри стен. Билеты в музей могут включать несколько зданий.</p></div>
 </section>
-<section class="place" id="vologda_church_john">
-<h3>Церковь Святого Иоанна Крестителя</h3>
+<section class="place" id="vologda_regional_art">
+<div class="place-lead">
+<h3>Вологодская областная художественная галерея</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/vologda_church_john.jpg" alt="Церковь Святого Иоанна Крестителя"/></figure>
-<div class="place-desc"><p class="prose">Церковь Святого Иоанна Крестителя в Вологде является великолепным примером русской православной архитектуры, известной своими сложными фресками и спокойной атмосферой. Уютно расположенная в сердце города, эта церковь привлекает как верующих, так и туристов, предлагая возможность прикоснуться к богатому духовному наследию региона. Её мирная обстановка делает это место идеальным для размышлений и оценки исторического ландшафта Вологды. Основан в 1694 году, заменив более раннюю деревянную церковь. Содержит сложные фрески и традиционные русские архитектурные элементы. Служит активным местом поклонения и культурной достопримечательностью в Вологде.</p>
-<p class="prose">Церковь Святого Иоанна Крестителя была основана в конце 17 века, строительство завершилось в 1694 году. Она была построена на месте более ранней деревянной церкви, что отражает растущее значение православной веры в регионе в этот период. Церковь прошла через различные реставрации на протяжении лет, сохраняя свою архитектурную целостность и художественные сокровища. Культурно Церковь Святого Иоанна Крестителя служит важным символом религиозного наследия и общественной жизни Вологды. Это место для традиционных православных обрядов и празднований, способствующее формированию местной идентичности и преемственности практик веры. Художественные элементы церкви, включая фрески, представляют собой значительный вклад в культурный ландшафт региона.</p></div>
+<figure class="place-fig place-fig--lo-res"><img src="../images/vologda_regional_art_b.jpg" alt="Вологодская областная художественная галерея" width="330" height="268"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Вологодская областная художественная галерея — это выдающееся культурное учреждение, расположенное в самом сердце Вологды. Здесь представлена впечатляющая коллекция русского искусства, включая произведения с 18 века до современных работ. Посетители могут ознакомиться с различными выставками, которые демонстрируют богатое художественное наследие региона и не только. Основанная в 1963 году, галерея имеет коллекцию, охватывающую несколько столетий. Галерея представляет работы известных российских художников и проводит временные выставки.</p>
+<p class="prose">Вологодская областная художественная галерея была основана в 1963 году, развившись из более ранних коллекций, которые начали формироваться в 1930-х годах. С тех пор она стала ключевым игроком в продвижении и сохранении регионального искусства, отражая художественные события в Вологде и окрестностях. Культурно галерея играет важную роль в художественной жизни Вологды, служа платформой для местных художников и способствуя признанию как исторического, так и современного искусства. Она вносит вклад в культурную идентичность и наследие города, делая его важным местом для любителей искусства и туристов.</p></div>
 </section>
-<section class="place" id="vologda_dmitry_prilutsky">
-<h3>Церковь Дмитрия Прилутского</h3>
+<section class="place" id="vologda_regional_museum">
+<div class="place-lead">
+<h3>Вологодский государственный музей</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/vologda_dmitry_prilutsky.jpg" alt="Церковь Дмитрия Прилутского"/></figure>
-<div class="place-desc"><p class="prose">Церковь Дмитрия Прилутского в Вологде является ярким примером русской архитектуры, известной своим сложным дизайном и историческим значением. Эта церковь, посвященная святому Дмитрию Прилутскому, служит мирным местом для размышлений и поклонения, привлекая как местных жителей, так и туристов. Ее спокойная атмосфера и красивые окрестности делают ее обязательным местом для посещения тем, кто исследует богатое культурное наследие Вологды. Основан в конце 16 века. Завершено в 1610 году. Посвящён Святому Дмитрию Прилуцкому.</p>
-<p class="prose">Церковь Дмитрия Прилутского была основана в конце XVI века, а её строительство завершилось в 1610 году. Она названа в честь святого Дмитрия Прилутского, почитаемой фигуры в русском православии, и на протяжении веков играла важную роль в духовной жизни региона. Церковь прошла через различные реставрации на протяжении лет, сохраняя свою архитектурную целостность и историческую ценность. Культурно церковь является важной частью наследия Вологды, демонстрируя традиционные русские архитектурные стили и служа местом для местных религиозных практик. Она отражает глубокие традиции православной веры в регионе и продолжает быть центром общественных собраний и духовных событий.</p></div>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vologda_regional_museum.jpg" alt="Вологодский государственный музей" width="330" height="214" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vologda_regional_museum_b.jpg" alt="Вологодский государственный музей — вид 2" width="330" height="204" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Вологодский государственный музей — это выдающееся культурное учреждение, расположенное в самом сердце Вологды, которое демонстрирует богатую историю и художественное наследие региона. Посетители могут ознакомиться с разнообразной коллекцией экспонатов, включая традиционные ремесла, изобразительное искусство и исторические артефакты, отражающие уникальную идентичность этого края. Музей также проводит различные культурные мероприятия и образовательные программы, что делает его живым центром как для местных жителей, так и для туристов. Основанный в 1919 году, музей обладает богатой коллекцией региональных артефактов. Музей предлагает экспозиции, посвященные традиционным ремеслам, изобразительному искусству и местной истории.</p>
+<p class="prose">Вологодский государственный музей был основан в 1919 году, развившись из более ранних коллекций, которые восходят к 18 веку. Он сыграл ключевую роль в сохранении культурного наследия Вологодской области, особенно во время значительных исторических событий, таких как советская эпоха, когда многие культурные учреждения столкнулись с трудностями. Культурно музей имеет важное значение для понимания художественных традиций и исторических нарративов Вологды, способствуя сохранению местного наследия. Он хранит значительную коллекцию русского искусства и ремесел, отражая вклад региона в национальную культуру. Музей также взаимодействует с сообществом через выставки и образовательные программы, укрепляя свою роль в повседневной жизни и культурной идентичности.</p></div>
+</section>
+<section class="place" id="vologda_kremlin">
+<div class="place-lead">
+<h3>Вологодский Кремль</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vologda_kremlin.jpg" alt="Вологодский Кремль" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vologda_kremlin_b.jpg" alt="Вологодский Кремль — вид 2" width="330" height="247" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Укрепленный епископский двор с колокольнями собора и кремлевскими стенами в историческом центре Вологды. Учтите время работы музеев и церквей. Ансамбль является центром для прогулок по старому центру.</p></div>
+</section>
+<section class="place" id="vologda_kremlin_2024">
+<div class="place-lead">
+<h3>Вологодский Кремль (недавний вид)</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vologda_kremlin_2024.jpg" alt="Вологодский Кремль (недавний вид)" width="1280" height="960" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vologda_kremlin_2024_b.jpg" alt="Вологодский Кремль (недавний вид) — вид 2" width="330" height="426" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Сочетайте с Собором Святой Софии и региональным музеем неподалеку. Толпы достигают пика в летние месяцы путешествий.</p></div>
 </section>
 <section class="place" id="vologda_house_of_peter">
+<div class="place-lead">
 <h3>Дом Петра I</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/vologda_house_of_peter.jpg" alt="Дом Петра I"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vologda_house_of_peter.jpg" alt="Дом Петра I" width="330" height="495" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vologda_house_of_peter_b.jpg" alt="Дом Петра I — вид 2" width="330" height="252" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Дом Петра I в Вологде — уникальный музей, посвященный ранним годам Петра Великого, который демонстрирует его жизнь и исторический контекст его правления. Этот очаровательный деревянный дом, построенный в конце XVII века, предлагает посетителям возможность заглянуть в личную жизнь одного из самых влиятельных царей России. Экспонаты включают артефакты, документы и выставки, подчеркивающие новаторский дух Петра и его роль в формировании современной России. Дом Петра I был построен в 1702 году. Он служил резиденцией для Петра Великого во время его поездок в Вологду. Музей был основан в 1940 году.</p>
 <p class="prose">Дом Петра I был построен в 1702 году и служил резиденцией для молодого царя во время его путешествий на север. Именно в этом доме, как говорят, Петр Великий разработал планы по развитию Российского флота и модернизации страны. С 1940 года дом сохранен как музей, отражая значимость Вологды в ранней жизни Петра. Культурно, Дом Петра I является важным объектом наследия, который отражает ранние усилия по модернизации России при Петре Великом. Он служит напоминанием о влиянии царя на русскую культуру и управление, отмечая ключевой поворотный момент в истории страны. Музей играет важную роль в образовании посетителей о традициях и инновациях той эпохи, способствуя более широкому пониманию русского наследия.</p></div>
 </section>
-<section class="place" id="vologda_kremlin_courtyard">
-<h3>Внутри Вологодского Кремля</h3>
-
-
-<figure class="place-fig"><img src="../images/vologda_kremlin_courtyard.jpg" alt="Внутри Вологодского Кремля"/></figure>
-<div class="place-desc"><p class="prose">Перспектива двора с куполами и стенами, демонстрирующая плотность кремлёвских церквей. Полезная справка о том, как маршруты проходят внутри стен. Билеты в музей могут включать несколько зданий.</p></div>
-</section>
 <section class="place" id="vologda_church_kazan">
+<div class="place-lead">
 <h3>Казанская церковь Вологды</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/vologda_church_kazan.jpg" alt="Казанская церковь Вологды"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vologda_church_kazan.jpg" alt="Казанская церковь Вологды" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vologda_church_kazan_b.jpg" alt="Казанская церковь Вологды — вид 2" width="330" height="211" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Казанская церковь в Вологде является ярким примером русской архитектуры, известной своими характерными луковичными куполами и сложными фресками. Эта историческая церковь служит спокойным местом для поклонения и свидетельством богатого культурного наследия города. Посетители могут полюбоваться её красивым интерьером и узнать о её значении для местного сообщества. Основан в начале 17 века. Строительство завершено в 1694 году. Посвящённый Казанской иконе Божией Матери.</p>
 <p class="prose">Казанская церковь была основана в начале 17 века, строительство завершилось в 1694 году. Она была построена в честь Казанской иконы Божией Матери, которая имеет большое значение в русском православии. На протяжении многих лет церковь стала свидетелем различных исторических событий, включая изменения, вызванные Русской революцией. Культурно Казанская церковь является важной достопримечательностью Вологды, отражая архитектурную эволюцию города и религиозные традиции. Она играет жизненно важную роль в повседневной жизни местных жителей, служа не только местом поклонения, но и площадкой для общественных собраний и культурных мероприятий. Художественные элементы церкви способствуют наследию Вологды, делая её интересным объектом как для местных жителей, так и для туристов.</p></div>
 </section>
+<section class="place" id="vologda_cathedral_square">
+<div class="place-lead">
+<h3>Кафедральная площадь</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vologda_cathedral_square.jpg" alt="Кафедральная площадь" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vologda_cathedral_square_b.jpg" alt="Кафедральная площадь — вид 2" width="330" height="224" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Бывшая Соборная площадь внутри Кремля, окруженная архитектурой соборов и открытой плиткой. Центральная часть экскурсионных туров по Кремлю. Уважайте огражденные зоны и расписания обслуживания.</p></div>
+</section>
 <section class="place" id="vologda_kremlin_square">
+<div class="place-lead">
 <h3>Красная площадь</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/vologda_kremlin_square.jpg" alt="Красная площадь"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vologda_kremlin_square.jpg" alt="Красная площадь" width="1280" height="960" style="height: 154px; max-height: 154px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vologda_kremlin_square_b.jpg" alt="Красная площадь — вид 2" width="330" height="110" style="height: 154px; max-height: 154px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Открытая площадь рядом с Кремлем, используемая для мероприятий и как главный подход к ансамблю. Хорошая ориентировочная точка перед входом в здания музея. Лед и снег зимой требуют осторожности на тротуарах.</p></div>
 </section>
 <section class="place" id="vologda_lace_museum">
+<div class="place-lead">
 <h3>Музей кружева</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/vologda_lace_museum.jpg" alt="Музей кружева"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/vologda_lace_museum_b.jpg" alt="Музей кружева" width="330" height="268"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Уделите время временным выставкам. Магазин подарков может предложить сертифицированные кружевные изделия.</p></div>
 </section>
+<section class="place" id="vologda_vologda_river">
+<div class="place-lead">
+<h3>Набережная реки Волгды</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vologda_vologda_river.jpg" alt="Набережная реки Волгды" width="1280" height="959" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vologda_vologda_river_b.jpg" alt="Набережная реки Волгды — вид 2" width="330" height="495" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Приятно для вечерней прогулки в теплые месяцы. Связывает район Кремля с жилыми кварталами выше по течению.</p></div>
+</section>
 <section class="place" id="vologda_regional_museum_ext">
+<div class="place-lead">
 <h3>Региональный музей</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/vologda_regional_museum_ext.jpg" alt="Региональный музей"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vologda_regional_museum_ext.jpg" alt="Региональный музей" width="330" height="322" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vologda_regional_museum_ext_b.jpg" alt="Региональный музей — вид 2" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Вологодский областной музей — это сокровищница местной истории и культуры, демонстрирующая богатое наследие Вологодской области. Посетители могут исследовать разнообразные выставки, которые подчеркивают искусство, традиции и исторические артефакты региона. Музей служит центральной точкой для понимания прошлого Вологды и ее культурной эволюции. Основанный в 1912 году, музей развивался, охватывая различные аспекты истории и культуры Вологды. Музей предлагает выставки, посвященные местному искусству, этнографии и естественной истории.</p>
 <p class="prose">Вологодский областной музей был основан в 1912 году, изначально сосредоточив внимание на естественной истории и этнографии региона. С течением времени он расширил свои коллекции и выставки, отражая историческое и культурное развитие Вологды и её окрестностей. Культурно музей играет важную роль в сохранении и продвижении уникального наследия Вологды, включая её традиционные ремёсла, народное искусство и местные обычаи. Он служит центром образовательных программ и культурных мероприятий, способствуя более глубокому пониманию истории региона как среди местных жителей, так и среди туристов.</p></div>
 </section>
+<section class="place" id="vologda_river_ext">
+<div class="place-lead">
+<h3>Река Волга</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vologda_river_ext.jpg" alt="Река Волга" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vologda_river_ext_b.jpg" alt="Река Волга — вид 2" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Река Вологда протекает через сердце Вологды, живописного города, известного своим историческим очарованием и культурным наследием. Она плавно извивается мимо древних церквей, уютных кафе и очаровательных парков, предлагая посетителям спокойное убежище среди бурной городской жизни. Он имеет длину примерно 480 километров и протекает через обширные пейзажи северо-западной России. Его берега окаймлены многочисленными маленькими островами, каждый из которых обладает своим уникальным характером и очарованием. Летом река становится популярным местом для катания на лодках, рыбалки и пикников. Исторические мосты, пересекающие реку, обеспечивают пешеходный доступ и предлагают панорамные виды на окрестности. Местный фольклор рассказывает истории о мистических существах, которые, как говорят, обитают в его глубинах.</p>
+<p class="prose">Происходя из глубин лесов северной России, река Вологда была неотъемлемой частью развития Вологды с незапамятных времен. На протяжении истории она служила важным транспортным маршрутом, соединяющим удаленные деревни с более широким миром. Сегодня она остается символом природной красоты и культурной идентичности региона. Посетители приходят к реке Вологда, чтобы насладиться её спокойными водами, прогуляться по живописным берегам и погрузиться в местную культуру и традиции.</p></div>
+</section>
 <section class="place" id="vologda_resurrection_cathedral">
+<div class="place-lead">
 <h3>Собор Воскресения</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/vologda_resurrection_cathedral.jpg" alt="Собор Воскресения"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vologda_resurrection_cathedral.jpg" alt="Собор Воскресения" width="1200" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vologda_resurrection_cathedral_b.jpg" alt="Собор Воскресения — вид 2" width="330" height="446" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Собор Воскресения — страница разъяснения в Wikimedia. Проверьте, предлагаются ли восхождения на башни сезонно. Сочетайте с соседними музеями Кремля.</p></div>
 </section>
 <section class="place" id="vologda_st_sophia_river">
+<div class="place-lead">
 <h3>Собор Святой Софии (с реки)</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/vologda_st_sophia_river.jpg" alt="Собор Святой Софии (с реки)"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vologda_st_sophia_river.jpg" alt="Собор Святой Софии (с реки)" width="1280" height="852" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vologda_st_sophia_river_b.jpg" alt="Собор Святой Софии (с реки) — вид 2" width="330" height="440" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Знаменитые купола собора, видимые с реки Вологда, определяют северный силуэт города. Речные прогулки соединяют несколько церквей и набережных. Ранний свет может быть отличным для фотографии.</p></div>
 </section>
 <section class="place" id="vologda_st_sophia_cathedral">
+<div class="place-lead">
 <h3>Собор Святой Софии, Вологда</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/vologda_st_sophia_cathedral.jpg" alt="Собор Святой Софии, Вологда"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vologda_st_sophia_cathedral.jpg" alt="Собор Святой Софии, Вологда" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vologda_st_sophia_cathedral_b.jpg" alt="Собор Святой Софии, Вологда — вид 2" width="330" height="426" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Собор Святой Софии в Вологде является потрясающим примером русской архитектуры, известным своим сложным дизайном и историческим значением. Построенный в 16 веке, этот собор служит выдающимся ориентиром в городе, привлекая посетителей своими красивыми фресками и богатым наследием. Он является свидетельством роли Вологды в развитии русской культуры и духовности. Построен в период с 1568 по 1570 год. Спроектировано архитектором Петром Барановым. Сочетает в себе византийский и местные архитектурные стили.</p>
 <p class="prose">Собор Святой Софии был построен в период с 1568 по 1570 год при царе Иване Грозном. Его спроектировал архитектор Пётр Баранов, и он является одним из первых примеров русского архитектурного стиля, который сочетает византийские и местные традиции. Собор прошёл различные реставрации и сыграл значительную роль в религиозной жизни региона на протяжении веков. Собор имеет большое культурное значение как символ исторического и религиозного наследия Вологды. Это не только место поклонения, но и объект, отражающий художественные достижения своего времени, с его потрясающими фресками и уникальными архитектурными особенностями. Собор способствует формированию местной идентичности и является центром различных религиозных церемоний и культурных событий.</p></div>
 </section>
 <section class="place" id="vologda_spaso_preobrazhensky">
+<div class="place-lead">
 <h3>Спасо-Преображенская церковь</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/vologda_spaso_preobrazhensky.jpg" alt="Спасо-Преображенская церковь"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vologda_spaso_preobrazhensky.jpg" alt="Спасо-Преображенская церковь" width="330" height="443" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vologda_spaso_preobrazhensky_b.jpg" alt="Спасо-Преображенская церковь — вид 2" width="330" height="462" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Спасо-Преображенская церковь в Вологде является выдающимся примером русской архитектуры, известной своим замысловатым дизайном и историческим значением. Эта церковь служит важной достопримечательностью города, привлекая посетителей своим богатым наследием и спокойной атмосферой. Она предлагает взгляд на духовную жизнь региона и искусство своего времени. Основан в начале 16 века, строительство завершено в 1560 году. Известен своим уникальным архитектурным стилем и сложными фресками.</p>
 <p class="prose">Спасо-Преображенская церковь была основана в начале XVI века, а её строительство, как считается, было завершено в 1560 году. На протяжении веков она подвергалась различным реставрациям, отражая архитектурные стили и религиозные практики разных эпох. Церковь сыграла ключевую роль в религиозной жизни Вологды, обслуживая местное сообщество более 450 лет. Культурно Спасо-Преображенская церковь является важной частью наследия Вологды, демонстрируя искусство русской православной архитектуры. Это место местных традиций и ритуалов, вносящее вклад в повседневную жизнь сообщества. Историческая и архитектурная ценность церкви делает её значимым ориентиром в городе, часто привлекающим внимание как местных жителей, так и туристов.</p></div>
 </section>
 <section class="place" id="vologda_spaso_prilutsky">
+<div class="place-lead">
 <h3>Спасо-Прилутский монастырь</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/vologda_spaso_prilutsky.jpg" alt="Спасо-Прилутский монастырь"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vologda_spaso_prilutsky.jpg" alt="Спасо-Прилутский монастырь" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vologda_spaso_prilutsky_b.jpg" alt="Спасо-Прилутский монастырь — вид 2" width="330" height="220" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Крупный монастырский комплекс к северу от центра, с укрепленными стенами и церковными зданиями. Требуется транспорт или более длительная прогулка от Кремля. Подтвердите часы работы; некоторые районы могут закрываться сезонно.</p></div>
 </section>
-<section class="place" id="vologda_kremlin">
-<h3>Вологодский Кремль</h3>
+<section class="place" id="vologda_dmitry_prilutsky">
+<div class="place-lead">
+<h3>Церковь Дмитрия Прилутского</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/vologda_kremlin.jpg" alt="Вологодский Кремль"/></figure>
-<div class="place-desc"><p class="prose">Укрепленный епископский двор с колокольнями собора и кремлевскими стенами в историческом центре Вологды. Учтите время работы музеев и церквей. Ансамбль является центром для прогулок по старому центру.</p></div>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vologda_dmitry_prilutsky.jpg" alt="Церковь Дмитрия Прилутского" width="330" height="440" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vologda_dmitry_prilutsky_b.jpg" alt="Церковь Дмитрия Прилутского — вид 2" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Церковь Дмитрия Прилутского в Вологде является ярким примером русской архитектуры, известной своим сложным дизайном и историческим значением. Эта церковь, посвященная святому Дмитрию Прилутскому, служит мирным местом для размышлений и поклонения, привлекая как местных жителей, так и туристов. Ее спокойная атмосфера и красивые окрестности делают ее обязательным местом для посещения тем, кто исследует богатое культурное наследие Вологды. Основан в конце 16 века. Завершено в 1610 году. Посвящён Святому Дмитрию Прилуцкому.</p>
+<p class="prose">Церковь Дмитрия Прилутского была основана в конце XVI века, а её строительство завершилось в 1610 году. Она названа в честь святого Дмитрия Прилутского, почитаемой фигуры в русском православии, и на протяжении веков играла важную роль в духовной жизни региона. Церковь прошла через различные реставрации на протяжении лет, сохраняя свою архитектурную целостность и историческую ценность. Культурно церковь является важной частью наследия Вологды, демонстрируя традиционные русские архитектурные стили и служа местом для местных религиозных практик. Она отражает глубокие традиции православной веры в регионе и продолжает быть центром общественных собраний и духовных событий.</p></div>
 </section>
-<section class="place" id="vologda_kremlin_2024">
-<h3>Вологодский Кремль (недавний вид)</h3>
+<section class="place" id="vologda_church_john">
+<div class="place-lead">
+<h3>Церковь Святого Иоанна Крестителя</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/vologda_kremlin_2024.jpg" alt="Вологодский Кремль (недавний вид)"/></figure>
-<div class="place-desc"><p class="prose">Сочетайте с Собором Святой Софии и региональным музеем неподалеку. Толпы достигают пика в летние месяцы путешествий.</p></div>
-</section>
-<section class="place" id="vologda_regional_art">
-<h3>Вологодская областная художественная галерея</h3>
-
-
-<figure class="place-fig"><img src="../images/vologda_regional_art.jpg" alt="Вологодская областная художественная галерея"/></figure>
-<div class="place-desc"><p class="prose">Вологодская областная художественная галерея — это выдающееся культурное учреждение, расположенное в самом сердце Вологды. Здесь представлена впечатляющая коллекция русского искусства, включая произведения с 18 века до современных работ. Посетители могут ознакомиться с различными выставками, которые демонстрируют богатое художественное наследие региона и не только. Основанная в 1963 году, галерея имеет коллекцию, охватывающую несколько столетий. Галерея представляет работы известных российских художников и проводит временные выставки.</p>
-<p class="prose">Вологодская областная художественная галерея была основана в 1963 году, развившись из более ранних коллекций, которые начали формироваться в 1930-х годах. С тех пор она стала ключевым игроком в продвижении и сохранении регионального искусства, отражая художественные события в Вологде и окрестностях. Культурно галерея играет важную роль в художественной жизни Вологды, служа платформой для местных художников и способствуя признанию как исторического, так и современного искусства. Она вносит вклад в культурную идентичность и наследие города, делая его важным местом для любителей искусства и туристов.</p></div>
-</section>
-<section class="place" id="vologda_river_ext">
-<h3>Река Волга</h3>
-
-
-<figure class="place-fig"><img src="../images/vologda_river_ext.jpg" alt="Река Волга"/></figure>
-<div class="place-desc"><p class="prose">Река Вологда протекает через сердце Вологды, живописного города, известного своим историческим очарованием и культурным наследием. Она плавно извивается мимо древних церквей, уютных кафе и очаровательных парков, предлагая посетителям спокойное убежище среди бурной городской жизни. Он имеет длину примерно 480 километров и протекает через обширные пейзажи северо-западной России. Его берега окаймлены многочисленными маленькими островами, каждый из которых обладает своим уникальным характером и очарованием. Летом река становится популярным местом для катания на лодках, рыбалки и пикников. Исторические мосты, пересекающие реку, обеспечивают пешеходный доступ и предлагают панорамные виды на окрестности. Местный фольклор рассказывает истории о мистических существах, которые, как говорят, обитают в его глубинах.</p>
-<p class="prose">Происходя из глубин лесов северной России, река Вологда была неотъемлемой частью развития Вологды с незапамятных времен. На протяжении истории она служила важным транспортным маршрутом, соединяющим удаленные деревни с более широким миром. Сегодня она остается символом природной красоты и культурной идентичности региона. Посетители приходят к реке Вологда, чтобы насладиться её спокойными водами, прогуляться по живописным берегам и погрузиться в местную культуру и традиции.</p></div>
-</section>
-<section class="place" id="vologda_vologda_river">
-<h3>Набережная реки Волгды</h3>
-
-
-<figure class="place-fig"><img src="../images/vologda_vologda_river.jpg" alt="Набережная реки Волгды"/></figure>
-<div class="place-desc"><p class="prose">Приятно для вечерней прогулки в теплые месяцы. Связывает район Кремля с жилыми кварталами выше по течению.</p></div>
-</section>
-<section class="place" id="vologda_regional_museum">
-<h3>Вологодский государственный музей</h3>
-
-
-<figure class="place-fig"><img src="../images/vologda_regional_museum.jpg" alt="Вологодский государственный музей"/></figure>
-<div class="place-desc"><p class="prose">Вологодский государственный музей — это выдающееся культурное учреждение, расположенное в самом сердце Вологды, которое демонстрирует богатую историю и художественное наследие региона. Посетители могут ознакомиться с разнообразной коллекцией экспонатов, включая традиционные ремесла, изобразительное искусство и исторические артефакты, отражающие уникальную идентичность этого края. Музей также проводит различные культурные мероприятия и образовательные программы, что делает его живым центром как для местных жителей, так и для туристов. Основанный в 1919 году, музей обладает богатой коллекцией региональных артефактов. Музей предлагает экспозиции, посвященные традиционным ремеслам, изобразительному искусству и местной истории.</p>
-<p class="prose">Вологодский государственный музей был основан в 1919 году, развившись из более ранних коллекций, которые восходят к 18 веку. Он сыграл ключевую роль в сохранении культурного наследия Вологодской области, особенно во время значительных исторических событий, таких как советская эпоха, когда многие культурные учреждения столкнулись с трудностями. Культурно музей имеет важное значение для понимания художественных традиций и исторических нарративов Вологды, способствуя сохранению местного наследия. Он хранит значительную коллекцию русского искусства и ремесел, отражая вклад региона в национальную культуру. Музей также взаимодействует с сообществом через выставки и образовательные программы, укрепляя свою роль в повседневной жизни и культурной идентичности.</p></div>
-</section>
-<section class="place" id="vologda_pdfband_5_58404528">
-<h3>ДКЖ</h3>
-
-
-<figure class="place-fig"><img src="../images/vologda_pdfband_5_58404528.jpg" alt="ДКЖ"/></figure>
-<div class="place-desc"><p class="prose">ДКЖ — микрорайон в составе Дзержинского района Перми. География
-Микрорайон расположен в левобережной части города, ограничен зоной отчуждения железной дороги у станции Пермь II. Восточная граница микрорайона проходит по улице Локомотивная (граница с микрорайоном Светлый), западная по улице Зои Космодемьянской (граница с микрорайоном Парковый), южная по улице Подлесная.</p></div>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vologda_church_john.jpg" alt="Церковь Святого Иоанна Крестителя" width="330" height="226" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vologda_church_john_b.jpg" alt="Церковь Святого Иоанна Крестителя — вид 2" width="330" height="510" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Церковь Святого Иоанна Крестителя в Вологде является великолепным примером русской православной архитектуры, известной своими сложными фресками и спокойной атмосферой. Уютно расположенная в сердце города, эта церковь привлекает как верующих, так и туристов, предлагая возможность прикоснуться к богатому духовному наследию региона. Её мирная обстановка делает это место идеальным для размышлений и оценки исторического ландшафта Вологды. Основан в 1694 году, заменив более раннюю деревянную церковь. Содержит сложные фрески и традиционные русские архитектурные элементы. Служит активным местом поклонения и культурной достопримечательностью в Вологде.</p>
+<p class="prose">Церковь Святого Иоанна Крестителя была основана в конце 17 века, строительство завершилось в 1694 году. Она была построена на месте более ранней деревянной церкви, что отражает растущее значение православной веры в регионе в этот период. Церковь прошла через различные реставрации на протяжении лет, сохраняя свою архитектурную целостность и художественные сокровища. Культурно Церковь Святого Иоанна Крестителя служит важным символом религиозного наследия и общественной жизни Вологды. Это место для традиционных православных обрядов и празднований, способствующее формированию местной идентичности и преемственности практик веры. Художественные элементы церкви, включая фрески, представляют собой значительный вклад в культурный ландшафт региона.</p></div>
 </section>
 </body>
 </html>

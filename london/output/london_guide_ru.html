@@ -13,7 +13,7 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
 .otium-logo { font-family: 'Libre Baskerville', serif; font-size: 2.15rem;
   font-weight: 600; letter-spacing: 0.18em; margin-bottom: 0.85rem; }
 .otiump { margin: 0.42rem 0; line-height: 1.42; text-align: justify;
-  max-width: 38rem; font-size: 0.95rem; }
+  font-size: 0.95rem; }
 .guide-title { page-break-after: auto; margin-bottom: 0.55rem;
   page-break-inside: avoid; }
 .historical-reference { margin: 0.75rem 0 1.15rem;
@@ -63,22 +63,103 @@ ol.trip-stops a:hover { text-decoration: underline; }
 .heraldry-univ-caption { font-size: 0.52rem; line-height: 1.18;
   margin: 0.12rem 0 0; padding: 0 0.06rem; color: #252525;
   text-align: center; font-weight: 500; }
-.heraldry-motto { text-align: center; max-width: 18rem; margin: 0.18rem auto;
+.heraldry-motto { text-align: center; margin: 0.18rem auto;
   width: 100%; }
 .motto-line { font-family: 'Libre Baskerville', serif; font-size: 1rem;
   margin: 0; color: #333; line-height: 1.35; }
 .guide-title h1.guide-title-main { font-family: 'Libre Baskerville', serif;
   font-size: 2.35rem; margin-bottom: 0.5rem; font-weight: 600; }
 .lead { color: #444; font-size: 1.05rem; }
-.guide-toc { margin: 0.85rem 0 1.15rem; page-break-inside: avoid; }
-.guide-toc h2 { font-family: 'Libre Baskerville', serif; font-size: 1.28rem;
-  font-weight: 600; margin: 0.4rem 0 0.55rem; }
+
+.guide-toc { page-break-before: always; break-before: page;
+  page-break-after: always; break-after: page;
+  margin: 0; padding: 0.2rem 0 0.45rem; page-break-inside: auto; }
+.guide-toc h2 { font-family: 'Libre Baskerville', serif;
+  font-size: 1.28rem; font-weight: 600; margin: 0.4rem 0 0.55rem; }
 .guide-toc ol { margin: 0.35rem 0 0.65rem 1.25rem; padding: 0;
   columns: 2; column-gap: 1.5rem; }
 .guide-toc li { margin: 0.18rem 0; line-height: 1.35;
   font-size: 0.88rem; break-inside: avoid; }
-.guide-toc a { color: #1a5276; text-decoration: none; }
+.guide-toc a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.guide-toc a:hover { color: #0d3d56; }
 .guide-toc li.toc-item--sub { font-size: 0.82rem; margin-left: 0.35rem; }
+.toc-back { font-size: 0.78rem; margin: 0 0 0.35rem; text-align: right; }
+.toc-back a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.toc-back a:hover { color: #0d3d56; }
+.place, .historical-reference, .guide-primer, .guide-trip-plans {
+  scroll-margin-top: 1.25rem; }
+.historical-reference h2, .guide-primer h2, .guide-trip-plans h2,
+.chapter-head h2, .place-lead h3 { position: relative; }
+.guide-toc + .place, .guide-toc + .chapter-head {
+  page-break-before: avoid; break-before: avoid-page; }
+.place-lead { page-break-inside: avoid; break-inside: avoid-page;
+  page-break-after: auto; }
+.place-lead > h3 { page-break-after: avoid; break-after: avoid-page; }
+.place-lead > .place-meta { page-break-after: avoid; break-after: avoid-page; }
+
+.place-fig { page-break-inside: avoid; break-inside: avoid-page;
+  margin: 0.5rem 0 1rem; }
+.place-fig img {
+  page-break-inside: avoid; break-inside: avoid-page;
+  max-height: 48vh; width: auto; max-width: 100%;
+  object-fit: contain; margin-left: auto; margin-right: auto; }
+.place-fig--hi-res img { max-height: 52vh; }
+.place-fig--lo-res img { max-height: 30vh; }
+.place-pdf-fig-row {
+  display: flex; flex-direction: row; flex-wrap: wrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.45rem 0.55rem; margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row .place-fig {
+  flex: 1 1 30%; margin: 0; min-width: 26%; max-width: 100%; }
+.place-pdf-fig-row .place-fig img {
+  width: auto; max-width: 100%; height: auto; max-height: 44vh;
+  object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--pair {
+  flex-wrap: nowrap; justify-content: space-between;
+  align-items: flex-end; gap: 0.5rem 0.65rem; }
+.place-pdf-fig-row--pair .place-fig {
+  flex: 1 1 47%; min-width: 0; max-width: 50%;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--pair .place-fig img {
+  max-height: 44vh; object-fit: contain; }
+.place-pdf-fig-row--pair .place-fig--hi-res img { max-height: 52vh; }
+.place-pdf-fig-row--pair .place-fig--lo-res img { max-height: 26vh; }
+.place-pdf-fig-row--pair .place-fig--row-sized img,
+.place-pdf-fig-row--triple .place-fig--row-sized img,
+.place-pdf-fig-row--many .place-fig--row-sized img {
+  width: auto; max-width: 100%; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row .place-fig--row-sized.place-fig--hi-res img,
+.place-pdf-fig-row .place-fig--row-sized.place-fig--lo-res img {
+  max-height: unset; }
+.place-pdf-fig-rows-stack {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple {
+  display: flex; flex-direction: row; flex-wrap: nowrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.4rem 0.48rem; margin: 0;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--triple .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--triple .place-fig--hi-res img { max-height: 42vh; }
+.place-pdf-fig-row--triple .place-fig--lo-res img { max-height: 18vh; }
+.place-pdf-fig-row--many {
+  flex-wrap: nowrap; justify-content: center; align-items: flex-end;
+  gap: 0.35rem 0.42rem; }
+.place-pdf-fig-row--many .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--many .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+
+
 .place { margin-bottom: 2.2rem; page-break-inside: auto; }
 h3 { font-family: 'Libre Baskerville', serif; font-size: 1.22rem; margin: 1.2rem 0 0.35rem;
   font-weight: 600; }
@@ -90,7 +171,6 @@ h4 { font-family: 'Libre Baskerville', serif; font-size: 0.95rem; text-transform
   color: #555; font-size: 0.95rem; margin: 0 0 0.5rem; font-style: italic; }
 .place-meta { font-size: 0.92rem; color: #353535; margin: 0 0 0.75rem;
   line-height: 1.4; }
-.place-fig { margin: 0.5rem 0 1rem; }
 img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
 .prose, .place-desc p { margin: 0.45rem 0; line-height: 1.5;
   text-align: justify; }
@@ -110,23 +190,26 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <figure class="heraldry-fig heraldry-coat-book" title="Coat of arms of the City of London"><img src="../images/guide_coat_of_arms.svg" alt="Coat of arms of the City of London"/></figure>
 <figure class="heraldry-fig heraldry-coat-book" title="Flag of the City of London"><img src="../images/guide_flag.svg" alt="Flag of the City of London"/></figure>
 </div></div><h1 class="guide-title-main">London</h1><p class="lead">Путеводитель. Объектов в этом выпуске: 26.</p></header>
+<nav class="guide-toc" id="guide-toc" aria-label="Содержание"><h2>Содержание</h2><ol><li class="toc-item"><a href="#guide-historical">Историческая справка</a></li><li class="toc-item"><a href="#guide-trips">Маршруты</a></li><li class="toc-item"><a href="#london_british_museum">London British Museum</a></li><li class="toc-item"><a href="#london_buckingham_palace">London Buckingham Palace</a></li><li class="toc-item"><a href="#london_covent_garden">London Covent Garden</a></li><li class="toc-item"><a href="#london_fazl_moschee">London Fazl Moschee</a></li><li class="toc-item"><a href="#london_hyde_park">London Hyde Park</a></li><li class="toc-item"><a href="#london_national_gallery">London National Gallery</a></li><li class="toc-item"><a href="#london_natural_history_museum">London Natural History Museum</a></li><li class="toc-item"><a href="#london_palace_westminster">London Palace Westminster</a></li><li class="toc-item"><a href="#london_st_pauls_aerial_cropped">London St Pauls Aerial Cropped</a></li><li class="toc-item"><a href="#london_st_pauls_cathedral">London St Pauls Cathedral</a></li><li class="toc-item"><a href="#london_tate_modern">London Tate Modern</a></li><li class="toc-item"><a href="#london_tower_bridge">London Tower Bridge</a></li><li class="toc-item"><a href="#london_tower_of_london">London Tower Of London</a></li><li class="toc-item"><a href="#london_westminster_abbey">London Westminster Abbey</a></li><li class="toc-item"><a href="#london_churchill_war_rooms">Войсковые комнаты Черчилля</a></li><li class="toc-item"><a href="#london_shakespeare_globe">Глобус Шекспира</a></li><li class="toc-item"><a href="#london_canary_wharf">Канари Уорф</a></li><li class="toc-item"><a href="#london_kensington_palace">Кенсингтонский дворец</a></li><li class="toc-item"><a href="#london_greenwich_observatory">Королевская обсерватория Гринвич</a></li><li class="toc-item"><a href="#london_camden_market">Кэмденский рынок</a></li><li class="toc-item"><a href="#london_va_museum">Музей Виктории и Альберта</a></li><li class="toc-item"><a href="#london_notting_hill">Ноттинг-Хилл Портобелло</a></li><li class="toc-item"><a href="#london_kew_gardens">Пальмовый дом в Кью-Гарденс</a></li><li class="toc-item"><a href="#london_borough_market">Рынок Бороу</a></li><li class="toc-item"><a href="#london_tate_britain">Тейт Британия</a></li><li class="toc-item"><a href="#london_big_ben">Часы Вестминстерского дворца</a></li></ol></nav>
 <section class="historical-reference" id="guide-historical" aria-label="Историческая справка"><h2>Историческая справка</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 <p class="prose">Лондон — столица Соединённого Королевства и крупнейший город Британских островов.</p>
 <p class="prose">Римский Лондиниум, средневековый Сити, имперская столица и глобальный финансовый центр XXI века. Темза, королевские резиденции, музеи бесплатного входа и многоязычные районы делают Лондон узлом культуры и науки.</p>
 <p class="prose">Вторая мировая война и блиц оставили следы; послевоенное восстановление и распад империи изменили роль метрополии. Сегодня Лондон — финансовый и культурный глобальный узел с многоязычным населением и богатыми музеями.</p></section>
 <section class="guide-trip-plans" id="guide-trips" aria-label="Маршруты"><h2>Маршруты</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 <article class="trip-plan" id="trip-1d"><h3>Один день</h3>
 <p class="prose">Компактный маршрут по главным точкам путеводителя с минимальным возвратом назад пешком.</p>
-<ol class="trip-stops"><li><a href="#london_camden_market">Кэмденский рынок</a> (~75мин)</li>
-<li><a href="#london_british_museum">London British Museum</a> (~75мин)</li>
-<li><a href="#london_national_gallery">London National Gallery</a> (~75мин)</li>
-<li><a href="#london_churchill_war_rooms">Войсковые комнаты Черчилля</a> (~75мин)</li>
+<ol class="trip-stops"><li><a href="#london_kensington_palace">Кенсингтонский дворец</a> (~75мин)</li>
+<li><a href="#london_va_museum">Музей Виктории и Альберта</a> (~75мин)</li>
 <li><a href="#london_buckingham_palace">London Buckingham Palace</a> (~75мин)</li>
-<li><a href="#london_va_museum">Музей Виктории и Альберта</a> (~75мин)</li></ol></article>
+<li><a href="#london_churchill_war_rooms">Войсковые комнаты Черчилля</a> (~75мин)</li>
+<li><a href="#london_national_gallery">London National Gallery</a> (~75мин)</li>
+<li><a href="#london_british_museum">London British Museum</a> (~75мин)</li></ol></article>
 <article class="trip-plan" id="trip-3d1"><h3>Три дня — день 1</h3>
 <p class="prose">День 1 — центральный кластер.</p>
-<ol class="trip-stops"><li><a href="#london_kensington_palace">Кенсингтонский дворец</a> (~75мин)</li>
-<li><a href="#london_borough_market">Рынок Бороу</a> (~75мин)</li>
+<ol class="trip-stops"><li><a href="#london_borough_market">Рынок Бороу</a> (~75мин)</li>
+<li><a href="#london_camden_market">Кэмденский рынок</a> (~75мин)</li>
 <li><a href="#london_greenwich_observatory">Королевская обсерватория Гринвич</a> (~75мин)</li>
 <li><a href="#london_shakespeare_globe">Глобус Шекспира</a> (~75мин)</li>
 <li><a href="#london_big_ben">Часы Вестминстерского дворца</a> (~75мин)</li></ol></article>
@@ -142,210 +225,353 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <ol class="trip-stops"><li><a href="#london_tower_bridge">London Tower Bridge</a> (~75мин)</li>
 <li><a href="#london_tower_of_london">London Tower Of London</a> (~75мин)</li>
 <li><a href="#london_tate_modern">London Tate Modern</a> (~75мин)</li></ol></article></section>
-<nav class="guide-toc" aria-label="Содержание"><h2>Содержание</h2><ol><li class="toc-item"><a href="#guide-historical">Историческая справка</a></li><li class="toc-item"><a href="#guide-trips">Маршруты</a></li><li class="toc-item"><a href="#london_borough_market">Рынок Бороу</a></li><li class="toc-item"><a href="#london_british_museum">London British Museum</a></li><li class="toc-item"><a href="#london_buckingham_palace">London Buckingham Palace</a></li><li class="toc-item"><a href="#london_camden_market">Кэмденский рынок</a></li><li class="toc-item"><a href="#london_canary_wharf">Канари Уорф</a></li><li class="toc-item"><a href="#london_churchill_war_rooms">Войсковые комнаты Черчилля</a></li><li class="toc-item"><a href="#london_covent_garden">London Covent Garden</a></li><li class="toc-item"><a href="#london_pdfband_2_af9e03be">Fazl Moschee</a></li><li class="toc-item"><a href="#london_hyde_park">London Hyde Park</a></li><li class="toc-item"><a href="#london_kensington_palace">Кенсингтонский дворец</a></li><li class="toc-item"><a href="#london_kew_gardens">Пальмовый дом в Кью-Гарденс</a></li><li class="toc-item"><a href="#london_national_gallery">London National Gallery</a></li><li class="toc-item"><a href="#london_natural_history_museum">London Natural History Museum</a></li><li class="toc-item"><a href="#london_notting_hill">Ноттинг-Хилл Портобелло</a></li><li class="toc-item"><a href="#london_palace_westminster">London Palace Westminster</a></li><li class="toc-item"><a href="#london_big_ben">Часы Вестминстерского дворца</a></li><li class="toc-item"><a href="#london_greenwich_observatory">Королевская обсерватория Гринвич</a></li><li class="toc-item"><a href="#london_shakespeare_globe">Глобус Шекспира</a></li><li class="toc-item"><a href="#london_st_pauls_cathedral">London St Pauls Cathedral</a></li><li class="toc-item"><a href="#london_pdfband_0_223e3b5e">St Pauls aerial (cropped)</a></li><li class="toc-item"><a href="#london_tate_britain">Тейт Британия</a></li><li class="toc-item"><a href="#london_tate_modern">London Tate Modern</a></li><li class="toc-item"><a href="#london_tower_bridge">London Tower Bridge</a></li><li class="toc-item"><a href="#london_tower_of_london">London Tower Of London</a></li><li class="toc-item"><a href="#london_va_museum">Музей Виктории и Альберта</a></li><li class="toc-item"><a href="#london_westminster_abbey">London Westminster Abbey</a></li></ol></nav>
-<section class="place" id="london_borough_market">
-<h3>Рынок Бороу</h3>
-
-
-<figure class="place-fig"><img src="../images/london_borough_market.jpg" alt="Рынок Бороу"/></figure>
-<div class="place-desc"><p class="prose">Боро Маркет — один из старейших и самых известных продуктовых рынков Лондона, предлагающий яркий ассортимент свежих продуктов, деликатесов и ремесленных товаров. Расположенный рядом с Лондонским мостом, он привлекает как местных жителей, так и туристов, предоставляя сенсорный праздник из зрительных, звуковых и вкусовых ощущений. Рынок является центром кулинарного творчества, на нем расположены различные торговые точки и продавцы, которые отмечают как британскую, так и международную кухню. Боро Маркет был официально основан в 1756 году. Рынок расположен на южном берегу реки Темзы, недалеко от Лондонского моста. Он включает более 100 киосков и магазинов, предлагающих разнообразные продукты питания.</p>
-<p class="prose">Боро Маркет имеет корни, уходящие в 11-й век, что делает его одним из старейших рынков в Лондоне. Изначально основанный как оптовый рынок фруктов и овощей, он эволюционировал на протяжении веков, с значительной реконструкцией в 19-м веке. В 20-м веке рынок столкнулся с трудностями, но был обновлён в 1990-х годах, став популярным местом для любителей еды. Культурно, рынок Бороу играет важную роль в гастрономической сцене Лондона, отражая разнообразное кулинарное наследие города. Он служит местом встречи для сообщества, где люди могут попробовать местные и международные вкусы. Рынок также проводит различные мероприятия и активности, способствуя чувству связи между посетителями и продавцами.</p></div>
-</section>
 <section class="place" id="london_british_museum">
+<div class="place-lead">
 <h3>London British Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/london_british_museum.jpg" alt="London British Museum"/></figure>
+<p class="place-meta">Адрес: Great Russell Street, Bloomsbury</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/london_british_museum.jpg" alt="London British Museum" width="1138" height="1600" style="height: 453px; max-height: 453px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/london_british_museum_b.jpg" alt="London British Museum — вид 2" width="330" height="324" style="height: 453px; max-height: 453px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Национальный музей истории, искусства и культуры с бесплатным входом. Большой двор окружает Зал для чтения под стеклянным навесом. Среди основных достопримечательностей — Розеттский камень и скульптуры Парфенона (выставление зависит от политики займов/аренды). Билеты с ограничением по времени действительны для крупных временных выставок.</p>
 <p class="prose">Происходил из завещания сэра Ханса Склоуна и превратился в глобальную коллекцию; проект «Большой дворик» открыл внутренний двор для посетителей. Одно из самых посещаемых музеев мира и центр неспешных дневных прогулок в Блумсбери.</p></div>
 </section>
 <section class="place" id="london_buckingham_palace">
+<div class="place-lead">
 <h3>London Buckingham Palace</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/london_buckingham_palace.jpg" alt="London Buckingham Palace"/></figure>
+<p class="place-meta">Адрес: Westminster</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/london_buckingham_palace.jpg" alt="London Buckingham Palace" width="1280" height="821" style="height: 296px; max-height: 296px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/london_buckingham_palace_b.jpg" alt="London Buckingham Palace — вид 2" width="330" height="216" style="height: 296px; max-height: 296px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Действующая королевская резиденция и лондонская штаб-квартира монарха. Садовый фасад и Мемориал Виктории обрамляют подъезд с Малль. Смена караула привлекает толпы к парадным воротам в запланированные утра. Залы государства открыты для публики в выбранные летние даты.</p>
 <p class="prose">Изначально это был Баккингем-хаус. Георг IV и Виктория расширили его до того дворца, который посетители видят сегодня. Образ современной монархии в центре Лондона.</p></div>
 </section>
-<section class="place" id="london_camden_market">
-<h3>Кэмденский рынок</h3>
-
-
-<figure class="place-fig"><img src="../images/london_camden_market.jpg" alt="Кэмденский рынок"/></figure>
-<div class="place-desc"><p class="prose">Кэмденский рынок — это яркий центр творчества и торговли, расположенный в самом сердце Кэмден-Таун, Лондон. Известный своим эклектичным сочетанием продуктовых лавок, винтажных магазинов и ремесленных изделий, рынок привлекает миллионы посетителей каждый год. Его оживленная атмосфера дополняется живой музыкой и уличными выступлениями, что делает его обязательным местом для посещения как для местных жителей, так и для туристов. Кэмденский рынок привлекает более 28 миллионов посетителей ежегодно. Рынок насчитывает более 1,000 магазинов и лавок. Рынок Кэмден-Лок открылся в 1974 году и стал одним из первых рынков в этом районе.</p>
-<p class="prose">Кемденский рынок начал свою историю в 1970-х годах как небольшой ремесленный рынок, значительно изменяясь на протяжении десятилетий. Рост рынка был вызван развитием альтернативной культуры в Лондоне, особенно в эпоху панка, что помогло утвердить Кемден как центр молодежной культуры и творчества. Сегодня он включает в себя несколько рынков, в том числе Кемден Лок Маркет, который открылся в 1974 году. Культурно рынок Кэмден играет ключевую роль в идентичности Лондона, представляя собой плавильный котел разнообразных сообществ и художественного самовыражения. Он стал синонимом альтернативной моды и музыки, способствуя репутации города как глобальной культурной столицы. Рынок также отражает изменяющуюся динамику городской жизни, подчеркивая важность местного бизнеса и уличной еды в современном обществе.</p></div>
-</section>
-<section class="place" id="london_canary_wharf">
-<h3>Канари Уорф</h3>
-
-
-<figure class="place-fig"><img src="../images/london_canary_wharf.jpg" alt="Канари Уорф"/></figure>
-<div class="place-desc"><p class="prose">Канари Уорф — это яркий финансовый район, расположенный на востоке Лондона, известный своими современными небоскребами и бурлящей атмосферой. Когда-то являвшийся центром судоходной промышленности, он превратился в один из ключевых финансовых центров Великобритании, в котором расположены крупнейшие банки и корпорации. Посетители могут насладиться разнообразием магазинов, ресторанов и культурных пространств среди знаковой архитектуры. Канари Уорф является домом для более чем 105 000 сотрудников и более 300 компаний. В районе расположено несколько известных небоскрёбов, включая One Canada Square, который был самым высоким зданием в Великобритании до 2012 года.</p>
-<p class="prose">История Канари-Уорфа восходит к концу 19 века, когда он был разработан как док для судоходства и торговли. В конце 20 века район испытал значительный упадок, что привело к его реконструкции в 1980-х и 1990-х годах в финансовый район. Строительство знакового здания One Canada Square было завершено в 1991 году, что ознаменовало новую эру для этого района. Культурно, Канари Уорф представляет собой изменение в экономическом ландшафте Лондона, эволюционируя из исторического порта в современный финансовый центр. Он играет ключевую роль в повседневной жизни тысяч профессионалов и является символом глобального финансового влияния Лондона. В этом районе проходят различные публичные художественные инсталляции и мероприятия, что способствует его культурной яркости.</p></div>
-</section>
-<section class="place" id="london_churchill_war_rooms">
-<h3>Войсковые комнаты Черчилля</h3>
-
-
-<figure class="place-fig"><img src="../images/london_churchill_war_rooms.jpg" alt="Войсковые комнаты Черчилля"/></figure>
-<div class="place-desc"><p class="prose">Военные комнаты Черчилля, расположенные в сердце Лондона, предлагают увлекательный взгляд на подземный нервный центр, где Уинстон Черчилль и его правительство работали во время Второй мировой войны. Посетители могут исследовать сохранившиеся комнаты и экспонаты, которые рассказывают историю военного руководства Британии и вызовов, с которыми столкнулись в один из самых бурных периодов в истории. Этот погружающий опыт не только подчеркивает стратегические решения, принятые в это время, но и человеческие истории, стоящие за военными усилиями. Военные кабинеты Черчилля были открыты для публики в качестве музея в 1984 году. Этот сайт является частью Имперских военных музеев, посвященных сохранению истории конфликтов.</p>
-<p class="prose">Варшавские комнаты Черчилля были созданы в 1938 году как секретный штаб британского правительства во время Второй мировой войны. Эти помещения использовались активно с 1939 по 1945 год, предоставляя безопасное место для Черчилля и его кабинета для управления военными операциями и организации логистики военного времени. После войны объект был закрыт и оставался в значительной степени нетронутым до тех пор, пока в 1984 году не был открыт для публики как музей. Войсковые комнаты Черчилля имеют огромное политическое значение, так как именно оттуда принимались ключевые решения во время Второй мировой войны, влияющие на ход конфликта и будущее Европы. Этот объект служит культурной достопримечательностью, сохраняя наследие военной Британии и отражая стойкость и решимость британского народа. Он является частью Имперских военных музеев и способствует пониманию влияния войны на общество, что делает его важным образовательным ресурсом.</p></div>
-</section>
 <section class="place" id="london_covent_garden">
+<div class="place-lead">
 <h3>London Covent Garden</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/london_covent_garden.jpg" alt="London Covent Garden"/></figure>
+<p class="place-meta">Адрес: West End</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/london_covent_garden.jpg" alt="London Covent Garden" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/london_covent_garden_b.jpg" alt="London Covent Garden — вид 2" width="330" height="228" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Уличные музыканты под крышей рынка из железа и стекла с оперным театром и бутиковыми улочками, расходящимися от него. Ремесла и продавцы на Яблочном рынке меняются ежедневно. Уличные артисты должны проходить кастинг для слотов выступлений.</p>
 <p class="prose">Фруктово-цветной рынок переехал; в железный сарай заселили туризм и розничную торговлю. Пешеходный театр между Странд и Сэвен-Дайалс.</p></div>
 </section>
-<section class="place" id="london_pdfband_2_af9e03be">
-<h3>Fazl Moschee</h3>
+<section class="place" id="london_fazl_moschee">
+<div class="place-lead">
+<h3>London Fazl Moschee</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/london_pdfband_2_af9e03be.jpg" alt="Fazl Moschee"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/london_fazl_moschee.jpg" alt="London Fazl Moschee" width="1200" height="1600" style="height: 331px; max-height: 331px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/london_fazl_moschee_b.jpg" alt="London Fazl Moschee — вид 2" width="330" height="237" style="height: 331px; max-height: 331px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 </section>
 <section class="place" id="london_hyde_park">
+<div class="place-lead">
 <h3>London Hyde Park</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/london_hyde_park.jpg" alt="London Hyde Park"/></figure>
+<p class="place-meta">Место: Westminster</p>
+<figure class="place-fig place-fig--lo-res"><img src="../images/london_hyde_park_b.jpg" alt="London Hyde Park" width="330" height="220"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Дебаты на Площади ораторов, плавательный клуб «Serpentine», и лодки-педали рядом с садами Кенсингтон. Зимняя страна чудес сезонно заполняет восточную поляну. Маршруты Parkrun начинаются возле сцены по субботним утрам.</p>
 <p class="prose">Охотничий квест Генриха VIII превратился в викторианскую публичную прогулку, связанную с Грин-парком. Самая большая ненастроенная зеленая зона в Центральном Лондоне.</p></div>
 </section>
-<section class="place" id="london_kensington_palace">
-<h3>Кенсингтонский дворец</h3>
-
-
-<figure class="place-fig"><img src="../images/london_kensington_palace.jpg" alt="Кенсингтонский дворец"/></figure>
-<div class="place-desc"><p class="prose">Кенсингтонский дворец — это великолепная королевская резиденция, расположенная в сердце Кенсингтонских садов в Лондоне. С своей красивой архитектурой и зелеными садами он предлагает посетителям возможность заглянуть в жизнь британской королевской семьи. Дворец является домом для богатой коллекции искусства и исторических артефактов, что делает его обязательным местом для посещения для тех, кто интересуется королевским наследием Великобритании. Кенсингтонский дворец был приобретен королем Вильгельмом III и королевой Марией II в 1689 году. Королева Виктория родилась в Кенсингтонском дворце в 1819 году. Дворец расположен в Кенсингтонских садах, которые являются частью Королевских парков Лондона.</p>
-<p class="prose">Кенсингтонский дворец имеет историю, которая восходит к концу 17 века, когда он был приобретен королем Вильгельмом III и королевой Марией II в 1689 году. Изначально скромный особняк, он был преобразован в королевскую резиденцию и с тех пор стал местом рождения и домом нескольких британских монархов, включая королеву Викторию. Дворец претерпел различные renovations и расширения на протяжении многих лет, отражая изменяющиеся вкусы и стили монархии. Культурно, Кенсингтонский дворец имеет значительное значение, так как демонстрирует эволюцию королевской жизни и британского наследия. Он хранит коллекцию королевских портретов и артефактов, которые подчеркивают художественные достижения монархии. Дворец также является местом проведения различных общественных мероприятий и выставок, что способствует его роли в современном культурном жизни. Хотя это не религиозное место, его историческая важность как королевской резиденции сделала его символом британской монархии.</p></div>
-</section>
-<section class="place" id="london_kew_gardens">
-<h3>Пальмовый дом в Кью-Гарденс</h3>
-
-
-<figure class="place-fig"><img src="../images/london_kew_gardens.jpg" alt="Пальмовый дом в Кью-Гарденс"/></figure>
-<div class="place-desc"><p class="prose">Теплица Палм Хаус в Кью-Гарденс — это великолепная викторианская стеклянная конструкция, расположенная в Королевских ботанических садах в Кью, Лондон. Она демонстрирует разнообразную коллекцию тропических растений и служит важным центром для ботанических исследований и охраны природы. Посетители могут исследовать её зелёные интерьеры и наслаждаться спокойной атмосферой садов, что делает это место идеальным для любителей природы и семей. Пальмовый дом — один из старейших сохранившихся викторианских теплиц в мире. Он содержит более 1,500 растений из тропических регионов, включая пальмы, папоротники и орхидеи.</p>
-<p class="prose">Пальмовый дом был спроектирован архитектором Ричардом Тёрнером и завершён в 1848 году. Это была одна из первых крупных викторианских стеклянных конструкций, построенная для размещения коллекции экзотических растений из тропических климатов. На протяжении многих лет он подвергался различным реставрациям, чтобы сохранить свою архитектурную целостность и ценные виды растений, которые он содержит. Культурно Теплица является ключевой частью Королевских ботанических садов, объекта Всемирного наследия ЮНЕСКО, признанного за его историческое и научное значение. Она играет важную роль в общественном образовании о сохранении растений и биоразнообразии, отражая приверженность Великобритании охране окружающей среды. Теплица также служит местом проведения различных культурных мероприятий и выставок, обогащая повседневную жизнь сообщества.</p></div>
-</section>
 <section class="place" id="london_national_gallery">
+<div class="place-lead">
 <h3>London National Gallery</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/london_national_gallery.jpg" alt="London National Gallery"/></figure>
+<p class="place-meta">Адрес: Trafalgar Square</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/london_national_gallery.jpg" alt="London National Gallery" width="1200" height="1600" style="height: 245px; max-height: 245px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/london_national_gallery_b.jpg" alt="London National Gallery — вид 2" width="330" height="175" style="height: 245px; max-height: 245px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Национальная галерея — художественный музей в Лондоне, Англия, Великобритания. В пятницу заведения продлевают часы работы с вечерами, предлагая встречи и музыку. Временные выставки проходят в подвальных залах Сейнсбери.</p>
 <p class="prose">Парламент выделил средства на создание национальной коллекции живописи для образовательных целей на площади. Мировая коллекция работ мастеров-антиквариата без входной платы.</p></div>
 </section>
 <section class="place" id="london_natural_history_museum">
+<div class="place-lead">
 <h3>London Natural History Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/london_natural_history_museum.jpg" alt="London Natural History Museum"/></figure>
+<p class="place-meta">Адрес: Cromwell Road, South Kensington</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/london_natural_history_museum.jpg" alt="London Natural History Museum" width="1280" height="720" style="height: 259px; max-height: 259px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/london_natural_history_museum_b.jpg" alt="London Natural History Museum — вид 2" width="330" height="199" style="height: 259px; max-height: 259px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Помещение Хинце с скелетом синего кита под раскрашенными потолочными плитами, относящимися к категориям живых видов. Симулятор землетрясений находится в геологическом крыле. Ночные заведения ориентированы на взрослую аудиторию, предлагая музыку и бары.</p>
 <p class="prose">Отделились от естественнонаучных коллекций Британского музея и образовали музейный квартал в Саут-Кенсингтон. Семейный портал в мир науки, рядом с V&amp;A.</p></div>
 </section>
-<section class="place" id="london_notting_hill">
-<h3>Ноттинг-Хилл Портобелло</h3>
-
-
-<figure class="place-fig"><img src="../images/london_notting_hill.jpg" alt="Ноттинг-Хилл Портобелло"/></figure>
-<div class="place-desc"><p class="prose">Портобелло в Ноттинг Хилле — это яркий рынок, расположенный в одном из самых живописных районов Лондона. Известный своими красочными домами и оживленной атмосферой, рынок предлагает разнообразие антиквариата, продуктовых лавок и уникальных бутиков. Посетители могут погрузиться в местную культуру, наслаждаясь эклектичным сочетанием товаров и знаменитой улицей Портобелло. Портобелло Маркет — один из крупнейших антикварных рынков в мире. Рынок работает каждый день, при этом самым загруженным днем является суббота.</p>
-<p class="prose">Рынок Портобелло начал свою историю в 19 веке, изначально как рынок свежих продуктов, прежде чем превратиться в центр антиквариата и винтажных товаров. Рынок приобрел популярность в 1960-х годах, став центром зарождающегося контркультурного движения и привлекая разнообразную толпу художников и музыкантов. Культурно, Ноттинг-Хилл Портобелло имеет важное значение для художественной и социальной жизни Лондона, особенно в 1960-х и 70-х годах, когда он стал синонимом богемного образа жизни города. В этом районе проходит ежегодный карнаваль Ноттинг-Хилла, который отмечает карибскую культуру и наследие и привлекает миллионы посетителей каждый год. Рынок также отражает многонациональную структуру Лондона, демонстрируя разнообразие продуктов питания и ремесел из различных сообществ.</p></div>
-</section>
 <section class="place" id="london_palace_westminster">
+<div class="place-lead">
 <h3>London Palace Westminster</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/london_palace_westminster.jpg" alt="London Palace Westminster"/></figure>
+<p class="place-meta">Адрес: City of Westminster, London</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/london_palace_westminster.jpg" alt="London Palace Westminster" width="1280" height="853" style="height: 182px; max-height: 182px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/london_palace_westminster_b.jpg" alt="London Palace Westminster — вид 2" width="330" height="130" style="height: 182px; max-height: 182px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Местонахождение парламента Великобритании: Палата общин и Палата лордов заседают в залах, расположенных по обе стороны от Вестминстерского зала. Башня Елизаветы (Биг-Бен) возвышается на северном конце комплекса. Вестминстерский зал предшествует викторианской перестройке и до сих пор служит местом проведения церемониальных мероприятий. Часовая башня широко известна под прозвищем «Биг-Бен» из-за своего большого колокола.</p>
 <p class="prose">Происхождение королевского дворца находится на острове Торни; пожар в 1834 году уничтожил большую часть средневековой застройки, что привело к формированию сегодняшнего ансамбля в стиле неоготики. Деяствующий законодательный орган и один из наиболее фотографируемых силуэтов лондонской набережной.</p></div>
 </section>
-<section class="place" id="london_big_ben">
-<h3>Часы Вестминстерского дворца</h3>
+<section class="place" id="london_st_pauls_aerial_cropped">
+<div class="place-lead">
+<h3>London St Pauls Aerial Cropped</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/london_big_ben.jpg" alt="Часы Вестминстерского дворца"/></figure>
-<div class="place-desc"><p class="prose">Часы Вестминстерского дворца, известные как Биг Бен, являются одной из самых знаковых достопримечательностей Лондона, знаменитой своей впечатляющей готической архитектурой и выразительной часовой башней. Посетители стремятся увидеть сложный дизайн часов и услышать их знаменитые куранты, которые звучат по всему городу. Как символ британской демократии, он гордо стоит рядом с Парламентом, что делает его обязательным местом для посещения всем, кто исследует Лондон. Большой Бен — это прозвище Великого колокола часов на северном конце Вестминстерского дворца. Часовая башня высотой 316 футов (96 метров) имеет основание размером 40 футов (12 метров) в квадрате.</p>
-<p class="prose">Биг Бен был завершен в 1859 году и назван в честь сэра Бенджамина Холла, который курировал его установку. Часовая башня была спроектирована Огюстом Пюги в стиле готического возрождения и стала символом Лондона и Соединенного Королевства. Башня была переименована в Башню Елизаветы в 2012 году в честь Алмазного юбилея королевы Елизаветы II. Биг Бен является мощным символом британского управления и демократии, расположенным в самом сердце политического ландшафта Великобритании. Он не только функциональные часы, но и центр национальных празднований и протестов, отражая пульс общественной жизни в Лондоне. Культурно он представляет собой богатое наследие, привлекая миллионы туристов каждый год и занимая видное место в искусстве, литературе и СМИ.</p></div>
-</section>
-<section class="place" id="london_greenwich_observatory">
-<h3>Королевская обсерватория Гринвич</h3>
-
-
-<figure class="place-fig"><img src="../images/london_greenwich_observatory.jpg" alt="Королевская обсерватория Гринвич"/></figure>
-<div class="place-desc"><p class="prose">Королевская обсерватория Гринвич — это историческое место, расположенное в Гринвиче, Лондон, известное своей ключевой ролью в истории астрономии и навигации. Посетители могут исследовать линию нулевого меридиана, исторические телескопы и увлекательные выставки, посвященные хронометражу и небесной навигации. Обсерватория предлагает потрясающие виды на реку Темзу и город, что делает её обязательным местом для посещения как для любителей истории, так и для случайных туристов. Основан в 1675 году королем Карлом II. Родина нулевого меридиана, обозначающего 0 градусов долготы. Объект Всемирного наследия ЮНЕСКО с 1997 года.</p>
-<p class="prose">Основанная в 1675 году королем Карлом II, Королевская обсерватория была создана для улучшения навигации на море, позволяя морякам определять свою долготу. Обсерватория сыграла ключевую роль в развитии точного измерения времени и была домом для знаменитого Гринвичского среднего времени (GMT), которое было принято во всем мире. На протяжении веков она была центром астрономических исследований и значительно способствовала нашему пониманию вселенной. Королевская обсерватория Гринвич имеет огромное культурное значение как объект Всемирного наследия ЮНЕСКО, признанный за свои вклад в области науки и навигации. Она символизирует морскую историю Британии и глобальное влияние британских исследований в эпоху парусного флота. Обсерватория также играет роль в современной повседневной жизни, поскольку нулевой меридиан продолжает служить основой для стандартного учета времени по всему миру.</p></div>
-</section>
-<section class="place" id="london_shakespeare_globe">
-<h3>Глобус Шекспира</h3>
-
-
-<figure class="place-fig"><img src="../images/london_shakespeare_globe.jpg" alt="Глобус Шекспира"/></figure>
-<div class="place-desc"><p class="prose">Глобус Шекспира — это потрясающая реконструкция оригинального театра Глобус, где в конце 16-го и начале 17-го века ставились многие пьесы Уильяма Шекспира. Расположенный на берегу реки Темзы, этот знаковый объект предлагает посетителям возможность насладиться шекспировской драмой в аутентичной обстановке, включая экскурсии с гидом и живые выступления. Открытый дизайн театра и соломенная крыша создают уникальную атмосферу, погружая зрителей в мир елизаветинского театра. Оригинальный театр Глобус был построен в 1599 году. Современный театр «Глобус» Шекспира был открыт в 1997 году. Театр имеет открытый дизайн с крышей из соломы.</p>
-<p class="prose">Оригинальный Театр Глобус был построен в 1599 году труппой Шекспира, Лордом Камергером, и стал ключевым местом для произведений драматурга. Он был разрушен огнем в 1613 году во время представления «Генри VIII», но был быстро восстановлен в следующем году. Современная реконструкция, известная как Глобус Шекспира, открылась для публики в 1997 году, спроектированная так, чтобы отражать оригинальную структуру и атмосферу. Глобус Шекспира имеет огромное культурное значение как символ богатого театрального наследия Англии и как праздник неугасимого наследия Шекспира. Он служит важным образовательным ресурсом, способствующим изучению произведений Шекспира и истории театра. Это место также вносит вклад в яркую художественную сцену Лондона, привлекая посетителей со всего мира и способствуя глубокому пониманию классической литературы и исполнения.</p></div>
+<figure class="place-fig place-fig--hi-res"><img src="../images/london_st_pauls_aerial_cropped.jpg" alt="London St Pauls Aerial Cropped" width="1280" height="879"/></figure>
+</div>
 </section>
 <section class="place" id="london_st_pauls_cathedral">
+<div class="place-lead">
 <h3>London St Pauls Cathedral</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/london_st_pauls_cathedral.jpg" alt="London St Pauls Cathedral"/></figure>
+<p class="place-meta">Адрес: Ludgate Hill, City of London</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--row-sized"><img src="../images/london_st_pauls_cathedral.jpg" alt="London St Pauls Cathedral" width="1138" height="1140" style="height: 403px; max-height: 403px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/london_st_pauls_cathedral_b.jpg" alt="London St Pauls Cathedral — вид 2" width="330" height="288" style="height: 403px; max-height: 403px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Англиканский собор с куполом реновации Врена. Посещение башни включает в себя Галерею шепота и крипту с гробницами (включая гробницы Нельсона и Веллингтона). Нынешняя церковь заменила средневековый собор, разрушенный Большим пожаром 1666 года. Купол на протяжении столетий был самым высоким сооружением в Лондоне.</p>
 <p class="prose">Проект рена сохранился после военных повреждений; интерьер был реставрирован и адаптирован для современного богослужения и туризма.</p></div>
 </section>
-<section class="place" id="london_pdfband_0_223e3b5e">
-<h3>St Pauls aerial (cropped)</h3>
-
-
-<figure class="place-fig"><img src="../images/london_pdfband_0_223e3b5e.jpg" alt="St Pauls aerial (cropped)"/></figure>
-</section>
-<section class="place" id="london_tate_britain">
-<h3>Тейт Британия</h3>
-
-
-<figure class="place-fig"><img src="../images/london_tate_britain.jpg" alt="Тейт Британия"/></figure>
-<div class="place-desc"><p class="prose">Тейт Бритейн — это знаменитый художественный музей, расположенный в Лондоне, который хранит обширную коллекцию британского искусства с 16 века до наших дней. Посетители могут ознакомиться с шедеврами таких художников, как Дж.М.В. Тёрнер, Джон Констебл и Генри Мур, что делает его обязательным для посещения для любителей искусства. Музей также предлагает разнообразные выставки, образовательные программы и мероприятия, которые затрагивают современные проблемы в мире искусства. Тейт Британия хранит крупнейшую коллекцию британского искусства в мире. Коллекция музея включает произведения от 16 века до современного искусства.</p>
-<p class="prose">Тейт Британия была основана в 1897 году как Национальная галерея британского искусства и была переименована в 1932 году в честь сэра Генри Тейта, сахарного магната, который пожертвовал свою коллекцию нации. Здание музея, спроектированное архитектором Сидни Р. Дж. Смитом, открылось в 1897 году и претерпело несколько расширений и реконструкций, включая добавление галереи Клора в 2000 году, которая демонстрирует работы Дж. М. У. Тёрнера. Культурно Tate Britain играет важную роль в сохранении и демонстрации британского художественного наследия, способствуя формированию национальной идентичности. Он служит платформой для современного дискурса в искусстве и взаимодействует с разнообразной аудиторией через свои выставки и образовательные инициативы. Музей также является частью сети Tate, в которую входят Tate Modern и Tate Liverpool, что подчеркивает его значимость в культурном ландшафте Великобритании.</p></div>
-</section>
 <section class="place" id="london_tate_modern">
+<div class="place-lead">
 <h3>London Tate Modern</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/london_tate_modern.jpg" alt="London Tate Modern"/></figure>
+<p class="place-meta">Адрес: Bankside, Southwark</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/london_tate_modern.jpg" alt="London Tate Modern" width="1280" height="960" style="height: 260px; max-height: 260px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/london_tate_modern_b.jpg" alt="London Tate Modern — вид 2" width="330" height="186" style="height: 260px; max-height: 260px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Международное современное и актуальное искусство в переоборудованной электростанции Банксайд. В Турбильном зале представлены крупномасштабные инсталляции. Посещение постоянной коллекции бесплатно; специальные выставки платные. Расширение «The Switch House» добавило смотровые уровни над Темзой.</p>
 <p class="prose">Электростанция Bankside, работавшая на мазуте, была закрыта в 1981 году; адаптивное повторное использование сохранило дымовую трубу и кирпичное строение в качестве культурного центра у реки. Аналог Святого Павла на Саут-Банке, через Миллениум-бридж.</p></div>
 </section>
 <section class="place" id="london_tower_bridge">
+<div class="place-lead">
 <h3>London Tower Bridge</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1886–1894</p>
-<figure class="place-fig"><img src="../images/london_tower_bridge.jpg" alt="London Tower Bridge"/></figure>
+<p class="place-meta">Место: Tower Bridge Road, London | Период: 1886–1894</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/london_tower_bridge.jpg" alt="London Tower Bridge" width="1280" height="640" style="height: 204px; max-height: 204px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/london_tower_bridge_b.jpg" alt="London Tower Bridge — вид 2" width="330" height="146" style="height: 204px; max-height: 204px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Сочетание бальзамического и подвесного мостов возле Тауэра. Настилы верхних пешеходных дорожек теперь используются для выставок и созерцания реки. Гидравлическая сила изначально приводила в движение проезжую часть; электрический привод заменил ее в 1970-х годах. Мост часто ошибочно принимают за Лондонский мост выше по течению.</p>
 <p class="prose">Спроектировано Хорасом Джонсом и Джоном Вулфом Барри для облегчения дорожного движения при сохранении доступа крупным парусникам к Пул-оф-Лондона. Самый узнаваемый переход Темзы в Лондоне в популярной символике.</p></div>
 </section>
 <section class="place" id="london_tower_of_london">
+<div class="place-lead">
 <h3>London Tower Of London</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/london_tower_of_london.jpg" alt="London Tower Of London"/></figure>
+<p class="place-meta">Адрес: Tower Hill</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/london_tower_of_london.jpg" alt="London Tower Of London" width="1280" height="804" style="height: 260px; max-height: 260px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/london_tower_of_london_b.jpg" alt="London Tower Of London — вид 2" width="330" height="186" style="height: 260px; max-height: 260px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Исторический замок и бывшая королевская монетная палата, где хранятся Королевские драгоценности. Патрульные (Йуман Уордеры) проводят туры, сочетающие хронику и анекдоты. Вильгельм Завоеватель начал строительство Белой башни для защиты Города. Вороны содержатся на месте по традиции, связанной с судьбой башни.</p>
 <p class="prose">Роли дворца, тюрьмы, менежи и оружейной наслоились на протяжении Средневековья и эпохи Тюдоров, став сегодня церемониальной крепостью. ЮНЕСКО-объект и густая глава о британской монархии в камне.</p></div>
 </section>
+<section class="place" id="london_westminster_abbey">
+<div class="place-lead">
+<h3>London Westminster Abbey</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Dean&#x27;s Yard, Westminster</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/london_westminster_abbey.jpg" alt="London Westminster Abbey" width="1280" height="1519" style="height: 182px; max-height: 182px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/london_westminster_abbey_b.jpg" alt="London Westminster Abbey — вид 2" width="330" height="130" style="height: 182px; max-height: 182px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Королевская уникальная церковь и место коронации. Уголок поэтов и королевские гробницы вознаградят вас более продолжительным посещением, чем фотография фасада. Коронации здесь проходили с 1066 года (Вильгельм Завоеватель). Здесь похоронены или увековечены многие монархи и известные британцы.</p>
+<p class="prose">Церковь Эдуарда Конфессора была заменена современным готическим зданием в период правления Генри III и его преемников. Церемония, музыка и средневековая архитектура сходятся у площади Парламента.</p></div>
+</section>
+<section class="place" id="london_churchill_war_rooms">
+<div class="place-lead">
+<h3>Войсковые комнаты Черчилля</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/london_churchill_war_rooms.jpg" alt="Войсковые комнаты Черчилля" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/london_churchill_war_rooms_b.jpg" alt="Войсковые комнаты Черчилля — вид 2" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Военные комнаты Черчилля, расположенные в сердце Лондона, предлагают увлекательный взгляд на подземный нервный центр, где Уинстон Черчилль и его правительство работали во время Второй мировой войны. Посетители могут исследовать сохранившиеся комнаты и экспонаты, которые рассказывают историю военного руководства Британии и вызовов, с которыми столкнулись в один из самых бурных периодов в истории. Этот погружающий опыт не только подчеркивает стратегические решения, принятые в это время, но и человеческие истории, стоящие за военными усилиями. Военные кабинеты Черчилля были открыты для публики в качестве музея в 1984 году. Этот сайт является частью Имперских военных музеев, посвященных сохранению истории конфликтов.</p>
+<p class="prose">Варшавские комнаты Черчилля были созданы в 1938 году как секретный штаб британского правительства во время Второй мировой войны. Эти помещения использовались активно с 1939 по 1945 год, предоставляя безопасное место для Черчилля и его кабинета для управления военными операциями и организации логистики военного времени. После войны объект был закрыт и оставался в значительной степени нетронутым до тех пор, пока в 1984 году не был открыт для публики как музей. Войсковые комнаты Черчилля имеют огромное политическое значение, так как именно оттуда принимались ключевые решения во время Второй мировой войны, влияющие на ход конфликта и будущее Европы. Этот объект служит культурной достопримечательностью, сохраняя наследие военной Британии и отражая стойкость и решимость британского народа. Он является частью Имперских военных музеев и способствует пониманию влияния войны на общество, что делает его важным образовательным ресурсом.</p></div>
+</section>
+<section class="place" id="london_shakespeare_globe">
+<div class="place-lead">
+<h3>Глобус Шекспира</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/london_shakespeare_globe.jpg" alt="Глобус Шекспира" width="330" height="260" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/london_shakespeare_globe_b.jpg" alt="Глобус Шекспира — вид 2" width="330" height="216" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Глобус Шекспира — это потрясающая реконструкция оригинального театра Глобус, где в конце 16-го и начале 17-го века ставились многие пьесы Уильяма Шекспира. Расположенный на берегу реки Темзы, этот знаковый объект предлагает посетителям возможность насладиться шекспировской драмой в аутентичной обстановке, включая экскурсии с гидом и живые выступления. Открытый дизайн театра и соломенная крыша создают уникальную атмосферу, погружая зрителей в мир елизаветинского театра. Оригинальный театр Глобус был построен в 1599 году. Современный театр «Глобус» Шекспира был открыт в 1997 году. Театр имеет открытый дизайн с крышей из соломы.</p>
+<p class="prose">Оригинальный Театр Глобус был построен в 1599 году труппой Шекспира, Лордом Камергером, и стал ключевым местом для произведений драматурга. Он был разрушен огнем в 1613 году во время представления «Генри VIII», но был быстро восстановлен в следующем году. Современная реконструкция, известная как Глобус Шекспира, открылась для публики в 1997 году, спроектированная так, чтобы отражать оригинальную структуру и атмосферу. Глобус Шекспира имеет огромное культурное значение как символ богатого театрального наследия Англии и как праздник неугасимого наследия Шекспира. Он служит важным образовательным ресурсом, способствующим изучению произведений Шекспира и истории театра. Это место также вносит вклад в яркую художественную сцену Лондона, привлекая посетителей со всего мира и способствуя глубокому пониманию классической литературы и исполнения.</p></div>
+</section>
+<section class="place" id="london_canary_wharf">
+<div class="place-lead">
+<h3>Канари Уорф</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/london_canary_wharf.jpg" alt="Канари Уорф" width="330" height="186" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/london_canary_wharf_b.jpg" alt="Канари Уорф — вид 2" width="330" height="186" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Канари Уорф — это яркий финансовый район, расположенный на востоке Лондона, известный своими современными небоскребами и бурлящей атмосферой. Когда-то являвшийся центром судоходной промышленности, он превратился в один из ключевых финансовых центров Великобритании, в котором расположены крупнейшие банки и корпорации. Посетители могут насладиться разнообразием магазинов, ресторанов и культурных пространств среди знаковой архитектуры. Канари Уорф является домом для более чем 105 000 сотрудников и более 300 компаний. В районе расположено несколько известных небоскрёбов, включая One Canada Square, который был самым высоким зданием в Великобритании до 2012 года.</p>
+<p class="prose">История Канари-Уорфа восходит к концу 19 века, когда он был разработан как док для судоходства и торговли. В конце 20 века район испытал значительный упадок, что привело к его реконструкции в 1980-х и 1990-х годах в финансовый район. Строительство знакового здания One Canada Square было завершено в 1991 году, что ознаменовало новую эру для этого района. Культурно, Канари Уорф представляет собой изменение в экономическом ландшафте Лондона, эволюционируя из исторического порта в современный финансовый центр. Он играет ключевую роль в повседневной жизни тысяч профессионалов и является символом глобального финансового влияния Лондона. В этом районе проходят различные публичные художественные инсталляции и мероприятия, что способствует его культурной яркости.</p></div>
+</section>
+<section class="place" id="london_kensington_palace">
+<div class="place-lead">
+<h3>Кенсингтонский дворец</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/london_kensington_palace.jpg" alt="Кенсингтонский дворец" width="330" height="267" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/london_kensington_palace_b.jpg" alt="Кенсингтонский дворец — вид 2" width="330" height="422" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Кенсингтонский дворец — это великолепная королевская резиденция, расположенная в сердце Кенсингтонских садов в Лондоне. С своей красивой архитектурой и зелеными садами он предлагает посетителям возможность заглянуть в жизнь британской королевской семьи. Дворец является домом для богатой коллекции искусства и исторических артефактов, что делает его обязательным местом для посещения для тех, кто интересуется королевским наследием Великобритании. Кенсингтонский дворец был приобретен королем Вильгельмом III и королевой Марией II в 1689 году. Королева Виктория родилась в Кенсингтонском дворце в 1819 году. Дворец расположен в Кенсингтонских садах, которые являются частью Королевских парков Лондона.</p>
+<p class="prose">Кенсингтонский дворец имеет историю, которая восходит к концу 17 века, когда он был приобретен королем Вильгельмом III и королевой Марией II в 1689 году. Изначально скромный особняк, он был преобразован в королевскую резиденцию и с тех пор стал местом рождения и домом нескольких британских монархов, включая королеву Викторию. Дворец претерпел различные renovations и расширения на протяжении многих лет, отражая изменяющиеся вкусы и стили монархии. Культурно, Кенсингтонский дворец имеет значительное значение, так как демонстрирует эволюцию королевской жизни и британского наследия. Он хранит коллекцию королевских портретов и артефактов, которые подчеркивают художественные достижения монархии. Дворец также является местом проведения различных общественных мероприятий и выставок, что способствует его роли в современном культурном жизни. Хотя это не религиозное место, его историческая важность как королевской резиденции сделала его символом британской монархии.</p></div>
+</section>
+<section class="place" id="london_greenwich_observatory">
+<div class="place-lead">
+<h3>Королевская обсерватория Гринвич</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/london_greenwich_observatory.jpg" alt="Королевская обсерватория Гринвич" width="330" height="495" style="height: 207px; max-height: 207px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/london_greenwich_observatory_b.jpg" alt="Королевская обсерватория Гринвич — вид 2" width="330" height="148" style="height: 207px; max-height: 207px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Королевская обсерватория Гринвич — это историческое место, расположенное в Гринвиче, Лондон, известное своей ключевой ролью в истории астрономии и навигации. Посетители могут исследовать линию нулевого меридиана, исторические телескопы и увлекательные выставки, посвященные хронометражу и небесной навигации. Обсерватория предлагает потрясающие виды на реку Темзу и город, что делает её обязательным местом для посещения как для любителей истории, так и для случайных туристов. Основан в 1675 году королем Карлом II. Родина нулевого меридиана, обозначающего 0 градусов долготы. Объект Всемирного наследия ЮНЕСКО с 1997 года.</p>
+<p class="prose">Основанная в 1675 году королем Карлом II, Королевская обсерватория была создана для улучшения навигации на море, позволяя морякам определять свою долготу. Обсерватория сыграла ключевую роль в развитии точного измерения времени и была домом для знаменитого Гринвичского среднего времени (GMT), которое было принято во всем мире. На протяжении веков она была центром астрономических исследований и значительно способствовала нашему пониманию вселенной. Королевская обсерватория Гринвич имеет огромное культурное значение как объект Всемирного наследия ЮНЕСКО, признанный за свои вклад в области науки и навигации. Она символизирует морскую историю Британии и глобальное влияние британских исследований в эпоху парусного флота. Обсерватория также играет роль в современной повседневной жизни, поскольку нулевой меридиан продолжает служить основой для стандартного учета времени по всему миру.</p></div>
+</section>
+<section class="place" id="london_camden_market">
+<div class="place-lead">
+<h3>Кэмденский рынок</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<figure class="place-fig place-fig--lo-res"><img src="../images/london_camden_market_b.jpg" alt="Кэмденский рынок" width="330" height="247"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Кэмденский рынок — это яркий центр творчества и торговли, расположенный в самом сердце Кэмден-Таун, Лондон. Известный своим эклектичным сочетанием продуктовых лавок, винтажных магазинов и ремесленных изделий, рынок привлекает миллионы посетителей каждый год. Его оживленная атмосфера дополняется живой музыкой и уличными выступлениями, что делает его обязательным местом для посещения как для местных жителей, так и для туристов. Кэмденский рынок привлекает более 28 миллионов посетителей ежегодно. Рынок насчитывает более 1,000 магазинов и лавок. Рынок Кэмден-Лок открылся в 1974 году и стал одним из первых рынков в этом районе.</p>
+<p class="prose">Кемденский рынок начал свою историю в 1970-х годах как небольшой ремесленный рынок, значительно изменяясь на протяжении десятилетий. Рост рынка был вызван развитием альтернативной культуры в Лондоне, особенно в эпоху панка, что помогло утвердить Кемден как центр молодежной культуры и творчества. Сегодня он включает в себя несколько рынков, в том числе Кемден Лок Маркет, который открылся в 1974 году. Культурно рынок Кэмден играет ключевую роль в идентичности Лондона, представляя собой плавильный котел разнообразных сообществ и художественного самовыражения. Он стал синонимом альтернативной моды и музыки, способствуя репутации города как глобальной культурной столицы. Рынок также отражает изменяющуюся динамику городской жизни, подчеркивая важность местного бизнеса и уличной еды в современном обществе.</p></div>
+</section>
 <section class="place" id="london_va_museum">
+<div class="place-lead">
 <h3>Музей Виктории и Альберта</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/london_va_museum.jpg" alt="Музей Виктории и Альберта"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/london_va_museum.jpg" alt="Музей Виктории и Альберта" width="330" height="220"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Музей Виктории и Альберта, часто называемый V&amp;A, является всемирно известным музеем, расположенным в Саут-Кенсингтоне, Лондон. Он хранит обширную коллекцию декоративного искусства и дизайна, охватывающую более 5,000 лет истории. Посетители могут исследовать выставки, представляющие все, от моды и текстиля до керамики и фотографии, что делает его настоящим сокровищем для любителей искусства и культурных энтузиастов. V&amp;A — это крупнейший в мире музей декоративного искусства и дизайна. В его коллекции более 2,3 миллиона объектов, охватывающих 5000 лет.</p>
 <p class="prose">Музей Виктории и Альберта был основан в 1852 году, изначально как Музей производств. Он был создан для содействия улучшению декоративного искусства и дизайна в Британии, отражая влияние индустриальной эпохи на общество. Музей был назван в честь королевы Виктории и её мужа, принца Альберта, которые сыграли ключевую роль в его создании. На протяжении многих лет он претерпел несколько расширений и реконструкций, став одним из крупнейших музеев декоративного искусства и дизайна в мире. Культурно V&amp;A играет ключевую роль в сохранении и демонстрации художественного наследия Британии и за ее пределами. Здесь представлена разнообразная коллекция, отражающая различные культуры и эпохи, что способствует пониманию глобального искусства и дизайна. Музей также взаимодействует с общественностью через образовательные программы, выставки и мероприятия, делая искусство доступным для всех. Хотя он не имеет религиозного значения, его роль в культурном ландшафте Лондона глубока, влияя на повседневную жизнь и традиции в городе.</p></div>
 </section>
-<section class="place" id="london_westminster_abbey">
-<h3>London Westminster Abbey</h3>
+<section class="place" id="london_notting_hill">
+<div class="place-lead">
+<h3>Ноттинг-Хилл Портобелло</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/london_westminster_abbey.jpg" alt="London Westminster Abbey"/></figure>
-<div class="place-desc"><p class="prose">Королевская уникальная церковь и место коронации. Уголок поэтов и королевские гробницы вознаградят вас более продолжительным посещением, чем фотография фасада. Коронации здесь проходили с 1066 года (Вильгельм Завоеватель). Здесь похоронены или увековечены многие монархи и известные британцы.</p>
-<p class="prose">Церковь Эдуарда Конфессора была заменена современным готическим зданием в период правления Генри III и его преемников. Церемония, музыка и средневековая архитектура сходятся у площади Парламента.</p></div>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/london_notting_hill.jpg" alt="Ноттинг-Хилл Портобелло" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/london_notting_hill_b.jpg" alt="Ноттинг-Хилл Портобелло — вид 2" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Портобелло в Ноттинг Хилле — это яркий рынок, расположенный в одном из самых живописных районов Лондона. Известный своими красочными домами и оживленной атмосферой, рынок предлагает разнообразие антиквариата, продуктовых лавок и уникальных бутиков. Посетители могут погрузиться в местную культуру, наслаждаясь эклектичным сочетанием товаров и знаменитой улицей Портобелло. Портобелло Маркет — один из крупнейших антикварных рынков в мире. Рынок работает каждый день, при этом самым загруженным днем является суббота.</p>
+<p class="prose">Рынок Портобелло начал свою историю в 19 веке, изначально как рынок свежих продуктов, прежде чем превратиться в центр антиквариата и винтажных товаров. Рынок приобрел популярность в 1960-х годах, став центром зарождающегося контркультурного движения и привлекая разнообразную толпу художников и музыкантов. Культурно, Ноттинг-Хилл Портобелло имеет важное значение для художественной и социальной жизни Лондона, особенно в 1960-х и 70-х годах, когда он стал синонимом богемного образа жизни города. В этом районе проходит ежегодный карнаваль Ноттинг-Хилла, который отмечает карибскую культуру и наследие и привлекает миллионы посетителей каждый год. Рынок также отражает многонациональную структуру Лондона, демонстрируя разнообразие продуктов питания и ремесел из различных сообществ.</p></div>
+</section>
+<section class="place" id="london_kew_gardens">
+<div class="place-lead">
+<h3>Пальмовый дом в Кью-Гарденс</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/london_kew_gardens.jpg" alt="Пальмовый дом в Кью-Гарденс" width="330" height="187" style="height: 166px; max-height: 166px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/london_kew_gardens_b.jpg" alt="Пальмовый дом в Кью-Гарденс — вид 2" width="330" height="119" style="height: 166px; max-height: 166px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Теплица Палм Хаус в Кью-Гарденс — это великолепная викторианская стеклянная конструкция, расположенная в Королевских ботанических садах в Кью, Лондон. Она демонстрирует разнообразную коллекцию тропических растений и служит важным центром для ботанических исследований и охраны природы. Посетители могут исследовать её зелёные интерьеры и наслаждаться спокойной атмосферой садов, что делает это место идеальным для любителей природы и семей. Пальмовый дом — один из старейших сохранившихся викторианских теплиц в мире. Он содержит более 1,500 растений из тропических регионов, включая пальмы, папоротники и орхидеи.</p>
+<p class="prose">Пальмовый дом был спроектирован архитектором Ричардом Тёрнером и завершён в 1848 году. Это была одна из первых крупных викторианских стеклянных конструкций, построенная для размещения коллекции экзотических растений из тропических климатов. На протяжении многих лет он подвергался различным реставрациям, чтобы сохранить свою архитектурную целостность и ценные виды растений, которые он содержит. Культурно Теплица является ключевой частью Королевских ботанических садов, объекта Всемирного наследия ЮНЕСКО, признанного за его историческое и научное значение. Она играет важную роль в общественном образовании о сохранении растений и биоразнообразии, отражая приверженность Великобритании охране окружающей среды. Теплица также служит местом проведения различных культурных мероприятий и выставок, обогащая повседневную жизнь сообщества.</p></div>
+</section>
+<section class="place" id="london_borough_market">
+<div class="place-lead">
+<h3>Рынок Бороу</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/london_borough_market.jpg" alt="Рынок Бороу" width="330" height="498" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/london_borough_market_b.jpg" alt="Рынок Бороу — вид 2" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Боро Маркет — один из старейших и самых известных продуктовых рынков Лондона, предлагающий яркий ассортимент свежих продуктов, деликатесов и ремесленных товаров. Расположенный рядом с Лондонским мостом, он привлекает как местных жителей, так и туристов, предоставляя сенсорный праздник из зрительных, звуковых и вкусовых ощущений. Рынок является центром кулинарного творчества, на нем расположены различные торговые точки и продавцы, которые отмечают как британскую, так и международную кухню. Боро Маркет был официально основан в 1756 году. Рынок расположен на южном берегу реки Темзы, недалеко от Лондонского моста. Он включает более 100 киосков и магазинов, предлагающих разнообразные продукты питания.</p>
+<p class="prose">Боро Маркет имеет корни, уходящие в 11-й век, что делает его одним из старейших рынков в Лондоне. Изначально основанный как оптовый рынок фруктов и овощей, он эволюционировал на протяжении веков, с значительной реконструкцией в 19-м веке. В 20-м веке рынок столкнулся с трудностями, но был обновлён в 1990-х годах, став популярным местом для любителей еды. Культурно, рынок Бороу играет важную роль в гастрономической сцене Лондона, отражая разнообразное кулинарное наследие города. Он служит местом встречи для сообщества, где люди могут попробовать местные и международные вкусы. Рынок также проводит различные мероприятия и активности, способствуя чувству связи между посетителями и продавцами.</p></div>
+</section>
+<section class="place" id="london_tate_britain">
+<div class="place-lead">
+<h3>Тейт Британия</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/london_tate_britain.jpg" alt="Тейт Британия" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/london_tate_britain_b.jpg" alt="Тейт Британия — вид 2" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Тейт Бритейн — это знаменитый художественный музей, расположенный в Лондоне, который хранит обширную коллекцию британского искусства с 16 века до наших дней. Посетители могут ознакомиться с шедеврами таких художников, как Дж.М.В. Тёрнер, Джон Констебл и Генри Мур, что делает его обязательным для посещения для любителей искусства. Музей также предлагает разнообразные выставки, образовательные программы и мероприятия, которые затрагивают современные проблемы в мире искусства. Тейт Британия хранит крупнейшую коллекцию британского искусства в мире. Коллекция музея включает произведения от 16 века до современного искусства.</p>
+<p class="prose">Тейт Британия была основана в 1897 году как Национальная галерея британского искусства и была переименована в 1932 году в честь сэра Генри Тейта, сахарного магната, который пожертвовал свою коллекцию нации. Здание музея, спроектированное архитектором Сидни Р. Дж. Смитом, открылось в 1897 году и претерпело несколько расширений и реконструкций, включая добавление галереи Клора в 2000 году, которая демонстрирует работы Дж. М. У. Тёрнера. Культурно Tate Britain играет важную роль в сохранении и демонстрации британского художественного наследия, способствуя формированию национальной идентичности. Он служит платформой для современного дискурса в искусстве и взаимодействует с разнообразной аудиторией через свои выставки и образовательные инициативы. Музей также является частью сети Tate, в которую входят Tate Modern и Tate Liverpool, что подчеркивает его значимость в культурном ландшафте Великобритании.</p></div>
+</section>
+<section class="place" id="london_big_ben">
+<div class="place-lead">
+<h3>Часы Вестминстерского дворца</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/london_big_ben.jpg" alt="Часы Вестминстерского дворца" width="330" height="223" style="height: 182px; max-height: 182px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/london_big_ben_b.jpg" alt="Часы Вестминстерского дворца — вид 2" width="330" height="130" style="height: 182px; max-height: 182px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Часы Вестминстерского дворца, известные как Биг Бен, являются одной из самых знаковых достопримечательностей Лондона, знаменитой своей впечатляющей готической архитектурой и выразительной часовой башней. Посетители стремятся увидеть сложный дизайн часов и услышать их знаменитые куранты, которые звучат по всему городу. Как символ британской демократии, он гордо стоит рядом с Парламентом, что делает его обязательным местом для посещения всем, кто исследует Лондон. Большой Бен — это прозвище Великого колокола часов на северном конце Вестминстерского дворца. Часовая башня высотой 316 футов (96 метров) имеет основание размером 40 футов (12 метров) в квадрате.</p>
+<p class="prose">Биг Бен был завершен в 1859 году и назван в честь сэра Бенджамина Холла, который курировал его установку. Часовая башня была спроектирована Огюстом Пюги в стиле готического возрождения и стала символом Лондона и Соединенного Королевства. Башня была переименована в Башню Елизаветы в 2012 году в честь Алмазного юбилея королевы Елизаветы II. Биг Бен является мощным символом британского управления и демократии, расположенным в самом сердце политического ландшафта Великобритании. Он не только функциональные часы, но и центр национальных празднований и протестов, отражая пульс общественной жизни в Лондоне. Культурно он представляет собой богатое наследие, привлекая миллионы туристов каждый год и занимая видное место в искусстве, литературе и СМИ.</p></div>
 </section>
 </body>
 </html>

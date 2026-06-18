@@ -13,7 +13,7 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
 .otium-logo { font-family: 'Spectral', serif; font-size: 2.15rem;
   font-weight: 600; letter-spacing: 0.18em; margin-bottom: 0.85rem; }
 .otiump { margin: 0.42rem 0; line-height: 1.42; text-align: justify;
-  max-width: 38rem; font-size: 0.95rem; }
+  font-size: 0.95rem; }
 .guide-title { page-break-after: auto; margin-bottom: 0.55rem;
   page-break-inside: avoid; }
 .historical-reference { margin: 0.75rem 0 1.15rem;
@@ -63,22 +63,103 @@ ol.trip-stops a:hover { text-decoration: underline; }
 .heraldry-univ-caption { font-size: 0.52rem; line-height: 1.18;
   margin: 0.12rem 0 0; padding: 0 0.06rem; color: #252525;
   text-align: center; font-weight: 500; }
-.heraldry-motto { text-align: center; max-width: 18rem; margin: 0.18rem auto;
+.heraldry-motto { text-align: center; margin: 0.18rem auto;
   width: 100%; }
 .motto-line { font-family: 'Spectral', serif; font-size: 1rem;
   margin: 0; color: #333; line-height: 1.35; }
 .guide-title h1.guide-title-main { font-family: 'Spectral', serif;
   font-size: 2.35rem; margin-bottom: 0.5rem; font-weight: 600; }
 .lead { color: #444; font-size: 1.05rem; }
-.guide-toc { margin: 0.85rem 0 1.15rem; page-break-inside: avoid; }
-.guide-toc h2 { font-family: 'Spectral', serif; font-size: 1.28rem;
-  font-weight: 600; margin: 0.4rem 0 0.55rem; }
+
+.guide-toc { page-break-before: always; break-before: page;
+  page-break-after: always; break-after: page;
+  margin: 0; padding: 0.2rem 0 0.45rem; page-break-inside: auto; }
+.guide-toc h2 { font-family: 'Spectral', serif;
+  font-size: 1.28rem; font-weight: 600; margin: 0.4rem 0 0.55rem; }
 .guide-toc ol { margin: 0.35rem 0 0.65rem 1.25rem; padding: 0;
   columns: 2; column-gap: 1.5rem; }
 .guide-toc li { margin: 0.18rem 0; line-height: 1.35;
   font-size: 0.88rem; break-inside: avoid; }
-.guide-toc a { color: #1a5276; text-decoration: none; }
+.guide-toc a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.guide-toc a:hover { color: #0d3d56; }
 .guide-toc li.toc-item--sub { font-size: 0.82rem; margin-left: 0.35rem; }
+.toc-back { font-size: 0.78rem; margin: 0 0 0.35rem; text-align: right; }
+.toc-back a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.toc-back a:hover { color: #0d3d56; }
+.place, .historical-reference, .guide-primer, .guide-trip-plans {
+  scroll-margin-top: 1.25rem; }
+.historical-reference h2, .guide-primer h2, .guide-trip-plans h2,
+.chapter-head h2, .place-lead h3 { position: relative; }
+.guide-toc + .place, .guide-toc + .chapter-head {
+  page-break-before: avoid; break-before: avoid-page; }
+.place-lead { page-break-inside: avoid; break-inside: avoid-page;
+  page-break-after: auto; }
+.place-lead > h3 { page-break-after: avoid; break-after: avoid-page; }
+.place-lead > .place-meta { page-break-after: avoid; break-after: avoid-page; }
+
+.place-fig { page-break-inside: avoid; break-inside: avoid-page;
+  margin: 0.5rem 0 1rem; }
+.place-fig img {
+  page-break-inside: avoid; break-inside: avoid-page;
+  max-height: 48vh; width: auto; max-width: 100%;
+  object-fit: contain; margin-left: auto; margin-right: auto; }
+.place-fig--hi-res img { max-height: 52vh; }
+.place-fig--lo-res img { max-height: 30vh; }
+.place-pdf-fig-row {
+  display: flex; flex-direction: row; flex-wrap: wrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.45rem 0.55rem; margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row .place-fig {
+  flex: 1 1 30%; margin: 0; min-width: 26%; max-width: 100%; }
+.place-pdf-fig-row .place-fig img {
+  width: auto; max-width: 100%; height: auto; max-height: 44vh;
+  object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--pair {
+  flex-wrap: nowrap; justify-content: space-between;
+  align-items: flex-end; gap: 0.5rem 0.65rem; }
+.place-pdf-fig-row--pair .place-fig {
+  flex: 1 1 47%; min-width: 0; max-width: 50%;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--pair .place-fig img {
+  max-height: 44vh; object-fit: contain; }
+.place-pdf-fig-row--pair .place-fig--hi-res img { max-height: 52vh; }
+.place-pdf-fig-row--pair .place-fig--lo-res img { max-height: 26vh; }
+.place-pdf-fig-row--pair .place-fig--row-sized img,
+.place-pdf-fig-row--triple .place-fig--row-sized img,
+.place-pdf-fig-row--many .place-fig--row-sized img {
+  width: auto; max-width: 100%; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row .place-fig--row-sized.place-fig--hi-res img,
+.place-pdf-fig-row .place-fig--row-sized.place-fig--lo-res img {
+  max-height: unset; }
+.place-pdf-fig-rows-stack {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple {
+  display: flex; flex-direction: row; flex-wrap: nowrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.4rem 0.48rem; margin: 0;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--triple .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--triple .place-fig--hi-res img { max-height: 42vh; }
+.place-pdf-fig-row--triple .place-fig--lo-res img { max-height: 18vh; }
+.place-pdf-fig-row--many {
+  flex-wrap: nowrap; justify-content: center; align-items: flex-end;
+  gap: 0.35rem 0.42rem; }
+.place-pdf-fig-row--many .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--many .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+
+
 .place { margin-bottom: 2.2rem; page-break-inside: auto; }
 h3 { font-family: 'Spectral', serif; font-size: 1.22rem; margin: 1.2rem 0 0.35rem;
   font-weight: 600; }
@@ -90,7 +171,6 @@ h4 { font-family: 'Spectral', serif; font-size: 0.95rem; text-transform: upperca
   color: #555; font-size: 0.95rem; margin: 0 0 0.5rem; font-style: italic; }
 .place-meta { font-size: 0.92rem; color: #353535; margin: 0 0 0.75rem;
   line-height: 1.4; }
-.place-fig { margin: 0.5rem 0 1rem; }
 img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
 .prose, .place-desc p { margin: 0.45rem 0; line-height: 1.5;
   text-align: justify; }
@@ -110,11 +190,14 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <figure class="heraldry-fig heraldry-coat-book" title="Emblem of Istanbul"><img src="../images/guide_coat_of_arms.svg" alt="Emblem of Istanbul"/></figure>
 <figure class="heraldry-fig heraldry-coat-book" title="Flag of Istanbul"><img src="../images/guide_flag.svg" alt="Flag of Istanbul"/></figure>
 </div></div><h1 class="guide-title-main">Istanbul</h1><p class="lead">Путеводитель. Объектов в этом выпуске: 33.</p></header>
+<nav class="guide-toc" id="guide-toc" aria-label="Содержание"><h2>Содержание</h2><ol><li class="toc-item"><a href="#guide-historical">Историческая справка</a></li><li class="toc-item"><a href="#guide-trips">Маршруты</a></li><li class="toc-item"><a href="#istanbul_138bs20220515d0016_ed_ea">Istanbul 138Bs20220515D0016 Ed Ea</a></li><li class="toc-item"><a href="#istanbul_basilica_cistern">Istanbul Basilica Cistern</a></li><li class="toc-item"><a href="#istanbul_blue_mosque">Istanbul Blue Mosque</a></li><li class="toc-item"><a href="#istanbul_bosphorus_strait">Istanbul Bosphorus Strait</a></li><li class="toc-item"><a href="#istanbul_chora_church">Istanbul Chora Church</a></li><li class="toc-item"><a href="#istanbul_dolmabahce_palace">Istanbul Dolmabahce Palace</a></li><li class="toc-item"><a href="#istanbul_galata_tower">Istanbul Galata Tower</a></li><li class="toc-item"><a href="#istanbul_grand_bazaar">Istanbul Grand Bazaar</a></li><li class="toc-item"><a href="#istanbul_hagia_sophia">Istanbul Hagia Sophia</a></li><li class="toc-item"><a href="#istanbul_hippodrome_of_constantinople">Istanbul Hippodrome Of Constantinople</a></li><li class="toc-item"><a href="#istanbul_maidens_tower">Istanbul Maidens Tower</a></li><li class="toc-item"><a href="#istanbul_miniaturk">Istanbul Miniaturk</a></li><li class="toc-item"><a href="#istanbul_pera_museum">Istanbul Pera Museum</a></li><li class="toc-item"><a href="#istanbul_popebenedictxvi">Istanbul Popebenedictxvi</a></li><li class="toc-item"><a href="#istanbul_rustem_pasha">Istanbul Rustem Pasha</a></li><li class="toc-item"><a href="#istanbul_spice_bazaar">Istanbul Spice Bazaar</a></li><li class="toc-item"><a href="#istanbul_suleymaniye_mosque">Istanbul Suleymaniye Mosque</a></li><li class="toc-item"><a href="#istanbul_topkapi_palace">Istanbul Topkapi Palace</a></li><li class="toc-item"><a href="#istanbul_valens_aqueduct">Istanbul Valens Aqueduct</a></li><li class="toc-item"><a href="#istanbul_palaceofjusticeistanbul_1">Palaceofjusticeistanbul 1</a></li><li class="toc-item"><a href="#istanbul_beylerbeyi">Дворец Бейлербеи</a></li><li class="toc-item"><a href="#istanbul_ortakoy">Мечеть Ортакой</a></li><li class="toc-item"><a href="#istanbul_fatih_mosque">Мечеть Фатих</a></li><li class="toc-item"><a href="#istanbul_sakirin">Мечеть Шакирин</a></li><li class="toc-item"><a href="#istanbul_eyup_sultan">Мечеть Эйюп Султан</a></li><li class="toc-item"><a href="#istanbul_rahmi_museum">Музей Рахми М. Коча</a></li><li class="toc-item"><a href="#istanbul_emirgan_park">Парк Эмирган</a></li><li class="toc-item"><a href="#istanbul_balat">Район Балат</a></li><li class="toc-item"><a href="#istanbul_istanbul_modern">Стамбульский музей современного искусства</a></li><li class="toc-item"><a href="#istanbul_vialand">Тематика Вияленд</a></li><li class="toc-item"><a href="#istanbul_kadikoy_market">Улица рынка Кадыкёй</a></li><li class="toc-item"><a href="#istanbul_pierre_loti">Холм Пьера Лоти</a></li><li class="toc-item"><a href="#istanbul_chora">Церковь Хора музей</a></li></ol></nav>
 <section class="historical-reference" id="guide-historical" aria-label="Историческая справка"><h2>Историческая справка</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 <p class="prose">Стамбул — крупнейший город Турции, мост между Европой и Азией у пролива Босфор.</p>
 <p class="prose">Византийский Константинополь и османский Стамбул наложили слои: Айя-София, великие мечети, базары и дворцы. Сегодня это мегаполис с богатой кулинарной, музыкальной и торговой традицией.</p>
 <p class="prose">Республика сделала город мегаполисом с мостами через Босфор; рост населения и туризма сопровождались модернизацией транспорта. Стамбул остаётся перекрёстком торговли и культур Востока и Запада, с богатым наследием имперских эпох.</p></section>
 <section class="guide-trip-plans" id="guide-trips" aria-label="Маршруты"><h2>Маршруты</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 <article class="trip-plan" id="trip-1d"><h3>Один день</h3>
 <p class="prose">Компактный маршрут по главным точкам путеводителя с минимальным возвратом назад пешком.</p>
 <ol class="trip-stops"><li><a href="#istanbul_beylerbeyi">Дворец Бейлербеи</a> (~75мин)</li>
@@ -143,256 +226,432 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <li><a href="#istanbul_blue_mosque">Istanbul Blue Mosque</a> (~75мин)</li>
 <li><a href="#istanbul_bosphorus_strait">Istanbul Bosphorus Strait</a> (~75мин)</li>
 <li><a href="#istanbul_emirgan_park">Парк Эмирган</a> (~75мин)</li></ol></article></section>
-<nav class="guide-toc" aria-label="Содержание"><h2>Содержание</h2><ol><li class="toc-item"><a href="#guide-historical">Историческая справка</a></li><li class="toc-item"><a href="#guide-trips">Маршруты</a></li><li class="toc-item"><a href="#istanbul_pdfband_8_56106a46">138BS20220515D0016-ed-ea</a></li><li class="toc-item"><a href="#istanbul_balat">Район Балат</a></li><li class="toc-item"><a href="#istanbul_basilica_cistern">Istanbul Basilica Cistern</a></li><li class="toc-item"><a href="#istanbul_beylerbeyi">Дворец Бейлербеи</a></li><li class="toc-item"><a href="#istanbul_bosphorus_strait">Istanbul Bosphorus Strait</a></li><li class="toc-item"><a href="#istanbul_chora_church">Istanbul Chora Church</a></li><li class="toc-item"><a href="#istanbul_chora">Церковь Хора музей</a></li><li class="toc-item"><a href="#istanbul_dolmabahce_palace">Istanbul Dolmabahce Palace</a></li><li class="toc-item"><a href="#istanbul_emirgan_park">Парк Эмирган</a></li><li class="toc-item"><a href="#istanbul_eyup_sultan">Мечеть Эйюп Султан</a></li><li class="toc-item"><a href="#istanbul_fatih_mosque">Мечеть Фатих</a></li><li class="toc-item"><a href="#istanbul_galata_tower">Istanbul Galata Tower</a></li><li class="toc-item"><a href="#istanbul_grand_bazaar">Istanbul Grand Bazaar</a></li><li class="toc-item"><a href="#istanbul_hagia_sophia">Istanbul Hagia Sophia</a></li><li class="toc-item"><a href="#istanbul_pdfband_3_3cf9c4b4">Hippodrome of Constantinople</a></li><li class="toc-item"><a href="#istanbul_istanbul_modern">Стамбульский музей современного искусства</a></li><li class="toc-item"><a href="#istanbul_kadikoy_market">Улица рынка Кадыкёй</a></li><li class="toc-item"><a href="#istanbul_maidens_tower">Istanbul Maidens Tower</a></li><li class="toc-item"><a href="#istanbul_miniaturk">Istanbul Miniaturk</a></li><li class="toc-item"><a href="#istanbul_ortakoy">Мечеть Ортакой</a></li><li class="toc-item"><a href="#istanbul_pdfband_9_4b91e409">PalaceOfJusticeIstanbul (1)</a></li><li class="toc-item"><a href="#istanbul_pera_museum">Istanbul Pera Museum</a></li><li class="toc-item"><a href="#istanbul_pierre_loti">Холм Пьера Лоти</a></li><li class="toc-item"><a href="#istanbul_pdfband_0_d45c3cd3">PopeBenedictXVI</a></li><li class="toc-item"><a href="#istanbul_rahmi_museum">Музей Рахми М. Коча</a></li><li class="toc-item"><a href="#istanbul_rustem_pasha">Istanbul Rustem Pasha</a></li><li class="toc-item"><a href="#istanbul_spice_bazaar">Istanbul Spice Bazaar</a></li><li class="toc-item"><a href="#istanbul_blue_mosque">Istanbul Blue Mosque</a></li><li class="toc-item"><a href="#istanbul_suleymaniye_mosque">Istanbul Suleymaniye Mosque</a></li><li class="toc-item"><a href="#istanbul_topkapi_palace">Istanbul Topkapi Palace</a></li><li class="toc-item"><a href="#istanbul_valens_aqueduct">Istanbul Valens Aqueduct</a></li><li class="toc-item"><a href="#istanbul_vialand">Тематика Вияленд</a></li><li class="toc-item"><a href="#istanbul_sakirin">Мечеть Шакирин</a></li></ol></nav>
-<section class="place" id="istanbul_pdfband_8_56106a46">
-<h3>138BS20220515D0016-ed-ea</h3>
+<section class="place" id="istanbul_138bs20220515d0016_ed_ea">
+<div class="place-lead">
+<h3>Istanbul 138Bs20220515D0016 Ed Ea</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/istanbul_pdfband_8_56106a46.jpg" alt="138BS20220515D0016-ed-ea"/></figure>
-</section>
-<section class="place" id="istanbul_balat">
-<h3>Район Балат</h3>
-
-
-<figure class="place-fig"><img src="../images/istanbul_balat.jpg" alt="Район Балат"/></figure>
-<div class="place-desc"><p class="prose">Балак — это яркий район в Стамбуле, известный своими красочными домами, исторической архитектурой и богатым культурным наследием. Когда-то еврейский квартал, он со временем превратился в центр художественного самовыражения и общественной жизни, привлекая посетителей своими очаровательными улицами и местными кафе. Этот район предлагает возможность заглянуть в разнообразное прошлое Стамбула и является идеальным местом для тех, кто хочет ощутить уникальное смешение культур города. Балат исторически был еврейским кварталом в Стамбуле. В этом районе расположено множество синагог, церквей и мечетей, что отражает его многокультурное наследие. Балак известен своими яркими домами и узкими улицами, привлекая как местных жителей, так и туристов.</p>
-<p class="prose">История Балата восходит к византийской эпохе, когда он был основан как жилой район. Район процветал в османский период, особенно как центр еврейской общины, которая поселилась здесь в значительных количествах с 15 века. Ключевыми событиями стали основание различных синагог и школ, которые сыграли важную роль в культурной жизни общины. С культурной точки зрения, Балат значим благодаря своему эклектичному смешению наследия, демонстрируя сочетание еврейских, греческих и армянских влияний. Архитектура района отражает это разнообразие, и многие здания теперь признаны исторической ценностью. Балат стал центром для художников и творческих людей, внося вклад в современную культурную сцену Стамбула. Этот район также известен своими традициями и общественными мероприятиями, которые отмечают его богатую историю и способствуют местному взаимодействию.</p></div>
+<figure class="place-fig place-fig--hi-res"><img src="../images/istanbul_138bs20220515d0016_ed_ea.jpg" alt="Istanbul 138Bs20220515D0016 Ed Ea" width="1280" height="899"/></figure>
+</div>
 </section>
 <section class="place" id="istanbul_basilica_cistern">
+<div class="place-lead">
 <h3>Istanbul Basilica Cistern</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/istanbul_basilica_cistern.jpg" alt="Istanbul Basilica Cistern"/></figure>
+<p class="place-meta">Адрес: Sultanahmet</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/istanbul_basilica_cistern.jpg" alt="Istanbul Basilica Cistern" width="1280" height="1400" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_basilica_cistern_b.jpg" alt="Istanbul Basilica Cistern — вид 2" width="330" height="511" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Лес из переработанных коринфских колонн, отраженный в мелкой воде с современными пешеходными дорожками и освещением. Основания колонн Медузы использованы в качестве спалии. Для концертов используется это пространство, обеспечивающее драматическую акустику.</p>
 <p class="prose">Хранилище воды для квартала Большого дворца до османского повторного использования и переоткрытия. Подземный контрапункт куполу собора Святой Софии.</p></div>
 </section>
-<section class="place" id="istanbul_beylerbeyi">
-<h3>Дворец Бейлербеи</h3>
+<section class="place" id="istanbul_blue_mosque">
+<div class="place-lead">
+<h3>Istanbul Blue Mosque</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/istanbul_beylerbeyi.jpg" alt="Дворец Бейлербеи"/></figure>
-<div class="place-desc"><p class="prose">Дворец Бейлербеи, расположенный на азиатской стороне Стамбула, является великолепным примером османской архитектуры XIX века. С видом на Босфор, этот дворец служил летней резиденцией для султанов и славится своими красивыми садами и роскошными интерьерами. Посетители могут исследовать его богато украшенные комнаты и узнать о жизни османской элиты. Дворец Бейлербеи был построен в период с 1861 по 1865 год. Дворец представляет собой сочетание барочной и османской архитектурных стилей. Он расположен на азиатской стороне Стамбула, с видом на пролив Босфор.</p>
-<p class="prose">Дворец Бейлербеи был заказан султаном Абдул-Азизом и завершен в 1865 году. Его спроектировал армянский архитектор Гарабет Балян и его сын, и он служил убежищем для султанов, особенно в жаркие летние месяцы. Дворец принимал различных важных гостей, включая иностранных дипломатов. Дворец имеет культурное значение как представление архитектурных и художественных достижений Османской империи. Его дизайн отражает сочетание западных и восточных влияний, которые характеризовали этот период. Дворец Бейлербеи также является символом роскоши османского двора и предлагает представление о повседневной жизни и традициях султанов.</p></div>
+<p class="place-meta">Адрес: Sultanahmet Meydanı</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/istanbul_blue_mosque.jpg" alt="Istanbul Blue Mosque" width="1280" height="1147" style="height: 301px; max-height: 301px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_blue_mosque_b.jpg" alt="Istanbul Blue Mosque — вид 2" width="330" height="215" style="height: 301px; max-height: 301px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Шестиминаретная имперская мечеть напротив Ипподрома, названная в честь изникской плитки, окрасившей интерьер молитвенного зала. Посетителям следует соблюдать режим молитв и скромную одежду при входе. Аркады внутреннего двора обрамляют виды на Ая-ю-Марию Палеологскую собор через парк.</p>
+<p class="prose">Учрежден Ахмедом I как имперская основа с комплексами кюллие вокруг площади. Пейзаж Султанахмета в паре с Ая-Софией определяет туристический Стамбул.</p></div>
 </section>
 <section class="place" id="istanbul_bosphorus_strait">
+<div class="place-lead">
 <h3>Istanbul Bosphorus Strait</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/istanbul_bosphorus_strait.jpg" alt="Istanbul Bosphorus Strait"/></figure>
+<p class="place-meta">Адрес: Şehir Hatları terminals (Eminönü, Karaköy, Üsküdar)</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/istanbul_bosphorus_strait.jpg" alt="Istanbul Bosphorus Strait" width="1280" height="658" style="height: 237px; max-height: 237px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_bosphorus_strait_b.jpg" alt="Istanbul Bosphorus Strait — вид 2" width="330" height="219" style="height: 237px; max-height: 237px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Публичные паромы соединяют Европу и Азию, предлагая дешёвые палубы для фотографирования набережных пёшечных особняков (ялы), мечетей и мостов в последовательности. İstanbulkart работает на муниципальных паромах и трамваях. Утренний свет с линии Üsküdar подсвечивает силуэт исторического полуострова.</p>
 <p class="prose">Морские пригороды росли вдоль маршрутов пароходов; современные катамараны сокращают время пересечения в часы пик. Самые спокойные экскурсии по городу часто проходят в формате водного круиза.</p></div>
 </section>
 <section class="place" id="istanbul_chora_church">
+<div class="place-lead">
 <h3>Istanbul Chora Church</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/istanbul_chora_church.jpg" alt="Istanbul Chora Church"/></figure>
+<p class="place-meta">Адрес: Edirnekapı</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/istanbul_chora_church.jpg" alt="Istanbul Chora Church" width="1280" height="720" style="height: 259px; max-height: 259px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_chora_church_b.jpg" alt="Istanbul Chora Church — вид 2" width="330" height="278" style="height: 259px; max-height: 259px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Проверьте часы работы музея относительно времени молитв. Поход по холмам от трамвайных линий Золотого Рога. Теодорос Метохит спонсировал палеологовское украшение перед османской конверсией. Наиболее изысканное сохранившееся константинопольское сюжетное искусство вне крупных музеев.</p></div>
 </section>
-<section class="place" id="istanbul_chora">
-<h3>Церковь Хора музей</h3>
-
-
-<figure class="place-fig"><img src="../images/istanbul_chora.jpg" alt="Церковь Хора музей"/></figure>
-<div class="place-desc"><p class="prose">Церковь Хора, ныне музей, является великолепным примером византийской архитектуры, расположенной в Стамбуле. Известная своими изысканными мозаиками и фресками, она предлагает посетителям возможность заглянуть в художественную и духовную жизнь Византийской империи. Спокойная атмосфера церкви и сложные произведения искусства делают её обязательным местом для посещения тем, кто исследует богатую историю Стамбула. Церковь Хора была изначально построена в IV веке. Он был преобразован в мечеть после османского завоевания Константинополя в 1453 году. Церковь стала музеем в 1945 году и теперь известна своими потрясающими византийскими мозаиками.</p>
-<p class="prose">Изначально построенная в 4 веке, церковь Хора изначально была монастырем, известным как Церковь Святого Спасителя в Хоре. Она претерпела значительные renovations в 11 веке, особенно под покровительством византийской аристократки Марии Дукаины, и была дополнительно украшена замечательными мозаиками и фресками в 14 веке. Церковь была превращена в мечеть после османского завоевания в 1453 году и позже стала музеем в 1945 году. Церковь Хора имеет огромное культурное значение как свидетельство византийского искусства и архитектуры, демонстрируя некоторые из лучших примеров религиозных мозаик и фресок в мире. Она признана объектом Всемирного наследия ЮНЕСКО, что отражает её важность в наследии Стамбула и более широкой истории христианства. Церковь также служит символом разнообразной религиозной истории города, воплощая переход от византийских к османским влияниям.</p></div>
-</section>
 <section class="place" id="istanbul_dolmabahce_palace">
+<div class="place-lead">
 <h3>Istanbul Dolmabahce Palace</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1843–1856</p>
-<figure class="place-fig"><img src="../images/istanbul_dolmabahce_palace.jpg" alt="Istanbul Dolmabahce Palace"/></figure>
+<p class="place-meta">Адрес: Beşiktaş waterfront | Период: 1843–1856</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/istanbul_dolmabahce_palace.jpg" alt="Istanbul Dolmabahce Palace" width="1280" height="853" style="height: 151px; max-height: 151px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_dolmabahce_palace_b.jpg" alt="Istanbul Dolmabahce Palace — вид 2" width="330" height="108" style="height: 151px; max-height: 151px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Кристаллические лестницы и церемониальные залы, где поздние султаны империи принимали дипломатов. Экскурсионные туры по помещениям запрещают делать случайные фотографии во многих комнатах. Крыло Музея часов расположено рядом с главным входом.</p>
 <p class="prose">Придворная резиденция переместилась с Топкапы к современному европейскому стилю на набережной. Фасад Босфора соперничает с мечетями Ортакёя ниже по течению.</p></div>
 </section>
-<section class="place" id="istanbul_emirgan_park">
-<h3>Парк Эмирган</h3>
-
-
-<figure class="place-fig"><img src="../images/istanbul_emirgan_park.jpg" alt="Парк Эмирган"/></figure>
-<div class="place-desc"><p class="prose">Парк Эмирган — это спокойный оазис, расположенный в районе Сарыер в Стамбуле, известный своей зеленью и яркими тюльпановыми садами. Этот обширный парк предлагает посетителям мирное убежище от шумного города, с прогулочными дорожками, очаровательными павильонами и потрясающими видами на Босфор. Он особенно знаменит своим ежегодным Фестивалем тюльпанов, который привлекает как местных жителей, так и туристов, желающих полюбоваться красочными композициями. Парк Эмирган занимает площадь примерно 47 акров. Парк включает три исторических павильона, известных как Желтый, Белый и Розовый павильоны, построенные в османскую эпоху.</p>
-<p class="prose">Парк Эмирган восходит к 19 веку и изначально был частью частного поместья, принадлежащего османской дворянской семье Эмирганов. Парк был открыт для публики в 1940 году и с тех пор стал любимой зоной отдыха для местных жителей и туристов. Его дизайн отражает тенденции ландшафтной архитектуры того времени, сочетая природную красоту и элементы формального сада. Культурно, парк Эмирган занимает особое место в наследии Стамбула, служа местом проведения различных фестивалей и общественных мероприятий. Ежегодный фестиваль тюльпанов в парке отмечает историческое значение тюльпанов в турецкой культуре, символизируя красоту и изобилие. Хотя он не имеет заметного политического или религиозного значения, он представляет собой ценную часть повседневной жизни в Стамбуле, где природа и сообщество пересекаются.</p></div>
-</section>
-<section class="place" id="istanbul_eyup_sultan">
-<h3>Мечеть Эйюп Султан</h3>
-
-
-<figure class="place-fig"><img src="../images/istanbul_eyup_sultan.jpg" alt="Мечеть Эйюп Султан"/></figure>
-<div class="place-desc"><p class="prose">Мечеть Эйюп Султан, расположенная в историческом районе Эйюп в Стамбуле, является почитаемым местом, известным своей потрясающей архитектурой и духовным значением. Она привлекает как верующих, так и туристов, предлагая возможность прикоснуться к богатому религиозному наследию города. Мечеть окружена красивыми садами и традиционными чайными домиками, что делает её спокойным убежищем среди шумного города. Мечеть была заказана султаном Мехмедом II. Он имеет большой купол и красивую минарет, характерные для османской архитектуры.</p>
-<p class="prose">Мечеть Эйюп Султана была построена в 1458 году, вскоре после османского завоевания Константинополя. Она названа в честь Абу Айюба аль-Ансари, спутника Пророка Мухаммеда, который, как считается, похоронен неподалеку. Мечеть претерпела несколько реконструкций на протяжении веков, особенно после повреждений, полученных во время землетрясений XVIII века. Мечеть имеет огромное культурное и религиозное значение как место паломничества для мусульман, особенно в месяц Рамадан. Она также является символом расширения Османской империи и её глубоких исламских традиций. Окружающая территория является яркой частью повседневной жизни в Стамбуле, где процветают традиции и общественные собрания.</p></div>
-</section>
-<section class="place" id="istanbul_fatih_mosque">
-<h3>Мечеть Фатих</h3>
-
-
-<figure class="place-fig"><img src="../images/istanbul_fatih_mosque.jpg" alt="Мечеть Фатих"/></figure>
-<div class="place-desc"><p class="prose">Мечеть Фатих, расположенная в историческом районе Фатих в Стамбуле, является впечатляющим примером османской архитектуры и значимым религиозным объектом. Построенная в период с 1463 по 1470 год, она служит свидетельством богатой истории и культурного наследия города. Посетители могут восхищаться её величественным куполом, сложной плиточной работой и спокойным двором, что делает её тихим убежищем среди шумного города. Мечеть была построена в период с 1463 по 1470 год. Он был заказан султаном Мехмедом II после завоевания Константинополя. Мечеть имеет большой центральный купол и красивый двор.</p>
-<p class="prose">Мечеть Фатих была заказана султаном Мехмедом II, также известным как Мехмед Завоеватель, вскоре после падения Константинополя в 1453 году. Она была построена на месте Церкви Святых Апостолов, отражая трансформацию города от византийского к османскому правлению. Мечеть претерпела несколько реставраций, особенно после разрушительного землетрясения в 1766 году. Как видное место поклонения, мечеть Фатих играет важную роль в повседневной жизни местной мусульманской общины. Это не только место для молитвы, но и центр образования и культурной деятельности. Архитектурный стиль мечети оказал влияние на многие другие мечети в Стамбуле и за его пределами, способствуя богатому исламскому наследию города.</p></div>
-</section>
 <section class="place" id="istanbul_galata_tower">
+<div class="place-lead">
 <h3>Istanbul Galata Tower</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/istanbul_galata_tower.jpg" alt="Istanbul Galata Tower"/></figure>
+<p class="place-meta">Адрес: Beyoğlu</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/istanbul_galata_tower.jpg" alt="Istanbul Galata Tower" width="1200" height="1600" style="height: 54px; max-height: 54px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_galata_tower_b.jpg" alt="Istanbul Galata Tower — вид 2" width="330" height="39" style="height: 54px; max-height: 54px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Генуэзская сторожевая башня, превращенная в смотровую площадку над Золотым рогом. Очереди достигают пика на закате ради панорамных фотографий. Район холма вокруг густо застроен кафе и музыкальными заведениями. Лифтовый доступ ведет в верхнюю галерею с ограждениями безопасности.</p>
 <p class="prose">Часть стен Генуэзской Галлаты; османские и современные реставрации адаптировали его для пожарной охраны и туризма. Вертикальный маркер между Историческим полуостровом и ночной жизнью Бейоглу.</p></div>
 </section>
 <section class="place" id="istanbul_grand_bazaar">
+<div class="place-lead">
 <h3>Istanbul Grand Bazaar</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/istanbul_grand_bazaar.jpg" alt="Istanbul Grand Bazaar"/></figure>
+<p class="place-meta">Адрес: Beyazıt–Mercan</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/istanbul_grand_bazaar.jpg" alt="Istanbul Grand Bazaar" width="1050" height="1400" style="height: 338px; max-height: 338px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_grand_bazaar_b.jpg" alt="Istanbul Grand Bazaar — вид 2" width="330" height="242" style="height: 338px; max-height: 338px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Лабиринт ювелирных, текстильных и сувенирных лавок под кирпичными сводами. Названные ворота открываются в разные кварталы. Сравните цены и воспользуйтесь предложениями на чай как частью местного ритейл-этикета. В крупные праздники могут сокращаться часы торговли.</p>
 <p class="prose">Магазины, созданные по указу Мехмеда II, превратились в walled commercial city-in-miniature между Бейазытом и Золотым Рогом. Под туристическим фасадом до сих пор функционирует крупный оптово-розничный центр.</p></div>
 </section>
 <section class="place" id="istanbul_hagia_sophia">
+<div class="place-lead">
 <h3>Istanbul Hagia Sophia</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/istanbul_hagia_sophia.jpg" alt="Istanbul Hagia Sophia"/></figure>
+<p class="place-meta">Адрес: Sultanahmet</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/istanbul_hagia_sophia.jpg" alt="Istanbul Hagia Sophia" width="1280" height="854" style="height: 221px; max-height: 221px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_hagia_sophia_b.jpg" alt="Istanbul Hagia Sophia — вид 2" width="330" height="158" style="height: 221px; max-height: 221px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Бывший патриарший собор, затем мечеть, а ныне музей-мечеть, известный своим огромным центральным куполом и мраморной облицовкой. Исидор Милетский и Антемий Траллийские были признанными архитекторами при Юстиниане. Каллиграфические круглые медальоны и мозаики различных периодов сосуществуют в интерьере.</p>
 <p class="prose">Построена как Великая Церковь Константинополя; Османская завоеватели добавили минареты и обстановку; современная Турция чередовала использование в музее и для молитвы. Памятник, стоящий на стыке римской, византийской и османской историй.</p></div>
 </section>
-<section class="place" id="istanbul_pdfband_3_3cf9c4b4">
-<h3>Hippodrome of Constantinople</h3>
+<section class="place" id="istanbul_hippodrome_of_constantinople">
+<div class="place-lead">
+<h3>Istanbul Hippodrome Of Constantinople</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/istanbul_pdfband_3_3cf9c4b4.jpg" alt="Hippodrome of Constantinople"/></figure>
-</section>
-<section class="place" id="istanbul_istanbul_modern">
-<h3>Стамбульский музей современного искусства</h3>
-
-
-<figure class="place-fig"><img src="../images/istanbul_istanbul_modern.jpg" alt="Стамбульский музей современного искусства"/></figure>
-<div class="place-desc"><p class="prose">Стамбульский музей современного искусства — это первый музей Турции, посвященный современному и актуальному искусству. Расположенный вдоль Босфора, он демонстрирует разнообразную коллекцию произведений как турецких, так и международных художников, предлагая посетителям яркий взгляд на развивающийся ландшафт современного творчества. Открытый в 2004 году как первый современный художественный музей Турции. Расположен в районе Топхане вдоль набережной Босфора. Включает коллекцию из более чем 1,000 произведений турецких и международных художников.</p>
-<p class="prose">Основанный в 2004 году, Стамбульский музей современного искусства был создан для продвижения современного искусства в Турции и предоставления платформы для современных художников. Расположение музея в бывшем складе отражает его стремление сочетать историческую архитектуру с современным художественным выражением. С культурной точки зрения музей играет ключевую роль в арт-сцене Стамбула, способствуя диалогу между местными и глобальными художественными сообществами. Он проводит различные выставки, образовательные программы и мероприятия, которые вовлекают общественность и способствуют оценке современного искусства. Усилия музея способствуют растущей репутации Стамбула как культурного центра региона.</p></div>
-</section>
-<section class="place" id="istanbul_kadikoy_market">
-<h3>Улица рынка Кадыкёй</h3>
-
-
-<figure class="place-fig"><img src="../images/istanbul_kadikoy_market.jpg" alt="Улица рынка Кадыкёй"/></figure>
-<div class="place-desc"><p class="prose">Улица рынка Кадыкёй — это яркий центр в Стамбуле, известный своей оживленной атмосферой и разнообразием предложений. Посетители могут исследовать различные магазины, лавки и закусочные, представляющие местные продукты, традиционные блюда и ремесленные изделия. Рынок является идеальным сочетанием современной жизни и исторического очарования, что делает его обязательным для посещения для всех, кто хочет познакомиться с местной культурой. Кадыкёй был основан в VII веке до нашей эры как Халкидон. Рынок был центром торговли и коммерции на протяжении веков. Кадыкёй известен своей богатой кулинарной сценой, предлагающей традиционные турецкие блюда.</p>
-<p class="prose">Кадыкёй имеет богатую историю, которая уходит корнями в древние времена, изначально известный как Халкидон. Этот район претерпел значительное развитие на протяжении веков, особенно в византийский и османский периоды, когда он стал важным торговым и жилым районом. Улица рынка сама по себе эволюционировала со временем, отражая изменяющуюся динамику города. Культурно, улица рынка Кадыкёй является центром повседневной жизни района, где местные жители собираются, чтобы делать покупки, общаться и наслаждаться яркой атмосферой. Рынок символизирует разнообразные кулинарные традиции Стамбула, предлагая вкус как местных, так и международных блюд. Он служит площадкой для культурных мероприятий и фестивалей, укрепляя свою роль как пространства для общения сообщества.</p></div>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/istanbul_hippodrome_of_constantinople.jpg" alt="Istanbul Hippodrome Of Constantinople" width="1280" height="607" style="height: 219px; max-height: 219px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_hippodrome_of_constantinople_b.jpg" alt="Istanbul Hippodrome Of Constantinople — вид 2" width="330" height="511" style="height: 219px; max-height: 219px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 </section>
 <section class="place" id="istanbul_maidens_tower">
+<div class="place-lead">
 <h3>Istanbul Maidens Tower</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/istanbul_maidens_tower.jpg" alt="Istanbul Maidens Tower"/></figure>
+<p class="place-meta">Адрес: Üsküdar islet</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/istanbul_maidens_tower.jpg" alt="Istanbul Maidens Tower" width="1280" height="960" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_maidens_tower_b.jpg" alt="Istanbul Maidens Tower — вид 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Небольшой ресторан-павильон на босфоровском острове, куда ходят паромы с обоих берегов. Легенды смешивают истории о отравленной принцессе с древними обычаями. Ночные паромы обрамляют кадры заката в сторону Собора Святой Софии.</p>
 <p class="prose">Якорная точка Византийской цепи стала фонарной станцией и кафе-визитной карточкой. Вертикальная пунктуация видна с променада Üsküдар.</p></div>
 </section>
 <section class="place" id="istanbul_miniaturk">
+<div class="place-lead">
 <h3>Istanbul Miniaturk</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/istanbul_miniaturk.jpg" alt="Istanbul Miniaturk"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_miniaturk.jpg" alt="Istanbul Miniaturk" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_miniaturk_b.jpg" alt="Istanbul Miniaturk — вид 2" width="330" height="298" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Миниатюрный парк Миниатюрк находится на северо-восточном берегу Золотого Рога в Стамбуле, Турция. Он открылся 2 мая 2003 года. Это один из крупнейших миниатюрных парков мира, с выставочной площадью в 15 000 м² (160 000 кв. футов) и общей площадью 60 000 квадратных метров (650 000 кв. футов).</p></div>
 </section>
-<section class="place" id="istanbul_ortakoy">
-<h3>Мечеть Ортакой</h3>
-
-
-<figure class="place-fig"><img src="../images/istanbul_ortakoy.jpg" alt="Мечеть Ортакой"/></figure>
-<div class="place-desc"><p class="prose">Мечеть Ортакой, также известная как мечеть Бüyük Меджидие, является великолепным примером османской барочной архитектуры, расположенной на берегах Босфора в Стамбуле. Ее живописное местоположение и замысловатый дизайн делают ее популярным местом как для туристов, так и для местных жителей, предлагая спокойную атмосферу среди шумного города. Мечеть особенно известна своими элегантными минаретами и красивым интерьером, украшенным изысканной каллиграфией и люстрами. Мечеть Ортакёй была завершена в 1856 году. Он был спроектирован архитектором Гарабет Бальяном и его сыном. Мечеть сочетает в себе элементы барокко и османского архитектурного стиля.</p>
-<p class="prose">Мечеть Ортакой была заказана султаном Абдулмеджидом I и завершена в 1856 году. Она была спроектирована армянским архитектором Гарабет Баляном и его сыном, которые были выдающимися фигурами османской архитектуры. Мечеть подвергалась различным реставрациям на протяжении многих лет, особенно после землетрясения 1999 года, что обеспечило её сохранение как исторической достопримечательности. Культурно, мечеть Орта-кёй занимает особое место в наследии Стамбула, символизируя слияние различных архитектурных стилей и разнообразную историю города. Это популярное место для свадеб и других церемоний, отражающее её роль в повседневной жизни местного сообщества. Расположение мечети у Босфора также делает её значимым ориентиром в ландшафте Стамбула, привлекая посетителей со всего мира.</p></div>
-</section>
-<section class="place" id="istanbul_pdfband_9_4b91e409">
-<h3>PalaceOfJusticeIstanbul (1)</h3>
-
-
-<figure class="place-fig"><img src="../images/istanbul_pdfband_9_4b91e409.jpg" alt="PalaceOfJusticeIstanbul (1)"/></figure>
-</section>
 <section class="place" id="istanbul_pera_museum">
+<div class="place-lead">
 <h3>Istanbul Pera Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/istanbul_pera_museum.jpg" alt="Istanbul Pera Museum"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/istanbul_pera_museum_b.jpg" alt="Istanbul Pera Museum" width="330" height="202"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Музей Пера — художественный музей в Стамбуле, Турции.</p></div>
 </section>
-<section class="place" id="istanbul_pierre_loti">
-<h3>Холм Пьера Лоти</h3>
+<section class="place" id="istanbul_popebenedictxvi">
+<div class="place-lead">
+<h3>Istanbul Popebenedictxvi</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/istanbul_pierre_loti.jpg" alt="Холм Пьера Лоти"/></figure>
-<div class="place-desc"><p class="prose">Холм Пьер Лоти предлагает захватывающие панорамные виды на Стамбул, что делает его популярным местом как для местных жителей, так и для туристов. Названный в честь французского романиста Пьера Лоти, который черпал вдохновение в его спокойной обстановке, холм является идеальным местом для отдыха и наслаждения красотой Золотого Рога. Посетители также могут исследовать историческое кафе, где подают традиционный турецкий чай и кофе. Холм Пьер Лоти расположен в районе Эйюп в Стамбуле. Этот холм предлагает один из лучших панорамных видов на Золотой Рог и городской пейзаж. Кафе на холме Пьер Лоти названо в честь французского писателя Пьера Лоти, который посетил это место в конце 19 века.</p>
-<p class="prose">Холм Пьер Лоти является значимым местом с византийских времен, известным своей стратегической точкой обзора на Золотой Рог. Холм стал популярным в конце 19 века, когда Пьер Лоти, французский военно-морской офицер и писатель, часто посещал эту местность, привлекая внимание к ее живописным видам в своих литературных произведениях. Культурно, холм Пьер Лоти является любимым местом, которое отражает смешение разнообразного наследия Стамбула. Он служит местом встречи для местных жителей и туристов, воплощая яркую повседневную жизнь города. Кафе на холме стало символом социального взаимодействия и отдыха, внося вклад в культурную ткань Стамбула.</p></div>
-</section>
-<section class="place" id="istanbul_pdfband_0_d45c3cd3">
-<h3>PopeBenedictXVI</h3>
-
-
-<figure class="place-fig"><img src="../images/istanbul_pdfband_0_d45c3cd3.jpg" alt="PopeBenedictXVI"/></figure>
-</section>
-<section class="place" id="istanbul_rahmi_museum">
-<h3>Музей Рахми М. Коча</h3>
-
-
-<figure class="place-fig"><img src="../images/istanbul_rahmi_museum.jpg" alt="Музей Рахми М. Коча"/></figure>
-<div class="place-desc"><p class="prose">Музей Рахми М. Коча в Стамбуле — это увлекательное место, посвященное истории транспорта, промышленности и связи. Расположенный в прекрасно отреставрированном историческом заводе на Золотом Роге, музей демонстрирует впечатляющую коллекцию артефактов, включая винтажные автомобили, паровые машины и морские экспонаты. Посетители могут исследовать интерактивные выставки и получить уникальное представление о промышленном наследии Турции. Музей был основан в 1994 году. Он расположен в бывшей фабрике якорей на Золотом Роге. Коллекция включает в себя винтажные автомобили, поезда и морские артефакты.</p>
-<p class="prose">Коча был основан в 1994 году Рахми Кочем, выдающимся турецким бизнесменом и филантропом. Музей расположен в бывшей фабрике якорей, построенной в конце 19 века, которая была тщательно отреставрирована, чтобы сохранить свою историческую значимость и разместить обширную коллекцию. С культурной точки зрения музей играет жизненно важную роль в сохранении промышленного и технологического наследия Турции, отражая эволюцию различных отраслей, которые сформировали нацию. Он служит образовательным ресурсом, способствуя осведомленности о исторических событиях в области транспорта и связи, и вносит вклад в богатое культурное разнообразие Стамбула.</p></div>
+<figure class="place-fig place-fig--hi-res"><img src="../images/istanbul_popebenedictxvi.jpg" alt="Istanbul Popebenedictxvi" width="1200" height="1600"/></figure>
+</div>
 </section>
 <section class="place" id="istanbul_rustem_pasha">
+<div class="place-lead">
 <h3>Istanbul Rustem Pasha</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/istanbul_rustem_pasha.jpg" alt="Istanbul Rustem Pasha"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_rustem_pasha.jpg" alt="Istanbul Rustem Pasha" width="330" height="250" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_rustem_pasha_b.jpg" alt="Istanbul Rustem Pasha — вид 2" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Мечеть Рустема-паши — мечеть в Стамбуле, Турция.</p></div>
 </section>
 <section class="place" id="istanbul_spice_bazaar">
+<div class="place-lead">
 <h3>Istanbul Spice Bazaar</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/istanbul_spice_bazaar.jpg" alt="Istanbul Spice Bazaar"/></figure>
+<p class="place-meta">Адрес: Eminönü</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/istanbul_spice_bazaar.jpg" alt="Istanbul Spice Bazaar" width="1280" height="960" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_spice_bazaar_b.jpg" alt="Istanbul Spice Bazaar — вид 2" width="330" height="248" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Наличные деньги все еще полезны для покупки небольших мешочков со специями. Причалы паромной переправы находятся в одном квартале к югу, в сторону Кадыкёя. Учрежден за счет египетских торговых доходов; до сих пор смешивает оптовую торговлю с розничной для туристов. Сенсорный якорь между пассажирами, между Йени-джами и Галатским мостом.</p></div>
 </section>
-<section class="place" id="istanbul_blue_mosque">
-<h3>Istanbul Blue Mosque</h3>
-
-
-<figure class="place-fig"><img src="../images/istanbul_blue_mosque.jpg" alt="Istanbul Blue Mosque"/></figure>
-<div class="place-desc"><p class="prose">Шестиминаретная имперская мечеть напротив Ипподрома, названная в честь изникской плитки, окрасившей интерьер молитвенного зала. Посетителям следует соблюдать режим молитв и скромную одежду при входе. Аркады внутреннего двора обрамляют виды на Ая-ю-Марию Палеологскую собор через парк.</p>
-<p class="prose">Учрежден Ахмедом I как имперская основа с комплексами кюллие вокруг площади. Пейзаж Султанахмета в паре с Ая-Софией определяет туристический Стамбул.</p></div>
-</section>
 <section class="place" id="istanbul_suleymaniye_mosque">
+<div class="place-lead">
 <h3>Istanbul Suleymaniye Mosque</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/istanbul_suleymaniye_mosque.jpg" alt="Istanbul Suleymaniye Mosque"/></figure>
+<p class="place-meta">Адрес: Third Hill</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/istanbul_suleymaniye_mosque.jpg" alt="Istanbul Suleymaniye Mosque" width="1039" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_suleymaniye_mosque_b.jpg" alt="Istanbul Suleymaniye Mosque — вид 2" width="330" height="495" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Самый большой комплекс мечетей Синана с террасами с видом на судоходство по Золотому Рогу. Аркады двора обрамляют виды на Галату. Могилы Сулеймана и Хюррем расположены в саду.</p>
 <p class="prose">Имперская мечеть, увенчивающая третий холм города над базарами. Вершина архитектуры классического османского Стамбула.</p></div>
 </section>
 <section class="place" id="istanbul_topkapi_palace">
+<div class="place-lead">
 <h3>Istanbul Topkapi Palace</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/istanbul_topkapi_palace.jpg" alt="Istanbul Topkapi Palace"/></figure>
+<p class="place-meta">Адрес: Sultanahmet</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--row-sized"><img src="../images/istanbul_topkapi_palace.jpg" alt="Istanbul Topkapi Palace" width="1140" height="1140" style="height: 252px; max-height: 252px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_topkapi_palace_b.jpg" alt="Istanbul Topkapi Palace — вид 2" width="330" height="180" style="height: 252px; max-height: 252px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Дворец Султана на Сералье-поинте с казначейством, секторами билетов на харем и террасами с видом на Золотой рог и Босфор. Для проживания в покоях Харема может потребоваться приобретение отдельных билетов. Правила тишины во дворе помогают сохранить атмосферу музея.</p>
 <p class="prose">Первая резиденция до Долмабахче; коллекции оружия, фарфора и реликвий, собранные в разные периоды. Необходимый контекст жизни в османском дворе над старым портом.</p></div>
 </section>
 <section class="place" id="istanbul_valens_aqueduct">
+<div class="place-lead">
 <h3>Istanbul Valens Aqueduct</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/istanbul_valens_aqueduct.jpg" alt="Istanbul Valens Aqueduct"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_valens_aqueduct.jpg" alt="Istanbul Valens Aqueduct" width="330" height="241" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_valens_aqueduct_b.jpg" alt="Istanbul Valens Aqueduct — вид 2" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Акведук Валентина — римский акведук, снабжавший Константинополь (Стамбул, Турция).</p></div>
 </section>
+<section class="place" id="istanbul_palaceofjusticeistanbul_1">
+<div class="place-lead">
+<h3>Palaceofjusticeistanbul 1</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/istanbul_palaceofjusticeistanbul_1.jpg" alt="Palaceofjusticeistanbul 1" width="1280" height="848" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_palaceofjusticeistanbul_1_b.jpg" alt="Palaceofjusticeistanbul 1 — вид 2" width="330" height="220" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+</section>
+<section class="place" id="istanbul_beylerbeyi">
+<div class="place-lead">
+<h3>Дворец Бейлербеи</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_beylerbeyi.jpg" alt="Дворец Бейлербеи" width="330" height="116" style="height: 162px; max-height: 162px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_beylerbeyi_b.jpg" alt="Дворец Бейлербеи — вид 2" width="330" height="220" style="height: 162px; max-height: 162px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Дворец Бейлербеи, расположенный на азиатской стороне Стамбула, является великолепным примером османской архитектуры XIX века. С видом на Босфор, этот дворец служил летней резиденцией для султанов и славится своими красивыми садами и роскошными интерьерами. Посетители могут исследовать его богато украшенные комнаты и узнать о жизни османской элиты. Дворец Бейлербеи был построен в период с 1861 по 1865 год. Дворец представляет собой сочетание барочной и османской архитектурных стилей. Он расположен на азиатской стороне Стамбула, с видом на пролив Босфор.</p>
+<p class="prose">Дворец Бейлербеи был заказан султаном Абдул-Азизом и завершен в 1865 году. Его спроектировал армянский архитектор Гарабет Балян и его сын, и он служил убежищем для султанов, особенно в жаркие летние месяцы. Дворец принимал различных важных гостей, включая иностранных дипломатов. Дворец имеет культурное значение как представление архитектурных и художественных достижений Османской империи. Его дизайн отражает сочетание западных и восточных влияний, которые характеризовали этот период. Дворец Бейлербеи также является символом роскоши османского двора и предлагает представление о повседневной жизни и традициях султанов.</p></div>
+</section>
+<section class="place" id="istanbul_ortakoy">
+<div class="place-lead">
+<h3>Мечеть Ортакой</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_ortakoy.jpg" alt="Мечеть Ортакой" width="330" height="206" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_ortakoy_b.jpg" alt="Мечеть Ортакой — вид 2" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Мечеть Ортакой, также известная как мечеть Бüyük Меджидие, является великолепным примером османской барочной архитектуры, расположенной на берегах Босфора в Стамбуле. Ее живописное местоположение и замысловатый дизайн делают ее популярным местом как для туристов, так и для местных жителей, предлагая спокойную атмосферу среди шумного города. Мечеть особенно известна своими элегантными минаретами и красивым интерьером, украшенным изысканной каллиграфией и люстрами. Мечеть Ортакёй была завершена в 1856 году. Он был спроектирован архитектором Гарабет Бальяном и его сыном. Мечеть сочетает в себе элементы барокко и османского архитектурного стиля.</p>
+<p class="prose">Мечеть Ортакой была заказана султаном Абдулмеджидом I и завершена в 1856 году. Она была спроектирована армянским архитектором Гарабет Баляном и его сыном, которые были выдающимися фигурами османской архитектуры. Мечеть подвергалась различным реставрациям на протяжении многих лет, особенно после землетрясения 1999 года, что обеспечило её сохранение как исторической достопримечательности. Культурно, мечеть Орта-кёй занимает особое место в наследии Стамбула, символизируя слияние различных архитектурных стилей и разнообразную историю города. Это популярное место для свадеб и других церемоний, отражающее её роль в повседневной жизни местного сообщества. Расположение мечети у Босфора также делает её значимым ориентиром в ландшафте Стамбула, привлекая посетителей со всего мира.</p></div>
+</section>
+<section class="place" id="istanbul_fatih_mosque">
+<div class="place-lead">
+<h3>Мечеть Фатих</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_fatih_mosque.jpg" alt="Мечеть Фатих" width="330" height="440" style="height: 414px; max-height: 414px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--row-sized"><img src="../images/istanbul_fatih_mosque_b.jpg" alt="Мечеть Фатих — вид 2" width="330" height="535" style="height: 414px; max-height: 414px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Мечеть Фатих, расположенная в историческом районе Фатих в Стамбуле, является впечатляющим примером османской архитектуры и значимым религиозным объектом. Построенная в период с 1463 по 1470 год, она служит свидетельством богатой истории и культурного наследия города. Посетители могут восхищаться её величественным куполом, сложной плиточной работой и спокойным двором, что делает её тихим убежищем среди шумного города. Мечеть была построена в период с 1463 по 1470 год. Он был заказан султаном Мехмедом II после завоевания Константинополя. Мечеть имеет большой центральный купол и красивый двор.</p>
+<p class="prose">Мечеть Фатих была заказана султаном Мехмедом II, также известным как Мехмед Завоеватель, вскоре после падения Константинополя в 1453 году. Она была построена на месте Церкви Святых Апостолов, отражая трансформацию города от византийского к османскому правлению. Мечеть претерпела несколько реставраций, особенно после разрушительного землетрясения в 1766 году. Как видное место поклонения, мечеть Фатих играет важную роль в повседневной жизни местной мусульманской общины. Это не только место для молитвы, но и центр образования и культурной деятельности. Архитектурный стиль мечети оказал влияние на многие другие мечети в Стамбуле и за его пределами, способствуя богатому исламскому наследию города.</p></div>
+</section>
+<section class="place" id="istanbul_sakirin">
+<div class="place-lead">
+<h3>Мечеть Шакирин</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_sakirin.jpg" alt="Мечеть Шакирин" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_sakirin_b.jpg" alt="Мечеть Шакирин — вид 2" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Мечеть Шакирин, расположенная в сердце Стамбула, является современным архитектурным чудом, которое прекрасно сочетает современный дизайн с традиционными исламскими элементами. Завершенная в 2009 году, она выделяется своим уникальным эстетическим обликом и служит спокойным местом для поклонения среди шумного города. Посетители могут оценить ее сложные детали и мирную атмосферу, которую она предлагает. Спроектировано архитектором Хюсревом Тайлой и завершено в 2009 году. Построено по заказу семьи Шакирин в память о их патриархе.</p>
+<p class="prose">Мечеть Шакирин была открыта в 2009 году и спроектирована известным турецким архитектором Хюсревом Тайлой. Она была заказана семьей Шакирин в память о их покойном патриархе и отражает современное понимание исламской архитектуры, сохраняя при этом уважение к традиционным практикам. С культурной точки зрения, мечеть Шакирин представляет собой сдвиг к современности в исламской архитектуре, демонстрируя, как современный дизайн может сосуществовать с религиозными практиками. Она служит центром сообщества, отражая повседневную жизнь жителей Стамбула и их духовные потребности. Дизайн и функция мечети способствуют продолжающемуся диалогу о роли веры в городской жизни, что делает её значимым ориентиром в Стамбуле.</p></div>
+</section>
+<section class="place" id="istanbul_eyup_sultan">
+<div class="place-lead">
+<h3>Мечеть Эйюп Султан</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_eyup_sultan.jpg" alt="Мечеть Эйюп Султан" width="330" height="440" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_eyup_sultan_b.jpg" alt="Мечеть Эйюп Султан — вид 2" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Мечеть Эйюп Султан, расположенная в историческом районе Эйюп в Стамбуле, является почитаемым местом, известным своей потрясающей архитектурой и духовным значением. Она привлекает как верующих, так и туристов, предлагая возможность прикоснуться к богатому религиозному наследию города. Мечеть окружена красивыми садами и традиционными чайными домиками, что делает её спокойным убежищем среди шумного города. Мечеть была заказана султаном Мехмедом II. Он имеет большой купол и красивую минарет, характерные для османской архитектуры.</p>
+<p class="prose">Мечеть Эйюп Султана была построена в 1458 году, вскоре после османского завоевания Константинополя. Она названа в честь Абу Айюба аль-Ансари, спутника Пророка Мухаммеда, который, как считается, похоронен неподалеку. Мечеть претерпела несколько реконструкций на протяжении веков, особенно после повреждений, полученных во время землетрясений XVIII века. Мечеть имеет огромное культурное и религиозное значение как место паломничества для мусульман, особенно в месяц Рамадан. Она также является символом расширения Османской империи и её глубоких исламских традиций. Окружающая территория является яркой частью повседневной жизни в Стамбуле, где процветают традиции и общественные собрания.</p></div>
+</section>
+<section class="place" id="istanbul_rahmi_museum">
+<div class="place-lead">
+<h3>Музей Рахми М. Коча</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<figure class="place-fig place-fig--lo-res"><img src="../images/istanbul_rahmi_museum_b.jpg" alt="Музей Рахми М. Коча" width="330" height="220"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Музей Рахми М. Коча в Стамбуле — это увлекательное место, посвященное истории транспорта, промышленности и связи. Расположенный в прекрасно отреставрированном историческом заводе на Золотом Роге, музей демонстрирует впечатляющую коллекцию артефактов, включая винтажные автомобили, паровые машины и морские экспонаты. Посетители могут исследовать интерактивные выставки и получить уникальное представление о промышленном наследии Турции. Музей был основан в 1994 году. Он расположен в бывшей фабрике якорей на Золотом Роге. Коллекция включает в себя винтажные автомобили, поезда и морские артефакты.</p>
+<p class="prose">Музей Рахми М. Коча был основан в 1994 году Рахми Кочем, выдающимся турецким бизнесменом и филантропом. Музей расположен в бывшей фабрике якорей, построенной в конце 19 века, которая была тщательно отреставрирована, чтобы сохранить свою историческую значимость и разместить обширную коллекцию. С культурной точки зрения музей играет жизненно важную роль в сохранении промышленного и технологического наследия Турции, отражая эволюцию различных отраслей, которые сформировали нацию. Он служит образовательным ресурсом, способствуя осведомленности о исторических событиях в области транспорта и связи, и вносит вклад в богатое культурное разнообразие Стамбула.</p></div>
+</section>
+<section class="place" id="istanbul_emirgan_park">
+<div class="place-lead">
+<h3>Парк Эмирган</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_emirgan_park.jpg" alt="Парк Эмирган" width="330" height="438" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_emirgan_park_b.jpg" alt="Парк Эмирган — вид 2" width="330" height="250" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Парк Эмирган — это спокойный оазис, расположенный в районе Сарыер в Стамбуле, известный своей зеленью и яркими тюльпановыми садами. Этот обширный парк предлагает посетителям мирное убежище от шумного города, с прогулочными дорожками, очаровательными павильонами и потрясающими видами на Босфор. Он особенно знаменит своим ежегодным Фестивалем тюльпанов, который привлекает как местных жителей, так и туристов, желающих полюбоваться красочными композициями. Парк Эмирган занимает площадь примерно 47 акров. Парк включает три исторических павильона, известных как Желтый, Белый и Розовый павильоны, построенные в османскую эпоху.</p>
+<p class="prose">Парк Эмирган восходит к 19 веку и изначально был частью частного поместья, принадлежащего османской дворянской семье Эмирганов. Парк был открыт для публики в 1940 году и с тех пор стал любимой зоной отдыха для местных жителей и туристов. Его дизайн отражает тенденции ландшафтной архитектуры того времени, сочетая природную красоту и элементы формального сада. Культурно, парк Эмирган занимает особое место в наследии Стамбула, служа местом проведения различных фестивалей и общественных мероприятий. Ежегодный фестиваль тюльпанов в парке отмечает историческое значение тюльпанов в турецкой культуре, символизируя красоту и изобилие. Хотя он не имеет заметного политического или религиозного значения, он представляет собой ценную часть повседневной жизни в Стамбуле, где природа и сообщество пересекаются.</p></div>
+</section>
+<section class="place" id="istanbul_balat">
+<div class="place-lead">
+<h3>Район Балат</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_balat.jpg" alt="Район Балат" width="330" height="440" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_balat_b.jpg" alt="Район Балат — вид 2" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Балак — это яркий район в Стамбуле, известный своими красочными домами, исторической архитектурой и богатым культурным наследием. Когда-то еврейский квартал, он со временем превратился в центр художественного самовыражения и общественной жизни, привлекая посетителей своими очаровательными улицами и местными кафе. Этот район предлагает возможность заглянуть в разнообразное прошлое Стамбула и является идеальным местом для тех, кто хочет ощутить уникальное смешение культур города. Балат исторически был еврейским кварталом в Стамбуле. В этом районе расположено множество синагог, церквей и мечетей, что отражает его многокультурное наследие. Балак известен своими яркими домами и узкими улицами, привлекая как местных жителей, так и туристов.</p>
+<p class="prose">История Балата восходит к византийской эпохе, когда он был основан как жилой район. Район процветал в османский период, особенно как центр еврейской общины, которая поселилась здесь в значительных количествах с 15 века. Ключевыми событиями стали основание различных синагог и школ, которые сыграли важную роль в культурной жизни общины. С культурной точки зрения, Балат значим благодаря своему эклектичному смешению наследия, демонстрируя сочетание еврейских, греческих и армянских влияний. Архитектура района отражает это разнообразие, и многие здания теперь признаны исторической ценностью. Балат стал центром для художников и творческих людей, внося вклад в современную культурную сцену Стамбула. Этот район также известен своими традициями и общественными мероприятиями, которые отмечают его богатую историю и способствуют местному взаимодействию.</p></div>
+</section>
+<section class="place" id="istanbul_istanbul_modern">
+<div class="place-lead">
+<h3>Стамбульский музей современного искусства</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_istanbul_modern.jpg" alt="Стамбульский музей современного искусства" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_istanbul_modern_b.jpg" alt="Стамбульский музей современного искусства — вид 2" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Стамбульский музей современного искусства — это первый музей Турции, посвященный современному и актуальному искусству. Расположенный вдоль Босфора, он демонстрирует разнообразную коллекцию произведений как турецких, так и международных художников, предлагая посетителям яркий взгляд на развивающийся ландшафт современного творчества. Открытый в 2004 году как первый современный художественный музей Турции. Расположен в районе Топхане вдоль набережной Босфора. Включает коллекцию из более чем 1,000 произведений турецких и международных художников.</p>
+<p class="prose">Основанный в 2004 году, Стамбульский музей современного искусства был создан для продвижения современного искусства в Турции и предоставления платформы для современных художников. Расположение музея в бывшем складе отражает его стремление сочетать историческую архитектуру с современным художественным выражением. С культурной точки зрения музей играет ключевую роль в арт-сцене Стамбула, способствуя диалогу между местными и глобальными художественными сообществами. Он проводит различные выставки, образовательные программы и мероприятия, которые вовлекают общественность и способствуют оценке современного искусства. Усилия музея способствуют растущей репутации Стамбула как культурного центра региона.</p></div>
+</section>
 <section class="place" id="istanbul_vialand">
+<div class="place-lead">
 <h3>Тематика Вияленд</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/istanbul_vialand.jpg" alt="Тематика Вияленд"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/istanbul_vialand.jpg" alt="Тематика Вияленд" width="330" height="212"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Виаланд — это яркий тематический парк и развлекательный комплекс, расположенный в Стамбуле, предлагающий сочетание захватывающих аттракционов, шопинга и ресторанов. Созданный для семей и любителей острых ощущений, он включает в себя аттракционы, варьирующиеся от американских горок до интерактивных игровых зон. Парк также включает торговый центр и отель, что делает его комплексным местом для отдыха и развлечений. Виаланд открылся в 2013 году. Он предлагает разнообразные аттракционы, варианты покупок и заведения общественного питания.</p>
 <p class="prose">Vialand открыл свои двери для публики в 2013 году, что стало значительным дополнением к развлекательному ландшафту Стамбула. Разработанный турецкой компанией, проект был нацелен на создание современного парка аттракционов, который отражает динамичный дух города, обеспечивая при этом семейную атмосферу. Хотя Вияланд не имеет исторического или политического значения в традиционном смысле, он представляет собой сдвиг в культурном ландшафте Стамбула в сторону современных развлечений и досуговых мероприятий. Парк стал популярным местом как для местных жителей, так и для туристов, способствуя эволюции идентичности города как центра семейных аттракционов и современных жизненных впечатлений.</p></div>
 </section>
-<section class="place" id="istanbul_sakirin">
-<h3>Мечеть Шакирин</h3>
+<section class="place" id="istanbul_kadikoy_market">
+<div class="place-lead">
+<h3>Улица рынка Кадыкёй</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/istanbul_sakirin.jpg" alt="Мечеть Шакирин"/></figure>
-<div class="place-desc"><p class="prose">Мечеть Шакирин, расположенная в сердце Стамбула, является современным архитектурным чудом, которое прекрасно сочетает современный дизайн с традиционными исламскими элементами. Завершенная в 2009 году, она выделяется своим уникальным эстетическим обликом и служит спокойным местом для поклонения среди шумного города. Посетители могут оценить ее сложные детали и мирную атмосферу, которую она предлагает. Спроектировано архитектором Хюсревом Тайлой и завершено в 2009 году. Построено по заказу семьи Шакирин в память о их патриархе.</p>
-<p class="prose">Мечеть Шакирин была открыта в 2009 году и спроектирована известным турецким архитектором Хюсревом Тайлой. Она была заказана семьей Шакирин в память о их покойном патриархе и отражает современное понимание исламской архитектуры, сохраняя при этом уважение к традиционным практикам. С культурной точки зрения, мечеть Шакирин представляет собой сдвиг к современности в исламской архитектуре, демонстрируя, как современный дизайн может сосуществовать с религиозными практиками. Она служит центром сообщества, отражая повседневную жизнь жителей Стамбула и их духовные потребности. Дизайн и функция мечети способствуют продолжающемуся диалогу о роли веры в городской жизни, что делает её значимым ориентиром в Стамбуле.</p></div>
+<figure class="place-fig place-fig--lo-res"><img src="../images/istanbul_kadikoy_market_b.jpg" alt="Улица рынка Кадыкёй" width="330" height="226"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Улица рынка Кадыкёй — это яркий центр в Стамбуле, известный своей оживленной атмосферой и разнообразием предложений. Посетители могут исследовать различные магазины, лавки и закусочные, представляющие местные продукты, традиционные блюда и ремесленные изделия. Рынок является идеальным сочетанием современной жизни и исторического очарования, что делает его обязательным для посещения для всех, кто хочет познакомиться с местной культурой. Кадыкёй был основан в VII веке до нашей эры как Халкидон. Рынок был центром торговли и коммерции на протяжении веков. Кадыкёй известен своей богатой кулинарной сценой, предлагающей традиционные турецкие блюда.</p>
+<p class="prose">Кадыкёй имеет богатую историю, которая уходит корнями в древние времена, изначально известный как Халкидон. Этот район претерпел значительное развитие на протяжении веков, особенно в византийский и османский периоды, когда он стал важным торговым и жилым районом. Улица рынка сама по себе эволюционировала со временем, отражая изменяющуюся динамику города. Культурно, улица рынка Кадыкёй является центром повседневной жизни района, где местные жители собираются, чтобы делать покупки, общаться и наслаждаться яркой атмосферой. Рынок символизирует разнообразные кулинарные традиции Стамбула, предлагая вкус как местных, так и международных блюд. Он служит площадкой для культурных мероприятий и фестивалей, укрепляя свою роль как пространства для общения сообщества.</p></div>
+</section>
+<section class="place" id="istanbul_pierre_loti">
+<div class="place-lead">
+<h3>Холм Пьера Лоти</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_pierre_loti.jpg" alt="Холм Пьера Лоти" width="330" height="62" style="height: 86px; max-height: 86px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_pierre_loti_b.jpg" alt="Холм Пьера Лоти — вид 2" width="330" height="159" style="height: 86px; max-height: 86px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Холм Пьер Лоти предлагает захватывающие панорамные виды на Стамбул, что делает его популярным местом как для местных жителей, так и для туристов. Названный в честь французского романиста Пьера Лоти, который черпал вдохновение в его спокойной обстановке, холм является идеальным местом для отдыха и наслаждения красотой Золотого Рога. Посетители также могут исследовать историческое кафе, где подают традиционный турецкий чай и кофе. Холм Пьер Лоти расположен в районе Эйюп в Стамбуле. Этот холм предлагает один из лучших панорамных видов на Золотой Рог и городской пейзаж. Кафе на холме Пьер Лоти названо в честь французского писателя Пьера Лоти, который посетил это место в конце 19 века.</p>
+<p class="prose">Холм Пьер Лоти является значимым местом с византийских времен, известным своей стратегической точкой обзора на Золотой Рог. Холм стал популярным в конце 19 века, когда Пьер Лоти, французский военно-морской офицер и писатель, часто посещал эту местность, привлекая внимание к ее живописным видам в своих литературных произведениях. Культурно, холм Пьер Лоти является любимым местом, которое отражает смешение разнообразного наследия Стамбула. Он служит местом встречи для местных жителей и туристов, воплощая яркую повседневную жизнь города. Кафе на холме стало символом социального взаимодействия и отдыха, внося вклад в культурную ткань Стамбула.</p></div>
+</section>
+<section class="place" id="istanbul_chora">
+<div class="place-lead">
+<h3>Церковь Хора музей</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<figure class="place-fig place-fig--lo-res"><img src="../images/istanbul_chora_b.jpg" alt="Церковь Хора музей" width="330" height="186"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Церковь Хора, ныне музей, является великолепным примером византийской архитектуры, расположенной в Стамбуле. Известная своими изысканными мозаиками и фресками, она предлагает посетителям возможность заглянуть в художественную и духовную жизнь Византийской империи. Спокойная атмосфера церкви и сложные произведения искусства делают её обязательным местом для посещения тем, кто исследует богатую историю Стамбула. Церковь Хора была изначально построена в IV веке. Он был преобразован в мечеть после османского завоевания Константинополя в 1453 году. Церковь стала музеем в 1945 году и теперь известна своими потрясающими византийскими мозаиками.</p>
+<p class="prose">Изначально построенная в 4 веке, церковь Хора изначально была монастырем, известным как Церковь Святого Спасителя в Хоре. Она претерпела значительные renovations в 11 веке, особенно под покровительством византийской аристократки Марии Дукаины, и была дополнительно украшена замечательными мозаиками и фресками в 14 веке. Церковь была превращена в мечеть после османского завоевания в 1453 году и позже стала музеем в 1945 году. Церковь Хора имеет огромное культурное значение как свидетельство византийского искусства и архитектуры, демонстрируя некоторые из лучших примеров религиозных мозаик и фресок в мире. Она признана объектом Всемирного наследия ЮНЕСКО, что отражает её важность в наследии Стамбула и более широкой истории христианства. Церковь также служит символом разнообразной религиозной истории города, воплощая переход от византийских к османским влияниям.</p></div>
 </section>
 </body>
 </html>

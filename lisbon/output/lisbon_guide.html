@@ -13,7 +13,7 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
 .otium-logo { font-family: 'Playfair Display', serif; font-size: 2.15rem;
   font-weight: 600; letter-spacing: 0.18em; margin-bottom: 0.85rem; }
 .otiump { margin: 0.42rem 0; line-height: 1.42; text-align: justify;
-  max-width: 38rem; font-size: 0.95rem; }
+  font-size: 0.95rem; }
 .guide-title { page-break-after: auto; margin-bottom: 0.55rem;
   page-break-inside: avoid; }
 .historical-reference { margin: 0.75rem 0 1.15rem;
@@ -63,22 +63,103 @@ ol.trip-stops a:hover { text-decoration: underline; }
 .heraldry-univ-caption { font-size: 0.52rem; line-height: 1.18;
   margin: 0.12rem 0 0; padding: 0 0.06rem; color: #252525;
   text-align: center; font-weight: 500; }
-.heraldry-motto { text-align: center; max-width: 18rem; margin: 0.18rem auto;
+.heraldry-motto { text-align: center; margin: 0.18rem auto;
   width: 100%; }
 .motto-line { font-family: 'Playfair Display', serif; font-size: 1rem;
   margin: 0; color: #333; line-height: 1.35; }
 .guide-title h1.guide-title-main { font-family: 'Playfair Display', serif;
   font-size: 2.35rem; margin-bottom: 0.5rem; font-weight: 600; }
 .lead { color: #444; font-size: 1.05rem; }
-.guide-toc { margin: 0.85rem 0 1.15rem; page-break-inside: avoid; }
-.guide-toc h2 { font-family: 'Playfair Display', serif; font-size: 1.28rem;
-  font-weight: 600; margin: 0.4rem 0 0.55rem; }
+
+.guide-toc { page-break-before: always; break-before: page;
+  page-break-after: always; break-after: page;
+  margin: 0; padding: 0.2rem 0 0.45rem; page-break-inside: auto; }
+.guide-toc h2 { font-family: 'Playfair Display', serif;
+  font-size: 1.28rem; font-weight: 600; margin: 0.4rem 0 0.55rem; }
 .guide-toc ol { margin: 0.35rem 0 0.65rem 1.25rem; padding: 0;
   columns: 2; column-gap: 1.5rem; }
 .guide-toc li { margin: 0.18rem 0; line-height: 1.35;
   font-size: 0.88rem; break-inside: avoid; }
-.guide-toc a { color: #1a5276; text-decoration: none; }
+.guide-toc a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.guide-toc a:hover { color: #0d3d56; }
 .guide-toc li.toc-item--sub { font-size: 0.82rem; margin-left: 0.35rem; }
+.toc-back { font-size: 0.78rem; margin: 0 0 0.35rem; text-align: right; }
+.toc-back a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.toc-back a:hover { color: #0d3d56; }
+.place, .historical-reference, .guide-primer, .guide-trip-plans {
+  scroll-margin-top: 1.25rem; }
+.historical-reference h2, .guide-primer h2, .guide-trip-plans h2,
+.chapter-head h2, .place-lead h3 { position: relative; }
+.guide-toc + .place, .guide-toc + .chapter-head {
+  page-break-before: avoid; break-before: avoid-page; }
+.place-lead { page-break-inside: avoid; break-inside: avoid-page;
+  page-break-after: auto; }
+.place-lead > h3 { page-break-after: avoid; break-after: avoid-page; }
+.place-lead > .place-meta { page-break-after: avoid; break-after: avoid-page; }
+
+.place-fig { page-break-inside: avoid; break-inside: avoid-page;
+  margin: 0.5rem 0 1rem; }
+.place-fig img {
+  page-break-inside: avoid; break-inside: avoid-page;
+  max-height: 48vh; width: auto; max-width: 100%;
+  object-fit: contain; margin-left: auto; margin-right: auto; }
+.place-fig--hi-res img { max-height: 52vh; }
+.place-fig--lo-res img { max-height: 30vh; }
+.place-pdf-fig-row {
+  display: flex; flex-direction: row; flex-wrap: wrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.45rem 0.55rem; margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row .place-fig {
+  flex: 1 1 30%; margin: 0; min-width: 26%; max-width: 100%; }
+.place-pdf-fig-row .place-fig img {
+  width: auto; max-width: 100%; height: auto; max-height: 44vh;
+  object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--pair {
+  flex-wrap: nowrap; justify-content: space-between;
+  align-items: flex-end; gap: 0.5rem 0.65rem; }
+.place-pdf-fig-row--pair .place-fig {
+  flex: 1 1 47%; min-width: 0; max-width: 50%;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--pair .place-fig img {
+  max-height: 44vh; object-fit: contain; }
+.place-pdf-fig-row--pair .place-fig--hi-res img { max-height: 52vh; }
+.place-pdf-fig-row--pair .place-fig--lo-res img { max-height: 26vh; }
+.place-pdf-fig-row--pair .place-fig--row-sized img,
+.place-pdf-fig-row--triple .place-fig--row-sized img,
+.place-pdf-fig-row--many .place-fig--row-sized img {
+  width: auto; max-width: 100%; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row .place-fig--row-sized.place-fig--hi-res img,
+.place-pdf-fig-row .place-fig--row-sized.place-fig--lo-res img {
+  max-height: unset; }
+.place-pdf-fig-rows-stack {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple {
+  display: flex; flex-direction: row; flex-wrap: nowrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.4rem 0.48rem; margin: 0;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--triple .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--triple .place-fig--hi-res img { max-height: 42vh; }
+.place-pdf-fig-row--triple .place-fig--lo-res img { max-height: 18vh; }
+.place-pdf-fig-row--many {
+  flex-wrap: nowrap; justify-content: center; align-items: flex-end;
+  gap: 0.35rem 0.42rem; }
+.place-pdf-fig-row--many .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--many .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+
+
 .place { margin-bottom: 2.2rem; page-break-inside: auto; }
 h3 { font-family: 'Playfair Display', serif; font-size: 1.22rem; margin: 1.2rem 0 0.35rem;
   font-weight: 600; }
@@ -90,7 +171,6 @@ h4 { font-family: 'Playfair Display', serif; font-size: 0.95rem; text-transform:
   color: #555; font-size: 0.95rem; margin: 0 0 0.5rem; font-style: italic; }
 .place-meta { font-size: 0.92rem; color: #353535; margin: 0 0 0.75rem;
   line-height: 1.4; }
-.place-fig { margin: 0.5rem 0 1rem; }
 img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
 .prose, .place-desc p { margin: 0.45rem 0; line-height: 1.5;
   text-align: justify; }
@@ -110,7 +190,9 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <figure class="heraldry-fig heraldry-coat-book" title="Coat of arms of Lisbon"><img src="../images/guide_coat_of_arms.svg" alt="Coat of arms of Lisbon"/></figure>
 <figure class="heraldry-fig heraldry-coat-book" title="Flag of Lisbon"><img src="../images/guide_flag.svg" alt="Flag of Lisbon"/></figure>
 </div></div><h1 class="guide-title-main">Lisbon</h1><p class="lead">Guide. Places in this edition: 28.</p></header>
+<nav class="guide-toc" id="guide-toc" aria-label="Contents"><h2>Contents</h2><ol><li class="toc-item"><a href="#guide-trips">Trip ideas</a></li><li class="toc-item"><a href="#lisbon_25_abril_bridge">25 de Abril Bridge</a></li><li class="toc-item"><a href="#lisbon_palacio_belem">Belém Palace</a></li><li class="toc-item"><a href="#lisbon_tower_belem">Belém Tower</a></li><li class="toc-item"><a href="#lisbon_cais_colunas">Cais das Colunas</a></li><li class="toc-item"><a href="#lisbon_gulbenkian">Calouste Gulbenkian Museum</a></li><li class="toc-item"><a href="#lisbon_campo_pequeno">Campo Pequeno bullring</a></li><li class="toc-item"><a href="#lisbon_carmo_convent">Carmo Convent ruins</a></li><li class="toc-item"><a href="#lisbon_estrela_basilica">Estrela Basilica</a></li><li class="toc-item"><a href="#lisbon_jeronimos_monastery">Jerónimos Monastery</a></li><li class="toc-item"><a href="#lisbon_se_cathedral">Lisbon Cathedral</a></li><li class="toc-item"><a href="#lisbon_lx_factory">LX Factory</a></li><li class="toc-item"><a href="#lisbon_maat">MAAT</a></li><li class="toc-item"><a href="#lisbon_miradouro_graca">Miradouro da Graça</a></li><li class="toc-item"><a href="#lisbon_miradouro_senhora_monte">Miradouro da Senhora do Monte</a></li><li class="toc-item"><a href="#lisbon_national_pantheon">National Pantheon</a></li><li class="toc-item"><a href="#lisbon_tile_museum">National Tile Museum</a></li><li class="toc-item"><a href="#lisbon_oceanario">Oceanário de Lisboa</a></li><li class="toc-item"><a href="#lisbon_padrao_descobrimentos">Padrão dos Descobrimentos</a></li><li class="toc-item"><a href="#lisbon_pal_cio_da_bemposta">Palácio da Bemposta</a></li><li class="toc-item"><a href="#lisbon_parque_eduardo_vii">Parque Eduardo VII</a></li><li class="toc-item"><a href="#lisbon_commerce_square">Praça do Comércio</a></li><li class="toc-item"><a href="#lisbon_praca_municipio">Praça do Município</a></li><li class="toc-item"><a href="#lisbon_rossio">Rossio (Pedro IV Square)</a></li><li class="toc-item"><a href="#lisbon_santa_justa_lift">Santa Justa Lift</a></li><li class="toc-item"><a href="#lisbon_sao_jorge_castle">São Jorge Castle</a></li><li class="toc-item"><a href="#lisbon_sao_vicente">São Vicente de Fora</a></li><li class="toc-item"><a href="#lisbon_tram_28">Tram 28 route</a></li><li class="toc-item"><a href="#lisbon_aqueduto_agua_livre">Águas Livres Aqueduct</a></li></ol></nav>
 <section class="guide-trip-plans" id="guide-trips" aria-label="Trip ideas"><h2>Trip ideas</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 <article class="trip-plan" id="trip-1d"><h3>One day</h3>
 <p class="prose">A compact loop linking the strongest cards in this guide, ordered to minimise backtracking on foot.</p>
 <ol class="trip-stops"><li><a href="#lisbon_campo_pequeno">Campo Pequeno bullring</a> (~75min)</li>
@@ -137,221 +219,376 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <p class="prose">Day 3 — remaining highlights nearby.</p>
 <ol class="trip-stops"><li><a href="#lisbon_tower_belem">Belém Tower</a> (~75min)</li>
 <li><a href="#lisbon_rossio">Rossio (Pedro IV Square)</a> (~75min)</li></ol></article></section>
-<nav class="guide-toc" aria-label="Contents"><h2>Contents</h2><ol><li class="toc-item"><a href="#guide-trips">Trip ideas</a></li><li class="toc-item"><a href="#lisbon_25_abril_bridge">25 de Abril Bridge</a></li><li class="toc-item"><a href="#lisbon_palacio_belem">Belém Palace</a></li><li class="toc-item"><a href="#lisbon_tower_belem">Belém Tower</a></li><li class="toc-item"><a href="#lisbon_cais_colunas">Cais das Colunas</a></li><li class="toc-item"><a href="#lisbon_gulbenkian">Calouste Gulbenkian Museum</a></li><li class="toc-item"><a href="#lisbon_campo_pequeno">Campo Pequeno bullring</a></li><li class="toc-item"><a href="#lisbon_carmo_convent">Carmo Convent ruins</a></li><li class="toc-item"><a href="#lisbon_estrela_basilica">Estrela Basilica</a></li><li class="toc-item"><a href="#lisbon_jeronimos_monastery">Jerónimos Monastery</a></li><li class="toc-item"><a href="#lisbon_se_cathedral">Lisbon Cathedral</a></li><li class="toc-item"><a href="#lisbon_lx_factory">LX Factory</a></li><li class="toc-item"><a href="#lisbon_maat">MAAT</a></li><li class="toc-item"><a href="#lisbon_miradouro_graca">Miradouro da Graça</a></li><li class="toc-item"><a href="#lisbon_miradouro_senhora_monte">Miradouro da Senhora do Monte</a></li><li class="toc-item"><a href="#lisbon_national_pantheon">National Pantheon</a></li><li class="toc-item"><a href="#lisbon_tile_museum">National Tile Museum</a></li><li class="toc-item"><a href="#lisbon_oceanario">Oceanário de Lisboa</a></li><li class="toc-item"><a href="#lisbon_padrao_descobrimentos">Padrão dos Descobrimentos</a></li><li class="toc-item"><a href="#lisbon_pdfband_9_f20cfd3f">Palácio da Bemposta</a></li><li class="toc-item"><a href="#lisbon_parque_eduardo_vii">Parque Eduardo VII</a></li><li class="toc-item"><a href="#lisbon_commerce_square">Praça do Comércio</a></li><li class="toc-item"><a href="#lisbon_praca_municipio">Praça do Município</a></li><li class="toc-item"><a href="#lisbon_rossio">Rossio (Pedro IV Square)</a></li><li class="toc-item"><a href="#lisbon_santa_justa_lift">Santa Justa Lift</a></li><li class="toc-item"><a href="#lisbon_sao_jorge_castle">São Jorge Castle</a></li><li class="toc-item"><a href="#lisbon_sao_vicente">São Vicente de Fora</a></li><li class="toc-item"><a href="#lisbon_tram_28">Tram 28 route</a></li><li class="toc-item"><a href="#lisbon_aqueduto_agua_livre">Águas Livres Aqueduct</a></li></ol></nav>
 <section class="place" id="lisbon_25_abril_bridge">
+<div class="place-lead">
 <h3>25 de Abril Bridge</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/lisbon_25_abril_bridge.jpg" alt="25 de Abril Bridge"/></figure>
-<div class="place-desc"><p class="prose">The 25 de Abril Bridge is an iconic suspension bridge in Lisbon, connecting the capital to Almada across the Tagus River. Often compared to San Francisco&#x27;s Golden Gate Bridge, it is a stunning feat of engineering and a vital transportation link. Visitors can admire its striking red color and panoramic views of the city and river from various vantage points. The bridge spans 2,277 meters in length, making it one of the longest suspension bridges in Europe. It was designed by the American engineer Edwin D.</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_25_abril_bridge.jpg" alt="25 de Abril Bridge" width="330" height="500" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_25_abril_bridge_b.jpg" alt="25 de Abril Bridge — view 2" width="330" height="255" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">The 25 de Abril Bridge is an iconic suspension bridge in Lisbon, connecting the capital to Almada across the Tagus River. Often compared to San Francisco&#x27;s Golden Gate Bridge, it is a stunning feat of engineering and a vital transportation link. Visitors can admire its striking red color and panoramic views of the city and river from various vantage points. The bridge spans 2,277 meters in length, making it one of the longest suspension bridges in Europe. It was designed by the American engineer Edwin D. Lewis and built by a consortium of Portuguese and American companies.</p>
 <p class="prose">Construction of the 25 de Abril Bridge began in 1962 and was completed in 1966, originally named Ponte Salazar after the Portuguese dictator. The bridge was inaugurated on August 6, 1966, and has since become a symbol of Lisbon&#x27;s modernity. It was renamed after the Carnation Revolution in 1974, which ended the authoritarian regime in Portugal. The 25 de Abril Bridge holds both political and cultural significance for Lisbon. It symbolizes the transition from dictatorship to democracy following the Carnation Revolution, marking a pivotal moment in Portuguese history. Culturally, the bridge is a beloved landmark that features prominently in the city&#x27;s identity, often appearing in art and photography, and serves as a backdrop for various events and celebrations.</p></div>
 </section>
 <section class="place" id="lisbon_palacio_belem">
+<div class="place-lead">
 <h3>Belém Palace</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/lisbon_palacio_belem.jpg" alt="Belém Palace"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_palacio_belem.jpg" alt="Belém Palace" width="330" height="248" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_palacio_belem_b.jpg" alt="Belém Palace — view 2" width="330" height="354" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Belém Palace, located in the historic district of Belém, is the official residence of the President of Portugal. This stunning example of Manueline architecture is surrounded by beautiful gardens and offers visitors a glimpse into the country&#x27;s political history. While the palace is not open to the public for tours, its impressive exterior and surrounding area are worth exploring. Belém Palace was built in the early 16th century. It became the official presidential residence in 1910.</p>
 <p class="prose">Belém Palace was originally built in the 16th century as a royal palace and has undergone several renovations over the years. It has served as a residence for Portuguese monarchs and, following the establishment of the Portuguese Republic in 1910, became the official residence of the President of Portugal. Key events in the country&#x27;s political history have taken place within its walls. As the official residence of the President, Belém Palace plays a crucial role in the political landscape of Portugal, symbolizing the continuity of the republic and the nation&#x27;s governance. The palace is also a cultural landmark, reflecting the rich architectural heritage of the Manueline style and serving as a backdrop for state ceremonies and official events.</p></div>
 </section>
 <section class="place" id="lisbon_tower_belem">
+<div class="place-lead">
 <h3>Belém Tower</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Belém | Style: Manueline maritime fortress | Period: 1514–1520</p>
-<figure class="place-fig"><img src="../images/lisbon_tower_belem.jpg" alt="Belém Tower"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lisbon_tower_belem.jpg" alt="Belém Tower" width="1280" height="1222" style="height: 441px; max-height: 441px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_tower_belem_b.jpg" alt="Belém Tower — view 2" width="330" height="354" style="height: 441px; max-height: 441px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Riverside bastion and ceremonial gateway to Lisbon&#x27;s harbour, decorated with Manueline rope motifs and royal shields. UNESCO-listed with the nearby Jerónimos Monastery as a monuments ensemble. Spiral stairs to the terrace can queue heavily before noon.</p>
 <p class="prose">Built from lioz limestone as part of King Manuel I&#x27;s coastal defence and prestige programme. Icon of Portugal&#x27;s Age of Discovery imagery.</p></div>
 </section>
 <section class="place" id="lisbon_cais_colunas">
+<div class="place-lead">
 <h3>Cais das Colunas</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/lisbon_cais_colunas.jpg" alt="Cais das Colunas"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_cais_colunas.jpg" alt="Cais das Colunas" width="330" height="211" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_cais_colunas_b.jpg" alt="Cais das Colunas — view 2" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Cais das Colunas is a picturesque waterfront area in Lisbon, known for its striking columns that mark the site where ships once docked. This charming spot offers stunning views of the Tagus River and serves as a popular gathering place for both locals and tourists. Visitors can enjoy leisurely strolls along the promenade, taking in the vibrant atmosphere and historical significance of the location. Cais das Colunas was built in 1776. The columns served as a ceremonial entrance for ships arriving in Lisbon.</p>
 <p class="prose">Cais das Colunas was constructed in the early 18th century, specifically in 1776, as part of the city&#x27;s efforts to modernize its waterfront. The columns were designed to provide a grand entrance for arriving dignitaries and merchants, symbolizing Lisbon&#x27;s importance as a maritime hub during the Age of Discoveries. The area has witnessed various historical events, including significant maritime activities and trade. Culturally, Cais das Colunas is a vital part of Lisbon&#x27;s heritage, representing the city&#x27;s rich maritime history and architectural beauty. It is a favored spot for social gatherings and cultural events, reflecting the daily life of Lisbon&#x27;s residents. The site contributes to the overall charm of the city, enhancing its appeal as a UNESCO World Heritage site.</p></div>
 </section>
 <section class="place" id="lisbon_gulbenkian">
+<div class="place-lead">
 <h3>Calouste Gulbenkian Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/lisbon_gulbenkian.jpg" alt="Calouste Gulbenkian Museum"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/lisbon_gulbenkian_b.jpg" alt="Calouste Gulbenkian Museum" width="330" height="220"/></figure>
+</div>
 <div class="place-desc"><p class="prose">The Calouste Gulbenkian Museum in Lisbon is a treasure trove of art and culture, housing an extensive collection that spans from ancient to modern times. Visitors can explore works by renowned artists such as Rembrandt, Monet, and Van Dyck, as well as artifacts from various civilizations. The museum is set within beautifully landscaped gardens, providing a serene environment for art lovers and casual visitors alike. The museum features over 6,000 works of art, including paintings, sculptures, and decorative arts. It is located in the Areeiro district of Lisbon, surrounded by a 7-hectare park.</p>
 <p class="prose">The Calouste Gulbenkian Museum was founded in 1969, following the wishes of Calouste Gulbenkian, an Armenian oil magnate and philanthropist. He bequeathed his extensive art collection to the museum, which was established to promote culture and education in Portugal. The museum has since become a key institution for art and culture in the country. Culturally, the Gulbenkian Museum plays a vital role in Lisbon&#x27;s artistic landscape, showcasing a diverse range of artworks that reflect both European and Eastern influences. It serves as a hub for cultural exchange and education, hosting exhibitions, concerts, and lectures that enrich the local community. The museum&#x27;s gardens also offer a peaceful retreat, enhancing the daily life of Lisbon&#x27;s residents and visitors.</p></div>
 </section>
 <section class="place" id="lisbon_campo_pequeno">
+<div class="place-lead">
 <h3>Campo Pequeno bullring</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/lisbon_campo_pequeno.jpg" alt="Campo Pequeno bullring"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_campo_pequeno.jpg" alt="Campo Pequeno bullring" width="330" height="272" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_campo_pequeno_b.jpg" alt="Campo Pequeno bullring — view 2" width="330" height="430" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Campo Pequeno bullring is a striking example of neo-Moorish architecture located in the heart of Lisbon. Originally inaugurated in 1892, it has served as a venue for bullfighting, concerts, and various cultural events, making it a vibrant hub of activity. Visitors can explore its impressive façade and enjoy the lively atmosphere of the surrounding area. Inaugurated on May 15, 1892. Designed by architect José Luís Monteiro in a neo-Moorish style. Underwent major renovations in the early 2000s to become a multifunctional venue.</p>
 <p class="prose">Campo Pequeno was inaugurated on May 15, 1892, designed by architect José Luís Monteiro. The bullring has undergone several renovations, particularly in the early 2000s, when it was transformed into a multifunctional space, preserving its historical character while adapting to modern uses. Culturally, Campo Pequeno is a symbol of traditional Portuguese bullfighting, a practice that has deep roots in the country&#x27;s heritage. It hosts a variety of events, from concerts to exhibitions, reflecting the dynamic cultural life of Lisbon. Although bullfighting has faced criticism and declining popularity, the venue remains a significant landmark that captures the essence of local traditions and community gatherings.</p></div>
 </section>
 <section class="place" id="lisbon_carmo_convent">
+<div class="place-lead">
 <h3>Carmo Convent ruins</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Chiado | Style: Open-air Gothic arches | Period: Gothic church; ruined 1755</p>
-<figure class="place-fig"><img src="../images/lisbon_carmo_convent.jpg" alt="Carmo Convent ruins"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lisbon_carmo_convent.jpg" alt="Carmo Convent ruins" width="1280" height="960" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_carmo_convent_b.jpg" alt="Carmo Convent ruins — view 2" width="330" height="329" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Elevador de Santa Justa lands almost at the gate. Earthquake interpretation panels line the lateral chapels. 1755 shockwave stripped vaults; romantic ruin aesthetic drew 19th-century visitors. Physical reminder of Lisbon&#x27;s seismic vulnerability.</p></div>
 </section>
 <section class="place" id="lisbon_estrela_basilica">
+<div class="place-lead">
 <h3>Estrela Basilica</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/lisbon_estrela_basilica.jpg" alt="Estrela Basilica"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_estrela_basilica.jpg" alt="Estrela Basilica" width="330" height="475" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_estrela_basilica_b.jpg" alt="Estrela Basilica — view 2" width="330" height="440" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Estrela Basilica, a stunning example of Neoclassical architecture, is one of Lisbon&#x27;s most iconic landmarks. Completed in the late 18th century, this grand church is known for its impressive dome and beautifully adorned interior, making it a must-visit for both tourists and locals. Nestled in the tranquil Estrela Garden, the basilica offers a serene escape from the bustling city. The basilica features a large dome that is one of the tallest in Lisbon. It is home to the tomb of Queen Maria I, the monarch who commissioned its construction.</p>
 <p class="prose">Construction of the Estrela Basilica began in 1779 and was completed in 1834. It was commissioned by Queen Maria I as a fulfillment of a vow made during her pregnancy, reflecting the deep connection between the monarchy and the Catholic Church during this period. The basilica was consecrated in 1789 and has since been a prominent site for religious ceremonies and community gatherings. The Estrela Basilica holds cultural importance as a symbol of Lisbon&#x27;s architectural heritage and religious devotion. Its stunning interior, featuring intricate azulejos and religious artwork, reflects the artistic traditions of Portugal. The basilica is also a site of pilgrimage, attracting visitors who come to admire its beauty and partake in religious rites.</p></div>
 </section>
 <section class="place" id="lisbon_jeronimos_monastery">
+<div class="place-lead">
 <h3>Jerónimos Monastery</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Praça do Império, Belém | Style: Manueline monastery church and cloister | Period: 1501–1601</p>
-<figure class="place-fig"><img src="../images/lisbon_jeronimos_monastery.jpg" alt="Jerónimos Monastery"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lisbon_jeronimos_monastery.jpg" alt="Jerónimos Monastery" width="1062" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_jeronimos_monastery_b.jpg" alt="Jerónimos Monastery — view 2" width="330" height="494" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Hieronymite monastery funded by spice-trade wealth, housing Vasco da Gama&#x27;s tomb and a filigree stone cloister. Pastel de nata queues at Antiga Confeitaria de Belém sit a short walk east. Church nave is free; cloister and museum sectors are ticketed.</p>
 <p class="prose">Linked to the return of da Gama&#x27;s first India voyage; the complex became a state pantheon for navigators. High point of Portuguese Late Gothic carving.</p></div>
 </section>
 <section class="place" id="lisbon_se_cathedral">
+<div class="place-lead">
 <h3>Lisbon Cathedral</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/lisbon_se_cathedral.jpg" alt="Lisbon Cathedral"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_se_cathedral.jpg" alt="Lisbon Cathedral" width="330" height="396" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_se_cathedral_b.jpg" alt="Lisbon Cathedral — view 2" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Lisbon Cathedral, known as Sé de Lisboa, is the city&#x27;s oldest and most important church, showcasing a blend of architectural styles from Romanesque to Gothic. Its imposing façade and beautiful rose window make it a must-visit for anyone exploring the historic Alfama district. Visitors can admire the intricate chapels and the stunning views of the city from the cathedral&#x27;s terrace. Lisbon Cathedral was consecrated in 1147. The cathedral features a mix of architectural styles, including Romanesque, Gothic, and Baroque.</p>
 <p class="prose">Construction of Lisbon Cathedral began in 1147, shortly after the city was captured from the Moors during the Reconquista. The cathedral was built to commemorate the victory and has undergone several renovations and restorations over the centuries, particularly after the 1755 earthquake that caused significant damage. As a place of worship, Lisbon Cathedral holds immense religious significance for the Catholic community and serves as the archbishop&#x27;s seat. It is a symbol of the city&#x27;s resilience and history, reflecting the cultural heritage of Lisbon through its architecture and art. The cathedral is also a focal point for various religious ceremonies and celebrations, drawing both pilgrims and tourists alike.</p></div>
 </section>
 <section class="place" id="lisbon_lx_factory">
+<div class="place-lead">
 <h3>LX Factory</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Alcântara | Style: Industrial sheds to studios | Period: 2008 creative reuse</p>
-<figure class="place-fig"><img src="../images/lisbon_lx_factory.jpg" alt="LX Factory"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/lisbon_lx_factory_b.jpg" alt="LX Factory" width="330" height="212"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Street art, design shops, and rooftop bars inside a former textile mill yard under the bridge. Sunday markets add food trucks to the bookshop courtyard. Evening Uber queues spike after concerts at the bridge arena.</p>
 <p class="prose">Lisbon&#x27;s post-industrial waterfront strip attracted creatives before major hotel chains. Alternative retail spine west of Belém.</p></div>
 </section>
 <section class="place" id="lisbon_maat">
+<div class="place-lead">
 <h3>MAAT</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Belém waterfront | Style: Low wave-form ceramic tile shell | Period: 2016 (Amanda Levete)</p>
-<figure class="place-fig"><img src="../images/lisbon_maat.jpg" alt="MAAT"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lisbon_maat.jpg" alt="MAAT" width="1280" height="1280" style="height: 263px; max-height: 263px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_maat_b.jpg" alt="MAAT — view 2" width="330" height="188" style="height: 263px; max-height: 263px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Riverfront contemporary art and technology shows with roof walks toward Ponte 25 de Abril. Sunset reflects along the black mirror cladding. Combined tickets sometimes pair with Central Tejo next door.</p>
 <p class="prose">EPAL power station neighbour negotiated shared public esplanades. Belém&#x27;s modern wing beyond the monastery axis.</p></div>
 </section>
 <section class="place" id="lisbon_miradouro_graca">
+<div class="place-lead">
 <h3>Miradouro da Graça</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/lisbon_miradouro_graca.jpg" alt="Miradouro da Graça"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_miradouro_graca.jpg" alt="Miradouro da Graça" width="330" height="156" style="height: 218px; max-height: 218px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_miradouro_graca_b.jpg" alt="Miradouro da Graça — view 2" width="330" height="185" style="height: 218px; max-height: 218px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Miradouro da Graça offers stunning panoramic views of Lisbon, making it a popular spot for both locals and tourists. Nestled in the Graça neighborhood, this viewpoint is a perfect place to relax and soak in the city&#x27;s vibrant atmosphere. With its charming gardens and historic surroundings, it serves as an ideal backdrop for memorable photographs. Located in the Graça neighborhood, known for its historic charm. Offers views of key landmarks such as the Castle of São Jorge and the Tagus River.</p>
 <p class="prose">The Miradouro da Graça is situated near the historic Graça district, which dates back to the 12th century. The viewpoint itself has evolved over the years, becoming a favored location for visitors seeking to admire the beauty of Lisbon and its iconic landmarks. Culturally, Miradouro da Graça is a vital part of daily life in Lisbon, serving as a gathering place for residents and a must-visit for tourists. The viewpoint reflects the city&#x27;s rich heritage and artistic spirit, often featuring local musicians and artists who contribute to its lively atmosphere.</p></div>
 </section>
 <section class="place" id="lisbon_miradouro_senhora_monte">
+<div class="place-lead">
 <h3>Miradouro da Senhora do Monte</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/lisbon_miradouro_senhora_monte.jpg" alt="Miradouro da Senhora do Monte"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_miradouro_senhora_monte.jpg" alt="Miradouro da Senhora do Monte" width="330" height="247" style="height: 105px; max-height: 105px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_miradouro_senhora_monte_b.jpg" alt="Miradouro da Senhora do Monte — view 2" width="330" height="75" style="height: 105px; max-height: 105px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Miradouro da Senhora do Monte is one of Lisbon&#x27;s most breathtaking viewpoints, offering panoramic views of the city and the Tagus River. Nestled in the Graça neighborhood, this spot is a favorite among locals and tourists alike, providing a perfect backdrop for stunning photographs and moments of reflection. The serene atmosphere, complemented by lush gardens and historical features, makes it an ideal place to unwind and soak in the beauty of Lisbon. The viewpoint is located at an elevation of 830 feet, making it one of the highest in Lisbon. It offers views of several iconic landmarks, including the São Jorge Castle and the Lisbon Cathedral.</p>
 <p class="prose">The Miradouro da Senhora do Monte is situated near the site of an old chapel dedicated to Our Lady of the Mountain, which dates back to the 17th century. Over the years, this viewpoint has been a popular gathering place, especially during the 19th century when it became known for its scenic vistas and romantic ambiance. Culturally, the Miradouro da Senhora do Monte is significant as it reflects the traditional Lisbon lifestyle, where locals often gather to enjoy the views and socialize. The viewpoint is also a popular spot for artists and photographers, capturing the essence of the city. While it does not hold specific political or religious significance, its role as a communal space highlights the importance of public areas in urban life.</p></div>
 </section>
 <section class="place" id="lisbon_national_pantheon">
+<div class="place-lead">
 <h3>National Pantheon</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Campo de Santa Clara | Style: Baroque central plan with dome | Period: 17th c. church; pantheon 1966 onward</p>
-<figure class="place-fig"><img src="../images/lisbon_national_pantheon.jpg" alt="National Pantheon"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lisbon_national_pantheon.jpg" alt="National Pantheon" width="1280" height="1017" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_national_pantheon_b.jpg" alt="National Pantheon — view 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Feira da Ladra flea market spills around the square on Tuesdays. Wind at the terrace can be strong above the Alfama roofscape. Unfinished church became a secular pantheon for national heroes. 360° roof views reward the climb from the tile quarter.</p></div>
 </section>
 <section class="place" id="lisbon_tile_museum">
+<div class="place-lead">
 <h3>National Tile Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Xabregas | Style: Church nave with azulejo panels | Period: 1509 convent; museum 1965</p>
-<figure class="place-fig"><img src="../images/lisbon_tile_museum.jpg" alt="National Tile Museum"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/lisbon_tile_museum_b.jpg" alt="National Tile Museum" width="330" height="410"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Café sits in the former convent cloister. Bus links faster than walking from Santa Apolónia. Madre de Deus church absorbed into a national azulejo collection. Best single-site survey of Portuguese tile painting.</p></div>
 </section>
 <section class="place" id="lisbon_oceanario">
+<div class="place-lead">
 <h3>Oceanário de Lisboa</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/lisbon_oceanario.jpg" alt="Oceanário de Lisboa"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/lisbon_oceanario_b.jpg" alt="Oceanário de Lisboa" width="330" height="220"/></figure>
+</div>
 <div class="place-desc"><p class="prose">The Oceanário de Lisboa is one of the largest aquariums in the world, located in the Parque das Nações. It showcases a diverse range of marine life, including sharks, rays, and colorful tropical fish, all within a stunning architectural design. Visitors can explore various ecosystems and learn about ocean conservation efforts in an engaging and educational environment. Inaugurated on May 18, 1998, during Expo 98. Designed by British architect Richard Rogers. Houses over 15,000 marine animals from 450 species.</p>
 <p class="prose">The Oceanário de Lisboa was inaugurated on May 18, 1998, as part of the Expo 98 World&#x27;s Fair, which focused on the theme of &#x27;The Oceans, a Heritage for the Future.&#x27; Designed by architect Richard Rogers, it has since become a prominent landmark in Lisbon, attracting millions of visitors each year. Culturally, the Oceanário serves as a vital educational resource, promoting awareness about marine conservation and the importance of protecting ocean ecosystems. It plays a significant role in Lisbon&#x27;s identity as a city that values its maritime heritage and environmental responsibility.</p></div>
 </section>
 <section class="place" id="lisbon_padrao_descobrimentos">
+<div class="place-lead">
 <h3>Padrão dos Descobrimentos</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/lisbon_padrao_descobrimentos.jpg" alt="Padrão dos Descobrimentos"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_padrao_descobrimentos.jpg" alt="Padrão dos Descobrimentos" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_padrao_descobrimentos_b.jpg" alt="Padrão dos Descobrimentos — view 2" width="330" height="354" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Monument of the Discoveries (Portuguese: Padrão dos Descobrimentos, Portuguese pronunciation: [pɐˈðɾɐ̃w duʒ ðɨʃkuβɾiˈmẽtuʃ]) is a monument on the northern bank of the Tagus River estuary, in the civil parish of Santa Maria de Belém, Lisbon. Located along the river where ships departed to explore and trade with India and the Orient, the monument celebrates the Portuguese Age of Discovery (or &quot;Age of Exploration&quot;) during the 15th and 16th centuries.</p></div>
 </section>
-<section class="place" id="lisbon_pdfband_9_f20cfd3f">
+<section class="place" id="lisbon_pal_cio_da_bemposta">
+<div class="place-lead">
 <h3>Palácio da Bemposta</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/lisbon_pdfband_9_f20cfd3f.jpg" alt="Palácio da Bemposta"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lisbon_pal_cio_da_bemposta.jpg" alt="Palácio da Bemposta" width="1280" height="831" style="height: 299px; max-height: 299px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--row-sized"><img src="../images/lisbon_pal_cio_da_bemposta_b.jpg" alt="Palácio da Bemposta — view 2" width="330" height="587" style="height: 299px; max-height: 299px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 </section>
 <section class="place" id="lisbon_parque_eduardo_vii">
+<div class="place-lead">
 <h3>Parque Eduardo VII</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/lisbon_parque_eduardo_vii.jpg" alt="Parque Eduardo VII"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_parque_eduardo_vii.jpg" alt="Parque Eduardo VII" width="330" height="410" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_parque_eduardo_vii_b.jpg" alt="Parque Eduardo VII — view 2" width="330" height="287" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The park occupies an area of 26 hectares (64 acres) to the north of Avenida da Liberdade and Marquis of Pombal Square in Lisbon&#x27;s city center. The park is named for King Edward VII of the United Kingdom, who visited Portugal in 1903 to strengthen relations between the two countries and reaffirm the Anglo-Portuguese Alliance.</p></div>
 </section>
 <section class="place" id="lisbon_commerce_square">
+<div class="place-lead">
 <h3>Praça do Comércio</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Baixa riverfront | Style: Pombaline arcaded square | Period: 1755 earthquake rebuild onward</p>
-<figure class="place-fig"><img src="../images/lisbon_commerce_square.jpg" alt="Praça do Comércio"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lisbon_commerce_square.jpg" alt="Praça do Comércio" width="1280" height="1280" style="height: 462px; max-height: 462px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_commerce_square_b.jpg" alt="Praça do Comércio — view 2" width="330" height="477" style="height: 462px; max-height: 462px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Yellow arcaded square opening to the Tagus, framed by government wings and the triumphal Rua Augusta Arch. Equestrian statue of Joseph I anchors the riverside centre. Trams to Alfama skirt the square&#x27;s north side.</p>
 <p class="prose">Replaced the royal palace destroyed in the 1755 earthquake as the city&#x27;s ceremonial river gate. Default festival ground and tourist orientation hub.</p></div>
 </section>
 <section class="place" id="lisbon_praca_municipio">
+<div class="place-lead">
 <h3>Praça do Município</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/lisbon_praca_municipio.jpg" alt="Praça do Município"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_praca_municipio.jpg" alt="Praça do Município" width="330" height="264" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_praca_municipio_b.jpg" alt="Praça do Município — view 2" width="330" height="495" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Praça do Município is a vibrant public square located in the heart of Lisbon, known for its stunning architecture and lively atmosphere. Surrounded by important municipal buildings, it serves as a central hub for both locals and tourists alike, offering a glimpse into the city&#x27;s rich history and cultural life. The square is often bustling with events, markets, and gatherings, making it a must-visit destination. The square was redesigned after the 1755 earthquake. It is surrounded by significant municipal buildings, including the Lisbon City Hall.</p>
 <p class="prose">Praça do Município, historically known as Praça do Comércio, has roots dating back to the 18th century. It was redesigned after the 1755 earthquake, which devastated much of Lisbon, leading to the establishment of a new urban layout. The square has since been a focal point for various civic activities and celebrations. Politically, Praça do Município has played a role in Lisbon&#x27;s governance, serving as a site for municipal administration and public gatherings. Culturally, it reflects the city&#x27;s heritage through its architecture and serves as a venue for festivals and public events, contributing to the daily life of Lisbon&#x27;s residents. The square is a testament to the city&#x27;s resilience and adaptability over centuries.</p></div>
 </section>
 <section class="place" id="lisbon_rossio">
+<div class="place-lead">
 <h3>Rossio (Pedro IV Square)</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Baixa | Style: Portuguese baroque façades and wave pavement | Period: 13th c. square; wave calçada 19th c.</p>
-<figure class="place-fig"><img src="../images/lisbon_rossio.jpg" alt="Rossio (Pedro IV Square)"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lisbon_rossio.jpg" alt="Rossio (Pedro IV Square)" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--row-sized"><img src="../images/lisbon_rossio_b.jpg" alt="Rossio (Pedro IV Square) — view 2" width="330" height="608" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Central plaza with baroque fountains, theatre, and station portal feeding Sintra trains. Café Nicola writers&#x27; tradition still draws journalists. Elevador da Glória climbs toward Bairro Alto at the west edge.</p>
 <p class="prose">Inquisition autos-da-fé gave way to civic festivals and café culture. Default meeting point between Baixa and nightlife hills.</p></div>
 </section>
 <section class="place" id="lisbon_santa_justa_lift">
+<div class="place-lead">
 <h3>Santa Justa Lift</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Baixa–Chiado | Style: Gothic revival iron elevator tower | Period: 1902 (Raoul Mesnier du Ponsard)</p>
-<figure class="place-fig"><img src="../images/lisbon_santa_justa_lift.jpg" alt="Santa Justa Lift"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lisbon_santa_justa_lift.jpg" alt="Santa Justa Lift" width="1200" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_santa_justa_lift_b.jpg" alt="Santa Justa Lift — view 2" width="330" height="495" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Vertical iron link between lower Baixa grid and Carmo terrace viewpoints, still using original carriages on busy days. Vista tickets at the top may require an extra queue beyond lift fare. Night lighting emphasises riveted neo-Gothic tracery.</p>
 <p class="prose">Steam originally powered the lift; electrification integrated it into Carris urban transport branding. Industrial heritage selfie spot between grid and hill neighbourhoods.</p></div>
 </section>
 <section class="place" id="lisbon_sao_jorge_castle">
+<div class="place-lead">
 <h3>São Jorge Castle</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Alfama hill | Style: Medieval castle walls and keeps | Period: 11th c. Moorish walls; successive rebuilds</p>
-<figure class="place-fig"><img src="../images/lisbon_sao_jorge_castle.jpg" alt="São Jorge Castle"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lisbon_sao_jorge_castle.jpg" alt="São Jorge Castle" width="1280" height="700" style="height: 252px; max-height: 252px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_sao_jorge_castle_b.jpg" alt="São Jorge Castle — view 2" width="330" height="375" style="height: 252px; max-height: 252px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Hilltop fortifications with ramparts overlooking terracotta roofs, cruise ships on the Tagus, and peacocks in gardens. Archaeological trenches expose Iron Age and Roman layers inside the walls. Sunset crowds peak on the eastern battlements.</p>
 <p class="prose">Moorish citadel became royal palace; today&#x27;s ruins are largely medieval and restored 20th-century fabric. The compass rose for understanding Lisbon&#x27;s seven hills layout.</p></div>
 </section>
 <section class="place" id="lisbon_sao_vicente">
+<div class="place-lead">
 <h3>São Vicente de Fora</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/lisbon_sao_vicente.jpg" alt="São Vicente de Fora"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_sao_vicente.jpg" alt="São Vicente de Fora" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_sao_vicente_b.jpg" alt="São Vicente de Fora — view 2" width="330" height="185" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">São Vicente de Fora is a stunning monastery located in the Alfama district of Lisbon, renowned for its impressive architecture and serene atmosphere. Visitors can admire the beautiful cloisters, intricate tile work, and the breathtaking views of the city from its elevated position. The site is also home to the tombs of several Portuguese monarchs, adding to its historical allure. Founded in 1598, the monastery was originally a Benedictine establishment. The site features the tombs of several Portuguese kings and queens. The monastery&#x27;s architecture showcases Mannerist style, particularly in its church and cloisters.</p>
 <p class="prose">The Monastery of São Vicente de Fora was founded in 1598, originally built to house a community of Benedictine monks. It was later transformed into a Franciscan monastery, and its construction was completed in the mid-17th century. The site has undergone various renovations and restorations over the centuries, particularly after the 1755 earthquake that devastated much of Lisbon. São Vicente de Fora holds cultural significance as a prime example of Mannerist architecture in Portugal and is an important part of Lisbon&#x27;s religious heritage. The monastery is a place of pilgrimage for many, reflecting the deep-rooted Catholic traditions in the city. Additionally, it serves as a symbol of the historical connection between the monarchy and the church, with its royal tombs representing the enduring legacy of Portugal&#x27;s past.</p></div>
 </section>
 <section class="place" id="lisbon_tram_28">
+<div class="place-lead">
 <h3>Tram 28 route</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Martim Moniz to Campo Ourique | Style: Vintage Lisbon yellow trams | Period: 1930s Remodelado trams</p>
-<figure class="place-fig"><img src="../images/lisbon_tram_28.jpg" alt="Tram 28 route"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lisbon_tram_28.jpg" alt="Tram 28 route" width="1280" height="960" style="height: 289px; max-height: 289px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_tram_28_b.jpg" alt="Tram 28 route — view 2" width="330" height="207" style="height: 289px; max-height: 289px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Wood-and-brass cars squeal through Alfama curves past miradouros and cathedral approaches. Pickpockets target crowded summer rides. Early morning offers calmer photography than midday crush.</p>
 <p class="prose">Electrified lines replaced funiculars on some hills while keeping narrow gauge. Moving postcard through the steepest historic quarters.</p></div>
 </section>
 <section class="place" id="lisbon_aqueduto_agua_livre">
+<div class="place-lead">
 <h3>Águas Livres Aqueduct</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/lisbon_aqueduto_agua_livre.jpg" alt="Águas Livres Aqueduct"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_aqueduto_agua_livre.jpg" alt="Águas Livres Aqueduct" width="330" height="440" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lisbon_aqueduto_agua_livre_b.jpg" alt="Águas Livres Aqueduct — view 2" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Águas Livres Aqueduct — historic aqueduct in Lisbon, Portugal.</p></div>
 </section>
 </body>

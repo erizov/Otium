@@ -15,6 +15,29 @@ _P = TypeVar("_P", bound=dict[str, Any])
 MIN_IMAGE_BYTES = 500
 _MIN_VECTOR_BYTES = 32
 
+# PDF: show 1 image when only one exists on disk; up to 2 when two+ exist.
+PDF_MAX_IMAGES_PER_PLACE = 2
+# Registry-style downloads: primary + extras, capped at 2 total per place.
+DOWNLOAD_MAX_IMAGES_PER_PLACE = 2
+# Do not fetch missing place photos for these cities (use on-disk only).
+DOWNLOAD_FROZEN_CITY_SLUGS: frozenset[str] = frozenset({"moscow", "spb"})
+
+
+def should_skip_city_place_downloads(city_slug: str) -> bool:
+    """True when registry downloads must not add place images."""
+    return city_slug.strip().lower() in DOWNLOAD_FROZEN_CITY_SLUGS
+
+
+def additional_images_for_download(
+    place: dict[str, Any],
+    *,
+    max_total: int | None = None,
+) -> list[Any]:
+    """``additional_images`` entries to attempt (excludes primary slot)."""
+    cap = max_total if max_total is not None else DOWNLOAD_MAX_IMAGES_PER_PLACE
+    extras = place.get("additional_images") or []
+    return list(extras[: max(0, cap - 1)])
+
 # Food venues are out of scope for curated sightseeing guides.
 EXCLUDED_PLACE_CATEGORIES: frozenset[str] = frozenset({
     "cafes",
@@ -111,8 +134,9 @@ def smallest_same_stem_image_rel(root: Path, rel: str) -> str | None:
     Among files sharing the same stem (foo.jpg, foo.webp, …), pick the
     smallest by bytes that is still >= MIN_IMAGE_BYTES.
     """
+    root_res = root.resolve()
     rel_clean = rel.replace("\\", "/").lstrip("/")
-    base = root / rel_clean
+    base = root_res / rel_clean
     parent = base.parent
     stem = base.stem
     if not parent.is_dir():
@@ -131,17 +155,21 @@ def smallest_same_stem_image_rel(root: Path, rel: str) -> str | None:
         return None
     best = min(sized, key=lambda t: t[1])[0]
     try:
-        return best.relative_to(root.resolve()).as_posix()
+        return best.resolve().relative_to(root_res).as_posix()
     except ValueError:
         return None
 
 
 def place_has_pdf_image(root: Path, place: _P) -> bool:
-    """True when ``image_rel_path`` resolves to a usable file under *root*."""
+    """True when a lead or extra image resolves under *root*."""
     rel = place.get("image_rel_path")
-    if not rel:
-        return False
-    return smallest_same_stem_image_rel(root, rel) is not None
+    if rel and smallest_same_stem_image_rel(root, rel):
+        return True
+    for item in place.get("additional_images") or []:
+        er = item.get("image_rel_path")
+        if er and smallest_same_stem_image_rel(root, er):
+            return True
+    return False
 
 
 def _pdfband_duplicates_curated(
@@ -277,13 +305,20 @@ def places_for_pdf(
     city_slug: str = "",
     sort_key: Callable[[_P], Any] | None = None,
     dedupe_sidecar: bool = True,
+    include_food_venues: bool | None = None,
 ) -> list[_P]:
     """
     Places eligible for PDF/HTML export: must have a local image on disk.
 
     ``suppress_images_for_pdf`` rows are omitted (no text-only fallback).
+    Moscow includes historical cafes (Complete Guide ch. 19).
     """
-    rows = drop_excluded_category_places(list(places))
+    if include_food_venues is None:
+        include_food_venues = city_slug.strip().lower() == "moscow"
+    if include_food_venues:
+        rows = list(places)
+    else:
+        rows = drop_excluded_category_places(list(places))
     if dedupe_sidecar:
         rows = dedupe_pdf_sidecar_places(rows, city_slug=city_slug)
     out = [p for p in rows if place_has_pdf_image(root, p)]

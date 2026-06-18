@@ -118,6 +118,10 @@ def _load_guide(guide: str) -> tuple[list[dict], dict[str, str]]:
         from moscow.data.cafes import CAFES
         from moscow.data.cafe_image_urls import CAFE_IMAGE_DOWNLOADS
         return CAFES, CAFE_IMAGE_DOWNLOADS
+    if guide == "osobnjaki":
+        from moscow.data.osobnjaki import OSOBNJAKI
+        from moscow.data.osobnjaki_image_urls import OSOBNJAKI_IMAGE_DOWNLOADS
+        return OSOBNJAKI, OSOBNJAKI_IMAGE_DOWNLOADS
     raise ValueError("Unknown guide: {}".format(guide))
 
 
@@ -125,7 +129,7 @@ GUIDES = [
     "monasteries", "places_of_worship", "parks", "museums", "palaces",
     "buildings", "sculptures", "places", "squares", "metro", "theaters",
     "viewpoints", "bridges", "markets", "libraries", "railway_stations",
-    "cemeteries", "landmarks", "cafes",
+    "cemeteries", "landmarks", "cafes", "osobnjaki",
 ]
 
 # Subdir under output/images/ -> guide key (must match workflow SUBDIR_TO_GUIDE)
@@ -149,6 +153,7 @@ SUBDIR_TO_GUIDE = {
     "moscow_cemeteries": "cemeteries",
     "moscow_landmarks": "landmarks",
     "moscow_cafes": "cafes",
+    "moscow_osobnjaki": "osobnjaki",
 }
 
 

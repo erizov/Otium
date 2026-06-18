@@ -220,6 +220,48 @@ _DEFAULT = (
 )
 
 
+def guide_pdf_pagination_css(*, toc_h2_extra: str = "") -> str:
+    """
+    Print/PDF rules: TOC on its own page; title + lead image stay together.
+    """
+    from scripts.city_guide_place_figures import place_figure_layout_css
+
+    toc_h2 = toc_h2_extra.strip()
+    if toc_h2 and not toc_h2.endswith(";"):
+        toc_h2 += ";"
+    place_fig_css = place_figure_layout_css()
+    return """
+.guide-toc {{ page-break-before: always; break-before: page;
+  page-break-after: always; break-after: page;
+  margin: 0; padding: 0.2rem 0 0.45rem; page-break-inside: auto; }}
+.guide-toc h2 {{ {toc_h2}
+  font-size: 1.28rem; font-weight: 600; margin: 0.4rem 0 0.55rem; }}
+.guide-toc ol {{ margin: 0.35rem 0 0.65rem 1.25rem; padding: 0;
+  columns: 2; column-gap: 1.5rem; }}
+.guide-toc li {{ margin: 0.18rem 0; line-height: 1.35;
+  font-size: 0.88rem; break-inside: avoid; }}
+.guide-toc a {{ color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }}
+.guide-toc a:hover {{ color: #0d3d56; }}
+.guide-toc li.toc-item--sub {{ font-size: 0.82rem; margin-left: 0.35rem; }}
+.toc-back {{ font-size: 0.78rem; margin: 0 0 0.35rem; text-align: right; }}
+.toc-back a {{ color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }}
+.toc-back a:hover {{ color: #0d3d56; }}
+.place, .historical-reference, .guide-primer, .guide-trip-plans {{
+  scroll-margin-top: 1.25rem; }}
+.historical-reference h2, .guide-primer h2, .guide-trip-plans h2,
+.chapter-head h2, .place-lead h3 {{ position: relative; }}
+.guide-toc + .place, .guide-toc + .chapter-head {{
+  page-break-before: avoid; break-before: avoid-page; }}
+.place-lead {{ page-break-inside: avoid; break-inside: avoid-page;
+  page-break-after: auto; }}
+.place-lead > h3 {{ page-break-after: avoid; break-after: avoid-page; }}
+.place-lead > .place-meta {{ page-break-after: avoid; break-after: avoid-page; }}
+{place_fig_css}
+""".format(toc_h2=toc_h2, place_fig_css=place_fig_css)
+
+
 def typography_triple(city_slug: str) -> tuple[str, str, str]:
     """Href and CSS font-family stacks for city slug (snake_case)."""
     return _TYPO.get(city_slug, _DEFAULT)
@@ -247,7 +289,7 @@ body {{ font-family: {body}; margin: 2rem;
 .otium-logo {{ font-family: {title}; font-size: 2.15rem;
   font-weight: 600; letter-spacing: 0.18em; margin-bottom: 0.85rem; }}
 .otiump {{ margin: 0.42rem 0; line-height: 1.42; text-align: justify;
-  max-width: 38rem; font-size: 0.95rem; }}
+  font-size: 0.95rem; }}
 .guide-title {{ page-break-after: auto; margin-bottom: 0.55rem;
   page-break-inside: avoid; }}
 .historical-reference {{ margin: 0.75rem 0 1.15rem;
@@ -297,22 +339,14 @@ ol.trip-stops a:hover {{ text-decoration: underline; }}
 .heraldry-univ-caption {{ font-size: 0.52rem; line-height: 1.18;
   margin: 0.12rem 0 0; padding: 0 0.06rem; color: #252525;
   text-align: center; font-weight: 500; }}
-.heraldry-motto {{ text-align: center; max-width: 18rem; margin: 0.18rem auto;
+.heraldry-motto {{ text-align: center; margin: 0.18rem auto;
   width: 100%; }}
 .motto-line {{ font-family: {title}; font-size: 1rem;
   margin: 0; color: #333; line-height: 1.35; }}
 .guide-title h1.guide-title-main {{ font-family: {title};
   font-size: 2.35rem; margin-bottom: 0.5rem; font-weight: 600; }}
 .lead {{ color: #444; font-size: 1.05rem; }}
-.guide-toc {{ margin: 0.85rem 0 1.15rem; page-break-inside: avoid; }}
-.guide-toc h2 {{ font-family: {title}; font-size: 1.28rem;
-  font-weight: 600; margin: 0.4rem 0 0.55rem; }}
-.guide-toc ol {{ margin: 0.35rem 0 0.65rem 1.25rem; padding: 0;
-  columns: 2; column-gap: 1.5rem; }}
-.guide-toc li {{ margin: 0.18rem 0; line-height: 1.35;
-  font-size: 0.88rem; break-inside: avoid; }}
-.guide-toc a {{ color: #1a5276; text-decoration: none; }}
-.guide-toc li.toc-item--sub {{ font-size: 0.82rem; margin-left: 0.35rem; }}
+{pagination}
 .place {{ margin-bottom: 2.2rem; page-break-inside: auto; }}
 h3 {{ font-family: {title}; font-size: 1.22rem; margin: 1.2rem 0 0.35rem;
   font-weight: 600; }}
@@ -324,7 +358,6 @@ h4 {{ font-family: {title}; font-size: 0.95rem; text-transform: uppercase;
   color: #555; font-size: 0.95rem; margin: 0 0 0.5rem; font-style: italic; }}
 .place-meta {{ font-size: 0.92rem; color: #353535; margin: 0 0 0.75rem;
   line-height: 1.4; }}
-.place-fig {{ margin: 0.5rem 0 1rem; }}
 img {{ max-width: 100%; height: auto; display: block; border-radius: 4px; }}
 .prose, .place-desc p {{ margin: 0.45rem 0; line-height: 1.5;
   text-align: justify; }}
@@ -337,4 +370,7 @@ ul.facts li, ul.stories li {{ margin: 0.25rem 0; line-height: 1.45; }}
         title=title,
         tclass=title_symbols_class,
         hebrew_sub=hebrew_sub,
+        pagination=guide_pdf_pagination_css(
+            toc_h2_extra="font-family: {0}".format(title),
+        ),
     )

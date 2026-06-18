@@ -13,7 +13,7 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
 .otium-logo { font-family: 'Cormorant Garamond', serif; font-size: 2.15rem;
   font-weight: 600; letter-spacing: 0.18em; margin-bottom: 0.85rem; }
 .otiump { margin: 0.42rem 0; line-height: 1.42; text-align: justify;
-  max-width: 38rem; font-size: 0.95rem; }
+  font-size: 0.95rem; }
 .guide-title { page-break-after: auto; margin-bottom: 0.55rem;
   page-break-inside: avoid; }
 .historical-reference { margin: 0.75rem 0 1.15rem;
@@ -63,22 +63,103 @@ ol.trip-stops a:hover { text-decoration: underline; }
 .heraldry-univ-caption { font-size: 0.52rem; line-height: 1.18;
   margin: 0.12rem 0 0; padding: 0 0.06rem; color: #252525;
   text-align: center; font-weight: 500; }
-.heraldry-motto { text-align: center; max-width: 18rem; margin: 0.18rem auto;
+.heraldry-motto { text-align: center; margin: 0.18rem auto;
   width: 100%; }
 .motto-line { font-family: 'Cormorant Garamond', serif; font-size: 1rem;
   margin: 0; color: #333; line-height: 1.35; }
 .guide-title h1.guide-title-main { font-family: 'Cormorant Garamond', serif;
   font-size: 2.35rem; margin-bottom: 0.5rem; font-weight: 600; }
 .lead { color: #444; font-size: 1.05rem; }
-.guide-toc { margin: 0.85rem 0 1.15rem; page-break-inside: avoid; }
-.guide-toc h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.28rem;
-  font-weight: 600; margin: 0.4rem 0 0.55rem; }
+
+.guide-toc { page-break-before: always; break-before: page;
+  page-break-after: always; break-after: page;
+  margin: 0; padding: 0.2rem 0 0.45rem; page-break-inside: auto; }
+.guide-toc h2 { font-family: 'Cormorant Garamond', serif;
+  font-size: 1.28rem; font-weight: 600; margin: 0.4rem 0 0.55rem; }
 .guide-toc ol { margin: 0.35rem 0 0.65rem 1.25rem; padding: 0;
   columns: 2; column-gap: 1.5rem; }
 .guide-toc li { margin: 0.18rem 0; line-height: 1.35;
   font-size: 0.88rem; break-inside: avoid; }
-.guide-toc a { color: #1a5276; text-decoration: none; }
+.guide-toc a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.guide-toc a:hover { color: #0d3d56; }
 .guide-toc li.toc-item--sub { font-size: 0.82rem; margin-left: 0.35rem; }
+.toc-back { font-size: 0.78rem; margin: 0 0 0.35rem; text-align: right; }
+.toc-back a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.toc-back a:hover { color: #0d3d56; }
+.place, .historical-reference, .guide-primer, .guide-trip-plans {
+  scroll-margin-top: 1.25rem; }
+.historical-reference h2, .guide-primer h2, .guide-trip-plans h2,
+.chapter-head h2, .place-lead h3 { position: relative; }
+.guide-toc + .place, .guide-toc + .chapter-head {
+  page-break-before: avoid; break-before: avoid-page; }
+.place-lead { page-break-inside: avoid; break-inside: avoid-page;
+  page-break-after: auto; }
+.place-lead > h3 { page-break-after: avoid; break-after: avoid-page; }
+.place-lead > .place-meta { page-break-after: avoid; break-after: avoid-page; }
+
+.place-fig { page-break-inside: avoid; break-inside: avoid-page;
+  margin: 0.5rem 0 1rem; }
+.place-fig img {
+  page-break-inside: avoid; break-inside: avoid-page;
+  max-height: 48vh; width: auto; max-width: 100%;
+  object-fit: contain; margin-left: auto; margin-right: auto; }
+.place-fig--hi-res img { max-height: 52vh; }
+.place-fig--lo-res img { max-height: 30vh; }
+.place-pdf-fig-row {
+  display: flex; flex-direction: row; flex-wrap: wrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.45rem 0.55rem; margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row .place-fig {
+  flex: 1 1 30%; margin: 0; min-width: 26%; max-width: 100%; }
+.place-pdf-fig-row .place-fig img {
+  width: auto; max-width: 100%; height: auto; max-height: 44vh;
+  object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--pair {
+  flex-wrap: nowrap; justify-content: space-between;
+  align-items: flex-end; gap: 0.5rem 0.65rem; }
+.place-pdf-fig-row--pair .place-fig {
+  flex: 1 1 47%; min-width: 0; max-width: 50%;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--pair .place-fig img {
+  max-height: 44vh; object-fit: contain; }
+.place-pdf-fig-row--pair .place-fig--hi-res img { max-height: 52vh; }
+.place-pdf-fig-row--pair .place-fig--lo-res img { max-height: 26vh; }
+.place-pdf-fig-row--pair .place-fig--row-sized img,
+.place-pdf-fig-row--triple .place-fig--row-sized img,
+.place-pdf-fig-row--many .place-fig--row-sized img {
+  width: auto; max-width: 100%; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row .place-fig--row-sized.place-fig--hi-res img,
+.place-pdf-fig-row .place-fig--row-sized.place-fig--lo-res img {
+  max-height: unset; }
+.place-pdf-fig-rows-stack {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple {
+  display: flex; flex-direction: row; flex-wrap: nowrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.4rem 0.48rem; margin: 0;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--triple .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--triple .place-fig--hi-res img { max-height: 42vh; }
+.place-pdf-fig-row--triple .place-fig--lo-res img { max-height: 18vh; }
+.place-pdf-fig-row--many {
+  flex-wrap: nowrap; justify-content: center; align-items: flex-end;
+  gap: 0.35rem 0.42rem; }
+.place-pdf-fig-row--many .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--many .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+
+
 .place { margin-bottom: 2.2rem; page-break-inside: auto; }
 h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.22rem; margin: 1.2rem 0 0.35rem;
   font-weight: 600; }
@@ -90,7 +171,6 @@ h4 { font-family: 'Cormorant Garamond', serif; font-size: 0.95rem; text-transfor
   color: #555; font-size: 0.95rem; margin: 0 0 0.5rem; font-style: italic; }
 .place-meta { font-size: 0.92rem; color: #353535; margin: 0 0 0.75rem;
   line-height: 1.4; }
-.place-fig { margin: 0.5rem 0 1rem; }
 img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
 .prose, .place-desc p { margin: 0.45rem 0; line-height: 1.5;
   text-align: justify; }
@@ -110,11 +190,14 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <figure class="heraldry-fig heraldry-coat-book" title="Coat of arms of Kazan"><img src="../images/guide_coat_of_arms.svg" alt="Coat of arms of Kazan"/></figure>
 <figure class="heraldry-fig heraldry-coat-book" title="Flag of Kazan"><img src="../images/guide_flag.svg" alt="Flag of Kazan"/></figure>
 </div></div><h1 class="guide-title-main">Kazan</h1><p class="lead">Guide. Places in this edition: 29.</p></header>
+<nav class="guide-toc" id="guide-toc" aria-label="Contents"><h2>Contents</h2><ol><li class="toc-item"><a href="#guide-historical">Historical overview</a></li><li class="toc-item"><a href="#guide-trips">Trip ideas</a></li><li class="toc-item"><a href="#kazan_annunciation_cathedral">Annunciation Cathedral</a></li><li class="toc-item"><a href="#kazan_bauman_street">Bauman Street</a></li><li class="toc-item"><a href="#kazan_chak_chak_museum">Chak-Chak Museum</a></li><li class="toc-item"><a href="#kazan_our_lady_kazan">Church of Our Lady of Kazan</a></li><li class="toc-item"><a href="#kazan_epiphany_cathedral">Epiphany Cathedral Kazan</a></li><li class="toc-item"><a href="#kazan_family_center">Family Center (Kazan)</a></li><li class="toc-item"><a href="#kazan_iske_kazan_2024_03_28">Iske-Kazan (2024-03-28)</a></li><li class="toc-item"><a href="#kazan_family_center_view">Kazan Family Center view</a></li><li class="toc-item"><a href="#kazan_university_main">Kazan Federal University</a></li><li class="toc-item"><a href="#kazan_kremlin">Kazan Kremlin</a></li><li class="toc-item"><a href="#kazan_kremlin_drone">Kazan Kremlin from the air</a></li><li class="toc-item"><a href="#kazan_kremlin_winter">Kazan Kremlin in winter</a></li><li class="toc-item"><a href="#kazan_kazan_icon">Kazan Mother of God icon church</a></li><li class="toc-item"><a href="#kazan_riverside_kremlin">Kremlin embankment Kazan</a></li><li class="toc-item"><a href="#kazan_kremlin_wall_gate">Kremlin Spasskaya Tower</a></li><li class="toc-item"><a href="#kazan_kul_sharif_mosque">Kul Sharif Mosque</a></li><li class="toc-item"><a href="#kazan_muslim_prayer">Mardzhani Mosque</a></li><li class="toc-item"><a href="#kazan_millennium_park">Millennium Park</a></li><li class="toc-item"><a href="#kazan_minselhoz">Minselhoz</a></li><li class="toc-item"><a href="#kazan_tatarstan_museum">National Museum of Tatarstan</a></li><li class="toc-item"><a href="#kazan_nikolsky_cathedral">Nikolsky Cathedral Kazan</a></li><li class="toc-item"><a href="#kazan_st_peter_paul_old">Old Peter and Paul Cathedral</a></li><li class="toc-item"><a href="#kazan_peter_paul_cathedral">Saints Peter and Paul Cathedral</a></li><li class="toc-item"><a href="#kazan_st_john_baptist">St John the Baptist Church</a></li><li class="toc-item"><a href="#kazan_syuyumbike_leans">Söyembikä leaning tower</a></li><li class="toc-item"><a href="#kazan_soyembika_tower">Söyembikä Tower</a></li><li class="toc-item"><a href="#kazan_temple_all_religions">Temple of All Religions</a></li><li class="toc-item"><a href="#kazan_transfiguration">Transfiguration Monastery Kazan</a></li><li class="toc-item"><a href="#kazan_tukay_square">Tukay Square</a></li></ol></nav>
 <section class="historical-reference" id="guide-historical" aria-label="Historical overview"><h2>Historical overview</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 <p class="prose">Kazan is the capital of Tatarstan and a major Volga metropolis where Tatar and Russian cultures meet.</p>
 <p class="prose">The kremlin’s Kul Sharif Mosque and Orthodox cathedrals symbolise that dialogue across centuries. Kazan is also a university, sporting, and industrial centre for the wider Volga region.</p>
 <p class="prose">Imperial and Soviet industry strengthened transport on the Volga; the 2013 Universiade renewed infrastructure. Kazan stresses intercultural dialogue inside Russia and promotes science, sport, and tourism across the Volga macro-region.</p></section>
 <section class="guide-trip-plans" id="guide-trips" aria-label="Trip ideas"><h2>Trip ideas</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 <article class="trip-plan" id="trip-1d"><h3>One day</h3>
 <p class="prose">A compact loop linking the strongest cards in this guide, ordered to minimise backtracking on foot.</p>
 <ol class="trip-stops"><li><a href="#kazan_university_main">Kazan Federal University</a> (~75min)</li>
@@ -140,222 +223,392 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <article class="trip-plan" id="trip-3d3"><h3>Three days — day 3</h3>
 <p class="prose">Day 3 — remaining highlights nearby.</p>
 <ol class="trip-stops"><li><a href="#kazan_transfiguration">Transfiguration Monastery Kazan</a> (~75min)</li></ol></article></section>
-<nav class="guide-toc" aria-label="Contents"><h2>Contents</h2><ol><li class="toc-item"><a href="#guide-historical">Historical overview</a></li><li class="toc-item"><a href="#guide-trips">Trip ideas</a></li><li class="toc-item"><a href="#kazan_annunciation_cathedral">Annunciation Cathedral</a></li><li class="toc-item"><a href="#kazan_bauman_street">Bauman Street</a></li><li class="toc-item"><a href="#kazan_chak_chak_museum">Chak-Chak Museum</a></li><li class="toc-item"><a href="#kazan_our_lady_kazan">Church of Our Lady of Kazan</a></li><li class="toc-item"><a href="#kazan_epiphany_cathedral">Epiphany Cathedral Kazan</a></li><li class="toc-item"><a href="#kazan_family_center">Family Center (Kazan)</a></li><li class="toc-item"><a href="#kazan_pdfband_4_b289dd99">Iske-Kazan (2024-03-28)</a></li><li class="toc-item"><a href="#kazan_family_center_view">Kazan Family Center view</a></li><li class="toc-item"><a href="#kazan_university_main">Kazan Federal University</a></li><li class="toc-item"><a href="#kazan_kremlin">Kazan Kremlin</a></li><li class="toc-item"><a href="#kazan_kremlin_drone">Kazan Kremlin from the air</a></li><li class="toc-item"><a href="#kazan_kremlin_winter">Kazan Kremlin in winter</a></li><li class="toc-item"><a href="#kazan_kazan_icon">Kazan Mother of God icon church</a></li><li class="toc-item"><a href="#kazan_riverside_kremlin">Kremlin embankment Kazan</a></li><li class="toc-item"><a href="#kazan_kremlin_wall_gate">Kremlin Spasskaya Tower</a></li><li class="toc-item"><a href="#kazan_kul_sharif_mosque">Kul Sharif Mosque</a></li><li class="toc-item"><a href="#kazan_muslim_prayer">Mardzhani Mosque</a></li><li class="toc-item"><a href="#kazan_millennium_park">Millennium Park</a></li><li class="toc-item"><a href="#kazan_pdfband_10_2dafa78b">Minselhoz</a></li><li class="toc-item"><a href="#kazan_tatarstan_museum">National Museum of Tatarstan</a></li><li class="toc-item"><a href="#kazan_nikolsky_cathedral">Nikolsky Cathedral Kazan</a></li><li class="toc-item"><a href="#kazan_st_peter_paul_old">Old Peter and Paul Cathedral</a></li><li class="toc-item"><a href="#kazan_peter_paul_cathedral">Saints Peter and Paul Cathedral</a></li><li class="toc-item"><a href="#kazan_st_john_baptist">St John the Baptist Church</a></li><li class="toc-item"><a href="#kazan_syuyumbike_leans">Söyembikä leaning tower</a></li><li class="toc-item"><a href="#kazan_soyembika_tower">Söyembikä Tower</a></li><li class="toc-item"><a href="#kazan_temple_all_religions">Temple of All Religions</a></li><li class="toc-item"><a href="#kazan_transfiguration">Transfiguration Monastery Kazan</a></li><li class="toc-item"><a href="#kazan_tukay_square">Tukay Square</a></li></ol></nav>
 <section class="place" id="kazan_annunciation_cathedral">
+<div class="place-lead">
 <h3>Annunciation Cathedral</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/kazan_annunciation_cathedral.jpg" alt="Annunciation Cathedral"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/kazan_annunciation_cathedral.jpg" alt="Annunciation Cathedral" width="1167" height="1400" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kazan_annunciation_cathedral_b.jpg" alt="Annunciation Cathedral — view 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Historic Orthodox cathedral inside the kremlin, part of the ensemble inscribed on the World Heritage List. Active church: silence and photography rules apply. Combine with other kremlin monuments in one visit.</p></div>
 </section>
 <section class="place" id="kazan_bauman_street">
+<div class="place-lead">
 <h3>Bauman Street</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/kazan_bauman_street.jpg" alt="Bauman Street"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/kazan_bauman_street.jpg" alt="Bauman Street" width="1280" height="960" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kazan_bauman_street_b.jpg" alt="Bauman Street — view 2" width="330" height="248" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Main pedestrian thoroughfare with historic façades, cafés, and street life between the kremlin quarter and the core city. Evenings and weekends are the liveliest. Good starting point for walking loops around the centre.</p></div>
 </section>
 <section class="place" id="kazan_chak_chak_museum">
+<div class="place-lead">
 <h3>Chak-Chak Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/kazan_chak_chak_museum.jpg" alt="Chak-Chak Museum"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kazan_chak_chak_museum.jpg" alt="Chak-Chak Museum" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kazan_chak_chak_museum_b.jpg" alt="Chak-Chak Museum — view 2" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Chak-Chak Museum in Kazan is a delightful homage to one of Tatarstan&#x27;s most beloved traditional sweets, chak-chak. Visitors can explore the history and cultural significance of this honey and dough delicacy through interactive exhibits and tastings. The museum not only showcases the preparation of chak-chak but also offers insights into Tatar culinary traditions and hospitality. The museum is dedicated to the traditional Tatar sweet known as chak-chak. Chak-chak is made from fried dough and honey, often served during celebrations and gatherings. The museum features interactive exhibits and offers tastings of chak-chak.</p>
 <p class="prose">The Chak-Chak Museum was established to celebrate the rich culinary heritage of the Tatar people, with a focus on the iconic dessert that has been a staple in Tatar households for centuries. While specific founding dates are not widely documented, the museum reflects a growing interest in preserving and promoting Tatar culture in the modern era. Culturally, the Chak-Chak Museum plays a vital role in preserving Tatar traditions and culinary arts, contributing to the broader narrative of Tatar identity. It serves as a venue for cultural exchange, where locals and tourists alike can appreciate the significance of chak-chak in Tatar hospitality and celebrations. The museum also highlights the importance of food as a means of cultural expression and community bonding.</p></div>
 </section>
 <section class="place" id="kazan_our_lady_kazan">
+<div class="place-lead">
 <h3>Church of Our Lady of Kazan</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/kazan_our_lady_kazan.jpg" alt="Church of Our Lady of Kazan"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kazan_our_lady_kazan.jpg" alt="Church of Our Lady of Kazan" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kazan_our_lady_kazan_b.jpg" alt="Church of Our Lady of Kazan — view 2" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Church of Our Lady of Kazan is a stunning example of Russian Orthodox architecture located in the heart of Kazan. Known for its striking blue dome and intricate interior, the church serves as both a place of worship and a cultural landmark. Visitors can admire its beautiful frescoes and learn about its significance in the local community. The church was completed in 1806. It is dedicated to the Kazan Icon of the Mother of God.</p>
 <p class="prose">The Church of Our Lady of Kazan was founded in the early 19th century, with its construction completed in 1806. It was built to honor the Kazan Icon of the Mother of God, which is believed to have miraculous powers. The church has undergone various renovations over the years, particularly after the Soviet era when many religious buildings were repurposed or neglected. Culturally, the Church of Our Lady of Kazan plays a vital role in the spiritual life of the local community and is a symbol of Kazan&#x27;s rich religious heritage. It attracts both pilgrims and tourists, contributing to the city&#x27;s identity as a center of faith and tradition. The church&#x27;s architecture and art reflect the unique blend of Russian and Tatar influences, showcasing the diverse cultural landscape of Kazan.</p></div>
 </section>
 <section class="place" id="kazan_epiphany_cathedral">
+<div class="place-lead">
 <h3>Epiphany Cathedral Kazan</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/kazan_epiphany_cathedral.jpg" alt="Epiphany Cathedral Kazan"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kazan_epiphany_cathedral.jpg" alt="Epiphany Cathedral Kazan" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kazan_epiphany_cathedral_b.jpg" alt="Epiphany Cathedral Kazan — view 2" width="330" height="440" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Epiphany Cathedral in Kazan is a stunning example of Russian Orthodox architecture, characterized by its ornate design and vibrant frescoes. Located in the heart of the city, it serves as a spiritual hub for the local community and a popular destination for visitors. The cathedral&#x27;s serene atmosphere and historical significance make it a must-visit site for anyone exploring Kazan. Founded in 1561 by Ivan the Terrible. Underwent significant restoration and was consecrated in 2005.</p>
 <p class="prose">The Epiphany Cathedral was founded in 1561 by Ivan the Terrible to commemorate the victory over the Kazan Khanate. It has undergone several renovations and restorations over the centuries, particularly after the damage it sustained during the Soviet era. The cathedral was consecrated in 2005 after extensive restoration work. The Epiphany Cathedral holds cultural and religious importance as a prominent symbol of the Russian Orthodox faith in Kazan. It reflects the city&#x27;s rich heritage and serves as a site for various religious ceremonies and community gatherings. The cathedral&#x27;s architectural beauty and historical context contribute to Kazan&#x27;s identity as a center of spiritual and cultural life.</p></div>
 </section>
 <section class="place" id="kazan_family_center">
+<div class="place-lead">
 <h3>Family Center (Kazan)</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/kazan_family_center.jpg" alt="Family Center (Kazan)"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/kazan_family_center.jpg" alt="Family Center (Kazan)" width="1280" height="1483" style="height: 330px; max-height: 330px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kazan_family_center_b.jpg" alt="Family Center (Kazan) — view 2" width="330" height="236" style="height: 330px; max-height: 330px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Distinctive registry and celebration complex beside the Kazanka, nicknamed for its chalice-like roofline. Exterior views are popular with photographers at sunset. Interior access is tied to ceremonies and official events.</p></div>
 </section>
-<section class="place" id="kazan_pdfband_4_b289dd99">
+<section class="place" id="kazan_iske_kazan_2024_03_28">
+<div class="place-lead">
 <h3>Iske-Kazan (2024-03-28)</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/kazan_pdfband_4_b289dd99.jpg" alt="Iske-Kazan (2024-03-28)"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/kazan_iske_kazan_2024_03_28.jpg" alt="Iske-Kazan (2024-03-28)" width="1200" height="1600" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kazan_iske_kazan_2024_03_28_b.jpg" alt="Iske-Kazan (2024-03-28) — view 2" width="330" height="247" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 </section>
 <section class="place" id="kazan_family_center_view">
+<div class="place-lead">
 <h3>Kazan Family Center view</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/kazan_family_center_view.jpg" alt="Kazan Family Center view"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kazan_family_center_view.jpg" alt="Kazan Family Center view" width="330" height="236" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kazan_family_center_view_b.jpg" alt="Kazan Family Center view — view 2" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Kazan Family Center, an architectural gem located along the banks of the Kazanka River, offers breathtaking views of the city and serves as a hub for family-oriented activities. Its modern design and vibrant atmosphere make it a popular destination for both locals and tourists, providing a space for recreation, events, and community gatherings. Opened in 2013 as part of urban development initiatives. Located along the Kazanka River, offering scenic views. Hosts a variety of family-oriented events and activities.</p>
 <p class="prose">The Kazan Family Center was inaugurated in 2013 as part of Kazan&#x27;s efforts to enhance its urban landscape and promote family values. The center symbolizes the city&#x27;s commitment to fostering a supportive environment for families and children. Culturally, the Kazan Family Center plays an important role in the daily lives of residents, serving as a venue for various events, workshops, and activities that strengthen community ties. It reflects Kazan&#x27;s dedication to family welfare and social cohesion, contributing to the city&#x27;s vibrant cultural scene.</p></div>
 </section>
 <section class="place" id="kazan_university_main">
+<div class="place-lead">
 <h3>Kazan Federal University</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/kazan_university_main.jpg" alt="Kazan Federal University"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kazan_university_main.jpg" alt="Kazan Federal University" width="330" height="186" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kazan_university_main_b.jpg" alt="Kazan Federal University — view 2" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Kazan Federal University is one of the oldest and most prestigious universities in Russia, renowned for its rich academic tradition and stunning architecture. Located in the heart of Kazan, it serves as a center for education and research, attracting students from around the world. Visitors can explore its beautiful campus, which blends historical and modern elements, and appreciate its role in shaping the intellectual landscape of the region. Founded in 1804, making it one of the oldest universities in Russia. Home to over 40,000 students from various countries. Notable alumni include prominent scientists, writers, and political figures.</p>
 <p class="prose">Founded in 1804, Kazan Federal University has played a crucial role in the educational development of Tatarstan and Russia as a whole. It was established during a time of significant reform in the Russian Empire, aiming to promote higher education and scientific inquiry. Over the years, the university has witnessed numerous key events, including the establishment of various faculties and the integration of innovative research programs. Kazan Federal University holds substantial cultural significance as a hub of education and intellectual thought in Tatarstan. It has contributed to the region&#x27;s cultural heritage by fostering a diverse academic environment and promoting the study of Tatar language and culture. The university has also been involved in various cultural initiatives, enhancing daily life in Kazan and contributing to its reputation as a center of learning.</p></div>
 </section>
 <section class="place" id="kazan_kremlin">
+<div class="place-lead">
 <h3>Kazan Kremlin</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/kazan_kremlin.jpg" alt="Kazan Kremlin"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/kazan_kremlin.jpg" alt="Kazan Kremlin" width="1280" height="960" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kazan_kremlin_b.jpg" alt="Kazan Kremlin — view 2" width="330" height="419" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">UNESCO-listed fortress and the symbolic heart of Tatarstan, with kremlin walls, towers, and major religious buildings. Allow time for security checks at kremlin entrances. Combine with museums and viewpoints along the inner territory.</p></div>
 </section>
 <section class="place" id="kazan_kremlin_drone">
+<div class="place-lead">
 <h3>Kazan Kremlin from the air</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/kazan_kremlin_drone.jpg" alt="Kazan Kremlin from the air"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/kazan_kremlin_drone.jpg" alt="Kazan Kremlin from the air" width="1280" height="960" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kazan_kremlin_drone_b.jpg" alt="Kazan Kremlin from the air — view 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Aerial context for the kremlin citadel on a rise above the Kazanka and the city grid. Useful for understanding how the kremlin relates to the rivers and centre. Best light is often morning or late afternoon.</p></div>
 </section>
 <section class="place" id="kazan_kremlin_winter">
+<div class="place-lead">
 <h3>Kazan Kremlin in winter</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/kazan_kremlin_winter.jpg" alt="Kazan Kremlin in winter"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/kazan_kremlin_winter.jpg" alt="Kazan Kremlin in winter" width="1280" height="960" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kazan_kremlin_winter_b.jpg" alt="Kazan Kremlin in winter — view 2" width="330" height="247" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Seasonal view of the kremlin ensemble under snow, highlighting roofs and open spaces inside the walls. Paths can be icy; wear sturdy footwear. Shorter daylight in winter: plan photography earlier.</p></div>
 </section>
 <section class="place" id="kazan_kazan_icon">
+<div class="place-lead">
 <h3>Kazan Mother of God icon church</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/kazan_kazan_icon.jpg" alt="Kazan Mother of God icon church"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kazan_kazan_icon.jpg" alt="Kazan Mother of God icon church" width="330" height="495" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kazan_kazan_icon_b.jpg" alt="Kazan Mother of God icon church — view 2" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Kazan Mother of God Icon Church is a striking example of religious architecture located in the heart of Kazan. Known for its beautiful iconography and serene atmosphere, the church attracts both worshippers and visitors alike. Its historical and cultural significance makes it a must-visit destination for those exploring the rich heritage of the city. Founded in 1613 to honor the Kazan Icon of the Mother of God. Underwent significant renovations in the 19th and 20th centuries.</p>
 <p class="prose">The Kazan Mother of God Icon Church was founded in the early 17th century, specifically in 1613, to commemorate the miraculous appearance of the Kazan Icon of the Mother of God. The church has undergone several renovations and restorations over the centuries, reflecting the evolving architectural styles and the resilience of the local community. Culturally, the church serves as a vital part of Kazan&#x27;s heritage, symbolizing the city&#x27;s blend of Orthodox Christian traditions and Tatar influences. It plays a significant role in daily life for many residents, who participate in various religious rites and community events held within its walls. The church is also a site of pilgrimage for believers, further emphasizing its religious importance.</p></div>
 </section>
 <section class="place" id="kazan_riverside_kremlin">
+<div class="place-lead">
 <h3>Kremlin embankment Kazan</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/kazan_riverside_kremlin.jpg" alt="Kremlin embankment Kazan"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kazan_riverside_kremlin.jpg" alt="Kremlin embankment Kazan" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kazan_riverside_kremlin_b.jpg" alt="Kremlin embankment Kazan — view 2" width="330" height="238" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Kremlin Embankment in Kazan offers a picturesque promenade along the banks of the Kazanka River, providing stunning views of the Kazan Kremlin and the city skyline. This vibrant public space is perfect for leisurely strolls, outdoor activities, and cultural events, making it a popular gathering spot for both locals and tourists. With its blend of historical architecture and modern amenities, the embankment is a key highlight of Kazan&#x27;s urban landscape. The Kazan Kremlin was designated a UNESCO World Heritage Site in 2000. The embankment features various sculptures and monuments that reflect the city&#x27;s history and culture.</p>
 <p class="prose">The Kremlin Embankment has evolved significantly since the establishment of Kazan in the 10th century. The area has witnessed various historical events, particularly during the 16th century when Kazan became a major center of the Khanate and later a focal point during the Russian conquest. The embankment itself has been developed over the years to enhance public access to the river and the Kremlin, reflecting the city&#x27;s growth and modernization. The Kremlin Embankment serves as a cultural hub in Kazan, hosting numerous festivals, concerts, and public gatherings that celebrate the city&#x27;s rich heritage. It is a vital part of daily life for residents, offering a space for recreation and community engagement. The proximity to the UNESCO-listed Kazan Kremlin further emphasizes its cultural importance, as it connects visitors to the historical heart of the city.</p></div>
 </section>
 <section class="place" id="kazan_kremlin_wall_gate">
+<div class="place-lead">
 <h3>Kremlin Spasskaya Tower</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/kazan_kremlin_wall_gate.jpg" alt="Kremlin Spasskaya Tower"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kazan_kremlin_wall_gate.jpg" alt="Kremlin Spasskaya Tower" width="330" height="495" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kazan_kremlin_wall_gate_b.jpg" alt="Kremlin Spasskaya Tower — view 2" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Spasskaya Tower, an iconic symbol of Kazan, stands proudly at the entrance of the Kazan Kremlin. This impressive structure, with its distinctive clock and vibrant colors, serves as a gateway to the rich history and culture of the city. Visitors can admire its architectural beauty while exploring the surrounding Kremlin grounds, a UNESCO World Heritage site. The tower stands at 58 meters tall and features a distinctive clock installed in the 18th century. It is one of the few structures that survived the 1552 siege of Kazan. The Spasskaya Tower is often used as a backdrop for cultural events and festivals in Kazan.</p>
 <p class="prose">The Spasskaya Tower was constructed in the late 16th century, specifically between 1556 and 1562, as part of the fortifications of the Kazan Kremlin following the city&#x27;s conquest by Ivan the Terrible. It has undergone several renovations over the centuries, particularly after being damaged in the 17th century and during World War II. The Spasskaya Tower holds significant political importance as it symbolizes the historical power of the Russian state in the region. It marks the boundary between the Kremlin and the city, reflecting the historical shifts in governance and control. Culturally, it is a vital part of Kazan&#x27;s heritage, representing the fusion of Tatar and Russian influences, and is a focal point for various local traditions and celebrations.</p></div>
 </section>
 <section class="place" id="kazan_kul_sharif_mosque">
+<div class="place-lead">
 <h3>Kul Sharif Mosque</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/kazan_kul_sharif_mosque.jpg" alt="Kul Sharif Mosque"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/kazan_kul_sharif_mosque.jpg" alt="Kul Sharif Mosque" width="1200" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kazan_kul_sharif_mosque_b.jpg" alt="Kul Sharif Mosque — view 2" width="330" height="419" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Large congregational mosque inside the kremlin, rebuilt as a major landmark of modern Kazan. Dress modestly; follow posted visitor rules. Interior visits may pause during prayer times.</p></div>
 </section>
 <section class="place" id="kazan_muslim_prayer">
+<div class="place-lead">
 <h3>Mardzhani Mosque</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/kazan_muslim_prayer.jpg" alt="Mardzhani Mosque"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kazan_muslim_prayer.jpg" alt="Mardzhani Mosque" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kazan_muslim_prayer_b.jpg" alt="Mardzhani Mosque — view 2" width="330" height="413" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Märcani Mosque — mosque in İske Bistä microdistrict, Waxitof City District, Qazan, Tatarstan.</p></div>
 </section>
 <section class="place" id="kazan_millennium_park">
+<div class="place-lead">
 <h3>Millennium Park</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: 201 E. Randolph Street</p>
-<figure class="place-fig"><img src="../images/kazan_millennium_park.jpg" alt="Millennium Park"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/kazan_millennium_park.jpg" alt="Millennium Park" width="1280" height="960" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kazan_millennium_park_b.jpg" alt="Millennium Park — view 2" width="330" height="440" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Riverside park marking the millennium of Kazan, with paths and views toward the kremlin quarter. Family-friendly; busy on warm weekends. Links visually to the Family Center across the water.</p></div>
 </section>
-<section class="place" id="kazan_pdfband_10_2dafa78b">
+<section class="place" id="kazan_minselhoz">
+<div class="place-lead">
 <h3>Minselhoz</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/kazan_pdfband_10_2dafa78b.jpg" alt="Minselhoz"/></figure>
+<figure class="place-fig place-fig--hi-res"><img src="../images/kazan_minselhoz.jpg" alt="Minselhoz" width="1280" height="837"/></figure>
+</div>
 </section>
 <section class="place" id="kazan_tatarstan_museum">
+<div class="place-lead">
 <h3>National Museum of Tatarstan</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/kazan_tatarstan_museum.jpg" alt="National Museum of Tatarstan"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kazan_tatarstan_museum.jpg" alt="National Museum of Tatarstan" width="330" height="440" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kazan_tatarstan_museum_b.jpg" alt="National Museum of Tatarstan — view 2" width="330" height="440" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The National Museum of Tatarstan in Kazan is a treasure trove of Tatar culture and history, showcasing a diverse collection of artifacts that reflect the rich heritage of the region. Visitors can explore exhibitions that span from ancient times to contemporary art, providing insights into the traditions and daily life of the Tatar people. The museum serves as a cultural hub, hosting various events and educational programs throughout the year. Founded in 1894 as the Kazan Museum of Antiquities and Arts. Houses over 800,000 items in its collection, including archaeological finds, ethnographic artifacts, and works of art.</p>
 <p class="prose">Founded in 1894, the National Museum of Tatarstan has played a crucial role in the preservation and promotion of Tatar culture. Initially established as the Kazan Museum of Antiquities and Arts, it has undergone several transformations and expansions, particularly after the establishment of the Tatar Autonomous Soviet Socialist Republic in 1920, which emphasized the importance of regional identity. The National Museum of Tatarstan holds significant cultural importance as it not only preserves the history and heritage of the Tatar people but also serves as a symbol of Tatar identity within the broader context of Russian history. Through its extensive collections and exhibitions, the museum fosters a greater understanding of Tatar traditions and arts, contributing to the cultural dialogue in a multi-ethnic society.</p></div>
 </section>
 <section class="place" id="kazan_nikolsky_cathedral">
+<div class="place-lead">
 <h3>Nikolsky Cathedral Kazan</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/kazan_nikolsky_cathedral.jpg" alt="Nikolsky Cathedral Kazan"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kazan_nikolsky_cathedral.jpg" alt="Nikolsky Cathedral Kazan" width="330" height="477" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kazan_nikolsky_cathedral_b.jpg" alt="Nikolsky Cathedral Kazan — view 2" width="330" height="219" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Nikolsky Cathedral, located in the heart of Kazan, is a stunning example of Russian Orthodox architecture. Known for its intricate design and vibrant frescoes, this cathedral serves as a peaceful retreat for visitors and a vital part of the city&#x27;s spiritual landscape. Its serene atmosphere invites contemplation and reflection amidst the bustling city life. Nikolsky Cathedral was completed in 1725. It is dedicated to Saint Nicholas, the patron saint of travelers and merchants. The cathedral underwent significant restoration after damage during the Soviet era.</p>
 <p class="prose">Nikolsky Cathedral was founded in the early 18th century, with construction beginning in 1710 and completed in 1725. It was built to honor Saint Nicholas, the patron saint of travelers and merchants, and has undergone several restorations over the years, particularly after suffering damage during the Soviet era. The cathedral has witnessed significant events in Kazan&#x27;s history, including the changes brought about by the Russian Revolution. The cathedral holds cultural importance as a symbol of Kazan&#x27;s rich religious heritage and architectural beauty. It reflects the city&#x27;s diverse history and the enduring presence of the Orthodox faith in the region. The cathedral is a focal point for local traditions and religious rites, drawing both pilgrims and tourists who seek to connect with its spiritual and historical legacy.</p></div>
 </section>
 <section class="place" id="kazan_st_peter_paul_old">
+<div class="place-lead">
 <h3>Old Peter and Paul Cathedral</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/kazan_st_peter_paul_old.jpg" alt="Old Peter and Paul Cathedral"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--row-sized"><img src="../images/kazan_st_peter_paul_old.jpg" alt="Old Peter and Paul Cathedral" width="330" height="587" style="height: 299px; max-height: 299px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kazan_st_peter_paul_old_b.jpg" alt="Old Peter and Paul Cathedral — view 2" width="330" height="214" style="height: 299px; max-height: 299px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Old Peter and Paul Cathedral in Kazan is a striking example of Russian Baroque architecture, known for its intricate design and historical importance. Situated in the heart of the city, it serves as a testament to Kazan&#x27;s rich religious heritage and cultural evolution. Visitors can admire its ornate interiors and learn about its role in the spiritual life of the community. The cathedral was built in the Russian Baroque style. It is located in the historic center of Kazan. The cathedral was originally constructed to honor Peter the Great.</p>
 <p class="prose">The Old Peter and Paul Cathedral was founded in 1723 and is one of the oldest churches in Kazan. It was constructed to commemorate the victory of Peter the Great in the Great Northern War and has undergone several renovations over the centuries. The cathedral has witnessed significant events in Russian history, including the changes brought about by the Bolshevik Revolution. The cathedral holds cultural significance as a symbol of Kazan&#x27;s architectural heritage and is a focal point for local traditions and celebrations. It reflects the city&#x27;s diverse history and the blend of different cultural influences. Although its primary function is religious, it also serves as a venue for cultural events and community gatherings.</p></div>
 </section>
 <section class="place" id="kazan_peter_paul_cathedral">
+<div class="place-lead">
 <h3>Saints Peter and Paul Cathedral</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/kazan_peter_paul_cathedral.jpg" alt="Saints Peter and Paul Cathedral"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/kazan_peter_paul_cathedral.jpg" alt="Saints Peter and Paul Cathedral" width="1280" height="960" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kazan_peter_paul_cathedral_b.jpg" alt="Saints Peter and Paul Cathedral — view 2" width="330" height="440" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Baroque cathedral away from the kremlin, associated with the Russian imperial presence in the city. Check service times before visiting. Pairs well with a stroll along nearby streets.</p></div>
 </section>
 <section class="place" id="kazan_st_john_baptist">
+<div class="place-lead">
 <h3>St John the Baptist Church</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/kazan_st_john_baptist.jpg" alt="St John the Baptist Church"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kazan_st_john_baptist.jpg" alt="St John the Baptist Church" width="330" height="219" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kazan_st_john_baptist_b.jpg" alt="St John the Baptist Church — view 2" width="330" height="495" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">St. John the Baptist Church, located in the heart of Kazan, is a stunning example of Russian Orthodox architecture. Its intricate design and vibrant frescoes attract both worshippers and visitors alike, making it a significant landmark in the city. The church serves as a place of worship and a cultural hub, reflecting the rich religious heritage of the region. Founded in the early 19th century, completed in 1816. Architectural style reflects traditional Russian Orthodox design.</p>
 <p class="prose">St. John the Baptist Church was founded in the early 19th century, with its construction completed in 1816. It has since witnessed various historical events, including the changes brought about by the Russian Revolution and the subsequent shifts in religious practices in the region. The church holds cultural importance as a symbol of Kazan&#x27;s architectural heritage and is a testament to the city&#x27;s diverse religious landscape. It plays a vital role in the daily lives of local residents, serving as a venue for religious rites and community gatherings. The church&#x27;s presence contributes to the overall historical narrative of Kazan, reflecting the city&#x27;s blend of traditions and modernity.</p></div>
 </section>
 <section class="place" id="kazan_syuyumbike_leans">
+<div class="place-lead">
 <h3>Söyembikä leaning tower</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/kazan_syuyumbike_leans.jpg" alt="Söyembikä leaning tower"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kazan_syuyumbike_leans.jpg" alt="Söyembikä leaning tower" width="330" height="495" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kazan_syuyumbike_leans_b.jpg" alt="Söyembikä leaning tower — view 2" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Söyembikä Leaning Tower is one of Kazan&#x27;s most iconic landmarks, renowned for its unique tilt and rich history. This architectural marvel stands as a symbol of the city&#x27;s Tatar heritage and offers stunning views of the Kazanka River. Visitors can explore its intriguing design and learn about the legends that surround this fascinating structure. The tower is approximately 58 meters tall and leans at a slight angle. It is part of the UNESCO World Heritage Site of the Kazan Kremlin.</p>
 <p class="prose">The Söyembikä Tower was built in the 17th century, specifically around 1757, as part of the Kazan Kremlin. It is named after the last queen of Kazan, Söyembikä, who is said to have been a significant figure during the city&#x27;s tumultuous history, particularly during the Russian conquest of Kazan in 1552. The tower has undergone various renovations and remains a prominent feature of the Kazan skyline. Culturally, the Söyembikä Tower is a vital part of Kazan&#x27;s identity, representing the blend of Tatar and Russian influences in the region. It is often associated with local folklore and serves as a popular subject in art and literature. The tower&#x27;s unique design and historical context contribute to its status as a symbol of resilience and heritage in Kazan, attracting both tourists and locals alike.</p></div>
 <div class="place-story-block"><p class="prose place-story">Legend has it that the tower leans because it was built with the tears of Söyembikä, who mourned the loss of her kingdom</p></div>
 </section>
 <section class="place" id="kazan_soyembika_tower">
+<div class="place-lead">
 <h3>Söyembikä Tower</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/kazan_soyembika_tower.jpg" alt="Söyembikä Tower"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/kazan_soyembika_tower.jpg" alt="Söyembikä Tower" width="1200" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kazan_soyembika_tower_b.jpg" alt="Söyembikä Tower — view 2" width="330" height="505" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Often busy with tour groups in peak season. Check whether interior climbs are open before planning around them.</p></div>
 </section>
 <section class="place" id="kazan_temple_all_religions">
+<div class="place-lead">
 <h3>Temple of All Religions</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/kazan_temple_all_religions.jpg" alt="Temple of All Religions"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kazan_temple_all_religions.jpg" alt="Temple of All Religions" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kazan_temple_all_religions_b.jpg" alt="Temple of All Religions — view 2" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Temple of All Religions in Kazan is a unique architectural complex that symbolizes the coexistence of various faiths. This vibrant structure blends elements from different religious traditions, making it a fascinating destination for visitors interested in spirituality and cultural diversity. Its colorful domes and intricate designs invite exploration and reflection. Founded in 1992 by Ildar Khanov. The temple incorporates architectural elements from Christianity, Islam, Buddhism, and other faiths.</p>
 <p class="prose">The Temple of All Religions was founded in 1992 by Ildar Khanov, an artist and philosopher who envisioned a space that would unite all religions. Construction began in the same year, and the temple has been continuously developed since then, incorporating various architectural styles and motifs from different faiths. Culturally, the Temple of All Religions serves as a symbol of tolerance and unity in a diverse society. It reflects Kazan&#x27;s rich heritage and the harmonious coexistence of multiple religions, which is particularly significant in a city known for its multicultural population. The temple is not officially recognized as a place of worship but rather as a cultural and artistic project, attracting visitors from around the world.</p></div>
 </section>
 <section class="place" id="kazan_transfiguration">
+<div class="place-lead">
 <h3>Transfiguration Monastery Kazan</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/kazan_transfiguration.jpg" alt="Transfiguration Monastery Kazan"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kazan_transfiguration.jpg" alt="Transfiguration Monastery Kazan" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kazan_transfiguration_b.jpg" alt="Transfiguration Monastery Kazan — view 2" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Transfiguration Monastery in Kazan is a stunning architectural marvel that serves as a significant place of worship and a historical landmark. Nestled in the heart of the city, it attracts visitors with its intricate designs and serene atmosphere, making it a perfect spot for reflection and exploration of the region&#x27;s spiritual heritage. Founded in the early 16th century after the conquest of Kazan by Ivan the Terrible. The monastery features a blend of architectural styles, including Baroque and Neoclassical elements.</p>
 <p class="prose">Founded in the early 16th century, the Transfiguration Monastery has played a pivotal role in the religious landscape of Kazan. It was established shortly after the conquest of Kazan by Ivan the Terrible in 1552, symbolizing the integration of Orthodox Christianity in the region. Over the centuries, the monastery has undergone various renovations and expansions, reflecting the evolving architectural styles and religious practices. The Transfiguration Monastery holds considerable cultural and religious significance in Kazan. It is a testament to the city&#x27;s rich heritage and the historical interplay between different faiths. The monastery&#x27;s architecture and art contribute to the local identity, while its ongoing role in religious ceremonies and community events reinforces its importance in daily life. Additionally, it stands as a site of pilgrimage for many Orthodox Christians.</p></div>
 </section>
 <section class="place" id="kazan_tukay_square">
+<div class="place-lead">
 <h3>Tukay Square</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/kazan_tukay_square.jpg" alt="Tukay Square"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kazan_tukay_square.jpg" alt="Tukay Square" width="330" height="440" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kazan_tukay_square_b.jpg" alt="Tukay Square — view 2" width="330" height="493" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Tukay Square is a vibrant public space located in the heart of Kazan, serving as a central hub for both locals and visitors. The square is named after the famous Tatar poet Gabdulla Tukay and features beautiful landscaping, fountains, and seating areas, making it a perfect spot for relaxation and social gatherings. Throughout the year, the square hosts various cultural events, festivals, and performances that celebrate the rich heritage of the region. Tukay Square is named after the Tatar poet Gabdulla Tukay. The square features fountains, landscaped gardens, and seating areas for public use.</p>
 <p class="prose">Tukay Square was established in the early 20th century and has since become a significant landmark in Kazan. It was named in honor of Gabdulla Tukay, who is celebrated for his contributions to Tatar literature and culture. The square has witnessed numerous historical events, reflecting the city&#x27;s evolution over the years. Politically, Tukay Square serves as a gathering place for public demonstrations and civic events, reflecting the active engagement of the community in local governance. Culturally, it stands as a testament to Kazan&#x27;s rich heritage, often hosting art exhibitions and performances that highlight Tatar traditions. The square is a vital part of daily life in Kazan, where residents come together to celebrate their identity and community.</p></div>
 </section>

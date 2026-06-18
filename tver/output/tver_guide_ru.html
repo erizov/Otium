@@ -13,7 +13,7 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
 .otium-logo { font-family: 'Cormorant Garamond', serif; font-size: 2.15rem;
   font-weight: 600; letter-spacing: 0.18em; margin-bottom: 0.85rem; }
 .otiump { margin: 0.42rem 0; line-height: 1.42; text-align: justify;
-  max-width: 38rem; font-size: 0.95rem; }
+  font-size: 0.95rem; }
 .guide-title { page-break-after: auto; margin-bottom: 0.55rem;
   page-break-inside: avoid; }
 .historical-reference { margin: 0.75rem 0 1.15rem;
@@ -63,22 +63,103 @@ ol.trip-stops a:hover { text-decoration: underline; }
 .heraldry-univ-caption { font-size: 0.52rem; line-height: 1.18;
   margin: 0.12rem 0 0; padding: 0 0.06rem; color: #252525;
   text-align: center; font-weight: 500; }
-.heraldry-motto { text-align: center; max-width: 18rem; margin: 0.18rem auto;
+.heraldry-motto { text-align: center; margin: 0.18rem auto;
   width: 100%; }
 .motto-line { font-family: 'Cormorant Garamond', serif; font-size: 1rem;
   margin: 0; color: #333; line-height: 1.35; }
 .guide-title h1.guide-title-main { font-family: 'Cormorant Garamond', serif;
   font-size: 2.35rem; margin-bottom: 0.5rem; font-weight: 600; }
 .lead { color: #444; font-size: 1.05rem; }
-.guide-toc { margin: 0.85rem 0 1.15rem; page-break-inside: avoid; }
-.guide-toc h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.28rem;
-  font-weight: 600; margin: 0.4rem 0 0.55rem; }
+
+.guide-toc { page-break-before: always; break-before: page;
+  page-break-after: always; break-after: page;
+  margin: 0; padding: 0.2rem 0 0.45rem; page-break-inside: auto; }
+.guide-toc h2 { font-family: 'Cormorant Garamond', serif;
+  font-size: 1.28rem; font-weight: 600; margin: 0.4rem 0 0.55rem; }
 .guide-toc ol { margin: 0.35rem 0 0.65rem 1.25rem; padding: 0;
   columns: 2; column-gap: 1.5rem; }
 .guide-toc li { margin: 0.18rem 0; line-height: 1.35;
   font-size: 0.88rem; break-inside: avoid; }
-.guide-toc a { color: #1a5276; text-decoration: none; }
+.guide-toc a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.guide-toc a:hover { color: #0d3d56; }
 .guide-toc li.toc-item--sub { font-size: 0.82rem; margin-left: 0.35rem; }
+.toc-back { font-size: 0.78rem; margin: 0 0 0.35rem; text-align: right; }
+.toc-back a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.toc-back a:hover { color: #0d3d56; }
+.place, .historical-reference, .guide-primer, .guide-trip-plans {
+  scroll-margin-top: 1.25rem; }
+.historical-reference h2, .guide-primer h2, .guide-trip-plans h2,
+.chapter-head h2, .place-lead h3 { position: relative; }
+.guide-toc + .place, .guide-toc + .chapter-head {
+  page-break-before: avoid; break-before: avoid-page; }
+.place-lead { page-break-inside: avoid; break-inside: avoid-page;
+  page-break-after: auto; }
+.place-lead > h3 { page-break-after: avoid; break-after: avoid-page; }
+.place-lead > .place-meta { page-break-after: avoid; break-after: avoid-page; }
+
+.place-fig { page-break-inside: avoid; break-inside: avoid-page;
+  margin: 0.5rem 0 1rem; }
+.place-fig img {
+  page-break-inside: avoid; break-inside: avoid-page;
+  max-height: 48vh; width: auto; max-width: 100%;
+  object-fit: contain; margin-left: auto; margin-right: auto; }
+.place-fig--hi-res img { max-height: 52vh; }
+.place-fig--lo-res img { max-height: 30vh; }
+.place-pdf-fig-row {
+  display: flex; flex-direction: row; flex-wrap: wrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.45rem 0.55rem; margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row .place-fig {
+  flex: 1 1 30%; margin: 0; min-width: 26%; max-width: 100%; }
+.place-pdf-fig-row .place-fig img {
+  width: auto; max-width: 100%; height: auto; max-height: 44vh;
+  object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--pair {
+  flex-wrap: nowrap; justify-content: space-between;
+  align-items: flex-end; gap: 0.5rem 0.65rem; }
+.place-pdf-fig-row--pair .place-fig {
+  flex: 1 1 47%; min-width: 0; max-width: 50%;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--pair .place-fig img {
+  max-height: 44vh; object-fit: contain; }
+.place-pdf-fig-row--pair .place-fig--hi-res img { max-height: 50vh; }
+.place-pdf-fig-row--pair .place-fig--lo-res img { max-height: 26vh; }
+.place-pdf-fig-row--pair .place-fig--row-sized img,
+.place-pdf-fig-row--triple .place-fig--row-sized img,
+.place-pdf-fig-row--many .place-fig--row-sized img {
+  width: auto; max-width: 100%; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row .place-fig--row-sized.place-fig--hi-res img,
+.place-pdf-fig-row .place-fig--row-sized.place-fig--lo-res img {
+  max-height: unset; }
+.place-pdf-fig-rows-stack {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple {
+  display: flex; flex-direction: row; flex-wrap: nowrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.4rem 0.48rem; margin: 0;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--triple .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--triple .place-fig--hi-res img { max-height: 38vh; }
+.place-pdf-fig-row--triple .place-fig--lo-res img { max-height: 18vh; }
+.place-pdf-fig-row--many {
+  flex-wrap: nowrap; justify-content: center; align-items: flex-end;
+  gap: 0.35rem 0.42rem; }
+.place-pdf-fig-row--many .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--many .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+
+
 .place { margin-bottom: 2.2rem; page-break-inside: auto; }
 h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.22rem; margin: 1.2rem 0 0.35rem;
   font-weight: 600; }
@@ -90,7 +171,6 @@ h4 { font-family: 'Cormorant Garamond', serif; font-size: 0.95rem; text-transfor
   color: #555; font-size: 0.95rem; margin: 0 0 0.5rem; font-style: italic; }
 .place-meta { font-size: 0.92rem; color: #353535; margin: 0 0 0.75rem;
   line-height: 1.4; }
-.place-fig { margin: 0.5rem 0 1rem; }
 img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
 .prose, .place-desc p { margin: 0.45rem 0; line-height: 1.5;
   text-align: justify; }
@@ -109,12 +189,15 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <div class="heraldry-strip heraldry-official">
 <figure class="heraldry-fig heraldry-coat-book" title="Coat of arms of Tver"><img src="../images/guide_coat_of_arms.svg" alt="Coat of arms of Tver"/></figure>
 <figure class="heraldry-fig heraldry-coat-book" title="Flag of Tver"><img src="../images/guide_flag.svg" alt="Flag of Tver"/></figure>
-</div></div><h1 class="guide-title-main">Tver</h1><p class="lead">Путеводитель. Объектов в этом выпуске: 31.</p></header>
+</div></div><h1 class="guide-title-main">Tver</h1><p class="lead">Путеводитель. Объектов в этом выпуске: 30.</p></header>
+<nav class="guide-toc" id="guide-toc" aria-label="Содержание"><h2>Содержание</h2><ol><li class="toc-item"><a href="#guide-historical">Историческая справка</a></li><li class="toc-item"><a href="#guide-trips">Маршруты</a></li><li class="toc-item"><a href="#tver_place_2">Place 2</a></li><li class="toc-item"><a href="#tver_place_4">Place 4</a></li><li class="toc-item"><a href="#tver_afanasy_nikitin">Tver Afanasy Nikitin</a></li><li class="toc-item"><a href="#tver_borisoglebsky">Tver Borisoglebsky</a></li><li class="toc-item"><a href="#tver_bridge_volga">Tver Bridge Volga</a></li><li class="toc-item"><a href="#tver_fire_tower">Tver Fire Tower</a></li><li class="toc-item"><a href="#tver_landmark">Tver Landmark</a></li><li class="toc-item"><a href="#tver_local_lore_museum">Tver Local Lore Museum</a></li><li class="toc-item"><a href="#tver_michael_garden">Tver Michael Garden</a></li><li class="toc-item"><a href="#tver_mosque_tver">Tver Mosque Tver</a></li><li class="toc-item"><a href="#tver_museum_life">Tver Museum Life</a></li><li class="toc-item"><a href="#tver_otechestvo">Tver Otechestvo</a></li><li class="toc-item"><a href="#tver_puppet_theatre">Tver Puppet Theatre</a></li><li class="toc-item"><a href="#tver_railway_station">Tver Railway Station</a></li><li class="toc-item"><a href="#tver_regional_art_museum">Tver Regional Art Museum</a></li><li class="toc-item"><a href="#tver_resurrection_cathedral">Tver Resurrection Cathedral</a></li><li class="toc-item"><a href="#tver_river_station">Tver River Station</a></li><li class="toc-item"><a href="#tver_river_volga_embankment">Tver River Volga Embankment</a></li><li class="toc-item"><a href="#tver_saint_michael">Tver Saint Michael</a></li><li class="toc-item"><a href="#tver_smolensky_cathedral">Tver Smolensky Cathedral</a></li><li class="toc-item"><a href="#tver_sobor">Tver Sobor</a></li><li class="toc-item"><a href="#tver_soviet_square">Tver Soviet Square</a></li><li class="toc-item"><a href="#tver_st_catherine">Tver St Catherine</a></li><li class="toc-item"><a href="#tver_steamboat_rex">Tver Steamboat Rex</a></li><li class="toc-item"><a href="#tver_travel_palace">Tver Travel Palace</a></li><li class="toc-item"><a href="#tver_trekhsvyatskaya">Tver Trekhsvyatskaya</a></li><li class="toc-item"><a href="#tver_university">Tver University</a></li><li class="toc-item"><a href="#tver_white_trinity">Tver White Trinity</a></li><li class="toc-item"><a href="#tver_yard">Tver Yard</a></li><li class="toc-item"><a href="#tver_place_3">Извините, но я не могу помочь с этой просьбой.</a></li></ol></nav>
 <section class="historical-reference" id="guide-historical" aria-label="Историческая справка"><h2>Историческая справка</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 <p class="prose">Тверь — административный центр Тверской области, древний город на Верхней Волге.</p>
 <p class="prose">Конкурент Москвы в XIV веке, позже — провинциальный центр с путями в Новгород и Петербург. Путевой дворец Екатерины II, набережные и многочисленные церкви отражают историю торговли и культуры средней полосы.</p>
 <p class="prose">Имперский и советский периоды укрепили Тверь как узел дорог и лёгкой промышленности; Великая Отечественная война оставила следы. Сегодня город развивает транспортные коридоры Москва — Санкт-Петербург и сохраняет память о средневековой конкуренции с Москвой.</p></section>
 <section class="guide-trip-plans" id="guide-trips" aria-label="Маршруты"><h2>Маршруты</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 <article class="trip-plan" id="trip-1d"><h3>Один день</h3>
 <p class="prose">Компактный маршрут по главным точкам путеводителя с минимальным возвратом назад пешком.</p>
 <ol class="trip-stops"><li><a href="#tver_railway_station">Tver Railway Station</a> (~75мин)</li>
@@ -125,273 +208,435 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <li><a href="#tver_fire_tower">Tver Fire Tower</a> (~75мин)</li></ol></article>
 <article class="trip-plan" id="trip-3d1"><h3>Три дня — день 1</h3>
 <p class="prose">День 1 — центральный кластер.</p>
-<ol class="trip-stops"><li><a href="#tver_local_lore_museum">Tver Local Lore Museum</a> (~75мин)</li>
+<ol class="trip-stops"><li><a href="#tver_landmark">Tver Landmark</a> (~75мин)</li>
+<li><a href="#tver_local_lore_museum">Tver Local Lore Museum</a> (~75мин)</li>
 <li><a href="#tver_michael_garden">Tver Michael Garden</a> (~75мин)</li>
-<li><a href="#tver_puppet_theatre">Tver Puppet Theatre</a> (~75мин)</li>
-<li><a href="#tver_pushkin_statue">Tver Pushkin Statue</a> (~75мин)</li>
-<li><a href="#tver_regional_art_museum">Tver Regional Art Museum</a> (~75мин)</li></ol></article>
+<li><a href="#tver_place_3">Извините, но я не могу помочь с этой просьбой.</a> (~75мин)</li>
+<li><a href="#tver_place_4">Place 4</a> (~75мин)</li></ol></article>
 <article class="trip-plan" id="trip-3d2"><h3>Три дня — день 2</h3>
 <p class="prose">День 2 — следующая группа районов.</p>
-<ol class="trip-stops"><li><a href="#tver_resurrection_cathedral">Tver Resurrection Cathedral</a> (~75мин)</li>
+<ol class="trip-stops"><li><a href="#tver_puppet_theatre">Tver Puppet Theatre</a> (~75мин)</li>
+<li><a href="#tver_regional_art_museum">Tver Regional Art Museum</a> (~75мин)</li>
+<li><a href="#tver_resurrection_cathedral">Tver Resurrection Cathedral</a> (~75мин)</li>
 <li><a href="#tver_river_station">Tver River Station</a> (~75мин)</li>
-<li><a href="#tver_river_volga_embankment">Tver River Volga Embankment</a> (~75мин)</li>
-<li><a href="#tver_saint_michael">Tver Saint Michael</a> (~75мин)</li>
-<li><a href="#tver_smolensky_cathedral">Tver Smolensky Cathedral</a> (~75мин)</li></ol></article>
+<li><a href="#tver_river_volga_embankment">Tver River Volga Embankment</a> (~75мин)</li></ol></article>
 <article class="trip-plan" id="trip-3d3"><h3>Три дня — день 3</h3>
 <p class="prose">День 3 — оставшиеся близкие объекты.</p>
-<ol class="trip-stops"><li><a href="#tver_soviet_square">Tver Soviet Square</a> (~75мин)</li>
+<ol class="trip-stops"><li><a href="#tver_saint_michael">Tver Saint Michael</a> (~75мин)</li>
+<li><a href="#tver_smolensky_cathedral">Tver Smolensky Cathedral</a> (~75мин)</li>
+<li><a href="#tver_soviet_square">Tver Soviet Square</a> (~75мин)</li>
 <li><a href="#tver_st_catherine">Tver St Catherine</a> (~75мин)</li>
-<li><a href="#tver_steamboat_rex">Tver Steamboat Rex</a> (~75мин)</li>
-<li><a href="#tver_travel_palace">Tver Travel Palace</a> (~75мин)</li>
-<li><a href="#tver_trekhsvyatskaya">Tver Trekhsvyatskaya</a> (~75мин)</li></ol></article></section>
-<nav class="guide-toc" aria-label="Содержание"><h2>Содержание</h2><ol><li class="toc-item"><a href="#guide-historical">Историческая справка</a></li><li class="toc-item"><a href="#guide-trips">Маршруты</a></li><li class="toc-item"><a href="#tver_afanasy_nikitin">Tver Afanasy Nikitin</a></li><li class="toc-item"><a href="#tver_borisoglebsky">Tver Borisoglebsky</a></li><li class="toc-item"><a href="#tver_michael_garden">Tver Michael Garden</a></li><li class="toc-item"><a href="#tver_fire_tower">Tver Fire Tower</a></li><li class="toc-item"><a href="#tver_pdfband_2_fe9d5210">Mosque Tver</a></li><li class="toc-item"><a href="#tver_museum_life">Tver Museum Life</a></li><li class="toc-item"><a href="#tver_bridge_volga">Tver Bridge Volga</a></li><li class="toc-item"><a href="#tver_steamboat_rex">Tver Steamboat Rex</a></li><li class="toc-item"><a href="#tver_pushkin_statue">Tver Pushkin Statue</a></li><li class="toc-item"><a href="#tver_resurrection_cathedral">Tver Resurrection Cathedral</a></li><li class="toc-item"><a href="#tver_st_catherine">Tver St Catherine</a></li><li class="toc-item"><a href="#tver_saint_michael">Tver Saint Michael</a></li><li class="toc-item"><a href="#tver_smolensky_cathedral">Tver Smolensky Cathedral</a></li><li class="toc-item"><a href="#tver_soviet_square">Tver Soviet Square</a></li><li class="toc-item"><a href="#tver_pdfband_8_aafdf269">Извините, но я не могу помочь с этой просьбой.</a></li><li class="toc-item"><a href="#tver_travel_palace">Tver Travel Palace</a></li><li class="toc-item"><a href="#tver_trekhsvyatskaya">Tver Trekhsvyatskaya</a></li><li class="toc-item"><a href="#tver_yard">Tver Yard</a></li><li class="toc-item"><a href="#tver_otechestvo">Tver Otechestvo</a></li><li class="toc-item"><a href="#tver_puppet_theatre">Tver Puppet Theatre</a></li><li class="toc-item"><a href="#tver_railway_station">Tver Railway Station</a></li><li class="toc-item"><a href="#tver_regional_art_museum">Tver Regional Art Museum</a></li><li class="toc-item"><a href="#tver_local_lore_museum">Tver Local Lore Museum</a></li><li class="toc-item"><a href="#tver_river_station">Tver River Station</a></li><li class="toc-item"><a href="#tver_pdfband_0_dff3a250">Tver Sobor</a></li><li class="toc-item"><a href="#tver_university">Tver University</a></li><li class="toc-item"><a href="#tver_river_volga_embankment">Tver River Volga Embankment</a></li><li class="toc-item"><a href="#tver_white_trinity">Tver White Trinity</a></li><li class="toc-item"><a href="#tver_pdfband_3_dea77b64">Ансамбль зданий площади Ленина</a></li><li class="toc-item"><a href="#tver_pdfband_9_c03e2bcb">Дворец культуры Металлист</a></li><li class="toc-item"><a href="#tver_pdfband_1_79351208">Иоанна Предтечи</a></li></ol></nav>
+<li><a href="#tver_steamboat_rex">Tver Steamboat Rex</a> (~75мин)</li></ol></article></section>
+<section class="place" id="tver_place_2">
+<div class="place-lead">
+<h3>Place 2</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Стиль: конструктивизм, неоклассицизм</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/tver_place_2.jpg" alt="Place 2" width="1280" height="960" style="height: 249px; max-height: 249px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/tver_place_2_b.jpg" alt="Place 2 — вид 2" width="330" height="247" style="height: 249px; max-height: 249px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Здание администрации города выполнено в неоклассическом стиле с элементами конструктивизма. На площади установлены памятники Ленину и другим выдающимся деятелям советского периода. Архитектурный ансамбль формировался постепенно, начиная с 1930-х годов. Площадь Ленина была благоустроена и получила современный облик после реконструкции в конце XX — начале XXI века. Здесь регулярно проходят городские мероприятия и праздники.</p>
+<p class="prose">Ансамбль зданий площади Ленина сложился в первой половине XX века и является памятником советской архитектуры. Здесь расположены здания, построенные в стиле конструктивизма и неоклассицизма, отражающие характерные черты градостроительства того периода. Архитектурный ансамбль включает несколько значимых объектов, среди которых выделяется здание администрации города Твери, выполненное в строгих классических формах. Площадь Ленина является центральной площадью города и важным общественным пространством, символизирующим историческое развитие Твери. Посещение ансамбля позволяет познакомиться с архитектурной историей региона и ощутить атмосферу советского градостроительства.</p></div>
+</section>
+<section class="place" id="tver_place_4">
+<div class="place-lead">
+<h3>Place 4</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Стиль: сталинский ампир | Период: 1967</p>
+<figure class="place-fig place-fig--hi-res"><img src="../images/tver_place_4.jpg" alt="Place 4" width="1280" height="960"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Построен в стиле сталинского ампира. Является памятником архитектуры регионального значения. Имеет высоту около 40 метров. До постройки Дворца культуры жители района испытывали дефицит культурных мероприятий. Сегодня здание используется для проведения концертов, выставок и театральных постановок.</p>
+<p class="prose">Дворец культуры «Металлист» был открыт в Твери в 1967 году и предназначался для досуга работников предприятий тяжёлого машиностроения. Сооружение стало знаковым объектом города благодаря оригинальной архитектуре и сталинской высотности. В годы своего расцвета здесь проходили концерты, выставки, спектакли и массовые мероприятия. Здание привлекает внимание туристов своей необычной формой и величественным видом, символизируя эпоху советского модернизма.</p></div>
+</section>
 <section class="place" id="tver_afanasy_nikitin">
+<div class="place-lead">
 <h3>Tver Afanasy Nikitin</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Период: 2008</p>
-<figure class="place-fig"><img src="../images/tver_afanasy_nikitin.jpg" alt="Tver Afanasy Nikitin"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/tver_afanasy_nikitin_b.jpg" alt="Tver Afanasy Nikitin" width="330" height="214"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Афанасий Никитин был уроженцем Твери. Памятник выполнен скульптором Игорем Рыбаковым. Высота монумента составляет около пяти метров. На постаменте памятника изображены сцены из жизни Никитина. Открытие памятника приурочено к празднованию 540-летия первого путешествия.</p>
 <p class="prose">Памятник Афанасию Никитину установлен в Твери в честь знаменитого русского путешественника и купца, который совершил путешествие в Персию и Индию в XV веке. Никитин стал первым русским человеком, подробно описавшим эти страны в своем дневнике &#x27;Хожение за три моря&#x27;. Памятник был открыт в 2008 году и расположен в историческом центре города, рядом с набережной Волги. Памятник привлекает туристов и местных жителей, являясь символом культурного наследия Твери и важным элементом городской инфраструктуры.</p></div>
 </section>
 <section class="place" id="tver_borisoglebsky">
+<div class="place-lead">
 <h3>Tver Borisoglebsky</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/tver_borisoglebsky.jpg" alt="Tver Borisoglebsky"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/tver_borisoglebsky.jpg" alt="Tver Borisoglebsky" width="1280" height="853" style="height: 222px; max-height: 222px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/tver_borisoglebsky_b.jpg" alt="Tver Borisoglebsky — вид 2" width="330" height="220" style="height: 222px; max-height: 222px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Основан в середине XVII века. Известен благодаря сохранившимся иконам и фрескам. На территории монастыря расположены древние храмы и колокольня. Был закрыт в советское время, позже восстановлен. Сегодня действует как действующий мужской монастырь.</p>
 <p class="prose">Борисоглебский монастырь основан в XVII веке и долгое время был значимым духовным центром Твери. Здесь хранились ценные иконы и церковная утварь, сыгравшие важную роль в культурной жизни региона. Монастырь пережил периоды расцвета и упадка, оставаясь символом веры и надежды для местных жителей. Монастырь привлекает паломников и туристов своей историей и архитектурной ценностью, представляя собой важный памятник русской культуры и православия.</p></div>
 </section>
-<section class="place" id="tver_michael_garden">
-<h3>Tver Michael Garden</h3>
+<section class="place" id="tver_bridge_volga">
+<div class="place-lead">
+<h3>Tver Bridge Volga</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/tver_michael_garden.jpg" alt="Tver Michael Garden"/></figure>
-<div class="place-desc"><p class="prose">Один из старейших парков Твери. На территории парка установлен памятник А.С. Здесь часто проходят городские мероприятия и фестивали. Площадь парка составляет около 6 гектаров. Парк благоустроен современными дорожками и зонами для пикника.</p>
-<p class="prose">Городской сад Твери был заложен в конце XIX века и долгое время оставался любимым местом отдыха горожан. Здесь проходили народные гуляния, концерты и праздники, ставшие традиционными для жителей города. Сад стал символом культурной жизни Твери и сыграл важную роль в формировании городской среды. Сад привлекает туристов и местных жителей благодаря живописной аллее лип, уютным скамейкам и тихим уголкам для отдыха.</p></div>
+<p class="place-meta">Стиль: классицизм | Период: 1824</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/tver_bridge_volga.jpg" alt="Tver Bridge Volga" width="1280" height="960" style="height: 250px; max-height: 250px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/tver_bridge_volga_b.jpg" alt="Tver Bridge Volga — вид 2" width="330" height="266" style="height: 250px; max-height: 250px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Первый камень моста был заложен в 1849 году. Старый Волговский мост — единственный сохранившийся каменный мост в Твери. Сооружение выполнено из местного известняка и кирпича. На мосту установлены чугунные перила. Мост несколько раз перестраивался после наводнений и разрушений.</p>
+<p class="prose">Староволжский мост является одним из старейших каменных мостов Твери, построенным в середине XIX века. Сооружение играло важную транспортную роль, соединяя центральную часть города с левобережьем Волги. Мост неоднократно реконструировался и ремонтировался, сохраняя свою историческую ценность до наших дней. Мост привлекает туристов своей архитектурной ценностью и исторической значимостью, позволяя увидеть старинное инженерное сооружение и насладиться видом на реку Волгу.</p></div>
 </section>
 <section class="place" id="tver_fire_tower">
+<div class="place-lead">
 <h3>Tver Fire Tower</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/tver_fire_tower.jpg" alt="Tver Fire Tower"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/tver_fire_tower.jpg" alt="Tver Fire Tower" width="1280" height="852" style="height: 167px; max-height: 167px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/tver_fire_tower_b.jpg" alt="Tver Fire Tower — вид 2" width="330" height="165" style="height: 167px; max-height: 167px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Башня является памятником архитектуры конца XIX века. Высота башни составляет около 25 метров. Из смотровой площадки открывается панорамный вид на окружающую природу. С башни регулярно проводятся экскурсии для туристов и школьников. На башне установлены современные средства связи для оперативного оповещения служб пожаротушения.</p>
 <p class="prose">Башня наблюдения за пожарами построена в конце XIX века и служила важным элементом системы предупреждения лесных пожаров в Тверской области. Она возвышается над окрестностями, позволяя быстро обнаружить очаги возгораний и своевременно принять меры. Посещение башни позволяет увидеть живописные виды местности и узнать больше о традициях охраны лесов региона.</p></div>
 </section>
-<section class="place" id="tver_pdfband_2_fe9d5210">
-<h3>Mosque Tver</h3>
+<section class="place" id="tver_landmark">
+<div class="place-lead">
+<h3>Tver Landmark</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Стиль: барокко | Период: 1682–1693</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/tver_landmark.jpg" alt="Tver Landmark" width="1172" height="1600" style="height: 222px; max-height: 222px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/tver_landmark_b.jpg" alt="Tver Landmark — вид 2" width="330" height="220" style="height: 222px; max-height: 222px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Построен в 1688 году. Освящён в 1704 году. Сильно пострадал от пожара в XVIII веке и был перестроен. Имеет уникальный деревянный иконостас. На стенах сохранились старинные фрески.</p>
+<p class="prose">Храм Иоанна Предтечи в Твери является старейшим каменным храмом города и памятником архитектуры XVII века. Построен в честь святого Иоанна Крестителя, крестившего Иисуса Христа. Храм был заложен в 1688 году и освящён в 1704 году. В XVIII веке здание храма сильно пострадало от пожара и было перестроено в стиле барокко. Среди интересных фактов стоит отметить уникальную резную деревянную иконостасную перегородку и старинные фрески, сохранившиеся до наших дней. Здание привлекает туристов своей исторической ценностью и архитектурной красотой, позволяя погрузиться в атмосферу старой русской провинции.</p></div>
+</section>
+<section class="place" id="tver_local_lore_museum">
+<div class="place-lead">
+<h3>Tver Local Lore Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Стиль: эклектика | Период: 1893</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/tver_local_lore_museum.jpg" alt="Tver Local Lore Museum" width="1280" height="720" style="height: 187px; max-height: 187px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--row-sized"><img src="../images/tver_local_lore_museum_b.jpg" alt="Tver Local Lore Museum — вид 2" width="330" height="604" style="height: 187px; max-height: 187px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Первый музей Тверской губернии был открыт в 1870 году. Коллекция музея включает предметы археологии, этнографии, живописи и декоративно-прикладного искусства. Особняк, в котором расположен музей, построен в стиле эклектики. В музее регулярно проводятся выставки и культурные мероприятия. На территории музея находится памятник архитектуры регионального значения.</p>
+<p class="prose">Тверской областной музей основан в 1870 году и является одним из старейших музеев Северо-Западного региона России. Изначально располагался в здании бывшего городского училища, позже неоднократно менял место расположения, пока не обосновался в историческом особняке XIX века. Музей сыграл важную роль в сохранении культурного наследия Тверской области, собирая экспонаты по истории края, искусству и археологии. Музей интересен посетителям возможностью познакомиться с историей и культурой Твери и Тверской области, увидеть уникальные артефакты и произведения искусства.</p></div>
+</section>
+<section class="place" id="tver_michael_garden">
+<div class="place-lead">
+<h3>Tver Michael Garden</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/tver_pdfband_2_fe9d5210.jpg" alt="Mosque Tver"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/tver_michael_garden.jpg" alt="Tver Michael Garden" width="1280" height="720" style="height: 187px; max-height: 187px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/tver_michael_garden_b.jpg" alt="Tver Michael Garden — вид 2" width="330" height="330" style="height: 187px; max-height: 187px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Один из старейших парков Твери. На территории парка установлен памятник А.С. Пушкину. Здесь часто проходят городские мероприятия и фестивали. Площадь парка составляет около 6 гектаров. Парк благоустроен современными дорожками и зонами для пикника.</p>
+<p class="prose">Городской сад Твери был заложен в конце XIX века и долгое время оставался любимым местом отдыха горожан. Здесь проходили народные гуляния, концерты и праздники, ставшие традиционными для жителей города. Сад стал символом культурной жизни Твери и сыграл важную роль в формировании городской среды. Сад привлекает туристов и местных жителей благодаря живописной аллее лип, уютным скамейкам и тихим уголкам для отдыха.</p></div>
+</section>
+<section class="place" id="tver_mosque_tver">
+<div class="place-lead">
+<h3>Tver Mosque Tver</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/tver_mosque_tver.jpg" alt="Tver Mosque Tver" width="1280" height="960" style="height: 249px; max-height: 249px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/tver_mosque_tver_b.jpg" alt="Tver Mosque Tver — вид 2" width="330" height="247" style="height: 249px; max-height: 249px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Построена в конце XIX века. Является старейшей мечетью Северо-Западного региона России. При поддержке российского императора Александра III. Важная культурная достопримечательность города. Место регулярных молитв и религиозных собраний.</p>
 <p class="prose">Мечеть Тверь является одной из старейших мусульманских святынь Северо-Западного региона России. Построена в конце XIX века по инициативе местных мусульманской общины и при поддержке российского императора Александра III. Мечеть сыграла важную роль в культурной жизни города, став местом встреч верующих и важным элементом городской архитектуры. Посещение мечети позволяет познакомиться с историей и культурой мусульманского сообщества Твери, узнать больше о традициях и обычаях российских мусульман.</p></div>
 </section>
 <section class="place" id="tver_museum_life">
+<div class="place-lead">
 <h3>Tver Museum Life</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/tver_museum_life.jpg" alt="Tver Museum Life"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/tver_museum_life.jpg" alt="Tver Museum Life" width="1280" height="960" style="height: 250px; max-height: 250px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--row-sized"><img src="../images/tver_museum_life_b.jpg" alt="Tver Museum Life — вид 2" width="330" height="604" style="height: 250px; max-height: 250px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Основан в [ГОД].</p>
 <p class="prose">Музей жизни Твери открылся в 2022 году и является первым в своем роде в регионе. Музей рассказывает историю города через личные истории жителей, артефакты и интерактивные экспозиции. В музее представлены уникальные экспонаты, отражающие повседневную жизнь тверичан разных эпох. Познакомиться с историей и культурой Твери, узнать больше о повседневной жизни горожан.</p></div>
 </section>
-<section class="place" id="tver_bridge_volga">
-<h3>Tver Bridge Volga</h3>
-
-<p class="place-meta">Стиль: классицизм | Период: 1824</p>
-<figure class="place-fig"><img src="../images/tver_bridge_volga.jpg" alt="Tver Bridge Volga"/></figure>
-<div class="place-desc"><p class="prose">Первый камень моста был заложен в 1849 году. Старый Волговский мост — единственный сохранившийся каменный мост в Твери. Сооружение выполнено из местного известняка и кирпича. На мосту установлены чугунные перила. Мост несколько раз перестраивался после наводнений и разрушений.</p>
-<p class="prose">Староволжский мост является одним из старейших каменных мостов Твери, построенным в середине XIX века. Сооружение играло важную транспортную роль, соединяя центральную часть города с левобережьем Волги. Мост неоднократно реконструировался и ремонтировался, сохраняя свою историческую ценность до наших дней. Мост привлекает туристов своей архитектурной ценностью и исторической значимостью, позволяя увидеть старинное инженерное сооружение и насладиться видом на реку Волгу.</p></div>
-</section>
-<section class="place" id="tver_steamboat_rex">
-<h3>Tver Steamboat Rex</h3>
-
-
-<figure class="place-fig"><img src="../images/tver_steamboat_rex.jpg" alt="Tver Steamboat Rex"/></figure>
-<div class="place-desc"><p class="prose">Основу коллекции составляют исторические суда, построенные до 1940-х годов. Экспозиция включает несколько уникальных образцов паровых двигателей. На территории музея регулярно проводятся экскурсии и тематические мероприятия. Ряд экспонатов имеет статус памятников культурного наследия России. Посещение возможно круглый год.</p>
-<p class="prose">Музей старого парохода расположен в Твери и представляет коллекцию старинных судов Волги, включая уникальные образцы паровых кораблей начала XX века. Коллекция музея позволяет увидеть развитие судостроительной отрасли региона и познакомиться с историей водного транспорта России. Среди экспонатов есть знаменитый буксир «Красная звезда», сыгравший важную роль в Великой Отечественной войне. Музей интересен поклонникам истории судоходства, ценителям техники и всем, кто хочет узнать больше о развитии транспортной инфраструктуры России.</p></div>
-</section>
-<section class="place" id="tver_pushkin_statue">
-<h3>Tver Pushkin Statue</h3>
-
-<p class="place-meta">Период: 1969</p>
-<figure class="place-fig"><img src="../images/tver_pushkin_statue.jpg" alt="Tver Pushkin Statue"/></figure>
-<div class="place-desc"><p class="prose">Скульптура выполнена из бронзы и камня. Высота памятника составляет около 6 метров. На постаменте выгравированы строки из произведений Пушкина. Пушкин изображён стоящим в полный рост, в традиционном костюме XIX века. Открытие монумента состоялось в 1969 году.</p>
-<p class="prose">Памятник Пушкину в Твери установлен в честь 200-летия со дня рождения великого поэта. Автором скульптуры является известный российский скульптор Николай Андреев. Монумент расположен в самом центре города, напротив здания городской администрации. Монумент привлекает туристов и местных жителей благодаря своей исторической ценности и живописному расположению.</p></div>
-</section>
-<section class="place" id="tver_resurrection_cathedral">
-<h3>Tver Resurrection Cathedral</h3>
-
-<p class="place-meta">Стиль: классицизм | Период: 1764 год</p>
-<figure class="place-fig"><img src="../images/tver_resurrection_cathedral.jpg" alt="Tver Resurrection Cathedral"/></figure>
-<div class="place-desc"><p class="prose">Здание собора выполнено в стиле классицизма. Архитектором храма стал Иван Еготов. После реставрации храм приобрёл первоначальный облик. На колокольне установлены старинные колокола. Ежегодно здесь проводятся торжественные богослужения и концерты духовной музыки.</p>
-<p class="prose">Вознесенский собор Твери был заложен в 1764 году императрицей Екатериной II и освящён в честь Воскресения Христова. В годы советской власти храм был закрыт и использовался под складские помещения. После распада СССР началось возрождение православной культуры, и в 2008 году здание собора было возвращено верующим и заново освящено как Воскресенский кафедральный собор. Собор является важным памятником архитектуры XVIII века и символом духовного возрождения города.</p></div>
-</section>
-<section class="place" id="tver_st_catherine">
-<h3>Tver St Catherine</h3>
-
-<p class="place-meta">Стиль: эклектика, русский стиль и неоготика | Период: 1716–1724</p>
-<figure class="place-fig"><img src="../images/tver_st_catherine.jpg" alt="Tver St Catherine"/></figure>
-<div class="place-desc"><p class="prose">Строительство храма началось в 1897 году и завершилось в 1904-м. Архитектурный стиль здания сочетает черты русского стиля и неоготики. Интерьер храма украшен живописью известных художников конца XIX века. Свято-Катеринский храм долгое время оставался центром общественной жизни города. После революции храм использовался под различные нужды, включая кинотеатр.</p>
-<p class="prose">Свято-Катеринский храм был построен в Твери в конце XIX века по проекту архитектора Николая Васильевича Поздеева. Храм стал значимым памятником архитектуры эклектики, сочетающей элементы русского стиля и неоготики. Строительство велось на средства тверских купцов и благотворителей, что позволило создать здание с богатым внутренним убранством и живописью, выполненной известными художниками того времени. Храм является важной архитектурной достопримечательностью Твери и привлекает внимание туристов своей необычной архитектурой и историческим значением.</p></div>
-</section>
-<section class="place" id="tver_saint_michael">
-<h3>Tver Saint Michael</h3>
-
-<p class="place-meta">Стиль: эклектика с элементами русского зодчества и псевдорусского стиля</p>
-<figure class="place-fig"><img src="../images/tver_saint_michael.jpg" alt="Tver Saint Michael"/></figure>
-<div class="place-desc"><p class="prose">Церковь выполнена в характерном для конца XIX века смешении стилей эклектики и русского зодчества. На фасаде здания расположены декоративные элементы, вдохновленные древнерусской архитектурой. Интерьер церкви украшен деревянными резными иконостасами и живописью. Церковь является памятником архитектуры федерального значения. Рядом с храмом расположен небольшой благоустроенный сквер.</p>
-<p class="prose">Церковь Святого Михаила в Твери была построена в конце XIX века по проекту архитектора Николая Васильевича Поздеева. Здание выполнено в стиле эклектики с элементами русского зодчества и псевдорусского стиля. Церковь играла важную роль в религиозной жизни города, являясь одним из главных храмов Тверской епархии. Церковь привлекает туристов своей уникальной архитектурой и атмосферой старинной русской провинции.</p></div>
-</section>
-<section class="place" id="tver_smolensky_cathedral">
-<h3>Tver Smolensky Cathedral</h3>
-
-<p class="place-meta">Стиль: московское барокко</p>
-<figure class="place-fig"><img src="../images/tver_smolensky_cathedral.jpg" alt="Tver Smolensky Cathedral"/></figure>
-<div class="place-desc"><p class="prose">Храм возведён в стиле московского барокко. На фасаде собора расположены изящные белокаменные резные украшения. Собор неоднократно реставрировался, последний раз в конце XX века. В храме хранятся ценные иконы и церковная утварь XVIII-XIX веков. Рядом расположен мемориал воинам Великой Отечественной войны.</p>
-<p class="prose">Смоленский собор был построен в XVII веке, является одним из старейших храмов Твери и важнейшим памятником русского зодчества. В течение столетий храм играл важную духовную и культурную роль в жизни города, пережил многочисленные войны и пожары, сохранив уникальные фрески и иконы. Смоленский собор привлекает туристов своей историей, архитектурой и атмосферой старины, позволяя окунуться в атмосферу старинной русской провинции.</p></div>
-</section>
-<section class="place" id="tver_soviet_square">
-<h3>Tver Soviet Square</h3>
-
-
-<figure class="place-fig"><img src="../images/tver_soviet_square.jpg" alt="Tver Soviet Square"/></figure>
-<div class="place-desc"><p class="prose">На площади расположены памятники Ленину и Ворошилову — символы советской эпохи. Здесь регулярно проводятся фестивали и праздники, посвящённые советскому наследию. Площадь благоустроена современными ландшафтными решениями, сохраняя исторический облик. Рядом находится здание бывшего кинотеатра «Тверь», ныне преобразованное в культурный центр. Ежегодно здесь проходит фестиваль ретроавтомобилей, привлекающий любителей советской техники.</p>
-<p class="prose">Советская площадь в Твери появилась в середине XX века как символ социалистического строительства и культурного центра города. Здесь проходили массовые мероприятия, концерты, демонстрации и праздничные гуляния. Площадь стала местом встреч горожан и важным элементом городской инфраструктуры. Советская площадь привлекает туристов и жителей своим историческим значением и атмосферой советского прошлого.</p></div>
-</section>
-<section class="place" id="tver_pdfband_8_aafdf269">
-<h3>Извините, но я не могу помочь с этой просьбой.</h3>
-
-
-<figure class="place-fig"><img src="../images/tver_pdfband_8_aafdf269.jpg" alt="Извините, но я не могу помочь с этой просьбой."/></figure>
-<div class="place-desc"><p class="prose">Музей ТГМВЦ демонстрирует богатое культурное наследие Твери через свою обширную коллекцию местных артефактов и исторических экспонатов. Основанный в [FOUNDING YEAR], музей является одним из старейших учреждений, посвященных сохранению культурного наследия Твери. В нем хранится более [NUMBER] артефактов, датируемых веками назад, которые дают представление о повседневной жизни и социальных структурах. Музей регулярно проводит специальные выставки, подчеркивающие менее известные аспекты истории и искусства Твери. Расположенный в историческом здании, построенном в период [АРХИТЕКТУРНЫЙ ПЕРИОД], сам музей является свидетельством архитектурного мастерства.</p>
-<p class="prose">Основанный в [YEAR], музей изначально был создан для сохранения и展示 значительных исторических артефактов и реликвий прошлого Твери. Со временем он стал важным центром для изучения региональной культуры и традиций, привлекая посетителей, стремящихся понять эволюцию города и его уникальную идентичность. Посетители приходят сюда, чтобы изучить тонкие детали истории Твери и узнать больше о традициях и обычаях региона.</p></div>
-</section>
-<section class="place" id="tver_travel_palace">
-<h3>Tver Travel Palace</h3>
-
-<p class="place-meta">Стиль: русская эклектика | Период: 1790–1800</p>
-<figure class="place-fig"><img src="../images/tver_travel_palace.jpg" alt="Tver Travel Palace"/></figure>
-<div class="place-desc"><p class="prose">Дворец был возведён в конце XIX века. Архитектор здания — Александр Шмидт. Стиль дворца сочетает элементы классицизма, барокко и модерна. Здание служило центром светской жизни города. Travel Palace сохранился до наших дней и сегодня используется как гостиница.</p>
-<p class="prose">Трёвожная башня и крепостные стены Твери давно стали частью истории русского зодчества, однако архитектурное наследие города богато и разнообразно. В XIX веке в Твери был построен роскошный дворец под названием Travel Palace, ставший одним из символов местного дворянства и купеческого сословия. Его архитектором стал талантливый инженер Александр Шмидт, вдохновлявшийся европейскими стилями и традициями. Дворец служил местом встреч знати и элиты города, привлекал внимание горожан своей изысканностью и величием. Travel Palace является ярким образцом русской эклектики конца XIX века и представляет собой уникальное сочетание различных архитектурных стилей, отражающих культурную и социальную жизнь региона.</p></div>
-</section>
-<section class="place" id="tver_trekhsvyatskaya">
-<h3>Tver Trekhsvyatskaya</h3>
-
-<p class="place-meta">Стиль: эклектика, модерн</p>
-<figure class="place-fig"><img src="../images/tver_trekhsvyatskaya.jpg" alt="Tver Trekhsvyatskaya"/></figure>
-<div class="place-desc"><p class="prose">На улице находится Дом-музей Михаила Афанасьевича Булгакова, где писатель жил и работал над романом «Белая гвардия». Доходный дом № 6 построен по проекту архитектора Ивана Блинкова. Здание № 8 является памятником архитектуры федерального значения. По адресу улица Трехсвятская, д.</p>
-<p class="prose">Трехсвятская улица возникла в середине XIX века и изначально называлась Большая Спасская. В конце XIX века получила современное название в честь расположенных поблизости храмов Троицы Живоначальной и Святителей Московских. Здесь находились знаменитые доходные дома, принадлежавшие купцам и промышленникам, среди которых особняк братьев Бахрушиных, ныне известный как Дом-музей М. А. Булгакова. Улица интересна своей архитектурой конца XIX — начала XX веков, здесь сохранились здания, отражающие стиль эклектики и модерна.</p></div>
-</section>
-<section class="place" id="tver_yard">
-<h3>Tver Yard</h3>
-
-<p class="place-meta">Стиль: эклектика и конструктивизм</p>
-<figure class="place-fig"><img src="../images/tver_yard.jpg" alt="Tver Yard"/></figure>
-<div class="place-desc"><p class="prose">Конный двор существовал до начала XX века, когда начался массовый переход на механическое транспортное средство. С середины XX века объект использовался преимущественно для обслуживания автотранспорта. Сегодня здание является важным логистическим узлом города. Архитектура здания сочетает элементы эклектики и конструктивизма. Территория комплекса включает несколько зданий различного назначения.</p>
-<p class="prose">Тверской конный двор был основан в конце XIX века и долгое время являлся крупнейшим предприятием по производству и обслуживанию конной тяги в регионе. Со временем необходимость в конной тяге снизилась, и здание переоборудовали под автомобильное хозяйство. Сегодня здесь расположен современный автопарк и логистический центр. Здание интересно своей историей и архитектурным решением, отражающим эпоху развития транспорта в Твери.</p></div>
-</section>
 <section class="place" id="tver_otechestvo">
+<div class="place-lead">
 <h3>Tver Otechestvo</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Стиль: классицизм</p>
-<figure class="place-fig"><img src="../images/tver_otechestvo.jpg" alt="Tver Otechestvo"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/tver_otechestvo_b.jpg" alt="Tver Otechestvo" width="330" height="504"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Тверской драматический театр основан в 1897 году. Это старейший театральный коллектив Тверской области, сыгравший значительную роль в культурной жизни региона. Театр знаменит постановкой спектаклей классики русской драматургии и современной авторской пьесы.</p>
 <p class="prose">Среди известных артистов театра — Николай Охлопков, который начинал свою карьеру именно здесь. Значение Тверского драматического театра заключается в сохранении традиций русского драматического искусства и популяризации театральной культуры среди жителей и гостей города.</p></div>
 </section>
 <section class="place" id="tver_puppet_theatre">
+<div class="place-lead">
 <h3>Tver Puppet Theatre</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Стиль: советский модернизм | Период: 1964</p>
-<figure class="place-fig"><img src="../images/tver_puppet_theatre.jpg" alt="Tver Puppet Theatre"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/tver_puppet_theatre.jpg" alt="Tver Puppet Theatre" width="1280" height="720" style="height: 187px; max-height: 187px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/tver_puppet_theatre_b.jpg" alt="Tver Puppet Theatre — вид 2" width="330" height="247" style="height: 187px; max-height: 187px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Театр неоднократно становился лауреатом всероссийских и международных конкурсов. Ежегодно в театре проводится около 400 спектаклей. Здание театра было построено в стиле советского модернизма. Спектакли театра пользуются популярностью среди детей и взрослых. В репертуаре представлены постановки как классических произведений, так и современных пьес.</p>
 <p class="prose">Тверской кукольный театр основан в 1968 году. За годы своего существования стал одним из ведущих театров страны, регулярно участвуя в российских и международных фестивалях. Театр знаменит своими яркими постановками, профессиональными актёрами-кукловодами и современным репертуаром. Это место стоит посетить поклонникам театра кукол и ценителям театрального искусства, желающим увидеть яркие спектакли и насладиться искусством управления куклами.</p></div>
 </section>
 <section class="place" id="tver_railway_station">
+<div class="place-lead">
 <h3>Tver Railway Station</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Стиль: эклектика | Период: 1896</p>
-<figure class="place-fig"><img src="../images/tver_railway_station.jpg" alt="Tver Railway Station"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/tver_railway_station.jpg" alt="Tver Railway Station" width="1280" height="960" style="height: 249px; max-height: 249px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/tver_railway_station_b.jpg" alt="Tver Railway Station — вид 2" width="330" height="247" style="height: 249px; max-height: 249px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Первый поезд отправился отсюда в 1897 году. Здание вокзала построено в эклектическом стиле. На территории вокзала расположены несколько кафе и магазинов. Ежедневно через вокзал проходят десятки поездов дальнего следования.</p>
 <p class="prose">Тверской вокзал был открыт в 1896 году и является одним из старейших железнодорожных вокзалов России. Со временем здание неоднократно перестраивалось и расширялось, приобретая современный облик. Вокзал играл ключевую роль в развитии транспортной инфраструктуры региона и служил важным связующим звеном между Москвой и северо-западными областями страны. Это один из символов Твери, важный транспортный узел и место встречи путешественников.</p></div>
 </section>
 <section class="place" id="tver_regional_art_museum">
+<div class="place-lead">
 <h3>Tver Regional Art Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/tver_regional_art_museum.jpg" alt="Tver Regional Art Museum"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/tver_regional_art_museum.jpg" alt="Tver Regional Art Museum" width="1280" height="960" style="height: 249px; max-height: 249px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/tver_regional_art_museum_b.jpg" alt="Tver Regional Art Museum — вид 2" width="330" height="247" style="height: 249px; max-height: 249px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Основана в 1986 году. Коллекция включает работы известных русских живописцев XIX–XX веков. Регулярно проводятся выставки современного искусства. Расположена в историческом здании Твери. Имеет статус областного учреждения культуры.</p>
 <p class="prose">Тверская областная картинная галерея была основана в 1986 году на базе местного художественного музея. Со временем коллекция значительно расширилась, пополнившись работами русских художников XIX–XX веков, включая произведения Левитана, Айвазовского и Репина. Галерея также известна выставками современных авторов и регулярными экспозициями местных мастеров. Посещение галереи позволяет познакомиться с выдающимися произведениями русской живописи и современным искусством Тверской области.</p></div>
 </section>
-<section class="place" id="tver_local_lore_museum">
-<h3>Tver Local Lore Museum</h3>
+<section class="place" id="tver_resurrection_cathedral">
+<div class="place-lead">
+<h3>Tver Resurrection Cathedral</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Стиль: эклектика | Период: 1893</p>
-<figure class="place-fig"><img src="../images/tver_local_lore_museum.jpg" alt="Tver Local Lore Museum"/></figure>
-<div class="place-desc"><p class="prose">Первый музей Тверской губернии был открыт в 1870 году. Коллекция музея включает предметы археологии, этнографии, живописи и декоративно-прикладного искусства. Особняк, в котором расположен музей, построен в стиле эклектики. В музее регулярно проводятся выставки и культурные мероприятия. На территории музея находится памятник архитектуры регионального значения.</p>
-<p class="prose">Тверской областной музей основан в 1870 году и является одним из старейших музеев Северо-Западного региона России. Изначально располагался в здании бывшего городского училища, позже неоднократно менял место расположения, пока не обосновался в историческом особняке XIX века. Музей сыграл важную роль в сохранении культурного наследия Тверской области, собирая экспонаты по истории края, искусству и археологии. Музей интересен посетителям возможностью познакомиться с историей и культурой Твери и Тверской области, увидеть уникальные артефакты и произведения искусства.</p></div>
+<p class="place-meta">Стиль: классицизм | Период: 1764 год</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/tver_resurrection_cathedral.jpg" alt="Tver Resurrection Cathedral" width="1280" height="960" style="height: 249px; max-height: 249px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/tver_resurrection_cathedral_b.jpg" alt="Tver Resurrection Cathedral — вид 2" width="330" height="247" style="height: 249px; max-height: 249px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Здание собора выполнено в стиле классицизма. Архитектором храма стал Иван Еготов. После реставрации храм приобрёл первоначальный облик. На колокольне установлены старинные колокола. Ежегодно здесь проводятся торжественные богослужения и концерты духовной музыки.</p>
+<p class="prose">Вознесенский собор Твери был заложен в 1764 году императрицей Екатериной II и освящён в честь Воскресения Христова. В годы советской власти храм был закрыт и использовался под складские помещения. После распада СССР началось возрождение православной культуры, и в 2008 году здание собора было возвращено верующим и заново освящено как Воскресенский кафедральный собор. Собор является важным памятником архитектуры XVIII века и символом духовного возрождения города.</p></div>
 </section>
 <section class="place" id="tver_river_station">
+<div class="place-lead">
 <h3>Tver River Station</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Стиль: русский модерн</p>
-<figure class="place-fig"><img src="../images/tver_river_station.jpg" alt="Tver River Station"/></figure>
-<div class="place-desc"><p class="prose">Здание станции выполнено в стиле русского модерна, характерного для начала XX века. Архитектором здания является неизвестный автор, предположительно инженер Г. Первоначально станция называлась Николаевской, позже получила современное название. Сооружение имеет характерные элементы модерна: плавные линии, арочные окна и декоративные детали. На территории станции сохранились оригинальные чугунные перила и фонари.</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/tver_river_station.jpg" alt="Tver River Station" width="1280" height="832" style="height: 217px; max-height: 217px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/tver_river_station_b.jpg" alt="Tver River Station — вид 2" width="330" height="247" style="height: 217px; max-height: 217px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Здание станции выполнено в стиле русского модерна, характерного для начала XX века. Архитектором здания является неизвестный автор, предположительно инженер Г. В. Барановский. Первоначально станция называлась Николаевской, позже получила современное название. Сооружение имеет характерные элементы модерна: плавные линии, арочные окна и декоративные детали. На территории станции сохранились оригинальные чугунные перила и фонари.</p>
 <p class="prose">Тверская железнодорожная станция была построена в конце XIX века и стала важным транспортным узлом города Твери. Со временем она утратила первоначальное значение, однако сохранила историческое значение как памятник архитектуры русского модерна. Станция привлекает туристов своей архитектурой и историей, позволяя познакомиться с архитектурным стилем модерн.</p></div>
 </section>
-<section class="place" id="tver_pdfband_0_dff3a250">
-<h3>Tver Sobor</h3>
-
-<p class="place-meta">Период: 1876–1884</p>
-<figure class="place-fig"><img src="../images/tver_pdfband_0_dff3a250.jpg" alt="Tver Sobor"/></figure>
-<div class="place-desc"><p class="prose">Первый каменный храм Твери. Символ политического влияния Тверского княжества. Собор неоднократно перестраивался и менял облик. Пожар начала XVIII века сильно повредил здание. На территории сохранились старинные захоронения.</p>
-<p class="prose">Тверской собор был построен в конце XV века и стал первым каменным храмом Твери. Сооружение выполняло функцию главного городского собора и символически связывало город с Москвой, подчеркивая значимость Тверского княжества. Собор пережил несколько перестроек и утратил первоначальные черты после пожара начала XVIII века. Посещение собора позволяет познакомиться с историей города и узнать больше о развитии архитектуры Тверской земли.</p></div>
-</section>
-<section class="place" id="tver_university">
-<h3>Tver University</h3>
-
-<p class="place-meta">Период: 1843</p>
-<figure class="place-fig"><img src="../images/tver_university.jpg" alt="Tver University"/></figure>
-<div class="place-desc"><p class="prose">Основан в 1967 году. Является крупнейшим высшим учебным заведением региона. Имеет филиалы в нескольких городах Тверской области. Выпускники университета работают в различных отраслях экономики и науки. Ежегодно привлекает тысячи студентов из разных регионов России.</p>
-<p class="prose">Тверской государственный университет основан в 1967 году. В советский период стал важным образовательным центром региона, обеспечивающим подготовку специалистов для промышленности и науки Тверской области. Сегодня вуз активно развивается, расширяя свою научную базу и образовательные программы. Университет является ведущим научно-образовательным учреждением Твери, предлагающим широкий спектр образовательных услуг и научных исследований.</p></div>
-</section>
 <section class="place" id="tver_river_volga_embankment">
+<div class="place-lead">
 <h3>Tver River Volga Embankment</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/tver_river_volga_embankment.jpg" alt="Tver River Volga Embankment"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/tver_river_volga_embankment.jpg" alt="Tver River Volga Embankment" width="1280" height="960" style="height: 207px; max-height: 207px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/tver_river_volga_embankment_b.jpg" alt="Tver River Volga Embankment — вид 2" width="330" height="205" style="height: 207px; max-height: 207px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Набережная была благоустроена и отреставрирована в последние десятилетия, сохранив исторический облик и добавив современные удобства. Здесь расположены памятник Петру I и мемориал в честь героев Великой Отечественной войны. На набережной регулярно проходят культурные мероприятия и фестивали. Набережная протянулась вдоль реки Волга почти на два километра.</p>
 <p class="prose">Волгоградская набережная Твери возникла в середине XIX века как место прогулок горожан и важный транспортный узел города. Со временем здесь появились красивые парки, памятники и уютные кафе, ставшие визитной карточкой Твери. Набережная Волги является одним из главных символов и мест отдыха жителей и гостей Твери, предлагая живописные виды на реку и городскую панораму.</p></div>
 </section>
+<section class="place" id="tver_saint_michael">
+<div class="place-lead">
+<h3>Tver Saint Michael</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Стиль: эклектика с элементами русского зодчества и псевдорусского стиля</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/tver_saint_michael.jpg" alt="Tver Saint Michael" width="1142" height="1600" style="height: 249px; max-height: 249px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/tver_saint_michael_b.jpg" alt="Tver Saint Michael — вид 2" width="330" height="247" style="height: 249px; max-height: 249px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Церковь выполнена в характерном для конца XIX века смешении стилей эклектики и русского зодчества. На фасаде здания расположены декоративные элементы, вдохновленные древнерусской архитектурой. Интерьер церкви украшен деревянными резными иконостасами и живописью. Церковь является памятником архитектуры федерального значения. Рядом с храмом расположен небольшой благоустроенный сквер.</p>
+<p class="prose">Церковь Святого Михаила в Твери была построена в конце XIX века по проекту архитектора Николая Васильевича Поздеева. Здание выполнено в стиле эклектики с элементами русского зодчества и псевдорусского стиля. Церковь играла важную роль в религиозной жизни города, являясь одним из главных храмов Тверской епархии. Церковь привлекает туристов своей уникальной архитектурой и атмосферой старинной русской провинции.</p></div>
+</section>
+<section class="place" id="tver_smolensky_cathedral">
+<div class="place-lead">
+<h3>Tver Smolensky Cathedral</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Стиль: московское барокко</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/tver_smolensky_cathedral.jpg" alt="Tver Smolensky Cathedral" width="1280" height="853" style="height: 222px; max-height: 222px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/tver_smolensky_cathedral_b.jpg" alt="Tver Smolensky Cathedral — вид 2" width="330" height="319" style="height: 222px; max-height: 222px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Храм возведён в стиле московского барокко. На фасаде собора расположены изящные белокаменные резные украшения. Собор неоднократно реставрировался, последний раз в конце XX века. В храме хранятся ценные иконы и церковная утварь XVIII-XIX веков. Рядом расположен мемориал воинам Великой Отечественной войны.</p>
+<p class="prose">Смоленский собор был построен в XVII веке, является одним из старейших храмов Твери и важнейшим памятником русского зодчества. В течение столетий храм играл важную духовную и культурную роль в жизни города, пережил многочисленные войны и пожары, сохранив уникальные фрески и иконы. Смоленский собор привлекает туристов своей историей, архитектурой и атмосферой старины, позволяя окунуться в атмосферу старинной русской провинции.</p></div>
+</section>
+<section class="place" id="tver_sobor">
+<div class="place-lead">
+<h3>Tver Sobor</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Период: 1876–1884</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/tver_sobor.jpg" alt="Tver Sobor" width="1280" height="809" style="height: 211px; max-height: 211px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/tver_sobor_b.jpg" alt="Tver Sobor — вид 2" width="330" height="440" style="height: 211px; max-height: 211px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Первый каменный храм Твери. Символ политического влияния Тверского княжества. Собор неоднократно перестраивался и менял облик. Пожар начала XVIII века сильно повредил здание. На территории сохранились старинные захоронения.</p>
+<p class="prose">Тверской собор был построен в конце XV века и стал первым каменным храмом Твери. Сооружение выполняло функцию главного городского собора и символически связывало город с Москвой, подчеркивая значимость Тверского княжества. Собор пережил несколько перестроек и утратил первоначальные черты после пожара начала XVIII века. Посещение собора позволяет познакомиться с историей города и узнать больше о развитии архитектуры Тверской земли.</p></div>
+</section>
+<section class="place" id="tver_soviet_square">
+<div class="place-lead">
+<h3>Tver Soviet Square</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/tver_soviet_square.jpg" alt="Tver Soviet Square" width="1280" height="746" style="height: 194px; max-height: 194px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/tver_soviet_square_b.jpg" alt="Tver Soviet Square — вид 2" width="330" height="220" style="height: 194px; max-height: 194px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">На площади расположены памятники Ленину и Ворошилову — символы советской эпохи. Здесь регулярно проводятся фестивали и праздники, посвящённые советскому наследию. Площадь благоустроена современными ландшафтными решениями, сохраняя исторический облик. Рядом находится здание бывшего кинотеатра «Тверь», ныне преобразованное в культурный центр. Ежегодно здесь проходит фестиваль ретроавтомобилей, привлекающий любителей советской техники.</p>
+<p class="prose">Советская площадь в Твери появилась в середине XX века как символ социалистического строительства и культурного центра города. Здесь проходили массовые мероприятия, концерты, демонстрации и праздничные гуляния. Площадь стала местом встреч горожан и важным элементом городской инфраструктуры. Советская площадь привлекает туристов и жителей своим историческим значением и атмосферой советского прошлого.</p></div>
+</section>
+<section class="place" id="tver_st_catherine">
+<div class="place-lead">
+<h3>Tver St Catherine</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Стиль: эклектика, русский стиль и неоготика | Период: 1716–1724</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/tver_st_catherine.jpg" alt="Tver St Catherine" width="1280" height="916" style="height: 239px; max-height: 239px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/tver_st_catherine_b.jpg" alt="Tver St Catherine — вид 2" width="330" height="440" style="height: 239px; max-height: 239px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Строительство храма началось в 1897 году и завершилось в 1904-м. Архитектурный стиль здания сочетает черты русского стиля и неоготики. Интерьер храма украшен живописью известных художников конца XIX века. Свято-Катеринский храм долгое время оставался центром общественной жизни города. После революции храм использовался под различные нужды, включая кинотеатр.</p>
+<p class="prose">Свято-Катеринский храм был построен в Твери в конце XIX века по проекту архитектора Николая Васильевича Поздеева. Храм стал значимым памятником архитектуры эклектики, сочетающей элементы русского стиля и неоготики. Строительство велось на средства тверских купцов и благотворителей, что позволило создать здание с богатым внутренним убранством и живописью, выполненной известными художниками того времени. Храм является важной архитектурной достопримечательностью Твери и привлекает внимание туристов своей необычной архитектурой и историческим значением.</p></div>
+</section>
+<section class="place" id="tver_steamboat_rex">
+<div class="place-lead">
+<h3>Tver Steamboat Rex</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/tver_steamboat_rex.jpg" alt="Tver Steamboat Rex" width="1280" height="670" style="height: 174px; max-height: 174px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/tver_steamboat_rex_b.jpg" alt="Tver Steamboat Rex — вид 2" width="330" height="204" style="height: 174px; max-height: 174px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Основу коллекции составляют исторические суда, построенные до 1940-х годов. Экспозиция включает несколько уникальных образцов паровых двигателей. На территории музея регулярно проводятся экскурсии и тематические мероприятия. Ряд экспонатов имеет статус памятников культурного наследия России. Посещение возможно круглый год.</p>
+<p class="prose">Музей старого парохода расположен в Твери и представляет коллекцию старинных судов Волги, включая уникальные образцы паровых кораблей начала XX века. Коллекция музея позволяет увидеть развитие судостроительной отрасли региона и познакомиться с историей водного транспорта России. Среди экспонатов есть знаменитый буксир «Красная звезда», сыгравший важную роль в Великой Отечественной войне. Музей интересен поклонникам истории судоходства, ценителям техники и всем, кто хочет узнать больше о развитии транспортной инфраструктуры России.</p></div>
+</section>
+<section class="place" id="tver_travel_palace">
+<div class="place-lead">
+<h3>Tver Travel Palace</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Стиль: русская эклектика | Период: 1790–1800</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/tver_travel_palace.jpg" alt="Tver Travel Palace" width="1280" height="854" style="height: 222px; max-height: 222px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/tver_travel_palace_b.jpg" alt="Tver Travel Palace — вид 2" width="330" height="262" style="height: 222px; max-height: 222px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Дворец был возведён в конце XIX века. Архитектор здания — Александр Шмидт. Стиль дворца сочетает элементы классицизма, барокко и модерна. Здание служило центром светской жизни города. Travel Palace сохранился до наших дней и сегодня используется как гостиница.</p>
+<p class="prose">Трёвожная башня и крепостные стены Твери давно стали частью истории русского зодчества, однако архитектурное наследие города богато и разнообразно. В XIX веке в Твери был построен роскошный дворец под названием Travel Palace, ставший одним из символов местного дворянства и купеческого сословия. Его архитектором стал талантливый инженер Александр Шмидт, вдохновлявшийся европейскими стилями и традициями. Дворец служил местом встреч знати и элиты города, привлекал внимание горожан своей изысканностью и величием. Travel Palace является ярким образцом русской эклектики конца XIX века и представляет собой уникальное сочетание различных архитектурных стилей, отражающих культурную и социальную жизнь региона.</p></div>
+</section>
+<section class="place" id="tver_trekhsvyatskaya">
+<div class="place-lead">
+<h3>Tver Trekhsvyatskaya</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Стиль: эклектика, модерн</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/tver_trekhsvyatskaya.jpg" alt="Tver Trekhsvyatskaya" width="1280" height="768" style="height: 200px; max-height: 200px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/tver_trekhsvyatskaya_b.jpg" alt="Tver Trekhsvyatskaya — вид 2" width="330" height="247" style="height: 200px; max-height: 200px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">На улице находится Дом-музей Михаила Афанасьевича Булгакова, где писатель жил и работал над романом «Белая гвардия». Доходный дом № 6 построен по проекту архитектора Ивана Блинкова. Здание № 8 является памятником архитектуры федерального значения. По адресу улица Трехсвятская, д.</p>
+<p class="prose">Трехсвятская улица возникла в середине XIX века и изначально называлась Большая Спасская. В конце XIX века получила современное название в честь расположенных поблизости храмов Троицы Живоначальной и Святителей Московских. Здесь находились знаменитые доходные дома, принадлежавшие купцам и промышленникам, среди которых особняк братьев Бахрушиных, ныне известный как Дом-музей М. А. Булгакова. Улица интересна своей архитектурой конца XIX — начала XX веков, здесь сохранились здания, отражающие стиль эклектики и модерна.</p></div>
+</section>
+<section class="place" id="tver_university">
+<div class="place-lead">
+<h3>Tver University</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Период: 1843</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/tver_university.jpg" alt="Tver University" width="1280" height="977" style="height: 249px; max-height: 249px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/tver_university_b.jpg" alt="Tver University — вид 2" width="330" height="247" style="height: 249px; max-height: 249px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Основан в 1967 году. Является крупнейшим высшим учебным заведением региона. Имеет филиалы в нескольких городах Тверской области. Выпускники университета работают в различных отраслях экономики и науки. Ежегодно привлекает тысячи студентов из разных регионов России.</p>
+<p class="prose">Тверской государственный университет основан в 1967 году. В советский период стал важным образовательным центром региона, обеспечивающим подготовку специалистов для промышленности и науки Тверской области. Сегодня вуз активно развивается, расширяя свою научную базу и образовательные программы. Университет является ведущим научно-образовательным учреждением Твери, предлагающим широкий спектр образовательных услуг и научных исследований.</p></div>
+</section>
 <section class="place" id="tver_white_trinity">
+<div class="place-lead">
 <h3>Tver White Trinity</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Стиль: эклектика | Период: 1714–1726</p>
-<figure class="place-fig"><img src="../images/tver_white_trinity.jpg" alt="Tver White Trinity"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/tver_white_trinity.jpg" alt="Tver White Trinity" width="1280" height="849" style="height: 221px; max-height: 221px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/tver_white_trinity_b.jpg" alt="Tver White Trinity — вид 2" width="330" height="319" style="height: 221px; max-height: 221px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Храм построен в эклектическом стиле, сочетающем черты русского классицизма и византийской архитектуры. Здание церкви имеет характерные купола с позолоченными крестами. Внутри храма сохранились уникальные росписи и иконы, выполненные местными мастерами. Церковь является памятником градостроительства конца XIX века. На протяжении многих лет храм служил духовным центром города.</p>
 <p class="prose">Белая Троица — православная церковь в Твери, построенная в конце XIX века в стиле эклектики. Храм был возведён благодаря пожертвованиям горожан и освящён в честь Святой Троицы. Здание выделяется своей оригинальной архитектурой, сочетающей элементы русского классицизма и византийского стиля. Церковь привлекает туристов и верующих своим историческим значением и уникальной архитектурной красотой.</p></div>
 </section>
-<section class="place" id="tver_pdfband_3_dea77b64">
-<h3>Ансамбль зданий площади Ленина</h3>
+<section class="place" id="tver_yard">
+<div class="place-lead">
+<h3>Tver Yard</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Стиль: конструктивизм, неоклассицизм</p>
-<figure class="place-fig"><img src="../images/tver_pdfband_3_dea77b64.jpg" alt="Ансамбль зданий площади Ленина"/></figure>
-<div class="place-desc"><p class="prose">Здание администрации города выполнено в неоклассическом стиле с элементами конструктивизма. На площади установлены памятники Ленину и другим выдающимся деятелям советского периода. Архитектурный ансамбль формировался постепенно, начиная с 1930-х годов. Площадь Ленина была благоустроена и получила современный облик после реконструкции в конце XX — начале XXI века. Здесь регулярно проходят городские мероприятия и праздники.</p>
-<p class="prose">Ансамбль зданий площади Ленина сложился в первой половине XX века и является памятником советской архитектуры. Здесь расположены здания, построенные в стиле конструктивизма и неоклассицизма, отражающие характерные черты градостроительства того периода. Архитектурный ансамбль включает несколько значимых объектов, среди которых выделяется здание администрации города Твери, выполненное в строгих классических формах. Площадь Ленина является центральной площадью города и важным общественным пространством, символизирующим историческое развитие Твери. Посещение ансамбля позволяет познакомиться с архитектурной историей региона и ощутить атмосферу советского градостроительства.</p></div>
+<p class="place-meta">Стиль: эклектика и конструктивизм</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/tver_yard.jpg" alt="Tver Yard" width="1280" height="960" style="height: 202px; max-height: 202px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/tver_yard_b.jpg" alt="Tver Yard — вид 2" width="330" height="200" style="height: 202px; max-height: 202px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Конный двор существовал до начала XX века, когда начался массовый переход на механическое транспортное средство. С середины XX века объект использовался преимущественно для обслуживания автотранспорта. Сегодня здание является важным логистическим узлом города. Архитектура здания сочетает элементы эклектики и конструктивизма. Территория комплекса включает несколько зданий различного назначения.</p>
+<p class="prose">Тверской конный двор был основан в конце XIX века и долгое время являлся крупнейшим предприятием по производству и обслуживанию конной тяги в регионе. Со временем необходимость в конной тяге снизилась, и здание переоборудовали под автомобильное хозяйство. Сегодня здесь расположен современный автопарк и логистический центр. Здание интересно своей историей и архитектурным решением, отражающим эпоху развития транспорта в Твери.</p></div>
 </section>
-<section class="place" id="tver_pdfband_9_c03e2bcb">
-<h3>Дворец культуры Металлист</h3>
+<section class="place" id="tver_place_3">
+<div class="place-lead">
+<h3>Извините, но я не могу помочь с этой просьбой.</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Стиль: сталинский ампир | Период: 1967</p>
-<figure class="place-fig"><img src="../images/tver_pdfband_9_c03e2bcb.jpg" alt="Дворец культуры Металлист"/></figure>
-<div class="place-desc"><p class="prose">Построен в стиле сталинского ампира. Является памятником архитектуры регионального значения. Имеет высоту около 40 метров. До постройки Дворца культуры жители района испытывали дефицит культурных мероприятий. Сегодня здание используется для проведения концертов, выставок и театральных постановок.</p>
-<p class="prose">Дворец культуры «Металлист» был открыт в Твери в 1967 году и предназначался для досуга работников предприятий тяжёлого машиностроения. Сооружение стало знаковым объектом города благодаря оригинальной архитектуре и сталинской высотности. В годы своего расцвета здесь проходили концерты, выставки, спектакли и массовые мероприятия. Здание привлекает внимание туристов своей необычной формой и величественным видом, символизируя эпоху советского модернизма.</p></div>
-</section>
-<section class="place" id="tver_pdfband_1_79351208">
-<h3>Иоанна Предтечи</h3>
 
-<p class="place-meta">Стиль: барокко | Период: 1682–1693</p>
-<figure class="place-fig"><img src="../images/tver_pdfband_1_79351208.jpg" alt="Иоанна Предтечи"/></figure>
-<div class="place-desc"><p class="prose">Построен в 1688 году. Освящён в 1704 году. Сильно пострадал от пожара в XVIII веке и был перестроен. Имеет уникальный деревянный иконостас. На стенах сохранились старинные фрески.</p>
-<p class="prose">Храм Иоанна Предтечи в Твери является старейшим каменным храмом города и памятником архитектуры XVII века. Построен в честь святого Иоанна Крестителя, крестившего Иисуса Христа. Храм был заложен в 1688 году и освящён в 1704 году. В XVIII веке здание храма сильно пострадало от пожара и было перестроено в стиле барокко. Среди интересных фактов стоит отметить уникальную резную деревянную иконостасную перегородку и старинные фрески, сохранившиеся до наших дней. Здание привлекает туристов своей исторической ценностью и архитектурной красотой, позволяя погрузиться в атмосферу старой русской провинции.</p></div>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/tver_place_3.jpg" alt="Извините, но я не могу помочь с этой просьбой." width="1280" height="960" style="height: 188px; max-height: 188px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/tver_place_3_b.jpg" alt="Извините, но я не могу помочь с этой просьбой. — вид 2" width="330" height="186" style="height: 188px; max-height: 188px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Музей ТГМВЦ демонстрирует богатое культурное наследие Твери через свою обширную коллекцию местных артефактов и исторических экспонатов. Основанный в [FOUNDING YEAR], музей является одним из старейших учреждений, посвященных сохранению культурного наследия Твери. В нем хранится более [NUMBER] артефактов, датируемых веками назад, которые дают представление о повседневной жизни и социальных структурах. Музей регулярно проводит специальные выставки, подчеркивающие менее известные аспекты истории и искусства Твери. Расположенный в историческом здании, построенном в период [АРХИТЕКТУРНЫЙ ПЕРИОД], сам музей является свидетельством архитектурного мастерства.</p>
+<p class="prose">Основанный в [YEAR], музей изначально был создан для сохранения и展示 значительных исторических артефактов и реликвий прошлого Твери. Со временем он стал важным центром для изучения региональной культуры и традиций, привлекая посетителей, стремящихся понять эволюцию города и его уникальную идентичность. Посетители приходят сюда, чтобы изучить тонкие детали истории Твери и узнать больше о традициях и обычаях региона.</p></div>
 </section>
 </body>
 </html>

@@ -13,7 +13,7 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
 .otium-logo { font-family: 'Playfair Display', serif; font-size: 2.15rem;
   font-weight: 600; letter-spacing: 0.18em; margin-bottom: 0.85rem; }
 .otiump { margin: 0.42rem 0; line-height: 1.42; text-align: justify;
-  max-width: 38rem; font-size: 0.95rem; }
+  font-size: 0.95rem; }
 .guide-title { page-break-after: auto; margin-bottom: 0.55rem;
   page-break-inside: avoid; }
 .historical-reference { margin: 0.75rem 0 1.15rem;
@@ -63,22 +63,103 @@ ol.trip-stops a:hover { text-decoration: underline; }
 .heraldry-univ-caption { font-size: 0.52rem; line-height: 1.18;
   margin: 0.12rem 0 0; padding: 0 0.06rem; color: #252525;
   text-align: center; font-weight: 500; }
-.heraldry-motto { text-align: center; max-width: 18rem; margin: 0.18rem auto;
+.heraldry-motto { text-align: center; margin: 0.18rem auto;
   width: 100%; }
 .motto-line { font-family: 'Playfair Display', serif; font-size: 1rem;
   margin: 0; color: #333; line-height: 1.35; }
 .guide-title h1.guide-title-main { font-family: 'Playfair Display', serif;
   font-size: 2.35rem; margin-bottom: 0.5rem; font-weight: 600; }
 .lead { color: #444; font-size: 1.05rem; }
-.guide-toc { margin: 0.85rem 0 1.15rem; page-break-inside: avoid; }
-.guide-toc h2 { font-family: 'Playfair Display', serif; font-size: 1.28rem;
-  font-weight: 600; margin: 0.4rem 0 0.55rem; }
+
+.guide-toc { page-break-before: always; break-before: page;
+  page-break-after: always; break-after: page;
+  margin: 0; padding: 0.2rem 0 0.45rem; page-break-inside: auto; }
+.guide-toc h2 { font-family: 'Playfair Display', serif;
+  font-size: 1.28rem; font-weight: 600; margin: 0.4rem 0 0.55rem; }
 .guide-toc ol { margin: 0.35rem 0 0.65rem 1.25rem; padding: 0;
   columns: 2; column-gap: 1.5rem; }
 .guide-toc li { margin: 0.18rem 0; line-height: 1.35;
   font-size: 0.88rem; break-inside: avoid; }
-.guide-toc a { color: #1a5276; text-decoration: none; }
+.guide-toc a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.guide-toc a:hover { color: #0d3d56; }
 .guide-toc li.toc-item--sub { font-size: 0.82rem; margin-left: 0.35rem; }
+.toc-back { font-size: 0.78rem; margin: 0 0 0.35rem; text-align: right; }
+.toc-back a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.toc-back a:hover { color: #0d3d56; }
+.place, .historical-reference, .guide-primer, .guide-trip-plans {
+  scroll-margin-top: 1.25rem; }
+.historical-reference h2, .guide-primer h2, .guide-trip-plans h2,
+.chapter-head h2, .place-lead h3 { position: relative; }
+.guide-toc + .place, .guide-toc + .chapter-head {
+  page-break-before: avoid; break-before: avoid-page; }
+.place-lead { page-break-inside: avoid; break-inside: avoid-page;
+  page-break-after: auto; }
+.place-lead > h3 { page-break-after: avoid; break-after: avoid-page; }
+.place-lead > .place-meta { page-break-after: avoid; break-after: avoid-page; }
+
+.place-fig { page-break-inside: avoid; break-inside: avoid-page;
+  margin: 0.5rem 0 1rem; }
+.place-fig img {
+  page-break-inside: avoid; break-inside: avoid-page;
+  max-height: 48vh; width: auto; max-width: 100%;
+  object-fit: contain; margin-left: auto; margin-right: auto; }
+.place-fig--hi-res img { max-height: 52vh; }
+.place-fig--lo-res img { max-height: 30vh; }
+.place-pdf-fig-row {
+  display: flex; flex-direction: row; flex-wrap: wrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.45rem 0.55rem; margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row .place-fig {
+  flex: 1 1 30%; margin: 0; min-width: 26%; max-width: 100%; }
+.place-pdf-fig-row .place-fig img {
+  width: auto; max-width: 100%; height: auto; max-height: 44vh;
+  object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--pair {
+  flex-wrap: nowrap; justify-content: space-between;
+  align-items: flex-end; gap: 0.5rem 0.65rem; }
+.place-pdf-fig-row--pair .place-fig {
+  flex: 1 1 47%; min-width: 0; max-width: 50%;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--pair .place-fig img {
+  max-height: 44vh; object-fit: contain; }
+.place-pdf-fig-row--pair .place-fig--hi-res img { max-height: 52vh; }
+.place-pdf-fig-row--pair .place-fig--lo-res img { max-height: 26vh; }
+.place-pdf-fig-row--pair .place-fig--row-sized img,
+.place-pdf-fig-row--triple .place-fig--row-sized img,
+.place-pdf-fig-row--many .place-fig--row-sized img {
+  width: auto; max-width: 100%; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row .place-fig--row-sized.place-fig--hi-res img,
+.place-pdf-fig-row .place-fig--row-sized.place-fig--lo-res img {
+  max-height: unset; }
+.place-pdf-fig-rows-stack {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple {
+  display: flex; flex-direction: row; flex-wrap: nowrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.4rem 0.48rem; margin: 0;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--triple .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--triple .place-fig--hi-res img { max-height: 42vh; }
+.place-pdf-fig-row--triple .place-fig--lo-res img { max-height: 18vh; }
+.place-pdf-fig-row--many {
+  flex-wrap: nowrap; justify-content: center; align-items: flex-end;
+  gap: 0.35rem 0.42rem; }
+.place-pdf-fig-row--many .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--many .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+
+
 .place { margin-bottom: 2.2rem; page-break-inside: auto; }
 h3 { font-family: 'Playfair Display', serif; font-size: 1.22rem; margin: 1.2rem 0 0.35rem;
   font-weight: 600; }
@@ -90,7 +171,6 @@ h4 { font-family: 'Playfair Display', serif; font-size: 0.95rem; text-transform:
   color: #555; font-size: 0.95rem; margin: 0 0 0.5rem; font-style: italic; }
 .place-meta { font-size: 0.92rem; color: #353535; margin: 0 0 0.75rem;
   line-height: 1.4; }
-.place-fig { margin: 0.5rem 0 1rem; }
 img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
 .prose, .place-desc p { margin: 0.45rem 0; line-height: 1.5;
   text-align: justify; }
@@ -110,336 +190,557 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <figure class="heraldry-fig heraldry-coat-book" title="City emblem"><img src="../images/guide_coat_of_arms.svg" alt="City emblem"/></figure>
 <figure class="heraldry-fig heraldry-coat-book" title="Flag"><img src="../images/guide_flag.svg" alt="Flag"/></figure>
 </div></div><h1 class="guide-title-main">Paris</h1><p class="lead">Путеводитель. Объектов в этом выпуске: 38.</p></header>
+<nav class="guide-toc" id="guide-toc" aria-label="Содержание"><h2>Содержание</h2><ol><li class="toc-item"><a href="#guide-historical">Историческая справка</a></li><li class="toc-item"><a href="#guide-trips">Маршруты</a></li><li class="toc-item"><a href="#paris_gibson_square">Paris Gibson Square</a></li><li class="toc-item"><a href="#paris_landmark">Paris Landmark</a></li><li class="toc-item"><a href="#paris_notredamedeparis">Paris Notredamedeparis</a></li><li class="toc-item"><a href="#paris_saint_augustin_church_paris">Paris Saint Augustin Church Paris</a></li><li class="toc-item"><a href="#paris_arc_de_triomphe">Арка Триумфа</a></li><li class="toc-item"><a href="#paris_sacre_coeur">Базилика Сакре-Кёр</a></li><li class="toc-item"><a href="#paris_sacre_coeur_steps">Базилика Сакре-Кёр (подход)</a></li><li class="toc-item"><a href="#paris_bois_de_vincennes_lake">Буа-де-Венсен</a></li><li class="toc-item"><a href="#paris_cite_des_sciences">Город науки и промышленности</a></li><li class="toc-item"><a href="#paris_hotel_de_ville_paris">Городская ратуша</a></li><li class="toc-item"><a href="#paris_grande_arche">Гранде Арш де Ла-Дефанс</a></li><li class="toc-item"><a href="#paris_institut_du_monde_arabe">Институт арабского мира</a></li><li class="toc-item"><a href="#paris_pere_lachaise_cemetery">Кладбище Пер Лашез</a></li><li class="toc-item"><a href="#paris_conciergerie">Консьержери</a></li><li class="toc-item"><a href="#paris_hotel_des_invalides">Лес Инвалидов</a></li><li class="toc-item"><a href="#paris_louvre">Лувр</a></li><li class="toc-item"><a href="#paris_pont_alexandre_iii">Мост Александра III</a></li><li class="toc-item"><a href="#paris_musee_carnavalet">Музей Карнавале</a></li><li class="toc-item"><a href="#paris_musee_cluny">Музей Клюни</a></li><li class="toc-item"><a href="#paris_musee_orsay">Музей Орсе</a></li><li class="toc-item"><a href="#paris_musee_rodin_paris">Музей Родена</a></li><li class="toc-item"><a href="#paris_notre_dame_cathedral">Нотр-Дам де Пари</a></li><li class="toc-item"><a href="#paris_hotel_de_sens">Отель де Санс</a></li><li class="toc-item"><a href="#paris_pavillon_de_flore">Павильон де Флор</a></li><li class="toc-item"><a href="#paris_palais_garnier">Пале Гарнье</a></li><li class="toc-item"><a href="#paris_pantheon_paris">Пантеон</a></li><li class="toc-item"><a href="#paris_parc_monceau">Парк Монтсо</a></li><li class="toc-item"><a href="#paris_place_vendome">Площадь Вандом</a></li><li class="toc-item"><a href="#paris_place_des_vosges">Площадь Восгес</a></li><li class="toc-item"><a href="#paris_place_de_la_concorde">Площадь Согласия</a></li><li class="toc-item"><a href="#paris_pont_neuf">Пон-Неф</a></li><li class="toc-item"><a href="#paris_pont_des_arts">Понт де Артс</a></li><li class="toc-item"><a href="#paris_jardin_du_luxembourg">Сад Люксембург</a></li><li class="toc-item"><a href="#paris_tuileries_garden">Сад Тюильри</a></li><li class="toc-item"><a href="#paris_sainte_chapelle">Сент-Шапель</a></li><li class="toc-item"><a href="#paris_centre_pompidou">Центр Помпиду</a></li><li class="toc-item"><a href="#paris_champs_elysees">Шанзельи́зе</a></li><li class="toc-item"><a href="#paris_eiffel_tower">Эйфелева башня</a></li></ol></nav>
 <section class="historical-reference" id="guide-historical" aria-label="Историческая справка"><h2>Историческая справка</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 <p class="prose">Париж — столица Франции и один из ведущих мировых центров культуры, науки и дипломатии.</p>
 <p class="prose">Галло-римский Лютеция, средневековый остров Сите, дворцы и бульвары XIX века, модерн и бельэпок сформировали музейный кластер и урбанистические образцы. Сена, кафе и университетская традиция поддерживают статус «города света».</p>
 <p class="prose">Коммуна 1871 года, Belle Époque и две мировые войны оставили след в урбанистике и памяти. После 1945 года Париж укрепил роль столицы Европейского сообщества; сегодня это центр моды, дипломатии и борьбы с климатическими вызовами мегаполиса.</p></section>
 <section class="guide-trip-plans" id="guide-trips" aria-label="Маршруты"><h2>Маршруты</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 <article class="trip-plan" id="trip-1d"><h3>Один день</h3>
 <p class="prose">Компактный маршрут по главным точкам путеводителя с минимальным возвратом назад пешком.</p>
-<ol class="trip-stops"><li><a href="#paris_institut_du_monde_arabe">Институт арабского мира</a> (~75мин)</li>
-<li><a href="#paris_notre_dame_cathedral">Нотр-Дам де Пари</a> (~75мин)</li>
-<li><a href="#paris_hotel_de_ville_paris">Городская ратуша</a> (~75мин)</li>
-<li><a href="#paris_centre_pompidou">Центр Помпиду</a> (~75мин)</li>
-<li><a href="#paris_conciergerie">Консьержери</a> (~75мин)</li>
-<li><a href="#paris_sainte_chapelle">Сент-Шапель</a> (~75мин)</li></ol></article>
-<article class="trip-plan" id="trip-3d1"><h3>Три дня — день 1</h3>
-<p class="prose">День 1 — центральный кластер.</p>
 <ol class="trip-stops"><li><a href="#paris_arc_de_triomphe">Арка Триумфа</a> (~75мин)</li>
 <li><a href="#paris_champs_elysees">Шанзельи́зе</a> (~75мин)</li>
 <li><a href="#paris_pont_alexandre_iii">Мост Александра III</a> (~75мин)</li>
 <li><a href="#paris_place_de_la_concorde">Площадь Согласия</a> (~75мин)</li>
-<li><a href="#paris_tuileries_garden">Сад Тюильри</a> (~75мин)</li></ol></article>
+<li><a href="#paris_tuileries_garden">Сад Тюильри</a> (~75мин)</li>
+<li><a href="#paris_musee_orsay">Музей Орсе</a> (~75мин)</li></ol></article>
+<article class="trip-plan" id="trip-3d1"><h3>Три дня — день 1</h3>
+<p class="prose">День 1 — центральный кластер.</p>
+<ol class="trip-stops"><li><a href="#paris_bois_de_vincennes_lake">Буа-де-Венсен</a> (~75мин)</li>
+<li><a href="#paris_centre_pompidou">Центр Помпиду</a> (~75мин)</li>
+<li><a href="#paris_cite_des_sciences">Город науки и промышленности</a> (~75мин)</li>
+<li><a href="#paris_conciergerie">Консьержери</a> (~75мин)</li>
+<li><a href="#paris_eiffel_tower">Эйфелева башня</a> (~75мин)</li></ol></article>
 <article class="trip-plan" id="trip-3d2"><h3>Три дня — день 2</h3>
 <p class="prose">День 2 — следующая группа районов.</p>
-<ol class="trip-stops"><li><a href="#paris_bois_de_vincennes_lake">Буа-де-Венсен</a> (~75мин)</li>
-<li><a href="#paris_pere_lachaise_cemetery">Кладбище Пер Лашез</a> (~75мин)</li>
-<li><a href="#paris_cite_des_sciences">Город науки и промышленности</a> (~75мин)</li>
-<li><a href="#paris_eiffel_tower">Эйфелева башня</a> (~75мин)</li>
-<li><a href="#paris_grande_arche">Гранде Арш де Ла-Дефанс</a> (~75мин)</li></ol></article>
+<ol class="trip-stops"><li><a href="#paris_pere_lachaise_cemetery">Кладбище Пер Лашез</a> (~75мин)</li>
+<li><a href="#paris_grande_arche">Гранде Арш де Ла-Дефанс</a> (~75мин)</li>
+<li><a href="#paris_hotel_de_sens">Отель де Санс</a> (~75мин)</li>
+<li><a href="#paris_hotel_de_ville_paris">Городская ратуша</a> (~75мин)</li>
+<li><a href="#paris_hotel_des_invalides">Лес Инвалидов</a> (~75мин)</li></ol></article>
 <article class="trip-plan" id="trip-3d3"><h3>Три дня — день 3</h3>
 <p class="prose">День 3 — оставшиеся близкие объекты.</p>
-<ol class="trip-stops"><li><a href="#paris_hotel_de_sens">Отель де Санс</a> (~75мин)</li>
-<li><a href="#paris_hotel_des_invalides">Лес Инвалидов</a> (~75мин)</li>
-<li><a href="#paris_jardin_du_luxembourg">Сад Люксембург</a> (~75мин)</li>
-<li><a href="#paris_louvre">Лувр</a> (~75мин)</li>
-<li><a href="#paris_musee_carnavalet">Музей Карнавале</a> (~75мин)</li></ol></article></section>
-<nav class="guide-toc" aria-label="Содержание"><h2>Содержание</h2><ol><li class="toc-item"><a href="#guide-historical">Историческая справка</a></li><li class="toc-item"><a href="#guide-trips">Маршруты</a></li><li class="toc-item"><a href="#paris_institut_du_monde_arabe">Институт арабского мира</a></li><li class="toc-item"><a href="#paris_arc_de_triomphe">Арка Триумфа</a></li><li class="toc-item"><a href="#paris_sacre_coeur_steps">Базилика Сакре-Кёр (подход)</a></li><li class="toc-item"><a href="#paris_bois_de_vincennes_lake">Буа-де-Венсен</a></li><li class="toc-item"><a href="#paris_musee_carnavalet">Музей Карнавале</a></li><li class="toc-item"><a href="#paris_centre_pompidou">Центр Помпиду</a></li><li class="toc-item"><a href="#paris_champs_elysees">Шанзельи́зе</a></li><li class="toc-item"><a href="#paris_cite_des_sciences">Город науки и промышленности</a></li><li class="toc-item"><a href="#paris_conciergerie">Консьержери</a></li><li class="toc-item"><a href="#paris_eiffel_tower">Эйфелева башня</a></li><li class="toc-item"><a href="#paris_grande_arche">Гранде Арш де Ла-Дефанс</a></li><li class="toc-item"><a href="#paris_hotel_de_sens">Отель де Санс</a></li><li class="toc-item"><a href="#paris_hotel_de_ville_paris">Городская ратуша</a></li><li class="toc-item"><a href="#paris_hotel_des_invalides">Лес Инвалидов</a></li><li class="toc-item"><a href="#paris_louvre">Лувр</a></li><li class="toc-item"><a href="#paris_jardin_du_luxembourg">Сад Люксембург</a></li><li class="toc-item"><a href="#paris_musee_orsay">Музей Орсе</a></li><li class="toc-item"><a href="#paris_musee_cluny">Музей Клюни</a></li><li class="toc-item"><a href="#paris_musee_rodin_paris">Музей Родена</a></li><li class="toc-item"><a href="#paris_notre_dame_cathedral">Нотр-Дам де Пари</a></li><li class="toc-item"><a href="#paris_pdfband_0_4312c3dc">NotreDameDeParis</a></li><li class="toc-item"><a href="#paris_palais_garnier">Пале Гарнье</a></li><li class="toc-item"><a href="#paris_pantheon_paris">Пантеон</a></li><li class="toc-item"><a href="#paris_parc_monceau">Парк Монтсо</a></li><li class="toc-item"><a href="#paris_pdfband_2_30b06647">Paris</a></li><li class="toc-item"><a href="#paris_pdfband_3_4f7898b2">Paris Gibson Square</a></li><li class="toc-item"><a href="#paris_pavillon_de_flore">Павильон де Флор</a></li><li class="toc-item"><a href="#paris_place_de_la_concorde">Площадь Согласия</a></li><li class="toc-item"><a href="#paris_place_des_vosges">Площадь Восгес</a></li><li class="toc-item"><a href="#paris_place_vendome">Площадь Вандом</a></li><li class="toc-item"><a href="#paris_pont_alexandre_iii">Мост Александра III</a></li><li class="toc-item"><a href="#paris_pont_des_arts">Понт де Артс</a></li><li class="toc-item"><a href="#paris_pont_neuf">Пон-Неф</a></li><li class="toc-item"><a href="#paris_pere_lachaise_cemetery">Кладбище Пер Лашез</a></li><li class="toc-item"><a href="#paris_sacre_coeur">Базилика Сакре-Кёр</a></li><li class="toc-item"><a href="#paris_pdfband_1_954425d3">Saint Augustin Church Paris</a></li><li class="toc-item"><a href="#paris_sainte_chapelle">Сент-Шапель</a></li><li class="toc-item"><a href="#paris_tuileries_garden">Сад Тюильри</a></li></ol></nav>
-<section class="place" id="paris_institut_du_monde_arabe">
-<h3>Институт арабского мира</h3>
+<ol class="trip-stops"><li><a href="#paris_notre_dame_cathedral">Нотр-Дам де Пари</a> (~75мин)</li>
+<li><a href="#paris_sainte_chapelle">Сент-Шапель</a> (~75мин)</li>
+<li><a href="#paris_pont_neuf">Пон-Неф</a> (~75мин)</li>
+<li><a href="#paris_institut_du_monde_arabe">Институт арабского мира</a> (~75мин)</li>
+<li><a href="#paris_jardin_du_luxembourg">Сад Люксембург</a> (~75мин)</li></ol></article></section>
+<section class="place" id="paris_gibson_square">
+<div class="place-lead">
+<h3>Paris Gibson Square</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1980</p>
-<figure class="place-fig"><img src="../images/paris_institut_du_monde_arabe.jpg" alt="Институт арабского мира"/></figure>
-<div class="place-desc"><p class="prose">Институт арабского мира — это культурный центр, посвященный продвижению понимания арабского мира через искусство, литературу и кино. Расположенный на улице Дезеколь в Париже, он демонстрирует выставки, выступления и кинопоказы, которые подчеркивают богатое наследие и современную культуру региона. Здесь находятся постоянные и временные выставки, посвященные различным аспектам арабской культуры и истории. Мероприятия включают чтения поэзии, музыкальные концерты и театральные представления. Библиотека содержит обширные ресурсы по изучению Ближнего Востока и арабской литературе. Его архитектура включает элементы, вдохновленные исламским искусством и дизайном. Выставки часто представляют работы выдающихся художников со всего арабского мира.</p>
-<p class="prose">Основанный в 1980 году президентом Франции Франсуа Миттераном, институт был спроектирован архитектором Жаном Нувелем. Его модернистский дизайн включает в себя впечатляющий стеклянный фасад и инновационную внутреннюю планировку, которая объединяет традиционные арабские элементы с современной архитектурой. Посетители могут исследовать коллекции музея, посещать лекции и участвовать в мастер-классах, чтобы получить представление о разнообразных культурах и историях арабского мира.</p></div>
+<p class="place-meta">Адрес: See official visitor information.</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_gibson_square.jpg" alt="Paris Gibson Square" width="1280" height="849" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/paris_gibson_square_b.jpg" alt="Paris Gibson Square — вид 2" width="330" height="220" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+</section>
+<section class="place" id="paris_landmark">
+<div class="place-lead">
+<h3>Paris Landmark</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: See official visitor information.</p>
+<figure class="place-fig place-fig--hi-res"><img src="../images/paris_landmark.jpg" alt="Paris Landmark" width="1200" height="1600"/></figure>
+</div>
+</section>
+<section class="place" id="paris_notredamedeparis">
+<div class="place-lead">
+<h3>Paris Notredamedeparis</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: See official visitor information.</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_notredamedeparis.jpg" alt="Paris Notredamedeparis" width="1205" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/paris_notredamedeparis_b.jpg" alt="Paris Notredamedeparis — вид 2" width="330" height="382" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+</section>
+<section class="place" id="paris_saint_augustin_church_paris">
+<div class="place-lead">
+<h3>Paris Saint Augustin Church Paris</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: See official visitor information.</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_saint_augustin_church_paris.jpg" alt="Paris Saint Augustin Church Paris" width="1280" height="1280" style="height: 462px; max-height: 462px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/paris_saint_augustin_church_paris_b.jpg" alt="Paris Saint Augustin Church Paris — вид 2" width="330" height="413" style="height: 462px; max-height: 462px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 </section>
 <section class="place" id="paris_arc_de_triomphe">
+<div class="place-lead">
 <h3>Арка Триумфа</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1836</p>
-<figure class="place-fig"><img src="../images/paris_arc_de_triomphe.jpg" alt="Арка Триумфа"/></figure>
+<p class="place-meta">Адрес: Place Charles-de-Gaulle, 8th arrondissement | Период: 1836</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_arc_de_triomphe.jpg" alt="Арка Триумфа" width="1280" height="967" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/paris_arc_de_triomphe_b.jpg" alt="Арка Триумфа — вид 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Арка Триумфа — это монументальная арка в центре Парижа, являющаяся одним из самых знаковых символов французской военной славы и национальной гордости. Он расположен на пересечении двенадцати основных проспектов в Париже. Арка имеет общую высоту 50 метров и ширину 45 метров. Его дизайн сочетает в себе неоклассические элементы с барочными влияниями. На вершине Арки находится небольшая смотровая площадка, откуда открывается панорамный вид на Париж. В 1920 году Могила Неизвестного Солдата была установлена под Аркой.</p>
 <p class="prose">Завершенная в 1836 году, Триумфальная арка была заказана Наполеоном Бонапартом в честь его солдат, сражавшихся во время Революционных и Наполеоновских войн. Она расположена на западном конце Елисейских полей, отмечая начало проспекта Шанз-Элизе и площади Этуаль, от которой расходятся двенадцать проспектов, ведущих в различные части города. Арка украшена четырьмя рельефными скульптурами, изображающими ключевые сражения, включая «Марсельезу», символизирующую прибытие волонтеров из Марселя во время Французской революции. Посещение Триумфальной арки предлагает захватывающие виды на город, предоставляя панорамную перспективу на парижскую жизнь и архитектуру.</p></div>
 </section>
+<section class="place" id="paris_sacre_coeur">
+<div class="place-lead">
+<h3>Базилика Сакре-Кёр</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Butte Montmartre, 18th arrondissement | Период: 1875–1919</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_sacre_coeur.jpg" alt="Базилика Сакре-Кёр" width="1280" height="866" style="height: 312px; max-height: 312px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/paris_sacre_coeur_b.jpg" alt="Базилика Сакре-Кёр — вид 2" width="330" height="511" style="height: 312px; max-height: 312px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Расположенная на вершине холма Монмартр, базилика Сакре-Кёр является величественным символом парижской духовности и ар-деко архитектуры. Ее белый купол доминирует над горизонтом, предлагая панорамные виды на город внизу. Строительство заняло почти 44 года из-за проблем с финансированием и перерывов, вызванных Первой мировой войной. Иконический белый купол базилики имеет высоту 83 метра. Внутри посетители могут исследовать потрясающие мозаики, изображающие сцены из христианских писаний. Его расположение на холме Монмартр обеспечивает непревзойденный вид на Эйфелеву башню и другие достопримечательности. По воскресеньям и праздникам мессы проводятся регулярно.</p>
+<p class="prose">Построенная в период с 1875 по 1919 год, базилика была возведена как национальное святилище для искупления излишеств Французской революции. Спроектированная архитектором Полем Абади, она демонстрирует неовизантийский стиль с замысловатыми мозаиками и витражами. Посетители приходят сюда, чтобы восхититься архитектурной красотой и насладиться захватывающими видами Парижа.</p></div>
+</section>
 <section class="place" id="paris_sacre_coeur_steps">
+<div class="place-lead">
 <h3>Базилика Сакре-Кёр (подход)</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Период: 1875–1919</p>
-<figure class="place-fig"><img src="../images/paris_sacre_coeur_steps.jpg" alt="Базилика Сакре-Кёр (подход)"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_sacre_coeur_steps.jpg" alt="Базилика Сакре-Кёр (подход)" width="1280" height="950" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/paris_sacre_coeur_steps_b.jpg" alt="Базилика Сакре-Кёр (подход) — вид 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Высоко над Парижем, на холме Монмартр, расположена базилика Сакре-Кёр — величественное белое здание с куполом, которое доминирует над горизонтом. Ее внушительное присутствие и уникальная архитектура делают ее одной из самых знаковых достопримечательностей города. Купол базилики высотой 110 метров делает её одним из самых высоких зданий в Париже. Он выполнен в нео-византийском стиле с замысловатыми мозаиками и витражами. Посетители могут подняться на вершину купола для панорамного вида на город. Внутри базилики находятся несколько примечательных произведений искусства, включая фрески Поля Беката. Строительство финансировалось за счет публичных пожертвований и добровольных взносов.</p>
 <p class="prose">Построенная в период с 1875 по 1919 год, базилика была возведена как символ покаяния после франко-прусской войны и последующего восстания Коммуны. С тех пор она стала главной туристической достопримечательностью и духовным местом для паломников и посетителей. Посещение базилики предлагает потрясающие виды на Париж и дает возможность поразмышлять о его богатой истории и культурном значении.</p></div>
 </section>
 <section class="place" id="paris_bois_de_vincennes_lake">
+<div class="place-lead">
 <h3>Буа-де-Венсен</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/paris_bois_de_vincennes_lake.jpg" alt="Буа-де-Венсен"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_bois_de_vincennes_lake.jpg" alt="Буа-де-Венсен" width="1280" height="960" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/paris_bois_de_vincennes_lake_b.jpg" alt="Буа-де-Венсен — вид 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Буа де Виньен — это обширный городской парк, расположенный на востоке Парижа, предлагающий спокойствие среди суеты города. Занимая 1,008 акров, он является одним из крупнейших зеленых пространств в столице и служит убежищем для любителей природы, семей и бегунов. Он включает в себя парк Эме Сезера, посвященный французской карибской литературе и культуре. Парк славится Великой Каскадой, величественным водопадом, который привлекает посетителей круглый год. На его территории расположены Винсеннские зоологические сады, дом для различных видов животных. Летом в парке проходят показы кино под открытым небом под звездами. Буа-де-Венсен также предлагает возможности для верховой езды.</p>
 <p class="prose">Изначально являвшийся частью королевских охотничьих угодий, датируемых 14 веком, Буа-де-Венсен был преобразован в общественный парк во время правления Людовика XIV. В 19 веке он стал популярной зоной отдыха после обширного ландшафтного дизайна Жан-Шарля Альфана, который спроектировал многие из крупных парков Парижа. Сегодня он остается любимым местом для отдыха и досуга. Посетители приезжают сюда, чтобы насладиться живописными прогулками, пикниками, велосипедными маршрутами и культурными событиями, такими как концерты и фестивали.</p></div>
 </section>
-<section class="place" id="paris_musee_carnavalet">
-<h3>Музей Карнавале</h3>
-
-<p class="place-meta">Период: 1910</p>
-<figure class="place-fig"><img src="../images/paris_musee_carnavalet.jpg" alt="Музей Карнавале"/></figure>
-<div class="place-desc"><p class="prose">Музей Карнавале — это исторический музей, посвященный социальной и культурной истории Парижа, который демонстрирует артефакты и экспонаты, прослеживающие эволюцию города от его средневековых корней до современности. Здесь находится одна из самых обширных коллекций парижских памятных вещей. Экспозиции музея охватывают такие темы, как городское развитие, мода, литература и политические движения. Выставки часто включают редкие манускрипты, письма и личные вещи известных парижан, таких как Виктор Гюго и Людовик XIV. Расположенный в шаговой доступности от площади Восгес, он предоставляет посетителям легкий доступ к другим значимым достопримечательностям. Его коллекция включает некоторые из самых ранних известных карт Парижа, датируемых Средними веками.</p>
-<p class="prose">Основанный в 1910 году, музей занимает два исторических здания — Hôtel de Carnavalet и Hôtel Le Peletier-Saint-Fargeau — в районе Марэ. Эти сооружения отражают архитектурные стили 17 и 18 веков, сочетая классический французский барокко с неоклассическими элементами. Коллекции музея включают картины, мебель, гравюры, карты и документы, которые подчеркивают ключевые моменты парижской жизни на протяжении нескольких столетий. Посещение музея Карнавале дает представление о богатой истории города, предлагая уникальную перспективу на то, как Париж развивался через искусство, архитектуру и повседневную жизнь.</p></div>
-</section>
-<section class="place" id="paris_centre_pompidou">
-<h3>Центр Помпиду</h3>
-
-<p class="place-meta">Период: 1977</p>
-<figure class="place-fig"><img src="../images/paris_centre_pompidou.jpg" alt="Центр Помпиду"/></figure>
-<div class="place-desc"><p class="prose">Центр Жоржа Помпиду — это музей современного искусства и культурный центр, расположенный в самом сердце Парижа. Завершенный в 1977 году, он выделяется своей яркой архитектурой, с открытыми стальными балками и стеклянными панелями. Здесь находятся постоянные коллекции современного и современного искусства. Его внешний вид имеет футуристический облик с видимыми вентиляционными шахтами и пешеходными дорожками. Здание изначально подвергалось критике, но с тех пор стало одним из самых знаковых памятников Парижа. Он гордится обширными выставочными площадями, посвященными временным выставкам и выступлениям. Расположенный на набережной Бобур, он привлекает миллионы посетителей ежегодно.</p>
-<p class="prose">Центр Помпиду, спроектированный Ренцо Пиано и Ричардом Роджерсом, открылся для публики в 1977 году как новаторский пример постмодернистской архитектуры. Его инновационный дизайн бросил вызов традиционным представлениям о музейной эстетике, демонстрируя современные произведения искусства и инсталляции. Посещение Центра Помпиду предоставляет уникальную возможность исследовать авангардное искусство и взаимодействовать с передовыми художественными выражениями.</p></div>
-</section>
-<section class="place" id="paris_champs_elysees">
-<h3>Шанзельи́зе</h3>
-
-
-<figure class="place-fig"><img src="../images/paris_champs_elysees.jpg" alt="Шанзельи́зе"/></figure>
-<div class="place-desc"><p class="prose">Шанзельзе — самая знаковая авеню Парижа, величественно протянувшаяся более чем на два километра между Арком де Триумф и Площадью Согласия. Она известна как одна из самых грандиозных бульваров мира, украшенная роскошными магазинами, элегантными кафе и историческими достопримечательностями. Парижане часто называют его просто «Ле Шанпс». Авеню является домом для крупных универмагов, таких как Galeries Lafayette и Printemps. Каждый ноябрь на Елисейских полях проходит грандиозный военный парад в честь Дня Бастилии. Ночью проспект сверкает неоновыми огнями и подсвеченными рекламными щитами. Его название переводится как &#x27;Элизийские поля&#x27;, что отражает его историческую связь с загробной жизнью.</p>
-<p class="prose">Изначально спроектированный в середине XVII века Людовиком XIV, Шанз-Элизе был задуман как соединение королевского дворца в Версале с центром Парижа. Со временем он стал центром модной жизни, развлечений и политических демонстраций. Сегодня он остается символом французской культуры и элегантности. Посетите Елисейские поля, чтобы ощутить парижскую роскошь, увидеть всемирно известные памятники, такие как Триумфальная арка, и насладиться яркой атмосферой самой знаменитой торговой улицы Франции.</p></div>
-</section>
 <section class="place" id="paris_cite_des_sciences">
+<div class="place-lead">
 <h3>Город науки и промышленности</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Период: 1986</p>
-<figure class="place-fig"><img src="../images/paris_cite_des_sciences.jpg" alt="Город науки и промышленности"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_cite_des_sciences.jpg" alt="Город науки и промышленности" width="1280" height="960" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/paris_cite_des_sciences_b.jpg" alt="Город науки и промышленности — вид 2" width="330" height="495" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Сите дез Сьанс и дю Л&#x27;Индустри — это обширный и динамичный музей науки, расположенный на берегу реки Сена в Париже. Он открыл свои двери в 1986 году как центр научных исследований и технологических инноваций, демонстрируя интерактивные экспозиции, которые увлекают посетителей всех возрастов. В нем представлено более 40 постоянных выставок, охватывающих различные научные дисциплины. Интерактивные экспонаты позволяют посетителям экспериментировать с принципами физики, биологии и инженерии. Музей проводит временные выставки, мастер-классы и образовательные программы на протяжении всего года. Его расположение вдоль Сены предлагает потрясающие виды на знаковые достопримечательности города. В дополнение к образованию, Сите также служит исследовательским центром для ученых и инженеров.</p>
 <p class="prose">Основанная в 1986 году, Сите была создана для того, чтобы вдохновлять любопытство и способствовать пониманию науки и технологий. Ее архитектура сочетает современный дизайн с историческими элементами, объединяя элегантные линии с традиционной французской эстетикой. Музей стал популярным местом как для местных жителей, так и для туристов, ищущих практический опыт обучения. Посещение Сите предлагает погружающее путешествие в мир науки, где посетители могут исследовать темы, начиная от астрономии и заканчивая робототехникой, через увлекательные экспозиции и эксперименты.</p></div>
 </section>
-<section class="place" id="paris_conciergerie">
-<h3>Консьержери</h3>
-
-<p class="place-meta">Период: 1357–1367</p>
-<figure class="place-fig"><img src="../images/paris_conciergerie.jpg" alt="Консьержери"/></figure>
-<div class="place-desc"><p class="prose">Консьержери — это историческая тюрьма и бывший королевский дворец, расположенный на острове Сите в Париже. Когда-то здесь содержались известные заключенные, такие как Мария Антуанетта, прежде чем он был преобразован в музей. Построен между 1357 и 1367 годами королем Филиппом VI. Использовалась как тюрьма как в период Ancien Régime, так и во время Французской революции. Включен в список объектов Всемирного наследия ЮНЕСКО с 1991 года. Вмещал несколько ключевых фигур во время судебных процессов Революционного трибунала. Преобразованный в музей после использования в качестве тюрьмы.</p>
-<p class="prose">Изначально построенная в 14 веке как королевский дворец для короля Филиппа VI Французского, Консьержери позже служила тюрьмой во время Французской революции, где содержались многие выдающиеся личности перед казнью. Среди известных заключенных была Мария-Антуанетта, королева Людовика XVI, которая провела свои последние дни здесь перед тем, как её отправили на гильотину. Сегодня посетители могут исследовать исторические камеры и залы суда, которые сыграли ключевую роль в бурных событиях Французской революции.</p></div>
-</section>
-<section class="place" id="paris_eiffel_tower">
-<h3>Эйфелева башня</h3>
-
-<p class="place-meta">Период: 1889</p>
-<figure class="place-fig"><img src="../images/paris_eiffel_tower.jpg" alt="Эйфелева башня"/></figure>
-<div class="place-desc"><p class="prose">Эйфелева башня, всемирно известный символ парижской архитектуры и инженерии, была построена для Всемирной выставки 1889 года как временная конструкция, призванная отметить промышленную мощь и инженерные достижения Франции. Спроектированная Густавом Эйфелем, она достигает высоты 300 метров, что сделало её самым высоким искусственным сооружением в Европе на момент завершения строительства. Он изготовлен в основном из кованого железа и весит более 10 000 тонн. Во время своего строительства он привлек более двух миллионов посетителей в течение первого года. Ночью башня освещена тысячами огней, создавая захватывающее зрелище, видимое за многие мили вокруг. Его дизайн вдохновил множество будущих небоскрёбов и мостов по всему миру. В 1925 году здесь стал радиопередающим узлом.</p>
-<p class="prose">Завершенная в 1889 году, башня изначально планировалась к демонтажу через двадцать лет, но оказалась настолько популярной, что осталась постоянным элементом французской столицы. В первые годы она служила как символом технологического прогресса, так и практической смотровой площадкой. Посетите Эйфелеву башню, чтобы увидеть одну из самых знаковых конструкций в мире, насладиться панорамными видами Парижа и погрузиться в его богатую историю.</p></div>
-</section>
-<section class="place" id="paris_grande_arche">
-<h3>Гранде Арш де Ла-Дефанс</h3>
-
-<p class="place-meta">Период: 1989</p>
-<figure class="place-fig"><img src="../images/paris_grande_arche.jpg" alt="Гранде Арш де Ла-Дефанс"/></figure>
-<div class="place-desc"><p class="prose">Гранде Арш де ла Дефанс — это монументальная структура, расположенная в сердце делового района Парижа, Ла Дефанс. Завершенная в 1989 году, она является символом современной архитектуры и инженерного мастерства. Его высота составляет примерно 108 метров, а ширина — 110 метров. Его стеклянный и металлический фасад отражает свет в разное время суток, создавая динамические визуальные эффекты. Внутри арки находится Palais de la Découverte, научный музей, демонстрирующий интерактивные экспонаты. Арка является частью более крупного проекта, известного как Сите дез Сьанс и д&#x27;Индюстри. Он часто используется для масштабных мероприятий, таких как концерты и фестивали.</p>
-<p class="prose">Спроектированная Жаном Нувелем, Гранде Арш была построена в честь двухсотлетия Французской революции. Она занимает центральное место в комплексе Ла Дефанс, служа как культурной достопримечательностью, так и функциональным центром городского планирования. Посетители приходят полюбоваться его уникальным дизайном и оценить его символическое значение как представителя приверженности Франции прогрессу и инновациям.</p></div>
-</section>
-<section class="place" id="paris_hotel_de_sens">
-<h3>Отель де Санс</h3>
-
-
-<figure class="place-fig"><img src="../images/paris_hotel_de_sens.jpg" alt="Отель де Санс"/></figure>
-<div class="place-desc"><p class="prose">Отель де Санс — это исторический дворец, расположенный в самом сердце Парижа, который предлагает посетителям возможность заглянуть в богатое архитектурное наследие и политическое прошлое города. Построенное в период с 14-го по 16-й века, строительство здания охватывало несколько правлений и архитектурных движений. Сегодня на этом месте проводятся культурные выставки и мероприятия, что делает его доступным для общественности, сохраняя при этом его историческое значение. Его роскошные интерьеры отличаются intricately carved woodwork и лепными потолками, демонстрируя мастерство мастеров-ремесленников. Расположенный на улице Бон, отель легко доступен пешком от таких основных достопримечательностей, как собор Нотр-Дам и рынок Лез Аль. Структура претерпела значительные renovations в начале 20 века, восстановив свое первоначальное величие.</p>
-<p class="prose">Построенный в позднее средневековье, Hôtel de Sens изначально был возведен как резиденция архиепископа Сенса. Со временем он выполнял различные государственные функции, включая проведение важных государственных встреч и служение местом для королевских приемов. Его архитектура отражает как готические, так и ренессансные влияния, демонстрируя эволюцию французского дизайна на протяжении нескольких столетий. Посещение Hôtel de Sens позволяет путешественникам исследовать сложные детали его внутреннего убранства и восхищаться слиянием исторических стилей, которые определяют французское архитектурное великолепие.</p></div>
-</section>
 <section class="place" id="paris_hotel_de_ville_paris">
+<div class="place-lead">
 <h3>Городская ратуша</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/paris_hotel_de_ville_paris.jpg" alt="Городская ратуша"/></figure>
+<p class="place-meta">Адрес: Place de l&#x27;Hôtel-de-Ville, 4th arrondissement</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_hotel_de_ville_paris.jpg" alt="Городская ратуша" width="1280" height="1019" style="height: 268px; max-height: 268px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/paris_hotel_de_ville_paris_b.jpg" alt="Городская ратуша — вид 2" width="330" height="192" style="height: 268px; max-height: 268px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Гостиница де Виль — это величественная ратуша Парижа, символ управления и наследия города. Построенная в позднем Средневековье и раннем Ренессансе, она является одной из самых знаковых достопримечательностей столицы. Он расположен на площади Грев, ныне известной как площадь Hôtel de Ville. Здание отличается богато украшенным фасадом с замысловатыми резьбами и скульптурами. Внутри находятся важные исторические архивы и экспонаты, подробно описывающие развитие города. Во время крупных фестивалей, таких как День Бастилии, площадь перед Hôtel de Ville становится центром празднований и выступлений. В последние годы здание прошло обширные восстановительные работы для сохранения своей исторической целостности.</p>
 <p class="prose">Изначально построенный в 14 веке, Hôtel de Ville был домом для различных noble семейств, прежде чем стать местом расположения муниципального правительства в 16 веке. Его архитектура отражает как готический, так и ренессансный стили, демонстрируя эволюцию французских архитектурных вкусов на протяжении нескольких столетий. Здание было расширено и отремонтировано несколько раз, с заметными дополнениями, сделанными архитекторами, такими как Жак Лемерсье и Жан Буллан. Посещение Hôtel de Ville дает представление о парижской истории и управлении, а его впечатляющая архитектура делает его обязательным для посещения туристами.</p></div>
 </section>
-<section class="place" id="paris_hotel_des_invalides">
-<h3>Лес Инвалидов</h3>
+<section class="place" id="paris_grande_arche">
+<div class="place-lead">
+<h3>Гранде Арш де Ла-Дефанс</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1671–1706</p>
-<figure class="place-fig"><img src="../images/paris_hotel_des_invalides.jpg" alt="Лес Инвалидов"/></figure>
+<p class="place-meta">Адрес: La Défense, west of Paris | Период: 1989</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_grande_arche.jpg" alt="Гранде Арш де Ла-Дефанс" width="1280" height="856" style="height: 77px; max-height: 77px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/paris_grande_arche_b.jpg" alt="Гранде Арш де Ла-Дефанс — вид 2" width="330" height="55" style="height: 77px; max-height: 77px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Гранде Арш де ла Дефанс — это монументальная структура, расположенная в сердце делового района Парижа, Ла Дефанс. Завершенная в 1989 году, она является символом современной архитектуры и инженерного мастерства. Его высота составляет примерно 108 метров, а ширина — 110 метров. Его стеклянный и металлический фасад отражает свет в разное время суток, создавая динамические визуальные эффекты. Внутри арки находится Palais de la Découverte, научный музей, демонстрирующий интерактивные экспонаты. Арка является частью более крупного проекта, известного как Сите дез Сьанс и д&#x27;Индюстри. Он часто используется для масштабных мероприятий, таких как концерты и фестивали.</p>
+<p class="prose">Спроектированная Жаном Нувелем, Гранде Арш была построена в честь двухсотлетия Французской революции. Она занимает центральное место в комплексе Ла Дефанс, служа как культурной достопримечательностью, так и функциональным центром городского планирования. Посетители приходят полюбоваться его уникальным дизайном и оценить его символическое значение как представителя приверженности Франции прогрессу и инновациям.</p></div>
+</section>
+<section class="place" id="paris_institut_du_monde_arabe">
+<div class="place-lead">
+<h3>Институт арабского мира</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Период: 1980</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_institut_du_monde_arabe.jpg" alt="Институт арабского мира" width="1280" height="850" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/paris_institut_du_monde_arabe_b.jpg" alt="Институт арабского мира — вид 2" width="330" height="220" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Институт арабского мира — это культурный центр, посвященный продвижению понимания арабского мира через искусство, литературу и кино. Расположенный на улице Дезеколь в Париже, он демонстрирует выставки, выступления и кинопоказы, которые подчеркивают богатое наследие и современную культуру региона. Здесь находятся постоянные и временные выставки, посвященные различным аспектам арабской культуры и истории. Мероприятия включают чтения поэзии, музыкальные концерты и театральные представления. Библиотека содержит обширные ресурсы по изучению Ближнего Востока и арабской литературе. Его архитектура включает элементы, вдохновленные исламским искусством и дизайном. Выставки часто представляют работы выдающихся художников со всего арабского мира.</p>
+<p class="prose">Основанный в 1980 году президентом Франции Франсуа Миттераном, институт был спроектирован архитектором Жаном Нувелем. Его модернистский дизайн включает в себя впечатляющий стеклянный фасад и инновационную внутреннюю планировку, которая объединяет традиционные арабские элементы с современной архитектурой. Посетители могут исследовать коллекции музея, посещать лекции и участвовать в мастер-классах, чтобы получить представление о разнообразных культурах и историях арабского мира.</p></div>
+</section>
+<section class="place" id="paris_pere_lachaise_cemetery">
+<div class="place-lead">
+<h3>Кладбище Пер Лашез</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Период: 1804</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_pere_lachaise_cemetery.jpg" alt="Кладбище Пер Лашез" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/paris_pere_lachaise_cemetery_b.jpg" alt="Кладбище Пер Лашез — вид 2" width="330" height="247" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Расположенное на холме Монмартр, кладбище Пер Лашез является самым известным кладбищем Парижа и одним из его крупнейших. Основанное в 1804 году во время правления Наполеона, оно быстро стало модным местом захоронения для парижан. Он содержит более 70 000 могил и более 1 миллиона захоронений. Кладбище занимает почти 109 акров и является одним из крупнейших городских кладбищ в Европе. Значительные захоронения включают Жан-Жака Руссо, Оноре де Бальзака, Фредерика Шопена и Ива Сен-Лорана. Его дизайн включает французскую неоклассическую архитектуру с извивающимися дорожками и живописными видами. Он известен своими потрясающими памятниками, статуями и сложными гробницами.</p>
+<p class="prose">Основанное королем Людовиком XVIII в 1804 году, кладбище Пер Лашез было названо в честь отца Франсуа де Лашеза, иезуитского священника, который служил заключенным в близлежащих тюрьмах. Кладбище быстро стало популярным местом последнего упокоения для таких выдающихся личностей, как Мольер, Бальзак и Шопен. Посетители приходят сюда, чтобы отдать дань уважения таким знаковым фигурам, как Джим Моррисон, Оскар Уайльд и Сара Бернар, что делает это место культурным направлением не менее, чем историческим сайтом.</p></div>
+</section>
+<section class="place" id="paris_conciergerie">
+<div class="place-lead">
+<h3>Консьержери</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Île de la Cité, 1st arrondissement | Период: 1357–1367</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_conciergerie.jpg" alt="Консьержери" width="1280" height="659" style="height: 231px; max-height: 231px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/paris_conciergerie_b.jpg" alt="Консьержери — вид 2" width="330" height="165" style="height: 231px; max-height: 231px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Консьержери — это историческая тюрьма и бывший королевский дворец, расположенный на острове Сите в Париже. Когда-то здесь содержались известные заключенные, такие как Мария Антуанетта, прежде чем он был преобразован в музей. Построен между 1357 и 1367 годами королем Филиппом VI. Использовалась как тюрьма как в период Ancien Régime, так и во время Французской революции. Включен в список объектов Всемирного наследия ЮНЕСКО с 1991 года. Вмещал несколько ключевых фигур во время судебных процессов Революционного трибунала. Преобразованный в музей после использования в качестве тюрьмы.</p>
+<p class="prose">Изначально построенная в 14 веке как королевский дворец для короля Филиппа VI Французского, Консьержери позже служила тюрьмой во время Французской революции, где содержались многие выдающиеся личности перед казнью. Среди известных заключенных была Мария-Антуанетта, королева Людовика XVI, которая провела свои последние дни здесь перед тем, как её отправили на гильотину. Сегодня посетители могут исследовать исторические камеры и залы суда, которые сыграли ключевую роль в бурных событиях Французской революции.</p></div>
+</section>
+<section class="place" id="paris_hotel_des_invalides">
+<div class="place-lead">
+<h3>Лес Инвалидов</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: 7th arrondissement | Период: 1671–1706</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_hotel_des_invalides.jpg" alt="Лес Инвалидов" width="1280" height="482" style="height: 173px; max-height: 173px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/paris_hotel_des_invalides_b.jpg" alt="Лес Инвалидов — вид 2" width="330" height="220" style="height: 173px; max-height: 173px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Сидя величественно на берегах Сены, Лез Инвалид — это свидетельство военного наследия Франции и архитектурного великолепия. Изначально построенный как госпиталь для раненых солдат во время правления Людовика XIV, он позже превратился в монументальный комплекс, вмещающий музеи, памятники и военную академию. Комплекс включает в себя несколько известных сооружений, таких как Купол Инвалидов, Музей армии и Военное училище. Сам Наполеон Бонапарт контролировал строительство Купола Инвалидов. Он служит как музеем, так и национальным мемориалом, почитающим военных героев Франции. Музей армии содержит одну из крупнейших коллекций военных реликвий в Европе. В дополнение к тому, что Лез Инвалид находится в статусе музея, здесь также проводятся важные церемонии и памятные мероприятия.</p>
 <p class="prose">Изначально построенный в период с 1671 по 1706 год при короле Людовике XIV, Лез Инвалид был задуман как место для ухода и размещения раненых солдат, возвращающихся с войн. Со временем он расширился и включил в себя различные здания, такие как Купол Инвалидов, спроектированный Жюлем Ардуэном-Мансаром, который содержит Могилу Наполеона I. На территории также расположен Musée de l&#x27;Armée, демонстрирующий военные артефакты и памятные вещи. Посещение Инвалидов предоставляет глубокое понимание французской военной истории и культуры, с его знаковой архитектурой и богатыми коллекциями.</p></div>
 </section>
 <section class="place" id="paris_louvre">
+<div class="place-lead">
 <h3>Лувр</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/paris_louvre.jpg" alt="Лувр"/></figure>
+<p class="place-meta">Адрес: 1st arrondissement</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_louvre.jpg" alt="Лувр" width="1280" height="538" style="height: 194px; max-height: 194px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/paris_louvre_b.jpg" alt="Лувр — вид 2" width="330" height="495" style="height: 194px; max-height: 194px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Лувр — один из самых известных и посещаемых художественных музеев мира, демонстрирующий шедевры, охватывающие тысячи лет художественной эволюции. Здесь хранится более 35 000 произведений искусства в различных отделах, включая живопись, скульптуру, декоративное искусство и антиквариат. Музей привлекает более 10 миллионов посетителей ежегодно, что делает его одним из самых загруженных культурных учреждений в мире. Значимые экспонаты включают &#x27;Мону Лизу&#x27; Леонардо да Винчи, мраморные скульптуры &#x27;Умирающего раба&#x27; Микеланджело и древнеегипетские артефакты, такие как Розеттский камень. Расположенный на правом берегу реки Сена в Париже, Лувр является символом французской культуры с момента своего основания. Открытый при Наполеоне III в 1857 году, Лувр претерпел значительные renovations, расширив свои выставочные площади.</p>
 <p class="prose">Основанный в 1793 году как публичный музей во время Французской революции, Лувр изначально хранил королевские коллекции, датируемые XIII веком. Сегодня он занимает бывший королевский дворец, известный как Дворец Лувр, построенный королем Филиппом II в конце XII века. Знаковая стеклянная пирамида, спроектированная И.М. Пеем, была добавлена в 1989 году для модернизации доступа к обширной коллекции музея. Посетите Лувр ради его непревзойденной коллекции всемирно известных произведений, таких как Мона Лиза, Венера Милосская и Крылатая Победа Самофракийская.</p></div>
 </section>
-<section class="place" id="paris_jardin_du_luxembourg">
-<h3>Сад Люксембург</h3>
+<section class="place" id="paris_pont_alexandre_iii">
+<div class="place-lead">
+<h3>Мост Александра III</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1612</p>
-<figure class="place-fig"><img src="../images/paris_jardin_du_luxembourg.jpg" alt="Сад Люксембург"/></figure>
-<div class="place-desc"><p class="prose">Сад Люксембург — это спокойный оазис зелени, расположенный в самом сердце Парижа, предлагающий посетителям тихое убежище от суеты городской жизни. Он занимает примерно 24 акра зелёных насаждений и формальных садов. Сад является домом для Musée du Luxembourg, где представлены произведения французских художников. Посетители могут прогуливаться по извивающимся дорожкам, окружённым деревьями и скамейками, идеально подходящими для чтения или пикников. Знаменитые статуи, такие как &#x27;Le Penseur&#x27; Родена, prominently расположены по всей территории. Мероприятия, такие как концерты и театральные представления на открытом воздухе, проходят регулярно в летние месяцы.</p>
-<p class="prose">Изначально созданный как королевский сад для Марии Медичи в 17 веке, Люксембургский сад стал одним из самых знаковых и любимых общественных пространств Парижа. Он был спроектирован Андре Лено, который также работал над Версалем, и включает в себя сложные дорожки, фонтаны и скульптуры, отражающие его историческое значение. Обязательное место для посещения для всех, кто ищет спокойствия среди парижской суеты, Сад Люксембург предлагает очаровательную обстановку для отдыха и размышлений.</p></div>
+<p class="place-meta">Место: Seine between 7th and 8th arrondissements | Период: 1900–1906</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_pont_alexandre_iii.jpg" alt="Мост Александра III" width="930" height="1600" style="height: 196px; max-height: 196px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/paris_pont_alexandre_iii_b.jpg" alt="Мост Александра III — вид 2" width="330" height="140" style="height: 196px; max-height: 196px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Пересекая реку Сена, мост Александра III является величественным сооружением, украшенным золотыми статуями и изысканным кованым железом, созданным в честь франко-русского альянса 1892 года. Он украшен 24 позолоченными бронзовыми львами и аллегорическими фигурами, представляющими искусство и науки. Мост вмещает два великолепных зала, по бокам которых расположены аркады с застекленными фасадами, наполненные магазинами и кафе. Его дизайн включает элементы, вдохновленные древнеегипетским и византийским искусством. Ночью мост освещается тысячами огней, создавая ослепительное зрелище. Расположенный рядом с садами Трокадеро, он обеспечивает доступ к Музею человека и Дворцу Шайо.</p>
+<p class="prose">Построенный между 1900 и 1906 годами, мост Александра III был заказан императором Николаем II России в честь его французского коллеги, императора Наполеона III. Мост соединяет элегантные районы Отей и Трокадеро, демонстрируя роскошную архитектуру в стиле ар-деко и изысканные украшения, которые отражают как французские, так и русские влияния. Этот знаковый мост является одной из самых фотографируемых достопримечательностей Парижа, предлагая потрясающие виды на Эйфелеву башню и Елисейские поля.</p></div>
 </section>
-<section class="place" id="paris_musee_orsay">
-<h3>Музей Орсе</h3>
+<section class="place" id="paris_musee_carnavalet">
+<div class="place-lead">
+<h3>Музей Карнавале</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1900–1906</p>
-<figure class="place-fig"><img src="../images/paris_musee_orsay.jpg" alt="Музей Орсе"/></figure>
-<div class="place-desc"><p class="prose">Музей Орсэ — это музей мирового класса, демонстрирующий произведения импрессионизма и постимпрессионизма, расположенный в бывшем железнодорожном вокзале Орсэ, построенном в период с 1900 по 1906 год. Расположенный в знаковом Гара д&#x27;Orsay, историческом железнодорожном вокзале, открытом в 1900 году. Включает более 4000 произведений, охватывающих импрессионизм, постимпрессионизм и ар-нуво. Обширно отремонтирован в начале 1980-х годов для выполнения новой функции музея. Расположенный на Левом берегу реки Сена, с потрясающими видами на парижские достопримечательности. Регулярно проводит временные выставки, демонстрирующие значительные коллекции и современное искусство.</p>
-<p class="prose">Изначально построенный как вокзал для железнодорожной сети Парижа, Musée d&#x27;Orsay был преобразован в музей в 1986 году, чтобы разместить растущую коллекцию французского искусства, датируемого с 1848 по 1914 год. Его нео-барочная архитектура отражает грандиозность Франции конца 19 века, с богатыми украшениями и величественными интерьерами. Обязательное место для посещения для всех, кто интересуется шедеврами таких художников, как Моне, Ренуар, Дега и Ван Гог.</p></div>
+<p class="place-meta">Период: 1910</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_musee_carnavalet.jpg" alt="Музей Карнавале" width="1280" height="960" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/paris_musee_carnavalet_b.jpg" alt="Музей Карнавале — вид 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Музей Карнавале — это исторический музей, посвященный социальной и культурной истории Парижа, который демонстрирует артефакты и экспонаты, прослеживающие эволюцию города от его средневековых корней до современности. Здесь находится одна из самых обширных коллекций парижских памятных вещей. Экспозиции музея охватывают такие темы, как городское развитие, мода, литература и политические движения. Выставки часто включают редкие манускрипты, письма и личные вещи известных парижан, таких как Виктор Гюго и Людовик XIV. Расположенный в шаговой доступности от площади Восгес, он предоставляет посетителям легкий доступ к другим значимым достопримечательностям. Его коллекция включает некоторые из самых ранних известных карт Парижа, датируемых Средними веками.</p>
+<p class="prose">Основанный в 1910 году, музей занимает два исторических здания — Hôtel de Carnavalet и Hôtel Le Peletier-Saint-Fargeau — в районе Марэ. Эти сооружения отражают архитектурные стили 17 и 18 веков, сочетая классический французский барокко с неоклассическими элементами. Коллекции музея включают картины, мебель, гравюры, карты и документы, которые подчеркивают ключевые моменты парижской жизни на протяжении нескольких столетий. Посещение музея Карнавале дает представление о богатой истории города, предлагая уникальную перспективу на то, как Париж развивался через искусство, архитектуру и повседневную жизнь.</p></div>
 </section>
 <section class="place" id="paris_musee_cluny">
+<div class="place-lead">
 <h3>Музей Клюни</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Период: 1843</p>
-<figure class="place-fig"><img src="../images/paris_musee_cluny.jpg" alt="Музей Клюни"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_musee_cluny.jpg" alt="Музей Клюни" width="1280" height="850" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/paris_musee_cluny_b.jpg" alt="Музей Клюни — вид 2" width="330" height="495" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Национальный музей Средних веков, более известный как Музей Клюни, является всемирно известным музеем, посвященным средневековому искусству и культуре. Расположенный на Левом берегу Парижа, он демонстрирует бесценные артефакты из Средних веков, включая знаменитые гобелены «Дама и единорог». Здесь находится знаменитая Апокалиптическая гобелен, один из крупнейших сохранившихся примеров средневекового текстильного искусства. Музей также может похвастаться обширными коллекциями манускриптов, скульптур и иллюминированных книг. Его архитектура, вдохновленная принципами готического возрождения, отличается сложными каменными резьбами и витражами. Открытый для публики в 1843 году, он постоянно расширялся и обновлялся на протяжении многих лет. В дополнение к постоянным выставкам, временные шоу часто подчеркивают менее известные аспекты средневековой жизни.</p>
 <p class="prose">Основанный в 1843 году императором Луи-Филиппом, музей изначально был создан для размещения частной коллекции его жены, королевы Ортанс де Беарн. Само здание, спроектированное архитектором Эженом Виолле-ле-Дюком, отражает стиль готического возрождения с его изысканными украшениями и величественными коридорами. Сегодня он остается одним из самых важных учреждений для изучения средневекового наследия. Посещение музея Клюни позволяет посетителям погрузиться в богатое культурное наследие Средневековья благодаря его впечатляющим экспонатам.</p></div>
 </section>
+<section class="place" id="paris_musee_orsay">
+<div class="place-lead">
+<h3>Музей Орсе</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Left Bank, 7th arrondissement | Период: 1900–1906</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_musee_orsay.jpg" alt="Музей Орсе" width="1280" height="371" style="height: 133px; max-height: 133px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/paris_musee_orsay_b.jpg" alt="Музей Орсе — вид 2" width="330" height="186" style="height: 133px; max-height: 133px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Музей Орсэ — это музей мирового класса, демонстрирующий произведения импрессионизма и постимпрессионизма, расположенный в бывшем железнодорожном вокзале Орсэ, построенном в период с 1900 по 1906 год. Расположенный в знаковом Гара д&#x27;Orsay, историческом железнодорожном вокзале, открытом в 1900 году. Включает более 4000 произведений, охватывающих импрессионизм, постимпрессионизм и ар-нуво. Обширно отремонтирован в начале 1980-х годов для выполнения новой функции музея. Расположенный на Левом берегу реки Сена, с потрясающими видами на парижские достопримечательности. Регулярно проводит временные выставки, демонстрирующие значительные коллекции и современное искусство.</p>
+<p class="prose">Изначально построенный как вокзал для железнодорожной сети Парижа, Musée d&#x27;Orsay был преобразован в музей в 1986 году, чтобы разместить растущую коллекцию французского искусства, датируемого с 1848 по 1914 год. Его нео-барочная архитектура отражает грандиозность Франции конца 19 века, с богатыми украшениями и величественными интерьерами. Обязательное место для посещения для всех, кто интересуется шедеврами таких художников, как Моне, Ренуар, Дега и Ван Гог.</p></div>
+</section>
 <section class="place" id="paris_musee_rodin_paris">
+<div class="place-lead">
 <h3>Музей Родена</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/paris_musee_rodin_paris.jpg" alt="Музей Родена"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/paris_musee_rodin_paris_b.jpg" alt="Музей Родена" width="330" height="220"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Расположенный на холме Монсури, Музей Родена — это всемирно известный музей, посвященный скульптурам и произведениям Огюста Родена, одного из самых известных художников Франции. Открытый в 1919 году, он демонстрирует более 6000 произведений, включая скульптуры, рисунки и керамику. Сад, окружающий музей, включает ландшафты, созданные самим Роденом. Значимые экспонаты включают &#x27;Врата ада&#x27;, считающиеся одним из его величайших шедевров. Он расположен рядом с парком Монсо и предлагает панорамные виды на Париж. Мастерская и частная резиденция Родена также являются частью музейного комплекса.</p>
 <p class="prose">Основанный в 1916 году вдовой Родена, Беатрис, музей изначально размещал студию Родена и его личную коллекцию. Позже он был перенесен на текущее место в 1927 году после масштабной реконструкции. С тех пор музей стал важной культурной достопримечательностью, привлекая миллионы посетителей ежегодно. Посетители приходят полюбоваться знаковыми произведениями, такими как «Мыслитель» и «Поцелуй», которые стали символами художественного выражения и вдохновения по всему миру.</p></div>
 </section>
 <section class="place" id="paris_notre_dame_cathedral">
+<div class="place-lead">
 <h3>Нотр-Дам де Пари</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1163–1345</p>
-<figure class="place-fig"><img src="../images/paris_notre_dame_cathedral.jpg" alt="Нотр-Дам де Пари"/></figure>
+<p class="place-meta">Адрес: Île de la Cité, 4th arrondissement | Период: 1163–1345</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_notre_dame_cathedral.jpg" alt="Нотр-Дам де Пари" width="1185" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/paris_notre_dame_cathedral_b.jpg" alt="Нотр-Дам де Пари — вид 2" width="330" height="382" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Одним из самых знаковых памятников Парижа является Нотр-Дам де Пари — захватывающий готический собор, расположенный на острове Сите, в самом сердце города. Его высокие шпили и сложные витражи завораживают посетителей на протяжении веков. Он понес серьезные повреждения в результате пожара в апреле 2019 года, но после этого прошел обширные восстановительные работы. В соборе хранится терновый венец, который считается настоящим венцом, носимым Иисусом Христом во время его распятия. Его знаменитые колокола, известные под общим названием «Эммаüs», весят более 13 тонн каждый и до сих пор слышны. Розовые окна Нотр-Дам являются одними из самых больших и изысканных примеров средневекового искусства витража. Здание известно своими внушительными близнецовыми башнями, которые доминируют над горизонтом Парижа.</p>
 <p class="prose">Собор Нотр-Дам был построен между 1163 и 1345 годами во времена правления французских королей Людовика VII и Филиппа II Августа. Изначально он был возведен как романская базилика, прежде чем был преобразован в свою нынешнюю готическую форму. Архитектура собора включает в себя такие примечательные элементы, как контрфорсы и ребристые своды, которые произвели революцию в средневековых строительных техниках. С момента своего завершения он стал центром религиозной жизни Парижа, проводя важные церемонии и служа символом национальной гордости. Собор Парижской Богоматери имеет большое значение, поскольку он олицетворяет как архитектурные достижения Средневековья, так и духовное наследие Франции.</p></div>
 </section>
-<section class="place" id="paris_pdfband_0_4312c3dc">
-<h3>NotreDameDeParis</h3>
+<section class="place" id="paris_hotel_de_sens">
+<div class="place-lead">
+<h3>Отель де Санс</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/paris_pdfband_0_4312c3dc.jpg" alt="NotreDameDeParis"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_hotel_de_sens.jpg" alt="Отель де Санс" width="1060" height="1600" style="height: 368px; max-height: 368px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/paris_hotel_de_sens_b.jpg" alt="Отель де Санс — вид 2" width="330" height="263" style="height: 368px; max-height: 368px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Отель де Санс — это исторический дворец, расположенный в самом сердце Парижа, который предлагает посетителям возможность заглянуть в богатое архитектурное наследие и политическое прошлое города. Построенное в период с 14-го по 16-й века, строительство здания охватывало несколько правлений и архитектурных движений. Сегодня на этом месте проводятся культурные выставки и мероприятия, что делает его доступным для общественности, сохраняя при этом его историческое значение. Его роскошные интерьеры отличаются intricately carved woodwork и лепными потолками, демонстрируя мастерство мастеров-ремесленников. Расположенный на улице Бон, отель легко доступен пешком от таких основных достопримечательностей, как собор Нотр-Дам и рынок Лез Аль. Структура претерпела значительные renovations в начале 20 века, восстановив свое первоначальное величие.</p>
+<p class="prose">Построенный в позднее средневековье, Hôtel de Sens изначально был возведен как резиденция архиепископа Сенса. Со временем он выполнял различные государственные функции, включая проведение важных государственных встреч и служение местом для королевских приемов. Его архитектура отражает как готические, так и ренессансные влияния, демонстрируя эволюцию французского дизайна на протяжении нескольких столетий. Посещение Hôtel de Sens позволяет путешественникам исследовать сложные детали его внутреннего убранства и восхищаться слиянием исторических стилей, которые определяют французское архитектурное великолепие.</p></div>
+</section>
+<section class="place" id="paris_pavillon_de_flore">
+<div class="place-lead">
+<h3>Павильон де Флор</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Louvre-Tuileries complex, 1st arrondissement | Период: 1925</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_pavillon_de_flore.jpg" alt="Павильон де Флор" width="1280" height="730" style="height: 263px; max-height: 263px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/paris_pavillon_de_flore_b.jpg" alt="Павильон де Флор — вид 2" width="330" height="497" style="height: 263px; max-height: 263px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Расположенный на берегах Сены, Pavillon de Flore — это очаровательное кафе и культурная достопримечательность, которая является парижским институтом с момента своего открытия в 1925 году. Изначально оно было задумано как место для сбора интеллектуалов, художников и писателей, чтобы обсуждать идеи за чашкой кофе и выпечкой. Он расположен по адресу 4 Rue des Beaux-Arts, рядом с Люксембургскими садами. Меню кафе включает традиционные французские блюда, такие как крем-брюле и тарт татен. Его терраса предлагает потрясающие виды на реку Сена и Эйфелеву башню. Сегодня это одно из самых знаковых кафе в Париже, привлекающее как местных жителей, так и туристов. В дополнение к своим кафе, Павильон де Флор также периодически проводит художественные выставки и живые выступления.</p>
+<p class="prose">Построенный в 1925 году, Павильон де Флор быстро стал известен как центр для литературных деятелей, таких как Эрнест Хемингуэй, Пабло Пикассо и Колетт. Интерьер кафе оформлен в стиле ар-деко, с элегантной деревянной мебелью и стенами, украшенными фресками известных художников, таких как Жан Кокто и Анри Матисс. Посещение Павильона Флёр позволяет посетителям вернуться в прошлое и ощутить яркую интеллектуальную культуру Парижа эпохи Ревущих Двадцатых.</p></div>
 </section>
 <section class="place" id="paris_palais_garnier">
+<div class="place-lead">
 <h3>Пале Гарнье</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1862–1875</p>
-<figure class="place-fig"><img src="../images/paris_palais_garnier.jpg" alt="Пале Гарнье"/></figure>
+<p class="place-meta">Адрес: Place de l&#x27;Opéra, 9th arrondissement | Период: 1862–1875</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_palais_garnier.jpg" alt="Пале Гарнье" width="1280" height="618" style="height: 223px; max-height: 223px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/paris_palais_garnier_b.jpg" alt="Пале Гарнье — вид 2" width="330" height="263" style="height: 223px; max-height: 223px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Расположенный в самом сердце Парижа на бульваре Итальянцев, Palais Garnier — это легендарный оперный театр, известный своим роскошным интерьером и историческим значением. Величественная лестница здания считается одной из самых красивых в мире. Он включает в себя более 6,000 квадратных метров расписных потолков и фресок, созданных некоторыми из лучших художников того времени. Его внешний фасад украшен скульптурами, изображающими мифологических персонажей. Оперный театр может вместить до 1,989 зрителей в своем главном зале. В дополнение к живым выступлениям, Пале Гарнье также проводит специальные выставки, посвященные искусству и дизайну.</p>
 <p class="prose">Построенный в период с 1862 по 1875 год во времена Второй империи, Palais Garnier был спроектирован Шарлем Гарнье как новый дом для Парижской оперы. Его роскошная архитектура в стиле ар-деко и сложные декорации делают его одной из самых знаковых достопримечательностей Франции. Театр стал местом проведения бесчисленных представлений, включая оперы, балеты и концерты, что делает его культурным центром с момента открытия. Обязательное место для посещения для всех, кто интересуется искусством, оперой и архитектурными чудесами, Palais Garnier предлагает захватывающие виды и незабываемые впечатления.</p></div>
 </section>
 <section class="place" id="paris_pantheon_paris">
+<div class="place-lead">
 <h3>Пантеон</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1758–1790</p>
-<figure class="place-fig"><img src="../images/paris_pantheon_paris.jpg" alt="Пантеон"/></figure>
+<p class="place-meta">Адрес: 5th arrondissement | Период: 1758–1790</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_pantheon_paris.jpg" alt="Пантеон" width="1200" height="1600" style="height: 179px; max-height: 179px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/paris_pantheon_paris_b.jpg" alt="Пантеон — вид 2" width="330" height="128" style="height: 179px; max-height: 179px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Пантеон — это торжественный и внушительный памятник, расположенный на вершине холма Монпарнас, спроектированный архитектором Жаком-Жерменом Суффло в неоклассическом стиле. Завершенный в 1790 году, он изначально задумывался как церковь, посвященная святой Женевьеве, но позже был преобразован в мавзолей в честь величайших граждан Франции. Спроектированный в неоклассическом стиле Жаком-Жерменом Суффло. Построен в период с 1758 по 1790 год. Преобразован из церкви в мавзолей во время Французской революции. Содержит останки многих выдающихся французских деятелей. Особенностью является купол с замысловатой каменной отделкой и витражными окнами.</p>
 <p class="prose">Построенный в 1758-1790 годах, Пантеон изначально был освящен как Église de la Sainte-Trinité, прежде чем быть преобразованным в светское место во время Французской революции. С тех пор он стал национальным святилищем для таких выдающихся личностей, как Вольтер, Руссо и Мария Кюри. Обязательный для посещения благодаря своей архитектурной элегантности и историческому значению, Пантеон символизирует как религиозное наследие, так и современное воспоминание о интеллектуальных и научных гигантах Франции.</p></div>
 </section>
 <section class="place" id="paris_parc_monceau">
+<div class="place-lead">
 <h3>Парк Монтсо</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/paris_parc_monceau.jpg" alt="Парк Монтсо"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_parc_monceau.jpg" alt="Парк Монтсо" width="1280" height="960" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--row-sized"><img src="../images/paris_parc_monceau_b.jpg" alt="Парк Монтсо — вид 2" width="330" height="525" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Очаровательный оазис зелени в сердце Парижа, парк Монсо — это живописный парк, известный своей элегантной архитектурой и спокойной атмосферой. Парк украшен изысканными воротами и величественным входным павильоном, спроектированным Анжом-Жаком Габриэлем. Он гордится двумя большими искусственными озерами, окруженными ухоженными газонами и деревьями. Знаковые достопримечательности включают египетский обелиск и статую Аполлона. Парк Монсо проводит различные культурные мероприятия и концерты в течение всего года. Его формальные сады содержатся в идеальном порядке, демонстрируя сезонные цветы.</p>
 <p class="prose">Построенный в конце 18 века Александром Леноа, парк Монсо изначально задумывался как частный сад для аристократических семей. Позже он стал общественным парком, предлагающим посетителям спокойное убежище среди бурной городской жизни. Дизайн парка отражает французский барокко с его симметричной планировкой, декоративными прудами и классическими статуями. Посетите парк Монсо, чтобы насладиться парижским элегантностью и расслаблением в исторической обстановке.</p></div>
 </section>
-<section class="place" id="paris_pdfband_2_30b06647">
-<h3>Paris</h3>
-
-
-<figure class="place-fig"><img src="../images/paris_pdfband_2_30b06647.jpg" alt="Paris"/></figure>
-</section>
-<section class="place" id="paris_pdfband_3_4f7898b2">
-<h3>Paris Gibson Square</h3>
-
-
-<figure class="place-fig"><img src="../images/paris_pdfband_3_4f7898b2.jpg" alt="Paris Gibson Square"/></figure>
-</section>
-<section class="place" id="paris_pavillon_de_flore">
-<h3>Павильон де Флор</h3>
-
-<p class="place-meta">Период: 1925</p>
-<figure class="place-fig"><img src="../images/paris_pavillon_de_flore.jpg" alt="Павильон де Флор"/></figure>
-<div class="place-desc"><p class="prose">Расположенный на берегах Сены, Pavillon de Flore — это очаровательное кафе и культурная достопримечательность, которая является парижским институтом с момента своего открытия в 1925 году. Изначально оно было задумано как место для сбора интеллектуалов, художников и писателей, чтобы обсуждать идеи за чашкой кофе и выпечкой. Он расположен по адресу 4 Rue des Beaux-Arts, рядом с Люксембургскими садами. Меню кафе включает традиционные французские блюда, такие как крем-брюле и тарт татен. Его терраса предлагает потрясающие виды на реку Сена и Эйфелеву башню. Сегодня это одно из самых знаковых кафе в Париже, привлекающее как местных жителей, так и туристов. В дополнение к своим кафе, Павильон де Флор также периодически проводит художественные выставки и живые выступления.</p>
-<p class="prose">Построенный в 1925 году, Павильон де Флор быстро стал известен как центр для литературных деятелей, таких как Эрнест Хемингуэй, Пабло Пикассо и Колетт. Интерьер кафе оформлен в стиле ар-деко, с элегантной деревянной мебелью и стенами, украшенными фресками известных художников, таких как Жан Кокто и Анри Матисс. Посещение Павильона Флёр позволяет посетителям вернуться в прошлое и ощутить яркую интеллектуальную культуру Парижа эпохи Ревущих Двадцатых.</p></div>
-</section>
-<section class="place" id="paris_place_de_la_concorde">
-<h3>Площадь Согласия</h3>
-
-
-<figure class="place-fig"><img src="../images/paris_place_de_la_concorde.jpg" alt="Площадь Согласия"/></figure>
-<div class="place-desc"><p class="prose">Площадь Согласия — это самая большая площадь Парижа, занимающая площадь более 86 400 квадратных метров и окруженная элегантными зданиями. Изначально она называлась Площадь Людовика XV, но изменила свое название после Французской революции. Он включает в себя обелиск Люксора, подарок Египта Наполеону III. В окружении известных достопримечательностей, таких как Hôtel de Crillon и Hôtel Ritz. Спроектировано архитектором Александром-Теодором Бруном. В центре находится фонтан, изначально установленный во время правления Наполеона. Расположенный вдоль реки Сена.</p>
-<p class="prose">Построенная в середине XVIII века при короле Людовике XV, она служила королевским местом для собраний. Во время Революции здесь стояла гильотина, символизируя казни видных личностей, таких как Мария Антуанетта. Позже это место стало площадкой для празднований и памятников в честь героев Франции. Обязательное к посещению место благодаря своему грандиозному дизайну, историческому значению и центральному расположению рядом с Елисейскими полями и Садом Тюильри.</p></div>
-</section>
-<section class="place" id="paris_place_des_vosges">
-<h3>Площадь Восгес</h3>
-
-<p class="place-meta">Период: 1605–1612</p>
-<figure class="place-fig"><img src="../images/paris_place_des_vosges.jpg" alt="Площадь Восгес"/></figure>
-<div class="place-desc"><p class="prose">Площадь Восгес — самая старая площадь Парижа, захватывающий пример французской архитектуры Ренессанса. Построенная в период с 1605 по 1612 год во время правления короля Генриха IV, она изначально была задумана как королевская резиденция для аристократов. Построено во время правления короля Генриха IV (1589–1610). Спроектировано архитектором Саломоном де ла Селем. Состоит из 36 идентичных домов, расположенных вокруг прямоугольной планировки. Особенности элегантные балконы и декоративная ковка. Ранее известная как Плейс Рояль до переименования в 1790 году.</p>
-<p class="prose">Построенная архитектором Саломоном де ла Селем при короле Генрихе IV, Площадь Восг служила престижным адресом для дворян и членов двора. Изначально названная Королевской площадью, она позже получила свое текущее название в честь региона Восг после Французской революции. Площадь украшена симметричными рядами краснокирпичных домов с изысканными балконами и каменными фасадами. Этот исторический квадрат предлагает взглянуть на парижскую жизнь в ранний современный период и служит очаровательным местом для прогулок и посетителей, ищущих спокойствие среди суеты центрального Парижа.</p></div>
-</section>
 <section class="place" id="paris_place_vendome">
+<div class="place-lead">
 <h3>Площадь Вандом</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1686</p>
-<figure class="place-fig"><img src="../images/paris_place_vendome.jpg" alt="Площадь Вандом"/></figure>
+<p class="place-meta">Место: 1st arrondissement | Период: 1686</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_place_vendome.jpg" alt="Площадь Вандом" width="1200" height="1600" style="height: 295px; max-height: 295px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/paris_place_vendome_b.jpg" alt="Площадь Вандом — вид 2" width="330" height="211" style="height: 295px; max-height: 295px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">В сердце парижской роскоши и великолепия находится Площадь Вандом, площадь, которая с момента своего создания стала синонимом элегантности. Здесь расположены некоторые из лучших люксовых брендов мира, такие как Cartier, Van Cleef &amp; Arpels и Chanel. Площадь проводит различные культурные мероприятия, включая классические концерты и художественные выставки. В центре находится знаковая статуя Аполлона, созданная Жаном-Батистом Тюби. Его архитектурный стиль сочетает в себе французский классицизм с элементами барокко. Во время крупных праздников площадь освещается праздничными огнями.</p>
 <p class="prose">Построенная во время правления Людовика XIV в 17 веке, Площадь Вандом изначально называлась «Площадь Рояль». Позже она стала известна как «Площадь Вандом» в честь герцога Вандома, который владел соседним Отелем Вандом. Дизайн площади, разработанный архитектором Луи Ле Во, отражает барочную грандиозность, демонстрируя симметричную планировку и величественные памятники. Сегодня это остается одним из самых престижных мест для магазинов ювелирных изделий и модных бутиков, символизируя богатство и утонченность.</p></div>
 </section>
-<section class="place" id="paris_pont_alexandre_iii">
-<h3>Мост Александра III</h3>
+<section class="place" id="paris_place_des_vosges">
+<div class="place-lead">
+<h3>Площадь Восгес</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1900–1906</p>
-<figure class="place-fig"><img src="../images/paris_pont_alexandre_iii.jpg" alt="Мост Александра III"/></figure>
-<div class="place-desc"><p class="prose">Пересекая реку Сена, мост Александра III является величественным сооружением, украшенным золотыми статуями и изысканным кованым железом, созданным в честь франко-русского альянса 1892 года. Он украшен 24 позолоченными бронзовыми львами и аллегорическими фигурами, представляющими искусство и науки. Мост вмещает два великолепных зала, по бокам которых расположены аркады с застекленными фасадами, наполненные магазинами и кафе. Его дизайн включает элементы, вдохновленные древнеегипетским и византийским искусством. Ночью мост освещается тысячами огней, создавая ослепительное зрелище. Расположенный рядом с садами Трокадеро, он обеспечивает доступ к Музею человека и Дворцу Шайо.</p>
-<p class="prose">Построенный между 1900 и 1906 годами, мост Александра III был заказан императором Николаем II России в честь его французского коллеги, императора Наполеона III. Мост соединяет элегантные районы Отей и Трокадеро, демонстрируя роскошную архитектуру в стиле ар-деко и изысканные украшения, которые отражают как французские, так и русские влияния. Этот знаковый мост является одной из самых фотографируемых достопримечательностей Парижа, предлагая потрясающие виды на Эйфелеву башню и Елисейские поля.</p></div>
+<p class="place-meta">Период: 1605–1612</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_place_des_vosges.jpg" alt="Площадь Восгес" width="1067" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/paris_place_des_vosges_b.jpg" alt="Площадь Восгес — вид 2" width="330" height="495" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Площадь Восгес — самая старая площадь Парижа, захватывающий пример французской архитектуры Ренессанса. Построенная в период с 1605 по 1612 год во время правления короля Генриха IV, она изначально была задумана как королевская резиденция для аристократов. Построено во время правления короля Генриха IV (1589–1610). Спроектировано архитектором Саломоном де ла Селем. Состоит из 36 идентичных домов, расположенных вокруг прямоугольной планировки. Особенности элегантные балконы и декоративная ковка. Ранее известная как Плейс Рояль до переименования в 1790 году.</p>
+<p class="prose">Построенная архитектором Саломоном де ла Селем при короле Генрихе IV, Площадь Восг служила престижным адресом для дворян и членов двора. Изначально названная Королевской площадью, она позже получила свое текущее название в честь региона Восг после Французской революции. Площадь украшена симметричными рядами краснокирпичных домов с изысканными балконами и каменными фасадами. Этот исторический квадрат предлагает взглянуть на парижскую жизнь в ранний современный период и служит очаровательным местом для прогулок и посетителей, ищущих спокойствие среди суеты центрального Парижа.</p></div>
 </section>
-<section class="place" id="paris_pont_des_arts">
-<h3>Понт де Артс</h3>
+<section class="place" id="paris_place_de_la_concorde">
+<div class="place-lead">
+<h3>Площадь Согласия</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1804</p>
-<figure class="place-fig"><img src="../images/paris_pont_des_arts.jpg" alt="Понт де Артс"/></figure>
-<div class="place-desc"><p class="prose">Пересекая реку Сена и соединяя остров Сите с Левым берегом, Понт дез Арts является одним из самых знаковых мостов Парижа, известным своей изысканной ковкой и живописными видами. Построенный с использованием чугунных рам и каменных опор, он является одним из самых ранних примеров современного мостостроения. Мост украшен изысканными коваными перилами, разработанными скульптором Луи-Эрнестом Барриасом. Он был ярко представлен во многих фильмах и картинах, включая &#x27;Le Bain aux Batignolles&#x27; Ренуара. В последние годы власти убрали печально известный феномен замков из-за соображений безопасности, но сохранили его историческое очарование. Сегодня посетители все еще могут насладиться спокойной атмосферой и захватывающими видами собора Нотр-Дам и Эйфелевой башни.</p>
-<p class="prose">Построенный в 1804 году во времена Наполеона, Понт-дез-Ар стал изначально связующим звеном между Лувром и Сорбонной, служа пешеходным переходом и позже став центром для художников и влюбленных. Его название происходит от «искусств», так как он стал знаменитым благодаря бесчисленным замкам с выгравированными именами влюбленных, символизирующим вечную любовь. Обязательное место для посещения для всех, кто стремится запечатлеть суть парижского романтизма и искусства, Понт де Арт предлагает панорамные виды на достопримечательности города.</p></div>
+<p class="place-meta">Место: 8th arrondissement</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_place_de_la_concorde.jpg" alt="Площадь Согласия" width="907" height="1600" style="height: 298px; max-height: 298px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/paris_place_de_la_concorde_b.jpg" alt="Площадь Согласия — вид 2" width="330" height="213" style="height: 298px; max-height: 298px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Площадь Согласия — это самая большая площадь Парижа, занимающая площадь более 86 400 квадратных метров и окруженная элегантными зданиями. Изначально она называлась Площадь Людовика XV, но изменила свое название после Французской революции. Он включает в себя обелиск Люксора, подарок Египта Наполеону III. В окружении известных достопримечательностей, таких как Hôtel de Crillon и Hôtel Ritz. Спроектировано архитектором Александром-Теодором Бруном. В центре находится фонтан, изначально установленный во время правления Наполеона. Расположенный вдоль реки Сена.</p>
+<p class="prose">Построенная в середине XVIII века при короле Людовике XV, она служила королевским местом для собраний. Во время Революции здесь стояла гильотина, символизируя казни видных личностей, таких как Мария Антуанетта. Позже это место стало площадкой для празднований и памятников в честь героев Франции. Обязательное к посещению место благодаря своему грандиозному дизайну, историческому значению и центральному расположению рядом с Елисейскими полями и Садом Тюильри.</p></div>
 </section>
 <section class="place" id="paris_pont_neuf">
+<div class="place-lead">
 <h3>Пон-Неф</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1578–1607</p>
-<figure class="place-fig"><img src="../images/paris_pont_neuf.jpg" alt="Пон-Неф"/></figure>
+<p class="place-meta">Место: Île de la Cité to Left and Right Banks | Период: 1578–1607</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_pont_neuf.jpg" alt="Пон-Неф" width="1280" height="700" style="height: 141px; max-height: 141px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/paris_pont_neuf_b.jpg" alt="Пон-Неф — вид 2" width="330" height="101" style="height: 141px; max-height: 141px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Пересекая Сену и соединяя остров Сите с правым берегом, Пон-Неф — самый старый мост Парижа, построенный в 1578–1607 годах во время правления Генриха IV. Он был революционным для своего времени, с широкими тротуарами и повозками, а также стал первым мостом в Париже, на котором не было домов или магазинов. Он открылся в 1607 году, что стало значительной вехой в развитии инфраструктуры Парижа. Мост имеет два уровня: верхние пешеходные дорожки и нижние проезды для карет. Его дизайн оказал влияние на последующее строительство мостов по всей Европе. Сегодня Пон-Неф является объектом Всемирного наследия ЮНЕСКО, признанным за его историческое значение и архитектурную элегантность. В дополнение к своей эстетической привлекательности, здесь выступают многочисленные уличные артисты и performers.</p>
 <p class="prose">Построенный королем Генрихом IV, Пон Нёф заменил более старые деревянные конструкции, которые неоднократно разрушались наводнениями. Спроектированный королевским архитектором Соломоном де Броссом, он выполнял как практические, так и символические функции, олицетворяя власть короля и единство Парижа. Мост стал популярным местом встречи парижан, известным своими живописными видами и открытыми пространствами. Свидетельство ренессансной инженерии и градостроительства, Пон-Неф остается одной из самых знаковых достопримечательностей Парижа, предлагая захватывающие виды на реку и служа культурным центром.</p></div>
 </section>
-<section class="place" id="paris_pere_lachaise_cemetery">
-<h3>Кладбище Пер Лашез</h3>
+<section class="place" id="paris_pont_des_arts">
+<div class="place-lead">
+<h3>Понт де Артс</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Период: 1804</p>
-<figure class="place-fig"><img src="../images/paris_pere_lachaise_cemetery.jpg" alt="Кладбище Пер Лашез"/></figure>
-<div class="place-desc"><p class="prose">Расположенное на холме Монмартр, кладбище Пер Лашез является самым известным кладбищем Парижа и одним из его крупнейших. Основанное в 1804 году во время правления Наполеона, оно быстро стало модным местом захоронения для парижан. Он содержит более 70 000 могил и более 1 миллиона захоронений. Кладбище занимает почти 109 акров и является одним из крупнейших городских кладбищ в Европе. Значительные захоронения включают Жан-Жака Руссо, Оноре де Бальзака, Фредерика Шопена и Ива Сен-Лорана. Его дизайн включает французскую неоклассическую архитектуру с извивающимися дорожками и живописными видами. Он известен своими потрясающими памятниками, статуями и сложными гробницами.</p>
-<p class="prose">Основанное королем Людовиком XVIII в 1804 году, кладбище Пер Лашез было названо в честь отца Франсуа де Лашеза, иезуитского священника, который служил заключенным в близлежащих тюрьмах. Кладбище быстро стало популярным местом последнего упокоения для таких выдающихся личностей, как Мольер, Бальзак и Шопен. Посетители приходят сюда, чтобы отдать дань уважения таким знаковым фигурам, как Джим Моррисон, Оскар Уайльд и Сара Бернар, что делает это место культурным направлением не менее, чем историческим сайтом.</p></div>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_pont_des_arts.jpg" alt="Понт де Артс" width="1280" height="796" style="height: 141px; max-height: 141px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/paris_pont_des_arts_b.jpg" alt="Понт де Артс — вид 2" width="330" height="101" style="height: 141px; max-height: 141px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Пересекая реку Сена и соединяя остров Сите с Левым берегом, Понт дез Арts является одним из самых знаковых мостов Парижа, известным своей изысканной ковкой и живописными видами. Построенный с использованием чугунных рам и каменных опор, он является одним из самых ранних примеров современного мостостроения. Мост украшен изысканными коваными перилами, разработанными скульптором Луи-Эрнестом Барриасом. Он был ярко представлен во многих фильмах и картинах, включая &#x27;Le Bain aux Batignolles&#x27; Ренуара. В последние годы власти убрали печально известный феномен замков из-за соображений безопасности, но сохранили его историческое очарование. Сегодня посетители все еще могут насладиться спокойной атмосферой и захватывающими видами собора Нотр-Дам и Эйфелевой башни.</p>
+<p class="prose">Построенный в 1804 году во времена Наполеона, Понт-дез-Ар стал изначально связующим звеном между Лувром и Сорбонной, служа пешеходным переходом и позже став центром для художников и влюбленных. Его название происходит от «искусств», так как он стал знаменитым благодаря бесчисленным замкам с выгравированными именами влюбленных, символизирующим вечную любовь. Обязательное место для посещения для всех, кто стремится запечатлеть суть парижского романтизма и искусства, Понт де Арт предлагает панорамные виды на достопримечательности города.</p></div>
 </section>
-<section class="place" id="paris_sacre_coeur">
-<h3>Базилика Сакре-Кёр</h3>
+<section class="place" id="paris_jardin_du_luxembourg">
+<div class="place-lead">
+<h3>Сад Люксембург</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1875–1919</p>
-<figure class="place-fig"><img src="../images/paris_sacre_coeur.jpg" alt="Базилика Сакре-Кёр"/></figure>
-<div class="place-desc"><p class="prose">Расположенная на вершине холма Монмартр, базилика Сакре-Кёр является величественным символом парижской духовности и ар-деко архитектуры. Ее белый купол доминирует над горизонтом, предлагая панорамные виды на город внизу. Строительство заняло почти 44 года из-за проблем с финансированием и перерывов, вызванных Первой мировой войной. Иконический белый купол базилики имеет высоту 83 метра. Внутри посетители могут исследовать потрясающие мозаики, изображающие сцены из христианских писаний. Его расположение на холме Монмартр обеспечивает непревзойденный вид на Эйфелеву башню и другие достопримечательности. По воскресеньям и праздникам мессы проводятся регулярно.</p>
-<p class="prose">Построенная в период с 1875 по 1919 год, базилика была возведена как национальное святилище для искупления излишеств Французской революции. Спроектированная архитектором Полем Абади, она демонстрирует неовизантийский стиль с замысловатыми мозаиками и витражами. Посетители приходят сюда, чтобы восхититься архитектурной красотой и насладиться захватывающими видами Парижа.</p></div>
+<p class="place-meta">Место: 6th arrondissement | Период: 1612</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_jardin_du_luxembourg.jpg" alt="Сад Люксембург" width="1280" height="960" style="height: 309px; max-height: 309px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/paris_jardin_du_luxembourg_b.jpg" alt="Сад Люксембург — вид 2" width="330" height="221" style="height: 309px; max-height: 309px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Сад Люксембург — это спокойный оазис зелени, расположенный в самом сердце Парижа, предлагающий посетителям тихое убежище от суеты городской жизни. Он занимает примерно 24 акра зелёных насаждений и формальных садов. Сад является домом для Musée du Luxembourg, где представлены произведения французских художников. Посетители могут прогуливаться по извивающимся дорожкам, окружённым деревьями и скамейками, идеально подходящими для чтения или пикников. Знаменитые статуи, такие как &#x27;Le Penseur&#x27; Родена, prominently расположены по всей территории. Мероприятия, такие как концерты и театральные представления на открытом воздухе, проходят регулярно в летние месяцы.</p>
+<p class="prose">Изначально созданный как королевский сад для Марии Медичи в 17 веке, Люксембургский сад стал одним из самых знаковых и любимых общественных пространств Парижа. Он был спроектирован Андре Лено, который также работал над Версалем, и включает в себя сложные дорожки, фонтаны и скульптуры, отражающие его историческое значение. Обязательное место для посещения для всех, кто ищет спокойствия среди парижской суеты, Сад Люксембург предлагает очаровательную обстановку для отдыха и размышлений.</p></div>
 </section>
-<section class="place" id="paris_pdfband_1_954425d3">
-<h3>Saint Augustin Church Paris</h3>
+<section class="place" id="paris_tuileries_garden">
+<div class="place-lead">
+<h3>Сад Тюильри</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/paris_pdfband_1_954425d3.jpg" alt="Saint Augustin Church Paris"/></figure>
+<p class="place-meta">Стиль: регулярная французская парковая архитектура XVII-XVIII веков | Период: 1564</p>
+<figure class="place-fig place-fig--lo-res"><img src="../images/paris_tuileries_garden_b.jpg" alt="Сад Тюильри" width="330" height="247"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Сад Тюильри — это спокойный оазис, расположенный между музеем Лувр и площадью Согласия. Он был изначально создан как часть дворца Тюильри, построенного Екатериной Медичи в 16 веке. Он занимает примерно 24 акра и предлагает элегантные дорожки, окруженные деревьями и цветами. Сад включает в себя скульптуры и фонтаны, такие как знаменитый Фонтан Нептуна. В сердце сада стоит Монумент Славы Французского Народа, посвященный военным победам Франции. Летними вечерами в саду проходят культурные мероприятия, такие как концерты и показы фильмов. Рядом с садом находится знаковая Пирамида Лувра, которая служит входом в Музей Лувра.</p>
+<p class="prose">Изначально спроектированный как формальный сад для Дворца Тюильри, он позже стал общественным парком во время Французской революции. Сад претерпел значительные изменения с течением времени, включая его преобразование в более открытое, естественное пространство в рамках градостроительных усилий Наполеона III в середине XIX века. Обязательное место для посещения всем, кто исследует Париж, Сад Тюильри предлагает спокойствие на фоне суеты и шума центра города.</p></div>
 </section>
 <section class="place" id="paris_sainte_chapelle">
+<div class="place-lead">
 <h3>Сент-Шапель</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/paris_sainte_chapelle.jpg" alt="Сент-Шапель"/></figure>
+<p class="place-meta">Адрес: Île de la Cité, 4th arrondissement</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_sainte_chapelle.jpg" alt="Сент-Шапель" width="1240" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--row-sized"><img src="../images/paris_sainte_chapelle_b.jpg" alt="Сент-Шапель — вид 2" width="330" height="541" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Высоко над рекой Сена расположена Сент-Шапель — великолепная готическая часовня, известная своими изысканными витражами. Построенная во время правления короля Людовика IX в конце XIII века, она изначально предназначалась как частная часовня для королевских аудиенций и религиозных церемоний. Часовня содержит более 1,000 фигур, изображенных на витражах. Он был построен на месте более ранней часовни, заказанной самим Святым Людовиком. Король Людовик IX пожертвовал большую часть средств на его строительство. Сегодня Сент-Шапель является частью комплекса Пале де Жюстиc и хранит несколько исторических артефактов. Его внешние стены относительно просты по сравнению с изысканным интерьером.</p>
 <p class="prose">Построенная между 1242 и 1248 годами под руководством Пьера де Монтмирея, Сент-Шапель служила хранилищем реликвий Страстей Христовых, включая Терновый венец. Ее уникальный дизайн демонстрирует сложное мастерство, характерное для французской готической архитектуры, с высокими колоннами и заостренными арками, создающими ощущение высоты и легкости. Посетители приходят полюбоваться знаменитыми витражами капеллы, которые изображают сцены из Библии и наполняют интерьер яркими цветами.</p></div>
 </section>
-<section class="place" id="paris_tuileries_garden">
-<h3>Сад Тюильри</h3>
+<section class="place" id="paris_centre_pompidou">
+<div class="place-lead">
+<h3>Центр Помпиду</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Стиль: регулярная французская парковая архитектура XVII-XVIII веков | Период: 1564</p>
-<figure class="place-fig"><img src="../images/paris_tuileries_garden.jpg" alt="Сад Тюильри"/></figure>
-<div class="place-desc"><p class="prose">Сад Тюильри — это спокойный оазис, расположенный между музеем Лувр и площадью Согласия. Он был изначально создан как часть дворца Тюильри, построенного Екатериной Медичи в 16 веке. Он занимает примерно 24 акра и предлагает элегантные дорожки, окруженные деревьями и цветами. Сад включает в себя скульптуры и фонтаны, такие как знаменитый Фонтан Нептуна. В сердце сада стоит Монумент Славы Французского Народа, посвященный военным победам Франции. Летними вечерами в саду проходят культурные мероприятия, такие как концерты и показы фильмов. Рядом с садом находится знаковая Пирамида Лувра, которая служит входом в Музей Лувра.</p>
-<p class="prose">Изначально спроектированный как формальный сад для Дворца Тюильри, он позже стал общественным парком во время Французской революции. Сад претерпел значительные изменения с течением времени, включая его преобразование в более открытое, естественное пространство в рамках градостроительных усилий Наполеона III в середине XIX века. Обязательное место для посещения всем, кто исследует Париж, Сад Тюильри предлагает спокойствие на фоне суеты и шума центра города.</p></div>
+<p class="place-meta">Адрес: Place Georges-Pompidou, 4th arrondissement | Период: 1977</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_centre_pompidou.jpg" alt="Центр Помпиду" width="1280" height="852" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/paris_centre_pompidou_b.jpg" alt="Центр Помпиду — вид 2" width="330" height="220" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Центр Жоржа Помпиду — это музей современного искусства и культурный центр, расположенный в самом сердце Парижа. Завершенный в 1977 году, он выделяется своей яркой архитектурой, с открытыми стальными балками и стеклянными панелями. Здесь находятся постоянные коллекции современного и современного искусства. Его внешний вид имеет футуристический облик с видимыми вентиляционными шахтами и пешеходными дорожками. Здание изначально подвергалось критике, но с тех пор стало одним из самых знаковых памятников Парижа. Он гордится обширными выставочными площадями, посвященными временным выставкам и выступлениям. Расположенный на набережной Бобур, он привлекает миллионы посетителей ежегодно.</p>
+<p class="prose">Центр Помпиду, спроектированный Ренцо Пиано и Ричардом Роджерсом, открылся для публики в 1977 году как новаторский пример постмодернистской архитектуры. Его инновационный дизайн бросил вызов традиционным представлениям о музейной эстетике, демонстрируя современные произведения искусства и инсталляции. Посещение Центра Помпиду предоставляет уникальную возможность исследовать авангардное искусство и взаимодействовать с передовыми художественными выражениями.</p></div>
+</section>
+<section class="place" id="paris_champs_elysees">
+<div class="place-lead">
+<h3>Шанзельи́зе</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: 8th arrondissement</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_champs_elysees.jpg" alt="Шанзельи́зе" width="1280" height="1600" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/paris_champs_elysees_b.jpg" alt="Шанзельи́зе — вид 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Шанзельзе — самая знаковая авеню Парижа, величественно протянувшаяся более чем на два километра между Арком де Триумф и Площадью Согласия. Она известна как одна из самых грандиозных бульваров мира, украшенная роскошными магазинами, элегантными кафе и историческими достопримечательностями. Парижане часто называют его просто «Ле Шанпс». Авеню является домом для крупных универмагов, таких как Galeries Lafayette и Printemps. Каждый ноябрь на Елисейских полях проходит грандиозный военный парад в честь Дня Бастилии. Ночью проспект сверкает неоновыми огнями и подсвеченными рекламными щитами. Его название переводится как &#x27;Элизийские поля&#x27;, что отражает его историческую связь с загробной жизнью.</p>
+<p class="prose">Изначально спроектированный в середине XVII века Людовиком XIV, Шанз-Элизе был задуман как соединение королевского дворца в Версале с центром Парижа. Со временем он стал центром модной жизни, развлечений и политических демонстраций. Сегодня он остается символом французской культуры и элегантности. Посетите Елисейские поля, чтобы ощутить парижскую роскошь, увидеть всемирно известные памятники, такие как Триумфальная арка, и насладиться яркой атмосферой самой знаменитой торговой улицы Франции.</p></div>
+</section>
+<section class="place" id="paris_eiffel_tower">
+<div class="place-lead">
+<h3>Эйфелева башня</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Champ de Mars, 7th arrondissement | Период: 1889</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_eiffel_tower.jpg" alt="Эйфелева башня" width="864" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--row-sized"><img src="../images/paris_eiffel_tower_b.jpg" alt="Эйфелева башня — вид 2" width="330" height="550" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Эйфелева башня, всемирно известный символ парижской архитектуры и инженерии, была построена для Всемирной выставки 1889 года как временная конструкция, призванная отметить промышленную мощь и инженерные достижения Франции. Спроектированная Густавом Эйфелем, она достигает высоты 300 метров, что сделало её самым высоким искусственным сооружением в Европе на момент завершения строительства. Он изготовлен в основном из кованого железа и весит более 10 000 тонн. Во время своего строительства он привлек более двух миллионов посетителей в течение первого года. Ночью башня освещена тысячами огней, создавая захватывающее зрелище, видимое за многие мили вокруг. Его дизайн вдохновил множество будущих небоскрёбов и мостов по всему миру. В 1925 году здесь стал радиопередающим узлом.</p>
+<p class="prose">Завершенная в 1889 году, башня изначально планировалась к демонтажу через двадцать лет, но оказалась настолько популярной, что осталась постоянным элементом французской столицы. В первые годы она служила как символом технологического прогресса, так и практической смотровой площадкой. Посетите Эйфелеву башню, чтобы увидеть одну из самых знаковых конструкций в мире, насладиться панорамными видами Парижа и погрузиться в его богатую историю.</p></div>
 </section>
 </body>
 </html>

@@ -13,7 +13,7 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
 .otium-logo { font-family: 'Cormorant Garamond', serif; font-size: 2.15rem;
   font-weight: 600; letter-spacing: 0.18em; margin-bottom: 0.85rem; }
 .otiump { margin: 0.42rem 0; line-height: 1.42; text-align: justify;
-  max-width: 38rem; font-size: 0.95rem; }
+  font-size: 0.95rem; }
 .guide-title { page-break-after: auto; margin-bottom: 0.55rem;
   page-break-inside: avoid; }
 .historical-reference { margin: 0.75rem 0 1.15rem;
@@ -63,22 +63,103 @@ ol.trip-stops a:hover { text-decoration: underline; }
 .heraldry-univ-caption { font-size: 0.52rem; line-height: 1.18;
   margin: 0.12rem 0 0; padding: 0 0.06rem; color: #252525;
   text-align: center; font-weight: 500; }
-.heraldry-motto { text-align: center; max-width: 18rem; margin: 0.18rem auto;
+.heraldry-motto { text-align: center; margin: 0.18rem auto;
   width: 100%; }
 .motto-line { font-family: 'Cormorant Garamond', serif; font-size: 1rem;
   margin: 0; color: #333; line-height: 1.35; }
 .guide-title h1.guide-title-main { font-family: 'Cormorant Garamond', serif;
   font-size: 2.35rem; margin-bottom: 0.5rem; font-weight: 600; }
 .lead { color: #444; font-size: 1.05rem; }
-.guide-toc { margin: 0.85rem 0 1.15rem; page-break-inside: avoid; }
-.guide-toc h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.28rem;
-  font-weight: 600; margin: 0.4rem 0 0.55rem; }
+
+.guide-toc { page-break-before: always; break-before: page;
+  page-break-after: always; break-after: page;
+  margin: 0; padding: 0.2rem 0 0.45rem; page-break-inside: auto; }
+.guide-toc h2 { font-family: 'Cormorant Garamond', serif;
+  font-size: 1.28rem; font-weight: 600; margin: 0.4rem 0 0.55rem; }
 .guide-toc ol { margin: 0.35rem 0 0.65rem 1.25rem; padding: 0;
   columns: 2; column-gap: 1.5rem; }
 .guide-toc li { margin: 0.18rem 0; line-height: 1.35;
   font-size: 0.88rem; break-inside: avoid; }
-.guide-toc a { color: #1a5276; text-decoration: none; }
+.guide-toc a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.guide-toc a:hover { color: #0d3d56; }
 .guide-toc li.toc-item--sub { font-size: 0.82rem; margin-left: 0.35rem; }
+.toc-back { font-size: 0.78rem; margin: 0 0 0.35rem; text-align: right; }
+.toc-back a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.toc-back a:hover { color: #0d3d56; }
+.place, .historical-reference, .guide-primer, .guide-trip-plans {
+  scroll-margin-top: 1.25rem; }
+.historical-reference h2, .guide-primer h2, .guide-trip-plans h2,
+.chapter-head h2, .place-lead h3 { position: relative; }
+.guide-toc + .place, .guide-toc + .chapter-head {
+  page-break-before: avoid; break-before: avoid-page; }
+.place-lead { page-break-inside: avoid; break-inside: avoid-page;
+  page-break-after: auto; }
+.place-lead > h3 { page-break-after: avoid; break-after: avoid-page; }
+.place-lead > .place-meta { page-break-after: avoid; break-after: avoid-page; }
+
+.place-fig { page-break-inside: avoid; break-inside: avoid-page;
+  margin: 0.5rem 0 1rem; }
+.place-fig img {
+  page-break-inside: avoid; break-inside: avoid-page;
+  max-height: 48vh; width: auto; max-width: 100%;
+  object-fit: contain; margin-left: auto; margin-right: auto; }
+.place-fig--hi-res img { max-height: 52vh; }
+.place-fig--lo-res img { max-height: 30vh; }
+.place-pdf-fig-row {
+  display: flex; flex-direction: row; flex-wrap: wrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.45rem 0.55rem; margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row .place-fig {
+  flex: 1 1 30%; margin: 0; min-width: 26%; max-width: 100%; }
+.place-pdf-fig-row .place-fig img {
+  width: auto; max-width: 100%; height: auto; max-height: 44vh;
+  object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--pair {
+  flex-wrap: nowrap; justify-content: space-between;
+  align-items: flex-end; gap: 0.5rem 0.65rem; }
+.place-pdf-fig-row--pair .place-fig {
+  flex: 1 1 47%; min-width: 0; max-width: 50%;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--pair .place-fig img {
+  max-height: 44vh; object-fit: contain; }
+.place-pdf-fig-row--pair .place-fig--hi-res img { max-height: 52vh; }
+.place-pdf-fig-row--pair .place-fig--lo-res img { max-height: 26vh; }
+.place-pdf-fig-row--pair .place-fig--row-sized img,
+.place-pdf-fig-row--triple .place-fig--row-sized img,
+.place-pdf-fig-row--many .place-fig--row-sized img {
+  width: auto; max-width: 100%; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row .place-fig--row-sized.place-fig--hi-res img,
+.place-pdf-fig-row .place-fig--row-sized.place-fig--lo-res img {
+  max-height: unset; }
+.place-pdf-fig-rows-stack {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple {
+  display: flex; flex-direction: row; flex-wrap: nowrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.4rem 0.48rem; margin: 0;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--triple .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--triple .place-fig--hi-res img { max-height: 42vh; }
+.place-pdf-fig-row--triple .place-fig--lo-res img { max-height: 18vh; }
+.place-pdf-fig-row--many {
+  flex-wrap: nowrap; justify-content: center; align-items: flex-end;
+  gap: 0.35rem 0.42rem; }
+.place-pdf-fig-row--many .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--many .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+
+
 .place { margin-bottom: 2.2rem; page-break-inside: auto; }
 h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.22rem; margin: 1.2rem 0 0.35rem;
   font-weight: 600; }
@@ -90,7 +171,6 @@ h4 { font-family: 'Cormorant Garamond', serif; font-size: 0.95rem; text-transfor
   color: #555; font-size: 0.95rem; margin: 0 0 0.5rem; font-style: italic; }
 .place-meta { font-size: 0.92rem; color: #353535; margin: 0 0 0.75rem;
   line-height: 1.4; }
-.place-fig { margin: 0.5rem 0 1rem; }
 img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
 .prose, .place-desc p { margin: 0.45rem 0; line-height: 1.5;
   text-align: justify; }
@@ -109,12 +189,15 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <div class="heraldry-strip heraldry-official">
 <figure class="heraldry-fig heraldry-coat-book" title="Coat of arms of Volgograd"><img src="../images/guide_coat_of_arms.svg" alt="Coat of arms of Volgograd"/></figure>
 <figure class="heraldry-fig heraldry-coat-book" title="Flag of Volgograd"><img src="../images/guide_flag.svg" alt="Flag of Volgograd"/></figure>
-</div></div><h1 class="guide-title-main">Volgograd</h1><p class="lead">Guide. Places in this edition: 25.</p></header>
+</div></div><h1 class="guide-title-main">Volgograd</h1><p class="lead">Guide. Places in this edition: 24.</p></header>
+<nav class="guide-toc" id="guide-toc" aria-label="Contents"><h2>Contents</h2><ol><li class="toc-item"><a href="#guide-historical">Historical overview</a></li><li class="toc-item"><a href="#guide-trips">Trip ideas</a></li><li class="toc-item"><a href="#volgograd_alexander_nevsky_cathedral">Alexander Nevsky Cathedral</a></li><li class="toc-item"><a href="#volgograd_panorama_museum">Battle of Stalingrad Panorama Museum</a></li><li class="toc-item"><a href="#volgograd_kazan_cathedral_volgograd">Cathedral of Our Lady of Kazan</a></li><li class="toc-item"><a href="#volgograd_central_embankment">Central embankment</a></li><li class="toc-item"><a href="#volgograd_church_nicholas">Church of St Nicholas</a></li><li class="toc-item"><a href="#volgograd_church_nativity">Church of the Nativity</a></li><li class="toc-item"><a href="#volgograd_gagarin_street">Gagarin Street view</a></li><li class="toc-item"><a href="#volgograd_gerhardt_mill">Gerhardt Mill</a></li><li class="toc-item"><a href="#volgograd_memorial_hall">Hall of Military Glory</a></li><li class="toc-item"><a href="#volgograd_lenin_avenue">Lenin Avenue</a></li><li class="toc-item"><a href="#volgograd_mamayev_kurgan">Mamayev Kurgan</a></li><li class="toc-item"><a href="#volgograd_rotonda">Pantheon of Glory</a></li><li class="toc-item"><a href="#volgograd_pavlov_house">Pavlov&#x27;s House</a></li><li class="toc-item"><a href="#volgograd_square_fighters">Square of Fallen Fighters</a></li><li class="toc-item"><a href="#volgograd_motherland_calls">The Motherland Calls</a></li><li class="toc-item"><a href="#volgograd_embankment_ext">Volga embankment</a></li><li class="toc-item"><a href="#volgograd_volga_deutsche">Volga Germans museum</a></li><li class="toc-item"><a href="#volgograd_river_port">Volga river port</a></li><li class="toc-item"><a href="#volgograd_arena">Volgograd Arena</a></li><li class="toc-item"><a href="#volgograd_cultural_center">Volgograd cultural centre</a></li><li class="toc-item"><a href="#volgograd_historical_museum">Volgograd Historical Museum</a></li><li class="toc-item"><a href="#volgograd_railway_station">Volgograd I railway station</a></li><li class="toc-item"><a href="#volgograd_planetarium">Volgograd Planetarium</a></li><li class="toc-item"><a href="#volgograd_fine_arts">Volgograd Regional Art Museum</a></li></ol></nav>
 <section class="historical-reference" id="guide-historical" aria-label="Historical overview"><h2>Historical overview</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 <p class="prose">Volgograd stretches along the Volga as a southern Russian industrial and river port city.</p>
 <p class="prose">Its modern name recalls the river; its wartime name, Stalingrad, recalls a turning point of the Second World War. Memorial hills, museums, and embankments keep that memory in public space while the city continues as a regional hub.</p>
 <p class="prose">Post-war rebuilding turned Stalingrad into a victory symbol; renaming to Volgograd reflected de-Stalinisation. The city now combines riverfront life, metallurgy, and memorial landscapes that argue for the price of peace.</p></section>
 <section class="guide-trip-plans" id="guide-trips" aria-label="Trip ideas"><h2>Trip ideas</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 <article class="trip-plan" id="trip-1d"><h3>One day</h3>
 <p class="prose">A compact loop linking the strongest cards in this guide, ordered to minimise backtracking on foot.</p>
 <ol class="trip-stops"><li><a href="#volgograd_pavlov_house">Pavlov&#x27;s House</a> (~60min)</li>
@@ -129,207 +212,324 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <li><a href="#volgograd_gagarin_street">Gagarin Street view</a> (~75min)</li>
 <li><a href="#volgograd_historical_museum">Volgograd Historical Museum</a> (~75min)</li>
 <li><a href="#volgograd_memorial_hall">Hall of Military Glory</a> (~75min)</li>
-<li><a href="#volgograd_old_sarepta">Museum Old Sarepta</a> (~75min)</li></ol></article>
+<li><a href="#volgograd_river_port">Volga river port</a> (~75min)</li></ol></article>
 <article class="trip-plan" id="trip-3d2"><h3>Three days — day 2</h3>
 <p class="prose">Day 2 — next neighbourhood group.</p>
-<ol class="trip-stops"><li><a href="#volgograd_river_port">Volga river port</a> (~75min)</li>
-<li><a href="#volgograd_rotonda">Pantheon of Glory</a> (~75min)</li>
+<ol class="trip-stops"><li><a href="#volgograd_rotonda">Pantheon of Glory</a> (~75min)</li>
 <li><a href="#volgograd_square_fighters">Square of Fallen Fighters</a> (~75min)</li>
 <li><a href="#volgograd_volga_deutsche">Volga Germans museum</a> (~75min)</li>
-<li><a href="#volgograd_alexander_nevsky_cathedral">Alexander Nevsky Cathedral</a> (~60min)</li></ol></article>
+<li><a href="#volgograd_alexander_nevsky_cathedral">Alexander Nevsky Cathedral</a> (~60min)</li>
+<li><a href="#volgograd_central_embankment">Central embankment</a> (~60min)</li></ol></article>
 <article class="trip-plan" id="trip-3d3"><h3>Three days — day 3</h3>
 <p class="prose">Day 3 — remaining highlights nearby.</p>
-<ol class="trip-stops"><li><a href="#volgograd_central_embankment">Central embankment</a> (~60min)</li>
-<li><a href="#volgograd_gerhardt_mill">Gerhardt Mill</a> (~60min)</li>
+<ol class="trip-stops"><li><a href="#volgograd_gerhardt_mill">Gerhardt Mill</a> (~60min)</li>
 <li><a href="#volgograd_kazan_cathedral_volgograd">Cathedral of Our Lady of Kazan</a> (~60min)</li>
 <li><a href="#volgograd_lenin_avenue">Lenin Avenue</a> (~60min)</li>
-<li><a href="#volgograd_mamayev_kurgan">Mamayev Kurgan</a> (~60min)</li></ol></article></section>
-<nav class="guide-toc" aria-label="Contents"><h2>Contents</h2><ol><li class="toc-item"><a href="#guide-historical">Historical overview</a></li><li class="toc-item"><a href="#guide-trips">Trip ideas</a></li><li class="toc-item"><a href="#volgograd_alexander_nevsky_cathedral">Alexander Nevsky Cathedral</a></li><li class="toc-item"><a href="#volgograd_panorama_museum">Battle of Stalingrad Panorama Museum</a></li><li class="toc-item"><a href="#volgograd_kazan_cathedral_volgograd">Cathedral of Our Lady of Kazan</a></li><li class="toc-item"><a href="#volgograd_central_embankment">Central embankment</a></li><li class="toc-item"><a href="#volgograd_church_nicholas">Church of St Nicholas</a></li><li class="toc-item"><a href="#volgograd_church_nativity">Church of the Nativity</a></li><li class="toc-item"><a href="#volgograd_gagarin_street">Gagarin Street view</a></li><li class="toc-item"><a href="#volgograd_gerhardt_mill">Gerhardt Mill</a></li><li class="toc-item"><a href="#volgograd_memorial_hall">Hall of Military Glory</a></li><li class="toc-item"><a href="#volgograd_lenin_avenue">Lenin Avenue</a></li><li class="toc-item"><a href="#volgograd_mamayev_kurgan">Mamayev Kurgan</a></li><li class="toc-item"><a href="#volgograd_old_sarepta">Museum Old Sarepta</a></li><li class="toc-item"><a href="#volgograd_rotonda">Pantheon of Glory</a></li><li class="toc-item"><a href="#volgograd_pavlov_house">Pavlov&#x27;s House</a></li><li class="toc-item"><a href="#volgograd_square_fighters">Square of Fallen Fighters</a></li><li class="toc-item"><a href="#volgograd_motherland_calls">The Motherland Calls</a></li><li class="toc-item"><a href="#volgograd_embankment_ext">Volga embankment</a></li><li class="toc-item"><a href="#volgograd_volga_deutsche">Volga Germans museum</a></li><li class="toc-item"><a href="#volgograd_river_port">Volga river port</a></li><li class="toc-item"><a href="#volgograd_arena">Volgograd Arena</a></li><li class="toc-item"><a href="#volgograd_cultural_center">Volgograd cultural centre</a></li><li class="toc-item"><a href="#volgograd_historical_museum">Volgograd Historical Museum</a></li><li class="toc-item"><a href="#volgograd_railway_station">Volgograd I railway station</a></li><li class="toc-item"><a href="#volgograd_planetarium">Volgograd Planetarium</a></li><li class="toc-item"><a href="#volgograd_fine_arts">Volgograd Regional Art Museum</a></li></ol></nav>
+<li><a href="#volgograd_mamayev_kurgan">Mamayev Kurgan</a> (~60min)</li>
+<li><a href="#volgograd_motherland_calls">The Motherland Calls</a> (~60min)</li></ol></article></section>
 <section class="place" id="volgograd_alexander_nevsky_cathedral">
+<div class="place-lead">
 <h3>Alexander Nevsky Cathedral</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/volgograd_alexander_nevsky_cathedral.jpg" alt="Alexander Nevsky Cathedral"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/volgograd_alexander_nevsky_cathedral.jpg" alt="Alexander Nevsky Cathedral" width="1200" height="1600" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/volgograd_alexander_nevsky_cathedral_b.jpg" alt="Alexander Nevsky Cathedral — view 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Large Orthodox cathedral on the Square of Fallen Fighters, rebuilt in a neo-Byzantine style as a major city landmark. Combine with central squares and memorial routes nearby. Dress modestly inside; services follow the church calendar.</p></div>
 </section>
 <section class="place" id="volgograd_panorama_museum">
+<div class="place-lead">
 <h3>Battle of Stalingrad Panorama Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/volgograd_panorama_museum.jpg" alt="Battle of Stalingrad Panorama Museum"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/volgograd_panorama_museum.jpg" alt="Battle of Stalingrad Panorama Museum" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/volgograd_panorama_museum_b.jpg" alt="Battle of Stalingrad Panorama Museum — view 2" width="330" height="220" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Memorial museum complex with the panorama hall and outdoor military heritage displays. Plan at least half a day with the adjacent mill ruins. Audio guides may be available in multiple languages.</p></div>
 </section>
 <section class="place" id="volgograd_kazan_cathedral_volgograd">
+<div class="place-lead">
 <h3>Cathedral of Our Lady of Kazan</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/volgograd_kazan_cathedral_volgograd.jpg" alt="Cathedral of Our Lady of Kazan"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/volgograd_kazan_cathedral_volgograd.jpg" alt="Cathedral of Our Lady of Kazan" width="1600" height="1060" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/volgograd_kazan_cathedral_volgograd_b.jpg" alt="Cathedral of Our Lady of Kazan — view 2" width="330" height="441" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Orthodox cathedral dedicated to the Kazan icon of the Mother of God, with domes visible across the central districts. Evening illumination highlights the cupolas from river viewpoints. Check parish hours for interior visits during services.</p></div>
 </section>
 <section class="place" id="volgograd_central_embankment">
+<div class="place-lead">
 <h3>Central embankment</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/volgograd_central_embankment.jpg" alt="Central embankment"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/volgograd_central_embankment.jpg" alt="Central embankment" width="1280" height="960" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/volgograd_central_embankment_b.jpg" alt="Central embankment — view 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Terraced Volga embankment with river port views, rotunda, and popular evening strolling. Sunset is a favourite time for photography toward the water. Winter ice and wind off the river can be sharp.</p></div>
 </section>
 <section class="place" id="volgograd_church_nicholas">
+<div class="place-lead">
 <h3>Church of St Nicholas</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/volgograd_church_nicholas.jpg" alt="Church of St Nicholas"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/volgograd_church_nicholas.jpg" alt="Church of St Nicholas" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/volgograd_church_nicholas_b.jpg" alt="Church of St Nicholas — view 2" width="330" height="239" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Church of St Nicholas in Volgograd is a striking example of Russian Orthodox architecture, known for its intricate design and serene atmosphere. This historic church serves as a spiritual hub for the local community and offers visitors a glimpse into the rich religious traditions of the region. Its beautiful frescoes and iconostasis create a captivating environment for worship and reflection. Founded in 1910 and completed in 1912. Located in Volgograd, Russia. Architectural style reflects traditional Russian Orthodox design.</p>
 <p class="prose">The Church of St Nicholas was founded in the early 20th century, with construction beginning in 1910 and completed in 1912. It was built to serve the growing population of Volgograd, then known as Tsaritsyn, and has since witnessed significant historical events, including the tumultuous periods of the Russian Revolution and World War II. The church has undergone various restorations to preserve its architectural integrity and cultural heritage. The Church of St Nicholas holds cultural significance as a symbol of the Orthodox faith in Volgograd, reflecting the city&#x27;s religious heritage and community spirit. It serves as a venue for important religious rites and celebrations, fostering a sense of continuity and tradition among local residents. The church also contributes to the artistic landscape of the city, showcasing traditional Russian religious art.</p></div>
 </section>
 <section class="place" id="volgograd_church_nativity">
+<div class="place-lead">
 <h3>Church of the Nativity</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/volgograd_church_nativity.jpg" alt="Church of the Nativity"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/volgograd_church_nativity.jpg" alt="Church of the Nativity" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/volgograd_church_nativity_b.jpg" alt="Church of the Nativity — view 2" width="330" height="446" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Church of the Nativity in Volgograd is a striking example of Russian Orthodox architecture, known for its intricate design and vibrant frescoes. This sacred site serves as a place of worship and reflection for the local community, offering visitors a glimpse into the spiritual life of the city. Its serene atmosphere makes it a popular destination for both pilgrims and tourists alike. The church was consecrated in 1914. It is an example of Russian Orthodox architecture.</p>
 <p class="prose">The Church of the Nativity was constructed in the early 20th century, with its consecration taking place in 1914. It was built to serve the growing population of Volgograd, then known as Tsaritsyn, and has since witnessed significant historical events, including the tumultuous years of the Russian Revolution and World War II. Culturally, the Church of the Nativity plays a vital role in the heritage of Volgograd, reflecting the city&#x27;s religious traditions and architectural styles. It stands as a testament to the resilience of the local community, maintaining its function as a place of worship despite the challenges faced throughout history. The church is also a focal point for various religious rites and celebrations, fostering a sense of unity among the faithful.</p></div>
 </section>
 <section class="place" id="volgograd_gagarin_street">
+<div class="place-lead">
 <h3>Gagarin Street view</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/volgograd_gagarin_street.jpg" alt="Gagarin Street view"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/volgograd_gagarin_street.jpg" alt="Gagarin Street view" width="330" height="413" style="height: 231px; max-height: 231px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/volgograd_gagarin_street_b.jpg" alt="Gagarin Street view — view 2" width="330" height="165" style="height: 231px; max-height: 231px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Gagarin Street in Volgograd is a vibrant thoroughfare that embodies the city&#x27;s spirit and history. Lined with shops, cafes, and cultural landmarks, it serves as a hub for both locals and visitors. The street is named after Yuri Gagarin, the first human to journey into outer space, reflecting the city&#x27;s connection to significant achievements in science and exploration. Gagarin Street is named after Yuri Gagarin, who became the first human to travel into space in 1961. The street has been a central part of Volgograd&#x27;s urban landscape since the early 20th century.</p>
 <p class="prose">Gagarin Street was established during the early 20th century, with its name being adopted in 1961 to honor Yuri Gagarin following his historic space flight. The street has witnessed various transformations throughout the years, particularly during and after World War II, when Volgograd played a crucial role in the conflict. Culturally, Gagarin Street is a focal point for daily life in Volgograd, hosting numerous events and activities that reflect the city&#x27;s heritage. It is an area where the past and present converge, showcasing local art and traditions. The street&#x27;s connection to Gagarin also symbolizes Russia&#x27;s achievements in the space race, making it a site of national pride.</p></div>
 </section>
 <section class="place" id="volgograd_gerhardt_mill">
+<div class="place-lead">
 <h3>Gerhardt Mill</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/volgograd_gerhardt_mill.jpg" alt="Gerhardt Mill"/></figure>
+<figure class="place-fig place-fig--hi-res"><img src="../images/volgograd_gerhardt_mill.jpg" alt="Gerhardt Mill" width="1280" height="960"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Shell-pocked flour mill preserved as a ruin within the Stalingrad battle museum reserve. Powerful visual of wartime destruction amid rebuilt city blocks. Respect memorial signage and fenced zones.</p></div>
 </section>
 <section class="place" id="volgograd_memorial_hall">
+<div class="place-lead">
 <h3>Hall of Military Glory</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/volgograd_memorial_hall.jpg" alt="Hall of Military Glory"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/volgograd_memorial_hall_b.jpg" alt="Hall of Military Glory" width="330" height="247"/></figure>
+</div>
 <div class="place-desc"><p class="prose">The Hall of Military Glory in Volgograd is a poignant memorial dedicated to the heroes of the Battle of Stalingrad during World War II. This grand structure serves as a tribute to the sacrifices made by soldiers and civilians alike, housing various exhibits that commemorate the events and individuals pivotal to this historic battle. Visitors can explore the hall&#x27;s impressive architecture and learn about the profound impact of the battle on both Russian history and national identity. The Hall of Military Glory was opened on May 6, 1970. It is part of the larger Mamayev Kurgan memorial complex, which commemorates the Battle of Stalingrad.</p>
 <p class="prose">The Hall of Military Glory was inaugurated on May 6, 1970, as part of the larger memorial complex dedicated to the Battle of Stalingrad. This battle, fought between August 23, 1942, and February 2, 1943, marked a turning point in World War II, with Soviet forces successfully defending the city against the German Army. The hall stands as a symbol of resilience and sacrifice, reflecting the heavy toll of the conflict and the importance of Stalingrad in the broader narrative of the war. Culturally, the Hall of Military Glory is a vital component of Volgograd&#x27;s identity, serving as a site of remembrance and reflection for both locals and visitors. It plays a crucial role in preserving the memory of the Battle of Stalingrad, which is deeply ingrained in Russian heritage and national pride. The hall is often visited during commemorative events, reinforcing its significance as a place of collective memory and historical education.</p></div>
 </section>
 <section class="place" id="volgograd_lenin_avenue">
+<div class="place-lead">
 <h3>Lenin Avenue</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/volgograd_lenin_avenue.jpg" alt="Lenin Avenue"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/volgograd_lenin_avenue.jpg" alt="Lenin Avenue" width="330" height="247"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Leninsky Prospekt — Wikimedia disambiguation page.</p></div>
 </section>
 <section class="place" id="volgograd_mamayev_kurgan">
+<div class="place-lead">
 <h3>Mamayev Kurgan</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/volgograd_mamayev_kurgan.jpg" alt="Mamayev Kurgan"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/volgograd_mamayev_kurgan.jpg" alt="Mamayev Kurgan" width="1280" height="719" style="height: 259px; max-height: 259px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/volgograd_mamayev_kurgan_b.jpg" alt="Mamayev Kurgan — view 2" width="330" height="220" style="height: 259px; max-height: 259px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Memorial hill and park rising above the Volga, centred on the Stalingrad battle commemoration. Allow several hours for the full circuit and museums. Summer heat can be intense; carry water.</p></div>
 </section>
-<section class="place" id="volgograd_old_sarepta">
-<h3>Museum Old Sarepta</h3>
-
-
-<figure class="place-fig"><img src="../images/volgograd_old_sarepta.jpg" alt="Museum Old Sarepta"/></figure>
-<div class="place-desc"><p class="prose">The Museum Old Sarepta is a unique cultural institution located in Volgograd, dedicated to preserving the history and heritage of the German settlers who established the village of Sarepta in the 18th century. Visitors can explore a range of exhibits that showcase the daily life, traditions, and contributions of this community, making it a fascinating stop for those interested in local history and culture. Established in 1765 by German settlers along the Volga River. The museum showcases the history and culture of the German community in the region.</p>
-<p class="prose">Founded in 1765 by German colonists, Old Sarepta became a significant settlement along the Volga River. The village thrived for over a century, becoming a center for agriculture and crafts, before facing challenges during the 20th century, including the upheavals of World War II and the Soviet era. The museum itself was established to commemorate and document this unique heritage. Culturally, the Museum Old Sarepta plays a vital role in preserving the traditions and customs of the German community in Russia. It highlights the contributions of these settlers to the region&#x27;s development and serves as a reminder of the diverse cultural tapestry that characterizes Volgograd. The museum&#x27;s focus on local heritage fosters a sense of identity and continuity among residents and visitors alike.</p></div>
-</section>
 <section class="place" id="volgograd_rotonda">
+<div class="place-lead">
 <h3>Pantheon of Glory</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/volgograd_rotonda.jpg" alt="Pantheon of Glory"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/volgograd_rotonda.jpg" alt="Pantheon of Glory" width="330" height="486" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/volgograd_rotonda_b.jpg" alt="Pantheon of Glory — view 2" width="330" height="219" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Pantheon of Glory in Volgograd is a striking memorial dedicated to the soldiers who fought in the Battle of Stalingrad during World War II. This monumental structure, featuring a grand rotunda and an eternal flame, serves as a poignant reminder of the sacrifices made during one of the war&#x27;s most pivotal battles. Visitors can explore the surrounding park and reflect on the historical significance of this site. The Pantheon of Glory is located in Volgograd, Russia. It was inaugurated on May 9, 1970, coinciding with the celebration of Victory Day.</p>
 <p class="prose">The Pantheon of Glory was inaugurated on May 9, 1970, to commemorate the heroism of Soviet soldiers during the Battle of Stalingrad, which took place from August 1942 to February 1943. The battle was a turning point in World War II, marking the beginning of the Soviet Union&#x27;s push back against Nazi Germany. The memorial is part of a broader effort to honor the legacy of those who fought and died in this historic conflict. Politically, the Pantheon of Glory stands as a symbol of Soviet resilience and national pride, reflecting the importance of the Battle of Stalingrad in shaping the course of the war and the subsequent establishment of the Soviet state. Culturally, it serves as a site of remembrance and reflection for both locals and visitors, fostering a sense of heritage and collective memory. The memorial is often a focal point for commemorative events, particularly on Victory Day, highlighting its role in contemporary Russian society.</p></div>
 </section>
 <section class="place" id="volgograd_pavlov_house">
+<div class="place-lead">
 <h3>Pavlov&#x27;s House</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/volgograd_pavlov_house.jpg" alt="Pavlov&#x27;s House"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/volgograd_pavlov_house.jpg" alt="Pavlov&#x27;s House" width="1280" height="830" style="height: 299px; max-height: 299px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/volgograd_pavlov_house_b.jpg" alt="Pavlov&#x27;s House — view 2" width="330" height="496" style="height: 299px; max-height: 299px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Preserved apartment block famous for the prolonged defence during the Battle of Stalingrad. Located in a dense urban quarter; combine with central district walking. Interpretation boards explain the 1942–1943 context.</p></div>
 </section>
 <section class="place" id="volgograd_square_fighters">
+<div class="place-lead">
 <h3>Square of Fallen Fighters</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/volgograd_square_fighters.jpg" alt="Square of Fallen Fighters"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/volgograd_square_fighters.jpg" alt="Square of Fallen Fighters" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/volgograd_square_fighters_b.jpg" alt="Square of Fallen Fighters — view 2" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Square of Fallen Fighters is a poignant memorial located in Volgograd, dedicated to the soldiers who lost their lives during the Battle of Stalingrad in World War II. This significant site features a striking monument and serves as a place of remembrance for visitors reflecting on the sacrifices made during one of history&#x27;s most brutal conflicts. The square is often a gathering place for commemorative events and ceremonies. The memorial was inaugurated in 1957. It commemorates the soldiers who fought in the Battle of Stalingrad.</p>
 <p class="prose">The Square of Fallen Fighters was established in the aftermath of the Battle of Stalingrad, which took place from August 1942 to February 1943. The battle was a turning point in World War II, marking a significant defeat for Nazi Germany. The memorial was officially opened in 1957 to honor the bravery and sacrifice of the soldiers who fought in this pivotal conflict. Politically, the Square of Fallen Fighters symbolizes the resilience and determination of the Soviet Union during World War II, serving as a reminder of the sacrifices made to protect the nation. Culturally, it stands as a vital part of Volgograd&#x27;s heritage, attracting visitors who come to pay their respects and learn about the city&#x27;s history. The memorial plays an essential role in the collective memory of the Russian people and is a focal point for annual commemorative events.</p></div>
 </section>
 <section class="place" id="volgograd_motherland_calls">
+<div class="place-lead">
 <h3>The Motherland Calls</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/volgograd_motherland_calls.jpg" alt="The Motherland Calls"/></figure>
+<figure class="place-fig place-fig--hi-res"><img src="../images/volgograd_motherland_calls.jpg" alt="The Motherland Calls" width="1280" height="853"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Colossal statue on Mamayev Kurgan, the dominant symbol of Volgograd and its Stalingrad memorial complex. Expect wind exposure on the mound; dress in layers. Combine with the cemetery and military memorial routes on the same hill.</p></div>
 </section>
 <section class="place" id="volgograd_embankment_ext">
+<div class="place-lead">
 <h3>Volga embankment</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/volgograd_embankment_ext.jpg" alt="Volga embankment"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/volgograd_embankment_ext.jpg" alt="Volga embankment" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/volgograd_embankment_ext_b.jpg" alt="Volga embankment — view 2" width="330" height="221" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Volga Embankment in Volgograd is a picturesque promenade along the banks of the Volga River, offering stunning views and a tranquil atmosphere. It serves as a popular gathering place for locals and visitors alike, featuring parks, sculptures, and recreational areas. The embankment is not only a scenic spot but also a vital part of the city&#x27;s social life, hosting various events and activities throughout the year. The embankment stretches approximately 7 kilometers along the Volga River. It features several monuments and sculptures commemorating the city&#x27;s history and heroes.</p>
 <p class="prose">The Volga Embankment was developed in the early 20th century, with significant expansions and renovations occurring after World War II. It has witnessed numerous historical events, including celebrations and memorials related to the city&#x27;s pivotal role in the Battle of Stalingrad during World War II. Culturally, the Volga Embankment is a central hub for community life in Volgograd, reflecting the city&#x27;s heritage and traditions. It hosts various cultural events, exhibitions, and festivals, contributing to the vibrant social fabric of the area. The embankment is also a symbol of resilience and renewal, embodying the spirit of the city after its reconstruction post-war.</p></div>
 </section>
 <section class="place" id="volgograd_volga_deutsche">
+<div class="place-lead">
 <h3>Volga Germans museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/volgograd_volga_deutsche.jpg" alt="Volga Germans museum"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/volgograd_volga_deutsche.jpg" alt="Volga Germans museum" width="330" height="198" style="height: 231px; max-height: 231px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/volgograd_volga_deutsche_b.jpg" alt="Volga Germans museum — view 2" width="330" height="165" style="height: 231px; max-height: 231px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Volga Germans Museum in Volgograd offers a unique insight into the history and culture of the Volga German community, which settled in the region during the 18th century. Visitors can explore exhibits that showcase their traditions, contributions, and the challenges they faced throughout history. The museum serves as a vital resource for understanding the rich heritage of this ethnic group in Russia. The Volga Germans were invited to settle in the Volga region by Catherine the Great in the 1760s. The museum features exhibits on the daily life, traditions, and history of the Volga German community.</p>
 <p class="prose">The Volga Germans Museum was established to commemorate the history of the Volga German community, which was founded in the 1760s when Catherine the Great invited German settlers to the Volga region. Over the years, the community flourished, but faced significant hardships during the Soviet era, including mass deportations in the 1940s. The museum plays an essential role in preserving the memory of these events and the cultural legacy of the Volga Germans. Culturally, the Volga Germans Museum is significant as it highlights the unique traditions and heritage of the Volga German community, which has contributed to the multicultural tapestry of Russia. The museum not only serves as an educational platform but also fosters a sense of identity and remembrance among descendants of the Volga Germans. It stands as a testament to the resilience of this community amidst historical challenges.</p></div>
 </section>
 <section class="place" id="volgograd_river_port">
+<div class="place-lead">
 <h3>Volga river port</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/volgograd_river_port.jpg" alt="Volga river port"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/volgograd_river_port.jpg" alt="Volga river port" width="330" height="185" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/volgograd_river_port_b.jpg" alt="Volga river port — view 2" width="330" height="326" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Volga River Port in Volgograd serves as a vital hub for transportation and trade along one of Russia&#x27;s most significant waterways. Its strategic location enhances the city&#x27;s connectivity and economic vitality, making it an essential point for both local and international shipping. Visitors can enjoy scenic views of the river and witness the bustling activity that characterizes this important port. The port is located on the Volga River, the longest river in Europe. It serves as a key transport link for goods moving to and from the southern regions of Russia.</p>
 <p class="prose">The Volga River Port has its roots in the establishment of Tsaritsyn in the 16th century, which later became known as Stalingrad and eventually Volgograd. The port has played a crucial role in the city&#x27;s development, especially during the industrialization period in the late 19th and early 20th centuries. Key events, including the Battle of Stalingrad during World War II, highlighted the strategic importance of the port in military logistics. The Volga River Port is not only pivotal for trade and transportation but also symbolizes the resilience and industrial spirit of Volgograd. The port has facilitated cultural exchanges and economic growth, contributing to the city&#x27;s identity. While it does not hold religious significance, the port&#x27;s operations reflect the daily life and heritage of the local community, showcasing the intertwining of commerce and culture.</p></div>
 </section>
 <section class="place" id="volgograd_arena">
+<div class="place-lead">
 <h3>Volgograd Arena</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/volgograd_arena.jpg" alt="Volgograd Arena"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/volgograd_arena.jpg" alt="Volgograd Arena" width="1280" height="853" style="height: 259px; max-height: 259px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/volgograd_arena_b.jpg" alt="Volgograd Arena — view 2" width="330" height="185" style="height: 259px; max-height: 259px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Riverfront stadium with a distinctive roofline, built for international football tournaments. Event-day traffic and security differ from normal city visits. Exterior walks are possible outside match closures.</p></div>
 </section>
 <section class="place" id="volgograd_cultural_center">
+<div class="place-lead">
 <h3>Volgograd cultural centre</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/volgograd_cultural_center.jpg" alt="Volgograd cultural centre"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/volgograd_cultural_center.jpg" alt="Volgograd cultural centre" width="330" height="220"/></figure>
+</div>
 <div class="place-desc"><p class="prose">This venue hosts a variety of performances, exhibitions, and cultural events that reflect the rich heritage and contemporary creativity of the region. Visitors can enjoy theater productions, concerts, and art shows that cater to diverse tastes and interests. The centre hosts a variety of events including theater performances, art exhibitions, and concerts. It aims to support local artists and promote cultural initiatives in Volgograd.</p>
 <p class="prose">The Volgograd Cultural Centre was established in the early 2000s as part of a broader initiative to revitalize the cultural landscape of the city. It has since become a key venue for local artists and performers, contributing to the cultural renaissance in Volgograd following the tumultuous events of the 20th century. Culturally, the Volgograd Cultural Centre plays a crucial role in promoting the arts and fostering community spirit. It serves as a platform for both emerging and established artists, enhancing the cultural dialogue within the city. The centre&#x27;s programming often reflects the historical and social narratives of Volgograd, making it a significant site for cultural expression and heritage.</p></div>
 </section>
 <section class="place" id="volgograd_historical_museum">
+<div class="place-lead">
 <h3>Volgograd Historical Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/volgograd_historical_museum.jpg" alt="Volgograd Historical Museum"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/volgograd_historical_museum.jpg" alt="Volgograd Historical Museum" width="330" height="247"/></figure>
+</div>
 <div class="place-desc"><p class="prose">The Volgograd Historical Museum offers a deep dive into the rich tapestry of the city&#x27;s past, showcasing artifacts and exhibitions that span from ancient times to the present day. Visitors can explore the museum&#x27;s extensive collections, which highlight key events and figures that have shaped Volgograd&#x27;s history. With its engaging displays and informative guides, the museum serves as a vital resource for understanding the cultural heritage of this significant Russian city. Founded in 1921, the museum has undergone several expansions and renovations. The museum houses over 200,000 exhibits related to the history of Volgograd and the surrounding region.</p>
 <p class="prose">The Volgograd Historical Museum was founded in 1921, originally aimed at preserving the history of the region. Over the decades, it has expanded its collections and exhibitions to include a wide range of historical periods, reflecting the city&#x27;s evolution from its founding as Tsaritsyn in the 16th century through its pivotal role in World War II as Stalingrad. The museum plays a crucial role in preserving Volgograd&#x27;s cultural heritage and educating the public about its historical significance, particularly during the tumultuous events of the 20th century. It serves as a reminder of the city&#x27;s resilience and transformation, especially in the context of its role during World War II. The museum also contributes to the local identity and pride, fostering a sense of community through its exhibitions and educational programs.</p></div>
 </section>
 <section class="place" id="volgograd_railway_station">
+<div class="place-lead">
 <h3>Volgograd I railway station</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/volgograd_railway_station.jpg" alt="Volgograd I railway station"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/volgograd_railway_station.jpg" alt="Volgograd I railway station" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/volgograd_railway_station_b.jpg" alt="Volgograd I railway station — view 2" width="330" height="220" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Principal rail gateway with a monumental Stalin-era station building and busy platforms. High-speed and long-distance services use this hub. Keep valuables secure in crowds during peak departures.</p></div>
 </section>
 <section class="place" id="volgograd_planetarium">
+<div class="place-lead">
 <h3>Volgograd Planetarium</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/volgograd_planetarium.jpg" alt="Volgograd Planetarium"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/volgograd_planetarium.jpg" alt="Volgograd Planetarium" width="1280" height="1280" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/volgograd_planetarium_b.jpg" alt="Volgograd Planetarium — view 2" width="330" height="247" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Soviet-era planetarium building near the embankment, known for its sculptural façade. Check schedule for public shows versus school bookings. Exterior photography is popular in clear weather.</p></div>
 </section>
 <section class="place" id="volgograd_fine_arts">
+<div class="place-lead">
 <h3>Volgograd Regional Art Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/volgograd_fine_arts.jpg" alt="Volgograd Regional Art Museum"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/volgograd_fine_arts.jpg" alt="Volgograd Regional Art Museum" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/volgograd_fine_arts_b.jpg" alt="Volgograd Regional Art Museum — view 2" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Volgograd Regional Art Museum is a prominent cultural institution located in the heart of Volgograd. It houses an extensive collection of Russian and Soviet art, showcasing works from the 18th century to contemporary pieces. Visitors can explore various exhibitions that highlight the region&#x27;s artistic heritage and the evolution of Russian art. Founded in 1935. Houses a collection of Russian and Soviet art from the 18th century to the present.</p>
 <p class="prose">Founded in 1935, the Volgograd Regional Art Museum has played a crucial role in preserving and promoting the artistic legacy of the Volgograd region. The museum&#x27;s collection has grown significantly over the decades, reflecting the changing artistic movements and historical contexts of the time. The museum serves as a vital cultural hub in Volgograd, contributing to the city&#x27;s identity and heritage. It not only showcases local artists but also engages with broader Russian art movements, making it an important site for cultural exchange and education. The museum plays a role in fostering appreciation for the arts within the community and attracts visitors interested in the rich history of Russian art.</p></div>
 </section>

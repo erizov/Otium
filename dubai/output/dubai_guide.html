@@ -13,7 +13,7 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
 .otium-logo { font-family: 'Marcellus', serif; font-size: 2.15rem;
   font-weight: 600; letter-spacing: 0.18em; margin-bottom: 0.85rem; }
 .otiump { margin: 0.42rem 0; line-height: 1.42; text-align: justify;
-  max-width: 38rem; font-size: 0.95rem; }
+  font-size: 0.95rem; }
 .guide-title { page-break-after: auto; margin-bottom: 0.55rem;
   page-break-inside: avoid; }
 .historical-reference { margin: 0.75rem 0 1.15rem;
@@ -63,22 +63,103 @@ ol.trip-stops a:hover { text-decoration: underline; }
 .heraldry-univ-caption { font-size: 0.52rem; line-height: 1.18;
   margin: 0.12rem 0 0; padding: 0 0.06rem; color: #252525;
   text-align: center; font-weight: 500; }
-.heraldry-motto { text-align: center; max-width: 18rem; margin: 0.18rem auto;
+.heraldry-motto { text-align: center; margin: 0.18rem auto;
   width: 100%; }
 .motto-line { font-family: 'Marcellus', serif; font-size: 1rem;
   margin: 0; color: #333; line-height: 1.35; }
 .guide-title h1.guide-title-main { font-family: 'Marcellus', serif;
   font-size: 2.35rem; margin-bottom: 0.5rem; font-weight: 600; }
 .lead { color: #444; font-size: 1.05rem; }
-.guide-toc { margin: 0.85rem 0 1.15rem; page-break-inside: avoid; }
-.guide-toc h2 { font-family: 'Marcellus', serif; font-size: 1.28rem;
-  font-weight: 600; margin: 0.4rem 0 0.55rem; }
+
+.guide-toc { page-break-before: always; break-before: page;
+  page-break-after: always; break-after: page;
+  margin: 0; padding: 0.2rem 0 0.45rem; page-break-inside: auto; }
+.guide-toc h2 { font-family: 'Marcellus', serif;
+  font-size: 1.28rem; font-weight: 600; margin: 0.4rem 0 0.55rem; }
 .guide-toc ol { margin: 0.35rem 0 0.65rem 1.25rem; padding: 0;
   columns: 2; column-gap: 1.5rem; }
 .guide-toc li { margin: 0.18rem 0; line-height: 1.35;
   font-size: 0.88rem; break-inside: avoid; }
-.guide-toc a { color: #1a5276; text-decoration: none; }
+.guide-toc a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.guide-toc a:hover { color: #0d3d56; }
 .guide-toc li.toc-item--sub { font-size: 0.82rem; margin-left: 0.35rem; }
+.toc-back { font-size: 0.78rem; margin: 0 0 0.35rem; text-align: right; }
+.toc-back a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.toc-back a:hover { color: #0d3d56; }
+.place, .historical-reference, .guide-primer, .guide-trip-plans {
+  scroll-margin-top: 1.25rem; }
+.historical-reference h2, .guide-primer h2, .guide-trip-plans h2,
+.chapter-head h2, .place-lead h3 { position: relative; }
+.guide-toc + .place, .guide-toc + .chapter-head {
+  page-break-before: avoid; break-before: avoid-page; }
+.place-lead { page-break-inside: avoid; break-inside: avoid-page;
+  page-break-after: auto; }
+.place-lead > h3 { page-break-after: avoid; break-after: avoid-page; }
+.place-lead > .place-meta { page-break-after: avoid; break-after: avoid-page; }
+
+.place-fig { page-break-inside: avoid; break-inside: avoid-page;
+  margin: 0.5rem 0 1rem; }
+.place-fig img {
+  page-break-inside: avoid; break-inside: avoid-page;
+  max-height: 48vh; width: auto; max-width: 100%;
+  object-fit: contain; margin-left: auto; margin-right: auto; }
+.place-fig--hi-res img { max-height: 52vh; }
+.place-fig--lo-res img { max-height: 30vh; }
+.place-pdf-fig-row {
+  display: flex; flex-direction: row; flex-wrap: wrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.45rem 0.55rem; margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row .place-fig {
+  flex: 1 1 30%; margin: 0; min-width: 26%; max-width: 100%; }
+.place-pdf-fig-row .place-fig img {
+  width: auto; max-width: 100%; height: auto; max-height: 44vh;
+  object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--pair {
+  flex-wrap: nowrap; justify-content: space-between;
+  align-items: flex-end; gap: 0.5rem 0.65rem; }
+.place-pdf-fig-row--pair .place-fig {
+  flex: 1 1 47%; min-width: 0; max-width: 50%;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--pair .place-fig img {
+  max-height: 44vh; object-fit: contain; }
+.place-pdf-fig-row--pair .place-fig--hi-res img { max-height: 52vh; }
+.place-pdf-fig-row--pair .place-fig--lo-res img { max-height: 26vh; }
+.place-pdf-fig-row--pair .place-fig--row-sized img,
+.place-pdf-fig-row--triple .place-fig--row-sized img,
+.place-pdf-fig-row--many .place-fig--row-sized img {
+  width: auto; max-width: 100%; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row .place-fig--row-sized.place-fig--hi-res img,
+.place-pdf-fig-row .place-fig--row-sized.place-fig--lo-res img {
+  max-height: unset; }
+.place-pdf-fig-rows-stack {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple {
+  display: flex; flex-direction: row; flex-wrap: nowrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.4rem 0.48rem; margin: 0;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--triple .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--triple .place-fig--hi-res img { max-height: 42vh; }
+.place-pdf-fig-row--triple .place-fig--lo-res img { max-height: 18vh; }
+.place-pdf-fig-row--many {
+  flex-wrap: nowrap; justify-content: center; align-items: flex-end;
+  gap: 0.35rem 0.42rem; }
+.place-pdf-fig-row--many .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--many .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+
+
 .place { margin-bottom: 2.2rem; page-break-inside: auto; }
 h3 { font-family: 'Marcellus', serif; font-size: 1.22rem; margin: 1.2rem 0 0.35rem;
   font-weight: 600; }
@@ -90,7 +171,6 @@ h4 { font-family: 'Marcellus', serif; font-size: 0.95rem; text-transform: upperc
   color: #555; font-size: 0.95rem; margin: 0 0 0.5rem; font-style: italic; }
 .place-meta { font-size: 0.92rem; color: #353535; margin: 0 0 0.75rem;
   line-height: 1.4; }
-.place-fig { margin: 0.5rem 0 1rem; }
 img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
 .prose, .place-desc p { margin: 0.45rem 0; line-height: 1.5;
   text-align: justify; }
@@ -110,7 +190,9 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <figure class="heraldry-fig heraldry-coat-book" title="Coat of arms of Dubai"><img src="../images/guide_coat_of_arms.svg" alt="Coat of arms of Dubai"/></figure>
 <figure class="heraldry-fig heraldry-coat-book" title="Flag of Dubai"><img src="../images/guide_flag.svg" alt="Flag of Dubai"/></figure>
 </div></div><h1 class="guide-title-main">Dubai</h1><p class="lead">Guide. Places in this edition: 34.</p></header>
+<nav class="guide-toc" id="guide-toc" aria-label="Contents"><h2>Contents</h2><ol><li class="toc-item"><a href="#guide-trips">Trip ideas</a></li><li class="toc-item"><a href="#dubai_al_fahidi">Al Fahidi Historical District</a></li><li class="toc-item"><a href="#dubai_al_seef">Al Seef and Creekside promenade</a></li><li class="toc-item"><a href="#dubai_alserkal">Alserkal Avenue</a></li><li class="toc-item"><a href="#dubai_burj_al_arab">Burj Al Arab</a></li><li class="toc-item"><a href="#dubai_burj_khalifa">Burj Khalifa</a></li><li class="toc-item"><a href="#dubai_city_walk">City Walk Dubai</a></li><li class="toc-item"><a href="#dubai_spice_deira">Deira Old Souk</a></li><li class="toc-item"><a href="#dubai_downtown_montreal">Downtown Montreal</a></li><li class="toc-item"><a href="#dubai_landmark">Dubai</a></li><li class="toc-item"><a href="#dubai_creek_deira">Dubai Creek (Deira side)</a></li><li class="toc-item"><a href="#dubai_frame">Dubai Frame</a></li><li class="toc-item"><a href="#dubai_dubai_hills">Dubai Hills Park</a></li><li class="toc-item"><a href="#dubai_hindu_temple">Dubai Hindu temple</a></li><li class="toc-item"><a href="#dubai_marina">Dubai Marina</a></li><li class="toc-item"><a href="#dubai_museum_al_fahidi">Dubai Museum (Al Fahidi Fort)</a></li><li class="toc-item"><a href="#dubai_opera">Dubai Opera</a></li><li class="toc-item"><a href="#dubai_dubaimuseum2">DubaiMuseum2</a></li><li class="toc-item"><a href="#dubai_etihad_museum">Etihad Museum</a></li><li class="toc-item"><a href="#dubai_expo_city">Expo City Dubai</a></li><li class="toc-item"><a href="#dubai_global_village">Global Village (seasonal)</a></li><li class="toc-item"><a href="#dubai_gold_souk">Gold Souk Deira</a></li><li class="toc-item"><a href="#dubai_grand_mosque">Grand Mosque Dubai</a></li><li class="toc-item"><a href="#dubai_hatta">Hatta Dam</a></li><li class="toc-item"><a href="#dubai_heritage_village">Hatta Heritage Village</a></li><li class="toc-item"><a href="#dubai_jumeirah_mosque">Jumeirah Mosque</a></li><li class="toc-item"><a href="#dubai_kite_beach">Kite Beach</a></li><li class="toc-item"><a href="#dubai_la_mer">La Mer beachfront</a></li><li class="toc-item"><a href="#dubai_madinat_jumeirah">Madinat Jumeirah resort</a></li><li class="toc-item"><a href="#dubai_museum_of_the_future">Museum of the Future</a></li><li class="toc-item"><a href="#dubai_palm_jumeirah">Palm Jumeirah trunk</a></li><li class="toc-item"><a href="#dubai_qasr_al_hosn">Qasr Al Hosn</a></li><li class="toc-item"><a href="#dubai_safa_park">Safa Park</a></li><li class="toc-item"><a href="#dubai_wild_wadi">Wild Wadi Waterpark</a></li><li class="toc-item"><a href="#dubai_zabeel_palace_in_dubai">Zabeel palace in Dubai</a></li></ol></nav>
 <section class="guide-trip-plans" id="guide-trips" aria-label="Trip ideas"><h2>Trip ideas</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 <article class="trip-plan" id="trip-1d"><h3>One day</h3>
 <p class="prose">A compact loop linking the strongest cards in this guide, ordered to minimise backtracking on foot.</p>
 <ol class="trip-stops"><li><a href="#dubai_alserkal">Alserkal Avenue</a> (~75min)</li>
@@ -136,265 +218,456 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <article class="trip-plan" id="trip-3d3"><h3>Three days — day 3</h3>
 <p class="prose">Day 3 — remaining highlights nearby.</p>
 <ol class="trip-stops"><li><a href="#dubai_hatta">Hatta Dam</a> (~60min)</li></ol></article></section>
-<nav class="guide-toc" aria-label="Contents"><h2>Contents</h2><ol><li class="toc-item"><a href="#guide-trips">Trip ideas</a></li><li class="toc-item"><a href="#dubai_al_fahidi">Al Fahidi Historical District</a></li><li class="toc-item"><a href="#dubai_al_seef">Al Seef and Creekside promenade</a></li><li class="toc-item"><a href="#dubai_alserkal">Alserkal Avenue</a></li><li class="toc-item"><a href="#dubai_burj_al_arab">Burj Al Arab</a></li><li class="toc-item"><a href="#dubai_burj_khalifa">Burj Khalifa</a></li><li class="toc-item"><a href="#dubai_city_walk">City Walk Dubai</a></li><li class="toc-item"><a href="#dubai_spice_deira">Deira Old Souk</a></li><li class="toc-item"><a href="#dubai_pdfband_3_dc26830d">Downtown Montreal (8392011668)</a></li><li class="toc-item"><a href="#dubai_pdfband_0_41025eeb">Dubai (19225459)</a></li><li class="toc-item"><a href="#dubai_creek_deira">Dubai Creek (Deira side)</a></li><li class="toc-item"><a href="#dubai_frame">Dubai Frame</a></li><li class="toc-item"><a href="#dubai_dubai_hills">Dubai Hills Park</a></li><li class="toc-item"><a href="#dubai_pdfband_1_ca27259c">Dubai Hindu temple</a></li><li class="toc-item"><a href="#dubai_marina">Dubai Marina</a></li><li class="toc-item"><a href="#dubai_museum_al_fahidi">Dubai Museum (Al Fahidi Fort)</a></li><li class="toc-item"><a href="#dubai_opera">Dubai Opera</a></li><li class="toc-item"><a href="#dubai_pdfband_8_36ceff8b">DubaiMuseum2</a></li><li class="toc-item"><a href="#dubai_etihad_museum">Etihad Museum</a></li><li class="toc-item"><a href="#dubai_expo_city">Expo City Dubai</a></li><li class="toc-item"><a href="#dubai_global_village">Global Village (seasonal)</a></li><li class="toc-item"><a href="#dubai_gold_souk">Gold Souk Deira</a></li><li class="toc-item"><a href="#dubai_grand_mosque">Grand Mosque Dubai</a></li><li class="toc-item"><a href="#dubai_hatta">Hatta Dam</a></li><li class="toc-item"><a href="#dubai_heritage_village">Hatta Heritage Village</a></li><li class="toc-item"><a href="#dubai_jumeirah_mosque">Jumeirah Mosque</a></li><li class="toc-item"><a href="#dubai_kite_beach">Kite Beach</a></li><li class="toc-item"><a href="#dubai_la_mer">La Mer beachfront</a></li><li class="toc-item"><a href="#dubai_madinat_jumeirah">Madinat Jumeirah resort</a></li><li class="toc-item"><a href="#dubai_museum_of_the_future">Museum of the Future</a></li><li class="toc-item"><a href="#dubai_palm_jumeirah">Palm Jumeirah trunk</a></li><li class="toc-item"><a href="#dubai_qasr_al_hosn">Qasr Al Hosn</a></li><li class="toc-item"><a href="#dubai_safa_park">Safa Park</a></li><li class="toc-item"><a href="#dubai_wild_wadi">Wild Wadi Waterpark</a></li><li class="toc-item"><a href="#dubai_pdfband_9_d0a641cf">Zabeel palace in Dubai</a></li></ol></nav>
 <section class="place" id="dubai_al_fahidi">
+<div class="place-lead">
 <h3>Al Fahidi Historical District</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/dubai_al_fahidi.jpg" alt="Al Fahidi Historical District"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_al_fahidi.jpg" alt="Al Fahidi Historical District" width="330" height="249" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_al_fahidi_b.jpg" alt="Al Fahidi Historical District — view 2" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Al Fahidi Historical District, also known as Al Bastakiya, is a captivating area in Dubai that showcases the city&#x27;s rich heritage and traditional architecture. Visitors can explore narrow lanes lined with wind-tower buildings, art galleries, and museums that reflect the Emirati culture. This district offers a glimpse into Dubai&#x27;s past, making it a must-visit for those interested in the city&#x27;s history and traditions. Al Fahidi Historical District is one of the oldest traditional Emirati neighborhoods in Dubai. The district features wind-tower architecture, which was used for natural cooling in the hot climate.</p>
 <p class="prose">Al Fahidi Historical District dates back to the late 19th century and was originally established by Persian merchants. The area served as a trading hub and residential quarter, reflecting the architectural style and lifestyle of the time. Significant restoration efforts began in the early 2000s to preserve its historical value and promote cultural tourism. Culturally, Al Fahidi Historical District is a vital part of Dubai&#x27;s identity, representing the traditional lifestyle and heritage of the Emirati people. The district hosts various cultural events and art exhibitions, contributing to the local arts scene. Its preservation is crucial for understanding Dubai&#x27;s evolution from a small fishing village to a global metropolis.</p></div>
 </section>
 <section class="place" id="dubai_al_seef">
+<div class="place-lead">
 <h3>Al Seef and Creekside promenade</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Dubai Creek | Style: Gulf vernacular reinterpretation | Period: 2018 heritage-styled retail</p>
-<figure class="place-fig"><img src="../images/dubai_al_seef.jpg" alt="Al Seef and Creekside promenade"/></figure>
+<figure class="place-fig place-fig--hi-res"><img src="../images/dubai_al_seef.jpg" alt="Al Seef and Creekside promenade" width="1280" height="853"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Timber-clad walkways, dhow moorings, and cafés linking Al Fahidi to new creek-side hotels. Night lighting emphasises wind-tower silhouettes. Abras still cross to Deira for one-dirham hops.</p>
 <p class="prose">Placemaking project stitching old fabric to new hospitality strips. Walkable buffer between fort museum and creek traffic.</p></div>
 </section>
 <section class="place" id="dubai_alserkal">
+<div class="place-lead">
 <h3>Alserkal Avenue</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/dubai_alserkal.jpg" alt="Alserkal Avenue"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_alserkal.jpg" alt="Alserkal Avenue" width="330" height="247" style="height: 231px; max-height: 231px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_alserkal_b.jpg" alt="Alserkal Avenue — view 2" width="330" height="165" style="height: 231px; max-height: 231px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Alserkal Avenue is a vibrant cultural hub located in the Al Quoz district of Dubai, known for its contemporary art galleries, creative spaces, and innovative events. This dynamic venue fosters a community of artists, designers, and cultural enthusiasts, making it a must-visit destination for anyone interested in the arts. With its eclectic mix of exhibitions, performances, and workshops, Alserkal Avenue is a testament to Dubai&#x27;s growing reputation as a center for creativity and cultural exchange. Alserkal Avenue was founded in 2007 in the Al Quoz district. It features over 40 contemporary art galleries and creative spaces. The avenue hosts numerous cultural events, including art fairs and film screenings.</p>
 <p class="prose">Alserkal Avenue was established in 2007, transforming a series of industrial warehouses into a thriving arts district. The initiative was spearheaded by a group of local art enthusiasts and entrepreneurs who recognized the need for a dedicated space to promote contemporary art and culture in Dubai. Over the years, it has evolved into a key player in the regional art scene, hosting numerous exhibitions and events that attract both local and international audiences. Culturally, Alserkal Avenue plays a crucial role in Dubai&#x27;s artistic landscape, showcasing a diverse range of contemporary art and design. It serves as a platform for emerging and established artists, contributing to the city&#x27;s cultural dialogue and fostering a sense of community. The avenue hosts various events, including art fairs, film screenings, and workshops, which engage the public and promote cultural awareness. While it does not hold religious significance, its secular nature allows for a wide range of artistic expressions that reflect the multicultural fabric of Dubai.</p></div>
 </section>
 <section class="place" id="dubai_burj_al_arab">
+<div class="place-lead">
 <h3>Burj Al Arab</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Jumeirah | Style: Sail-shaped hotel on artificial island | Period: 1994–1999</p>
-<figure class="place-fig"><img src="../images/dubai_burj_al_arab.jpg" alt="Burj Al Arab"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/dubai_burj_al_arab.jpg" alt="Burj Al Arab" width="1143" height="1600" style="height: 313px; max-height: 313px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_burj_al_arab_b.jpg" alt="Burj Al Arab — view 2" width="330" height="224" style="height: 313px; max-height: 313px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Luxury hotel on a reclaimed mound, visible along Jumeirah Beach. Interior atrium and restaurants are guest-reservation heavy. Public beach viewpoints offer classic silhouette photos at blue hour. Helipad stunts in marketing made the crown world-famous.</p>
 <p class="prose">Tom Wright&#x27;s sail metaphor became Dubai&#x27;s first global architectural icon before the Burj Khalifa superseded height records. Coastal landmark between old creek trade and Palm megaprojects.</p></div>
 </section>
 <section class="place" id="dubai_burj_khalifa">
+<div class="place-lead">
 <h3>Burj Khalifa</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Downtown Dubai | Style: Neo-futurist tower; bundled Y-plan | Period: 2004–2010</p>
-<figure class="place-fig"><img src="../images/dubai_burj_khalifa.jpg" alt="Burj Khalifa"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/dubai_burj_khalifa.jpg" alt="Burj Khalifa" width="1280" height="857" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_burj_khalifa_b.jpg" alt="Burj Khalifa — view 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Tallest building in the world at completion, with observation decks on upper levels and fountain shows at its base. At.mosphere restaurant occupied a high floor for years before other concepts rotated in. Tickets for sunset slots often sell out first.</p>
 <p class="prose">Emaar-led megaproject rebranded from Burj Dubai at opening; it anchors Sheikh Zayed Road&#x27;s high-rise corridor. The vertical exclamation point of Dubai&#x27;s skyline marketing.</p></div>
 </section>
 <section class="place" id="dubai_city_walk">
+<div class="place-lead">
 <h3>City Walk Dubai</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/dubai_city_walk.jpg" alt="City Walk Dubai"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_city_walk.jpg" alt="City Walk Dubai" width="330" height="438" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_city_walk_b.jpg" alt="City Walk Dubai — view 2" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">City Walk Dubai is a vibrant urban destination that combines shopping, dining, and entertainment in a modern setting. Featuring a mix of high-end boutiques, casual eateries, and art installations, it offers a unique experience for both residents and visitors. The open-air design and contemporary architecture make it a popular spot for leisurely strolls and social gatherings. City Walk Dubai covers an area of 1.2 million square feet. It features over 300 retail outlets and a wide array of dining options.</p>
 <p class="prose">City Walk Dubai was launched in 2015 as part of the larger development initiative by Meraas, aimed at creating a new urban lifestyle destination. The area has rapidly evolved into a hub for entertainment and retail, reflecting Dubai&#x27;s growth as a cosmopolitan city. Culturally, City Walk Dubai represents the fusion of modernity and tradition, showcasing art and design while promoting community engagement through various events. It serves as a gathering place for locals and tourists alike, enhancing the social fabric of the city. The development aligns with Dubai&#x27;s vision of becoming a global city, emphasizing innovation and lifestyle.</p></div>
 </section>
 <section class="place" id="dubai_spice_deira">
+<div class="place-lead">
 <h3>Deira Old Souk</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/dubai_spice_deira.jpg" alt="Deira Old Souk"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_spice_deira.jpg" alt="Deira Old Souk" width="330" height="440" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_spice_deira_b.jpg" alt="Deira Old Souk — view 2" width="330" height="452" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Deira Old Souk, also known as the Spice Souk, is a vibrant market located in the heart of Dubai&#x27;s historic district. Visitors can immerse themselves in the rich aromas of spices, herbs, and traditional goods, making it a sensory delight. The souk offers a glimpse into the city&#x27;s trading past and remains a bustling hub for both locals and tourists alike. Deira Old Souk is known for its extensive range of spices, herbs, and traditional Arabian goods. The souk is located near Dubai Creek, which has historically been a significant trade route.</p>
 <p class="prose">The Deira Old Souk has its roots in Dubai&#x27;s early trading days, dating back to the 19th century when it served as a key marketplace for merchants. It has evolved over the years, reflecting the city&#x27;s growth from a small fishing village to a global trade center. The souk has witnessed significant changes, especially during the oil boom in the 1970s, which transformed Dubai&#x27;s economy and infrastructure. Culturally, Deira Old Souk is a vital part of Dubai&#x27;s heritage, showcasing traditional trading practices and local craftsmanship. It plays an essential role in daily life, where residents shop for spices and other goods, thus preserving local traditions. The souk&#x27;s atmosphere and architecture reflect the historical essence of the region, contributing to Dubai&#x27;s identity as a melting pot of cultures.</p></div>
 </section>
-<section class="place" id="dubai_pdfband_3_dc26830d">
-<h3>Downtown Montreal (8392011668)</h3>
+<section class="place" id="dubai_downtown_montreal">
+<div class="place-lead">
+<h3>Downtown Montreal</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/dubai_pdfband_3_dc26830d.jpg" alt="Downtown Montreal (8392011668)"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/dubai_downtown_montreal.jpg" alt="Downtown Montreal" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_downtown_montreal_b.jpg" alt="Downtown Montreal — view 2" width="330" height="220" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 </section>
-<section class="place" id="dubai_pdfband_0_41025eeb">
-<h3>Dubai (19225459)</h3>
+<section class="place" id="dubai_landmark">
+<div class="place-lead">
+<h3>Dubai</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/dubai_pdfband_0_41025eeb.jpg" alt="Dubai (19225459)"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/dubai_landmark_b.jpg" alt="Dubai" width="330" height="320"/></figure>
+</div>
 </section>
 <section class="place" id="dubai_creek_deira">
+<div class="place-lead">
 <h3>Dubai Creek (Deira side)</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Deira and Bur Dubai | Style: Traditional dhow wharves and souk fabric</p>
-<figure class="place-fig"><img src="../images/dubai_creek_deira.jpg" alt="Dubai Creek (Deira side)"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/dubai_creek_deira.jpg" alt="Dubai Creek (Deira side)" width="1280" height="854" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_creek_deira_b.jpg" alt="Dubai Creek (Deira side) — view 2" width="330" height="247" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Saltwater inlet where abras cross between textile and gold souks. Abras still carry commuters for a dirham fare. Spice aromas and textile lanes sit a short walk from the abra docks. Al Fahidi&#x27;s wind-tower neighbourhood lies on the Bur Dubai bank.</p>
 <p class="prose">Pearling and trade boats anchored here before oil revenues shifted the city&#x27;s centre of gravity seaward. The human-scale counterweight to Marina glass canyons.</p></div>
 </section>
 <section class="place" id="dubai_frame">
+<div class="place-lead">
 <h3>Dubai Frame</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Zabeel Park | Style: Vertical gold cladding on rectangular portal | Period: 2018</p>
-<figure class="place-fig"><img src="../images/dubai_frame.jpg" alt="Dubai Frame"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/dubai_frame.jpg" alt="Dubai Frame" width="1280" height="960" style="height: 63px; max-height: 63px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_frame_b.jpg" alt="Dubai Frame — view 2" width="330" height="45" style="height: 63px; max-height: 63px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Observation bridge linking old creek narratives with Sheikh Zayed Road skyline views. Glass-floor panels mark the transition between old and new galleries. Zabeel Park metro reduces taxi hunting at weekends.</p>
 <p class="prose">Competition-winning portal symbol sparked debate on skyline gimmicks versus storytelling. Photographic frame device literalised as architecture.</p></div>
 </section>
 <section class="place" id="dubai_dubai_hills">
+<div class="place-lead">
 <h3>Dubai Hills Park</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/dubai_dubai_hills.jpg" alt="Dubai Hills Park"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--row-sized"><img src="../images/dubai_dubai_hills.jpg" alt="Dubai Hills Park" width="330" height="587" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_dubai_hills_b.jpg" alt="Dubai Hills Park — view 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Dubai Hills Park is a sprawling green oasis nestled in the heart of Dubai, offering a serene escape from the bustling city. With its beautifully landscaped gardens, walking trails, and recreational facilities, it serves as a perfect spot for families and outdoor enthusiasts. The park is designed to promote a healthy lifestyle and community engagement, making it a popular destination for both residents and visitors. Dubai Hills Park covers an area of approximately 180 hectares. The park features a variety of amenities, including children&#x27;s play areas, sports facilities, and picnic spots.</p>
 <p class="prose">Dubai Hills Park plays a vital role in promoting outdoor leisure and community interaction within the rapidly developing urban landscape of Dubai. It reflects the city&#x27;s commitment to enhancing the quality of life for its residents through accessible green spaces, which are increasingly important in urban planning. The park also serves as a venue for community events, fostering social ties and cultural exchange among diverse populations.</p></div>
 </section>
-<section class="place" id="dubai_pdfband_1_ca27259c">
+<section class="place" id="dubai_hindu_temple">
+<div class="place-lead">
 <h3>Dubai Hindu temple</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/dubai_pdfband_1_ca27259c.jpg" alt="Dubai Hindu temple"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/dubai_hindu_temple.jpg" alt="Dubai Hindu temple" width="1200" height="1600" style="height: 207px; max-height: 207px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_hindu_temple_b.jpg" alt="Dubai Hindu temple — view 2" width="330" height="148" style="height: 207px; max-height: 207px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 </section>
 <section class="place" id="dubai_marina">
+<div class="place-lead">
 <h3>Dubai Marina</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Dubai Marina district | Style: High-rise residential towers along artificial canal | Period: 2000s onward</p>
-<figure class="place-fig"><img src="../images/dubai_marina.jpg" alt="Dubai Marina"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/dubai_marina.jpg" alt="Dubai Marina" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_marina_b.jpg" alt="Dubai Marina — view 2" width="330" height="220" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Man-made marina lined with towers, cafés, and dhow dinner cruises. Evening light reflects in the water between walkways. The Marina Walk is popular for jogging after dark when temperatures ease. Tram links connect to JBR beach without crossing busy roads.</p>
 <p class="prose">Excavated channel and reclaimed edges created a new waterfront property template west of the old creek trade city. Densest cluster of residential supertalls in the emirate.</p></div>
 </section>
 <section class="place" id="dubai_museum_al_fahidi">
+<div class="place-lead">
 <h3>Dubai Museum (Al Fahidi Fort)</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Al Fahidi Historical Neighbourhood | Style: Arabian Gulf defensive tower | Period: 1787 coral-block fort</p>
-<figure class="place-fig"><img src="../images/dubai_museum_al_fahidi.jpg" alt="Dubai Museum (Al Fahidi Fort)"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/dubai_museum_al_fahidi.jpg" alt="Dubai Museum (Al Fahidi Fort)" width="1067" height="1600" style="height: 288px; max-height: 288px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_museum_al_fahidi_b.jpg" alt="Dubai Museum (Al Fahidi Fort) — view 2" width="330" height="206" style="height: 288px; max-height: 288px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Exhibits on pearling, souk life, and creek archaeology inside the city&#x27;s oldest surviving building. Combine with sheikh&#x27;s diwan courtyards nearby. Evening abra rides depart below the ramparts.</p>
 <p class="prose">Fasil defensive seat before British protectorate maps reshaped coastal security. Grounds the megacity origin in creek trade.</p></div>
 </section>
 <section class="place" id="dubai_opera">
+<div class="place-lead">
 <h3>Dubai Opera</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/dubai_opera.jpg" alt="Dubai Opera"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_opera.jpg" alt="Dubai Opera" width="330" height="440" style="height: 319px; max-height: 319px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/dubai_opera_b.jpg" alt="Dubai Opera — view 2" width="5854" height="4049" style="height: 319px; max-height: 319px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">This multi-format venue hosts a diverse range of performances, including opera, ballet, theater, and concerts, making it a cultural hub for both residents and visitors. With its striking design inspired by the traditional dhow boats, the opera house offers a unique experience for art enthusiasts and casual visitors alike. Inaugurated on August 31, 2016. Designed by architect Janus Rostock. Located in Downtown Dubai, near the Burj Khalifa.</p>
 <p class="prose">Dubai Opera was inaugurated on August 31, 2016, marking a significant addition to the city&#x27;s cultural landscape. Designed by the renowned architect Janus Rostock, the venue reflects Dubai&#x27;s ambition to become a global arts destination. Since its opening, it has hosted numerous high-profile performances and events, contributing to the city&#x27;s reputation as a center for arts and culture. Culturally, Dubai Opera plays a pivotal role in promoting the arts in the UAE, showcasing both local and international talent. It serves as a platform for various artistic expressions, enhancing the cultural fabric of Dubai. The venue is also part of the broader initiative to elevate Dubai&#x27;s status as a global city, attracting tourists and fostering a vibrant arts scene.</p></div>
 </section>
-<section class="place" id="dubai_pdfband_8_36ceff8b">
+<section class="place" id="dubai_dubaimuseum2">
+<div class="place-lead">
 <h3>DubaiMuseum2</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/dubai_pdfband_8_36ceff8b.jpg" alt="DubaiMuseum2"/></figure>
+<figure class="place-fig place-fig--hi-res"><img src="../images/dubai_dubaimuseum2.jpg" alt="DubaiMuseum2" width="1280" height="665"/></figure>
+</div>
 </section>
 <section class="place" id="dubai_etihad_museum">
+<div class="place-lead">
 <h3>Etihad Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/dubai_etihad_museum.jpg" alt="Etihad Museum"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_etihad_museum.jpg" alt="Etihad Museum" width="330" height="247" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/dubai_etihad_museum_b.jpg" alt="Etihad Museum — view 2" width="4032" height="3024" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Etihad Museum — museum in Dubai.</p></div>
 </section>
 <section class="place" id="dubai_expo_city">
+<div class="place-lead">
 <h3>Expo City Dubai</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/dubai_expo_city.jpg" alt="Expo City Dubai"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_expo_city.jpg" alt="Expo City Dubai" width="330" height="247" style="height: 225px; max-height: 225px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_expo_city_b.jpg" alt="Expo City Dubai — view 2" width="330" height="161" style="height: 225px; max-height: 225px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Expo City Dubai is a vibrant hub that showcases innovation, sustainability, and culture, built on the legacy of Expo 2020. Visitors can explore pavilions that celebrate global achievements and experience interactive exhibits that highlight the future of technology and design. The city is a testament to Dubai&#x27;s commitment to creating a sustainable urban environment and fostering international collaboration. Expo City Dubai was the first World Expo held in the Middle East. The site covers an area of 4.38 square kilometers. Expo 2020 attracted over 24 million visitors from around the world.</p>
 <p class="prose">Expo City Dubai was established as the site for Expo 2020, which was postponed to 2021 due to the COVID-19 pandemic. The expo ran from October 1, 2021, to March 31, 2022, and marked the first World Expo held in the Middle East. Following the event, the area has been transformed into a permanent destination for culture, education, and innovation. Expo City Dubai holds cultural significance as it embodies the spirit of global collaboration and innovation. The site features pavilions from various countries, showcasing their heritage and advancements, thus fostering a sense of community and shared knowledge. It serves as a platform for cultural exchange and highlights Dubai&#x27;s role as a leader in sustainability and urban development.</p></div>
 </section>
 <section class="place" id="dubai_global_village">
+<div class="place-lead">
 <h3>Global Village (seasonal)</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Sheikh Mohammed Bin Zayed Road | Style: Pavilion architecture replicas | Period: 1997 onward seasonal fair</p>
-<figure class="place-fig"><img src="../images/dubai_global_village.jpg" alt="Global Village (seasonal)"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/dubai_global_village.jpg" alt="Global Village (seasonal)" width="1280" height="960" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_global_village_b.jpg" alt="Global Village (seasonal) — view 2" width="330" height="219" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Winter-night fairground of country pavilions, street food, and carnival rides east of the city core. Open roughly November–April; check dates before planning. Parking lots are vast—note your zone letter.</p>
 <p class="prose">Started as modest heritage tents; scale now matches regional exposition ambitions. Family budget night out for expatriate communities.</p></div>
 </section>
 <section class="place" id="dubai_gold_souk">
+<div class="place-lead">
 <h3>Gold Souk Deira</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/dubai_gold_souk.jpg" alt="Gold Souk Deira"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_gold_souk.jpg" alt="Gold Souk Deira" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_gold_souk_b.jpg" alt="Gold Souk Deira — view 2" width="330" height="330" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Gold Souk in Deira is a vibrant market renowned for its dazzling array of gold jewelry and precious gems. Visitors can explore narrow lanes lined with shops showcasing intricate designs and traditional craftsmanship. The souk is not only a shopping destination but also a cultural experience, reflecting Dubai&#x27;s rich trading history. The Gold Souk features over 300 retailers, primarily specializing in gold jewelry. It is estimated that the Gold Souk contains around 10 tons of gold on display at any given time.</p>
 <p class="prose">The Gold Souk was established in the 1940s, coinciding with Dubai&#x27;s emergence as a trading hub in the region. Over the decades, it has grown significantly, becoming a focal point for gold trading in the Middle East. The market has witnessed various developments, including modernization efforts while retaining its traditional charm. Culturally, the Gold Souk represents Dubai&#x27;s historical role as a center for trade and commerce, contributing to the city&#x27;s identity as a global city. It reflects the rich heritage of craftsmanship and the importance of gold in local traditions, including wedding ceremonies and celebrations. The souk is a testament to the enduring legacy of Dubai&#x27;s mercantile past.</p></div>
 </section>
 <section class="place" id="dubai_grand_mosque">
+<div class="place-lead">
 <h3>Grand Mosque Dubai</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/dubai_grand_mosque.jpg" alt="Grand Mosque Dubai"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_grand_mosque.jpg" alt="Grand Mosque Dubai" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_grand_mosque_b.jpg" alt="Grand Mosque Dubai — view 2" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Grand Mosque in Dubai, also known as the Sheikh Zayed Grand Mosque, is a stunning architectural masterpiece that showcases the rich cultural heritage of the UAE. With its intricate design and majestic domes, it serves as a prominent symbol of Islamic faith and artistry. Visitors are welcome to explore its serene surroundings and admire the beautiful prayer halls and courtyards. The mosque can accommodate over 40,000 worshippers. It features 82 domes and over 1,000 columns, showcasing intricate Islamic designs.</p>
 <p class="prose">The Grand Mosque was inaugurated in 1998 and has since become one of the largest mosques in the United Arab Emirates. It was named after Sheikh Zayed bin Sultan Al Nahyan, the founding father of the UAE, and has been a site for significant religious events and gatherings. The Grand Mosque plays a vital role in the cultural and religious landscape of Dubai. It is not only a place of worship but also a center for community events and interfaith dialogue. The mosque&#x27;s architecture reflects Islamic art and heritage, making it a key attraction for both locals and tourists, while also promoting the values of peace and tolerance.</p></div>
 </section>
 <section class="place" id="dubai_hatta">
+<div class="place-lead">
 <h3>Hatta Dam</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/dubai_hatta.jpg" alt="Hatta Dam"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_hatta.jpg" alt="Hatta Dam" width="330" height="104" style="height: 145px; max-height: 145px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_hatta_b.jpg" alt="Hatta Dam — view 2" width="330" height="248" style="height: 145px; max-height: 145px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Hatta (Arabic: حتا locally [ˈħɑttɐ]) is an inland exclave of the emirate of Dubai in the United Arab Emirates. Formerly Omani territory, its ownership was transferred to Dubai in or around 1850. Geography It lies to the south-east of Dubai&#x27;s main territory and is about 134 km (83 mi) east of Dubai.</p></div>
 </section>
 <section class="place" id="dubai_heritage_village">
+<div class="place-lead">
 <h3>Hatta Heritage Village</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/dubai_heritage_village.jpg" alt="Hatta Heritage Village"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--row-sized"><img src="../images/dubai_heritage_village.jpg" alt="Hatta Heritage Village" width="330" height="587" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_heritage_village_b.jpg" alt="Hatta Heritage Village — view 2" width="330" height="247" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Hatta Heritage Village is a captivating glimpse into the traditional life of the UAE, showcasing the region&#x27;s rich history and culture. Visitors can explore restored buildings, including a fort and several houses, that reflect the architectural styles of the past. The village offers a unique opportunity to experience local crafts, traditional customs, and the natural beauty of the Hatta region. Hatta Heritage Village includes a restored fort and several traditional houses. The village showcases local crafts and customs, providing insight into Emirati life.</p>
 <p class="prose">Hatta Heritage Village was established to preserve the cultural heritage of the Hatta region, with efforts to restore and maintain the site beginning in the late 20th century. The village features structures that date back to the 16th century, highlighting the historical significance of Hatta as a settlement and its role in the region&#x27;s development. Culturally, Hatta Heritage Village serves as an important site for understanding the traditions and daily life of the Emirati people. It reflects the UAE&#x27;s commitment to preserving its heritage amid rapid modernization. The village is a venue for cultural events and festivals, fostering a sense of community and continuity in Emirati traditions.</p></div>
 </section>
 <section class="place" id="dubai_jumeirah_mosque">
+<div class="place-lead">
 <h3>Jumeirah Mosque</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Jumeirah 1 | Style: Fatimid-inspired stone mosque | Period: 1979</p>
-<figure class="place-fig"><img src="../images/dubai_jumeirah_mosque.jpg" alt="Jumeirah Mosque"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/dubai_jumeirah_mosque.jpg" alt="Jumeirah Mosque" width="1280" height="960" style="height: 344px; max-height: 344px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_jumeirah_mosque_b.jpg" alt="Jumeirah Mosque — view 2" width="330" height="246" style="height: 344px; max-height: 344px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Stone mosque promoted for guided &#x27;Open Doors&#x27; visits explaining Emirati culture and prayer practice to visitors. Modest dress is required for organised tours. Floodlighting after dusk emphasises the two minarets and central dome.</p>
 <p class="prose">Built as a gift from Sheikh Rashid; its programme of cultural outreach predates many newer museum initiatives. Accessible introduction to mosque architecture away from the downtown towers.</p></div>
 </section>
 <section class="place" id="dubai_kite_beach">
+<div class="place-lead">
 <h3>Kite Beach</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/dubai_kite_beach.jpg" alt="Kite Beach"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_kite_beach.jpg" alt="Kite Beach" width="330" height="247" style="height: 319px; max-height: 319px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/dubai_kite_beach_b.jpg" alt="Kite Beach — view 2" width="5854" height="4049" style="height: 319px; max-height: 319px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Kite Beach is a vibrant stretch of coastline in Dubai, known for its stunning views of the iconic Burj Al Arab and its lively atmosphere. This popular destination attracts both locals and tourists with its soft sands, water sports, and a variety of cafes and restaurants. Ideal for families and fitness enthusiasts, Kite Beach offers ample space for beach activities, jogging, and relaxation under the sun. Kite Beach is located in the Umm Suqeim area of Dubai. The beach is known for its water sports, including kite surfing and paddleboarding.</p>
 <p class="prose">Kite Beach has developed over the years as part of Dubai&#x27;s transformation into a global city. While specific historical milestones for the beach itself may not be documented, it reflects the broader evolution of Dubai&#x27;s coastal areas since the late 20th century, when the city began to invest heavily in tourism and recreation. Culturally, Kite Beach plays a significant role in the daily lives of Dubai&#x27;s residents, serving as a communal space for leisure and social interaction. It is a hub for various water sports, reflecting the Emirati lifestyle that embraces outdoor activities. The beach also hosts events and festivals that celebrate local culture and promote community engagement.</p></div>
 </section>
 <section class="place" id="dubai_la_mer">
+<div class="place-lead">
 <h3>La Mer beachfront</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/dubai_la_mer.jpg" alt="La Mer beachfront"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_la_mer.jpg" alt="La Mer beachfront" width="330" height="413" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_la_mer_b.jpg" alt="La Mer beachfront — view 2" width="330" height="330" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">La Mer is a vibrant beachfront destination in Dubai, blending modernity with a laid-back atmosphere. Visitors can enjoy a variety of dining options, retail shops, and water sports, all set against the stunning backdrop of the Arabian Gulf. The area is designed for relaxation and entertainment, making it a popular spot for both locals and tourists alike. La Mer spans over 2.5 kilometers along the coastline. The area features over 130 shops, restaurants, and cafes.</p>
 <p class="prose">La Mer was developed as part of Dubai&#x27;s ongoing efforts to enhance its coastal areas and promote tourism. Opened in 2017, this beachfront destination reflects the city&#x27;s rapid growth and commitment to creating attractive leisure spaces. Culturally, La Mer represents Dubai&#x27;s shift towards a more relaxed lifestyle, offering a space for community engagement and leisure activities. It showcases the city&#x27;s modern architectural style while also incorporating elements that reflect the local heritage. The area is a hub for social interaction, drawing diverse crowds that contribute to the multicultural fabric of Dubai.</p></div>
 </section>
 <section class="place" id="dubai_madinat_jumeirah">
+<div class="place-lead">
 <h3>Madinat Jumeirah resort</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Jumeirah | Style: Neo-Arab windcatcher resort fabric | Period: 2004 phased souk resort</p>
-<figure class="place-fig"><img src="../images/dubai_madinat_jumeirah.jpg" alt="Madinat Jumeirah resort"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/dubai_madinat_jumeirah.jpg" alt="Madinat Jumeirah resort" width="1280" height="867" style="height: 312px; max-height: 312px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_madinat_jumeirah_b.jpg" alt="Madinat Jumeirah resort — view 2" width="330" height="247" style="height: 312px; max-height: 312px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Water taxi network through faux-souk restaurants with Burj Al Arab backdrop views. Abra rides are cheaper than beach resort taxi loops. Theatre hosts touring musicals separate from hotel keys.</p>
 <p class="prose">Jumeirah Group packaged vernacular motifs into a super-scale hospitality district. Controlled &#x27;old Dubai&#x27; fantasy beside the open Gulf.</p></div>
 </section>
 <section class="place" id="dubai_museum_of_the_future">
+<div class="place-lead">
 <h3>Museum of the Future</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Sheikh Zayed Road | Style: Stainless torus with Arabic calligraphy voids | Period: 2022</p>
-<figure class="place-fig"><img src="../images/dubai_museum_of_the_future.jpg" alt="Museum of the Future"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/dubai_museum_of_the_future_b.jpg" alt="Museum of the Future" width="330" height="440"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Immersive floors on climate, health, and space futures with no traditional object cases. Timed tickets sell out weeks ahead in peak season. Metro Emirates Towers links via air-conditioned walkway.</p>
 <p class="prose">Government brief asked for an icon readable at highway speeds. Dubai&#x27;s post-Expo futurist branding in built form.</p></div>
 </section>
 <section class="place" id="dubai_palm_jumeirah">
+<div class="place-lead">
 <h3>Palm Jumeirah trunk</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Palm Jumeirah | Style: Artificial frond island urbanism | Period: 2001–2006 reclamation</p>
-<figure class="place-fig"><img src="../images/dubai_palm_jumeirah.jpg" alt="Palm Jumeirah trunk"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/dubai_palm_jumeirah.jpg" alt="Palm Jumeirah trunk" width="1280" height="857" style="height: 309px; max-height: 309px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_palm_jumeirah_b.jpg" alt="Palm Jumeirah trunk — view 2" width="330" height="229" style="height: 309px; max-height: 309px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Monorail and road spine lined with apartment towers leading toward Atlantis resort at the crescent. The View at The Palm offers map-like perspective boards. Beach clubs require reservations Friday afternoons.</p>
 <p class="prose">Nakheel&#x27;s palm-shaped landfill extended Dubai&#x27;s beach real estate seaward. Engineering spectacle visible from aircraft on approach.</p></div>
 </section>
 <section class="place" id="dubai_qasr_al_hosn">
+<div class="place-lead">
 <h3>Qasr Al Hosn</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/dubai_qasr_al_hosn.jpg" alt="Qasr Al Hosn"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_qasr_al_hosn.jpg" alt="Qasr Al Hosn" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_qasr_al_hosn_b.jpg" alt="Qasr Al Hosn — view 2" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Qasr Al Hosn is a historic fort in the heart of Abu Dhabi, symbolizing the UAE&#x27;s rich heritage and cultural identity. Originally built in the 18th century, it served as a watchtower and later became the residence of the ruling family. Today, it stands as a museum, showcasing the history and traditions of the Emirati people. Qasr Al Hosn was built in 1761. It is the oldest stone building in Abu Dhabi. The fort served as the residence of the ruling family and the center of governance.</p>
 <p class="prose">Qasr Al Hosn was constructed in 1761, making it the oldest stone building in Abu Dhabi. Initially built as a watchtower to protect the freshwater wells, it evolved into a royal palace and the center of governance for the emirate. The fort has undergone several renovations and restorations, particularly in the late 20th century, to preserve its historical significance. Culturally, Qasr Al Hosn is a vital landmark that reflects the heritage and traditions of the UAE. It serves as a venue for cultural events and exhibitions, promoting the understanding of Emirati history. The fort&#x27;s transformation into a museum underscores its role in educating visitors about the region&#x27;s past and fostering a sense of national pride.</p></div>
 </section>
 <section class="place" id="dubai_safa_park">
+<div class="place-lead">
 <h3>Safa Park</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/dubai_safa_park.jpg" alt="Safa Park"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_safa_park.jpg" alt="Safa Park" width="330" height="284" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_safa_park_b.jpg" alt="Safa Park — view 2" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Safa Park — park in the United Arab Emirates.</p></div>
 </section>
 <section class="place" id="dubai_wild_wadi">
+<div class="place-lead">
 <h3>Wild Wadi Waterpark</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/dubai_wild_wadi.jpg" alt="Wild Wadi Waterpark"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_wild_wadi.jpg" alt="Wild Wadi Waterpark" width="330" height="495" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_wild_wadi_b.jpg" alt="Wild Wadi Waterpark — view 2" width="330" height="440" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Wild Wadi Waterpark is a premier water attraction located in Dubai, offering a variety of thrilling water rides and attractions for all ages. Set against the backdrop of the iconic Burj Al Arab, the park features wave pools, lazy rivers, and adrenaline-pumping slides, making it a perfect destination for families and adventure seekers alike. With its Arabian-themed design and lush landscaping, Wild Wadi provides a unique blend of fun and relaxation in the heart of the city. The park features over 30 rides and attractions. Wild Wadi is themed around the tale of Juha, a character from Arabian folklore.</p>
 <p class="prose">Wild Wadi Waterpark opened its doors in 1999 and was developed by the Jumeirah Group, which is known for its luxury hospitality offerings in Dubai. The park has since become a key attraction in the city, drawing millions of visitors each year. Wild Wadi Waterpark is not only a popular leisure destination but also contributes to Dubai&#x27;s reputation as a leading tourist hub. The park reflects the city&#x27;s commitment to providing world-class entertainment and recreational facilities, enhancing the overall quality of life for residents and visitors alike.</p></div>
 </section>
-<section class="place" id="dubai_pdfband_9_d0a641cf">
+<section class="place" id="dubai_zabeel_palace_in_dubai">
+<div class="place-lead">
 <h3>Zabeel palace in Dubai</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/dubai_pdfband_9_d0a641cf.jpg" alt="Zabeel palace in Dubai"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/dubai_zabeel_palace_in_dubai.jpg" alt="Zabeel palace in Dubai" width="1280" height="865" style="height: 312px; max-height: 312px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_zabeel_palace_in_dubai_b.jpg" alt="Zabeel palace in Dubai — view 2" width="330" height="250" style="height: 312px; max-height: 312px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 </section>
 </body>
 </html>

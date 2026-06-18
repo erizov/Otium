@@ -20,6 +20,15 @@ if str(_PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(_PROJECT_ROOT))
 
 
+def _clean_yandex_cdn_url(url: str) -> str:
+    """Strip HTML/JSON debris glued to Yandex CDN URLs in page source."""
+    u = url.strip()
+    for sep in ("&quot;", '"', "'", "&amp;"):
+        if sep in u:
+            u = u.split(sep, 1)[0]
+    return u.split("?")[0].rstrip("/.,;")
+
+
 def search_place_by_name(
     name: str,
     city: str = "Москва",
@@ -77,7 +86,7 @@ def search_place_by_name(
             cdn_pattern = r'https://avatars\.mds\.yandex\.net/[^"\s<>\)]+'
             cdn_matches = re.findall(cdn_pattern, content, re.IGNORECASE)
             for url in cdn_matches:
-                clean_url = url.split("?")[0]
+                clean_url = _clean_yandex_cdn_url(url)
                 if any(
                     p in clean_url
                     for p in [
@@ -94,7 +103,7 @@ def search_place_by_name(
                 if "yandex" in url.lower() and any(
                     ext in url.lower() for ext in [".jpg", ".jpeg", ".png", ".webp"]
                 ):
-                    clean_url = url.split("?")[0]
+                    clean_url = _clean_yandex_cdn_url(url)
                     found_urls.add(clean_url)
 
             # Pattern 3: data-src or data-lazy-src attributes
@@ -102,7 +111,7 @@ def search_place_by_name(
             lazy_matches = re.findall(lazy_pattern, content, re.IGNORECASE)
             for url in lazy_matches:
                 if "yandex" in url.lower():
-                    clean_url = url.split("?")[0]
+                    clean_url = _clean_yandex_cdn_url(url)
                     found_urls.add(clean_url)
 
             # Click first search result to open place card (photos are there)
@@ -143,7 +152,7 @@ def search_place_by_name(
                         content = page.content()
                         cdn_matches = re.findall(cdn_pattern, content, re.IGNORECASE)
                     for url in cdn_matches:
-                        clean_url = url.split("?")[0]
+                        clean_url = _clean_yandex_cdn_url(url)
                         if any(
                             p in clean_url
                             for p in [
@@ -157,11 +166,11 @@ def search_place_by_name(
                         if "yandex" in url.lower() and any(
                             ext in url.lower() for ext in [".jpg", ".jpeg", ".png", ".webp"]
                         ):
-                            found_urls.add(url.split("?")[0])
+                            found_urls.add(_clean_yandex_cdn_url(url))
                     lazy_matches = re.findall(lazy_pattern, content, re.IGNORECASE)
                     for url in lazy_matches:
                         if "yandex" in url.lower():
-                            found_urls.add(url.split("?")[0])
+                            found_urls.add(_clean_yandex_cdn_url(url))
             except Exception:
                 pass
 
@@ -183,7 +192,7 @@ def search_place_by_name(
                             for url in re.findall(
                                 cdn_pattern, content_after, re.IGNORECASE
                             ):
-                                clean_url = url.split("?")[0]
+                                clean_url = _clean_yandex_cdn_url(url)
                                 if any(
                                     p in clean_url
                                     for p in [
@@ -194,7 +203,7 @@ def search_place_by_name(
                                     found_urls.add(clean_url)
                             for url in re.findall(img_pattern, content_after, re.IGNORECASE):
                                 if "yandex" in url.lower():
-                                    found_urls.add(url.split("?")[0])
+                                    found_urls.add(_clean_yandex_cdn_url(url))
                             break
                     except Exception:
                         continue
@@ -213,7 +222,7 @@ def search_place_by_name(
                     if src and "yandex" in src.lower() and any(
                         ext in src.lower() for ext in [".jpg", ".jpeg", ".png", ".webp"]
                     ):
-                        clean_url = src.split("?")[0]
+                        clean_url = _clean_yandex_cdn_url(src)
                         if clean_url not in image_urls:
                             image_urls.append(clean_url)
                             if len(image_urls) >= max_images:
@@ -297,14 +306,14 @@ def search_yandex_images(
             time.sleep(4)
             content = page.content()
             for url in re.findall(cdn_pattern, content, re.IGNORECASE):
-                clean_url = url.split("?")[0]
+                clean_url = _clean_yandex_cdn_url(url)
                 if any(p in clean_url for p in path_patterns):
                     found_urls.add(clean_url)
             if not found_urls:
                 time.sleep(3)
                 content = page.content()
                 for url in re.findall(cdn_pattern, content, re.IGNORECASE):
-                    clean_url = url.split("?")[0]
+                    clean_url = _clean_yandex_cdn_url(url)
                     if any(p in clean_url for p in path_patterns):
                         found_urls.add(clean_url)
         except (PWTimeout, Exception):

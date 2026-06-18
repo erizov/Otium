@@ -13,7 +13,7 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
 .otium-logo { font-family: 'Cormorant Garamond', serif; font-size: 2.15rem;
   font-weight: 600; letter-spacing: 0.18em; margin-bottom: 0.85rem; }
 .otiump { margin: 0.42rem 0; line-height: 1.42; text-align: justify;
-  max-width: 38rem; font-size: 0.95rem; }
+  font-size: 0.95rem; }
 .guide-title { page-break-after: auto; margin-bottom: 0.55rem;
   page-break-inside: avoid; }
 .historical-reference { margin: 0.75rem 0 1.15rem;
@@ -63,22 +63,103 @@ ol.trip-stops a:hover { text-decoration: underline; }
 .heraldry-univ-caption { font-size: 0.52rem; line-height: 1.18;
   margin: 0.12rem 0 0; padding: 0 0.06rem; color: #252525;
   text-align: center; font-weight: 500; }
-.heraldry-motto { text-align: center; max-width: 18rem; margin: 0.18rem auto;
+.heraldry-motto { text-align: center; margin: 0.18rem auto;
   width: 100%; }
 .motto-line { font-family: 'Cormorant Garamond', serif; font-size: 1rem;
   margin: 0; color: #333; line-height: 1.35; }
 .guide-title h1.guide-title-main { font-family: 'Cormorant Garamond', serif;
   font-size: 2.35rem; margin-bottom: 0.5rem; font-weight: 600; }
 .lead { color: #444; font-size: 1.05rem; }
-.guide-toc { margin: 0.85rem 0 1.15rem; page-break-inside: avoid; }
-.guide-toc h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.28rem;
-  font-weight: 600; margin: 0.4rem 0 0.55rem; }
+
+.guide-toc { page-break-before: always; break-before: page;
+  page-break-after: always; break-after: page;
+  margin: 0; padding: 0.2rem 0 0.45rem; page-break-inside: auto; }
+.guide-toc h2 { font-family: 'Cormorant Garamond', serif;
+  font-size: 1.28rem; font-weight: 600; margin: 0.4rem 0 0.55rem; }
 .guide-toc ol { margin: 0.35rem 0 0.65rem 1.25rem; padding: 0;
   columns: 2; column-gap: 1.5rem; }
 .guide-toc li { margin: 0.18rem 0; line-height: 1.35;
   font-size: 0.88rem; break-inside: avoid; }
-.guide-toc a { color: #1a5276; text-decoration: none; }
+.guide-toc a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.guide-toc a:hover { color: #0d3d56; }
 .guide-toc li.toc-item--sub { font-size: 0.82rem; margin-left: 0.35rem; }
+.toc-back { font-size: 0.78rem; margin: 0 0 0.35rem; text-align: right; }
+.toc-back a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.toc-back a:hover { color: #0d3d56; }
+.place, .historical-reference, .guide-primer, .guide-trip-plans {
+  scroll-margin-top: 1.25rem; }
+.historical-reference h2, .guide-primer h2, .guide-trip-plans h2,
+.chapter-head h2, .place-lead h3 { position: relative; }
+.guide-toc + .place, .guide-toc + .chapter-head {
+  page-break-before: avoid; break-before: avoid-page; }
+.place-lead { page-break-inside: avoid; break-inside: avoid-page;
+  page-break-after: auto; }
+.place-lead > h3 { page-break-after: avoid; break-after: avoid-page; }
+.place-lead > .place-meta { page-break-after: avoid; break-after: avoid-page; }
+
+.place-fig { page-break-inside: avoid; break-inside: avoid-page;
+  margin: 0.5rem 0 1rem; }
+.place-fig img {
+  page-break-inside: avoid; break-inside: avoid-page;
+  max-height: 48vh; width: auto; max-width: 100%;
+  object-fit: contain; margin-left: auto; margin-right: auto; }
+.place-fig--hi-res img { max-height: 52vh; }
+.place-fig--lo-res img { max-height: 30vh; }
+.place-pdf-fig-row {
+  display: flex; flex-direction: row; flex-wrap: wrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.45rem 0.55rem; margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row .place-fig {
+  flex: 1 1 30%; margin: 0; min-width: 26%; max-width: 100%; }
+.place-pdf-fig-row .place-fig img {
+  width: auto; max-width: 100%; height: auto; max-height: 44vh;
+  object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--pair {
+  flex-wrap: nowrap; justify-content: space-between;
+  align-items: flex-end; gap: 0.5rem 0.65rem; }
+.place-pdf-fig-row--pair .place-fig {
+  flex: 1 1 47%; min-width: 0; max-width: 50%;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--pair .place-fig img {
+  max-height: 44vh; object-fit: contain; }
+.place-pdf-fig-row--pair .place-fig--hi-res img { max-height: 50vh; }
+.place-pdf-fig-row--pair .place-fig--lo-res img { max-height: 26vh; }
+.place-pdf-fig-row--pair .place-fig--row-sized img,
+.place-pdf-fig-row--triple .place-fig--row-sized img,
+.place-pdf-fig-row--many .place-fig--row-sized img {
+  width: auto; max-width: 100%; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row .place-fig--row-sized.place-fig--hi-res img,
+.place-pdf-fig-row .place-fig--row-sized.place-fig--lo-res img {
+  max-height: unset; }
+.place-pdf-fig-rows-stack {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple {
+  display: flex; flex-direction: row; flex-wrap: nowrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.4rem 0.48rem; margin: 0;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--triple .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--triple .place-fig--hi-res img { max-height: 38vh; }
+.place-pdf-fig-row--triple .place-fig--lo-res img { max-height: 18vh; }
+.place-pdf-fig-row--many {
+  flex-wrap: nowrap; justify-content: center; align-items: flex-end;
+  gap: 0.35rem 0.42rem; }
+.place-pdf-fig-row--many .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--many .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+
+
 .place { margin-bottom: 2.2rem; page-break-inside: auto; }
 h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.22rem; margin: 1.2rem 0 0.35rem;
   font-weight: 600; }
@@ -90,7 +171,6 @@ h4 { font-family: 'Cormorant Garamond', serif; font-size: 0.95rem; text-transfor
   color: #555; font-size: 0.95rem; margin: 0 0 0.5rem; font-style: italic; }
 .place-meta { font-size: 0.92rem; color: #353535; margin: 0 0 0.75rem;
   line-height: 1.4; }
-.place-fig { margin: 0.5rem 0 1rem; }
 img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
 .prose, .place-desc p { margin: 0.45rem 0; line-height: 1.5;
   text-align: justify; }
@@ -110,16 +190,19 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <figure class="heraldry-fig heraldry-coat-book" title="Coat of arms of Lviv"><img src="../images/guide_coat_of_arms.svg" alt="Coat of arms of Lviv"/></figure>
 <figure class="heraldry-fig heraldry-coat-book" title="Flag of Lviv"><img src="../images/guide_flag.svg" alt="Flag of Lviv"/></figure>
 </div></div><h1 class="guide-title-main">Lviv</h1><p class="lead">Путеводитель. Объектов в этом выпуске: 30.</p></header>
+<nav class="guide-toc" id="guide-toc" aria-label="Содержание"><h2>Содержание</h2><ol><li class="toc-item"><a href="#guide-historical">Историческая справка</a></li><li class="toc-item"><a href="#guide-trips">Маршруты</a></li><li class="toc-item"><a href="#lviv_0204_han_cami">Lviv 0204 Han Cami</a></li><li class="toc-item"><a href="#lviv_bandinelli_palace">Lviv Bandinelli Palace</a></li><li class="toc-item"><a href="#lviv_basilian_monastery">Lviv Basilian Monastery</a></li><li class="toc-item"><a href="#lviv_boitsov">Lviv Boitsov</a></li><li class="toc-item"><a href="#lviv_dianafountain_lviv">Lviv Dianafountain Lviv</a></li><li class="toc-item"><a href="#lviv_landmark">Lviv Landmark</a></li><li class="toc-item"><a href="#lviv_lvivrynek1941">Lviv Lvivrynek1941</a></li><li class="toc-item"><a href="#lviv_lychakiv_cemetery">Lviv Lychakiv Cemetery</a></li><li class="toc-item"><a href="#lviv_potocki_palace">Lviv Potocki Palace</a></li><li class="toc-item"><a href="#lviv_armenian_cathedral">Армянский собор</a></li><li class="toc-item"><a href="#lviv_korniakt_tower">Башня Корнякта</a></li><li class="toc-item"><a href="#lviv_high_castle">Высокий замковый холм</a></li><li class="toc-item"><a href="#lviv_ivan_franko_university">Главный университет Львова</a></li><li class="toc-item"><a href="#lviv_villa_biennale">Дворец культуры Львов</a></li><li class="toc-item"><a href="#lviv_dominican_church">Доминиканская церковь во Львове</a></li><li class="toc-item"><a href="#lviv_jesuit_church">Иезуитская церковь во Львове</a></li><li class="toc-item"><a href="#lviv_italian_courtyard">Итальянский дворик</a></li><li class="toc-item"><a href="#lviv_latin_cathedral">Латинский собор</a></li><li class="toc-item"><a href="#lviv_opera_house">Львовский оперный театр</a></li><li class="toc-item"><a href="#lviv_arsenal_museum">Музей Арсенала</a></li><li class="toc-item"><a href="#lviv_brewery_museum">Музей пивоварения во Львове</a></li><li class="toc-item"><a href="#lviv_pharmacy_museum">Музей фармацевтики</a></li><li class="toc-item"><a href="#lviv_solomiya_krushelnytska">Опера имени Соломии Крушельницкой в Львове</a></li><li class="toc-item"><a href="#lviv_stryi_park">Парк Стрый</a></li><li class="toc-item"><a href="#lviv_ploshcha_mickiewicz">Площадь Мицкевича</a></li><li class="toc-item"><a href="#lviv_rynok_square">Площадь Рынок</a></li><li class="toc-item"><a href="#lviv_jewish_hospital">Район синагоги Золотой Розы</a></li><li class="toc-item"><a href="#lviv_st_george_cathedral">Собор Святого Георгия</a></li><li class="toc-item"><a href="#lviv_bernardine_church">Церковь бернардинцев</a></li><li class="toc-item"><a href="#lviv_carmelite">Церковь кармелитов</a></li></ol></nav>
 <section class="historical-reference" id="guide-historical" aria-label="Историческая справка"><h2>Историческая справка</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 <p class="prose">Львов — административный центр Львовской области Украины, город на стыке культур Центральной Европы.</p>
 <p class="prose">Русь, Галиция, Польша, Австро-Венгрия и XX век оставили площади, арены, университет и многоязычную архитектуру. Львов известен кофейной традицией, театрами и памятью о разных общинах.</p>
 <p class="prose">Межвоенная Польша и Вторая мировая война изменили этнический состав; советский период сохранил университет и театры. После 1991 года Львов укрепил ориентацию на Европу, туризм и ИТ, оставаясь символом западноукраинской идентичности.</p></section>
 <section class="guide-trip-plans" id="guide-trips" aria-label="Маршруты"><h2>Маршруты</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 <article class="trip-plan" id="trip-1d"><h3>Один день</h3>
 <p class="prose">Компактный маршрут по главным точкам путеводителя с минимальным возвратом назад пешком.</p>
-<ol class="trip-stops"><li><a href="#lviv_armenian_cathedral">Армянский собор</a> (~75мин)</li>
+<ol class="trip-stops"><li><a href="#lviv_bandinelli_palace">Lviv Bandinelli Palace</a> (~75мин)</li>
 <li><a href="#lviv_pharmacy_museum">Музей фармацевтики</a> (~75мин)</li>
-<li><a href="#lviv_bandinelli_palace">Lviv Bandinelli Palace</a> (~75мин)</li>
+<li><a href="#lviv_armenian_cathedral">Армянский собор</a> (~75мин)</li>
 <li><a href="#lviv_boitsov">Lviv Boitsov</a> (~75мин)</li>
 <li><a href="#lviv_ploshcha_mickiewicz">Площадь Мицкевича</a> (~75мин)</li>
 <li><a href="#lviv_basilian_monastery">Lviv Basilian Monastery</a> (~60мин)</li></ol></article>
@@ -137,235 +220,396 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <li><a href="#lviv_arsenal_museum">Музей Арсенала</a> (~75мин)</li>
 <li><a href="#lviv_bernardine_church">Церковь бернардинцев</a> (~75мин)</li>
 <li><a href="#lviv_brewery_museum">Музей пивоварения во Львове</a> (~75мин)</li></ol></article></section>
-<nav class="guide-toc" aria-label="Содержание"><h2>Содержание</h2><ol><li class="toc-item"><a href="#guide-historical">Историческая справка</a></li><li class="toc-item"><a href="#guide-trips">Маршруты</a></li><li class="toc-item"><a href="#lviv_pdfband_2_5ffecd0e">0204-Han Cami</a></li><li class="toc-item"><a href="#lviv_armenian_cathedral">Армянский собор</a></li><li class="toc-item"><a href="#lviv_arsenal_museum">Музей Арсенала</a></li><li class="toc-item"><a href="#lviv_bandinelli_palace">Lviv Bandinelli Palace</a></li><li class="toc-item"><a href="#lviv_basilian_monastery">Lviv Basilian Monastery</a></li><li class="toc-item"><a href="#lviv_brewery_museum">Музей пивоварения во Львове</a></li><li class="toc-item"><a href="#lviv_bernardine_church">Церковь бернардинцев</a></li><li class="toc-item"><a href="#lviv_boitsov">Lviv Boitsov</a></li><li class="toc-item"><a href="#lviv_carmelite">Церковь кармелитов</a></li><li class="toc-item"><a href="#lviv_pdfband_3_73244fd6">DianaFountain Lviv</a></li><li class="toc-item"><a href="#lviv_dominican_church">Доминиканская церковь во Львове</a></li><li class="toc-item"><a href="#lviv_jewish_hospital">Район синагоги Золотой Розы</a></li><li class="toc-item"><a href="#lviv_high_castle">Высокий замковый холм</a></li><li class="toc-item"><a href="#lviv_italian_courtyard">Итальянский дворик</a></li><li class="toc-item"><a href="#lviv_jesuit_church">Иезуитская церковь во Львове</a></li><li class="toc-item"><a href="#lviv_korniakt_tower">Башня Корнякта</a></li><li class="toc-item"><a href="#lviv_latin_cathedral">Латинский собор</a></li><li class="toc-item"><a href="#lviv_opera_house">Львовский оперный театр</a></li><li class="toc-item"><a href="#lviv_pdfband_9_af31338a">LvivRynek1941</a></li><li class="toc-item"><a href="#lviv_lychakiv_cemetery">Lviv Lychakiv Cemetery</a></li><li class="toc-item"><a href="#lviv_ploshcha_mickiewicz">Площадь Мицкевича</a></li><li class="toc-item"><a href="#lviv_villa_biennale">Дворец культуры Львов</a></li><li class="toc-item"><a href="#lviv_pharmacy_museum">Музей фармацевтики</a></li><li class="toc-item"><a href="#lviv_potocki_palace">Lviv Potocki Palace</a></li><li class="toc-item"><a href="#lviv_rynok_square">Площадь Рынок</a></li><li class="toc-item"><a href="#lviv_solomiya_krushelnytska">Опера имени Соломии Крушельницкой в Львове</a></li><li class="toc-item"><a href="#lviv_st_george_cathedral">Собор Святого Георгия</a></li><li class="toc-item"><a href="#lviv_stryi_park">Парк Стрый</a></li><li class="toc-item"><a href="#lviv_ivan_franko_university">Главный университет Львова</a></li><li class="toc-item"><a href="#lviv_pdfband_0_c7ae57f7">Львівська ратуша вночі</a></li></ol></nav>
-<section class="place" id="lviv_pdfband_2_5ffecd0e">
-<h3>0204-Han Cami</h3>
+<section class="place" id="lviv_0204_han_cami">
+<div class="place-lead">
+<h3>Lviv 0204 Han Cami</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/lviv_pdfband_2_5ffecd0e.jpg" alt="0204-Han Cami"/></figure>
-</section>
-<section class="place" id="lviv_armenian_cathedral">
-<h3>Армянский собор</h3>
-
-
-<figure class="place-fig"><img src="../images/lviv_armenian_cathedral.jpg" alt="Армянский собор"/></figure>
-<div class="place-desc"><p class="prose">Армянский собор во Львове является великолепным примером средневековой архитектуры, демонстрируя богатое наследие армянской общины в Украине. Эта историческая церковь с её сложными каменными резьбами и красивыми фресками служит свидетельством культурных и религиозных традиций армян в регионе. Посетители могут восхищаться её уникальным архитектурным стилем и спокойной атмосферой, что делает её обязательной для посещения достопримечательностью во Львове. Основан в 14 веке, около 1363 года. Сочетает в себе элементы готической и ренессансной архитектуры. Дом для примечательных фресок и сложных каменных резьб.</p>
-<p class="prose">Армянский собор был основан в 14 веке, и его строительство, как считается, началось около 1363 года. Он был построен для обслуживания растущего армянского населения во Львове, которое процветало как значительный торговый центр. На протяжении веков собор претерпел различные ремонты и реставрации, отражая изменяющиеся художественные стили и влияния своего времени. Армянский собор имеет значительное культурное значение как символ армянского наследия во Львове, внося вклад в разнообразный религиозный ландшафт города. Это важное место для армянской общины, где проводятся религиозные церемонии и культурные мероприятия, сохраняющие их традиции. Уникальные архитектурные особенности и произведения искусства собора также повышают статус Львова как объекта Всемирного наследия ЮНЕСКО, подчеркивая историческое богатство города.</p></div>
-</section>
-<section class="place" id="lviv_arsenal_museum">
-<h3>Музей Арсенала</h3>
-
-
-<figure class="place-fig"><img src="../images/lviv_arsenal_museum.jpg" alt="Музей Арсенала"/></figure>
-<div class="place-desc"><p class="prose">Арсенал Музей во Львове — это увлекательное место, которое демонстрирует богатую военную историю и наследие города. Расположенный в историческом здании арсенала XVI века, музей предлагает обширную коллекцию оружия, доспехов и военных артефактов, позволяя посетителям заглянуть в прошлое. Он служит свидетельством стратегического значения Львова на протяжении истории и его роли в различных военных конфликтах. Музей был основан в 1951 году. Здание было изначально построено в середине XVI века.</p>
-<p class="prose">Музей Арсенала был основан в 1951 году и расположен в здании, которое датируется серединой XVI века. Изначально построенное как арсенал для защиты города, это сооружение стало свидетелем множества исторических событий, включая войны и территориальные изменения, которые сформировали идентичность Львова. Культурно, Арсенал Музей играет важную роль в сохранении военного наследия Львова и Украины. Он отражает историческое значение города как военной крепости, демонстрируя эволюцию оружия и стратегий обороны на протяжении веков. Музей также способствует пониманию места Львова в более широком контексте европейской военной истории.</p></div>
+<figure class="place-fig place-fig--hi-res"><img src="../images/lviv_0204_han_cami.jpg" alt="Lviv 0204 Han Cami" width="975" height="1600"/></figure>
+</div>
 </section>
 <section class="place" id="lviv_bandinelli_palace">
+<div class="place-lead">
 <h3>Lviv Bandinelli Palace</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Период: 1875–1880</p>
-<figure class="place-fig"><img src="../images/lviv_bandinelli_palace.jpg" alt="Lviv Bandinelli Palace"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lviv_bandinelli_palace.jpg" alt="Lviv Bandinelli Palace" width="1200" height="1600" style="height: 445px; max-height: 445px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lviv_bandinelli_palace_b.jpg" alt="Lviv Bandinelli Palace — вид 2" width="330" height="498" style="height: 445px; max-height: 445px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Построенный в конце XIX века, дворец Бандини — шедевр неоренессанского стиля, величественно возвышающийся на главной площади Львова. Его изящный фасад и богато украшенный интерьер отражают богатое культурное наследие города. Спроектировано в неоренессанс стиле с изысканными деталями, вдохновлёнными итальянской архитектурой. Расположен на площади Рынок, одной из крупнейших средневековых рыночных площадей Европы. В дворце представлены изысканные фрески с изображениями сцен из классической мифологии. Здесь находится музей, где представлены произведения искусства и артефакты, отражающие мультикультурное прошлое Львова. Открыто для публики в 1964 году после масштабной реставрации.</p>
 <p class="prose">Построенный между 1875 и 1880 годами итальянским архитектором Франческо Бандинилли, дворец изначально предназначался для проживания состоятельных купцов. Со временем он стал символом архитектурного многообразия и культурной значимости Львова. Посетители приходят сюда, чтобы полюбоваться его замысловатым декором, потрясающими фресками и исторической ценностью в самом сердце Львова.</p></div>
 </section>
 <section class="place" id="lviv_basilian_monastery">
+<div class="place-lead">
 <h3>Lviv Basilian Monastery</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/lviv_basilian_monastery.jpg" alt="Lviv Basilian Monastery"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lviv_basilian_monastery.jpg" alt="Lviv Basilian Monastery" width="1280" height="1280" style="height: 334px; max-height: 334px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lviv_basilian_monastery_b.jpg" alt="Lviv Basilian Monastery — вид 2" width="330" height="511" style="height: 334px; max-height: 334px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Базильянские монахи — это восточнохристианские монахи, следующие правилам Святого Василия Великого, епископа Кесарии (330–379). Термин «Базильянский» обычно используется только в Католической Церкви для отличия греко-католических монахов от других форм монашеской жизни в рамках Католической Церкви. В Восточной Православной Церкви все монахи следуют Правилу Святого Василия, поэтому они не выделяются как «Базильянские».</p></div>
 </section>
-<section class="place" id="lviv_brewery_museum">
-<h3>Музей пивоварения во Львове</h3>
-
-
-<figure class="place-fig"><img src="../images/lviv_brewery_museum.jpg" alt="Музей пивоварения во Львове"/></figure>
-<div class="place-desc"><p class="prose">Музей пивоварения во Львове предлагает увлекательный взгляд на богатую историю производства пива в регионе. Расположенный в историческом здании, музей демонстрирует традиционные методы пивоварения и эволюцию пивной культуры во Львове. Посетители могут исследовать интерактивные экспозиции, пробовать местные сорта пива и узнать о значении пива в украинском наследии. Музей расположен в историческом здании, которое датируется 19-м веком. Он включает выставки о традиционных методах пивоварения и истории местных пивоварен.</p>
-<p class="prose">Музей пивоварения был основан для сохранения и продвижения давних пивоваренных традиций Львова, города, известного своей яркой пивной культурой с Средневековья. Коллекция музея включает артефакты и документы, которые прослеживают историю пивоварения в регионе, подчеркивая ключевые события и местные пивоварни, сформировавшие идентичность Львова. Культурно Музей пивоварения играет важную роль в праздновании наследия Львова и его давних отношений с пивом. Пиво было неотъемлемой частью повседневной жизни и социальных встреч в городе, отражая местные традиции и общинные ценности. Музей не только обучает посетителей техникам пивоварения, но и способствует оценке уникального вклада Львова в индустрию пива.</p></div>
-</section>
-<section class="place" id="lviv_bernardine_church">
-<h3>Церковь бернардинцев</h3>
-
-
-<figure class="place-fig"><img src="../images/lviv_bernardine_church.jpg" alt="Церковь бернардинцев"/></figure>
-<div class="place-desc"><p class="prose">Бернардинская церковь во Львове является великолепным примером барочной архитектуры, известной своим сложным фасадом и красивым интерьером. Изначально построенная в 17 веке, она служит значимой достопримечательностью города, привлекая посетителей своей богатой историей и художественным наследием. Церковь является не только местом поклонения, но и культурным центром, проводящим различные мероприятия и выставки на протяжении всего года. Основан в 1600 году Орденом бернардинцев. Завершено в 1630 году и отреставрировано после Второй мировой войны.</p>
-<p class="prose">Бернардинская церковь была основана в 1600 году Орденом бернардинцев и завершена в 1630 году. Она была построена на месте более ранней деревянной церкви и претерпела различные renovations на протяжении веков, особенно после повреждений во время Второй мировой войны. Церковь стала свидетелем многих исторических событий во Львове, отражая разнообразные культурные влияния города. Культурно, Бернардинская церковь является важным символом архитектурного наследия Львова, демонстрируя барочный стиль, который характеризует многие исторические здания города. Она играет жизненно важную роль в повседневной жизни местного сообщества, служа не только религиозным местом, но и площадкой для культурных мероприятий. Значимость церкви дополнительно подчеркивается ее связью с различными традициями и ритуалами, которые продолжают соблюдаться верующими.</p></div>
-</section>
 <section class="place" id="lviv_boitsov">
+<div class="place-lead">
 <h3>Lviv Boitsov</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Период: 1876–1884</p>
-<figure class="place-fig"><img src="../images/lviv_boitsov.jpg" alt="Lviv Boitsov"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lviv_boitsov.jpg" alt="Lviv Boitsov" width="1050" height="1400" style="height: 249px; max-height: 249px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lviv_boitsov_b.jpg" alt="Lviv Boitsov — вид 2" width="330" height="247" style="height: 249px; max-height: 249px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Боймская часовня — это историческая и живописная православная церковь, расположенная в самом сердце Старого города Львова. Построенная в конце XIX века, она служит свидетельством богатого архитектурного наследия города. Капелла была заказана богатым купцом Иваном Боимом и его женой Оксаной. Здесь представлены изысканные резные работы и фрески, отражающие художественный стиль той эпохи. Церковь Боим является одной из немногих сохранившихся примеров украинского барокко в Львове. Его интерьер примечателен своим золотым иконостасом и богато украшенным алтарем. Сегодня часовня служит как местом поклонения, так и культурной достопримечательностью.</p>
 <p class="prose">Построенная между 1876 и 1884 годами архитектором Иваном Григоровичем Боймом, часовня изначально предназначалась для частных богослужений семьи Бойм. Она отличается замысловатым внутренним декором и декоративными элементами, характерными для украинского барокко. Посетители приезжают сюда, чтобы полюбоваться уникальным сочетанием традиционного религиозного искусства и архитектурного изящества.</p></div>
 </section>
-<section class="place" id="lviv_carmelite">
-<h3>Церковь кармелитов</h3>
+<section class="place" id="lviv_dianafountain_lviv">
+<div class="place-lead">
+<h3>Lviv Dianafountain Lviv</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/lviv_carmelite.jpg" alt="Церковь кармелитов"/></figure>
-<div class="place-desc"><p class="prose">Кармелитская церковь во Львове является великолепным примером барочной архитектуры, известной своим сложным интерьером и спокойной атмосферой. Эта историческая церковь, изначально построенная в 17 веке, служит мирным убежищем как для местных жителей, так и для туристов. Ее красивые алтари и произведения искусства отражают богатое духовное наследие города. Основан в 1630 году Орденом кармелитов. Реновированный в 18 веке, демонстрирующий барочную архитектуру.</p>
-<p class="prose">Кармелитская церковь была основана в 1630 году Орденом Братьев нашей Госпожи с горы Кармель. Она была построена на месте более ранней деревянной церкви и претерпела значительные renovations в 18 веке, особенно под руководством архитектора Иоганна Георга Пинселя. Церковь стала свидетелем различных исторических событий, включая бурные периоды войны и политических изменений во Львове. Культурно Кармелитская церковь является важной достопримечательностью во Львове, внося вклад в архитектурное наследие города и привлекая многочисленных посетителей. Она играет роль в повседневной жизни сообщества, проводя религиозные службы и культурные мероприятия. Художественные элементы церкви, включая алтари и фрески, имеют значительное значение для местного наследия и отражают разнообразную историю города.</p></div>
+<figure class="place-fig place-fig--lo-res"><img src="../images/lviv_dianafountain_lviv_b.jpg" alt="Lviv Dianafountain Lviv" width="330" height="247"/></figure>
+</div>
 </section>
-<section class="place" id="lviv_pdfband_3_73244fd6">
-<h3>DianaFountain Lviv</h3>
+<section class="place" id="lviv_landmark">
+<div class="place-lead">
+<h3>Lviv Landmark</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/lviv_pdfband_3_73244fd6.jpg" alt="DianaFountain Lviv"/></figure>
+<figure class="place-fig place-fig--hi-res"><img src="../images/lviv_landmark.jpg" alt="Lviv Landmark" width="1280" height="853"/></figure>
+</div>
 </section>
-<section class="place" id="lviv_dominican_church">
-<h3>Доминиканская церковь во Львове</h3>
+<section class="place" id="lviv_lvivrynek1941">
+<div class="place-lead">
+<h3>Lviv Lvivrynek1941</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/lviv_dominican_church.jpg" alt="Доминиканская церковь во Львове"/></figure>
-<div class="place-desc"><p class="prose">Доминиканская церковь во Львове, также известная как Церковь Успения Пресвятой Богородицы, является великолепным примером барочной архитектуры. Ее сложный фасад и богато украшенный интерьер делают ее обязательным местом для посещения для всех, кто исследует историческое и культурное наследие города. Посетители могут полюбоваться красивыми алтарями, фресками и впечатляющим органом, которые подчеркивают спокойную атмосферу церкви. Основан в 1749 году и завершен в 1763 году. Архитектурный стиль: Барокко. Значимо для местного католического сообщества.</p>
-<p class="prose">Доминиканская церковь была основана в 1749 году Доминиканским орденом, а строительство завершилось в 1763 году. Церковь была построена на месте более ранней деревянной церкви и за годы претерпела несколько реконструкций, особенно после повреждений во время Второй мировой войны. Она служила важным религиозным центром для местной католической общины. Культурно Доминиканская церковь является неотъемлемой частью архитектурного наследия Львова, отражая богатую историю города и влияние различных художественных стилей. Это место религиозной важности для католической общины, где проводятся регулярные службы и специальные мероприятия. Церковь также способствует статусу Львова как объекта Всемирного наследия ЮНЕСКО, демонстрируя уникальное сочетание восточноевропейских и западноевропейских влияний.</p></div>
+<figure class="place-fig place-fig--hi-res"><img src="../images/lviv_lvivrynek1941.jpg" alt="Lviv Lvivrynek1941" width="1280" height="960"/></figure>
+</div>
 </section>
-<section class="place" id="lviv_jewish_hospital">
-<h3>Район синагоги Золотой Розы</h3>
+<section class="place" id="lviv_lychakiv_cemetery">
+<div class="place-lead">
+<h3>Lviv Lychakiv Cemetery</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/lviv_jewish_hospital.jpg" alt="Район синагоги Золотой Розы"/></figure>
-<div class="place-desc"><p class="prose">Район Синагоги Золотой Розы во Львове является трогательным напоминанием о богатом еврейском наследии города. Когда-то здесь находилась одна из самых значительных синагог Восточной Европы, и это место отражает историческую и культурную ткань еврейской общины Львова. Посетители могут исследовать остатки этого священного пространства и оценить его архитектурную красоту на фоне яркого города. Синагога Золотой Розы была основана в начале 17 века. Синагога была разрушена во время Второй мировой войны, вместе с большей частью еврейского наследия Львова.</p>
-<p class="prose">Синагога Золотой Розы была основана в начале 17 века, и её строительство связано с процветающим еврейским сообществом во Львове в этот период. Она стала центральным местом поклонения и общественной жизни до тех пор, пока не была разрушена во время Второй мировой войны. Район вокруг синагоги с тех пор стал важной точкой для памяти и почитания еврейской истории Львова. Культурно район Золотой Розы синагоги имеет значительное значение, так как он представляет историческое присутствие еврейской жизни во Львове, что оказало влияние на культурный ландшафт города. Это место служит свидетельством богатых традиций и вкладов еврейской общины, которые были неотъемлемой частью идентичности Львова. Хотя сама синагога больше не существует, этот район остается местом размышлений и памяти.</p></div>
+<p class="place-meta">Период: 1786</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lviv_lychakiv_cemetery.jpg" alt="Lviv Lychakiv Cemetery" width="1280" height="822" style="height: 214px; max-height: 214px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lviv_lychakiv_cemetery_b.jpg" alt="Lviv Lychakiv Cemetery — вид 2" width="330" height="220" style="height: 214px; max-height: 214px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Расположенный на холме над Старым городом Львова, кладбище Личаковско является одним из самых известных в Украине кладбищ. Основанное в конце XVIII века, оно стало культурным и историческим памятником, где находится тысячи могил, памятников и мавзолеев. Он занимает площадь более 49 гектаров, что делает его одним из крупнейших кладбищ Европы. На кладбище более 300 000 захоронений. Среди заметных захоронений — Иван Франко, выдающийся украинский писатель, и Юрий Андруховский, современный поэт. Его дизайн включает живописные дорожки, фонтаны и парки, создающие умиротворяющую атмосферу. В пределах кладбища находятся несколько знаменитых зданий и памятников, таких как Мавзолей Тараса Шевченко.</p>
+<p class="prose">Основанный в 1786 году польскими дворянами, кладбище быстро стало символом мультикультурного наследия Львова. Со временем оно выросло в обширный некрополь, став местом захоронения выдающихся личностей самых разных областей — включая писателей, художников, учёных и политиков. Его архитектура отражает смесь неоклассических, барочных и ар-нуво стилей, что делает его уникальным сочетанием истории и искусства. Посетители приходят сюда, чтобы изучить его богатую историю, полюбоваться замысловатыми надгробиями и задуматься о жизни погребенных здесь людей.</p></div>
 </section>
-<section class="place" id="lviv_high_castle">
-<h3>Высокий замковый холм</h3>
+<section class="place" id="lviv_potocki_palace">
+<div class="place-lead">
+<h3>Lviv Potocki Palace</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/lviv_high_castle.jpg" alt="Высокий замковый холм"/></figure>
-<div class="place-desc"><p class="prose">Высокий замок предлагает захватывающие панорамные виды на Львов и его окрестности, что делает его обязательным для посещения всем, кто исследует город. На холме находятся руины Высокого замка, исторической крепости, которая датируется 14 веком. Посетители могут насладиться неспешной прогулкой к вершине, где они могут погрузиться в природную красоту и богатую историю этого места. Высокий замок — самая высокая точка во Львове, достигающая высоты 409 метров. Руины Высокого Замка — это все, что осталось от оригинальной крепости, построенной в 14 веке.</p>
-<p class="prose">Высокий Замок, известный как High Castle Hill, был основан в середине XIV века как стратегическая крепость польским королем Казимиром III. Замок сыграл значительную роль в защите Львова от различных захватчиков на протяжении своей истории. Хотя оригинальная структура в значительной степени исчезла, это место остается свидетельством средневекового прошлого города. Этот холм является не только исторической достопримечательностью, но и культурным символом для жителей Львова. Он стал местом сбора как местных жителей, так и туристов, способствуя чувству общности и связи с наследием города. Панорамы с холма вдохновили бесчисленное количество художников и писателей, что способствовало богатому культурному наследию Львова.</p></div>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lviv_potocki_palace.jpg" alt="Lviv Potocki Palace" width="952" height="1600" style="height: 222px; max-height: 222px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lviv_potocki_palace_b.jpg" alt="Lviv Potocki Palace — вид 2" width="330" height="220" style="height: 222px; max-height: 222px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 </section>
-<section class="place" id="lviv_italian_courtyard">
-<h3>Итальянский дворик</h3>
+<section class="place" id="lviv_armenian_cathedral">
+<div class="place-lead">
+<h3>Армянский собор</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/lviv_italian_courtyard.jpg" alt="Итальянский дворик"/></figure>
-<div class="place-desc"><p class="prose">Итальянский дворик во Львове — это потрясающее архитектурное сокровище, которое демонстрирует сочетание стилей Ренессанса и Барокко. Уютно расположенный в историческом центре города, он служит живописным местом для отдыха и восхищения сложными деталями своего дизайна. Дворик окружен очаровательными кафе и магазинами, что делает его ярким центром активности. Построен в конце 16 века. Сочетает в себе элементы архитектурных стилей Ренессанса и Барокко. Часть объекта Всемирного наследия ЮНЕСКО для Львова.</p>
-<p class="prose">Итальянский двор был построен в конце XVI века как часть дворцов в итальянском стиле, возведенных состоятельными купцами. На протяжении веков он претерпел различные renovations, отражая изменяющиеся архитектурные тенденции и богатую историю города. Двор был безмолвным свидетелем многих значительных событий в прошлом Львова, включая периоды культурного расцвета и политических волнений. Культурно Итальянский дворик является важной достопримечательностью, отражающей разнообразное наследие Львова, демонстрируя исторические связи города с Италией и его роль в более широком европейском контексте. Это популярное место встреч, которое олицетворяет повседневную жизнь жителей и гостей Львова, способствуя яркой атмосфере города. Дворик также является частью объекта Всемирного наследия ЮНЕСКО для города, подчеркивая его архитектурную и историческую ценность.</p></div>
-</section>
-<section class="place" id="lviv_jesuit_church">
-<h3>Иезуитская церковь во Львове</h3>
-
-
-<figure class="place-fig"><img src="../images/lviv_jesuit_church.jpg" alt="Иезуитская церковь во Львове"/></figure>
-<div class="place-desc"><p class="prose">Иезуитская церковь во Львове, также известная как Церковь святых апостолов Петра и Павла, является великолепным примером барочной архитектуры. Ее сложный интерьер и грандиозный фасад делают ее обязательным местом для посещения теми, кто исследует богатый исторический и культурный ландшафт города. Посетители могут полюбоваться красивыми фресками и скульптурами, украшающими церковь, отражающими ее художественное наследие. Основан в 1610 году Обществом Иисуса. Завершенное в 1630 году, это яркий пример барочной архитектуры. Церковь была местом проведения значительных религиозных церемоний и общественных мероприятий.</p>
-<p class="prose">Иезуитская церковь была основана в 1610 году Обществом Иисуса и завершена в 1630 году. Она служила значительным религиозным центром для иезуитов во Львове, играя ключевую роль в Контрреформации. Церковь претерпела различные реставрации и изменения в собственности на протяжении веков, отражая бурную историю города. Культурно, Иезуитская церковь является важной достопримечательностью Львова, демонстрируя барочную искусство и архитектуру. Она была местом проведения различных религиозных церемоний и общественных собраний, внося вклад в духовную жизнь города. Историческая значимость церкви дополнительно подчеркивается ее включением в список Всемирного наследия ЮНЕСКО как часть Исторического центра Львова.</p></div>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lviv_armenian_cathedral.jpg" alt="Армянский собор" width="1200" height="1600" style="height: 430px; max-height: 430px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lviv_armenian_cathedral_b.jpg" alt="Армянский собор — вид 2" width="330" height="425" style="height: 430px; max-height: 430px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Армянский собор во Львове является великолепным примером средневековой архитектуры, демонстрируя богатое наследие армянской общины в Украине. Эта историческая церковь с её сложными каменными резьбами и красивыми фресками служит свидетельством культурных и религиозных традиций армян в регионе. Посетители могут восхищаться её уникальным архитектурным стилем и спокойной атмосферой, что делает её обязательной для посещения достопримечательностью во Львове. Основан в 14 веке, около 1363 года. Сочетает в себе элементы готической и ренессансной архитектуры. Дом для примечательных фресок и сложных каменных резьб.</p>
+<p class="prose">Армянский собор был основан в 14 веке, и его строительство, как считается, началось около 1363 года. Он был построен для обслуживания растущего армянского населения во Львове, которое процветало как значительный торговый центр. На протяжении веков собор претерпел различные ремонты и реставрации, отражая изменяющиеся художественные стили и влияния своего времени. Армянский собор имеет значительное культурное значение как символ армянского наследия во Львове, внося вклад в разнообразный религиозный ландшафт города. Это важное место для армянской общины, где проводятся религиозные церемонии и культурные мероприятия, сохраняющие их традиции. Уникальные архитектурные особенности и произведения искусства собора также повышают статус Львова как объекта Всемирного наследия ЮНЕСКО, подчеркивая историческое богатство города.</p></div>
 </section>
 <section class="place" id="lviv_korniakt_tower">
+<div class="place-lead">
 <h3>Башня Корнякта</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/lviv_korniakt_tower.jpg" alt="Башня Корнякта"/></figure>
+<figure class="place-fig place-fig--hi-res"><img src="../images/lviv_korniakt_tower.jpg" alt="Башня Корнякта" width="1073" height="1600"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Башня Корнякта, знаковая достопримечательность Львова, является свидетельством богатого архитектурного наследия города. Величественно поднимаясь над горизонтом, она является частью комплекса Доминиканской церкви и предлагает потрясающие виды на город с своей смотровой площадки. Посетители могут исследовать её сложный дизайн и узнать о её историческом значении. Башня имеет высоту примерно 65 метров. Он представляет собой уникальное сочетание готического и ренессансного архитектурных стилей.</p>
 <p class="prose">Построенная в конце XVI века, Корняктская башня была возведена богатым торговцем и меценатом Константы Корняктом как часть Доминиканского монастыря. Башня была завершена в 1570 году и с тех пор стала одной из самых узнаваемых конструкций Львова, отражая архитектурный стиль Ренессанса города. Башня Корнякта имеет культурное значение как символ исторического богатства и художественного наследия Львова. Она является яркой чертой городского горизонта и привлекает множество посетителей, способствуя статусу Львова как объекта Всемирного наследия ЮНЕСКО. Башня также отражает разнообразные культурные влияния города, демонстрируя сочетание украинских, польских и еврейских традиций.</p></div>
 </section>
+<section class="place" id="lviv_high_castle">
+<div class="place-lead">
+<h3>Высокий замковый холм</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lviv_high_castle.jpg" alt="Высокий замковый холм" width="1280" height="960" style="height: 244px; max-height: 244px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lviv_high_castle_b.jpg" alt="Высокий замковый холм — вид 2" width="330" height="242" style="height: 244px; max-height: 244px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Высокий замок предлагает захватывающие панорамные виды на Львов и его окрестности, что делает его обязательным для посещения всем, кто исследует город. На холме находятся руины Высокого замка, исторической крепости, которая датируется 14 веком. Посетители могут насладиться неспешной прогулкой к вершине, где они могут погрузиться в природную красоту и богатую историю этого места. Высокий замок — самая высокая точка во Львове, достигающая высоты 409 метров. Руины Высокого Замка — это все, что осталось от оригинальной крепости, построенной в 14 веке.</p>
+<p class="prose">Высокий Замок, известный как High Castle Hill, был основан в середине XIV века как стратегическая крепость польским королем Казимиром III. Замок сыграл значительную роль в защите Львова от различных захватчиков на протяжении своей истории. Хотя оригинальная структура в значительной степени исчезла, это место остается свидетельством средневекового прошлого города. Этот холм является не только исторической достопримечательностью, но и культурным символом для жителей Львова. Он стал местом сбора как местных жителей, так и туристов, способствуя чувству общности и связи с наследием города. Панорамы с холма вдохновили бесчисленное количество художников и писателей, что способствовало богатому культурному наследию Львова.</p></div>
+</section>
+<section class="place" id="lviv_ivan_franko_university">
+<div class="place-lead">
+<h3>Главный университет Львова</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lviv_ivan_franko_university.jpg" alt="Главный университет Львова" width="1280" height="854" style="height: 206px; max-height: 206px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lviv_ivan_franko_university_b.jpg" alt="Главный университет Львова — вид 2" width="330" height="204" style="height: 206px; max-height: 206px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Национальный университет имени Ивана Франко во Львове — это престижное учебное заведение, расположенное в самом сердце Львова, известное своей потрясающей архитектурой и богатым академическим наследием. Основанный в 1661 году, он сыграл ключевую роль в формировании интеллектуального ландшафта Украины. Посетители могут полюбоваться его величественным фасадом и исследовать зелёные университетские территории, пропитанные историей. Основан в 1661 году как иезуитский колледж. Стала университетом в 1784 году в составе Австрийской империи. Переименован в честь Ивана Франко в 1940 году.</p>
+<p class="prose">Университет был основан в 1661 году как иезуитский колледж и на протяжении веков претерпел несколько трансформаций. В 1784 году он стал университетом в рамках Австрийской империи и был назван в честь выдающегося украинского писателя Ивана Франко в 1940 году. Ключевыми событиями в его истории являются создание различных факультетов и роль университета в продвижении украинской культуры и образования. Университет имеет значительное культурное значение как центр обучения и интеллектуального дискурса в Украине. Он способствовал развитию украинской литературы, науки и искусства, став краеугольным камнем культурного наследия нации. Это учреждение также стало местом для различных политических движений и протестов, отражая его роль в более широком социополитическом контексте региона.</p></div>
+</section>
+<section class="place" id="lviv_villa_biennale">
+<div class="place-lead">
+<h3>Дворец культуры Львов</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lviv_villa_biennale.jpg" alt="Дворец культуры Львов" width="1280" height="960" style="height: 249px; max-height: 249px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lviv_villa_biennale_b.jpg" alt="Дворец культуры Львов — вид 2" width="330" height="247" style="height: 249px; max-height: 249px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Дворец культуры во Львове, великолепная архитектурная жемчужина, служит ярким центром искусств и культуры в самом сердце Львова. Изначально построенный в начале 20 века, он принимает различные выступления, выставки и общественные мероприятия, что делает его ключевым местом как для местных жителей, так и для туристов. Богатая история дворца и разнообразная программа отражают динамичную культурную атмосферу города. Основан в начале 1900-х годов. Проводит различные культурные мероприятия, включая театральные представления и выставки.</p>
+<p class="prose">Дворец культуры во Львове был основан в начале 1900-х годов и изначально служил местом для общественных собраний и культурных мероприятий. На протяжении десятилетий он претерпел различные ремонты и адаптации, продолжая играть значительную роль в культурной жизни Львова. Ключевыми событиями стали выступления известных артистов и местные театральные постановки, что способствовало художественному наследию города. Культурно Дворец культуры во Львове является краеугольным камнем художественного выражения города, демонстрируя местные таланты и принимая международные события. Он играет жизненно важную роль в сохранении богатого наследия Львова и содействии вовлеченности сообщества через искусство. Это место является свидетельством приверженности города культурному развитию и служит местом встречи для разнообразных традиций и современных художественных начинаний.</p></div>
+</section>
+<section class="place" id="lviv_dominican_church">
+<div class="place-lead">
+<h3>Доминиканская церковь во Львове</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lviv_dominican_church.jpg" alt="Доминиканская церковь во Львове" width="1163" height="1600" style="height: 254px; max-height: 254px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lviv_dominican_church_b.jpg" alt="Доминиканская церковь во Львове — вид 2" width="330" height="251" style="height: 254px; max-height: 254px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Доминиканская церковь во Львове, также известная как Церковь Успения Пресвятой Богородицы, является великолепным примером барочной архитектуры. Ее сложный фасад и богато украшенный интерьер делают ее обязательным местом для посещения для всех, кто исследует историческое и культурное наследие города. Посетители могут полюбоваться красивыми алтарями, фресками и впечатляющим органом, которые подчеркивают спокойную атмосферу церкви. Основан в 1749 году и завершен в 1763 году. Архитектурный стиль: Барокко. Значимо для местного католического сообщества.</p>
+<p class="prose">Доминиканская церковь была основана в 1749 году Доминиканским орденом, а строительство завершилось в 1763 году. Церковь была построена на месте более ранней деревянной церкви и за годы претерпела несколько реконструкций, особенно после повреждений во время Второй мировой войны. Она служила важным религиозным центром для местной католической общины. Культурно Доминиканская церковь является неотъемлемой частью архитектурного наследия Львова, отражая богатую историю города и влияние различных художественных стилей. Это место религиозной важности для католической общины, где проводятся регулярные службы и специальные мероприятия. Церковь также способствует статусу Львова как объекта Всемирного наследия ЮНЕСКО, демонстрируя уникальное сочетание восточноевропейских и западноевропейских влияний.</p></div>
+</section>
+<section class="place" id="lviv_jesuit_church">
+<div class="place-lead">
+<h3>Иезуитская церковь во Львове</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lviv_jesuit_church.jpg" alt="Иезуитская церковь во Львове" width="330" height="498" style="height: 231px; max-height: 231px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lviv_jesuit_church_b.jpg" alt="Иезуитская церковь во Львове — вид 2" width="330" height="229" style="height: 231px; max-height: 231px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Иезуитская церковь во Львове, также известная как Церковь святых апостолов Петра и Павла, является великолепным примером барочной архитектуры. Ее сложный интерьер и грандиозный фасад делают ее обязательным местом для посещения теми, кто исследует богатый исторический и культурный ландшафт города. Посетители могут полюбоваться красивыми фресками и скульптурами, украшающими церковь, отражающими ее художественное наследие. Основан в 1610 году Обществом Иисуса. Завершенное в 1630 году, это яркий пример барочной архитектуры. Церковь была местом проведения значительных религиозных церемоний и общественных мероприятий.</p>
+<p class="prose">Иезуитская церковь была основана в 1610 году Обществом Иисуса и завершена в 1630 году. Она служила значительным религиозным центром для иезуитов во Львове, играя ключевую роль в Контрреформации. Церковь претерпела различные реставрации и изменения в собственности на протяжении веков, отражая бурную историю города. Культурно, Иезуитская церковь является важной достопримечательностью Львова, демонстрируя барочную искусство и архитектуру. Она была местом проведения различных религиозных церемоний и общественных собраний, внося вклад в духовную жизнь города. Историческая значимость церкви дополнительно подчеркивается ее включением в список Всемирного наследия ЮНЕСКО как часть Исторического центра Львова.</p></div>
+</section>
+<section class="place" id="lviv_italian_courtyard">
+<div class="place-lead">
+<h3>Итальянский дворик</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lviv_italian_courtyard.jpg" alt="Итальянский дворик" width="1280" height="854" style="height: 187px; max-height: 187px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lviv_italian_courtyard_b.jpg" alt="Итальянский дворик — вид 2" width="330" height="185" style="height: 187px; max-height: 187px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Итальянский дворик во Львове — это потрясающее архитектурное сокровище, которое демонстрирует сочетание стилей Ренессанса и Барокко. Уютно расположенный в историческом центре города, он служит живописным местом для отдыха и восхищения сложными деталями своего дизайна. Дворик окружен очаровательными кафе и магазинами, что делает его ярким центром активности. Построен в конце 16 века. Сочетает в себе элементы архитектурных стилей Ренессанса и Барокко. Часть объекта Всемирного наследия ЮНЕСКО для Львова.</p>
+<p class="prose">Итальянский двор был построен в конце XVI века как часть дворцов в итальянском стиле, возведенных состоятельными купцами. На протяжении веков он претерпел различные renovations, отражая изменяющиеся архитектурные тенденции и богатую историю города. Двор был безмолвным свидетелем многих значительных событий в прошлом Львова, включая периоды культурного расцвета и политических волнений. Культурно Итальянский дворик является важной достопримечательностью, отражающей разнообразное наследие Львова, демонстрируя исторические связи города с Италией и его роль в более широком европейском контексте. Это популярное место встреч, которое олицетворяет повседневную жизнь жителей и гостей Львова, способствуя яркой атмосфере города. Дворик также является частью объекта Всемирного наследия ЮНЕСКО для города, подчеркивая его архитектурную и историческую ценность.</p></div>
+</section>
 <section class="place" id="lviv_latin_cathedral">
+<div class="place-lead">
 <h3>Латинский собор</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/lviv_latin_cathedral.jpg" alt="Латинский собор"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lviv_latin_cathedral.jpg" alt="Латинский собор" width="1280" height="889" style="height: 222px; max-height: 222px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lviv_latin_cathedral_b.jpg" alt="Латинский собор — вид 2" width="330" height="220" style="height: 222px; max-height: 222px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Латинский собор во Львове, также известный как Собор Успения Пресвятой Богородицы, является потрясающим примером готической архитектуры и ключевой достопримечательностью города. Посетители могут восхищаться его сложным фасадом и красивым интерьером, в котором находятся замечательные произведения искусства и исторические артефакты. Собор служит важным местом поклонения и свидетельством богатого культурного наследия Львова. Собор изначально был построен как католическая церковь, а позже стал резиденцией епископа латинского обряда во Львове. Он имеет 70-метровую колокольню, которая является одной из самых высоких конструкций во Львове.</p>
 <p class="prose">Латинский собор был основан в середине XIV века, строительство началось в 1360 году и завершилось в 1481 году. На протяжении веков он подвергался различным ремонтам и реставрациям, отражая изменяющиеся архитектурные стили и влияния во Львове. Собор также стал свидетелем значительных исторических событий, включая бурные времена Польско-Литовского Commonwealth и Австро-Венгерской империи. Латинский собор имеет значительное культурное значение как символ разнообразного наследия Львова, сочетая элементы готики, ренессанса и барокко. Он является частью объекта Всемирного наследия ЮНЕСКО, который признает историческую архитектуру города. Собор остается активным местом поклонения, проводя различные религиозные церемонии и мероприятия, и является центром местных традиций и общественных собраний.</p></div>
 </section>
 <section class="place" id="lviv_opera_house">
+<div class="place-lead">
 <h3>Львовский оперный театр</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/lviv_opera_house.jpg" alt="Львовский оперный театр"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lviv_opera_house.jpg" alt="Львовский оперный театр" width="1280" height="1453" style="height: 217px; max-height: 217px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lviv_opera_house_b.jpg" alt="Львовский оперный театр — вид 2" width="4608" height="3000" style="height: 217px; max-height: 217px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Львовский оперный театр — это потрясающий архитектурный шедевр, расположенный в самом сердце Львова, известный своим роскошным дизайном и богатым культурным предложением. Открытый в 1900 году, он служит основным местом для оперных, балетных и классических музыкальных выступлений, привлекая как местных жителей, так и туристов. Его грандиозный фасад и роскошные интерьеры делают его обязательным местом для посещения всем, кто исследует яркую художественную сцену города. Открыто 4 октября 1900 года. Спроектировано архитектором Зигмунтом Горголевским. Расположен в центре города Львов.</p>
 <p class="prose">Львовский оперный театр был открыт 4 октября 1900 года, спроектированный архитектором Зигмунтом Горголевским в неоренессансном стиле. Он заменил ранее существовавший деревянный театр, который находился на этом месте с 18 века. На протяжении многих лет оперный театр принимал множество значительных выступлений и мероприятий, способствуя репутации Львова как культурного центра. Культурно Львовский оперный театр является краеугольным камнем художественной жизни города, демонстрируя разнообразные выступления, отражающие как местные традиции, так и международные влияния. Он играет важную роль в сохранении музыкального наследия региона и является центром общественной жизни, принимая различные фестивали и мероприятия на протяжении всего года. Хотя это в первую очередь светское учреждение, оно воплощает богатую культурную ткань Львова, которая была сформирована под воздействием различных исторических факторов.</p></div>
 </section>
-<section class="place" id="lviv_pdfband_9_af31338a">
-<h3>LvivRynek1941</h3>
+<section class="place" id="lviv_arsenal_museum">
+<div class="place-lead">
+<h3>Музей Арсенала</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/lviv_pdfband_9_af31338a.jpg" alt="LvivRynek1941"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lviv_arsenal_museum.jpg" alt="Музей Арсенала" width="1200" height="1600" style="height: 222px; max-height: 222px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lviv_arsenal_museum_b.jpg" alt="Музей Арсенала — вид 2" width="330" height="220" style="height: 222px; max-height: 222px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Арсенал Музей во Львове — это увлекательное место, которое демонстрирует богатую военную историю и наследие города. Расположенный в историческом здании арсенала XVI века, музей предлагает обширную коллекцию оружия, доспехов и военных артефактов, позволяя посетителям заглянуть в прошлое. Он служит свидетельством стратегического значения Львова на протяжении истории и его роли в различных военных конфликтах. Музей был основан в 1951 году. Здание было изначально построено в середине XVI века.</p>
+<p class="prose">Музей Арсенала был основан в 1951 году и расположен в здании, которое датируется серединой XVI века. Изначально построенное как арсенал для защиты города, это сооружение стало свидетелем множества исторических событий, включая войны и территориальные изменения, которые сформировали идентичность Львова. Культурно, Арсенал Музей играет важную роль в сохранении военного наследия Львова и Украины. Он отражает историческое значение города как военной крепости, демонстрируя эволюцию оружия и стратегий обороны на протяжении веков. Музей также способствует пониманию места Львова в более широком контексте европейской военной истории.</p></div>
 </section>
-<section class="place" id="lviv_lychakiv_cemetery">
-<h3>Lviv Lychakiv Cemetery</h3>
-
-<p class="place-meta">Период: 1786</p>
-<figure class="place-fig"><img src="../images/lviv_lychakiv_cemetery.jpg" alt="Lviv Lychakiv Cemetery"/></figure>
-<div class="place-desc"><p class="prose">Расположенный на холме над Старым городом Львова, кладбище Личаковско является одним из самых известных в Украине кладбищ. Основанное в конце XVIII века, оно стало культурным и историческим памятником, где находится тысячи могил, памятников и мавзолеев. Он занимает площадь более 49 гектаров, что делает его одним из крупнейших кладбищ Европы. На кладбище более 300 000 захоронений. Среди заметных захоронений — Иван Франко, выдающийся украинский писатель, и Юрий Андруховский, современный поэт. Его дизайн включает живописные дорожки, фонтаны и парки, создающие умиротворяющую атмосферу. В пределах кладбища находятся несколько знаменитых зданий и памятников, таких как Мавзолей Тараса Шевченко.</p>
-<p class="prose">Основанный в 1786 году польскими дворянами, кладбище быстро стало символом мультикультурного наследия Львова. Со временем оно выросло в обширный некрополь, став местом захоронения выдающихся личностей самых разных областей — включая писателей, художников, учёных и политиков. Его архитектура отражает смесь неоклассических, барочных и ар-нуво стилей, что делает его уникальным сочетанием истории и искусства. Посетители приходят сюда, чтобы изучить его богатую историю, полюбоваться замысловатыми надгробиями и задуматься о жизни погребенных здесь людей.</p></div>
-</section>
-<section class="place" id="lviv_ploshcha_mickiewicz">
-<h3>Площадь Мицкевича</h3>
+<section class="place" id="lviv_brewery_museum">
+<div class="place-lead">
+<h3>Музей пивоварения во Львове</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/lviv_ploshcha_mickiewicz.jpg" alt="Площадь Мицкевича"/></figure>
-<div class="place-desc"><p class="prose">Площадь Мицкевича — это очаровательное общественное пространство, расположенное в сердце Львова, окруженное исторической архитектурой и яркой городской жизнью. Названная в честь знаменитого польского поэта Адама Мицкевича, площадь украшена его выдающейся статуей, что делает её популярным местом встречи как для местных жителей, так и для туристов. Площадь служит площадкой для культурных мероприятий и фестивалей, отражая богатое художественное наследие города. Площадь Мицкевича названа в честь польского поэта Адама Мицкевича. Статуя Мицкевича была открыта в 1904 году и является примечательной особенностью площади. Площадь была местом проведения различных культурных мероприятий и общественных собраний.</p>
-<p class="prose">Площадь Мицкевича была основана в середине 19 века и с тех пор стала значимой достопримечательностью во Львове. Статуя Адама Мицкевича, открытая в 1904 году, увековечивает влияние поэта на польскую литературу и культуру. На протяжении многих лет площадь стала свидетелем различных исторических событий, включая публичные собрания и празднования. Культурно площадь Мицкевича играет важную роль в идентичности Львова, служа центром художественного выражения и общественных мероприятий. Она отражает мультикультурное наследие города, где пересекаются польские, украинские и еврейские влияния. Площадь часто используется для общественных событий, способствуя чувству общности и преемственности в богатых традициях Львова.</p></div>
-</section>
-<section class="place" id="lviv_villa_biennale">
-<h3>Дворец культуры Львов</h3>
-
-
-<figure class="place-fig"><img src="../images/lviv_villa_biennale.jpg" alt="Дворец культуры Львов"/></figure>
-<div class="place-desc"><p class="prose">Дворец культуры во Львове, великолепная архитектурная жемчужина, служит ярким центром искусств и культуры в самом сердце Львова. Изначально построенный в начале 20 века, он принимает различные выступления, выставки и общественные мероприятия, что делает его ключевым местом как для местных жителей, так и для туристов. Богатая история дворца и разнообразная программа отражают динамичную культурную атмосферу города. Основан в начале 1900-х годов. Проводит различные культурные мероприятия, включая театральные представления и выставки.</p>
-<p class="prose">Дворец культуры во Львове был основан в начале 1900-х годов и изначально служил местом для общественных собраний и культурных мероприятий. На протяжении десятилетий он претерпел различные ремонты и адаптации, продолжая играть значительную роль в культурной жизни Львова. Ключевыми событиями стали выступления известных артистов и местные театральные постановки, что способствовало художественному наследию города. Культурно Дворец культуры во Львове является краеугольным камнем художественного выражения города, демонстрируя местные таланты и принимая международные события. Он играет жизненно важную роль в сохранении богатого наследия Львова и содействии вовлеченности сообщества через искусство. Это место является свидетельством приверженности города культурному развитию и служит местом встречи для разнообразных традиций и современных художественных начинаний.</p></div>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lviv_brewery_museum.jpg" alt="Музей пивоварения во Львове" width="1280" height="853" style="height: 202px; max-height: 202px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lviv_brewery_museum_b.jpg" alt="Музей пивоварения во Львове — вид 2" width="330" height="200" style="height: 202px; max-height: 202px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Музей пивоварения во Львове предлагает увлекательный взгляд на богатую историю производства пива в регионе. Расположенный в историческом здании, музей демонстрирует традиционные методы пивоварения и эволюцию пивной культуры во Львове. Посетители могут исследовать интерактивные экспозиции, пробовать местные сорта пива и узнать о значении пива в украинском наследии. Музей расположен в историческом здании, которое датируется 19-м веком. Он включает выставки о традиционных методах пивоварения и истории местных пивоварен.</p>
+<p class="prose">Музей пивоварения был основан для сохранения и продвижения давних пивоваренных традиций Львова, города, известного своей яркой пивной культурой с Средневековья. Коллекция музея включает артефакты и документы, которые прослеживают историю пивоварения в регионе, подчеркивая ключевые события и местные пивоварни, сформировавшие идентичность Львова. Культурно Музей пивоварения играет важную роль в праздновании наследия Львова и его давних отношений с пивом. Пиво было неотъемлемой частью повседневной жизни и социальных встреч в городе, отражая местные традиции и общинные ценности. Музей не только обучает посетителей техникам пивоварения, но и способствует оценке уникального вклада Львова в индустрию пива.</p></div>
 </section>
 <section class="place" id="lviv_pharmacy_museum">
+<div class="place-lead">
 <h3>Музей фармацевтики</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/lviv_pharmacy_museum.jpg" alt="Музей фармацевтики"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lviv_pharmacy_museum.jpg" alt="Музей фармацевтики" width="1280" height="960" style="height: 250px; max-height: 250px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lviv_pharmacy_museum_b.jpg" alt="Музей фармацевтики — вид 2" width="330" height="255" style="height: 250px; max-height: 250px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Аптечный музей во Львове — это уникальное место, которое демонстрирует богатую историю фармацевтики и медицины в Украине. Расположенный в историческом здании, датируемом 18 веком, музей предлагает обширную коллекцию артефактов, включая древние фармацевтические инструменты, аптечные банки и исторические документы. Посетители могут исследовать эволюцию медицинских практик и роль фармацевтов на протяжении веков. Основан в 1966 году. Расположен в историческом здании, датируемом 18 веком. Включает коллекцию древних фармацевтических инструментов и аптечных банок.</p>
 <p class="prose">Музей фармацевтики был основан в 1966 году, что делает его одним из старейших музеев, посвященных фармацевтике в Украине. Он расположен в здании, которое изначально служило аптекой в 18 веке, отражая давнюю традицию фармацевтической практики во Львове. С тех пор музей стал ключевым учреждением для сохранения и демонстрации истории медицины в регионе. Культурно Аптечный музей играет важную роль в сохранении богатого наследия Львова в области медицины и фармацевтики. Он подчеркивает историческое значение города как центра образования и здравоохранения в Восточной Европе. Музей не только служит образовательным ресурсом, но и способствует пониманию местных традиций и развитию медицинских практик с течением времени.</p></div>
 </section>
-<section class="place" id="lviv_potocki_palace">
-<h3>Lviv Potocki Palace</h3>
-
-
-<figure class="place-fig"><img src="../images/lviv_potocki_palace.jpg" alt="Lviv Potocki Palace"/></figure>
-</section>
-<section class="place" id="lviv_rynok_square">
-<h3>Площадь Рынок</h3>
-
-
-<figure class="place-fig"><img src="../images/lviv_rynok_square.jpg" alt="Площадь Рынок"/></figure>
-<div class="place-desc"><p class="prose">Площадь Рынок, сердце Львова, является ярким общественным пространством, окруженным великолепной архитектурой Ренессанса и шумными кафе. Этот объект Всемирного наследия ЮНЕСКО служит центром для местных жителей и туристов, предлагая возможность заглянуть в богатую историю и культурную жизнь города. Посетители могут исследовать различные рыночные лавки, наслаждаться уличными выступлениями и оценить историческое значение площади. Площадь Рынок была основана в XIII веке. Он был объявлен объектом Всемирного наследия ЮНЕСКО благодаря своей архитектурной и исторической значимости.</p>
-<p class="prose">Площадь Рынок была основана в XIII веке как центральный рынок Львова, служа фокусной точкой для торговли и коммерции. На протяжении веков она стала свидетелем множества ключевых событий, включая публичные собрания и празднования, отражая изменяющуюся идентичность города. Площадь претерпела различные реконструкции, сохраняя свою архитектурную красоту, одновременно адаптируясь к современным потребностям. Площадь Рынок имеет огромное культурное значение как символ наследия и повседневной жизни Львова. Это место сбора для фестивалей, художественных выставок и местных традиций, демонстрирующее яркий дух сообщества города. Архитектурный ансамбль площади является свидетельством разнообразных влияний города и играет ключевую роль в статусе Львова как объекта Всемирного наследия ЮНЕСКО.</p></div>
-</section>
 <section class="place" id="lviv_solomiya_krushelnytska">
+<div class="place-lead">
 <h3>Опера имени Соломии Крушельницкой в Львове</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/lviv_solomiya_krushelnytska.jpg" alt="Опера имени Соломии Крушельницкой в Львове"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lviv_solomiya_krushelnytska.jpg" alt="Опера имени Соломии Крушельницкой в Львове" width="1280" height="960" style="height: 215px; max-height: 215px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lviv_solomiya_krushelnytska_b.jpg" alt="Опера имени Соломии Крушельницкой в Львове — вид 2" width="330" height="213" style="height: 215px; max-height: 215px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Опера имени Соломии Крушельницкой во Львове — это потрясающий архитектурный шедевр, расположенный в самом сердце Львова, известный своими изысканными выступлениями и богатым культурным наследием. Этот оперный театр не только демонстрирует лучшее из украинской и международной оперы, но и служит ярким центром для художественного сообщества города. Посетители могут насладиться разнообразной программой опер, балетов и концертов в прекрасно отреставрированном интерьере, который отражает историческое очарование Львова. Открытый в 1900 году, оперный театр является ключевым примером неоренессансной архитектуры. Он был назван в честь известной украинской оперной певицы Соломии Крушельницкой.</p>
 <p class="prose">Львовская опера имени Соломии Крушельницкой была открыта в 1900 году, спроектирована архитектором Зигмунтом Горголевским в стиле неоренессанса. Она была названа в честь знаменитой украинской оперной певицы Соломии Крушельницкой, которая была выдающейся фигурой в начале 20 века. Оперный театр стал свидетелем множества значительных выступлений и событий на протяжении своей истории, внося вклад в культурный ландшафт Львова. Культурно Львовская опера играет ключевую роль в сохранении и продвижении украинских художественных традиций, становясь центром яркой культурной жизни города. Здесь проходят различные выступления, которые привлекают как местных жителей, так и туристов, отражая богатое наследие и художественное разнообразие Львова. Оперный театр также является символом национальной гордости и идентичности, демонстрируя таланты украинских художников и композиторов.</p></div>
 </section>
-<section class="place" id="lviv_st_george_cathedral">
-<h3>Собор Святого Георгия</h3>
-
-
-<figure class="place-fig"><img src="../images/lviv_st_george_cathedral.jpg" alt="Собор Святого Георгия"/></figure>
-<div class="place-desc"><p class="prose">Кафедральный собор Святого Георгия является потрясающим примером барочной архитектуры, расположенным в самом сердце Львова. Этот исторический собор, посвященный Святому Георгию, служит значимым религиозным местом и символом богатого культурного наследия города. Посетители могут восхищаться его сложными фресками и впечатляющей колокольней, которые дают представление об художественном прошлом Львова. Построен в период с 1744 по 1761 год. Спроектировано архитектором Бартоломео Растрелли. Служит основным местом для Украинской греко-католической церкви.</p>
-<p class="prose">Строительство Собора Святого Юра началось в 1744 году и было завершено в 1761 году. Он был спроектирован архитектором Бартоломео Растрелли и с тех пор является выдающимся ориентиром во Львове. Собор прошел через различные реставрации и сыграл ключевую роль в религиозной жизни города, особенно для Украинской греко-католической церкви. Собор Святого Георгия имеет значительное культурное и религиозное значение во Львове. Как важное место поклонения для украинской греко-католической общины, он стал центром различных религиозных обрядов и церемоний. Архитектурная красота и историческая ценность собора способствуют тому, что Львов был объявлен объектом Всемирного наследия ЮНЕСКО, отражая разнообразное наследие и традиции города.</p></div>
-</section>
 <section class="place" id="lviv_stryi_park">
+<div class="place-lead">
 <h3>Парк Стрый</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/lviv_stryi_park.jpg" alt="Парк Стрый"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lviv_stryi_park.jpg" alt="Парк Стрый" width="1200" height="1600" style="height: 188px; max-height: 188px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lviv_stryi_park_b.jpg" alt="Парк Стрый — вид 2" width="330" height="186" style="height: 188px; max-height: 188px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Парк Стрый — это спокойный оазис в сердце Львова, предлагающий посетителям зелёный ландшафт, прогулочные дорожки и тихие пруды. Основанный в конце 19 века, этот парк является идеальным местом для неспешных прогулок, пикников и наслаждения красотой природы. С разнообразной флорой и историческими памятниками, Парк Стрый является любимым местом отдыха как для местных жителей, так и для туристов. Парк Стрый был основан в 1887 году. Парк занимает площадь около 60 гектаров.</p>
 <p class="prose">Парк Стрый был основан в 1887 году и спроектирован известным ландшафтным архитектором Альфредом Жеглинским. Изначально парк был частью планов расширения города и с тех пор стал ключевым рекреационным пространством для жителей Львова. На протяжении многих лет он принимал различные культурные мероприятия и собрания, что способствовало его историческому значению. Культурно парк Стрый является важным зеленым пространством, которое улучшает качество городской жизни во Львове. Это популярное место для общественных мероприятий, художественных выставок и фестивалей, отражающих богатое наследие и яркие традиции города. Парк также является любимым местом для повседневного отдыха, что делает его неотъемлемой частью социальной структуры Львова.</p></div>
 </section>
-<section class="place" id="lviv_ivan_franko_university">
-<h3>Главный университет Львова</h3>
+<section class="place" id="lviv_ploshcha_mickiewicz">
+<div class="place-lead">
+<h3>Площадь Мицкевича</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/lviv_ivan_franko_university.jpg" alt="Главный университет Львова"/></figure>
-<div class="place-desc"><p class="prose">Национальный университет имени Ивана Франко во Львове — это престижное учебное заведение, расположенное в самом сердце Львова, известное своей потрясающей архитектурой и богатым академическим наследием. Основанный в 1661 году, он сыграл ключевую роль в формировании интеллектуального ландшафта Украины. Посетители могут полюбоваться его величественным фасадом и исследовать зелёные университетские территории, пропитанные историей. Основан в 1661 году как иезуитский колледж. Стала университетом в 1784 году в составе Австрийской империи. Переименован в честь Ивана Франко в 1940 году.</p>
-<p class="prose">Университет был основан в 1661 году как иезуитский колледж и на протяжении веков претерпел несколько трансформаций. В 1784 году он стал университетом в рамках Австрийской империи и был назван в честь выдающегося украинского писателя Ивана Франко в 1940 году. Ключевыми событиями в его истории являются создание различных факультетов и роль университета в продвижении украинской культуры и образования. Университет имеет значительное культурное значение как центр обучения и интеллектуального дискурса в Украине. Он способствовал развитию украинской литературы, науки и искусства, став краеугольным камнем культурного наследия нации. Это учреждение также стало местом для различных политических движений и протестов, отражая его роль в более широком социополитическом контексте региона.</p></div>
+<figure class="place-fig place-fig--hi-res"><img src="../images/lviv_ploshcha_mickiewicz.jpg" alt="Площадь Мицкевича" width="1280" height="661"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Площадь Мицкевича — это очаровательное общественное пространство, расположенное в сердце Львова, окруженное исторической архитектурой и яркой городской жизнью. Названная в честь знаменитого польского поэта Адама Мицкевича, площадь украшена его выдающейся статуей, что делает её популярным местом встречи как для местных жителей, так и для туристов. Площадь служит площадкой для культурных мероприятий и фестивалей, отражая богатое художественное наследие города. Площадь Мицкевича названа в честь польского поэта Адама Мицкевича. Статуя Мицкевича была открыта в 1904 году и является примечательной особенностью площади. Площадь была местом проведения различных культурных мероприятий и общественных собраний.</p>
+<p class="prose">Площадь Мицкевича была основана в середине 19 века и с тех пор стала значимой достопримечательностью во Львове. Статуя Адама Мицкевича, открытая в 1904 году, увековечивает влияние поэта на польскую литературу и культуру. На протяжении многих лет площадь стала свидетелем различных исторических событий, включая публичные собрания и празднования. Культурно площадь Мицкевича играет важную роль в идентичности Львова, служа центром художественного выражения и общественных мероприятий. Она отражает мультикультурное наследие города, где пересекаются польские, украинские и еврейские влияния. Площадь часто используется для общественных событий, способствуя чувству общности и преемственности в богатых традициях Львова.</p></div>
 </section>
-<section class="place" id="lviv_pdfband_0_c7ae57f7">
-<h3>Львівська ратуша вночі</h3>
+<section class="place" id="lviv_rynok_square">
+<div class="place-lead">
+<h3>Площадь Рынок</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/lviv_pdfband_0_c7ae57f7.jpg" alt="Львівська ратуша вночі"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lviv_rynok_square.jpg" alt="Площадь Рынок" width="1059" height="1600" style="height: 405px; max-height: 405px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lviv_rynok_square_b.jpg" alt="Площадь Рынок — вид 2" width="330" height="401" style="height: 405px; max-height: 405px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Площадь Рынок, сердце Львова, является ярким общественным пространством, окруженным великолепной архитектурой Ренессанса и шумными кафе. Этот объект Всемирного наследия ЮНЕСКО служит центром для местных жителей и туристов, предлагая возможность заглянуть в богатую историю и культурную жизнь города. Посетители могут исследовать различные рыночные лавки, наслаждаться уличными выступлениями и оценить историческое значение площади. Площадь Рынок была основана в XIII веке. Он был объявлен объектом Всемирного наследия ЮНЕСКО благодаря своей архитектурной и исторической значимости.</p>
+<p class="prose">Площадь Рынок была основана в XIII веке как центральный рынок Львова, служа фокусной точкой для торговли и коммерции. На протяжении веков она стала свидетелем множества ключевых событий, включая публичные собрания и празднования, отражая изменяющуюся идентичность города. Площадь претерпела различные реконструкции, сохраняя свою архитектурную красоту, одновременно адаптируясь к современным потребностям. Площадь Рынок имеет огромное культурное значение как символ наследия и повседневной жизни Львова. Это место сбора для фестивалей, художественных выставок и местных традиций, демонстрирующее яркий дух сообщества города. Архитектурный ансамбль площади является свидетельством разнообразных влияний города и играет ключевую роль в статусе Львова как объекта Всемирного наследия ЮНЕСКО.</p></div>
+</section>
+<section class="place" id="lviv_jewish_hospital">
+<div class="place-lead">
+<h3>Район синагоги Золотой Розы</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lviv_jewish_hospital.jpg" alt="Район синагоги Золотой Розы" width="1060" height="1600" style="height: 450px; max-height: 450px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lviv_jewish_hospital_b.jpg" alt="Район синагоги Золотой Розы — вид 2" width="330" height="478" style="height: 450px; max-height: 450px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Район Синагоги Золотой Розы во Львове является трогательным напоминанием о богатом еврейском наследии города. Когда-то здесь находилась одна из самых значительных синагог Восточной Европы, и это место отражает историческую и культурную ткань еврейской общины Львова. Посетители могут исследовать остатки этого священного пространства и оценить его архитектурную красоту на фоне яркого города. Синагога Золотой Розы была основана в начале 17 века. Синагога была разрушена во время Второй мировой войны, вместе с большей частью еврейского наследия Львова.</p>
+<p class="prose">Синагога Золотой Розы была основана в начале 17 века, и её строительство связано с процветающим еврейским сообществом во Львове в этот период. Она стала центральным местом поклонения и общественной жизни до тех пор, пока не была разрушена во время Второй мировой войны. Район вокруг синагоги с тех пор стал важной точкой для памяти и почитания еврейской истории Львова. Культурно район Золотой Розы синагоги имеет значительное значение, так как он представляет историческое присутствие еврейской жизни во Львове, что оказало влияние на культурный ландшафт города. Это место служит свидетельством богатых традиций и вкладов еврейской общины, которые были неотъемлемой частью идентичности Львова. Хотя сама синагога больше не существует, этот район остается местом размышлений и памяти.</p></div>
+</section>
+<section class="place" id="lviv_st_george_cathedral">
+<div class="place-lead">
+<h3>Собор Святого Георгия</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lviv_st_george_cathedral.jpg" alt="Собор Святого Георгия" width="1280" height="879" style="height: 221px; max-height: 221px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lviv_st_george_cathedral_b.jpg" alt="Собор Святого Георгия — вид 2" width="330" height="219" style="height: 221px; max-height: 221px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Кафедральный собор Святого Георгия является потрясающим примером барочной архитектуры, расположенным в самом сердце Львова. Этот исторический собор, посвященный Святому Георгию, служит значимым религиозным местом и символом богатого культурного наследия города. Посетители могут восхищаться его сложными фресками и впечатляющей колокольней, которые дают представление об художественном прошлом Львова. Построен в период с 1744 по 1761 год. Спроектировано архитектором Бартоломео Растрелли. Служит основным местом для Украинской греко-католической церкви.</p>
+<p class="prose">Строительство Собора Святого Юра началось в 1744 году и было завершено в 1761 году. Он был спроектирован архитектором Бартоломео Растрелли и с тех пор является выдающимся ориентиром во Львове. Собор прошел через различные реставрации и сыграл ключевую роль в религиозной жизни города, особенно для Украинской греко-католической церкви. Собор Святого Георгия имеет значительное культурное и религиозное значение во Львове. Как важное место поклонения для украинской греко-католической общины, он стал центром различных религиозных обрядов и церемоний. Архитектурная красота и историческая ценность собора способствуют тому, что Львов был объявлен объектом Всемирного наследия ЮНЕСКО, отражая разнообразное наследие и традиции города.</p></div>
+</section>
+<section class="place" id="lviv_bernardine_church">
+<div class="place-lead">
+<h3>Церковь бернардинцев</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/lviv_bernardine_church.jpg" alt="Церковь бернардинцев" width="1171" height="1600" style="height: 254px; max-height: 254px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lviv_bernardine_church_b.jpg" alt="Церковь бернардинцев — вид 2" width="330" height="251" style="height: 254px; max-height: 254px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Бернардинская церковь во Львове является великолепным примером барочной архитектуры, известной своим сложным фасадом и красивым интерьером. Изначально построенная в 17 веке, она служит значимой достопримечательностью города, привлекая посетителей своей богатой историей и художественным наследием. Церковь является не только местом поклонения, но и культурным центром, проводящим различные мероприятия и выставки на протяжении всего года. Основан в 1600 году Орденом бернардинцев. Завершено в 1630 году и отреставрировано после Второй мировой войны.</p>
+<p class="prose">Бернардинская церковь была основана в 1600 году Орденом бернардинцев и завершена в 1630 году. Она была построена на месте более ранней деревянной церкви и претерпела различные renovations на протяжении веков, особенно после повреждений во время Второй мировой войны. Церковь стала свидетелем многих исторических событий во Львове, отражая разнообразные культурные влияния города. Культурно, Бернардинская церковь является важным символом архитектурного наследия Львова, демонстрируя барочный стиль, который характеризует многие исторические здания города. Она играет жизненно важную роль в повседневной жизни местного сообщества, служа не только религиозным местом, но и площадкой для культурных мероприятий. Значимость церкви дополнительно подчеркивается ее связью с различными традициями и ритуалами, которые продолжают соблюдаться верующими.</p></div>
+</section>
+<section class="place" id="lviv_carmelite">
+<div class="place-lead">
+<h3>Церковь кармелитов</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lviv_carmelite.jpg" alt="Церковь кармелитов" width="330" height="440" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/lviv_carmelite_b.jpg" alt="Церковь кармелитов — вид 2" width="330" height="498" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Кармелитская церковь во Львове является великолепным примером барочной архитектуры, известной своим сложным интерьером и спокойной атмосферой. Эта историческая церковь, изначально построенная в 17 веке, служит мирным убежищем как для местных жителей, так и для туристов. Ее красивые алтари и произведения искусства отражают богатое духовное наследие города. Основан в 1630 году Орденом кармелитов. Реновированный в 18 веке, демонстрирующий барочную архитектуру.</p>
+<p class="prose">Кармелитская церковь была основана в 1630 году Орденом Братьев нашей Госпожи с горы Кармель. Она была построена на месте более ранней деревянной церкви и претерпела значительные renovations в 18 веке, особенно под руководством архитектора Иоганна Георга Пинселя. Церковь стала свидетелем различных исторических событий, включая бурные периоды войны и политических изменений во Львове. Культурно Кармелитская церковь является важной достопримечательностью во Львове, внося вклад в архитектурное наследие города и привлекая многочисленных посетителей. Она играет роль в повседневной жизни сообщества, проводя религиозные службы и культурные мероприятия. Художественные элементы церкви, включая алтари и фрески, имеют значительное значение для местного наследия и отражают разнообразную историю города.</p></div>
 </section>
 </body>
 </html>

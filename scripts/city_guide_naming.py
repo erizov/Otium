@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import re
+import urllib.parse
 
 # Legacy PDF size-band rows (pre-unification).
 _LEGACY_PDFBAND_RE = re.compile(r"^([a-z0-9_]+)_(?:pdfband|filler)_")
@@ -57,12 +58,68 @@ def is_curated_place_slug(slug: str, city_slug: str) -> bool:
 
 def short_id_from_title(city_slug: str, title: str) -> str:
     """Derive a short_id from a display title (for migrations)."""
-    raw = title.strip().lower()
+    raw = clean_place_display_title(title.strip())
+    raw = re.sub(r"^\d{6,8}\s+", "", raw)
+    # Drop camera/asset IDs like "(8392011668)" that often leak into filenames.
+    raw = re.sub(r"\(\d{7,}\)\s*$", "", raw).strip()
+    raw = raw.lower()
     raw = re.sub(r"[^a-z0-9]+", "_", raw)
     raw = re.sub(r"_+", "_", raw).strip("_")
+    # Remove long numeric tokens anywhere (usually an asset ID, not a place).
+    parts = [p for p in raw.split("_") if not re.fullmatch(r"\d{7,}", p)]
+    raw = "_".join(parts).strip("_")
+    city_key = city_slug.replace("_", " ")
+    if raw in (city_slug, city_key.replace(" ", "_"), city_key):
+        raw = "landmark"
+    # Avoid returning numeric-only or near-empty IDs.
+    if not raw or re.fullmatch(r"\d+", raw):
+        raw = "landmark"
     if raw.startswith(city_slug + "_"):
         return raw[len(city_slug) + 1 :]
     return raw[:48] or "place"
+
+
+def descriptive_place_slug(
+    city_slug: str,
+    title: str,
+    used_slugs: set[str],
+) -> str:
+    """
+    Build ``{city}_{short_id}`` from a human title; suffix on collision.
+
+    Never uses ``pdfband`` / ``filler`` tokens — for PDF size-band rows.
+    """
+    short = short_id_from_title(city_slug, title)
+    base = curated_place_slug(city_slug, short)
+    if base not in used_slugs:
+        return base
+    for nn in range(2, 100):
+        cand = "{}_{}".format(base, nn)
+        if cand not in used_slugs:
+            return cand
+    return "{}_{}".format(base, len(used_slugs) + 1)
+
+
+def title_for_descriptive_slug(place: dict) -> str:
+    """Best display title for slug derivation from a place row."""
+    filler = filler_display_title(place)
+    if filler:
+        return filler
+    for key in ("name_en", "name_ru", "name", "subtitle_en", "subtitle_ru"):
+        raw = str(place.get(key) or "").strip()
+        if raw:
+            cleaned = clean_place_display_title(raw)
+            if cleaned:
+                return cleaned
+    url = str(place.get("image_source_url") or "")
+    if url:
+        name = url.rsplit("/", 1)[-1]
+        cleaned = clean_place_display_title(
+            urllib.parse.unquote(name.replace("_", " ")),
+        )
+        if cleaned:
+            return cleaned
+    return "landmark"
 
 
 _IMAGE_FILE_SUFFIX_RE = re.compile(
@@ -83,6 +140,27 @@ _PHOTOCHROM_SUFFIX_DIGIT_RE = re.compile(
     r"(photochrom)\d+$",
     re.IGNORECASE,
 )
+_ASSET_ID_PAREN_RE = re.compile(r"\s*\(\d{5,}\)\s*")
+_LEADING_FILE_ID_RE = re.compile(r"^\d{6,8}\s+")
+_TRAILING_ASSET_ID_RE = re.compile(r"\s+\d{7,}\s*$")
+
+
+def clean_place_display_title(text: str) -> str:
+    """
+    Human place title: strip Commons filename noise and camera/asset IDs.
+
+    Examples:
+    - ``Dubai (19225459).jpeg`` → ``Dubai``
+    - ``Downtown Montreal (8392011668)`` → ``Downtown Montreal``
+    - ``141227 Berliner Dom`` → ``Berliner Dom``
+    """
+    s = clean_wikimedia_display_title(str(text).strip())
+    if not s:
+        return s
+    s = _ASSET_ID_PAREN_RE.sub("", s).strip()
+    s = _LEADING_FILE_ID_RE.sub("", s).strip()
+    s = _TRAILING_ASSET_ID_RE.sub("", s).strip()
+    return s.strip()
 
 
 def clean_wikimedia_display_title(text: str) -> str:
@@ -118,7 +196,7 @@ def filler_display_title(place: dict) -> str | None:
         raw = place.get(key)
         if raw is None:
             continue
-        cleaned = clean_wikimedia_display_title(str(raw).strip())
+        cleaned = clean_place_display_title(str(raw).strip())
         if not cleaned or not is_substantive_text(cleaned):
             continue
         if looks_like_slug_title(cleaned) or is_pdf_filler_slug(cleaned):
@@ -146,12 +224,22 @@ def title_from_place_slug(slug: str) -> str:
     Human title from a place slug: ``dubai_gold_souk`` → ``Dubai Gold Souk``.
 
     PDF-band filler slugs fall back to ``title_from_pdf_filler_slug``.
+    City registry slugs ``city_category_12`` drop the city and index tokens.
     """
     s = str(slug).strip()
     if not s:
         return s
     if is_pdf_filler_slug(s):
         return title_from_pdf_filler_slug(s)
+    parts = s.lower().split("_")
+    if len(parts) >= 3 and parts[-1].isdigit():
+        tail = parts[1:-1]
+        index = parts[-1]
+        if tail:
+            words = " ".join(tail).replace("-", " ")
+            title = clean_wikimedia_display_title(words.title())
+            if title:
+                return "{} {}".format(title, index)
     words = s.replace("_", " ").strip()
     return clean_wikimedia_display_title(words.title())
 

@@ -623,7 +623,7 @@ Refresh: ``python scripts/report_city_guide_stats.py --write-readme``
 | `madrid` | 32 |
 | `minsk` | 29 |
 | `montreal` | 37 |
-| `moscow` | 311 |
+| `moscow` | 500 |
 | `new_york` | 31 |
 | `novosibirsk` | 25 |
 | `odessa` | 24 |
@@ -645,9 +645,68 @@ Refresh: ``python scripts/report_city_guide_stats.py --write-readme``
 | `vologda` | 21 |
 | `yaroslavl` | 25 |
 
-**Totals:** 45 cities · **1654** unique curated places · 113 PDF expand sidecar rows (filler images; not counted in Places).
+**Totals:** 45 cities · **1843** unique curated places · 113 PDF expand sidecar rows (filler images; not counted in Places).
 <!-- /city-guide-place-counts -->
 Refresh after dedup or grow:
 python scripts/report_city_guide_stats.py --write-readme
 
 python scripts/warm_route_coords_cache.py
+
+<!-- city-guide-image-per-place -->
+## Place images per city
+
+On-disk raster count per registry place (primary + ``additional_images``, capped at 2). **skip** = ``suppress_images_for_pdf``. Refresh: ``python scripts/report_city_guide_stats.py --write-readme`` or ``python scripts/stats_city_guide_images_per_place.py``.
+
+| City | places | skip | 0 img | 1 img | 2 img |
+|------|-------:|-----:|------:|------:|------:|
+| `amsterdam` | 31 | 0 | 0 | 3 | 28 |
+| `athens` | 29 | 0 | 1 | 0 | 28 |
+| `bangkok` | 32 | 0 | 0 | 3 | 29 |
+| `barcelona` | 33 | 0 | 0 | 4 | 29 |
+| `berlin` | 38 | 0 | 0 | 2 | 36 |
+| `boston` | 28 | 0 | 0 | 2 | 26 |
+| `budapest` | 33 | 0 | 0 | 5 | 28 |
+| `chernivtsi` | 33 | 0 | 1 | 5 | 27 |
+| `copenhagen` | 29 | 0 | 0 | 4 | 25 |
+| `dubai` | 34 | 0 | 0 | 4 | 30 |
+| `dublin` | 21 | 0 | 0 | 3 | 18 |
+| `florence` | 37 | 0 | 0 | 2 | 35 |
+| `istanbul` | 33 | 0 | 0 | 7 | 26 |
+| `jerusalem` | 33 | 0 | 0 | 4 | 29 |
+| `kazan` | 29 | 0 | 0 | 1 | 28 |
+| `kharkiv` | 29 | 0 | 1 | 3 | 25 |
+| `kyiv` | 30 | 0 | 0 | 5 | 25 |
+| `lisbon` | 28 | 0 | 0 | 4 | 24 |
+| `london` | 26 | 0 | 0 | 4 | 22 |
+| `los_angeles` | 30 | 0 | 0 | 3 | 27 |
+| `lviv` | 30 | 0 | 0 | 4 | 26 |
+| `madrid` | 33 | 0 | 0 | 0 | 33 |
+| `minsk` | 34 | 0 | 0 | 4 | 30 |
+| `montreal` | 39 | 0 | 0 | 4 | 35 |
+| `moscow` | 500 | 0 | 35 | 67 | 398 |
+| `new_york` | 35 | 0 | 0 | 3 | 32 |
+| `novosibirsk` | 28 | 0 | 1 | 4 | 23 |
+| `odessa` | 25 | 0 | 0 | 5 | 20 |
+| `paris` | 38 | 0 | 0 | 3 | 35 |
+| `philadelphia` | 27 | 0 | 0 | 2 | 25 |
+| `prague` | 37 | 0 | 0 | 3 | 34 |
+| `rome` | 40 | 0 | 0 | 3 | 37 |
+| `san_francisco` | 26 | 0 | 0 | 1 | 25 |
+| `singapore` | 27 | 0 | 0 | 0 | 27 |
+| `smolensk` | 68 | 1 | 0 | 3 | 64 |
+| `spb` | 354 | 0 | 8 | 106 | 240 |
+| `tokyo` | 30 | 0 | 0 | 4 | 26 |
+| `tver` | 31 | 0 | 0 | 3 | 28 |
+| `vatican` | 27 | 0 | 0 | 4 | 23 |
+| `venice` | 35 | 0 | 0 | 0 | 35 |
+| `vienna` | 33 | 0 | 1 | 3 | 29 |
+| `vladivostok` | 25 | 0 | 0 | 7 | 18 |
+| `volgograd` | 25 | 0 | 1 | 6 | 18 |
+| `vologda` | 22 | 0 | 0 | 3 | 19 |
+| `yaroslavl` | 26 | 0 | 0 | 1 | 25 |
+
+| **TOTAL** | **2211** | **1** | **49** | **311** | **1850** |
+
+**PDF-eligible:** 2210 places · **0 img:** 49 (2.2%) · **1 img:** 311 (14.1%) · **2 img:** 1850 (83.7%).
+<!-- /city-guide-image-per-place -->
+

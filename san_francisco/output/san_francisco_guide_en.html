@@ -13,7 +13,7 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
 .otium-logo { font-family: 'Libre Baskerville', serif; font-size: 2.15rem;
   font-weight: 600; letter-spacing: 0.18em; margin-bottom: 0.85rem; }
 .otiump { margin: 0.42rem 0; line-height: 1.42; text-align: justify;
-  max-width: 38rem; font-size: 0.95rem; }
+  font-size: 0.95rem; }
 .guide-title { page-break-after: auto; margin-bottom: 0.55rem;
   page-break-inside: avoid; }
 .historical-reference { margin: 0.75rem 0 1.15rem;
@@ -63,22 +63,103 @@ ol.trip-stops a:hover { text-decoration: underline; }
 .heraldry-univ-caption { font-size: 0.52rem; line-height: 1.18;
   margin: 0.12rem 0 0; padding: 0 0.06rem; color: #252525;
   text-align: center; font-weight: 500; }
-.heraldry-motto { text-align: center; max-width: 18rem; margin: 0.18rem auto;
+.heraldry-motto { text-align: center; margin: 0.18rem auto;
   width: 100%; }
 .motto-line { font-family: 'Libre Baskerville', serif; font-size: 1rem;
   margin: 0; color: #333; line-height: 1.35; }
 .guide-title h1.guide-title-main { font-family: 'Libre Baskerville', serif;
   font-size: 2.35rem; margin-bottom: 0.5rem; font-weight: 600; }
 .lead { color: #444; font-size: 1.05rem; }
-.guide-toc { margin: 0.85rem 0 1.15rem; page-break-inside: avoid; }
-.guide-toc h2 { font-family: 'Libre Baskerville', serif; font-size: 1.28rem;
-  font-weight: 600; margin: 0.4rem 0 0.55rem; }
+
+.guide-toc { page-break-before: always; break-before: page;
+  page-break-after: always; break-after: page;
+  margin: 0; padding: 0.2rem 0 0.45rem; page-break-inside: auto; }
+.guide-toc h2 { font-family: 'Libre Baskerville', serif;
+  font-size: 1.28rem; font-weight: 600; margin: 0.4rem 0 0.55rem; }
 .guide-toc ol { margin: 0.35rem 0 0.65rem 1.25rem; padding: 0;
   columns: 2; column-gap: 1.5rem; }
 .guide-toc li { margin: 0.18rem 0; line-height: 1.35;
   font-size: 0.88rem; break-inside: avoid; }
-.guide-toc a { color: #1a5276; text-decoration: none; }
+.guide-toc a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.guide-toc a:hover { color: #0d3d56; }
 .guide-toc li.toc-item--sub { font-size: 0.82rem; margin-left: 0.35rem; }
+.toc-back { font-size: 0.78rem; margin: 0 0 0.35rem; text-align: right; }
+.toc-back a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.toc-back a:hover { color: #0d3d56; }
+.place, .historical-reference, .guide-primer, .guide-trip-plans {
+  scroll-margin-top: 1.25rem; }
+.historical-reference h2, .guide-primer h2, .guide-trip-plans h2,
+.chapter-head h2, .place-lead h3 { position: relative; }
+.guide-toc + .place, .guide-toc + .chapter-head {
+  page-break-before: avoid; break-before: avoid-page; }
+.place-lead { page-break-inside: avoid; break-inside: avoid-page;
+  page-break-after: auto; }
+.place-lead > h3 { page-break-after: avoid; break-after: avoid-page; }
+.place-lead > .place-meta { page-break-after: avoid; break-after: avoid-page; }
+
+.place-fig { page-break-inside: avoid; break-inside: avoid-page;
+  margin: 0.5rem 0 1rem; }
+.place-fig img {
+  page-break-inside: avoid; break-inside: avoid-page;
+  max-height: 48vh; width: auto; max-width: 100%;
+  object-fit: contain; margin-left: auto; margin-right: auto; }
+.place-fig--hi-res img { max-height: 52vh; }
+.place-fig--lo-res img { max-height: 30vh; }
+.place-pdf-fig-row {
+  display: flex; flex-direction: row; flex-wrap: wrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.45rem 0.55rem; margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row .place-fig {
+  flex: 1 1 30%; margin: 0; min-width: 26%; max-width: 100%; }
+.place-pdf-fig-row .place-fig img {
+  width: auto; max-width: 100%; height: auto; max-height: 44vh;
+  object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--pair {
+  flex-wrap: nowrap; justify-content: space-between;
+  align-items: flex-end; gap: 0.5rem 0.65rem; }
+.place-pdf-fig-row--pair .place-fig {
+  flex: 1 1 47%; min-width: 0; max-width: 50%;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--pair .place-fig img {
+  max-height: 44vh; object-fit: contain; }
+.place-pdf-fig-row--pair .place-fig--hi-res img { max-height: 52vh; }
+.place-pdf-fig-row--pair .place-fig--lo-res img { max-height: 26vh; }
+.place-pdf-fig-row--pair .place-fig--row-sized img,
+.place-pdf-fig-row--triple .place-fig--row-sized img,
+.place-pdf-fig-row--many .place-fig--row-sized img {
+  width: auto; max-width: 100%; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row .place-fig--row-sized.place-fig--hi-res img,
+.place-pdf-fig-row .place-fig--row-sized.place-fig--lo-res img {
+  max-height: unset; }
+.place-pdf-fig-rows-stack {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple {
+  display: flex; flex-direction: row; flex-wrap: nowrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.4rem 0.48rem; margin: 0;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--triple .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--triple .place-fig--hi-res img { max-height: 42vh; }
+.place-pdf-fig-row--triple .place-fig--lo-res img { max-height: 18vh; }
+.place-pdf-fig-row--many {
+  flex-wrap: nowrap; justify-content: center; align-items: flex-end;
+  gap: 0.35rem 0.42rem; }
+.place-pdf-fig-row--many .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--many .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+
+
 .place { margin-bottom: 2.2rem; page-break-inside: auto; }
 h3 { font-family: 'Libre Baskerville', serif; font-size: 1.22rem; margin: 1.2rem 0 0.35rem;
   font-weight: 600; }
@@ -90,7 +171,6 @@ h4 { font-family: 'Libre Baskerville', serif; font-size: 0.95rem; text-transform
   color: #555; font-size: 0.95rem; margin: 0 0 0.5rem; font-style: italic; }
 .place-meta { font-size: 0.92rem; color: #353535; margin: 0 0 0.75rem;
   line-height: 1.4; }
-.place-fig { margin: 0.5rem 0 1rem; }
 img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
 .prose, .place-desc p { margin: 0.45rem 0; line-height: 1.5;
   text-align: justify; }
@@ -110,7 +190,9 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <figure class="heraldry-fig heraldry-coat-book" title="Seal of San Francisco"><img src="../images/guide_coat_of_arms.svg" alt="Seal of San Francisco"/></figure>
 <figure class="heraldry-fig heraldry-coat-book" title="Flag of San Francisco"><img src="../images/guide_flag.svg" alt="Flag of San Francisco"/></figure>
 </div></div><h1 class="guide-title-main">San Francisco</h1><p class="lead">Guide. Places in this edition: 26.</p></header>
+<nav class="guide-toc" id="guide-toc" aria-label="Contents"><h2>Contents</h2><ol><li class="toc-item"><a href="#guide-trips">Trip ideas</a></li><li class="toc-item"><a href="#san_francisco_9550jfjfconcepcion_francisco_mosque_highway_tarl">9550jfjfConcepcion Francisco Mosque Highway Tarlacfvf</a></li><li class="toc-item"><a href="#san_francisco_alcatraz">Alcatraz Island</a></li><li class="toc-item"><a href="#san_francisco_asian_art">Asian Art Museum</a></li><li class="toc-item"><a href="#san_francisco_castro">Castro Theatre</a></li><li class="toc-item"><a href="#san_francisco_chinatown_gate">Chinatown Dragon Gate</a></li><li class="toc-item"><a href="#san_francisco_coit_tower">Coit Tower</a></li><li class="toc-item"><a href="#san_francisco_de_young">de Young Museum</a></li><li class="toc-item"><a href="#san_francisco_exploratorium">Exploratorium</a></li><li class="toc-item"><a href="#san_francisco_ferry_building">Ferry Building Marketplace</a></li><li class="toc-item"><a href="#san_francisco_fishermans_wharf">Fisherman&#x27;s Wharf</a></li><li class="toc-item"><a href="#san_francisco_golden_gate_bridge">Golden Gate Bridge</a></li><li class="toc-item"><a href="#san_francisco_grace_cathedral">Grace Cathedral</a></li><li class="toc-item"><a href="#san_francisco_iglesia_san_francisco_cusco">Iglesia San Francisco Cusco</a></li><li class="toc-item"><a href="#san_francisco_legion_of_honor">Legion of Honor</a></li><li class="toc-item"><a href="#san_francisco_lombard">Lombard Street</a></li><li class="toc-item"><a href="#san_francisco_lombard_street">Lombard Street (crooked block)</a></li><li class="toc-item"><a href="#san_francisco_mission_dolores">Mission Dolores</a></li><li class="toc-item"><a href="#san_francisco_painted_ladies">Painted Ladies (Alamo Square)</a></li><li class="toc-item"><a href="#san_francisco_palace_fine_arts">Palace of Fine Arts</a></li><li class="toc-item"><a href="#san_francisco_pier_39">Pier 39 sea lions</a></li><li class="toc-item"><a href="#san_francisco_cable_car">Powell–Hyde cable car</a></li><li class="toc-item"><a href="#san_francisco_salesforce_park">Salesforce Park</a></li><li class="toc-item"><a href="#san_francisco_st_mary_s">St Mary&#x27;s</a></li><li class="toc-item"><a href="#san_francisco_sutro_baths">Sutro Baths ruins</a></li><li class="toc-item"><a href="#san_francisco_transamerica">Transamerica Pyramid</a></li><li class="toc-item"><a href="#san_francisco_twin_peaks">Twin Peaks view</a></li></ol></nav>
 <section class="guide-trip-plans" id="guide-trips" aria-label="Trip ideas"><h2>Trip ideas</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 <article class="trip-plan" id="trip-1d"><h3>One day</h3>
 <p class="prose">A compact loop linking the strongest cards in this guide, ordered to minimise backtracking on foot.</p>
 <ol class="trip-stops"><li><a href="#san_francisco_castro">Castro Theatre</a> (~75min)</li>
@@ -136,205 +218,357 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <article class="trip-plan" id="trip-3d3"><h3>Three days — day 3</h3>
 <p class="prose">Day 3 — remaining highlights nearby.</p>
 <ol class="trip-stops"><li><a href="#san_francisco_lombard_street">Lombard Street (crooked block)</a> (~75min)</li></ol></article></section>
-<nav class="guide-toc" aria-label="Contents"><h2>Contents</h2><ol><li class="toc-item"><a href="#guide-trips">Trip ideas</a></li><li class="toc-item"><a href="#san_francisco_pdfband_2_0dc3c907">9550jfjfConcepcion Francisco Mosque Highway Tarlacfvf</a></li><li class="toc-item"><a href="#san_francisco_alcatraz">Alcatraz Island</a></li><li class="toc-item"><a href="#san_francisco_asian_art">Asian Art Museum</a></li><li class="toc-item"><a href="#san_francisco_castro">Castro Theatre</a></li><li class="toc-item"><a href="#san_francisco_chinatown_gate">Chinatown Dragon Gate</a></li><li class="toc-item"><a href="#san_francisco_coit_tower">Coit Tower</a></li><li class="toc-item"><a href="#san_francisco_de_young">de Young Museum</a></li><li class="toc-item"><a href="#san_francisco_exploratorium">Exploratorium</a></li><li class="toc-item"><a href="#san_francisco_ferry_building">Ferry Building Marketplace</a></li><li class="toc-item"><a href="#san_francisco_fishermans_wharf">Fisherman&#x27;s Wharf</a></li><li class="toc-item"><a href="#san_francisco_golden_gate_bridge">Golden Gate Bridge</a></li><li class="toc-item"><a href="#san_francisco_grace_cathedral">Grace Cathedral</a></li><li class="toc-item"><a href="#san_francisco_pdfband_1_651152c8">Iglesia San Francisco Cusco</a></li><li class="toc-item"><a href="#san_francisco_legion_of_honor">Legion of Honor</a></li><li class="toc-item"><a href="#san_francisco_lombard">Lombard Street</a></li><li class="toc-item"><a href="#san_francisco_lombard_street">Lombard Street (crooked block)</a></li><li class="toc-item"><a href="#san_francisco_mission_dolores">Mission Dolores</a></li><li class="toc-item"><a href="#san_francisco_painted_ladies">Painted Ladies (Alamo Square)</a></li><li class="toc-item"><a href="#san_francisco_palace_fine_arts">Palace of Fine Arts</a></li><li class="toc-item"><a href="#san_francisco_pier_39">Pier 39 sea lions</a></li><li class="toc-item"><a href="#san_francisco_cable_car">Powell–Hyde cable car</a></li><li class="toc-item"><a href="#san_francisco_salesforce_park">Salesforce Park</a></li><li class="toc-item"><a href="#san_francisco_pdfband_0_92afbdbb">St Mary&#x27;s</a></li><li class="toc-item"><a href="#san_francisco_sutro_baths">Sutro Baths ruins</a></li><li class="toc-item"><a href="#san_francisco_transamerica">Transamerica Pyramid</a></li><li class="toc-item"><a href="#san_francisco_twin_peaks">Twin Peaks view</a></li></ol></nav>
-<section class="place" id="san_francisco_pdfband_2_0dc3c907">
+<section class="place" id="san_francisco_9550jfjfconcepcion_francisco_mosque_highway_tarl">
+<div class="place-lead">
 <h3>9550jfjfConcepcion Francisco Mosque Highway Tarlacfvf</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/san_francisco_pdfband_2_0dc3c907.jpg" alt="9550jfjfConcepcion Francisco Mosque Highway Tarlacfvf"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/san_francisco_9550jfjfconcepcion_francisco_mosque_highway_tarl.jpg" alt="9550jfjfConcepcion Francisco Mosque Highway Tarlacfvf" width="1280" height="960" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/san_francisco_9550jfjfconcepcion_francisco_mosque_highway_tarl_b.jpg" alt="9550jfjfConcepcion Francisco Mosque Highway Tarlacfvf — view 2" width="330" height="440" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 </section>
 <section class="place" id="san_francisco_alcatraz">
+<div class="place-lead">
 <h3>Alcatraz Island</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: San Francisco Bay | Style: Cellhouse industrial architecture | Period: 1859 fort; federal penitentiary 1934–1963</p>
-<figure class="place-fig"><img src="../images/san_francisco_alcatraz.jpg" alt="Alcatraz Island"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/san_francisco_alcatraz.jpg" alt="Alcatraz Island" width="1280" height="655" style="height: 236px; max-height: 236px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/san_francisco_alcatraz_b.jpg" alt="Alcatraz Island — view 2" width="330" height="210" style="height: 236px; max-height: 236px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Audio tours through cellblocks narrated by former guards and inmates; seabird nesting closes some paths seasonally. Only concessionaire boats may dock; tickets sell out weeks ahead in summer. Night tours add lighthouse and hospital wing access.</p>
 <p class="prose">Military prison preceded gangster-era federal pen; Native occupation in 1969–1971 reframed its symbolism. Bay islands park with layered carceral history.</p></div>
 </section>
 <section class="place" id="san_francisco_asian_art">
+<div class="place-lead">
 <h3>Asian Art Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/san_francisco_asian_art.jpg" alt="Asian Art Museum"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/san_francisco_asian_art.jpg" alt="Asian Art Museum" width="330" height="93" style="height: 130px; max-height: 130px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/san_francisco_asian_art_b.jpg" alt="Asian Art Museum — view 2" width="330" height="495" style="height: 130px; max-height: 130px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Asian Art Museum in San Francisco is one of the largest museums in the Western world dedicated to Asian art. Housing over 18,000 objects spanning 6,000 years of history, the museum offers a rich exploration of the diverse cultures of Asia. Visitors can experience a wide range of exhibitions, educational programs, and cultural events that showcase the artistic heritage of the continent. The museum&#x27;s collection includes artifacts from China, Japan, Korea, India, and Southeast Asia. It features pieces from various mediums, including paintings, sculptures, textiles, and ceramics.</p>
 <p class="prose">The Asian Art Museum was founded in 1966, originally as part of the San Francisco Museum of Art. It became an independent institution in 2003 when it moved to its current location in the former main branch of the San Francisco Public Library, a building designed by architect George W. Kelham in the 1930s. The museum&#x27;s collection has grown significantly over the decades, reflecting the evolving appreciation of Asian art in the United States. Culturally, the Asian Art Museum plays a vital role in promoting understanding and appreciation of Asian heritage through its extensive collection and educational initiatives. It serves as a hub for cultural exchange, hosting events that celebrate Asian traditions and contemporary practices. The museum&#x27;s dedication to showcasing diverse artistic expressions fosters dialogue among communities and enhances the cultural landscape of San Francisco.</p></div>
 </section>
 <section class="place" id="san_francisco_castro">
+<div class="place-lead">
 <h3>Castro Theatre</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/san_francisco_castro.jpg" alt="Castro Theatre"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/san_francisco_castro.jpg" alt="Castro Theatre" width="330" height="505" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/san_francisco_castro_b.jpg" alt="Castro Theatre — view 2" width="330" height="324" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Castro Theatre, a historic movie palace located in the heart of San Francisco&#x27;s Castro District, is renowned for its stunning Art Deco architecture and vibrant programming. Opened in 1922, it serves as a cultural hub, showcasing a diverse array of films, including classic revivals and contemporary LGBTQ+ cinema. The theater&#x27;s iconic marquee and rich history make it a must-visit destination for both locals and tourists alike. Opened on June 22, 1922. Designed by architect Timothy Pflueger in the Art Deco style. Renovated in the 1990s to restore its historic features.</p>
 <p class="prose">The Castro Theatre was opened on June 22, 1922, originally as a silent film house. It was designed by architect Timothy Pflueger and has undergone various renovations over the years, including a significant restoration in the 1990s. The theater has been a key venue for the San Francisco International Film Festival and has hosted numerous events that celebrate LGBTQ+ culture and history. The Castro Theatre holds a prominent place in San Francisco&#x27;s cultural landscape, particularly within the LGBTQ+ community. It has been a site for important film screenings and events that reflect the struggles and triumphs of LGBTQ+ rights. The theater&#x27;s programming often highlights diverse voices and stories, contributing to the ongoing dialogue about representation in cinema. Its historical and cultural significance makes it a symbol of inclusivity and artistic expression in the city.</p></div>
 </section>
 <section class="place" id="san_francisco_chinatown_gate">
+<div class="place-lead">
 <h3>Chinatown Dragon Gate</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Grant Avenue at Bush Street | Style: Chinese paifang gateway | Period: 1970 gift from Taiwan</p>
-<figure class="place-fig"><img src="../images/san_francisco_chinatown_gate.jpg" alt="Chinatown Dragon Gate"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/san_francisco_chinatown_gate.jpg" alt="Chinatown Dragon Gate" width="1280" height="850" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/san_francisco_chinatown_gate_b.jpg" alt="Chinatown Dragon Gate — view 2" width="330" height="220" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Stone arch marking entry to the oldest North American Chinatown&#x27;s steep Grant Avenue shops. Portsmouth Square sits two blocks north for tai chi mornings. Stockton Street markets are less touristy than Grant.</p>
 <p class="prose">Post-earthquake rebuilds layered neon signage onto Victorian brick. Symbolic threshold between Financial District and community lanes.</p></div>
 </section>
 <section class="place" id="san_francisco_coit_tower">
+<div class="place-lead">
 <h3>Coit Tower</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Telegraph Hill | Style: Art Deco fluted shaft | Period: 1933</p>
-<figure class="place-fig"><img src="../images/san_francisco_coit_tower.jpg" alt="Coit Tower"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/san_francisco_coit_tower.jpg" alt="Coit Tower" width="1280" height="960" style="height: 329px; max-height: 329px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/san_francisco_coit_tower_b.jpg" alt="Coit Tower — view 2" width="330" height="235" style="height: 329px; max-height: 329px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Depression-era murals line the lobby before elevator rides to bay-view balconies. Filbert Steps approach rewards walkers climbing from the Wharf. Parking on the summit circle is extremely limited.</p>
 <p class="prose">Lillie Hitchcock Coit&#x27;s bequest funded firefighter tribute symbolism. 360° orientation spike visible from many hill neighbourhoods.</p></div>
 </section>
 <section class="place" id="san_francisco_de_young">
+<div class="place-lead">
 <h3>de Young Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Golden Gate Park | Style: Copper mesh tower museum | Period: 2005 replacement (Herzog &amp; de Meuron)</p>
-<figure class="place-fig"><img src="../images/san_francisco_de_young.jpg" alt="de Young Museum"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/san_francisco_de_young.jpg" alt="de Young Museum" width="1280" height="457" style="height: 164px; max-height: 164px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/san_francisco_de_young_b.jpg" alt="de Young Museum — view 2" width="330" height="247" style="height: 164px; max-height: 164px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Americas, Oceania, and costume collections with an observation level over tree canopy. Friday night events mix DJs with gallery access. Japanese Tea Garden sits beside the east entrance.</p>
 <p class="prose">1900s expo structure failed in earthquakes; new building twists to resist lateral loads. Park-side counterpart to the Legion across the dunes.</p></div>
 </section>
 <section class="place" id="san_francisco_exploratorium">
+<div class="place-lead">
 <h3>Exploratorium</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/san_francisco_exploratorium.jpg" alt="Exploratorium"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/san_francisco_exploratorium.jpg" alt="Exploratorium" width="330" height="248" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/san_francisco_exploratorium_b.jpg" alt="Exploratorium — view 2" width="330" height="206" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Exploratorium — museum in San Francisco.</p></div>
 </section>
 <section class="place" id="san_francisco_ferry_building">
+<div class="place-lead">
 <h3>Ferry Building Marketplace</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Embarcadero | Style: Beaux-Arts transit hall | Period: 1898 clock tower; 2003 marketplace</p>
-<figure class="place-fig"><img src="../images/san_francisco_ferry_building.jpg" alt="Ferry Building Marketplace"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/san_francisco_ferry_building.jpg" alt="Ferry Building Marketplace" width="1280" height="693" style="height: 250px; max-height: 250px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/san_francisco_ferry_building_b.jpg" alt="Ferry Building Marketplace — view 2" width="330" height="220" style="height: 250px; max-height: 250px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Ferries still depart to Oakland and Larkspur from slips behind the hall. Clock tower tours are occasional—check schedules. Survived the 1906 quake as a waterfront landmark; freeway era hid it until Embarcadero removal. Food destination anchor on the eastern waterfront.</p></div>
 </section>
 <section class="place" id="san_francisco_fishermans_wharf">
+<div class="place-lead">
 <h3>Fisherman&#x27;s Wharf</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/san_francisco_fishermans_wharf.jpg" alt="Fisherman&#x27;s Wharf"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/san_francisco_fishermans_wharf.jpg" alt="Fisherman&#x27;s Wharf" width="330" height="219" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/san_francisco_fishermans_wharf_b.jpg" alt="Fisherman&#x27;s Wharf — view 2" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Fisherman&#x27;s Wharf is a bustling waterfront area in San Francisco known for its vibrant atmosphere, seafood restaurants, and stunning views of the Bay. Visitors can explore historic piers, enjoy street performances, and visit attractions like the famous sea lions at Pier 39. The area is a hub of activity, making it a must-see destination for both tourists and locals alike. Fisherman&#x27;s Wharf was originally settled by Italian fishermen in the late 1800s. The area became a popular tourist destination in the 1970s, with the development of attractions like Pier 39.</p>
 <p class="prose">Fisherman&#x27;s Wharf has its roots in the early 19th century when it served as a fishing village for Italian immigrants. The area grew in prominence during the Gold Rush era, becoming a vital port for fishing and shipping. Over the years, it has transformed from a working wharf into a popular tourist destination, with significant developments occurring in the 1970s and 1980s. Culturally, Fisherman&#x27;s Wharf is a symbol of San Francisco&#x27;s maritime heritage and is integral to the city&#x27;s identity. It showcases the city&#x27;s history through its preserved architecture and local traditions, such as the annual Crab Festival. The area also plays a role in the daily life of residents, offering a lively marketplace and recreational space.</p></div>
 </section>
 <section class="place" id="san_francisco_golden_gate_bridge">
+<div class="place-lead">
 <h3>Golden Gate Bridge</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
-<p class="place-meta">Address: U.S. 101 / State Route 1 | Style: Art Deco suspension bridge (Strauss chief engineer) | Period: 1933–1937</p>
-<figure class="place-fig"><img src="../images/san_francisco_golden_gate_bridge.jpg" alt="Golden Gate Bridge"/></figure>
+<p class="place-meta">Location: U.S. 101 / State Route 1 | Style: Art Deco suspension bridge (Strauss chief engineer) | Period: 1933–1937</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/san_francisco_golden_gate_bridge.jpg" alt="Golden Gate Bridge" width="1280" height="640" style="height: 231px; max-height: 231px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/san_francisco_golden_gate_bridge_b.jpg" alt="Golden Gate Bridge — view 2" width="330" height="346" style="height: 231px; max-height: 231px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">International Orange span linking San Francisco to Marin Headlands. Fort Point and Battery Spencer offer classic viewpoints. Sidewalk hours flip between east and west sides by season. Fog can erase the towers within minutes—check marine layer forecasts.</p>
 <p class="prose">Depression-era project with Art Deco towers; retrofit added seismic isolation after Loma Prieta lessons. The city&#x27;s most reproduced engineering landmark.</p></div>
 </section>
 <section class="place" id="san_francisco_grace_cathedral">
+<div class="place-lead">
 <h3>Grace Cathedral</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/san_francisco_grace_cathedral.jpg" alt="Grace Cathedral"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/san_francisco_grace_cathedral.jpg" alt="Grace Cathedral" width="330" height="323" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/san_francisco_grace_cathedral_b.jpg" alt="Grace Cathedral — view 2" width="330" height="292" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Grace Cathedral is a stunning Episcopal church located in the heart of San Francisco, renowned for its striking architecture and beautiful stained glass windows. Visitors can explore its serene interior, attend services, or participate in various community events. The cathedral also features a labyrinth, offering a unique space for reflection and meditation. The cathedral features a stunning labyrinth inspired by the one at Chartres Cathedral in France. Grace Cathedral is known for its impressive collection of stained glass windows, including works by notable artists.</p>
 <p class="prose">Grace Cathedral was founded in 1849, originally as a small wooden structure. The current Gothic-style building was completed in 1964, following a series of expansions and reconstructions due to fire and earthquakes. Notably, it has served as a center for social justice and community support throughout its history. Culturally, Grace Cathedral is a vital part of San Francisco&#x27;s heritage, hosting art exhibitions, concerts, and community gatherings that enrich the local arts scene. It is also a significant religious site, providing a space for worship and spiritual reflection for the Episcopal community and beyond.</p></div>
 </section>
-<section class="place" id="san_francisco_pdfband_1_651152c8">
+<section class="place" id="san_francisco_iglesia_san_francisco_cusco">
+<div class="place-lead">
 <h3>Iglesia San Francisco Cusco</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/san_francisco_pdfband_1_651152c8.jpg" alt="Iglesia San Francisco Cusco"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/san_francisco_iglesia_san_francisco_cusco.jpg" alt="Iglesia San Francisco Cusco" width="1280" height="692" style="height: 214px; max-height: 214px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/san_francisco_iglesia_san_francisco_cusco_b.jpg" alt="Iglesia San Francisco Cusco — view 2" width="330" height="153" style="height: 214px; max-height: 214px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 </section>
 <section class="place" id="san_francisco_legion_of_honor">
+<div class="place-lead">
 <h3>Legion of Honor</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Lincoln Park | Style: French neo-classical copy | Period: 1924 Beaux-Arts museum</p>
-<figure class="place-fig"><img src="../images/san_francisco_legion_of_honor.jpg" alt="Legion of Honor"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/san_francisco_legion_of_honor.jpg" alt="Legion of Honor" width="1280" height="800" style="height: 282px; max-height: 282px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/san_francisco_legion_of_honor_b.jpg" alt="Legion of Honor — view 2" width="330" height="202" style="height: 282px; max-height: 282px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Legion of Honour — highest French order of merit. Free first Tuesdays draw long morning lines. Same-day ticket discounts link to de Young in Golden Gate Park.</p>
 <p class="prose">Adolph Spreckels&#x27; memorial museum echoes Paris&#x27;s Legion façade on Pacific cliffs. Fine arts complement to science across the bridge approaches.</p></div>
 </section>
 <section class="place" id="san_francisco_lombard">
+<div class="place-lead">
 <h3>Lombard Street</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/san_francisco_lombard.jpg" alt="Lombard Street"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/san_francisco_lombard.jpg" alt="Lombard Street" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--row-sized"><img src="../images/san_francisco_lombard_b.jpg" alt="Lombard Street — view 2" width="330" height="586" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Lombard Street, often dubbed the &#x27;crookedest street in the world,&#x27; is a famous San Francisco landmark known for its steep, winding turns and vibrant flowerbeds. Visitors flock to this picturesque street to experience its unique design and stunning views of the city. The street&#x27;s charm and character make it a must-see destination for anyone exploring San Francisco. Lombard Street is located between Hyde and Leavenworth Streets. The street features eight sharp turns over a one-block stretch. It was redesigned in 1922 to improve accessibility for vehicles.</p>
 <p class="prose">Lombard Street was originally a straight thoroughfare in the 19th century, but its steep incline made it difficult for vehicles to navigate. In 1922, the city redesigned the street to include eight hairpin turns, allowing for safer passage and creating its iconic zigzag appearance. This transformation was part of a broader effort to enhance the city&#x27;s infrastructure and attract tourism. Culturally, Lombard Street represents the unique architectural and urban planning challenges of San Francisco, reflecting the city&#x27;s hilly terrain and innovative solutions. It has become a symbol of the city, drawing millions of tourists each year and contributing to the local economy. The street is often featured in films and media, further embedding it in the cultural fabric of San Francisco.</p></div>
 </section>
 <section class="place" id="san_francisco_lombard_street">
+<div class="place-lead">
 <h3>Lombard Street (crooked block)</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Russian Hill between Hyde and Leavenworth | Style: Residential brick road with hydrangea planters | Period: 1922 switchbacks</p>
-<figure class="place-fig"><img src="../images/san_francisco_lombard_street.jpg" alt="Lombard Street (crooked block)"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/san_francisco_lombard_street.jpg" alt="Lombard Street (crooked block)" width="1065" height="1600" style="height: 464px; max-height: 464px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/san_francisco_lombard_street_b.jpg" alt="Lombard Street (crooked block) — view 2" width="330" height="332" style="height: 464px; max-height: 464px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">One-way hairpin garden street designed to tame Russian Hill grades; tourist cars queue on summer weekends. Pedestrians can descend stairs on both sides for photos without driving. Cable car Powell–Hyde line passes the top of the block.</p>
 <p class="prose">Resident Carl Henry proposed curves to reduce 27% grades that early autos could not climb. Controlled traffic-calming experiment turned pop-culture set piece.</p></div>
 </section>
 <section class="place" id="san_francisco_mission_dolores">
+<div class="place-lead">
 <h3>Mission Dolores</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/san_francisco_mission_dolores.jpg" alt="Mission Dolores"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/san_francisco_mission_dolores.jpg" alt="Mission Dolores" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/san_francisco_mission_dolores_b.jpg" alt="Mission Dolores — view 2" width="330" height="201" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Mission Dolores, officially known as Mission San Francisco de Asís, is the oldest surviving structure in San Francisco, offering a glimpse into the city&#x27;s rich history. Nestled in the vibrant Mission District, this historic site features a beautiful chapel and a serene cemetery, making it a peaceful retreat amidst the urban landscape. Visitors can explore its museum, which showcases artifacts and exhibits related to the mission&#x27;s history and the early days of California. Mission Dolores is the oldest structure in San Francisco. It was founded on June 29, 1776, by Spanish Franciscan missionaries.</p>
 <p class="prose">Mission Dolores was founded on June 29, 1776, by Spanish Franciscan missionaries, making it the sixth of the 21 California missions. The mission played a crucial role in the Spanish colonization of California and served as a religious and cultural hub for the indigenous Ohlone people. The original adobe structure was completed in 1782, and it has undergone various restorations over the centuries, particularly after the 1906 earthquake. Mission Dolores holds significant cultural and religious importance as a symbol of the early Spanish mission system in California. It reflects the blending of indigenous and Spanish cultures and is a site of pilgrimage for many who wish to connect with California&#x27;s historical roots. The mission&#x27;s ongoing role in community life and its preservation efforts highlight its importance in San Francisco&#x27;s heritage and identity.</p></div>
 </section>
 <section class="place" id="san_francisco_painted_ladies">
+<div class="place-lead">
 <h3>Painted Ladies (Alamo Square)</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Steiner Street façades | Style: Stick-Eastlake and Queen Anne houses | Period: 1892–1896 Victorian row</p>
-<figure class="place-fig"><img src="../images/san_francisco_painted_ladies.jpg" alt="Painted Ladies (Alamo Square)"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/san_francisco_painted_ladies.jpg" alt="Painted Ladies (Alamo Square)" width="1280" height="512" style="height: 184px; max-height: 184px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/san_francisco_painted_ladies_b.jpg" alt="Painted Ladies (Alamo Square) — view 2" width="330" height="220" style="height: 184px; max-height: 184px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Pastel Victorian fronts facing downtown skyline from Alamo Square lawn—postcard framing of old and new skylines. Park slope gets muddy after rain; bring a blanket for picnics. TV opening credits made this view globally familiar.</p>
 <p class="prose">Post-1906 paint campaigns emphasised polychrome trim now maintained by homeowners&#x27; associations. Neighbourhood preservation showcase beside Western Addition parks.</p></div>
 </section>
 <section class="place" id="san_francisco_palace_fine_arts">
+<div class="place-lead">
 <h3>Palace of Fine Arts</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Marina District | Style: Beaux-Arts rotunda and colonnade | Period: 1915 exposition; rebuilt 1960s</p>
-<figure class="place-fig"><img src="../images/san_francisco_palace_fine_arts.jpg" alt="Palace of Fine Arts"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/san_francisco_palace_fine_arts.jpg" alt="Palace of Fine Arts" width="1280" height="584" style="height: 210px; max-height: 210px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/san_francisco_palace_fine_arts_b.jpg" alt="Palace of Fine Arts — view 2" width="330" height="206" style="height: 210px; max-height: 210px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Swan pond reflecting a faux-ruin colonnade originally built for the Panama-Pacific Expo. Wedding photography crowds peak Saturday afternoons. Exploratorium moved out but theatre remains active.</p>
 <p class="prose">Bernard Maybeck&#x27;s temporary palace was reconstructed in concrete for permanence. Romantic backdrop between Marina flats and the Presidio.</p></div>
 </section>
 <section class="place" id="san_francisco_pier_39">
+<div class="place-lead">
 <h3>Pier 39 sea lions</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Fisherman&#x27;s Wharf | Style: Waterfront festival marketplace | Period: 1978 retail pier</p>
-<figure class="place-fig"><img src="../images/san_francisco_pier_39.jpg" alt="Pier 39 sea lions"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/san_francisco_pier_39.jpg" alt="Pier 39 sea lions" width="1280" height="294" style="height: 106px; max-height: 106px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/san_francisco_pier_39_b.jpg" alt="Pier 39 sea lions — view 2" width="330" height="330" style="height: 106px; max-height: 106px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">California sea lions haul out on floating docks beside carousel and sourdough chowder stalls. Winter counts peak when herring spawn nearby. Bay cruises depart from adjacent slips.</p>
 <p class="prose">Animals chose the docks voluntarily after the 1989 earthquake marina shifts. Free wildlife spectacle amid tourist retail density.</p></div>
 </section>
 <section class="place" id="san_francisco_cable_car">
+<div class="place-lead">
 <h3>Powell–Hyde cable car</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Powell and Market turntable | Style: Grip-propelled street railway | Period: 1873 system; rebuilt cars 20th c.</p>
-<figure class="place-fig"><img src="../images/san_francisco_cable_car.jpg" alt="Powell–Hyde cable car"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/san_francisco_cable_car.jpg" alt="Powell–Hyde cable car" width="1280" height="851" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/san_francisco_cable_car_b.jpg" alt="Powell–Hyde cable car — view 2" width="330" height="220" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Moving National Historic Landmark climbing Nob Hill ridges; gripmen operate manual brakes on steep grades. Clipper card and visitor passports reduce queueing at busy stops. Cable machinery at Washington–Mason barn can be toured.</p>
 <p class="prose">Andrew Smith Hallidene&#x27;s rope-drive system survived earthquakes and bus competition as a heritage fleet. Working museum of Victorian urban traction.</p></div>
 </section>
 <section class="place" id="san_francisco_salesforce_park">
+<div class="place-lead">
 <h3>Salesforce Park</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/san_francisco_salesforce_park.jpg" alt="Salesforce Park"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/san_francisco_salesforce_park.jpg" alt="Salesforce Park" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/san_francisco_salesforce_park_b.jpg" alt="Salesforce Park — view 2" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Salesforce Park is an urban oasis located atop the Salesforce Transit Center in San Francisco. This vibrant green space features lush gardens, walking paths, and stunning views of the city skyline, making it a perfect spot for relaxation and recreation. The park also hosts various events and activities, contributing to the community&#x27;s cultural life. Salesforce Park spans over 5.4 acres and is located on top of the Salesforce Transit Center. The park features over 600 trees and a variety of native plants, promoting biodiversity.</p>
 <p class="prose">Salesforce Park opened in 2018 as part of the Salesforce Transit Center project, which aimed to enhance public transportation and urban space in San Francisco. The park was designed to be a green refuge in the heart of the city, incorporating sustainable practices and native plant species. Culturally, Salesforce Park serves as a vital community space that promotes well-being and environmental awareness. It is a testament to urban revitalization efforts, reflecting the city&#x27;s commitment to integrating nature within the urban landscape. The park also hosts art installations and performances, enriching the cultural fabric of San Francisco.</p></div>
 </section>
-<section class="place" id="san_francisco_pdfband_0_92afbdbb">
+<section class="place" id="san_francisco_st_mary_s">
+<div class="place-lead">
 <h3>St Mary&#x27;s</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/san_francisco_pdfband_0_92afbdbb.jpg" alt="St Mary&#x27;s"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/san_francisco_st_mary_s.jpg" alt="St Mary&#x27;s" width="1280" height="960" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/san_francisco_st_mary_s_b.jpg" alt="St Mary&#x27;s — view 2" width="330" height="367" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">St. Mary&#x27;s — Wikimedia disambiguation page.</p></div>
 </section>
 <section class="place" id="san_francisco_sutro_baths">
+<div class="place-lead">
 <h3>Sutro Baths ruins</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/san_francisco_sutro_baths.jpg" alt="Sutro Baths ruins"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/san_francisco_sutro_baths_b.jpg" alt="Sutro Baths ruins" width="330" height="202"/></figure>
+</div>
 <div class="place-desc"><p class="prose">The Sutro Baths ruins, located near the Pacific Ocean in San Francisco, are a fascinating remnant of a once-grand public bathhouse complex. Built in 1896 by Adolph Sutro, the baths featured multiple swimming pools filled with seawater, providing a unique recreational experience for locals and visitors alike. Today, the ruins are a popular destination for those interested in history, architecture, and stunning coastal views. The Sutro Baths were built in 1896 and closed in 1964. The complex included six saltwater pools and could accommodate over 1,000 bathers at a time. The site is now part of the Golden Gate National Recreation Area.</p>
 <p class="prose">The Sutro Baths were designed by Adolph Sutro, a prominent businessman and former mayor of San Francisco, and opened to the public in 1896. The complex included six saltwater pools, a museum, and a restaurant, attracting thousands of visitors each day. However, the baths struggled financially and ultimately closed in 1964, after which they fell into disrepair and were partially destroyed by a fire in 1966. The Sutro Baths hold cultural significance as a symbol of San Francisco&#x27;s history of public recreation and the city&#x27;s coastal heritage. They reflect the late 19th-century trend of bathhouses and public swimming, which were important for community health and leisure. Today, the ruins serve as a reminder of the city&#x27;s past and are a popular site for photography and exploration, contributing to the local cultural landscape.</p></div>
 </section>
 <section class="place" id="san_francisco_transamerica">
+<div class="place-lead">
 <h3>Transamerica Pyramid</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/san_francisco_transamerica.jpg" alt="Transamerica Pyramid"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/san_francisco_transamerica.jpg" alt="Transamerica Pyramid" width="330" height="189" style="height: 264px; max-height: 264px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--row-sized"><img src="../images/san_francisco_transamerica_b.jpg" alt="Transamerica Pyramid — view 2" width="330" height="574" style="height: 264px; max-height: 264px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Transamerica Pyramid is an iconic skyscraper located in the heart of San Francisco&#x27;s financial district. Completed in 1972, its unique pyramid shape and striking design make it one of the most recognizable landmarks in the city. Visitors can admire its architectural beauty from various vantage points, and the building serves as a symbol of San Francisco&#x27;s innovative spirit. Designed by architect William Pereira. Completed in 1972, it stands at 853 feet tall. The building has 48 floors and is made of reinforced concrete.</p>
 <p class="prose">The Transamerica Pyramid was designed by architect William Pereira and officially opened on April 4, 1972. It was the tallest building in San Francisco until 2017 and is notable for its distinctive shape, which was intended to allow sunlight to reach the streets below. The building was originally constructed as the headquarters for the Transamerica Corporation. Culturally, the Transamerica Pyramid represents San Francisco&#x27;s architectural innovation and resilience, standing as a testament to the city&#x27;s growth and transformation over the decades. It is often featured in films, photographs, and artworks, symbolizing the dynamic character of the city. While it does not hold political significance, its prominence in the skyline makes it a focal point for both locals and tourists, contributing to the city&#x27;s identity.</p></div>
 </section>
 <section class="place" id="san_francisco_twin_peaks">
+<div class="place-lead">
 <h3>Twin Peaks view</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/san_francisco_twin_peaks.jpg" alt="Twin Peaks view"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/san_francisco_twin_peaks.jpg" alt="Twin Peaks view" width="330" height="38" style="height: 53px; max-height: 53px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/san_francisco_twin_peaks_b.jpg" alt="Twin Peaks view — view 2" width="330" height="186" style="height: 53px; max-height: 53px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Twin Peaks offers breathtaking panoramic views of San Francisco, making it a must-visit destination for both tourists and locals. Standing at 922 feet, it is one of the highest points in the city, providing stunning vistas of the skyline, the Golden Gate Bridge, and the Bay. The area is perfect for hiking, photography, and enjoying the natural beauty of the region. Twin Peaks is one of the highest points in San Francisco at 922 feet. The area was designated as a public park in the 1930s.</p>
 <p class="prose">Twin Peaks was named in the mid-19th century, reflecting its distinctive twin summits. The area was largely undeveloped until the early 20th century when it became a popular destination for city dwellers seeking recreation and scenic views. In the 1930s, the city began to establish a park around the peaks, solidifying its status as a public space. Culturally, Twin Peaks is an iconic symbol of San Francisco, frequently appearing in films and media that showcase the city&#x27;s unique landscape. It serves as a gathering place for locals and visitors alike, contributing to the city&#x27;s vibrant outdoor lifestyle. The viewpoint is also a popular spot for events and celebrations, reflecting the community&#x27;s spirit.</p></div>
 </section>

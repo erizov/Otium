@@ -26,12 +26,41 @@ from scripts.city_guide_historical_reference_ru import (
 )
 from scripts.city_guide_narrative import place_heading_plain
 
+GUIDE_TOC_ID = "guide-toc"
 GUIDE_HISTORICAL_ID = "guide-historical"
 GUIDE_PRIMER_ID = "guide-primer"
 GUIDE_TRIPS_ID = "guide-trips"
 GUIDE_UNIVERSITIES_ID = "guide-universities"
 GUIDE_MODERN_SMOLENSK_ID = "guide-modern-smolensk"
 GUIDE_WELCOME_CLOSING_ID = "guide-welcome-closing"
+
+_SORT_STRIP_CHARS = "«»\"\"''""„‚''`"
+
+
+def normalize_title_for_sort(text: str) -> str:
+    """Lowercase sort key; strip guillemets and quote marks from edges."""
+    s = str(text or "").strip().lower().replace("ё", "е")
+    while True:
+        prev = s
+        s = s.strip(_SORT_STRIP_CHARS)
+        if len(s) >= 2 and s[0] in _SORT_STRIP_CHARS and s[-1] in _SORT_STRIP_CHARS:
+            s = s[1:-1].strip()
+        if s == prev:
+            break
+    return s
+
+
+def place_sort_key(edition: str) -> Callable[[Mapping[str, Any]], tuple[str, str]]:
+    """Edition-aware place ordering for TOC and body sections."""
+
+    def _key(place: Mapping[str, Any]) -> tuple[str, str]:
+        label = place_heading_plain(place, edition)
+        return (
+            normalize_title_for_sort(label),
+            str(place.get("slug") or ""),
+        )
+
+    return _key
 
 
 @dataclass(frozen=True)
@@ -46,6 +75,24 @@ class GuideTocEntry:
 def guide_toc_title(edition: str) -> str:
     """Localized TOC heading."""
     return "Содержание" if edition == "ru" else "Contents"
+
+
+def guide_toc_back_label(edition: str) -> str:
+    """Short back-link label pointing to the contents page."""
+    return "↑ Содержание" if edition == "ru" else "↑ Contents"
+
+
+def guide_toc_back_link_html(edition: str) -> str:
+    """Link from a chapter/place back to the table of contents."""
+    title = guide_toc_title(edition)
+    return (
+        '<p class="toc-back"><a href="#{anchor}" '
+        'aria-label="{title}">{label}</a></p>'
+    ).format(
+        anchor=GUIDE_TOC_ID,
+        title=escape(title),
+        label=escape(guide_toc_back_label(edition)),
+    )
 
 
 def category_chapter_anchor(category: str) -> str:
@@ -72,11 +119,15 @@ def guide_toc_html(entries: Sequence[GuideTocEntry], edition: str) -> str:
         )
     title = guide_toc_title(edition)
     return (
-        '<nav class="guide-toc" aria-label="{}">'
-        "<h2>{}</h2>"
-        "<ol>{}</ol>"
+        '<nav class="guide-toc" id="{toc_id}" aria-label="{title}">'
+        "<h2>{title}</h2>"
+        "<ol>{items}</ol>"
         "</nav>"
-    ).format(escape(title), escape(title), "".join(items))
+    ).format(
+        toc_id=GUIDE_TOC_ID,
+        title=escape(title),
+        items="".join(items),
+    )
 
 
 def _historical_toc_entry(
@@ -169,17 +220,18 @@ def toc_entries_for_jerusalem_guide(
     *,
     city_slug: str,
     project_root: Path | None,
-    sort_key: Callable[[Mapping[str, Any]], Any],
+    sort_key: Callable[[Mapping[str, Any]], Any] | None = None,
     has_section: Callable[[Path, Mapping[str, Any]], bool],
 ) -> list[GuideTocEntry]:
     """
     Build TOC for Jerusalem-style guides from the same place filter as HTML.
     """
+    edition_sort = sort_key if sort_key is not None else place_sort_key(edition)
     pdf_places = places_for_pdf(
         root,
         places,
         city_slug=city_slug,
-        sort_key=sort_key,
+        sort_key=edition_sort,
     )
     section_places = [p for p in pdf_places if has_section(root, p)]
     entries: list[GuideTocEntry] = []

@@ -13,7 +13,7 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
 .otium-logo { font-family: 'Marcellus', serif; font-size: 2.15rem;
   font-weight: 600; letter-spacing: 0.18em; margin-bottom: 0.85rem; }
 .otiump { margin: 0.42rem 0; line-height: 1.42; text-align: justify;
-  max-width: 38rem; font-size: 0.95rem; }
+  font-size: 0.95rem; }
 .guide-title { page-break-after: auto; margin-bottom: 0.55rem;
   page-break-inside: avoid; }
 .historical-reference { margin: 0.75rem 0 1.15rem;
@@ -63,22 +63,103 @@ ol.trip-stops a:hover { text-decoration: underline; }
 .heraldry-univ-caption { font-size: 0.52rem; line-height: 1.18;
   margin: 0.12rem 0 0; padding: 0 0.06rem; color: #252525;
   text-align: center; font-weight: 500; }
-.heraldry-motto { text-align: center; max-width: 18rem; margin: 0.18rem auto;
+.heraldry-motto { text-align: center; margin: 0.18rem auto;
   width: 100%; }
 .motto-line { font-family: 'Marcellus', serif; font-size: 1rem;
   margin: 0; color: #333; line-height: 1.35; }
 .guide-title h1.guide-title-main { font-family: 'Marcellus', serif;
   font-size: 2.35rem; margin-bottom: 0.5rem; font-weight: 600; }
 .lead { color: #444; font-size: 1.05rem; }
-.guide-toc { margin: 0.85rem 0 1.15rem; page-break-inside: avoid; }
-.guide-toc h2 { font-family: 'Marcellus', serif; font-size: 1.28rem;
-  font-weight: 600; margin: 0.4rem 0 0.55rem; }
+
+.guide-toc { page-break-before: always; break-before: page;
+  page-break-after: always; break-after: page;
+  margin: 0; padding: 0.2rem 0 0.45rem; page-break-inside: auto; }
+.guide-toc h2 { font-family: 'Marcellus', serif;
+  font-size: 1.28rem; font-weight: 600; margin: 0.4rem 0 0.55rem; }
 .guide-toc ol { margin: 0.35rem 0 0.65rem 1.25rem; padding: 0;
   columns: 2; column-gap: 1.5rem; }
 .guide-toc li { margin: 0.18rem 0; line-height: 1.35;
   font-size: 0.88rem; break-inside: avoid; }
-.guide-toc a { color: #1a5276; text-decoration: none; }
+.guide-toc a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.guide-toc a:hover { color: #0d3d56; }
 .guide-toc li.toc-item--sub { font-size: 0.82rem; margin-left: 0.35rem; }
+.toc-back { font-size: 0.78rem; margin: 0 0 0.35rem; text-align: right; }
+.toc-back a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.toc-back a:hover { color: #0d3d56; }
+.place, .historical-reference, .guide-primer, .guide-trip-plans {
+  scroll-margin-top: 1.25rem; }
+.historical-reference h2, .guide-primer h2, .guide-trip-plans h2,
+.chapter-head h2, .place-lead h3 { position: relative; }
+.guide-toc + .place, .guide-toc + .chapter-head {
+  page-break-before: avoid; break-before: avoid-page; }
+.place-lead { page-break-inside: avoid; break-inside: avoid-page;
+  page-break-after: auto; }
+.place-lead > h3 { page-break-after: avoid; break-after: avoid-page; }
+.place-lead > .place-meta { page-break-after: avoid; break-after: avoid-page; }
+
+.place-fig { page-break-inside: avoid; break-inside: avoid-page;
+  margin: 0.5rem 0 1rem; }
+.place-fig img {
+  page-break-inside: avoid; break-inside: avoid-page;
+  max-height: 48vh; width: auto; max-width: 100%;
+  object-fit: contain; margin-left: auto; margin-right: auto; }
+.place-fig--hi-res img { max-height: 52vh; }
+.place-fig--lo-res img { max-height: 30vh; }
+.place-pdf-fig-row {
+  display: flex; flex-direction: row; flex-wrap: wrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.45rem 0.55rem; margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row .place-fig {
+  flex: 1 1 30%; margin: 0; min-width: 26%; max-width: 100%; }
+.place-pdf-fig-row .place-fig img {
+  width: auto; max-width: 100%; height: auto; max-height: 44vh;
+  object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--pair {
+  flex-wrap: nowrap; justify-content: space-between;
+  align-items: flex-end; gap: 0.5rem 0.65rem; }
+.place-pdf-fig-row--pair .place-fig {
+  flex: 1 1 47%; min-width: 0; max-width: 50%;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--pair .place-fig img {
+  max-height: 44vh; object-fit: contain; }
+.place-pdf-fig-row--pair .place-fig--hi-res img { max-height: 52vh; }
+.place-pdf-fig-row--pair .place-fig--lo-res img { max-height: 26vh; }
+.place-pdf-fig-row--pair .place-fig--row-sized img,
+.place-pdf-fig-row--triple .place-fig--row-sized img,
+.place-pdf-fig-row--many .place-fig--row-sized img {
+  width: auto; max-width: 100%; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row .place-fig--row-sized.place-fig--hi-res img,
+.place-pdf-fig-row .place-fig--row-sized.place-fig--lo-res img {
+  max-height: unset; }
+.place-pdf-fig-rows-stack {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple {
+  display: flex; flex-direction: row; flex-wrap: nowrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.4rem 0.48rem; margin: 0;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--triple .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--triple .place-fig--hi-res img { max-height: 42vh; }
+.place-pdf-fig-row--triple .place-fig--lo-res img { max-height: 18vh; }
+.place-pdf-fig-row--many {
+  flex-wrap: nowrap; justify-content: center; align-items: flex-end;
+  gap: 0.35rem 0.42rem; }
+.place-pdf-fig-row--many .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--many .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+
+
 .place { margin-bottom: 2.2rem; page-break-inside: auto; }
 h3 { font-family: 'Marcellus', serif; font-size: 1.22rem; margin: 1.2rem 0 0.35rem;
   font-weight: 600; }
@@ -90,7 +171,6 @@ h4 { font-family: 'Marcellus', serif; font-size: 0.95rem; text-transform: upperc
   color: #555; font-size: 0.95rem; margin: 0 0 0.5rem; font-style: italic; }
 .place-meta { font-size: 0.92rem; color: #353535; margin: 0 0 0.75rem;
   line-height: 1.4; }
-.place-fig { margin: 0.5rem 0 1rem; }
 img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
 .prose, .place-desc p { margin: 0.45rem 0; line-height: 1.5;
   text-align: justify; }
@@ -110,7 +190,9 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <figure class="heraldry-fig heraldry-coat-book" title="City emblem"><img src="../images/guide_coat_of_arms.svg" alt="City emblem"/></figure>
 <figure class="heraldry-fig heraldry-coat-book" title="Flag"><img src="../images/guide_flag.svg" alt="Flag"/></figure>
 </div></div><h1 class="guide-title-main">Madrid</h1><p class="lead">Guide. Places in this edition: 33.</p></header>
+<nav class="guide-toc" id="guide-toc" aria-label="Contents"><h2>Contents</h2><ol><li class="toc-item"><a href="#guide-trips">Trip ideas</a></li><li class="toc-item"><a href="#madrid_1_de_mayo">1º de Mayo</a></li><li class="toc-item"><a href="#madrid_almudena_cathedral">Almudena Cathedral</a></li><li class="toc-item"><a href="#madrid_caixaforum_madrid">CaixaForum Madrid</a></li><li class="toc-item"><a href="#madrid_museo_cerralbo">Cerralbo Museum</a></li><li class="toc-item"><a href="#madrid_plaza_de_cibeles_fountain">Cibeles Fountain</a></li><li class="toc-item"><a href="#madrid_cybeles_palace_madrid">Cybele Palace (City Hall)</a></li><li class="toc-item"><a href="#madrid_edificio_metropolis">Edificio Metrópolis</a></li><li class="toc-item"><a href="#madrid_fountain_neptune_madrid">Fountain of Neptune</a></li><li class="toc-item"><a href="#madrid_fountain_cibeles">Fuente de Cibeles</a></li><li class="toc-item"><a href="#madrid_gran_via_madrid">Gran Vía</a></li><li class="toc-item"><a href="#madrid_ermita_san_antonio_florida">Hermitage of San Antonio de la Florida</a></li><li class="toc-item"><a href="#madrid_las_ventas">Las Ventas Bullring</a></li><li class="toc-item"><a href="#madrid_atocha">Madrid Atocha railway station</a></li><li class="toc-item"><a href="#madrid_mercado_san_miguel">Mercado de San Miguel</a></li><li class="toc-item"><a href="#madrid_museo_del_prado">Museo del Prado</a></li><li class="toc-item"><a href="#madrid_plaza_colon_madrid">Plaza de Colón</a></li><li class="toc-item"><a href="#madrid_plaza_de_espana_madrid">Plaza de España</a></li><li class="toc-item"><a href="#madrid_plaza_de_oriente">Plaza de Oriente</a></li><li class="toc-item"><a href="#madrid_plaza_callao">Plaza del Callao</a></li><li class="toc-item"><a href="#madrid_plaza_mayor_madrid">Plaza Mayor</a></li><li class="toc-item"><a href="#madrid_puerta_de_alcala">Puerta de Alcalá</a></li><li class="toc-item"><a href="#madrid_puerta_del_sol">Puerta del Sol</a></li><li class="toc-item"><a href="#madrid_museo_reina_sofia">Reina Sofía Museum</a></li><li class="toc-item"><a href="#madrid_retiro_crystal_palace">Retiro Park</a></li><li class="toc-item"><a href="#madrid_basilica_san_francisco_grande">Royal Basilica of San Francisco el Grande</a></li><li class="toc-item"><a href="#madrid_royal_botanical_garden_madrid">Royal Botanical Garden of Madrid</a></li><li class="toc-item"><a href="#madrid_royal_palace_madrid">Royal Palace of Madrid</a></li><li class="toc-item"><a href="#madrid_santiago_bernabeu">Santiago Bernabéu Stadium</a></li><li class="toc-item"><a href="#madrid_sorolla_museum">Sorolla Museum</a></li><li class="toc-item"><a href="#madrid_zarzuela_theatre">Teatro de la Zarzuela</a></li><li class="toc-item"><a href="#madrid_royal_theatre_madrid">Teatro Real</a></li><li class="toc-item"><a href="#madrid_templo_de_debod">Temple of Debod</a></li><li class="toc-item"><a href="#madrid_museo_thyssen">Thyssen-Bornemisza Museum</a></li></ol></nav>
 <section class="guide-trip-plans" id="guide-trips" aria-label="Trip ideas"><h2>Trip ideas</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 <article class="trip-plan" id="trip-1d"><h3>One day</h3>
 <p class="prose">A compact loop linking the strongest cards in this guide, ordered to minimise backtracking on foot.</p>
 <ol class="trip-stops"><li><a href="#madrid_caixaforum_madrid">CaixaForum Madrid</a> (~75min)</li>
@@ -140,267 +222,464 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <li><a href="#madrid_mercado_san_miguel">Mercado de San Miguel</a> (~75min)</li>
 <li><a href="#madrid_plaza_de_oriente">Plaza de Oriente</a> (~75min)</li>
 <li><a href="#madrid_almudena_cathedral">Almudena Cathedral</a> (~75min)</li></ol></article></section>
-<nav class="guide-toc" aria-label="Contents"><h2>Contents</h2><ol><li class="toc-item"><a href="#guide-trips">Trip ideas</a></li><li class="toc-item"><a href="#madrid_pdfband_3_d3fbf0f1">1º de Mayo</a></li><li class="toc-item"><a href="#madrid_almudena_cathedral">Almudena Cathedral</a></li><li class="toc-item"><a href="#madrid_caixaforum_madrid">CaixaForum Madrid</a></li><li class="toc-item"><a href="#madrid_museo_cerralbo">Cerralbo Museum</a></li><li class="toc-item"><a href="#madrid_plaza_de_cibeles_fountain">Cibeles Fountain</a></li><li class="toc-item"><a href="#madrid_retiro_crystal_palace">Retiro Park</a></li><li class="toc-item"><a href="#madrid_cybeles_palace_madrid">Cybele Palace (City Hall)</a></li><li class="toc-item"><a href="#madrid_edificio_metropolis">Edificio Metrópolis</a></li><li class="toc-item"><a href="#madrid_fountain_neptune_madrid">Fountain of Neptune</a></li><li class="toc-item"><a href="#madrid_fountain_cibeles">Fuente de Cibeles</a></li><li class="toc-item"><a href="#madrid_gran_via_madrid">Gran Vía</a></li><li class="toc-item"><a href="#madrid_ermita_san_antonio_florida">Hermitage of San Antonio de la Florida</a></li><li class="toc-item"><a href="#madrid_las_ventas">Las Ventas Bullring</a></li><li class="toc-item"><a href="#madrid_atocha">Madrid Atocha railway station</a></li><li class="toc-item"><a href="#madrid_mercado_san_miguel">Mercado de San Miguel</a></li><li class="toc-item"><a href="#madrid_museo_del_prado">Museo del Prado</a></li><li class="toc-item"><a href="#madrid_plaza_colon_madrid">Plaza de Colón</a></li><li class="toc-item"><a href="#madrid_plaza_de_espana_madrid">Plaza de España</a></li><li class="toc-item"><a href="#madrid_plaza_de_oriente">Plaza de Oriente</a></li><li class="toc-item"><a href="#madrid_plaza_callao">Plaza del Callao</a></li><li class="toc-item"><a href="#madrid_plaza_mayor_madrid">Plaza Mayor</a></li><li class="toc-item"><a href="#madrid_puerta_de_alcala">Puerta de Alcalá</a></li><li class="toc-item"><a href="#madrid_puerta_del_sol">Puerta del Sol</a></li><li class="toc-item"><a href="#madrid_museo_reina_sofia">Reina Sofía Museum</a></li><li class="toc-item"><a href="#madrid_basilica_san_francisco_grande">Royal Basilica of San Francisco el Grande</a></li><li class="toc-item"><a href="#madrid_royal_botanical_garden_madrid">Royal Botanical Garden of Madrid</a></li><li class="toc-item"><a href="#madrid_royal_palace_madrid">Royal Palace of Madrid</a></li><li class="toc-item"><a href="#madrid_santiago_bernabeu">Santiago Bernabéu Stadium</a></li><li class="toc-item"><a href="#madrid_sorolla_museum">Sorolla Museum</a></li><li class="toc-item"><a href="#madrid_zarzuela_theatre">Teatro de la Zarzuela</a></li><li class="toc-item"><a href="#madrid_royal_theatre_madrid">Teatro Real</a></li><li class="toc-item"><a href="#madrid_templo_de_debod">Temple of Debod</a></li><li class="toc-item"><a href="#madrid_museo_thyssen">Thyssen-Bornemisza Museum</a></li></ol></nav>
-<section class="place" id="madrid_pdfband_3_d3fbf0f1">
+<section class="place" id="madrid_1_de_mayo">
+<div class="place-lead">
 <h3>1º de Mayo</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: See official visitor information.</p>
-<figure class="place-fig"><img src="../images/madrid_pdfband_3_d3fbf0f1.jpg" alt="1º de Mayo"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/madrid_1_de_mayo.jpg" alt="1º de Mayo" width="1092" height="1600" style="height: 309px; max-height: 309px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/madrid_1_de_mayo_b.jpg" alt="1º de Mayo — view 2" width="330" height="221" style="height: 309px; max-height: 309px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">1ro. de Mayo — Wikimedia disambiguation page.</p></div>
 </section>
 <section class="place" id="madrid_almudena_cathedral">
+<div class="place-lead">
 <h3>Almudena Cathedral</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Facing Royal Palace | Style: Historicist cathedral | Period: 1874–1993</p>
-<figure class="place-fig"><img src="../images/madrid_almudena_cathedral.jpg" alt="Almudena Cathedral"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/madrid_almudena_cathedral.jpg" alt="Almudena Cathedral" width="1062" height="1600" style="height: 154px; max-height: 154px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/madrid_almudena_cathedral_b.jpg" alt="Almudena Cathedral — view 2" width="330" height="110" style="height: 154px; max-height: 154px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Perched on the Cuesta de San Vicente, Almudena Cathedral is Madrid&#x27;s most prominent religious structure and a blend of Gothic Revival and Neo-Romanesque styles. Its construction began in 1874 and was completed in 1993. Modern neo-Romanesque and neo-Gothic cathedral consecrated in 1993 after a long hiatus. Construction commenced in 1874 and concluded in 1993 after extensive delays. The cathedral houses the royal tombs of King Alfonso XII and Queen María Cristina. It features a central dome and four smaller domes symbolizing the four evangelists. Its facade incorporates both Gothic and Romanesque architectural motifs. Almudena Cathedral has been designated a National Monument since 1969. Wedding of crown prince raised its profile in 2004. Museum section explains architectural phases.</p>
 <p class="prose">Built over several decades, Almudena Cathedral was initially planned as a neo-Gothic cathedral but evolved into a mix of Gothic Revival and Romanesque elements. The project faced numerous delays due to political instability and financial constraints, culminating in its official consecration in 1993. Plans dragged from the 16th century through civil wars and Franco era. Almudena Cathedral stands out for its soaring spires and elaborate interior, showcasing intricate stained glass windows and impressive sculptures. Crypt tours and colourful interior ceilings surprise first-time visitors.</p></div>
 </section>
 <section class="place" id="madrid_caixaforum_madrid">
+<div class="place-lead">
 <h3>CaixaForum Madrid</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Modernist, blending traditional Spanish architectural elements with contemporary design | Period: 2006</p>
-<figure class="place-fig"><img src="../images/madrid_caixaforum_madrid.jpg" alt="CaixaForum Madrid"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/madrid_caixaforum_madrid.jpg" alt="CaixaForum Madrid" width="1280" height="960" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/madrid_caixaforum_madrid_b.jpg" alt="CaixaForum Madrid — view 2" width="330" height="494" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">CaixaForum Madrid is a modern cultural institution nestled within the heart of Spain&#x27;s capital city. Established in 2006, it serves as both a museum and exhibition space, showcasing contemporary art, photography, and design. It houses temporary exhibitions focusing on various artistic disciplines including painting, sculpture, photography, and multimedia. The building features a large atrium filled with natural light, enhancing the viewing experience for visitors. CaixaForum also organizes educational programs, workshops, and lectures aimed at promoting cultural awareness and engagement among locals and tourists alike. Adjacent to the Royal Palace, it offers panoramic views of Madrid’s historic center. Its name derives from the institution&#x27;s sponsor, CaixaBank.</p>
 <p class="prose">Opened in 2006, CaixaForum Madrid was designed by renowned architect Rafael Moneo. It occupies a prominent location in the city&#x27;s cultural district, adjacent to the Royal Palace and Puerta del Sol. The building itself blends traditional Spanish architecture with contemporary elements, reflecting its dual purpose as both a historical landmark and a cutting-edge cultural hub. Visitors come to experience groundbreaking exhibitions, interactive installations, and thought-provoking exhibits that explore global themes and local heritage.</p></div>
 </section>
 <section class="place" id="madrid_museo_cerralbo">
+<div class="place-lead">
 <h3>Cerralbo Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Neoclassical | Period: 1870s (residence); 1946 (museum)</p>
-<figure class="place-fig"><img src="../images/madrid_museo_cerralbo.jpg" alt="Cerralbo Museum"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/madrid_museo_cerralbo.jpg" alt="Cerralbo Museum" width="1280" height="883" style="height: 318px; max-height: 318px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/madrid_museo_cerralbo_b.jpg" alt="Cerralbo Museum — view 2" width="330" height="246" style="height: 318px; max-height: 318px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Situated on the hill of Cerralbo, this museum showcases a collection of Spanish art and antiquities spanning centuries, offering visitors a glimpse into Spain&#x27;s rich cultural heritage. It houses one of the most extensive collections of Spanish sculptures and paintings. The museum also features significant archaeological artifacts including Roman and Moorish relics. Notable works include pieces by artists such as Velázquez, Murillo, and Zurbarán. Its architecture reflects the neoclassical style with elegant interiors and grand courtyards. Regular temporary exhibitions complement its permanent collection.</p>
 <p class="prose">The Cerralbo Museum was founded in 1946 by King Alfonso XIII as a private residence for his family. After his death, it became a public museum dedicated to exhibiting Spanish artworks and archaeological finds dating back to prehistoric times through modern eras. Visitors come here to explore the evolution of Spanish culture and artistic expression over time.</p></div>
 </section>
 <section class="place" id="madrid_plaza_de_cibeles_fountain">
+<div class="place-lead">
 <h3>Cibeles Fountain</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Neoclassical | Period: 1777–1783</p>
-<figure class="place-fig"><img src="../images/madrid_plaza_de_cibeles_fountain.jpg" alt="Cibeles Fountain"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/madrid_plaza_de_cibeles_fountain.jpg" alt="Cibeles Fountain" width="1280" height="960" style="height: 247px; max-height: 247px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/madrid_plaza_de_cibeles_fountain_b.jpg" alt="Cibeles Fountain — view 2" width="330" height="177" style="height: 247px; max-height: 247px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">A majestic symbol of Madrid&#x27;s grandiosity and sophistication, the Cibeles Fountain stands as one of Spain&#x27;s most iconic landmarks. Designed by Italian architect Giacomo Ruiz de Lega, it showcases classic Neoclassical architecture. The four horses on top represent the winds—north, south, east, and west. It lies at the intersection of two major boulevards: Paseo del Prado and Calle Alcalá. Restored several times over the years, its last significant restoration took place in 1996. Today, it&#x27;s surrounded by bustling cafes and shopping streets, making it a popular meeting point.</p>
 <p class="prose">Constructed between 1777 and 1783 during the reign of King Charles III, the fountain was originally named after Queen Maria Barbara de Braganza, who was known by her nickname &#x27;La Reyna Cibeles&#x27;. It later became a symbol of civic pride and elegance, often depicted in paintings and postcards depicting Madrid’s urban life. Visiting the Cibeles Fountain is essential for understanding the cultural heritage and architectural splendor of Madrid.</p></div>
 </section>
-<section class="place" id="madrid_retiro_crystal_palace">
-<h3>Retiro Park</h3>
-
-<p class="place-meta">Address: Parque del Retiro | Style: 19th-century glasshouse | Period: 1887</p>
-<figure class="place-fig"><img src="../images/madrid_retiro_crystal_palace.jpg" alt="Retiro Park"/></figure>
-<div class="place-desc"><p class="prose">In the heart of Madrid&#x27;s Retiro Park stands a marvelous structure known as Crystal Palace, originally constructed for the International Exposition of 1887. This glass and iron edifice was designed by renowned architect Ricardo Buñuel to showcase modern technology and engineering prowess. Iron-and-glass pavilion beside a small lake—Victorian engineering transplanted to Madrid gardening. Constructed using innovative glass and iron techniques typical of Victorian architecture. Hosted various exhibitions and cultural events throughout its history. Renovated several times since its construction to maintain its structural integrity. Survived numerous challenges including wars and natural disasters to remain standing today. Serves as a symbol of technological advancement and artistic expression. Palacio de Velázquez sits deeper in the park for more exhibits. Weekend drum circles gather near the main fountain axis.</p>
-<p class="prose">Built in 1887, Crystal Palace served as the main exhibition hall during the International Exposition held in Madrid. It showcased cutting-edge technologies, artworks, and innovations that captivated visitors from around the world. The palace was later relocated within the park after its initial use, becoming a permanent fixture. Built for the 1887 Philippines Exposition; now hosts temporary art installs. Today, Crystal Palace is one of the most iconic landmarks in Retiro Park, offering visitors a glimpse into Spain’s rich industrial heritage while providing a serene setting for relaxation and reflection. Rowboats and shade trees make the basin a summer refuge.</p></div>
-</section>
 <section class="place" id="madrid_cybeles_palace_madrid">
+<div class="place-lead">
 <h3>Cybele Palace (City Hall)</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Neoclassical | Period: 1905–1910</p>
-<figure class="place-fig"><img src="../images/madrid_cybeles_palace_madrid.jpg" alt="Cybele Palace (City Hall)"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/madrid_cybeles_palace_madrid.jpg" alt="Cybele Palace (City Hall)" width="1280" height="639" style="height: 230px; max-height: 230px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/madrid_cybeles_palace_madrid_b.jpg" alt="Cybele Palace (City Hall) — view 2" width="330" height="220" style="height: 230px; max-height: 230px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Cybele Palace, officially known as the Ayuntamiento de Madrid, is a grand neoclassical building that dominates the Plaza de Cibeles in central Madrid. Completed in 1910, it was designed by architect Manuel Muñoz Montoya and features impressive columns, statues of Roman goddesses, and elegant facades. Completed in 1910, it is one of the newer landmarks in Madrid’s historic center. Designed by Manuel Muñoz Montoya, who also worked on the nearby Puerta del Sol. It is named after the goddess Cybele, whose statue stands prominently on the plaza. The interior houses various artworks and exhibits related to local history and culture. Its facade includes sculptures depicting scenes from Spanish mythology.</p>
 <p class="prose">Built between 1905 and 1910, the palace replaced an earlier town hall on the same site. Designed to reflect Madrid&#x27;s growing importance as a capital city, its construction marked a significant moment in the city&#x27;s modernization. The building houses the municipal government offices and has become one of Madrid’s most iconic landmarks. Visiting the Cybele Palace allows visitors to witness the harmonious blend of classical architecture and urban planning, offering a glimpse into the historical evolution of Madrid.</p></div>
 </section>
 <section class="place" id="madrid_edificio_metropolis">
+<div class="place-lead">
 <h3>Edificio Metrópolis</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Gran Vía / Alcalá junction | Style: French-inspired Beaux-Arts office tower | Period: 1948–1956</p>
-<figure class="place-fig"><img src="../images/madrid_edificio_metropolis.jpg" alt="Edificio Metrópolis"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/madrid_edificio_metropolis.jpg" alt="Edificio Metrópolis" width="1279" height="872" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/madrid_edificio_metropolis_b.jpg" alt="Edificio Metrópolis — view 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Located on the bustling Paseo de la Castellana, Edificio Metrópolis is a striking example of modernist architecture that dominates Madrid&#x27;s skyline. Completed in 1956, it stands as one of Spain’s most iconic post-war buildings. French Beaux-Arts wedding-cake dome topped with winged Victory—bank HQ turned skyline emoji. Completed in 1956 during Spain&#x27;s economic recovery after World War II. Designed by Manuel Muñoz Monasterio, who also worked on other notable projects like the Hotel Ritz Madrid. Features a distinctive facade with large windows and geometric patterns inspired by Art Deco motifs. Serves as a symbol of Madrid&#x27;s transformation into a modern metropolis following the war. Offers visitors access to rooftop terraces providing breathtaking vistas over the city. Pedestrian refuges help cross the star intersection. Compare symmetrical framing from Calle de Alcalá walks.</p>
 <p class="prose">Constructed between 1948 and 1956, Edificio Metrópolis was designed by architect Manuel Muñoz Monasterio. It represents a fusion of Art Deco and International Style elements, showcasing clean lines and minimalist aesthetics typical of mid-century modernism. 1911 completion by French and Spanish architects for La Unión y el Fénix. A must-visit for architecture enthusiasts, Edificio Metrópolis exemplifies the bold design trends of its era while offering panoramic views of Madrid. The money shot for Gran Vía postcards at blue hour.</p></div>
 </section>
 <section class="place" id="madrid_fountain_neptune_madrid">
+<div class="place-lead">
 <h3>Fountain of Neptune</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Plaza de Cánovas del Castillo | Style: Neoclassical fountain | Period: 1755–1762</p>
-<figure class="place-fig"><img src="../images/madrid_fountain_neptune_madrid.jpg" alt="Fountain of Neptune"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/madrid_fountain_neptune_madrid.jpg" alt="Fountain of Neptune" width="1280" height="968" style="height: 309px; max-height: 309px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/madrid_fountain_neptune_madrid_b.jpg" alt="Fountain of Neptune — view 2" width="330" height="221" style="height: 309px; max-height: 309px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Fountain of Neptune is a majestic Baroque fountain located in the heart of Madrid&#x27;s Plaza de Cibeles. It was constructed during the reign of King Philip V and completed in 1762. Neptune in marine chariot—Atlético Madrid victory splash zone counterpart to Cibeles. It features intricate sculptural details depicting marine life and mythological figures. The fountain was relocated twice before finding its permanent home in Plaza de Cibeles. Neptune’s statue stands at a height of nearly six meters. Plaza de Cibeles, where it resides, is also known for its elegant neoclassical architecture. The fountain remains a focal point of Madrid’s cultural life. Traffic never stops—tripods need care on kerbs. Fountain lighting highlights bronze greens after dusk.</p>
 <p class="prose">Built between 1755 and 1762 by Italian sculptor Pietro Tenerani, the fountain honors Neptune, god of the sea, with a central statue standing atop a shell-shaped pedestal surrounded by four dolphins. The fountain originally stood in the Puerta del Sol but was moved to its current location in 1859. 1786 fountain by Ventura Rodríguez; Paseo del Prado fountain quartet member. This iconic landmark is one of Madrid’s most recognizable symbols and serves as a popular meeting point for locals and tourists alike. Roundabout drama between Prado museum and Thyssen walks.</p></div>
 </section>
 <section class="place" id="madrid_fountain_cibeles">
+<div class="place-lead">
 <h3>Fuente de Cibeles</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Plaza de Cibeles | Style: Neoclassical monumental fountain | Period: 1787</p>
-<figure class="place-fig"><img src="../images/madrid_fountain_cibeles.jpg" alt="Fuente de Cibeles"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/madrid_fountain_cibeles.jpg" alt="Fuente de Cibeles" width="1280" height="853" style="height: 247px; max-height: 247px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/madrid_fountain_cibeles_b.jpg" alt="Fuente de Cibeles — view 2" width="330" height="177" style="height: 247px; max-height: 247px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">A majestic fountain at the heart of Madrid&#x27;s Plaza de la Independencia, Fuente de Cibeles is a symbol of the city&#x27;s classical charm and architectural heritage. Chariot goddess and lions framing the Cybele Palace—Real Madrid victory celebrations soak it in foam. Constructed in 1787 as part of the Royal Palace complex. Designed by Luis López de Herrera in collaboration with sculptor Piotr de Mena. The fountain is made from marble and granite, showcasing intricate detailing and symmetry. It stands prominently on Plaza de la Independencia, adjacent to the Palacio Real. Celebrated annually during the Fiesta de las Flores, when it is decorated with flowers. Bank of Spain neighbours the fountain&#x27;s eastern flank. Night floodlighting dramatises marble surfaces.</p>
 <p class="prose">Built in 1787 during the reign of King Carlos III, Fuente de Cibeles was originally designed by architect Luis López de Herrera to honor the ancient Greek goddess Cybele. The monumental structure features four lions pulling a chariot, representing strength and power, while the central statue depicts the goddess herself. Over time, it has become one of Madrid’s most iconic landmarks, attracting visitors for its historical significance and breathtaking views. 1782 fountain by Ventura Rodríguez; civic iconography merged with football lore. Visit Fuente de Cibeles to experience the elegant fusion of classicism and royal grandeur that defines Madrid&#x27;s urban landscape. Traffic rotary photography needs patience and wide lens.</p></div>
 </section>
 <section class="place" id="madrid_gran_via_madrid">
+<div class="place-lead">
 <h3>Gran Vía</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Centro–Argüelles stretch | Style: Eclectic early modern streetscape | Period: 1910–1929</p>
-<figure class="place-fig"><img src="../images/madrid_gran_via_madrid.jpg" alt="Gran Vía"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/madrid_gran_via_madrid.jpg" alt="Gran Vía" width="1280" height="852" style="height: 228px; max-height: 228px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/madrid_gran_via_madrid_b.jpg" alt="Gran Vía — view 2" width="330" height="163" style="height: 228px; max-height: 228px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Gran Vía is Madrid&#x27;s iconic avenue, famed for its grand architecture and bustling pedestrian zone. Known as the &#x27;Broadway of Spain,&#x27; it has been a cultural hub since its inception. Theatre façades, rooftop bars, and belle-époque neon stitched into a busy canyon. It stretches approximately 1.8 kilometers through central Madrid. The street is lined with luxury shops, cinemas, and cafés. Gran Vía hosts major cultural events and festivals throughout the year. Its wide sidewalks are popular among pedestrians and tourists. In the early 20th century, Gran Vía became famous for its neon signs and vibrant nightlife. Look up for art-deco caps Metropolis and Telefónica. Film première crowds still treat Capitol cinema as ritual.</p>
 <p class="prose">Constructed between 1910 and 1929, Gran Vía was designed to be Madrid’s main commercial and entertainment district. It showcases Art Nouveau, Art Deco, and neoclassical styles, with notable landmarks such as the Gran Teatro de las Cortes and the Cine Rex. Early 20th-century slash through historic fabric to relieve congestion. A must-visit for anyone exploring Madrid, Gran Vía offers a blend of historical charm and modern vibrancy. Nightlife density from plaza de España toward Callao.</p></div>
 </section>
 <section class="place" id="madrid_ermita_san_antonio_florida">
+<div class="place-lead">
 <h3>Hermitage of San Antonio de la Florida</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Gothic and Renaissance | Period: 1527</p>
-<figure class="place-fig"><img src="../images/madrid_ermita_san_antonio_florida.jpg" alt="Hermitage of San Antonio de la Florida"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/madrid_ermita_san_antonio_florida.jpg" alt="Hermitage of San Antonio de la Florida" width="1280" height="879" style="height: 317px; max-height: 317px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/madrid_ermita_san_antonio_florida_b.jpg" alt="Hermitage of San Antonio de la Florida — view 2" width="330" height="247" style="height: 317px; max-height: 317px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Hermitage of San Antonio de la Florida is a serene and historic religious site nestled within Madrid&#x27;s vibrant urban landscape. Built during the early 16th century, it was originally constructed as a Franciscan convent dedicated to Saint Anthony of Padua. It was initially intended as a female monastery but later became a male hermitage. Its construction began under the patronage of Queen Joanna I. The interior features elaborate decorations and frescoes reflecting its historical evolution. Today, it operates as a museum showcasing religious artifacts and artworks. It remains an active church where services are held regularly.</p>
 <p class="prose">Founded in 1527 by Queen Joanna I of Castile, the hermitage served as both a spiritual retreat for nuns and a center for devotional practices. Over time, its architecture evolved under various influences, blending Gothic and Renaissance styles. Today, visitors can admire its intricate stonework and artistic embellishments that reflect centuries of architectural refinement. Visiting the Hermitage offers a chance to immerse oneself in Madrid’s rich historical heritage while appreciating its unique blend of religious significance and architectural beauty.</p></div>
 </section>
 <section class="place" id="madrid_las_ventas">
+<div class="place-lead">
 <h3>Las Ventas Bullring</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Salamanca district | Style: Neo-Mudéjar bullring | Period: 1882–1910</p>
-<figure class="place-fig"><img src="../images/madrid_las_ventas.jpg" alt="Las Ventas Bullring"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/madrid_las_ventas.jpg" alt="Las Ventas Bullring" width="1280" height="750" style="height: 270px; max-height: 270px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/madrid_las_ventas_b.jpg" alt="Las Ventas Bullring — view 2" width="330" height="233" style="height: 270px; max-height: 270px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Located in the heart of Madrid, Las Ventas Bullring is one of Spain&#x27;s most iconic venues and a testament to the city&#x27;s rich cultural heritage. Mudéjar-trimmed bullring—love or loathe corridas, the civic symbolism is undeniable. Constructed during the Belle Époque era, Las Ventas features a neo-Moorish architectural style that blends Spanish and Mediterranean influences. The arena can accommodate up to 23,000 spectators, making it one of the largest bullrings in Europe. It was originally designed by architect Aníbal Martínez and engineer Manuel Delgado, who aimed to create a space that would reflect the elegance and grandeur of traditional Spanish architecture. Las Ventas has undergone several renovations over the decades but retains its original charm and authenticity. Today, the bullring also hosts various cultural events such as concerts, festivals, and exhibitions. Ethical visitors may prefer architecture tours to corridas. Metro connects faster than traffic on festival days.</p>
 <p class="prose">Built between 1882 and 1910, Las Ventas Bullring has been the stage for countless bullfights since its opening. It played a significant role in shaping Madrid&#x27;s identity as a vibrant hub for bullfighting culture, attracting both locals and tourists alike. Over the years, it has hosted some of the most famous matadors and bulls, making it a symbol of tradition and passion. 1929–1934 construction; still hosts major San Isidro season corridas. Visiting Las Ventas offers an unforgettable experience, allowing visitors to witness the thrilling spectacle of bullfighting while immersing themselves in the historical significance of this legendary venue. Guided visits explain sand geometry and tiers when no fight runs.</p></div>
 </section>
 <section class="place" id="madrid_atocha">
+<div class="place-lead">
 <h3>Madrid Atocha railway station</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Arganzuela | Style: Iron train shed + modern atrium | Period: 1892</p>
-<figure class="place-fig"><img src="../images/madrid_atocha.jpg" alt="Madrid Atocha railway station"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/madrid_atocha.jpg" alt="Madrid Atocha railway station" width="1200" height="1600" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/madrid_atocha_b.jpg" alt="Madrid Atocha railway station — view 2" width="330" height="247" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">At the heart of Madrid&#x27;s bustling transportation network lies the iconic Atocha Railway Station, a testament to both modern efficiency and historical grandeur. Tropical garden under wrought-iron vaults—high-speed hub linking Andalusia and the Mediterranean. Opened in 1892 during Spain’s Golden Age of Railroads. The station features elaborate Moorish-inspired design elements and Art Nouveau detailing. It connects Madrid with major cities across Spain and Europe. Atocha handles over 40 million travelers each year. Its central location makes it easily accessible via metro line 6. Separate signage for commuter Cercanías and long-distance tracks. Souvenir shops cluster toward the newer extension.</p>
 <p class="prose">Built in 1892, Atocha was designed by architect Aníbal Castro in the Neo-Mudéjar style, blending Moorish influences with Art Nouveau elements. Originally constructed as a terminus for Spain’s railways, it has since evolved into one of Europe’s busiest hubs, handling millions of passengers annually. Its grand arches, intricate tilework, and ornate façades make it a significant architectural landmark that reflects Madrid’s rich cultural heritage. Historic terminal expanded; 1992 glass hall by Rafael Moneo inserted alongside platforms. Atocha is more than just a transit hub—it serves as a vibrant meeting point where local culture meets international travel. Sculpture garden atmosphere while waiting for AVE departures.</p></div>
 </section>
 <section class="place" id="madrid_mercado_san_miguel">
+<div class="place-lead">
 <h3>Mercado de San Miguel</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Near Plaza Mayor | Style: Early 20th-century iron market | Period: 1915</p>
-<figure class="place-fig"><img src="../images/madrid_mercado_san_miguel.jpg" alt="Mercado de San Miguel"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/madrid_mercado_san_miguel.jpg" alt="Mercado de San Miguel" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/madrid_mercado_san_miguel_b.jpg" alt="Mercado de San Miguel — view 2" width="330" height="247" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Located in the heart of Madrid&#x27;s trendy Malasaña district, Mercado de San Miguel is a vibrant food market known for its colorful stalls and artisanal products. Iron market hall turned gourmet pincho counters—tourist premiums but high sensory payoff. Opened in 1915 during Spain’s Belle Époque era. Renovated extensively in 2018 with modern amenities while retaining its traditional charm. Home to over 40 vendors offering a wide variety of culinary delights. Popular among locals and visitors seeking high-quality ingredients and artisan goods. Surrounded by lively bars and cafes perfect for enjoying meals al fresco. Standing-room etiquette prevails at peak lunch. Compare prices with traditional bars one street out.</p>
 <p class="prose">Established in 1915, the market originally served as a central hub for local produce and seafood. Over time it evolved into a bustling marketplace where chefs, gourmands, and tourists alike gather to sample tapas, chorizo, jamón ibérico, and regional specialties. 1916 structure renovated for upscale grazing in the 2000s. A must-visit destination for anyone interested in authentic Spanish cuisine and culture. Quick introduction to jamón grades and vermouth culture.</p></div>
 </section>
 <section class="place" id="madrid_museo_del_prado">
+<div class="place-lead">
 <h3>Museo del Prado</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Paseo del Prado | Style: 19th-century museum architecture | Period: 1785</p>
-<figure class="place-fig"><img src="../images/madrid_museo_del_prado.jpg" alt="Museo del Prado"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/madrid_museo_del_prado.jpg" alt="Museo del Prado" width="1280" height="828" style="height: 298px; max-height: 298px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/madrid_museo_del_prado_b.jpg" alt="Museo del Prado — view 2" width="330" height="246" style="height: 298px; max-height: 298px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Museo del Prado is one of the world’s greatest art galleries, showcasing masterpieces by Spanish and European artists spanning centuries. Located in Madrid&#x27;s historic center, it houses works by Titian, Velázquez, Bosch, and many others. Spain&#x27;s flagship picture gallery: Velázquez, Goya, Titian, and Rubens in a sober neo-classical shell. It contains over 8,600 works of art, including more than 4,800 paintings. Notable exhibits include Las Meninas by Diego Velázquez and The Garden of Earthly Delights by Hieronymus Bosch. The building itself was designed by architect Ventura Rodríguez in the Neoclassical style. Inaugurated in 1785, it became fully open to the public in 1819. Its permanent collection includes works by Rembrandt, Rubens, and Francisco de Goya. Evening openings run on select days—check the official calendar. The Jerónimos wing connects to historic cloister views.</p>
 <p class="prose">Founded in 1785 as a royal collection for King Charles III, the museum originally served as a private gallery for aristocratic visitors. It opened to the public in 1819 under Queen Isabella II, making it accessible to all art lovers. Today, its collections include some of the most iconic paintings in Western art history. Royal collection opened as public museum in 1819; extensions and reordering continued into the 21st century. Visiting the Prado offers a unique opportunity to explore Europe’s artistic heritage through its extensive collection of paintings, sculptures, and drawings. Free windows and blockbuster loans; expect timed entries at peaks.</p></div>
 </section>
 <section class="place" id="madrid_plaza_colon_madrid">
+<div class="place-lead">
 <h3>Plaza de Colón</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Art Deco | Period: Early 20th century</p>
-<figure class="place-fig"><img src="../images/madrid_plaza_colon_madrid.jpg" alt="Plaza de Colón"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/madrid_plaza_colon_madrid.jpg" alt="Plaza de Colón" width="1067" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/madrid_plaza_colon_madrid_b.jpg" alt="Plaza de Colón — view 2" width="330" height="440" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">At the heart of Madrid&#x27;s vibrant downtown lies Plaza de Colón, a majestic square known for its imposing monument to Christopher Columbus and bustling cafes. Surrounded by elegant boulevards and lined with historic buildings, it is both a cultural hub and a social gathering spot. The monument to Columbus was sculpted by Emilio Alarcón and stands 46 meters tall. Surrounding streets include Gran Vía, one of Madrid&#x27;s most famous shopping avenues. Each year, the square hosts various festivals and events, including the city&#x27;s renowned Christmas market. It serves as a focal point for political demonstrations and cultural celebrations. Nearby attractions include the Palacio de Comunicaciones and the Teatro Real.</p>
 <p class="prose">Built in the early 20th century during Spain’s Belle Époque, Plaza de Colón was designed as a grand tribute to Christopher Columbus. The monument at its center, featuring a statue of Columbus on horseback, was completed in 1917. It has since become a symbol of Spanish colonial pride and a popular meeting point for locals and tourists alike. Visiting Plaza de Colón offers a glimpse into Madrid&#x27;s rich history and culture, blending art deco architecture with lively street life.</p></div>
 </section>
 <section class="place" id="madrid_plaza_de_espana_madrid">
+<div class="place-lead">
 <h3>Plaza de España</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
-<p class="place-meta">Address: Moncloa–Argüelles | Style: 20th-century civic square | Period: 1928</p>
-<figure class="place-fig"><img src="../images/madrid_plaza_de_espana_madrid.jpg" alt="Plaza de España"/></figure>
+<p class="place-meta">Location: Moncloa–Argüelles | Style: 20th-century civic square | Period: 1928</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/madrid_plaza_de_espana_madrid.jpg" alt="Plaza de España" width="1280" height="853" style="height: 281px; max-height: 281px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/madrid_plaza_de_espana_madrid_b.jpg" alt="Plaza de España — view 2" width="330" height="201" style="height: 281px; max-height: 281px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Located at the heart of Madrid&#x27;s historic center, Plaza de España is a majestic square known for its neo-Mudéjar architecture and grandiose scale. Completed in 1928 as part of the Exposición Iberoamericana, it was designed to showcase Spain’s cultural heritage and artistic prowess. Wide square with Cervantes memorial and bronze Don Quixote tipping toward Sancho. Constructed using intricate ceramic tiles and elaborate stonework, the plaza features a central fountain surrounded by ornate arches and columns. The square was originally intended to represent various regions of Spain through its decorative motifs and thematic displays. Today, it remains one of Madrid&#x27;s most iconic landmarks, drawing visitors who come to admire its grandeur and take in the atmosphere of old-world charm. It has been featured prominently in numerous films and television shows, adding to its global recognition. Surrounded by elegant buildings and gardens, Plaza de España provides a serene setting for relaxation and reflection. Metro exits surface into windy open space—dress for breeze. Torre de Madrid and Edificio España frame the long view.</p>
 <p class="prose">Built in 1928 during the Exposición Iberoamericana, Plaza de España served as a venue for showcasing Spanish art, culture, and architectural styles. Its design reflects the fusion of traditional Mudéjar elements with modernist influences, making it a unique example of early 20th-century urban planning. Designed in the first third of the 20th century; skyscrapers now flank the horizon. A must-visit for anyone interested in exploring Madrid&#x27;s rich cultural heritage and architectural diversity, Plaza de España offers a stunning blend of historical significance and aesthetic beauty. Gateway between royal western axis and Gran Vía approaches.</p></div>
 </section>
 <section class="place" id="madrid_plaza_de_oriente">
+<div class="place-lead">
 <h3>Plaza de Oriente</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
-<p class="place-meta">Address: Royal precinct | Style: Neoclassical palace forecourt | Period: early 18th century</p>
-<figure class="place-fig"><img src="../images/madrid_plaza_de_oriente.jpg" alt="Plaza de Oriente"/></figure>
+<p class="place-meta">Location: Royal precinct | Style: Neoclassical palace forecourt | Period: early 18th century</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/madrid_plaza_de_oriente.jpg" alt="Plaza de Oriente" width="1280" height="960" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/madrid_plaza_de_oriente_b.jpg" alt="Plaza de Oriente — view 2" width="330" height="440" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">At the heart of Madrid&#x27;s royal district lies Plaza de Oriente, a grand square framed by majestic buildings and lined with elegant cafes and shops. This historic plaza is a testament to Spain’s rich architectural heritage. Formal garden square before the palace—statues of monarchs line axial paths to the theatre wing. The square is surrounded by neoclassical buildings, including the Palacio Real de Madrid and the Teatro Real. It hosts various cultural events throughout the year, such as concerts and festivals. Located near the Royal Palace, it offers stunning views of the palace facade. In the center stands a monumental equestrian statue of King Felipe V, commissioned by his son Louis I. During special occasions, the square becomes a focal point for national celebrations. Opera house façade closes the northern perspective. Evening golden light brushes the equestrian silhouettes.</p>
 <p class="prose">Originally constructed during the reign of King Philip V in the early 18th century, Plaza de Oriente was designed as part of the Royal Palace complex. It served as a ceremonial space for state occasions and parades, reflecting the grandeur and power of the Spanish monarchy. Today, it remains a symbol of Madrid&#x27;s historical significance and cultural pride. French landscape taste filtered through Spanish court protocol in the 19th century. Visit Plaza de Oriente to experience the elegance and solemnity of traditional Spanish architecture and to witness the tranquil atmosphere that contrasts sharply with the bustling streets nearby. Calm pause compared with throbbing Sol a few blocks east.</p></div>
 </section>
 <section class="place" id="madrid_plaza_callao">
+<div class="place-lead">
 <h3>Plaza del Callao</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/madrid_plaza_callao.jpg" alt="Plaza del Callao"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/madrid_plaza_callao.jpg" alt="Plaza del Callao" width="1067" height="1600" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/madrid_plaza_callao_b.jpg" alt="Plaza del Callao — view 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Located near the bustling Gran Vía and Puerta del Sol, Plaza del Callao is a charming square that exudes both historical significance and modern vibrancy. Surrounded by elegant buildings and lined with cafés and shops, it serves as a hub for locals and tourists alike. The square is flanked by several notable landmarks including the Palacio de Comunicaciones and the Teatro Cómico. It hosts annual events such as the Feria del Libro, a book fair showcasing local authors and publishers. During the day, Plaza del Callao buzzes with activity, drawing shoppers and café-goers. At night, the street lights illuminate the cobblestones, creating a romantic ambiance perfect for evening walks. This square has been a central gathering point since the early 19th century.</p>
 <p class="prose">Originally named after the Spanish province of Callao, this plaza was once a busy marketplace where merchants traded goods. Over time, it evolved into a cultural center, hosting festivals and events that reflect Madrid&#x27;s rich heritage. Today, its cobblestone streets and vibrant atmosphere make it a popular spot for strolling and people-watching. Visitors should come to Plaza del Callao to experience the lively energy of Madrid’s urban life and soak up the charm of its historic architecture.</p></div>
 </section>
 <section class="place" id="madrid_plaza_mayor_madrid">
+<div class="place-lead">
 <h3>Plaza Mayor</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
-<p class="place-meta">Address: Centro | Style: Herrerian / Spanish Baroque urban square | Period: late 16th century</p>
-<figure class="place-fig"><img src="../images/madrid_plaza_mayor_madrid.jpg" alt="Plaza Mayor"/></figure>
+<p class="place-meta">Location: Centro | Style: Herrerian / Spanish Baroque urban square | Period: late 16th century</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/madrid_plaza_mayor_madrid.jpg" alt="Plaza Mayor" width="1280" height="960" style="height: 277px; max-height: 277px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/madrid_plaza_mayor_madrid_b.jpg" alt="Plaza Mayor — view 2" width="330" height="198" style="height: 277px; max-height: 277px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">At the heart of Madrid&#x27;s historic center lies Plaza Mayor, a grand square that has been the hub of social life and political gatherings for centuries. Arcaded 17th-century plaza—Philip III on horseback, cafés with umbrellas, and holiday markets. Constructed between 1589 and 1593. Consists of 147 arches supported by stone columns. Hosted bullfights, plays, and tournaments until the early 20th century. Surrounded by cafes and restaurants offering authentic tapas. Designated a UNESCO World Heritage Site in 1985. Pickpockets work the Christmas stalls—mind backpacks. Side alleys lead toward La Latina tapas strips.</p>
 <p class="prose">Built in the late 16th century during the reign of Philip III, Plaza Mayor was designed by architect Juan de Villanueva as a monumental space to showcase royal power and civic pride. Originally known as &#x27;Plaza del Arrabal,&#x27; it became the focal point of Madrid’s urban fabric, hosting festivals, markets, and important ceremonies. Today, its Baroque architecture and intricate facades remain intact, making it one of Spain&#x27;s most iconic plazas. Habsburg urban theatre for autos-da-fé, bullfights, and civic ritual; Casa de la Panadería anchors the north. Visit Plaza Mayor to experience the essence of traditional Spanish culture and witness the charming blend of historical grandeur and modern charm. Controlled symmetry ideal for first light before tour groups.</p></div>
 </section>
 <section class="place" id="madrid_puerta_de_alcala">
+<div class="place-lead">
 <h3>Puerta de Alcalá</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Plaza de la Independencia | Style: Neoclassical triumphal arch | Period: 1778–1792</p>
-<figure class="place-fig"><img src="../images/madrid_puerta_de_alcala.jpg" alt="Puerta de Alcalá"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/madrid_puerta_de_alcala.jpg" alt="Puerta de Alcalá" width="1280" height="832" style="height: 300px; max-height: 300px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/madrid_puerta_de_alcala_b.jpg" alt="Puerta de Alcalá — view 2" width="330" height="247" style="height: 300px; max-height: 300px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Puerta de Alcalá, a majestic archway at the southern entrance to Madrid&#x27;s historic center, was constructed between 1778 and 1792 during the reign of King Charles III. Designed by architect Juan de Villanueva, it originally served as a triumphal gate celebrating the victories of Spanish arms. Triple-arched triumphal gate predating Parisian models—granite clad in evening colour washes. Constructed between 1778 and 1792. Designed by Juan de Villanueva. Inspired by ancient Roman architecture. Features sculptures commemorating military victories. Located at the southern entrance to Madrid’s historic center. Traffic circles the monument—use underpass crossings. Pride lighting occasionally themes the stonework.</p>
 <p class="prose">Built under the patronage of King Charles III, the Puerta de Alcalá symbolized Spain’s military might and colonial expansion. The monumental structure, inspired by ancient Roman architecture, featured sculptures depicting scenes of triumph and victory. It later became a popular gathering spot for locals and tourists alike, offering panoramic views of the city. Finished 1778 under Charles III as eastern city marker. Today, the Puerta de Alcalá remains one of Madrid’s most iconic landmarks, representing both historical grandeur and modern urban life. Axis link between Retiro walks and Salamanca streets.</p></div>
 </section>
 <section class="place" id="madrid_puerta_del_sol">
+<div class="place-lead">
 <h3>Puerta del Sol</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
-<p class="place-meta">Address: Centro | Style: Eclectic city junction</p>
-<figure class="place-fig"><img src="../images/madrid_puerta_del_sol.jpg" alt="Puerta del Sol"/></figure>
+<p class="place-meta">Location: Centro | Style: Eclectic city junction</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/madrid_puerta_del_sol.jpg" alt="Puerta del Sol" width="1280" height="960" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/madrid_puerta_del_sol_b.jpg" alt="Puerta del Sol — view 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">At the heart of Madrid lies Puerta del Sol, a bustling square that has been the city&#x27;s symbolic center since medieval times. It is famously marked by the Zero Kilometer marker, which represents the starting point for all road distances in Spain. Radial hub with clock tower, Kilometre Zero plaque, and New Year&#x27;s grape-swallowing ritual on TV. It is home to the Zero Kilometer marker, used to measure distances throughout Spain. The square hosts Madrid&#x27;s famous Christmas market during December. A statue of King Alfonso XII stands at its center, commemorating his reign. Its busy streets are lined with cafes and shops offering traditional Spanish pastries and snacks. Nearby is the Royal Theatre of Madrid, one of the city&#x27;s cultural landmarks. Bear-and-strawberry-tree statue marks the city symbol. Expect dense crowds at any hour—cross walks carefully.</p>
 <p class="prose">Originally known as Plaza de la Virgen, it was renamed Puerta del Sol in the 18th century after the nearby gatehouse. The square has long served as a hub for political gatherings and celebrations, including the annual New Year&#x27;s Eve countdown. Its iconic fountain, installed in 1777, features sculptures of Spanish provinces. Former city gate footprint became democratic protest and celebration stage. Visit Puerta del Sol to experience Madrid’s vibrant atmosphere and take part in festive events like the New Year&#x27;s celebration. Metro convergence and Tío Pepe neon in the night skyline.</p></div>
 </section>
 <section class="place" id="madrid_museo_reina_sofia">
+<div class="place-lead">
 <h3>Reina Sofía Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Calle de Santa Isabel | Style: Historic hospital + contemporary museum insertions | Period: 1986</p>
-<figure class="place-fig"><img src="../images/madrid_museo_reina_sofia.jpg" alt="Reina Sofía Museum"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/madrid_museo_reina_sofia.jpg" alt="Reina Sofía Museum" width="1280" height="741" style="height: 267px; max-height: 267px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/madrid_museo_reina_sofia_b.jpg" alt="Reina Sofía Museum — view 2" width="330" height="440" style="height: 267px; max-height: 267px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Reina Sofía Museum is one of Madrid&#x27;s most iconic cultural institutions, showcasing modern and contemporary art from Spain and around the world. Spain&#x27;s modern-art citadel—Guernica anchors rooms of Miró, Dalí, and contemporary installation. It houses over 20,000 works of art, including some of the most important pieces of the Spanish avant-garde movement. The museum&#x27;s collection includes Pablo Picasso’s Guernica, considered one of the greatest anti-war paintings in history. Its architectural design features modernist elements combined with traditional Spanish styles, creating a harmonious fusion of old and new. Opened on December 17, 1992, it has become a major tourist attraction and educational hub for art lovers worldwide. Regularly hosts temporary exhibitions showcasing cutting-edge contemporary art. Carrier backpacks must often be left in lockers. Sabatini building wings surround a courtyard escalator drama.</p>
 <p class="prose">Established in 1986, the museum was originally named after Queen Sofía of Spain, who played a significant role in promoting arts and culture during her husband King Juan Carlos&#x27; reign. It occupies the former Royal Palace of Art, designed by architect Antonio Palacios in the early 20th century, making it a unique blend of historical architecture and avant-garde art. 18th-century hospital buildings adapted by Jean Nouvel and others. Visitors come to admire masterpieces by Picasso, Dalí, Miró, and other renowned artists that reflect the evolution of Spanish art from the late 19th century to the present day. Free windows matter for students; crowds cluster at Picasso&#x27;s masterpiece.</p></div>
 </section>
+<section class="place" id="madrid_retiro_crystal_palace">
+<div class="place-lead">
+<h3>Retiro Park</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
+
+<p class="place-meta">Location: Parque del Retiro | Style: 19th-century glasshouse | Period: 1887</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/madrid_retiro_crystal_palace.jpg" alt="Retiro Park" width="1279" height="853" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/madrid_retiro_crystal_palace_b.jpg" alt="Retiro Park — view 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">In the heart of Madrid&#x27;s Retiro Park stands a marvelous structure known as Crystal Palace, originally constructed for the International Exposition of 1887. This glass and iron edifice was designed by renowned architect Ricardo Buñuel to showcase modern technology and engineering prowess. Iron-and-glass pavilion beside a small lake—Victorian engineering transplanted to Madrid gardening. Constructed using innovative glass and iron techniques typical of Victorian architecture. Hosted various exhibitions and cultural events throughout its history. Renovated several times since its construction to maintain its structural integrity. Survived numerous challenges including wars and natural disasters to remain standing today. Serves as a symbol of technological advancement and artistic expression. Palacio de Velázquez sits deeper in the park for more exhibits. Weekend drum circles gather near the main fountain axis.</p>
+<p class="prose">Built in 1887, Crystal Palace served as the main exhibition hall during the International Exposition held in Madrid. It showcased cutting-edge technologies, artworks, and innovations that captivated visitors from around the world. The palace was later relocated within the park after its initial use, becoming a permanent fixture. Built for the 1887 Philippines Exposition; now hosts temporary art installs. Today, Crystal Palace is one of the most iconic landmarks in Retiro Park, offering visitors a glimpse into Spain’s rich industrial heritage while providing a serene setting for relaxation and reflection. Rowboats and shade trees make the basin a summer refuge.</p></div>
+</section>
 <section class="place" id="madrid_basilica_san_francisco_grande">
+<div class="place-lead">
 <h3>Royal Basilica of San Francisco el Grande</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Baroque | Period: 1717–1738</p>
-<figure class="place-fig"><img src="../images/madrid_basilica_san_francisco_grande.jpg" alt="Royal Basilica of San Francisco el Grande"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/madrid_basilica_san_francisco_grande.jpg" alt="Royal Basilica of San Francisco el Grande" width="1280" height="960" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/madrid_basilica_san_francisco_grande_b.jpg" alt="Royal Basilica of San Francisco el Grande — view 2" width="330" height="440" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Royal Basilica of San Francisco el Grande is a majestic Baroque church, towering over Madrid&#x27;s Puerta del Sol district. Completed in the early 18th century, it was commissioned by King Philip V to commemorate his victory at Alcazar and became one of Spain’s most significant religious monuments. Commissioned by King Philip V after his victory at the Battle of Alcazar in 1707. Designed by Italian architect Francesco Sabatini. Features impressive sculptural works by Gian Lorenzo Bernini. Contains paintings by notable Spanish artists such as Bartolomé Esteban Murillo and Diego Velázquez. Located near Madrid&#x27;s historic center, adjacent to the Plaza de la Independencia.</p>
 <p class="prose">Built between 1717 and 1738 under the reign of King Philip V, the basilica was designed by Italian architect Francesco Sabatini. It served as a symbol of royal power and the king&#x27;s gratitude for military success. The interior features lavish decorations, including sculptures by Bernini and paintings by artists like Murillo and Velázquez. Visitors come here to admire its breathtaking architecture and rich artistic heritage, which blend Spanish and Italian influences.</p></div>
 </section>
 <section class="place" id="madrid_royal_botanical_garden_madrid">
+<div class="place-lead">
 <h3>Royal Botanical Garden of Madrid</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Baroque | Period: 1755</p>
-<figure class="place-fig"><img src="../images/madrid_royal_botanical_garden_madrid.jpg" alt="Royal Botanical Garden of Madrid"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/madrid_royal_botanical_garden_madrid.jpg" alt="Royal Botanical Garden of Madrid" width="1200" height="1600" style="height: 254px; max-height: 254px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/madrid_royal_botanical_garden_madrid_b.jpg" alt="Royal Botanical Garden of Madrid — view 2" width="330" height="182" style="height: 254px; max-height: 254px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Royal Botanical Garden of Madrid is a serene oasis nestled within the heart of Spain’s capital city. Established in 1755 by King Ferdinand VI, it serves as both a scientific research center and a tranquil retreat for locals and visitors alike. It houses over 8,000 plant species representing diverse ecosystems worldwide. The garden features a unique collection of cacti and succulents from arid regions. Its classical Baroque architecture complements the lush greenery and formal gardens. Regular exhibitions showcase rare and endangered plants. Events such as flower festivals attract large crowds each year.</p>
 <p class="prose">Originally founded in 1755 under royal decree, the garden was designed to house exotic plants and promote botanical studies. Over time, it has become one of Europe&#x27;s most important botanical institutions, hosting thousands of species from around the world. Visitors come here to appreciate its stunning flora, peaceful atmosphere, and historical significance.</p></div>
 </section>
 <section class="place" id="madrid_royal_palace_madrid">
+<div class="place-lead">
 <h3>Royal Palace of Madrid</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Calle de Bailén | Style: Italianate Baroque / Neoclassical | Period: Early 18th century</p>
-<figure class="place-fig"><img src="../images/madrid_royal_palace_madrid.jpg" alt="Royal Palace of Madrid"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/madrid_royal_palace_madrid.jpg" alt="Royal Palace of Madrid" width="1280" height="907" style="height: 154px; max-height: 154px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/madrid_royal_palace_madrid_b.jpg" alt="Royal Palace of Madrid — view 2" width="330" height="110" style="height: 154px; max-height: 154px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Royal Palace of Madrid is the official residence of Spain&#x27;s monarchs and a testament to centuries of royal splendor. Built on the site of an old fortress, it stands as one of Europe’s grandest palaces. Bourbon ceremonial palace with Plaza de Armas courtyard and interiors rivalling Versailles in scale. It houses over three thousand rooms spread across more than 135,000 square meters. The palace contains an extensive art collection featuring works by artists such as Velázquez, Goya, and Rubens. Its gardens, known as the Real Jardín Botánico, are home to rare plants and botanical specimens. The Palace’s interior features elaborate decorative elements, including gold-leafed ceilings and intricate stucco work. Today, parts of the palace are open to the public for guided tours. Changing of the guard happens on fixed mornings. Combine with Almudena façade across the elevation.</p>
 <p class="prose">Originally constructed in the early 18th century by King Philip V, the palace was designed by Italian architect Filippo Juvarra. Over time, numerous architects contributed their designs, including Juan de Villanueva and Antonio Gaudi, resulting in a blend of Baroque, Neoclassical, and Art Nouveau styles. The palace has hosted countless coronations, state visits, and ceremonies since its inauguration. Built on the burned Alcázar site from the 1730s onward by Italian and Spanish architects. Visiting the Royal Palace offers a glimpse into Spain’s rich historical heritage and provides insight into the opulent lifestyle of past monarchs. Working royal venue; many rooms open on the visitor circuit.</p></div>
 </section>
 <section class="place" id="madrid_santiago_bernabeu">
+<div class="place-lead">
 <h3>Santiago Bernabéu Stadium</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Chamartín | Style: Modern football stadium | Period: 1947</p>
-<figure class="place-fig"><img src="../images/madrid_santiago_bernabeu.jpg" alt="Santiago Bernabéu Stadium"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/madrid_santiago_bernabeu.jpg" alt="Santiago Bernabéu Stadium" width="1280" height="960" style="height: 312px; max-height: 312px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/madrid_santiago_bernabeu_b.jpg" alt="Santiago Bernabéu Stadium — view 2" width="330" height="223" style="height: 312px; max-height: 312px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Santiago Bernabéu Stadium is the iconic home of Real Madrid football club and one of Spain&#x27;s most famous landmarks. Located in the heart of Madrid, it has been the stage for countless legendary matches since its opening in 1947. Real Madrid&#x27;s home ground—facelift cycles keep the bowl futuristic. It can accommodate up to 81,000 spectators. The stadium features four stands with unique architectural designs. Real Madrid won their first European Cup here in 1956. Inaugurated as Estadio Chamartín before being renamed in 1955. Hosted the 1982 FIFA World Cup semi-finals. Match-day security is airport-grade. Roof walk experiences open when construction pauses.</p>
 <p class="prose">Built in 1947, the stadium was named after Santiago Bernabéu Yeste, a former president of Real Madrid who played a key role in its establishment. It has undergone several renovations over the years but retains its traditional Spanish architecture style. The stadium has hosted numerous international matches, including the UEFA Champions League final and FIFA World Cup games. Opened 1947; naming honours long-serving club president Santiago Bernabéu. Visiting the Santiago Bernabéu Stadium allows fans to experience the rich history and atmosphere of one of Europe’s premier football clubs. Museum-tour combo sells out on derby weeks.</p></div>
 </section>
 <section class="place" id="madrid_sorolla_museum">
+<div class="place-lead">
 <h3>Sorolla Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Neoclassical | Period: Late 19th century</p>
-<figure class="place-fig"><img src="../images/madrid_sorolla_museum.jpg" alt="Sorolla Museum"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/madrid_sorolla_museum.jpg" alt="Sorolla Museum" width="1280" height="960" style="height: 344px; max-height: 344px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/madrid_sorolla_museum_b.jpg" alt="Sorolla Museum — view 2" width="330" height="246" style="height: 344px; max-height: 344px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Sorolla Museum is a must-visit for art lovers and historians alike, showcasing the works of Joaquín Sorolla y Bastida, one of Spain&#x27;s most celebrated impressionist painters. Located on Calle de Bailén in Madrid’s Salamanca district, the museum offers stunning views overlooking the city. It houses more than 600 pieces by Sorolla, including his famous painting &#x27;El Descanso&#x27; (The Rest). The museum also features a permanent exhibition dedicated to Sorolla’s wife, Teresa Velázquez, who inspired many of his works. Open daily except Mondays, it welcomes visitors with guided tours available in multiple languages. Built in the late 19th century, the building itself reflects elements of neoclassical architecture.</p>
 <p class="prose">Established in 1984, the museum was originally the home and studio of artist Joaquín Sorolla y Bastida. It preserves his personal belongings, including furniture, paintings, drawings, and letters that provide insight into his life and work. Visiting the Sorolla Museum allows visitors to immerse themselves in the vibrant colors and themes of Spanish impressionism.</p></div>
 </section>
 <section class="place" id="madrid_zarzuela_theatre">
+<div class="place-lead">
 <h3>Teatro de la Zarzuela</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: neoclassical | Period: 1856</p>
-<figure class="place-fig"><img src="../images/madrid_zarzuela_theatre.jpg" alt="Teatro de la Zarzuela"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/madrid_zarzuela_theatre.jpg" alt="Teatro de la Zarzuela" width="1280" height="968" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/madrid_zarzuela_theatre_b.jpg" alt="Teatro de la Zarzuela — view 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Teatro de la Zarzuela is a historic theater in Madrid renowned for its performances of zarzuelas—Spanish operettas that blend music, comedy, and drama. Established in 1856, it has been a cultural hub showcasing traditional Spanish musical theatre. It opened in 1856 as part of Madrid’s cultural revival during the reign of Queen Isabella II. Its interior features ornate decorations and a grand stage suitable for elaborate productions. The theater hosts both classical zarzuelas and modern adaptations, ensuring a diverse range of performances. Notable performers have included legendary figures like Manuel de Falla and Federico García Lorca. Today, it remains an important venue for preserving and promoting traditional Spanish art forms.</p>
 <p class="prose">Built in 1856, the Teatro de la Zarzuela was originally designed to promote and preserve Spain&#x27;s unique form of musical theatre, the zarzuela. Over time, it became one of the most iconic venues for zarzuela performances, hosting numerous celebrated artists and productions. Its architecture reflects the elegant neoclassical style typical of late 19th-century Madrid. Visiting the Teatro de la Zarzuela allows visitors to experience authentic Spanish culture through its vibrant and lively performances.</p></div>
 </section>
 <section class="place" id="madrid_royal_theatre_madrid">
+<div class="place-lead">
 <h3>Teatro Real</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Baroque | Period: 1783</p>
-<figure class="place-fig"><img src="../images/madrid_royal_theatre_madrid.jpg" alt="Teatro Real"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/madrid_royal_theatre_madrid.jpg" alt="Teatro Real" width="1280" height="960" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/madrid_royal_theatre_madrid_b.jpg" alt="Teatro Real — view 2" width="330" height="247" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Teatro Real is Madrid&#x27;s premier opera house and one of Spain’s most iconic cultural institutions. Established in 1783 as the Royal Theatre, it has been renovated several times over its long history. It is located on Calle Alcalá, near Plaza de España. The interior features ornate Baroque-style decorations and state-of-the-art acoustics. Each season brings new productions ranging from classical masterpieces to contemporary works. Its orchestra pit can accommodate up to 120 musicians. Guests can enjoy pre-performance drinks in the elegant lobby.</p>
 <p class="prose">Originally opened in 1783 under King Charles III, the Teatro Real was designed by Italian architect Giuseppe Valadier. It underwent significant reconstruction after a fire in 1947, reopening in 1962 with modern amenities. The theater played host to notable performances by artists such as Maria Callas and Luciano Pavarotti. Visiting the Teatro Real allows visitors to experience world-class operatic performances and witness historical architecture that reflects Madrid’s rich cultural heritage.</p></div>
 </section>
 <section class="place" id="madrid_templo_de_debod">
+<div class="place-lead">
 <h3>Temple of Debod</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Parque del Oeste | Style: Ancient Egyptian (reassembled) | Period: approximately 150 BCE</p>
-<figure class="place-fig"><img src="../images/madrid_templo_de_debod.jpg" alt="Temple of Debod"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/madrid_templo_de_debod.jpg" alt="Temple of Debod" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/madrid_templo_de_debod_b.jpg" alt="Temple of Debod — view 2" width="330" height="220" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Temple of Debod is a remarkable ancient Egyptian temple relocated to Madrid in the 1960s as part of an international cultural exchange. It stands as a testament to the friendship between Spain and Egypt. Real Egyptian Ptolemaic temple reassembled on a reflecting pool—gift after the Aswan dam salvage. Constructed during the reign of Ptolemy IV Philopator. Consists of four columns with hieroglyphic inscriptions. Donated to Spain in 1971. Features reliefs depicting pharaohs and deities. Restored and reopened to the public in 1973. Free entry with bag checks at peak sunset. Respect quiet—this is a small archaeological enclosure.</p>
 <p class="prose">Originally built around 150 BCE near Aswan, Egypt, the temple was dismantled and reconstructed in Madrid&#x27;s Parque del Buen Retiro after being donated by Egypt in gratitude for Spain’s assistance during the construction of the Aswan Dam. The temple represents one of the most significant examples of Egyptian architecture outside its native country. Stones arrived 1968; alignment celebrates Spanish–Egyptian cooperation. Visiting the Temple of Debod allows travelers to experience authentic Egyptian culture within the heart of Madrid. Sunset silhouettes across the water are wildly popular.</p></div>
 </section>
 <section class="place" id="madrid_museo_thyssen">
+<div class="place-lead">
 <h3>Thyssen-Bornemisza Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Paseo del Prado | Style: Early 19th-century villa museum | Period: 1992</p>
-<figure class="place-fig"><img src="../images/madrid_museo_thyssen.jpg" alt="Thyssen-Bornemisza Museum"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/madrid_museo_thyssen.jpg" alt="Thyssen-Bornemisza Museum" width="1280" height="788" style="height: 284px; max-height: 284px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/madrid_museo_thyssen_b.jpg" alt="Thyssen-Bornemisza Museum — view 2" width="330" height="247" style="height: 284px; max-height: 284px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Thyssen-Bornemisza Museum is a prominent art institution showcasing European masterpieces spanning the medieval to modern eras. Old Masters to Pop in a palatial villa—completes the triad with Prado and Reina Sofía. It houses more than 6,000 pieces from various periods of Western art. Its architecture blends traditional Spanish design with contemporary elements, offering visitors a unique experience. The museum features temporary exhibitions showcasing cutting-edge contemporary art. Located near Parque del Buen Retiro, it offers scenic views of the park and surrounding areas. Regularly hosts educational programs and lectures on art history. Joint tickets exist with sister museums—compare bundles. Late Friday hours help dodge tour-bus timing.</p>
 <p class="prose">Established in 1992, it was originally housed in the Palacio del Marques de la Azca, a historic building dating back to the early 20th century. The museum&#x27;s collection includes works by artists such as Picasso, Van Gogh, and Matisse, making it one of Madrid’s leading cultural attractions. Baron Thyssen-Bornemisza collection housed here since the early 1990s. Visitors come here for its extensive collection of world-class artworks that provide insight into European artistic evolution over centuries. Strong on German Expressionism and American scene painting.</p></div>
 </section>

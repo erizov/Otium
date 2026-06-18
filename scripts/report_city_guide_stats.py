@@ -15,6 +15,8 @@ if str(_PROJECT_ROOT) not in sys.path:
 
 from scripts.city_guide_core import is_curated_place_row
 from scripts.city_guide_core import is_substantive_text
+from scripts.city_guide_core import PDF_MAX_IMAGES_PER_PLACE
+from scripts.city_guide_core import smallest_same_stem_image_rel
 
 _README = _PROJECT_ROOT / "docs" / "CITY_GUIDES_README.md"
 _SECTION_START = "<!-- city-guide-stats -->\n"
@@ -23,6 +25,8 @@ _SECTION_END = "<!-- /city-guide-stats -->\n"
 _ROOT_README = _PROJECT_ROOT / "README.md"
 _PLACE_COUNTS_START = "<!-- city-guide-place-counts -->\n"
 _PLACE_COUNTS_END = "<!-- /city-guide-place-counts -->\n"
+_IMAGE_PER_PLACE_START = "<!-- city-guide-image-per-place -->\n"
+_IMAGE_PER_PLACE_END = "<!-- /city-guide-image-per-place -->\n"
 
 _IMAGE_SUFFIXES = frozenset({
     ".jpg", ".jpeg", ".png", ".webp", ".gif", ".svg",
@@ -120,6 +124,98 @@ def _load_places(module_name: str, attr: str) -> list[dict]:
     mod = importlib.import_module(module_name)
     raw = getattr(mod, attr)
     return [dict(p) for p in raw]
+
+
+def _count_pdf_eligible_images(root: Path, place: dict) -> int:
+    if place.get("suppress_images_for_pdf"):
+        return -1
+    n = 0
+    rel = place.get("image_rel_path")
+    if rel and smallest_same_stem_image_rel(root, rel):
+        n += 1
+    for item in place.get("additional_images") or []:
+        er = item.get("image_rel_path")
+        if er and smallest_same_stem_image_rel(root, er):
+            n += 1
+    return min(n, PDF_MAX_IMAGES_PER_PLACE)
+
+
+def _image_per_place_row(
+    slug: str,
+    places: list[dict],
+) -> tuple[str, int, int, int, int, int]:
+    root = _PROJECT_ROOT / slug
+    c0 = c1 = c2 = cskip = 0
+    for p in places:
+        n = _count_pdf_eligible_images(root, p)
+        if n < 0:
+            cskip += 1
+        elif n == 0:
+            c0 += 1
+        elif n == 1:
+            c1 += 1
+        else:
+            c2 += 1
+    return slug, len(places), cskip, c0, c1, c2
+
+
+def build_image_per_place_section() -> str:
+    """Markdown table: places with 0 / 1 / 2 on-disk PDF images per city."""
+    rows: list[tuple[str, int, int, int, int, int]] = []
+    for slug, mod, attr in _REGISTRY:
+        rows.append(_image_per_place_row(slug, _load_places(mod, attr)))
+    moscow_path = _PROJECT_ROOT / "moscow" / "data" / "moscow_places.json"
+    moscow_places = json.loads(moscow_path.read_text(encoding="utf-8"))
+    rows.append(_image_per_place_row("moscow", moscow_places))
+    rows.sort(key=lambda r: r[0])
+
+    t0 = t1 = t2 = 0
+    body_lines: list[str] = []
+    for slug, total, skip, c0, c1, c2 in rows:
+        body_lines.append(
+            "| `{}` | {} | {} | {} | {} | {} |\n".format(
+                slug, total, skip, c0, c1, c2,
+            ),
+        )
+        t0 += c0
+        t1 += c1
+        t2 += c2
+    eligible = sum(r[1] - r[2] for r in rows)
+    intro = (
+        "## Place images per city\n\n"
+        "On-disk raster count per registry place (primary + "
+        "``additional_images``, capped at 2). **skip** = "
+        "``suppress_images_for_pdf``. Refresh: "
+        "``python scripts/report_city_guide_stats.py --write-readme`` "
+        "or ``python scripts/stats_city_guide_images_per_place.py``.\n\n"
+        "| City | places | skip | 0 img | 1 img | 2 img |\n"
+        "|------|-------:|-----:|------:|------:|------:|\n"
+    )
+    footer = (
+        "\n| **TOTAL** | **{}** | **{}** | **{}** | **{}** | **{}** |\n"
+        "\n**PDF-eligible:** {} places · **0 img:** {} ({:.1f}%) · "
+        "**1 img:** {} ({:.1f}%) · **2 img:** {} ({:.1f}%).\n"
+    ).format(
+        sum(r[1] for r in rows),
+        sum(r[2] for r in rows),
+        t0,
+        t1,
+        t2,
+        eligible,
+        t0,
+        100.0 * t0 / eligible if eligible else 0.0,
+        t1,
+        100.0 * t1 / eligible if eligible else 0.0,
+        t2,
+        100.0 * t2 / eligible if eligible else 0.0,
+    )
+    return (
+        _IMAGE_PER_PLACE_START
+        + intro
+        + "".join(body_lines)
+        + footer
+        + _IMAGE_PER_PLACE_END
+    )
 
 
 def _markdown_table(rows: list[tuple[str, ...]]) -> str:
@@ -301,7 +397,15 @@ def main() -> int:
             _PLACE_COUNTS_START,
             _PLACE_COUNTS_END,
         )
+        images = build_image_per_place_section()
+        _write_marked_section(
+            _ROOT_README,
+            images,
+            _IMAGE_PER_PLACE_START,
+            _IMAGE_PER_PLACE_END,
+        )
         print("Wrote place counts into", _ROOT_README, file=sys.stderr)
+        print("Wrote image-per-place stats into", _ROOT_README, file=sys.stderr)
     if not args.write and not args.write_readme:
         if args.fail_desc_pct is None:
             sys.stdout.write(section)

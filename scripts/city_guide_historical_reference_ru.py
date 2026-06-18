@@ -927,8 +927,11 @@ def historical_reference_section_html(
     body: str,
     *,
     section_title: str | None = None,
+    edition: str = "ru",
 ) -> str:
     """Chapter block for historical blurb, or empty when there is no text."""
+    from scripts.city_guide_toc import guide_toc_back_link_html
+
     text = (body or "").strip()
     if not text:
         return ""
@@ -939,14 +942,15 @@ def historical_reference_section_html(
     )
     return (
         '<section class="historical-reference" '
-        'id="{}" '
-        'aria-label="{}">'
-        "<h2>{}</h2>\n"
-        "{}"
+        'id="{id}" '
+        'aria-label="{title}">'
+        "<h2>{title}</h2>\n"
+        "{back}\n"
+        "{inner}"
         "</section>"
     ).format(
-        "guide-historical",
-        escape(title),
-        escape(title),
-        inner,
+        id="guide-historical",
+        title=escape(title),
+        back=guide_toc_back_link_html(edition),
+        inner=inner,
     )

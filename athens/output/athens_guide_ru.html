@@ -13,7 +13,7 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
 .otium-logo { font-family: 'Cinzel', serif; font-size: 2.15rem;
   font-weight: 600; letter-spacing: 0.18em; margin-bottom: 0.85rem; }
 .otiump { margin: 0.42rem 0; line-height: 1.42; text-align: justify;
-  max-width: 38rem; font-size: 0.95rem; }
+  font-size: 0.95rem; }
 .guide-title { page-break-after: auto; margin-bottom: 0.55rem;
   page-break-inside: avoid; }
 .historical-reference { margin: 0.75rem 0 1.15rem;
@@ -63,22 +63,103 @@ ol.trip-stops a:hover { text-decoration: underline; }
 .heraldry-univ-caption { font-size: 0.52rem; line-height: 1.18;
   margin: 0.12rem 0 0; padding: 0 0.06rem; color: #252525;
   text-align: center; font-weight: 500; }
-.heraldry-motto { text-align: center; max-width: 18rem; margin: 0.18rem auto;
+.heraldry-motto { text-align: center; margin: 0.18rem auto;
   width: 100%; }
 .motto-line { font-family: 'Cinzel', serif; font-size: 1rem;
   margin: 0; color: #333; line-height: 1.35; }
 .guide-title h1.guide-title-main { font-family: 'Cinzel', serif;
   font-size: 2.35rem; margin-bottom: 0.5rem; font-weight: 600; }
 .lead { color: #444; font-size: 1.05rem; }
-.guide-toc { margin: 0.85rem 0 1.15rem; page-break-inside: avoid; }
-.guide-toc h2 { font-family: 'Cinzel', serif; font-size: 1.28rem;
-  font-weight: 600; margin: 0.4rem 0 0.55rem; }
+
+.guide-toc { page-break-before: always; break-before: page;
+  page-break-after: always; break-after: page;
+  margin: 0; padding: 0.2rem 0 0.45rem; page-break-inside: auto; }
+.guide-toc h2 { font-family: 'Cinzel', serif;
+  font-size: 1.28rem; font-weight: 600; margin: 0.4rem 0 0.55rem; }
 .guide-toc ol { margin: 0.35rem 0 0.65rem 1.25rem; padding: 0;
   columns: 2; column-gap: 1.5rem; }
 .guide-toc li { margin: 0.18rem 0; line-height: 1.35;
   font-size: 0.88rem; break-inside: avoid; }
-.guide-toc a { color: #1a5276; text-decoration: none; }
+.guide-toc a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.guide-toc a:hover { color: #0d3d56; }
 .guide-toc li.toc-item--sub { font-size: 0.82rem; margin-left: 0.35rem; }
+.toc-back { font-size: 0.78rem; margin: 0 0 0.35rem; text-align: right; }
+.toc-back a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.toc-back a:hover { color: #0d3d56; }
+.place, .historical-reference, .guide-primer, .guide-trip-plans {
+  scroll-margin-top: 1.25rem; }
+.historical-reference h2, .guide-primer h2, .guide-trip-plans h2,
+.chapter-head h2, .place-lead h3 { position: relative; }
+.guide-toc + .place, .guide-toc + .chapter-head {
+  page-break-before: avoid; break-before: avoid-page; }
+.place-lead { page-break-inside: avoid; break-inside: avoid-page;
+  page-break-after: auto; }
+.place-lead > h3 { page-break-after: avoid; break-after: avoid-page; }
+.place-lead > .place-meta { page-break-after: avoid; break-after: avoid-page; }
+
+.place-fig { page-break-inside: avoid; break-inside: avoid-page;
+  margin: 0.5rem 0 1rem; }
+.place-fig img {
+  page-break-inside: avoid; break-inside: avoid-page;
+  max-height: 48vh; width: auto; max-width: 100%;
+  object-fit: contain; margin-left: auto; margin-right: auto; }
+.place-fig--hi-res img { max-height: 52vh; }
+.place-fig--lo-res img { max-height: 30vh; }
+.place-pdf-fig-row {
+  display: flex; flex-direction: row; flex-wrap: wrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.45rem 0.55rem; margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row .place-fig {
+  flex: 1 1 30%; margin: 0; min-width: 26%; max-width: 100%; }
+.place-pdf-fig-row .place-fig img {
+  width: auto; max-width: 100%; height: auto; max-height: 44vh;
+  object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--pair {
+  flex-wrap: nowrap; justify-content: space-between;
+  align-items: flex-end; gap: 0.5rem 0.65rem; }
+.place-pdf-fig-row--pair .place-fig {
+  flex: 1 1 47%; min-width: 0; max-width: 50%;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--pair .place-fig img {
+  max-height: 44vh; object-fit: contain; }
+.place-pdf-fig-row--pair .place-fig--hi-res img { max-height: 52vh; }
+.place-pdf-fig-row--pair .place-fig--lo-res img { max-height: 26vh; }
+.place-pdf-fig-row--pair .place-fig--row-sized img,
+.place-pdf-fig-row--triple .place-fig--row-sized img,
+.place-pdf-fig-row--many .place-fig--row-sized img {
+  width: auto; max-width: 100%; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row .place-fig--row-sized.place-fig--hi-res img,
+.place-pdf-fig-row .place-fig--row-sized.place-fig--lo-res img {
+  max-height: unset; }
+.place-pdf-fig-rows-stack {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple {
+  display: flex; flex-direction: row; flex-wrap: nowrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.4rem 0.48rem; margin: 0;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--triple .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--triple .place-fig--hi-res img { max-height: 42vh; }
+.place-pdf-fig-row--triple .place-fig--lo-res img { max-height: 18vh; }
+.place-pdf-fig-row--many {
+  flex-wrap: nowrap; justify-content: center; align-items: flex-end;
+  gap: 0.35rem 0.42rem; }
+.place-pdf-fig-row--many .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--many .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+
+
 .place { margin-bottom: 2.2rem; page-break-inside: auto; }
 h3 { font-family: 'Cinzel', serif; font-size: 1.22rem; margin: 1.2rem 0 0.35rem;
   font-weight: 600; }
@@ -90,7 +171,6 @@ h4 { font-family: 'Cinzel', serif; font-size: 0.95rem; text-transform: uppercase
   color: #555; font-size: 0.95rem; margin: 0 0 0.5rem; font-style: italic; }
 .place-meta { font-size: 0.92rem; color: #353535; margin: 0 0 0.75rem;
   line-height: 1.4; }
-.place-fig { margin: 0.5rem 0 1rem; }
 img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
 .prose, .place-desc p { margin: 0.45rem 0; line-height: 1.5;
   text-align: justify; }
@@ -109,12 +189,15 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <div class="heraldry-strip heraldry-official">
 <figure class="heraldry-fig heraldry-coat-book" title="Coat of arms of Athens"><img src="../images/guide_coat_of_arms.svg" alt="Coat of arms of Athens"/></figure>
 <figure class="heraldry-fig heraldry-coat-book" title="Flag of Athens"><img src="../images/guide_flag.svg" alt="Flag of Athens"/></figure>
-</div></div><h1 class="guide-title-main">Athens</h1><p class="lead">Путеводитель. Объектов в этом выпуске: 29.</p></header>
+</div></div><h1 class="guide-title-main">Athens</h1><p class="lead">Путеводитель. Объектов в этом выпуске: 28.</p></header>
+<nav class="guide-toc" id="guide-toc" aria-label="Содержание"><h2>Содержание</h2><ol><li class="toc-item"><a href="#guide-historical">Историческая справка</a></li><li class="toc-item"><a href="#guide-trips">Маршруты</a></li><li class="toc-item"><a href="#athens_acropolis_museum">Athens Acropolis Museum</a></li><li class="toc-item"><a href="#athens_ancient_agora">Athens Ancient Agora</a></li><li class="toc-item"><a href="#athens_ancient_agora_temple">Athens Ancient Agora Temple</a></li><li class="toc-item"><a href="#athens_benaki_museum">Athens Benaki Museum</a></li><li class="toc-item"><a href="#athens_byzantine_museum">Athens Byzantine Museum</a></li><li class="toc-item"><a href="#athens_filopappou">Athens Filopappou</a></li><li class="toc-item"><a href="#athens_greek_old_royal_palace_on_fire">Athens Greek Old Royal Palace On Fire</a></li><li class="toc-item"><a href="#athens_hadrian_arch">Athens Hadrian Arch</a></li><li class="toc-item"><a href="#athens_hadrian_library">Athens Hadrian Library</a></li><li class="toc-item"><a href="#athens_kaisariani">Athens Kaisariani</a></li><li class="toc-item"><a href="#athens_kerameikos">Athens Kerameikos</a></li><li class="toc-item"><a href="#athens_landmark">Athens Landmark</a></li><li class="toc-item"><a href="#athens_lycabettus">Athens Lycabettus</a></li><li class="toc-item"><a href="#athens_monastiraki">Athens Monastiraki</a></li><li class="toc-item"><a href="#athens_museum_of_cycladic">Athens Museum Of Cycladic</a></li><li class="toc-item"><a href="#athens_national_archaeological_museum">Athens National Archaeological Museum</a></li><li class="toc-item"><a href="#athens_national_garden">Athens National Garden</a></li><li class="toc-item"><a href="#athens_numismatic_museum">Athens Numismatic Museum</a></li><li class="toc-item"><a href="#athens_odeon_herodes">Athens Odeon Herodes</a></li><li class="toc-item"><a href="#athens_panagia_kapnikarea">Athens Panagia Kapnikarea</a></li><li class="toc-item"><a href="#athens_panathenaic_stadium">Athens Panathenaic Stadium</a></li><li class="toc-item"><a href="#athens_parthenon">Athens Parthenon</a></li><li class="toc-item"><a href="#athens_psyrri">Athens Psyrri</a></li><li class="toc-item"><a href="#athens_sounion">Athens Sounion</a></li><li class="toc-item"><a href="#athens_stavros_niarchos">Athens Stavros Niarchos</a></li><li class="toc-item"><a href="#athens_stoa_of_attalos">Athens Stoa Of Attalos</a></li><li class="toc-item"><a href="#athens_temple_olympian_zeus">Athens Temple Olympian Zeus</a></li><li class="toc-item"><a href="#athens_tower_of_winds">Athens Tower Of Winds</a></li></ol></nav>
 <section class="historical-reference" id="guide-historical" aria-label="Историческая справка"><h2>Историческая справка</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 <p class="prose">Афины — столица Греции, один из древнейших европейских городов с непрерывной историей поселения.</p>
 <p class="prose">Античный полис, римский и византийский периоды, османская эпоха и независимое государство сформировали слойную городскую среду: акрополь, классические руины, неоклассика и XX век. Афины остаются узлом культуры, образования и средиземноморской метрополии.</p>
 <p class="prose">В XIX веке столица перенесена в Афины; независимая Греция восстановила классические символы на фоне османского наследия. XX век принёс расширение агломерации, Олимпиаду 2004 года и современную инфраструктуру; Афины остаются важным узлом Средиземноморья.</p></section>
 <section class="guide-trip-plans" id="guide-trips" aria-label="Маршруты"><h2>Маршруты</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 <article class="trip-plan" id="trip-1d"><h3>Один день</h3>
 <p class="prose">Компактный маршрут по главным точкам путеводителя с минимальным возвратом назад пешком.</p>
 <ol class="trip-stops"><li><a href="#athens_acropolis_museum">Athens Acropolis Museum</a> (~75мин)</li>
@@ -143,232 +226,391 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <li><a href="#athens_museum_of_cycladic">Athens Museum Of Cycladic</a> (~75мин)</li>
 <li><a href="#athens_national_archaeological_museum">Athens National Archaeological Museum</a> (~75мин)</li>
 <li><a href="#athens_odeon_herodes">Athens Odeon Herodes</a> (~75мин)</li></ol></article></section>
-<nav class="guide-toc" aria-label="Содержание"><h2>Содержание</h2><ol><li class="toc-item"><a href="#guide-historical">Историческая справка</a></li><li class="toc-item"><a href="#guide-trips">Маршруты</a></li><li class="toc-item"><a href="#athens_acropolis_museum">Athens Acropolis Museum</a></li><li class="toc-item"><a href="#athens_ancient_agora">Athens Ancient Agora</a></li><li class="toc-item"><a href="#athens_hadrian_arch">Athens Hadrian Arch</a></li><li class="toc-item"><a href="#athens_benaki_museum">Athens Benaki Museum</a></li><li class="toc-item"><a href="#athens_byzantine_museum">Athens Byzantine Museum</a></li><li class="toc-item"><a href="#athens_panagia_kapnikarea">Athens Panagia Kapnikarea</a></li><li class="toc-item"><a href="#athens_filopappou">Athens Filopappou</a></li><li class="toc-item"><a href="#athens_pdfband_9_85906380">Greek Old Royal Palace on fire</a></li><li class="toc-item"><a href="#athens_hadrian_library">Athens Hadrian Library</a></li><li class="toc-item"><a href="#athens_kaisariani">Athens Kaisariani</a></li><li class="toc-item"><a href="#athens_kerameikos">Athens Kerameikos</a></li><li class="toc-item"><a href="#athens_monastiraki">Athens Monastiraki</a></li><li class="toc-item"><a href="#athens_lycabettus">Athens Lycabettus</a></li><li class="toc-item"><a href="#athens_museum_of_cycladic">Athens Museum Of Cycladic</a></li><li class="toc-item"><a href="#athens_national_archaeological_museum">Athens National Archaeological Museum</a></li><li class="toc-item"><a href="#athens_national_garden">Athens National Garden</a></li><li class="toc-item"><a href="#athens_numismatic_museum">Athens Numismatic Museum</a></li><li class="toc-item"><a href="#athens_odeon_herodes">Athens Odeon Herodes</a></li><li class="toc-item"><a href="#athens_panathenaic_stadium">Athens Panathenaic Stadium</a></li><li class="toc-item"><a href="#athens_parthenon">Athens Parthenon</a></li><li class="toc-item"><a href="#athens_psyrri">Athens Psyrri</a></li><li class="toc-item"><a href="#athens_stavros_niarchos">Athens Stavros Niarchos</a></li><li class="toc-item"><a href="#athens_stoa_of_attalos">Athens Stoa Of Attalos</a></li><li class="toc-item"><a href="#athens_syntagma_guard">Athens Syntagma Guard</a></li><li class="toc-item"><a href="#athens_ancient_agora_temple">Athens Ancient Agora Temple</a></li><li class="toc-item"><a href="#athens_temple_olympian_zeus">Athens Temple Olympian Zeus</a></li><li class="toc-item"><a href="#athens_sounion">Athens Sounion</a></li><li class="toc-item"><a href="#athens_tower_of_winds">Athens Tower Of Winds</a></li><li class="toc-item"><a href="#athens_pdfband_0_40738d11">Μητρόπολη Αθηνών</a></li></ol></nav>
 <section class="place" id="athens_acropolis_museum">
+<div class="place-lead">
 <h3>Athens Acropolis Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/athens_acropolis_museum.jpg" alt="Athens Acropolis Museum"/></figure>
+<p class="place-meta">Адрес: Dionysiou Areopagitou 15</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/athens_acropolis_museum.jpg" alt="Athens Acropolis Museum" width="1280" height="960" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/athens_acropolis_museum_b.jpg" alt="Athens Acropolis Museum — вид 2" width="330" height="453" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Здание музея построено над древними археологическими раскопками. Архитектор проекта — швейцарский архитектор Бернард Цумми. Стеклянные фасады позволяют видеть античные сооружения прямо через стены музея. Экспозиция включает экспонаты, найденные во время археологических исследований Акрополя. Открытие музея состоялось в сентябре 2009 года.</p>
 <p class="prose">Археологический музей Акрополя был открыт в 2009 году архитектором Бернаром Цумми. Здание расположено непосредственно над археологическими раскопками и стало важной частью культурного наследия Афин. Архитектура музея сочетает современные стеклянные фасады и бетонные конструкции, гармонично вписываясь в окружающий исторический контекст. Музей позволяет посетителям увидеть уникальные артефакты древней цивилизации прямо над местом их обнаружения, создавая уникальную атмосферу погружения в историю.</p></div>
 </section>
 <section class="place" id="athens_ancient_agora">
+<div class="place-lead">
 <h3>Athens Ancient Agora</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Стиль: Стоа, булевтерион, основания храмов</p>
-<figure class="place-fig"><img src="../images/athens_ancient_agora.jpg" alt="Athens Ancient Agora"/></figure>
+<p class="place-meta">Адрес: Northwest of the Acropolis | Стиль: Стоа, булевтерион, основания храмов</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/athens_ancient_agora.jpg" alt="Athens Ancient Agora" width="1280" height="960" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/athens_ancient_agora_b.jpg" alt="Athens Ancient Agora — вид 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Агора существовала с архаического периода до римской эпохи. Здесь находились общественные здания, такие как портики (стои), храмовые постройки и трибуна для народных собраний. На территории археологического памятника сохранились фундаменты храмов и стои. Афинанская агора служила местом проведения политических дискуссий и судебных заседаний. Считается, что именно в этой агоре впервые были приняты демократические реформы Солона.</p>
 <p class="prose">Древняя агора Афин возникла ещё в архаический период и функционировала до римского завоевания города. Это был важнейший общественный центр античных Афин, где проходили торговые сделки, политические дебаты и культурные мероприятия. Агора была сердцем афинской демократии, здесь собирались граждане для обсуждения государственных вопросов и принятия решений. Запоминающийся факт: именно здесь были впервые введены демократические законы Солона. Посещение Древней агоры позволяет увидеть архитектурные остатки одного из важнейших общественных центров древних Афин и лучше понять устройство и жизнь античной демократии.</p></div>
 </section>
-<section class="place" id="athens_hadrian_arch">
-<h3>Athens Hadrian Arch</h3>
+<section class="place" id="athens_ancient_agora_temple">
+<div class="place-lead">
+<h3>Athens Ancient Agora Temple</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Стиль: Римский триумфальный арх со стилевыми элементами коринфского ордера.</p>
-<figure class="place-fig"><img src="../images/athens_hadrian_arch.jpg" alt="Athens Hadrian Arch"/></figure>
-<div class="place-desc"><p class="prose">Архитектурный ансамбль включает две симметричные полуколоннады с коринфскими капителями. На арке сохранились рельефы, изображающие сцены военных побед и достижения империи. Считается одной из лучших сохранившихся римских триумфальных арок. Адрес сооружения — Леофорос Василисис Амалас. Рядом расположена площадь Синтагма.</p>
-<p class="prose">Триумфальная арка Адриана была возведена в Афинах в 131 году н.э. по приказу императора Адриана в честь его визита в Грецию и успехов римского войска. Арка стала важным символом культурного обмена между Римской империей и греческой цивилизацией, демонстрируя уважение Рима к эллинскому наследию. Архитектурный стиль арки сочетает элементы древнеримского триумфального арочного зодчества с традициями коринфского ордера, характерного для греческого искусства. Арка Адриана является одним из ключевых памятников античной архитектуры в Афинах и привлекает туристов своей величественной архитектурой и историческим значением.</p></div>
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/athens_ancient_agora_temple.jpg" alt="Athens Ancient Agora Temple" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/athens_ancient_agora_temple_b.jpg" alt="Athens Ancient Agora Temple — вид 2" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Храм Гефеста – место поклонения в Афинах. Общественные фотоархивы связывают это место с: Афины, храм, город, Храм Гефеста. Стоит заехать во время исследования Афин.</p></div>
 </section>
 <section class="place" id="athens_benaki_museum">
+<div class="place-lead">
 <h3>Athens Benaki Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Стиль: ар-деко | Период: 1930</p>
-<figure class="place-fig"><img src="../images/athens_benaki_museum.jpg" alt="Athens Benaki Museum"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/athens_benaki_museum.jpg" alt="Athens Benaki Museum" width="1600" height="1066" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/athens_benaki_museum_b.jpg" alt="Athens Benaki Museum — вид 2" width="330" height="220" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Коллекция музея включает около 8 тысяч экспонатов, охватывающих различные эпохи греческой истории. Особняк, в котором размещается музей, является памятником архитектуры ар-деко. Константин Бенакис был известным филантропом и меценатом, активно поддерживавшим культурное наследие Греции. Музей Бенаки ежегодно привлекает тысячи туристов и местных жителей благодаря своей уникальной экспозиции. На территории музея регулярно проводятся выставки современного искусства.</p>
 <p class="prose">Музей Бенаки основан в 1960 году коллекционером Константином Бенаки, который собрал уникальную коллекцию предметов греческого искусства разных эпох. Музей расположен в историческом особняке начала XX века, построенном архитектором Николаосом Балтасисом в стиле ар-деко. Один из ведущих музеев Греции, предлагающий посетителям погружение в историю и культуру страны через обширную коллекцию артефактов, начиная от античных времен до современности.</p></div>
 </section>
 <section class="place" id="athens_byzantine_museum">
+<div class="place-lead">
 <h3>Athens Byzantine Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Период: 1889</p>
-<figure class="place-fig"><img src="../images/athens_byzantine_museum.jpg" alt="Athens Byzantine Museum"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/athens_byzantine_museum.jpg" alt="Athens Byzantine Museum" width="1600" height="1200" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/athens_byzantine_museum_b.jpg" alt="Athens Byzantine Museum — вид 2" width="330" height="247" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Коллекция музея насчитывает около 4 тысяч экспонатов, включая мозаики, иконы, рукописи и предметы быта. Здесь представлены уникальные находки из археологических раскопок древнего города Фивы. Экспозиция рассказывает о развитии архитектуры, искусства и религии Византии. Особое внимание уделено истории Храма Святой Софии, который был центром духовной жизни Константинополя. Посещение музея позволяет увидеть редкие образцы средневекового искусства.</p>
 <p class="prose">Музей основан в 1976 году на месте бывшей резиденции короля Георга I Афинского. Коллекция музея включает артефакты византийской эпохи и раннего христианства, отражающие культурное наследие древней столицы Византии и современного греческого государства. Главная цель музея — сохранение и популяризация культурного наследия Византии и раннего христианства.</p></div>
 </section>
-<section class="place" id="athens_panagia_kapnikarea">
-<h3>Athens Panagia Kapnikarea</h3>
-
-
-<figure class="place-fig"><img src="../images/athens_panagia_kapnikarea.jpg" alt="Athens Panagia Kapnikarea"/></figure>
-<div class="place-desc"><p class="prose">Церковь Панагии Капникареа — это место поклонения в Афинах. Общественные фотоархивы ассоциируют это место со: островом Крит, отпусками, Панагия Кера и церковью. Стоит заехать во время исследования Афин.</p></div>
-</section>
 <section class="place" id="athens_filopappou">
+<div class="place-lead">
 <h3>Athens Filopappou</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Период: III век н.э.</p>
-<figure class="place-fig"><img src="../images/athens_filopappou.jpg" alt="Athens Filopappou"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/athens_filopappou.jpg" alt="Athens Filopappou" width="1600" height="1152" style="height: 332px; max-height: 332px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/athens_filopappou_b.jpg" alt="Athens Filopappou — вид 2" width="330" height="247" style="height: 332px; max-height: 332px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">На вершине холма расположен храм Афины Полиас, построенный в честь сенатора Публия Элий Филопаппа. С вершины холма открывается вид на центральную часть города и порт Пирей. Холм окружён зелёной зоной с ухоженными дорожками и скамейками. Название холма происходит от имени римского сенатора, поддержавшего строительство храма. Филопаппу холм часто посещают туристы и местные жители, чтобы полюбоваться закатом.</p>
 <p class="prose">Филопаппа холм получил своё название в честь римского сенатора Публия Элий Филопаппа, который пожертвовал средства на строительство храма Афины Полиас в III веке н.э. Холм долгое время был местом прогулок аристократии и знати, а сегодня является популярной смотровой площадкой с панорамным видом на город и Акрополь. Здесь открывается живописная панорама города и величественный силуэт Акрополя, позволяющий насладиться красотой античной архитектуры.</p></div>
 </section>
-<section class="place" id="athens_pdfband_9_85906380">
-<h3>Greek Old Royal Palace on fire</h3>
+<section class="place" id="athens_greek_old_royal_palace_on_fire">
+<div class="place-lead">
+<h3>Athens Greek Old Royal Palace On Fire</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/athens_pdfband_9_85906380.jpg" alt="Greek Old Royal Palace on fire"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/athens_greek_old_royal_palace_on_fire.jpg" alt="Athens Greek Old Royal Palace On Fire" width="1280" height="867" style="height: 312px; max-height: 312px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/athens_greek_old_royal_palace_on_fire_b.jpg" alt="Athens Greek Old Royal Palace On Fire — вид 2" width="330" height="228" style="height: 312px; max-height: 312px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Старый Королевский Дворец в Греции является достопримечательностью Афин. Общественные фотоархивы ассоциируют это место с: великой галереей, памятником, архитектурой, строительством.</p></div>
 </section>
+<section class="place" id="athens_hadrian_arch">
+<div class="place-lead">
+<h3>Athens Hadrian Arch</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Leoforos Vasilisis Amalias | Стиль: Римский триумфальный арх со стилевыми элементами коринфского ордера.</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/athens_hadrian_arch.jpg" alt="Athens Hadrian Arch" width="1068" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/athens_hadrian_arch_b.jpg" alt="Athens Hadrian Arch — вид 2" width="330" height="388" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Архитектурный ансамбль включает две симметричные полуколоннады с коринфскими капителями. На арке сохранились рельефы, изображающие сцены военных побед и достижения империи. Считается одной из лучших сохранившихся римских триумфальных арок. Адрес сооружения — Леофорос Василисис Амалас. Рядом расположена площадь Синтагма.</p>
+<p class="prose">Триумфальная арка Адриана была возведена в Афинах в 131 году н.э. по приказу императора Адриана в честь его визита в Грецию и успехов римского войска. Арка стала важным символом культурного обмена между Римской империей и греческой цивилизацией, демонстрируя уважение Рима к эллинскому наследию. Архитектурный стиль арки сочетает элементы древнеримского триумфального арочного зодчества с традициями коринфского ордера, характерного для греческого искусства. Арка Адриана является одним из ключевых памятников античной архитектуры в Афинах и привлекает туристов своей величественной архитектурой и историческим значением.</p></div>
+</section>
 <section class="place" id="athens_hadrian_library">
+<div class="place-lead">
 <h3>Athens Hadrian Library</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/athens_hadrian_library.jpg" alt="Athens Hadrian Library"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/athens_hadrian_library.jpg" alt="Athens Hadrian Library" width="330" height="440" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/athens_hadrian_library_b.jpg" alt="Athens Hadrian Library — вид 2" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Согласно публичным фотоархивам, данное место ассоциируется с: мост, река, Кастель Сант-Анджело, достопримечательность.</p></div>
 </section>
 <section class="place" id="athens_kaisariani">
+<div class="place-lead">
 <h3>Athens Kaisariani</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Стиль: византийский стиль</p>
-<figure class="place-fig"><img src="../images/athens_kaisariani.jpg" alt="Athens Kaisariani"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/athens_kaisariani.jpg" alt="Athens Kaisariani" width="1600" height="1200" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/athens_kaisariani_b.jpg" alt="Athens Kaisariani — вид 2" width="330" height="219" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Основан в XIII веке. Расположен в живописной местности Кесариани, неподалеку от Афин. Известен панорамными видами на окрестности. Является важным религиозным центром для православных христиан. Обладает уникальной архитектурой византийского стиля.</p>
 <p class="prose">Кесариани монастырь расположен недалеко от Афин и является одним из старейших афинских монастырей. Основан в XIII веке, во времена правления династии Ласкарисов, когда Афины находились под властью Византийской империи. Монастырь знаменит своей живописной природой и впечатляющими видами на окрестности, благодаря чему стал популярным местом паломничества и отдыха. Монастырь привлекает туристов своими уникальными пейзажами и историческим значением, отражающим культурное наследие региона.</p></div>
 </section>
 <section class="place" id="athens_kerameikos">
+<div class="place-lead">
 <h3>Athens Kerameikos</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Стиль: древнегреческий</p>
-<figure class="place-fig"><img src="../images/athens_kerameikos.jpg" alt="Athens Kerameikos"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/athens_kerameikos.jpg" alt="Athens Kerameikos" width="1600" height="827" style="height: 238px; max-height: 238px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/athens_kerameikos_b.jpg" alt="Athens Kerameikos — вид 2" width="330" height="247" style="height: 238px; max-height: 238px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">На кладбище находятся захоронения выдающихся государственных деятелей и философов Древних Афин. Здесь расположены древние гробницы и некрополи, датируемые VII–IV веками до н.э. Керемейкос был местом проведения знаменитых панафинейских празднеств, посвящённых богине Афине. Археологические раскопки на территории некрополя продолжаются и сегодня. Рядом с кладбищем находится музей, где представлены экспонаты, найденные во время археологических исследований.</p>
 <p class="prose">Некрополь КерAMEЙкос расположен рядом с древним Афинским городом-государством и является одним из старейших кладбищ Греции. Здесь хоронили афинян начиная с VIII века до н.э., вплоть до римского периода IV века н.э. Это место знаменито своими погребальными сооружениями, мраморными стелами и надгробиями, многие из которых сохранились до наших дней. В древности здесь также находился знаменитый стадион Панафинейских игр, где проходили спортивные соревнования. Кладбище Керемейкос позволяет увидеть уникальные образцы древнегреческой архитектуры и скульптуры, сохранившиеся до наших дней.</p></div>
 </section>
-<section class="place" id="athens_monastiraki">
-<h3>Athens Monastiraki</h3>
+<section class="place" id="athens_landmark">
+<div class="place-lead">
+<h3>Athens Landmark</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Стиль: смешанный стиль, включающий элементы османского периода и неоклассицизма</p>
-<figure class="place-fig"><img src="../images/athens_monastiraki.jpg" alt="Athens Monastiraki"/></figure>
-<div class="place-desc"><p class="prose">Район расположен рядом с археологическими раскопками древнегреческой Агоры. Рынок Монастираки является одним из старейших и крупнейших рынков Афин. Здесь находится знаменитый блошиный рынок, где продаются антиквариат и винтажные вещи. Рядом расположены знаменитые кафе и рестораны, предлагающие блюда традиционной греческой кухни. В районе также находятся несколько музеев и исторических памятников.</p>
-<p class="prose">Монастираки — исторический район Афин, возникший вокруг византийской церкви Айос-Монasterios и развивавшийся благодаря близости к древнегреческой Агоре. В эпоху Османской империи здесь сформировался оживленный рынок, ставший важным торговым центром города. После реконструкции начала XX века район приобрел смешанный стиль архитектуры, сочетающий элементы османского периода и неоклассицизма. Знаменит своими шумными рынками и атмосферной уличной жизнью, Монастираки привлекает туристов своей уникальной атмосферой и возможностью приобрести традиционные греческие сувениры и продукты.</p></div>
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/athens_landmark.jpg" alt="Athens Landmark" width="1280" height="1164" style="height: 408px; max-height: 408px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/athens_landmark_b.jpg" alt="Athens Landmark — вид 2" width="330" height="292" style="height: 408px; max-height: 408px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Μητρόπολη Αθηνών — место поклонения в Афинах. Государственные фотоархивы ассоциируют этот объект со следующими темами: Афины, дома, город, здание.</p></div>
 </section>
 <section class="place" id="athens_lycabettus">
+<div class="place-lead">
 <h3>Athens Lycabettus</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/athens_lycabettus.jpg" alt="Athens Lycabettus"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/athens_lycabettus.jpg" alt="Athens Lycabettus" width="1600" height="1068" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/athens_lycabettus_b.jpg" alt="Athens Lycabettus — вид 2" width="330" height="247" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">С вершины горы видны Акрополь и другие достопримечательности Афин. На горе находится церковь Святого Георгия XIV века. Название происходит от имени мифического героя Ликаба, сына Геракла. В древности гора была священным местом, посвящённым богине Артемиде. Сегодня вершина горы популярна среди туристов и местных жителей.</p>
 <p class="prose">Гора Ликабетт — самая высокая точка Афин (277 м), впервые упоминается в трудах Геродота V века до н.э., служила стратегическим пунктом города ещё во времена Древней Греции. В Средние века здесь стояла крепость, позднее гора стала местом паломничества христиан благодаря церкви Святого Георгия, построенной в XIX веке. Знаменита панорамным видом на Афины и окрестности, который открывается с вершины горы.</p></div>
 </section>
+<section class="place" id="athens_monastiraki">
+<div class="place-lead">
+<h3>Athens Monastiraki</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Plato&#x27;s footpaths near Agora | Стиль: смешанный стиль, включающий элементы османского периода и неоклассицизма</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/athens_monastiraki.jpg" alt="Athens Monastiraki" width="1280" height="960" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/athens_monastiraki_b.jpg" alt="Athens Monastiraki — вид 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Район расположен рядом с археологическими раскопками древнегреческой Агоры. Рынок Монастираки является одним из старейших и крупнейших рынков Афин. Здесь находится знаменитый блошиный рынок, где продаются антиквариат и винтажные вещи. Рядом расположены знаменитые кафе и рестораны, предлагающие блюда традиционной греческой кухни. В районе также находятся несколько музеев и исторических памятников.</p>
+<p class="prose">Монастираки — исторический район Афин, возникший вокруг византийской церкви Айос-Монasterios и развивавшийся благодаря близости к древнегреческой Агоре. В эпоху Османской империи здесь сформировался оживленный рынок, ставший важным торговым центром города. После реконструкции начала XX века район приобрел смешанный стиль архитектуры, сочетающий элементы османского периода и неоклассицизма. Знаменит своими шумными рынками и атмосферной уличной жизнью, Монастираки привлекает туристов своей уникальной атмосферой и возможностью приобрести традиционные греческие сувениры и продукты.</p></div>
+</section>
 <section class="place" id="athens_museum_of_cycladic">
+<div class="place-lead">
 <h3>Athens Museum Of Cycladic</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Стиль: современная архитектура</p>
-<figure class="place-fig"><img src="../images/athens_museum_of_cycladic.jpg" alt="Athens Museum Of Cycladic"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/athens_museum_of_cycladic.jpg" alt="Athens Museum Of Cycladic" width="1600" height="1339" style="height: 386px; max-height: 386px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/athens_museum_of_cycladic_b.jpg" alt="Athens Museum Of Cycladic — вид 2" width="330" height="440" style="height: 386px; max-height: 386px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Коллекция музея включает около 7 тысяч экспонатов, представляющих искусство Киклады с IV тысячелетия до н. э. до V века до н. э. Наиболее известные экспонаты — знаменитые белоснежные мраморные статуи Кикладской культуры, датируемые III-II тысячелетием до н. э. Здание музея было спроектировано архитектором Йоргосом Папастратос и представляет собой современное здание, гармонично вписывающееся в окружающий ландшафт. Экспозиция разделена на несколько тематических зон, каждая из которых посвящена определённой эпохе и стилю. Ежегодно музей посещают десятки тысяч туристов и любителей античной культуры.</p>
 <p class="prose">Музей изящных искусств в Афинах основан в 1986 году, однако музей современного искусства Кикладского искусства был открыт в 2003 году после реконструкции и расширения первоначальной коллекции. Музей посвящён древнему искусству Кикладских островов и содержит богатейшую коллекцию керамики, скульптуры и декоративных предметов периода неолита до классического греческого искусства. Посещение музея позволяет увидеть уникальные артефакты, отражающие художественную традицию древних жителей Кикладских островов, отличающихся утончённым стилем и изысканностью форм.</p></div>
 </section>
 <section class="place" id="athens_national_archaeological_museum">
+<div class="place-lead">
 <h3>Athens National Archaeological Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/athens_national_archaeological_museum.jpg" alt="Athens National Archaeological Museum"/></figure>
+<p class="place-meta">Адрес: 28is Oktovriou 44</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/athens_national_archaeological_museum.jpg" alt="Athens National Archaeological Museum" width="1280" height="813" style="height: 293px; max-height: 293px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/athens_national_archaeological_museum_b.jpg" alt="Athens National Archaeological Museum — вид 2" width="330" height="220" style="height: 293px; max-height: 293px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Коллекция музея включает около миллиона экспонатов, представляющих различные периоды греческой истории. Наибольший интерес среди посетителей вызывают знаменитые сокровища из Микен и гробницы царей из Орхомена. Здание музея было построено архитектором Спиридоном Лакисосом. Экспозиция охватывает историю Древней Греции от доисторического периода до позднего эллинизма. Архитектура здания вдохновлена древними храмами и колоннадами.</p>
 <p class="prose">Национальный археологический музей Афин был основан в конце XIX века и открыт в 1889 году. Здание выполнено в стиле неоклассицизма и расположено на территории старинной крепости Акрополь. Музей стал первым крупным учреждением подобного типа в Греции и одной из главных достопримечательностей города. Музей считается одним из крупнейших хранилищ древнегреческих артефактов и привлекает туристов своей уникальной коллекцией античных находок.</p></div>
 </section>
 <section class="place" id="athens_national_garden">
+<div class="place-lead">
 <h3>Athens National Garden</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Период: 1869 год</p>
-<figure class="place-fig"><img src="../images/athens_national_garden.jpg" alt="Athens National Garden"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/athens_national_garden.jpg" alt="Athens National Garden" width="1600" height="1067" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/athens_national_garden_b.jpg" alt="Athens National Garden — вид 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Создан по образцу английских парков, сочетающих природную красоту и ухоженность садов. На территории сада произрастают редкие виды деревьев и кустарников, привезенные из разных уголков мира. Сад окружён высокой каменной стеной, защищающей от шума городской суеты. Ежегодно здесь проводятся выставки цветов и ботанические мероприятия. В саду расположены несколько фонтанов и скульптур, символизирующих греческую мифологию.</p>
 <p class="prose">Национальный сад Афин был основан в конце XIX века по инициативе короля Георга I и королевы Ольги Греческой. Изначально задумывался как место отдыха королевской семьи и аристократии, однако быстро стал популярным среди афинян и туристов благодаря своей живописной природе и разнообразию растений. Сегодня Национальный сад является одним из символов города и любимым местом прогулок местных жителей и гостей столицы. Национальный сад привлекает посетителей своими прекрасными пейзажами, фонтанами и историческими памятниками, такими как статуя богини Афины и мраморная колоннада.</p></div>
 </section>
 <section class="place" id="athens_numismatic_museum">
+<div class="place-lead">
 <h3>Athens Numismatic Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Стиль: архитектура начала XX века</p>
-<figure class="place-fig"><img src="../images/athens_numismatic_museum.jpg" alt="Athens Numismatic Museum"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/athens_numismatic_museum.jpg" alt="Athens Numismatic Museum" width="1600" height="1194" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/athens_numismatic_museum_b.jpg" alt="Athens Numismatic Museum — вид 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Коллекция музея охватывает более двух тысяч лет истории греческой нумизматики. Экспозиция разделена на несколько тематических залов, каждый из которых посвящен определенному историческому периоду. Особое внимание уделяется коллекциям монет эпохи Александра Македонского и Римской империи. Музей регулярно проводит выставки и организует образовательные мероприятия для широкой публики. Бывшая резиденция премьер-министра Греции является памятником архитектуры начала XX века.</p>
 <p class="prose">Нумизматический музей Афин основан в 1960 году и расположен в историческом здании бывшей резиденции премьер-министра Греции. Коллекция музея включает монеты и медали различных эпох, начиная от античных времен до современности. Среди экспонатов выделяются редкие экземпляры монет эллинистического периода и римского завоевания. Музей интересен ценителям нумизматики и истории Древней Греции, позволяя увидеть развитие денежной системы страны через века.</p></div>
 </section>
 <section class="place" id="athens_odeon_herodes">
+<div class="place-lead">
 <h3>Athens Odeon Herodes</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Стиль: Римский каменный театр с отреставрированной сценической частью</p>
-<figure class="place-fig"><img src="../images/athens_odeon_herodes.jpg" alt="Athens Odeon Herodes"/></figure>
+<p class="place-meta">Адрес: South slope, Acropolis | Стиль: Римский каменный театр с отреставрированной сценической частью</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/athens_odeon_herodes.jpg" alt="Athens Odeon Herodes" width="1280" height="960" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/athens_odeon_herodes_b.jpg" alt="Athens Odeon Herodes — вид 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Первоначально театр вмещал около 5 тысяч зрителей. Реконструкция здания завершилась в 1858 году. Сегодняшний интерьер театра сохранил элементы оригинальной постройки II века. Сцена оборудована современным оборудованием для выступлений. Ежегодно здесь проводятся международные музыкальные фестивали.</p>
 <p class="prose">Одеон Герода Аттика был построен в 161 году н.э. римским императором Марком Аврелием в Афинах на южном склоне Акрополя. Здание изначально служило местом проведения музыкальных концертов и театральных постановок. Оригинальная конструкция была разрушена землетрясением в V веке, после чего восстановлена византийцами и вновь повреждена во время османского правления. Современное здание было реконструировано в конце XIX века и сегодня используется для летних оперных спектаклей и концертов классической музыки. Здание привлекает туристов своей уникальной архитектурой и атмосферой античности, позволяя насладиться выступлениями знаменитых артистов под открытым небом.</p></div>
 </section>
-<section class="place" id="athens_panathenaic_stadium">
-<h3>Athens Panathenaic Stadium</h3>
+<section class="place" id="athens_panagia_kapnikarea">
+<div class="place-lead">
+<h3>Athens Panagia Kapnikarea</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Стиль: U-образный стадион выполнен из пентелийского мрамора.</p>
-<figure class="place-fig"><img src="../images/athens_panathenaic_stadium.jpg" alt="Athens Panathenaic Stadium"/></figure>
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/athens_panagia_kapnikarea.jpg" alt="Athens Panagia Kapnikarea" width="1068" height="1600" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/athens_panagia_kapnikarea_b.jpg" alt="Athens Panagia Kapnikarea — вид 2" width="330" height="247" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Церковь Панагии Капникареа — это место поклонения в Афинах. Общественные фотоархивы ассоциируют это место со: островом Крит, отпусками, Панагия Кера и церковью.</p></div>
+</section>
+<section class="place" id="athens_panathenaic_stadium">
+<div class="place-lead">
+<h3>Athens Panathenaic Stadium</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Pangrati | Стиль: U-образный стадион выполнен из пентелийского мрамора.</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/athens_panathenaic_stadium.jpg" alt="Athens Panathenaic Stadium" width="1280" height="876" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/athens_panathenaic_stadium_b.jpg" alt="Athens Panathenaic Stadium — вид 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Первый раз реконструирован в римский период, когда были установлены мраморные сидения. Современное название стадиона появилось благодаря реконструкции в конце XIX века. Здесь регулярно проводятся спортивные соревнования, включая футбольный матч открытия Олимпийских игр 2004 года. Считается первым крупным спортивным сооружением, специально предназначенным для зрителей. На стадионе проходили Панафинейские игры, посвящённые богине Афине.</p>
 <p class="prose">Панатинаикос — древний стадион Афин, построенный в 330 году до н.э., изначально имел каменные трибуны из известняка. В эпоху римского правления, примерно в 144 году н.э., мраморные сиденья заменили старые конструкции. Современная реконструкция стадиона была проведена в XIX веке. Сегодня Панатинаикос является одним из символов Афин и местом проведения спортивных мероприятий. Это место стоит посетить поклонникам спорта и истории Древней Греции, чтобы увидеть один из старейших стадионов Европы и ощутить атмосферу античных соревнований.</p></div>
 </section>
 <section class="place" id="athens_parthenon">
+<div class="place-lead">
 <h3>Athens Parthenon</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Стиль: Дорический перифирельный храм</p>
-<figure class="place-fig"><img src="../images/athens_parthenon.jpg" alt="Athens Parthenon"/></figure>
+<p class="place-meta">Адрес: Acropolis of Athens | Стиль: Дорический перифирельный храм</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/athens_parthenon.jpg" alt="Athens Parthenon" width="1280" height="960" style="height: 288px; max-height: 288px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/athens_parthenon_b.jpg" alt="Athens Parthenon — вид 2" width="330" height="206" style="height: 288px; max-height: 288px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Парфенон является образцом дорического периптерального храма. Фасады Парфенона украшены рельефами, выполненными мастерской Фидия. Статуя Афины Парфенос была выполнена из золота и слоновой кости. Храм служил символом могущества и процветания Афинского полиса. На фронтоне Парфенона изображалась битва богов и гигантов.</p>
 <p class="prose">Парфенон — выдающийся памятник древнегреческой архитектуры, возведённый в классический период Афин архитектором Иктином и Калликратом по заказу Перикла. Строительство храма Парфенона длилось около пятнадцати лет и завершилось примерно в 438 году до н.э., хотя отдельные работы продолжались ещё несколько лет. Изначально храм был посвящён богине Афине Парфенос, покровительнице города, и использовался как место поклонения и хранения её культового изображения — знаменитой статуи работы Фидия. Знаменитый архитектурный шедевр Древней Греции, символизирующий величие афинской демократии и искусства V века до н.э.</p></div>
 </section>
 <section class="place" id="athens_psyrri">
+<div class="place-lead">
 <h3>Athens Psyrri</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/athens_psyrri.jpg" alt="Athens Psyrri"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/athens_psyrri.jpg" alt="Athens Psyrri" width="1600" height="1600" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/athens_psyrri_b.jpg" alt="Athens Psyrri — вид 2" width="330" height="247" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Здесь находится знаменитый археологический комплекс Агорион, представляющий собой остатки древней Агоры. Улицы района известны своей ночной активностью и множеством баров и клубов. Исторически квартал был местом проживания ремесленников и торговцев. Сегодня Psyrri привлекает туристов своей уникальной атмосферой и традиционной греческой кухней. Район также славится фестивалями уличной еды и музыкальными концертами.</p>
 <p class="prose">Квартал Psyrri расположен в историческом центре Афин и является одним из старейших районов города. Здесь зародилась знаменитая древнегреческая Агора, где проходили важные общественные мероприятия и торговля. Сегодня район сохранил атмосферу средневекового Афинского квартала, сочетая старинную архитектуру с современными кафе и ресторанами. Знаменит своими аутентичными заведениями, атмосферной ночной жизнью и уютными улочками, отражающими дух старого Афин.</p></div>
 </section>
-<section class="place" id="athens_stavros_niarchos">
-<h3>Athens Stavros Niarchos</h3>
-
-
-<figure class="place-fig"><img src="../images/athens_stavros_niarchos.jpg" alt="Athens Stavros Niarchos"/></figure>
-<div class="place-desc"><p class="prose">Фонд Ставроса Ниархоса представлен в Афинах. Государственные фотоархивы связывают это место с: Кипр, Айя Варвара, церковь, православный.</p></div>
-</section>
-<section class="place" id="athens_stoa_of_attalos">
-<h3>Athens Stoa Of Attalos</h3>
-
-<p class="place-meta">Стиль: эллинистический двухколонный портик</p>
-<figure class="place-fig"><img src="../images/athens_stoa_of_attalos.jpg" alt="Athens Stoa Of Attalos"/></figure>
-<div class="place-desc"><p class="prose">Реконструированное здание Стоа Атталоса выполнено в оригинальном эллинистическом стиле. Музей расположен непосредственно рядом с руинами Древней агоры. Экспозиция музея включает артефакты, отражающие повседневную жизнь и культурное наследие афинян. Стоа названа в честь царя Аттала II, который изначально построил её в I веке до н. э. Здание является частью комплекса музеев Афинского акрополя.</p>
-<p class="prose">Стоа Атталоса — реконструкция древнегреческого портика, возведённая в 1952–1956 годах на территории Древней агоры Афин. Здание представляет собой типичный образец двухрядной колоннады эллинистического стиля. Реконструкция выполнена на основе сохранившихся фрагментов древних сооружений и является важным памятником античной архитектуры. Стоа Атталоса служит музеем и выставочным пространством, где представлены археологические находки и экспонаты, раскрывающие историю Древних Афин.</p></div>
-</section>
-<section class="place" id="athens_syntagma_guard">
-<h3>Athens Syntagma Guard</h3>
-
-<p class="place-meta">Стиль: неоклассический</p>
-<figure class="place-fig"><img src="../images/athens_syntagma_guard.jpg" alt="Athens Syntagma Guard"/></figure>
-<div class="place-desc"><p class="prose">Ежедневная смена почётного караула начинается в 11 утра. Могила Неизвестного солдата была открыта в 1932 году. Здание парламента построено в неоклассическом стиле. На площади проводятся официальные государственные церемонии. Евзонские гвардейцы носят традиционные костюмы, разработанные специально для этой службы.</p>
-<p class="prose">Синтagma-Сquare расположена перед зданием парламента Греции, построенным в неоклассическом стиле в XIX веке. Площадь названа в честь королевского дворца Синтagma («Конституция»), который находился здесь до 1863 года. Ежедневно на площади проходят торжественные смены почётного караула Евзонов — церемониальных гвардейцев в традиционных костюмах, охраняющих могилу Неизвестного солдата. Площадь является символом демократии и независимости Греции, местом проведения государственных мероприятий и памятных церемоний.</p></div>
-</section>
-<section class="place" id="athens_ancient_agora_temple">
-<h3>Athens Ancient Agora Temple</h3>
-
-
-<figure class="place-fig"><img src="../images/athens_ancient_agora_temple.jpg" alt="Athens Ancient Agora Temple"/></figure>
-<div class="place-desc"><p class="prose">Храм Гефеста – место поклонения в Афинах. Общественные фотоархивы связывают это место с: Афины, храм, город, Храм Гефеста.</p></div>
-</section>
-<section class="place" id="athens_temple_olympian_zeus">
-<h3>Athens Temple Olympian Zeus</h3>
-
-<p class="place-meta">Стиль: Коринфский ордер</p>
-<figure class="place-fig"><img src="../images/athens_temple_olympian_zeus.jpg" alt="Athens Temple Olympian Zeus"/></figure>
-<div class="place-desc"><p class="prose">Это самый большой храм Афинского акрополя после Парфенона. Длина храма составляла около 104 метров, ширина — примерно 44 метра. Колонны храма были выполнены в стиле коринфского ордера, считавшегося наиболее роскошным среди всех классических стилей. На территории храма сохранились остатки статуй Зевса и императора Адриана. После завершения строительства храм использовался преимущественно для проведения торжественных церемоний и религиозных праздников.</p>
-<p class="prose">Знаменитый храм Зевса Олимпийского был построен ещё в VI веке до н. э., однако строительство затянулось почти на тысячелетие и завершилось лишь во II веке н. э. при императоре Адриане. Храм стал одним из крупнейших и величественных сооружений античности, символизируя могущество Рима и уважение к древнегреческим богам. Храм Зевса Олимпийского является выдающимся памятником архитектуры, отражающим слияние греческой и римской культур, и привлекает туристов своей грандиозностью и исторической ценностью.</p></div>
-</section>
 <section class="place" id="athens_sounion">
+<div class="place-lead">
 <h3>Athens Sounion</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Стиль: дорический</p>
-<figure class="place-fig"><img src="../images/athens_sounion.jpg" alt="Athens Sounion"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/athens_sounion.jpg" alt="Athens Sounion" width="1293" height="1600" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/athens_sounion_b.jpg" alt="Athens Sounion — вид 2" width="330" height="247" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">На руинах храма сохранились фрагменты колонн и основания стен. Считается одним из самых красивых античных храмов в мире. Панорамный вид с храма вдохновлял художников и поэтов на протяжении веков. К храму ведет узкая тропа, поднимающаяся вдоль отвесной скалы. Построен в дорическом стиле.</p>
 <p class="prose">Храм Посейдона в Сунионе построен около IV века до н. э. греческими архитекторами Фидием и Калликратом. Расположенный на высокой скале над Эгейским морем, храм стал символом мощи и величия античной Греции. В древности здесь проводились религиозные церемонии и жертвоприношения в честь бога моря Посейдона. Знаменитое место паломничества туристов благодаря живописному расположению и потрясающим видам на море.</p></div>
 </section>
-<section class="place" id="athens_tower_of_winds">
-<h3>Athens Tower Of Winds</h3>
+<section class="place" id="athens_stavros_niarchos">
+<div class="place-lead">
+<h3>Athens Stavros Niarchos</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Стиль: эллинистический октогональный гелио-дромион</p>
-<figure class="place-fig"><img src="../images/athens_tower_of_winds.jpg" alt="Athens Tower Of Winds"/></figure>
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/athens_stavros_niarchos.jpg" alt="Athens Stavros Niarchos" width="1600" height="1038" style="height: 299px; max-height: 299px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/athens_stavros_niarchos_b.jpg" alt="Athens Stavros Niarchos — вид 2" width="330" height="465" style="height: 299px; max-height: 299px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Фонд Ставроса Ниархоса представлен в Афинах. Государственные фотоархивы связывают это место с: Кипр, Айя Варвара, церковь, православный.</p></div>
+</section>
+<section class="place" id="athens_stoa_of_attalos">
+<div class="place-lead">
+<h3>Athens Stoa Of Attalos</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Ancient Agora | Стиль: эллинистический двухколонный портик</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/athens_stoa_of_attalos.jpg" alt="Athens Stoa Of Attalos" width="1280" height="960" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/athens_stoa_of_attalos_b.jpg" alt="Athens Stoa Of Attalos — вид 2" width="330" height="247" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Реконструированное здание Стоа Атталоса выполнено в оригинальном эллинистическом стиле. Музей расположен непосредственно рядом с руинами Древней агоры. Экспозиция музея включает артефакты, отражающие повседневную жизнь и культурное наследие афинян. Стоа названа в честь царя Аттала II, который изначально построил её в I веке до н. э. Здание является частью комплекса музеев Афинского акрополя.</p>
+<p class="prose">Стоа Атталоса — реконструкция древнегреческого портика, возведённая в 1952–1956 годах на территории Древней агоры Афин. Здание представляет собой типичный образец двухрядной колоннады эллинистического стиля. Реконструкция выполнена на основе сохранившихся фрагментов древних сооружений и является важным памятником античной архитектуры. Стоа Атталоса служит музеем и выставочным пространством, где представлены археологические находки и экспонаты, раскрывающие историю Древних Афин.</p></div>
+</section>
+<section class="place" id="athens_temple_olympian_zeus">
+<div class="place-lead">
+<h3>Athens Temple Olympian Zeus</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Archaeological site of Olympeion | Стиль: Коринфский ордер</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/athens_temple_olympian_zeus.jpg" alt="Athens Temple Olympian Zeus" width="1280" height="844" style="height: 304px; max-height: 304px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/athens_temple_olympian_zeus_b.jpg" alt="Athens Temple Olympian Zeus — вид 2" width="330" height="252" style="height: 304px; max-height: 304px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Это самый большой храм Афинского акрополя после Парфенона. Длина храма составляла около 104 метров, ширина — примерно 44 метра. Колонны храма были выполнены в стиле коринфского ордера, считавшегося наиболее роскошным среди всех классических стилей. На территории храма сохранились остатки статуй Зевса и императора Адриана. После завершения строительства храм использовался преимущественно для проведения торжественных церемоний и религиозных праздников.</p>
+<p class="prose">Знаменитый храм Зевса Олимпийского был построен ещё в VI веке до н. э., однако строительство затянулось почти на тысячелетие и завершилось лишь во II веке н. э. при императоре Адриане. Храм стал одним из крупнейших и величественных сооружений античности, символизируя могущество Рима и уважение к древнегреческим богам. Храм Зевса Олимпийского является выдающимся памятником архитектуры, отражающим слияние греческой и римской культур, и привлекает туристов своей грандиозностью и исторической ценностью.</p></div>
+</section>
+<section class="place" id="athens_tower_of_winds">
+<div class="place-lead">
+<h3>Athens Tower Of Winds</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Roman Agora, Plaka | Стиль: эллинистический октогональный гелио-дромион</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/athens_tower_of_winds.jpg" alt="Athens Tower Of Winds" width="1068" height="1600" style="height: 221px; max-height: 221px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/athens_tower_of_winds_b.jpg" alt="Athens Tower Of Winds — вид 2" width="330" height="158" style="height: 221px; max-height: 221px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Башня имеет форму правильного восьмиугольника, характерную для архитектуры эллинистического периода. На каждой стороне башни установлены бронзовые фигуры, изображающие древнегреческие ветры. Считается первой метеорологической станцией, совмещённой с солнечными часами. Архитектурный стиль здания относится к позднему классическому периоду и характеризуется строгими пропорциями и симметрией. Руины башни сохранились до наших дней и являются частью археологического комплекса Римской агоры.</p>
 <p class="prose">Куллорум ветров», построенный в I веке до н. э., является одним из выдающихся архитектурных памятников Древней Греции. Расположенная в районе Римского агора, эта восьмиугольная башня служила одновременно астрономическими часами и погодной станцией. В её верхней части размещались восемь аллегорических статуй ветров, каждая из которых символизировала определённое направление ветра. Башня была построена во времена эллинистической культуры и сохранила уникальные инженерные решения своего времени. Здание привлекает туристов своей необычной архитектурой и сочетанием науки и искусства античности.</p></div>
-</section>
-<section class="place" id="athens_pdfband_0_40738d11">
-<h3>Μητρόπολη Αθηνών</h3>
-
-
-<figure class="place-fig"><img src="../images/athens_pdfband_0_40738d11.jpg" alt="Μητρόπολη Αθηνών"/></figure>
-<div class="place-desc"><p class="prose">Μητρόπολη Αθηνών — место поклонения в Афинах. Государственные фотоархивы ассоциируют этот объект со следующими темами: Афины, дома, город, здание.</p></div>
 </section>
 </body>
 </html>

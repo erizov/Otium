@@ -204,6 +204,7 @@ def _row_max_height_px(
     row_kind: str,
     *,
     compact: bool = False,
+    height_scale: float = 1.0,
 ) -> int:
     tier_longest = _row_tier_longest(paths)
     if row_kind == "pair":
@@ -220,7 +221,8 @@ def _row_max_height_px(
             vh = 14.0 if compact else 20.0
         else:
             vh = 24.0 if compact else 36.0
-    return int(_ROW_VIEWPORT_H_PX * vh / 100.0)
+    scaled = int(_ROW_VIEWPORT_H_PX * vh / 100.0 * max(1.0, height_scale))
+    return max(1, scaled)
 
 
 def row_equal_img_styles(
@@ -228,12 +230,18 @@ def row_equal_img_styles(
     *,
     row_kind: str = "pair",
     compact: bool = False,
+    height_scale: float = 1.0,
 ) -> list[str]:
     """Equal inline heights — fill each column up to the row resolution cap."""
     count = len(paths)
     if count < 2:
         return [""] * count
-    max_h = _row_max_height_px(paths, row_kind, compact=compact)
+    max_h = _row_max_height_px(
+        paths,
+        row_kind,
+        compact=compact,
+        height_scale=height_scale,
+    )
     col_w = _row_col_width_px(count)
     dims: list[tuple[int, int]] = []
     for path in paths:
@@ -244,6 +252,8 @@ def row_equal_img_styles(
         target = _row_equal_height_px(dims, max_h, col_w)
     else:
         target = max_h
+    if height_scale > 1.0:
+        target = min(int(target * height_scale), max_h)
     if target <= 0:
         return [""] * count
     style = _ROW_IMG_STYLE.format(target)
@@ -344,6 +354,7 @@ def place_figure_row_html(
     edition: str,
     image_paths: Sequence[Path | None] | None = None,
     row_paths: Sequence[Path | None] | None = None,
+    row_height_scale: float = 1.0,
 ) -> str:
     """One horizontal row of figures; ``row_kind``: pair | triple | many."""
     s = _ui_strings(edition)
@@ -358,7 +369,18 @@ def place_figure_row_html(
             row_path_list.append(_path_at(image_paths, idx0))
     img_extras: list[str]
     if len(img_slice) >= 2:
-        img_extras = row_equal_img_styles(row_path_list, row_kind=row_kind)
+        scale = row_height_scale if row_kind in ("triple", "many") else 1.0
+        if row_kind in ("triple", "many"):
+            from scripts.smolensk_guide_image_layout import (
+                resolve_triple_row_height_scale,
+            )
+
+            scale = resolve_triple_row_height_scale(scale)
+        img_extras = row_equal_img_styles(
+            row_path_list,
+            row_kind=row_kind,
+            height_scale=scale,
+        )
     else:
         img_extras = [""] * len(img_slice)
     for pos, (seq_i, src) in enumerate(img_slice):
@@ -382,8 +404,16 @@ def place_figure_rows_max_three_html(
     edition: str,
     *,
     image_paths: Sequence[Path | None] | None = None,
+    triple_row_height_scale: float = 1.0,
 ) -> str:
     """Stack rows of up to three images (Smolensk-style multi-photo places)."""
+    from scripts.smolensk_guide_image_layout import (
+        resolve_triple_row_height_scale,
+    )
+
+    triple_row_height_scale = resolve_triple_row_height_scale(
+        triple_row_height_scale,
+    )
     s = _ui_strings(edition)
     if not indexed:
         return ""
@@ -413,6 +443,7 @@ def place_figure_rows_max_three_html(
                     row_kind="triple",
                     edition=edition,
                     image_paths=image_paths,
+                    row_height_scale=triple_row_height_scale,
                 )
             )
             i += 3
@@ -456,6 +487,7 @@ def place_figures_layout_html(
     *,
     start_index: int = 0,
     image_paths: Sequence[Path | None] | None = None,
+    triple_row_height_scale: float = 1.0,
 ) -> str:
     """Lay out place photos: ≤2 in one row; >2 in rows of up to three."""
     if not img_srcs:
@@ -491,4 +523,13 @@ def place_figures_layout_html(
         name_plain,
         edition,
         image_paths=image_paths,
+        triple_row_height_scale=triple_row_height_scale,
     )
+
+
+try:
+    from scripts.smolensk_guide_image_layout import install_typography_patch
+
+    install_typography_patch()
+except ImportError:
+    pass

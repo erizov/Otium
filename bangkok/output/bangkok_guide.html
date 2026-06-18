@@ -13,7 +13,7 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
 .otium-logo { font-family: 'Spectral', serif; font-size: 2.15rem;
   font-weight: 600; letter-spacing: 0.18em; margin-bottom: 0.85rem; }
 .otiump { margin: 0.42rem 0; line-height: 1.42; text-align: justify;
-  max-width: 38rem; font-size: 0.95rem; }
+  font-size: 0.95rem; }
 .guide-title { page-break-after: auto; margin-bottom: 0.55rem;
   page-break-inside: avoid; }
 .historical-reference { margin: 0.75rem 0 1.15rem;
@@ -63,22 +63,103 @@ ol.trip-stops a:hover { text-decoration: underline; }
 .heraldry-univ-caption { font-size: 0.52rem; line-height: 1.18;
   margin: 0.12rem 0 0; padding: 0 0.06rem; color: #252525;
   text-align: center; font-weight: 500; }
-.heraldry-motto { text-align: center; max-width: 18rem; margin: 0.18rem auto;
+.heraldry-motto { text-align: center; margin: 0.18rem auto;
   width: 100%; }
 .motto-line { font-family: 'Spectral', serif; font-size: 1rem;
   margin: 0; color: #333; line-height: 1.35; }
 .guide-title h1.guide-title-main { font-family: 'Spectral', serif;
   font-size: 2.35rem; margin-bottom: 0.5rem; font-weight: 600; }
 .lead { color: #444; font-size: 1.05rem; }
-.guide-toc { margin: 0.85rem 0 1.15rem; page-break-inside: avoid; }
-.guide-toc h2 { font-family: 'Spectral', serif; font-size: 1.28rem;
-  font-weight: 600; margin: 0.4rem 0 0.55rem; }
+
+.guide-toc { page-break-before: always; break-before: page;
+  page-break-after: always; break-after: page;
+  margin: 0; padding: 0.2rem 0 0.45rem; page-break-inside: auto; }
+.guide-toc h2 { font-family: 'Spectral', serif;
+  font-size: 1.28rem; font-weight: 600; margin: 0.4rem 0 0.55rem; }
 .guide-toc ol { margin: 0.35rem 0 0.65rem 1.25rem; padding: 0;
   columns: 2; column-gap: 1.5rem; }
 .guide-toc li { margin: 0.18rem 0; line-height: 1.35;
   font-size: 0.88rem; break-inside: avoid; }
-.guide-toc a { color: #1a5276; text-decoration: none; }
+.guide-toc a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.guide-toc a:hover { color: #0d3d56; }
 .guide-toc li.toc-item--sub { font-size: 0.82rem; margin-left: 0.35rem; }
+.toc-back { font-size: 0.78rem; margin: 0 0 0.35rem; text-align: right; }
+.toc-back a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.toc-back a:hover { color: #0d3d56; }
+.place, .historical-reference, .guide-primer, .guide-trip-plans {
+  scroll-margin-top: 1.25rem; }
+.historical-reference h2, .guide-primer h2, .guide-trip-plans h2,
+.chapter-head h2, .place-lead h3 { position: relative; }
+.guide-toc + .place, .guide-toc + .chapter-head {
+  page-break-before: avoid; break-before: avoid-page; }
+.place-lead { page-break-inside: avoid; break-inside: avoid-page;
+  page-break-after: auto; }
+.place-lead > h3 { page-break-after: avoid; break-after: avoid-page; }
+.place-lead > .place-meta { page-break-after: avoid; break-after: avoid-page; }
+
+.place-fig { page-break-inside: avoid; break-inside: avoid-page;
+  margin: 0.5rem 0 1rem; }
+.place-fig img {
+  page-break-inside: avoid; break-inside: avoid-page;
+  max-height: 48vh; width: auto; max-width: 100%;
+  object-fit: contain; margin-left: auto; margin-right: auto; }
+.place-fig--hi-res img { max-height: 52vh; }
+.place-fig--lo-res img { max-height: 30vh; }
+.place-pdf-fig-row {
+  display: flex; flex-direction: row; flex-wrap: wrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.45rem 0.55rem; margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row .place-fig {
+  flex: 1 1 30%; margin: 0; min-width: 26%; max-width: 100%; }
+.place-pdf-fig-row .place-fig img {
+  width: auto; max-width: 100%; height: auto; max-height: 44vh;
+  object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--pair {
+  flex-wrap: nowrap; justify-content: space-between;
+  align-items: flex-end; gap: 0.5rem 0.65rem; }
+.place-pdf-fig-row--pair .place-fig {
+  flex: 1 1 47%; min-width: 0; max-width: 50%;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--pair .place-fig img {
+  max-height: 44vh; object-fit: contain; }
+.place-pdf-fig-row--pair .place-fig--hi-res img { max-height: 52vh; }
+.place-pdf-fig-row--pair .place-fig--lo-res img { max-height: 26vh; }
+.place-pdf-fig-row--pair .place-fig--row-sized img,
+.place-pdf-fig-row--triple .place-fig--row-sized img,
+.place-pdf-fig-row--many .place-fig--row-sized img {
+  width: auto; max-width: 100%; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row .place-fig--row-sized.place-fig--hi-res img,
+.place-pdf-fig-row .place-fig--row-sized.place-fig--lo-res img {
+  max-height: unset; }
+.place-pdf-fig-rows-stack {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple {
+  display: flex; flex-direction: row; flex-wrap: nowrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.4rem 0.48rem; margin: 0;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--triple .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--triple .place-fig--hi-res img { max-height: 42vh; }
+.place-pdf-fig-row--triple .place-fig--lo-res img { max-height: 18vh; }
+.place-pdf-fig-row--many {
+  flex-wrap: nowrap; justify-content: center; align-items: flex-end;
+  gap: 0.35rem 0.42rem; }
+.place-pdf-fig-row--many .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--many .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+
+
 .place { margin-bottom: 2.2rem; page-break-inside: auto; }
 h3 { font-family: 'Spectral', serif; font-size: 1.22rem; margin: 1.2rem 0 0.35rem;
   font-weight: 600; }
@@ -90,7 +171,6 @@ h4 { font-family: 'Spectral', serif; font-size: 0.95rem; text-transform: upperca
   color: #555; font-size: 0.95rem; margin: 0 0 0.5rem; font-style: italic; }
 .place-meta { font-size: 0.92rem; color: #353535; margin: 0 0 0.75rem;
   line-height: 1.4; }
-.place-fig { margin: 0.5rem 0 1rem; }
 img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
 .prose, .place-desc p { margin: 0.45rem 0; line-height: 1.5;
   text-align: justify; }
@@ -110,7 +190,9 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <figure class="heraldry-fig heraldry-coat-book" title="Seal of Bangkok"><img src="../images/guide_coat_of_arms.svg" alt="Seal of Bangkok"/></figure>
 <figure class="heraldry-fig heraldry-coat-book" title="Flag of Bangkok"><img src="../images/guide_flag.svg" alt="Flag of Bangkok"/></figure>
 </div></div><h1 class="guide-title-main">Bangkok</h1><p class="lead">Guide. Places in this edition: 32.</p></header>
+<nav class="guide-toc" id="guide-toc" aria-label="Contents"><h2>Contents</h2><ol><li class="toc-item"><a href="#guide-trips">Trip ideas</a></li><li class="toc-item"><a href="#bangkok_ananta_samakhom">Ananta Samakhom Throne Hall</a></li><li class="toc-item"><a href="#bangkok_asiatique">Asiatique riverfront</a></li><li class="toc-item"><a href="#bangkok_bang_namphueng">Bang Krachao</a></li><li class="toc-item"><a href="#bangkok_chao_phraya_river">Chao Phraya express boats</a></li><li class="toc-item"><a href="#bangkok_chatuchak_park">Chatuchak Park</a></li><li class="toc-item"><a href="#bangkok_chatuchak_market">Chatuchak Weekend Market</a></li><li class="toc-item"><a href="#bangkok_erawan_shrine">Erawan Shrine</a></li><li class="toc-item"><a href="#bangkok_wat_suthat_swing">Giant Swing</a></li><li class="toc-item"><a href="#bangkok_grand_palace">Grand Palace complex</a></li><li class="toc-item"><a href="#bangkok_iconsiam">ICONSIAM</a></li><li class="toc-item"><a href="#bangkok_jim_thompson_art">Jim Thompson Art Center</a></li><li class="toc-item"><a href="#bangkok_jim_thompson_house">Jim Thompson House</a></li><li class="toc-item"><a href="#bangkok_mahanakhon">King Power Mahanakhon</a></li><li class="toc-item"><a href="#bangkok_lumphini_park">Lumphini Park</a></li><li class="toc-item"><a href="#bangkok_mbk_center">MBK Center</a></li><li class="toc-item"><a href="#bangkok_national_museum">National Museum Bangkok</a></li><li class="toc-item"><a href="#bangkok_roayal_barges">Royal Barges Museum</a></li><li class="toc-item"><a href="#bangkok_scala_cinema">Scala Cinema</a></li><li class="toc-item"><a href="#bangkok_siam_paragon">Siam Paragon</a></li><li class="toc-item"><a href="#bangkok_ton_son_mosque">Ton Son Mosque</a></li><li class="toc-item"><a href="#bangkok_wat_arun">Wat Arun (Temple of Dawn)</a></li><li class="toc-item"><a href="#bangkok_wat_arun_view">Wat Arun view</a></li><li class="toc-item"><a href="#bangkok_wat_benchamabophit">Wat Benchamabophit (Marble Temple)</a></li><li class="toc-item"><a href="#bangkok_wat_kalayanamit">Wat Kalayanamit</a></li><li class="toc-item"><a href="#bangkok_wat_mahathat">Wat Mahathat</a></li><li class="toc-item"><a href="#bangkok_wat_pho">Wat Pho (Temple of the Reclining Buddha)</a></li><li class="toc-item"><a href="#bangkok_wat_phrakaew">Wat Phra Kaew</a></li><li class="toc-item"><a href="#bangkok_wat_ratchanatdaram">Wat Ratchanatdaram</a></li><li class="toc-item"><a href="#bangkok_wat_saket">Wat Saket (Golden Mount)</a></li><li class="toc-item"><a href="#bangkok_wat_suthat">Wat Suthat</a></li><li class="toc-item"><a href="#bangkok_wat_traimit">Wat Traimit (Golden Buddha)</a></li><li class="toc-item"><a href="#bangkok_yaowarat">Yaowarat Road (Chinatown)</a></li></ol></nav>
 <section class="guide-trip-plans" id="guide-trips" aria-label="Trip ideas"><h2>Trip ideas</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 <article class="trip-plan" id="trip-1d"><h3>One day</h3>
 <p class="prose">A compact loop linking the strongest cards in this guide, ordered to minimise backtracking on foot.</p>
 <ol class="trip-stops"><li><a href="#bangkok_wat_suthat_swing">Giant Swing</a> (~75min)</li>
@@ -138,256 +220,438 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <ol class="trip-stops"><li><a href="#bangkok_chatuchak_market">Chatuchak Weekend Market</a> (~75min)</li>
 <li><a href="#bangkok_wat_arun_view">Wat Arun view</a> (~75min)</li>
 <li><a href="#bangkok_wat_kalayanamit">Wat Kalayanamit</a> (~75min)</li></ol></article></section>
-<nav class="guide-toc" aria-label="Contents"><h2>Contents</h2><ol><li class="toc-item"><a href="#guide-trips">Trip ideas</a></li><li class="toc-item"><a href="#bangkok_ananta_samakhom">Ananta Samakhom Throne Hall</a></li><li class="toc-item"><a href="#bangkok_asiatique">Asiatique riverfront</a></li><li class="toc-item"><a href="#bangkok_bang_namphueng">Bang Krachao</a></li><li class="toc-item"><a href="#bangkok_chao_phraya_river">Chao Phraya express boats</a></li><li class="toc-item"><a href="#bangkok_chatuchak_park">Chatuchak Park</a></li><li class="toc-item"><a href="#bangkok_chatuchak_market">Chatuchak Weekend Market</a></li><li class="toc-item"><a href="#bangkok_erawan_shrine">Erawan Shrine</a></li><li class="toc-item"><a href="#bangkok_wat_suthat_swing">Giant Swing</a></li><li class="toc-item"><a href="#bangkok_grand_palace">Grand Palace complex</a></li><li class="toc-item"><a href="#bangkok_iconsiam">ICONSIAM</a></li><li class="toc-item"><a href="#bangkok_jim_thompson_art">Jim Thompson Art Center</a></li><li class="toc-item"><a href="#bangkok_jim_thompson_house">Jim Thompson House</a></li><li class="toc-item"><a href="#bangkok_mahanakhon">King Power Mahanakhon</a></li><li class="toc-item"><a href="#bangkok_lumphini_park">Lumphini Park</a></li><li class="toc-item"><a href="#bangkok_mbk_center">MBK Center</a></li><li class="toc-item"><a href="#bangkok_national_museum">National Museum Bangkok</a></li><li class="toc-item"><a href="#bangkok_roayal_barges">Royal Barges Museum</a></li><li class="toc-item"><a href="#bangkok_pdfband_3_6a8db025">Scala Cinema</a></li><li class="toc-item"><a href="#bangkok_siam_paragon">Siam Paragon</a></li><li class="toc-item"><a href="#bangkok_pdfband_2_606a0e24">Ton Son Mosque</a></li><li class="toc-item"><a href="#bangkok_wat_arun">Wat Arun (Temple of Dawn)</a></li><li class="toc-item"><a href="#bangkok_wat_arun_view">Wat Arun view</a></li><li class="toc-item"><a href="#bangkok_wat_benchamabophit">Wat Benchamabophit (Marble Temple)</a></li><li class="toc-item"><a href="#bangkok_wat_kalayanamit">Wat Kalayanamit</a></li><li class="toc-item"><a href="#bangkok_wat_mahathat">Wat Mahathat</a></li><li class="toc-item"><a href="#bangkok_wat_pho">Wat Pho (Temple of the Reclining Buddha)</a></li><li class="toc-item"><a href="#bangkok_wat_phrakaew">Wat Phra Kaew</a></li><li class="toc-item"><a href="#bangkok_wat_ratchanatdaram">Wat Ratchanatdaram</a></li><li class="toc-item"><a href="#bangkok_wat_saket">Wat Saket (Golden Mount)</a></li><li class="toc-item"><a href="#bangkok_wat_suthat">Wat Suthat</a></li><li class="toc-item"><a href="#bangkok_wat_traimit">Wat Traimit (Golden Buddha)</a></li><li class="toc-item"><a href="#bangkok_yaowarat">Yaowarat Road (Chinatown)</a></li></ol></nav>
 <section class="place" id="bangkok_ananta_samakhom">
+<div class="place-lead">
 <h3>Ananta Samakhom Throne Hall</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Thai-French eclectic | Period: 1906–1913</p>
-<figure class="place-fig"><img src="../images/bangkok_ananta_samakhom.jpg" alt="Ananta Samakhom Throne Hall"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/bangkok_ananta_samakhom.jpg" alt="Ananta Samakhom Throne Hall" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/bangkok_ananta_samakhom_b.jpg" alt="Ananta Samakhom Throne Hall — view 2" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Ananta Samakhom Throne Hall is a majestic and imposing structure located on Ratchadamnoen Avenue, Bangkok&#x27;s grand thoroughfare. Built during the reign of King Chulalongkorn, it serves as a testament to Thai architectural ingenuity and royal splendor. It features intricate carvings and decorative details inspired by both Thai and Western styles. The hall has four wings that represent the four cardinal directions. Its central dome is adorned with gold leaf and murals depicting scenes from Thai history. Ananta Samakhom is also known for its beautiful gardens and fountains, which enhance its aesthetic appeal. Today, it hosts various cultural events, exhibitions, and performances.</p>
 <p class="prose">Constructed between 1906 and 1913, Ananta Samakhom was originally intended as a venue for royal audiences and ceremonies. Designed by renowned French architect Paul Lavanham, its architecture blends traditional Thai elements with European influences, showcasing the fusion of cultures under King Chulalongkorn’s rule. A symbol of Thailand&#x27;s rich cultural heritage and historical significance, Ananta Samakhom offers visitors a glimpse into the opulent past of Bangkok&#x27;s monarchy.</p></div>
 </section>
 <section class="place" id="bangkok_asiatique">
+<div class="place-lead">
 <h3>Asiatique riverfront</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Modern-Thai fusion | Period: 2006</p>
-<figure class="place-fig"><img src="../images/bangkok_asiatique.jpg" alt="Asiatique riverfront"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/bangkok_asiatique.jpg" alt="Asiatique riverfront" width="330" height="440" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/bangkok_asiatique_b.jpg" alt="Asiatique riverfront — view 2" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Asiatique The Riverfront is a vibrant entertainment district and shopping mall located along the Chao Phraya River in Bangkok. Established in 2006, it combines modern architecture with traditional Thai elements, creating a unique fusion of culture and commerce. It features over 150 shops, restaurants, and entertainment venues. The central waterway provides scenic boat rides and live performances. Its architectural style incorporates Thai pagodas and balconies into modern designs. Nighttime illuminations enhance the atmosphere, drawing crowds throughout the week. Located near Ratchaprasong intersection, it’s easily accessible via public transport.</p>
 <p class="prose">Opened in 2006, Asiatique was designed to revitalize the riverside area by blending historical charm with contemporary design. It quickly became a popular destination for both locals and tourists seeking a mix of shopping, dining, and cultural experiences. Visitors come to Asiatique to enjoy its blend of traditional Thai aesthetics and modern amenities, making it a key attraction for those looking for a relaxing yet lively evening out.</p></div>
 </section>
 <section class="place" id="bangkok_bang_namphueng">
+<div class="place-lead">
 <h3>Bang Krachao</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/bangkok_bang_namphueng.jpg" alt="Bang Krachao"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/bangkok_bang_namphueng.jpg" alt="Bang Krachao" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/bangkok_bang_namphueng_b.jpg" alt="Bang Krachao — view 2" width="330" height="186" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Located on the eastern bank of the Chao Phraya River, Bang Krachao is a lush green oasis offering tranquil walks and scenic views of Bangkok&#x27;s skyline. It’s a favorite spot for locals seeking respite from urban hustle. The park covers approximately 476 acres of land. It features walking trails, picnic areas, and boat tours along the Chao Phraya River. Birdwatchers can observe various species including egrets, herons, and kingfishers. Bang Krachao hosts occasional cultural festivals showcasing local traditions and crafts. Boats depart regularly from Tha Tien Pier, providing access to the island.</p>
 <p class="prose">Originally a rural village, Bang Krachao&#x27;s transformation into a park began in the late 1980s when it was designated as a recreational area to preserve its natural beauty and provide a green space for residents. Today, it remains one of Bangkok&#x27;s most popular destinations for nature lovers and tourists alike. Visit Bang Krachao for its serene riverbanks, birdwatching opportunities, and breathtaking sunsets over the capital city&#x27;s iconic skyscrapers.</p></div>
 </section>
 <section class="place" id="bangkok_chao_phraya_river">
+<div class="place-lead">
 <h3>Chao Phraya express boats</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Central pier network</p>
-<figure class="place-fig"><img src="../images/bangkok_chao_phraya_river.jpg" alt="Chao Phraya express boats"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/bangkok_chao_phraya_river.jpg" alt="Chao Phraya express boats" width="1280" height="720" style="height: 259px; max-height: 259px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/bangkok_chao_phraya_river_b.jpg" alt="Chao Phraya express boats — view 2" width="330" height="186" style="height: 259px; max-height: 259px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Orange-flag express boats skip-stop between old city wats and modern hotels—cheap deck seating with river breeze. Tourist boats cost more but add narration and fewer transfers. Evening ICONSIAM ferries link shopping malls with light shows.</p>
 <p class="prose">Canal city logistics moved toward motorised ferries as roads choked; river remains a commuter spine. The scenic spine tying Wat Arun, Tha Tien, and Sathorn piers.</p></div>
 </section>
 <section class="place" id="bangkok_chatuchak_park">
+<div class="place-lead">
 <h3>Chatuchak Park</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Period: 1984</p>
-<figure class="place-fig"><img src="../images/bangkok_chatuchak_park.jpg" alt="Chatuchak Park"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/bangkok_chatuchak_park.jpg" alt="Chatuchak Park" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/bangkok_chatuchak_park_b.jpg" alt="Chatuchak Park — view 2" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Chatuchak Park is Bangkok&#x27;s largest and most popular weekend market, located on the outskirts of the city. Established in 1984, it has become a hub for local crafts, street food, and cultural experiences. It spans over 35 acres, making it one of the largest markets in Southeast Asia. The park features more than 15,000 stalls selling everything from antiques to fresh produce. Each week, millions of visitors flock here to explore the diverse offerings and enjoy live performances. It&#x27;s known for its bustling atmosphere and colorful displays of flowers and plants. Many international travelers consider it a highlight of their Bangkok experience.</p>
 <p class="prose">In 1984, Chatuchak Park was opened as a recreational space and flea market, quickly evolving into one of Thailand&#x27;s iconic destinations. It showcases traditional Thai handicrafts, exotic plants, and vibrant street foods that attract locals and tourists alike. Visitors come to Chatuchak Park for its unique blend of shopping, dining, and relaxation amidst lush greenery.</p></div>
 </section>
 <section class="place" id="bangkok_chatuchak_market">
+<div class="place-lead">
 <h3>Chatuchak Weekend Market</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Kamphaeng Phet Road | Style: Open-air sectional market grid | Period: 1942 market evolution; modern roof sections added</p>
-<figure class="place-fig"><img src="../images/bangkok_chatuchak_market.jpg" alt="Chatuchak Weekend Market"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/bangkok_chatuchak_market.jpg" alt="Chatuchak Weekend Market" width="1280" height="960" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/bangkok_chatuchak_market_b.jpg" alt="Chatuchak Weekend Market — view 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Massive weekend bazaar for plants, crafts, street food, and vintage clothing—section maps help avoid getting lost. Morning hours beat heat and crowds; carry cash for small vendors. MRT Kamphaeng Phet exits directly into market sectors.</p>
 <p class="prose">Grew from municipal flea markets into a national wholesale-retail hybrid with international tourist traffic. Bangkok&#x27;s most intense single-site shopping experience.</p></div>
 </section>
 <section class="place" id="bangkok_erawan_shrine">
+<div class="place-lead">
 <h3>Erawan Shrine</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Ratchaprasong intersection | Style: Hindu spirit house with Khmer-style pavilion | Period: 1956</p>
-<figure class="place-fig"><img src="../images/bangkok_erawan_shrine.jpg" alt="Erawan Shrine"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/bangkok_erawan_shrine_b.jpg" alt="Erawan Shrine" width="330" height="220"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Busy corner shrine to Brahma where dancers offer thanks for answered prayers amid mall traffic. Incense and marigold vendors ring the fence. Evening light mixes with LED billboards overhead.</p>
 <p class="prose">Built to counter bad omens during the original Erawan Hotel construction. Working shrine inside Bangkok&#x27;s luxury retail crossroads.</p></div>
 </section>
 <section class="place" id="bangkok_wat_suthat_swing">
+<div class="place-lead">
 <h3>Giant Swing</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Thai traditional style | Period: late 19th century</p>
-<figure class="place-fig"><img src="../images/bangkok_wat_suthat_swing.jpg" alt="Giant Swing"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/bangkok_wat_suthat_swing.jpg" alt="Giant Swing" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/bangkok_wat_suthat_swing_b.jpg" alt="Giant Swing — view 2" width="330" height="495" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Perched high above Bangkok&#x27;s Lumphini Park, the Giant Swing is a striking symbol of Thai culture and tradition. This towering structure stands as a testament to ancient beliefs and rituals. Located within Lumphini Park, one of Bangkok&#x27;s most popular green spaces. Consists of two towers connected by a suspension bridge. Offers panoramic views of the cityscape below. Symbolizes the importance of faith and tradition in Thai society. Used today primarily for tourism and cultural appreciation.</p>
 <p class="prose">Built during the reign of King Rama V in the late 19th century, the Giant Swing was originally constructed for royal ceremonies and religious festivals. It served as a place where monks would perform sacred rites and blessings, while also offering a breathtaking view of the surrounding landscape. Visiting the Giant Swing allows travelers to experience Thailand’s rich cultural heritage firsthand and witness its unique blend of spirituality and architecture.</p></div>
 </section>
 <section class="place" id="bangkok_grand_palace">
+<div class="place-lead">
 <h3>Grand Palace complex</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Phra Nakhon | Style: Thai royal temples and throne halls | Period: 1782 onward (Rattanakosin foundation)</p>
-<figure class="place-fig"><img src="../images/bangkok_grand_palace.jpg" alt="Grand Palace complex"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/bangkok_grand_palace.jpg" alt="Grand Palace complex" width="1280" height="854" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/bangkok_grand_palace_b.jpg" alt="Grand Palace complex — view 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Walled precinct of throne halls, royal offices, and Wat Phra Kaew with the Emerald Buddha. Strict dress code at gates. Shoulders and knees must be covered; rental sarongs available outside. Combine tickets sometimes bundle nearby museums—check current policy.</p>
 <p class="prose">Rama I moved the capital across the river; successive kings expanded pavilions and mural galleries. Thailand&#x27;s foremost royal and religious ensemble in the old island city.</p></div>
 </section>
 <section class="place" id="bangkok_iconsiam">
+<div class="place-lead">
 <h3>ICONSIAM</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Contemporary Thai-inspired architecture | Period: 2019</p>
-<figure class="place-fig"><img src="../images/bangkok_iconsiam.jpg" alt="ICONSIAM"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/bangkok_iconsiam.jpg" alt="ICONSIAM" width="330" height="440" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/bangkok_iconsiam_b.jpg" alt="ICONSIAM — view 2" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">IconSiam is a modern shopping and entertainment complex located on the banks of the Chao Phraya River in Bangkok, Thailand. Completed in 2019, it offers visitors a blend of high-end retail stores, dining options, and cultural attractions. It boasts over 300 shops and restaurants within its expansive premises. The complex includes an indoor amusement park called Dream World. IconSiam houses a large aquarium showcasing marine life from around Southeast Asia. Its rooftop garden provides panoramic views of the surrounding cityscape. The interior design incorporates Thai art and craftsmanship.</p>
 <p class="prose">Opened in 2019, IconSiam was designed by renowned architect Tadao Ando to reflect traditional Thai architecture while incorporating contemporary elements. The complex features a unique design with a glass facade that reflects the river&#x27;s waters, creating a striking visual effect. A must-visit for shoppers and tourists seeking a vibrant experience combining luxury brands, culinary delights, and cultural immersion.</p></div>
 </section>
 <section class="place" id="bangkok_jim_thompson_art">
+<div class="place-lead">
 <h3>Jim Thompson Art Center</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Traditional Thai architecture combined with modern design elements | Period: 1983</p>
-<figure class="place-fig"><img src="../images/bangkok_jim_thompson_art.jpg" alt="Jim Thompson Art Center"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/bangkok_jim_thompson_art.jpg" alt="Jim Thompson Art Center" width="330" height="440" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/bangkok_jim_thompson_art_b.jpg" alt="Jim Thompson Art Center — view 2" width="330" height="246" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Jim Thompson Art Center is a serene oasis nestled within the bustling heart of Bangkok, showcasing contemporary and traditional Thai art. Located on Sukhumvit Soi 11, near Asoke BTS station. Features rotating exhibits of Thai artists. Includes a tranquil garden with water features. Hosted numerous international exhibitions. Offers guided tours and workshops.</p>
 <p class="prose">Established in 1983 by American expatriate Jim Thompson, the center honors his passion for Thai culture and design. Originally housed in a historic villa, it later expanded to include modern galleries and gardens designed by renowned architect Sirchanya Kijsridad. A must-visit for those seeking insights into Thailand&#x27;s artistic heritage and contemporary expression.</p></div>
 </section>
 <section class="place" id="bangkok_jim_thompson_house">
+<div class="place-lead">
 <h3>Jim Thompson House</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Rama I Road | Style: Traditional Thai timber houses reassembled | Period: 1950s teak compound</p>
-<figure class="place-fig"><img src="../images/bangkok_jim_thompson_house.jpg" alt="Jim Thompson House"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/bangkok_jim_thompson_house.jpg" alt="Jim Thompson House" width="1280" height="960" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/bangkok_jim_thompson_house_b.jpg" alt="Jim Thompson House — view 2" width="330" height="440" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Silk merchant&#x27;s preserved home displaying Southeast Asian art and Thai craft rooms. Guided tours explain Thompson&#x27;s OSS background and disappearance myth. Café and boutique extend the visit beyond the house circuit.</p>
 <p class="prose">Thompson collected panels from upcountry houses before his 1967 Malaysia trip. Accessible introduction to Thai domestic architecture downtown.</p></div>
 </section>
 <section class="place" id="bangkok_mahanakhon">
+<div class="place-lead">
 <h3>King Power Mahanakhon</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Modern | Period: 2016</p>
-<figure class="place-fig"><img src="../images/bangkok_mahanakhon.jpg" alt="King Power Mahanakhon"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/bangkok_mahanakhon.jpg" alt="King Power Mahanakhon" width="330" height="78" style="height: 109px; max-height: 109px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--row-sized"><img src="../images/bangkok_mahanakhon_b.jpg" alt="King Power Mahanakhon — view 2" width="330" height="587" style="height: 109px; max-height: 109px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">King Power Mahanakhon is a striking skyscraper dominating the Bangkok skyline, offering panoramic views and luxurious amenities. Opened in 2016. Height: 314 meters. Designed by Kohn Pedersen Fox Associates. Features a luxury hotel and retail spaces. Panoramic observation deck on the 77th floor.</p>
 <p class="prose">Completed in 2016, King Power Mahanakhon stands as one of Bangkok&#x27;s tallest buildings at 314 meters. Designed by Kohn Pedersen Fox Associates, it incorporates modern architecture with sleek lines and glass facades. The tower houses retail spaces, offices, and a luxury hotel, attracting visitors for its unique design and stunning vistas. Visit King Power Mahanakhon to experience breathtaking views of Bangkok and enjoy high-end shopping and dining options.</p></div>
 </section>
 <section class="place" id="bangkok_lumphini_park">
+<div class="place-lead">
 <h3>Lumphini Park</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
-<p class="place-meta">Address: Pathum Wan | Style: Tropical urban park and lake | Period: 1920s royal park</p>
-<figure class="place-fig"><img src="../images/bangkok_lumphini_park.jpg" alt="Lumphini Park"/></figure>
+<p class="place-meta">Location: Pathum Wan | Style: Tropical urban park and lake | Period: 1920s royal park</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/bangkok_lumphini_park.jpg" alt="Lumphini Park" width="1280" height="706" style="height: 254px; max-height: 254px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/bangkok_lumphini_park_b.jpg" alt="Lumphini Park — view 2" width="330" height="223" style="height: 254px; max-height: 254px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Central green with monitor lizards, paddle boats, and dawn jogging loops around the lake. MRT Silom station opens directly onto the park edge. Smoking bans are enforced on most internal paths.</p>
 <p class="prose">Named after Lumbini in Nepal; land was royal before public opening. Primary breathing space between Silom and Sukhumvit office belts.</p></div>
 </section>
 <section class="place" id="bangkok_mbk_center">
+<div class="place-lead">
 <h3>MBK Center</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Modern-Thai fusion | Period: 1986</p>
-<figure class="place-fig"><img src="../images/bangkok_mbk_center.jpg" alt="MBK Center"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/bangkok_mbk_center.jpg" alt="MBK Center" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/bangkok_mbk_center_b.jpg" alt="MBK Center — view 2" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">MBK Center is Bangkok&#x27;s iconic shopping mall, famed for its vibrant atmosphere and wide array of boutiques, food courts, and entertainment options. Opened in 1986, MBK stands for &#x27;Major Boromindra Kaew&#x27;. It occupies over 400,000 square feet across multiple floors. The mall features more than 2,000 retail outlets. Its central atrium hosts regular live performances and events. MBK attracts millions of visitors annually.</p>
 <p class="prose">Founded in 1986, MBK Center quickly became a cultural hub and one of the city&#x27;s most popular destinations for locals and tourists alike. Its unique design combines modern architecture with traditional Thai aesthetics, making it a symbol of Bangkok’s dynamic urban landscape. A must-visit for shoppers seeking high-end fashion, local crafts, and affordable souvenirs, as well as those looking to experience authentic Thai culture through its lively food courts and diverse entertainment offerings.</p></div>
 </section>
 <section class="place" id="bangkok_national_museum">
+<div class="place-lead">
 <h3>National Museum Bangkok</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Traditional Thai architecture with modern touches | Period: 1874</p>
-<figure class="place-fig"><img src="../images/bangkok_national_museum.jpg" alt="National Museum Bangkok"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/bangkok_national_museum_b.jpg" alt="National Museum Bangkok" width="330" height="220"/></figure>
+</div>
 <div class="place-desc"><p class="prose">The National Museum of Thailand is a grand testament to the country&#x27;s rich cultural heritage and history. Located in Dusit District, it showcases artifacts spanning thousands of years, offering visitors a comprehensive journey through Thai civilization. Founded in 1874 during the reign of King Chulalongkorn. Houses over 200,000 artifacts including sculptures, ceramics, and paintings. Exhibits include ancient Buddha images, royal regalia, and ceremonial objects. Features a blend of traditional Thai architecture with modern design elements. Regularly hosts temporary exhibitions highlighting various aspects of Thai culture.</p>
 <p class="prose">Established in 1874 by King Chulalongkorn, the museum was originally known as the Royal Opium Museum. It later became a repository for historical artifacts, reflecting the evolution of Thai culture over centuries. Today, it stands as one of Bangkok&#x27;s most significant institutions, housing relics that tell the story of ancient kingdoms and dynasties. Visiting the National Museum provides insight into Thailand’s past, its artistry, religion, and royal traditions.</p></div>
 </section>
 <section class="place" id="bangkok_roayal_barges">
+<div class="place-lead">
 <h3>Royal Barges Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Period: 1988</p>
-<figure class="place-fig"><img src="../images/bangkok_roayal_barges.jpg" alt="Royal Barges Museum"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/bangkok_roayal_barges.jpg" alt="Royal Barges Museum" width="330" height="182" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/bangkok_roayal_barges_b.jpg" alt="Royal Barges Museum — view 2" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Discover the Royal Barges Museum, a testament to Thailand&#x27;s royal heritage and maritime traditions. This unique museum showcases intricately decorated royal barges used for ceremonial purposes. The museum houses more than 40 exquisite royal barges. Each barge is meticulously crafted with detailed carvings and decorations. These barges are used exclusively for state ceremonies and religious rituals. Construction of these vessels often took years due to their elaborate designs and craftsmanship. Visitors can explore the museum year-round, enjoying guided tours and educational exhibits.</p>
 <p class="prose">Established in 1988, the Royal Barges Museum preserves over 40 historically significant vessels. These ornate boats were employed during royal processions and special occasions, symbolizing Thailand&#x27;s rich cultural heritage and historical significance. Visit the Royal Barges Museum to appreciate Thailand’s traditional boat-building techniques and its vibrant cultural legacy.</p></div>
 </section>
-<section class="place" id="bangkok_pdfband_3_6a8db025">
+<section class="place" id="bangkok_scala_cinema">
+<div class="place-lead">
 <h3>Scala Cinema</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/bangkok_pdfband_3_6a8db025.jpg" alt="Scala Cinema"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/bangkok_scala_cinema.jpg" alt="Scala Cinema" width="1280" height="720" style="height: 259px; max-height: 259px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/bangkok_scala_cinema_b.jpg" alt="Scala Cinema — view 2" width="330" height="441" style="height: 259px; max-height: 259px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Built in the early 20th century. The architectural style combines elements of Western and Eastern cultures. It is one of the oldest movie theaters in the city. The hall features luxurious decor and finishes. Known for its prestigious cultural events.</p>
 <p class="prose">Scala Cinema is one of Bangkok&#x27;s oldest cinemas, built in the early 20th century. Originally conceived as an elegant venue for film screenings and cultural events, Scala quickly became an important part of the city&#x27;s cultural life. The building is distinguished by its architecture and stands as a symbol of the colonial era, blending elements of Western and Eastern design. Scala Cinema attracts tourists and local residents due to its unique atmosphere and historical significance, serving as a monument of architecture and cultural heritage in Bangkok.</p></div>
 </section>
 <section class="place" id="bangkok_siam_paragon">
+<div class="place-lead">
 <h3>Siam Paragon</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Period: 2002</p>
-<figure class="place-fig"><img src="../images/bangkok_siam_paragon.jpg" alt="Siam Paragon"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/bangkok_siam_paragon.jpg" alt="Siam Paragon" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/bangkok_siam_paragon_b.jpg" alt="Siam Paragon — view 2" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Siam Paragon — shopping mall.</p></div>
 </section>
-<section class="place" id="bangkok_pdfband_2_606a0e24">
+<section class="place" id="bangkok_ton_son_mosque">
+<div class="place-lead">
 <h3>Ton Son Mosque</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/bangkok_pdfband_2_606a0e24.jpg" alt="Ton Son Mosque"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/bangkok_ton_son_mosque.jpg" alt="Ton Son Mosque" width="1280" height="877" style="height: 316px; max-height: 316px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/bangkok_ton_son_mosque_b.jpg" alt="Ton Son Mosque — view 2" width="330" height="440" style="height: 316px; max-height: 316px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">This is one of the few modern-style mosques in Thailand. The architecture of Tong Son is inspired by traditional Islamic motifs, adapted for local climatic conditions. The construction of the mosque was financed by charitable organizations from Malaysia and Indonesia. The building is decorated with mosaic panels made by local artisans. Prayers and religious ceremonies are held here daily.</p>
 <p class="prose">The Tonsai Mosque was built in the mid-20th century and became one of Bangkok&#x27;s first modern Muslim shrines. It combines elements of traditional Islamic architecture with modern architectural solutions that reflect the influence of Thai design and culture. The mosque attracts tourists with its unusual architecture and is an important place of worship for the local Muslim community.</p></div>
 </section>
 <section class="place" id="bangkok_wat_arun">
+<div class="place-lead">
 <h3>Wat Arun (Temple of Dawn)</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Thonburi, Chao Phraya west bank | Style: Khmer-influenced prang encrusted with porcelain | Period: 17th c. origins; prang restored 2013–2017</p>
-<figure class="place-fig"><img src="../images/bangkok_wat_arun.jpg" alt="Wat Arun (Temple of Dawn)"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/bangkok_wat_arun.jpg" alt="Wat Arun (Temple of Dawn)" width="1200" height="1600" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/bangkok_wat_arun_b.jpg" alt="Wat Arun (Temple of Dawn) — view 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Steep central prang decorated with floral china shards, best photographed at sunset from opposite river piers. Ferry hop from Tha Tien is part of the classic riverside itinerary. Narrow stairs on the prang require careful ascent.</p>
 <p class="prose">Named for the dawn glow on its tiles; Rama II-era expansion created the tall Khmer-style tower visitors climb. Thonburi shore&#x27;s vertical exclamation opposite the Grand Palace.</p></div>
 </section>
 <section class="place" id="bangkok_wat_arun_view">
+<div class="place-lead">
 <h3>Wat Arun view</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Khmer-influenced Prang style | Period: late 1760s</p>
-<figure class="place-fig"><img src="../images/bangkok_wat_arun_view.jpg" alt="Wat Arun view"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/bangkok_wat_arun_view.jpg" alt="Wat Arun view" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/bangkok_wat_arun_view_b.jpg" alt="Wat Arun view — view 2" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Perched on the banks of the Chao Phraya River, Wat Arun&#x27;s towering prang and intricate murals offer a breathtaking panorama of Bangkok&#x27;s skyline. This iconic temple is one of the city&#x27;s most photographed landmarks. The temple&#x27;s main prang measures approximately 74 meters high. It houses several Buddha images within its interior shrines. Visitors can ascend the prang for panoramic views of the river and surrounding areas. Its exterior walls are decorated with colorful mosaics and glazed tiles. A small museum showcases artifacts related to the temple&#x27;s history.</p>
 <p class="prose">Constructed during the Ayutthaya era around the late 1760s, Wat Arun was originally named Wat Chetuphon. The temple&#x27;s name derives from &#x27;Arun Rajasakha,&#x27; meaning dawn or morning light, symbolizing the rising sun. Its distinctive prang design reflects Khmer architectural influences, while its vibrant murals depict scenes from Buddhist scriptures and historical events. To appreciate Bangkok&#x27;s unique blend of traditional Thai culture and modern urban life, visiting Wat Arun provides a perfect vantage point to observe both.</p></div>
 </section>
 <section class="place" id="bangkok_wat_benchamabophit">
+<div class="place-lead">
 <h3>Wat Benchamabophit (Marble Temple)</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Si Ayutthaya Road | Style: Thai temple using Carrara marble cladding | Period: 1899 (Prince Naris era)</p>
-<figure class="place-fig"><img src="../images/bangkok_wat_benchamabophit.jpg" alt="Wat Benchamabophit (Marble Temple)"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/bangkok_wat_benchamabophit.jpg" alt="Wat Benchamabophit (Marble Temple)" width="1280" height="959" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/bangkok_wat_benchamabophit_b.jpg" alt="Wat Benchamabophit (Marble Temple) — view 2" width="330" height="517" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Five-baht coin reverse depicts this ubosot. Monastic chanting carries into the cloister galleries. Rama V commissioned a modern royal wat using imported stone and skilled Italian carvers. Classic postcard temple away from riverside crowds.</p></div>
 </section>
 <section class="place" id="bangkok_wat_kalayanamit">
+<div class="place-lead">
 <h3>Wat Kalayanamit</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Thai traditional | Period: late 19th century</p>
-<figure class="place-fig"><img src="../images/bangkok_wat_kalayanamit.jpg" alt="Wat Kalayanamit"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/bangkok_wat_kalayanamit.jpg" alt="Wat Kalayanamit" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/bangkok_wat_kalayanamit_b.jpg" alt="Wat Kalayanamit — view 2" width="330" height="264" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Perched on the banks of the Chao Phraya River, Wat Kalayanamit is a serene temple known for its elegant architecture and peaceful atmosphere. It serves as a spiritual hub for locals and tourists alike. The temple’s main hall houses several Buddha images, including one made entirely out of gold. It has a unique design with three distinct sections representing different stages of Buddhist teachings. Each year, Wat Kalayanamit hosts a festival celebrating the life of Queen Saovabha. Located near Bang Sue Market, it attracts both religious pilgrims and curious travelers seeking cultural experiences. Its location along the river provides easy access by boat or ferry.</p>
 <p class="prose">Built during the reign of King Rama V in the late 19th century, Wat Kalayanamit was originally constructed to honor Queen Saovabha Bongsen, the king&#x27;s beloved consort. The temple features intricate murals depicting scenes from Buddhist scriptures and traditional Thai artistry. Visitors come here to appreciate the tranquility and beauty of the temple, which offers stunning views of the river and surrounding landscape.</p></div>
 </section>
 <section class="place" id="bangkok_wat_mahathat">
+<div class="place-lead">
 <h3>Wat Mahathat</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/bangkok_wat_mahathat.jpg" alt="Wat Mahathat"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/bangkok_wat_mahathat.jpg" alt="Wat Mahathat" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/bangkok_wat_mahathat_b.jpg" alt="Wat Mahathat — view 2" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Wat Mahathat Yuwaratrangsarit (Thai: วัดมหาธาตุยุวราชรังสฤษฎิ์) is a Buddhist temple in Bangkok, Thailand. It is one of only six first-class royal temples of the ratchaworamahawihan grade in Thailand. Its monks belong to the Mahā Nikāya.</p></div>
 </section>
 <section class="place" id="bangkok_wat_pho">
+<div class="place-lead">
 <h3>Wat Pho (Temple of the Reclining Buddha)</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Sanam Chai Road | Style: Rattanakosin temple with long viharn | Period: 16th c. monastery; reclining hall expanded 1832</p>
-<figure class="place-fig"><img src="../images/bangkok_wat_pho.jpg" alt="Wat Pho (Temple of the Reclining Buddha)"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/bangkok_wat_pho.jpg" alt="Wat Pho (Temple of the Reclining Buddha)" width="1067" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/bangkok_wat_pho_b.jpg" alt="Wat Pho (Temple of the Reclining Buddha) — view 2" width="330" height="499" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Giant reclining Buddha in gold leaf with mother-of-pearl feet; campus famous for Thai massage school and chedi rows. Coin bowls line the gallery behind the Buddha&#x27;s back for merit offerings. Traditional massage pavilion may require same-day queue tickets.</p>
 <p class="prose">Rama I enlarged an older wat; Rama III added encyclopaedic stupas of Buddhist cosmology. UNESCO Memory of the World inscription for stone inscriptions on site.</p></div>
 </section>
 <section class="place" id="bangkok_wat_phrakaew">
+<div class="place-lead">
 <h3>Wat Phra Kaew</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/bangkok_wat_phrakaew.jpg" alt="Wat Phra Kaew"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/bangkok_wat_phrakaew_b.jpg" alt="Wat Phra Kaew" width="330" height="220"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Wat Phra Kaew — Royal temple complex in Bangkok, Thailand.</p></div>
 </section>
 <section class="place" id="bangkok_wat_ratchanatdaram">
+<div class="place-lead">
 <h3>Wat Ratchanatdaram</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Traditional Thai Buddhist architecture | Period: Early 20th century</p>
-<figure class="place-fig"><img src="../images/bangkok_wat_ratchanatdaram.jpg" alt="Wat Ratchanatdaram"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/bangkok_wat_ratchanatdaram.jpg" alt="Wat Ratchanatdaram" width="330" height="296" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/bangkok_wat_ratchanatdaram_b.jpg" alt="Wat Ratchanatdaram — view 2" width="330" height="440" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Perched on the banks of the Chao Phraya River, Wat Ratchanatdaram is a serene temple known for its elegant architecture and peaceful atmosphere. It offers visitors a tranquil escape amidst bustling Bangkok. Constructed during the reign of King Vajiravudh (Rama VI). Designed by renowned architect Anusorn Panyarachun. Features intricate murals depicting scenes from Thai mythology. Surrounded by lush gardens offering scenic views of the river. Offers daily meditation sessions and traditional ceremonies.</p>
 <p class="prose">Founded in the early 20th century, Wat Ratchanatdaram was originally built as a royal chapel dedicated to King Rama VI. Over time, it evolved into a significant religious site with historical significance and cultural importance. A must-visit for those seeking spiritual solace and a glimpse into Thailand&#x27;s rich Buddhist heritage.</p></div>
 </section>
 <section class="place" id="bangkok_wat_saket">
+<div class="place-lead">
 <h3>Wat Saket (Golden Mount)</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Boriphat Road | Style: Ayutthaya-style chedi on artificial hill | Period: Ayutthaya origins; chedi expanded 19th c.</p>
-<figure class="place-fig"><img src="../images/bangkok_wat_saket.jpg" alt="Wat Saket (Golden Mount)"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/bangkok_wat_saket.jpg" alt="Wat Saket (Golden Mount)" width="1280" height="960" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/bangkok_wat_saket_b.jpg" alt="Wat Saket (Golden Mount) — view 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Golden chedi atop a man-made hill with spiral ramp; views over Rattanakosin old city. The wat hosts a major Loy Krathong fair each autumn. Modest dress is expected at the upper terrace.</p>
 <p class="prose">Monks carried soil in sacks to raise the drum-shaped reliquary above flood-prone ground. Landmark hill visible from many downtown streets.</p></div>
 </section>
 <section class="place" id="bangkok_wat_suthat">
+<div class="place-lead">
 <h3>Wat Suthat</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Thai architectural style | Period: circa 1840</p>
-<figure class="place-fig"><img src="../images/bangkok_wat_suthat.jpg" alt="Wat Suthat"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/bangkok_wat_suthat.jpg" alt="Wat Suthat" width="330" height="481" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/bangkok_wat_suthat_b.jpg" alt="Wat Suthat — view 2" width="330" height="237" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Perched high on a hilltop overlooking Bangkok&#x27;s historic district, Wat Suthat is one of the city&#x27;s most iconic temples. Its distinctive chedi and towering gold spires make it instantly recognizable even to first-time visitors. The temple&#x27;s main chedi houses relics of Lord Buddha. Its towering central spire is covered with gold leaf. Wat Suthat features detailed murals depicting scenes from Buddhist scriptures. It was renovated extensively in the late 19th century under King Chulalongkorn. Adjacent to the temple stands Phra Phedrong, a large bronze statue.</p>
 <p class="prose">Built during the Ayutthaya period around 1840, Wat Suthat was originally named Wat Praya Thep. It served as a royal temple for King Rama III and later became known for its impressive architecture and religious significance. Today, it&#x27;s considered one of Bangkok&#x27;s top attractions due to its grand design and historical importance. Visiting Wat Suthat allows travelers to experience traditional Thai Buddhist culture and admire intricate carvings and golden decorations.</p></div>
 </section>
 <section class="place" id="bangkok_wat_traimit">
+<div class="place-lead">
 <h3>Wat Traimit (Golden Buddha)</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Yaowarat | Style: Chinese-Thai temple podium and hall | Period: 2010 temple hall; image much older</p>
-<figure class="place-fig"><img src="../images/bangkok_wat_traimit.jpg" alt="Wat Traimit (Golden Buddha)"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/bangkok_wat_traimit.jpg" alt="Wat Traimit (Golden Buddha)" width="997" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/bangkok_wat_traimit_b.jpg" alt="Wat Traimit (Golden Buddha) — view 2" width="330" height="439" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Five-and-a-half tonne solid gold Buddha revealed when a stucco casing cracked during moving. Yaowarat food stalls cluster within a short walk after viewing. Museum levels explain Chinatown migration history.</p>
 <p class="prose">The figure was disguised for centuries before rediscovery in the 1950s. Chinatown&#x27;s spiritual and tourist anchor.</p></div>
 </section>
 <section class="place" id="bangkok_yaowarat">
+<div class="place-lead">
 <h3>Yaowarat Road (Chinatown)</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Samphanthawong | Style: Sino-Thai neon and signage canyon | Period: Early 20th c. shophouse street</p>
-<figure class="place-fig"><img src="../images/bangkok_yaowarat.jpg" alt="Yaowarat Road (Chinatown)"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/bangkok_yaowarat.jpg" alt="Yaowarat Road (Chinatown)" width="1200" height="1600" style="height: 257px; max-height: 257px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/bangkok_yaowarat_b.jpg" alt="Yaowarat Road (Chinatown) — view 2" width="330" height="184" style="height: 257px; max-height: 257px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Night market street for bird&#x27;s nest soup, seafood queues, and gold shops under bilingual signs. Arrive hungry; many stalls open only after dark. MRT Wat Mangkon improves access from other districts.</p>
 <p class="prose">Teochew traders expanded a canal-side lane into a neon gastronomy spine. Bangkok&#x27;s densest evening food theatre.</p></div>
 </section>

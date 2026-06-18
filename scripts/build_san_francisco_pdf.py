@@ -12,6 +12,7 @@ if str(_PROJECT_ROOT) not in sys.path:
 
 from san_francisco.data.places_registry import SAN_FRANCISCO_PLACES
 
+from scripts.city_guide_copy import install_guide_copy_patch
 from scripts.city_guide_jerusalem_style_pdf import run_build_pdf_main
 from scripts.city_guide_title_heraldry_assets import (
     title_symbols_for_slug,
@@ -21,6 +22,7 @@ _TITLE_SYMBOLS = title_symbols_for_slug("san_francisco")
 
 
 def main() -> int:
+    install_guide_copy_patch()
     return run_build_pdf_main(
         project_root=_PROJECT_ROOT,
         city_slug="san_francisco",

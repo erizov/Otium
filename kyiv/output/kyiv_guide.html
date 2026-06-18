@@ -13,7 +13,7 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
 .otium-logo { font-family: 'Cormorant Garamond', serif; font-size: 2.15rem;
   font-weight: 600; letter-spacing: 0.18em; margin-bottom: 0.85rem; }
 .otiump { margin: 0.42rem 0; line-height: 1.42; text-align: justify;
-  max-width: 38rem; font-size: 0.95rem; }
+  font-size: 0.95rem; }
 .guide-title { page-break-after: auto; margin-bottom: 0.55rem;
   page-break-inside: avoid; }
 .historical-reference { margin: 0.75rem 0 1.15rem;
@@ -63,22 +63,96 @@ ol.trip-stops a:hover { text-decoration: underline; }
 .heraldry-univ-caption { font-size: 0.52rem; line-height: 1.18;
   margin: 0.12rem 0 0; padding: 0 0.06rem; color: #252525;
   text-align: center; font-weight: 500; }
-.heraldry-motto { text-align: center; max-width: 18rem; margin: 0.18rem auto;
+.heraldry-motto { text-align: center; margin: 0.18rem auto;
   width: 100%; }
 .motto-line { font-family: 'Cormorant Garamond', serif; font-size: 1rem;
   margin: 0; color: #333; line-height: 1.35; }
 .guide-title h1.guide-title-main { font-family: 'Cormorant Garamond', serif;
   font-size: 2.35rem; margin-bottom: 0.5rem; font-weight: 600; }
 .lead { color: #444; font-size: 1.05rem; }
-.guide-toc { margin: 0.85rem 0 1.15rem; page-break-inside: avoid; }
-.guide-toc h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.28rem;
-  font-weight: 600; margin: 0.4rem 0 0.55rem; }
+
+.guide-toc { page-break-before: always; break-before: page;
+  page-break-after: always; break-after: page;
+  margin: 0; padding: 0.2rem 0 0.45rem; page-break-inside: auto; }
+.guide-toc h2 { font-family: 'Cormorant Garamond', serif;
+  font-size: 1.28rem; font-weight: 600; margin: 0.4rem 0 0.55rem; }
 .guide-toc ol { margin: 0.35rem 0 0.65rem 1.25rem; padding: 0;
   columns: 2; column-gap: 1.5rem; }
 .guide-toc li { margin: 0.18rem 0; line-height: 1.35;
   font-size: 0.88rem; break-inside: avoid; }
-.guide-toc a { color: #1a5276; text-decoration: none; }
+.guide-toc a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.guide-toc a:hover { color: #0d3d56; }
 .guide-toc li.toc-item--sub { font-size: 0.82rem; margin-left: 0.35rem; }
+.toc-back { font-size: 0.78rem; margin: 0 0 0.35rem; text-align: right; }
+.toc-back a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.toc-back a:hover { color: #0d3d56; }
+.place, .historical-reference, .guide-primer, .guide-trip-plans {
+  scroll-margin-top: 1.25rem; }
+.historical-reference h2, .guide-primer h2, .guide-trip-plans h2,
+.chapter-head h2, .place-lead h3 { position: relative; }
+.guide-toc + .place, .guide-toc + .chapter-head {
+  page-break-before: avoid; break-before: avoid-page; }
+.place-lead { page-break-inside: avoid; break-inside: avoid-page;
+  page-break-after: auto; }
+.place-lead > h3 { page-break-after: avoid; break-after: avoid-page; }
+.place-lead > .place-meta { page-break-after: avoid; break-after: avoid-page; }
+
+.place-fig { page-break-inside: avoid; break-inside: avoid-page;
+  margin: 0.5rem 0 1rem; }
+.place-fig img {
+  page-break-inside: avoid; break-inside: avoid-page;
+  max-height: 48vh; width: auto; max-width: 100%;
+  object-fit: contain; margin-left: auto; margin-right: auto; }
+.place-fig--hi-res img { max-height: 52vh; }
+.place-fig--lo-res img { max-height: 30vh; }
+.place-pdf-fig-row {
+  display: flex; flex-direction: row; flex-wrap: wrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.45rem 0.55rem; margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row .place-fig {
+  flex: 1 1 30%; margin: 0; min-width: 26%; max-width: 100%; }
+.place-pdf-fig-row .place-fig img {
+  width: auto; max-width: 100%; height: auto; max-height: 44vh;
+  object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--pair {
+  flex-wrap: nowrap; justify-content: space-between;
+  align-items: flex-end; gap: 0.5rem 0.65rem; }
+.place-pdf-fig-row--pair .place-fig {
+  flex: 1 1 47%; min-width: 0; max-width: 50%;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--pair .place-fig img {
+  max-height: 44vh; object-fit: contain; }
+.place-pdf-fig-row--pair .place-fig--hi-res img { max-height: 50vh; }
+.place-pdf-fig-row--pair .place-fig--lo-res img { max-height: 26vh; }
+.place-pdf-fig-rows-stack {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple {
+  display: flex; flex-direction: row; flex-wrap: nowrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.4rem 0.48rem; margin: 0;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--triple .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--triple .place-fig--hi-res img { max-height: 38vh; }
+.place-pdf-fig-row--triple .place-fig--lo-res img { max-height: 18vh; }
+.place-pdf-fig-row--many {
+  flex-wrap: nowrap; justify-content: center; align-items: flex-end;
+  gap: 0.35rem 0.42rem; }
+.place-pdf-fig-row--many .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--many .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+
+
 .place { margin-bottom: 2.2rem; page-break-inside: auto; }
 h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.22rem; margin: 1.2rem 0 0.35rem;
   font-weight: 600; }
@@ -90,7 +164,6 @@ h4 { font-family: 'Cormorant Garamond', serif; font-size: 0.95rem; text-transfor
   color: #555; font-size: 0.95rem; margin: 0 0 0.5rem; font-style: italic; }
 .place-meta { font-size: 0.92rem; color: #353535; margin: 0 0 0.75rem;
   line-height: 1.4; }
-.place-fig { margin: 0.5rem 0 1rem; }
 img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
 .prose, .place-desc p { margin: 0.45rem 0; line-height: 1.5;
   text-align: justify; }
@@ -110,11 +183,14 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <figure class="heraldry-fig heraldry-coat-book" title="Coat of arms of Kyiv"><img src="../images/guide_coat_of_arms.svg" alt="Coat of arms of Kyiv"/></figure>
 <figure class="heraldry-fig heraldry-coat-book" title="Flag of Kyiv"><img src="../images/guide_flag.svg" alt="Flag of Kyiv"/></figure>
 </div></div><h1 class="guide-title-main">Kyiv</h1><p class="lead">Guide. Places in this edition: 30.</p></header>
+<nav class="guide-toc" id="guide-toc" aria-label="Contents"><h2>Contents</h2><ol><li class="toc-item"><a href="#guide-historical">Historical overview</a></li><li class="toc-item"><a href="#guide-trips">Trip ideas</a></li><li class="toc-item"><a href="#kyiv_andrews_descent">Andriyivskyy Descent</a></li><li class="toc-item"><a href="#kyiv_ar_rahma">Ar-Rahma</a></li><li class="toc-item"><a href="#kyiv_bessarabka">Bessarabsky Market</a></li><li class="toc-item"><a href="#kyiv_contract_house">Contract House</a></li><li class="toc-item"><a href="#kyiv_bridge_klitschko">Glass Bridge Kyiv</a></li><li class="toc-item"><a href="#kyiv_golden_gate">Golden Gate</a></li><li class="toc-item"><a href="#kyiv_lavra_bell_tower">Great Lavra Bell Tower</a></li><li class="toc-item"><a href="#kyiv_house_chimeras">House with Chimaeras</a></li><li class="toc-item"><a href="#kyiv_hryshko_garden">Hryshko National Botanical Garden</a></li><li class="toc-item"><a href="#kyiv_maidan">Independence Square</a></li><li class="toc-item"><a href="#kyiv_landmark_2">Kyiv</a></li><li class="toc-item"><a href="#kyiv_landmark">Kyiv Landmark</a></li><li class="toc-item"><a href="#kyiv_pechersk_lavra">Kyiv Pechersk Lavra</a></li><li class="toc-item"><a href="#kyiv_mariinsky_palace">Mariinsky Palace</a></li><li class="toc-item"><a href="#kyiv_mariinsky_park">Mariinsky Park</a></li><li class="toc-item"><a href="#kyiv_mosque_engraving">Mosque engraving</a></li><li class="toc-item"><a href="#kyiv_motherland">Motherland Monument</a></li><li class="toc-item"><a href="#kyiv_mystetskyi">Mystetskyi Arsenal</a></li><li class="toc-item"><a href="#kyiv_national_museum">National Art Museum of Ukraine</a></li><li class="toc-item"><a href="#kyiv_national_opera">National Opera of Ukraine</a></li><li class="toc-item"><a href="#kyiv_one_street_museum">One Street Museum</a></li><li class="toc-item"><a href="#kyiv_pechersk_district">Pechersk government quarter</a></li><li class="toc-item"><a href="#kyiv_podil">Podil district</a></li><li class="toc-item"><a href="#kyiv_saint_sophia">Saint Sophia Cathedral</a></li><li class="toc-item"><a href="#kyiv_st_alexander">St Alexander Roman Catholic church</a></li><li class="toc-item"><a href="#kyiv_sts_boris_gleb">St Boris and Gleb Monastery</a></li><li class="toc-item"><a href="#kyiv_sts_cyril_methodius">St Cyrils Monastery</a></li><li class="toc-item"><a href="#kyiv_st_michael">St Michael Golden Domed Monastery</a></li><li class="toc-item"><a href="#kyiv_st_nicholas">St Nicholas Cathedral</a></li><li class="toc-item"><a href="#kyiv_st_volodymyr_cathedral">St Volodymyr Cathedral</a></li></ol></nav>
 <section class="historical-reference" id="guide-historical" aria-label="Historical overview"><h2>Historical overview</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 <p class="prose">Kyiv is the capital of Ukraine and one of Eastern Europe’s oldest continuously inhabited cities, set on the Dnieper hills.</p>
 <p class="prose">As a centre of Kyivan Rus, later Polish-Lithuanian, imperial, Soviet, and independent eras, it combines monastic cliffs, boulevards, and modern quarters. Its history is inseparable from the wider region’s faith, trade, and statecraft.</p>
 <p class="prose">Kyiv endured the Mongol sack, Polish-Lithuanian rule, imperial administration, and the Soviet era as Ukraine’s capital. Independence from 1991 and events after 2014 reframed its political role as a European capital on the Dnieper.</p></section>
 <section class="guide-trip-plans" id="guide-trips" aria-label="Trip ideas"><h2>Trip ideas</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 <article class="trip-plan" id="trip-1d"><h3>One day</h3>
 <p class="prose">A compact loop linking the strongest cards in this guide, ordered to minimise backtracking on foot.</p>
 <ol class="trip-stops"><li><a href="#kyiv_andrews_descent">Andriyivskyy Descent</a> (~75min)</li>
@@ -142,236 +218,391 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <ol class="trip-stops"><li><a href="#kyiv_podil">Podil district</a> (~75min)</li>
 <li><a href="#kyiv_st_alexander">St Alexander Roman Catholic church</a> (~75min)</li>
 <li><a href="#kyiv_st_michael">St Michael Golden Domed Monastery</a> (~75min)</li></ol></article></section>
-<nav class="guide-toc" aria-label="Contents"><h2>Contents</h2><ol><li class="toc-item"><a href="#guide-historical">Historical overview</a></li><li class="toc-item"><a href="#guide-trips">Trip ideas</a></li><li class="toc-item"><a href="#kyiv_andrews_descent">Andriyivskyy Descent</a></li><li class="toc-item"><a href="#kyiv_pdfband_2_52626d3e">Ar-Rahma</a></li><li class="toc-item"><a href="#kyiv_bessarabka">Bessarabsky Market</a></li><li class="toc-item"><a href="#kyiv_contract_house">Contract House</a></li><li class="toc-item"><a href="#kyiv_bridge_klitschko">Glass Bridge Kyiv</a></li><li class="toc-item"><a href="#kyiv_golden_gate">Golden Gate</a></li><li class="toc-item"><a href="#kyiv_lavra_bell_tower">Great Lavra Bell Tower</a></li><li class="toc-item"><a href="#kyiv_house_chimeras">House with Chimaeras</a></li><li class="toc-item"><a href="#kyiv_hryshko_garden">Hryshko National Botanical Garden</a></li><li class="toc-item"><a href="#kyiv_maidan">Independence Square</a></li><li class="toc-item"><a href="#kyiv_pdfband_3_f5a3f15b">Kyiv</a></li><li class="toc-item"><a href="#kyiv_pechersk_lavra">Kyiv Pechersk Lavra</a></li><li class="toc-item"><a href="#kyiv_mariinsky_palace">Mariinsky Palace</a></li><li class="toc-item"><a href="#kyiv_mariinsky_park">Mariinsky Park</a></li><li class="toc-item"><a href="#kyiv_pdfband_12_52626d3e">Mosque engraving</a></li><li class="toc-item"><a href="#kyiv_motherland">Motherland Monument</a></li><li class="toc-item"><a href="#kyiv_mystetskyi">Mystetskyi Arsenal</a></li><li class="toc-item"><a href="#kyiv_national_museum">National Art Museum of Ukraine</a></li><li class="toc-item"><a href="#kyiv_national_opera">National Opera of Ukraine</a></li><li class="toc-item"><a href="#kyiv_one_street_museum">One Street Museum</a></li><li class="toc-item"><a href="#kyiv_pechersk_district">Pechersk government quarter</a></li><li class="toc-item"><a href="#kyiv_podil">Podil district</a></li><li class="toc-item"><a href="#kyiv_saint_sophia">Saint Sophia Cathedral</a></li><li class="toc-item"><a href="#kyiv_st_alexander">St Alexander Roman Catholic church</a></li><li class="toc-item"><a href="#kyiv_sts_boris_gleb">St Boris and Gleb Monastery</a></li><li class="toc-item"><a href="#kyiv_sts_cyril_methodius">St Cyrils Monastery</a></li><li class="toc-item"><a href="#kyiv_st_michael">St Michael Golden Domed Monastery</a></li><li class="toc-item"><a href="#kyiv_st_nicholas">St Nicholas Cathedral</a></li><li class="toc-item"><a href="#kyiv_st_volodymyr_cathedral">St Volodymyr Cathedral</a></li><li class="toc-item"><a href="#kyiv_pdfband_1_b80fce99">Вільнянськ3</a></li></ol></nav>
 <section class="place" id="kyiv_andrews_descent">
+<div class="place-lead">
 <h3>Andriyivskyy Descent</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/kyiv_andrews_descent.jpg" alt="Andriyivskyy Descent"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/kyiv_andrews_descent.jpg" alt="Andriyivskyy Descent" width="1280" height="1092" style="height: 220px; max-height: 220px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/kyiv_andrews_descent_b.jpg" alt="Andriyivskyy Descent — view 2" width="330" height="220" style="height: 220px; max-height: 220px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Andriyivskyy Descent is a picturesque street in Kyiv, renowned for its charming architecture and vibrant atmosphere. Often referred to as the &#x27;Montmartre of Kyiv,&#x27; it is lined with art galleries, cafes, and souvenir shops, making it a popular destination for both locals and tourists. The descent connects the upper town with the historic Podil district, offering stunning views of the Dnipro River. Andriyivskyy Descent connects the Upper Town with the Podil district. St. The street is known for its baroque architecture and vibrant arts scene.</p>
 <p class="prose">Andriyivskyy Descent has roots dating back to the 11th century, originally serving as a crucial trade route. Throughout its history, it has witnessed significant events, including the establishment of the nearby St. Andrew&#x27;s Church in 1747, which stands as a prominent architectural landmark. The street has evolved over the centuries, reflecting the changing dynamics of Kyiv&#x27;s urban landscape. Culturally, Andriyivskyy Descent is a hub of artistic expression and heritage, hosting numerous festivals and events that celebrate Ukrainian traditions. It is home to several historical buildings and monuments, contributing to Kyiv&#x27;s rich cultural tapestry. The street plays a vital role in daily life, serving as a gathering place for artists, musicians, and visitors alike.</p></div>
 </section>
-<section class="place" id="kyiv_pdfband_2_52626d3e">
+<section class="place" id="kyiv_ar_rahma">
+<div class="place-lead">
 <h3>Ar-Rahma</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/kyiv_pdfband_2_52626d3e.jpg" alt="Ar-Rahma"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/kyiv_ar_rahma.jpg" alt="Ar-Rahma" width="1280" height="855" style="height: 209px; max-height: 209px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/kyiv_ar_rahma_b.jpg" alt="Ar-Rahma — view 2" width="330" height="209" style="height: 209px; max-height: 209px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 </section>
 <section class="place" id="kyiv_bessarabka">
+<div class="place-lead">
 <h3>Bessarabsky Market</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/kyiv_bessarabka.jpg" alt="Bessarabsky Market"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/kyiv_bessarabka.jpg" alt="Bessarabsky Market" width="1065" height="1600" style="height: 220px; max-height: 220px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/kyiv_bessarabka_b.jpg" alt="Bessarabsky Market — view 2" width="330" height="220" style="height: 220px; max-height: 220px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Bessarabsky Market, located in the heart of Kyiv, is a vibrant hub of local life and commerce. Known for its diverse array of fresh produce, meats, and artisanal goods, the market offers visitors a taste of Ukrainian culture and culinary traditions. Its bustling atmosphere and rich history make it a must-visit destination for both locals and tourists alike. Established in 1912. Located in the Shevchenkivskyi District of Kyiv. Features a variety of stalls selling fresh produce, meats, and local delicacies.</p>
 <p class="prose">Bessarabsky Market was established in 1912 and has since become one of Kyiv&#x27;s most iconic marketplaces. Originally named after the Bessarabia region, the market has undergone several renovations and expansions over the years, adapting to the changing needs of the city and its residents. Culturally, Bessarabsky Market serves as a vital center for daily life in Kyiv, reflecting the city&#x27;s culinary heritage and local traditions. It is a gathering place for community members and a showcase for Ukrainian artisans, contributing to the preservation of local crafts and flavors. The market&#x27;s lively environment embodies the spirit of Kyiv, making it an integral part of the city&#x27;s identity.</p></div>
 </section>
 <section class="place" id="kyiv_contract_house">
+<div class="place-lead">
 <h3>Contract House</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/kyiv_contract_house.jpg" alt="Contract House"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/kyiv_contract_house.jpg" alt="Contract House" width="1280" height="915" style="height: 220px; max-height: 220px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/kyiv_contract_house_b.jpg" alt="Contract House — view 2" width="330" height="220" style="height: 220px; max-height: 220px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Contract House, located in the heart of Kyiv, is a striking example of 19th-century architecture that has become a symbol of the city&#x27;s rich history. Originally built as a trading house for merchants, it now serves as a cultural venue hosting various events and exhibitions. Visitors can admire its intricate design and learn about its role in the commercial life of Kyiv. Constructed in 1846 by architect Andriy Melenskyi. Originally served as a trading house for merchants in Kyiv.</p>
 <p class="prose">The Contract House was constructed in the mid-19th century, specifically in 1846, by architect Andriy Melenskyi. It was designed to facilitate trade and commerce in Kyiv, reflecting the city&#x27;s growing economic importance during that period. Over the years, the building has undergone various renovations, preserving its historical essence while adapting to contemporary uses. Culturally, the Contract House plays a vital role in Kyiv&#x27;s artistic landscape, hosting exhibitions, concerts, and cultural events that celebrate local heritage. It stands as a testament to the city&#x27;s architectural evolution and serves as a gathering place for the community, fostering a sense of identity and continuity in the ever-changing urban environment.</p></div>
 </section>
 <section class="place" id="kyiv_bridge_klitschko">
+<div class="place-lead">
 <h3>Glass Bridge Kyiv</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/kyiv_bridge_klitschko.jpg" alt="Glass Bridge Kyiv"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/kyiv_bridge_klitschko_b.jpg" alt="Glass Bridge Kyiv" width="330" height="247"/></figure>
+</div>
 <div class="place-desc"><p class="prose">The Glass Bridge in Kyiv, also known as the Klitschko Bridge, is a stunning architectural marvel that spans the picturesque landscape of the city. This modern pedestrian bridge offers breathtaking views of the surrounding parks and the Dnipro River, making it a popular spot for both locals and tourists. Its transparent design and unique structure invite visitors to experience a sense of walking in the sky, enhancing the beauty of Kyiv&#x27;s urban environment. The Glass Bridge is 200 meters long and 3.5 meters wide. It features a transparent floor made of reinforced glass, providing unique views of the surroundings.</p>
 <p class="prose">The Glass Bridge was inaugurated in 2019 as part of the revitalization efforts in Kyiv&#x27;s green spaces. It connects the iconic Park of Eternal Glory with the picturesque landscape of the Hryshko National Botanical Garden, promoting accessibility to these important cultural sites. Culturally, the Glass Bridge has become a symbol of modern Kyiv, representing the city&#x27;s commitment to blending nature with urban life. It serves as a gathering place for residents and visitors alike, fostering community interaction and enhancing the daily life of the city. The bridge also hosts various art installations and events, further embedding it into the cultural fabric of Kyiv.</p></div>
 </section>
 <section class="place" id="kyiv_golden_gate">
+<div class="place-lead">
 <h3>Golden Gate</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/kyiv_golden_gate.jpg" alt="Golden Gate"/></figure>
+<figure class="place-fig place-fig--hi-res"><img src="../images/kyiv_golden_gate.jpg" alt="Golden Gate" width="1280" height="904"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Golden Gate — museum in Kyiv, Ukraine.</p></div>
 </section>
 <section class="place" id="kyiv_lavra_bell_tower">
+<div class="place-lead">
 <h3>Great Lavra Bell Tower</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/kyiv_lavra_bell_tower.jpg" alt="Great Lavra Bell Tower"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/kyiv_lavra_bell_tower.jpg" alt="Great Lavra Bell Tower" width="1048" height="1600" style="height: 245px; max-height: 245px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/kyiv_lavra_bell_tower_b.jpg" alt="Great Lavra Bell Tower — view 2" width="330" height="245" style="height: 245px; max-height: 245px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Great Lavra Bell Tower, an iconic structure of Kyiv, rises majestically above the historic Pechersk Lavra Monastery. Completed in the 18th century, this baroque masterpiece is not only a stunning architectural feat but also a symbol of Ukraine&#x27;s rich religious and cultural heritage. Visitors can admire its intricate design and enjoy panoramic views of the city from its observation deck. Constructed between 1731 and 1745. Design attributed to architect Johann Gottfried Schadel. Stands at 96 meters tall, making it the tallest structure in Kyiv. Part of the Kyiv Pechersk Lavra, a UNESCO World Heritage Site.</p>
 <p class="prose">The Great Lavra Bell Tower was constructed between 1731 and 1745, designed by architect Johann Gottfried Schadel. It stands at 96 meters tall, making it the tallest structure in Kyiv. The tower has undergone various restorations and remains a central feature of the Kyiv Pechersk Lavra, a UNESCO World Heritage Site. The Great Lavra Bell Tower holds immense cultural and religious significance as part of the Pechersk Lavra, a major center of Orthodox Christianity in Ukraine. It serves as a symbol of national identity and resilience, reflecting the historical struggles and triumphs of the Ukrainian people. The tower also plays a role in daily life, attracting pilgrims and tourists alike, and is integral to various religious rites and celebrations.</p></div>
 </section>
 <section class="place" id="kyiv_house_chimeras">
+<div class="place-lead">
 <h3>House with Chimaeras</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
-<p class="place-meta">Style: Art Nouveau | Period: 1903</p>
-<figure class="place-fig"><img src="../images/kyiv_house_chimeras.jpg" alt="House with Chimaeras"/></figure>
+<p class="place-meta">Address: Банкова вулиця, 10 | Style: Art Nouveau | Period: 1903</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/kyiv_house_chimeras.jpg" alt="House with Chimaeras" width="1280" height="960" style="height: 185px; max-height: 185px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/kyiv_house_chimeras_b.jpg" alt="House with Chimaeras — view 2" width="330" height="185" style="height: 185px; max-height: 185px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The House with Chimaeras is a distinctive architectural landmark located on Khreshchatyk Street, Kiev&#x27;s main boulevard. Its unique design features chimeras—mythical creatures combining elements of different animals—in intricate reliefs adorning the facade. It is situated at the intersection of Khreshchatyk and Istomina Streets. The chimeras are believed to symbolize strength, courage, and wisdom. The building was renovated extensively in the late 1980s and early 1990s. Today, it houses various cultural venues including a theater and exhibition spaces. Its design has inspired numerous artists and photographers.</p>
 <p class="prose">Built in 1903 by architect Ivan Fryazinov, the house originally served as a bank and later became a cultural center. The chimeras were added to the facade during its renovation in the early 20th century, making it one of Kiev’s most iconic buildings. Visitors come to admire the exquisite artistry of the chimeras and the harmonious blend of traditional Ukrainian architecture with Art Nouveau influences.</p></div>
 </section>
 <section class="place" id="kyiv_hryshko_garden">
+<div class="place-lead">
 <h3>Hryshko National Botanical Garden</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Period: 1974</p>
-<figure class="place-fig"><img src="../images/kyiv_hryshko_garden.jpg" alt="Hryshko National Botanical Garden"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/kyiv_hryshko_garden.jpg" alt="Hryshko National Botanical Garden" width="1280" height="853" style="height: 219px; max-height: 219px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/kyiv_hryshko_garden_b.jpg" alt="Hryshko National Botanical Garden — view 2" width="330" height="219" style="height: 219px; max-height: 219px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Set amidst Kiev&#x27;s rolling hills and verdant landscapes, Hryshko National Botanical Garden is a serene oasis of flora and fauna. Established to preserve biodiversity and educate the public on plant life, it showcases over 8,000 species of plants from around the world. The garden spans approximately 60 hectares of land. It houses more than 8,000 plant species, including many rare and exotic varieties. Visitors can explore diverse habitats such as tropical rainforests, deserts, and alpine meadows. Regular educational programs and exhibitions provide insight into horticulture and environmental science. Hryshko hosts numerous cultural events throughout the year, including flower festivals and botanical conferences.</p>
 <p class="prose">Founded in 1974 by botanist Nikolay Hryshko, the garden was originally known as the Kiev Botanical Garden. It later expanded into its current national status, becoming one of Ukraine’s most significant botanical institutions. The garden features unique collections of rare and endangered plants, making it a vital hub for conservation efforts. A must-visit for nature lovers and students of botany, Hryshko offers stunning displays of flowers, trees, and shrubs, all meticulously arranged within themed gardens.</p></div>
 </section>
 <section class="place" id="kyiv_maidan">
+<div class="place-lead">
 <h3>Independence Square</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/kyiv_maidan.jpg" alt="Independence Square"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/kyiv_maidan.jpg" alt="Independence Square" width="1280" height="850" style="height: 143px; max-height: 143px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/kyiv_maidan_b.jpg" alt="Independence Square — view 2" width="330" height="143" style="height: 143px; max-height: 143px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Maidan Nezalezhnosti — main square of Kyiv, Ukraine.</p></div>
 </section>
-<section class="place" id="kyiv_pdfband_3_f5a3f15b">
+<section class="place" id="kyiv_landmark_2">
+<div class="place-lead">
 <h3>Kyiv</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/kyiv_pdfband_3_f5a3f15b.jpg" alt="Kyiv"/></figure>
+<figure class="place-fig place-fig--hi-res"><img src="../images/kyiv_landmark_2.jpg" alt="Kyiv" width="1059" height="1600"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Kyiv — capital and largest city of Ukraine.</p></div>
 </section>
+<section class="place" id="kyiv_landmark">
+<div class="place-lead">
+<h3>Kyiv Landmark</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
+
+
+<figure class="place-fig place-fig--hi-res"><img src="../images/kyiv_landmark.jpg" alt="Kyiv Landmark" width="1280" height="960"/></figure>
+</div>
+</section>
 <section class="place" id="kyiv_pechersk_lavra">
+<div class="place-lead">
 <h3>Kyiv Pechersk Lavra</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Byzantine architecture with elements of Ukrainian Baroque | Period: 1051</p>
-<figure class="place-fig"><img src="../images/kyiv_pechersk_lavra.jpg" alt="Kyiv Pechersk Lavra"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/kyiv_pechersk_lavra.jpg" alt="Kyiv Pechersk Lavra" width="1280" height="870" style="height: 220px; max-height: 220px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/kyiv_pechersk_lavra_b.jpg" alt="Kyiv Pechersk Lavra — view 2" width="330" height="220" style="height: 220px; max-height: 220px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">It was declared a UNESCO World Heritage Site in 1990. The Lavra includes several churches, monasteries, and underground catacombs. Visitors can explore the historic Caves Monastery and Cathedral of the Dormition. Notable figures buried here include national heroes and religious leaders. Annual festivals celebrate the Lavra&#x27;s cultural significance.</p>
 <p class="prose">A must-visit for anyone interested in Ukrainian culture and religion, the Lavra offers breathtaking views of the Dniepr River and provides a glimpse into the country&#x27;s rich historical and spiritual legacy.</p></div>
 </section>
 <section class="place" id="kyiv_mariinsky_palace">
+<div class="place-lead">
 <h3>Mariinsky Palace</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/kyiv_mariinsky_palace.jpg" alt="Mariinsky Palace"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/kyiv_mariinsky_palace.jpg" alt="Mariinsky Palace" width="1280" height="533" style="height: 139px; max-height: 139px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/kyiv_mariinsky_palace_b.jpg" alt="Mariinsky Palace — view 2" width="330" height="495" style="height: 139px; max-height: 139px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Mariinsky Palace, an architectural gem in Kyiv, serves as the official ceremonial residence of the President of Ukraine. Its stunning Baroque design, complemented by lush gardens, makes it a popular destination for visitors interested in the city&#x27;s rich history and culture. Constructed between 1744 and 1752. Originally designed for Empress Elizabeth of Russia. Serves as the ceremonial residence of the President of Ukraine.</p>
 <p class="prose">Construction of Mariinsky Palace began in 1744 under the direction of architect Bartolomeo Rastrelli and was completed in 1752. Originally built for Empress Elizabeth of Russia, the palace has undergone various renovations and served different purposes throughout its history, including hosting significant state events. Mariinsky Palace holds considerable political significance as it is the site of official state ceremonies and functions, reflecting Ukraine&#x27;s governance and national identity. Culturally, the palace is a symbol of the country&#x27;s heritage, showcasing Baroque architecture and serving as a venue for cultural events that celebrate Ukrainian traditions.</p></div>
 </section>
 <section class="place" id="kyiv_mariinsky_park">
+<div class="place-lead">
 <h3>Mariinsky Park</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/kyiv_mariinsky_park.jpg" alt="Mariinsky Park"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/kyiv_mariinsky_park_b.jpg" alt="Mariinsky Park" width="330" height="247"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Mariinsky Park is a picturesque green space located in the heart of Kyiv, offering stunning views of the Dnipro River and the iconic Parliament building. This park is a perfect spot for leisurely strolls, picnics, and enjoying the vibrant atmosphere of the city. With its beautiful landscaping and historical monuments, it serves as a peaceful retreat for both locals and visitors alike. Established in the late 18th century. Named after the Mariinsky Palace, built in 1752. Features a variety of sculptures and monuments.</p>
 <p class="prose">Mariinsky Park was established in the late 18th century, initially designed in the French style and later transformed into a landscape park. It was named after the nearby Mariinsky Palace, which was constructed in 1752 as a residence for the Empress Elizabeth. Over the years, the park has undergone several renovations and expansions, becoming a significant recreational area in Kyiv. Mariinsky Park holds cultural importance as a gathering place for citizens and a venue for various public events, including concerts and festivals. Its proximity to the political heart of Ukraine makes it a site for demonstrations and civic engagement, reflecting the city&#x27;s dynamic history. The park is also home to several monuments and sculptures that celebrate Ukrainian heritage and history.</p></div>
 </section>
-<section class="place" id="kyiv_pdfband_12_52626d3e">
+<section class="place" id="kyiv_mosque_engraving">
+<div class="place-lead">
 <h3>Mosque engraving</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/kyiv_pdfband_12_52626d3e.jpg" alt="Mosque engraving"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/kyiv_mosque_engraving.jpg" alt="Mosque engraving" width="1280" height="840" style="height: 219px; max-height: 219px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/kyiv_mosque_engraving_b.jpg" alt="Mosque engraving — view 2" width="330" height="268" style="height: 219px; max-height: 219px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 </section>
 <section class="place" id="kyiv_motherland">
+<div class="place-lead">
 <h3>Motherland Monument</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/kyiv_motherland.jpg" alt="Motherland Monument"/></figure>
+<figure class="place-fig place-fig--hi-res"><img src="../images/kyiv_motherland.jpg" alt="Motherland Monument" width="1200" height="1600"/></figure>
+</div>
 <div class="place-desc"><p class="prose">The Motherland Monument, towering at 62 meters, is an iconic symbol of Kyiv and a testament to Ukraine&#x27;s resilience and strength. This colossal statue, part of the Museum of the Great Patriotic War, offers visitors panoramic views of the city and serves as a poignant reminder of the sacrifices made during World War II. Its striking design and historical context make it a must-visit landmark for anyone exploring Kyiv. The statue is made of stainless steel and weighs approximately 560 tons. It is part of the National Museum of the History of Ukraine in the Second World War.</p>
 <p class="prose">The Motherland Monument was inaugurated on May 9, 1981, to commemorate the Soviet victory in the Great Patriotic War. Designed by sculptor Yevgeny Vuchetich, the monument was part of a larger complex dedicated to the war, reflecting the Soviet Union&#x27;s emphasis on its wartime history. The statue has since become a symbol of national pride and identity for Ukraine, particularly following its independence in 1991. Politically, the Motherland Monument stands as a symbol of Ukraine&#x27;s struggle for sovereignty and independence, particularly in the context of its complex history with Russia. Culturally, it represents a significant aspect of Ukrainian heritage, embodying the collective memory of the nation&#x27;s sacrifices during wartime. The monument is also a focal point for national celebrations and commemorative events, reinforcing its role in contemporary Ukrainian identity.</p></div>
 </section>
 <section class="place" id="kyiv_mystetskyi">
+<div class="place-lead">
 <h3>Mystetskyi Arsenal</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
-<p class="place-meta">Style: Neoclassical | Period: 1898</p>
-<figure class="place-fig"><img src="../images/kyiv_mystetskyi.jpg" alt="Mystetskyi Arsenal"/></figure>
+<p class="place-meta">Address: вул. Лаврська, 10-12, м. Київ, 01010 | Style: Neoclassical | Period: 1898</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/kyiv_mystetskyi.jpg" alt="Mystetskyi Arsenal" width="1280" height="853" style="height: 195px; max-height: 195px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/kyiv_mystetskyi_b.jpg" alt="Mystetskyi Arsenal — view 2" width="330" height="195" style="height: 195px; max-height: 195px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Located on Vulytsia Hrechaniwka, Mystetskyi Arsenal is a renowned museum and cultural center showcasing Ukrainian art and historical artifacts. It was originally built as a military arsenal during the late 19th century. The museum houses one of the largest collections of Ukrainian avant-garde art. It organizes regular temporary exhibits showcasing contemporary artists. Exhibits often include multimedia installations and interactive displays. The grounds feature outdoor sculptures and gardens. Mystetskyi Arsenal offers guided tours and educational programs.</p>
 <p class="prose">Established in 1898 as a munitions depot for the Imperial Russian Army, Mystetskyi Arsenal later transformed into a cultural institution after Ukraine&#x27;s independence in 1991. The building&#x27;s neoclassical architecture reflects its origins as a functional structure designed to store weapons and ammunition. Visitors can explore exhibitions featuring modern and traditional Ukrainian art, as well as artifacts that highlight Kiev’s rich historical heritage.</p></div>
 </section>
 <section class="place" id="kyiv_national_museum">
+<div class="place-lead">
 <h3>National Art Museum of Ukraine</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
-<p class="place-meta">Period: 1898</p>
-<figure class="place-fig"><img src="../images/kyiv_national_museum.jpg" alt="National Art Museum of Ukraine"/></figure>
+<p class="place-meta">Address: 6, вулиця Михайла Грушевського | Period: 1898</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/kyiv_national_museum.jpg" alt="National Art Museum of Ukraine" width="1280" height="853" style="height: 222px; max-height: 222px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/kyiv_national_museum_b.jpg" alt="National Art Museum of Ukraine — view 2" width="330" height="233" style="height: 222px; max-height: 222px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The National Art Museum of Ukraine is Kiev&#x27;s premier institution for showcasing the country&#x27;s rich artistic heritage and global influence. Established in 1898 as a private collection, it later became one of Europe’s most significant art repositories. It houses more than 400,000 exhibits, showcasing a vast array of Ukrainian art. The museum features permanent exhibitions dedicated to various periods of Ukrainian art history. Notable collections include works by famous Ukrainian painters like Taras Shevchenko and Vasyl Kopp. Regular temporary exhibitions highlight contemporary Ukrainian art and international collaborations. Located on Khreshchatyk Street, the museum attracts thousands of visitors annually.</p>
 <p class="prose">Founded in 1898 by Ukrainian philanthropist Nikolay Lysenko, the museum originally housed his personal collection of paintings, sculptures, and artifacts. Over time, its holdings expanded to include works by renowned Ukrainian artists such as Ivan Trush, Olexa Hryniuk, and Mikhail Boichuk. Today, the museum boasts over 400,000 items, making it one of the largest collections of Ukrainian art worldwide. Visitors can explore masterpieces spanning centuries, including iconic pieces from both traditional Ukrainian folk art and modern avant-garde movements.</p></div>
 </section>
 <section class="place" id="kyiv_national_opera">
+<div class="place-lead">
 <h3>National Opera of Ukraine</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/kyiv_national_opera.jpg" alt="National Opera of Ukraine"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/kyiv_national_opera.jpg" alt="National Opera of Ukraine" width="1280" height="959" style="height: 220px; max-height: 220px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/kyiv_national_opera_b.jpg" alt="National Opera of Ukraine — view 2" width="330" height="220" style="height: 220px; max-height: 220px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The National Opera of Ukraine in Kyiv is a stunning architectural masterpiece and a cultural hub for the performing arts. Visitors can enjoy a diverse repertoire of opera and ballet performances in a grand setting that reflects the rich artistic heritage of Ukraine. The venue not only showcases local talent but also attracts international artists, making it a must-visit for art enthusiasts. Founded in 1867 as the Kyiv Opera House. Officially designated as the National Opera of Ukraine in 1991. Underwent significant renovations after World War II.</p>
 <p class="prose">The National Opera of Ukraine was founded in 1867, originally as the Kyiv Opera House. It has undergone several transformations and renovations, particularly after World War II, and was officially designated as the National Opera of Ukraine in 1991, following the country&#x27;s independence. The theater has hosted numerous significant performances and has been a platform for many renowned artists throughout its history. Culturally, the National Opera of Ukraine plays a vital role in preserving and promoting Ukrainian heritage through its performances and productions. It serves as a gathering place for the community, reflecting the artistic spirit of the nation. The theater also contributes to the cultural dialogue within Europe, showcasing Ukraine&#x27;s rich traditions and contemporary artistic expressions.</p></div>
 </section>
 <section class="place" id="kyiv_one_street_museum">
+<div class="place-lead">
 <h3>One Street Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/kyiv_one_street_museum.jpg" alt="One Street Museum"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/kyiv_one_street_museum.jpg" alt="One Street Museum" width="1280" height="992" style="height: 233px; max-height: 233px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/kyiv_one_street_museum_b.jpg" alt="One Street Museum — view 2" width="330" height="233" style="height: 233px; max-height: 233px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The One Street Museum in Kyiv is a unique cultural institution dedicated to the history and heritage of the city&#x27;s iconic Andriyivskyy Descent. This charming museum showcases the artistic and architectural evolution of the street, featuring exhibits that highlight its significance in Kyiv&#x27;s urban landscape. Visitors can explore the rich tapestry of stories and characters that have shaped this historic thoroughfare. The museum is located on Andriyivskyy Descent, one of Kyiv&#x27;s oldest streets. It features exhibitions on the street&#x27;s history, architecture, and notable figures. The museum promotes local artists and hosts various cultural events.</p>
 <p class="prose">The One Street Museum was established in 2016, aiming to preserve and present the history of Andriyivskyy Descent, a street known for its vibrant artistic community and historical landmarks. The museum focuses on the evolution of the street from the 18th century to the present day, reflecting the changes in Kyiv&#x27;s social and cultural life. Culturally, the One Street Museum plays a vital role in celebrating Kyiv&#x27;s artistic heritage and the daily life of its citizens. It serves as a platform for local artists and craftsmen, fostering a sense of community and continuity in the face of modern urban development. The museum also highlights the importance of Andriyivskyy Descent as a symbol of Kyiv&#x27;s historical identity and its ongoing cultural narrative.</p></div>
 </section>
 <section class="place" id="kyiv_pechersk_district">
+<div class="place-lead">
 <h3>Pechersk government quarter</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/kyiv_pechersk_district.jpg" alt="Pechersk government quarter"/></figure>
+<figure class="place-fig place-fig--hi-res"><img src="../images/kyiv_pechersk_district.jpg" alt="Pechersk government quarter" width="1280" height="815"/></figure>
+</div>
 <div class="place-desc"><p class="prose">The Pechersk government quarter in Kyiv is a vital administrative hub, housing key government buildings and institutions. This area is characterized by its impressive architecture, including the iconic Verkhovna Rada (Parliament) and the Presidential Administration. Visitors can appreciate the blend of historical and modern influences that shape the political landscape of Ukraine. Home to the Verkhovna Rada, the Ukrainian Parliament. Contains the Presidential Administration of Ukraine. Features the Kyiv Pechersk Lavra, a UNESCO World Heritage Site.</p>
 <p class="prose">The Pechersk district has deep historical roots, dating back to the establishment of the Kyiv Pechersk Lavra in the 11th century, which became a center of Orthodox Christianity. Over the centuries, Pechersk evolved into a significant administrative area, especially during the 20th century when it became the heart of government activities in Ukraine. Politically, the Pechersk government quarter plays a crucial role in the governance of Ukraine, hosting the country&#x27;s legislative and executive branches. Culturally, it reflects the rich heritage of Kyiv, with landmarks that signify the city&#x27;s historical importance. The area is also a focal point for civic engagement and protests, particularly during pivotal moments in Ukraine&#x27;s history.</p></div>
 </section>
 <section class="place" id="kyiv_podil">
+<div class="place-lead">
 <h3>Podil district</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/kyiv_podil.jpg" alt="Podil district"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/kyiv_podil.jpg" alt="Podil district" width="1200" height="1600" style="height: 68px; max-height: 68px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/kyiv_podil_b.jpg" alt="Podil district — view 2" width="330" height="68" style="height: 68px; max-height: 68px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Podil is one of Kyiv&#x27;s oldest districts, nestled along the Dnieper River, known for its vibrant atmosphere and historical architecture. This area combines a rich tapestry of history with modern life, featuring bustling markets, charming cafes, and cultural landmarks. Visitors can explore its cobblestone streets, which tell the story of the city&#x27;s evolution over centuries. Podil is one of the oldest districts in Kyiv, established in the 9th century. It was a major trade center during the medieval period, particularly for goods transported along the Dnieper River. The first printing house in Ukraine was established in Podil in the 16th century.</p>
 <p class="prose">Podil&#x27;s history dates back to the 9th century, making it one of the founding areas of Kyiv. It served as a major trade hub during the medieval period, particularly noted for its role in the commerce of goods along the Dnieper River. Key events include the establishment of the first printing house in Ukraine in the 16th century and its significance during various political upheavals throughout Ukrainian history. Culturally, Podil is a vibrant center of artistic expression and heritage, home to numerous theaters, galleries, and museums. The district reflects the daily life of Kyiv&#x27;s residents, blending traditional customs with contemporary culture. While it does not hold significant religious landmarks, its secular spaces often host cultural events and festivals that celebrate the diverse traditions of the city.</p></div>
 </section>
 <section class="place" id="kyiv_saint_sophia">
+<div class="place-lead">
 <h3>Saint Sophia Cathedral</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/kyiv_saint_sophia.jpg" alt="Saint Sophia Cathedral"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/kyiv_saint_sophia.jpg" alt="Saint Sophia Cathedral" width="1280" height="873" style="height: 220px; max-height: 220px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/kyiv_saint_sophia_b.jpg" alt="Saint Sophia Cathedral — view 2" width="330" height="220" style="height: 220px; max-height: 220px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Saint Sophia Cathedral in Kyiv is an 11th-century Byzantine monument and UNESCO World Heritage site, famed for its mosaics, frescoes, and central role in Kyivan Rus heritage.</p></div>
 </section>
 <section class="place" id="kyiv_st_alexander">
+<div class="place-lead">
 <h3>St Alexander Roman Catholic church</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/kyiv_st_alexander.jpg" alt="St Alexander Roman Catholic church"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/kyiv_st_alexander_b.jpg" alt="St Alexander Roman Catholic church" width="330" height="413"/></figure>
+</div>
 <div class="place-desc"><p class="prose">St. Known for its neo-Gothic style and beautiful stained glass windows, this church serves as a serene place of worship and reflection. Visitors can appreciate its intricate design and the peaceful atmosphere that invites both prayer and contemplation. Founded in 1902 and consecrated in 1912. Designed in neo-Gothic architectural style. One of the few Roman Catholic churches in Kyiv.</p>
 <p class="prose">St. Alexander Roman Catholic Church was founded in 1902 and is one of the few Roman Catholic churches in Kyiv. It was built to serve the growing Catholic community in the city and was consecrated in 1912. The church has witnessed significant historical events, including the tumultuous periods of World War I and II, and has undergone various restorations to preserve its beauty. The church holds cultural significance as a symbol of the Roman Catholic faith in Ukraine, contributing to the religious diversity of the city. It plays an important role in the daily lives of its parishioners, hosting regular services and community events. Architecturally, it reflects the influence of Western European styles, showcasing the cultural exchange between Ukraine and the West.</p></div>
 </section>
 <section class="place" id="kyiv_sts_boris_gleb">
+<div class="place-lead">
 <h3>St Boris and Gleb Monastery</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/kyiv_sts_boris_gleb.jpg" alt="St Boris and Gleb Monastery"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res"><img src="../images/kyiv_sts_boris_gleb.jpg" alt="St Boris and Gleb Monastery" width="330" height="248" style="height: 233px; max-height: 233px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/kyiv_sts_boris_gleb_b.jpg" alt="St Boris and Gleb Monastery — view 2" width="330" height="417" style="height: 233px; max-height: 233px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The St. Boris and Gleb Monastery, nestled in the heart of Kyiv, is a serene haven reflecting the city&#x27;s rich spiritual heritage. This historic site, dedicated to the first Christian martyrs of Kyivan Rus, offers visitors a glimpse into the architectural beauty and religious devotion that has characterized the region for centuries. With its tranquil surroundings and significant historical roots, the monastery is a must-visit for those seeking to understand Kyiv&#x27;s religious landscape. The monastery was founded in the early 12th century. It is dedicated to the Christian martyrs Boris and Gleb.</p>
 <p class="prose">Founded in the early 12th century, the St. Boris and Gleb Monastery is one of the oldest religious sites in Kyiv. It was established in honor of the princes Boris and Gleb, who were martyred in the struggle for power following the death of their father, Prince Vladimir the Great. Over the centuries, the monastery has undergone various renovations and restorations, reflecting the changing architectural styles and the enduring significance of its religious mission. The St. Boris and Gleb Monastery holds considerable cultural and religious significance in Ukraine. It serves as a symbol of the early Christian heritage of the region and is an important site for pilgrimage, particularly among the Orthodox faithful. The monastery&#x27;s architecture and art contribute to Kyiv&#x27;s rich cultural tapestry, showcasing the artistic traditions that have evolved over the centuries. Additionally, it plays a role in the daily lives of local worshippers, offering a space for prayer and reflection.</p></div>
 </section>
 <section class="place" id="kyiv_sts_cyril_methodius">
+<div class="place-lead">
 <h3>St Cyrils Monastery</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/kyiv_sts_cyril_methodius.jpg" alt="St Cyrils Monastery"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/kyiv_sts_cyril_methodius.jpg" alt="St Cyrils Monastery" width="1036" height="1400" style="height: 247px; max-height: 247px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/kyiv_sts_cyril_methodius_b.jpg" alt="St Cyrils Monastery — view 2" width="330" height="247" style="height: 247px; max-height: 247px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">St. Known for its beautiful frescoes and serene atmosphere, this historic site offers visitors a glimpse into the rich spiritual and artistic heritage of Ukraine. The monastery is a peaceful retreat, perfect for contemplation and exploration of its historical significance. Founded in the 12th century, with records dating back to 1146. Named after Saint Cyril, a key figure in the development of the Cyrillic alphabet. Features remarkable frescoes and mosaics from the medieval period.</p>
 <p class="prose">St. Cyril&#x27;s Monastery was founded in the 12th century, with its earliest records dating back to 1146. The monastery has undergone various renovations and restorations over the centuries, particularly after suffering damage during the Soviet era. It is named after Saint Cyril, one of the creators of the Cyrillic alphabet, and has been a site of religious importance throughout its history. Culturally, St. Cyril&#x27;s Monastery is significant for its exquisite frescoes and mosaics, which are considered masterpieces of medieval art. The monastery has played a role in the spiritual life of the Ukrainian Orthodox Church and continues to be a place of worship and pilgrimage. Its architectural style and artistic heritage contribute to Kyiv&#x27;s status as a city rich in history and culture.</p></div>
 </section>
 <section class="place" id="kyiv_st_michael">
+<div class="place-lead">
 <h3>St Michael Golden Domed Monastery</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/kyiv_st_michael.jpg" alt="St Michael Golden Domed Monastery"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/kyiv_st_michael.jpg" alt="St Michael Golden Domed Monastery" width="1280" height="853" style="height: 210px; max-height: 210px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/kyiv_st_michael_b.jpg" alt="St Michael Golden Domed Monastery — view 2" width="330" height="210" style="height: 210px; max-height: 210px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">St. Michael&#x27;s Golden-Domed Monastery is a stunning architectural masterpiece located in the heart of Kyiv. Renowned for its striking golden domes and rich history, the monastery serves as a symbol of Ukrainian spirituality and resilience. Visitors can explore its beautiful interiors and enjoy the serene atmosphere that has attracted pilgrims and tourists alike. Founded in the 11th century by Prince Sviatopolk II. The monastery was destroyed in 1934 and rebuilt in the early 1990s. It is an important site for Orthodox Christian worship in Ukraine.</p>
 <p class="prose">Founded in the 11th century by Prince Sviatopolk II, St. Michael&#x27;s Golden-Domed Monastery has undergone numerous transformations throughout its history. It was destroyed by the Soviet regime in 1934 but was reconstructed in the early 1990s, symbolizing the revival of Ukrainian culture and faith after years of repression. St. Michael&#x27;s Monastery holds substantial cultural and religious significance for Ukrainians. It is a key site for Orthodox Christian worship and has played a role in various national events, reflecting the intersection of faith and national identity. The monastery is also a testament to Ukraine&#x27;s artistic heritage, showcasing exquisite frescoes and mosaics that highlight the country&#x27;s rich religious traditions.</p></div>
 </section>
 <section class="place" id="kyiv_st_nicholas">
+<div class="place-lead">
 <h3>St Nicholas Cathedral</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/kyiv_st_nicholas.jpg" alt="St Nicholas Cathedral"/></figure>
-<div class="place-desc"><p class="prose">St. Nicholas Cathedral, an architectural gem in Kyiv, is renowned for its stunning Neo-Gothic design and intricate stained glass windows. Nestled in the heart of the city, this cathedral serves as a serene space for worship and reflection, attracting both locals and visitors alike. Its unique blend of artistic beauty and spiritual significance makes it a must-visit destination in Kyiv. Constructed between 1899 and 1909. Designed by architect Vasily K. Originally built as a Roman Catholic church.</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/kyiv_st_nicholas.jpg" alt="St Nicholas Cathedral" width="1280" height="855" style="height: 223px; max-height: 223px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/kyiv_st_nicholas_b.jpg" alt="St Nicholas Cathedral — view 2" width="330" height="248" style="height: 223px; max-height: 223px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">St. Nicholas Cathedral, an architectural gem in Kyiv, is renowned for its stunning Neo-Gothic design and intricate stained glass windows. Nestled in the heart of the city, this cathedral serves as a serene space for worship and reflection, attracting both locals and visitors alike. Its unique blend of artistic beauty and spiritual significance makes it a must-visit destination in Kyiv. Constructed between 1899 and 1909. Designed by architect Vasily K. Kolesnikov. Originally built as a Roman Catholic church.</p>
 <p class="prose">St. Nicholas Cathedral was constructed between 1899 and 1909, designed by architect Vasily K. Kolesnikov. It was built as a Roman Catholic church and later became a part of the Ukrainian Orthodox Church. The cathedral has witnessed significant historical events, including the tumultuous periods of the 20th century, which impacted its status and use. Nicholas Cathedral stands as a symbol of Kyiv&#x27;s diverse religious heritage and architectural evolution. It plays a vital role in the daily lives of the local community, hosting various religious services and events. The cathedral&#x27;s artistic elements, including its beautiful frescoes and sculptures, contribute to Ukraine&#x27;s rich cultural tapestry.</p></div>
 </section>
 <section class="place" id="kyiv_st_volodymyr_cathedral">
+<div class="place-lead">
 <h3>St Volodymyr Cathedral</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/kyiv_st_volodymyr_cathedral.jpg" alt="St Volodymyr Cathedral"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/kyiv_st_volodymyr_cathedral.jpg" alt="St Volodymyr Cathedral" width="1024" height="1600" style="height: 248px; max-height: 248px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/kyiv_st_volodymyr_cathedral_b.jpg" alt="St Volodymyr Cathedral — view 2" width="330" height="248" style="height: 248px; max-height: 248px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">St. Known for its vibrant mosaics and frescoes, the cathedral serves as a symbol of the Ukrainian Orthodox faith and is a key landmark for both locals and visitors. Its serene atmosphere invites contemplation and reflection amidst the bustling city. St. The cathedral is known for its stunning mosaics and frescoes, created by prominent artists of the time.</p>
 <p class="prose">St. Volodymyr Cathedral was commissioned in 1862 to commemorate the 900th anniversary of the Baptism of Kyivan Rus. The cathedral was completed in 1882 and was designed by architect Vasily Nestorovich Borysov, showcasing a blend of Byzantine and Ukrainian architectural styles. It has been a site of significant religious and cultural events throughout its history. The cathedral holds immense cultural significance as a representation of Ukrainian heritage and identity. It is not only a place of worship but also a site for important ceremonies and celebrations, reflecting the spiritual life of the community. The cathedral&#x27;s artistic elements contribute to its status as a cultural treasure, attracting art enthusiasts and pilgrims alike.</p></div>
-</section>
-<section class="place" id="kyiv_pdfband_1_b80fce99">
-<h3>Вільнянськ3</h3>
-
-
-<figure class="place-fig"><img src="../images/kyiv_pdfband_1_b80fce99.jpg" alt="Вільнянськ3"/></figure>
 </section>
 </body>
 </html>

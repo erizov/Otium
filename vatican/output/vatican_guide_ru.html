@@ -13,7 +13,7 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
 .otium-logo { font-family: 'Cinzel', serif; font-size: 2.15rem;
   font-weight: 600; letter-spacing: 0.18em; margin-bottom: 0.85rem; }
 .otiump { margin: 0.42rem 0; line-height: 1.42; text-align: justify;
-  max-width: 38rem; font-size: 0.95rem; }
+  font-size: 0.95rem; }
 .guide-title { page-break-after: auto; margin-bottom: 0.55rem;
   page-break-inside: avoid; }
 .historical-reference { margin: 0.75rem 0 1.15rem;
@@ -63,22 +63,103 @@ ol.trip-stops a:hover { text-decoration: underline; }
 .heraldry-univ-caption { font-size: 0.52rem; line-height: 1.18;
   margin: 0.12rem 0 0; padding: 0 0.06rem; color: #252525;
   text-align: center; font-weight: 500; }
-.heraldry-motto { text-align: center; max-width: 18rem; margin: 0.18rem auto;
+.heraldry-motto { text-align: center; margin: 0.18rem auto;
   width: 100%; }
 .motto-line { font-family: 'Cinzel', serif; font-size: 1rem;
   margin: 0; color: #333; line-height: 1.35; }
 .guide-title h1.guide-title-main { font-family: 'Cinzel', serif;
   font-size: 2.35rem; margin-bottom: 0.5rem; font-weight: 600; }
 .lead { color: #444; font-size: 1.05rem; }
-.guide-toc { margin: 0.85rem 0 1.15rem; page-break-inside: avoid; }
-.guide-toc h2 { font-family: 'Cinzel', serif; font-size: 1.28rem;
-  font-weight: 600; margin: 0.4rem 0 0.55rem; }
+
+.guide-toc { page-break-before: always; break-before: page;
+  page-break-after: always; break-after: page;
+  margin: 0; padding: 0.2rem 0 0.45rem; page-break-inside: auto; }
+.guide-toc h2 { font-family: 'Cinzel', serif;
+  font-size: 1.28rem; font-weight: 600; margin: 0.4rem 0 0.55rem; }
 .guide-toc ol { margin: 0.35rem 0 0.65rem 1.25rem; padding: 0;
   columns: 2; column-gap: 1.5rem; }
 .guide-toc li { margin: 0.18rem 0; line-height: 1.35;
   font-size: 0.88rem; break-inside: avoid; }
-.guide-toc a { color: #1a5276; text-decoration: none; }
+.guide-toc a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.guide-toc a:hover { color: #0d3d56; }
 .guide-toc li.toc-item--sub { font-size: 0.82rem; margin-left: 0.35rem; }
+.toc-back { font-size: 0.78rem; margin: 0 0 0.35rem; text-align: right; }
+.toc-back a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.toc-back a:hover { color: #0d3d56; }
+.place, .historical-reference, .guide-primer, .guide-trip-plans {
+  scroll-margin-top: 1.25rem; }
+.historical-reference h2, .guide-primer h2, .guide-trip-plans h2,
+.chapter-head h2, .place-lead h3 { position: relative; }
+.guide-toc + .place, .guide-toc + .chapter-head {
+  page-break-before: avoid; break-before: avoid-page; }
+.place-lead { page-break-inside: avoid; break-inside: avoid-page;
+  page-break-after: auto; }
+.place-lead > h3 { page-break-after: avoid; break-after: avoid-page; }
+.place-lead > .place-meta { page-break-after: avoid; break-after: avoid-page; }
+
+.place-fig { page-break-inside: avoid; break-inside: avoid-page;
+  margin: 0.5rem 0 1rem; }
+.place-fig img {
+  page-break-inside: avoid; break-inside: avoid-page;
+  max-height: 48vh; width: auto; max-width: 100%;
+  object-fit: contain; margin-left: auto; margin-right: auto; }
+.place-fig--hi-res img { max-height: 52vh; }
+.place-fig--lo-res img { max-height: 30vh; }
+.place-pdf-fig-row {
+  display: flex; flex-direction: row; flex-wrap: wrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.45rem 0.55rem; margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row .place-fig {
+  flex: 1 1 30%; margin: 0; min-width: 26%; max-width: 100%; }
+.place-pdf-fig-row .place-fig img {
+  width: auto; max-width: 100%; height: auto; max-height: 44vh;
+  object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--pair {
+  flex-wrap: nowrap; justify-content: space-between;
+  align-items: flex-end; gap: 0.5rem 0.65rem; }
+.place-pdf-fig-row--pair .place-fig {
+  flex: 1 1 47%; min-width: 0; max-width: 50%;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--pair .place-fig img {
+  max-height: 44vh; object-fit: contain; }
+.place-pdf-fig-row--pair .place-fig--hi-res img { max-height: 52vh; }
+.place-pdf-fig-row--pair .place-fig--lo-res img { max-height: 26vh; }
+.place-pdf-fig-row--pair .place-fig--row-sized img,
+.place-pdf-fig-row--triple .place-fig--row-sized img,
+.place-pdf-fig-row--many .place-fig--row-sized img {
+  width: auto; max-width: 100%; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row .place-fig--row-sized.place-fig--hi-res img,
+.place-pdf-fig-row .place-fig--row-sized.place-fig--lo-res img {
+  max-height: unset; }
+.place-pdf-fig-rows-stack {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple {
+  display: flex; flex-direction: row; flex-wrap: nowrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.4rem 0.48rem; margin: 0;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--triple .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--triple .place-fig--hi-res img { max-height: 42vh; }
+.place-pdf-fig-row--triple .place-fig--lo-res img { max-height: 18vh; }
+.place-pdf-fig-row--many {
+  flex-wrap: nowrap; justify-content: center; align-items: flex-end;
+  gap: 0.35rem 0.42rem; }
+.place-pdf-fig-row--many .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--many .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+
+
 .place { margin-bottom: 2.2rem; page-break-inside: auto; }
 h3 { font-family: 'Cinzel', serif; font-size: 1.22rem; margin: 1.2rem 0 0.35rem;
   font-weight: 600; }
@@ -90,7 +171,6 @@ h4 { font-family: 'Cinzel', serif; font-size: 0.95rem; text-transform: uppercase
   color: #555; font-size: 0.95rem; margin: 0 0 0.5rem; font-style: italic; }
 .place-meta { font-size: 0.92rem; color: #353535; margin: 0 0 0.75rem;
   line-height: 1.4; }
-.place-fig { margin: 0.5rem 0 1rem; }
 img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
 .prose, .place-desc p { margin: 0.45rem 0; line-height: 1.5;
   text-align: justify; }
@@ -110,11 +190,14 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <figure class="heraldry-fig heraldry-coat-book" title="Coat of arms of Vatican City"><img src="../images/guide_coat_of_arms.svg" alt="Coat of arms of Vatican City"/></figure>
 <figure class="heraldry-fig heraldry-coat-book" title="Flag of Vatican City"><img src="../images/guide_flag.svg" alt="Flag of Vatican City"/></figure>
 </div></div><h1 class="guide-title-main">Vatican City</h1><p class="lead">Путеводитель. Объектов в этом выпуске: 27.</p></header>
+<nav class="guide-toc" id="guide-toc" aria-label="Содержание"><h2>Содержание</h2><ol><li class="toc-item"><a href="#guide-historical">Историческая справка</a></li><li class="toc-item"><a href="#guide-trips">Маршруты</a></li><li class="toc-item"><a href="#vatican_aerial_basilica">Vatican Aerial Basilica</a></li><li class="toc-item"><a href="#vatican_apostolic_palace">Vatican Apostolic Palace</a></li><li class="toc-item"><a href="#vatican_audience_hall">Vatican Audience Hall</a></li><li class="toc-item"><a href="#vatican_biblioteca_apostolica">Vatican Biblioteca Apostolica</a></li><li class="toc-item"><a href="#vatican_carriage_pavilion">Vatican Carriage Pavilion</a></li><li class="toc-item"><a href="#vatican_castel_sant_angelo">Vatican Castel Sant Angelo</a></li><li class="toc-item"><a href="#vatican_cortile_pigna">Vatican Cortile Pigna</a></li><li class="toc-item"><a href="#vatican_cupola_exterior">Vatican Cupola Exterior</a></li><li class="toc-item"><a href="#vatican_ethnological_museum">Vatican Ethnological Museum</a></li><li class="toc-item"><a href="#vatican_gardens">Vatican Gardens</a></li><li class="toc-item"><a href="#vatican_geographical_maps">Vatican Geographical Maps</a></li><li class="toc-item"><a href="#vatican_gregorian_egyptian">Vatican Gregorian Egyptian</a></li><li class="toc-item"><a href="#vatican_gregorian_etruscan">Vatican Gregorian Etruscan</a></li><li class="toc-item"><a href="#vatican_museums">Vatican Museums</a></li><li class="toc-item"><a href="#vatican_necropolis_scavi">Vatican Necropolis Scavi</a></li><li class="toc-item"><a href="#vatican_obelisk_st_peters">Vatican Obelisk St Peters</a></li><li class="toc-item"><a href="#vatican_papal_archbasilica">Vatican Papal Archbasilica</a></li><li class="toc-item"><a href="#vatican_petersdom">Vatican Petersdom</a></li><li class="toc-item"><a href="#vatican_pinacoteca_vatican">Vatican Pinacoteca Vatican</a></li><li class="toc-item"><a href="#vatican_ponte_sant_angelo">Vatican Ponte Sant Angelo</a></li><li class="toc-item"><a href="#vatican_raphael_rooms">Vatican Raphael Rooms</a></li><li class="toc-item"><a href="#vatican_raphael_school_of_athens">Vatican Raphael School Of Athens</a></li><li class="toc-item"><a href="#vatican_sistine_chapel">Vatican Sistine Chapel</a></li><li class="toc-item"><a href="#vatican_st_peters_basilica">Vatican St Peters Basilica</a></li><li class="toc-item"><a href="#vatican_st_peters_square">Vatican St Peters Square</a></li><li class="toc-item"><a href="#vatican_sura">Vatican Sura</a></li><li class="toc-item"><a href="#vatican_swiss_guard">Vatican Swiss Guard</a></li></ol></nav>
 <section class="historical-reference" id="guide-historical" aria-label="Историческая справка"><h2>Историческая справка</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 <p class="prose">Ватикан — карликовое государство-анклав внутри Рима, резиденция папы и центр Римско-католической церкви.</p>
 <p class="prose">Микро-государство на холме Ватикан со Собором Святого Петра, музеями и библиотекой; суверенитет оформлен Латеранскими соглашениями 1929 года. Культурное наследие Ренессанса и современная дипломатия сосредоточены на площади святого Петра.</p>
 <p class="prose">Вторая мировая война и поздний XX век закрепили нейтралитет; папство Иоанна Павла II и последующих понтификов усилили дипломатическую роль. Ватикан остаётся центром канонического права, искусства и межрелигиозного диалога на микротерритории внутри Рима.</p></section>
 <section class="guide-trip-plans" id="guide-trips" aria-label="Маршруты"><h2>Маршруты</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 <article class="trip-plan" id="trip-1d"><h3>Один день</h3>
 <p class="prose">Компактный маршрут по главным точкам путеводителя с минимальным возвратом назад пешком.</p>
 <ol class="trip-stops"><li><a href="#vatican_apostolic_palace">Vatican Apostolic Palace</a> (~75мин)</li>
@@ -143,222 +226,371 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <li><a href="#vatican_gregorian_etruscan">Vatican Gregorian Etruscan</a> (~75мин)</li>
 <li><a href="#vatican_museums">Vatican Museums</a> (~75мин)</li>
 <li><a href="#vatican_necropolis_scavi">Vatican Necropolis Scavi</a> (~75мин)</li></ol></article></section>
-<nav class="guide-toc" aria-label="Содержание"><h2>Содержание</h2><ol><li class="toc-item"><a href="#guide-historical">Историческая справка</a></li><li class="toc-item"><a href="#guide-trips">Маршруты</a></li><li class="toc-item"><a href="#vatican_ethnological_museum">Vatican Ethnological Museum</a></li><li class="toc-item"><a href="#vatican_apostolic_palace">Vatican Apostolic Palace</a></li><li class="toc-item"><a href="#vatican_papal_archbasilica">Vatican Papal Archbasilica</a></li><li class="toc-item"><a href="#vatican_carriage_pavilion">Vatican Carriage Pavilion</a></li><li class="toc-item"><a href="#vatican_castel_sant_angelo">Vatican Castel Sant Angelo</a></li><li class="toc-item"><a href="#vatican_cortile_pigna">Vatican Cortile Pigna</a></li><li class="toc-item"><a href="#vatican_geographical_maps">Vatican Geographical Maps</a></li><li class="toc-item"><a href="#vatican_gregorian_egyptian">Vatican Gregorian Egyptian</a></li><li class="toc-item"><a href="#vatican_gregorian_etruscan">Vatican Gregorian Etruscan</a></li><li class="toc-item"><a href="#vatican_audience_hall">Vatican Audience Hall</a></li><li class="toc-item"><a href="#vatican_ponte_sant_angelo">Vatican Ponte Sant Angelo</a></li><li class="toc-item"><a href="#vatican_raphael_rooms">Vatican Raphael Rooms</a></li><li class="toc-item"><a href="#vatican_raphael_school_of_athens">Vatican Raphael School Of Athens</a></li><li class="toc-item"><a href="#vatican_cupola_exterior">Vatican Cupola Exterior</a></li><li class="toc-item"><a href="#vatican_sistine_chapel">Vatican Sistine Chapel</a></li><li class="toc-item"><a href="#vatican_st_peters_basilica">Vatican St Peters Basilica</a></li><li class="toc-item"><a href="#vatican_aerial_basilica">Vatican Aerial Basilica</a></li><li class="toc-item"><a href="#vatican_st_peters_square">Vatican St Peters Square</a></li><li class="toc-item"><a href="#vatican_pdfband_2_ba249258">Sura</a></li><li class="toc-item"><a href="#vatican_swiss_guard">Vatican Swiss Guard</a></li><li class="toc-item"><a href="#vatican_biblioteca_apostolica">Vatican Biblioteca Apostolica</a></li><li class="toc-item"><a href="#vatican_pdfband_3_f013ff34">Petersdom</a></li><li class="toc-item"><a href="#vatican_necropolis_scavi">Vatican Necropolis Scavi</a></li><li class="toc-item"><a href="#vatican_gardens">Vatican Gardens</a></li><li class="toc-item"><a href="#vatican_museums">Vatican Museums</a></li><li class="toc-item"><a href="#vatican_obelisk_st_peters">Vatican Obelisk St Peters</a></li><li class="toc-item"><a href="#vatican_pinacoteca_vatican">Vatican Pinacoteca Vatican</a></li></ol></nav>
-<section class="place" id="vatican_ethnological_museum">
-<h3>Vatican Ethnological Museum</h3>
+<section class="place" id="vatican_aerial_basilica">
+<div class="place-lead">
+<h3>Vatican Aerial Basilica</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 2019</p>
-<figure class="place-fig"><img src="../images/vatican_ethnological_museum.jpg" alt="Vatican Ethnological Museum"/></figure>
-<div class="place-desc"><p class="prose">Открыт в Ватикане в 2021 году. Создан по инициативе Папы Франциска. Посвящён вопросам экологии и защиты окружающей среды. Расположен рядом с известными достопримечательностями Ватикана, такими как Сикстинская капелла. Является частью культурного наследия Ватикана.</p>
-<p class="prose">Музей Anima Mundi был открыт в Ватикане в 2021 году и стал первым музеем Ватикана, посвящённым экологии и защите окружающей среды. Идея музея принадлежит Папе Франциску, который активно выступает за экологические инициативы и защиту природы. Музей расположен рядом с Сикстинской капеллой и является частью культурного комплекса Ватикана. Музей призван привлечь внимание общественности к проблемам экологии и вдохновить посетителей на осознанное отношение к природе и её охране.</p></div>
+<p class="place-meta">Адрес: Vatican City</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vatican_aerial_basilica.jpg" alt="Vatican Aerial Basilica" width="1280" height="885" style="height: 319px; max-height: 319px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vatican_aerial_basilica_b.jpg" alt="Vatican Aerial Basilica — вид 2" width="330" height="247" style="height: 319px; max-height: 319px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Вид с площадки охватывает территорию всего Ватикана и близлежащих районов Рима. Сюда можно подняться пешком по специальной лестнице внутри собора. Площадка открыта ежедневно, кроме дней технических работ. На площадке установлены удобные скамейки для отдыха посетителей. Отсюда хорошо видны купола базилики и папского дворца.</p>
+<p class="prose">Панорамная смотровая площадка St Pyotr&#x27;s from the air расположена на крыше собора Святого Петра в Ватикане. Отсюда открывается потрясающий вид на весь город-государство, включая площадь Святого Петра и окружающие здания Ватикана. Место стало популярным среди туристов благодаря уникальной возможности увидеть архитектуру города сверху. Смотровая площадка позволяет насладиться захватывающим видом на знаменитые архитектурные сооружения Ватикана и получить представление о масштабах и красоте столицы католического мира.</p></div>
 </section>
 <section class="place" id="vatican_apostolic_palace">
+<div class="place-lead">
 <h3>Vatican Apostolic Palace</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Стиль: Ренессанс и барокко</p>
-<figure class="place-fig"><img src="../images/vatican_apostolic_palace.jpg" alt="Vatican Apostolic Palace"/></figure>
+<p class="place-meta">Адрес: Vatican City | Стиль: Ренессанс и барокко</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vatican_apostolic_palace.jpg" alt="Vatican Apostolic Palace" width="1280" height="720" style="height: 259px; max-height: 259px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vatican_apostolic_palace_b.jpg" alt="Vatican Apostolic Palace — вид 2" width="330" height="225" style="height: 259px; max-height: 259px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Строительство дворца велось поэтапно в течение XV–XVII веков. Дворец сочетает архитектурные стили ренессансной и барочной архитектуры. Здесь находятся знаменитые Сикстинская капелла и Станцы Рафаэля. Во дворце проходят официальные встречи и церемонии Папы Римского. На территории дворца располагается Ватиканская библиотека.</p>
 <p class="prose">Апостольский дворец является официальной резиденцией Папы Римского и расположен в самом сердце Ватикана. Строительство дворца продолжалось в течение нескольких столетий, начиная с эпохи Возрождения и заканчивая эпохой барокко. Здесь расположены личные покои Папы, рабочие кабинеты, аудиенц-залы и многочисленные художественные коллекции, включая работы Рафаэля и Микеланджело. Посещение Апостольского дворца позволяет увидеть интерьеры и произведения искусства, созданные лучшими мастерами итальянского Ренессанса и барокко.</p></div>
 </section>
-<section class="place" id="vatican_papal_archbasilica">
-<h3>Vatican Papal Archbasilica</h3>
+<section class="place" id="vatican_audience_hall">
+<div class="place-lead">
+<h3>Vatican Audience Hall</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Стиль: Романский стиль с элементами готики и ренессанса</p>
-<figure class="place-fig"><img src="../images/vatican_papal_archbasilica.jpg" alt="Vatican Papal Archbasilica"/></figure>
-<div class="place-desc"><p class="prose">Расположен рядом с Ватиканским дворцом и является крупнейшим собором Рима. Знаменит мозаиками и фресками, включая знаменитую работу Рафаэля Санти. Собор открыт ежедневно для посещения паломниками и туристами. Имеет статус базилики-петрификата (первого посвящённого храма Христа Спасителя). Является местом коронации всех римских пап начиная с XI века.</p>
-<p class="prose">Архикафедральный собор Святого Иоанна Латерана — главный католический храм Рима и резиденция епископа Римского, главы Католической церкви. Построен в VI веке на месте дворца императора Латерануса, отсюда название. Собор неоднократно перестраивался и расширялся, последний раз значительные изменения произошли после пожара 1519 года. Главный кафедральный собор Ватикана, место коронации пап и важнейший символ христианства.</p></div>
+<p class="place-meta">Стиль: современная архитектура с элементами классицизма</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vatican_audience_hall.jpg" alt="Vatican Audience Hall" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vatican_audience_hall_b.jpg" alt="Vatican Audience Hall — вид 2" width="330" height="264" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Зал назван в честь Папы Павла VI, занимавшего престол с 1963 по 1978 год. Построена по проекту архитектора Карло Маджио и инженера Марио Галли, завершена в 1969 году. Помещение рассчитано на несколько тысяч человек, включая папский трон и места для прессы. Стены зала украшают фрески современных художников, отражающих темы христианской веры и морали. Архитектура здания сочетает элементы современной архитектуры и классицизма.</p>
+<p class="prose">Павильон Пауло VI — одна из главных аудиторий Ватикана, построенная в середине XX века специально для проведения официальных аудиенций Папы Римского. Здание стало символом обновления и модернизации католической церкви после Второй мировой войны. Здесь проходят важные официальные встречи и церемонии, привлекающие внимание миллионов верующих и туристов со всего мира.</p></div>
+</section>
+<section class="place" id="vatican_biblioteca_apostolica">
+<div class="place-lead">
+<h3>Vatican Biblioteca Apostolica</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<figure class="place-fig place-fig--lo-res"><img src="../images/vatican_biblioteca_apostolica_b.jpg" alt="Vatican Biblioteca Apostolica" width="330" height="294"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Библиотека содержит около миллиона книг, среди которых редкие рукописи и печатные издания XV–XVI веков. Здесь хранится самая древняя Библия, известная как Ватиканский кодекс, написанная примерно в IV веке н.э. Коллекция включает более 8 тысяч древних манускриптов, включая ранние версии произведений Платона, Аристотеля и Гомера. С момента основания библиотека служила хранилищем и источником знаний для католической церкви и ученых всего мира. Ежегодно библиотека пополняется новыми экземплярами редких изданий и рукописей.</p>
+<p class="prose">Апостольская библиотека Ватикана основана в XVI веке папой Юлием II и является одной из старейших библиотек мира. Здесь хранятся уникальные рукописи, манускрипты и редкие издания, имеющие огромное значение для истории и культуры человечества. Особое место занимают древние пергаменты и рукописные Библии, многие из которых датируются эпохой раннего христианства. Посещение Апостольской библиотеки позволяет прикоснуться к сокровищам мировой культуры и получить представление о значении религиозных текстов и исторических документов.</p></div>
 </section>
 <section class="place" id="vatican_carriage_pavilion">
+<div class="place-lead">
 <h3>Vatican Carriage Pavilion</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Стиль: эклектика</p>
-<figure class="place-fig"><img src="../images/vatican_carriage_pavilion.jpg" alt="Vatican Carriage Pavilion"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vatican_carriage_pavilion.jpg" alt="Vatican Carriage Pavilion" width="330" height="295" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vatican_carriage_pavilion_b.jpg" alt="Vatican Carriage Pavilion — вид 2" width="330" height="265" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Построена в стиле эклектики, сочетающей элементы классицизма и барокко. Является частью комплекса музеев Ватикана. Открыта для посещения туристами ежедневно. Считается одним из самых красивых внутренних двориков Ватикана. Здесь проходили торжественные церемонии и встречи официальных лиц.</p>
 <p class="prose">Карусель-вагонетка Carriage Pavilion расположена во внутреннем дворе Ватикана, рядом с музеем Пия-Климента и садами Ватиканского дворца. Она была построена в середине XIX века папой Пием IX как символическое место встречи папы римского с верующими паломниками. Здесь традиционно останавливались кареты понтифика, когда он выходил встречать прихожан после мессы. Это исторически значимое сооружение является важным элементом культурного наследия Ватикана и привлекает внимание туристов своей уникальной архитектурой и атмосферой.</p></div>
 </section>
 <section class="place" id="vatican_castel_sant_angelo">
+<div class="place-lead">
 <h3>Vatican Castel Sant Angelo</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/vatican_castel_sant_angelo.jpg" alt="Vatican Castel Sant Angelo"/></figure>
+<p class="place-meta">Адрес: Lungotevere Castello, Rome (outside Vatican walls)</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vatican_castel_sant_angelo.jpg" alt="Vatican Castel Sant Angelo" width="1280" height="811" style="height: 292px; max-height: 292px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vatican_castel_sant_angelo_b.jpg" alt="Vatican Castel Sant Angelo — вид 2" width="330" height="247" style="height: 292px; max-height: 292px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Строительство мавзолея началось ещё при жизни императора Адриана в 139 году н.э. Сооружение служило местом захоронения членов семьи Адриана и его преемников. Во время осады Рима в XIII веке крепость использовалась папами как убежище. В XVI веке Папа Юлий II укрепил стены крепости и добавил новые бастионы. На вершине башни установлена статуя архангела Михаила, ставшая символом победы над чумой в XVII веке.</p>
 <p class="prose">Кастель Сант&#x27;Анджело изначально был возведён во II веке н.э. как мавзолей императора Адриана, известного также как Мавзолей Адриана. Со временем сооружение превратилось в мощную крепость, сыгравшую важную оборонительную роль в Средние века и эпоху Возрождения. Здесь останавливались папы римские, проходили важные церемонии и встречи, включая коронации и аудиенции. Здание привлекает туристов своей уникальной историей, сочетающей древнеримский мавзолей и средневековую крепость, символизируя переход от античности к средневековью и эпохе Возрождения.</p></div>
 </section>
 <section class="place" id="vatican_cortile_pigna">
+<div class="place-lead">
 <h3>Vatican Cortile Pigna</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/vatican_cortile_pigna.jpg" alt="Vatican Cortile Pigna"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vatican_cortile_pigna.jpg" alt="Vatican Cortile Pigna" width="330" height="294" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vatican_cortile_pigna_b.jpg" alt="Vatican Cortile Pigna — вид 2" width="330" height="455" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Скульптура сделана из бронзы и представляет собой стилизованную форму пинии. Папой Павлом III Фарнезе был заказан перенос скульптуры именно в это место. На постаменте рядом с пинией установлена статуя святого Петра. Высота скульптуры составляет примерно 4 метра. Корте дель Пинья является частью архитектурного ансамбля площади Святого Петра.</p>
 <p class="prose">Кортеж Пиньи (итал. Corte del Pigna) расположен перед портиком собора Святого Петра в Ватикане. Сооружение выполнено в виде огромной бронзовой скульптуры-пинии высотой около 4 метров, установленной на постаменте. Скульптура была создана предположительно в XVI веке по заказу Папы Павла III Фарнезе и выполнена скульптором Джованни да Болонья. Поначалу пиния стояла внутри базилики Сан-Пьетро-ин-Винколи, однако позже её перенесли сюда. Это необычное произведение искусства привлекает внимание туристов и паломников благодаря своей оригинальной форме и историческому значению.</p></div>
 </section>
-<section class="place" id="vatican_geographical_maps">
-<h3>Vatican Geographical Maps</h3>
+<section class="place" id="vatican_cupola_exterior">
+<div class="place-lead">
+<h3>Vatican Cupola Exterior</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Стиль: Ренессансный коридор картографии | Период: 1580–1585</p>
-<figure class="place-fig"><img src="../images/vatican_geographical_maps.jpg" alt="Vatican Geographical Maps"/></figure>
+<p class="place-meta">Стиль: Возрождение</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vatican_cupola_exterior.jpg" alt="Vatican Cupola Exterior" width="330" height="226" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vatican_cupola_exterior_b.jpg" alt="Vatican Cupola Exterior — вид 2" width="330" height="495" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Высота купола составляет около 136 метров, диаметр основания — примерно 42 метра. На вершине купола расположена смотровая площадка, откуда открывается панорамный вид на Римский Ватикан и город. Собор Святого Петра является главным храмом Римско-католической церкви и местом захоронения многих пап. Купол выполнен из кирпича и камня, покрыт свинцовой крышей. Строительство купола было завершено в 1590 году.</p>
+<p class="prose">Купол собора Святого Петра был возведён архитектором Микеланджело Буонарроти в середине XVI века по заказу Папы Павла III Фарнезе. Купол стал символом католической церкви и крупнейшим купольным сооружением своего времени, оказав огромное влияние на европейское зодчество последующих столетий. Посещение купола позволяет увидеть великолепную панораму Рима и ощутить величие архитектуры эпохи Возрождения.</p></div>
+</section>
+<section class="place" id="vatican_ethnological_museum">
+<div class="place-lead">
+<h3>Vatican Ethnological Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Период: 2019</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vatican_ethnological_museum.jpg" alt="Vatican Ethnological Museum" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vatican_ethnological_museum_b.jpg" alt="Vatican Ethnological Museum — вид 2" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Открыт в Ватикане в 2021 году. Создан по инициативе Папы Франциска. Посвящён вопросам экологии и защиты окружающей среды. Расположен рядом с известными достопримечательностями Ватикана, такими как Сикстинская капелла. Является частью культурного наследия Ватикана.</p>
+<p class="prose">Музей Anima Mundi был открыт в Ватикане в 2021 году и стал первым музеем Ватикана, посвящённым экологии и защите окружающей среды. Идея музея принадлежит Папе Франциску, который активно выступает за экологические инициативы и защиту природы. Музей расположен рядом с Сикстинской капеллой и является частью культурного комплекса Ватикана. Музей призван привлечь внимание общественности к проблемам экологии и вдохновить посетителей на осознанное отношение к природе и её охране.</p></div>
+</section>
+<section class="place" id="vatican_gardens">
+<div class="place-lead">
+<h3>Vatican Gardens</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Место: Vatican City | Стиль: Формальные сады, гроты, современные насаждения</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vatican_gardens.jpg" alt="Vatican Gardens" width="1000" height="1600" style="height: 431px; max-height: 431px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vatican_gardens_b.jpg" alt="Vatican Gardens — вид 2" width="330" height="308" style="height: 431px; max-height: 431px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">На территории садов расположены знаменитые Ватиканские гроты, созданные архитектором Донателло Браманте. Здесь находятся статуи знаменитых скульпторов Микеланджело и Бернини. В садах разбиты цветочные клумбы и аллеи с экзотическими растениями. Парк окружён массивной стеной с воротами Порта Пиа, построенной при папе Сиксте V. Ежегодно миллионы людей посещают сады Ватикана, чтобы полюбоваться великолепием архитектуры и пейзажей.</p>
+<p class="prose">Сады Ватикана были заложены ещё в эпоху Возрождения и постепенно развивались на протяжении веков. Сегодня это живописная территория, включающая формальные сады эпохи Ренессанса, роскошные гротески и современные насаждения. Здесь гармонично сочетаются элементы классики и современности. Зелёные зоны Ватикана являются популярным местом отдыха среди паломников и туристов, позволяя насладиться красотой природы и спокойствием.</p></div>
+</section>
+<section class="place" id="vatican_geographical_maps">
+<div class="place-lead">
+<h3>Vatican Geographical Maps</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Vatican Museums | Стиль: Ренессансный коридор картографии | Период: 1580–1585</p>
+<figure class="place-fig place-fig--lo-res"><img src="../images/vatican_geographical_maps_b.jpg" alt="Vatican Geographical Maps" width="330" height="242"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Здесь представлены одни из старейших сохранившихся картографических изображений Земли, созданные мастерами эпохи Ренессанса. Среди экспонатов особое место занимают работы Герарда Меркатора и Абрахама Ортелиуса. Карты выполнены вручную, с использованием сложных методов гравировки и раскраски. Это одно из немногих мест в мире, где можно увидеть оригинальные карты, созданные до изобретения печатного станка. На картах изображены территории, известные европейцам в эпоху Великих географических открытий.</p>
 <p class="prose">Галерея географических карт была создана в Ватиканских музеях в середине XVI века, примерно в период между 1580 и 1585 годами, во времена понтификата Сикста V. Именно тогда здесь были собраны уникальные карты мира, отражающие представления эпохи Возрождения о географии и устройстве вселенной. Среди наиболее известных экспонатов галереи выделяются знаменитые карты Меркатора и Ортелиуса, ставшие настоящими шедеврами картографии своего времени. Посещение Галереи географических карт позволяет увидеть выдающиеся образцы старинной картографии и глубже понять развитие представлений человечества о мире.</p></div>
 </section>
 <section class="place" id="vatican_gregorian_egyptian">
+<div class="place-lead">
 <h3>Vatican Gregorian Egyptian</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Период: 1907</p>
-<figure class="place-fig"><img src="../images/vatican_gregorian_egyptian.jpg" alt="Vatican Gregorian Egyptian"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vatican_gregorian_egyptian.jpg" alt="Vatican Gregorian Egyptian" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vatican_gregorian_egyptian_b.jpg" alt="Vatican Gregorian Egyptian — вид 2" width="330" height="469" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Основал музей папа Григорий XVI. Открыт в 1902 году. Один из старейших музеев древнего Египта вне страны. Собрание включает свыше 30 тысяч предметов. Экспозиция посвящена повседневной жизни древних египтян.</p>
 <p class="prose">Грегорианский египетский музей был основан в Риме в XIX веке по инициативе папы Григория XVI и открыт в 1902 году. Музей является одним из старейших и крупнейших собраний древнеегипетских артефактов за пределами Египта. Среди экспонатов представлены мумии, саркофаги, статуэтки фараонов и предметы быта древних египтян. Музей позволяет посетителям познакомиться с культурой Древнего Египта и увидеть уникальные археологические находки, многие из которых были найдены непосредственно в Египте.</p></div>
 </section>
 <section class="place" id="vatican_gregorian_etruscan">
+<div class="place-lead">
 <h3>Vatican Gregorian Etruscan</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Период: 1911</p>
-<figure class="place-fig"><img src="../images/vatican_gregorian_etruscan.jpg" alt="Vatican Gregorian Etruscan"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vatican_gregorian_etruscan.jpg" alt="Vatican Gregorian Etruscan" width="330" height="186" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vatican_gregorian_etruscan_b.jpg" alt="Vatican Gregorian Etruscan — вид 2" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Экспозиция музея демонстрирует культовую символику этрусков, включая бронзовые зеркала и украшения. Особое место занимают предметы, связанные с музыкой и григорианским хоралом. Коллекция содержит древние музыкальные инструменты и нотные записи. Здесь представлены археологические находки из раскопок этрусских городов. Музей расположен рядом с Ватиканскими садами и является частью комплекса музеев Ватикана.</p>
 <p class="prose">Музей основан в XIX веке и посвящён изучению древнеримской цивилизации этрусков и истории григорианского пения. Коллекция включает уникальные экспонаты, отражающие религиозные ритуалы, искусство и быт древних этрусков. Позволяет глубже понять историю и культуру этрусских народов, познакомиться с редкими артефактами и музыкальными традициями.</p></div>
 </section>
-<section class="place" id="vatican_audience_hall">
-<h3>Vatican Audience Hall</h3>
+<section class="place" id="vatican_museums">
+<div class="place-lead">
+<h3>Vatican Museums</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Стиль: современная архитектура с элементами классицизма</p>
-<figure class="place-fig"><img src="../images/vatican_audience_hall.jpg" alt="Vatican Audience Hall"/></figure>
-<div class="place-desc"><p class="prose">Зал назван в честь Папы Павла VI, занимавшего престол с 1963 по 1978 год. Построена по проекту архитектора Карло Маджио и инженера Марио Галли, завершена в 1969 году. Помещение рассчитано на несколько тысяч человек, включая папский трон и места для прессы. Стены зала украшают фрески современных художников, отражающих темы христианской веры и морали. Архитектура здания сочетает элементы современной архитектуры и классицизма.</p>
-<p class="prose">Павильон Пауло VI — одна из главных аудиторий Ватикана, построенная в середине XX века специально для проведения официальных аудиенций Папы Римского. Здание стало символом обновления и модернизации католической церкви после Второй мировой войны. Здесь проходят важные официальные встречи и церемонии, привлекающие внимание миллионов верующих и туристов со всего мира.</p></div>
+<p class="place-meta">Адрес: Vatican City | Стиль: Галереи и залы различных стилей, включая ренессансную архитектуру</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vatican_museums.jpg" alt="Vatican Museums" width="1280" height="814" style="height: 293px; max-height: 293px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vatican_museums_b.jpg" alt="Vatican Museums — вид 2" width="330" height="217" style="height: 293px; max-height: 293px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Коллекция музея насчитывает около семи тысяч произведений живописи и скульптуры. Сикстинская капелла является одной из главных достопримечательностей Рима и символом христианской культуры. Станцы Рафаэля представляют собой серию комнат, каждая из которых украшена уникальными фресками. Музей открыт ежедневно, кроме вторника, вход платный. На территории музея также расположены Папская библиотека и Музей археологии.</p>
+<p class="prose">Ватиканские музеи возникли постепенно начиная с XVI века, когда папы начали собирать художественные коллекции. Сегодня музейная коллекция включает знаменитые шедевры эпохи Возрождения, среди которых работы Рафаэля, Микеланджело и Леонардо да Винчи. Особое место занимает Сикстинская капелла, расписанная фресками Микеланджело, и Станцы Рафаэля, украшенные картинами великого мастера. Посещение Ватиканских музеев позволяет увидеть уникальные произведения искусства эпохи Возрождения и познакомиться с историей папского коллекционирования.</p></div>
+</section>
+<section class="place" id="vatican_necropolis_scavi">
+<div class="place-lead">
+<h3>Vatican Necropolis Scavi</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vatican_necropolis_scavi.jpg" alt="Vatican Necropolis Scavi" width="330" height="226" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vatican_necropolis_scavi_b.jpg" alt="Vatican Necropolis Scavi — вид 2" width="330" height="218" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">На территории раскопок обнаружены фрагменты древних римских бань Терм Диоклетиана. Здесь сохранились уникальные мозаики IV века, датируемые временем императора Константина. Раскопки включают руины раннехристианских базилик и катакомб, связанных с первыми христианами. Археологический парк является частью комплекса музеев Ватикана. Территория раскопок открыта для посещения ежедневно.</p>
+<p class="prose">Археологические раскопки Ватикана проводятся уже несколько столетий и позволяют увидеть древние слои истории Рима и раннего христианства. Раскопки начались еще в XVI веке, когда были найдены остатки древнеримских зданий и храмов. Сегодня археологический парк включает в себя обширную территорию, где посетители могут увидеть руины терм Диоклетиана, античные храмы и мозаики IV века, а также раннехристианские базилики и катакомбы. Посещение археологических раскопок Ватикана позволяет глубже понять историю зарождения христианской церкви и культуры Древнего Рима.</p></div>
+</section>
+<section class="place" id="vatican_obelisk_st_peters">
+<div class="place-lead">
+<h3>Vatican Obelisk St Peters</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vatican_obelisk_st_peters.jpg" alt="Vatican Obelisk St Peters" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vatican_obelisk_st_peters_b.jpg" alt="Vatican Obelisk St Peters — вид 2" width="330" height="185" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Обелиск изготовлен из красного гранита и весит около 350 тонн. На верхней части обелиска изображены сцены из жизни Христа. Во времена Древнего Рима обелиски использовались как символы власти и авторитета. Считается, что обелиск перевезён в Рим ещё во II веке н.э., однако окончательно установлен в Ватикане лишь в XVI веке. Рядом с обелиском расположена колоннада Бернини, выполненная знаменитым итальянским архитектором.</p>
+<p class="prose">Ватиканский обелиск был установлен в XVI веке по указу папы Юлия III в Ватиканском саду рядом с Собором Святого Петра. Обелиск привезён из древнего города Лептис-Магна в Ливии и является одним из древнейших сохранившихся памятников Рима. Его высота составляет около 25 метров. Обелиск привлекает внимание туристов своей историей и величественным видом, являясь символом древности и красоты Рима.</p></div>
+</section>
+<section class="place" id="vatican_papal_archbasilica">
+<div class="place-lead">
+<h3>Vatican Papal Archbasilica</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Стиль: Романский стиль с элементами готики и ренессанса</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vatican_papal_archbasilica.jpg" alt="Vatican Papal Archbasilica" width="330" height="299" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vatican_papal_archbasilica_b.jpg" alt="Vatican Papal Archbasilica — вид 2" width="330" height="254" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Расположен рядом с Ватиканским дворцом и является крупнейшим собором Рима. Знаменит мозаиками и фресками, включая знаменитую работу Рафаэля Санти. Собор открыт ежедневно для посещения паломниками и туристами. Имеет статус базилики-петрификата (первого посвящённого храма Христа Спасителя). Является местом коронации всех римских пап начиная с XI века.</p>
+<p class="prose">Архикафедральный собор Святого Иоанна Латерана — главный католический храм Рима и резиденция епископа Римского, главы Католической церкви. Построен в VI веке на месте дворца императора Латерануса, отсюда название. Собор неоднократно перестраивался и расширялся, последний раз значительные изменения произошли после пожара 1519 года. Главный кафедральный собор Ватикана, место коронации пап и важнейший символ христианства.</p></div>
+</section>
+<section class="place" id="vatican_petersdom">
+<div class="place-lead">
+<h3>Vatican Petersdom</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Стиль: барокко</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vatican_petersdom.jpg" alt="Vatican Petersdom" width="1280" height="629" style="height: 227px; max-height: 227px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vatican_petersdom_b.jpg" alt="Vatican Petersdom — вид 2" width="330" height="440" style="height: 227px; max-height: 227px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Строительство собора началось в 1506 году и продолжалось несколько столетий. Храм имеет форму латинского креста и вмещает около 60 тысяч человек. На куполе собора изображена фреска Микеланджело «Страшный суд». Перед собором находится площадь Святого Петра, одна из крупнейших городских площадей Европы. Рядом расположен музей Ватикана, хранящий богатейшую коллекцию произведений искусства.</p>
+<p class="prose">Папский престол существует уже много веков, начиная с апостольского времени. В середине XIX века Ватикан стал независимым государством после подписания Латеранских соглашений между Италией и Святым Престолом в 1929 году. Собор Святого Петра является главным храмом католической церкви и местом захоронений пап. Это крупнейшее христианское сооружение в мире, символизирующее духовную власть Папы Римского. Собор Святого Петра — символ католицизма и одно из главных мест паломничества верующих со всего мира.</p></div>
+</section>
+<section class="place" id="vatican_pinacoteca_vatican">
+<div class="place-lead">
+<h3>Vatican Pinacoteca Vatican</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Стиль: ренессансная архитектура</p>
+<figure class="place-fig place-fig--lo-res"><img src="../images/vatican_pinacoteca_vatican.jpg" alt="Vatican Pinacoteca Vatican" width="330" height="261"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Коллекция включает около 450 живописных произведений и скульптур. Основу собрания составляют произведения итальянских художников XV–XVII веков. Пинакотека открыта для посетителей ежедневно, кроме вторника. Здание галереи выполнено в стиле ренессансной архитектуры. Среди наиболее известных экспонатов — знаменитое полотно «Афинская школа» Рафаэля.</p>
+<p class="prose">Галерея Пинакотека Ватикана была основана папой Пием IV в XVI веке и расположена в Ватиканском дворце. Здесь собрана одна из крупнейших коллекций западноевропейской живописи эпохи Возрождения и барокко. Среди знаменитых полотен представлены работы Рафаэля, Микеланджело, Леонардо да Винчи, Тициана и многих других выдающихся мастеров. Посещение галереи позволяет увидеть шедевры мировой живописи и глубже понять развитие европейской культуры и искусства.</p></div>
 </section>
 <section class="place" id="vatican_ponte_sant_angelo">
+<div class="place-lead">
 <h3>Vatican Ponte Sant Angelo</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/vatican_ponte_sant_angelo.jpg" alt="Vatican Ponte Sant Angelo"/></figure>
+<p class="place-meta">Место: Tiber crossing toward Castel Sant&#x27;Angelo</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vatican_ponte_sant_angelo.jpg" alt="Vatican Ponte Sant Angelo" width="1280" height="960" style="height: 296px; max-height: 296px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vatican_ponte_sant_angelo_b.jpg" alt="Vatican Ponte Sant Angelo — вид 2" width="330" height="212" style="height: 296px; max-height: 296px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Строительство моста началось при императоре Адриане в 134 году н.э. Первоначально мост носил имя Мост пяти апостолов. На Понте Санг’Анжело установлены скульптуры ангелов, созданные мастерской Бернини в XVII веке. С моста открывается панорамный вид на Ватиканские холмы и собор Святого Петра. Мост находится рядом с музеем Пия-Климента и Замком святого Ангела.</p>
 <p class="prose">Понте Санг’Анжело — древнеримский мост через Тибр, возведённый императором Адрианом в 134 году н.э. Первоначально назывался Мост пяти апостолов, позднее получил современное название благодаря легенде о явлении архангела Михаила, который якобы спас город от чумы. В эпоху Возрождения и Барокко мост неоднократно перестраивался и украшался скульптурами, среди которых наиболее известны работы Бернини. Мост является важной архитектурной достопримечательностью Рима и символом города, особенно популярным среди туристов благодаря величественным статуям ангелов и живописному виду на Ватиканские холмы.</p></div>
 </section>
 <section class="place" id="vatican_raphael_rooms">
+<div class="place-lead">
 <h3>Vatican Raphael Rooms</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Период: 1508–1517</p>
-<figure class="place-fig"><img src="../images/vatican_raphael_rooms.jpg" alt="Vatican Raphael Rooms"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vatican_raphael_rooms.jpg" alt="Vatican Raphael Rooms" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vatican_raphael_rooms_b.jpg" alt="Vatican Raphael Rooms — вид 2" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Росписи созданы Рафаэлем Санти совместно с учениками и помощниками. На стенах изображены сцены из Священной истории и аллегории добродетелей. Залы расположены во дворце Ватикана рядом с Сикстинской капеллой. Рафаэль лично участвовал в создании композиции и раскраске всех фресок. После смерти Рафаэля работы были завершены его учениками.</p>
 <p class="prose">Стенные росписи Рафаэля Санти выполнены в Ватикане в XVI веке по заказу Папы Юлия II. Это серия из пяти залов, объединённых общей темой «Триумф Церкви». Росписи создавались между 1508 и 1517 годами и стали важным этапом в развитии европейской живописи эпохи Высокого Возрождения. Залы Рафаэля являются выдающимся образцом искусства Ренессанса и привлекают туристов своей уникальной атмосферой и живописью высокого уровня.</p></div>
 </section>
 <section class="place" id="vatican_raphael_school_of_athens">
+<div class="place-lead">
 <h3>Vatican Raphael School Of Athens</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/vatican_raphael_school_of_athens.jpg" alt="Vatican Raphael School Of Athens"/></figure>
+<p class="place-meta">Адрес: Apostolic Palace</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vatican_raphael_school_of_athens.jpg" alt="Vatican Raphael School Of Athens" width="1280" height="892" style="height: 321px; max-height: 321px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vatican_raphael_school_of_athens_b.jpg" alt="Vatican Raphael School Of Athens — вид 2" width="330" height="256" style="height: 321px; max-height: 321px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Рафаэль создал цикл фресок по поручению Папы Юлия II. Наиболее известной работой является фреска «Школа Афин», где изображена группа философов во главе с Платоном и Аристотелем. Фрески выполнены техникой мокрой штукатурки прямо на стене. Цикл включает девять больших фресок, каждая из которых посвящена определенной теме. После смерти Рафаэля над росписью стен работал его ученик Джулио Романо.</p>
 <p class="prose">Стены Станц Рафаэля украшены фресками, выполненными великим художником Рафаэлем Санти в период с 1508 по 1511 год по заказу Папы Юлия II. Это один из важнейших циклов фресок эпохи Высокого Возрождения, представляющий собой синтез античной философии и христианской веры. Наиболее известная фреска цикла — «Школа Афин», изображающая философов древности во главе с Платоном и Аристотелем. Фрески Станц Рафаэля являются выдающимся образцом искусства Высокого Возрождения и отражают интеллектуальные поиски того времени, соединяя идеи древних мыслителей с христианскими ценностями.</p></div>
 </section>
-<section class="place" id="vatican_cupola_exterior">
-<h3>Vatican Cupola Exterior</h3>
-
-<p class="place-meta">Стиль: Возрождение</p>
-<figure class="place-fig"><img src="../images/vatican_cupola_exterior.jpg" alt="Vatican Cupola Exterior"/></figure>
-<div class="place-desc"><p class="prose">Высота купола составляет около 136 метров, диаметр основания — примерно 42 метра. На вершине купола расположена смотровая площадка, откуда открывается панорамный вид на Римский Ватикан и город. Собор Святого Петра является главным храмом Римско-католической церкви и местом захоронения многих пап. Купол выполнен из кирпича и камня, покрыт свинцовой крышей. Строительство купола было завершено в 1590 году.</p>
-<p class="prose">Купол собора Святого Петра был возведён архитектором Микеланджело Буонарроти в середине XVI века по заказу Папы Павла III Фарнезе. Купол стал символом католической церкви и крупнейшим купольным сооружением своего времени, оказав огромное влияние на европейское зодчество последующих столетий. Посещение купола позволяет увидеть великолепную панораму Рима и ощутить величие архитектуры эпохи Возрождения.</p></div>
-</section>
 <section class="place" id="vatican_sistine_chapel">
+<div class="place-lead">
 <h3>Vatican Sistine Chapel</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Стиль: поздняя готика и ранний ренессанс</p>
-<figure class="place-fig"><img src="../images/vatican_sistine_chapel.jpg" alt="Vatican Sistine Chapel"/></figure>
+<p class="place-meta">Адрес: Vatican Museums complex | Стиль: поздняя готика и ранний ренессанс</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vatican_sistine_chapel.jpg" alt="Vatican Sistine Chapel" width="1031" height="1400" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vatican_sistine_chapel_b.jpg" alt="Vatican Sistine Chapel — вид 2" width="330" height="440" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Фрески потолка выполнены одним из величайших художников мира — Микеланджело. На потолке изображены сцены из библейской истории, начиная от сотворения мира до суда над человечеством. Капелла получила свое название в честь папы Сикста IV, который инициировал строительство. Знаменитый художник Боттичелли также участвовал в оформлении интерьера капеллы. Строительство капеллы продолжалось около восьми лет.</p>
 <p class="prose">Сикстинская капелла была построена в период с 1473 по 1481 год по заказу папы Сикста IV и названа в честь него. Здание выполнено в стиле поздней готики и раннего ренессанса. Внутреннее убранство капеллы стало шедевром Высокого Возрождения благодаря фреске потолка, выполненной Микеланджело Буонарроти между 1508 и 1512 годами. Фреска изображает сцены из Библии, включая знаменитые композиции «Страшный суд», «Сотворение Адама» и «Грехопадение». Это место стало символом культурного наследия человечества. Посещение Сикстинской капеллы позволяет увидеть выдающийся образец живописи эпохи Ренессанса и почувствовать атмосферу одного из важнейших религиозных сооружений Европы.</p></div>
 </section>
 <section class="place" id="vatican_st_peters_basilica">
+<div class="place-lead">
 <h3>Vatican St Peters Basilica</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Стиль: Ренессанс и барокко</p>
-<figure class="place-fig"><img src="../images/vatican_st_peters_basilica.jpg" alt="Vatican St Peters Basilica"/></figure>
+<p class="place-meta">Адрес: Piazza San Pietro | Стиль: Ренессанс и барокко</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vatican_st_peters_basilica.jpg" alt="Vatican St Peters Basilica" width="1280" height="896" style="height: 240px; max-height: 240px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vatican_st_peters_basilica_b.jpg" alt="Vatican St Peters Basilica — вид 2" width="330" height="172" style="height: 240px; max-height: 240px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Строительство купола собора длилось с 1546 по 1626 год. Фасад храма оформлен в стиле барокко и выполнен Джованни Лоренцо Бернини в 1735 году. Купол собора является крупнейшим кирпичным куполом в мире. На площади перед собором находится статуя Моисея работы Микеланджело. Интерьер собора украшен произведениями искусства великих мастеров эпохи Возрождения.</p>
 <p class="prose">Собор Святого Петра — главный католический храм мира, построенный на месте захоронения апостола Петра. Строительство началось в XIV веке, однако завершён собор был лишь в XVII столетии усилиями архитекторов Браманте, Микеланджело, Мадерно и Бернини. Это место паломничества миллионов верующих и туристов благодаря своей уникальной архитектуре и значимости в христианстве. Это одно из важнейших религиозных сооружений Европы, символизирующее центр христианского мира и привлекающее миллионы посетителей ежегодно.</p></div>
 </section>
-<section class="place" id="vatican_aerial_basilica">
-<h3>Vatican Aerial Basilica</h3>
-
-
-<figure class="place-fig"><img src="../images/vatican_aerial_basilica.jpg" alt="Vatican Aerial Basilica"/></figure>
-<div class="place-desc"><p class="prose">Вид с площадки охватывает территорию всего Ватикана и близлежащих районов Рима. Сюда можно подняться пешком по специальной лестнице внутри собора. Площадка открыта ежедневно, кроме дней технических работ. На площадке установлены удобные скамейки для отдыха посетителей. Отсюда хорошо видны купола базилики и папского дворца.</p>
-<p class="prose">Панорамная смотровая площадка St Pyotr&#x27;s from the air расположена на крыше собора Святого Петра в Ватикане. Отсюда открывается потрясающий вид на весь город-государство, включая площадь Святого Петра и окружающие здания Ватикана. Место стало популярным среди туристов благодаря уникальной возможности увидеть архитектуру города сверху. Смотровая площадка позволяет насладиться захватывающим видом на знаменитые архитектурные сооружения Ватикана и получить представление о масштабах и красоте столицы католического мира.</p></div>
-</section>
 <section class="place" id="vatican_st_peters_square">
+<div class="place-lead">
 <h3>Vatican St Peters Square</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Стиль: барокко</p>
-<figure class="place-fig"><img src="../images/vatican_st_peters_square.jpg" alt="Vatican St Peters Square"/></figure>
+<p class="place-meta">Адрес: Before St Peter&#x27;s Basilica | Стиль: барокко</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vatican_st_peters_square.jpg" alt="Vatican St Peters Square" width="1280" height="719" style="height: 240px; max-height: 240px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vatican_st_peters_square_b.jpg" alt="Vatican St Peters Square — вид 2" width="330" height="172" style="height: 240px; max-height: 240px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Площадь была создана архитектором Бернини в стиле барокко. Колоннады площади поддерживают 284 колонны. Длина площади составляет около 240 метров, ширина — примерно 135 метров. На площади расположены две большие лестницы, ведущие к входу в собор. Ежедневно площадь принимает тысячи паломников и туристов.</p>
 <p class="prose">Собор Святого Петра окружён площадью, спроектированной знаменитым итальянским архитектором и скульптором Джованни Бернардони, известным как Бернини. Строительство колоннад завершилось в 1667 году после десяти лет работы. Площадь имеет форму эллипса и трапеции, благодаря чему идеально подчёркивает фасад базилики. Это одно из знаковых мест Ватикана, где проходят важные церковные церемонии и мероприятия. Площадь перед собором является одной из главных площадей Ватикана и местом проведения важнейших церемоний и папских выступлений.</p></div>
 </section>
-<section class="place" id="vatican_pdfband_2_ba249258">
-<h3>Sura</h3>
+<section class="place" id="vatican_sura">
+<div class="place-lead">
+<h3>Vatican Sura</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Стиль: итальянский ренессанс</p>
-<figure class="place-fig"><img src="../images/vatican_pdfband_2_ba249258.jpg" alt="Sura"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vatican_sura.jpg" alt="Vatican Sura" width="1280" height="670" style="height: 241px; max-height: 241px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vatican_sura_b.jpg" alt="Vatican Sura — вид 2" width="330" height="247" style="height: 241px; max-height: 241px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Строительство собора началось в XVI веке по проекту архитектора Донателло. Интерьер храма украшен произведениями искусства известных итальянских мастеров эпохи Ренессанса. В соборе хранятся ценные религиозные реликвии и произведения живописи, отражающие историю христианства. Ежегодно собор посещают тысячи верующих и туристов со всего мира. Здание собора выполнено в стиле итальянского ренессансного зодчества.</p>
 <p class="prose">Собор Суры 33 расположен в самом сердце Ватикана, являясь одним из крупнейших и наиболее значимых католических храмов города. Построенный в эпоху Возрождения, собор стал важным местом паломничества и центром религиозной жизни столицы Италии. Здесь регулярно проводятся торжественные мессы и важные церковные церемонии. Посещение собора позволяет прикоснуться к истории и духовности одного из важнейших религиозных центров мира.</p></div>
 </section>
 <section class="place" id="vatican_swiss_guard">
+<div class="place-lead">
 <h3>Vatican Swiss Guard</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Стиль: Ренессансная церемониальная униформа</p>
-<figure class="place-fig"><img src="../images/vatican_swiss_guard.jpg" alt="Vatican Swiss Guard"/></figure>
+<p class="place-meta">Адрес: Porta Sant&#x27;Anna and Bronze Door | Стиль: Ренессансная церемониальная униформа</p>
+<figure class="place-fig place-fig--lo-res"><img src="../images/vatican_swiss_guard_b.jpg" alt="Vatican Swiss Guard" width="330" height="220"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Пост находится у входа Порт Сант-Анна и Бронзовых ворот. Традиционная форма гвардейцев включает алую куртку, белые чулки и высокие ботфорты. Ежедневно проводится смена караула, привлекающая туристов и паломников. Гвардейцы проходят строгий отбор и военную подготовку перед вступлением в службу. Папский отряд насчитывает около 100 человек.</p>
 <p class="prose">Швейцарская гвардия была основана в 1506 году папой Юлий II. Изначально её задачей было охранять понтифика от физической угрозы, однако сегодня она выполняет церемониальные функции, представляя Ватикан на официальных мероприятиях и парадах. Швейцарские гвардейцы известны своей яркой формой эпохи Возрождения, вдохновлённой итальянским ренессансом. Посещение поста швейцарской гвардии позволяет увидеть уникальную историческую форму и ритуалы, сохранившиеся до наших дней.</p></div>
-</section>
-<section class="place" id="vatican_biblioteca_apostolica">
-<h3>Vatican Biblioteca Apostolica</h3>
-
-
-<figure class="place-fig"><img src="../images/vatican_biblioteca_apostolica.jpg" alt="Vatican Biblioteca Apostolica"/></figure>
-<div class="place-desc"><p class="prose">Библиотека содержит около миллиона книг, среди которых редкие рукописи и печатные издания XV–XVI веков. Здесь хранится самая древняя Библия, известная как Ватиканский кодекс, написанная примерно в IV веке н.э. Коллекция включает более 8 тысяч древних манускриптов, включая ранние версии произведений Платона, Аристотеля и Гомера. С момента основания библиотека служила хранилищем и источником знаний для католической церкви и ученых всего мира. Ежегодно библиотека пополняется новыми экземплярами редких изданий и рукописей.</p>
-<p class="prose">Апостольская библиотека Ватикана основана в XVI веке папой Юлием II и является одной из старейших библиотек мира. Здесь хранятся уникальные рукописи, манускрипты и редкие издания, имеющие огромное значение для истории и культуры человечества. Особое место занимают древние пергаменты и рукописные Библии, многие из которых датируются эпохой раннего христианства. Посещение Апостольской библиотеки позволяет прикоснуться к сокровищам мировой культуры и получить представление о значении религиозных текстов и исторических документов.</p></div>
-</section>
-<section class="place" id="vatican_pdfband_3_f013ff34">
-<h3>Petersdom</h3>
-
-<p class="place-meta">Стиль: барокко</p>
-<figure class="place-fig"><img src="../images/vatican_pdfband_3_f013ff34.jpg" alt="Petersdom"/></figure>
-<div class="place-desc"><p class="prose">Строительство собора началось в 1506 году и продолжалось несколько столетий. Храм имеет форму латинского креста и вмещает около 60 тысяч человек. На куполе собора изображена фреска Микеланджело «Страшный суд». Перед собором находится площадь Святого Петра, одна из крупнейших городских площадей Европы. Рядом расположен музей Ватикана, хранящий богатейшую коллекцию произведений искусства.</p>
-<p class="prose">Папский престол существует уже много веков, начиная с апостольского времени. В середине XIX века Ватикан стал независимым государством после подписания Латеранских соглашений между Италией и Святым Престолом в 1929 году. Собор Святого Петра является главным храмом католической церкви и местом захоронений пап. Это крупнейшее христианское сооружение в мире, символизирующее духовную власть Папы Римского. Собор Святого Петра — символ католицизма и одно из главных мест паломничества верующих со всего мира.</p></div>
-</section>
-<section class="place" id="vatican_necropolis_scavi">
-<h3>Vatican Necropolis Scavi</h3>
-
-
-<figure class="place-fig"><img src="../images/vatican_necropolis_scavi.jpg" alt="Vatican Necropolis Scavi"/></figure>
-<div class="place-desc"><p class="prose">На территории раскопок обнаружены фрагменты древних римских бань Терм Диоклетиана. Здесь сохранились уникальные мозаики IV века, датируемые временем императора Константина. Раскопки включают руины раннехристианских базилик и катакомб, связанных с первыми христианами. Археологический парк является частью комплекса музеев Ватикана. Территория раскопок открыта для посещения ежедневно.</p>
-<p class="prose">Археологические раскопки Ватикана проводятся уже несколько столетий и позволяют увидеть древние слои истории Рима и раннего христианства. Раскопки начались еще в XVI веке, когда были найдены остатки древнеримских зданий и храмов. Сегодня археологический парк включает в себя обширную территорию, где посетители могут увидеть руины терм Диоклетиана, античные храмы и мозаики IV века, а также раннехристианские базилики и катакомбы. Посещение археологических раскопок Ватикана позволяет глубже понять историю зарождения христианской церкви и культуры Древнего Рима.</p></div>
-</section>
-<section class="place" id="vatican_gardens">
-<h3>Vatican Gardens</h3>
-
-<p class="place-meta">Стиль: Формальные сады, гроты, современные насаждения</p>
-<figure class="place-fig"><img src="../images/vatican_gardens.jpg" alt="Vatican Gardens"/></figure>
-<div class="place-desc"><p class="prose">На территории садов расположены знаменитые Ватиканские гроты, созданные архитектором Донателло Браманте. Здесь находятся статуи знаменитых скульпторов Микеланджело и Бернини. В садах разбиты цветочные клумбы и аллеи с экзотическими растениями. Парк окружён массивной стеной с воротами Порта Пиа, построенной при папе Сиксте V. Ежегодно миллионы людей посещают сады Ватикана, чтобы полюбоваться великолепием архитектуры и пейзажей.</p>
-<p class="prose">Сады Ватикана были заложены ещё в эпоху Возрождения и постепенно развивались на протяжении веков. Сегодня это живописная территория, включающая формальные сады эпохи Ренессанса, роскошные гротески и современные насаждения. Здесь гармонично сочетаются элементы классики и современности. Зелёные зоны Ватикана являются популярным местом отдыха среди паломников и туристов, позволяя насладиться красотой природы и спокойствием.</p></div>
-</section>
-<section class="place" id="vatican_museums">
-<h3>Vatican Museums</h3>
-
-<p class="place-meta">Стиль: Галереи и залы различных стилей, включая ренессансную архитектуру</p>
-<figure class="place-fig"><img src="../images/vatican_museums.jpg" alt="Vatican Museums"/></figure>
-<div class="place-desc"><p class="prose">Коллекция музея насчитывает около семи тысяч произведений живописи и скульптуры. Сикстинская капелла является одной из главных достопримечательностей Рима и символом христианской культуры. Станцы Рафаэля представляют собой серию комнат, каждая из которых украшена уникальными фресками. Музей открыт ежедневно, кроме вторника, вход платный. На территории музея также расположены Папская библиотека и Музей археологии.</p>
-<p class="prose">Ватиканские музеи возникли постепенно начиная с XVI века, когда папы начали собирать художественные коллекции. Сегодня музейная коллекция включает знаменитые шедевры эпохи Возрождения, среди которых работы Рафаэля, Микеланджело и Леонардо да Винчи. Особое место занимает Сикстинская капелла, расписанная фресками Микеланджело, и Станцы Рафаэля, украшенные картинами великого мастера. Посещение Ватиканских музеев позволяет увидеть уникальные произведения искусства эпохи Возрождения и познакомиться с историей папского коллекционирования.</p></div>
-</section>
-<section class="place" id="vatican_obelisk_st_peters">
-<h3>Vatican Obelisk St Peters</h3>
-
-
-<figure class="place-fig"><img src="../images/vatican_obelisk_st_peters.jpg" alt="Vatican Obelisk St Peters"/></figure>
-<div class="place-desc"><p class="prose">Обелиск изготовлен из красного гранита и весит около 350 тонн. На верхней части обелиска изображены сцены из жизни Христа. Во времена Древнего Рима обелиски использовались как символы власти и авторитета. Считается, что обелиск перевезён в Рим ещё во II веке н.э., однако окончательно установлен в Ватикане лишь в XVI веке. Рядом с обелиском расположена колоннада Бернини, выполненная знаменитым итальянским архитектором.</p>
-<p class="prose">Ватиканский обелиск был установлен в XVI веке по указу папы Юлия III в Ватиканском саду рядом с Собором Святого Петра. Обелиск привезён из древнего города Лептис-Магна в Ливии и является одним из древнейших сохранившихся памятников Рима. Его высота составляет около 25 метров. Обелиск привлекает внимание туристов своей историей и величественным видом, являясь символом древности и красоты Рима.</p></div>
-</section>
-<section class="place" id="vatican_pinacoteca_vatican">
-<h3>Vatican Pinacoteca Vatican</h3>
-
-<p class="place-meta">Стиль: ренессансная архитектура</p>
-<figure class="place-fig"><img src="../images/vatican_pinacoteca_vatican.jpg" alt="Vatican Pinacoteca Vatican"/></figure>
-<div class="place-desc"><p class="prose">Коллекция включает около 450 живописных произведений и скульптур. Основу собрания составляют произведения итальянских художников XV–XVII веков. Пинакотека открыта для посетителей ежедневно, кроме вторника. Здание галереи выполнено в стиле ренессансной архитектуры. Среди наиболее известных экспонатов — знаменитое полотно «Афинская школа» Рафаэля.</p>
-<p class="prose">Галерея Пинакотека Ватикана была основана папой Пием IV в XVI веке и расположена в Ватиканском дворце. Здесь собрана одна из крупнейших коллекций западноевропейской живописи эпохи Возрождения и барокко. Среди знаменитых полотен представлены работы Рафаэля, Микеланджело, Леонардо да Винчи, Тициана и многих других выдающихся мастеров. Посещение галереи позволяет увидеть шедевры мировой живописи и глубже понять развитие европейской культуры и искусства.</p></div>
 </section>
 </body>
 </html>

@@ -37,6 +37,10 @@ from scripts.city_guide_narrative import (
     place_meta_line,
     subtitle_html_for_edition,
 )
+from scripts.city_guide_place_figures import (
+    place_figure_layout_css,
+    place_figures_layout_html,
+)
 from scripts.city_guide_historical_reference_ru import (
     HERALDRY_CHAPTER_LABEL_EN,
     HERALDRY_CHAPTER_LABEL_RU,
@@ -47,9 +51,11 @@ from scripts.city_guide_historical_reference_ru import (
     reference_text_ru_for_any_city,
 )
 from scripts.city_guide_jerusalem_style_pdf import guide_ui_strings
+from scripts.city_guide_typography import guide_pdf_pagination_css
 from scripts.city_guide_toc import (
     GuideTocEntry,
     category_chapter_anchor,
+    guide_toc_back_link_html,
     guide_toc_html,
     toc_entries_for_category_guide,
 )
@@ -344,45 +350,32 @@ def _html_paragraphs(text: str) -> str:
 
 def _image_srcs_for_place(root: Path, p: SpbPlace) -> list[str]:
     """Основное + доп. фото, только если файлы на диске."""
-    out: list[str] = []
+    srcs, _paths = _image_entries_for_place(root, p)
+    return srcs
+
+
+def _image_entries_for_place(
+    root: Path,
+    p: SpbPlace,
+) -> tuple[list[str], list[Path]]:
+    """HTML src + filesystem path for each local place photo."""
+    srcs: list[str] = []
+    paths: list[Path] = []
     primary = p.get("image_rel_path")
     if primary:
         pp = root / primary
         if pp.is_file() and pp.stat().st_size >= MIN_IMAGE_BYTES:
-            out.append(_rel_to_src(primary))
+            srcs.append(_rel_to_src(primary))
+            paths.append(pp)
     for extra in p.get("additional_images") or []:
         rel = extra.get("image_rel_path")
         if not rel:
             continue
         path = root / rel
         if path.is_file() and path.stat().st_size >= MIN_IMAGE_BYTES:
-            out.append(_rel_to_src(rel))
-    return out
-
-
-def _place_figures_html(
-    name_plain: str,
-    img_srcs: list[str],
-    edition: str,
-) -> str:
-    if not img_srcs:
-        return ""
-    s = guide_ui_strings(edition)
-    figs: list[str] = []
-    for i, src in enumerate(img_srcs):
-        if i == 0:
-            alt = name_plain
-        else:
-            alt = s["img_alt_extra"].format(name_plain, i + 1)
-        figs.append(
-            '<figure class="place-fig"><img src="{}" alt="{}"/></figure>'.format(
-                escape(src),
-                escape(alt),
-            )
-        )
-    if len(figs) == 1:
-        return figs[0]
-    return '<div class="place-fig-row">\n{}\n</div>'.format("\n".join(figs))
+            srcs.append(_rel_to_src(rel))
+            paths.append(path)
+    return srcs, paths
 
 
 def _place_block(
@@ -390,6 +383,8 @@ def _place_block(
     img_srcs: list[str],
     edition: str,
     deduper: GuideNarrativeDeduper,
+    *,
+    image_paths: list[Path] | None = None,
 ) -> str:
     s = guide_ui_strings(edition)
     title_plain = place_heading_plain(p, edition)
@@ -403,11 +398,22 @@ def _place_block(
     )
     chunks: list[str] = [
         '<section class="place" id="{}">'.format(escape(p.get("slug", "x"))),
+        '<div class="place-lead">',
         "<h3>{}</h3>".format(title_html),
+        guide_toc_back_link_html(edition),
         sub_html,
         meta_html,
-        _place_figures_html(title_plain, img_srcs, edition),
     ]
+    if img_srcs:
+        chunks.append(
+            place_figures_layout_html(
+                img_srcs,
+                title_plain,
+                edition,
+                image_paths=image_paths,
+            )
+        )
+    chunks.append("</div>")
     narrative = merge_narrative_html(p, edition, deduper)
     if narrative:
         chunks.append(narrative)
@@ -605,6 +611,7 @@ def _build_html(
         hist = historical_reference_section_html(
             hist_body,
             section_title=hist_title,
+            edition=edition,
         )
         if hist:
             blocks.append(hist)
@@ -640,18 +647,28 @@ def _build_html(
             blocks.append(
                 '<div class="chapter-head" id="{}">'
                 "<h2>{}</h2>"
+                "{}"
                 '<p class="chapter-count">{}</p>'
                 "</div>".format(
                     escape(category_chapter_anchor(str(cat))),
                     escape(h2),
+                    guide_toc_back_link_html(edition),
                     escape(sub),
                 ),
             )
             last_cat = cat
-        srcs = _image_srcs_for_place(spb_root, p)
+        srcs, paths = _image_entries_for_place(spb_root, p)
         if not srcs:
             continue
-        blocks.append(_place_block(p, srcs, edition, narrative_deduper))
+        blocks.append(
+            _place_block(
+                p,
+                srcs,
+                edition,
+                narrative_deduper,
+                image_paths=paths,
+            )
+        )
     body_inner = "\n".join(blocks)
     css = """
 body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
@@ -660,8 +677,7 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
   padding: 2rem 1rem 3rem; box-sizing: border-box; }
 .otium-logo { font-family: 'Cormorant Garamond', serif; font-size: 3rem;
   font-weight: 600; letter-spacing: 0.2em; margin-bottom: 2rem; }
-.otiump { margin: 0.9rem 0; line-height: 1.55; text-align: justify;
-  max-width: 40rem; }
+.otiump { margin: 0.9rem 0; line-height: 1.55; text-align: justify; }
 .guide-title { page-break-after: always; margin-bottom: 1rem;
   page-break-inside: avoid; }
 .historical-reference { margin: 0.75rem 0 1.15rem;
@@ -673,7 +689,7 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
   letter-spacing: 0.08em; color: #555; margin: 0.5rem 0 0.25rem;
   text-align: center; width: 100%; }
 .title-strip-note { font-size: 0.68rem; color: #666; margin: 0 0 0.35rem;
-  text-align: center; max-width: 38rem; margin-left: auto;
+  text-align: center; margin-left: auto;
   margin-right: auto; line-height: 1.35; }
 .heraldry-strip { display: flex; flex-wrap: wrap; align-items: center;
   justify-content: center; gap: 0.35rem 0.55rem; margin: 0.2rem 0 0.45rem; }
@@ -694,22 +710,18 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
 .heraldry-univ-caption { font-size: 0.52rem; line-height: 1.18;
   margin: 0.12rem 0 0; padding: 0 0.06rem; color: #252525;
   text-align: center; font-weight: 500; }
-.heraldry-motto { text-align: center; max-width: 18rem; margin: 0.18rem auto;
+.heraldry-motto { text-align: center; margin: 0.18rem auto;
   width: 100%; }
 .motto-line { font-family: 'Cormorant Garamond', serif; font-size: 1rem;
   margin: 0; color: #333; line-height: 1.35; }
 .guide-title h1 { font-family: 'Cormorant Garamond', serif; font-size: 2.4rem;
   margin-bottom: 0.5rem; }
 .lead { color: #444; font-size: 1.05rem; }
-.guide-toc { margin: 0.85rem 0 1.15rem; page-break-inside: avoid; }
-.guide-toc h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.28rem;
-  font-weight: 600; margin: 0.4rem 0 0.55rem; }
-.guide-toc ol { margin: 0.35rem 0 0.65rem 1.25rem; padding: 0;
-  columns: 2; column-gap: 1.5rem; }
-.guide-toc li { margin: 0.18rem 0; line-height: 1.35;
-  font-size: 0.88rem; break-inside: avoid; }
-.guide-toc a { color: #1a5276; text-decoration: none; }
-.guide-toc li.toc-item--sub { font-size: 0.82rem; margin-left: 0.35rem; }
+"""
+    css += guide_pdf_pagination_css(
+        toc_h2_extra="font-family: 'Cormorant Garamond', serif",
+    )
+    css += """
 .chapter-head { margin-top: 2.2rem; border-bottom: 1px solid #bbb;
   padding-bottom: 0.35rem;
   page-break-after: avoid; break-after: avoid; }
@@ -726,13 +738,9 @@ h4 { font-size: 0.95rem; text-transform: uppercase;
   font-style: italic; }
 .place-meta { font-size: 0.92rem; color: #353535; margin: 0 0 0.75rem;
   line-height: 1.4; }
-.place-fig { margin: 0.5rem 0 1rem; }
-.place-fig-row { display: flex; flex-wrap: wrap; gap: 0.45rem 0.65rem;
-  align-items: flex-start; margin: 0.45rem 0 0.85rem;
-  page-break-inside: avoid; }
-.place-fig-row .place-fig { flex: 1 1 42%; max-width: calc(50% - 0.35rem);
-  margin: 0; min-width: 9.5rem; box-sizing: border-box; }
-.place-fig-row .place-fig img { width: 100%; height: auto; }
+"""
+    css += place_figure_layout_css()
+    css += """
 img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
 .prose, .place-desc p { margin: 0.45rem 0; line-height: 1.5;
   text-align: justify; }
@@ -940,6 +948,7 @@ def main() -> int:
         if args.html_only:
             continue
         if use_chunked:
+            pdf_deduper = GuideNarrativeDeduper()
             pdf_ok = _pdf_via_playwright_chunked_spb(
                 spb_root=spb_root,
                 out_dir=out_dir,
@@ -950,7 +959,7 @@ def main() -> int:
                 project_root=_PROJECT_ROOT,
                 image_wait_timeout_ms=args.image_wait_ms,
                 header=header,
-                deduper=narrative_deduper,
+                deduper=pdf_deduper,
             )
         else:
             pdf_ok = _pdf_via_playwright(

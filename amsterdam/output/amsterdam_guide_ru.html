@@ -13,7 +13,7 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
 .otium-logo { font-family: 'Spectral', serif; font-size: 2.15rem;
   font-weight: 600; letter-spacing: 0.18em; margin-bottom: 0.85rem; }
 .otiump { margin: 0.42rem 0; line-height: 1.42; text-align: justify;
-  max-width: 38rem; font-size: 0.95rem; }
+  font-size: 0.95rem; }
 .guide-title { page-break-after: auto; margin-bottom: 0.55rem;
   page-break-inside: avoid; }
 .historical-reference { margin: 0.75rem 0 1.15rem;
@@ -63,22 +63,103 @@ ol.trip-stops a:hover { text-decoration: underline; }
 .heraldry-univ-caption { font-size: 0.52rem; line-height: 1.18;
   margin: 0.12rem 0 0; padding: 0 0.06rem; color: #252525;
   text-align: center; font-weight: 500; }
-.heraldry-motto { text-align: center; max-width: 18rem; margin: 0.18rem auto;
+.heraldry-motto { text-align: center; margin: 0.18rem auto;
   width: 100%; }
 .motto-line { font-family: 'Spectral', serif; font-size: 1rem;
   margin: 0; color: #333; line-height: 1.35; }
 .guide-title h1.guide-title-main { font-family: 'Spectral', serif;
   font-size: 2.35rem; margin-bottom: 0.5rem; font-weight: 600; }
 .lead { color: #444; font-size: 1.05rem; }
-.guide-toc { margin: 0.85rem 0 1.15rem; page-break-inside: avoid; }
-.guide-toc h2 { font-family: 'Spectral', serif; font-size: 1.28rem;
-  font-weight: 600; margin: 0.4rem 0 0.55rem; }
+
+.guide-toc { page-break-before: always; break-before: page;
+  page-break-after: always; break-after: page;
+  margin: 0; padding: 0.2rem 0 0.45rem; page-break-inside: auto; }
+.guide-toc h2 { font-family: 'Spectral', serif;
+  font-size: 1.28rem; font-weight: 600; margin: 0.4rem 0 0.55rem; }
 .guide-toc ol { margin: 0.35rem 0 0.65rem 1.25rem; padding: 0;
   columns: 2; column-gap: 1.5rem; }
 .guide-toc li { margin: 0.18rem 0; line-height: 1.35;
   font-size: 0.88rem; break-inside: avoid; }
-.guide-toc a { color: #1a5276; text-decoration: none; }
+.guide-toc a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.guide-toc a:hover { color: #0d3d56; }
 .guide-toc li.toc-item--sub { font-size: 0.82rem; margin-left: 0.35rem; }
+.toc-back { font-size: 0.78rem; margin: 0 0 0.35rem; text-align: right; }
+.toc-back a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.toc-back a:hover { color: #0d3d56; }
+.place, .historical-reference, .guide-primer, .guide-trip-plans {
+  scroll-margin-top: 1.25rem; }
+.historical-reference h2, .guide-primer h2, .guide-trip-plans h2,
+.chapter-head h2, .place-lead h3 { position: relative; }
+.guide-toc + .place, .guide-toc + .chapter-head {
+  page-break-before: avoid; break-before: avoid-page; }
+.place-lead { page-break-inside: avoid; break-inside: avoid-page;
+  page-break-after: auto; }
+.place-lead > h3 { page-break-after: avoid; break-after: avoid-page; }
+.place-lead > .place-meta { page-break-after: avoid; break-after: avoid-page; }
+
+.place-fig { page-break-inside: avoid; break-inside: avoid-page;
+  margin: 0.5rem 0 1rem; }
+.place-fig img {
+  page-break-inside: avoid; break-inside: avoid-page;
+  max-height: 48vh; width: auto; max-width: 100%;
+  object-fit: contain; margin-left: auto; margin-right: auto; }
+.place-fig--hi-res img { max-height: 52vh; }
+.place-fig--lo-res img { max-height: 30vh; }
+.place-pdf-fig-row {
+  display: flex; flex-direction: row; flex-wrap: wrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.45rem 0.55rem; margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row .place-fig {
+  flex: 1 1 30%; margin: 0; min-width: 26%; max-width: 100%; }
+.place-pdf-fig-row .place-fig img {
+  width: auto; max-width: 100%; height: auto; max-height: 44vh;
+  object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--pair {
+  flex-wrap: nowrap; justify-content: space-between;
+  align-items: flex-end; gap: 0.5rem 0.65rem; }
+.place-pdf-fig-row--pair .place-fig {
+  flex: 1 1 47%; min-width: 0; max-width: 50%;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--pair .place-fig img {
+  max-height: 44vh; object-fit: contain; }
+.place-pdf-fig-row--pair .place-fig--hi-res img { max-height: 52vh; }
+.place-pdf-fig-row--pair .place-fig--lo-res img { max-height: 26vh; }
+.place-pdf-fig-row--pair .place-fig--row-sized img,
+.place-pdf-fig-row--triple .place-fig--row-sized img,
+.place-pdf-fig-row--many .place-fig--row-sized img {
+  width: auto; max-width: 100%; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row .place-fig--row-sized.place-fig--hi-res img,
+.place-pdf-fig-row .place-fig--row-sized.place-fig--lo-res img {
+  max-height: unset; }
+.place-pdf-fig-rows-stack {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple {
+  display: flex; flex-direction: row; flex-wrap: nowrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.4rem 0.48rem; margin: 0;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--triple .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--triple .place-fig--hi-res img { max-height: 42vh; }
+.place-pdf-fig-row--triple .place-fig--lo-res img { max-height: 18vh; }
+.place-pdf-fig-row--many {
+  flex-wrap: nowrap; justify-content: center; align-items: flex-end;
+  gap: 0.35rem 0.42rem; }
+.place-pdf-fig-row--many .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--many .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+
+
 .place { margin-bottom: 2.2rem; page-break-inside: auto; }
 h3 { font-family: 'Spectral', serif; font-size: 1.22rem; margin: 1.2rem 0 0.35rem;
   font-weight: 600; }
@@ -90,7 +171,6 @@ h4 { font-family: 'Spectral', serif; font-size: 0.95rem; text-transform: upperca
   color: #555; font-size: 0.95rem; margin: 0 0 0.5rem; font-style: italic; }
 .place-meta { font-size: 0.92rem; color: #353535; margin: 0 0 0.75rem;
   line-height: 1.4; }
-.place-fig { margin: 0.5rem 0 1rem; }
 img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
 .prose, .place-desc p { margin: 0.45rem 0; line-height: 1.5;
   text-align: justify; }
@@ -110,286 +190,465 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <figure class="heraldry-fig heraldry-coat-book" title="Coat of arms of Amsterdam"><img src="../images/guide_coat_of_arms.svg" alt="Coat of arms of Amsterdam"/></figure>
 <figure class="heraldry-fig heraldry-coat-book" title="Flag of Amsterdam"><img src="../images/guide_flag.svg" alt="Flag of Amsterdam"/></figure>
 </div></div><h1 class="guide-title-main">Amsterdam</h1><p class="lead">Путеводитель. Объектов в этом выпуске: 31.</p></header>
+<nav class="guide-toc" id="guide-toc" aria-label="Содержание"><h2>Содержание</h2><ol><li class="toc-item"><a href="#guide-historical">Историческая справка</a></li><li class="toc-item"><a href="#guide-trips">Маршруты</a></li><li class="toc-item"><a href="#amsterdam_adam_tower">Amsterdam Adam Tower</a></li><li class="toc-item"><a href="#amsterdam_anne_frank_house">Amsterdam Anne Frank House</a></li><li class="toc-item"><a href="#amsterdam_artis">Amsterdam Artis</a></li><li class="toc-item"><a href="#amsterdam_begijnhof">Amsterdam Begijnhof</a></li><li class="toc-item"><a href="#amsterdam_bijlmer">Amsterdam Bijlmer</a></li><li class="toc-item"><a href="#amsterdam_bloemenmarkt">Amsterdam Bloemenmarkt</a></li><li class="toc-item"><a href="#amsterdam_canal_ring">Amsterdam Canal Ring</a></li><li class="toc-item"><a href="#amsterdam_central_station">Amsterdam Central Station</a></li><li class="toc-item"><a href="#amsterdam_concertgebouw">Amsterdam Concertgebouw</a></li><li class="toc-item"><a href="#amsterdam_dam_square">Amsterdam Dam Square</a></li><li class="toc-item"><a href="#amsterdam_de_gooyer">Amsterdam De Gooyer</a></li><li class="toc-item"><a href="#amsterdam_eye_film">Amsterdam Eye Film</a></li><li class="toc-item"><a href="#amsterdam_foam">Amsterdam Foam</a></li><li class="toc-item"><a href="#amsterdam_hermitage_amsterdam">Amsterdam Hermitage Amsterdam</a></li><li class="toc-item"><a href="#amsterdam_magere_brug">Amsterdam Magere Brug</a></li><li class="toc-item"><a href="#amsterdam_museum_het_schip">Amsterdam Museum Het Schip</a></li><li class="toc-item"><a href="#amsterdam_national_monument">Amsterdam National Monument</a></li><li class="toc-item"><a href="#amsterdam_nemo">Amsterdam Nemo</a></li><li class="toc-item"><a href="#amsterdam_nieuwe_kerk">Amsterdam Nieuwe Kerk</a></li><li class="toc-item"><a href="#amsterdam_noorderkerk">Amsterdam Noorderkerk</a></li><li class="toc-item"><a href="#amsterdam_oude_kerk">Amsterdam Oude Kerk</a></li><li class="toc-item"><a href="#amsterdam_portuguese_synagogue">Amsterdam Portuguese Synagogue</a></li><li class="toc-item"><a href="#amsterdam_reguliersgracht">Amsterdam Reguliersgracht</a></li><li class="toc-item"><a href="#amsterdam_rembrandt_house">Amsterdam Rembrandt House</a></li><li class="toc-item"><a href="#amsterdam_rijksmuseum">Amsterdam Rijksmuseum</a></li><li class="toc-item"><a href="#amsterdam_royal_palace">Amsterdam Royal Palace</a></li><li class="toc-item"><a href="#amsterdam_scheepvaartmuseum">Amsterdam Scheepvaartmuseum</a></li><li class="toc-item"><a href="#amsterdam_stedelijk">Amsterdam Stedelijk</a></li><li class="toc-item"><a href="#amsterdam_van_gogh_museum">Amsterdam Van Gogh Museum</a></li><li class="toc-item"><a href="#amsterdam_westerkerk">Amsterdam Westerkerk</a></li><li class="toc-item"><a href="#amsterdam_zuiderkerk">Amsterdam Zuiderkerk</a></li></ol></nav>
 <section class="historical-reference" id="guide-historical" aria-label="Историческая справка"><h2>Историческая справка</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 <p class="prose">Амстердам — столица Нидерландов и крупнейший город королевства, исторический центр торговли и мореплавания.</p>
 <p class="prose">С XIII века город развивается на месте дамб у залива; Золотой век XVII века принёс расцвет архитектуры, каналов и светского искусства. Сегодня Амстердам сочетает исторические кварталы с современной урбанистикой и музеями мирового уровня.</p>
 <p class="prose">В XIX–XX веках порт и колониальная торговля обогатили город; после Второй мировой войны Амстердам выбрал гуманную урбанистику и стал образцом интеграции воды, велосипеда и культурных институций. Сегодня это столица международного права, дизайна и устойчивого развития.</p></section>
 <section class="guide-trip-plans" id="guide-trips" aria-label="Маршруты"><h2>Маршруты</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 <article class="trip-plan" id="trip-1d"><h3>Один день</h3>
 <p class="prose">Компактный маршрут по главным точкам путеводителя с минимальным возвратом назад пешком.</p>
-<ol class="trip-stops"><li><a href="#amsterdam_central_station">Amsterdam Central Station</a> (~75мин)</li>
-<li><a href="#amsterdam_oude_kerk">Amsterdam Oude Kerk</a> (~75мин)</li>
-<li><a href="#amsterdam_national_monument">Amsterdam National Monument</a> (~75мин)</li>
-<li><a href="#amsterdam_dam_square">Amsterdam Dam Square</a> (~75мин)</li>
-<li><a href="#amsterdam_nieuwe_kerk">Amsterdam Nieuwe Kerk</a> (~75мин)</li>
-<li><a href="#amsterdam_begijnhof">Amsterdam Begijnhof</a> (~75мин)</li></ol></article>
-<article class="trip-plan" id="trip-3d1"><h3>Три дня — день 1</h3>
-<p class="prose">День 1 — центральный кластер.</p>
 <ol class="trip-stops"><li><a href="#amsterdam_anne_frank_house">Amsterdam Anne Frank House</a> (~75мин)</li>
 <li><a href="#amsterdam_westerkerk">Amsterdam Westerkerk</a> (~75мин)</li>
-<li><a href="#amsterdam_noorderkerk">Amsterdam Noorderkerk</a> (~75мин)</li>
+<li><a href="#amsterdam_nieuwe_kerk">Amsterdam Nieuwe Kerk</a> (~75мин)</li>
+<li><a href="#amsterdam_dam_square">Amsterdam Dam Square</a> (~75мин)</li>
+<li><a href="#amsterdam_national_monument">Amsterdam National Monument</a> (~75мин)</li>
+<li><a href="#amsterdam_oude_kerk">Amsterdam Oude Kerk</a> (~75мин)</li></ol></article>
+<article class="trip-plan" id="trip-3d1"><h3>Три дня — день 1</h3>
+<p class="prose">День 1 — центральный кластер.</p>
+<ol class="trip-stops"><li><a href="#amsterdam_noorderkerk">Amsterdam Noorderkerk</a> (~75мин)</li>
 <li><a href="#amsterdam_adam_tower">Amsterdam Adam Tower</a> (~75мин)</li>
-<li><a href="#amsterdam_artis">Amsterdam Artis</a> (~75мин)</li></ol></article>
+<li><a href="#amsterdam_artis">Amsterdam Artis</a> (~75мин)</li>
+<li><a href="#amsterdam_bijlmer">Amsterdam Bijlmer</a> (~75мин)</li>
+<li><a href="#amsterdam_bloemenmarkt">Amsterdam Bloemenmarkt</a> (~75мин)</li></ol></article>
 <article class="trip-plan" id="trip-3d2"><h3>Три дня — день 2</h3>
 <p class="prose">День 2 — следующая группа районов.</p>
-<ol class="trip-stops"><li><a href="#amsterdam_bloemenmarkt">Amsterdam Bloemenmarkt</a> (~75мин)</li>
+<ol class="trip-stops"><li><a href="#amsterdam_portuguese_synagogue">Amsterdam Portuguese Synagogue</a> (~75мин)</li>
+<li><a href="#amsterdam_rembrandt_house">Amsterdam Rembrandt House</a> (~75мин)</li>
+<li><a href="#amsterdam_zuiderkerk">Amsterdam Zuiderkerk</a> (~75мин)</li>
 <li><a href="#amsterdam_canal_ring">Amsterdam Canal Ring</a> (~75мин)</li>
-<li><a href="#amsterdam_concertgebouw">Amsterdam Concertgebouw</a> (~75мин)</li>
-<li><a href="#amsterdam_de_gooyer">Amsterdam De Gooyer</a> (~75мин)</li>
-<li><a href="#amsterdam_foam">Amsterdam Foam</a> (~75мин)</li></ol></article>
+<li><a href="#amsterdam_central_station">Amsterdam Central Station</a> (~75мин)</li></ol></article>
 <article class="trip-plan" id="trip-3d3"><h3>Три дня — день 3</h3>
 <p class="prose">День 3 — оставшиеся близкие объекты.</p>
 <ol class="trip-stops"><li><a href="#amsterdam_stedelijk">Amsterdam Stedelijk</a> (~75мин)</li>
 <li><a href="#amsterdam_van_gogh_museum">Amsterdam Van Gogh Museum</a> (~75мин)</li>
-<li><a href="#amsterdam_hermitage_amsterdam">Amsterdam Hermitage Amsterdam</a> (~75мин)</li>
-<li><a href="#amsterdam_magere_brug">Amsterdam Magere Brug</a> (~75мин)</li>
-<li><a href="#amsterdam_museum_het_schip">Amsterdam Museum Het Schip</a> (~75мин)</li></ol></article></section>
-<nav class="guide-toc" aria-label="Содержание"><h2>Содержание</h2><ol><li class="toc-item"><a href="#guide-historical">Историческая справка</a></li><li class="toc-item"><a href="#guide-trips">Маршруты</a></li><li class="toc-item"><a href="#amsterdam_adam_tower">Amsterdam Adam Tower</a></li><li class="toc-item"><a href="#amsterdam_central_station">Amsterdam Central Station</a></li><li class="toc-item"><a href="#amsterdam_anne_frank_house">Amsterdam Anne Frank House</a></li><li class="toc-item"><a href="#amsterdam_artis">Amsterdam Artis</a></li><li class="toc-item"><a href="#amsterdam_begijnhof">Amsterdam Begijnhof</a></li><li class="toc-item"><a href="#amsterdam_pdfband_2_f2270f2e">Bijlmer</a></li><li class="toc-item"><a href="#amsterdam_canal_ring">Amsterdam Canal Ring</a></li><li class="toc-item"><a href="#amsterdam_dam_square">Amsterdam Dam Square</a></li><li class="toc-item"><a href="#amsterdam_de_gooyer">Amsterdam De Gooyer</a></li><li class="toc-item"><a href="#amsterdam_eye_film">Amsterdam Eye Film</a></li><li class="toc-item"><a href="#amsterdam_foam">Amsterdam Foam</a></li><li class="toc-item"><a href="#amsterdam_hermitage_amsterdam">Amsterdam Hermitage Amsterdam</a></li><li class="toc-item"><a href="#amsterdam_magere_brug">Amsterdam Magere Brug</a></li><li class="toc-item"><a href="#amsterdam_museum_het_schip">Amsterdam Museum Het Schip</a></li><li class="toc-item"><a href="#amsterdam_scheepvaartmuseum">Amsterdam Scheepvaartmuseum</a></li><li class="toc-item"><a href="#amsterdam_national_monument">Amsterdam National Monument</a></li><li class="toc-item"><a href="#amsterdam_nemo">Amsterdam Nemo</a></li><li class="toc-item"><a href="#amsterdam_nieuwe_kerk">Amsterdam Nieuwe Kerk</a></li><li class="toc-item"><a href="#amsterdam_noorderkerk">Amsterdam Noorderkerk</a></li><li class="toc-item"><a href="#amsterdam_oude_kerk">Amsterdam Oude Kerk</a></li><li class="toc-item"><a href="#amsterdam_portuguese_synagogue">Amsterdam Portuguese Synagogue</a></li><li class="toc-item"><a href="#amsterdam_reguliersgracht">Amsterdam Reguliersgracht</a></li><li class="toc-item"><a href="#amsterdam_rembrandt_house">Amsterdam Rembrandt House</a></li><li class="toc-item"><a href="#amsterdam_rijksmuseum">Amsterdam Rijksmuseum</a></li><li class="toc-item"><a href="#amsterdam_concertgebouw">Amsterdam Concertgebouw</a></li><li class="toc-item"><a href="#amsterdam_royal_palace">Amsterdam Royal Palace</a></li><li class="toc-item"><a href="#amsterdam_bloemenmarkt">Amsterdam Bloemenmarkt</a></li><li class="toc-item"><a href="#amsterdam_stedelijk">Amsterdam Stedelijk</a></li><li class="toc-item"><a href="#amsterdam_van_gogh_museum">Amsterdam Van Gogh Museum</a></li><li class="toc-item"><a href="#amsterdam_westerkerk">Amsterdam Westerkerk</a></li><li class="toc-item"><a href="#amsterdam_zuiderkerk">Amsterdam Zuiderkerk</a></li></ol></nav>
+<li><a href="#amsterdam_concertgebouw">Amsterdam Concertgebouw</a> (~75мин)</li>
+<li><a href="#amsterdam_de_gooyer">Amsterdam De Gooyer</a> (~75мин)</li>
+<li><a href="#amsterdam_foam">Amsterdam Foam</a> (~75мин)</li></ol></article></section>
 <section class="place" id="amsterdam_adam_tower">
+<div class="place-lead">
 <h3>Amsterdam Adam Tower</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Стиль: хай-тек | Период: 1996</p>
-<figure class="place-fig"><img src="../images/amsterdam_adam_tower.jpg" alt="Amsterdam Adam Tower"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/amsterdam_adam_tower.jpg" alt="Amsterdam Adam Tower" width="1600" height="1200" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/amsterdam_adam_tower_b.jpg" alt="Amsterdam Adam Tower — вид 2" width="330" height="440" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Высота башни составляет около 75 метров. Структура выполнена из стекла и стали, имеет характерную форму, напоминающую перевернутый корабль. На верхнем этаже расположена смотровая площадка с потрясающим видом на каналы и исторический центр Амстердама. Внутри здания находятся кафе, рестораны и магазины.</p>
 <p class="prose">А&#x27;DAM Tower — символ Амстердама и одна из главных достопримечательностей города, расположенная рядом с каналом Сингел. Здание было построено в стиле хай-тек в конце XX века архитектором Ремом Колхасом и открыто в 1996 году. А&#x27;DAM изначально задумывался как культурный центр, объединяющий театры, концертные залы, галереи и офисы. Здание привлекает туристов своей необычной формой и панорамными видами на город, является популярным местом встреч и проведения мероприятий.</p></div>
 </section>
-<section class="place" id="amsterdam_central_station">
-<h3>Amsterdam Central Station</h3>
-
-
-<figure class="place-fig"><img src="../images/amsterdam_central_station.jpg" alt="Amsterdam Central Station"/></figure>
-<div class="place-desc"><p class="prose">Это одна из старейших железнодорожных станций Нидерландов. Архитектурный стиль станции сочетает черты голландской готики и итальянского ренессанса. На территории станции расположен музей железнодорожной техники. Ежедневно через станцию проходит около 400 поездов. Здание украшено мозаичными панелями, витражами и декоративными элементами.</p>
-<p class="prose">Станция Амстердам-Центраал была построена в 1881–1889 годах архитектором Питером Кюйперсом в стиле нидерландского неоренессанса. Это крупнейшая железнодорожная станция Нидерландов, расположенная в самом центре города на площади Стансплейн. Она стала символом Амстердама благодаря уникальной архитектуре и великолепному интерьеру, сочетающему элементы готики и ренессанса. Амстердам-Центраал привлекает туристов своей исторической ценностью и архитектурной красотой, являясь важным транспортным узлом страны.</p></div>
-</section>
 <section class="place" id="amsterdam_anne_frank_house">
+<div class="place-lead">
 <h3>Amsterdam Anne Frank House</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Стиль: Канальный дом (каналхаус)</p>
-<figure class="place-fig"><img src="../images/amsterdam_anne_frank_house.jpg" alt="Amsterdam Anne Frank House"/></figure>
+<p class="place-meta">Адрес: Westermarkt 20 | Стиль: Канальный дом (каналхаус)</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/amsterdam_anne_frank_house.jpg" alt="Amsterdam Anne Frank House" width="1042" height="1600" style="height: 359px; max-height: 359px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/amsterdam_anne_frank_house_b.jpg" alt="Amsterdam Anne Frank House — вид 2" width="330" height="257" style="height: 359px; max-height: 359px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Дом Анны Франк является одним из наиболее посещаемых музеев Амстердама. Тайная комната, где прятались члены семьи Франк, до сих пор сохранила оригинальную обстановку времен Второй мировой войны. Ежегодно музей посещают около миллиона туристов со всего мира. После освобождения Нидерландов в 1945 году дом Анны Франк был передан Нидерландскому обществу памяти Холокоста. Музей открыт ежедневно, кроме Рождества и Нового года.</p>
 <p class="prose">Знаменитый дом Анны Франк расположен на канале Западной Маркета в Амстердаме и изначально был обычной городской резиденцией XVII века. В годы Второй мировой войны здесь была оборудована тайная комната, где семья Анны Франк скрывалась от нацистских преследований. Дом стал символом борьбы за свободу и память жертв Холокоста. Посещение дома Анны Франк позволяет глубже понять трагические события Второй мировой войны и историю Холокоста, а также почувствовать атмосферу жизни семьи во время оккупации Нидерландов.</p></div>
 </section>
 <section class="place" id="amsterdam_artis">
+<div class="place-lead">
 <h3>Amsterdam Artis</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Период: 1838</p>
-<figure class="place-fig"><img src="../images/amsterdam_artis.jpg" alt="Amsterdam Artis"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/amsterdam_artis_b.jpg" alt="Amsterdam Artis" width="330" height="247"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Основан в 1838 году. Один из старейших зоопарков Европы. Расположен в центре Амстердама, недалеко от Королевского дворца. Имеет собственный ботанический сад и аквариум. Ежегодно принимает более миллиона посетителей.</p>
 <p class="prose">Artis Zoo основана в 1838 году и является старейшей зоопарковой территорией Нидерландов. Изначально зоопарк задумывался как место для научных исследований и популяризации знаний о природе среди широкой публики. Сегодня Artis представляет собой комплекс, включающий зоопарк, ботанический сад и аквариум, где представлены редкие виды животных и растений. Зоопарк привлекает туристов и местных жителей благодаря уникальной коллекции экзотических видов и возможности познакомиться с редкими животными в естественной среде обитания.</p></div>
 </section>
 <section class="place" id="amsterdam_begijnhof">
+<div class="place-lead">
 <h3>Amsterdam Begijnhof</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/amsterdam_begijnhof.jpg" alt="Amsterdam Begijnhof"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/amsterdam_begijnhof.jpg" alt="Amsterdam Begijnhof" width="1600" height="518" style="height: 149px; max-height: 149px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/amsterdam_begijnhof_b.jpg" alt="Amsterdam Begijnhof — вид 2" width="330" height="220" style="height: 149px; max-height: 149px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Здесь расположены дома XVII века, сохранившиеся до наших дней. На территории Бегиньхофа находится старейшая действующая церковь Амстердама — Оude Kerk. Считается одним из наиболее тихих и умиротворяющих уголков города. В Бегиньхофе проводятся экскурсии, позволяющие познакомиться с историей женских религиозных общин. Монастырь был основан в XVI веке.</p>
 <p class="prose">Бегиньхоф — женский монастырь, основанный в XVI веке бегиннями, религиозными общинами незамужних женщин. Здесь сохранилось несколько старинных домов XVII века, окружённых зелёной территорией. Бегиньхоф знаменит своей атмосферой спокойствия и тишины среди шумного Амстердама. Это одно из немногих мест в городе, где можно почувствовать атмосферу средневекового женского монастыря.</p></div>
 </section>
-<section class="place" id="amsterdam_pdfband_2_f2270f2e">
-<h3>Bijlmer</h3>
+<section class="place" id="amsterdam_bijlmer">
+<div class="place-lead">
+<h3>Amsterdam Bijlmer</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Стиль: хай-тек | Период: 1968–1974</p>
-<figure class="place-fig"><img src="../images/amsterdam_pdfband_2_f2270f2e.jpg" alt="Bijlmer"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/amsterdam_bijlmer.jpg" alt="Amsterdam Bijlmer" width="1280" height="960" style="height: 289px; max-height: 289px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/amsterdam_bijlmer_b.jpg" alt="Amsterdam Bijlmer — вид 2" width="330" height="207" style="height: 289px; max-height: 289px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Высота башни составляет около 84 метров, она является одним из самых высоких зданий района. Архитектором проекта выступил известный нидерландский мастер архитектуры Рем Колхас, который также проектировал музей Вигмор в Лондоне. Структура здания выполнена из стекла и стали, имеет сложную форму с плавными изгибами и углами. На верхнем этаже расположена смотровая площадка, откуда открывается панорамный вид на город. Здание изначально предназначалось для размещения офисов и жилья.</p>
 <p class="prose">Башня Bijlmer.JPG — культовое сооружение района Бийлмер в Амстердаме, построенная в конце XX века. Изначально задумывалась как современное здание с элементами хай-тек архитектуры, отражающее стремительное развитие города и стремление жителей к прогрессу. Сооружение стало символом инноваций и современного искусства в архитектуре Нидерландов. Здание привлекает туристов необычной формой и смелостью архитектурного решения, став одной из визитных карточек района Бийлмер.</p></div>
 </section>
-<section class="place" id="amsterdam_canal_ring">
-<h3>Amsterdam Canal Ring</h3>
+<section class="place" id="amsterdam_bloemenmarkt">
+<div class="place-lead">
+<h3>Amsterdam Bloemenmarkt</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Стиль: двускатная крыша (голландская габельная архитектура)</p>
-<figure class="place-fig"><img src="../images/amsterdam_canal_ring.jpg" alt="Amsterdam Canal Ring"/></figure>
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/amsterdam_bloemenmarkt.jpg" alt="Amsterdam Bloemenmarkt" width="1067" height="1600" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/amsterdam_bloemenmarkt_b.jpg" alt="Amsterdam Bloemenmarkt — вид 2" width="330" height="247" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">На рынке представлено огромное разнообразие сортов цветов и растений. Ежедневно сюда приезжают фермеры и садоводы из разных регионов Нидерландов. Рынок работает ежедневно, кроме понедельника. Тюльпаны считаются визитной карточкой рынка и страны. Сингель цветочный рынок входит в список объектов культурного наследия Нидерландов.</p>
+<p class="prose">Сингель цветочный рынок расположен вдоль канала Сингел в Амстердаме и является одним из старейших цветочных рынков города. Здесь традиционно собираются торговцы цветами и растениями начиная с XVII века, когда Нидерланды были мировым лидером в выращивании тюльпанов и других декоративных растений. Рынок стал символом голландской торговли и культуры цветоводства. Знаменитый цветочный рынок привлекает туристов своей атмосферой и возможностью приобрести свежие цветы и растения прямо от производителей.</p></div>
+</section>
+<section class="place" id="amsterdam_canal_ring">
+<div class="place-lead">
+<h3>Amsterdam Canal Ring</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Grachtengordel | Стиль: двускатная крыша (голландская габельная архитектура)</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/amsterdam_canal_ring.jpg" alt="Amsterdam Canal Ring" width="1280" height="851" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/amsterdam_canal_ring_b.jpg" alt="Amsterdam Canal Ring — вид 2" width="330" height="286" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Зона Canal ring walk включает несколько каналов: Сингельграхт, Херенграхт, Кейзерсграхт и Принсенграхт. Архитектура домов выполнена в стиле голландского амстердамского ренессанса и барокко. На территории канала-кольца расположены знаменитые музеи и достопримечательности, такие как Рейксмузеум и Королевский дворец. По каналам регулярно проходят прогулочные катера и лодки, создавая атмосферу спокойствия и романтики. Ежегодно здесь проводятся фестивали и праздники, привлекающие туристов и местных жителей.</p>
 <p class="prose">Канал-кольцо Амстердама — историческая пешеходная зона, окружённая каналами и живописными домами эпохи XVII века. Это сердце города, где сохранились уникальные голландские дома с характерной двускатной крышей. Канал-кольцо было построено в основном в XVII веке и стало символом процветания и величия Амстердама того периода. Здесь можно увидеть типичные голландские каналы и уютные жилые дома, отражающие дух старинного Амстердама.</p></div>
 </section>
+<section class="place" id="amsterdam_central_station">
+<div class="place-lead">
+<h3>Amsterdam Central Station</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Stationsplein</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/amsterdam_central_station.jpg" alt="Amsterdam Central Station" width="1280" height="930" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/amsterdam_central_station_b.jpg" alt="Amsterdam Central Station — вид 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Это одна из старейших железнодорожных станций Нидерландов. Архитектурный стиль станции сочетает черты голландской готики и итальянского ренессанса. На территории станции расположен музей железнодорожной техники. Ежедневно через станцию проходит около 400 поездов. Здание украшено мозаичными панелями, витражами и декоративными элементами.</p>
+<p class="prose">Станция Амстердам-Центраал была построена в 1881–1889 годах архитектором Питером Кюйперсом в стиле нидерландского неоренессанса. Это крупнейшая железнодорожная станция Нидерландов, расположенная в самом центре города на площади Стансплейн. Она стала символом Амстердама благодаря уникальной архитектуре и великолепному интерьеру, сочетающему элементы готики и ренессанса. Амстердам-Центраал привлекает туристов своей исторической ценностью и архитектурной красотой, являясь важным транспортным узлом страны.</p></div>
+</section>
+<section class="place" id="amsterdam_concertgebouw">
+<div class="place-lead">
+<h3>Amsterdam Concertgebouw</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Стиль: эклектика | Период: 1888</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/amsterdam_concertgebouw.jpg" alt="Amsterdam Concertgebouw" width="1067" height="1600" style="height: 291px; max-height: 291px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/amsterdam_concertgebouw_b.jpg" alt="Amsterdam Concertgebouw — вид 2" width="330" height="208" style="height: 291px; max-height: 291px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Первый концерт состоялся уже через год после открытия, в сентябре 1889 года. Архитектурный стиль здания — эклектика, сочетающая элементы классицизма и ренессанса. Концертгебау стал первым зданием в мире, специально построенным исключительно для исполнения симфонической музыки. Фасад здания украшен скульптурой Девы Марии работы французского скульптора Шарля Этьена Рошфора. Сцена зала оборудована уникальной системой акустики, разработанной инженером Гроотендорстом.</p>
+<p class="prose">Концертный зал Концертгебау («Музыкальный дом») был открыт в Амстердаме в 1888 году архитектором Пита Хюмансом. Здание стало символом музыкальной культуры Нидерландов благодаря уникальным акустическим характеристикам и выдающимся концертам классической музыки. Зал неоднократно реконструировался, последняя крупная реконструкция завершилась в 2019 году. Зал Концертгебау является одним из ведущих музыкальных площадок Европы, где регулярно выступают всемирно известные оркестры и солисты.</p></div>
+</section>
 <section class="place" id="amsterdam_dam_square">
+<div class="place-lead">
 <h3>Amsterdam Dam Square</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/amsterdam_dam_square.jpg" alt="Amsterdam Dam Square"/></figure>
+<p class="place-meta">Адрес: Centrum</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/amsterdam_dam_square.jpg" alt="Amsterdam Dam Square" width="1280" height="927" style="height: 334px; max-height: 334px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/amsterdam_dam_square_b.jpg" alt="Amsterdam Dam Square — вид 2" width="330" height="247" style="height: 334px; max-height: 334px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Центральная площадь, связывающая торговые улицы, королевский дворец и национальный мемориал жертвам Второй мировой войны. Голуби и уличные артисты скапливаются возле памятника. Трамваи пересекают площадь — обращайте внимание на велосипедные дорожки по краям.</p>
 <p class="prose">Здесь был построен затор на Амстеле; площадь превратилась в центральное место сбора города. Символическое сердце Амстердама, место проведения протестов и мероприятий.</p></div>
 </section>
 <section class="place" id="amsterdam_de_gooyer">
+<div class="place-lead">
 <h3>Amsterdam De Gooyer</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/amsterdam_de_gooyer.jpg" alt="Amsterdam De Gooyer"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/amsterdam_de_gooyer.jpg" alt="Amsterdam De Gooyer" width="1200" height="1600" style="height: 460px; max-height: 460px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/amsterdam_de_gooyer_b.jpg" alt="Amsterdam De Gooyer — вид 2" width="330" height="329" style="height: 460px; max-height: 460px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Построена в середине XVII века. Использовалась для переработки зерна и льна. Одна из немногих сохранившихся исторических мельниц Амстердама. Находится рядом с каналом Принсенграхт. Является популярным местом для прогулок и фотосессий.</p>
 <p class="prose">ветряная мельница Де Гойер расположена в Амстердаме и является одной из старейших сохранившихся мельниц города. Построена она была в XVII веке и использовалась для размола зерна и переработки льна. Это одна из немногих сохранившихся исторических мельниц Амстердама, свидетельствующих о былом значении сельского хозяйства в городской жизни. Мельница Де Гойер привлекает туристов своей историей и атмосферой старинной Голландии, позволяя заглянуть в прошлое и увидеть, каким образом город развивался и менялся.</p></div>
 </section>
 <section class="place" id="amsterdam_eye_film">
+<div class="place-lead">
 <h3>Amsterdam Eye Film</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/amsterdam_eye_film.jpg" alt="Amsterdam Eye Film"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/amsterdam_eye_film.jpg" alt="Amsterdam Eye Film" width="1600" height="907" style="height: 261px; max-height: 261px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/amsterdam_eye_film_b.jpg" alt="Amsterdam Eye Film — вид 2" width="330" height="264" style="height: 261px; max-height: 261px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Основан в 2003 году объединением трех ранее независимых организаций. Расположен в историческом здании бывшего кинотеатра Royal Noordeinde Palace. Ежегодно проводит около 400 мероприятий, включая премьеры, ретроспективы и фестивали. Собирает коллекцию редких архивных материалов и киноплёнок. Является членом международной сети Cinemateket.</p>
 <p class="prose">EYE Film Institute — музей киноискусства в Амстердаме, основанный в 2003 году. Музей посвящён исследованию и популяризации мирового кинематографического наследия. EYE организует выставки, показы фильмов, лекции и мастер-классы, привлекая внимание широкой аудитории к истории кино и современным тенденциям. Это один из ведущих мировых центров изучения кино, предлагающий посетителям уникальные возможности познакомиться с историей кинематографа и современными фильмами.</p></div>
 </section>
 <section class="place" id="amsterdam_foam">
+<div class="place-lead">
 <h3>Amsterdam Foam</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Стиль: Исторический стиль здания — промышленная архитектура начала XX века.</p>
-<figure class="place-fig"><img src="../images/amsterdam_foam.jpg" alt="Amsterdam Foam"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/amsterdam_foam_b.jpg" alt="Amsterdam Foam" width="330" height="404"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Foam является одним из ведущих музеев фотографии в Европе и ежегодно проводит выставки известных мировых фотографов. Здание музея, бывшее здание электростанции, внесено в список памятников архитектуры Нидерландов. Коллекция музея включает работы мастеров фотографии, таких как Андреас Гурски, Синди Шерман и Джефф Уолл. Ежегодно музей организует международные конкурсы и фотофестивали, привлекающие внимание широкой аудитории. Foam располагает обширной библиотекой фотографий и архивом исторических снимков.</p>
 <p class="prose">Музей фотографии Foam открылся в Амстердаме в 2004 году и стал важным культурным центром Европы благодаря своей коллекции современного фотоискусства. Музей расположен в историческом здании бывшей электростанции, построенной в начале XX века, что придает экспозиции особый шарм и атмосферу. Foam привлекает любителей и профессионалов фотографии возможностью увидеть передовые работы современных фотографов и узнать о последних тенденциях в мире фотоискусства.</p></div>
 </section>
 <section class="place" id="amsterdam_hermitage_amsterdam">
+<div class="place-lead">
 <h3>Amsterdam Hermitage Amsterdam</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/amsterdam_hermitage_amsterdam.jpg" alt="Amsterdam Hermitage Amsterdam"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/amsterdam_hermitage_amsterdam.jpg" alt="Amsterdam Hermitage Amsterdam" width="1600" height="1059" style="height: 305px; max-height: 305px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/amsterdam_hermitage_amsterdam_b.jpg" alt="Amsterdam Hermitage Amsterdam — вид 2" width="330" height="247" style="height: 305px; max-height: 305px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Это первая зарубежная галерея Государственного Эрмитажа. Расположена в бывшем складе Royal Dutch Shell. Создана известным голландским архитектором Ремко ван дер Хелмом. Открытие состоялось в апреле 2019 года. Коллекция включает произведения живописи, графики и скульптуры.</p>
 <p class="prose">Героиня нашего рассказа — галерея Hermitage Amsterdam, открытая в 2019 году. Она стала первой филией Государственного Эрмитажа за пределами России и Европы. Галерея расположена в историческом здании бывшего склада XIX века, принадлежавшего компании Royal Dutch Shell. Проект разработан голландским архитектором Ремко ван дер Хелмом. Галерея позволяет российским шедеврам искусства обрести новую аудиторию в Европе, расширяя культурное наследие страны.</p></div>
 </section>
 <section class="place" id="amsterdam_magere_brug">
+<div class="place-lead">
 <h3>Amsterdam Magere Brug</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Стиль: ренессанс | Период: 1980</p>
-<figure class="place-fig"><img src="../images/amsterdam_magere_brug.jpg" alt="Amsterdam Magere Brug"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/amsterdam_magere_brug.jpg" alt="Amsterdam Magere Brug" width="1600" height="975" style="height: 281px; max-height: 281px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/amsterdam_magere_brug_b.jpg" alt="Amsterdam Magere Brug — вид 2" width="330" height="215" style="height: 281px; max-height: 281px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Построена в стиле ренессансной архитектуры, характерной для Нидерландов. Имеет длину около 80 метров и ширину чуть больше двух метров. На протяжении веков использовалась жителями Амстердама для прогулок и пикников. Название &#x27;Magere&#x27; переводится с голландского как &#x27;худая&#x27;, из-за тонкой конструкции моста. Является символом Амстердама наряду с каналами и велосипедистами.</p>
 <p class="prose">Мейзе-Брюг — одна из старейших деревянных пешеходных мостовых Амстердама, построенная в XVI веке. Со временем она несколько раз перестраивалась и ремонтировалась, последняя реконструкция состоялась в конце XX века. Известна своей необычной формой и элегантностью. Популярное туристическое место благодаря живописному виду и близости к историческим районам города.</p></div>
 </section>
 <section class="place" id="amsterdam_museum_het_schip">
+<div class="place-lead">
 <h3>Amsterdam Museum Het Schip</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Стиль: модерн, функционализм | Период: 1870–1914</p>
-<figure class="place-fig"><img src="../images/amsterdam_museum_het_schip.jpg" alt="Amsterdam Museum Het Schip"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/amsterdam_museum_het_schip.jpg" alt="Amsterdam Museum Het Schip" width="1600" height="778" style="height: 224px; max-height: 224px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/amsterdam_museum_het_schip_b.jpg" alt="Amsterdam Museum Het Schip — вид 2" width="330" height="231" style="height: 224px; max-height: 224px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Здание музея имеет форму корабля, символизируя движение вперед и прогресс. Архитектор Хендрик Питер Берлаге использовал новые строительные технологии и материалы, такие как железобетон и стекло. «Het Schip» стал первым зданием в Амстердаме, построенным исключительно в стиле модерн. Интерьер музея оформлен в духе функционализма и минимализма, характерных для голландского рационализма. Музей открыт для публики с 1986 года.</p>
 <p class="prose">Музей «Het Schip» («Корабль») расположен в Амстердаме и является выдающимся примером архитектуры XX века. Построенный в 1924–1931 годах архитектором Хендриком Питером Берлаге, музей представляет собой здание необычной формы, вдохновленное формой корабля. Архитектор стремился создать пространство, отражающее дух времени и инновационные идеи своего времени. Этот музей интересен своими архитектурными решениями и уникальной формой здания, ставшей символом модернизма в Нидерландах.</p></div>
 </section>
-<section class="place" id="amsterdam_scheepvaartmuseum">
-<h3>Amsterdam Scheepvaartmuseum</h3>
-
-<p class="place-meta">Стиль: арт-деко | Период: 1937</p>
-<figure class="place-fig"><img src="../images/amsterdam_scheepvaartmuseum.jpg" alt="Amsterdam Scheepvaartmuseum"/></figure>
-<div class="place-desc"><p class="prose">Коллекция музея включает более 40 тысяч предметов, охватывающих историю морского дела от Средневековья до современности. Экспозиция рассказывает о роли Нидерландов в развитии мировой торговли и исследовании новых земель. Здание музея построено в стиле арт-деко и открыто для посетителей с 1937 года. Среди наиболее известных экспонатов — модель корабля «Де Зёйд-Вестерлинден», построенного в XVII веке. Ежегодно музей посещает около полумиллиона человек.</p>
-<p class="prose">Национальный морской музей Нидерландов расположен в Амстердаме и является крупнейшим морским музеем страны. Основан в 1935 году, изначально назывался Морской институт Нидерландов. В музее собрана обширная коллекция экспонатов, посвящённых истории голландского флота и морских исследований. Среди знаковых объектов музея — старинные модели кораблей, навигационные инструменты и артефакты, связанные с великими географическими открытиями. Музей привлекает туристов и исследователей своей уникальной коллекцией, отражающей вклад Нидерландов в мировое мореплавание и колониальную экспансию.</p></div>
-</section>
 <section class="place" id="amsterdam_national_monument">
+<div class="place-lead">
 <h3>Amsterdam National Monument</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Стиль: абстрактная архитектура, минимализм | Период: 1956</p>
-<figure class="place-fig"><img src="../images/amsterdam_national_monument.jpg" alt="Amsterdam National Monument"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/amsterdam_national_monument.jpg" alt="Amsterdam National Monument" width="1200" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/amsterdam_national_monument_b.jpg" alt="Amsterdam National Monument — вид 2" width="330" height="495" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Монумент выполнен архитектором Питером Айзенманом, известным своими мемориальными проектами. Открытие памятника совпало с 60-й годовщиной высадки союзников в Нормандии. На территории мемориала ежегодно проходят памятные мероприятия. Скульптурная композиция состоит из трёх бетонных блоков, расположенных в виде буквы V. Рядом с монументом находится музей Берген-Бельзена.</p>
 <p class="prose">Национальный монумент Нидерландов был открыт в 2002 году после десятилетней реконструкции и торжественного перезахоронения останков солдат времён Второй мировой войны. Памятник расположен рядом с бывшим концентрационным лагерем Берген-Бельзен и является символом памяти жертв нацизма и героизма голландского народа. Монумент представляет собой абстрактную конструкцию из бетона, символизирующую сломанные цепи угнетения. Национальный монумент — место памяти и скорби, посвящённое жертвам Холокоста и всем погибшим во время Второй мировой войны.</p></div>
 </section>
 <section class="place" id="amsterdam_nemo">
+<div class="place-lead">
 <h3>Amsterdam Nemo</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/amsterdam_nemo.jpg" alt="Amsterdam Nemo"/></figure>
+<p class="place-meta">Адрес: Oosterdok 2</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/amsterdam_nemo.jpg" alt="Amsterdam Nemo" width="1280" height="960" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/amsterdam_nemo_b.jpg" alt="Amsterdam Nemo — вид 2" width="330" height="248" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Здание музея выполнено в форме большого купола, покрытого медью, благодаря чему оно блестит на солнце и выглядит эффектно издалека. Архитектор Ренцо Пьяно вдохновлялся идеей соединения науки и искусства, создав уникальный архитектурный объект. На территории музея регулярно проводятся научные шоу, лекции и мастер-классы, привлекающие внимание широкой аудитории. Экспозиция музея включает интерактивные экспонаты, демонстрирующие физические явления и законы природы. Ежегодно музей посещают сотни тысяч посетителей, интересующихся наукой и технологиями.</p>
 <p class="prose">Научный музей NEMO открылся в 1997 году по проекту знаменитого итальянского архитектора Ренцо Пьяно. Расположенный на искусственном острове посреди Остердока, музей стал первым современным научно-техническим центром Нидерландов. Архитектура здания выделяется необычной формой купола из медной оболочки, который напоминает гигантский космический корабль или летающую тарелку. Музей привлекает туристов и местных жителей возможностью познакомиться с передовыми научными достижениями и интерактивными экспозициями, посвященными физике, биологии, астрономии и другим естественным наукам.</p></div>
 </section>
 <section class="place" id="amsterdam_nieuwe_kerk">
+<div class="place-lead">
 <h3>Amsterdam Nieuwe Kerk</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Стиль: барокко | Период: 1306–1404</p>
-<figure class="place-fig"><img src="../images/amsterdam_nieuwe_kerk.jpg" alt="Amsterdam Nieuwe Kerk"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/amsterdam_nieuwe_kerk.jpg" alt="Amsterdam Nieuwe Kerk" width="1600" height="1248" style="height: 360px; max-height: 360px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/amsterdam_nieuwe_kerk_b.jpg" alt="Amsterdam Nieuwe Kerk — вид 2" width="330" height="284" style="height: 360px; max-height: 360px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Строительство церкви велось с 1650 по 1665 год. Архитектором здания был Питер Пост, известный мастер своего времени. Интерьер церкви украшен произведениями искусства известных мастеров Голландии XVII века. Здесь находятся могилы многих знаменитых людей, включая представителей династии Оранских-Нассау. С момента постройки здание использовалось также как музей и выставочный зал.</p>
 <p class="prose">Нидерландская Новая церковь, расположенная в центре Амстердама, была построена в XVII веке и долгое время служила местом захоронений членов королевской семьи и знати Нидерландов. Со временем она стала важным культурным объектом города, сохранившимся памятником архитектуры эпохи барокко. Здание привлекает туристов своей уникальной архитектурой и богатой историей, связанной с выдающимися фигурами голландского общества.</p></div>
 </section>
 <section class="place" id="amsterdam_noorderkerk">
+<div class="place-lead">
 <h3>Amsterdam Noorderkerk</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Стиль: голландское барокко | Период: 1648–1650</p>
-<figure class="place-fig"><img src="../images/amsterdam_noorderkerk.jpg" alt="Amsterdam Noorderkerk"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/amsterdam_noorderkerk.jpg" alt="Amsterdam Noorderkerk" width="1600" height="1208" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/amsterdam_noorderkerk_b.jpg" alt="Amsterdam Noorderkerk — вид 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Построена в стиле голландского барокко. Имеет уникальную форму купола, отличающуюся от традиционных форм. Интерьер церкви украшен изысканными резными элементами. Является частью ансамбля исторической застройки района Де-Воорхоф. Внутри церкви сохранились старинные орган и алтарная картина.</p>
 <p class="prose">Церковь Ньивекерк (Noorderkerk), построенная в XVII веке, является одной из старейших протестантских церквей Амстердама. В течение нескольких столетий она служила местом богослужений и важным культурным центром города. Среди запоминающихся фактов стоит отметить её архитектурную уникальность: церковь отличается необычной формой купола и изящной отделкой интерьеров. Церковь привлекает туристов своей историей и архитектурой, а также служит символом религиозной жизни Амстердама.</p></div>
 </section>
 <section class="place" id="amsterdam_oude_kerk">
+<div class="place-lead">
 <h3>Amsterdam Oude Kerk</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Стиль: готический зал-храм с деревянной крышей</p>
-<figure class="place-fig"><img src="../images/amsterdam_oude_kerk.jpg" alt="Amsterdam Oude Kerk"/></figure>
+<p class="place-meta">Адрес: Oudekerksplein | Стиль: готический зал-храм с деревянной крышей</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/amsterdam_oude_kerk.jpg" alt="Amsterdam Oude Kerk" width="1280" height="258" style="height: 93px; max-height: 93px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/amsterdam_oude_kerk_b.jpg" alt="Amsterdam Oude Kerk — вид 2" width="330" height="290" style="height: 93px; max-height: 93px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Это самая старая церковь Амстердама. Здание сохранило оригинальные деревянные своды. В церкви проводятся концерты органной музыки. Рядом расположен музей восковых фигур Madame Tussauds Amsterdam. Архитектурный стиль сочетает черты средневекового храма и готической архитектуры.</p>
 <p class="prose">Оуедеркерк — старейшая церковь Амстердама, построенная ещё в XIII веке в форме средневекового зала-храма. Со временем здание дополнили готическими элементами, придавшими ей характерный облик. Это одна из немногих церквей города, сохранивших оригинальную деревянную кровельную конструкцию. Церковь привлекает туристов своей атмосферой старины и уникальной архитектурой, сочетающей элементы средневековья и готики.</p></div>
 </section>
 <section class="place" id="amsterdam_portuguese_synagogue">
+<div class="place-lead">
 <h3>Amsterdam Portuguese Synagogue</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Стиль: голландский ренессанс и барокко | Период: 1671–1675</p>
-<figure class="place-fig"><img src="../images/amsterdam_portuguese_synagogue.jpg" alt="Amsterdam Portuguese Synagogue"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/amsterdam_portuguese_synagogue_b.jpg" alt="Amsterdam Portuguese Synagogue" width="330" height="334"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Здание построено в стиле голландского ренессанса и барокко. Архитектором стал Питер Пост, известный также постройкой здания биржи Амстердама. Синагогу посещают ежегодно около 40 тысяч человек. Интерьер украшен резными деревянными элементами и витражами. Вход бесплатный, однако посещение возможно только по предварительной записи.</p>
 <p class="prose">Португальская синагога Амстердама была построена в XVII веке еврейской общиной португальского происхождения после переселения в Нидерланды. Это одна из старейших действующих синагог Европы, сохранившаяся до наших дней. Здание стало символом культурного наследия иудаизма и еврейской общины Нидерландов. Синагога привлекает туристов своей уникальной архитектурой и богатой историей, отражающей культурное разнообразие Амстердама.</p></div>
 </section>
 <section class="place" id="amsterdam_reguliersgracht">
+<div class="place-lead">
 <h3>Amsterdam Reguliersgracht</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Стиль: канальный дом с арочными мостами</p>
-<figure class="place-fig"><img src="../images/amsterdam_reguliersgracht.jpg" alt="Amsterdam Reguliersgracht"/></figure>
+<p class="place-meta">Адрес: Reguliersgracht, Grachtengordel | Стиль: канальный дом с арочными мостами</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/amsterdam_reguliersgracht.jpg" alt="Amsterdam Reguliersgracht" width="1280" height="852" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/amsterdam_reguliersgracht_b.jpg" alt="Amsterdam Reguliersgracht — вид 2" width="330" height="220" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Через Регулярисграхт перекинуто три элегантных арочных моста, выполненных в стиле канальных домов. Мосты Регулярисграхта входят в состав ансамбля знаменитых амстердамских каналов, признанных объектом Всемирного наследия ЮНЕСКО. Каналы Регулярисграхт были построены одновременно с другими каналами кольцевой системы города в XVII веке. Арочные мосты Регулярисграхта выполнены из кирпича и камня, типичны для голландской архитектурной традиции. На мостах Регулярисграхта часто устраиваются уличные выставки и концерты, привлекающие туристов.</p>
 <p class="prose">Регулярисграхт — один из каналов Амстердама, построенный в XVII веке во время расширения кольцевого канала города. Канал соединяет районы Йордан и Лейдсеплейн и является частью знаменитого амстердамского Грахтенгольда. Через Регулярисграхт перекинуто несколько изящных арочных мостов, украшающих канал и придающих городу особый шарм. Мосты Регулярисграхта — важный элемент городской архитектуры и неотъемлемая часть прогулочного маршрута по историческому центру Амстердама.</p></div>
 </section>
 <section class="place" id="amsterdam_rembrandt_house">
+<div class="place-lead">
 <h3>Amsterdam Rembrandt House</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/amsterdam_rembrandt_house.jpg" alt="Amsterdam Rembrandt House"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/amsterdam_rembrandt_house.jpg" alt="Amsterdam Rembrandt House" width="1200" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/amsterdam_rembrandt_house_b.jpg" alt="Amsterdam Rembrandt House — вид 2" width="330" height="498" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Дом был приобретён художником в 1639 году. Здесь сохранились оригинальные интерьеры XVII века. На первом этаже расположены экспозиции, посвящённые творчеству Рембрандта. В музее также представлены личные вещи художника и членов его семьи. Посещение музея даёт возможность увидеть подлинную обстановку дома, где творил один из величайших художников Европы.</p>
 <p class="prose">Рембрандт Хаус Музей расположен в историческом доме, где великий голландский художник Рембрандт ван Рейн жил и работал с 1639 по 1660 год. Дом был построен в XVII веке и сохранил интерьеры той эпохи, включая мастерскую художника, жилые комнаты и библиотеку. Это место стало символом творчества и жизни одного из величайших живописцев мира. Музей позволяет посетителям погрузиться в атмосферу мастерской великого мастера и увидеть предметы, принадлежавшие самому художнику, его семье и современникам.</p></div>
 </section>
 <section class="place" id="amsterdam_rijksmuseum">
+<div class="place-lead">
 <h3>Amsterdam Rijksmuseum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/amsterdam_rijksmuseum.jpg" alt="Amsterdam Rijksmuseum"/></figure>
+<p class="place-meta">Адрес: Museumstraat 1</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/amsterdam_rijksmuseum.jpg" alt="Amsterdam Rijksmuseum" width="1280" height="681" style="height: 245px; max-height: 245px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/amsterdam_rijksmuseum_b.jpg" alt="Amsterdam Rijksmuseum — вид 2" width="330" height="220" style="height: 245px; max-height: 245px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Коллекция музея включает около миллиона экспонатов. Наибольшее внимание привлекают картины Рембрандта, Яна Вермеера и Франса Халса. Архитектура здания сочетает элементы неоготики и ренессансного стиля. Зал современного искусства занимает современное атриумное пространство. Ежегодно музей посещают свыше двух миллионов человек.</p>
 <p class="prose">Рижский музей (Rijksmuseum) — один из крупнейших художественных музеев Нидерландов, расположенный в Амстердаме по адресу Музейстрат, дом 1. Основан в 1885 году архитектором Питом Куипером в стиле голландского неоренессанса. После масштабной реставрации был вновь открыт в 2013 году. Музей привлекает туристов и ценителей искусства благодаря уникальной коллекции произведений живописи, графики, декоративно-прикладного искусства и мебели эпохи Возрождения и Нового времени.</p></div>
 </section>
-<section class="place" id="amsterdam_concertgebouw">
-<h3>Amsterdam Concertgebouw</h3>
-
-<p class="place-meta">Стиль: эклектика | Период: 1888</p>
-<figure class="place-fig"><img src="../images/amsterdam_concertgebouw.jpg" alt="Amsterdam Concertgebouw"/></figure>
-<div class="place-desc"><p class="prose">Первый концерт состоялся уже через год после открытия, в сентябре 1889 года. Архитектурный стиль здания — эклектика, сочетающая элементы классицизма и ренессанса. Концертгебау стал первым зданием в мире, специально построенным исключительно для исполнения симфонической музыки. Фасад здания украшен скульптурой Девы Марии работы французского скульптора Шарля Этьена Рошфора. Сцена зала оборудована уникальной системой акустики, разработанной инженером Гроотендорстом.</p>
-<p class="prose">Концертный зал Концертгебау («Музыкальный дом») был открыт в Амстердаме в 1888 году архитектором Пита Хюмансом. Здание стало символом музыкальной культуры Нидерландов благодаря уникальным акустическим характеристикам и выдающимся концертам классической музыки. Зал неоднократно реконструировался, последняя крупная реконструкция завершилась в 2019 году. Зал Концертгебау является одним из ведущих музыкальных площадок Европы, где регулярно выступают всемирно известные оркестры и солисты.</p></div>
-</section>
 <section class="place" id="amsterdam_royal_palace">
+<div class="place-lead">
 <h3>Amsterdam Royal Palace</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Стиль: Датский классицизм (архитектор Якоб ван Кампен)</p>
-<figure class="place-fig"><img src="../images/amsterdam_royal_palace.jpg" alt="Amsterdam Royal Palace"/></figure>
+<p class="place-meta">Адрес: Dam Square | Стиль: Датский классицизм (архитектор Якоб ван Кампен)</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/amsterdam_royal_palace.jpg" alt="Amsterdam Royal Palace" width="1280" height="960" style="height: 331px; max-height: 331px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/amsterdam_royal_palace_b.jpg" alt="Amsterdam Royal Palace — вид 2" width="330" height="237" style="height: 331px; max-height: 331px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Строительство здания началось в 1648 году, однако закончено оно было уже после смерти архитектора ван Кампенна в 1655 году. До официального использования королями здание служило ратушей Амстердама. Архитектурный стиль дворца сочетает элементы голландского барокко и классицизма. На территории комплекса расположены Королевские сады, где регулярно проводятся выставки и мероприятия. Во дворце хранится коллекция картин известных нидерландских художников.</p>
 <p class="prose">Роял-палас Амстердама расположен на Дамской площади и является одной из главных достопримечательностей города. Здание изначально было построено в стиле голландского классицизма архитектором Якобом ван Кампеном в 1655 году как городской ратуша. В дальнейшем здание использовалось королевской семьей Нидерландов начиная с 1808 года, когда оно стало официальной резиденцией монархии. Сегодня Роял-палас служит местом проведения государственных мероприятий и церемоний, а также открыт для посещения туристами. Здание привлекает туристов своей уникальной архитектурой и богатой историей, связанной с развитием политической системы Нидерландов.</p></div>
 </section>
-<section class="place" id="amsterdam_bloemenmarkt">
-<h3>Amsterdam Bloemenmarkt</h3>
+<section class="place" id="amsterdam_scheepvaartmuseum">
+<div class="place-lead">
+<h3>Amsterdam Scheepvaartmuseum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/amsterdam_bloemenmarkt.jpg" alt="Amsterdam Bloemenmarkt"/></figure>
-<div class="place-desc"><p class="prose">На рынке представлено огромное разнообразие сортов цветов и растений. Ежедневно сюда приезжают фермеры и садоводы из разных регионов Нидерландов. Рынок работает ежедневно, кроме понедельника. Тюльпаны считаются визитной карточкой рынка и страны. Сингель цветочный рынок входит в список объектов культурного наследия Нидерландов.</p>
-<p class="prose">Сингель цветочный рынок расположен вдоль канала Сингел в Амстердаме и является одним из старейших цветочных рынков города. Здесь традиционно собираются торговцы цветами и растениями начиная с XVII века, когда Нидерланды были мировым лидером в выращивании тюльпанов и других декоративных растений. Рынок стал символом голландской торговли и культуры цветоводства. Знаменитый цветочный рынок привлекает туристов своей атмосферой и возможностью приобрести свежие цветы и растения прямо от производителей.</p></div>
+<p class="place-meta">Стиль: арт-деко | Период: 1937</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/amsterdam_scheepvaartmuseum.jpg" alt="Amsterdam Scheepvaartmuseum" width="1600" height="843" style="height: 210px; max-height: 210px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/amsterdam_scheepvaartmuseum_b.jpg" alt="Amsterdam Scheepvaartmuseum — вид 2" width="330" height="150" style="height: 210px; max-height: 210px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Коллекция музея включает более 40 тысяч предметов, охватывающих историю морского дела от Средневековья до современности. Экспозиция рассказывает о роли Нидерландов в развитии мировой торговли и исследовании новых земель. Здание музея построено в стиле арт-деко и открыто для посетителей с 1937 года. Среди наиболее известных экспонатов — модель корабля «Де Зёйд-Вестерлинден», построенного в XVII веке. Ежегодно музей посещает около полумиллиона человек.</p>
+<p class="prose">Национальный морской музей Нидерландов расположен в Амстердаме и является крупнейшим морским музеем страны. Основан в 1935 году, изначально назывался Морской институт Нидерландов. В музее собрана обширная коллекция экспонатов, посвящённых истории голландского флота и морских исследований. Среди знаковых объектов музея — старинные модели кораблей, навигационные инструменты и артефакты, связанные с великими географическими открытиями. Музей привлекает туристов и исследователей своей уникальной коллекцией, отражающей вклад Нидерландов в мировое мореплавание и колониальную экспансию.</p></div>
 </section>
 <section class="place" id="amsterdam_stedelijk">
+<div class="place-lead">
 <h3>Amsterdam Stedelijk</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Стиль: Neo-Renaissance hall, современное крыло выполнено в форме &#x27;ванной&#x27; (&#x27;bathtub&#x27;)</p>
-<figure class="place-fig"><img src="../images/amsterdam_stedelijk.jpg" alt="Amsterdam Stedelijk"/></figure>
+<p class="place-meta">Адрес: Museumplein 10 | Стиль: Neo-Renaissance hall, современное крыло выполнено в форме &#x27;ванной&#x27; (&#x27;bathtub&#x27;)</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/amsterdam_stedelijk.jpg" alt="Amsterdam Stedelijk" width="1280" height="853" style="height: 260px; max-height: 260px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/amsterdam_stedelijk_b.jpg" alt="Amsterdam Stedelijk — вид 2" width="330" height="186" style="height: 260px; max-height: 260px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Открытие музея состоялось в 1895 году. В музее представлены работы известных художников, включая Пита Мондриана и Виллема де Кунинга. Новое крыло музея было открыто в 2012 году архитектором Ремом Колхасом. Коллекция включает произведения искусства, археологические артефакты и предметы декоративно-прикладного искусства. Музей расположен на Музейной площади Амстердама.</p>
 <p class="prose">Музей был основан в 1895 году как частное собрание произведений искусства и археологических находок. Со временем коллекция значительно расширилась, став одним из крупнейших музеев Нидерландов. В новом крыле музея, открытом в 2012 году, применены современные архитектурные решения, гармонично сочетающиеся с историческим зданием в стиле неоренессанс. Это ведущий музей современного искусства в Нидерландах, предлагающий посетителям уникальные выставки и коллекции, отражающие развитие мировой культуры от начала XX века до наших дней.</p></div>
 </section>
 <section class="place" id="amsterdam_van_gogh_museum">
+<div class="place-lead">
 <h3>Amsterdam Van Gogh Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/amsterdam_van_gogh_museum.jpg" alt="Amsterdam Van Gogh Museum"/></figure>
+<p class="place-meta">Адрес: Museumplein 6</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/amsterdam_van_gogh_museum.jpg" alt="Amsterdam Van Gogh Museum" width="1280" height="590" style="height: 212px; max-height: 212px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--row-sized"><img src="../images/amsterdam_van_gogh_museum_b.jpg" alt="Amsterdam Van Gogh Museum — вид 2" width="330" height="521" style="height: 212px; max-height: 212px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Коллекция музея включает около двух тысяч картин Ван Гога, а также работы Анри де Тулуз-Лотрека, Поля Гогена и Клода Моне. В музее регулярно проводятся временные выставки современного искусства. Архитектура здания отличается современным стилем, сочетающим минимализм и функциональность. Ежегодно музей посещает свыше миллиона человек. Рядом с музеем расположены другие важные достопримечательности Амстердама, такие как Королевский дворец и Национальная галерея.</p>
 <p class="prose">Музей Ван Гога открылся в Амстердаме в 1973 году по проекту архитекторов Ритвелда и ван Трича. Со временем музей расширялся: в 1999 году был добавлен новый крылец, спроектированный японским архитектором Кэндзо Тангэ. Сегодня музей занимает центральную площадь Музейплейн и является одним из главных культурных центров города. Знаменитый музей привлекает туристов и ценителей искусства благодаря уникальной коллекции работ Винсента Ван Гога и произведений других выдающихся художников постимпрессионизма.</p></div>
 </section>
 <section class="place" id="amsterdam_westerkerk">
+<div class="place-lead">
 <h3>Amsterdam Westerkerk</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1620–1631</p>
-<figure class="place-fig"><img src="../images/amsterdam_westerkerk.jpg" alt="Amsterdam Westerkerk"/></figure>
+<p class="place-meta">Адрес: Prinsengracht 279–281 | Период: 1620–1631</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/amsterdam_westerkerk.jpg" alt="Amsterdam Westerkerk" width="1280" height="1114" style="height: 402px; max-height: 402px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--row-sized"><img src="../images/amsterdam_westerkerk_b.jpg" alt="Amsterdam Westerkerk — вид 2" width="330" height="603" style="height: 402px; max-height: 402px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Это первая крупная протестантская церковь Амстердама после отмены запрета католической архитектуры. Архитектор церкви — Питер Пост, один из выдающихся мастеров своего времени. Храм знаменит своими высокими стрельчатыми окнами и массивной башней. Вестеркерк является ярким примером голландского ренессансного стиля. На протяжении веков здание неоднократно реставрировалось и модернизировалось.</p>
 <p class="prose">Знаменитый протестантский храм Вестеркерк был построен в Амстердаме в период с 1620 по 1631 год в стиле нидерландского ренессанса. В архитектуре здания гармонично сочетаются элементы поздней готики и раннего барокко. Вестеркерк стал первым крупным зданием города, построенным после отмены запрета католической архитектуры в XVII веке. Храм играл важную роль в жизни амстердамской общины, став местом проведения значимых религиозных мероприятий и торжественных церемоний. Вестеркерк привлекает туристов своей уникальной архитектурой и историческим значением, отражающим культурное развитие Нидерландов периода Нидерландской революции.</p></div>
 </section>
 <section class="place" id="amsterdam_zuiderkerk">
+<div class="place-lead">
 <h3>Amsterdam Zuiderkerk</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Стиль: голландский ренессанс и барокко | Период: 1641–1647 годы</p>
-<figure class="place-fig"><img src="../images/amsterdam_zuiderkerk.jpg" alt="Amsterdam Zuiderkerk"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/amsterdam_zuiderkerk.jpg" alt="Amsterdam Zuiderkerk" width="1200" height="1600" style="height: 373px; max-height: 373px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/amsterdam_zuiderkerk_b.jpg" alt="Amsterdam Zuiderkerk — вид 2" width="330" height="267" style="height: 373px; max-height: 373px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Здание церкви было возведено в 1641–1647 годах. Архитектурный стиль сочетает элементы ренессанса и барокко. Церковь известна своим богатым интерьером и лепниной. На территории расположена старинная колокольня. Рядом находится музей восковых фигур Ван Гога.</p>
 <p class="prose">Церковь Зуидеркерк (Зуидеркирхе) была построена в XVII веке в Амстердаме и стала одной из первых протестантских церквей города после Реформации. Сооружение выполнено в стиле голландского ренессанса и барокко, отличается изящной архитектурой и богатым декором. В течение нескольких столетий церковь играла важную роль в жизни амстердамской общины, служила местом богослужений и памятных событий. Посещение церкви позволяет познакомиться с историей раннего протестантизма в Нидерландах и оценить архитектурное наследие эпохи Возрождения.</p></div>
 </section>

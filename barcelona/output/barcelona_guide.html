@@ -13,7 +13,7 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
 .otium-logo { font-family: 'Marcellus', serif; font-size: 2.15rem;
   font-weight: 600; letter-spacing: 0.18em; margin-bottom: 0.85rem; }
 .otiump { margin: 0.42rem 0; line-height: 1.42; text-align: justify;
-  max-width: 38rem; font-size: 0.95rem; }
+  font-size: 0.95rem; }
 .guide-title { page-break-after: auto; margin-bottom: 0.55rem;
   page-break-inside: avoid; }
 .historical-reference { margin: 0.75rem 0 1.15rem;
@@ -63,22 +63,103 @@ ol.trip-stops a:hover { text-decoration: underline; }
 .heraldry-univ-caption { font-size: 0.52rem; line-height: 1.18;
   margin: 0.12rem 0 0; padding: 0 0.06rem; color: #252525;
   text-align: center; font-weight: 500; }
-.heraldry-motto { text-align: center; max-width: 18rem; margin: 0.18rem auto;
+.heraldry-motto { text-align: center; margin: 0.18rem auto;
   width: 100%; }
 .motto-line { font-family: 'Marcellus', serif; font-size: 1rem;
   margin: 0; color: #333; line-height: 1.35; }
 .guide-title h1.guide-title-main { font-family: 'Marcellus', serif;
   font-size: 2.35rem; margin-bottom: 0.5rem; font-weight: 600; }
 .lead { color: #444; font-size: 1.05rem; }
-.guide-toc { margin: 0.85rem 0 1.15rem; page-break-inside: avoid; }
-.guide-toc h2 { font-family: 'Marcellus', serif; font-size: 1.28rem;
-  font-weight: 600; margin: 0.4rem 0 0.55rem; }
+
+.guide-toc { page-break-before: always; break-before: page;
+  page-break-after: always; break-after: page;
+  margin: 0; padding: 0.2rem 0 0.45rem; page-break-inside: auto; }
+.guide-toc h2 { font-family: 'Marcellus', serif;
+  font-size: 1.28rem; font-weight: 600; margin: 0.4rem 0 0.55rem; }
 .guide-toc ol { margin: 0.35rem 0 0.65rem 1.25rem; padding: 0;
   columns: 2; column-gap: 1.5rem; }
 .guide-toc li { margin: 0.18rem 0; line-height: 1.35;
   font-size: 0.88rem; break-inside: avoid; }
-.guide-toc a { color: #1a5276; text-decoration: none; }
+.guide-toc a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.guide-toc a:hover { color: #0d3d56; }
 .guide-toc li.toc-item--sub { font-size: 0.82rem; margin-left: 0.35rem; }
+.toc-back { font-size: 0.78rem; margin: 0 0 0.35rem; text-align: right; }
+.toc-back a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.toc-back a:hover { color: #0d3d56; }
+.place, .historical-reference, .guide-primer, .guide-trip-plans {
+  scroll-margin-top: 1.25rem; }
+.historical-reference h2, .guide-primer h2, .guide-trip-plans h2,
+.chapter-head h2, .place-lead h3 { position: relative; }
+.guide-toc + .place, .guide-toc + .chapter-head {
+  page-break-before: avoid; break-before: avoid-page; }
+.place-lead { page-break-inside: avoid; break-inside: avoid-page;
+  page-break-after: auto; }
+.place-lead > h3 { page-break-after: avoid; break-after: avoid-page; }
+.place-lead > .place-meta { page-break-after: avoid; break-after: avoid-page; }
+
+.place-fig { page-break-inside: avoid; break-inside: avoid-page;
+  margin: 0.5rem 0 1rem; }
+.place-fig img {
+  page-break-inside: avoid; break-inside: avoid-page;
+  max-height: 48vh; width: auto; max-width: 100%;
+  object-fit: contain; margin-left: auto; margin-right: auto; }
+.place-fig--hi-res img { max-height: 52vh; }
+.place-fig--lo-res img { max-height: 30vh; }
+.place-pdf-fig-row {
+  display: flex; flex-direction: row; flex-wrap: wrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.45rem 0.55rem; margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row .place-fig {
+  flex: 1 1 30%; margin: 0; min-width: 26%; max-width: 100%; }
+.place-pdf-fig-row .place-fig img {
+  width: auto; max-width: 100%; height: auto; max-height: 44vh;
+  object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--pair {
+  flex-wrap: nowrap; justify-content: space-between;
+  align-items: flex-end; gap: 0.5rem 0.65rem; }
+.place-pdf-fig-row--pair .place-fig {
+  flex: 1 1 47%; min-width: 0; max-width: 50%;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--pair .place-fig img {
+  max-height: 44vh; object-fit: contain; }
+.place-pdf-fig-row--pair .place-fig--hi-res img { max-height: 52vh; }
+.place-pdf-fig-row--pair .place-fig--lo-res img { max-height: 26vh; }
+.place-pdf-fig-row--pair .place-fig--row-sized img,
+.place-pdf-fig-row--triple .place-fig--row-sized img,
+.place-pdf-fig-row--many .place-fig--row-sized img {
+  width: auto; max-width: 100%; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row .place-fig--row-sized.place-fig--hi-res img,
+.place-pdf-fig-row .place-fig--row-sized.place-fig--lo-res img {
+  max-height: unset; }
+.place-pdf-fig-rows-stack {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple {
+  display: flex; flex-direction: row; flex-wrap: nowrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.4rem 0.48rem; margin: 0;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--triple .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--triple .place-fig--hi-res img { max-height: 42vh; }
+.place-pdf-fig-row--triple .place-fig--lo-res img { max-height: 18vh; }
+.place-pdf-fig-row--many {
+  flex-wrap: nowrap; justify-content: center; align-items: flex-end;
+  gap: 0.35rem 0.42rem; }
+.place-pdf-fig-row--many .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--many .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+
+
 .place { margin-bottom: 2.2rem; page-break-inside: auto; }
 h3 { font-family: 'Marcellus', serif; font-size: 1.22rem; margin: 1.2rem 0 0.35rem;
   font-weight: 600; }
@@ -90,7 +171,6 @@ h4 { font-family: 'Marcellus', serif; font-size: 0.95rem; text-transform: upperc
   color: #555; font-size: 0.95rem; margin: 0 0 0.5rem; font-style: italic; }
 .place-meta { font-size: 0.92rem; color: #353535; margin: 0 0 0.75rem;
   line-height: 1.4; }
-.place-fig { margin: 0.5rem 0 1rem; }
 img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
 .prose, .place-desc p { margin: 0.45rem 0; line-height: 1.5;
   text-align: justify; }
@@ -110,7 +190,9 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <figure class="heraldry-fig heraldry-coat-book" title="City emblem"><img src="../images/guide_coat_of_arms.svg" alt="City emblem"/></figure>
 <figure class="heraldry-fig heraldry-coat-book" title="Flag"><img src="../images/guide_flag.svg" alt="Flag"/></figure>
 </div></div><h1 class="guide-title-main">Barcelona</h1><p class="lead">Guide. Places in this edition: 33.</p></header>
+<nav class="guide-toc" id="guide-toc" aria-label="Contents"><h2>Contents</h2><ol><li class="toc-item"><a href="#guide-trips">Trip ideas</a></li><li class="toc-item"><a href="#barcelona_arc_de_triomf">Arc de Triomf</a></li><li class="toc-item"><a href="#barcelona_cathedral">Barcelona Cathedral</a></li><li class="toc-item"><a href="#barcelona_barceloneta_beach">Barceloneta Beach</a></li><li class="toc-item"><a href="#barcelona_basilica_de_la_merce">Basilica of La Mercè</a></li><li class="toc-item"><a href="#barcelona_santa_maria_del_pi">Basilica of Santa Maria del Pi</a></li><li class="toc-item"><a href="#barcelona_sagrada_familia">Basilica of the Sagrada Família</a></li><li class="toc-item"><a href="#barcelona_bunkers_carmel_barcelona">Bunkers del Carmel</a></li><li class="toc-item"><a href="#barcelona_camp_nou">Camp Nou Stadium</a></li><li class="toc-item"><a href="#barcelona_casa_amatller_barcelona">Casa Amatller</a></li><li class="toc-item"><a href="#barcelona_casa_batllo">Casa Batlló</a></li><li class="toc-item"><a href="#barcelona_casa_mila">Casa Milà (La Pedrera)</a></li><li class="toc-item"><a href="#barcelona_columbus_monument">Columbus Monument</a></li><li class="toc-item"><a href="#barcelona_cosmo_caixa_barcelona">CosmoCaixa Barcelona</a></li><li class="toc-item"><a href="#barcelona_hospital_sant_pau">Hospital de Sant Pau</a></li><li class="toc-item"><a href="#barcelona_hotel_w_barcelona">Hotel W Barcelona</a></li><li class="toc-item"><a href="#barcelona_la_boqueria">La Boqueria Market</a></li><li class="toc-item"><a href="#barcelona_llagrimes_negres">Llagrimes negres</a></li><li class="toc-item"><a href="#barcelona_llotja_de_la_mar_barcelona">Llotja de la Mar (Barcelona)</a></li><li class="toc-item"><a href="#barcelona_magic_fountain_montjuic">Magic Fountain of Montjuïc</a></li><li class="toc-item"><a href="#barcelona_monastery_pedralbes">Monastery of Pedralbes</a></li><li class="toc-item"><a href="#barcelona_montjuic_castle">Montjuïc Castle</a></li><li class="toc-item"><a href="#barcelona_mnac_palau_nacional">Museu Nacional d&#x27;Art de Catalunya (MNAC)</a></li><li class="toc-item"><a href="#barcelona_palau_de_la_musica">Palau de la Música Catalana</a></li><li class="toc-item"><a href="#barcelona_palau_guell">Palau Güell</a></li><li class="toc-item"><a href="#barcelona_parc_de_la_ciutadella">Parc de la Ciutadella</a></li><li class="toc-item"><a href="#barcelona_parc_del_laberint">Parc del Laberint d&#x27;Horta</a></li><li class="toc-item"><a href="#barcelona_park_guell">Park Güell</a></li><li class="toc-item"><a href="#barcelona_picasso_museum_barcelona">Picasso Museum</a></li><li class="toc-item"><a href="#barcelona_placa_catalunya">Plaça de Catalunya</a></li><li class="toc-item"><a href="#barcelona_port_vell">Port Vell</a></li><li class="toc-item"><a href="#barcelona_santa_maria_del_mar">Santa Maria del Mar</a></li><li class="toc-item"><a href="#barcelona_sagrat_cor_tibidabo">Tibidabo Expiatory Church</a></li><li class="toc-item"><a href="#barcelona_torre_glories">Torre Glòries</a></li></ol></nav>
 <section class="guide-trip-plans" id="guide-trips" aria-label="Trip ideas"><h2>Trip ideas</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 <article class="trip-plan" id="trip-1d"><h3>One day</h3>
 <p class="prose">A compact loop linking the strongest cards in this guide, ordered to minimise backtracking on foot.</p>
 <ol class="trip-stops"><li><a href="#barcelona_casa_amatller_barcelona">Casa Amatller</a> (~75min)</li>
@@ -140,266 +222,451 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <li><a href="#barcelona_arc_de_triomf">Arc de Triomf</a> (~75min)</li>
 <li><a href="#barcelona_barceloneta_beach">Barceloneta Beach</a> (~75min)</li>
 <li><a href="#barcelona_camp_nou">Camp Nou Stadium</a> (~75min)</li></ol></article></section>
-<nav class="guide-toc" aria-label="Contents"><h2>Contents</h2><ol><li class="toc-item"><a href="#guide-trips">Trip ideas</a></li><li class="toc-item"><a href="#barcelona_arc_de_triomf">Arc de Triomf</a></li><li class="toc-item"><a href="#barcelona_cathedral">Barcelona Cathedral</a></li><li class="toc-item"><a href="#barcelona_barceloneta_beach">Barceloneta Beach</a></li><li class="toc-item"><a href="#barcelona_basilica_de_la_merce">Basilica of La Mercè</a></li><li class="toc-item"><a href="#barcelona_santa_maria_del_pi">Basilica of Santa Maria del Pi</a></li><li class="toc-item"><a href="#barcelona_sagrada_familia">Basilica of the Sagrada Família</a></li><li class="toc-item"><a href="#barcelona_bunkers_carmel_barcelona">Bunkers del Carmel</a></li><li class="toc-item"><a href="#barcelona_camp_nou">Camp Nou Stadium</a></li><li class="toc-item"><a href="#barcelona_casa_amatller_barcelona">Casa Amatller</a></li><li class="toc-item"><a href="#barcelona_casa_batllo">Casa Batlló</a></li><li class="toc-item"><a href="#barcelona_casa_mila">Casa Milà (La Pedrera)</a></li><li class="toc-item"><a href="#barcelona_columbus_monument">Columbus Monument</a></li><li class="toc-item"><a href="#barcelona_cosmo_caixa_barcelona">CosmoCaixa Barcelona</a></li><li class="toc-item"><a href="#barcelona_hospital_sant_pau">Hospital de Sant Pau</a></li><li class="toc-item"><a href="#barcelona_hotel_w_barcelona">Hotel W Barcelona</a></li><li class="toc-item"><a href="#barcelona_la_boqueria">La Boqueria Market</a></li><li class="toc-item"><a href="#barcelona_pdfband_3_b44a8b72">Llagrimes negres</a></li><li class="toc-item"><a href="#barcelona_llotja_de_la_mar_barcelona">Llotja de la Mar (Barcelona)</a></li><li class="toc-item"><a href="#barcelona_magic_fountain_montjuic">Magic Fountain of Montjuïc</a></li><li class="toc-item"><a href="#barcelona_monastery_pedralbes">Monastery of Pedralbes</a></li><li class="toc-item"><a href="#barcelona_montjuic_castle">Montjuïc Castle</a></li><li class="toc-item"><a href="#barcelona_mnac_palau_nacional">Museu Nacional d&#x27;Art de Catalunya (MNAC)</a></li><li class="toc-item"><a href="#barcelona_palau_de_la_musica">Palau de la Música Catalana</a></li><li class="toc-item"><a href="#barcelona_palau_guell">Palau Güell</a></li><li class="toc-item"><a href="#barcelona_parc_de_la_ciutadella">Parc de la Ciutadella</a></li><li class="toc-item"><a href="#barcelona_parc_del_laberint">Parc del Laberint d&#x27;Horta</a></li><li class="toc-item"><a href="#barcelona_park_guell">Park Güell</a></li><li class="toc-item"><a href="#barcelona_picasso_museum_barcelona">Picasso Museum</a></li><li class="toc-item"><a href="#barcelona_placa_catalunya">Plaça de Catalunya</a></li><li class="toc-item"><a href="#barcelona_port_vell">Port Vell</a></li><li class="toc-item"><a href="#barcelona_santa_maria_del_mar">Santa Maria del Mar</a></li><li class="toc-item"><a href="#barcelona_sagrat_cor_tibidabo">Tibidabo Expiatory Church</a></li><li class="toc-item"><a href="#barcelona_torre_glories">Torre Glòries</a></li></ol></nav>
 <section class="place" id="barcelona_arc_de_triomf">
+<div class="place-lead">
 <h3>Arc de Triomf</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Passeig Lluís Companys | Style: Neo-Mudéjar | Period: 1887–1888</p>
-<figure class="place-fig"><img src="../images/barcelona_arc_de_triomf.jpg" alt="Arc de Triomf"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/barcelona_arc_de_triomf.jpg" alt="Arc de Triomf" width="1280" height="957" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/barcelona_arc_de_triomf_b.jpg" alt="Arc de Triomf — view 2" width="330" height="248" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Arc de Triomf is Barcelona&#x27;s iconic monumental arch, standing at the entrance to Parc de la Ciutadella. It was constructed for the Universal Exposition of 1888 and remains a symbol of Catalonia’s cultural heritage. Brick Mudejar-inspired arch built as the 1888 fair main gate—now a promenade to the Ciutadella. It stands approximately 34 meters high and 26 meters wide. Its design features intricate stone carvings depicting scenes from Catalan history and culture. The structure has four arches, each representing different aspects of Catalonian identity. After its completion, the arch served as a ceremonial gateway for state visits and military parades. Today, it serves as a popular gathering point during festivals and special events. Bicycle rentals cluster at the nearby park edge. Morning side-light sculptures read crisply.</p>
 <p class="prose">Built between 1887 and 1888 as part of preparations for the International Exhibition, the Arc de Triomf was originally intended to commemorate Spain&#x27;s colonial victories. Designed by architect Francisco del Villar y Córdoba, it combines neoclassical and Art Nouveau elements, showcasing the fusion of traditional Spanish architecture with modernist influences. Architect Josep Vilaseca i Casanovas used neo-Moorish brick patterning. Visiting the Arc de Triomf offers a glimpse into Barcelona&#x27;s rich historical and artistic legacy, making it a must-see landmark for anyone exploring the city. Skaters, buskers, and cyclists thread beneath daily.</p></div>
 </section>
 <section class="place" id="barcelona_cathedral">
+<div class="place-lead">
 <h3>Barcelona Cathedral</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Pla de la Seu, Gothic Quarter | Style: Catalan Gothic / historicist façade | Period: 1298–1460</p>
-<figure class="place-fig"><img src="../images/barcelona_cathedral.jpg" alt="Barcelona Cathedral"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/barcelona_cathedral.jpg" alt="Barcelona Cathedral" width="1067" height="1600" style="height: 201px; max-height: 201px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/barcelona_cathedral_b.jpg" alt="Barcelona Cathedral — view 2" width="330" height="144" style="height: 201px; max-height: 201px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Sitting majestically on Barcelona&#x27;s Plaza de la Seo, the Barcelona Cathedral is a soaring testament to Gothic architecture and religious devotion. Its twin towers dominate the skyline, offering panoramic views of the city&#x27;s historic core. Neo-Gothic main front above a 13th–15th-century Gothic nave with geese in the cloister. Construction began in 1298 under King James II of Aragon. The cathedral&#x27;s twin towers are among the tallest in Spain at 50 meters high. It houses the tomb of Saint Ramon de Penyafort, a prominent medieval scholar and saint. Its facade includes sculptures depicting scenes from the life of Jesus Christ. Regular services and concerts take place within the cathedral, making it an active spiritual center. Dress respectfully; choir times vary. Lift to roof offers tight city vistas on selected tickets.</p>
 <p class="prose">Dedicated to Saint Eulàlia; façade completion belongs to the 19th century. A must-visit for its stunning architectural details and historical significance, the Barcelona Cathedral offers a glimpse into the city&#x27;s rich cultural heritage. Liturgical heart of the old city beside narrow lanes.</p></div>
 </section>
 <section class="place" id="barcelona_barceloneta_beach">
+<div class="place-lead">
 <h3>Barceloneta Beach</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Ciutat Vella waterfront | Style: Urban beachfront</p>
-<figure class="place-fig"><img src="../images/barcelona_barceloneta_beach.jpg" alt="Barceloneta Beach"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/barcelona_barceloneta_beach.jpg" alt="Barceloneta Beach" width="1280" height="851" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/barcelona_barceloneta_beach_b.jpg" alt="Barceloneta Beach — view 2" width="330" height="247" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Barceloneta Beach is a picturesque urban beach located on the eastern shore of Barcelona, offering a vibrant mix of sunbathers, surfers, and families enjoying its golden sands and crystal-clear waters. Sandy city beach beside a grid of low fishermen&#x27;s blocks turned nightlife strip. It features a long stretch of sandy coastline with gentle waves perfect for swimming and surfing. The beach is surrounded by colorful buildings, cafes, and restaurants that create a lively seaside ambiance. Barceloneta is known for its annual Fira de Santa Madrona festival, celebrated in mid-July each year. Located near popular attractions such as the Port Vell marina and Columbus Monument, making it easily accessible for visitors. Its name derives from the Catalan word &#x27;barcelonès,&#x27; meaning &#x27;little Barcelona.&#x27;. Lockers and showers dot the boardwalk. August sun is fierce—shade is scarce on the sand.</p>
 <p class="prose">Originally developed as a working-class neighborhood during the late 19th century, Barceloneta has evolved into one of Barcelona&#x27;s most iconic beaches. It was once home to fishermen and dock workers but now attracts tourists and locals alike for its lively atmosphere and proximity to the city center. 18th-century planned neighbourhood; Olympic-era promenade upgrades reshaped dunes. This beach is significant because it represents both the historical roots and modern charm of Barcelona, blending traditional fishing culture with contemporary leisure activities. Swim, run, or watch winter waves without leaving the city core.</p></div>
 </section>
 <section class="place" id="barcelona_basilica_de_la_merce">
+<div class="place-lead">
 <h3>Basilica of La Mercè</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: neo-Gothic | Period: 1865–1888</p>
-<figure class="place-fig"><img src="../images/barcelona_basilica_de_la_merce.jpg" alt="Basilica of La Mercè"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/barcelona_basilica_de_la_merce.jpg" alt="Basilica of La Mercè" width="1280" height="960" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/barcelona_basilica_de_la_merce_b.jpg" alt="Basilica of La Mercè — view 2" width="330" height="247" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Basilica of La Mercè is a majestic neo-Gothic cathedral located on Montjuïc hill, offering panoramic views over Barcelona and its harbor. Completed in 1888 after nearly two decades of construction, it stands as one of the city&#x27;s most iconic landmarks. It was consecrated as a minor basilica in 1907. Its interior features elaborate carvings and statues depicting scenes from the life of Mary, patron saint of Barcelona. The basilica hosts important religious ceremonies and concerts throughout the year. Montjuïc hill provides a picturesque setting for the basilica, with a view stretching across Barcelona&#x27;s modern district and old town. During the annual festival, fireworks illuminate the night sky above the basilica.</p>
 <p class="prose">Built between 1865 and 1888, the basilica was designed by architect Francisco del Villar y Lozano in the neo-Gothic style. It served as a symbol of Catalan identity during the late 19th century, representing both religious devotion and cultural pride. The basilica&#x27;s soaring spires and intricate stained-glass windows make it a testament to Catalonia’s rich architectural heritage. Visitors come to experience the basilica&#x27;s breathtaking architecture and to witness the annual Fiesta de la Mercè festival, which draws thousands of locals and tourists each September.</p></div>
 </section>
 <section class="place" id="barcelona_santa_maria_del_pi">
+<div class="place-lead">
 <h3>Basilica of Santa Maria del Pi</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Catalan-Gothic | Period: 1326–late 18th century</p>
-<figure class="place-fig"><img src="../images/barcelona_santa_maria_del_pi.jpg" alt="Basilica of Santa Maria del Pi"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/barcelona_santa_maria_del_pi.jpg" alt="Basilica of Santa Maria del Pi" width="1280" height="960" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/barcelona_santa_maria_del_pi_b.jpg" alt="Basilica of Santa Maria del Pi — view 2" width="330" height="440" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Basilica of Santa Maria del Pi is a prominent Gothic cathedral located in Barcelona&#x27;s historic district, offering visitors a blend of solemnity and beauty. Construction began in 1326 and continued until the late 18th century. It houses the tomb of Jaume Ferrà i Forns, a renowned architect. The basilica has three naves with a choir loft above the main altar. Its façade includes sculptures representing various saints and biblical figures. Visitors can ascend to the bell tower for panoramic city views.</p>
 <p class="prose">Built between the 14th and 18th centuries, the basilica reflects the evolution of Catalan-Gothic architecture. It was originally constructed as a parish church dedicated to Saint Mary of the Wood, later elevated to basilica status by Pope Pius XI in 1907. Its most notable feature is the central nave, which features intricate carvings and stained glass windows depicting scenes from the Bible. A must-visit for its historical significance and architectural elegance, the basilica offers stunning interiors and breathtaking views of Barcelona’s Old Town.</p></div>
 </section>
 <section class="place" id="barcelona_sagrada_familia">
+<div class="place-lead">
 <h3>Basilica of the Sagrada Família</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Carrer de Mallorca, Eixample | Style: Modernisme / organic Gothic | Period: began in 1882, ongoing construction</p>
-<figure class="place-fig"><img src="../images/barcelona_sagrada_familia.jpg" alt="Basilica of the Sagrada Família"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/barcelona_sagrada_familia.jpg" alt="Basilica of the Sagrada Família" width="1077" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/barcelona_sagrada_familia_b.jpg" alt="Basilica of the Sagrada Família — view 2" width="330" height="431" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Antoni Gaudí&#x27;s iconic masterpiece, the Basilica of the Sagrada Familia, is one of Barcelona’s most celebrated landmarks. This breathtakingly intricate church combines Gothic and Art Nouveau elements to create a uniquely Catalan style. Antoni Gaudí&#x27;s unfinished basilica—forest-like columns, nativity façade stone, and cranes that signal ongoing work. Construction began in 1882 but remains ongoing. It is the largest unfinished Roman Catholic church in the world. Gaudí’s designs feature more than 18,000 pieces of handcrafted stained glass. The basilica includes 18 towers representing Jesus Christ and the twelve apostles. Visitors can climb the towers for panoramic views of Barcelona. Timed tickets sell out; book well ahead. Passion façade reads cooler and more austere than the nativity side.</p>
 <p class="prose">Begun in 1882 by Francisco de Paula del Villar y Lozano, construction was later taken over by Antoni Gaudí in 1883. Gaudí dedicated his life to completing the project until his death in 1926, leaving it unfinished. Today, under the guidance of the Fundació la Sagrada Família, work continues on this ambitious project. Construction began in 1882; Gaudí directed the project from 1883 until his death in 1926. The Sagrada Familia is significant for its architectural innovation and religious significance, showcasing Gaudí’s visionary approach to design. UNESCO site and the city&#x27;s most recognisable silhouette; towers slowly reach completion.</p></div>
 </section>
 <section class="place" id="barcelona_bunkers_carmel_barcelona">
+<div class="place-lead">
 <h3>Bunkers del Carmel</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Period: 1940s</p>
-<figure class="place-fig"><img src="../images/barcelona_bunkers_carmel_barcelona.jpg" alt="Bunkers del Carmel"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/barcelona_bunkers_carmel_barcelona_b.jpg" alt="Bunkers del Carmel" width="330" height="497"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Perched high above Barcelona&#x27;s bustling streets, Bunkers del Carmel offers a breathtaking panorama of the Catalan capital and its iconic landmarks such as Montjuïc and Sagrada Familia. This former military outpost has been transformed into one of the city&#x27;s most popular vantage points. The site was once used by Spanish soldiers to monitor enemy aircraft approaching the city. Today, visitors can explore restored underground tunnels and gun emplacements. Guided tours are available, offering insights into the historical significance of the location. Located on Mount Carmel, it provides a bird’s eye view of Barcelona’s harbor and surrounding neighborhoods. It is accessible via cable car from nearby Ciutadella Park.</p>
 <p class="prose">Originally constructed during World War II to defend against air raids, these bunkers served as part of Spain’s coastal defense system. After decades of disuse, they were renovated and opened to the public in the early 2000s, providing visitors with stunning views of the cityscape below. Visit Bunkers del Carmel for unparalleled views of Barcelona’s urban landscape and architectural treasures.</p></div>
 </section>
 <section class="place" id="barcelona_camp_nou">
+<div class="place-lead">
 <h3>Camp Nou Stadium</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Les Corts | Style: 20th-century stadium architecture | Period: 1957</p>
-<figure class="place-fig"><img src="../images/barcelona_camp_nou.jpg" alt="Camp Nou Stadium"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/barcelona_camp_nou.jpg" alt="Camp Nou Stadium" width="1280" height="720" style="height: 259px; max-height: 259px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/barcelona_camp_nou_b.jpg" alt="Camp Nou Stadium — view 2" width="330" height="190" style="height: 259px; max-height: 259px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Camp Nou is the iconic home of FC Barcelona and one of Europe&#x27;s largest football stadiums. Completed in 1957, it has hosted countless international matches, including Champions League finals and major tournaments. FC Barcelona&#x27;s immense stadium—facade tours and museum exhibits even on non-match days. It is the largest football stadium in Europe with a maximum capacity exceeding 99,000 people. The stadium is known for its distinctive white-and-red design inspired by traditional Catalonian architecture. Since its opening, Camp Nou has been the permanent home of FC Barcelona, a globally renowned club. Inaugurated as Estadi del FC Barcelona, it was renamed Camp Nou in 1959 after a fan campaign. Camp Nou has hosted numerous significant events such as UEFA Champions League Finals and international friendlies. Match-day access differs from tour tickets. Metro near ground gets packed before kick-off.</p>
 <p class="prose">Built in 1957, Camp Nou was designed by architects Enric Miralles i Serra and Josep Suñol. Originally seating around 80,000 spectators, it underwent several expansions to reach its current capacity of over 99,000 seats. The stadium became a symbol of Catalan identity and football excellence, hosting legendary matches and world-class performances. Opened 1957; redevelopment plans cycle with club finance headlines. A must-visit for football enthusiasts and those interested in architectural marvels, Camp Nou offers breathtaking views and a unique atmosphere. Mecca for football culture; expect emotional crowds.</p></div>
 </section>
 <section class="place" id="barcelona_casa_amatller_barcelona">
+<div class="place-lead">
 <h3>Casa Amatller</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Art Nouveau | Period: 1904</p>
-<figure class="place-fig"><img src="../images/barcelona_casa_amatller_barcelona.jpg" alt="Casa Amatller"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/barcelona_casa_amatller_barcelona.jpg" alt="Casa Amatller" width="1200" height="1600" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/barcelona_casa_amatller_barcelona_b.jpg" alt="Casa Amatller — view 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Casa Amatller is a historic pastry shop and café located on Barcelona&#x27;s Rambla de Catalunya, known for its luxurious interiors and traditional Spanish pastries. Established in 1904. Designed by Josep Puig i Cadafalch. Renowned for its traditional Spanish pastries. Located at the heart of Barcelona’s Rambla de Catalunya. Art Nouveau style interior.</p>
 <p class="prose">Built in 1904 by architect Josep Puig i Cadafalch, Casa Amatller was originally designed as a private residence but later converted into a café and bakery. It quickly became a popular meeting spot for artists, intellectuals, and locals alike, renowned for its exquisite pastries such as the iconic trifles and tortes. A must-visit for food lovers and architecture enthusiasts, Casa Amatller showcases Art Nouveau influences with intricate details and elegant decorations.</p></div>
 </section>
 <section class="place" id="barcelona_casa_batllo">
+<div class="place-lead">
 <h3>Casa Batlló</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Passeig de Gràcia | Style: Modernisme | Period: 1904–1906</p>
-<figure class="place-fig"><img src="../images/barcelona_casa_batllo.jpg" alt="Casa Batlló"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/barcelona_casa_batllo.jpg" alt="Casa Batlló" width="1280" height="830" style="height: 299px; max-height: 299px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/barcelona_casa_batllo_b.jpg" alt="Casa Batlló — view 2" width="330" height="221" style="height: 299px; max-height: 299px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Casa Batlló is a stunning Art Nouveau masterpiece perched on Barcelona&#x27;s Passeig de Gràcia, designed by Antoni Gaudí and completed between 1904 and 1906. Dragon-scale roof, bone-like columns, and shimmering blue tiles—Gaudí&#x27;s remodel of a bourgeois house. Designed by famed architect Antoni Gaudí, who also created La Sagrada Familia and Park Güell. The facade includes colorful ceramic tiles inspired by marine life and natural forms. Its distinctive roofline is often likened to a dragon&#x27;s backbone due to its scaly texture and undulating shape. Inside, visitors can explore the lavishly decorated living spaces filled with whimsical details and sculptural furniture. It was restored in the late 20th century to preserve its original beauty. Night illuminations change façade readings. Compare neighbours Domènech i Montaner and Puig i Cadafalch facades.</p>
 <p class="prose">Completed during the height of Barcelona’s modernist movement, Casa Batlló was originally commissioned as a private residence for wealthy industrialist Josep Batlló i Matameu. The building features unique architectural elements such as undulating façades, intricate ceramic tiles, and a dramatic skylight roof that resembles a dragon&#x27;s spine. 1904–1906 renovation for the Batlló family on the Block of Discord. Visitors come to Casa Batlló to experience its dazzling interior design, vibrant colors, and the fusion of traditional Catalan craftsmanship with Gaudí’s innovative vision. Interior volumes and light wells reward an audioguide visit.</p></div>
 </section>
 <section class="place" id="barcelona_casa_mila">
+<div class="place-lead">
 <h3>Casa Milà (La Pedrera)</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Passeig de Gràcia | Style: Modernisme | Period: 1906–1910</p>
-<figure class="place-fig"><img src="../images/barcelona_casa_mila.jpg" alt="Casa Milà (La Pedrera)"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/barcelona_casa_mila.jpg" alt="Casa Milà (La Pedrera)" width="1280" height="997" style="height: 347px; max-height: 347px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/barcelona_casa_mila_b.jpg" alt="Casa Milà (La Pedrera) — view 2" width="330" height="248" style="height: 347px; max-height: 347px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Designed by Antoni Gaudí and completed in 1910, Casa Milà, also known as La Pedrera, is a unique example of Catalan Modernism. Located on Passeig de Gràcia, it stands out with its undulating façade and dramatic roofscape. Stone quarry wave façade, attic catenary arches, and warrior chimneys on the roof. It is considered one of the masterpieces of Catalan Modernism. The interior features intricate details and innovative construction techniques. Its undulating facade resembles waves of rock formations. The roof terrace provides panoramic views of Barcelona. Casa Milà has been designated a UNESCO World Heritage Site. Evening jazz on the roof runs seasonally. The building still mixes private flats with exhibition space.</p>
 <p class="prose">Built between 1906 and 1910 for the wealthy industrialist Pere Milà i Clavé, Casa Milà was one of Gaudí&#x27;s most innovative projects during his peak years. The building&#x27;s design incorporates organic forms inspired by nature, showcasing Gaudí’s characteristic use of curves and asymmetry. 1906–1912 apartment block for the Milà family; UNESCO-listed with other Gaudí works. A must-visit landmark, Casa Milà offers visitors a glimpse into the artistic genius of Antoni Gaudí and his pioneering approach to architecture. Rooftop sculpture garden defines city postcards.</p></div>
 </section>
 <section class="place" id="barcelona_columbus_monument">
+<div class="place-lead">
 <h3>Columbus Monument</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Portal de la Pau, end of La Rambla | Style: Historicist monument | Period: 1888</p>
-<figure class="place-fig"><img src="../images/barcelona_columbus_monument.jpg" alt="Columbus Monument"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/barcelona_columbus_monument.jpg" alt="Columbus Monument" width="499" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--row-sized"><img src="../images/barcelona_columbus_monument_b.jpg" alt="Columbus Monument — view 2" width="330" height="541" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Columbus Monument, also known as the Colón Monument, is a prominent landmark located on Barcelona&#x27;s harborfront, designed to commemorate Christopher Columbus and his discovery of America. Completed in 1888 for the Universal Exposition, it stands as a testament to Spain’s maritime heritage. Iron column pointing seaward—1888 exposition memorial to Columbus, elevator optional. Completed in 1888 for the Barcelona World Fair, it showcases Spain’s significant contributions to global exploration. The monument is made of white Carrara marble, which contrasts sharply against the blue waters of Port Vell. It is situated at the end of the popular Rambla de Mar promenade, making it easily accessible to tourists and locals alike. In addition to being a tourist attraction, the area around the monument serves as a hub for cultural events and celebrations. The statue of Columbus is crowned by a bronze globe representing the world he discovered. Views from the top compete with mast clutter in the harbour. Surrounding traffic is heavy day and night.</p>
 <p class="prose">Constructed during the late 19th century, the monument was built to honor the explorer who sailed under Spanish flags and opened new trade routes across the Atlantic Ocean. Designed by architect Enric Sagnier, its imposing marble structure features a statue of Columbus pointing towards the horizon, symbolizing his visionary spirit and pioneering journeys. Marks Barcelona&#x27;s maritime prestige and World&#x27;s Fair ambition. Visiting the Columbus Monument offers a chance to appreciate the city&#x27;s rich historical connections with exploration and maritime culture. Pivot between Rambla crowds, Drassanes, and the port.</p></div>
 </section>
 <section class="place" id="barcelona_cosmo_caixa_barcelona">
+<div class="place-lead">
 <h3>CosmoCaixa Barcelona</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Modernist, incorporating elements of sustainability and eco-conscious design. | Period: 2003</p>
-<figure class="place-fig"><img src="../images/barcelona_cosmo_caixa_barcelona.jpg" alt="CosmoCaixa Barcelona"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/barcelona_cosmo_caixa_barcelona.jpg" alt="CosmoCaixa Barcelona" width="1280" height="850" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/barcelona_cosmo_caixa_barcelona_b.jpg" alt="CosmoCaixa Barcelona — view 2" width="330" height="220" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">CosmoCaixa Barcelona is a world-class science museum and interactive zoo, showcasing nature&#x27;s wonders through engaging exhibits and educational programs. It houses over 4,000 animals representing various ecosystems. The building uses renewable energy sources like solar panels and rainwater recycling systems. Exhibits include dinosaurs, marine life, and tropical forests. Interactive displays allow visitors to participate in experiments and simulations. CosmoCaixa offers regular workshops, lectures, and family-oriented events.</p>
 <p class="prose">Opened in 2003, CosmoCaixa was designed by architects Rafael Moneo and Eduard Solà-Morales to promote environmental awareness and scientific education. It stands as one of the most innovative eco-friendly buildings in Europe, featuring sustainable architecture and green technologies. Visitors can explore habitats from around the globe, learn about biodiversity, and engage with hands-on activities that inspire curiosity and understanding of the natural world.</p></div>
 </section>
 <section class="place" id="barcelona_hospital_sant_pau">
+<div class="place-lead">
 <h3>Hospital de Sant Pau</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Carrer de Sant Antoni Maria Claret | Style: Modernisme | Period: 1902–1930</p>
-<figure class="place-fig"><img src="../images/barcelona_hospital_sant_pau.jpg" alt="Hospital de Sant Pau"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/barcelona_hospital_sant_pau.jpg" alt="Hospital de Sant Pau" width="1280" height="853" style="height: 285px; max-height: 285px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/barcelona_hospital_sant_pau_b.jpg" alt="Hospital de Sant Pau — view 2" width="330" height="204" style="height: 285px; max-height: 285px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Situated on the outskirts of Barcelona&#x27;s old town, Hospital de Sant Pau is a breathtaking example of Catalan Modernism. Designed by Lluís Domènech i Montaner and completed in 1930, it was originally built as a hospital for lepers and later transformed into a mental health facility. Domènech i Montaner&#x27;s modernist hospital pavilions—tile domes, gardens, and stained corridors. Designed by architect Lluís Domènech i Montaner, who also created the Palau de la Música Catalana. The site was designated a UNESCO World Heritage Site in 2000. It houses the Museum of Sacred Art, showcasing religious artifacts and artworks. Its gardens feature beautiful flora and are open to the public for leisurely strolls. Today, it serves as a cultural center and museum. Allow time to walk between pavilion courts. Combine with Recinte Modernista routing maps.</p>
 <p class="prose">Constructed between 1902 and 1930, the complex includes several buildings featuring elaborate façades decorated with intricate ceramics, stained glass, and sculptures. Its unique design combines elements of Gothic Revival and Art Nouveau styles, showcasing the brilliance of Catalonia’s architectural heritage. Early 20th-century expansion of medieval charity healthcare; restoration opened tourism routes. Visitors come to admire its exquisite architecture and detailed craftsmanship, making it one of Barcelona&#x27;s most iconic landmarks. UNESCO ensemble rival to the more famous Gaudí trail.</p></div>
 </section>
 <section class="place" id="barcelona_hotel_w_barcelona">
+<div class="place-lead">
 <h3>Hotel W Barcelona</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Contemporary | Period: 2018</p>
-<figure class="place-fig"><img src="../images/barcelona_hotel_w_barcelona.jpg" alt="Hotel W Barcelona"/></figure>
+<figure class="place-fig place-fig--hi-res"><img src="../images/barcelona_hotel_w_barcelona.jpg" alt="Hotel W Barcelona" width="1280" height="836"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Perched high above the vibrant streets of Barcelona&#x27;s Eixample district, Hotel W Barcelona is a modern oasis that seamlessly blends luxury with urban chic. Its striking design and contemporary aesthetic make it one of the city&#x27;s most iconic hotels. Located on Carrer dels Assaonadors, the hotel boasts panoramic views of Montjuïc and the Mediterranean Sea. Its interior design features sleek lines, minimalist aesthetics, and vibrant hues inspired by local art and culture. Guests can enjoy dining at its rooftop restaurant, which offers breathtaking views of Barcelona’s skyline. The hotel also includes a state-of-the-art fitness center and spa facilities for relaxation and wellness. It serves as a hub for social gatherings and business meetings, making it an ideal venue for both leisure travelers and corporate clients.</p>
 <p class="prose">Opened in 2018, Hotel W Barcelona has quickly become a symbol of the city&#x27;s dynamic and cosmopolitan spirit. Designed by renowned architect Rafael Moneo, the hotel showcases innovative architecture and luxurious interiors, offering guests unparalleled views of the cityscape. Hotel W Barcelona offers visitors a unique experience, combining stylish accommodations with exceptional service and world-class amenities.</p></div>
 </section>
 <section class="place" id="barcelona_la_boqueria">
+<div class="place-lead">
 <h3>La Boqueria Market</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: La Rambla | Style: 19th-century iron market hall | Period: 1840</p>
-<figure class="place-fig"><img src="../images/barcelona_la_boqueria.jpg" alt="La Boqueria Market"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/barcelona_la_boqueria.jpg" alt="La Boqueria Market" width="1280" height="903" style="height: 325px; max-height: 325px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/barcelona_la_boqueria_b.jpg" alt="La Boqueria Market — view 2" width="330" height="247" style="height: 325px; max-height: 325px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">La Boqueria is one of Barcelona&#x27;s most iconic and vibrant markets, famous for its colorful displays of fresh produce, seafood, meats, and local crafts. Located in the heart of the Born neighborhood, it attracts both locals and tourists alike. Iron-and-glass market hall packed with fruit stacks, jamón legs, and juice counters. It features over 80 stalls selling everything from fruits and vegetables to cheeses, meats, and seafood. The market is known for its elaborate decorations during special occasions like Christmas and Easter. Visitors can find unique handmade items such as ceramics, leather goods, and traditional textiles. Locals often gather here for socializing and enjoying tapas with friends. It&#x27;s also home to several popular restaurants where diners can sample innovative dishes prepared with ingredients sourced directly from the market. Watch bags—crowded pinch points attract pickpockets. Some stalls close Monday mornings.</p>
 <p class="prose">Founded in 1840, La Boqueria was originally a small open-air market but later moved indoors to protect vendors and customers from weather conditions. Over time, it became a hub for culinary innovation and cultural exchange, showcasing the best of Catalan cuisine and regional products. Present structure from the 19th century atop older trading grounds. A must-visit for anyone interested in experiencing authentic Spanish food culture and artisanal craftsmanship. Sensory overload best early before tour groups pack the aisles.</p></div>
 </section>
-<section class="place" id="barcelona_pdfband_3_b44a8b72">
+<section class="place" id="barcelona_llagrimes_negres">
+<div class="place-lead">
 <h3>Llagrimes negres</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: See official visitor information.</p>
-<figure class="place-fig"><img src="../images/barcelona_pdfband_3_b44a8b72.jpg" alt="Llagrimes negres"/></figure>
+<figure class="place-fig place-fig--hi-res"><img src="../images/barcelona_llagrimes_negres.jpg" alt="Llagrimes negres" width="1280" height="960"/></figure>
+</div>
 </section>
 <section class="place" id="barcelona_llotja_de_la_mar_barcelona">
+<div class="place-lead">
 <h3>Llotja de la Mar (Barcelona)</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Catalan-Gothic with Moorish influences | Period: 1401–1477</p>
-<figure class="place-fig"><img src="../images/barcelona_llotja_de_la_mar_barcelona.jpg" alt="Llotja de la Mar (Barcelona)"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/barcelona_llotja_de_la_mar_barcelona.jpg" alt="Llotja de la Mar (Barcelona)" width="1280" height="704" style="height: 254px; max-height: 254px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/barcelona_llotja_de_la_mar_barcelona_b.jpg" alt="Llotja de la Mar (Barcelona) — view 2" width="330" height="296" style="height: 254px; max-height: 254px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Llotja de la Mar, a UNESCO World Heritage Site, is one of Barcelona&#x27;s most iconic landmarks and historical monuments. It was originally built as a trading center for merchants during the late Gothic era. It was designated a UNESCO World Heritage Site in 1998. Its interior features elaborate stonework and carved wooden ceilings. The building has undergone several restorations over the centuries to preserve its original beauty. Today it houses various exhibitions and cultural events. Located on the Rambla del Carme, it offers panoramic views of the city.</p>
 <p class="prose">Constructed between 1401 and 1477, the Llotja de la Mar served as a hub for maritime trade and commerce in medieval Barcelona. Its intricate architecture reflects Catalan-Gothic style with Moorish influences, showcasing the city&#x27;s rich cultural heritage. Visitors come to appreciate its unique architectural design and historical significance as a symbol of Barcelona’s vibrant past.</p></div>
 </section>
 <section class="place" id="barcelona_magic_fountain_montjuic">
+<div class="place-lead">
 <h3>Magic Fountain of Montjuïc</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Avinguda Maria Cristina, Montjuïc | Style: Art Deco hydraulics | Period: 1929</p>
-<figure class="place-fig"><img src="../images/barcelona_magic_fountain_montjuic.jpg" alt="Magic Fountain of Montjuïc"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/barcelona_magic_fountain_montjuic.jpg" alt="Magic Fountain of Montjuïc" width="1280" height="960" style="height: 315px; max-height: 315px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/barcelona_magic_fountain_montjuic_b.jpg" alt="Magic Fountain of Montjuïc — view 2" width="330" height="225" style="height: 315px; max-height: 315px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">At night, the Magic Fountain of Montjuïc transforms into a dazzling spectacle, showcasing synchronized water jets and colorful lights set to music. Located on Barcelona&#x27;s iconic hilltop park, it is one of the city&#x27;s most celebrated attractions. Huge ornamental fountain with music-and-light shows in front of palatial fairground steps. The fountain features over 4,000 nozzles that create intricate patterns and shapes. It plays classical, pop, and contemporary music during performances. Each performance lasts approximately 20 minutes. The fountain operates daily except during inclement weather. In addition to nighttime shows, it hosts special events like New Year’s Eve celebrations. Arrive early for railing spots in summer. National Art Museum crowns the hill behind.</p>
 <p class="prose">Built for the 1929 International Exposition, the fountain was originally designed by architect Lluís Miralles i Campoverde. It underwent significant renovations in 1984, modernizing its technology and enhancing its visual impact. Built for the 1929 International Exposition; evening choreography restored for tourism. Visiting the Magic Fountain offers an unforgettable experience blending art, science, and entertainment. Free spectacle—check seasonal timetables.</p></div>
 </section>
 <section class="place" id="barcelona_monastery_pedralbes">
+<div class="place-lead">
 <h3>Monastery of Pedralbes</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Catalan-Gothic | Period: 1326</p>
-<figure class="place-fig"><img src="../images/barcelona_monastery_pedralbes.jpg" alt="Monastery of Pedralbes"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/barcelona_monastery_pedralbes.jpg" alt="Monastery of Pedralbes" width="1280" height="902" style="height: 284px; max-height: 284px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/barcelona_monastery_pedralbes_b.jpg" alt="Monastery of Pedralbes — view 2" width="330" height="203" style="height: 284px; max-height: 284px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Monastery of Santa María de Pedralbes is a serene and historical site nestled within Barcelona&#x27;s urban landscape. Founded by Queen Elisenda de Barcelon in the late 14th century, it stands as one of the city&#x27;s most significant examples of Gothic architecture. Founded in 1326 by Queen Elisenda de Barcelon. Secularized in 1907. Designated a UNESCO World Heritage Site in 1997. Features notable Gothic-style façade and interior. Houses collections of religious art and artifacts.</p>
 <p class="prose">Built during the reign of Queen Elisenda de Barcelon, the monastery was originally intended to serve as a royal burial ground for members of her family. It later became a convent where nuns lived and prayed until its secularization in the early 20th century. The structure reflects the intricate details typical of Catalan-Gothic style, showcasing exquisite carvings and stained glass windows. Visitors come here to appreciate the beauty of Catalonia’s architectural heritage and to experience the tranquility of this peaceful sanctuary amidst bustling city life.</p></div>
 </section>
 <section class="place" id="barcelona_montjuic_castle">
+<div class="place-lead">
 <h3>Montjuïc Castle</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Baroque | Period: late 17th century</p>
-<figure class="place-fig"><img src="../images/barcelona_montjuic_castle.jpg" alt="Montjuïc Castle"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/barcelona_montjuic_castle.jpg" alt="Montjuïc Castle" width="1280" height="387" style="height: 139px; max-height: 139px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/barcelona_montjuic_castle_b.jpg" alt="Montjuïc Castle — view 2" width="330" height="220" style="height: 139px; max-height: 139px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Perched high above Barcelona, Montjuïc Castle offers panoramic views of the city and harbor below. Built on a rocky hilltop, it is one of the most iconic landmarks in the region. It was originally built in 1640 by King Philip IV of Spain. The castle&#x27;s design incorporates elements of Baroque architecture. During World War II, the castle served as a prison for political prisoners. Today, visitors can tour the museum and enjoy exhibits related to military history and modern art. From the top of the castle, guests can see the entire city of Barcelona, including the famous Olympic Stadium.</p>
 <p class="prose">Originally constructed in the late 17th century as a fortress to defend against naval attacks, Montjuïc Castle has undergone numerous renovations over the centuries. It played a significant role during the Spanish Civil War and later became a museum showcasing military history and art collections. Visitors come here for breathtaking vistas and to explore its rich historical significance.</p></div>
 </section>
 <section class="place" id="barcelona_mnac_palau_nacional">
+<div class="place-lead">
 <h3>Museu Nacional d&#x27;Art de Catalunya (MNAC)</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Art Nouveau/neoclassical | Period: 1897</p>
-<figure class="place-fig"><img src="../images/barcelona_mnac_palau_nacional.jpg" alt="Museu Nacional d&#x27;Art de Catalunya (MNAC)"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/barcelona_mnac_palau_nacional.jpg" alt="Museu Nacional d&#x27;Art de Catalunya (MNAC)" width="1050" height="1400" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/barcelona_mnac_palau_nacional_b.jpg" alt="Museu Nacional d&#x27;Art de Catalunya (MNAC) — view 2" width="330" height="440" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Museu Nacional d&#x27;Art de Catalunya (MNAC), located on Montjuïc hill, is one of Barcelona&#x27;s most important cultural institutions and a key repository for the region’s artistic heritage. It boasts extensive collections spanning over eight centuries of Catalan art. The museum’s architecture style reflects Art Nouveau influences with neoclassical elements. Notable exhibits include the famous collection of Romanesque and Gothic sculptures. MNAC also features a notable contemporary art section showcasing contemporary Catalan artists. Its location on Montjuïc offers panoramic views of Barcelona.</p>
 <p class="prose">Established in 1897 as part of the World Fair celebrations, MNAC houses some of Spain’s finest art collections dating back to the Middle Ages. The museum underwent significant renovations during the late 20th century, reshaping its interior layout and showcasing masterpieces by artists such as Picasso, Dalí, and Miró. Visitors come here to explore Catalonia’s rich artistic legacy, including works from medieval cathedral treasuries, Renaissance paintings, and modernist masterpieces.</p></div>
 </section>
 <section class="place" id="barcelona_palau_de_la_musica">
+<div class="place-lead">
 <h3>Palau de la Música Catalana</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Carrer Palau de la Música | Style: Modernisme | Period: 1905–1908</p>
-<figure class="place-fig"><img src="../images/barcelona_palau_de_la_musica.jpg" alt="Palau de la Música Catalana"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/barcelona_palau_de_la_musica.jpg" alt="Palau de la Música Catalana" width="1280" height="800" style="height: 288px; max-height: 288px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/barcelona_palau_de_la_musica_b.jpg" alt="Palau de la Música Catalana — view 2" width="330" height="248" style="height: 288px; max-height: 288px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Palau de la Música Catalana is a stunningly beautiful concert hall and UNESCO World Heritage Site, showcasing Art Nouveau architecture at its finest. Lluís Domènech i Montaner&#x27;s flower-packed concert hall—stained glass, mosaics, and allegorical sculpture. It was constructed during the Modernisme movement, a Catalan version of Art Nouveau. Its interior features elaborate designs inspired by nature and traditional Catalonian motifs. The acoustics are renowned for their clarity and richness, making it ideal for musical performances. In 2005, it celebrated its centennial anniversary. It houses a permanent exhibition on the history of Catalan music. Photography rules change during rehearsals. The corner façade bursts with colour at midday sun.</p>
 <p class="prose">Built between 1905 and 1908, the Palau was designed by modernist architect Lluís Domènech i Montaner. It originally served as a venue for classical music performances and has since become one of Barcelona&#x27;s most iconic landmarks. Its intricate detailing, including stained glass windows, ceramic tiles, and ornate wooden ceilings, reflects the artistic flourishing of early 20th-century Catalonia. Built 1905–1908 for the Orfeó Català choral society. Visiting the Palau de la Música Catalana offers a unique opportunity to experience the fusion of art, music, and architecture in Barcelona’s vibrant cultural scene. UNESCO monument; guided tours when concerts pause.</p></div>
 </section>
 <section class="place" id="barcelona_palau_guell">
+<div class="place-lead">
 <h3>Palau Güell</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Carrer Nou de la Rambla | Style: Modernisme | Period: 1885–1890</p>
-<figure class="place-fig"><img src="../images/barcelona_palau_guell.jpg" alt="Palau Güell"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/barcelona_palau_guell.jpg" alt="Palau Güell" width="1067" height="1600" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/barcelona_palau_guell_b.jpg" alt="Palau Güell — view 2" width="330" height="247" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Antoni Gaudí&#x27;s whimsical masterpiece, Palau Güell, is a dazzling example of his unique Catalan Modernism style. Located on the hillside above Barcelona, it showcases intricate mosaics, vibrant colors, and organic forms that reflect Gaudí’s fascination with nature. Early Gaudí urban palace with dark façade and explosive rooftop chimneys overlooking the Raval. Designed by Antoni Gaudí, who later became famous for his work on Sagrada Familia. The building was constructed using local materials like terracotta, stone, and ceramics. It includes an impressive garden filled with exotic plants and statues. Palau Güell is one of the earliest examples of Gaudí’s use of curvilinear forms and asymmetry. Today, it serves as both a museum and cultural center. Roof visit is short but memorable. Rambla proximity means tourist density at the door.</p>
 <p class="prose">Built between 1885 and 1890 for Eusebi Güell, a wealthy industrialist, Palau Güell was originally intended as a country villa. It features elaborate façades, arches, and domes inspired by Islamic architecture and natural elements such as plants and animals. The interior boasts stunning ceramic tiles, stained glass windows, and sculptures created by Gaudí himself. Built 1886–1890 for industrialist Eusebi Güell; UNESCO-listed. Visitors come to admire its innovative design, blending traditional Spanish craftsmanship with avant-garde artistic expression. Central hall and attic catenary lines foreshadow later masterworks.</p></div>
 </section>
 <section class="place" id="barcelona_parc_de_la_ciutadella">
+<div class="place-lead">
 <h3>Parc de la Ciutadella</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
-<p class="place-meta">Address: Ciutat Vella edge | Style: 19th-century civic park | Period: mid-19th century</p>
-<figure class="place-fig"><img src="../images/barcelona_parc_de_la_ciutadella.jpg" alt="Parc de la Ciutadella"/></figure>
+<p class="place-meta">Location: Ciutat Vella edge | Style: 19th-century civic park | Period: mid-19th century</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/barcelona_parc_de_la_ciutadella.jpg" alt="Parc de la Ciutadella" width="1059" height="1600" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/barcelona_parc_de_la_ciutadella_b.jpg" alt="Parc de la Ciutadella — view 2" width="330" height="247" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Parc de la Ciutadella is a charming urban park nestled within Barcelona&#x27;s historic center. Originally built as the site of the city&#x27;s fortress and military barracks, it was later transformed into a peaceful green oasis filled with lush gardens, sculptures, and historical monuments. Former fortress grounds with boating lake, palm alleys, zoo corner, and ornate cascade monument. It hosts the annual Flower Show, one of Europe’s largest floral exhibitions. The park features several notable sculptures by renowned artists like Josep Llimona. Visitors can explore the Botanical Garden, home to over 4,000 plant species. Located near the Park Güell, it offers stunning views of the city and Mount Tibidabo. The park played host to the Universal Exposition of 1888. Barcelona Zoo occupies part of the grounds. Mammoth statue surprises first-time visitors near the lake.</p>
 <p class="prose">Originally constructed during the mid-19th century, the Parc de la Ciutadella served as the location for Barcelona&#x27;s military citadel and barracks. After Spain&#x27;s defeat in the Spanish-American War, the area was converted into a public park in 1888, showcasing grandiose architectural elements and reflecting the city&#x27;s ambitions to become a modern European capital. Park opened after the 1888 fair; parliament building sits in the old arsenal. A must-visit for its beautiful scenery, cultural significance, and iconic landmarks such as the Font Mància fountain and the Museum of Zoology. Lazy picnics and street music on weekends.</p></div>
 </section>
 <section class="place" id="barcelona_parc_del_laberint">
+<div class="place-lead">
 <h3>Parc del Laberint d&#x27;Horta</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Period: late 19th century</p>
-<figure class="place-fig"><img src="../images/barcelona_parc_del_laberint.jpg" alt="Parc del Laberint d&#x27;Horta"/></figure>
+<figure class="place-fig place-fig--hi-res"><img src="../images/barcelona_parc_del_laberint.jpg" alt="Parc del Laberint d&#x27;Horta" width="1280" height="857"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Perched on the outskirts of Barcelona&#x27;s vibrant cityscape, Parc del Laberint d&#x27;Horta is a serene oasis where nature meets artistry. This charming park, nestled amidst lush greenery and winding paths, offers visitors a unique experience with its intricate maze, designed to challenge both young and old alike. The labyrinth consists of over 4,000 plants arranged in a complex geometric pattern. Visitors can also enjoy scenic walks through the park’s flower gardens and ponds. It hosts annual events such as music festivals and art exhibitions. Located near the Guinardó Hill, it offers panoramic views of Barcelona’s rooftops and surrounding landscapes. The park remains open year-round, offering respite from busy city life.</p>
 <p class="prose">Originally created as part of the Horta district&#x27;s agricultural heritage, Parc del Laberint d&#x27;Horta was transformed into a public park in the late 19th century. The labyrinth itself, meticulously crafted by landscape architect Josep Fontserè i Roca, opened in 1875, showcasing his innovative design that combines horticulture and architecture. Over time, the park has evolved, becoming a beloved destination for locals and tourists seeking tranquility amid urban bustle. A must-visit for anyone exploring Barcelona&#x27;s hidden gems, Parc del Laberint d&#x27;Horta provides a peaceful escape while showcasing the city&#x27;s rich historical and cultural legacy.</p></div>
 </section>
 <section class="place" id="barcelona_park_guell">
+<div class="place-lead">
 <h3>Park Güell</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
-<p class="place-meta">Address: Gràcia / Carmel hill | Style: Modernisme / landscape | Period: 1900–1914</p>
-<figure class="place-fig"><img src="../images/barcelona_park_guell.jpg" alt="Park Güell"/></figure>
+<p class="place-meta">Location: Gràcia / Carmel hill | Style: Modernisme / landscape | Period: 1900–1914</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/barcelona_park_guell.jpg" alt="Park Güell" width="1280" height="965" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/barcelona_park_guell_b.jpg" alt="Park Güell — view 2" width="330" height="247" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Perched high above Barcelona&#x27;s rooftops, Park Güell is a whimsical masterpiece designed by the Catalan architect Antoni Gaudí. Completed between 1900 and 1914, it was originally intended as a residential development for wealthy patrons but remained largely unfinished due to financial constraints. Gaudí-planned garden city fragment with mosaic lizard, hypostyle hall, and serpentine benches over Barcelona. Designed by Antoni Gaudí during his most prolific years. The park spans approximately 17 acres (6.9 hectares). It includes the famous &#x27;Salvador&#x27; mosaic bench depicting religious scenes. Visitors can explore the labyrinthine pathways lined with flora typical of Mediterranean gardens. Located on the hillside overlooking the city center. Entry slots limit crowding on the central zone. Free surrounding paths still offer views without a ticket.</p>
 <p class="prose">Commissioned by Eusebi Guell, a prominent industrialist, Park Güell showcases Gaudí’s unique vision of organic forms inspired by nature. The park features iconic elements such as colorful ceramic tiles, intricate ironwork, and sculptural benches that blend seamlessly with the natural landscape. Eusebi Güell&#x27;s early-1900s estate park opened to public use after housing failed to sell. A UNESCO World Heritage Site since 2005, Park Güell offers breathtaking views of Barcelona and serves as a testament to Gaudí&#x27;s genius and innovative use of materials. Panoramic viewpoint and introduction to trencadís tilework.</p></div>
 </section>
 <section class="place" id="barcelona_picasso_museum_barcelona">
+<div class="place-lead">
 <h3>Picasso Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Modernist</p>
-<figure class="place-fig"><img src="../images/barcelona_picasso_museum_barcelona.jpg" alt="Picasso Museum"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/barcelona_picasso_museum_barcelona.jpg" alt="Picasso Museum" width="1280" height="960" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/barcelona_picasso_museum_barcelona_b.jpg" alt="Picasso Museum — view 2" width="330" height="300" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Picasso Museum is a must-visit for art lovers and history enthusiasts alike. Located in the heart of Barcelona&#x27;s bohemian district, it showcases Pablo Picasso’s works spanning his early years to his later masterpieces. It houses more than 4,000 pieces by Picasso, including paintings, sculptures, ceramics, drawings, and prints. The museum features permanent exhibits as well as temporary exhibitions showcasing new works by contemporary artists inspired by Picasso. Palau Guell, the building that now houses the museum, was designed by Antoni Gaudí, another famous Catalan architect. The museum offers guided tours led by experts who provide insight into Picasso’s life and work. There are also educational programs aimed at children and families.</p>
 <p class="prose">Founded in 1968, the museum was originally housed in the historic Casas del Buen Consejo, which had been built in the late 18th century. It moved to its current location at the former Palau Guell in 1974, where it remains today. The museum has become one of Barcelona’s most iconic cultural institutions. Visiting the Picasso Museum allows visitors to explore the evolution of Picasso’s artistic style over time.</p></div>
 </section>
 <section class="place" id="barcelona_placa_catalunya">
+<div class="place-lead">
 <h3>Plaça de Catalunya</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
-<p class="place-meta">Address: Centre, hub of axes | Style: Urban monumental square | Period: late 19th century</p>
-<figure class="place-fig"><img src="../images/barcelona_placa_catalunya.jpg" alt="Plaça de Catalunya"/></figure>
+<p class="place-meta">Location: Centre, hub of axes | Style: Urban monumental square | Period: late 19th century</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/barcelona_placa_catalunya.jpg" alt="Plaça de Catalunya" width="1280" height="960" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/barcelona_placa_catalunya_b.jpg" alt="Plaça de Catalunya — view 2" width="330" height="494" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">At the heart of Barcelona lies Plaça de Catalunya, a vibrant hub where the city&#x27;s past and present converge. This iconic square is surrounded by modernist buildings, including the majestic Palau Sant Jordi, designed by Antoni Gaudí&#x27;s disciple Lluís Domènech i Muntaner. Large square sewing Eixample grid to the old city&#x27;s mouth—pigeons, fountains, department stores. The square is located at the intersection of Avinguda de les Corts Catalanes and Gran Via de les Cortes Catalanes. It features elegant Art Nouveau facades and ornate street lamps inspired by traditional Catalan design. Palau de la Generalitat, home to the regional government, overlooks the square. Each year, the square hosts numerous festivals and events celebrating Catalonian culture. Nearby, you&#x27;ll find the Museum of Catalan History, showcasing artifacts that trace the region&#x27;s historical evolution. Underground passages connect multiple lines. Evening skate and music culture energises the periphery.</p>
 <p class="prose">Built during the late 19th century as part of Barcelona&#x27;s urban renewal efforts, Plaça de Catalunya has been central to the city&#x27;s social life since its inception. It was originally named Plaça del Comte d&#x27;Urgell but later renamed to reflect Catalonia&#x27;s cultural identity. Today, it remains one of the most significant gathering places for locals and tourists alike. Laid out in urban expansion plans; metro interchange beneath. A must-visit for anyone exploring Barcelona, Plaça de Catalunya offers a glimpse into the city&#x27;s rich architectural heritage and serves as a lively meeting point for all. Default meeting point for metro, airport buses, and protests alike.</p></div>
 </section>
 <section class="place" id="barcelona_port_vell">
+<div class="place-lead">
 <h3>Port Vell</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Waterfront old harbour | Style: Late 20th-century waterfront renewal | Period: late 1980s to early 1990s</p>
-<figure class="place-fig"><img src="../images/barcelona_port_vell.jpg" alt="Port Vell"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/barcelona_port_vell.jpg" alt="Port Vell" width="1280" height="378" style="height: 136px; max-height: 136px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/barcelona_port_vell_b.jpg" alt="Port Vell — view 2" width="330" height="310" style="height: 136px; max-height: 136px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Port Vell is a picturesque waterfront district located at the heart of Barcelona&#x27;s old port. It serves as both a vibrant hub for locals and tourists alike, offering scenic views, cafes, shops, and recreational activities. Maremagnum bridges, yacht moorings, and boardwalks between city and sea. It houses one of Europe’s largest marinas with over 700 moorings. The area includes several restaurants and bars with outdoor seating offering panoramic sea views. A popular attraction is the Palau de la Musica Catalana, which can be seen from Port Vell. Located near the famous Las Ramblas, it provides easy access to the city&#x27;s main attractions. In recent years, Port Vell has undergone further development, including new pedestrian zones and green spaces. Aquarium building anchors one mole. Cruise ships dwarf older sailboats at peak season.</p>
 <p class="prose">Originally constructed during the late 1980s to early 1990s, Port Vell was part of the urban renewal project aimed at revitalizing Barcelona&#x27;s harbor area. The modern design by architect Ricardo Bofill features a mix of commercial spaces, residential areas, and leisure facilities. Olympic-era redesign turned industrial docks into leisure quays. Visitors come here to enjoy the charming atmosphere, explore the marina, and stroll along the promenade overlooking the Mediterranean Sea. Evening strolls with gull noise and cable-car views to Montjuïc.</p></div>
 </section>
 <section class="place" id="barcelona_santa_maria_del_mar">
+<div class="place-lead">
 <h3>Santa Maria del Mar</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Plaça de Santa Maria, La Ribera | Style: Catalan Gothic | Period: 1329–1383</p>
-<figure class="place-fig"><img src="../images/barcelona_santa_maria_del_mar.jpg" alt="Santa Maria del Mar"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/barcelona_santa_maria_del_mar.jpg" alt="Santa Maria del Mar" width="1280" height="1474" style="height: 267px; max-height: 267px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/barcelona_santa_maria_del_mar_b.jpg" alt="Santa Maria del Mar — view 2" width="330" height="191" style="height: 267px; max-height: 267px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Sitting majestically on Barcelona&#x27;s waterfront, Santa Maria del Mar is a breathtaking Gothic cathedral known for its striking simplicity and light-filled interior. Completed in the late 14th century, it stands as one of the city&#x27;s most iconic landmarks. Single-nave Catalan Gothic basilica built by medieval shipwright guild stone-by-stone. Completed in 1383 after nearly fifty years of construction. Designed by architect Jaume Fruger i Cuní. Features a distinctive octagonal apse and a single nave without side aisles. Renowned for its natural light flooding through the high clerestory windows. Located near the port district, offering panoramic views of the Mediterranean. Rose window geometry rewards binocular detail. Evening organ concerts possible—check schedules.</p>
 <p class="prose">Built between 1329 and 1383 during the reign of King James II, Santa Maria del Mar was designed by architect Jaume Fruger i Cuní. The cathedral&#x27;s construction coincided with Barcelona’s golden age, when the city flourished under royal patronage. Its simple yet elegant design reflects Catalonia&#x27;s unique architectural style, blending elements of both Romanesque and Gothic architecture. Consecrated in the 1300s; clean proportions emphasize height over clutter. Visitors come to Santa Maria del Mar to experience its serene atmosphere and appreciate the exquisite craftsmanship of its intricate stained-glass windows and marble altar. Filming favourite for vaulted silence minutes from craft boutiques.</p></div>
 </section>
 <section class="place" id="barcelona_sagrat_cor_tibidabo">
+<div class="place-lead">
 <h3>Tibidabo Expiatory Church</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Tibidabo hill | Style: Historicist church on summit | Period: 1898–1901</p>
-<figure class="place-fig"><img src="../images/barcelona_sagrat_cor_tibidabo.jpg" alt="Tibidabo Expiatory Church"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/barcelona_sagrat_cor_tibidabo.jpg" alt="Tibidabo Expiatory Church" width="1028" height="1600" style="height: 375px; max-height: 375px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/barcelona_sagrat_cor_tibidabo_b.jpg" alt="Tibidabo Expiatory Church — view 2" width="330" height="268" style="height: 375px; max-height: 375px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Sitting atop the highest point of Montjuïc hill at 512 meters above sea level, the Tibidabo Expiatory Church offers a breathtaking view over Barcelona and its surrounding areas. Completed between 1898 and 1901, it was designed by architect Francisco del Villar y Lozano. Neo-Gothic church and statue crowning an amusement park ridgeline over the city. The church is constructed in neo-Gothic style with a distinctive tower resembling a medieval castle. It features intricate stained glass windows depicting scenes from the life of Jesus Christ. Inside, visitors can find sculptures and frescoes created by renowned artists such as Josep Maria Jujol. On clear days, one can see all the way to the Mediterranean Sea from the top of the hill. Adjacent to the church stands the Mirador dels Airets observatory, offering additional vistas. Fog can erase the panorama—check weather. Ride wristbands are separate from church entry.</p>
 <p class="prose">Built during the late 19th century as part of the Expiation movement following the 1881 assassination of Spanish king Alfonso XII, the church was intended to serve as a symbol of penitence and national mourning. Its construction coincided with Barcelona&#x27;s transformation into a modern industrial metropolis, and the structure itself became an iconic landmark of Catalonia’s cultural identity. Early 20th-century temple completion after decades of fundraising. Visitors come here for both its architectural beauty and panoramic views, which extend far across the cityscape. Funicular and vintage tram links make the ascent part of the fun.</p></div>
 </section>
 <section class="place" id="barcelona_torre_glories">
+<div class="place-lead">
 <h3>Torre Glòries</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Plaça de les Glòries | Style: Contemporary skyscraper | Period: 1996–1999</p>
-<figure class="place-fig"><img src="../images/barcelona_torre_glories.jpg" alt="Torre Glòries"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/barcelona_torre_glories.jpg" alt="Torre Glòries" width="646" height="1600" style="height: 231px; max-height: 231px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/barcelona_torre_glories_b.jpg" alt="Torre Glòries — view 2" width="330" height="165" style="height: 231px; max-height: 231px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Located at the heart of Barcelona&#x27;s Eixample district, Torre Glòries is a striking modernist tower that dominates the skyline and serves as a symbol of urban renewal. Bullet-shaped high-rise by Jean Nouvel—night LED skin and water features at its base. Completed in 1999, it became one of the tallest buildings in Barcelona upon its opening. The tower houses offices, residential units, and commercial spaces. Its distinctive spiral form was inspired by the nearby Rambla dels Estudis park and reflects the city’s historical connection with gardens and open spaces. It features a rooftop terrace offering breathtaking vistas of Montjuïc mountain and the Mediterranean Sea. Torre Glòries has become a prominent landmark within Barcelona’s urban landscape. Dusk colour cycles are a photo ritual. Compare silhouette views from diagonal avenues.</p>
 <p class="prose">Constructed between 1996 and 1999, Torre Glòries was designed by noted Catalan architect Jordi Llinàs to complement the city&#x27;s existing architectural heritage while introducing a contemporary aesthetic. The tower stands out for its unique design featuring large glass panels and a distinctive spiral shape, which allows natural light to flood interior spaces. Opened 2005 as Torre Agbar; rebranded; tech and hotel uses shifted over time. Visitors should see Torre Glòries for its innovative architecture and panoramic views overlooking Barcelona’s vibrant cityscape. Anchor of the Glòries district renewal beside Design Museum and Encants market.</p></div>
 </section>

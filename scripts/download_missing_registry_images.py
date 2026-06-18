@@ -16,6 +16,7 @@ from scripts.city_guide_jerusalem_style_images import (
     add_download_image_args,
     download_jerusalem_style_images,
 )
+from scripts.city_guide_core import DOWNLOAD_FROZEN_CITY_SLUGS
 from scripts.city_guide_naming import is_pdf_filler_slug
 from scripts.city_guide_title_heraldry_assets import (
     title_page_assets_for_download_arg,
@@ -70,6 +71,7 @@ def _download_city(city_slug: str, args: argparse.Namespace) -> int:
         title_page_assets=title_assets,
         args=args,
         url_is_whitelisted_fn=wl.url_is_whitelisted,
+        city_slug=city_slug,
     )
 
 
@@ -100,7 +102,9 @@ def main() -> int:
     for slug, _mod, _attr in _REGISTRY:
         if want and slug not in want:
             continue
-        if slug in ("smolensk", "spb"):
+        if slug in DOWNLOAD_FROZEN_CITY_SLUGS:
+            continue
+        if slug == "smolensk":
             continue
         code = _download_city(slug, args)
         if code:

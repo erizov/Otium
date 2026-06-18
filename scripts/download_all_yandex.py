@@ -42,6 +42,7 @@ _GUIDES = [
     ("cemeteries", "Cemetery", "moscow.data.cemeteries", "CEMETERIES", None),
     ("landmarks", "Landmark", "moscow.data.landmarks", "LANDMARKS", None),
     ("cafes", "Cafe", "moscow.data.cafes", "CAFES", None),
+    ("osobnjaki", "Mansion", "moscow.data.osobnjaki", "OSOBNJAKI", None),
 ]
 
 

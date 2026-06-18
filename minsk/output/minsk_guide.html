@@ -13,7 +13,7 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
 .otium-logo { font-family: 'Cormorant Garamond', serif; font-size: 2.15rem;
   font-weight: 600; letter-spacing: 0.18em; margin-bottom: 0.85rem; }
 .otiump { margin: 0.42rem 0; line-height: 1.42; text-align: justify;
-  max-width: 38rem; font-size: 0.95rem; }
+  font-size: 0.95rem; }
 .guide-title { page-break-after: auto; margin-bottom: 0.55rem;
   page-break-inside: avoid; }
 .historical-reference { margin: 0.75rem 0 1.15rem;
@@ -63,22 +63,96 @@ ol.trip-stops a:hover { text-decoration: underline; }
 .heraldry-univ-caption { font-size: 0.52rem; line-height: 1.18;
   margin: 0.12rem 0 0; padding: 0 0.06rem; color: #252525;
   text-align: center; font-weight: 500; }
-.heraldry-motto { text-align: center; max-width: 18rem; margin: 0.18rem auto;
+.heraldry-motto { text-align: center; margin: 0.18rem auto;
   width: 100%; }
 .motto-line { font-family: 'Cormorant Garamond', serif; font-size: 1rem;
   margin: 0; color: #333; line-height: 1.35; }
 .guide-title h1.guide-title-main { font-family: 'Cormorant Garamond', serif;
   font-size: 2.35rem; margin-bottom: 0.5rem; font-weight: 600; }
 .lead { color: #444; font-size: 1.05rem; }
-.guide-toc { margin: 0.85rem 0 1.15rem; page-break-inside: avoid; }
-.guide-toc h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.28rem;
-  font-weight: 600; margin: 0.4rem 0 0.55rem; }
+
+.guide-toc { page-break-before: always; break-before: page;
+  page-break-after: always; break-after: page;
+  margin: 0; padding: 0.2rem 0 0.45rem; page-break-inside: auto; }
+.guide-toc h2 { font-family: 'Cormorant Garamond', serif;
+  font-size: 1.28rem; font-weight: 600; margin: 0.4rem 0 0.55rem; }
 .guide-toc ol { margin: 0.35rem 0 0.65rem 1.25rem; padding: 0;
   columns: 2; column-gap: 1.5rem; }
 .guide-toc li { margin: 0.18rem 0; line-height: 1.35;
   font-size: 0.88rem; break-inside: avoid; }
-.guide-toc a { color: #1a5276; text-decoration: none; }
+.guide-toc a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.guide-toc a:hover { color: #0d3d56; }
 .guide-toc li.toc-item--sub { font-size: 0.82rem; margin-left: 0.35rem; }
+.toc-back { font-size: 0.78rem; margin: 0 0 0.35rem; text-align: right; }
+.toc-back a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.toc-back a:hover { color: #0d3d56; }
+.place, .historical-reference, .guide-primer, .guide-trip-plans {
+  scroll-margin-top: 1.25rem; }
+.historical-reference h2, .guide-primer h2, .guide-trip-plans h2,
+.chapter-head h2, .place-lead h3 { position: relative; }
+.guide-toc + .place, .guide-toc + .chapter-head {
+  page-break-before: avoid; break-before: avoid-page; }
+.place-lead { page-break-inside: avoid; break-inside: avoid-page;
+  page-break-after: auto; }
+.place-lead > h3 { page-break-after: avoid; break-after: avoid-page; }
+.place-lead > .place-meta { page-break-after: avoid; break-after: avoid-page; }
+
+.place-fig { page-break-inside: avoid; break-inside: avoid-page;
+  margin: 0.5rem 0 1rem; }
+.place-fig img {
+  page-break-inside: avoid; break-inside: avoid-page;
+  max-height: 48vh; width: auto; max-width: 100%;
+  object-fit: contain; margin-left: auto; margin-right: auto; }
+.place-fig--hi-res img { max-height: 52vh; }
+.place-fig--lo-res img { max-height: 30vh; }
+.place-pdf-fig-row {
+  display: flex; flex-direction: row; flex-wrap: wrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.45rem 0.55rem; margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row .place-fig {
+  flex: 1 1 30%; margin: 0; min-width: 26%; max-width: 100%; }
+.place-pdf-fig-row .place-fig img {
+  width: auto; max-width: 100%; height: auto; max-height: 44vh;
+  object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--pair {
+  flex-wrap: nowrap; justify-content: space-between;
+  align-items: flex-end; gap: 0.5rem 0.65rem; }
+.place-pdf-fig-row--pair .place-fig {
+  flex: 1 1 47%; min-width: 0; max-width: 50%;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--pair .place-fig img {
+  max-height: 44vh; object-fit: contain; }
+.place-pdf-fig-row--pair .place-fig--hi-res img { max-height: 50vh; }
+.place-pdf-fig-row--pair .place-fig--lo-res img { max-height: 26vh; }
+.place-pdf-fig-rows-stack {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple {
+  display: flex; flex-direction: row; flex-wrap: nowrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.4rem 0.48rem; margin: 0;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--triple .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--triple .place-fig--hi-res img { max-height: 38vh; }
+.place-pdf-fig-row--triple .place-fig--lo-res img { max-height: 18vh; }
+.place-pdf-fig-row--many {
+  flex-wrap: nowrap; justify-content: center; align-items: flex-end;
+  gap: 0.35rem 0.42rem; }
+.place-pdf-fig-row--many .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--many .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+
+
 .place { margin-bottom: 2.2rem; page-break-inside: auto; }
 h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.22rem; margin: 1.2rem 0 0.35rem;
   font-weight: 600; }
@@ -90,7 +164,6 @@ h4 { font-family: 'Cormorant Garamond', serif; font-size: 0.95rem; text-transfor
   color: #555; font-size: 0.95rem; margin: 0 0 0.5rem; font-style: italic; }
 .place-meta { font-size: 0.92rem; color: #353535; margin: 0 0 0.75rem;
   line-height: 1.4; }
-.place-fig { margin: 0.5rem 0 1rem; }
 img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
 .prose, .place-desc p { margin: 0.45rem 0; line-height: 1.5;
   text-align: justify; }
@@ -110,11 +183,14 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <figure class="heraldry-fig heraldry-coat-book" title="Coat of arms of Minsk"><img src="../images/guide_coat_of_arms.svg" alt="Coat of arms of Minsk"/></figure>
 <figure class="heraldry-fig heraldry-coat-book" title="Flag of Minsk"><img src="../images/guide_flag.svg" alt="Flag of Minsk"/></figure>
 </div></div><h1 class="guide-title-main">Minsk</h1><p class="lead">Guide. Places in this edition: 34.</p></header>
+<nav class="guide-toc" id="guide-toc" aria-label="Contents"><h2>Contents</h2><ol><li class="toc-item"><a href="#guide-historical">Historical overview</a></li><li class="toc-item"><a href="#guide-trips">Trip ideas</a></li><li class="toc-item"><a href="#minsk_catholic_cathedral">Archcathedral of the Blessed Virgin Mary</a></li><li class="toc-item"><a href="#minsk_national_history">Belarusian History Museum</a></li><li class="toc-item"><a href="#minsk_belarusian_state_circus">Belarusian State Circus</a></li><li class="toc-item"><a href="#minsk_chelyuskinites">Chelyuskinites Park</a></li><li class="toc-item"><a href="#minsk_all_saints">Church of All Saints</a></li><li class="toc-item"><a href="#minsk_red_church">Church of Saints Simon and Helena</a></li><li class="toc-item"><a href="#minsk_sts_peter_paul">Church of Sts Peter and Paul</a></li><li class="toc-item"><a href="#minsk_drozdy">Drozdy reservoir</a></li><li class="toc-item"><a href="#minsk_gorky_park">Gorky Park</a></li><li class="toc-item"><a href="#minsk_war_museum">Great Patriotic War Museum</a></li><li class="toc-item"><a href="#minsk_holy_spirit_cathedral">Holy Spirit Cathedral</a></li><li class="toc-item"><a href="#minsk_independence_square">Independence Square</a></li><li class="toc-item"><a href="#minsk_island_tears">Island of Tears</a></li><li class="toc-item"><a href="#minsk_landmark_2">Minsk -</a></li><li class="toc-item"><a href="#minsk_aircraft_carrier">Minsk aircraft carrier</a></li><li class="toc-item"><a href="#minsk_minsk_arena">Minsk Arena</a></li><li class="toc-item"><a href="#minsk_landmark">Minsk Landmark</a></li><li class="toc-item"><a href="#minsk_mosque">Minsk mosque</a></li><li class="toc-item"><a href="#minsk_belarus_station">Minsk railway station</a></li><li class="toc-item"><a href="#minsk_city_gate">Minsk triumphal arch</a></li><li class="toc-item"><a href="#minsk_national_art_museum">National Art Museum</a></li><li class="toc-item"><a href="#minsk_national_library">National Library of Belarus</a></li><li class="toc-item"><a href="#minsk_opera_ballet">National Opera and Ballet</a></li><li class="toc-item"><a href="#minsk_new_minsk_mosque_p01">New Minsk mosque p01</a></li><li class="toc-item"><a href="#minsk_october_square">October Square</a></li><li class="toc-item"><a href="#minsk_kastrycnickaja">October Street</a></li><li class="toc-item"><a href="#minsk_palace_republic">Palace of the Republic</a></li><li class="toc-item"><a href="#minsk_sts_simon_helena">Red Church</a></li><li class="toc-item"><a href="#minsk_st_elizabeth">St Elizabeth Convent</a></li><li class="toc-item"><a href="#minsk_st_roch">St Roch church</a></li><li class="toc-item"><a href="#minsk_trinity_hill">Trinity Hill</a></li><li class="toc-item"><a href="#minsk_upper_town">Upper Town Minsk</a></li><li class="toc-item"><a href="#minsk_victory_square">Victory Square</a></li><li class="toc-item"><a href="#minsk_yakub_kolas">Yakub Kolas Square</a></li></ol></nav>
 <section class="historical-reference" id="guide-historical" aria-label="Historical overview"><h2>Historical overview</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 <p class="prose">Minsk is the capital of Belarus and its largest city on the Svislach River.</p>
 <p class="prose">Mentioned by the eleventh century, rebuilt after twentieth-century destruction, it is known for broad avenues and green wedges. Industry, technology, and national institutions define its present rhythm.</p>
 <p class="prose">The world wars and post-war reconstruction produced wide prospekty; independence after 1991 made Minsk the capital of a sovereign Belarus mixing manufacturing, IT, and multinational memory of the borderlands.</p></section>
 <section class="guide-trip-plans" id="guide-trips" aria-label="Trip ideas"><h2>Trip ideas</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 <article class="trip-plan" id="trip-1d"><h3>One day</h3>
 <p class="prose">A compact loop linking the strongest cards in this guide, ordered to minimise backtracking on foot.</p>
 <ol class="trip-stops"><li><a href="#minsk_chelyuskinites">Chelyuskinites Park</a> (~75min)</li>
@@ -142,265 +218,444 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <ol class="trip-stops"><li><a href="#minsk_war_museum">Great Patriotic War Museum</a> (~75min)</li>
 <li><a href="#minsk_sts_simon_helena">Red Church</a> (~75min)</li>
 <li><a href="#minsk_victory_square">Victory Square</a> (~75min)</li></ol></article></section>
-<nav class="guide-toc" aria-label="Contents"><h2>Contents</h2><ol><li class="toc-item"><a href="#guide-historical">Historical overview</a></li><li class="toc-item"><a href="#guide-trips">Trip ideas</a></li><li class="toc-item"><a href="#minsk_catholic_cathedral">Archcathedral of the Blessed Virgin Mary</a></li><li class="toc-item"><a href="#minsk_national_history">Belarusian History Museum</a></li><li class="toc-item"><a href="#minsk_belarusian_state_circus">Belarusian State Circus</a></li><li class="toc-item"><a href="#minsk_chelyuskinites">Chelyuskinites Park</a></li><li class="toc-item"><a href="#minsk_all_saints">Church of All Saints</a></li><li class="toc-item"><a href="#minsk_red_church">Church of Saints Simon and Helena</a></li><li class="toc-item"><a href="#minsk_sts_peter_paul">Church of Sts Peter and Paul</a></li><li class="toc-item"><a href="#minsk_drozdy">Drozdy reservoir</a></li><li class="toc-item"><a href="#minsk_gorky_park">Gorky Park</a></li><li class="toc-item"><a href="#minsk_war_museum">Great Patriotic War Museum</a></li><li class="toc-item"><a href="#minsk_holy_spirit_cathedral">Holy Spirit Cathedral</a></li><li class="toc-item"><a href="#minsk_independence_square">Independence Square</a></li><li class="toc-item"><a href="#minsk_island_tears">Island of Tears</a></li><li class="toc-item"><a href="#minsk_pdfband_15_91916483">Minsk -</a></li><li class="toc-item"><a href="#minsk_pdfband_4_91916483">Minsk aircraft carrier</a></li><li class="toc-item"><a href="#minsk_minsk_arena">Minsk Arena</a></li><li class="toc-item"><a href="#minsk_pdfband_2_7101e6f9">Minsk mosque</a></li><li class="toc-item"><a href="#minsk_belarus_station">Minsk railway station</a></li><li class="toc-item"><a href="#minsk_city_gate">Minsk triumphal arch</a></li><li class="toc-item"><a href="#minsk_national_art_museum">National Art Museum</a></li><li class="toc-item"><a href="#minsk_national_library">National Library of Belarus</a></li><li class="toc-item"><a href="#minsk_opera_ballet">National Opera and Ballet</a></li><li class="toc-item"><a href="#minsk_pdfband_0_29c5ad91">New Minsk mosque p01</a></li><li class="toc-item"><a href="#minsk_october_square">October Square</a></li><li class="toc-item"><a href="#minsk_kastrycnickaja">October Street</a></li><li class="toc-item"><a href="#minsk_palace_republic">Palace of the Republic</a></li><li class="toc-item"><a href="#minsk_sts_simon_helena">Red Church</a></li><li class="toc-item"><a href="#minsk_st_elizabeth">St Elizabeth Convent</a></li><li class="toc-item"><a href="#minsk_st_roch">St Roch church</a></li><li class="toc-item"><a href="#minsk_trinity_hill">Trinity Hill</a></li><li class="toc-item"><a href="#minsk_upper_town">Upper Town Minsk</a></li><li class="toc-item"><a href="#minsk_victory_square">Victory Square</a></li><li class="toc-item"><a href="#minsk_yakub_kolas">Yakub Kolas Square</a></li><li class="toc-item"><a href="#minsk_pdfband_1_2e13651f">МЦ1</a></li></ol></nav>
 <section class="place" id="minsk_catholic_cathedral">
+<div class="place-lead">
 <h3>Archcathedral of the Blessed Virgin Mary</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/minsk_catholic_cathedral.jpg" alt="Archcathedral of the Blessed Virgin Mary"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res"><img src="../images/minsk_catholic_cathedral.jpg" alt="Archcathedral of the Blessed Virgin Mary" width="330" height="440" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/minsk_catholic_cathedral_b.jpg" alt="Archcathedral of the Blessed Virgin Mary — view 2" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Archcathedral of the Blessed Virgin Mary, located in the heart of Minsk, is a stunning example of Gothic Revival architecture. This prominent Catholic cathedral serves as a spiritual center for the local community and is known for its striking twin spires and beautiful interior. Visitors can admire its intricate stained glass windows and participate in various religious services throughout the week. Founded in 1710 as a Jesuit church. Became a cathedral in 1991 with the establishment of the Diocese of Minsk-Mahilyow. Features Gothic Revival architecture with twin spires.</p>
 <p class="prose">The Archcathedral was founded in 1710 and has undergone several renovations and restorations since its inception. Originally built as a church for the Jesuits, it became a cathedral in 1991 when the Diocese of Minsk-Mahilyow was established. Key events in its history include the impact of World War II, during which the cathedral suffered damage, and its subsequent restoration in the post-war period. The Archcathedral holds cultural significance as a symbol of the Catholic faith in Belarus, particularly in a predominantly Orthodox country. It serves as a venue for important religious ceremonies and community gatherings, reflecting the traditions and heritage of the local Catholic population. The cathedral also plays a role in the broader cultural landscape of Minsk, attracting both pilgrims and tourists alike.</p></div>
 </section>
 <section class="place" id="minsk_national_history">
+<div class="place-lead">
 <h3>Belarusian History Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/minsk_national_history.jpg" alt="Belarusian History Museum"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/minsk_national_history.jpg" alt="Belarusian History Museum" width="1280" height="853" style="height: 210px; max-height: 210px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/minsk_national_history_b.jpg" alt="Belarusian History Museum — view 2" width="330" height="210" style="height: 210px; max-height: 210px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Belarusian History Museum in Minsk offers a comprehensive journey through the rich tapestry of Belarusian history, showcasing artifacts and exhibits that span from ancient times to the modern era. Visitors can explore the cultural heritage, significant events, and the evolution of the nation through various interactive displays and collections. The museum serves as a vital educational resource for both locals and tourists alike, highlighting the importance of preserving Belarus&#x27;s historical narrative. Established in 1957, the museum focuses on Belarusian history and culture. The museum features a wide range of artifacts, including archaeological finds, historical documents, and traditional crafts.</p>
 <p class="prose">The Belarusian History Museum was established in 1957, with the aim of collecting, preserving, and displaying the historical artifacts of Belarus. It has undergone several renovations and expansions over the years, enhancing its role as a key institution for historical education and research in the country. The museum plays a crucial role in fostering a sense of national identity and pride among Belarusians by highlighting significant cultural and historical milestones. It serves as a platform for understanding the complexities of Belarus&#x27;s past, including its struggles for independence and the impact of various political regimes. Through its exhibitions, the museum also reflects the cultural diversity and traditions of the Belarusian people.</p></div>
 </section>
 <section class="place" id="minsk_belarusian_state_circus">
+<div class="place-lead">
 <h3>Belarusian State Circus</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/minsk_belarusian_state_circus.jpg" alt="Belarusian State Circus"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/minsk_belarusian_state_circus.jpg" alt="Belarusian State Circus" width="1280" height="960" style="height: 220px; max-height: 220px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/minsk_belarusian_state_circus_b.jpg" alt="Belarusian State Circus — view 2" width="330" height="220" style="height: 220px; max-height: 220px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Belarusian State Circus in Minsk is a vibrant venue that showcases a variety of performances, including acrobatics, animal acts, and clown shows. With its unique architecture and lively atmosphere, it serves as a popular attraction for both locals and tourists. The circus is known for its commitment to preserving traditional circus arts while also embracing modern performances. Established in 1959. Located in the center of Minsk. Hosts a variety of performances including acrobatics and clown shows.</p>
 <p class="prose">The Belarusian State Circus was established in 1959, becoming a significant cultural institution in Minsk. It has undergone various renovations and expansions over the years, adapting to the changing tastes of audiences while maintaining its core mission of entertaining and showcasing circus arts. Culturally, the Belarusian State Circus plays a vital role in the artistic landscape of Minsk, contributing to the city&#x27;s heritage and entertainment scene. It reflects the traditions of circus performance in Belarus, fostering a sense of community and joy among its visitors. The circus also serves as a platform for local talent, helping to promote the arts within the region.</p></div>
 </section>
 <section class="place" id="minsk_chelyuskinites">
+<div class="place-lead">
 <h3>Chelyuskinites Park</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/minsk_chelyuskinites.jpg" alt="Chelyuskinites Park"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/minsk_chelyuskinites.jpg" alt="Chelyuskinites Park" width="1280" height="956" style="height: 194px; max-height: 194px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/minsk_chelyuskinites_b.jpg" alt="Chelyuskinites Park — view 2" width="330" height="194" style="height: 194px; max-height: 194px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Chelyuskinites Park is a serene green space in Minsk, ideal for leisurely strolls and family outings. With its picturesque landscapes, playgrounds, and recreational areas, it serves as a vibrant hub for both locals and visitors. The park is particularly popular during the warmer months, offering a peaceful retreat from the city&#x27;s hustle and bustle. Established in 1957. Named after the Chelyuskinites, Soviet explorers. Features playgrounds, walking paths, and recreational areas.</p>
 <p class="prose">Chelyuskinites Park was established in 1957 and named after the Chelyuskinites, a group of Soviet explorers who undertook significant Arctic expeditions. The park has undergone various renovations over the years, enhancing its appeal and accessibility to the public. Culturally, Chelyuskinites Park plays a vital role in the daily life of Minsk residents, serving as a venue for community events, festivals, and recreational activities. The park&#x27;s design and layout reflect the Soviet era&#x27;s emphasis on public spaces that promote social interaction and leisure.</p></div>
 </section>
 <section class="place" id="minsk_all_saints">
+<div class="place-lead">
 <h3>Church of All Saints</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/minsk_all_saints.jpg" alt="Church of All Saints"/></figure>
+<figure class="place-fig place-fig--hi-res"><img src="../images/minsk_all_saints.jpg" alt="Church of All Saints" width="1280" height="961"/></figure>
+</div>
 <div class="place-desc"><p class="prose">The Church of All Saints in Minsk is a striking example of modern ecclesiastical architecture, notable for its unique design and vibrant stained glass. This church serves as a spiritual center for the local community and is a popular site for both worship and cultural events. Visitors can admire its beautiful interior and participate in various religious activities throughout the year. Consecrated in 2009. Built to honor victims of political repression.</p>
 <p class="prose">The Church of All Saints was consecrated in 2009, making it one of the newer religious structures in Minsk. It was built to honor the memory of the victims of political repression in Belarus, reflecting the country&#x27;s complex historical narrative. Culturally, the Church of All Saints plays an important role in the daily lives of many Belarusians, serving as a gathering place for community events and religious ceremonies. It stands as a symbol of resilience and remembrance, contributing to the cultural heritage of Minsk. The church also reflects the broader religious landscape of Belarus, where Orthodox Christianity is predominant.</p></div>
 </section>
 <section class="place" id="minsk_red_church">
+<div class="place-lead">
 <h3>Church of Saints Simon and Helena</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: neoclassical | Period: late 19th century</p>
-<figure class="place-fig"><img src="../images/minsk_red_church.jpg" alt="Church of Saints Simon and Helena"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/minsk_red_church.jpg" alt="Church of Saints Simon and Helena" width="1280" height="848" style="height: 221px; max-height: 221px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/minsk_red_church_b.jpg" alt="Church of Saints Simon and Helena — view 2" width="330" height="247" style="height: 221px; max-height: 221px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Church of Saints Simon and Elena is a prominent Orthodox church located in the heart of Minsk&#x27;s historic center. Its neoclassical architecture, characterized by clean lines and symmetrical facades, stands out among neighboring buildings. Constructed in the late 1800s, the church underwent significant restoration work following WWII. It features elegant columns and a domed roof typical of neoclassical design. Inside, visitors can admire intricate frescoes depicting scenes from biblical narratives. The church offers regular services and occasional cultural events open to the public. Located near major landmarks such as the National Academic Theatre of Belarus.</p>
 <p class="prose">Built in the late 19th century, the church was originally dedicated to Saint Elena but later renamed after both saints, Simon and Elena. It served as a place of worship for local residents until it was partially destroyed during World War II. After the war, it was reconstructed and reopened to the community. Visitors come here to appreciate its architectural beauty and historical significance, as well as to experience the tranquility within its peaceful interior.</p></div>
 </section>
 <section class="place" id="minsk_sts_peter_paul">
+<div class="place-lead">
 <h3>Church of Sts Peter and Paul</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/minsk_sts_peter_paul.jpg" alt="Church of Sts Peter and Paul"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/minsk_sts_peter_paul.jpg" alt="Church of Sts Peter and Paul" width="1280" height="1055" style="height: 220px; max-height: 220px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/minsk_sts_peter_paul_b.jpg" alt="Church of Sts Peter and Paul — view 2" width="330" height="220" style="height: 220px; max-height: 220px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Church of Sts Peter and Paul, located in the heart of Minsk, is a striking example of Baroque architecture. This beautiful church serves as a spiritual center for the local community and is renowned for its intricate interior and serene atmosphere, making it a must-visit for both pilgrims and tourists alike. Founded in the early 17th century, completed in 1705. Underwent significant restoration after World War II. Represents Baroque architectural style.</p>
 <p class="prose">The Church of Sts Peter and Paul was founded in the early 17th century, with its construction completed in 1705. It has undergone several restorations over the years, particularly after suffering damage during World War II. The church has played a significant role in the religious life of Minsk and continues to be a focal point for the Catholic community. Culturally, the Church of Sts Peter and Paul is an important landmark in Minsk, reflecting the city&#x27;s rich architectural heritage. It is a site of regular worship and community gatherings, contributing to the daily life of its parishioners. The church also symbolizes the historical presence of Catholicism in Belarus, which has shaped the region&#x27;s cultural landscape.</p></div>
 </section>
 <section class="place" id="minsk_drozdy">
+<div class="place-lead">
 <h3>Drozdy reservoir</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/minsk_drozdy.jpg" alt="Drozdy reservoir"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/minsk_drozdy.jpg" alt="Drozdy reservoir" width="1280" height="1025" style="height: 247px; max-height: 247px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/minsk_drozdy_b.jpg" alt="Drozdy reservoir — view 2" width="330" height="247" style="height: 247px; max-height: 247px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Drozdy Reservoir is a picturesque spot located on the outskirts of Minsk, offering stunning views and a serene atmosphere. This popular recreational area is ideal for outdoor activities such as walking, cycling, and fishing, making it a favored destination for both locals and visitors. The surrounding nature and tranquil waters provide a perfect escape from the hustle and bustle of the city. The reservoir was built in the 1980s as part of a broader water management strategy. It covers an area of approximately 1.5 square kilometers.</p>
 <p class="prose">The Drozdy Reservoir was constructed in the late 20th century, primarily for flood control and as a water supply source for the city of Minsk. Over the years, it has evolved into a recreational area, attracting residents and tourists alike to its scenic shores. While primarily a recreational site, Drozdy Reservoir holds cultural significance for the people of Minsk, serving as a gathering place for families and friends. It reflects the city&#x27;s commitment to preserving green spaces and promoting outdoor activities, contributing to the quality of life in the urban environment.</p></div>
 </section>
 <section class="place" id="minsk_gorky_park">
+<div class="place-lead">
 <h3>Gorky Park</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/minsk_gorky_park.jpg" alt="Gorky Park"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/minsk_gorky_park_b.jpg" alt="Gorky Park" width="330" height="247"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Gorky Park (Central Children&#x27;s Park) in Minsk is a large riverside green space with paths, rides, and monuments, popular for walks along the Svislach.</p></div>
 </section>
 <section class="place" id="minsk_war_museum">
+<div class="place-lead">
 <h3>Great Patriotic War Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/minsk_war_museum.jpg" alt="Great Patriotic War Museum"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/minsk_war_museum.jpg" alt="Great Patriotic War Museum" width="1280" height="960" style="height: 247px; max-height: 247px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/minsk_war_museum_b.jpg" alt="Great Patriotic War Museum — view 2" width="330" height="247" style="height: 247px; max-height: 247px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Great Patriotic War Museum in Minsk is a poignant tribute to Belarus&#x27;s role in World War II, showcasing a vast collection of artifacts, exhibits, and multimedia presentations. Visitors can explore the museum&#x27;s extensive galleries that detail the harrowing experiences of the Belarusian people during the war, as well as the broader impact of the conflict on the nation. The museum serves as both an educational resource and a memorial, inviting reflection on the sacrifices made during this tumultuous period. The museum was officially opened on July 3, 2014. It features over 30,000 exhibits related to the Great Patriotic War. The museum is located near the historic Victory Square in Minsk.</p>
 <p class="prose">The Great Patriotic War Museum was established in 2014, commemorating the significant events of World War II, particularly the Eastern Front&#x27;s impact on Belarus. The museum&#x27;s foundation reflects the country&#x27;s dedication to preserving the memory of those who fought and suffered during the war, with a focus on the Battle of Stalingrad and the liberation of Belarus. Politically, the museum plays a crucial role in shaping national identity and memory regarding World War II, emphasizing Belarus&#x27;s struggle and resilience. Culturally, it serves as a vital repository of Belarusian heritage, showcasing the art and narratives that emerged from the war experience. The museum also fosters a sense of unity and remembrance among the populace, reinforcing traditions of honoring veterans and those lost during the conflict.</p></div>
 </section>
 <section class="place" id="minsk_holy_spirit_cathedral">
+<div class="place-lead">
 <h3>Holy Spirit Cathedral</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/minsk_holy_spirit_cathedral.jpg" alt="Holy Spirit Cathedral"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/minsk_holy_spirit_cathedral.jpg" alt="Holy Spirit Cathedral" width="1280" height="929" style="height: 242px; max-height: 242px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/minsk_holy_spirit_cathedral_b.jpg" alt="Holy Spirit Cathedral — view 2" width="330" height="447" style="height: 242px; max-height: 242px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Holy Spirit Cathedral in the Upper Town is Minsk&#x27;s principal Belarusian Orthodox church, rebuilt in the 18th century with baroque forms and a landmark white façade.</p></div>
 </section>
 <section class="place" id="minsk_independence_square">
+<div class="place-lead">
 <h3>Independence Square</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/minsk_independence_square.jpg" alt="Independence Square"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/minsk_independence_square.jpg" alt="Independence Square" width="1280" height="720" style="height: 187px; max-height: 187px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/minsk_independence_square_b.jpg" alt="Independence Square — view 2" width="330" height="220" style="height: 187px; max-height: 187px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Independence Square (Niezaležnasci) is the ceremonial centre of Minsk, linking the Red Church, government buildings, and major avenues through the post-war city core.</p></div>
 </section>
 <section class="place" id="minsk_island_tears">
+<div class="place-lead">
 <h3>Island of Tears</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/minsk_island_tears.jpg" alt="Island of Tears"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/minsk_island_tears.jpg" alt="Island of Tears" width="1280" height="857" style="height: 223px; max-height: 223px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/minsk_island_tears_b.jpg" alt="Island of Tears — view 2" width="330" height="247" style="height: 223px; max-height: 223px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Island of Tears is a poignant memorial located in the heart of Minsk, dedicated to the Belarusian soldiers who lost their lives in the Afghan War. Surrounded by the Svislach River, the site features a striking sculpture of grieving mothers and offers a serene space for reflection and remembrance. Visitors can explore the emotional depth of this landmark while enjoying the scenic views of the river and the city. The memorial was inaugurated in 1996. It commemorates Belarusian soldiers who died in the Soviet-Afghan War. The site features a sculpture of grieving mothers, symbolizing loss and remembrance.</p>
 <p class="prose">The Island of Tears was established in 1996 as a tribute to the Belarusian soldiers who perished during the Soviet-Afghan War from 1979 to 1989. The memorial was designed by architect Andrei Mikhailov and features a unique sculpture created by the artist Alesey Sokolov. The site has since become a significant place for commemorative events and gatherings. Politically, the Island of Tears serves as a reminder of the sacrifices made by Belarusian soldiers during a controversial conflict, reflecting the complexities of national identity and memory in Belarus. Culturally, it has become a site for mourning and remembrance, resonating with the collective grief of families and the nation. The memorial is also a focal point for discussions about war, peace, and the impact of conflict on society.</p></div>
 </section>
-<section class="place" id="minsk_pdfband_15_91916483">
+<section class="place" id="minsk_landmark_2">
+<div class="place-lead">
 <h3>Minsk -</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/minsk_pdfband_15_91916483.jpg" alt="Minsk -"/></figure>
+<figure class="place-fig"><img src="../images/minsk_landmark_2.jpg" alt="Minsk -" width="1140" height="847"/></figure>
+</div>
 </section>
-<section class="place" id="minsk_pdfband_4_91916483">
+<section class="place" id="minsk_aircraft_carrier">
+<div class="place-lead">
 <h3>Minsk aircraft carrier</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/minsk_pdfband_4_91916483.jpg" alt="Minsk aircraft carrier"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/minsk_aircraft_carrier.jpg" alt="Minsk aircraft carrier" width="1280" height="569" style="height: 148px; max-height: 148px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/minsk_aircraft_carrier_b.jpg" alt="Minsk aircraft carrier — view 2" width="330" height="221" style="height: 148px; max-height: 148px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Minsk — 1978 Kiev-class aircraft carrier.</p></div>
 </section>
 <section class="place" id="minsk_minsk_arena">
+<div class="place-lead">
 <h3>Minsk Arena</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Modern architecture with elements of postmodernism | Period: 2006–2008</p>
-<figure class="place-fig"><img src="../images/minsk_minsk_arena.jpg" alt="Minsk Arena"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/minsk_minsk_arena.jpg" alt="Minsk Arena" width="1280" height="960" style="height: 186px; max-height: 186px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/minsk_minsk_arena_b.jpg" alt="Minsk Arena — view 2" width="330" height="186" style="height: 186px; max-height: 186px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Located at the heart of Minsk, Minsk Arena is a multi-purpose sports and entertainment venue that has become one of the city&#x27;s most iconic landmarks. The arena can accommodate up to 14,700 spectators during large-scale events. It features two ice rinks, including one dedicated solely for figure skating competitions. Minsk Arena hosts regular home games for the national ice hockey team. Since its opening, the venue has hosted numerous high-profile international events, attracting top athletes and entertainers. Its unique design includes a retractable roof, showcasing innovative engineering.</p>
 <p class="prose">Built between 2006 and 2008, Minsk Arena was designed by architect Sergei Kireyev to host major sporting events such as ice hockey matches, concerts, and cultural performances. It quickly gained prominence for its modern architecture and state-of-the-art facilities, making it a hub for both local and international events. Visitors come here to witness world-class performances, whether it&#x27;s a thrilling hockey game, a concert by popular artists, or a vibrant cultural festival.</p></div>
 </section>
-<section class="place" id="minsk_pdfband_2_7101e6f9">
+<section class="place" id="minsk_landmark">
+<div class="place-lead">
+<h3>Minsk Landmark</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
+
+
+<figure class="place-fig place-fig--hi-res"><img src="../images/minsk_landmark.jpg" alt="Minsk Landmark" width="1280" height="878"/></figure>
+</div>
+</section>
+<section class="place" id="minsk_mosque">
+<div class="place-lead">
 <h3>Minsk mosque</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/minsk_pdfband_2_7101e6f9.jpg" alt="Minsk mosque"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/minsk_mosque.jpg" alt="Minsk mosque" width="1280" height="966" style="height: 252px; max-height: 252px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/minsk_mosque_b.jpg" alt="Minsk mosque — view 2" width="330" height="389" style="height: 252px; max-height: 252px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 </section>
 <section class="place" id="minsk_belarus_station">
+<div class="place-lead">
 <h3>Minsk railway station</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/minsk_belarus_station.jpg" alt="Minsk railway station"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/minsk_belarus_station.jpg" alt="Minsk railway station" width="1280" height="853" style="height: 220px; max-height: 220px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/minsk_belarus_station_b.jpg" alt="Minsk railway station — view 2" width="330" height="220" style="height: 220px; max-height: 220px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Minsk Railway Station serves as a vital transportation hub in the heart of the Belarusian capital, connecting the city to various domestic and international destinations. Its striking architecture and bustling atmosphere reflect the city&#x27;s vibrant energy, making it a key point of interest for travelers and locals alike. The station is not only a gateway to the city but also a symbol of Minsk&#x27;s growth and modernization. Inaugurated in 1873, the station has been a key transportation hub for over a century. The station underwent significant reconstruction in the 1950s to accommodate modern rail services.</p>
 <p class="prose">Minsk Railway Station was inaugurated in 1873, marking a significant development in the city&#x27;s transportation network. Originally built to facilitate trade and passenger movement, the station has undergone several renovations and expansions over the years, adapting to the increasing demands of rail travel. Key events in its history include its reconstruction in the 1950s and its role during various historical periods, including World War II. The station plays an important role in the daily life of Minsk residents, serving as a central point for commuting and travel. It has witnessed numerous political events, including protests and demonstrations, reflecting the city&#x27;s dynamic political landscape. Culturally, the station is a meeting point for people from various backgrounds, contributing to the rich tapestry of Belarusian society.</p></div>
 </section>
 <section class="place" id="minsk_city_gate">
+<div class="place-lead">
 <h3>Minsk triumphal arch</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/minsk_city_gate.jpg" alt="Minsk triumphal arch"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/minsk_city_gate.jpg" alt="Minsk triumphal arch" width="1280" height="1050" style="height: 273px; max-height: 273px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/minsk_city_gate_b.jpg" alt="Minsk triumphal arch — view 2" width="330" height="425" style="height: 273px; max-height: 273px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Minsk Triumph Arch, also known as the Minsk City Gate, is a striking landmark that symbolizes the city&#x27;s historical and cultural heritage. Erected in the mid-20th century, it serves as a gateway to the capital and a reminder of Belarus&#x27;s past. Visitors can admire its impressive architecture and the surrounding park, which offers a serene setting for relaxation and reflection. Constructed in 1957 as a tribute to World War II victories. Located at the entrance to the city center, serving as a prominent landmark.</p>
 <p class="prose">The Minsk Triumph Arch was constructed in 1957 to commemorate the victory of the Soviet Union in World War II. It was designed to celebrate the resilience and strength of the Belarusian people during the war and has since become an iconic feature of the city. The arch holds cultural significance as a symbol of national identity and pride, reflecting the historical narrative of Belarus. It stands as a reminder of the country&#x27;s tumultuous past and the sacrifices made during the war. The site is often used for public gatherings and ceremonies, reinforcing its role in contemporary civic life.</p></div>
 </section>
 <section class="place" id="minsk_national_art_museum">
+<div class="place-lead">
 <h3>National Art Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/minsk_national_art_museum.jpg" alt="National Art Museum"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/minsk_national_art_museum.jpg" alt="National Art Museum" width="1280" height="720" style="height: 187px; max-height: 187px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/minsk_national_art_museum_b.jpg" alt="National Art Museum — view 2" width="330" height="220" style="height: 187px; max-height: 187px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The National Art Museum in Minsk is a premier destination for art lovers, showcasing an extensive collection of Belarusian and international art. Housed in a striking building, the museum features a diverse array of exhibitions, from classical to contemporary works. Visitors can explore the rich artistic heritage of Belarus and enjoy various cultural events throughout the year. Established in 1939 as the Museum of Fine Arts. Current building completed in 1984. Houses over 30,000 works of art.</p>
 <p class="prose">The National Art Museum was established in 1939, originally as the Museum of Fine Arts. It has undergone several transformations and expansions, reflecting the evolving art scene in Belarus. The museum&#x27;s current building, completed in 1984, was designed to accommodate its growing collection and to serve as a cultural hub in the capital. Culturally, the National Art Museum plays a vital role in preserving and promoting Belarusian art and heritage. It serves as a platform for artists and a center for cultural dialogue, contributing to the understanding of Belarusian identity through art. The museum also engages with the public through educational programs and exhibitions, fostering a deeper appreciation for the arts in daily life.</p></div>
 </section>
 <section class="place" id="minsk_national_library">
+<div class="place-lead">
 <h3>National Library of Belarus</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
-<p class="place-meta">Style: Classical Revival architecture | Period: 1921</p>
-<figure class="place-fig"><img src="../images/minsk_national_library.jpg" alt="National Library of Belarus"/></figure>
+<p class="place-meta">Address: проспект Независимости, 116 | Style: Classical Revival architecture | Period: 1921</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/minsk_national_library.jpg" alt="National Library of Belarus" width="1280" height="720" style="height: 187px; max-height: 187px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/minsk_national_library_b.jpg" alt="National Library of Belarus — view 2" width="330" height="220" style="height: 187px; max-height: 187px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The National Library of Belarus is the largest and most important library in the country, housing over three million books and documents. Established in 1921 as a part of the Belarusian Central Scientific Library, it has since grown into one of Europe&#x27;s leading research institutions. It houses more than three million items including books, journals, maps, and manuscripts. The building itself is an architectural landmark designed by prominent local architect Ivan Polozkov. The library offers free access to online resources and digital databases for academic research. Regular exhibitions showcase rare editions and artifacts related to Belarusian literature and history. It collaborates with international organizations such as UNESCO to promote knowledge sharing.</p>
 <p class="prose">Founded in 1921 during the Soviet era, the National Library of Belarus was originally known as the Belarusian Central Scientific Library. Over time, it expanded its collections to include rare manuscripts, historical archives, and modern publications. Today, it serves as a major cultural hub for scholars, researchers, and students. Visitors can explore the extensive collection of historical texts, rare books, and artworks, making it a significant destination for those interested in Belarusian culture and heritage.</p></div>
 </section>
 <section class="place" id="minsk_opera_ballet">
+<div class="place-lead">
 <h3>National Opera and Ballet</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/minsk_opera_ballet.jpg" alt="National Opera and Ballet"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/minsk_opera_ballet.jpg" alt="National Opera and Ballet" width="1280" height="960" style="height: 247px; max-height: 247px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/minsk_opera_ballet_b.jpg" alt="National Opera and Ballet — view 2" width="330" height="247" style="height: 247px; max-height: 247px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The National Opera and Ballet of Belarus, located in the heart of Minsk, is a stunning architectural gem that showcases the rich cultural heritage of the country. With its grand performances and world-class productions, it serves as a vibrant hub for the arts, attracting both locals and tourists alike. Visitors can enjoy a diverse repertoire ranging from classic operas to contemporary ballet, all performed by talented artists. Founded in 1933 as the Belarusian State Opera and Ballet Theatre. The building was completed in 1939 and features a neoclassical architectural style. In 1995, it was awarded the National Academic title.</p>
 <p class="prose">The National Opera and Ballet of Belarus was founded in 1933, originally as the Belarusian State Opera and Ballet Theatre. The building itself, designed in a neoclassical style, was completed in 1939 and has undergone several renovations since. Key milestones include the establishment of the National Academic title in 1995, recognizing its significance in the cultural landscape of Belarus. The theater plays a crucial role in the cultural life of Minsk, serving as a platform for both traditional and modern artistic expressions. It contributes to the preservation of Belarusian heritage through its performances and educational programs, fostering a love for the arts among the community. While the theater primarily focuses on the arts, it also reflects the broader social and political context of the country, often being a space for cultural dialogue.</p></div>
 </section>
-<section class="place" id="minsk_pdfband_0_29c5ad91">
+<section class="place" id="minsk_new_minsk_mosque_p01">
+<div class="place-lead">
 <h3>New Minsk mosque p01</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/minsk_pdfband_0_29c5ad91.jpg" alt="New Minsk mosque p01"/></figure>
+<figure class="place-fig place-fig--hi-res"><img src="../images/minsk_new_minsk_mosque_p01.jpg" alt="New Minsk mosque p01" width="1280" height="853"/></figure>
+</div>
 </section>
 <section class="place" id="minsk_october_square">
+<div class="place-lead">
 <h3>October Square</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/minsk_october_square.jpg" alt="October Square"/></figure>
+<figure class="place-fig place-fig--hi-res"><img src="../images/minsk_october_square.jpg" alt="October Square" width="1280" height="960"/></figure>
+</div>
 <div class="place-desc"><p class="prose">October Square is a prominent public space in Minsk, serving as a central hub for both locals and visitors. Surrounded by significant buildings, it is often a venue for cultural events and public gatherings, reflecting the city&#x27;s vibrant life. The square is particularly known for its striking architecture and the nearby Government House, which adds to its historical and political importance. October Square is located in the heart of Minsk, Belarus. It is bordered by the Government House and the Belarusian State Circus.</p>
 <p class="prose">October Square was established in the early 20th century and has undergone various transformations throughout its history. Originally named after the October Revolution, it has been a site for numerous significant events, including celebrations and protests, particularly during the late 20th century. The square holds considerable political significance as a site for public demonstrations and gatherings, especially during times of political unrest. Culturally, it is a focal point for community events and celebrations, embodying the spirit of Minsk and its residents. The square&#x27;s architecture and layout reflect the city&#x27;s historical evolution and are integral to its urban identity.</p></div>
 </section>
 <section class="place" id="minsk_kastrycnickaja">
+<div class="place-lead">
 <h3>October Street</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/minsk_kastrycnickaja.jpg" alt="October Street"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/minsk_kastrycnickaja.jpg" alt="October Street" width="1280" height="853" style="height: 220px; max-height: 220px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/minsk_kastrycnickaja_b.jpg" alt="October Street — view 2" width="330" height="220" style="height: 220px; max-height: 220px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">October Street is one of the central thoroughfares in Minsk, known for its vibrant atmosphere and historical architecture. Lined with shops, cafes, and cultural venues, it serves as a hub for both locals and visitors. The street is a popular destination for leisurely strolls and offers a glimpse into the city&#x27;s urban life. The street was named in honor of the October Revolution.</p>
 <p class="prose">October Street has its roots in the early 20th century, reflecting the architectural styles of that era. It has undergone various transformations, particularly during the Soviet period, when it became a focal point for urban development in Minsk. The street was named to commemorate the October Revolution, symbolizing its historical ties to significant political events. Culturally, October Street plays a vital role in the daily life of Minsk, serving as a gathering place for social activities and events. It is home to several cultural institutions and is often associated with artistic expression, making it a vibrant part of the city&#x27;s heritage. The street&#x27;s significance is further underscored by its role in local traditions and celebrations.</p></div>
 </section>
 <section class="place" id="minsk_palace_republic">
+<div class="place-lead">
 <h3>Palace of the Republic</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/minsk_palace_republic.jpg" alt="Palace of the Republic"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/minsk_palace_republic.jpg" alt="Palace of the Republic" width="1280" height="929" style="height: 242px; max-height: 242px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/minsk_palace_republic_b.jpg" alt="Palace of the Republic — view 2" width="330" height="247" style="height: 242px; max-height: 242px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Palace of the Republic on Independence Square is Minsk&#x27;s main concert and congress hall, used for state events, performances, and large public gatherings.</p></div>
 </section>
 <section class="place" id="minsk_sts_simon_helena">
+<div class="place-lead">
 <h3>Red Church</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/minsk_sts_simon_helena.jpg" alt="Red Church"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/minsk_sts_simon_helena.jpg" alt="Red Church" width="330" height="231"/></figure>
+</div>
 <div class="place-desc"><p class="prose">The Red Church, officially known as the Church of Saints Simon and Helena, is a striking example of neo-Romanesque architecture located in the heart of Minsk. Its vibrant red brick exterior and elegant spires make it one of the city&#x27;s most recognizable landmarks. The church serves as a popular site for both worship and cultural events, drawing visitors with its unique design and historical significance. Constructed between 1905 and 1910. Designed in neo-Romanesque style. Serves the Roman Catholic community in Minsk.</p>
 <p class="prose">Construction of the Red Church began in 1905 and was completed in 1910. It was built by the local community as a Roman Catholic place of worship, reflecting the religious needs of the Polish-speaking population in Minsk during that era. The church has witnessed various historical events, including the impact of World War II and the subsequent changes in Belarusian society. The Red Church holds cultural importance as a symbol of the city&#x27;s architectural heritage and is a testament to the religious diversity in Minsk. It is a gathering place for the local Catholic community and plays a role in various cultural events, enhancing the daily life of residents. While it does not have UNESCO status, it is recognized for its aesthetic and historical value.</p></div>
 </section>
 <section class="place" id="minsk_st_elizabeth">
+<div class="place-lead">
 <h3>St Elizabeth Convent</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/minsk_st_elizabeth.jpg" alt="St Elizabeth Convent"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res"><img src="../images/minsk_st_elizabeth.jpg" alt="St Elizabeth Convent" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/minsk_st_elizabeth_b.jpg" alt="St Elizabeth Convent — view 2" width="330" height="257" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">St. Elizabeth Convent, located in the heart of Minsk, is a serene oasis known for its stunning architecture and tranquil gardens. Founded in the early 20th century, the convent serves as a spiritual center and a place of refuge, attracting visitors seeking peace and reflection. Its beautiful grounds and vibrant community life make it a unique destination for both pilgrims and tourists alike. Founded in 1910 by Grand Duchess Elizabeth Feodorovna. Serves as a spiritual and charitable center. Features beautiful gardens and traditional Orthodox architecture.</p>
 <p class="prose">St. Elizabeth Convent was established in 1910 by Grand Duchess Elizabeth Feodorovna, a member of the Russian imperial family. The convent was built as a place for the care of the sick and the poor, reflecting the charitable mission of its founder. Over the years, it has undergone various transformations, particularly during periods of political upheaval, yet it has remained a significant religious institution in Minsk. The convent holds cultural significance as a center of Orthodox Christianity in Belarus, embodying the region&#x27;s rich religious heritage. It plays a vital role in the daily lives of many locals, offering spiritual guidance and community support. The convent also hosts various religious ceremonies and events, contributing to the preservation of traditions and fostering a sense of unity among believers.</p></div>
 </section>
 <section class="place" id="minsk_st_roch">
+<div class="place-lead">
 <h3>St Roch church</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/minsk_st_roch.jpg" alt="St Roch church"/></figure>
-<div class="place-desc"><p class="prose">St. Roch Church, located in the heart of Minsk, is a striking example of neo-Gothic architecture. Known for its beautiful stained glass windows and serene atmosphere, it serves as a peaceful retreat for both worshippers and visitors alike. The church is a popular spot for those seeking to experience the spiritual and cultural heritage of the city. Designed in the neo-Gothic style by architect A.</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res"><img src="../images/minsk_st_roch.jpg" alt="St Roch church" width="330" height="440" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/minsk_st_roch_b.jpg" alt="St Roch church — view 2" width="330" height="253" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">St. Roch Church, located in the heart of Minsk, is a striking example of neo-Gothic architecture. Known for its beautiful stained glass windows and serene atmosphere, it serves as a peaceful retreat for both worshippers and visitors alike. The church is a popular spot for those seeking to experience the spiritual and cultural heritage of the city. Designed in the neo-Gothic style by architect A. V. Kovalchuk.</p>
 <p class="prose">St. Roch Church was constructed in the early 20th century, with its foundation laid in 1905 and the building completed in 1910. It was designed by architect A. V. Kovalchuk and has since undergone various renovations to preserve its architectural integrity and adapt to the needs of the local community. The church holds cultural significance as a testament to the architectural styles of its time and as a site for community gatherings and religious ceremonies. It reflects the rich religious heritage of Minsk and continues to play a role in the daily lives of its residents, providing a space for reflection and worship.</p></div>
 </section>
 <section class="place" id="minsk_trinity_hill">
+<div class="place-lead">
 <h3>Trinity Hill</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/minsk_trinity_hill.jpg" alt="Trinity Hill"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/minsk_trinity_hill.jpg" alt="Trinity Hill" width="1280" height="627" style="height: 163px; max-height: 163px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/minsk_trinity_hill_b.jpg" alt="Trinity Hill — view 2" width="330" height="273" style="height: 163px; max-height: 163px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Trinity Hill is a picturesque neighborhood in Minsk, known for its charming cobblestone streets and vibrant atmosphere. This historic area is characterized by its well-preserved architecture and offers visitors a glimpse into the city&#x27;s past, alongside modern cafes and shops. A stroll through Trinity Hill reveals the rich cultural tapestry of Minsk, making it a must-visit destination for anyone exploring the city. Trinity Hill is one of the oldest neighborhoods in Minsk, established in the 11th century. The area features several historical landmarks, including the Holy Spirit Cathedral and the former merchant houses.</p>
 <p class="prose">Trinity Hill dates back to the 11th century and is one of the oldest parts of Minsk. It was historically significant as a center of trade and commerce, with its strategic location along the Svislach River. The area has witnessed various key events throughout Belarusian history, including the establishment of the Grand Duchy of Lithuania and later, the Polish-Lithuanian Commonwealth. Culturally, Trinity Hill is a vibrant hub that reflects the heritage of Minsk through its architecture and local traditions. The area is home to several notable landmarks, including the Holy Spirit Cathedral, which showcases the religious and cultural history of the region. Trinity Hill remains an integral part of daily life in Minsk, where locals and tourists alike gather to enjoy its unique blend of history and modernity.</p></div>
 </section>
 <section class="place" id="minsk_upper_town">
+<div class="place-lead">
 <h3>Upper Town Minsk</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/minsk_upper_town.jpg" alt="Upper Town Minsk"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/minsk_upper_town.jpg" alt="Upper Town Minsk" width="1280" height="927" style="height: 164px; max-height: 164px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/minsk_upper_town_b.jpg" alt="Upper Town Minsk — view 2" width="330" height="164" style="height: 164px; max-height: 164px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Upper Town Minsk is a historic district that showcases the architectural beauty and cultural heritage of Belarus&#x27;s capital. Characterized by its charming streets, vibrant atmosphere, and significant landmarks, this area serves as a hub for both locals and visitors. Exploring Upper Town offers a glimpse into the rich history and traditions that define Minsk. Upper Town was a key trading center in the 11th century. The district features notable landmarks such as the Holy Spirit Cathedral and the Town Hall.</p>
 <p class="prose">Upper Town was established in the 11th century and has played a crucial role in the development of Minsk. It was the center of trade and commerce during the Grand Duchy of Lithuania and later became a focal point during various historical events, including the partitions of Poland and the Soviet era. Culturally, Upper Town is significant for its blend of architectural styles, reflecting the city&#x27;s diverse history. It is home to several important landmarks, including the Holy Spirit Cathedral and the Town Hall, which are vital to the local heritage. The area also plays a role in contemporary life, hosting festivals and events that celebrate Belarusian traditions.</p></div>
 </section>
 <section class="place" id="minsk_victory_square">
+<div class="place-lead">
 <h3>Victory Square</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Soviet classicism with elements of Art Nouveau | Period: 1974</p>
-<figure class="place-fig"><img src="../images/minsk_victory_square.jpg" alt="Victory Square"/></figure>
+<figure class="place-fig place-fig--hi-res"><img src="../images/minsk_victory_square.jpg" alt="Victory Square" width="1280" height="851"/></figure>
+</div>
 <div class="place-desc"><p class="prose">At the heart of Minsk lies Victory Square, a grand public space that symbolizes both historical significance and modern urban life. Surrounded by majestic buildings and lined with trees, it serves as a gathering place for locals and visitors alike. The square is home to the iconic Palace of Independence, which houses the National Assembly of Belarus. It features impressive monuments honoring the fallen soldiers of WWII. Surrounding streets are lined with elegant Art Nouveau and Classicist buildings dating back to the early 20th century. Events such as concerts, markets, and art exhibitions frequently occur here, making it a dynamic part of the city&#x27;s social fabric. On major holidays, the square becomes a focal point for national celebrations.</p>
 <p class="prose">Originally constructed during Soviet times, Victory Square was named to commemorate the victory over Nazi Germany in World War II. It has since evolved into a vibrant hub where cultural events, festivals, and celebrations take place regularly. Visiting Victory Square allows one to experience the fusion of history and contemporary culture in Minsk&#x27;s bustling center.</p></div>
 </section>
 <section class="place" id="minsk_yakub_kolas">
+<div class="place-lead">
 <h3>Yakub Kolas Square</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Soviet classicism with elements of modern urban design | Period: 1960s</p>
-<figure class="place-fig"><img src="../images/minsk_yakub_kolas.jpg" alt="Yakub Kolas Square"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/minsk_yakub_kolas.jpg" alt="Yakub Kolas Square" width="1280" height="958" style="height: 220px; max-height: 220px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/minsk_yakub_kolas_b.jpg" alt="Yakub Kolas Square — view 2" width="330" height="220" style="height: 220px; max-height: 220px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Yakub Kolas Square is a central gathering place in Minsk, named after Belarusian poet Yakub Kolas, who played a significant role in the development of modern Belarusian literature. The square features elegant architecture and offers a peaceful atmosphere amidst bustling city life. The square is surrounded by historic buildings dating back to the early 20th century. It hosts regular cultural festivals showcasing traditional Belarusian music and dance. In the center stands a statue honoring Yakub Kolas himself, symbolizing his contribution to Belarusian culture. Nearby are several cafes and restaurants offering local cuisine and drinks. Events such as book fairs and literary readings take place here regularly.</p>
 <p class="prose">Named after renowned Belarusian writer Yakub Kolas, whose works greatly influenced the cultural identity of Belarus, the square was developed during the Soviet era as a focal point for civic gatherings and celebrations. It has been a hub for political rallies, concerts, and commemorative events since its inception. Visitors come to Yakub Kolas Square to experience the tranquility of the city center, enjoy performances by local artists, and appreciate the architectural beauty of the surrounding buildings.</p></div>
-</section>
-<section class="place" id="minsk_pdfband_1_2e13651f">
-<h3>МЦ1</h3>
-
-
-<figure class="place-fig"><img src="../images/minsk_pdfband_1_2e13651f.jpg" alt="МЦ1"/></figure>
 </section>
 </body>
 </html>

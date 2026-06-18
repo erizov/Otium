@@ -13,7 +13,7 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
 .otium-logo { font-family: 'Spectral', serif; font-size: 2.15rem;
   font-weight: 600; letter-spacing: 0.18em; margin-bottom: 0.85rem; }
 .otiump { margin: 0.42rem 0; line-height: 1.42; text-align: justify;
-  max-width: 38rem; font-size: 0.95rem; }
+  font-size: 0.95rem; }
 .guide-title { page-break-after: auto; margin-bottom: 0.55rem;
   page-break-inside: avoid; }
 .historical-reference { margin: 0.75rem 0 1.15rem;
@@ -63,22 +63,103 @@ ol.trip-stops a:hover { text-decoration: underline; }
 .heraldry-univ-caption { font-size: 0.52rem; line-height: 1.18;
   margin: 0.12rem 0 0; padding: 0 0.06rem; color: #252525;
   text-align: center; font-weight: 500; }
-.heraldry-motto { text-align: center; max-width: 18rem; margin: 0.18rem auto;
+.heraldry-motto { text-align: center; margin: 0.18rem auto;
   width: 100%; }
 .motto-line { font-family: 'Spectral', serif; font-size: 1rem;
   margin: 0; color: #333; line-height: 1.35; }
 .guide-title h1.guide-title-main { font-family: 'Spectral', serif;
   font-size: 2.35rem; margin-bottom: 0.5rem; font-weight: 600; }
 .lead { color: #444; font-size: 1.05rem; }
-.guide-toc { margin: 0.85rem 0 1.15rem; page-break-inside: avoid; }
-.guide-toc h2 { font-family: 'Spectral', serif; font-size: 1.28rem;
-  font-weight: 600; margin: 0.4rem 0 0.55rem; }
+
+.guide-toc { page-break-before: always; break-before: page;
+  page-break-after: always; break-after: page;
+  margin: 0; padding: 0.2rem 0 0.45rem; page-break-inside: auto; }
+.guide-toc h2 { font-family: 'Spectral', serif;
+  font-size: 1.28rem; font-weight: 600; margin: 0.4rem 0 0.55rem; }
 .guide-toc ol { margin: 0.35rem 0 0.65rem 1.25rem; padding: 0;
   columns: 2; column-gap: 1.5rem; }
 .guide-toc li { margin: 0.18rem 0; line-height: 1.35;
   font-size: 0.88rem; break-inside: avoid; }
-.guide-toc a { color: #1a5276; text-decoration: none; }
+.guide-toc a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.guide-toc a:hover { color: #0d3d56; }
 .guide-toc li.toc-item--sub { font-size: 0.82rem; margin-left: 0.35rem; }
+.toc-back { font-size: 0.78rem; margin: 0 0 0.35rem; text-align: right; }
+.toc-back a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.toc-back a:hover { color: #0d3d56; }
+.place, .historical-reference, .guide-primer, .guide-trip-plans {
+  scroll-margin-top: 1.25rem; }
+.historical-reference h2, .guide-primer h2, .guide-trip-plans h2,
+.chapter-head h2, .place-lead h3 { position: relative; }
+.guide-toc + .place, .guide-toc + .chapter-head {
+  page-break-before: avoid; break-before: avoid-page; }
+.place-lead { page-break-inside: avoid; break-inside: avoid-page;
+  page-break-after: auto; }
+.place-lead > h3 { page-break-after: avoid; break-after: avoid-page; }
+.place-lead > .place-meta { page-break-after: avoid; break-after: avoid-page; }
+
+.place-fig { page-break-inside: avoid; break-inside: avoid-page;
+  margin: 0.5rem 0 1rem; }
+.place-fig img {
+  page-break-inside: avoid; break-inside: avoid-page;
+  max-height: 48vh; width: auto; max-width: 100%;
+  object-fit: contain; margin-left: auto; margin-right: auto; }
+.place-fig--hi-res img { max-height: 52vh; }
+.place-fig--lo-res img { max-height: 30vh; }
+.place-pdf-fig-row {
+  display: flex; flex-direction: row; flex-wrap: wrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.45rem 0.55rem; margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row .place-fig {
+  flex: 1 1 30%; margin: 0; min-width: 26%; max-width: 100%; }
+.place-pdf-fig-row .place-fig img {
+  width: auto; max-width: 100%; height: auto; max-height: 44vh;
+  object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--pair {
+  flex-wrap: nowrap; justify-content: space-between;
+  align-items: flex-end; gap: 0.5rem 0.65rem; }
+.place-pdf-fig-row--pair .place-fig {
+  flex: 1 1 47%; min-width: 0; max-width: 50%;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--pair .place-fig img {
+  max-height: 44vh; object-fit: contain; }
+.place-pdf-fig-row--pair .place-fig--hi-res img { max-height: 52vh; }
+.place-pdf-fig-row--pair .place-fig--lo-res img { max-height: 26vh; }
+.place-pdf-fig-row--pair .place-fig--row-sized img,
+.place-pdf-fig-row--triple .place-fig--row-sized img,
+.place-pdf-fig-row--many .place-fig--row-sized img {
+  width: auto; max-width: 100%; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row .place-fig--row-sized.place-fig--hi-res img,
+.place-pdf-fig-row .place-fig--row-sized.place-fig--lo-res img {
+  max-height: unset; }
+.place-pdf-fig-rows-stack {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple {
+  display: flex; flex-direction: row; flex-wrap: nowrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.4rem 0.48rem; margin: 0;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--triple .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--triple .place-fig--hi-res img { max-height: 42vh; }
+.place-pdf-fig-row--triple .place-fig--lo-res img { max-height: 18vh; }
+.place-pdf-fig-row--many {
+  flex-wrap: nowrap; justify-content: center; align-items: flex-end;
+  gap: 0.35rem 0.42rem; }
+.place-pdf-fig-row--many .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--many .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+
+
 .place { margin-bottom: 2.2rem; page-break-inside: auto; }
 h3 { font-family: 'Spectral', serif; font-size: 1.22rem; margin: 1.2rem 0 0.35rem;
   font-weight: 600; }
@@ -90,7 +171,6 @@ h4 { font-family: 'Spectral', serif; font-size: 0.95rem; text-transform: upperca
   color: #555; font-size: 0.95rem; margin: 0 0 0.5rem; font-style: italic; }
 .place-meta { font-size: 0.92rem; color: #353535; margin: 0 0 0.75rem;
   line-height: 1.4; }
-.place-fig { margin: 0.5rem 0 1rem; }
 img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
 .prose, .place-desc p { margin: 0.45rem 0; line-height: 1.5;
   text-align: justify; }
@@ -110,32 +190,35 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <figure class="heraldry-fig heraldry-coat-book" title="City emblem"><img src="../images/guide_coat_of_arms.svg" alt="City emblem"/></figure>
 <figure class="heraldry-fig heraldry-coat-book" title="Flag"><img src="../images/guide_flag.svg" alt="Flag"/></figure>
 </div></div><h1 class="guide-title-main">Budapest</h1><p class="lead">Путеводитель. Объектов в этом выпуске: 33.</p></header>
+<nav class="guide-toc" id="guide-toc" aria-label="Содержание"><h2>Содержание</h2><ol><li class="toc-item"><a href="#guide-historical">Историческая справка</a></li><li class="toc-item"><a href="#guide-trips">Маршруты</a></li><li class="toc-item"><a href="#budapest_al_huda_mosque_manila">Budapest Al Huda Mosque Manila</a></li><li class="toc-item"><a href="#budapest_andrassy_avenue">Budapest Andrassy Avenue</a></li><li class="toc-item"><a href="#budapest_aquincum_museum">Budapest Aquincum Museum</a></li><li class="toc-item"><a href="#budapest_buda_castle">Budapest Buda Castle</a></li><li class="toc-item"><a href="#budapest_buda_hill_funicular">Budapest Buda Hill Funicular</a></li><li class="toc-item"><a href="#budapest_chain_bridge">Budapest Chain Bridge</a></li><li class="toc-item"><a href="#budapest_citadella_budapest">Budapest Citadella Budapest</a></li><li class="toc-item"><a href="#budapest_dohany_street_synagogue">Budapest Dohany Street Synagogue</a></li><li class="toc-item"><a href="#budapest_fishermans_bastion">Budapest Fishermans Bastion</a></li><li class="toc-item"><a href="#budapest_gellert_hill_view">Budapest Gellert Hill View</a></li><li class="toc-item"><a href="#budapest_great_market_hall">Budapest Great Market Hall</a></li><li class="toc-item"><a href="#budapest_gresham_palace_budapest">Budapest Gresham Palace Budapest</a></li><li class="toc-item"><a href="#budapest_heroes_square">Budapest Heroes Square</a></li><li class="toc-item"><a href="#budapest_house_of_terror">Budapest House Of Terror</a></li><li class="toc-item"><a href="#budapest_hungarian_national_museum">Budapest Hungarian National Museum</a></li><li class="toc-item"><a href="#budapest_hungarian_parliament">Budapest Hungarian Parliament</a></li><li class="toc-item"><a href="#budapest_hungarian_state_opera">Budapest Hungarian State Opera</a></li><li class="toc-item"><a href="#budapest_kopaszi_gat">Budapest Kopaszi Gat</a></li><li class="toc-item"><a href="#budapest_landmark">Budapest Landmark</a></li><li class="toc-item"><a href="#budapest_liberty_bridge">Budapest Liberty Bridge</a></li><li class="toc-item"><a href="#budapest_margaret_island">Budapest Margaret Island</a></li><li class="toc-item"><a href="#budapest_matthias_church">Budapest Matthias Church</a></li><li class="toc-item"><a href="#budapest_museum_of_applied_arts_budapest">Budapest Museum Of Applied Arts Budapest</a></li><li class="toc-item"><a href="#budapest_museum_of_fine_arts">Budapest Museum Of Fine Arts</a></li><li class="toc-item"><a href="#budapest_rudas_baths">Budapest Rudas Baths</a></li><li class="toc-item"><a href="#budapest_shoes_danube_memorial">Budapest Shoes Danube Memorial</a></li><li class="toc-item"><a href="#budapest_st_stephens_basilica">Budapest St Stephens Basilica</a></li><li class="toc-item"><a href="#budapest_szechenyi_bath">Budapest Szechenyi Bath</a></li><li class="toc-item"><a href="#budapest_szent_istvan_park">Budapest Szent Istvan Park</a></li><li class="toc-item"><a href="#budapest_szimpla_kert">Budapest Szimpla Kert</a></li><li class="toc-item"><a href="#budapest_tab_n_a_szem_utc_b_l">Budapest Tab N A Szem Utc B L</a></li><li class="toc-item"><a href="#budapest_the_house_of_houdini">Budapest The House Of Houdini</a></li><li class="toc-item"><a href="#budapest_vajdahunyad_castle">Budapest Vajdahunyad Castle</a></li></ol></nav>
 <section class="historical-reference" id="guide-historical" aria-label="Историческая справка"><h2>Историческая справка</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 <p class="prose">Будапешт — столица Венгрии, образованный слиянием Буды, Пешта и Обуды в конце XIX века.</p>
 <p class="prose">Римские корни, средневековая крепость на холме, эпоха Османской империи и расцвет Австро-Венгрии оставили мосты, купальни Сечени и парламент на Дунае. Город — центр музыки, архитектуры модерна и термальной культуры.</p>
 <p class="prose">Первая мировая война и Трианон изменили роль Венгрии; Вторая мировая и 1956 год оставили след в памяти города. После 1990 года Будапешт открылся Европе, развил туризм и сохранил купальни, мосты и музыкальные традиции как общее достояние.</p></section>
 <section class="guide-trip-plans" id="guide-trips" aria-label="Маршруты"><h2>Маршруты</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 <article class="trip-plan" id="trip-1d"><h3>Один день</h3>
 <p class="prose">Компактный маршрут по главным точкам путеводителя с минимальным возвратом назад пешком.</p>
-<ol class="trip-stops"><li><a href="#budapest_dohany_street_synagogue">Budapest Dohany Street Synagogue</a> (~75мин)</li>
-<li><a href="#budapest_szimpla_kert">Budapest Szimpla Kert</a> (~75мин)</li>
-<li><a href="#budapest_hungarian_state_opera">Budapest Hungarian State Opera</a> (~75мин)</li>
-<li><a href="#budapest_st_stephens_basilica">Budapest St Stephens Basilica</a> (~75мин)</li>
+<ol class="trip-stops"><li><a href="#budapest_chain_bridge">Budapest Chain Bridge</a> (~75мин)</li>
 <li><a href="#budapest_shoes_danube_memorial">Budapest Shoes Danube Memorial</a> (~75мин)</li>
-<li><a href="#budapest_hungarian_parliament">Budapest Hungarian Parliament</a> (~75мин)</li></ol></article>
+<li><a href="#budapest_hungarian_parliament">Budapest Hungarian Parliament</a> (~75мин)</li>
+<li><a href="#budapest_st_stephens_basilica">Budapest St Stephens Basilica</a> (~75мин)</li>
+<li><a href="#budapest_hungarian_state_opera">Budapest Hungarian State Opera</a> (~75мин)</li>
+<li><a href="#budapest_house_of_terror">Budapest House Of Terror</a> (~75мин)</li></ol></article>
 <article class="trip-plan" id="trip-3d1"><h3>Три дня — день 1</h3>
 <p class="prose">День 1 — центральный кластер.</p>
-<ol class="trip-stops"><li><a href="#budapest_house_of_terror">Budapest House Of Terror</a> (~75мин)</li>
-<li><a href="#budapest_andrassy_avenue">Budapest Andrassy Avenue</a> (~75мин)</li>
+<ol class="trip-stops"><li><a href="#budapest_andrassy_avenue">Budapest Andrassy Avenue</a> (~75мин)</li>
 <li><a href="#budapest_aquincum_museum">Budapest Aquincum Museum</a> (~75мин)</li>
 <li><a href="#budapest_buda_castle">Budapest Buda Castle</a> (~75мин)</li>
-<li><a href="#budapest_buda_hill_funicular">Budapest Buda Hill Funicular</a> (~75мин)</li></ol></article>
+<li><a href="#budapest_buda_hill_funicular">Budapest Buda Hill Funicular</a> (~75мин)</li>
+<li><a href="#budapest_citadella_budapest">Budapest Citadella Budapest</a> (~75мин)</li></ol></article>
 <article class="trip-plan" id="trip-3d2"><h3>Три дня — день 2</h3>
 <p class="prose">День 2 — следующая группа районов.</p>
-<ol class="trip-stops"><li><a href="#budapest_great_market_hall">Budapest Great Market Hall</a> (~75мин)</li>
+<ol class="trip-stops"><li><a href="#budapest_dohany_street_synagogue">Budapest Dohany Street Synagogue</a> (~75мин)</li>
+<li><a href="#budapest_szimpla_kert">Budapest Szimpla Kert</a> (~75мин)</li>
+<li><a href="#budapest_great_market_hall">Budapest Great Market Hall</a> (~75мин)</li>
 <li><a href="#budapest_museum_of_applied_arts_budapest">Budapest Museum Of Applied Arts Budapest</a> (~75мин)</li>
-<li><a href="#budapest_chain_bridge">Budapest Chain Bridge</a> (~75мин)</li>
-<li><a href="#budapest_citadella_budapest">Budapest Citadella Budapest</a> (~75мин)</li>
 <li><a href="#budapest_fishermans_bastion">Budapest Fishermans Bastion</a> (~75мин)</li></ol></article>
 <article class="trip-plan" id="trip-3d3"><h3>Три дня — день 3</h3>
 <p class="prose">День 3 — оставшиеся близкие объекты.</p>
@@ -144,264 +227,446 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <li><a href="#budapest_gresham_palace_budapest">Budapest Gresham Palace Budapest</a> (~75мин)</li>
 <li><a href="#budapest_heroes_square">Budapest Heroes Square</a> (~75мин)</li>
 <li><a href="#budapest_hungarian_national_museum">Budapest Hungarian National Museum</a> (~75мин)</li></ol></article></section>
-<nav class="guide-toc" aria-label="Содержание"><h2>Содержание</h2><ol><li class="toc-item"><a href="#guide-historical">Историческая справка</a></li><li class="toc-item"><a href="#guide-trips">Маршруты</a></li><li class="toc-item"><a href="#budapest_pdfband_2_08a0e03c">Al-Huda Mosque Manila</a></li><li class="toc-item"><a href="#budapest_andrassy_avenue">Budapest Andrassy Avenue</a></li><li class="toc-item"><a href="#budapest_aquincum_museum">Budapest Aquincum Museum</a></li><li class="toc-item"><a href="#budapest_buda_castle">Budapest Buda Castle</a></li><li class="toc-item"><a href="#budapest_buda_hill_funicular">Budapest Buda Hill Funicular</a></li><li class="toc-item"><a href="#budapest_citadella_budapest">Budapest Citadella Budapest</a></li><li class="toc-item"><a href="#budapest_dohany_street_synagogue">Budapest Dohany Street Synagogue</a></li><li class="toc-item"><a href="#budapest_fishermans_bastion">Budapest Fishermans Bastion</a></li><li class="toc-item"><a href="#budapest_gresham_palace_budapest">Budapest Gresham Palace Budapest</a></li><li class="toc-item"><a href="#budapest_gellert_hill_view">Budapest Gellert Hill View</a></li><li class="toc-item"><a href="#budapest_great_market_hall">Budapest Great Market Hall</a></li><li class="toc-item"><a href="#budapest_heroes_square">Budapest Heroes Square</a></li><li class="toc-item"><a href="#budapest_house_of_terror">Budapest House Of Terror</a></li><li class="toc-item"><a href="#budapest_hungarian_national_museum">Budapest Hungarian National Museum</a></li><li class="toc-item"><a href="#budapest_hungarian_parliament">Budapest Hungarian Parliament</a></li><li class="toc-item"><a href="#budapest_hungarian_state_opera">Budapest Hungarian State Opera</a></li><li class="toc-item"><a href="#budapest_kopaszi_gat">Budapest Kopaszi Gat</a></li><li class="toc-item"><a href="#budapest_liberty_bridge">Budapest Liberty Bridge</a></li><li class="toc-item"><a href="#budapest_margaret_island">Budapest Margaret Island</a></li><li class="toc-item"><a href="#budapest_matthias_church">Budapest Matthias Church</a></li><li class="toc-item"><a href="#budapest_pdfband_1_5724a212">Budapest</a></li><li class="toc-item"><a href="#budapest_museum_of_applied_arts_budapest">Budapest Museum Of Applied Arts Budapest</a></li><li class="toc-item"><a href="#budapest_museum_of_fine_arts">Budapest Museum Of Fine Arts</a></li><li class="toc-item"><a href="#budapest_rudas_baths">Budapest Rudas Baths</a></li><li class="toc-item"><a href="#budapest_shoes_danube_memorial">Budapest Shoes Danube Memorial</a></li><li class="toc-item"><a href="#budapest_st_stephens_basilica">Budapest St Stephens Basilica</a></li><li class="toc-item"><a href="#budapest_szent_istvan_park">Budapest Szent Istvan Park</a></li><li class="toc-item"><a href="#budapest_szimpla_kert">Budapest Szimpla Kert</a></li><li class="toc-item"><a href="#budapest_chain_bridge">Budapest Chain Bridge</a></li><li class="toc-item"><a href="#budapest_szechenyi_bath">Budapest Szechenyi Bath</a></li><li class="toc-item"><a href="#budapest_pdfband_0_59767a6a">Tabán a szem utcából</a></li><li class="toc-item"><a href="#budapest_pdfband_3_29e17fee">The House of Houdini</a></li><li class="toc-item"><a href="#budapest_vajdahunyad_castle">Budapest Vajdahunyad Castle</a></li></ol></nav>
-<section class="place" id="budapest_pdfband_2_08a0e03c">
-<h3>Al-Huda Mosque Manila</h3>
+<section class="place" id="budapest_al_huda_mosque_manila">
+<div class="place-lead">
+<h3>Budapest Al Huda Mosque Manila</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/budapest_pdfband_2_08a0e03c.jpg" alt="Al-Huda Mosque Manila"/></figure>
+<p class="place-meta">Адрес: See official visitor information.</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/budapest_al_huda_mosque_manila.jpg" alt="Budapest Al Huda Mosque Manila" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/budapest_al_huda_mosque_manila_b.jpg" alt="Budapest Al Huda Mosque Manila — вид 2" width="330" height="220" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Мечеть Аль-Худа в Маниле — место поклонения в Будапеште. Общественные фотоархивы связывают это место с: рекой, городом, Будапештом, Венгрией. Стоит зайти, исследуя Будапешт.</p></div>
 </section>
 <section class="place" id="budapest_andrassy_avenue">
+<div class="place-lead">
 <h3>Budapest Andrassy Avenue</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1860–1912</p>
-<figure class="place-fig"><img src="../images/budapest_andrassy_avenue.jpg" alt="Budapest Andrassy Avenue"/></figure>
+<p class="place-meta">Адрес: Andrássy út, linking Deák Square to Heroes’ Square | Период: 1860–1912</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--row-sized"><img src="../images/budapest_andrassy_avenue.jpg" alt="Budapest Andrassy Avenue" width="589" height="768" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/budapest_andrassy_avenue_b.jpg" alt="Budapest Andrassy Avenue — вид 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Авеню Андраши — самая знаковая улица Будапешта, грандиозный бульвар, вымощенный величественными зданиями и изысканной архитектурой ар-нуво. Оно тянется более чем на четыре километра через сердце города, соединяя Площадь Героев с Площадью Вёросмарта. На улице можно увидеть многочисленные образцы стилей Ар-нуво и Сецессиона, включая знаменитый дом Рёцсавёльджи и Гранд-отель Трианон. Здесь расположены несколько известных достопримечательностей, таких как здание Парламента и Цепной мост «Шечени». Авеню Андраши включено в список объектов Всемирного наследия ЮНЕСКО с 1987 года благодаря его исключительной культурной значимости. В течение дня посетители могут насладиться шопингом, посещением ресторанов и наблюдением за жизнью, любуясь красивыми фасадами. Ночью улица оживает под мерцанием разноцветных неоновых огней, освещающих здания.</p>
 <p class="prose">Построенная между 1860 и 1912 годами, Авеню Андрасси была спроектирована в рамках расширения города в конце XIX века. Изначально названная в честь премьер-министра Гюля Андрасси, она приобрела славу благодаря своим роскошным отелям, кафе и элегантным магазинам, которые привлекали как местных жителей, так и туристов. Сегодня она остается одной из самых очаровательных и живописных улиц Европы. Посещение проспекта Эндраши позволяет заглянуть в богатое архитектурное наследие Будапешта и предоставляет уникальную возможность прогуляться по историческому маршруту, наполненному яркой культурой и атмосферой.</p></div>
 </section>
 <section class="place" id="budapest_aquincum_museum">
+<div class="place-lead">
 <h3>Budapest Aquincum Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/budapest_aquincum_museum.jpg" alt="Budapest Aquincum Museum"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/budapest_aquincum_museum.jpg" alt="Budapest Aquincum Museum" width="1280" height="950" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/budapest_aquincum_museum_b.jpg" alt="Budapest Aquincum Museum — вид 2" width="330" height="219" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Отправьтесь в Древний Рим в Музей Аквинкум, где артефакты и руины оживляют римскую провинцию Паннония. Основан как римская военная база около 89 г. н.э. Руины включают самый крупный римский банный комплекс к северу от Альп. Объект расположен недалеко от бывшего римского центра Паннонии. Раскопки начались в конце XIX века. Дома, статуи, мозаики и скульптуры римской эпохи.</p>
 <p class="prose">Основанный в I веке н. э., Аквинкум был процветающим римским военным лагерем и поселением на берегах реки Дунай. Сегодняшний музей сохраняет руины бань, храмов и амфитеатров, предлагая посетителям представление о повседневной жизни во времена Римской империи. Посетите Музей Аквинкум, чтобы изучить богатую историю римского прошлого Будапешта и понять, как она сформировала современную Венгрию.</p></div>
 </section>
 <section class="place" id="budapest_buda_castle">
+<div class="place-lead">
 <h3>Budapest Buda Castle</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/budapest_buda_castle.jpg" alt="Budapest Buda Castle"/></figure>
+<p class="place-meta">Адрес: Buda Castle Hill</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/budapest_buda_castle.jpg" alt="Budapest Buda Castle" width="1600" height="1113" style="height: 312px; max-height: 312px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/budapest_buda_castle_b.jpg" alt="Budapest Buda Castle — вид 2" width="330" height="223" style="height: 312px; max-height: 312px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Расположенный величественно на холме с видом на Дунай, замок Буда — одна из самых знаковых достопримечательностей Будапешта и свидетельство богатого исторического наследия Венгрии. Построенный преимущественно в стиле Возрождения с более поздним барочным влиянием. Расположен на Холме Крепости, откуда открываются панорамные виды на город. Объявлено объектом Всемирного наследия ЮНЕСКО в 1987 году. Реконструкция была завершена в 1960-х годах после значительного разрушения во время войны. Является культурным центром, где проводятся различные выставки и мероприятия.</p>
 <p class="prose">Изначально построенный в XIII веке как крепость, Буда был преобразован в королевский дворец во время правления короля Яноша Корвинуса в конце XV века. После значительного ущерба, нанесённого во время Второй мировой войны, в середине XX века он был кропотливо восстановлен до былого великолепия венгерскими архитекторами. Сегодня здесь располагается Музей королевского дворца, в котором представлены произведения искусства и артефакты из королевского прошлого Венгрии. Посетители приезжают в Будайскую крепость ради захватывающих видов, архитектурного великолепия и увлекательных музейных коллекций, которые предоставляют представление о королевской истории Венгрии.</p></div>
 </section>
 <section class="place" id="budapest_buda_hill_funicular">
+<div class="place-lead">
 <h3>Budapest Buda Hill Funicular</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Период: 1900</p>
-<figure class="place-fig"><img src="../images/budapest_buda_hill_funicular.jpg" alt="Budapest Buda Hill Funicular"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/budapest_buda_hill_funicular.jpg" alt="Budapest Buda Hill Funicular" width="1063" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/budapest_buda_hill_funicular_b.jpg" alt="Budapest Buda Hill Funicular — вид 2" width="330" height="495" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Поднимитесь на Фуникулёре Будайской крепости к одной из самых знаковых достопримечательностей Будапешта — Будайскому дворцу. Эта живописная поездка на канатной дороге предлагает захватывающие виды на Дунай и исторический район Пешт внизу. Работает ежедневно с раннего утра до позднего вечера. Фунвалю (или фуникулер) курсирует примерно каждые 10 минут в часы пик. Это самая старая действующая фуникулерная железная дорога в Венгрии. Путь занимает всего три минуты, но ощущается как мини-приключение. Доступно для инвалидных колясок.</p>
 <p class="prose">Построенный в 1900 году, фуникулер был изначально спроектирован венгерским инженером Армином Вамбери как средство связи королевского дворца на Замковом холме с остальной частью города. С годами он стал любимой местной достопримечательностью и символом уникального очарования Будапешта. Насладитесь панорамным видом столицы во время неспешной поездки по центру холмистого района Буды.</p></div>
 </section>
+<section class="place" id="budapest_chain_bridge">
+<div class="place-lead">
+<h3>Budapest Chain Bridge</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Место: Connects Széchenyi Square (Buda) and Clark Ádám Square (Pest) | Период: 1849</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/budapest_chain_bridge.jpg" alt="Budapest Chain Bridge" width="1062" height="1600" style="height: 257px; max-height: 257px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/budapest_chain_bridge_b.jpg" alt="Budapest Chain Bridge — вид 2" width="330" height="184" style="height: 257px; max-height: 257px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Это был первый постоянный мост через Дунай в Будапеште. Его строительство стало значительным достижением в транспортной инфраструктуре. Мост назван в честь графа Иштвана Сеченьи, выдающегося венгерского государственного деятеля, выступавшего за модернизацию. Сегодня пешеходам разрешено прогуливаться по мосту без движения транспорта, наслаждаясь панорамными видами. Реставрационные работы в конце XX века сохранили его первозданный облик.</p>
+<p class="prose">Построенный британскими инженерами Уильямом Тирни Кларком и Адамом Кларком между 1839 и 1849 годами, этот мост был инженерным чудом своего времени. Он заменил паромное сообщение и стал символом единства двух берегов столицы. Элегантный дизайн включает железные цепи, поддерживающие дорогу, что делает его одним из первых в Европе подвесных мостов с цепным строением. Обязательная достопримечательность для посетителей Будапешта, Цепной мост имени Священника Сеченея предлагает захватывающие виды на Дунай и служит напоминанием о богатом промышленном наследии Венгрии.</p></div>
+</section>
 <section class="place" id="budapest_citadella_budapest">
+<div class="place-lead">
 <h3>Budapest Citadella Budapest</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Период: 1851–1856</p>
-<figure class="place-fig"><img src="../images/budapest_citadella_budapest.jpg" alt="Budapest Citadella Budapest"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/budapest_citadella_budapest.jpg" alt="Budapest Citadella Budapest" width="1200" height="1600" style="height: 299px; max-height: 299px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/budapest_citadella_budapest_b.jpg" alt="Budapest Citadella Budapest — вид 2" width="330" height="214" style="height: 299px; max-height: 299px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Расположенная высоко над Будапештом на холме с видом на реку Дунай, Цитадель — одна из самых знаковых достопримечательностей города и свидетельство его богатого военного наследия. Завершено в 1856 году после пяти лет строительных работ. Проект итальянского архитектора Карло Марчеллино, возведенный во времена австрийского правления. Обладает четырьмя башнями с отчетливыми архитектурными стилями, отражающими разные периоды эволюции дизайна. Сегодня здесь расположены музеи, кафе и рестораны, которые обеспечивают развлечения как для местных жителей, так и для туристов. Отсюда открывается непревзойденный вид на Будайскую крепость, Цепной мост и район Пешта.</p>
 <p class="prose">Построенная в период с 1851 по 1856 год, Цитадель изначально была возведена в качестве крепости, предназначенной для защиты столицы от потенциальных угроз. Она служила как военным укреплением, так и стратегической наблюдательной точкой в течение турбулентных лет Венгрии после Наполеоновских войн. Сегодня она является символом устойчивости и популярным туристическим объектом, предлагающим панорамные виды на город. Посещение Цитадели позволяет посетителям насладиться захватывающими видами и узнать об историческом значении этого впечатляющего сооружения.</p></div>
 </section>
 <section class="place" id="budapest_dohany_street_synagogue">
+<div class="place-lead">
 <h3>Budapest Dohany Street Synagogue</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1854–1859</p>
-<figure class="place-fig"><img src="../images/budapest_dohany_street_synagogue.jpg" alt="Budapest Dohany Street Synagogue"/></figure>
+<p class="place-meta">Адрес: Dohány Street, VII district | Период: 1854–1859</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/budapest_dohany_street_synagogue.jpg" alt="Budapest Dohany Street Synagogue" width="1600" height="1200" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/budapest_dohany_street_synagogue_b.jpg" alt="Budapest Dohany Street Synagogue — вид 2" width="330" height="298" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Синагога на улице Доhány, самая большая и самая впечатляющая синагога Будапешта, является свидетельством богатого еврейского наследия города. Построенная между 1854 и 1859 годами, она является одной из крупнейших ортодоксальных синагог Европы, известной своей неоготикой и богато украшим интерьером. Это самая большая синагога в Центральной Европе. На его фасаде расположены богато украшенные резьбы и статуи, изображающие библейские сцены. Внутри синагога украшена сложной резьбой и красочными витражами. Во время Второй мировой войны здание использовалось как убежище для евреев, спасавшихся от преследований. Сегодня это место функционирует одновременно и как музей, и как действующее место поклонения.</p>
 <p class="prose">Возведённая в середине XIX века, синагога на улице Доhány была спроектирована австрийским архитектором Людвигом Ферстером. Изначально она задумывалась как место поклонения для растущей еврейской общины Будапешта, и служила символом религиозной свободы и культурной интеграции. Сегодня это остаётся значимым историческим объектом, сохраняющим память о богатом еврейском прошлом Венгрии. Посещение синагоги на улице Доhány позволяет путешественникам ощутить архитектурное величие и духовное значение одного из самых заметных культовых сооружений Европы.</p></div>
 </section>
 <section class="place" id="budapest_fishermans_bastion">
+<div class="place-lead">
 <h3>Budapest Fishermans Bastion</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1895–1902</p>
-<figure class="place-fig"><img src="../images/budapest_fishermans_bastion.jpg" alt="Budapest Fishermans Bastion"/></figure>
+<p class="place-meta">Адрес: Hess András Square, Buda Castle district | Период: 1895–1902</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/budapest_fishermans_bastion.jpg" alt="Budapest Fishermans Bastion" width="1600" height="1066" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/budapest_fishermans_bastion_b.jpg" alt="Budapest Fishermans Bastion — вид 2" width="330" height="247" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Над Дунаем и Будайской цитаделью расположена Бастион рыбаков — величественное укрепление, построенное в конце XIX века для защиты западного фланга города. Его семь башен символизируют исторические венгерские графства. Бастион имеет семь башен, каждая из которых представляет одну из традиционных графств Венгрии. Было спроектировано знаменитыми венгерскими архитекторами Миклошем Иблом и Фригейшем Шулеком. Его строительство началось в 1895 году и закончилось в 1902 году. Посетители могут подняться на башни, чтобы полюбоваться панорамными видами города. Бастион рыбака расположен на Холме замка с видом на Дунай.</p>
 <p class="prose">Построенный между 1895 и 1902 годами Миклошем Ибл и Фригешем Шулеком, бастион изначально предназначался в качестве оборонительного сооружения, но позже стал популярной туристической достопримечательностью. Отсюда открывается панорамный вид на живописные набережные Будапешта и такие знаковые здания, как Парламент и базилика Святого Стефана. Бастион рыбака — место, которое обязательно стоит посетить благодаря своим захватывающим панорамам и историческому значению. Отсюда открывается уникальный взгляд на богатое культурное наследие Будапешта.</p></div>
 </section>
-<section class="place" id="budapest_gresham_palace_budapest">
-<h3>Budapest Gresham Palace Budapest</h3>
-
-<p class="place-meta">Период: 1911</p>
-<figure class="place-fig"><img src="../images/budapest_gresham_palace_budapest.jpg" alt="Budapest Gresham Palace Budapest"/></figure>
-<div class="place-desc"><p class="prose">The Four Seasons Gresham Palace — исторический отель, расположенный на элегантном проспекте Андраши в Будапеште, который когда-то называли «Шанз-Элизея Венгрии». Построенный в 1911 году, он изначально был возведен в качестве роскошного дворцового отеля известным архитектором Ödön Lechner. Открылся в 1911 году в качестве роскошного отеля для состоятельных гостей. Спроектировано венгерским архитектором Одёном Лехнером в стиле Ар-нуво. Признан объектом культурного наследия в 1964 году. Расположен на проспекте Андраши, объекте Всемирного наследия ЮНЕСКО. Предлагает панорамные виды на город и Дунай.</p>
-<p class="prose">Завершённый в 1911 году, Грэшэм-Палас служил одной из самых роскошных гостиниц Европы своего времени. Спроектированный в стиле ар-нуво, он демонстрировал изысканный интерьер и современные удобства для той эпохи. Здание внесено в список объектов культурного наследия с 1964 года и остаётся символом архитектурного величия Будапешта. Посетители приезжают, чтобы насладиться элегантностью и историческим шармом этого знакового отеля, который предлагает захватывающие виды на Дунай и служит напоминанием о богатом прошлом Будапешта.</p></div>
-</section>
 <section class="place" id="budapest_gellert_hill_view">
+<div class="place-lead">
 <h3>Budapest Gellert Hill View</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/budapest_gellert_hill_view.jpg" alt="Budapest Gellert Hill View"/></figure>
+<p class="place-meta">Место: Gellért Hill, XI district</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/budapest_gellert_hill_view.jpg" alt="Budapest Gellert Hill View" width="1600" height="1200" style="height: 102px; max-height: 102px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/budapest_gellert_hill_view_b.jpg" alt="Budapest Gellert Hill View — вид 2" width="330" height="73" style="height: 102px; max-height: 102px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Над Будапештом, на горе Геллерт, открывается панорамный вид на Дунай и город внизу. Ее пышные зеленые склоны служат умиротворяющим убежищем от суеты центра города. На холме расположены термальные купальни Геллерт, известные своими целебными водами и роскошными спа-процедурами. Здесь распожены живописные руины замка, которые дают представление о средневековой венгерской истории. На вершине холма возвышается внушительная Цитаделла, откуда открывается дополнительный живописный вид на город. В ночное время холм подсвечивается, создавая волшебную атмосферу, которая приумножает его красоту. Гора Геллерт также славится своей яркой архитектурой в стиле ар-нуво, особенно заметной в соседних купальнях.</p>
 <p class="prose">Названный в честь Святого Геллерта, который был мучеником здесь в X веке, Холм Геллерта долгое время был священным местом. Он стал популярной туристической достопримечательностью после строительства культового отеля &quot;Геллерт Спа&quot; в 1912 году, который по сей день остается одной из наиболее узнаваемых достопримечательностей Венгрии. Гора Геллерт привлекает посетителей своими захватывающими панорамами и историческим значением, что делает её обязательным к посещению место для всех, кто исследует Будапешт.</p></div>
 </section>
 <section class="place" id="budapest_great_market_hall">
+<div class="place-lead">
 <h3>Budapest Great Market Hall</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1897</p>
-<figure class="place-fig"><img src="../images/budapest_great_market_hall.jpg" alt="Budapest Great Market Hall"/></figure>
+<p class="place-meta">Адрес: Fővám Square, Pest | Период: 1897</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/budapest_great_market_hall.jpg" alt="Budapest Great Market Hall" width="1600" height="1066" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/budapest_great_market_hall_b.jpg" alt="Budapest Great Market Hall — вид 2" width="330" height="495" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Великий Рынок — это знаковой центральный рынок Будапешта, свидетельство богатого архитектурного наследия города и его яркой кулинарной культуры. Открыто в 1897 году во времена Австро-Венгерской империи. Спроектировано известным архитектором Ödön Lechner. Объявлен национальным памятником с 1964 г. С яркими лавками, где продают местные деликатесы, такие как паприка и гуляш. Проводил множество культурных мероприятий и фестивалей на протяжении своей истории.</p>
 <p class="prose">Построенный в 1897 году, Великий рынок (Great Market Hall) был спроектирован архитектором Одёном Лехнером в неомавританском стиле. До середины XX века он служил главным продуктовым рынком Будапешта, предлагая свежие продукты, мясо и специи со всей Венгрии. Сегодня это место остается одной из самых посещаемых туристических достопримечательностей, сочетая историческое значение с современным очарованием. Посетите Большой рыночный зал, чтобы окунуться в традиционную венгерскую кухню и стать свидетелем оживленной атмосферы многолюдного рынка Будапешта.</p></div>
 </section>
-<section class="place" id="budapest_heroes_square">
-<h3>Budapest Heroes Square</h3>
+<section class="place" id="budapest_gresham_palace_budapest">
+<div class="place-lead">
+<h3>Budapest Gresham Palace Budapest</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1896–1929</p>
-<figure class="place-fig"><img src="../images/budapest_heroes_square.jpg" alt="Budapest Heroes Square"/></figure>
+<p class="place-meta">Период: 1911</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/budapest_gresham_palace_budapest.jpg" alt="Budapest Gresham Palace Budapest" width="1280" height="960" style="height: 281px; max-height: 281px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/budapest_gresham_palace_budapest_b.jpg" alt="Budapest Gresham Palace Budapest — вид 2" width="330" height="201" style="height: 281px; max-height: 281px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">The Four Seasons Gresham Palace — исторический отель, расположенный на элегантном проспекте Андраши в Будапеште, который когда-то называли «Шанз-Элизея Венгрии». Построенный в 1911 году, он изначально был возведен в качестве роскошного дворцового отеля известным архитектором Ödön Lechner. Открылся в 1911 году в качестве роскошного отеля для состоятельных гостей. Спроектировано венгерским архитектором Одёном Лехнером в стиле Ар-нуво. Признан объектом культурного наследия в 1964 году. Расположен на проспекте Андраши, объекте Всемирного наследия ЮНЕСКО. Предлагает панорамные виды на город и Дунай.</p>
+<p class="prose">Завершённый в 1911 году, Грэшэм-Палас служил одной из самых роскошных гостиниц Европы своего времени. Спроектированный в стиле ар-нуво, он демонстрировал изысканный интерьер и современные удобства для той эпохи. Здание внесено в список объектов культурного наследия с 1964 года и остаётся символом архитектурного величия Будапешта. Посетители приезжают, чтобы насладиться элегантностью и историческим шармом этого знакового отеля, который предлагает захватывающие виды на Дунай и служит напоминанием о богатом прошлом Будапешта.</p></div>
+</section>
+<section class="place" id="budapest_heroes_square">
+<div class="place-lead">
+<h3>Budapest Heroes Square</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Место: End of Andrássy Avenue, City Park entrance | Период: 1896–1929</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/budapest_heroes_square.jpg" alt="Budapest Heroes Square" width="1600" height="1067" style="height: 260px; max-height: 260px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/budapest_heroes_square_b.jpg" alt="Budapest Heroes Square — вид 2" width="330" height="186" style="height: 260px; max-height: 260px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Площадь Героев — самый знаковый монументальный ансамбль Будапешта, демонстрирующий гордую историю и национальную идентичность города. Расположенная на Будайской па́ди, она была построена в период между 1896 и 1929 годами в рамках Памятника Тысячелетия, воздвигнутого в честь тысячелетия со дня основания Венгрии. Площадь окружена неоклассическими зданиями, спроектированными Имре Штайндлем и Одён Лехнером. В здании находится Музей венгерской истории, где представлены артефакты, связанные с прошлым Венгрии. В центре возвышается величественная статуя короля Стефана I, первого короля Венгрии. Каждая сторона площади представляет разные периоды венгерской истории, включая Средневековье, эпоху Реформации и Эпоху Просвещения. Площадь Героев стала объектом Всемирного наследия ЮНЕСКО в 1987 году.</p>
 <p class="prose">Сформированная в течение нескольких десятилетий, Площадь Героев украшена статуями венгерских королей, королев и героев, а также аллегорическими фигурами, изображающими различные аспекты венгерской культуры и истории. На площади также расположена массивная Статуя Сечени, символизирующая прогресс и реформу. Посетители приходят сюда, чтобы полюбоваться грандиозной архитектурой, впечатляющими скульптурами и потрясающими видами Дунайской реки.</p></div>
 </section>
 <section class="place" id="budapest_house_of_terror">
+<div class="place-lead">
 <h3>Budapest House Of Terror</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/budapest_house_of_terror.jpg" alt="Budapest House Of Terror"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/budapest_house_of_terror.jpg" alt="Budapest House Of Terror" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/budapest_house_of_terror_b.jpg" alt="Budapest House Of Terror — вид 2" width="330" height="220" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Музей Дома Террора — жуткое напоминание о мрачных главах недавней истории Венгрии. Расположенный в бывшем штабе Гестапо и нацистской тюрьме, он рассказывает историю репрессий, сопротивления и выживания во время Второй мировой войны. В музее представлены экспозиции, посвященные преступлениям, совершенным как нацистами, так и коммунистами. Посетители могут осмотреть оригинальные камеры и комнаты допросов, которые использовались оккупационными силами. Интерактивные дисплеи предоставляют контекст с помощью мультимедиа и артефактов. Экскурсии доступны на нескольких языках. Музей получил несколько наград за инновационный подход к историческому повествованию.</p>
 <p class="prose">Построенное в начале XX века как штаб венгерской секретной полиции, здание позднее стало печально известной штаб-квартирой Гестапо во время нацистской оккупации. После войны оно служило тюрьмой до его закрытия в 1989 году. Музей открылся в 2002 году в память о жертвах тоталитарных режимов. Этот музей предлагает одновременно мучительное и крайне важное представление о борьбе Венгрии с фашизмом и угнетением.</p></div>
 </section>
 <section class="place" id="budapest_hungarian_national_museum">
+<div class="place-lead">
 <h3>Budapest Hungarian National Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Период: 1808</p>
-<figure class="place-fig"><img src="../images/budapest_hungarian_national_museum.jpg" alt="Budapest Hungarian National Museum"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/budapest_hungarian_national_museum.jpg" alt="Budapest Hungarian National Museum" width="1280" height="1078" style="height: 389px; max-height: 389px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--row-sized"><img src="../images/budapest_hungarian_national_museum_b.jpg" alt="Budapest Hungarian National Museum — вид 2" width="330" height="674" style="height: 389px; max-height: 389px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Национальный музей Венгрии — главное культурное учреждение Будапешта, демонстрирующее богатое историческое и художественное наследие нации. В его коллекции хранится более 4 миллионов экспонатов, включая археологические находки, картины, скульптуры и манускрипты. Среди примечательных экспонатов — древнеримские реликвии, средневековые религиозные артефакты и произведения известных венгерских художников, таких как Мункацси и Климт. В музее прошла масштабная реконструкция в начале 2000-х годов, что улучшило доступность и модернизировало его помещения. Его архитектура отражает различные стили, сочетая неоклассические элементы с современным дизайном. Расположенный на площади Вёросмарта, он предлагает панорамные виды на Дунай.</p>
 <p class="prose">Основанный в 1808 году как Королевская венгерская академия наук, он впоследствии превратился в музей, посвященный культуре и истории Венгрии. Со временем его коллекции значительно расширились, став одним из самых полных собраний венгерского искусства и артефактов в Европе. Посетители приезжают сюда, чтобы изучить историю, искусство и культуру Венгрии благодаря ее обширным экспозициям и коллекциям.</p></div>
 </section>
 <section class="place" id="budapest_hungarian_parliament">
+<div class="place-lead">
 <h3>Budapest Hungarian Parliament</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1885–1902</p>
-<figure class="place-fig"><img src="../images/budapest_hungarian_parliament.jpg" alt="Budapest Hungarian Parliament"/></figure>
+<p class="place-meta">Адрес: Kossuth Lajos Square, Pest riverbank | Период: 1885–1902</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/budapest_hungarian_parliament.jpg" alt="Budapest Hungarian Parliament" width="1600" height="900" style="height: 259px; max-height: 259px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/budapest_hungarian_parliament_b.jpg" alt="Budapest Hungarian Parliament — вид 2" width="330" height="201" style="height: 259px; max-height: 259px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Здание Венгерского парламента — самая культовая достопримечательность Будапешта, возвышающаяся над берегами Дуная. Завершённое в 1902 году, оно демонстрирует сочетание нео-готического и нео-ренессансного стилей, а его высокие шпили устремляются к небу. Он состоит из двух корпусов, в каждом из которых около 600 номеров. Внутри он богато украшен залами и залами, включая Зал Совета и Тронный зал. Здание расположено на холме с видом на Дунай, откуда открывается панорама города. Стоимость строительства оказалась почти в три раза выше первоначального бюджета из-за изменений в проекте и задержек. Сегодня оно служит одновременно и музеем, и действующим парламентом.</p>
 <p class="prose">Построенный в период с 1885 по 1902 год, Парламент был спроектирован архитектором Имре Штайндлем для размещения законодательного собрания Венгрии. Здание славится своей сложной декорацией, включая статуи, изображающие исторические личности, и аллегорические сцены, посвященные венгерской культуре и ценностям. Посещение Венгерского парламента позволяет получить представление о богатом политическом и культурном наследии Венгрии.</p></div>
 </section>
 <section class="place" id="budapest_hungarian_state_opera">
+<div class="place-lead">
 <h3>Budapest Hungarian State Opera</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1884</p>
-<figure class="place-fig"><img src="../images/budapest_hungarian_state_opera.jpg" alt="Budapest Hungarian State Opera"/></figure>
+<p class="place-meta">Адрес: Andrássy Avenue 22, VI district | Период: 1884</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/budapest_hungarian_state_opera.jpg" alt="Budapest Hungarian State Opera" width="1600" height="1200" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/budapest_hungarian_state_opera_b.jpg" alt="Budapest Hungarian State Opera — вид 2" width="330" height="494" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Национальная оперная сцена Венгрии – знаковый культурный памятник Будапешта, знаменитый своей роскошной неоренессансной архитектурой и выступлениями мирового класса. Открытие состоялось 23 декабря 1884 года с «Аидой» Верди. Его роскошные интерьеры украшены сусальным золотом, мраморными колоннами и хрустальными люстрами. Здание прошло масштабную реконструкцию в начале 20 века под руководством Адольфа Шульца. Сегодня это остается одной из главных площадок для оперы и классической музыки в Центральной Европе. Знаменитые дирижёры, такие как Герберт фон Карамян, выступали здесь.</p>
 <p class="prose">Построенный в 1884 году, оперный театр был спроектирован знаменитым архитектором Фригешем Шулеком для проведения грандиозных опер, балетов и концертов классической музыки. Он быстро стал символом художественного мастерства Венгрии и ее международного признания, принимая на протяжении десятилетий выступления некоторых из самых известных артистов Европы. Посещение Венгерской государственной оперы позволяет ощутить как богатое культурное наследие Венгрии, так и захватывающую дух красоту её интерьера.</p></div>
 </section>
 <section class="place" id="budapest_kopaszi_gat">
+<div class="place-lead">
 <h3>Budapest Kopaszi Gat</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/budapest_kopaszi_gat.jpg" alt="Budapest Kopaszi Gat"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/budapest_kopaszi_gat.jpg" alt="Budapest Kopaszi Gat" width="1067" height="1600" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/budapest_kopaszi_gat_b.jpg" alt="Budapest Kopaszi Gat — вид 2" width="330" height="247" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Расположенный на стороне Буда Дунайской реки, парк Копаши-гат — очаровательное место, откуда открываются панорамные виды на реку и берег Пешта. Пышная зелень парка обеспечивает спокойное убежище от суеты центра города. Основан в конце 1800-х годов в период венгерской индустриализации и модернизации. Характеризуется сочетанием формальных садов и природных лесных массивов. Предлагает пешеходные маршруты, ведущие к различным точкам вдоль реки. Находится рядом с рядом исторических достопримечательностей, включая замок Хилл и Королевский дворец. Излюбленное место для романтических прогулок и фотосъемки.</p>
 <p class="prose">Изначально открытый в конце XIX века в рамках плана городского развития города, Копаши-гэть был спроектирован для сообщения между Будой и Пештом через реку. Со временем он стал популярным местом как для местных жителей, так и для туристов, известным своими живописными прогулками и спокойной атмосферой. Посетите Копаши-гат, чтобы насладиться захватывающими панорамами Дуная и ощутить безмятежную красоту зеленых насаждений Будапешта.</p></div>
 </section>
-<section class="place" id="budapest_liberty_bridge">
-<h3>Budapest Liberty Bridge</h3>
+<section class="place" id="budapest_landmark">
+<div class="place-lead">
+<h3>Budapest Landmark</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1930–1933</p>
-<figure class="place-fig"><img src="../images/budapest_liberty_bridge.jpg" alt="Budapest Liberty Bridge"/></figure>
+<p class="place-meta">Адрес: See official visitor information.</p>
+<figure class="place-fig place-fig--hi-res"><img src="../images/budapest_landmark.jpg" alt="Budapest Landmark" width="1067" height="1600"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Церковь Матиаса, в Будапеште — место поклонения в Будапеште. Публичные фотоархивы ассоциируют это место с: Будапешт, церковь Матьяша, Венгрия, архитектура.</p></div>
+</section>
+<section class="place" id="budapest_liberty_bridge">
+<div class="place-lead">
+<h3>Budapest Liberty Bridge</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Место: Connects Fővám Square (Pest) and Gellért Square (Buda) | Период: 1930–1933</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/budapest_liberty_bridge.jpg" alt="Budapest Liberty Bridge" width="1280" height="783" style="height: 282px; max-height: 282px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/budapest_liberty_bridge_b.jpg" alt="Budapest Liberty Bridge — вид 2" width="330" height="206" style="height: 282px; max-height: 282px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Нависающий над Дунаем и соединяющий Буду с Пештом, мост Свободы является свидетельством современного инженерного искусства своей эпохи. Построенный в межвоенные годы, он был спроектирован венгерским архитектором Одёном Лехнером. Он соединяет два крупных района Будапешта — Буду и Пешт. Мост первоначально назывался Цепной мост II из-за его сходства с близлежащим Цепным мостом. Его строительство ознаменовало значительный прогресс в венгерской гражданской инженерии. Мост Свободы претерпел несколько реконструкций с момента своего открытия, но при этом сохранил многое из своего первоначального дизайна. Это одно из немногих сохранившихся образцов архитектуры Ар-нуво в Будапеште.</p>
 <p class="prose">Построенный в период с 1930 по 1933 год, мост «Свободы» заменил более старый подвесной мост, который был поврежден во время Первой мировой войны. Представленный в стиле ар-нуво, он украшен замысловатым кованым железом и декоративными элементами, характерными для работ Лехнера. Мост стал знаковой частью городского ландшафта Будапешта, откуда открываются панорамные виды на реку и окружающие холмы. Посетителям следует ознакомиться с мостом Либерти, чтобы оценить его историческое значение и захватывающие виды на Дунай.</p></div>
 </section>
 <section class="place" id="budapest_margaret_island">
+<div class="place-lead">
 <h3>Budapest Margaret Island</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/budapest_margaret_island.jpg" alt="Budapest Margaret Island"/></figure>
+<p class="place-meta">Место: Danube between Margaret Bridge and Árpád Bridge</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/budapest_margaret_island.jpg" alt="Budapest Margaret Island" width="1600" height="1066" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/budapest_margaret_island_b.jpg" alt="Budapest Margaret Island — вид 2" width="330" height="227" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Расположенный в самом сердце Будапешта, остров Маргарита — это безмятежный оазис, предлагающий умиротворение посреди суеты городской жизни. Этот искусственный остров был создан путем возведения запруды на Дунае и с самого начала стал любимым местом отдыха для местных жителей и гостей города. Остров занимает приблизительно 64 гектара и включает обширные парковые зоны и пешеходные тропы. Здесь находится один из крупнейших в Европе термальных купальных комплексов — Купальни Сеченьи, который ежедневно привлекает тысячи посетителей. Остров Маргарет также может похвастаться элегантным Королевским дворцом, который был первоначально построен как летняя резиденция для венгерской знати. Помимо культурных достопримечательностей, остров предоставляет возможности для велопрогулок, бега трусцой и пикников. Местные часто называют его «маленьким кусочком рая» внутри города.</p>
 <p class="prose">Первоначально построенный в конце XIX века в рамках городских планов по предоставлению зеленых насаждений жителям, остров Маргарет получил свое название в честь святой Маргариты Венгерской, средневековой княжны, почитаемой на местном уровне. Остров стал популярной рекреационной зоной после строительства ряда заметных достопримечательностей, таких как бани Сечени и Королевский дворец. Место, которое обязательно стоит посетить всем, кто ищет убежище от городской суеты, Остров Маргарет предлагает живописные прогулки, исторические памятники и роскошные купальные комплексы.</p></div>
 </section>
 <section class="place" id="budapest_matthias_church">
+<div class="place-lead">
 <h3>Budapest Matthias Church</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1728–1769</p>
-<figure class="place-fig"><img src="../images/budapest_matthias_church.jpg" alt="Budapest Matthias Church"/></figure>
+<p class="place-meta">Адрес: Szentháromság Square, Buda Castle | Период: 1728–1769</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/budapest_matthias_church.jpg" alt="Budapest Matthias Church" width="1066" height="1600" style="height: 406px; max-height: 406px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/budapest_matthias_church_b.jpg" alt="Budapest Matthias Church — вид 2" width="330" height="290" style="height: 406px; max-height: 406px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Доминирующая на Паестской стороне Будапештской набережной Дуная, церковь Матьяша — величественное барочное сооружение, которое на протяжении столетий является символом венгерской идентичности. Он стоит на месте, где в XI веке была построена первая каменная церковь. Интерьер украшен замысловатыми фресками и статуями, созданными известными художниками, такими как Миклош Переньи. Его башня предлагает захватывающие виды на город и реку внизу. Церковь сильно пострадала во время Второй мировой войны, но после войны была кропотливо восстановлена. Сегодня это место служит как религиозным объектом, так и культурной достопримечательностью.</p>
 <p class="prose">Построенный в период с 1728 по 1769 год, костёл Святого Михаила (Matthias Church) изначально был посвящен Святому Михаилу, но позже был переименован в честь короля Яноша Корвинуса, который сыграл ключевую роль в средневековой истории Венгрии. Церковь претерпела значительную реконструкцию в течение XIX века, получив свой нынешний неоклассический облик. Посетители приезжают сюда, чтобы полюбоваться его грандиозной архитектурой и насладиться панорамными видами на Дунай.</p></div>
 </section>
-<section class="place" id="budapest_pdfband_1_5724a212">
-<h3>Budapest</h3>
-
-
-<figure class="place-fig"><img src="../images/budapest_pdfband_1_5724a212.jpg" alt="Budapest"/></figure>
-<div class="place-desc"><p class="prose">Церковь Матиаса, в Будапеште — место поклонения в Будапеште. Публичные фотоархивы ассоциируют это место с: Будапешт, церковь Матьяша, Венгрия, архитектура.</p></div>
-</section>
 <section class="place" id="budapest_museum_of_applied_arts_budapest">
+<div class="place-lead">
 <h3>Budapest Museum Of Applied Arts Budapest</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Период: 1896</p>
-<figure class="place-fig"><img src="../images/budapest_museum_of_applied_arts_budapest.jpg" alt="Budapest Museum Of Applied Arts Budapest"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/budapest_museum_of_applied_arts_budapest.jpg" alt="Budapest Museum Of Applied Arts Budapest" width="1280" height="960" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/budapest_museum_of_applied_arts_budapest_b.jpg" alt="Budapest Museum Of Applied Arts Budapest — вид 2" width="330" height="247" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Музей декоративно-прикладного искусства — учреждение мирового уровня, демонстрирующее лучшие образцы декоративно-прикладного искусства со всей Европы. Основанный на рубеже XX века, он хранит коллекции, охватывающие столетия: от средневекового мастерства до современного дизайна. В нем представлено более 40 000 объектов из разных периодов и культур. В коллекции представлены работы таких известных художников, как Густав Климт и Альфонс Муха. Само здание — шедевр архитектуры ар-нуво, украшенный замысловатой керамической плиткой и витражными окнами. В рамках регулярных временных выставок можно ознакомиться с современными тенденциями в дизайне и рукоделии. Посетители могут ознакомиться с тематическими выставками, посвященными керамике, текстилю, мебели и ювелирному делу.</p>
 <p class="prose">Основанный в 1896 году во время золотого века Венгрии, музей изначально был спроектирован Ödön Lechner, одной из ведущих фигур венгерского ар-нуво. Его узнаваемая нео-готическая и ар-нуво архитектура отражает культурный и художественный дух эпохи Будапешта конца века (fin-de-siècle). Посещение Музея прикладного искусства обязательно для всех, кто интересуется искусством, дизайном и историческим ремеслом. Здесь можно увидеть уникальное представление об эволюции европейской эстетики.</p></div>
 </section>
 <section class="place" id="budapest_museum_of_fine_arts">
+<div class="place-lead">
 <h3>Budapest Museum Of Fine Arts</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1872</p>
-<figure class="place-fig"><img src="../images/budapest_museum_of_fine_arts.jpg" alt="Budapest Museum Of Fine Arts"/></figure>
+<p class="place-meta">Адрес: Heroes’ Square, XIV district | Период: 1872</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/budapest_museum_of_fine_arts.jpg" alt="Budapest Museum Of Fine Arts" width="1600" height="1071" style="height: 309px; max-height: 309px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/budapest_museum_of_fine_arts_b.jpg" alt="Budapest Museum Of Fine Arts — вид 2" width="330" height="404" style="height: 309px; max-height: 309px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Музей изящных искусств — главное учреждение Будапешта в сфере искусства и культуры, в котором представлены шедевры, охватывающие столетия европейских художественных традиций. В здании выставлено более 60 000 произведений искусства в различных медиа, включая живопись, скульптуру и керамику. В числе знаковых постоянных экспозиций — работы Маттиаса Грюневальда, Эль Греко и Дега. Само здание является ярким примером неоренессансской архитектуры, разработанной Миклошем Ибле, который также руководил строительством Палаты заседаний. Открыто для публики 1 ноября 1896 года после масштабной реконструкции и расширения. Регулярно проводит временные выставки современного искусства и специальные тематические экспозиции.</p>
 <p class="prose">Основанный в 1872 году, музей изначально содержал коллекции Национального музея, прежде чем стать отдельным учреждением, посвященным изящным искусствам. С тех пор он превратился в одно из самых значимых хранилищ Европы живописи, скульптуры и декоративно-прикладного искусства, чья архитектура отражает неоренессансный стиль, доминирующий во многих частях городского ландшафта Будапешта. Посетители приезжают сюда, чтобы увидеть мировые шедевры известных художников, таких как Рембрандт, Рубенс и Ван Гог, а также менее известные, но не менее важные работы венгерских мастеров.</p></div>
 </section>
 <section class="place" id="budapest_rudas_baths">
+<div class="place-lead">
 <h3>Budapest Rudas Baths</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/budapest_rudas_baths.jpg" alt="Budapest Rudas Baths"/></figure>
+<p class="place-meta">Адрес: Döbrentei Square, Tabán, I district</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--row-sized"><img src="../images/budapest_rudas_baths.jpg" alt="Budapest Rudas Baths" width="1000" height="593" style="height: 273px; max-height: 273px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/budapest_rudas_baths_b.jpg" alt="Budapest Rudas Baths — вид 2" width="330" height="247" style="height: 273px; max-height: 273px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Бани Рудаш — одна из старейших и самых известных термальных бань Будапешта, упоминания о которых относятся к XIII веку. Бани славятся своими сероводородными водами с целебными свойствами. Расположенные недалеко от центра исторического района Будапешта, они предлагают потрясающие виды на Дунай. Гости могут насладиться как внутренним, так и открытым бассейном, включая подогревленный до 38°C бассейн. Внутри расположен кафе, где подают традиционные венгерские блюда и напитки. Бани Рудас также располагают саунами, парилками и зонами релаксации.</p>
 <p class="prose">Изначально построенные как средневековая спа-купель во времена правления короля Белы IV, бани Рудаш прошли многочисленные реконструкции на протяжении веков. Современное здание датируется концом XIX века и было спроектировано архитектором Фригешем Шулеком в неоренессанционном стиле. Со временем бани стали культурным центром как для местных жителей, так и для гостей, предлагая традиционные венгерские купальные ритуалы и терапевтические процедуры. Посещение купален Рудаш позволяет путешественникам окунуться в аутентичную венгерскую культуру и насладиться омолаживающими термальными водами.</p></div>
 </section>
 <section class="place" id="budapest_shoes_danube_memorial">
+<div class="place-lead">
 <h3>Budapest Shoes Danube Memorial</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 2005</p>
-<figure class="place-fig"><img src="../images/budapest_shoes_danube_memorial.jpg" alt="Budapest Shoes Danube Memorial"/></figure>
+<p class="place-meta">Место: Pest embankment near Parliament | Период: 2005</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/budapest_shoes_danube_memorial.jpg" alt="Budapest Shoes Danube Memorial" width="1600" height="1166" style="height: 310px; max-height: 310px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/budapest_shoes_danube_memorial_b.jpg" alt="Budapest Shoes Danube Memorial — вид 2" width="330" height="222" style="height: 310px; max-height: 310px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">На набережной Дуная, рядом со зданием парламента, находится трогательный мемориал, известный как «Обувь на набережной Дуная». Он посвящен жертвам Холокоста, которые были расстреляны милицией Крестоносцев-стрел во время Второй мировой войны. Скульптура находится на улице Андраши (Andrássy út), недалеко от Венгерского парламента. Каждый ботинок отлит по реальным следам ног, взятым у выживших и потомков жертв Холокоста. Инсталляция была профинансирована за счет частных пожертвований и поддержки местного сообщества. Это место стало популярным для туристов и местных жителей, где они могут размышлять и отдать дань уважения. Дизайн интегрирует природный ландшафт, гармонично сочетаясь с окружающей средой.</p>
 <p class="prose">Установленная в 2005 году эта скульптура была создана художником Дюлой Пауэром и инженером Тибором Бондой. Инсталляция состоит из двенадцати бронзовых туфель, расположенных вдоль набережной и символизирующих тысячи людей, которых заставляли раздеваться перед тем, как выстрелить в воду. Каждая туфель представляет одну жертву, а её размер отражает возраст и пол. Этот трогательный мемориал служит напоминанием о мрачном прошлом Будапешта и является данью памяти тем, кто погиб во время Холокоста.</p></div>
 </section>
 <section class="place" id="budapest_st_stephens_basilica">
+<div class="place-lead">
 <h3>Budapest St Stephens Basilica</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1851–1906</p>
-<figure class="place-fig"><img src="../images/budapest_st_stephens_basilica.jpg" alt="Budapest St Stephens Basilica"/></figure>
+<p class="place-meta">Адрес: Szent István Square, Pest | Период: 1851–1906</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/budapest_st_stephens_basilica.jpg" alt="Budapest St Stephens Basilica" width="1202" height="1600" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/budapest_st_stephens_basilica_b.jpg" alt="Budapest St Stephens Basilica — вид 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Расположенная на берегах Дуная и доминирующая над панорамой Будапешта, Базилика Святого Стефана является величественным символом венгерского католицизма и национальной гордости. Оно возвышается на высоте более 96 метров, что делает его одним из самых высоких зданий в Будапеште. Внутри расположены потрясающие витражные окна с изображениями сцен венгерской истории и библейского повествования. Его двойные шпили — одна из самых знаковых достопримечательностей города, которые видны из многих частей центра. Внутри базилики музей демонстрирует артефакты, связанные венгерскими святыми и историческими личностями. Экскурсии предоставляют представление о ее богатой истории и архитектурных особенностях.</p>
 <p class="prose">Построенная в период с 1851 по 1906 год, базилика была возведена в честь первого короля Венгрии, Святого Стефана I, который объединил страну в XI веке. Проект выполнен Алаёшем Шик в неоготическом стиле и сочетает элементы романской архитектуры с замысловатыми деталями, вдохновлёнными средневековыми соборами. Базилика служила центром религиозных церемоний и политических собраний во время бурную современную историю Венгрии. Посещение базилики Святого Стефана позволяет путешественникам ощутить слияние архитектурной красоты и духовного значения, которые определяют культурное наследие Будапешта.</p></div>
 </section>
+<section class="place" id="budapest_szechenyi_bath">
+<div class="place-lead">
+<h3>Budapest Szechenyi Bath</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: City Park (Városliget), XIV district | Период: 1913</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/budapest_szechenyi_bath.jpg" alt="Budapest Szechenyi Bath" width="1600" height="1125" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/budapest_szechenyi_bath_b.jpg" alt="Budapest Szechenyi Bath — вид 2" width="330" height="219" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Войдите в успокаивающие объятия термальных купаний Сеченьи — царского оазиса, расположенного в центре Будапешта с 1913 года. Эта роскошная баня была спроектирована известным архитектором Ödön Lechner и демонстрирует великолепие ар-нуво. Бани имеют девять бассейнов, включая крытые и открытые. Он предлагает как традиционные венгерские банные ритуалы, так и современные оздоровительные услуги. Гости могут насладиться видом на Дунай из террасы на верхнем уровне. Ее архитектура сочетает элементы ар-нуво и неоклассических стилей. Открытие состоялось в рамках празднования столетия Венгрии.</p>
+<p class="prose">Построенные в 1913 году, термальные купальни Сеченьи являются одними из крупнейших в Европе. Они были возведены в честь графа Иштвана Сеченьи — видного венгерского государственного деятеля, выступавшего за модернизацию и развитие инфраструктуры. Комплекс включает девять бассейнов, наполненных целебными минеральными водами, каждый из которых предлагает уникальные терапевтические преимущества. Посетите термальные купальни Сеченьи, чтобы окунуться в роскошную атмосферу богатого культурного наследия Венгрии, наслаждаясь при этом омолаживающими спа-процедурами.</p></div>
+</section>
 <section class="place" id="budapest_szent_istvan_park">
+<div class="place-lead">
 <h3>Budapest Szent Istvan Park</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/budapest_szent_istvan_park.jpg" alt="Budapest Szent Istvan Park"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/budapest_szent_istvan_park.jpg" alt="Budapest Szent Istvan Park" width="1280" height="960" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/budapest_szent_istvan_park_b.jpg" alt="Budapest Szent Istvan Park — вид 2" width="330" height="440" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Парк Святого Иштвана — очаровательный зеленый оазис, расположенный среди шумных улиц Будапешта, который предлагает спокойствие и красоту в пределах легкой досягаемости от центра города. Парк украшен элегантной неоклассической архитектурой и декоративными статуями. Он может похвастаться красивыми клумбами и ухоженными газонами. В парке Святого Иштвана проводятся различные культурные мероприятия в течение года, включая концерты и фестивали. Расположенный недалеко от реки Дунай, он предлагает потрясающие виды на Венгерский парламент. Парк легко доступен общественным транспортом и пешеходными дорожками.</p>
 <p class="prose">Основанный в конце XIX века, парк Szent István изначально был задуман как рекреационная зона для жителей города. Получив название в честь Святого Стефана, первого короля Венгрии, он со временем стал одним из самых любимых мест как местными жителями, так и гостями, где можно отдохнуть, прогуляться и насладиться природой прямо дома. Этот парк важен как с исторической, так и с точки зрения атмосферы, что делает его обязательным местом посещения для всех, кто исследует зелёные зоны Будапешта.</p></div>
 </section>
 <section class="place" id="budapest_szimpla_kert">
+<div class="place-lead">
 <h3>Budapest Szimpla Kert</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Период: 2004</p>
-<figure class="place-fig"><img src="../images/budapest_szimpla_kert.jpg" alt="Budapest Szimpla Kert"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/budapest_szimpla_kert_b.jpg" alt="Budapest Szimpla Kert" width="330" height="220"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Szimpla Kert — яркое открытое заведение, расположенное среди живописных холмов Буды в Будапеште. Оно предлагает уникальное сочетание уличной еды, живой музыки и красочных декораций, создавая праздничное настроение. Создан в 2004 году на месте бывшей оранжереи и садового кафе. Комплекс включает более 60 тематических комнат с разнообразным декором и инсталляциями. Регулярно проходят выступления андеграундных групп, диджеев и независимых артистов. Расположен в пешей доступности от очаровательного Замкового квартала. Работает круглый год с сезонными программами.</p>
 <p class="prose">Изначально открытый в начале 2000-х годов в качестве небольшого садового кафе, Szimpla Kert быстро завоевал популярность как среди местных жителей, так и среди туристов благодаря своему эклектичному настроению и непринужденной атмосфере. Со временем он превратился в многофункциональное пространство, где проводятся концерты, выставки искусств и фестивали. Обязательное место для посещения, если вы ищете яркий и подлинный опыт альтернативной культурной жизни Будапешта.</p></div>
 </section>
-<section class="place" id="budapest_chain_bridge">
-<h3>Budapest Chain Bridge</h3>
+<section class="place" id="budapest_tab_n_a_szem_utc_b_l">
+<div class="place-lead">
+<h3>Budapest Tab N A Szem Utc B L</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1849</p>
-<figure class="place-fig"><img src="../images/budapest_chain_bridge.jpg" alt="Budapest Chain Bridge"/></figure>
-<div class="place-desc"><p class="prose">Это был первый постоянный мост через Дунай в Будапеште. Его строительство стало значительным достижением в транспортной инфраструктуре. Мост назван в честь графа Иштвана Сеченьи, выдающегося венгерского государственного деятеля, выступавшего за модернизацию. Сегодня пешеходам разрешено прогуливаться по мосту без движения транспорта, наслаждаясь панорамными видами. Реставрационные работы в конце XX века сохранили его первозданный облик.</p>
-<p class="prose">Построенный британскими инженерами Уильямом Тирни Кларком и Адамом Кларком между 1839 и 1849 годами, этот мост был инженерным чудом своего времени. Он заменил паромное сообщение и стал символом единства двух берегов столицы. Элегантный дизайн включает железные цепи, поддерживающие дорогу, что делает его одним из первых в Европе подвесных мостов с цепным строением. Обязательная достопримечательность для посетителей Будапешта, Цепной мост имени Священника Сеченея предлагает захватывающие виды на Дунай и служит напоминанием о богатом промышленном наследии Венгрии.</p></div>
-</section>
-<section class="place" id="budapest_szechenyi_bath">
-<h3>Budapest Szechenyi Bath</h3>
-
-<p class="place-meta">Период: 1913</p>
-<figure class="place-fig"><img src="../images/budapest_szechenyi_bath.jpg" alt="Budapest Szechenyi Bath"/></figure>
-<div class="place-desc"><p class="prose">Войдите в успокаивающие объятия термальных купаний Сеченьи — царского оазиса, расположенного в центре Будапешта с 1913 года. Эта роскошная баня была спроектирована известным архитектором Ödön Lechner и демонстрирует великолепие ар-нуво. Бани имеют девять бассейнов, включая крытые и открытые. Он предлагает как традиционные венгерские банные ритуалы, так и современные оздоровительные услуги. Гости могут насладиться видом на Дунай из террасы на верхнем уровне. Ее архитектура сочетает элементы ар-нуво и неоклассических стилей. Открытие состоялось в рамках празднования столетия Венгрии.</p>
-<p class="prose">Построенные в 1913 году, термальные купальни Сеченьи являются одними из крупнейших в Европе. Они были возведены в честь графа Иштвана Сеченьи — видного венгерского государственного деятеля, выступавшего за модернизацию и развитие инфраструктуры. Комплекс включает девять бассейнов, наполненных целебными минеральными водами, каждый из которых предлагает уникальные терапевтические преимущества. Посетите термальные купальни Сеченьи, чтобы окунуться в роскошную атмосферу богатого культурного наследия Венгрии, наслаждаясь при этом омолаживающими спа-процедурами.</p></div>
-</section>
-<section class="place" id="budapest_pdfband_0_59767a6a">
-<h3>Tabán a szem utcából</h3>
-
-
-<figure class="place-fig"><img src="../images/budapest_pdfband_0_59767a6a.jpg" alt="Tabán a szem utcából"/></figure>
+<p class="place-meta">Адрес: See official visitor information.</p>
+<figure class="place-fig place-fig--hi-res"><img src="../images/budapest_tab_n_a_szem_utc_b_l.jpg" alt="Budapest Tab N A Szem Utc B L" width="1280" height="1458"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Места поклонения в Будапеште, также от улицы Табан.</p></div>
 </section>
-<section class="place" id="budapest_pdfband_3_29e17fee">
-<h3>The House of Houdini</h3>
+<section class="place" id="budapest_the_house_of_houdini">
+<div class="place-lead">
+<h3>Budapest The House Of Houdini</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/budapest_pdfband_3_29e17fee.jpg" alt="The House of Houdini"/></figure>
+<p class="place-meta">Адрес: See official visitor information.</p>
+<figure class="place-fig place-fig--hi-res"><img src="../images/budapest_the_house_of_houdini.jpg" alt="Budapest The House Of Houdini" width="1280" height="712"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Дом Худини — это достопримечательность Будапешта.</p></div>
 </section>
 <section class="place" id="budapest_vajdahunyad_castle">
+<div class="place-lead">
 <h3>Budapest Vajdahunyad Castle</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1904–1908</p>
-<figure class="place-fig"><img src="../images/budapest_vajdahunyad_castle.jpg" alt="Budapest Vajdahunyad Castle"/></figure>
+<p class="place-meta">Адрес: City Park lake | Период: 1904–1908</p>
+<figure class="place-fig place-fig--hi-res"><img src="../images/budapest_vajdahunyad_castle.jpg" alt="Budapest Vajdahunyad Castle" width="1600" height="972"/></figure>
+</div>
 <div class="place-desc"><p class="prose">На величественном холме с видом на пестрый Будапешта возвышается замок Вайдахуньяд — сказочный замок, сочетающий элементы средневековой венгерской архитектуры со стилями Ренессанса и Барокко. Замок был построен из материалов, полученных из разных частей Венгрии. В нем находится музей, посвященный венгерской истории и культуре. Его башня предлагает панорамный вид на Будапешт. Внутри посетители могут осмотреть Королевский зал, где проводятся специальные выставки. Дизайн замка включает элементы, заимствованные из нескольких знаменитых замков по всей Венгрии.</p>
 <p class="prose">Построенный между 1904 и 1908 годами в рамках Экспозиции тысячелетия, приуроченной к тысячелетию христианства в Венгрии, замок Вадьяхуньяд был спроектирован архитектором Фригешем Шулеком. Он сочетает в себе архитектурные элементы различных исторических периодов, включая готические, романские и ренессансные мотивы, что делает его уникальным сплавом стилей. Посетители приезжают сюда за потрясающими видами Дуная и историческим городским пейзажем, а также за впечатляющими внутренними экспозициями, демонстрирующими венгерские культурные артефакты и произведения искусства.</p></div>
 </section>

@@ -13,7 +13,7 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
 .otium-logo { font-family: 'Spectral', serif; font-size: 2.15rem;
   font-weight: 600; letter-spacing: 0.18em; margin-bottom: 0.85rem; }
 .otiump { margin: 0.42rem 0; line-height: 1.42; text-align: justify;
-  max-width: 38rem; font-size: 0.95rem; }
+  font-size: 0.95rem; }
 .guide-title { page-break-after: auto; margin-bottom: 0.55rem;
   page-break-inside: avoid; }
 .historical-reference { margin: 0.75rem 0 1.15rem;
@@ -63,22 +63,103 @@ ol.trip-stops a:hover { text-decoration: underline; }
 .heraldry-univ-caption { font-size: 0.52rem; line-height: 1.18;
   margin: 0.12rem 0 0; padding: 0 0.06rem; color: #252525;
   text-align: center; font-weight: 500; }
-.heraldry-motto { text-align: center; max-width: 18rem; margin: 0.18rem auto;
+.heraldry-motto { text-align: center; margin: 0.18rem auto;
   width: 100%; }
 .motto-line { font-family: 'Spectral', serif; font-size: 1rem;
   margin: 0; color: #333; line-height: 1.35; }
 .guide-title h1.guide-title-main { font-family: 'Spectral', serif;
   font-size: 2.35rem; margin-bottom: 0.5rem; font-weight: 600; }
 .lead { color: #444; font-size: 1.05rem; }
-.guide-toc { margin: 0.85rem 0 1.15rem; page-break-inside: avoid; }
-.guide-toc h2 { font-family: 'Spectral', serif; font-size: 1.28rem;
-  font-weight: 600; margin: 0.4rem 0 0.55rem; }
+
+.guide-toc { page-break-before: always; break-before: page;
+  page-break-after: always; break-after: page;
+  margin: 0; padding: 0.2rem 0 0.45rem; page-break-inside: auto; }
+.guide-toc h2 { font-family: 'Spectral', serif;
+  font-size: 1.28rem; font-weight: 600; margin: 0.4rem 0 0.55rem; }
 .guide-toc ol { margin: 0.35rem 0 0.65rem 1.25rem; padding: 0;
   columns: 2; column-gap: 1.5rem; }
 .guide-toc li { margin: 0.18rem 0; line-height: 1.35;
   font-size: 0.88rem; break-inside: avoid; }
-.guide-toc a { color: #1a5276; text-decoration: none; }
+.guide-toc a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.guide-toc a:hover { color: #0d3d56; }
 .guide-toc li.toc-item--sub { font-size: 0.82rem; margin-left: 0.35rem; }
+.toc-back { font-size: 0.78rem; margin: 0 0 0.35rem; text-align: right; }
+.toc-back a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.toc-back a:hover { color: #0d3d56; }
+.place, .historical-reference, .guide-primer, .guide-trip-plans {
+  scroll-margin-top: 1.25rem; }
+.historical-reference h2, .guide-primer h2, .guide-trip-plans h2,
+.chapter-head h2, .place-lead h3 { position: relative; }
+.guide-toc + .place, .guide-toc + .chapter-head {
+  page-break-before: avoid; break-before: avoid-page; }
+.place-lead { page-break-inside: avoid; break-inside: avoid-page;
+  page-break-after: auto; }
+.place-lead > h3 { page-break-after: avoid; break-after: avoid-page; }
+.place-lead > .place-meta { page-break-after: avoid; break-after: avoid-page; }
+
+.place-fig { page-break-inside: avoid; break-inside: avoid-page;
+  margin: 0.5rem 0 1rem; }
+.place-fig img {
+  page-break-inside: avoid; break-inside: avoid-page;
+  max-height: 48vh; width: auto; max-width: 100%;
+  object-fit: contain; margin-left: auto; margin-right: auto; }
+.place-fig--hi-res img { max-height: 52vh; }
+.place-fig--lo-res img { max-height: 30vh; }
+.place-pdf-fig-row {
+  display: flex; flex-direction: row; flex-wrap: wrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.45rem 0.55rem; margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row .place-fig {
+  flex: 1 1 30%; margin: 0; min-width: 26%; max-width: 100%; }
+.place-pdf-fig-row .place-fig img {
+  width: auto; max-width: 100%; height: auto; max-height: 44vh;
+  object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--pair {
+  flex-wrap: nowrap; justify-content: space-between;
+  align-items: flex-end; gap: 0.5rem 0.65rem; }
+.place-pdf-fig-row--pair .place-fig {
+  flex: 1 1 47%; min-width: 0; max-width: 50%;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--pair .place-fig img {
+  max-height: 44vh; object-fit: contain; }
+.place-pdf-fig-row--pair .place-fig--hi-res img { max-height: 52vh; }
+.place-pdf-fig-row--pair .place-fig--lo-res img { max-height: 26vh; }
+.place-pdf-fig-row--pair .place-fig--row-sized img,
+.place-pdf-fig-row--triple .place-fig--row-sized img,
+.place-pdf-fig-row--many .place-fig--row-sized img {
+  width: auto; max-width: 100%; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row .place-fig--row-sized.place-fig--hi-res img,
+.place-pdf-fig-row .place-fig--row-sized.place-fig--lo-res img {
+  max-height: unset; }
+.place-pdf-fig-rows-stack {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple {
+  display: flex; flex-direction: row; flex-wrap: nowrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.4rem 0.48rem; margin: 0;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--triple .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--triple .place-fig--hi-res img { max-height: 42vh; }
+.place-pdf-fig-row--triple .place-fig--lo-res img { max-height: 18vh; }
+.place-pdf-fig-row--many {
+  flex-wrap: nowrap; justify-content: center; align-items: flex-end;
+  gap: 0.35rem 0.42rem; }
+.place-pdf-fig-row--many .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--many .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+
+
 .place { margin-bottom: 2.2rem; page-break-inside: auto; }
 h3 { font-family: 'Spectral', serif; font-size: 1.22rem; margin: 1.2rem 0 0.35rem;
   font-weight: 600; }
@@ -90,7 +171,6 @@ h4 { font-family: 'Spectral', serif; font-size: 0.95rem; text-transform: upperca
   color: #555; font-size: 0.95rem; margin: 0 0 0.5rem; font-style: italic; }
 .place-meta { font-size: 0.92rem; color: #353535; margin: 0 0 0.75rem;
   line-height: 1.4; }
-.place-fig { margin: 0.5rem 0 1rem; }
 img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
 .prose, .place-desc p { margin: 0.45rem 0; line-height: 1.5;
   text-align: justify; }
@@ -110,7 +190,9 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <figure class="heraldry-fig heraldry-coat-book" title="City emblem"><img src="../images/guide_coat_of_arms.svg" alt="City emblem"/></figure>
 <figure class="heraldry-fig heraldry-coat-book" title="Flag"><img src="../images/guide_flag.svg" alt="Flag"/></figure>
 </div></div><h1 class="guide-title-main">Budapest</h1><p class="lead">Guide. Places in this edition: 33.</p></header>
+<nav class="guide-toc" id="guide-toc" aria-label="Contents"><h2>Contents</h2><ol><li class="toc-item"><a href="#guide-trips">Trip ideas</a></li><li class="toc-item"><a href="#budapest_al_huda_mosque_manila">Al-Huda Mosque Manila</a></li><li class="toc-item"><a href="#budapest_andrassy_avenue">Andrássy Avenue (historic view)</a></li><li class="toc-item"><a href="#budapest_aquincum_museum">Aquincum Museum</a></li><li class="toc-item"><a href="#budapest_buda_castle">Buda Castle</a></li><li class="toc-item"><a href="#budapest_buda_hill_funicular">Buda Castle Funicular</a></li><li class="toc-item"><a href="#budapest_landmark">Budapest</a></li><li class="toc-item"><a href="#budapest_citadella_budapest">Citadella</a></li><li class="toc-item"><a href="#budapest_dohany_street_synagogue">Dohány Street Synagogue</a></li><li class="toc-item"><a href="#budapest_fishermans_bastion">Fisherman&#x27;s Bastion</a></li><li class="toc-item"><a href="#budapest_gresham_palace_budapest">Four Seasons Gresham Palace</a></li><li class="toc-item"><a href="#budapest_gellert_hill_view">Gellért Hill</a></li><li class="toc-item"><a href="#budapest_great_market_hall">Great Market Hall</a></li><li class="toc-item"><a href="#budapest_heroes_square">Heroes&#x27; Square</a></li><li class="toc-item"><a href="#budapest_house_of_terror">House of Terror Museum</a></li><li class="toc-item"><a href="#budapest_hungarian_national_museum">Hungarian National Museum</a></li><li class="toc-item"><a href="#budapest_hungarian_parliament">Hungarian Parliament Building</a></li><li class="toc-item"><a href="#budapest_hungarian_state_opera">Hungarian State Opera House</a></li><li class="toc-item"><a href="#budapest_kopaszi_gat">Kopaszi-gát</a></li><li class="toc-item"><a href="#budapest_liberty_bridge">Liberty Bridge</a></li><li class="toc-item"><a href="#budapest_margaret_island">Margaret Island</a></li><li class="toc-item"><a href="#budapest_matthias_church">Matthias Church</a></li><li class="toc-item"><a href="#budapest_museum_of_applied_arts_budapest">Museum of Applied Arts</a></li><li class="toc-item"><a href="#budapest_museum_of_fine_arts">Museum of Fine Arts</a></li><li class="toc-item"><a href="#budapest_rudas_baths">Rudas Baths</a></li><li class="toc-item"><a href="#budapest_shoes_danube_memorial">Shoes on the Danube Bank</a></li><li class="toc-item"><a href="#budapest_st_stephens_basilica">St. Stephen&#x27;s Basilica</a></li><li class="toc-item"><a href="#budapest_szent_istvan_park">Szent István Park</a></li><li class="toc-item"><a href="#budapest_szimpla_kert">Szimpla Kert</a></li><li class="toc-item"><a href="#budapest_chain_bridge">Széchenyi Chain Bridge</a></li><li class="toc-item"><a href="#budapest_szechenyi_bath">Széchenyi Thermal Bath</a></li><li class="toc-item"><a href="#budapest_tab_n_a_szem_utc_b_l">Tabán a szem utcából</a></li><li class="toc-item"><a href="#budapest_the_house_of_houdini">The House of Houdini</a></li><li class="toc-item"><a href="#budapest_vajdahunyad_castle">Vajdahunyad Castle</a></li></ol></nav>
 <section class="guide-trip-plans" id="guide-trips" aria-label="Trip ideas"><h2>Trip ideas</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 <article class="trip-plan" id="trip-1d"><h3>One day</h3>
 <p class="prose">A compact loop linking the strongest cards in this guide, ordered to minimise backtracking on foot.</p>
 <ol class="trip-stops"><li><a href="#budapest_house_of_terror">House of Terror Museum</a> (~75min)</li>
@@ -140,260 +222,442 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <li><a href="#budapest_margaret_island">Margaret Island</a> (~75min)</li>
 <li><a href="#budapest_buda_castle">Buda Castle</a> (~75min)</li>
 <li><a href="#budapest_fishermans_bastion">Fisherman&#x27;s Bastion</a> (~75min)</li></ol></article></section>
-<nav class="guide-toc" aria-label="Contents"><h2>Contents</h2><ol><li class="toc-item"><a href="#guide-trips">Trip ideas</a></li><li class="toc-item"><a href="#budapest_pdfband_2_08a0e03c">Al-Huda Mosque Manila</a></li><li class="toc-item"><a href="#budapest_andrassy_avenue">Andrássy Avenue (historic view)</a></li><li class="toc-item"><a href="#budapest_aquincum_museum">Aquincum Museum</a></li><li class="toc-item"><a href="#budapest_buda_castle">Buda Castle</a></li><li class="toc-item"><a href="#budapest_buda_hill_funicular">Buda Castle Funicular</a></li><li class="toc-item"><a href="#budapest_citadella_budapest">Citadella</a></li><li class="toc-item"><a href="#budapest_dohany_street_synagogue">Dohány Street Synagogue</a></li><li class="toc-item"><a href="#budapest_fishermans_bastion">Fisherman&#x27;s Bastion</a></li><li class="toc-item"><a href="#budapest_gresham_palace_budapest">Four Seasons Gresham Palace</a></li><li class="toc-item"><a href="#budapest_gellert_hill_view">Gellért Hill</a></li><li class="toc-item"><a href="#budapest_great_market_hall">Great Market Hall</a></li><li class="toc-item"><a href="#budapest_heroes_square">Heroes&#x27; Square</a></li><li class="toc-item"><a href="#budapest_house_of_terror">House of Terror Museum</a></li><li class="toc-item"><a href="#budapest_hungarian_national_museum">Hungarian National Museum</a></li><li class="toc-item"><a href="#budapest_hungarian_parliament">Hungarian Parliament Building</a></li><li class="toc-item"><a href="#budapest_hungarian_state_opera">Hungarian State Opera House</a></li><li class="toc-item"><a href="#budapest_kopaszi_gat">Kopaszi-gát</a></li><li class="toc-item"><a href="#budapest_liberty_bridge">Liberty Bridge</a></li><li class="toc-item"><a href="#budapest_margaret_island">Margaret Island</a></li><li class="toc-item"><a href="#budapest_matthias_church">Matthias Church</a></li><li class="toc-item"><a href="#budapest_pdfband_1_5724a212">Budapest</a></li><li class="toc-item"><a href="#budapest_museum_of_applied_arts_budapest">Museum of Applied Arts</a></li><li class="toc-item"><a href="#budapest_museum_of_fine_arts">Museum of Fine Arts</a></li><li class="toc-item"><a href="#budapest_rudas_baths">Rudas Baths</a></li><li class="toc-item"><a href="#budapest_shoes_danube_memorial">Shoes on the Danube Bank</a></li><li class="toc-item"><a href="#budapest_st_stephens_basilica">St. Stephen&#x27;s Basilica</a></li><li class="toc-item"><a href="#budapest_szent_istvan_park">Szent István Park</a></li><li class="toc-item"><a href="#budapest_szimpla_kert">Szimpla Kert</a></li><li class="toc-item"><a href="#budapest_chain_bridge">Széchenyi Chain Bridge</a></li><li class="toc-item"><a href="#budapest_szechenyi_bath">Széchenyi Thermal Bath</a></li><li class="toc-item"><a href="#budapest_pdfband_0_59767a6a">Tabán a szem utcából</a></li><li class="toc-item"><a href="#budapest_pdfband_3_29e17fee">The House of Houdini</a></li><li class="toc-item"><a href="#budapest_vajdahunyad_castle">Vajdahunyad Castle</a></li></ol></nav>
-<section class="place" id="budapest_pdfband_2_08a0e03c">
+<section class="place" id="budapest_al_huda_mosque_manila">
+<div class="place-lead">
 <h3>Al-Huda Mosque Manila</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: See official visitor information.</p>
-<figure class="place-fig"><img src="../images/budapest_pdfband_2_08a0e03c.jpg" alt="Al-Huda Mosque Manila"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/budapest_al_huda_mosque_manila.jpg" alt="Al-Huda Mosque Manila" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/budapest_al_huda_mosque_manila_b.jpg" alt="Al-Huda Mosque Manila — view 2" width="330" height="220" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 </section>
 <section class="place" id="budapest_andrassy_avenue">
+<div class="place-lead">
 <h3>Andrássy Avenue (historic view)</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Andrássy út, linking Deák Square to Heroes’ Square | Style: Eclectic 19th-century avenue | Period: 1860–1912</p>
-<figure class="place-fig"><img src="../images/budapest_andrassy_avenue.jpg" alt="Andrássy Avenue (historic view)"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--row-sized"><img src="../images/budapest_andrassy_avenue.jpg" alt="Andrássy Avenue (historic view)" width="589" height="768" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/budapest_andrassy_avenue_b.jpg" alt="Andrássy Avenue (historic view) — view 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Andrássy Avenue is Budapest&#x27;s most iconic street, a grand boulevard lined with majestic buildings and exquisite art nouveau architecture. It stretches for over four kilometers through the heart of the city, connecting Heroes&#x27; Square to Vörösmarty Square. Grand boulevard lined with mansions, embassies, Opera, and House of Terror museum—UNESCO buffer around the Millennium Metro below. The street features numerous examples of Art Nouveau and Secessionist styles, including the famous Rózsavölgyi House and the Grand Hotel Trianon. It houses several notable landmarks such as the Parliament Building and the Széchenyi Chain Bridge. Andrássy Avenue has been listed as a UNESCO World Heritage Site since 1987 due to its exceptional cultural significance. During the day, visitors can enjoy shopping, dining, and people-watching while admiring the beautiful facades. At night, the street comes alive with colorful neon lights illuminating the buildings. Metro M1 is continental Europe’s oldest underground line (1896). Cafés on side streets offer quieter breaks than the main road.</p>
 <p class="prose">Built between 1860 and 1912, Andrássy Avenue was designed as part of the city&#x27;s expansion during the late 19th century. Originally named after Prime Minister Gyula Andrássy, it became known for its luxurious hotels, cafés, and elegant shops that attracted both locals and tourists alike. Today, it remains one of the most charming and picturesque streets in Europe. Laid out from 1872 as a representative axis for the growing capital. Visiting Andrássy Avenue offers a glimpse into Budapest’s rich architectural heritage and provides a unique opportunity to stroll along a historic route filled with vibrant culture and atmosphere. Defines Pest’s elegant 19th-century urban fabric.</p></div>
 </section>
 <section class="place" id="budapest_aquincum_museum">
+<div class="place-lead">
 <h3>Aquincum Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/budapest_aquincum_museum.jpg" alt="Aquincum Museum"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/budapest_aquincum_museum.jpg" alt="Aquincum Museum" width="1280" height="950" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/budapest_aquincum_museum_b.jpg" alt="Aquincum Museum — view 2" width="330" height="219" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Step back in time to ancient Rome at the Aquincum Museum, where artifacts and ruins bring to life the Roman province of Pannonia. Established as a Roman military base around 89 AD. Ruins include the largest Roman bath complex north of the Alps. The site is located near the former Roman capital of Pannonia. Excavations began in the late 19th century. Houses statues, mosaics, and sculptures from the Roman era.</p>
 <p class="prose">Founded in the 1st century AD, Aquincum was a thriving Roman military camp and settlement on the banks of the Danube River. Today&#x27;s museum preserves remains of baths, temples, and amphitheaters, offering visitors a glimpse into daily life during the Roman Empire. Visit Aquincum Museum to explore the rich history of Budapest’s Roman past and understand how it shaped modern Hungary.</p></div>
 </section>
 <section class="place" id="budapest_buda_castle">
+<div class="place-lead">
 <h3>Buda Castle</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Buda Castle Hill | Style: Mixed historic palace architecture | Period: 13th century</p>
-<figure class="place-fig"><img src="../images/budapest_buda_castle.jpg" alt="Buda Castle"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/budapest_buda_castle.jpg" alt="Buda Castle" width="1600" height="1113" style="height: 312px; max-height: 312px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/budapest_buda_castle_b.jpg" alt="Buda Castle — view 2" width="330" height="223" style="height: 312px; max-height: 312px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Sitting majestically on a hilltop overlooking the Danube River, Buda Castle is one of Budapest&#x27;s most iconic landmarks and a testament to Hungary&#x27;s rich historical heritage. Royal palace complex housing the Hungarian National Gallery, the Budapest History Museum, and National Széchényi Library. Constructed primarily in the Renaissance style with later baroque influences. Located on Castle Hill, offering panoramic vistas of the city. Designated a UNESCO World Heritage Site in 1987. Renovations completed in the 1960s after significant wartime destruction. Serves as a cultural hub, hosting various exhibitions and events. Funicular from Clark Ádám Square saves the steep climb. Courtyards and terraces give wide Pest-side panoramas.</p>
 <p class="prose">Originally built in the 13th century as a fortress, Buda Castle evolved into a royal palace during the reign of King Matthias Corvinus in the late 15th century. After extensive damage during World War II, it was painstakingly restored to its former glory by Hungarian architects in the mid-20th century. Today, it houses the Royal Palace Museum, showcasing art and artifacts from Hungary’s royal past. Royal seat from the 13th century onward; repeatedly destroyed and rebuilt—today’s shell largely mid–20th century. Visitors come to Buda Castle for its breathtaking views, architectural splendor, and fascinating museum collections that offer insights into Hungary&#x27;s royal history. UNESCO-listed Buda Castle Quarter core with ramparts, churches, and cobbled streets.</p></div>
 </section>
 <section class="place" id="budapest_buda_hill_funicular">
+<div class="place-lead">
 <h3>Buda Castle Funicular</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Period: 1900</p>
-<figure class="place-fig"><img src="../images/budapest_buda_hill_funicular.jpg" alt="Buda Castle Funicular"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/budapest_buda_hill_funicular.jpg" alt="Buda Castle Funicular" width="1063" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/budapest_buda_hill_funicular_b.jpg" alt="Buda Castle Funicular — view 2" width="330" height="495" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Climb aboard the Buda Castle Funicular for a scenic journey up to one of Budapest&#x27;s most iconic landmarks—Buda Palace. This charming cable car ride offers breathtaking views of the Danube River and the historic Pest district below. Operates daily from early morning until late evening. The funicular runs approximately every 10 minutes during peak hours. It is the oldest operating funicular railway in Hungary. The journey takes just three minutes but feels like a mini-adventure. Offers wheelchair accessibility.</p>
 <p class="prose">Built in 1900, the funicular was originally designed by Hungarian engineer Ármin Vámbéry as a means to connect the royal palace on Castle Hill with the rest of the city. Over the years, it has become a beloved local attraction and a symbol of Budapest’s unique charm. Experience the panoramic vistas of the capital city while enjoying a leisurely ride through the heart of Buda’s hilltop neighborhood.</p></div>
 </section>
+<section class="place" id="budapest_landmark">
+<div class="place-lead">
+<h3>Budapest</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
+
+<p class="place-meta">Address: See official visitor information.</p>
+<figure class="place-fig place-fig--hi-res"><img src="../images/budapest_landmark.jpg" alt="Budapest" width="1067" height="1600"/></figure>
+</div>
+</section>
 <section class="place" id="budapest_citadella_budapest">
+<div class="place-lead">
 <h3>Citadella</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Military fortification architecture | Period: 1851–1856</p>
-<figure class="place-fig"><img src="../images/budapest_citadella_budapest.jpg" alt="Citadella"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/budapest_citadella_budapest.jpg" alt="Citadella" width="1200" height="1600" style="height: 299px; max-height: 299px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/budapest_citadella_budapest_b.jpg" alt="Citadella — view 2" width="330" height="214" style="height: 299px; max-height: 299px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Perched high above Budapest on a hilltop overlooking the Danube River, Citadella is one of the city&#x27;s most iconic landmarks and a testament to its rich military heritage. Completed in 1856 after five years of construction work. Designed by Italian architect Carlo Marcellino and built under Austrian rule. Features four towers with distinctive architectural styles reflecting different periods of design evolution. Today houses museums, cafes, and restaurants providing entertainment for locals and tourists alike. Offers unparalleled views of Buda Castle, Chain Bridge, and Pest district.</p>
 <p class="prose">Built between 1851 and 1856, the Citadella was originally constructed as a fortress designed to defend the capital against potential threats. It served as both a military stronghold and a strategic observation point during Hungary&#x27;s turbulent years following the Napoleonic Wars. Today, it stands as a symbol of resilience and a popular tourist attraction offering panoramic views of the city below. Visiting Citadella allows visitors to experience breathtaking vistas while learning about the historical significance of this impressive structure.</p></div>
 </section>
 <section class="place" id="budapest_dohany_street_synagogue">
+<div class="place-lead">
 <h3>Dohány Street Synagogue</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Dohány Street, VII district | Style: Moorish Revival | Period: 1854–1859</p>
-<figure class="place-fig"><img src="../images/budapest_dohany_street_synagogue.jpg" alt="Dohány Street Synagogue"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/budapest_dohany_street_synagogue.jpg" alt="Dohány Street Synagogue" width="1600" height="1200" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/budapest_dohany_street_synagogue_b.jpg" alt="Dohány Street Synagogue — view 2" width="330" height="298" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Dohány Street Synagogue, Budapest&#x27;s largest and most impressive synagogue, stands as a testament to the city&#x27;s vibrant Jewish heritage. Built between 1854 and 1859, it is one of Europe’s largest Orthodox synagogues, known for its neo-Romanesque architecture and ornate interior. Moorish Revival synagogue—largest in Europe by seating—with museum and cemetery garden in the block. It is the largest synagogue in Central Europe. Its exterior features elaborate carvings and statues depicting biblical scenes. Inside, the synagogue boasts intricate woodwork and colorful stained-glass windows. During World War II, the building was used as a shelter for Jews escaping persecution. Today, it operates as both a museum and active place of worship. The Raoul Wallenberg Holocaust Memorial Park adjoins the site. Guided visits explain the organ and women’s gallery.</p>
 <p class="prose">Constructed during the mid-19th century, the Dohány Street Synagogue was designed by Austrian architect Ludwig Förster. Originally intended as a house of worship for Budapest&#x27;s growing Jewish community, it served as a symbol of religious freedom and cultural integration. Today, it remains a significant historical site, preserving memories of Hungary&#x27;s rich Jewish past. Built 1854–1859; the ghetto wall during the siege of Budapest ran partly through the complex. Visiting the Dohány Street Synagogue allows travelers to experience the architectural grandeur and spiritual significance of one of Europe&#x27;s most notable houses of worship. Centre of Neolog Judaism in Hungary and a key site on Jewish heritage walks.</p></div>
 </section>
 <section class="place" id="budapest_fishermans_bastion">
+<div class="place-lead">
 <h3>Fisherman&#x27;s Bastion</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Hess András Square, Buda Castle district | Style: Neo-Romanesque | Period: 1895–1902</p>
-<figure class="place-fig"><img src="../images/budapest_fishermans_bastion.jpg" alt="Fisherman&#x27;s Bastion"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/budapest_fishermans_bastion.jpg" alt="Fisherman&#x27;s Bastion" width="1600" height="1066" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/budapest_fishermans_bastion_b.jpg" alt="Fisherman&#x27;s Bastion — view 2" width="330" height="247" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Overlooking the Danube River and Buda Castle, Fisherman&#x27;s Bastion is a majestic fortification built during the late 19th century to defend the city&#x27;s western flank. Its seven towers symbolize Hungary’s historic counties. Fairytale terraces and turrets above the Danube with views toward Parliament—built as a lookout, not a fortress. The bastion has seven towers, each representing one of Hungary’s traditional counties. It was designed by renowned Hungarian architects Miklós Ybl and Frigyes Schulek. Its construction began in 1895 and ended in 1902. Visitors can ascend the towers for panoramic views of the city. Fisherman&#x27;s Bastion is located on Castle Hill overlooking the Danube. Named after the fishermen’s guild once tasked with defending this stretch of wall. Seven towers evoke the seven Magyar chieftains of legend.</p>
 <p class="prose">Constructed between 1895 and 1902 by Miklós Ybl and Frigyes Schulek, the bastion was originally intended as a defensive structure but later became a popular tourist attraction. It offers panoramic views of Budapest&#x27;s scenic riverbanks and iconic buildings like Parliament and St Stephen&#x27;s Basilica. Completed around 1902 to designs by Frigyes Schulek near Matthias Church; partly fee-charging for upper terraces. A must-visit for its breathtaking vistas and historical significance, Fisherman&#x27;s Bastion provides a unique perspective on Budapest’s rich cultural heritage. Romantic panorama point and wedding-photo favourite above the river bend.</p></div>
 </section>
 <section class="place" id="budapest_gresham_palace_budapest">
+<div class="place-lead">
 <h3>Four Seasons Gresham Palace</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Art Nouveau | Period: 1911</p>
-<figure class="place-fig"><img src="../images/budapest_gresham_palace_budapest.jpg" alt="Four Seasons Gresham Palace"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/budapest_gresham_palace_budapest.jpg" alt="Four Seasons Gresham Palace" width="1280" height="960" style="height: 281px; max-height: 281px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/budapest_gresham_palace_budapest_b.jpg" alt="Four Seasons Gresham Palace — view 2" width="330" height="201" style="height: 281px; max-height: 281px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Four Seasons Gresham Palace is a historic hotel nestled within Budapest&#x27;s elegant Andrássy Avenue, once known as the &#x27;Champs-Elysees of Hungary.&#x27; Built in 1911, it was originally constructed as a luxurious palace hotel by the renowned architect Ödön Lechner. Opened in 1911 as a luxury hotel for wealthy travelers. Designed by Hungarian architect Ödön Lechner in the Art Nouveau style. Listed as a cultural heritage site in 1964. Located on Andrássy Avenue, a UNESCO World Heritage Site. Offers panoramic views of the city and the Danube.</p>
 <p class="prose">Completed in 1911, the Gresham Palace served as one of the most opulent hotels in Europe during its time. Designed in the Art Nouveau style, it showcased exquisite interior decorations and modern amenities for its era. The building has been listed as a cultural heritage site since 1964 and remains a symbol of Budapest’s architectural grandeur. Visitors come to experience the elegance and historical charm of this iconic hotel, which offers breathtaking views of the Danube River and serves as a reminder of Budapest&#x27;s rich past.</p></div>
 </section>
 <section class="place" id="budapest_gellert_hill_view">
+<div class="place-lead">
 <h3>Gellért Hill</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
-<p class="place-meta">Address: Gellért Hill, XI district | Style: Historic fortifications and monuments</p>
-<figure class="place-fig"><img src="../images/budapest_gellert_hill_view.jpg" alt="Gellért Hill"/></figure>
+<p class="place-meta">Location: Gellért Hill, XI district | Style: Historic fortifications and monuments</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/budapest_gellert_hill_view.jpg" alt="Gellért Hill" width="1600" height="1200" style="height: 102px; max-height: 102px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/budapest_gellert_hill_view_b.jpg" alt="Gellért Hill — view 2" width="330" height="73" style="height: 102px; max-height: 102px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Perched high above Budapest, Gellért Hill offers panoramic views of the Danube River and the city below. Its lush green slopes are a serene escape from bustling downtown life. Limestone hill above the Danube: Citadel, Liberty Statue, and lookout paths over bridges and rooftops. The hill is home to the Gellért Thermal Baths, known for their healing waters and luxurious spa treatments. It features a picturesque castle ruin that provides a glimpse into medieval Hungarian history. Atop the hill stands the impressive Citadella, offering further scenic views over the city. During nighttime, the hill is illuminated, creating a magical atmosphere that enhances its beauty. Gellért Hill is also famous for its colorful Art Nouveau architecture, particularly seen in the nearby baths. The Cave Church is carved into the hillside near the base. Wear sturdy shoes; some paths are steep and exposed.</p>
 <p class="prose">Named after Saint Gellért, who was martyred here in the 10th century, Gellért Hill has long been a sacred site. It became a popular tourist attraction with the construction of the iconic Gellért Spa Hotel in 1912, which remains one of Hungary&#x27;s most recognized landmarks. Fortifications from the 19th century; the giant female Liberty figure dates to Soviet-era commemoration, reinterpreted today. Visitors come to Gellért Hill for its breathtaking vistas and historical significance, making it a must-see destination for anyone exploring Budapest. Classic sunset viewpoint and a geological backdrop to the Gellért Baths below.</p></div>
 </section>
 <section class="place" id="budapest_great_market_hall">
+<div class="place-lead">
 <h3>Great Market Hall</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Fővám Square, Pest | Style: Historicist / industrial architecture | Period: 1897</p>
-<figure class="place-fig"><img src="../images/budapest_great_market_hall.jpg" alt="Great Market Hall"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/budapest_great_market_hall.jpg" alt="Great Market Hall" width="1600" height="1066" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/budapest_great_market_hall_b.jpg" alt="Great Market Hall — view 2" width="330" height="495" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Great Market Hall is Budapest&#x27;s iconic central market, a testament to the city&#x27;s rich architectural heritage and vibrant culinary culture. Iron-framed hall with a colourful Zsolnay roof: paprika, lángos, and souvenirs on the ground, more food upstairs. Opened in 1897 during the Austro-Hungarian Empire era. Designed by renowned architect Ödön Lechner. Listed as a National Monument since 1964. Features colorful stalls selling local specialties like paprika and goulash. Hosted numerous cultural events and festivals throughout its history. Try the gallery level for simple Hungarian dishes. Liberty Bridge is steps away for a riverside walk.</p>
 <p class="prose">Built in 1897, the Great Market Hall was designed by architect Ödön Lechner in the Neo-Moorish style. It served as the main food market for Budapest until the mid-20th century, offering fresh produce, meats, and spices from across Hungary. Today it remains one of the most visited tourist attractions, blending historical significance with modern charm. Opened in 1897; designed by Samu Pecz as a modern wholesale market near the river and tram termini. Visit the Great Market Hall to immerse yourself in traditional Hungarian cuisine and witness the lively atmosphere of Budapest’s bustling marketplace. Working market and tourist ritual in one noisy, fragrant building.</p></div>
 </section>
 <section class="place" id="budapest_heroes_square">
+<div class="place-lead">
 <h3>Heroes&#x27; Square</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
-<p class="place-meta">Address: End of Andrássy Avenue, City Park entrance | Style: Historicist monuments | Period: 1896–1929</p>
-<figure class="place-fig"><img src="../images/budapest_heroes_square.jpg" alt="Heroes&#x27; Square"/></figure>
+<p class="place-meta">Location: End of Andrássy Avenue, City Park entrance | Style: Historicist monuments | Period: 1896–1929</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/budapest_heroes_square.jpg" alt="Heroes&#x27; Square" width="1600" height="1067" style="height: 260px; max-height: 260px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/budapest_heroes_square_b.jpg" alt="Heroes&#x27; Square — view 2" width="330" height="186" style="height: 260px; max-height: 260px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Heroes&#x27; Square is Budapest&#x27;s most iconic monumental ensemble, showcasing the city&#x27;s proud history and national identity. Situated on Buda Hill, it was built between 1896 and 1929 as part of the Millennium Monument to commemorate a thousand years since Hungary&#x27;s establishment. Monumental square with the Millennium Memorial, colonnades of historic figures, and two major art museums on either side. The square is surrounded by neoclassical buildings designed by Imre Steindl and Ödön Lechner. It houses the Museum of Hungarian History, which displays artifacts related to Hungary’s past. In the center stands the imposing statue of King Stephan I, Hungary&#x27;s first king. Each side of the square represents different periods of Hungarian history, including medieval times, the Reformation era, and the Age of Enlightenment. Heroes&#x27; Square became a UNESCO World Heritage Site in 1987. The Museum of Fine Arts and the Hall of Art frame the square. Ice skating and the zoo lie deeper in the park behind.</p>
 <p class="prose">Constructed over several decades, Heroes&#x27; Square features statues of Hungarian kings, queens, and heroes, along with allegorical figures representing various aspects of Hungarian culture and history. The square also includes the massive Statue of Széchenyi, symbolizing progress and reform. Laid out for Hungary’s 1896 millennium celebrations; later adapted as a site for mass gatherings and national holidays. Visitors come here to admire the grandiose architecture, impressive sculptures, and stunning views of the Danube River. Hungarian history in stone—mythic chieftains, kings, and independence themes in one vista.</p></div>
 </section>
 <section class="place" id="budapest_house_of_terror">
+<div class="place-lead">
 <h3>House of Terror Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Art Nouveau | Period: Early 20th century</p>
-<figure class="place-fig"><img src="../images/budapest_house_of_terror.jpg" alt="House of Terror Museum"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/budapest_house_of_terror.jpg" alt="House of Terror Museum" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/budapest_house_of_terror_b.jpg" alt="House of Terror Museum — view 2" width="330" height="220" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The House of Terror Museum is Budapest&#x27;s chilling reminder of the dark chapters of Hungary&#x27;s recent past. Located in a former Gestapo headquarters and Nazi prison, it tells the story of repression, resistance, and survival during World War II. It houses exhibits documenting both Nazi and Communist atrocities. Visitors can explore the original cells and interrogation rooms used by the occupying forces. Interactive displays provide context through multimedia and artifacts. Guided tours are available in multiple languages. The museum has won several awards for its innovative approach to historical storytelling.</p>
 <p class="prose">Built in the early 20th century as the headquarters for the Hungarian secret police, the building later became the dreaded Gestapo HQ under Nazi occupation. After the war, it served as a prison until its closure in 1989. The museum opened in 2002 to commemorate the victims of totalitarian regimes. This museum offers a harrowing yet essential look into Hungary’s struggle against fascism and oppression.</p></div>
 </section>
 <section class="place" id="budapest_hungarian_national_museum">
+<div class="place-lead">
 <h3>Hungarian National Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Neoclassical and Contemporary | Period: 1808</p>
-<figure class="place-fig"><img src="../images/budapest_hungarian_national_museum.jpg" alt="Hungarian National Museum"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/budapest_hungarian_national_museum.jpg" alt="Hungarian National Museum" width="1280" height="1078" style="height: 389px; max-height: 389px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--row-sized"><img src="../images/budapest_hungarian_national_museum_b.jpg" alt="Hungarian National Museum — view 2" width="330" height="674" style="height: 389px; max-height: 389px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Hungarian National Museum is Budapest&#x27;s premier cultural institution, showcasing the nation&#x27;s rich historical and artistic heritage. It houses over 4 million items in its collection, including archaeological finds, paintings, sculptures, and manuscripts. Notable exhibits include ancient Roman relics, medieval religious artifacts, and works by famous Hungarian artists such as Munkácsy and Klimt. The museum underwent major renovations in the early 2000s, enhancing accessibility and modernizing its facilities. Its architecture reflects various styles, blending neoclassical elements with contemporary design. Located on Vörösmarty Square, it offers panoramic views of the Danube River.</p>
 <p class="prose">Established in 1808 as the Royal Hungarian Academy of Sciences, it later evolved into a museum dedicated to Hungary&#x27;s culture and history. Over time, its collections expanded significantly, becoming one of Europe’s most comprehensive repositories of Hungarian art and artifacts. Visitors come here to explore Hungary&#x27;s history, art, and culture through its extensive exhibits and collections.</p></div>
 </section>
 <section class="place" id="budapest_hungarian_parliament">
+<div class="place-lead">
 <h3>Hungarian Parliament Building</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Kossuth Lajos Square, Pest riverbank | Style: Neo-Gothic | Period: 1885–1902</p>
-<figure class="place-fig"><img src="../images/budapest_hungarian_parliament.jpg" alt="Hungarian Parliament Building"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/budapest_hungarian_parliament.jpg" alt="Hungarian Parliament Building" width="1600" height="900" style="height: 259px; max-height: 259px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/budapest_hungarian_parliament_b.jpg" alt="Hungarian Parliament Building — view 2" width="330" height="201" style="height: 259px; max-height: 259px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Hungarian Parliament Building is Budapest&#x27;s most iconic landmark, towering over the banks of the Danube River. Completed in 1902, it showcases a blend of neo-Gothic and neo-Renaissance styles, with its towering spires reaching towards the skyline. Neo-Gothic riverside parliament with a tall central dome and long symmetrical wings—Hungary’s largest building and a postcard symbol of Budapest. It has two wings, each containing around 600 rooms. Its interior features lavishly decorated halls and chambers, including the Council Hall and the Royal Throne Room. The building stands on a hill overlooking the Danube, offering panoramic views of the city. Construction cost nearly three times more than initially budgeted due to design changes and delays. Today, it serves as both a museum and a working parliament. Guided visits cover the dome hall and ceremonial stairs when sessions allow. The building faces the Danube across from Buda Castle and the Chain Bridge.</p>
 <p class="prose">Built between 1885 and 1902, the Parliament was designed by architect Imre Steindl to house Hungary’s legislative assembly. The building boasts intricate decorations, including statues representing historical figures and allegorical scenes depicting Hungarian culture and values. Built from the late 19th century after the 1867 Compromise; designed by Imre Steindl. Heavily damaged in World War II and restored in stages. Visiting the Hungarian Parliament offers a glimpse into Hungary&#x27;s rich political and cultural heritage. Seat of the National Assembly and a national emblem of Hungarian statehood.</p></div>
 </section>
 <section class="place" id="budapest_hungarian_state_opera">
+<div class="place-lead">
 <h3>Hungarian State Opera House</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Andrássy Avenue 22, VI district | Style: Neo-Renaissance | Period: 1884</p>
-<figure class="place-fig"><img src="../images/budapest_hungarian_state_opera.jpg" alt="Hungarian State Opera House"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/budapest_hungarian_state_opera.jpg" alt="Hungarian State Opera House" width="1600" height="1200" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/budapest_hungarian_state_opera_b.jpg" alt="Hungarian State Opera House — view 2" width="330" height="494" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Hungarian State Opera House is Budapest&#x27;s iconic cultural landmark, famed for its opulent neo-Renaissance architecture and world-class performances. Renaissance Revival opera house with rich auditorium gilding—home to opera and ballet after a major recent restoration. It opened on December 23, 1884 with Verdi&#x27;s &#x27;Aida&#x27;. Its lavish interiors feature gold leaf decorations, marble columns, and crystal chandeliers. The building underwent extensive renovations in the early 20th century under the direction of Adolf Schulz. Today it remains one of the top venues for opera and classical music in Central Europe. Famous conductors such as Herbert von Karajan have conducted here. Guided tours run when rehearsals allow. The avenue is lined with cafés toward Heroes’ Square.</p>
 <p class="prose">Built in 1884, the opera house was designed by the renowned architect Frigyes Schulek to serve as a venue for grand operas, ballets, and classical music concerts. It quickly became a symbol of Hungary’s artistic prowess and international recognition, hosting some of Europe’s most celebrated performers over the decades. Opened in 1884 to Miklós Ybl’s design; acoustics were praised from the first season. Visiting the Hungarian State Opera House allows one to experience both the rich history of Hungarian culture and the breathtaking beauty of its interior design. One of Europe’s great lyric theatres and a UNESCO-listed stretch of Andrássy Avenue.</p></div>
 </section>
 <section class="place" id="budapest_kopaszi_gat">
+<div class="place-lead">
 <h3>Kopaszi-gát</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Period: late 19th century</p>
-<figure class="place-fig"><img src="../images/budapest_kopaszi_gat.jpg" alt="Kopaszi-gát"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/budapest_kopaszi_gat.jpg" alt="Kopaszi-gát" width="1067" height="1600" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/budapest_kopaszi_gat_b.jpg" alt="Kopaszi-gát — view 2" width="330" height="247" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Situated on the Buda side of the Danube River, Kopaszi-gát is a charming park offering panoramic views of the river and the Pest shoreline. The park&#x27;s lush greenery provides a peaceful escape from the bustling city center. Established in the late 1800s during the era of Hungarian industrialization and modernization. Features a mix of formal gardens and natural woodland areas. Offers walking trails that lead to various points along the riverside. Adjacent to several historical landmarks including Castle Hill and the Royal Palace. A favorite spot for romantic strolls and photography.</p>
 <p class="prose">Originally opened in the late 19th century as part of the city&#x27;s urban development plan, Kopaszi-gát was designed to connect Buda with Pest across the river. Over time, it has become a popular destination for locals and tourists alike, known for its scenic walks and tranquil atmosphere. Visit Kopaszi-gát to enjoy breathtaking vistas of the Danube and experience the serene beauty of Budapest’s green spaces.</p></div>
 </section>
 <section class="place" id="budapest_liberty_bridge">
+<div class="place-lead">
 <h3>Liberty Bridge</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
-<p class="place-meta">Address: Connects Fővám Square (Pest) and Gellért Square (Buda) | Style: Art Nouveau bridge | Period: 1930–1933</p>
-<figure class="place-fig"><img src="../images/budapest_liberty_bridge.jpg" alt="Liberty Bridge"/></figure>
+<p class="place-meta">Location: Connects Fővám Square (Pest) and Gellért Square (Buda) | Style: Art Nouveau bridge | Period: 1930–1933</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/budapest_liberty_bridge.jpg" alt="Liberty Bridge" width="1280" height="783" style="height: 282px; max-height: 282px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/budapest_liberty_bridge_b.jpg" alt="Liberty Bridge — view 2" width="330" height="206" style="height: 282px; max-height: 282px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Spanning the Danube River and connecting Buda to Pest, Liberty Bridge is a testament to modern engineering of its era. Completed during the interwar years, it was designed by Hungarian architect Ödön Lechner. Green Art Nouveau truss bridge with a central pedestrian strip—popular at sunset and during summer festivals. It connects two major districts of Budapest—Buda and Pest. The bridge was originally named Chain Bridge II due to its similarity to the nearby Chain Bridge. Its construction marked a significant advancement in Hungarian civil engineering. Liberty Bridge has undergone several renovations since its opening but retains much of its original design. It is one of the few remaining examples of Art Nouveau architecture in Budapest. The Turul bird statue tops a Buda-side pillar. Occasionally closed to traffic for public gatherings.</p>
 <p class="prose">Constructed between 1930 and 1933, Liberty Bridge replaced an older suspension bridge that had been damaged during World War I. Designed in the Art Nouveau style, it showcases intricate ironwork and decorative elements typical of Lechner&#x27;s work. The bridge became an iconic symbol of Budapest’s urban landscape, offering panoramic views of the river and surrounding hills. Opened in 1896 as Franz Joseph Bridge; renamed after 1945. Trams share the deck with walkers. Visitors should experience Liberty Bridge for its historical significance and breathtaking vistas over the Danube. Visual neighbour to the Great Market Hall and Gellért Hotel.</p></div>
 </section>
 <section class="place" id="budapest_margaret_island">
+<div class="place-lead">
 <h3>Margaret Island</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
-<p class="place-meta">Address: Danube between Margaret Bridge and Árpád Bridge | Style: Landscape park | Period: late 19th century</p>
-<figure class="place-fig"><img src="../images/budapest_margaret_island.jpg" alt="Margaret Island"/></figure>
+<p class="place-meta">Location: Danube between Margaret Bridge and Árpád Bridge | Style: Landscape park | Period: late 19th century</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/budapest_margaret_island.jpg" alt="Margaret Island" width="1600" height="1066" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/budapest_margaret_island_b.jpg" alt="Margaret Island — view 2" width="330" height="227" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Situated in the heart of Budapest, Margaret Island is a serene oasis offering tranquility amidst bustling city life. This man-made island was created by damming the Danube River and has been a favorite retreat for locals and visitors since its inception. Green kilometre-long island: promenades, ruins, a small zoo, pools, and summer musical fountain shows. The island spans approximately 64 hectares and features extensive parkland and walking trails. It houses one of Europe&#x27;s largest thermal bath complexes, the Széchenyi Baths, which attracts thousands of visitors daily. Margaret Island also boasts the elegant Royal Palace, originally built as a summer residence for Hungarian nobles. In addition to its cultural attractions, the island provides opportunities for cycling, jogging, and picnicking. Locals often refer to it as &#x27;a little piece of paradise&#x27; within the city. Rent bikes or electric carts to circle the island quickly. Medieval Dominican convent ruins remain near the centre.</p>
 <p class="prose">Originally constructed in the late 19th century as part of urban planning efforts to provide green spaces for residents, Margaret Island derives its name from Saint Margaret of Hungary, a medieval princess who is revered locally. The island became a popular recreational area with the construction of several notable landmarks such as the Széchenyi Baths and the Royal Palace. Monasteries once stood here; today it is a public park with sports facilities and spas. A must-visit destination for anyone seeking respite from urban hustle, Margaret Island offers scenic walks, historical monuments, and luxurious bathing facilities. Local lung between Buda and Pest—runners, families, and festival crowds share the paths.</p></div>
 </section>
 <section class="place" id="budapest_matthias_church">
+<div class="place-lead">
 <h3>Matthias Church</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Szentháromság Square, Buda Castle | Style: Gothic with Neo-Gothic restoration | Period: 1728–1769</p>
-<figure class="place-fig"><img src="../images/budapest_matthias_church.jpg" alt="Matthias Church"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/budapest_matthias_church.jpg" alt="Matthias Church" width="1066" height="1600" style="height: 406px; max-height: 406px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/budapest_matthias_church_b.jpg" alt="Matthias Church — view 2" width="330" height="290" style="height: 406px; max-height: 406px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Dominating the Pest side of Budapest’s Danube River embankment, Matthias Church is a majestic Baroque edifice that has been a symbol of Hungarian identity for centuries. Colourful tiled roof and mixed Gothic lines: coronations and royal weddings once took place under its vaults. It stands on the site where the first stone church was built in the 11th century. The interior features intricate frescoes and statues by renowned artists like Miklós Perényi. Its tower offers breathtaking vistas of the city and the river below. The church was heavily damaged during World War II but was painstakingly restored post-war. Today it serves as both a religious venue and a cultural landmark. Franz Joseph and Elizabeth were crowned king and queen of Hungary here in 1867. Interior frescoes and the organ draw concert audiences.</p>
 <p class="prose">Built between 1728 and 1769, Matthias Church was originally dedicated to St. Mikhail but later renamed after King Matthias Corvinus, who played a pivotal role in Hungary&#x27;s medieval history. The church underwent significant reconstruction during the 19th century, earning its current neoclassical appearance. Core from the 13th–15th centuries with later Baroque and 19th-century Neo-Gothic restoration by Frigyes Schulek. Visitors come here to admire its grandiose architecture and soak in the panoramic views over the Danube. Buda’s main church for centuries and a visual anchor next to the Fisherman’s Bastion.</p></div>
 </section>
-<section class="place" id="budapest_pdfband_1_5724a212">
-<h3>Budapest</h3>
-
-<p class="place-meta">Address: See official visitor information.</p>
-<figure class="place-fig"><img src="../images/budapest_pdfband_1_5724a212.jpg" alt="Budapest"/></figure>
-</section>
 <section class="place" id="budapest_museum_of_applied_arts_budapest">
+<div class="place-lead">
 <h3>Museum of Applied Arts</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Art Nouveau | Period: 1896</p>
-<figure class="place-fig"><img src="../images/budapest_museum_of_applied_arts_budapest.jpg" alt="Museum of Applied Arts"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/budapest_museum_of_applied_arts_budapest.jpg" alt="Museum of Applied Arts" width="1280" height="960" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/budapest_museum_of_applied_arts_budapest_b.jpg" alt="Museum of Applied Arts — view 2" width="330" height="247" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Museum of Applied Arts is a world-class institution showcasing the finest examples of decorative and applied arts from across Europe. Established at the turn of the 20th century, it houses collections that span centuries, from medieval craftsmanship to modern design. It showcases over 40,000 objects from various periods and cultures. Its collection includes works by renowned artists such as Gustav Klimt and Alphonse Mucha. The building itself is a masterpiece of Art Nouveau architecture, featuring intricate ceramic tiles and stained glass windows. Regular temporary exhibitions highlight contemporary trends in design and crafting. Visitors can explore thematic displays dedicated to ceramics, textiles, furniture, and jewelry.</p>
 <p class="prose">Founded in 1896 during Hungary&#x27;s golden age, the museum was originally designed by Ödön Lechner, one of the leading figures of Hungarian Art Nouveau. Its distinctive neo-Gothic and Art Nouveau architecture reflects the cultural and artistic zeitgeist of fin-de-siècle Budapest. A must-visit for anyone interested in art, design, and historical craftsmanship, the Museum of Applied Arts offers a unique glimpse into the evolution of European aesthetics.</p></div>
 </section>
 <section class="place" id="budapest_museum_of_fine_arts">
+<div class="place-lead">
 <h3>Museum of Fine Arts</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Heroes’ Square, XIV district | Style: Neoclassical / Neo-Renaissance | Period: 1872</p>
-<figure class="place-fig"><img src="../images/budapest_museum_of_fine_arts.jpg" alt="Museum of Fine Arts"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/budapest_museum_of_fine_arts.jpg" alt="Museum of Fine Arts" width="1600" height="1071" style="height: 309px; max-height: 309px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/budapest_museum_of_fine_arts_b.jpg" alt="Museum of Fine Arts — view 2" width="330" height="404" style="height: 309px; max-height: 309px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Museum of Fine Arts is Budapest&#x27;s premier institution for art and culture, showcasing masterpieces spanning centuries of European artistic traditions. Neoclassical temple of art facing the Hall of Art—Old Masters, Egyptian antiquities, and a strong Spanish collection. It houses over 60,000 pieces of artwork across various media including paintings, sculptures, and ceramics. Notable permanent exhibits include works by Matthias Grünewald, El Greco, and Degas. The building itself is a striking example of neo-Renaissance architecture, designed by Miklós Ybl, who also oversaw construction of the Parliament Building. Opened to the public on November 1, 1896, after extensive renovations and expansion. Regularly hosts temporary exhibitions featuring contemporary art and special thematic displays. Ticket often pairs with temporary blockbusters—check schedules. The building balances the square’s monument symmetrically.</p>
 <p class="prose">Established in 1872, the museum originally housed collections from the National Museum before becoming a separate entity dedicated to fine arts. It has since grown into one of Europe’s most significant repositories of painting, sculpture, and decorative arts, with its architecture reflecting the neo-Renaissance style that dominates much of Budapest&#x27;s urban landscape. Opened in 1906; long renovation cycles refreshed galleries and climate systems. Visitors come here to experience world-class artworks by renowned artists such as Rembrandt, Rubens, and Van Gogh, as well as lesser-known but equally important works from Hungarian masters. Hungary’s premier encyclopaedic fine arts museum.</p></div>
 </section>
 <section class="place" id="budapest_rudas_baths">
+<div class="place-lead">
 <h3>Rudas Baths</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Döbrentei Square, Tabán, I district | Style: Ottoman and later additions | Period: 19th century</p>
-<figure class="place-fig"><img src="../images/budapest_rudas_baths.jpg" alt="Rudas Baths"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--row-sized"><img src="../images/budapest_rudas_baths.jpg" alt="Rudas Baths" width="1000" height="593" style="height: 273px; max-height: 273px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/budapest_rudas_baths_b.jpg" alt="Rudas Baths — view 2" width="330" height="247" style="height: 273px; max-height: 273px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Rudas Baths is one of the oldest and most renowned thermal baths in Budapest, dating back to the 13th century when it was first mentioned in historical records. Ottoman-era dome and octagonal pool under pencil columns, plus newer rooftop tubs with Danube views. The baths are known for their sulfur-rich water with healing properties. Located near the heart of Budapest&#x27;s historic district, they offer stunning views of the Danube River. Guests can enjoy both indoor and outdoor pools, including a swimming pool heated to 38°C. A café on-site serves traditional Hungarian cuisine and drinks. Rudas Baths also feature saunas, steam rooms, and relaxation areas. Check the calendar for men-only, women-only, or mixed days. Combine with Gellért Bath across the river if time allows.</p>
 <p class="prose">Originally built as a medieval spa during the reign of King Bela IV, Rudas Baths have undergone numerous renovations over the centuries. The current building dates to the late 19th century, designed by architect Frigyes Schulek in the Neo-Renaissance style. Over time, the baths became a cultural hub for locals and visitors alike, offering traditional Hungarian bathing rituals and therapeutic treatments. Turkish bath from the 16th century, expanded across centuries; gendered days still apply in some thermal areas. Visiting Rudas Baths allows travelers to experience authentic Hungarian culture and indulge in rejuvenating thermal waters. Direct experience of Budapest’s Turkish layer beneath the modern spa industry.</p></div>
 </section>
 <section class="place" id="budapest_shoes_danube_memorial">
+<div class="place-lead">
 <h3>Shoes on the Danube Bank</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
-<p class="place-meta">Address: Pest embankment near Parliament | Style: Contemporary memorial sculpture | Period: 2005</p>
-<figure class="place-fig"><img src="../images/budapest_shoes_danube_memorial.jpg" alt="Shoes on the Danube Bank"/></figure>
+<p class="place-meta">Location: Pest embankment near Parliament | Style: Contemporary memorial sculpture | Period: 2005</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/budapest_shoes_danube_memorial.jpg" alt="Shoes on the Danube Bank" width="1600" height="1166" style="height: 310px; max-height: 310px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/budapest_shoes_danube_memorial_b.jpg" alt="Shoes on the Danube Bank — view 2" width="330" height="222" style="height: 310px; max-height: 310px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">On the banks of the Danube River, near the Parliament building, stands a poignant memorial known as &#x27;Shoes on the Danube Bank.&#x27; It commemorates the victims of the Holocaust who were executed by the Arrow Cross militia during World War II. Sixty pairs of cast iron shoes recall Jews shot into the river by Arrow Cross militia in 1944–45. The sculpture is located at Andrássy út, close to the Hungarian Parliament. Each shoe is cast from actual footprints taken from survivors and descendants of Holocaust victims. The installation was funded through private donations and community support. It has become a popular site for tourists and locals alike to reflect and pay respects. The design incorporates the natural landscape, blending seamlessly into its surroundings. Visit at dusk when the Parliament lights reflect on the water. Keep a respectful distance; not a selfie backdrop.</p>
 <p class="prose">Installed in 2005, this sculpture was created by artist Gyula Pauer and engineer Tibor Bonda. The installation consists of twelve bronze shoes arranged along the riverbank, symbolizing the thousands of people who were forced to undress before being shot into the water. Each shoe represents one victim, with their size reflecting age and gender. Created by Gyula Pauer and Can Togay (2005) as a quiet riverside memorial. This moving tribute serves as a reminder of Budapest&#x27;s dark past and pays homage to those who perished during the Holocaust. One of Budapest’s most moving Holocaust sites—flowers and candles appear daily.</p></div>
 </section>
 <section class="place" id="budapest_st_stephens_basilica">
+<div class="place-lead">
 <h3>St. Stephen&#x27;s Basilica</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Szent István Square, Pest | Style: Neoclassical / Neo-Renaissance | Period: 1851–1906</p>
-<figure class="place-fig"><img src="../images/budapest_st_stephens_basilica.jpg" alt="St. Stephen&#x27;s Basilica"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/budapest_st_stephens_basilica.jpg" alt="St. Stephen&#x27;s Basilica" width="1202" height="1600" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/budapest_st_stephens_basilica_b.jpg" alt="St. Stephen&#x27;s Basilica — view 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Dominating Budapest’s skyline and nestled on the banks of the Danube, St. Stephen&#x27;s Basilica is a majestic symbol of Hungarian Catholicism and national pride. Neoclassical basilica with a climbable dome; houses the reliquary of St. Stephen, Hungary’s first king. It stands at over 96 meters tall, making it one of the tallest buildings in Budapest. The interior features stunning stained-glass windows depicting scenes from Hungarian history and biblical narratives. Its twin spires are among the most iconic landmarks in the city, visible from many parts of downtown. A museum within the basilica showcases artifacts related to Hungarian saints and historical figures. Guided tours provide insight into its rich history and architectural details. The panorama terrace rewards the stair or lift climb. The Holy Right (hand relic) is displayed on notable feast days.</p>
 <p class="prose">Built between 1851 and 1906, the basilica was constructed to honor Hungary&#x27;s first king, Saint Stephen I, who unified the country in the 11th century. Designed by Alajos Schick in the neo-Gothic style, it combines elements of Romanesque architecture with intricate details inspired by medieval cathedrals. The basilica served as a focal point for religious ceremonies and political gatherings during Hungary&#x27;s turbulent modern history. Construction spanned the 19th century after an earlier church collapse; dome completed with engineering lessons from the saga. Visiting St. Stephen&#x27;s Basilica allows travelers to experience the fusion of architectural beauty and spiritual significance that defines Budapest’s cultural heritage. Co-cathedral of Esztergom–Budapest and a major venue for state and liturgical events.</p></div>
 </section>
 <section class="place" id="budapest_szent_istvan_park">
+<div class="place-lead">
 <h3>Szent István Park</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: neoclassical | Period: late 19th century</p>
-<figure class="place-fig"><img src="../images/budapest_szent_istvan_park.jpg" alt="Szent István Park"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/budapest_szent_istvan_park.jpg" alt="Szent István Park" width="1280" height="960" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/budapest_szent_istvan_park_b.jpg" alt="Szent István Park — view 2" width="330" height="440" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Szent István Park is a charming green oasis nestled amidst Budapest&#x27;s bustling streets, offering tranquility and beauty within easy reach of the city center. The park features elegant neoclassical architecture and decorative statues. It boasts beautiful flower beds and well-maintained lawns. Szent István Park hosts various cultural events throughout the year, including concerts and festivals. Located near the Danube River, it offers stunning views of the Hungarian Parliament Building. The park is easily accessible by public transport and pedestrian paths.</p>
 <p class="prose">Established in the late 19th century, Szent István Park was originally designed as a recreational space for the city&#x27;s residents. Named after St. Stephen, Hungary&#x27;s first king, it has since become one of the most beloved spots for locals and visitors alike to relax, stroll, and enjoy nature close to home. This park is significant for its historical significance and serene atmosphere, making it a must-visit for anyone exploring Budapest’s urban greenery.</p></div>
 </section>
 <section class="place" id="budapest_szimpla_kert">
+<div class="place-lead">
 <h3>Szimpla Kert</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Period: 2004</p>
-<figure class="place-fig"><img src="../images/budapest_szimpla_kert.jpg" alt="Szimpla Kert"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/budapest_szimpla_kert_b.jpg" alt="Szimpla Kert" width="330" height="220"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Szimpla Kert is a vibrant open-air venue nestled amidst Budapest&#x27;s picturesque Buda Hills. It offers a unique blend of street food, live music, and colorful decorations that create a festive atmosphere. Established in 2004 as a converted former greenhouse and garden café. Features over 60 themed rooms with diverse décor and installations. Regularly hosts underground bands, DJs, and independent artists. Located within walking distance of the charming Castle District. Operates year-round with seasonal programming.</p>
 <p class="prose">Originally opened as a small garden café in the early 2000s, Szimpla Kert quickly gained popularity among locals and tourists alike for its eclectic vibe and laid-back ambiance. Over time, it evolved into a multifunctional space hosting concerts, art exhibitions, and festivals. A must-visit for anyone seeking a lively and authentic experience of Budapest’s alternative culture scene.</p></div>
 </section>
 <section class="place" id="budapest_chain_bridge">
+<div class="place-lead">
 <h3>Széchenyi Chain Bridge</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
-<p class="place-meta">Address: Connects Széchenyi Square (Buda) and Clark Ádám Square (Pest) | Style: 19th-century suspension bridge | Period: 1849</p>
-<figure class="place-fig"><img src="../images/budapest_chain_bridge.jpg" alt="Széchenyi Chain Bridge"/></figure>
+<p class="place-meta">Location: Connects Széchenyi Square (Buda) and Clark Ádám Square (Pest) | Style: 19th-century suspension bridge | Period: 1849</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/budapest_chain_bridge.jpg" alt="Széchenyi Chain Bridge" width="1062" height="1600" style="height: 257px; max-height: 257px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/budapest_chain_bridge_b.jpg" alt="Széchenyi Chain Bridge — view 2" width="330" height="184" style="height: 257px; max-height: 257px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Széchenyi Chain Bridge is Budapest&#x27;s iconic landmark, spanning the Danube River and connecting Buda and Pest since its opening in 1849. The first permanent bridge linking Buda and Pest, with stone towers and suspension chains—still a main pedestrian and tram crossing. It was the first permanent bridge across the Danube in Budapest. Its construction marked a significant advancement in transportation infrastructure. The bridge was named after Count István Széchenyi, a prominent Hungarian statesman who advocated for modernization. Today, pedestrians can walk on the bridge without traffic, enjoying panoramic views. Restoration work in the late 20th century preserved its original appearance. Lion sculptures guard the abutments at each end. Night lighting makes it one of the most photographed spans in Europe.</p>
 <p class="prose">Constructed between 1839 and 1849 by British engineers William Tierney Clark and Adam Clark, the bridge was a marvel of engineering for its time. It replaced a ferry service and became a symbol of unity between the two banks of the capital. The elegant design features iron chains supporting the roadway, making it one of Europe’s first chain suspension bridges. Opened in 1849; named after Count István Széchenyi. Rebuilt after World War II using original design principles. A must-see for visitors to Budapest, the Széchenyi Chain Bridge offers stunning views over the Danube and serves as a reminder of Hungary&#x27;s rich industrial heritage. Urban link that literally unified the two cities long before their official merger.</p></div>
 </section>
 <section class="place" id="budapest_szechenyi_bath">
+<div class="place-lead">
 <h3>Széchenyi Thermal Bath</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: City Park (Városliget), XIV district | Style: Neo-Baroque | Period: 1913</p>
-<figure class="place-fig"><img src="../images/budapest_szechenyi_bath.jpg" alt="Széchenyi Thermal Bath"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/budapest_szechenyi_bath.jpg" alt="Széchenyi Thermal Bath" width="1600" height="1125" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/budapest_szechenyi_bath_b.jpg" alt="Széchenyi Thermal Bath — view 2" width="330" height="219" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Step into the soothing embrace of Széchenyi Thermal Bath, a regal oasis nestled within Budapest&#x27;s city center since 1913. This opulent bathhouse was designed by renowned architect Ödön Lechner and showcases Art Nouveau splendor. Yellow Neo-Baroque bath complex with outdoor pools steamy in winter—social Budapest at its most relaxed. The bath houses nine pools, including indoor and outdoor options. It offers both traditional Hungarian bathing rituals and modern wellness services. Visitors can enjoy views of the Danube River from its upper-level terrace. Its architecture blends elements of Art Nouveau and neoclassical styles. Opened as part of Hungary’s centennial celebrations. Chess players at outdoor pools are a familiar winter sight. Combine with Heroes’ Square and Vajdahunyad Castle on foot.</p>
 <p class="prose">Constructed in 1913, Széchenyi Thermal Bath is one of Europe’s largest thermal baths. It was built to honor Count István Széchenyi, a prominent Hungarian statesman who advocated for modernization and infrastructure development. The bath complex features nine pools filled with healing mineral waters, each offering unique therapeutic benefits. Opened in 1913; water is supplied from the Széchenyi thermal spring system under the park. Visit Széchenyi Thermal Bath to immerse yourself in the luxurious atmosphere of Hungary’s rich cultural heritage while enjoying rejuvenating spa treatments. One of Europe’s largest spa complexes and a symbol of Budapest’s bath culture.</p></div>
 </section>
-<section class="place" id="budapest_pdfband_0_59767a6a">
+<section class="place" id="budapest_tab_n_a_szem_utc_b_l">
+<div class="place-lead">
 <h3>Tabán a szem utcából</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: See official visitor information.</p>
-<figure class="place-fig"><img src="../images/budapest_pdfband_0_59767a6a.jpg" alt="Tabán a szem utcából"/></figure>
+<figure class="place-fig place-fig--hi-res"><img src="../images/budapest_tab_n_a_szem_utc_b_l.jpg" alt="Tabán a szem utcából" width="1280" height="1458"/></figure>
+</div>
 </section>
-<section class="place" id="budapest_pdfband_3_29e17fee">
+<section class="place" id="budapest_the_house_of_houdini">
+<div class="place-lead">
 <h3>The House of Houdini</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: See official visitor information.</p>
-<figure class="place-fig"><img src="../images/budapest_pdfband_3_29e17fee.jpg" alt="The House of Houdini"/></figure>
+<figure class="place-fig place-fig--hi-res"><img src="../images/budapest_the_house_of_houdini.jpg" alt="The House of Houdini" width="1280" height="712"/></figure>
+</div>
 </section>
 <section class="place" id="budapest_vajdahunyad_castle">
+<div class="place-lead">
 <h3>Vajdahunyad Castle</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: City Park lake | Style: Historicist pastiche | Period: 1904–1908</p>
-<figure class="place-fig"><img src="../images/budapest_vajdahunyad_castle.jpg" alt="Vajdahunyad Castle"/></figure>
+<figure class="place-fig place-fig--hi-res"><img src="../images/budapest_vajdahunyad_castle.jpg" alt="Vajdahunyad Castle" width="1600" height="972"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Sitting majestically on a hilltop overlooking Budapest&#x27;s Pest side, Vajdahunyad Castle is a fairy-tale castle that blends elements of Hungarian medieval architecture with Renaissance and Baroque styles. Romantic composite castle copying Transylvanian and Romanesque motifs—originally temporary for 1896, rebuilt in stone. The castle was constructed using materials sourced from different parts of Hungary. It houses a museum dedicated to Hungarian history and culture. Its tower offers panoramic views of Budapest. Inside, visitors can explore the Royal Hall, which hosts special exhibitions. The castle&#x27;s design incorporates elements from several famous castles across Hungary. Rowboats and ice skating (seasonal) surround the building. Courtyard concerts enliven summer evenings.</p>
 <p class="prose">Built between 1904 and 1908 as part of the Millennium Exposition to commemorate Hungary&#x27;s thousand years since its Christian conversion, Vajdahunyad Castle was designed by architect Frigyes Schulek. It combines architectural features from various historical periods, including Gothic, Romanesque, and Renaissance motifs, making it a unique fusion of styles. Designed by Ignác Alpár as a millennium exhibition pavilion; today it houses the Hungarian Agricultural Museum. Visitors come here for its stunning views of the Danube River and the historic cityscape, as well as its impressive interior exhibits showcasing Hungarian cultural artifacts and artworks. Fairytale silhouette on the boating lake minutes from Széchenyi Bath.</p></div>
 </section>

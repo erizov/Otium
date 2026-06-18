@@ -13,7 +13,7 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
 .otium-logo { font-family: 'Marcellus', serif; font-size: 2.15rem;
   font-weight: 600; letter-spacing: 0.18em; margin-bottom: 0.85rem; }
 .otiump { margin: 0.42rem 0; line-height: 1.42; text-align: justify;
-  max-width: 38rem; font-size: 0.95rem; }
+  font-size: 0.95rem; }
 .guide-title { page-break-after: auto; margin-bottom: 0.55rem;
   page-break-inside: avoid; }
 .historical-reference { margin: 0.75rem 0 1.15rem;
@@ -63,22 +63,103 @@ ol.trip-stops a:hover { text-decoration: underline; }
 .heraldry-univ-caption { font-size: 0.52rem; line-height: 1.18;
   margin: 0.12rem 0 0; padding: 0 0.06rem; color: #252525;
   text-align: center; font-weight: 500; }
-.heraldry-motto { text-align: center; max-width: 18rem; margin: 0.18rem auto;
+.heraldry-motto { text-align: center; margin: 0.18rem auto;
   width: 100%; }
 .motto-line { font-family: 'Marcellus', serif; font-size: 1rem;
   margin: 0; color: #333; line-height: 1.35; }
 .guide-title h1.guide-title-main { font-family: 'Marcellus', serif;
   font-size: 2.35rem; margin-bottom: 0.5rem; font-weight: 600; }
 .lead { color: #444; font-size: 1.05rem; }
-.guide-toc { margin: 0.85rem 0 1.15rem; page-break-inside: avoid; }
-.guide-toc h2 { font-family: 'Marcellus', serif; font-size: 1.28rem;
-  font-weight: 600; margin: 0.4rem 0 0.55rem; }
+
+.guide-toc { page-break-before: always; break-before: page;
+  page-break-after: always; break-after: page;
+  margin: 0; padding: 0.2rem 0 0.45rem; page-break-inside: auto; }
+.guide-toc h2 { font-family: 'Marcellus', serif;
+  font-size: 1.28rem; font-weight: 600; margin: 0.4rem 0 0.55rem; }
 .guide-toc ol { margin: 0.35rem 0 0.65rem 1.25rem; padding: 0;
   columns: 2; column-gap: 1.5rem; }
 .guide-toc li { margin: 0.18rem 0; line-height: 1.35;
   font-size: 0.88rem; break-inside: avoid; }
-.guide-toc a { color: #1a5276; text-decoration: none; }
+.guide-toc a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.guide-toc a:hover { color: #0d3d56; }
 .guide-toc li.toc-item--sub { font-size: 0.82rem; margin-left: 0.35rem; }
+.toc-back { font-size: 0.78rem; margin: 0 0 0.35rem; text-align: right; }
+.toc-back a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.toc-back a:hover { color: #0d3d56; }
+.place, .historical-reference, .guide-primer, .guide-trip-plans {
+  scroll-margin-top: 1.25rem; }
+.historical-reference h2, .guide-primer h2, .guide-trip-plans h2,
+.chapter-head h2, .place-lead h3 { position: relative; }
+.guide-toc + .place, .guide-toc + .chapter-head {
+  page-break-before: avoid; break-before: avoid-page; }
+.place-lead { page-break-inside: avoid; break-inside: avoid-page;
+  page-break-after: auto; }
+.place-lead > h3 { page-break-after: avoid; break-after: avoid-page; }
+.place-lead > .place-meta { page-break-after: avoid; break-after: avoid-page; }
+
+.place-fig { page-break-inside: avoid; break-inside: avoid-page;
+  margin: 0.5rem 0 1rem; }
+.place-fig img {
+  page-break-inside: avoid; break-inside: avoid-page;
+  max-height: 48vh; width: auto; max-width: 100%;
+  object-fit: contain; margin-left: auto; margin-right: auto; }
+.place-fig--hi-res img { max-height: 52vh; }
+.place-fig--lo-res img { max-height: 30vh; }
+.place-pdf-fig-row {
+  display: flex; flex-direction: row; flex-wrap: wrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.45rem 0.55rem; margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row .place-fig {
+  flex: 1 1 30%; margin: 0; min-width: 26%; max-width: 100%; }
+.place-pdf-fig-row .place-fig img {
+  width: auto; max-width: 100%; height: auto; max-height: 44vh;
+  object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--pair {
+  flex-wrap: nowrap; justify-content: space-between;
+  align-items: flex-end; gap: 0.5rem 0.65rem; }
+.place-pdf-fig-row--pair .place-fig {
+  flex: 1 1 47%; min-width: 0; max-width: 50%;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--pair .place-fig img {
+  max-height: 44vh; object-fit: contain; }
+.place-pdf-fig-row--pair .place-fig--hi-res img { max-height: 52vh; }
+.place-pdf-fig-row--pair .place-fig--lo-res img { max-height: 26vh; }
+.place-pdf-fig-row--pair .place-fig--row-sized img,
+.place-pdf-fig-row--triple .place-fig--row-sized img,
+.place-pdf-fig-row--many .place-fig--row-sized img {
+  width: auto; max-width: 100%; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row .place-fig--row-sized.place-fig--hi-res img,
+.place-pdf-fig-row .place-fig--row-sized.place-fig--lo-res img {
+  max-height: unset; }
+.place-pdf-fig-rows-stack {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple {
+  display: flex; flex-direction: row; flex-wrap: nowrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.4rem 0.48rem; margin: 0;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--triple .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--triple .place-fig--hi-res img { max-height: 42vh; }
+.place-pdf-fig-row--triple .place-fig--lo-res img { max-height: 18vh; }
+.place-pdf-fig-row--many {
+  flex-wrap: nowrap; justify-content: center; align-items: flex-end;
+  gap: 0.35rem 0.42rem; }
+.place-pdf-fig-row--many .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--many .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+
+
 .place { margin-bottom: 2.2rem; page-break-inside: auto; }
 h3 { font-family: 'Marcellus', serif; font-size: 1.22rem; margin: 1.2rem 0 0.35rem;
   font-weight: 600; }
@@ -90,7 +171,6 @@ h4 { font-family: 'Marcellus', serif; font-size: 0.95rem; text-transform: upperc
   color: #555; font-size: 0.95rem; margin: 0 0 0.5rem; font-style: italic; }
 .place-meta { font-size: 0.92rem; color: #353535; margin: 0 0 0.75rem;
   line-height: 1.4; }
-.place-fig { margin: 0.5rem 0 1rem; }
 img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
 .prose, .place-desc p { margin: 0.45rem 0; line-height: 1.5;
   text-align: justify; }
@@ -110,301 +190,501 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <figure class="heraldry-fig heraldry-coat-book" title="City emblem"><img src="../images/guide_coat_of_arms.svg" alt="City emblem"/></figure>
 <figure class="heraldry-fig heraldry-coat-book" title="Flag"><img src="../images/guide_flag.svg" alt="Flag"/></figure>
 </div></div><h1 class="guide-title-main">Madrid</h1><p class="lead">Путеводитель. Объектов в этом выпуске: 33.</p></header>
+<nav class="guide-toc" id="guide-toc" aria-label="Содержание"><h2>Содержание</h2><ol><li class="toc-item"><a href="#guide-historical">Историческая справка</a></li><li class="toc-item"><a href="#guide-trips">Маршруты</a></li><li class="toc-item"><a href="#madrid_1_de_mayo">Madrid 1 De Mayo</a></li><li class="toc-item"><a href="#madrid_almudena_cathedral">Madrid Almudena Cathedral</a></li><li class="toc-item"><a href="#madrid_atocha">Madrid Atocha</a></li><li class="toc-item"><a href="#madrid_basilica_san_francisco_grande">Madrid Basilica San Francisco Grande</a></li><li class="toc-item"><a href="#madrid_caixaforum_madrid">Madrid Caixaforum Madrid</a></li><li class="toc-item"><a href="#madrid_cybeles_palace_madrid">Madrid Cybeles Palace Madrid</a></li><li class="toc-item"><a href="#madrid_edificio_metropolis">Madrid Edificio Metropolis</a></li><li class="toc-item"><a href="#madrid_ermita_san_antonio_florida">Madrid Ermita San Antonio Florida</a></li><li class="toc-item"><a href="#madrid_fountain_cibeles">Madrid Fountain Cibeles</a></li><li class="toc-item"><a href="#madrid_fountain_neptune_madrid">Madrid Fountain Neptune Madrid</a></li><li class="toc-item"><a href="#madrid_gran_via_madrid">Madrid Gran Via Madrid</a></li><li class="toc-item"><a href="#madrid_las_ventas">Madrid Las Ventas</a></li><li class="toc-item"><a href="#madrid_mercado_san_miguel">Madrid Mercado San Miguel</a></li><li class="toc-item"><a href="#madrid_museo_cerralbo">Madrid Museo Cerralbo</a></li><li class="toc-item"><a href="#madrid_museo_del_prado">Madrid Museo Del Prado</a></li><li class="toc-item"><a href="#madrid_museo_reina_sofia">Madrid Museo Reina Sofia</a></li><li class="toc-item"><a href="#madrid_museo_thyssen">Madrid Museo Thyssen</a></li><li class="toc-item"><a href="#madrid_plaza_callao">Madrid Plaza Callao</a></li><li class="toc-item"><a href="#madrid_plaza_colon_madrid">Madrid Plaza Colon Madrid</a></li><li class="toc-item"><a href="#madrid_plaza_de_cibeles_fountain">Madrid Plaza De Cibeles Fountain</a></li><li class="toc-item"><a href="#madrid_plaza_de_espana_madrid">Madrid Plaza De Espana Madrid</a></li><li class="toc-item"><a href="#madrid_plaza_de_oriente">Madrid Plaza De Oriente</a></li><li class="toc-item"><a href="#madrid_plaza_mayor_madrid">Madrid Plaza Mayor Madrid</a></li><li class="toc-item"><a href="#madrid_puerta_de_alcala">Madrid Puerta De Alcala</a></li><li class="toc-item"><a href="#madrid_puerta_del_sol">Madrid Puerta Del Sol</a></li><li class="toc-item"><a href="#madrid_retiro_crystal_palace">Madrid Retiro Crystal Palace</a></li><li class="toc-item"><a href="#madrid_royal_botanical_garden_madrid">Madrid Royal Botanical Garden Madrid</a></li><li class="toc-item"><a href="#madrid_royal_palace_madrid">Madrid Royal Palace Madrid</a></li><li class="toc-item"><a href="#madrid_royal_theatre_madrid">Madrid Royal Theatre Madrid</a></li><li class="toc-item"><a href="#madrid_santiago_bernabeu">Madrid Santiago Bernabeu</a></li><li class="toc-item"><a href="#madrid_sorolla_museum">Madrid Sorolla Museum</a></li><li class="toc-item"><a href="#madrid_templo_de_debod">Madrid Templo De Debod</a></li><li class="toc-item"><a href="#madrid_zarzuela_theatre">Madrid Zarzuela Theatre</a></li></ol></nav>
 <section class="historical-reference" id="guide-historical" aria-label="Историческая справка"><h2>Историческая справка</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 <p class="prose">Мадрид — столица Испании и политический центр королевства на высокогорном плато.</p>
 <p class="prose">От крепости к резиденции дворов Габсбургов и Бурбонов: музеи Прадо, Рейна София и Тиссен-Борнемисца, королевские дворцы и бульвары. Мадрид — столица футбола, ночной жизни и современного искусства.</p>
 <p class="prose">Гражданская война сделала Мадрид символом республиканской обороны; франкистская эпоха и демократия после 1975 года расширили столицу. Евро и интеграция в ЕС укрепили экономику; Мадрид — узел высокоскоростных дорог и культуры всей Испании.</p></section>
 <section class="guide-trip-plans" id="guide-trips" aria-label="Маршруты"><h2>Маршруты</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 <article class="trip-plan" id="trip-1d"><h3>Один день</h3>
 <p class="prose">Компактный маршрут по главным точкам путеводителя с минимальным возвратом назад пешком.</p>
-<ol class="trip-stops"><li><a href="#madrid_caixaforum_madrid">Madrid Caixaforum Madrid</a> (~75мин)</li>
-<li><a href="#madrid_royal_botanical_garden_madrid">Madrid Royal Botanical Garden Madrid</a> (~75мин)</li>
-<li><a href="#madrid_fountain_neptune_madrid">Madrid Fountain Neptune Madrid</a> (~75мин)</li>
-<li><a href="#madrid_museo_thyssen">Madrid Museo Thyssen</a> (~75мин)</li>
-<li><a href="#madrid_edificio_metropolis">Madrid Edificio Metropolis</a> (~75мин)</li>
-<li><a href="#madrid_fountain_cibeles">Madrid Fountain Cibeles</a> (~75мин)</li></ol></article>
+<ol class="trip-stops"><li><a href="#madrid_basilica_san_francisco_grande">Madrid Basilica San Francisco Grande</a> (~75мин)</li>
+<li><a href="#madrid_mercado_san_miguel">Madrid Mercado San Miguel</a> (~75мин)</li>
+<li><a href="#madrid_plaza_mayor_madrid">Madrid Plaza Mayor Madrid</a> (~75мин)</li>
+<li><a href="#madrid_plaza_callao">Madrid Plaza Callao</a> (~75мин)</li>
+<li><a href="#madrid_gran_via_madrid">Madrid Gran Via Madrid</a> (~75мин)</li>
+<li><a href="#madrid_edificio_metropolis">Madrid Edificio Metropolis</a> (~75мин)</li></ol></article>
 <article class="trip-plan" id="trip-3d1"><h3>Три дня — день 1</h3>
 <p class="prose">День 1 — центральный кластер.</p>
-<ol class="trip-stops"><li><a href="#madrid_basilica_san_francisco_grande">Madrid Basilica San Francisco Grande</a> (~75мин)</li>
-<li><a href="#madrid_almudena_cathedral">Madrid Almudena Cathedral</a> (~75мин)</li>
+<ol class="trip-stops"><li><a href="#madrid_almudena_cathedral">Madrid Almudena Cathedral</a> (~75мин)</li>
 <li><a href="#madrid_atocha">Madrid Atocha</a> (~75мин)</li>
+<li><a href="#madrid_caixaforum_madrid">Madrid Caixaforum Madrid</a> (~75мин)</li>
 <li><a href="#madrid_cybeles_palace_madrid">Madrid Cybeles Palace Madrid</a> (~75мин)</li>
 <li><a href="#madrid_ermita_san_antonio_florida">Madrid Ermita San Antonio Florida</a> (~75мин)</li></ol></article>
 <article class="trip-plan" id="trip-3d2"><h3>Три дня — день 2</h3>
 <p class="prose">День 2 — следующая группа районов.</p>
-<ol class="trip-stops"><li><a href="#madrid_gran_via_madrid">Madrid Gran Via Madrid</a> (~75мин)</li>
-<li><a href="#madrid_las_ventas">Madrid Las Ventas</a> (~75мин)</li>
-<li><a href="#madrid_mercado_san_miguel">Madrid Mercado San Miguel</a> (~75мин)</li>
-<li><a href="#madrid_museo_cerralbo">Madrid Museo Cerralbo</a> (~75мин)</li>
-<li><a href="#madrid_museo_del_prado">Madrid Museo Del Prado</a> (~75мин)</li></ol></article>
+<ol class="trip-stops"><li><a href="#madrid_royal_botanical_garden_madrid">Madrid Royal Botanical Garden Madrid</a> (~75мин)</li>
+<li><a href="#madrid_fountain_neptune_madrid">Madrid Fountain Neptune Madrid</a> (~75мин)</li>
+<li><a href="#madrid_museo_thyssen">Madrid Museo Thyssen</a> (~75мин)</li>
+<li><a href="#madrid_fountain_cibeles">Madrid Fountain Cibeles</a> (~75мин)</li>
+<li><a href="#madrid_las_ventas">Madrid Las Ventas</a> (~75мин)</li></ol></article>
 <article class="trip-plan" id="trip-3d3"><h3>Три дня — день 3</h3>
 <p class="prose">День 3 — оставшиеся близкие объекты.</p>
-<ol class="trip-stops"><li><a href="#madrid_plaza_callao">Madrid Plaza Callao</a> (~75мин)</li>
-<li><a href="#madrid_plaza_mayor_madrid">Madrid Plaza Mayor Madrid</a> (~75мин)</li>
-<li><a href="#madrid_plaza_de_oriente">Madrid Plaza De Oriente</a> (~75мин)</li>
+<ol class="trip-stops"><li><a href="#madrid_plaza_de_oriente">Madrid Plaza De Oriente</a> (~75мин)</li>
+<li><a href="#madrid_museo_cerralbo">Madrid Museo Cerralbo</a> (~75мин)</li>
+<li><a href="#madrid_museo_del_prado">Madrid Museo Del Prado</a> (~75мин)</li>
 <li><a href="#madrid_museo_reina_sofia">Madrid Museo Reina Sofia</a> (~75мин)</li></ol></article></section>
-<nav class="guide-toc" aria-label="Содержание"><h2>Содержание</h2><ol><li class="toc-item"><a href="#guide-historical">Историческая справка</a></li><li class="toc-item"><a href="#guide-trips">Маршруты</a></li><li class="toc-item"><a href="#madrid_pdfband_3_d3fbf0f1">1º de Mayo</a></li><li class="toc-item"><a href="#madrid_almudena_cathedral">Madrid Almudena Cathedral</a></li><li class="toc-item"><a href="#madrid_caixaforum_madrid">Madrid Caixaforum Madrid</a></li><li class="toc-item"><a href="#madrid_museo_cerralbo">Madrid Museo Cerralbo</a></li><li class="toc-item"><a href="#madrid_plaza_de_cibeles_fountain">Madrid Plaza De Cibeles Fountain</a></li><li class="toc-item"><a href="#madrid_retiro_crystal_palace">Madrid Retiro Crystal Palace</a></li><li class="toc-item"><a href="#madrid_cybeles_palace_madrid">Madrid Cybeles Palace Madrid</a></li><li class="toc-item"><a href="#madrid_edificio_metropolis">Madrid Edificio Metropolis</a></li><li class="toc-item"><a href="#madrid_fountain_neptune_madrid">Madrid Fountain Neptune Madrid</a></li><li class="toc-item"><a href="#madrid_fountain_cibeles">Madrid Fountain Cibeles</a></li><li class="toc-item"><a href="#madrid_gran_via_madrid">Madrid Gran Via Madrid</a></li><li class="toc-item"><a href="#madrid_ermita_san_antonio_florida">Madrid Ermita San Antonio Florida</a></li><li class="toc-item"><a href="#madrid_las_ventas">Madrid Las Ventas</a></li><li class="toc-item"><a href="#madrid_atocha">Madrid Atocha</a></li><li class="toc-item"><a href="#madrid_mercado_san_miguel">Madrid Mercado San Miguel</a></li><li class="toc-item"><a href="#madrid_museo_del_prado">Madrid Museo Del Prado</a></li><li class="toc-item"><a href="#madrid_plaza_colon_madrid">Madrid Plaza Colon Madrid</a></li><li class="toc-item"><a href="#madrid_plaza_de_espana_madrid">Madrid Plaza De Espana Madrid</a></li><li class="toc-item"><a href="#madrid_plaza_de_oriente">Madrid Plaza De Oriente</a></li><li class="toc-item"><a href="#madrid_plaza_callao">Madrid Plaza Callao</a></li><li class="toc-item"><a href="#madrid_plaza_mayor_madrid">Madrid Plaza Mayor Madrid</a></li><li class="toc-item"><a href="#madrid_puerta_de_alcala">Madrid Puerta De Alcala</a></li><li class="toc-item"><a href="#madrid_puerta_del_sol">Madrid Puerta Del Sol</a></li><li class="toc-item"><a href="#madrid_museo_reina_sofia">Madrid Museo Reina Sofia</a></li><li class="toc-item"><a href="#madrid_basilica_san_francisco_grande">Madrid Basilica San Francisco Grande</a></li><li class="toc-item"><a href="#madrid_royal_botanical_garden_madrid">Madrid Royal Botanical Garden Madrid</a></li><li class="toc-item"><a href="#madrid_royal_palace_madrid">Madrid Royal Palace Madrid</a></li><li class="toc-item"><a href="#madrid_santiago_bernabeu">Madrid Santiago Bernabeu</a></li><li class="toc-item"><a href="#madrid_sorolla_museum">Madrid Sorolla Museum</a></li><li class="toc-item"><a href="#madrid_zarzuela_theatre">Madrid Zarzuela Theatre</a></li><li class="toc-item"><a href="#madrid_royal_theatre_madrid">Madrid Royal Theatre Madrid</a></li><li class="toc-item"><a href="#madrid_templo_de_debod">Madrid Templo De Debod</a></li><li class="toc-item"><a href="#madrid_museo_thyssen">Madrid Museo Thyssen</a></li></ol></nav>
-<section class="place" id="madrid_pdfband_3_d3fbf0f1">
-<h3>1º de Mayo</h3>
+<section class="place" id="madrid_1_de_mayo">
+<div class="place-lead">
+<h3>Madrid 1 De Mayo</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/madrid_pdfband_3_d3fbf0f1.jpg" alt="1º de Mayo"/></figure>
+<p class="place-meta">Адрес: See official visitor information.</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/madrid_1_de_mayo.jpg" alt="Madrid 1 De Mayo" width="1092" height="1600" style="height: 309px; max-height: 309px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/madrid_1_de_mayo_b.jpg" alt="Madrid 1 De Mayo — вид 2" width="330" height="221" style="height: 309px; max-height: 309px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 </section>
 <section class="place" id="madrid_almudena_cathedral">
+<div class="place-lead">
 <h3>Madrid Almudena Cathedral</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1874–1993</p>
-<figure class="place-fig"><img src="../images/madrid_almudena_cathedral.jpg" alt="Madrid Almudena Cathedral"/></figure>
+<p class="place-meta">Адрес: Facing Royal Palace | Период: 1874–1993</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/madrid_almudena_cathedral.jpg" alt="Madrid Almudena Cathedral" width="1062" height="1600" style="height: 154px; max-height: 154px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/madrid_almudena_cathedral_b.jpg" alt="Madrid Almudena Cathedral — вид 2" width="330" height="110" style="height: 154px; max-height: 154px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Расположенный на Куэста-де-Сан-Висенте, кафедральный собор Альмудена — самая заметная религиозная постройка Мадрида, сочетающая в себе готическое возрождение и неороманский стили. Его строительство началось в 1874 году и было завершено в 1993 году. Строительство началось в 1874 году и завершилось в 1993 году после длительных задержек. В соборе расположены королевские гробницы короля Альфонсо XII и королевы Марии-Кристины. Он имеет центральный купол и четыре меньших купола, символизирующих четырех евангелистов. Его фасад сочетает готические и романские архитектурные мотивы. Собор Альмудена был признан национальным памятником в 1969 году.</p>
 <p class="prose">Возведённый на протяжении нескольких десятилетий, собор Альмудена изначально планировали как нео-готический храм, но он со временем превратился в сочетание элементов готического возрождения и романского стиля. Проект столкнулся с многочисленными задержками из-за политической нестабильности и финансовых ограничений, и его официальное освящение состоялось в 1993 году. Катедральный собор Альмадена отличается взмывающими ввысь шпилями и роскошным интерьером, где представлены замысловатые витражи и впечатляющие скульптуры.</p></div>
 </section>
+<section class="place" id="madrid_atocha">
+<div class="place-lead">
+<h3>Madrid Atocha</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Arganzuela | Период: 1892</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/madrid_atocha.jpg" alt="Madrid Atocha" width="1200" height="1600" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/madrid_atocha_b.jpg" alt="Madrid Atocha — вид 2" width="330" height="247" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">В самом сердце оживленной транспортной системы Мадрида расположена культовая вокзальная станция Аточа, свидетель сочетания современной эффективности и исторического величия. Открыт в 1892 году во время Золотого века железных дорог Испании. Станция украшена замысловатым мавританским дизайном и деталями в стиле ар-нуво. Соединяет Мадрид с крупными городами по всей Испании и Европе. Аточа ежегодно обслуживает более 40 миллионов путешественников. Благодаря своему центральному расположению, сюда легко добраться по линии метро 6.</p>
+<p class="prose">Построенный в 1892 году, вокзал Аточа был спроектирован архитектором Анибалом Кастро в неомудехарском стиле, сочетающем мавританское влияние с элементами ар-нуво. Изначально построенный как конечная станция испанских железных дорог, он с тех пор превратился в один из самых оживленных узлов Европы, ежегодно обслуживая миллионы пассажиров. Его величественные арки, замысловатая плитка и богато украшенные фасады делают его значимой архитектурной достопримечательностью, отражающей богатое культурное наследие Мадрида. Аточа — это больше, чем просто транзитный узел; это оживленное место встречи, где местная культура встречается с международными путешествиями.</p></div>
+</section>
+<section class="place" id="madrid_basilica_san_francisco_grande">
+<div class="place-lead">
+<h3>Madrid Basilica San Francisco Grande</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Период: 1717–1738</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/madrid_basilica_san_francisco_grande.jpg" alt="Madrid Basilica San Francisco Grande" width="1280" height="960" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/madrid_basilica_san_francisco_grande_b.jpg" alt="Madrid Basilica San Francisco Grande — вид 2" width="330" height="440" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Королевская базилика Сан-Франциско-эль-Гранде — величественная барочная церковь, возвышающаяся над районом Пуэрта-дель-Соль в Мадриде. Построенная в начале XVIII века, она была заказана королем Филиппом V в память о его победе в Альказаре и стала одним из самых значимых религиозных памятников Испании. Заказан королем Филиппом V после его победы в битве при Алькасаре в 1707 году. Разработано итальянским архитектором Франческо Сабатини. Располагает впечатляющими скульптурными работами Джан Лоренцо Бернини. Содержит картины известных испанских художников, таких как Бартоломе Esteban Мурильо и Диего Веласкес. Расположен недалеко от исторического центра Мадрида, рядом с площадью Индепенденсия.</p>
+<p class="prose">Построенная в период с 1717 по 1738 год во время правления короля Филиппа V, базилика была разработана итальянским архитектором Франческо Сабатини. Она служила символом королевской власти и благодарности короля за военные успехи. Интерьер украшен роскошными декорациями, включая скульптуры Бернини и картины таких художников, как Мурильо и Веласкес. Посетители приезжают сюда, чтобы полюбоваться его захватывающей архитектурой и богатым художественным наследием, в котором переплетаются испанское и итальянское влияния.</p></div>
+</section>
 <section class="place" id="madrid_caixaforum_madrid">
+<div class="place-lead">
 <h3>Madrid Caixaforum Madrid</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Период: 2006</p>
-<figure class="place-fig"><img src="../images/madrid_caixaforum_madrid.jpg" alt="Madrid Caixaforum Madrid"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/madrid_caixaforum_madrid.jpg" alt="Madrid Caixaforum Madrid" width="1280" height="960" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/madrid_caixaforum_madrid_b.jpg" alt="Madrid Caixaforum Madrid — вид 2" width="330" height="494" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">CaixaForum Madrid — это современное культурное учреждение, расположенное в самом сердце испанской столицы. Основанный в 2006 году, он функционирует как музей и выставочное пространство, где представлены современное искусство, фотография и дизайн. Здесь проводятся временные выставки, посвященные различным художественным дисциплинам, включая живопись, скульптуру, фотографию и мультимедиа. Здание имеет большой атриум, заполненный естественным светом, что улучшает впечатления от посещения для посетителей. CaixaForum также проводит образовательные программы, мастер-классы и лекции, направленные на повышение культурной осведомленности и вовлеченности как среди местных жителей, так и среди туристов. Примыкающий к Королевскому дворцу, он предлагает панорамный вид исторического центра Мадрида. Его название происходит от спонсора учреждения — CaixaBank.</p>
 <p class="prose">Открывшийся в 2006 году CaixaForum Madrid был спроектирован известным архитектором Рафаэлем Монео. Он занимает видное место в культурном районе города, рядом с Королевским дворцом и Пуэрта-дель-Соль. Само здание сочетает в себе традиционную испанскую архитектуру с современными элементами, отражая его двойную роль как исторической достопримечательности и передового культурного центра. Посетители приезжают, чтобы ознакомиться с новаторскими выставками, интерактивными инсталляциями и мыслительными экспозициями, которые исследуют глобальные темы и местное наследие.</p></div>
 </section>
-<section class="place" id="madrid_museo_cerralbo">
-<h3>Madrid Museo Cerralbo</h3>
-
-
-<figure class="place-fig"><img src="../images/madrid_museo_cerralbo.jpg" alt="Madrid Museo Cerralbo"/></figure>
-<div class="place-desc"><p class="prose">Расположенный на холме Серальбо, этот музей представляет коллекцию испанского искусства и антиквариата, охватывающую века, и дает посетителям представление о богатом культурном наследии Испании. Здесь находится одна из самых обширных коллекций испанских скульптур и картин. В музее также представлены важные археологические артефакты, включая римские и мавританские реликвии. Значительные работы включают произведения таких художников, как Веласкес, Мурильо и Сульбаран. Его архитектура отражает неоклассический стиль с элегантными интерьерами и величественными дворами. Регулярные временные выставки дополняют постоянную коллекцию.</p>
-<p class="prose">Музей Серральбо был основан в 1946 году королем Альфонсо XIII в качестве частной резиденции для его семьи. После его смерти он стал публичным музеем, посвященным экспонированию испанских произведений искусства и археологических находок, датируемых периодом от доисторических времен до современных эпох. Здесь посетители приходят, чтобы ознакомиться с эволюцией испанской культуры и художественного самовыражения с течением времени.</p></div>
-</section>
-<section class="place" id="madrid_plaza_de_cibeles_fountain">
-<h3>Madrid Plaza De Cibeles Fountain</h3>
-
-<p class="place-meta">Период: 1777–1783</p>
-<figure class="place-fig"><img src="../images/madrid_plaza_de_cibeles_fountain.jpg" alt="Madrid Plaza De Cibeles Fountain"/></figure>
-<div class="place-desc"><p class="prose">Величественный символ величия и изысканности Мадрида, Фонтан Цибеллы является одной из самых знаковых достопримечательностей Испании. Проект итальянского архитектора Джакомо Руиса де Лега демонстрирует классическую неоклассическую архитектуру. Четыре лошади наверху изображают ветры — север, юг, восток и запад. Он находится на пересечении двух главных бульваров: Пасео-дель-Прадо и Калье-Алкала. Несколько раз восстанавливавшийся за годы, объект претерпел последнюю значительную реставрацию в 1996 году. Сегодня он окружён шумными кафе и торговыми улицами, что делает его популярным местом встреч.</p>
-<p class="prose">Построенный в период с 1777 по 1783 год во времена правления короля Карла III, фонтан изначально был назван в честь королевы Марии Барбары де Браганса, которая была известна под прозвищем «La Reyna Cibeles» (Королева Цибелы). Позднее он стал символом гражданской гордости и элегантности, часто изображавшийся на картинах и открытках, воспевающих городскую жизнь Мадрида. Посещение фонтана Цибел — это необходимо для понимания культурного наследия и архитектурного великолепия Мадрида.</p></div>
-</section>
-<section class="place" id="madrid_retiro_crystal_palace">
-<h3>Madrid Retiro Crystal Palace</h3>
-
-<p class="place-meta">Период: 1887</p>
-<figure class="place-fig"><img src="../images/madrid_retiro_crystal_palace.jpg" alt="Madrid Retiro Crystal Palace"/></figure>
-<div class="place-desc"><p class="prose">В самом сердце мадридского парка Ретиро стоит замечательное сооружение, известное как Кристальный дворец. Изначально оно было построено для Международной выставки 1887 года. Этот стеклянный и железный павильон был разработан известным архитектором Рикардо Буньелем, чтобы продемонстрировать современные технологии и инженерное мастерство. Построенный с использованием инновационных техник из стекла и железа, характерных для викторианской архитектуры. Проводил выставки и культурные мероприятия на протяжении всей своей истории. С момента возведения объект неоднократно подвергался реновации для поддержания его структурной целостности. Город пережил множество испытаний, включая войны и стихийные бедствия, и до сих пор сохраняет свой облик. Служит символом технологического развития и художественного самовыражения.</p>
-<p class="prose">Построенный в 1887 году, Кристальный дворец служил главным выставочным залом во время Международной выставки, проходившей в Мадриде. Он демонстрировал передовые технологии, произведения искусства и инновации, которые покорили посетителей со всего мира. Позже дворец был перемещен в пределах парка после первоначального использования и стал постоянным объектом. Сегодня Палац-Кристалл — одна из самых знаковых достопримечательностей в парке Ретиро, предлагающая посетителям представление о богатом промышленном наследии Испании и одновременно создающая умиротворяющую обстановку для отдыха и размышлений.</p></div>
-</section>
 <section class="place" id="madrid_cybeles_palace_madrid">
+<div class="place-lead">
 <h3>Madrid Cybeles Palace Madrid</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Период: 1905–1910</p>
-<figure class="place-fig"><img src="../images/madrid_cybeles_palace_madrid.jpg" alt="Madrid Cybeles Palace Madrid"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/madrid_cybeles_palace_madrid.jpg" alt="Madrid Cybeles Palace Madrid" width="1280" height="639" style="height: 230px; max-height: 230px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/madrid_cybeles_palace_madrid_b.jpg" alt="Madrid Cybeles Palace Madrid — вид 2" width="330" height="220" style="height: 230px; max-height: 230px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Дворец Цибелы (Cybele Palace), официально известный как Ayuntamiento de Madrid, — это величественное неоклассическое здание, доминирующее на площади Сибеле (Plaza de Cibeles) в центре Мадрида. Завершённый в 1910 году, он был спроектирован архитектором Мануэлем Муньосом Монтойей и отличается впечатляющими колоннами, статуями римских богинь и элегантными фасадами. Завершённый в 1910 году, он является одной из более новых достопримечательностей исторического центра Мадрида. Спроектировано Мануэлем Муньосом Монтойей, который также работал над близлежащей Пуэрта дель Соль. Название происходит от имени богини Кибелы, чья статуя prominently расположена на площади. Внутри представлены различные произведения искусства и экспозиции, посвященные местной истории и культуре. Фасад украшен скульптурами, изображающими сцены испанской мифологии.</p>
 <p class="prose">Построенный в период с 1905 по 1910 год, дворец заменил более раннюю ратушу на этой же территории. Его проектирование было призвано отразить растущее значение Мадрида как столицы, и его строительство ознаменовало собой важный этап модернизации города. В здании размещены офисы муниципального правительства, и оно стало одной из самых знаковых достопримечательностей Мадрида. Посещение дворца Цибелы позволяет посетителям увидеть гармоничное сочетание классической архитектуры и городского планирования, предлагая представление об исторической эволюции Мадрида.</p></div>
 </section>
 <section class="place" id="madrid_edificio_metropolis">
+<div class="place-lead">
 <h3>Madrid Edificio Metropolis</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1948–1956</p>
-<figure class="place-fig"><img src="../images/madrid_edificio_metropolis.jpg" alt="Madrid Edificio Metropolis"/></figure>
+<p class="place-meta">Адрес: Gran Vía / Alcalá junction | Период: 1948–1956</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/madrid_edificio_metropolis.jpg" alt="Madrid Edificio Metropolis" width="1279" height="872" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/madrid_edificio_metropolis_b.jpg" alt="Madrid Edificio Metropolis — вид 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Расположенный на шумном Пасео-де-ла-Касте llана, здания «Эдифисио Метрополис» является ярким образцом модернистской архитектуры, доминирующим в пейзаже Мадрида. Завершённый в 1956 году, он считается одним из самых знаковых послевоенных зданий Испании. Завершено в 1956 году в период экономического восстановления Испании после Второй мировой войны. Дизайн: Мануэль Муньос Монастерио, который также работал над другими известными проектами, такими как Отель Ritz Madrid. Выделяется своим узнаваемым фасадом с большими окнами и геометрическими узорами, вдохновлёнными мотивами ар-деко. Выступает символом преображения Мадрида в современный мегаполис после войны. Предлагает посетителям доступ к террасам на крыше с захватывающими видами на город.</p>
 <p class="prose">Построенный между 1948 и 1956 годами, Edificio Metrópolis был разработан архитектором Мануэлем Муньосом Монастерио. Он представляет собой сочетание элементов ар-деко и международного стиля, демонстрируя чистые линии и минималистскую эстетику, характерные для модернизма середины века. Edificio Metrópolis — обязательное место для любителей архитектуры. Оно является ярким примером смелых дизайнерских тенденций своей эпохи, а также предлагает панорамные виды Мадрида.</p></div>
 </section>
-<section class="place" id="madrid_fountain_neptune_madrid">
-<h3>Madrid Fountain Neptune Madrid</h3>
-
-<p class="place-meta">Период: 1755–1762</p>
-<figure class="place-fig"><img src="../images/madrid_fountain_neptune_madrid.jpg" alt="Madrid Fountain Neptune Madrid"/></figure>
-<div class="place-desc"><p class="prose">Фонтан Нептуна — величественный барочный фонтан, расположенный в центре Мадридской площади Сибелес (Plaza de Cibeles). Он был построен во время правления короля Филиппа V и завершён в 1762 году. Он украшен сложными скульптурными деталями, изображающими морскую жизнь и мифологические фигуры. Фонтан был перемещен дважды, прежде чем найти свое постоянное место на площади Сибелес. Статуя Нептуна возвышается на высоте почти шесть метров. Пьяца-де-Сибелес, где она находится, также известна своей изящной неоклассической архитектурой. Фонтан остается центральной точкой культурной жизни Мадрида.</p>
-<p class="prose">Построенный между 1755 и 1762 годами итальянским скульптором Пьетро Тенерани, фонтан посвящён Нептуну, богу моря, и представляет собой центральную статую, стоящую на постаменте в форме раковины, окружённую четырьмя дельфинами. Изначально фонтан находился в Пуэрта-дель-Соль, но был перемещён на нынешнее место в 1859 году. Эта знаковая достопримечательность является одной из самых узнаваемых символов Мадрида и служит популярным местом встречи как для местных жителей, так и для туристов.</p></div>
-</section>
-<section class="place" id="madrid_fountain_cibeles">
-<h3>Madrid Fountain Cibeles</h3>
-
-<p class="place-meta">Период: 1787</p>
-<figure class="place-fig"><img src="../images/madrid_fountain_cibeles.jpg" alt="Madrid Fountain Cibeles"/></figure>
-<div class="place-desc"><p class="prose">Величественный фонтан Fuente de Cibeles, расположенный в центре площади Прадо (Plaza de la Independencia) в Мадриде, является символом классического шарма и архитектурного наследия города. Построен в 1787 году в составе комплекса Королевского дворца. Разработан Луисом Лопесом де Эрерой в сотрудничестве со скульптором Петром де Меной. Фонтан выполнен из мрамора и гранита, демонстрируя сложную проработку и симметрию. Он расположен на видном месте на площади Индепенденсия, рядом с Королевским дворцом. Празднуется ежегодно во время Фиесты де лас Флорес, когда всё украшено цветами.</p>
-<p class="prose">Построенный в 1787 году во время правления короля Карлоса III, фонте де Сибелес (Fuente de Cibeles) изначально был спроектирован архитектором Луисом Лопесом де Эрерой в честь древнегреческой богини Кибелы. Монументальная структура изображает четыре льва, тянущих колесницу, что символизирует силу и мощь, а центральная статуя изображает саму богиню. Со временем это место стало одной из самых знаковых достопримечательностей Мадрида, привлекающей посетителей благодаря своей исторической значимости и захватывающим панорамным видам. Посетите Фонте-де-Сибелес, чтобы ощутить изящное сочетание классицизма и королевского величия, которое определяет городской ландшафт Мадрида.</p></div>
-</section>
-<section class="place" id="madrid_gran_via_madrid">
-<h3>Madrid Gran Via Madrid</h3>
-
-<p class="place-meta">Период: 1910–1929</p>
-<figure class="place-fig"><img src="../images/madrid_gran_via_madrid.jpg" alt="Madrid Gran Via Madrid"/></figure>
-<div class="place-desc"><p class="prose">Гран-Виа — знатная авеню Мадрида, знаменитая своей величественной архитектурой и оживленной пешеходной зоной. Известная как «Бродвей Испании», она была культурным центром с момента своего основания. Он простирается приблизительно на 1,8 километра через центральный Мадрид. Улица увешана роскошными магазинами, кинотеатрами и кафе. На Гран-Виа круглый год проходят крупные культурные мероприятия и фестивали. Широкие тротуары популярны среди пешеходов и туристов. В начале XX века Гран-Виа прославилась своими неоновыми вывесками и яркой ночной жизнью.</p>
-<p class="prose">Построенная между 1910 и 1929 годами, Гран-Виа была задумана как главный коммерческий и развлекательный район Мадрида. Она сочетает в себе стили модерна, ар-деко и неоклассицизма, и включает такие достопримечательности, как Гран-Театро-де-лас-Кортес и Сине Рекс. Гран-Виа — обязательное место для посещения при знакомстве с Мадридом, предлагающее сочетание исторического очарования и современной динамики.</p></div>
-</section>
 <section class="place" id="madrid_ermita_san_antonio_florida">
+<div class="place-lead">
 <h3>Madrid Ermita San Antonio Florida</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Период: 1527</p>
-<figure class="place-fig"><img src="../images/madrid_ermita_san_antonio_florida.jpg" alt="Madrid Ermita San Antonio Florida"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/madrid_ermita_san_antonio_florida.jpg" alt="Madrid Ermita San Antonio Florida" width="1280" height="879" style="height: 317px; max-height: 317px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/madrid_ermita_san_antonio_florida_b.jpg" alt="Madrid Ermita San Antonio Florida — вид 2" width="330" height="247" style="height: 317px; max-height: 317px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Эрмитаж Сан-Антонио де ла Флорида — безмятежный и исторический религиозный объект, расположенный в оживном городском ландшафте Мадрида. Построенный в начале XVI века, он изначально возводился как францисканский монастырь, посвященный Святому Антонию Падуескому. Изначально он задумывался как женский монастырь, но позже стал мужским скитом. Его строительство началось под покровительством королевы Джоанны I. Интерьер украшен богато декорированными элементами и фресками, отражающими его историческую эволюцию. Сегодня это музей, где представлены религиозные артефакты и произведения искусства. Она остается действующей церковью, где регулярно проводятся богослужения.</p>
 <p class="prose">Основанный в 1527 году королевой Джоанной I Кастильской, этот скит служил как духовным убежищем для монахинь, так и центром религиозных практик. Со временем его архитектура претерпевала изменения под влиянием различных стилей, сочетая элементы готики и ренессанса. Сегодня посетители могут полюбоваться его сложной каменной кладкой и художественными украшениями, которые отражают века архитектурного совершенствования. Посещение Эрмитажа предоставляет возможность погрузиться в богатое историческое наследие Мадрида, наслаждаясь его уникальным сочетанием религиозного значения и архитектурной красоты.</p></div>
 </section>
-<section class="place" id="madrid_las_ventas">
-<h3>Madrid Las Ventas</h3>
+<section class="place" id="madrid_fountain_cibeles">
+<div class="place-lead">
+<h3>Madrid Fountain Cibeles</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1882–1910</p>
-<figure class="place-fig"><img src="../images/madrid_las_ventas.jpg" alt="Madrid Las Ventas"/></figure>
+<p class="place-meta">Адрес: Plaza de Cibeles | Период: 1787</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/madrid_fountain_cibeles.jpg" alt="Madrid Fountain Cibeles" width="1280" height="853" style="height: 247px; max-height: 247px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/madrid_fountain_cibeles_b.jpg" alt="Madrid Fountain Cibeles — вид 2" width="330" height="177" style="height: 247px; max-height: 247px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Величественный фонтан Fuente de Cibeles, расположенный в центре площади Прадо (Plaza de la Independencia) в Мадриде, является символом классического шарма и архитектурного наследия города. Построен в 1787 году в составе комплекса Королевского дворца. Разработан Луисом Лопесом де Эрерой в сотрудничестве со скульптором Петром де Меной. Фонтан выполнен из мрамора и гранита, демонстрируя сложную проработку и симметрию. Он расположен на видном месте на площади Индепенденсия, рядом с Королевским дворцом. Празднуется ежегодно во время Фиесты де лас Флорес, когда всё украшено цветами.</p>
+<p class="prose">Построенный в 1787 году во время правления короля Карлоса III, фонте де Сибелес (Fuente de Cibeles) изначально был спроектирован архитектором Луисом Лопесом де Эрерой в честь древнегреческой богини Кибелы. Монументальная структура изображает четыре льва, тянущих колесницу, что символизирует силу и мощь, а центральная статуя изображает саму богиню. Со временем это место стало одной из самых знаковых достопримечательностей Мадрида, привлекающей посетителей благодаря своей исторической значимости и захватывающим панорамным видам. Посетите Фонте-де-Сибелес, чтобы ощутить изящное сочетание классицизма и королевского величия, которое определяет городской ландшафт Мадрида.</p></div>
+</section>
+<section class="place" id="madrid_fountain_neptune_madrid">
+<div class="place-lead">
+<h3>Madrid Fountain Neptune Madrid</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Plaza de Cánovas del Castillo | Период: 1755–1762</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/madrid_fountain_neptune_madrid.jpg" alt="Madrid Fountain Neptune Madrid" width="1280" height="968" style="height: 309px; max-height: 309px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/madrid_fountain_neptune_madrid_b.jpg" alt="Madrid Fountain Neptune Madrid — вид 2" width="330" height="221" style="height: 309px; max-height: 309px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Фонтан Нептуна — величественный барочный фонтан, расположенный в центре Мадридской площади Сибелес (Plaza de Cibeles). Он был построен во время правления короля Филиппа V и завершён в 1762 году. Он украшен сложными скульптурными деталями, изображающими морскую жизнь и мифологические фигуры. Фонтан был перемещен дважды, прежде чем найти свое постоянное место на площади Сибелес. Статуя Нептуна возвышается на высоте почти шесть метров. Пьяца-де-Сибелес, где она находится, также известна своей изящной неоклассической архитектурой. Фонтан остается центральной точкой культурной жизни Мадрида.</p>
+<p class="prose">Построенный между 1755 и 1762 годами итальянским скульптором Пьетро Тенерани, фонтан посвящён Нептуну, богу моря, и представляет собой центральную статую, стоящую на постаменте в форме раковины, окружённую четырьмя дельфинами. Изначально фонтан находился в Пуэрта-дель-Соль, но был перемещён на нынешнее место в 1859 году. Эта знаковая достопримечательность является одной из самых узнаваемых символов Мадрида и служит популярным местом встречи как для местных жителей, так и для туристов.</p></div>
+</section>
+<section class="place" id="madrid_gran_via_madrid">
+<div class="place-lead">
+<h3>Madrid Gran Via Madrid</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Centro–Argüelles stretch | Период: 1910–1929</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/madrid_gran_via_madrid.jpg" alt="Madrid Gran Via Madrid" width="1280" height="852" style="height: 228px; max-height: 228px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/madrid_gran_via_madrid_b.jpg" alt="Madrid Gran Via Madrid — вид 2" width="330" height="163" style="height: 228px; max-height: 228px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Гран-Виа — знатная авеню Мадрида, знаменитая своей величественной архитектурой и оживленной пешеходной зоной. Известная как «Бродвей Испании», она была культурным центром с момента своего основания. Он простирается приблизительно на 1,8 километра через центральный Мадрид. Улица увешана роскошными магазинами, кинотеатрами и кафе. На Гран-Виа круглый год проходят крупные культурные мероприятия и фестивали. Широкие тротуары популярны среди пешеходов и туристов. В начале XX века Гран-Виа прославилась своими неоновыми вывесками и яркой ночной жизнью.</p>
+<p class="prose">Построенная между 1910 и 1929 годами, Гран-Виа была задумана как главный коммерческий и развлекательный район Мадрида. Она сочетает в себе стили модерна, ар-деко и неоклассицизма, и включает такие достопримечательности, как Гран-Театро-де-лас-Кортес и Сине Рекс. Гран-Виа — обязательное место для посещения при знакомстве с Мадридом, предлагающее сочетание исторического очарования и современной динамики.</p></div>
+</section>
+<section class="place" id="madrid_las_ventas">
+<div class="place-lead">
+<h3>Madrid Las Ventas</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Salamanca district | Период: 1882–1910</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/madrid_las_ventas.jpg" alt="Madrid Las Ventas" width="1280" height="750" style="height: 270px; max-height: 270px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/madrid_las_ventas_b.jpg" alt="Madrid Las Ventas — вид 2" width="330" height="233" style="height: 270px; max-height: 270px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Расположенная в самом сердце Мадрида, арена лассо Лас-Вентас является одной из самых знаковых достопримечательностей Испании и свидетельством богатого культурного наследия города. Выстроившийся во времена Belle Époque, Лас-Вентас отличается неомавританским архитектурным стилем, который сочетает испанское и средиземноморское влияния. Арена может вместить до 23 000 зрителей, что делает ее одной из крупнейших коррид в Европе. Поначалу проект был разработан архитектором Анибалем Мартинесом и инженером Мануэлем Дельгадо, которые стремились создать пространство, отражающее элегантность и великолепие традиционной испанской архитектуры. В Лас-Вентес прошли несколько реконструкций на протяжении десятилетий, но он сохранил свой первозданный шарм и аутентичность. Сегодня на коррида-арене также проводятся различные культурные мероприятия, такие как концерты, фестивали и выставки.</p>
 <p class="prose">Построенная между 1882 и 1910 годами, коррида-арена Лас-Вентас стала с момента своего открытия местом проведения бесчисленных корриджей. Она сыграла значительную роль в формировании идентичности Мадрида как яркого центра корриджей, привлекая как местных жителей, так и туристов. На протяжении многих лет здесь выступали одни из самых известных матадоров и быков, что сделало ее символом традиции и страсти. Посещение Лас-Вентас дарит незабываемые впечатления, позволяя посетителям стать свидетелями захватывающего зрелища корриды, одновременно погружаясь в историческое значение этой легендарной арены.</p></div>
 </section>
-<section class="place" id="madrid_atocha">
-<h3>Madrid Atocha</h3>
-
-<p class="place-meta">Период: 1892</p>
-<figure class="place-fig"><img src="../images/madrid_atocha.jpg" alt="Madrid Atocha"/></figure>
-<div class="place-desc"><p class="prose">В самом сердце оживленной транспортной системы Мадрида расположена культовая вокзальная станция Аточа, свидетель сочетания современной эффективности и исторического величия. Открыт в 1892 году во время Золотого века железных дорог Испании. Станция украшена замысловатым мавританским дизайном и деталями в стиле ар-нуво. Соединяет Мадрид с крупными городами по всей Испании и Европе. Аточа ежегодно обслуживает более 40 миллионов путешественников. Благодаря своему центральному расположению, сюда легко добраться по линии метро 6.</p>
-<p class="prose">Построенный в 1892 году, вокзал Аточа был спроектирован архитектором Анибалом Кастро в неомудехарском стиле, сочетающем мавританское влияние с элементами ар-нуво. Изначально построенный как конечная станция испанских железных дорог, он с тех пор превратился в один из самых оживленных узлов Европы, ежегодно обслуживая миллионы пассажиров. Его величественные арки, замысловатая плитка и богато украшенные фасады делают его значимой архитектурной достопримечательностью, отражающей богатое культурное наследие Мадрида. Аточа — это больше, чем просто транзитный узел; это оживленное место встречи, где местная культура встречается с международными путешествиями.</p></div>
-</section>
 <section class="place" id="madrid_mercado_san_miguel">
+<div class="place-lead">
 <h3>Madrid Mercado San Miguel</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1915</p>
-<figure class="place-fig"><img src="../images/madrid_mercado_san_miguel.jpg" alt="Madrid Mercado San Miguel"/></figure>
+<p class="place-meta">Адрес: Near Plaza Mayor | Период: 1915</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/madrid_mercado_san_miguel.jpg" alt="Madrid Mercado San Miguel" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/madrid_mercado_san_miguel_b.jpg" alt="Madrid Mercado San Miguel — вид 2" width="330" height="247" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Расположенный в самом сердце модного района Маласанья в Мадриде, рынок Сан-Мигель — это оживленный продуктовый рынок, известный своими красочными прилавками и ремесленными изделиями. Открылось в 1915 году в период Бэла Эпок в Испании. Объект прошел масштабную реновацию в 2018 году, оснащенный современными удобствами, при этом сохранил свой традиционный шарм. Здесь расположено более 40 продавцов, предлагающих широкий ассортимент кулинарных наслаждений. Популярен как среди местных жителей, так и среди посетителей, ищущих ингредиенты высокого качества и изделия ручной работы. Окружен оживленными барами и кафе, идеальными для наслаждения трапезой на свежем воздухе.</p>
 <p class="prose">Основанный в 1915 году, рынок изначально служил центральным узлом для местной продукции и морепродуктов. Со временем он превратился в оживлённый базар, куда собираются повара, гурманы и туристы, чтобы попробовать тапас, чоризо, хамон иберико и региональные блюда. Обязательное место посещения для всех, кто интересуется аутентичной испанской кухней и культурой.</p></div>
 </section>
-<section class="place" id="madrid_museo_del_prado">
-<h3>Madrid Museo Del Prado</h3>
+<section class="place" id="madrid_museo_cerralbo">
+<div class="place-lead">
+<h3>Madrid Museo Cerralbo</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1785</p>
-<figure class="place-fig"><img src="../images/madrid_museo_del_prado.jpg" alt="Madrid Museo Del Prado"/></figure>
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/madrid_museo_cerralbo.jpg" alt="Madrid Museo Cerralbo" width="1280" height="883" style="height: 318px; max-height: 318px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/madrid_museo_cerralbo_b.jpg" alt="Madrid Museo Cerralbo — вид 2" width="330" height="246" style="height: 318px; max-height: 318px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Расположенный на холме Серальбо, этот музей представляет коллекцию испанского искусства и антиквариата, охватывающую века, и дает посетителям представление о богатом культурном наследии Испании. Здесь находится одна из самых обширных коллекций испанских скульптур и картин. В музее также представлены важные археологические артефакты, включая римские и мавританские реликвии. Значительные работы включают произведения таких художников, как Веласкес, Мурильо и Сульбаран. Его архитектура отражает неоклассический стиль с элегантными интерьерами и величественными дворами. Регулярные временные выставки дополняют постоянную коллекцию.</p>
+<p class="prose">Музей Серральбо был основан в 1946 году королем Альфонсо XIII в качестве частной резиденции для его семьи. После его смерти он стал публичным музеем, посвященным экспонированию испанских произведений искусства и археологических находок, датируемых периодом от доисторических времен до современных эпох. Здесь посетители приходят, чтобы ознакомиться с эволюцией испанской культуры и художественного самовыражения с течением времени.</p></div>
+</section>
+<section class="place" id="madrid_museo_del_prado">
+<div class="place-lead">
+<h3>Madrid Museo Del Prado</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Paseo del Prado | Период: 1785</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/madrid_museo_del_prado.jpg" alt="Madrid Museo Del Prado" width="1280" height="828" style="height: 298px; max-height: 298px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/madrid_museo_del_prado_b.jpg" alt="Madrid Museo Del Prado — вид 2" width="330" height="246" style="height: 298px; max-height: 298px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Музей Прадо — одна из величайших художественных галерей мира, представляющая шедевры испанских и европейских художников разных столетий. Расположенный в историческом центре Мадрида, он хранит работы Тициана, Веласкеса, Босха и многих других. В нём находится более 8 600 произведений искусства, включая более 4 800 картин. Среди примечательных экспонатов — «Лас Менины» Диего Веласкеса и «Сад земных наслаждений» Херонимуса Босха. Само здание было спроектировано архитектором Вентура Родригесом в неоклассическом стиле. Открывшееся в 1785 году, оно стало полностью доступно для публики в 1819 году. Его постоянная коллекция включает работы Рембрандта, Рубенса и Франсиско де Гоя.</p>
 <p class="prose">Основанный в 1785 году как королевская коллекция для короля Карла III, музей изначально служил частной галереей для аристократических посетителей. Он открылся для публики в 1819 году при королеве Исабелле II, что сделало его доступным для всех любителей искусства. Сегодня его коллекции включают некоторые из самых знаковых картин в истории западного искусства. Посещение музея Прадо предоставляет уникальную возможность ознакомиться с художественным наследием Европы благодаря его обширной коллекции картин, скульптур и рисунков.</p></div>
 </section>
+<section class="place" id="madrid_museo_reina_sofia">
+<div class="place-lead">
+<h3>Madrid Museo Reina Sofia</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Calle de Santa Isabel | Период: 1986</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/madrid_museo_reina_sofia.jpg" alt="Madrid Museo Reina Sofia" width="1280" height="741" style="height: 267px; max-height: 267px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/madrid_museo_reina_sofia_b.jpg" alt="Madrid Museo Reina Sofia — вид 2" width="330" height="440" style="height: 267px; max-height: 267px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Музей «Реайна София» — одна из самых знаковых культурных институций Мадрида, где представлены современное и актуальное искусство из Испании и со всего мира. Он содержит более 20 000 произведений искусства, включая некоторые из наиболее важных работ испанского авангардного движения. В коллекции музея представлена «Герника» Пабло Пикассо, считающаяся одной из величайших антивоенных картин в истории. Его архитектурный дизайн сочетает элементы модернизма с традиционными испанскими стилями, создавая гармоничное слияние старого и нового. Открывшись 17 декабря 1992 года, оно стало крупной туристической достопримечательностью и образовательным центром для любителей искусства со всего мира. Регулярно проводит временные выставки, представляющие передовое современное искусство.</p>
+<p class="prose">Основанный в 1986 году, музей был изначально назван в честь королевы Софии Испанской, сыгравшей значительную роль в содействии искусству и культуре во время правления её мужа короля Хуана Карлоса. Он расположен в бывшем Королевском дворце Искусства, спроектированном архитектором Антонио Паласиосом в начале XX века, что делает его уникальным сочетанием исторической архитектуры и авангардного искусства. Посетители могут полюбоваться шедеврами Пикассо, Дали, Миро и других известных художников, которые отражают эволюцию испанского искусства от конца XIX века до наших дней.</p></div>
+</section>
+<section class="place" id="madrid_museo_thyssen">
+<div class="place-lead">
+<h3>Madrid Museo Thyssen</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Paseo del Prado | Период: 1992</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/madrid_museo_thyssen.jpg" alt="Madrid Museo Thyssen" width="1280" height="788" style="height: 284px; max-height: 284px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/madrid_museo_thyssen_b.jpg" alt="Madrid Museo Thyssen — вид 2" width="330" height="247" style="height: 284px; max-height: 284px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Музей Тиссен-Борнемиса — видное художественное учреждение, в котором представлены европейские шедевры, охватывающие период от Средневековья до современности. Здесь хранятся более 6000 экспонатов различных периодов западного искусства. Архитектура сочетает традиционный испанский стиль с современными элементами, предлагая гостям уникальные впечатления. В музее проходят временные выставки, посвященные передовому современному искусству. Расположенный недалеко от парка Эль-Буэн-Ретиро, он предлагает живописные виды парка и окрестных районов. Регулярно проводит образовательные программы и лекции по истории искусств.</p>
+<p class="prose">Основанный в 1992 году, музей изначально располагался в Паласио-дель-Маркес-де-ла-Аска, историческом здании, датируемом началом XX века. Коллекция музея включает работы таких художников, как Пикассо, Ван Гог и Матисс, что делает его одной из ведущих культурных достопримечательностей Мадрида. Гости приезжают сюда благодаря обширной коллекции мирового уровня произведений искусства, которые дают представление об эволюции европейского искусства на протяжении веков.</p></div>
+</section>
+<section class="place" id="madrid_plaza_callao">
+<div class="place-lead">
+<h3>Madrid Plaza Callao</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/madrid_plaza_callao.jpg" alt="Madrid Plaza Callao" width="1067" height="1600" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/madrid_plaza_callao_b.jpg" alt="Madrid Plaza Callao — вид 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Расположенная недалеко от оживленной Гран-Виа и Пуэрта-дель-Соль, площадь Кальяо — очаровательная площадь, которая излучает как историческое значение, так и современную энергию. Окруженная элегантными зданиями и усеянная кафе и магазинами, она служит центром притяжения как для местных жителей, так и для туристов. На площади расположены несколько известных достопримечательностей, включая Паласио де Комуникасионес и Театро Комико. Здесь проводятся ежегодные мероприятия, такие как Feria del Libro — книжная ярмарка, на которой представлены местные авторы и издатели. Днём Плаза дель Кальо бурлит жизнью, привлекая покупателей и посетителей кафе. По ночам уличные фонари освещают булыжники, создавая романтическую атмосферу, идеально подходящую для вечерних прогулок. Эта площадь была центральным местом сбора с начала XIX века.</p>
+<p class="prose">Первоначально названная в честь испанской провинции Кальяо (Callao), эта площадь когда-то была оживным торговым рынком, где купцы обменивались товарами. Со временем она превратилась в культурный центр, проводящий фестивали и мероприятия, которые отражают богатое наследие Мадрида. Сегодня ее мощеные улочки и живая атмосфера делают ее популярным местом для прогулок и наблюдения за людьми. Посетителям рекомендуется посетить Плаза дель Кальо, чтобы ощутить живую энергию мадридской городской жизни и насладиться очарованием ее исторической архитектуры.</p></div>
+</section>
 <section class="place" id="madrid_plaza_colon_madrid">
+<div class="place-lead">
 <h3>Madrid Plaza Colon Madrid</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/madrid_plaza_colon_madrid.jpg" alt="Madrid Plaza Colon Madrid"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/madrid_plaza_colon_madrid.jpg" alt="Madrid Plaza Colon Madrid" width="1067" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/madrid_plaza_colon_madrid_b.jpg" alt="Madrid Plaza Colon Madrid — вид 2" width="330" height="440" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">В самом центре оживленного делового района Мадрида расположена Плаза-де-Колон, величественная площадь, известная своей внушительной статуей Христофора Колумба и шумными кафе. Окруженная элегантными бульварами и выстроенная вдоль исторических зданий, она является одновременно культурным центром и местом встреч. Памятник Колумбу был создан Эмилио Аларконом и возвышается на высоте 46 метров. В окрестностях проходят улицы Гран-Виа, одна из самых известных торговых авеню Мадрида. Ежегодно на площади проводятся различные фестивали и мероприятия, включая известный рождественский рынок города. Оно служит центральной точкой для политических демонстраций и культурных торжеств. Поблизости находятся Паласио-де-Комникасионес и Театро-Реаль.</p>
 <p class="prose">Построенная в начале XX века во время эпохи Бла и Бом (Belle Époque) в Испании, площадь Колумбы (Plaza de Colón) была спроектирована как грандиозная дань уважения Христофору Колумбу. Памятник в ее центре, на котором установлена статуя Колумба на коне, был завершен в 1917 году. С тех пор она стала символом испанского колониального престижа и популярным местом встречи как для местных жителей, так и для туристов. Посещение площади Колон дает представление о богатой истории и культуре Мадрида, сочетая ар-деко архитектуру с оживными уличными декорациями.</p></div>
 </section>
-<section class="place" id="madrid_plaza_de_espana_madrid">
-<h3>Madrid Plaza De Espana Madrid</h3>
+<section class="place" id="madrid_plaza_de_cibeles_fountain">
+<div class="place-lead">
+<h3>Madrid Plaza De Cibeles Fountain</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1928</p>
-<figure class="place-fig"><img src="../images/madrid_plaza_de_espana_madrid.jpg" alt="Madrid Plaza De Espana Madrid"/></figure>
+<p class="place-meta">Период: 1777–1783</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/madrid_plaza_de_cibeles_fountain.jpg" alt="Madrid Plaza De Cibeles Fountain" width="1280" height="960" style="height: 247px; max-height: 247px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/madrid_plaza_de_cibeles_fountain_b.jpg" alt="Madrid Plaza De Cibeles Fountain — вид 2" width="330" height="177" style="height: 247px; max-height: 247px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Величественный символ величия и изысканности Мадрида, Фонтан Цибеллы является одной из самых знаковых достопримечательностей Испании. Проект итальянского архитектора Джакомо Руиса де Лега демонстрирует классическую неоклассическую архитектуру. Четыре лошади наверху изображают ветры — север, юг, восток и запад. Он находится на пересечении двух главных бульваров: Пасео-дель-Прадо и Калье-Алкала. Несколько раз восстанавливавшийся за годы, объект претерпел последнюю значительную реставрацию в 1996 году. Сегодня он окружён шумными кафе и торговыми улицами, что делает его популярным местом встреч.</p>
+<p class="prose">Построенный в период с 1777 по 1783 год во времена правления короля Карла III, фонтан изначально был назван в честь королевы Марии Барбары де Браганса, которая была известна под прозвищем «La Reyna Cibeles» (Королева Цибелы). Позднее он стал символом гражданской гордости и элегантности, часто изображавшийся на картинах и открытках, воспевающих городскую жизнь Мадрида. Посещение фонтана Цибел — это необходимо для понимания культурного наследия и архитектурного великолепия Мадрида.</p></div>
+</section>
+<section class="place" id="madrid_plaza_de_espana_madrid">
+<div class="place-lead">
+<h3>Madrid Plaza De Espana Madrid</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Место: Moncloa–Argüelles | Период: 1928</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/madrid_plaza_de_espana_madrid.jpg" alt="Madrid Plaza De Espana Madrid" width="1280" height="853" style="height: 281px; max-height: 281px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/madrid_plaza_de_espana_madrid_b.jpg" alt="Madrid Plaza De Espana Madrid — вид 2" width="330" height="201" style="height: 281px; max-height: 281px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Расположенная в сердце исторического центра Мадрида, Пласа-де-Эспанья — величественная площадь, известная своей неомудехарской архитектурой и грандиозными масштабами. Она была завершена в 1928 году в рамках Экспозиции ибероамериканской, и задумывалась как витрина культурного наследия и художественного мастерства Испании. Посадка представляет собой центральный фонтан, окружённый орнаментами аркадами и колоннами, и сложена из замысловатой керамической плитки и богато украшенной каменной кладки. Площадь изначально задумывалась для изображения различных регионов Испании посредством своих декоративных мотивов и тематических экспозиций. Сегодня это остается одной из самых знаковых достопримечательностей Мадрида, привлекающей посетителей, которые приезжают, чтобы полюбоваться его величием и насладиться атмосферой старинного очарования. Это место часто появляется в многочисленных фильмах и телешоу, что способствовало повышению его мирового признания. Окружённая элегантными зданиями и садами, Пласа де Эспанья обеспечивает умиротворяющую обстановку для отдыха и размышлений.</p>
 <p class="prose">Возведенная в 1928 году во время Экспозиции ибероамериканской культуры (Exposición Iberoamericana), Площадь Испании (Plaza de España) служила местом демонстрации испанского искусства, культуры и архитектурных стилей. Её дизайн отражает слияние традиционных мудехарских элементов с модернистским влиянием, что делает её уникальным примером городского планирования начала XX века. Для тех, кто интересуется изучением богатого культурного наследия и архитектурного разнообразия Мадрида, Пласа-де-Эспанья является обязательным к посещению местом, предлагающим потрясающее сочетание исторического значения и эстетической красоты.</p></div>
 </section>
 <section class="place" id="madrid_plaza_de_oriente">
+<div class="place-lead">
 <h3>Madrid Plaza De Oriente</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/madrid_plaza_de_oriente.jpg" alt="Madrid Plaza De Oriente"/></figure>
+<p class="place-meta">Место: Royal precinct</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/madrid_plaza_de_oriente.jpg" alt="Madrid Plaza De Oriente" width="1280" height="960" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/madrid_plaza_de_oriente_b.jpg" alt="Madrid Plaza De Oriente — вид 2" width="330" height="440" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">В самом сердце королевского района Мадрида расположена Пласа-де-Ориенте, великолепная площадь, обрамленная величественными зданиями и усаженная элегантными кафе и магазинами. Эта историческая площадь — свидетельство богатого архитектурного наследия Испании. Площадь окружена неоклассическими зданиями, включая Королевский дворец Мадрида и Королевский театр. В течение года здесь проводятся различные культурные мероприятия, такие как концерты и фестивали. Расположенный рядом с Королевским дворцом, он предлагает потрясающие виды фасада дворца. В центре возвышается монументальная конная статуя короля Фелипе V, заказанная его сыном Луи I. Во время особых случаев площадь становится центром национальных торжеств.</p>
 <p class="prose">Plaza de Oriente была первоначально построена во времена правления короля Филиппа V в начале XVIII века в рамках комплекса Королевского дворца. Она служила церемониальным пространством для государственных торжеств и парадов, отражая величие и мощь испанской монархии. Сегодня она остается символом исторического значения и культурной гордости Мадрида. Посетите Пласа-де-Оriente, чтобы ощутить элегантность и торжественность традиционной испанской архитектуры и стать свидетелем спокойной атмосферы, резко контрастирующей с шумными улицами поблизости.</p></div>
 </section>
-<section class="place" id="madrid_plaza_callao">
-<h3>Madrid Plaza Callao</h3>
-
-
-<figure class="place-fig"><img src="../images/madrid_plaza_callao.jpg" alt="Madrid Plaza Callao"/></figure>
-<div class="place-desc"><p class="prose">Расположенная недалеко от оживленной Гран-Виа и Пуэрта-дель-Соль, площадь Кальяо — очаровательная площадь, которая излучает как историческое значение, так и современную энергию. Окруженная элегантными зданиями и усеянная кафе и магазинами, она служит центром притяжения как для местных жителей, так и для туристов. На площади расположены несколько известных достопримечательностей, включая Паласио де Комуникасионес и Театро Комико. Здесь проводятся ежегодные мероприятия, такие как Feria del Libro — книжная ярмарка, на которой представлены местные авторы и издатели. Днём Плаза дель Кальо бурлит жизнью, привлекая покупателей и посетителей кафе. По ночам уличные фонари освещают булыжники, создавая романтическую атмосферу, идеально подходящую для вечерних прогулок. Эта площадь была центральным местом сбора с начала XIX века.</p>
-<p class="prose">Первоначально названная в честь испанской провинции Кальяо (Callao), эта площадь когда-то была оживным торговым рынком, где купцы обменивались товарами. Со временем она превратилась в культурный центр, проводящий фестивали и мероприятия, которые отражают богатое наследие Мадрида. Сегодня ее мощеные улочки и живая атмосфера делают ее популярным местом для прогулок и наблюдения за людьми. Посетителям рекомендуется посетить Плаза дель Кальо, чтобы ощутить живую энергию мадридской городской жизни и насладиться очарованием ее исторической архитектуры.</p></div>
-</section>
 <section class="place" id="madrid_plaza_mayor_madrid">
+<div class="place-lead">
 <h3>Madrid Plaza Mayor Madrid</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/madrid_plaza_mayor_madrid.jpg" alt="Madrid Plaza Mayor Madrid"/></figure>
+<p class="place-meta">Место: Centro</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/madrid_plaza_mayor_madrid.jpg" alt="Madrid Plaza Mayor Madrid" width="1280" height="960" style="height: 277px; max-height: 277px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/madrid_plaza_mayor_madrid_b.jpg" alt="Madrid Plaza Mayor Madrid — вид 2" width="330" height="198" style="height: 277px; max-height: 277px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">В самом сердце исторического центра Мадрида находится площадь Майор (Plaza Mayor) — грандиозная площадь, которая на протяжении столетий была центром общественной жизни и политических собраний. Построено между 1589 и 1593 годами. Состоит из 147 арок, поддерживаемых каменными колоннами. Проводил быки-бойные, театральные и турнирные представления до начала XX века. Окружен кафе и ресторанами, предлагающими аутентичные тапас. Объявлено объектом Всемирного наследия ЮНЕСКО в 1985 году.</p>
 <p class="prose">Построенная в конце XVI века во время правления Филиппа III, Площадь Майор (Plaza Mayor) была спроектирована архитектором Хуаном де Вильянуэвой как монументальное пространство, призванное демонстрировать королевскую власть и гражданскую гордость. Изначально известная как «Пласа-дель-Аррабаль» (Plaza del Arrabal), она стала центром городской застройки Мадрида, где проходили фестивали, рынки и важные церемонии. Сегодня ее барочная архитектура и замысловатые фасады сохранились нетронутыми, что делает ее одной из самых знаковых площадей Испании. Посетите Пласа Майор, чтобы ощутить дух традиционной испанской культуры и полюбоваться очаровательным сочетанием исторического величия и современного шарма.</p></div>
 </section>
 <section class="place" id="madrid_puerta_de_alcala">
+<div class="place-lead">
 <h3>Madrid Puerta De Alcala</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1778–1792</p>
-<figure class="place-fig"><img src="../images/madrid_puerta_de_alcala.jpg" alt="Madrid Puerta De Alcala"/></figure>
+<p class="place-meta">Адрес: Plaza de la Independencia | Период: 1778–1792</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/madrid_puerta_de_alcala.jpg" alt="Madrid Puerta De Alcala" width="1280" height="832" style="height: 300px; max-height: 300px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/madrid_puerta_de_alcala_b.jpg" alt="Madrid Puerta De Alcala — вид 2" width="330" height="247" style="height: 300px; max-height: 300px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Пуэрта-де-Алкала — величественная арка на южном входе в исторический центр Мадрида — была построена между 1778 и 1792 годами во время правления короля Карла III. Спроектированная архитектором Хуаном де Вильянуэвой, она изначально служила триумфальными воротами, посвященными победам испанских войск. Построенный в период с 1778 по 1792 год. Вдохновлённая древнеримской архитектурой. Скульптуры, посвящённые военным победам. Расположен на южном входе в исторический центр Мадрида.</p>
 <p class="prose">Построенная при покровительстве короля Карла III, Пуэрта-де-Алкаль символизировала военную мощь и колониальную экспансию Испании. Монументальная структура, вдохновленная древнеримской архитектурой, была украшена скульптурами, изображающими сцены триумфа и победы. Позже это место стало популярным местом сбора как для местных жителей, так и для туристов, откуда открывались панорамные виды на город. Сегодня Пуэрта-де-Алкала остается одной из самых знаковых достопримечательностей Мадрида, олицетворяя как историческое величие, так и современную городскую жизнь.</p></div>
 </section>
 <section class="place" id="madrid_puerta_del_sol">
+<div class="place-lead">
 <h3>Madrid Puerta Del Sol</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/madrid_puerta_del_sol.jpg" alt="Madrid Puerta Del Sol"/></figure>
+<p class="place-meta">Место: Centro</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/madrid_puerta_del_sol.jpg" alt="Madrid Puerta Del Sol" width="1280" height="960" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/madrid_puerta_del_sol_b.jpg" alt="Madrid Puerta Del Sol — вид 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">В сердце Мадрида находится Пуэрта-дель-Соль — оживленная площадь, которая с средневековья является символическим центром города. Она знаменита своим маркером нулевого километра, который представляет собой отправную точку для всех автомобильных расстояний в Испании. Здесь находится нулевой километр, используемый для измерения расстояний по всей Испании. На этой площади в декабре проходит знаменитый рождественский рынок Мадрида. В центре находится статуя короля Альфонсо XII, посвященная его правлению. В его оживленных улицах расположены кафе и магазины, предлагающие традиционную испанскую выпечку и закуски. Вблизи находится Королевский театр Мадрида — одна из культурных достопримечательностей города.</p>
 <p class="prose">Изначально известная как Пласа-де-ла-Вирхен (Plaza de la Virgen), площадь была переименована в Пуэрта-дель-Соль (Puerta del Sol) в XVIII веке в честь ближайших ворот. Площадь долгое время служила центром политических собраний и празднований, включая ежегодный отсчет до Нового года. Ее знаменитый фонтан, установленный в 1777 году, украшен скульптурами испанских провинций. Посетите Пуэрта-дель-Соль, чтобы ощутить яркую атмосферу Мадрида и принять участие в праздничных мероприятиях, таких как празднование Нового года.</p></div>
 </section>
-<section class="place" id="madrid_museo_reina_sofia">
-<h3>Madrid Museo Reina Sofia</h3>
+<section class="place" id="madrid_retiro_crystal_palace">
+<div class="place-lead">
+<h3>Madrid Retiro Crystal Palace</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1986</p>
-<figure class="place-fig"><img src="../images/madrid_museo_reina_sofia.jpg" alt="Madrid Museo Reina Sofia"/></figure>
-<div class="place-desc"><p class="prose">Музей «Реайна София» — одна из самых знаковых культурных институций Мадрида, где представлены современное и актуальное искусство из Испании и со всего мира. Он содержит более 20 000 произведений искусства, включая некоторые из наиболее важных работ испанского авангардного движения. В коллекции музея представлена «Герника» Пабло Пикассо, считающаяся одной из величайших антивоенных картин в истории. Его архитектурный дизайн сочетает элементы модернизма с традиционными испанскими стилями, создавая гармоничное слияние старого и нового. Открывшись 17 декабря 1992 года, оно стало крупной туристической достопримечательностью и образовательным центром для любителей искусства со всего мира. Регулярно проводит временные выставки, представляющие передовое современное искусство.</p>
-<p class="prose">Основанный в 1986 году, музей был изначально назван в честь королевы Софии Испанской, сыгравшей значительную роль в содействии искусству и культуре во время правления её мужа короля Хуана Карлоса. Он расположен в бывшем Королевском дворце Искусства, спроектированном архитектором Антонио Паласиосом в начале XX века, что делает его уникальным сочетанием исторической архитектуры и авангардного искусства. Посетители могут полюбоваться шедеврами Пикассо, Дали, Миро и других известных художников, которые отражают эволюцию испанского искусства от конца XIX века до наших дней.</p></div>
-</section>
-<section class="place" id="madrid_basilica_san_francisco_grande">
-<h3>Madrid Basilica San Francisco Grande</h3>
-
-<p class="place-meta">Период: 1717–1738</p>
-<figure class="place-fig"><img src="../images/madrid_basilica_san_francisco_grande.jpg" alt="Madrid Basilica San Francisco Grande"/></figure>
-<div class="place-desc"><p class="prose">Королевская базилика Сан-Франциско-эль-Гранде — величественная барочная церковь, возвышающаяся над районом Пуэрта-дель-Соль в Мадриде. Построенная в начале XVIII века, она была заказана королем Филиппом V в память о его победе в Альказаре и стала одним из самых значимых религиозных памятников Испании. Заказан королем Филиппом V после его победы в битве при Алькасаре в 1707 году. Разработано итальянским архитектором Франческо Сабатини. Располагает впечатляющими скульптурными работами Джан Лоренцо Бернини. Содержит картины известных испанских художников, таких как Бартоломе Esteban Мурильо и Диего Веласкес. Расположен недалеко от исторического центра Мадрида, рядом с площадью Индепенденсия.</p>
-<p class="prose">Построенная в период с 1717 по 1738 год во время правления короля Филиппа V, базилика была разработана итальянским архитектором Франческо Сабатини. Она служила символом королевской власти и благодарности короля за военные успехи. Интерьер украшен роскошными декорациями, включая скульптуры Бернини и картины таких художников, как Мурильо и Веласкес. Посетители приезжают сюда, чтобы полюбоваться его захватывающей архитектурой и богатым художественным наследием, в котором переплетаются испанское и итальянское влияния.</p></div>
+<p class="place-meta">Место: Parque del Retiro | Период: 1887</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/madrid_retiro_crystal_palace.jpg" alt="Madrid Retiro Crystal Palace" width="1279" height="853" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/madrid_retiro_crystal_palace_b.jpg" alt="Madrid Retiro Crystal Palace — вид 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">В самом сердце мадридского парка Ретиро стоит замечательное сооружение, известное как Кристальный дворец. Изначально оно было построено для Международной выставки 1887 года. Этот стеклянный и железный павильон был разработан известным архитектором Рикардо Буньелем, чтобы продемонстрировать современные технологии и инженерное мастерство. Построенный с использованием инновационных техник из стекла и железа, характерных для викторианской архитектуры. Проводил выставки и культурные мероприятия на протяжении всей своей истории. С момента возведения объект неоднократно подвергался реновации для поддержания его структурной целостности. Город пережил множество испытаний, включая войны и стихийные бедствия, и до сих пор сохраняет свой облик. Служит символом технологического развития и художественного самовыражения.</p>
+<p class="prose">Построенный в 1887 году, Кристальный дворец служил главным выставочным залом во время Международной выставки, проходившей в Мадриде. Он демонстрировал передовые технологии, произведения искусства и инновации, которые покорили посетителей со всего мира. Позже дворец был перемещен в пределах парка после первоначального использования и стал постоянным объектом. Сегодня Палац-Кристалл — одна из самых знаковых достопримечательностей в парке Ретиро, предлагающая посетителям представление о богатом промышленном наследии Испании и одновременно создающая умиротворяющую обстановку для отдыха и размышлений.</p></div>
 </section>
 <section class="place" id="madrid_royal_botanical_garden_madrid">
+<div class="place-lead">
 <h3>Madrid Royal Botanical Garden Madrid</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Период: 1755</p>
-<figure class="place-fig"><img src="../images/madrid_royal_botanical_garden_madrid.jpg" alt="Madrid Royal Botanical Garden Madrid"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/madrid_royal_botanical_garden_madrid.jpg" alt="Madrid Royal Botanical Garden Madrid" width="1200" height="1600" style="height: 254px; max-height: 254px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/madrid_royal_botanical_garden_madrid_b.jpg" alt="Madrid Royal Botanical Garden Madrid — вид 2" width="330" height="182" style="height: 254px; max-height: 254px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Рояльный ботанический сад Мадрида — безмятежный оазис, расположенный в самом сердце столицы Испании. Основанный в 1755 году королем Фердинандом VI, он служит одновременно научно-исследовательским центром и тихим убежищем для местных жителей и гостей. В нем обитает более 8000 видов растений, представляющих разнообразные экосистемы со всего мира. Сад представляет уникальную коллекцию кактусов и суккулентов из засушливых регионов. Его классическая барочная архитектура дополняет пышную зелень и формальные сады. Регулярные выставки демонстрируют редкие и находящиеся под угрозой исчезновения растения. Мероприятия, такие как цветочные фестивали, ежегодно привлекают большое количество посетителей.</p>
 <p class="prose">Изначально основанный в 1755 году по королевскому указу, сад был задуман для размещения экзотических растений и содействия ботаническим исследованиям. Со временем он стал одним из самых значимых ботанических учреждений Европы, где представлены тысячи видов со всего мира. Посетители приезжают сюда, чтобы насладиться его потрясающей флорой, безмятежной атмосферой и историческим значением.</p></div>
 </section>
 <section class="place" id="madrid_royal_palace_madrid">
+<div class="place-lead">
 <h3>Madrid Royal Palace Madrid</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/madrid_royal_palace_madrid.jpg" alt="Madrid Royal Palace Madrid"/></figure>
+<p class="place-meta">Адрес: Calle de Bailén</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/madrid_royal_palace_madrid.jpg" alt="Madrid Royal Palace Madrid" width="1280" height="907" style="height: 154px; max-height: 154px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/madrid_royal_palace_madrid_b.jpg" alt="Madrid Royal Palace Madrid — вид 2" width="330" height="110" style="height: 154px; max-height: 154px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Королевский дворец в Мадриде — официальная резиденция монархов Испании и свидетельство столетий королевского великолепия. Построенный на месте старинной крепости, он является одним из самых грандиозных дворцов Европы. В нем находится более трех тысяч комнат, занимающих площадь свыше 135 000 квадратных метров. В дворце находится обширная художественная коллекция, включающая работы таких художников, как Веласкес, Гойя и Рубенс. В его садах, известных как Королевский Ботанический сад (Real Jardín Botánico), произрастают редкие растения и ботанические экземпляры. Интерьер дворца украшен замысловатыми декоративными элементами, включая потолки, покрытые сусальным золотом, и сложную лепнину. Сегодня некоторые части дворца открыты для публики для посещения в рамках экскурсионных туров.</p>
 <p class="prose">Первоначально построенный в начале XVIII века королем Филиппом V, дворец был спроектирован итальянским архитектором Филиппо Джуваррой. Со временем различные архитекторы внесли свой вклад в его дизайн, включая Хуана де Вильянуэву и Антонио Гауди, что привело к смешению стилей барокко, неоклассицизма и ар-нуво. С момента своего открытия дворец принимал бесчисленное количество коронаций, государственных визитов и церемоний. Посещение Королевского дворца дает представление о богатом историческом наследии Испании и знакомит с роскошным образом жизни бывших монархов.</p></div>
 </section>
-<section class="place" id="madrid_santiago_bernabeu">
-<h3>Madrid Santiago Bernabeu</h3>
+<section class="place" id="madrid_royal_theatre_madrid">
+<div class="place-lead">
+<h3>Madrid Royal Theatre Madrid</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1947</p>
-<figure class="place-fig"><img src="../images/madrid_santiago_bernabeu.jpg" alt="Madrid Santiago Bernabeu"/></figure>
+<p class="place-meta">Период: 1783</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/madrid_royal_theatre_madrid.jpg" alt="Madrid Royal Theatre Madrid" width="1280" height="960" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/madrid_royal_theatre_madrid_b.jpg" alt="Madrid Royal Theatre Madrid — вид 2" width="330" height="247" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Театро Реаль — ведущий оперный театр Мадрида и одна из самых знаковых культурных институций Испании. Основанный в 1783 году как Королевский театр, он неоднократно реконструировался на протяжении своей долгой истории. Он находится на улице Алкала, недалеко от площади Испании. Интерьер украшен богато декорированным барочным убранством и имеет современную акустику. Каждый сезон представляет новые постановки — от классических шедевров до современных произведений. Его оркестровая яма может вместить до 120 музыкантов. Гости могут выпить предварительный напиток в элегантном лобби.</p>
+<p class="prose">Изначально открытый в 1783 году при короле Чарльзе III, Театро Реаль был спроектирован итальянским архитектором Джузеппе Валадиэром. Он претерпел значительную реконструкцию после пожара в 1947 году и вновь открылся в 1962 году с современными удобствами. На сцене театра прошли известные выступления таких артистов, как Мария Каллас и Лучиано Паваротти. Посещение Театра Реаля позволяет гостям насладиться оперными постановками мирового класса и увидеть историческую архитектуру, отражающую богатое культурное наследие Мадрида.</p></div>
+</section>
+<section class="place" id="madrid_santiago_bernabeu">
+<div class="place-lead">
+<h3>Madrid Santiago Bernabeu</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Chamartín | Период: 1947</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/madrid_santiago_bernabeu.jpg" alt="Madrid Santiago Bernabeu" width="1280" height="960" style="height: 312px; max-height: 312px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/madrid_santiago_bernabeu_b.jpg" alt="Madrid Santiago Bernabeu — вид 2" width="330" height="223" style="height: 312px; max-height: 312px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Стадион «Сантьяго Бернабеу» — культовая арена футбольного клуба «Реал Мадрид» и одна из самых известных достопримечательностей Испании. Расположенный в самом сердце Мадрида, он был сценой для бесчисленных легендарных матчей с момента своего открытия в 1947 году. Может вместить до 81 000 зрителей. Стадион имеет четыре трибуны с уникальным архитектурным дизайном. Реал Мадрид выиграл здесь свою первую Кубок Европы в 1956 году. Открыт как Estadio Chamartín, а затем переименован в 1955 году. Проводило полуфиналы чемпионата мира по футболу ФИФА 1982 года.</p>
 <p class="prose">Построенный в 1947 году, стадион назван в честь Сантьяго Бернабеу Есте, бывшего президента «Реала», который сыграл ключевую роль в его создании. За эти годы стадион претерпел множество реконструкций, но сохранил свой традиционный испанский архитектурный стиль. На арене проходило множество международных матчей, включая финалы Лиги чемпионов УЕФА и игры чемпионатов мира ФИФА. Посещение стадиона «Сантьяго Бернабеу» позволяет болельщикам окунуться в богатую историю и атмосферу одного из лучших футбольных клубов Европы.</p></div>
 </section>
 <section class="place" id="madrid_sorolla_museum">
+<div class="place-lead">
 <h3>Madrid Sorolla Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/madrid_sorolla_museum.jpg" alt="Madrid Sorolla Museum"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/madrid_sorolla_museum.jpg" alt="Madrid Sorolla Museum" width="1280" height="960" style="height: 344px; max-height: 344px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/madrid_sorolla_museum_b.jpg" alt="Madrid Sorolla Museum — вид 2" width="330" height="246" style="height: 344px; max-height: 344px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Музей Соролья — обязательное место для посещения как любителям искусства, так и историкам. Здесь представлены работы Хоахина Сороллы и Бастиды, одного из самых известных импрессионистов Испании. Расположенный на улице Калье-де-Байлен в мадридском районе Саламанка, музей предлагает потрясающий вид на город. В нем находится более 600 работ Сороллы, включая его знаменитую картину «Эль Дескансо» («Покой»). В музее также представлена постоянная экспозиция, посвященная жене Сороллы, Терезе Веласкес, которая послужила вдохновением для многих его работ. Работает ежедневно, кроме понедельников, и предлагает посетителям экскурсии на нескольких языках. Построенное в конце XIX века, само здание отражает элементы неоклассической архитектуры.</p>
 <p class="prose">Основанный в 1984 году, музей изначально был домом и студией художника Хоакина Сорольи и Бастиды. В его стенах хранятся личные вещи художника, включая мебель, картины, рисунки и письма, которые дают представление о его жизни и творчестве. Посещение музея Сороллы позволяет гостям погрузиться в яркие цвета и темы испанского импрессионизма.</p></div>
 </section>
-<section class="place" id="madrid_zarzuela_theatre">
-<h3>Madrid Zarzuela Theatre</h3>
-
-<p class="place-meta">Период: 1856</p>
-<figure class="place-fig"><img src="../images/madrid_zarzuela_theatre.jpg" alt="Madrid Zarzuela Theatre"/></figure>
-<div class="place-desc"><p class="prose">Театро де ла Сарсуэля – исторический театр в Мадриде, известный своими постановками зарсуэль — испанских оперэт, сочетающих музыку, комедию и драму. Основанный в 1856 году, он стал культурным центром, демонстрирующим традиционный испанский музыкальный театр. Открылось в 1856 году в рамках культурного возрождения Мадрида во время правления королевы Изабеллы II. Его интерьер украшен богато орнаментами и оснащен большой сценой, подходящей для пышных постановок. В театре проходят как классические зарзуэли, так и современные адаптации, что обеспечивает разнообразие представлений. Среди выдающихся исполнителей были легендарные фигуры, такие как Мануэль де Фалля и Федерико Гарсия Лорка. Сегодня это остается важным местом для сохранения и продвижения традиционных испанских видов искусства.</p>
-<p class="prose">Возведённый в 1856 году, Театро-де-ла-Зарсуэля изначально был создан для продвижения и сохранения уникальной формы испанского музыкального театра — зарсуэли. Со временем он стал одной из самых знаковых площадок для представлений зарсуэли, принимая на сцене многочисленных известных артистов и постановки. Его архитектура отражает элегантный неоклассический стиль, характерный для Мадрида конца XIX века. Посещение театра «Ла-Зарсуэла» позволяет гостям погрузиться в подлинную испанскую культуру благодаря его ярким и живым представлениям.</p></div>
-</section>
-<section class="place" id="madrid_royal_theatre_madrid">
-<h3>Madrid Royal Theatre Madrid</h3>
-
-<p class="place-meta">Период: 1783</p>
-<figure class="place-fig"><img src="../images/madrid_royal_theatre_madrid.jpg" alt="Madrid Royal Theatre Madrid"/></figure>
-<div class="place-desc"><p class="prose">Театро Реаль — ведущий оперный театр Мадрида и одна из самых знаковых культурных институций Испании. Основанный в 1783 году как Королевский театр, он неоднократно реконструировался на протяжении своей долгой истории. Он находится на улице Алкала, недалеко от площади Испании. Интерьер украшен богато декорированным барочным убранством и имеет современную акустику. Каждый сезон представляет новые постановки — от классических шедевров до современных произведений. Его оркестровая яма может вместить до 120 музыкантов. Гости могут выпить предварительный напиток в элегантном лобби.</p>
-<p class="prose">Изначально открытый в 1783 году при короле Чарльзе III, Театро Реаль был спроектирован итальянским архитектором Джузеппе Валадиэром. Он претерпел значительную реконструкцию после пожара в 1947 году и вновь открылся в 1962 году с современными удобствами. На сцене театра прошли известные выступления таких артистов, как Мария Каллас и Лучиано Паваротти. Посещение Театра Реаля позволяет гостям насладиться оперными постановками мирового класса и увидеть историческую архитектуру, отражающую богатое культурное наследие Мадрида.</p></div>
-</section>
 <section class="place" id="madrid_templo_de_debod">
+<div class="place-lead">
 <h3>Madrid Templo De Debod</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/madrid_templo_de_debod.jpg" alt="Madrid Templo De Debod"/></figure>
+<p class="place-meta">Адрес: Parque del Oeste</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/madrid_templo_de_debod.jpg" alt="Madrid Templo De Debod" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/madrid_templo_de_debod_b.jpg" alt="Madrid Templo De Debod — вид 2" width="330" height="220" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Храм Дебода — выдающийся древнеегипетский храм, который был перевезен в Мадрид в 1960-х годах в рамках международного культурного обмена. Он является свидетельством дружбы между Испанией и Египтом. Построено во время правления Птолемея IV Филадора. Состоит из четырёх колонн с иероглифическими надписями. Пожертвовано Испании в 1971 г. Рельефы с изображениями фараонов и божеств. Восстановлен и вновь открыт для общественности в 1973 году.</p>
 <p class="prose">Изначально построенный около 150 г. до н.э. недалеко от Асуана в Египте, храм был демонтирован и воссоздан в мадридском парке Эль-Буэн-Ретиро после того, как Египет подарил его Испании в знак благодарности за помощь в строительстве Асуанской плотины. Храм является одним из наиболее значимых примеров египетской архитектуры за пределами своей родины. Посещение храма Дебода позволяет путешественникам ощутить подлинную египетскую культуру в самом сердце Мадрида.</p></div>
 </section>
-<section class="place" id="madrid_museo_thyssen">
-<h3>Madrid Museo Thyssen</h3>
+<section class="place" id="madrid_zarzuela_theatre">
+<div class="place-lead">
+<h3>Madrid Zarzuela Theatre</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1992</p>
-<figure class="place-fig"><img src="../images/madrid_museo_thyssen.jpg" alt="Madrid Museo Thyssen"/></figure>
-<div class="place-desc"><p class="prose">Музей Тиссен-Борнемиса — видное художественное учреждение, в котором представлены европейские шедевры, охватывающие период от Средневековья до современности. Здесь хранятся более 6000 экспонатов различных периодов западного искусства. Архитектура сочетает традиционный испанский стиль с современными элементами, предлагая гостям уникальные впечатления. В музее проходят временные выставки, посвященные передовому современному искусству. Расположенный недалеко от парка Эль-Буэн-Ретиро, он предлагает живописные виды парка и окрестных районов. Регулярно проводит образовательные программы и лекции по истории искусств.</p>
-<p class="prose">Основанный в 1992 году, музей изначально располагался в Паласио-дель-Маркес-де-ла-Аска, историческом здании, датируемом началом XX века. Коллекция музея включает работы таких художников, как Пикассо, Ван Гог и Матисс, что делает его одной из ведущих культурных достопримечательностей Мадрида. Гости приезжают сюда благодаря обширной коллекции мирового уровня произведений искусства, которые дают представление об эволюции европейского искусства на протяжении веков.</p></div>
+<p class="place-meta">Период: 1856</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/madrid_zarzuela_theatre.jpg" alt="Madrid Zarzuela Theatre" width="1280" height="968" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/madrid_zarzuela_theatre_b.jpg" alt="Madrid Zarzuela Theatre — вид 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Театро де ла Сарсуэля – исторический театр в Мадриде, известный своими постановками зарсуэль — испанских оперэт, сочетающих музыку, комедию и драму. Основанный в 1856 году, он стал культурным центром, демонстрирующим традиционный испанский музыкальный театр. Открылось в 1856 году в рамках культурного возрождения Мадрида во время правления королевы Изабеллы II. Его интерьер украшен богато орнаментами и оснащен большой сценой, подходящей для пышных постановок. В театре проходят как классические зарзуэли, так и современные адаптации, что обеспечивает разнообразие представлений. Среди выдающихся исполнителей были легендарные фигуры, такие как Мануэль де Фалля и Федерико Гарсия Лорка. Сегодня это остается важным местом для сохранения и продвижения традиционных испанских видов искусства.</p>
+<p class="prose">Возведённый в 1856 году, Театро-де-ла-Зарсуэля изначально был создан для продвижения и сохранения уникальной формы испанского музыкального театра — зарсуэли. Со временем он стал одной из самых знаковых площадок для представлений зарсуэли, принимая на сцене многочисленных известных артистов и постановки. Его архитектура отражает элегантный неоклассический стиль, характерный для Мадрида конца XIX века. Посещение театра «Ла-Зарсуэла» позволяет гостям погрузиться в подлинную испанскую культуру благодаря его ярким и живым представлениям.</p></div>
 </section>
 </body>
 </html>

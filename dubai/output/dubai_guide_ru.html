@@ -13,7 +13,7 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
 .otium-logo { font-family: 'Marcellus', serif; font-size: 2.15rem;
   font-weight: 600; letter-spacing: 0.18em; margin-bottom: 0.85rem; }
 .otiump { margin: 0.42rem 0; line-height: 1.42; text-align: justify;
-  max-width: 38rem; font-size: 0.95rem; }
+  font-size: 0.95rem; }
 .guide-title { page-break-after: auto; margin-bottom: 0.55rem;
   page-break-inside: avoid; }
 .historical-reference { margin: 0.75rem 0 1.15rem;
@@ -63,22 +63,103 @@ ol.trip-stops a:hover { text-decoration: underline; }
 .heraldry-univ-caption { font-size: 0.52rem; line-height: 1.18;
   margin: 0.12rem 0 0; padding: 0 0.06rem; color: #252525;
   text-align: center; font-weight: 500; }
-.heraldry-motto { text-align: center; max-width: 18rem; margin: 0.18rem auto;
+.heraldry-motto { text-align: center; margin: 0.18rem auto;
   width: 100%; }
 .motto-line { font-family: 'Marcellus', serif; font-size: 1rem;
   margin: 0; color: #333; line-height: 1.35; }
 .guide-title h1.guide-title-main { font-family: 'Marcellus', serif;
   font-size: 2.35rem; margin-bottom: 0.5rem; font-weight: 600; }
 .lead { color: #444; font-size: 1.05rem; }
-.guide-toc { margin: 0.85rem 0 1.15rem; page-break-inside: avoid; }
-.guide-toc h2 { font-family: 'Marcellus', serif; font-size: 1.28rem;
-  font-weight: 600; margin: 0.4rem 0 0.55rem; }
+
+.guide-toc { page-break-before: always; break-before: page;
+  page-break-after: always; break-after: page;
+  margin: 0; padding: 0.2rem 0 0.45rem; page-break-inside: auto; }
+.guide-toc h2 { font-family: 'Marcellus', serif;
+  font-size: 1.28rem; font-weight: 600; margin: 0.4rem 0 0.55rem; }
 .guide-toc ol { margin: 0.35rem 0 0.65rem 1.25rem; padding: 0;
   columns: 2; column-gap: 1.5rem; }
 .guide-toc li { margin: 0.18rem 0; line-height: 1.35;
   font-size: 0.88rem; break-inside: avoid; }
-.guide-toc a { color: #1a5276; text-decoration: none; }
+.guide-toc a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.guide-toc a:hover { color: #0d3d56; }
 .guide-toc li.toc-item--sub { font-size: 0.82rem; margin-left: 0.35rem; }
+.toc-back { font-size: 0.78rem; margin: 0 0 0.35rem; text-align: right; }
+.toc-back a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.toc-back a:hover { color: #0d3d56; }
+.place, .historical-reference, .guide-primer, .guide-trip-plans {
+  scroll-margin-top: 1.25rem; }
+.historical-reference h2, .guide-primer h2, .guide-trip-plans h2,
+.chapter-head h2, .place-lead h3 { position: relative; }
+.guide-toc + .place, .guide-toc + .chapter-head {
+  page-break-before: avoid; break-before: avoid-page; }
+.place-lead { page-break-inside: avoid; break-inside: avoid-page;
+  page-break-after: auto; }
+.place-lead > h3 { page-break-after: avoid; break-after: avoid-page; }
+.place-lead > .place-meta { page-break-after: avoid; break-after: avoid-page; }
+
+.place-fig { page-break-inside: avoid; break-inside: avoid-page;
+  margin: 0.5rem 0 1rem; }
+.place-fig img {
+  page-break-inside: avoid; break-inside: avoid-page;
+  max-height: 48vh; width: auto; max-width: 100%;
+  object-fit: contain; margin-left: auto; margin-right: auto; }
+.place-fig--hi-res img { max-height: 52vh; }
+.place-fig--lo-res img { max-height: 30vh; }
+.place-pdf-fig-row {
+  display: flex; flex-direction: row; flex-wrap: wrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.45rem 0.55rem; margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row .place-fig {
+  flex: 1 1 30%; margin: 0; min-width: 26%; max-width: 100%; }
+.place-pdf-fig-row .place-fig img {
+  width: auto; max-width: 100%; height: auto; max-height: 44vh;
+  object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--pair {
+  flex-wrap: nowrap; justify-content: space-between;
+  align-items: flex-end; gap: 0.5rem 0.65rem; }
+.place-pdf-fig-row--pair .place-fig {
+  flex: 1 1 47%; min-width: 0; max-width: 50%;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--pair .place-fig img {
+  max-height: 44vh; object-fit: contain; }
+.place-pdf-fig-row--pair .place-fig--hi-res img { max-height: 52vh; }
+.place-pdf-fig-row--pair .place-fig--lo-res img { max-height: 26vh; }
+.place-pdf-fig-row--pair .place-fig--row-sized img,
+.place-pdf-fig-row--triple .place-fig--row-sized img,
+.place-pdf-fig-row--many .place-fig--row-sized img {
+  width: auto; max-width: 100%; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row .place-fig--row-sized.place-fig--hi-res img,
+.place-pdf-fig-row .place-fig--row-sized.place-fig--lo-res img {
+  max-height: unset; }
+.place-pdf-fig-rows-stack {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple {
+  display: flex; flex-direction: row; flex-wrap: nowrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.4rem 0.48rem; margin: 0;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--triple .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--triple .place-fig--hi-res img { max-height: 42vh; }
+.place-pdf-fig-row--triple .place-fig--lo-res img { max-height: 18vh; }
+.place-pdf-fig-row--many {
+  flex-wrap: nowrap; justify-content: center; align-items: flex-end;
+  gap: 0.35rem 0.42rem; }
+.place-pdf-fig-row--many .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--many .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+
+
 .place { margin-bottom: 2.2rem; page-break-inside: auto; }
 h3 { font-family: 'Marcellus', serif; font-size: 1.22rem; margin: 1.2rem 0 0.35rem;
   font-weight: 600; }
@@ -90,7 +171,6 @@ h4 { font-family: 'Marcellus', serif; font-size: 0.95rem; text-transform: upperc
   color: #555; font-size: 0.95rem; margin: 0 0 0.5rem; font-style: italic; }
 .place-meta { font-size: 0.92rem; color: #353535; margin: 0 0 0.75rem;
   line-height: 1.4; }
-.place-fig { margin: 0.5rem 0 1rem; }
 img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
 .prose, .place-desc p { margin: 0.45rem 0; line-height: 1.5;
   text-align: justify; }
@@ -110,11 +190,14 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <figure class="heraldry-fig heraldry-coat-book" title="Coat of arms of Dubai"><img src="../images/guide_coat_of_arms.svg" alt="Coat of arms of Dubai"/></figure>
 <figure class="heraldry-fig heraldry-coat-book" title="Flag of Dubai"><img src="../images/guide_flag.svg" alt="Flag of Dubai"/></figure>
 </div></div><h1 class="guide-title-main">Dubai</h1><p class="lead">Путеводитель. Объектов в этом выпуске: 34.</p></header>
+<nav class="guide-toc" id="guide-toc" aria-label="Содержание"><h2>Содержание</h2><ol><li class="toc-item"><a href="#guide-historical">Историческая справка</a></li><li class="toc-item"><a href="#guide-trips">Маршруты</a></li><li class="toc-item"><a href="#dubai_al_seef">Dubai Al Seef</a></li><li class="toc-item"><a href="#dubai_burj_al_arab">Dubai Burj Al Arab</a></li><li class="toc-item"><a href="#dubai_burj_khalifa">Dubai Burj Khalifa</a></li><li class="toc-item"><a href="#dubai_creek_deira">Dubai Creek Deira</a></li><li class="toc-item"><a href="#dubai_downtown_montreal">Dubai Downtown Montreal</a></li><li class="toc-item"><a href="#dubai_dubaimuseum2">Dubai Dubaimuseum2</a></li><li class="toc-item"><a href="#dubai_etihad_museum">Dubai Etihad Museum</a></li><li class="toc-item"><a href="#dubai_frame">Dubai Frame</a></li><li class="toc-item"><a href="#dubai_global_village">Dubai Global Village</a></li><li class="toc-item"><a href="#dubai_hatta">Dubai Hatta</a></li><li class="toc-item"><a href="#dubai_hindu_temple">Dubai Hindu Temple</a></li><li class="toc-item"><a href="#dubai_jumeirah_mosque">Dubai Jumeirah Mosque</a></li><li class="toc-item"><a href="#dubai_landmark">Dubai Landmark</a></li><li class="toc-item"><a href="#dubai_madinat_jumeirah">Dubai Madinat Jumeirah</a></li><li class="toc-item"><a href="#dubai_marina">Dubai Marina</a></li><li class="toc-item"><a href="#dubai_museum_al_fahidi">Dubai Museum Al Fahidi</a></li><li class="toc-item"><a href="#dubai_museum_of_the_future">Dubai Museum Of The Future</a></li><li class="toc-item"><a href="#dubai_palm_jumeirah">Dubai Palm Jumeirah</a></li><li class="toc-item"><a href="#dubai_safa_park">Dubai Safa Park</a></li><li class="toc-item"><a href="#dubai_zabeel_palace_in_dubai">Dubai Zabeel Palace In Dubai</a></li><li class="toc-item"><a href="#dubai_alserkal">Алсеркал Авеню</a></li><li class="toc-item"><a href="#dubai_grand_mosque">Великая мечеть Дубая</a></li><li class="toc-item"><a href="#dubai_wild_wadi">Водный парк Wild Wadi</a></li><li class="toc-item"><a href="#dubai_city_walk">Городская прогулка по Дубаю</a></li><li class="toc-item"><a href="#dubai_heritage_village">Деревня наследия Хатты</a></li><li class="toc-item"><a href="#dubai_opera">Дубай Опера</a></li><li class="toc-item"><a href="#dubai_gold_souk">Золотой рынок Дейры</a></li><li class="toc-item"><a href="#dubai_al_fahidi">Исторический район Аль Фахиди</a></li><li class="toc-item"><a href="#dubai_qasr_al_hosn">Каср Аль Хосн</a></li><li class="toc-item"><a href="#dubai_dubai_hills">Парк Дубай Хиллс</a></li><li class="toc-item"><a href="#dubai_kite_beach">Пляж Кайт</a></li><li class="toc-item"><a href="#dubai_la_mer">Пляжная зона La Mer</a></li><li class="toc-item"><a href="#dubai_spice_deira">Старый рынок Дейры</a></li><li class="toc-item"><a href="#dubai_expo_city">Экспо Сити Дубай</a></li></ol></nav>
 <section class="historical-reference" id="guide-historical" aria-label="Историческая справка"><h2>Историческая справка</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 <p class="prose">Дубай — крупнейший город эмирата Дубай (ОАЭ), финансовый и туристический центр Персидского залива.</p>
 <p class="prose">От рыбацкой и жемчужной деревни к мегаполису за несколько десятилетий XX–XXI веков: небоскрёбы, искусственные острова и логистические хабы. Дубай сочетает арабское культурное наследие с глобальной экономикой услуг.</p>
 <p class="prose">Нефть дала старт инфраструктуре; экономическое диверсифицирование сделало Дубай узлом авиаперевозок и выставок. Город привлекает специалистов со всего мира, сочетая исламскую культуру с глобальным сервисом и инвестициями в недвижимость и туризм.</p></section>
 <section class="guide-trip-plans" id="guide-trips" aria-label="Маршруты"><h2>Маршруты</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 <article class="trip-plan" id="trip-1d"><h3>Один день</h3>
 <p class="prose">Компактный маршрут по главным точкам путеводителя с минимальным возвратом назад пешком.</p>
 <ol class="trip-stops"><li><a href="#dubai_alserkal">Алсеркал Авеню</a> (~75мин)</li>
@@ -140,265 +223,456 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <article class="trip-plan" id="trip-3d3"><h3>Три дня — день 3</h3>
 <p class="prose">День 3 — оставшиеся близкие объекты.</p>
 <ol class="trip-stops"><li><a href="#dubai_hatta">Dubai Hatta</a> (~60мин)</li></ol></article></section>
-<nav class="guide-toc" aria-label="Содержание"><h2>Содержание</h2><ol><li class="toc-item"><a href="#guide-historical">Историческая справка</a></li><li class="toc-item"><a href="#guide-trips">Маршруты</a></li><li class="toc-item"><a href="#dubai_al_fahidi">Исторический район Аль Фахиди</a></li><li class="toc-item"><a href="#dubai_al_seef">Dubai Al Seef</a></li><li class="toc-item"><a href="#dubai_alserkal">Алсеркал Авеню</a></li><li class="toc-item"><a href="#dubai_burj_al_arab">Dubai Burj Al Arab</a></li><li class="toc-item"><a href="#dubai_burj_khalifa">Dubai Burj Khalifa</a></li><li class="toc-item"><a href="#dubai_city_walk">Городская прогулка по Дубаю</a></li><li class="toc-item"><a href="#dubai_spice_deira">Старый рынок Дейры</a></li><li class="toc-item"><a href="#dubai_pdfband_3_dc26830d">Downtown Montreal (8392011668)</a></li><li class="toc-item"><a href="#dubai_pdfband_0_41025eeb">Dubai (19225459)</a></li><li class="toc-item"><a href="#dubai_creek_deira">Dubai Creek Deira</a></li><li class="toc-item"><a href="#dubai_frame">Dubai Frame</a></li><li class="toc-item"><a href="#dubai_dubai_hills">Парк Дубай Хиллс</a></li><li class="toc-item"><a href="#dubai_pdfband_1_ca27259c">Dubai Hindu temple</a></li><li class="toc-item"><a href="#dubai_marina">Dubai Marina</a></li><li class="toc-item"><a href="#dubai_museum_al_fahidi">Dubai Museum Al Fahidi</a></li><li class="toc-item"><a href="#dubai_opera">Дубай Опера</a></li><li class="toc-item"><a href="#dubai_pdfband_8_36ceff8b">DubaiMuseum2</a></li><li class="toc-item"><a href="#dubai_etihad_museum">Dubai Etihad Museum</a></li><li class="toc-item"><a href="#dubai_expo_city">Экспо Сити Дубай</a></li><li class="toc-item"><a href="#dubai_global_village">Dubai Global Village</a></li><li class="toc-item"><a href="#dubai_gold_souk">Золотой рынок Дейры</a></li><li class="toc-item"><a href="#dubai_grand_mosque">Великая мечеть Дубая</a></li><li class="toc-item"><a href="#dubai_hatta">Dubai Hatta</a></li><li class="toc-item"><a href="#dubai_heritage_village">Деревня наследия Хатты</a></li><li class="toc-item"><a href="#dubai_jumeirah_mosque">Dubai Jumeirah Mosque</a></li><li class="toc-item"><a href="#dubai_kite_beach">Пляж Кайт</a></li><li class="toc-item"><a href="#dubai_la_mer">Пляжная зона La Mer</a></li><li class="toc-item"><a href="#dubai_madinat_jumeirah">Dubai Madinat Jumeirah</a></li><li class="toc-item"><a href="#dubai_museum_of_the_future">Dubai Museum Of The Future</a></li><li class="toc-item"><a href="#dubai_palm_jumeirah">Dubai Palm Jumeirah</a></li><li class="toc-item"><a href="#dubai_qasr_al_hosn">Каср Аль Хосн</a></li><li class="toc-item"><a href="#dubai_safa_park">Dubai Safa Park</a></li><li class="toc-item"><a href="#dubai_wild_wadi">Водный парк Wild Wadi</a></li><li class="toc-item"><a href="#dubai_pdfband_9_d0a641cf">Zabeel palace in Dubai</a></li></ol></nav>
-<section class="place" id="dubai_al_fahidi">
-<h3>Исторический район Аль Фахиди</h3>
-
-
-<figure class="place-fig"><img src="../images/dubai_al_fahidi.jpg" alt="Исторический район Аль Фахиди"/></figure>
-<div class="place-desc"><p class="prose">Исторический район Аль-Фахиди, также известный как Аль-Бастакья, является очаровательной зоной в Дубае, которая демонстрирует богатое наследие города и традиционную архитектуру. Посетители могут прогуляться по узким улочкам, вдоль которых расположены здания с ветряными башнями, художественные галереи и музеи, отражающие эмиратскую культуру. Этот район предлагает возможность заглянуть в прошлое Дубая, что делает его обязательным для посещения для тех, кто интересуется историей и традициями города. Исторический район Аль-Фахиди — один из старейших традиционных эмиратских кварталов в Дубае. Район отличается архитектурой с ветряными башнями, которая использовалась для естественного охлаждения в жарком климате.</p>
-<p class="prose">Исторический район Аль-Фахиди восходит к концу 19 века и был изначально основан персидскими торговцами. Эта территория служила торговым центром и жилым кварталом, отражая архитектурный стиль и образ жизни того времени. Значительные работы по восстановлению начались в начале 2000-х годов с целью сохранения его исторической ценности и продвижения культурного туризма. Культурно район Аль-Фахиди является важной частью идентичности Дубая, представляя традиционный образ жизни и наследие эмиратского народа. В этом районе проводятся различные культурные мероприятия и художественные выставки, что способствует развитию местной арт-сцены. Его сохранение имеет решающее значение для понимания эволюции Дубая от маленькой рыбацкой деревни до глобального мегаполиса.</p></div>
-</section>
 <section class="place" id="dubai_al_seef">
+<div class="place-lead">
 <h3>Dubai Al Seef</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/dubai_al_seef.jpg" alt="Dubai Al Seef"/></figure>
+<p class="place-meta">Адрес: Dubai Creek</p>
+<figure class="place-fig place-fig--hi-res"><img src="../images/dubai_al_seef.jpg" alt="Dubai Al Seef" width="1280" height="853"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Деревянные дорожки, пристани для доу и кафе, связывающие Аль-Фахиди с отельными комплексами у русла реки. Ночное освещение подчеркивает силуэты ветряных башен. Абрасы до сих пор ходят в Дейру всего за один дирхам.</p>
 <p class="prose">Проект по формированию среды, объединяющий историческую застройку и современные гостиничные кварталы. Пешеходная зона между музеем форта и потоком транспорта у ручья.</p></div>
 </section>
-<section class="place" id="dubai_alserkal">
-<h3>Алсеркал Авеню</h3>
-
-
-<figure class="place-fig"><img src="../images/dubai_alserkal.jpg" alt="Алсеркал Авеню"/></figure>
-<div class="place-desc"><p class="prose">Алсеркал Авеню — это яркий культурный центр, расположенный в районе Аль-Квоз в Дубае, известный своими современными художественными галереями, креативными пространствами и инновационными мероприятиями. Этот динамичный объект способствует формированию сообщества художников, дизайнеров и культурных энтузиастов, что делает его обязательным местом для посещения для всех, кто интересуется искусством. С эклектичным сочетанием выставок, представлений и мастер-классов Алсеркал Авеню является свидетельством растущей репутации Дубая как центра творчества и культурного обмена. Алсеркал Авеню был основан в 2007 году в районе Аль-Куз. В нем представлено более 40 современных художественных галерей и творческих пространств. На проспекте проходят многочисленные культурные мероприятия, включая художественные ярмарки и показы фильмов.</p>
-<p class="prose">Алсеркал Авеню был основан в 2007 году, преобразовав серию промышленных складов в процветающий арт-район. Инициативу возглавила группа местных любителей искусства и предпринимателей, которые осознали необходимость создания специализированного пространства для продвижения современного искусства и культуры в Дубае. С течением времени он стал ключевым игроком на региональной арт-сцене, проводя многочисленные выставки и мероприятия, которые привлекают как местную, так и международную аудиторию. Культурно, Алсеркал Авеню играет ключевую роль в художественном ландшафте Дубая, демонстрируя разнообразие современного искусства и дизайна. Он служит платформой для начинающих и известных художников, способствуя культурному диалогу города и формируя чувство общности. Авеню проводит различные мероприятия, включая художественные ярмарки, кинопоказы и мастер-классы, которые вовлекают общественность и способствуют культурной осведомленности. Хотя он не имеет религиозного значения, его светский характер позволяет разнообразным художественным выражениям отражать многокультурную ткань Дубая.</p></div>
-</section>
 <section class="place" id="dubai_burj_al_arab">
+<div class="place-lead">
 <h3>Dubai Burj Al Arab</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1994–1999</p>
-<figure class="place-fig"><img src="../images/dubai_burj_al_arab.jpg" alt="Dubai Burj Al Arab"/></figure>
+<p class="place-meta">Адрес: Jumeirah | Период: 1994–1999</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/dubai_burj_al_arab.jpg" alt="Dubai Burj Al Arab" width="1143" height="1600" style="height: 313px; max-height: 313px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_burj_al_arab_b.jpg" alt="Dubai Burj Al Arab — вид 2" width="330" height="224" style="height: 313px; max-height: 313px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Роскошный отель на восстановленном холме, с видом вдоль пляжа Джумейра. Интерьерный атриум и рестораны требуют предварительного бронирования от гостей. Виды с общедоступных пляжей позволяют сделать классические силуэтные фотографии в «синий час». Показательные выступы с вертолетных площадок в рамках маркетинга сделали Королевство всемирно известным.</p>
 <p class="prose">Метафора парусности Тома Райта стала первой мировой архитектурной иконой Дубая до того, как Бурдж-Халифа превзошел рекорды высоты. Прибрежный объект между старой торговлей ручьем и мегапроектами &quot;Пальма&quot;.</p></div>
 </section>
 <section class="place" id="dubai_burj_khalifa">
+<div class="place-lead">
 <h3>Dubai Burj Khalifa</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 2004–2010</p>
-<figure class="place-fig"><img src="../images/dubai_burj_khalifa.jpg" alt="Dubai Burj Khalifa"/></figure>
+<p class="place-meta">Адрес: Downtown Dubai | Период: 2004–2010</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/dubai_burj_khalifa.jpg" alt="Dubai Burj Khalifa" width="1280" height="857" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_burj_khalifa_b.jpg" alt="Dubai Burj Khalifa — вид 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Самое высокое в мире здание после завершения строительства, с смотровыми палубами на верхних уровнях и фонтанными шоу у его основания. Ресторан At.mosphere занимал верхний этаж годами, прежде чем в нём сменились другие концепции. Билеты на вечерние сеансы часто раскупаются первыми.</p>
 <p class="prose">Мегапроект под руководством Emaar, ранее известный как Burj Dubai, был переименован к открытию и является ориентиром высотного коридора Шейх Зайд Роуд. Вертикальный восклицательный знак маркетинга горизонтов Дубая.</p></div>
 </section>
-<section class="place" id="dubai_city_walk">
-<h3>Городская прогулка по Дубаю</h3>
-
-
-<figure class="place-fig"><img src="../images/dubai_city_walk.jpg" alt="Городская прогулка по Дубаю"/></figure>
-<div class="place-desc"><p class="prose">City Walk Dubai — это яркое городское направление, которое сочетает в себе шопинг, рестораны и развлечения в современном окружении. Смешение высококлассных бутиков, непринужденных кафе и художественных инсталляций предлагает уникальный опыт как для местных жителей, так и для туристов. Открытый дизайн и современная архитектура делают его популярным местом для неспешных прогулок и социальных встреч. City Walk Dubai занимает площадь 1,2 миллиона квадратных футов. В нем представлено более 300 торговых точек и широкий выбор ресторанов.</p>
-<p class="prose">City Walk Dubai был запущен в 2015 году в рамках более крупной инициативы по развитию от Meraas, направленной на создание нового городского стиля жизни. Эта территория быстро превратилась в центр развлечений и торговли, отражая рост Дубая как космополитичного города. Культурно City Walk Dubai представляет собой слияние современности и традиций, демонстрируя искусство и дизайн, а также способствуя вовлечению сообщества через различные мероприятия. Это место встречи как для местных жителей, так и для туристов, укрепляя социальную структуру города. Развитие соответствует видению Дубая как глобального города, подчеркивая инновации и образ жизни.</p></div>
-</section>
-<section class="place" id="dubai_spice_deira">
-<h3>Старый рынок Дейры</h3>
-
-
-<figure class="place-fig"><img src="../images/dubai_spice_deira.jpg" alt="Старый рынок Дейры"/></figure>
-<div class="place-desc"><p class="prose">Старый рынок Дейры, также известный как Рынок специй, — это яркий рынок, расположенный в сердце исторического района Дубая. Посетители могут погрузиться в богатые ароматы специй, трав и традиционных товаров, что делает его настоящим наслаждением для чувств. Рынок предлагает взгляд на торговое прошлое города и по-прежнему остается оживленным центром как для местных жителей, так и для туристов. Старый рынок Дейры известен своим широким ассортиментом специй, трав и традиционных арабских товаров. Сук расположен рядом с Дубайским заливом, который исторически был важным торговым маршрутом.</p>
-<p class="prose">Старый рынок Дейры имеет свои корни в ранние торговые дни Дубая, восходящие к 19 веку, когда он служил ключевым рынком для торговцев. С течением времени он эволюционировал, отражая рост города от небольшой рыбацкой деревни до глобального торгового центра. Рынок стал свидетелем значительных изменений, особенно во время нефтяного бума 1970-х годов, который преобразовал экономику и инфраструктуру Дубая. Культурно, Старый рынок Дейры является важной частью наследия Дубая, демонстрируя традиционные торговые практики и местное ремесло. Он играет важную роль в повседневной жизни, где жители покупают специи и другие товары, тем самым сохраняя местные традиции. Атмосфера и архитектура рынка отражают историческую суть региона, способствуя формированию идентичности Дубая как плавильного котла культур.</p></div>
-</section>
-<section class="place" id="dubai_pdfband_3_dc26830d">
-<h3>Downtown Montreal (8392011668)</h3>
-
-
-<figure class="place-fig"><img src="../images/dubai_pdfband_3_dc26830d.jpg" alt="Downtown Montreal (8392011668)"/></figure>
-</section>
-<section class="place" id="dubai_pdfband_0_41025eeb">
-<h3>Dubai (19225459)</h3>
-
-
-<figure class="place-fig"><img src="../images/dubai_pdfband_0_41025eeb.jpg" alt="Dubai (19225459)"/></figure>
-</section>
 <section class="place" id="dubai_creek_deira">
+<div class="place-lead">
 <h3>Dubai Creek Deira</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/dubai_creek_deira.jpg" alt="Dubai Creek Deira"/></figure>
+<p class="place-meta">Адрес: Deira and Bur Dubai</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/dubai_creek_deira.jpg" alt="Dubai Creek Deira" width="1280" height="854" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_creek_deira_b.jpg" alt="Dubai Creek Deira — вид 2" width="330" height="247" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Соленый вход, где встречаются текстильный и золотой рынки Абрас. Абрас до сих пор перевозят пассажиров за сбор в дирхамы. Ароматы специй и лавки текстиля находятся в небольшой пешей доступности от причалов абра. Район парусных минаретов аль Фахиди находится на берегу Бур-Дубай.</p>
 <p class="prose">Здесь причаливали жемчужные и торговые лодки до того, как нефтяные доходы сместили центр тяжести города в сторону моря. Масштаб человеческих размеров-противовес стеклянным каньонам Марины.</p></div>
 </section>
-<section class="place" id="dubai_frame">
-<h3>Dubai Frame</h3>
+<section class="place" id="dubai_downtown_montreal">
+<div class="place-lead">
+<h3>Dubai Downtown Montreal</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 2018</p>
-<figure class="place-fig"><img src="../images/dubai_frame.jpg" alt="Dubai Frame"/></figure>
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/dubai_downtown_montreal.jpg" alt="Dubai Downtown Montreal" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_downtown_montreal_b.jpg" alt="Dubai Downtown Montreal — вид 2" width="330" height="220" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+</section>
+<section class="place" id="dubai_dubaimuseum2">
+<div class="place-lead">
+<h3>Dubai Dubaimuseum2</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<figure class="place-fig place-fig--hi-res"><img src="../images/dubai_dubaimuseum2.jpg" alt="Dubai Dubaimuseum2" width="1280" height="665"/></figure>
+</div>
+</section>
+<section class="place" id="dubai_etihad_museum">
+<div class="place-lead">
+<h3>Dubai Etihad Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_etihad_museum.jpg" alt="Dubai Etihad Museum" width="330" height="247" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/dubai_etihad_museum_b.jpg" alt="Dubai Etihad Museum — вид 2" width="4032" height="3024" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Музей Этихада — музей в Дубае.</p></div>
+</section>
+<section class="place" id="dubai_frame">
+<div class="place-lead">
+<h3>Dubai Frame</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Zabeel Park | Период: 2018</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/dubai_frame.jpg" alt="Dubai Frame" width="1280" height="960" style="height: 63px; max-height: 63px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_frame_b.jpg" alt="Dubai Frame — вид 2" width="330" height="45" style="height: 63px; max-height: 63px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Наблюдательный мост, соединяющий старинные истории о ручьях с видами на горизонт шоссе Шейха Зайда. Панели со стеклянным полом отмечают переход между старыми и новыми залами. Метро Забиль Парк облегчает поиск такси в выходные.</p>
 <p class="prose">Символ портала, удостоенный победы на конкурсе, спровоцировал дискуссию о том, что лучше: архитектурные уловки или повествовательный подход в формировании силуэта города. Фотографический кадр-элемент, воплощенный в архитектуру.</p></div>
 </section>
-<section class="place" id="dubai_dubai_hills">
-<h3>Парк Дубай Хиллс</h3>
+<section class="place" id="dubai_global_village">
+<div class="place-lead">
+<h3>Dubai Global Village</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/dubai_dubai_hills.jpg" alt="Парк Дубай Хиллс"/></figure>
-<div class="place-desc"><p class="prose">Парк Dubai Hills — это обширный зеленый оазис, расположенный в самом сердце Дубая, предлагающий спокойное убежище от суеты города. С его красиво оформленными садами, пешеходными тропами и рекреационными удобствами, он является идеальным местом для семей и любителей активного отдыха. Парк создан для содействия здоровому образу жизни и вовлечению сообщества, что делает его популярным местом как для местных жителей, так и для туристов. Парк Dubai Hills занимает площадь примерно 180 гектаров. Парк предлагает разнообразные удобства, включая детские игровые площадки, спортивные сооружения и места для пикников.</p>
-<p class="prose">Парк Dubai Hills играет важную роль в содействии активному отдыху на свежем воздухе и взаимодействию сообщества в быстро развивающемся городском ландшафте Дубая. Он отражает приверженность города улучшению качества жизни его жителей через доступные зеленые пространства, которые становятся все более важными в городском планировании. Парк также служит местом проведения общественных мероприятий, способствуя социальным связям и культурному обмену среди разнообразных групп населения.</p></div>
+<p class="place-meta">Адрес: Sheikh Mohammed Bin Zayed Road</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/dubai_global_village.jpg" alt="Dubai Global Village" width="1280" height="960" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_global_village_b.jpg" alt="Dubai Global Village — вид 2" width="330" height="219" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Зимняя ярмарка в павильонах, с уличной едой и карнавальными аттракционами к востоку от центра города. Открывается примерно с ноября по апрель; проверьте актуальные даты перед поездкой. Парковки обширны — запомните букву вашей зоны.</p>
+<p class="prose">Начиналось как скромные ремесленные палатки; сегодня масштаб соответствует амбициям региональной выставки. Семейный вечер вне дома для экспатриантских сообществ.</p></div>
 </section>
-<section class="place" id="dubai_pdfband_1_ca27259c">
-<h3>Dubai Hindu temple</h3>
+<section class="place" id="dubai_hatta">
+<div class="place-lead">
+<h3>Dubai Hatta</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/dubai_pdfband_1_ca27259c.jpg" alt="Dubai Hindu temple"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_hatta.jpg" alt="Dubai Hatta" width="330" height="104" style="height: 145px; max-height: 145px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_hatta_b.jpg" alt="Dubai Hatta — вид 2" width="330" height="248" style="height: 145px; max-height: 145px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Хатта (араб. حتا, местное произношение [ˈħɑttɐ]) — внутренний эксклав эмирата Дубай, расположенный в Объединенных Арабских Эмиратах. Ранее это была оманская территория, и ее владение было передано Дубаю приблизительно в 1850 году. География Хатта расположена к юго-востоку от основной территории Дубая и находится примерно в 134 км (83 миль) к востоку от Дубая.</p></div>
+</section>
+<section class="place" id="dubai_hindu_temple">
+<div class="place-lead">
+<h3>Dubai Hindu Temple</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/dubai_hindu_temple.jpg" alt="Dubai Hindu Temple" width="1200" height="1600" style="height: 207px; max-height: 207px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_hindu_temple_b.jpg" alt="Dubai Hindu Temple — вид 2" width="330" height="148" style="height: 207px; max-height: 207px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+</section>
+<section class="place" id="dubai_jumeirah_mosque">
+<div class="place-lead">
+<h3>Dubai Jumeirah Mosque</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Jumeirah 1 | Период: 1979</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/dubai_jumeirah_mosque.jpg" alt="Dubai Jumeirah Mosque" width="1280" height="960" style="height: 344px; max-height: 344px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_jumeirah_mosque_b.jpg" alt="Dubai Jumeirah Mosque — вид 2" width="330" height="246" style="height: 344px; max-height: 344px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Мечеть-камень продвигается для экскурсионных посещений «Открытые двери», на которых рассказывается об эмиратской культуре и молитвенной практике для посетителей. Для организованных туров требуется скромная одежда. Подсветка после наступления темноты подчеркивает две минарета и центральный купол.</p>
+<p class="prose">Построен в дар от шейха Рашида; его программа культурного обмена предшествует многим более новым музейным инициативам. Доступное введение в архитектуру мечетей, вдали от центральных небоскрёбов.</p></div>
+</section>
+<section class="place" id="dubai_landmark">
+<div class="place-lead">
+<h3>Dubai Landmark</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<figure class="place-fig place-fig--lo-res"><img src="../images/dubai_landmark_b.jpg" alt="Dubai Landmark" width="330" height="320"/></figure>
+</div>
+</section>
+<section class="place" id="dubai_madinat_jumeirah">
+<div class="place-lead">
+<h3>Dubai Madinat Jumeirah</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Jumeirah</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/dubai_madinat_jumeirah.jpg" alt="Dubai Madinat Jumeirah" width="1280" height="867" style="height: 312px; max-height: 312px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_madinat_jumeirah_b.jpg" alt="Dubai Madinat Jumeirah — вид 2" width="330" height="247" style="height: 312px; max-height: 312px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Набережный ватертакси к ресторанам в стиле фальшивого сук с видом на Бурдж-эль-Араб. Поездки на автобусе Абра дешевле, чем такси по курортам у пляжа. Театры предлагают разовые билеты на гастролирующие мюзиклы, которые не входят в комплект ключей от отеля.</p>
+<p class="prose">Группа Джумейра объединила местные мотивы в масштабный гостиничный район. Контролированный фэнтези-образ «Старого Дубая» рядом с открым заливом.</p></div>
 </section>
 <section class="place" id="dubai_marina">
+<div class="place-lead">
 <h3>Dubai Marina</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/dubai_marina.jpg" alt="Dubai Marina"/></figure>
+<p class="place-meta">Адрес: Dubai Marina district</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/dubai_marina.jpg" alt="Dubai Marina" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_marina_b.jpg" alt="Dubai Marina — вид 2" width="330" height="220" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Искусственная марина, выстроенная вдоль башен, кафе и круизных ужинов на дхоу. Вечерний свет отражается в воде между пешеходными дорожками. Мрина Ворк популярна для пробежек после наступления темноты, когда снижается температура. Трамвайные линии соединяются с пляжем JBR, не перекрещивая оживлённые дороги.</p>
 <p class="prose">Раскопанный канал и рекультивированные края создали новую шаблонную недвижимость на набережной к западу от старого города торгового ручья. Самое плотное скопление жилых супервысоких зданий в эмирате.</p></div>
 </section>
 <section class="place" id="dubai_museum_al_fahidi">
+<div class="place-lead">
 <h3>Dubai Museum Al Fahidi</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/dubai_museum_al_fahidi.jpg" alt="Dubai Museum Al Fahidi"/></figure>
+<p class="place-meta">Адрес: Al Fahidi Historical Neighbourhood</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/dubai_museum_al_fahidi.jpg" alt="Dubai Museum Al Fahidi" width="1067" height="1600" style="height: 288px; max-height: 288px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_museum_al_fahidi_b.jpg" alt="Dubai Museum Al Fahidi — вид 2" width="330" height="206" style="height: 288px; max-height: 288px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Выставки по жемчужному промыслу, жизни на рынке (суке) и археологии ручьев внутри самого старого сохранившегося здания города. Сочетайте это с ближайшими дворами дивана шейха. Вечерние прогулки на «абра» отправляются ниже крепостных стен.</p>
 <p class="prose">Оборонительный центр Фасиль до того, как карты британского протектората переформатировали прибрежную безопасность. Истоки мегаполиса уходят корнями в торговлю, осуществлявшуюся по ручьям.</p></div>
 </section>
-<section class="place" id="dubai_opera">
-<h3>Дубай Опера</h3>
-
-
-<figure class="place-fig"><img src="../images/dubai_opera.jpg" alt="Дубай Опера"/></figure>
-<div class="place-desc"><p class="prose">Дубайская опера — это потрясающий архитектурный шедевр, расположенный в сердце Даунтауна Дубая. Этот многофункциональный зал принимает разнообразные выступления, включая оперу, балет, театр и концерты, что делает его культурным центром как для местных жителей, так и для туристов. С его впечатляющим дизайном, вдохновленным традиционными лодками дау, опера предлагает уникальный опыт как для любителей искусства, так и для случайных посетителей. Открыт 31 августа 2016 года. Спроектировано архитектором Яномусом Ростоком. Расположен в центре Дубая, рядом с Бурдж-Халифа.</p>
-<p class="prose">Дубайская опера была открыта 31 августа 2016 года, что стало значительным дополнением к культурному ландшафту города. Спроектированное знаменитым архитектором Янусом Ростоком, это заведение отражает амбиции Дубая стать мировым центром искусства. С момента открытия здесь прошло множество высокопрофильных выступлений и мероприятий, что способствовало укреплению репутации города как центра искусства и культуры. Культурно, Опера Дубая играет ключевую роль в продвижении искусств в ОАЭ, демонстрируя как местные, так и международные таланты. Она служит платформой для различных художественных выражений, обогащая культурную ткань Дубая. Это заведение также является частью более широкой инициативы по повышению статуса Дубая как глобального города, привлекая туристов и способствуя развитию яркой художественной сцены.</p></div>
-</section>
-<section class="place" id="dubai_pdfband_8_36ceff8b">
-<h3>DubaiMuseum2</h3>
-
-
-<figure class="place-fig"><img src="../images/dubai_pdfband_8_36ceff8b.jpg" alt="DubaiMuseum2"/></figure>
-</section>
-<section class="place" id="dubai_etihad_museum">
-<h3>Dubai Etihad Museum</h3>
-
-
-<figure class="place-fig"><img src="../images/dubai_etihad_museum.jpg" alt="Dubai Etihad Museum"/></figure>
-<div class="place-desc"><p class="prose">Музей Этихада — музей в Дубае.</p></div>
-</section>
-<section class="place" id="dubai_expo_city">
-<h3>Экспо Сити Дубай</h3>
-
-
-<figure class="place-fig"><img src="../images/dubai_expo_city.jpg" alt="Экспо Сити Дубай"/></figure>
-<div class="place-desc"><p class="prose">Expo City Dubai — это яркий центр, который демонстрирует инновации, устойчивое развитие и культуру, основанный на наследии Expo 2020. Посетители могут исследовать павильоны, которые отмечают глобальные достижения, и познакомиться с интерактивными экспозициями, подчеркивающими будущее технологий и дизайна. Этот город является свидетельством приверженности Дубая созданию устойчивой городской среды и содействию международному сотрудничеству. Expo City Dubai был первым Всемирным выставочным мероприятием, проведенным на Ближнем Востоке. Площадь участка составляет 4,38 квадратных километра. Экспо 2020 привлекло более 24 миллионов посетителей со всего мира.</p>
-<p class="prose">Expo City Dubai был создан как место для Expo 2020, который был перенесен на 2021 год из-за пандемии COVID-19. Выставка проходила с 1 октября 2021 года по 31 марта 2022 года и стала первой Всемирной выставкой, проведенной на Ближнем Востоке. После мероприятия эта территория была преобразована в постоянное место для культуры, образования и инноваций. Expo City Dubai имеет культурное значение, так как олицетворяет дух глобального сотрудничества и инноваций. На площадке расположены павильоны различных стран, демонстрирующие их наследие и достижения, тем самым способствуя чувству общности и обмену знаниями. Она служит платформой для культурного обмена и подчеркивает роль Дубая как лидера в области устойчивого развития и городского строительства.</p></div>
-</section>
-<section class="place" id="dubai_global_village">
-<h3>Dubai Global Village</h3>
-
-
-<figure class="place-fig"><img src="../images/dubai_global_village.jpg" alt="Dubai Global Village"/></figure>
-<div class="place-desc"><p class="prose">Зимняя ярмарка в павильонах, с уличной едой и карнавальными аттракционами к востоку от центра города. Открывается примерно с ноября по апрель; проверьте актуальные даты перед поездкой. Парковки обширны — запомните букву вашей зоны.</p>
-<p class="prose">Начиналось как скромные ремесленные палатки; сегодня масштаб соответствует амбициям региональной выставки. Семейный вечер вне дома для экспатриантских сообществ.</p></div>
-</section>
-<section class="place" id="dubai_gold_souk">
-<h3>Золотой рынок Дейры</h3>
-
-
-<figure class="place-fig"><img src="../images/dubai_gold_souk.jpg" alt="Золотой рынок Дейры"/></figure>
-<div class="place-desc"><p class="prose">Золотой рынок в Дейре — это яркий рынок, известный своим ослепительным ассортиментом золотых украшений и драгоценных камней. Посетители могут исследовать узкие улочки, вдоль которых расположены магазины, демонстрирующие сложные дизайны и традиционное мастерство. Рынок является не только местом для покупок, но и культурным опытом, отражающим богатую торговую историю Дубая. Золотой рынок насчитывает более 300 торговцев, в основном специализирующихся на золотых украшениях. Согласно оценкам, в Золотом Суку выставлено около 10 тонн золота в любой момент времени.</p>
-<p class="prose">Золотой рынок был основан в 1940-х годах, что совпало с появлением Дубая в качестве торгового центра региона. На протяжении десятилетий он значительно расширился, став ключевым местом для торговли золотом на Ближнем Востоке. Рынок стал свидетелем различных изменений, включая усилия по модернизации, сохраняя при этом свой традиционный шарм. Культурно Золотой рынок представляет собой историческую роль Дубая как центра торговли и коммерции, способствуя формированию идентичности города как глобального центра. Он отражает богатое наследие ремесел и важность золота в местных традициях, включая свадебные церемонии и празднования. Рынок является свидетельством прочного наследия торгового прошлого Дубая.</p></div>
-</section>
-<section class="place" id="dubai_grand_mosque">
-<h3>Великая мечеть Дубая</h3>
-
-
-<figure class="place-fig"><img src="../images/dubai_grand_mosque.jpg" alt="Великая мечеть Дубая"/></figure>
-<div class="place-desc"><p class="prose">Великая мечеть в Дубае, также известная как Великая мечеть шейха Заеда, является потрясающим архитектурным шедевром, который демонстрирует богатое культурное наследие ОАЭ. Со своим замысловатым дизайном и величественными куполами она служит ярким символом исламской веры и искусства. Посетители могут исследовать её спокойные окрестности и восхищаться красивыми молитвенными залами и дворами. Мечеть может разместить более 40 000 верующих. Он включает 82 купола и более 1000 колонн, демонстрируя сложные исламские узоры.</p>
-<p class="prose">Великая мечеть была открыта в 1998 году и с тех пор стала одной из крупнейших мечетей в Объединенных Арабских Эмиратах. Она названа в честь шейха Заеда бин Султана Аль Нахаяна, основателя ОАЭ, и стала местом значительных религиозных событий и собраний. Великая мечеть играет важную роль в культурном и религиозном ландшафте Дубая. Это не только место поклонения, но и центр общественных мероприятий и межконфессионального диалога. Архитектура мечети отражает исламское искусство и наследие, что делает её ключевой достопримечательностью как для местных жителей, так и для туристов, одновременно продвигая ценности мира и терпимости.</p></div>
-</section>
-<section class="place" id="dubai_hatta">
-<h3>Dubai Hatta</h3>
-
-
-<figure class="place-fig"><img src="../images/dubai_hatta.jpg" alt="Dubai Hatta"/></figure>
-<div class="place-desc"><p class="prose">Хатта (араб. حتا, местное произношение [ˈħɑttɐ]) — внутренний эксклав эмирата Дубай, расположенный в Объединенных Арабских Эмиратах. Ранее это была оманская территория, и ее владение было передано Дубаю приблизительно в 1850 году. География Хатта расположена к юго-востоку от основной территории Дубая и находится примерно в 134 км (83 миль) к востоку от Дубая.</p></div>
-</section>
-<section class="place" id="dubai_heritage_village">
-<h3>Деревня наследия Хатты</h3>
-
-
-<figure class="place-fig"><img src="../images/dubai_heritage_village.jpg" alt="Деревня наследия Хатты"/></figure>
-<div class="place-desc"><p class="prose">Деревня наследия Хатта — это увлекательный взгляд на традиционную жизнь ОАЭ, демонстрирующая богатую историю и культуру региона. Посетители могут исследовать восстановленные здания, включая крепость и несколько домов, которые отражают архитектурные стили прошлого. Деревня предлагает уникальную возможность познакомиться с местными ремеслами, традиционными обычаями и природной красотой региона Хатта. Деревня наследия Хатты включает в себя восстановленную крепость и несколько традиционных домов. Деревня демонстрирует местные ремесла и обычаи, предоставляя представление о жизни эмиратцев.</p>
-<p class="prose">Деревня наследия Хатта была основана для сохранения культурного наследия региона Хатта, с усилиями по восстановлению и поддержанию объекта, начавшимися в конце 20 века. Деревня включает в себя сооружения, датируемые 16 веком, подчеркивая историческую значимость Хатты как поселения и ее роль в развитии региона. Культурно, деревня наследия Хатта служит важным местом для понимания традиций и повседневной жизни эмиратского народа. Она отражает стремление ОАЭ сохранить свое наследие на фоне быстрого модернизации. Деревня является площадкой для культурных мероприятий и фестивалей, способствуя чувству общности и преемственности в эмиратских традициях.</p></div>
-</section>
-<section class="place" id="dubai_jumeirah_mosque">
-<h3>Dubai Jumeirah Mosque</h3>
-
-<p class="place-meta">Период: 1979</p>
-<figure class="place-fig"><img src="../images/dubai_jumeirah_mosque.jpg" alt="Dubai Jumeirah Mosque"/></figure>
-<div class="place-desc"><p class="prose">Мечеть-камень продвигается для экскурсионных посещений «Открытые двери», на которых рассказывается об эмиратской культуре и молитвенной практике для посетителей. Для организованных туров требуется скромная одежда. Подсветка после наступления темноты подчеркивает две минарета и центральный купол.</p>
-<p class="prose">Построен в дар от шейха Рашида; его программа культурного обмена предшествует многим более новым музейным инициативам. Доступное введение в архитектуру мечетей, вдали от центральных небоскрёбов.</p></div>
-</section>
-<section class="place" id="dubai_kite_beach">
-<h3>Пляж Кайт</h3>
-
-
-<figure class="place-fig"><img src="../images/dubai_kite_beach.jpg" alt="Пляж Кайт"/></figure>
-<div class="place-desc"><p class="prose">Пляж Кайт — это яркая полоса побережья в Дубае, известная своими потрясающими видами на знаковый Бурдж Аль-Араб и живой атмосферой. Это популярное место привлекает как местных жителей, так и туристов своими мягкими песками, водными видами спорта и разнообразием кафе и ресторанов. Идеально подходит для семей и любителей фитнеса, Пляж Кайт предлагает достаточно пространства для пляжных активностей, пробежек и отдыха на солнце. Пляж Кайт расположен в районе Умм-Сукейм в Дубае. Пляж известен своими водными видами спорта, включая кайтсерфинг и паддлбординг.</p>
-<p class="prose">Пляж Кайт развивался на протяжении многих лет как часть трансформации Дубая в глобальный город. Хотя конкретные исторические вехи для самого пляжа могут не быть задокументированы, он отражает более широкую эволюцию прибрежных районов Дубая с конца 20 века, когда город начал активно инвестировать в туризм и отдых. Культурно, пляж Кайт играет значительную роль в повседневной жизни жителей Дубая, служа общим пространством для отдыха и социального взаимодействия. Это центр различных водных видов спорта, отражающий эмиратский образ жизни, который включает активный отдых на свежем воздухе. Пляж также принимает мероприятия и фестивали, которые отмечают местную культуру и способствуют вовлечению сообщества.</p></div>
-</section>
-<section class="place" id="dubai_la_mer">
-<h3>Пляжная зона La Mer</h3>
-
-
-<figure class="place-fig"><img src="../images/dubai_la_mer.jpg" alt="Пляжная зона La Mer"/></figure>
-<div class="place-desc"><p class="prose">La Mer — это яркое прибрежное направление в Дубае, сочетающее современность с расслабляющей атмосферой. Посетители могут насладиться разнообразием ресторанов, магазинов и водных видов спорта, все это на фоне потрясающего пейзажа Аравийского залива. Эта зона создана для отдыха и развлечений, что делает ее популярным местом как для местных жителей, так и для туристов. Ла Мер протянулся более чем на 2,5 километра вдоль побережья. В этом районе расположено более 130 магазинов, ресторанов и кафе.</p>
-<p class="prose">La Mer был разработан в рамках продолжающихся усилий Дубая по улучшению своих прибрежных зон и продвижению туризма. Открытый в 2017 году, этот пляжный курорт отражает стремительный рост города и его приверженность созданию привлекательных зон отдыха. Культурно La Mer представляет собой сдвиг Дубая к более расслабленному образу жизни, предлагая пространство для общественного взаимодействия и досуговых мероприятий. Здесь демонстрируется современный архитектурный стиль города, при этом также учитываются элементы, отражающие местное наследие. Эта зона является центром социального взаимодействия, привлекая разнообразные толпы, которые способствуют многонациональному характеру Дубая.</p></div>
-</section>
-<section class="place" id="dubai_madinat_jumeirah">
-<h3>Dubai Madinat Jumeirah</h3>
-
-
-<figure class="place-fig"><img src="../images/dubai_madinat_jumeirah.jpg" alt="Dubai Madinat Jumeirah"/></figure>
-<div class="place-desc"><p class="prose">Набережный ватертакси к ресторанам в стиле фальшивого сук с видом на Бурдж-эль-Араб. Поездки на автобусе Абра дешевле, чем такси по курортам у пляжа. Театры предлагают разовые билеты на гастролирующие мюзиклы, которые не входят в комплект ключей от отеля.</p>
-<p class="prose">Группа Джумейра объединила местные мотивы в масштабный гостиничный район. Контролированный фэнтези-образ «Старого Дубая» рядом с открым заливом.</p></div>
-</section>
 <section class="place" id="dubai_museum_of_the_future">
+<div class="place-lead">
 <h3>Dubai Museum Of The Future</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 2022</p>
-<figure class="place-fig"><img src="../images/dubai_museum_of_the_future.jpg" alt="Dubai Museum Of The Future"/></figure>
+<p class="place-meta">Адрес: Sheikh Zayed Road | Период: 2022</p>
+<figure class="place-fig place-fig--lo-res"><img src="../images/dubai_museum_of_the_future_b.jpg" alt="Dubai Museum Of The Future" width="330" height="440"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Иммерсивное пространство, посвященное будущему климата, здоровья и космоса, без традиционных витрин. Билеты с фиксированным временем раскупают за недели до начала сезона. Связан пешеходной галереей с кондиционером.</p>
 <p class="prose">Правительственный брифинг запросил значок, который можно прочитать на скорости на шоссе. Постэкспо футуристический брендинг Дубая в материальной форме.</p></div>
 </section>
 <section class="place" id="dubai_palm_jumeirah">
+<div class="place-lead">
 <h3>Dubai Palm Jumeirah</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/dubai_palm_jumeirah.jpg" alt="Dubai Palm Jumeirah"/></figure>
+<p class="place-meta">Адрес: Palm Jumeirah</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/dubai_palm_jumeirah.jpg" alt="Dubai Palm Jumeirah" width="1280" height="857" style="height: 309px; max-height: 309px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_palm_jumeirah_b.jpg" alt="Dubai Palm Jumeirah — вид 2" width="330" height="229" style="height: 309px; max-height: 309px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Монорельс и магистральная дорога, обрамленные жилыми башнями, ведут к курортному комплексу Atlantis в районе Полумесяца. The View at The Palm предлагает доски с перспективой в виде карты. Для посещения пляжных клубов требуется бронирование по пятницам после обеда.</p>
 <p class="prose">Тростниковый полигон Нахили расширил пляжную недвижимость Дубая в сторону моря. Инженерное чудо, видимое с воздуха при приближении.</p></div>
 </section>
-<section class="place" id="dubai_qasr_al_hosn">
-<h3>Каср Аль Хосн</h3>
-
-
-<figure class="place-fig"><img src="../images/dubai_qasr_al_hosn.jpg" alt="Каср Аль Хосн"/></figure>
-<div class="place-desc"><p class="prose">Каср Аль Хосн — это историческая крепость в самом сердце Абу-Даби, символизирующая богатое наследие и культурную идентичность ОАЭ. Изначально построенная в 18 веке, она служила смотровой башней, а позже стала резиденцией правящей семьи. Сегодня она является музеем, который демонстрирует историю и традиции эмиратского народа. Каср Аль Хосн был построен в 1761 году. Это самое старое каменное здание в Абу-Даби. Форт служил резиденцией правящей семьи и центром управления.</p>
-<p class="prose">Каср Аль Хосн был построен в 1761 году, что делает его самым старым каменным зданием в Абу-Даби. Изначально построенный как смотровая башня для защиты пресноводных источников, он стал королевским дворцом и центром управления эмиратом. Форт претерпел несколько ремонтов и реставраций, особенно в конце 20 века, чтобы сохранить свое историческое значение. Культурно, Каср Аль Хосн является важной достопримечательностью, отражающей наследие и традиции ОАЭ. Он служит местом проведения культурных мероприятий и выставок, способствуя пониманию истории эмиратов. Преобразование крепости в музей подчеркивает ее роль в обучении посетителей истории региона и содействии чувству национальной гордости.</p></div>
-</section>
 <section class="place" id="dubai_safa_park">
+<div class="place-lead">
 <h3>Dubai Safa Park</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/dubai_safa_park.jpg" alt="Dubai Safa Park"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_safa_park.jpg" alt="Dubai Safa Park" width="330" height="284" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_safa_park_b.jpg" alt="Dubai Safa Park — вид 2" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Сафа Парк — парк в Объединённых Арабских Эмиратах.</p></div>
 </section>
+<section class="place" id="dubai_zabeel_palace_in_dubai">
+<div class="place-lead">
+<h3>Dubai Zabeel Palace In Dubai</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/dubai_zabeel_palace_in_dubai.jpg" alt="Dubai Zabeel Palace In Dubai" width="1280" height="865" style="height: 312px; max-height: 312px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_zabeel_palace_in_dubai_b.jpg" alt="Dubai Zabeel Palace In Dubai — вид 2" width="330" height="250" style="height: 312px; max-height: 312px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+</section>
+<section class="place" id="dubai_alserkal">
+<div class="place-lead">
+<h3>Алсеркал Авеню</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_alserkal.jpg" alt="Алсеркал Авеню" width="330" height="247" style="height: 231px; max-height: 231px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_alserkal_b.jpg" alt="Алсеркал Авеню — вид 2" width="330" height="165" style="height: 231px; max-height: 231px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Алсеркал Авеню — это яркий культурный центр, расположенный в районе Аль-Квоз в Дубае, известный своими современными художественными галереями, креативными пространствами и инновационными мероприятиями. Этот динамичный объект способствует формированию сообщества художников, дизайнеров и культурных энтузиастов, что делает его обязательным местом для посещения для всех, кто интересуется искусством. С эклектичным сочетанием выставок, представлений и мастер-классов Алсеркал Авеню является свидетельством растущей репутации Дубая как центра творчества и культурного обмена. Алсеркал Авеню был основан в 2007 году в районе Аль-Куз. В нем представлено более 40 современных художественных галерей и творческих пространств. На проспекте проходят многочисленные культурные мероприятия, включая художественные ярмарки и показы фильмов.</p>
+<p class="prose">Алсеркал Авеню был основан в 2007 году, преобразовав серию промышленных складов в процветающий арт-район. Инициативу возглавила группа местных любителей искусства и предпринимателей, которые осознали необходимость создания специализированного пространства для продвижения современного искусства и культуры в Дубае. С течением времени он стал ключевым игроком на региональной арт-сцене, проводя многочисленные выставки и мероприятия, которые привлекают как местную, так и международную аудиторию. Культурно, Алсеркал Авеню играет ключевую роль в художественном ландшафте Дубая, демонстрируя разнообразие современного искусства и дизайна. Он служит платформой для начинающих и известных художников, способствуя культурному диалогу города и формируя чувство общности. Авеню проводит различные мероприятия, включая художественные ярмарки, кинопоказы и мастер-классы, которые вовлекают общественность и способствуют культурной осведомленности. Хотя он не имеет религиозного значения, его светский характер позволяет разнообразным художественным выражениям отражать многокультурную ткань Дубая.</p></div>
+</section>
+<section class="place" id="dubai_grand_mosque">
+<div class="place-lead">
+<h3>Великая мечеть Дубая</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_grand_mosque.jpg" alt="Великая мечеть Дубая" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_grand_mosque_b.jpg" alt="Великая мечеть Дубая — вид 2" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Великая мечеть в Дубае, также известная как Великая мечеть шейха Заеда, является потрясающим архитектурным шедевром, который демонстрирует богатое культурное наследие ОАЭ. Со своим замысловатым дизайном и величественными куполами она служит ярким символом исламской веры и искусства. Посетители могут исследовать её спокойные окрестности и восхищаться красивыми молитвенными залами и дворами. Мечеть может разместить более 40 000 верующих. Он включает 82 купола и более 1000 колонн, демонстрируя сложные исламские узоры.</p>
+<p class="prose">Великая мечеть была открыта в 1998 году и с тех пор стала одной из крупнейших мечетей в Объединенных Арабских Эмиратах. Она названа в честь шейха Заеда бин Султана Аль Нахаяна, основателя ОАЭ, и стала местом значительных религиозных событий и собраний. Великая мечеть играет важную роль в культурном и религиозном ландшафте Дубая. Это не только место поклонения, но и центр общественных мероприятий и межконфессионального диалога. Архитектура мечети отражает исламское искусство и наследие, что делает её ключевой достопримечательностью как для местных жителей, так и для туристов, одновременно продвигая ценности мира и терпимости.</p></div>
+</section>
 <section class="place" id="dubai_wild_wadi">
+<div class="place-lead">
 <h3>Водный парк Wild Wadi</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/dubai_wild_wadi.jpg" alt="Водный парк Wild Wadi"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_wild_wadi.jpg" alt="Водный парк Wild Wadi" width="330" height="495" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_wild_wadi_b.jpg" alt="Водный парк Wild Wadi — вид 2" width="330" height="440" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Wild Wadi Waterpark — это главный водный аттракцион, расположенный в Дубае, предлагающий разнообразные захватывающие водные горки и аттракционы для всех возрастов. На фоне знакового Бурдж Аль-Араб парк предлагает волновые бассейны, ленивые реки и захватывающие горки, что делает его идеальным местом для семей и искателей приключений. С его арабской тематикой и зелеными насаждениями Wild Wadi предоставляет уникальное сочетание веселья и расслабления в сердце города. В парке более 30 аттракционов и развлечений. Wild Wadi оформлен в стиле сказаний о Джухе, персонаже арабского фольклора.</p>
 <p class="prose">Водный парк Wild Wadi открыл свои двери в 1999 году и был разработан группой Jumeirah, известной своими роскошными гостиничными предложениями в Дубае. С тех пор парк стал ключевой достопримечательностью города, привлекая миллионы посетителей каждый год. Водный парк Wild Wadi — это не только популярное место для отдыха, но и важный вклад в репутацию Дубая как ведущего туристического центра. Парк отражает стремление города предоставлять развлекательные и рекреационные услуги мирового уровня, улучшая общее качество жизни как для жителей, так и для посетителей.</p></div>
 </section>
-<section class="place" id="dubai_pdfband_9_d0a641cf">
-<h3>Zabeel palace in Dubai</h3>
+<section class="place" id="dubai_city_walk">
+<div class="place-lead">
+<h3>Городская прогулка по Дубаю</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/dubai_pdfband_9_d0a641cf.jpg" alt="Zabeel palace in Dubai"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_city_walk.jpg" alt="Городская прогулка по Дубаю" width="330" height="438" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_city_walk_b.jpg" alt="Городская прогулка по Дубаю — вид 2" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">City Walk Dubai — это яркое городское направление, которое сочетает в себе шопинг, рестораны и развлечения в современном окружении. Смешение высококлассных бутиков, непринужденных кафе и художественных инсталляций предлагает уникальный опыт как для местных жителей, так и для туристов. Открытый дизайн и современная архитектура делают его популярным местом для неспешных прогулок и социальных встреч. City Walk Dubai занимает площадь 1,2 миллиона квадратных футов. В нем представлено более 300 торговых точек и широкий выбор ресторанов.</p>
+<p class="prose">City Walk Dubai был запущен в 2015 году в рамках более крупной инициативы по развитию от Meraas, направленной на создание нового городского стиля жизни. Эта территория быстро превратилась в центр развлечений и торговли, отражая рост Дубая как космополитичного города. Культурно City Walk Dubai представляет собой слияние современности и традиций, демонстрируя искусство и дизайн, а также способствуя вовлечению сообщества через различные мероприятия. Это место встречи как для местных жителей, так и для туристов, укрепляя социальную структуру города. Развитие соответствует видению Дубая как глобального города, подчеркивая инновации и образ жизни.</p></div>
+</section>
+<section class="place" id="dubai_heritage_village">
+<div class="place-lead">
+<h3>Деревня наследия Хатты</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--row-sized"><img src="../images/dubai_heritage_village.jpg" alt="Деревня наследия Хатты" width="330" height="587" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_heritage_village_b.jpg" alt="Деревня наследия Хатты — вид 2" width="330" height="247" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Деревня наследия Хатта — это увлекательный взгляд на традиционную жизнь ОАЭ, демонстрирующая богатую историю и культуру региона. Посетители могут исследовать восстановленные здания, включая крепость и несколько домов, которые отражают архитектурные стили прошлого. Деревня предлагает уникальную возможность познакомиться с местными ремеслами, традиционными обычаями и природной красотой региона Хатта. Деревня наследия Хатты включает в себя восстановленную крепость и несколько традиционных домов. Деревня демонстрирует местные ремесла и обычаи, предоставляя представление о жизни эмиратцев.</p>
+<p class="prose">Деревня наследия Хатта была основана для сохранения культурного наследия региона Хатта, с усилиями по восстановлению и поддержанию объекта, начавшимися в конце 20 века. Деревня включает в себя сооружения, датируемые 16 веком, подчеркивая историческую значимость Хатты как поселения и ее роль в развитии региона. Культурно, деревня наследия Хатта служит важным местом для понимания традиций и повседневной жизни эмиратского народа. Она отражает стремление ОАЭ сохранить свое наследие на фоне быстрого модернизации. Деревня является площадкой для культурных мероприятий и фестивалей, способствуя чувству общности и преемственности в эмиратских традициях.</p></div>
+</section>
+<section class="place" id="dubai_opera">
+<div class="place-lead">
+<h3>Дубай Опера</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_opera.jpg" alt="Дубай Опера" width="330" height="440" style="height: 319px; max-height: 319px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/dubai_opera_b.jpg" alt="Дубай Опера — вид 2" width="5854" height="4049" style="height: 319px; max-height: 319px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Дубайская опера — это потрясающий архитектурный шедевр, расположенный в сердце Даунтауна Дубая. Этот многофункциональный зал принимает разнообразные выступления, включая оперу, балет, театр и концерты, что делает его культурным центром как для местных жителей, так и для туристов. С его впечатляющим дизайном, вдохновленным традиционными лодками дау, опера предлагает уникальный опыт как для любителей искусства, так и для случайных посетителей. Открыт 31 августа 2016 года. Спроектировано архитектором Яномусом Ростоком. Расположен в центре Дубая, рядом с Бурдж-Халифа.</p>
+<p class="prose">Дубайская опера была открыта 31 августа 2016 года, что стало значительным дополнением к культурному ландшафту города. Спроектированное знаменитым архитектором Янусом Ростоком, это заведение отражает амбиции Дубая стать мировым центром искусства. С момента открытия здесь прошло множество высокопрофильных выступлений и мероприятий, что способствовало укреплению репутации города как центра искусства и культуры. Культурно, Опера Дубая играет ключевую роль в продвижении искусств в ОАЭ, демонстрируя как местные, так и международные таланты. Она служит платформой для различных художественных выражений, обогащая культурную ткань Дубая. Это заведение также является частью более широкой инициативы по повышению статуса Дубая как глобального города, привлекая туристов и способствуя развитию яркой художественной сцены.</p></div>
+</section>
+<section class="place" id="dubai_gold_souk">
+<div class="place-lead">
+<h3>Золотой рынок Дейры</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_gold_souk.jpg" alt="Золотой рынок Дейры" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_gold_souk_b.jpg" alt="Золотой рынок Дейры — вид 2" width="330" height="330" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Золотой рынок в Дейре — это яркий рынок, известный своим ослепительным ассортиментом золотых украшений и драгоценных камней. Посетители могут исследовать узкие улочки, вдоль которых расположены магазины, демонстрирующие сложные дизайны и традиционное мастерство. Рынок является не только местом для покупок, но и культурным опытом, отражающим богатую торговую историю Дубая. Золотой рынок насчитывает более 300 торговцев, в основном специализирующихся на золотых украшениях. Согласно оценкам, в Золотом Суку выставлено около 10 тонн золота в любой момент времени.</p>
+<p class="prose">Золотой рынок был основан в 1940-х годах, что совпало с появлением Дубая в качестве торгового центра региона. На протяжении десятилетий он значительно расширился, став ключевым местом для торговли золотом на Ближнем Востоке. Рынок стал свидетелем различных изменений, включая усилия по модернизации, сохраняя при этом свой традиционный шарм. Культурно Золотой рынок представляет собой историческую роль Дубая как центра торговли и коммерции, способствуя формированию идентичности города как глобального центра. Он отражает богатое наследие ремесел и важность золота в местных традициях, включая свадебные церемонии и празднования. Рынок является свидетельством прочного наследия торгового прошлого Дубая.</p></div>
+</section>
+<section class="place" id="dubai_al_fahidi">
+<div class="place-lead">
+<h3>Исторический район Аль Фахиди</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_al_fahidi.jpg" alt="Исторический район Аль Фахиди" width="330" height="249" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_al_fahidi_b.jpg" alt="Исторический район Аль Фахиди — вид 2" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Исторический район Аль-Фахиди, также известный как Аль-Бастакья, является очаровательной зоной в Дубае, которая демонстрирует богатое наследие города и традиционную архитектуру. Посетители могут прогуляться по узким улочкам, вдоль которых расположены здания с ветряными башнями, художественные галереи и музеи, отражающие эмиратскую культуру. Этот район предлагает возможность заглянуть в прошлое Дубая, что делает его обязательным для посещения для тех, кто интересуется историей и традициями города. Исторический район Аль-Фахиди — один из старейших традиционных эмиратских кварталов в Дубае. Район отличается архитектурой с ветряными башнями, которая использовалась для естественного охлаждения в жарком климате.</p>
+<p class="prose">Исторический район Аль-Фахиди восходит к концу 19 века и был изначально основан персидскими торговцами. Эта территория служила торговым центром и жилым кварталом, отражая архитектурный стиль и образ жизни того времени. Значительные работы по восстановлению начались в начале 2000-х годов с целью сохранения его исторической ценности и продвижения культурного туризма. Культурно район Аль-Фахиди является важной частью идентичности Дубая, представляя традиционный образ жизни и наследие эмиратского народа. В этом районе проводятся различные культурные мероприятия и художественные выставки, что способствует развитию местной арт-сцены. Его сохранение имеет решающее значение для понимания эволюции Дубая от маленькой рыбацкой деревни до глобального мегаполиса.</p></div>
+</section>
+<section class="place" id="dubai_qasr_al_hosn">
+<div class="place-lead">
+<h3>Каср Аль Хосн</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_qasr_al_hosn.jpg" alt="Каср Аль Хосн" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_qasr_al_hosn_b.jpg" alt="Каср Аль Хосн — вид 2" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Каср Аль Хосн — это историческая крепость в самом сердце Абу-Даби, символизирующая богатое наследие и культурную идентичность ОАЭ. Изначально построенная в 18 веке, она служила смотровой башней, а позже стала резиденцией правящей семьи. Сегодня она является музеем, который демонстрирует историю и традиции эмиратского народа. Каср Аль Хосн был построен в 1761 году. Это самое старое каменное здание в Абу-Даби. Форт служил резиденцией правящей семьи и центром управления.</p>
+<p class="prose">Каср Аль Хосн был построен в 1761 году, что делает его самым старым каменным зданием в Абу-Даби. Изначально построенный как смотровая башня для защиты пресноводных источников, он стал королевским дворцом и центром управления эмиратом. Форт претерпел несколько ремонтов и реставраций, особенно в конце 20 века, чтобы сохранить свое историческое значение. Культурно, Каср Аль Хосн является важной достопримечательностью, отражающей наследие и традиции ОАЭ. Он служит местом проведения культурных мероприятий и выставок, способствуя пониманию истории эмиратов. Преобразование крепости в музей подчеркивает ее роль в обучении посетителей истории региона и содействии чувству национальной гордости.</p></div>
+</section>
+<section class="place" id="dubai_dubai_hills">
+<div class="place-lead">
+<h3>Парк Дубай Хиллс</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--row-sized"><img src="../images/dubai_dubai_hills.jpg" alt="Парк Дубай Хиллс" width="330" height="587" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_dubai_hills_b.jpg" alt="Парк Дубай Хиллс — вид 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Парк Dubai Hills — это обширный зеленый оазис, расположенный в самом сердце Дубая, предлагающий спокойное убежище от суеты города. С его красиво оформленными садами, пешеходными тропами и рекреационными удобствами, он является идеальным местом для семей и любителей активного отдыха. Парк создан для содействия здоровому образу жизни и вовлечению сообщества, что делает его популярным местом как для местных жителей, так и для туристов. Парк Dubai Hills занимает площадь примерно 180 гектаров. Парк предлагает разнообразные удобства, включая детские игровые площадки, спортивные сооружения и места для пикников.</p>
+<p class="prose">Парк Dubai Hills играет важную роль в содействии активному отдыху на свежем воздухе и взаимодействию сообщества в быстро развивающемся городском ландшафте Дубая. Он отражает приверженность города улучшению качества жизни его жителей через доступные зеленые пространства, которые становятся все более важными в городском планировании. Парк также служит местом проведения общественных мероприятий, способствуя социальным связям и культурному обмену среди разнообразных групп населения.</p></div>
+</section>
+<section class="place" id="dubai_kite_beach">
+<div class="place-lead">
+<h3>Пляж Кайт</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_kite_beach.jpg" alt="Пляж Кайт" width="330" height="247" style="height: 319px; max-height: 319px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/dubai_kite_beach_b.jpg" alt="Пляж Кайт — вид 2" width="5854" height="4049" style="height: 319px; max-height: 319px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Пляж Кайт — это яркая полоса побережья в Дубае, известная своими потрясающими видами на знаковый Бурдж Аль-Араб и живой атмосферой. Это популярное место привлекает как местных жителей, так и туристов своими мягкими песками, водными видами спорта и разнообразием кафе и ресторанов. Идеально подходит для семей и любителей фитнеса, Пляж Кайт предлагает достаточно пространства для пляжных активностей, пробежек и отдыха на солнце. Пляж Кайт расположен в районе Умм-Сукейм в Дубае. Пляж известен своими водными видами спорта, включая кайтсерфинг и паддлбординг.</p>
+<p class="prose">Пляж Кайт развивался на протяжении многих лет как часть трансформации Дубая в глобальный город. Хотя конкретные исторические вехи для самого пляжа могут не быть задокументированы, он отражает более широкую эволюцию прибрежных районов Дубая с конца 20 века, когда город начал активно инвестировать в туризм и отдых. Культурно, пляж Кайт играет значительную роль в повседневной жизни жителей Дубая, служа общим пространством для отдыха и социального взаимодействия. Это центр различных водных видов спорта, отражающий эмиратский образ жизни, который включает активный отдых на свежем воздухе. Пляж также принимает мероприятия и фестивали, которые отмечают местную культуру и способствуют вовлечению сообщества.</p></div>
+</section>
+<section class="place" id="dubai_la_mer">
+<div class="place-lead">
+<h3>Пляжная зона La Mer</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_la_mer.jpg" alt="Пляжная зона La Mer" width="330" height="413" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_la_mer_b.jpg" alt="Пляжная зона La Mer — вид 2" width="330" height="330" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">La Mer — это яркое прибрежное направление в Дубае, сочетающее современность с расслабляющей атмосферой. Посетители могут насладиться разнообразием ресторанов, магазинов и водных видов спорта, все это на фоне потрясающего пейзажа Аравийского залива. Эта зона создана для отдыха и развлечений, что делает ее популярным местом как для местных жителей, так и для туристов. Ла Мер протянулся более чем на 2,5 километра вдоль побережья. В этом районе расположено более 130 магазинов, ресторанов и кафе.</p>
+<p class="prose">La Mer был разработан в рамках продолжающихся усилий Дубая по улучшению своих прибрежных зон и продвижению туризма. Открытый в 2017 году, этот пляжный курорт отражает стремительный рост города и его приверженность созданию привлекательных зон отдыха. Культурно La Mer представляет собой сдвиг Дубая к более расслабленному образу жизни, предлагая пространство для общественного взаимодействия и досуговых мероприятий. Здесь демонстрируется современный архитектурный стиль города, при этом также учитываются элементы, отражающие местное наследие. Эта зона является центром социального взаимодействия, привлекая разнообразные толпы, которые способствуют многонациональному характеру Дубая.</p></div>
+</section>
+<section class="place" id="dubai_spice_deira">
+<div class="place-lead">
+<h3>Старый рынок Дейры</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_spice_deira.jpg" alt="Старый рынок Дейры" width="330" height="440" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_spice_deira_b.jpg" alt="Старый рынок Дейры — вид 2" width="330" height="452" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Старый рынок Дейры, также известный как Рынок специй, — это яркий рынок, расположенный в сердце исторического района Дубая. Посетители могут погрузиться в богатые ароматы специй, трав и традиционных товаров, что делает его настоящим наслаждением для чувств. Рынок предлагает взгляд на торговое прошлое города и по-прежнему остается оживленным центром как для местных жителей, так и для туристов. Старый рынок Дейры известен своим широким ассортиментом специй, трав и традиционных арабских товаров. Сук расположен рядом с Дубайским заливом, который исторически был важным торговым маршрутом.</p>
+<p class="prose">Старый рынок Дейры имеет свои корни в ранние торговые дни Дубая, восходящие к 19 веку, когда он служил ключевым рынком для торговцев. С течением времени он эволюционировал, отражая рост города от небольшой рыбацкой деревни до глобального торгового центра. Рынок стал свидетелем значительных изменений, особенно во время нефтяного бума 1970-х годов, который преобразовал экономику и инфраструктуру Дубая. Культурно, Старый рынок Дейры является важной частью наследия Дубая, демонстрируя традиционные торговые практики и местное ремесло. Он играет важную роль в повседневной жизни, где жители покупают специи и другие товары, тем самым сохраняя местные традиции. Атмосфера и архитектура рынка отражают историческую суть региона, способствуя формированию идентичности Дубая как плавильного котла культур.</p></div>
+</section>
+<section class="place" id="dubai_expo_city">
+<div class="place-lead">
+<h3>Экспо Сити Дубай</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_expo_city.jpg" alt="Экспо Сити Дубай" width="330" height="247" style="height: 225px; max-height: 225px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/dubai_expo_city_b.jpg" alt="Экспо Сити Дубай — вид 2" width="330" height="161" style="height: 225px; max-height: 225px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Expo City Dubai — это яркий центр, который демонстрирует инновации, устойчивое развитие и культуру, основанный на наследии Expo 2020. Посетители могут исследовать павильоны, которые отмечают глобальные достижения, и познакомиться с интерактивными экспозициями, подчеркивающими будущее технологий и дизайна. Этот город является свидетельством приверженности Дубая созданию устойчивой городской среды и содействию международному сотрудничеству. Expo City Dubai был первым Всемирным выставочным мероприятием, проведенным на Ближнем Востоке. Площадь участка составляет 4,38 квадратных километра. Экспо 2020 привлекло более 24 миллионов посетителей со всего мира.</p>
+<p class="prose">Expo City Dubai был создан как место для Expo 2020, который был перенесен на 2021 год из-за пандемии COVID-19. Выставка проходила с 1 октября 2021 года по 31 марта 2022 года и стала первой Всемирной выставкой, проведенной на Ближнем Востоке. После мероприятия эта территория была преобразована в постоянное место для культуры, образования и инноваций. Expo City Dubai имеет культурное значение, так как олицетворяет дух глобального сотрудничества и инноваций. На площадке расположены павильоны различных стран, демонстрирующие их наследие и достижения, тем самым способствуя чувству общности и обмену знаниями. Она служит платформой для культурного обмена и подчеркивает роль Дубая как лидера в области устойчивого развития и городского строительства.</p></div>
 </section>
 </body>
 </html>

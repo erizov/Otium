@@ -13,7 +13,7 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
 .otium-logo { font-family: 'Spectral', serif; font-size: 2.15rem;
   font-weight: 600; letter-spacing: 0.18em; margin-bottom: 0.85rem; }
 .otiump { margin: 0.42rem 0; line-height: 1.42; text-align: justify;
-  max-width: 38rem; font-size: 0.95rem; }
+  font-size: 0.95rem; }
 .guide-title { page-break-after: auto; margin-bottom: 0.55rem;
   page-break-inside: avoid; }
 .historical-reference { margin: 0.75rem 0 1.15rem;
@@ -63,22 +63,103 @@ ol.trip-stops a:hover { text-decoration: underline; }
 .heraldry-univ-caption { font-size: 0.52rem; line-height: 1.18;
   margin: 0.12rem 0 0; padding: 0 0.06rem; color: #252525;
   text-align: center; font-weight: 500; }
-.heraldry-motto { text-align: center; max-width: 18rem; margin: 0.18rem auto;
+.heraldry-motto { text-align: center; margin: 0.18rem auto;
   width: 100%; }
 .motto-line { font-family: 'Spectral', serif; font-size: 1rem;
   margin: 0; color: #333; line-height: 1.35; }
 .guide-title h1.guide-title-main { font-family: 'Spectral', serif;
   font-size: 2.35rem; margin-bottom: 0.5rem; font-weight: 600; }
 .lead { color: #444; font-size: 1.05rem; }
-.guide-toc { margin: 0.85rem 0 1.15rem; page-break-inside: avoid; }
-.guide-toc h2 { font-family: 'Spectral', serif; font-size: 1.28rem;
-  font-weight: 600; margin: 0.4rem 0 0.55rem; }
+
+.guide-toc { page-break-before: always; break-before: page;
+  page-break-after: always; break-after: page;
+  margin: 0; padding: 0.2rem 0 0.45rem; page-break-inside: auto; }
+.guide-toc h2 { font-family: 'Spectral', serif;
+  font-size: 1.28rem; font-weight: 600; margin: 0.4rem 0 0.55rem; }
 .guide-toc ol { margin: 0.35rem 0 0.65rem 1.25rem; padding: 0;
   columns: 2; column-gap: 1.5rem; }
 .guide-toc li { margin: 0.18rem 0; line-height: 1.35;
   font-size: 0.88rem; break-inside: avoid; }
-.guide-toc a { color: #1a5276; text-decoration: none; }
+.guide-toc a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.guide-toc a:hover { color: #0d3d56; }
 .guide-toc li.toc-item--sub { font-size: 0.82rem; margin-left: 0.35rem; }
+.toc-back { font-size: 0.78rem; margin: 0 0 0.35rem; text-align: right; }
+.toc-back a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.toc-back a:hover { color: #0d3d56; }
+.place, .historical-reference, .guide-primer, .guide-trip-plans {
+  scroll-margin-top: 1.25rem; }
+.historical-reference h2, .guide-primer h2, .guide-trip-plans h2,
+.chapter-head h2, .place-lead h3 { position: relative; }
+.guide-toc + .place, .guide-toc + .chapter-head {
+  page-break-before: avoid; break-before: avoid-page; }
+.place-lead { page-break-inside: avoid; break-inside: avoid-page;
+  page-break-after: auto; }
+.place-lead > h3 { page-break-after: avoid; break-after: avoid-page; }
+.place-lead > .place-meta { page-break-after: avoid; break-after: avoid-page; }
+
+.place-fig { page-break-inside: avoid; break-inside: avoid-page;
+  margin: 0.5rem 0 1rem; }
+.place-fig img {
+  page-break-inside: avoid; break-inside: avoid-page;
+  max-height: 48vh; width: auto; max-width: 100%;
+  object-fit: contain; margin-left: auto; margin-right: auto; }
+.place-fig--hi-res img { max-height: 52vh; }
+.place-fig--lo-res img { max-height: 30vh; }
+.place-pdf-fig-row {
+  display: flex; flex-direction: row; flex-wrap: wrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.45rem 0.55rem; margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row .place-fig {
+  flex: 1 1 30%; margin: 0; min-width: 26%; max-width: 100%; }
+.place-pdf-fig-row .place-fig img {
+  width: auto; max-width: 100%; height: auto; max-height: 44vh;
+  object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--pair {
+  flex-wrap: nowrap; justify-content: space-between;
+  align-items: flex-end; gap: 0.5rem 0.65rem; }
+.place-pdf-fig-row--pair .place-fig {
+  flex: 1 1 47%; min-width: 0; max-width: 50%;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--pair .place-fig img {
+  max-height: 44vh; object-fit: contain; }
+.place-pdf-fig-row--pair .place-fig--hi-res img { max-height: 52vh; }
+.place-pdf-fig-row--pair .place-fig--lo-res img { max-height: 26vh; }
+.place-pdf-fig-row--pair .place-fig--row-sized img,
+.place-pdf-fig-row--triple .place-fig--row-sized img,
+.place-pdf-fig-row--many .place-fig--row-sized img {
+  width: auto; max-width: 100%; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row .place-fig--row-sized.place-fig--hi-res img,
+.place-pdf-fig-row .place-fig--row-sized.place-fig--lo-res img {
+  max-height: unset; }
+.place-pdf-fig-rows-stack {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple {
+  display: flex; flex-direction: row; flex-wrap: nowrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.4rem 0.48rem; margin: 0;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--triple .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--triple .place-fig--hi-res img { max-height: 42vh; }
+.place-pdf-fig-row--triple .place-fig--lo-res img { max-height: 18vh; }
+.place-pdf-fig-row--many {
+  flex-wrap: nowrap; justify-content: center; align-items: flex-end;
+  gap: 0.35rem 0.42rem; }
+.place-pdf-fig-row--many .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--many .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+
+
 .place { margin-bottom: 2.2rem; page-break-inside: auto; }
 h3 { font-family: 'Spectral', serif; font-size: 1.22rem; margin: 1.2rem 0 0.35rem;
   font-weight: 600; }
@@ -90,7 +171,6 @@ h4 { font-family: 'Spectral', serif; font-size: 0.95rem; text-transform: upperca
   color: #555; font-size: 0.95rem; margin: 0 0 0.5rem; font-style: italic; }
 .place-meta { font-size: 0.92rem; color: #353535; margin: 0 0 0.75rem;
   line-height: 1.4; }
-.place-fig { margin: 0.5rem 0 1rem; }
 img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
 .prose, .place-desc p { margin: 0.45rem 0; line-height: 1.5;
   text-align: justify; }
@@ -110,7 +190,9 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <figure class="heraldry-fig heraldry-coat-book" title="City emblem"><img src="../images/guide_coat_of_arms.svg" alt="City emblem"/></figure>
 <figure class="heraldry-fig heraldry-coat-book" title="Flag"><img src="../images/guide_flag.svg" alt="Flag"/></figure>
 </div></div><h1 class="guide-title-main">Prague</h1><p class="lead">Guide. Places in this edition: 37.</p></header>
+<nav class="guide-toc" id="guide-toc" aria-label="Contents"><h2>Contents</h2><ol><li class="toc-item"><a href="#guide-trips">Trip ideas</a></li><li class="toc-item"><a href="#prague_2017_hatvan">2017 Hatvan</a></li><li class="toc-item"><a href="#prague_vysehrad_ss_peter_paul">Basilica of St. Peter and St. Paul, Vyšehrad</a></li><li class="toc-item"><a href="#prague_charles_bridge">Charles Bridge</a></li><li class="toc-item"><a href="#prague_infant_jesus_prague_church">Church of Our Lady Victorious</a></li><li class="toc-item"><a href="#prague_dancing_house">Dancing House</a></li><li class="toc-item"><a href="#prague_kampa_charles_bridge_view">Kampa and Charles Bridge</a></li><li class="toc-item"><a href="#prague_kinsky_palace_old_town">Kinský Palace (Old Town Square)</a></li><li class="toc-item"><a href="#prague_lennon_wall">Lennon Wall</a></li><li class="toc-item"><a href="#prague_letna_metronome">Letná Metronome</a></li><li class="toc-item"><a href="#prague_letna_park_view">Letná Park viewpoint</a></li><li class="toc-item"><a href="#prague_klementinum_mirror_chapel">Mirror Chapel (Klementinum)</a></li><li class="toc-item"><a href="#prague_municipal_house">Municipal House</a></li><li class="toc-item"><a href="#prague_national_museum_prague">National Museum</a></li><li class="toc-item"><a href="#prague_national_technical_museum_prague">National Technical Museum</a></li><li class="toc-item"><a href="#prague_national_theatre_prague">National Theatre</a></li><li class="toc-item"><a href="#prague_nizwa_006">Nizwa</a></li><li class="toc-item"><a href="#prague_naplavka_riverside">Náplavka (Rašínovo nábřeží)</a></li><li class="toc-item"><a href="#prague_old_jewish_cemetery">Old Jewish Cemetery</a></li><li class="toc-item"><a href="#prague_old_town_hall">Old Town Hall</a></li><li class="toc-item"><a href="#prague_old_town_square">Old Town Square</a></li><li class="toc-item"><a href="#prague_petrin_tower">Petřín Lookout Tower</a></li><li class="toc-item"><a href="#prague_powder_gate">Powder Gate</a></li><li class="toc-item"><a href="#prague_astronomical_clock_orloj">Prague Astronomical Clock</a></li><li class="toc-item"><a href="#prague_troya_botanical_garden">Prague Botanic Garden Troja</a></li><li class="toc-item"><a href="#prague_castle">Prague Castle</a></li><li class="toc-item"><a href="#prague_main_railway_station">Prague Main Railway Station</a></li><li class="toc-item"><a href="#prague_praguecathedral03">PragueCathedral03</a></li><li class="toc-item"><a href="#prague_st_nicholas_mala_strana">St. Nicholas Church, Malá Strana</a></li><li class="toc-item"><a href="#prague_st_vitus_cathedral">St. Vitus Cathedral</a></li><li class="toc-item"><a href="#prague_strahov_monastery">Strahov Monastery</a></li><li class="toc-item"><a href="#prague_stromovka_park">Stromovka (Royal Game Reserve)</a></li><li class="toc-item"><a href="#prague_troja_castle">Troja Château</a></li><li class="toc-item"><a href="#prague_vratislavsk_pal_c">Vratislavský palác</a></li><li class="toc-item"><a href="#prague_vysehrad_cemetery_slavin">Vyšehrad Cemetery</a></li><li class="toc-item"><a href="#prague_wallenstein_garden">Wallenstein Garden</a></li><li class="toc-item"><a href="#prague_wenceslas_square">Wenceslas Square</a></li><li class="toc-item"><a href="#prague_zizkov_tower">Žižkov Television Tower</a></li></ol></nav>
 <section class="guide-trip-plans" id="guide-trips" aria-label="Trip ideas"><h2>Trip ideas</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 <article class="trip-plan" id="trip-1d"><h3>One day</h3>
 <p class="prose">A compact loop linking the strongest cards in this guide, ordered to minimise backtracking on foot.</p>
 <ol class="trip-stops"><li><a href="#prague_infant_jesus_prague_church">Church of Our Lady Victorious</a> (~75min)</li>
@@ -140,292 +222,504 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <li><a href="#prague_stromovka_park">Stromovka (Royal Game Reserve)</a> (~75min)</li>
 <li><a href="#prague_troya_botanical_garden">Prague Botanic Garden Troja</a> (~75min)</li>
 <li><a href="#prague_zizkov_tower">Žižkov Television Tower</a> (~75min)</li></ol></article></section>
-<nav class="guide-toc" aria-label="Contents"><h2>Contents</h2><ol><li class="toc-item"><a href="#guide-trips">Trip ideas</a></li><li class="toc-item"><a href="#prague_vysehrad_ss_peter_paul">Basilica of St. Peter and St. Paul, Vyšehrad</a></li><li class="toc-item"><a href="#prague_charles_bridge">Charles Bridge</a></li><li class="toc-item"><a href="#prague_infant_jesus_prague_church">Church of Our Lady Victorious</a></li><li class="toc-item"><a href="#prague_dancing_house">Dancing House</a></li><li class="toc-item"><a href="#prague_kampa_charles_bridge_view">Kampa and Charles Bridge</a></li><li class="toc-item"><a href="#prague_kinsky_palace_old_town">Kinský Palace (Old Town Square)</a></li><li class="toc-item"><a href="#prague_lennon_wall">Lennon Wall</a></li><li class="toc-item"><a href="#prague_letna_metronome">Letná Metronome</a></li><li class="toc-item"><a href="#prague_letna_park_view">Letná Park viewpoint</a></li><li class="toc-item"><a href="#prague_klementinum_mirror_chapel">Mirror Chapel (Klementinum)</a></li><li class="toc-item"><a href="#prague_municipal_house">Municipal House</a></li><li class="toc-item"><a href="#prague_national_museum_prague">National Museum</a></li><li class="toc-item"><a href="#prague_national_technical_museum_prague">National Technical Museum</a></li><li class="toc-item"><a href="#prague_national_theatre_prague">National Theatre</a></li><li class="toc-item"><a href="#prague_pdfband_1_1aaef487">2017 Hatvan</a></li><li class="toc-item"><a href="#prague_pdfband_2_45de4182">Nizwa 006 (30816611472)</a></li><li class="toc-item"><a href="#prague_naplavka_riverside">Náplavka (Rašínovo nábřeží)</a></li><li class="toc-item"><a href="#prague_old_jewish_cemetery">Old Jewish Cemetery</a></li><li class="toc-item"><a href="#prague_old_town_hall">Old Town Hall</a></li><li class="toc-item"><a href="#prague_old_town_square">Old Town Square</a></li><li class="toc-item"><a href="#prague_petrin_tower">Petřín Lookout Tower</a></li><li class="toc-item"><a href="#prague_powder_gate">Powder Gate</a></li><li class="toc-item"><a href="#prague_astronomical_clock_orloj">Prague Astronomical Clock</a></li><li class="toc-item"><a href="#prague_troya_botanical_garden">Prague Botanic Garden Troja</a></li><li class="toc-item"><a href="#prague_castle">Prague Castle</a></li><li class="toc-item"><a href="#prague_main_railway_station">Prague Main Railway Station</a></li><li class="toc-item"><a href="#prague_pdfband_0_2f02bea1">PragueCathedral03</a></li><li class="toc-item"><a href="#prague_st_nicholas_mala_strana">St. Nicholas Church, Malá Strana</a></li><li class="toc-item"><a href="#prague_st_vitus_cathedral">St. Vitus Cathedral</a></li><li class="toc-item"><a href="#prague_strahov_monastery">Strahov Monastery</a></li><li class="toc-item"><a href="#prague_stromovka_park">Stromovka (Royal Game Reserve)</a></li><li class="toc-item"><a href="#prague_troja_castle">Troja Château</a></li><li class="toc-item"><a href="#prague_pdfband_9_08958a66">Vratislavský palác</a></li><li class="toc-item"><a href="#prague_vysehrad_cemetery_slavin">Vyšehrad Cemetery</a></li><li class="toc-item"><a href="#prague_wallenstein_garden">Wallenstein Garden</a></li><li class="toc-item"><a href="#prague_wenceslas_square">Wenceslas Square</a></li><li class="toc-item"><a href="#prague_zizkov_tower">Žižkov Television Tower</a></li></ol></nav>
+<section class="place" id="prague_2017_hatvan">
+<div class="place-lead">
+<h3>2017 Hatvan</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
+
+<p class="place-meta">Address: See official visitor information.</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/prague_2017_hatvan.jpg" alt="2017 Hatvan" width="1280" height="960" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/prague_2017_hatvan_b.jpg" alt="2017 Hatvan — view 2" width="330" height="432" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+</section>
 <section class="place" id="prague_vysehrad_ss_peter_paul">
+<div class="place-lead">
 <h3>Basilica of St. Peter and St. Paul, Vyšehrad</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Vyšehrad fortress, Prague 2 | Style: Neo-Gothic exterior, Art Nouveau interior | Period: 1891–1896</p>
-<figure class="place-fig"><img src="../images/prague_vysehrad_ss_peter_paul.jpg" alt="Basilica of St. Peter and St. Paul, Vyšehrad"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/prague_vysehrad_ss_peter_paul.jpg" alt="Basilica of St. Peter and St. Paul, Vyšehrad" width="1201" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/prague_vysehrad_ss_peter_paul_b.jpg" alt="Basilica of St. Peter and St. Paul, Vyšehrad — view 2" width="330" height="440" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Sitting high above the Vltava River on a picturesque hilltop, the Basilica of St. Pyotr and St. Paul at Vyšehrad is one of Prague&#x27;s most iconic landmarks. Its soaring spires and towering steeples dominate the city&#x27;s skyline, offering visitors a breathtaking view of the capital city below. Neo-Gothic basilica with striking twin spires inside the Vyšehrad fort—associated with the Czech national cemetery Slavín nearby. Constructed using local sandstone and granite. Features twin towers standing over 70 meters tall. Contains numerous stained glass windows depicting biblical scenes. Located within the ancient fortress complex of Vyšehrad. Design inspired by medieval European churches. Composers such as Dvořák are buried in the adjacent cemetery. Ramparts offer views of the Vltava and New Town.</p>
 <p class="prose">Built between 1891 and 1896, the basilica was designed by Czech architect Antonín Linhart to replace an earlier church that had been destroyed during World War II. The structure combines elements of neo-Gothic and Romanesque styles, showcasing intricate carvings and elaborate decorations typical of these periods. Older church on site; present form largely 19th-century reconstruction with Art Nouveau interior painting. This majestic cathedral serves as both a spiritual center for locals and tourists alike while providing stunning panoramic views of Prague’s historical districts. Vyšehrad is a legendary “first Prague castle” in medieval chronicles and a quiet park above the river.</p></div>
 </section>
 <section class="place" id="prague_charles_bridge">
+<div class="place-lead">
 <h3>Charles Bridge</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
-<p class="place-meta">Address: Between Old Town and Malá Strana over the Vltava | Style: Gothic bridge with Baroque sculpture | Period: 1357</p>
-<figure class="place-fig"><img src="../images/prague_charles_bridge.jpg" alt="Charles Bridge"/></figure>
+<p class="place-meta">Location: Between Old Town and Malá Strana over the Vltava | Style: Gothic bridge with Baroque sculpture | Period: 1357</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/prague_charles_bridge.jpg" alt="Charles Bridge" width="1280" height="720" style="height: 259px; max-height: 259px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/prague_charles_bridge_b.jpg" alt="Charles Bridge — view 2" width="330" height="220" style="height: 259px; max-height: 259px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Spanning the Vltava River and connecting Prague&#x27;s Old Town with the Castle District, Charles Bridge is one of Europe&#x27;s most iconic landmarks. Built in the late Middle Ages, it was originally named Stone Bridge. A medieval stone bridge lined with statues, now a pedestrian spine between the castle side and the Old Town. Early mornings and late evenings are quieter for crossing. The bridge was consecrated on July 9, 1402. It underwent significant restoration work in the early 20th century after being damaged by World War II bombings. Charles Bridge has inspired countless artists, writers, and photographers due to its scenic beauty and historical significance. Today, it remains a popular spot for locals and tourists alike, offering pedestrian access only. In 1995, Charles Bridge was included in UNESCO&#x27;s World Heritage List. The bridge is about 516 metres long and rests on 16 arches. Many statues are 17th–18th century copies; originals are partly in the National Museum.</p>
 <p class="prose">Constructed between 1357 and 1402 during the reign of King Charles IV, Charles Bridge replaced an earlier wooden bridge that had been repeatedly destroyed by floods. Designed to connect Prague&#x27;s historic districts, it became a vital transportation route and symbol of the city&#x27;s prosperity. The bridge features 30 Baroque statues, each representing saints and biblical figures, added over several centuries. Founded in 1357 under Charles IV; the Baroque sculptures were added from the late 17th century onward. The bridge has been repaired after floods and military action. Visiting Charles Bridge allows travelers to experience Prague&#x27;s rich architectural heritage and enjoy panoramic views of the city’s riverbanks. The iconic image of Prague in travel literature and a daily route for residents as well as visitors.</p></div>
 </section>
 <section class="place" id="prague_infant_jesus_prague_church">
+<div class="place-lead">
 <h3>Church of Our Lady Victorious</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Gothic | Period: 1370–1489</p>
-<figure class="place-fig"><img src="../images/prague_infant_jesus_prague_church.jpg" alt="Church of Our Lady Victorious"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/prague_infant_jesus_prague_church.jpg" alt="Church of Our Lady Victorious" width="1242" height="1600" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/prague_infant_jesus_prague_church_b.jpg" alt="Church of Our Lady Victorious — view 2" width="330" height="247" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Church of Our Lady Victorious, also known as the Týn Church, is a prominent landmark in Prague&#x27;s Old Town. Its striking Gothic architecture and three towers make it one of the city&#x27;s most iconic structures. It features three soaring towers that dominate the skyline of Old Town Square. The interior boasts intricate carvings and paintings depicting biblical scenes. Its altar contains valuable gold and silver artifacts dating back to the 15th century. The church has undergone several restorations over the centuries but retains much of its original medieval character. Adjacent to the church are the ruins of St.</p>
 <p class="prose">Built between 1370 and 1489, the church was constructed during the reign of King Charles IV. Originally intended to be part of a larger complex, its construction was interrupted by the Hussite Wars. The church later became a symbol of religious triumph after the Battle of White Mountain in 1620, hence its name &#x27;Our Lady Victorious.&#x27;. Visitors come here for its stunning Gothic design and historical significance, especially the impressive altar and stained glass windows.</p></div>
 </section>
 <section class="place" id="prague_dancing_house">
+<div class="place-lead">
 <h3>Dancing House</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Jiráskovo náměstí 1981/6 | Style: Deconstructivist / late modern | Period: 1992–1996</p>
-<figure class="place-fig"><img src="../images/prague_dancing_house.jpg" alt="Dancing House"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/prague_dancing_house.jpg" alt="Dancing House" width="1280" height="906" style="height: 137px; max-height: 137px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/prague_dancing_house_b.jpg" alt="Dancing House — view 2" width="330" height="98" style="height: 137px; max-height: 137px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Dancing House (Czech: Tančící dům), also known as Fred and Ginger due to its flowing silhouette, is a modernist landmark designed by Frank Gehry and Czech architect Pyotr Eštetřík. Completed in 1996, it stands out among Prague&#x27;s traditional architecture. A deconstructivist office building by Frank Gehry and Vlado Milunić, nicknamed “Fred and Ginger” for its paired curved volumes. Designed by Canadian-American architect Frank Gehry and Czech architect Pyotr Eštětrík. Located on Rejsek Street near the Vltava River. Symbolizes the fusion of Western and Eastern European aesthetics. Inspired by the dance partnership of Fred Astaire and Ginger Rogers. Recognized as one of Europe&#x27;s most significant contemporary structures. A glass bar on the top offers views toward the castle. It stands opposite the river from the National Theatre area.</p>
 <p class="prose">Built between 1992 and 1996, the Dancing House was constructed during a time of political transition in Czechoslovakia following the fall of communism. The building’s unique design reflects the collaboration of two architects, with Gehry contributing his avant-garde style while Eštětrík incorporated local architectural traditions. Its distinctive shape has become iconic for the city. Completed in 1996 on a site cleared by WWII bombing; controversial at first, now a postcard favourite. Visitors come to see the innovative architecture and the playful, dynamic form that contrasts sharply with the surrounding historic buildings. Represents post-1989 architectural openness on the riverside.</p></div>
 </section>
 <section class="place" id="prague_kampa_charles_bridge_view">
+<div class="place-lead">
 <h3>Kampa and Charles Bridge</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
-<p class="place-meta">Address: Kampa island, Malá Strana | Style: Urban park and embankment | Period: late 19th century</p>
-<figure class="place-fig"><img src="../images/prague_kampa_charles_bridge_view.jpg" alt="Kampa and Charles Bridge"/></figure>
+<p class="place-meta">Location: Kampa island, Malá Strana | Style: Urban park and embankment | Period: late 19th century</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/prague_kampa_charles_bridge_view.jpg" alt="Kampa and Charles Bridge" width="1280" height="862" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/prague_kampa_charles_bridge_view_b.jpg" alt="Kampa and Charles Bridge — view 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Kampa is a picturesque riverside park on the banks of the Vltava River, offering stunning views of Prague&#x27;s historic landmarks, including Charles Bridge. It’s a peaceful oasis filled with sculptures, gardens, and pedestrian paths that provide a tranquil escape from bustling city life. Park-like island by the river: willows, museum of modern art at one end, and classic views back toward the Charles Bridge arches. Located along the banks of the Vltava River, Kampa offers breathtaking vistas of Prague’s iconic landmarks. The park features numerous sculptural installations created by contemporary artists. It serves as a popular spot for locals and tourists alike to relax and reflect amidst nature. Kampa Park is connected to Charles Bridge via several pedestrian bridges, making it easily accessible from various parts of the city. This park hosts regular cultural events such as music festivals and art fairs. The Čertovka side canal is nicknamed “Prague’s Venice”. Outdoor sculptures include the famous babies by David Černý on nearby lawns.</p>
 <p class="prose">Originally a marshy area used for fishing and agriculture, Kampa was transformed into a park in the late 19th century by architect Josef Zítek. The site became famous as a gathering place for artists and intellectuals during the early 20th century. Today, it remains a vibrant cultural hub, known for its open-air art exhibitions and charming cafes. Former mills and gardens; gradually landscaped for public leisure from the 20th century. Visit Kampa to enjoy unparalleled panoramic views of Charles Bridge and Old Town, while soaking up the laid-back atmosphere of this serene green space. Calmer riverside space minutes from the dense tourist core.</p></div>
 </section>
 <section class="place" id="prague_kinsky_palace_old_town">
+<div class="place-lead">
 <h3>Kinský Palace (Old Town Square)</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Baroque | Period: early 18th century</p>
-<figure class="place-fig"><img src="../images/prague_kinsky_palace_old_town.jpg" alt="Kinský Palace (Old Town Square)"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/prague_kinsky_palace_old_town.jpg" alt="Kinský Palace (Old Town Square)" width="1280" height="960" style="height: 204px; max-height: 204px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/prague_kinsky_palace_old_town_b.jpg" alt="Kinský Palace (Old Town Square) — view 2" width="330" height="146" style="height: 204px; max-height: 204px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Sitting majestically on the edge of Old Town Square, Kinský Palace is a testament to Baroque architecture and Prague&#x27;s rich cultural heritage. Constructed during the reign of Emperor Charles VI. Listed as a National Cultural Monument since 1962. Formerly owned by prominent Czech aristocrats. Notable for its intricate stucco work and elaborate decorations. Hosted numerous royal and diplomatic gatherings throughout its history.</p>
 <p class="prose">Built in the early 18th century by architect Jan Blahoslav for Count František Kinsky, the palace has served as both a residence and a venue for various official ceremonies over the years. Its grand entrance hall and ornate interiors reflect the opulence and elegance typical of its era. A must-visit for anyone interested in exploring Prague’s architectural gems and experiencing the city&#x27;s historical grandeur firsthand.</p></div>
 </section>
 <section class="place" id="prague_lennon_wall">
+<div class="place-lead">
 <h3>Lennon Wall</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Velkopřevorské náměstí, Malá Strana | Style: Urban wall / street art | Period: 1988</p>
-<figure class="place-fig"><img src="../images/prague_lennon_wall.jpg" alt="Lennon Wall"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--row-sized"><img src="../images/prague_lennon_wall.jpg" alt="Lennon Wall" width="1140" height="989" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/prague_lennon_wall_b.jpg" alt="Lennon Wall — view 2" width="330" height="247" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">It has become one of the city&#x27;s most popular attractions, attracting visitors from around the world. A wall covered in graffiti, lyrics, and messages—once an unofficial memorial after John Lennon’s death, now repainted freely by visitors. It is one of the most famous street art sites in Europe. The wall serves as a tribute to peace and freedom. Artists from various countries contribute to its evolving design. It attracts thousands of tourists annually. Its original purpose was to express opposition against authoritarian regimes. The wall is on ground belonging to the Sovereign Military Order of Malta. Content changes constantly; photos date quickly.</p>
 <p class="prose">Initially painted by local artist David Cerny in 1988, the wall was named after John Lennon&#x27;s song &#x27;Give Peace a Chance&#x27;. Over time, it became a symbol of freedom and resistance during Czechoslovakia&#x27;s communist era. Today, the wall continues to evolve as artists from all over the world add their unique creations, making it a dynamic and ever-changing canvas. In the 1980s youth wrote protest lyrics here under communist censorship; ownership and repainting cycles continue today. Visiting the Lennon Wall allows travelers to experience the fusion of art, history, and culture in Prague. Symbol of free expression in Cold War Prague and a tourist stop near Kampa.</p></div>
 </section>
 <section class="place" id="prague_letna_metronome">
+<div class="place-lead">
 <h3>Letná Metronome</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Contemporary | Period: 2006</p>
-<figure class="place-fig"><img src="../images/prague_letna_metronome.jpg" alt="Letná Metronome"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/prague_letna_metronome.jpg" alt="Letná Metronome" width="1280" height="865" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/prague_letna_metronome_b.jpg" alt="Letná Metronome — view 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Sitting atop Letná Park, the Letná Metronome is a modern landmark that has become one of Prague&#x27;s most iconic structures since its construction in 2006. Designed by Czech architect Jan Kaplický, it stands as a testament to contemporary architecture and engineering. It is located in Letná Park, offering breathtaking vistas over the city center. Its distinctive design incorporates LED lights that illuminate at night, enhancing its visibility from afar. The building houses a restaurant and observation deck providing visitors with scenic perspectives. The oscillation effect creates a sense of motion even when standing still, adding to its dynamic appeal. It has been recognized internationally for its architectural innovation.</p>
 <p class="prose">Completed in 2006, the Letná Metronome was built on the site of the former Letenské Ledové Arény. It represents a fusion of art and technology, showcasing innovative design principles and materials. The structure features a unique oscillating mechanism inspired by the movement of metronomes, symbolizing rhythm and harmony. The Letná Metronome offers panoramic views of Prague and serves as a popular meeting point for locals and tourists alike.</p></div>
 </section>
 <section class="place" id="prague_letna_park_view">
+<div class="place-lead">
 <h3>Letná Park viewpoint</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Period: late 19th century</p>
-<figure class="place-fig"><img src="../images/prague_letna_park_view.JPG" alt="Letná Park viewpoint"/></figure>
+<figure class="place-fig place-fig--hi-res"><img src="../images/prague_letna_park_view.JPG" alt="Letná Park viewpoint" width="1280" height="848"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Perched high above the bustling streets of Prague, Letná Park offers a panoramic view of the city, including the iconic Charles Bridge and the majestic spires of Old Town Hall. On clear days, visitors can even catch glimpses of the distant mountains to the west. It is situated on a hill overlooking the Vltava River valley. Letná Park hosts various cultural events throughout the year, including film screenings and outdoor performances. Visitors can also enjoy leisurely walks along winding paths through the park’s lush greenery. The park features several sculptures and monuments commemorating historical figures and significant moments in Czech history.</p>
 <p class="prose">Originally developed as a military training ground during the late 19th century, Letná Park has since evolved into one of Prague&#x27;s most popular recreational areas. It became famous for hosting large-scale concerts and festivals, such as the annual Rockwave festival, attracting thousands of music lovers each year. The park is renowned for its breathtaking vistas and serves as a perfect spot for taking picturesque photos of the cityscape.</p></div>
 </section>
 <section class="place" id="prague_klementinum_mirror_chapel">
+<div class="place-lead">
 <h3>Mirror Chapel (Klementinum)</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Baroque | Period: 1694–1703</p>
-<figure class="place-fig"><img src="../images/prague_klementinum_mirror_chapel.jpg" alt="Mirror Chapel (Klementinum)"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/prague_klementinum_mirror_chapel.jpg" alt="Mirror Chapel (Klementinum)" width="1280" height="960" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/prague_klementinum_mirror_chapel_b.jpg" alt="Mirror Chapel (Klementinum) — view 2" width="330" height="440" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Mirror Chapel, part of the Klementinum complex, is a breathtakingly beautiful example of Baroque architecture and artistry. It was built during the late 17th century as a chapel within the former Jesuit college. It is located within the historical Klementinum building, which houses the National Library of Czech Republic. Its ceiling features elaborate frescoes painted by master artists of the time. The chapel&#x27;s mirrors reflect light, creating a sense of depth and space. A small organ situated near the altar enhances the spiritual ambiance during worship services.</p>
 <p class="prose">Constructed between 1694 and 1703 by Italian architect Giovanni Domenico Orsi, the Mirror Chapel originally served as a place for religious services and education. Its walls are adorned with intricate gold leaf decorations, mirrors, and paintings depicting saints and biblical scenes. Visitors come to admire its exquisite interior design, which combines baroque elements with reflective surfaces that create a dazzling effect.</p></div>
 </section>
 <section class="place" id="prague_municipal_house">
+<div class="place-lead">
 <h3>Municipal House</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Náměstí Republiky 5 | Style: Art Nouveau (Czech Secession) | Period: 1911</p>
-<figure class="place-fig"><img src="../images/prague_municipal_house.jpg" alt="Municipal House"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/prague_municipal_house.jpg" alt="Municipal House" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--row-sized"><img src="../images/prague_municipal_house_b.jpg" alt="Municipal House — view 2" width="330" height="529" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Completed in 1911, Municipal House is a grand Art Nouveau landmark located on Wenceslas Square in Prague. Designed by architect Josef Fanta and decorated with intricate mosaics, murals, and sculptures, it was originally intended as a cultural center for the city&#x27;s middle class. Art Nouveau concert and civic hall: façade mosaics, Mucha-decorated interiors in places, and the main home of the Prague Symphony Orchestra. It features a majestic hall with a domed ceiling and a central fountain. The building houses a café, restaurant, and concert hall. Its exterior displays elaborate ceramic tiles depicting scenes from Czech folklore. During World War II, it survived bombing raids due to its strategic location away from major targets. Today, it remains one of Prague’s most iconic symbols. Guided tours show representative rooms when concerts allow. The building combines café, exhibition spaces, and the Smetana Hall.</p>
 <p class="prose">Built during the Czech National Revival era, Municipal House served as a venue for concerts, exhibitions, and social gatherings. Its opulent interior boasts exquisite details, including chandeliers, marble floors, and stained glass windows, showcasing the vibrant creativity of early 20th-century design. Built 1905–1912 on the site of the former royal court; the Czechoslovak independence was declared here in 1918. Visitors come to experience its unique architectural style and enjoy the historical atmosphere of Prague&#x27;s cultural heart. Prime example of Czech Secession architecture and a working performance venue.</p></div>
 </section>
 <section class="place" id="prague_national_museum_prague">
+<div class="place-lead">
 <h3>National Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Václavské náměstí 68 | Style: Neo-Renaissance | Period: 1818</p>
-<figure class="place-fig"><img src="../images/prague_national_museum_prague.jpg" alt="National Museum"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/prague_national_museum_prague.jpg" alt="National Museum" width="1067" height="1600" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/prague_national_museum_prague_b.jpg" alt="National Museum — view 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The National Museum of the Czech Republic is one of Europe&#x27;s largest and most significant institutions dedicated to science, art, and culture. Established in 1818 as a royal museum, it has grown into a comprehensive collection showcasing Czech heritage across disciplines. Neoclassical museum building at the head of Wenceslas Square; collections span natural sciences, history, and arts. It contains more than 14 million items in its vast collections. The building itself is a notable example of neo-Renaissance architecture. Exhibits range from ancient fossils to modern art and historical artifacts. One of its highlights is the famous Dinosaur Hall with life-size models. Regular temporary exhibitions feature cutting-edge research and contemporary art. A new building and underground link connect across the tram underpass. The dome and staircase are favourites for interior photography.</p>
 <p class="prose">Founded in 1818 by Emperor Francis I, the National Museum was originally called the Royal Museum of Natural History and Arts. Over time, it expanded its collections to include anthropology, archaeology, geology, zoology, and fine arts. Today, it houses over 14 million artifacts, making it one of the country&#x27;s largest cultural repositories. Founded in 1818; the dominant historical building was completed in the 1890s and underwent major renovation in the 2010s. Visitors come here for its extensive exhibits covering natural sciences, art, history, and anthropology, providing deep insights into Czech culture and heritage. Flagship state museum and architectural anchor of the square.</p></div>
 </section>
 <section class="place" id="prague_national_technical_museum_prague">
+<div class="place-lead">
 <h3>National Technical Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Art Nouveau with modern elements | Period: 1901</p>
-<figure class="place-fig"><img src="../images/prague_national_technical_museum_prague.jpg" alt="National Technical Museum"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/prague_national_technical_museum_prague.jpg" alt="National Technical Museum" width="1068" height="1600" style="height: 287px; max-height: 287px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/prague_national_technical_museum_prague_b.jpg" alt="National Technical Museum — view 2" width="330" height="205" style="height: 287px; max-height: 287px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The National Technical Museum is a leading science and technology museum showcasing Czech innovations and engineering marvels. It boasts one of Europe&#x27;s largest collections of vintage cars and aircraft. Exhibits include interactive displays that allow visitors to experience firsthand how machines work. The museum regularly hosts temporary exhibitions on emerging technologies such as artificial intelligence and renewable energy. Located within the historic Letná Park, it offers panoramic views of Prague from its rooftop terrace. Its architecture style reflects Art Nouveau influences with modern touches.</p>
 <p class="prose">Established in 1901, the museum has been a hub for technological education and research since its inception. It houses over 400,000 exhibits spanning centuries of Czech technical achievements, including early steam engines, aeronautical models, and robotics demonstrations. Visitors can explore cutting-edge technologies alongside historical artifacts, gaining insight into Czech ingenuity and innovation.</p></div>
 </section>
 <section class="place" id="prague_national_theatre_prague">
+<div class="place-lead">
 <h3>National Theatre</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Neo-Renaissance | Period: 1883</p>
-<figure class="place-fig"><img src="../images/prague_national_theatre_prague.jpg" alt="National Theatre"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/prague_national_theatre_prague.jpg" alt="National Theatre" width="1280" height="851" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/prague_national_theatre_prague_b.jpg" alt="National Theatre — view 2" width="330" height="220" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The National Theatre of Prague is a grandiose architectural masterpiece showcasing Czech culture and art. Completed in 1883, it stands as one of Europe&#x27;s most significant opera houses. It was founded under the patronage of Emperor Franz Joseph I of Austria-Hungary. Its interior features intricate decorations and elaborate chandeliers inspired by Italian Renaissance palaces. The theater hosts over 300 performances annually, attracting audiences from around the globe. Notable works performed here include Mozart&#x27;s &#x27;Don Giovanni&#x27; and Verdi&#x27;s &#x27;La Traviata&#x27;. In 1992, the building was designated a UNESCO World Heritage Site.</p>
 <p class="prose">Built during the late 19th century, the National Theatre was designed by Josef Zítek to embody the cultural aspirations of Czech nationhood after decades of Habsburg rule. It opened its doors on May 4, 1883, with performances that celebrated Czech identity through music and drama. The building’s neo-Renaissance style reflects both historical influence and modern innovation, making it a symbol of Czech pride and artistic expression. Visiting the National Theatre allows visitors to experience world-class operas, ballets, and plays while immersing themselves in the rich cultural heritage of Bohemia.</p></div>
 </section>
-<section class="place" id="prague_pdfband_1_1aaef487">
-<h3>2017 Hatvan</h3>
+<section class="place" id="prague_nizwa_006">
+<div class="place-lead">
+<h3>Nizwa</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: See official visitor information.</p>
-<figure class="place-fig"><img src="../images/prague_pdfband_1_1aaef487.jpg" alt="2017 Hatvan"/></figure>
-</section>
-<section class="place" id="prague_pdfband_2_45de4182">
-<h3>Nizwa 006 (30816611472)</h3>
-
-<p class="place-meta">Address: See official visitor information.</p>
-<figure class="place-fig"><img src="../images/prague_pdfband_2_45de4182.jpg" alt="Nizwa 006 (30816611472)"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/prague_nizwa_006.jpg" alt="Nizwa" width="1200" height="1600" style="height: 260px; max-height: 260px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/prague_nizwa_006_b.jpg" alt="Nizwa — view 2" width="330" height="186" style="height: 260px; max-height: 260px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 </section>
 <section class="place" id="prague_naplavka_riverside">
+<div class="place-lead">
 <h3>Náplavka (Rašínovo nábřeží)</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Art Nouveau and functionalist architecture | Period: 1907–1916</p>
-<figure class="place-fig"><img src="../images/prague_naplavka_riverside.jpg" alt="Náplavka (Rašínovo nábřeží)"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/prague_naplavka_riverside.jpg" alt="Náplavka (Rašínovo nábřeží)" width="1200" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/prague_naplavka_riverside_b.jpg" alt="Náplavka (Rašínovo nábřeží) — view 2" width="330" height="440" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">It was built between 1907 and 1916 to protect the city against flooding while also becoming a popular recreational area. Built using reinforced concrete and stone, the structure spans over 4 kilometers along the river. The name &#x27;Náplavka&#x27; translates to &#x27;overflow&#x27; in English, reflecting its purpose as a flood defense mechanism. It includes several bridges connecting different parts of the city, making it easy to explore various districts. During World War II, Náplavka served as a strategic defensive position due to its elevated location and viewpoints. Today, it remains a favorite spot for locals and tourists alike, offering panoramic vistas and cultural events.</p>
 <p class="prose">Constructed during the early 20th century, Náplavka&#x27;s design incorporates both functional flood control measures and aesthetic elements. Designed by Czech architect Antonín Wiehl, it features elegant arches and walkways that blend seamlessly with the natural landscape of the riverbank. A must-visit for its stunning views of the Vltava River and Old Town Bridge Tower, as well as its historical significance as a protective barrier.</p></div>
 </section>
 <section class="place" id="prague_old_jewish_cemetery">
+<div class="place-lead">
 <h3>Old Jewish Cemetery</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Josefov, Old Jewish Cemetery | Style: Historic cemetery landscape | Period: 1439</p>
-<figure class="place-fig"><img src="../images/prague_old_jewish_cemetery.jpg" alt="Old Jewish Cemetery"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/prague_old_jewish_cemetery.jpg" alt="Old Jewish Cemetery" width="1280" height="439" style="height: 158px; max-height: 158px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/prague_old_jewish_cemetery_b.jpg" alt="Old Jewish Cemetery — view 2" width="330" height="220" style="height: 158px; max-height: 158px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Old Jewish Cemetery is Prague&#x27;s oldest and most famous Jewish burial ground, dating back to the late 15th century. It contains over 12,000 gravestones, many of which are centuries old. Layered gravestones crowded on a small plot—one of Europe’s oldest surviving Jewish burial grounds, now part of the Jewish Museum circuit. It is located near the Charles Bridge and Old Town Square, making it easily accessible by foot. Many notable figures are buried here, including Rabbi Loew, who may have inspired the legend of the Golem. The cemetery was designated a UNESCO World Heritage Site in 1992. Due to limited space, new burials ceased in the early 18th century. Burial layers extend up to nine stories high. Rabbi Loew (Maharal) is traditionally associated with burials in this ground. Access is usually with a combined ticket to nearby synagogues.</p>
 <p class="prose">Established around 1439, the cemetery served as a final resting place for generations of Jews living in Prague. Due to strict regulations on land use, burials were stacked layer upon layer, resulting in the unique &#x27;layered&#x27; appearance that makes it one of Europe’s most unusual cemeteries. Used from the early 15th century until 1787; because space was tight, earth was added and stones overlap in depth. Visiting the Old Jewish Cemetery provides insight into the history and culture of Prague&#x27;s Jewish community. A poignant record of the Prague Jewish community before modern urban clearance and Holocaust losses.</p></div>
 </section>
 <section class="place" id="prague_old_town_hall">
+<div class="place-lead">
 <h3>Old Town Hall</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Staroměstské náměstí 1 | Style: Gothic core with later additions | Period: late 14th century</p>
-<figure class="place-fig"><img src="../images/prague_old_town_hall.jpg" alt="Old Town Hall"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/prague_old_town_hall.jpg" alt="Old Town Hall" width="1200" height="1600" style="height: 288px; max-height: 288px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/prague_old_town_hall_b.jpg" alt="Old Town Hall — view 2" width="330" height="206" style="height: 288px; max-height: 288px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Old Town Hall is a majestic landmark dominating the historical center of Prague, standing as one of the city&#x27;s most iconic structures since its construction in the late 14th century. Gothic tower and administrative complex; the astronomical clock is on its southern face. The tower offers views over the red roofs of the Old Town. It houses two renowned astronomical clocks, each featuring unique celestial displays. The building underwent significant renovations in the early 20th century, preserving its historic integrity while incorporating modern elements. Today, it serves as a museum showcasing medieval artifacts and historical documents related to the city’s governance. Its tower offers panoramic views of the Old Town Square and surrounding areas. The hall originally housed the municipal government offices and courts. Parts of the building can be visited on guided routes including the underground. The chapel interior includes notable Gothic vaulting.</p>
 <p class="prose">Built during the reign of Charles IV around 1380, the Old Town Hall served various administrative and judicial purposes over the centuries. It was also home to astronomical clocks that became famous for their intricate mechanisms and celestial displays. The hall&#x27;s architecture reflects Gothic influences with later Renaissance additions, showcasing the evolution of architectural styles in Prague. Origins in the 14th century; the Gothic tower and chapel are the most prominent surviving medieval parts after wartime damage and rebuilds. Visitors come here to admire the stunning Gothic facade, explore the historical courtrooms, and marvel at the intricately decorated interior spaces. Seat of Old Town self-government for centuries and a landmark silhouette on the square.</p></div>
 </section>
 <section class="place" id="prague_old_town_square">
+<div class="place-lead">
 <h3>Old Town Square</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
-<p class="place-meta">Address: Staré Město, Prague 1 | Style: Gothic and Baroque façades | Period: early 14th century</p>
-<figure class="place-fig"><img src="../images/prague_old_town_square.jpg" alt="Old Town Square"/></figure>
+<p class="place-meta">Location: Staré Město, Prague 1 | Style: Gothic and Baroque façades | Period: early 14th century</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/prague_old_town_square.jpg" alt="Old Town Square" width="1280" height="1236" style="height: 288px; max-height: 288px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/prague_old_town_square_b.jpg" alt="Old Town Square — view 2" width="330" height="206" style="height: 288px; max-height: 288px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">At the heart of Prague&#x27;s Old Town lies its iconic square, a testament to centuries of architectural and cultural heritage. The cobblestone streets are lined with medieval buildings, each telling a story of past empires and royal courts. The main square of the Old Town: Týn Church, the Old Town Hall with the astronomical clock, cafés, and seasonal markets. The square is surrounded by Gothic, Renaissance, and Baroque buildings. It hosts the famous Prague Spring Festival every summer. The Astronomical Clock, installed in 1410, is one of Europe&#x27;s oldest functioning clocks. Adjacent to the square is the Týn Church, built between 1380 and 1420. During World War II, the square served as a gathering point for resistance movements. The Jan Hus monument (1915) anchors the centre of the square. Christmas and Easter markets draw large crowds here.</p>
 <p class="prose">Founded in the early 14th century by King Wenceslas II, the Old Town Square was originally designed as a marketplace for traders and craftsmen. Over time it became a center for political gatherings and festivals, hosting significant events such as coronations and religious processions. Today, it&#x27;s home to landmarks like the Týn Church and the Astronomical Clock, which attracts tourists worldwide. The square grew from a market place; public executions, coronation processions, and modern protests have all left their mark on its memory. Visit Old Town Square to experience Prague&#x27;s rich history and breathtaking architecture up close. Social and ceremonial heart of the historic centre and a starting point for many walking routes.</p></div>
 </section>
 <section class="place" id="prague_petrin_tower">
+<div class="place-lead">
 <h3>Petřín Lookout Tower</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
-<p class="place-meta">Address: Petřín Hill | Style: Late 19th-century iron tower | Period: 1891</p>
-<figure class="place-fig"><img src="../images/prague_petrin_tower.jpg" alt="Petřín Lookout Tower"/></figure>
+<p class="place-meta">Location: Petřín Hill | Style: Late 19th-century iron tower | Period: 1891</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/prague_petrin_tower.jpg" alt="Petřín Lookout Tower" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/prague_petrin_tower_b.jpg" alt="Petřín Lookout Tower — view 2" width="330" height="220" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Perched high above the bustling streets of Prague, Petřín Lookout Tower offers a panoramic view of the city’s landmarks and bridges. Built in 1891 as part of the Exposition of decorative arts, it stands as a testament to late 19th-century engineering and design. A steel lookout tower inspired by the Eiffel Tower, smaller but placed high on Petřín hill for sweeping views over Prague. The tower is 60 meters tall and constructed primarily from iron and stone. It features an observation deck with views extending up to 20 kilometers around the city. A small museum within the tower showcases historical artifacts related to the Exposition. At night, the tower is illuminated, making it a striking sight against the evening skyline. In 1945, during World War II, the tower served as a strategic military lookout. About 299 steps lead to the main viewing platform. The funicular from Újezd is part of the public transport network.</p>
 <p class="prose">Completed in 1891 for the Czech Exhibition of Decorative Arts, the tower was designed by architect Josef Zítek. Originally intended as a temporary structure, its popularity led to its permanent installation on Petřín Hill. It has since become one of Prague&#x27;s most iconic symbols and a popular vantage point for tourists and locals alike. Built for the 1891 Jubilee Exhibition; carried up the hill by funicular or footpaths. Visitors come here to experience the thrill of looking down upon Prague’s Old Town Square, Charles Bridge, and Vltava River from a bird’s-eye perspective. Favourite panorama point and a recognizable silhouette from the city below.</p></div>
 </section>
 <section class="place" id="prague_powder_gate">
+<div class="place-lead">
 <h3>Powder Gate</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Náměstí Republiky / Celetná | Style: Late Gothic tower | Period: 1612–1614</p>
-<figure class="place-fig"><img src="../images/prague_powder_gate.jpg" alt="Powder Gate"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/prague_powder_gate.jpg" alt="Powder Gate" width="1200" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--row-sized"><img src="../images/prague_powder_gate_b.jpg" alt="Powder Gate — view 2" width="330" height="541" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Powder Gate (Výstavušská brána), a majestic landmark of Prague&#x27;s Old Town, stands as one of the city&#x27;s most iconic structures. Originally built during the reign of Emperor Rudolf II, it served as a defensive barrier and entrance point for the royal castle. A Gothic gate-tower that was once one of the entrances to the Old Town; decorative stonework rises above pedestrian traffic. Built in 1612–1614, the gate is a fine example of late Gothic and Renaissance design. It features intricate carvings and sculptures depicting scenes from mythology and heraldry. Today, the Powder Gate serves as a popular tourist attraction and a gateway to the charming streets of Old Town. Located near Wenceslas Square and the Charles Bridge, it offers panoramic views of the city center. Restored several times over the centuries, the gate retains much of its original charm. You can climb the tower for a view along Celetná. It stands near the Municipal House and the modern shopping district.</p>
 <p class="prose">Constructed in the early 17th century under Emperor Rudolf II, the Powder Gate was designed to protect the royal palace and provide access to the Old Town Square. It derived its name from the powder storage facility located within its walls, which supplied ammunition to the city&#x27;s defenses. Built in the 15th century; used for gunpowder storage at one time, hence the name. Linked visually to the route toward the Old Town Square. Visitors should see the Powder Gate for its impressive Baroque architecture and historical significance as a symbol of Prague&#x27;s rich military heritage. Landmark boundary between Old and New Town and a backdrop for coronation processions of old.</p></div>
 </section>
 <section class="place" id="prague_astronomical_clock_orloj">
+<div class="place-lead">
 <h3>Prague Astronomical Clock</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Old Town Hall, Old Town Square | Style: Gothic clock integrated into the town hall | Period: 1410</p>
-<figure class="place-fig"><img src="../images/prague_astronomical_clock_orloj.jpg" alt="Prague Astronomical Clock"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/prague_astronomical_clock_orloj.jpg" alt="Prague Astronomical Clock" width="1280" height="963" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/prague_astronomical_clock_orloj_b.jpg" alt="Prague Astronomical Clock — view 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Prague Astronomical Clock is a legendary timepiece that has mesmerized visitors for centuries. Perched high above Old Town Square, it stands as one of the most iconic symbols of Prague&#x27;s rich cultural heritage. A medieval clock with an astronomical dial, apostles in the windows, and the famous skeleton figure (“Death”) ringing the bell. It features three main dials showing the time, the position of the sun and moon, and lunar phases. Each hour, a procession of mechanical figures performs a miniature pageant. Restored several times over the years, the clock remains operational to this day. Constructed primarily from wood, brass, and iron, it showcases intricate craftsmanship. Located at the center of Old Town Square, it attracts millions of tourists annually. Crowds gather on the hour to watch the apostles’ procession. The clock was damaged in 1945 and restored in the following years.</p>
 <p class="prose">First mentioned in 1410, the clock was commissioned by Charles IV and completed by clockmaker Mikuláš of Kadaň. It underwent significant restorations in 1490 and 1865, preserving its original design while modernizing its mechanisms. The clock&#x27;s fame grew when it began displaying astronomical phenomena such as the zodiac signs and celestial movements. The mechanism dates from 1410 (astronomer Jan Šindel and clockmaker Mikuláš of Kadaň); later layers added the calendar and figurine show. A must-see attraction, the Prague Astronomical Clock offers a fascinating glimpse into medieval engineering and artistry. One of the oldest operating astronomical clocks and a symbol of Prague craftsmanship.</p></div>
 </section>
 <section class="place" id="prague_troya_botanical_garden">
+<div class="place-lead">
 <h3>Prague Botanic Garden Troja</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Period: 1956</p>
-<figure class="place-fig"><img src="../images/prague_troya_botanical_garden.jpg" alt="Prague Botanic Garden Troja"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/prague_troya_botanical_garden.jpg" alt="Prague Botanic Garden Troja" width="1280" height="960" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/prague_troya_botanical_garden_b.jpg" alt="Prague Botanic Garden Troja — view 2" width="330" height="250" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Situated on the outskirts of Prague, the Prague Botanic Garden Troja is a serene oasis offering visitors a tranquil escape from urban hustle and bustle. Established in 1956, it spans over 70 hectares, showcasing diverse flora from around the world. It covers approximately 70 hectares of land. The garden features more than 8,000 species of plants from all continents. There are several educational trails and botanical exhibits designed for learning about different types of vegetation. In addition to flora, there are also animal habitats including ponds and aviaries. Regular cultural events and seasonal flower exhibitions take place throughout the year.</p>
 <p class="prose">The garden was founded in 1956 as part of the Czechoslovak Academy of Sciences, with its primary purpose being scientific research into botany and plant biology. Over time, it has evolved to become one of the most popular green spaces for both locals and tourists alike, attracting millions annually due to its unique collections and peaceful atmosphere. Visitors come here to experience the beauty of nature amidst lush greenery, exotic plants, and scenic walkways that wind through various themed sections.</p></div>
 </section>
 <section class="place" id="prague_castle">
+<div class="place-lead">
 <h3>Prague Castle</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Hradčany, Prague 1 | Style: Mixed Gothic, Renaissance, Baroque | Period: 9th century</p>
-<figure class="place-fig"><img src="../images/prague_castle.jpg" alt="Prague Castle"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/prague_castle.jpg" alt="Prague Castle" width="1280" height="991" style="height: 315px; max-height: 315px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/prague_castle_b.jpg" alt="Prague Castle — view 2" width="330" height="225" style="height: 315px; max-height: 315px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Perched high above the Vltava River, Prague Castle is the largest ancient castle complex in Europe and a testament to centuries of Czech history. Its soaring towers and majestic facades are a sight to behold. A fortified hilltop complex: palaces, churches, and gardens overlooking the city. St. Vitus Cathedral dominates the skyline from many viewpoints. It covers an area of approximately 70,000 square meters. The castle complex includes more than 2,000 rooms. St. The Royal Summer Apartments feature exquisite Baroque interiors. Golden Lane, a narrow street within the castle walls, houses quaint shops and cafes. The Guinness Book once listed it as the largest ancient castle complex in the world (by area). Golden Lane is a picturesque row of small houses inside the fortifications.</p>
 <p class="prose">Originally built in the 9th century as a fortress for Bohemian kings, Prague Castle has evolved over time into a grand palace and seat of power. It served as the royal residence until the early 20th century and remains one of the most significant symbols of Czech sovereignty. Notable features include St. Vitus Cathedral, the Golden Lane, and the Royal Summer Apartments. The site has been a seat of power since the 9th century; major phases include Gothic, Renaissance, and Baroque rebuilding under successive rulers. Historic residence of Bohemian kings and the modern Czech president; UNESCO-listed with related urban zones.</p></div>
 </section>
 <section class="place" id="prague_main_railway_station">
+<div class="place-lead">
 <h3>Prague Main Railway Station</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Wilsonova 300/8, Prague 1 | Style: Art Nouveau terminal with modern halls | Period: 1871</p>
-<figure class="place-fig"><img src="../images/prague_main_railway_station.jpg" alt="Prague Main Railway Station"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/prague_main_railway_station.jpg" alt="Prague Main Railway Station" width="900" height="1600" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/prague_main_railway_station_b.jpg" alt="Prague Main Railway Station — view 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">At the heart of Prague&#x27;s bustling transport network lies the grand Praha-Hlavní nádraží, commonly known as Praha Hlavní Nádraží or simply &#x27;Hlavní&#x27;. This majestic station, with its neo-Renaissance architecture and imposing facade, serves as a hub for both domestic and international rail travel. Art Nouveau terminal behind a historic façade; the glass dome of the new hall is visible from the street approach. Opened in 1871, making it one of the oldest functioning railway stations in Czech Republic. Its neo-Renaissance style is characterized by ornate facades and elaborate decorative elements. The station handles millions of passengers annually, serving as a vital link between Prague and Europe. It has undergone several renovations over the years but retains much of its original design integrity. Located near Wenceslas Square, it offers convenient access to central Prague. Original Fanta building interiors were restored for public access. Metro line C connects directly underground.</p>
 <p class="prose">Constructed in 1871, Praha Hlavní Nádraží was one of the first major railway stations in Bohemia. Designed by architect Josef Zítek, it quickly became a symbol of modern transportation infrastructure in the region. The station played a crucial role during the industrial revolution, facilitating trade and connecting Prague to key European cities such as Berlin, Vienna, and Dresden. Opened in its present form in the early 20th century; later modern additions handle high-speed and international traffic. Visitors should explore Praha Hlavní Nádraží for its historical significance and architectural beauty, which reflect the city&#x27;s rich cultural heritage. Main rail gateway to the city and an interior worth a quick look even if you are not travelling.</p></div>
 </section>
-<section class="place" id="prague_pdfband_0_2f02bea1">
+<section class="place" id="prague_praguecathedral03">
+<div class="place-lead">
 <h3>PragueCathedral03</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: See official visitor information.</p>
-<figure class="place-fig"><img src="../images/prague_pdfband_0_2f02bea1.jpg" alt="PragueCathedral03"/></figure>
+<figure class="place-fig place-fig--hi-res"><img src="../images/prague_praguecathedral03.jpg" alt="PragueCathedral03" width="1280" height="953"/></figure>
+</div>
 </section>
 <section class="place" id="prague_st_nicholas_mala_strana">
+<div class="place-lead">
 <h3>St. Nicholas Church, Malá Strana</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Malostranské náměstí, Malá Strana | Style: High Baroque | Period: late 14th century</p>
-<figure class="place-fig"><img src="../images/prague_st_nicholas_mala_strana.jpg" alt="St. Nicholas Church, Malá Strana"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/prague_st_nicholas_mala_strana.jpg" alt="St. Nicholas Church, Malá Strana" width="1600" height="1525" style="height: 440px; max-height: 440px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/prague_st_nicholas_mala_strana_b.jpg" alt="St. Nicholas Church, Malá Strana — view 2" width="330" height="495" style="height: 440px; max-height: 440px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Perched on a hilltop overlooking the Vltava River, St. Nikolay Church is one of Prague&#x27;s most iconic landmarks, towering majestically above the picturesque Malá Strana district. Baroque church with a pale green dome and rich interior stucco; organ concerts are frequent in the tourist season. The church was founded by King Wenceslaus II in 1349. It features a distinctive spire with intricate carvings and sculptures. Inside, visitors can see Baroque altarpieces and frescoes by renowned artists. Its location provides excellent photo opportunities due to its elevated position. The interior includes a crypt containing the remains of some notable figures. Do not confuse with the other St. The bell tower can sometimes be climbed on tours.</p>
 <p class="prose">Built in the late Gothic style during the early 14th century, St. Nikolay Church was originally constructed as a Franciscan monastery and church. Over time, it has undergone several renovations, including baroque modifications in the 18th century that added ornate interiors and decorative facades. The church&#x27;s bell tower offers panoramic views of the cityscape, making it a popular vantage point for tourists. Built in the 18th century on the site of a Gothic predecessor; associated with Jesuit patronage. Visitors come to admire its architectural beauty, historical significance, and breathtaking views of the river and surrounding areas. One of the finest Baroque church interiors in Prague and a dominant of Malá Strana square.</p></div>
 </section>
 <section class="place" id="prague_st_vitus_cathedral">
+<div class="place-lead">
 <h3>St. Vitus Cathedral</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Prague Castle, third courtyard | Style: French Gothic and Neo-Gothic | Period: began in 1344, ongoing construction until 1929</p>
-<figure class="place-fig"><img src="../images/prague_st_vitus_cathedral.jpg" alt="St. Vitus Cathedral"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/prague_st_vitus_cathedral.jpg" alt="St. Vitus Cathedral" width="1064" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/prague_st_vitus_cathedral_b.jpg" alt="St. Vitus Cathedral — view 2" width="330" height="493" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Sitting majestically atop Prague Castle, St. Vitus Cathedral is the spiritual heart of Bohemia and a testament to Gothic architecture. Its towering spires soar toward the sky, offering panoramic views of the city below. The metropolitan cathedral of Prague: soaring nave, stained glass including Alfons Mucha’s window, and the St. Wenceslas Chapel. Construction began in 1344 during the reign of King Charles IV. The cathedral remains unfinished to this day, symbolizing the impermanence of life. It houses the tombs of Czech kings and queens, including those of Charles IV and his wife Anna of Bohemia. Its distinctive twin towers are among the most recognizable landmarks in Prague. Regular services take place here, allowing visitors to experience contemporary worship alongside historical reverence. The Great South Tower can be climbed for a view over the city. The crown jewels were historically kept in the Crown Jewels chamber.</p>
 <p class="prose">Built between 1344 and 1929, St. Vitus Cathedral has undergone numerous renovations over the centuries. Originally commissioned by King Charles IV, it was intended as a royal mausoleum for his family. The cathedral&#x27;s construction halted several times due to wars and financial constraints but resumed each time with renewed dedication. Today, its interior features stunning stained glass windows and intricate carvings that reflect both medieval craftsmanship and modern restoration efforts. Construction began in 1344 under Charles IV; the cathedral was only finished in the 19th and early 20th centuries with Neo-Gothic completion work. Visitors come here to admire its breathtaking architecture and appreciate the rich historical significance of this sacred space. Coronation church of Bohemian kings and the burial place of several saints and rulers.</p></div>
 </section>
 <section class="place" id="prague_strahov_monastery">
+<div class="place-lead">
 <h3>Strahov Monastery</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Strahovské nádvoří 1, Hradčany | Style: Baroque and historic monastic complex | Period: late 17th century</p>
-<figure class="place-fig"><img src="../images/prague_strahov_monastery.jpg" alt="Strahov Monastery"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/prague_strahov_monastery.jpg" alt="Strahov Monastery" width="1067" height="1600" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/prague_strahov_monastery_b.jpg" alt="Strahov Monastery — view 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Sitting high on a hill above Prague&#x27;s Old Town, Strahov Monastery is one of the city&#x27;s most iconic landmarks. Its imposing Baroque architecture and stunning views make it a must-visit for anyone exploring the capital. Premonstratensian monastery with a famous library hall and church towers visible from Petřín and the castle approaches. The monastery was founded in 1622 by Archbishop František Bedřich z Lobkoviců. It was designed by Italian architect Giovanni Antonio De Rossi. The Royal Library contains over 200,000 volumes, including rare illuminated manuscripts. The library&#x27;s collection includes works dating back to the 9th century. The monastery has been continuously inhabited since its construction. The monastery brewery has a long tradition and a popular restaurant. Nearby Petřín paths connect to the castle gardens.</p>
 <p class="prose">Built in the late 17th century during the reign of Emperor Leopold I, Strahov Monastery was originally intended as a Benedictine monastery. Over time, it became home to the Royal Library, which houses some of Europe’s rarest books and manuscripts. The monastery also features two impressive churches: the Church of St. Charles Borromeo and the smaller Church of Our Lady of Health. Founded in the 12th century; library and theological collections grew through the early modern period. Visiting Strahov Monastery allows visitors to experience both religious heritage and cultural treasures within a single location. Important manuscript collections and Baroque library interiors (visiting rules vary).</p></div>
 </section>
 <section class="place" id="prague_stromovka_park">
+<div class="place-lead">
 <h3>Stromovka (Royal Game Reserve)</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Period: early 14th century</p>
-<figure class="place-fig"><img src="../images/prague_stromovka_park.jpg" alt="Stromovka (Royal Game Reserve)"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/prague_stromovka_park.jpg" alt="Stromovka (Royal Game Reserve)" width="1280" height="844" style="height: 304px; max-height: 304px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/prague_stromovka_park_b.jpg" alt="Stromovka (Royal Game Reserve) — view 2" width="330" height="247" style="height: 304px; max-height: 304px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Situated on the outskirts of Prague, Stromovka is a picturesque park renowned for its tranquil atmosphere and natural beauty. Established as a royal game reserve during the reign of Emperor Charles IV, it offers visitors a unique blend of historical significance and contemporary relaxation. The park covers over 600 hectares of lush forests and meadows. It features numerous walking trails, making it ideal for hiking and cycling. Stromovka hosts various cultural festivals throughout the year, showcasing traditional Czech music and performances. A small lake within the park provides opportunities for boating and fishing. The park also includes several historic buildings, including the former hunting lodge.</p>
 <p class="prose">Originally founded as a royal hunting ground by Emperor Charles IV in the early 14th century, Stromovka later evolved into a recreational area open to the public. Over time, it became a popular destination for walks, picnics, and cultural events, reflecting Prague&#x27;s rich heritage and love for nature. Visitors come to Stromovka to experience its serene surroundings, enjoy outdoor activities, and immerse themselves in the city&#x27;s vibrant culture.</p></div>
 </section>
 <section class="place" id="prague_troja_castle">
+<div class="place-lead">
 <h3>Troja Château</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: U trojského zámku 1, Prague 7 | Style: Czech High Baroque palace and garden | Period: mid-18th century</p>
-<figure class="place-fig"><img src="../images/prague_troja_castle.jpg" alt="Troja Château"/></figure>
+<figure class="place-fig place-fig--hi-res"><img src="../images/prague_troja_castle.jpg" alt="Troja Château" width="1600" height="900"/></figure>
+</div>
 <div class="place-desc"><p class="prose">High above Prague lies the Troja Château, a grand Baroque palace overlooking the Vltava River and Prague&#x27;s iconic skyline. Its elegant facade and sweeping views make it one of the city&#x27;s most picturesque spots. Baroque château with formal terraced gardens stepping down toward the Vltava; Prague Zoo is just uphill. It features lavish interiors with ornate decorations typical of the Baroque era. The grounds include formal gardens and parkland that extend across several hectares. Visitors can enjoy guided tours exploring the historical rooms and art collections. Its location on a hilltop provides unparalleled vistas of Prague Castle and the Old Town. Today, the château hosts cultural events, exhibitions, and concerts. The Grand Staircase aligns views with the river axis. Temporary art exhibitions often use the staterooms.</p>
 <p class="prose">Built in the mid-18th century by architect Jan Bláha for Count František Antonín z Moravského Třebomíru, the château was originally intended as a summer residence. It later became a military barracks during World War II before being restored to its former glory in the late 20th century. Built for the Sternberg family in the late 17th century; garden statuary and staircases follow Italianate models. The château offers stunning panoramic views of Prague and is a testament to the city&#x27;s rich architectural heritage. Popular half-day trip combining palace interiors, gardens, and zoo or botanic garden.</p></div>
 </section>
-<section class="place" id="prague_pdfband_9_08958a66">
+<section class="place" id="prague_vratislavsk_pal_c">
+<div class="place-lead">
 <h3>Vratislavský palác</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: See official visitor information.</p>
-<figure class="place-fig"><img src="../images/prague_pdfband_9_08958a66.jpg" alt="Vratislavský palác"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/prague_vratislavsk_pal_c.jpg" alt="Vratislavský palác" width="1280" height="960" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/prague_vratislavsk_pal_c_b.jpg" alt="Vratislavský palác — view 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 </section>
 <section class="place" id="prague_vysehrad_cemetery_slavin">
+<div class="place-lead">
 <h3>Vyšehrad Cemetery</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Neo-Gothic, Art Nouveau, Classical | Period: 1875</p>
-<figure class="place-fig"><img src="../images/prague_vysehrad_cemetery_slavin.jpg" alt="Vyšehrad Cemetery"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/prague_vysehrad_cemetery_slavin.jpg" alt="Vyšehrad Cemetery" width="1200" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/prague_vysehrad_cemetery_slavin_b.jpg" alt="Vyšehrad Cemetery — view 2" width="330" height="439" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Perched high above the Vltava River and Prague&#x27;s historic center lies Vyšehrad Cemetery, a peaceful oasis of serenity amidst the bustling cityscape. Established in the late 19th century, it has become one of the most notable burial grounds for Czech intellectuals, artists, writers, and politicians. It covers approximately 46 acres (18 hectares) of land on the hilltop location. The cemetery includes several mausoleums and chapels with intricate carvings and sculptures. Notable graves include those of prominent Czechoslovakian leaders and cultural icons. Its scenic views offer panoramic vistas of Prague’s landmarks such as Charles Bridge and Old Town Square. Visitors can explore various sections dedicated to different historical periods and artistic movements.</p>
 <p class="prose">Founded in 1875, Vyšehrad Cemetery was designed by architect Josef Zítek to embody the romantic ideals of the era. It occupies the former fortress site of Vyšehrad Castle, which once served as a strategic stronghold overlooking the river. The cemetery is known for its unique blend of neo-Gothic, Art Nouveau, and classical styles, showcasing some of the finest examples of funerary architecture in Europe. A visit here allows visitors to pay homage to many famous Czech figures who rest within its hallowed grounds, including authors Karel Čapek and Božena Němcová, composer Bedřich Smetana, and politician Tomáš Masaryk.</p></div>
 </section>
 <section class="place" id="prague_wallenstein_garden">
+<div class="place-lead">
 <h3>Wallenstein Garden</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Baroque | Period: 1620–1624</p>
-<figure class="place-fig"><img src="../images/prague_wallenstein_garden.jpg" alt="Wallenstein Garden"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/prague_wallenstein_garden.jpg" alt="Wallenstein Garden" width="1280" height="718" style="height: 259px; max-height: 259px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/prague_wallenstein_garden_b.jpg" alt="Wallenstein Garden — view 2" width="330" height="220" style="height: 259px; max-height: 259px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Wallenstein Garden is a serene oasis of tranquility nestled within the heart of Prague&#x27;s Old Town. Designed by Italian architect Giovanni Antonio de Rossi and built during the early 17th century under the patronage of Albrecht von Wallenstein, it combines Baroque elegance with meticulous attention to detail. Constructed between 1620 and 1624. Designed by Italian architect Giovanni Antonio de Rossi. Features elaborate fountains and sculptures. Symbolizes the opulence and influence of Albrecht von Wallenstein. Located adjacent to the Charles Bridge.</p>
 <p class="prose">Commissioned by Albrecht von Wallenstein, a powerful military leader and statesman, the garden was completed around 1620. It showcases intricate fountains, statues, and carefully manicured hedges arranged in geometric patterns typical of Baroque gardens. The garden served as both a leisure retreat for its patrons and a symbol of power and wealth. Visitors come here to appreciate the exquisite beauty of the garden’s architecture and landscaping, which remain largely unchanged since its creation.</p></div>
 </section>
 <section class="place" id="prague_wenceslas_square">
+<div class="place-lead">
 <h3>Wenceslas Square</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
-<p class="place-meta">Address: Nové Město, Prague 1 | Style: 19th- and 20th-century eclectic façades | Period: late 14th century</p>
-<figure class="place-fig"><img src="../images/prague_wenceslas_square.jpg" alt="Wenceslas Square"/></figure>
+<p class="place-meta">Location: Nové Město, Prague 1 | Style: 19th- and 20th-century eclectic façades | Period: late 14th century</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/prague_wenceslas_square.jpg" alt="Wenceslas Square" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/prague_wenceslas_square_b.jpg" alt="Wenceslas Square — view 2" width="330" height="247" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">At the heart of Prague&#x27;s vibrant downtown lies Wenceslas Square, a bustling hub that has been central to Czech history and culture for centuries. A long boulevard-like square with the National Museum at its upper end and the equestrian statue of St. Wenceslas below. The square is named after Saint Wenceslas, who ruled Bohemia in the 10th century. It hosts numerous festivals and concerts throughout the year, attracting locals and tourists alike. Nearby stands the National Memorial to the Victims of Communism, commemorating those who died under communist rule. In recent years, it has become known for its pedestrian-only zone, making it an ideal spot for leisurely strolls. Adjacent to the square are several notable restaurants and cafes offering traditional Czech cuisine. Despite the name, it reads more like a wide avenue than a compact square. The National Museum façade was restored in the 2010s.</p>
 <p class="prose">Originally built in the late 14th century as a marketplace, Wenceslas Square became a political and cultural focal point during the Habsburg Empire. It was renamed after Saint Wenceslas, patron saint of Bohemia, in the early 20th century. The square witnessed significant events such as demonstrations against Nazi occupation and anti-communist uprisings in the 1960s and 1980s. Named and reshaped in the 19th century; site of key moments in 20th-century Czech history including 1968 and 1989 gatherings. A must-visit for its historical significance and lively atmosphere, Wenceslas Square is also home to iconic landmarks like the National Museum and the imposing statue of King Wenceslas. Commercial artery and traditional place for public demonstrations and national holidays.</p></div>
 </section>
 <section class="place" id="prague_zizkov_tower">
+<div class="place-lead">
 <h3>Žižkov Television Tower</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Modernist | Period: 1992</p>
-<figure class="place-fig"><img src="../images/prague_zizkov_tower.jpg" alt="Žižkov Television Tower"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/prague_zizkov_tower.jpg" alt="Žižkov Television Tower" width="1200" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/prague_zizkov_tower_b.jpg" alt="Žižkov Television Tower — view 2" width="330" height="495" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Dominating the skyline of Prague since its completion in 1992, Žižkov Television Tower is a modernist marvel that stands as one of Europe&#x27;s tallest structures. Its distinctive design and towering presence make it an iconic symbol of the Czech capital. At 160 meters tall, it is the second-tallest structure in Prague after the Charles Bridge. The tower houses a revolving restaurant offering panoramic dining experiences. It serves as both a cultural landmark and a functional broadcast center. Its unusual design earned it recognition as a UNESCO World Heritage Site candidate. Opened during the transition period following the fall of communism, it symbolizes hope and progress.</p>
 <p class="prose">Constructed between 1985 and 1992, the Žižkov Television Tower was originally intended to serve as a broadcasting facility for Czech television. Designed by architect Jan Kaplický, it features a unique shape inspired by the structure of DNA molecules. The tower became famous not just for its functionality but also for its striking appearance, which has become synonymous with Prague’s urban landscape. Visitors come here to enjoy breathtaking views of Prague, including the Old Town Square, Charles Bridge, and the Vltava River, all framed against the backdrop of the tower itself.</p></div>
 </section>

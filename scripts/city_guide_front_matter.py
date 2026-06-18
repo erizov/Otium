@@ -132,16 +132,19 @@ def primer_section_html(
             parts.append('<p class="prose">{}</p>'.format(escape(text)))
     if not parts:
         return ""
+    from scripts.city_guide_toc import guide_toc_back_link_html
+
     return (
-        '<section class="guide-primer" id="{}" aria-label="{}">'
-        "<h2>{}</h2>\n"
-        "{}"
+        '<section class="guide-primer" id="{id}" aria-label="{title}">'
+        "<h2>{title}</h2>\n"
+        "{back}\n"
+        "{body}"
         "</section>"
     ).format(
-        "guide-primer",
-        escape(h["section"]),
-        escape(h["section"]),
-        "\n".join(parts),
+        id="guide-primer",
+        title=escape(h["section"]),
+        back=guide_toc_back_link_html(edition),
+        body="\n".join(parts),
     )
 
 
@@ -245,15 +248,18 @@ def trip_plans_section_html(
             articles.append(art)
     if not articles:
         return ""
+    from scripts.city_guide_toc import guide_toc_back_link_html
+
     return (
-        '<section class="guide-trip-plans" id="guide-trips" aria-label="{}">'
-        "<h2>{}</h2>\n"
-        "{}"
+        '<section class="guide-trip-plans" id="guide-trips" aria-label="{title}">'
+        "<h2>{title}</h2>\n"
+        "{back}\n"
+        "{body}"
         "</section>"
     ).format(
-        escape(trip_h["section"]),
-        escape(trip_h["section"]),
-        "\n".join(articles),
+        title=escape(trip_h["section"]),
+        back=guide_toc_back_link_html(edition),
+        body="\n".join(articles),
     )
 
 

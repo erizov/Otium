@@ -92,6 +92,7 @@ def _extra_stale_input_paths(project_root: Path) -> list[Path]:
         "scripts/city_guide_core.py",
         "scripts/city_guide_naming.py",
         "scripts/city_guide_narrative.py",
+        "scripts/city_guide_place_meta.py",
         "scripts/city_guide_front_matter.py",
         "scripts/city_guide_proximity_routes.py",
     )
@@ -248,6 +249,11 @@ def main() -> int:
             "and keep N distinct archives per file (default 3). Use 0 to skip."
         ),
     )
+    parser.add_argument(
+        "--force-all",
+        action="store_true",
+        help="Rebuild every city regardless of input mtimes.",
+    )
     args = parser.parse_args()
     root = (
         args.project_root.resolve()
@@ -265,11 +271,14 @@ def main() -> int:
 
     stale: list[str] = []
     for slug in slugs:
-        need, reason = needs_rebuild(
-            root,
-            slug,
-            include_shared=args.include_shared,
-        )
+        if args.force_all:
+            need, reason = True, "forced"
+        else:
+            need, reason = needs_rebuild(
+                root,
+                slug,
+                include_shared=args.include_shared,
+            )
         status = "STALE" if need else "ok"
         print("{}: {} ({})".format(slug, status, reason))
         if need:

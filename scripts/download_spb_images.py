@@ -18,6 +18,11 @@ if str(_PROJECT_ROOT) not in sys.path:
 from spb.data.places_registry import SPB_PLACES
 from spb.whitelist import default_whitelist_path, url_is_whitelisted
 
+from scripts.city_guide_core import (
+    additional_images_for_download,
+    should_skip_city_place_downloads,
+)
+
 MIN_IMAGE_BYTES = 500
 # Титул гида (не в spb_places.json); upload.wikimedia.org в whitelist.
 _HERALD_ASSETS: tuple[tuple[str, str], ...] = (
@@ -327,7 +332,11 @@ def main() -> int:
     n_incomplete = 0
     n_not_whitelisted = 0
     n_already_on_disk = 0
+    if should_skip_city_place_downloads("spb"):
+        print("Place image downloads skipped for spb (frozen city).")
     for place in SPB_PLACES:
+        if should_skip_city_place_downloads("spb"):
+            continue
         slug = place.get("slug", "?")
         url = place.get("image_source_url")
         rel = place.get("image_rel_path")
@@ -354,7 +363,9 @@ def main() -> int:
         else:
             todo.append((slug, url, dest))
 
-        for j, extra in enumerate(place.get("additional_images") or [], start=1):
+        for j, extra in enumerate(
+            additional_images_for_download(place), start=1,
+        ):
             eu = extra.get("image_source_url")
             er = extra.get("image_rel_path")
             if not eu or not er:

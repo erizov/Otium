@@ -13,7 +13,7 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
 .otium-logo { font-family: 'Cormorant Garamond', serif; font-size: 2.15rem;
   font-weight: 600; letter-spacing: 0.18em; margin-bottom: 0.85rem; }
 .otiump { margin: 0.42rem 0; line-height: 1.42; text-align: justify;
-  max-width: 38rem; font-size: 0.95rem; }
+  font-size: 0.95rem; }
 .guide-title { page-break-after: auto; margin-bottom: 0.55rem;
   page-break-inside: avoid; }
 .historical-reference { margin: 0.75rem 0 1.15rem;
@@ -63,22 +63,96 @@ ol.trip-stops a:hover { text-decoration: underline; }
 .heraldry-univ-caption { font-size: 0.52rem; line-height: 1.18;
   margin: 0.12rem 0 0; padding: 0 0.06rem; color: #252525;
   text-align: center; font-weight: 500; }
-.heraldry-motto { text-align: center; max-width: 18rem; margin: 0.18rem auto;
+.heraldry-motto { text-align: center; margin: 0.18rem auto;
   width: 100%; }
 .motto-line { font-family: 'Cormorant Garamond', serif; font-size: 1rem;
   margin: 0; color: #333; line-height: 1.35; }
 .guide-title h1.guide-title-main { font-family: 'Cormorant Garamond', serif;
   font-size: 2.35rem; margin-bottom: 0.5rem; font-weight: 600; }
 .lead { color: #444; font-size: 1.05rem; }
-.guide-toc { margin: 0.85rem 0 1.15rem; page-break-inside: avoid; }
-.guide-toc h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.28rem;
-  font-weight: 600; margin: 0.4rem 0 0.55rem; }
+
+.guide-toc { page-break-before: always; break-before: page;
+  page-break-after: always; break-after: page;
+  margin: 0; padding: 0.2rem 0 0.45rem; page-break-inside: auto; }
+.guide-toc h2 { font-family: 'Cormorant Garamond', serif;
+  font-size: 1.28rem; font-weight: 600; margin: 0.4rem 0 0.55rem; }
 .guide-toc ol { margin: 0.35rem 0 0.65rem 1.25rem; padding: 0;
   columns: 2; column-gap: 1.5rem; }
 .guide-toc li { margin: 0.18rem 0; line-height: 1.35;
   font-size: 0.88rem; break-inside: avoid; }
-.guide-toc a { color: #1a5276; text-decoration: none; }
+.guide-toc a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.guide-toc a:hover { color: #0d3d56; }
 .guide-toc li.toc-item--sub { font-size: 0.82rem; margin-left: 0.35rem; }
+.toc-back { font-size: 0.78rem; margin: 0 0 0.35rem; text-align: right; }
+.toc-back a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.toc-back a:hover { color: #0d3d56; }
+.place, .historical-reference, .guide-primer, .guide-trip-plans {
+  scroll-margin-top: 1.25rem; }
+.historical-reference h2, .guide-primer h2, .guide-trip-plans h2,
+.chapter-head h2, .place-lead h3 { position: relative; }
+.guide-toc + .place, .guide-toc + .chapter-head {
+  page-break-before: avoid; break-before: avoid-page; }
+.place-lead { page-break-inside: avoid; break-inside: avoid-page;
+  page-break-after: auto; }
+.place-lead > h3 { page-break-after: avoid; break-after: avoid-page; }
+.place-lead > .place-meta { page-break-after: avoid; break-after: avoid-page; }
+
+.place-fig { page-break-inside: avoid; break-inside: avoid-page;
+  margin: 0.5rem 0 1rem; }
+.place-fig img {
+  page-break-inside: avoid; break-inside: avoid-page;
+  max-height: 48vh; width: auto; max-width: 100%;
+  object-fit: contain; margin-left: auto; margin-right: auto; }
+.place-fig--hi-res img { max-height: 52vh; }
+.place-fig--lo-res img { max-height: 30vh; }
+.place-pdf-fig-row {
+  display: flex; flex-direction: row; flex-wrap: wrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.45rem 0.55rem; margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row .place-fig {
+  flex: 1 1 30%; margin: 0; min-width: 26%; max-width: 100%; }
+.place-pdf-fig-row .place-fig img {
+  width: auto; max-width: 100%; height: auto; max-height: 44vh;
+  object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--pair {
+  flex-wrap: nowrap; justify-content: space-between;
+  align-items: flex-end; gap: 0.5rem 0.65rem; }
+.place-pdf-fig-row--pair .place-fig {
+  flex: 1 1 47%; min-width: 0; max-width: 50%;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--pair .place-fig img {
+  max-height: 44vh; object-fit: contain; }
+.place-pdf-fig-row--pair .place-fig--hi-res img { max-height: 50vh; }
+.place-pdf-fig-row--pair .place-fig--lo-res img { max-height: 26vh; }
+.place-pdf-fig-rows-stack {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple {
+  display: flex; flex-direction: row; flex-wrap: nowrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.4rem 0.48rem; margin: 0;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--triple .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--triple .place-fig--hi-res img { max-height: 38vh; }
+.place-pdf-fig-row--triple .place-fig--lo-res img { max-height: 18vh; }
+.place-pdf-fig-row--many {
+  flex-wrap: nowrap; justify-content: center; align-items: flex-end;
+  gap: 0.35rem 0.42rem; }
+.place-pdf-fig-row--many .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--many .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+
+
 .place { margin-bottom: 2.2rem; page-break-inside: auto; }
 h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.22rem; margin: 1.2rem 0 0.35rem;
   font-weight: 600; }
@@ -90,7 +164,6 @@ h4 { font-family: 'Cormorant Garamond', serif; font-size: 0.95rem; text-transfor
   color: #555; font-size: 0.95rem; margin: 0 0 0.5rem; font-style: italic; }
 .place-meta { font-size: 0.92rem; color: #353535; margin: 0 0 0.75rem;
   line-height: 1.4; }
-.place-fig { margin: 0.5rem 0 1rem; }
 img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
 .prose, .place-desc p { margin: 0.45rem 0; line-height: 1.5;
   text-align: justify; }
@@ -110,11 +183,14 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <figure class="heraldry-fig heraldry-coat-book" title="Coat of arms of Vladivostok"><img src="../images/guide_coat_of_arms.svg" alt="Coat of arms of Vladivostok"/></figure>
 <figure class="heraldry-fig heraldry-coat-book" title="Flag of Vladivostok"><img src="../images/guide_flag.svg" alt="Flag of Vladivostok"/></figure>
 </div></div><h1 class="guide-title-main">Vladivostok</h1><p class="lead">Путеводитель. Объектов в этом выпуске: 25.</p></header>
+<nav class="guide-toc" id="guide-toc" aria-label="Содержание"><h2>Содержание</h2><ol><li class="toc-item"><a href="#guide-historical">Историческая справка</a></li><li class="toc-item"><a href="#guide-trips">Маршруты</a></li><li class="toc-item"><a href="#vladivostok_landmark">Vladivostok Landmark</a></li><li class="toc-item"><a href="#vladivostok_arseniev_museum">Арсеньевский государственный музей</a></li><li class="toc-item"><a href="#vladivostok_amursky_zaliv">Берег залива Амур</a></li><li class="toc-item"><a href="#vladivostok_borodinskaya">Бородинская батарея</a></li><li class="toc-item"><a href="#vladivostok_train_station">Владивостокский железнодорожный вокзал</a></li><li class="toc-item"><a href="#vladivostok_golden_bridge">Золотой мост</a></li><li class="toc-item"><a href="#vladivostok_federal_university">Кампус ДВФУ, остров Русский</a></li><li class="toc-item"><a href="#vladivostok_maritime_university">Морской государственный университет</a></li><li class="toc-item"><a href="#vladivostok_submarine_c56">Музей подводной лодки С-56</a></li><li class="toc-item"><a href="#vladivostok_korabelnaya_embankment">Набережная Корабельная</a></li><li class="toc-item"><a href="#vladivostok_pokrovsky_park">Покровский парк</a></li><li class="toc-item"><a href="#vladivostok_skala_park">Прибрежная набережная</a></li><li class="toc-item"><a href="#vladivostok_oceanarium">Приморский океанариум</a></li><li class="toc-item"><a href="#vladivostok_millionka">Район Миллонка</a></li><li class="toc-item"><a href="#vladivostok_russky_bridge">Русский мост</a></li><li class="toc-item"><a href="#vladivostok_svetlanskaya">Светланская улица</a></li><li class="toc-item"><a href="#vladivostok_orlinoe_gnezdo_view">Смотровая площадка Орлиное</a></li><li class="toc-item"><a href="#vladivostok_navy_cathedral">Собор Тихоокеанского флота</a></li><li class="toc-item"><a href="#vladivostok_sportivnaya_harbour">Спортивная гавань</a></li><li class="toc-item"><a href="#vladivostok_tokarevskiy">Токаревский маяк</a></li><li class="toc-item"><a href="#vladivostok_triumphal_arch">Триумфальная арка</a></li><li class="toc-item"><a href="#vladivostok_minny_gorodok">Форт Минный Городок</a></li><li class="toc-item"><a href="#vladivostok_eagle_nest">Холм Орлиное Гнездо</a></li><li class="toc-item"><a href="#vladivostok_central_square">Центральная площадь Владивостока</a></li><li class="toc-item"><a href="#vladivostok_nikolai_chapel">Часовня Святого Николая</a></li></ol></nav>
 <section class="historical-reference" id="guide-historical" aria-label="Историческая справка"><h2>Историческая справка</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 <p class="prose">Владивосток — крупнейший город Приморья и конечная станция Транссибирской магистрали на Тихом океане.</p>
 <p class="prose">Основан как военно-морская база Российской империи, развивался как порт и форпост на Дальнем Востоке. Мосты через бухту Золотой Рог, корабли Тихоокеанского флота и холмистый рельеф задают облик города.</p>
 <p class="prose">Советский период укрепил военно-морскую роль; закрытость города сменилась открытостью после 1991 года. Транссиб, торговля с Азией и мосты через бухту формируют облик форпоста России на Тихом океане.</p></section>
 <section class="guide-trip-plans" id="guide-trips" aria-label="Маршруты"><h2>Маршруты</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 <article class="trip-plan" id="trip-1d"><h3>Один день</h3>
 <p class="prose">Компактный маршрут по главным точкам путеводителя с минимальным возвратом назад пешком.</p>
 <ol class="trip-stops"><li><a href="#vladivostok_maritime_university">Морской государственный университет</a> (~75мин)</li>
@@ -140,203 +216,328 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <article class="trip-plan" id="trip-3d3"><h3>Три дня — день 3</h3>
 <p class="prose">День 3 — оставшиеся близкие объекты.</p>
 <ol class="trip-stops"><li><a href="#vladivostok_navy_cathedral">Собор Тихоокеанского флота</a> (~75мин)</li></ol></article></section>
-<nav class="guide-toc" aria-label="Содержание"><h2>Содержание</h2><ol><li class="toc-item"><a href="#guide-historical">Историческая справка</a></li><li class="toc-item"><a href="#guide-trips">Маршруты</a></li><li class="toc-item"><a href="#vladivostok_amursky_zaliv">Берег залива Амур</a></li><li class="toc-item"><a href="#vladivostok_arseniev_museum">Арсеньевский государственный музей</a></li><li class="toc-item"><a href="#vladivostok_borodinskaya">Бородинская батарея</a></li><li class="toc-item"><a href="#vladivostok_submarine_c56">Музей подводной лодки С-56</a></li><li class="toc-item"><a href="#vladivostok_central_square">Центральная площадь Владивостока</a></li><li class="toc-item"><a href="#vladivostok_nikolai_chapel">Часовня Святого Николая</a></li><li class="toc-item"><a href="#vladivostok_eagle_nest">Холм Орлиное Гнездо</a></li><li class="toc-item"><a href="#vladivostok_federal_university">Кампус ДВФУ, остров Русский</a></li><li class="toc-item"><a href="#vladivostok_korabelnaya_embankment">Набережная Корабельная</a></li><li class="toc-item"><a href="#vladivostok_maritime_university">Морской государственный университет</a></li><li class="toc-item"><a href="#vladivostok_millionka">Район Миллонка</a></li><li class="toc-item"><a href="#vladivostok_minny_gorodok">Форт Минный Городок</a></li><li class="toc-item"><a href="#vladivostok_orlinoe_gnezdo_view">Смотровая площадка Орлиное</a></li><li class="toc-item"><a href="#vladivostok_navy_cathedral">Собор Тихоокеанского флота</a></li><li class="toc-item"><a href="#vladivostok_pokrovsky_park">Покровский парк</a></li><li class="toc-item"><a href="#vladivostok_oceanarium">Приморский океанариум</a></li><li class="toc-item"><a href="#vladivostok_russky_bridge">Русский мост</a></li><li class="toc-item"><a href="#vladivostok_skala_park">Прибрежная набережная</a></li><li class="toc-item"><a href="#vladivostok_sportivnaya_harbour">Спортивная гавань</a></li><li class="toc-item"><a href="#vladivostok_svetlanskaya">Светланская улица</a></li><li class="toc-item"><a href="#vladivostok_tokarevskiy">Токаревский маяк</a></li><li class="toc-item"><a href="#vladivostok_triumphal_arch">Триумфальная арка</a></li><li class="toc-item"><a href="#vladivostok_train_station">Владивостокский железнодорожный вокзал</a></li><li class="toc-item"><a href="#vladivostok_golden_bridge">Золотой мост</a></li><li class="toc-item"><a href="#vladivostok_pdfband_5_64ff39b6">ДКЖД</a></li></ol></nav>
-<section class="place" id="vladivostok_amursky_zaliv">
-<h3>Берег залива Амур</h3>
+<section class="place" id="vladivostok_landmark">
+<div class="place-lead">
+<h3>Vladivostok Landmark</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/vladivostok_amursky_zaliv.jpg" alt="Берег залива Амур"/></figure>
-<div class="place-desc"><p class="prose">Берег Амурского залива во Владивостоке предлагает потрясающие виды на Тихий океан и является ярким центром как для местных жителей, так и для туристов. С его живописными пейзажами и оживленной набережной, эта территория идеально подходит для неспешных прогулок, обедов и культурных мероприятий. Залив также представляет собой значимую точку интереса благодаря своей исторической и стратегической важности в морской деятельности России. Амурский залив является частью Японского моря и расположен в Приморском крае. Владивосток был официально основан в 1860 году, а бухта служила стратегической военно-морской базой. Залив окружен несколькими ключевыми достопримечательностями, включая знаменитый Русский мост и холм Орлиное гнездо.</p>
-<p class="prose">Амурский залив был открыт русскими исследователями в середине 19 века и стал ключевым местом для основания Владивостока в 1860 году. Залив сыграл важную роль во время Русско-японской войны (1904-1905) и с тех пор является важной военно-морской базой, способствуя развитию города как крупного порта на Тихом океане. Культурно побережье залива Амур является неотъемлемой частью идентичности Владивостока, отражая морское наследие города и его роль как ворот в Тихий океан. Набережная — популярное место для встреч, где проходят различные культурные мероприятия и фестивали, демонстрирующие местные традиции и искусство. Хотя у залива нет заметного религиозного значения, он служит общественным пространством для отдыха и социального взаимодействия.</p></div>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/vladivostok_landmark.jpg" alt="Vladivostok Landmark" width="1280" height="720" style="height: 187px; max-height: 187px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--hi-res"><img src="../images/vladivostok_landmark_b.jpg" alt="Vladivostok Landmark — вид 2" width="6016" height="4000" style="height: 187px; max-height: 187px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 </section>
 <section class="place" id="vladivostok_arseniev_museum">
+<div class="place-lead">
 <h3>Арсеньевский государственный музей</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/vladivostok_arseniev_museum.jpg" alt="Арсеньевский государственный музей"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/vladivostok_arseniev_museum_b.jpg" alt="Арсеньевский государственный музей" width="330" height="220"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Арсеньевский государственный музей во Владивостоке является сокровищницей истории и культуры региона. Основанный в 1890 году, он демонстрирует разнообразную коллекцию артефактов, включая этнографические материалы, произведения искусства и исторические документы, отражающие богатое наследие Русского Дальнего Востока. Посетители могут ознакомиться с выставками, которые подчеркивают культуру коренных народов, естественную историю и развитие самого Владивостока. Основан в 1890 году Владимиром Арсеньевым. Коллекции домов, связанные с коренными народами Дальнего Востока России. Включает выставки по естественной истории региона.</p>
 <p class="prose">Арсеньевский государственный музей был основан в 1890 году местным историком и этнографом Владимиром Арсеньевым. Изначально созданный как музей краеведения, он со временем эволюционировал и охватывает широкий спектр экспонатов, документирующих историю и культуру Приморского края. Музей сыграл ключевую роль в сохранении культурного наследия Владивостока и его окрестностей. Культурно, Государственный музей Арсеньева является важным учреждением для сохранения и продвижения разнообразного наследия региона. Он играет значительную роль в просвещении общественности о коренных культурах Дальнего Востока и исторических событиях, которые сформировали Владивосток. Коллекции музея способствуют пониманию местных традиций и повседневной жизни, что делает его ключевым игроком в культурном ландшафте города.</p></div>
 </section>
+<section class="place" id="vladivostok_amursky_zaliv">
+<div class="place-lead">
+<h3>Берег залива Амур</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/vladivostok_amursky_zaliv.jpg" alt="Берег залива Амур" width="1280" height="849" style="height: 221px; max-height: 221px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/vladivostok_amursky_zaliv_b.jpg" alt="Берег залива Амур — вид 2" width="330" height="288" style="height: 221px; max-height: 221px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Берег Амурского залива во Владивостоке предлагает потрясающие виды на Тихий океан и является ярким центром как для местных жителей, так и для туристов. С его живописными пейзажами и оживленной набережной, эта территория идеально подходит для неспешных прогулок, обедов и культурных мероприятий. Залив также представляет собой значимую точку интереса благодаря своей исторической и стратегической важности в морской деятельности России. Амурский залив является частью Японского моря и расположен в Приморском крае. Владивосток был официально основан в 1860 году, а бухта служила стратегической военно-морской базой. Залив окружен несколькими ключевыми достопримечательностями, включая знаменитый Русский мост и холм Орлиное гнездо.</p>
+<p class="prose">Амурский залив был открыт русскими исследователями в середине 19 века и стал ключевым местом для основания Владивостока в 1860 году. Залив сыграл важную роль во время Русско-японской войны (1904-1905) и с тех пор является важной военно-морской базой, способствуя развитию города как крупного порта на Тихом океане. Культурно побережье залива Амур является неотъемлемой частью идентичности Владивостока, отражая морское наследие города и его роль как ворот в Тихий океан. Набережная — популярное место для встреч, где проходят различные культурные мероприятия и фестивали, демонстрирующие местные традиции и искусство. Хотя у залива нет заметного религиозного значения, он служит общественным пространством для отдыха и социального взаимодействия.</p></div>
+</section>
 <section class="place" id="vladivostok_borodinskaya">
+<div class="place-lead">
 <h3>Бородинская батарея</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/vladivostok_borodinskaya.jpg" alt="Бородинская батарея"/></figure>
+<figure class="place-fig place-fig--hi-res"><img src="../images/vladivostok_borodinskaya.jpg" alt="Бородинская батарея" width="1280" height="853"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Бородинская батарея — это историческое прибрежное укрепление, расположенное во Владивостоке, с потрясающими видами на окружающие воды и город. Построенная в конце 19 века, эта достопримечательность служит напоминанием о военном прошлом города и его стратегическом значении на Дальнем Востоке России. Посетители могут исследовать сохранившиеся сооружения и узнать о роли, которую этот объект сыграл в защите региона. Построен в период с 1888 по 1891 год. Названный в честь Бородинского сражения времен Наполеоновских войн. Часть системы береговой обороны Владивостока.</p>
 <p class="prose">Бородинская батарея была построена в период с 1888 по 1891 год в рамках серии береговых укреплений, направленных на защиту Владивостока от naval атак. Она была названа в честь Бородинского сражения, значительного события в Наполеоновских войнах. Батарея была оснащена тяжелой артиллерией и сыграла роль в Русско-японской войне (1904-1905), демонстрируя свою военную важность в ключевой момент российской истории. Бородинская батарея имеет культурное значение как символ военного наследия Владивостока и его стратегической роли в защите Тихоокеанского побережья России. Она отражает архитектурный стиль того периода и вносит вклад в исторический нарратив города. Хотя в первую очередь это военное сооружение, оно стало объектом интереса как для местных жителей, так и для туристов, интегрируясь в повседневную жизнь города как место для исследования и размышлений о прошлом.</p></div>
 </section>
-<section class="place" id="vladivostok_submarine_c56">
-<h3>Музей подводной лодки С-56</h3>
-
-
-<figure class="place-fig"><img src="../images/vladivostok_submarine_c56.jpg" alt="Музей подводной лодки С-56"/></figure>
-<div class="place-desc"><p class="prose">Музей подводной лодки С-56 во Владивостоке предлагает уникальный взгляд на морскую историю Советского флота. Посетители могут исследовать интерьер подводной лодки, которая сыграла значительную роль во время Второй мировой войны, и узнать о жизни подводников. Музей предоставляет увлекательный опыт для тех, кто интересуется военной историей и морской техникой. Подводная лодка C-56 была спущена на воду 15 декабря 1944 года. Это одна из немногих сохранившихся подводных лодок из состава Советского флота. Подводная лодка была преобразована в музей в 2002 году.</p>
-<p class="prose">Подводная лодка C-56 была спущена на воду в 1944 году и является одной из немногих сохранившихся подводных лодок со времен Советского Союза. Она служила в Тихоокеанском флоте и прославилась своими успешными миссиями во время Второй мировой войны. В 2002 году подводная лодка была преобразована в музей, что позволило общественности оценить её историческое значение. Музей подводной лодки C-56 служит напоминанием о морском наследии России и стратегическом значении Владивостока как портового города. Он отражает более широкую культурную нарративу военной мощи Советского Союза в XX веке и способствует формированию местной идентичности. Музей также играет роль в сохранении памяти о тех, кто служил в подводном флоте.</p></div>
-</section>
-<section class="place" id="vladivostok_central_square">
-<h3>Центральная площадь Владивостока</h3>
-
-
-<figure class="place-fig"><img src="../images/vladivostok_central_square.jpg" alt="Центральная площадь Владивостока"/></figure>
-<div class="place-desc"><p class="prose">Центральная площадь Владивостока является сердцем города, предлагая яркое пространство как для местных жителей, так и для туристов. Окруженная значительными достопримечательностями, она является популярным местом для культурных мероприятий, фестивалей и повседневной жизни. Открытая планировка площади и живописные виды делают ее идеальным местом для того, чтобы ощутить суть Владивостока. Центральная площадь была официально открыта в 1860 году. Он расположен рядом с важными достопримечательностями, такими как Владивостокская городская дума и Приморская сцена Мариинского театра.</p>
-<p class="prose">Центральная площадь была основана в конце 19 века, совпадая с основанием Владивостока в 1860 году. На протяжении многих лет она стала свидетелем множества ключевых событий, включая военные парады и публичные празднования, отражая рост и развитие города. В качестве центрального общественного пространства площадь играет важную роль в культурной жизни Владивостока, служа местом для различных художественных выступлений и общественных собраний. Она символизирует историческую эволюцию города и является центром гражданской гордости и местных традиций.</p></div>
-</section>
-<section class="place" id="vladivostok_nikolai_chapel">
-<h3>Часовня Святого Николая</h3>
-
-
-<figure class="place-fig"><img src="../images/vladivostok_nikolai_chapel.jpg" alt="Часовня Святого Николая"/></figure>
-<div class="place-desc"><p class="prose">Часовня Святого Николая во Владивостоке — это очаровательное и историческое место поклонения, которое предлагает посетителям возможность узнать о богатом культурном наследии города. Уютно расположенная на живописном холме, эта небольшая часовня посвящена Святому Николаю, покровителю моряков и путешественников, что отражает морскую историю региона. Её спокойная атмосфера и красивая архитектура делают её мирным убежищем как для местных жителей, так и для туристов. Часовня была построена в 2003 году на холме с видом на город. Он посвящен Святому Николаю, покровителю моряков. Место имеет исторические связи с более ранними часовнями, основанными в конце 19 века.</p>
-<p class="prose">Часовня Святого Николая была построена в 2003 году и предназначена для увековечения памяти моряков и рыбаков, которые бороздили воды вокруг Владивостока. Она была возведена на месте ранее существовавшей часовни, основанной в конце 19 века, которая была утрачена в бурные события 20 века. Текущая часовня служит символом стойкости и веры для местного сообщества. Культурно часовня Святого Николая занимает важное место в повседневной жизни жителей Владивостока, особенно тех, кто связан с морем. Это место, где отмечаются местные традиции и морское наследие, часто служа площадкой для общественных собраний и религиозных церемоний. Часовня также отражает более широкий исторический нарратив российского Дальнего Востока, воплощая духовную связь между людьми и их морской средой.</p></div>
-</section>
-<section class="place" id="vladivostok_eagle_nest">
-<h3>Холм Орлиное Гнездо</h3>
-
-
-<figure class="place-fig"><img src="../images/vladivostok_eagle_nest.jpg" alt="Холм Орлиное Гнездо"/></figure>
-<div class="place-desc"><p class="prose">Холм Орлиное Гнездо предлагает захватывающие панорамные виды на Владивосток и окружающее море, что делает его обязательной точкой для посещения как туристами, так и местными жителями. Доступный через короткий поход или на автомобиле, холм украшен пешеходными тропами и смотровыми площадками, которые предлагают потрясающие виды, особенно на закате. В этом районе также находится знаковая смотровая башня Орлиное Гнездо, что добавляет ему очарования и привлекательности. Холм Орлиное Гнездо имеет высоту примерно 202 метра. Смотровая башня была построена в 1960-х годах и является популярным местом для фотографии.</p>
-<p class="prose">Холм Орлиное гнездо является значимой достопримечательностью Владивостока с момента основания города в 1860 году. Изначально использовавшийся как военный наблюдательный пункт, он сыграл ключевую роль в защите города во время различных конфликтов, включая Русско-японскую войну. С течением времени он преобразился в популярную рекреационную зону, отражающую рост и развитие города. Культурно, Холм Орлиное Гнездо является неотъемлемой частью идентичности Владивостока, привлекая посетителей своей природной красотой и историческим контекстом. Он служит местом сбора для местных жителей и туристов, способствуя чувству общности и связи с наследием города. Выдающееся место холма в местных традициях и его роль как живописной площадки для празднований и мероприятий еще больше подчеркивают его культурное значение.</p></div>
-</section>
-<section class="place" id="vladivostok_federal_university">
-<h3>Кампус ДВФУ, остров Русский</h3>
-
-
-<figure class="place-fig"><img src="../images/vladivostok_federal_university.jpg" alt="Кампус ДВФУ, остров Русский"/></figure>
-<div class="place-desc"><p class="prose">Кампус Дальневосточного федерального университета на острове Русский — это современная образовательная достопримечательность, которая демонстрирует передовую архитектуру и потрясающие виды на окружающее море. Открытый в 2012 году, он служит основным кампусом для Дальневосточного федерального университета, обеспечивая живую атмосферу для студентов и посетителей. Кампус является не только академическим центром, но и культурной площадкой, принимающей различные мероприятия и выставки в течение всего года. Кампус был официально открыт в 2012 году. Он расположен на Русском острове, который соединен с Владивостоком Русским мостом. ДВФУ — один из крупнейших университетов на Дальнем Востоке России.</p>
-<p class="prose">Дальневосточный федеральный университет был основан в 1899 году, изначально как Восточный институт. Кампус на острове Русском был открыт в 2012 году, что совпало с саммитом АТЭС, проведенным во Владивостоке, целью которого было повышение международного профиля региона. Новый кампус был спроектирован для удовлетворения растущего числа студентов и для содействия инновациям и исследованиям в различных областях. Кампус Дальневосточного федерального университета (ДВФУ) играет ключевую роль в образовательной среде российского Дальнего Востока, способствуя культурному обмену и сотрудничеству с международными учреждениями. Он является символом развития и модернизации региона, особенно после его статуса федерального университета. Кампус также вносит вклад в местную экономику и общественную жизнь, проводя культурные мероприятия, которые вовлекают как студентов, так и жителей.</p></div>
-</section>
-<section class="place" id="vladivostok_korabelnaya_embankment">
-<h3>Набережная Корабельная</h3>
-
-
-<figure class="place-fig"><img src="../images/vladivostok_korabelnaya_embankment.jpg" alt="Набережная Корабельная"/></figure>
-<div class="place-desc"><p class="prose">Набережная Корabelnaya — это живописная набережная во Владивостоке, предлагающая потрясающие виды на Золотой Рог и окружающие холмы. Эта яркая зона идеально подходит для неспешных прогулок, здесь расположены кафе, магазины и художественные инсталляции, отражающие морское наследие города. Посетители могут насладиться оживленной атмосферой, любуясь живописной красотой Тихоокеанского побережья. Набережная была официально открыта в 1891 году. Он включает в себя несколько памятников и скульптур, которые отмечают морскую историю Владивостока.</p>
-<p class="prose">Набережная КорABELьная была разработана в конце 19 века в рамках расширения Владивостока как крупного портового города. Эта территория стала свидетелем значительных событий, включая военно-морские парады и празднования, которые подчеркивают её важность в российской морской истории. Набережная служит культурным центром, где местные жители и туристы собираются, чтобы наслаждаться различными событиями и фестивалями в течение года. Она отражает идентичность города как морского центра и играет важную роль в повседневной жизни, демонстрируя богатое наследие Владивостока и яркий дух сообщества.</p></div>
-</section>
-<section class="place" id="vladivostok_maritime_university">
-<h3>Морской государственный университет</h3>
-
-<p class="place-meta">Период: 1963</p>
-<figure class="place-fig"><img src="../images/vladivostok_maritime_university.jpg" alt="Морской государственный университет"/></figure>
-<div class="place-desc"><p class="prose">Основанный в 1963 году, Морской государственный университет является ведущим учебным заведением, посвященным морским наукам и инженерии. Расположенный на живописном побережье Владивостока, он стал одной из знаковых достопримечательностей города. Он предлагает программы бакалавриата и магистратуры в области морских технологий, берегового строительства и морского права. Кампус располагает современными лабораториями, оснащенными новейшим оборудованием для проведения морских исследований. Студенты имеют доступ к обширным объектам, включая марину и парусный клуб. Значимые выпускники включают выдающихся ученых и высокопоставленных военных офицеров. Его расположение на набережной обеспечивает потрясающие виды на залив Золотой Рог.</p>
-<p class="prose">Основанный в 1963 году в рамках усилий Советского Союза по развитию морской экспертизы, университет изначально сосредоточился на подготовке моряков для Тихоокеанского флота. Со временем его учебный план расширился, включая морскую биологию, океанографию и гражданское строительство. Сегодня он остается центром исследований и образования в области навигации, судостроения и экологических наук. Университет играет ключевую роль в развитии талантов для военно-морской и морской промышленности России, а также в значительной степени способствует научным открытиям в регионе Дальнего Востока.</p></div>
-</section>
-<section class="place" id="vladivostok_millionka">
-<h3>Район Миллонка</h3>
-
-
-<figure class="place-fig"><img src="../images/vladivostok_millionka.jpg" alt="Район Миллонка"/></figure>
-<div class="place-desc"><p class="prose">Район Миллионка во Владивостоке — это яркая местность, известная своей богатой историей и эклектичной архитектурой. Когда-то это был оживленный центр для купцов и торговцев, а теперь он предлагает посетителям возможность заглянуть в прошлое города через узкие улицы и исторические здания. В этом районе также проживает разнообразное сообщество, отражающее мультикультурную ткань Владивостока. Миллионка была основана в конце 1800-х годов как коммерческий район. Этот район известен своим разнообразием архитектурных стилей и многокультурным сообществом.</p>
-<p class="prose">Основанная в конце 19 века, Миллонка стала ключевым коммерческим районом во время Российской Империи, служа центром торговли и иммиграции. Название «Миллонка» происходит от русского слова «миллион», отражая богатство и активность, которые характеризовали эту местность. На протяжении лет здесь происходили значительные события, включая приток различных этнических групп и развитие Владивостока как стратегического портового города. Культурно, Миллионка примечательна своим архитектурным разнообразием и смешением влияний различных иммигрантских сообществ, включая китайское, корейское и русское. Этот плавильный котел способствовал созданию уникальной культурной атмосферы, где местные рынки и закусочные предлагают вкус различных традиций. Хотя значительных религиозных достопримечательностей здесь нет, повседневная жизнь района пронизана обычаями и практиками его разнообразных жителей.</p></div>
-</section>
-<section class="place" id="vladivostok_minny_gorodok">
-<h3>Форт Минный Городок</h3>
-
-
-<figure class="place-fig"><img src="../images/vladivostok_minny_gorodok.jpg" alt="Форт Минный Городок"/></figure>
-<div class="place-desc"><p class="prose">Форт Минный Городок, расположенный в живописном городе Владивосток, является исторической военной установкой, которая предлагает посетителям возможность заглянуть в стратегическое прошлое региона. Основанный в конце 19 века, этот укрепленный объект сыграл ключевую роль в защите Тихоокеанского побережья Российской империи. Сегодня он является свидетельством богатого военного наследия города и предлагает потрясающие виды на окружающий ландшафт. Построен в период с 1886 по 1891 год.</p>
-<p class="prose">Форт Минный Городок был построен в период с 1886 по 1891 год в рамках системы береговой обороны Владивостока. Он был предназначен для защиты порта от потенциальных naval атак и был оснащен артиллерией, способной прикрывать подходы к городу. Форт использовался в различных конфликтах, включая Вторую мировую войну, прежде чем быть выведенным из эксплуатации в конце 20 века. Расположение и дизайн крепости отражают военные стратегии Российской империи в период расширения территориальных интересов на Тихом океане. Хотя Минный Городок в первую очередь является военным объектом, он также стал культурной достопримечательностью, символизирующей историческую роль Владивостока как ворот на Восток. Его сохранение позволяет исследовать наследие города и служит напоминанием о сложной истории региона.</p></div>
-</section>
-<section class="place" id="vladivostok_orlinoe_gnezdo_view">
-<h3>Смотровая площадка Орлиное</h3>
-
-
-<figure class="place-fig"><img src="../images/vladivostok_orlinoe_gnezdo_view.jpg" alt="Смотровая площадка Орлиное"/></figure>
-<div class="place-desc"><p class="prose">Смотровая площадка Орлиное Гнездо предлагает захватывающие панорамные виды на Владивосток и окружающий пейзаж, что делает её обязательным местом для посещения как туристами, так и местными жителями. Расположенная на склоне холма, эта смотровая площадка открывает потрясающие виды на Золотой Рог, знаковый Русский мост и яркий город внизу. Это идеальное место для фотографии, отдыха и наслаждения природной красотой региона. Смотровая площадка расположена на склоне холма с видом на залив Золотой Рог. Он предлагает виды на значимые достопримечательности, включая Русский мост и городской пейзаж.</p>
-<p class="prose">Наблюдательная площадка Орлиное Гнездо, что в переводе означает «Орлиное Гнездо», стала яркой особенностью пейзажа Владивостока с момента своего открытия. Это место стало популярным местом встречи для жителей и гостей города, отражая рост и развитие города на протяжении многих лет. Культурно смотровая площадка служит символом связи Владивостока с природой и его прибрежным наследием. Это популярное место как для местных жителей, так и для туристов, часто используемое для празднований, встреч и непринужденных выездов. Вид с площадки также подчеркивает уникальное географическое положение города на слиянии земли и моря, укрепляя его идентичность как важного портового города.</p></div>
-</section>
-<section class="place" id="vladivostok_navy_cathedral">
-<h3>Собор Тихоокеанского флота</h3>
-
-
-<figure class="place-fig"><img src="../images/vladivostok_navy_cathedral.jpg" alt="Собор Тихоокеанского флота"/></figure>
-<div class="place-desc"><p class="prose">Собор Тихоокеанского флота, также известный как Собор Святого Николая, является ярким архитектурным памятником, расположенным во Владивостоке. Этот православный собор, посвященный покровителю моряков, представляет собой потрясающее сочетание византийского и русского архитектурных стилей. Посетители могут восхищаться его впечатляющими куполами и сложными интерьерами, размышляя о его историческом и культурном значении в регионе. Освященный в 1903 году, собор посвящен Святому Николаю, покровителю моряков. Собор сочетает в себе византийский и русский архитектурные стили.</p>
-<p class="prose">Собор Тихоокеанского флота был освящен в 1903 году и служил духовным центром Тихоокеанского флота Российского флота. Он был построен в память о моряках, которые погибли во время Русско-японской войны. Собор прошел через различные реставрации, особенно после повреждений, полученных в советскую эпоху. Как место поклонения, Собор Тихоокеанского флота имеет глубокое религиозное значение для местной православной общины, служа местом для различных обрядов и церемоний. Культурно он является символом морского наследия Владивостока и исторических связей города с Российским флотом. Собор является заметной частью повседневной жизни местных жителей и стал популярным местом как для жителей, так и для туристов, отражая богатые традиции региона.</p></div>
-</section>
-<section class="place" id="vladivostok_pokrovsky_park">
-<h3>Покровский парк</h3>
-
-
-<figure class="place-fig"><img src="../images/vladivostok_pokrovsky_park.jpg" alt="Покровский парк"/></figure>
-<div class="place-desc"><p class="prose">Покровский парк — это спокойный оазис в бурлящем городе Владивосток, предлагающий зеленые насаждения, прогулочные дорожки и живописные виды на окружающий ландшафт. Этот парк является популярным местом как для местных жителей, так и для туристов, предоставляя мирное убежище для отдыха и досуга. С его ухоженными садами и рекреационными удобствами, Покровский парк — идеальное место для наслаждения природой в самом сердце города. Покровский парк был основан в начале 20 века. Парк предлагает прогулочные дорожки, сады и рекреационные объекты.</p>
-<p class="prose">Покровский парк был основан в начале 20 века, его происхождение связано с развитием Владивостока как значимого портового города. Парк претерпел различные реконструкции на протяжении лет, адаптируясь к меняющимся потребностям сообщества, сохраняя при этом свою природную красоту. Культурно Покровский парк служит важным пространством для общественных собраний, уличных мероприятий и рекреационных активностей, отражая повседневную жизнь жителей Владивостока. Парк часто используется для культурных фестивалей и празднований, демонстрируя местные традиции и способствуя чувству общности среди его посетителей.</p></div>
-</section>
-<section class="place" id="vladivostok_oceanarium">
-<h3>Приморский океанариум</h3>
-
-
-<figure class="place-fig"><img src="../images/vladivostok_oceanarium.jpg" alt="Приморский океанариум"/></figure>
-<div class="place-desc"><p class="prose">Приморский океанариум во Владивостоке — это потрясающий центр морской науки, который демонстрирует богатое биоразнообразие Тихого океана. Посетители могут исследовать различные экспозиции, посвященные морской жизни, включая уникальные виды, обитающие в этом регионе. Учреждение также акцентирует внимание на охране окружающей среды и образовании, что делает его обязательным для посещения как для семей, так и для любителей морской флоры и фауны. Открытый в 2012 году, Приморский океанариум является одним из крупнейших океанариумов в России. Он включает более 100 видов морских обитателей, включая рыбы, млекопитающие и беспозвоночные, родом из Тихого океана.</p>
-<p class="prose">Приморский океанариум был открыт в 2012 году в рамках более широкой инициативы по продвижению морских исследований и образования в регионе. Он был построен для повышения общественной осведомленности о морских экосистемах и их охране, отражая растущий интерес к экологическим вопросам в России. Культурно океанариум играет ключевую роль в образовании общественности о морской среде и содействии связи между сообществом и океаном. Он служит центром для морских исследований и усилий по охране окружающей среды, подчеркивая важность сохранения уникального морского наследия Дальнего Востока России.</p></div>
-</section>
-<section class="place" id="vladivostok_russky_bridge">
-<h3>Русский мост</h3>
-
-
-<figure class="place-fig"><img src="../images/vladivostok_russky_bridge.jpg" alt="Русский мост"/></figure>
-<div class="place-desc"><p class="prose">Русский мост — это знаковый вантовый мост во Владивостоке, соединяющий материковую часть с островом Русский. Открытый в 2012 году, он является одним из самых длинных вантовых мостов в мире, предлагая потрясающие виды на город и окружающие воды. Мост не только инженерное чудо, но и символ модернизации и развития Владивостока. Открытый в 2012 году, Русский мост протянулся на 3100 метров. Он был построен для облегчения доступа к острову Русский для саммита АТЭС. Главный пролет моста составляет 1,104 метра, что делает его одним из самых длинных в мире.</p>
-<p class="prose">Строительство Русского моста началось в 2008 году и было завершено в 2012 году, что совпало с саммитом Азиатско-Тихоокеанского экономического сотрудничества (АТЭС), который проходил во Владивостоке. Мост был спроектирован для улучшения доступности к Русскому острову, который имеет историческое значение как место для военных и образовательных учреждений. Русский мост играет важную роль в улучшении связности Владивостока, отражая стратегическое значение города как ворот в Тихий океан. Он стал культурной достопримечательностью, часто изображаемой в местном искусстве и фотографии, и является популярным местом как для жителей, так и для туристов. Мост также символизирует стремления города к росту и его роль в международных отношениях.</p></div>
-</section>
-<section class="place" id="vladivostok_skala_park">
-<h3>Прибрежная набережная</h3>
-
-
-<figure class="place-fig"><img src="../images/vladivostok_skala_park.jpg" alt="Прибрежная набережная"/></figure>
-<div class="place-desc"><p class="prose">Набережная в Владивостоке — это живописная прогулочная зона, которая предлагает потрясающие виды на Японское море и окружающий ландшафт. Эта яркая местность идеально подходит для неспешных прогулок, обедов в местных кафе и наслаждения различными культурными событиями в течение года. Сочетая природную красоту и городское очарование, набережная является обязательным местом для посещения как для местных жителей, так и для туристов. Набережная у моря предлагает панорамные виды на залив Золотой Рог. Это популярное место для активного отдыха и мероприятий в течение всего года.</p>
-<p class="prose">Набережная у моря имеет свои корни в развитии Владивостока как крупного портового города в конце 19 века. Основанная в период расширения Российской империи на Дальний Восток, набережная со временем эволюционировала, отражая рост города и его преобразование в культурный центр. Культурно Приморская набережная служит центром общественной жизни во Владивостоке, принимая фестивали, художественные выставки и выступления, которые отмечают наследие региона. Она олицетворяет морскую идентичность города и является местом встречи для жителей и гостей, способствуя чувству принадлежности и культурному обмену.</p></div>
-</section>
-<section class="place" id="vladivostok_sportivnaya_harbour">
-<h3>Спортивная гавань</h3>
-
-
-<figure class="place-fig"><img src="../images/vladivostok_sportivnaya_harbour.jpg" alt="Спортивная гавань"/></figure>
-<div class="place-desc"><p class="prose">Спортивная гавань — это живописная прибрежная зона во Владивостоке, известная своими потрясающими видами на Японское море и окружающие пейзажи. Это яркое место популярно как среди местных жителей, так и среди туристов, предлагая разнообразные возможности для отдыха, варианты питания и культурные мероприятия. Гавань служит воротами к различным морским приключениям, что делает её обязательным местом для посещения в городе. Спортивная гавань расположена на восточном побережье Владивостока. Гавань предлагает разнообразные развлекательные объекты, включая пешеходные дорожки и кафе.</p>
-<p class="prose">Спортивная гавань имеет свои корни в начале 20 века, когда Владивосток стал значительным портовым городом. Гавань претерпела различные изменения на протяжении десятилетий, превратившись в рекреационный центр, который отражает морское наследие города. Культурно Спортивная гавань играет жизненно важную роль в повседневной жизни жителей Владивостока, служа местом сбора для общественных мероприятий и праздников. Её живописная красота и яркая атмосфера способствуют формированию идентичности города, делая её центром притяжения как для местных жителей, так и для туристов. Гавань также ассоциируется с различными морскими традициями и активностями, демонстрируя связь региона с морем.</p></div>
-</section>
-<section class="place" id="vladivostok_svetlanskaya">
-<h3>Светланская улица</h3>
-
-
-<figure class="place-fig"><img src="../images/vladivostok_svetlanskaya.jpg" alt="Светланская улица"/></figure>
-<div class="place-desc"><p class="prose">Светланская улица — это оживленная магистраль в сердце Владивостока, известная своей живой атмосферой и исторической архитектурой. Улица, уставленная кафе, магазинами и культурными заведениями, служит центральным узлом как для местных жителей, так и для туристов. Это идеальное место, чтобы ощутить уникальное сочетание русских и азиатских влияний в городе. Улица Светланская была основана в 19 веке в рамках градостроительного развития Владивостока. Улица представляет собой смесь архитектурных стилей, отражающих историческую эволюцию города.</p>
-<p class="prose">Улица Светланская имеет свои корни в конце 19 века, совпадая с основанием Владивостока в 1860 году. По мере развития города как значительного порта и военного поста улица стала центром торговли и общественной жизни, став свидетелем различных ключевых событий на протяжении своей истории. Культурно Светланская улица играет ключевую роль в повседневной жизни Владивостока, отражая разнообразное наследие города. Здесь расположены несколько важных культурных учреждений, и она служит местом проведения местных мероприятий и фестивалей, демонстрируя традиции и художественные выражения региона.</p></div>
-</section>
-<section class="place" id="vladivostok_tokarevskiy">
-<h3>Токаревский маяк</h3>
-
-
-<figure class="place-fig"><img src="../images/vladivostok_tokarevskiy.jpg" alt="Токаревский маяк"/></figure>
-<div class="place-desc"><p class="prose">Токаревский маяк — это впечатляющая достопримечательность, расположенная на восточном краю острова Русский во Владивостоке. Построенный в 1910 году, этот знаковый объект служит маяком для судов, проходящих по водам Японского моря. Посетители могут насладиться потрясающими видами на побережье и окружающий океан, что делает его популярным местом для фотографий и неспешных прогулок. Маяк был построен в 1910 году. Он расположен на восточном краю острова Русский.</p>
-<p class="prose">Токаревский маяк был построен в 1910 году для навигации морского транспорта в водах Владивостока. На протяжении многих лет он подвергался нескольким реконструкциям для поддержания своей функциональности и структурной целостности. Маяк является свидетельством морского наследия региона и стал неугасимым символом Владивостока. Культурно, Токаревский маяк представляет собой морскую историю Владивостока и является популярным местом как для местных жителей, так и для туристов. Он часто изображается в искусстве и фотографии, воплощая дух города и его связь с морем. Маяк является частью повседневной жизни жителей, которые часто посещают эту местность для отдыха и расслабления.</p></div>
-</section>
-<section class="place" id="vladivostok_triumphal_arch">
-<h3>Триумфальная арка</h3>
-
-
-<figure class="place-fig"><img src="../images/vladivostok_triumphal_arch.jpg" alt="Триумфальная арка"/></figure>
-<div class="place-desc"><p class="prose">Триумфальная арка — это свободно стоящее монументальное сооружение в форме арки с одним или несколькими арочными проходами, часто предназначенное для пересечения дороги и обычно стоящее отдельно, не соединенное с другими зданиями. В своей самой простой форме триумфальная арка состоит из двух массивных пилонов, соединенных аркой, которая обычно увенчана плоским антаблементом или аттиком, на котором может быть установлена статуя или который несет памятные надписи. Основная структура часто украшена резьбой, скульптурными рельефами и посвящениями. Проверьте часы работы и стоимость билетов на официальных сайтах перед поездкой. Толпы достигают пика в выходные и праздничные дни.</p></div>
-</section>
 <section class="place" id="vladivostok_train_station">
+<div class="place-lead">
 <h3>Владивостокский железнодорожный вокзал</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/vladivostok_train_station.jpg" alt="Владивостокский железнодорожный вокзал"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/vladivostok_train_station.jpg" alt="Владивостокский железнодорожный вокзал" width="1200" height="1600" style="height: 206px; max-height: 206px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/vladivostok_train_station_b.jpg" alt="Владивостокский железнодорожный вокзал — вид 2" width="330" height="206" style="height: 206px; max-height: 206px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Владивостокский железнодорожный вокзал является важным узлом для путешественников на Дальнем Востоке России, соединяя город с различными направлениями по региону и за его пределами. С его впечатляющей архитектурой и историческим значением, вокзал не только транспортный центр, но и достопримечательность, отражающая богатое морское наследие города. Посетители могут исследовать его величественный фасад и насладиться оживленной атмосферой, которая характеризует эту важную транзитную точку. Открытый в 1912 году как восточный терминал Транссибирской магистрали. Архитектурный стиль сочетает в себе русские и азиатские влияния.</p>
 <p class="prose">Владивостокский вокзал был открыт в 1912 году как восточный терминал Транссибирской магистрали. Его создание стало значительным шагом в развитии связности региона, способствуя торговле и путешествиям между Россией и Тихим океаном. Станция стала свидетелем множества ключевых событий на протяжении своей истории, включая мобилизации во время Второй мировой войны и расширение Владивостока как крупного портового города. Станция имеет культурное значение как символ роли Владивостока в качестве ворот в Тихий океан. Она является местом повседневной жизни как для местных жителей, так и для путешественников, отражая разнообразное наследие и традиции города. Архитектурный стиль станции демонстрирует элементы русских и азиатских влияний, воплощая уникальное положение города на пересечении культур.</p></div>
 </section>
 <section class="place" id="vladivostok_golden_bridge">
+<div class="place-lead">
 <h3>Золотой мост</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/vladivostok_golden_bridge.jpg" alt="Золотой мост"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/vladivostok_golden_bridge.jpg" alt="Золотой мост" width="1280" height="833" style="height: 217px; max-height: 217px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/vladivostok_golden_bridge_b.jpg" alt="Золотой мост — вид 2" width="330" height="220" style="height: 217px; max-height: 217px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Золотой мост, также известный как Золотой мост, является впечатляющим вантовым мостом во Владивостоке, который соединяет центральную часть города с островом Русский. Протяженностью более 1,104 метров, он является одним из самых длинных мостов в России и предлагает захватывающие виды на окружающий ландшафт и Золотой Рог. Мост не только архитектурное чудо, но и важная транспортная артерия, улучшающая связь региона. Мост протянулся на 1,104 метра, что делает его одним из самых длинных в России вантовых мостов. Он был завершен в 2012 году в рамках подготовки к саммиту АТЭС.</p>
 <p class="prose">Строительство Золотого моста началось в 2008 году и было завершено в 2012 году, что совпало с саммитом Азиатско-Тихоокеанского экономического сотрудничества (АТЭС), который проходил во Владивостоке. Мост был официально открыт 2 сентября 2012 года и с тех пор стал знаковым символом города. Золотой мост является значимым инфраструктурным проектом, который укрепляет роль Владивостока как ключевого портового города на Дальнем Востоке России. Он символизирует усилия города по модернизации и развитию, особенно в контексте международных отношений и экономического сотрудничества в Азиатско-Тихоокеанском регионе. Кроме того, мост стал культурной достопримечательностью, часто изображаемой в местном искусстве и фотографии, и является популярным местом как для жителей, так и для туристов.</p></div>
 </section>
-<section class="place" id="vladivostok_pdfband_5_64ff39b6">
-<h3>ДКЖД</h3>
+<section class="place" id="vladivostok_federal_university">
+<div class="place-lead">
+<h3>Кампус ДВФУ, остров Русский</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/vladivostok_pdfband_5_64ff39b6.jpg" alt="ДКЖД"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/vladivostok_federal_university.jpg" alt="Кампус ДВФУ, остров Русский" width="1280" height="990" style="height: 152px; max-height: 152px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/vladivostok_federal_university_b.jpg" alt="Кампус ДВФУ, остров Русский — вид 2" width="330" height="152" style="height: 152px; max-height: 152px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Кампус Дальневосточного федерального университета на острове Русский — это современная образовательная достопримечательность, которая демонстрирует передовую архитектуру и потрясающие виды на окружающее море. Открытый в 2012 году, он служит основным кампусом для Дальневосточного федерального университета, обеспечивая живую атмосферу для студентов и посетителей. Кампус является не только академическим центром, но и культурной площадкой, принимающей различные мероприятия и выставки в течение всего года. Кампус был официально открыт в 2012 году. Он расположен на Русском острове, который соединен с Владивостоком Русским мостом. ДВФУ — один из крупнейших университетов на Дальнем Востоке России.</p>
+<p class="prose">Дальневосточный федеральный университет был основан в 1899 году, изначально как Восточный институт. Кампус на острове Русском был открыт в 2012 году, что совпало с саммитом АТЭС, проведенным во Владивостоке, целью которого было повышение международного профиля региона. Новый кампус был спроектирован для удовлетворения растущего числа студентов и для содействия инновациям и исследованиям в различных областях. Кампус Дальневосточного федерального университета (ДВФУ) играет ключевую роль в образовательной среде российского Дальнего Востока, способствуя культурному обмену и сотрудничеству с международными учреждениями. Он является символом развития и модернизации региона, особенно после его статуса федерального университета. Кампус также вносит вклад в местную экономику и общественную жизнь, проводя культурные мероприятия, которые вовлекают как студентов, так и жителей.</p></div>
+</section>
+<section class="place" id="vladivostok_maritime_university">
+<div class="place-lead">
+<h3>Морской государственный университет</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Период: 1963</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/vladivostok_maritime_university.jpg" alt="Морской государственный университет" width="1280" height="720" style="height: 187px; max-height: 187px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/vladivostok_maritime_university_b.jpg" alt="Морской государственный университет — вид 2" width="330" height="311" style="height: 187px; max-height: 187px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Основанный в 1963 году, Морской государственный университет является ведущим учебным заведением, посвященным морским наукам и инженерии. Расположенный на живописном побережье Владивостока, он стал одной из знаковых достопримечательностей города. Он предлагает программы бакалавриата и магистратуры в области морских технологий, берегового строительства и морского права. Кампус располагает современными лабораториями, оснащенными новейшим оборудованием для проведения морских исследований. Студенты имеют доступ к обширным объектам, включая марину и парусный клуб. Значимые выпускники включают выдающихся ученых и высокопоставленных военных офицеров. Его расположение на набережной обеспечивает потрясающие виды на залив Золотой Рог.</p>
+<p class="prose">Основанный в 1963 году в рамках усилий Советского Союза по развитию морской экспертизы, университет изначально сосредоточился на подготовке моряков для Тихоокеанского флота. Со временем его учебный план расширился, включая морскую биологию, океанографию и гражданское строительство. Сегодня он остается центром исследований и образования в области навигации, судостроения и экологических наук. Университет играет ключевую роль в развитии талантов для военно-морской и морской промышленности России, а также в значительной степени способствует научным открытиям в регионе Дальнего Востока.</p></div>
+</section>
+<section class="place" id="vladivostok_submarine_c56">
+<div class="place-lead">
+<h3>Музей подводной лодки С-56</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/vladivostok_submarine_c56.jpg" alt="Музей подводной лодки С-56" width="1280" height="960" style="height: 220px; max-height: 220px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/vladivostok_submarine_c56_b.jpg" alt="Музей подводной лодки С-56 — вид 2" width="330" height="220" style="height: 220px; max-height: 220px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Музей подводной лодки С-56 во Владивостоке предлагает уникальный взгляд на морскую историю Советского флота. Посетители могут исследовать интерьер подводной лодки, которая сыграла значительную роль во время Второй мировой войны, и узнать о жизни подводников. Музей предоставляет увлекательный опыт для тех, кто интересуется военной историей и морской техникой. Подводная лодка C-56 была спущена на воду 15 декабря 1944 года. Это одна из немногих сохранившихся подводных лодок из состава Советского флота. Подводная лодка была преобразована в музей в 2002 году.</p>
+<p class="prose">Подводная лодка C-56 была спущена на воду в 1944 году и является одной из немногих сохранившихся подводных лодок со времен Советского Союза. Она служила в Тихоокеанском флоте и прославилась своими успешными миссиями во время Второй мировой войны. В 2002 году подводная лодка была преобразована в музей, что позволило общественности оценить её историческое значение. Музей подводной лодки C-56 служит напоминанием о морском наследии России и стратегическом значении Владивостока как портового города. Он отражает более широкую культурную нарративу военной мощи Советского Союза в XX веке и способствует формированию местной идентичности. Музей также играет роль в сохранении памяти о тех, кто служил в подводном флоте.</p></div>
+</section>
+<section class="place" id="vladivostok_korabelnaya_embankment">
+<div class="place-lead">
+<h3>Набережная Корабельная</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<figure class="place-fig place-fig--hi-res"><img src="../images/vladivostok_korabelnaya_embankment.jpg" alt="Набережная Корабельная" width="1280" height="592"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Набережная Корabelnaya — это живописная набережная во Владивостоке, предлагающая потрясающие виды на Золотой Рог и окружающие холмы. Эта яркая зона идеально подходит для неспешных прогулок, здесь расположены кафе, магазины и художественные инсталляции, отражающие морское наследие города. Посетители могут насладиться оживленной атмосферой, любуясь живописной красотой Тихоокеанского побережья. Набережная была официально открыта в 1891 году. Он включает в себя несколько памятников и скульптур, которые отмечают морскую историю Владивостока.</p>
+<p class="prose">Набережная КорABELьная была разработана в конце 19 века в рамках расширения Владивостока как крупного портового города. Эта территория стала свидетелем значительных событий, включая военно-морские парады и празднования, которые подчеркивают её важность в российской морской истории. Набережная служит культурным центром, где местные жители и туристы собираются, чтобы наслаждаться различными событиями и фестивалями в течение года. Она отражает идентичность города как морского центра и играет важную роль в повседневной жизни, демонстрируя богатое наследие Владивостока и яркий дух сообщества.</p></div>
+</section>
+<section class="place" id="vladivostok_pokrovsky_park">
+<div class="place-lead">
+<h3>Покровский парк</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<figure class="place-fig place-fig--hi-res"><img src="../images/vladivostok_pokrovsky_park.jpg" alt="Покровский парк" width="1050" height="1400"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Покровский парк — это спокойный оазис в бурлящем городе Владивосток, предлагающий зеленые насаждения, прогулочные дорожки и живописные виды на окружающий ландшафт. Этот парк является популярным местом как для местных жителей, так и для туристов, предоставляя мирное убежище для отдыха и досуга. С его ухоженными садами и рекреационными удобствами, Покровский парк — идеальное место для наслаждения природой в самом сердце города. Покровский парк был основан в начале 20 века. Парк предлагает прогулочные дорожки, сады и рекреационные объекты.</p>
+<p class="prose">Покровский парк был основан в начале 20 века, его происхождение связано с развитием Владивостока как значимого портового города. Парк претерпел различные реконструкции на протяжении лет, адаптируясь к меняющимся потребностям сообщества, сохраняя при этом свою природную красоту. Культурно Покровский парк служит важным пространством для общественных собраний, уличных мероприятий и рекреационных активностей, отражая повседневную жизнь жителей Владивостока. Парк часто используется для культурных фестивалей и празднований, демонстрируя местные традиции и способствуя чувству общности среди его посетителей.</p></div>
+</section>
+<section class="place" id="vladivostok_skala_park">
+<div class="place-lead">
+<h3>Прибрежная набережная</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/vladivostok_skala_park.jpg" alt="Прибрежная набережная" width="1280" height="857" style="height: 223px; max-height: 223px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/vladivostok_skala_park_b.jpg" alt="Прибрежная набережная — вид 2" width="330" height="247" style="height: 223px; max-height: 223px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Набережная в Владивостоке — это живописная прогулочная зона, которая предлагает потрясающие виды на Японское море и окружающий ландшафт. Эта яркая местность идеально подходит для неспешных прогулок, обедов в местных кафе и наслаждения различными культурными событиями в течение года. Сочетая природную красоту и городское очарование, набережная является обязательным местом для посещения как для местных жителей, так и для туристов. Набережная у моря предлагает панорамные виды на залив Золотой Рог. Это популярное место для активного отдыха и мероприятий в течение всего года.</p>
+<p class="prose">Набережная у моря имеет свои корни в развитии Владивостока как крупного портового города в конце 19 века. Основанная в период расширения Российской империи на Дальний Восток, набережная со временем эволюционировала, отражая рост города и его преобразование в культурный центр. Культурно Приморская набережная служит центром общественной жизни во Владивостоке, принимая фестивали, художественные выставки и выступления, которые отмечают наследие региона. Она олицетворяет морскую идентичность города и является местом встречи для жителей и гостей, способствуя чувству принадлежности и культурному обмену.</p></div>
+</section>
+<section class="place" id="vladivostok_oceanarium">
+<div class="place-lead">
+<h3>Приморский океанариум</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/vladivostok_oceanarium.jpg" alt="Приморский океанариум" width="1280" height="855" style="height: 220px; max-height: 220px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/vladivostok_oceanarium_b.jpg" alt="Приморский океанариум — вид 2" width="330" height="220" style="height: 220px; max-height: 220px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Приморский океанариум во Владивостоке — это потрясающий центр морской науки, который демонстрирует богатое биоразнообразие Тихого океана. Посетители могут исследовать различные экспозиции, посвященные морской жизни, включая уникальные виды, обитающие в этом регионе. Учреждение также акцентирует внимание на охране окружающей среды и образовании, что делает его обязательным для посещения как для семей, так и для любителей морской флоры и фауны. Открытый в 2012 году, Приморский океанариум является одним из крупнейших океанариумов в России. Он включает более 100 видов морских обитателей, включая рыбы, млекопитающие и беспозвоночные, родом из Тихого океана.</p>
+<p class="prose">Приморский океанариум был открыт в 2012 году в рамках более широкой инициативы по продвижению морских исследований и образования в регионе. Он был построен для повышения общественной осведомленности о морских экосистемах и их охране, отражая растущий интерес к экологическим вопросам в России. Культурно океанариум играет ключевую роль в образовании общественности о морской среде и содействии связи между сообществом и океаном. Он служит центром для морских исследований и усилий по охране окружающей среды, подчеркивая важность сохранения уникального морского наследия Дальнего Востока России.</p></div>
+</section>
+<section class="place" id="vladivostok_millionka">
+<div class="place-lead">
+<h3>Район Миллонка</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/vladivostok_millionka.jpg" alt="Район Миллонка" width="1067" height="1600" style="height: 440px; max-height: 440px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/vladivostok_millionka_b.jpg" alt="Район Миллонка — вид 2" width="330" height="440" style="height: 440px; max-height: 440px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Район Миллионка во Владивостоке — это яркая местность, известная своей богатой историей и эклектичной архитектурой. Когда-то это был оживленный центр для купцов и торговцев, а теперь он предлагает посетителям возможность заглянуть в прошлое города через узкие улицы и исторические здания. В этом районе также проживает разнообразное сообщество, отражающее мультикультурную ткань Владивостока. Миллионка была основана в конце 1800-х годов как коммерческий район. Этот район известен своим разнообразием архитектурных стилей и многокультурным сообществом.</p>
+<p class="prose">Основанная в конце 19 века, Миллонка стала ключевым коммерческим районом во время Российской Империи, служа центром торговли и иммиграции. Название «Миллонка» происходит от русского слова «миллион», отражая богатство и активность, которые характеризовали эту местность. На протяжении лет здесь происходили значительные события, включая приток различных этнических групп и развитие Владивостока как стратегического портового города. Культурно, Миллионка примечательна своим архитектурным разнообразием и смешением влияний различных иммигрантских сообществ, включая китайское, корейское и русское. Этот плавильный котел способствовал созданию уникальной культурной атмосферы, где местные рынки и закусочные предлагают вкус различных традиций. Хотя значительных религиозных достопримечательностей здесь нет, повседневная жизнь района пронизана обычаями и практиками его разнообразных жителей.</p></div>
+</section>
+<section class="place" id="vladivostok_russky_bridge">
+<div class="place-lead">
+<h3>Русский мост</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/vladivostok_russky_bridge.jpg" alt="Русский мост" width="1280" height="960" style="height: 215px; max-height: 215px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/vladivostok_russky_bridge_b.jpg" alt="Русский мост — вид 2" width="330" height="215" style="height: 215px; max-height: 215px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Русский мост — это знаковый вантовый мост во Владивостоке, соединяющий материковую часть с островом Русский. Открытый в 2012 году, он является одним из самых длинных вантовых мостов в мире, предлагая потрясающие виды на город и окружающие воды. Мост не только инженерное чудо, но и символ модернизации и развития Владивостока. Открытый в 2012 году, Русский мост протянулся на 3100 метров. Он был построен для облегчения доступа к острову Русский для саммита АТЭС. Главный пролет моста составляет 1,104 метра, что делает его одним из самых длинных в мире.</p>
+<p class="prose">Строительство Русского моста началось в 2008 году и было завершено в 2012 году, что совпало с саммитом Азиатско-Тихоокеанского экономического сотрудничества (АТЭС), который проходил во Владивостоке. Мост был спроектирован для улучшения доступности к Русскому острову, который имеет историческое значение как место для военных и образовательных учреждений. Русский мост играет важную роль в улучшении связности Владивостока, отражая стратегическое значение города как ворот в Тихий океан. Он стал культурной достопримечательностью, часто изображаемой в местном искусстве и фотографии, и является популярным местом как для жителей, так и для туристов. Мост также символизирует стремления города к росту и его роль в международных отношениях.</p></div>
+</section>
+<section class="place" id="vladivostok_svetlanskaya">
+<div class="place-lead">
+<h3>Светланская улица</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/vladivostok_svetlanskaya.jpg" alt="Светланская улица" width="1280" height="720" style="height: 187px; max-height: 187px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/vladivostok_svetlanskaya_b.jpg" alt="Светланская улица — вид 2" width="330" height="206" style="height: 187px; max-height: 187px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Светланская улица — это оживленная магистраль в сердце Владивостока, известная своей живой атмосферой и исторической архитектурой. Улица, уставленная кафе, магазинами и культурными заведениями, служит центральным узлом как для местных жителей, так и для туристов. Это идеальное место, чтобы ощутить уникальное сочетание русских и азиатских влияний в городе. Улица Светланская была основана в 19 веке в рамках градостроительного развития Владивостока. Улица представляет собой смесь архитектурных стилей, отражающих историческую эволюцию города.</p>
+<p class="prose">Улица Светланская имеет свои корни в конце 19 века, совпадая с основанием Владивостока в 1860 году. По мере развития города как значительного порта и военного поста улица стала центром торговли и общественной жизни, став свидетелем различных ключевых событий на протяжении своей истории. Культурно Светланская улица играет ключевую роль в повседневной жизни Владивостока, отражая разнообразное наследие города. Здесь расположены несколько важных культурных учреждений, и она служит местом проведения местных мероприятий и фестивалей, демонстрируя традиции и художественные выражения региона.</p></div>
+</section>
+<section class="place" id="vladivostok_orlinoe_gnezdo_view">
+<div class="place-lead">
+<h3>Смотровая площадка Орлиное</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<figure class="place-fig place-fig--hi-res"><img src="../images/vladivostok_orlinoe_gnezdo_view.jpg" alt="Смотровая площадка Орлиное" width="1280" height="720"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Смотровая площадка Орлиное Гнездо предлагает захватывающие панорамные виды на Владивосток и окружающий пейзаж, что делает её обязательным местом для посещения как туристами, так и местными жителями. Расположенная на склоне холма, эта смотровая площадка открывает потрясающие виды на Золотой Рог, знаковый Русский мост и яркий город внизу. Это идеальное место для фотографии, отдыха и наслаждения природной красотой региона. Смотровая площадка расположена на склоне холма с видом на залив Золотой Рог. Он предлагает виды на значимые достопримечательности, включая Русский мост и городской пейзаж.</p>
+<p class="prose">Наблюдательная площадка Орлиное Гнездо, что в переводе означает «Орлиное Гнездо», стала яркой особенностью пейзажа Владивостока с момента своего открытия. Это место стало популярным местом встречи для жителей и гостей города, отражая рост и развитие города на протяжении многих лет. Культурно смотровая площадка служит символом связи Владивостока с природой и его прибрежным наследием. Это популярное место как для местных жителей, так и для туристов, часто используемое для празднований, встреч и непринужденных выездов. Вид с площадки также подчеркивает уникальное географическое положение города на слиянии земли и моря, укрепляя его идентичность как важного портового города.</p></div>
+</section>
+<section class="place" id="vladivostok_navy_cathedral">
+<div class="place-lead">
+<h3>Собор Тихоокеанского флота</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/vladivostok_navy_cathedral.jpg" alt="Собор Тихоокеанского флота" width="1280" height="1420" style="height: 220px; max-height: 220px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/vladivostok_navy_cathedral_b.jpg" alt="Собор Тихоокеанского флота — вид 2" width="330" height="220" style="height: 220px; max-height: 220px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Собор Тихоокеанского флота, также известный как Собор Святого Николая, является ярким архитектурным памятником, расположенным во Владивостоке. Этот православный собор, посвященный покровителю моряков, представляет собой потрясающее сочетание византийского и русского архитектурных стилей. Посетители могут восхищаться его впечатляющими куполами и сложными интерьерами, размышляя о его историческом и культурном значении в регионе. Освященный в 1903 году, собор посвящен Святому Николаю, покровителю моряков. Собор сочетает в себе византийский и русский архитектурные стили.</p>
+<p class="prose">Собор Тихоокеанского флота был освящен в 1903 году и служил духовным центром Тихоокеанского флота Российского флота. Он был построен в память о моряках, которые погибли во время Русско-японской войны. Собор прошел через различные реставрации, особенно после повреждений, полученных в советскую эпоху. Как место поклонения, Собор Тихоокеанского флота имеет глубокое религиозное значение для местной православной общины, служа местом для различных обрядов и церемоний. Культурно он является символом морского наследия Владивостока и исторических связей города с Российским флотом. Собор является заметной частью повседневной жизни местных жителей и стал популярным местом как для жителей, так и для туристов, отражая богатые традиции региона.</p></div>
+</section>
+<section class="place" id="vladivostok_sportivnaya_harbour">
+<div class="place-lead">
+<h3>Спортивная гавань</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<figure class="place-fig place-fig--hi-res"><img src="../images/vladivostok_sportivnaya_harbour.jpg" alt="Спортивная гавань" width="1280" height="960"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Спортивная гавань — это живописная прибрежная зона во Владивостоке, известная своими потрясающими видами на Японское море и окружающие пейзажи. Это яркое место популярно как среди местных жителей, так и среди туристов, предлагая разнообразные возможности для отдыха, варианты питания и культурные мероприятия. Гавань служит воротами к различным морским приключениям, что делает её обязательным местом для посещения в городе. Спортивная гавань расположена на восточном побережье Владивостока. Гавань предлагает разнообразные развлекательные объекты, включая пешеходные дорожки и кафе.</p>
+<p class="prose">Спортивная гавань имеет свои корни в начале 20 века, когда Владивосток стал значительным портовым городом. Гавань претерпела различные изменения на протяжении десятилетий, превратившись в рекреационный центр, который отражает морское наследие города. Культурно Спортивная гавань играет жизненно важную роль в повседневной жизни жителей Владивостока, служа местом сбора для общественных мероприятий и праздников. Её живописная красота и яркая атмосфера способствуют формированию идентичности города, делая её центром притяжения как для местных жителей, так и для туристов. Гавань также ассоциируется с различными морскими традициями и активностями, демонстрируя связь региона с морем.</p></div>
+</section>
+<section class="place" id="vladivostok_tokarevskiy">
+<div class="place-lead">
+<h3>Токаревский маяк</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<figure class="place-fig place-fig--hi-res"><img src="../images/vladivostok_tokarevskiy.jpg" alt="Токаревский маяк" width="1201" height="1600"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Токаревский маяк — это впечатляющая достопримечательность, расположенная на восточном краю острова Русский во Владивостоке. Построенный в 1910 году, этот знаковый объект служит маяком для судов, проходящих по водам Японского моря. Посетители могут насладиться потрясающими видами на побережье и окружающий океан, что делает его популярным местом для фотографий и неспешных прогулок. Маяк был построен в 1910 году. Он расположен на восточном краю острова Русский.</p>
+<p class="prose">Токаревский маяк был построен в 1910 году для навигации морского транспорта в водах Владивостока. На протяжении многих лет он подвергался нескольким реконструкциям для поддержания своей функциональности и структурной целостности. Маяк является свидетельством морского наследия региона и стал неугасимым символом Владивостока. Культурно, Токаревский маяк представляет собой морскую историю Владивостока и является популярным местом как для местных жителей, так и для туристов. Он часто изображается в искусстве и фотографии, воплощая дух города и его связь с морем. Маяк является частью повседневной жизни жителей, которые часто посещают эту местность для отдыха и расслабления.</p></div>
+</section>
+<section class="place" id="vladivostok_triumphal_arch">
+<div class="place-lead">
+<h3>Триумфальная арка</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/vladivostok_triumphal_arch.jpg" alt="Триумфальная арка" width="1066" height="1600" style="height: 248px; max-height: 248px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/vladivostok_triumphal_arch_b.jpg" alt="Триумфальная арка — вид 2" width="330" height="248" style="height: 248px; max-height: 248px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Триумфальная арка — это свободно стоящее монументальное сооружение в форме арки с одним или несколькими арочными проходами, часто предназначенное для пересечения дороги и обычно стоящее отдельно, не соединенное с другими зданиями. В своей самой простой форме триумфальная арка состоит из двух массивных пилонов, соединенных аркой, которая обычно увенчана плоским антаблементом или аттиком, на котором может быть установлена статуя или который несет памятные надписи. Основная структура часто украшена резьбой, скульптурными рельефами и посвящениями. Проверьте часы работы и стоимость билетов на официальных сайтах перед поездкой. Толпы достигают пика в выходные и праздничные дни.</p></div>
+</section>
+<section class="place" id="vladivostok_minny_gorodok">
+<div class="place-lead">
+<h3>Форт Минный Городок</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<figure class="place-fig place-fig--hi-res"><img src="../images/vladivostok_minny_gorodok.jpg" alt="Форт Минный Городок" width="1067" height="1600"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Форт Минный Городок, расположенный в живописном городе Владивосток, является исторической военной установкой, которая предлагает посетителям возможность заглянуть в стратегическое прошлое региона. Основанный в конце 19 века, этот укрепленный объект сыграл ключевую роль в защите Тихоокеанского побережья Российской империи. Сегодня он является свидетельством богатого военного наследия города и предлагает потрясающие виды на окружающий ландшафт. Построен в период с 1886 по 1891 год.</p>
+<p class="prose">Форт Минный Городок был построен в период с 1886 по 1891 год в рамках системы береговой обороны Владивостока. Он был предназначен для защиты порта от потенциальных naval атак и был оснащен артиллерией, способной прикрывать подходы к городу. Форт использовался в различных конфликтах, включая Вторую мировую войну, прежде чем быть выведенным из эксплуатации в конце 20 века. Расположение и дизайн крепости отражают военные стратегии Российской империи в период расширения территориальных интересов на Тихом океане. Хотя Минный Городок в первую очередь является военным объектом, он также стал культурной достопримечательностью, символизирующей историческую роль Владивостока как ворот на Восток. Его сохранение позволяет исследовать наследие города и служит напоминанием о сложной истории региона.</p></div>
+</section>
+<section class="place" id="vladivostok_eagle_nest">
+<div class="place-lead">
+<h3>Холм Орлиное Гнездо</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/vladivostok_eagle_nest.jpg" alt="Холм Орлиное Гнездо" width="1280" height="853" style="height: 220px; max-height: 220px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/vladivostok_eagle_nest_b.jpg" alt="Холм Орлиное Гнездо — вид 2" width="330" height="220" style="height: 220px; max-height: 220px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Холм Орлиное Гнездо предлагает захватывающие панорамные виды на Владивосток и окружающее море, что делает его обязательной точкой для посещения как туристами, так и местными жителями. Доступный через короткий поход или на автомобиле, холм украшен пешеходными тропами и смотровыми площадками, которые предлагают потрясающие виды, особенно на закате. В этом районе также находится знаковая смотровая башня Орлиное Гнездо, что добавляет ему очарования и привлекательности. Холм Орлиное Гнездо имеет высоту примерно 202 метра. Смотровая башня была построена в 1960-х годах и является популярным местом для фотографии.</p>
+<p class="prose">Холм Орлиное гнездо является значимой достопримечательностью Владивостока с момента основания города в 1860 году. Изначально использовавшийся как военный наблюдательный пункт, он сыграл ключевую роль в защите города во время различных конфликтов, включая Русско-японскую войну. С течением времени он преобразился в популярную рекреационную зону, отражающую рост и развитие города. Культурно, Холм Орлиное Гнездо является неотъемлемой частью идентичности Владивостока, привлекая посетителей своей природной красотой и историческим контекстом. Он служит местом сбора для местных жителей и туристов, способствуя чувству общности и связи с наследием города. Выдающееся место холма в местных традициях и его роль как живописной площадки для празднований и мероприятий еще больше подчеркивают его культурное значение.</p></div>
+</section>
+<section class="place" id="vladivostok_central_square">
+<div class="place-lead">
+<h3>Центральная площадь Владивостока</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/vladivostok_central_square.jpg" alt="Центральная площадь Владивостока" width="1280" height="801" style="height: 206px; max-height: 206px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/vladivostok_central_square_b.jpg" alt="Центральная площадь Владивостока — вид 2" width="330" height="206" style="height: 206px; max-height: 206px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Центральная площадь Владивостока является сердцем города, предлагая яркое пространство как для местных жителей, так и для туристов. Окруженная значительными достопримечательностями, она является популярным местом для культурных мероприятий, фестивалей и повседневной жизни. Открытая планировка площади и живописные виды делают ее идеальным местом для того, чтобы ощутить суть Владивостока. Центральная площадь была официально открыта в 1860 году. Он расположен рядом с важными достопримечательностями, такими как Владивостокская городская дума и Приморская сцена Мариинского театра.</p>
+<p class="prose">Центральная площадь была основана в конце 19 века, совпадая с основанием Владивостока в 1860 году. На протяжении многих лет она стала свидетелем множества ключевых событий, включая военные парады и публичные празднования, отражая рост и развитие города. В качестве центрального общественного пространства площадь играет важную роль в культурной жизни Владивостока, служа местом для различных художественных выступлений и общественных собраний. Она символизирует историческую эволюцию города и является центром гражданской гордости и местных традиций.</p></div>
+</section>
+<section class="place" id="vladivostok_nikolai_chapel">
+<div class="place-lead">
+<h3>Часовня Святого Николая</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/vladivostok_nikolai_chapel.jpg" alt="Часовня Святого Николая" width="1280" height="960" style="height: 250px; max-height: 250px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/vladivostok_nikolai_chapel_b.jpg" alt="Часовня Святого Николая — вид 2" width="330" height="495" style="height: 250px; max-height: 250px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Часовня Святого Николая во Владивостоке — это очаровательное и историческое место поклонения, которое предлагает посетителям возможность узнать о богатом культурном наследии города. Уютно расположенная на живописном холме, эта небольшая часовня посвящена Святому Николаю, покровителю моряков и путешественников, что отражает морскую историю региона. Её спокойная атмосфера и красивая архитектура делают её мирным убежищем как для местных жителей, так и для туристов. Часовня была построена в 2003 году на холме с видом на город. Он посвящен Святому Николаю, покровителю моряков. Место имеет исторические связи с более ранними часовнями, основанными в конце 19 века.</p>
+<p class="prose">Часовня Святого Николая была построена в 2003 году и предназначена для увековечения памяти моряков и рыбаков, которые бороздили воды вокруг Владивостока. Она была возведена на месте ранее существовавшей часовни, основанной в конце 19 века, которая была утрачена в бурные события 20 века. Текущая часовня служит символом стойкости и веры для местного сообщества. Культурно часовня Святого Николая занимает важное место в повседневной жизни жителей Владивостока, особенно тех, кто связан с морем. Это место, где отмечаются местные традиции и морское наследие, часто служа площадкой для общественных собраний и религиозных церемоний. Часовня также отражает более широкий исторический нарратив российского Дальнего Востока, воплощая духовную связь между людьми и их морской средой.</p></div>
 </section>
 </body>
 </html>

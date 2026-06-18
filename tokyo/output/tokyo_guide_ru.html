@@ -13,7 +13,7 @@ body { font-family: 'Noto Sans JP', sans-serif; margin: 2rem;
 .otium-logo { font-family: 'Shippori Mincho', serif; font-size: 2.15rem;
   font-weight: 600; letter-spacing: 0.18em; margin-bottom: 0.85rem; }
 .otiump { margin: 0.42rem 0; line-height: 1.42; text-align: justify;
-  max-width: 38rem; font-size: 0.95rem; }
+  font-size: 0.95rem; }
 .guide-title { page-break-after: auto; margin-bottom: 0.55rem;
   page-break-inside: avoid; }
 .historical-reference { margin: 0.75rem 0 1.15rem;
@@ -63,22 +63,103 @@ ol.trip-stops a:hover { text-decoration: underline; }
 .heraldry-univ-caption { font-size: 0.52rem; line-height: 1.18;
   margin: 0.12rem 0 0; padding: 0 0.06rem; color: #252525;
   text-align: center; font-weight: 500; }
-.heraldry-motto { text-align: center; max-width: 18rem; margin: 0.18rem auto;
+.heraldry-motto { text-align: center; margin: 0.18rem auto;
   width: 100%; }
 .motto-line { font-family: 'Shippori Mincho', serif; font-size: 1rem;
   margin: 0; color: #333; line-height: 1.35; }
 .guide-title h1.guide-title-main { font-family: 'Shippori Mincho', serif;
   font-size: 2.35rem; margin-bottom: 0.5rem; font-weight: 600; }
 .lead { color: #444; font-size: 1.05rem; }
-.guide-toc { margin: 0.85rem 0 1.15rem; page-break-inside: avoid; }
-.guide-toc h2 { font-family: 'Shippori Mincho', serif; font-size: 1.28rem;
-  font-weight: 600; margin: 0.4rem 0 0.55rem; }
+
+.guide-toc { page-break-before: always; break-before: page;
+  page-break-after: always; break-after: page;
+  margin: 0; padding: 0.2rem 0 0.45rem; page-break-inside: auto; }
+.guide-toc h2 { font-family: 'Shippori Mincho', serif;
+  font-size: 1.28rem; font-weight: 600; margin: 0.4rem 0 0.55rem; }
 .guide-toc ol { margin: 0.35rem 0 0.65rem 1.25rem; padding: 0;
   columns: 2; column-gap: 1.5rem; }
 .guide-toc li { margin: 0.18rem 0; line-height: 1.35;
   font-size: 0.88rem; break-inside: avoid; }
-.guide-toc a { color: #1a5276; text-decoration: none; }
+.guide-toc a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.guide-toc a:hover { color: #0d3d56; }
 .guide-toc li.toc-item--sub { font-size: 0.82rem; margin-left: 0.35rem; }
+.toc-back { font-size: 0.78rem; margin: 0 0 0.35rem; text-align: right; }
+.toc-back a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.toc-back a:hover { color: #0d3d56; }
+.place, .historical-reference, .guide-primer, .guide-trip-plans {
+  scroll-margin-top: 1.25rem; }
+.historical-reference h2, .guide-primer h2, .guide-trip-plans h2,
+.chapter-head h2, .place-lead h3 { position: relative; }
+.guide-toc + .place, .guide-toc + .chapter-head {
+  page-break-before: avoid; break-before: avoid-page; }
+.place-lead { page-break-inside: avoid; break-inside: avoid-page;
+  page-break-after: auto; }
+.place-lead > h3 { page-break-after: avoid; break-after: avoid-page; }
+.place-lead > .place-meta { page-break-after: avoid; break-after: avoid-page; }
+
+.place-fig { page-break-inside: avoid; break-inside: avoid-page;
+  margin: 0.5rem 0 1rem; }
+.place-fig img {
+  page-break-inside: avoid; break-inside: avoid-page;
+  max-height: 48vh; width: auto; max-width: 100%;
+  object-fit: contain; margin-left: auto; margin-right: auto; }
+.place-fig--hi-res img { max-height: 52vh; }
+.place-fig--lo-res img { max-height: 30vh; }
+.place-pdf-fig-row {
+  display: flex; flex-direction: row; flex-wrap: wrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.45rem 0.55rem; margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row .place-fig {
+  flex: 1 1 30%; margin: 0; min-width: 26%; max-width: 100%; }
+.place-pdf-fig-row .place-fig img {
+  width: auto; max-width: 100%; height: auto; max-height: 44vh;
+  object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--pair {
+  flex-wrap: nowrap; justify-content: space-between;
+  align-items: flex-end; gap: 0.5rem 0.65rem; }
+.place-pdf-fig-row--pair .place-fig {
+  flex: 1 1 47%; min-width: 0; max-width: 50%;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--pair .place-fig img {
+  max-height: 44vh; object-fit: contain; }
+.place-pdf-fig-row--pair .place-fig--hi-res img { max-height: 52vh; }
+.place-pdf-fig-row--pair .place-fig--lo-res img { max-height: 26vh; }
+.place-pdf-fig-row--pair .place-fig--row-sized img,
+.place-pdf-fig-row--triple .place-fig--row-sized img,
+.place-pdf-fig-row--many .place-fig--row-sized img {
+  width: auto; max-width: 100%; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row .place-fig--row-sized.place-fig--hi-res img,
+.place-pdf-fig-row .place-fig--row-sized.place-fig--lo-res img {
+  max-height: unset; }
+.place-pdf-fig-rows-stack {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple {
+  display: flex; flex-direction: row; flex-wrap: nowrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.4rem 0.48rem; margin: 0;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--triple .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--triple .place-fig--hi-res img { max-height: 42vh; }
+.place-pdf-fig-row--triple .place-fig--lo-res img { max-height: 18vh; }
+.place-pdf-fig-row--many {
+  flex-wrap: nowrap; justify-content: center; align-items: flex-end;
+  gap: 0.35rem 0.42rem; }
+.place-pdf-fig-row--many .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--many .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+
+
 .place { margin-bottom: 2.2rem; page-break-inside: auto; }
 h3 { font-family: 'Shippori Mincho', serif; font-size: 1.22rem; margin: 1.2rem 0 0.35rem;
   font-weight: 600; }
@@ -90,7 +171,6 @@ h4 { font-family: 'Shippori Mincho', serif; font-size: 0.95rem; text-transform: 
   color: #555; font-size: 0.95rem; margin: 0 0 0.5rem; font-style: italic; }
 .place-meta { font-size: 0.92rem; color: #353535; margin: 0 0 0.75rem;
   line-height: 1.4; }
-.place-fig { margin: 0.5rem 0 1rem; }
 img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
 .prose, .place-desc p { margin: 0.45rem 0; line-height: 1.5;
   text-align: justify; }
@@ -111,11 +191,14 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <figure class="heraldry-fig heraldry-coat-book" title="Emblem of Tokyo"><img src="../images/guide_coat_of_arms.svg" alt="Emblem of Tokyo"/></figure>
 <figure class="heraldry-fig heraldry-coat-book" title="Flag of Tokyo Metropolis"><img src="../images/guide_flag.svg" alt="Flag of Tokyo Metropolis"/></figure>
 </div></div><h1 class="guide-title-main">Tokyo</h1><p class="lead">Путеводитель. Объектов в этом выпуске: 30.</p></header>
+<nav class="guide-toc" id="guide-toc" aria-label="Содержание"><h2>Содержание</h2><ol><li class="toc-item"><a href="#guide-historical">Историческая справка</a></li><li class="toc-item"><a href="#guide-trips">Маршруты</a></li><li class="toc-item"><a href="#tokyo_akihabara">Tokyo Akihabara</a></li><li class="toc-item"><a href="#tokyo_camii">Tokyo Camii</a></li><li class="toc-item"><a href="#tokyo_church_of_christ">Tokyo Church Of Christ</a></li><li class="toc-item"><a href="#tokyo_edo_tokyo_museum">Tokyo Edo Tokyo Museum</a></li><li class="toc-item"><a href="#tokyo_ginza">Tokyo Ginza</a></li><li class="toc-item"><a href="#tokyo_hamarikyu">Tokyo Hamarikyu</a></li><li class="toc-item"><a href="#tokyo_imperial_east_garden">Tokyo Imperial East Garden</a></li><li class="toc-item"><a href="#tokyo_imperial_palace">Tokyo Imperial Palace</a></li><li class="toc-item"><a href="#tokyo_imperial_palace_ext">Tokyo Imperial Palace Ext</a></li><li class="toc-item"><a href="#tokyo_matsuke_heikichi_nogaku_zue_walters">Tokyo Matsuke Heikichi Nogaku Zue Walters</a></li><li class="toc-item"><a href="#tokyo_meiji_shrine">Tokyo Meiji Shrine</a></li><li class="toc-item"><a href="#tokyo_meiji_torii">Tokyo Meiji Torii</a></li><li class="toc-item"><a href="#tokyo_nezu_museum">Tokyo Nezu Museum</a></li><li class="toc-item"><a href="#tokyo_nezu_shrine">Tokyo Nezu Shrine</a></li><li class="toc-item"><a href="#tokyo_oedo_odaiba">Tokyo Oedo Odaiba</a></li><li class="toc-item"><a href="#tokyo_roppongi_hills">Tokyo Roppongi Hills</a></li><li class="toc-item"><a href="#tokyo_sensoji">Tokyo Sensoji</a></li><li class="toc-item"><a href="#tokyo_shibuya_crossing">Tokyo Shibuya Crossing</a></li><li class="toc-item"><a href="#tokyo_shibuya_scramble_alt">Tokyo Shibuya Scramble Alt</a></li><li class="toc-item"><a href="#tokyo_shinjuku_kabukicho">Tokyo Shinjuku Kabukicho</a></li><li class="toc-item"><a href="#tokyo_skytree">Tokyo Skytree</a></li><li class="toc-item"><a href="#tokyo_st_mary_s_cathedral_tokyo">Tokyo St Mary S Cathedral Tokyo</a></li><li class="toc-item"><a href="#tokyo_sumida_park">Tokyo Sumida Park</a></li><li class="toc-item"><a href="#tokyo_tokyo_tower">Tokyo Tokyo Tower</a></li><li class="toc-item"><a href="#tokyo_tsukiji_outer_market">Tokyo Tsukiji Outer Market</a></li><li class="toc-item"><a href="#tokyo_ueno_district">Tokyo Ueno District</a></li><li class="toc-item"><a href="#tokyo_ueno_park">Tokyo Ueno Park</a></li><li class="toc-item"><a href="#tokyo_yanaka_ginza">Tokyo Yanaka Ginza</a></li><li class="toc-item"><a href="#tokyo_zojoji">Tokyo Zojoji</a></li><li class="toc-item"><a href="#tokyo_shinjuku_gyoen">Синдзюку Гёэн</a></li></ol></nav>
 <section class="historical-reference" id="guide-historical" aria-label="Историческая справка"><h2>Историческая справка</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 <p class="prose">Токио — столица Японии и крупнейшая агломерация мира на острове Хонсю.</p>
 <p class="prose">От замка Эдо сёгуната к имперской столице Мэйдзи и мегаполису после 1945 года: небоскрёбы Синдзюку, храмы Асакуса и сеть метро. Токио сочетает традиционные праздники с индустрией аниме, моды и гастрономии.</p>
 <p class="prose">Землетрясание 1923 года и бомбардировки 1945 года разрушали город; восстановление и Олимпиада 1964 года показали технологический подъём. Токио сочетает безопасность, культуру повседневности и глобальную роль японской экономики и мягкой силы.</p></section>
 <section class="guide-trip-plans" id="guide-trips" aria-label="Маршруты"><h2>Маршруты</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 <article class="trip-plan" id="trip-1d"><h3>Один день</h3>
 <p class="prose">Компактный маршрут по главным точкам путеводителя с минимальным возвратом назад пешком.</p>
 <ol class="trip-stops"><li><a href="#tokyo_edo_tokyo_museum">Tokyo Edo Tokyo Museum</a> (~75мин)</li>
@@ -130,259 +213,426 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <li><a href="#tokyo_ginza">Tokyo Ginza</a> (~75мин)</li>
 <li><a href="#tokyo_hamarikyu">Tokyo Hamarikyu</a> (~75мин)</li>
 <li><a href="#tokyo_imperial_palace">Tokyo Imperial Palace</a> (~75мин)</li>
-<li><a href="#tokyo_meiji_shrine">Tokyo Meiji Shrine</a> (~75мин)</li></ol></article>
+<li><a href="#tokyo_matsuke_heikichi_nogaku_zue_walters">Tokyo Matsuke Heikichi Nogaku Zue Walters</a> (~75мин)</li></ol></article>
 <article class="trip-plan" id="trip-3d2"><h3>Три дня — день 2</h3>
 <p class="prose">День 2 — следующая группа районов.</p>
 <ol class="trip-stops"><li><a href="#tokyo_zojoji">Tokyo Zojoji</a> (~75мин)</li>
 <li><a href="#tokyo_tokyo_tower">Tokyo Tokyo Tower</a> (~75мин)</li>
+<li><a href="#tokyo_meiji_shrine">Tokyo Meiji Shrine</a> (~75мин)</li>
 <li><a href="#tokyo_meiji_torii">Tokyo Meiji Torii</a> (~75мин)</li>
-<li><a href="#tokyo_nezu_museum">Tokyo Nezu Museum</a> (~75мин)</li>
-<li><a href="#tokyo_oedo_odaiba">Tokyo Oedo Odaiba</a> (~75мин)</li></ol></article>
+<li><a href="#tokyo_nezu_museum">Tokyo Nezu Museum</a> (~75мин)</li></ol></article>
 <article class="trip-plan" id="trip-3d3"><h3>Три дня — день 3</h3>
 <p class="prose">День 3 — оставшиеся близкие объекты.</p>
 <ol class="trip-stops"><li><a href="#tokyo_shinjuku_gyoen">Синдзюку Гёэн</a> (~75мин)</li>
-<li><a href="#tokyo_roppongi_hills">Tokyo Roppongi Hills</a> (~75мин)</li>
-<li><a href="#tokyo_shibuya_crossing">Tokyo Shibuya Crossing</a> (~75мин)</li></ol></article></section>
-<nav class="guide-toc" aria-label="Содержание"><h2>Содержание</h2><ol><li class="toc-item"><a href="#guide-historical">Историческая справка</a></li><li class="toc-item"><a href="#guide-trips">Маршруты</a></li><li class="toc-item"><a href="#tokyo_akihabara">Tokyo Akihabara</a></li><li class="toc-item"><a href="#tokyo_edo_tokyo_museum">Tokyo Edo Tokyo Museum</a></li><li class="toc-item"><a href="#tokyo_ginza">Tokyo Ginza</a></li><li class="toc-item"><a href="#tokyo_hamarikyu">Tokyo Hamarikyu</a></li><li class="toc-item"><a href="#tokyo_imperial_palace_ext">Tokyo Imperial Palace Ext</a></li><li class="toc-item"><a href="#tokyo_imperial_east_garden">Tokyo Imperial East Garden</a></li><li class="toc-item"><a href="#tokyo_imperial_palace">Tokyo Imperial Palace</a></li><li class="toc-item"><a href="#tokyo_shinjuku_kabukicho">Tokyo Shinjuku Kabukicho</a></li><li class="toc-item"><a href="#tokyo_pdfband_3_7d0f8767">Matsuke Heikichi - Nogaku zue - Walters</a></li><li class="toc-item"><a href="#tokyo_meiji_shrine">Tokyo Meiji Shrine</a></li><li class="toc-item"><a href="#tokyo_meiji_torii">Tokyo Meiji Torii</a></li><li class="toc-item"><a href="#tokyo_nezu_museum">Tokyo Nezu Museum</a></li><li class="toc-item"><a href="#tokyo_nezu_shrine">Tokyo Nezu Shrine</a></li><li class="toc-item"><a href="#tokyo_oedo_odaiba">Tokyo Oedo Odaiba</a></li><li class="toc-item"><a href="#tokyo_roppongi_hills">Tokyo Roppongi Hills</a></li><li class="toc-item"><a href="#tokyo_sensoji">Tokyo Sensoji</a></li><li class="toc-item"><a href="#tokyo_shibuya_scramble_alt">Tokyo Shibuya Scramble Alt</a></li><li class="toc-item"><a href="#tokyo_shibuya_crossing">Tokyo Shibuya Crossing</a></li><li class="toc-item"><a href="#tokyo_shinjuku_gyoen">Синдзюку Гёэн</a></li><li class="toc-item"><a href="#tokyo_pdfband_0_0a06f033">St. Mary&#x27;s Cathedral Tokyo</a></li><li class="toc-item"><a href="#tokyo_sumida_park">Tokyo Sumida Park</a></li><li class="toc-item"><a href="#tokyo_pdfband_2_725b2c55">Tokyo Camii</a></li><li class="toc-item"><a href="#tokyo_pdfband_1_0304bd06">Tokyo Church of Christ</a></li><li class="toc-item"><a href="#tokyo_skytree">Tokyo Skytree</a></li><li class="toc-item"><a href="#tokyo_tokyo_tower">Tokyo Tokyo Tower</a></li><li class="toc-item"><a href="#tokyo_tsukiji_outer_market">Tokyo Tsukiji Outer Market</a></li><li class="toc-item"><a href="#tokyo_ueno_park">Tokyo Ueno Park</a></li><li class="toc-item"><a href="#tokyo_ueno_district">Tokyo Ueno District</a></li><li class="toc-item"><a href="#tokyo_yanaka_ginza">Tokyo Yanaka Ginza</a></li><li class="toc-item"><a href="#tokyo_zojoji">Tokyo Zojoji</a></li></ol></nav>
+<li><a href="#tokyo_oedo_odaiba">Tokyo Oedo Odaiba</a> (~75мин)</li>
+<li><a href="#tokyo_roppongi_hills">Tokyo Roppongi Hills</a> (~75мин)</li></ol></article></section>
 <section class="place" id="tokyo_akihabara">
+<div class="place-lead">
 <h3>Tokyo Akihabara</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/tokyo_akihabara.jpg" alt="Tokyo Akihabara"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/tokyo_akihabara.jpg" alt="Tokyo Akihabara" width="330" height="330" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/tokyo_akihabara_b.jpg" alt="Tokyo Akihabara — вид 2" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Акихабара является одним из крупнейших центров электронной коммерции Японии. Здесь расположены крупнейшие магазины цифровой техники, такие как Yodobashi Camera и Hanshin Denki. Ежедневно через станцию Акихабарей проходит около миллиона человек. Район знаменит магазином Animate, где продаются товары для поклонников аниме и манги. На улицах района часто проходят фестивали и мероприятия, посвящённые аниме и играм.</p>
 <p class="prose">Акихабара — исторический район Токио, известный своими электронными магазинами и культурой otaku. Район возник в середине XX века вокруг станции Акихабарей и изначально был центром торговли радиодеталями и бытовой электроникой. Сегодня Акихабара стала символом японской поп-культуры и местом паломничества фанатов аниме, манги и видеоигр. Это место привлекает туристов и местных жителей благодаря уникальной атмосфере, ярким магазинам электроники и многочисленным кафе и ресторанам с тематической едой и напитками.</p></div>
 </section>
+<section class="place" id="tokyo_camii">
+<div class="place-lead">
+<h3>Tokyo Camii</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Стиль: современная архитектура с элементами традиционного исламского стиля</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/tokyo_camii.jpg" alt="Tokyo Camii" width="1200" height="1600" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/tokyo_camii_b.jpg" alt="Tokyo Camii — вид 2" width="330" height="247" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Первое здание мечети было построено в 1964 году, позже заменено современным сооружением. Архитектура здания сочетает традиционные исламские мотивы с элементами японского стиля. Ежегодно здесь проводятся важные религиозные мероприятия и фестивали. Это единственная действующая мечеть в Токио. Посещение мечети позволяет лучше понять культурное разнообразие Японии.</p>
+<p class="prose">Токио Ками — мечеть, построенная в Токио японскими мусульманами в середине XX века. Это одно из первых мусульманских религиозных сооружений в Японии, ставшее символом единства японской общины мусульман и их культурной самобытности. Мечеть стала местом проведения исламских праздников и мероприятий, способствуя укреплению связей между верующими и их традициями. Мечеть привлекает туристов и местных жителей возможностью познакомиться с культурой ислама и историей японских мусульман.</p></div>
+</section>
+<section class="place" id="tokyo_church_of_christ">
+<div class="place-lead">
+<h3>Tokyo Church Of Christ</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Стиль: сочетание традиционного японского стиля и элементов западной архитектуры</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/tokyo_church_of_christ.jpg" alt="Tokyo Church Of Christ" width="1280" height="960" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/tokyo_church_of_christ_b.jpg" alt="Tokyo Church Of Christ — вид 2" width="330" height="440" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Церковь была основана миссионерами из США в конце XIX века. Здание выполнено в традиционном японском стиле с элементами западной архитектуры. Это одна из старейших протестантских церквей Японии. Ежегодно храм посещают тысячи паломников и туристов. На территории церкви регулярно проводятся богослужения и культурные мероприятия.</p>
+<p class="prose">Церковь Христа в Токио — протестантская церковь, основанная в конце XIX века последователями американской миссии. Со временем она стала важным центром религиозной жизни японской столицы, объединяя верующих разных национальностей. Особенностью храма является сочетание традиционного японского стиля архитектуры и западных религиозных традиций. Храм привлекает туристов и местных жителей своей уникальной архитектурой и атмосферой, сочетающей японские традиции и западные религиозные практики.</p></div>
+</section>
 <section class="place" id="tokyo_edo_tokyo_museum">
+<div class="place-lead">
 <h3>Tokyo Edo Tokyo Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Период: 1993</p>
-<figure class="place-fig"><img src="../images/tokyo_edo_tokyo_museum.jpg" alt="Tokyo Edo Tokyo Museum"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/tokyo_edo_tokyo_museum.jpg" alt="Tokyo Edo Tokyo Museum" width="330" height="264" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/tokyo_edo_tokyo_museum_b.jpg" alt="Tokyo Edo Tokyo Museum — вид 2" width="330" height="186" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Экспозиция музея занимает площадь около 48 тысяч квадратных метров. Здесь воссозданы улицы традиционного японского квартала эпохи Эдо. На территории музея находятся павильоны традиционной архитектуры, демонстрирующие различные стили японских домов. Коллекция музея включает свыше 70 тысяч экспонатов, рассказывающих о жизни горожан XVII–XIX веков. В музее регулярно проводятся тематические выставки, лекции и мастер-классы.</p>
 <p class="prose">Музей Edo-Tokyo расположен в районе Сумида в Токио и посвящён истории города Эдо и современной столицы Японии — Токио. Музей был открыт в 1996 году после многолетней реконструкции старинной железнодорожной станции Асакуса. Экспозиция музея охватывает период от основания Эдо до начала XX века, когда город стал столицей империи Мэйдзи. Здесь представлены уникальные артефакты, отражающие повседневную жизнь горожан тех времён, включая традиционные ремесла, архитектуру и культурные особенности периода Эдо. Посещение музея позволяет глубже понять историю развития японской столицы и познакомиться с культурой и традициями периода Эдо.</p></div>
 </section>
 <section class="place" id="tokyo_ginza">
+<div class="place-lead">
 <h3>Tokyo Ginza</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Период: 1987</p>
-<figure class="place-fig"><img src="../images/tokyo_ginza.jpg" alt="Tokyo Ginza"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/tokyo_ginza.jpg" alt="Tokyo Ginza" width="330" height="223" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/tokyo_ginza_b.jpg" alt="Tokyo Ginza — вид 2" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Открыт в 1987 году. Располагается в самом сердце района Гинза. Известен уникальной архитектурой и современным дизайном. Считается одним из лучших мест для шопинга в Токио. На территории расположены рестораны известных шеф-поваров.</p>
 <p class="prose">Гинза-кроссинг — крупнейший торговый центр Токио, расположенный в одноименном районе Гинза. Открытый в 1987 году, он стал символом современной архитектуры Японии и местом притяжения туристов и местных жителей благодаря уникальным дизайнерским решениям и разнообразию магазинов и ресторанов. Знаменитый Гинза-кроссинг привлекает посетителей своими магазинами мировых брендов, ресторанами высокой кухни и атмосферой элитной городской жизни.</p></div>
 </section>
 <section class="place" id="tokyo_hamarikyu">
+<div class="place-lead">
 <h3>Tokyo Hamarikyu</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Период: 1869</p>
-<figure class="place-fig"><img src="../images/tokyo_hamarikyu.jpg" alt="Tokyo Hamarikyu"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/tokyo_hamarikyu.jpg" alt="Tokyo Hamarikyu" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/tokyo_hamarikyu_b.jpg" alt="Tokyo Hamarikyu — вид 2" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Создан по указу императора Мэйдзи в 1869 году. Располагается на территории бывшего императорского дворца. Известен своими красивыми прудами и мостиками. Считается одним из символов современного Токио. Ежегодно посещается миллионами туристов.</p>
 <p class="prose">Хамарикю Гарден — один из старейших парков Токио, заложенный в середине XIX века по приказу императора Мэйдзи. Парк стал местом отдыха знати и аристократии, символизируя европейский стиль жизни и новые веяния эпохи модернизации Японии. Особенность парка — живописная атмосфера, сочетающая традиционные японские сады с элементами европейской архитектуры. Парк Хамарикю Гарден привлекает туристов уникальной атмосферой, красотой японских садов и возможностью увидеть старинную архитектуру периода Мэйдзи.</p></div>
 </section>
-<section class="place" id="tokyo_imperial_palace_ext">
-<h3>Tokyo Imperial Palace Ext</h3>
-
-
-<figure class="place-fig"><img src="../images/tokyo_imperial_palace_ext.jpg" alt="Tokyo Imperial Palace Ext"/></figure>
-<div class="place-desc"><p class="prose">Дворец окружён высокой стеной длиной около пяти километров. На территории дворца расположено несколько зданий, включая главный зал аудиенций и императорские покои. Ежедневно утром перед дворцом проводится церемония смены караула. Внутри резиденции запрещено фотографировать. Территория Императорского дворца открыта для посещения туристов ежедневно.</p>
-<p class="prose">Императорский дворец Токио — официальная резиденция императора Японии. Построен в конце XIX века после переноса столицы страны в Токио. Ранее здесь находился замок Эдо, построенный сёгунами Токугава в XVII веке. Сегодня Императорский дворец является символом японской монархии и местом проведения государственных церемоний. Это одна из главных достопримечательностей Токио и символ императорской власти Японии.</p></div>
-</section>
 <section class="place" id="tokyo_imperial_east_garden">
+<div class="place-lead">
 <h3>Tokyo Imperial East Garden</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Стиль: ландшафтный дизайн с элементами традиционного японского садоводства, включающий рвы, каменные бастионы и ухоженные газоны.</p>
-<figure class="place-fig"><img src="../images/tokyo_imperial_east_garden.jpg" alt="Tokyo Imperial East Garden"/></figure>
+<p class="place-meta">Место: Chiyoda | Стиль: ландшафтный дизайн с элементами традиционного японского садоводства, включающий рвы, каменные бастионы и ухоженные газоны.</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/tokyo_imperial_east_garden.jpg" alt="Tokyo Imperial East Garden" width="1280" height="1073" style="height: 347px; max-height: 347px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/tokyo_imperial_east_garden_b.jpg" alt="Tokyo Imperial East Garden — вид 2" width="330" height="248" style="height: 347px; max-height: 347px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Сад был заложен в эпоху послевоенной реконструкции Японии. Его ландшафт вдохновлён традиционными японскими парками, сочетающими элементы природы и искусственно созданных элементов. Рвы и каменные стены напоминают о военных укреплениях периода Эдо. На территории сада расположены павильоны и мосты, украшенные традиционной японской архитектурой. Ежегодно парк посещают миллионы туристов, желающих увидеть символ императорской власти.</p>
 <p class="prose">Императорский дворец в Токио является историческим центром японской монархии и расположен в районе Чиода. Восточный сад дворца был разбит в 1960-х годах после реставрации территории, ранее использовавшейся как военные укрепления периода Эдо. Сад окружён рвом и каменными бастионами, символизируя преемственность традиций японского военного искусства и современной городской культуры. Восточный сад Императорского дворца позволяет туристам ознакомиться с уникальной гармонией старинной архитектуры и современного городского пространства, создавая атмосферу спокойствия и умиротворённости среди шумного мегаполиса.</p></div>
 </section>
 <section class="place" id="tokyo_imperial_palace">
+<div class="place-lead">
 <h3>Tokyo Imperial Palace</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/tokyo_imperial_palace.jpg" alt="Tokyo Imperial Palace"/></figure>
+<p class="place-meta">Адрес: Chiyoda</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/tokyo_imperial_palace.jpg" alt="Tokyo Imperial Palace" width="1280" height="853" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/tokyo_imperial_palace_b.jpg" alt="Tokyo Imperial Palace — вид 2" width="330" height="219" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">На территории дворца расположены традиционные японские постройки и современные здания. Дворец окружён глубокими рвами и каменными стенами. Главную башню замка называют Фушими-ягура. Ежедневно туристы могут наблюдать смену караула перед дворцом. Посещение Императорского дворца возможно только во время официальных церемоний.</p>
 <p class="prose">Императорский дворец Токио расположен на месте бывшего замка Эдо, построенного сёгунатом Токугава в XVII веке. Замок служил резиденцией сегунов до Реставрации Мэйдзи, когда власть перешла императору Муцухито. Современный Императорский дворец был восстановлен после Второй мировой войны в середине XX века. Это главная императорская резиденция Японии, место проведения государственных церемоний и торжественных мероприятий.</p></div>
 </section>
-<section class="place" id="tokyo_shinjuku_kabukicho">
-<h3>Tokyo Shinjuku Kabukicho</h3>
+<section class="place" id="tokyo_imperial_palace_ext">
+<div class="place-lead">
+<h3>Tokyo Imperial Palace Ext</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/tokyo_shinjuku_kabukicho.jpg" alt="Tokyo Shinjuku Kabukicho"/></figure>
-<div class="place-desc"><p class="prose">Построена в стиле неонового каньона, характерного для района Кабукичо. Позволяет увидеть знаменитый неоновый световой пейзаж города. Расположена рядом с главной улицей Кабукичо, где сконцентрированы развлекательные заведения. Является популярной смотровой площадкой для фотографирования и наблюдения за ночной жизнью района. Предоставляет вид на токийское метро Синдзюку и другие достопримечательности.</p>
-<p class="prose">Кабаре-стрит Кабукичо — район развлечений Токио, возникший после Второй мировой войны. Здесь сосредоточены многочисленные кабаре-клубы, бары и рестораны, известные своей яркой ночной жизнью и шоу-программами. Кабукитё стал символом ночной жизни Японии и популярным местом среди туристов и местных жителей. Кабукитё гейтор — обзорная площадка, позволяющая насладиться панорамным видом на Кабукичо и окрестности, включая знаменитые неоновые башни района.</p></div>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/tokyo_imperial_palace_ext.jpg" alt="Tokyo Imperial Palace Ext" width="330" height="219" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/tokyo_imperial_palace_ext_b.jpg" alt="Tokyo Imperial Palace Ext — вид 2" width="330" height="374" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Дворец окружён высокой стеной длиной около пяти километров. На территории дворца расположено несколько зданий, включая главный зал аудиенций и императорские покои. Ежедневно утром перед дворцом проводится церемония смены караула. Внутри резиденции запрещено фотографировать. Территория Императорского дворца открыта для посещения туристов ежедневно.</p>
+<p class="prose">Императорский дворец Токио — официальная резиденция императора Японии. Построен в конце XIX века после переноса столицы страны в Токио. Ранее здесь находился замок Эдо, построенный сёгунами Токугава в XVII веке. Сегодня Императорский дворец является символом японской монархии и местом проведения государственных церемоний. Это одна из главных достопримечательностей Токио и символ императорской власти Японии.</p></div>
 </section>
-<section class="place" id="tokyo_pdfband_3_7d0f8767">
-<h3>Matsuke Heikichi - Nogaku zue - Walters</h3>
+<section class="place" id="tokyo_matsuke_heikichi_nogaku_zue_walters">
+<div class="place-lead">
+<h3>Tokyo Matsuke Heikichi Nogaku Zue Walters</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Стиль: традиционный японский стиль</p>
-<figure class="place-fig"><img src="../images/tokyo_pdfband_3_7d0f8767.jpg" alt="Matsuke Heikichi - Nogaku zue - Walters"/></figure>
+<figure class="place-fig place-fig--hi-res"><img src="../images/tokyo_matsuke_heikichi_nogaku_zue_walters.jpg" alt="Tokyo Matsuke Heikichi Nogaku Zue Walters" width="1280" height="866"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Театр Но возник примерно в XVI–XVII веках. Традиция театра Но передается от учителя к ученикам. Ногаку входит в список нематериального культурного наследия ЮНЕСКО. Каждый спектакль театра длится около трех часов. Для исполнения роли актер должен долго тренироваться и изучать специальные техники.</p>
 <p class="prose">Музей Ногаку (театр Но), расположенный в Токио, является значимым культурным объектом Японии, представляющим традиционное театральное искусство страны. Основанный в XVII веке, театр Но считается одним из старейших видов японского драматического искусства, сочетающего музыку, танец, драму и поэзию. Здание музея было построено в стиле традиционного японского театра, отражая богатое историческое наследие и эстетику этой уникальной формы искусства. Посещение музея позволяет глубже понять японскую культуру и историю, познакомиться с искусством театра Но и насладиться красотой традиционных японских декораций и костюмов.</p></div>
 </section>
 <section class="place" id="tokyo_meiji_shrine">
+<div class="place-lead">
 <h3>Tokyo Meiji Shrine</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Стиль: синтоистское святилище, выполненное в стиле кипарисовых построек</p>
-<figure class="place-fig"><img src="../images/tokyo_meiji_shrine.jpg" alt="Tokyo Meiji Shrine"/></figure>
+<p class="place-meta">Адрес: Shibuya, Yoyogi | Стиль: синтоистское святилище, выполненное в стиле кипарисовых построек</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/tokyo_meiji_shrine.jpg" alt="Tokyo Meiji Shrine" width="1280" height="856" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/tokyo_meiji_shrine_b.jpg" alt="Tokyo Meiji Shrine — вид 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Расположено в районе Шибуя, Токио, рядом с парком Йойоги. На входе установлены крупнейшие в мире деревянные ворота тори высотой около 12 метров. Ежедневно проводится несколько церемоний, привлекающих тысячи посетителей. Святилище окружено живописным лесопарком площадью свыше 70 гектаров. Здесь ежегодно проходит праздник Цукуба мацури, символизирующий начало учебного года.</p>
 <p class="prose">Мэйдзи Дзингу — святилище Мэйдзи, посвящённое императору Муцухито и его супруге императрице Сёкэн-ин, возведено в начале XX века после пожара 1920 года. После Второй мировой войны храм был восстановлен в 1958 году. Это одно из крупнейших синтоистских святилищ Японии, известное своими масштабными церемониями и традициями. Знаменитое место паломничества японцев и туристов благодаря величественному входу с гигантскими воротами тори и пышной зелёной территории.</p></div>
 </section>
 <section class="place" id="tokyo_meiji_torii">
+<div class="place-lead">
 <h3>Tokyo Meiji Torii</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Стиль: Гигантский кипарисовый стиль (Giant cypress)</p>
-<figure class="place-fig"><img src="../images/tokyo_meiji_torii.jpg" alt="Tokyo Meiji Torii"/></figure>
+<p class="place-meta">Адрес: Harajuku approach | Стиль: Гигантский кипарисовый стиль (Giant cypress)</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/tokyo_meiji_torii.jpg" alt="Tokyo Meiji Torii" width="1280" height="960" style="height: 260px; max-height: 260px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/tokyo_meiji_torii_b.jpg" alt="Tokyo Meiji Torii — вид 2" width="330" height="186" style="height: 260px; max-height: 260px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Внешний входной комплекс включает две гигантские кипарисовые тории высотой около 12 метров каждая. Строительство внешнего входа было завершено в 1926 году. На внешней стороне тории изображена эмблема императорской семьи. Ежегодно возле тории проводится традиционный фестиваль «Ханацукасияма», посвящённый цветению сакуры. Комплекс окружён живописным парком, где гуляют туристы и местные жители.</p>
 <p class="prose">Тории — традиционные ворота синтоистских святилищ Японии, символизирующие переход от мирской жизни к священной территории храма. Внешние ворота Мейдзи-дзингу были возведены в 1920-х годах после пожара, уничтожившего оригинальные деревянные конструкции. Гигантские кипарисовые тории стали символом мемориального комплекса и привлекают туристов своей величественностью. Посещение внешних ворот Мейдзи-синджу позволяет ощутить атмосферу традиционного японского синтоизма и насладиться красотой природы района Харадзюку.</p></div>
 </section>
 <section class="place" id="tokyo_nezu_museum">
+<div class="place-lead">
 <h3>Tokyo Nezu Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Стиль: модернизм | Период: 1919</p>
-<figure class="place-fig"><img src="../images/tokyo_nezu_museum.jpg" alt="Tokyo Nezu Museum"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/tokyo_nezu_museum.jpg" alt="Tokyo Nezu Museum" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/tokyo_nezu_museum_b.jpg" alt="Tokyo Nezu Museum — вид 2" width="330" height="236" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Архитектор здания — знаменитый японский архитектор Кэндзо Танге. Музей расположен в живописной части района Аояма, рядом с парком Нэзу. Коллекция музея включает работы современных японских художников. На территории музея проводятся концерты классической музыки и театральные постановки. Ежегодно музей посещает около полумиллиона человек.</p>
 <p class="prose">Музей Нэзуйама основан в 1969 году благодаря усилиям семьи Нэзу, известной своей благотворительной деятельностью и любовью к искусству. Здание музея было спроектировано архитектором Кэндзо Танге и построено в стиле модернизма, сочетающего элементы традиционной японской архитектуры и современные тенденции. Музей стал важным культурным центром Токио, где регулярно проходят выставки современного искусства. Здание музея является выдающимся образцом послевоенной архитектуры Японии и привлекает внимание любителей искусства и архитектуры со всего мира.</p></div>
 </section>
 <section class="place" id="tokyo_nezu_shrine">
+<div class="place-lead">
 <h3>Tokyo Nezu Shrine</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Стиль: синтоистская архитектура эпохи Эдо | Период: 1626</p>
-<figure class="place-fig"><img src="../images/tokyo_nezu_shrine.jpg" alt="Tokyo Nezu Shrine"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/tokyo_nezu_shrine_b.jpg" alt="Tokyo Nezu Shrine" width="330" height="238"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Храм построен в традиционном японском стиле синтоизма, сочетающем элементы японской архитектуры эпохи Эдо. На территории храма растёт старинное дерево сакуры, возраст которого превышает несколько сотен лет. Ежегодно весной здесь проводится фестиваль цветущей сакуры, привлекающий тысячи посетителей. В храме хранятся древние священные предметы и реликвии, символизирующие связь поколений и духовную преемственность. Рядом с храмом находится одноимённый парк, популярный среди горожан благодаря своим живописным аллеям и пруду.</p>
 <p class="prose">Небольшой синтоистский храм Нэзуйаширасан расположен в районе Тиёда в Токио. Храм основан в эпоху Эдо (примерно XVII век), изначально назывался Хонго-синдэн. Со временем название изменилось, став отражением места расположения храма рядом с парком Нэзу. Храм окружён живописной зелёной зоной и является популярным местом прогулок среди местных жителей. Нэзу Шинджирен привлекает туристов своей атмосферой спокойствия и гармонии, а также возможностью насладиться прогулкой по ухоженному саду и парку.</p></div>
 </section>
 <section class="place" id="tokyo_oedo_odaiba">
+<div class="place-lead">
 <h3>Tokyo Oedo Odaiba</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Период: 1996</p>
-<figure class="place-fig"><img src="../images/tokyo_oedo_odaiba.jpg" alt="Tokyo Oedo Odaiba"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/tokyo_oedo_odaiba.jpg" alt="Tokyo Oedo Odaiba" width="330" height="439" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/tokyo_oedo_odaiba_b.jpg" alt="Tokyo Oedo Odaiba — вид 2" width="330" height="173" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Высота статуи составляет около 40 метров. На постаменте изображены цитаты из Декларации независимости США. Статуя выполнена из нержавеющей стали и меди. Смотровая площадка внутри статуи предлагает панорамный вид на Токийский залив. Ежегодно её посещают тысячи туристов.</p>
 <p class="prose">Статуя Свободы в Одайбе — уменьшенная копия знаменитой американской Статуи Свободы, расположенная на искусственном острове Футэдзима в районе Одайба в Токио. Подарок от правительства США Японии, статуя была установлена в 1996 году в честь 125-летия оригинала. Идея проекта принадлежит японскому бизнесмену Юдзи Харада, который вдохновился оригинальной статуей во время своего визита в Нью-Йорк. Символ дружбы между Японией и США, культурное наследие и популярная достопримечательность района Одайба.</p></div>
 </section>
 <section class="place" id="tokyo_roppongi_hills">
+<div class="place-lead">
 <h3>Tokyo Roppongi Hills</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Стиль: современная архитектура, хай-тек | Период: 2003</p>
-<figure class="place-fig"><img src="../images/tokyo_roppongi_hills.jpg" alt="Tokyo Roppongi Hills"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/tokyo_roppongi_hills.jpg" alt="Tokyo Roppongi Hills" width="330" height="186" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/tokyo_roppongi_hills_b.jpg" alt="Tokyo Roppongi Hills — вид 2" width="330" height="186" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Высота башни составляет 243 метра. На верхнем этаже расположена смотровая площадка Sky Terrace 52nd Floor, откуда открывается вид на весь Токио. Здание является штаб-квартирой корпорации Mitsubishi Estate Company. Небоскрёб оснащён системой солнечных батарей, обеспечивающих до 7% потребляемой энергии. В башне расположены офисы компаний, рестораны, магазины и жилые помещения.</p>
 <p class="prose">Roppongi Hills Mori Tower построен в Токио в 2003 году японской архитектурной фирмой Kohn Pedersen Fox Associates (KPF). Здание стало знаковым объектом района Роппонги благодаря сочетанию современной архитектуры и инновационного дизайна. Башня высотой 243 метра стала первым небоскрёбом такого масштаба в Японии после Второй мировой войны. Mori Tower привлекает туристов своей уникальной архитектурой, панорамными видами города и современными торговыми площадями.</p></div>
 </section>
 <section class="place" id="tokyo_sensoji">
+<div class="place-lead">
 <h3>Tokyo Sensoji</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Стиль: буддийский храм, стиль архитектуры включает элементы традиционной японской архитектуры периода Хэйан.</p>
-<figure class="place-fig"><img src="../images/tokyo_sensoji.jpg" alt="Tokyo Sensoji"/></figure>
+<p class="place-meta">Адрес: Asakusa, Taitō | Стиль: буддийский храм, стиль архитектуры включает элементы традиционной японской архитектуры периода Хэйан.</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/tokyo_sensoji.jpg" alt="Tokyo Sensoji" width="1280" height="851" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/tokyo_sensoji_b.jpg" alt="Tokyo Sensoji — вид 2" width="330" height="323" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Храм Сенсё-дзи входит в список национальных сокровищ Японии. Статуя богини Каннон в храме считается одной из главных достопримечательностей города. Перед главным входом храма расположена знаменитая арка Конихара-тэнмон, известная также как Каминаримон. Пятьэтажная пагода храма является одним из символов района Асакуса. Ежегодно в феврале здесь проводится знаменитый фестиваль Сандзя-мацури.</p>
 <p class="prose">Сенсё-дзи — буддийский храм в Токио, один из старейших храмов Японии, основанный в 645 году принцессой Анэномебе. Храм расположен в районе Асакуса и является важным религиозным центром страны. В храме находится главная святыня — статуя богини Каннон, почитаемой японцами как покровительницу путешественников и детей. Сенсё-дзи привлекает туристов своей уникальной архитектурой и богатой историей, являясь символом японской культуры и религии.</p></div>
 </section>
-<section class="place" id="tokyo_shibuya_scramble_alt">
-<h3>Tokyo Shibuya Scramble Alt</h3>
-
-
-<figure class="place-fig"><img src="../images/tokyo_shibuya_scramble_alt.jpg" alt="Tokyo Shibuya Scramble Alt"/></figure>
-<div class="place-desc"><p class="prose">Ежедневно через переход проходит около 2 миллионов человек. Переход оборудован специальными светофорами, синхронизированными с движением толпы. На переходе часто проводятся фотосессии и съёмки рекламных роликов. Название «Шибуя Кроссинг» стало синонимом хаотичного движения и суеты мегаполиса. Здесь ежегодно проводится фестиваль «Shibuya Scramble Square», привлекающий миллионы посетителей.</p>
-<p class="prose">Шибуя Кроссинг — один из самых известных пешеходных переходов Токио, расположенный прямо перед станцией Шибуя. Переход знаменит своей оживлённой атмосферой и ярким потоком людей, пересекающих улицу одновременно. Ежедневно здесь проходят тысячи туристов и местных жителей, создавая уникальную атмосферу города, где сочетаются традиционные японские ценности и современные технологии. Популярное место среди туристов благодаря уникальной атмосфере и возможности сделать эффектные фотографии.</p></div>
-</section>
 <section class="place" id="tokyo_shibuya_crossing">
+<div class="place-lead">
 <h3>Tokyo Shibuya Crossing</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/tokyo_shibuya_crossing.jpg" alt="Tokyo Shibuya Crossing"/></figure>
+<p class="place-meta">Адрес: Shibuya Station Hachikō exit</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/tokyo_shibuya_crossing.jpg" alt="Tokyo Shibuya Crossing" width="1280" height="720" style="height: 259px; max-height: 259px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/tokyo_shibuya_crossing_b.jpg" alt="Tokyo Shibuya Crossing — вид 2" width="330" height="220" style="height: 259px; max-height: 259px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Ежедневный поток людей составляет около 2 миллионов человек. Переход стал культовым местом после выхода фильма «Гонщик» с Такеши Китано в главной роли. Светофор перехода изображён на многих сувенирах и открытках. На пересечении улиц Харадзюку и Шибуя расположен знаменитый магазин UNIQLO. Перекрёсток часто появляется в аниме и манге, например, в сериале «Тетрадь смерти».</p>
 <p class="prose">Сибуя Кроссинг — один из самых известных пешеходных переходов Токио, ставший символом района Сибуя и японской культуры поп-культуры. Переход получил широкую известность благодаря своей оживлённой атмосфере и яркому светофору, став популярным местом встреч и съёмок фильмов и клипов. Ежедневно через перекрёсток проходят тысячи людей, создавая уникальную атмосферу городской жизни. Популярное место встреч туристов и местных жителей, символ японской культуры и уличной моды.</p></div>
 </section>
-<section class="place" id="tokyo_shinjuku_gyoen">
-<h3>Синдзюку Гёэн</h3>
+<section class="place" id="tokyo_shibuya_scramble_alt">
+<div class="place-lead">
+<h3>Tokyo Shibuya Scramble Alt</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1926</p>
-<figure class="place-fig"><img src="../images/tokyo_shinjuku_gyoen.jpg" alt="Синдзюку Гёэн"/></figure>
-<div class="place-desc"><p class="prose">Расположенный к северу от шумного района Синдзюку в Токио, Национальный сад Синдзюку Гёэн является спокойным оазисом, предлагающим возможность увидеть традиционный японский садовый дизайн и природу. Он занимает примерно 57 гектаров земли. Парк насчитывает более 180 000 деревьев, представляющих более 400 видов. Каждый сезон приносит разные цветы, включая цветение вишни, азалии и гортензии. Его архитектура включает исторические здания, такие как Чайный дом и Административное здание. Посетители также могут насладиться сезонными фестивалями, такими как Весенний фестиваль цветения вишни.</p>
-<p class="prose">Основанный в начале эпохи Сёва (1926), Синдзюку Гёэн изначально предназначался как рекреационное пространство для членов императорской семьи и высокопоставленных чиновников. Сегодня он демонстрирует три различных стиля — японский, европейский формальный и английский ландшафтный сад — сочетая историческое значение с современными усилиями по охране окружающей среды. Посетите Синдзюку Гёэн, чтобы насладиться уникальным сочетанием традиционной и западной садовой эстетики Японии, прогуливаясь по ухоженным ландшафтам в тишине и спокойствии.</p></div>
+<p class="place-meta">Адрес: Shibuya Station</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/tokyo_shibuya_scramble_alt.jpg" alt="Tokyo Shibuya Scramble Alt" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/tokyo_shibuya_scramble_alt_b.jpg" alt="Tokyo Shibuya Scramble Alt — вид 2" width="330" height="220" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Ежедневно через переход проходит около 2 миллионов человек. Переход оборудован специальными светофорами, синхронизированными с движением толпы. На переходе часто проводятся фотосессии и съёмки рекламных роликов. Название «Шибуя Кроссинг» стало синонимом хаотичного движения и суеты мегаполиса. Здесь ежегодно проводится фестиваль «Shibuya Scramble Square», привлекающий миллионы посетителей.</p>
+<p class="prose">Шибуя Кроссинг — один из самых известных пешеходных переходов Токио, расположенный прямо перед станцией Шибуя. Переход знаменит своей оживлённой атмосферой и ярким потоком людей, пересекающих улицу одновременно. Ежедневно здесь проходят тысячи туристов и местных жителей, создавая уникальную атмосферу города, где сочетаются традиционные японские ценности и современные технологии. Популярное место среди туристов благодаря уникальной атмосфере и возможности сделать эффектные фотографии.</p></div>
 </section>
-<section class="place" id="tokyo_pdfband_0_0a06f033">
-<h3>St. Mary&#x27;s Cathedral Tokyo</h3>
+<section class="place" id="tokyo_shinjuku_kabukicho">
+<div class="place-lead">
+<h3>Tokyo Shinjuku Kabukicho</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Shinjuku</p>
+<figure class="place-fig place-fig--lo-res"><img src="../images/tokyo_shinjuku_kabukicho_b.jpg" alt="Tokyo Shinjuku Kabukicho" width="330" height="220"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Построена в стиле неонового каньона, характерного для района Кабукичо. Позволяет увидеть знаменитый неоновый световой пейзаж города. Расположена рядом с главной улицей Кабукичо, где сконцентрированы развлекательные заведения. Является популярной смотровой площадкой для фотографирования и наблюдения за ночной жизнью района. Предоставляет вид на токийское метро Синдзюку и другие достопримечательности.</p>
+<p class="prose">Кабаре-стрит Кабукичо — район развлечений Токио, возникший после Второй мировой войны. Здесь сосредоточены многочисленные кабаре-клубы, бары и рестораны, известные своей яркой ночной жизнью и шоу-программами. Кабукитё стал символом ночной жизни Японии и популярным местом среди туристов и местных жителей. Кабукитё гейтор — обзорная площадка, позволяющая насладиться панорамным видом на Кабукичо и окрестности, включая знаменитые неоновые башни района.</p></div>
+</section>
+<section class="place" id="tokyo_skytree">
+<div class="place-lead">
+<h3>Tokyo Skytree</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Sumida | Период: 2012</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/tokyo_skytree.jpg" alt="Tokyo Skytree" width="1067" height="1600" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/tokyo_skytree_b.jpg" alt="Tokyo Skytree — вид 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Высота Скайтри составляет 634 метра, что делает её второй по величине постройкой Японии после токийской телебашни. На верхнем этаже расположена обзорная площадка, откуда открывается вид на весь город. Нижний этаж занимает тематический парк с аттракционами и зонами развлечений. Башня оснащена двумя смотровыми уровнями: нижний открыт круглый год, верхний работает сезонно. Строительство Скайтри заняло около трех лет.</p>
+<p class="prose">Токийская Скайтри — телевизионная башня высотой 634 метра, расположенная в районе Сумида. Построена в 2012 году в стиле неофутуристического телебашенного комплекса. Является самой высокой отдельно стоящей башней мира и вторым по высоте сооружением Японии после Токийской башни. Скайтри привлекает туристов панорамными видами Токио, смотровой площадкой на высоте 350 метров и тематическим парком на нижнем уровне.</p></div>
+</section>
+<section class="place" id="tokyo_st_mary_s_cathedral_tokyo">
+<div class="place-lead">
+<h3>Tokyo St Mary S Cathedral Tokyo</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Стиль: модернизм с элементами японского стиля</p>
-<figure class="place-fig"><img src="../images/tokyo_pdfband_0_0a06f033.jpg" alt="St. Mary&#x27;s Cathedral Tokyo"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/tokyo_st_mary_s_cathedral_tokyo.jpg" alt="Tokyo St Mary S Cathedral Tokyo" width="1280" height="888" style="height: 320px; max-height: 320px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/tokyo_st_mary_s_cathedral_tokyo_b.jpg" alt="Tokyo St Mary S Cathedral Tokyo — вид 2" width="330" height="247" style="height: 320px; max-height: 320px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Храм построен в стиле модернизма с элементами традиционной японской архитектуры. Купол храма выполнен в форме многослойной бумаги оригами. Строительство продолжалось около пяти лет. Католикам храм служит местом проведения богослужений и духовных мероприятий. Ежегодно здесь проходит фестиваль музыки и искусства.</p>
 <p class="prose">Статуя Девы Марии возведена в середине XX века в Токио архитектором Хироси Окамото. Храм стал символом мира и духовного единения горожан после разрушительных последствий Второй мировой войны. Особенностью сооружения является необычная форма купола, вдохновлённая японским искусством оригами. Здание привлекает туристов своей уникальной архитектурой и атмосферой спокойствия и умиротворённости, позволяя ощутить гармонию Востока и Запада.</p></div>
 </section>
 <section class="place" id="tokyo_sumida_park">
+<div class="place-lead">
 <h3>Tokyo Sumida Park</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/tokyo_sumida_park.jpg" alt="Tokyo Sumida Park"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/tokyo_sumida_park.jpg" alt="Tokyo Sumida Park" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/tokyo_sumida_park_b.jpg" alt="Tokyo Sumida Park — вид 2" width="330" height="222" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">В парке расположены несколько небольших прудов и водоёмов, где разводят карпов кои. На территории парка находится буддийский храм Хонгандзи, построенный в традиционном японском стиле. Ежегодно здесь проводится традиционный фестиваль Сумидакагэмацури, во время которого устраиваются театрализованные представления и костюмированные шествия. С холмов парка открывается живописная панорама города, включая знаменитые небоскрёбы района Синдзюку. Летом в парке проходят многочисленные музыкальные концерты и театральные постановки.</p>
 <p class="prose">Сумидзакагаока (современное название Сумида-парк) был основан в конце XIX века рядом с одноимённой станцией железной дороги Токио. Парк расположен вдоль живописной реки Сумидагава и долгое время служил местом отдыха горожан. Здесь регулярно проводились народные гуляния, фестивали и концерты, особенно популярными были летние мероприятия, посвящённые празднику Бон. В XX веке парк стал популярным местом прогулок среди жителей Токио благодаря ухоженной территории, озёрам и зелёным насаждениям. Парк привлекает туристов своей уникальной атмосферой спокойствия и гармонии природы с городской средой, а также возможностью насладиться видами на реку Сумидагава и окрестности Токио.</p></div>
 </section>
-<section class="place" id="tokyo_pdfband_2_725b2c55">
-<h3>Tokyo Camii</h3>
-
-<p class="place-meta">Стиль: современная архитектура с элементами традиционного исламского стиля</p>
-<figure class="place-fig"><img src="../images/tokyo_pdfband_2_725b2c55.jpg" alt="Tokyo Camii"/></figure>
-<div class="place-desc"><p class="prose">Первое здание мечети было построено в 1964 году, позже заменено современным сооружением. Архитектура здания сочетает традиционные исламские мотивы с элементами японского стиля. Ежегодно здесь проводятся важные религиозные мероприятия и фестивали. Это единственная действующая мечеть в Токио. Посещение мечети позволяет лучше понять культурное разнообразие Японии.</p>
-<p class="prose">Токио Ками — мечеть, построенная в Токио японскими мусульманами в середине XX века. Это одно из первых мусульманских религиозных сооружений в Японии, ставшее символом единства японской общины мусульман и их культурной самобытности. Мечеть стала местом проведения исламских праздников и мероприятий, способствуя укреплению связей между верующими и их традициями. Мечеть привлекает туристов и местных жителей возможностью познакомиться с культурой ислама и историей японских мусульман.</p></div>
-</section>
-<section class="place" id="tokyo_pdfband_1_0304bd06">
-<h3>Tokyo Church of Christ</h3>
-
-<p class="place-meta">Стиль: сочетание традиционного японского стиля и элементов западной архитектуры</p>
-<figure class="place-fig"><img src="../images/tokyo_pdfband_1_0304bd06.jpg" alt="Tokyo Church of Christ"/></figure>
-<div class="place-desc"><p class="prose">Церковь была основана миссионерами из США в конце XIX века. Здание выполнено в традиционном японском стиле с элементами западной архитектуры. Это одна из старейших протестантских церквей Японии. Ежегодно храм посещают тысячи паломников и туристов. На территории церкви регулярно проводятся богослужения и культурные мероприятия.</p>
-<p class="prose">Церковь Христа в Токио — протестантская церковь, основанная в конце XIX века последователями американской миссии. Со временем она стала важным центром религиозной жизни японской столицы, объединяя верующих разных национальностей. Особенностью храма является сочетание традиционного японского стиля архитектуры и западных религиозных традиций. Храм привлекает туристов и местных жителей своей уникальной архитектурой и атмосферой, сочетающей японские традиции и западные религиозные практики.</p></div>
-</section>
-<section class="place" id="tokyo_skytree">
-<h3>Tokyo Skytree</h3>
-
-<p class="place-meta">Период: 2012</p>
-<figure class="place-fig"><img src="../images/tokyo_skytree.jpg" alt="Tokyo Skytree"/></figure>
-<div class="place-desc"><p class="prose">Высота Скайтри составляет 634 метра, что делает её второй по величине постройкой Японии после токийской телебашни. На верхнем этаже расположена обзорная площадка, откуда открывается вид на весь город. Нижний этаж занимает тематический парк с аттракционами и зонами развлечений. Башня оснащена двумя смотровыми уровнями: нижний открыт круглый год, верхний работает сезонно. Строительство Скайтри заняло около трех лет.</p>
-<p class="prose">Токийская Скайтри — телевизионная башня высотой 634 метра, расположенная в районе Сумида. Построена в 2012 году в стиле неофутуристического телебашенного комплекса. Является самой высокой отдельно стоящей башней мира и вторым по высоте сооружением Японии после Токийской башни. Скайтри привлекает туристов панорамными видами Токио, смотровой площадкой на высоте 350 метров и тематическим парком на нижнем уровне.</p></div>
-</section>
 <section class="place" id="tokyo_tokyo_tower">
+<div class="place-lead">
 <h3>Tokyo Tokyo Tower</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Стиль: Стальная решётчатая конструкция, вдохновлённая формой Эйфелевой башни | Период: 1958</p>
-<figure class="place-fig"><img src="../images/tokyo_tokyo_tower.jpg" alt="Tokyo Tokyo Tower"/></figure>
+<p class="place-meta">Адрес: Minato, Shiba Park | Стиль: Стальная решётчатая конструкция, вдохновлённая формой Эйфелевой башни | Период: 1958</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/tokyo_tokyo_tower.jpg" alt="Tokyo Tokyo Tower" width="1067" height="1600" style="height: 260px; max-height: 260px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/tokyo_tokyo_tower_b.jpg" alt="Tokyo Tokyo Tower — вид 2" width="330" height="186" style="height: 260px; max-height: 260px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Высота башни составляет 333 метра. Башня выполнена в стиле стальной решётчатой конструкции, схожей с Эйфелевой башней. На верхних этажах расположены смотровые площадки и рестораны. Ежегодно её посещают около 3 миллионов туристов. Строительство велось всего за год.</p>
 <p class="prose">Токийская башня была построена в 1958 году как символ восстановления Японии после Второй мировой войны. Она стала популярной достопримечательностью города и важной частью городской инфраструктуры, выполняя функции радиовышки и телевизионной башни. Токио-Тауэр выделяется своей уникальной архитектурой, вдохновлённой Эйфелевой башней, и является одним из узнаваемых символов японской столицы. Посещение Токио-Тауэра позволяет увидеть город сверху и почувствовать дух исторического возрождения Японии.</p></div>
 </section>
 <section class="place" id="tokyo_tsukiji_outer_market">
+<div class="place-lead">
 <h3>Tokyo Tsukiji Outer Market</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/tokyo_tsukiji_outer_market.jpg" alt="Tokyo Tsukiji Outer Market"/></figure>
+<p class="place-meta">Адрес: Tsukiji</p>
+<figure class="place-fig place-fig--lo-res"><img src="../images/tokyo_tsukiji_outer_market_b.jpg" alt="Tokyo Tsukiji Outer Market" width="330" height="176"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Здесь ежедневно продаются тысячи тонн свежей рыбы и морепродуктов. Рыбная биржа функционирует уже более пяти веков. Комплекс переехал на нынешнее место в 1984 году. Ежедневно сюда приезжают десятки тысяч покупателей. Рынок является одним из символов японской столицы.</p>
 <p class="prose">Тсукидзи Оутэр Маркет расположен рядом с легендарной рыбной биржей Тсукидзи, основанной ещё в 16 веке. После Второй мировой войны здесь появились крытые торговые ряды, где продавались свежие морепродукты и рыба. В 1984 году комплекс переехал на новое место, сохранив свою популярность среди местных жителей и туристов. Это одно из главных мест Токио, чтобы попробовать свежайшие морепродукты прямо от поставщиков.</p></div>
 </section>
-<section class="place" id="tokyo_ueno_park">
-<h3>Tokyo Ueno Park</h3>
-
-<p class="place-meta">Период: 1873</p>
-<figure class="place-fig"><img src="../images/tokyo_ueno_park.jpg" alt="Tokyo Ueno Park"/></figure>
-<div class="place-desc"><p class="prose">Парк расположен рядом с Императорским дворцом и музеем Уэно. Здесь находится крупнейший ботанический сад Японии. На территории парка установлены памятники русским воинам, погибшим в Русско-японской войне. Ежегодно весной проводится фестиваль сакуры Уэно, собирающий тысячи посетителей. В парке есть зоопарк, один из старейших в стране.</p>
-<p class="prose">Уэно-парк был основан в конце XIX века после реставрации Мэйдзи и стал первым общественным парком Токио. Здесь проходили важные политические мероприятия, выставки и культурные события, ставшие символом модернизации Японии. Сегодня парк сохраняет историческое значение и является популярным местом отдыха горожан и туристов. Это одно из самых живописных мест Токио, популярное среди местных жителей и гостей города благодаря ухоженным садам, памятникам культуры и архитектуры, а также разнообразию развлечений и мероприятий.</p></div>
-</section>
 <section class="place" id="tokyo_ueno_district">
+<div class="place-lead">
 <h3>Tokyo Ueno District</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Стиль: западный стиль</p>
-<figure class="place-fig"><img src="../images/tokyo_ueno_district.jpg" alt="Tokyo Ueno District"/></figure>
+<p class="place-meta">Адрес: Ueno, Taitō | Стиль: западный стиль</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/tokyo_ueno_district.jpg" alt="Tokyo Ueno District" width="1280" height="850" style="height: 235px; max-height: 235px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/tokyo_ueno_district_b.jpg" alt="Tokyo Ueno District — вид 2" width="330" height="168" style="height: 235px; max-height: 235px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">На территории парка расположены Музей изящных искусств Уэно, Национальный музей природы и науки, Музей западного искусства и другие музеи. Главной достопримечательностью парка считается пруд Синобадзу, окруженный живописными мостиками и павильонами. Музеи Уэно-парка являются одними из старейших культурных учреждений Японии и хранят богатейшую коллекцию произведений искусства и научных экспонатов. Ежегодно в парке проводятся многочисленные фестивали и мероприятия, привлекающие тысячи посетителей. В парке также находится статуя Сорай Хосю — известного японского просветителя XVIII века.</p>
 <p class="prose">Уэно-парк был основан в 1873 году и изначально служил местом отдыха горожан Токио. Со временем парк стал популярным культурным центром города благодаря строительству нескольких музеев западного стиля в конце XIX–XX веков. Сегодня Уэно-парк является одним из крупнейших и наиболее посещаемых парков Японии, известным своими живописными прудами и парком скульптур. Парк привлекает туристов и местных жителей благодаря уникальным музейным зданиям, расположенным среди живописной природы, и является важной культурной достопримечательностью Токио.</p></div>
 </section>
+<section class="place" id="tokyo_ueno_park">
+<div class="place-lead">
+<h3>Tokyo Ueno Park</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Период: 1873</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/tokyo_ueno_park.jpg" alt="Tokyo Ueno Park" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/tokyo_ueno_park_b.jpg" alt="Tokyo Ueno Park — вид 2" width="330" height="200" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Парк расположен рядом с Императорским дворцом и музеем Уэно. Здесь находится крупнейший ботанический сад Японии. На территории парка установлены памятники русским воинам, погибшим в Русско-японской войне. Ежегодно весной проводится фестиваль сакуры Уэно, собирающий тысячи посетителей. В парке есть зоопарк, один из старейших в стране.</p>
+<p class="prose">Уэно-парк был основан в конце XIX века после реставрации Мэйдзи и стал первым общественным парком Токио. Здесь проходили важные политические мероприятия, выставки и культурные события, ставшие символом модернизации Японии. Сегодня парк сохраняет историческое значение и является популярным местом отдыха горожан и туристов. Это одно из самых живописных мест Токио, популярное среди местных жителей и гостей города благодаря ухоженным садам, памятникам культуры и архитектуры, а также разнообразию развлечений и мероприятий.</p></div>
+</section>
 <section class="place" id="tokyo_yanaka_ginza">
+<div class="place-lead">
 <h3>Tokyo Yanaka Ginza</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/tokyo_yanaka_ginza.jpg" alt="Tokyo Yanaka Ginza"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/tokyo_yanaka_ginza.jpg" alt="Tokyo Yanaka Ginza" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/tokyo_yanaka_ginza_b.jpg" alt="Tokyo Yanaka Ginza — вид 2" width="330" height="189" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Рынок Yanaka Ginza открыт ежедневно, кроме понедельника. На рынке представлены свежие овощи, фрукты, рыба, мясо, цветы и различные ремесленные изделия. Рядом с рынком находится одноименная улица Yanaka Ginza Street, известная своими кафе и бутиками. Ежегодно здесь проводится фестиваль цветов, привлекающий тысячи посетителей. Название Yanaka происходит от района Токио, где расположен рынок.</p>
 <p class="prose">Yanaka Ginza — исторический рынок в токийском районе Янака, известный своими традиционными уличными рядами и небольшими лавочками, где продаются свежие продукты, цветы и ремесленные изделия. Рынок существует уже несколько десятилетий и является популярным местом среди местных жителей и туристов благодаря уютной атмосфере и аутентичным товарам. Здесь можно приобрести уникальные товары ручной работы и насладиться атмосферой традиционного японского рынка.</p></div>
 </section>
 <section class="place" id="tokyo_zojoji">
+<div class="place-lead">
 <h3>Tokyo Zojoji</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Стиль: Древний японский дзэнский стиль, сочетающий элементы традиционной архитектуры и садов. | Период: 1603 год</p>
-<figure class="place-fig"><img src="../images/tokyo_zojoji.jpg" alt="Tokyo Zojoji"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/tokyo_zojoji.jpg" alt="Tokyo Zojoji" width="330" height="256" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/tokyo_zojoji_b.jpg" alt="Tokyo Zojoji — вид 2" width="330" height="498" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Основан в 1603 году. Известен своими чайными церемониями и традиционными ритуалами. На территории храма находится музей истории Эдо. Считается одним из главных храмов школы Риндзай. Расположен недалеко от станции Сибуя.</p>
 <p class="prose">Зоё-дзи — буддийский храм дзэнского направления, основанный в 16 веке сёгуном Токугавой Иэясу после победы в битве при Сэкигахара. Храм стал символом мира и процветания новой эпохи Эдо. Здесь сохранились уникальные исторические здания и сады, окружённые спокойной атмосферой старинного храма. Храм привлекает туристов уникальной архитектурой, живописными садами и возможностью прикоснуться к древней японской культуре.</p></div>
+</section>
+<section class="place" id="tokyo_shinjuku_gyoen">
+<div class="place-lead">
+<h3>Синдзюку Гёэн</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Период: 1926</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/tokyo_shinjuku_gyoen.jpg" alt="Синдзюку Гёэн" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/tokyo_shinjuku_gyoen_b.jpg" alt="Синдзюку Гёэн — вид 2" width="330" height="176" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Расположенный к северу от шумного района Синдзюку в Токио, Национальный сад Синдзюку Гёэн является спокойным оазисом, предлагающим возможность увидеть традиционный японский садовый дизайн и природу. Он занимает примерно 57 гектаров земли. Парк насчитывает более 180 000 деревьев, представляющих более 400 видов. Каждый сезон приносит разные цветы, включая цветение вишни, азалии и гортензии. Его архитектура включает исторические здания, такие как Чайный дом и Административное здание. Посетители также могут насладиться сезонными фестивалями, такими как Весенний фестиваль цветения вишни.</p>
+<p class="prose">Основанный в начале эпохи Сёва (1926), Синдзюку Гёэн изначально предназначался как рекреационное пространство для членов императорской семьи и высокопоставленных чиновников. Сегодня он демонстрирует три различных стиля — японский, европейский формальный и английский ландшафтный сад — сочетая историческое значение с современными усилиями по охране окружающей среды. Посетите Синдзюку Гёэн, чтобы насладиться уникальным сочетанием традиционной и западной садовой эстетики Японии, прогуливаясь по ухоженным ландшафтам в тишине и спокойствии.</p></div>
 </section>
 </body>
 </html>

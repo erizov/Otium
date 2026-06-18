@@ -19,6 +19,7 @@ from scripts.build_pdf import (
 )
 from scripts.city_guide_core import (
     MIN_IMAGE_BYTES,
+    PDF_MAX_IMAGES_PER_PLACE,
     copy_built_guide_pdf_to_final_guides,
     is_substantive_text,
     places_for_pdf,
@@ -32,6 +33,7 @@ from scripts.city_guide_narrative import (
     place_meta_line,
     subtitle_html_for_edition,
 )
+from scripts.city_guide_place_figures import place_figures_layout_html
 from scripts.city_guide_front_matter import front_matter_html_blocks
 from scripts.city_guide_historical_reference_ru import (
     HERALDRY_CHAPTER_LABEL_EN,
@@ -46,7 +48,9 @@ from scripts.city_guide_moscow_heraldry import moscow_heraldry_html
 from scripts.city_guide_typography import guide_inline_css
 from scripts.city_guide_typography import typography_triple
 from scripts.city_guide_toc import (
+    guide_toc_back_link_html,
     guide_toc_html,
+    place_sort_key,
     toc_entries_for_jerusalem_guide,
 )
 
@@ -106,13 +110,6 @@ def _guide_strings(edition: str) -> dict[str, str]:
     }
 
 
-def _place_sort_key(p: dict[str, Any]) -> tuple[str, str]:
-    name = (p.get("name_en") or "").strip()
-    if not name:
-        name = (p.get("name_ru") or "").strip()
-    return (name.lower(), str(p.get("slug", "")))
-
-
 def places_with_local_images(
     root: Path,
     places: list[dict[str, Any]],
@@ -123,7 +120,7 @@ def places_with_local_images(
         root,
         places,
         city_slug=city_slug,
-        sort_key=_place_sort_key,
+        sort_key=place_sort_key("en"),
     )
 
 
@@ -148,23 +145,44 @@ def _rel_to_src(rel: str) -> str:
 def _image_srcs_for_place(
     root: Path,
     p: dict[str, Any],
+    *,
+    max_images: int | None = None,
 ) -> list[str]:
+    srcs, _paths = _image_entries_for_place(
+        root,
+        p,
+        max_images=max_images,
+    )
+    return srcs
+
+
+def _image_entries_for_place(
+    root: Path,
+    p: dict[str, Any],
+    *,
+    max_images: int | None = None,
+) -> tuple[list[str], list[Path]]:
     if p.get("suppress_images_for_pdf"):
-        return []
-    out: list[str] = []
+        return [], []
+    srcs: list[str] = []
+    paths: list[Path] = []
     rel = p.get("image_rel_path")
     if rel:
         chosen = smallest_same_stem_image_rel(root, rel)
         if chosen:
-            out.append(_rel_to_src(chosen))
+            srcs.append(_rel_to_src(chosen))
+            paths.append(root / chosen)
     for item in p.get("additional_images") or []:
         er = item.get("image_rel_path")
         if not er:
             continue
         chosen_extra = smallest_same_stem_image_rel(root, er)
         if chosen_extra:
-            out.append(_rel_to_src(chosen_extra))
-    return out
+            srcs.append(_rel_to_src(chosen_extra))
+            paths.append(root / chosen_extra)
+    if max_images is not None and max_images > 0:
+        return srcs[:max_images], paths[:max_images]
+    return srcs, paths
 
 
 def _place_title_parts(p: dict[str, Any], edition: str) -> tuple[str, str]:
@@ -178,8 +196,9 @@ def place_block(
     img_srcs: list[str],
     edition: str,
     deduper: GuideNarrativeDeduper,
+    *,
+    image_paths: list[Path] | None = None,
 ) -> str:
-    s = _guide_strings(edition)
     name_h, name_plain = _place_title_parts(p, edition)
     sub_html = subtitle_html_for_edition(p, edition)
     meta = _place_meta_line(p, edition)
@@ -191,22 +210,22 @@ def place_block(
     slug = str(p.get("slug", "x"))
     chunks: list[str] = [
         '<section class="place" id="{}">'.format(escape(slug)),
+        '<div class="place-lead">',
         "<h3>{}</h3>".format(name_h),
+        guide_toc_back_link_html(edition),
         sub_html,
         meta_html,
     ]
-    for i, src in enumerate(img_srcs):
-        alt = (
-            name_plain
-            if i == 0
-            else s["img_alt_extra"].format(name_plain, i + 1)
-        )
+    if img_srcs:
         chunks.append(
-            '<figure class="place-fig"><img src="{}" alt="{}"/></figure>'.format(
-                escape(src),
-                escape(alt),
+            place_figures_layout_html(
+                img_srcs,
+                name_plain,
+                edition,
+                image_paths=image_paths,
             )
         )
+    chunks.append("</div>")
     narrative = merge_narrative_html(p, edition, deduper)
     if narrative:
         chunks.append(narrative)
@@ -297,6 +316,7 @@ def _historical_reference_block(
     if edition == "ru":
         return historical_reference_section_html(
             reference_text_ru_for_any_city(city_slug, project_root),
+            edition=edition,
         )
     body_en = reference_text_en_for_any_city(city_slug, project_root)
     if not body_en:
@@ -304,6 +324,7 @@ def _historical_reference_block(
     return historical_reference_section_html(
         body_en,
         section_title=HISTORICAL_SECTION_TITLE_EN,
+        edition=edition,
     )
 
 
@@ -318,11 +339,11 @@ def _preamble_blocks(
     edition: str,
     project_root: Path | None,
 ) -> list[str]:
-    pdf_places = places_for_pdf(
+    section_places = _sorted_section_places(
         root,
         places,
+        edition,
         city_slug=city_slug,
-        sort_key=_place_sort_key,
     )
     s = _guide_strings(edition)
     blocks: list[str] = [cover_otium_html(edition)]
@@ -347,18 +368,7 @@ def _preamble_blocks(
         "</header>".format(
             heraldry_block,
             escape(display_title),
-            escape(s["lead"].format(len(pdf_places))),
-        ),
-    )
-    hist = _historical_reference_block(city_slug, edition, project_root)
-    if hist:
-        blocks.append(hist)
-    blocks.extend(
-        front_matter_html_blocks(
-            project_root,
-            city_slug,
-            edition,
-            pdf_places,
+            escape(s["lead"].format(len(section_places))),
         ),
     )
     toc_entries = toc_entries_for_jerusalem_guide(
@@ -367,12 +377,23 @@ def _preamble_blocks(
         edition,
         city_slug=city_slug,
         project_root=project_root,
-        sort_key=_place_sort_key,
+        sort_key=place_sort_key(edition),
         has_section=_place_has_section,
     )
     toc_html = guide_toc_html(toc_entries, edition)
     if toc_html:
         blocks.append(toc_html)
+    hist = _historical_reference_block(city_slug, edition, project_root)
+    if hist:
+        blocks.append(hist)
+    blocks.extend(
+        front_matter_html_blocks(
+            project_root,
+            city_slug,
+            edition,
+            section_places,
+        ),
+    )
     return blocks
 
 
@@ -380,18 +401,56 @@ def _place_has_section(root: Path, place: dict[str, Any]) -> bool:
     return bool(_image_srcs_for_place(root, place))
 
 
+def _sorted_section_places(
+    root: Path,
+    places: list[dict[str, Any]],
+    edition: str,
+    *,
+    city_slug: str,
+) -> list[dict[str, Any]]:
+    """PDF-eligible places with a renderable section, edition sort order."""
+    pdf_places = places_for_pdf(
+        root,
+        places,
+        city_slug=city_slug,
+        sort_key=place_sort_key(edition),
+    )
+    return [p for p in pdf_places if _place_has_section(root, p)]
+
+
 def _place_section_blocks(
     root: Path,
     places: list[dict[str, Any]],
     edition: str,
     deduper: GuideNarrativeDeduper,
+    *,
+    city_slug: str = "",
 ) -> list[str]:
+    max_images = PDF_MAX_IMAGES_PER_PLACE
+    ordered = _sorted_section_places(
+        root,
+        places,
+        edition,
+        city_slug=city_slug,
+    )
     out: list[str] = []
-    for p in places:
-        srcs = _image_srcs_for_place(root, p)
+    for p in ordered:
+        srcs, paths = _image_entries_for_place(
+            root,
+            p,
+            max_images=max_images,
+        )
         if not srcs:
             continue
-        out.append(place_block(p, srcs, edition, deduper))
+        out.append(
+            place_block(
+                p,
+                srcs,
+                edition,
+                deduper,
+                image_paths=paths,
+            )
+        )
     return out
 
 
@@ -450,7 +509,13 @@ def build_html(
         project_root=project_root,
     )
     blocks.extend(
-        _place_section_blocks(root, places, edition, narrative_deduper),
+        _place_section_blocks(
+            root,
+            places,
+            edition,
+            narrative_deduper,
+            city_slug=city_slug,
+        ),
     )
     return _wrap_guide_html(
         blocks,
@@ -487,7 +552,13 @@ def _pdf_via_playwright_chunked(
         print("pypdf required for chunked PDF merge.", file=sys.stderr)
         return False
 
-    place_blocks = _place_section_blocks(root, places, edition, deduper)
+    place_blocks = _place_section_blocks(
+        root,
+        places,
+        edition,
+        deduper,
+        city_slug=city_slug,
+    )
     preface = _preamble_blocks(
         root,
         city_slug=city_slug,
@@ -693,7 +764,23 @@ def run_build_pdf_main(
         if args.html_only:
             continue
         use_chunked = len(built) > PDF_CHUNK_MAX_PLACES
-        if use_chunked:
+        # Full HTML keeps TOC anchor links intact; chunk only as fallback.
+        pdf_ok = _pdf_via_playwright(
+            html_path,
+            pdf_path,
+            image_wait_timeout_ms=args.image_wait_ms,
+            display_header_footer=True,
+            footer_template=footer,
+            header_template=header,
+            static_site_root=root,
+        )
+        if not pdf_ok and use_chunked:
+            print(
+                "Full-document PDF failed; trying chunked render "
+                "(TOC links may not reach all sections).",
+                file=sys.stderr,
+            )
+            pdf_deduper = GuideNarrativeDeduper()
             pdf_ok = _pdf_via_playwright_chunked(
                 root=root,
                 out_dir=out_dir,
@@ -710,17 +797,7 @@ def run_build_pdf_main(
                 image_wait_timeout_ms=args.image_wait_ms,
                 footer=footer,
                 header=header,
-                deduper=narrative_deduper,
-            )
-        else:
-            pdf_ok = _pdf_via_playwright(
-                html_path,
-                pdf_path,
-                image_wait_timeout_ms=args.image_wait_ms,
-                display_header_footer=True,
-                footer_template=footer,
-                header_template=header,
-                static_site_root=root,
+                deduper=pdf_deduper,
             )
         if pdf_ok:
             _strip_empty_pdf_pages(pdf_path)

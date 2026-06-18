@@ -13,7 +13,7 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
 .otium-logo { font-family: 'Spectral', serif; font-size: 2.15rem;
   font-weight: 600; letter-spacing: 0.18em; margin-bottom: 0.85rem; }
 .otiump { margin: 0.42rem 0; line-height: 1.42; text-align: justify;
-  max-width: 38rem; font-size: 0.95rem; }
+  font-size: 0.95rem; }
 .guide-title { page-break-after: auto; margin-bottom: 0.55rem;
   page-break-inside: avoid; }
 .historical-reference { margin: 0.75rem 0 1.15rem;
@@ -63,22 +63,103 @@ ol.trip-stops a:hover { text-decoration: underline; }
 .heraldry-univ-caption { font-size: 0.52rem; line-height: 1.18;
   margin: 0.12rem 0 0; padding: 0 0.06rem; color: #252525;
   text-align: center; font-weight: 500; }
-.heraldry-motto { text-align: center; max-width: 18rem; margin: 0.18rem auto;
+.heraldry-motto { text-align: center; margin: 0.18rem auto;
   width: 100%; }
 .motto-line { font-family: 'Spectral', serif; font-size: 1rem;
   margin: 0; color: #333; line-height: 1.35; }
 .guide-title h1.guide-title-main { font-family: 'Spectral', serif;
   font-size: 2.35rem; margin-bottom: 0.5rem; font-weight: 600; }
 .lead { color: #444; font-size: 1.05rem; }
-.guide-toc { margin: 0.85rem 0 1.15rem; page-break-inside: avoid; }
-.guide-toc h2 { font-family: 'Spectral', serif; font-size: 1.28rem;
-  font-weight: 600; margin: 0.4rem 0 0.55rem; }
+
+.guide-toc { page-break-before: always; break-before: page;
+  page-break-after: always; break-after: page;
+  margin: 0; padding: 0.2rem 0 0.45rem; page-break-inside: auto; }
+.guide-toc h2 { font-family: 'Spectral', serif;
+  font-size: 1.28rem; font-weight: 600; margin: 0.4rem 0 0.55rem; }
 .guide-toc ol { margin: 0.35rem 0 0.65rem 1.25rem; padding: 0;
   columns: 2; column-gap: 1.5rem; }
 .guide-toc li { margin: 0.18rem 0; line-height: 1.35;
   font-size: 0.88rem; break-inside: avoid; }
-.guide-toc a { color: #1a5276; text-decoration: none; }
+.guide-toc a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.guide-toc a:hover { color: #0d3d56; }
 .guide-toc li.toc-item--sub { font-size: 0.82rem; margin-left: 0.35rem; }
+.toc-back { font-size: 0.78rem; margin: 0 0 0.35rem; text-align: right; }
+.toc-back a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.toc-back a:hover { color: #0d3d56; }
+.place, .historical-reference, .guide-primer, .guide-trip-plans {
+  scroll-margin-top: 1.25rem; }
+.historical-reference h2, .guide-primer h2, .guide-trip-plans h2,
+.chapter-head h2, .place-lead h3 { position: relative; }
+.guide-toc + .place, .guide-toc + .chapter-head {
+  page-break-before: avoid; break-before: avoid-page; }
+.place-lead { page-break-inside: avoid; break-inside: avoid-page;
+  page-break-after: auto; }
+.place-lead > h3 { page-break-after: avoid; break-after: avoid-page; }
+.place-lead > .place-meta { page-break-after: avoid; break-after: avoid-page; }
+
+.place-fig { page-break-inside: avoid; break-inside: avoid-page;
+  margin: 0.5rem 0 1rem; }
+.place-fig img {
+  page-break-inside: avoid; break-inside: avoid-page;
+  max-height: 48vh; width: auto; max-width: 100%;
+  object-fit: contain; margin-left: auto; margin-right: auto; }
+.place-fig--hi-res img { max-height: 52vh; }
+.place-fig--lo-res img { max-height: 30vh; }
+.place-pdf-fig-row {
+  display: flex; flex-direction: row; flex-wrap: wrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.45rem 0.55rem; margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row .place-fig {
+  flex: 1 1 30%; margin: 0; min-width: 26%; max-width: 100%; }
+.place-pdf-fig-row .place-fig img {
+  width: auto; max-width: 100%; height: auto; max-height: 44vh;
+  object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--pair {
+  flex-wrap: nowrap; justify-content: space-between;
+  align-items: flex-end; gap: 0.5rem 0.65rem; }
+.place-pdf-fig-row--pair .place-fig {
+  flex: 1 1 47%; min-width: 0; max-width: 50%;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--pair .place-fig img {
+  max-height: 44vh; object-fit: contain; }
+.place-pdf-fig-row--pair .place-fig--hi-res img { max-height: 52vh; }
+.place-pdf-fig-row--pair .place-fig--lo-res img { max-height: 26vh; }
+.place-pdf-fig-row--pair .place-fig--row-sized img,
+.place-pdf-fig-row--triple .place-fig--row-sized img,
+.place-pdf-fig-row--many .place-fig--row-sized img {
+  width: auto; max-width: 100%; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row .place-fig--row-sized.place-fig--hi-res img,
+.place-pdf-fig-row .place-fig--row-sized.place-fig--lo-res img {
+  max-height: unset; }
+.place-pdf-fig-rows-stack {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple {
+  display: flex; flex-direction: row; flex-wrap: nowrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.4rem 0.48rem; margin: 0;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--triple .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--triple .place-fig--hi-res img { max-height: 42vh; }
+.place-pdf-fig-row--triple .place-fig--lo-res img { max-height: 18vh; }
+.place-pdf-fig-row--many {
+  flex-wrap: nowrap; justify-content: center; align-items: flex-end;
+  gap: 0.35rem 0.42rem; }
+.place-pdf-fig-row--many .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--many .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+
+
 .place { margin-bottom: 2.2rem; page-break-inside: auto; }
 h3 { font-family: 'Spectral', serif; font-size: 1.22rem; margin: 1.2rem 0 0.35rem;
   font-weight: 600; }
@@ -90,7 +171,6 @@ h4 { font-family: 'Spectral', serif; font-size: 0.95rem; text-transform: upperca
   color: #555; font-size: 0.95rem; margin: 0 0 0.5rem; font-style: italic; }
 .place-meta { font-size: 0.92rem; color: #353535; margin: 0 0 0.75rem;
   line-height: 1.4; }
-.place-fig { margin: 0.5rem 0 1rem; }
 img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
 .prose, .place-desc p { margin: 0.45rem 0; line-height: 1.5;
   text-align: justify; }
@@ -110,7 +190,9 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <figure class="heraldry-fig heraldry-coat-book" title="Emblem of Istanbul"><img src="../images/guide_coat_of_arms.svg" alt="Emblem of Istanbul"/></figure>
 <figure class="heraldry-fig heraldry-coat-book" title="Flag of Istanbul"><img src="../images/guide_flag.svg" alt="Flag of Istanbul"/></figure>
 </div></div><h1 class="guide-title-main">Istanbul</h1><p class="lead">Guide. Places in this edition: 33.</p></header>
+<nav class="guide-toc" id="guide-toc" aria-label="Contents"><h2>Contents</h2><ol><li class="toc-item"><a href="#guide-trips">Trip ideas</a></li><li class="toc-item"><a href="#istanbul_138bs20220515d0016_ed_ea">138BS20220515D0016-ed-ea</a></li><li class="toc-item"><a href="#istanbul_balat">Balat district</a></li><li class="toc-item"><a href="#istanbul_basilica_cistern">Basilica Cistern</a></li><li class="toc-item"><a href="#istanbul_beylerbeyi">Beylerbeyi Palace</a></li><li class="toc-item"><a href="#istanbul_bosphorus_strait">Bosphorus ferry views</a></li><li class="toc-item"><a href="#istanbul_chora_church">Chora Church (Kariye Mosque)</a></li><li class="toc-item"><a href="#istanbul_chora">Chora Church museum</a></li><li class="toc-item"><a href="#istanbul_dolmabahce_palace">Dolmabahçe Palace</a></li><li class="toc-item"><a href="#istanbul_emirgan_park">Emirgan Park</a></li><li class="toc-item"><a href="#istanbul_eyup_sultan">Eyüp Sultan Mosque</a></li><li class="toc-item"><a href="#istanbul_fatih_mosque">Fatih Mosque</a></li><li class="toc-item"><a href="#istanbul_galata_tower">Galata Tower</a></li><li class="toc-item"><a href="#istanbul_grand_bazaar">Grand Bazaar</a></li><li class="toc-item"><a href="#istanbul_hagia_sophia">Hagia Sophia</a></li><li class="toc-item"><a href="#istanbul_hippodrome_of_constantinople">Hippodrome of Constantinople</a></li><li class="toc-item"><a href="#istanbul_istanbul_modern">Istanbul Museum of Modern Art</a></li><li class="toc-item"><a href="#istanbul_kadikoy_market">Kadıköy market street</a></li><li class="toc-item"><a href="#istanbul_maidens_tower">Maiden&#x27;s Tower (Kız Kulesi)</a></li><li class="toc-item"><a href="#istanbul_miniaturk">Miniaturk</a></li><li class="toc-item"><a href="#istanbul_ortakoy">Ortaköy Mosque</a></li><li class="toc-item"><a href="#istanbul_palaceofjusticeistanbul_1">PalaceOfJusticeIstanbul (1)</a></li><li class="toc-item"><a href="#istanbul_pera_museum">Pera Museum</a></li><li class="toc-item"><a href="#istanbul_pierre_loti">Pierre Loti Hill</a></li><li class="toc-item"><a href="#istanbul_popebenedictxvi">PopeBenedictXVI</a></li><li class="toc-item"><a href="#istanbul_rahmi_museum">Rahmi M. Koç Museum</a></li><li class="toc-item"><a href="#istanbul_rustem_pasha">Rüstem Pasha Mosque</a></li><li class="toc-item"><a href="#istanbul_spice_bazaar">Spice Bazaar (Mısır Çarşısı)</a></li><li class="toc-item"><a href="#istanbul_blue_mosque">Sultan Ahmed Mosque (Blue Mosque)</a></li><li class="toc-item"><a href="#istanbul_suleymaniye_mosque">Süleymaniye Mosque</a></li><li class="toc-item"><a href="#istanbul_topkapi_palace">Topkapı Palace</a></li><li class="toc-item"><a href="#istanbul_valens_aqueduct">Valens Aqueduct</a></li><li class="toc-item"><a href="#istanbul_vialand">Vialand theme gate</a></li><li class="toc-item"><a href="#istanbul_sakirin">Şakirin Mosque</a></li></ol></nav>
 <section class="guide-trip-plans" id="guide-trips" aria-label="Trip ideas"><h2>Trip ideas</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 <article class="trip-plan" id="trip-1d"><h3>One day</h3>
 <p class="prose">A compact loop linking the strongest cards in this guide, ordered to minimise backtracking on foot.</p>
 <ol class="trip-stops"><li><a href="#istanbul_beylerbeyi">Beylerbeyi Palace</a> (~75min)</li>
@@ -139,257 +221,433 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <li><a href="#istanbul_blue_mosque">Sultan Ahmed Mosque (Blue Mosque)</a> (~75min)</li>
 <li><a href="#istanbul_bosphorus_strait">Bosphorus ferry views</a> (~75min)</li>
 <li><a href="#istanbul_emirgan_park">Emirgan Park</a> (~75min)</li></ol></article></section>
-<nav class="guide-toc" aria-label="Contents"><h2>Contents</h2><ol><li class="toc-item"><a href="#guide-trips">Trip ideas</a></li><li class="toc-item"><a href="#istanbul_pdfband_8_56106a46">138BS20220515D0016-ed-ea</a></li><li class="toc-item"><a href="#istanbul_balat">Balat district</a></li><li class="toc-item"><a href="#istanbul_basilica_cistern">Basilica Cistern</a></li><li class="toc-item"><a href="#istanbul_beylerbeyi">Beylerbeyi Palace</a></li><li class="toc-item"><a href="#istanbul_bosphorus_strait">Bosphorus ferry views</a></li><li class="toc-item"><a href="#istanbul_chora_church">Chora Church (Kariye Mosque)</a></li><li class="toc-item"><a href="#istanbul_chora">Chora Church museum</a></li><li class="toc-item"><a href="#istanbul_dolmabahce_palace">Dolmabahçe Palace</a></li><li class="toc-item"><a href="#istanbul_emirgan_park">Emirgan Park</a></li><li class="toc-item"><a href="#istanbul_eyup_sultan">Eyüp Sultan Mosque</a></li><li class="toc-item"><a href="#istanbul_fatih_mosque">Fatih Mosque</a></li><li class="toc-item"><a href="#istanbul_galata_tower">Galata Tower</a></li><li class="toc-item"><a href="#istanbul_grand_bazaar">Grand Bazaar</a></li><li class="toc-item"><a href="#istanbul_hagia_sophia">Hagia Sophia</a></li><li class="toc-item"><a href="#istanbul_pdfband_3_3cf9c4b4">Hippodrome of Constantinople</a></li><li class="toc-item"><a href="#istanbul_istanbul_modern">Istanbul Museum of Modern Art</a></li><li class="toc-item"><a href="#istanbul_kadikoy_market">Kadıköy market street</a></li><li class="toc-item"><a href="#istanbul_maidens_tower">Maiden&#x27;s Tower (Kız Kulesi)</a></li><li class="toc-item"><a href="#istanbul_miniaturk">Miniaturk</a></li><li class="toc-item"><a href="#istanbul_ortakoy">Ortaköy Mosque</a></li><li class="toc-item"><a href="#istanbul_pdfband_9_4b91e409">PalaceOfJusticeIstanbul (1)</a></li><li class="toc-item"><a href="#istanbul_pera_museum">Pera Museum</a></li><li class="toc-item"><a href="#istanbul_pierre_loti">Pierre Loti Hill</a></li><li class="toc-item"><a href="#istanbul_pdfband_0_d45c3cd3">PopeBenedictXVI</a></li><li class="toc-item"><a href="#istanbul_rahmi_museum">Rahmi M. Koç Museum</a></li><li class="toc-item"><a href="#istanbul_rustem_pasha">Rüstem Pasha Mosque</a></li><li class="toc-item"><a href="#istanbul_spice_bazaar">Spice Bazaar (Mısır Çarşısı)</a></li><li class="toc-item"><a href="#istanbul_blue_mosque">Sultan Ahmed Mosque (Blue Mosque)</a></li><li class="toc-item"><a href="#istanbul_suleymaniye_mosque">Süleymaniye Mosque</a></li><li class="toc-item"><a href="#istanbul_topkapi_palace">Topkapı Palace</a></li><li class="toc-item"><a href="#istanbul_valens_aqueduct">Valens Aqueduct</a></li><li class="toc-item"><a href="#istanbul_vialand">Vialand theme gate</a></li><li class="toc-item"><a href="#istanbul_sakirin">Şakirin Mosque</a></li></ol></nav>
-<section class="place" id="istanbul_pdfband_8_56106a46">
+<section class="place" id="istanbul_138bs20220515d0016_ed_ea">
+<div class="place-lead">
 <h3>138BS20220515D0016-ed-ea</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/istanbul_pdfband_8_56106a46.jpg" alt="138BS20220515D0016-ed-ea"/></figure>
+<figure class="place-fig place-fig--hi-res"><img src="../images/istanbul_138bs20220515d0016_ed_ea.jpg" alt="138BS20220515D0016-ed-ea" width="1280" height="899"/></figure>
+</div>
 </section>
 <section class="place" id="istanbul_balat">
+<div class="place-lead">
 <h3>Balat district</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/istanbul_balat.jpg" alt="Balat district"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_balat.jpg" alt="Balat district" width="330" height="440" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_balat_b.jpg" alt="Balat district — view 2" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Balat is a vibrant neighborhood in Istanbul, known for its colorful houses, historic architecture, and rich cultural heritage. Once a Jewish quarter, it has transformed over the years into a hub of artistic expression and community life, attracting visitors with its charming streets and local cafes. The area offers a glimpse into Istanbul&#x27;s diverse past and is a perfect spot for those looking to experience the city&#x27;s unique blend of cultures. Balat was historically a Jewish quarter in Istanbul. The neighborhood features numerous synagogues, churches, and mosques, reflecting its multicultural heritage. Balat is known for its colorful houses and narrow streets, attracting both locals and tourists.</p>
 <p class="prose">Balat&#x27;s history dates back to the Byzantine era, when it was established as a residential area. The neighborhood flourished during the Ottoman period, particularly as a center for the Jewish community, which settled here in significant numbers from the 15th century onwards. Key events include the establishment of various synagogues and schools, which played a crucial role in the community&#x27;s cultural life. Culturally, Balat is significant for its eclectic mix of heritage, showcasing a blend of Jewish, Greek, and Armenian influences. The neighborhood&#x27;s architecture reflects this diversity, with many buildings now recognized for their historical value. Balat has become a focal point for artists and creatives, contributing to Istanbul&#x27;s contemporary cultural scene. The area is also known for its traditions and community events, which celebrate its rich history and foster local engagement.</p></div>
 </section>
 <section class="place" id="istanbul_basilica_cistern">
+<div class="place-lead">
 <h3>Basilica Cistern</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Sultanahmet | Style: Ancient vaulted cistern | Period: 6th c. Justinian</p>
-<figure class="place-fig"><img src="../images/istanbul_basilica_cistern.jpg" alt="Basilica Cistern"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/istanbul_basilica_cistern.jpg" alt="Basilica Cistern" width="1280" height="1400" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_basilica_cistern_b.jpg" alt="Basilica Cistern — view 2" width="330" height="511" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Forest of recycled Corinthian columns reflected in shallow water with modern walkways and lighting. Medusa column bases are reversed as spolia. Concerts use the space for dramatic acoustics.</p>
 <p class="prose">Stored water for the Great Palace quarter before Ottoman reuse and rediscovery. Underground counterpoint to Hagia Sophia&#x27;s dome above.</p></div>
 </section>
 <section class="place" id="istanbul_beylerbeyi">
+<div class="place-lead">
 <h3>Beylerbeyi Palace</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/istanbul_beylerbeyi.jpg" alt="Beylerbeyi Palace"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_beylerbeyi.jpg" alt="Beylerbeyi Palace" width="330" height="116" style="height: 162px; max-height: 162px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_beylerbeyi_b.jpg" alt="Beylerbeyi Palace — view 2" width="330" height="220" style="height: 162px; max-height: 162px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Beylerbeyi Palace, located on the Asian side of Istanbul, is a stunning example of 19th-century Ottoman architecture. Overlooking the Bosphorus, this palace served as a summer residence for sultans and is renowned for its beautiful gardens and opulent interiors. Visitors can explore its richly decorated rooms and learn about the lifestyle of the Ottoman elite. Beylerbeyi Palace was built between 1861 and 1865. The palace features a blend of Baroque and Ottoman architectural styles. It is located on the Asian side of Istanbul, overlooking the Bosphorus Strait.</p>
 <p class="prose">Beylerbeyi Palace was commissioned by Sultan Abdulaziz and completed in 1865. It was designed by the Armenian architect Garabet Balyan and his son, and it served as a retreat for the sultans, particularly during the hot summer months. The palace hosted various important guests, including foreign dignitaries. The palace holds cultural significance as a representation of the Ottoman Empire&#x27;s architectural and artistic achievements. Its design reflects the blend of Western and Eastern influences that characterized the period. Beylerbeyi Palace is also a symbol of the opulence of the Ottoman court and offers insight into the daily life and traditions of the sultans.</p></div>
 </section>
 <section class="place" id="istanbul_bosphorus_strait">
+<div class="place-lead">
 <h3>Bosphorus ferry views</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Şehir Hatları terminals (Eminönü, Karaköy, Üsküdar)</p>
-<figure class="place-fig"><img src="../images/istanbul_bosphorus_strait.jpg" alt="Bosphorus ferry views"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/istanbul_bosphorus_strait.jpg" alt="Bosphorus ferry views" width="1280" height="658" style="height: 237px; max-height: 237px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_bosphorus_strait_b.jpg" alt="Bosphorus ferry views — view 2" width="330" height="219" style="height: 237px; max-height: 237px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Public ferries link Europe and Asia with cheap decks for photographing yalı waterfront mansions, mosques, and bridges in sequence. İstanbulkart taps work on municipal ferries and trams. Morning light from the Üsküdar line highlights the historic peninsula silhouette.</p>
 <p class="prose">Maritime suburbs grew along steamboat routes; modern catamarans shorten peak-hour crossings. The calmest city tour is often a round trip on the water.</p></div>
 </section>
 <section class="place" id="istanbul_chora_church">
+<div class="place-lead">
 <h3>Chora Church (Kariye Mosque)</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Edirnekapı | Style: Middle Byzantine church with exonarthex | Period: Byzantine layers; mosaics 14th c.</p>
-<figure class="place-fig"><img src="../images/istanbul_chora_church.jpg" alt="Chora Church (Kariye Mosque)"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/istanbul_chora_church.jpg" alt="Chora Church (Kariye Mosque)" width="1280" height="720" style="height: 259px; max-height: 259px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_chora_church_b.jpg" alt="Chora Church (Kariye Mosque) — view 2" width="330" height="278" style="height: 259px; max-height: 259px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Check prayer-time closures when visiting as a museum. Hilly walk from Golden Horn tram lines. Theodore Metochites sponsored the Palaiologan redecoration before Ottoman conversion. Finest surviving Constantinopolitan narrative art outside the major museums.</p></div>
 </section>
 <section class="place" id="istanbul_chora">
+<div class="place-lead">
 <h3>Chora Church museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/istanbul_chora.jpg" alt="Chora Church museum"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/istanbul_chora_b.jpg" alt="Chora Church museum" width="330" height="186"/></figure>
+</div>
 <div class="place-desc"><p class="prose">The Chora Church, now a museum, is a stunning example of Byzantine architecture located in Istanbul. Renowned for its exquisite mosaics and frescoes, it offers visitors a glimpse into the artistic and spiritual life of the Byzantine Empire. The church&#x27;s serene atmosphere and intricate artwork make it a must-visit for those exploring the rich history of Istanbul. The Chora Church was originally built in the 4th century. It was converted into a mosque after the Ottoman conquest of Constantinople in 1453. The church became a museum in 1945 and is now known for its stunning Byzantine mosaics.</p>
 <p class="prose">Originally built in the 4th century, the Chora Church was initially a monastery known as the Church of the Holy Saviour in Chora. It underwent significant renovations in the 11th century, particularly under the patronage of the Byzantine aristocrat Maria Doukaina, and was further embellished with remarkable mosaics and frescoes during the 14th century. The church was converted into a mosque after the Ottoman conquest in 1453 and later became a museum in 1945. The Chora Church holds immense cultural significance as a testament to Byzantine art and architecture, showcasing some of the finest examples of religious mosaics and frescoes in the world. It is recognized as a UNESCO World Heritage Site, reflecting its importance in the heritage of Istanbul and the broader history of Christianity. The church also serves as a symbol of the city&#x27;s diverse religious history, embodying the transition from Byzantine to Ottoman influences.</p></div>
 </section>
 <section class="place" id="istanbul_dolmabahce_palace">
+<div class="place-lead">
 <h3>Dolmabahçe Palace</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Beşiktaş waterfront | Style: Eclectic European palace on Bosphorus | Period: 1843–1856</p>
-<figure class="place-fig"><img src="../images/istanbul_dolmabahce_palace.jpg" alt="Dolmabahçe Palace"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/istanbul_dolmabahce_palace.jpg" alt="Dolmabahçe Palace" width="1280" height="853" style="height: 151px; max-height: 151px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_dolmabahce_palace_b.jpg" alt="Dolmabahçe Palace — view 2" width="330" height="108" style="height: 151px; max-height: 151px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Crystal staircase and ceremonial halls where the empire&#x27;s late sultans received diplomats. Guided interior tours prohibit casual photography in many rooms. Clock museum wing sits beside the main gate.</p>
 <p class="prose">Shifted court residence from Topkapı to European-style waterfront modernity. Bosphorus façade rival to Ortaköy mosques downstream.</p></div>
 </section>
 <section class="place" id="istanbul_emirgan_park">
+<div class="place-lead">
 <h3>Emirgan Park</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/istanbul_emirgan_park.jpg" alt="Emirgan Park"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_emirgan_park.jpg" alt="Emirgan Park" width="330" height="438" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_emirgan_park_b.jpg" alt="Emirgan Park — view 2" width="330" height="250" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Emirgan Park is a serene oasis located in the Sarıyer district of Istanbul, renowned for its lush greenery and vibrant tulip gardens. This expansive park offers visitors a peaceful retreat from the bustling city, complete with walking paths, charming pavilions, and stunning views of the Bosphorus. It is particularly famous for its annual Tulip Festival, attracting both locals and tourists alike to admire the colorful displays. Emirgan Park covers an area of approximately 47 acres. The park features three historic pavilions, known as the Yellow, White, and Pink pavilions, built during the Ottoman era.</p>
 <p class="prose">Emirgan Park dates back to the 19th century and was originally part of a private estate owned by the Ottoman noble family, the Emirgans. The park was opened to the public in 1940 and has since become a beloved recreational area for residents and visitors. Its design reflects the landscape architecture trends of the time, featuring a blend of natural beauty and formal garden elements. Culturally, Emirgan Park holds a special place in Istanbul&#x27;s heritage, serving as a venue for various festivals and community events. The park&#x27;s annual Tulip Festival celebrates the historical significance of tulips in Turkish culture, symbolizing beauty and abundance. While it does not have notable political or religious significance, it represents a cherished aspect of daily life in Istanbul, where nature and community intersect.</p></div>
 </section>
 <section class="place" id="istanbul_eyup_sultan">
+<div class="place-lead">
 <h3>Eyüp Sultan Mosque</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/istanbul_eyup_sultan.jpg" alt="Eyüp Sultan Mosque"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_eyup_sultan.jpg" alt="Eyüp Sultan Mosque" width="330" height="440" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_eyup_sultan_b.jpg" alt="Eyüp Sultan Mosque — view 2" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Eyüp Sultan Mosque, located in the historic Eyüp district of Istanbul, is a revered site known for its stunning architecture and spiritual significance. It attracts both worshippers and tourists, offering a glimpse into the rich religious heritage of the city. The mosque is surrounded by beautiful gardens and traditional tea houses, making it a peaceful retreat amidst the bustling city. The mosque was commissioned by Sultan Mehmed II. It features a large dome and a beautiful minaret, characteristic of Ottoman architecture.</p>
 <p class="prose">The Eyüp Sultan Mosque was built in 1458, shortly after the Ottoman conquest of Constantinople. It is named after Abu Ayyub al-Ansari, a companion of the Prophet Muhammad, who is believed to be buried nearby. The mosque has undergone several renovations over the centuries, particularly after sustaining damage during the 18th-century earthquakes. The mosque holds immense cultural and religious significance as a pilgrimage site for Muslims, especially during the month of Ramadan. It is also a symbol of the Ottoman Empire&#x27;s expansion and its deep-rooted Islamic heritage. The surrounding area is a vibrant part of daily life in Istanbul, where traditions and community gatherings flourish.</p></div>
 </section>
 <section class="place" id="istanbul_fatih_mosque">
+<div class="place-lead">
 <h3>Fatih Mosque</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/istanbul_fatih_mosque.jpg" alt="Fatih Mosque"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_fatih_mosque.jpg" alt="Fatih Mosque" width="330" height="440" style="height: 414px; max-height: 414px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--row-sized"><img src="../images/istanbul_fatih_mosque_b.jpg" alt="Fatih Mosque — view 2" width="330" height="535" style="height: 414px; max-height: 414px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Fatih Mosque, located in the historic district of Fatih in Istanbul, is an impressive example of Ottoman architecture and a significant religious site. Built between 1463 and 1470, it stands as a testament to the city&#x27;s rich history and cultural heritage. Visitors can admire its grand dome, intricate tile work, and serene courtyard, making it a peaceful retreat amidst the bustling city. The mosque was built between 1463 and 1470. It was commissioned by Sultan Mehmed II after the conquest of Constantinople. The mosque features a large central dome and a beautiful courtyard.</p>
 <p class="prose">The Fatih Mosque was commissioned by Sultan Mehmed II, also known as Mehmed the Conqueror, shortly after the fall of Constantinople in 1453. It was constructed on the site of the Church of the Holy Apostles, reflecting the transformation of the city from Byzantine to Ottoman rule. The mosque has undergone several restorations, particularly after the devastating earthquake in 1766. As a prominent place of worship, the Fatih Mosque plays a vital role in the daily lives of the local Muslim community. It is not only a site for prayer but also a center for education and cultural activities. The mosque&#x27;s architectural style has influenced many other mosques in Istanbul and beyond, contributing to the city&#x27;s rich Islamic heritage.</p></div>
 </section>
 <section class="place" id="istanbul_galata_tower">
+<div class="place-lead">
 <h3>Galata Tower</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Beyoğlu | Style: Medieval stone cylinder with conical roof | Period: 1348 Genoese tower; later restorations</p>
-<figure class="place-fig"><img src="../images/istanbul_galata_tower.jpg" alt="Galata Tower"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/istanbul_galata_tower.jpg" alt="Galata Tower" width="1200" height="1600" style="height: 54px; max-height: 54px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_galata_tower_b.jpg" alt="Galata Tower — view 2" width="330" height="39" style="height: 54px; max-height: 54px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Genoese watchtower turned observation deck over the Golden Horn. Queues peak at sunset for panoramic photos. The hill quarter around it is dense with cafés and music venues. Elevator access leads to an upper gallery with safety barriers.</p>
 <p class="prose">Part of Genoese Galata&#x27;s walls; Ottoman and modern restorations adapted it for fire watch and tourism. The vertical marker between historic peninsula and Beyoğlu nightlife.</p></div>
 </section>
 <section class="place" id="istanbul_grand_bazaar">
+<div class="place-lead">
 <h3>Grand Bazaar</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Beyazıt–Mercan | Style: Ottoman covered market streets and hans | Period: 15th c. core; vaulted streets expanded over centuries</p>
-<figure class="place-fig"><img src="../images/istanbul_grand_bazaar.jpg" alt="Grand Bazaar"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/istanbul_grand_bazaar.jpg" alt="Grand Bazaar" width="1050" height="1400" style="height: 338px; max-height: 338px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_grand_bazaar_b.jpg" alt="Grand Bazaar — view 2" width="330" height="242" style="height: 338px; max-height: 338px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Labyrinth of jewellery, textile, and souvenir shops under brick vaults. Named gates open onto different neighbourhoods. Compare prices and enjoy tea offers as part of local retail etiquette. Major holidays can shorten trader hours.</p>
 <p class="prose">Mehmed II&#x27;s charter shops grew into a walled commercial city-in-miniature between Beyazıt and the Golden Horn. Still a working wholesale and retail hub beneath the tourist surface.</p></div>
 </section>
 <section class="place" id="istanbul_hagia_sophia">
+<div class="place-lead">
 <h3>Hagia Sophia</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Sultanahmet | Style: Byzantine dome on pendentives; later minarets | Period: 532–537 (Justinian); Ottoman additions later</p>
-<figure class="place-fig"><img src="../images/istanbul_hagia_sophia.jpg" alt="Hagia Sophia"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/istanbul_hagia_sophia.jpg" alt="Hagia Sophia" width="1280" height="854" style="height: 221px; max-height: 221px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_hagia_sophia_b.jpg" alt="Hagia Sophia — view 2" width="330" height="158" style="height: 221px; max-height: 221px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Former patriarchal cathedral, later mosque, now a museum-mosque complex famed for its immense central dome and marble revetment. Isidore of Miletus and Anthemius of Tralles were credited architects under Justinian. Calligraphic roundels and mosaics from different periods coexist in the interior.</p>
 <p class="prose">Built as the Great Church of Constantinople; Ottoman conquest added minarets and furnishings; modern Turkey alternated museum and prayer use. A hinge monument between Roman, Byzantine, and Ottoman histories.</p></div>
 </section>
-<section class="place" id="istanbul_pdfband_3_3cf9c4b4">
+<section class="place" id="istanbul_hippodrome_of_constantinople">
+<div class="place-lead">
 <h3>Hippodrome of Constantinople</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/istanbul_pdfband_3_3cf9c4b4.jpg" alt="Hippodrome of Constantinople"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/istanbul_hippodrome_of_constantinople.jpg" alt="Hippodrome of Constantinople" width="1280" height="607" style="height: 219px; max-height: 219px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_hippodrome_of_constantinople_b.jpg" alt="Hippodrome of Constantinople — view 2" width="330" height="511" style="height: 219px; max-height: 219px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Hippodrome of Constantinople (Greek: Ἱππόδρομος τῆς Κωνσταντινουπόλεως, romanized: Hippódromos tēs Kōnstantinoupóleōs; Latin: Circus Maximus Constantinopolitanus; Turkish: Hipodrom) was a circus that was the sporting and social centre of Constantinople, capital of the Eastern Roman Empire. Today it is a square in Istanbul, Turkey, known as Sultanahmet Square (Turkish: Sultanahmet Meydanı). The word hippodrome comes from the Greek hippos (ἵππος), horse, and dromos (δρόμος), path or way.</p></div>
 </section>
 <section class="place" id="istanbul_istanbul_modern">
+<div class="place-lead">
 <h3>Istanbul Museum of Modern Art</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/istanbul_istanbul_modern.jpg" alt="Istanbul Museum of Modern Art"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_istanbul_modern.jpg" alt="Istanbul Museum of Modern Art" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_istanbul_modern_b.jpg" alt="Istanbul Museum of Modern Art — view 2" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Istanbul Museum of Modern Art is Turkey&#x27;s first museum dedicated to modern and contemporary art. Located along the Bosphorus, it showcases a diverse collection of works by both Turkish and international artists, offering visitors a vibrant glimpse into the evolving landscape of contemporary creativity. Opened in 2004 as Turkey&#x27;s first modern art museum. Located in the Tophane district along the Bosphorus waterfront. Features a collection of over 1,000 works from Turkish and international artists.</p>
 <p class="prose">Founded in 2004, the Istanbul Museum of Modern Art was established to promote modern art in Turkey and to provide a platform for contemporary artists. The museum&#x27;s location in a former warehouse reflects its commitment to blending historical architecture with modern artistic expression. Culturally, the museum plays a crucial role in Istanbul&#x27;s art scene, fostering dialogue between local and global artistic communities. It hosts various exhibitions, educational programs, and events that engage the public and promote contemporary art appreciation. The museum&#x27;s efforts contribute to Istanbul&#x27;s growing reputation as a cultural hub in the region.</p></div>
 </section>
 <section class="place" id="istanbul_kadikoy_market">
+<div class="place-lead">
 <h3>Kadıköy market street</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/istanbul_kadikoy_market.jpg" alt="Kadıköy market street"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/istanbul_kadikoy_market_b.jpg" alt="Kadıköy market street" width="330" height="226"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Kadıköy Market Street is a vibrant hub in Istanbul, known for its bustling atmosphere and diverse offerings. Visitors can explore a variety of shops, stalls, and eateries, showcasing local produce, traditional foods, and artisanal crafts. The market is a perfect blend of modern life and historical charm, making it a must-visit for anyone wanting to experience the local culture. Kadıköy was founded in the 7th century BC as Chalcedon. The market has been a center for trade and commerce for centuries. Kadıköy is known for its rich culinary scene, featuring traditional Turkish foods.</p>
 <p class="prose">Kadıköy has a rich history that dates back to ancient times, originally known as Chalcedon. The area has seen significant development over the centuries, particularly during the Byzantine and Ottoman periods, when it became an important trade and residential district. The market street itself has evolved over time, reflecting the changing dynamics of the city. Culturally, Kadıköy Market Street is a focal point for daily life in the district, where locals gather to shop, socialize, and enjoy the vibrant atmosphere. The market is emblematic of Istanbul&#x27;s diverse culinary traditions, offering a taste of both local and international flavors. It serves as a venue for cultural events and festivals, reinforcing its role as a community gathering space.</p></div>
 </section>
 <section class="place" id="istanbul_maidens_tower">
+<div class="place-lead">
 <h3>Maiden&#x27;s Tower (Kız Kulesi)</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Üsküdar islet | Style: Ottoman octagonal lighthouse | Period: 1725 tower; earlier beacons</p>
-<figure class="place-fig"><img src="../images/istanbul_maidens_tower.jpg" alt="Maiden&#x27;s Tower (Kız Kulesi)"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/istanbul_maidens_tower.jpg" alt="Maiden&#x27;s Tower (Kız Kulesi)" width="1280" height="960" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_maidens_tower_b.jpg" alt="Maiden&#x27;s Tower (Kız Kulesi) — view 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Small tower restaurant on a Bosphorus islet reached by shuttle boats from both shores. Legends mix poisoned princess tales with ancient customs posts. Night ferries frame sunset shots toward Hagia Sophia.</p>
 <p class="prose">Byzantine chain anchor point became a lantern station and café landmark. Vertical punctuation visible from Üsküdar promenade.</p></div>
 </section>
 <section class="place" id="istanbul_miniaturk">
+<div class="place-lead">
 <h3>Miniaturk</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/istanbul_miniaturk.jpg" alt="Miniaturk"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_miniaturk.jpg" alt="Miniaturk" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_miniaturk_b.jpg" alt="Miniaturk — view 2" width="330" height="298" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">It was opened on 2 May 2003. It is one of the world&#x27;s largest miniature parks, with a 15,000 m2 (160,000 sq ft) model area and total area of 60,000 square metres (650,000 sq ft).</p></div>
 </section>
 <section class="place" id="istanbul_ortakoy">
+<div class="place-lead">
 <h3>Ortaköy Mosque</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/istanbul_ortakoy.jpg" alt="Ortaköy Mosque"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_ortakoy.jpg" alt="Ortaköy Mosque" width="330" height="206" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_ortakoy_b.jpg" alt="Ortaköy Mosque — view 2" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Ortaköy Mosque, also known as the Büyük Mecidiye Mosque, is a stunning example of Ottoman Baroque architecture located on the shores of the Bosphorus in Istanbul. Its picturesque setting and intricate design make it a popular spot for both tourists and locals alike, offering a serene atmosphere amidst the bustling city. The mosque is particularly famous for its elegant minarets and beautiful interior, adorned with intricate calligraphy and chandeliers. Ortaköy Mosque was completed in 1856. It was designed by architect Garabet Balyan and his son. The mosque features a blend of Baroque and Ottoman architectural styles.</p>
 <p class="prose">Ortaköy Mosque was commissioned by Sultan Abdülmecid I and completed in 1856. It was designed by the Armenian architect Garabet Balyan and his son, who were prominent figures in Ottoman architecture. The mosque has undergone various restorations over the years, particularly after the 1999 earthquake, ensuring its preservation as a historical landmark. Culturally, Ortaköy Mosque holds a special place in Istanbul&#x27;s heritage, symbolizing the fusion of different architectural styles and the city&#x27;s diverse history. It is a popular venue for weddings and other ceremonies, reflecting its role in the daily lives of the local community. The mosque&#x27;s location by the Bosphorus also makes it a significant landmark in Istanbul&#x27;s landscape, attracting visitors from around the world.</p></div>
 </section>
-<section class="place" id="istanbul_pdfband_9_4b91e409">
+<section class="place" id="istanbul_palaceofjusticeistanbul_1">
+<div class="place-lead">
 <h3>PalaceOfJusticeIstanbul (1)</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/istanbul_pdfband_9_4b91e409.jpg" alt="PalaceOfJusticeIstanbul (1)"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/istanbul_palaceofjusticeistanbul_1.jpg" alt="PalaceOfJusticeIstanbul (1)" width="1280" height="848" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_palaceofjusticeistanbul_1_b.jpg" alt="PalaceOfJusticeIstanbul (1) — view 2" width="330" height="220" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 </section>
 <section class="place" id="istanbul_pera_museum">
+<div class="place-lead">
 <h3>Pera Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/istanbul_pera_museum.jpg" alt="Pera Museum"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/istanbul_pera_museum_b.jpg" alt="Pera Museum" width="330" height="202"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Pera Museum — art museum in İstanbul, Turkey.</p></div>
 </section>
 <section class="place" id="istanbul_pierre_loti">
+<div class="place-lead">
 <h3>Pierre Loti Hill</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/istanbul_pierre_loti.jpg" alt="Pierre Loti Hill"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_pierre_loti.jpg" alt="Pierre Loti Hill" width="330" height="62" style="height: 86px; max-height: 86px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_pierre_loti_b.jpg" alt="Pierre Loti Hill — view 2" width="330" height="159" style="height: 86px; max-height: 86px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Pierre Loti Hill offers breathtaking panoramic views of Istanbul, making it a popular destination for both locals and tourists. Named after the French novelist Pierre Loti, who found inspiration in its serene surroundings, the hill is a perfect spot to relax and enjoy the beauty of the Golden Horn. Visitors can also explore the historic café that serves traditional Turkish tea and coffee. Pierre Loti Hill is located in the Eyüp district of Istanbul. The hill offers one of the best panoramic views of the Golden Horn and the city skyline. The café at Pierre Loti Hill is named after the French writer Pierre Loti, who visited the site in the late 19th century.</p>
 <p class="prose">Pierre Loti Hill has been a significant location since the Byzantine era, known for its strategic vantage point over the Golden Horn. The hill became popular in the late 19th century when Pierre Loti, a French naval officer and writer, frequented the area, drawing attention to its picturesque views in his literary works. Culturally, Pierre Loti Hill is a cherished spot that reflects the blend of Istanbul&#x27;s diverse heritage. It serves as a gathering place for locals and tourists alike, embodying the city&#x27;s vibrant daily life. The hill&#x27;s café has become a symbol of social interaction and relaxation, contributing to the cultural fabric of Istanbul.</p></div>
 </section>
-<section class="place" id="istanbul_pdfband_0_d45c3cd3">
+<section class="place" id="istanbul_popebenedictxvi">
+<div class="place-lead">
 <h3>PopeBenedictXVI</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/istanbul_pdfband_0_d45c3cd3.jpg" alt="PopeBenedictXVI"/></figure>
+<figure class="place-fig place-fig--hi-res"><img src="../images/istanbul_popebenedictxvi.jpg" alt="PopeBenedictXVI" width="1200" height="1600"/></figure>
+</div>
 <div class="place-desc"><p class="prose">%5B%5BWikipedia%3ARedirects+for+discussion%5D%5D+debate+closed+as+delete
 #REDIRECT Pope Benedict XVI.</p></div>
 </section>
 <section class="place" id="istanbul_rahmi_museum">
+<div class="place-lead">
 <h3>Rahmi M. Koç Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/istanbul_rahmi_museum.jpg" alt="Rahmi M. Koç Museum"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/istanbul_rahmi_museum_b.jpg" alt="Rahmi M. Koç Museum" width="330" height="220"/></figure>
+</div>
 <div class="place-desc"><p class="prose">The Rahmi M. Koç Museum in Istanbul is a captivating destination dedicated to the history of transport, industry, and communications. Housed in a beautifully restored historic factory on the Golden Horn, the museum showcases an impressive collection of artifacts, including vintage automobiles, steam engines, and maritime exhibits. Visitors can explore interactive displays and enjoy a unique insight into Turkey&#x27;s industrial heritage. The museum was founded in 1994. It is located in a former anchor factory on the Golden Horn. The collection includes vintage cars, trains, and maritime artifacts.</p>
 <p class="prose">The Rahmi M. Koç Museum was established in 1994 by Rahmi Koç, a prominent Turkish businessman and philanthropist. The museum occupies a former anchor factory that dates back to the late 19th century, which has been meticulously restored to preserve its historical significance while housing the extensive collection. Culturally, the museum plays a vital role in preserving Turkey&#x27;s industrial and technological heritage, reflecting the evolution of various industries that have shaped the nation. It serves as an educational resource, promoting awareness of the historical developments in transport and communication, and contributes to Istanbul&#x27;s rich tapestry of cultural institutions.</p></div>
 </section>
 <section class="place" id="istanbul_rustem_pasha">
+<div class="place-lead">
 <h3>Rüstem Pasha Mosque</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/istanbul_rustem_pasha.jpg" alt="Rüstem Pasha Mosque"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_rustem_pasha.jpg" alt="Rüstem Pasha Mosque" width="330" height="250" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_rustem_pasha_b.jpg" alt="Rüstem Pasha Mosque — view 2" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Rüstem Pasha Mosque — mosque in İstanbul, Turkey.</p></div>
 </section>
 <section class="place" id="istanbul_spice_bazaar">
+<div class="place-lead">
 <h3>Spice Bazaar (Mısır Çarşısı)</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Eminönü | Style: Ottoman vaulted market | Period: 1660s L-shaped hall</p>
-<figure class="place-fig"><img src="../images/istanbul_spice_bazaar.jpg" alt="Spice Bazaar (Mısır Çarşısı)"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/istanbul_spice_bazaar.jpg" alt="Spice Bazaar (Mısır Çarşısı)" width="1280" height="960" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_spice_bazaar_b.jpg" alt="Spice Bazaar (Mısır Çarşısı) — view 2" width="330" height="248" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Cash still helps for small spice sacks. Ferry piers sit one block south toward Kadıköy. Commissioned from Egyptian trade revenues; still mixes wholesale with tourist retail. Sensory anchor between Yeni Cami and Galata Bridge commuters.</p></div>
 </section>
 <section class="place" id="istanbul_blue_mosque">
+<div class="place-lead">
 <h3>Sultan Ahmed Mosque (Blue Mosque)</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Sultanahmet Meydanı | Style: Classical Ottoman mosque with cascade of domes | Period: 1609–1616 (Sedefkâr Mehmed Ağa)</p>
-<figure class="place-fig"><img src="../images/istanbul_blue_mosque.jpg" alt="Sultan Ahmed Mosque (Blue Mosque)"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/istanbul_blue_mosque.jpg" alt="Sultan Ahmed Mosque (Blue Mosque)" width="1280" height="1147" style="height: 301px; max-height: 301px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_blue_mosque_b.jpg" alt="Sultan Ahmed Mosque (Blue Mosque) — view 2" width="330" height="215" style="height: 301px; max-height: 301px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Six-minaret imperial mosque facing the Hippodrome, named for İznik tiles that tint the prayer hall interior. Visitors should respect prayer times and modest dress at the entrance. Courtyard arcades frame views toward Hagia Sophia across the park.</p>
 <p class="prose">Commissioned by Ahmed I as an imperial foundation with külliye dependencies around the square. Sultanahmet&#x27;s skyline pair with Hagia Sophia defines tourist Istanbul.</p></div>
 </section>
 <section class="place" id="istanbul_suleymaniye_mosque">
+<div class="place-lead">
 <h3>Süleymaniye Mosque</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Third Hill | Style: Classical Ottoman külliye | Period: 1550–1557 (Sinan)</p>
-<figure class="place-fig"><img src="../images/istanbul_suleymaniye_mosque.jpg" alt="Süleymaniye Mosque"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/istanbul_suleymaniye_mosque.jpg" alt="Süleymaniye Mosque" width="1039" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_suleymaniye_mosque_b.jpg" alt="Süleymaniye Mosque — view 2" width="330" height="495" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Sinan&#x27;s largest mosque complex with terraces overlooking Golden Horn ship traffic. Courtyard arcades frame views toward Galata. Tombs of Süleyman and Hürrem sit in the garden.</p>
 <p class="prose">Imperial foundation mosque crowning the city&#x27;s third hill above the bazaars. Architectural peak of classical Ottoman Istanbul.</p></div>
 </section>
 <section class="place" id="istanbul_topkapi_palace">
+<div class="place-lead">
 <h3>Topkapı Palace</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Sultanahmet | Style: Ottoman palace pavilions around courtyards | Period: 1460s onward (successive courts)</p>
-<figure class="place-fig"><img src="../images/istanbul_topkapi_palace.jpg" alt="Topkapı Palace"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--row-sized"><img src="../images/istanbul_topkapi_palace.jpg" alt="Topkapı Palace" width="1140" height="1140" style="height: 252px; max-height: 252px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_topkapi_palace_b.jpg" alt="Topkapı Palace — view 2" width="330" height="180" style="height: 252px; max-height: 252px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Sultan&#x27;s palace on the Seraglio Point with treasury, harem ticket sector, and terraces over the Golden Horn and Marmara. Separate tickets often apply to the Harem apartments. Courtyard silence rules help preserve the museum atmosphere.</p>
 <p class="prose">Primary residence until Dolmabahçe; collections of arms, porcelain, and relics accumulated across reigns. Essential context for Ottoman court life above the old harbour.</p></div>
 </section>
 <section class="place" id="istanbul_valens_aqueduct">
+<div class="place-lead">
 <h3>Valens Aqueduct</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/istanbul_valens_aqueduct.jpg" alt="Valens Aqueduct"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_valens_aqueduct.jpg" alt="Valens Aqueduct" width="330" height="241" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_valens_aqueduct_b.jpg" alt="Valens Aqueduct — view 2" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Aqueduct of Valens — Roman aqueduct supplying Constantinople (Istanbul, Turkey).</p></div>
 </section>
 <section class="place" id="istanbul_vialand">
+<div class="place-lead">
 <h3>Vialand theme gate</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/istanbul_vialand.jpg" alt="Vialand theme gate"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/istanbul_vialand.jpg" alt="Vialand theme gate" width="330" height="212"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Vialand is a vibrant theme park and entertainment complex located in Istanbul, offering a mix of thrilling rides, shopping, and dining experiences. Designed to cater to families and thrill-seekers alike, it features attractions that range from roller coasters to interactive play areas. The park also includes a shopping mall and a hotel, making it a comprehensive destination for leisure and entertainment. Vialand opened in 2013. It features a variety of rides, shopping options, and dining facilities.</p>
 <p class="prose">Vialand opened its doors to the public in 2013, marking a significant addition to Istanbul&#x27;s entertainment landscape. Developed by the Turkish company, the project aimed to create a modern amusement park that reflects the city&#x27;s dynamic spirit while providing a family-friendly environment. While Vialand does not hold historical or political significance in the traditional sense, it represents a shift in Istanbul&#x27;s cultural landscape towards modern entertainment and leisure activities. The park has become a popular destination for both locals and tourists, contributing to the city&#x27;s evolving identity as a hub for family-oriented attractions and contemporary lifestyle experiences.</p></div>
 </section>
 <section class="place" id="istanbul_sakirin">
+<div class="place-lead">
 <h3>Şakirin Mosque</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/istanbul_sakirin.jpg" alt="Şakirin Mosque"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_sakirin.jpg" alt="Şakirin Mosque" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/istanbul_sakirin_b.jpg" alt="Şakirin Mosque — view 2" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Şakirin Mosque, located in the heart of Istanbul, is a modern architectural marvel that beautifully blends contemporary design with traditional Islamic elements. Completed in 2009, it stands out for its unique aesthetic and serves as a serene place of worship amidst the bustling city. Visitors can appreciate its intricate details and the peaceful atmosphere it offers. Designed by architect Hüsrev Tayla and completed in 2009. Commissioned by the Şakirin family in memory of their patriarch.</p>
 <p class="prose">Şakirin Mosque was inaugurated in 2009 and was designed by the renowned Turkish architect Hüsrev Tayla. It was commissioned by the Şakirin family in memory of their late patriarch, and it reflects a modern interpretation of Islamic architecture while maintaining respect for traditional practices. Culturally, Şakirin Mosque represents a shift towards modernity in Islamic architecture, showcasing how contemporary design can coexist with religious practices. It serves as a community hub, reflecting the daily lives of Istanbul&#x27;s residents and their spiritual needs. The mosque&#x27;s design and function contribute to the ongoing dialogue about the role of faith in urban life, making it a significant landmark in Istanbul.</p></div>
 </section>

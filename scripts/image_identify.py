@@ -74,6 +74,7 @@ def image_matches_item(
         "cemeteries": "cemetery or necropolis in Moscow",
         "landmarks": "iconic landmark or building in Moscow",
         "cafes": "cafe or restaurant in Moscow",
+        "osobnjaki": "urban mansion or historic house in Moscow",
     }
     ctx = _ctx_map.get(ctx, ctx)
     place_desc = item_name

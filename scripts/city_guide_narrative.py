@@ -25,7 +25,7 @@ from scripts.city_guide_translate import (
 
 _CYRILLIC_RE = re.compile(r"[\u0400-\u04FF]")
 _SENTENCE_SPLIT_RE = re.compile(
-    r"(?<=[.!?…])\s+(?=[\"«(A-ZА-ЯЁ0-9])",
+    r"(?<=[.!?…])(?<![A-ZА-ЯЁ]\.)\s+(?=[\"«(A-ZА-ЯЁ0-9])",
 )
 _NEUTRAL_META_RE = re.compile(r"^[\d\s\u2013\-–—.,/()+]+$")
 _SYNTHETIC_RU_STORY_RE = re.compile(
@@ -77,7 +77,9 @@ _RU_LANDMARK_TAIL_RE = re.compile(
 
 
 def polish_display_title(text: str) -> str:
-    return clean_wikimedia_display_title(str(text).strip())
+    from scripts.city_guide_naming import clean_place_display_title
+
+    return clean_place_display_title(str(text).strip())
 
 
 def is_ru_landmark_stub(text: str) -> bool:
@@ -94,7 +96,11 @@ def is_ru_landmark_stub(text: str) -> bool:
 
 def is_landmark_boilerplate(text: str) -> bool:
     """Grow-script / translate filler — never show in guides."""
-    return is_landmark_stub(text) or is_ru_landmark_stub(text)
+    return (
+        is_landmark_stub(text)
+        or is_ru_landmark_stub(text)
+        or is_reference_boilerplate(text)
+    )
 
 
 _GENERIC_FACT_STUBS = frozenset(
@@ -230,6 +236,46 @@ def clean_pixabay_artifacts(text: str) -> str:
     s = _URL_RE.sub("", s)
     s = re.sub(r"\s+", " ", s).strip(" .")
     return s
+
+
+_REFERENCE_BOOK_RE = re.compile(
+    r"Крижевская|"
+    r"блогерами|"
+    r"Текст предоставлен издательством|"
+    r"li\s*res\.ru|litres\.ru|"
+    r"ISBN\s*[\d\-Xx]+|"
+    r"формат\s+PDF\s+A4|"
+    r"Эксмо;\s*Москва|"
+    r"BEST\s+OF\s+RUSSIA|"
+    r"Ins\s*a?gram\s+собрал",
+    re.IGNORECASE,
+)
+_OCR_TOC_RE = re.compile(
+    r"Содержание\s+Вступление\s+\d+|"
+    r"\d+\s+МАР[ШW]РУТ|"
+    r"Донской\s+пр-д,\s*д\.\s*9\s+Центросоюз|"
+    r"отдел\s+рукописей\s+РГБ",
+    re.IGNORECASE,
+)
+_PDF_PAGE_TOC_RE = re.compile(r"\b\d{3}\s+[А-ЯЁA-Z]")
+
+
+def is_reference_boilerplate(text: str) -> bool:
+    """OCR/book-catalog filler from PDF sidecar imports — not place prose."""
+    s = str(text).strip()
+    if len(s) < 80:
+        return False
+    if _REFERENCE_BOOK_RE.search(s):
+        return True
+    if _OCR_TOC_RE.search(s):
+        return True
+    if "Москва изнутри" in s and "ISBN" in s.upper():
+        return True
+    if s.count("©") >= 2:
+        return True
+    if len(_PDF_PAGE_TOC_RE.findall(s)) >= 4:
+        return True
+    return False
 
 
 def is_pixabay_stub(text: str) -> bool:
@@ -958,10 +1004,6 @@ def place_heading_plain(
             )
             if translated:
                 return polish_display_title(translated)
-    if edition != "ru":
-        ru_plain = pick_first_text(place, "ru", ("name_ru", "name"))
-        if ru_plain:
-            return ru_plain
     if is_pdf_filler_slug(slug):
         return title_from_pdf_filler_slug(slug)
     if "_" in slug:
@@ -989,10 +1031,30 @@ def place_meta_line(
     edition: str,
     labels: dict[str, str],
 ) -> str | None:
+    from scripts.city_guide_place_meta import (
+        meta_labels,
+        pick_location_label,
+        pick_metro_line,
+        pick_street_address,
+        pick_visit_hours,
+        place_category,
+    )
+
     parts: list[str] = []
-    address = pick_text_field(place, edition, "address")
+    cat = place_category(dict(place))
+    meta = meta_labels(edition)
+    line = pick_metro_line(dict(place))
+    if cat == "metro" and line:
+        parts.append("{} {}".format(meta["metro_line"], line))
+    location = pick_location_label(dict(place))
+    if location:
+        parts.append("{} {}".format(meta["location"], location))
+    address = pick_street_address(dict(place))
     if address:
-        parts.append("{} {}".format(labels["address"], address))
+        parts.append("{} {}".format(meta["address"], address))
+    hours = pick_visit_hours(dict(place), edition)
+    if hours:
+        parts.append("{} {}".format(meta["visit_hours"], hours))
     style = pick_text_field(place, edition, "architecture_style")
     if style:
         parts.append("{} {}".format(labels["style"], style))

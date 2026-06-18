@@ -1,0 +1,58 @@
+# -*- coding: utf-8 -*-
+"""Fix Latin/Cyrillic mixups in osobnjaki_batch2.py."""
+
+from __future__ import annotations
+
+from pathlib import Path
+
+# (broken, fixed) — broken strings use Latin lookalikes inside Cyrillic text
+_FIXES: list[tuple[str, str]] = [
+    ("\u041c\u0438\u043binis\u0430", "\u041c\u0438\u043b\u0438\u043d\u0438\u0441\u0430"),
+    ("\u0415\u0440\u043cola\u0435\u0432\u0441\u043a\u0438\u0439", "\u0415\u0440\u043c\u043e\u043b\u0430\u0435\u0432\u0441\u043a\u0438\u0439"),
+    ("\u0433\u0438necology museum history", "\u0438\u0441\u0442\u043e\u0440\u0438\u044f \u0433\u0438\u043d\u0435\u043a\u043e\u043b\u043e\u0433\u0438\u0438"),
+    ("\u0421\u043f\u0438\u0440\u0438\u0434on\u043a\u0430", "\u0421\u043f\u0438\u0440\u0438\u0434\u043e\u043d\u043e\u0432\u043a\u0430"),
+    ("\u041f\u0440okofieva", "\u041f\u0440\u043e\u043a\u043e\u0444\u044c\u0435\u0432\u0430"),
+    ("\u041buniny\u0445", "\u041b\u0443\u043d\u0438\u043d\u044b\u0445"),
+    ("\u041buniny\u0445", "\u041b\u0443\u043d\u0438\u043d\u044b\u0445"),
+    ("\u041d\u0430\u0449okina", "\u041d\u0430\u0449\u043e\u043a\u0438\u043d\u0430"),
+    ("\u041d\u0430\u0449okina", "\u041d\u0430\u0449\u043e\u043a\u0438\u043d\u0430"),
+    ("\u0414\u043e\u043bgorukov\u044b\u0445", "\u0414\u043e\u043b\u0433\u043e\u0440\u0443\u043a\u043e\u0432\u044b\u0445"),
+    ("\u0414\u043e\u043bgorukov\u044b", "\u0414\u043e\u043b\u0433\u043e\u0440\u0443\u043a\u043e\u0432\u044b"),
+    ("\u0421\u043e\u043bloguba", "\u0421\u043e\u043b\u043b\u043e\u0433\u0443\u0431\u0430"),
+    ("\u043f\u0435\u0440. \u0422\u0440\u0435\u0445prudny", "\u043f\u0435\u0440. \u0422\u0440\u0435\u0445\u043f\u0440\u0443\u0434\u043d\u044b\u0439"),
+    ("Trekhprudny \u043f\u0435\u0440\u0435\u0443\u043b\u043a\u0435", "\u0422\u0440\u0435\u0445\u043f\u0440\u0443\u0434\u043d\u043e\u043c \u043f\u0435\u0440\u0435\u0443\u043b\u043a\u0435"),
+    ("Trekhprudny \u2014", "\u0422\u0440\u0435\u0445\u043f\u0440\u0443\u0434\u043d\u044b\u0439 \u2014"),
+    ("Solllogub", "Sollogub"),
+    ("\u0414\u043e\u043c-\u043c\u0443z\u0435\u0439", "\u0414\u043e\u043c-\u043c\u0443\u0437\u0435\u0439"),
+    ("\u041f\u0440\u0435ch\u0438\u0441\u0442enka", "\u041f\u0440\u0435\u0447\u0438\u0441\u0442\u0435\u043d\u043a\u0430"),
+    ("\u041f\u0440\u0435ch\u0438\u0441\u0442enke", "\u041f\u0440\u0435\u0447\u0438\u0441\u0442\u0435\u043d\u043a\u0435"),
+    ("\u0414\u043e\u043c \u0411\u043e\u0442kina", "\u0414\u043e\u043c \u0411\u043e\u0442\u043a\u0438\u043d\u0430"),
+    ("\u0421\u0442\u0430\u0440okonyushenny", "\u0421\u0442\u0430\u0440\u043e\u043a\u043e\u043d\u044e\u0448\u0435\u043d\u043d\u044b\u0439"),
+    ("\u0410\u0440bat", "\u0410\u0440\u0431\u0430\u0442"),
+    ("\u0444\u0438\u043b\u0430\u043d\u0442rop", "\u0444\u0438\u043b\u0430\u043d\u0442\u0440\u043e\u043f"),
+    ("\u0411\u043e\u0442kina", "\u0411\u043e\u0442\u043a\u0438\u043d\u0430"),
+    ("\u0410\u0440bata", "\u0410\u0440\u0431\u0430\u0442\u0430"),
+    ("\u041cazepina", "\u041c\u0430\u0437\u0435\u043f\u0438\u043d\u0430"),
+    ("[\"Trekhprudny\",", "[\"\u0422\u0440\u0435\u0445\u043f\u0440\u0443\u0434\u043d\u044b\u0439\",",),
+]
+
+
+def main() -> int:
+    path = Path(__file__).resolve().parent.parent / "moscow" / "data" / "osobnjaki_batch2.py"
+    text = path.read_text(encoding="utf-8")
+    original = text
+    for broken, fixed in _FIXES:
+        text = text.replace(broken, fixed)
+    if text == original:
+        print("No changes applied.")
+        return 1
+    path.write_text(text, encoding="utf-8")
+    print("Fixed {} replacements in {}".format(
+        sum(original.count(b) for b, _ in _FIXES if b in original),
+        path.name,
+    ))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

@@ -13,7 +13,7 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
 .otium-logo { font-family: 'Cormorant Garamond', serif; font-size: 2.15rem;
   font-weight: 600; letter-spacing: 0.18em; margin-bottom: 0.85rem; }
 .otiump { margin: 0.42rem 0; line-height: 1.42; text-align: justify;
-  max-width: 38rem; font-size: 0.95rem; }
+  font-size: 0.95rem; }
 .guide-title { page-break-after: auto; margin-bottom: 0.55rem;
   page-break-inside: avoid; }
 .historical-reference { margin: 0.75rem 0 1.15rem;
@@ -63,22 +63,103 @@ ol.trip-stops a:hover { text-decoration: underline; }
 .heraldry-univ-caption { font-size: 0.52rem; line-height: 1.18;
   margin: 0.12rem 0 0; padding: 0 0.06rem; color: #252525;
   text-align: center; font-weight: 500; }
-.heraldry-motto { text-align: center; max-width: 18rem; margin: 0.18rem auto;
+.heraldry-motto { text-align: center; margin: 0.18rem auto;
   width: 100%; }
 .motto-line { font-family: 'Cormorant Garamond', serif; font-size: 1rem;
   margin: 0; color: #333; line-height: 1.35; }
 .guide-title h1.guide-title-main { font-family: 'Cormorant Garamond', serif;
   font-size: 2.35rem; margin-bottom: 0.5rem; font-weight: 600; }
 .lead { color: #444; font-size: 1.05rem; }
-.guide-toc { margin: 0.85rem 0 1.15rem; page-break-inside: avoid; }
-.guide-toc h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.28rem;
-  font-weight: 600; margin: 0.4rem 0 0.55rem; }
+
+.guide-toc { page-break-before: always; break-before: page;
+  page-break-after: always; break-after: page;
+  margin: 0; padding: 0.2rem 0 0.45rem; page-break-inside: auto; }
+.guide-toc h2 { font-family: 'Cormorant Garamond', serif;
+  font-size: 1.28rem; font-weight: 600; margin: 0.4rem 0 0.55rem; }
 .guide-toc ol { margin: 0.35rem 0 0.65rem 1.25rem; padding: 0;
   columns: 2; column-gap: 1.5rem; }
 .guide-toc li { margin: 0.18rem 0; line-height: 1.35;
   font-size: 0.88rem; break-inside: avoid; }
-.guide-toc a { color: #1a5276; text-decoration: none; }
+.guide-toc a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.guide-toc a:hover { color: #0d3d56; }
 .guide-toc li.toc-item--sub { font-size: 0.82rem; margin-left: 0.35rem; }
+.toc-back { font-size: 0.78rem; margin: 0 0 0.35rem; text-align: right; }
+.toc-back a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.toc-back a:hover { color: #0d3d56; }
+.place, .historical-reference, .guide-primer, .guide-trip-plans {
+  scroll-margin-top: 1.25rem; }
+.historical-reference h2, .guide-primer h2, .guide-trip-plans h2,
+.chapter-head h2, .place-lead h3 { position: relative; }
+.guide-toc + .place, .guide-toc + .chapter-head {
+  page-break-before: avoid; break-before: avoid-page; }
+.place-lead { page-break-inside: avoid; break-inside: avoid-page;
+  page-break-after: auto; }
+.place-lead > h3 { page-break-after: avoid; break-after: avoid-page; }
+.place-lead > .place-meta { page-break-after: avoid; break-after: avoid-page; }
+
+.place-fig { page-break-inside: avoid; break-inside: avoid-page;
+  margin: 0.5rem 0 1rem; }
+.place-fig img {
+  page-break-inside: avoid; break-inside: avoid-page;
+  max-height: 48vh; width: auto; max-width: 100%;
+  object-fit: contain; margin-left: auto; margin-right: auto; }
+.place-fig--hi-res img { max-height: 52vh; }
+.place-fig--lo-res img { max-height: 30vh; }
+.place-pdf-fig-row {
+  display: flex; flex-direction: row; flex-wrap: wrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.45rem 0.55rem; margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row .place-fig {
+  flex: 1 1 30%; margin: 0; min-width: 26%; max-width: 100%; }
+.place-pdf-fig-row .place-fig img {
+  width: auto; max-width: 100%; height: auto; max-height: 44vh;
+  object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--pair {
+  flex-wrap: nowrap; justify-content: space-between;
+  align-items: flex-end; gap: 0.5rem 0.65rem; }
+.place-pdf-fig-row--pair .place-fig {
+  flex: 1 1 47%; min-width: 0; max-width: 50%;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--pair .place-fig img {
+  max-height: 44vh; object-fit: contain; }
+.place-pdf-fig-row--pair .place-fig--hi-res img { max-height: 52vh; }
+.place-pdf-fig-row--pair .place-fig--lo-res img { max-height: 26vh; }
+.place-pdf-fig-row--pair .place-fig--row-sized img,
+.place-pdf-fig-row--triple .place-fig--row-sized img,
+.place-pdf-fig-row--many .place-fig--row-sized img {
+  width: auto; max-width: 100%; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row .place-fig--row-sized.place-fig--hi-res img,
+.place-pdf-fig-row .place-fig--row-sized.place-fig--lo-res img {
+  max-height: unset; }
+.place-pdf-fig-rows-stack {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple {
+  display: flex; flex-direction: row; flex-wrap: nowrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.4rem 0.48rem; margin: 0;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--triple .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--triple .place-fig--hi-res img { max-height: 42vh; }
+.place-pdf-fig-row--triple .place-fig--lo-res img { max-height: 18vh; }
+.place-pdf-fig-row--many {
+  flex-wrap: nowrap; justify-content: center; align-items: flex-end;
+  gap: 0.35rem 0.42rem; }
+.place-pdf-fig-row--many .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--many .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+
+
 .place { margin-bottom: 2.2rem; page-break-inside: auto; }
 h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.22rem; margin: 1.2rem 0 0.35rem;
   font-weight: 600; }
@@ -90,7 +171,6 @@ h4 { font-family: 'Cormorant Garamond', serif; font-size: 0.95rem; text-transfor
   color: #555; font-size: 0.95rem; margin: 0 0 0.5rem; font-style: italic; }
 .place-meta { font-size: 0.92rem; color: #353535; margin: 0 0 0.75rem;
   line-height: 1.4; }
-.place-fig { margin: 0.5rem 0 1rem; }
 img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
 .prose, .place-desc p { margin: 0.45rem 0; line-height: 1.5;
   text-align: justify; }
@@ -110,7 +190,9 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <figure class="heraldry-fig heraldry-coat-book" title="Coat of arms of Odesa"><img src="../images/guide_coat_of_arms.svg" alt="Coat of arms of Odesa"/></figure>
 <figure class="heraldry-fig heraldry-coat-book" title="Flag of Odesa"><img src="../images/guide_flag.svg" alt="Flag of Odesa"/></figure>
 </div></div><h1 class="guide-title-main">Odesa</h1><p class="lead">Guide. Places in this edition: 25.</p></header>
+<nav class="guide-toc" id="guide-toc" aria-label="Contents"><h2>Contents</h2><ol><li class="toc-item"><a href="#guide-trips">Trip ideas</a></li><li class="toc-item"><a href="#odessa_bristol_hotel">Bristol Hotel Odessa</a></li><li class="toc-item"><a href="#odessa_deribasovskaya">Deribasovskaya Street</a></li><li class="toc-item"><a href="#odessa_richelieu">Duke de Richelieu monument</a></li><li class="toc-item"><a href="#odessa_french_boulevard">French Boulevard Odessa</a></li><li class="toc-item"><a href="#odessa_green_theatre">Green Theatre Odessa</a></li><li class="toc-item"><a href="#odessa_lanzheron_beach">Lanzheron Beach</a></li><li class="toc-item"><a href="#odessa_mother_in_law_bridge">Mother-in-law Bridge</a></li><li class="toc-item"><a href="#odessa_odessa_catacombs">Museum of Partisan Glory</a></li><li class="toc-item"><a href="#odessa_archeology_museum">Odessa Archaeology Museum</a></li><li class="toc-item"><a href="#odessa_city_hall">Odessa City Hall</a></li><li class="toc-item"><a href="#odessa_odessa_film_studio">Odessa Film Studio</a></li><li class="toc-item"><a href="#odessa_fine_arts_museum">Odessa Fine Arts Museum</a></li><li class="toc-item"><a href="#odessa_black_sea_coast">Odessa Gulf coast</a></li><li class="toc-item"><a href="#odessa_landmark">Odessa Landmark</a></li><li class="toc-item"><a href="#odessa_opera_theatre">Odessa Opera and Ballet Theater</a></li><li class="toc-item"><a href="#odessa_passage">Odessa Passage</a></li><li class="toc-item"><a href="#odessa_port">Odessa Sea Port</a></li><li class="toc-item"><a href="#odessa_potemkin_stairs">Potemkin Stairs</a></li><li class="toc-item"><a href="#odessa_prymorsky_boulevard">Primorsky Boulevard</a></li><li class="toc-item"><a href="#odessa_spaso_preobrazhensky">Saviour Transfiguration Cathedral</a></li><li class="toc-item"><a href="#odessa_shah_palace">Shah Palace Odessa</a></li><li class="toc-item"><a href="#odessa_shevchenko_park">Shevchenko Park Odessa</a></li><li class="toc-item"><a href="#odessa_st_paul_cathedral">St Pauls Lutheran Cathedral</a></li><li class="toc-item"><a href="#odessa_transfiguration_cathedral">Transfiguration Cathedral</a></li><li class="toc-item"><a href="#odessa_vorontsov_palace">Vorontsov Palace</a></li></ol></nav>
 <section class="guide-trip-plans" id="guide-trips" aria-label="Trip ideas"><h2>Trip ideas</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 <article class="trip-plan" id="trip-1d"><h3>One day</h3>
 <p class="prose">A compact loop linking the strongest cards in this guide, ordered to minimise backtracking on foot.</p>
 <ol class="trip-stops"><li><a href="#odessa_deribasovskaya">Deribasovskaya Street</a> (~75min)</li>
@@ -137,203 +219,337 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <p class="prose">Day 3 — remaining highlights nearby.</p>
 <ol class="trip-stops"><li><a href="#odessa_port">Odessa Sea Port</a> (~75min)</li>
 <li><a href="#odessa_archeology_museum">Odessa Archaeology Museum</a> (~75min)</li></ol></article></section>
-<nav class="guide-toc" aria-label="Contents"><h2>Contents</h2><ol><li class="toc-item"><a href="#guide-trips">Trip ideas</a></li><li class="toc-item"><a href="#odessa_bristol_hotel">Bristol Hotel Odessa</a></li><li class="toc-item"><a href="#odessa_deribasovskaya">Deribasovskaya Street</a></li><li class="toc-item"><a href="#odessa_richelieu">Duke de Richelieu monument</a></li><li class="toc-item"><a href="#odessa_french_boulevard">French Boulevard Odessa</a></li><li class="toc-item"><a href="#odessa_green_theatre">Green Theatre Odessa</a></li><li class="toc-item"><a href="#odessa_lanzheron_beach">Lanzheron Beach</a></li><li class="toc-item"><a href="#odessa_mother_in_law_bridge">Mother-in-law Bridge</a></li><li class="toc-item"><a href="#odessa_odessa_catacombs">Museum of Partisan Glory</a></li><li class="toc-item"><a href="#odessa_archeology_museum">Odessa Archaeology Museum</a></li><li class="toc-item"><a href="#odessa_city_hall">Odessa City Hall</a></li><li class="toc-item"><a href="#odessa_odessa_film_studio">Odessa Film Studio</a></li><li class="toc-item"><a href="#odessa_fine_arts_museum">Odessa Fine Arts Museum</a></li><li class="toc-item"><a href="#odessa_black_sea_coast">Odessa Gulf coast</a></li><li class="toc-item"><a href="#odessa_opera_theatre">Odessa Opera and Ballet Theater</a></li><li class="toc-item"><a href="#odessa_passage">Odessa Passage</a></li><li class="toc-item"><a href="#odessa_port">Odessa Sea Port</a></li><li class="toc-item"><a href="#odessa_potemkin_stairs">Potemkin Stairs</a></li><li class="toc-item"><a href="#odessa_prymorsky_boulevard">Primorsky Boulevard</a></li><li class="toc-item"><a href="#odessa_spaso_preobrazhensky">Saviour Transfiguration Cathedral</a></li><li class="toc-item"><a href="#odessa_shah_palace">Shah Palace Odessa</a></li><li class="toc-item"><a href="#odessa_shevchenko_park">Shevchenko Park Odessa</a></li><li class="toc-item"><a href="#odessa_st_paul_cathedral">St Pauls Lutheran Cathedral</a></li><li class="toc-item"><a href="#odessa_transfiguration_cathedral">Transfiguration Cathedral</a></li><li class="toc-item"><a href="#odessa_vorontsov_palace">Vorontsov Palace</a></li><li class="toc-item"><a href="#odessa_pdfband_2_3bc3706d">Одесса. Арабский центр</a></li></ol></nav>
 <section class="place" id="odessa_bristol_hotel">
+<div class="place-lead">
 <h3>Bristol Hotel Odessa</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/odessa_bristol_hotel.jpg" alt="Bristol Hotel Odessa"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/odessa_bristol_hotel.jpg" alt="Bristol Hotel Odessa" width="1280" height="960" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/odessa_bristol_hotel_b.jpg" alt="Bristol Hotel Odessa — view 2" width="330" height="219" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Bristol Hotel Odessa is a luxurious establishment located in the heart of Odessa, known for its elegant architecture and rich history. This hotel offers guests a blend of modern comfort and classic charm, making it a popular choice for travelers seeking to experience the vibrant culture of the city. With its prime location, visitors can easily explore nearby attractions and enjoy the city&#x27;s lively atmosphere. Founded in 1899, the Bristol Hotel is one of the oldest hotels in Odessa. The hotel features a blend of neoclassical and modern architectural styles.</p>
 <p class="prose">The Bristol Hotel Odessa was established in the late 19th century, specifically in 1899, and has since become a notable landmark in the city. Originally designed to cater to the affluent travelers of the time, the hotel has undergone various renovations while maintaining its historical essence. It has hosted numerous dignitaries and cultural figures throughout its history, reflecting the city&#x27;s status as a significant port and cultural hub. Culturally, the Bristol Hotel Odessa stands as a symbol of the city&#x27;s architectural heritage and hospitality. It has played a role in Odessa&#x27;s social life, serving as a meeting place for artists, intellectuals, and tourists alike. The hotel&#x27;s presence contributes to the city&#x27;s identity, showcasing the blend of historical and contemporary influences that define Odessa.</p></div>
 </section>
 <section class="place" id="odessa_deribasovskaya">
+<div class="place-lead">
 <h3>Deribasovskaya Street</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/odessa_deribasovskaya.jpg" alt="Deribasovskaya Street"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/odessa_deribasovskaya.jpg" alt="Deribasovskaya Street" width="1280" height="1531" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/odessa_deribasovskaya_b.jpg" alt="Deribasovskaya Street — view 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Deribasovskaya Street is the vibrant heart of Odessa, known for its lively atmosphere, charming architecture, and bustling cafes. This pedestrian-friendly thoroughfare is a popular destination for both locals and tourists, offering a glimpse into the city&#x27;s rich history and culture. Visitors can enjoy street performances, shop for souvenirs, and savor local cuisine in this iconic urban space. Deribasovskaya Street was named after José de Ribas, the founder of Odessa. The street was officially established in the early 19th century. It is a pedestrian-only street, popular for shopping and dining.</p>
 <p class="prose">Deribasovskaya Street was established in the early 19th century, named after the city&#x27;s founder, José de Ribas. The street quickly became a central hub for trade and social life in Odessa, reflecting the city&#x27;s growth as a major port and cultural center in the region. Key events, including various public celebrations and gatherings, have taken place here, marking its importance in the city&#x27;s historical narrative. Culturally, Deribasovskaya Street is a symbol of Odessa&#x27;s vibrant urban life, showcasing the city&#x27;s diverse heritage through its architecture and public spaces. It has been a site for artistic expression, with numerous galleries and performances contributing to the local arts scene. The street also plays a vital role in daily life, serving as a meeting point and a venue for various cultural events and festivals.</p></div>
 </section>
 <section class="place" id="odessa_richelieu">
+<div class="place-lead">
 <h3>Duke de Richelieu monument</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/odessa_richelieu.jpg" alt="Duke de Richelieu monument"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/odessa_richelieu_b.jpg" alt="Duke de Richelieu monument" width="330" height="208"/></figure>
+</div>
 <div class="place-desc"><p class="prose">The Duke de Richelieu monument in Odessa stands as a tribute to one of the city&#x27;s founding figures, Duke Armand Emmanuel de Richelieu. Erected in 1828, this iconic sculpture is located at the top of the Potemkin Steps and offers stunning views of the Black Sea. The monument is a popular spot for both locals and tourists, symbolizing the city&#x27;s rich history and cultural heritage. The monument was unveiled in 1828 and is made of white stone. It stands at the top of the Potemkin Steps, overlooking the harbor. Duke de Richelieu is credited with significant urban development in Odessa.</p>
 <p class="prose">The Duke de Richelieu, who served as the governor of New Russia from 1803 to 1814, played a crucial role in the development of Odessa as a major port city. His efforts in urban planning and infrastructure laid the groundwork for Odessa&#x27;s growth and prosperity. The monument was designed by the sculptor Ivan Petrovich Martos and unveiled in 1828, commemorating Richelieu&#x27;s contributions to the city. Politically, the monument reflects the importance of Duke de Richelieu in shaping Odessa&#x27;s identity during the early 19th century. Culturally, it serves as a symbol of Odessa&#x27;s heritage, celebrating the city&#x27;s historical ties to European influences. The monument is a focal point for local traditions and gatherings, reinforcing its role in the daily life of Odessans.</p></div>
 </section>
 <section class="place" id="odessa_french_boulevard">
+<div class="place-lead">
 <h3>French Boulevard Odessa</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/odessa_french_boulevard.jpg" alt="French Boulevard Odessa"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/odessa_french_boulevard.jpg" alt="French Boulevard Odessa" width="1280" height="857" style="height: 261px; max-height: 261px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/odessa_french_boulevard_b.jpg" alt="French Boulevard Odessa — view 2" width="330" height="187" style="height: 261px; max-height: 261px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">French Boulevard is a picturesque avenue in Odessa, renowned for its stunning views of the Black Sea and lush greenery. This charming boulevard is lined with elegant villas, cafes, and cultural landmarks, making it a popular destination for both locals and tourists. Visitors can enjoy leisurely strolls while soaking in the vibrant atmosphere of this historic area. French Boulevard was developed in the early 1800s. The boulevard is known for its scenic views of the Black Sea. It features a mix of architectural styles, including Neoclassical and Art Nouveau.</p>
 <p class="prose">French Boulevard was established in the early 19th century, reflecting the influence of French architecture and culture in Odessa. It became a fashionable promenade for the city&#x27;s elite, showcasing the city&#x27;s growth and development during this period. The boulevard has witnessed various historical events, including social gatherings and cultural celebrations. Culturally, French Boulevard holds a special place in Odessa&#x27;s heritage, symbolizing the city&#x27;s cosmopolitan spirit and its connections to European art and architecture. It serves as a hub for daily life, where locals engage in leisure activities and cultural events. The boulevard is also associated with various traditions and festivals that celebrate the city&#x27;s diverse cultural landscape.</p></div>
 </section>
 <section class="place" id="odessa_green_theatre">
+<div class="place-lead">
 <h3>Green Theatre Odessa</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/odessa_green_theatre.jpg" alt="Green Theatre Odessa"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/odessa_green_theatre.jpg" alt="Green Theatre Odessa" width="1280" height="960" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/odessa_green_theatre_b.jpg" alt="Green Theatre Odessa — view 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Green Theatre Odessa is a unique open-air venue nestled within the lush greenery of the city&#x27;s park. Known for its stunning natural acoustics and picturesque setting, it hosts a variety of cultural events, including concerts, theatrical performances, and festivals, making it a beloved spot for both locals and tourists alike. Established in 1936 as an open-air theatre. Hosts a variety of cultural events, including concerts and festivals. Located within a park, enhancing its natural acoustics and scenic beauty.</p>
 <p class="prose">The Green Theatre was established in 1936 and has since become an iconic part of Odessa&#x27;s cultural landscape. Originally designed as a venue for theatrical performances, it has evolved over the decades to accommodate a wide range of artistic expressions, reflecting the city&#x27;s dynamic cultural scene. Culturally, the Green Theatre plays a vital role in Odessa&#x27;s artistic community, serving as a platform for both emerging and established artists. Its open-air format fosters a unique atmosphere that enhances the experience of performances, making it a cherished venue for summer events. The theatre also contributes to the city&#x27;s heritage, celebrating local traditions and fostering a sense of community among residents.</p></div>
 </section>
 <section class="place" id="odessa_lanzheron_beach">
+<div class="place-lead">
 <h3>Lanzheron Beach</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/odessa_lanzheron_beach.jpg" alt="Lanzheron Beach"/></figure>
+<figure class="place-fig place-fig--hi-res"><img src="../images/odessa_lanzheron_beach.jpg" alt="Lanzheron Beach" width="1280" height="960"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Lanzheron Beach is a popular seaside destination in Odessa, known for its picturesque views and vibrant atmosphere. Visitors can enjoy sunbathing, swimming, and a variety of beachside activities. The beach is also lined with cafes and restaurants, making it a perfect spot for relaxation and socializing. Lanzheron Beach is located near the center of Odessa, making it easily accessible. The beach features a promenade with cafes, bars, and recreational facilities.</p>
 <p class="prose">Lanzheron Beach has been a cherished part of Odessa since the city was founded in the late 18th century. It was named after the Russian admiral, Count Grigory Lanzheron, who played a significant role in the development of the city. Over the years, the beach has evolved into a key recreational area for both locals and tourists. Culturally, Lanzheron Beach holds a special place in the hearts of Odessans, serving as a hub for leisure and social interaction. It reflects the city&#x27;s coastal heritage and is a site where various local traditions and summer festivities take place. The beach is integral to the daily life of the community, offering a space for relaxation and connection with nature.</p></div>
 </section>
 <section class="place" id="odessa_mother_in_law_bridge">
+<div class="place-lead">
 <h3>Mother-in-law Bridge</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/odessa_mother_in_law_bridge.jpg" alt="Mother-in-law Bridge"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/odessa_mother_in_law_bridge.jpg" alt="Mother-in-law Bridge" width="1280" height="750" style="height: 270px; max-height: 270px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/odessa_mother_in_law_bridge_b.jpg" alt="Mother-in-law Bridge — view 2" width="330" height="247" style="height: 270px; max-height: 270px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Mother-in-law Bridge in Odessa is a charming pedestrian bridge that connects the picturesque park areas of the city. Known for its unique name and scenic views, it serves as a popular spot for both locals and tourists to enjoy leisurely strolls and take in the surrounding beauty. The bridge is adorned with artistic elements, making it a delightful addition to Odessa&#x27;s urban landscape. The bridge connects two major parks in Odessa, offering scenic views of the surrounding area. It features artistic elements that contribute to its unique charm and appeal.</p>
 <p class="prose">The Mother-in-law Bridge was constructed in the early 2000s as part of a broader initiative to enhance public spaces in Odessa. It was designed to provide a safe and pleasant passage for pedestrians while also beautifying the area with its artistic features. While the Mother-in-law Bridge does not hold significant political or religious importance, it contributes to the cultural fabric of Odessa. It is a popular gathering place that reflects the city&#x27;s commitment to creating vibrant public spaces, fostering community interaction, and enhancing the overall quality of urban life.</p></div>
 </section>
 <section class="place" id="odessa_odessa_catacombs">
+<div class="place-lead">
 <h3>Museum of Partisan Glory</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/odessa_odessa_catacombs.jpg" alt="Museum of Partisan Glory"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/odessa_odessa_catacombs.jpg" alt="Museum of Partisan Glory" width="1200" height="1600" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/odessa_odessa_catacombs_b.jpg" alt="Museum of Partisan Glory — view 2" width="330" height="247" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Museum of Partisan Glory in Odessa is a poignant tribute to the brave resistance fighters of World War II who operated in the region&#x27;s extensive catacombs. This museum showcases artifacts, photographs, and narratives that illuminate the struggles and sacrifices of partisans against Nazi occupation. Visitors can explore the rich history of the underground movement and gain insight into the resilience of the local population during a tumultuous period. The museum was founded in 1970. It is located near the historic Odessa Catacombs. The museum features exhibits dedicated to the partisan fighters of World War II.</p>
 <p class="prose">The Museum of Partisan Glory was established in 1970 to commemorate the heroism of partisans who fought against fascism during World War II. The museum is located near the Odessa Catacombs, which served as a crucial base for resistance activities. Over the years, it has become a significant site for education and remembrance, reflecting the city&#x27;s wartime history. The museum holds cultural significance as it preserves the memory of the partisan movement and contributes to the collective identity of Odessa&#x27;s residents. It serves as a reminder of the city&#x27;s past struggles and the importance of resistance in shaping national narratives. The museum also plays a role in fostering discussions about war, peace, and the impact of conflict on communities.</p></div>
 </section>
 <section class="place" id="odessa_archeology_museum">
+<div class="place-lead">
 <h3>Odessa Archaeology Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/odessa_archeology_museum.jpg" alt="Odessa Archaeology Museum"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/odessa_archeology_museum.jpg" alt="Odessa Archaeology Museum" width="1280" height="960" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/odessa_archeology_museum_b.jpg" alt="Odessa Archaeology Museum — view 2" width="330" height="286" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Odessa Archaeology Museum is a treasure trove of ancient artifacts, showcasing the rich history of the region from prehistoric times to the Middle Ages. Visitors can explore a diverse collection that includes Greek, Roman, and Scythian relics, providing insight into the cultural heritage of Odessa and its surrounding areas. The museum&#x27;s elegant architecture and well-curated exhibits make it a must-visit for history enthusiasts. Founded in 1875, the museum is one of the oldest archaeological museums in Ukraine. The museum&#x27;s collection includes over 160,000 artifacts, highlighting the history of the Black Sea region.</p>
 <p class="prose">Founded in 1875, the Odessa Archaeology Museum has played a crucial role in the study and preservation of the region&#x27;s archaeological heritage. The museum&#x27;s collection has expanded significantly over the years, particularly following excavations in the Black Sea region and the discovery of ancient sites. The museum serves as a vital cultural institution in Odessa, reflecting the city&#x27;s historical importance as a crossroads of various civilizations. It contributes to the understanding of the region&#x27;s diverse cultural identity and heritage, making it an essential part of the local community and a point of interest for scholars and tourists alike.</p></div>
 </section>
 <section class="place" id="odessa_city_hall">
+<div class="place-lead">
 <h3>Odessa City Hall</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/odessa_city_hall.jpg" alt="Odessa City Hall"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/odessa_city_hall_b.jpg" alt="Odessa City Hall" width="330" height="247"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Odessa City Hall is an iconic landmark located in the heart of Odessa, showcasing stunning architecture and serving as a central hub for local governance. Its grand façade and historical significance make it a must-visit for anyone exploring the city. Visitors can appreciate its role in the city&#x27;s development while enjoying the vibrant atmosphere of the surrounding area. Constructed between 1884 and 1887. Designed by architect Franz Boffo in a Neoclassical style. Serves as the seat of the Odessa City Council.</p>
 <p class="prose">The Odessa City Hall was constructed between 1884 and 1887, designed by architect Franz Boffo in a Neoclassical style. It has witnessed numerous key events in the city&#x27;s history, including the establishment of Odessa as a significant port and cultural center in the 19th century. The building has undergone various renovations over the years, reflecting the city&#x27;s evolving identity. As a political center, Odessa City Hall has played a crucial role in the administration of the city and has been a site for important civic events and decisions. Culturally, it stands as a symbol of Odessa&#x27;s rich heritage, often hosting public gatherings, celebrations, and exhibitions that reflect the city&#x27;s diverse traditions and artistic expressions.</p></div>
 </section>
 <section class="place" id="odessa_odessa_film_studio">
+<div class="place-lead">
 <h3>Odessa Film Studio</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Period: 1907</p>
-<figure class="place-fig"><img src="../images/odessa_odessa_film_studio.jpg" alt="Odessa Film Studio"/></figure>
+<figure class="place-fig place-fig--hi-res"><img src="../images/odessa_odessa_film_studio.jpg" alt="Odessa Film Studio" width="1240" height="1600"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Odessa Film Studio is one of the oldest and most renowned film studios in Eastern Europe, founded in 1907. It has played a pivotal role in Ukrainian cinema, producing numerous classic films that have become iconic both locally and internationally. The studio was originally opened as a motion picture production facility by French entrepreneur Georges Hatschek. It has produced over 4,000 films since its establishment, including classics such as &#x27;Ivanhoe&#x27; and &#x27;Dr. Today, the studio continues to operate as a working film location, offering tours and workshops for aspiring filmmakers. Its impressive facilities include sound stages, green screens, and extensive outdoor locations. Notable international productions filmed at the studio include &#x27;Borat&#x27;, &#x27;Midnight in Paris&#x27;, and &#x27;The Bourne Legacy&#x27;.</p>
 <p class="prose">Established in 1907, Odessa Film Studio has been a hub for filmmaking in Ukraine since its inception. Over the years, it has hosted some of the region&#x27;s most celebrated directors and actors, contributing significantly to the development of Ukrainian cinematic art. The studio is particularly known for its lavish sets and meticulous attention to detail, which have contributed to the creation of memorable scenes in many famous movies. Visitors can explore the historical significance of the studio and gain insight into how it shaped Ukrainian cinema over the decades.</p></div>
 </section>
 <section class="place" id="odessa_fine_arts_museum">
+<div class="place-lead">
 <h3>Odessa Fine Arts Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/odessa_fine_arts_museum.jpg" alt="Odessa Fine Arts Museum"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/odessa_fine_arts_museum_b.jpg" alt="Odessa Fine Arts Museum" width="330" height="436"/></figure>
+</div>
 <div class="place-desc"><p class="prose">The Odessa Fine Arts Museum is a treasure trove of artistic heritage located in the heart of Odessa. Housed in a stunning neoclassical building, the museum showcases an extensive collection of Ukrainian and European art, ranging from the Renaissance to the modern era. Visitors can explore a variety of exhibitions that reflect the rich cultural tapestry of the region. Founded in 1899 as the City Museum of Fine Arts. Housed in a neoclassical building constructed in the late 19th century. Features a collection that spans from the Renaissance to modern art.</p>
 <p class="prose">The Odessa Fine Arts Museum was founded in 1899, originally established as the City Museum of Fine Arts. The museum&#x27;s collection has grown significantly over the years, particularly after the acquisition of artworks from various private collections and galleries. The building itself was constructed in the late 19th century and has undergone several renovations to preserve its architectural integrity. Culturally, the Odessa Fine Arts Museum plays a vital role in promoting the artistic heritage of Ukraine and fostering appreciation for both local and international art. It serves as a cultural hub for the community, hosting exhibitions, educational programs, and cultural events that engage both residents and visitors. The museum&#x27;s collection includes notable works that highlight the artistic movements that have influenced Ukraine&#x27;s cultural landscape.</p></div>
 </section>
 <section class="place" id="odessa_black_sea_coast">
+<div class="place-lead">
 <h3>Odessa Gulf coast</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/odessa_black_sea_coast.jpg" alt="Odessa Gulf coast"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/odessa_black_sea_coast.jpg" alt="Odessa Gulf coast" width="1280" height="960" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/odessa_black_sea_coast_b.jpg" alt="Odessa Gulf coast — view 2" width="330" height="334" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Odessa Gulf coast, stretching along the Black Sea, offers stunning views and a vibrant atmosphere. Visitors can enjoy picturesque beaches, bustling promenades, and a variety of recreational activities. This coastal area is not only a popular destination for relaxation but also a hub of cultural and social life in Odessa. The Odessa Gulf coast is part of the Black Sea, which has been a crucial maritime route for centuries. Odessa was officially founded in 1794 by a decree from the Russian Empress Catherine the Great. The coast features several popular beaches, including Arcadia Beach and Lanzheron Beach.</p>
 <p class="prose">The Odessa Gulf coast has been integral to the city&#x27;s development since its founding in the late 18th century. The establishment of the port in 1794 marked the beginning of Odessa&#x27;s rise as a significant maritime hub. Throughout the 19th and 20th centuries, the coast witnessed numerous events, including naval battles and the establishment of seaside resorts that attracted visitors from across Europe. Culturally, the Odessa Gulf coast plays a vital role in the daily life of residents and visitors alike, serving as a gathering place for festivals, concerts, and artistic performances. The area&#x27;s rich heritage is reflected in its architecture and local traditions, contributing to Odessa&#x27;s identity as a vibrant cultural center. While the coast has no specific religious significance, it is often a site for secular celebrations and community events.</p></div>
 </section>
+<section class="place" id="odessa_landmark">
+<div class="place-lead">
+<h3>Odessa Landmark</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/odessa_landmark.jpg" alt="Odessa Landmark" width="1280" height="960" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/odessa_landmark_b.jpg" alt="Odessa Landmark — view 2" width="330" height="462" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+</section>
 <section class="place" id="odessa_opera_theatre">
+<div class="place-lead">
 <h3>Odessa Opera and Ballet Theater</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/odessa_opera_theatre.jpg" alt="Odessa Opera and Ballet Theater"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/odessa_opera_theatre.jpg" alt="Odessa Opera and Ballet Theater" width="1250" height="1280" style="height: 315px; max-height: 315px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/odessa_opera_theatre_b.jpg" alt="Odessa Opera and Ballet Theater — view 2" width="330" height="225" style="height: 315px; max-height: 315px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Odessa Opera and Ballet Theater is a stunning architectural masterpiece located in the heart of Odessa, renowned for its exquisite performances and rich cultural heritage. With its opulent interiors and grand facade, it serves as a prominent venue for opera, ballet, and classical music, attracting both locals and tourists alike. Visitors can enjoy a diverse program of performances throughout the year, making it a must-visit destination for art enthusiasts. The theater was built in the Neo-Renaissance style, featuring a lavish interior adorned with frescoes and sculptures. It is one of the oldest opera theaters in Ukraine and has a seating capacity of approximately 1,600. The Odessa Opera and Ballet Theater was designated as a national cultural monument in Ukraine.</p>
 <p class="prose">The Odessa Opera and Ballet Theater was officially opened on October 6, 1887, and was designed by the renowned architect Ferdinand Fellner and his partner Hermann Helmer. The theater has undergone several renovations and restorations, particularly after sustaining damage during World War II. It has hosted numerous famous performances and artists, solidifying its status as a cultural landmark in Ukraine. Culturally, the Odessa Opera and Ballet Theater is a cornerstone of the city&#x27;s artistic life, showcasing a blend of Ukrainian and international talent. It plays a vital role in preserving and promoting the performing arts, contributing to Odessa&#x27;s reputation as a cultural hub. The theater is also a symbol of the city&#x27;s rich heritage and is integral to the local community&#x27;s identity, hosting various events and festivals that celebrate the arts.</p></div>
 </section>
 <section class="place" id="odessa_passage">
+<div class="place-lead">
 <h3>Odessa Passage</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/odessa_passage.jpg" alt="Odessa Passage"/></figure>
-<div class="place-desc"><p class="prose">This historic shopping arcade features a blend of neo-Renaissance and Art Nouveau styles, making it a popular destination for both locals and tourists. Visitors can explore a variety of shops, cafes, and galleries while enjoying the vibrant atmosphere of this bustling market. Opened in 1899 and designed by architect E. Features a mix of neo-Renaissance and Art Nouveau architectural styles.</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/odessa_passage.jpg" alt="Odessa Passage" width="1280" height="960" style="height: 299px; max-height: 299px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/odessa_passage_b.jpg" alt="Odessa Passage — view 2" width="330" height="214" style="height: 299px; max-height: 299px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">This historic shopping arcade features a blend of neo-Renaissance and Art Nouveau styles, making it a popular destination for both locals and tourists. Visitors can explore a variety of shops, cafes, and galleries while enjoying the vibrant atmosphere of this bustling market. Opened in 1899 and designed by architect E. M. K. G. de Vilmont. Features a mix of neo-Renaissance and Art Nouveau architectural styles.</p>
 <p class="prose">Constructed in the late 19th century, Odessa Passage was officially opened in 1899. Designed by architect E. M. K. G. de Vilmont, the arcade was intended to serve as a commercial hub, reflecting the city&#x27;s growth and prosperity during this period. Over the years, it has witnessed significant events in Odessa&#x27;s history, including changes in ownership and renovations that have preserved its architectural beauty. Odessa Passage holds cultural importance as a symbol of the city&#x27;s rich heritage and its role as a commercial center. The arcade not only showcases the architectural styles of its time but also serves as a gathering place for the community, reflecting the daily life and traditions of Odessa&#x27;s residents. Its continued use as a market underscores its relevance in the contemporary cultural landscape of the city.</p></div>
 </section>
 <section class="place" id="odessa_port">
+<div class="place-lead">
 <h3>Odessa Sea Port</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/odessa_port.jpg" alt="Odessa Sea Port"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/odessa_port.jpg" alt="Odessa Sea Port" width="1087" height="1600" style="height: 277px; max-height: 277px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/odessa_port_b.jpg" alt="Odessa Sea Port — view 2" width="330" height="198" style="height: 277px; max-height: 277px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Odessa Sea Port is a bustling hub of maritime activity and a key gateway to the Black Sea. With its stunning architecture and vibrant atmosphere, the port is not only vital for trade but also a popular spot for tourists seeking to experience the city&#x27;s rich maritime heritage. Visitors can enjoy picturesque views of ships and the waterfront while exploring nearby attractions. Founded in 1794, the Odessa Sea Port is one of the oldest ports in Ukraine. It serves as a major hub for cargo and passenger transport in the Black Sea region.</p>
 <p class="prose">The Odessa Sea Port was founded in 1794, shortly after the establishment of the city of Odessa itself. It has played a crucial role in the economic development of the region, facilitating trade and commerce throughout its history. Key events include its expansion in the 19th century, which transformed it into one of the largest ports in the Black Sea. The port has significant cultural importance as a symbol of Odessa&#x27;s maritime identity and economic vitality. It has influenced local traditions and daily life, with many residents relying on the port for employment and commerce. The port area is also a focal point for cultural events and gatherings, reflecting the city&#x27;s diverse heritage.</p></div>
 </section>
 <section class="place" id="odessa_potemkin_stairs">
+<div class="place-lead">
 <h3>Potemkin Stairs</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/odessa_potemkin_stairs.jpg" alt="Potemkin Stairs"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/odessa_potemkin_stairs.jpg" alt="Potemkin Stairs" width="1280" height="807" style="height: 291px; max-height: 291px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/odessa_potemkin_stairs_b.jpg" alt="Potemkin Stairs — view 2" width="330" height="466" style="height: 291px; max-height: 291px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Potemkin Stairs are an iconic symbol of Odessa, connecting the city’s port to the upper town. This grand staircase, consisting of 192 steps, offers stunning views of the Black Sea and serves as a popular gathering spot for both locals and tourists. Its unique design creates an optical illusion, making it appear longer than it is, which adds to its charm and allure. The staircase consists of 192 steps, but the number appears to be 193 due to the optical illusion created by its design. The Potemkin Stairs were inspired by the Spanish Steps in Rome and are one of the most recognized landmarks in Odessa.</p>
 <p class="prose">Constructed between 1837 and 1841, the Potemkin Stairs were designed by architect Francesco Boffo. They were originally named the &#x27;Great Staircase&#x27; and were later renamed in honor of the battleship Potemkin, which was associated with the 1905 revolution. The stairs have witnessed significant historical events, including protests and celebrations, making them a central feature of Odessa&#x27;s urban landscape. The Potemkin Stairs hold cultural importance as a symbol of Odessa&#x27;s identity and resilience. They have been featured in various works of art and literature, reflecting the city’s rich heritage. The stairs are also a popular site for public gatherings and events, reinforcing their role in the daily life of the city’s residents. While they do not hold religious significance, their grandeur and historical context contribute to Odessa&#x27;s cultural narrative.</p></div>
 </section>
 <section class="place" id="odessa_prymorsky_boulevard">
+<div class="place-lead">
 <h3>Primorsky Boulevard</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/odessa_prymorsky_boulevard.jpg" alt="Primorsky Boulevard"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/odessa_prymorsky_boulevard.jpg" alt="Primorsky Boulevard" width="1280" height="927" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/odessa_prymorsky_boulevard_b.jpg" alt="Primorsky Boulevard — view 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Primorsky Boulevard is a picturesque promenade in Odessa, offering stunning views of the Black Sea and the city&#x27;s vibrant architecture. Lined with lush trees, historical monuments, and charming cafes, it serves as a popular gathering place for locals and tourists alike. This boulevard is not only a scenic spot but also a hub of cultural and social activities, making it a must-visit destination in Odessa. Primorsky Boulevard was officially established in 1803. The boulevard features several notable landmarks, including the famous Potemkin Stairs and the Monument to Duc de Richelieu. It serves as a venue for various cultural events and festivals throughout the year.</p>
 <p class="prose">Primorsky Boulevard was established in the early 19th century, becoming a central part of Odessa&#x27;s urban landscape. Originally named the Boulevard of the Black Sea, it has witnessed significant events throughout the city&#x27;s history, including the establishment of the port and the development of Odessa as a key cultural and economic center in the region. Primorsky Boulevard holds cultural importance as a symbol of Odessa&#x27;s rich heritage and artistic spirit. It is often associated with various cultural events, festivals, and daily life in the city, reflecting the vibrant atmosphere of Odessa. The boulevard is also home to several monuments and sculptures that celebrate the city&#x27;s history and artistic achievements.</p></div>
 </section>
 <section class="place" id="odessa_spaso_preobrazhensky">
+<div class="place-lead">
 <h3>Saviour Transfiguration Cathedral</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/odessa_spaso_preobrazhensky.jpg" alt="Saviour Transfiguration Cathedral"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/odessa_spaso_preobrazhensky.jpg" alt="Saviour Transfiguration Cathedral" width="1280" height="1214" style="height: 438px; max-height: 438px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/odessa_spaso_preobrazhensky_b.jpg" alt="Saviour Transfiguration Cathedral — view 2" width="330" height="516" style="height: 438px; max-height: 438px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Saviour Transfiguration Cathedral in Odessa is a stunning example of Byzantine architecture, renowned for its striking domes and intricate interior. This cathedral serves as a spiritual hub for the local Orthodox community and is a must-visit for those interested in the city&#x27;s religious heritage. Visitors can admire its beautiful frescoes and icons that reflect the rich traditions of Eastern Orthodox Christianity. Construction began in 1865 and was completed in 1881. The cathedral is designed in the Byzantine architectural style.</p>
 <p class="prose">The Saviour Transfiguration Cathedral was founded in the early 19th century, with construction beginning in 1865 and completed in 1881. Designed by architect A. M. Kolesnikov, it was built to serve the growing Orthodox population in Odessa and has since undergone various restorations, particularly after suffering damage during World War II. The cathedral holds significant cultural and religious importance in Odessa, serving as a center for Orthodox worship and community gatherings. It reflects the city&#x27;s architectural heritage and is a testament to the enduring traditions of Eastern Orthodoxy in the region. The cathedral is also a symbol of resilience, having been restored after periods of turmoil, including the impacts of war.</p></div>
 </section>
 <section class="place" id="odessa_shah_palace">
+<div class="place-lead">
 <h3>Shah Palace Odessa</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/odessa_shah_palace.jpg" alt="Shah Palace Odessa"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/odessa_shah_palace.jpg" alt="Shah Palace Odessa" width="1200" height="1600" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/odessa_shah_palace_b.jpg" alt="Shah Palace Odessa — view 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Shah Palace, a stunning architectural gem in Odessa, showcases a blend of Eastern and Western design influences. This historic palace, with its intricate details and lush gardens, offers visitors a glimpse into the opulent lifestyle of the past. Today, it serves as a cultural venue, hosting various events and exhibitions.</p>
-<p class="prose">Constructed in the late 19th century, Shah Palace was designed by the renowned architect A. M. K. It was originally built for a wealthy merchant and has since witnessed numerous historical events, reflecting the changing tides of Odessa&#x27;s social and economic landscape. Culturally, Shah Palace stands as a testament to Odessa&#x27;s rich heritage, embodying the city&#x27;s architectural diversity. It plays a vital role in the local arts scene, often hosting exhibitions and cultural events that celebrate the region&#x27;s traditions and artistic expressions.</p></div>
+<p class="prose">Constructed in the late 19th century, Shah Palace was designed by the renowned architect A. M. K. K. It was originally built for a wealthy merchant and has since witnessed numerous historical events, reflecting the changing tides of Odessa&#x27;s social and economic landscape. Culturally, Shah Palace stands as a testament to Odessa&#x27;s rich heritage, embodying the city&#x27;s architectural diversity. It plays a vital role in the local arts scene, often hosting exhibitions and cultural events that celebrate the region&#x27;s traditions and artistic expressions.</p></div>
 </section>
 <section class="place" id="odessa_shevchenko_park">
+<div class="place-lead">
 <h3>Shevchenko Park Odessa</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/odessa_shevchenko_park.jpg" alt="Shevchenko Park Odessa"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/odessa_shevchenko_park.jpg" alt="Shevchenko Park Odessa" width="1280" height="960" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/odessa_shevchenko_park_b.jpg" alt="Shevchenko Park Odessa — view 2" width="330" height="247" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Shevchenko Park in Odessa is a lush urban oasis that offers a serene escape from the bustling city life. Established in the 19th century, the park features beautiful walking paths, vibrant flower beds, and a variety of sculptures, making it a perfect spot for relaxation and recreation. Visitors can enjoy the park&#x27;s historical monuments and cultural events throughout the year. Founded in 1874 and originally named after Taras Shevchenko. Features a variety of sculptures and monuments dedicated to cultural figures. Hosts numerous cultural events and activities throughout the year.</p>
 <p class="prose">Shevchenko Park was founded in 1874 and originally named after the famous Ukrainian poet Taras Shevchenko. The park has undergone several renovations and expansions over the years, becoming a central part of Odessa&#x27;s public life and a venue for various cultural activities. Culturally, Shevchenko Park holds great importance for the people of Odessa, serving as a gathering place for locals and tourists alike. It hosts numerous events, including concerts and art exhibitions, reflecting the city&#x27;s vibrant artistic scene. The park is also a testament to the city&#x27;s dedication to preserving green spaces amidst urban development.</p></div>
 </section>
 <section class="place" id="odessa_st_paul_cathedral">
+<div class="place-lead">
 <h3>St Pauls Lutheran Cathedral</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/odessa_st_paul_cathedral.jpg" alt="St Pauls Lutheran Cathedral"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/odessa_st_paul_cathedral.jpg" alt="St Pauls Lutheran Cathedral" width="1130" height="1600" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/odessa_st_paul_cathedral_b.jpg" alt="St Pauls Lutheran Cathedral — view 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">St. Paul&#x27;s Lutheran Cathedral in Odessa is a striking example of neo-Gothic architecture, known for its impressive spire and intricate stained glass windows. This active place of worship serves not only the local Lutheran community but also attracts visitors with its historical and cultural significance. The cathedral&#x27;s serene interior and beautiful surroundings make it a peaceful retreat in the bustling city. Founded in 1841 to serve the Lutheran community in Odessa. Features neo-Gothic architectural style with a prominent spire. Underwent renovations after damage during World War II.</p>
 <p class="prose">St. Paul&#x27;s Lutheran Cathedral was founded in 1841, reflecting the growing presence of the German community in Odessa during the 19th century. The cathedral was constructed to serve the spiritual needs of Lutheran immigrants and has undergone various renovations over the years, particularly after sustaining damage during World War II. The cathedral holds cultural importance as a symbol of the diverse heritage of Odessa, a city known for its multicultural population. It plays a role in the daily lives of its congregants, hosting regular services and community events. Additionally, the architectural style of the cathedral contributes to the city&#x27;s historical landscape, making it a point of interest for both locals and tourists.</p></div>
 </section>
 <section class="place" id="odessa_transfiguration_cathedral">
+<div class="place-lead">
 <h3>Transfiguration Cathedral</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/odessa_transfiguration_cathedral.jpg" alt="Transfiguration Cathedral"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/odessa_transfiguration_cathedral.jpg" alt="Transfiguration Cathedral" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/odessa_transfiguration_cathedral_b.jpg" alt="Transfiguration Cathedral — view 2" width="330" height="220" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">hedral in Huesca, Spain Ukraine Transfiguration Cathedral, Chernihiv, a building of pre-Mongol Rus Transfiguration Cathedral, Dnipropetrovsk Transfiguration Cathedral in Odesa Transfiguration Cathedral, Vinnytsia United States Russian Orthodox Cathedral of the Transfiguration of Our Lord in New York City Cathedral Shrine of the Transfiguration, the cathedral of the Episcopal Diocese of Virginia, U.</p></div>
 </section>
 <section class="place" id="odessa_vorontsov_palace">
+<div class="place-lead">
 <h3>Vorontsov Palace</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Neoclassical | Period: 1834–1848</p>
-<figure class="place-fig"><img src="../images/odessa_vorontsov_palace.jpg" alt="Vorontsov Palace"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/odessa_vorontsov_palace.jpg" alt="Vorontsov Palace" width="1280" height="960" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/odessa_vorontsov_palace_b.jpg" alt="Vorontsov Palace — view 2" width="330" height="487" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Perched high above the Black Sea coastline, Vorontsov Palace is a breathtaking example of neoclassical architecture. This lavish mansion was built for Prince Mikhail Vorontsov, Governor-General of the Crimea, during the late 19th century. The palace boasts extensive gardens featuring exotic plants and fountains. It houses a museum dedicated to local art and historical artifacts. Its location offers panoramic vistas that make it one of the most photographed spots in Ukraine. Vorontsov Palace has been listed as a UNESCO World Heritage Site since 2014. Today, it serves as a venue for concerts, exhibitions, and special events.</p>
 <p class="prose">Constructed between 1834 and 1848 by Italian architect Francesco Boffo, the palace served as both a summer residence and a cultural hub. It showcases exquisite interiors adorned with marble floors, frescoes, and elaborate decorations inspired by ancient Greek and Roman motifs. Visitors come to experience its grandiose interior design and stunning views over Odessa&#x27;s harbor and the sea beyond.</p></div>
-</section>
-<section class="place" id="odessa_pdfband_2_3bc3706d">
-<h3>Одесса. Арабский центр</h3>
-
-
-<figure class="place-fig"><img src="../images/odessa_pdfband_2_3bc3706d.jpg" alt="Одесса. Арабский центр"/></figure>
 </section>
 </body>
 </html>

@@ -13,7 +13,7 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
 .otium-logo { font-family: 'Marcellus', serif; font-size: 2.15rem;
   font-weight: 600; letter-spacing: 0.18em; margin-bottom: 0.85rem; }
 .otiump { margin: 0.42rem 0; line-height: 1.42; text-align: justify;
-  max-width: 38rem; font-size: 0.95rem; }
+  font-size: 0.95rem; }
 .guide-title { page-break-after: auto; margin-bottom: 0.55rem;
   page-break-inside: avoid; }
 .historical-reference { margin: 0.75rem 0 1.15rem;
@@ -63,22 +63,103 @@ ol.trip-stops a:hover { text-decoration: underline; }
 .heraldry-univ-caption { font-size: 0.52rem; line-height: 1.18;
   margin: 0.12rem 0 0; padding: 0 0.06rem; color: #252525;
   text-align: center; font-weight: 500; }
-.heraldry-motto { text-align: center; max-width: 18rem; margin: 0.18rem auto;
+.heraldry-motto { text-align: center; margin: 0.18rem auto;
   width: 100%; }
 .motto-line { font-family: 'Marcellus', serif; font-size: 1rem;
   margin: 0; color: #333; line-height: 1.35; }
 .guide-title h1.guide-title-main { font-family: 'Marcellus', serif;
   font-size: 2.35rem; margin-bottom: 0.5rem; font-weight: 600; }
 .lead { color: #444; font-size: 1.05rem; }
-.guide-toc { margin: 0.85rem 0 1.15rem; page-break-inside: avoid; }
-.guide-toc h2 { font-family: 'Marcellus', serif; font-size: 1.28rem;
-  font-weight: 600; margin: 0.4rem 0 0.55rem; }
+
+.guide-toc { page-break-before: always; break-before: page;
+  page-break-after: always; break-after: page;
+  margin: 0; padding: 0.2rem 0 0.45rem; page-break-inside: auto; }
+.guide-toc h2 { font-family: 'Marcellus', serif;
+  font-size: 1.28rem; font-weight: 600; margin: 0.4rem 0 0.55rem; }
 .guide-toc ol { margin: 0.35rem 0 0.65rem 1.25rem; padding: 0;
   columns: 2; column-gap: 1.5rem; }
 .guide-toc li { margin: 0.18rem 0; line-height: 1.35;
   font-size: 0.88rem; break-inside: avoid; }
-.guide-toc a { color: #1a5276; text-decoration: none; }
+.guide-toc a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.guide-toc a:hover { color: #0d3d56; }
 .guide-toc li.toc-item--sub { font-size: 0.82rem; margin-left: 0.35rem; }
+.toc-back { font-size: 0.78rem; margin: 0 0 0.35rem; text-align: right; }
+.toc-back a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.toc-back a:hover { color: #0d3d56; }
+.place, .historical-reference, .guide-primer, .guide-trip-plans {
+  scroll-margin-top: 1.25rem; }
+.historical-reference h2, .guide-primer h2, .guide-trip-plans h2,
+.chapter-head h2, .place-lead h3 { position: relative; }
+.guide-toc + .place, .guide-toc + .chapter-head {
+  page-break-before: avoid; break-before: avoid-page; }
+.place-lead { page-break-inside: avoid; break-inside: avoid-page;
+  page-break-after: auto; }
+.place-lead > h3 { page-break-after: avoid; break-after: avoid-page; }
+.place-lead > .place-meta { page-break-after: avoid; break-after: avoid-page; }
+
+.place-fig { page-break-inside: avoid; break-inside: avoid-page;
+  margin: 0.5rem 0 1rem; }
+.place-fig img {
+  page-break-inside: avoid; break-inside: avoid-page;
+  max-height: 48vh; width: auto; max-width: 100%;
+  object-fit: contain; margin-left: auto; margin-right: auto; }
+.place-fig--hi-res img { max-height: 52vh; }
+.place-fig--lo-res img { max-height: 30vh; }
+.place-pdf-fig-row {
+  display: flex; flex-direction: row; flex-wrap: wrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.45rem 0.55rem; margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row .place-fig {
+  flex: 1 1 30%; margin: 0; min-width: 26%; max-width: 100%; }
+.place-pdf-fig-row .place-fig img {
+  width: auto; max-width: 100%; height: auto; max-height: 44vh;
+  object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--pair {
+  flex-wrap: nowrap; justify-content: space-between;
+  align-items: flex-end; gap: 0.5rem 0.65rem; }
+.place-pdf-fig-row--pair .place-fig {
+  flex: 1 1 47%; min-width: 0; max-width: 50%;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--pair .place-fig img {
+  max-height: 44vh; object-fit: contain; }
+.place-pdf-fig-row--pair .place-fig--hi-res img { max-height: 52vh; }
+.place-pdf-fig-row--pair .place-fig--lo-res img { max-height: 26vh; }
+.place-pdf-fig-row--pair .place-fig--row-sized img,
+.place-pdf-fig-row--triple .place-fig--row-sized img,
+.place-pdf-fig-row--many .place-fig--row-sized img {
+  width: auto; max-width: 100%; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row .place-fig--row-sized.place-fig--hi-res img,
+.place-pdf-fig-row .place-fig--row-sized.place-fig--lo-res img {
+  max-height: unset; }
+.place-pdf-fig-rows-stack {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple {
+  display: flex; flex-direction: row; flex-wrap: nowrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.4rem 0.48rem; margin: 0;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--triple .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--triple .place-fig--hi-res img { max-height: 42vh; }
+.place-pdf-fig-row--triple .place-fig--lo-res img { max-height: 18vh; }
+.place-pdf-fig-row--many {
+  flex-wrap: nowrap; justify-content: center; align-items: flex-end;
+  gap: 0.35rem 0.42rem; }
+.place-pdf-fig-row--many .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--many .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+
+
 .place { margin-bottom: 2.2rem; page-break-inside: auto; }
 h3 { font-family: 'Marcellus', serif; font-size: 1.22rem; margin: 1.2rem 0 0.35rem;
   font-weight: 600; }
@@ -90,7 +171,6 @@ h4 { font-family: 'Marcellus', serif; font-size: 0.95rem; text-transform: upperc
   color: #555; font-size: 0.95rem; margin: 0 0 0.5rem; font-style: italic; }
 .place-meta { font-size: 0.92rem; color: #353535; margin: 0 0 0.75rem;
   line-height: 1.4; }
-.place-fig { margin: 0.5rem 0 1rem; }
 img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
 .prose, .place-desc p { margin: 0.45rem 0; line-height: 1.5;
   text-align: justify; }
@@ -110,11 +190,14 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <figure class="heraldry-fig heraldry-coat-book" title="City emblem"><img src="../images/guide_coat_of_arms.svg" alt="City emblem"/></figure>
 <figure class="heraldry-fig heraldry-coat-book" title="Flag"><img src="../images/guide_flag.svg" alt="Flag"/></figure>
 </div></div><h1 class="guide-title-main">Barcelona</h1><p class="lead">Путеводитель. Объектов в этом выпуске: 33.</p></header>
+<nav class="guide-toc" id="guide-toc" aria-label="Содержание"><h2>Содержание</h2><ol><li class="toc-item"><a href="#guide-historical">Историческая справка</a></li><li class="toc-item"><a href="#guide-trips">Маршруты</a></li><li class="toc-item"><a href="#barcelona_arc_de_triomf">Barcelona Arc De Triomf</a></li><li class="toc-item"><a href="#barcelona_barceloneta_beach">Barcelona Barceloneta Beach</a></li><li class="toc-item"><a href="#barcelona_basilica_de_la_merce">Barcelona Basilica De La Merce</a></li><li class="toc-item"><a href="#barcelona_bunkers_carmel_barcelona">Barcelona Bunkers Carmel Barcelona</a></li><li class="toc-item"><a href="#barcelona_camp_nou">Barcelona Camp Nou</a></li><li class="toc-item"><a href="#barcelona_casa_amatller_barcelona">Barcelona Casa Amatller Barcelona</a></li><li class="toc-item"><a href="#barcelona_casa_batllo">Barcelona Casa Batllo</a></li><li class="toc-item"><a href="#barcelona_casa_mila">Barcelona Casa Mila</a></li><li class="toc-item"><a href="#barcelona_cathedral">Barcelona Cathedral</a></li><li class="toc-item"><a href="#barcelona_columbus_monument">Barcelona Columbus Monument</a></li><li class="toc-item"><a href="#barcelona_cosmo_caixa_barcelona">Barcelona Cosmo Caixa Barcelona</a></li><li class="toc-item"><a href="#barcelona_hospital_sant_pau">Barcelona Hospital Sant Pau</a></li><li class="toc-item"><a href="#barcelona_hotel_w_barcelona">Barcelona Hotel W Barcelona</a></li><li class="toc-item"><a href="#barcelona_la_boqueria">Barcelona La Boqueria</a></li><li class="toc-item"><a href="#barcelona_llagrimes_negres">Barcelona Llagrimes Negres</a></li><li class="toc-item"><a href="#barcelona_llotja_de_la_mar_barcelona">Barcelona Llotja De La Mar Barcelona</a></li><li class="toc-item"><a href="#barcelona_magic_fountain_montjuic">Barcelona Magic Fountain Montjuic</a></li><li class="toc-item"><a href="#barcelona_mnac_palau_nacional">Barcelona Mnac Palau Nacional</a></li><li class="toc-item"><a href="#barcelona_monastery_pedralbes">Barcelona Monastery Pedralbes</a></li><li class="toc-item"><a href="#barcelona_montjuic_castle">Barcelona Montjuic Castle</a></li><li class="toc-item"><a href="#barcelona_palau_de_la_musica">Barcelona Palau De La Musica</a></li><li class="toc-item"><a href="#barcelona_palau_guell">Barcelona Palau Guell</a></li><li class="toc-item"><a href="#barcelona_parc_de_la_ciutadella">Barcelona Parc De La Ciutadella</a></li><li class="toc-item"><a href="#barcelona_parc_del_laberint">Barcelona Parc Del Laberint</a></li><li class="toc-item"><a href="#barcelona_park_guell">Barcelona Park Guell</a></li><li class="toc-item"><a href="#barcelona_picasso_museum_barcelona">Barcelona Picasso Museum Barcelona</a></li><li class="toc-item"><a href="#barcelona_placa_catalunya">Barcelona Placa Catalunya</a></li><li class="toc-item"><a href="#barcelona_port_vell">Barcelona Port Vell</a></li><li class="toc-item"><a href="#barcelona_sagrada_familia">Barcelona Sagrada Familia</a></li><li class="toc-item"><a href="#barcelona_sagrat_cor_tibidabo">Barcelona Sagrat Cor Tibidabo</a></li><li class="toc-item"><a href="#barcelona_santa_maria_del_mar">Barcelona Santa Maria Del Mar</a></li><li class="toc-item"><a href="#barcelona_santa_maria_del_pi">Barcelona Santa Maria Del Pi</a></li><li class="toc-item"><a href="#barcelona_torre_glories">Barcelona Torre Glories</a></li></ol></nav>
 <section class="historical-reference" id="guide-historical" aria-label="Историческая справка"><h2>Историческая справка</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 <p class="prose">Барселона — столица Каталонии и второй по величине город Испании, порт и средиземноморский культурный центр.</p>
 <p class="prose">Римская колония, средневековый порт, промышленная эпоха и каталонский модерн (включая творчество Гауди) определили облик города. Барселона известна планировкой Эшампле, набережной и музейной сценой.</p>
 <p class="prose">Индустриальная эпоха и экспозиция 1929 года заложили развитие Монжуика; Олимпиада 1992 года обновила набережную и инфраструктуру. Сегодня Барселона сочетает автономию Каталонии, туризм и креативные индустрии, оставаясь средиземноморским мостом Европы и Испании.</p></section>
 <section class="guide-trip-plans" id="guide-trips" aria-label="Маршруты"><h2>Маршруты</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 <article class="trip-plan" id="trip-1d"><h3>Один день</h3>
 <p class="prose">Компактный маршрут по главным точкам путеводителя с минимальным возвратом назад пешком.</p>
 <ol class="trip-stops"><li><a href="#barcelona_casa_amatller_barcelona">Barcelona Casa Amatller Barcelona</a> (~75мин)</li>
@@ -143,266 +226,451 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <li><a href="#barcelona_llotja_de_la_mar_barcelona">Barcelona Llotja De La Mar Barcelona</a> (~75мин)</li>
 <li><a href="#barcelona_mnac_palau_nacional">Barcelona Mnac Palau Nacional</a> (~75мин)</li>
 <li><a href="#barcelona_monastery_pedralbes">Barcelona Monastery Pedralbes</a> (~75мин)</li></ol></article></section>
-<nav class="guide-toc" aria-label="Содержание"><h2>Содержание</h2><ol><li class="toc-item"><a href="#guide-historical">Историческая справка</a></li><li class="toc-item"><a href="#guide-trips">Маршруты</a></li><li class="toc-item"><a href="#barcelona_arc_de_triomf">Barcelona Arc De Triomf</a></li><li class="toc-item"><a href="#barcelona_cathedral">Barcelona Cathedral</a></li><li class="toc-item"><a href="#barcelona_barceloneta_beach">Barcelona Barceloneta Beach</a></li><li class="toc-item"><a href="#barcelona_basilica_de_la_merce">Barcelona Basilica De La Merce</a></li><li class="toc-item"><a href="#barcelona_santa_maria_del_pi">Barcelona Santa Maria Del Pi</a></li><li class="toc-item"><a href="#barcelona_sagrada_familia">Barcelona Sagrada Familia</a></li><li class="toc-item"><a href="#barcelona_bunkers_carmel_barcelona">Barcelona Bunkers Carmel Barcelona</a></li><li class="toc-item"><a href="#barcelona_camp_nou">Barcelona Camp Nou</a></li><li class="toc-item"><a href="#barcelona_casa_amatller_barcelona">Barcelona Casa Amatller Barcelona</a></li><li class="toc-item"><a href="#barcelona_casa_batllo">Barcelona Casa Batllo</a></li><li class="toc-item"><a href="#barcelona_casa_mila">Barcelona Casa Mila</a></li><li class="toc-item"><a href="#barcelona_columbus_monument">Barcelona Columbus Monument</a></li><li class="toc-item"><a href="#barcelona_cosmo_caixa_barcelona">Barcelona Cosmo Caixa Barcelona</a></li><li class="toc-item"><a href="#barcelona_hospital_sant_pau">Barcelona Hospital Sant Pau</a></li><li class="toc-item"><a href="#barcelona_hotel_w_barcelona">Barcelona Hotel W Barcelona</a></li><li class="toc-item"><a href="#barcelona_la_boqueria">Barcelona La Boqueria</a></li><li class="toc-item"><a href="#barcelona_pdfband_3_b44a8b72">Llagrimes negres</a></li><li class="toc-item"><a href="#barcelona_llotja_de_la_mar_barcelona">Barcelona Llotja De La Mar Barcelona</a></li><li class="toc-item"><a href="#barcelona_magic_fountain_montjuic">Barcelona Magic Fountain Montjuic</a></li><li class="toc-item"><a href="#barcelona_monastery_pedralbes">Barcelona Monastery Pedralbes</a></li><li class="toc-item"><a href="#barcelona_montjuic_castle">Barcelona Montjuic Castle</a></li><li class="toc-item"><a href="#barcelona_mnac_palau_nacional">Barcelona Mnac Palau Nacional</a></li><li class="toc-item"><a href="#barcelona_palau_de_la_musica">Barcelona Palau De La Musica</a></li><li class="toc-item"><a href="#barcelona_palau_guell">Barcelona Palau Guell</a></li><li class="toc-item"><a href="#barcelona_parc_de_la_ciutadella">Barcelona Parc De La Ciutadella</a></li><li class="toc-item"><a href="#barcelona_parc_del_laberint">Barcelona Parc Del Laberint</a></li><li class="toc-item"><a href="#barcelona_park_guell">Barcelona Park Guell</a></li><li class="toc-item"><a href="#barcelona_picasso_museum_barcelona">Barcelona Picasso Museum Barcelona</a></li><li class="toc-item"><a href="#barcelona_placa_catalunya">Barcelona Placa Catalunya</a></li><li class="toc-item"><a href="#barcelona_port_vell">Barcelona Port Vell</a></li><li class="toc-item"><a href="#barcelona_santa_maria_del_mar">Barcelona Santa Maria Del Mar</a></li><li class="toc-item"><a href="#barcelona_sagrat_cor_tibidabo">Barcelona Sagrat Cor Tibidabo</a></li><li class="toc-item"><a href="#barcelona_torre_glories">Barcelona Torre Glories</a></li></ol></nav>
 <section class="place" id="barcelona_arc_de_triomf">
+<div class="place-lead">
 <h3>Barcelona Arc De Triomf</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1887–1888</p>
-<figure class="place-fig"><img src="../images/barcelona_arc_de_triomf.jpg" alt="Barcelona Arc De Triomf"/></figure>
+<p class="place-meta">Адрес: Passeig Lluís Companys | Период: 1887–1888</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/barcelona_arc_de_triomf.jpg" alt="Barcelona Arc De Triomf" width="1280" height="957" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/barcelona_arc_de_triomf_b.jpg" alt="Barcelona Arc De Triomf — вид 2" width="330" height="248" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Арк де Триумф — знающая монументальная арка Барселоны, расположенная на входе в парк Ла-Сиутаделья. Она была построена к Всемирной выставке 1888 года и остается символом культурного наследия Каталонии. Оно имеет высоту около 34 метров и ширину около 26 метров. Он украшен замысловатой каменной резьбой, изображающей сцены каталонской истории и культуры. Сооружение имеет четыре арки, каждая из которых представляет разные аспекты каталонийской идентичности. После своего завершения арка служила церемониальным проходом для визитов государственных деятелей и военных парадов. Сегодня это популярное место сбора во время фестивалей и специальных мероприятий.</p>
 <p class="prose">Возведённый в период между 1887 и 1888 годами в рамках подготовки к Международной выставке, Арк де Триумф изначально задумывался как памятник колониальным победам Испании. Проект архитектора Франсиско дель Вильяр и Кордоба сочетает в себе элементы неоклассицизма и ар-нуво, демонстрируя слияние традиционной испанской архитектуры с модернистскими влияниями. Посещение Арки триумфа предлагает заглянуть в богатое историческое и художественное наследие Барселоны, что делает её обязательной достопримечательностью для любого, кто исследует город.</p></div>
 </section>
-<section class="place" id="barcelona_cathedral">
-<h3>Barcelona Cathedral</h3>
-
-<p class="place-meta">Период: 1298–1460</p>
-<figure class="place-fig"><img src="../images/barcelona_cathedral.jpg" alt="Barcelona Cathedral"/></figure>
-<div class="place-desc"><p class="prose">Кафедральный собор Барселоны — один из главных символов города и католической церкви Испании. Строительство собора началось в XI веке, однако основные архитектурные работы велись в XIII-XIV веках в готическом стиле. Кафедра епископа Барселоны расположена именно здесь, отсюда берет начало история кафедрального собора, ставшего важнейшим религиозным центром региона.</p></div>
-</section>
 <section class="place" id="barcelona_barceloneta_beach">
+<div class="place-lead">
 <h3>Barcelona Barceloneta Beach</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/barcelona_barceloneta_beach.jpg" alt="Barcelona Barceloneta Beach"/></figure>
+<p class="place-meta">Адрес: Ciutat Vella waterfront</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/barcelona_barceloneta_beach.jpg" alt="Barcelona Barceloneta Beach" width="1280" height="851" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/barcelona_barceloneta_beach_b.jpg" alt="Barcelona Barceloneta Beach — вид 2" width="330" height="247" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Пляж Барселонета — живописный городской пляж, расположенный на восточном побережье Барселоны. Он предлагает яркое сочетание солнечных купальщиков, серферов и семей, наслаждающихся золотым песком и кристально чистыми водами. Его название происходит от каталанского слова «barcelonès», что означает «маленькая Барселона».</p>
 <p class="prose">Первоначально застроенный как рабочий район в конце XIX века, Барселонета превратился в одну из самых знаковых пляжей Барселоны. Когда-то здесь жили рыбаки и докеры, но сейчас это место привлекает и туристов, и местных жителей благодаря своей живой атмосфере и близости к центру города. Этот пляж значим, поскольку представляет как исторические корни, так и современный шарм Барселоны, сочетая традиционную рыболовную культуру с современными видами досуговой деятельности.</p></div>
 </section>
 <section class="place" id="barcelona_basilica_de_la_merce">
+<div class="place-lead">
 <h3>Barcelona Basilica De La Merce</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Период: 1865–1888</p>
-<figure class="place-fig"><img src="../images/barcelona_basilica_de_la_merce.jpg" alt="Barcelona Basilica De La Merce"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/barcelona_basilica_de_la_merce.jpg" alt="Barcelona Basilica De La Merce" width="1280" height="960" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/barcelona_basilica_de_la_merce_b.jpg" alt="Barcelona Basilica De La Merce — вид 2" width="330" height="247" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Базилика Ла Мерке – величественный неоготический собор, расположенный на холме Монжуик, откуда открываются панорамные виды на Барселону и её гавань. Построенная и завершенная в 1888 году после почти двух десятилетий возведения, она является одной из самых знаковых достопримечательностей города. Было освящено в качестве малой базилики в 1907 году. Интерьер украшен изысканными резьбами и статуями, изображающими сцены из жизни Марии, покровительницы Барселоны. В базилике в течение года проходят важные религиозные церемонии и концерты. Гора Монжуик обеспечивает живописный фон для базилики, откуда открывается вид на современный район и старый город Барселоны. Во время ежегодного фестиваля фейерверки освещают ночное небо над базиликой.</p>
 <p class="prose">Построенный в период с 1865 по 1888 год, этот базилический храм спроектировал архитектор Франсиско дель Вильяр и Лосано в нео-готическом стиле. В конце XIX века он служил символом каталонской идентичности, олицетворяя как религиозное благочестие, так и культурную гордость. Парящие шпили и замысловатые витражные окна базилики делают его свидетельством богатого архитектурного наследия Каталонии. Посетители приезжают, чтобы оценить захватывающую архитектуру базилики и стать свидетелями ежегодного фестиваля Фьеста де ла Мерке, который собирает тысячи местных жителей и туристов в сентябре.</p></div>
 </section>
-<section class="place" id="barcelona_santa_maria_del_pi">
-<h3>Barcelona Santa Maria Del Pi</h3>
-
-
-<figure class="place-fig"><img src="../images/barcelona_santa_maria_del_pi.jpg" alt="Barcelona Santa Maria Del Pi"/></figure>
-<div class="place-desc"><p class="prose">Базилика Санта-Мария-дель-Пи — выдающийся готический собор, расположенный в историческом районе Барселоны и предлагающий посетителям сочетание торжественности и красоты. Строительство началось в 1326 году и продолжалось до конца XVIII века. Здесь находится гробница Яуме Ферра и Форнса, известного архитектора. Базилика имеет три нефы с хором над главным алтарем. Его фасад включает скульптуры, изображающие различных святых и библейских персонажей. Посетители могут подняться на колокольню, чтобы полюбоваться панорамным видом на город.</p>
-<p class="prose">Построенная между XIV и XVIII веками, базилика отражает эволюцию каталонско-готической архитектуры. Изначально она была возведена в качестве приходской церкви, посвященной Святой Марии Лесной, а позже была повышена до статуса базилики Папой Пием XI в 1907 году. Самой примечательной особенностью является центральный неф, украшенный сложными резьбами и витражными окнами, изображающими сцены из Библии. Базилика, обязательная к посещению благодаря своему историческому значению и архитектурному изяществу, предлагает потрясающие интерьеры и захватывающие виды Старого города Барселоны.</p></div>
-</section>
-<section class="place" id="barcelona_sagrada_familia">
-<h3>Barcelona Sagrada Familia</h3>
-
-
-<figure class="place-fig"><img src="../images/barcelona_sagrada_familia.jpg" alt="Barcelona Sagrada Familia"/></figure>
-<div class="place-desc"><p class="prose">Знаменитый шедевр Антонио Гауди, Базилика Святого Семейства (Саграда Фамилия), является одной из самых выдающихся достопримечательностей Барселоны. Эта захватывающе сложная церковь сочетает в себе готические и элементы ар-нуво, создавая уникальный каталонский стиль. Строительство началось в 1882 году, но продолжается до сих пор. Это самая большая незавершенная римско-католическая церковь в мире. Дизайны Гауди украшены более чем 18 000 кусков ручного витражного стекла. Базилика включает 18 башен, олицетворяющих Иисуса Христа и двенадцать апостолов. Посетители могут подняться на башни, чтобы насладиться панорамным видом на Барселону.</p>
-<p class="prose">Начало работ было положено в 1882 году Франсиско де Паулой де Вильяр и Лосано; позднее строительство продолжил Антонио Гауди в 1883 году. Гауди посвятил свою жизнь завершению проекта, но оставил его незавершенным после своей смерти в 1926 году. Сегодня, под руководством Fundació la Sagrada Família, работы продолжаются над этим амбициозным проектом. Саграда Фамилия значима своей архитектурной инновационностью и религиозным значением, являя собой воплощение дальновидного замысла Гауди.</p></div>
-</section>
 <section class="place" id="barcelona_bunkers_carmel_barcelona">
+<div class="place-lead">
 <h3>Barcelona Bunkers Carmel Barcelona</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/barcelona_bunkers_carmel_barcelona.jpg" alt="Barcelona Bunkers Carmel Barcelona"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/barcelona_bunkers_carmel_barcelona_b.jpg" alt="Barcelona Bunkers Carmel Barcelona" width="330" height="497"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Расположенные высоко над оживленными улицами Барселоны, Бюнкерс-дель-Кармель (Bunkers del Carmel) предлагает захватывающую панораму каталонской столицы и её знаковых достопримечательностей, таких как Монжуик (Montjuïc) и Саграда-Фамилия (Sagrada Familia). Этот бывший военный форпост был преобразован в одну из самых популярных обзорных площадок города. Объект когда-то использовался испанскими солдатами для наблюдения за вражескими самолетами, приближающимися к городу. Сегодня посетители могут исследовать реставрированные подземные туннели и огневые позиции. Доступны экскурсии с гидом, которые позволят узнать об историческом значении этого места. Расположенный на горе Кармель, он обеспечивает панорамный вид на гавань Барселоны и окружающие районы. Доступно канатной дорогой из ближайшего парка Циутаделла.</p>
 <p class="prose">Эти бункеры, изначально построенные во время Второй мировой войны для защиты от воздушных налётов, служили частью системы береговой обороны Испании. После десятилетий забвения они были отреставрированы и открыты для публики в начале 2000-х годов, откуда посетителям открываются потрясающие виды на городской пейзаж. Посетите Бюнкерс-дель-Кармель, чтобы полюбоваться непревзойденными видами городского ландшафта и архитектурными сокровищами Барселоны.</p></div>
 </section>
 <section class="place" id="barcelona_camp_nou">
+<div class="place-lead">
 <h3>Barcelona Camp Nou</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1957</p>
-<figure class="place-fig"><img src="../images/barcelona_camp_nou.jpg" alt="Barcelona Camp Nou"/></figure>
+<p class="place-meta">Адрес: Les Corts | Период: 1957</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/barcelona_camp_nou.jpg" alt="Barcelona Camp Nou" width="1280" height="720" style="height: 259px; max-height: 259px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/barcelona_camp_nou_b.jpg" alt="Barcelona Camp Nou — вид 2" width="330" height="190" style="height: 259px; max-height: 259px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Камп Ноу — знаковая домашняя арена «Барселоны» и один из крупнейших футбольных стадионов Европы. Он был завершен в 1957 году и принял бесчисленное количество международных матчей, включая финалы Лиги чемпионов и крупные турниры. Это крупнейший футбольный стадион в Европе, вместимость которого превышает 99 000 человек. Стадион известен своим характерным красно-белым дизайном, вдохновлённым традиционной каталонской архитектурой. С момента своего открытия Кампу Ну был постоянной домашней ареной «Барселоны», всемирно известного клуба. Изначально он был Estadi del FC Barcelona, а в 1959 году, после кампании фанатов, ему присвоили имя Camp Nou. Кампу Нор принимал множество значимых событий, таких как финал Лиги чемпионов УЕФА и международные товарищеские матчи.</p>
 <p class="prose">Возведённый в 1957 году, стадион «Камп Ноу» был спроектирован архитекторами Энриком Миральесом и Серрой (Enric Miralles i Serra) и Жозепом Суньолом (Josep Suñol). Первоначально он вмещал около 80 000 зрителей, затем претерпел несколько расширений, достигнув нынешней вместимости — более 99 000 мест. Стадион стал символом каталонской идентичности и футбольного превосходства, принимая легендарные матчи и выступления мирового класса.</p></div>
 </section>
 <section class="place" id="barcelona_casa_amatller_barcelona">
+<div class="place-lead">
 <h3>Barcelona Casa Amatller Barcelona</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Период: 1904</p>
-<figure class="place-fig"><img src="../images/barcelona_casa_amatller_barcelona.jpg" alt="Barcelona Casa Amatller Barcelona"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/barcelona_casa_amatller_barcelona.jpg" alt="Barcelona Casa Amatller Barcelona" width="1200" height="1600" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/barcelona_casa_amatller_barcelona_b.jpg" alt="Barcelona Casa Amatller Barcelona — вид 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Casa Amatller — это историческая кондитерская и кафе, расположенная на Рамбла-де-Каталянья в Барселоне, известная своими роскошными интерьерами и традиционной испанской выпечкой. Основан в 1904 г. Дизайн: Хосеп Пуиг и Кадафальч. Известный своими традиционными испанскими выпечками. Расположен на Рамбла-де-Каталунья в самом сердце Барселоны. Интерьер в стиле Ар Нуво.</p>
 <p class="prose">Построенная в 1904 году архитектором Джосепом Пуи г Кадафальчем, Casa Amatller изначально была задумана как частная резиденция, но позже была переоборудована в кафе и пекарню. Она быстро стала популярным местом встречи для художников, интеллектуалов и местных жителей, получив известность благодаря своей изысканной выпечке, такой как культовые трюфели и торты. Место, которое обязательно стоит посетить любителям еды и архитектуры. Каса Аматлер демонстрирует влияние ар-нуво со сложной детализацией и изящной отделкой.</p></div>
 </section>
 <section class="place" id="barcelona_casa_batllo">
+<div class="place-lead">
 <h3>Barcelona Casa Batllo</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1904–1906</p>
-<figure class="place-fig"><img src="../images/barcelona_casa_batllo.jpg" alt="Barcelona Casa Batllo"/></figure>
+<p class="place-meta">Адрес: Passeig de Gràcia | Период: 1904–1906</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/barcelona_casa_batllo.jpg" alt="Barcelona Casa Batllo" width="1280" height="830" style="height: 299px; max-height: 299px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/barcelona_casa_batllo_b.jpg" alt="Barcelona Casa Batllo — вид 2" width="330" height="221" style="height: 299px; max-height: 299px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Каса Батльо — потрясающий шедевр ар-нуво, расположенный на Пассей де Грация в Барселоне. Здание спроектировано Антонио Гауди и завершено между 1904 и 1906 годами. Спроектировано знаменитым архитектором Антонио Гауди, который также создал Ла Саграда Фамилия и Парк Güell. Фасад включает цветную керамическую плитку, вдохновленную морской жизнью и природными формами. Его отличительный контур крыши часто напоминает драконий хребет благодаря чешуйчатой текстуре и волнообразным изгибам. Внутри посетители могут исследовать роскошно декорированные гостиные, наполненные причудливыми деталями и скульптурной мебелью. Его восстановление состоялось в конце XX века для сохранения изначальной красоты.</p>
 <p class="prose">Построенная в расцвете модернистского движения Барселоны, Casa Batlló изначально была заказана в качестве частной резиденции для богатого промышленника Хосепа Батльо и Матамеу. Здание отличается уникальными архитектурными элементами, такими как волнообразные фасады, замысловатые керамические плитки и эффектная скатная крыша с люком, напоминающая позвоночник дракона. Посетители приходят в Каса Батльо, чтобы насладиться её ослепительным интерьерным дизайном, яркими красками и слиянием традиционного каталонского мастерства с инновационным видением Гауди.</p></div>
 </section>
 <section class="place" id="barcelona_casa_mila">
+<div class="place-lead">
 <h3>Barcelona Casa Mila</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1906–1910</p>
-<figure class="place-fig"><img src="../images/barcelona_casa_mila.jpg" alt="Barcelona Casa Mila"/></figure>
+<p class="place-meta">Адрес: Passeig de Gràcia | Период: 1906–1910</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/barcelona_casa_mila.jpg" alt="Barcelona Casa Mila" width="1280" height="997" style="height: 347px; max-height: 347px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/barcelona_casa_mila_b.jpg" alt="Barcelona Casa Mila — вид 2" width="330" height="248" style="height: 347px; max-height: 347px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Спроектированная Антонио Гауди и завершенная в 1910 году, Каса Мила, также известная как Ла Педрера, является уникальным примером каталонского модерна. Расположенная на Пассей де Грасиа, она выделяется своими волнистыми фасадом и драматичным крышевым ландшафтом. Считается одним из шедевров каталонского модерна. Интерьер отличается сложными деталями и инновационными строительными техниками. Его волнистый фасад напоминает волны скальных образований. Панорамный вид Барселоны с террасы на крыше. &quot;Casa Milà&quot; включен в список Всемирного наследия ЮНЕСКО.</p>
 <p class="prose">Построенный в период с 1906 по 1910 год для богатого промышленника Pere Milà i Clavé, Каса Мила была одним из самых новаторских проектов Гауди в период его расцвета. Дизайн здания включает органические формы, вдохновленные природой, демонстрируя характерное использование Гауди кривых линий и асимметрии. Обязательное место для посещения, Casa Milà предлагает посетителям заглянуть в художественный гений Антонио Гауди и ознакомиться с его новаторским подходом к архитектуре.</p></div>
 </section>
-<section class="place" id="barcelona_columbus_monument">
-<h3>Barcelona Columbus Monument</h3>
+<section class="place" id="barcelona_cathedral">
+<div class="place-lead">
+<h3>Barcelona Cathedral</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1888</p>
-<figure class="place-fig"><img src="../images/barcelona_columbus_monument.jpg" alt="Barcelona Columbus Monument"/></figure>
+<p class="place-meta">Адрес: Pla de la Seu, Gothic Quarter | Период: 1298–1460</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/barcelona_cathedral.jpg" alt="Barcelona Cathedral" width="1067" height="1600" style="height: 201px; max-height: 201px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/barcelona_cathedral_b.jpg" alt="Barcelona Cathedral — вид 2" width="330" height="144" style="height: 201px; max-height: 201px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Кафедральный собор Барселоны — один из главных символов города и католической церкви Испании. Строительство собора началось в XI веке, однако основные архитектурные работы велись в XIII-XIV веках в готическом стиле. Кафедра епископа Барселоны расположена именно здесь, отсюда берет начало история кафедрального собора, ставшего важнейшим религиозным центром региона.</p></div>
+</section>
+<section class="place" id="barcelona_columbus_monument">
+<div class="place-lead">
+<h3>Barcelona Columbus Monument</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Portal de la Pau, end of La Rambla | Период: 1888</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/barcelona_columbus_monument.jpg" alt="Barcelona Columbus Monument" width="499" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--row-sized"><img src="../images/barcelona_columbus_monument_b.jpg" alt="Barcelona Columbus Monument — вид 2" width="330" height="541" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Памятник Колумба, также известный как Колон-монумент, — выдающийся ориентир, расположенный на набережной Барселоны. Он был воздвигнут в память о Христофоре Колумбе и его открытии Америки. Памятник, завершенный в 1888 году к Всемирной выставке, является свидетельством морского наследия Испании. Завершённый в 1888 году для Всемирной выставки в Барселоне, он демонстрирует значительный вклад Испании в глобальные исследования. Мемориал сделан из белого мрамора Каррара, который резко контрастирует с синими водами Порт-Вель. Находится в конце популярной прогулочной аллеи Рамбла-де-Мар, что обеспечивает легкий доступ как для туристов, так и для местных жителей. Помимо того, что это туристическая достопримечательность, район вокруг памятника также служит центром для культурных мероприятий и празднований. Статуя Колумба увенчана бронзовым глобусом, символизирующим мир, который он открыл.</p>
 <p class="prose">Построенный в конце XIX века, монумент был возведён в честь исследователя, который плавал под испанскими флагами и открыл новые торговые маршруты через Атлантический океан. Ра разработанный архитектором Энриком Санье, он представляет собой величественную мраморную конструкцию, на которой установлена статуя Колумба, указывающая на горизонт и символизирующая его дальновидный дух и первопроходческие путешествия. Посещение памятника Колумба дает возможность оценить богатые исторические связи города с эпохой исследований и морской культурой.</p></div>
 </section>
 <section class="place" id="barcelona_cosmo_caixa_barcelona">
+<div class="place-lead">
 <h3>Barcelona Cosmo Caixa Barcelona</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Период: 2003</p>
-<figure class="place-fig"><img src="../images/barcelona_cosmo_caixa_barcelona.jpg" alt="Barcelona Cosmo Caixa Barcelona"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/barcelona_cosmo_caixa_barcelona.jpg" alt="Barcelona Cosmo Caixa Barcelona" width="1280" height="850" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/barcelona_cosmo_caixa_barcelona_b.jpg" alt="Barcelona Cosmo Caixa Barcelona — вид 2" width="330" height="220" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Музей науки и интерактивный зоопарк CosmoCaixa Barcelona — это объект мирового уровня, который знакомит с чудесами природы посредством увлекательных экспозиций и образовательных программ. В нем обитает более 4000 животных, представляющих различные экосистемы. Здание использует возобновляемые источники энергии, такие как солнечные панели и системы рециркуляции дождевой воды. В экспозиции представлены динозавры, морская жизнь и тропические леса. Интерактивные экспозиции позволяют посетителям участвовать в экспериментах и симуляциях. В «КосмоКайше» регулярно проводятся семинары, лекции и семейные мероприятия.</p>
 <p class="prose">Открытый в 2003 году, CosmoCaixa был спроектирован архитекторами Рафаэлем Монео и Эдуардом Сола-Моралесом для повышения экологической осведомленности и научного образования. Он является одним из самых инновационных экологичных зданий в Европе, отличаясь устойчивой архитектурой и &quot;зелеными&quot; технологиями. Посетители могут ознакомиться с ареалами обитания со всего мира, узнать о биоразнообразии и принять участие в практических занятиях, которые вдохновляют любопытство и понимание естественного мира.</p></div>
 </section>
 <section class="place" id="barcelona_hospital_sant_pau">
+<div class="place-lead">
 <h3>Barcelona Hospital Sant Pau</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1902–1930</p>
-<figure class="place-fig"><img src="../images/barcelona_hospital_sant_pau.jpg" alt="Barcelona Hospital Sant Pau"/></figure>
+<p class="place-meta">Адрес: Carrer de Sant Antoni Maria Claret | Период: 1902–1930</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/barcelona_hospital_sant_pau.jpg" alt="Barcelona Hospital Sant Pau" width="1280" height="853" style="height: 285px; max-height: 285px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/barcelona_hospital_sant_pau_b.jpg" alt="Barcelona Hospital Sant Pau — вид 2" width="330" height="204" style="height: 285px; max-height: 285px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Расположенный на окраине Старого города Барселоны, госпиталь Сант Пау (Hospital de Sant Pau) представляет собой захватывающий пример каталонского модернизма. Проект, разработанный Луисом Доменеч и Монтанером и завершенный в 1930 году, изначально был построен как лепрозорий, а позже преобразован в психиатрический центр. Спроектировано архитектором Луисом Доменек и Монтанером, который также создал Палау де ла Мусика Каталана. Объект был включен в список объектов Всемирного наследия ЮНЕСКО в 2000 году. В нем расположен Музей сакрального искусства, где представлены религиозные артефакты и произведения искусства. Его сады украшены красивой флорой и открыты для неспешных прогулок для всех посетителей. Сегодня это культурный центр и музей.</p>
 <p class="prose">Построенный в период с 1902 по 1930 год, комплекс включает несколько зданий с богато украшенными фасадами, декорированными сложной керамикой, витражами и скульптурой. Уникальный дизайн сочетает элементы готического возрождения и стиля ар-нуво, демонстрируя блеск архитектурного наследия Каталонии. Посетители приезжают сюда, чтобы полюбоваться его изысканной архитектурой и детальным мастерством, что делает его одной из самых знаковых достопримечательностей Барселоны.</p></div>
 </section>
 <section class="place" id="barcelona_hotel_w_barcelona">
+<div class="place-lead">
 <h3>Barcelona Hotel W Barcelona</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Период: 2018</p>
-<figure class="place-fig"><img src="../images/barcelona_hotel_w_barcelona.jpg" alt="Barcelona Hotel W Barcelona"/></figure>
+<figure class="place-fig place-fig--hi-res"><img src="../images/barcelona_hotel_w_barcelona.jpg" alt="Barcelona Hotel W Barcelona" width="1280" height="836"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Расположенный высоко над оживлёнными улицами района Эшампле в Барселоне, отель W Barcelona — современный оазис, который органично сочетает роскошь и городской шик. Его эффектный дизайн и современная эстетика делают его одним из самых знаковых отелей города. Расположенный на улице Карер дельс Ассаонадорс, отель может похвастаться панорамными видами на Монжуик и Средиземное море. Интерьер отличается обтекаемыми линиями, минималистической эстетикой и яркими оттенками, вдохновленными местным искусством и культурой. Гости могут насладиться ужином в его ресторанчике на крыше, откуда открывается захватывающий вид на панораму Барселоны. В отеле также имеется современный фитнес-центр и спа-зона для отдыха и оздоровления. Оно является центром для социальных мероприятий и деловых встреч, что делает его идеальной площадкой как для туристов, так и для корпоративных клиентов.</p>
 <p class="prose">Отель W Barcelona, открывшийся в 2018 году, быстро стал символом динамичного и космополитического духа города. Созданный известным архитектором Рафаэлем Монео, отель демонстрирует инновационную архитектуру и роскошные интерьеры, предлагая гостям непревзойденные виды на городской пейзаж. Отель W Barcelona предлагает гостям уникальное впечатление, сочетая в себе стильное размещение, исключительный уровень обслуживания и удобства мирового класса.</p></div>
 </section>
 <section class="place" id="barcelona_la_boqueria">
+<div class="place-lead">
 <h3>Barcelona La Boqueria</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1840</p>
-<figure class="place-fig"><img src="../images/barcelona_la_boqueria.jpg" alt="Barcelona La Boqueria"/></figure>
+<p class="place-meta">Адрес: La Rambla | Период: 1840</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/barcelona_la_boqueria.jpg" alt="Barcelona La Boqueria" width="1280" height="903" style="height: 325px; max-height: 325px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/barcelona_la_boqueria_b.jpg" alt="Barcelona La Boqueria — вид 2" width="330" height="247" style="height: 325px; max-height: 325px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Ла Бокерия — один из самых знаковых и оживленных рынков Барселоны, известный своими яркими рядами свежих продуктов, морепродуктов, мяса и местных ремесел. Он расположен в самом сердце района Бо́рн и привлекает как местных жителей, так и туристов. Он представляет собой более 80 лавок, где продают всё: от фруктов и овощей до сыров, мяса и морепродуктов. Рынок славится богатыми декорациями, которые устанавливаются во время таких особых праздников, как Рождество и Пасха. Посетители могут найти уникальные изделия ручной работы, такие как керамика, кожаные изделия и традиционный текстиль. Местные часто собираются здесь, чтобы пообщаться и насладиться тапасом с друзьями. Здесь также расположены несколько популярных ресторанов, где посетители могут попробовать инновационные блюда, приготовленные из ингредиентов, поставляемых непосредственно с местного рынка.</p>
 <p class="prose">Основанный в 1840 году, рынок Ла Бокерия изначально был небольшой уличной ярмаркой, но впоследствии был перенесен в помещение для защиты продавцов и покупателей от непогоды. Со временем он превратился в центр кулинарных инноваций и культурного обмена, представляя лучшее из каталонской кухни и региональных продуктов. Место, которое обязательно стоит посетить всем, кто интересуется аутентичной испанской гастрономической культурой и ремесленным мастерством.</p></div>
 </section>
-<section class="place" id="barcelona_pdfband_3_b44a8b72">
-<h3>Llagrimes negres</h3>
+<section class="place" id="barcelona_llagrimes_negres">
+<div class="place-lead">
+<h3>Barcelona Llagrimes Negres</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/barcelona_pdfband_3_b44a8b72.jpg" alt="Llagrimes negres"/></figure>
+<p class="place-meta">Адрес: See official visitor information.</p>
+<figure class="place-fig place-fig--hi-res"><img src="../images/barcelona_llagrimes_negres.jpg" alt="Barcelona Llagrimes Negres" width="1280" height="960"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Ллагримес Негрес — одна из достопримечательностей Барселоны. Публичные фотоархивы связывают этот объект с: Монсеррат, Барселона, Испания, природа. Стоит посетить во время исследования Барселоны.</p></div>
 </section>
 <section class="place" id="barcelona_llotja_de_la_mar_barcelona">
+<div class="place-lead">
 <h3>Barcelona Llotja De La Mar Barcelona</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Период: 1401–1477</p>
-<figure class="place-fig"><img src="../images/barcelona_llotja_de_la_mar_barcelona.jpg" alt="Barcelona Llotja De La Mar Barcelona"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/barcelona_llotja_de_la_mar_barcelona.jpg" alt="Barcelona Llotja De La Mar Barcelona" width="1280" height="704" style="height: 254px; max-height: 254px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/barcelona_llotja_de_la_mar_barcelona_b.jpg" alt="Barcelona Llotja De La Mar Barcelona — вид 2" width="330" height="296" style="height: 254px; max-height: 254px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Llotja de la Mar — объект Всемирного наследия ЮНЕСКО, одна из самых знаковых достопримечательностей и исторических памятников Барселоны. Изначально он был построен как торговый центр для купцов в эпоху поздней готики. Объект был включен в список Всемирного наследия ЮНЕСКО в 1998 году. Его интерьер украшен замысловатой каменной резьбой и резными деревянными потолками. Здание прошло несколько реставраций на протяжении столетий, чтобы сохранить свою первозданную красоту. Сегодня здесь проходят различные выставки и культурные мероприятия. Расположенный на Рамбла-дель-Карме, он предлагает панорамные виды на город.</p>
 <p class="prose">Построенная в период между 1401 и 1477 годами, Ллотжа де ла Мар служила центром морской торговли и коммерции в средневековом Барселоне. Ее замысловатая архитектура отражает каталонско-готический стиль с мавританским влиянием, что подчеркивает богатое культурное наследие города. Посетители приезжают, чтобы оценить его уникальный архитектурный дизайн и историческое значение как символа яркого прошлого Барселоны.</p></div>
 </section>
 <section class="place" id="barcelona_magic_fountain_montjuic">
+<div class="place-lead">
 <h3>Barcelona Magic Fountain Montjuic</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1929</p>
-<figure class="place-fig"><img src="../images/barcelona_magic_fountain_montjuic.jpg" alt="Barcelona Magic Fountain Montjuic"/></figure>
+<p class="place-meta">Адрес: Avinguda Maria Cristina, Montjuïc | Период: 1929</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/barcelona_magic_fountain_montjuic.jpg" alt="Barcelona Magic Fountain Montjuic" width="1280" height="960" style="height: 315px; max-height: 315px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/barcelona_magic_fountain_montjuic_b.jpg" alt="Barcelona Magic Fountain Montjuic — вид 2" width="330" height="225" style="height: 315px; max-height: 315px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Ночью Магический фонтан Монжуик превращается в ослепительное зрелище, демонстрируя синхронизированные струи воды и разноцветные огни под музыку. Расположенный в знаковом парке на холме Барселоны, он является одной из самых популярных достопримечательностей города. Фонтан оснащен более чем 4000 соплами, создающими замысловатые узоры и формы. Выступает с исполнением классической, поп- и современной музыки. Каждое представление длится примерно 20 минут. Фонтан работает ежедневно, за исключением неустойчивой погоды. В дополнение к вечерним шоу, здесь проводятся специальные мероприятия, такие как празднование Нового года.</p>
 <p class="prose">Построенный к Международной выставке 1929 года, фонтан изначально был спроектирован архитектором Луисом Мираллесом и Камповерде. Он прошел значительную реконструкцию в 1984 году, благодаря которой была модернизирована его технология и усилен визуальный эффект. Посещение Магического фонтана подарит незабываемые впечатления, сочетая искусство, науку и развлечения.</p></div>
 </section>
+<section class="place" id="barcelona_mnac_palau_nacional">
+<div class="place-lead">
+<h3>Barcelona Mnac Palau Nacional</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Период: 1897</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/barcelona_mnac_palau_nacional.jpg" alt="Barcelona Mnac Palau Nacional" width="1050" height="1400" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/barcelona_mnac_palau_nacional_b.jpg" alt="Barcelona Mnac Palau Nacional — вид 2" width="330" height="440" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Музей национального искусства Каталонии (MNAC), расположенный на холме Монжуик, является одной из самых важных культурных институций Барселоны и ключевым хранилищем художественного наследия региона. Здесь представлены обширные коллекции, охватывающие период более восьми столетий каталонского искусства. Архитектурный стиль музея отражает влияние ар-нуво с элементами неоклассицизма. Среди примечательных экспозиций находится знаменитая коллекция романских и готических скульптур. MNAC также располагает заметным разделом современного искусства, посвященным современным каталонским художникам. Расположение на Монжуике открывает панорамный вид на Барселону.</p>
+<p class="prose">Основанный в 1897 году в рамках празднования Всемирной выставки, MNAC хранит одни из самых изысканных художественных коллекций Испании, относящихся ко временам Средневековья. Музей прошел масштабную реконструкцию в конце XX века, что позволило изменить его внутреннее планирование и представить шедевры таких художников, как Пикассо, Дали и Миро. Посетители приезжают сюда, чтобы ознакомиться с богатым художественным наследием Каталонии, включая произведения из хранилищ средневековых соборов, картины эпохи Возрождения и шедевры модернизма.</p></div>
+</section>
 <section class="place" id="barcelona_monastery_pedralbes">
+<div class="place-lead">
 <h3>Barcelona Monastery Pedralbes</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Период: 1326</p>
-<figure class="place-fig"><img src="../images/barcelona_monastery_pedralbes.jpg" alt="Barcelona Monastery Pedralbes"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/barcelona_monastery_pedralbes.jpg" alt="Barcelona Monastery Pedralbes" width="1280" height="902" style="height: 284px; max-height: 284px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/barcelona_monastery_pedralbes_b.jpg" alt="Barcelona Monastery Pedralbes — вид 2" width="330" height="203" style="height: 284px; max-height: 284px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Монастырь Санта-Мария-де-Педральбес — умиротворенное и историческое место, расположенное в городской среде Барселоны. Основанный королевой Элисендой де Барселоном в конце XIV века, он является одной из самых значимых образцов готической архитектуры в городе. Основанная в 1326 году королевой Элисендой де Барселоны. Секуляризирован в 1907 г. Объявлен объектом Всемирного наследия ЮНЕСКО в 1997 г. Выделяется заметным фасадом и интерьером в готическом стиле. Дома с коллекциями религиозного искусства и артефактов.</p>
 <p class="prose">Построенный во времена правления королевы Элизенды де Барселоны, монастырь изначально задумывался в качестве королевского усыпальницы для членов ее семьи. Позже он стал монастырем, где жили и молились монахини до его секуляризации в начале XX века. Здание отражает замысловатые детали, типичные для каталонско-готического стиля, демонстрируя изысканную резьбу и витражи. Гости приезжают сюда, чтобы полюбоваться красотой архитектурного наследия Каталонии и ощутить спокойствие этого мирного убежища среди шума городской жизни.</p></div>
 </section>
 <section class="place" id="barcelona_montjuic_castle">
+<div class="place-lead">
 <h3>Barcelona Montjuic Castle</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/barcelona_montjuic_castle.jpg" alt="Barcelona Montjuic Castle"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/barcelona_montjuic_castle.jpg" alt="Barcelona Montjuic Castle" width="1280" height="387" style="height: 139px; max-height: 139px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/barcelona_montjuic_castle_b.jpg" alt="Barcelona Montjuic Castle — вид 2" width="330" height="220" style="height: 139px; max-height: 139px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Нависая высоко над Барселоной, замок Монжуик предлагает панорамные виды на город и гавань внизу. Построенный на скалистом холме, он является одной из самых знаковых достопримечательностей региона. Он был построен в 1640 году королем Филиппом IV Испанским. Дизайн замка включает элементы барочной архитектуры. Во время Второй мировой войны замок использовался в качестве тюрьмы для политических заключенных. Сегодня посетители могут посетить музей и насладиться экспозициями, посвященными военной истории и современному искусству. С вершины замка открывается вид на весь город Барселона, включая знаменитый Олимпийский стадион.</p>
 <p class="prose">Изначально построенный в конце XVII века как крепость для защиты от морских нападений, замок Монжуик претерпел многочисленные реконструкции на протяжении столетий. Он сыграл значительную роль во время Гражданской войны в Испании и позднее превратился в музей, где представлены военная история и коллекции произведений искусства. Посетители приезжают сюда ради захватывающих видов и чтобы изучить его богатое историческое значение.</p></div>
 </section>
-<section class="place" id="barcelona_mnac_palau_nacional">
-<h3>Barcelona Mnac Palau Nacional</h3>
-
-<p class="place-meta">Период: 1897</p>
-<figure class="place-fig"><img src="../images/barcelona_mnac_palau_nacional.jpg" alt="Barcelona Mnac Palau Nacional"/></figure>
-<div class="place-desc"><p class="prose">Музей национального искусства Каталонии (MNAC), расположенный на холме Монжуик, является одной из самых важных культурных институций Барселоны и ключевым хранилищем художественного наследия региона. Здесь представлены обширные коллекции, охватывающие период более восьми столетий каталонского искусства. Архитектурный стиль музея отражает влияние ар-нуво с элементами неоклассицизма. Среди примечательных экспозиций находится знаменитая коллекция романских и готических скульптур. MNAC также располагает заметным разделом современного искусства, посвященным современным каталонским художникам. Расположение на Монжуике открывает панорамный вид на Барселону.</p>
-<p class="prose">Основанный в 1897 году в рамках празднования Всемирной выставки, MNAC хранит одни из самых изысканных художественных коллекций Испании, относящихся ко временам Средневековья. Музей прошел масштабную реконструкцию в конце XX века, что позволило изменить его внутреннее планирование и представить шедевры таких художников, как Пикассо, Дали и Миро. Посетители приезжают сюда, чтобы ознакомиться с богатым художественным наследием Каталонии, включая произведения из хранилищ средневековых соборов, картины эпохи Возрождения и шедевры модернизма.</p></div>
-</section>
 <section class="place" id="barcelona_palau_de_la_musica">
+<div class="place-lead">
 <h3>Barcelona Palau De La Musica</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1905–1908</p>
-<figure class="place-fig"><img src="../images/barcelona_palau_de_la_musica.jpg" alt="Barcelona Palau De La Musica"/></figure>
+<p class="place-meta">Адрес: Carrer Palau de la Música | Период: 1905–1908</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/barcelona_palau_de_la_musica.jpg" alt="Barcelona Palau De La Musica" width="1280" height="800" style="height: 288px; max-height: 288px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/barcelona_palau_de_la_musica_b.jpg" alt="Barcelona Palau De La Musica — вид 2" width="330" height="248" style="height: 288px; max-height: 288px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Палау-де-ла-Мусика-Каталана — ошеломляюще красивый концертный зал и объект Всемирного наследия ЮНЕСКО, демонстрирующий расцвет архитектуры ар-нуво. Было построено в период Модернизма — каталонского варианта ар-нуво. Внутри помещение украшено замысловатым орнаментом, вдохновленным природой и традиционными каталонскими мотивами. Акустикой славятся своей чистотой и насыщенностью (или: богатством звука), что делает это место идеальным для музыкальных выступлений. В 2005 году оно отметило свое столетие. В нём представлена постоянная выставка об истории каталонской музыки.</p>
 <p class="prose">Построенный между 1905 и 1908 годами, Палау был спроектирован модернистским архитектором Ллуисом Доменеч и Монтанером. Изначально он служил местом проведения концертов классической музыки и с тех пор стал одной из самых знаковых достопримечательностей Барселоны. Его сложная отделка, включая витражи, керамическую плитку и богато украшенные деревянные потолки, отражает художественный расцвет Каталонии начала XX века. Посещение Палау-де-ла-Мусика-Каталана предоставляет уникальную возможность ощутить слияние искусства, музыки и архитектуры в яркой культурной сцене Барселоны.</p></div>
 </section>
 <section class="place" id="barcelona_palau_guell">
+<div class="place-lead">
 <h3>Barcelona Palau Guell</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1885–1890</p>
-<figure class="place-fig"><img src="../images/barcelona_palau_guell.jpg" alt="Barcelona Palau Guell"/></figure>
+<p class="place-meta">Адрес: Carrer Nou de la Rambla | Период: 1885–1890</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/barcelona_palau_guell.jpg" alt="Barcelona Palau Guell" width="1067" height="1600" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/barcelona_palau_guell_b.jpg" alt="Barcelona Palau Guell — вид 2" width="330" height="247" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Шедевр причудливого дизайна Антонио Гауди, Палау Гуэль, является ослепительным примером его уникального стиля каталонского модернизма. Расположенный на холме над Барселоной, он демонстрирует замысловатую мозаику, яркие цвета и органические формы, отражающие увлечение Гауди природой. Спроектировано Антонио Гауди, который впоследствии прославился своей работой над Саграда Фамилия. Здание было построено с использованием местных материалов, таких как терракота, камень и керамика. Он включает впечатляющий сад, полный экзотических растений и статуй. Палау Гюэль — одна из первых работ Гауди, демонстрирующих использование криволинейных форм и асимметрии. Сегодня оно функционирует как музей и культурный центр.</p>
 <p class="prose">Построенный между 1885 и 1890 годами для Эусеби Гюэля, богатого промышленника, Палау Гюэль изначально задумывался как загородная вилла. Он украшен пышными фасадами, арками и куполами, вдохновленными исламской архитектурой и природными элементами, такими как растения и животные. Интерьер славится потрясающей керамической плиткой, витражами и скульптурами, созданными самим Гауди. Посетители приходят сюда, чтобы полюбоваться его новаторским дизайном, который сочетает традиционное испанское мастерство с авангардным художественным выражением.</p></div>
 </section>
 <section class="place" id="barcelona_parc_de_la_ciutadella">
+<div class="place-lead">
 <h3>Barcelona Parc De La Ciutadella</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/barcelona_parc_de_la_ciutadella.jpg" alt="Barcelona Parc De La Ciutadella"/></figure>
+<p class="place-meta">Место: Ciutat Vella edge</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/barcelona_parc_de_la_ciutadella.jpg" alt="Barcelona Parc De La Ciutadella" width="1059" height="1600" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/barcelona_parc_de_la_ciutadella_b.jpg" alt="Barcelona Parc De La Ciutadella — вид 2" width="330" height="247" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Парк де ла Сиутаделла — очаровательный городской парк, расположенный в историческом центре Барселоны. Изначально он был построен как место расположения городской крепости и военных казарм, но позже был преобразован в мирный зелёный оазис, наполненный пышными садами, скульптурами и историческими памятниками. Здесь проходит Ежегодный Цветочный Салон (Flower Show) — одна из крупнейших цветочных выставок Европы. В парке расположено несколько примечательных скульптур от известных художников, таких как Хосеп Ллимона. Посетители могут посетить Ботанический сад, где находится более 4 000 видов растений. Находится недалеко от парка Güell, откуда открываются потрясающие виды на город и гору Тибидабо. В этом парке проходила Всемирная выставка 1888 года.</p>
 <p class="prose">Первоначально построенный в середине XIX века, парк Сиутаделла служил местом расположения военной цитадели и казарм Барселоны. После поражения Испании в Испано-американской войне эта территория была преобразована в публичный парк в 1888 году, который демонстрирует грандиозные архитектурные элементы и отражает стремление города стать современной европейской столицей. Обязательно к посещению благодаря живописным пейзажам, культурному значению и знаковым достопримечательностям, таким как фонтан Фонт Мансия и Музей зоологии.</p></div>
 </section>
 <section class="place" id="barcelona_parc_del_laberint">
+<div class="place-lead">
 <h3>Barcelona Parc Del Laberint</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/barcelona_parc_del_laberint.jpg" alt="Barcelona Parc Del Laberint"/></figure>
+<figure class="place-fig place-fig--hi-res"><img src="../images/barcelona_parc_del_laberint.jpg" alt="Barcelona Parc Del Laberint" width="1280" height="857"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Расположенный на окраине оживленного городского пейзажа Барселоны, парк «Лабиринт в Орте» (Parc del Laberint d&#x27;Horta) — это безмятежный оазис, где природа встречается с искусством. Этот очаровательный парк, расположенный среди пышной зелени и извилистых дорожек, предлагает посетителям уникальный опыт благодаря своему замысловатому лабиринту, разработанному, чтобы бросить вызов как молодым, так и пожилым людям. Лабиринт состоит из более чем 4000 растений, расположенных в сложной геометрической укладке. Посетители также могут совершать прогулки по живописным цветочным садам и прудам парка. Здесь ежегодно проводятся такие мероприятия, как музыкальные фестивали и художественные выставки. Находится недалеко от холма Гуинардо и откуда открываются панорамные виды на крыши Барселоны и окружающие пейзажи. Парк открыт круглый год, предлагая отдушину от суеты городской жизни.</p>
 <p class="prose">Первоначально созданный как часть сельскохозяйственного наследия района Хорта, парк дель Лабиринт д&#x27;Хорта (Parc del Laberint d&#x27;Horta) был преобразован в общественный парк в конце XIX века. Сам лабиринт, тщательно разработанный ландшафтным архитектором Жозепом Фонтсере i Рока (Josep Fontserè i Roca), открылся в 1875 году, демонстрируя его новаторский дизайн, сочетающий садоводство и архитектуру. Со временем парк претерпел изменения, став любимым местом отдыха для местных жителей и туристов, ищущих спокойствия в городской суете. Посещение парка Лабиринт в Хорте (Parc del Laberint d&#x27;Horta) — обязательная программа для всех, кто исследует скрытые жемчужины Барселоны. Он предлагает возможность отдохнуть от суеты, демонстрируя при этом богатое историческое и культурное наследие города.</p></div>
 </section>
 <section class="place" id="barcelona_park_guell">
+<div class="place-lead">
 <h3>Barcelona Park Guell</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1900–1914</p>
-<figure class="place-fig"><img src="../images/barcelona_park_guell.jpg" alt="Barcelona Park Guell"/></figure>
+<p class="place-meta">Место: Gràcia / Carmel hill | Период: 1900–1914</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/barcelona_park_guell.jpg" alt="Barcelona Park Guell" width="1280" height="965" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/barcelona_park_guell_b.jpg" alt="Barcelona Park Guell — вид 2" width="330" height="247" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">На вершине крыш Барселоны расположился Парк Güell — причудливый шедевр, разработанный каталонским архитектором Антонио Гауди. Завершённый в период между 1900 и 1914 годами, он изначально предназначался для жилого комплекса для состоятельных покровителей, но остался в значительной степени незавершённым из-за финансовых ограничений. Спроектировано Антонио Гауди в период расцвета его творчества. Парк занимает примерно 17 акров (6,9 гектара). Здесь находится знаменитая мозаичная скамейка «Сальвадор», на которой изображены религиозные сцены. Посетители могут пройтись по лабиринтным тропинкам, увешанным флорой, характерной для средиземноморских садов. Расположен на склоне холма с видом на центр города.</p>
 <p class="prose">Заказчик Эусеби Гель (Eusebi Guell), видный промышленник, создал парк Güell, который демонстрирует уникальное видение Гауди (Gaudí) органических форм, вдохновлённых природой. В парке представлены такие знаковые элементы, как цветная керамическая плитка, замысловатое кованое железо и скульптурные скамьи, которые органично вплетаются в природный ландшафт. Объявленная объектом Всемирного наследия ЮНЕСКО в 2005 году, парк Гуэль предлагает захватывающие виды Барселоны и служит свидетельством гения Гауди и его инновационного использования материалов.</p></div>
 </section>
 <section class="place" id="barcelona_picasso_museum_barcelona">
+<div class="place-lead">
 <h3>Barcelona Picasso Museum Barcelona</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/barcelona_picasso_museum_barcelona.jpg" alt="Barcelona Picasso Museum Barcelona"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/barcelona_picasso_museum_barcelona.jpg" alt="Barcelona Picasso Museum Barcelona" width="1280" height="960" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/barcelona_picasso_museum_barcelona_b.jpg" alt="Barcelona Picasso Museum Barcelona — вид 2" width="330" height="300" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Музей Пикассо — обязательное место для посещения как любителям искусства, так и историческим энтузиастам. Расположенный в самом сердце богемного района Барселоны, он представляет работы Пабло Пикассо, охватывающие его ранние годы и более поздние шедевры. В нём хранится более 4000 работ Пикассо, включая картины, скульптуры, керамику, рисунки и графические отпечатки. В музее представлены постоянные экспозиции, а также временные выставки, представляющие новые работы современных художников, вдохновлённых Пикассо. Палау Гюэль, здание, в котором сейчас находится музей, было спроектировано Антоном Гауди, другим известным каталонским архитектором. Музей предлагает экскурсии, которые проводятся экспертами и дают представление о жизни и творчестве Пикассо. Также проводятся образовательные программы для детей и семей.</p>
 <p class="prose">Основанный в 1968 году, музей изначально располагался в историческом здании Casas del Buen Consejo, которое было построено в конце XVIII века. В 1974 году он переехал в нынешнее местоположение — бывший Palau Guell, где он и находится по сей день. Музей стал одной из самых знаковых культурных институций Барселоны. Посещение Музея Пикассо позволяет гостям ознакомиться с эволюцией художественного стиля Пикассо с течением времени.</p></div>
 </section>
 <section class="place" id="barcelona_placa_catalunya">
+<div class="place-lead">
 <h3>Barcelona Placa Catalunya</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/barcelona_placa_catalunya.jpg" alt="Barcelona Placa Catalunya"/></figure>
+<p class="place-meta">Место: Centre, hub of axes</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/barcelona_placa_catalunya.jpg" alt="Barcelona Placa Catalunya" width="1280" height="960" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/barcelona_placa_catalunya_b.jpg" alt="Barcelona Placa Catalunya — вид 2" width="330" height="494" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">В самом сердце Барселоны расположена Пласа-де-Каталунья – оживленный центр, где встречаются прошлое и настоящее города. Эта знаковая площадь окружена модернистскими зданиями, включая величественный Палау-Сант-Жорди, спроектированный учеником Антонио Гауди Луисом Доменеком и Мунтанером. Пьяцца находится на пересечении Авигуды де лес Кортс Каталанес и Гран Виа де лес Кортс Каталанес. Здесь представлены изящные фасады в стиле ар-нуво и богато украшенные уличные фонари, вдохновленные традиционным каталонским дизайном. Палау де ла Генералитат, где расположено региональное правительство, выходит на площадь. Каждый год площадь принимает многочисленные фестивали и мероприятия, посвященные каталонской культуре. Недалеко вы найдете Музей каталонской истории, в котором представлены артефакты, прослеживающие историческое развитие региона.</p>
 <p class="prose">Построенная в конце XIX века в рамках усилий по реконструкции Барселоны, Площадь Каталонии (Plaça de Catalunya) всегда оставалась центральной для социальной жизни города. Изначально она называлась Площадь Герцога Ургеля (Plaça del Comte d&#x27;Urgell), но позже было решено изменить название, чтобы отразить культурную самобытность Каталонии. Сегодня она остается одной из самых значимых встреч для местных жителей и туристов. Plaça de Catalunya — обязательное место для посещения всем, кто исследует Барселону. Здесь можно заглянуть в богатое архитектурное наследие города, а также насладиться атмосферой оживленного места встреч для всех.</p></div>
 </section>
 <section class="place" id="barcelona_port_vell">
+<div class="place-lead">
 <h3>Barcelona Port Vell</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/barcelona_port_vell.jpg" alt="Barcelona Port Vell"/></figure>
+<p class="place-meta">Адрес: Waterfront old harbour</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/barcelona_port_vell.jpg" alt="Barcelona Port Vell" width="1280" height="378" style="height: 136px; max-height: 136px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/barcelona_port_vell_b.jpg" alt="Barcelona Port Vell — вид 2" width="330" height="310" style="height: 136px; max-height: 136px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Порт-Вель — живописный набережный район, расположенный в самом сердце старого порта Барселоны. Он служит оживленным центром как для местных жителей, так и для туристов, предлагая живописные виды, кафе, магазины и места для отдыха. В нём расположена одна из крупнейших марин Европы с более чем 700 местами стоянки. В этом районе расположены несколько ресторанов и баров с летней террасой, откуда открываются панорамные виды на море. Популярным местом является Палау-де-ла-Мусика-Каталанья, которое видно из Порт-Вель. Расположенный рядом с знаменитой Лас-Рамблас, он обеспечивает легкий доступ к основным достопримечательностям города. В последние годы Порт Вельль претерпел дальнейшее развитие, включая новые пешеходные зоны и зеленые пространства.</p>
 <p class="prose">Изначально Порт-Вель был построен в конце 1980-х – начале 1990-х годов в рамках проекта по обновлению городской застройки, направленного на возрождение гавани Барселоны. Современный дизайн, разработанный архитектором Рикардо Бофилем, сочетает в себе коммерческие пространства, жилые районы и места для отдыха. Гости приезжают сюда, чтобы насладиться чарующей атмосферой, исследовать марину и прогуляться по набережной с видом на Средиземное море.</p></div>
 </section>
-<section class="place" id="barcelona_santa_maria_del_mar">
-<h3>Barcelona Santa Maria Del Mar</h3>
+<section class="place" id="barcelona_sagrada_familia">
+<div class="place-lead">
+<h3>Barcelona Sagrada Familia</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1329–1383</p>
-<figure class="place-fig"><img src="../images/barcelona_santa_maria_del_mar.jpg" alt="Barcelona Santa Maria Del Mar"/></figure>
-<div class="place-desc"><p class="prose">Расположенная величественно на набережной Барселоны, готическая церковь Санта Мария дель Мар — это захватывающий дух собор, известный своей поразительной простотой и светлым интерьером. Возведённый в конце XIV века, он является одной из самых знаковых достопримечательностей города. Завершено в 1383 году после почти пятидесяти лет строительства. Спроектировано архитектором Жоме Фругером и Куни. Характеризуется отличительной восьмиугольной апсидой и единственным нефом без боковых проходов. Славится естественным светом, который заливает высокие клерестовые окна. Расположенный недалеко от портового района, откуда открывается панорамный вид на Средиземное море.</p>
-<p class="prose">Построенная в период между 1329 и 1383 годами во время правления короля Джеймса II, церковь Санта-Мария-дель-Мар была спроектирована архитектором Жауме Фругером и Куни. Строительство собора совпало с золотым веком Барселоны, когда город процветал при королевском покровительстве. Его простой, но элегантный дизайн отражает уникальный каталонский архитектурный стиль, сочетающий элементы как романской, так и готической архитектуры. Посетители приезжают в Санта-Мария-дель-Мар, чтобы ощутить его безмятежную атмосферу и полюбоваться изысканным мастерством его замысловатых витражей и мраморного алтаря.</p></div>
+<p class="place-meta">Адрес: Carrer de Mallorca, Eixample</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/barcelona_sagrada_familia.jpg" alt="Barcelona Sagrada Familia" width="1077" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/barcelona_sagrada_familia_b.jpg" alt="Barcelona Sagrada Familia — вид 2" width="330" height="431" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Знаменитый шедевр Антонио Гауди, Базилика Святого Семейства (Саграда Фамилия), является одной из самых выдающихся достопримечательностей Барселоны. Эта захватывающе сложная церковь сочетает в себе готические и элементы ар-нуво, создавая уникальный каталонский стиль. Строительство началось в 1882 году, но продолжается до сих пор. Это самая большая незавершенная римско-католическая церковь в мире. Дизайны Гауди украшены более чем 18 000 кусков ручного витражного стекла. Базилика включает 18 башен, олицетворяющих Иисуса Христа и двенадцать апостолов. Посетители могут подняться на башни, чтобы насладиться панорамным видом на Барселону.</p>
+<p class="prose">Начало работ было положено в 1882 году Франсиско де Паулой де Вильяр и Лосано; позднее строительство продолжил Антонио Гауди в 1883 году. Гауди посвятил свою жизнь завершению проекта, но оставил его незавершенным после своей смерти в 1926 году. Сегодня, под руководством Fundació la Sagrada Família, работы продолжаются над этим амбициозным проектом. Саграда Фамилия значима своей архитектурной инновационностью и религиозным значением, являя собой воплощение дальновидного замысла Гауди.</p></div>
 </section>
 <section class="place" id="barcelona_sagrat_cor_tibidabo">
+<div class="place-lead">
 <h3>Barcelona Sagrat Cor Tibidabo</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1898–1901</p>
-<figure class="place-fig"><img src="../images/barcelona_sagrat_cor_tibidabo.jpg" alt="Barcelona Sagrat Cor Tibidabo"/></figure>
+<p class="place-meta">Адрес: Tibidabo hill | Период: 1898–1901</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/barcelona_sagrat_cor_tibidabo.jpg" alt="Barcelona Sagrat Cor Tibidabo" width="1028" height="1600" style="height: 375px; max-height: 375px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/barcelona_sagrat_cor_tibidabo_b.jpg" alt="Barcelona Sagrat Cor Tibidabo — вид 2" width="330" height="268" style="height: 375px; max-height: 375px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Расположенная на самой высокой точке холма Монжуик, на высоте 512 метров над уровнем моря, паломническая церковь Тибидабо предлагает захватывающий вид на Барселону и окружающие ее районы. Строительство завершено между 1898 и 1901 годами; проект разработал архитектор Франсиско дель Вильяр и Лосано. Церковь построена в нео-готическом стиле с отличительной башней, напоминающей средневековый замок. Он украшен замысловатыми витражными окнами, изображающими сцены из жизни Иисуса Христа. Внутри посетители могут найти скульптуры и фрески, созданные такими известными художниками, как Жосеп Мария Хухоль. В ясные дни с вершины холма открывается вид до Средиземного моря. Рядом с церковью находится обсерватория Мирадор-дельс-Айретс, откуда открываются дополнительные панорамные виды.</p>
 <p class="prose">Возведенная в конце XIX века как часть движения искупления после убийства испанского короля Альфонсо XII в 1881 году, церковь задумывалась как символ покаяния и национального траура. Ее строительство совпало с преображением Барселоны в современный промышленный мегаполис, и само это сооружение стало знаковым ориентиром культурной самобытности Каталонии. Туристы приезжают сюда ради его архитектурной красоты и панорамных видов, которые простираются далеко над городским пейзажем.</p></div>
 </section>
-<section class="place" id="barcelona_torre_glories">
-<h3>Barcelona Torre Glories</h3>
+<section class="place" id="barcelona_santa_maria_del_mar">
+<div class="place-lead">
+<h3>Barcelona Santa Maria Del Mar</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1996–1999</p>
-<figure class="place-fig"><img src="../images/barcelona_torre_glories.jpg" alt="Barcelona Torre Glories"/></figure>
+<p class="place-meta">Адрес: Plaça de Santa Maria, La Ribera | Период: 1329–1383</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/barcelona_santa_maria_del_mar.jpg" alt="Barcelona Santa Maria Del Mar" width="1280" height="1474" style="height: 267px; max-height: 267px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/barcelona_santa_maria_del_mar_b.jpg" alt="Barcelona Santa Maria Del Mar — вид 2" width="330" height="191" style="height: 267px; max-height: 267px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Расположенная величественно на набережной Барселоны, готическая церковь Санта Мария дель Мар — это захватывающий дух собор, известный своей поразительной простотой и светлым интерьером. Возведённый в конце XIV века, он является одной из самых знаковых достопримечательностей города. Завершено в 1383 году после почти пятидесяти лет строительства. Спроектировано архитектором Жоме Фругером и Куни. Характеризуется отличительной восьмиугольной апсидой и единственным нефом без боковых проходов. Славится естественным светом, который заливает высокие клерестовые окна. Расположенный недалеко от портового района, откуда открывается панорамный вид на Средиземное море.</p>
+<p class="prose">Построенная в период между 1329 и 1383 годами во время правления короля Джеймса II, церковь Санта-Мария-дель-Мар была спроектирована архитектором Жауме Фругером и Куни. Строительство собора совпало с золотым веком Барселоны, когда город процветал при королевском покровительстве. Его простой, но элегантный дизайн отражает уникальный каталонский архитектурный стиль, сочетающий элементы как романской, так и готической архитектуры. Посетители приезжают в Санта-Мария-дель-Мар, чтобы ощутить его безмятежную атмосферу и полюбоваться изысканным мастерством его замысловатых витражей и мраморного алтаря.</p></div>
+</section>
+<section class="place" id="barcelona_santa_maria_del_pi">
+<div class="place-lead">
+<h3>Barcelona Santa Maria Del Pi</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/barcelona_santa_maria_del_pi.jpg" alt="Barcelona Santa Maria Del Pi" width="1280" height="960" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/barcelona_santa_maria_del_pi_b.jpg" alt="Barcelona Santa Maria Del Pi — вид 2" width="330" height="440" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Базилика Санта-Мария-дель-Пи — выдающийся готический собор, расположенный в историческом районе Барселоны и предлагающий посетителям сочетание торжественности и красоты. Строительство началось в 1326 году и продолжалось до конца XVIII века. Здесь находится гробница Яуме Ферра и Форнса, известного архитектора. Базилика имеет три нефы с хором над главным алтарем. Его фасад включает скульптуры, изображающие различных святых и библейских персонажей. Посетители могут подняться на колокольню, чтобы полюбоваться панорамным видом на город.</p>
+<p class="prose">Построенная между XIV и XVIII веками, базилика отражает эволюцию каталонско-готической архитектуры. Изначально она была возведена в качестве приходской церкви, посвященной Святой Марии Лесной, а позже была повышена до статуса базилики Папой Пием XI в 1907 году. Самой примечательной особенностью является центральный неф, украшенный сложными резьбами и витражными окнами, изображающими сцены из Библии. Базилика, обязательная к посещению благодаря своему историческому значению и архитектурному изяществу, предлагает потрясающие интерьеры и захватывающие виды Старого города Барселоны.</p></div>
+</section>
+<section class="place" id="barcelona_torre_glories">
+<div class="place-lead">
+<h3>Barcelona Torre Glories</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Plaça de les Glòries | Период: 1996–1999</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/barcelona_torre_glories.jpg" alt="Barcelona Torre Glories" width="646" height="1600" style="height: 231px; max-height: 231px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/barcelona_torre_glories_b.jpg" alt="Barcelona Torre Glories — вид 2" width="330" height="165" style="height: 231px; max-height: 231px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Расположенная в самом сердце района Эшампле Барселоны, Torre Glòries — это эффектная модернистская башня, которая доминирует над городским пейзажем и служит символом городской реконструкции. Завершено в 1999 году, оно стало одной из самых высоких зданий Барселоны при открытии. Высотное здание содержит офисы, жилые помещения и коммерческие площади. Его характерная спиральная форма была вдохновлена соседним парком Рамбла дельс Эстудис и отражает историческую связь города с садами и открытыми пространствами. Здесь расположена терраса на крыше, откуда открывается захватывающий вид на гору Монжуик и Средиземное море. Torre Glòries стала заметной достопримечательностью в городском ландшафте Барселоны.</p>
 <p class="prose">Построенная между 1996 и 1999 годами, башня Торре Глориэс была спроектирована известным каталонским архитектором Хорди Ллинасом, чтобы дополнить существуческое архитектурное наследие города, одновременно представив современную эстетику. Башня выделяется своим уникальным дизайном, который включает большие стеклянные панели и характерную спиралевидную форму, позволяющую естественному свету заполнять внутренние пространства. Туристов стоит посетить Торре Глориэс за ее инновационную архитектуру и панорамные виды на оживленный городской пейзаж Барселоны.</p></div>
 </section>

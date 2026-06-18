@@ -26,7 +26,7 @@ BUILD_GUIDES = [
     "monasteries", "places_of_worship", "parks", "museums", "palaces",
     "buildings", "sculptures", "places", "squares", "metro", "theaters",
     "viewpoints", "bridges", "markets", "libraries", "railway_stations",
-    "cemeteries", "landmarks", "cafes",
+    "cemeteries", "landmarks", "cafes", "osobnjaki",
 ]
 
 GUIDE_TO_SUBDIR = {
@@ -49,6 +49,7 @@ GUIDE_TO_SUBDIR = {
     "cemeteries": "moscow_cemeteries",
     "landmarks": "moscow_landmarks",
     "cafes": "moscow_cafes",
+    "osobnjaki": "moscow_osobnjaki",
 }
 
 
@@ -111,6 +112,9 @@ def _load_places(guide: str) -> list[dict]:
     if guide == "cafes":
         from moscow.data.cafes import CAFES
         return CAFES
+    if guide == "osobnjaki":
+        from moscow.data.osobnjaki import OSOBNJAKI
+        return OSOBNJAKI
     raise ValueError("Unknown guide: {}".format(guide))
 
 

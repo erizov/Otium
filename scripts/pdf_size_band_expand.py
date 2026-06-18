@@ -31,7 +31,8 @@ _PROJECT_ROOT = Path(__file__).resolve().parent.parent
 if str(_PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(_PROJECT_ROOT))
 
-from scripts.city_guide_naming import filler_place_slug
+from scripts.city_guide_naming import descriptive_place_slug
+from scripts.city_guide_naming import clean_place_display_title
 from scripts.city_guide_naming import image_rel_path_for_slug
 from scripts.city_guide_naming import pdf_expand_sidecar_filename
 from scripts.expand_guides_commons_batch import (  # noqa: E402
@@ -76,22 +77,6 @@ def _existing_keys(rows: list[dict]) -> tuple[set[str], set[str]]:
             if v:
                 names.add(v)
     return slugs, names
-
-
-def _next_filler_index(
-    used_slugs: set[str],
-    city_slug: str,
-    category: str,
-) -> int:
-    """Stable per-category counter (01, 02, …)."""
-    prefix = "{}_filler_{}_".format(city_slug, category)
-    nn = 0
-    for s in used_slugs:
-        if s.startswith(prefix):
-            tail = s[len(prefix) :]
-            if tail.isdigit():
-                nn = max(nn, int(tail))
-    return nn + 1
 
 
 def _queries_for_slug(slug: str, display: str) -> list[tuple[str, str]]:
@@ -211,14 +196,13 @@ def _commons_row_for_query(
     time.sleep(_SEARCH_SLEEP_SEC)
     if not url or not title:
         return None
-    clean_title = title
+    clean_title = clean_place_display_title(title)
     if clean_title.lower().startswith("file:"):
         clean_title = clean_title[5:].strip()
     low = clean_title.strip().lower()
     if low in used_names:
         return None
-    nn = _next_filler_index(used_slugs, slug, category)
-    ps = filler_place_slug(slug, category, nn)
+    ps = descriptive_place_slug(slug, clean_title, used_slugs)
     if ps in used_slugs:
         return None
     desc = _rag_description_for_title(

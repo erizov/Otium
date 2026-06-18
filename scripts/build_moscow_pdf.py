@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -14,7 +15,9 @@ if str(_PROJECT_ROOT) not in sys.path:
 
 from scripts.city_guide_jerusalem_style_pdf import run_build_pdf_main
 from scripts.city_guide_title_heraldry_assets import title_symbols_for_slug
+from scripts.city_guide_translate import EditionTranslator, get_edition_translator, set_edition_translator
 from scripts.moscow_title_assets_data import install_moscow_bundled_assets
+from scripts.reconcile_moscow_guide_editions import reconcile_moscow_places_json
 from webapp.server.city_store import load_city_places
 
 
@@ -58,7 +61,29 @@ def main() -> int:
 
     moscow_root = _PROJECT_ROOT / "moscow"
     install_moscow_bundled_assets(moscow_root)
-    places = load_city_places(_PROJECT_ROOT, "moscow")
+    os.environ.pop("CITY_GUIDE_NO_TRANSLATE", None)
+    places_path = moscow_root / "data" / "moscow_places.json"
+    reconcile_moscow_places_json(
+        places_path,
+        _PROJECT_ROOT,
+        cache_only=True,
+        fetch_wikipedia=True,
+        pdf_only=True,
+    )
+    tr = get_edition_translator(_PROJECT_ROOT)
+    if tr is not None:
+        set_edition_translator(
+            EditionTranslator(
+                project_root=_PROJECT_ROOT,
+                cache_path=tr._cache_file,
+                cache_only=True,
+            ),
+        )
+    places = load_city_places(
+        _PROJECT_ROOT,
+        "moscow",
+        include_food_venues=True,
+    )
     return run_build_pdf_main(
         project_root=_PROJECT_ROOT,
         city_slug="moscow",

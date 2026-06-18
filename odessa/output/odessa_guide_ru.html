@@ -13,7 +13,7 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
 .otium-logo { font-family: 'Cormorant Garamond', serif; font-size: 2.15rem;
   font-weight: 600; letter-spacing: 0.18em; margin-bottom: 0.85rem; }
 .otiump { margin: 0.42rem 0; line-height: 1.42; text-align: justify;
-  max-width: 38rem; font-size: 0.95rem; }
+  font-size: 0.95rem; }
 .guide-title { page-break-after: auto; margin-bottom: 0.55rem;
   page-break-inside: avoid; }
 .historical-reference { margin: 0.75rem 0 1.15rem;
@@ -63,22 +63,96 @@ ol.trip-stops a:hover { text-decoration: underline; }
 .heraldry-univ-caption { font-size: 0.52rem; line-height: 1.18;
   margin: 0.12rem 0 0; padding: 0 0.06rem; color: #252525;
   text-align: center; font-weight: 500; }
-.heraldry-motto { text-align: center; max-width: 18rem; margin: 0.18rem auto;
+.heraldry-motto { text-align: center; margin: 0.18rem auto;
   width: 100%; }
 .motto-line { font-family: 'Cormorant Garamond', serif; font-size: 1rem;
   margin: 0; color: #333; line-height: 1.35; }
 .guide-title h1.guide-title-main { font-family: 'Cormorant Garamond', serif;
   font-size: 2.35rem; margin-bottom: 0.5rem; font-weight: 600; }
 .lead { color: #444; font-size: 1.05rem; }
-.guide-toc { margin: 0.85rem 0 1.15rem; page-break-inside: avoid; }
-.guide-toc h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.28rem;
-  font-weight: 600; margin: 0.4rem 0 0.55rem; }
+
+.guide-toc { page-break-before: always; break-before: page;
+  page-break-after: always; break-after: page;
+  margin: 0; padding: 0.2rem 0 0.45rem; page-break-inside: auto; }
+.guide-toc h2 { font-family: 'Cormorant Garamond', serif;
+  font-size: 1.28rem; font-weight: 600; margin: 0.4rem 0 0.55rem; }
 .guide-toc ol { margin: 0.35rem 0 0.65rem 1.25rem; padding: 0;
   columns: 2; column-gap: 1.5rem; }
 .guide-toc li { margin: 0.18rem 0; line-height: 1.35;
   font-size: 0.88rem; break-inside: avoid; }
-.guide-toc a { color: #1a5276; text-decoration: none; }
+.guide-toc a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.guide-toc a:hover { color: #0d3d56; }
 .guide-toc li.toc-item--sub { font-size: 0.82rem; margin-left: 0.35rem; }
+.toc-back { font-size: 0.78rem; margin: 0 0 0.35rem; text-align: right; }
+.toc-back a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.toc-back a:hover { color: #0d3d56; }
+.place, .historical-reference, .guide-primer, .guide-trip-plans {
+  scroll-margin-top: 1.25rem; }
+.historical-reference h2, .guide-primer h2, .guide-trip-plans h2,
+.chapter-head h2, .place-lead h3 { position: relative; }
+.guide-toc + .place, .guide-toc + .chapter-head {
+  page-break-before: avoid; break-before: avoid-page; }
+.place-lead { page-break-inside: avoid; break-inside: avoid-page;
+  page-break-after: auto; }
+.place-lead > h3 { page-break-after: avoid; break-after: avoid-page; }
+.place-lead > .place-meta { page-break-after: avoid; break-after: avoid-page; }
+
+.place-fig { page-break-inside: avoid; break-inside: avoid-page;
+  margin: 0.5rem 0 1rem; }
+.place-fig img {
+  page-break-inside: avoid; break-inside: avoid-page;
+  max-height: 48vh; width: auto; max-width: 100%;
+  object-fit: contain; margin-left: auto; margin-right: auto; }
+.place-fig--hi-res img { max-height: 52vh; }
+.place-fig--lo-res img { max-height: 30vh; }
+.place-pdf-fig-row {
+  display: flex; flex-direction: row; flex-wrap: wrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.45rem 0.55rem; margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row .place-fig {
+  flex: 1 1 30%; margin: 0; min-width: 26%; max-width: 100%; }
+.place-pdf-fig-row .place-fig img {
+  width: auto; max-width: 100%; height: auto; max-height: 44vh;
+  object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--pair {
+  flex-wrap: nowrap; justify-content: space-between;
+  align-items: flex-end; gap: 0.5rem 0.65rem; }
+.place-pdf-fig-row--pair .place-fig {
+  flex: 1 1 47%; min-width: 0; max-width: 50%;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--pair .place-fig img {
+  max-height: 44vh; object-fit: contain; }
+.place-pdf-fig-row--pair .place-fig--hi-res img { max-height: 50vh; }
+.place-pdf-fig-row--pair .place-fig--lo-res img { max-height: 26vh; }
+.place-pdf-fig-rows-stack {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple {
+  display: flex; flex-direction: row; flex-wrap: nowrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.4rem 0.48rem; margin: 0;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--triple .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--triple .place-fig--hi-res img { max-height: 38vh; }
+.place-pdf-fig-row--triple .place-fig--lo-res img { max-height: 18vh; }
+.place-pdf-fig-row--many {
+  flex-wrap: nowrap; justify-content: center; align-items: flex-end;
+  gap: 0.35rem 0.42rem; }
+.place-pdf-fig-row--many .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--many .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+
+
 .place { margin-bottom: 2.2rem; page-break-inside: auto; }
 h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.22rem; margin: 1.2rem 0 0.35rem;
   font-weight: 600; }
@@ -90,7 +164,6 @@ h4 { font-family: 'Cormorant Garamond', serif; font-size: 0.95rem; text-transfor
   color: #555; font-size: 0.95rem; margin: 0 0 0.5rem; font-style: italic; }
 .place-meta { font-size: 0.92rem; color: #353535; margin: 0 0 0.75rem;
   line-height: 1.4; }
-.place-fig { margin: 0.5rem 0 1rem; }
 img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
 .prose, .place-desc p { margin: 0.45rem 0; line-height: 1.5;
   text-align: justify; }
@@ -110,18 +183,21 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <figure class="heraldry-fig heraldry-coat-book" title="Coat of arms of Odesa"><img src="../images/guide_coat_of_arms.svg" alt="Coat of arms of Odesa"/></figure>
 <figure class="heraldry-fig heraldry-coat-book" title="Flag of Odesa"><img src="../images/guide_flag.svg" alt="Flag of Odesa"/></figure>
 </div></div><h1 class="guide-title-main">Odesa</h1><p class="lead">Путеводитель. Объектов в этом выпуске: 25.</p></header>
+<nav class="guide-toc" id="guide-toc" aria-label="Содержание"><h2>Содержание</h2><ol><li class="toc-item"><a href="#guide-historical">Историческая справка</a></li><li class="toc-item"><a href="#guide-trips">Маршруты</a></li><li class="toc-item"><a href="#odessa_landmark">Odessa Landmark</a></li><li class="toc-item"><a href="#odessa_bristol_hotel">Бристоль Отель Одесса</a></li><li class="toc-item"><a href="#odessa_vorontsov_palace">Воронцовский дворец</a></li><li class="toc-item"><a href="#odessa_shah_palace">Дворец Шаха Одесса</a></li><li class="toc-item"><a href="#odessa_green_theatre">Зеленый театр Одесса</a></li><li class="toc-item"><a href="#odessa_st_paul_cathedral">Лютеранский собор Святого Павла</a></li><li class="toc-item"><a href="#odessa_richelieu">Монумент герцога де Ришельё</a></li><li class="toc-item"><a href="#odessa_mother_in_law_bridge">Мост свекрови</a></li><li class="toc-item"><a href="#odessa_odessa_catacombs">Музей партизанской славы</a></li><li class="toc-item"><a href="#odessa_black_sea_coast">Одесса, побережье залива</a></li><li class="toc-item"><a href="#odessa_archeology_museum">Одесский археологический музей</a></li><li class="toc-item"><a href="#odessa_city_hall">Одесский городской совет</a></li><li class="toc-item"><a href="#odessa_port">Одесский морской порт</a></li><li class="toc-item"><a href="#odessa_fine_arts_museum">Одесский музей изобразительных искусств</a></li><li class="toc-item"><a href="#odessa_passage">Одесский Пассаж</a></li><li class="toc-item"><a href="#odessa_odessa_film_studio">Одеськая киностудия</a></li><li class="toc-item"><a href="#odessa_opera_theatre">Одеський театр опери та балету</a></li><li class="toc-item"><a href="#odessa_shevchenko_park">Парк Шевченко Одесса</a></li><li class="toc-item"><a href="#odessa_lanzheron_beach">Пляж Ланжерон</a></li><li class="toc-item"><a href="#odessa_potemkin_stairs">Потемкинская лестница</a></li><li class="toc-item"><a href="#odessa_prymorsky_boulevard">Приморский бульвар</a></li><li class="toc-item"><a href="#odessa_transfiguration_cathedral">Собор Преображения Господня</a></li><li class="toc-item"><a href="#odessa_spaso_preobrazhensky">Собор Спаса Преображения</a></li><li class="toc-item"><a href="#odessa_deribasovskaya">Улица Дерибасовская</a></li><li class="toc-item"><a href="#odessa_french_boulevard">Французский бульвар, Одесса</a></li></ol></nav>
 <section class="historical-reference" id="guide-historical" aria-label="Историческая справка"><h2>Историческая справка</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 <p class="prose">Одесса — крупный порт на Чёрном море, культурный центр юга Украины.</p>
 <p class="prose">Основана по указу Екатерины II, развивалась как космополитичный город торговли и театра: Потёмкинская лестница, дворики и литературные традиции. Морской фасад и многонациональное наследие остаются частью идентичности.</p>
 <p class="prose">Гражданская война и Вторая мировая война сменили власти и население; советский период сделал Одессу крупным портом и кинематографическим брендом. В XXI веке город сохраняет космополитизм и культурные традиции юга Украины у моря.</p></section>
 <section class="guide-trip-plans" id="guide-trips" aria-label="Маршруты"><h2>Маршруты</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 <article class="trip-plan" id="trip-1d"><h3>Один день</h3>
 <p class="prose">Компактный маршрут по главным точкам путеводителя с минимальным возвратом назад пешком.</p>
-<ol class="trip-stops"><li><a href="#odessa_deribasovskaya">Улица Дерибасовская</a> (~75мин)</li>
-<li><a href="#odessa_opera_theatre">Одеський театр опери та балету</a> (~75мин)</li>
-<li><a href="#odessa_city_hall">Одесский городской совет</a> (~75мин)</li>
+<ol class="trip-stops"><li><a href="#odessa_vorontsov_palace">Воронцовский дворец</a> (~75мин)</li>
 <li><a href="#odessa_potemkin_stairs">Потемкинская лестница</a> (~75мин)</li>
-<li><a href="#odessa_vorontsov_palace">Воронцовский дворец</a> (~75мин)</li>
+<li><a href="#odessa_city_hall">Одесский городской совет</a> (~75мин)</li>
+<li><a href="#odessa_opera_theatre">Одеський театр опери та балету</a> (~75мин)</li>
+<li><a href="#odessa_deribasovskaya">Улица Дерибасовская</a> (~75мин)</li>
 <li><a href="#odessa_prymorsky_boulevard">Приморский бульвар</a> (~75мин)</li></ol></article>
 <article class="trip-plan" id="trip-3d1"><h3>Три дня — день 1</h3>
 <p class="prose">День 1 — центральный кластер.</p>
@@ -141,203 +217,325 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <p class="prose">День 3 — оставшиеся близкие объекты.</p>
 <ol class="trip-stops"><li><a href="#odessa_port">Одесский морской порт</a> (~75мин)</li>
 <li><a href="#odessa_archeology_museum">Одесский археологический музей</a> (~75мин)</li></ol></article></section>
-<nav class="guide-toc" aria-label="Содержание"><h2>Содержание</h2><ol><li class="toc-item"><a href="#guide-historical">Историческая справка</a></li><li class="toc-item"><a href="#guide-trips">Маршруты</a></li><li class="toc-item"><a href="#odessa_bristol_hotel">Бристоль Отель Одесса</a></li><li class="toc-item"><a href="#odessa_deribasovskaya">Улица Дерибасовская</a></li><li class="toc-item"><a href="#odessa_richelieu">Монумент герцога де Ришельё</a></li><li class="toc-item"><a href="#odessa_french_boulevard">Французский бульвар, Одесса</a></li><li class="toc-item"><a href="#odessa_green_theatre">Зеленый театр Одесса</a></li><li class="toc-item"><a href="#odessa_lanzheron_beach">Пляж Ланжерон</a></li><li class="toc-item"><a href="#odessa_mother_in_law_bridge">Мост свекрови</a></li><li class="toc-item"><a href="#odessa_odessa_catacombs">Музей партизанской славы</a></li><li class="toc-item"><a href="#odessa_archeology_museum">Одесский археологический музей</a></li><li class="toc-item"><a href="#odessa_city_hall">Одесский городской совет</a></li><li class="toc-item"><a href="#odessa_odessa_film_studio">Одеськая киностудия</a></li><li class="toc-item"><a href="#odessa_fine_arts_museum">Одесский музей изобразительных искусств</a></li><li class="toc-item"><a href="#odessa_black_sea_coast">Одесса, побережье залива</a></li><li class="toc-item"><a href="#odessa_opera_theatre">Одеський театр опери та балету</a></li><li class="toc-item"><a href="#odessa_passage">Одесский Пассаж</a></li><li class="toc-item"><a href="#odessa_port">Одесский морской порт</a></li><li class="toc-item"><a href="#odessa_potemkin_stairs">Потемкинская лестница</a></li><li class="toc-item"><a href="#odessa_prymorsky_boulevard">Приморский бульвар</a></li><li class="toc-item"><a href="#odessa_spaso_preobrazhensky">Собор Спаса Преображения</a></li><li class="toc-item"><a href="#odessa_shah_palace">Дворец Шаха Одесса</a></li><li class="toc-item"><a href="#odessa_shevchenko_park">Парк Шевченко Одесса</a></li><li class="toc-item"><a href="#odessa_st_paul_cathedral">Лютеранский собор Святого Павла</a></li><li class="toc-item"><a href="#odessa_transfiguration_cathedral">Собор Преображения Господня</a></li><li class="toc-item"><a href="#odessa_vorontsov_palace">Воронцовский дворец</a></li><li class="toc-item"><a href="#odessa_pdfband_2_3bc3706d">Одесса. Арабский центр</a></li></ol></nav>
+<section class="place" id="odessa_landmark">
+<div class="place-lead">
+<h3>Odessa Landmark</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/odessa_landmark.jpg" alt="Odessa Landmark" width="1280" height="960" style="height: 250px; max-height: 250px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/odessa_landmark_b.jpg" alt="Odessa Landmark — вид 2" width="330" height="462" style="height: 250px; max-height: 250px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+</section>
 <section class="place" id="odessa_bristol_hotel">
+<div class="place-lead">
 <h3>Бристоль Отель Одесса</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/odessa_bristol_hotel.jpg" alt="Бристоль Отель Одесса"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/odessa_bristol_hotel.jpg" alt="Бристоль Отель Одесса" width="1280" height="960" style="height: 219px; max-height: 219px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/odessa_bristol_hotel_b.jpg" alt="Бристоль Отель Одесса — вид 2" width="330" height="219" style="height: 219px; max-height: 219px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Отель Бристоль в Одессе — это роскошное заведение, расположенное в самом сердце Одессы, известное своей элегантной архитектурой и богатой историей. Этот отель предлагает гостям сочетание современного комфорта и классического очарования, что делает его популярным выбором для путешественников, стремящихся ощутить яркую культуру города. Благодаря своему удачному местоположению, посетители могут легко исследовать близлежащие достопримечательности и наслаждаться живой атмосферой города. Основанный в 1899 году, отель Бристоль является одним из старейших отелей в Одессе. Отель сочетает в себе неоклассический и современный архитектурные стили.</p>
 <p class="prose">Отель Бристоль в Одессе был основан в конце 19 века, а именно в 1899 году, и с тех пор стал заметной достопримечательностью города. Изначально спроектированный для обслуживания состоятельных путешественников того времени, отель прошел через различные реконструкции, сохраняя при этом свою историческую суть. На протяжении своей истории он принимал множество высокопоставленных гостей и культурных деятелей, отражая статус города как значительного порта и культурного центра. Культурно отель «Бристоль» в Одессе является символом архитектурного наследия и гостеприимства города. Он сыграл важную роль в социальной жизни Одессы, служа местом встречи для художников, интеллектуалов и туристов. Присутствие отеля способствует формированию идентичности города, демонстрируя сочетание исторических и современных влияний, которые определяют Одессу.</p></div>
 </section>
-<section class="place" id="odessa_deribasovskaya">
-<h3>Улица Дерибасовская</h3>
+<section class="place" id="odessa_vorontsov_palace">
+<div class="place-lead">
+<h3>Воронцовский дворец</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/odessa_deribasovskaya.jpg" alt="Улица Дерибасовская"/></figure>
-<div class="place-desc"><p class="prose">Улица Дерибасовская — это яркое сердце Одессы, известное своей живой атмосферой, очаровательной архитектурой и шумными кафе. Эта пешеходная улица является популярным местом как для местных жителей, так и для туристов, предлагая возможность заглянуть в богатую историю и культуру города. Посетители могут наслаждаться уличными выступлениями, покупать сувениры и пробовать местную кухню в этом знаковом городском пространстве. Улица Дерибасовская названа в честь Хосе де Рибаса, основателя Одессы. Улица была официально основана в начале 19 века. Это улица только для пешеходов, популярная для шопинга и ужинов.</p>
-<p class="prose">Улица Дерибасовская была основана в начале 19 века и названа в честь основателя города Хосе де Рибаса. Улица быстро стала центральным узлом торговли и общественной жизни в Одессе, отражая рост города как крупного порта и культурного центра региона. Здесь проходили ключевые события, включая различные общественные праздники и собрания, что подчеркивает её важность в историческом нарративе города. Культурно, улица Дерибасовская является символом яркой городской жизни Одессы, демонстрируя разнообразное наследие города через свою архитектуру и общественные пространства. Она стала местом для художественного самовыражения, с многочисленными галереями и выступлениями, способствующими развитию местной художественной сцены. Улица также играет важную роль в повседневной жизни, служа местом встречи и площадкой для различных культурных событий и фестивалей.</p></div>
+<p class="place-meta">Период: 1834–1848</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/odessa_vorontsov_palace.jpg" alt="Воронцовский дворец" width="1280" height="960" style="height: 250px; max-height: 250px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/odessa_vorontsov_palace_b.jpg" alt="Воронцовский дворец — вид 2" width="330" height="487" style="height: 250px; max-height: 250px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Расположенный высоко над побережьем Черного моря, Воронцовский дворец является захватывающим примером неоклассической архитектуры. Этот роскошный особняк был построен для князя Михаила Воронцова, генерал-губернатора Крыма, в конце 19 века. Дворец гордится обширными садами с экзотическими растениями и фонтанами. В нем расположен музей, посвященный местному искусству и историческим артефактам. Его расположение предлагает панорамные виды, которые делают его одним из самых фотографируемых мест в Украине. Воронцовский дворец внесен в список объектов Всемирного наследия ЮНЕСКО с 2014 года. Сегодня он служит местом для концертов, выставок и специальных мероприятий.</p>
+<p class="prose">Построенный между 1834 и 1848 годами итальянским архитектором Франческо Боффо, дворец служил как летней резиденцией, так и культурным центром. Он демонстрирует изысканные интерьеры, украшенные мраморными полами, фресками и сложными декорациями, вдохновленными древнегреческими и древнеримскими мотивами. Посетители приезжают, чтобы насладиться его грандиозным интерьером и потрясающими видами на одесский порт и море вдали.</p></div>
 </section>
-<section class="place" id="odessa_richelieu">
-<h3>Монумент герцога де Ришельё</h3>
+<section class="place" id="odessa_shah_palace">
+<div class="place-lead">
+<h3>Дворец Шаха Одесса</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/odessa_richelieu.jpg" alt="Монумент герцога де Ришельё"/></figure>
-<div class="place-desc"><p class="prose">Монумент герцога де Ришельё в Одессе является данью уважения одной из основополагающих фигур города, герцогу Арману Эммануэлю де Ришельё. Установленный в 1828 году, этот знаковый памятник расположен на вершине Потемкинской лестницы и предлагает потрясающие виды на Черное море. Монумент является популярным местом как для местных жителей, так и для туристов, символизируя богатую историю и культурное наследие города. Памятник был открыт в 1828 году и выполнен из белого камня. Он расположен на вершине Потемкинской лестницы, с видом на порт. Дюк де Ришельё считается значительной фигурой в городском развитии Одессы.</p>
-<p class="prose">Герцог Ришелье, который занимал пост губернатора Новороссии с 1803 по 1814 год, сыграл ключевую роль в развитии Одессы как крупного портового города. Его усилия в области градостроительства и инфраструктуры заложили основу для роста и процветания Одессы. Памятник был создан скульптором Иваном Петровичем Мартосом и открыт в 1828 году в честь вклада Ришелье в развитие города. Политически памятник отражает важность герцога де Ришелье в формировании идентичности Одессы в начале 19 века. Культурно он служит символом наследия Одессы, отмечая исторические связи города с европейскими влияниями. Памятник является центром местных традиций и собраний, укрепляя свою роль в повседневной жизни одесситов.</p></div>
-</section>
-<section class="place" id="odessa_french_boulevard">
-<h3>Французский бульвар, Одесса</h3>
-
-
-<figure class="place-fig"><img src="../images/odessa_french_boulevard.jpg" alt="Французский бульвар, Одесса"/></figure>
-<div class="place-desc"><p class="prose">Французский бульвар — живописная авеню в Одессе, известная своими потрясающими видами на Черное море и зелеными насаждениями. Этот очаровательный бульвар окружен элегантными виллами, кафе и культурными достопримечательностями, что делает его популярным местом как для местных жителей, так и для туристов. Посетители могут наслаждаться неспешными прогулками, впитывая яркую атмосферу этого исторического района. Французский бульвар был разработан в начале 1800-х годов. Бульвар известен своими живописными видами на Черное море. Он включает в себя смесь архитектурных стилей, включая неоклассицизм и ар-нуво.</p>
-<p class="prose">Французский бульвар был основан в начале 19 века, отражая влияние французской архитектуры и культуры в Одессе. Он стал модной прогулочной зоной для городской элиты, демонстрируя рост и развитие города в этот период. Бульвар стал свидетелем различных исторических событий, включая социальные собрания и культурные праздники. Культурно Французский бульвар занимает особое место в наследии Одессы, символизируя космополитический дух города и его связи с европейским искусством и архитектурой. Он служит центром повседневной жизни, где местные жители занимаются досугом и культурными мероприятиями. Бульвар также ассоциируется с различными традициями и фестивалями, которые отмечают разнообразный культурный ландшафт города.</p></div>
+<figure class="place-fig place-fig--hi-res"><img src="../images/odessa_shah_palace.jpg" alt="Дворец Шаха Одесса" width="1200" height="1600"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Дворец Шаха, потрясающий архитектурный шедевр в Одессе, демонстрирует сочетание восточных и западных дизайнерских влияний. Этот исторический дворец с его сложными деталями и роскошными садами предлагает посетителям возможность заглянуть в роскошный образ жизни прошлого. Сегодня он служит культурной площадкой, принимая различные мероприятия и выставки. Перед поездкой проверьте часы работы и информацию о билетах на официальных сайтах. Толпы достигают пика по выходным и в праздничные дни.</p>
+<p class="prose">Построенный в конце 19 века, Дворец Шаха был спроектирован знаменитым архитектором А. М. К. К. Изначально он был построен для богатого купца и с тех пор стал свидетелем множества исторических событий, отражая изменения в социальной и экономической жизни Одессы. Культурно, Дворец Шаха является свидетельством богатого наследия Одессы, воплощая архитектурное разнообразие города. Он играет важную роль в местной арт-сцене, часто принимая выставки и культурные мероприятия, которые отмечают традиции и художественные выражения региона.</p></div>
 </section>
 <section class="place" id="odessa_green_theatre">
+<div class="place-lead">
 <h3>Зеленый театр Одесса</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/odessa_green_theatre.jpg" alt="Зеленый театр Одесса"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/odessa_green_theatre.jpg" alt="Зеленый театр Одесса" width="1280" height="960" style="height: 220px; max-height: 220px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/odessa_green_theatre_b.jpg" alt="Зеленый театр Одесса — вид 2" width="330" height="220" style="height: 220px; max-height: 220px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Зеленый театр Одессы — это уникальная открытая площадка, расположенная среди зелени городского парка. Известный своими потрясающими естественными акустическими свойствами и живописной обстановкой, он принимает различные культурные мероприятия, включая концерты, театральные представления и фестивали, что делает его любимым местом как для местных жителей, так и для туристов. Основанный в 1936 году как открытый театр. Проводит различные культурные мероприятия, включая концерты и фестивали. Расположенный в парке, что подчеркивает его естественную акустику и живописную красоту.</p>
 <p class="prose">Зеленый театр был основан в 1936 году и с тех пор стал знаковым элементом культурного ландшафта Одессы. Изначально задуманный как площадка для театральных представлений, он с течением десятилетий эволюционировал, чтобы вместить широкий спектр художественных выражений, отражая динамичную культурную сцену города. Культурно Зеленый театр играет жизненно важную роль в художественном сообществе Одессы, служа платформой как для начинающих, так и для известных артистов. Его открытый формат создает уникальную атмосферу, которая усиливает впечатление от выступлений, делая его любимым местом для летних мероприятий. Театр также вносит вклад в наследие города, отмечая местные традиции и способствуя чувству общности среди жителей.</p></div>
 </section>
-<section class="place" id="odessa_lanzheron_beach">
-<h3>Пляж Ланжерон</h3>
+<section class="place" id="odessa_st_paul_cathedral">
+<div class="place-lead">
+<h3>Лютеранский собор Святого Павла</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/odessa_lanzheron_beach.jpg" alt="Пляж Ланжерон"/></figure>
-<div class="place-desc"><p class="prose">Пляж Ланжерон — популярное морское направление в Одессе, известное своими живописными видами и яркой атмосферой. Посетители могут наслаждаться загаром, купанием и разнообразными пляжными активностями. Пляж также окружён кафе и ресторанами, что делает его идеальным местом для отдыха и общения. Пляж Ланжерон расположен недалеко от центра Одессы, что делает его легко доступным. Пляж оборудован набережной с кафе, барами и рекреационными удобствами.</p>
-<p class="prose">Пляж Ланжерон является любимой частью Одессы с момента основания города в конце 18 века. Он был назван в честь русского адмирала, графа Григория Ланжерона, который сыграл значительную роль в развитии города. С течением времени пляж стал ключевой зоной отдыха как для местных жителей, так и для туристов. Культурно пляж Ланжерон занимает особое место в сердцах одесситов, служа центром отдыха и социального взаимодействия. Он отражает прибрежное наследие города и является местом, где проходят различные местные традиции и летние праздники. Пляж является неотъемлемой частью повседневной жизни сообщества, предлагая пространство для отдыха и связи с природой.</p></div>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/odessa_st_paul_cathedral.jpg" alt="Лютеранский собор Святого Павла" width="1130" height="1600" style="height: 220px; max-height: 220px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/odessa_st_paul_cathedral_b.jpg" alt="Лютеранский собор Святого Павла — вид 2" width="330" height="220" style="height: 220px; max-height: 220px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Лютеранский собор Святого Павла в Одессе является ярким примером неоготической архитектуры, известным своим впечатляющим шпилем и сложными витражами. Это действующее место поклонения служит не только местной лютеранской общине, но и привлекает посетителей своей исторической и культурной значимостью. Спокойный интерьер собора и красивые окрестности делают его мирным убежищем в шумном городе. Основан в 1841 году для обслуживания лютеранской общины в Одессе. Особенности неоготического архитектурного стиля с выдающимся шпилем. Провел реконструкцию после повреждений, полученных во время Второй мировой войны.</p>
+<p class="prose">Лютеранский собор Святого Павла был основан в 1841 году, отражая растущее присутствие немецкой общины в Одессе в течение 19 века. Собор был построен для удовлетворения духовных нужд лютеранских иммигрантов и за годы своего существования претерпел различные реконструкции, особенно после повреждений, полученных во время Второй мировой войны. Собор имеет культурное значение как символ разнообразного наследия Одессы, города, известного своим многонациональным населением. Он играет важную роль в повседневной жизни своих прихожан, проводя регулярные службы и общественные мероприятия. Кроме того, архитектурный стиль собора вносит вклад в исторический ландшафт города, делая его объектом интереса как для местных жителей, так и для туристов.</p></div>
+</section>
+<section class="place" id="odessa_richelieu">
+<div class="place-lead">
+<h3>Монумент герцога де Ришельё</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<figure class="place-fig place-fig--lo-res"><img src="../images/odessa_richelieu_b.jpg" alt="Монумент герцога де Ришельё" width="330" height="208"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Монумент герцога де Ришельё в Одессе является данью уважения одной из основополагающих фигур города, герцогу Арману Эммануэлю де Ришельё. Установленный в 1828 году, этот знаковый памятник расположен на вершине Потемкинской лестницы и предлагает потрясающие виды на Черное море. Монумент является популярным местом как для местных жителей, так и для туристов, символизируя богатую историю и культурное наследие города. Памятник был открыт в 1828 году и выполнен из белого камня. Он расположен на вершине Потемкинской лестницы, с видом на порт. Дюк де Ришельё считается значительной фигурой в городском развитии Одессы.</p>
+<p class="prose">Герцог Ришелье, который занимал пост губернатора Новороссии с 1803 по 1814 год, сыграл ключевую роль в развитии Одессы как крупного портового города. Его усилия в области градостроительства и инфраструктуры заложили основу для роста и процветания Одессы. Памятник был создан скульптором Иваном Петровичем Мартосом и открыт в 1828 году в честь вклада Ришелье в развитие города. Политически памятник отражает важность герцога де Ришелье в формировании идентичности Одессы в начале 19 века. Культурно он служит символом наследия Одессы, отмечая исторические связи города с европейскими влияниями. Памятник является центром местных традиций и собраний, укрепляя свою роль в повседневной жизни одесситов.</p></div>
 </section>
 <section class="place" id="odessa_mother_in_law_bridge">
+<div class="place-lead">
 <h3>Мост свекрови</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/odessa_mother_in_law_bridge.jpg" alt="Мост свекрови"/></figure>
+<figure class="place-fig place-fig--hi-res"><img src="../images/odessa_mother_in_law_bridge.jpg" alt="Мост свекрови" width="1280" height="750"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Мост тещи в Одессе — это очаровательный пешеходный мост, который соединяет живописные парковые зоны города. Известный своим уникальным названием и живописными видами, он является популярным местом как для местных жителей, так и для туристов, которые наслаждаются неспешными прогулками и окружающей красотой. Мост украшен художественными элементами, что делает его приятным дополнением к городской среде Одессы. Мост соединяет два крупных парка в Одессе, предлагая живописные виды на окрестности. Он включает в себя художественные элементы, которые способствуют его уникальному очарованию и привлекательности.</p>
 <p class="prose">Мост тещи был построен в начале 2000-х годов в рамках более широкой инициативы по улучшению общественных пространств в Одессе. Он был спроектирован для обеспечения безопасного и приятного прохода для пешеходов, а также для украшения района своими художественными особенностями. Хотя Мост тещи не имеет значительного политического или религиозного значения, он вносит вклад в культурную ткань Одессы. Это популярное место для встреч, которое отражает стремление города создавать яркие общественные пространства, способствовать взаимодействию сообщества и повышать общее качество городской жизни.</p></div>
 </section>
 <section class="place" id="odessa_odessa_catacombs">
+<div class="place-lead">
 <h3>Музей партизанской славы</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/odessa_odessa_catacombs.jpg" alt="Музей партизанской славы"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/odessa_odessa_catacombs.jpg" alt="Музей партизанской славы" width="1200" height="1600" style="height: 247px; max-height: 247px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/odessa_odessa_catacombs_b.jpg" alt="Музей партизанской славы — вид 2" width="330" height="247" style="height: 247px; max-height: 247px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Музей партизанской славы в Одессе является трогательным данью уважения смелым борцам сопротивления Второй мировой войны, которые действовали в обширных катакомбах региона. Этот музей демонстрирует артефакты, фотографии и повествования, которые освещают борьбу и жертвы партизан против нацистской оккупации. Посетители могут исследовать богатую историю подпольного движения и получить представление о стойкости местного населения в бурный период. Музей был основан в 1970 году. Он расположен недалеко от исторических Одесских катакомб. Музей представляет экспозиции, посвященные партизанам Второй мировой войны.</p>
 <p class="prose">Музей Партизанской Славы был основан в 1970 году в честь героизма партизан, сражавшихся против фашизма во время Второй мировой войны. Музей расположен рядом с Одесскими катакомбами, которые служили важной базой для сопротивления. За годы своего существования он стал значимым местом для образования и памяти, отражая военную историю города. Музей имеет культурное значение, так как сохраняет память о партизанском движении и способствует формированию коллективной идентичности жителей Одессы. Он служит напоминанием о прошлых испытаниях города и важности сопротивления в формировании национальных нарративов. Музей также играет роль в содействии обсуждениям о войне, мире и влиянии конфликтов на сообщества.</p></div>
 </section>
+<section class="place" id="odessa_black_sea_coast">
+<div class="place-lead">
+<h3>Одесса, побережье залива</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/odessa_black_sea_coast.jpg" alt="Одесса, побережье залива" width="1280" height="960" style="height: 250px; max-height: 250px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/odessa_black_sea_coast_b.jpg" alt="Одесса, побережье залива — вид 2" width="330" height="334" style="height: 250px; max-height: 250px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Побережье Одесского залива, протянувшееся вдоль Черного моря, предлагает потрясающие виды и яркую атмосферу. Посетители могут наслаждаться живописными пляжами, оживленными набережными и разнообразными видами активного отдыха. Эта прибрежная зона является не только популярным местом для отдыха, но и центром культурной и социальной жизни в Одессе. Одесское побережье залива является частью Черного моря, которое на протяжении веков было важным морским путем. Одесса была официально основана в 1794 году по указу российской императрицы Екатерины Великой. На побережье расположены несколько популярных пляжей, включая пляж Аркадия и пляж Ланжерон.</p>
+<p class="prose">Одесское побережье залива играло важную роль в развитии города с момента его основания в конце 18 века. Основание порта в 1794 году положило начало восхождению Одессы как значительного морского центра. В течение 19 и 20 веков побережье стало свидетелем множества событий, включая морские сражения и создание курортов на побережье, которые привлекали посетителей со всей Европы. Культурно, побережье Одессы играет важную роль в повседневной жизни жителей и гостей города, служа местом сбора для фестивалей, концертов и художественных выступлений. Богатое наследие этого региона отражается в его архитектуре и местных традициях, что способствует формированию идентичности Одессы как яркого культурного центра. Хотя побережье не имеет специфического религиозного значения, оно часто становится местом светских празднований и общественных мероприятий.</p></div>
+</section>
 <section class="place" id="odessa_archeology_museum">
+<div class="place-lead">
 <h3>Одесский археологический музей</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/odessa_archeology_museum.jpg" alt="Одесский археологический музей"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/odessa_archeology_museum.jpg" alt="Одесский археологический музей" width="1280" height="960" style="height: 250px; max-height: 250px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/odessa_archeology_museum_b.jpg" alt="Одесский археологический музей — вид 2" width="330" height="286" style="height: 250px; max-height: 250px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Одесский археологический музей — это сокровищница древних артефактов, демонстрирующая богатую историю региона от доисторических времен до Средневековья. Посетители могут исследовать разнообразную коллекцию, включающую греческие, римские и скифские реликвии, что дает представление о культурном наследии Одессы и ее окрестностей. Элегантная архитектура музея и хорошо подобранные экспозиции делают его обязательным для посещения для любителей истории. Основанный в 1875 году, музей является одним из старейших археологических музеев Украины. Коллекция музея включает более 160 000 артефактов, подчеркивающих историю Черноморского региона.</p>
 <p class="prose">Основанный в 1875 году, Одесский музей археологии сыграл ключевую роль в изучении и сохранении археологического наследия региона. Коллекция музея значительно расширилась за эти годы, особенно после раскопок в Черноморском регионе и открытия древних объектов. Музей служит важным культурным учреждением в Одессе, отражая историческое значение города как перекрестка различных цивилизаций. Он способствует пониманию разнообразной культурной идентичности и наследия региона, что делает его неотъемлемой частью местного сообщества и объектом интереса как для ученых, так и для туристов.</p></div>
 </section>
 <section class="place" id="odessa_city_hall">
+<div class="place-lead">
 <h3>Одесский городской совет</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/odessa_city_hall.jpg" alt="Одесский городской совет"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/odessa_city_hall_b.jpg" alt="Одесский городской совет" width="330" height="247"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Одесская мэрия — это знаковая достопримечательность, расположенная в сердце Одессы, с потрясающей архитектурой и являющаяся центральным узлом местного управления. Ее величественный фасад и историческое значение делают ее обязательным местом для посещения всем, кто исследует город. Посетители могут оценить ее роль в развитии города, наслаждаясь яркой атмосферой окружающей местности. Построен в период с 1884 по 1887 год. Спроектировано архитектором Францем Бофо в неоклассическом стиле. Служит местом заседания Одесского городского совета.</p>
 <p class="prose">Одесская мэрия была построена в период с 1884 по 1887 год, спроектирована архитектором Францем Бофо в неоклассическом стиле. Она стала свидетелем многочисленных ключевых событий в истории города, включая становление Одессы как значимого порта и культурного центра в 19 веке. Здание претерпело различные renovations на протяжении многих лет, отражая эволюцию идентичности города. В качестве политического центра, Одесский городской совет сыграл ключевую роль в управлении городом и стал местом для важных гражданских событий и решений. Культурно он является символом богатого наследия Одессы, часто принимая общественные собрания, празднования и выставки, которые отражают разнообразные традиции и художественные выражения города.</p></div>
 </section>
-<section class="place" id="odessa_odessa_film_studio">
-<h3>Одеськая киностудия</h3>
-
-<p class="place-meta">Период: 1907</p>
-<figure class="place-fig"><img src="../images/odessa_odessa_film_studio.jpg" alt="Одеськая киностудия"/></figure>
-<div class="place-desc"><p class="prose">Одеськая киностудия — одна из старейших и самых известных киностудий Восточной Европы, основанная в 1907 году. Она сыграла ключевую роль в украинском кино, производя множество классических фильмов, которые стали культовыми как на местном, так и на международном уровне. Студия была изначально открыта как производственное предприятие для кинофильмов французским предпринимателем Жоржем Хатшеком. С момента своего основания она выпустила более 4000 фильмов, включая классические такие, как «Айвенго» и «Доктор Живаго». Сегодня студия продолжает работать как съемочная площадка, предлагая экскурсии и мастер-классы для начинающих кинематографистов. Его впечатляющие объекты включают звуковые студии, зеленые экраны и обширные открытые локации. Значимые международные фильмы, снятые на студии, включают &#x27;Борат&#x27;, &#x27;Полночь в Париже&#x27; и &#x27;Наследие Борна&#x27;.</p>
-<p class="prose">Основанная в 1907 году, Одесская киностудия с момента своего создания стала центром кинопроизводства в Украине. На протяжении многих лет здесь работали некоторые из самых известных режиссеров и актеров региона, что значительно способствовало развитию украинского кинематографического искусства. Студия особенно известна своими роскошными декорациями и тщательным вниманием к деталям, что способствовало созданию запоминающихся сцен во многих знаменитых фильмах. Посетители могут исследовать историческое значение студии и получить представление о том, как она формировала украинское кино на протяжении десятилетий.</p></div>
-</section>
-<section class="place" id="odessa_fine_arts_museum">
-<h3>Одесский музей изобразительных искусств</h3>
-
-
-<figure class="place-fig"><img src="../images/odessa_fine_arts_museum.jpg" alt="Одесский музей изобразительных искусств"/></figure>
-<div class="place-desc"><p class="prose">Одесский музей изобразительных искусств — это сокровищница художественного наследия, расположенная в самом сердце Одессы. Величественное неоклассическое здание музея хранит обширную коллекцию украинского и европейского искусства, охватывающую период от Ренессанса до современности. Посетители могут ознакомиться с разнообразными выставками, отражающими богатую культурную палитру региона. Основан в 1899 году как Городской музей изящных искусств. Расположенный в неоклассическом здании, построенном в конце 19 века. Содержит коллекцию, охватывающую период от Ренессанса до современного искусства.</p>
-<p class="prose">Одесский музей изобразительных искусств был основан в 1899 году, изначально создан как Городской музей изобразительных искусств. Коллекция музея значительно увеличилась за годы, особенно после приобретения произведений искусства из различных частных коллекций и галерей. Само здание было построено в конце 19 века и прошло несколько ремонтов для сохранения своей архитектурной целостности. Культурно Одесский музей изобразительных искусств играет жизненно важную роль в продвижении художественного наследия Украины и в формировании ценности как местного, так и международного искусства. Он служит культурным центром для сообщества, проводя выставки, образовательные программы и культурные мероприятия, которые вовлекают как местных жителей, так и посетителей. Коллекция музея включает в себя значимые произведения, которые подчеркивают художественные движения, оказавшие влияние на культурный ландшафт Украины.</p></div>
-</section>
-<section class="place" id="odessa_black_sea_coast">
-<h3>Одесса, побережье залива</h3>
-
-
-<figure class="place-fig"><img src="../images/odessa_black_sea_coast.jpg" alt="Одесса, побережье залива"/></figure>
-<div class="place-desc"><p class="prose">Побережье Одесского залива, протянувшееся вдоль Черного моря, предлагает потрясающие виды и яркую атмосферу. Посетители могут наслаждаться живописными пляжами, оживленными набережными и разнообразными видами активного отдыха. Эта прибрежная зона является не только популярным местом для отдыха, но и центром культурной и социальной жизни в Одессе. Одесское побережье залива является частью Черного моря, которое на протяжении веков было важным морским путем. Одесса была официально основана в 1794 году по указу российской императрицы Екатерины Великой. На побережье расположены несколько популярных пляжей, включая пляж Аркадия и пляж Ланжерон.</p>
-<p class="prose">Одесское побережье залива играло важную роль в развитии города с момента его основания в конце 18 века. Основание порта в 1794 году положило начало восхождению Одессы как значительного морского центра. В течение 19 и 20 веков побережье стало свидетелем множества событий, включая морские сражения и создание курортов на побережье, которые привлекали посетителей со всей Европы. Культурно, побережье Одессы играет важную роль в повседневной жизни жителей и гостей города, служа местом сбора для фестивалей, концертов и художественных выступлений. Богатое наследие этого региона отражается в его архитектуре и местных традициях, что способствует формированию идентичности Одессы как яркого культурного центра. Хотя побережье не имеет специфического религиозного значения, оно часто становится местом светских празднований и общественных мероприятий.</p></div>
-</section>
-<section class="place" id="odessa_opera_theatre">
-<h3>Одеський театр опери та балету</h3>
-
-
-<figure class="place-fig"><img src="../images/odessa_opera_theatre.jpg" alt="Одеський театр опери та балету"/></figure>
-<div class="place-desc"><p class="prose">Одесский театр оперы и балета — это потрясающий архитектурный шедевр, расположенный в самом сердце Одессы, известный своими изысканными представлениями и богатым культурным наследием. С его роскошными интерьерами и величественным фасадом, он служит важной площадкой для оперы, балета и классической музыки, привлекая как местных жителей, так и туристов. Посетители могут наслаждаться разнообразной программой выступлений на протяжении всего года, что делает его обязательным местом для посещения для любителей искусства. Театр был построен в неоренессансном стиле, с роскошным интерьером, украшенным фресками и скульптурами. Это один из старейших оперных театров Украины, вмещающий около 1,600 зрителей. Одесский театр оперы и балета был объявлен национальным культурным памятником Украины.</p>
-<p class="prose">Одесский театр оперы и балета был официально открыт 6 октября 1887 года и был спроектирован знаменитым архитектором Фердинандом Фелльнером и его партнером Германом Хеллером. Театр прошел несколько ремонтов и реставраций, особенно после повреждений, полученных во время Второй мировой войны. Он стал площадкой для множества известных спектаклей и артистов, укрепив свой статус культурной достопримечательности Украины. Культурно Одесский театр оперы и балета является краеугольным камнем художественной жизни города, демонстрируя сочетание украинского и международного таланта. Он играет жизненно важную роль в сохранении и продвижении исполнительских искусств, способствуя репутации Одессы как культурного центра. Театр также является символом богатого наследия города и неотъемлемой частью идентичности местного сообщества, принимая различные мероприятия и фестивали, которые отмечают искусство.</p></div>
-</section>
-<section class="place" id="odessa_passage">
-<h3>Одесский Пассаж</h3>
-
-
-<figure class="place-fig"><img src="../images/odessa_passage.jpg" alt="Одесский Пассаж"/></figure>
-<div class="place-desc"><p class="prose">Одесский Пассаж — это потрясающее архитектурное сокровище, расположенное в самом сердце Одессы. Этот исторический торговый аркад сочетает в себе элементы неоренессанса и арт-нуво, что делает его популярным местом как для местных жителей, так и для туристов. Посетители могут исследовать разнообразные магазины, кафе и галереи, наслаждаясь яркой атмосферой этого оживленного рынка. Открытый в 1899 году и спроектированный архитектором Э. Сочетает в себе элементы неоренессанса и ар-нуво в архитектурном стиле.</p>
-<p class="prose">Построенный в конце 19 века, Одесский Пасаж был официально открыт в 1899 году. Спроектированный архитектором Э. М. К. Г. де Вильмонтом, аркада предназначалась для того, чтобы служить коммерческим центром, отражая рост и процветание города в этот период. На протяжении многих лет она стала свидетелем значительных событий в истории Одессы, включая изменения в собственности и реставрации, которые сохранили ее архитектурную красоту. Одесский Пассаж имеет культурное значение как символ богатого наследия города и его роли в качестве торгового центра. Аркада не только демонстрирует архитектурные стили своего времени, но и служит местом сбора для сообщества, отражая повседневную жизнь и традиции одесситов. Его продолжающееся использование в качестве рынка подчеркивает его актуальность в современном культурном ландшафте города.</p></div>
-</section>
 <section class="place" id="odessa_port">
+<div class="place-lead">
 <h3>Одесский морской порт</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/odessa_port.jpg" alt="Одесский морской порт"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/odessa_port.jpg" alt="Одесский морской порт" width="1087" height="1600" style="height: 198px; max-height: 198px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/odessa_port_b.jpg" alt="Одесский морской порт — вид 2" width="330" height="198" style="height: 198px; max-height: 198px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Одесский морской порт — это оживленный центр морской деятельности и ключевые ворота к Черному морю. С его потрясающей архитектурой и яркой атмосферой порт не только важен для торговли, но и является популярным местом для туристов, стремящихся познакомиться с богатым морским наследием города. Посетители могут наслаждаться живописными видами на корабли и набережную, исследуя близлежащие достопримечательности. Основанный в 1794 году, Одесский морской порт является одним из старейших портов Украины. Он служит важным узлом для грузовых и пассажирских перевозок в Черноморском регионе.</p>
 <p class="prose">Одесский морской порт был основан в 1794 году, вскоре после основания города Одесса. Он сыграл ключевую роль в экономическом развитии региона, способствуя торговле и коммерции на протяжении всей своей истории. Ключевыми событиями стали его расширение в 19 веке, которое превратило его в один из крупнейших портов Черного моря. Порт имеет значительное культурное значение как символ морской идентичности и экономической жизнеспособности Одессы. Он оказал влияние на местные традиции и повседневную жизнь, многие жители зависят от порта для трудоустройства и торговли. Портовая зона также является центром культурных мероприятий и собраний, отражая разнообразное наследие города.</p></div>
 </section>
+<section class="place" id="odessa_fine_arts_museum">
+<div class="place-lead">
+<h3>Одесский музей изобразительных искусств</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<figure class="place-fig place-fig--lo-res"><img src="../images/odessa_fine_arts_museum_b.jpg" alt="Одесский музей изобразительных искусств" width="330" height="436"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Одесский музей изобразительных искусств — это сокровищница художественного наследия, расположенная в самом сердце Одессы. Величественное неоклассическое здание музея хранит обширную коллекцию украинского и европейского искусства, охватывающую период от Ренессанса до современности. Посетители могут ознакомиться с разнообразными выставками, отражающими богатую культурную палитру региона. Основан в 1899 году как Городской музей изящных искусств. Расположенный в неоклассическом здании, построенном в конце 19 века. Содержит коллекцию, охватывающую период от Ренессанса до современного искусства.</p>
+<p class="prose">Одесский музей изобразительных искусств был основан в 1899 году, изначально создан как Городской музей изобразительных искусств. Коллекция музея значительно увеличилась за годы, особенно после приобретения произведений искусства из различных частных коллекций и галерей. Само здание было построено в конце 19 века и прошло несколько ремонтов для сохранения своей архитектурной целостности. Культурно Одесский музей изобразительных искусств играет жизненно важную роль в продвижении художественного наследия Украины и в формировании ценности как местного, так и международного искусства. Он служит культурным центром для сообщества, проводя выставки, образовательные программы и культурные мероприятия, которые вовлекают как местных жителей, так и посетителей. Коллекция музея включает в себя значимые произведения, которые подчеркивают художественные движения, оказавшие влияние на культурный ландшафт Украины.</p></div>
+</section>
+<section class="place" id="odessa_passage">
+<div class="place-lead">
+<h3>Одесский Пассаж</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/odessa_passage.jpg" alt="Одесский Пассаж" width="1280" height="960" style="height: 214px; max-height: 214px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/odessa_passage_b.jpg" alt="Одесский Пассаж — вид 2" width="330" height="214" style="height: 214px; max-height: 214px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Одесский Пассаж — это потрясающее архитектурное сокровище, расположенное в самом сердце Одессы. Этот исторический торговый аркад сочетает в себе элементы неоренессанса и арт-нуво, что делает его популярным местом как для местных жителей, так и для туристов. Посетители могут исследовать разнообразные магазины, кафе и галереи, наслаждаясь яркой атмосферой этого оживленного рынка. Открытый в 1899 году и спроектированный архитектором Э. М. К. Г. де Вильмонтом. Сочетает в себе элементы неоренессанса и ар-нуво в архитектурном стиле.</p>
+<p class="prose">Построенный в конце 19 века, Одесский Пасаж был официально открыт в 1899 году. Спроектированный архитектором Э. М. К. Г. де Вильмонтом, аркада предназначалась для того, чтобы служить коммерческим центром, отражая рост и процветание города в этот период. На протяжении многих лет она стала свидетелем значительных событий в истории Одессы, включая изменения в собственности и реставрации, которые сохранили ее архитектурную красоту. Одесский Пассаж имеет культурное значение как символ богатого наследия города и его роли в качестве торгового центра. Аркада не только демонстрирует архитектурные стили своего времени, но и служит местом сбора для сообщества, отражая повседневную жизнь и традиции одесситов. Его продолжающееся использование в качестве рынка подчеркивает его актуальность в современном культурном ландшафте города.</p></div>
+</section>
+<section class="place" id="odessa_odessa_film_studio">
+<div class="place-lead">
+<h3>Одеськая киностудия</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Период: 1907</p>
+<figure class="place-fig place-fig--hi-res"><img src="../images/odessa_odessa_film_studio.jpg" alt="Одеськая киностудия" width="1240" height="1600"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Одеськая киностудия — одна из старейших и самых известных киностудий Восточной Европы, основанная в 1907 году. Она сыграла ключевую роль в украинском кино, производя множество классических фильмов, которые стали культовыми как на местном, так и на международном уровне. Студия была изначально открыта как производственное предприятие для кинофильмов французским предпринимателем Жоржем Хатшеком. С момента своего основания она выпустила более 4000 фильмов, включая классические такие, как «Айвенго» и «Доктор Живаго». Сегодня студия продолжает работать как съемочная площадка, предлагая экскурсии и мастер-классы для начинающих кинематографистов. Его впечатляющие объекты включают звуковые студии, зеленые экраны и обширные открытые локации. Значимые международные фильмы, снятые на студии, включают &#x27;Борат&#x27;, &#x27;Полночь в Париже&#x27; и &#x27;Наследие Борна&#x27;.</p>
+<p class="prose">Основанная в 1907 году, Одесская киностудия с момента своего создания стала центром кинопроизводства в Украине. На протяжении многих лет здесь работали некоторые из самых известных режиссеров и актеров региона, что значительно способствовало развитию украинского кинематографического искусства. Студия особенно известна своими роскошными декорациями и тщательным вниманием к деталям, что способствовало созданию запоминающихся сцен во многих знаменитых фильмах. Посетители могут исследовать историческое значение студии и получить представление о том, как она формировала украинское кино на протяжении десятилетий.</p></div>
+</section>
+<section class="place" id="odessa_opera_theatre">
+<div class="place-lead">
+<h3>Одеський театр опери та балету</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/odessa_opera_theatre.jpg" alt="Одеський театр опери та балету" width="1250" height="1280" style="height: 225px; max-height: 225px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/odessa_opera_theatre_b.jpg" alt="Одеський театр опери та балету — вид 2" width="330" height="225" style="height: 225px; max-height: 225px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Одесский театр оперы и балета — это потрясающий архитектурный шедевр, расположенный в самом сердце Одессы, известный своими изысканными представлениями и богатым культурным наследием. С его роскошными интерьерами и величественным фасадом, он служит важной площадкой для оперы, балета и классической музыки, привлекая как местных жителей, так и туристов. Посетители могут наслаждаться разнообразной программой выступлений на протяжении всего года, что делает его обязательным местом для посещения для любителей искусства. Театр был построен в неоренессансном стиле, с роскошным интерьером, украшенным фресками и скульптурами. Это один из старейших оперных театров Украины, вмещающий около 1,600 зрителей. Одесский театр оперы и балета был объявлен национальным культурным памятником Украины.</p>
+<p class="prose">Одесский театр оперы и балета был официально открыт 6 октября 1887 года и был спроектирован знаменитым архитектором Фердинандом Фелльнером и его партнером Германом Хеллером. Театр прошел несколько ремонтов и реставраций, особенно после повреждений, полученных во время Второй мировой войны. Он стал площадкой для множества известных спектаклей и артистов, укрепив свой статус культурной достопримечательности Украины. Культурно Одесский театр оперы и балета является краеугольным камнем художественной жизни города, демонстрируя сочетание украинского и международного таланта. Он играет жизненно важную роль в сохранении и продвижении исполнительских искусств, способствуя репутации Одессы как культурного центра. Театр также является символом богатого наследия города и неотъемлемой частью идентичности местного сообщества, принимая различные мероприятия и фестивали, которые отмечают искусство.</p></div>
+</section>
+<section class="place" id="odessa_shevchenko_park">
+<div class="place-lead">
+<h3>Парк Шевченко Одесса</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/odessa_shevchenko_park.jpg" alt="Парк Шевченко Одесса" width="1280" height="960" style="height: 247px; max-height: 247px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/odessa_shevchenko_park_b.jpg" alt="Парк Шевченко Одесса — вид 2" width="330" height="247" style="height: 247px; max-height: 247px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Парк Шевченко в Одессе — это зелёный городской оазис, который предлагает спокойное убежище от суеты городской жизни. Основанный в 19 веке, парк отличается красивыми прогулочными дорожками, яркими цветочными клумбами и разнообразными скульптурами, что делает его идеальным местом для отдыха и развлечений. Посетители могут наслаждаться историческими памятниками парка и культурными событиями на протяжении всего года. Основан в 1874 году и изначально назван в честь Тараса Шевченко. Включает в себя разнообразные скульптуры и памятники, посвященные культурным деятелям. В течение года здесь проходит множество культурных мероприятий и активностей.</p>
+<p class="prose">Парк Шевченко был основан в 1874 году и изначально назван в честь знаменитого украинского поэта Тараса Шевченко. Парк прошел несколько реконструкций и расширений на протяжении лет, став центральной частью общественной жизни Одессы и местом проведения различных культурных мероприятий. Культурно парк Шевченко имеет большое значение для жителей Одессы, служа местом встречи как для местных жителей, так и для туристов. Здесь проходят многочисленные мероприятия, включая концерты и художественные выставки, отражающие яркую художественную сцену города. Парк также является свидетельством приверженности города к сохранению зеленых зон на фоне городской застройки.</p></div>
+</section>
+<section class="place" id="odessa_lanzheron_beach">
+<div class="place-lead">
+<h3>Пляж Ланжерон</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<figure class="place-fig place-fig--hi-res"><img src="../images/odessa_lanzheron_beach.jpg" alt="Пляж Ланжерон" width="1280" height="960"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Пляж Ланжерон — популярное морское направление в Одессе, известное своими живописными видами и яркой атмосферой. Посетители могут наслаждаться загаром, купанием и разнообразными пляжными активностями. Пляж также окружён кафе и ресторанами, что делает его идеальным местом для отдыха и общения. Пляж Ланжерон расположен недалеко от центра Одессы, что делает его легко доступным. Пляж оборудован набережной с кафе, барами и рекреационными удобствами.</p>
+<p class="prose">Пляж Ланжерон является любимой частью Одессы с момента основания города в конце 18 века. Он был назван в честь русского адмирала, графа Григория Ланжерона, который сыграл значительную роль в развитии города. С течением времени пляж стал ключевой зоной отдыха как для местных жителей, так и для туристов. Культурно пляж Ланжерон занимает особое место в сердцах одесситов, служа центром отдыха и социального взаимодействия. Он отражает прибрежное наследие города и является местом, где проходят различные местные традиции и летние праздники. Пляж является неотъемлемой частью повседневной жизни сообщества, предлагая пространство для отдыха и связи с природой.</p></div>
+</section>
 <section class="place" id="odessa_potemkin_stairs">
+<div class="place-lead">
 <h3>Потемкинская лестница</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/odessa_potemkin_stairs.jpg" alt="Потемкинская лестница"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/odessa_potemkin_stairs.jpg" alt="Потемкинская лестница" width="1280" height="807" style="height: 210px; max-height: 210px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/odessa_potemkin_stairs_b.jpg" alt="Потемкинская лестница — вид 2" width="330" height="466" style="height: 210px; max-height: 210px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Потемкинская лестница — это знаковый символ Одессы, соединяющий порт города с верхней частью. Эта грандиозная лестница, состоящая из 192 ступеней, предлагает потрясающие виды на Черное море и служит популярным местом встречи как для местных жителей, так и для туристов. Ее уникальный дизайн создает оптическую иллюзию, заставляя лестницу казаться длиннее, чем она есть, что добавляет ей очарования и привлекательности. Лестница состоит из 192 ступеней, но кажется, что их 193 из-за оптической иллюзии, созданной её дизайном. Потемкинская лестница была вдохновлена Испанской лестницей в Риме и является одной из самых известных достопримечательностей Одессы.</p>
 <p class="prose">Построенные в период с 1837 по 1841 год, Потемкинские лестницы были спроектированы архитектором Франческо Бофо. Изначально они назывались «Большая лестница», а позже были переименованы в честь броненосца Потемкин, который был связан с революцией 1905 года. Лестницы стали свидетелями значительных исторических событий, включая протесты и празднования, что делает их центральной частью городского ландшафта Одессы. Потемкинская лестница имеет культурное значение как символ идентичности и стойкости Одессы. Она была изображена в различных произведениях искусства и литературы, отражая богатое наследие города. Лестница также является популярным местом для общественных собраний и мероприятий, что подчеркивает ее роль в повседневной жизни жителей города. Хотя она не имеет религиозного значения, ее величие и исторический контекст способствуют культурному нарративу Одессы.</p></div>
 </section>
 <section class="place" id="odessa_prymorsky_boulevard">
+<div class="place-lead">
 <h3>Приморский бульвар</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/odessa_prymorsky_boulevard.jpg" alt="Приморский бульвар"/></figure>
+<figure class="place-fig place-fig--hi-res"><img src="../images/odessa_prymorsky_boulevard.jpg" alt="Приморский бульвар" width="1280" height="927"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Приморский бульвар — это живописная набережная в Одессе, предлагающая потрясающие виды на Черное море и яркую архитектуру города. Устланный зелеными деревьями, историческими памятниками и очаровательными кафе, он служит популярным местом встреч как для местных жителей, так и для туристов. Этот бульвар не только живописное место, но и центр культурной и социальной активности, что делает его обязательным для посещения в Одессе. Приморский бульвар был официально основан в 1803 году. Бульвар включает в себя несколько известных достопримечательностей, включая знаменитую Потемкинскую лестницу и Памятник герцогу де Ришелье. Он служит местом проведения различных культурных мероприятий и фестивалей на протяжении всего года.</p>
 <p class="prose">Приморский бульвар был основан в начале 19 века и стал центральной частью городской архитектуры Одессы. Изначально названный Бульваром Черного моря, он стал свидетелем значительных событий в истории города, включая создание порта и развитие Одессы как ключевого культурного и экономического центра региона. Приморский бульвар имеет культурное значение как символ богатого наследия и художественного духа Одессы. Он часто ассоциируется с различными культурными событиями, фестивалями и повседневной жизнью в городе, отражая яркую атмосферу Одессы. Бульвар также является домом для нескольких памятников и скульптур, которые отмечают историю города и его художественные достижения.</p></div>
 </section>
+<section class="place" id="odessa_transfiguration_cathedral">
+<div class="place-lead">
+<h3>Собор Преображения Господня</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/odessa_transfiguration_cathedral.jpg" alt="Собор Преображения Господня" width="1280" height="853" style="height: 220px; max-height: 220px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/odessa_transfiguration_cathedral_b.jpg" alt="Собор Преображения Господня — вид 2" width="330" height="220" style="height: 220px; max-height: 220px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Кафедральный собор в Уэске, Испания. Собор Преображения, Чернигов, здание допомонгольской Руси. Собор Преображения, Днепропетровск. Собор Преображения в Одессе. Собор Преображения, Винница. Соединенные Штаты. Русский православный собор Преображения Господня в Нью-Йорке. Собор-усыпальница Преображения, кафедральный собор епископальной епархии Виргинии. Проверьте часы работы и информацию о билетах на официальных сайтах перед поездкой. Толпы достигают пика в выходные и праздничные дни.</p></div>
+</section>
 <section class="place" id="odessa_spaso_preobrazhensky">
+<div class="place-lead">
 <h3>Собор Спаса Преображения</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/odessa_spaso_preobrazhensky.jpg" alt="Собор Спаса Преображения"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/odessa_spaso_preobrazhensky.jpg" alt="Собор Спаса Преображения" width="1280" height="1214" style="height: 316px; max-height: 316px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/odessa_spaso_preobrazhensky_b.jpg" alt="Собор Спаса Преображения — вид 2" width="330" height="516" style="height: 316px; max-height: 316px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Собор Спаса Преображения в Одессе является потрясающим примером византийской архитектуры, известным своими впечатляющими куполами и сложным интерьером. Этот собор служит духовным центром для местной православной общины и является обязательным для посещения для тех, кто интересуется религиозным наследием города. Посетители могут полюбоваться его красивыми фресками и иконами, которые отражают богатые традиции восточного православия. Строительство началось в 1865 году и было завершено в 1881 году. Собор выполнен в византийском архитектурном стиле.</p>
 <p class="prose">Собор Спаса Преображения был основан в начале 19 века, строительство началось в 1865 году и завершилось в 1881 году. Спроектированный архитектором А. М. Колесниковым, он был построен для обслуживания растущего православного населения в Одессе и с тех пор претерпел различные реставрации, особенно после повреждений, полученных во время Второй мировой войны. Собор имеет значительное культурное и религиозное значение в Одессе, служа центром православного поклонения и общественных собраний. Он отражает архитектурное наследие города и является свидетельством стойких традиций восточного православия в регионе. Собор также символизирует стойкость, будучи восстановленным после периодов смятения, включая последствия войны.</p></div>
 </section>
-<section class="place" id="odessa_shah_palace">
-<h3>Дворец Шаха Одесса</h3>
+<section class="place" id="odessa_deribasovskaya">
+<div class="place-lead">
+<h3>Улица Дерибасовская</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/odessa_shah_palace.jpg" alt="Дворец Шаха Одесса"/></figure>
-<div class="place-desc"><p class="prose">Дворец Шаха, потрясающий архитектурный шедевр в Одессе, демонстрирует сочетание восточных и западных дизайнерских влияний. Этот исторический дворец с его сложными деталями и роскошными садами предлагает посетителям возможность заглянуть в роскошный образ жизни прошлого. Сегодня он служит культурной площадкой, принимая различные мероприятия и выставки. Перед поездкой проверьте часы работы и информацию о билетах на официальных сайтах. Толпы достигают пика по выходным и в праздничные дни.</p>
-<p class="prose">Построенный в конце 19 века, Дворец Шаха был спроектирован знаменитым архитектором А. М. К. Изначально он был построен для богатого купца и с тех пор стал свидетелем множества исторических событий, отражая изменения в социальной и экономической жизни Одессы. Культурно, Дворец Шаха является свидетельством богатого наследия Одессы, воплощая архитектурное разнообразие города. Он играет важную роль в местной арт-сцене, часто принимая выставки и культурные мероприятия, которые отмечают традиции и художественные выражения региона.</p></div>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res"><img src="../images/odessa_deribasovskaya.jpg" alt="Улица Дерибасовская" width="1280" height="1531" style="height: 220px; max-height: 220px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/odessa_deribasovskaya_b.jpg" alt="Улица Дерибасовская — вид 2" width="330" height="220" style="height: 220px; max-height: 220px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Улица Дерибасовская — это яркое сердце Одессы, известное своей живой атмосферой, очаровательной архитектурой и шумными кафе. Эта пешеходная улица является популярным местом как для местных жителей, так и для туристов, предлагая возможность заглянуть в богатую историю и культуру города. Посетители могут наслаждаться уличными выступлениями, покупать сувениры и пробовать местную кухню в этом знаковом городском пространстве. Улица Дерибасовская названа в честь Хосе де Рибаса, основателя Одессы. Улица была официально основана в начале 19 века. Это улица только для пешеходов, популярная для шопинга и ужинов.</p>
+<p class="prose">Улица Дерибасовская была основана в начале 19 века и названа в честь основателя города Хосе де Рибаса. Улица быстро стала центральным узлом торговли и общественной жизни в Одессе, отражая рост города как крупного порта и культурного центра региона. Здесь проходили ключевые события, включая различные общественные праздники и собрания, что подчеркивает её важность в историческом нарративе города. Культурно, улица Дерибасовская является символом яркой городской жизни Одессы, демонстрируя разнообразное наследие города через свою архитектуру и общественные пространства. Она стала местом для художественного самовыражения, с многочисленными галереями и выступлениями, способствующими развитию местной художественной сцены. Улица также играет важную роль в повседневной жизни, служа местом встречи и площадкой для различных культурных событий и фестивалей.</p></div>
 </section>
-<section class="place" id="odessa_shevchenko_park">
-<h3>Парк Шевченко Одесса</h3>
+<section class="place" id="odessa_french_boulevard">
+<div class="place-lead">
+<h3>Французский бульвар, Одесса</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/odessa_shevchenko_park.jpg" alt="Парк Шевченко Одесса"/></figure>
-<div class="place-desc"><p class="prose">Парк Шевченко в Одессе — это зелёный городской оазис, который предлагает спокойное убежище от суеты городской жизни. Основанный в 19 веке, парк отличается красивыми прогулочными дорожками, яркими цветочными клумбами и разнообразными скульптурами, что делает его идеальным местом для отдыха и развлечений. Посетители могут наслаждаться историческими памятниками парка и культурными событиями на протяжении всего года. Основан в 1874 году и изначально назван в честь Тараса Шевченко. Включает в себя разнообразные скульптуры и памятники, посвященные культурным деятелям. В течение года здесь проходит множество культурных мероприятий и активностей.</p>
-<p class="prose">Парк Шевченко был основан в 1874 году и изначально назван в честь знаменитого украинского поэта Тараса Шевченко. Парк прошел несколько реконструкций и расширений на протяжении лет, став центральной частью общественной жизни Одессы и местом проведения различных культурных мероприятий. Культурно парк Шевченко имеет большое значение для жителей Одессы, служа местом встречи как для местных жителей, так и для туристов. Здесь проходят многочисленные мероприятия, включая концерты и художественные выставки, отражающие яркую художественную сцену города. Парк также является свидетельством приверженности города к сохранению зеленых зон на фоне городской застройки.</p></div>
-</section>
-<section class="place" id="odessa_st_paul_cathedral">
-<h3>Лютеранский собор Святого Павла</h3>
-
-
-<figure class="place-fig"><img src="../images/odessa_st_paul_cathedral.jpg" alt="Лютеранский собор Святого Павла"/></figure>
-<div class="place-desc"><p class="prose">Лютеранский собор Святого Павла в Одессе является ярким примером неоготической архитектуры, известным своим впечатляющим шпилем и сложными витражами. Это действующее место поклонения служит не только местной лютеранской общине, но и привлекает посетителей своей исторической и культурной значимостью. Спокойный интерьер собора и красивые окрестности делают его мирным убежищем в шумном городе. Основан в 1841 году для обслуживания лютеранской общины в Одессе. Особенности неоготического архитектурного стиля с выдающимся шпилем. Провел реконструкцию после повреждений, полученных во время Второй мировой войны.</p>
-<p class="prose">Лютеранский собор Святого Павла был основан в 1841 году, отражая растущее присутствие немецкой общины в Одессе в течение 19 века. Собор был построен для удовлетворения духовных нужд лютеранских иммигрантов и за годы своего существования претерпел различные реконструкции, особенно после повреждений, полученных во время Второй мировой войны. Собор имеет культурное значение как символ разнообразного наследия Одессы, города, известного своим многонациональным населением. Он играет важную роль в повседневной жизни своих прихожан, проводя регулярные службы и общественные мероприятия. Кроме того, архитектурный стиль собора вносит вклад в исторический ландшафт города, делая его объектом интереса как для местных жителей, так и для туристов.</p></div>
-</section>
-<section class="place" id="odessa_transfiguration_cathedral">
-<h3>Собор Преображения Господня</h3>
-
-
-<figure class="place-fig"><img src="../images/odessa_transfiguration_cathedral.jpg" alt="Собор Преображения Господня"/></figure>
-<div class="place-desc"><p class="prose">Кафедральный собор в Уэске, Испания. Собор Преображения, Чернигов, здание допомонгольской Руси. Собор Преображения, Днепропетровск. Собор Преображения в Одессе. Собор Преображения, Винница. Соединенные Штаты. Русский православный собор Преображения Господня в Нью-Йорке. Собор-усыпальница Преображения, кафедральный собор епископальной епархии Виргинии. Проверьте часы работы и информацию о билетах на официальных сайтах перед поездкой. Толпы достигают пика в выходные и праздничные дни.</p></div>
-</section>
-<section class="place" id="odessa_vorontsov_palace">
-<h3>Воронцовский дворец</h3>
-
-<p class="place-meta">Период: 1834–1848</p>
-<figure class="place-fig"><img src="../images/odessa_vorontsov_palace.jpg" alt="Воронцовский дворец"/></figure>
-<div class="place-desc"><p class="prose">Расположенный высоко над побережьем Черного моря, Воронцовский дворец является захватывающим примером неоклассической архитектуры. Этот роскошный особняк был построен для князя Михаила Воронцова, генерал-губернатора Крыма, в конце 19 века. Дворец гордится обширными садами с экзотическими растениями и фонтанами. В нем расположен музей, посвященный местному искусству и историческим артефактам. Его расположение предлагает панорамные виды, которые делают его одним из самых фотографируемых мест в Украине. Воронцовский дворец внесен в список объектов Всемирного наследия ЮНЕСКО с 2014 года. Сегодня он служит местом для концертов, выставок и специальных мероприятий.</p>
-<p class="prose">Построенный между 1834 и 1848 годами итальянским архитектором Франческо Боффо, дворец служил как летней резиденцией, так и культурным центром. Он демонстрирует изысканные интерьеры, украшенные мраморными полами, фресками и сложными декорациями, вдохновленными древнегреческими и древнеримскими мотивами. Посетители приезжают, чтобы насладиться его грандиозным интерьером и потрясающими видами на одесский порт и море вдали.</p></div>
-</section>
-<section class="place" id="odessa_pdfband_2_3bc3706d">
-<h3>Одесса. Арабский центр</h3>
-
-
-<figure class="place-fig"><img src="../images/odessa_pdfband_2_3bc3706d.jpg" alt="Одесса. Арабский центр"/></figure>
+<figure class="place-fig place-fig--hi-res"><img src="../images/odessa_french_boulevard.jpg" alt="Французский бульвар, Одесса" width="1280" height="857"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Французский бульвар — живописная авеню в Одессе, известная своими потрясающими видами на Черное море и зелеными насаждениями. Этот очаровательный бульвар окружен элегантными виллами, кафе и культурными достопримечательностями, что делает его популярным местом как для местных жителей, так и для туристов. Посетители могут наслаждаться неспешными прогулками, впитывая яркую атмосферу этого исторического района. Французский бульвар был разработан в начале 1800-х годов. Бульвар известен своими живописными видами на Черное море. Он включает в себя смесь архитектурных стилей, включая неоклассицизм и ар-нуво.</p>
+<p class="prose">Французский бульвар был основан в начале 19 века, отражая влияние французской архитектуры и культуры в Одессе. Он стал модной прогулочной зоной для городской элиты, демонстрируя рост и развитие города в этот период. Бульвар стал свидетелем различных исторических событий, включая социальные собрания и культурные праздники. Культурно Французский бульвар занимает особое место в наследии Одессы, символизируя космополитический дух города и его связи с европейским искусством и архитектурой. Он служит центром повседневной жизни, где местные жители занимаются досугом и культурными мероприятиями. Бульвар также ассоциируется с различными традициями и фестивалями, которые отмечают разнообразный культурный ландшафт города.</p></div>
 </section>
 </body>
 </html>

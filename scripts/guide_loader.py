@@ -20,7 +20,7 @@ GUIDES = [
     "monasteries", "places_of_worship", "parks", "museums", "palaces",
     "buildings", "sculptures", "places", "squares", "metro", "theaters",
     "viewpoints", "bridges", "markets", "libraries", "railway_stations",
-    "cemeteries", "landmarks",
+    "cemeteries", "landmarks", "cafes", "osobnjaki",
 ]
 
 SUBDIR_TO_GUIDE = {
@@ -42,6 +42,8 @@ SUBDIR_TO_GUIDE = {
     "moscow_railway_stations": "railway_stations",
     "moscow_cemeteries": "cemeteries",
     "moscow_landmarks": "landmarks",
+    "moscow_cafes": "cafes",
+    "moscow_osobnjaki": "osobnjaki",
 }
 
 GUIDE_TO_SUBDIR = {v: k for k, v in SUBDIR_TO_GUIDE.items()}
@@ -108,6 +110,9 @@ def load_places(guide: str) -> list[dict[str, Any]]:
     if guide == "cafes":
         from moscow.data.cafes import CAFES
         return CAFES
+    if guide == "osobnjaki":
+        from moscow.data.osobnjaki import OSOBNJAKI
+        return OSOBNJAKI
     raise ValueError("Unknown guide: {}".format(guide))
 
 
@@ -177,6 +182,11 @@ def load_guide_with_downloads(guide: str) -> tuple[list[dict[str, Any]], dict]:
     if guide == "cafes":
         from moscow.data.cafe_image_urls import CAFE_IMAGE_DOWNLOADS
         return places, CAFE_IMAGE_DOWNLOADS
+    if guide == "osobnjaki":
+        from moscow.data.osobnjaki_image_urls import (
+            OSOBNJAKI_IMAGE_DOWNLOADS,
+        )
+        return places, OSOBNJAKI_IMAGE_DOWNLOADS
     raise ValueError("Unknown guide: {}".format(guide))
 
 
@@ -189,6 +199,7 @@ for _g in GUIDES:
     )
 _GUIDE_STORIES_VAR["places_of_worship"] = "PLACES_OF_WORSHIP_STORIES"
 _GUIDE_STORIES_VAR["railway_stations"] = "RAILWAY_STATION_STORIES"
+_GUIDE_STORIES_VAR["cafes"] = "CAFE_STORIES"
 
 
 def load_stories(guide: str) -> dict[str, str]:

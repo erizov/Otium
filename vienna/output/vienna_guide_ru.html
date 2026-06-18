@@ -13,7 +13,7 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
 .otium-logo { font-family: 'Vollkorn', serif; font-size: 2.15rem;
   font-weight: 600; letter-spacing: 0.18em; margin-bottom: 0.85rem; }
 .otiump { margin: 0.42rem 0; line-height: 1.42; text-align: justify;
-  max-width: 38rem; font-size: 0.95rem; }
+  font-size: 0.95rem; }
 .guide-title { page-break-after: auto; margin-bottom: 0.55rem;
   page-break-inside: avoid; }
 .historical-reference { margin: 0.75rem 0 1.15rem;
@@ -63,22 +63,103 @@ ol.trip-stops a:hover { text-decoration: underline; }
 .heraldry-univ-caption { font-size: 0.52rem; line-height: 1.18;
   margin: 0.12rem 0 0; padding: 0 0.06rem; color: #252525;
   text-align: center; font-weight: 500; }
-.heraldry-motto { text-align: center; max-width: 18rem; margin: 0.18rem auto;
+.heraldry-motto { text-align: center; margin: 0.18rem auto;
   width: 100%; }
 .motto-line { font-family: 'Vollkorn', serif; font-size: 1rem;
   margin: 0; color: #333; line-height: 1.35; }
 .guide-title h1.guide-title-main { font-family: 'Vollkorn', serif;
   font-size: 2.35rem; margin-bottom: 0.5rem; font-weight: 600; }
 .lead { color: #444; font-size: 1.05rem; }
-.guide-toc { margin: 0.85rem 0 1.15rem; page-break-inside: avoid; }
-.guide-toc h2 { font-family: 'Vollkorn', serif; font-size: 1.28rem;
-  font-weight: 600; margin: 0.4rem 0 0.55rem; }
+
+.guide-toc { page-break-before: always; break-before: page;
+  page-break-after: always; break-after: page;
+  margin: 0; padding: 0.2rem 0 0.45rem; page-break-inside: auto; }
+.guide-toc h2 { font-family: 'Vollkorn', serif;
+  font-size: 1.28rem; font-weight: 600; margin: 0.4rem 0 0.55rem; }
 .guide-toc ol { margin: 0.35rem 0 0.65rem 1.25rem; padding: 0;
   columns: 2; column-gap: 1.5rem; }
 .guide-toc li { margin: 0.18rem 0; line-height: 1.35;
   font-size: 0.88rem; break-inside: avoid; }
-.guide-toc a { color: #1a5276; text-decoration: none; }
+.guide-toc a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.guide-toc a:hover { color: #0d3d56; }
 .guide-toc li.toc-item--sub { font-size: 0.82rem; margin-left: 0.35rem; }
+.toc-back { font-size: 0.78rem; margin: 0 0 0.35rem; text-align: right; }
+.toc-back a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.toc-back a:hover { color: #0d3d56; }
+.place, .historical-reference, .guide-primer, .guide-trip-plans {
+  scroll-margin-top: 1.25rem; }
+.historical-reference h2, .guide-primer h2, .guide-trip-plans h2,
+.chapter-head h2, .place-lead h3 { position: relative; }
+.guide-toc + .place, .guide-toc + .chapter-head {
+  page-break-before: avoid; break-before: avoid-page; }
+.place-lead { page-break-inside: avoid; break-inside: avoid-page;
+  page-break-after: auto; }
+.place-lead > h3 { page-break-after: avoid; break-after: avoid-page; }
+.place-lead > .place-meta { page-break-after: avoid; break-after: avoid-page; }
+
+.place-fig { page-break-inside: avoid; break-inside: avoid-page;
+  margin: 0.5rem 0 1rem; }
+.place-fig img {
+  page-break-inside: avoid; break-inside: avoid-page;
+  max-height: 48vh; width: auto; max-width: 100%;
+  object-fit: contain; margin-left: auto; margin-right: auto; }
+.place-fig--hi-res img { max-height: 52vh; }
+.place-fig--lo-res img { max-height: 30vh; }
+.place-pdf-fig-row {
+  display: flex; flex-direction: row; flex-wrap: wrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.45rem 0.55rem; margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row .place-fig {
+  flex: 1 1 30%; margin: 0; min-width: 26%; max-width: 100%; }
+.place-pdf-fig-row .place-fig img {
+  width: auto; max-width: 100%; height: auto; max-height: 44vh;
+  object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--pair {
+  flex-wrap: nowrap; justify-content: space-between;
+  align-items: flex-end; gap: 0.5rem 0.65rem; }
+.place-pdf-fig-row--pair .place-fig {
+  flex: 1 1 47%; min-width: 0; max-width: 50%;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--pair .place-fig img {
+  max-height: 44vh; object-fit: contain; }
+.place-pdf-fig-row--pair .place-fig--hi-res img { max-height: 52vh; }
+.place-pdf-fig-row--pair .place-fig--lo-res img { max-height: 26vh; }
+.place-pdf-fig-row--pair .place-fig--row-sized img,
+.place-pdf-fig-row--triple .place-fig--row-sized img,
+.place-pdf-fig-row--many .place-fig--row-sized img {
+  width: auto; max-width: 100%; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row .place-fig--row-sized.place-fig--hi-res img,
+.place-pdf-fig-row .place-fig--row-sized.place-fig--lo-res img {
+  max-height: unset; }
+.place-pdf-fig-rows-stack {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple {
+  display: flex; flex-direction: row; flex-wrap: nowrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.4rem 0.48rem; margin: 0;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--triple .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--triple .place-fig--hi-res img { max-height: 42vh; }
+.place-pdf-fig-row--triple .place-fig--lo-res img { max-height: 18vh; }
+.place-pdf-fig-row--many {
+  flex-wrap: nowrap; justify-content: center; align-items: flex-end;
+  gap: 0.35rem 0.42rem; }
+.place-pdf-fig-row--many .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--many .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+
+
 .place { margin-bottom: 2.2rem; page-break-inside: auto; }
 h3 { font-family: 'Vollkorn', serif; font-size: 1.22rem; margin: 1.2rem 0 0.35rem;
   font-weight: 600; }
@@ -90,7 +171,6 @@ h4 { font-family: 'Vollkorn', serif; font-size: 0.95rem; text-transform: upperca
   color: #555; font-size: 0.95rem; margin: 0 0 0.5rem; font-style: italic; }
 .place-meta { font-size: 0.92rem; color: #353535; margin: 0 0 0.75rem;
   line-height: 1.4; }
-.place-fig { margin: 0.5rem 0 1rem; }
 img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
 .prose, .place-desc p { margin: 0.45rem 0; line-height: 1.5;
   text-align: justify; }
@@ -109,12 +189,15 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <div class="heraldry-strip heraldry-official">
 <figure class="heraldry-fig heraldry-coat-book" title="City emblem"><img src="../images/guide_coat_of_arms.svg" alt="City emblem"/></figure>
 <figure class="heraldry-fig heraldry-coat-book" title="Flag"><img src="../images/guide_flag.svg" alt="Flag"/></figure>
-</div></div><h1 class="guide-title-main">Vienna</h1><p class="lead">Путеводитель. Объектов в этом выпуске: 33.</p></header>
+</div></div><h1 class="guide-title-main">Vienna</h1><p class="lead">Путеводитель. Объектов в этом выпуске: 32.</p></header>
+<nav class="guide-toc" id="guide-toc" aria-label="Содержание"><h2>Содержание</h2><ol><li class="toc-item"><a href="#guide-historical">Историческая справка</a></li><li class="toc-item"><a href="#guide-trips">Маршруты</a></li><li class="toc-item"><a href="#vienna_albertina">Vienna Albertina</a></li><li class="toc-item"><a href="#vienna_belvedere_vienna">Vienna Belvedere Vienna</a></li><li class="toc-item"><a href="#vienna_hofburg_vienna">Vienna Hofburg Vienna</a></li><li class="toc-item"><a href="#vienna_hundertwasserhaus">Vienna Hundertwasserhaus</a></li><li class="toc-item"><a href="#vienna_karlskirche">Vienna Karlskirche</a></li><li class="toc-item"><a href="#vienna_naturhistorisches_museum">Vienna Naturhistorisches Museum</a></li><li class="toc-item"><a href="#vienna_prater_riesenrad">Vienna Prater Riesenrad</a></li><li class="toc-item"><a href="#vienna_schoenbrunn_palace">Vienna Schoenbrunn Palace</a></li><li class="toc-item"><a href="#vienna_spanish_riding_school">Vienna Spanish Riding School</a></li><li class="toc-item"><a href="#vienna_state_opera">Vienna State Opera</a></li><li class="toc-item"><a href="#vienna_stephansdom">Vienna Stephansdom</a></li><li class="toc-item"><a href="#vienna_austrian_parliament">Австрийский парламент</a></li><li class="toc-item"><a href="#vienna_ankeruhr_vienna">Анкеруhr</a></li><li class="toc-item"><a href="#vienna_rathaus_vienna">Венская ратуша</a></li><li class="toc-item"><a href="#vienna_technisches_museum_wien">Венский музей науки и техники</a></li><li class="toc-item"><a href="#vienna_volksgarten_vienna">Вольксгартен</a></li><li class="toc-item"><a href="#vienna_stadtpark_vienna">Городской парк</a></li><li class="toc-item"><a href="#vienna_haus_der_musik_wien">Дом музыки Вена</a></li><li class="toc-item"><a href="#vienna_donauturm">Дунайская башня</a></li><li class="toc-item"><a href="#vienna_tiergarten_schoenbrunn">Зоопарк Шёнбрунн</a></li><li class="toc-item"><a href="#vienna_freud_memorial">Мемориал Зигмунда Фрейда</a></li><li class="toc-item"><a href="#vienna_judenplatz_holocaust_memorial">Мемориал Холокоста на площади Юденплатц</a></li><li class="toc-item"><a href="#vienna_mozarthaus_vienna">Моцартхаус Вена</a></li><li class="toc-item"><a href="#vienna_kunsthistorisches_museum">Музей истории искусств</a></li><li class="toc-item"><a href="#vienna_museumsquartier">Музейный квартал</a></li><li class="toc-item"><a href="#vienna_naschmarkt">Насчмарт</a></li><li class="toc-item"><a href="#vienna_urania_vienna">Обсерватория Урании</a></li><li class="toc-item"><a href="#vienna_maria_theresien_denkmal">Памятник Марии Терезии</a></li><li class="toc-item"><a href="#vienna_prater_hauptallee">Пратер Хаупталлее</a></li><li class="toc-item"><a href="#vienna_spanische_hofreitschule_facade">Фасад Испанской школы верховой езды</a></li><li class="toc-item"><a href="#vienna_ruprechtskirche_vienna">Церковь Святого Руперта</a></li><li class="toc-item"><a href="#vienna_stephansplatz">Штефансплатц</a></li></ol></nav>
 <section class="historical-reference" id="guide-historical" aria-label="Историческая справка"><h2>Историческая справка</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 <p class="prose">Вена — столица Австрии, резиденция Габсбургов и центр классической музыки.</p>
 <p class="prose">Римский Виндобона, средневековый герцогский двор, имперский город XIX века с Рингштрассе и сецессионом. Опера, кофейни и музеи делают Вену узлом образования и международных организаций.</p>
 <p class="prose">Распад монархии сделал Вену столицей маленькой республики; аншлюс и война оставили травмы. Нейтралитет после 1955 года и вступление в ЕС укрепили благосостояние; Вена — город музыки, ООН и высокого качества жизни.</p></section>
 <section class="guide-trip-plans" id="guide-trips" aria-label="Маршруты"><h2>Маршруты</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 <article class="trip-plan" id="trip-1d"><h3>Один день</h3>
 <p class="prose">Компактный маршрут по главным точкам путеводителя с минимальным возвратом назад пешком.</p>
 <ol class="trip-stops"><li><a href="#vienna_albertina">Vienna Albertina</a> (~75мин)</li>
@@ -144,268 +227,444 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <li><a href="#vienna_karlskirche">Vienna Karlskirche</a> (~75мин)</li>
 <li><a href="#vienna_kunsthistorisches_museum">Музей истории искусств</a> (~75мин)</li>
 <li><a href="#vienna_maria_theresien_denkmal">Памятник Марии Терезии</a> (~75мин)</li></ol></article></section>
-<nav class="guide-toc" aria-label="Содержание"><h2>Содержание</h2><ol><li class="toc-item"><a href="#guide-historical">Историческая справка</a></li><li class="toc-item"><a href="#guide-trips">Маршруты</a></li><li class="toc-item"><a href="#vienna_albertina">Vienna Albertina</a></li><li class="toc-item"><a href="#vienna_ankeruhr_vienna">Анкеруhr</a></li><li class="toc-item"><a href="#vienna_austrian_parliament">Австрийский парламент</a></li><li class="toc-item"><a href="#vienna_belvedere_vienna">Vienna Belvedere Vienna</a></li><li class="toc-item"><a href="#vienna_ruprechtskirche_vienna">Церковь Святого Руперта</a></li><li class="toc-item"><a href="#vienna_donauturm">Дунайская башня</a></li><li class="toc-item"><a href="#vienna_hofburg_vienna">Vienna Hofburg Vienna</a></li><li class="toc-item"><a href="#vienna_haus_der_musik_wien">Дом музыки Вена</a></li><li class="toc-item"><a href="#vienna_hundertwasserhaus">Vienna Hundertwasserhaus</a></li><li class="toc-item"><a href="#vienna_pdfband_2_025b2e6e">Iran nuclear negotiation team at Islamisches Zentrum Imam Ali (04)</a></li><li class="toc-item"><a href="#vienna_judenplatz_holocaust_memorial">Мемориал Холокоста на площади Юденплатц</a></li><li class="toc-item"><a href="#vienna_karlskirche">Vienna Karlskirche</a></li><li class="toc-item"><a href="#vienna_kunsthistorisches_museum">Музей истории искусств</a></li><li class="toc-item"><a href="#vienna_maria_theresien_denkmal">Памятник Марии Терезии</a></li><li class="toc-item"><a href="#vienna_mozarthaus_vienna">Моцартхаус Вена</a></li><li class="toc-item"><a href="#vienna_museumsquartier">Музейный квартал</a></li><li class="toc-item"><a href="#vienna_naschmarkt">Насчмарт</a></li><li class="toc-item"><a href="#vienna_naturhistorisches_museum">Vienna Naturhistorisches Museum</a></li><li class="toc-item"><a href="#vienna_prater_hauptallee">Пратер Хаупталлее</a></li><li class="toc-item"><a href="#vienna_schoenbrunn_palace">Vienna Schoenbrunn Palace</a></li><li class="toc-item"><a href="#vienna_tiergarten_schoenbrunn">Зоопарк Шёнбрунн</a></li><li class="toc-item"><a href="#vienna_freud_memorial">Мемориал Зигмунда Фрейда</a></li><li class="toc-item"><a href="#vienna_spanish_riding_school">Vienna Spanish Riding School</a></li><li class="toc-item"><a href="#vienna_spanische_hofreitschule_facade">Фасад Испанской школы верховой езды</a></li><li class="toc-item"><a href="#vienna_stephansdom">Vienna Stephansdom</a></li><li class="toc-item"><a href="#vienna_stadtpark_vienna">Городской парк</a></li><li class="toc-item"><a href="#vienna_stephansplatz">Штефансплатц</a></li><li class="toc-item"><a href="#vienna_urania_vienna">Обсерватория Урании</a></li><li class="toc-item"><a href="#vienna_rathaus_vienna">Венская ратуша</a></li><li class="toc-item"><a href="#vienna_technisches_museum_wien">Венский музей науки и техники</a></li><li class="toc-item"><a href="#vienna_state_opera">Vienna State Opera</a></li><li class="toc-item"><a href="#vienna_volksgarten_vienna">Вольксгартен</a></li><li class="toc-item"><a href="#vienna_prater_riesenrad">Vienna Prater Riesenrad</a></li></ol></nav>
 <section class="place" id="vienna_albertina">
+<div class="place-lead">
 <h3>Vienna Albertina</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1776</p>
-<figure class="place-fig"><img src="../images/vienna_albertina.jpg" alt="Vienna Albertina"/></figure>
+<p class="place-meta">Адрес: Albertinaplatz 1, 1010 Wien | Период: 1776</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vienna_albertina.jpg" alt="Vienna Albertina" width="1280" height="960" style="height: 337px; max-height: 337px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vienna_albertina_b.jpg" alt="Vienna Albertina — вид 2" width="330" height="241" style="height: 337px; max-height: 337px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Коллекция музея включает около миллиона графических работ и гравюр различных эпох и стилей. В музее представлены работы известных художников эпохи Возрождения, включая Леонардо да Винчи, Рафаэля и Дюрера. В залах музея расположены знаменитые портреты императоров династии Габсбургов. Музей расположен рядом с Венской оперой, откуда открывается живописная панорама города. Ежегодно музей организует выставки современного искусства, привлекающие внимание ценителей живописи и графики.</p>
 <p class="prose">Альбертина названа в честь герцога Альбера Саксен-Тешенского, основавшего коллекцию произведений искусства в 1776 году. Со временем музей расширился и стал доступен широкой публике. Сегодня Альбертина является крупнейшим музеем графики и печатной продукции в мире. Альбертина — уникальное место, соединяющее коллекции старинных императорских апартаментов и современное искусство, позволяя посетителям погрузиться в историю австрийской культуры.</p></div>
 </section>
-<section class="place" id="vienna_ankeruhr_vienna">
-<h3>Анкеруhr</h3>
-
-<p class="place-meta">Период: 1844</p>
-<figure class="place-fig"><img src="../images/vienna_ankeruhr_vienna.jpg" alt="Анкеруhr"/></figure>
-<div class="place-desc"><p class="prose">Анкеруhr — это очаровательные исторические часы, расположенные на Ратхаусплац в старом городе Вены. С начала 19 века они радуют посетителей своим причудливым очарованием и сложным дизайном. Построено мастером часового дела Иоганном Шрёттером в 1844 году. Оснащен механическим якорным спуском, который обеспечивает точность хода. Работает без батарей и электричества, полагаясь исключительно на силу тяжести и шестерни. Отображает как часы, так и минуты, а также небольшой календарь, указывающий день недели. Окруженный яркой барочной архитектурой, это живописное место идеально подходит для фотографии.</p>
-<p class="prose">Построенные в 1844 году, Анкеруhr изначально были установлены для того, чтобы отмечать время для местных жителей и путешественников. С течением лет они стали любимой достопримечательностью, привлекая туристов и местных жителей своим уникальным механизмом и тщательной отделкой. Посещение Анкеруhr дает возможность заглянуть в богатое культурное наследие Вены и предоставляет идеальную возможность оценить традиционное австрийское ремесло.</p></div>
-</section>
-<section class="place" id="vienna_austrian_parliament">
-<h3>Австрийский парламент</h3>
-
-<p class="place-meta">Период: 1874–1904</p>
-<figure class="place-fig"><img src="../images/vienna_austrian_parliament.jpg" alt="Австрийский парламент"/></figure>
-<div class="place-desc"><p class="prose">Австрийское здание парламента — это величественная неоготическая структура, расположенная на Рингштрассе в Вене, в пределах Старого города. Оно было построено в период с 1874 по 1904 год для размещения законодательной ветви правительства Австро-Венгрии. Строительство началось в 1874 году и продолжалось до 1904 года. В нем находятся две палаты: Палата представителей и Федеральный совет. Здание украшено сложными каменными резьбами, изображающими исторические фигуры и сцены из австрийской истории. Его интерьер включает роскошно оформленные залы и комнаты, используемые для официальных заседаний и церемоний. Башня предлагает панорамные виды на город.</p>
-<p class="prose">Здание парламента, спроектированное архитекторами Карлом фон Хазенауэром и Теофилом Хансеном, отражает грандиозные амбиции венской архитектуры конца девятнадцатого века. Завершенное поэтапно в течение нескольких десятилетий, оно стало одним из самых впечатляющих примеров неоготического дизайна в Европе. Его высокие шпили и сложные фасады делают его символом как императорского величия, так и демократического управления. Посещение Австрийского парламента позволяет посетителям увидеть место, где принимались ключевые решения, влияющие на регион, в его расцвете как части Австро-Венгерской империи.</p></div>
-</section>
 <section class="place" id="vienna_belvedere_vienna">
+<div class="place-lead">
 <h3>Vienna Belvedere Vienna</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1714–1723</p>
-<figure class="place-fig"><img src="../images/vienna_belvedere_vienna.jpg" alt="Vienna Belvedere Vienna"/></figure>
+<p class="place-meta">Адрес: Prinz-Eugen-Straße 27, 1030 Wien | Период: 1714–1723</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vienna_belvedere_vienna.jpg" alt="Vienna Belvedere Vienna" width="1280" height="1357" style="height: 203px; max-height: 203px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vienna_belvedere_vienna_b.jpg" alt="Vienna Belvedere Vienna — вид 2" width="330" height="145" style="height: 203px; max-height: 203px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Комплекс включает Верхний и Нижний дворцы, соединённые регулярными садами. В Верхнем дворце экспонируется картина Густава Климта «Поцелуй». Нижний дворец служит выставочным пространством современного искусства. Архитектура комплекса сочетает черты позднего итальянского и французского барокко. Сады дворца являются частью охраняемого культурного наследия ЮНЕСКО.</p>
 <p class="prose">Знаменитый венский дворец Бельведер был построен в период с 1714 по 1723 годы по заказу принца Евгения Савойского как загородная резиденция и садово-парковый ансамбль. Архитектурный комплекс сочетает элементы барокко и является выдающимся образцом стиля эпохи. Здесь расположены Верхний и Нижний дворцы, соединенные каскадом регулярных садов. Бельведер представляет собой важный культурный объект Австрии и один из главных символов венской архитектуры барокко. В Верхнем дворце находится знаменитое полотно Густава Климта «Поцелуй», а также крупнейшие коллекции австрийского искусства.</p></div>
 </section>
-<section class="place" id="vienna_ruprechtskirche_vienna">
-<h3>Церковь Святого Руперта</h3>
-
-<p class="place-meta">Период: 1746–1758</p>
-<figure class="place-fig"><img src="../images/vienna_ruprechtskirche_vienna.jpg" alt="Церковь Святого Руперта"/></figure>
-<div class="place-desc"><p class="prose">Церковь Святого Руперта — барочная жемчужина, расположенная на окраине внутреннего города Вены, известная своим ярким белым фасадом и сложным внутренним убранством. Здесь находится гробница императора Фердинанда III, который правил во время Тридцатилетней войны. Его интерьер украшен сложными фресками, написанными Джованни Баттистой Тьеполо, одним из самых известных художников Европы того времени. Алтарь содержит скульптуры Франца Антона Маульбертша, известного своими работами в мраморе и бронзе. Орган был построен знаменитым венским мастером инструментов Игназом Тобиасом Шрайбером. Рядом с церковью расположено историческое аббатство Святого Руперта, которое является местом паломничества с средневековых времён.</p>
-<p class="prose">Построенная между 1746 и 1758 годами по приказу императрицы Марии Терезии, церковь была спроектирована архитектором Иосифом Эмануэлем Фишером фон Эрлахом, чтобы стать центром религиозной жизни в северном районе города. Она украшена элегантным куполом и классическими колоннами, демонстрируя архитектурный стиль позднего рококо с влиянием итальянского барокко. Посетители приходят сюда, чтобы восхититься изысканным барочным искусством и ощутить спокойную атмосферу в его высоком нефе.</p></div>
-</section>
-<section class="place" id="vienna_donauturm">
-<h3>Дунайская башня</h3>
-
-<p class="place-meta">Период: 2003–2006</p>
-<figure class="place-fig"><img src="../images/vienna_donauturm.jpg" alt="Дунайская башня"/></figure>
-<div class="place-desc"><p class="prose">Расположенная на окраине центра Вены, Башня Дуная предлагает панорамные виды на реку Дунай и окружающие пригороды. Ее современный дизайн и стеклянный фасад делают ее ярким дополнением к горизонту города. Башня высотой 94 метра является одним из самых высоких зданий в Вене. В нем расположены квартиры, офисы и торговые площади, удовлетворяющие различные потребности сообщества. Его прозрачный стеклянный фасад позволяет естественному свету заполнять внутренние пространства, снижая потребление энергии. Гости могут наслаждаться напитками и закусками на смотровой площадке, расположенной на верхнем этаже. Строительство началось в 2003 году и заняло три года.</p>
-<p class="prose">Завершенная в 2006 году, Башня Дуная была спроектирована австрийским архитектором Карлом Шванцером в рамках более крупного проекта застройки вдоль Дунайского канала. Она выполняет как жилые, так и коммерческие функции, сочетая современную архитектуру с устойчивыми характеристиками, такими как солнечные панели и энергоэффективное освещение. Посетители приезжают сюда ради захватывающих видов на город и реку, предлагая уникальную перспективу, которую нельзя испытать нигде в Вене.</p></div>
-</section>
 <section class="place" id="vienna_hofburg_vienna">
+<div class="place-lead">
 <h3>Vienna Hofburg Vienna</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Стиль: Кунстхисторицизм (историцизм)</p>
-<figure class="place-fig"><img src="../images/vienna_hofburg_vienna.jpg" alt="Vienna Hofburg Vienna"/></figure>
+<p class="place-meta">Адрес: Michaelerkuppel, 1010 Wien | Стиль: Кунстхисторицизм (историцизм)</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vienna_hofburg_vienna.jpg" alt="Vienna Hofburg Vienna" width="1280" height="395" style="height: 142px; max-height: 142px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vienna_hofburg_vienna_b.jpg" alt="Vienna Hofburg Vienna — вид 2" width="330" height="435" style="height: 142px; max-height: 142px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Дворец служил резиденцией австрийских монархов на протяжении нескольких династий. Здесь расположена Испанская школа верховой езды, основанная еще в XVI веке. Комплекс включает несколько храмов и библиотек, являющихся важными культурными объектами города. Собор Святого Стефана, расположенный рядом с Хофбургом, символизирует величие и значимость комплекса. На территории дворца проходят официальные мероприятия и церемонии государственного значения.</p>
 <p class="prose">Хофбург возник в XIII веке как средневековый замок, постепенно расширялся и перестраивался на протяжении столетий, превратившись в огромный дворцовый комплекс, ставший центром власти династии Габсбургов. Сегодня здесь расположены президентские офисы и многочисленные музеи, включая знаменитую Испанскую школу верховой езды. Хофбург является географическим и символическим сердцем исторической Вены, местом сосредоточения власти австрийских императоров на протяжении веков.</p></div>
 </section>
-<section class="place" id="vienna_haus_der_musik_wien">
-<h3>Дом музыки Вена</h3>
-
-<p class="place-meta">Период: 2001</p>
-<figure class="place-fig"><img src="../images/vienna_haus_der_musik_wien.jpg" alt="Дом музыки Вена"/></figure>
-<div class="place-desc"><p class="prose">Дом музыки в Вене — это уникальный музей, посвященный искусству и науке музыки. Расположенный в самом сердце города, он предлагает интерактивные экспозиции, которые исследуют историю, теорию и технологии, стоящие за музыкальными инструментами и звуком. Он включает более 400 музыкальных инструментов со всего мира. Интерактивные выставки позволяют посетителям экспериментировать со звуком и музыкальным производством. Музей располагает коллекцией винтажных синтезаторов и электронного оборудования. Гости могут узнать о физике звука и его связи с акустикой. Регулярные концерты и мастер-классы проводятся в течение всего года.</p>
-<p class="prose">Открытый в 2001 году, Дом музыки в Вене был спроектирован архитектором Хеленой Бехтольд в рамках усилий по культурной ревитализации города. Он демонстрирует современные установки и предлагает посетителям интерактивные впечатления, делая его как образовательным, так и развлекательным. Посещение Дома Музыки позволяет гостям узнать, как создается, исполняется и воспринимается музыка через инновационные экспозиции и демонстрации.</p></div>
-</section>
 <section class="place" id="vienna_hundertwasserhaus">
+<div class="place-lead">
 <h3>Vienna Hundertwasserhaus</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Стиль: Органический модернизм | Период: 1986</p>
-<figure class="place-fig"><img src="../images/vienna_hundertwasserhaus.jpg" alt="Vienna Hundertwasserhaus"/></figure>
+<p class="place-meta">Адрес: Kegelgasse 34–38, 1030 Wien | Стиль: Органический модернизм | Период: 1986</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vienna_hundertwasserhaus.jpg" alt="Vienna Hundertwasserhaus" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vienna_hundertwasserhaus_b.jpg" alt="Vienna Hundertwasserhaus — вид 2" width="330" height="495" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Год постройки: 1986 г. Стиль архитектуры: Органический модернизм (Organic Modernism). Волнообразные полы создают необычный интерьер с плавными переходами между комнатами. На прилегающей территории расположены кафе и выставки работ Хундертвассера. Фасад здания окрашен яркими цветами, символизирующими природное разнообразие.</p>
 <p class="prose">Знаменитое здание спроектировано архитектором Фриденсрайхом Хундертвассером совместно с Йозефом Кравиной в рамках муниципального жилищного проекта. Здание стало знаковым примером органического модернизма и выразительным художественным заявлением. Его необычная архитектура включает волнообразные полы, зелёные насаждения внутри помещений и многоцветную фасадную отделку. Это одно из наиболее фотографируемых альтернативных архитектурных мест Вены, привлекающее туристов своей яркой индивидуальностью и необычным дизайном.</p></div>
 </section>
-<section class="place" id="vienna_pdfband_2_025b2e6e">
-<h3>Iran nuclear negotiation team at Islamisches Zentrum Imam Ali (04)</h3>
-
-
-<figure class="place-fig"><img src="../images/vienna_pdfband_2_025b2e6e.jpg" alt="Iran nuclear negotiation team at Islamisches Zentrum Imam Ali (04)"/></figure>
-</section>
-<section class="place" id="vienna_judenplatz_holocaust_memorial">
-<h3>Мемориал Холокоста на площади Юденплатц</h3>
-
-<p class="place-meta">Период: 2000</p>
-<figure class="place-fig"><img src="../images/vienna_judenplatz_holocaust_memorial.jpg" alt="Мемориал Холокоста на площади Юденплатц"/></figure>
-<div class="place-desc"><p class="prose">Мемориал Холокоста на площади Иудеев является трогательным и размышляющим пространством, посвященным памяти еврейской общины Вены во время Второй мировой войны. Расположенный рядом с исторической площадью Иудеев, он служит как мемориалом, так и напоминанием о трагическом прошлом города. Он расположен в сердце исторического центра Вены, недалеко от знаменитого собора Святого Стефана. Памятник был профинансирован за счет частных пожертвований и государственной поддержки. Дизайн сочетает в себе модернистские элементы, уважая окружающую историческую архитектуру. Каждый блок представляет собой один аспект опыта Холокоста: депортация, преследование и память. Расположенный неподалеку музей предоставляет дополнительный контекст и информацию о истории еврейской общины Вены.</p>
-<p class="prose">Памятник, спроектированный архитектором Петром Кулкой и художником Фрицем Вотрюбой, был завершен в 2000 году. Он состоит из трех больших бетонных блоков, расположенных в круге, символизирующих жертв Холокоста. На территории также находится площадь с бронзовой табличкой, на которой перечислены имена евреев, депортированных из Вены в период с 1941 по 1945 год. Посещение Мемориала Холокоста на площади Юденплатц позволяет посетителям задуматься о ужасах Холокоста и отдать дань уважения тем, кто страдал и погиб в этот темный период истории.</p></div>
-</section>
 <section class="place" id="vienna_karlskirche">
+<div class="place-lead">
 <h3>Vienna Karlskirche</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Стиль: барокко | Период: 1716–1737</p>
-<figure class="place-fig"><img src="../images/vienna_karlskirche.jpg" alt="Vienna Karlskirche"/></figure>
+<p class="place-meta">Адрес: Karlsplatz, 1040 Wien | Стиль: барокко | Период: 1716–1737</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vienna_karlskirche.jpg" alt="Vienna Karlskirche" width="1280" height="1280" style="height: 273px; max-height: 273px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vienna_karlskirche_b.jpg" alt="Vienna Karlskirche — вид 2" width="330" height="195" style="height: 273px; max-height: 273px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Это барочная церковь-вотив, возведённая в благодарность за спасение от чумы. Архитектурный ансамбль включает две колонны, вдохновленные колоннами Траяна. На куполе расположены фрески, доступные для осмотра сезонно через лифт. Здание имеет форму греческого креста, характерную для венского барокко. Интерьер церкви украшен позолотой и мраморными элементами.</p>
 <p class="prose">Карлскирхе была построена в период с 1716 по 1737 год по заказу императора Карла VI после эпидемии чумы 1713 года. Здание стало символом благодарности жителей Вены за избавление от болезни. Архитектором выступил Иоганн Бернхард Фишер фон Эрлах, завершивший строительство сын императора Иосиф I. Карлскирхе стала доминирующим архитектурным элементом площади Карлсплатц между кольцевой улицей Рингштрассе и торговым рынком Нойштадтмаркт. Карлскирхе является визитной карточкой города и главной достопримечательностью площади Карлсплатц, символизируя победу над бедствием и величие имперской столицы.</p></div>
 </section>
-<section class="place" id="vienna_kunsthistorisches_museum">
-<h3>Музей истории искусств</h3>
-
-<p class="place-meta">Период: 1891</p>
-<figure class="place-fig"><img src="../images/vienna_kunsthistorisches_museum.jpg" alt="Музей истории искусств"/></figure>
-<div class="place-desc"><p class="prose">Кунстисторическое музей — одно из самых знаковых культурных учреждений Вены, представляющее шедевры от древних цивилизаций до эпохи барокко. Открытый в 1891 году как часть видения императора Франца Иосифа I продемонстрировать художественные сокровища своей семьи. В доме более 600,000 объектов, включая произведения Тициана, Рембрандта, Рубенса и Ван Дейка. Зал монстров и чудес содержит редкие образцы естественной истории и курьезы. Рядом с Музеем естественной истории находятся оба здания, которые имеют общий атриум, известный как Великий двор. Особенностью является великолепная центральная лестница, украшенная статуями, изображающими известных художников.</p>
-<p class="prose">Построенный между 1872 и 1891 годами, музей был спроектирован архитектором Готфридом Семпером в грандиозном стиле Боз-Ар. Изначально он размещал имперские художественные коллекции, отражающие богатство и мощь Австро-Венгрии в ее расцвете. Роскошные интерьеры здания украшены мраморными полами, сложной лепниной и изысканными люстрами, что делает его свидетельством роскоши конца XIX века. Посетите Художественно-исторический музей, чтобы увидеть его обширную коллекцию европейских картин, скульптур и декоративного искусства, охватывающую более двух тысячелетий.</p></div>
-</section>
-<section class="place" id="vienna_maria_theresien_denkmal">
-<h3>Памятник Марии Терезии</h3>
-
-<p class="place-meta">Период: 1968</p>
-<figure class="place-fig"><img src="../images/vienna_maria_theresien_denkmal.jpg" alt="Памятник Марии Терезии"/></figure>
-<div class="place-desc"><p class="prose">Расположенный на оживленной торговой улице Грабен, Мемориал Марии Терезии является данью уважения влиятельной императрице Австрии и покровительнице искусств. Эта элегантная скульптура запечатлевает её королевское достоинство и величественное присутствие. Статуя была создана австрийским художником Вильгельмом фон Рюбецаем. На картине изображена Мария Терезия, стоящая с сложенными руками, в традиционном королевском одеянии. Памятник расположен на пересечении двух основных пешеходных улиц в центре Вены. Эта скульптура является частью обширной коллекции исторических памятников города, отмечающих его богатое наследие. В 1968 году отмечалась двухсотлетняя годовщина со дня смерти Марии Терезии.</p>
-<p class="prose">Завершенный в 1968 году, мемориал был заказан городом Веной в честь императрицы Марии Терезии, правившей с 1740 по 1780 год. Он является символом ее значительного вклада в искусство, культуру и образование в период ее правления. Посещение мемориала позволяет посетителям оценить культурное наследие, оставленное одним из самых известных монархов Австрии.</p></div>
-</section>
-<section class="place" id="vienna_mozarthaus_vienna">
-<h3>Моцартхаус Вена</h3>
-
-
-<figure class="place-fig"><img src="../images/vienna_mozarthaus_vienna.jpg" alt="Моцартхаус Вена"/></figure>
-<div class="place-desc"><p class="prose">Погрузитесь в мир Моцарта в Моцартхаус Вена, музее, посвященном жизни и творчеству Вольфганга Амадея Моцарта. Расположенный на Моцартштрасе, он предлагает посетителям возможность заглянуть в его дом детства и творческую атмосферу. Дом расположен по адресу Моцартштрассе 9, недалеко от знаменитого дворца Хофбург. В нем представлены предметы интерьера той эпохи и экспонаты, связанные с ранними годами жизни Моцарта. Посетители могут исследовать комнаты, где Моцарт жил и учился музыке. В музее регулярно проводятся концерты и образовательные программы. Музей также располагает небольшой библиотекой с книгами и манускриптами.</p>
-<p class="prose">Построенный около 1740 года, Моцартхаус Вена изначально принадлежал Леопольду Моцарту, отцу Вольфганга. Он служил резиденцией композитора до его отъезда в Зальцбург в 1773 году. Позже здание стало школой, а затем частным жильем, прежде чем в 1942 году было преобразовано в музей. Посетите Моцартхаус в Вене, чтобы ощутить атмосферу, в которой Моцарт рос и создавал свои первые композиции.</p></div>
-</section>
-<section class="place" id="vienna_museumsquartier">
-<h3>Музейный квартал</h3>
-
-<p class="place-meta">Период: 1904–1913</p>
-<figure class="place-fig"><img src="../images/vienna_museumsquartier.jpg" alt="Музейный квартал"/></figure>
-<div class="place-desc"><p class="prose">MuseumsQuartier — это яркий культурный центр Вены, расположенный в историческом сердце города. Ранее это был военный казарменный и конюшенный комплекс, преобразованный в один из самых динамичных арт-районов Европы. Он охватывает более 60 000 квадратных метров выставочной площади. Комплекс включает в себя Музей Леопольда, Музей прикладного искусства и Австрийский кинотеатр. Его архитектура сочетает элементы ар-деко с современным дизайном. Регулярно проводит международные выставки и фестивали. Открыто для публики в 1998 году.</p>
-<p class="prose">Построенный в 1904-1913 годах как военная установка, MuseumsQuartier в конце 20 века underwent extensive renovations, чтобы стать современным культурным центром. Сегодня здесь расположены многочисленные музеи, галереи, кинотеатры и площадки для выступлений, представляющие современное и историческое искусство. Обязательное место для любителей искусства, MuseumsQuartier предлагает уникальное сочетание традиционных и авангардных выставок.</p></div>
-</section>
-<section class="place" id="vienna_naschmarkt">
-<h3>Насчмарт</h3>
-
-<p class="place-meta">Период: 1898</p>
-<figure class="place-fig"><img src="../images/vienna_naschmarkt.jpg" alt="Насчмарт"/></figure>
-<div class="place-desc"><p class="prose">Нашмаркт — самый известный и оживленный рынок Вены, шумный центр местных продуктов, мясных изделий, сыров и уличной еды. Расположенный в самом сердце города, он является неотъемлемой частью венского образа жизни с момента своего основания. Открытый в 1898 году как один из первых крытых рынков Европы. Включает более 140 магазинов, продающих всё, от свежих фруктов и овощей до изделий ручной работы. Здесь расположено несколько знаковых ресторанов, предлагающих традиционные венские блюда, такие как Винер Шницель и Апфельштрудель. В последние годы был значительно отремонтирован, сохранив свой исторический шарм. Привлекает миллионы посетителей ежегодно.</p>
-<p class="prose">Основанный в 1898 году, Нашмаркт изначально был задуман как современный рынок, чтобы заменить старые, менее гигиеничные рынки. Он быстро стал культурной достопримечательностью, привлекая местных жителей и туристов своими яркими прилавками, живой атмосферой и разнообразием кулинарных удовольствий. Обязательное место для посещения для всех, кто интересуется подлинной австрийской кухней и местной культурой.</p></div>
-</section>
 <section class="place" id="vienna_naturhistorisches_museum">
+<div class="place-lead">
 <h3>Vienna Naturhistorisches Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1889</p>
-<figure class="place-fig"><img src="../images/vienna_naturhistorisches_museum.jpg" alt="Vienna Naturhistorisches Museum"/></figure>
+<p class="place-meta">Адрес: Burgring 7, 1010 Wien | Период: 1889</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vienna_naturhistorisches_museum.jpg" alt="Vienna Naturhistorisches Museum" width="1280" height="919" style="height: 331px; max-height: 331px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vienna_naturhistorisches_museum_b.jpg" alt="Vienna Naturhistorisches Museum — вид 2" width="330" height="499" style="height: 331px; max-height: 331px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Здание является зеркальным отражением Музея истории искусств на площади Марии-Терезии. Коллекция музея включает один из крупнейших в мире экспозиций метеоритов. Экспозиция посвящена эволюции жизни на Земле, начиная от древнейших микроорганизмов до современных видов животных и растений. Особое внимание уделяется антропологическим находкам, среди которых выделяется знаменитая Венера из Виллендорфа. В музее регулярно проводятся научные выставки и лекции, посвященные актуальным вопросам биологии и палеонтологии.</p>
 <p class="prose">Музей естественной истории был построен во второй половине XIX века по указу императора Франца Иосифа I специально для размещения императорских коллекций естественнонаучных экспонатов. Здание выполнено в академическом стиле и стало одним из символов Вены благодаря своему величественному интерьеру и уникальным экспозициям. Это место привлекает туристов и исследователей своим богатым собранием метеоритов, древних ископаемых динозавров и знаменитой статуэткой Венеры из Виллендорфа.</p></div>
 </section>
-<section class="place" id="vienna_prater_hauptallee">
-<h3>Пратер Хаупталлее</h3>
+<section class="place" id="vienna_prater_riesenrad">
+<div class="place-lead">
+<h3>Vienna Prater Riesenrad</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/vienna_prater_hauptallee.jpg" alt="Пратер Хаупталлее"/></figure>
-<div class="place-desc"><p class="prose">Пратер Хаупталея — это знаковая центральная аллея Вены, расположенная в крупнейшем парке города, протянувшаяся более чем на два километра сквозь зелёные насаждения и открытые пространства. Она служит как для неспешных прогулок, так и для оживлённой пешеходной зоны, вдоль которой расположены кафе, магазины и достопримечательности. Он соединяет популярный парк аттракционов Пратер с районом Музейного квартала. Хаупталея проводит различные фестивали и мероприятия в течение года, включая концерты и рынки. Летом посетители могут отдохнуть на тенистых скамейках под высокими деревьями. Ночью уличные фонари освещают тропинку, создавая романтическую атмосферу для вечерних прогулок. Здесь также находятся несколько исторических памятников, таких как колесо обозрения Ризенрад.</p>
-<p class="prose">Изначально спроектированный ландшафтным архитектором Карлом фон Хазенауэром в конце 19 века, Пратер задумывался как современная зона отдыха для венских граждан. Хаупталлея стала известна своим грандиозным бульварным стилем, с широкими дорожками, деревьями и статуями, отражающими богатое культурное наследие города. Посетители приходят сюда, чтобы насладиться спокойной атмосферой парка, исследуя яркую уличную жизнь вдоль Хаупталея.</p></div>
+<p class="place-meta">Адрес: Riesenradplatz 1, 1020 Wien | Период: 1897</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vienna_prater_riesenrad.jpg" alt="Vienna Prater Riesenrad" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vienna_prater_riesenrad_b.jpg" alt="Vienna Prater Riesenrad — вид 2" width="330" height="220" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Считается одним из старейших колес обозрения Европы. Его высота составляет около 65 метров. Аттракцион часто изображается в кино, включая фильм &#x27;Третий человек&#x27;. На колесе установлено до 36 кабинок. Колесо открыто круглый год, кроме штормовых дней.</p>
+<p class="prose">Колесо построено британской фирмой в 1897 году и стало символом района Пратер и венской панорамы. После Второй мировой войны аттракцион восстановили с оригинальными кабинками. Это единственное сохранившееся колесо от Всемирной выставки 1897 года диаметром 65 метров. Это визитная карточка венского парка развлечений Пратер и узнаваемая деталь городского силуэта.</p></div>
 </section>
 <section class="place" id="vienna_schoenbrunn_palace">
+<div class="place-lead">
 <h3>Vienna Schoenbrunn Palace</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Стиль: барокко | Период: 1696–1712</p>
-<figure class="place-fig"><img src="../images/vienna_schoenbrunn_palace.jpg" alt="Vienna Schoenbrunn Palace"/></figure>
+<p class="place-meta">Адрес: Schönbrunner Schloßstraße 47, 1130 Wien | Стиль: барокко | Период: 1696–1712</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vienna_schoenbrunn_palace.jpg" alt="Vienna Schoenbrunn Palace" width="1280" height="276" style="height: 99px; max-height: 99px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vienna_schoenbrunn_palace_b.jpg" alt="Vienna Schoenbrunn Palace — вид 2" width="330" height="331" style="height: 99px; max-height: 99px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Дворец насчитывает 1441 комнату, многие из которых открыты для посетителей. Знаменитый парк Шёнбрунна включает в себя 107 гектаров зелёных насаждений и знаменитые королевские оранжереи. На территории дворца находится один из старейших зоопарков мира, основанный ещё в XVIII веке. Комплекс внесён в список Всемирного наследия ЮНЕСКО. Глориетта — визитная карточка комплекса, символ величия и красоты дворцовой архитектуры.</p>
 <p class="prose">Шёнбруннский дворец изначально был охотничьей резиденцией Габсбургов, построенной в конце XVII века. Со временем он превратился в роскошную императорскую резиденцию при Марии Терезии и её наследниках. Здесь проходили важные государственные приёмы и встречи, а также дворцовый быт императорской семьи. Особо примечателен павильон Глориетта, расположенный на вершине холма и открывающий живописный вид на формальные партеры и городскую панораму. Шёнбруннский дворец является крупнейшим и наиболее посещаемым дворцовым комплексом Вены, включающим знаменитый зоопарк и великолепные сады.</p></div>
 </section>
-<section class="place" id="vienna_tiergarten_schoenbrunn">
-<h3>Зоопарк Шёнбрунн</h3>
-
-<p class="place-meta">Период: 1752</p>
-<figure class="place-fig"><img src="../images/vienna_tiergarten_schoenbrunn.jpg" alt="Зоопарк Шёнбрунн"/></figure>
-<div class="place-desc"><p class="prose">Расположенный на окраине Вены, зоопарк Шенбрунн является одним из старейших зоопарков Европы и любимой достопримечательностью как для местных жителей, так и для туристов. Основанный в 1752 году императрицей Марией Терезией как менажерия для королевских животных, он позже превратился в общественный зоопарк. Здесь обитает более 4,000 животных, представляющих более 600 различных видов. Зоопарк предлагает несколько знаковых экспозиций, включая Водный мир и Дом приматов. Зоопарк Шёнбрунн был признан ведущей организацией в области охраны дикой природы и программ разведения. Его ботанический сад гордится более чем 8,000 видами растений, создавая зелёный оазис на территории. В рамках объекта Всемирного наследия ЮНЕСКО зоопарк Шенбрунн сохраняет свою историческую архитектуру и ландшафтный дизайн.</p>
-<p class="prose">Изначально основанный как частная менажерия в 1752 году во время правления императрицы Марии Терезии, зоопарк Шенбрунн был создан для содержания экзотических животных для династии Габсбургов. Со временем он стал доступен для широкой публики, став как научно-исследовательским учреждением, так и популярным местом отдыха. Сегодня его историческое значение сохраняется наряду с современными усилиями по охране природы. Посещение зоопарка Шенбрунн позволяет гостям исследовать широкий ассортимент видов животных, наслаждаясь очаровательной исторической атмосферой императорских садов.</p></div>
-</section>
-<section class="place" id="vienna_freud_memorial">
-<h3>Мемориал Зигмунда Фрейда</h3>
-
-<p class="place-meta">Период: 2006</p>
-<figure class="place-fig"><img src="../images/vienna_freud_memorial.jpg" alt="Мемориал Зигмунда Фрейда"/></figure>
-<div class="place-desc"><p class="prose">Памятник Зигмунду Фрейду — это созерцательная скульптура, посвященная знаменитому психоаналитику и основателю современной психологии. Расположенный на берегу реки Дунай, он был открыт в 2006 году в рамках празднования Вены ее богатого культурного наследия. Он расположен на месте, где Фрейд жил в последние годы своей жизни в Вене. Скульптура была создана с использованием традиционных техник литья бронзы. Фрейд переехал в Лондон незадолго до своей смерти в 1939 году, но провел большую часть своих формативных лет в Вене. Герберт Маркс также создал находящийся поблизости Монумент Эрнста Толлера. Мемориал расположен в пределах легкой досягаемости пешком от знаменитого парка аттракционов Пратер.</p>
-<p class="prose">Памятник, заказанный городом Веной и созданный австрийским художником Герхардом Марксом, отдает дань уважения новаторской работе Фрейда и его влиянию на мировую мысль. Скульптура состоит из двух больших бронзовых фигур, представляющих Фрейда и его дочь Анну, символизируя их глубокую связь и наследие. Посещение Мемориала Зигмунда Фрейда позволяет посетителям поразмышлять о жизни и вкладе одного из самых влиятельных мыслителей XX века.</p></div>
-</section>
 <section class="place" id="vienna_spanish_riding_school">
+<div class="place-lead">
 <h3>Vienna Spanish Riding School</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Стиль: барокко | Период: 1736</p>
-<figure class="place-fig"><img src="../images/vienna_spanish_riding_school.jpg" alt="Vienna Spanish Riding School"/></figure>
+<p class="place-meta">Адрес: Michaelerplatz 1, 1010 Wien (Hofburg) | Стиль: барокко | Период: 1736</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vienna_spanish_riding_school.jpg" alt="Vienna Spanish Riding School" width="1280" height="838" style="height: 302px; max-height: 302px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vienna_spanish_riding_school_b.jpg" alt="Vienna Spanish Riding School — вид 2" width="330" height="226" style="height: 302px; max-height: 302px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Ежедневные утренние тренировки лошадей проводятся открыто для публики. Гала-представления проходят строго по билетам. Липпицанеры известны своей элегантностью и грациозностью движений. Школа продолжает традицию династии Габсбургов, начавшуюся еще в XVI веке. Испанская школа верховой езды расположена во дворце Хофбург.</p>
 <p class="prose">Испанская школа верховой езды была основана в 1736 году по указу императора Карла VI Габсбурга. Это учреждение стало продолжением старинной австрийской придворной традиции, существующей до сих пор. Здесь веками сохранялись уникальные традиции классической выездки лошадей породы липпицанеры, ставшие визитной карточкой школы. Испанская школа верховой езды — уникальное сочетание искусства верховой езды и архитектуры дворцов Вены, привлекающее туристов своими утренними тренировками и торжественными выступлениями.</p></div>
 </section>
-<section class="place" id="vienna_spanische_hofreitschule_facade">
-<h3>Фасад Испанской школы верховой езды</h3>
+<section class="place" id="vienna_state_opera">
+<div class="place-lead">
+<h3>Vienna State Opera</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1787</p>
-<figure class="place-fig"><img src="../images/vienna_spanische_hofreitschule_facade.jpg" alt="Фасад Испанской школы верховой езды"/></figure>
-<div class="place-desc"><p class="prose">Величественный фасад Испанской школы верховой езды является свидетельством роскоши и традиций австрийской имперской эпохи. Построенная в 1787 году во время правления императора Иосифа II, она демонстрирует барочную архитектуру в её наилучшем проявлении, с богатыми деталями и симметричными элементами дизайна. Построенный в 1787 году, фасад является примером австрийского барокко. Здесь находятся знаменитые липицкие жеребцы, выведенные специально для классического выездки. Школа продолжает обучать всадников, используя традиционные методы, уходящие корнями в века. Регулярные выступления демонстрируют элегантность и точность этих конных атлетов. Интерьер украшен сложными декорациями и историческими артефактами.</p>
-<p class="prose">Основанная в 1600 году как часть Хофрейтшуле, Испанская школа верховой езды стала домом для знаменитых лошадей Липиццанеров с конца 18 века. Ее нынешний фасад был построен в 1787 году при императоре Иосифе II, отражая великолепие Габсбургской Вены. Здание служило как тренировочной площадкой для кавалеристов, так и местом для королевских церемоний. Посещение Испанской школы верховой езды позволяет посетителям firsthand увидеть одну из самых известных традиций верховой езды в Европе.</p></div>
+<p class="place-meta">Адрес: Opernring 2, 1010 Wien | Период: 1869</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vienna_state_opera.JPG" alt="Vienna State Opera" width="1280" height="783" style="height: 282px; max-height: 282px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vienna_state_opera_b.jpg" alt="Vienna State Opera — вид 2" width="330" height="203" style="height: 282px; max-height: 282px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Театр расположен на улице Ринг в самом центре Вены. После реконструкции здание сохранило оригинальный исторический фасад. Ежегодная трансляция Нового года собирает миллионы зрителей по всему миру. Зал театра рассчитан на более чем две тысячи мест. Опера Вены входит в число крупнейших мировых оперных площадок.</p>
+<p class="prose">Венаская государственная опера была открыта в 1869 году как Hofoper, однако после падения монархии получила современное название. Здание выполнено в стиле неоренессанс и расположено на знаменитой венской улице Ринг. После разрушений Второй мировой войны театр был восстановлен с сохранением исторического фасада. Государственная опера Вены является одним из ведущих оперных театров Европы и известна своим выдающимся репертуаром и традицией ежегодной трансляции новогоднего концерта.</p></div>
 </section>
 <section class="place" id="vienna_stephansdom">
+<div class="place-lead">
 <h3>Vienna Stephansdom</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Стиль: готика | Период: 1304–1436</p>
-<figure class="place-fig"><img src="../images/vienna_stephansdom.jpg" alt="Vienna Stephansdom"/></figure>
+<p class="place-meta">Адрес: Stephansplatz 3, 1010 Wien | Стиль: готика | Период: 1304–1436</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vienna_stephansdom.jpg" alt="Vienna Stephansdom" width="1067" height="1600" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vienna_stephansdom_b.jpg" alt="Vienna Stephansdom — вид 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Южная башня собора, известная как «Штефль», является одной из визитных карточек Вены и видна практически отовсюду в городе. Крыша собора покрыта традиционной чешуёй черепицы с изображением двуглавого орла династии Габсбургов. Собор считается местом упокоения многих известных личностей Австрии, среди которых правители, епископы и национальные герои. Строительство продолжалось около четырёх столетий, отражая архитектурную эволюцию готики и влияние различных эпох. На протяжении веков собор неоднократно перестраивался и реставрировался, сохраняя при этом свою первоначальную готическую структуру.</p>
 <p class="prose">Страсбургская кафедра была заложена в 1304 году и строилась почти три столетия, завершившись лишь в середине XV века. Изначально возведённая на месте предыдущих церквей, она прошла несколько этапов строительства, включая завершение шпиля и центрального нефа в позднем средневековье. Архитектурный ансамбль стал символом мощи Габсбургов и доминирует над городской панорамой благодаря южной башне «Штефль», возвышающейся над крышами города. Это главная церковь австрийской столицы и кафедральный собор архиепархии Вены, где покоятся останки выдающихся государственных деятелей, духовенства и знати.</p></div>
 </section>
-<section class="place" id="vienna_stadtpark_vienna">
-<h3>Городской парк</h3>
+<section class="place" id="vienna_austrian_parliament">
+<div class="place-lead">
+<h3>Австрийский парламент</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1864</p>
-<figure class="place-fig"><img src="../images/vienna_stadtpark_vienna.jpg" alt="Городской парк"/></figure>
-<div class="place-desc"><p class="prose">Спокойный оазис природы в бурлящем сердце Вены, Штадтпарк предлагает умиротворяющее убежище как для местных жителей, так и для туристов. С ухоженными газонами, элегантными аллеями и живописными мостиками через маленькие ручьи, это одно из самых любимых зелёных пространств города. Он занимает примерно 37 гектаров и включает в себя разнообразную флору и фауну, характерные для центральноевропейских ландшафтов. Парк включает несколько исторических памятников, включая Мемориал Неизвестному Солдату и бывшие казармы Императорской армии. В летние месяцы на открытой сцене регулярно проводятся уличные представления и концерты. Стадтпарк служит центром для различных общественных мероприятий, таких как блошиные рынки и художественные выставки. Его центральное расположение делает его легко доступным на общественном транспорте.</p>
-<p class="prose">Изначально спроектированный ландшафтным архитектором Карлом фон Хазенауэром в конце 19 века, Штадтпарк был открыт для публики в 1864 году в рамках видения императора Франца Иосифа I по созданию современного городского паркового комплекса. Парк быстро стал популярным местом встречи для венских граждан, принимая культурные мероприятия, концерты и фестивали на протяжении многих лет. Посетители приходят в Stadtpark, чтобы насладиться его спокойной атмосферой, прогуляться по извивающимся тропинкам и оценить потрясающие виды на городской пейзаж с его возвышенных мест.</p></div>
+<p class="place-meta">Адрес: Dr.-Karl-Renner-Ring 3, 1010 Wien | Период: 1874–1904</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vienna_austrian_parliament.jpg" alt="Австрийский парламент" width="1280" height="437" style="height: 157px; max-height: 157px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vienna_austrian_parliament_b.jpg" alt="Австрийский парламент — вид 2" width="330" height="186" style="height: 157px; max-height: 157px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Австрийское здание парламента — это величественная неоготическая структура, расположенная на Рингштрассе в Вене, в пределах Старого города. Оно было построено в период с 1874 по 1904 год для размещения законодательной ветви правительства Австро-Венгрии. Строительство началось в 1874 году и продолжалось до 1904 года. В нем находятся две палаты: Палата представителей и Федеральный совет. Здание украшено сложными каменными резьбами, изображающими исторические фигуры и сцены из австрийской истории. Его интерьер включает роскошно оформленные залы и комнаты, используемые для официальных заседаний и церемоний. Башня предлагает панорамные виды на город.</p>
+<p class="prose">Здание парламента, спроектированное архитекторами Карлом фон Хазенауэром и Теофилом Хансеном, отражает грандиозные амбиции венской архитектуры конца девятнадцатого века. Завершенное поэтапно в течение нескольких десятилетий, оно стало одним из самых впечатляющих примеров неоготического дизайна в Европе. Его высокие шпили и сложные фасады делают его символом как императорского величия, так и демократического управления. Посещение Австрийского парламента позволяет посетителям увидеть место, где принимались ключевые решения, влияющие на регион, в его расцвете как части Австро-Венгерской империи.</p></div>
 </section>
-<section class="place" id="vienna_stephansplatz">
-<h3>Штефансплатц</h3>
+<section class="place" id="vienna_ankeruhr_vienna">
+<div class="place-lead">
+<h3>Анкеруhr</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/vienna_stephansplatz.jpg" alt="Штефансплатц"/></figure>
-<div class="place-desc"><p class="prose">В самом сердце Вены находится Штефансплац, яркий центр, где традиции встречаются с современной жизнью. Окруженный историческими зданиями и оживленными кафе, он является одной из самых знаковых площадей города. Площадь названа в честь собора Святого Стефана, который доминирует на её северной стороне. В нем находятся несколько известных достопримечательностей, включая Ратушу (Городскую ратушу), Бургтеатр и дворец Нойе Бург. Каждый год Рождественский рынок преображает площадь в праздничную сцену, наполненную традиционными ремеслами и сезонными угощениями. Штефансплац служит местом сбора для различных фестивалей, концертов и политических демонстраций. Во время Второй мировой войны площадь сильно пострадала, но была тщательно восстановлена после войны.</p>
-<p class="prose">Основанная в конце XIII века как рынок, Штефансплац на протяжении веков была центральной частью развития Вены. Позже она была расширена и преобразована в величественную площадь в эпоху барокко, став центром культурных событий и собраний. Сегодня это по-прежнему популярное место как для местных жителей, так и для туристов. Стефансплац имеет особое значение, поскольку предлагает уникальное сочетание исторического очарования и современного настроения, что делает его обязательным местом для посещения всем, кто исследует Вену.</p></div>
-</section>
-<section class="place" id="vienna_urania_vienna">
-<h3>Обсерватория Урании</h3>
-
-<p class="place-meta">Период: 1894</p>
-<figure class="place-fig"><img src="../images/vienna_urania_vienna.jpg" alt="Обсерватория Урании"/></figure>
-<div class="place-desc"><p class="prose">Расположенная высоко над центром города на Шоттенринге, обсерватория Урания предлагает захватывающий вид на венский горизонт и знаменитый дворец Хофбург. Построенная в 1894 году, она изначально предназначалась как образовательное учреждение для популяризации астрономии среди широкой публики. Он расположен на месте бывшего Императорского монетного двора. Здание отличается неоклассическими элементами дизайна, характерными для творчества Теофила Хансена. Регулярные публичные сеансы наблюдения за звездами проводятся каждую ночь при ясной погоде. Уранья проводит временные выставки, связанные с исследованием космоса и астрономией. С 1976 года он является частью Австрийской ассоциации музеев.</p>
-<p class="prose">Установленная в 1894 году императором Францем Иосифом I, обсерватория Ураниа была спроектирована архитектором Теофилом Хансеном. Она служила как обсерватория для научных исследований, так и образовательным учреждением, направленным на развитие интереса к астрономии. Со временем она стала символом культурного наследия Вены и популярной туристической достопримечательностью. Посещение Урании позволяет гостям насладиться очарованием архитектуры начала века, наслаждаясь панорамными видами на город.</p></div>
+<p class="place-meta">Адрес: Hoher Markt 10–11, 1010 Wien | Период: 1844</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vienna_ankeruhr_vienna.jpg" alt="Анкеруhr" width="1200" height="1600" style="height: 462px; max-height: 462px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vienna_ankeruhr_vienna_b.jpg" alt="Анкеруhr — вид 2" width="330" height="330" style="height: 462px; max-height: 462px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Анкеруhr — это очаровательные исторические часы, расположенные на Ратхаусплац в старом городе Вены. С начала 19 века они радуют посетителей своим причудливым очарованием и сложным дизайном. Построено мастером часового дела Иоганном Шрёттером в 1844 году. Оснащен механическим якорным спуском, который обеспечивает точность хода. Работает без батарей и электричества, полагаясь исключительно на силу тяжести и шестерни. Отображает как часы, так и минуты, а также небольшой календарь, указывающий день недели. Окруженный яркой барочной архитектурой, это живописное место идеально подходит для фотографии.</p>
+<p class="prose">Построенные в 1844 году, Анкеруhr изначально были установлены для того, чтобы отмечать время для местных жителей и путешественников. С течением лет они стали любимой достопримечательностью, привлекая туристов и местных жителей своим уникальным механизмом и тщательной отделкой. Посещение Анкеруhr дает возможность заглянуть в богатое культурное наследие Вены и предоставляет идеальную возможность оценить традиционное австрийское ремесло.</p></div>
 </section>
 <section class="place" id="vienna_rathaus_vienna">
+<div class="place-lead">
 <h3>Венская ратуша</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Стиль: historicist, сочетающий элементы неоренессанса и поздней готики | Период: 1872–1883</p>
-<figure class="place-fig"><img src="../images/vienna_rathaus_vienna.jpg" alt="Венская ратуша"/></figure>
+<p class="place-meta">Адрес: Friedrich-Schmidt-Platz 1, 1010 Wien | Стиль: historicist, сочетающий элементы неоренессанса и поздней готики | Период: 1872–1883</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vienna_rathaus_vienna.jpg" alt="Венская ратуша" width="1280" height="960" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vienna_rathaus_vienna_b.jpg" alt="Венская ратуша — вид 2" width="330" height="265" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Здание венской ратуши расположено по адресу Фридрих-Шмидт-Плац, 1, 1010 Вена. На территории перед ратушей ежегодно проводится рождественский рынок Кристкиндлмаркт и летний кинофестиваль. Архитектурный стиль здания сочетает элементы неоготики и ренессанса, создавая уникальный облик. Строительство ратуши завершилось спустя ровно десять лет после начала работ. Башня ратуши, вдохновленная фламандскими тканями-халами, стала узнаваемым символом Вены.</p>
 <p class="prose">Венская ратуша была построена в период с 1872 по 1883 год, когда город стремительно расширялся за пределы средневековых стен. Здание стало символом новой эпохи и важным элементом архитектурной композиции ансамбля Рингштрассе. Вдохновением для архитекторов послужили фламандские ткани-халы, что отразилось в форме башни ратуши. Ратуша является одной из главных достопримечательностей Вены и визитной карточкой города, представляя собой гармоничное сочетание элементов неоренессанса и поздней готики.</p></div>
 </section>
 <section class="place" id="vienna_technisches_museum_wien">
+<div class="place-lead">
 <h3>Венский музей науки и техники</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/vienna_technisches_museum_wien.jpg" alt="Венский музей науки и техники"/></figure>
+<p class="place-meta">Адрес: Mariaspringergasse 2, 1140 Wien</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vienna_technisches_museum_wien.jpg" alt="Венский музей науки и техники" width="1280" height="720" style="height: 259px; max-height: 259px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vienna_technisches_museum_wien_b.jpg" alt="Венский музей науки и техники — вид 2" width="330" height="220" style="height: 259px; max-height: 259px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Венский музей науки и техники — это яркий центр, демонстрирующий эволюцию технологий и инженерии через интерактивные экспозиции, практические выставки и исторические артефакты. Расположенный на берегу реки Дунай, музей предлагает панорамные виды на городской пейзаж. Интерактивные экспозиции позволяют посетителям экспериментировать с принципами физики и инженерии. Здесь находится одна из крупнейших в Европе коллекций винтажных научных инструментов. Регулярно проводит временные выставки, сосредоточенные на конкретных темах, связанных с инновациями и устойчивым развитием. Музей сотрудничает с местными университетами в области исследований и образовательных инициатив.</p>
 <p class="prose">Основанный в 1982 году, музей изначально был частью Технического университета Вены. В 2004 году он переехал на свое текущее место, предлагая посетителям современное пространство, посвященное изучению науки и технологий. К числу примечательных особенностей относятся реконструкция ранних механических калькуляторов и модели работ известных австрийских инженеров. Посещение этого места дает представление о технологическом наследии Австрии, одновременно вовлекая посетителей в современные выставки и образовательные программы.</p></div>
 </section>
-<section class="place" id="vienna_state_opera">
-<h3>Vienna State Opera</h3>
-
-<p class="place-meta">Период: 1869</p>
-<figure class="place-fig"><img src="../images/vienna_state_opera.JPG" alt="Vienna State Opera"/></figure>
-<div class="place-desc"><p class="prose">Театр расположен на улице Ринг в самом центре Вены. После реконструкции здание сохранило оригинальный исторический фасад. Ежегодная трансляция Нового года собирает миллионы зрителей по всему миру. Зал театра рассчитан на более чем две тысячи мест. Опера Вены входит в число крупнейших мировых оперных площадок.</p>
-<p class="prose">Венаская государственная опера была открыта в 1869 году как Hofoper, однако после падения монархии получила современное название. Здание выполнено в стиле неоренессанс и расположено на знаменитой венской улице Ринг. После разрушений Второй мировой войны театр был восстановлен с сохранением исторического фасада. Государственная опера Вены является одним из ведущих оперных театров Европы и известна своим выдающимся репертуаром и традицией ежегодной трансляции новогоднего концерта.</p></div>
-</section>
 <section class="place" id="vienna_volksgarten_vienna">
+<div class="place-lead">
 <h3>Вольксгартен</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/vienna_volksgarten_vienna.jpg" alt="Вольксгартен"/></figure>
+<p class="place-meta">Место: Burgring, 1010 Wien</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vienna_volksgarten_vienna.jpg" alt="Вольксгартен" width="1280" height="853" style="height: 207px; max-height: 207px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vienna_volksgarten_vienna_b.jpg" alt="Вольксгартен — вид 2" width="330" height="148" style="height: 207px; max-height: 207px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Вольксгартен — живописный городской парк, расположенный в самом сердце внутреннего города Вены, предлагающий спокойное убежище среди шумных улиц и исторической архитектуры. Он был основан как часть комплекса дворца Хофбург и изначально создан как королевский сад для императора Франца I, позже став общественным пространством, доступным для всех граждан. Парк занимает примерно 4 гектара и включает в себя разнообразные виды растений, включая деревья, цветы и кустарники. Здесь находится знаменитый Вольксгартентеатр, который проводит открытые выступления в летние месяцы. Расположенный рядом с Дворцом Хофбург, Вольксгартен предлагает потрясающие виды на дворец и окружающие здания. Весной парк расцветает яркими тюльпанами и другими сезонными цветами, привлекая посетителей со всего мира. В дополнение к тому, что Volksgarten является рекреационной зоной, он также служит местом для различных художественных выставок и концертов.</p>
 <p class="prose">Изначально спроектированный ландшафтным архитектором Карлом фон Хазенауэром в середине 19 века, Вольксгартен претерпел несколько трансформаций за свою историю. Изначально известный как «Сад народа», он стал популярным местом сбора для венских жителей, ищущих отдых и досуг. Сегодня он остается одним из самых знаковых зеленых пространств в городе, принимая культурные мероприятия и фестивали на протяжении всего года. Посетители приходят в Вольксгартен, чтобы насладиться его спокойной атмосферой, красивой флорой и историческим значением, что делает его обязательным местом для посещения для всех, кто исследует богатую культуру и наследие Вены.</p></div>
 </section>
-<section class="place" id="vienna_prater_riesenrad">
-<h3>Vienna Prater Riesenrad</h3>
+<section class="place" id="vienna_stadtpark_vienna">
+<div class="place-lead">
+<h3>Городской парк</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1897</p>
-<figure class="place-fig"><img src="../images/vienna_prater_riesenrad.jpg" alt="Vienna Prater Riesenrad"/></figure>
-<div class="place-desc"><p class="prose">Считается одним из старейших колес обозрения Европы. Его высота составляет около 65 метров. Аттракцион часто изображается в кино, включая фильм &#x27;Третий человек&#x27;. На колесе установлено до 36 кабинок. Колесо открыто круглый год, кроме штормовых дней.</p>
-<p class="prose">Колесо построено британской фирмой в 1897 году и стало символом района Пратер и венской панорамы. После Второй мировой войны аттракцион восстановили с оригинальными кабинками. Это единственное сохранившееся колесо от Всемирной выставки 1897 года диаметром 65 метров. Это визитная карточка венского парка развлечений Пратер и узнаваемая деталь городского силуэта.</p></div>
+<p class="place-meta">Место: Parkring, 1010 / 1030 Wien | Период: 1864</p>
+<figure class="place-fig place-fig--lo-res"><img src="../images/vienna_stadtpark_vienna_b.jpg" alt="Городской парк" width="330" height="183"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Спокойный оазис природы в бурлящем сердце Вены, Штадтпарк предлагает умиротворяющее убежище как для местных жителей, так и для туристов. С ухоженными газонами, элегантными аллеями и живописными мостиками через маленькие ручьи, это одно из самых любимых зелёных пространств города. Он занимает примерно 37 гектаров и включает в себя разнообразную флору и фауну, характерные для центральноевропейских ландшафтов. Парк включает несколько исторических памятников, включая Мемориал Неизвестному Солдату и бывшие казармы Императорской армии. В летние месяцы на открытой сцене регулярно проводятся уличные представления и концерты. Стадтпарк служит центром для различных общественных мероприятий, таких как блошиные рынки и художественные выставки. Его центральное расположение делает его легко доступным на общественном транспорте.</p>
+<p class="prose">Изначально спроектированный ландшафтным архитектором Карлом фон Хазенауэром в конце 19 века, Штадтпарк был открыт для публики в 1864 году в рамках видения императора Франца Иосифа I по созданию современного городского паркового комплекса. Парк быстро стал популярным местом встречи для венских граждан, принимая культурные мероприятия, концерты и фестивали на протяжении многих лет. Посетители приходят в Stadtpark, чтобы насладиться его спокойной атмосферой, прогуляться по извивающимся тропинкам и оценить потрясающие виды на городской пейзаж с его возвышенных мест.</p></div>
+</section>
+<section class="place" id="vienna_haus_der_musik_wien">
+<div class="place-lead">
+<h3>Дом музыки Вена</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Seilerstätte 30, 1010 Wien | Период: 2001</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vienna_haus_der_musik_wien.jpg" alt="Дом музыки Вена" width="1200" height="1600" style="height: 203px; max-height: 203px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vienna_haus_der_musik_wien_b.jpg" alt="Дом музыки Вена — вид 2" width="330" height="145" style="height: 203px; max-height: 203px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Дом музыки в Вене — это уникальный музей, посвященный искусству и науке музыки. Расположенный в самом сердце города, он предлагает интерактивные экспозиции, которые исследуют историю, теорию и технологии, стоящие за музыкальными инструментами и звуком. Он включает более 400 музыкальных инструментов со всего мира. Интерактивные выставки позволяют посетителям экспериментировать со звуком и музыкальным производством. Музей располагает коллекцией винтажных синтезаторов и электронного оборудования. Гости могут узнать о физике звука и его связи с акустикой. Регулярные концерты и мастер-классы проводятся в течение всего года.</p>
+<p class="prose">Открытый в 2001 году, Дом музыки в Вене был спроектирован архитектором Хеленой Бехтольд в рамках усилий по культурной ревитализации города. Он демонстрирует современные установки и предлагает посетителям интерактивные впечатления, делая его как образовательным, так и развлекательным. Посещение Дома Музыки позволяет гостям узнать, как создается, исполняется и воспринимается музыка через инновационные экспозиции и демонстрации.</p></div>
+</section>
+<section class="place" id="vienna_donauturm">
+<div class="place-lead">
+<h3>Дунайская башня</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Место: Donauturmstraße 8, 1220 Wien | Период: 2003–2006</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vienna_donauturm.jpg" alt="Дунайская башня" width="1198" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vienna_donauturm_b.jpg" alt="Дунайская башня — вид 2" width="330" height="495" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Расположенная на окраине центра Вены, Башня Дуная предлагает панорамные виды на реку Дунай и окружающие пригороды. Ее современный дизайн и стеклянный фасад делают ее ярким дополнением к горизонту города. Башня высотой 94 метра является одним из самых высоких зданий в Вене. В нем расположены квартиры, офисы и торговые площади, удовлетворяющие различные потребности сообщества. Его прозрачный стеклянный фасад позволяет естественному свету заполнять внутренние пространства, снижая потребление энергии. Гости могут наслаждаться напитками и закусками на смотровой площадке, расположенной на верхнем этаже. Строительство началось в 2003 году и заняло три года.</p>
+<p class="prose">Завершенная в 2006 году, Башня Дуная была спроектирована австрийским архитектором Карлом Шванцером в рамках более крупного проекта застройки вдоль Дунайского канала. Она выполняет как жилые, так и коммерческие функции, сочетая современную архитектуру с устойчивыми характеристиками, такими как солнечные панели и энергоэффективное освещение. Посетители приезжают сюда ради захватывающих видов на город и реку, предлагая уникальную перспективу, которую нельзя испытать нигде в Вене.</p></div>
+</section>
+<section class="place" id="vienna_tiergarten_schoenbrunn">
+<div class="place-lead">
+<h3>Зоопарк Шёнбрунн</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Maxingstraße 13b, 1130 Wien | Период: 1752</p>
+<figure class="place-fig place-fig--lo-res"><img src="../images/vienna_tiergarten_schoenbrunn_b.jpg" alt="Зоопарк Шёнбрунн" width="330" height="225"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Расположенный на окраине Вены, зоопарк Шенбрунн является одним из старейших зоопарков Европы и любимой достопримечательностью как для местных жителей, так и для туристов. Основанный в 1752 году императрицей Марией Терезией как менажерия для королевских животных, он позже превратился в общественный зоопарк. Здесь обитает более 4,000 животных, представляющих более 600 различных видов. Зоопарк предлагает несколько знаковых экспозиций, включая Водный мир и Дом приматов. Зоопарк Шёнбрунн был признан ведущей организацией в области охраны дикой природы и программ разведения. Его ботанический сад гордится более чем 8,000 видами растений, создавая зелёный оазис на территории. В рамках объекта Всемирного наследия ЮНЕСКО зоопарк Шенбрунн сохраняет свою историческую архитектуру и ландшафтный дизайн.</p>
+<p class="prose">Изначально основанный как частная менажерия в 1752 году во время правления императрицы Марии Терезии, зоопарк Шенбрунн был создан для содержания экзотических животных для династии Габсбургов. Со временем он стал доступен для широкой публики, став как научно-исследовательским учреждением, так и популярным местом отдыха. Сегодня его историческое значение сохраняется наряду с современными усилиями по охране природы. Посещение зоопарка Шенбрунн позволяет гостям исследовать широкий ассортимент видов животных, наслаждаясь очаровательной исторической атмосферой императорских садов.</p></div>
+</section>
+<section class="place" id="vienna_freud_memorial">
+<div class="place-lead">
+<h3>Мемориал Зигмунда Фрейда</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Место: Berggasse 19, 1090 Wien | Период: 2006</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vienna_freud_memorial.jpg" alt="Мемориал Зигмунда Фрейда" width="1067" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vienna_freud_memorial_b.jpg" alt="Мемориал Зигмунда Фрейда — вид 2" width="330" height="440" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Памятник Зигмунду Фрейду — это созерцательная скульптура, посвященная знаменитому психоаналитику и основателю современной психологии. Расположенный на берегу реки Дунай, он был открыт в 2006 году в рамках празднования Вены ее богатого культурного наследия. Он расположен на месте, где Фрейд жил в последние годы своей жизни в Вене. Скульптура была создана с использованием традиционных техник литья бронзы. Фрейд переехал в Лондон незадолго до своей смерти в 1939 году, но провел большую часть своих формативных лет в Вене. Герберт Маркс также создал находящийся поблизости Монумент Эрнста Толлера. Мемориал расположен в пределах легкой досягаемости пешком от знаменитого парка аттракционов Пратер.</p>
+<p class="prose">Памятник, заказанный городом Веной и созданный австрийским художником Герхардом Марксом, отдает дань уважения новаторской работе Фрейда и его влиянию на мировую мысль. Скульптура состоит из двух больших бронзовых фигур, представляющих Фрейда и его дочь Анну, символизируя их глубокую связь и наследие. Посещение Мемориала Зигмунда Фрейда позволяет посетителям поразмышлять о жизни и вкладе одного из самых влиятельных мыслителей XX века.</p></div>
+</section>
+<section class="place" id="vienna_judenplatz_holocaust_memorial">
+<div class="place-lead">
+<h3>Мемориал Холокоста на площади Юденплатц</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Judenplatz, 1010 Wien | Период: 2000</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vienna_judenplatz_holocaust_memorial.jpg" alt="Мемориал Холокоста на площади Юденплатц" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vienna_judenplatz_holocaust_memorial_b.jpg" alt="Мемориал Холокоста на площади Юденплатц — вид 2" width="330" height="220" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Мемориал Холокоста на площади Иудеев является трогательным и размышляющим пространством, посвященным памяти еврейской общины Вены во время Второй мировой войны. Расположенный рядом с исторической площадью Иудеев, он служит как мемориалом, так и напоминанием о трагическом прошлом города. Он расположен в сердце исторического центра Вены, недалеко от знаменитого собора Святого Стефана. Памятник был профинансирован за счет частных пожертвований и государственной поддержки. Дизайн сочетает в себе модернистские элементы, уважая окружающую историческую архитектуру. Каждый блок представляет собой один аспект опыта Холокоста: депортация, преследование и память. Расположенный неподалеку музей предоставляет дополнительный контекст и информацию о истории еврейской общины Вены.</p>
+<p class="prose">Памятник, спроектированный архитектором Петром Кулкой и художником Фрицем Вотрюбой, был завершен в 2000 году. Он состоит из трех больших бетонных блоков, расположенных в круге, символизирующих жертв Холокоста. На территории также находится площадь с бронзовой табличкой, на которой перечислены имена евреев, депортированных из Вены в период с 1941 по 1945 год. Посещение Мемориала Холокоста на площади Юденплатц позволяет посетителям задуматься о ужасах Холокоста и отдать дань уважения тем, кто страдал и погиб в этот темный период истории.</p></div>
+</section>
+<section class="place" id="vienna_mozarthaus_vienna">
+<div class="place-lead">
+<h3>Моцартхаус Вена</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Domgasse 5, 1010 Wien</p>
+<figure class="place-fig place-fig--lo-res"><img src="../images/vienna_mozarthaus_vienna_b.jpg" alt="Моцартхаус Вена" width="330" height="220"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Погрузитесь в мир Моцарта в Моцартхаус Вена, музее, посвященном жизни и творчеству Вольфганга Амадея Моцарта. Расположенный на Моцартштрасе, он предлагает посетителям возможность заглянуть в его дом детства и творческую атмосферу. Дом расположен по адресу Моцартштрассе 9, недалеко от знаменитого дворца Хофбург. В нем представлены предметы интерьера той эпохи и экспонаты, связанные с ранними годами жизни Моцарта. Посетители могут исследовать комнаты, где Моцарт жил и учился музыке. В музее регулярно проводятся концерты и образовательные программы. Музей также располагает небольшой библиотекой с книгами и манускриптами.</p>
+<p class="prose">Построенный около 1740 года, Моцартхаус Вена изначально принадлежал Леопольду Моцарту, отцу Вольфганга. Он служил резиденцией композитора до его отъезда в Зальцбург в 1773 году. Позже здание стало школой, а затем частным жильем, прежде чем в 1942 году было преобразовано в музей. Посетите Моцартхаус в Вене, чтобы ощутить атмосферу, в которой Моцарт рос и создавал свои первые композиции.</p></div>
+</section>
+<section class="place" id="vienna_kunsthistorisches_museum">
+<div class="place-lead">
+<h3>Музей истории искусств</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Maria-Theresien-Platz, 1010 Wien | Период: 1891</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vienna_kunsthistorisches_museum.jpg" alt="Музей истории искусств" width="1280" height="825" style="height: 297px; max-height: 297px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--row-sized"><img src="../images/vienna_kunsthistorisches_museum_b.jpg" alt="Музей истории искусств — вид 2" width="330" height="612" style="height: 297px; max-height: 297px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Кунстисторическое музей — одно из самых знаковых культурных учреждений Вены, представляющее шедевры от древних цивилизаций до эпохи барокко. Открытый в 1891 году как часть видения императора Франца Иосифа I продемонстрировать художественные сокровища своей семьи. В доме более 600,000 объектов, включая произведения Тициана, Рембрандта, Рубенса и Ван Дейка. Зал монстров и чудес содержит редкие образцы естественной истории и курьезы. Рядом с Музеем естественной истории находятся оба здания, которые имеют общий атриум, известный как Великий двор. Особенностью является великолепная центральная лестница, украшенная статуями, изображающими известных художников.</p>
+<p class="prose">Построенный между 1872 и 1891 годами, музей был спроектирован архитектором Готфридом Семпером в грандиозном стиле Боз-Ар. Изначально он размещал имперские художественные коллекции, отражающие богатство и мощь Австро-Венгрии в ее расцвете. Роскошные интерьеры здания украшены мраморными полами, сложной лепниной и изысканными люстрами, что делает его свидетельством роскоши конца XIX века. Посетите Художественно-исторический музей, чтобы увидеть его обширную коллекцию европейских картин, скульптур и декоративного искусства, охватывающую более двух тысячелетий.</p></div>
+</section>
+<section class="place" id="vienna_museumsquartier">
+<div class="place-lead">
+<h3>Музейный квартал</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Museumsplatz 1, 1070 Wien | Период: 1904–1913</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vienna_museumsquartier.jpg" alt="Музейный квартал" width="1280" height="435" style="height: 157px; max-height: 157px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vienna_museumsquartier_b.jpg" alt="Музейный квартал — вид 2" width="330" height="220" style="height: 157px; max-height: 157px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">MuseumsQuartier — это яркий культурный центр Вены, расположенный в историческом сердце города. Ранее это был военный казарменный и конюшенный комплекс, преобразованный в один из самых динамичных арт-районов Европы. Он охватывает более 60 000 квадратных метров выставочной площади. Комплекс включает в себя Музей Леопольда, Музей прикладного искусства и Австрийский кинотеатр. Его архитектура сочетает элементы ар-деко с современным дизайном. Регулярно проводит международные выставки и фестивали. Открыто для публики в 1998 году.</p>
+<p class="prose">Построенный в 1904-1913 годах как военная установка, MuseumsQuartier в конце 20 века underwent extensive renovations, чтобы стать современным культурным центром. Сегодня здесь расположены многочисленные музеи, галереи, кинотеатры и площадки для выступлений, представляющие современное и историческое искусство. Обязательное место для любителей искусства, MuseumsQuartier предлагает уникальное сочетание традиционных и авангардных выставок.</p></div>
+</section>
+<section class="place" id="vienna_naschmarkt">
+<div class="place-lead">
+<h3>Насчмарт</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Linke Wienzeile, 1040 / 1060 Wien | Период: 1898</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vienna_naschmarkt.jpg" alt="Насчмарт" width="1280" height="960" style="height: 260px; max-height: 260px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vienna_naschmarkt_b.jpg" alt="Насчмарт — вид 2" width="330" height="186" style="height: 260px; max-height: 260px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Нашмаркт — самый известный и оживленный рынок Вены, шумный центр местных продуктов, мясных изделий, сыров и уличной еды. Расположенный в самом сердце города, он является неотъемлемой частью венского образа жизни с момента своего основания. Открытый в 1898 году как один из первых крытых рынков Европы. Включает более 140 магазинов, продающих всё, от свежих фруктов и овощей до изделий ручной работы. Здесь расположено несколько знаковых ресторанов, предлагающих традиционные венские блюда, такие как Винер Шницель и Апфельштрудель. В последние годы был значительно отремонтирован, сохранив свой исторический шарм. Привлекает миллионы посетителей ежегодно.</p>
+<p class="prose">Основанный в 1898 году, Нашмаркт изначально был задуман как современный рынок, чтобы заменить старые, менее гигиеничные рынки. Он быстро стал культурной достопримечательностью, привлекая местных жителей и туристов своими яркими прилавками, живой атмосферой и разнообразием кулинарных удовольствий. Обязательное место для посещения для всех, кто интересуется подлинной австрийской кухней и местной культурой.</p></div>
+</section>
+<section class="place" id="vienna_urania_vienna">
+<div class="place-lead">
+<h3>Обсерватория Урании</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Uraniastraße 1, 1010 Wien | Период: 1894</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vienna_urania_vienna.jpg" alt="Обсерватория Урании" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vienna_urania_vienna_b.jpg" alt="Обсерватория Урании — вид 2" width="330" height="440" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Расположенная высоко над центром города на Шоттенринге, обсерватория Урания предлагает захватывающий вид на венский горизонт и знаменитый дворец Хофбург. Построенная в 1894 году, она изначально предназначалась как образовательное учреждение для популяризации астрономии среди широкой публики. Он расположен на месте бывшего Императорского монетного двора. Здание отличается неоклассическими элементами дизайна, характерными для творчества Теофила Хансена. Регулярные публичные сеансы наблюдения за звездами проводятся каждую ночь при ясной погоде. Уранья проводит временные выставки, связанные с исследованием космоса и астрономией. С 1976 года он является частью Австрийской ассоциации музеев.</p>
+<p class="prose">Установленная в 1894 году императором Францем Иосифом I, обсерватория Ураниа была спроектирована архитектором Теофилом Хансеном. Она служила как обсерватория для научных исследований, так и образовательным учреждением, направленным на развитие интереса к астрономии. Со временем она стала символом культурного наследия Вены и популярной туристической достопримечательностью. Посещение Урании позволяет гостям насладиться очарованием архитектуры начала века, наслаждаясь панорамными видами на город.</p></div>
+</section>
+<section class="place" id="vienna_maria_theresien_denkmal">
+<div class="place-lead">
+<h3>Памятник Марии Терезии</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Место: Maria-Theresien-Platz, 1010 Wien | Период: 1968</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vienna_maria_theresien_denkmal.jpg" alt="Памятник Марии Терезии" width="1143" height="1600" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vienna_maria_theresien_denkmal_b.jpg" alt="Памятник Марии Терезии — вид 2" width="330" height="247" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Расположенный на оживленной торговой улице Грабен, Мемориал Марии Терезии является данью уважения влиятельной императрице Австрии и покровительнице искусств. Эта элегантная скульптура запечатлевает её королевское достоинство и величественное присутствие. Статуя была создана австрийским художником Вильгельмом фон Рюбецаем. На картине изображена Мария Терезия, стоящая с сложенными руками, в традиционном королевском одеянии. Памятник расположен на пересечении двух основных пешеходных улиц в центре Вены. Эта скульптура является частью обширной коллекции исторических памятников города, отмечающих его богатое наследие. В 1968 году отмечалась двухсотлетняя годовщина со дня смерти Марии Терезии.</p>
+<p class="prose">Завершенный в 1968 году, мемориал был заказан городом Веной в честь императрицы Марии Терезии, правившей с 1740 по 1780 год. Он является символом ее значительного вклада в искусство, культуру и образование в период ее правления. Посещение мемориала позволяет посетителям оценить культурное наследие, оставленное одним из самых известных монархов Австрии.</p></div>
+</section>
+<section class="place" id="vienna_prater_hauptallee">
+<div class="place-lead">
+<h3>Пратер Хаупталлее</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Место: Prater, 1020 Wien</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vienna_prater_hauptallee.jpg" alt="Пратер Хаупталлее" width="1280" height="857" style="height: 309px; max-height: 309px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vienna_prater_hauptallee_b.jpg" alt="Пратер Хаупталлее — вид 2" width="330" height="317" style="height: 309px; max-height: 309px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Пратер Хаупталея — это знаковая центральная аллея Вены, расположенная в крупнейшем парке города, протянувшаяся более чем на два километра сквозь зелёные насаждения и открытые пространства. Она служит как для неспешных прогулок, так и для оживлённой пешеходной зоны, вдоль которой расположены кафе, магазины и достопримечательности. Он соединяет популярный парк аттракционов Пратер с районом Музейного квартала. Хаупталея проводит различные фестивали и мероприятия в течение года, включая концерты и рынки. Летом посетители могут отдохнуть на тенистых скамейках под высокими деревьями. Ночью уличные фонари освещают тропинку, создавая романтическую атмосферу для вечерних прогулок. Здесь также находятся несколько исторических памятников, таких как колесо обозрения Ризенрад.</p>
+<p class="prose">Изначально спроектированный ландшафтным архитектором Карлом фон Хазенауэром в конце 19 века, Пратер задумывался как современная зона отдыха для венских граждан. Хаупталлея стала известна своим грандиозным бульварным стилем, с широкими дорожками, деревьями и статуями, отражающими богатое культурное наследие города. Посетители приходят сюда, чтобы насладиться спокойной атмосферой парка, исследуя яркую уличную жизнь вдоль Хаупталея.</p></div>
+</section>
+<section class="place" id="vienna_spanische_hofreitschule_facade">
+<div class="place-lead">
+<h3>Фасад Испанской школы верховой езды</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Michaelerplatz, Hofburg, 1010 Wien | Период: 1787</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vienna_spanische_hofreitschule_facade.jpg" alt="Фасад Испанской школы верховой езды" width="1200" height="1600" style="height: 203px; max-height: 203px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vienna_spanische_hofreitschule_facade_b.jpg" alt="Фасад Испанской школы верховой езды — вид 2" width="330" height="145" style="height: 203px; max-height: 203px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Величественный фасад Испанской школы верховой езды является свидетельством роскоши и традиций австрийской имперской эпохи. Построенная в 1787 году во время правления императора Иосифа II, она демонстрирует барочную архитектуру в её наилучшем проявлении, с богатыми деталями и симметричными элементами дизайна. Построенный в 1787 году, фасад является примером австрийского барокко. Здесь находятся знаменитые липицкие жеребцы, выведенные специально для классического выездки. Школа продолжает обучать всадников, используя традиционные методы, уходящие корнями в века. Регулярные выступления демонстрируют элегантность и точность этих конных атлетов. Интерьер украшен сложными декорациями и историческими артефактами.</p>
+<p class="prose">Основанная в 1600 году как часть Хофрейтшуле, Испанская школа верховой езды стала домом для знаменитых лошадей Липиццанеров с конца 18 века. Ее нынешний фасад был построен в 1787 году при императоре Иосифе II, отражая великолепие Габсбургской Вены. Здание служило как тренировочной площадкой для кавалеристов, так и местом для королевских церемоний. Посещение Испанской школы верховой езды позволяет посетителям firsthand увидеть одну из самых известных традиций верховой езды в Европе.</p></div>
+</section>
+<section class="place" id="vienna_ruprechtskirche_vienna">
+<div class="place-lead">
+<h3>Церковь Святого Руперта</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Ruprechtsplatz, 1010 Wien | Период: 1746–1758</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vienna_ruprechtskirche_vienna.jpg" alt="Церковь Святого Руперта" width="1200" height="1600" style="height: 302px; max-height: 302px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vienna_ruprechtskirche_vienna_b.jpg" alt="Церковь Святого Руперта — вид 2" width="330" height="216" style="height: 302px; max-height: 302px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Церковь Святого Руперта — барочная жемчужина, расположенная на окраине внутреннего города Вены, известная своим ярким белым фасадом и сложным внутренним убранством. Здесь находится гробница императора Фердинанда III, который правил во время Тридцатилетней войны. Его интерьер украшен сложными фресками, написанными Джованни Баттистой Тьеполо, одним из самых известных художников Европы того времени. Алтарь содержит скульптуры Франца Антона Маульбертша, известного своими работами в мраморе и бронзе. Орган был построен знаменитым венским мастером инструментов Игназом Тобиасом Шрайбером. Рядом с церковью расположено историческое аббатство Святого Руперта, которое является местом паломничества с средневековых времён.</p>
+<p class="prose">Построенная между 1746 и 1758 годами по приказу императрицы Марии Терезии, церковь была спроектирована архитектором Иосифом Эмануэлем Фишером фон Эрлахом, чтобы стать центром религиозной жизни в северном районе города. Она украшена элегантным куполом и классическими колоннами, демонстрируя архитектурный стиль позднего рококо с влиянием итальянского барокко. Посетители приходят сюда, чтобы восхититься изысканным барочным искусством и ощутить спокойную атмосферу в его высоком нефе.</p></div>
+</section>
+<section class="place" id="vienna_stephansplatz">
+<div class="place-lead">
+<h3>Штефансплатц</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Место: 1010 Wien, around Stephansdom</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vienna_stephansplatz.jpg" alt="Штефансплатц" width="330" height="127" style="height: 177px; max-height: 177px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vienna_stephansplatz_b.jpg" alt="Штефансплатц — вид 2" width="330" height="220" style="height: 177px; max-height: 177px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">В самом сердце Вены находится Штефансплац, яркий центр, где традиции встречаются с современной жизнью. Окруженный историческими зданиями и оживленными кафе, он является одной из самых знаковых площадей города. Площадь названа в честь собора Святого Стефана, который доминирует на её северной стороне. В нем находятся несколько известных достопримечательностей, включая Ратушу (Городскую ратушу), Бургтеатр и дворец Нойе Бург. Каждый год Рождественский рынок преображает площадь в праздничную сцену, наполненную традиционными ремеслами и сезонными угощениями. Штефансплац служит местом сбора для различных фестивалей, концертов и политических демонстраций. Во время Второй мировой войны площадь сильно пострадала, но была тщательно восстановлена после войны.</p>
+<p class="prose">Основанная в конце XIII века как рынок, Штефансплац на протяжении веков была центральной частью развития Вены. Позже она была расширена и преобразована в величественную площадь в эпоху барокко, став центром культурных событий и собраний. Сегодня это по-прежнему популярное место как для местных жителей, так и для туристов. Стефансплац имеет особое значение, поскольку предлагает уникальное сочетание исторического очарования и современного настроения, что делает его обязательным местом для посещения всем, кто исследует Вену.</p></div>
 </section>
 </body>
 </html>

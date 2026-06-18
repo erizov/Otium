@@ -81,10 +81,12 @@ class EditionTranslator:
         project_root: Path | None = None,
         enabled: bool = True,
         cache_path: Path | None = None,
+        cache_only: bool = False,
     ) -> None:
         self._root = project_root or _PROJECT_ROOT
         self._enabled = enabled
         self._cache_file = cache_path or _cache_path(self._root)
+        self._cache_only = cache_only
         self._mem: dict[str, str] = {}
         self._load_cache()
 
@@ -126,6 +128,8 @@ class EditionTranslator:
         if key in self._mem:
             cached = self._mem[key].strip()
             return cached if cached and _text_for_edition(cached, dst) else None
+        if self._cache_only:
+            return None
         translated = self._call_backend(s, src=src, dst=dst, kind=kind)
         if not translated:
             return None
@@ -149,7 +153,14 @@ class EditionTranslator:
     ) -> str | None:
         if os.environ.get("OLLAMA_HOST") or os.environ.get("USE_OLLAMA") == "1":
             try:
-                return self._ollama(text, src=src, dst=dst, kind=kind)
+                ollama_out = self._ollama(
+                    text,
+                    src=src,
+                    dst=dst,
+                    kind=kind,
+                )
+                if ollama_out:
+                    return ollama_out
             except Exception:
                 pass
         if os.environ.get("OPENAI_API_KEY", "").strip():

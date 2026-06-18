@@ -13,7 +13,7 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
 .otium-logo { font-family: 'Libre Baskerville', serif; font-size: 2.15rem;
   font-weight: 600; letter-spacing: 0.18em; margin-bottom: 0.85rem; }
 .otiump { margin: 0.42rem 0; line-height: 1.42; text-align: justify;
-  max-width: 38rem; font-size: 0.95rem; }
+  font-size: 0.95rem; }
 .guide-title { page-break-after: auto; margin-bottom: 0.55rem;
   page-break-inside: avoid; }
 .historical-reference { margin: 0.75rem 0 1.15rem;
@@ -63,22 +63,103 @@ ol.trip-stops a:hover { text-decoration: underline; }
 .heraldry-univ-caption { font-size: 0.52rem; line-height: 1.18;
   margin: 0.12rem 0 0; padding: 0 0.06rem; color: #252525;
   text-align: center; font-weight: 500; }
-.heraldry-motto { text-align: center; max-width: 18rem; margin: 0.18rem auto;
+.heraldry-motto { text-align: center; margin: 0.18rem auto;
   width: 100%; }
 .motto-line { font-family: 'Libre Baskerville', serif; font-size: 1rem;
   margin: 0; color: #333; line-height: 1.35; }
 .guide-title h1.guide-title-main { font-family: 'Libre Baskerville', serif;
   font-size: 2.35rem; margin-bottom: 0.5rem; font-weight: 600; }
 .lead { color: #444; font-size: 1.05rem; }
-.guide-toc { margin: 0.85rem 0 1.15rem; page-break-inside: avoid; }
-.guide-toc h2 { font-family: 'Libre Baskerville', serif; font-size: 1.28rem;
-  font-weight: 600; margin: 0.4rem 0 0.55rem; }
+
+.guide-toc { page-break-before: always; break-before: page;
+  page-break-after: always; break-after: page;
+  margin: 0; padding: 0.2rem 0 0.45rem; page-break-inside: auto; }
+.guide-toc h2 { font-family: 'Libre Baskerville', serif;
+  font-size: 1.28rem; font-weight: 600; margin: 0.4rem 0 0.55rem; }
 .guide-toc ol { margin: 0.35rem 0 0.65rem 1.25rem; padding: 0;
   columns: 2; column-gap: 1.5rem; }
 .guide-toc li { margin: 0.18rem 0; line-height: 1.35;
   font-size: 0.88rem; break-inside: avoid; }
-.guide-toc a { color: #1a5276; text-decoration: none; }
+.guide-toc a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.guide-toc a:hover { color: #0d3d56; }
 .guide-toc li.toc-item--sub { font-size: 0.82rem; margin-left: 0.35rem; }
+.toc-back { font-size: 0.78rem; margin: 0 0 0.35rem; text-align: right; }
+.toc-back a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.toc-back a:hover { color: #0d3d56; }
+.place, .historical-reference, .guide-primer, .guide-trip-plans {
+  scroll-margin-top: 1.25rem; }
+.historical-reference h2, .guide-primer h2, .guide-trip-plans h2,
+.chapter-head h2, .place-lead h3 { position: relative; }
+.guide-toc + .place, .guide-toc + .chapter-head {
+  page-break-before: avoid; break-before: avoid-page; }
+.place-lead { page-break-inside: avoid; break-inside: avoid-page;
+  page-break-after: auto; }
+.place-lead > h3 { page-break-after: avoid; break-after: avoid-page; }
+.place-lead > .place-meta { page-break-after: avoid; break-after: avoid-page; }
+
+.place-fig { page-break-inside: avoid; break-inside: avoid-page;
+  margin: 0.5rem 0 1rem; }
+.place-fig img {
+  page-break-inside: avoid; break-inside: avoid-page;
+  max-height: 48vh; width: auto; max-width: 100%;
+  object-fit: contain; margin-left: auto; margin-right: auto; }
+.place-fig--hi-res img { max-height: 52vh; }
+.place-fig--lo-res img { max-height: 30vh; }
+.place-pdf-fig-row {
+  display: flex; flex-direction: row; flex-wrap: wrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.45rem 0.55rem; margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row .place-fig {
+  flex: 1 1 30%; margin: 0; min-width: 26%; max-width: 100%; }
+.place-pdf-fig-row .place-fig img {
+  width: auto; max-width: 100%; height: auto; max-height: 44vh;
+  object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--pair {
+  flex-wrap: nowrap; justify-content: space-between;
+  align-items: flex-end; gap: 0.5rem 0.65rem; }
+.place-pdf-fig-row--pair .place-fig {
+  flex: 1 1 47%; min-width: 0; max-width: 50%;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--pair .place-fig img {
+  max-height: 44vh; object-fit: contain; }
+.place-pdf-fig-row--pair .place-fig--hi-res img { max-height: 52vh; }
+.place-pdf-fig-row--pair .place-fig--lo-res img { max-height: 26vh; }
+.place-pdf-fig-row--pair .place-fig--row-sized img,
+.place-pdf-fig-row--triple .place-fig--row-sized img,
+.place-pdf-fig-row--many .place-fig--row-sized img {
+  width: auto; max-width: 100%; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row .place-fig--row-sized.place-fig--hi-res img,
+.place-pdf-fig-row .place-fig--row-sized.place-fig--lo-res img {
+  max-height: unset; }
+.place-pdf-fig-rows-stack {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple {
+  display: flex; flex-direction: row; flex-wrap: nowrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.4rem 0.48rem; margin: 0;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--triple .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--triple .place-fig--hi-res img { max-height: 42vh; }
+.place-pdf-fig-row--triple .place-fig--lo-res img { max-height: 18vh; }
+.place-pdf-fig-row--many {
+  flex-wrap: nowrap; justify-content: center; align-items: flex-end;
+  gap: 0.35rem 0.42rem; }
+.place-pdf-fig-row--many .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--many .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+
+
 .place { margin-bottom: 2.2rem; page-break-inside: auto; }
 h3 { font-family: 'Libre Baskerville', serif; font-size: 1.22rem; margin: 1.2rem 0 0.35rem;
   font-weight: 600; }
@@ -90,7 +171,6 @@ h4 { font-family: 'Libre Baskerville', serif; font-size: 0.95rem; text-transform
   color: #555; font-size: 0.95rem; margin: 0 0 0.5rem; font-style: italic; }
 .place-meta { font-size: 0.92rem; color: #353535; margin: 0 0 0.75rem;
   line-height: 1.4; }
-.place-fig { margin: 0.5rem 0 1rem; }
 img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
 .prose, .place-desc p { margin: 0.45rem 0; line-height: 1.5;
   text-align: justify; }
@@ -110,7 +190,9 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <figure class="heraldry-fig heraldry-coat-book" title="Coat of arms of the City of London"><img src="../images/guide_coat_of_arms.svg" alt="Coat of arms of the City of London"/></figure>
 <figure class="heraldry-fig heraldry-coat-book" title="Flag of the City of London"><img src="../images/guide_flag.svg" alt="Flag of the City of London"/></figure>
 </div></div><h1 class="guide-title-main">London</h1><p class="lead">Guide. Places in this edition: 26.</p></header>
+<nav class="guide-toc" id="guide-toc" aria-label="Contents"><h2>Contents</h2><ol><li class="toc-item"><a href="#guide-trips">Trip ideas</a></li><li class="toc-item"><a href="#london_borough_market">Borough Market</a></li><li class="toc-item"><a href="#london_british_museum">British Museum</a></li><li class="toc-item"><a href="#london_buckingham_palace">Buckingham Palace</a></li><li class="toc-item"><a href="#london_camden_market">Camden Market</a></li><li class="toc-item"><a href="#london_canary_wharf">Canary Wharf</a></li><li class="toc-item"><a href="#london_churchill_war_rooms">Churchill War Rooms</a></li><li class="toc-item"><a href="#london_covent_garden">Covent Garden piazza</a></li><li class="toc-item"><a href="#london_fazl_moschee">Fazl Moschee</a></li><li class="toc-item"><a href="#london_hyde_park">Hyde Park and Serpentine</a></li><li class="toc-item"><a href="#london_kensington_palace">Kensington Palace</a></li><li class="toc-item"><a href="#london_kew_gardens">Kew Gardens Palm House</a></li><li class="toc-item"><a href="#london_national_gallery">National Gallery</a></li><li class="toc-item"><a href="#london_natural_history_museum">Natural History Museum</a></li><li class="toc-item"><a href="#london_notting_hill">Notting Hill Portobello</a></li><li class="toc-item"><a href="#london_palace_westminster">Palace of Westminster</a></li><li class="toc-item"><a href="#london_big_ben">Palace of Westminster clock</a></li><li class="toc-item"><a href="#london_greenwich_observatory">Royal Observatory Greenwich</a></li><li class="toc-item"><a href="#london_shakespeare_globe">Shakespeare&#x27;s Globe</a></li><li class="toc-item"><a href="#london_st_pauls_cathedral">St Paul&#x27;s Cathedral</a></li><li class="toc-item"><a href="#london_st_pauls_aerial_cropped">St Pauls aerial (cropped)</a></li><li class="toc-item"><a href="#london_tate_britain">Tate Britain</a></li><li class="toc-item"><a href="#london_tate_modern">Tate Modern</a></li><li class="toc-item"><a href="#london_tower_bridge">Tower Bridge</a></li><li class="toc-item"><a href="#london_tower_of_london">Tower of London</a></li><li class="toc-item"><a href="#london_va_museum">Victoria and Albert Museum</a></li><li class="toc-item"><a href="#london_westminster_abbey">Westminster Abbey</a></li></ol></nav>
 <section class="guide-trip-plans" id="guide-trips" aria-label="Trip ideas"><h2>Trip ideas</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 <article class="trip-plan" id="trip-1d"><h3>One day</h3>
 <p class="prose">A compact loop linking the strongest cards in this guide, ordered to minimise backtracking on foot.</p>
 <ol class="trip-stops"><li><a href="#london_camden_market">Camden Market</a> (~75min)</li>
@@ -138,208 +220,351 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <ol class="trip-stops"><li><a href="#london_tower_bridge">Tower Bridge</a> (~75min)</li>
 <li><a href="#london_tower_of_london">Tower of London</a> (~75min)</li>
 <li><a href="#london_tate_modern">Tate Modern</a> (~75min)</li></ol></article></section>
-<nav class="guide-toc" aria-label="Contents"><h2>Contents</h2><ol><li class="toc-item"><a href="#guide-trips">Trip ideas</a></li><li class="toc-item"><a href="#london_borough_market">Borough Market</a></li><li class="toc-item"><a href="#london_british_museum">British Museum</a></li><li class="toc-item"><a href="#london_buckingham_palace">Buckingham Palace</a></li><li class="toc-item"><a href="#london_camden_market">Camden Market</a></li><li class="toc-item"><a href="#london_canary_wharf">Canary Wharf</a></li><li class="toc-item"><a href="#london_churchill_war_rooms">Churchill War Rooms</a></li><li class="toc-item"><a href="#london_covent_garden">Covent Garden piazza</a></li><li class="toc-item"><a href="#london_pdfband_2_af9e03be">Fazl Moschee</a></li><li class="toc-item"><a href="#london_hyde_park">Hyde Park and Serpentine</a></li><li class="toc-item"><a href="#london_kensington_palace">Kensington Palace</a></li><li class="toc-item"><a href="#london_kew_gardens">Kew Gardens Palm House</a></li><li class="toc-item"><a href="#london_national_gallery">National Gallery</a></li><li class="toc-item"><a href="#london_natural_history_museum">Natural History Museum</a></li><li class="toc-item"><a href="#london_notting_hill">Notting Hill Portobello</a></li><li class="toc-item"><a href="#london_palace_westminster">Palace of Westminster</a></li><li class="toc-item"><a href="#london_big_ben">Palace of Westminster clock</a></li><li class="toc-item"><a href="#london_greenwich_observatory">Royal Observatory Greenwich</a></li><li class="toc-item"><a href="#london_shakespeare_globe">Shakespeare&#x27;s Globe</a></li><li class="toc-item"><a href="#london_st_pauls_cathedral">St Paul&#x27;s Cathedral</a></li><li class="toc-item"><a href="#london_pdfband_0_223e3b5e">St Pauls aerial (cropped)</a></li><li class="toc-item"><a href="#london_tate_britain">Tate Britain</a></li><li class="toc-item"><a href="#london_tate_modern">Tate Modern</a></li><li class="toc-item"><a href="#london_tower_bridge">Tower Bridge</a></li><li class="toc-item"><a href="#london_tower_of_london">Tower of London</a></li><li class="toc-item"><a href="#london_va_museum">Victoria and Albert Museum</a></li><li class="toc-item"><a href="#london_westminster_abbey">Westminster Abbey</a></li></ol></nav>
 <section class="place" id="london_borough_market">
+<div class="place-lead">
 <h3>Borough Market</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/london_borough_market.jpg" alt="Borough Market"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/london_borough_market.jpg" alt="Borough Market" width="330" height="498" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/london_borough_market_b.jpg" alt="Borough Market — view 2" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Borough Market is one of London’s oldest and most renowned food markets, offering a vibrant array of fresh produce, gourmet foods, and artisanal products. Located near London Bridge, it attracts both locals and tourists alike, providing a sensory feast of sights, sounds, and tastes. The market is a hub of culinary creativity, hosting various food stalls and vendors that celebrate both British and international cuisine. Borough Market was officially established in 1756. The market is located on the south bank of the River Thames, near London Bridge. It features over 100 stalls and shops offering a variety of food products.</p>
 <p class="prose">Borough Market has roots dating back to the 11th century, making it one of the oldest markets in London. Originally established as a wholesale fruit and vegetable market, it has evolved over the centuries, with significant redevelopment occurring in the 19th century. The market faced challenges in the 20th century but was revitalized in the 1990s, becoming a popular destination for food lovers. Culturally, Borough Market plays a vital role in London&#x27;s food scene, reflecting the city’s diverse culinary heritage. It serves as a gathering place for the community, where people can experience local and international flavors. The market also hosts various events and activities, fostering a sense of connection among visitors and vendors alike.</p></div>
 </section>
 <section class="place" id="london_british_museum">
+<div class="place-lead">
 <h3>British Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Great Russell Street, Bloomsbury | Style: Greek revival façade; modern Great Court glass roof | Period: 1753 founding; Great Court roof 2000 (Foster)</p>
-<figure class="place-fig"><img src="../images/london_british_museum.jpg" alt="British Museum"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/london_british_museum.jpg" alt="British Museum" width="1138" height="1600" style="height: 453px; max-height: 453px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/london_british_museum_b.jpg" alt="British Museum — view 2" width="330" height="324" style="height: 453px; max-height: 453px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">National museum of human history, art, and culture with free general admission. The Great Court wraps the Reading Room under a glass canopy. Highlights include the Rosetta Stone and the Parthenon sculptures (subject to loan policy). Timed tickets apply to major temporary exhibitions.</p>
 <p class="prose">Grew from Sir Hans Sloane&#x27;s bequest into a global collection; the Great Court project opened the inner court to visitors. One of the world&#x27;s most visited museums and a Bloomsbury anchor for slow afternoons.</p></div>
 </section>
 <section class="place" id="london_buckingham_palace">
+<div class="place-lead">
 <h3>Buckingham Palace</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Westminster | Style: Neoclassical façade; state rooms in palatial sequence | Period: 1703 house; 19th c. enlargement (Nash, Blore)</p>
-<figure class="place-fig"><img src="../images/london_buckingham_palace.jpg" alt="Buckingham Palace"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/london_buckingham_palace.jpg" alt="Buckingham Palace" width="1280" height="821" style="height: 296px; max-height: 296px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/london_buckingham_palace_b.jpg" alt="Buckingham Palace — view 2" width="330" height="216" style="height: 296px; max-height: 296px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Working royal residence and London headquarters of the monarch. The garden façade and Victoria Memorial frame the approach from the Mall. Changing of the Guard draws crowds at the front gates on scheduled mornings. State Rooms open to the public on selected summer dates.</p>
 <p class="prose">Began as Buckingham House; George IV and Victoria expanded it into the palace state visitors recognise today. The public face of the modern monarchy in central London.</p></div>
 </section>
 <section class="place" id="london_camden_market">
+<div class="place-lead">
 <h3>Camden Market</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/london_camden_market.jpg" alt="Camden Market"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/london_camden_market_b.jpg" alt="Camden Market" width="330" height="247"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Camden Market is a vibrant hub of creativity and commerce located in the heart of Camden Town, London. Known for its eclectic mix of food stalls, vintage shops, and artisan crafts, the market attracts millions of visitors each year. Its lively atmosphere is complemented by live music and street performances, making it a must-visit destination for both locals and tourists. Camden Market attracts over 28 million visitors annually. The market features over 1,000 shops and stalls. Camden Lock Market opened in 1974 and was one of the first markets in the area.</p>
 <p class="prose">Camden Market began in the 1970s as a small craft market, evolving significantly over the decades. The market&#x27;s growth was spurred by the rise of alternative culture in London, particularly during the punk era, which helped establish Camden as a center for youth culture and creativity. Today, it encompasses several markets, including the Camden Lock Market, which opened in 1974. Culturally, Camden Market plays a crucial role in London&#x27;s identity, representing a melting pot of diverse communities and artistic expression. It has become synonymous with alternative fashion and music, contributing to the city&#x27;s reputation as a global cultural capital. The market also reflects the changing dynamics of urban life, showcasing the importance of local businesses and street food in contemporary society.</p></div>
 </section>
 <section class="place" id="london_canary_wharf">
+<div class="place-lead">
 <h3>Canary Wharf</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/london_canary_wharf.jpg" alt="Canary Wharf"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/london_canary_wharf.jpg" alt="Canary Wharf" width="330" height="186" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/london_canary_wharf_b.jpg" alt="Canary Wharf — view 2" width="330" height="186" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Canary Wharf is a vibrant financial district located in East London, known for its modern skyscrapers and bustling atmosphere. Once a hub for the shipping industry, it has transformed into one of the UK&#x27;s key financial centers, housing major banks and corporations. Visitors can enjoy a variety of shops, restaurants, and cultural spaces amidst the iconic architecture. Canary Wharf is home to over 105,000 employees and more than 300 businesses. The district features several notable skyscrapers, including One Canada Square, which was the tallest building in the UK until 2012.</p>
 <p class="prose">Canary Wharf&#x27;s history dates back to the late 19th century when it was developed as a dock for shipping and trade. The area saw significant decline in the late 20th century, leading to its redevelopment in the 1980s and 1990s into a financial district. The construction of the iconic One Canada Square was completed in 1991, marking a new era for the area. Culturally, Canary Wharf represents the shift in London&#x27;s economic landscape, evolving from a historical port to a modern financial hub. It plays a crucial role in the daily life of thousands of professionals and is a symbol of London&#x27;s global financial influence. The area hosts various public art installations and events, contributing to its cultural vibrancy.</p></div>
 </section>
 <section class="place" id="london_churchill_war_rooms">
+<div class="place-lead">
 <h3>Churchill War Rooms</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/london_churchill_war_rooms.jpg" alt="Churchill War Rooms"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/london_churchill_war_rooms.jpg" alt="Churchill War Rooms" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/london_churchill_war_rooms_b.jpg" alt="Churchill War Rooms — view 2" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Churchill War Rooms, located in the heart of London, offer a fascinating glimpse into the underground nerve center where Winston Churchill and his government operated during World War II. Visitors can explore the preserved rooms and exhibits that tell the story of Britain&#x27;s wartime leadership and the challenges faced during one of history&#x27;s most tumultuous periods. This immersive experience not only highlights the strategic decisions made but also the human stories behind the war effort. The Churchill War Rooms were opened to the public as a museum in 1984. The site is part of the Imperial War Museums, dedicated to preserving the history of conflict.</p>
 <p class="prose">The Churchill War Rooms were established in 1938 as a secret headquarters for the British government during World War II. The rooms were used extensively from 1939 to 1945, providing a secure location for Churchill and his cabinet to direct military operations and manage wartime logistics. After the war, the site was closed and remained largely untouched until it was opened to the public in 1984 as a museum. The Churchill War Rooms hold immense political significance as they were the command center from which key decisions were made during World War II, influencing the course of the conflict and the future of Europe. The site serves as a cultural landmark, preserving the heritage of wartime Britain and reflecting the resilience and determination of the British people. It is part of the Imperial War Museums and contributes to the understanding of the impact of war on society, making it a vital educational resource.</p></div>
 </section>
 <section class="place" id="london_covent_garden">
+<div class="place-lead">
 <h3>Covent Garden piazza</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: West End | Style: Neoclassical market hall | Period: Inigo Jones square 1630s; glass roof 1830s</p>
-<figure class="place-fig"><img src="../images/london_covent_garden.jpg" alt="Covent Garden piazza"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/london_covent_garden.jpg" alt="Covent Garden piazza" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/london_covent_garden_b.jpg" alt="Covent Garden piazza — view 2" width="330" height="228" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Buskers under the iron-and-glass market roof with opera house and boutique lanes radiating outward. Apple Market crafts rotate daily vendors. Street performers must audition for pitch slots.</p>
 <p class="prose">Fruit-and-flower market moved out; tourism and retail filled the iron shed. Pedestrian theatre between Strand and Seven Dials.</p></div>
 </section>
-<section class="place" id="london_pdfband_2_af9e03be">
+<section class="place" id="london_fazl_moschee">
+<div class="place-lead">
 <h3>Fazl Moschee</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/london_pdfband_2_af9e03be.jpg" alt="Fazl Moschee"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/london_fazl_moschee.jpg" alt="Fazl Moschee" width="1200" height="1600" style="height: 331px; max-height: 331px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/london_fazl_moschee_b.jpg" alt="Fazl Moschee — view 2" width="330" height="237" style="height: 331px; max-height: 331px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 </section>
 <section class="place" id="london_hyde_park">
+<div class="place-lead">
 <h3>Hyde Park and Serpentine</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
-<p class="place-meta">Address: Westminster | Style: English landscape park | Period: 1637 royal park; Serpentine 1730s</p>
-<figure class="place-fig"><img src="../images/london_hyde_park.jpg" alt="Hyde Park and Serpentine"/></figure>
+<p class="place-meta">Location: Westminster | Style: English landscape park | Period: 1637 royal park; Serpentine 1730s</p>
+<figure class="place-fig place-fig--lo-res"><img src="../images/london_hyde_park_b.jpg" alt="Hyde Park and Serpentine" width="330" height="220"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Speakers&#x27; Corner debates, Serpentine swimming club, and pedal boats beside Kensington Gardens. Winter Wonderland fills the east meadow seasonally. Parkrun loops start near the bandstand on Saturday mornings.</p>
 <p class="prose">Henry VIII hunting chase became a Victorian public promenade linked to Green Park. Central London&#x27;s largest unstructured green relief.</p></div>
 </section>
 <section class="place" id="london_kensington_palace">
+<div class="place-lead">
 <h3>Kensington Palace</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/london_kensington_palace.jpg" alt="Kensington Palace"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/london_kensington_palace.jpg" alt="Kensington Palace" width="330" height="267" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/london_kensington_palace_b.jpg" alt="Kensington Palace — view 2" width="330" height="422" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">With its beautiful architecture and lush gardens, it offers visitors a glimpse into the lives of British royalty. The palace is home to a rich collection of art and historical artifacts, making it a must-visit destination for those interested in the royal heritage of the UK. Kensington Palace was acquired by King William III and Queen Mary II in 1689. Queen Victoria was born at Kensington Palace in 1819. The palace is set within Kensington Gardens, which is part of the Royal Parks of London.</p>
 <p class="prose">Kensington Palace has a history that dates back to the late 17th century when it was acquired by King William III and Queen Mary II in 1689. Originally a modest mansion, it was transformed into a royal residence and has since been the birthplace and home of several British monarchs, including Queen Victoria. The palace has undergone various renovations and expansions over the years, reflecting the changing tastes and styles of the monarchy. Culturally, Kensington Palace is significant as it showcases the evolution of royal life and British heritage. It houses a collection of royal portraits and artifacts that highlight the artistic achievements of the monarchy. The palace is also a venue for various public events and exhibitions, contributing to its role in contemporary cultural life. Although it is not a religious site, its historical importance as a royal residence has made it a symbol of the British monarchy.</p></div>
 </section>
 <section class="place" id="london_kew_gardens">
+<div class="place-lead">
 <h3>Kew Gardens Palm House</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/london_kew_gardens.jpg" alt="Kew Gardens Palm House"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/london_kew_gardens.jpg" alt="Kew Gardens Palm House" width="330" height="187" style="height: 166px; max-height: 166px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/london_kew_gardens_b.jpg" alt="Kew Gardens Palm House — view 2" width="330" height="119" style="height: 166px; max-height: 166px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Kew Gardens Palm House is a stunning Victorian glasshouse located within the Royal Botanic Gardens at Kew, London. It showcases a diverse collection of tropical plants and serves as a vital center for botanical research and conservation. Visitors can explore its lush interiors and enjoy the serene surroundings of the gardens, making it a perfect spot for nature lovers and families alike. The Palm House is one of the oldest surviving Victorian glasshouses in the world. It contains over 1,500 plants from tropical regions, including palms, ferns, and orchids.</p>
 <p class="prose">The Palm House was designed by architect Richard Turner and completed in 1848. It was one of the first large-scale Victorian glass structures and was built to house a collection of exotic plants from tropical climates. Over the years, it has undergone various restorations to preserve its architectural integrity and the precious plant species it houses. Culturally, the Palm House is a key part of the Royal Botanic Gardens, a UNESCO World Heritage Site, recognized for its historical and scientific importance. It plays an essential role in public education about plant conservation and biodiversity, reflecting the UK&#x27;s commitment to environmental stewardship. The Palm House also serves as a venue for various cultural events and exhibitions, enriching the daily life of the community.</p></div>
 </section>
 <section class="place" id="london_national_gallery">
+<div class="place-lead">
 <h3>National Gallery</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Trafalgar Square | Style: Neoclassical portico; postmodern wing | Period: 1838 core; Sainsbury Wing 1991</p>
-<figure class="place-fig"><img src="../images/london_national_gallery.jpg" alt="National Gallery"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/london_national_gallery.jpg" alt="National Gallery" width="1200" height="1600" style="height: 245px; max-height: 245px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/london_national_gallery_b.jpg" alt="National Gallery — view 2" width="330" height="175" style="height: 245px; max-height: 245px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">National Gallery — art museum in London, England, UK. Friday lates extend hours with talks and music. Timed exhibitions occupy the basement Sainsbury rooms.</p>
 <p class="prose">Parliament funded a national painting collection for public education on the square. World-class Old Masters without an admission fee.</p></div>
 </section>
 <section class="place" id="london_natural_history_museum">
+<div class="place-lead">
 <h3>Natural History Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Cromwell Road, South Kensington | Style: Romanesque revival terracotta | Period: 1881 (Waterhouse)</p>
-<figure class="place-fig"><img src="../images/london_natural_history_museum.jpg" alt="Natural History Museum"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/london_natural_history_museum.jpg" alt="Natural History Museum" width="1280" height="720" style="height: 259px; max-height: 259px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/london_natural_history_museum_b.jpg" alt="Natural History Museum — view 2" width="330" height="199" style="height: 259px; max-height: 259px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Hintze Hall blue whale skeleton under painted ceiling tiles of living species categories. Earthquake simulator queues in the geology wing. Night openings target adults with music and bars.</p>
 <p class="prose">Split from British Museum natural collections into South Kensington&#x27;s museum quarter. Family gateway to science next door to the V&amp;A.</p></div>
 </section>
 <section class="place" id="london_notting_hill">
+<div class="place-lead">
 <h3>Notting Hill Portobello</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/london_notting_hill.jpg" alt="Notting Hill Portobello"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/london_notting_hill.jpg" alt="Notting Hill Portobello" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/london_notting_hill_b.jpg" alt="Notting Hill Portobello — view 2" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Notting Hill Portobello is a vibrant market located in one of London&#x27;s most picturesque neighborhoods. Known for its colorful houses and lively atmosphere, the market offers a diverse range of antiques, food stalls, and unique boutiques. Visitors can immerse themselves in the local culture while enjoying the eclectic mix of products and the famous Portobello Road. Portobello Market is one of the largest antique markets in the world. The market operates every day, with the busiest day being Saturday.</p>
 <p class="prose">Portobello Market began in the 19th century, initially as a fresh food market before evolving into a hub for antiques and vintage goods. The market gained popularity in the 1960s, becoming a focal point for the burgeoning counterculture movement and attracting a diverse crowd of artists and musicians. Culturally, Notting Hill Portobello is significant for its role in London&#x27;s artistic and social scenes, particularly during the 1960s and 70s when it became synonymous with the city&#x27;s bohemian lifestyle. The area hosts the annual Notting Hill Carnival, celebrating Caribbean culture and heritage, which draws millions of visitors each year. The market also reflects the multicultural fabric of London, showcasing a variety of foods and crafts from different communities.</p></div>
 </section>
 <section class="place" id="london_palace_westminster">
+<div class="place-lead">
 <h3>Palace of Westminster</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: City of Westminster, London | Style: Perpendicular Gothic revival (Barry and Pugin) | Period: 11th c. onward; rebuilt after 1834 fire</p>
-<figure class="place-fig"><img src="../images/london_palace_westminster.jpg" alt="Palace of Westminster"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/london_palace_westminster.jpg" alt="Palace of Westminster" width="1280" height="853" style="height: 182px; max-height: 182px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/london_palace_westminster_b.jpg" alt="Palace of Westminster — view 2" width="330" height="130" style="height: 182px; max-height: 182px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Seat of the UK Parliament: the Commons and Lords meet in chambers flanking Westminster Hall. Elizabeth Tower (Big Ben) rises at the north end of the complex. Westminster Hall predates the Victorian rebuilding and still hosts ceremonial events. The clock tower is widely nicknamed Big Ben after its great bell.</p>
 <p class="prose">Royal palace origins on Thorney Island; fire destroyed much of the medieval fabric in 1834, leading to the present Gothic revival ensemble. A working legislature and one of London&#x27;s most photographed riverfront silhouettes.</p></div>
 </section>
 <section class="place" id="london_big_ben">
+<div class="place-lead">
 <h3>Palace of Westminster clock</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/london_big_ben.jpg" alt="Palace of Westminster clock"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/london_big_ben.jpg" alt="Palace of Westminster clock" width="330" height="223" style="height: 182px; max-height: 182px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/london_big_ben_b.jpg" alt="Palace of Westminster clock — view 2" width="330" height="130" style="height: 182px; max-height: 182px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Palace of Westminster clock, commonly known as Big Ben, is one of London&#x27;s most iconic landmarks, renowned for its impressive Gothic architecture and its striking clock tower. Visitors flock to see the clock&#x27;s intricate design and hear its famous chimes, which resonate throughout the city. As a symbol of British democracy, it stands proudly alongside the Houses of Parliament, making it a must-visit site for anyone exploring London. Big Ben is the nickname for the Great Bell of the clock at the north end of the Palace of Westminster. The clock tower stands at 316 feet (96 meters) tall and has a base that is 40 feet (12 meters) square.</p>
 <p class="prose">Big Ben was completed in 1859 and was named after Sir Benjamin Hall, who oversaw its installation. The clock tower was designed by Augustus Pugin in the Gothic Revival style and has become a symbol of London and the United Kingdom. The tower was renamed the Elizabeth Tower in 2012 to mark the Diamond Jubilee of Queen Elizabeth II. Big Ben serves as a powerful symbol of British governance and democracy, located at the heart of the UK&#x27;s political landscape. It is not only a functional timepiece but also a focal point for national celebrations and protests, reflecting the pulse of public life in London. Culturally, it represents a rich heritage, drawing millions of tourists each year and featuring prominently in art, literature, and media.</p></div>
 </section>
 <section class="place" id="london_greenwich_observatory">
+<div class="place-lead">
 <h3>Royal Observatory Greenwich</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/london_greenwich_observatory.jpg" alt="Royal Observatory Greenwich"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/london_greenwich_observatory.jpg" alt="Royal Observatory Greenwich" width="330" height="495" style="height: 207px; max-height: 207px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/london_greenwich_observatory_b.jpg" alt="Royal Observatory Greenwich — view 2" width="330" height="148" style="height: 207px; max-height: 207px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Royal Observatory Greenwich is a historic site located in Greenwich, London, renowned for its pivotal role in the history of astronomy and navigation. Visitors can explore the Prime Meridian line, the historic telescopes, and the fascinating exhibitions that delve into timekeeping and celestial navigation. The observatory offers stunning views of the River Thames and the city, making it a must-visit destination for both history buffs and casual tourists. Founded in 1675 by King Charles II. Home to the Prime Meridian, marking 0 degrees longitude. A UNESCO World Heritage Site since 1997.</p>
 <p class="prose">Founded in 1675 by King Charles II, the Royal Observatory was established to improve navigation at sea by enabling sailors to determine their longitude. The observatory played a crucial role in the development of accurate timekeeping and was home to the famous Greenwich Mean Time (GMT), which was adopted worldwide. Over the centuries, it has been a center for astronomical research and has contributed significantly to our understanding of the universe. The Royal Observatory Greenwich holds immense cultural significance as a UNESCO World Heritage Site, recognized for its contributions to the fields of science and navigation. It symbolizes Britain&#x27;s maritime history and the global influence of British exploration during the Age of Sail. The observatory also plays a role in contemporary daily life, as the Prime Meridian continues to serve as the basis for standard timekeeping around the world.</p></div>
 </section>
 <section class="place" id="london_shakespeare_globe">
+<div class="place-lead">
 <h3>Shakespeare&#x27;s Globe</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/london_shakespeare_globe.jpg" alt="Shakespeare&#x27;s Globe"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/london_shakespeare_globe.jpg" alt="Shakespeare&#x27;s Globe" width="330" height="260" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/london_shakespeare_globe_b.jpg" alt="Shakespeare&#x27;s Globe — view 2" width="330" height="216" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Shakespeare&#x27;s Globe is a stunning reconstruction of the original Globe Theatre, where many of William Shakespeare&#x27;s plays were performed in the late 16th and early 17th centuries. Located on the banks of the River Thames, this iconic venue offers visitors a chance to experience Shakespearean drama in an authentic setting, complete with guided tours and live performances. The theatre&#x27;s open-air design and thatched roof create a unique atmosphere, immersing audiences in the world of Elizabethan theatre. The original Globe Theatre was built in 1599. The modern Shakespeare&#x27;s Globe was opened in 1997. The theatre features an open-air design with a thatched roof.</p>
 <p class="prose">The original Globe Theatre was built in 1599 by Shakespeare&#x27;s playing company, the Lord Chamberlain&#x27;s Men, and was a key venue for the playwright&#x27;s works. It was destroyed by fire in 1613 during a performance of Henry VIII but was quickly rebuilt the following year. The modern reconstruction, known as Shakespeare&#x27;s Globe, opened to the public in 1997, designed to reflect the original structure and experience. Shakespeare&#x27;s Globe holds immense cultural significance as a symbol of England&#x27;s rich theatrical heritage and as a celebration of Shakespeare&#x27;s enduring legacy. It serves as a vital educational resource, promoting the study of Shakespeare&#x27;s works and the history of theatre. The venue also contributes to London&#x27;s vibrant arts scene, attracting visitors from around the world and fostering a deep appreciation for classical literature and performance.</p></div>
 </section>
 <section class="place" id="london_st_pauls_cathedral">
+<div class="place-lead">
 <h3>St Paul&#x27;s Cathedral</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Ludgate Hill, City of London | Style: English Baroque; great dome | Period: 1675–1711 (Wren)</p>
-<figure class="place-fig"><img src="../images/london_st_pauls_cathedral.jpg" alt="St Paul&#x27;s Cathedral"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--row-sized"><img src="../images/london_st_pauls_cathedral.jpg" alt="St Paul&#x27;s Cathedral" width="1138" height="1140" style="height: 403px; max-height: 403px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/london_st_pauls_cathedral_b.jpg" alt="St Paul&#x27;s Cathedral — view 2" width="330" height="288" style="height: 403px; max-height: 403px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Anglican cathedral crowned by Wren&#x27;s dome. Whispering Gallery climbs and crypt tombs (including Nelson and Wellington) extend a tower visit. The present church replaced the medieval cathedral destroyed in the Great Fire of 1666. The dome was for centuries the tallest structure in London.</p>
 <p class="prose">Wren&#x27;s design survived wartime damage; the interior was conserved and re-presented for modern worship and tourism. City of London landmark and national ceremonial church.</p></div>
 </section>
-<section class="place" id="london_pdfband_0_223e3b5e">
+<section class="place" id="london_st_pauls_aerial_cropped">
+<div class="place-lead">
 <h3>St Pauls aerial (cropped)</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/london_pdfband_0_223e3b5e.jpg" alt="St Pauls aerial (cropped)"/></figure>
+<figure class="place-fig place-fig--hi-res"><img src="../images/london_st_pauls_aerial_cropped.jpg" alt="St Pauls aerial (cropped)" width="1280" height="879"/></figure>
+</div>
 </section>
 <section class="place" id="london_tate_britain">
+<div class="place-lead">
 <h3>Tate Britain</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/london_tate_britain.jpg" alt="Tate Britain"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/london_tate_britain.jpg" alt="Tate Britain" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/london_tate_britain_b.jpg" alt="Tate Britain — view 2" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Tate Britain is a renowned art museum located in London, housing an extensive collection of British art from the 16th century to the present day. Visitors can explore masterpieces by artists such as J.M.W. Turner, John Constable, and Henry Moore, making it a must-visit for art enthusiasts. The museum also offers a variety of exhibitions, educational programs, and events that engage with contemporary issues in the art world. Tate Britain houses the largest collection of British art in the world. The museum&#x27;s collection includes works from the 16th century to contemporary art.</p>
 <p class="prose">Tate Britain was founded in 1897 as the National Gallery of British Art and was renamed in 1932 to honor Sir Henry Tate, a sugar magnate who donated his collection to the nation. The museum&#x27;s building, designed by architect Sidney R. J. Smith, opened in 1897 and has undergone several expansions and renovations, including the addition of the Clore Gallery in 2000, which showcases the works of J.M.W. Turner. Culturally, Tate Britain plays a vital role in preserving and showcasing British artistic heritage, contributing to the national identity. It serves as a platform for contemporary discourse in the arts and engages with diverse audiences through its exhibitions and educational initiatives. The museum is also part of the Tate network, which includes Tate Modern and Tate Liverpool, further emphasizing its importance in the UK&#x27;s cultural landscape.</p></div>
 </section>
 <section class="place" id="london_tate_modern">
+<div class="place-lead">
 <h3>Tate Modern</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Bankside, Southwark | Style: Industrial modernism adapted by Herzog &amp; de Meuron | Period: 1947–1963 power station; museum opened 2000</p>
-<figure class="place-fig"><img src="../images/london_tate_modern.jpg" alt="Tate Modern"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/london_tate_modern.jpg" alt="Tate Modern" width="1280" height="960" style="height: 260px; max-height: 260px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/london_tate_modern_b.jpg" alt="Tate Modern — view 2" width="330" height="186" style="height: 260px; max-height: 260px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">International modern and contemporary art in the converted Bankside Power Station. The Turbine Hall hosts large-scale installations. General collection entry is free; special exhibitions are ticketed. The Switch House extension added viewing levels over the Thames.</p>
 <p class="prose">Oil-fired Bankside station closed in 1981; adaptive reuse preserved the chimney and brick massing as a riverside cultural hub. South Bank counterpart to St Paul&#x27;s across the Millennium Bridge.</p></div>
 </section>
 <section class="place" id="london_tower_bridge">
+<div class="place-lead">
 <h3>Tower Bridge</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
-<p class="place-meta">Address: Tower Bridge Road, London | Style: Victorian bascule and suspension bridge | Period: 1886–1894</p>
-<figure class="place-fig"><img src="../images/london_tower_bridge.jpg" alt="Tower Bridge"/></figure>
+<p class="place-meta">Location: Tower Bridge Road, London | Style: Victorian bascule and suspension bridge | Period: 1886–1894</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/london_tower_bridge.jpg" alt="Tower Bridge" width="1280" height="640" style="height: 204px; max-height: 204px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/london_tower_bridge_b.jpg" alt="Tower Bridge — view 2" width="330" height="146" style="height: 204px; max-height: 204px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Combined bascule and suspension bridge near the Tower of London. High-level walkways now host exhibitions and river views. Hydraulic power originally lifted the roadways; electric drive replaced it in the 1970s. The bridge is often mistaken for London Bridge upstream.</p>
 <p class="prose">Designed by Horace Jones and John Wolfe Barry to ease road traffic while preserving tall-ship access to the Pool of London. London&#x27;s most iconic Thames crossing in popular imagery.</p></div>
 </section>
 <section class="place" id="london_tower_of_london">
+<div class="place-lead">
 <h3>Tower of London</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Tower Hill | Style: Norman keep; medieval fortifications | Period: 11th c. White Tower; medieval curtain walls</p>
-<figure class="place-fig"><img src="../images/london_tower_of_london.jpg" alt="Tower of London"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/london_tower_of_london.jpg" alt="Tower of London" width="1280" height="804" style="height: 260px; max-height: 260px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/london_tower_of_london_b.jpg" alt="Tower of London — view 2" width="330" height="186" style="height: 260px; max-height: 260px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Historic castle and former royal mint housing the Crown Jewels. Yeoman Warders lead tours mixing chronicle and anecdote. William the Conqueror began the White Tower to secure the City. Ravens are kept on site by tradition tied to the tower&#x27;s fate.</p>
 <p class="prose">Palace, prison, menagerie, and armoury roles layered through the Middle Ages and Tudors into a ceremonial fortress today. UNESCO-listed ensemble and a dense chapter of English monarchy in stone.</p></div>
 </section>
 <section class="place" id="london_va_museum">
+<div class="place-lead">
 <h3>Victoria and Albert Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/london_va_museum.jpg" alt="Victoria and Albert Museum"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/london_va_museum.jpg" alt="Victoria and Albert Museum" width="330" height="220"/></figure>
+</div>
 <div class="place-desc"><p class="prose">The Victoria and Albert Museum, often referred to as the V&amp;A, is a world-renowned museum located in South Kensington, London. It houses a vast collection of decorative arts and design, spanning over 5,000 years of history. Visitors can explore exhibitions featuring everything from fashion and textiles to ceramics and photography, making it a treasure trove for art lovers and cultural enthusiasts alike. The V&amp;A is the world&#x27;s largest museum of decorative arts and design. It has over 2.3 million objects in its collection, spanning 5,000 years.</p>
 <p class="prose">The Victoria and Albert Museum was founded in 1852, originally as the Museum of Manufactures. It was established to promote the improvement of decorative arts and design in Britain, reflecting the industrial age&#x27;s impact on society. The museum was named in honor of Queen Victoria and her husband, Prince Albert, who were instrumental in its creation. Over the years, it has undergone several expansions and renovations, becoming one of the largest museums of decorative arts and design in the world. Culturally, the V&amp;A plays a crucial role in preserving and showcasing the artistic heritage of Britain and beyond. It is home to a diverse collection that reflects various cultures and periods, contributing to the understanding of global art and design. The museum also engages with the public through educational programs, exhibitions, and events, making art accessible to all. While it does not hold religious significance, its role in the cultural landscape of London is profound, influencing daily life and traditions in the city.</p></div>
 </section>
 <section class="place" id="london_westminster_abbey">
+<div class="place-lead">
 <h3>Westminster Abbey</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Dean&#x27;s Yard, Westminster | Style: English Gothic | Period: 13th c. Gothic core; later chapels and towers</p>
-<figure class="place-fig"><img src="../images/london_westminster_abbey.jpg" alt="Westminster Abbey"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/london_westminster_abbey.jpg" alt="Westminster Abbey" width="1280" height="1519" style="height: 182px; max-height: 182px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/london_westminster_abbey_b.jpg" alt="Westminster Abbey — view 2" width="330" height="130" style="height: 182px; max-height: 182px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Royal peculiar church and coronation site. Poets&#x27; Corner and royal tombs reward a longer visit than a façade photo. Coronations have taken place here since 1066 (William the Conqueror). Many monarchs and notable Britons are buried or commemorated inside.</p>
 <p class="prose">Edward the Confessor&#x27;s church was replaced by the present Gothic building under Henry III and successors. State ceremony, music, and medieval architecture converge beside Parliament Square.</p></div>
 </section>

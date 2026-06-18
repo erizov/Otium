@@ -80,6 +80,8 @@ CHAPTER_CONFIG: list[tuple[str, str, str]] = [
      "Iconic места и символы города: от Красной площади до Москва-Сити."),
     ("cafes", "Исторические кафе Москвы",
      "Легендарные кафе и рестораны Москвы — история и атмосфера."),
+    ("osobnjaki", "Особняки Москвы",
+     "50 городских особняков и усадебных домов — архитектура и история."),
 ]
 
 # Shared print CSS (aligned with build_pdf.py)
@@ -105,7 +107,7 @@ _COMBINED_CSS = """
   .meta { margin: 0.2em 0 0.6em 0.3em; color: #6b635b !important; }
   .block-label { margin: 0.6em 0 0.15em 0.3em; text-transform: uppercase;
     font-weight: 600; color: #6b7b8a !important; }
-  .body-text { margin: 0 0 0.4em 0.3em; text-align: left; max-width: 42em;
+  .body-text { margin: 0 0 0.4em 0.3em; text-align: left;
     color: #1c1b19; font-family: "Source Serif 4", Georgia, serif; }
   .story-text { font-style: italic; color: #4a5568; }
   ul, li, p { color: #1c1b19; font-family: "Source Serif 4", Georgia, serif; }
@@ -116,8 +118,7 @@ _COMBINED_CSS = """
   .preface-block .subtitle { font-size: 11pt; text-align: center;
     color: #6b635b; font-style: italic; margin-bottom: 1.2em; }
   .preface-block p, .chapter-intro p, .references-block p {
-    margin: 0.4em 0; font-size: 9.5pt; line-height: 1.5; text-align: justify;
-    max-width: 38em; margin-left: auto; margin-right: auto; }
+    margin: 0.4em 0; font-size: 9.5pt; line-height: 1.5; text-align: justify; }
   .chapter-intro { page-break-after: avoid; padding-bottom: 0.5em; }
   .chapter-intro .place-list { margin: 0.4em 0 0 1.2em; font-size: 9pt;
     columns: 2; column-gap: 2em; list-style: disc; }

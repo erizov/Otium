@@ -13,7 +13,7 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
 .otium-logo { font-family: 'Vollkorn', serif; font-size: 2.15rem;
   font-weight: 600; letter-spacing: 0.18em; margin-bottom: 0.85rem; }
 .otiump { margin: 0.42rem 0; line-height: 1.42; text-align: justify;
-  max-width: 38rem; font-size: 0.95rem; }
+  font-size: 0.95rem; }
 .guide-title { page-break-after: auto; margin-bottom: 0.55rem;
   page-break-inside: avoid; }
 .historical-reference { margin: 0.75rem 0 1.15rem;
@@ -63,22 +63,103 @@ ol.trip-stops a:hover { text-decoration: underline; }
 .heraldry-univ-caption { font-size: 0.52rem; line-height: 1.18;
   margin: 0.12rem 0 0; padding: 0 0.06rem; color: #252525;
   text-align: center; font-weight: 500; }
-.heraldry-motto { text-align: center; max-width: 18rem; margin: 0.18rem auto;
+.heraldry-motto { text-align: center; margin: 0.18rem auto;
   width: 100%; }
 .motto-line { font-family: 'Vollkorn', serif; font-size: 1rem;
   margin: 0; color: #333; line-height: 1.35; }
 .guide-title h1.guide-title-main { font-family: 'Vollkorn', serif;
   font-size: 2.35rem; margin-bottom: 0.5rem; font-weight: 600; }
 .lead { color: #444; font-size: 1.05rem; }
-.guide-toc { margin: 0.85rem 0 1.15rem; page-break-inside: avoid; }
-.guide-toc h2 { font-family: 'Vollkorn', serif; font-size: 1.28rem;
-  font-weight: 600; margin: 0.4rem 0 0.55rem; }
+
+.guide-toc { page-break-before: always; break-before: page;
+  page-break-after: always; break-after: page;
+  margin: 0; padding: 0.2rem 0 0.45rem; page-break-inside: auto; }
+.guide-toc h2 { font-family: 'Vollkorn', serif;
+  font-size: 1.28rem; font-weight: 600; margin: 0.4rem 0 0.55rem; }
 .guide-toc ol { margin: 0.35rem 0 0.65rem 1.25rem; padding: 0;
   columns: 2; column-gap: 1.5rem; }
 .guide-toc li { margin: 0.18rem 0; line-height: 1.35;
   font-size: 0.88rem; break-inside: avoid; }
-.guide-toc a { color: #1a5276; text-decoration: none; }
+.guide-toc a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.guide-toc a:hover { color: #0d3d56; }
 .guide-toc li.toc-item--sub { font-size: 0.82rem; margin-left: 0.35rem; }
+.toc-back { font-size: 0.78rem; margin: 0 0 0.35rem; text-align: right; }
+.toc-back a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.toc-back a:hover { color: #0d3d56; }
+.place, .historical-reference, .guide-primer, .guide-trip-plans {
+  scroll-margin-top: 1.25rem; }
+.historical-reference h2, .guide-primer h2, .guide-trip-plans h2,
+.chapter-head h2, .place-lead h3 { position: relative; }
+.guide-toc + .place, .guide-toc + .chapter-head {
+  page-break-before: avoid; break-before: avoid-page; }
+.place-lead { page-break-inside: avoid; break-inside: avoid-page;
+  page-break-after: auto; }
+.place-lead > h3 { page-break-after: avoid; break-after: avoid-page; }
+.place-lead > .place-meta { page-break-after: avoid; break-after: avoid-page; }
+
+.place-fig { page-break-inside: avoid; break-inside: avoid-page;
+  margin: 0.5rem 0 1rem; }
+.place-fig img {
+  page-break-inside: avoid; break-inside: avoid-page;
+  max-height: 48vh; width: auto; max-width: 100%;
+  object-fit: contain; margin-left: auto; margin-right: auto; }
+.place-fig--hi-res img { max-height: 52vh; }
+.place-fig--lo-res img { max-height: 30vh; }
+.place-pdf-fig-row {
+  display: flex; flex-direction: row; flex-wrap: wrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.45rem 0.55rem; margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row .place-fig {
+  flex: 1 1 30%; margin: 0; min-width: 26%; max-width: 100%; }
+.place-pdf-fig-row .place-fig img {
+  width: auto; max-width: 100%; height: auto; max-height: 44vh;
+  object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--pair {
+  flex-wrap: nowrap; justify-content: space-between;
+  align-items: flex-end; gap: 0.5rem 0.65rem; }
+.place-pdf-fig-row--pair .place-fig {
+  flex: 1 1 47%; min-width: 0; max-width: 50%;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--pair .place-fig img {
+  max-height: 44vh; object-fit: contain; }
+.place-pdf-fig-row--pair .place-fig--hi-res img { max-height: 52vh; }
+.place-pdf-fig-row--pair .place-fig--lo-res img { max-height: 26vh; }
+.place-pdf-fig-row--pair .place-fig--row-sized img,
+.place-pdf-fig-row--triple .place-fig--row-sized img,
+.place-pdf-fig-row--many .place-fig--row-sized img {
+  width: auto; max-width: 100%; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row .place-fig--row-sized.place-fig--hi-res img,
+.place-pdf-fig-row .place-fig--row-sized.place-fig--lo-res img {
+  max-height: unset; }
+.place-pdf-fig-rows-stack {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple {
+  display: flex; flex-direction: row; flex-wrap: nowrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.4rem 0.48rem; margin: 0;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--triple .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--triple .place-fig--hi-res img { max-height: 42vh; }
+.place-pdf-fig-row--triple .place-fig--lo-res img { max-height: 18vh; }
+.place-pdf-fig-row--many {
+  flex-wrap: nowrap; justify-content: center; align-items: flex-end;
+  gap: 0.35rem 0.42rem; }
+.place-pdf-fig-row--many .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--many .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+
+
 .place { margin-bottom: 2.2rem; page-break-inside: auto; }
 h3 { font-family: 'Vollkorn', serif; font-size: 1.22rem; margin: 1.2rem 0 0.35rem;
   font-weight: 600; }
@@ -90,7 +171,6 @@ h4 { font-family: 'Vollkorn', serif; font-size: 0.95rem; text-transform: upperca
   color: #555; font-size: 0.95rem; margin: 0 0 0.5rem; font-style: italic; }
 .place-meta { font-size: 0.92rem; color: #353535; margin: 0 0 0.75rem;
   line-height: 1.4; }
-.place-fig { margin: 0.5rem 0 1rem; }
 img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
 .prose, .place-desc p { margin: 0.45rem 0; line-height: 1.5;
   text-align: justify; }
@@ -110,30 +190,33 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <figure class="heraldry-fig heraldry-coat-book" title="Coat of arms of Copenhagen"><img src="../images/guide_coat_of_arms.svg" alt="Coat of arms of Copenhagen"/></figure>
 <figure class="heraldry-fig heraldry-coat-book" title="Flag of Copenhagen"><img src="../images/guide_flag.svg" alt="Flag of Copenhagen"/></figure>
 </div></div><h1 class="guide-title-main">Copenhagen</h1><p class="lead">Путеводитель. Объектов в этом выпуске: 29.</p></header>
+<nav class="guide-toc" id="guide-toc" aria-label="Содержание"><h2>Содержание</h2><ol><li class="toc-item"><a href="#guide-historical">Историческая справка</a></li><li class="toc-item"><a href="#guide-trips">Маршруты</a></li><li class="toc-item"><a href="#copenhagen_amalienborg">Copenhagen Amalienborg</a></li><li class="toc-item"><a href="#copenhagen_brandmuseet">Copenhagen Brandmuseet</a></li><li class="toc-item"><a href="#copenhagen_christiania">Copenhagen Christiania</a></li><li class="toc-item"><a href="#copenhagen_christiansborg">Copenhagen Christiansborg</a></li><li class="toc-item"><a href="#copenhagen_christiansborg_slot">Copenhagen Christiansborg Slot</a></li><li class="toc-item"><a href="#copenhagen_church_trinitatis">Copenhagen Church Trinitatis</a></li><li class="toc-item"><a href="#copenhagen_glyptotek">Copenhagen Glyptotek</a></li><li class="toc-item"><a href="#copenhagen_historic_map_tranquebar">Copenhagen Historic Map Tranquebar</a></li><li class="toc-item"><a href="#copenhagen_imamalimoskecph">Copenhagen Imamalimoskecph</a></li><li class="toc-item"><a href="#copenhagen_little_mermaid">Copenhagen Little Mermaid</a></li><li class="toc-item"><a href="#copenhagen_marble_church">Copenhagen Marble Church</a></li><li class="toc-item"><a href="#copenhagen_nyhavn">Copenhagen Nyhavn</a></li><li class="toc-item"><a href="#copenhagen_nytorv">Copenhagen Nytorv</a></li><li class="toc-item"><a href="#copenhagen_opera_house">Copenhagen Opera House</a></li><li class="toc-item"><a href="#copenhagen_rosenborg_castle">Copenhagen Rosenborg Castle</a></li><li class="toc-item"><a href="#copenhagen_rosenborg_ext">Copenhagen Rosenborg Ext</a></li><li class="toc-item"><a href="#copenhagen_round_tower">Copenhagen Round Tower</a></li><li class="toc-item"><a href="#copenhagen_tivoli_gardens">Copenhagen Tivoli Gardens</a></li><li class="toc-item"><a href="#copenhagen_black_diamond">Библиотека Черный Алмаз</a></li><li class="toc-item"><a href="#copenhagen_botanical">Ботанический сад</a></li><li class="toc-item"><a href="#copenhagen_designmuseum">Дизайнмузей Дания</a></li><li class="toc-item"><a href="#copenhagen_assistens">Кладбище Ассистенс</a></li><li class="toc-item"><a href="#copenhagen_church_marble">Мраморная церковь</a></li><li class="toc-item"><a href="#copenhagen_bakken">Парк аттракционов Баккен</a></li><li class="toc-item"><a href="#copenhagen_superkilen">Парк Суперкилен</a></li><li class="toc-item"><a href="#copenhagen_torvehallerne">Рынок Торвехаллерне</a></li><li class="toc-item"><a href="#copenhagen_kastellet">Форт Кастеллет</a></li><li class="toc-item"><a href="#copenhagen_grundtvigs">Церковь Грунтвита</a></li><li class="toc-item"><a href="#copenhagen_church_holmen">Церковь Холмен</a></li></ol></nav>
 <section class="historical-reference" id="guide-historical" aria-label="Историческая справка"><h2>Историческая справка</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 <p class="prose">Копенгаген — столица Дании и крупнейший город королевства, порт Балтики и Северного моря.</p>
 <p class="prose">Средневековая крепость и ганзейская торговля, абсолютная монархия и социальное государство сформировали открытую урбанистику: каналы, велосипедная культура, дизайн и устойчивое развитие. Город известен королевскими резиденциями и музеями.</p>
 <p class="prose">Вторая мировая война и оккупация оставили память о сопротивлении; послевоенное социальное государство сделало Данию эталоном благосостояния. Копенгаген инвестирует в зелёную энергетику, архитектуру набережных и городскую жизнь у моря.</p></section>
 <section class="guide-trip-plans" id="guide-trips" aria-label="Маршруты"><h2>Маршруты</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 <article class="trip-plan" id="trip-1d"><h3>Один день</h3>
 <p class="prose">Компактный маршрут по главным точкам путеводителя с минимальным возвратом назад пешком.</p>
-<ol class="trip-stops"><li><a href="#copenhagen_church_holmen">Церковь Холмен</a> (~75мин)</li>
-<li><a href="#copenhagen_christiansborg_slot">Copenhagen Christiansborg Slot</a> (~60мин)</li>
-<li><a href="#copenhagen_christiansborg">Copenhagen Christiansborg</a> (~75мин)</li>
-<li><a href="#copenhagen_church_trinitatis">Copenhagen Church Trinitatis</a> (~60мин)</li>
-<li><a href="#copenhagen_tivoli_gardens">Copenhagen Tivoli Gardens</a> (~75мин)</li>
-<li><a href="#copenhagen_christiania">Copenhagen Christiania</a> (~75мин)</li></ol></article>
-<article class="trip-plan" id="trip-3d1"><h3>Три дня — день 1</h3>
-<p class="prose">День 1 — центральный кластер.</p>
 <ol class="trip-stops"><li><a href="#copenhagen_designmuseum">Дизайнмузей Дания</a> (~75мин)</li>
 <li><a href="#copenhagen_opera_house">Copenhagen Opera House</a> (~75мин)</li>
-<li><a href="#copenhagen_bakken">Парк аттракционов Баккен</a> (~75мин)</li>
+<li><a href="#copenhagen_christiania">Copenhagen Christiania</a> (~75мин)</li>
+<li><a href="#copenhagen_church_holmen">Церковь Холмен</a> (~75мин)</li>
+<li><a href="#copenhagen_christiansborg">Copenhagen Christiansborg</a> (~75мин)</li>
+<li><a href="#copenhagen_christiansborg_slot">Copenhagen Christiansborg Slot</a> (~60мин)</li></ol></article>
+<article class="trip-plan" id="trip-3d1"><h3>Три дня — день 1</h3>
+<p class="prose">День 1 — центральный кластер.</p>
+<ol class="trip-stops"><li><a href="#copenhagen_bakken">Парк аттракционов Баккен</a> (~75мин)</li>
 <li><a href="#copenhagen_black_diamond">Библиотека Черный Алмаз</a> (~75мин)</li>
-<li><a href="#copenhagen_amalienborg">Copenhagen Amalienborg</a> (~75мин)</li></ol></article>
+<li><a href="#copenhagen_amalienborg">Copenhagen Amalienborg</a> (~75мин)</li>
+<li><a href="#copenhagen_assistens">Кладбище Ассистенс</a> (~75мин)</li>
+<li><a href="#copenhagen_botanical">Ботанический сад</a> (~75мин)</li></ol></article>
 <article class="trip-plan" id="trip-3d2"><h3>Три дня — день 2</h3>
 <p class="prose">День 2 — следующая группа районов.</p>
-<ol class="trip-stops"><li><a href="#copenhagen_assistens">Кладбище Ассистенс</a> (~75мин)</li>
-<li><a href="#copenhagen_botanical">Ботанический сад</a> (~75мин)</li>
+<ol class="trip-stops"><li><a href="#copenhagen_church_trinitatis">Copenhagen Church Trinitatis</a> (~60мин)</li>
+<li><a href="#copenhagen_tivoli_gardens">Copenhagen Tivoli Gardens</a> (~75мин)</li>
 <li><a href="#copenhagen_church_marble">Мраморная церковь</a> (~75мин)</li>
 <li><a href="#copenhagen_glyptotek">Copenhagen Glyptotek</a> (~75мин)</li>
 <li><a href="#copenhagen_grundtvigs">Церковь Грунтвита</a> (~75мин)</li></ol></article>
@@ -142,229 +225,390 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <ol class="trip-stops"><li><a href="#copenhagen_kastellet">Форт Кастеллет</a> (~75мин)</li>
 <li><a href="#copenhagen_little_mermaid">Copenhagen Little Mermaid</a> (~75мин)</li>
 <li><a href="#copenhagen_marble_church">Copenhagen Marble Church</a> (~75мин)</li></ol></article></section>
-<nav class="guide-toc" aria-label="Содержание"><h2>Содержание</h2><ol><li class="toc-item"><a href="#guide-historical">Историческая справка</a></li><li class="toc-item"><a href="#guide-trips">Маршруты</a></li><li class="toc-item"><a href="#copenhagen_amalienborg">Copenhagen Amalienborg</a></li><li class="toc-item"><a href="#copenhagen_assistens">Кладбище Ассистенс</a></li><li class="toc-item"><a href="#copenhagen_bakken">Парк аттракционов Баккен</a></li><li class="toc-item"><a href="#copenhagen_black_diamond">Библиотека Черный Алмаз</a></li><li class="toc-item"><a href="#copenhagen_botanical">Ботанический сад</a></li><li class="toc-item"><a href="#copenhagen_pdfband_8_e3a581df">Brandmuseet</a></li><li class="toc-item"><a href="#copenhagen_christiansborg_slot">Copenhagen Christiansborg Slot</a></li><li class="toc-item"><a href="#copenhagen_christiansborg">Copenhagen Christiansborg</a></li><li class="toc-item"><a href="#copenhagen_church_holmen">Церковь Холмен</a></li><li class="toc-item"><a href="#copenhagen_opera_house">Copenhagen Opera House</a></li><li class="toc-item"><a href="#copenhagen_designmuseum">Дизайнмузей Дания</a></li><li class="toc-item"><a href="#copenhagen_marble_church">Copenhagen Marble Church</a></li><li class="toc-item"><a href="#copenhagen_christiania">Copenhagen Christiania</a></li><li class="toc-item"><a href="#copenhagen_grundtvigs">Церковь Грунтвита</a></li><li class="toc-item"><a href="#copenhagen_pdfband_3_d85700d9">Historic map Tranquebar</a></li><li class="toc-item"><a href="#copenhagen_pdfband_2_6a31905a">ImamAliMoskeCph</a></li><li class="toc-item"><a href="#copenhagen_kastellet">Форт Кастеллет</a></li><li class="toc-item"><a href="#copenhagen_church_marble">Мраморная церковь</a></li><li class="toc-item"><a href="#copenhagen_glyptotek">Copenhagen Glyptotek</a></li><li class="toc-item"><a href="#copenhagen_nyhavn">Copenhagen Nyhavn</a></li><li class="toc-item"><a href="#copenhagen_nytorv">Copenhagen Nytorv</a></li><li class="toc-item"><a href="#copenhagen_rosenborg_ext">Copenhagen Rosenborg Ext</a></li><li class="toc-item"><a href="#copenhagen_rosenborg_castle">Copenhagen Rosenborg Castle</a></li><li class="toc-item"><a href="#copenhagen_superkilen">Парк Суперкилен</a></li><li class="toc-item"><a href="#copenhagen_little_mermaid">Copenhagen Little Mermaid</a></li><li class="toc-item"><a href="#copenhagen_round_tower">Copenhagen Round Tower</a></li><li class="toc-item"><a href="#copenhagen_tivoli_gardens">Copenhagen Tivoli Gardens</a></li><li class="toc-item"><a href="#copenhagen_torvehallerne">Рынок Торвехаллерне</a></li><li class="toc-item"><a href="#copenhagen_church_trinitatis">Copenhagen Church Trinitatis</a></li></ol></nav>
 <section class="place" id="copenhagen_amalienborg">
+<div class="place-lead">
 <h3>Copenhagen Amalienborg</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/copenhagen_amalienborg.jpg" alt="Copenhagen Amalienborg"/></figure>
+<p class="place-meta">Адрес: Amalienborg Slotsplads</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/copenhagen_amalienborg.jpg" alt="Copenhagen Amalienborg" width="1280" height="622" style="height: 224px; max-height: 224px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_amalienborg_b.jpg" alt="Copenhagen Amalienborg — вид 2" width="330" height="222" style="height: 224px; max-height: 224px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Зимняя резиденция королевы из четырех одинаковых дворцов вокруг конной статуи Фредерика V. Смена караула проходит из Розенборга в полдень. Два дворца открываются в качестве музеев по графику.</p>
 <p class="prose">Планировалось после пожара в Кристьянсборге; королевская семья приняла площадь в 1794 году. Монархический центр, напротив оперы через гавань.</p></div>
 </section>
-<section class="place" id="copenhagen_assistens">
-<h3>Кладбище Ассистенс</h3>
+<section class="place" id="copenhagen_brandmuseet">
+<div class="place-lead">
+<h3>Copenhagen Brandmuseet</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/copenhagen_assistens.jpg" alt="Кладбище Ассистенс"/></figure>
-<div class="place-desc"><p class="prose">Ассистенс Кладбище — это спокойное и историческое место захоронения, расположенное в районе Нёрребро в Копенгагене. Основанное в 1760 году, оно служит последним пристанищем для многих выдающихся личностей, включая известных писателей и художников. Посетители могут прогуливаться по его мирным тропинкам, наслаждаясь сочетанием природы и истории. Основан в 1760 году, изначально для бедных Копенгагена. Место захоронения известных личностей, включая Ганса Христиана Андерсена и Søren Kierkegaard.</p>
-<p class="prose">Кладбище Ассистенс было основано в 1760 году как место захоронения для бедных горожан и со временем стало известным кладбищем для выдающихся граждан. Оно стало свидетелем значительных изменений в практике захоронений и городском развитии, отражая рост города и культурные изменения. С культурной точки зрения, кладбище Ассистенс имеет значительное значение, так как здесь находятся могилы известных личностей, таких как Ханс Кристиан Андерсен и Søren Kierkegaard, что делает его местом литературного и художественного наследия. Кладбище также является популярным местом среди местных жителей, служа парком, где люди собираются для размышлений и отдыха, таким образом, интегрируясь в повседневную жизнь Копенгагена.</p></div>
-</section>
-<section class="place" id="copenhagen_bakken">
-<h3>Парк аттракционов Баккен</h3>
-
-
-<figure class="place-fig"><img src="../images/copenhagen_bakken.jpg" alt="Парк аттракционов Баккен"/></figure>
-<div class="place-desc"><p class="prose">Парк аттракционов Баккен, расположенный к северу от Копенгагена, является старейшим действующим парком аттракционов в мире, предлагая очаровательное сочетание исторических аттракционов и современных развлечений. Уютно расположенный в красивом лесном окружении, он предлагает разнообразные варианты досуга, от захватывающих американских горок до традиционных игр и представлений. Посетители могут насладиться живой атмосферой, наполненной торговыми лавками с едой, ресторанами и яркой ночной жизнью. Баккен был основан в 1583 году, что делает его старейшим парком аттракционов в мире. Парк расположен в Клампенборге, примерно в 10 километрах к северу от центра Копенгагена. Баккен предлагает более 30 аттракционов и развлечений, включая американские горки и карусель.</p>
-<p class="prose">Он начался как природный источник, где местные жители собирались для отдыха, и на протяжении веков превратился в полноценный парк аттракционов. Ключевыми событиями в его истории стали появление различных аттракционов и развлечений, которые сделали его любимым местом как для местных жителей, так и для туристов. Культурно Баккен занимает особое место в датском наследии, представляя собой давнюю традицию досуга и развлечений. Он отражает эволюцию парков аттракционов и их роль в социальной жизни, демонстрируя как историческую, так и современную датскую культуру. Парк является популярным местом для семейных выездов и празднований, внося вклад в яркую повседневную жизнь Копенгагена.</p></div>
-</section>
-<section class="place" id="copenhagen_black_diamond">
-<h3>Библиотека Черный Алмаз</h3>
-
-
-<figure class="place-fig"><img src="../images/copenhagen_black_diamond.jpg" alt="Библиотека Черный Алмаз"/></figure>
-<div class="place-desc"><p class="prose">Черный алмаз, официально известный как Алмаз Королевской библиотеки, является впечатляющим современным архитектурным шедевром, расположенным на набережной в Копенгагене. Это современное расширение Королевской библиотеки предлагает посетителям не только обширную коллекцию книг и ресурсов, но и потрясающие виды на гавань. Со своим уникальным дизайном и яркими культурными предложениями он служит центром как для местных жителей, так и для туристов. Черный алмаз является продолжением Королевской библиотеки, основанной в 1648 году. Он был официально открыт в 1999 году и имеет впечатляющий фасад из черного стекла. Библиотека хранит коллекцию из более чем 30 миллионов предметов, включая книги, манускрипты и цифровые ресурсы.</p>
-<p class="prose">Черный алмаз был открыт в 1999 году как расширение Королевской библиотеки, основанной в 1648 году. Здание было спроектировано датским архитектором Шмидтом Хаммером Лассеном и стало символом современного Копенгагена, гармонично вписываясь в исторический ландшафт города и предоставляя пространство для знаний и культуры. Культурно Черный Алмаз играет жизненно важную роль в художественной сцене Копенгагена, проводя выставки, концерты и литературные события, которые вовлекают общественность и продвигают искусство. Его расположение вдоль набережной подчеркивает его значимость как места встречи, отражая приверженность города содействию сообществу и культурному обмену. Библиотека также служит свидетельством преданности Дании образованию и публичному доступу к информации.</p></div>
-</section>
-<section class="place" id="copenhagen_botanical">
-<h3>Ботанический сад</h3>
-
-
-<figure class="place-fig"><img src="../images/copenhagen_botanical.jpg" alt="Ботанический сад"/></figure>
-<div class="place-desc"><p class="prose">Ботанический сад в Копенгагене — это зелёный оазис, расположенный в самом сердце города, который демонстрирует разнообразную коллекцию растений со всего мира. Посетители могут исследовать его прекрасно оформленные территории, исторические теплицы и спокойные пруды, что делает это место идеальным для отдыха и обучения. Сад является не только убежищем для любителей растений, но и популярным местом для семей и туристов. Сад занимает площадь 10 гектаров и включает более 13 000 видов растений. Исторические теплицы, построенные в 1870-х годах, являются ярким примером викторианской архитектуры.</p>
-<p class="prose">Ботанический сад был основан в 1600 году, изначально как сад лекарственных трав для Копенгагенского университета. Он претерпел несколько трансформаций, с значительными расширениями и строительством знаковых теплиц в 19 веке, отражая развивающееся понимание ботаники и садоводства. С культурной точки зрения Ботанический сад является важным ресурсом для образования и исследований, способствуя пониманию разнообразия растений и охраны окружающей среды. Он является любимой частью городского пейзажа Копенгагена, предлагая мирное убежище для жителей и посетителей, а также участвует в различных культурных мероприятиях и активностях на протяжении всего года.</p></div>
-</section>
-<section class="place" id="copenhagen_pdfband_8_e3a581df">
-<h3>Brandmuseet</h3>
-
-
-<figure class="place-fig"><img src="../images/copenhagen_pdfband_8_e3a581df.jpg" alt="Brandmuseet"/></figure>
-</section>
-<section class="place" id="copenhagen_christiansborg_slot">
-<h3>Copenhagen Christiansborg Slot</h3>
-
-
-<figure class="place-fig"><img src="../images/copenhagen_christiansborg_slot.jpg" alt="Copenhagen Christiansborg Slot"/></figure>
-<div class="place-desc"><p class="prose">Дворец Кристиансборг (дат. Christiansborg Slot, произношение [kʰʁestjænsˈpɒˀ ˈslʌt, kʰʁæs-]) — это дворец и правительственное здание, расположенное на острове Слотсхолмен в центре Копенгагена, Дания. Это место заседаний датского парламента (Folketinget), кабинета премьер-министра Дании и Верховного суда Дании. Кроме того, в дворце используются также некоторые помещения датским монархом, включая Королевские приемные залы, Палац-капеллу и Королевские конюшни.</p></div>
-</section>
-<section class="place" id="copenhagen_christiansborg">
-<h3>Copenhagen Christiansborg</h3>
-
-
-<figure class="place-fig"><img src="../images/copenhagen_christiansborg.jpg" alt="Copenhagen Christiansborg"/></figure>
-<div class="place-desc"><p class="prose">Палац на острове, где расположены здание Фокетингет, королевские приёмные и руины средневекового епископского замка. Для посещения смотровой площадки башни требуется бесплатный билет с ограниченным по времени слотом утром. Музей королевских конюшен расположен в северном крыле.</p>
-<p class="prose">Два предыдущих дворца сгорели; дизайн Торвальда Йоргенсена был использован на фундаменте. Уникальное место, объединяющее три датских направления.</p></div>
-</section>
-<section class="place" id="copenhagen_church_holmen">
-<h3>Церковь Холмен</h3>
-
-
-<figure class="place-fig"><img src="../images/copenhagen_church_holmen.jpg" alt="Церковь Холмен"/></figure>
-<div class="place-desc"><p class="prose">Церковь Холмен, расположенная в сердце Копенгагена, является великолепным примером барочной архитектуры и значимой достопримечательностью города. Изначально построенная как морская церковь для Королевского датского флота, она предлагает посетителям возможность заглянуть в морскую историю Дании и религиозное наследие. Церковь известна своим красивым интерьером, включая сложную деревянную отделку и впечатляющие алтарные картины, что делает её обязательным местом для посещения как для любителей истории, так и для энтузиастов архитектуры. Основан в 1695 году и завершен в 1699 году. Изначально построена как военно-морская церковь для Королевского военно-морского флота Дании. Особенности барочной архитектуры с замысловатой деревянной резьбой и алтарными образами.</p>
-<p class="prose">Церковь Холмен была основана в 1695 году и завершена в 1699 году, спроектирована архитектором А.Ф. Редигером. Она служила церковью для моряков и стала центральным местом поклонения для Датского флота. На протяжении своей истории церковь претерпела различные реконструкции, особенно после пожара в 1990 году, который привел к значительным усилиям по восстановлению для сохранения её барочных черт. Культурно Церковь Холмена играет важную роль в повседневной жизни Копенгагена, служа не только местом для поклонения, но и площадкой для концертов и общественных мероприятий. Её историческая связь с Датским флотом добавляет ей культурного значения, отражая морское наследие Дании. Церковь является символом архитектурной эволюции города и остается любимой частью пейзажа Копенгагена.</p></div>
-</section>
-<section class="place" id="copenhagen_opera_house">
-<h3>Copenhagen Opera House</h3>
-
-
-<figure class="place-fig"><img src="../images/copenhagen_opera_house.jpg" alt="Copenhagen Opera House"/></figure>
-<div class="place-desc"><p class="prose">Национальная опера через гавань от Амаленборга с консольной крышей и публичным фойе-проходом. Автобус через гавань соединяет Нихавн с главной площадью. Туры за кулисы проводятся в выбранные летние даты.</p>
-<p class="prose">Пожертвование фонда А. П. Мёллер стало якорем культурного развития Хольмена. Современный противовес исторической оси дворца.</p></div>
-</section>
-<section class="place" id="copenhagen_designmuseum">
-<h3>Дизайнмузей Дания</h3>
-
-
-<figure class="place-fig"><img src="../images/copenhagen_designmuseum.jpg" alt="Дизайнмузей Дания"/></figure>
-<div class="place-desc"><p class="prose">Дизайнмузей Дания — это главное место для любителей дизайна, представляющее богатую коллекцию датских и международных дизайнерских артефактов. Расположенный в бывшей больнице, датируемой 18-м веком, музей предлагает посетителям возможность заглянуть в эволюцию дизайна через различные выставки и образовательные программы. С акцентом как на историческом, так и на современном дизайне, он служит ярким центром творчества и инноваций в Копенгагене. Основан в 1893 году как Датский музей декоративного искусства. Расположен в бывшей больнице, построенной в 18 веке. Претерпел значительную реконструкцию, завершенную в 2013 году.</p>
-<p class="prose">Дизайнмузей Дания был основан в 1893 году, изначально как Датский музей декоративного искусства. Музей претерпел несколько преобразований и расширений на протяжении лет, включая значительную реконструкцию, завершенную в 2013 году, которая модернизировала его помещения, сохранив при этом историческую архитектуру. Музей играет ключевую роль в сохранении и продвижении богатого дизайнерского наследия Дании, которое признано во всем мире. Он отражает культурное значение дизайна в датском обществе, влияя на повседневную жизнь и способствуя формированию идентичности страны. Музей также занимается современными вопросами в дизайне, способствуя обсуждениям о устойчивом развитии и инновациях.</p></div>
-</section>
-<section class="place" id="copenhagen_marble_church">
-<h3>Copenhagen Marble Church</h3>
-
-
-<figure class="place-fig"><img src="../images/copenhagen_marble_church.jpg" alt="Copenhagen Marble Church"/></figure>
-<div class="place-desc"><p class="prose">Мечеть с медного зеленого купола, обращенная к оси Амалиенборга и вдохновленная пропорциями Святого Петра. Концерты в крипте используют акустику хранилища. Билеты на восхождение на купол продаются в меньшем количестве, чем предполагает описание башни.</p>
-<p class="prose">Эйтвэда роскошный мраморный проект застопорился на столетие до завершения. Визуальное завершение вдоль оси Фредериксстадена.</p></div>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/copenhagen_brandmuseet.jpg" alt="Copenhagen Brandmuseet" width="1280" height="961" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_brandmuseet_b.jpg" alt="Copenhagen Brandmuseet — вид 2" width="330" height="250" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 </section>
 <section class="place" id="copenhagen_christiania">
+<div class="place-lead">
 <h3>Copenhagen Christiania</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/copenhagen_christiania.jpg" alt="Copenhagen Christiania"/></figure>
+<p class="place-meta">Адрес: Christianshavn</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--row-sized"><img src="../images/copenhagen_christiania.jpg" alt="Copenhagen Christiania" width="1140" height="1140" style="height: 305px; max-height: 305px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_christiania_b.jpg" alt="Copenhagen Christiania — вид 2" width="330" height="218" style="height: 305px; max-height: 305px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Безмашинообразная коммуна мастерских, вегетарианских кафе и набережных троп на бывшей территории казарм. Правила фотосъемки на главной улице могут меняться — читайте информационные знаки. Удобнее добираться на велосипеде, чем на машине, до ближайших улиц.</p>
 <p class="prose">Активисты открыли доступ художникам и неформалам; последовали десятилетия переговоров. Лучший известный эксперимент по автономному району в Европе.</p></div>
 </section>
-<section class="place" id="copenhagen_grundtvigs">
-<h3>Церковь Грунтвита</h3>
+<section class="place" id="copenhagen_christiansborg">
+<div class="place-lead">
+<h3>Copenhagen Christiansborg</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/copenhagen_grundtvigs.jpg" alt="Церковь Грунтвита"/></figure>
-<div class="place-desc"><p class="prose">Церковь Грундвига является ярким примером датской экспрессионистской архитектуры, расположенной в районе Биспеебьерг в Копенгагене. Известная своим уникальным кирпичным фасадом и высокими башнями, церковь посвящена датскому теологу Н.Ф.С. Грундвигу и служит заметной достопримечательностью города. Посетители могут восхищаться её впечатляющим интерьером, который включает в себя красивые витражи и сложную деревянную отделку, что делает это место спокойным для размышлений и поклонения. Спроектирован архитектором П.В. Церковь названа в честь Н.Ф.С.</p>
-<p class="prose">Строительство церкви Грундвига началось в 1921 году и было завершено в 1940 году, проектом занимался архитектор П.В. Йенсен-Клинт. Церковь была построена в честь Н.Ф.С. Грундвига, значительной фигуры в датской истории, известного своими вкладом в образование и церковь. Здание отражает принципы мысли Грундвига, подчеркивая важность сообщества и духовности. Культурно, Церковь Грундвига является символом датского наследия и архитектурных инноваций, представляя переход от традиционного к современному дизайну церкви в Дании. Она играет важную роль в повседневной жизни местного сообщества, проводя различные мероприятия и службы, которые способствуют чувству принадлежности. Церковь также является популярным местом для туристов, внося вклад в культурный ландшафт Копенгагена.</p></div>
+<p class="place-meta">Адрес: Prins Jørgens Gård</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/copenhagen_christiansborg.jpg" alt="Copenhagen Christiansborg" width="1178" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_christiansborg_b.jpg" alt="Copenhagen Christiansborg — вид 2" width="330" height="495" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Палац на острове, где расположены здание Фокетингет, королевские приёмные и руины средневекового епископского замка. Для посещения смотровой площадки башни требуется бесплатный билет с ограниченным по времени слотом утром. Музей королевских конюшен расположен в северном крыле.</p>
+<p class="prose">Два предыдущих дворца сгорели; дизайн Торвальда Йоргенсена был использован на фундаменте. Уникальное место, объединяющее три датских направления.</p></div>
 </section>
-<section class="place" id="copenhagen_pdfband_3_d85700d9">
-<h3>Historic map Tranquebar</h3>
+<section class="place" id="copenhagen_christiansborg_slot">
+<div class="place-lead">
+<h3>Copenhagen Christiansborg Slot</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/copenhagen_pdfband_3_d85700d9.jpg" alt="Historic map Tranquebar"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_christiansborg_slot.jpg" alt="Copenhagen Christiansborg Slot" width="330" height="218" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_christiansborg_slot_b.jpg" alt="Copenhagen Christiansborg Slot — вид 2" width="330" height="495" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Дворец Кристиансборг (дат. Christiansborg Slot, произношение [kʰʁestjænsˈpɒˀ ˈslʌt, kʰʁæs-]) — это дворец и правительственное здание, расположенное на острове Слотсхолмен в центре Копенгагена, Дания. Это место заседаний датского парламента (Folketinget), кабинета премьер-министра Дании и Верховного суда Дании. Кроме того, в дворце используются также некоторые помещения датским монархом, включая Королевские приемные залы, Палац-капеллу и Королевские конюшни.</p></div>
 </section>
-<section class="place" id="copenhagen_pdfband_2_6a31905a">
-<h3>ImamAliMoskeCph</h3>
+<section class="place" id="copenhagen_church_trinitatis">
+<div class="place-lead">
+<h3>Copenhagen Church Trinitatis</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/copenhagen_pdfband_2_6a31905a.jpg" alt="ImamAliMoskeCph"/></figure>
-</section>
-<section class="place" id="copenhagen_kastellet">
-<h3>Форт Кастеллет</h3>
-
-
-<figure class="place-fig"><img src="../images/copenhagen_kastellet.jpg" alt="Форт Кастеллет"/></figure>
-<div class="place-desc"><p class="prose">Кастеллет — это хорошо сохранившаяся звездообразная крепость, расположенная в сердце Копенгагена, предлагающая посетителям возможность заглянуть в военную историю Дании. Окруженная живописными рвами и зелеными насаждениями, она служит спокойным парком, где местные жители и туристы могут прогуливаться и наслаждаться пейзажем. Крепость является не только важным историческим объектом, но и яркой частью городского ландшафта, в которой находятся ветряная мельница и церковь. Кастеллет был построен в период с 1626 по 1629 год. Это одна из лучших сохранившихся звёздных крепостей в Северной Европе.</p>
-<p class="prose">Кастеллет был основан в 1626 году во время правления короля Кристиана IV как часть серии укреплений для защиты Копенгагена. Он был построен в форме звезды, что было новаторским дизайном для своего времени. На протяжении веков Кастеллет играл различные роли, включая службу в качестве военной базы и гарнизона, и стал свидетелем значительных событий в датской истории, включая конфликты и изменения в военной стратегии. Кастеллет имеет культурное значение как символ военного наследия Дании и архитектурной изобретательности. Он отражает историческую эволюцию военной обороны в регионе и является популярным местом для культурных мероприятий и собраний. Крепость также является охраняемой зоной, подчеркивающей ее важность в сохранении исторического ландшафта Дании.</p></div>
-</section>
-<section class="place" id="copenhagen_church_marble">
-<h3>Мраморная церковь</h3>
-
-
-<figure class="place-fig"><img src="../images/copenhagen_church_marble.jpg" alt="Мраморная церковь"/></figure>
-<div class="place-desc"><p class="prose">Мраморная церковь, или Церковь Фредерика, является потрясающим примером барочной архитектуры, расположенной в самом сердце Копенгагена. Известная своим впечатляющим куполом, одним из крупнейших в Европе, она служит ярким ориентиром и популярным местом как для туристов, так и для местных жителей. Посетители могут восхищаться её сложным интерьером и наслаждаться спокойной атмосферой, которая приглашает к размышлениям и созерцанию. Купол Мраморной церкви имеет диаметр 31 метр, что делает его одним из крупнейших в Европе. Церковь была окончательно освящена в 1894 году после долгого периода строительства.</p>
-<p class="prose">Строительство Мраморной церкви началось в 1749 году под руководством архитектора Николая Эйгтведа, но было завершено только в 1894 году из-за различных финансовых и политических трудностей. Церковь была построена на месте предыдущей церкви и задумывалась как грандиозный памятник датской королевской семье. Мраморная церковь имеет культурное значение как символ архитектурного наследия Дании и является ключевой частью городского силуэта. Она часто ассоциируется с королевскими церемониями и событиями, отражая свою связь с датской монархией. Кроме того, церковь является местом проведения концертов и культурных мероприятий, что делает её яркой частью повседневной жизни Копенгагена.</p></div>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_church_trinitatis.jpg" alt="Copenhagen Church Trinitatis" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_church_trinitatis_b.jpg" alt="Copenhagen Church Trinitatis — вид 2" width="330" height="495" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Церковь Тринитас (Trinitatis Kirke) расположена в центральном районе Копенгагена, Дания. Это один из лучших примеров готической архитектуры, сохранившейся до наших дней в Дании. Она является частью Тринитас-комплекса XVII века, который также включает астрономическую башню Рюндетаорн (Rundetårn) и Библиотеку Копенгагенского университета. Построенная во времена Кристиана IV, церковь изначально служила студентам Копенгагенского университета.</p></div>
 </section>
 <section class="place" id="copenhagen_glyptotek">
+<div class="place-lead">
 <h3>Copenhagen Glyptotek</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/copenhagen_glyptotek.jpg" alt="Copenhagen Glyptotek"/></figure>
+<p class="place-meta">Адрес: Dantes Plads</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/copenhagen_glyptotek.jpg" alt="Copenhagen Glyptotek" width="1280" height="709" style="height: 255px; max-height: 255px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_glyptotek_b.jpg" alt="Copenhagen Glyptotek — вид 2" width="330" height="443" style="height: 255px; max-height: 255px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Подарок внука пивовара — антиквариат и французская скульптура, сосредоточенные в стеклянном зимнем саду. Кофе в павильоне для приемов — это тихий перерыв во время экскурсии. Картины «Датской золотой эпохи» расположены на верхних этажах.</p>
 <p class="prose">Карл Якобсен финансировал строительство смежных крыльев для размещения растущих коллекций скульптур и мраморов. Слияние средиземноморской скульптуры и копенгагенской civic-гордости.</p></div>
 </section>
+<section class="place" id="copenhagen_historic_map_tranquebar">
+<div class="place-lead">
+<h3>Copenhagen Historic Map Tranquebar</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<figure class="place-fig place-fig--hi-res"><img src="../images/copenhagen_historic_map_tranquebar.jpg" alt="Copenhagen Historic Map Tranquebar" width="1280" height="1128"/></figure>
+</div>
+</section>
+<section class="place" id="copenhagen_imamalimoskecph">
+<div class="place-lead">
+<h3>Copenhagen Imamalimoskecph</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<figure class="place-fig place-fig--hi-res"><img src="../images/copenhagen_imamalimoskecph.jpg" alt="Copenhagen Imamalimoskecph" width="1200" height="1600"/></figure>
+</div>
+</section>
+<section class="place" id="copenhagen_little_mermaid">
+<div class="place-lead">
+<h3>Copenhagen Little Mermaid</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Langelinie promenade</p>
+<figure class="place-fig place-fig--lo-res"><img src="../images/copenhagen_little_mermaid_b.jpg" alt="Copenhagen Little Mermaid" width="330" height="412"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Небольшая бронзовая статуэтка, основанная на сказке Андерсена, которую бесконечно фотографируют, несмотря на ее скромный размер, находясь на прогулочной дорожке круизного лайнера. Самые большие скопления людей наблюдаются, когда несколько судов причаливают к «Оушенкай». Из-за истории вандализма возможны периодические выставки за пределами площадки для ремонта.</p>
+<p class="prose">Брюэр Карл Якобсен заказал эту фигуру после просмотра балетной постановки этой сказки. Самая вызывающая споры &quot;обязательная к посещению&quot; миниатюрная скульптура Дании.</p></div>
+</section>
+<section class="place" id="copenhagen_marble_church">
+<div class="place-lead">
+<h3>Copenhagen Marble Church</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Frederiksstaden</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/copenhagen_marble_church.jpg" alt="Copenhagen Marble Church" width="1068" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_marble_church_b.jpg" alt="Copenhagen Marble Church — вид 2" width="330" height="520" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Мечеть с медного зеленого купола, обращенная к оси Амалиенборга и вдохновленная пропорциями Святого Петра. Концерты в крипте используют акустику хранилища. Билеты на восхождение на купол продаются в меньшем количестве, чем предполагает описание башни.</p>
+<p class="prose">Эйтвэда роскошный мраморный проект застопорился на столетие до завершения. Визуальное завершение вдоль оси Фредериксстадена.</p></div>
+</section>
 <section class="place" id="copenhagen_nyhavn">
+<div class="place-lead">
 <h3>Copenhagen Nyhavn</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/copenhagen_nyhavn.jpg" alt="Copenhagen Nyhavn"/></figure>
+<p class="place-meta">Адрес: Nyhavn canal</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/copenhagen_nyhavn.jpg" alt="Copenhagen Nyhavn" width="1280" height="416" style="height: 150px; max-height: 150px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_nyhavn_b.jpg" alt="Copenhagen Nyhavn — вид 2" width="330" height="220" style="height: 150px; max-height: 150px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Набережная кафе и канальных лодок; дом № 20 отмечает мемориальная доска с пребыванием Ханса Кристиана Андерсена. Автобус по набережной H9 связывает Нюхавн с Оперным театром без необходимости идти пешком обратно. Вечерние подогреватели для сидений продлевают сезон уличного питания в прохладное время.</p>
 <p class="prose">Прокладка заднего порта для Kongens Nytorv создала набережную для моряков, которая позже была преобразована в туристическую ось. Копенгаген в масштабе открытки рядом с более высоким осям Амаленборга.</p></div>
 </section>
 <section class="place" id="copenhagen_nytorv">
+<div class="place-lead">
 <h3>Copenhagen Nytorv</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/copenhagen_nytorv.jpg" alt="Copenhagen Nytorv"/></figure>
+<p class="place-meta">Адрес: Strøget spine</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/copenhagen_nytorv.jpg" alt="Copenhagen Nytorv" width="1280" height="850" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_nytorv_b.jpg" alt="Copenhagen Nytorv — вид 2" width="330" height="230" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Две площади, где стояла старая ратуша; сегодня это аркады судебного здания и террасы кафе. Рождественский рынок заполняет брусчатку в декабре. Пешеходный Стрёгет соединяет толпы на Стрёгете к северу, в сторону Башни Круга.</p>
 <p class="prose">Публичные наказания когда-то собирали толпы; сегодня их использование в подавляющем большинстве цивильно-общественное. Фасады с юридическим наследием среди торгового трафика.</p></div>
 </section>
-<section class="place" id="copenhagen_rosenborg_ext">
-<h3>Copenhagen Rosenborg Ext</h3>
+<section class="place" id="copenhagen_opera_house">
+<div class="place-lead">
+<h3>Copenhagen Opera House</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/copenhagen_rosenborg_ext.jpg" alt="Copenhagen Rosenborg Ext"/></figure>
-<div class="place-desc"><p class="prose">Розенборг — страница разрешения неоднозначности Викимедиа.</p></div>
+<p class="place-meta">Адрес: Holmen</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/copenhagen_opera_house.jpg" alt="Copenhagen Opera House" width="1280" height="851" style="height: 260px; max-height: 260px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_opera_house_b.jpg" alt="Copenhagen Opera House — вид 2" width="330" height="186" style="height: 260px; max-height: 260px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Национальная опера через гавань от Амаленборга с консольной крышей и публичным фойе-проходом. Автобус через гавань соединяет Нихавн с главной площадью. Туры за кулисы проводятся в выбранные летние даты.</p>
+<p class="prose">Пожертвование фонда А. П. Мёллер стало якорем культурного развития Хольмена. Современный противовес исторической оси дворца.</p></div>
 </section>
 <section class="place" id="copenhagen_rosenborg_castle">
+<div class="place-lead">
 <h3>Copenhagen Rosenborg Castle</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/copenhagen_rosenborg_castle.jpg" alt="Copenhagen Rosenborg Castle"/></figure>
+<p class="place-meta">Адрес: Øster Voldgade</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/copenhagen_rosenborg_castle.jpg" alt="Copenhagen Rosenborg Castle" width="1280" height="851" style="height: 243px; max-height: 243px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_rosenborg_castle_b.jpg" alt="Copenhagen Rosenborg Castle — вид 2" width="330" height="174" style="height: 243px; max-height: 243px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Королевская казна венцов и слоновой костивый троон нарвала в компактном зубчатом дворце, окруженном лужайками Королевского сада. Домик зимней розы в садах открыт в сокращенном режиме работы. Локеры для рюкзаков обязательны перед маршрутом в Зал Короны.</p>
 <p class="prose">Дом удовольствий Кристиана IV стал музеем абсолютистских регалий при более поздних конституционных королях. Лучшее погружение в мастерство датского Золотого века в одной комнате.</p></div>
 </section>
-<section class="place" id="copenhagen_superkilen">
-<h3>Парк Суперкилен</h3>
+<section class="place" id="copenhagen_rosenborg_ext">
+<div class="place-lead">
+<h3>Copenhagen Rosenborg Ext</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/copenhagen_superkilen.jpg" alt="Парк Суперкилен"/></figure>
-<div class="place-desc"><p class="prose">Парк Суперкилен — это яркое городское пространство, расположенное в районе Нёрребро в Копенгагене, созданное для празднования мультикультурного разнообразия города. Занимая более 30 000 квадратных метров, парк предлагает уникальное сочетание искусства, архитектуры и ландшафтного дизайна, что делает его популярным местом как для местных жителей, так и для туристов. С его впечатляющими инсталляциями и игривым дизайном, Суперкилен служит центром сообщества для отдыха, расслабления и культурного обмена. Суперкилен занимает площадь 30 000 квадратных метров. Парк состоит из трех различных зон: Красной площади, Черного рынка и Зеленого парка.</p>
-<p class="prose">Суперкилен был открыт в 2012 году в рамках более крупного проекта по обновлению городской инфраструктуры, направленного на revitalization района Нёрребро. Парк был спроектирован архитектурной фирмой BIG (Bjarke Ingels Group) в сотрудничестве с Superflex и Topotek1, с целью отразить разнообразные культурные традиции жителей этого района. С культурной точки зрения, Суперкилен имеет значительное значение, так как олицетворяет дух инклюзивности и мультикультурализма, демонстрируя элементы из различных стран мира, такие как марокканский фонтан и российская игровая площадка. Парк служит платформой для общественных мероприятий и собраний, способствуя социальному взаимодействию между жителями разных слоев общества. Его дизайн и назначение подчеркивают важность общественных пространств в городской жизни, способствуя чувству принадлежности и вовлеченности в сообщество.</p></div>
-</section>
-<section class="place" id="copenhagen_little_mermaid">
-<h3>Copenhagen Little Mermaid</h3>
-
-
-<figure class="place-fig"><img src="../images/copenhagen_little_mermaid.jpg" alt="Copenhagen Little Mermaid"/></figure>
-<div class="place-desc"><p class="prose">Небольшая бронзовая статуэтка, основанная на сказке Андерсена, которую бесконечно фотографируют, несмотря на ее скромный размер, находясь на прогулочной дорожке круизного лайнера. Самые большие скопления людей наблюдаются, когда несколько судов причаливают к «Оушенкай». Из-за истории вандализма возможны периодические выставки за пределами площадки для ремонта.</p>
-<p class="prose">Брюэр Карл Якобсен заказал эту фигуру после просмотра балетной постановки этой сказки. Самая вызывающая споры &quot;обязательная к посещению&quot; миниатюрная скульптура Дании.</p></div>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_rosenborg_ext.jpg" alt="Copenhagen Rosenborg Ext" width="330" height="494" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_rosenborg_ext_b.jpg" alt="Copenhagen Rosenborg Ext — вид 2" width="330" height="251" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Розенборг — страница разрешения неоднозначности Викимедиа.</p></div>
 </section>
 <section class="place" id="copenhagen_round_tower">
+<div class="place-lead">
 <h3>Copenhagen Round Tower</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1637–1642</p>
-<figure class="place-fig"><img src="../images/copenhagen_round_tower.jpg" alt="Copenhagen Round Tower"/></figure>
+<p class="place-meta">Адрес: Købmagergade | Период: 1637–1642</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/copenhagen_round_tower.jpg" alt="Copenhagen Round Tower" width="1280" height="919" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_round_tower_b.jpg" alt="Copenhagen Round Tower — вид 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Конская спиральная рампа, ведущая на наблюдательную платформу и библиотечный зал — без лестниц до финальной фонарной лестницы. Концерты органа в Церкви Троицы иногда отдаются эхом вверх по кирпичному цилиндру. Зимний лед иногда закрывает верхнюю открытую палубу.</p>
 <p class="prose">Астрономическая башня Кристиана IV поддерживала наследие инструментов Тихо Браге в университетской обсерватории. Самая старая действующая обсерватория Европы, доступная для неспешных восхождений.</p></div>
 </section>
 <section class="place" id="copenhagen_tivoli_gardens">
+<div class="place-lead">
 <h3>Copenhagen Tivoli Gardens</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/copenhagen_tivoli_gardens.jpg" alt="Copenhagen Tivoli Gardens"/></figure>
+<p class="place-meta">Место: Vesterbrogade at City Hall</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/copenhagen_tivoli_gardens.jpg" alt="Copenhagen Tivoli Gardens" width="1280" height="854" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_tivoli_gardens_b.jpg" alt="Copenhagen Tivoli Gardens — вид 2" width="330" height="235" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Сезонный парк развлечений с деревянной американской горкой, фейерверками в пятницу и концертным залом, проводящим выступления в жанрах поп и классика. На оживленные субботы браслеты для многоразовых поездок опережают очереди за жетонами. Хэллоуин и Рождественские ярмарки полностью преображают улицы.</p>
 <p class="prose">Георг Карстенсен убедил Кристиана VIII в том, что «когда люди развлекаются, они забывают о политике». В. Дисней назвал Тиволи источником вдохновения для сочетания садов и аттракционов в Диснейленде.</p></div>
 </section>
+<section class="place" id="copenhagen_black_diamond">
+<div class="place-lead">
+<h3>Библиотека Черный Алмаз</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_black_diamond.jpg" alt="Библиотека Черный Алмаз" width="330" height="186" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_black_diamond_b.jpg" alt="Библиотека Черный Алмаз — вид 2" width="330" height="184" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Черный алмаз, официально известный как Алмаз Королевской библиотеки, является впечатляющим современным архитектурным шедевром, расположенным на набережной в Копенгагене. Это современное расширение Королевской библиотеки предлагает посетителям не только обширную коллекцию книг и ресурсов, но и потрясающие виды на гавань. Со своим уникальным дизайном и яркими культурными предложениями он служит центром как для местных жителей, так и для туристов. Черный алмаз является продолжением Королевской библиотеки, основанной в 1648 году. Он был официально открыт в 1999 году и имеет впечатляющий фасад из черного стекла. Библиотека хранит коллекцию из более чем 30 миллионов предметов, включая книги, манускрипты и цифровые ресурсы.</p>
+<p class="prose">Черный алмаз был открыт в 1999 году как расширение Королевской библиотеки, основанной в 1648 году. Здание было спроектировано датским архитектором Шмидтом Хаммером Лассеном и стало символом современного Копенгагена, гармонично вписываясь в исторический ландшафт города и предоставляя пространство для знаний и культуры. Культурно Черный Алмаз играет жизненно важную роль в художественной сцене Копенгагена, проводя выставки, концерты и литературные события, которые вовлекают общественность и продвигают искусство. Его расположение вдоль набережной подчеркивает его значимость как места встречи, отражая приверженность города содействию сообществу и культурному обмену. Библиотека также служит свидетельством преданности Дании образованию и публичному доступу к информации.</p></div>
+</section>
+<section class="place" id="copenhagen_botanical">
+<div class="place-lead">
+<h3>Ботанический сад</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_botanical.jpg" alt="Ботанический сад" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_botanical_b.jpg" alt="Ботанический сад — вид 2" width="330" height="236" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Ботанический сад в Копенгагене — это зелёный оазис, расположенный в самом сердце города, который демонстрирует разнообразную коллекцию растений со всего мира. Посетители могут исследовать его прекрасно оформленные территории, исторические теплицы и спокойные пруды, что делает это место идеальным для отдыха и обучения. Сад является не только убежищем для любителей растений, но и популярным местом для семей и туристов. Сад занимает площадь 10 гектаров и включает более 13 000 видов растений. Исторические теплицы, построенные в 1870-х годах, являются ярким примером викторианской архитектуры.</p>
+<p class="prose">Ботанический сад был основан в 1600 году, изначально как сад лекарственных трав для Копенгагенского университета. Он претерпел несколько трансформаций, с значительными расширениями и строительством знаковых теплиц в 19 веке, отражая развивающееся понимание ботаники и садоводства. С культурной точки зрения Ботанический сад является важным ресурсом для образования и исследований, способствуя пониманию разнообразия растений и охраны окружающей среды. Он является любимой частью городского пейзажа Копенгагена, предлагая мирное убежище для жителей и посетителей, а также участвует в различных культурных мероприятиях и активностях на протяжении всего года.</p></div>
+</section>
+<section class="place" id="copenhagen_designmuseum">
+<div class="place-lead">
+<h3>Дизайнмузей Дания</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_designmuseum.jpg" alt="Дизайнмузей Дания" width="330" height="227" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_designmuseum_b.jpg" alt="Дизайнмузей Дания — вид 2" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Дизайнмузей Дания — это главное место для любителей дизайна, представляющее богатую коллекцию датских и международных дизайнерских артефактов. Расположенный в бывшей больнице, датируемой 18-м веком, музей предлагает посетителям возможность заглянуть в эволюцию дизайна через различные выставки и образовательные программы. С акцентом как на историческом, так и на современном дизайне, он служит ярким центром творчества и инноваций в Копенгагене. Основан в 1893 году как Датский музей декоративного искусства. Расположен в бывшей больнице, построенной в 18 веке. Претерпел значительную реконструкцию, завершенную в 2013 году.</p>
+<p class="prose">Дизайнмузей Дания был основан в 1893 году, изначально как Датский музей декоративного искусства. Музей претерпел несколько преобразований и расширений на протяжении лет, включая значительную реконструкцию, завершенную в 2013 году, которая модернизировала его помещения, сохранив при этом историческую архитектуру. Музей играет ключевую роль в сохранении и продвижении богатого дизайнерского наследия Дании, которое признано во всем мире. Он отражает культурное значение дизайна в датском обществе, влияя на повседневную жизнь и способствуя формированию идентичности страны. Музей также занимается современными вопросами в дизайне, способствуя обсуждениям о устойчивом развитии и инновациях.</p></div>
+</section>
+<section class="place" id="copenhagen_assistens">
+<div class="place-lead">
+<h3>Кладбище Ассистенс</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_assistens.jpg" alt="Кладбище Ассистенс" width="330" height="248" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_assistens_b.jpg" alt="Кладбище Ассистенс — вид 2" width="330" height="440" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Ассистенс Кладбище — это спокойное и историческое место захоронения, расположенное в районе Нёрребро в Копенгагене. Основанное в 1760 году, оно служит последним пристанищем для многих выдающихся личностей, включая известных писателей и художников. Посетители могут прогуливаться по его мирным тропинкам, наслаждаясь сочетанием природы и истории. Основан в 1760 году, изначально для бедных Копенгагена. Место захоронения известных личностей, включая Ганса Христиана Андерсена и Søren Kierkegaard.</p>
+<p class="prose">Кладбище Ассистенс было основано в 1760 году как место захоронения для бедных горожан и со временем стало известным кладбищем для выдающихся граждан. Оно стало свидетелем значительных изменений в практике захоронений и городском развитии, отражая рост города и культурные изменения. С культурной точки зрения, кладбище Ассистенс имеет значительное значение, так как здесь находятся могилы известных личностей, таких как Ханс Кристиан Андерсен и Søren Kierkegaard, что делает его местом литературного и художественного наследия. Кладбище также является популярным местом среди местных жителей, служа парком, где люди собираются для размышлений и отдыха, таким образом, интегрируясь в повседневную жизнь Копенгагена.</p></div>
+</section>
+<section class="place" id="copenhagen_church_marble">
+<div class="place-lead">
+<h3>Мраморная церковь</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_church_marble.jpg" alt="Мраморная церковь" width="330" height="456" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_church_marble_b.jpg" alt="Мраморная церковь — вид 2" width="330" height="520" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Мраморная церковь, или Церковь Фредерика, является потрясающим примером барочной архитектуры, расположенной в самом сердце Копенгагена. Известная своим впечатляющим куполом, одним из крупнейших в Европе, она служит ярким ориентиром и популярным местом как для туристов, так и для местных жителей. Посетители могут восхищаться её сложным интерьером и наслаждаться спокойной атмосферой, которая приглашает к размышлениям и созерцанию. Купол Мраморной церкви имеет диаметр 31 метр, что делает его одним из крупнейших в Европе. Церковь была окончательно освящена в 1894 году после долгого периода строительства.</p>
+<p class="prose">Строительство Мраморной церкви началось в 1749 году под руководством архитектора Николая Эйгтведа, но было завершено только в 1894 году из-за различных финансовых и политических трудностей. Церковь была построена на месте предыдущей церкви и задумывалась как грандиозный памятник датской королевской семье. Мраморная церковь имеет культурное значение как символ архитектурного наследия Дании и является ключевой частью городского силуэта. Она часто ассоциируется с королевскими церемониями и событиями, отражая свою связь с датской монархией. Кроме того, церковь является местом проведения концертов и культурных мероприятий, что делает её яркой частью повседневной жизни Копенгагена.</p></div>
+</section>
+<section class="place" id="copenhagen_bakken">
+<div class="place-lead">
+<h3>Парк аттракционов Баккен</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<figure class="place-fig place-fig--lo-res"><img src="../images/copenhagen_bakken_b.jpg" alt="Парк аттракционов Баккен" width="330" height="247"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Парк аттракционов Баккен, расположенный к северу от Копенгагена, является старейшим действующим парком аттракционов в мире, предлагая очаровательное сочетание исторических аттракционов и современных развлечений. Уютно расположенный в красивом лесном окружении, он предлагает разнообразные варианты досуга, от захватывающих американских горок до традиционных игр и представлений. Посетители могут насладиться живой атмосферой, наполненной торговыми лавками с едой, ресторанами и яркой ночной жизнью. Баккен был основан в 1583 году, что делает его старейшим парком аттракционов в мире. Парк расположен в Клампенборге, примерно в 10 километрах к северу от центра Копенгагена. Баккен предлагает более 30 аттракционов и развлечений, включая американские горки и карусель.</p>
+<p class="prose">Он начался как природный источник, где местные жители собирались для отдыха, и на протяжении веков превратился в полноценный парк аттракционов. Ключевыми событиями в его истории стали появление различных аттракционов и развлечений, которые сделали его любимым местом как для местных жителей, так и для туристов. Культурно Баккен занимает особое место в датском наследии, представляя собой давнюю традицию досуга и развлечений. Он отражает эволюцию парков аттракционов и их роль в социальной жизни, демонстрируя как историческую, так и современную датскую культуру. Парк является популярным местом для семейных выездов и празднований, внося вклад в яркую повседневную жизнь Копенгагена.</p></div>
+</section>
+<section class="place" id="copenhagen_superkilen">
+<div class="place-lead">
+<h3>Парк Суперкилен</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_superkilen.jpg" alt="Парк Суперкилен" width="330" height="330" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_superkilen_b.jpg" alt="Парк Суперкилен — вид 2" width="330" height="218" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Парк Суперкилен — это яркое городское пространство, расположенное в районе Нёрребро в Копенгагене, созданное для празднования мультикультурного разнообразия города. Занимая более 30 000 квадратных метров, парк предлагает уникальное сочетание искусства, архитектуры и ландшафтного дизайна, что делает его популярным местом как для местных жителей, так и для туристов. С его впечатляющими инсталляциями и игривым дизайном, Суперкилен служит центром сообщества для отдыха, расслабления и культурного обмена. Суперкилен занимает площадь 30 000 квадратных метров. Парк состоит из трех различных зон: Красной площади, Черного рынка и Зеленого парка.</p>
+<p class="prose">Суперкилен был открыт в 2012 году в рамках более крупного проекта по обновлению городской инфраструктуры, направленного на revitalization района Нёрребро. Парк был спроектирован архитектурной фирмой BIG (Bjarke Ingels Group) в сотрудничестве с Superflex и Topotek1, с целью отразить разнообразные культурные традиции жителей этого района. С культурной точки зрения, Суперкилен имеет значительное значение, так как олицетворяет дух инклюзивности и мультикультурализма, демонстрируя элементы из различных стран мира, такие как марокканский фонтан и российская игровая площадка. Парк служит платформой для общественных мероприятий и собраний, способствуя социальному взаимодействию между жителями разных слоев общества. Его дизайн и назначение подчеркивают важность общественных пространств в городской жизни, способствуя чувству принадлежности и вовлеченности в сообщество.</p></div>
+</section>
 <section class="place" id="copenhagen_torvehallerne">
+<div class="place-lead">
 <h3>Рынок Торвехаллерне</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/copenhagen_torvehallerne.jpg" alt="Рынок Торвехаллерне"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_torvehallerne.jpg" alt="Рынок Торвехаллерне" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_torvehallerne_b.jpg" alt="Рынок Торвехаллерне — вид 2" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Торвеаллерне — это яркий рынок, расположенный в сердце Копенгагена, предлагающий восхитительное сочетание свежих продуктов, деликатесов и ремесленных товаров. Со своей современной стеклянной и стальной конструкцией он служит центром как для местных жителей, так и для туристов, демонстрируя лучшее из датской кулинарной культуры. Посетители могут исследовать разнообразные лавки, наслаждаться вкусными блюдами и ощутить живую атмосферу этого популярного места. Торвеаллерне состоит из двух больших стеклянных залов с более чем 60 продавцами. Рынок предлагает разнообразие товаров, включая свежие фрукты, овощи, мясо, сыры и гурманскую уличную еду.</p>
 <p class="prose">Торвеаллерне открылись в 2011 году, преобразовав эту территорию в современный продуктовый рынок, который отдает дань историческим традициям рынков Копенгагена. Ранее на этом месте располагался старый мясной рынок, который был неотъемлемой частью города с 19 века. Развитие рынка было направлено на revitalization городской пространства и продвижение местных производителей продуктов питания. Культурно Торвеаллерне представляет собой современное место встречи, которое отражает приверженность Копенгагена устойчивому развитию и местной культуре питания. Оно способствует вовлечению сообщества и поддерживает местных ремесленников, что делает его важной частью повседневной жизни города. Рынок стал символом кулинарной сцены Копенгагена, привлекая как любителей еды, так и туристов.</p></div>
 </section>
-<section class="place" id="copenhagen_church_trinitatis">
-<h3>Copenhagen Church Trinitatis</h3>
+<section class="place" id="copenhagen_kastellet">
+<div class="place-lead">
+<h3>Форт Кастеллет</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/copenhagen_church_trinitatis.jpg" alt="Copenhagen Church Trinitatis"/></figure>
-<div class="place-desc"><p class="prose">Церковь Тринитас (Trinitatis Kirke) расположена в центральном районе Копенгагена, Дания. Это один из лучших примеров готической архитектуры, сохранившейся до наших дней в Дании. Она является частью Тринитас-комплекса XVII века, который также включает астрономическую башню Рюндетаорн (Rundetårn) и Библиотеку Копенгагенского университета. Построенная во времена Кристиана IV, церковь изначально служила студентам Копенгагенского университета.</p></div>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_kastellet.jpg" alt="Форт Кастеллет" width="330" height="186" style="height: 140px; max-height: 140px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_kastellet_b.jpg" alt="Форт Кастеллет — вид 2" width="330" height="100" style="height: 140px; max-height: 140px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Кастеллет — это хорошо сохранившаяся звездообразная крепость, расположенная в сердце Копенгагена, предлагающая посетителям возможность заглянуть в военную историю Дании. Окруженная живописными рвами и зелеными насаждениями, она служит спокойным парком, где местные жители и туристы могут прогуливаться и наслаждаться пейзажем. Крепость является не только важным историческим объектом, но и яркой частью городского ландшафта, в которой находятся ветряная мельница и церковь. Кастеллет был построен в период с 1626 по 1629 год. Это одна из лучших сохранившихся звёздных крепостей в Северной Европе.</p>
+<p class="prose">Кастеллет был основан в 1626 году во время правления короля Кристиана IV как часть серии укреплений для защиты Копенгагена. Он был построен в форме звезды, что было новаторским дизайном для своего времени. На протяжении веков Кастеллет играл различные роли, включая службу в качестве военной базы и гарнизона, и стал свидетелем значительных событий в датской истории, включая конфликты и изменения в военной стратегии. Кастеллет имеет культурное значение как символ военного наследия Дании и архитектурной изобретательности. Он отражает историческую эволюцию военной обороны в регионе и является популярным местом для культурных мероприятий и собраний. Крепость также является охраняемой зоной, подчеркивающей ее важность в сохранении исторического ландшафта Дании.</p></div>
+</section>
+<section class="place" id="copenhagen_grundtvigs">
+<div class="place-lead">
+<h3>Церковь Грунтвита</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_grundtvigs.jpg" alt="Церковь Грунтвита" width="330" height="465" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_grundtvigs_b.jpg" alt="Церковь Грунтвита — вид 2" width="330" height="473" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Церковь Грундвига является ярким примером датской экспрессионистской архитектуры, расположенной в районе Биспеебьерг в Копенгагене. Известная своим уникальным кирпичным фасадом и высокими башнями, церковь посвящена датскому теологу Н.Ф.С. Грундвигу и служит заметной достопримечательностью города. Посетители могут восхищаться её впечатляющим интерьером, который включает в себя красивые витражи и сложную деревянную отделку, что делает это место спокойным для размышлений и поклонения. Спроектирован архитектором П.В. Йенсеном-Клинтом, строительство началось в 1921 году и было завершено в 1940 году. Церковь названа в честь Н.Ф.С. Грундвига, выдающегося датского теолога и педагога.</p>
+<p class="prose">Строительство церкви Грундвига началось в 1921 году и было завершено в 1940 году, проектом занимался архитектор П.В. Йенсен-Клинт. Церковь была построена в честь Н.Ф.С. Грундвига, значительной фигуры в датской истории, известного своими вкладом в образование и церковь. Здание отражает принципы мысли Грундвига, подчеркивая важность сообщества и духовности. Культурно, Церковь Грундвига является символом датского наследия и архитектурных инноваций, представляя переход от традиционного к современному дизайну церкви в Дании. Она играет важную роль в повседневной жизни местного сообщества, проводя различные мероприятия и службы, которые способствуют чувству принадлежности. Церковь также является популярным местом для туристов, внося вклад в культурный ландшафт Копенгагена.</p></div>
+</section>
+<section class="place" id="copenhagen_church_holmen">
+<div class="place-lead">
+<h3>Церковь Холмен</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_church_holmen.jpg" alt="Церковь Холмен" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/copenhagen_church_holmen_b.jpg" alt="Церковь Холмен — вид 2" width="330" height="186" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Церковь Холмен, расположенная в сердце Копенгагена, является великолепным примером барочной архитектуры и значимой достопримечательностью города. Изначально построенная как морская церковь для Королевского датского флота, она предлагает посетителям возможность заглянуть в морскую историю Дании и религиозное наследие. Церковь известна своим красивым интерьером, включая сложную деревянную отделку и впечатляющие алтарные картины, что делает её обязательным местом для посещения как для любителей истории, так и для энтузиастов архитектуры. Основан в 1695 году и завершен в 1699 году. Изначально построена как военно-морская церковь для Королевского военно-морского флота Дании. Особенности барочной архитектуры с замысловатой деревянной резьбой и алтарными образами.</p>
+<p class="prose">Церковь Холмен была основана в 1695 году и завершена в 1699 году, спроектирована архитектором А.Ф. Редигером. Она служила церковью для моряков и стала центральным местом поклонения для Датского флота. На протяжении своей истории церковь претерпела различные реконструкции, особенно после пожара в 1990 году, который привел к значительным усилиям по восстановлению для сохранения её барочных черт. Культурно Церковь Холмена играет важную роль в повседневной жизни Копенгагена, служа не только местом для поклонения, но и площадкой для концертов и общественных мероприятий. Её историческая связь с Датским флотом добавляет ей культурного значения, отражая морское наследие Дании. Церковь является символом архитектурной эволюции города и остается любимой частью пейзажа Копенгагена.</p></div>
 </section>
 </body>
 </html>

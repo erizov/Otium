@@ -16,7 +16,12 @@ from pathlib import Path
 from typing import Any
 
 from smolensk.image_optimize import optimize_raster_image_if_large
-from scripts.city_guide_core import min_bytes_for_filename
+from scripts.city_guide_core import (
+    DOWNLOAD_MAX_IMAGES_PER_PLACE,
+    additional_images_for_download,
+    min_bytes_for_filename,
+    should_skip_city_place_downloads,
+)
 
 _USER_AGENT = (
     "ExcursionGuide/1.0 (batch download for local guide; Python urllib)"
@@ -90,7 +95,20 @@ def _fetch_bytes(
     *,
     min_len: int,
 ) -> tuple[str, bytes]:
-    req = urllib.request.Request(url, headers={"User-Agent": _USER_AGENT})
+    safe = str(url or "").strip()
+    if not safe.startswith(("http://", "https://")):
+        return "err", b"invalid URL scheme"
+    parts = urllib.parse.urlsplit(safe)
+    safe = urllib.parse.urlunsplit(
+        (
+            parts.scheme,
+            parts.netloc,
+            urllib.parse.quote(parts.path, safe="/%"),
+            urllib.parse.quote(parts.query, safe="=&%"),
+            parts.fragment,
+        ),
+    )
+    req = urllib.request.Request(safe, headers={"User-Agent": _USER_AGENT})
     try:
         with urllib.request.urlopen(req, timeout=timeout_sec) as resp:
             data = resp.read()
@@ -120,6 +138,16 @@ def _dedupe_urls_keep_order(urls: list[str]) -> list[str]:
     return out
 
 
+def _http_download_urls(urls: Sequence[str]) -> list[str]:
+    """Keep only absolute http(s) URLs (skip bad registry entries)."""
+    out: list[str] = []
+    for raw in urls:
+        u = str(raw or "").strip()
+        if u.startswith(("http://", "https://")):
+            out.append(u)
+    return out
+
+
 def _download_place_image(
     urls: list[str],
     dest: Path,
@@ -128,6 +156,9 @@ def _download_place_image(
     retries_429: int,
     pause_429_sec: float,
 ) -> tuple[bool, str]:
+    urls = _http_download_urls(urls)
+    if not urls:
+        return False, "no valid http(s) URLs"
     dest.parent.mkdir(parents=True, exist_ok=True)
     min_len = min_bytes_for_filename(dest.name)
     last_err = "no URL"
@@ -136,6 +167,20 @@ def _download_place_image(
         while attempt < max(1, retries_429):
             status, data = _fetch_bytes(u, timeout_sec, min_len=min_len)
             if status == "ok":
+                from scripts.image_subject_filter import check_image_bytes
+                from scripts.image_subject_filter import rejection_message
+                from scripts.image_subject_filter import subject_filter_enabled
+
+                if subject_filter_enabled():
+                    verdict = check_image_bytes(data)
+                    if not verdict.accept:
+                        last_err = rejection_message(verdict)
+                        print(
+                            "  subject reject {}: {}".format(dest.name, last_err),
+                            file=sys.stderr,
+                            flush=True,
+                        )
+                        break
                 dest.write_bytes(data)
                 return True, "ok"
             if status == "404":
@@ -166,10 +211,25 @@ def download_jerusalem_style_images(
     title_page_assets: Sequence[tuple[str, str | Sequence[str]]],
     args: argparse.Namespace,
     url_is_whitelisted_fn: Callable[..., bool],
+    city_slug: str = "",
+    max_images_per_place: int | None = None,
 ) -> int:
     """Download place + title images. Returns 0 on success."""
+    import os
+
+    if getattr(args, "no_subject_filter", False):
+        os.environ["SUBJECT_FILTER"] = "0"
+    elif getattr(args, "subject_filter", False):
+        os.environ["SUBJECT_FILTER"] = "1"
     root = city_root.resolve()
     wpath = whitelist_path
+    slug_key = city_slug.strip().lower() or city_root.name.strip().lower()
+    per_place = (
+        max_images_per_place
+        if max_images_per_place is not None
+        else DOWNLOAD_MAX_IMAGES_PER_PLACE
+    )
+    skip_places = should_skip_city_place_downloads(slug_key)
 
     if args.full_size:
         thumb_w: int | None = None
@@ -211,7 +271,16 @@ def download_jerusalem_style_images(
             return
         todo.append((label, allowed, dest))
 
+    if skip_places:
+        print(
+            "Place image downloads skipped for {} (frozen city).".format(
+                slug_key,
+            ),
+        )
+
     for place in places:
+        if skip_places:
+            continue
         slug = place.get("slug", "?")
         url = place.get("image_source_url")
         rel = place.get("image_rel_path")
@@ -223,7 +292,10 @@ def download_jerusalem_style_images(
             )
             continue
         _queue_urls(str(slug), rel, (url,))
-        for j, extra in enumerate(place.get("additional_images") or [], start=1):
+        for j, extra in enumerate(
+            additional_images_for_download(place, max_total=per_place),
+            start=1,
+        ):
             eu = extra.get("image_source_url")
             er = extra.get("image_rel_path")
             if not eu or not er:
@@ -391,6 +463,19 @@ def add_download_image_args(p: argparse.ArgumentParser) -> None:
         "--no-optimize",
         action="store_true",
         help="Do not recompress local files over ~350 KiB after download.",
+    )
+    p.add_argument(
+        "--subject-filter",
+        action="store_true",
+        help="Deprecated: filter is on by default; use --no-subject-filter.",
+    )
+    p.add_argument(
+        "--no-subject-filter",
+        action="store_true",
+        help=(
+            "Disable person/animal main-subject rejection "
+            "(offline YOLO; on by default)."
+        ),
     )
 
 

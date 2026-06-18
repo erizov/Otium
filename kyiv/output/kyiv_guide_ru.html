@@ -13,7 +13,7 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
 .otium-logo { font-family: 'Cormorant Garamond', serif; font-size: 2.15rem;
   font-weight: 600; letter-spacing: 0.18em; margin-bottom: 0.85rem; }
 .otiump { margin: 0.42rem 0; line-height: 1.42; text-align: justify;
-  max-width: 38rem; font-size: 0.95rem; }
+  font-size: 0.95rem; }
 .guide-title { page-break-after: auto; margin-bottom: 0.55rem;
   page-break-inside: avoid; }
 .historical-reference { margin: 0.75rem 0 1.15rem;
@@ -63,22 +63,103 @@ ol.trip-stops a:hover { text-decoration: underline; }
 .heraldry-univ-caption { font-size: 0.52rem; line-height: 1.18;
   margin: 0.12rem 0 0; padding: 0 0.06rem; color: #252525;
   text-align: center; font-weight: 500; }
-.heraldry-motto { text-align: center; max-width: 18rem; margin: 0.18rem auto;
+.heraldry-motto { text-align: center; margin: 0.18rem auto;
   width: 100%; }
 .motto-line { font-family: 'Cormorant Garamond', serif; font-size: 1rem;
   margin: 0; color: #333; line-height: 1.35; }
 .guide-title h1.guide-title-main { font-family: 'Cormorant Garamond', serif;
   font-size: 2.35rem; margin-bottom: 0.5rem; font-weight: 600; }
 .lead { color: #444; font-size: 1.05rem; }
-.guide-toc { margin: 0.85rem 0 1.15rem; page-break-inside: avoid; }
-.guide-toc h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.28rem;
-  font-weight: 600; margin: 0.4rem 0 0.55rem; }
+
+.guide-toc { page-break-before: always; break-before: page;
+  page-break-after: always; break-after: page;
+  margin: 0; padding: 0.2rem 0 0.45rem; page-break-inside: auto; }
+.guide-toc h2 { font-family: 'Cormorant Garamond', serif;
+  font-size: 1.28rem; font-weight: 600; margin: 0.4rem 0 0.55rem; }
 .guide-toc ol { margin: 0.35rem 0 0.65rem 1.25rem; padding: 0;
   columns: 2; column-gap: 1.5rem; }
 .guide-toc li { margin: 0.18rem 0; line-height: 1.35;
   font-size: 0.88rem; break-inside: avoid; }
-.guide-toc a { color: #1a5276; text-decoration: none; }
+.guide-toc a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.guide-toc a:hover { color: #0d3d56; }
 .guide-toc li.toc-item--sub { font-size: 0.82rem; margin-left: 0.35rem; }
+.toc-back { font-size: 0.78rem; margin: 0 0 0.35rem; text-align: right; }
+.toc-back a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.toc-back a:hover { color: #0d3d56; }
+.place, .historical-reference, .guide-primer, .guide-trip-plans {
+  scroll-margin-top: 1.25rem; }
+.historical-reference h2, .guide-primer h2, .guide-trip-plans h2,
+.chapter-head h2, .place-lead h3 { position: relative; }
+.guide-toc + .place, .guide-toc + .chapter-head {
+  page-break-before: avoid; break-before: avoid-page; }
+.place-lead { page-break-inside: avoid; break-inside: avoid-page;
+  page-break-after: auto; }
+.place-lead > h3 { page-break-after: avoid; break-after: avoid-page; }
+.place-lead > .place-meta { page-break-after: avoid; break-after: avoid-page; }
+
+.place-fig { page-break-inside: avoid; break-inside: avoid-page;
+  margin: 0.5rem 0 1rem; }
+.place-fig img {
+  page-break-inside: avoid; break-inside: avoid-page;
+  max-height: 48vh; width: auto; max-width: 100%;
+  object-fit: contain; margin-left: auto; margin-right: auto; }
+.place-fig--hi-res img { max-height: 52vh; }
+.place-fig--lo-res img { max-height: 30vh; }
+.place-pdf-fig-row {
+  display: flex; flex-direction: row; flex-wrap: wrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.45rem 0.55rem; margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row .place-fig {
+  flex: 1 1 30%; margin: 0; min-width: 26%; max-width: 100%; }
+.place-pdf-fig-row .place-fig img {
+  width: auto; max-width: 100%; height: auto; max-height: 44vh;
+  object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--pair {
+  flex-wrap: nowrap; justify-content: space-between;
+  align-items: flex-end; gap: 0.5rem 0.65rem; }
+.place-pdf-fig-row--pair .place-fig {
+  flex: 1 1 47%; min-width: 0; max-width: 50%;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--pair .place-fig img {
+  max-height: 44vh; object-fit: contain; }
+.place-pdf-fig-row--pair .place-fig--hi-res img { max-height: 52vh; }
+.place-pdf-fig-row--pair .place-fig--lo-res img { max-height: 26vh; }
+.place-pdf-fig-row--pair .place-fig--row-sized img,
+.place-pdf-fig-row--triple .place-fig--row-sized img,
+.place-pdf-fig-row--many .place-fig--row-sized img {
+  width: auto; max-width: 100%; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row .place-fig--row-sized.place-fig--hi-res img,
+.place-pdf-fig-row .place-fig--row-sized.place-fig--lo-res img {
+  max-height: unset; }
+.place-pdf-fig-rows-stack {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple {
+  display: flex; flex-direction: row; flex-wrap: nowrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.4rem 0.48rem; margin: 0;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--triple .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--triple .place-fig--hi-res img { max-height: 42vh; }
+.place-pdf-fig-row--triple .place-fig--lo-res img { max-height: 18vh; }
+.place-pdf-fig-row--many {
+  flex-wrap: nowrap; justify-content: center; align-items: flex-end;
+  gap: 0.35rem 0.42rem; }
+.place-pdf-fig-row--many .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--many .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+
+
 .place { margin-bottom: 2.2rem; page-break-inside: auto; }
 h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.22rem; margin: 1.2rem 0 0.35rem;
   font-weight: 600; }
@@ -90,7 +171,6 @@ h4 { font-family: 'Cormorant Garamond', serif; font-size: 0.95rem; text-transfor
   color: #555; font-size: 0.95rem; margin: 0 0 0.5rem; font-style: italic; }
 .place-meta { font-size: 0.92rem; color: #353535; margin: 0 0 0.75rem;
   line-height: 1.4; }
-.place-fig { margin: 0.5rem 0 1rem; }
 img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
 .prose, .place-desc p { margin: 0.45rem 0; line-height: 1.5;
   text-align: justify; }
@@ -110,267 +190,435 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <figure class="heraldry-fig heraldry-coat-book" title="Coat of arms of Kyiv"><img src="../images/guide_coat_of_arms.svg" alt="Coat of arms of Kyiv"/></figure>
 <figure class="heraldry-fig heraldry-coat-book" title="Flag of Kyiv"><img src="../images/guide_flag.svg" alt="Flag of Kyiv"/></figure>
 </div></div><h1 class="guide-title-main">Kyiv</h1><p class="lead">Путеводитель. Объектов в этом выпуске: 30.</p></header>
+<nav class="guide-toc" id="guide-toc" aria-label="Содержание"><h2>Содержание</h2><ol><li class="toc-item"><a href="#guide-historical">Историческая справка</a></li><li class="toc-item"><a href="#guide-trips">Маршруты</a></li><li class="toc-item"><a href="#kyiv_ar_rahma">Kyiv Ar Rahma</a></li><li class="toc-item"><a href="#kyiv_golden_gate">Kyiv Golden Gate</a></li><li class="toc-item"><a href="#kyiv_house_chimeras">Kyiv House Chimeras</a></li><li class="toc-item"><a href="#kyiv_hryshko_garden">Kyiv Hryshko Garden</a></li><li class="toc-item"><a href="#kyiv_landmark">Kyiv Landmark</a></li><li class="toc-item"><a href="#kyiv_maidan">Kyiv Maidan</a></li><li class="toc-item"><a href="#kyiv_mosque_engraving">Kyiv Mosque Engraving</a></li><li class="toc-item"><a href="#kyiv_mystetskyi">Kyiv Mystetskyi</a></li><li class="toc-item"><a href="#kyiv_national_museum">Kyiv National Museum</a></li><li class="toc-item"><a href="#kyiv_pechersk_lavra">Kyiv Pechersk Lavra</a></li><li class="toc-item"><a href="#kyiv_saint_sophia">Kyiv Saint Sophia</a></li><li class="toc-item"><a href="#kyiv_landmark_2">Landmark 2</a></li><li class="toc-item"><a href="#kyiv_andrews_descent">Андреевский спуск</a></li><li class="toc-item"><a href="#kyiv_bessarabka">Бессарабский рынок</a></li><li class="toc-item"><a href="#kyiv_lavra_bell_tower">Великая Лавра Колокольня</a></li><li class="toc-item"><a href="#kyiv_contract_house">Дом Контракта</a></li><li class="toc-item"><a href="#kyiv_mariinsky_palace">Мариинский дворец</a></li><li class="toc-item"><a href="#kyiv_mariinsky_park">Мариинский парк</a></li><li class="toc-item"><a href="#kyiv_sts_boris_gleb">Монастырь Святого Бориса и Глеба</a></li><li class="toc-item"><a href="#kyiv_sts_cyril_methodius">Монастырь Святого Кирилла</a></li><li class="toc-item"><a href="#kyiv_motherland">Монумент Родина-мать</a></li><li class="toc-item"><a href="#kyiv_national_opera">Национальная опера Украины</a></li><li class="toc-item"><a href="#kyiv_pechersk_district">Печерский правительственный квартал</a></li><li class="toc-item"><a href="#kyiv_podil">Район Подол</a></li><li class="toc-item"><a href="#kyiv_st_volodymyr_cathedral">Собор Святого Владимира</a></li><li class="toc-item"><a href="#kyiv_st_michael">Собор Святого Михаила с золотыми куполами</a></li><li class="toc-item"><a href="#kyiv_st_nicholas">Собор Святого Николая</a></li><li class="toc-item"><a href="#kyiv_bridge_klitschko">Стеклянный мост Киев</a></li><li class="toc-item"><a href="#kyiv_one_street_museum">Улица-музей</a></li><li class="toc-item"><a href="#kyiv_st_alexander">Церковь Святого Александра Римско-Католическая</a></li></ol></nav>
 <section class="historical-reference" id="guide-historical" aria-label="Историческая справка"><h2>Историческая справка</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 <p class="prose">Киев — столица Украины, один из древнейших городов Восточной Европы.</p>
 <p class="prose">Легендарный «мат городов русских», центр Киевской Руси, княжеские соборы и пещеры Лавры, польско-литовский и российский периоды, советская индустрия и независимость. Днепр, холмы и монументальная архитектура задают облик мегаполиса.</p>
 <p class="prose">Киев пережил монгольский разор, Речь Посполиту, Российскую империю и СССР как административный центр Украины. Независимость с 1991 года и события 2014–2022 годов определили политическую роль города как столицы европейского государства на Днепре.</p></section>
 <section class="guide-trip-plans" id="guide-trips" aria-label="Маршруты"><h2>Маршруты</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 <article class="trip-plan" id="trip-1d"><h3>Один день</h3>
 <p class="prose">Компактный маршрут по главным точкам путеводителя с минимальным возвратом назад пешком.</p>
-<ol class="trip-stops"><li><a href="#kyiv_andrews_descent">Андреевский спуск</a> (~75мин)</li>
-<li><a href="#kyiv_one_street_museum">Улица-музей</a> (~75мин)</li>
+<ol class="trip-stops"><li><a href="#kyiv_house_chimeras">Kyiv House Chimeras</a> (~75мин)</li>
+<li><a href="#kyiv_national_museum">Kyiv National Museum</a> (~75мин)</li>
+<li><a href="#kyiv_maidan">Kyiv Maidan</a> (~60мин)</li>
 <li><a href="#kyiv_saint_sophia">Kyiv Saint Sophia</a> (~60мин)</li>
 <li><a href="#kyiv_golden_gate">Kyiv Golden Gate</a> (~60мин)</li>
-<li><a href="#kyiv_national_opera">Национальная опера Украины</a> (~75мин)</li>
-<li><a href="#kyiv_bessarabka">Бессарабский рынок</a> (~75мин)</li></ol></article>
+<li><a href="#kyiv_national_opera">Национальная опера Украины</a> (~75мин)</li></ol></article>
 <article class="trip-plan" id="trip-3d1"><h3>Три дня — день 1</h3>
 <p class="prose">День 1 — центральный кластер.</p>
-<ol class="trip-stops"><li><a href="#kyiv_house_chimeras">Kyiv House Chimeras</a> (~75мин)</li>
+<ol class="trip-stops"><li><a href="#kyiv_andrews_descent">Андреевский спуск</a> (~75мин)</li>
+<li><a href="#kyiv_bessarabka">Бессарабский рынок</a> (~75мин)</li>
 <li><a href="#kyiv_hryshko_garden">Kyiv Hryshko Garden</a> (~75мин)</li>
 <li><a href="#kyiv_lavra_bell_tower">Великая Лавра Колокольня</a> (~75мин)</li>
-<li><a href="#kyiv_mariinsky_palace">Мариинский дворец</a> (~75мин)</li>
-<li><a href="#kyiv_mariinsky_park">Мариинский парк</a> (~75мин)</li></ol></article>
+<li><a href="#kyiv_mariinsky_palace">Мариинский дворец</a> (~75мин)</li></ol></article>
 <article class="trip-plan" id="trip-3d2"><h3>Три дня — день 2</h3>
 <p class="prose">День 2 — следующая группа районов.</p>
 <ol class="trip-stops"><li><a href="#kyiv_pechersk_lavra">Kyiv Pechersk Lavra</a> (~75мин)</li>
 <li><a href="#kyiv_motherland">Монумент Родина-мать</a> (~75мин)</li>
+<li><a href="#kyiv_mariinsky_park">Мариинский парк</a> (~75мин)</li>
 <li><a href="#kyiv_mystetskyi">Kyiv Mystetskyi</a> (~75мин)</li>
-<li><a href="#kyiv_national_museum">Kyiv National Museum</a> (~75мин)</li>
-<li><a href="#kyiv_pechersk_district">Печерский правительственный квартал</a> (~75мин)</li></ol></article>
+<li><a href="#kyiv_one_street_museum">Улица-музей</a> (~75мин)</li></ol></article>
 <article class="trip-plan" id="trip-3d3"><h3>Три дня — день 3</h3>
 <p class="prose">День 3 — оставшиеся близкие объекты.</p>
-<ol class="trip-stops"><li><a href="#kyiv_podil">Район Подол</a> (~75мин)</li>
+<ol class="trip-stops"><li><a href="#kyiv_pechersk_district">Печерский правительственный квартал</a> (~75мин)</li>
+<li><a href="#kyiv_podil">Район Подол</a> (~75мин)</li>
 <li><a href="#kyiv_st_alexander">Церковь Святого Александра Римско-Католическая</a> (~75мин)</li>
 <li><a href="#kyiv_st_michael">Собор Святого Михаила с золотыми куполами</a> (~75мин)</li></ol></article></section>
-<nav class="guide-toc" aria-label="Содержание"><h2>Содержание</h2><ol><li class="toc-item"><a href="#guide-historical">Историческая справка</a></li><li class="toc-item"><a href="#guide-trips">Маршруты</a></li><li class="toc-item"><a href="#kyiv_andrews_descent">Андреевский спуск</a></li><li class="toc-item"><a href="#kyiv_pdfband_2_52626d3e">Ar-Rahma</a></li><li class="toc-item"><a href="#kyiv_bessarabka">Бессарабский рынок</a></li><li class="toc-item"><a href="#kyiv_contract_house">Дом Контракта</a></li><li class="toc-item"><a href="#kyiv_bridge_klitschko">Стеклянный мост Киев</a></li><li class="toc-item"><a href="#kyiv_golden_gate">Kyiv Golden Gate</a></li><li class="toc-item"><a href="#kyiv_lavra_bell_tower">Великая Лавра Колокольня</a></li><li class="toc-item"><a href="#kyiv_house_chimeras">Kyiv House Chimeras</a></li><li class="toc-item"><a href="#kyiv_hryshko_garden">Kyiv Hryshko Garden</a></li><li class="toc-item"><a href="#kyiv_maidan">Kyiv Maidan</a></li><li class="toc-item"><a href="#kyiv_pdfband_3_f5a3f15b">Kyiv</a></li><li class="toc-item"><a href="#kyiv_pechersk_lavra">Kyiv Pechersk Lavra</a></li><li class="toc-item"><a href="#kyiv_mariinsky_palace">Мариинский дворец</a></li><li class="toc-item"><a href="#kyiv_mariinsky_park">Мариинский парк</a></li><li class="toc-item"><a href="#kyiv_pdfband_12_52626d3e">Mosque engraving</a></li><li class="toc-item"><a href="#kyiv_motherland">Монумент Родина-мать</a></li><li class="toc-item"><a href="#kyiv_mystetskyi">Kyiv Mystetskyi</a></li><li class="toc-item"><a href="#kyiv_national_museum">Kyiv National Museum</a></li><li class="toc-item"><a href="#kyiv_national_opera">Национальная опера Украины</a></li><li class="toc-item"><a href="#kyiv_one_street_museum">Улица-музей</a></li><li class="toc-item"><a href="#kyiv_pechersk_district">Печерский правительственный квартал</a></li><li class="toc-item"><a href="#kyiv_podil">Район Подол</a></li><li class="toc-item"><a href="#kyiv_saint_sophia">Kyiv Saint Sophia</a></li><li class="toc-item"><a href="#kyiv_st_alexander">Церковь Святого Александра Римско-Католическая</a></li><li class="toc-item"><a href="#kyiv_sts_boris_gleb">Монастырь Святого Бориса и Глеба</a></li><li class="toc-item"><a href="#kyiv_sts_cyril_methodius">Монастырь Святого Кирилла</a></li><li class="toc-item"><a href="#kyiv_st_michael">Собор Святого Михаила с золотыми куполами</a></li><li class="toc-item"><a href="#kyiv_st_nicholas">Собор Святого Николая</a></li><li class="toc-item"><a href="#kyiv_st_volodymyr_cathedral">Собор Святого Владимира</a></li><li class="toc-item"><a href="#kyiv_pdfband_1_b80fce99">Вільнянськ3</a></li></ol></nav>
-<section class="place" id="kyiv_andrews_descent">
-<h3>Андреевский спуск</h3>
+<section class="place" id="kyiv_ar_rahma">
+<div class="place-lead">
+<h3>Kyiv Ar Rahma</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/kyiv_andrews_descent.jpg" alt="Андреевский спуск"/></figure>
-<div class="place-desc"><p class="prose">Андреевский спуск — живописная улица в Киеве, известная своей очаровательной архитектурой и яркой атмосферой. Часто называемая «Монмартром Киева», она усеяна художественными галереями, кафе и магазинами сувениров, что делает её популярным местом как для местных жителей, так и для туристов. Спуск соединяет верхний город с историческим районом Подол, предлагая потрясающие виды на реку Днепр. Андреевский спуск соединяет Верхний город с районом Подол. Церковь Святого Андрея, расположенная на спуске, была построена в середине XVIII века. Улица известна своей барочной архитектурой и яркой художественной сценой.</p>
-<p class="prose">Андреевский спуск имеет корни, уходящие в XI век, изначально служа важным торговым маршрутом. На протяжении своей истории он стал свидетелем значительных событий, включая основание близлежащей церкви Святого Андрея в 1747 году, которая является выдающимся архитектурным памятником. Улица развивалась на протяжении веков, отражая изменяющуюся динамику городской среды Киева. Культурно Андреевский спуск является центром художественного самовыражения и наследия, проводя многочисленные фестивали и мероприятия, которые отмечают украинские традиции. Здесь расположено несколько исторических зданий и памятников, что способствует богатому культурному полотну Киева. Улица играет важную роль в повседневной жизни, служа местом встречи для художников, музыкантов и посетителей.</p></div>
-</section>
-<section class="place" id="kyiv_pdfband_2_52626d3e">
-<h3>Ar-Rahma</h3>
-
-
-<figure class="place-fig"><img src="../images/kyiv_pdfband_2_52626d3e.jpg" alt="Ar-Rahma"/></figure>
-</section>
-<section class="place" id="kyiv_bessarabka">
-<h3>Бессарабский рынок</h3>
-
-
-<figure class="place-fig"><img src="../images/kyiv_bessarabka.jpg" alt="Бессарабский рынок"/></figure>
-<div class="place-desc"><p class="prose">Бессарабский рынок, расположенный в самом сердце Киева, является ярким центром местной жизни и торговли. Известный своим разнообразием свежих продуктов, мяса и ремесленных товаров, рынок предлагает посетителям вкус украинской культуры и кулинарных традиций. Его оживленная атмосфера и богатая история делают его обязательным местом для посещения как для местных жителей, так и для туристов. Основан в 1912 году. Расположен в Шевченковском районе Киева. Предлагает разнообразие киосков, продающих свежие продукты, мясо и местные деликатесы.</p>
-<p class="prose">Бессарабский рынок был основан в 1912 году и с тех пор стал одним из самых знаковых рынков Киева. Изначально названный в честь региона Бессарабия, рынок за годы претерпел несколько ремонтов и расширений, адаптируясь к меняющимся потребностям города и его жителей. Культурно Бессарабский рынок служит важным центром повседневной жизни в Киеве, отражая кулинарное наследие города и местные традиции. Это место сбора членов сообщества и выставка украинских ремесленников, способствующая сохранению местных ремесел и вкусов. Живой дух рынка олицетворяет атмосферу Киева, делая его неотъемлемой частью идентичности города.</p></div>
-</section>
-<section class="place" id="kyiv_contract_house">
-<h3>Дом Контракта</h3>
-
-
-<figure class="place-fig"><img src="../images/kyiv_contract_house.jpg" alt="Дом Контракта"/></figure>
-<div class="place-desc"><p class="prose">Дом контрактов, расположенный в сердце Киева, является ярким примером архитектуры 19 века, который стал символом богатой истории города. Изначально построенный как торговый дом для купцов, он теперь служит культурной площадкой, принимающей различные мероприятия и выставки. Посетители могут восхищаться его сложным дизайном и узнать о его роли в коммерческой жизни Киева. Построено в 1846 году архитектором Андрием Меленским. Изначально служил торговым домом для купцов в Киеве.</p>
-<p class="prose">Контрактовый дом был построен в середине 19 века, а именно в 1846 году, архитектором Андрием Меленским. Он был спроектирован для содействия торговле и коммерции в Киеве, отражая растущее экономическое значение города в тот период. На протяжении лет здание претерпело различные renovations, сохраняя свою историческую суть, одновременно адаптируясь к современным нуждам. Культурно Дом Контрактов играет важную роль в художественном ландшафте Киева, принимая выставки, концерты и культурные мероприятия, которые отмечают местное наследие. Он является свидетельством архитектурной эволюции города и служит местом сбора для сообщества, способствуя чувству идентичности и непрерывности в постоянно меняющейся городской среде.</p></div>
-</section>
-<section class="place" id="kyiv_bridge_klitschko">
-<h3>Стеклянный мост Киев</h3>
-
-
-<figure class="place-fig"><img src="../images/kyiv_bridge_klitschko.jpg" alt="Стеклянный мост Киев"/></figure>
-<div class="place-desc"><p class="prose">Стеклянный мост в Киеве, также известный как мост Кличко, является потрясающим архитектурным чудом, которое простирается над живописным ландшафтом города. Этот современный пешеходный мост предлагает захватывающие виды на окружающие парки и реку Днепр, что делает его популярным местом как для местных жителей, так и для туристов. Его прозрачный дизайн и уникальная структура приглашают посетителей испытать ощущение прогулки по небу, подчеркивая красоту городской среды Киева. Стеклянный мост имеет длину 200 метров и ширину 3,5 метра. Он имеет прозрачный пол из армированного стекла, который предоставляет уникальные виды на окружающую местность.</p>
-<p class="prose">Стеклянный мост был открыт в 2019 году в рамках усилий по revitalизации зеленых зон Киева. Он соединяет знаковый Парк Вечной Славы с живописным ландшафтом Национального ботанического сада имени Гришка, способствуя доступности этих важных культурных объектов. Культурно Стеклянный мост стал символом современного Киева, представляя собой приверженность города к сочетанию природы и городской жизни. Он служит местом сбора для жителей и гостей, способствуя взаимодействию сообщества и улучшая повседневную жизнь города. Мост также принимает различные художественные инсталляции и мероприятия, еще больше встраивая его в культурную ткань Киева.</p></div>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/kyiv_ar_rahma.jpg" alt="Kyiv Ar Rahma" width="1280" height="855" style="height: 292px; max-height: 292px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kyiv_ar_rahma_b.jpg" alt="Kyiv Ar Rahma — вид 2" width="330" height="209" style="height: 292px; max-height: 292px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 </section>
 <section class="place" id="kyiv_golden_gate">
+<div class="place-lead">
 <h3>Kyiv Golden Gate</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/kyiv_golden_gate.jpg" alt="Kyiv Golden Gate"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/kyiv_golden_gate.jpg" alt="Kyiv Golden Gate" width="1280" height="904" style="height: 309px; max-height: 309px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kyiv_golden_gate_b.jpg" alt="Kyiv Golden Gate — вид 2" width="330" height="221" style="height: 309px; max-height: 309px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Золотые Ворота — музей в Киеве, Украина.</p></div>
 </section>
-<section class="place" id="kyiv_lavra_bell_tower">
-<h3>Великая Лавра Колокольня</h3>
-
-
-<figure class="place-fig"><img src="../images/kyiv_lavra_bell_tower.jpg" alt="Великая Лавра Колокольня"/></figure>
-<div class="place-desc"><p class="prose">Великая Лаврская колокольня, знаковая структура Киева, величественно возвышается над историческим Печерским Лаврой. Завершенная в 18 веке, этот барочный шедевр является не только потрясающим архитектурным достижением, но и символом богатого религиозного и культурного наследия Украины. Посетители могут восхищаться ее сложным дизайном и наслаждаться панорамными видами города с ее смотровой площадки. Построен в период с 1731 по 1745 год. Дизайн, приписываемый архитектору Иоганну Готфриду Шаделю. Высота составляет 96 метров, что делает его самой высокой структурой в Киеве. Часть Киево-Печерской лавры, объекта Всемирного наследия ЮНЕСКО.</p>
-<p class="prose">Великая Лаврская колокольня была построена в период с 1731 по 1745 год, спроектирована архитектором Иоганном Готфридом Шаделем. Она достигает высоты 96 метров, что делает её самой высокой конструкцией в Киеве. Башня прошла через различные реставрации и остается центральной частью Киево-Печерской лавры, объекта Всемирного наследия ЮНЕСКО. Великая колокольня Лавры имеет огромное культурное и религиозное значение как часть Печерской лавры, главного центра православного христианства в Украине. Она служит символом национальной идентичности и стойкости, отражая исторические борьбы и победы украинского народа. Колокольня также играет важную роль в повседневной жизни, привлекая паломников и туристов, и является неотъемлемой частью различных религиозных обрядов и празднований.</p></div>
-</section>
 <section class="place" id="kyiv_house_chimeras">
+<div class="place-lead">
 <h3>Kyiv House Chimeras</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Адрес: Банкова вулиця, 10 | Период: 1903</p>
-<figure class="place-fig"><img src="../images/kyiv_house_chimeras.jpg" alt="Kyiv House Chimeras"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/kyiv_house_chimeras.jpg" alt="Kyiv House Chimeras" width="1280" height="960" style="height: 259px; max-height: 259px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kyiv_house_chimeras_b.jpg" alt="Kyiv House Chimeras — вид 2" width="330" height="185" style="height: 259px; max-height: 259px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Дом с химерами — это характерная архитектурная достопримечательность, расположенная на улице Крещатик, главной бульваре Киева. Его уникальный дизайн включает химер — мифических существ, сочетающих элементы разных животных — в замысловатых рельефах, украшающих фасад. Находится на пересечении улиц Крещатик и Истомина. Химеры, как считается, символизируют силу, мужество и мудрость. Здание было капитально реконструировано в конце 1980-х — начале 1990-х годов. Сегодня здесь расположены различные культурные площадки, включая театр и выставочные пространства. Его облик вдохновлял множество художников и фотографов. *(Alternatively, if the design refers specifically to architecture: Архитектура этого места вдохновила многих художников и фотографов.)*.</p>
 <p class="prose">Построенный в 1903 году архитектором Иваном Фрязиновым, дом изначально служил банком, а позже стал культурным центром. Химеры были добавлены к фасаду во время его реконструкции в начале XX века, что сделало его одним из самых знаковых зданий Киева. Посетители приезжают, чтобы полюбоваться изысканным мастерством химер и гармоничным сочетанием традиционной украинской архитектуры с влиянием ар-нуво.</p></div>
 </section>
 <section class="place" id="kyiv_hryshko_garden">
+<div class="place-lead">
 <h3>Kyiv Hryshko Garden</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Период: 1974</p>
-<figure class="place-fig"><img src="../images/kyiv_hryshko_garden.jpg" alt="Kyiv Hryshko Garden"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/kyiv_hryshko_garden.jpg" alt="Kyiv Hryshko Garden" width="1280" height="853" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kyiv_hryshko_garden_b.jpg" alt="Kyiv Hryshko Garden — вид 2" width="330" height="219" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Расположенный среди холмов Киева и изумрудных пейзажей, Национальный ботанический сад имени Грышко — это безмятежный оазис флоры и фауны. Созданный для сохранения биоразнообразия и просвещения общественности в вопросах растительного мира, он представляет более 8 000 видов растений со всего мира. Сад занимает территорию площадью примерно 60 гектаров. Он является домом для более чем 8000 видов растений, включая многие редкие и экзотические сорта. Посетители могут исследовать разнообразные среды обитания, такие как тропические тропические леса, пустыни и альпийские луга. Регулярные образовательные программы и выставки дают представление об садоводстве и экологической науке. Хрышко проводит многочисленные культурные мероприятия в течение года, включая цветочные фестивали и ботанические конференции.</p>
 <p class="prose">Основанный в 1974 году ботаником Николаем Грышко, сад изначально назывался Киево-ботаническим садом. Позднее он расширился и получил свой нынешний национальный статус, став одним из самых значимых ботанических учреждений Украины. Сад отличается уникальными коллекциями редких и находящихся под угрозой исчезновения растений, что делает его жизненно важным центром природоохранных усилий. Место, которое обязательно к посещению любителям природы и студентам-ботаникам, Хрышко предлагает великолепные выставки цветов, деревьев и кустарников, все из которых тщательно размещены в тематических садах.</p></div>
 </section>
+<section class="place" id="kyiv_landmark">
+<div class="place-lead">
+<h3>Kyiv Landmark</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<figure class="place-fig place-fig--hi-res"><img src="../images/kyiv_landmark.jpg" alt="Kyiv Landmark" width="1280" height="960"/></figure>
+</div>
+</section>
 <section class="place" id="kyiv_maidan">
+<div class="place-lead">
 <h3>Kyiv Maidan</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/kyiv_maidan.jpg" alt="Kyiv Maidan"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/kyiv_maidan.jpg" alt="Kyiv Maidan" width="1280" height="850" style="height: 200px; max-height: 200px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kyiv_maidan_b.jpg" alt="Kyiv Maidan — вид 2" width="330" height="143" style="height: 200px; max-height: 200px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Майдан Незалежности — главная площадь Киева, Украина.</p></div>
 </section>
-<section class="place" id="kyiv_pdfband_3_f5a3f15b">
-<h3>Kyiv</h3>
+<section class="place" id="kyiv_mosque_engraving">
+<div class="place-lead">
+<h3>Kyiv Mosque Engraving</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/kyiv_pdfband_3_f5a3f15b.jpg" alt="Kyiv"/></figure>
-</section>
-<section class="place" id="kyiv_pechersk_lavra">
-<h3>Kyiv Pechersk Lavra</h3>
-
-<p class="place-meta">Период: 1051</p>
-<figure class="place-fig"><img src="../images/kyiv_pechersk_lavra.jpg" alt="Kyiv Pechersk Lavra"/></figure>
-<div class="place-desc"><p class="prose">Объект был признан объектом Всемирного наследия ЮНЕСКО в 1990 году. Лавра включает несколько церквей, монастырей и подземных катакомб. Посетители могут исследовать исторический монастырь Пещерный и Собор Успения. Среди заметных захоронений находятся могилы национальных героев и религиозных лидеров. Ежегодные фестивали отмечают культурное значение Лавры.</p>
-<p class="prose">Место, которое обязательно стоит посетить всем, кто интересуется украинской культурой и религией. Лавра предлагает захватывающие виды на реку Днепр и дает представление о богатом историческом и духовном наследии страны.</p></div>
-</section>
-<section class="place" id="kyiv_mariinsky_palace">
-<h3>Мариинский дворец</h3>
-
-
-<figure class="place-fig"><img src="../images/kyiv_mariinsky_palace.jpg" alt="Мариинский дворец"/></figure>
-<div class="place-desc"><p class="prose">Мариинский дворец, архитектурное сокровище Киева, служит официальной церемониальной резиденцией Президента Украины. Его потрясающий барочный дизайн, дополненный зелеными садами, делает его популярным местом для посетителей, интересующихся богатой историей и культурой города. Построен в период с 1744 по 1752 год. Изначально спроектирован для императрицы Елизаветы России. Служит церемониальной резиденцией Президента Украины.</p>
-<p class="prose">Строительство Мариинского дворца началось в 1744 году под руководством архитектора Бартоломео Растрелли и было завершено в 1752 году. Изначально построенный для императрицы Елизаветы Петровны, дворец претерпел различные реконструкции и на протяжении своей истории выполнял разные функции, включая проведение значительных государственных мероприятий. Мариинский дворец имеет значительное политическое значение, так как является местом официальных государственных церемоний и мероприятий, отражая управление Украиной и национальную идентичность. Культурно дворец является символом наследия страны, демонстрируя барочную архитектуру и служа местом для культурных событий, которые отмечают украинские традиции.</p></div>
-</section>
-<section class="place" id="kyiv_mariinsky_park">
-<h3>Мариинский парк</h3>
-
-
-<figure class="place-fig"><img src="../images/kyiv_mariinsky_park.jpg" alt="Мариинский парк"/></figure>
-<div class="place-desc"><p class="prose">Мариинский парк — это живописное зеленое пространство, расположенное в сердце Киева, предлагающее потрясающие виды на реку Днепр и знаковое здание парламента. Этот парк является идеальным местом для неспешных прогулок, пикников и наслаждения яркой атмосферой города. С его красивым ландшафтным дизайном и историческими памятниками он служит спокойным убежищем как для местных жителей, так и для туристов. Основан в конце 18 века. Назван в честь Мариинского дворца, построенного в 1752 году. Включает в себя разнообразные скульптуры и памятники.</p>
-<p class="prose">Мариинский парк был основан в конце 18 века, изначально спроектированный в французском стиле, а затем преобразованный в ландшафтный парк. Он был назван в честь соседнего Мариинского дворца, который был построен в 1752 году как резиденция для императрицы Елизаветы. На протяжении многих лет парк претерпел несколько ремонтов и расширений, став значительной зоной отдыха в Киеве. Мариинский парк имеет культурное значение как место сбора граждан и площадка для различных общественных мероприятий, включая концерты и фестивали. Его близость к политическому центру Украины делает его местом для демонстраций и гражданского участия, отражая динамичную историю города. Парк также является домом для нескольких памятников и скульптур, которые отмечают украинское наследие и историю.</p></div>
-</section>
-<section class="place" id="kyiv_pdfband_12_52626d3e">
-<h3>Mosque engraving</h3>
-
-
-<figure class="place-fig"><img src="../images/kyiv_pdfband_12_52626d3e.jpg" alt="Mosque engraving"/></figure>
-</section>
-<section class="place" id="kyiv_motherland">
-<h3>Монумент Родина-мать</h3>
-
-
-<figure class="place-fig"><img src="../images/kyiv_motherland.jpg" alt="Монумент Родина-мать"/></figure>
-<div class="place-desc"><p class="prose">Монумент Родина-Мать, возвышающийся на 62 метра, является знаковым символом Киева и свидетельством стойкости и силы Украины. Эта колоссальная статуя, часть Музея Великой Отечественной войны, предлагает посетителям панорамные виды на город и служит трогательным напоминанием о жертвах, понесенных во время Второй мировой войны. Его впечатляющий дизайн и исторический контекст делают его обязательной для посещения достопримечательностью для всех, кто исследует Киев. Статуя изготовлена из нержавеющей стали и весит примерно 560 тонн. Это часть Национального музея истории Украины во Второй мировой войне.</p>
-<p class="prose">Монумент Родина-Мать был открыт 9 мая 1981 года в честь советской победы в Великой Отечественной войне. Спроектированный скульптором Евгением Вучетичем, монумент стал частью более крупного комплекса, посвященного войне, отражая акцент Советского Союза на своей военной истории. С тех пор статуя стала символом национальной гордости и идентичности для Украины, особенно после ее независимости в 1991 году. Политически, Монумент Родины является символом борьбы Украины за суверенитет и независимость, особенно в контексте её сложной истории с Россией. Культурно, он представляет собой значительный аспект украинского наследия, воплощая коллективную память о жертвах нации во время войны. Монумент также является центром национальных празднований и памятных мероприятий, укрепляя свою роль в современной украинской идентичности.</p></div>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/kyiv_mosque_engraving.jpg" alt="Kyiv Mosque Engraving" width="1280" height="840" style="height: 303px; max-height: 303px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kyiv_mosque_engraving_b.jpg" alt="Kyiv Mosque Engraving — вид 2" width="330" height="268" style="height: 303px; max-height: 303px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 </section>
 <section class="place" id="kyiv_mystetskyi">
+<div class="place-lead">
 <h3>Kyiv Mystetskyi</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Адрес: вул. Лаврська, 10-12, м. Київ, 01010 | Период: 1898</p>
-<figure class="place-fig"><img src="../images/kyiv_mystetskyi.jpg" alt="Kyiv Mystetskyi"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/kyiv_mystetskyi.jpg" alt="Kyiv Mystetskyi" width="1280" height="853" style="height: 273px; max-height: 273px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kyiv_mystetskyi_b.jpg" alt="Kyiv Mystetskyi — вид 2" width="330" height="195" style="height: 273px; max-height: 273px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">На улице Гречанивке находится Музей-арсенал — известный музей и культурный центр, который представляет украинское искусство и исторические артефакты. Он был изначально построен как военный арсенал в конце XIX века. Музей хранит одну из крупнейших коллекций украинского авангардного искусства. Здесь проводятся регулярные временные выставки, посвященные современному искусству. Выставки часто включают мультимедийные инсталляции и интерактивные дисплеи. На территории расположены открытые скульптуры и сады. Мистецкий Арсенал предлагает экскурсии с гидом и образовательные программы.</p>
 <p class="prose">Выданный в 1898 году как пороховой склад для Императорской русской армии, Музей-арсенал впоследствии превратился в культурное учреждение после обретения Украиной независимости в 1991 году. Неоклассическая архитектура здания отражает его первоначальное предназначение как функциональной структуры для хранения оружия и боеприпасов. Посетители могут ознакомиться с выставками, посвящёнными современному и традиционному украинскому искусству, а также с артефактами, подчёркивающими богатое историческое наследие Киева.</p></div>
 </section>
 <section class="place" id="kyiv_national_museum">
+<div class="place-lead">
 <h3>Kyiv National Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Адрес: 6, вулиця Михайла Грушевського | Период: 1898</p>
-<figure class="place-fig"><img src="../images/kyiv_national_museum.jpg" alt="Kyiv National Museum"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/kyiv_national_museum.jpg" alt="Kyiv National Museum" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kyiv_national_museum_b.jpg" alt="Kyiv National Museum — вид 2" width="330" height="233" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Национальный художественный музей Украины является ведущим учреждением Киева для демонстрации богатого художественного наследия страны и ее глобального влияния. Основанный в 1898 году как частная коллекция, он впоследствии стал одним из самых значимых арт-хранилищ Европы. В нем насчитывается более 400 000 экспонатов, демонстрирующих огромное разнообразие украинского искусства. Музей располагает постоянными выставками, посвященными различным периодам истории украинского искусства. В коллекциях представлены работы известных украинских художников, таких как Тарас Шевченко и Василий Копп. Регулярные временные выставки освещают современное украинское искусство и международное сотрудничество. На улице Крещатик расположен музей, который ежегодно привлекает тысячи посетителей.</p>
 <p class="prose">Основанный в 1898 году украинским филантропом Николаем Лысенко, музей изначально содержал его личную коллекцию картин, скульптур и артефактов. Со временем его фонды расширились, включив работы известных украинских художников, таких как Иван Труш, Олекса Грынюк и Михаил Бойчук. Сегодня музей насчитывает более 400 000 экспонатов, что делает его одной из крупнейших коллекций украинского искусства в мире. Посетители могут ознакомиться с шедеврами, охватывающими века, включая знаковые произведения как традиционного украинского народного искусства, так и современного авангарда.</p></div>
 </section>
-<section class="place" id="kyiv_national_opera">
-<h3>Национальная опера Украины</h3>
+<section class="place" id="kyiv_pechersk_lavra">
+<div class="place-lead">
+<h3>Kyiv Pechersk Lavra</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/kyiv_national_opera.jpg" alt="Национальная опера Украины"/></figure>
-<div class="place-desc"><p class="prose">Национальная опера Украины в Киеве — это потрясающий архитектурный шедевр и культурный центр исполнительских искусств. Посетители могут насладиться разнообразным репертуаром оперных и балетных представлений в великолепной обстановке, отражающей богатое художественное наследие Украины. Это заведение не только демонстрирует местные таланты, но и привлекает международных артистов, что делает его обязательным для посещения любителями искусства. Основан в 1867 году как Киевский оперный театр. Официально названо Национальной оперой Украины в 1991 году. Провел значительные renovations после Второй мировой войны.</p>
-<p class="prose">Национальная опера Украины была основана в 1867 году, изначально как Киевский оперный театр. Она претерпела несколько трансформаций и ремонтов, особенно после Второй мировой войны, и в 1991 году, после независимости страны, была официально названа Национальной оперой Украины. Театр стал местом проведения множества значительных спектаклей и платформой для многих известных артистов на протяжении своей истории. Культурно Национальная опера Украины играет жизненно важную роль в сохранении и продвижении украинского наследия через свои выступления и постановки. Она служит местом сбора для сообщества, отражая художественный дух нации. Театр также вносит вклад в культурный диалог внутри Европы, демонстрируя богатые традиции Украины и современные художественные выражения.</p></div>
-</section>
-<section class="place" id="kyiv_one_street_museum">
-<h3>Улица-музей</h3>
-
-
-<figure class="place-fig"><img src="../images/kyiv_one_street_museum.jpg" alt="Улица-музей"/></figure>
-<div class="place-desc"><p class="prose">Улица-музей в Киеве — это уникальное культурное учреждение, посвященное истории и наследию знакового Андреевского спуска. Этот очаровательный музей демонстрирует художественную и архитектурную эволюцию улицы, представляя экспонаты, подчеркивающие ее значимость в городском ландшафте Киева. Посетители могут исследовать богатую палитру историй и персонажей, которые сформировали эту историческую магистраль. Музей расположен на Андреевском спуске, одной из старейших улиц Киева. Он включает выставки о истории улицы, архитектуре и выдающихся личностях. Музей поддерживает местных художников и проводит различные культурные мероприятия.</p>
-<p class="prose">Улица-музей была основана в 2016 году с целью сохранить и представить историю Андреевского спуска, улицы, известной своим ярким художественным сообществом и историческими памятниками. Музей сосредоточен на эволюции улицы с 18 века до настоящего времени, отражая изменения в социальной и культурной жизни Киева. Культурно Музей одной улицы играет важную роль в праздновании художественного наследия Киева и повседневной жизни его граждан. Он служит платформой для местных художников и ремесленников, способствуя чувству общности и преемственности на фоне современного городского развития. Музей также подчеркивает важность Андреевского спуска как символа исторической идентичности Киева и его продолжающегося культурного нарратива.</p></div>
-</section>
-<section class="place" id="kyiv_pechersk_district">
-<h3>Печерский правительственный квартал</h3>
-
-
-<figure class="place-fig"><img src="../images/kyiv_pechersk_district.jpg" alt="Печерский правительственный квартал"/></figure>
-<div class="place-desc"><p class="prose">Печерский правительственный квартал в Киеве является важным административным центром, в котором расположены ключевые государственные здания и учреждения. Эта территория характеризуется впечатляющей архитектурой, включая знаковую Верховную Раду и Администрацию Президента. Посетители могут оценить сочетание исторических и современных влияний, формирующих политический ландшафт Украины. Дом Верховной Рады, украинского парламента. Содержит Администрацию Президента Украины. Включает Киево-Печерскую лавру, объект Всемирного наследия ЮНЕСКО.</p>
-<p class="prose">Печерский район имеет глубокие исторические корни, восходящие к основанию Киево-Печерской лавры в 11 веке, которая стала центром православного христианства. На протяжении веков Печерск превратился в значительную административную территорию, особенно в 20 веке, когда он стал сердцем правительственной деятельности в Украине. Политически Печерский правительственный квартал играет ключевую роль в управлении Украиной, являясь местом расположения законодательной и исполнительной ветвей власти страны. Культурно он отражает богатое наследие Киева, с памятниками, которые подчеркивают историческую значимость города. Эта территория также является центром гражданской активности и протестов, особенно в ключевые моменты истории Украины.</p></div>
-</section>
-<section class="place" id="kyiv_podil">
-<h3>Район Подол</h3>
-
-
-<figure class="place-fig"><img src="../images/kyiv_podil.jpg" alt="Район Подол"/></figure>
-<div class="place-desc"><p class="prose">Подол — один из старейших районов Киева, расположенный вдоль реки Днепр, известный своей яркой атмосферой и исторической архитектурой. Этот район сочетает в себе богатую историю и современную жизнь, предлагая оживленные рынки, очаровательные кафе и культурные достопримечательности. Посетители могут прогуляться по его мощеным улицам, которые рассказывают о развитии города на протяжении веков. Подол — один из старейших районов Киева, основанный в IX веке. В средние века это был крупный торговый центр, особенно для товаров, перевозимых по реке Днепр. Первая типография в Украине была основана в Подоле в 16 веке.</p>
-<p class="prose">История Подола восходит к IX веку, что делает его одной из основополагающих территорий Киева. В средние века он служил важным торговым центром, особенно известным своей ролью в торговле товарами вдоль реки Днепр. Ключевыми событиями являются основание первой типографии в Украине в XVI веке и его значимость во время различных политических upheavals на протяжении украинской истории. Культурно Подол является ярким центром художественного выражения и наследия, домом для многочисленных театров, галерей и музеев. Район отражает повседневную жизнь жителей Киева, сочетая традиционные обычаи с современной культурой. Хотя здесь нет значительных религиозных памятников, его светские пространства часто становятся местом проведения культурных мероприятий и фестивалей, которые отмечают разнообразные традиции города.</p></div>
+<p class="place-meta">Период: 1051</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/kyiv_pechersk_lavra.jpg" alt="Kyiv Pechersk Lavra" width="1280" height="870" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kyiv_pechersk_lavra_b.jpg" alt="Kyiv Pechersk Lavra — вид 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Объект был признан объектом Всемирного наследия ЮНЕСКО в 1990 году. Лавра включает несколько церквей, монастырей и подземных катакомб. Посетители могут исследовать исторический монастырь Пещерный и Собор Успения. Среди заметных захоронений находятся могилы национальных героев и религиозных лидеров. Ежегодные фестивали отмечают культурное значение Лавры.</p>
+<p class="prose">Место, которое обязательно стоит посетить всем, кто интересуется украинской культурой и религией. Лавра предлагает захватывающие виды на реку Днепр и дает представление о богатом историческом и духовном наследии страны.</p></div>
 </section>
 <section class="place" id="kyiv_saint_sophia">
+<div class="place-lead">
 <h3>Kyiv Saint Sophia</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/kyiv_saint_sophia.jpg" alt="Kyiv Saint Sophia"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/kyiv_saint_sophia.jpg" alt="Kyiv Saint Sophia" width="1280" height="873" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kyiv_saint_sophia_b.jpg" alt="Kyiv Saint Sophia — вид 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Софийский собор в Киеве — византийский памятник XI века и объект Всемирного наследия ЮНЕСКО, известный своими мозаиками, фресками и центральной ролью в наследии Киевской Руси.</p></div>
 </section>
-<section class="place" id="kyiv_st_alexander">
-<h3>Церковь Святого Александра Римско-Католическая</h3>
+<section class="place" id="kyiv_landmark_2">
+<div class="place-lead">
+<h3>Landmark 2</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/kyiv_st_alexander.jpg" alt="Церковь Святого Александра Римско-Католическая"/></figure>
-<div class="place-desc"><p class="prose">Церковь Святого Александра Римско-Католическая — это потрясающее архитектурное сокровище, расположенное в самом сердце Киева. Известная своим неоготическим стилем и красивыми витражами, эта церковь служит спокойным местом для поклонения и размышлений. Посетители могут оценить её сложный дизайн и мирную атмосферу, которая приглашает как к молитве, так и к созерцанию. Основан в 1902 году и освящен в 1912 году. Сделано в неоготическом архитектурном стиле. Одна из немногих римско-католических церквей в Киеве.</p>
-<p class="prose">Церковь Святого Александра Римско-католической церкви была основана в 1902 году и является одной из немногих римско-католических церквей в Киеве. Она была построена для обслуживания растущей католической общины в городе и была освящена в 1912 году. Церковь стала свидетелем значительных исторических событий, включая бурные периоды Первой и Второй мировых войн, и прошла через различные реставрации для сохранения своей красоты. Церковь имеет культурное значение как символ римско-католической веры в Украине, способствуя религиозному разнообразию города. Она играет важную роль в повседневной жизни своих прихожан, проводя регулярные службы и общественные мероприятия. Архитектурно она отражает влияние западноевропейских стилей, демонстрируя культурный обмен между Украиной и Западом.</p></div>
+<figure class="place-fig place-fig--hi-res"><img src="../images/kyiv_landmark_2.jpg" alt="Landmark 2" width="1059" height="1600"/></figure>
+</div>
+</section>
+<section class="place" id="kyiv_andrews_descent">
+<div class="place-lead">
+<h3>Андреевский спуск</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/kyiv_andrews_descent.jpg" alt="Андреевский спуск" width="1280" height="1092" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kyiv_andrews_descent_b.jpg" alt="Андреевский спуск — вид 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Андреевский спуск — живописная улица в Киеве, известная своей очаровательной архитектурой и яркой атмосферой. Часто называемая «Монмартром Киева», она усеяна художественными галереями, кафе и магазинами сувениров, что делает её популярным местом как для местных жителей, так и для туристов. Спуск соединяет верхний город с историческим районом Подол, предлагая потрясающие виды на реку Днепр. Андреевский спуск соединяет Верхний город с районом Подол. Церковь Святого Андрея, расположенная на спуске, была построена в середине XVIII века. Улица известна своей барочной архитектурой и яркой художественной сценой.</p>
+<p class="prose">Андреевский спуск имеет корни, уходящие в XI век, изначально служа важным торговым маршрутом. На протяжении своей истории он стал свидетелем значительных событий, включая основание близлежащей церкви Святого Андрея в 1747 году, которая является выдающимся архитектурным памятником. Улица развивалась на протяжении веков, отражая изменяющуюся динамику городской среды Киева. Культурно Андреевский спуск является центром художественного самовыражения и наследия, проводя многочисленные фестивали и мероприятия, которые отмечают украинские традиции. Здесь расположено несколько исторических зданий и памятников, что способствует богатому культурному полотну Киева. Улица играет важную роль в повседневной жизни, служа местом встречи для художников, музыкантов и посетителей.</p></div>
+</section>
+<section class="place" id="kyiv_bessarabka">
+<div class="place-lead">
+<h3>Бессарабский рынок</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/kyiv_bessarabka.jpg" alt="Бессарабский рынок" width="1065" height="1600" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kyiv_bessarabka_b.jpg" alt="Бессарабский рынок — вид 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Бессарабский рынок, расположенный в самом сердце Киева, является ярким центром местной жизни и торговли. Известный своим разнообразием свежих продуктов, мяса и ремесленных товаров, рынок предлагает посетителям вкус украинской культуры и кулинарных традиций. Его оживленная атмосфера и богатая история делают его обязательным местом для посещения как для местных жителей, так и для туристов. Основан в 1912 году. Расположен в Шевченковском районе Киева. Предлагает разнообразие киосков, продающих свежие продукты, мясо и местные деликатесы.</p>
+<p class="prose">Бессарабский рынок был основан в 1912 году и с тех пор стал одним из самых знаковых рынков Киева. Изначально названный в честь региона Бессарабия, рынок за годы претерпел несколько ремонтов и расширений, адаптируясь к меняющимся потребностям города и его жителей. Культурно Бессарабский рынок служит важным центром повседневной жизни в Киеве, отражая кулинарное наследие города и местные традиции. Это место сбора членов сообщества и выставка украинских ремесленников, способствующая сохранению местных ремесел и вкусов. Живой дух рынка олицетворяет атмосферу Киева, делая его неотъемлемой частью идентичности города.</p></div>
+</section>
+<section class="place" id="kyiv_lavra_bell_tower">
+<div class="place-lead">
+<h3>Великая Лавра Колокольня</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/kyiv_lavra_bell_tower.jpg" alt="Великая Лавра Колокольня" width="1048" height="1600" style="height: 343px; max-height: 343px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kyiv_lavra_bell_tower_b.jpg" alt="Великая Лавра Колокольня — вид 2" width="330" height="245" style="height: 343px; max-height: 343px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Великая Лаврская колокольня, знаковая структура Киева, величественно возвышается над историческим Печерским Лаврой. Завершенная в 18 веке, этот барочный шедевр является не только потрясающим архитектурным достижением, но и символом богатого религиозного и культурного наследия Украины. Посетители могут восхищаться ее сложным дизайном и наслаждаться панорамными видами города с ее смотровой площадки. Построен в период с 1731 по 1745 год. Дизайн, приписываемый архитектору Иоганну Готфриду Шаделю. Высота составляет 96 метров, что делает его самой высокой структурой в Киеве. Часть Киево-Печерской лавры, объекта Всемирного наследия ЮНЕСКО.</p>
+<p class="prose">Великая Лаврская колокольня была построена в период с 1731 по 1745 год, спроектирована архитектором Иоганном Готфридом Шаделем. Она достигает высоты 96 метров, что делает её самой высокой конструкцией в Киеве. Башня прошла через различные реставрации и остается центральной частью Киево-Печерской лавры, объекта Всемирного наследия ЮНЕСКО. Великая колокольня Лавры имеет огромное культурное и религиозное значение как часть Печерской лавры, главного центра православного христианства в Украине. Она служит символом национальной идентичности и стойкости, отражая исторические борьбы и победы украинского народа. Колокольня также играет важную роль в повседневной жизни, привлекая паломников и туристов, и является неотъемлемой частью различных религиозных обрядов и празднований.</p></div>
+</section>
+<section class="place" id="kyiv_contract_house">
+<div class="place-lead">
+<h3>Дом Контракта</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/kyiv_contract_house.jpg" alt="Дом Контракта" width="1280" height="915" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kyiv_contract_house_b.jpg" alt="Дом Контракта — вид 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Дом контрактов, расположенный в сердце Киева, является ярким примером архитектуры 19 века, который стал символом богатой истории города. Изначально построенный как торговый дом для купцов, он теперь служит культурной площадкой, принимающей различные мероприятия и выставки. Посетители могут восхищаться его сложным дизайном и узнать о его роли в коммерческой жизни Киева. Построено в 1846 году архитектором Андрием Меленским. Изначально служил торговым домом для купцов в Киеве.</p>
+<p class="prose">Контрактовый дом был построен в середине 19 века, а именно в 1846 году, архитектором Андрием Меленским. Он был спроектирован для содействия торговле и коммерции в Киеве, отражая растущее экономическое значение города в тот период. На протяжении лет здание претерпело различные renovations, сохраняя свою историческую суть, одновременно адаптируясь к современным нуждам. Культурно Дом Контрактов играет важную роль в художественном ландшафте Киева, принимая выставки, концерты и культурные мероприятия, которые отмечают местное наследие. Он является свидетельством архитектурной эволюции города и служит местом сбора для сообщества, способствуя чувству идентичности и непрерывности в постоянно меняющейся городской среде.</p></div>
+</section>
+<section class="place" id="kyiv_mariinsky_palace">
+<div class="place-lead">
+<h3>Мариинский дворец</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/kyiv_mariinsky_palace.jpg" alt="Мариинский дворец" width="1280" height="533" style="height: 192px; max-height: 192px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kyiv_mariinsky_palace_b.jpg" alt="Мариинский дворец — вид 2" width="330" height="495" style="height: 192px; max-height: 192px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Мариинский дворец, архитектурное сокровище Киева, служит официальной церемониальной резиденцией Президента Украины. Его потрясающий барочный дизайн, дополненный зелеными садами, делает его популярным местом для посетителей, интересующихся богатой историей и культурой города. Построен в период с 1744 по 1752 год. Изначально спроектирован для императрицы Елизаветы России. Служит церемониальной резиденцией Президента Украины.</p>
+<p class="prose">Строительство Мариинского дворца началось в 1744 году под руководством архитектора Бартоломео Растрелли и было завершено в 1752 году. Изначально построенный для императрицы Елизаветы Петровны, дворец претерпел различные реконструкции и на протяжении своей истории выполнял разные функции, включая проведение значительных государственных мероприятий. Мариинский дворец имеет значительное политическое значение, так как является местом официальных государственных церемоний и мероприятий, отражая управление Украиной и национальную идентичность. Культурно дворец является символом наследия страны, демонстрируя барочную архитектуру и служа местом для культурных событий, которые отмечают украинские традиции.</p></div>
+</section>
+<section class="place" id="kyiv_mariinsky_park">
+<div class="place-lead">
+<h3>Мариинский парк</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<figure class="place-fig place-fig--lo-res"><img src="../images/kyiv_mariinsky_park_b.jpg" alt="Мариинский парк" width="330" height="247"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Мариинский парк — это живописное зеленое пространство, расположенное в сердце Киева, предлагающее потрясающие виды на реку Днепр и знаковое здание парламента. Этот парк является идеальным местом для неспешных прогулок, пикников и наслаждения яркой атмосферой города. С его красивым ландшафтным дизайном и историческими памятниками он служит спокойным убежищем как для местных жителей, так и для туристов. Основан в конце 18 века. Назван в честь Мариинского дворца, построенного в 1752 году. Включает в себя разнообразные скульптуры и памятники.</p>
+<p class="prose">Мариинский парк был основан в конце 18 века, изначально спроектированный в французском стиле, а затем преобразованный в ландшафтный парк. Он был назван в честь соседнего Мариинского дворца, который был построен в 1752 году как резиденция для императрицы Елизаветы. На протяжении многих лет парк претерпел несколько ремонтов и расширений, став значительной зоной отдыха в Киеве. Мариинский парк имеет культурное значение как место сбора граждан и площадка для различных общественных мероприятий, включая концерты и фестивали. Его близость к политическому центру Украины делает его местом для демонстраций и гражданского участия, отражая динамичную историю города. Парк также является домом для нескольких памятников и скульптур, которые отмечают украинское наследие и историю.</p></div>
 </section>
 <section class="place" id="kyiv_sts_boris_gleb">
+<div class="place-lead">
 <h3>Монастырь Святого Бориса и Глеба</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/kyiv_sts_boris_gleb.jpg" alt="Монастырь Святого Бориса и Глеба"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kyiv_sts_boris_gleb.jpg" alt="Монастырь Святого Бориса и Глеба" width="330" height="248" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kyiv_sts_boris_gleb_b.jpg" alt="Монастырь Святого Бориса и Глеба — вид 2" width="330" height="417" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Монастырь Святого Бориса и Глеба, расположенный в сердце Киева, является спокойным уголком, отражающим богатое духовное наследие города. Этот исторический объект, посвященный первым христианским мученикам Киевской Руси, предлагает посетителям возможность увидеть архитектурную красоту и религиозную преданность, которые характеризуют этот регион на протяжении веков. С его спокойной атмосферой и значительными историческими корнями, монастырь является обязательным местом для посещения тем, кто стремится понять религиозный ландшафт Киева. Монастырь был основан в начале XII века. Он посвящен христианским мученикам Борису и Глебу.</p>
 <p class="prose">Основанный в начале XII века, монастырь Святого Бориса и Глеба является одним из старейших религиозных объектов в Киеве. Он был основан в честь князей Бориса и Глеба, которые стали мучениками в борьбе за власть после смерти их отца, князя Владимира Великого. На протяжении веков монастырь претерпел различные ремонты и реставрации, отражая изменяющиеся архитектурные стили и неугасимую значимость своей религиозной миссии. Монастырь Святого Бориса и Глеба имеет значительное культурное и религиозное значение в Украине. Он служит символом раннего христианского наследия региона и является важным местом для паломничества, особенно среди православных верующих. Архитектура и искусство монастыря способствуют богатому культурному полотну Киева, демонстрируя художественные традиции, которые развивались на протяжении веков. Кроме того, он играет роль в повседневной жизни местных прихожан, предлагая пространство для молитвы и размышлений.</p></div>
 </section>
 <section class="place" id="kyiv_sts_cyril_methodius">
+<div class="place-lead">
 <h3>Монастырь Святого Кирилла</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/kyiv_sts_cyril_methodius.jpg" alt="Монастырь Святого Кирилла"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/kyiv_sts_cyril_methodius.jpg" alt="Монастырь Святого Кирилла" width="1036" height="1400" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kyiv_sts_cyril_methodius_b.jpg" alt="Монастырь Святого Кирилла — вид 2" width="330" height="247" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Монастырь Святого Кирилла является великолепным примером византийской архитектуры, расположенным в сердце Киева. Известный своими красивыми фресками и спокойной атмосферой, этот исторический объект предлагает посетителям возможность заглянуть в богатое духовное и художественное наследие Украины. Монастырь является тихим убежищем, идеальным для размышлений и исследования его исторического значения. Основан в 12 веке, с записями, датируемыми 1146 годом. Названный в честь святого Кирилла, ключевой фигуры в развитии кириллицы. Особенности включают замечательные фрески и мозаики средневекового периода.</p>
 <p class="prose">Монастырь Святого Кирилла был основан в XII веке, а его самые ранние записи датируются 1146 годом. Монастырь претерпел различные ремонты и реставрации на протяжении веков, особенно после повреждений, полученных в советскую эпоху. Он назван в честь Святого Кирилла, одного из создателей кириллицы, и на протяжении своей истории был местом религиозного значения. Культурно, монастырь Святого Кирилла значим своими изысканными фресками и мозаиками, которые считаются шедеврами средневекового искусства. Монастырь сыграл роль в духовной жизни Украинской Православной Церкви и продолжает быть местом поклонения и паломничества. Его архитектурный стиль и художественное наследие способствуют статусу Киева как города, богатого историей и культурой.</p></div>
 </section>
+<section class="place" id="kyiv_motherland">
+<div class="place-lead">
+<h3>Монумент Родина-мать</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/kyiv_motherland.jpg" alt="Монумент Родина-мать" width="1200" height="1600" style="height: 309px; max-height: 309px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kyiv_motherland_b.jpg" alt="Монумент Родина-мать — вид 2" width="330" height="221" style="height: 309px; max-height: 309px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Монумент Родина-Мать, возвышающийся на 62 метра, является знаковым символом Киева и свидетельством стойкости и силы Украины. Эта колоссальная статуя, часть Музея Великой Отечественной войны, предлагает посетителям панорамные виды на город и служит трогательным напоминанием о жертвах, понесенных во время Второй мировой войны. Его впечатляющий дизайн и исторический контекст делают его обязательной для посещения достопримечательностью для всех, кто исследует Киев. Статуя изготовлена из нержавеющей стали и весит примерно 560 тонн. Это часть Национального музея истории Украины во Второй мировой войне.</p>
+<p class="prose">Монумент Родина-Мать был открыт 9 мая 1981 года в честь советской победы в Великой Отечественной войне. Спроектированный скульптором Евгением Вучетичем, монумент стал частью более крупного комплекса, посвященного войне, отражая акцент Советского Союза на своей военной истории. С тех пор статуя стала символом национальной гордости и идентичности для Украины, особенно после ее независимости в 1991 году. Политически, Монумент Родины является символом борьбы Украины за суверенитет и независимость, особенно в контексте её сложной истории с Россией. Культурно, он представляет собой значительный аспект украинского наследия, воплощая коллективную память о жертвах нации во время войны. Монумент также является центром национальных празднований и памятных мероприятий, укрепляя свою роль в современной украинской идентичности.</p></div>
+</section>
+<section class="place" id="kyiv_national_opera">
+<div class="place-lead">
+<h3>Национальная опера Украины</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/kyiv_national_opera.jpg" alt="Национальная опера Украины" width="1280" height="959" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kyiv_national_opera_b.jpg" alt="Национальная опера Украины — вид 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Национальная опера Украины в Киеве — это потрясающий архитектурный шедевр и культурный центр исполнительских искусств. Посетители могут насладиться разнообразным репертуаром оперных и балетных представлений в великолепной обстановке, отражающей богатое художественное наследие Украины. Это заведение не только демонстрирует местные таланты, но и привлекает международных артистов, что делает его обязательным для посещения любителями искусства. Основан в 1867 году как Киевский оперный театр. Официально названо Национальной оперой Украины в 1991 году. Провел значительные renovations после Второй мировой войны.</p>
+<p class="prose">Национальная опера Украины была основана в 1867 году, изначально как Киевский оперный театр. Она претерпела несколько трансформаций и ремонтов, особенно после Второй мировой войны, и в 1991 году, после независимости страны, была официально названа Национальной оперой Украины. Театр стал местом проведения множества значительных спектаклей и платформой для многих известных артистов на протяжении своей истории. Культурно Национальная опера Украины играет жизненно важную роль в сохранении и продвижении украинского наследия через свои выступления и постановки. Она служит местом сбора для сообщества, отражая художественный дух нации. Театр также вносит вклад в культурный диалог внутри Европы, демонстрируя богатые традиции Украины и современные художественные выражения.</p></div>
+</section>
+<section class="place" id="kyiv_pechersk_district">
+<div class="place-lead">
+<h3>Печерский правительственный квартал</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/kyiv_pechersk_district.jpg" alt="Печерский правительственный квартал" width="1280" height="815" style="height: 221px; max-height: 221px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kyiv_pechersk_district_b.jpg" alt="Печерский правительственный квартал — вид 2" width="330" height="158" style="height: 221px; max-height: 221px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Печерский правительственный квартал в Киеве является важным административным центром, в котором расположены ключевые государственные здания и учреждения. Эта территория характеризуется впечатляющей архитектурой, включая знаковую Верховную Раду и Администрацию Президента. Посетители могут оценить сочетание исторических и современных влияний, формирующих политический ландшафт Украины. Дом Верховной Рады, украинского парламента. Содержит Администрацию Президента Украины. Включает Киево-Печерскую лавру, объект Всемирного наследия ЮНЕСКО.</p>
+<p class="prose">Печерский район имеет глубокие исторические корни, восходящие к основанию Киево-Печерской лавры в 11 веке, которая стала центром православного христианства. На протяжении веков Печерск превратился в значительную административную территорию, особенно в 20 веке, когда он стал сердцем правительственной деятельности в Украине. Политически Печерский правительственный квартал играет ключевую роль в управлении Украиной, являясь местом расположения законодательной и исполнительной ветвей власти страны. Культурно он отражает богатое наследие Киева, с памятниками, которые подчеркивают историческую значимость города. Эта территория также является центром гражданской активности и протестов, особенно в ключевые моменты истории Украины.</p></div>
+</section>
+<section class="place" id="kyiv_podil">
+<div class="place-lead">
+<h3>Район Подол</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/kyiv_podil.jpg" alt="Район Подол" width="1200" height="1600" style="height: 95px; max-height: 95px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kyiv_podil_b.jpg" alt="Район Подол — вид 2" width="330" height="68" style="height: 95px; max-height: 95px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Подол — один из старейших районов Киева, расположенный вдоль реки Днепр, известный своей яркой атмосферой и исторической архитектурой. Этот район сочетает в себе богатую историю и современную жизнь, предлагая оживленные рынки, очаровательные кафе и культурные достопримечательности. Посетители могут прогуляться по его мощеным улицам, которые рассказывают о развитии города на протяжении веков. Подол — один из старейших районов Киева, основанный в IX веке. В средние века это был крупный торговый центр, особенно для товаров, перевозимых по реке Днепр. Первая типография в Украине была основана в Подоле в 16 веке.</p>
+<p class="prose">История Подола восходит к IX веку, что делает его одной из основополагающих территорий Киева. В средние века он служил важным торговым центром, особенно известным своей ролью в торговле товарами вдоль реки Днепр. Ключевыми событиями являются основание первой типографии в Украине в XVI веке и его значимость во время различных политических upheavals на протяжении украинской истории. Культурно Подол является ярким центром художественного выражения и наследия, домом для многочисленных театров, галерей и музеев. Район отражает повседневную жизнь жителей Киева, сочетая традиционные обычаи с современной культурой. Хотя здесь нет значительных религиозных памятников, его светские пространства часто становятся местом проведения культурных мероприятий и фестивалей, которые отмечают разнообразные традиции города.</p></div>
+</section>
+<section class="place" id="kyiv_st_volodymyr_cathedral">
+<div class="place-lead">
+<h3>Собор Святого Владимира</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/kyiv_st_volodymyr_cathedral.jpg" alt="Собор Святого Владимира" width="1024" height="1600" style="height: 347px; max-height: 347px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kyiv_st_volodymyr_cathedral_b.jpg" alt="Собор Святого Владимира — вид 2" width="330" height="248" style="height: 347px; max-height: 347px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Собор Святого Владимира — это потрясающий пример византийской архитектуры, расположенный в самом сердце Киева. Известный своими яркими мозаиками и фресками, собор служит символом украинской православной веры и является ключевой достопримечательностью как для местных жителей, так и для туристов. Его спокойная атмосфера приглашает к размышлениям и медитации среди шумного города. Собор Святого Владимира был построен в период с 1862 по 1882 год. Собор известен своими потрясающими мозаиками и фресками, созданными выдающимися художниками того времени.</p>
+<p class="prose">Собор Святого Владимира был заказан в 1862 году в честь 900-летия Крещения Киевской Руси. Собор был завершен в 1882 году и спроектирован архитектором Василием Несторовичем Борисовым, демонстрируя сочетание византийского и украинского архитектурных стилей. На протяжении своей истории он стал местом значительных религиозных и культурных событий. Собор имеет огромное культурное значение как символ украинского наследия и идентичности. Это не только место поклонения, но и площадка для важных церемоний и празднований, отражающих духовную жизнь сообщества. Художественные элементы собора способствуют его статусу культурного сокровища, привлекая как любителей искусства, так и паломников.</p></div>
+</section>
 <section class="place" id="kyiv_st_michael">
+<div class="place-lead">
 <h3>Собор Святого Михаила с золотыми куполами</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/kyiv_st_michael.jpg" alt="Собор Святого Михаила с золотыми куполами"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/kyiv_st_michael.jpg" alt="Собор Святого Михаила с золотыми куполами" width="1280" height="853" style="height: 294px; max-height: 294px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kyiv_st_michael_b.jpg" alt="Собор Святого Михаила с золотыми куполами — вид 2" width="330" height="210" style="height: 294px; max-height: 294px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Софийский Золотой Купольный Монастырь — это потрясающий архитектурный шедевр, расположенный в самом сердце Киева. Известный своими яркими золотыми куполами и богатой историей, монастырь служит символом украинской духовности и стойкости. Посетители могут исследовать его красивые интерьеры и насладиться спокойной атмосферой, которая привлекает как паломников, так и туристов. Основан в XI веке князем Святополком II. Монастырь был разрушен в 1934 году и восстановлен в начале 1990-х годов. Это важное место для православного христианского поклонения в Украине.</p>
 <p class="prose">Основанный в XI веке князем Святополком II, Михайловский Златоверхий монастырь претерпел множество преобразований на протяжении своей истории. Он был разрушен советским режимом в 1934 году, но был восстановлен в начале 1990-х годов, символизируя возрождение украинской культуры и веры после лет репрессий. Монастырь Святого Михаила имеет значительное культурное и религиозное значение для украинцев. Это ключевое место для православного христианского поклонения и сыграло роль в различных национальных событиях, отражая пересечение веры и национальной идентичности. Монастырь также является свидетельством художественного наследия Украины, демонстрируя изысканные фрески и мозаики, которые подчеркивают богатые религиозные традиции страны.</p></div>
 </section>
 <section class="place" id="kyiv_st_nicholas">
+<div class="place-lead">
 <h3>Собор Святого Николая</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/kyiv_st_nicholas.jpg" alt="Собор Святого Николая"/></figure>
-<div class="place-desc"><p class="prose">Собор Святого Николая, архитектурное сокровище Киева, славится своим потрясающим неоготическим дизайном и изысканными витражами. Уютно расположенный в самом сердце города, этот собор служит спокойным местом для поклонения и размышлений, привлекая как местных жителей, так и туристов. Его уникальное сочетание художественной красоты и духовного значения делает его обязательным местом для посещения в Киеве. Построен в период с 1899 по 1909 год. Спроектировано архитектором Василием К. Изначально построена как католическая церковь.</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/kyiv_st_nicholas.jpg" alt="Собор Святого Николая" width="1280" height="855" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kyiv_st_nicholas_b.jpg" alt="Собор Святого Николая — вид 2" width="330" height="248" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Собор Святого Николая, архитектурное сокровище Киева, славится своим потрясающим неоготическим дизайном и изысканными витражами. Уютно расположенный в самом сердце города, этот собор служит спокойным местом для поклонения и размышлений, привлекая как местных жителей, так и туристов. Его уникальное сочетание художественной красоты и духовного значения делает его обязательным местом для посещения в Киеве. Построен в период с 1899 по 1909 год. Спроектировано архитектором Василием К. Колесниковым. Изначально построена как католическая церковь.</p>
 <p class="prose">Собор Святого Николая был построен в период с 1899 по 1909 год, спроектирован архитектором Василием К. Колесниковым. Он был возведен как римско-католическая церковь, а позже стал частью Украинской православной церкви. Собор стал свидетелем значительных исторических событий, включая бурные периоды 20 века, которые повлияли на его статус и использование. Культурно, Собор Святого Николая является символом разнообразного религиозного наследия и архитектурной эволюции Киева. Он играет важную роль в повседневной жизни местного сообщества, проводя различные религиозные службы и мероприятия. Художественные элементы собора, включая его красивые фрески и скульптуры, способствуют богатому культурному полотну Украины.</p></div>
 </section>
-<section class="place" id="kyiv_st_volodymyr_cathedral">
-<h3>Собор Святого Владимира</h3>
+<section class="place" id="kyiv_bridge_klitschko">
+<div class="place-lead">
+<h3>Стеклянный мост Киев</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/kyiv_st_volodymyr_cathedral.jpg" alt="Собор Святого Владимира"/></figure>
-<div class="place-desc"><p class="prose">Собор Святого Владимира — это потрясающий пример византийской архитектуры, расположенный в самом сердце Киева. Известный своими яркими мозаиками и фресками, собор служит символом украинской православной веры и является ключевой достопримечательностью как для местных жителей, так и для туристов. Его спокойная атмосфера приглашает к размышлениям и медитации среди шумного города. Собор Святого Владимира был построен в период с 1862 по 1882 год. Собор известен своими потрясающими мозаиками и фресками, созданными выдающимися художниками того времени.</p>
-<p class="prose">Собор Святого Владимира был заказан в 1862 году в честь 900-летия Крещения Киевской Руси. Собор был завершен в 1882 году и спроектирован архитектором Василием Несторовичем Борисовым, демонстрируя сочетание византийского и украинского архитектурных стилей. На протяжении своей истории он стал местом значительных религиозных и культурных событий. Собор имеет огромное культурное значение как символ украинского наследия и идентичности. Это не только место поклонения, но и площадка для важных церемоний и празднований, отражающих духовную жизнь сообщества. Художественные элементы собора способствуют его статусу культурного сокровища, привлекая как любителей искусства, так и паломников.</p></div>
+<figure class="place-fig place-fig--lo-res"><img src="../images/kyiv_bridge_klitschko_b.jpg" alt="Стеклянный мост Киев" width="330" height="247"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Стеклянный мост в Киеве, также известный как мост Кличко, является потрясающим архитектурным чудом, которое простирается над живописным ландшафтом города. Этот современный пешеходный мост предлагает захватывающие виды на окружающие парки и реку Днепр, что делает его популярным местом как для местных жителей, так и для туристов. Его прозрачный дизайн и уникальная структура приглашают посетителей испытать ощущение прогулки по небу, подчеркивая красоту городской среды Киева. Стеклянный мост имеет длину 200 метров и ширину 3,5 метра. Он имеет прозрачный пол из армированного стекла, который предоставляет уникальные виды на окружающую местность.</p>
+<p class="prose">Стеклянный мост был открыт в 2019 году в рамках усилий по revitalизации зеленых зон Киева. Он соединяет знаковый Парк Вечной Славы с живописным ландшафтом Национального ботанического сада имени Гришка, способствуя доступности этих важных культурных объектов. Культурно Стеклянный мост стал символом современного Киева, представляя собой приверженность города к сочетанию природы и городской жизни. Он служит местом сбора для жителей и гостей, способствуя взаимодействию сообщества и улучшая повседневную жизнь города. Мост также принимает различные художественные инсталляции и мероприятия, еще больше встраивая его в культурную ткань Киева.</p></div>
 </section>
-<section class="place" id="kyiv_pdfband_1_b80fce99">
-<h3>Вільнянськ3</h3>
+<section class="place" id="kyiv_one_street_museum">
+<div class="place-lead">
+<h3>Улица-музей</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/kyiv_pdfband_1_b80fce99.jpg" alt="Вільнянськ3"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/kyiv_one_street_museum.jpg" alt="Улица-музей" width="1280" height="992" style="height: 326px; max-height: 326px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/kyiv_one_street_museum_b.jpg" alt="Улица-музей — вид 2" width="330" height="233" style="height: 326px; max-height: 326px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Улица-музей в Киеве — это уникальное культурное учреждение, посвященное истории и наследию знакового Андреевского спуска. Этот очаровательный музей демонстрирует художественную и архитектурную эволюцию улицы, представляя экспонаты, подчеркивающие ее значимость в городском ландшафте Киева. Посетители могут исследовать богатую палитру историй и персонажей, которые сформировали эту историческую магистраль. Музей расположен на Андреевском спуске, одной из старейших улиц Киева. Он включает выставки о истории улицы, архитектуре и выдающихся личностях. Музей поддерживает местных художников и проводит различные культурные мероприятия.</p>
+<p class="prose">Улица-музей была основана в 2016 году с целью сохранить и представить историю Андреевского спуска, улицы, известной своим ярким художественным сообществом и историческими памятниками. Музей сосредоточен на эволюции улицы с 18 века до настоящего времени, отражая изменения в социальной и культурной жизни Киева. Культурно Музей одной улицы играет важную роль в праздновании художественного наследия Киева и повседневной жизни его граждан. Он служит платформой для местных художников и ремесленников, способствуя чувству общности и преемственности на фоне современного городского развития. Музей также подчеркивает важность Андреевского спуска как символа исторической идентичности Киева и его продолжающегося культурного нарратива.</p></div>
+</section>
+<section class="place" id="kyiv_st_alexander">
+<div class="place-lead">
+<h3>Церковь Святого Александра Римско-Католическая</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<figure class="place-fig place-fig--lo-res"><img src="../images/kyiv_st_alexander_b.jpg" alt="Церковь Святого Александра Римско-Католическая" width="330" height="413"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Церковь Святого Александра Римско-Католическая — это потрясающее архитектурное сокровище, расположенное в самом сердце Киева. Известная своим неоготическим стилем и красивыми витражами, эта церковь служит спокойным местом для поклонения и размышлений. Посетители могут оценить её сложный дизайн и мирную атмосферу, которая приглашает как к молитве, так и к созерцанию. Основан в 1902 году и освящен в 1912 году. Сделано в неоготическом архитектурном стиле. Одна из немногих римско-католических церквей в Киеве.</p>
+<p class="prose">Церковь Святого Александра Римско-католической церкви была основана в 1902 году и является одной из немногих римско-католических церквей в Киеве. Она была построена для обслуживания растущей католической общины в городе и была освящена в 1912 году. Церковь стала свидетелем значительных исторических событий, включая бурные периоды Первой и Второй мировых войн, и прошла через различные реставрации для сохранения своей красоты. Церковь имеет культурное значение как символ римско-католической веры в Украине, способствуя религиозному разнообразию города. Она играет важную роль в повседневной жизни своих прихожан, проводя регулярные службы и общественные мероприятия. Архитектурно она отражает влияние западноевропейских стилей, демонстрируя культурный обмен между Украиной и Западом.</p></div>
 </section>
 </body>
 </html>

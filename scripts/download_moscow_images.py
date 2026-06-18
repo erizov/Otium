@@ -43,6 +43,7 @@ def main() -> int:
         title_page_assets=title_page_assets_for_download_arg("moscow"),
         args=args,
         url_is_whitelisted_fn=url_is_whitelisted,
+        city_slug="moscow",
     )
 
 

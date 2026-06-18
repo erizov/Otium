@@ -12,6 +12,7 @@ if str(_PROJECT_ROOT) not in sys.path:
 
 from vatican.data.places_registry import VATICAN_PLACES
 
+from scripts.city_guide_copy import install_guide_copy_patch
 from scripts.city_guide_jerusalem_style_pdf import run_build_pdf_main
 
 _TITLE_SYMBOLS: tuple[tuple[str, str], ...] = (
@@ -27,6 +28,7 @@ _TITLE_SYMBOLS: tuple[tuple[str, str], ...] = (
 
 
 def main() -> int:
+    install_guide_copy_patch()
     return run_build_pdf_main(
         project_root=_PROJECT_ROOT,
         city_slug="vatican",

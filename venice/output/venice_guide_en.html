@@ -13,7 +13,7 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
 .otium-logo { font-family: 'Cinzel', serif; font-size: 2.15rem;
   font-weight: 600; letter-spacing: 0.18em; margin-bottom: 0.85rem; }
 .otiump { margin: 0.42rem 0; line-height: 1.42; text-align: justify;
-  max-width: 38rem; font-size: 0.95rem; }
+  font-size: 0.95rem; }
 .guide-title { page-break-after: auto; margin-bottom: 0.55rem;
   page-break-inside: avoid; }
 .historical-reference { margin: 0.75rem 0 1.15rem;
@@ -63,22 +63,103 @@ ol.trip-stops a:hover { text-decoration: underline; }
 .heraldry-univ-caption { font-size: 0.52rem; line-height: 1.18;
   margin: 0.12rem 0 0; padding: 0 0.06rem; color: #252525;
   text-align: center; font-weight: 500; }
-.heraldry-motto { text-align: center; max-width: 18rem; margin: 0.18rem auto;
+.heraldry-motto { text-align: center; margin: 0.18rem auto;
   width: 100%; }
 .motto-line { font-family: 'Cinzel', serif; font-size: 1rem;
   margin: 0; color: #333; line-height: 1.35; }
 .guide-title h1.guide-title-main { font-family: 'Cinzel', serif;
   font-size: 2.35rem; margin-bottom: 0.5rem; font-weight: 600; }
 .lead { color: #444; font-size: 1.05rem; }
-.guide-toc { margin: 0.85rem 0 1.15rem; page-break-inside: avoid; }
-.guide-toc h2 { font-family: 'Cinzel', serif; font-size: 1.28rem;
-  font-weight: 600; margin: 0.4rem 0 0.55rem; }
+
+.guide-toc { page-break-before: always; break-before: page;
+  page-break-after: always; break-after: page;
+  margin: 0; padding: 0.2rem 0 0.45rem; page-break-inside: auto; }
+.guide-toc h2 { font-family: 'Cinzel', serif;
+  font-size: 1.28rem; font-weight: 600; margin: 0.4rem 0 0.55rem; }
 .guide-toc ol { margin: 0.35rem 0 0.65rem 1.25rem; padding: 0;
   columns: 2; column-gap: 1.5rem; }
 .guide-toc li { margin: 0.18rem 0; line-height: 1.35;
   font-size: 0.88rem; break-inside: avoid; }
-.guide-toc a { color: #1a5276; text-decoration: none; }
+.guide-toc a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.guide-toc a:hover { color: #0d3d56; }
 .guide-toc li.toc-item--sub { font-size: 0.82rem; margin-left: 0.35rem; }
+.toc-back { font-size: 0.78rem; margin: 0 0 0.35rem; text-align: right; }
+.toc-back a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.toc-back a:hover { color: #0d3d56; }
+.place, .historical-reference, .guide-primer, .guide-trip-plans {
+  scroll-margin-top: 1.25rem; }
+.historical-reference h2, .guide-primer h2, .guide-trip-plans h2,
+.chapter-head h2, .place-lead h3 { position: relative; }
+.guide-toc + .place, .guide-toc + .chapter-head {
+  page-break-before: avoid; break-before: avoid-page; }
+.place-lead { page-break-inside: avoid; break-inside: avoid-page;
+  page-break-after: auto; }
+.place-lead > h3 { page-break-after: avoid; break-after: avoid-page; }
+.place-lead > .place-meta { page-break-after: avoid; break-after: avoid-page; }
+
+.place-fig { page-break-inside: avoid; break-inside: avoid-page;
+  margin: 0.5rem 0 1rem; }
+.place-fig img {
+  page-break-inside: avoid; break-inside: avoid-page;
+  max-height: 48vh; width: auto; max-width: 100%;
+  object-fit: contain; margin-left: auto; margin-right: auto; }
+.place-fig--hi-res img { max-height: 52vh; }
+.place-fig--lo-res img { max-height: 30vh; }
+.place-pdf-fig-row {
+  display: flex; flex-direction: row; flex-wrap: wrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.45rem 0.55rem; margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row .place-fig {
+  flex: 1 1 30%; margin: 0; min-width: 26%; max-width: 100%; }
+.place-pdf-fig-row .place-fig img {
+  width: auto; max-width: 100%; height: auto; max-height: 44vh;
+  object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--pair {
+  flex-wrap: nowrap; justify-content: space-between;
+  align-items: flex-end; gap: 0.5rem 0.65rem; }
+.place-pdf-fig-row--pair .place-fig {
+  flex: 1 1 47%; min-width: 0; max-width: 50%;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--pair .place-fig img {
+  max-height: 44vh; object-fit: contain; }
+.place-pdf-fig-row--pair .place-fig--hi-res img { max-height: 52vh; }
+.place-pdf-fig-row--pair .place-fig--lo-res img { max-height: 26vh; }
+.place-pdf-fig-row--pair .place-fig--row-sized img,
+.place-pdf-fig-row--triple .place-fig--row-sized img,
+.place-pdf-fig-row--many .place-fig--row-sized img {
+  width: auto; max-width: 100%; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row .place-fig--row-sized.place-fig--hi-res img,
+.place-pdf-fig-row .place-fig--row-sized.place-fig--lo-res img {
+  max-height: unset; }
+.place-pdf-fig-rows-stack {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple {
+  display: flex; flex-direction: row; flex-wrap: nowrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.4rem 0.48rem; margin: 0;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--triple .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--triple .place-fig--hi-res img { max-height: 42vh; }
+.place-pdf-fig-row--triple .place-fig--lo-res img { max-height: 18vh; }
+.place-pdf-fig-row--many {
+  flex-wrap: nowrap; justify-content: center; align-items: flex-end;
+  gap: 0.35rem 0.42rem; }
+.place-pdf-fig-row--many .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--many .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+
+
 .place { margin-bottom: 2.2rem; page-break-inside: auto; }
 h3 { font-family: 'Cinzel', serif; font-size: 1.22rem; margin: 1.2rem 0 0.35rem;
   font-weight: 600; }
@@ -90,7 +171,6 @@ h4 { font-family: 'Cinzel', serif; font-size: 0.95rem; text-transform: uppercase
   color: #555; font-size: 0.95rem; margin: 0 0 0.5rem; font-style: italic; }
 .place-meta { font-size: 0.92rem; color: #353535; margin: 0 0 0.75rem;
   line-height: 1.4; }
-.place-fig { margin: 0.5rem 0 1rem; }
 img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
 .prose, .place-desc p { margin: 0.45rem 0; line-height: 1.5;
   text-align: justify; }
@@ -110,7 +190,9 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <figure class="heraldry-fig heraldry-coat-book" title="City emblem"><img src="../images/guide_coat_of_arms.svg" alt="City emblem"/></figure>
 <figure class="heraldry-fig heraldry-coat-book" title="Flag"><img src="../images/guide_flag.svg" alt="Flag"/></figure>
 </div></div><h1 class="guide-title-main">Venice</h1><p class="lead">Guide. Places in this edition: 35.</p></header>
+<nav class="guide-toc" id="guide-toc" aria-label="Contents"><h2>Contents</h2><ol><li class="toc-item"><a href="#guide-trips">Trip ideas</a></li><li class="toc-item"><a href="#venice_ponte_accademia">Accademia Bridge</a></li><li class="toc-item"><a href="#venice_arsenale_gate_land">Arsenale gate (land entrance)</a></li><li class="toc-item"><a href="#venice_bridge_of_sighs">Bridge of Sighs</a></li><li class="toc-item"><a href="#venice_burano">Burano</a></li><li class="toc-item"><a href="#venice_ca_doro">Ca&#x27; d&#x27;Oro</a></li><li class="toc-item"><a href="#venice_ca_rezzonico">Ca&#x27; Rezzonico</a></li><li class="toc-item"><a href="#venice_campo_san_polo">Campo San Polo</a></li><li class="toc-item"><a href="#venice_campo_santa_margherita">Campo Santa Margherita</a></li><li class="toc-item"><a href="#venice_canton">Canton</a></li><li class="toc-item"><a href="#venice_doges_palace">Doge&#x27;s Palace</a></li><li class="toc-item"><a href="#venice_gallerie_accademia">Gallerie dell&#x27;Accademia</a></li><li class="toc-item"><a href="#venice_giardini_biennale">Giardini della Biennale</a></li><li class="toc-item"><a href="#venice_grand_canal">Grand Canal</a></li><li class="toc-item"><a href="#venice_jewish_museum_venice">Jewish Museum of Venice</a></li><li class="toc-item"><a href="#venice_teatro_la_fenice">La Fenice</a></li><li class="toc-item"><a href="#venice_lido_di_venezia">Lido di Venezia</a></li><li class="toc-item"><a href="#venice_lido_di_venezia_beach">Lido di Venezia beaches</a></li><li class="toc-item"><a href="#venice_biblioteca_marciana">Marciana Library</a></li><li class="toc-item"><a href="#venice_murano">Murano</a></li><li class="toc-item"><a href="#venice_scala_contarini_del_bovolo">Palazzo Contarini del Bovolo</a></li><li class="toc-item"><a href="#venice_peggy_guggenheim_collection">Peggy Guggenheim Collection</a></li><li class="toc-item"><a href="#venice_piazza_san_marco">Piazza San Marco</a></li><li class="toc-item"><a href="#venice_punta_della_dogana">Punta della Dogana</a></li><li class="toc-item"><a href="#venice_rialto_bridge">Rialto Bridge</a></li><li class="toc-item"><a href="#venice_san_francesco_della_vigna">San Francesco della Vigna</a></li><li class="toc-item"><a href="#venice_san_giorgio_maggiore">San Giorgio Maggiore</a></li><li class="toc-item"><a href="#venice_san_zaccaria_venice">San Zaccaria</a></li><li class="toc-item"><a href="#venice_santa_maria_dei_miracoli">Santa Maria dei Miracoli</a></li><li class="toc-item"><a href="#venice_santa_maria_della_salute">Santa Maria della Salute</a></li><li class="toc-item"><a href="#venice_santa_maria_formosa">Santa Maria Formosa</a></li><li class="toc-item"><a href="#venice_scuola_grande_san_rocco">Scuola Grande di San Rocco</a></li><li class="toc-item"><a href="#venice_basilica_san_marco">St. Mark&#x27;s Basilica</a></li><li class="toc-item"><a href="#venice_campanile_san_marco">St. Mark&#x27;s Campanile</a></li><li class="toc-item"><a href="#venice_st_marks_clocktower">St. Mark&#x27;s Clock Tower</a></li><li class="toc-item"><a href="#venice_arsenale">Venetian Arsenal</a></li></ol></nav>
 <section class="guide-trip-plans" id="guide-trips" aria-label="Trip ideas"><h2>Trip ideas</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 <article class="trip-plan" id="trip-1d"><h3>One day</h3>
 <p class="prose">A compact loop linking the strongest cards in this guide, ordered to minimise backtracking on foot.</p>
 <ol class="trip-stops"><li><a href="#venice_bridge_of_sighs">Bridge of Sighs</a> (~75min)</li>
@@ -136,284 +218,493 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <article class="trip-plan" id="trip-3d3"><h3>Three days — day 3</h3>
 <p class="prose">Day 3 — remaining highlights nearby.</p>
 <ol class="trip-stops"><li><a href="#venice_lido_di_venezia">Lido di Venezia</a> (~75min)</li></ol></article></section>
-<nav class="guide-toc" aria-label="Contents"><h2>Contents</h2><ol><li class="toc-item"><a href="#guide-trips">Trip ideas</a></li><li class="toc-item"><a href="#venice_ponte_accademia">Accademia Bridge</a></li><li class="toc-item"><a href="#venice_arsenale_gate_land">Arsenale gate (land entrance)</a></li><li class="toc-item"><a href="#venice_bridge_of_sighs">Bridge of Sighs</a></li><li class="toc-item"><a href="#venice_burano">Burano</a></li><li class="toc-item"><a href="#venice_ca_doro">Ca&#x27; d&#x27;Oro</a></li><li class="toc-item"><a href="#venice_ca_rezzonico">Ca&#x27; Rezzonico</a></li><li class="toc-item"><a href="#venice_campo_san_polo">Campo San Polo</a></li><li class="toc-item"><a href="#venice_campo_santa_margherita">Campo Santa Margherita</a></li><li class="toc-item"><a href="#venice_doges_palace">Doge&#x27;s Palace</a></li><li class="toc-item"><a href="#venice_gallerie_accademia">Gallerie dell&#x27;Accademia</a></li><li class="toc-item"><a href="#venice_giardini_biennale">Giardini della Biennale</a></li><li class="toc-item"><a href="#venice_grand_canal">Grand Canal</a></li><li class="toc-item"><a href="#venice_jewish_museum_venice">Jewish Museum of Venice</a></li><li class="toc-item"><a href="#venice_teatro_la_fenice">La Fenice</a></li><li class="toc-item"><a href="#venice_lido_di_venezia">Lido di Venezia</a></li><li class="toc-item"><a href="#venice_lido_di_venezia_beach">Lido di Venezia beaches</a></li><li class="toc-item"><a href="#venice_biblioteca_marciana">Marciana Library</a></li><li class="toc-item"><a href="#venice_pdfband_2_1c9dd585">Canton</a></li><li class="toc-item"><a href="#venice_murano">Murano</a></li><li class="toc-item"><a href="#venice_scala_contarini_del_bovolo">Palazzo Contarini del Bovolo</a></li><li class="toc-item"><a href="#venice_peggy_guggenheim_collection">Peggy Guggenheim Collection</a></li><li class="toc-item"><a href="#venice_piazza_san_marco">Piazza San Marco</a></li><li class="toc-item"><a href="#venice_punta_della_dogana">Punta della Dogana</a></li><li class="toc-item"><a href="#venice_rialto_bridge">Rialto Bridge</a></li><li class="toc-item"><a href="#venice_san_francesco_della_vigna">San Francesco della Vigna</a></li><li class="toc-item"><a href="#venice_san_giorgio_maggiore">San Giorgio Maggiore</a></li><li class="toc-item"><a href="#venice_san_zaccaria_venice">San Zaccaria</a></li><li class="toc-item"><a href="#venice_santa_maria_dei_miracoli">Santa Maria dei Miracoli</a></li><li class="toc-item"><a href="#venice_santa_maria_della_salute">Santa Maria della Salute</a></li><li class="toc-item"><a href="#venice_santa_maria_formosa">Santa Maria Formosa</a></li><li class="toc-item"><a href="#venice_scuola_grande_san_rocco">Scuola Grande di San Rocco</a></li><li class="toc-item"><a href="#venice_basilica_san_marco">St. Mark&#x27;s Basilica</a></li><li class="toc-item"><a href="#venice_campanile_san_marco">St. Mark&#x27;s Campanile</a></li><li class="toc-item"><a href="#venice_st_marks_clocktower">St. Mark&#x27;s Clock Tower</a></li><li class="toc-item"><a href="#venice_arsenale">Venetian Arsenal</a></li></ol></nav>
 <section class="place" id="venice_ponte_accademia">
+<div class="place-lead">
 <h3>Accademia Bridge</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
-<p class="place-meta">Address: Dorsoduro–San Marco crossing of the Grand Canal | Style: Timber arch footbridge | Period: Modern bridge 1933; rebuilt 1985 (wooden arch)</p>
-<figure class="place-fig"><img src="../images/venice_ponte_accademia.jpg" alt="Accademia Bridge"/></figure>
+<p class="place-meta">Location: Dorsoduro–San Marco crossing of the Grand Canal | Style: Timber arch footbridge | Period: Modern bridge 1933; rebuilt 1985 (wooden arch)</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_ponte_accademia.jpg" alt="Accademia Bridge" width="1280" height="960" style="height: 310px; max-height: 310px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/venice_ponte_accademia_b.jpg" alt="Accademia Bridge — view 2" width="330" height="222" style="height: 310px; max-height: 310px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Accademia Bridge, built in 1589, is a notable landmark of Venice&#x27;s architectural heritage. It spans the Grand Canal and connects the districts of Dorsoduro and San Polo. A favored photo spot for Salute and canal bends; wooden deck adds a slight spring under foot traffic. Designed by Antonio da Ponte, the same architect who created the Rialto Bridge. Made of Istrian stone, a durable material commonly used in Venetian constructions. Features four large arches supporting the bridge’s structure. Located near the famous Gallerie dell&#x27;Accademia art museum. Serves as a pedestrian-only crossing today. One of few pedestrian crossings of the Grand Canal. Named for the nearby Accademia galleries and former academy.</p>
 <p class="prose">Constructed in 1589 during the reign of Duke Sebastiano Venier, the bridge was originally designed by architect Antonio da Ponte to replace the temporary wooden structure that had been used for centuries. The stone bridge features elegant arches and intricate decorative elements inspired by classical Roman architecture. Its construction marked a significant milestone in Venice’s urban planning, as it provided a permanent solution to the transportation needs across the Grand Canal. Bridges here reflect shifting engineering and tourism pressure; wood remains a deliberate aesthetic choice. Visiting the Accademia Bridge allows travelers to experience the historical charm and beauty of Venice firsthand, offering panoramic views of the Grand Canal and its surrounding buildings. Classic viewpoint tying art district to the main visitor loop.</p></div>
 </section>
 <section class="place" id="venice_arsenale_gate_land">
+<div class="place-lead">
 <h3>Arsenale gate (land entrance)</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Land entrance to the Arsenale, Castello | Style: Triumphal arch gate with sculptural program | Period: c. 1460 gate with later additions</p>
-<figure class="place-fig"><img src="../images/venice_arsenale_gate_land.jpg" alt="Arsenale gate (land entrance)"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_arsenale_gate_land.jpg" alt="Arsenale gate (land entrance)" width="1200" height="1600" style="height: 305px; max-height: 305px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/venice_arsenale_gate_land_b.jpg" alt="Arsenale gate (land entrance) — view 2" width="330" height="218" style="height: 305px; max-height: 305px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Arsenale Gate is a formidable landmark and the main land entrance to the historic Arsenal district of Venice. It stands as a testament to Venetian military prowess and engineering ingenuity. The monumental portal signals the Arsenal&#x27;s importance; lions and reliefs perform maritime propaganda before you even enter the complex. Constructed around 1580, it was part of a larger defensive system surrounding the Arsenal. Its robust fortifications were designed to withstand sieges and protect against invaders. Today, visitors can explore the gate’s interior and admire its architectural details, including carved stone reliefs depicting scenes from Venetian history. It remains one of few surviving examples of Venetian military architecture from the early modern era. The gate also offers panoramic views overlooking the Grand Canal. Often cited as one of the earliest Renaissance triumphal arch gates in Venice. Lions and trophies evoke Venetian overseas power.</p>
 <p class="prose">Built during the late 16th century, the Arsenale Gate served as a strategic point for controlling access to the Arsenal, one of Venice&#x27;s most important naval shipyards. Its design reflects the Renaissance style, characterized by solid stone construction and intricate decorative elements. As the Arsenal grew, ceremonial architecture asserted state control over industry and navy. Visiting the Arsenale Gate allows travelers to experience firsthand the historical significance of Venice’s military infrastructure and its pivotal role in maritime power. A compact summary of Venice&#x27;s military-industrial identity.</p></div>
 </section>
 <section class="place" id="venice_bridge_of_sighs">
+<div class="place-lead">
 <h3>Bridge of Sighs</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
-<p class="place-meta">Address: Linking the Doge&#x27;s Palace to the former prisons | Style: Baroque enclosed limestone bridge (Antonio Contino) | Period: 1600–1603</p>
-<figure class="place-fig"><img src="../images/venice_bridge_of_sighs.jpg" alt="Bridge of Sighs"/></figure>
+<p class="place-meta">Location: Linking the Doge&#x27;s Palace to the former prisons | Style: Baroque enclosed limestone bridge (Antonio Contino) | Period: 1600–1603</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_bridge_of_sighs.jpg" alt="Bridge of Sighs" width="1280" height="932" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/venice_bridge_of_sighs_b.jpg" alt="Bridge of Sighs — view 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Bridge of Sighs is a picturesque stone bridge connecting the old Prisons to the infamous New Prison in Venice&#x27;s Piazza San Marco. Built in 1602 during the reign of Doge Francesco Donato, it spans over the Palace Canaletto and is famously known for its gothic architecture and intricate stonework. A small, sealed passage over a canal, best seen from nearby bridges; legend insists prisoners sighed at their last view of freedom. Built in 1602 under the rule of Doge Francesco Donato. Designed by architect Baldassarre Longhena. Located above the Palace Canaletto. Symbolizes the final view of freedom for prisoners. Reflects Venetian Gothic architectural style. Two separate interior corridors divide traffic between offices and cells. The popular name is later romantic rather than official Venetian usage.</p>
 <p class="prose">Constructed in 1602 by architect Baldassarre Longhena, the Bridge of Sighs was originally intended as a route between the interrogation chambers of the prisons and the courtrooms. Its name derives from the belief that prisoners would take their last look at freedom through the windows before being led into their cells below. The bridge’s design reflects Venetian Gothic style with elegant arches and decorative details. Built as an administrative shortcut between interrogation rooms and incarceration spaces. A must-visit attraction, the Bridge of Sighs offers breathtaking views of St Mark&#x27;s Square and the Grand Canal, symbolizing the transition from liberty to captivity. One of Venice&#x27;s most photographed details—architecture turned into story.</p></div>
 </section>
 <section class="place" id="venice_burano">
+<div class="place-lead">
 <h3>Burano</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Northern lagoon island (vaporetto access from Fondamente Nove) | Style: Colorful fishermen&#x27;s houses and canals | Period: Island settlement medieval; modern craft economy</p>
-<figure class="place-fig"><img src="../images/venice_burano.jpg" alt="Burano"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_burano.jpg" alt="Burano" width="1280" height="720" style="height: 259px; max-height: 259px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/venice_burano_b.jpg" alt="Burano — view 2" width="330" height="237" style="height: 259px; max-height: 259px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Burano is a picturesque island in the Venetian Lagoon known for its colorful houses and vibrant pastel hues that decorate the streets and canals. It’s a charming retreat where visitors can explore narrow alleys, shop for local crafts, and indulge in traditional cuisine. Bright façades and lace tradition make it a photogenic half-day trip; mornings beat tour waves. The colorful houses are painted with bright pastel shades to distinguish one home from another. Lace-making has been a major industry on Burano since the 14th century. It is accessible via regular water taxis from Venice&#x27;s main train station, Santa Lucia. Many artists and craftsmen still practice traditional techniques of lace-making today. Each house number is displayed prominently above the door. Known for lacemaking traditions and small workshops. Leaning bell tower of San Martino is a landmark.</p>
 <p class="prose">Founded as early as the 9th century, Burano was originally inhabited by fishermen who later became renowned for their expertise in weaving lace. The island&#x27;s economy flourished during the Renaissance when it exported high-quality lace to Europe and beyond. Today, Burano remains a symbol of Venetian heritage and artistry. Lagoon fishing communities developed distinct identity; tourism now sustains crafts and cafés. Visiting Burano offers a unique opportunity to experience authentic Venetian culture, enjoy scenic views, and appreciate the island&#x27;s artistic traditions. Venice&#x27;s lagoon life beyond the stone center—color, craft, and water.</p></div>
 </section>
 <section class="place" id="venice_ca_doro">
+<div class="place-lead">
 <h3>Ca&#x27; d&#x27;Oro</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Cannaregio, Grand Canal | Style: Venetian Gothic palace (marmo and tracery) | Period: 1421–1440</p>
-<figure class="place-fig"><img src="../images/venice_ca_doro.jpg" alt="Ca&#x27; d&#x27;Oro"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_ca_doro.jpg" alt="Ca&#x27; d&#x27;Oro" width="1280" height="960" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/venice_ca_doro_b.jpg" alt="Ca&#x27; d&#x27;Oro — view 2" width="330" height="290" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">One of Venice&#x27;s most iconic landmarks, Ca&#x27; d&#x27;Oro stands majestically on the Grand Canal, its ornate facade adorned with intricate gold-painted woodwork and Venetian Gothic elements. Built as a private residence during the late Renaissance, it later became a museum showcasing works by artists like Tintoretto and Veronese. Once gilded and polychrome, the lace-like façade reads best from the vaporetto; inside is the Franchetti Gallery. Built in the late 15th century, it is one of the earliest surviving examples of Venetian Gothic architecture. The interior features exquisite frescoes and decorative elements typical of the Renaissance era. It showcases masterpieces by notable Venetian painters such as Tintoretto and Veronese. Its distinctive golden-colored façade inspired the nickname &#x27;Golden Palace.&#x27;. Today, visitors can explore both the historical building and its collection of artworks. Name means &#x27;House of Gold&#x27; from its original decoration. Interior courtyard and staircases are part of the visit.</p>
 <p class="prose">Constructed between 1430 and 1440, Ca&#x27; d&#x27;Oro was originally commissioned by the Contarini family as their luxurious home. Its name translates to &#x27;Golden House,&#x27; reflecting the rich decoration that once covered its exterior. Over time, it served various purposes before becoming a museum in the early 20th century. Merchant-elite residences broadcast status on the canal; later collectors turned palazzi into museums. A must-visit for art lovers, Ca&#x27; d&#x27;Oro offers a glimpse into the opulent lifestyle of Venice’s elite and houses some of the finest examples of Venetian Gothic architecture. One of the purest Gothic façades on the Grand Canal.</p></div>
 </section>
 <section class="place" id="venice_ca_rezzonico">
+<div class="place-lead">
 <h3>Ca&#x27; Rezzonico</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Dorsoduro, Grand Canal | Style: Baroque palazzo; museum of 18th-century Venice | Period: Started 1649; completed 18th c.</p>
-<figure class="place-fig"><img src="../images/venice_ca_rezzonico.jpg" alt="Ca&#x27; Rezzonico"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_ca_rezzonico.jpg" alt="Ca&#x27; Rezzonico" width="1280" height="853" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/venice_ca_rezzonico_b.jpg" alt="Ca&#x27; Rezzonico — view 2" width="330" height="219" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Ca&#x27; Rezzonico is a majestic palazzo nestled along the Grand Canal, its elegant façade reflecting the grace and sophistication of Venice&#x27;s golden age. Period rooms, fresco ceilings, and social history of the Settecento—Venice at its theatrical, late-republic peak. The palazzo boasts one of the finest collections of Venetian painting, including works by Tiepolo, Guardi, and Canaletto. Its interior design reflects the opulence and elegance typical of aristocratic Venetian homes. It offers visitors a rare glimpse into the social life and culture of the Venetian elite. Today, it houses a museum dedicated to the history and aesthetics of Venetian life. The exterior features intricate stuccowork and sculptures adorning its facade. Originally designed by Baldassare Longhena. Focuses on Rococo interiors and daily life.</p>
 <p class="prose">Built in the late 18th century, Ca&#x27; Rezzonico was originally commissioned by Count Pietro Loredan as his private residence. Over time, it became known for its lavish interiors, featuring sumptuous Baroque decorations and exquisite artworks that capture the spirit of Venetian nobility during the Republic’s peak. Palazzo fortunes shifted with trade decline; museum use preserves domestic grandeur for public viewing. A must-visit for art lovers, Ca&#x27; Rezzonico showcases a remarkable collection of paintings, furniture, and decorative arts spanning several centuries. Best place to feel Venetian domestic luxury rather than civic power.</p></div>
 </section>
 <section class="place" id="venice_campo_san_polo">
+<div class="place-lead">
 <h3>Campo San Polo</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
-<p class="place-meta">Address: San Polo sestiere | Style: Large open campo with parish church frontage | Period: Campo formed medieval; surrounding façades accreted</p>
-<figure class="place-fig"><img src="../images/venice_campo_san_polo.jpg" alt="Campo San Polo"/></figure>
+<p class="place-meta">Location: San Polo sestiere | Style: Large open campo with parish church frontage | Period: Campo formed medieval; surrounding façades accreted</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_campo_san_polo.jpg" alt="Campo San Polo" width="1280" height="571" style="height: 206px; max-height: 206px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/venice_campo_san_polo_b.jpg" alt="Campo San Polo — view 2" width="330" height="263" style="height: 206px; max-height: 206px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">At the heart of Venice&#x27;s northern district lies Campo San Polo, a picturesque square where time seems to stand still. Surrounded by ancient buildings and lined with cafes and shops, it is one of the city&#x27;s most charming gathering places. One of Venice&#x27;s biggest open spaces; hosts seasonal events and markets with a more spacious feel than tight lanes. It is one of the largest squares in Venice, offering ample space for social interaction. The square features iconic landmarks such as the Church of Santa Maria del Carmine and the Palazzo dei Capi. Its proximity to the Grand Canal makes it easily accessible via water taxis and gondolas. In the evenings, Campo San Polo transforms into a lively spot for locals and tourists alike, with outdoor dining and live music performances. During carnival season, the square becomes the stage for colorful parades and celebrations. Historically used for public games and spectacles. Nearby Scuola Grande di San Rocco is a short walk away.</p>
 <p class="prose">Originally built around the 13th century, Campo San Polo has been a hub for local life since its inception. It was named after Saint Polycarp, whose church once stood nearby. Over centuries, it became a focal point for community gatherings, markets, and festivities. Campos were the civic rooms of each parish; San Polo&#x27;s scale reflects dense trade district importance. Visitors come here to soak in the tranquil atmosphere and enjoy the vibrant ambiance of Venetian daily life. A breathing space in the city&#x27;s most compact sestiere.</p></div>
 </section>
 <section class="place" id="venice_campo_santa_margherita">
+<div class="place-lead">
 <h3>Campo Santa Margherita</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
-<p class="place-meta">Address: Dorsoduro (near Ca&#x27; Foscari and IUAV) | Style: Residential campo with cafés and student life | Period: Medieval campo; façades and cafés evolved over time</p>
-<figure class="place-fig"><img src="../images/venice_campo_santa_margherita.jpg" alt="Campo Santa Margherita"/></figure>
+<p class="place-meta">Location: Dorsoduro (near Ca&#x27; Foscari and IUAV) | Style: Residential campo with cafés and student life | Period: Medieval campo; façades and cafés evolved over time</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_campo_santa_margherita.jpg" alt="Campo Santa Margherita" width="1280" height="927" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/venice_campo_santa_margherita_b.jpg" alt="Campo Santa Margherita — view 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">A picturesque square lined with colorful buildings and narrow alleys, Campo Santa Margherita is one of Venice&#x27;s most charming and lively spots. A lively square for aperitivo, markets, and late-night chatter—more local than the San Marco circuit. It is located near the famous Rialto Bridge and San Marco Square. The square features historic buildings dating back to the Renaissance era. Each year, it hosts various cultural events and seasonal celebrations. Its unique architecture blends Gothic and Venetian styles. Visitors can enjoy panoramic views of the Grand Canal. Popular with university students from nearby campuses. Weekly market stalls bring everyday produce into the stone city.</p>
 <p class="prose">Originally built in the 13th century as a commercial hub, Campo Santa Margherita has been a central gathering place for locals and tourists alike. Its name derives from Saint Margaret, whose chapel once stood nearby. Over time, it became known for its vibrant markets and festivals, making it a popular destination for Venetians and visitors seeking authentic local culture. Campos functioned as community plazas—wells, churches, and commerce—before modern retail. This square offers a glimpse into traditional Venetian life, complete with cafes, shops, and lively street performances. A reliable place to feel Venice as lived city, not only monument.</p></div>
 </section>
+<section class="place" id="venice_canton">
+<div class="place-lead">
+<h3>Canton</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
+
+<p class="place-meta">Address: See official visitor information. | Style: Ottoman-Venetian fusion | Period: 1870–1880</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_canton.jpg" alt="Canton" width="1280" height="1506" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/venice_canton_b.jpg" alt="Canton — view 2" width="330" height="247" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Canton offers a peaceful retreat for worship and reflection. Constructed around 1870–1880. Designed by architect Angelo Mazzarello. Located near the historic Rialto Bridge. Features a single dome and four minarets. Operates under the supervision of the Italian Islamic Community.</p>
+<p class="prose">Built during the late 19th century, Mosque, Canton was one of the first purpose-built mosques in Venice. It served as a hub for the city&#x27;s growing Muslim community, providing spiritual guidance and cultural enrichment to residents and visitors alike. Notable features include its elegant minaret and intricate tilework, reflecting both Ottoman and Venetian architectural influences. Visiting Mosque, Canton allows travelers to experience the unique blend of Eastern and Western traditions within Venice&#x27;s diverse cultural landscape.</p></div>
+</section>
 <section class="place" id="venice_doges_palace">
+<div class="place-lead">
 <h3>Doge&#x27;s Palace</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Piazza San Marco, adjacent to the lagoon | Style: Venetian Gothic palace with patterned façades | Period: 14th–15th c. core with later additions</p>
-<figure class="place-fig"><img src="../images/venice_doges_palace.jpg" alt="Doge&#x27;s Palace"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_doges_palace.jpg" alt="Doge&#x27;s Palace" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/venice_doges_palace_b.jpg" alt="Doge&#x27;s Palace — view 2" width="330" height="364" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Dominating the Piazza San Marco, Doge’s Palace is a grand testament to Venice’s medieval grandeur and power. Its imposing architecture and richly decorated interiors reflect centuries of Venetian rule. Arcaded loggias and pink-white stone diamond patterns hide council rooms, prisons, and state corridors once used to administer an empire of ports. Constructed primarily during the Gothic and Renaissance periods. The palace houses one of Europe’s most extensive collections of Byzantine mosaics. It was the administrative center of the Venetian Republic until its fall in 1797. Today it serves as a museum showcasing Venetian history and culture. Its lavish interior decorations include frescoes by Tintoretto and Veronese. Connected to the prisons by the Bridge of Sighs. The Sala del Maggior Consiglio is among Europe&#x27;s largest palace halls.</p>
 <p class="prose">Built between the 14th and 16th centuries, Doge’s Palace was the seat of the Republic of Venice’s government. It served as both the residence of the Doge, the city&#x27;s ruler, and the venue for important political gatherings and ceremonies. Notable features include the Hall of the Great Council, where major decisions were made, and the Bridge of Sighs, which connected the palace to the prison, symbolizing the final moment of hope before incarceration. Rebuilt after fires and political reforms; the palace is a layered machine for governance, secrecy, and public display. A must-visit for its architectural splendor and historical significance, Doge’s Palace offers insights into Venice’s past glory and the intricate workmanship of Renaissance artistry. Architectural emblem of the Serenissima and its oligarchic institutions.</p></div>
 </section>
 <section class="place" id="venice_gallerie_accademia">
+<div class="place-lead">
 <h3>Gallerie dell&#x27;Accademia</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Campo della Carità, Dorsoduro | Style: Adaptive reuse galleries in historic religious buildings | Period: Museum formed 18th–19th c. in former convent complex</p>
-<figure class="place-fig"><img src="../images/venice_gallerie_accademia.jpg" alt="Gallerie dell&#x27;Accademia"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_gallerie_accademia.jpg" alt="Gallerie dell&#x27;Accademia" width="1226" height="1600" style="height: 417px; max-height: 417px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/venice_gallerie_accademia_b.jpg" alt="Gallerie dell&#x27;Accademia — view 2" width="330" height="298" style="height: 417px; max-height: 417px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Gallerie dell&#x27;Accademia is a world-class art museum located on the Grand Canal in Venice. Established in 1768 as a venue for artistic academies and exhibitions, it houses one of the most significant collections of Venetian art spanning centuries. The key museum for Venetian painting—Bellini, Titian, Veronese—plus a bridge-view terrace nearby. It features permanent exhibits showcasing Venetian paintings dating back to the 14th century. Notable highlights include works by Tintoretto, Giorgione, and Palma il Vecchio. The museum underwent extensive restoration work after being damaged during World War II bombings. Its location along the Grand Canal provides stunning views of the waterway and surrounding architecture. Temporary exhibitions are regularly held showcasing contemporary art and thematic displays. Holds major cycles of Venetian Renaissance and Baroque art. Includes works tied to the city&#x27;s maritime identity and myth.</p>
 <p class="prose">Originally founded in 1768 by the Accademia di Belle Arti di Venezia, the gallery was initially used to display works by local artists. Over time, its collection expanded to include masterpieces by renowned Venetian painters such as Tintoretto, Titian, and Bellini. Today, it serves as both a cultural institution and a testament to Venice&#x27;s rich artistic heritage. Napoleonic suppressions and later Italian state policy consolidated art into public museums. Visiting the Gallerie dell&#x27;Accademia allows visitors to immerse themselves in the vibrant history of Venetian painting and appreciate some of the greatest works produced by Venetian masters. Best single stop for understanding Venetian color and light on canvas.</p></div>
 </section>
 <section class="place" id="venice_giardini_biennale">
+<div class="place-lead">
 <h3>Giardini della Biennale</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
-<p class="place-meta">Address: Castello edge, Biennale gardens | Style: Parkland with national pavilions and exhibition halls | Period: Napoleonic-era gardens; Biennale pavilions from 1895 onward</p>
-<figure class="place-fig"><img src="../images/venice_giardini_biennale.jpg" alt="Giardini della Biennale"/></figure>
+<p class="place-meta">Location: Castello edge, Biennale gardens | Style: Parkland with national pavilions and exhibition halls | Period: Napoleonic-era gardens; Biennale pavilions from 1895 onward</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_giardini_biennale.jpg" alt="Giardini della Biennale" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/venice_giardini_biennale_b.jpg" alt="Giardini della Biennale — view 2" width="330" height="247" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Giardini della Biennale is a historic park and exhibition space located on the island of Castello in Venice. Established in 1909 as part of the first International Exhibition of Modern Decorative Arts, it has since become one of the most iconic venues for contemporary art exhibitions. Tree-lined paths lead to permanent national pavilions; outside Biennale season it feels like a quiet public park near the lagoon. It was originally designed by Italian architect Antonio Salviati. Today it hosts the Venice Biennale every two years. The park features large open spaces ideal for outdoor installations. Notable artists who have exhibited here include Pablo Picasso and Andy Warhol. Its location on the Venetian lagoon offers stunning views of the city’s architecture. Venice Biennale began in 1895. Some pavilions are architectural statements in their own right.</p>
 <p class="prose">Originally built in 1909 to showcase modern decorative arts during the first Venice Biennale, the Giardini della Biennale has evolved into a world-renowned venue for international art exhibitions. Over time, it has hosted numerous groundbreaking shows that have shaped the global art scene. Imperial-era gardens became a global art forum and a recurring urban event machine. Visiting the Giardini della Biennale allows visitors to experience cutting-edge art exhibits and gain insight into current artistic trends. Where Venice hosts contemporary culture at international scale.</p></div>
 </section>
 <section class="place" id="venice_grand_canal">
+<div class="place-lead">
 <h3>Grand Canal</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: S-shaped main waterway through the historic center | Style: Palazzo-lined water boulevard | Period: Natural channel urbanized from the Middle Ages onward</p>
-<figure class="place-fig"><img src="../images/venice_grand_canal.jpg" alt="Grand Canal"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_grand_canal.jpg" alt="Grand Canal" width="1280" height="569" style="height: 205px; max-height: 205px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/venice_grand_canal_b.jpg" alt="Grand Canal — view 2" width="330" height="181" style="height: 205px; max-height: 205px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Grand Canal is Venice&#x27;s central water artery and the city&#x27;s most iconic thoroughfare. Stretching nearly four miles long, it serves as both a transportation hub and a grand stage for Venetian life. Vaporetto rides reveal a moving museum of façades from Byzantine to Baroque; mornings are calmer before day-tripper peaks. It is lined with some of Venice’s most famous landmarks including Palazzo Ducale and Ca’ d&#x27;Oro. The canal is navigated by traditional gondolas and vaporetti (water buses). Its width varies between 30 feet at narrow points and up to 164 feet at widest sections. More than 40 bridges cross the canal, each offering different views and styles. Venice&#x27;s famous Carnival processions often take place here. About 4 km long; only a handful of bridges cross it. Palazzi were designed to be read from the water.</p>
 <p class="prose">Constructed over centuries, the canal was originally a natural lagoon channel that became part of Venice&#x27;s urban fabric. It has been widened and deepened to accommodate larger boats and become a focal point of the city&#x27;s architecture and culture. Trade wealth built merchant palaces and water doors; later, tourism kept the canal as Venice&#x27;s central corridor. Visiting the Grand Canal allows travelers to experience the heart of Venice, witnessing its unique blend of Gothic, Renaissance, and Baroque architecture while enjoying gondola rides and exploring charming bridges and palaces along its shores. The city&#x27;s primary spatial axis—Venice understood as a floating streetscape.</p></div>
 </section>
 <section class="place" id="venice_jewish_museum_venice">
+<div class="place-lead">
 <h3>Jewish Museum of Venice</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Campo del Ghetto Nuovo, Cannaregio | Style: Historic ghetto buildings with synagogue interiors | Period: Museum established 20th c.; synagogues 16th–17th c.</p>
-<figure class="place-fig"><img src="../images/venice_jewish_museum_venice.jpg" alt="Jewish Museum of Venice"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_jewish_museum_venice.jpg" alt="Jewish Museum of Venice" width="1063" height="1600" style="height: 322px; max-height: 322px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/venice_jewish_museum_venice_b.jpg" alt="Jewish Museum of Venice — view 2" width="330" height="230" style="height: 322px; max-height: 322px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Jewish Museum of Venice is a testament to the vibrant Jewish community that once thrived here. Established in 2002, it sheds light on the rich cultural heritage and historical presence of Jews in Italy&#x27;s most famous city. Small museum with guided access to synagogues; the ghetto campo retains a quiet gravity compared to San Marco crowds. It occupies the former Synagogue of the Spanish and Portuguese Jews, known as the Scuola Spagnola. Exhibits include rare manuscripts, religious objects, and personal belongings. The museum highlights the role of Venetian Jews during the Renaissance era. It provides educational programs for students and researchers interested in Jewish history. Located near the Grand Canal, the museum offers panoramic views of the city&#x27;s waterways. The word &#x27;ghetto&#x27; originates here from the foundry district name. Synagogues are hidden behind domestic façades.</p>
 <p class="prose">Founded in 2002, the museum showcases artifacts, documents, and artwork that trace the history of Venetian Jewry. It was created to preserve and share the stories of those who lived, worked, and contributed to Venice’s society over centuries. From 1516 legal enclosure to evolving community life; later remembrance work reframed the district. Visiting the Jewish Museum allows travelers to gain insight into the unique contributions made by Venice’s Jewish population and their enduring legacy. Key site for European Jewish urban history and Venetian diversity.</p></div>
 </section>
 <section class="place" id="venice_teatro_la_fenice">
+<div class="place-lead">
 <h3>La Fenice</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Campo San Fantin, San Marco | Style: Neoclassical exterior; lavish Italian opera interior | Period: 1792; rebuilt 1837; rebuilt again 2003 after fire</p>
-<figure class="place-fig"><img src="../images/venice_teatro_la_fenice.jpg" alt="La Fenice"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_teatro_la_fenice.jpg" alt="La Fenice" width="1280" height="1216" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/venice_teatro_la_fenice_b.jpg" alt="La Fenice — view 2" width="330" height="247" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">La Fenice is one of Venice’s most iconic landmarks and a symbol of the city’s rich cultural heritage. Originally built in 1792, it has been destroyed twice by fire but always rebuilt with renewed grandeur. Tours reveal gilded boxes and stagecraft; performances are a splurge but acoustics and ornament justify it. The theater reopened after each devastating fire in 1837 and 1997. It hosts performances ranging from opera to classical music. Its interior features ornate decorations and elaborate acoustics. La Fenice regularly stages world-class operatic productions. Located on the Grand Canal, it offers panoramic views of Venice. Destroyed by fire in 1996; rebuilt to the earlier design. Premieres of major 19th-century Italian operas occurred here.</p>
 <p class="prose">Constructed in 1792, La Fenice was famously designed by architect Giorgio Massari in the Neoclassical style. The theater had a tragic fate, burning down in 1836 and again in 1996. Each time, however, it was painstakingly restored to its former glory, showcasing Venice&#x27;s resilience and commitment to preserving its artistic legacy. Rebuilding cycles match the name &#x27;Phoenix&#x27;—rising from ashes repeatedly. Visiting La Fenice allows visitors to experience the city&#x27;s vibrant cultural life and appreciate its enduring architectural beauty. One of Europe&#x27;s most famous opera houses and a symbol of Venetian resilience.</p></div>
 </section>
 <section class="place" id="venice_lido_di_venezia">
+<div class="place-lead">
 <h3>Lido di Venezia</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Barrier island between lagoon and Adriatic Sea | Style: Seaside resort island with Liberty-era hotels | Period: Resort development late 19th–early 20th c.</p>
-<figure class="place-fig"><img src="../images/venice_lido_di_venezia.jpg" alt="Lido di Venezia"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_lido_di_venezia.jpg" alt="Lido di Venezia" width="1280" height="956" style="height: 271px; max-height: 271px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/venice_lido_di_venezia_b.jpg" alt="Lido di Venezia — view 2" width="330" height="194" style="height: 271px; max-height: 271px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Lido di Venezia is a picturesque island and beach resort located just off the coast of Venice, offering visitors a tranquil escape from the bustling city center while still remaining easily accessible by water. Known for its long sandy beaches, charming cafes, and vibrant nightlife, it has become one of the most popular destinations for both locals and tourists. Beach walks, cycling, and film-festival glamour; the Lido offers a different Venice rhythm with straight streets and sand. It is connected to Venice via regular water buses and ferries, allowing easy access from the main city. The island hosts several notable landmarks including the Hotel Europa and the Palazzo del Lido. Each year, thousands of film enthusiasts gather on the Lido for the prestigious Venice International Film Festival. Its wide, sandy shores attract sunbathers and swimmers throughout the summer months. In addition to tourism, the Lido also serves as a residential area for some residents of Venice. Venice Film Festival venues cluster here each year. Acts as a natural breakwater protecting the lagoon.</p>
 <p class="prose">Originally developed as a fishing village during the Middle Ages, the Lido became famous as a seaside retreat in the late 19th century when wealthy Venetians began building summer villas here. Today, it remains a symbol of leisure and relaxation, hosting numerous cultural events such as the annual Venice Film Festival. Modern leisure culture transformed the island into a grand-hotel destination. Visitors come to Lido di Venezia for its idyllic beaches, scenic views, and lively atmosphere, making it an essential stop for anyone exploring the greater Venice area. Venice&#x27;s seaside face—health, bathing, and cinema.</p></div>
 </section>
 <section class="place" id="venice_lido_di_venezia_beach">
+<div class="place-lead">
 <h3>Lido di Venezia beaches</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Adriatic-facing beaches on the Lido | Style: Seaside promenade and bathhouse zones | Period: Resort beach culture late 19th–20th c.</p>
-<figure class="place-fig"><img src="../images/venice_lido_di_venezia_beach.jpg" alt="Lido di Venezia beaches"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_lido_di_venezia_beach.jpg" alt="Lido di Venezia beaches" width="1280" height="281" style="height: 101px; max-height: 101px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/venice_lido_di_venezia_beach_b.jpg" alt="Lido di Venezia beaches — view 2" width="330" height="208" style="height: 101px; max-height: 101px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Stretching along the northern shore of Venice, Lido di Venezia is a popular beach resort known for its long sandy shores and clear waters. It offers a relaxing escape from the bustling city center while still being easily accessible by waterbus or car. Long sand stretches and cabana rows offer a simple reset from stone and water; go early for quiet and light. The island is linked to Venice via regular water transport services making it easy to reach. It boasts several renowned hotels and luxury resorts offering luxurious accommodations. Lido di Venezia hosts various festivals including the annual film festival held at the Venice Film Festival Palace. Its wide stretches of golden sands attract sunbathers and swimmers alike. In summer months, visitors can enjoy a variety of water sports such as windsurfing and kayaking. Many sections are run by stabilimenti (managed beach clubs). Film Festival brings a seasonal spike in visitors and prices.</p>
 <p class="prose">Originally developed as a fishing village in the early 19th century, Lido di Venezia became a fashionable seaside retreat during the Belle Époque. Today it remains one of the most iconic coastal destinations in Italy, attracting tourists with its charming boardwalks, cafes, and vibrant nightlife. Modern bathing culture and hotel development turned the barrier island into a leisure brand. Visitors come to Lido di Venezia for its beautiful beaches, tranquil atmosphere, and proximity to Venice&#x27;s cultural attractions. Venice&#x27;s literal beach—rare for a lagoon city in the popular imagination.</p></div>
 </section>
 <section class="place" id="venice_biblioteca_marciana">
+<div class="place-lead">
 <h3>Marciana Library</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Piazzetta San Marco, facing the lagoon | Style: Renaissance library (Sansovino) with rich sculptural façade | Period: 1537–1588 (main building)</p>
-<figure class="place-fig"><img src="../images/venice_biblioteca_marciana.jpg" alt="Marciana Library"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_biblioteca_marciana.jpg" alt="Marciana Library" width="1035" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--row-sized"><img src="../images/venice_biblioteca_marciana_b.jpg" alt="Marciana Library — view 2" width="330" height="871" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Situated on the picturesque island of Murano, Marciana Library is a treasured cultural landmark and one of Venice&#x27;s most iconic libraries. Established in the late 18th century by Venetian nobility, it houses a rich collection of rare books, manuscripts, and historical documents dating back to medieval times. One of Europe&#x27;s great humanist libraries; reading rooms hold manuscripts and printed treasures of the Republic. The library contains over 400,000 volumes, including many rare and ancient texts. It features exquisite Baroque interior design with elaborate decorations and wooden shelves. Visitors can explore the library’s extensive collections through guided tours. Marciana Library has been listed as a UNESCO World Heritage Site since 1987. Its collections include works by notable authors such as Dante Alighieri and Pyotrarch. Founded from Cardinal Bessarion&#x27;s donation of Greek and Latin books. Façade helped define Venetian Renaissance classicism.</p>
 <p class="prose">Originally founded as a private library for Venetian aristocrats, Marciana Library was later opened to the public during the early 19th century. It became part of the state-owned Biblioteca Nazionale Marciana in 1867, preserving its status as a national institution while maintaining its unique character and charm. Republic invested in scholarship and public display of learning beside state power. A must-visit for bibliophiles and historians alike, Marciana Library offers a glimpse into Venice’s intellectual heritage and provides access to invaluable resources. Symbol of Venice as a publishing and intellectual hub.</p></div>
 </section>
-<section class="place" id="venice_pdfband_2_1c9dd585">
-<h3>Canton</h3>
-
-<p class="place-meta">Address: See official visitor information. | Style: Ottoman-Venetian fusion | Period: 1870–1880</p>
-<figure class="place-fig"><img src="../images/venice_pdfband_2_1c9dd585.jpg" alt="Canton"/></figure>
-<div class="place-desc"><p class="prose">A tranquil oasis of Islamic culture amidst the Venetian lagoon, Mosque, Canton offers a peaceful retreat for worship and reflection. Constructed around 1870–1880. Designed by architect Angelo Mazzarello. Located near the historic Rialto Bridge. Features a single dome and four minarets. Operates under the supervision of the Italian Islamic Community.</p>
-<p class="prose">Built during the late 19th century, Mosque, Canton was one of the first purpose-built mosques in Venice. It served as a hub for the city&#x27;s growing Muslim community, providing spiritual guidance and cultural enrichment to residents and visitors alike. Notable features include its elegant minaret and intricate tilework, reflecting both Ottoman and Venetian architectural influences. Visiting Mosque, Canton allows travelers to experience the unique blend of Eastern and Western traditions within Venice&#x27;s diverse cultural landscape.</p></div>
-</section>
 <section class="place" id="venice_murano">
+<div class="place-lead">
 <h3>Murano</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Lagoon island north of Venice historic center | Style: Island industrial-craft canalscape | Period: Glassmaking concentrated from 1291 onward</p>
-<figure class="place-fig"><img src="../images/venice_murano.jpg" alt="Murano"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_murano.jpg" alt="Murano" width="1280" height="862" style="height: 311px; max-height: 311px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/venice_murano_b.jpg" alt="Murano — view 2" width="330" height="286" style="height: 311px; max-height: 311px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Murano is a picturesque island famous for its glassmaking traditions and stunning artworks. Located just a short boat ride from Venice&#x27;s historic center, it has been producing exquisite glassware since the 13th century. Furnaces and showrooms display glass artistry; visit a workshop for demonstrations if you can handle sales pressure. The island is home to numerous glass factories where visitors can watch demonstrations of traditional methods. Murano&#x27;s oldest glass factory, Vetreria Nostro, was founded in 1694. Each piece of Murano glass is uniquely signed by the artist who created it. Glassblowing workshops offer hands-on experiences for tourists interested in learning these age-old crafts. Many shops on the island sell high-quality souvenirs made by local artists. Venice moved glassmakers here to reduce fire risk in the city. Murano innovations include cristallo and millefiori techniques.</p>
 <p class="prose">Founded in the 7th century, Murano became renowned for its glass industry during the Middle Ages when Venetian authorities moved glassmakers to the island to protect trade secrets. Over time, Murano developed into a hub of artistic innovation, with master craftsmen creating intricate designs that captivated visitors worldwide. Guild secrecy and state control protected high-value craft knowledge; modern global branding followed. Visiting Murano allows travelers to witness firsthand the ancient techniques used by skilled artisans and admire their breathtaking creations. Signature artisan industry that financed Venetian luxury.</p></div>
 </section>
 <section class="place" id="venice_scala_contarini_del_bovolo">
+<div class="place-lead">
 <h3>Palazzo Contarini del Bovolo</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Near Campo Manin, San Marco district | Style: Late Gothic-Renaissance spiral stair tower | Period: c. 1499</p>
-<figure class="place-fig"><img src="../images/venice_scala_contarini_del_bovolo.jpg" alt="Palazzo Contarini del Bovolo"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_scala_contarini_del_bovolo.jpg" alt="Palazzo Contarini del Bovolo" width="1142" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/venice_scala_contarini_del_bovolo_b.jpg" alt="Palazzo Contarini del Bovolo — view 2" width="330" height="440" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Perched on a narrow street of Venice&#x27;s Cannaregio district, Palazzo Contarini del Bovolo is a unique architectural marvel known for its spiral staircase towering above the rooftops. A corkscrew exterior stair climbs to a small terrace with rooftops and campanili—a quieter alternative to the main bell tower. The spiral staircase, known as &#x27;Bovolo,&#x27; has 97 steps leading to the top floor. The interior features Renaissance-style frescoes and decorative elements typical of Venetian homes. It was listed as a national monument in 1907. The building also houses a small museum showcasing historical artifacts related to the Contarini family. Visitors can climb the tower for panoramic views of Venice. Bovolo means &#x27;snail&#x27; in Venetian dialect. Embedded in a palazzo courtyard, easy to miss from the street.</p>
 <p class="prose">Built around 1485 by Venetian nobleman Pietro Contarini, the palazzo was originally constructed as a private residence. Its distinctive feature—a twisting staircase encased within a tower—was inspired by traditional Venetian architecture and reflects the city&#x27;s love for intricate design. The tower, completed in 1560, became a symbol of the family’s wealth and status. Noble families built theatrical staircases as status signals within dense urban plots. A must-visit for those interested in Venetian architecture and art, Palazzo Contarini del Bovolo offers stunning views of the surrounding canals and streets. A compact architectural curiosity with high photographic payoff.</p></div>
 </section>
 <section class="place" id="venice_peggy_guggenheim_collection">
+<div class="place-lead">
 <h3>Peggy Guggenheim Collection</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Palazzo Venier dei Leoni, Dorsoduro, Grand Canal | Style: Low canal-front palazzo adapted as modern-art museum | Period: 18th c. palazzo begun, left unfinished; museum later</p>
-<figure class="place-fig"><img src="../images/venice_peggy_guggenheim_collection.jpg" alt="Peggy Guggenheim Collection"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_peggy_guggenheim_collection.jpg" alt="Peggy Guggenheim Collection" width="1280" height="960" style="height: 336px; max-height: 336px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/venice_peggy_guggenheim_collection_b.jpg" alt="Peggy Guggenheim Collection — view 2" width="330" height="240" style="height: 336px; max-height: 336px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Peggy Guggenheim Collection is a world-class museum showcasing avant-garde art from the early 20th century. Located on the Grand Canal in Venice&#x27;s picturesque Dorsoduro district, it houses one of the most significant collections of modern and abstract art. A compact, high-impact modern collection in a domestic-scale palazzo; garden sculptures and canal terrace are highlights. It features over 3,000 pieces of art spanning several decades. The collection includes masterpieces by major figures like Jackson Pollock and Salvador Dalí. Visitors can explore the museum’s stunning Venetian palazzo setting. Regular temporary exhibitions complement the permanent collection. Located within walking distance of Venice’s main attractions. Peggy Guggenheim lived here and displayed art in her home. Core holdings include Surrealism and abstract modernism.</p>
 <p class="prose">Established by American heiress Peggy Guggenheim in 1946, the collection was originally housed at her villa in London before relocating to Venice in 1980. The museum opened its doors in its current location in 2009 after extensive renovations. It has become renowned for showcasing groundbreaking works by artists such as Picasso, Matisse, and Kandinsky. Postwar collecting and patronage inserted modern art into Venice&#x27;s historic fabric. A must-visit for art lovers seeking insight into the evolution of modernism and abstraction. Best small museum stop for 20th-century art in the city.</p></div>
 </section>
 <section class="place" id="venice_piazza_san_marco">
+<div class="place-lead">
 <h3>Piazza San Marco</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
-<p class="place-meta">Address: Piazza San Marco, Venice (San Marco sestiere) | Style: Civic and ceremonial piazza with arcaded Procuratie | Period: Formed from 9th c.; major paving and framing 12th–18th c.</p>
-<figure class="place-fig"><img src="../images/venice_piazza_san_marco.jpg" alt="Piazza San Marco"/></figure>
+<p class="place-meta">Location: Piazza San Marco, Venice (San Marco sestiere) | Style: Civic and ceremonial piazza with arcaded Procuratie | Period: Formed from 9th c.; major paving and framing 12th–18th c.</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_piazza_san_marco.jpg" alt="Piazza San Marco" width="1280" height="853" style="height: 205px; max-height: 205px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/venice_piazza_san_marco_b.jpg" alt="Piazza San Marco — view 2" width="330" height="147" style="height: 205px; max-height: 205px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">At the heart of Venice lies Piazza San Marco, a grand square that serves as the city&#x27;s symbolic and cultural hub. It is surrounded by iconic landmarks such as the Basilica di San Marco and the Doge&#x27;s Palace, making it one of the most photographed spots in Italy. Venice&#x27;s principal public room: basilica, campanile, palazzo, and cafés share a single stage where tide and light constantly rewrite the scene. The square is bordered by the famous Basilica di San Marco and the Doge&#x27;s Palace, which together form UNESCO World Heritage sites. It is often referred to as &#x27;St Mark&#x27;s Square&#x27; due to its proximity to the basilica. Located here are the Bailo’s Palace and the Clock Tower, significant symbols of Venetian authority. In the past, the square hosted grand processions and festivities marking major religious and civic occasions. Today, tourists can enjoy live music performances and street entertainers, adding to the lively ambiance. Known as la Piazza; other squares are campi. Acqua alta can flood the low paving in winter months.</p>
 <p class="prose">Originally built in the 9th century, Piazza San Marco was designed to honor St. Mark, the patron saint of Venice. Over time, it became the political and ceremonial center of the Venetian Republic, hosting important gatherings and celebrations. Today, its architecture reflects both Byzantine and Romanesque influences, showcasing the rich historical heritage of Venice. Expanded from a small forecourt into a monumental piazza as the Republic&#x27;s power and ritual grew around St Mark&#x27;s relic cult. Visiting Piazza San Marco allows travelers to immerse themselves in the vibrant atmosphere of Venice while experiencing its unique blend of art, culture, and history. The best single place to read Venice as republic, pilgrimage, and spectacle.</p></div>
 </section>
 <section class="place" id="venice_punta_della_dogana">
+<div class="place-lead">
 <h3>Punta della Dogana</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Triangular point between Grand Canal and Giudecca Canal | Style: Baroque customs house adapted by Tadao Ando | Period: Custom house 1677; renovated for museum 2009</p>
-<figure class="place-fig"><img src="../images/venice_punta_della_dogana.jpg" alt="Punta della Dogana"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_punta_della_dogana.jpg" alt="Punta della Dogana" width="1280" height="723" style="height: 260px; max-height: 260px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/venice_punta_della_dogana_b.jpg" alt="Punta della Dogana — view 2" width="330" height="220" style="height: 260px; max-height: 260px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Sitting majestically on the Grand Canal, Punta della Dogana is a testament to Venice&#x27;s historical maritime power and artistry. Originally built as a customs house during the Venetian Republic’s golden age, it now stands as one of the city&#x27;s most iconic landmarks. A sharp prow of stone where canals meet; contemporary exhibitions use Ando&#x27;s concrete minimalism against old brick. Built in 1549 during the reign of Pope Paul III. Converted into a museum in 2009 under the leadership of Peggy Guggenheim. Features permanent and temporary exhibits of modern and contemporary art. Offers panoramic vistas of Venice&#x27;s waterways and architecture. Renowned for its striking neoclassical facade. Once controlled goods entering Venice by sea. Now part of a major contemporary art circuit.</p>
 <p class="prose">Constructed in the early 16th century, Punta della Dogana served as a customs station for goods entering and leaving Venice. Its design reflects the architectural elegance typical of the Renaissance era, with intricate stone carvings and elegant arches. The building was later converted into a museum by the Fondazione Peggy Guggenheim in 2009, showcasing modern and contemporary art collections. From taxation and quarantine logistics to art patronage and adaptive reuse. A must-visit for its breathtaking views over the Grand Canal and the opportunity to explore avant-garde art exhibitions. Best example of contemporary architecture interventions inside Venice&#x27;s historic shell.</p></div>
 </section>
 <section class="place" id="venice_rialto_bridge">
+<div class="place-lead">
 <h3>Rialto Bridge</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
-<p class="place-meta">Address: Crossing the Grand Canal at Rialto | Style: Stone arch bridge with shop arcades (Antonio da Ponte) | Period: 1591</p>
-<figure class="place-fig"><img src="../images/venice_rialto_bridge.jpg" alt="Rialto Bridge"/></figure>
+<p class="place-meta">Location: Crossing the Grand Canal at Rialto | Style: Stone arch bridge with shop arcades (Antonio da Ponte) | Period: 1591</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_rialto_bridge.jpg" alt="Rialto Bridge" width="1200" height="1600" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/venice_rialto_bridge_b.jpg" alt="Rialto Bridge — view 2" width="330" height="219" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Rialto Bridge is Venice&#x27;s most iconic landmark and the city&#x27;s oldest bridge across the Grand Canal. Built to connect the two main districts of San Polo and San Marco, it has been a hub for commerce and social life since its construction. A single bold arch carries shops above the canal&#x27;s tightest commercial pinch point; best visited early for fewer crowds. It is one of the few remaining examples of late Renaissance architecture in Venice. Its three tiers provide ample space for shops and stalls selling local goods and souvenirs. The bridge is often crowded with tourists and locals alike, making it a lively spot for people-watching. During carnival season, the bridge becomes even more vibrant with colorful decorations and festive activities. Antonio da Ponte&#x27;s innovative design ensured that the bridge could withstand heavy traffic without obstructing water passage. Replaced earlier wooden bridges that collapsed and burned. Rialto market remains Venice&#x27;s historic trading center.</p>
 <p class="prose">Constructed in 1591 by architect Antonio da Ponte, the Rialto Bridge replaced an earlier wooden structure that had repeatedly burned down. Designed as a stone arch with three segmented arches, it was the first permanent bridge over the Grand Canal until 1854 when new bridges were built nearby. Its unique design allowed pedestrians and horse-drawn carriages to pass safely while maintaining the canal&#x27;s navigability. Built after long debate over engineering risk; the stone solution proved durable and iconic. A must-visit for anyone exploring Venice, the Rialto Bridge offers stunning views of the Grand Canal and provides a historical glimpse into Venetian architecture and daily life. Instant symbol of mercantile Venice and its waterborne economy.</p></div>
 </section>
 <section class="place" id="venice_san_francesco_della_vigna">
+<div class="place-lead">
 <h3>San Francesco della Vigna</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Castello, near the Arsenale | Style: Renaissance church with Palladio façade (1562) | Period: 1534–1554 (church) with later elements</p>
-<figure class="place-fig"><img src="../images/venice_san_francesco_della_vigna.jpg" alt="San Francesco della Vigna"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_san_francesco_della_vigna.jpg" alt="San Francesco della Vigna" width="1200" height="1600" style="height: 407px; max-height: 407px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/venice_san_francesco_della_vigna_b.jpg" alt="San Francesco della Vigna — view 2" width="330" height="291" style="height: 407px; max-height: 407px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">San Francesco della Vigna is a serene and tranquil Franciscan church located on the outskirts of Venice&#x27;s historic center. Its elegant design and peaceful atmosphere make it a popular destination for both locals and tourists seeking respite amidst the bustling city. A quiet Franciscan church with a crisp classical façade; interior chapels include aristocratic patronage. The church was consecrated in 1298 and has been a site of worship since then. It features intricate stone carvings and decorative arches typical of medieval Italian churches. Its interior contains frescoes by notable artists such as Jacopo de&#x27; Barbari and Lorenzo Lotto. Today, the church serves as a venue for religious services and cultural events. Located near the Giudecca Canal, it provides scenic views of the surrounding waterways. Built on a site associated with a former vineyard (vigna). Façade attributed to Palladio, plan by Sansovino lineage.</p>
 <p class="prose">Built during the late 13th century, San Francesco della Vigna was originally constructed as a monastery and convent by the Franciscans. Over time, it evolved into a church that became one of the most significant religious sites in Venice. The building’s architecture reflects its origins, combining Gothic elements with Venetian influences to create a unique blend of styles. Religious orders and noble families shaped Castello&#x27;s spiritual geography away from tourist center. Visiting San Francesco della Vigna offers visitors an opportunity to experience the calm and beauty of traditional Venetian architecture while reflecting on the spiritual heritage of the city. A calmer, architectural Venice beyond the main loop.</p></div>
 </section>
 <section class="place" id="venice_san_giorgio_maggiore">
+<div class="place-lead">
 <h3>San Giorgio Maggiore</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Isola di San Giorgio Maggiore, opposite Piazza San Marco | Style: Palladian Renaissance façade and interior (Andrea Palladio) | Period: 1566–1610 (church)</p>
-<figure class="place-fig"><img src="../images/venice_san_giorgio_maggiore.jpg" alt="San Giorgio Maggiore"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_san_giorgio_maggiore.jpg" alt="San Giorgio Maggiore" width="1280" height="888" style="height: 320px; max-height: 320px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/venice_san_giorgio_maggiore_b.jpg" alt="San Giorgio Maggiore — view 2" width="330" height="475" style="height: 320px; max-height: 320px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Dominating the eastern shore of Venice&#x27;s Grand Canal, San Giorgio Maggiore is a serene island church known for its soaring bell tower and breathtaking views across the water. Built on the site of a former Benedictine monastery, it was designed by Andrea Palladio, one of Italy’s greatest architects. A calm island church with a bell tower you can climb for a less crowded San Marco panorama across the water. Designed by Andrea Palladio, who also created the nearby Teatro Olimpico in Vicenza. The church houses a chapel dedicated to St. It features a grand façade decorated with Ionic columns and statues depicting saints. Its interior boasts frescoes by Tiepolo and other notable artists. Accessible via ferry from the mainland. Benedictine monastery complex remains active. Façade harmonizes two temple fronts into one composition.</p>
 <p class="prose">Constructed between 1609 and 1617, San Giorgio Maggiore was commissioned by Cardinal Giovanni Maffeo Barbarigo to serve as a religious retreat. The church&#x27;s design reflects Palladio&#x27;s classical principles, blending Roman elements with Venetian Gothic architecture. Its iconic bell tower, crowned by a statue of St. George, became a symbol of Venice’s architectural prowess. Monastic island became a visual counterweight to ducal Venice across the basin. Visitors come here to admire the harmonious blend of architecture and nature, offering panoramic vistas of the Grand Canal and the lagoon. Essential Palladio in situ and a prime viewpoint for the city silhouette.</p></div>
 </section>
 <section class="place" id="venice_san_zaccaria_venice">
+<div class="place-lead">
 <h3>San Zaccaria</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Campo San Zaccaria, near San Marco | Style: Transition from Gothic to Renaissance; bright marble front | Period: 1458–1515 (church)</p>
-<figure class="place-fig"><img src="../images/venice_san_zaccaria_venice.jpg" alt="San Zaccaria"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_san_zaccaria_venice.jpg" alt="San Zaccaria" width="1200" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--row-sized"><img src="../images/venice_san_zaccaria_venice_b.jpg" alt="San Zaccaria — view 2" width="330" height="524" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">San Zaccaria is a church located on the Grand Canal in Venice, known for its striking architecture and tranquil interior. Known for luminous interior and Bellini altarpiece; the convent history adds depth to the neighborhood&#x27;s calm pocket. The church features a soaring bell tower that dominates the canal landscape. Its facade is adorned with sculptures depicting scenes from the life of St. Inside, visitors can explore the elegant altar and carved wooden ceiling. San Zaccaria houses several notable works by local artists including Tintoretto and Palma il Vecchio. It remains one of Venice’s lesser-known but charming attractions. Bellini&#x27;s &#x27;San Zaccaria Altarpiece&#x27; is a highlight. The convent hosted and buried notable Venetian women.</p>
 <p class="prose">Built in the late 14th century, San Zaccaria was originally constructed as a Franciscan monastery and later converted into a parish church. Its design reflects Venetian Gothic style with elements of Byzantine influence, showcasing intricate stone carvings and stained glass windows that illuminate the nave. Monastic patronage and evolving styles created a hybrid church at the edge of the ducal core. Visitors come to admire its unique architectural blend and peaceful atmosphere amidst Venice&#x27;s bustling canals. One of the city&#x27;s most rewarding churches for painting and atmosphere.</p></div>
 </section>
 <section class="place" id="venice_santa_maria_dei_miracoli">
+<div class="place-lead">
 <h3>Santa Maria dei Miracoli</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Campo Santa Maria dei Miracoli, Cannaregio | Style: Early Renaissance jewel-box church in polychrome marble | Period: 1481–1489</p>
-<figure class="place-fig"><img src="../images/venice_santa_maria_dei_miracoli.jpg" alt="Santa Maria dei Miracoli"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_santa_maria_dei_miracoli.jpg" alt="Santa Maria dei Miracoli" width="1065" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/venice_santa_maria_dei_miracoli_b.jpg" alt="Santa Maria dei Miracoli — view 2" width="330" height="340" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">A small but exquisite church, Santa Maria dei Miracoli is a masterpiece of Venetian Gothic architecture. Its elegant design and intricate details make it one of the most beautiful examples of medieval art in Venice. Small and intensely decorated, with patterned marble and a raised presbytery stair—often quiet compared to larger churches. Constructed during the late Renaissance era, the church showcases unique architectural features typical of Venetian Gothic style. The facade is adorned with intricately carved stone reliefs depicting scenes from biblical narratives. Inside, visitors can see exquisite mosaics created by renowned artists like Jacopo Sansovino. It is located near the Grand Canal, offering panoramic views of the waterway and surrounding buildings. Its modest size belies the grandeur of its interior, making it a must-visit for those interested in Venetian religious architecture. Built to house a miracle-working icon of the Virgin. Interior uses rich colored marbles in a compact nave.</p>
 <p class="prose">Built between 1489 and 1527, Santa Maria dei Miracoli was originally constructed as a chapel for the noble family Barbaro. The church&#x27;s name translates to &#x27;Saint Mary of Miracles,&#x27; reflecting its significance as a site where miraculous healings were believed to occur. It served as both a private chapel and a public place of worship, combining elements of Byzantine and Venetian styles. Icon cult and private patronage produced a concentrated Renaissance statement in a residential district. Visitors come here to admire its delicate exterior and interior decorations, which include stunning mosaics and carved wooden panels. One of Venice&#x27;s most beautiful small churches for materials and proportion.</p></div>
 </section>
 <section class="place" id="venice_santa_maria_della_salute">
+<div class="place-lead">
 <h3>Santa Maria della Salute</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Dorsoduro, at the mouth of the Grand Canal | Style: Baroque votive basilica (Baldassare Longhena) | Period: 1631–1687</p>
-<figure class="place-fig"><img src="../images/venice_santa_maria_della_salute.jpg" alt="Santa Maria della Salute"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_santa_maria_della_salute.jpg" alt="Santa Maria della Salute" width="1187" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/venice_santa_maria_della_salute_b.jpg" alt="Santa Maria della Salute — view 2" width="330" height="495" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Sitting majestically at the entrance to Venice&#x27;s Grand Canal, Santa Maria della Salute is a breathtaking Baroque church that stands as one of the city&#x27;s most iconic landmarks. Its domed structure and intricate facade are instantly recognizable, making it a must-visit for anyone exploring Venice. A white dome and spiral volutes anchor postcard views from San Marco; inside, light washes over altars tied to plague memory. The church was consecrated on November 21, 1681, marking the end of the plague crisis. Its interior features elaborate frescoes and sculptures by renowned artists such as Tiepolo and Guardi. The main altar houses a painting depicting the Virgin Mary, known as &#x27;Madonna della Salute&#x27;. It is located on the island of Giudecca, connected to Venice via the Ponte dell&#x27;Accademia bridge. Each year, on November 21, a procession takes place around the canal to celebrate the church&#x27;s dedication. Built after the 1630 plague as a vow to the Virgin. An annual Festa della Salute procession crosses a temporary pontoon bridge.</p>
 <p class="prose">Built between 1631 and 1681 during the height of the plague epidemic, Santa Maria della Salute was constructed as a votive offering by Venetians who survived the devastating disease. Designed by Baldassare Longhena, its grand dome and soaring bell towers reflect the architectural style typical of late Renaissance and early Baroque periods. The basilica formalized public health crisis into civic ritual at a key water junction. Visiting Santa Maria della Salute allows travelers to experience the fusion of religious devotion and artistic excellence, showcasing Venice’s rich cultural heritage. Baroque skyline marker and living plague memorial.</p></div>
 </section>
 <section class="place" id="venice_santa_maria_formosa">
+<div class="place-lead">
 <h3>Santa Maria Formosa</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Campo Santa Maria Formosa, Castello | Style: Renaissance-Baroque parish church | Period: Founded 7th c.; current church largely 15th–17th c.</p>
-<figure class="place-fig"><img src="../images/venice_santa_maria_formosa.jpg" alt="Santa Maria Formosa"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_santa_maria_formosa.jpg" alt="Santa Maria Formosa" width="993" height="1600" style="height: 396px; max-height: 396px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/venice_santa_maria_formosa_b.jpg" alt="Santa Maria Formosa — view 2" width="330" height="283" style="height: 396px; max-height: 396px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Perched on the Grand Canal, Santa Maria Formosa is a striking Baroque church known for its vibrant facade and ornate interior. Its elegant design and strategic location make it one of Venice&#x27;s most photographed landmarks. A spacious campo and a church with multiple façades; a good stop when walking from Rialto toward the eastern districts. The church&#x27;s facade features intricate sculptures depicting scenes from biblical narratives. Inside, the nave is adorned with frescoes by artists such as Sebastiano Ricci and Palma il Giovane. Its bell tower offers panoramic views over the Grand Canal and surrounding areas. It serves as a popular venue for concerts and cultural events due to its acoustically superior interior. Santa Maria Formosa has been designated a UNESCO World Heritage Site. One of Venice&#x27;s oldest parish foundations by tradition. Campo is a neighborhood node with calmer evening life.</p>
 <p class="prose">Built in the late 17th century, Santa Maria Formosa was commissioned by the Venetian Republic to honor Saint Mary. The church replaced an earlier structure destroyed during the disastrous fire of 1512. Designed by architect Baldassare Longhena, its Baroque style reflects the grandiose aesthetic typical of Venice at that time. Parish churches structured Venetian daily life through guilds, markets, and festivals. Visiting Santa Maria Formosa allows visitors to experience the exquisite blend of artistry and architecture unique to Venice’s Baroque era. Everyday Venice: parish architecture and campo urbanism.</p></div>
 </section>
 <section class="place" id="venice_scuola_grande_san_rocco">
+<div class="place-lead">
 <h3>Scuola Grande di San Rocco</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Campo San Rocco, San Polo | Style: Confraternity halls with monumental painting program | Period: Scuola 16th c.; Tintoretto cycles 1564–1587</p>
-<figure class="place-fig"><img src="../images/venice_scuola_grande_san_rocco.jpg" alt="Scuola Grande di San Rocco"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_scuola_grande_san_rocco.jpg" alt="Scuola Grande di San Rocco" width="1280" height="960" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/venice_scuola_grande_san_rocco_b.jpg" alt="Scuola Grande di San Rocco — view 2" width="330" height="267" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Scuola Grande di San Rocco is a grand Venetian institution that combines art, religion, and community. Established in the late 15th century, it was originally created to support religious activities and charitable works within Venice&#x27;s vibrant artistic culture. Tintoretto&#x27;s dark, dramatic canvases cover ceilings and walls—an immersive, almost cinematic experience. Established in 1478 as a religious and charitable organization. Designed by architect Mauro Codussi and completed around 1500. Notable for its extensive collection of paintings by Tintoretto. Its interior features ornate woodcarvings and sumptuous decorations. Today, it operates as both a museum and a functioning scuola. Dedicated to St Roch, protector against plague. Tintoretto secured the commission with a strategic gift of a painting.</p>
 <p class="prose">Founded in 1478 by Venetians seeking to honor St. Roch, the Scuola Grande di San Rocco became one of the most prominent centers for devotional practices and patronage of artists like Tintoretto. Its architecture reflects the late Gothic style with intricate details and soaring ceilings typical of Venetian buildings. The scuola’s role evolved over time, becoming a significant hub for cultural and religious life in Venice. Lay confraternities funded charity and art; plague devotion generated one of Europe&#x27;s great cycles. Visiting here allows travelers to experience the intersection of faith, art, and communal spirit in Renaissance Venice. A masterpiece of Venetian painting in its original architectural setting.</p></div>
 </section>
 <section class="place" id="venice_basilica_san_marco">
+<div class="place-lead">
 <h3>St. Mark&#x27;s Basilica</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Piazza San Marco | Style: Italo-Byzantine domes, mosaics, and marble spolia | Period: 1063–1094 with later embellishments</p>
-<figure class="place-fig"><img src="../images/venice_basilica_san_marco.jpg" alt="St. Mark&#x27;s Basilica"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_basilica_san_marco.jpg" alt="St. Mark&#x27;s Basilica" width="1280" height="960" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/venice_basilica_san_marco_b.jpg" alt="St. Mark&#x27;s Basilica — view 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Dominating the Piazza San Marco, St. Mark’s Basilica is Venice’s most iconic church and one of Italy’s greatest architectural marvels. Its golden dome and intricate mosaics make it a breathtaking sight. Golden mosaics and dim vaults feel closer to the eastern Mediterranean than to mainland Italy; queues are long in high season. The basilica houses the famous bronze horses, originally taken from Constantinople. Its interior features stunning gold mosaics depicting biblical scenes and saints. It has four domes, each representing different aspects of Christian faith. Construction began under Doge Pietro II Orseolo and ended under Doge Domenico Contarini. St. Built to house relics of St Mark, taken from Alexandria by Venetian merchants. Exterior columns and marbles include reused ancient fragments.</p>
 <p class="prose">Built between 828 and 1071, St. Mark’s Basilica was originally constructed to house the relics of Saint Mark the Evangelist. Over time, it underwent numerous renovations and expansions, including significant additions during the Gothic and Byzantine periods. The basilica’s unique blend of Romanesque, Byzantine, and Venetian Gothic styles reflects its rich historical evolution. The Republic decorated the basilica with trophies of trade and conquest, making the church a public treasury of materials and images. A must-visit for art lovers, St. Mark’s Basilica showcases some of the world’s finest mosaics and marble decorations. Venice&#x27;s spiritual and political core—church as state icon.</p></div>
 </section>
 <section class="place" id="venice_campanile_san_marco">
+<div class="place-lead">
 <h3>St. Mark&#x27;s Campanile</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Piazza San Marco | Style: Brick campanile with pyramidal spire | Period: Original medieval tower; collapsed 1902; rebuilt 1912</p>
-<figure class="place-fig"><img src="../images/venice_campanile_san_marco.jpg" alt="St. Mark&#x27;s Campanile"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_campanile_san_marco.jpg" alt="St. Mark&#x27;s Campanile" width="839" height="1600" style="height: 319px; max-height: 319px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/venice_campanile_san_marco_b.jpg" alt="St. Mark&#x27;s Campanile — view 2" width="330" height="228" style="height: 319px; max-height: 319px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Dominating the skyline of Venice, St. Mark’s Campanile is a majestic bell tower that rises gracefully above the city’s waterways and squares. Its elegant design reflects Venetian Gothic architecture, blending Byzantine influences with Italianate elements. Elevator ascent yields the classic aerial of canals and lagoon; the rebuilt tower keeps the earlier silhouette by design. Completed in 1438, making it one of the oldest surviving bell towers in Europe. The tower stands at approximately 98.6 meters tall, offering panoramic vistas of Venice. It features intricate carvings and decorative elements typical of Venetian Gothic style. Following its collapse in 1902, it was painstakingly reconstructed using historical blueprints and materials. Today, visitors can ascend the tower via stairs for breathtaking views. Collapse damaged only the adjacent Loggetta, not the basilica. Rebuilt &#x27;com&#x27;era, dov&#x27;era&#x27;—as it was, where it was.</p>
 <p class="prose">Built between 1396 and 1438, St. Mark’s Campanile was originally constructed to house bells for church services and civic announcements. Over time, it became a symbol of Venice’s wealth and power, often depicted in paintings by artists such as Tintoretto and Canaletto. Medieval watchtower became emblem; the 1902 collapse triggered a careful reconstruction program. Visiting St. Mark’s Campanile offers stunning views over the Grand Canal and surrounding islands, providing insight into the architectural heritage of Venice. Primary vertical reference point for Venice&#x27;s flat roofscape.</p></div>
 </section>
 <section class="place" id="venice_st_marks_clocktower">
+<div class="place-lead">
 <h3>St. Mark&#x27;s Clock Tower</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: North side of Piazza San Marco, Mercerie entrance | Style: Renaissance tower with astronomical dial | Period: 1496–1499 (clock); later additions</p>
-<figure class="place-fig"><img src="../images/venice_st_marks_clocktower.jpg" alt="St. Mark&#x27;s Clock Tower"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_st_marks_clocktower.jpg" alt="St. Mark&#x27;s Clock Tower" width="1280" height="960" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/venice_st_marks_clocktower_b.jpg" alt="St. Mark&#x27;s Clock Tower — view 2" width="330" height="311" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Mark’s Clock Tower is a majestic landmark that has stood for centuries as Venice’s most iconic timekeeper. Blue-and-gold zodiac dial and the Moors striking the bell punctuate the shopping axis into the city. The tower houses an astronomical clock dating back to the early 16th century. It features detailed depictions of zodiac signs and constellations on its outer face. Each hour, mechanical figures emerge to strike the bells and perform a miniature play. Restoration work was carried out in the mid-20th century to preserve its historical integrity. Today, it remains an essential part of Venice’s cultural heritage. Shows phases of the moon and zodiac signs. Automata figures strike the bell on major schedules.</p>
 <p class="prose">Built in the late 15th century during the Renaissance era, the tower originally served as both a clock and a bell tower. It was designed by Antonio Rizzo, a Venetian architect renowned for his innovative use of Gothic elements combined with classical architecture. The tower became famous for its intricate astronomical clock, which displays the movement of celestial bodies, including the sun, moon, and stars. Built to regulate merchant and civic time at the mouth of Venice&#x27;s retail arteries. Visiting St. Mark’s Clock Tower allows travelers to experience the fusion of art, science, and engineering in one exquisite structure. Timekeeping as public architecture in a trading republic.</p></div>
 </section>
 <section class="place" id="venice_arsenale">
+<div class="place-lead">
 <h3>Venetian Arsenal</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Castello sestiere, eastern edge of the historic city | Style: Industrial naval complex, brick sheds and basins | Period: Founded 1104; expanded 14th–16th c.</p>
-<figure class="place-fig"><img src="../images/venice_arsenale.jpg" alt="Venetian Arsenal"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_arsenale.jpg" alt="Venetian Arsenal" width="1280" height="719" style="height: 259px; max-height: 259px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/venice_arsenale_b.jpg" alt="Venetian Arsenal — view 2" width="330" height="237" style="height: 259px; max-height: 259px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Venetian Arsenal was the largest and most sophisticated shipyard of its time, a symbol of Venice&#x27;s naval power and wealth. Once the shipbuilding engine of an empire; parts open during the Biennale and occasional tours. It covered over 40 acres of land and water space. At its height, it produced around 370 vessels annually. Its construction methods were so efficient that it could build entire galleys within just six months. The Arsenal was also used as a political prison until the early 19th century. Today, parts of the site are open to visitors, offering insights into Venice&#x27;s historical shipbuilding practices. Early assembly-line methods built galleys at remarkable speed. The complex includes ropewalks, basins, and gates.</p>
 <p class="prose">Founded in the late 13th century, the Venetian Arsenal became one of Europe’s earliest industrial complexes. It played a crucial military and economic role for centuries, producing ships for both trade and defense. At its peak, it employed thousands of workers and could produce up to ten warships simultaneously. Its layout included specialized workshops, storage areas, and docking facilities, showcasing advanced engineering techniques and organization. State-controlled production supported naval dominance; later military uses restricted access for centuries. Today, the Arsenal is a testament to Venice&#x27;s maritime heritage and technological prowess during the Renaissance. Industrial heart of the Republic—Venice as manufacturing power, not only art city.</p></div>
 </section>

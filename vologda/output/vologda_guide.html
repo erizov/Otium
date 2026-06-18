@@ -13,7 +13,7 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
 .otium-logo { font-family: 'Cormorant Garamond', serif; font-size: 2.15rem;
   font-weight: 600; letter-spacing: 0.18em; margin-bottom: 0.85rem; }
 .otiump { margin: 0.42rem 0; line-height: 1.42; text-align: justify;
-  max-width: 38rem; font-size: 0.95rem; }
+  font-size: 0.95rem; }
 .guide-title { page-break-after: auto; margin-bottom: 0.55rem;
   page-break-inside: avoid; }
 .historical-reference { margin: 0.75rem 0 1.15rem;
@@ -63,22 +63,103 @@ ol.trip-stops a:hover { text-decoration: underline; }
 .heraldry-univ-caption { font-size: 0.52rem; line-height: 1.18;
   margin: 0.12rem 0 0; padding: 0 0.06rem; color: #252525;
   text-align: center; font-weight: 500; }
-.heraldry-motto { text-align: center; max-width: 18rem; margin: 0.18rem auto;
+.heraldry-motto { text-align: center; margin: 0.18rem auto;
   width: 100%; }
 .motto-line { font-family: 'Cormorant Garamond', serif; font-size: 1rem;
   margin: 0; color: #333; line-height: 1.35; }
 .guide-title h1.guide-title-main { font-family: 'Cormorant Garamond', serif;
   font-size: 2.35rem; margin-bottom: 0.5rem; font-weight: 600; }
 .lead { color: #444; font-size: 1.05rem; }
-.guide-toc { margin: 0.85rem 0 1.15rem; page-break-inside: avoid; }
-.guide-toc h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.28rem;
-  font-weight: 600; margin: 0.4rem 0 0.55rem; }
+
+.guide-toc { page-break-before: always; break-before: page;
+  page-break-after: always; break-after: page;
+  margin: 0; padding: 0.2rem 0 0.45rem; page-break-inside: auto; }
+.guide-toc h2 { font-family: 'Cormorant Garamond', serif;
+  font-size: 1.28rem; font-weight: 600; margin: 0.4rem 0 0.55rem; }
 .guide-toc ol { margin: 0.35rem 0 0.65rem 1.25rem; padding: 0;
   columns: 2; column-gap: 1.5rem; }
 .guide-toc li { margin: 0.18rem 0; line-height: 1.35;
   font-size: 0.88rem; break-inside: avoid; }
-.guide-toc a { color: #1a5276; text-decoration: none; }
+.guide-toc a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.guide-toc a:hover { color: #0d3d56; }
 .guide-toc li.toc-item--sub { font-size: 0.82rem; margin-left: 0.35rem; }
+.toc-back { font-size: 0.78rem; margin: 0 0 0.35rem; text-align: right; }
+.toc-back a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.toc-back a:hover { color: #0d3d56; }
+.place, .historical-reference, .guide-primer, .guide-trip-plans {
+  scroll-margin-top: 1.25rem; }
+.historical-reference h2, .guide-primer h2, .guide-trip-plans h2,
+.chapter-head h2, .place-lead h3 { position: relative; }
+.guide-toc + .place, .guide-toc + .chapter-head {
+  page-break-before: avoid; break-before: avoid-page; }
+.place-lead { page-break-inside: avoid; break-inside: avoid-page;
+  page-break-after: auto; }
+.place-lead > h3 { page-break-after: avoid; break-after: avoid-page; }
+.place-lead > .place-meta { page-break-after: avoid; break-after: avoid-page; }
+
+.place-fig { page-break-inside: avoid; break-inside: avoid-page;
+  margin: 0.5rem 0 1rem; }
+.place-fig img {
+  page-break-inside: avoid; break-inside: avoid-page;
+  max-height: 48vh; width: auto; max-width: 100%;
+  object-fit: contain; margin-left: auto; margin-right: auto; }
+.place-fig--hi-res img { max-height: 52vh; }
+.place-fig--lo-res img { max-height: 30vh; }
+.place-pdf-fig-row {
+  display: flex; flex-direction: row; flex-wrap: wrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.45rem 0.55rem; margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row .place-fig {
+  flex: 1 1 30%; margin: 0; min-width: 26%; max-width: 100%; }
+.place-pdf-fig-row .place-fig img {
+  width: auto; max-width: 100%; height: auto; max-height: 44vh;
+  object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--pair {
+  flex-wrap: nowrap; justify-content: space-between;
+  align-items: flex-end; gap: 0.5rem 0.65rem; }
+.place-pdf-fig-row--pair .place-fig {
+  flex: 1 1 47%; min-width: 0; max-width: 50%;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--pair .place-fig img {
+  max-height: 44vh; object-fit: contain; }
+.place-pdf-fig-row--pair .place-fig--hi-res img { max-height: 52vh; }
+.place-pdf-fig-row--pair .place-fig--lo-res img { max-height: 26vh; }
+.place-pdf-fig-row--pair .place-fig--row-sized img,
+.place-pdf-fig-row--triple .place-fig--row-sized img,
+.place-pdf-fig-row--many .place-fig--row-sized img {
+  width: auto; max-width: 100%; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row .place-fig--row-sized.place-fig--hi-res img,
+.place-pdf-fig-row .place-fig--row-sized.place-fig--lo-res img {
+  max-height: unset; }
+.place-pdf-fig-rows-stack {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple {
+  display: flex; flex-direction: row; flex-wrap: nowrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.4rem 0.48rem; margin: 0;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--triple .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--triple .place-fig--hi-res img { max-height: 42vh; }
+.place-pdf-fig-row--triple .place-fig--lo-res img { max-height: 18vh; }
+.place-pdf-fig-row--many {
+  flex-wrap: nowrap; justify-content: center; align-items: flex-end;
+  gap: 0.35rem 0.42rem; }
+.place-pdf-fig-row--many .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--many .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+
+
 .place { margin-bottom: 2.2rem; page-break-inside: auto; }
 h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.22rem; margin: 1.2rem 0 0.35rem;
   font-weight: 600; }
@@ -90,7 +171,6 @@ h4 { font-family: 'Cormorant Garamond', serif; font-size: 0.95rem; text-transfor
   color: #555; font-size: 0.95rem; margin: 0 0 0.5rem; font-style: italic; }
 .place-meta { font-size: 0.92rem; color: #353535; margin: 0 0 0.75rem;
   line-height: 1.4; }
-.place-fig { margin: 0.5rem 0 1rem; }
 img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
 .prose, .place-desc p { margin: 0.45rem 0; line-height: 1.5;
   text-align: justify; }
@@ -110,11 +190,14 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <figure class="heraldry-fig heraldry-coat-book" title="Coat of arms of Vologda"><img src="../images/guide_coat_of_arms.svg" alt="Coat of arms of Vologda"/></figure>
 <figure class="heraldry-fig heraldry-coat-book" title="Flag of Vologda"><img src="../images/guide_flag.svg" alt="Flag of Vologda"/></figure>
 </div></div><h1 class="guide-title-main">Vologda</h1><p class="lead">Guide. Places in this edition: 22.</p></header>
+<nav class="guide-toc" id="guide-toc" aria-label="Contents"><h2>Contents</h2><ol><li class="toc-item"><a href="#guide-historical">Historical overview</a></li><li class="toc-item"><a href="#guide-trips">Trip ideas</a></li><li class="toc-item"><a href="#vologda_architectural_museum">Architectural and Ethnographic Museum</a></li><li class="toc-item"><a href="#vologda_cathedral_square">Cathedral Square</a></li><li class="toc-item"><a href="#vologda_church_john">Church of St John the Baptist</a></li><li class="toc-item"><a href="#vologda_dmitry_prilutsky">Dmitry Prilutsky church</a></li><li class="toc-item"><a href="#vologda_house_of_peter">House of Peter I</a></li><li class="toc-item"><a href="#vologda_kremlin_courtyard">Inside the Vologda Kremlin</a></li><li class="toc-item"><a href="#vologda_church_kazan">Kazan church Vologda</a></li><li class="toc-item"><a href="#vologda_kremlin_square">Kremlin Square</a></li><li class="toc-item"><a href="#vologda_lace_museum">Museum of Lace</a></li><li class="toc-item"><a href="#vologda_regional_museum_ext">Regional Museum</a></li><li class="toc-item"><a href="#vologda_resurrection_cathedral">Resurrection Cathedral</a></li><li class="toc-item"><a href="#vologda_st_sophia_river">Saint Sophia Cathedral (from the river)</a></li><li class="toc-item"><a href="#vologda_st_sophia_cathedral">Saint Sophia Cathedral Vologda</a></li><li class="toc-item"><a href="#vologda_spaso_preobrazhensky">Spaso-Preobrazhensky church</a></li><li class="toc-item"><a href="#vologda_spaso_prilutsky">Spaso-Prilutsky Monastery</a></li><li class="toc-item"><a href="#vologda_kremlin">Vologda Kremlin</a></li><li class="toc-item"><a href="#vologda_kremlin_2024">Vologda Kremlin (recent view)</a></li><li class="toc-item"><a href="#vologda_landmark">Vologda Landmark</a></li><li class="toc-item"><a href="#vologda_regional_art">Vologda Regional Art Gallery</a></li><li class="toc-item"><a href="#vologda_river_ext">Vologda River</a></li><li class="toc-item"><a href="#vologda_vologda_river">Vologda River embankment</a></li><li class="toc-item"><a href="#vologda_regional_museum">Vologda State Museum</a></li></ol></nav>
 <section class="historical-reference" id="guide-historical" aria-label="Historical overview"><h2>Historical overview</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 <p class="prose">Vologda is a regional centre of Russia’s north, known for wooden lace architecture and Orthodox heritage.</p>
 <p class="prose">Trade routes to the White Sea, stone building in the sixteenth and seventeenth centuries, and ties to church reformers shaped its character. Kremlin walls, carved houses, and literary traditions sustain an image of the “Russian North.”</p>
 <p class="prose">Imperial and Soviet periods preserved wooden carving and rail links; the Great Patriotic War touched the region. Vologda now cultivates Golden Ring tourism and northern folk heritage.</p></section>
 <section class="guide-trip-plans" id="guide-trips" aria-label="Trip ideas"><h2>Trip ideas</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 <article class="trip-plan" id="trip-1d"><h3>One day</h3>
 <p class="prose">A compact loop linking the strongest cards in this guide, ordered to minimise backtracking on foot.</p>
 <ol class="trip-stops"><li><a href="#vologda_kremlin_square">Kremlin Square</a> (~60min)</li>
@@ -144,170 +227,292 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <li><a href="#vologda_kremlin_2024">Vologda Kremlin (recent view)</a> (~60min)</li>
 <li><a href="#vologda_lace_museum">Museum of Lace</a> (~60min)</li>
 <li><a href="#vologda_vologda_river">Vologda River embankment</a> (~60min)</li></ol></article></section>
-<nav class="guide-toc" aria-label="Contents"><h2>Contents</h2><ol><li class="toc-item"><a href="#guide-historical">Historical overview</a></li><li class="toc-item"><a href="#guide-trips">Trip ideas</a></li><li class="toc-item"><a href="#vologda_architectural_museum">Architectural and Ethnographic Museum</a></li><li class="toc-item"><a href="#vologda_cathedral_square">Cathedral Square</a></li><li class="toc-item"><a href="#vologda_church_john">Church of St John the Baptist</a></li><li class="toc-item"><a href="#vologda_dmitry_prilutsky">Dmitry Prilutsky church</a></li><li class="toc-item"><a href="#vologda_house_of_peter">House of Peter I</a></li><li class="toc-item"><a href="#vologda_kremlin_courtyard">Inside the Vologda Kremlin</a></li><li class="toc-item"><a href="#vologda_church_kazan">Kazan church Vologda</a></li><li class="toc-item"><a href="#vologda_kremlin_square">Kremlin Square</a></li><li class="toc-item"><a href="#vologda_lace_museum">Museum of Lace</a></li><li class="toc-item"><a href="#vologda_regional_museum_ext">Regional Museum</a></li><li class="toc-item"><a href="#vologda_resurrection_cathedral">Resurrection Cathedral</a></li><li class="toc-item"><a href="#vologda_st_sophia_river">Saint Sophia Cathedral (from the river)</a></li><li class="toc-item"><a href="#vologda_st_sophia_cathedral">Saint Sophia Cathedral Vologda</a></li><li class="toc-item"><a href="#vologda_spaso_preobrazhensky">Spaso-Preobrazhensky church</a></li><li class="toc-item"><a href="#vologda_spaso_prilutsky">Spaso-Prilutsky Monastery</a></li><li class="toc-item"><a href="#vologda_kremlin">Vologda Kremlin</a></li><li class="toc-item"><a href="#vologda_kremlin_2024">Vologda Kremlin (recent view)</a></li><li class="toc-item"><a href="#vologda_regional_art">Vologda Regional Art Gallery</a></li><li class="toc-item"><a href="#vologda_river_ext">Vologda River</a></li><li class="toc-item"><a href="#vologda_vologda_river">Vologda River embankment</a></li><li class="toc-item"><a href="#vologda_regional_museum">Vologda State Museum</a></li><li class="toc-item"><a href="#vologda_pdfband_5_58404528">ДКЖ</a></li></ol></nav>
 <section class="place" id="vologda_architectural_museum">
+<div class="place-lead">
 <h3>Architectural and Ethnographic Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/vologda_architectural_museum.jpg" alt="Architectural and Ethnographic Museum"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vologda_architectural_museum.jpg" alt="Architectural and Ethnographic Museum" width="330" height="435" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vologda_architectural_museum_b.jpg" alt="Architectural and Ethnographic Museum — view 2" width="330" height="186" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Architectural and Ethnographic Museum in Vologda offers visitors a captivating glimpse into the region&#x27;s rich architectural heritage and traditional way of life. Set in a picturesque landscape, the museum features a collection of wooden structures, including churches and peasant houses, showcasing the unique styles of Russian architecture. Visitors can explore the exhibits that highlight the cultural practices and everyday life of the local population. Established in 1960. Features a collection of over 30 historical wooden structures. Showcases traditional Russian architecture and rural life.</p>
 <p class="prose">The Architectural and Ethnographic Museum was established in 1960, with the aim of preserving and showcasing the architectural heritage of the Vologda region. Over the years, the museum has expanded its collection, bringing together various historical buildings that represent the traditional Russian lifestyle and architecture. Culturally, the museum plays a vital role in preserving the heritage of the Vologda region, reflecting the architectural styles and traditions of rural life. It serves as an educational resource, promoting awareness of local customs and practices. The museum also contributes to the cultural tourism of Vologda, attracting visitors interested in the region&#x27;s history and traditions.</p></div>
 </section>
 <section class="place" id="vologda_cathedral_square">
+<div class="place-lead">
 <h3>Cathedral Square</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/vologda_cathedral_square.jpg" alt="Cathedral Square"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vologda_cathedral_square.jpg" alt="Cathedral Square" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vologda_cathedral_square_b.jpg" alt="Cathedral Square — view 2" width="330" height="224" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Former Sobornaya Square inside the kremlin, framed by cathedral architecture and open paving. Central to guided tours of the kremlin. Respect roped areas and service schedules.</p></div>
 </section>
 <section class="place" id="vologda_church_john">
+<div class="place-lead">
 <h3>Church of St John the Baptist</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/vologda_church_john.jpg" alt="Church of St John the Baptist"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vologda_church_john.jpg" alt="Church of St John the Baptist" width="330" height="226" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vologda_church_john_b.jpg" alt="Church of St John the Baptist — view 2" width="330" height="510" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Church of St John the Baptist in Vologda is a stunning example of Russian Orthodox architecture, known for its intricate frescoes and serene atmosphere. Nestled in the heart of the city, this church attracts both worshippers and visitors alike, offering a glimpse into the region&#x27;s rich spiritual heritage. Its peaceful surroundings make it a perfect spot for reflection and appreciation of Vologda&#x27;s historical landscape. Founded in 1694, replacing an earlier wooden church. Features intricate frescoes and traditional Russian architectural elements. Serves as an active place of worship and a cultural landmark in Vologda.</p>
 <p class="prose">The Church of St John the Baptist was founded in the late 17th century, with construction completed in 1694. It was built on the site of an earlier wooden church, reflecting the growing importance of the Orthodox faith in the region during this period. The church has undergone various restorations over the years, preserving its architectural integrity and artistic treasures. Culturally, the Church of St John the Baptist serves as a vital symbol of Vologda&#x27;s religious heritage and community life. It is a site for traditional Orthodox rites and celebrations, contributing to the local identity and continuity of faith practices. The church&#x27;s artistic elements, including its frescoes, represent significant contributions to the region&#x27;s cultural landscape.</p></div>
 </section>
 <section class="place" id="vologda_dmitry_prilutsky">
+<div class="place-lead">
 <h3>Dmitry Prilutsky church</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/vologda_dmitry_prilutsky.jpg" alt="Dmitry Prilutsky church"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vologda_dmitry_prilutsky.jpg" alt="Dmitry Prilutsky church" width="330" height="440" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vologda_dmitry_prilutsky_b.jpg" alt="Dmitry Prilutsky church — view 2" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Dmitry Prilutsky Church in Vologda is a striking example of Russian architecture, renowned for its intricate design and historical significance. This church, dedicated to St. Dmitry of Priluki, serves as a peaceful place for reflection and worship, attracting both locals and visitors alike. Its serene atmosphere and beautiful surroundings make it a must-visit site for those exploring Vologda&#x27;s rich cultural heritage. Founded in the late 16th century. Completed in 1610. Dedicated to St.</p>
 <p class="prose">The Dmitry Prilutsky Church was founded in the late 16th century, with its construction being completed in 1610. It is named after St. Dmitry of Priluki, a revered figure in Russian Orthodoxy, and has played a role in the spiritual life of the region for centuries. The church has undergone various restorations over the years, preserving its architectural integrity and historical value. Culturally, the church is an important part of Vologda&#x27;s heritage, showcasing traditional Russian architectural styles and serving as a venue for local religious practices. It reflects the deep-rooted traditions of the Orthodox faith in the region and continues to be a center for community gatherings and spiritual events.</p></div>
 </section>
 <section class="place" id="vologda_house_of_peter">
+<div class="place-lead">
 <h3>House of Peter I</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/vologda_house_of_peter.jpg" alt="House of Peter I"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vologda_house_of_peter.jpg" alt="House of Peter I" width="330" height="495" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vologda_house_of_peter_b.jpg" alt="House of Peter I — view 2" width="330" height="252" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The House of Peter I in Vologda is a unique museum dedicated to the early years of Peter the Great, showcasing his life and the historical context of his reign. This charming wooden house, built in the late 17th century, offers visitors a glimpse into the personal life of one of Russia&#x27;s most influential tsars. Exhibits include artifacts, documents, and displays that highlight Peter&#x27;s innovative spirit and his role in shaping modern Russia. The House of Peter I was built in 1702. It served as a residence for Peter the Great during his travels to Vologda. The museum was established in 1940.</p>
 <p class="prose">The House of Peter I was constructed in 1702 and served as a residence for the young tsar during his travels to the north. It is in this house that Peter the Great is said to have formulated plans for the development of the Russian Navy and the modernization of the country. The house has been preserved as a museum since 1940, reflecting the significance of Vologda in Peter&#x27;s early life. Culturally, the House of Peter I is an important heritage site that reflects the early modernization efforts of Russia under Peter the Great. It serves as a reminder of the tsar&#x27;s influence on Russian culture and governance, marking a pivotal shift in the nation&#x27;s history. The museum plays a crucial role in educating visitors about the traditions and innovations of the era, contributing to the broader understanding of Russian heritage.</p></div>
 </section>
 <section class="place" id="vologda_kremlin_courtyard">
+<div class="place-lead">
 <h3>Inside the Vologda Kremlin</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/vologda_kremlin_courtyard.jpg" alt="Inside the Vologda Kremlin"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vologda_kremlin_courtyard.jpg" alt="Inside the Vologda Kremlin" width="1280" height="854" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vologda_kremlin_courtyard_b.jpg" alt="Inside the Vologda Kremlin — view 2" width="330" height="495" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Courtyard perspective of domes and walls showing the density of the kremlin churches. Useful reference for how routes circulate inside the walls. Museum tickets may bundle several buildings.</p></div>
 </section>
 <section class="place" id="vologda_church_kazan">
+<div class="place-lead">
 <h3>Kazan church Vologda</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/vologda_church_kazan.jpg" alt="Kazan church Vologda"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vologda_church_kazan.jpg" alt="Kazan church Vologda" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vologda_church_kazan_b.jpg" alt="Kazan church Vologda — view 2" width="330" height="211" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Kazan Church in Vologda is a striking example of Russian architecture, known for its distinctive onion-shaped domes and intricate frescoes. This historic church serves as a serene place of worship and a testament to the city&#x27;s rich cultural heritage. Visitors can admire its beautiful interior and learn about its significance in the local community. Founded in the early 17th century. Construction completed in 1694. Dedicated to the Kazan Icon of the Mother of God.</p>
 <p class="prose">The Kazan Church was founded in the early 17th century, with its construction completed in 1694. It was built in honor of the Kazan Icon of the Mother of God, which holds great significance in Russian Orthodoxy. Over the years, the church has witnessed various historical events, including the changes brought about by the Russian Revolution. Culturally, the Kazan Church is an important landmark in Vologda, reflecting the city&#x27;s architectural evolution and religious traditions. It plays a vital role in the daily lives of local residents, serving not only as a place of worship but also as a venue for community gatherings and cultural events. The church&#x27;s artistic elements contribute to Vologda&#x27;s heritage, making it a site of interest for both locals and tourists.</p></div>
 </section>
 <section class="place" id="vologda_kremlin_square">
+<div class="place-lead">
 <h3>Kremlin Square</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/vologda_kremlin_square.jpg" alt="Kremlin Square"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vologda_kremlin_square.jpg" alt="Kremlin Square" width="1280" height="960" style="height: 154px; max-height: 154px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vologda_kremlin_square_b.jpg" alt="Kremlin Square — view 2" width="330" height="110" style="height: 154px; max-height: 154px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Open square beside the kremlin used for events and as the main approach to the ensemble. Good orientation point before entering museum buildings. Ice and snow in winter require care on paving.</p></div>
 </section>
 <section class="place" id="vologda_lace_museum">
+<div class="place-lead">
 <h3>Museum of Lace</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/vologda_lace_museum.jpg" alt="Museum of Lace"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/vologda_lace_museum_b.jpg" alt="Museum of Lace" width="330" height="268"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Allow time for temporary exhibitions. Gift shop may offer certified lace products.</p></div>
 </section>
 <section class="place" id="vologda_regional_museum_ext">
+<div class="place-lead">
 <h3>Regional Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/vologda_regional_museum_ext.jpg" alt="Regional Museum"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vologda_regional_museum_ext.jpg" alt="Regional Museum" width="330" height="322" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vologda_regional_museum_ext_b.jpg" alt="Regional Museum — view 2" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Vologda Regional Museum is a treasure trove of local history and culture, showcasing the rich heritage of the Vologda region. Visitors can explore diverse exhibitions that highlight the area&#x27;s art, traditions, and historical artifacts. The museum serves as a focal point for understanding Vologda&#x27;s past and its cultural evolution. Founded in 1912, the museum has evolved to encompass various aspects of Vologda&#x27;s history and culture. The museum features exhibitions on local art, ethnography, and natural history.</p>
 <p class="prose">The Vologda Regional Museum was founded in 1912, initially focusing on the natural history and ethnography of the region. Over the years, it has expanded its collections and exhibitions, reflecting the historical and cultural development of Vologda and its surroundings. Culturally, the museum plays a vital role in preserving and promoting the unique heritage of Vologda, including its traditional crafts, folk art, and local customs. It serves as a center for educational programs and cultural events, fostering a deeper appreciation for the region&#x27;s history among both locals and visitors.</p></div>
 </section>
 <section class="place" id="vologda_resurrection_cathedral">
+<div class="place-lead">
 <h3>Resurrection Cathedral</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/vologda_resurrection_cathedral.jpg" alt="Resurrection Cathedral"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vologda_resurrection_cathedral.jpg" alt="Resurrection Cathedral" width="1200" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vologda_resurrection_cathedral_b.jpg" alt="Resurrection Cathedral — view 2" width="330" height="446" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Cathedral of the Resurrection — Wikimedia disambiguation page. Check whether tower climbs are offered seasonally. Combine with neighbouring kremlin museums.</p></div>
 </section>
 <section class="place" id="vologda_st_sophia_river">
+<div class="place-lead">
 <h3>Saint Sophia Cathedral (from the river)</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/vologda_st_sophia_river.jpg" alt="Saint Sophia Cathedral (from the river)"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vologda_st_sophia_river.jpg" alt="Saint Sophia Cathedral (from the river)" width="1280" height="852" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vologda_st_sophia_river_b.jpg" alt="Saint Sophia Cathedral (from the river) — view 2" width="330" height="440" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Landmark cathedral domes seen from the Vologda River, defining the city&#x27;s northern skyline. River walks link several churches and embankments. Early light can be excellent for photography.</p></div>
 </section>
 <section class="place" id="vologda_st_sophia_cathedral">
+<div class="place-lead">
 <h3>Saint Sophia Cathedral Vologda</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/vologda_st_sophia_cathedral.jpg" alt="Saint Sophia Cathedral Vologda"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vologda_st_sophia_cathedral.jpg" alt="Saint Sophia Cathedral Vologda" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vologda_st_sophia_cathedral_b.jpg" alt="Saint Sophia Cathedral Vologda — view 2" width="330" height="426" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Saint Sophia Cathedral in Vologda is a stunning example of Russian architecture, renowned for its intricate design and historical importance. Built in the 16th century, this cathedral serves as a prominent landmark in the city, attracting visitors with its beautiful frescoes and rich heritage. It stands as a testament to Vologda&#x27;s role in the development of Russian culture and spirituality. Constructed between 1568 and 1570. Designed by architect Pyotr Baranov. Features a combination of Byzantine and local architectural styles.</p>
 <p class="prose">Saint Sophia Cathedral was constructed between 1568 and 1570 under the reign of Tsar Ivan the Terrible. It was designed by the architect Pyotr Baranov and is one of the earliest examples of the Russian architectural style that combines Byzantine and local traditions. The cathedral has undergone various restorations and has played a significant role in the religious life of the region over the centuries. The cathedral holds great cultural significance as a symbol of Vologda&#x27;s historical and religious heritage. It is not only a place of worship but also a site that reflects the artistic achievements of the time, with its stunning frescoes and unique architectural features. The cathedral contributes to the local identity and is a focal point for various religious ceremonies and cultural events.</p></div>
 </section>
 <section class="place" id="vologda_spaso_preobrazhensky">
+<div class="place-lead">
 <h3>Spaso-Preobrazhensky church</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/vologda_spaso_preobrazhensky.jpg" alt="Spaso-Preobrazhensky church"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vologda_spaso_preobrazhensky.jpg" alt="Spaso-Preobrazhensky church" width="330" height="443" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vologda_spaso_preobrazhensky_b.jpg" alt="Spaso-Preobrazhensky church — view 2" width="330" height="462" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Spaso-Preobrazhensky Church in Vologda is a stunning example of Russian architecture, known for its intricate design and historical importance. This church serves as a significant landmark in the city, attracting visitors with its rich heritage and serene atmosphere. It offers a glimpse into the spiritual life of the region and the artistry of its time. Founded in the early 16th century, with construction completed in 1560. Known for its unique architectural style and intricate frescoes.</p>
 <p class="prose">The Spaso-Preobrazhensky Church was founded in the early 16th century, with its construction believed to have been completed in 1560. It has undergone various restorations over the centuries, reflecting the architectural styles and religious practices of different eras. The church has played a pivotal role in the religious life of Vologda, serving the local community for over 450 years. Culturally, the Spaso-Preobrazhensky Church is an essential part of Vologda&#x27;s heritage, showcasing the artistry of Russian Orthodox architecture. It is a site of local traditions and rituals, contributing to the daily life of the community. The church&#x27;s historical and architectural value makes it a significant landmark in the city, often drawing attention from both locals and tourists alike.</p></div>
 </section>
 <section class="place" id="vologda_spaso_prilutsky">
+<div class="place-lead">
 <h3>Spaso-Prilutsky Monastery</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/vologda_spaso_prilutsky.jpg" alt="Spaso-Prilutsky Monastery"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vologda_spaso_prilutsky.jpg" alt="Spaso-Prilutsky Monastery" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vologda_spaso_prilutsky_b.jpg" alt="Spaso-Prilutsky Monastery — view 2" width="330" height="220" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Major monastery complex north of the centre, with fortified walls and church buildings. Requires transport or a longer walk from the kremlin. Confirm opening hours; some areas may close seasonally.</p></div>
 </section>
 <section class="place" id="vologda_kremlin">
+<div class="place-lead">
 <h3>Vologda Kremlin</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/vologda_kremlin.jpg" alt="Vologda Kremlin"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vologda_kremlin.jpg" alt="Vologda Kremlin" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vologda_kremlin_b.jpg" alt="Vologda Kremlin — view 2" width="330" height="247" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Fortified bishop&#x27;s court with cathedral bell towers and kremlin walls at the historic core of Vologda. Allow time for museum and church opening hours. The ensemble is a focal point for walking the old centre.</p></div>
 </section>
 <section class="place" id="vologda_kremlin_2024">
+<div class="place-lead">
 <h3>Vologda Kremlin (recent view)</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/vologda_kremlin_2024.jpg" alt="Vologda Kremlin (recent view)"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vologda_kremlin_2024.jpg" alt="Vologda Kremlin (recent view)" width="1280" height="960" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vologda_kremlin_2024_b.jpg" alt="Vologda Kremlin (recent view) — view 2" width="330" height="426" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Combine with St Sophia Cathedral and the regional museum nearby. Crowds peak in summer travel months.</p></div>
 </section>
+<section class="place" id="vologda_landmark">
+<div class="place-lead">
+<h3>Vologda Landmark</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
+
+
+<figure class="place-fig place-fig--hi-res"><img src="../images/vologda_landmark.jpg" alt="Vologda Landmark" width="1280" height="960"/></figure>
+</div>
+</section>
 <section class="place" id="vologda_regional_art">
+<div class="place-lead">
 <h3>Vologda Regional Art Gallery</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/vologda_regional_art.jpg" alt="Vologda Regional Art Gallery"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/vologda_regional_art_b.jpg" alt="Vologda Regional Art Gallery" width="330" height="268"/></figure>
+</div>
 <div class="place-desc"><p class="prose">The Vologda Regional Art Gallery is a prominent cultural institution located in the heart of Vologda. It houses an impressive collection of Russian art, including works from the 18th century to contemporary pieces. Visitors can explore various exhibitions that showcase the rich artistic heritage of the region and beyond. Founded in 1963, the gallery has a collection that spans several centuries. The gallery features works from notable Russian artists and hosts temporary exhibitions.</p>
 <p class="prose">The Vologda Regional Art Gallery was founded in 1963, evolving from earlier collections that began to take shape in the 1930s. It has since become a key player in the promotion and preservation of regional art, reflecting the artistic developments in Vologda and the surrounding areas. Culturally, the gallery plays a vital role in the artistic life of Vologda, serving as a platform for local artists and fostering appreciation for both historical and contemporary art. It contributes to the city&#x27;s cultural identity and heritage, making it an essential destination for art enthusiasts and tourists alike.</p></div>
 </section>
 <section class="place" id="vologda_river_ext">
+<div class="place-lead">
 <h3>Vologda River</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/vologda_river_ext.jpg" alt="Vologda River"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vologda_river_ext.jpg" alt="Vologda River" width="330" height="247" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vologda_river_ext_b.jpg" alt="Vologda River — view 2" width="330" height="220" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Vologda River flows through the heart of Vologda, a picturesque city known for its historical charm and cultural heritage. It meanders gently past ancient churches, cozy cafes, and charming parks, offering visitors a serene escape amidst bustling urban life. It is approximately 480 kilometers long, flowing through the vast landscapes of northwestern Russia. Its shores are lined with numerous small islands, each with its own unique character and charm. In summer, the river becomes a popular spot for boating, fishing, and picnicking. Historical bridges spanning the river provide pedestrian access and offer panoramic views of the surrounding area. Local folklore tells tales of mystical creatures said to inhabit its depths.</p>
 <p class="prose">Originating deep within the forests of northern Russia, the Vologda River has been an integral part of Vologda&#x27;s development since time immemorial. Throughout history, it served as a vital transportation route, connecting remote villages with the wider world. Today, it remains a symbol of the region’s natural beauty and cultural identity. Visitors come to the Vologda River to experience its tranquil waters, enjoy scenic walks along its banks, and immerse themselves in the local culture and traditions.</p></div>
 </section>
 <section class="place" id="vologda_vologda_river">
+<div class="place-lead">
 <h3>Vologda River embankment</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/vologda_vologda_river.jpg" alt="Vologda River embankment"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vologda_vologda_river.jpg" alt="Vologda River embankment" width="1280" height="959" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vologda_vologda_river_b.jpg" alt="Vologda River embankment — view 2" width="330" height="495" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Pleasant for an evening stroll in warmer months. Links the kremlin area to residential quarters upstream.</p></div>
 </section>
 <section class="place" id="vologda_regional_museum">
+<div class="place-lead">
 <h3>Vologda State Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/vologda_regional_museum.jpg" alt="Vologda State Museum"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vologda_regional_museum.jpg" alt="Vologda State Museum" width="330" height="214" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vologda_regional_museum_b.jpg" alt="Vologda State Museum — view 2" width="330" height="204" style="height: 234px; max-height: 234px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Vologda State Museum is a prominent cultural institution located in the heart of Vologda, showcasing the rich history and artistic heritage of the region. Visitors can explore a diverse collection of exhibits, including traditional crafts, fine arts, and historical artifacts that reflect the area&#x27;s unique identity. The museum also hosts various cultural events and educational programs, making it a vibrant hub for both locals and tourists. Founded in 1919, the museum has a rich collection of regional artifacts. The museum features exhibits on traditional crafts, fine arts, and local history.</p>
 <p class="prose">The Vologda State Museum was founded in 1919, evolving from earlier collections that date back to the 18th century. It has played a crucial role in preserving the cultural heritage of the Vologda region, especially during significant historical events such as the Soviet era, when many cultural institutions faced challenges. Culturally, the museum is vital for understanding the artistic traditions and historical narratives of Vologda, contributing to the preservation of local heritage. It houses a significant collection of Russian art and crafts, reflecting the region&#x27;s contributions to national culture. The museum also engages with the community through exhibitions and educational programs, reinforcing its role in daily life and cultural identity.</p></div>
-</section>
-<section class="place" id="vologda_pdfband_5_58404528">
-<h3>ДКЖ</h3>
-
-
-<figure class="place-fig"><img src="../images/vologda_pdfband_5_58404528.jpg" alt="ДКЖ"/></figure>
 </section>
 </body>
 </html>

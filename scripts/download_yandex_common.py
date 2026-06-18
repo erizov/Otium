@@ -21,7 +21,7 @@ if TYPE_CHECKING:
 MIN_BYTES = 2048
 # Use same min size as download_with_dedup when hashing (for forbidden/dup check)
 _HASH_MIN_BYTES = 500
-IMAGES_PER_PLACE_DEFAULT = 4
+IMAGES_PER_PLACE_DEFAULT = 2
 YANDEX_AVATARS = "avatars.mds.yandex.net"
 REFERER_YANDEX = "https://yandex.ru/"
 FOTO_MOS_RU_DOMAIN = "foto.mos.ru"

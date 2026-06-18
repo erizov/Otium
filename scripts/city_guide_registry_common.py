@@ -80,3 +80,58 @@ def merge_detail_overlays(
                 continue
             row[key] = val
     return rows
+
+
+def second_image_sidecar_path(data_dir: Path, city_slug: str) -> Path:
+    return data_dir / "{}_second_images.json".format(city_slug)
+
+
+def load_second_image_sidecar(data_dir: Path, city_slug: str) -> dict[str, list[dict]]:
+    path = second_image_sidecar_path(data_dir, city_slug)
+    if not path.is_file():
+        return {}
+    blob = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(blob, dict):
+        return {}
+    return blob
+
+
+def save_second_image_sidecar(
+    data_dir: Path,
+    city_slug: str,
+    sidecar: dict[str, list[dict]],
+) -> None:
+    path = second_image_sidecar_path(data_dir, city_slug)
+    path.write_text(
+        json.dumps(sidecar, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+
+
+def merge_second_image_sidecar(
+    rows: list[dict],
+    data_dir: Path,
+    city_slug: str,
+) -> list[dict]:
+    """Attach sidecar ``additional_images`` when JSON has none."""
+    side = load_second_image_sidecar(data_dir, city_slug)
+    if not side:
+        return rows
+    for row in rows:
+        slug = str(row.get("slug") or "")
+        if not slug or row.get("additional_images"):
+            continue
+        extra = side.get(slug)
+        if extra:
+            row["additional_images"] = extra
+    return rows
+
+
+def derive_second_image_rel(primary_rel: str) -> str:
+    rel = primary_rel.replace("\\", "/").lstrip("/")
+    parent = Path(rel).parent
+    stem = Path(rel).stem
+    suffix = Path(rel).suffix or ".jpg"
+    if parent.as_posix() in (".", ""):
+        return "{}_b{}".format(stem, suffix)
+    return str(parent / "{}_b{}".format(stem, suffix)).replace("\\", "/")

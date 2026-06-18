@@ -3,8 +3,8 @@
 Download images with per-download duplicate checking.
 
 Downloads images one by one, checking after each download if it's a duplicate
-of any existing file in the folder. Ensures each item gets exactly 4 distinct
-images before proceeding.
+of any existing file in the folder. Ensures each item gets up to N distinct
+images before proceeding (default 2).
 """
 
 from __future__ import annotations
@@ -23,6 +23,9 @@ import urllib.error
 from pathlib import Path
 from typing import Callable, Optional, Tuple
 
+from scripts.city_guide_core import DOWNLOAD_MAX_IMAGES_PER_PLACE
+from scripts.pixabay_config import pexels_image_search_enabled
+from scripts.pixabay_config import pixabay_image_search_enabled
 from scripts.core import ensure_utf8_console, load_env, project_root
 
 ensure_utf8_console()
@@ -42,6 +45,7 @@ FAIL_TIMEOUT = "timeout"
 FAIL_FORBIDDEN = "forbidden (hash)"
 FAIL_DUPLICATE = "duplicate of {}"  # .format(dup_basename)
 FAIL_AI_REJECT = "AI: does not match place"
+FAIL_SUBJECT = "subject filter: person/animal main"
 FAIL_TOO_SMALL = "response too small"
 FAIL_BANNED = "banned"
 FAIL_MOVED = "moved to forbidden"
@@ -259,6 +263,8 @@ def _normalize_image_url(url: str) -> str | None:
     if not url or not url.strip():
         return None
     url = url.strip()
+    if "&quot;" in url:
+        url = url.split("&quot;", 1)[0]
     if any(url.startswith(p) for p in _SKIP_URL_PREFIXES):
         return None
     if any(s in url.lower() for s in _SKIP_URL_CONTAINS):
@@ -779,9 +785,8 @@ def _fetch_urls_round_robin(
         excluded_sources = set()
     if failure_counts is None:
         failure_counts = {}
-    skip_pixabay = os.environ.get("PIXABAY_SKIP", "").strip().lower() in (
-        "1", "true", "yes",
-    )
+    skip_pixabay = not pixabay_image_search_enabled()
+    skip_pexels = not pexels_image_search_enabled()
     # Each (source, query) pair is a round-robin bucket; more buckets = less
     # delay per site (each site called every Nth request).
     _all_sources: list[tuple[str, Callable[[str], list[str]]]] = [
@@ -879,6 +884,7 @@ def _fetch_urls_round_robin(
     sources = [
         (n, f) for n, f in _all_sources
         if not (skip_pixabay and n.startswith("Pixabay"))
+        and not (skip_pexels and n.startswith("Pexels"))
     ]
     # Use configured source count for delay scaling (each site called every Nth)
     # Expand: each (source, query) = one bucket for round-robin. More buckets
@@ -1278,6 +1284,7 @@ def download_images_with_dedup(
     use_ai_identify: bool = False,
     guide_name: str = "",
     force_overwrite: bool = False,
+    max_images_per_item: int = DOWNLOAD_MAX_IMAGES_PER_PLACE,
 ) -> Tuple[dict[str, int], dict[str, int]]:
     """
     Download images with per-download duplicate checking.
@@ -1285,8 +1292,8 @@ def download_images_with_dedup(
     Images are never deleted unless: (1) explicitly requested (force_overwrite),
     or (2) the file is a duplicate of another. By default existing image files
     are not overwritten. Use force_overwrite to replace duplicates or
-    re-download. For each item, up to 4 distinct images; after each download,
-    validates uniqueness.
+    re-download. For each item, up to max_images_per_item distinct images; after
+    each download, validates uniqueness.
 
     Args:
         images_dir: Directory to save images
@@ -1343,14 +1350,16 @@ def download_images_with_dedup(
         )
     else:
         print("  AI identify: disabled.")
-    pixabay_skip = os.environ.get("PIXABAY_SKIP", "").strip().lower() in (
-        "1", "true", "yes",
-    )
+    pixabay_skip = not pixabay_image_search_enabled()
     pixabay = (
         "skipped" if pixabay_skip
         else ("yes" if os.environ.get("PIXABAY_API_KEY", "").strip() else "no")
     )
-    pexels = "yes" if os.environ.get("PEXELS_API_KEY", "").strip() else "no"
+    pexels_skip = not pexels_image_search_enabled()
+    pexels = (
+        "skipped" if pexels_skip
+        else ("yes" if os.environ.get("PEXELS_API_KEY", "").strip() else "no")
+    )
     unsplash = "yes" if os.environ.get("UNSPLASH_ACCESS_KEY", "").strip() else "no"
     flickr = "yes" if os.environ.get("FLICKR_API_KEY", "").strip() else "no"
     print(
@@ -1399,7 +1408,8 @@ def download_images_with_dedup(
         )
     _failure_counts: dict[str, int] = {}
 
-    # Process each item to get 4 distinct images
+    # Process each item to get distinct images (up to max_images_per_item)
+    max_slots = max(1, max_images_per_item)
     for item_idx, item in enumerate(items, 1):
         item_name = item.get("name", "?")
         print("\n[{}/{}] Processing: {}".format(item_idx, len(items), item_name), flush=True)
@@ -1420,24 +1430,20 @@ def download_images_with_dedup(
             results[item_name] = 0
             continue
 
-        # Derive slug and always target 4 slots per item (download up to 4).
-        # Always process all 4 slots to fill gaps (e.g. name_1, name_3, name_4
-        # -> fill name_2) and to detect duplicates (after dedup, fill gaps).
+        # Derive slug and target up to max_slots per item.
         slug = basename_to_slug(standard_basenames[0])
         required_slots = [
-            "{}_1.jpg".format(slug),
-            "{}_2.jpg".format(slug),
-            "{}_3.jpg".format(slug),
-            "{}_4.jpg".format(slug),
+            "{}_{}.jpg".format(slug, slot)
+            for slot in range(1, max_slots + 1)
         ]
-        if len(standard_basenames) < 4:
+        if len(standard_basenames) < max_slots:
             print(
-                "  {} has {} slot(s) in data; filling up to 4.".format(
-                    item_name, len(standard_basenames),
+                "  {} has {} slot(s) in data; filling up to {}.".format(
+                    item_name, len(standard_basenames), max_slots,
                 ),
             )
 
-        # Check upfront if all 4 images already exist and are valid
+        # Check upfront if all target images already exist and are valid
         # (skip entire item immediately if complete, unless force_overwrite)
         # This skips ALL delays (time.sleep calls) by skipping before download loop
         if not force_overwrite:
@@ -1466,14 +1472,18 @@ def download_images_with_dedup(
             
             if all_exist_and_valid:
                 # Skip immediately - no delays, no URL fetching, no downloads
-                print("  SKIP {}: all 4 images exist and valid, skipping item (no delays)".format(item_name), flush=True)
-                results[item_name] = 4
+                print(
+                    "  SKIP {}: all {} images exist and valid, skipping item "
+                    "(no delays)".format(item_name, max_slots),
+                    flush=True,
+                )
+                results[item_name] = max_slots
                 continue
 
         distinct_count = 0
 
         for basename in required_slots:
-            if distinct_count >= 4:
+            if distinct_count >= max_slots:
                 break
             path = images_dir / basename
             attempts_for_this_basename = 0
@@ -1804,6 +1814,50 @@ def download_images_with_dedup(
                     temp_path = images_dir / (basename + ".tmp")
                     temp_path.write_bytes(data)
 
+                    if os.environ.get("SUBJECT_FILTER", "1").strip().lower() not in (
+                        "0", "false", "no", "off",
+                    ):
+                        try:
+                            from scripts.image_subject_filter import (
+                                check_image_path,
+                            )
+                            from scripts.image_subject_filter import (
+                                rejection_message,
+                            )
+                            verdict = check_image_path(temp_path)
+                            if not verdict.accept:
+                                msg = rejection_message(verdict)
+                                print(
+                                    "  DOWNLOAD {}: URL {}/{} failed ({})".format(
+                                        basename,
+                                        url_idx_str,
+                                        total_urls_tried,
+                                        msg,
+                                    ),
+                                    flush=True,
+                                )
+                                temp_path.unlink()
+                                last_fail_reason = FAIL_SUBJECT
+                                stats.setdefault("subject_reject", 0)
+                                stats["subject_reject"] += 1
+                                fail_log_lines.append(
+                                    "{}\t{}\t{}\t{}".format(
+                                        basename,
+                                        item_name,
+                                        FAIL_SUBJECT,
+                                        url,
+                                    ),
+                                )
+                                time.sleep(DELAY_AFTER_REJECT_SEC)
+                                continue
+                        except Exception as exc:
+                            print(
+                                "  Subject filter error ({}), accepting.".format(
+                                    exc,
+                                ),
+                                file=sys.stderr,
+                            )
+
                     # Validate uniqueness again (perceptual vs SHA256 consistency)
                     current_hashes = _get_existing_hashes(
                         images_dir, images_root=images_root,
@@ -1938,8 +1992,8 @@ def download_images_with_dedup(
                     stats["downloaded"] += 1
                     downloaded_this_slot = True
                     print(
-                        "  DOWNLOAD {}: SUCCESS (dedup: unique, {}/4 for {})".format(
-                            basename, distinct_count, item_name,
+                        "  DOWNLOAD {}: SUCCESS (dedup: unique, {}/{} for {})".format(
+                            basename, distinct_count, max_slots, item_name,
                         ),
                         flush=True,
                     )
@@ -2102,8 +2156,8 @@ def download_images_with_dedup(
                     stats["downloaded"] += 1
                     downloaded_this_slot = True
                     print(
-                        "  DOWNLOAD {}: SUCCESS (dedup: unique, {}/4 for {}, from Yandex)".format(
-                            basename, distinct_count, item_name,
+                        "  DOWNLOAD {}: SUCCESS (dedup: unique, {}/{} for {}, from Yandex)".format(
+                            basename, distinct_count, max_slots, item_name,
                         ),
                         flush=True,
                     )
@@ -2166,9 +2220,10 @@ def validate_item_images_format(
     items: list[dict],
     images_dir: Path,
     guide_name: str = "guide",
+    max_images_per_item: int = DOWNLOAD_MAX_IMAGES_PER_PLACE,
 ) -> tuple[bool, list[str]]:
     """
-    Validate that each item has exactly 4 images in format name_1, name_2, name_3, name_4.
+    Validate that each item has up to max_images_per_item distinct images.
 
     Checks forbidden folder every time: files whose hash is in forbidden/ (or
     FORBIDDEN_IMAGE_HASHES) are treated as missing. Images are distinct, no duplicates.
@@ -2179,32 +2234,33 @@ def validate_item_images_format(
 
     forbidden_hashes = _load_forbidden_hashes(images_dir) | set(FORBIDDEN_IMAGE_HASHES)
     errors: list[str] = []
+    max_slots = max(1, max_images_per_item)
+    slot_suffixes = {"_{}.jpg".format(i) for i in range(1, max_slots + 1)}
 
     for i, item in enumerate(items, 1):
         name = item.get("name", "?")
         images = item.get("images") or []
         basenames = [_basename(img) for img in images]
 
-        # Filter to standard format (_1, _2, _3, _4) and sort
+        # Filter to standard format (_1 .. _N) and sort
         standard_basenames = sorted([
             bn for bn in basenames
-            if bn.endswith("_1.jpg") or bn.endswith("_2.jpg") or
-            bn.endswith("_3.jpg") or bn.endswith("_4.jpg")
+            if bn[-6:] in slot_suffixes
         ])
 
-        if len(standard_basenames) != 4:
+        if len(standard_basenames) < max_slots:
             errors.append(
-                "{} item {} ({!r}): expected exactly 4 images in format "
-                "name_1.jpg, name_2.jpg, name_3.jpg, name_4.jpg, got {}: {}".format(
-                    guide_name, i, name, len(standard_basenames),
+                "{} item {} ({!r}): expected {} image(s) in format "
+                "name_1.jpg .. name_{}.jpg, got {}: {}".format(
+                    guide_name, i, name, max_slots, max_slots,
+                    len(standard_basenames),
                     standard_basenames,
                 ),
             )
             continue
 
-        # Verify format: must have _1, _2, _3, _4
-        expected_suffixes = {"_1.jpg", "_2.jpg", "_3.jpg", "_4.jpg"}
-        actual_suffixes = {bn[-6:] for bn in standard_basenames}
+        expected_suffixes = slot_suffixes
+        actual_suffixes = {bn[-6:] for bn in standard_basenames[:max_slots]}
         if actual_suffixes != expected_suffixes:
             errors.append(
                 "{} item {} ({!r}): missing required suffixes. "
@@ -2215,9 +2271,9 @@ def validate_item_images_format(
             )
             continue
 
-        # Check all 4 files exist (and are not in forbidden folder by hash)
+        # Check target files exist (and are not in forbidden folder by hash)
         missing = []
-        for bn in standard_basenames:
+        for bn in standard_basenames[:max_slots]:
             path = images_dir / bn
             if not path.exists() or path.stat().st_size < MIN_IMAGE_BYTES:
                 missing.append(bn)
@@ -2279,10 +2335,12 @@ def validate_item_images_format(
                     ),
                 )
 
-        if len(hashes) == 4 and len(set(hashes)) < 4:
+        if len(hashes) == max_slots and len(set(hashes)) < max_slots:
             errors.append(
-                "{} item {} ({!r}): duplicate images within item (need 4 "
-                "distinct images per item)".format(guide_name, i, name),
+                "{} item {} ({!r}): duplicate images within item (need {} "
+                "distinct images per item)".format(
+                    guide_name, i, name, max_slots,
+                ),
             )
 
     return len(errors) == 0, errors

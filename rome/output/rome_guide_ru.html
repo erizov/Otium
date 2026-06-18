@@ -13,7 +13,7 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
 .otium-logo { font-family: 'Cinzel', serif; font-size: 2.15rem;
   font-weight: 600; letter-spacing: 0.18em; margin-bottom: 0.85rem; }
 .otiump { margin: 0.42rem 0; line-height: 1.42; text-align: justify;
-  max-width: 38rem; font-size: 0.95rem; }
+  font-size: 0.95rem; }
 .guide-title { page-break-after: auto; margin-bottom: 0.55rem;
   page-break-inside: avoid; }
 .historical-reference { margin: 0.75rem 0 1.15rem;
@@ -63,22 +63,103 @@ ol.trip-stops a:hover { text-decoration: underline; }
 .heraldry-univ-caption { font-size: 0.52rem; line-height: 1.18;
   margin: 0.12rem 0 0; padding: 0 0.06rem; color: #252525;
   text-align: center; font-weight: 500; }
-.heraldry-motto { text-align: center; max-width: 18rem; margin: 0.18rem auto;
+.heraldry-motto { text-align: center; margin: 0.18rem auto;
   width: 100%; }
 .motto-line { font-family: 'Cinzel', serif; font-size: 1rem;
   margin: 0; color: #333; line-height: 1.35; }
 .guide-title h1.guide-title-main { font-family: 'Cinzel', serif;
   font-size: 2.35rem; margin-bottom: 0.5rem; font-weight: 600; }
 .lead { color: #444; font-size: 1.05rem; }
-.guide-toc { margin: 0.85rem 0 1.15rem; page-break-inside: avoid; }
-.guide-toc h2 { font-family: 'Cinzel', serif; font-size: 1.28rem;
-  font-weight: 600; margin: 0.4rem 0 0.55rem; }
+
+.guide-toc { page-break-before: always; break-before: page;
+  page-break-after: always; break-after: page;
+  margin: 0; padding: 0.2rem 0 0.45rem; page-break-inside: auto; }
+.guide-toc h2 { font-family: 'Cinzel', serif;
+  font-size: 1.28rem; font-weight: 600; margin: 0.4rem 0 0.55rem; }
 .guide-toc ol { margin: 0.35rem 0 0.65rem 1.25rem; padding: 0;
   columns: 2; column-gap: 1.5rem; }
 .guide-toc li { margin: 0.18rem 0; line-height: 1.35;
   font-size: 0.88rem; break-inside: avoid; }
-.guide-toc a { color: #1a5276; text-decoration: none; }
+.guide-toc a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.guide-toc a:hover { color: #0d3d56; }
 .guide-toc li.toc-item--sub { font-size: 0.82rem; margin-left: 0.35rem; }
+.toc-back { font-size: 0.78rem; margin: 0 0 0.35rem; text-align: right; }
+.toc-back a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.toc-back a:hover { color: #0d3d56; }
+.place, .historical-reference, .guide-primer, .guide-trip-plans {
+  scroll-margin-top: 1.25rem; }
+.historical-reference h2, .guide-primer h2, .guide-trip-plans h2,
+.chapter-head h2, .place-lead h3 { position: relative; }
+.guide-toc + .place, .guide-toc + .chapter-head {
+  page-break-before: avoid; break-before: avoid-page; }
+.place-lead { page-break-inside: avoid; break-inside: avoid-page;
+  page-break-after: auto; }
+.place-lead > h3 { page-break-after: avoid; break-after: avoid-page; }
+.place-lead > .place-meta { page-break-after: avoid; break-after: avoid-page; }
+
+.place-fig { page-break-inside: avoid; break-inside: avoid-page;
+  margin: 0.5rem 0 1rem; }
+.place-fig img {
+  page-break-inside: avoid; break-inside: avoid-page;
+  max-height: 48vh; width: auto; max-width: 100%;
+  object-fit: contain; margin-left: auto; margin-right: auto; }
+.place-fig--hi-res img { max-height: 52vh; }
+.place-fig--lo-res img { max-height: 30vh; }
+.place-pdf-fig-row {
+  display: flex; flex-direction: row; flex-wrap: wrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.45rem 0.55rem; margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row .place-fig {
+  flex: 1 1 30%; margin: 0; min-width: 26%; max-width: 100%; }
+.place-pdf-fig-row .place-fig img {
+  width: auto; max-width: 100%; height: auto; max-height: 44vh;
+  object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--pair {
+  flex-wrap: nowrap; justify-content: space-between;
+  align-items: flex-end; gap: 0.5rem 0.65rem; }
+.place-pdf-fig-row--pair .place-fig {
+  flex: 1 1 47%; min-width: 0; max-width: 50%;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--pair .place-fig img {
+  max-height: 44vh; object-fit: contain; }
+.place-pdf-fig-row--pair .place-fig--hi-res img { max-height: 52vh; }
+.place-pdf-fig-row--pair .place-fig--lo-res img { max-height: 26vh; }
+.place-pdf-fig-row--pair .place-fig--row-sized img,
+.place-pdf-fig-row--triple .place-fig--row-sized img,
+.place-pdf-fig-row--many .place-fig--row-sized img {
+  width: auto; max-width: 100%; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row .place-fig--row-sized.place-fig--hi-res img,
+.place-pdf-fig-row .place-fig--row-sized.place-fig--lo-res img {
+  max-height: unset; }
+.place-pdf-fig-rows-stack {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple {
+  display: flex; flex-direction: row; flex-wrap: nowrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.4rem 0.48rem; margin: 0;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--triple .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--triple .place-fig--hi-res img { max-height: 42vh; }
+.place-pdf-fig-row--triple .place-fig--lo-res img { max-height: 18vh; }
+.place-pdf-fig-row--many {
+  flex-wrap: nowrap; justify-content: center; align-items: flex-end;
+  gap: 0.35rem 0.42rem; }
+.place-pdf-fig-row--many .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--many .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+
+
 .place { margin-bottom: 2.2rem; page-break-inside: auto; }
 h3 { font-family: 'Cinzel', serif; font-size: 1.22rem; margin: 1.2rem 0 0.35rem;
   font-weight: 600; }
@@ -90,7 +171,6 @@ h4 { font-family: 'Cinzel', serif; font-size: 0.95rem; text-transform: uppercase
   color: #555; font-size: 0.95rem; margin: 0 0 0.5rem; font-style: italic; }
 .place-meta { font-size: 0.92rem; color: #353535; margin: 0 0 0.75rem;
   line-height: 1.4; }
-.place-fig { margin: 0.5rem 0 1rem; }
 img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
 .prose, .place-desc p { margin: 0.45rem 0; line-height: 1.5;
   text-align: justify; }
@@ -110,11 +190,14 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <figure class="heraldry-fig heraldry-coat-book" title="City emblem"><img src="../images/guide_coat_of_arms.svg" alt="City emblem"/></figure>
 <figure class="heraldry-fig heraldry-coat-book" title="Flag"><img src="../images/guide_flag.svg" alt="Flag"/></figure>
 </div></div><h1 class="guide-title-main">Rome</h1><p class="lead">Путеводитель. Объектов в этом выпуске: 40.</p></header>
+<nav class="guide-toc" id="guide-toc" aria-label="Содержание"><h2>Содержание</h2><ol><li class="toc-item"><a href="#guide-historical">Историческая справка</a></li><li class="toc-item"><a href="#guide-trips">Маршруты</a></li><li class="toc-item"><a href="#rome_albert_square_johnbright">Rome Albert Square Johnbright</a></li><li class="toc-item"><a href="#rome_italy">Rome Italy</a></li><li class="toc-item"><a href="#rome_moschea">Rome Moschea</a></li><li class="toc-item"><a href="#rome_rom">Rome Rom</a></li><li class="toc-item"><a href="#rome_san_giovanni_in_laterano">Rome San Giovanni In Laterano</a></li><li class="toc-item"><a href="#rome_via_appia">Аппиева дорога</a></li><li class="toc-item"><a href="#rome_arch_of_constantine">Арка Константина</a></li><li class="toc-item"><a href="#rome_basilica_san_clemente">Базилика Сан-Клементе</a></li><li class="toc-item"><a href="#rome_basilica_san_paolo_fuori">Базилика Святого Павла за стенами</a></li><li class="toc-item"><a href="#rome_st_peters_basilica">Базилика Святого Петра</a></li><li class="toc-item"><a href="#rome_basilica_santa_maria_maggiore">Базилика Святой Марии Маджоре</a></li><li class="toc-item"><a href="#rome_villa_borghese">Вилла Боргезе</a></li><li class="toc-item"><a href="#rome_villa_sciarra">Вилла Скиарра</a></li><li class="toc-item"><a href="#rome_villa_farnesina">Вилла Фарнезина</a></li><li class="toc-item"><a href="#rome_spanish_steps">Испанская лестница</a></li><li class="toc-item"><a href="#rome_campo_de_fiori">Кампо де&#x27; Фьори</a></li><li class="toc-item"><a href="#rome_capitoline_hill">Капитолийский холм</a></li><li class="toc-item"><a href="#rome_castel_sant_angelo">Кастель-Сант&#x27;Анджело</a></li><li class="toc-item"><a href="#rome_colosseum">Колизей</a></li><li class="toc-item"><a href="#rome_trajan_column">Колонна Траяна</a></li><li class="toc-item"><a href="#rome_capuchin_crypt_rome">Крипта капуцинов</a></li><li class="toc-item"><a href="#rome_largo_torre_argentina">Ларго ди Торре Аргентина</a></li><li class="toc-item"><a href="#rome_mausoleum_of_augustus">Мавзолей Августа</a></li><li class="toc-item"><a href="#rome_testaccio_monte">Монте Тестаччо</a></li><li class="toc-item"><a href="#rome_vittoriano">Монумент Виктора Эммануила II</a></li><li class="toc-item"><a href="#rome_ara_pacis_museum">Музей Ара Пацис</a></li><li class="toc-item"><a href="#rome_park_villa_borghese_lake">Озеро Виллы Боргезе</a></li><li class="toc-item"><a href="#rome_palazzo_barberini">Палаццо Барберини</a></li><li class="toc-item"><a href="#rome_pantheon">Пантеон</a></li><li class="toc-item"><a href="#rome_pyramid_of_cestius">Пирамида Цестия</a></li><li class="toc-item"><a href="#rome_ponte_sant_angelo">Понте-Сант&#x27;Анджело</a></li><li class="toc-item"><a href="#rome_jewish_ghetto_portico_octavia">Портико д&#x27;Октавио</a></li><li class="toc-item"><a href="#rome_piazza_del_campidoglio">Пьяцца дель Капитолий</a></li><li class="toc-item"><a href="#rome_piazza_del_popolo">Пьяцца дель Пополо</a></li><li class="toc-item"><a href="#rome_piazza_navona">Пьяцца Навона</a></li><li class="toc-item"><a href="#rome_roman_forum">Римский форум</a></li><li class="toc-item"><a href="#rome_santa_maria_trastevere">Санта-Мария в Трастевере</a></li><li class="toc-item"><a href="#rome_baths_of_caracalla">Термы Каракаллы</a></li><li class="toc-item"><a href="#rome_bocca_della_verita">Уста Истины</a></li><li class="toc-item"><a href="#rome_trevi_fountain">Фонтан Треви</a></li></ol></nav>
 <section class="historical-reference" id="guide-historical" aria-label="Историческая справка"><h2>Историческая справка</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 <p class="prose">Рим — столица Италии, бывшая столица Римской империи и центр католического мира.</p>
 <p class="prose">Слои античности, раннего христианства, Ренессанса и барокко соседствуют с XX веком. Ватикан, форумы и фонтаны Треви — часть города-музея; Рим остаётся узлом политики, туризма и кулинарии.</p>
 <p class="prose">Объединение Италии перенесло столицу в Рим; Mussolini оставил монументальный след. После 1945 года город рос туристически и демографически; Ватикан и Италия сосуществуют в одном ландшафте памятников мирового значения.</p></section>
 <section class="guide-trip-plans" id="guide-trips" aria-label="Маршруты"><h2>Маршруты</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 <article class="trip-plan" id="trip-1d"><h3>Один день</h3>
 <p class="prose">Компактный маршрут по главным точкам путеводителя с минимальным возвратом назад пешком.</p>
 <ol class="trip-stops"><li><a href="#rome_via_appia">Аппиева дорога</a> (~75мин)</li>
@@ -125,336 +208,566 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <li><a href="#rome_arch_of_constantine">Арка Константина</a> (~75мин)</li></ol></article>
 <article class="trip-plan" id="trip-3d1"><h3>Три дня — день 1</h3>
 <p class="prose">День 1 — центральный кластер.</p>
-<ol class="trip-stops"><li><a href="#rome_ara_pacis_museum">Музей Ара Пацис</a> (~75мин)</li>
-<li><a href="#rome_mausoleum_of_augustus">Мавзолей Августа</a> (~75мин)</li>
-<li><a href="#rome_piazza_del_popolo">Пьяцца дель Пополо</a> (~75мин)</li>
-<li><a href="#rome_spanish_steps">Испанская лестница</a> (~75мин)</li>
-<li><a href="#rome_capuchin_crypt_rome">Крипта капуцинов</a> (~75мин)</li></ol></article>
+<ol class="trip-stops"><li><a href="#rome_st_peters_basilica">Базилика Святого Петра</a> (~75мин)</li>
+<li><a href="#rome_castel_sant_angelo">Кастель-Сант&#x27;Анджело</a> (~75мин)</li>
+<li><a href="#rome_ponte_sant_angelo">Понте-Сант&#x27;Анджело</a> (~75мин)</li>
+<li><a href="#rome_piazza_navona">Пьяцца Навона</a> (~75мин)</li>
+<li><a href="#rome_pantheon">Пантеон</a> (~75мин)</li></ol></article>
 <article class="trip-plan" id="trip-3d2"><h3>Три дня — день 2</h3>
 <p class="prose">День 2 — следующая группа районов.</p>
 <ol class="trip-stops"><li><a href="#rome_colosseum">Колизей</a> (~75мин)</li>
 <li><a href="#rome_basilica_san_clemente">Базилика Сан-Клементе</a> (~75мин)</li>
 <li><a href="#rome_basilica_santa_maria_maggiore">Базилика Святой Марии Маджоре</a> (~75мин)</li>
 <li><a href="#rome_trajan_column">Колонна Траяна</a> (~75мин)</li>
-<li><a href="#rome_bocca_della_verita">Уста Истины</a> (~75мин)</li></ol></article>
+<li><a href="#rome_ara_pacis_museum">Музей Ара Пацис</a> (~75мин)</li></ol></article>
 <article class="trip-plan" id="trip-3d3"><h3>Три дня — день 3</h3>
 <p class="prose">День 3 — оставшиеся близкие объекты.</p>
-<ol class="trip-stops"><li><a href="#rome_campo_de_fiori">Кампо де&#x27; Фьори</a> (~75мин)</li>
+<ol class="trip-stops"><li><a href="#rome_bocca_della_verita">Уста Истины</a> (~75мин)</li>
+<li><a href="#rome_campo_de_fiori">Кампо де&#x27; Фьори</a> (~75мин)</li>
 <li><a href="#rome_capitoline_hill">Капитолийский холм</a> (~75мин)</li>
-<li><a href="#rome_castel_sant_angelo">Кастель-Сант&#x27;Анджело</a> (~75мин)</li>
-<li><a href="#rome_jewish_ghetto_portico_octavia">Портико д&#x27;Октавио</a> (~75мин)</li>
-<li><a href="#rome_largo_torre_argentina">Ларго ди Торре Аргентина</a> (~75мин)</li></ol></article></section>
-<nav class="guide-toc" aria-label="Содержание"><h2>Содержание</h2><ol><li class="toc-item"><a href="#guide-historical">Историческая справка</a></li><li class="toc-item"><a href="#guide-trips">Маршруты</a></li><li class="toc-item"><a href="#rome_pdfband_3_cb3ed22e">Albert-Square-JohnBright</a></li><li class="toc-item"><a href="#rome_via_appia">Аппиева дорога</a></li><li class="toc-item"><a href="#rome_ara_pacis_museum">Музей Ара Пацис</a></li><li class="toc-item"><a href="#rome_arch_of_constantine">Арка Константина</a></li><li class="toc-item"><a href="#rome_basilica_san_paolo_fuori">Базилика Святого Павла за стенами</a></li><li class="toc-item"><a href="#rome_basilica_san_clemente">Базилика Сан-Клементе</a></li><li class="toc-item"><a href="#rome_basilica_santa_maria_maggiore">Базилика Святой Марии Маджоре</a></li><li class="toc-item"><a href="#rome_baths_of_caracalla">Термы Каракаллы</a></li><li class="toc-item"><a href="#rome_campo_de_fiori">Кампо де&#x27; Фьори</a></li><li class="toc-item"><a href="#rome_capitoline_hill">Капитолийский холм</a></li><li class="toc-item"><a href="#rome_capuchin_crypt_rome">Крипта капуцинов</a></li><li class="toc-item"><a href="#rome_castel_sant_angelo">Кастель-Сант&#x27;Анджело</a></li><li class="toc-item"><a href="#rome_colosseum">Колизей</a></li><li class="toc-item"><a href="#rome_largo_torre_argentina">Ларго ди Торре Аргентина</a></li><li class="toc-item"><a href="#rome_mausoleum_of_augustus">Мавзолей Августа</a></li><li class="toc-item"><a href="#rome_testaccio_monte">Монте Тестаччо</a></li><li class="toc-item"><a href="#rome_pdfband_2_2f129e05">Moschea</a></li><li class="toc-item"><a href="#rome_bocca_della_verita">Уста Истины</a></li><li class="toc-item"><a href="#rome_palazzo_barberini">Палаццо Барберини</a></li><li class="toc-item"><a href="#rome_pdfband_9_c17302d7">Rom</a></li><li class="toc-item"><a href="#rome_pantheon">Пантеон</a></li><li class="toc-item"><a href="#rome_piazza_del_campidoglio">Пьяцца дель Капитолий</a></li><li class="toc-item"><a href="#rome_piazza_del_popolo">Пьяцца дель Пополо</a></li><li class="toc-item"><a href="#rome_piazza_navona">Пьяцца Навона</a></li><li class="toc-item"><a href="#rome_ponte_sant_angelo">Понте-Сант&#x27;Анджело</a></li><li class="toc-item"><a href="#rome_jewish_ghetto_portico_octavia">Портико д&#x27;Октавио</a></li><li class="toc-item"><a href="#rome_pyramid_of_cestius">Пирамида Цестия</a></li><li class="toc-item"><a href="#rome_roman_forum">Римский форум</a></li><li class="toc-item"><a href="#rome_pdfband_1_da829d8c">Italy</a></li><li class="toc-item"><a href="#rome_pdfband_0_01b7073a">San Giovanni in Laterano</a></li><li class="toc-item"><a href="#rome_santa_maria_trastevere">Санта-Мария в Трастевере</a></li><li class="toc-item"><a href="#rome_spanish_steps">Испанская лестница</a></li><li class="toc-item"><a href="#rome_st_peters_basilica">Базилика Святого Петра</a></li><li class="toc-item"><a href="#rome_trajan_column">Колонна Траяна</a></li><li class="toc-item"><a href="#rome_trevi_fountain">Фонтан Треви</a></li><li class="toc-item"><a href="#rome_vittoriano">Монумент Виктора Эммануила II</a></li><li class="toc-item"><a href="#rome_villa_borghese">Вилла Боргезе</a></li><li class="toc-item"><a href="#rome_park_villa_borghese_lake">Озеро Виллы Боргезе</a></li><li class="toc-item"><a href="#rome_villa_farnesina">Вилла Фарнезина</a></li><li class="toc-item"><a href="#rome_villa_sciarra">Вилла Скиарра</a></li></ol></nav>
-<section class="place" id="rome_pdfband_3_cb3ed22e">
-<h3>Albert-Square-JohnBright</h3>
+<li><a href="#rome_capuchin_crypt_rome">Крипта капуцинов</a> (~75мин)</li>
+<li><a href="#rome_jewish_ghetto_portico_octavia">Портико д&#x27;Октавио</a> (~75мин)</li></ol></article></section>
+<section class="place" id="rome_albert_square_johnbright">
+<div class="place-lead">
+<h3>Rome Albert Square Johnbright</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
+<p class="place-meta">Адрес: See official visitor information.</p>
+<figure class="place-fig place-fig--hi-res"><img src="../images/rome_albert_square_johnbright.jpg" alt="Rome Albert Square Johnbright" width="1067" height="1600"/></figure>
+</div>
+</section>
+<section class="place" id="rome_italy">
+<div class="place-lead">
+<h3>Rome Italy</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<figure class="place-fig"><img src="../images/rome_pdfband_3_cb3ed22e.jpg" alt="Albert-Square-JohnBright"/></figure>
+<p class="place-meta">Адрес: See official visitor information.</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_italy.jpg" alt="Rome Italy" width="1280" height="997" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_pdfband_1_da829d8c_b.jpg" alt="Rome Italy — вид 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Italia [iˈtaːlja]), официальное название — Италья́нская Респу́блика (итал. Repubblica Italiana [reˈpubːlika itaˈljaːna]) — государство в Южной Европе, в центре Средиземноморья. Входит в Европейский союз и НАТО с момента их создания, является третьей по величине экономикой еврозоны.</p></div>
+</section>
+<section class="place" id="rome_moschea">
+<div class="place-lead">
+<h3>Rome Moschea</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: See official visitor information.</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_moschea.jpg" alt="Rome Moschea" width="1280" height="960" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_moschea_b.jpg" alt="Rome Moschea — вид 2" width="330" height="247" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+</section>
+<section class="place" id="rome_rom">
+<div class="place-lead">
+<h3>Rome Rom</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: See official visitor information.</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_rom.jpg" alt="Rome Rom" width="1280" height="865" style="height: 312px; max-height: 312px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_pdfband_9_c17302d7_b.jpg" alt="Rome Rom — вид 2" width="330" height="247" style="height: 312px; max-height: 312px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+</section>
+<section class="place" id="rome_san_giovanni_in_laterano">
+<div class="place-lead">
+<h3>Rome San Giovanni In Laterano</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: See official visitor information.</p>
+<figure class="place-fig place-fig--hi-res"><img src="../images/rome_san_giovanni_in_laterano.jpg" alt="Rome San Giovanni In Laterano" width="1280" height="959"/></figure>
+</div>
 </section>
 <section class="place" id="rome_via_appia">
+<div class="place-lead">
 <h3>Аппиева дорога</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/rome_via_appia.jpg" alt="Аппиева дорога"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_via_appia.jpg" alt="Аппиева дорога" width="1280" height="836" style="height: 301px; max-height: 301px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_via_appia_b.jpg" alt="Аппиева дорога — вид 2" width="330" height="247" style="height: 301px; max-height: 301px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Аппиева дорога — одна из старейших и самых известных древних дорог в Риме, датируемая IV веком до нашей эры. Изначально построенная как военная дорога, соединяющая Рим с Бриндизи на адриатическом побережье, она впоследствии стала важным торговым маршрутом и символом римской имперской власти. Он простирается примерно на 150 миль (240 км), от Рима до Бриндизи. Его название происходит от &#x27;via Appia&#x27;, что означает &#x27;Дорога Аппия&#x27;. Многие выдающиеся личности, включая Юлия Цезаря и Ганнибала, путешествовали по этому маршруту. Остатки древних сооружений, таких как гробницы и виллы, можно увидеть и сегодня. В современное время части Аппиевой дороги были преобразованы в живописные пешеходные маршруты.</p>
 <p class="prose">Построенная Аппием Клавдием Цекусом около 312 года до нашей эры, Аппиева дорога изначально была предназначена для военных нужд, но вскоре превратилась в жизненно важную артерию для торговли и коммуникации по всей Италии. Со временем она стала грандиозной монументальной дорогой, обрамленной гробницами, виллами и памятниками, отражающими богатство и влияние правящего класса Рима. Сегодня Аппиева дорога служит историческим напоминанием о былой славе Рима и его неугасимом наследии как центра культуры и торговли.</p></div>
 </section>
-<section class="place" id="rome_ara_pacis_museum">
-<h3>Музей Ара Пацис</h3>
-
-<p class="place-meta">Период: 2006</p>
-<figure class="place-fig"><img src="../images/rome_ara_pacis_museum.jpg" alt="Музей Ара Пацис"/></figure>
-<div class="place-desc"><p class="prose">Музей Ара Пактис — это современное архитектурное чудо, в котором хранится одно из самых значительных археологических сокровищ Рима — Алтарь мира. Расположенный на берегу реки Тибр, он демонстрирует древнеримские артефакты и дает представление о богатом историческом наследии города. В музее находятся фрагменты оригинального Алтаря Мира, датируемые временем императора Августа. Музей отличается инновационными дизайнерскими элементами, такими как естественный свет, проникающий через световые люки, что улучшает展示 артефактов. Это является свидетельством слияния классических и современных архитектурных стилей. Экспонаты включают скульптуры, рельефы и фрески, изображающие сцены из римской жизни и мифологии. Расположенный рядом с Палатинским холмом и рекой Тибр, этот объект предлагает живописные виды на исторический центр Рима.</p>
-<p class="prose">Построенный в 13 году до нашей эры в честь мира при правлении Августа, оригинальный алтарь был обнаружен во время раскопок в начале 20 века. Музей открылся в 2006 году, сочетая древние руины с современными архитектурными решениями, разработанными Ричардом Мейером, объединяя классические элементы с современными эстетическими подходами. Посещение музея Ара Паксис позволяет посетителям firsthand ощутить историю Рима через его сохранившиеся артефакты и великолепную архитектуру.</p></div>
-</section>
 <section class="place" id="rome_arch_of_constantine">
+<div class="place-lead">
 <h3>Арка Константина</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/rome_arch_of_constantine.jpg" alt="Арка Константина"/></figure>
+<p class="place-meta">Адрес: Beside Colosseum</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_arch_of_constantine.jpg" alt="Арка Константина" width="1280" height="960" style="height: 319px; max-height: 319px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_arch_of_constantine_b.jpg" alt="Арка Константина — вид 2" width="330" height="228" style="height: 319px; max-height: 319px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Арка Константина — это монументальная триумфальная арка, расположенная в начале Виа Триумфалис, посвященная победе императора Константина над Максенцием в битве при Милвийском мосту в 312 году нашей эры. Построенный во время правления императора Константина I. Состоит из трех арок, при этом центральная арка больше боковых. Особенности включают сложные мраморные фризы и рельефы, изображающие значимые моменты из римской истории. Расположен рядом с Колизеем и Палатином, что делает его легко доступным в самом сердце исторического центра Рима. Символизирует начало Виа Триумфалис, маршрута, используемого для триумфальных процессий.</p>
 <p class="prose">Построенная около 315 года н.э. в честь решающей победы императора Константина, Арка Константина была возведена путем сочетания элементов из более ранних римских памятников и храмов. Она является свидетельством слияния классической архитектуры с христианской символикой, включая рельефы, изображающие сцены как из языческих, так и из христианских нарративов. Обязательная к посещению достопримечательность благодаря своему историческому значению и архитектурной изобретательности, Арка Константина предлагает уникальный взгляд на переход древнего Рима от язычества к христианству.</p></div>
 </section>
-<section class="place" id="rome_basilica_san_paolo_fuori">
-<h3>Базилика Святого Павла за стенами</h3>
-
-
-<figure class="place-fig"><img src="../images/rome_basilica_san_paolo_fuori.jpg" alt="Базилика Святого Павла за стенами"/></figure>
-<div class="place-desc"><p class="prose">Базилика Святого Павла за стенами — это величественная римская базилика, расположенная за древними городскими стенами, посвященная Святому Павлу Апостолу. Это одно из самых значительных христианских мест Рима и свидетельство средневековой архитектуры. Он расположен за пределами Аврелианских стен, что отражает его первоначальное назначение как места захоронения. Базилика претерпела несколько ремонтов на протяжении веков, с примечательными реставрациями, завершенными в 17-м и 19-м веках. Его интерьер украшен впечатляющими мозаиками и фресками, включая работы художников Ренессанса, таких как Рафаэль и Перин дель Вага. Считается, что останки Святого Павла похоронены под главным алтарем, что делает это место священным для паломников. Базилика также хранит реликвии святых Лукии и Стефана.</p>
-<p class="prose">Построенная в IV веке нашей эры императором Константином, базилика изначально была возведена как мавзолей для святого Павла. Со временем она превратилась в церковь и стала одной из четырех главных папских базилик в Риме. Ее дизайн отражает как раннехристианский, так и позднеантичный архитектурные стили, демонстрируя переход между языческими и христианскими влияниями. Эта базилика важна своей исторической значимостью и архитектурной ценностью, предлагая посетителям возможность заглянуть в ранние дни христианства в Риме.</p></div>
-</section>
 <section class="place" id="rome_basilica_san_clemente">
+<div class="place-lead">
 <h3>Базилика Сан-Клементе</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/rome_basilica_san_clemente.jpg" alt="Базилика Сан-Клементе"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_basilica_san_clemente.jpg" alt="Базилика Сан-Клементе" width="1200" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_basilica_san_clemente_b.jpg" alt="Базилика Сан-Клементе — вид 2" width="330" height="447" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Базилика Сан-Клементе — это замечательный подземный комплекс под историческим центром Рима. Он сочетает в себе слои древних руин, средневековых сооружений и ренессансного искусства, предлагая посетителям уникальный взгляд на богатую историю города. Он включает три различных уровня: современная церковь на поверхности, средневековая церковь ниже и обширные древнеримские руины под ними. Нижний уровень содержит самую старую часть сооружения, датируемую 4-м веком. Значительные достопримечательности включают потрясающие мозаики и фрески из различных эпох, которые отражают разные художественные стили. Археологические раскопки выявили доказательства существования римской домус (дома), бань и катакомб. Базилика была объявлена малой базиликой Католической Церковью.</p>
 <p class="prose">Построенная на протяжении нескольких столетий, базилика изначально была возведена как римский дом около 4 века нашей эры. Со временем она стала христианской церковью, посвященной Святому Клименту, одному из первых пап. Место претерпело значительные реконструкции в Средние века и позже служило приходской церковью до начала 20 века. Сегодня ее подземные уровни демонстрируют сложные мозаики, фрески и археологические находки, которые дают представление о развитии Рима на протяжении веков. Посещение Базилики Сан-Клементе позволяет путешественникам исследовать увлекательное сочетание исторических периодов, включая римские, византийские и средневековые влияния.</p></div>
 </section>
+<section class="place" id="rome_basilica_san_paolo_fuori">
+<div class="place-lead">
+<h3>Базилика Святого Павла за стенами</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_basilica_san_paolo_fuori.jpg" alt="Базилика Святого Павла за стенами" width="1280" height="844" style="height: 304px; max-height: 304px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_basilica_san_paolo_fuori_b.jpg" alt="Базилика Святого Павла за стенами — вид 2" width="330" height="247" style="height: 304px; max-height: 304px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Базилика Святого Павла за стенами — это величественная римская базилика, расположенная за древними городскими стенами, посвященная Святому Павлу Апостолу. Это одно из самых значительных христианских мест Рима и свидетельство средневековой архитектуры. Он расположен за пределами Аврелианских стен, что отражает его первоначальное назначение как места захоронения. Базилика претерпела несколько ремонтов на протяжении веков, с примечательными реставрациями, завершенными в 17-м и 19-м веках. Его интерьер украшен впечатляющими мозаиками и фресками, включая работы художников Ренессанса, таких как Рафаэль и Перин дель Вага. Считается, что останки Святого Павла похоронены под главным алтарем, что делает это место священным для паломников. Базилика также хранит реликвии святых Лукии и Стефана.</p>
+<p class="prose">Построенная в IV веке нашей эры императором Константином, базилика изначально была возведена как мавзолей для святого Павла. Со временем она превратилась в церковь и стала одной из четырех главных папских базилик в Риме. Ее дизайн отражает как раннехристианский, так и позднеантичный архитектурные стили, демонстрируя переход между языческими и христианскими влияниями. Эта базилика важна своей исторической значимостью и архитектурной ценностью, предлагая посетителям возможность заглянуть в ранние дни христианства в Риме.</p></div>
+</section>
+<section class="place" id="rome_st_peters_basilica">
+<div class="place-lead">
+<h3>Базилика Святого Петра</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Vatican City (Saint Peter&#x27;s Square)</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_st_peters_basilica.jpg" alt="Базилика Святого Петра" width="1280" height="896" style="height: 240px; max-height: 240px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_st_peters_basilica_b.jpg" alt="Базилика Святого Петра — вид 2" width="330" height="172" style="height: 240px; max-height: 240px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Сидя величественно в центре Ватикана, базилика Святого Петра является одной из самых знаковых и почитаемых христианских построек в мире. Ее возвышающийся купол, спроектированный Микеланджело, доминирует над римским горизонтом. Базилика может вместить до 60 000 человек во время мессы. Он включает четыре массивные колонны, известные как «четыре столпа веры». Его интерьер содержит многочисленные произведения искусства известных художников, таких как Рафаэль и Караваджо. Купол, завершенный в 1626 году, является крупнейшим кирпичным куполом в мире. Папа Бенедикт XVI провел свою последнюю Пасхальную мессу здесь перед отставкой.</p>
+<p class="prose">Построенная на месте, где, как считалось, был похоронен Святой Петр, строительство началось при папе Юлии II в 1506 году и продолжалось более века. Базилика сочетает элементы архитектуры Ренессанса и Барокко, демонстрируя художественное великолепие таких мастеров, как Бернини и Микеланджело. Обязательное место для посещения для всех, кто интересуется искусством, архитектурой и католической историей, базилика Святого Петра предлагает захватывающие интерьеры и потрясающие виды с её высокой купольной конструкции.</p></div>
+</section>
 <section class="place" id="rome_basilica_santa_maria_maggiore">
+<div class="place-lead">
 <h3>Базилика Святой Марии Маджоре</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/rome_basilica_santa_maria_maggiore.jpg" alt="Базилика Святой Марии Маджоре"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_basilica_santa_maria_maggiore.jpg" alt="Базилика Святой Марии Маджоре" width="1280" height="1131" style="height: 408px; max-height: 408px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_basilica_santa_maria_maggiore_b.jpg" alt="Базилика Святой Марии Маджоре — вид 2" width="330" height="330" style="height: 408px; max-height: 408px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Доминируя над Пьяцца ди Санта Мария Маджоре, эта базилика является одной из самых знаковых достопримечательностей Рима и важным центром христианского паломничества. Считается одной из четырех главных папских базилик в Риме. Базилика украшена мозаиками, датируемыми V веком, которые изображают сцены из жизни Иисуса и Девы Марии. Его купол, спроектированный Браманте, примечателен своей восьмиугольной формой и характерным внешним видом. Санта-Мария-Маджоре также известна своим впечатляющим фасадом, украшенным скульптурами Бернини. Согласно легенде, базилика была построена на месте, где летом выпал снег, что указывало на божественное одобрение.</p>
 <p class="prose">Построенная между 432 и 439 годами нашей эры папой Сикстом III, базилика Святой Марии Маджоре изначально была возведена в честь явления Девы Марии святой Елене. На протяжении веков она многократно расширялась и восстанавливалась, включая значительные ремонты при папе Павле V в 17 веке. Базилика остается ключевым местом в римско-католической литургии и искусстве, храня важные религиозные реликвии и произведения искусства. Обязательное место для посещения из-за его исторической значимости, архитектурной красоты и духовной важности.</p></div>
 </section>
-<section class="place" id="rome_baths_of_caracalla">
-<h3>Термы Каракаллы</h3>
+<section class="place" id="rome_villa_borghese">
+<div class="place-lead">
+<h3>Вилла Боргезе</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Место: Pincian Hill / north of historic centre</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_villa_borghese.jpg" alt="Вилла Боргезе" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_villa_borghese_b.jpg" alt="Вилла Боргезе — вид 2" width="330" height="262" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Расположенный на северной окраине Рима, Вилла Боргезе является одним из самых известных городских парков Италии. Ее обширные площади предоставляют посетителям спокойное убежище от суеты городской жизни, предлагая живописные виды и тихие прогулочные дорожки. Здесь находится Галерея Боргезе, в которой собраны одни из лучших коллекций древнеримской скульптуры и барочной живописи в мире. Парк предлагает разнообразные ландшафты, включая формальные сады, лесистые участки и набережные у озера. Посетители могут наслаждаться выступлениями на открытом театре в летние месяцы. Его знаковый обелиск, известный как Египетский обелиск, prominently расположен в центральной площади парка. В дополнение к своим культурным достопримечательностям, Вилла Боргезе предлагает разнообразные виды активного отдыха, такие как велоспорт, бег и пикники.</p>
+<p class="prose">Изначально построенная папой Урбаном VIII Барберини в начале 17 века как частный сад для его семьи, Вилла Боргезе впоследствии стала частью обширных папских владений. Со временем она была расширена и преобразована в общественный парк под патронажем кардинала Сципиона Боргезе, который заказал множество скульптур и фонтанов для украшения её территории. Обязательное место для посещения как любителями искусства, так и энтузиастами природы, Вилла Боргезе демонстрирует шедевры таких художников, как Бернини и Канова.</p></div>
+</section>
+<section class="place" id="rome_villa_sciarra">
+<div class="place-lead">
+<h3>Вилла Скиарра</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/rome_baths_of_caracalla.jpg" alt="Термы Каракаллы"/></figure>
-<div class="place-desc"><p class="prose">Термы Каракаллы являются одними из крупнейших и лучше всего сохранившихся древнеримских банных комплексов, предлагая возможность заглянуть в роскошь и общественную жизнь императорского Рима. Построенные из травертина и мрамора, бани занимали площадь более 39 акров. Они были оснащены подогреваемой водой, поставляемой по акведукам, что обеспечивало комфорт для пользователей. Бани украшены сложными мозаиками и скульптурами, многие из которых были восстановлены и могут быть увидены сегодня. На пике своей популярности они обслуживали до 1,600 посетителей в день. Сегодня посетители могут исследовать руины и представить, каково было наслаждаться этими роскошными удобствами.</p>
-<p class="prose">Построенные во время правления императора Каракаллы около 212–216 годов н.э., эти бани были задуманы как центр для отдыха, общения и общественного здоровья. Они могли вмещать тысячи людей одновременно, демонстрируя передовые инженерные и архитектурные техники того времени. Комплекс включал в себя бассейны, сауны, тренажерные залы и роскошные украшения, отражающие грандиозный образ жизни римской элиты. Посещение Термы Каракаллы позволяет путешественникам ощутить величие древнеримской архитектуры и понять, как римляне жили, работали и развлекались.</p></div>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_villa_sciarra.jpg" alt="Вилла Скиарра" width="1280" height="821" style="height: 296px; max-height: 296px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_villa_sciarra_b.jpg" alt="Вилла Скиарра — вид 2" width="330" height="247" style="height: 296px; max-height: 296px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Расположенная на холме Янникуло, Вилла Щарра — это живописный парк, предлагающий панорамные виды на Рим и его знаковые достопримечательности. Она была изначально построена как частная вилла в конце 17 века кардиналом Пьетро Оттобони, который поручил архитектору Франческо де Санктис разработать её проект. Интерьер виллы украшен сложными фресками и декоративными элементами, характерными для эпохи Барокко. Он предлагает непревзойденные виды на реку Тибр и базилику Святого Петра. Вилла Скиарра проводит периодические культурные мероприятия и концерты в летние месяцы. На его территории находятсяFormal сады, цветочные клумбы и статуи, изображающие римских мифологических персонажей. Доступ к парку бесплатный и легко достижим на общественном транспорте.</p>
+<p class="prose">Построенная в конце 17 века для кардинала Пьетро Оттобони, Вилла Шарра с тех пор является выдающимся ориентиром. Архитектура виллы отражает барочный стиль с роскошными интерьерами и изысканными садами. Со временем она превратилась в общественный парк, открытый для посетителей, демонстрируя красивые фонтаны, скульптуры и спокойную атмосферу. Посетители приходят сюда, чтобы насладиться захватывающими видами Рима, отдохнуть среди ухоженных газонов и исследовать историческое значение этого места.</p></div>
+</section>
+<section class="place" id="rome_villa_farnesina">
+<div class="place-lead">
+<h3>Вилла Фарнезина</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_villa_farnesina.jpg" alt="Вилла Фарнезина" width="1280" height="1399" style="height: 161px; max-height: 161px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_villa_farnesina_b.jpg" alt="Вилла Фарнезина — вид 2" width="330" height="115" style="height: 161px; max-height: 161px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Расположенная на берегах реки Тибр, Вилла Фарнезина — это захватывающая вилла эпохи Ренессанса, известная своими роскошными фресками и великолепными интерьерами. Спроектированная архитектором Джулиано да Сангалло и оформленная такими художниками, как Россо Фиорентино и Пинтуриккьо, она была заказана кардиналом Алессандро Фарнезе в начале XVI века. Название виллы происходит от имени её владельца, кардинала Алессандро Фарнезе, который также стал папой Павлом III. В нем представлены фрески таких известных художников, как помощник Рафаэля Россо Фиорентино и Пинтуриккьо. Его архитектура сочетает элементы классического римского дизайна с современными ренессансными эстетиками. Сегодня посетители могут исследовать как внешние сады, так и внутренние комнаты, наполненные историческими артефактами и картинами. Расположенная в легкой доступности от исторического центра Рима, вилла предлагает спокойное убежище среди шумного города.</p>
+<p class="prose">Построенная около 1510 года, Вилла Фарнезина служила роскошной резиденцией для кардинала Алессандро Фарнезе, позже папы Павла III. Интерьер виллы украшен одними из самых изысканных образцов итальянского ренессансного искусства, включая фрески, изображающие мифологические сцены и аллегории, написанные выдающимися художниками того времени. Посетители приходят в Виллу Фарнезина, чтобы восхититься её потрясающими украшениями и богатым художественным наследием итальянского Ренессанса.</p></div>
+</section>
+<section class="place" id="rome_spanish_steps">
+<div class="place-lead">
+<h3>Испанская лестница</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Piazza di Spagna | Период: 1723–1726</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_spanish_steps.jpg" alt="Испанская лестница" width="1067" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_spanish_steps_b.jpg" alt="Испанская лестница — вид 2" width="330" height="488" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Испанская лестница — это самая знаковая лестница Рима, потрясающе элегантный памятник, который соединяет Пьяцца ди Спанья с церковью Тринита деи Монти выше. Состоит из 135 ступеней, ведущих к церкви Тринита́ деи Монти. Названный в честь расположенного поблизости Испанского посольства. Сделанный в барочном стиле, отражающем грандиозную архитектуру, типичную для Рима. Расположенный в конце Виа дель Бабуино, улицы, известной своими антикварными магазинами и кафе. Одно из самых фотографируемых мест в Риме.</p>
+<p class="prose">Построенные в период с 1723 по 1726 год во время правления папы Бенедикта XIII, эти ступени были спроектированы архитектором Франческо де Санктисом, чтобы соединить оживленную площадь внизу с спокойной церковью наверху. Ступени стали известны как место встречи художников, интеллектуалов и туристов, увековеченные в картинах и фильмах на протяжении многих лет. Обязательная к посещению достопримечательность благодаря своей красоте, культурному значению и романтической атмосфере.</p></div>
 </section>
 <section class="place" id="rome_campo_de_fiori">
+<div class="place-lead">
 <h3>Кампо де&#x27; Фьори</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/rome_campo_de_fiori.jpg" alt="Кампо де&#x27; Фьори"/></figure>
+<figure class="place-fig place-fig--hi-res"><img src="../images/rome_campo_de_fiori.jpg" alt="Кампо де&#x27; Фьори" width="1280" height="897"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Кампо-деи-Фиори — это яркая площадь в Риме, известная своим оживленным утренним рынком и историческим значением. Расположенная рядом с Университетом Рима, она является центром интеллектуального обмена и политических собраний с средневековых времен. Утренний рынок предлагает свежие продукты, цветы и местные ремесленные изделия. Это один из старейших рынков в Риме, который восходит к эпохе Ренессанса. Рядом стоит статуя, посвященная мученичеству Джордано Бруно. Площадь окружена элегантными барочными зданиями и узкими улочками. В выходные дни рынок расширяется за счет дополнительных палаток, продающих сувениры и ремесленные изделия.</p>
 <p class="prose">Изначально названная в честь римского дворянина, Кампо де&#x27; Фьори когда-то была болотистой местностью, использовавшейся как свалка. Со временем она стала популярным местом встреч для ученых и художников. В 16 веке она приобрела известность как рынок, на котором ежедневно проходила ярмарка цветов и овощей, продолжающая привлекать посетителей и сегодня. Площадь также имеет историческое значение из-за казни Джордано Бруно, философа и астронома, который был сожжен на костре здесь в 1600 году. Посетители приходят на Кампо-деи-Фиори, чтобы насладиться шумным рынком, ощутить живую атмосферу и поразмышлять о его богатой истории.</p></div>
 </section>
 <section class="place" id="rome_capitoline_hill">
+<div class="place-lead">
 <h3>Капитолийский холм</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/rome_capitoline_hill.jpg" alt="Капитолийский холм"/></figure>
+<p class="place-meta">Адрес: Campidoglio</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_capitoline_hill.jpg" alt="Капитолийский холм" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_capitoline_hill_b.jpg" alt="Капитолийский холм — вид 2" width="330" height="244" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Высоко над историческим центром Рима возвышается Капитолийский холм, один из семи холмов города и ключевой символ древнеримской власти. Изначально здесь располагались храмы, посвященные Юпитеру, Юноне и Минерве, что отражает его роль как духовного сердца Римской империи. Этот холм является частью семи легендарных холмов Рима, каждый из которых имеет свое историческое значение. Он служил центром римской гражданской жизни и религии на протяжении веков. Сегодня Капитолийские музеи демонстрируют артефакты, относящиеся к периодам Республики и Империи. Значимые скульптуры включают &#x27;Волчица Рима&#x27;, которая символизирует основание Рима Ромулом и Ремом. Его расположение предлагает панорамные виды на город, предоставляя уникальную перспективу на планировку Рима.</p>
 <p class="prose">Основанный в ранние дни Рима, Капитолийский холм стал местом расположения важных религиозных и политических сооружений. Капитолийские музеи, сейчас находящиеся здесь, хранят некоторые из самых значительных артефактов древнего Рима, включая знаменитую скульптуру &#x27;Бык из Каристоса&#x27;. Его значимость в римской мифологии и истории делает его обязательным для посещения для всех, кто интересуется корнями западной цивилизации. Посетите Капитолийский холм, чтобы исследовать место рождения римской религии и политики, и своими глазами увидеть искусство и архитектуру, которые сформировали западную культуру.</p></div>
 </section>
-<section class="place" id="rome_capuchin_crypt_rome">
-<h3>Крипта капуцинов</h3>
-
-<p class="place-meta">Период: 1629–1677</p>
-<figure class="place-fig"><img src="../images/rome_capuchin_crypt_rome.jpg" alt="Крипта капуцинов"/></figure>
-<div class="place-desc"><p class="prose">Крипта капуцинов — это уникальная и мрачная подземная часовня, расположенная под церковью Санта-Мария делла Кончезионе деи Каппучини в Риме. Она содержит скелетные останки более 4000 монахов, тщательно расположенные в сложные узоры и сцены. Он содержит примерно 4 000 скелетов, расположенных в сложных узорах. Стены крипты украшены костяными люстрами, скамейками и даже большим алтарем, покрытым черепами. Каждое оформление представляет собой различные темы, такие как воскресение, день суда и преходящесть земного существования. Часовня является частью более крупного комплекса, который включает в себя церковь над ней, служащую традиционным католическим местом поклонения. Крипта изначально предназначалась для религиозного обучения и размышлений о смертности.</p>
-<p class="prose">Построенная между 1629 и 1677 годами Орденом Братьев Миноритов-Капуцинов, крипта была задумана как напоминание о смертности и преходящей природе жизни. Кости были эксгумированы из различных капуцинских кладбищ и креативно расположены для формирования художественных композиций, включая аллегорические сцены, изображающие этапы жизни и смерти. Посещение Крипты капуцинов предоставляет редкую возможность увидеть один из самых необычных и исторически значимых примеров погребального искусства в Европе.</p></div>
-</section>
 <section class="place" id="rome_castel_sant_angelo">
+<div class="place-lead">
 <h3>Кастель-Сант&#x27;Анджело</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/rome_castel_sant_angelo.jpg" alt="Кастель-Сант&#x27;Анджело"/></figure>
+<p class="place-meta">Адрес: Lungotevere Castello</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_castel_sant_angelo.jpg" alt="Кастель-Сант&#x27;Анджело" width="1280" height="811" style="height: 273px; max-height: 273px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_castel_sant_angelo_b.jpg" alt="Кастель-Сант&#x27;Анджело — вид 2" width="330" height="195" style="height: 273px; max-height: 273px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Расположенный на берегах реки Тибр, Кастель-Сант-Анджело изначально был построен как мавзолей для императора Адриана во 2 веке нашей эры. Со временем он превратился в крепость, а позже стал папской резиденцией. Это один из лучших сохранившихся примеров римской архитектуры, датируемый 2 веком. Замок состоит из пяти высоких цилиндрических секций, которые символизируют Пять Ран Христовых. Во время Второй мировой войны фашистский режим Муссолини использовал его в качестве штаба, прежде чем был захвачен союзными силами. Сегодня посетители могут подняться на вершину, чтобы насладиться панорамными видами исторического центра Рима. Его дизайн оказал влияние на многие последующие укрепления по всей Европе.</p>
 <p class="prose">Построенный императором Адрианом около 139 года н.э. как место его погребения, это сооружение стало военной крепостью в Средние века. Впоследствии оно использовалось как тюрьма и замок папами, включая папу Николая V, который добавил оборонительные стены и башни. В 1527 году оно сыграло ключевую роль в защите Рима от атак войск Карла V. Обязательное место для посещения благодаря своей исторической значимости и потрясающим видам на реку Тибр и Ватикан.</p></div>
 </section>
 <section class="place" id="rome_colosseum">
+<div class="place-lead">
 <h3>Колизей</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/rome_colosseum.jpg" alt="Колизей"/></figure>
+<p class="place-meta">Адрес: Piazza del Colosseo, Rome</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_colosseum.jpg" alt="Колизей" width="1280" height="751" style="height: 271px; max-height: 271px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_colosseum_b.jpg" alt="Колизей — вид 2" width="330" height="194" style="height: 271px; max-height: 271px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Колизей, также известный как Флавиев амфитеатр, является одной из самых знаковых достопримечательностей Рима и свидетельством древнеримского инженерного мастерства. Построен между 70-80 годами н.э. Древние римляне называли его &#x27;Амфитеатр Флавия&#x27;. Здесь проводились такие мероприятия, как охота на животных, имитация морских сражений и казни. Сегодня он остается символом римской архитектуры и наследия. Работы по восстановлению продолжаются, чтобы сохранить его историческую целостность.</p>
 <p class="prose">Построенный в первом веке нашей эры при императоре Веспасиане, Колизей был предназначен для гладиаторских боев, публичных зрелищ и церемоний. Он мог вмещать до 50 000 зрителей и имел сложные гидравлические системы для поднятия животных и декораций. Его название происходит от близлежащего «Золотого дома» Нерона («Domus Aurea»), разговорно называемого «Колосс». Посетите Колизей, чтобы увидеть величие древнего Рима и понять его культурное значение.</p></div>
 </section>
+<section class="place" id="rome_trajan_column">
+<div class="place-lead">
+<h3>Колонна Траяна</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Trajan&#x27;s Forum</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_trajan_column.jpg" alt="Колонна Траяна" width="875" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--row-sized"><img src="../images/rome_trajan_column_b.jpg" alt="Колонна Траяна — вид 2" width="330" height="745" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Возвышаясь над Римским форумом, Колонна Траяна является величественным памятником военным победам императора Траяна и имперской славе Рима. Колонна имеет высоту примерно 30 метров и состоит из 23 спиральных уровней. Каждый уровень украшен детализированными барельефами, которые рассказывают историю кампаний Траяна против дакийцев. Он был построен из травертина и украшен скульптурными фигурами известных художников того времени. На вершине колонны находится бронзовая статуя самого императора Траяна. В основании колонны находится небольшой музей, демонстрирующий археологические находки, связанные со строительством и значением этого места.</p>
+<p class="prose">Построенная между 106 и 113 годами нашей эры во время правления императора Траяна, колонна увековечивает его завоевания в Дакии. На её мраморной поверхности вырезаны сложные рельефы, изображающие битвы, процессии и церемонии, предлагая яркую историческую запись экспансионистских амбиций древнего Рима. Посещение колонны Траяна позволяет путешественникам воочию увидеть художественные и архитектурные достижения древнего Рима, а также получить представление о военной мощи и культурной гордости империи.</p></div>
+</section>
+<section class="place" id="rome_capuchin_crypt_rome">
+<div class="place-lead">
+<h3>Крипта капуцинов</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Период: 1629–1677</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_capuchin_crypt_rome.jpg" alt="Крипта капуцинов" width="1280" height="934" style="height: 337px; max-height: 337px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_capuchin_crypt_rome_b.jpg" alt="Крипта капуцинов — вид 2" width="330" height="247" style="height: 337px; max-height: 337px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Крипта капуцинов — это уникальная и мрачная подземная часовня, расположенная под церковью Санта-Мария делла Кончезионе деи Каппучини в Риме. Она содержит скелетные останки более 4000 монахов, тщательно расположенные в сложные узоры и сцены. Он содержит примерно 4 000 скелетов, расположенных в сложных узорах. Стены крипты украшены костяными люстрами, скамейками и даже большим алтарем, покрытым черепами. Каждое оформление представляет собой различные темы, такие как воскресение, день суда и преходящесть земного существования. Часовня является частью более крупного комплекса, который включает в себя церковь над ней, служащую традиционным католическим местом поклонения. Крипта изначально предназначалась для религиозного обучения и размышлений о смертности.</p>
+<p class="prose">Построенная между 1629 и 1677 годами Орденом Братьев Миноритов-Капуцинов, крипта была задумана как напоминание о смертности и преходящей природе жизни. Кости были эксгумированы из различных капуцинских кладбищ и креативно расположены для формирования художественных композиций, включая аллегорические сцены, изображающие этапы жизни и смерти. Посещение Крипты капуцинов предоставляет редкую возможность увидеть один из самых необычных и исторически значимых примеров погребального искусства в Европе.</p></div>
+</section>
 <section class="place" id="rome_largo_torre_argentina">
+<div class="place-lead">
 <h3>Ларго ди Торре Аргентина</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/rome_largo_torre_argentina.jpg" alt="Ларго ди Торре Аргентина"/></figure>
+<p class="place-meta">Адрес: Campus Martius</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_largo_torre_argentina.jpg" alt="Ларго ди Торре Аргентина" width="1280" height="960" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_largo_torre_argentina_b.jpg" alt="Ларго ди Торре Аргентина — вид 2" width="330" height="440" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Скрытая под шумными улицами Рима, находится тихая оазис — площадь, где древние руины сосуществуют с современной жизнью. Ларго ди Торре Аргентина является домом для остатков четырех римских храмов, посвященных богам Юпитеру, Юноне и Марсу, датируемых III веком до нашей эры. Эта местность изначально была названа в честь близлежащей средневековой башни, Торре Аргентина. Раскопки проводились с 1929 по 1960 год, в результате чего были найдены значительные артефакты и скульптуры. Сегодня он также знаменит своим приютом для кошек, где многочисленные пушистые обитатели свободно бродят среди руин. Посетители могут исследовать объект с помощью экскурсионных туров или самостоятельных прогулок. Рядом с руинами находится церковь Санта-Мария дель Росарио.</p>
 <p class="prose">Обнаруженные во время раскопок в начале 20 века, эти руины когда-то были частью обширного комплекса, известного как Регия, официальная резиденция римских царей. Место стало международно известным, когда археологи раскопали останки места убийства Юлия Цезаря, ныне отмеченного бронзовой статуей. Этот исторический объект предлагает посетителям редкую возможность заглянуть в древнюю римскую цивилизацию, сочетая археологическое значение с живописным очарованием.</p></div>
 </section>
 <section class="place" id="rome_mausoleum_of_augustus">
+<div class="place-lead">
 <h3>Мавзолей Августа</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/rome_mausoleum_of_augustus.jpg" alt="Мавзолей Августа"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_mausoleum_of_augustus.jpg" alt="Мавзолей Августа" width="1280" height="720" style="height: 259px; max-height: 259px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_mausoleum_of_augustus_b.jpg" alt="Мавзолей Августа — вид 2" width="330" height="247" style="height: 259px; max-height: 259px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Мавзолей Августа — это величественный древний памятник, изначально задуманный как последнее пристанище для первого императора Рима и его семьи. Он является одним из самых знаковых символов римской имперской власти и архитектурного величия. Построенное из известняка и мрамора, сооружение изначально имело круглую форму с купольной крышей. Когда он был завершен, его высота составляла примерно 87 метров, что делало его одной из самых высоких конструкций в Риме в то время. Сегодня осталась только основа и часть внешней стены, но эти руины все еще вызывают величие древнего Рима. Сайт также включает археологические раскопки, которые раскрывают больше информации о первоначальной планировке и архитектуре. Его расположение на Виа Фламиния подчеркивает его стратегическое значение в городе.</p>
 <p class="prose">Построенный во времена правления императора Августа около 28 года до нашей эры, мавзолей был предназначен для хранения его останков и останков будущих членов его династии. Спроектированный архитектором Agrippa, он служил как гробницей, так и святилищем для празднования новой эры римского правления под руководством Августа. Его огромные размеры и сложные украшения сделали его центральной точкой городского пейзажа Рима. Посещение мавзолея Августа дает представление о грандиозных амбициях ранней Римской империи и ее неугасимом наследии.</p></div>
 </section>
 <section class="place" id="rome_testaccio_monte">
+<div class="place-lead">
 <h3>Монте Тестаччо</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/rome_testaccio_monte.jpg" alt="Монте Тестаччо"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_testaccio_monte.jpg" alt="Монте Тестаччо" width="1280" height="834" style="height: 301px; max-height: 301px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_testaccio_monte_b.jpg" alt="Монте Тестаччо — вид 2" width="330" height="236" style="height: 301px; max-height: 301px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Монте Тестаччо — это огромный археологический памятник и искусственный холм, расположенный на окраине Рима. Он возвышается над рекой Тибр, предлагая панорамные виды на город внизу. Это один из крупнейших искусственных холмов в Европе. На холме находится более 50 миллионов кусочков керамики. Монте Тестаччо был объявлен национальным памятником с 1928 года. Сегодня он служит как туристической достопримечательностью, так и природным заповедником. Его расположение делает его идеальным местом для наблюдения за птицами.</p>
 <p class="prose">Построенный во времена Римской империи как свалка для сломанной керамики и керамических изделий, Монте Тестаччо когда-то был огромным хранилищем фрагментов амфор. Со временем он превратился в значительную свалку, достигнув своей нынешней высоты около 34 метров. Название холма происходит от слова &#x27;testa&#x27;, что означает голова, ссылаясь на керамические головы, которые часто находили здесь. Посещение Монте Тестаччо дает представление о древнеримских методах управления отходами и предлагает уникальную перспективу на историческое развитие города.</p></div>
 </section>
-<section class="place" id="rome_pdfband_2_2f129e05">
-<h3>Moschea</h3>
+<section class="place" id="rome_vittoriano">
+<div class="place-lead">
+<h3>Монумент Виктора Эммануила II</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/rome_pdfband_2_2f129e05.jpg" alt="Moschea"/></figure>
+<p class="place-meta">Адрес: Piazza Venezia | Период: 1885–1911</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_vittoriano.jpg" alt="Монумент Виктора Эммануила II" width="1280" height="720" style="height: 259px; max-height: 259px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_vittoriano_b.jpg" alt="Монумент Виктора Эммануила II — вид 2" width="330" height="424" style="height: 259px; max-height: 259px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Монумент Виктора Эммануила II — это величественный национальный символ, расположенный в самом сердце исторического центра Рима, который является свидетельством итальянского объединения и богатого политического наследия города. Он расположен на месте, где Муссолини произносил свои знаменитые фашистские речи в 1920-х годах. Памятник часто называют Алтарь Отечества (Altare della Patria). Его дизайн включает элементы неоклассической архитектуры, сочетая римские и ренессансные стили. Ночью памятник освещается, что делает его одним из самых знаковых ночных достопримечательностей Рима. Расположенный рядом с важными достопримечательностями, такими как Римский форум и Колизей, он служит удобной точкой встречи.</p>
+<p class="prose">Построенный в период с 1885 по 1911 год, памятник был заказан королем Виктором Эммануилом II в честь единства Италии после десятилетий фрагментации. Спроектированный Джузеппе Саккони, он включает в себя возвышающийся обелиск, увенчанный бронзовой статуей самого короля, с видом на широкую площадь Венеция. Памятник также содержит Могилу Неизвестного Солдата, увековечивая память тех, кто пожертвовал своей жизнью ради нации. Посещение памятника предоставляет глубокое понимание современной истории Италии и ее трансформации из отдельных государств в единое государство.</p></div>
 </section>
-<section class="place" id="rome_bocca_della_verita">
-<h3>Уста Истины</h3>
+<section class="place" id="rome_ara_pacis_museum">
+<div class="place-lead">
+<h3>Музей Ара Пацис</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Lungotevere in Augusta | Период: 2006</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_ara_pacis_museum.jpg" alt="Музей Ара Пацис" width="1280" height="853" style="height: 294px; max-height: 294px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_ara_pacis_museum_b.jpg" alt="Музей Ара Пацис — вид 2" width="330" height="210" style="height: 294px; max-height: 294px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Музей Ара Пактис — это современное архитектурное чудо, в котором хранится одно из самых значительных археологических сокровищ Рима — Алтарь мира. Расположенный на берегу реки Тибр, он демонстрирует древнеримские артефакты и дает представление о богатом историческом наследии города. В музее находятся фрагменты оригинального Алтаря Мира, датируемые временем императора Августа. Музей отличается инновационными дизайнерскими элементами, такими как естественный свет, проникающий через световые люки, что улучшает展示 артефактов. Это является свидетельством слияния классических и современных архитектурных стилей. Экспонаты включают скульптуры, рельефы и фрески, изображающие сцены из римской жизни и мифологии. Расположенный рядом с Палатинским холмом и рекой Тибр, этот объект предлагает живописные виды на исторический центр Рима.</p>
+<p class="prose">Построенный в 13 году до нашей эры в честь мира при правлении Августа, оригинальный алтарь был обнаружен во время раскопок в начале 20 века. Музей открылся в 2006 году, сочетая древние руины с современными архитектурными решениями, разработанными Ричардом Мейером, объединяя классические элементы с современными эстетическими подходами. Посещение музея Ара Паксис позволяет посетителям firsthand ощутить историю Рима через его сохранившиеся артефакты и великолепную архитектуру.</p></div>
+</section>
+<section class="place" id="rome_park_villa_borghese_lake">
+<div class="place-lead">
+<h3>Озеро Виллы Боргезе</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/rome_bocca_della_verita.jpg" alt="Уста Истины"/></figure>
-<div class="place-desc"><p class="prose">Уста Истины — это знаменитая древнеримская скульптура, изображающая голову женщины с открытым ртом, расположенная в церкви Санта-Мария-ин-Космедине на Виа дель Корсо. Она стала одним из самых знаковых символов Рима. Считается, что он вырезан из травертинового камня. Легенда гласит, что скульптура защищает от лжецов, откусывая им руку. На сайте также находится фонтан Бокка делла Веритà, который содержит скульптуру. В Средние века этот район стал известен своим преследованием призраками, согласно местному фольклору. Сегодня посетители могут увидеть скульптуру на фоне шумной площади, заполненной кафе и магазинами.</p>
-<p class="prose">Изначально созданная как часть фонтана во времена правления императора Тиберия около 14–37 года н.э., скульптура была заново открыта в 1659 году и перемещена на свое текущее место в 1822 году. Ее название происходит от легенды, согласно которой любой, кто будет лгать, помещая руку в рот, потеряет ее. Посещение Уст устиной правды дает возможность заглянуть в богатое историческое наследие Рима и предоставляет шанс познакомиться с одной из менее известных, но увлекательных достопримечательностей города.</p></div>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_park_villa_borghese_lake.jpg" alt="Озеро Виллы Боргезе" width="1280" height="831" style="height: 299px; max-height: 299px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_park_villa_borghese_lake_b.jpg" alt="Озеро Виллы Боргезе — вид 2" width="330" height="247" style="height: 299px; max-height: 299px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Уютно расположенное в обширном парке Вилла Боргезе, искусственное озеро является тихим оазисом, окруженным зелеными насаждениями и классическими скульптурами. Оно предлагает спокойное убежище от шумного Рима, создавая живописную обстановку для неспешных прогулок и прогулок на лодках. Озеро занимает площадь примерно 4 гектара и питается подземными источниками. Это популярное место для гребли и аренды педальных лодок в теплые месяцы. Классические статуи и фонтаны выстраиваются вдоль берегов, добавляя живописную атмосферу. Лодки можно арендовать прямо на месте для прогулочных круизов по озеру. Осенью окружающие деревья становятся золотыми, создавая захватывающий фон.</p>
+<p class="prose">Построенное в конце 19 века в рамках видения папы Пия IX по улучшению красоты Виллы Боргезе, озеро изначально было задумано как дополнение к ландшафтной архитектуре парка. Сегодня оно остается одной из самых знаковых особенностей парка, привлекая посетителей своим элегантным очарованием и природной красотой. Посещение озера Виллы Боргезе позволяет гостям насладиться гармоничным сочетанием природы и искусства, предлагая спокойное убежище среди яркой городской жизни Рима.</p></div>
 </section>
 <section class="place" id="rome_palazzo_barberini">
+<div class="place-lead">
 <h3>Палаццо Барберини</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Период: 1629–1633</p>
-<figure class="place-fig"><img src="../images/rome_palazzo_barberini.jpg" alt="Палаццо Барберини"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_palazzo_barberini.jpg" alt="Палаццо Барберини" width="1280" height="960" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_palazzo_barberini_b.jpg" alt="Палаццо Барберини — вид 2" width="330" height="219" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Палаццо Барберини — это величественный барочный дворец, расположенный на площади Барберини в Риме, Италия. Он был заказан папой Урбаном VIII и спроектирован архитектором Франческо Борромини в период с 1629 по 1633 год. Здесь находится знаменитая Галерея национального древнего искусства, где представлены шедевры таких художников, как Караваджо и Рафаэль. Сады, окружающие палаццо, украшены красивыми фонтанами и статуями, созданными самим Бернини. Его архитектура, сочетающая классические элементы с барочной экстравагантностью, считается ярким примером римского барокко. В дополнение к своей художественной коллекции, палаццо также располагает библиотекой с редкими манускриптами и историческими документами. Сегодня он служит музеем, открытым для публики, предлагая посетителям возможность заглянуть в роскошный образ жизни аристократических семей прошлого.</p>
 <p class="prose">Построенный в начале 17 века под патронажем кардинала Маффео Барберини, впоследствии папы Урбана VIII, палаццо служил как частной резиденцией, так и культурным центром могущественной семьи Барберини. Его интерьер украшен роскошными декорациями, включая фрески Пьетро да Кортоне и скульптуры Бернини, отражающими роскошь и художественное мастерство той эпохи. Обязательное место для любителей искусства, Палаццо Барберини хранит одну из самых важных коллекций барочной живописи в Риме.</p></div>
 </section>
-<section class="place" id="rome_pdfband_9_c17302d7">
-<h3>Rom</h3>
-
-
-<figure class="place-fig"><img src="../images/rome_pdfband_9_c17302d7.jpg" alt="Rom"/></figure>
-</section>
 <section class="place" id="rome_pantheon">
+<div class="place-lead">
 <h3>Пантеон</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/rome_pantheon.jpg" alt="Пантеон"/></figure>
+<p class="place-meta">Адрес: Piazza della Rotonda</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_pantheon.jpg" alt="Пантеон" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_pantheon_b.jpg" alt="Пантеон — вид 2" width="330" height="244" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Пантеон — самый знаковый храм Рима и одно из лучших сохранившихся древних зданий в мире. Его купольная крыша, построенная без использования раствора, является свидетельством инженерного мастерства римлян. Его купол является самым большим неармированным бетонным куполом, когда-либо построенным. Он остался в основном нетронутым с момента своего строительства почти две тысячи лет назад. Здание было освящено как католическая церковь в VII веке нашей эры. Окулюс является единственным источником дневного света внутри здания. Работы по восстановлению начались в конце XVII века при папе Урбане VIII.</p>
 <p class="prose">Построенный около 126 года н.э. императором Адрианом, Пантеон изначально служил языческим храмом, посвященным всем богам. Позже он был преобразован в христианскую церковь в Средние века. Окулюс в его центре позволяет естественному свету заливать интерьер, создавая захватывающий эффект. Посетите Пантеон ради его архитектурных чудес, исторического значения и великолепного внутреннего дизайна.</p></div>
 </section>
-<section class="place" id="rome_piazza_del_campidoglio">
-<h3>Пьяцца дель Капитолий</h3>
+<section class="place" id="rome_pyramid_of_cestius">
+<div class="place-lead">
+<h3>Пирамида Цестия</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/rome_piazza_del_campidoglio.jpg" alt="Пьяцца дель Капитолий"/></figure>
-<div class="place-desc"><p class="prose">Расположенная высоко над историческим центром Рима, Пьяцца дель Капитолио — это величественная площадь, окруженная Палаццо Сенаторио и Капитолийскими музеями. Она является одной из самых знаковых достопримечательностей города, демонстрируя архитектуру Ренессанса в ее наилучшем проявлении. Площадь украшена тремя внушительными зданиями, спроектированными Микеланджело: Палаццо деи Консерватори, Палаццо Нуво и Капитолийскими музеями. Он возвышается над Форумом Романум и Колизеем, предлагая панорамные виды на исторический центр Рима. Площадь является домом для знаменитой статуи Марка Аврелия, изначально находившейся здесь, прежде чем была перемещена в Музеи Капитолия. Дизайн Микеланджело включает травертин, материал, связанный с древнеримскими памятниками. В 1947 году он был объявлен объектом Всемирного наследия ЮНЕСКО.</p>
-<p class="prose">Площадь Капитолия, спроектированная Микеланджело в начале XVI века, должна была стать символическим сердцем древнего Рима. Площадь заменила более ранние средневековые сооружения и стала символом папской власти и римского величия. Её симметричная планировка и величественные памятники отражают классические идеалы гармонии и пропорции. Посещение Пьяцца дель Капитолио предоставляет уникальную возможность погрузиться в богатое историческое наследие Рима и восхититься одними из лучших примеров искусства и архитектуры Ренессанса.</p></div>
-</section>
-<section class="place" id="rome_piazza_del_popolo">
-<h3>Пьяцца дель Пополо</h3>
-
-
-<figure class="place-fig"><img src="../images/rome_piazza_del_popolo.jpg" alt="Пьяцца дель Пополо"/></figure>
-<div class="place-desc"><p class="prose">В сердце исторического центра Рима находится Пьяцца дель Пополо, величественная площадь, которая на протяжении веков была центром жизни города. Окруженная древними церквями и памятниками, она является одной из самых знаковых точек встречи в городе. Он расположен на северном конце Виа Фламиния, который когда-то соединял Рим с северной Италией и Францией. Площадь украшена парными неоклассическими порталами, спроектированными Джакомо делла Порта и Доменико Фонтана. В центре находится египетский обелиск Гора, перевезенный из Гелиополя в 1589 году. Позже были добавлены два дополнительных обелиска, символизирующих исторические связи Рима с Египтом и христианством. Сегодня площадь остается живописным местом как для местных жителей, так и для туристов, предлагая панорамные виды на знаменитые церкви и улицы Рима.</p>
-<p class="prose">Площадь Пополо была построена в конце XVI века во время папства Сикста V и была задумана для того, чтобы отпраздновать окончание Виа Фламиния, древней дороги, ведущей на север от Рима. Изначально площадь украшали два обелиска, которые располагались по обе стороны от входа, символизируя связь Рима с Египтом и древним миром. Со временем площадь стала известна как место сбора для фестивалей, процессий и публичных казней. Посетите Пьяцца дель Пополо, чтобы насладиться слиянием классической архитектуры и религиозного искусства, с его знаковыми церквями Санта-Мария деи Мираколи и Санта-Мария ин Монтесанто.</p></div>
-</section>
-<section class="place" id="rome_piazza_navona">
-<h3>Пьяцца Навона</h3>
-
-
-<figure class="place-fig"><img src="../images/rome_piazza_navona.jpg" alt="Пьяцца Навона"/></figure>
-<div class="place-desc"><p class="prose">В сердце исторического центра Рима находится Пьяцца Навона, захватывающая площадь, которая изначально была построена как место для печально известных Цирковых игр Нерона. Сегодня это одно из самых знаковых и ярких пространств в городе. Три знаменитых фонтана — Фонтан Четырех Рек, Фонтан Моро и Фонтан Нептуна — были спроектированы Бернини и его современниками. Папа Иннокентий X поручил строительство Палаццо Памфили для размещения своей семьи, который теперь является домом музея Галерея древнего искусства. Каждое воскресное утро уличные торговцы устанавливают палатки, продавая фрукты, овощи и ремесленные изделия вокруг площади. Ночью Пьяцца Навона превращается в оживленную пешеходную зону, наполненную туристами, местными жителями и артистами. Его часто называют «площадью народа» из-за центрального расположения и частого использования римлянами.</p>
-<p class="prose">Площадь Навона была построена на руинах стадиона императора Домициана и служила цирком, где в древнеримские времена проводились гонки на колесницах. Название «Навона» происходит от латинского слова «quadrana nova», что означает «новая площадь». Со временем площадь стала центром религиозных фестивалей, политических собраний и общественной жизни. Обязательное к посещению место благодаря своей потрясающей барочной архитектуре, живописным фонтанам и очаровательной атмосфере, площадь Навона предлагает посетителям возможность увидеть как древний, так и современный Рим.</p></div>
+<p class="place-meta">Адрес: Porta San Paolo, Testaccio</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_pyramid_of_cestius.jpg" alt="Пирамида Цестия" width="1067" height="1600" style="height: 364px; max-height: 364px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_pyramid_of_cestius_b.jpg" alt="Пирамида Цестия — вид 2" width="330" height="260" style="height: 364px; max-height: 364px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Пирамида Цестия — уникальная древнеримская гробница, расположенная на улице Номентана, прямо за пределами исторического центра Рима. Построенная около 18 года до нашей эры, она является одним из самых ярких примеров римской архитектуры и инженерии. Построен около 18 года до н.э. По заказу Гая Цестия Эпулона. Сочетает египетский и римский архитектурные стили. Сделан полностью из полированного белого мрамора. Расположен рядом с древней Аппиевой дорогой.</p>
+<p class="prose">Построенная во времена правления Августа, пирамида была заказана Гаем Цестием Эпуло, видным римским магистратом. Она служила его погребальным памятником, сочетая египетские архитектурные элементы с римскими принципами дизайна. Точные пропорции конструкции и использование полированного мрамора выделяют её среди других гробниц того времени. Посещение Пирамиды Цестия дает представление о слиянии римского и египетского стилей, демонстрируя, как древние римляне адаптировали иностранные влияния для создания своих собственных уникальных форм искусства и архитектуры.</p></div>
 </section>
 <section class="place" id="rome_ponte_sant_angelo">
+<div class="place-lead">
 <h3>Понте-Сант&#x27;Анджело</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/rome_ponte_sant_angelo.jpg" alt="Понте-Сант&#x27;Анджело"/></figure>
+<p class="place-meta">Место: Tiber near Castel Sant&#x27;Angelo</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_ponte_sant_angelo.jpg" alt="Понте-Сант&#x27;Анджело" width="1280" height="960" style="height: 232px; max-height: 232px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_ponte_sant_angelo_b.jpg" alt="Понте-Сант&#x27;Анджело — вид 2" width="330" height="166" style="height: 232px; max-height: 232px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Пересекая реку Тибр и соединяя Кастель-Сант&#x27;Анджело с Ватиканом, Понте-Сант&#x27;Анджело является одним из самых знаковых мостов Рима. Построенный из травертина, мост в значительной степени остался неизменным с момента своего первоначального строительства. Мост украшен восемью мраморными скульптурами ангелов, созданными Джакомо делла Порта в 16 веке. Он был значительно отреставрирован в конце 19 века при папе Льве XIII. Понте-Сант&#x27;Анджело напрямую соединяется с Виа дель Корсо, что делает его легко доступным из центральной части Рима. Его расположение предлагает панорамные виды как на Ватикан, так и на Кастель-Сант&#x27;Анджело.</p>
 <p class="prose">Построенный императором Адрианом около 136 года нашей эры, Понте Сант&#x27;Анджело изначально назывался Понс Элиус. Он служил важной связью между двумя значительными римскими достопримечательностями: мавзолеем Адриана и базиликой Святого Петра. Со временем он стал известен своими статуями ангелов, которые были добавлены в эпоху Ренессанса. Обязательное место для посещения любителями архитектуры и теми, кто ищет историческое значение, Понте Сант&#x27;Анджело предлагает потрясающие виды на Тибр и окружающий городской пейзаж.</p></div>
 </section>
 <section class="place" id="rome_jewish_ghetto_portico_octavia">
+<div class="place-lead">
 <h3>Портико д&#x27;Октавио</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/rome_jewish_ghetto_portico_octavia.jpg" alt="Портико д&#x27;Октавио"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_jewish_ghetto_portico_octavia.jpg" alt="Портико д&#x27;Октавио" width="1280" height="960" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--row-sized"><img src="../images/rome_jewish_ghetto_portico_octavia_b.jpg" alt="Портико д&#x27;Октавио — вид 2" width="330" height="543" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Портико д’Оттавия — это величественный древнеримский портик, изначально построенный как часть более крупного комплекса, известного как Домиус Авреа, императором Нероном. Позже он был реконструирован и адаптирован во время правления императора Августа около 1 века нашей эры. Он расположен рядом с Палатинским холмом и Колизеем, что делает его легко доступным для туристов, исследующих эти знаковые места. Портик украшен колоннами с коринфскими капителями, что характерно для римской архитектуры. Его реконструкция во времена императора Августа подчеркивает неугасимое наследие римской инженерии и дизайна. Сегодня он служит мирным оазисом среди шумных улиц Рима. Части его оригинальной структуры сохранились, предоставляя историкам ценные сведения о древних строительных техниках.</p>
 <p class="prose">Первоначально построенный при императоре Нероне в рамках Дома Золотого, Портик Октавии был перестроен и переименован в честь Октавии Младшей, сестры императора Августа. Эта элегантная колоннадная структура служила как практическим, так и церемониальным целям, обеспечивая тень для пешеходов и одновременно используясь для официальных собраний и празднований. Являясь ярким примером архитектурного наследия Рима, он предлагает посетителям возможность заглянуть в роскошь и величие древнеримского общества.</p></div>
 </section>
-<section class="place" id="rome_pyramid_of_cestius">
-<h3>Пирамида Цестия</h3>
+<section class="place" id="rome_piazza_del_campidoglio">
+<div class="place-lead">
+<h3>Пьяцца дель Капитолий</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/rome_pyramid_of_cestius.jpg" alt="Пирамида Цестия"/></figure>
-<div class="place-desc"><p class="prose">Пирамида Цестия — уникальная древнеримская гробница, расположенная на улице Номентана, прямо за пределами исторического центра Рима. Построенная около 18 года до нашей эры, она является одним из самых ярких примеров римской архитектуры и инженерии. Построен около 18 года до н.э. По заказу Гая Цестия Эпулона. Сочетает египетский и римский архитектурные стили. Сделан полностью из полированного белого мрамора. Расположен рядом с древней Аппиевой дорогой.</p>
-<p class="prose">Построенная во времена правления Августа, пирамида была заказана Гаем Цестием Эпуло, видным римским магистратом. Она служила его погребальным памятником, сочетая египетские архитектурные элементы с римскими принципами дизайна. Точные пропорции конструкции и использование полированного мрамора выделяют её среди других гробниц того времени. Посещение Пирамиды Цестия дает представление о слиянии римского и египетского стилей, демонстрируя, как древние римляне адаптировали иностранные влияния для создания своих собственных уникальных форм искусства и архитектуры.</p></div>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_piazza_del_campidoglio.jpg" alt="Пьяцца дель Капитолий" width="1280" height="815" style="height: 294px; max-height: 294px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_piazza_del_campidoglio_b.jpg" alt="Пьяцца дель Капитолий — вид 2" width="330" height="244" style="height: 294px; max-height: 294px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Расположенная высоко над историческим центром Рима, Пьяцца дель Капитолио — это величественная площадь, окруженная Палаццо Сенаторио и Капитолийскими музеями. Она является одной из самых знаковых достопримечательностей города, демонстрируя архитектуру Ренессанса в ее наилучшем проявлении. Площадь украшена тремя внушительными зданиями, спроектированными Микеланджело: Палаццо деи Консерватори, Палаццо Нуво и Капитолийскими музеями. Он возвышается над Форумом Романум и Колизеем, предлагая панорамные виды на исторический центр Рима. Площадь является домом для знаменитой статуи Марка Аврелия, изначально находившейся здесь, прежде чем была перемещена в Музеи Капитолия. Дизайн Микеланджело включает травертин, материал, связанный с древнеримскими памятниками. В 1947 году он был объявлен объектом Всемирного наследия ЮНЕСКО.</p>
+<p class="prose">Площадь Капитолия, спроектированная Микеланджело в начале XVI века, должна была стать символическим сердцем древнего Рима. Площадь заменила более ранние средневековые сооружения и стала символом папской власти и римского величия. Её симметричная планировка и величественные памятники отражают классические идеалы гармонии и пропорции. Посещение Пьяцца дель Капитолио предоставляет уникальную возможность погрузиться в богатое историческое наследие Рима и восхититься одними из лучших примеров искусства и архитектуры Ренессанса.</p></div>
+</section>
+<section class="place" id="rome_piazza_del_popolo">
+<div class="place-lead">
+<h3>Пьяцца дель Пополо</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_piazza_del_popolo.jpg" alt="Пьяцца дель Пополо" width="1280" height="919" style="height: 326px; max-height: 326px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_piazza_del_popolo_b.jpg" alt="Пьяцца дель Пополо — вид 2" width="330" height="233" style="height: 326px; max-height: 326px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">В сердце исторического центра Рима находится Пьяцца дель Пополо, величественная площадь, которая на протяжении веков была центром жизни города. Окруженная древними церквями и памятниками, она является одной из самых знаковых точек встречи в городе. Он расположен на северном конце Виа Фламиния, который когда-то соединял Рим с северной Италией и Францией. Площадь украшена парными неоклассическими порталами, спроектированными Джакомо делла Порта и Доменико Фонтана. В центре находится египетский обелиск Гора, перевезенный из Гелиополя в 1589 году. Позже были добавлены два дополнительных обелиска, символизирующих исторические связи Рима с Египтом и христианством. Сегодня площадь остается живописным местом как для местных жителей, так и для туристов, предлагая панорамные виды на знаменитые церкви и улицы Рима.</p>
+<p class="prose">Площадь Пополо была построена в конце XVI века во время папства Сикста V и была задумана для того, чтобы отпраздновать окончание Виа Фламиния, древней дороги, ведущей на север от Рима. Изначально площадь украшали два обелиска, которые располагались по обе стороны от входа, символизируя связь Рима с Египтом и древним миром. Со временем площадь стала известна как место сбора для фестивалей, процессий и публичных казней. Посетите Пьяцца дель Пополо, чтобы насладиться слиянием классической архитектуры и религиозного искусства, с его знаковыми церквями Санта-Мария деи Мираколи и Санта-Мария ин Монтесанто.</p></div>
+</section>
+<section class="place" id="rome_piazza_navona">
+<div class="place-lead">
+<h3>Пьяцца Навона</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Место: Historic centre</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_piazza_navona.jpg" alt="Пьяцца Навона" width="1280" height="806" style="height: 290px; max-height: 290px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_piazza_navona_b.jpg" alt="Пьяцца Навона — вид 2" width="330" height="228" style="height: 290px; max-height: 290px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">В сердце исторического центра Рима находится Пьяцца Навона, захватывающая площадь, которая изначально была построена как место для печально известных Цирковых игр Нерона. Сегодня это одно из самых знаковых и ярких пространств в городе. Три знаменитых фонтана — Фонтан Четырех Рек, Фонтан Моро и Фонтан Нептуна — были спроектированы Бернини и его современниками. Папа Иннокентий X поручил строительство Палаццо Памфили для размещения своей семьи, который теперь является домом музея Галерея древнего искусства. Каждое воскресное утро уличные торговцы устанавливают палатки, продавая фрукты, овощи и ремесленные изделия вокруг площади. Ночью Пьяцца Навона превращается в оживленную пешеходную зону, наполненную туристами, местными жителями и артистами. Его часто называют «площадью народа» из-за центрального расположения и частого использования римлянами.</p>
+<p class="prose">Площадь Навона была построена на руинах стадиона императора Домициана и служила цирком, где в древнеримские времена проводились гонки на колесницах. Название «Навона» происходит от латинского слова «quadrana nova», что означает «новая площадь». Со временем площадь стала центром религиозных фестивалей, политических собраний и общественной жизни. Обязательное к посещению место благодаря своей потрясающей барочной архитектуре, живописным фонтанам и очаровательной атмосфере, площадь Навона предлагает посетителям возможность увидеть как древний, так и современный Рим.</p></div>
 </section>
 <section class="place" id="rome_roman_forum">
+<div class="place-lead">
 <h3>Римский форум</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/rome_roman_forum.jpg" alt="Римский форум"/></figure>
+<p class="place-meta">Адрес: Between Colosseum and Capitoline Hill</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_roman_forum.jpg" alt="Римский форум" width="1280" height="528" style="height: 168px; max-height: 168px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_roman_forum_b.jpg" alt="Римский форум — вид 2" width="330" height="120" style="height: 168px; max-height: 168px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Римский форум — это древнее сердце Рима, где веками обсуждались, принимались и отмечались история и власть. Расположенный между Капитолием и Палатином, он занимает площадь примерно 34 акра. Это было место важных ритуалов в период Республики и Империи. Археологические раскопки продолжают обнаруживать новые слои истории под руинами. Форум был окружен знаменитыми зданиями, такими как Храм Сатурна и Куриум Юлия. Сегодня посетители могут прогуляться среди руин и представить себе бурную деятельность, которая когда-то наполняла эти пространства.</p>
 <p class="prose">Когда-то политический, религиозный и коммерческий центр Римской империи, Римский форум стал сценой ключевых моментов римской цивилизации, включая речи известных ораторов, таких как Цицерон и Юлий Цезарь. Здесь находились храмы, рынки и правительственные здания, он служил центром гражданской жизни до своего упадка после падения империи. Посетите Римский форум, чтобы ощутить колыбель западной демократии и основополагающие начала римского права и культуры.</p></div>
 </section>
-<section class="place" id="rome_pdfband_1_da829d8c">
-<h3>Italy</h3>
-
-
-<figure class="place-fig"><img src="../images/rome_pdfband_1_da829d8c.jpg" alt="Italy"/></figure>
-<div class="place-desc"><p class="prose">Italia [iˈtaːlja]), официальное название — Италья́нская Респу́блика (итал. Repubblica Italiana [reˈpubːlika itaˈljaːna]) — государство в Южной Европе, в центре Средиземноморья. Входит в Европейский союз и НАТО с момента их создания, является третьей по величине экономикой еврозоны.</p></div>
-</section>
-<section class="place" id="rome_pdfband_0_01b7073a">
-<h3>San Giovanni in Laterano</h3>
-
-
-<figure class="place-fig"><img src="../images/rome_pdfband_0_01b7073a.jpg" alt="San Giovanni in Laterano"/></figure>
-</section>
 <section class="place" id="rome_santa_maria_trastevere">
+<div class="place-lead">
 <h3>Санта-Мария в Трастевере</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/rome_santa_maria_trastevere.jpg" alt="Санта-Мария в Трастевере"/></figure>
+<p class="place-meta">Адрес: Piazza di Santa Maria in Trastevere</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_santa_maria_trastevere.jpg" alt="Санта-Мария в Трастевере" width="1280" height="1280" style="height: 462px; max-height: 462px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_santa_maria_trastevere_b.jpg" alt="Санта-Мария в Трастевере — вид 2" width="330" height="418" style="height: 462px; max-height: 462px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Расположенная в живом и ярком районе Трастевере, Санта-Мария в Трастевере является одной из старейших церквей Рима, датируемой IV веком нашей эры. Ее сложные мозаики и древние фрески делают ее настоящим сокровищем для любителей искусства. Считается одной из семи исторических базилик Рима. Интерьер украшен захватывающими мозаиками, изображающими библейские сцены. Его колокольня предлагает панорамные виды на реку Тибр и окружающие районы. Церковь была восстановлена в значительной степени после повреждений, причиненных бомбардировками во время Второй мировой войны. В 1980 году он был возведен в ранг малой базилики.</p>
 <p class="prose">Построенная около 349 года нашей эры папой Маркеллином, Санта-Мария в Трастевере изначально была посвящена Святому Стефану. На протяжении веков она претерпела несколько ремонтов и расширений, особенно в период Ренессанса, когда были добавлены её потрясающие мозаики. Церковь также служила убежищем для ранних христиан во время преследований. Посещение Санта-Марии в Трастевере дает возможность заглянуть в римскую историю и религиозное наследие, демонстрируя некоторые из самых изысканных произведений искусства средневековья и Ренессанса в Риме.</p></div>
 </section>
-<section class="place" id="rome_spanish_steps">
-<h3>Испанская лестница</h3>
+<section class="place" id="rome_baths_of_caracalla">
+<div class="place-lead">
+<h3>Термы Каракаллы</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1723–1726</p>
-<figure class="place-fig"><img src="../images/rome_spanish_steps.jpg" alt="Испанская лестница"/></figure>
-<div class="place-desc"><p class="prose">Испанская лестница — это самая знаковая лестница Рима, потрясающе элегантный памятник, который соединяет Пьяцца ди Спанья с церковью Тринита деи Монти выше. Состоит из 135 ступеней, ведущих к церкви Тринита́ деи Монти. Названный в честь расположенного поблизости Испанского посольства. Сделанный в барочном стиле, отражающем грандиозную архитектуру, типичную для Рима. Расположенный в конце Виа дель Бабуино, улицы, известной своими антикварными магазинами и кафе. Одно из самых фотографируемых мест в Риме.</p>
-<p class="prose">Построенные в период с 1723 по 1726 год во время правления папы Бенедикта XIII, эти ступени были спроектированы архитектором Франческо де Санктисом, чтобы соединить оживленную площадь внизу с спокойной церковью наверху. Ступени стали известны как место встречи художников, интеллектуалов и туристов, увековеченные в картинах и фильмах на протяжении многих лет. Обязательная к посещению достопримечательность благодаря своей красоте, культурному значению и романтической атмосфере.</p></div>
+<p class="place-meta">Адрес: Via delle Terme di Caracalla</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_baths_of_caracalla.jpg" alt="Термы Каракаллы" width="1280" height="903" style="height: 325px; max-height: 325px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_baths_of_caracalla_b.jpg" alt="Термы Каракаллы — вид 2" width="330" height="470" style="height: 325px; max-height: 325px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Термы Каракаллы являются одними из крупнейших и лучше всего сохранившихся древнеримских банных комплексов, предлагая возможность заглянуть в роскошь и общественную жизнь императорского Рима. Построенные из травертина и мрамора, бани занимали площадь более 39 акров. Они были оснащены подогреваемой водой, поставляемой по акведукам, что обеспечивало комфорт для пользователей. Бани украшены сложными мозаиками и скульптурами, многие из которых были восстановлены и могут быть увидены сегодня. На пике своей популярности они обслуживали до 1,600 посетителей в день. Сегодня посетители могут исследовать руины и представить, каково было наслаждаться этими роскошными удобствами.</p>
+<p class="prose">Построенные во время правления императора Каракаллы около 212–216 годов н.э., эти бани были задуманы как центр для отдыха, общения и общественного здоровья. Они могли вмещать тысячи людей одновременно, демонстрируя передовые инженерные и архитектурные техники того времени. Комплекс включал в себя бассейны, сауны, тренажерные залы и роскошные украшения, отражающие грандиозный образ жизни римской элиты. Посещение Термы Каракаллы позволяет путешественникам ощутить величие древнеримской архитектуры и понять, как римляне жили, работали и развлекались.</p></div>
 </section>
-<section class="place" id="rome_st_peters_basilica">
-<h3>Базилика Святого Петра</h3>
+<section class="place" id="rome_bocca_della_verita">
+<div class="place-lead">
+<h3>Уста Истины</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/rome_st_peters_basilica.jpg" alt="Базилика Святого Петра"/></figure>
-<div class="place-desc"><p class="prose">Сидя величественно в центре Ватикана, базилика Святого Петра является одной из самых знаковых и почитаемых христианских построек в мире. Ее возвышающийся купол, спроектированный Микеланджело, доминирует над римским горизонтом. Базилика может вместить до 60 000 человек во время мессы. Он включает четыре массивные колонны, известные как «четыре столпа веры». Его интерьер содержит многочисленные произведения искусства известных художников, таких как Рафаэль и Караваджо. Купол, завершенный в 1626 году, является крупнейшим кирпичным куполом в мире. Папа Бенедикт XVI провел свою последнюю Пасхальную мессу здесь перед отставкой.</p>
-<p class="prose">Построенная на месте, где, как считалось, был похоронен Святой Петр, строительство началось при папе Юлии II в 1506 году и продолжалось более века. Базилика сочетает элементы архитектуры Ренессанса и Барокко, демонстрируя художественное великолепие таких мастеров, как Бернини и Микеланджело. Обязательное место для посещения для всех, кто интересуется искусством, архитектурой и католической историей, базилика Святого Петра предлагает захватывающие интерьеры и потрясающие виды с её высокой купольной конструкции.</p></div>
-</section>
-<section class="place" id="rome_trajan_column">
-<h3>Колонна Траяна</h3>
-
-
-<figure class="place-fig"><img src="../images/rome_trajan_column.jpg" alt="Колонна Траяна"/></figure>
-<div class="place-desc"><p class="prose">Возвышаясь над Римским форумом, Колонна Траяна является величественным памятником военным победам императора Траяна и имперской славе Рима. Колонна имеет высоту примерно 30 метров и состоит из 23 спиральных уровней. Каждый уровень украшен детализированными барельефами, которые рассказывают историю кампаний Траяна против дакийцев. Он был построен из травертина и украшен скульптурными фигурами известных художников того времени. На вершине колонны находится бронзовая статуя самого императора Траяна. В основании колонны находится небольшой музей, демонстрирующий археологические находки, связанные со строительством и значением этого места.</p>
-<p class="prose">Построенная между 106 и 113 годами нашей эры во время правления императора Траяна, колонна увековечивает его завоевания в Дакии. На её мраморной поверхности вырезаны сложные рельефы, изображающие битвы, процессии и церемонии, предлагая яркую историческую запись экспансионистских амбиций древнего Рима. Посещение колонны Траяна позволяет путешественникам воочию увидеть художественные и архитектурные достижения древнего Рима, а также получить представление о военной мощи и культурной гордости империи.</p></div>
+<p class="place-meta">Адрес: Santa Maria in Cosmedin porch</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_bocca_della_verita.jpg" alt="Уста Истины" width="1067" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_bocca_della_verita_b.jpg" alt="Уста Истины — вид 2" width="330" height="439" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Уста Истины — это знаменитая древнеримская скульптура, изображающая голову женщины с открытым ртом, расположенная в церкви Санта-Мария-ин-Космедине на Виа дель Корсо. Она стала одним из самых знаковых символов Рима. Считается, что он вырезан из травертинового камня. Легенда гласит, что скульптура защищает от лжецов, откусывая им руку. На сайте также находится фонтан Бокка делла Веритà, который содержит скульптуру. В Средние века этот район стал известен своим преследованием призраками, согласно местному фольклору. Сегодня посетители могут увидеть скульптуру на фоне шумной площади, заполненной кафе и магазинами.</p>
+<p class="prose">Изначально созданная как часть фонтана во времена правления императора Тиберия около 14–37 года н.э., скульптура была заново открыта в 1659 году и перемещена на свое текущее место в 1822 году. Ее название происходит от легенды, согласно которой любой, кто будет лгать, помещая руку в рот, потеряет ее. Посещение Уст устиной правды дает возможность заглянуть в богатое историческое наследие Рима и предоставляет шанс познакомиться с одной из менее известных, но увлекательных достопримечательностей города.</p></div>
 </section>
 <section class="place" id="rome_trevi_fountain">
+<div class="place-lead">
 <h3>Фонтан Треви</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1732–1762</p>
-<figure class="place-fig"><img src="../images/rome_trevi_fountain.jpg" alt="Фонтан Треви"/></figure>
+<p class="place-meta">Адрес: Piazza di Trevi | Период: 1732–1762</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/rome_trevi_fountain.jpg" alt="Фонтан Треви" width="1280" height="850" style="height: 250px; max-height: 250px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/rome_trevi_fountain_b.jpg" alt="Фонтан Треви — вид 2" width="330" height="179" style="height: 250px; max-height: 250px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Фонтан Треви — самый знаковый памятник Рима, шедевр барочной архитектуры, который доминирует над Пьяцца ди Треви. Завершенный в 1762 году после десятилетий строительства, он является одним из величайших памятников Италии. Это крупнейший барочный фонтан в Риме. Согласно легенде, бросив монету в фонтан, вы обеспечите себе возвращение в Рим. Каждый день тысячи евро собираются из монет, брошенных в воду. Фонтан прошел обширную реставрацию в конце 20 века. В его дизайне представлены статуи, символизирующие четыре реки мира: Нил, Ганг, Дунай и Рио-де-ла-Плата.</p>
 <p class="prose">Фонтан, заказанный папой Климентом XII в 1732 году, был спроектирован Николаем Сальви и позже завершен Джузеппе Никколини. Он состоит из трех уровней с esculturas, символизирующими Изобилие, Здоровье и Общественное благополучие Рима. Знаменитая сцена изображает Океана, бога моря, окруженного тритонами и морскими коньками. Обязательная к посещению достопримечательность благодаря своей захватывающей красоте и культурному значению, Фонтан Треви является магнитом для туристов со всего мира.</p></div>
-</section>
-<section class="place" id="rome_vittoriano">
-<h3>Монумент Виктора Эммануила II</h3>
-
-<p class="place-meta">Период: 1885–1911</p>
-<figure class="place-fig"><img src="../images/rome_vittoriano.jpg" alt="Монумент Виктора Эммануила II"/></figure>
-<div class="place-desc"><p class="prose">Монумент Виктора Эммануила II — это величественный национальный символ, расположенный в самом сердце исторического центра Рима, который является свидетельством итальянского объединения и богатого политического наследия города. Он расположен на месте, где Муссолини произносил свои знаменитые фашистские речи в 1920-х годах. Памятник часто называют Алтарь Отечества (Altare della Patria). Его дизайн включает элементы неоклассической архитектуры, сочетая римские и ренессансные стили. Ночью памятник освещается, что делает его одним из самых знаковых ночных достопримечательностей Рима. Расположенный рядом с важными достопримечательностями, такими как Римский форум и Колизей, он служит удобной точкой встречи.</p>
-<p class="prose">Построенный в период с 1885 по 1911 год, памятник был заказан королем Виктором Эммануилом II в честь единства Италии после десятилетий фрагментации. Спроектированный Джузеппе Саккони, он включает в себя возвышающийся обелиск, увенчанный бронзовой статуей самого короля, с видом на широкую площадь Венеция. Памятник также содержит Могилу Неизвестного Солдата, увековечивая память тех, кто пожертвовал своей жизнью ради нации. Посещение памятника предоставляет глубокое понимание современной истории Италии и ее трансформации из отдельных государств в единое государство.</p></div>
-</section>
-<section class="place" id="rome_villa_borghese">
-<h3>Вилла Боргезе</h3>
-
-
-<figure class="place-fig"><img src="../images/rome_villa_borghese.jpg" alt="Вилла Боргезе"/></figure>
-<div class="place-desc"><p class="prose">Расположенный на северной окраине Рима, Вилла Боргезе является одним из самых известных городских парков Италии. Ее обширные площади предоставляют посетителям спокойное убежище от суеты городской жизни, предлагая живописные виды и тихие прогулочные дорожки. Здесь находится Галерея Боргезе, в которой собраны одни из лучших коллекций древнеримской скульптуры и барочной живописи в мире. Парк предлагает разнообразные ландшафты, включая формальные сады, лесистые участки и набережные у озера. Посетители могут наслаждаться выступлениями на открытом театре в летние месяцы. Его знаковый обелиск, известный как Египетский обелиск, prominently расположен в центральной площади парка. В дополнение к своим культурным достопримечательностям, Вилла Боргезе предлагает разнообразные виды активного отдыха, такие как велоспорт, бег и пикники.</p>
-<p class="prose">Изначально построенная папой Урбаном VIII Барберини в начале 17 века как частный сад для его семьи, Вилла Боргезе впоследствии стала частью обширных папских владений. Со временем она была расширена и преобразована в общественный парк под патронажем кардинала Сципиона Боргезе, который заказал множество скульптур и фонтанов для украшения её территории. Обязательное место для посещения как любителями искусства, так и энтузиастами природы, Вилла Боргезе демонстрирует шедевры таких художников, как Бернини и Канова.</p></div>
-</section>
-<section class="place" id="rome_park_villa_borghese_lake">
-<h3>Озеро Виллы Боргезе</h3>
-
-
-<figure class="place-fig"><img src="../images/rome_park_villa_borghese_lake.jpg" alt="Озеро Виллы Боргезе"/></figure>
-<div class="place-desc"><p class="prose">Уютно расположенное в обширном парке Вилла Боргезе, искусственное озеро является тихим оазисом, окруженным зелеными насаждениями и классическими скульптурами. Оно предлагает спокойное убежище от шумного Рима, создавая живописную обстановку для неспешных прогулок и прогулок на лодках. Озеро занимает площадь примерно 4 гектара и питается подземными источниками. Это популярное место для гребли и аренды педальных лодок в теплые месяцы. Классические статуи и фонтаны выстраиваются вдоль берегов, добавляя живописную атмосферу. Лодки можно арендовать прямо на месте для прогулочных круизов по озеру. Осенью окружающие деревья становятся золотыми, создавая захватывающий фон.</p>
-<p class="prose">Построенное в конце 19 века в рамках видения папы Пия IX по улучшению красоты Виллы Боргезе, озеро изначально было задумано как дополнение к ландшафтной архитектуре парка. Сегодня оно остается одной из самых знаковых особенностей парка, привлекая посетителей своим элегантным очарованием и природной красотой. Посещение озера Виллы Боргезе позволяет гостям насладиться гармоничным сочетанием природы и искусства, предлагая спокойное убежище среди яркой городской жизни Рима.</p></div>
-</section>
-<section class="place" id="rome_villa_farnesina">
-<h3>Вилла Фарнезина</h3>
-
-
-<figure class="place-fig"><img src="../images/rome_villa_farnesina.jpg" alt="Вилла Фарнезина"/></figure>
-<div class="place-desc"><p class="prose">Расположенная на берегах реки Тибр, Вилла Фарнезина — это захватывающая вилла эпохи Ренессанса, известная своими роскошными фресками и великолепными интерьерами. Спроектированная архитектором Джулиано да Сангалло и оформленная такими художниками, как Россо Фиорентино и Пинтуриккьо, она была заказана кардиналом Алессандро Фарнезе в начале XVI века. Название виллы происходит от имени её владельца, кардинала Алессандро Фарнезе, который также стал папой Павлом III. В нем представлены фрески таких известных художников, как помощник Рафаэля Россо Фиорентино и Пинтуриккьо. Его архитектура сочетает элементы классического римского дизайна с современными ренессансными эстетиками. Сегодня посетители могут исследовать как внешние сады, так и внутренние комнаты, наполненные историческими артефактами и картинами. Расположенная в легкой доступности от исторического центра Рима, вилла предлагает спокойное убежище среди шумного города.</p>
-<p class="prose">Построенная около 1510 года, Вилла Фарнезина служила роскошной резиденцией для кардинала Алессандро Фарнезе, позже папы Павла III. Интерьер виллы украшен одними из самых изысканных образцов итальянского ренессансного искусства, включая фрески, изображающие мифологические сцены и аллегории, написанные выдающимися художниками того времени. Посетители приходят в Виллу Фарнезина, чтобы восхититься её потрясающими украшениями и богатым художественным наследием итальянского Ренессанса.</p></div>
-</section>
-<section class="place" id="rome_villa_sciarra">
-<h3>Вилла Скиарра</h3>
-
-
-<figure class="place-fig"><img src="../images/rome_villa_sciarra.jpg" alt="Вилла Скиарра"/></figure>
-<div class="place-desc"><p class="prose">Расположенная на холме Янникуло, Вилла Щарра — это живописный парк, предлагающий панорамные виды на Рим и его знаковые достопримечательности. Она была изначально построена как частная вилла в конце 17 века кардиналом Пьетро Оттобони, который поручил архитектору Франческо де Санктис разработать её проект. Интерьер виллы украшен сложными фресками и декоративными элементами, характерными для эпохи Барокко. Он предлагает непревзойденные виды на реку Тибр и базилику Святого Петра. Вилла Скиарра проводит периодические культурные мероприятия и концерты в летние месяцы. На его территории находятсяFormal сады, цветочные клумбы и статуи, изображающие римских мифологических персонажей. Доступ к парку бесплатный и легко достижим на общественном транспорте.</p>
-<p class="prose">Построенная в конце 17 века для кардинала Пьетро Оттобони, Вилла Шарра с тех пор является выдающимся ориентиром. Архитектура виллы отражает барочный стиль с роскошными интерьерами и изысканными садами. Со временем она превратилась в общественный парк, открытый для посетителей, демонстрируя красивые фонтаны, скульптуры и спокойную атмосферу. Посетители приходят сюда, чтобы насладиться захватывающими видами Рима, отдохнуть среди ухоженных газонов и исследовать историческое значение этого места.</p></div>
 </section>
 </body>
 </html>

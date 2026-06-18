@@ -19,6 +19,7 @@ from philadelphia.data.places_registry import PHILADELPHIA_PLACES
 from philadelphia.whitelist import default_whitelist_path, url_is_whitelisted
 from smolensk.image_optimize import optimize_raster_image_if_large
 from scripts.city_guide_core import min_bytes_for_filename
+from scripts.city_guide_core import additional_images_for_download
 
 _TITLE_PAGE_ASSETS: tuple[tuple[str, str], ...] = (
     (
@@ -248,7 +249,7 @@ def main() -> int:
             )
             continue
         _queue(url, rel, slug)
-        for j, extra in enumerate(place.get("additional_images") or [], start=1):
+        for j, extra in enumerate(additional_images_for_download(place), start=1):
             eu = extra.get("image_source_url")
             er = extra.get("image_rel_path")
             if not eu or not er:

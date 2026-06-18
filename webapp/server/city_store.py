@@ -71,7 +71,12 @@ def _load_json(path: Path) -> Any:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-def load_city_places(project_root: Path, city_slug: str) -> list[dict[str, Any]]:
+def load_city_places(
+    project_root: Path,
+    city_slug: str,
+    *,
+    include_food_venues: bool = False,
+) -> list[dict[str, Any]]:
     """
     Load merged places for a city.
 
@@ -127,6 +132,8 @@ def load_city_places(project_root: Path, city_slug: str) -> list[dict[str, Any]]
                     }
                 )
             row["additional_images"] = filtered[:4]
+    if include_food_venues:
+        return rows
     return drop_excluded_category_places(rows)
 
 

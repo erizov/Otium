@@ -13,7 +13,7 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
 .otium-logo { font-family: 'Cinzel', serif; font-size: 2.15rem;
   font-weight: 600; letter-spacing: 0.18em; margin-bottom: 0.85rem; }
 .otiump { margin: 0.42rem 0; line-height: 1.42; text-align: justify;
-  max-width: 38rem; font-size: 0.95rem; }
+  font-size: 0.95rem; }
 .guide-title { page-break-after: auto; margin-bottom: 0.55rem;
   page-break-inside: avoid; }
 .historical-reference { margin: 0.75rem 0 1.15rem;
@@ -63,22 +63,103 @@ ol.trip-stops a:hover { text-decoration: underline; }
 .heraldry-univ-caption { font-size: 0.52rem; line-height: 1.18;
   margin: 0.12rem 0 0; padding: 0 0.06rem; color: #252525;
   text-align: center; font-weight: 500; }
-.heraldry-motto { text-align: center; max-width: 18rem; margin: 0.18rem auto;
+.heraldry-motto { text-align: center; margin: 0.18rem auto;
   width: 100%; }
 .motto-line { font-family: 'Cinzel', serif; font-size: 1rem;
   margin: 0; color: #333; line-height: 1.35; }
 .guide-title h1.guide-title-main { font-family: 'Cinzel', serif;
   font-size: 2.35rem; margin-bottom: 0.5rem; font-weight: 600; }
 .lead { color: #444; font-size: 1.05rem; }
-.guide-toc { margin: 0.85rem 0 1.15rem; page-break-inside: avoid; }
-.guide-toc h2 { font-family: 'Cinzel', serif; font-size: 1.28rem;
-  font-weight: 600; margin: 0.4rem 0 0.55rem; }
+
+.guide-toc { page-break-before: always; break-before: page;
+  page-break-after: always; break-after: page;
+  margin: 0; padding: 0.2rem 0 0.45rem; page-break-inside: auto; }
+.guide-toc h2 { font-family: 'Cinzel', serif;
+  font-size: 1.28rem; font-weight: 600; margin: 0.4rem 0 0.55rem; }
 .guide-toc ol { margin: 0.35rem 0 0.65rem 1.25rem; padding: 0;
   columns: 2; column-gap: 1.5rem; }
 .guide-toc li { margin: 0.18rem 0; line-height: 1.35;
   font-size: 0.88rem; break-inside: avoid; }
-.guide-toc a { color: #1a5276; text-decoration: none; }
+.guide-toc a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.guide-toc a:hover { color: #0d3d56; }
 .guide-toc li.toc-item--sub { font-size: 0.82rem; margin-left: 0.35rem; }
+.toc-back { font-size: 0.78rem; margin: 0 0 0.35rem; text-align: right; }
+.toc-back a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.toc-back a:hover { color: #0d3d56; }
+.place, .historical-reference, .guide-primer, .guide-trip-plans {
+  scroll-margin-top: 1.25rem; }
+.historical-reference h2, .guide-primer h2, .guide-trip-plans h2,
+.chapter-head h2, .place-lead h3 { position: relative; }
+.guide-toc + .place, .guide-toc + .chapter-head {
+  page-break-before: avoid; break-before: avoid-page; }
+.place-lead { page-break-inside: avoid; break-inside: avoid-page;
+  page-break-after: auto; }
+.place-lead > h3 { page-break-after: avoid; break-after: avoid-page; }
+.place-lead > .place-meta { page-break-after: avoid; break-after: avoid-page; }
+
+.place-fig { page-break-inside: avoid; break-inside: avoid-page;
+  margin: 0.5rem 0 1rem; }
+.place-fig img {
+  page-break-inside: avoid; break-inside: avoid-page;
+  max-height: 48vh; width: auto; max-width: 100%;
+  object-fit: contain; margin-left: auto; margin-right: auto; }
+.place-fig--hi-res img { max-height: 52vh; }
+.place-fig--lo-res img { max-height: 30vh; }
+.place-pdf-fig-row {
+  display: flex; flex-direction: row; flex-wrap: wrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.45rem 0.55rem; margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row .place-fig {
+  flex: 1 1 30%; margin: 0; min-width: 26%; max-width: 100%; }
+.place-pdf-fig-row .place-fig img {
+  width: auto; max-width: 100%; height: auto; max-height: 44vh;
+  object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--pair {
+  flex-wrap: nowrap; justify-content: space-between;
+  align-items: flex-end; gap: 0.5rem 0.65rem; }
+.place-pdf-fig-row--pair .place-fig {
+  flex: 1 1 47%; min-width: 0; max-width: 50%;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--pair .place-fig img {
+  max-height: 44vh; object-fit: contain; }
+.place-pdf-fig-row--pair .place-fig--hi-res img { max-height: 52vh; }
+.place-pdf-fig-row--pair .place-fig--lo-res img { max-height: 26vh; }
+.place-pdf-fig-row--pair .place-fig--row-sized img,
+.place-pdf-fig-row--triple .place-fig--row-sized img,
+.place-pdf-fig-row--many .place-fig--row-sized img {
+  width: auto; max-width: 100%; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row .place-fig--row-sized.place-fig--hi-res img,
+.place-pdf-fig-row .place-fig--row-sized.place-fig--lo-res img {
+  max-height: unset; }
+.place-pdf-fig-rows-stack {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple {
+  display: flex; flex-direction: row; flex-wrap: nowrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.4rem 0.48rem; margin: 0;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--triple .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--triple .place-fig--hi-res img { max-height: 42vh; }
+.place-pdf-fig-row--triple .place-fig--lo-res img { max-height: 18vh; }
+.place-pdf-fig-row--many {
+  flex-wrap: nowrap; justify-content: center; align-items: flex-end;
+  gap: 0.35rem 0.42rem; }
+.place-pdf-fig-row--many .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--many .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+
+
 .place { margin-bottom: 2.2rem; page-break-inside: auto; }
 h3 { font-family: 'Cinzel', serif; font-size: 1.22rem; margin: 1.2rem 0 0.35rem;
   font-weight: 600; }
@@ -90,7 +171,6 @@ h4 { font-family: 'Cinzel', serif; font-size: 0.95rem; text-transform: uppercase
   color: #555; font-size: 0.95rem; margin: 0 0 0.5rem; font-style: italic; }
 .place-meta { font-size: 0.92rem; color: #353535; margin: 0 0 0.75rem;
   line-height: 1.4; }
-.place-fig { margin: 0.5rem 0 1rem; }
 img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
 .prose, .place-desc p { margin: 0.45rem 0; line-height: 1.5;
   text-align: justify; }
@@ -110,316 +190,528 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <figure class="heraldry-fig heraldry-coat-book" title="City emblem"><img src="../images/guide_coat_of_arms.svg" alt="City emblem"/></figure>
 <figure class="heraldry-fig heraldry-coat-book" title="Flag"><img src="../images/guide_flag.svg" alt="Flag"/></figure>
 </div></div><h1 class="guide-title-main">Venice</h1><p class="lead">Путеводитель. Объектов в этом выпуске: 35.</p></header>
+<nav class="guide-toc" id="guide-toc" aria-label="Содержание"><h2>Содержание</h2><ol><li class="toc-item"><a href="#guide-historical">Историческая справка</a></li><li class="toc-item"><a href="#guide-trips">Маршруты</a></li><li class="toc-item"><a href="#venice_arsenale">Venice Arsenale</a></li><li class="toc-item"><a href="#venice_arsenale_gate_land">Venice Arsenale Gate Land</a></li><li class="toc-item"><a href="#venice_basilica_san_marco">Venice Basilica San Marco</a></li><li class="toc-item"><a href="#venice_biblioteca_marciana">Venice Biblioteca Marciana</a></li><li class="toc-item"><a href="#venice_bridge_of_sighs">Venice Bridge Of Sighs</a></li><li class="toc-item"><a href="#venice_burano">Venice Burano</a></li><li class="toc-item"><a href="#venice_ca_doro">Venice Ca Doro</a></li><li class="toc-item"><a href="#venice_ca_rezzonico">Venice Ca Rezzonico</a></li><li class="toc-item"><a href="#venice_campanile_san_marco">Venice Campanile San Marco</a></li><li class="toc-item"><a href="#venice_campo_san_polo">Venice Campo San Polo</a></li><li class="toc-item"><a href="#venice_campo_santa_margherita">Venice Campo Santa Margherita</a></li><li class="toc-item"><a href="#venice_canton">Venice Canton</a></li><li class="toc-item"><a href="#venice_doges_palace">Venice Doges Palace</a></li><li class="toc-item"><a href="#venice_gallerie_accademia">Venice Gallerie Accademia</a></li><li class="toc-item"><a href="#venice_giardini_biennale">Venice Giardini Biennale</a></li><li class="toc-item"><a href="#venice_grand_canal">Venice Grand Canal</a></li><li class="toc-item"><a href="#venice_jewish_museum_venice">Venice Jewish Museum Venice</a></li><li class="toc-item"><a href="#venice_lido_di_venezia">Venice Lido Di Venezia</a></li><li class="toc-item"><a href="#venice_lido_di_venezia_beach">Venice Lido Di Venezia Beach</a></li><li class="toc-item"><a href="#venice_murano">Venice Murano</a></li><li class="toc-item"><a href="#venice_peggy_guggenheim_collection">Venice Peggy Guggenheim Collection</a></li><li class="toc-item"><a href="#venice_piazza_san_marco">Venice Piazza San Marco</a></li><li class="toc-item"><a href="#venice_ponte_accademia">Venice Ponte Accademia</a></li><li class="toc-item"><a href="#venice_punta_della_dogana">Venice Punta Della Dogana</a></li><li class="toc-item"><a href="#venice_rialto_bridge">Venice Rialto Bridge</a></li><li class="toc-item"><a href="#venice_san_francesco_della_vigna">Venice San Francesco Della Vigna</a></li><li class="toc-item"><a href="#venice_san_giorgio_maggiore">Venice San Giorgio Maggiore</a></li><li class="toc-item"><a href="#venice_san_zaccaria_venice">Venice San Zaccaria Venice</a></li><li class="toc-item"><a href="#venice_santa_maria_dei_miracoli">Venice Santa Maria Dei Miracoli</a></li><li class="toc-item"><a href="#venice_santa_maria_della_salute">Venice Santa Maria Della Salute</a></li><li class="toc-item"><a href="#venice_santa_maria_formosa">Venice Santa Maria Formosa</a></li><li class="toc-item"><a href="#venice_scala_contarini_del_bovolo">Venice Scala Contarini Del Bovolo</a></li><li class="toc-item"><a href="#venice_scuola_grande_san_rocco">Venice Scuola Grande San Rocco</a></li><li class="toc-item"><a href="#venice_st_marks_clocktower">Venice St Marks Clocktower</a></li><li class="toc-item"><a href="#venice_teatro_la_fenice">Venice Teatro La Fenice</a></li></ol></nav>
 <section class="historical-reference" id="guide-historical" aria-label="Историческая справка"><h2>Историческая справка</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 <p class="prose">Венеция — город в лагуне Адриатики, бывшая столица Венецианской республики.</p>
 <p class="prose">Морская торговая империя, Готика и Возрождение, карнавал и венецианское стекло. Каналы, мосты и палаццо создают уникальную среду; город борется с наводнениями и круизным туризмом, оставаясь символом Италии.</p>
 <p class="prose">Наполеон и Австрия сменили республику; присоединение к Италии сделало город частью национального государства. Туризм и круизы создают нагрузку на лагуну; Венеция ищет баланс между сохранением памятников ЮНЕСКО и жизнью местных жителей.</p></section>
 <section class="guide-trip-plans" id="guide-trips" aria-label="Маршруты"><h2>Маршруты</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 <article class="trip-plan" id="trip-1d"><h3>Один день</h3>
 <p class="prose">Компактный маршрут по главным точкам путеводителя с минимальным возвратом назад пешком.</p>
-<ol class="trip-stops"><li><a href="#venice_bridge_of_sighs">Venice Bridge Of Sighs</a> (~75мин)</li>
+<ol class="trip-stops"><li><a href="#venice_arsenale">Venice Arsenale</a> (~75мин)</li>
+<li><a href="#venice_giardini_biennale">Venice Giardini Biennale</a> (~75мин)</li>
+<li><a href="#venice_san_giorgio_maggiore">Venice San Giorgio Maggiore</a> (~75мин)</li>
 <li><a href="#venice_doges_palace">Venice Doges Palace</a> (~75мин)</li>
-<li><a href="#venice_basilica_san_marco">Venice Basilica San Marco</a> (~75мин)</li>
-<li><a href="#venice_campanile_san_marco">Venice Campanile San Marco</a> (~75мин)</li>
-<li><a href="#venice_biblioteca_marciana">Venice Biblioteca Marciana</a> (~75мин)</li>
-<li><a href="#venice_punta_della_dogana">Venice Punta Della Dogana</a> (~75мин)</li></ol></article>
+<li><a href="#venice_bridge_of_sighs">Venice Bridge Of Sighs</a> (~75мин)</li>
+<li><a href="#venice_basilica_san_marco">Venice Basilica San Marco</a> (~75мин)</li></ol></article>
 <article class="trip-plan" id="trip-3d1"><h3>Три дня — день 1</h3>
 <p class="prose">День 1 — центральный кластер.</p>
-<ol class="trip-stops"><li><a href="#venice_arsenale">Venice Arsenale</a> (~75мин)</li>
-<li><a href="#venice_arsenale_gate_land">Venice Arsenale Gate Land</a> (~75мин)</li>
+<ol class="trip-stops"><li><a href="#venice_arsenale_gate_land">Venice Arsenale Gate Land</a> (~75мин)</li>
+<li><a href="#venice_biblioteca_marciana">Venice Biblioteca Marciana</a> (~75мин)</li>
 <li><a href="#venice_burano">Venice Burano</a> (~75мин)</li>
 <li><a href="#venice_ca_doro">Venice Ca Doro</a> (~75мин)</li>
 <li><a href="#venice_ca_rezzonico">Venice Ca Rezzonico</a> (~75мин)</li></ol></article>
 <article class="trip-plan" id="trip-3d2"><h3>Три дня — день 2</h3>
 <p class="prose">День 2 — следующая группа районов.</p>
-<ol class="trip-stops"><li><a href="#venice_campo_san_polo">Venice Campo San Polo</a> (~75мин)</li>
+<ol class="trip-stops"><li><a href="#venice_campanile_san_marco">Venice Campanile San Marco</a> (~75мин)</li>
+<li><a href="#venice_campo_san_polo">Venice Campo San Polo</a> (~75мин)</li>
 <li><a href="#venice_campo_santa_margherita">Venice Campo Santa Margherita</a> (~75мин)</li>
 <li><a href="#venice_gallerie_accademia">Venice Gallerie Accademia</a> (~75мин)</li>
-<li><a href="#venice_giardini_biennale">Venice Giardini Biennale</a> (~75мин)</li>
 <li><a href="#venice_grand_canal">Venice Grand Canal</a> (~75мин)</li></ol></article>
 <article class="trip-plan" id="trip-3d3"><h3>Три дня — день 3</h3>
 <p class="prose">День 3 — оставшиеся близкие объекты.</p>
 <ol class="trip-stops"><li><a href="#venice_lido_di_venezia">Venice Lido Di Venezia</a> (~75мин)</li></ol></article></section>
-<nav class="guide-toc" aria-label="Содержание"><h2>Содержание</h2><ol><li class="toc-item"><a href="#guide-historical">Историческая справка</a></li><li class="toc-item"><a href="#guide-trips">Маршруты</a></li><li class="toc-item"><a href="#venice_ponte_accademia">Venice Ponte Accademia</a></li><li class="toc-item"><a href="#venice_arsenale_gate_land">Venice Arsenale Gate Land</a></li><li class="toc-item"><a href="#venice_bridge_of_sighs">Venice Bridge Of Sighs</a></li><li class="toc-item"><a href="#venice_burano">Venice Burano</a></li><li class="toc-item"><a href="#venice_ca_doro">Venice Ca Doro</a></li><li class="toc-item"><a href="#venice_ca_rezzonico">Venice Ca Rezzonico</a></li><li class="toc-item"><a href="#venice_campo_san_polo">Venice Campo San Polo</a></li><li class="toc-item"><a href="#venice_campo_santa_margherita">Venice Campo Santa Margherita</a></li><li class="toc-item"><a href="#venice_doges_palace">Venice Doges Palace</a></li><li class="toc-item"><a href="#venice_gallerie_accademia">Venice Gallerie Accademia</a></li><li class="toc-item"><a href="#venice_giardini_biennale">Venice Giardini Biennale</a></li><li class="toc-item"><a href="#venice_grand_canal">Venice Grand Canal</a></li><li class="toc-item"><a href="#venice_jewish_museum_venice">Venice Jewish Museum Venice</a></li><li class="toc-item"><a href="#venice_teatro_la_fenice">Venice Teatro La Fenice</a></li><li class="toc-item"><a href="#venice_lido_di_venezia">Venice Lido Di Venezia</a></li><li class="toc-item"><a href="#venice_lido_di_venezia_beach">Venice Lido Di Venezia Beach</a></li><li class="toc-item"><a href="#venice_biblioteca_marciana">Venice Biblioteca Marciana</a></li><li class="toc-item"><a href="#venice_pdfband_2_1c9dd585">Canton</a></li><li class="toc-item"><a href="#venice_murano">Venice Murano</a></li><li class="toc-item"><a href="#venice_scala_contarini_del_bovolo">Venice Scala Contarini Del Bovolo</a></li><li class="toc-item"><a href="#venice_peggy_guggenheim_collection">Venice Peggy Guggenheim Collection</a></li><li class="toc-item"><a href="#venice_piazza_san_marco">Venice Piazza San Marco</a></li><li class="toc-item"><a href="#venice_punta_della_dogana">Venice Punta Della Dogana</a></li><li class="toc-item"><a href="#venice_rialto_bridge">Venice Rialto Bridge</a></li><li class="toc-item"><a href="#venice_san_francesco_della_vigna">Venice San Francesco Della Vigna</a></li><li class="toc-item"><a href="#venice_san_giorgio_maggiore">Venice San Giorgio Maggiore</a></li><li class="toc-item"><a href="#venice_san_zaccaria_venice">Venice San Zaccaria Venice</a></li><li class="toc-item"><a href="#venice_santa_maria_dei_miracoli">Venice Santa Maria Dei Miracoli</a></li><li class="toc-item"><a href="#venice_santa_maria_della_salute">Venice Santa Maria Della Salute</a></li><li class="toc-item"><a href="#venice_santa_maria_formosa">Venice Santa Maria Formosa</a></li><li class="toc-item"><a href="#venice_scuola_grande_san_rocco">Venice Scuola Grande San Rocco</a></li><li class="toc-item"><a href="#venice_basilica_san_marco">Venice Basilica San Marco</a></li><li class="toc-item"><a href="#venice_campanile_san_marco">Venice Campanile San Marco</a></li><li class="toc-item"><a href="#venice_st_marks_clocktower">Venice St Marks Clocktower</a></li><li class="toc-item"><a href="#venice_arsenale">Venice Arsenale</a></li></ol></nav>
-<section class="place" id="venice_ponte_accademia">
-<h3>Venice Ponte Accademia</h3>
+<section class="place" id="venice_arsenale">
+<div class="place-lead">
+<h3>Venice Arsenale</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Стиль: классический ренессанс с влиянием римской архитектуры</p>
-<figure class="place-fig"><img src="../images/venice_ponte_accademia.jpg" alt="Venice Ponte Accademia"/></figure>
-<div class="place-desc"><p class="prose">Один из немногих пешеходных переходов через Гранд-канал. Назван в честь расположенных рядом художественных галерей и бывшей академии. Деревянная конструкция подчеркивает природную эстетику и органично вписывается в окружающую среду. Является важным элементом городского пейзажа и визитной карточкой Венеции. На мосту часто устраиваются выставки и мероприятия, привлекающие туристов.</p>
-<p class="prose">Мост Академии был построен в 1589 году в классическом ренессансном стиле с элементами римской архитектуры. Изначально мост был деревянным, что сохранилось до наших дней и стало частью его уникального облика. Со временем мост стал популярным местом для фотосъемок благодаря живописному виду на Салюте и изгиб канала Гранд-канал. Деревянная конструкция моста придает ему лёгкость и особую атмосферу, отличающуюся от традиционных каменных мостов Венеции. Это классический видовой пункт, соединяющий арт-квартал с основным туристическим маршрутом города.</p></div>
+<p class="place-meta">Адрес: Castello sestiere, eastern edge of the historic city</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_arsenale.jpg" alt="Venice Arsenale" width="1280" height="719" style="height: 259px; max-height: 259px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/venice_arsenale_b.jpg" alt="Venice Arsenale — вид 2" width="330" height="237" style="height: 259px; max-height: 259px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Здесь впервые были применены методы серийного производства кораблей, позволяющие значительно ускорить процесс строительства. Комплекс включает обширные территории с верфями, каналами и складскими помещениями. На протяжении веков Арсенале оставалась стратегически важной военной базой. Доступ открыт лишь частично во время проведения Биеннале и редких экскурсий. Изначально арсенал предназначался исключительно для государственных нужд.</p>
+<p class="prose">Венецианская Арсенале возникла в конце XIII века и была главным центром кораблестроения Венецианской республики. Здесь создавались военные корабли, поддерживавшие морское могущество государства. Изначально предприятие находилось под государственным контролем и играло ключевую роль в обеспечении военно-морской мощи страны. Со временем доступ к арсеналу был ограничен, и он использовался преимущественно для военных нужд. Среди примечательных фактов стоит отметить использование ранних методов конвейерной сборки, позволявших быстро строить галеры. Арсенале является важным историческим памятником, отражающим промышленную мощь Венецианской республики и её роль в морской торговле и военном превосходстве.</p></div>
 </section>
 <section class="place" id="venice_arsenale_gate_land">
+<div class="place-lead">
 <h3>Venice Arsenale Gate Land</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/venice_arsenale_gate_land.jpg" alt="Venice Arsenale Gate Land"/></figure>
+<p class="place-meta">Адрес: Land entrance to the Arsenale, Castello</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_arsenale_gate_land.jpg" alt="Venice Arsenale Gate Land" width="1200" height="1600" style="height: 305px; max-height: 305px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/venice_arsenale_gate_land_b.jpg" alt="Venice Arsenale Gate Land — вид 2" width="330" height="218" style="height: 305px; max-height: 305px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Львы и рельефы на портале выполняют пропагандистские функции, демонстрируя морскую мощь Венеции ещё до входа в комплекс. Гейт подчёркивает церемониальные аспекты управления государством через архитектуру. Сооружение выполнено в стиле итальянского Возрождения, характерном для знаковых архитектурных объектов Венеции. Портал часто упоминается среди ранних примеров ренессансных триумфальных арок в городе. Фигуры львов и трофеи символизируют имперский статус и военное превосходство Венецианской республики.</p>
 <p class="prose">Арсенале-гейт был построен в конце XVI века и является ярким примером ренессансной архитектуры Венеции. Сооружение служило парадным входом в Арсенальное производство и демонстрировало мощь и влияние Венецианской республики, подчеркивая контроль государства над военно-морским флотом и промышленностью. Часто цитируется как один из первых триумфальных арочных ворот Ренессанса в Венеции. Этот монументальный портал символизирует военную и индустриальную идентичность Венеции и подчеркивает её морское могущество.</p></div>
 </section>
-<section class="place" id="venice_bridge_of_sighs">
-<h3>Venice Bridge Of Sighs</h3>
+<section class="place" id="venice_basilica_san_marco">
+<div class="place-lead">
+<h3>Venice Basilica San Marco</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Стиль: венетский готический стиль | Период: 1600–1603</p>
-<figure class="place-fig"><img src="../images/venice_bridge_of_sighs.jpg" alt="Venice Bridge Of Sighs"/></figure>
+<p class="place-meta">Адрес: Piazza San Marco</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_basilica_san_marco.jpg" alt="Venice Basilica San Marco" width="1280" height="960" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/venice_basilica_san_marco_b.jpg" alt="Venice Basilica San Marco — вид 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Заложен в IX веке, строительство продолжалось до XI века. Архитектура сочетает элементы римского, византийского и готического стилей. Золотые мозаики и низкие своды создают атмосферу восточной Средиземноморья. Внешние колонны и мраморы включают фрагменты древних построек. Бasilica San Marco является одним из главных туристических объектов города.</p>
+<p class="prose">Собор Святого Марка был построен в IX–XI веках и стал духовным и политическим центром Венеции. Изначально возведённый в романском стиле, позже собор приобрёл черты византийского искусства и готики Венеции. В нём собраны трофеи торговли и завоеваний Республики, превращённые в публичную сокровищницу материалов и изображений. Собор служил хранилищем реликвий святого Марка, взятых из Александрии купцами Венеции. Это сердце духовной и политической жизни Венеции, церковь, символизирующая мощь и богатство республики.</p></div>
+</section>
+<section class="place" id="venice_biblioteca_marciana">
+<div class="place-lead">
+<h3>Venice Biblioteca Marciana</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Piazzetta San Marco, facing the lagoon</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_biblioteca_marciana.jpg" alt="Venice Biblioteca Marciana" width="1035" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--row-sized"><img src="../images/venice_biblioteca_marciana_b.jpg" alt="Venice Biblioteca Marciana — вид 2" width="330" height="871" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Фасад библиотеки выполнен в стиле барокко и стал ярким примером венской ренессансной классики. Читальные залы библиотеки хранят уникальные манускрипты и печатные издания, представляющие историческую ценность. Здание было открыто для широкой публики и способствовало распространению знаний среди населения. Марчианаская библиотека сыграла важную роль в развитии гуманистического образования и научных исследований в Венеции. Коллекция библиотеки включает редкие экземпляры средневековых рукописей и изданий эпохи Возрождения.</p>
+<p class="prose">Марчианаская библиотека была основана во второй половине XVIII века и является одной из старейших публичных библиотек Венеции. Библиотека была создана благодаря пожертвованию кардинала Бессариона, который передал в дар республике обширную коллекцию греческих и латинских рукописей и книг. Это место стало символом интеллектуального центра Венецианской республики, демонстрируя её стремление к просвещению и культурному развитию наряду с политической властью. Библиотека Марчиана представляет собой значимый памятник культуры и символ Венеции как крупного культурного и интеллектуального центра Европы.</p></div>
+</section>
+<section class="place" id="venice_bridge_of_sighs">
+<div class="place-lead">
+<h3>Venice Bridge Of Sighs</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Место: Linking the Doge&#x27;s Palace to the former prisons | Стиль: венетский готический стиль | Период: 1600–1603</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_bridge_of_sighs.jpg" alt="Venice Bridge Of Sighs" width="1280" height="932" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/venice_bridge_of_sighs_b.jpg" alt="Venice Bridge Of Sighs — вид 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Имеет два отдельных коридора внутри, разделённых перегородкой, один предназначен для административных помещений, другой — для тюремных камер. Название &#x27;Мост вздохов&#x27; возникло позже и является скорее романтическим, нежели официальным. Является одним из самых фотографируемых объектов города благодаря своему изящному облику и историческому значению. Построен над каналом Рио ди Пьетра, который раньше служил главным входом в тюрьму. Архитектура моста сочетает элементы готики и ренессанса.</p>
 <p class="prose">Мост вздохов построен в 1602 году в стиле венетского готического зодчества и соединяет Дворец дожей с тюрьмой Пьомпи. Изначально использовался как короткий путь между комнатами допросов и местами заключения. Согласно легенде, заключённые прощались с прошлой свободой, глядя последний раз на каналы Венеции через этот мост. Один из наиболее узнаваемых символов Венеции, ставший частью городской мифологии и привлекающий туристов своей атмосферой и архитектурой.</p></div>
 </section>
 <section class="place" id="venice_burano">
+<div class="place-lead">
 <h3>Venice Burano</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/venice_burano.jpg" alt="Venice Burano"/></figure>
+<p class="place-meta">Адрес: Northern lagoon island (vaporetto access from Fondamente Nove)</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_burano.jpg" alt="Venice Burano" width="1280" height="720" style="height: 259px; max-height: 259px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/venice_burano_b.jpg" alt="Venice Burano — вид 2" width="330" height="237" style="height: 259px; max-height: 259px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Яркие фасады домов стали визитной карточкой острова. Традиция кружевоплетения зародилась еще в Средние века. На острове расположены небольшие мастерские, где до сих пор создают кружево вручную. Лагуна вокруг острова славится живописными видами и прогулочными катерами. Башня Сан-Мартино известна своей необычной наклонностью.</p>
 <p class="prose">Бурано — остров в лагуне Венеции, известный своими яркими домиками и традициями изготовления кружева. Когда-то здесь жили рыбаки и ремесленники, позже остров стал популярным туристическим направлением благодаря живописной архитектуре и цветным фасадам домов. Сегодня Бурано продолжает сохранять свою уникальную идентичность, сочетая старинное искусство кружевоплетения с современными кафе и ресторанами. Бурано привлекает туристов яркой архитектурой и традициями кружевоплетения, предлагая увидеть жизнь венецианской лагуны вне центра города.</p></div>
 </section>
 <section class="place" id="venice_ca_doro">
+<div class="place-lead">
 <h3>Venice Ca Doro</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1421–1440</p>
-<figure class="place-fig"><img src="../images/venice_ca_doro.jpg" alt="Venice Ca Doro"/></figure>
+<p class="place-meta">Адрес: Cannaregio, Grand Canal | Период: 1421–1440</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_ca_doro.jpg" alt="Venice Ca Doro" width="1280" height="960" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/venice_ca_doro_b.jpg" alt="Venice Ca Doro — вид 2" width="330" height="290" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Название здания происходит от его первоначальной золотой отделки. Фасад Ca&#x27; d&#x27;Oro особенно выразительно выглядит именно с воды, благодаря чему рекомендуется посещать его на лодке. Внутри здания расположены экспозиции Франчетти-галереи, представляющей искусство разных эпох. Здание служило домом для знатных семей Венецианской республики и демонстрировало их высокое положение в обществе. После периода частной жизни оно стало музеем и доступно для посещения туристами.</p>
 <p class="prose">Палас Ca&#x27; d&#x27;Oro был построен в XV веке (примерно 1430–1440 годы) в стиле венетского готического зодчества. Изначально здание было богато декорировано позолотой и многоцветной росписью, фасад которого особенно эффектно смотрится с воды на гондоле или вапоретто. Название здания переводится как «Дом золота», отражая роскошь первоначального убранства. В прошлом это была резиденция богатых купцов Венеции, демонстрирующих своё богатство и статус прямо на Гранд-канале. Позже здесь размещались коллекции известных коллекционеров, превративших дом в музей. Ca&#x27; d&#x27;Oro является одним из лучших примеров чистого готического стиля на Гранд-канале и привлекает туристов своей уникальной архитектурой и богатой историей.</p></div>
 </section>
 <section class="place" id="venice_ca_rezzonico">
+<div class="place-lead">
 <h3>Venice Ca Rezzonico</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/venice_ca_rezzonico.jpg" alt="Venice Ca Rezzonico"/></figure>
+<p class="place-meta">Адрес: Dorsoduro, Grand Canal</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_ca_rezzonico.jpg" alt="Venice Ca Rezzonico" width="1280" height="853" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/venice_ca_rezzonico_b.jpg" alt="Venice Ca Rezzonico — вид 2" width="330" height="219" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Первоначально здание предназначалось для знатной семьи Реццонико. Музей знаменит своими парадными залами с фресками на потолке и интерьером в стиле барокко и рококо. Коллекция музея включает предметы повседневной жизни и предметы искусства периода поздней Республики Венеция. Здание является одним из немногих сохранившихся примеров архитектуры конца XVIII века в Венеции. Посещение музея позволяет увидеть обстановку типичного аристократического дома той эпохи.</p>
 <p class="prose">Палаццо Ка-Реццонико было построено в конце XVIII века и изначально спроектировано архитектором Бальдассаре Лонгена. Со временем судьба палаццо изменилась вместе с упадком торговли Венецианской республики, однако сегодня оно открыто для публики как музей, позволяя посетителям почувствовать атмосферу домашнего великолепия эпохи рококо. Лучшее место, чтобы ощутить роскошь частной жизни венецианцев эпохи рококо, а не величие городской власти.</p></div>
 </section>
-<section class="place" id="venice_campo_san_polo">
-<h3>Venice Campo San Polo</h3>
+<section class="place" id="venice_campanile_san_marco">
+<div class="place-lead">
+<h3>Venice Campanile San Marco</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Стиль: Ренессанс и готическое влияние</p>
-<figure class="place-fig"><img src="../images/venice_campo_san_polo.jpg" alt="Venice Campo San Polo"/></figure>
+<p class="place-meta">Адрес: Piazza San Marco</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_campanile_san_marco.jpg" alt="Venice Campanile San Marco" width="839" height="1600" style="height: 319px; max-height: 319px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/venice_campanile_san_marco_b.jpg" alt="Venice Campanile San Marco — вид 2" width="330" height="228" style="height: 319px; max-height: 319px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">После обрушения была восстановлена точно по первоначальному проекту, сохранив прежний силуэт. Обрушение башни произошло рядом с прилегающей лоджией, однако сама базилика осталась невредимой. Стиль здания — венецкий готический, характерный для архитектуры Венецианской республики. Подъем на башню осуществляется через лифт, откуда открывается панорамный обзор города. Башня служила наблюдательным пунктом и важным элементом обороны города.</p>
+<p class="prose">Средневековая сторожевая башня превратилась в символ Венеции после трагического обрушения в 1902 году, когда потребовалась тщательная реконструкция. Башня стала важнейшим ориентиром городской панорамы благодаря своей уникальной высоте и оригинальной готической архитектуре. Башня является главным вертикальным акцентом плоской крыши Венеции и открывает потрясающий вид на каналы и лагуну.</p></div>
+</section>
+<section class="place" id="venice_campo_san_polo">
+<div class="place-lead">
+<h3>Venice Campo San Polo</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Место: San Polo sestiere | Стиль: Ренессанс и готическое влияние</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_campo_san_polo.jpg" alt="Venice Campo San Polo" width="1280" height="571" style="height: 206px; max-height: 206px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/venice_campo_san_polo_b.jpg" alt="Venice Campo San Polo — вид 2" width="330" height="263" style="height: 206px; max-height: 206px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Исторически площадь использовалась для общественных игр и зрелищ. Рядом расположена известная Скуола Гранде ди Сан Рокко. Площадь отражает влияние ренессансной и готической архитектуры. Сан-Поло — одна из самых просторных площадей Венеции. Здесь регулярно проводятся культурные и общественные мероприятия.</p>
 <p class="prose">Кампан Сан-Поло был построен в XIII веке и изначально служил общественной площадью прихода Сан-Поло. Со временем площадь стала местом проведения ярмарок, рынков и публичных игр, отражая важность этой территории как торгового центра города. Сегодня Кампан остается просторной городской площадью, где проходят сезонные мероприятия и рынки. Площадь Сан-Поло является одним из крупнейших открытых пространств Венеции и служит важным общественным пространством в самом компактном районе города — Дорсодуро.</p></div>
 </section>
 <section class="place" id="venice_campo_santa_margherita">
+<div class="place-lead">
 <h3>Venice Campo Santa Margherita</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Стиль: готический и венецианский</p>
-<figure class="place-fig"><img src="../images/venice_campo_santa_margherita.jpg" alt="Venice Campo Santa Margherita"/></figure>
+<p class="place-meta">Место: Dorsoduro (near Ca&#x27; Foscari and IUAV) | Стиль: готический и венецианский</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_campo_santa_margherita.jpg" alt="Venice Campo Santa Margherita" width="1280" height="927" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/venice_campo_santa_margherita_b.jpg" alt="Venice Campo Santa Margherita — вид 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Площадь окружена готическими зданиями и домами в стиле венецианской архитектуры. Здесь регулярно проходят уличные рынки с местными овощами и фруктами. Рядом расположена старинная церковь Санта-Мария делле Мизерикорди. В Campo Santa Margherita часто собираются студенты Дожьенской академии. На площади устраиваются концерты классической музыки и культурные мероприятия.</p>
 <p class="prose">С XVI века Campo Santa Margherita была центральным местом общественной жизни Венеции, здесь проходили ярмарки, проводились религиозные церемонии и собрания горожан. Со временем площадь сохранила свою традиционную функцию, став местом встреч студентов местного университета и местных жителей. Это одно из немногих мест в городе, где ощущается настоящая жизнь Венеции, далекая от туристических маршрутов и монументальных достопримечательностей.</p></div>
 </section>
-<section class="place" id="venice_doges_palace">
-<h3>Venice Doges Palace</h3>
+<section class="place" id="venice_canton">
+<div class="place-lead">
+<h3>Venice Canton</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Стиль: готика и ренессанс</p>
-<figure class="place-fig"><img src="../images/venice_doges_palace.jpg" alt="Venice Doges Palace"/></figure>
+<p class="place-meta">Адрес: See official visitor information. | Стиль: смешанный стиль, сочетающий исламские мотивы и элементы итальянского ренессанса | Период: 1870–1880</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_canton.jpg" alt="Venice Canton" width="1280" height="1506" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/venice_canton_b.jpg" alt="Venice Canton — вид 2" width="330" height="247" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Единственная действующая мечеть в Италии находится именно здесь. Архитектура сочетает элементы исламского стиля с европейским ренессансом. Мечеть открыта для туристов ежедневно, кроме пятницы. Построена по инициативе китайских торговцев, обосновавшихся в Венеции. На территории мечети расположен небольшой музей, рассказывающий о жизни и культуре китайцев в Венеции.</p>
+<p class="prose">Мечеть Кантона построена в конце XIX века итальянскими архитекторами для китайской общины Венеции. Это одно из немногих китайских религиозных сооружений в Европе, сохранившихся до наших дней. Мечеть выполняла важную функцию культурного обмена между китайцами и местным населением, став местом встречи и общения представителей разных культур. Посещение мечети позволяет лучше понять историю и культуру китайского сообщества Венеции, увидеть уникальные архитектурные решения и познакомиться с традициями ислама.</p></div>
+</section>
+<section class="place" id="venice_doges_palace">
+<div class="place-lead">
+<h3>Venice Doges Palace</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Piazza San Marco, adjacent to the lagoon | Стиль: готика и ренессанс</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_doges_palace.jpg" alt="Venice Doges Palace" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/venice_doges_palace_b.jpg" alt="Venice Doges Palace — вид 2" width="330" height="364" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Соединён с тюрьмой мостом вздохов. Архитектурный символ Венецианской олигархии. Зал Большого совета — крупнейшая зала европейских дворцов. Построен в готическом и ренессансном стилях. После пожаров и восстаний многократно реставрировался.</p>
 <p class="prose">Дворец дожей был построен в XIV–XVI веках и стал символом могущества Венецианской республики. Это величественное здание служило резиденцией дожа и центром управления обширной морской империей. После многочисленных пожаров и политических реформ дворец неоднократно перестраивался и расширялся, превращаясь в сложную систему помещений, предназначенных для государственного управления, тайных заседаний и публичных церемоний. Одним из самых впечатляющих элементов дворца является Сала делла Маггьор Консильо — одна из крупнейших зал дворцов Европы. Посещение Дворца дожей позволяет окунуться в атмосферу средневековой Венецианской республики и увидеть архитектурное воплощение её власти и влияния.</p></div>
 </section>
 <section class="place" id="venice_gallerie_accademia">
+<div class="place-lead">
 <h3>Venice Gallerie Accademia</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Стиль: поздний классицизм</p>
-<figure class="place-fig"><img src="../images/venice_gallerie_accademia.jpg" alt="Venice Gallerie Accademia"/></figure>
+<p class="place-meta">Адрес: Campo della Carità, Dorsoduro | Стиль: поздний классицизм</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_gallerie_accademia.jpg" alt="Venice Gallerie Accademia" width="1226" height="1600" style="height: 417px; max-height: 417px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/venice_gallerie_accademia_b.jpg" alt="Venice Gallerie Accademia — вид 2" width="330" height="298" style="height: 417px; max-height: 417px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Собрание галереи включает знаменитые циклы картин, отражающие расцвет искусства Венецианской республики. Здесь представлены произведения, подчёркивающие морскую идентичность и мифологию Венеции. Музей расположен рядом с живописной мостовой террасой, откуда открывается прекрасный вид на Гранд-канал. Здание музея выполнено в стиле позднего классицизма. Галерея неоднократно реставрировалась и расширялась, сохраняя исторический облик.</p>
 <p class="prose">Гallerie dell&#x27;Accademia была основана в 1768 году как Академия художеств Венеции. В XIX веке Наполеоновские власти подавили многие частные коллекции, позже объединённые итальянским государством в публичные музеи. Сегодня галерея хранит шедевры эпохи Возрождения и барокко, включая работы художников, тесно связанных с историей города, такими как Джорджоне, Тициан и Веронезе. Это лучший музей для понимания особенностей живописи Венеции, её цвета и света, переданных на холсте.</p></div>
 </section>
 <section class="place" id="venice_giardini_biennale">
+<div class="place-lead">
 <h3>Venice Giardini Biennale</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/venice_giardini_biennale.jpg" alt="Venice Giardini Biennale"/></figure>
+<p class="place-meta">Место: Castello edge, Biennale gardens</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_giardini_biennale.jpg" alt="Venice Giardini Biennale" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/venice_giardini_biennale_b.jpg" alt="Venice Giardini Biennale — вид 2" width="330" height="247" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Павильон каждой страны является самостоятельным архитектурным объектом, отражающим национальные особенности и эстетические предпочтения. Во время проведения Венецианской биеннале территория превращается в центр современной культуры и привлекает миллионы посетителей. Сады были заложены еще в начале XX века и изначально служили местом отдыха аристократии. Здесь регулярно проходят тематические выставки, посвященные актуальным вопросам современности. Гуляя среди деревьев и павильонов, посетители погружаются в атмосферу культурного обмена и диалога между народами.</p>
 <p class="prose">Имперские сады Венеции превратились в международный арт-фестиваль, который проходит каждые два года и собирает павильоны разных стран мира. Здесь представлены архитектурные шедевры и произведения современного искусства, демонстрирующие культурное разнообразие и достижения мировой художественной сцены. Это место позволяет познакомиться с современными тенденциями мирового искусства и архитектуры в формате масштабной международной выставки.</p></div>
 </section>
 <section class="place" id="venice_grand_canal">
+<div class="place-lead">
 <h3>Venice Grand Canal</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/venice_grand_canal.jpg" alt="Venice Grand Canal"/></figure>
+<p class="place-meta">Адрес: S-shaped main waterway through the historic center</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_grand_canal.jpg" alt="Venice Grand Canal" width="1280" height="569" style="height: 205px; max-height: 205px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/venice_grand_canal_b.jpg" alt="Venice Grand Canal — вид 2" width="330" height="181" style="height: 205px; max-height: 205px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Длина Гранд-канала составляет около 4 км. Через канал перекинуто всего несколько мостов. Дворцы вдоль канала были специально спроектированы таким образом, чтобы их фасады читались с воды. По каналу проходят традиционные водные трамвайчики vaporetto, позволяющие насладиться видом исторических фасадов. Гранд-канал служил главным транспортным коридором Венеции до появления железных дорог.</p>
 <p class="prose">Гранд-канал был построен в эпоху Возрождения и стал важнейшей транспортной артерией Венеции, связывающей разные районы города. Канал играл ключевую роль в торговле и жизни города, став местом встречи купцов и аристократии. Здесь возвышались величественные дворцы, украшенные фасадами в стиле готики, ренессанса и барокко. Гранд-канал является главной осью Венеции и важнейшим пространственным элементом города, представляя собой своеобразную плавучую улицу.</p></div>
 </section>
 <section class="place" id="venice_jewish_museum_venice">
+<div class="place-lead">
 <h3>Venice Jewish Museum Venice</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Стиль: Барокко</p>
-<figure class="place-fig"><img src="../images/venice_jewish_museum_venice.jpg" alt="Venice Jewish Museum Venice"/></figure>
+<p class="place-meta">Адрес: Campo del Ghetto Nuovo, Cannaregio | Стиль: Барокко</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_jewish_museum_venice.jpg" alt="Venice Jewish Museum Venice" width="1063" height="1600" style="height: 322px; max-height: 322px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/venice_jewish_museum_venice_b.jpg" alt="Venice Jewish Museum Venice — вид 2" width="330" height="230" style="height: 322px; max-height: 322px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Название &#x27;гетто&#x27; впервые появилось именно здесь, обозначив место проживания евреев. Большинство синагог скрыты за фасадами обычных жилых домов. Коллекция музея включает редкие артефакты и архивные материалы, рассказывающие о повседневной жизни общины. После Второй мировой войны музей стал важным центром памяти жертв Холокоста. Экспозиция рассказывает о значении и роли еврейской культуры в городской среде.</p>
 <p class="prose">Синагоги Венеции долгое время были закрыты для широкой публики, доступ предоставлялся лишь по специальным экскурсиям. Музей расположен в историческом районе гетто, где с 1516 года евреи жили обособленно от остального населения города. Со временем район стал символом притеснения и изоляции еврейского сообщества Европы. Сегодня музей помогает переосмыслить историю района и напомнить о важности сохранения культурного наследия. Музей является ключевым местом для изучения европейской истории евреев и отражает разнообразие культурной жизни Венеции.</p></div>
 </section>
-<section class="place" id="venice_teatro_la_fenice">
-<h3>Venice Teatro La Fenice</h3>
-
-<p class="place-meta">Стиль: нео-классицизм</p>
-<figure class="place-fig"><img src="../images/venice_teatro_la_fenice.jpg" alt="Venice Teatro La Fenice"/></figure>
-<div class="place-desc"><p class="prose">Пожар 1996 года стал четвертым крупным пожаром в истории театра. Первое представление состоялось в 1794 году. На сцене Ла Фениче дебютировали такие известные композиторы, как Россини и Верди. После каждого восстановления театр сохранял первоначальный архитектурный облик. За свою историю театр пережил около 80 сезонов.</p>
-<p class="prose">Театр Ла Фениче — один из старейших и известнейших оперных театров Венеции, построенный в неоклассическом стиле в 1792 году. Здание неоднократно горело и восстанавливалось заново, словно символ феникса, возрождающегося из пепла. Последнее крупное восстановление произошло после пожара 1996 года. Ла Фениче — одна из самых известных сцен Европы, известная своими роскошными декорациями и великолепной акустикой. Здесь впервые прозвучали многие знаменитые оперы XIX века.</p></div>
-</section>
 <section class="place" id="venice_lido_di_venezia">
+<div class="place-lead">
 <h3>Venice Lido Di Venezia</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/venice_lido_di_venezia.jpg" alt="Venice Lido Di Venezia"/></figure>
+<p class="place-meta">Адрес: Barrier island between lagoon and Adriatic Sea</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_lido_di_venezia.jpg" alt="Venice Lido Di Venezia" width="1280" height="956" style="height: 271px; max-height: 271px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/venice_lido_di_venezia_b.jpg" alt="Venice Lido Di Venezia — вид 2" width="330" height="194" style="height: 271px; max-height: 271px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">На острове регулярно проводятся международные кинофестивали, включая знаменитый Венецианский кинофестиваль. Здесь расположены живописные песчаные пляжи и широкие улицы, идеально подходящие для прогулок и велосипедных поездок. Лидо служит природным волнорезом, защищающим лагуну от морских волн и штормов. Исторически остров был популярным местом для купания и оздоровления, привлекая туристов благодаря своим чистым водам Адриатического моря. Многие знаменитости и представители элиты часто выбирали Лидо для отдыха и проведения досуга.</p>
 <p class="prose">Лидо ди Венеция изначально было тихим островком, известным своими пляжами и курортной атмосферой. В XIX веке здесь начали строить роскошные отели и виллы, превращая Лидо в популярный курорт для аристократии и знати Европы. Современная история острова связана с развитием киноиндустрии: ежегодно здесь проходит Венецианский кинофестиваль, который привлекает кинозвезд и любителей кино со всего мира. Лидо ди Венеция — это символ морского отдыха и кинематографической жизни Венеции, предлагающий гостям возможность насладиться спокойствием пляжей и уникальной атмосферой Венецианского кинофестиваля.</p></div>
 </section>
 <section class="place" id="venice_lido_di_venezia_beach">
+<div class="place-lead">
 <h3>Venice Lido Di Venezia Beach</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/venice_lido_di_venezia_beach.jpg" alt="Venice Lido Di Venezia Beach"/></figure>
+<p class="place-meta">Адрес: Adriatic-facing beaches on the Lido</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_lido_di_venezia_beach.jpg" alt="Venice Lido Di Venezia Beach" width="1280" height="281" style="height: 101px; max-height: 101px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/venice_lido_di_venezia_beach_b.jpg" alt="Venice Lido Di Venezia Beach — вид 2" width="330" height="208" style="height: 101px; max-height: 101px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Пляжи острова представляют собой длинные песчаные участки с рядами кабанов. Многие секции пляжей управляются стабилизенти — официальными пляжными клубами. На Лидо регулярно проводятся культурные мероприятия и фестивали, включая Венецианский кинофестиваль. Пляжный сезон длится с мая по октябрь. Для посещения пляжа лучше приезжать рано утром, чтобы избежать большого количества людей и яркого солнца.</p>
 <p class="prose">Лидо-ди-Венеция — популярный пляжный район Венеции, расположенный на барьерном острове. Современная культура отдыха и развитие гостиничного бизнеса превратили остров в популярное место для туристов. Особое значение Лидо приобрело благодаря проведению ежегодного Венецианского кинофестиваля, который привлекает большое количество гостей и поднимает цены на жилье и развлечения. Единственное официальное место для купания в Венеции, Лидо-ди-Венеция является редким примером пляжа в городе, окруженном лагуной.</p></div>
 </section>
-<section class="place" id="venice_biblioteca_marciana">
-<h3>Venice Biblioteca Marciana</h3>
-
-
-<figure class="place-fig"><img src="../images/venice_biblioteca_marciana.jpg" alt="Venice Biblioteca Marciana"/></figure>
-<div class="place-desc"><p class="prose">Фасад библиотеки выполнен в стиле барокко и стал ярким примером венской ренессансной классики. Читальные залы библиотеки хранят уникальные манускрипты и печатные издания, представляющие историческую ценность. Здание было открыто для широкой публики и способствовало распространению знаний среди населения. Марчианаская библиотека сыграла важную роль в развитии гуманистического образования и научных исследований в Венеции. Коллекция библиотеки включает редкие экземпляры средневековых рукописей и изданий эпохи Возрождения.</p>
-<p class="prose">Марчианаская библиотека была основана во второй половине XVIII века и является одной из старейших публичных библиотек Венеции. Библиотека была создана благодаря пожертвованию кардинала Бессариона, который передал в дар республике обширную коллекцию греческих и латинских рукописей и книг. Это место стало символом интеллектуального центра Венецианской республики, демонстрируя её стремление к просвещению и культурному развитию наряду с политической властью. Библиотека Марчиана представляет собой значимый памятник культуры и символ Венеции как крупного культурного и интеллектуального центра Европы.</p></div>
-</section>
-<section class="place" id="venice_pdfband_2_1c9dd585">
-<h3>Canton</h3>
-
-<p class="place-meta">Стиль: смешанный стиль, сочетающий исламские мотивы и элементы итальянского ренессанса | Период: 1870–1880</p>
-<figure class="place-fig"><img src="../images/venice_pdfband_2_1c9dd585.jpg" alt="Canton"/></figure>
-<div class="place-desc"><p class="prose">Единственная действующая мечеть в Италии находится именно здесь. Архитектура сочетает элементы исламского стиля с европейским ренессансом. Мечеть открыта для туристов ежедневно, кроме пятницы. Построена по инициативе китайских торговцев, обосновавшихся в Венеции. На территории мечети расположен небольшой музей, рассказывающий о жизни и культуре китайцев в Венеции.</p>
-<p class="prose">Мечеть Кантона построена в конце XIX века итальянскими архитекторами для китайской общины Венеции. Это одно из немногих китайских религиозных сооружений в Европе, сохранившихся до наших дней. Мечеть выполняла важную функцию культурного обмена между китайцами и местным населением, став местом встречи и общения представителей разных культур. Посещение мечети позволяет лучше понять историю и культуру китайского сообщества Венеции, увидеть уникальные архитектурные решения и познакомиться с традициями ислама.</p></div>
-</section>
 <section class="place" id="venice_murano">
+<div class="place-lead">
 <h3>Venice Murano</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/venice_murano.jpg" alt="Venice Murano"/></figure>
+<p class="place-meta">Адрес: Lagoon island north of Venice historic center</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_murano.jpg" alt="Venice Murano" width="1280" height="862" style="height: 311px; max-height: 311px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/venice_murano_b.jpg" alt="Venice Murano — вид 2" width="330" height="286" style="height: 311px; max-height: 311px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">На острове расположены знаменитые печи и выставочные залы, демонстрирующие искусство стеклоделия. Мастер-классы и демонстрации позволяют посетителям лично ознакомиться с процессом создания изделий. Стекольные мастерские Мурано финансировали роскошь и величие Венецианской республики. Сегодня продукция острова известна во всём мире благодаря инновационным технологиям и высокому качеству. Остров является важным культурным центром Италии, привлекающим туристов своей уникальной атмосферой.</p>
 <p class="prose">Муранское стекло имеет многовековую историю, начавшуюся ещё в Средние века, когда стеклодувное ремесло было окружено тайной и строго контролировалось государством Венецианской республики. Перенос мастерских на остров Муран был обусловлен необходимостью снизить риск пожаров в городе. Сегодня муранские мастера продолжают использовать старинные техники, такие как кристалло и миллефиори, ставшие визитной карточкой острова. Посещение Мурано позволяет увидеть уникальные изделия мастеров, познакомиться с традициями и техниками изготовления стекла, узнать секреты мастерства, которые веками передавались от поколения к поколению.</p></div>
 </section>
-<section class="place" id="venice_scala_contarini_del_bovolo">
-<h3>Venice Scala Contarini Del Bovolo</h3>
-
-<p class="place-meta">Стиль: Ренессанс</p>
-<figure class="place-fig"><img src="../images/venice_scala_contarini_del_bovolo.jpg" alt="Venice Scala Contarini Del Bovolo"/></figure>
-<div class="place-desc"><p class="prose">Название &#x27;Боволо&#x27; происходит от итальянского слова &#x27;bovolo&#x27;, означающего &#x27;улитка&#x27;. Лестница состоит из 192 ступеней, закрученных вокруг центральной колонны. Из-за своего расположения во внутреннем дворе палаццо его легко пропустить, проходя мимо по улице. Это одно из немногих сохранившихся зданий эпохи Ренессанса в Венеции, демонстрирующее характерные черты городской застройки XVI века. На верхнем этаже находится небольшая смотровая площадка, откуда открывается живописный вид на город.</p>
-<p class="prose">Палаццо Контарини дель Боволо было построено между 1485 и 1560 годами представителями знатной семьи Контарини. Это здание стало ярким примером ренессансной архитектуры Венеции, где архитекторы использовали театральность фасадов и необычных архитектурных решений, чтобы подчеркнуть статус владельцев. Особенностью здания является уникальная винтовая лестница, закрученная наподобие улитки, ведущая на небольшую террасу с видом на городские крыши и колокольни. Здание привлекает туристов своей уникальной винтовой лестницей и панорамным видом, открывающимся с террасы, что делает его интересным объектом для посещения.</p></div>
-</section>
 <section class="place" id="venice_peggy_guggenheim_collection">
+<div class="place-lead">
 <h3>Venice Peggy Guggenheim Collection</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/venice_peggy_guggenheim_collection.jpg" alt="Venice Peggy Guggenheim Collection"/></figure>
+<p class="place-meta">Адрес: Palazzo Venier dei Leoni, Dorsoduro, Grand Canal</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_peggy_guggenheim_collection.jpg" alt="Venice Peggy Guggenheim Collection" width="1280" height="960" style="height: 336px; max-height: 336px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/venice_peggy_guggenheim_collection_b.jpg" alt="Venice Peggy Guggenheim Collection — вид 2" width="330" height="240" style="height: 336px; max-height: 336px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Пегги Гуггенхайм жила здесь и устраивала выставки прямо в своем доме. Основу коллекции составляют работы сюрреалистов и представителей абстракционизма. Особое внимание привлекают садовые скульптуры и терраса на канале. Дом-музей открыт для посетителей уже более полувека. Коллекция регулярно пополняется новыми произведениями.</p>
 <p class="prose">Коллекция Пегги Гуггенхайм была собрана после Второй мировой войны, когда американская меценатка привезла в Венецию произведения современных художников, включая сюрреалистов и абстрактных экспрессионистов. Дом-музей расположен в историческом палаццо XVIII века, гармонично сочетающем элементы стиля арт-деко и ренессанса Венеции. Лучший музей современного искусства в Венеции, позволяющий увидеть шедевры XX века в уютной домашней атмосфере.</p></div>
 </section>
 <section class="place" id="venice_piazza_san_marco">
+<div class="place-lead">
 <h3>Venice Piazza San Marco</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Стиль: византийский и романский стиль</p>
-<figure class="place-fig"><img src="../images/venice_piazza_san_marco.jpg" alt="Venice Piazza San Marco"/></figure>
+<p class="place-meta">Место: Piazza San Marco, Venice (San Marco sestiere) | Стиль: византийский и романский стиль</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_piazza_san_marco.jpg" alt="Venice Piazza San Marco" width="1280" height="853" style="height: 205px; max-height: 205px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/venice_piazza_san_marco_b.jpg" alt="Venice Piazza San Marco — вид 2" width="330" height="147" style="height: 205px; max-height: 205px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Площадь известна также как &#x27;ла Пьяцца&#x27;. На площади расположены знаменитые здания Базилика Сан-Марко, Кампанила и Дворец Дожей. Зимой здесь бывают наводнения из-за высокого уровня воды (аква альта). Здесь проходили важные государственные церемонии и празднества. С площади открывается великолепная панорама на Адриатическое море и остров Риальто.</p>
 <p class="prose">Площадь Сан-Марко возникла в IX веке как небольшая передняя площадь базилики Святого Марка. Со временем она расширялась вместе с ростом могущества Венецианской республики и развитием религиозного культа мощей святого Марка. Площадь стала местом проведения важнейших государственных церемоний и религиозных праздников, символом величия города и важнейшим пространством городской жизни. Это лучшее место в Венеции, чтобы почувствовать дух республики, паломничества и театральности городской культуры.</p></div>
 </section>
-<section class="place" id="venice_punta_della_dogana">
-<h3>Venice Punta Della Dogana</h3>
+<section class="place" id="venice_ponte_accademia">
+<div class="place-lead">
+<h3>Venice Ponte Accademia</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Стиль: Ренессанс</p>
-<figure class="place-fig"><img src="../images/venice_punta_della_dogana.jpg" alt="Venice Punta Della Dogana"/></figure>
+<p class="place-meta">Место: Dorsoduro–San Marco crossing of the Grand Canal | Стиль: классический ренессанс с влиянием римской архитектуры</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_ponte_accademia.jpg" alt="Venice Ponte Accademia" width="1280" height="960" style="height: 310px; max-height: 310px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/venice_ponte_accademia_b.jpg" alt="Venice Ponte Accademia — вид 2" width="330" height="222" style="height: 310px; max-height: 310px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Один из немногих пешеходных переходов через Гранд-канал. Назван в честь расположенных рядом художественных галерей и бывшей академии. Деревянная конструкция подчеркивает природную эстетику и органично вписывается в окружающую среду. Является важным элементом городского пейзажа и визитной карточкой Венеции. На мосту часто устраиваются выставки и мероприятия, привлекающие туристов.</p>
+<p class="prose">Мост Академии был построен в 1589 году в классическом ренессансном стиле с элементами римской архитектуры. Изначально мост был деревянным, что сохранилось до наших дней и стало частью его уникального облика. Со временем мост стал популярным местом для фотосъемок благодаря живописному виду на Салюте и изгиб канала Гранд-канал. Деревянная конструкция моста придает ему лёгкость и особую атмосферу, отличающуюся от традиционных каменных мостов Венеции. Это классический видовой пункт, соединяющий арт-квартал с основным туристическим маршрутом города.</p></div>
+</section>
+<section class="place" id="venice_punta_della_dogana">
+<div class="place-lead">
+<h3>Venice Punta Della Dogana</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Triangular point between Grand Canal and Giudecca Canal | Стиль: Ренессанс</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_punta_della_dogana.jpg" alt="Venice Punta Della Dogana" width="1280" height="723" style="height: 260px; max-height: 260px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/venice_punta_della_dogana_b.jpg" alt="Venice Punta Della Dogana — вид 2" width="330" height="220" style="height: 260px; max-height: 260px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">С конца XIX века Пунта использовалась как таможня и место карантина. Архитектор Токухиро Ано создал современное пространство внутри исторического здания. Сейчас в здании регулярно проходят выставки ведущих мировых художников. Комплекс входит в сеть музеев фонда Louis Vuitton. Ранее назывался Дворец таможенных сборов.</p>
 <p class="prose">Пунта делла Догана — историческое здание Венеции, построенное в эпоху Ренессанса в 1549 году. Изначально служило таможенным пунктом контроля товаров, поступающих морем в город. Со временем здесь размещались службы карантина и карантинной инспекции. В XX веке здание адаптировали под музей современного искусства, став частью международной арт-сцены. Здание является ярким примером интеграции современной архитектуры в исторический контекст Венеции, демонстрируя гармоничное сочетание старинных стен и современных экспозиций.</p></div>
 </section>
 <section class="place" id="venice_rialto_bridge">
+<div class="place-lead">
 <h3>Venice Rialto Bridge</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1591</p>
-<figure class="place-fig"><img src="../images/venice_rialto_bridge.jpg" alt="Venice Rialto Bridge"/></figure>
+<p class="place-meta">Место: Crossing the Grand Canal at Rialto | Период: 1591</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_rialto_bridge.jpg" alt="Venice Rialto Bridge" width="1200" height="1600" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/venice_rialto_bridge_b.jpg" alt="Venice Rialto Bridge — вид 2" width="330" height="219" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">На мосту расположены многочисленные магазины и лавки, благодаря чему он стал одним из самых оживленных мест Венеции. Риальто — самый старый каменный мост города, построенный в стиле поздней ренессансной архитектуры. С моста открывается живописная панорама Гранд-канала, особенно впечатляющая ранним утром или вечером. До постройки моста торговцы вынуждены были перевозить товары через канал на лодках, что замедляло торговлю. Мост Риальто сохранился до наших дней практически в первозданном виде.</p>
 <p class="prose">Мост Риальто был построен после долгих споров инженеров о надежности конструкции. В итоге выбрали долговечное каменное решение, ставшее символом Венеции и её водной экономики. Ранее здесь стояли деревянные мосты, часто горевшие и обрушивавшиеся. Мост Риальто является визитной карточкой Венеции и важнейшим элементом городской инфраструктуры, соединяя две главные части города.</p></div>
 </section>
 <section class="place" id="venice_san_francesco_della_vigna">
+<div class="place-lead">
 <h3>Venice San Francesco Della Vigna</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/venice_san_francesco_della_vigna.jpg" alt="Venice San Francesco Della Vigna"/></figure>
+<p class="place-meta">Адрес: Castello, near the Arsenale</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_san_francesco_della_vigna.jpg" alt="Venice San Francesco Della Vigna" width="1200" height="1600" style="height: 407px; max-height: 407px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/venice_san_francesco_della_vigna_b.jpg" alt="Venice San Francesco Della Vigna — вид 2" width="330" height="291" style="height: 407px; max-height: 407px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Церковь расположена в районе Кастелло, вдали от центральных туристических зон. Фасад церкви выполнен в характерном для эпохи Возрождения стиле, близком к палладианскому. Интерьер включает капеллы, поддерживающие аристократическое покровительство. Здание возведено на территории, ранее принадлежавшей винограднику. Планировка церкви разработана потомками архитектора Сансовино.</p>
 <p class="prose">Сан Франческо дела Винья — тихая францисканская церковь, построенная в конце XIII века в готико-венецианском стиле. Расположена вдали от туристических маршрутов, ближе к историческому центру Кастелло. Здесь религиозные ордена и знатные семьи формировали духовную географию района, отличающуюся спокойствием и атмосферой удаленности от шумной городской суеты. Церковь стоит на месте бывшего виноградника (отсюда название), а фасад приписывают Палладио, планировка же принадлежит линии Сансеверино. Это место позволяет окунуться в менее известную сторону Венеции, где архитектура и атмосфера отличаются от привычных туристических маршрутов.</p></div>
 </section>
 <section class="place" id="venice_san_giorgio_maggiore">
+<div class="place-lead">
 <h3>Venice San Giorgio Maggiore</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Стиль: классический ренессанс</p>
-<figure class="place-fig"><img src="../images/venice_san_giorgio_maggiore.jpg" alt="Venice San Giorgio Maggiore"/></figure>
+<p class="place-meta">Адрес: Isola di San Giorgio Maggiore, opposite Piazza San Marco | Стиль: классический ренессанс</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_san_giorgio_maggiore.jpg" alt="Venice San Giorgio Maggiore" width="1280" height="888" style="height: 320px; max-height: 320px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/venice_san_giorgio_maggiore_b.jpg" alt="Venice San Giorgio Maggiore — вид 2" width="330" height="475" style="height: 320px; max-height: 320px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">На острове расположен действующий бенедиктинский монастырь. Фасад церкви объединяет два храма в единую гармоничную композицию. Внутри храма сохранились оригинальные росписи и скульптуры эпохи Возрождения. Со смотровой площадки колокольни открывается живописная панорама Венеции. Палладиевская архитектура комплекса гармонично вписывается в природный ландшафт острова.</p>
 <p class="prose">Сан-Джорджо-Маджоре — островной монастырь и церковь, построенные Андреа Палладио в классическом ренессансном стиле. Расположенный напротив собора Святого Марка, этот архитектурный шедевр стал визуальным противовесом дворцовой Венеции, подчеркивая контраст между монашеской простотой и роскошью дожа. Комплекс монастыря до сих пор функционирует, сохраняя свою первоначальную духовную миссию. Церковь Сан-Джорджо-Маджоре является важнейшим примером архитектуры эпохи классического ренессанса в Венеции и обязательным местом посещения для всех ценителей искусства и истории города.</p></div>
 </section>
 <section class="place" id="venice_san_zaccaria_venice">
+<div class="place-lead">
 <h3>Venice San Zaccaria Venice</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/venice_san_zaccaria_venice.jpg" alt="Venice San Zaccaria Venice"/></figure>
+<p class="place-meta">Адрес: Campo San Zaccaria, near San Marco</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_san_zaccaria_venice.jpg" alt="Venice San Zaccaria Venice" width="1200" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--row-sized"><img src="../images/venice_san_zaccaria_venice_b.jpg" alt="Venice San Zaccaria Venice — вид 2" width="330" height="524" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Знаменитый алтарь работы братьев Беллини является главным украшением интерьера церкви. Обитель была местом проживания и захоронения известных женщин Венеции. Церковь расположена недалеко от исторического центра города, в районе, окруженном спокойствием и тишиной. Архитектурный стиль сочетает элементы готики и византийского влияния, создавая уникальную атмосферу. На территории монастыря сохранились остатки древних построек.</p>
 <p class="prose">Сан Заччария — церковь эпохи позднего XIV века, представляющая собой гармоничное сочетание венецкого готического стиля и византийских влияний. Изначально здесь располагалась женская монашеская обитель, сыгравшая важную роль в жизни города благодаря покровительству знатных дам Венеции. Вокруг церкви сложился тихий район, где сохранилась атмосфера старинной аристократической культуры. Церковь Сан Заччария особенно ценится за свое живописное внутреннее убранство и знаменитое алтарное изображение работы Джорджоне и Джованни Беллини, которое считается одним из выдающихся произведений искусства Венеции.</p></div>
 </section>
 <section class="place" id="venice_santa_maria_dei_miracoli">
+<div class="place-lead">
 <h3>Venice Santa Maria Dei Miracoli</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1481–1489</p>
-<figure class="place-fig"><img src="../images/venice_santa_maria_dei_miracoli.jpg" alt="Venice Santa Maria Dei Miracoli"/></figure>
+<p class="place-meta">Адрес: Campo Santa Maria dei Miracoli, Cannaregio | Период: 1481–1489</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_santa_maria_dei_miracoli.jpg" alt="Venice Santa Maria Dei Miracoli" width="1065" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/venice_santa_maria_dei_miracoli_b.jpg" alt="Venice Santa Maria Dei Miracoli — вид 2" width="330" height="340" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Интерьер церкви украшен богатыми цветными мраморными панелями, создающими атмосферу торжественности и величия. Высокий купол храма придает зданию легкость и воздушность, контрастируя с массивностью стен. Архитектура церкви отличается компактностью и продуманностью каждой детали, что делает её особенно привлекательной для туристов и ценителей искусства. В интерьере церкви находится знаменитый алтарь работы Андреа дель Кастаньо, выполненный в стиле раннего итальянского ренессанса. На фасаде церкви расположены две высокие башни-близнецы, придающие ей характерную визуальную особенность.</p>
 <p class="prose">Строительство церкви Санта-Мария-дели-Мираколи началось в конце XV века и продолжалось до начала XVI века. Архитектурный стиль здания сочетает элементы готики и ренессанса, отражая особенности венецианской архитектуры того периода. Здание было возведено по заказу частных покровителей и предназначалось для хранения почитаемой иконы Богоматери, обладающей чудесной силой исцелять верующих. Церковь расположена в жилом районе города, где сосредоточены частные дворцы знати и аристократии. Церковь Санта-Мария-дели-Мираколи является одной из самых красивых небольших церквей Венеции благодаря изысканному декору интерьера и гармоничному сочетанию архитектурных форм.</p></div>
 </section>
 <section class="place" id="venice_santa_maria_della_salute">
+<div class="place-lead">
 <h3>Venice Santa Maria Della Salute</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Стиль: барокко | Период: 1631–1687</p>
-<figure class="place-fig"><img src="../images/venice_santa_maria_della_salute.jpg" alt="Venice Santa Maria Della Salute"/></figure>
+<p class="place-meta">Адрес: Dorsoduro, at the mouth of the Grand Canal | Стиль: барокко | Период: 1631–1687</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_santa_maria_della_salute.jpg" alt="Venice Santa Maria Della Salute" width="1187" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/venice_santa_maria_della_salute_b.jpg" alt="Venice Santa Maria Della Salute — вид 2" width="330" height="495" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Ежегодный праздник Феста-делла-Салюте отмечается прохождением процессии через временный понтонный мост. Купол базилики выполнен в характерной белой цветовой гамме, контрастирующей с окружающей архитектурой. На фасаде базилики изображены сцены борьбы с чумой, символизирующие благодарность городу за спасение. Здание расположено на важном водном перекрестке Гранд-канала, соединяя два района города. Интерьер базилики украшен алтарями, связанными с историей эпидемии чумы.</p>
 <p class="prose">Базилика Санта-Мария-да-ла-Салюте была построена в Венеции между 1631 и 1681 годом как символ благодарности Деве Марии за избавление города от эпидемии чумы в 1630 году. Это стало важным общественным ритуалом, формализовавшим борьбу с эпидемией и превратившим базилику в ключевой элемент городской инфраструктуры. Архитектура здания сочетает элементы барокко с уникальными спиральными колоннами и белым куполом, который стал визитной карточкой Венеции. Санта-Мария-да-ла-Салюте является значимым архитектурным памятником и важной частью культурного наследия Венеции, представляя собой яркий пример барочной архитектуры и служа живым мемориалом памяти жертв чумы.</p></div>
 </section>
 <section class="place" id="venice_santa_maria_formosa">
+<div class="place-lead">
 <h3>Venice Santa Maria Formosa</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/venice_santa_maria_formosa.jpg" alt="Venice Santa Maria Formosa"/></figure>
+<p class="place-meta">Адрес: Campo Santa Maria Formosa, Castello</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_santa_maria_formosa.jpg" alt="Venice Santa Maria Formosa" width="993" height="1600" style="height: 396px; max-height: 396px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/venice_santa_maria_formosa_b.jpg" alt="Venice Santa Maria Formosa — вид 2" width="330" height="283" style="height: 396px; max-height: 396px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Санта-Мария-Формоза расположена в районе Каннареджо, недалеко от моста Риальто. Площадь перед церковью является традиционным местом встреч горожан вечером. Здание церкви имеет три фасада, выполненных разными архитекторами. Это одна из немногих церквей Венеции, сохранивших оригинальные интерьеры XVIII века. Традиционно считается, что церковь связана с покровительством святого Антония Падуанского.</p>
 <p class="prose">Церковь Санта-Мария-Формоза была построена в конце XVII века в стиле барокко. Это одна из старейших приходских церквей Венеции, традиционно связанная с повседневной жизнью города через гильдии, рынки и праздники. В церкви несколько фасадов и просторная площадь, где приятно отдохнуть во время прогулки от Риальто к восточным районам города. Церковь привлекает туристов спокойной атмосферой площади и возможностью увидеть старинную архитектуру Венеции.</p></div>
 </section>
+<section class="place" id="venice_scala_contarini_del_bovolo">
+<div class="place-lead">
+<h3>Venice Scala Contarini Del Bovolo</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Near Campo Manin, San Marco district | Стиль: Ренессанс</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_scala_contarini_del_bovolo.jpg" alt="Venice Scala Contarini Del Bovolo" width="1142" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/venice_scala_contarini_del_bovolo_b.jpg" alt="Venice Scala Contarini Del Bovolo — вид 2" width="330" height="440" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Название &#x27;Боволо&#x27; происходит от итальянского слова &#x27;bovolo&#x27;, означающего &#x27;улитка&#x27;. Лестница состоит из 192 ступеней, закрученных вокруг центральной колонны. Из-за своего расположения во внутреннем дворе палаццо его легко пропустить, проходя мимо по улице. Это одно из немногих сохранившихся зданий эпохи Ренессанса в Венеции, демонстрирующее характерные черты городской застройки XVI века. На верхнем этаже находится небольшая смотровая площадка, откуда открывается живописный вид на город.</p>
+<p class="prose">Палаццо Контарини дель Боволо было построено между 1485 и 1560 годами представителями знатной семьи Контарини. Это здание стало ярким примером ренессансной архитектуры Венеции, где архитекторы использовали театральность фасадов и необычных архитектурных решений, чтобы подчеркнуть статус владельцев. Особенностью здания является уникальная винтовая лестница, закрученная наподобие улитки, ведущая на небольшую террасу с видом на городские крыши и колокольни. Здание привлекает туристов своей уникальной винтовой лестницей и панорамным видом, открывающимся с террасы, что делает его интересным объектом для посещения.</p></div>
+</section>
 <section class="place" id="venice_scuola_grande_san_rocco">
+<div class="place-lead">
 <h3>Venice Scuola Grande San Rocco</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/venice_scuola_grande_san_rocco.jpg" alt="Venice Scuola Grande San Rocco"/></figure>
+<p class="place-meta">Адрес: Campo San Rocco, San Polo</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_scuola_grande_san_rocco.jpg" alt="Venice Scuola Grande San Rocco" width="1280" height="960" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/venice_scuola_grande_san_rocco_b.jpg" alt="Venice Scuola Grande San Rocco — вид 2" width="330" height="267" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Здание было основано в конце XV века. Братство Сан Рокко играло важную роль в борьбе с чумой, собирая пожертвования и организуя молитвы. Тинторетто выиграл конкурс на выполнение работ, подарив храмовой комиссии свою картину. Интерьер здания украшен знаменитыми фресками и потолочными росписями художника. Храм посвящен Святому Роху, покровителю от чумы.</p>
 <p class="prose">Основанная в конце XV века братством Сан Рокко, эта величественная структура служила местом молитвенных собраний и благотворительности. Братства часто создавались во времена эпидемий, чтобы молиться и помогать нуждающимся. В случае Сан Рокко такое братство активно поддерживало строительство храма и заказывало работы выдающемуся художнику Тинторетто. Именно благодаря поддержке этой организации художник получил возможность создать одно из своих величайших произведений. Это место обязано посетить каждый ценитель искусства эпохи позднего готического стиля, ведь здесь собраны уникальные произведения кисти Тинторетто, погружающие зрителя в атмосферу драматизма и глубины.</p></div>
 </section>
-<section class="place" id="venice_basilica_san_marco">
-<h3>Venice Basilica San Marco</h3>
-
-
-<figure class="place-fig"><img src="../images/venice_basilica_san_marco.jpg" alt="Venice Basilica San Marco"/></figure>
-<div class="place-desc"><p class="prose">Заложен в IX веке, строительство продолжалось до XI века. Архитектура сочетает элементы римского, византийского и готического стилей. Золотые мозаики и низкие своды создают атмосферу восточной Средиземноморья. Внешние колонны и мраморы включают фрагменты древних построек. Бasilica San Marco является одним из главных туристических объектов города.</p>
-<p class="prose">Собор Святого Марка был построен в IX–XI веках и стал духовным и политическим центром Венеции. Изначально возведённый в романском стиле, позже собор приобрёл черты византийского искусства и готики Венеции. В нём собраны трофеи торговли и завоеваний Республики, превращённые в публичную сокровищницу материалов и изображений. Собор служил хранилищем реликвий святого Марка, взятых из Александрии купцами Венеции. Это сердце духовной и политической жизни Венеции, церковь, символизирующая мощь и богатство республики.</p></div>
-</section>
-<section class="place" id="venice_campanile_san_marco">
-<h3>Venice Campanile San Marco</h3>
-
-
-<figure class="place-fig"><img src="../images/venice_campanile_san_marco.jpg" alt="Venice Campanile San Marco"/></figure>
-<div class="place-desc"><p class="prose">После обрушения была восстановлена точно по первоначальному проекту, сохранив прежний силуэт. Обрушение башни произошло рядом с прилегающей лоджией, однако сама базилика осталась невредимой. Стиль здания — венецкий готический, характерный для архитектуры Венецианской республики. Подъем на башню осуществляется через лифт, откуда открывается панорамный обзор города. Башня служила наблюдательным пунктом и важным элементом обороны города.</p>
-<p class="prose">Средневековая сторожевая башня превратилась в символ Венеции после трагического обрушения в 1902 году, когда потребовалась тщательная реконструкция. Башня стала важнейшим ориентиром городской панорамы благодаря своей уникальной высоте и оригинальной готической архитектуре. Башня является главным вертикальным акцентом плоской крыши Венеции и открывает потрясающий вид на каналы и лагуну.</p></div>
-</section>
 <section class="place" id="venice_st_marks_clocktower">
+<div class="place-lead">
 <h3>Venice St Marks Clocktower</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/venice_st_marks_clocktower.jpg" alt="Venice St Marks Clocktower"/></figure>
+<p class="place-meta">Адрес: North side of Piazza San Marco, Mercerie entrance</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_st_marks_clocktower.jpg" alt="Venice St Marks Clocktower" width="1280" height="960" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/venice_st_marks_clocktower_b.jpg" alt="Venice St Marks Clocktower — вид 2" width="330" height="311" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Башня расположена рядом с собором Святого Марка и Дворцом дожей. Автоматические фигуры бьют в колокол каждые полчаса и час. На циферблате изображены двенадцать знаков зодиака. Фазы Луны отображаются через специальное окно в верхней части башни. Часы работают ежедневно, привлекая внимание туристов своей уникальной эстетикой.</p>
 <p class="prose">Часы на башне Сан-Марко были построены в конце XV века и предназначались для точного регулирования времени торговцев и горожан. Они стали важной частью городской инфраструктуры Венеции, расположенной на пересечении торговых путей. Часовая башня знаменита своими золотыми и синими циферблатами зодиака и фигурами мавров, отбивающими время ударами колокола. Особенностью башни является показ фаз Луны и знаков Зодиака, а также автоматические фигуры, исполняющие мелодии и удары колокола в определённые часы. Это выдающийся пример архитектурной гармонии Ренессанса и готики, демонстрирующий значение времени в жизни торговой республики Венеция.</p></div>
 </section>
-<section class="place" id="venice_arsenale">
-<h3>Venice Arsenale</h3>
+<section class="place" id="venice_teatro_la_fenice">
+<div class="place-lead">
+<h3>Venice Teatro La Fenice</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/venice_arsenale.jpg" alt="Venice Arsenale"/></figure>
-<div class="place-desc"><p class="prose">Здесь впервые были применены методы серийного производства кораблей, позволяющие значительно ускорить процесс строительства. Комплекс включает обширные территории с верфями, каналами и складскими помещениями. На протяжении веков Арсенале оставалась стратегически важной военной базой. Доступ открыт лишь частично во время проведения Биеннале и редких экскурсий. Изначально арсенал предназначался исключительно для государственных нужд.</p>
-<p class="prose">Венецианская Арсенале возникла в конце XIII века и была главным центром кораблестроения Венецианской республики. Здесь создавались военные корабли, поддерживавшие морское могущество государства. Изначально предприятие находилось под государственным контролем и играло ключевую роль в обеспечении военно-морской мощи страны. Со временем доступ к арсеналу был ограничен, и он использовался преимущественно для военных нужд. Среди примечательных фактов стоит отметить использование ранних методов конвейерной сборки, позволявших быстро строить галеры. Арсенале является важным историческим памятником, отражающим промышленную мощь Венецианской республики и её роль в морской торговле и военном превосходстве.</p></div>
+<p class="place-meta">Адрес: Campo San Fantin, San Marco | Стиль: нео-классицизм</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/venice_teatro_la_fenice.jpg" alt="Venice Teatro La Fenice" width="1280" height="1216" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/venice_teatro_la_fenice_b.jpg" alt="Venice Teatro La Fenice — вид 2" width="330" height="247" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Пожар 1996 года стал четвертым крупным пожаром в истории театра. Первое представление состоялось в 1794 году. На сцене Ла Фениче дебютировали такие известные композиторы, как Россини и Верди. После каждого восстановления театр сохранял первоначальный архитектурный облик. За свою историю театр пережил около 80 сезонов.</p>
+<p class="prose">Театр Ла Фениче — один из старейших и известнейших оперных театров Венеции, построенный в неоклассическом стиле в 1792 году. Здание неоднократно горело и восстанавливалось заново, словно символ феникса, возрождающегося из пепла. Последнее крупное восстановление произошло после пожара 1996 года. Ла Фениче — одна из самых известных сцен Европы, известная своими роскошными декорациями и великолепной акустикой. Здесь впервые прозвучали многие знаменитые оперы XIX века.</p></div>
 </section>
 </body>
 </html>

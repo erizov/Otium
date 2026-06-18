@@ -43,18 +43,25 @@ MAX_STORY_CHARS = 420
 MIN_STORY_CHARS = 40
 
 
-def _wikipedia_search(place_name: str, lang: str = "en") -> list[int]:
-    """Return list of page IDs from Wikipedia search. lang: en or ru."""
+def wikipedia_search_hits(
+    place_name: str,
+    lang: str = "en",
+    *,
+    city_suffix: str | None = None,
+    limit: int = 3,
+) -> list[dict[str, int | str]]:
+    """Return Wikipedia search hits (pageid + title). lang: en or ru."""
     base = "https://en.wikipedia.org/w/api.php" if lang == "en" else (
         "https://ru.wikipedia.org/w/api.php"
     )
-    city = "Moscow" if lang == "en" else "Москва"
-    q = "{} {}".format(place_name, city)
+    if city_suffix is None:
+        city_suffix = "Moscow" if lang == "en" else "Москва"
+    q = "{} {}".format(place_name, city_suffix).strip()
     params = {
         "action": "query",
         "list": "search",
         "srsearch": q,
-        "srlimit": 3,
+        "srlimit": limit,
         "format": "json",
     }
     url = "{}?{}".format(base, urllib.parse.urlencode(params))
@@ -65,7 +72,102 @@ def _wikipedia_search(place_name: str, lang: str = "en") -> list[int]:
     except Exception:
         return []
     hits = data.get("query", {}).get("search") or []
-    return [h["pageid"] for h in hits]
+    out: list[dict[str, int | str]] = []
+    for hit in hits:
+        page_id = hit.get("pageid")
+        title = str(hit.get("title") or "").strip()
+        if page_id is not None and title:
+            out.append({"pageid": int(page_id), "title": title})
+    return out
+
+
+def _normalize_title_match(text: str) -> str:
+    s = str(text or "").strip().lower().replace("ё", "е")
+    s = re.sub(r"[^\w\s]", " ", s, flags=re.UNICODE)
+    return re.sub(r"\s+", " ", s).strip()
+
+
+def _ru_title_matches(query: str, hit_title: str) -> bool:
+    """True when a ru.wikipedia hit plausibly matches the place name."""
+    q = _normalize_title_match(query)
+    t = _normalize_title_match(hit_title)
+    if not q or not t:
+        return False
+    if q in t or t in q:
+        return True
+    q_words = {w for w in q.split() if len(w) >= 4}
+    t_words = {w for w in t.split() if len(w) >= 4}
+    return bool(q_words & t_words)
+
+
+def fetch_english_title_via_russian_page(
+    place_name_ru: str,
+    *,
+    city_suffix: str = "Москва",
+) -> str | None:
+    """Resolve EN article title via ru.wikipedia search + en langlink."""
+    for hit in wikipedia_search_hits(
+        place_name_ru,
+        "ru",
+        city_suffix=city_suffix,
+        limit=3,
+    ):
+        ru_title = str(hit.get("title") or "")
+        if not _ru_title_matches(place_name_ru, ru_title):
+            continue
+        page_id = hit.get("pageid")
+        if page_id is None:
+            continue
+        params = {
+            "action": "query",
+            "pageids": int(page_id),
+            "prop": "langlinks",
+            "lllang": "en",
+            "format": "json",
+        }
+        url = "https://ru.wikipedia.org/w/api.php?{}".format(
+            urllib.parse.urlencode(params),
+        )
+        req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
+        try:
+            with urllib.request.urlopen(req, timeout=12) as resp:
+                data = json.loads(resp.read().decode("utf-8"))
+        except Exception:
+            continue
+        pages = data.get("query", {}).get("pages") or {}
+        page = pages.get(str(page_id)) or {}
+        for link in page.get("langlinks") or []:
+            title = str(link.get("*") or "").strip()
+            if title:
+                return title
+    return None
+
+
+def fetch_wikipedia_page_title(
+    place_name: str,
+    lang: str = "en",
+    *,
+    city_suffix: str | None = None,
+) -> str | None:
+    """Best-effort Wikipedia article title for a place search query."""
+    for hit in wikipedia_search_hits(
+        place_name,
+        lang,
+        city_suffix=city_suffix,
+        limit=3,
+    ):
+        title = str(hit.get("title") or "").strip()
+        if title:
+            return title
+    return None
+
+
+def _wikipedia_search(place_name: str, lang: str = "en") -> list[int]:
+    """Return list of page IDs from Wikipedia search. lang: en or ru."""
+    return [
+        int(h["pageid"])
+        for h in wikipedia_search_hits(place_name, lang)
+    ]
 
 
 def _wikipedia_extract(page_id: int, lang: str = "en") -> str:

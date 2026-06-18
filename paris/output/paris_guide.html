@@ -13,7 +13,7 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
 .otium-logo { font-family: 'Playfair Display', serif; font-size: 2.15rem;
   font-weight: 600; letter-spacing: 0.18em; margin-bottom: 0.85rem; }
 .otiump { margin: 0.42rem 0; line-height: 1.42; text-align: justify;
-  max-width: 38rem; font-size: 0.95rem; }
+  font-size: 0.95rem; }
 .guide-title { page-break-after: auto; margin-bottom: 0.55rem;
   page-break-inside: avoid; }
 .historical-reference { margin: 0.75rem 0 1.15rem;
@@ -63,22 +63,103 @@ ol.trip-stops a:hover { text-decoration: underline; }
 .heraldry-univ-caption { font-size: 0.52rem; line-height: 1.18;
   margin: 0.12rem 0 0; padding: 0 0.06rem; color: #252525;
   text-align: center; font-weight: 500; }
-.heraldry-motto { text-align: center; max-width: 18rem; margin: 0.18rem auto;
+.heraldry-motto { text-align: center; margin: 0.18rem auto;
   width: 100%; }
 .motto-line { font-family: 'Playfair Display', serif; font-size: 1rem;
   margin: 0; color: #333; line-height: 1.35; }
 .guide-title h1.guide-title-main { font-family: 'Playfair Display', serif;
   font-size: 2.35rem; margin-bottom: 0.5rem; font-weight: 600; }
 .lead { color: #444; font-size: 1.05rem; }
-.guide-toc { margin: 0.85rem 0 1.15rem; page-break-inside: avoid; }
-.guide-toc h2 { font-family: 'Playfair Display', serif; font-size: 1.28rem;
-  font-weight: 600; margin: 0.4rem 0 0.55rem; }
+
+.guide-toc { page-break-before: always; break-before: page;
+  page-break-after: always; break-after: page;
+  margin: 0; padding: 0.2rem 0 0.45rem; page-break-inside: auto; }
+.guide-toc h2 { font-family: 'Playfair Display', serif;
+  font-size: 1.28rem; font-weight: 600; margin: 0.4rem 0 0.55rem; }
 .guide-toc ol { margin: 0.35rem 0 0.65rem 1.25rem; padding: 0;
   columns: 2; column-gap: 1.5rem; }
 .guide-toc li { margin: 0.18rem 0; line-height: 1.35;
   font-size: 0.88rem; break-inside: avoid; }
-.guide-toc a { color: #1a5276; text-decoration: none; }
+.guide-toc a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.guide-toc a:hover { color: #0d3d56; }
 .guide-toc li.toc-item--sub { font-size: 0.82rem; margin-left: 0.35rem; }
+.toc-back { font-size: 0.78rem; margin: 0 0 0.35rem; text-align: right; }
+.toc-back a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.toc-back a:hover { color: #0d3d56; }
+.place, .historical-reference, .guide-primer, .guide-trip-plans {
+  scroll-margin-top: 1.25rem; }
+.historical-reference h2, .guide-primer h2, .guide-trip-plans h2,
+.chapter-head h2, .place-lead h3 { position: relative; }
+.guide-toc + .place, .guide-toc + .chapter-head {
+  page-break-before: avoid; break-before: avoid-page; }
+.place-lead { page-break-inside: avoid; break-inside: avoid-page;
+  page-break-after: auto; }
+.place-lead > h3 { page-break-after: avoid; break-after: avoid-page; }
+.place-lead > .place-meta { page-break-after: avoid; break-after: avoid-page; }
+
+.place-fig { page-break-inside: avoid; break-inside: avoid-page;
+  margin: 0.5rem 0 1rem; }
+.place-fig img {
+  page-break-inside: avoid; break-inside: avoid-page;
+  max-height: 48vh; width: auto; max-width: 100%;
+  object-fit: contain; margin-left: auto; margin-right: auto; }
+.place-fig--hi-res img { max-height: 52vh; }
+.place-fig--lo-res img { max-height: 30vh; }
+.place-pdf-fig-row {
+  display: flex; flex-direction: row; flex-wrap: wrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.45rem 0.55rem; margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row .place-fig {
+  flex: 1 1 30%; margin: 0; min-width: 26%; max-width: 100%; }
+.place-pdf-fig-row .place-fig img {
+  width: auto; max-width: 100%; height: auto; max-height: 44vh;
+  object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--pair {
+  flex-wrap: nowrap; justify-content: space-between;
+  align-items: flex-end; gap: 0.5rem 0.65rem; }
+.place-pdf-fig-row--pair .place-fig {
+  flex: 1 1 47%; min-width: 0; max-width: 50%;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--pair .place-fig img {
+  max-height: 44vh; object-fit: contain; }
+.place-pdf-fig-row--pair .place-fig--hi-res img { max-height: 52vh; }
+.place-pdf-fig-row--pair .place-fig--lo-res img { max-height: 26vh; }
+.place-pdf-fig-row--pair .place-fig--row-sized img,
+.place-pdf-fig-row--triple .place-fig--row-sized img,
+.place-pdf-fig-row--many .place-fig--row-sized img {
+  width: auto; max-width: 100%; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row .place-fig--row-sized.place-fig--hi-res img,
+.place-pdf-fig-row .place-fig--row-sized.place-fig--lo-res img {
+  max-height: unset; }
+.place-pdf-fig-rows-stack {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple {
+  display: flex; flex-direction: row; flex-wrap: nowrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.4rem 0.48rem; margin: 0;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--triple .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--triple .place-fig--hi-res img { max-height: 42vh; }
+.place-pdf-fig-row--triple .place-fig--lo-res img { max-height: 18vh; }
+.place-pdf-fig-row--many {
+  flex-wrap: nowrap; justify-content: center; align-items: flex-end;
+  gap: 0.35rem 0.42rem; }
+.place-pdf-fig-row--many .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--many .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+
+
 .place { margin-bottom: 2.2rem; page-break-inside: auto; }
 h3 { font-family: 'Playfair Display', serif; font-size: 1.22rem; margin: 1.2rem 0 0.35rem;
   font-weight: 600; }
@@ -90,7 +171,6 @@ h4 { font-family: 'Playfair Display', serif; font-size: 0.95rem; text-transform:
   color: #555; font-size: 0.95rem; margin: 0 0 0.5rem; font-style: italic; }
 .place-meta { font-size: 0.92rem; color: #353535; margin: 0 0 0.75rem;
   line-height: 1.4; }
-.place-fig { margin: 0.5rem 0 1rem; }
 img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
 .prose, .place-desc p { margin: 0.45rem 0; line-height: 1.5;
   text-align: justify; }
@@ -110,7 +190,9 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <figure class="heraldry-fig heraldry-coat-book" title="City emblem"><img src="../images/guide_coat_of_arms.svg" alt="City emblem"/></figure>
 <figure class="heraldry-fig heraldry-coat-book" title="Flag"><img src="../images/guide_flag.svg" alt="Flag"/></figure>
 </div></div><h1 class="guide-title-main">Paris</h1><p class="lead">Guide. Places in this edition: 38.</p></header>
+<nav class="guide-toc" id="guide-toc" aria-label="Contents"><h2>Contents</h2><ol><li class="toc-item"><a href="#guide-trips">Trip ideas</a></li><li class="toc-item"><a href="#paris_institut_du_monde_arabe">Arab World Institute</a></li><li class="toc-item"><a href="#paris_arc_de_triomphe">Arc de Triomphe</a></li><li class="toc-item"><a href="#paris_sacre_coeur_steps">Basilica of Sacré-Cœur (approach)</a></li><li class="toc-item"><a href="#paris_bois_de_vincennes_lake">Bois de Vincennes</a></li><li class="toc-item"><a href="#paris_musee_carnavalet">Carnavalet Museum</a></li><li class="toc-item"><a href="#paris_centre_pompidou">Centre Pompidou</a></li><li class="toc-item"><a href="#paris_champs_elysees">Champs-Élysées</a></li><li class="toc-item"><a href="#paris_cite_des_sciences">Cité des sciences et de l&#x27;industrie</a></li><li class="toc-item"><a href="#paris_conciergerie">Conciergerie</a></li><li class="toc-item"><a href="#paris_eiffel_tower">Eiffel Tower</a></li><li class="toc-item"><a href="#paris_grande_arche">Grande Arche de la Défense</a></li><li class="toc-item"><a href="#paris_hotel_de_sens">Hôtel de Sens</a></li><li class="toc-item"><a href="#paris_hotel_de_ville_paris">Hôtel de Ville</a></li><li class="toc-item"><a href="#paris_hotel_des_invalides">Les Invalides</a></li><li class="toc-item"><a href="#paris_louvre">Louvre Museum</a></li><li class="toc-item"><a href="#paris_jardin_du_luxembourg">Luxembourg Garden</a></li><li class="toc-item"><a href="#paris_musee_orsay">Musée d&#x27;Orsay</a></li><li class="toc-item"><a href="#paris_musee_cluny">Musée de Cluny</a></li><li class="toc-item"><a href="#paris_musee_rodin_paris">Musée Rodin</a></li><li class="toc-item"><a href="#paris_notre_dame_cathedral">Notre-Dame de Paris</a></li><li class="toc-item"><a href="#paris_notredamedeparis">NotreDameDeParis</a></li><li class="toc-item"><a href="#paris_palais_garnier">Palais Garnier</a></li><li class="toc-item"><a href="#paris_pantheon_paris">Panthéon</a></li><li class="toc-item"><a href="#paris_parc_monceau">Parc Monceau</a></li><li class="toc-item"><a href="#paris_landmark">Paris</a></li><li class="toc-item"><a href="#paris_gibson_square">Paris Gibson Square</a></li><li class="toc-item"><a href="#paris_pavillon_de_flore">Pavillon de Flore</a></li><li class="toc-item"><a href="#paris_place_de_la_concorde">Place de la Concorde</a></li><li class="toc-item"><a href="#paris_place_des_vosges">Place des Vosges</a></li><li class="toc-item"><a href="#paris_place_vendome">Place Vendôme</a></li><li class="toc-item"><a href="#paris_pont_alexandre_iii">Pont Alexandre III</a></li><li class="toc-item"><a href="#paris_pont_des_arts">Pont des Arts</a></li><li class="toc-item"><a href="#paris_pont_neuf">Pont Neuf</a></li><li class="toc-item"><a href="#paris_pere_lachaise_cemetery">Père Lachaise Cemetery</a></li><li class="toc-item"><a href="#paris_sacre_coeur">Sacré-Cœur Basilica</a></li><li class="toc-item"><a href="#paris_saint_augustin_church_paris">Saint Augustin Church Paris</a></li><li class="toc-item"><a href="#paris_sainte_chapelle">Sainte-Chapelle</a></li><li class="toc-item"><a href="#paris_tuileries_garden">Tuileries Garden</a></li></ol></nav>
 <section class="guide-trip-plans" id="guide-trips" aria-label="Trip ideas"><h2>Trip ideas</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 <article class="trip-plan" id="trip-1d"><h3>One day</h3>
 <p class="prose">A compact loop linking the strongest cards in this guide, ordered to minimise backtracking on foot.</p>
 <ol class="trip-stops"><li><a href="#paris_institut_du_monde_arabe">Arab World Institute</a> (~75min)</li>
@@ -140,302 +222,520 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <li><a href="#paris_place_des_vosges">Place des Vosges</a> (~75min)</li>
 <li><a href="#paris_pont_des_arts">Pont des Arts</a> (~75min)</li>
 <li><a href="#paris_sacre_coeur_steps">Basilica of Sacré-Cœur (approach)</a> (~75min)</li></ol></article></section>
-<nav class="guide-toc" aria-label="Contents"><h2>Contents</h2><ol><li class="toc-item"><a href="#guide-trips">Trip ideas</a></li><li class="toc-item"><a href="#paris_institut_du_monde_arabe">Arab World Institute</a></li><li class="toc-item"><a href="#paris_arc_de_triomphe">Arc de Triomphe</a></li><li class="toc-item"><a href="#paris_sacre_coeur_steps">Basilica of Sacré-Cœur (approach)</a></li><li class="toc-item"><a href="#paris_bois_de_vincennes_lake">Bois de Vincennes</a></li><li class="toc-item"><a href="#paris_musee_carnavalet">Carnavalet Museum</a></li><li class="toc-item"><a href="#paris_centre_pompidou">Centre Pompidou</a></li><li class="toc-item"><a href="#paris_champs_elysees">Champs-Élysées</a></li><li class="toc-item"><a href="#paris_cite_des_sciences">Cité des sciences et de l&#x27;industrie</a></li><li class="toc-item"><a href="#paris_conciergerie">Conciergerie</a></li><li class="toc-item"><a href="#paris_eiffel_tower">Eiffel Tower</a></li><li class="toc-item"><a href="#paris_grande_arche">Grande Arche de la Défense</a></li><li class="toc-item"><a href="#paris_hotel_de_sens">Hôtel de Sens</a></li><li class="toc-item"><a href="#paris_hotel_de_ville_paris">Hôtel de Ville</a></li><li class="toc-item"><a href="#paris_hotel_des_invalides">Les Invalides</a></li><li class="toc-item"><a href="#paris_louvre">Louvre Museum</a></li><li class="toc-item"><a href="#paris_jardin_du_luxembourg">Luxembourg Garden</a></li><li class="toc-item"><a href="#paris_musee_orsay">Musée d&#x27;Orsay</a></li><li class="toc-item"><a href="#paris_musee_cluny">Musée de Cluny</a></li><li class="toc-item"><a href="#paris_musee_rodin_paris">Musée Rodin</a></li><li class="toc-item"><a href="#paris_notre_dame_cathedral">Notre-Dame de Paris</a></li><li class="toc-item"><a href="#paris_pdfband_0_4312c3dc">NotreDameDeParis</a></li><li class="toc-item"><a href="#paris_palais_garnier">Palais Garnier</a></li><li class="toc-item"><a href="#paris_pantheon_paris">Panthéon</a></li><li class="toc-item"><a href="#paris_parc_monceau">Parc Monceau</a></li><li class="toc-item"><a href="#paris_pdfband_2_30b06647">Paris</a></li><li class="toc-item"><a href="#paris_pdfband_3_4f7898b2">Paris Gibson Square</a></li><li class="toc-item"><a href="#paris_pavillon_de_flore">Pavillon de Flore</a></li><li class="toc-item"><a href="#paris_place_de_la_concorde">Place de la Concorde</a></li><li class="toc-item"><a href="#paris_place_des_vosges">Place des Vosges</a></li><li class="toc-item"><a href="#paris_place_vendome">Place Vendôme</a></li><li class="toc-item"><a href="#paris_pont_alexandre_iii">Pont Alexandre III</a></li><li class="toc-item"><a href="#paris_pont_des_arts">Pont des Arts</a></li><li class="toc-item"><a href="#paris_pont_neuf">Pont Neuf</a></li><li class="toc-item"><a href="#paris_pere_lachaise_cemetery">Père Lachaise Cemetery</a></li><li class="toc-item"><a href="#paris_sacre_coeur">Sacré-Cœur Basilica</a></li><li class="toc-item"><a href="#paris_pdfband_1_954425d3">Saint Augustin Church Paris</a></li><li class="toc-item"><a href="#paris_sainte_chapelle">Sainte-Chapelle</a></li><li class="toc-item"><a href="#paris_tuileries_garden">Tuileries Garden</a></li></ol></nav>
 <section class="place" id="paris_institut_du_monde_arabe">
+<div class="place-lead">
 <h3>Arab World Institute</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Modernist | Period: 1980</p>
-<figure class="place-fig"><img src="../images/paris_institut_du_monde_arabe.jpg" alt="Arab World Institute"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_institut_du_monde_arabe.jpg" alt="Arab World Institute" width="1280" height="850" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/paris_institut_du_monde_arabe_b.jpg" alt="Arab World Institute — view 2" width="330" height="220" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Arab World Institute is a cultural hub dedicated to promoting understanding of the Arab world through art, literature, and cinema. Located on Rue des Écoles in Paris, it showcases exhibitions, performances, and film screenings that highlight the rich heritage and contemporary culture of the region. It houses permanent and temporary exhibits focusing on various aspects of Arab culture and history. Events include poetry readings, music concerts, and theatrical performances. The library contains extensive resources on Middle Eastern studies and Arabic literature. Its architecture incorporates elements inspired by Islamic art and design. Exhibitions often feature works by prominent artists from across the Arab world.</p>
 <p class="prose">Established in 1980 by French President François Mitterrand, the institute was designed by architect Jean Nouvel. Its modernist design features a striking glass facade and an innovative interior layout that integrates traditional Arabic elements with contemporary architecture. Visitors can explore the museum&#x27;s collections, attend lectures, and participate in workshops to gain insights into the diverse cultures and histories of the Arab world.</p></div>
 </section>
 <section class="place" id="paris_arc_de_triomphe">
+<div class="place-lead">
 <h3>Arc de Triomphe</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Place Charles-de-Gaulle, 8th arrondissement | Style: Neoclassical | Period: 1836</p>
-<figure class="place-fig"><img src="../images/paris_arc_de_triomphe.jpg" alt="Arc de Triomphe"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_arc_de_triomphe.jpg" alt="Arc de Triomphe" width="1280" height="967" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/paris_arc_de_triomphe_b.jpg" alt="Arc de Triomphe — view 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Arc de Triomphe is a monumental arch at the center of Paris, standing as one of the most iconic symbols of French military glory and national pride. Neoclassical triumphal arch at the star junction of twelve avenues; tomb of the Unknown Soldier beneath. It is located at the intersection of twelve major avenues in Paris. The Arch has an overall height of 50 meters and width of 45 meters. Its design combines neoclassical elements with Baroque influences. Atop the Arc, there is a small observation deck offering panoramic views of Paris. In 1920, the Tomb of the Unknown Soldier was installed beneath the Arc. Use the underground passage—do not cross the roundabout on foot. July sunsets backlight the Champs-Élysées axis.</p>
 <p class="prose">Completed in 1836, the Arc de Triomphe was commissioned by Napoleon Bonaparte to honor his soldiers who fought during the Revolutionary and Napoleonic Wars. It stands at the western end of the Champs-Elysées, marking the start of the Avenue des Champs-Elysees and the Place de l&#x27;Étoile, which radiates into twelve avenues leading to various parts of the city. The Arch features four relief sculptures depicting key battles, including &#x27;La Marseillaise,&#x27; symbolizing the arrival of the volunteers from Marseille during the French Revolution. Commissioned by Napoleon; completed in the 1830s; relief sculpture tells revolutionary and imperial stories. Visiting the Arc de Triomphe offers breathtaking views overlooking the city, providing a panoramic perspective on Parisian life and architecture. Terrace views sweep along the axe to La Défense and toward the Louvre.</p></div>
 </section>
 <section class="place" id="paris_sacre_coeur_steps">
+<div class="place-lead">
 <h3>Basilica of Sacré-Cœur (approach)</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: neo-Byzantine | Period: 1875–1919</p>
-<figure class="place-fig"><img src="../images/paris_sacre_coeur_steps.jpg" alt="Basilica of Sacré-Cœur (approach)"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_sacre_coeur_steps.jpg" alt="Basilica of Sacré-Cœur (approach)" width="1280" height="950" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/paris_sacre_coeur_steps_b.jpg" alt="Basilica of Sacré-Cœur (approach) — view 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Perched high above Paris on Montmartre Hill, the Basilica of Sacré-Cœur is a soaring white domed structure that dominates the skyline. Its imposing presence and distinctive architecture make it one of the city&#x27;s most iconic landmarks. The basilica&#x27;s dome stands at 110 meters tall, making it one of the tallest buildings in Paris. It features a neo-Byzantine style with intricate mosaics and stained glass windows. Visitors can ascend to the top of the dome for panoramic views of the city. Inside, the basilica houses several notable works of art including murals by Paul Bécat. Construction was funded through public donations and voluntary contributions.</p>
 <p class="prose">Built between 1875 and 1919, the basilica was constructed as a symbol of penitence following the Franco-Prussian War and the subsequent Commune uprising. It has since become a major tourist attraction and a spiritual site for pilgrims and visitors alike. Visiting the basilica offers stunning views over Paris and provides a chance to reflect on its rich history and cultural significance.</p></div>
 </section>
 <section class="place" id="paris_bois_de_vincennes_lake">
+<div class="place-lead">
 <h3>Bois de Vincennes</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/paris_bois_de_vincennes_lake.jpg" alt="Bois de Vincennes"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_bois_de_vincennes_lake.jpg" alt="Bois de Vincennes" width="1280" height="960" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/paris_bois_de_vincennes_lake_b.jpg" alt="Bois de Vincennes — view 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Bois de Vincennes is a vast urban park located east of Paris, offering tranquility amidst the bustle of the city. Spread over 1,008 acres, it’s one of the largest green spaces within the capital and serves as a sanctuary for nature lovers, families, and joggers. It contains the Parc Aimé-Césaire, dedicated to French Caribbean literature and culture. The park features the Grande Cascade, a majestic waterfall that attracts visitors year-round. Located within its boundaries are the Zoological Gardens of Vincennes, home to various animal species. In summer, the park hosts open-air cinema screenings under the stars. Bois de Vincennes also offers horseback riding opportunities.</p>
 <p class="prose">Originally part of royal hunting grounds dating back to the 14th century, the Bois de Vincennes was transformed into a public park during the reign of Louis XIV. It became a popular recreational area in the 19th century after extensive landscaping by Jean-Charles Alphand, who designed many of Paris&#x27;s major parks. Today, it remains a cherished space for relaxation and leisure activities. Visitors come here to enjoy scenic walks, picnics, cycling trails, and cultural events like concerts and festivals.</p></div>
 </section>
 <section class="place" id="paris_musee_carnavalet">
+<div class="place-lead">
 <h3>Carnavalet Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Baroque and Neoclassical | Period: 1910</p>
-<figure class="place-fig"><img src="../images/paris_musee_carnavalet.jpg" alt="Carnavalet Museum"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_musee_carnavalet.jpg" alt="Carnavalet Museum" width="1280" height="960" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/paris_musee_carnavalet_b.jpg" alt="Carnavalet Museum — view 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Carnavalet Museum is a historical museum dedicated to the social and cultural history of Paris, showcasing artifacts and exhibits that trace the evolution of the city from its medieval roots to modern times. It houses one of the most extensive collections of Parisian memorabilia anywhere. The museum’s displays cover themes such as urban development, fashion, literature, and political movements. Exhibits often feature rare manuscripts, letters, and personal belongings belonging to famous Parisians like Victor Hugo and Louis XIV. Located within walking distance of Place des Vosges, it offers visitors easy access to other notable landmarks. Its collection includes some of the earliest known maps of Paris dating back to the Middle Ages.</p>
 <p class="prose">Established in 1910, the museum occupies two historic buildings—Hôtel de Carnavalet and Hôtel Le Peletier-Saint-Fargeau—in the Marais district. These structures reflect the architectural styles of the 17th and 18th centuries, blending classic French Baroque with neoclassical elements. The museum&#x27;s collections include paintings, furniture, prints, maps, and documents that highlight key moments in Parisian life over several centuries. Visiting the Carnavalet Museum provides insight into the city&#x27;s rich history, offering a unique perspective on how Paris has evolved through art, architecture, and everyday life.</p></div>
 </section>
 <section class="place" id="paris_centre_pompidou">
+<div class="place-lead">
 <h3>Centre Pompidou</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Place Georges-Pompidou, 4th arrondissement | Style: High-tech modernism | Period: 1977</p>
-<figure class="place-fig"><img src="../images/paris_centre_pompidou.jpg" alt="Centre Pompidou"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_centre_pompidou.jpg" alt="Centre Pompidou" width="1280" height="852" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/paris_centre_pompidou_b.jpg" alt="Centre Pompidou — view 2" width="330" height="220" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Completed in 1977, it stands out for its striking architecture, featuring exposed steel beams and glass panels. High-tech museum with color-coded ducts and pipes on the façade—modern and contemporary collections inside. It houses permanent collections of modern and contemporary art. Its exterior features a futuristic appearance with visible ventilation shafts and walkways. The building was originally criticized but has since become one of Paris&#x27;s most iconic landmarks. It boasts extensive exhibition spaces dedicated to temporary shows and performances. Located on Quai Beaubourg, it attracts millions of visitors annually. The exterior escalator tube offers city views with a ticket. The square hosts street performers year-round.</p>
 <p class="prose">Designed by Renzo Piano and Richard Rogers, the Centre Pompidou opened to the public in 1977 as a groundbreaking example of postmodern architecture. Its innovative design challenged traditional notions of museum aesthetics, showcasing contemporary artworks and installations. Renzo Piano and Richard Rogers&#x27; competition winner opened in 1977. Visiting the Centre Pompidou offers a unique opportunity to explore avant-garde art and engage with cutting-edge artistic expressions. Major European hub for 20th- and 21st-century art and public library space.</p></div>
 </section>
 <section class="place" id="paris_champs_elysees">
+<div class="place-lead">
 <h3>Champs-Élysées</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: 8th arrondissement | Style: Haussmannian avenue | Period: mid-17th century</p>
-<figure class="place-fig"><img src="../images/paris_champs_elysees.jpg" alt="Champs-Élysées"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_champs_elysees.jpg" alt="Champs-Élysées" width="1280" height="1600" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/paris_champs_elysees_b.jpg" alt="Champs-Élysées — view 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Champs-Élysées is Paris&#x27;s most iconic avenue, stretching majestically for over two kilometers between the Arc de Triomphe and Place de la Concorde. It is renowned as one of the world&#x27;s grandest boulevards, lined with luxurious shops, elegant cafés, and historic landmarks. Grand avenue from Place de la Concorde to the Arc de Triomphe—luxury shops, cinemas, and parade route. It is often referred to simply as &#x27;Les Champs&#x27; by Parisians. The Avenue is home to major department stores such as Galeries Lafayette and Printemps. Each November, the Champs-Élysées hosts the grandiose Bastille Day military parade. At night, the avenue sparkles with neon lights and illuminated billboards. Its name translates to &#x27;Elysian Fields,&#x27; reflecting its historical association with the afterlife. Sidewalks are long; metro stops break the walk. Christmas lights draw heavy evening traffic.</p>
 <p class="prose">Originally laid out in the mid-17th century by Louis XIV, the Champs-Élysées was designed to connect the royal palace at Versailles with central Paris. Over time it became a hub for fashionable life, entertainment, and political demonstrations. Today, it remains a symbol of French culture and elegance. Former market gardens became a ceremonial axis under successive regimes. Visit the Champs-Élysées to experience Parisian luxury, witness world-famous monuments like the Arc de Triomphe, and enjoy the vibrant atmosphere of France’s most famous shopping street. Bastille Day and finish line of the Tour de France.</p></div>
 </section>
 <section class="place" id="paris_cite_des_sciences">
+<div class="place-lead">
 <h3>Cité des sciences et de l&#x27;industrie</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Modernist | Period: 1986</p>
-<figure class="place-fig"><img src="../images/paris_cite_des_sciences.jpg" alt="Cité des sciences et de l&#x27;industrie"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_cite_des_sciences.jpg" alt="Cité des sciences et de l&#x27;industrie" width="1280" height="960" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/paris_cite_des_sciences_b.jpg" alt="Cité des sciences et de l&#x27;industrie — view 2" width="330" height="495" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Cité des sciences et de l&#x27;industrie is a vast and dynamic science museum located on the banks of the Seine River in Paris. It opened its doors in 1986 as a hub for scientific exploration and technological innovation, showcasing interactive exhibits that engage visitors of all ages. It features over 40 permanent exhibitions covering various scientific disciplines. Interactive exhibits allow visitors to experiment with physics, biology, and engineering principles. The museum hosts temporary exhibitions, workshops, and educational programs throughout the year. Its location along the Seine provides stunning views of the city’s iconic landmarks. In addition to education, the Cité also serves as a research center for scientists and engineers.</p>
 <p class="prose">Founded in 1986, the Cité was designed to inspire curiosity and foster understanding of science and technology. Its architecture combines modern design with historical elements, blending sleek lines with traditional French aesthetics. The museum has become a popular destination for both locals and tourists seeking hands-on learning experiences. Visiting the Cité offers an immersive journey into the world of science, where visitors can explore topics ranging from astronomy to robotics through engaging displays and experiments.</p></div>
 </section>
 <section class="place" id="paris_conciergerie">
+<div class="place-lead">
 <h3>Conciergerie</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Île de la Cité, 1st arrondissement | Style: Gothic / fortified palace | Period: 1357–1367</p>
-<figure class="place-fig"><img src="../images/paris_conciergerie.jpg" alt="Conciergerie"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_conciergerie.jpg" alt="Conciergerie" width="1280" height="659" style="height: 231px; max-height: 231px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/paris_conciergerie_b.jpg" alt="Conciergerie — view 2" width="330" height="165" style="height: 231px; max-height: 231px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Conciergerie is a historic prison and former royal palace located on the Île de la Cité in Paris. It was once home to notable prisoners such as Marie Antoinette before its transformation into a museum. Medieval royal palace turned revolutionary prison—Marie Antoinette&#x27;s cell is commemorated here. Constructed between 1357 and 1367 by King Philip VI. Used as a prison during both the Ancien Régime and the French Revolution. Listed as a UNESCO World Heritage Site since 1991. Housed several key figures during the Revolutionary Tribunal trials. Converted into a museum after serving as a prison. Audioguide explains trial procedures. Gothic halls survive from the Capetian era.</p>
 <p class="prose">Originally built in the 14th century as a royal palace for King Philip VI of France, the Conciergerie later served as a prison during the French Revolution, where many prominent figures were held before their executions. Notable inmates included Marie-Antoinette, Louis XVI&#x27;s queen, who spent her final days here before being sent to the guillotine. Kings ruled from this island complex before Versailles; Revolutionary Tribunal sat downstairs. Today, visitors can explore the historical cells and courtrooms that played pivotal roles in the tumultuous events of the French Revolution. Pairs with Sainte-Chapelle in the same Palais de la Cité compound.</p></div>
 </section>
 <section class="place" id="paris_eiffel_tower">
+<div class="place-lead">
 <h3>Eiffel Tower</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Champ de Mars, 7th arrondissement | Style: 1880s iron engineering | Period: 1889</p>
-<figure class="place-fig"><img src="../images/paris_eiffel_tower.jpg" alt="Eiffel Tower"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_eiffel_tower.jpg" alt="Eiffel Tower" width="864" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--row-sized"><img src="../images/paris_eiffel_tower_b.jpg" alt="Eiffel Tower — view 2" width="330" height="550" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Eiffel Tower, a global icon of Parisian architecture and engineering, was constructed for the 1889 Exposition Universelle as a temporary structure meant to celebrate France&#x27;s industrial prowess and engineering feats. Designed by Gustave Eiffel, it stands at 300 meters tall, making it the tallest man-made structure in Europe upon its completion. Iron lattice tower built for the 1889 World&#x27;s Fair; still the most visited paid monument in the city. It is made primarily of wrought iron, weighing over 10,000 tons. During its construction, it attracted more than two million visitors within its first year. At night, the tower is illuminated with thousands of lights, creating a breathtaking spectacle visible from miles around. Its design inspired many future skyscrapers and bridges worldwide. In 1925, it became a radio transmission site. Reserve lift tickets online for peak season. The esplanade is free; climbing the stairs is limited to certain days.</p>
 <p class="prose">Completed in 1889, the tower was originally intended to be dismantled after twenty years but proved so popular that it remains a permanent fixture of the French capital. It served as both a symbol of technological advancement and a practical observation point during its early days. Designed by Gustave Eiffel&#x27;s team; controversial at first, later embraced as the skyline signature of Paris. Visit the Eiffel Tower to experience one of the most iconic structures in the world, offering panoramic views of Paris and immersing yourself in its rich history. Observation decks and night lighting make it both museum piece and living landmark.</p></div>
 </section>
 <section class="place" id="paris_grande_arche">
+<div class="place-lead">
 <h3>Grande Arche de la Défense</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: La Défense, west of Paris | Style: Late modern | Period: 1989</p>
-<figure class="place-fig"><img src="../images/paris_grande_arche.jpg" alt="Grande Arche de la Défense"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_grande_arche.jpg" alt="Grande Arche de la Défense" width="1280" height="856" style="height: 77px; max-height: 77px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/paris_grande_arche_b.jpg" alt="Grande Arche de la Défense — view 2" width="330" height="55" style="height: 77px; max-height: 77px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Grande Arche de la Défense is a monumental structure located in the heart of Paris&#x27;s business district, La Défense. Completed in 1989, it stands as a symbol of modern architecture and engineering prowess. Late 20th-century hollow cube monument closing the historic axis westward from the Arc de Triomphe. It measures approximately 108 meters high and 110 meters wide. Its glass-and-metal facade reflects light during different times of day, creating dynamic visual effects. Inside the arch lies the Palais de la Découverte, a science museum showcasing interactive exhibits. The arch forms part of the larger project known as Cité des Sciences et de l&#x27;Industrie. It is often used for large-scale events such as concerts and festivals. Metro RER connections from central Paris are straightforward. Hours for the roof vary—check ahead.</p>
 <p class="prose">Designed by Jean Nouvel, the Grande Arche was constructed to commemorate the bicentennial of the French Revolution. It occupies a central position within the La Défense complex, serving as both a cultural landmark and a functional hub for urban planning. François Mitterrand-era grands projets; opened in 1989. Visitors come to admire its distinctive design and appreciate its symbolic importance as a representation of France’s commitment to progress and innovation. Business district landmark with rooftop perspectives on good weather days.</p></div>
 </section>
 <section class="place" id="paris_hotel_de_sens">
+<div class="place-lead">
 <h3>Hôtel de Sens</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Gothic and Renaissance | Period: late medieval era</p>
-<figure class="place-fig"><img src="../images/paris_hotel_de_sens.jpg" alt="Hôtel de Sens"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_hotel_de_sens.jpg" alt="Hôtel de Sens" width="1060" height="1600" style="height: 368px; max-height: 368px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/paris_hotel_de_sens_b.jpg" alt="Hôtel de Sens — view 2" width="330" height="263" style="height: 368px; max-height: 368px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Hôtel de Sens is a historic palace nestled within the heart of Paris, offering visitors a glimpse into the city&#x27;s rich architectural heritage and political past. Constructed between the 14th and 16th centuries, the building&#x27;s construction spanned multiple reigns and architectural movements. Today, the site houses cultural exhibitions and events, making it accessible to the public while preserving its historical significance. Its ornate interiors feature intricately carved woodwork and stucco ceilings, showcasing the craftsmanship of master artisans. Located on Rue de Beaune, the hotel is easily accessible by foot from major landmarks such as Notre-Dame Cathedral and Les Halles market. The structure underwent significant renovations in the early 20th century, restoring its original grandeur.</p>
 <p class="prose">Built during the late medieval era, the Hôtel de Sens was originally constructed as the residence for the Archbishop of Sens. Over time, it served various governmental roles, including housing important state meetings and serving as a royal reception venue. Its architecture reflects both Gothic and Renaissance influences, showcasing the evolution of French design over several centuries. Visiting the Hôtel de Sens allows travelers to explore the intricate details of its interior decorations and admire the fusion of historical styles that define French architectural brilliance.</p></div>
 </section>
 <section class="place" id="paris_hotel_de_ville_paris">
+<div class="place-lead">
 <h3>Hôtel de Ville</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Place de l&#x27;Hôtel-de-Ville, 4th arrondissement | Style: Neo-Renaissance | Period: Late 14th century to early 17th century</p>
-<figure class="place-fig"><img src="../images/paris_hotel_de_ville_paris.jpg" alt="Hôtel de Ville"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_hotel_de_ville_paris.jpg" alt="Hôtel de Ville" width="1280" height="1019" style="height: 268px; max-height: 268px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/paris_hotel_de_ville_paris_b.jpg" alt="Hôtel de Ville — view 2" width="330" height="192" style="height: 268px; max-height: 268px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Hôtel de Ville is Paris&#x27;s majestic town hall, a symbol of the city&#x27;s governance and heritage. Built during the late Middle Ages and early Renaissance, it stands as one of the most iconic landmarks in the capital. Neo-Renaissance city hall fronting a busy plaza once called Place de Grève. It is located on Place de Grève, now known as Place de l&#x27;Hôtel de Ville. The building features a richly decorated façade with intricate carvings and sculptures. Its interior houses important historical archives and exhibits detailing the city&#x27;s development. During major festivals like Bastille Day, the square outside the Hôtel de Ville becomes a hub for celebrations and performances. In recent years, the building underwent extensive restoration work to preserve its historical integrity. Free exhibitions often fill the Salle Saint-Jean. Riots and celebrations both mark this square in French history.</p>
 <p class="prose">Originally constructed in the 14th century, the Hôtel de Ville was home to various noble families before becoming the seat of municipal government in the 16th century. Its architecture reflects both Gothic and Renaissance styles, showcasing the evolution of French architectural tastes over several centuries. The building has been expanded and renovated multiple times, with notable additions made by architects such as Jacques Lemercier and Jean Bullant. Third Republic rebuilding after the 1871 fire during the Commune. Visiting the Hôtel de Ville offers insight into Parisian history and governance, while its impressive architecture makes it a must-see for tourists. Political heart of Paris with seasonal ice rink and exhibits in the courtyard.</p></div>
 </section>
 <section class="place" id="paris_hotel_des_invalides">
+<div class="place-lead">
 <h3>Les Invalides</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: 7th arrondissement | Style: French Baroque | Period: 1671–1706</p>
-<figure class="place-fig"><img src="../images/paris_hotel_des_invalides.jpg" alt="Les Invalides"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_hotel_des_invalides.jpg" alt="Les Invalides" width="1280" height="482" style="height: 173px; max-height: 173px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/paris_hotel_des_invalides_b.jpg" alt="Les Invalides — view 2" width="330" height="220" style="height: 173px; max-height: 173px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Sitting majestically on the banks of the Seine, Les Invalides is a testament to France&#x27;s military heritage and architectural grandeur. Originally built as a hospital for wounded soldiers during Louis XIV’s reign, it later evolved into a monumental complex housing museums, monuments, and a military academy. Baroque military complex with golden dome over Napoleon&#x27;s tomb and Army Museum collections. The complex comprises several notable structures including the Dome des Invalides, the Musée de l&#x27;Armée, and the École Militaire. Napoleon Bonaparte himself oversaw the construction of the Dome des Invalides. It serves as both a museum and a national memorial honoring France&#x27;s military heroes. The Musée de l&#x27;Armée contains one of the largest collections of military relics in Europe. In addition to being a museum, Les Invalides also hosts important ceremonies and commemorations. The dome church requires a combined ticket with the museum. Lawns toward the Seine are pleasant for a pause.</p>
 <p class="prose">Initially constructed between 1671 and 1706 under King Louis XIV, Les Invalides was intended to provide care and accommodation for injured soldiers returning from wars. Over time, it expanded to include various buildings such as the Dome des Invalides, designed by Jules Hardouin-Mansart, which houses the Tomb of Napoleon I. The site also includes the Musée de l&#x27;Armée, showcasing military artifacts and memorabilia. Louis XIV founded the hospital and church for wounded veterans in the late 17th century. Visiting Les Invalides offers a profound insight into French military history and culture, with its iconic architecture and rich collections. French military history from armor to World Wars in adjoining galleries.</p></div>
 </section>
 <section class="place" id="paris_louvre">
+<div class="place-lead">
 <h3>Louvre Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: 1st arrondissement | Style: Palace architecture with modern interventions | Period: 12th–19th centuries</p>
-<figure class="place-fig"><img src="../images/paris_louvre.jpg" alt="Louvre Museum"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_louvre.jpg" alt="Louvre Museum" width="1280" height="538" style="height: 194px; max-height: 194px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/paris_louvre_b.jpg" alt="Louvre Museum — view 2" width="330" height="495" style="height: 194px; max-height: 194px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Louvre is one of the world&#x27;s most famous and visited art museums, showcasing masterpieces spanning thousands of years of artistic evolution. World-famous museum in a former royal palace; glass pyramid entrance by I. M. Pei. It houses over 35,000 artworks across various departments including painting, sculpture, decorative arts, and antiquities. The museum attracts more than 10 million visitors annually making it one of the busiest cultural institutions globally. Notable exhibits include Leonardo da Vinci’s &#x27;Mona Lisa&#x27;, Michelangelo’s &#x27;Dying Slave&#x27; marble sculptures, and ancient Egyptian artifacts like the Rosetta Stone. Located on the Right Bank of the Seine River in Paris, the Louvre has been a symbol of French culture since its establishment. Inaugurated under Napoleon III in 1857, the Louvre underwent major renovations expanding its exhibition spaces. Closed Tuesdays; prebook timed tickets. Cour Napoléon is dramatic at dusk.</p>
 <p class="prose">Founded in 1793 as a public museum during the French Revolution, the Louvre originally housed royal collections dating back to the 13th century. Today it occupies the former royal palace known as the Louvre Palace, built by King Philip II in the late 12th century. The iconic glass pyramid designed by I.M. Pei was added in 1989 to modernize access to the museum&#x27;s vast collection. Fortress origins; Louvre palace grew across centuries; museum opened after the Revolution. Visit the Louvre for its unparalleled collection of world-famous works such as the Mona Lisa, Venus de Milo, and Winged Victory of Samothrace. From ancient near east to Renaissance painting—plan by wing or accept getting lost elegantly.</p></div>
 </section>
 <section class="place" id="paris_jardin_du_luxembourg">
+<div class="place-lead">
 <h3>Luxembourg Garden</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
-<p class="place-meta">Address: 6th arrondissement | Style: French classical garden | Period: 1612</p>
-<figure class="place-fig"><img src="../images/paris_jardin_du_luxembourg.jpg" alt="Luxembourg Garden"/></figure>
+<p class="place-meta">Location: 6th arrondissement | Style: French classical garden | Period: 1612</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_jardin_du_luxembourg.jpg" alt="Luxembourg Garden" width="1280" height="960" style="height: 309px; max-height: 309px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/paris_jardin_du_luxembourg_b.jpg" alt="Luxembourg Garden — view 2" width="330" height="221" style="height: 309px; max-height: 309px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Luxembourg Garden is a serene oasis of green nestled within the heart of Paris, offering visitors a tranquil escape from bustling city life. Formal French garden around the Senate palace—ponds, statues, and iconic green chairs. It covers approximately 24 acres of lush greenery and formal gardens. The garden is home to the Musée du Luxembourg, showcasing artworks by French painters. Visitors can stroll along winding paths lined with trees and benches perfect for reading or picnicking. Famous statues such as &#x27;Le Penseur&#x27; by Rodin are prominently displayed throughout the grounds. Events like concerts and open-air theater performances take place regularly during summer months. Model boats rent on the central fountain on fair days. Some lawns are closed to sitting—signs explain zones.</p>
 <p class="prose">Originally created as a royal garden for Marie de Médicis in the 17th century, the Luxembourg Garden has evolved into one of Paris&#x27; most iconic and beloved public spaces. It was designed by Andréy Le Nôtre, who also worked on Versailles, and features intricate paths, fountains, and sculptures that reflect its historical significance. Marie de&#x27; Medici commissioned the palace in the 1610s; public garden evolved over centuries. A must-visit for anyone seeking peace amidst Parisian hustle and bustle, the Luxembourg Garden provides a charming setting for relaxation and reflection. Neighborhood-scale calm between Latin Quarter and Saint-Germain.</p></div>
 </section>
 <section class="place" id="paris_musee_orsay">
+<div class="place-lead">
 <h3>Musée d&#x27;Orsay</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Left Bank, 7th arrondissement | Style: Beaux-Arts station conversion | Period: 1900–1906</p>
-<figure class="place-fig"><img src="../images/paris_musee_orsay.jpg" alt="Musée d&#x27;Orsay"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_musee_orsay.jpg" alt="Musée d&#x27;Orsay" width="1280" height="371" style="height: 133px; max-height: 133px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/paris_musee_orsay_b.jpg" alt="Musée d&#x27;Orsay — view 2" width="330" height="186" style="height: 133px; max-height: 133px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Musée d&#x27;Orsay is a world-class museum showcasing Impressionist and Post-Impressionist artworks, housed in the former Orsay railway station built between 1900 and 1906. Former railway station housing Impressionist masterpieces, sculpture, and decorative arts. Housed within the iconic Gare d&#x27;Orsay, a historic railway station originally opened in 1900. Features over 4,000 works spanning impressionism, post-impressionism, and art nouveau. Renovated extensively in the early 1980s to accommodate its new function as a museum. Located on the Left Bank of the Seine River, offering stunning views of Parisian landmarks. Regularly hosts temporary exhibitions showcasing significant collections and contemporary art. Thursday late openings are popular—book ahead. The riverside façade faces the Louvre across the Seine.</p>
 <p class="prose">Originally constructed as a train terminal for Paris&#x27;s rail network, the Musée d&#x27;Orsay was converted into a museum in 1986 to house the growing collection of French art dating from 1848 to 1914. Its neo-Baroque architecture reflects the grandiosity of late 19th-century France, featuring ornate decorations and majestic interiors. Gare d&#x27;Orsay&#x27;s train hall became a museum in the 1980s. A must-visit for anyone interested in masterpieces by artists such as Monet, Renoir, Degas, and Van Gogh. Single visit can cover Monet, Van Gogh, Degas, and the Belle Époque clock views.</p></div>
 </section>
 <section class="place" id="paris_musee_cluny">
+<div class="place-lead">
 <h3>Musée de Cluny</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Gothic Revival | Period: 1843</p>
-<figure class="place-fig"><img src="../images/paris_musee_cluny.jpg" alt="Musée de Cluny"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_musee_cluny.jpg" alt="Musée de Cluny" width="1280" height="850" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/paris_musee_cluny_b.jpg" alt="Musée de Cluny — view 2" width="330" height="495" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Musée national du Moyen Âge, better known as the Musée de Cluny, is a world-famous museum dedicated to medieval art and culture. Located on the Left Bank of Paris, it showcases priceless artifacts from the Middle Ages, including the famous Lady and Unicorn tapestries. It houses the celebrated Apocalypse Tapestry, one of the largest surviving examples of medieval textile art. The museum also boasts extensive collections of manuscripts, sculptures, and illuminated books. Its architecture, inspired by Gothic Revival principles, features intricate stone carvings and stained glass windows. Opened to the public in 1843, it has been continuously expanded and renovated over the years. In addition to its permanent exhibitions, temporary shows often highlight lesser-known aspects of medieval life.</p>
 <p class="prose">Founded in 1843 by Emperor Louis Philippe, the museum was originally created to house the private collection of his wife, Queen Hortense de Beauharnais. The building itself, designed by architect Eugène Viollet-le-Duc, reflects the Gothic Revival style with its elaborate decorations and grand hallways. Today, it remains one of the most important institutions for studying medieval heritage. Visiting the Musée de Cluny allows visitors to immerse themselves in the rich cultural legacy of the Middle Ages through its impressive exhibits.</p></div>
 </section>
 <section class="place" id="paris_musee_rodin_paris">
+<div class="place-lead">
 <h3>Musée Rodin</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 
-<figure class="place-fig"><img src="../images/paris_musee_rodin_paris.jpg" alt="Musée Rodin"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/paris_musee_rodin_paris_b.jpg" alt="Musée Rodin" width="330" height="220"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Located on the hill of Montsouris, Musée Rodin is a world-renowned museum showcasing the sculptures and works of Auguste Rodin, one of France&#x27;s most celebrated artists. Opened in 1919, it showcases over 6,000 works including sculptures, drawings, and ceramics. The garden surrounding the museum features landscapes designed by Rodin himself. Notable exhibits include &#x27;The Gates of Hell&#x27;, considered one of his greatest masterpieces. It is located near Parc Monceau and offers panoramic views of Paris. Rodin&#x27;s workshop and private residence are also part of the museum complex.</p>
 <p class="prose">Founded in 1916 by Rodin&#x27;s widow, Beatrice, the museum originally housed Rodin&#x27;s studio and personal collection. It was later moved to its current location in 1927 after extensive renovations. The museum has since become a major cultural landmark, attracting millions of visitors annually. Visitors come to admire iconic pieces such as &#x27;The Thinker&#x27; and &#x27;The Kiss&#x27;, which have become symbols of artistic expression and inspiration worldwide.</p></div>
 </section>
 <section class="place" id="paris_notre_dame_cathedral">
+<div class="place-lead">
 <h3>Notre-Dame de Paris</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Île de la Cité, 4th arrondissement | Style: Gothic | Period: 1163–1345</p>
-<figure class="place-fig"><img src="../images/paris_notre_dame_cathedral.jpg" alt="Notre-Dame de Paris"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_notre_dame_cathedral.jpg" alt="Notre-Dame de Paris" width="1185" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/paris_notre_dame_cathedral_b.jpg" alt="Notre-Dame de Paris — view 2" width="330" height="382" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">One of the most iconic landmarks of Paris, Notre-Dame de Paris is a breathtaking Gothic cathedral located on Île de la Cité, the heart of the city. Its soaring spires and intricate stained-glass windows have captivated visitors for centuries. Medieval Gothic cathedral famous for its west façade, rose windows, and flying buttresses. It suffered severe damage in a fire in April 2019 but underwent extensive restoration efforts afterward. The cathedral houses the crown of thorns, believed to be the actual crown worn by Jesus Christ at his crucifixion. Its famous bells, known collectively as &#x27;Emmaüs,&#x27; weigh over 13 tons each and can still be heard ringing today. Notre-Dame&#x27;s rose windows are some of the largest and most exquisite examples of medieval stained glass artistry. The building is renowned for its imposing twin towers, which dominate the skyline of Paris. Queue management changes after reopening; check official notices. Combine with Sainte-Chapelle nearby on the same island.</p>
 <p class="prose">Built between 1163 and 1345 during the reigns of French kings Louis VII and Philip II Augustus, Notre-Dame was originally constructed as a Romanesque basilica before being transformed into its current Gothic form. The cathedral&#x27;s architecture features notable elements such as flying buttresses and ribbed vaults, which revolutionized medieval construction techniques. It has been central to religious life in Paris since its completion, hosting important ceremonies and serving as a symbol of national pride. Construction spanned centuries from the 12th century; fire in 2019 led to a major restoration project. Notre-Dame de Paris is significant because it represents both the architectural achievements of the Middle Ages and the spiritual heritage of France. Liturgical heart of Paris and setting of Hugo&#x27;s novel—exterior viewing remains moving.</p></div>
 </section>
-<section class="place" id="paris_pdfband_0_4312c3dc">
+<section class="place" id="paris_notredamedeparis">
+<div class="place-lead">
 <h3>NotreDameDeParis</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: See official visitor information.</p>
-<figure class="place-fig"><img src="../images/paris_pdfband_0_4312c3dc.jpg" alt="NotreDameDeParis"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_notredamedeparis.jpg" alt="NotreDameDeParis" width="1205" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/paris_notredamedeparis_b.jpg" alt="NotreDameDeParis — view 2" width="330" height="382" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 </section>
 <section class="place" id="paris_palais_garnier">
+<div class="place-lead">
 <h3>Palais Garnier</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Place de l&#x27;Opéra, 9th arrondissement | Style: Second Empire / eclectic | Period: 1862–1875</p>
-<figure class="place-fig"><img src="../images/paris_palais_garnier.jpg" alt="Palais Garnier"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_palais_garnier.jpg" alt="Palais Garnier" width="1280" height="618" style="height: 223px; max-height: 223px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/paris_palais_garnier_b.jpg" alt="Palais Garnier — view 2" width="330" height="263" style="height: 223px; max-height: 223px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Located at the heart of Paris on Boulevard des Italiens, Palais Garnier is a legendary opera house renowned for its opulent interior and historical significance. Second Empire opera house with marble staircases, Chagall-painted ceiling, and gilded auditorium. The building&#x27;s grand staircase is considered one of the most beautiful in the world. It features over 6,000 square meters of painted ceilings and murals created by some of the finest artists of the time. Its exterior facade is adorned with sculptures depicting mythological figures. The opera house can accommodate up to 1,989 audience members in its main hall. In addition to live performances, Palais Garnier also hosts special exhibitions showcasing art and design. Dress codes apply for evening performances. The library-museum holds costume sketches.</p>
 <p class="prose">Built between 1862 and 1875 during the Second Empire era, Palais Garnier was designed by Charles Garnier to serve as the new home for the Paris Opera. Its lavish Art Nouveau-inspired architecture and elaborate decorations make it one of the most iconic landmarks in France. The theater has hosted countless performances, including operas, ballets, and concerts, making it a cultural hub since its opening. Opened in 1875; setting of Leroux&#x27;s Phantom tale. A must-visit for anyone interested in art, opera, and architectural wonders, Palais Garnier offers breathtaking views and an unforgettable experience. National ballet and opera venue plus self-guided daytime visits.</p></div>
 </section>
 <section class="place" id="paris_pantheon_paris">
+<div class="place-lead">
 <h3>Panthéon</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: 5th arrondissement | Style: Neoclassical | Period: 1758–1790</p>
-<figure class="place-fig"><img src="../images/paris_pantheon_paris.jpg" alt="Panthéon"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_pantheon_paris.jpg" alt="Panthéon" width="1200" height="1600" style="height: 179px; max-height: 179px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/paris_pantheon_paris_b.jpg" alt="Panthéon — view 2" width="330" height="128" style="height: 179px; max-height: 179px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Panthéon is a solemn and imposing monument situated at the top of Montparnasse hill, designed by architect Jacques-Germain Soufflot in the neo-classical style. Completed in 1790, it was originally intended as a church dedicated to St. Genevieve but later transformed into a mausoleum honoring France&#x27;s greatest citizens. Neoclassical church turned secular temple housing the remains of distinguished French citizens. Designed in the neo-classical style by Jacques-Germain Soufflot. Constructed between 1758 and 1790. Converted from a church to a mausoleum during the French Revolution. Houses the remains of many prominent French figures. Features a dome with intricate stonework and stained glass windows. Crypt visits are included in the main ticket. The colonnaded porch echoes Rome&#x27;s Pantheon.</p>
 <p class="prose">Built between 1758 and 1790, the Panthéon was initially consecrated as Église de la Sainte-Trinité before being converted into a secular site during the French Revolution. It has since become a national shrine for notable figures such as Voltaire, Rousseau, and Marie Curie. Revolutionary redesign of Soufflot&#x27;s church; Foucault&#x27;s pendulum once hung beneath the dome. A must-visit for its architectural elegance and historical significance, the Panthéon symbolizes both religious heritage and modern remembrance of France’s intellectual and scientific giants. Panthéon burials read like a canon of literature, science, and resistance.</p></div>
 </section>
 <section class="place" id="paris_parc_monceau">
+<div class="place-lead">
 <h3>Parc Monceau</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: French Baroque | Period: late 18th century</p>
-<figure class="place-fig"><img src="../images/paris_parc_monceau.jpg" alt="Parc Monceau"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_parc_monceau.jpg" alt="Parc Monceau" width="1280" height="960" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--row-sized"><img src="../images/paris_parc_monceau_b.jpg" alt="Parc Monceau — view 2" width="330" height="525" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">A charming oasis of green in the heart of Paris, Parc Monceau is a picturesque park known for its elegant architecture and serene atmosphere. The park features ornate gates and a grand entrance pavilion designed by Ange-Jacques Gabriel. It boasts two large artificial lakes surrounded by manicured lawns and trees. Notable attractions include the Egyptian obelisk and the statue of Apollo. Parc Monceau hosts various cultural events and concerts throughout the year. Its formal gardens are maintained meticulously, showcasing seasonal blooms.</p>
 <p class="prose">Built in the late 18th century by Alexandre Lenoir, Parc Monceau was originally designed as a private garden for aristocratic families. It later became a public park, offering visitors a tranquil retreat amidst bustling city life. The park&#x27;s design reflects French Baroque style with its symmetrical layout, ornamental ponds, and classical statues. Visit Parc Monceau to experience Parisian elegance and relaxation in a historical setting.</p></div>
 </section>
-<section class="place" id="paris_pdfband_2_30b06647">
+<section class="place" id="paris_landmark">
+<div class="place-lead">
 <h3>Paris</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: See official visitor information.</p>
-<figure class="place-fig"><img src="../images/paris_pdfband_2_30b06647.jpg" alt="Paris"/></figure>
+<figure class="place-fig place-fig--hi-res"><img src="../images/paris_landmark.jpg" alt="Paris" width="1200" height="1600"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Downie (born in San Francisco in 1958) is a multilingual Paris-based American nonfiction author, crime novelist and journalist who writes most often about culture, food and travel. Biography
 Downie&#x27;s family background is revealed in his memoir Shadows of Rome. His father, Charles E.</p></div>
 </section>
-<section class="place" id="paris_pdfband_3_4f7898b2">
+<section class="place" id="paris_gibson_square">
+<div class="place-lead">
 <h3>Paris Gibson Square</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: See official visitor information.</p>
-<figure class="place-fig"><img src="../images/paris_pdfband_3_4f7898b2.jpg" alt="Paris Gibson Square"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_gibson_square.jpg" alt="Paris Gibson Square" width="1280" height="849" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/paris_gibson_square_b.jpg" alt="Paris Gibson Square — view 2" width="330" height="220" style="height: 306px; max-height: 306px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 </section>
 <section class="place" id="paris_pavillon_de_flore">
+<div class="place-lead">
 <h3>Pavillon de Flore</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Louvre-Tuileries complex, 1st arrondissement | Style: French classical palace | Period: 1925</p>
-<figure class="place-fig"><img src="../images/paris_pavillon_de_flore.jpg" alt="Pavillon de Flore"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_pavillon_de_flore.jpg" alt="Pavillon de Flore" width="1280" height="730" style="height: 263px; max-height: 263px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/paris_pavillon_de_flore_b.jpg" alt="Pavillon de Flore — view 2" width="330" height="497" style="height: 263px; max-height: 263px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Perched on the banks of the Seine, Pavillon de Flore is a charming café and cultural landmark that has been a Parisian institution since its opening in 1925. It was originally designed as a venue for intellectuals, artists, and writers to gather and discuss ideas over coffee and pastries. Riverside pavilion at the Louvre&#x27;s western end—part of the museum wing facing the Tuileries Garden. It is located at 4 Rue des Beaux-Arts, near the Luxembourg Gardens. The café&#x27;s menu includes traditional French dishes such as crème brûlée and tarte tatin. Its terrace offers stunning views of the Seine River and the Eiffel Tower. Today it remains one of the most iconic cafés in Paris, attracting both locals and tourists alike. In addition to its café offerings, Pavillon de Flore also hosts occasional art exhibitions and live performances. Approach from the Tuileries for symmetry with the Carrousel arch. Exhibits inside rotate with the Louvre program.</p>
 <p class="prose">Built in 1925, Pavillon de Flore quickly became known as a hub for literary figures such as Ernest Hemingway, Pablo Picasso, and Colette. The café&#x27;s interior features Art Deco-inspired decorations, with elegant wooden furniture and walls adorned with murals by renowned artists like Jean Cocteau and Henri Matisse. Named for Flore; rebuilt after 19th-century fires; unified with the Louvre museum circuit today. Visiting Pavillon de Flore allows visitors to step back in time and experience the vibrant intellectual culture of Paris during the Roaring Twenties. Framing shot between garden allées and Seine traffic.</p></div>
 </section>
 <section class="place" id="paris_place_de_la_concorde">
+<div class="place-lead">
 <h3>Place de la Concorde</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
-<p class="place-meta">Address: 8th arrondissement | Style: Neoclassical urban space | Period: mid-18th century</p>
-<figure class="place-fig"><img src="../images/paris_place_de_la_concorde.jpg" alt="Place de la Concorde"/></figure>
+<p class="place-meta">Location: 8th arrondissement | Style: Neoclassical urban space | Period: mid-18th century</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_place_de_la_concorde.jpg" alt="Place de la Concorde" width="907" height="1600" style="height: 298px; max-height: 298px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/paris_place_de_la_concorde_b.jpg" alt="Place de la Concorde — view 2" width="330" height="213" style="height: 298px; max-height: 298px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Place de la Concorde is Paris&#x27;s largest square, stretching over 86,400 square meters and lined with elegant buildings. It was originally named Place Louis XV but changed its name after the French Revolution. Vast octagonal square with fountains and the Luxor obelisk at the historic heart of royal and revolutionary Paris. It features the Luxor Obelisk, a gift from Egypt to Napoleon III. Surrounded by notable landmarks such as Hôtel de Crillon and Hôtel Ritz. Designed by architect Alexandre-Théodore Brune. Has a fountain at its center, originally installed during Napoleon&#x27;s reign. Located along the Seine River. Traffic is fast; use marked crossings. Ferris wheels sometimes appear seasonally.</p>
 <p class="prose">Built in the mid-18th century under King Louis XV, it served as a royal gathering space. During the Revolution, the guillotine stood here, symbolizing executions of prominent figures like Marie Antoinette. Afterward, it became a site for celebrations and monuments honoring France’s heroes. Site of the guillotine during the Terror; obelisk erected in the 1830s. A must-visit for its grandiose design, historical significance, and central location near the Champs-Elysées and Tuileries Garden. Link between the Tuileries, Madeleine, and Champs-Élysées.</p></div>
 </section>
 <section class="place" id="paris_place_des_vosges">
+<div class="place-lead">
 <h3>Place des Vosges</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: French Renaissance | Period: 1605–1612</p>
-<figure class="place-fig"><img src="../images/paris_place_des_vosges.jpg" alt="Place des Vosges"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_place_des_vosges.jpg" alt="Place des Vosges" width="1067" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/paris_place_des_vosges_b.jpg" alt="Place des Vosges — view 2" width="330" height="495" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Place des Vosges is Paris&#x27;s oldest square, a breathtaking example of French Renaissance architecture. Built between 1605 and 1612 during the reign of King Henry IV, it was originally designed as a royal residence for aristocrats. Built during the reign of King Henry IV (1589–1610). Designed by architect Salomon de la Celle. Consists of 36 identical houses arranged around a rectangular layout. Features elegant balconies and decorative ironwork. Formerly known as Place Royale until renamed in 1790.</p>
 <p class="prose">Constructed by architect Salomon de la Celle under King Henry IV, the Place des Vosges served as a prestigious address for nobles and members of the court. Originally named Place Royale, it later took its current name to honor the Vosges region after the French Revolution. The square features symmetrical rows of red brick houses with ornate balconies and stone facades. This historic square offers a glimpse into Parisian life during the early modern era and serves as a charming destination for strollers and visitors seeking tranquility amidst the bustle of central Paris.</p></div>
 </section>
 <section class="place" id="paris_place_vendome">
+<div class="place-lead">
 <h3>Place Vendôme</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
-<p class="place-meta">Address: 1st arrondissement | Style: Neoclassical urban square | Period: 1686</p>
-<figure class="place-fig"><img src="../images/paris_place_vendome.jpg" alt="Place Vendôme"/></figure>
+<p class="place-meta">Location: 1st arrondissement | Style: Neoclassical urban square | Period: 1686</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_place_vendome.jpg" alt="Place Vendôme" width="1200" height="1600" style="height: 295px; max-height: 295px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/paris_place_vendome_b.jpg" alt="Place Vendôme — view 2" width="330" height="211" style="height: 295px; max-height: 295px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">At the heart of Parisian luxury and opulence lies Place Vendôme, a square that has been synonymous with elegance since its creation. Octagonal square with Vendôme column—center of high jewelry maisons and the Ritz. It is home to some of the world&#x27;s top luxury brands such as Cartier, Van Cleef &amp; Arpels, and Chanel. The square hosts various cultural events including classical concerts and art exhibitions. In the center stands the iconic statue of Apollo created by Jean-Baptiste Tuby. Its architectural style blends French classicism with Baroque elements. During major holidays, the square is illuminated with festive lights. Peek into courtyards only where invited. Napoleon&#x27;s campaigns are cast in bas-relief up the column.</p>
 <p class="prose">Built during the reign of Louis XIV in the 17th century, Place Vendôme was originally named &#x27;Place Royale&#x27;. It later became known as &#x27;Place Vendôme&#x27; after the Duke of Vendôme, who owned the adjacent Hôtel de Vendôme. The square&#x27;s design by architect Louis Le Vau reflects Baroque grandeur, showcasing symmetrical layout and grand monuments. Laid out under Louis XIV; column replaced after the Commune pulled down the original imperial statue. Today, it remains one of the most prestigious locations for high-end jewelry stores and fashion boutiques, symbolizing wealth and sophistication. Architecture of continuous arcades defines luxury retail Paris.</p></div>
 </section>
 <section class="place" id="paris_pont_alexandre_iii">
+<div class="place-lead">
 <h3>Pont Alexandre III</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
-<p class="place-meta">Address: Seine between 7th and 8th arrondissements | Style: Beaux-Arts | Period: 1900–1906</p>
-<figure class="place-fig"><img src="../images/paris_pont_alexandre_iii.jpg" alt="Pont Alexandre III"/></figure>
+<p class="place-meta">Location: Seine between 7th and 8th arrondissements | Style: Beaux-Arts | Period: 1900–1906</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_pont_alexandre_iii.jpg" alt="Pont Alexandre III" width="930" height="1600" style="height: 196px; max-height: 196px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/paris_pont_alexandre_iii_b.jpg" alt="Pont Alexandre III — view 2" width="330" height="140" style="height: 196px; max-height: 196px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Spanning the Seine River, Pont Alexandre III is a majestic bridge adorned with golden statues and ornate ironwork, designed to celebrate the Franco-Russian alliance of 1892. Beaux-Arts bridge rich with gilt lampposts and stone allegories—favorite film and parade backdrop. It features 24 gilded bronze lions and allegorical figures representing the arts and sciences. The bridge houses two grand halls flanked by glass-covered arcades filled with shops and cafés. Its design incorporates elements inspired by ancient Egyptian and Byzantine art. At night, the bridge is illuminated with thousands of lights, creating a dazzling spectacle. Located near the Trocadéro Gardens, it provides access to the Musée de l&#x27;Homme and the Palais de Chaillot. Sunrise and blue hour emphasize the sculptures. Expect closures during city events.</p>
 <p class="prose">Built between 1900 and 1906, Pont Alexandre III was commissioned by Emperor Nikolay II of Russia as a tribute to his French counterpart, Emperor Napoleon III. The bridge connects the elegant districts of Auteuil and Trocadéro, showcasing opulent Art Nouveau architecture and exquisite decorations that reflect both French and Russian influences. Opened for the 1900 Exposition Universelle; named for the Russian tsar. This iconic bridge is one of Paris&#x27;s most photographed landmarks, offering stunning views of the Eiffel Tower and the Champs-Elysées. Frames Invalides on one side, Grand and Petit Palais on the other.</p></div>
 </section>
 <section class="place" id="paris_pont_des_arts">
+<div class="place-lead">
 <h3>Pont des Arts</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: Cast-Iron Bridge | Period: 1804</p>
-<figure class="place-fig"><img src="../images/paris_pont_des_arts.jpg" alt="Pont des Arts"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_pont_des_arts.jpg" alt="Pont des Arts" width="1280" height="796" style="height: 141px; max-height: 141px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/paris_pont_des_arts_b.jpg" alt="Pont des Arts — view 2" width="330" height="101" style="height: 141px; max-height: 141px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Spanning the Seine River and connecting the Ile de la Cité with the Left Bank, Pont des Arts is one of Paris&#x27;s most iconic bridges, known for its intricate ironwork and picturesque views. Constructed using cast-iron frames and stone piers, making it one of the earliest examples of modern bridge engineering. The bridge features elaborate wrought-iron railings that were designed by sculptor Louis-Ernest Barrias. It has been featured prominently in numerous films and paintings, including Renoir’s &#x27;Le Bain aux Batignolles&#x27;. In recent years, authorities have removed the infamous lock phenomenon due to safety concerns but preserved its historical charm. Today, visitors can still enjoy the serene atmosphere and breathtaking views of Notre-Dame Cathedral and the Eiffel Tower.</p>
 <p class="prose">Built in 1804 during Napoleon&#x27;s reign, Pont des Arts was originally designed to provide a link between the Louvre and the Sorbonne, serving as a pedestrian crossing and later becoming a hub for artists and lovers. Its name derives from the &#x27;arts&#x27; because it became famous for being adorned with countless locks engraved with lovers&#x27; names, symbolizing eternal love. A must-visit for anyone seeking to capture the essence of Parisian romance and artistry, Pont des Arts offers panoramic vistas of the city&#x27;s landmarks.</p></div>
 </section>
 <section class="place" id="paris_pont_neuf">
+<div class="place-lead">
 <h3>Pont Neuf</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
-<p class="place-meta">Address: Île de la Cité to Left and Right Banks | Style: Renaissance bridge architecture | Period: 1578–1607</p>
-<figure class="place-fig"><img src="../images/paris_pont_neuf.jpg" alt="Pont Neuf"/></figure>
+<p class="place-meta">Location: Île de la Cité to Left and Right Banks | Style: Renaissance bridge architecture | Period: 1578–1607</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_pont_neuf.jpg" alt="Pont Neuf" width="1280" height="700" style="height: 141px; max-height: 141px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/paris_pont_neuf_b.jpg" alt="Pont Neuf — view 2" width="330" height="101" style="height: 141px; max-height: 141px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Spanning the Seine and connecting the Île de la Cité with the Right Bank, Pont Neuf is Paris&#x27;s oldest bridge, built between 1578 and 1607 during the reign of Henry IV. It was revolutionary for its time, featuring wide walkways and horse-drawn carriages, as well as being the first bridge in Paris without houses or shops. Despite the name &#x27;new bridge,&#x27; the oldest standing bridge across the Seine in Paris with mascarons along the parapets. It opened in 1607, marking a significant milestone in Parisian infrastructure development. The bridge features two tiers: upper walkways for pedestrians and lower roadways for carriages. Its design influenced subsequent bridge construction across Europe. Today, Pont Neuf is a UNESCO World Heritage Site recognized for its historical significance and architectural elegance. In addition to its aesthetic appeal, it hosts numerous street performers and artists. Square du Vert-Galant sits on the downstream tip. Night lighting reflects well for river photography.</p>
 <p class="prose">Constructed by King Henry IV, Pont Neuf replaced older wooden structures that had been repeatedly destroyed by floods. Designed by royal architect Salomon de Brosse, it served both practical and symbolic purposes, symbolizing the king’s authority and the unity of Paris. The bridge became a popular meeting place for Parisians, known for its scenic views and open spaces. Completed in the early 1600s under Henri IV. A testament to Renaissance engineering and urban planning, Pont Neuf remains one of Paris&#x27;s most iconic landmarks, offering breathtaking vistas over the river and serving as a cultural hub. Connects the tip of the island to both banks near the Louvre.</p></div>
 </section>
 <section class="place" id="paris_pere_lachaise_cemetery">
+<div class="place-lead">
 <h3>Père Lachaise Cemetery</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Style: French neoclassical | Period: 1804</p>
-<figure class="place-fig"><img src="../images/paris_pere_lachaise_cemetery.jpg" alt="Père Lachaise Cemetery"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_pere_lachaise_cemetery.jpg" alt="Père Lachaise Cemetery" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/paris_pere_lachaise_cemetery_b.jpg" alt="Père Lachaise Cemetery — view 2" width="330" height="247" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Perched on the Butte Montmartre, Père Lachaise Cemetery is Paris&#x27; most famous burial ground and one of its largest. Established in 1804 during Napoleon’s reign, it quickly became a fashionable resting place for Parisians. It contains over 70,000 graves and more than 1 million burials. The cemetery covers nearly 109 acres and is one of the largest urban cemeteries in Europe. Notable interments include Jean-Jacques Rousseau, Honoré de Balzac, Frédéric Chopin, and Yves Saint Laurent. Its design features French neoclassical architecture with winding paths and scenic views. It&#x27;s known for its stunning monuments, statues, and elaborate tombs.</p>
 <p class="prose">Founded by King Louis XVIII in 1804, Père Lachaise was named after Father François de Lachaise, a Jesuit priest who ministered to prisoners at nearby prisons. The cemetery grew rapidly as a popular final resting place for prominent figures such as Molière, Balzac, and Chopin. Visitors come here to pay respects to iconic figures like Jim Morrison, Oscar Wilde, and Sarah Bernhardt, making it a cultural destination as much as a historical site.</p></div>
 </section>
 <section class="place" id="paris_sacre_coeur">
+<div class="place-lead">
 <h3>Sacré-Cœur Basilica</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Butte Montmartre, 18th arrondissement | Style: Romano-Byzantine | Period: 1875–1919</p>
-<figure class="place-fig"><img src="../images/paris_sacre_coeur.jpg" alt="Sacré-Cœur Basilica"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_sacre_coeur.jpg" alt="Sacré-Cœur Basilica" width="1280" height="866" style="height: 312px; max-height: 312px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/paris_sacre_coeur_b.jpg" alt="Sacré-Cœur Basilica — view 2" width="330" height="511" style="height: 312px; max-height: 312px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Perched high on Montmartre hill, the Sacré-Cœur Basilica is a soaring symbol of Parisian spirituality and art-deco architecture. Its white dome dominates the skyline, offering panoramic views over the city below. Romano-Byzantine basilica with chalk-white domes atop Montmartre—panoramic over northern Paris. It took nearly 44 years to complete construction due to funding challenges and World War I interruptions. The basilica&#x27;s iconic white dome measures 83 meters tall. Inside, visitors can explore stunning mosaics depicting scenes from Christian scripture. Its location atop Montmartre Hill provides unparalleled views of the Eiffel Tower and other landmarks. On Sundays and holidays, masses are held regularly. The dome climb is separate from the nave visit. Weekend crowds are heavy; early mornings are quieter.</p>
 <p class="prose">Built between 1875 and 1919, the basilica was constructed as a national shrine to atone for the excesses of the French Revolution. Designed by architect Paul Abadie, it showcases neo-Byzantine style with intricate mosaics and stained glass windows. Consecrated in 1919; built as national vow after the Franco-Prussian War and Commune. Visitors come here to admire its architectural beauty and take in breathtaking vistas of Paris. Pilgrimage church and sunset viewpoint above winding village streets.</p></div>
 </section>
-<section class="place" id="paris_pdfband_1_954425d3">
+<section class="place" id="paris_saint_augustin_church_paris">
+<div class="place-lead">
 <h3>Saint Augustin Church Paris</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: See official visitor information.</p>
-<figure class="place-fig"><img src="../images/paris_pdfband_1_954425d3.jpg" alt="Saint Augustin Church Paris"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_saint_augustin_church_paris.jpg" alt="Saint Augustin Church Paris" width="1280" height="1280" style="height: 462px; max-height: 462px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/paris_saint_augustin_church_paris_b.jpg" alt="Saint Augustin Church Paris — view 2" width="330" height="413" style="height: 462px; max-height: 462px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 </section>
 <section class="place" id="paris_sainte_chapelle">
+<div class="place-lead">
 <h3>Sainte-Chapelle</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Île de la Cité, 4th arrondissement | Style: Gothic Rayonnant | Period: late 13th century</p>
-<figure class="place-fig"><img src="../images/paris_sainte_chapelle.jpg" alt="Sainte-Chapelle"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/paris_sainte_chapelle.jpg" alt="Sainte-Chapelle" width="1240" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--row-sized"><img src="../images/paris_sainte_chapelle_b.jpg" alt="Sainte-Chapelle — view 2" width="330" height="541" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Perched high above the River Seine, Sainte-Chapelle is a stunning gothic chapel renowned for its exquisite stained-glass windows. Built during the reign of King Louis IX in the late 13th century, it was originally intended as a private chapel for royal audiences and religious ceremonies. Royal chapel famed for upper-level stained glass telling biblical narratives in jewel tones. The chapel contains over 1,000 figures depicted in its stained-glass panels. It was built on the site of an earlier chapel commissioned by Saint Louis himself. King Louis IX donated most of the funds for its construction. Today, Sainte-Chapelle is part of the Palais de Justice complex and houses several historical artifacts. Its exterior walls are relatively plain compared to the elaborate interior. Security queue is shared with the Conciergerie ticket combo. Bright sun deepens the glass colors.</p>
 <p class="prose">Constructed between 1242 and 1248 under the direction of Pierre de Montmirail, Sainte-Chapelle served as a repository for relics of Christ&#x27;s Passion, including the Crown of Thorns. Its unique design showcases the intricate craftsmanship typical of French Gothic architecture, with towering columns and pointed arches that create a sense of height and lightness. Built by Louis IX in the 1240s to house Passion relics. Visitors come to admire the chapel’s famous stained glass, which depicts scenes from the Bible and illuminates the interior with vibrant colors. Gothic Rayonnant masterpiece—interior visits reward slow looking.</p></div>
 </section>
 <section class="place" id="paris_tuileries_garden">
+<div class="place-lead">
 <h3>Tuileries Garden</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Period: 1564</p>
-<figure class="place-fig"><img src="../images/paris_tuileries_garden.jpg" alt="Tuileries Garden"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/paris_tuileries_garden_b.jpg" alt="Tuileries Garden" width="330" height="247"/></figure>
+</div>
 <div class="place-desc"><p class="prose">The Tuileries Garden is a serene oasis nestled between the Louvre Museum and the Place de la Concorde. It was originally created as part of the Palace of Tuileries, built by Catherine de&#x27; Medici in the 16th century. It spans approximately 24 acres and features elegant paths lined with trees and flowers. The garden includes sculptures and fountains, such as the famous Fountain of Neptune. In the heart of the garden stands the Monument to the Glories of the French People, commemorating France’s military victories. During summer evenings, the garden hosts cultural events like concerts and film screenings. Adjacent to the garden lies the iconic Louvre Pyramid, which serves as the entrance to the Louvre Museum.</p>
 <p class="prose">Originally designed as a formal garden for the Palace of Tuileries, it later became a public park during the French Revolution. The garden underwent significant changes over time, including its transformation into a more open, natural space under Napoleon III&#x27;s urban planning efforts in the mid-19th century. A must-visit for anyone exploring Paris, the Tuileries Garden offers tranquility amidst the hustle and bustle of the city center.</p></div>
 </section>

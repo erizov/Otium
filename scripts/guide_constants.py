@@ -10,6 +10,7 @@ from pathlib import Path
 _SCRIPT_DIR = Path(__file__).resolve().parent
 PROJECT_ROOT = _SCRIPT_DIR.parent
 MOSCOW_ROOT = PROJECT_ROOT / "moscow"
+SPB_ROOT = PROJECT_ROOT / "spb"
 
 BUILD_GUIDES = [
     "monasteries",
@@ -52,6 +53,7 @@ GUIDE_EXPECTED_COUNTS: dict[str, int] = {
     "railway_stations": 9,
     "cemeteries": 9,
     "landmarks": 14,
+    "osobnjaki": 50,
 }
 
 
@@ -60,19 +62,32 @@ def get_moscow_root() -> Path:
     return MOSCOW_ROOT
 
 
-def get_output_dir() -> Path:
-    """Moscow category guide HTML/PDF output (``moscow/output/``)."""
+def get_output_dir(city: str = "moscow") -> Path:
+    """Category guide HTML/PDF output (``moscow/output/`` or ``spb/output/``)."""
+    if city == "spb":
+        return SPB_ROOT / "output"
     return MOSCOW_ROOT / "output"
 
 
-def get_images_root() -> Path:
-    """Moscow place images root (``moscow/images/``)."""
+def get_images_root(city: str = "moscow") -> Path:
+    """Place images root (``moscow/images/`` or ``spb/images/``)."""
+    if city == "spb":
+        return SPB_ROOT / "images"
     return MOSCOW_ROOT / "images"
 
 
 def get_moscow_data_dir() -> Path:
     """Moscow registry Python modules (``moscow/data/``)."""
     return MOSCOW_ROOT / "data"
+
+
+def spb_city_root_from_html_dir(html_output_dir: Path) -> Path:
+    """Resolve city root when HTML lives in ``spb/output/``."""
+    if html_output_dir.name == "output":
+        parent = html_output_dir.parent
+        if parent.name == "spb":
+            return parent
+    return html_output_dir
 
 
 def moscow_city_root_from_html_dir(html_output_dir: Path) -> Path:
@@ -88,3 +103,10 @@ def moscow_city_root_from_html_dir(html_output_dir: Path) -> Path:
         if parent.name == "moscow":
             return parent
     return html_output_dir
+
+
+def city_root_from_html_dir(html_output_dir: Path, city: str = "moscow") -> Path:
+    """Resolve city package root from HTML output directory."""
+    if city == "spb":
+        return spb_city_root_from_html_dir(html_output_dir)
+    return moscow_city_root_from_html_dir(html_output_dir)

@@ -13,7 +13,7 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
 .otium-logo { font-family: 'Spectral', serif; font-size: 2.15rem;
   font-weight: 600; letter-spacing: 0.18em; margin-bottom: 0.85rem; }
 .otiump { margin: 0.42rem 0; line-height: 1.42; text-align: justify;
-  max-width: 38rem; font-size: 0.95rem; }
+  font-size: 0.95rem; }
 .guide-title { page-break-after: auto; margin-bottom: 0.55rem;
   page-break-inside: avoid; }
 .historical-reference { margin: 0.75rem 0 1.15rem;
@@ -63,22 +63,103 @@ ol.trip-stops a:hover { text-decoration: underline; }
 .heraldry-univ-caption { font-size: 0.52rem; line-height: 1.18;
   margin: 0.12rem 0 0; padding: 0 0.06rem; color: #252525;
   text-align: center; font-weight: 500; }
-.heraldry-motto { text-align: center; max-width: 18rem; margin: 0.18rem auto;
+.heraldry-motto { text-align: center; margin: 0.18rem auto;
   width: 100%; }
 .motto-line { font-family: 'Spectral', serif; font-size: 1rem;
   margin: 0; color: #333; line-height: 1.35; }
 .guide-title h1.guide-title-main { font-family: 'Spectral', serif;
   font-size: 2.35rem; margin-bottom: 0.5rem; font-weight: 600; }
 .lead { color: #444; font-size: 1.05rem; }
-.guide-toc { margin: 0.85rem 0 1.15rem; page-break-inside: avoid; }
-.guide-toc h2 { font-family: 'Spectral', serif; font-size: 1.28rem;
-  font-weight: 600; margin: 0.4rem 0 0.55rem; }
+
+.guide-toc { page-break-before: always; break-before: page;
+  page-break-after: always; break-after: page;
+  margin: 0; padding: 0.2rem 0 0.45rem; page-break-inside: auto; }
+.guide-toc h2 { font-family: 'Spectral', serif;
+  font-size: 1.28rem; font-weight: 600; margin: 0.4rem 0 0.55rem; }
 .guide-toc ol { margin: 0.35rem 0 0.65rem 1.25rem; padding: 0;
   columns: 2; column-gap: 1.5rem; }
 .guide-toc li { margin: 0.18rem 0; line-height: 1.35;
   font-size: 0.88rem; break-inside: avoid; }
-.guide-toc a { color: #1a5276; text-decoration: none; }
+.guide-toc a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.guide-toc a:hover { color: #0d3d56; }
 .guide-toc li.toc-item--sub { font-size: 0.82rem; margin-left: 0.35rem; }
+.toc-back { font-size: 0.78rem; margin: 0 0 0.35rem; text-align: right; }
+.toc-back a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.toc-back a:hover { color: #0d3d56; }
+.place, .historical-reference, .guide-primer, .guide-trip-plans {
+  scroll-margin-top: 1.25rem; }
+.historical-reference h2, .guide-primer h2, .guide-trip-plans h2,
+.chapter-head h2, .place-lead h3 { position: relative; }
+.guide-toc + .place, .guide-toc + .chapter-head {
+  page-break-before: avoid; break-before: avoid-page; }
+.place-lead { page-break-inside: avoid; break-inside: avoid-page;
+  page-break-after: auto; }
+.place-lead > h3 { page-break-after: avoid; break-after: avoid-page; }
+.place-lead > .place-meta { page-break-after: avoid; break-after: avoid-page; }
+
+.place-fig { page-break-inside: avoid; break-inside: avoid-page;
+  margin: 0.5rem 0 1rem; }
+.place-fig img {
+  page-break-inside: avoid; break-inside: avoid-page;
+  max-height: 48vh; width: auto; max-width: 100%;
+  object-fit: contain; margin-left: auto; margin-right: auto; }
+.place-fig--hi-res img { max-height: 52vh; }
+.place-fig--lo-res img { max-height: 30vh; }
+.place-pdf-fig-row {
+  display: flex; flex-direction: row; flex-wrap: wrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.45rem 0.55rem; margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row .place-fig {
+  flex: 1 1 30%; margin: 0; min-width: 26%; max-width: 100%; }
+.place-pdf-fig-row .place-fig img {
+  width: auto; max-width: 100%; height: auto; max-height: 44vh;
+  object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--pair {
+  flex-wrap: nowrap; justify-content: space-between;
+  align-items: flex-end; gap: 0.5rem 0.65rem; }
+.place-pdf-fig-row--pair .place-fig {
+  flex: 1 1 47%; min-width: 0; max-width: 50%;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--pair .place-fig img {
+  max-height: 44vh; object-fit: contain; }
+.place-pdf-fig-row--pair .place-fig--hi-res img { max-height: 52vh; }
+.place-pdf-fig-row--pair .place-fig--lo-res img { max-height: 26vh; }
+.place-pdf-fig-row--pair .place-fig--row-sized img,
+.place-pdf-fig-row--triple .place-fig--row-sized img,
+.place-pdf-fig-row--many .place-fig--row-sized img {
+  width: auto; max-width: 100%; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row .place-fig--row-sized.place-fig--hi-res img,
+.place-pdf-fig-row .place-fig--row-sized.place-fig--lo-res img {
+  max-height: unset; }
+.place-pdf-fig-rows-stack {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple {
+  display: flex; flex-direction: row; flex-wrap: nowrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.4rem 0.48rem; margin: 0;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--triple .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--triple .place-fig--hi-res img { max-height: 42vh; }
+.place-pdf-fig-row--triple .place-fig--lo-res img { max-height: 18vh; }
+.place-pdf-fig-row--many {
+  flex-wrap: nowrap; justify-content: center; align-items: flex-end;
+  gap: 0.35rem 0.42rem; }
+.place-pdf-fig-row--many .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--many .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+
+
 .place { margin-bottom: 2.2rem; page-break-inside: auto; }
 h3 { font-family: 'Spectral', serif; font-size: 1.22rem; margin: 1.2rem 0 0.35rem;
   font-weight: 600; }
@@ -90,7 +171,6 @@ h4 { font-family: 'Spectral', serif; font-size: 0.95rem; text-transform: upperca
   color: #555; font-size: 0.95rem; margin: 0 0 0.5rem; font-style: italic; }
 .place-meta { font-size: 0.92rem; color: #353535; margin: 0 0 0.75rem;
   line-height: 1.4; }
-.place-fig { margin: 0.5rem 0 1rem; }
 img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
 .prose, .place-desc p { margin: 0.45rem 0; line-height: 1.5;
   text-align: justify; }
@@ -110,328 +190,543 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <figure class="heraldry-fig heraldry-coat-book" title="City emblem"><img src="../images/guide_coat_of_arms.svg" alt="City emblem"/></figure>
 <figure class="heraldry-fig heraldry-coat-book" title="Flag"><img src="../images/guide_flag.svg" alt="Flag"/></figure>
 </div></div><h1 class="guide-title-main">Prague</h1><p class="lead">Путеводитель. Объектов в этом выпуске: 37.</p></header>
+<nav class="guide-toc" id="guide-toc" aria-label="Содержание"><h2>Содержание</h2><ol><li class="toc-item"><a href="#guide-historical">Историческая справка</a></li><li class="toc-item"><a href="#guide-trips">Маршруты</a></li><li class="toc-item"><a href="#prague_nizwa_006">Nizwa 006</a></li><li class="toc-item"><a href="#prague_2017_hatvan">Prague 2017 Hatvan</a></li><li class="toc-item"><a href="#prague_praguecathedral03">Prague Praguecathedral03</a></li><li class="toc-item"><a href="#prague_vratislavsk_pal_c">Prague Vratislavsk Pal C</a></li><li class="toc-item"><a href="#prague_vysehrad_ss_peter_paul">Базилика Святого Петра и Святого Павла, Вышеград</a></li><li class="toc-item"><a href="#prague_wenceslas_square">Вацлавская площадь</a></li><li class="toc-item"><a href="#prague_main_railway_station">Главный вокзал Праги</a></li><li class="toc-item"><a href="#prague_kinsky_palace_old_town">Дворец Кинских (Площадь Старого города)</a></li><li class="toc-item"><a href="#prague_klementinum_mirror_chapel">Зеркальная капелла (Клементинум)</a></li><li class="toc-item"><a href="#prague_kampa_charles_bridge_view">Кампа и Карлов мост</a></li><li class="toc-item"><a href="#prague_charles_bridge">Карлов мост</a></li><li class="toc-item"><a href="#prague_st_vitus_cathedral">Кафедральный собор Святого Вита</a></li><li class="toc-item"><a href="#prague_vysehrad_cemetery_slavin">Кладбище Вышеград</a></li><li class="toc-item"><a href="#prague_letna_metronome">Летний метроном</a></li><li class="toc-item"><a href="#prague_municipal_house">Муниципальный дом</a></li><li class="toc-item"><a href="#prague_naplavka_riverside">Нáплавка (Раšinovo nábřeží)</a></li><li class="toc-item"><a href="#prague_national_museum_prague">Национальный музей</a></li><li class="toc-item"><a href="#prague_national_theatre_prague">Национальный театр</a></li><li class="toc-item"><a href="#prague_national_technical_museum_prague">Национальный технический музей</a></li><li class="toc-item"><a href="#prague_petrin_tower">Петřинская смотровая башня</a></li><li class="toc-item"><a href="#prague_astronomical_clock_orloj">Пражские астрономические часы</a></li><li class="toc-item"><a href="#prague_troya_botanical_garden">Пражский ботанический сад Троя</a></li><li class="toc-item"><a href="#prague_castle">Пражский Град</a></li><li class="toc-item"><a href="#prague_powder_gate">Пудровые ворота</a></li><li class="toc-item"><a href="#prague_wallenstein_garden">Сад Вальдштейна</a></li><li class="toc-item"><a href="#prague_letna_park_view">Смотровая площадка парка Летна</a></li><li class="toc-item"><a href="#prague_old_town_hall">Старая ратуша</a></li><li class="toc-item"><a href="#prague_old_jewish_cemetery">Старое еврейское кладбище</a></li><li class="toc-item"><a href="#prague_old_town_square">Староместская площадь</a></li><li class="toc-item"><a href="#prague_lennon_wall">Стенка Леннона</a></li><li class="toc-item"><a href="#prague_strahov_monastery">Страхов монастырь</a></li><li class="toc-item"><a href="#prague_stromovka_park">Стромовка (Королевский охотничий заповедник)</a></li><li class="toc-item"><a href="#prague_dancing_house">Танцующий дом</a></li><li class="toc-item"><a href="#prague_zizkov_tower">Телевизионная башня Жижков</a></li><li class="toc-item"><a href="#prague_infant_jesus_prague_church">Церковь Непорочного Зачатия Пресвятой Девы Марии</a></li><li class="toc-item"><a href="#prague_st_nicholas_mala_strana">Церковь Святого Николая, Малая Страна</a></li><li class="toc-item"><a href="#prague_troja_castle">Шато Троя</a></li></ol></nav>
 <section class="historical-reference" id="guide-historical" aria-label="Историческая справка"><h2>Историческая справка</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 <p class="prose">Прага — столица Чехии, политический и культурный центр страны на реке Влтаве.</p>
 <p class="prose">Княжеский и королевский город Священной Римской империи, столица Чехословакии и Евросоюза на перекрёстке Германии и Славии. Градчаны, Карлов мост и барокко контрастируют с модерном и современной архитектурой.</p>
 <p class="prose">Вторая мировая война и оккупация, 1968 и «бархатная» революция 1989 года определили память о свободе. Вступление в ЕС и НАТО закрепило западную ориентацию; Прага сочетает туризм, автопром и сервисы как столица Средней Европы.</p></section>
 <section class="guide-trip-plans" id="guide-trips" aria-label="Маршруты"><h2>Маршруты</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 <article class="trip-plan" id="trip-1d"><h3>Один день</h3>
 <p class="prose">Компактный маршрут по главным точкам путеводителя с минимальным возвратом назад пешком.</p>
-<ol class="trip-stops"><li><a href="#prague_charles_bridge">Карлов мост</a> (~75мин)</li>
-<li><a href="#prague_lennon_wall">Стенка Леннона</a> (~75мин)</li>
-<li><a href="#prague_infant_jesus_prague_church">Церковь Непорочного Зачатия Пресвятой Девы Марии</a> (~75мин)</li>
-<li><a href="#prague_wallenstein_garden">Сад Вальдштейна</a> (~75мин)</li>
-<li><a href="#prague_st_vitus_cathedral">Кафедральный собор Святого Вита</a> (~75мин)</li>
-<li><a href="#prague_castle">Пражский Град</a> (~75мин)</li></ol></article>
-<article class="trip-plan" id="trip-3d1"><h3>Три дня — день 1</h3>
-<p class="prose">День 1 — центральный кластер.</p>
-<ol class="trip-stops"><li><a href="#prague_municipal_house">Муниципальный дом</a> (~75мин)</li>
+<ol class="trip-stops"><li><a href="#prague_wenceslas_square">Вацлавская площадь</a> (~75мин)</li>
+<li><a href="#prague_national_museum_prague">Национальный музей</a> (~75мин)</li>
+<li><a href="#prague_municipal_house">Муниципальный дом</a> (~75мин)</li>
 <li><a href="#prague_powder_gate">Пудровые ворота</a> (~75мин)</li>
 <li><a href="#prague_old_town_square">Староместская площадь</a> (~75мин)</li>
-<li><a href="#prague_astronomical_clock_orloj">Пражские астрономические часы</a> (~75мин)</li>
-<li><a href="#prague_old_town_hall">Старая ратуша</a> (~75мин)</li></ol></article>
+<li><a href="#prague_astronomical_clock_orloj">Пражские астрономические часы</a> (~75мин)</li></ol></article>
+<article class="trip-plan" id="trip-3d1"><h3>Три дня — день 1</h3>
+<p class="prose">День 1 — центральный кластер.</p>
+<ol class="trip-stops"><li><a href="#prague_castle">Пражский Град</a> (~75мин)</li>
+<li><a href="#prague_charles_bridge">Карлов мост</a> (~75мин)</li>
+<li><a href="#prague_dancing_house">Танцующий дом</a> (~75мин)</li>
+<li><a href="#prague_infant_jesus_prague_church">Церковь Непорочного Зачатия Пресвятой Девы Марии</a> (~75мин)</li>
+<li><a href="#prague_kampa_charles_bridge_view">Кампа и Карлов мост</a> (~75мин)</li></ol></article>
 <article class="trip-plan" id="trip-3d2"><h3>Три дня — день 2</h3>
 <p class="prose">День 2 — следующая группа районов.</p>
-<ol class="trip-stops"><li><a href="#prague_dancing_house">Танцующий дом</a> (~75мин)</li>
-<li><a href="#prague_kampa_charles_bridge_view">Кампа и Карлов мост</a> (~75мин)</li>
+<ol class="trip-stops"><li><a href="#prague_lennon_wall">Стенка Леннона</a> (~75мин)</li>
+<li><a href="#prague_wallenstein_garden">Сад Вальдштейна</a> (~75мин)</li>
+<li><a href="#prague_st_vitus_cathedral">Кафедральный собор Святого Вита</a> (~75мин)</li>
 <li><a href="#prague_kinsky_palace_old_town">Дворец Кинских (Площадь Старого города)</a> (~75мин)</li>
-<li><a href="#prague_klementinum_mirror_chapel">Зеркальная капелла (Клементинум)</a> (~75мин)</li>
-<li><a href="#prague_letna_metronome">Летний метроном</a> (~75мин)</li></ol></article>
+<li><a href="#prague_klementinum_mirror_chapel">Зеркальная капелла (Клементинум)</a> (~75мин)</li></ol></article>
 <article class="trip-plan" id="trip-3d3"><h3>Три дня — день 3</h3>
 <p class="prose">День 3 — оставшиеся близкие объекты.</p>
 <ol class="trip-stops"><li><a href="#prague_vysehrad_cemetery_slavin">Кладбище Вышеград</a> (~75мин)</li>
+<li><a href="#prague_letna_metronome">Летний метроном</a> (~75мин)</li>
 <li><a href="#prague_letna_park_view">Смотровая площадка парка Летна</a> (~75мин)</li>
 <li><a href="#prague_main_railway_station">Главный вокзал Праги</a> (~75мин)</li>
-<li><a href="#prague_naplavka_riverside">Нáплавка (Раšinovo nábřeží)</a> (~75мин)</li>
-<li><a href="#prague_national_museum_prague">Национальный музей</a> (~75мин)</li></ol></article></section>
-<nav class="guide-toc" aria-label="Содержание"><h2>Содержание</h2><ol><li class="toc-item"><a href="#guide-historical">Историческая справка</a></li><li class="toc-item"><a href="#guide-trips">Маршруты</a></li><li class="toc-item"><a href="#prague_vysehrad_ss_peter_paul">Базилика Святого Петра и Святого Павла, Вышеград</a></li><li class="toc-item"><a href="#prague_charles_bridge">Карлов мост</a></li><li class="toc-item"><a href="#prague_infant_jesus_prague_church">Церковь Непорочного Зачатия Пресвятой Девы Марии</a></li><li class="toc-item"><a href="#prague_dancing_house">Танцующий дом</a></li><li class="toc-item"><a href="#prague_kampa_charles_bridge_view">Кампа и Карлов мост</a></li><li class="toc-item"><a href="#prague_kinsky_palace_old_town">Дворец Кинских (Площадь Старого города)</a></li><li class="toc-item"><a href="#prague_lennon_wall">Стенка Леннона</a></li><li class="toc-item"><a href="#prague_letna_metronome">Летний метроном</a></li><li class="toc-item"><a href="#prague_letna_park_view">Смотровая площадка парка Летна</a></li><li class="toc-item"><a href="#prague_klementinum_mirror_chapel">Зеркальная капелла (Клементинум)</a></li><li class="toc-item"><a href="#prague_municipal_house">Муниципальный дом</a></li><li class="toc-item"><a href="#prague_national_museum_prague">Национальный музей</a></li><li class="toc-item"><a href="#prague_national_technical_museum_prague">Национальный технический музей</a></li><li class="toc-item"><a href="#prague_national_theatre_prague">Национальный театр</a></li><li class="toc-item"><a href="#prague_pdfband_1_1aaef487">2017 Hatvan</a></li><li class="toc-item"><a href="#prague_pdfband_2_45de4182">Nizwa 006 (30816611472)</a></li><li class="toc-item"><a href="#prague_naplavka_riverside">Нáплавка (Раšinovo nábřeží)</a></li><li class="toc-item"><a href="#prague_old_jewish_cemetery">Старое еврейское кладбище</a></li><li class="toc-item"><a href="#prague_old_town_hall">Старая ратуша</a></li><li class="toc-item"><a href="#prague_old_town_square">Староместская площадь</a></li><li class="toc-item"><a href="#prague_petrin_tower">Петřинская смотровая башня</a></li><li class="toc-item"><a href="#prague_powder_gate">Пудровые ворота</a></li><li class="toc-item"><a href="#prague_astronomical_clock_orloj">Пражские астрономические часы</a></li><li class="toc-item"><a href="#prague_troya_botanical_garden">Пражский ботанический сад Троя</a></li><li class="toc-item"><a href="#prague_castle">Пражский Град</a></li><li class="toc-item"><a href="#prague_main_railway_station">Главный вокзал Праги</a></li><li class="toc-item"><a href="#prague_pdfband_0_2f02bea1">PragueCathedral03</a></li><li class="toc-item"><a href="#prague_st_nicholas_mala_strana">Церковь Святого Николая, Малая Страна</a></li><li class="toc-item"><a href="#prague_st_vitus_cathedral">Кафедральный собор Святого Вита</a></li><li class="toc-item"><a href="#prague_strahov_monastery">Страхов монастырь</a></li><li class="toc-item"><a href="#prague_stromovka_park">Стромовка (Королевский охотничий заповедник)</a></li><li class="toc-item"><a href="#prague_troja_castle">Шато Троя</a></li><li class="toc-item"><a href="#prague_pdfband_9_08958a66">Vratislavský palác</a></li><li class="toc-item"><a href="#prague_vysehrad_cemetery_slavin">Кладбище Вышеград</a></li><li class="toc-item"><a href="#prague_wallenstein_garden">Сад Вальдштейна</a></li><li class="toc-item"><a href="#prague_wenceslas_square">Вацлавская площадь</a></li><li class="toc-item"><a href="#prague_zizkov_tower">Телевизионная башня Жижков</a></li></ol></nav>
-<section class="place" id="prague_vysehrad_ss_peter_paul">
-<h3>Базилика Святого Петра и Святого Павла, Вышеград</h3>
+<li><a href="#prague_naplavka_riverside">Нáплавка (Раšinovo nábřeží)</a> (~75мин)</li></ol></article></section>
+<section class="place" id="prague_nizwa_006">
+<div class="place-lead">
+<h3>Nizwa 006</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1891–1896</p>
-<figure class="place-fig"><img src="../images/prague_vysehrad_ss_peter_paul.jpg" alt="Базилика Святого Петра и Святого Павла, Вышеград"/></figure>
+<p class="place-meta">Адрес: See official visitor information.</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/prague_nizwa_006.jpg" alt="Nizwa 006" width="1200" height="1600" style="height: 260px; max-height: 260px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/prague_nizwa_006_b.jpg" alt="Nizwa 006 — вид 2" width="330" height="186" style="height: 260px; max-height: 260px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+</section>
+<section class="place" id="prague_2017_hatvan">
+<div class="place-lead">
+<h3>Prague 2017 Hatvan</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: See official visitor information.</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/prague_2017_hatvan.jpg" alt="Prague 2017 Hatvan" width="1280" height="960" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/prague_2017_hatvan_b.jpg" alt="Prague 2017 Hatvan — вид 2" width="330" height="432" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+</section>
+<section class="place" id="prague_praguecathedral03">
+<div class="place-lead">
+<h3>Prague Praguecathedral03</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: See official visitor information.</p>
+<figure class="place-fig place-fig--hi-res"><img src="../images/prague_praguecathedral03.jpg" alt="Prague Praguecathedral03" width="1280" height="953"/></figure>
+</div>
+</section>
+<section class="place" id="prague_vratislavsk_pal_c">
+<div class="place-lead">
+<h3>Prague Vratislavsk Pal C</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: See official visitor information.</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/prague_vratislavsk_pal_c.jpg" alt="Prague Vratislavsk Pal C" width="1280" height="960" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/prague_vratislavsk_pal_c_b.jpg" alt="Prague Vratislavsk Pal C — вид 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+</section>
+<section class="place" id="prague_vysehrad_ss_peter_paul">
+<div class="place-lead">
+<h3>Базилика Святого Петра и Святого Павла, Вышеград</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Vyšehrad fortress, Prague 2 | Период: 1891–1896</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/prague_vysehrad_ss_peter_paul.jpg" alt="Базилика Святого Петра и Святого Павла, Вышеград" width="1201" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/prague_vysehrad_ss_peter_paul_b.jpg" alt="Базилика Святого Петра и Святого Павла, Вышеград — вид 2" width="330" height="440" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Сидя высоко над рекой Влтава на живописном холме, базилика Святого Петра и Святого Павла в Вышеграде является одной из самых знаковых достопримечательностей Праги. Ее высокие шпили и возвышающиеся башни доминируют над горизонтом города, предлагая посетителям захватывающий вид на столицу внизу. Построенный из местного песчаника и гранита. Достопримечательностью являются близнецовые башни высотой более 70 метров. Содержит множество витражей, изображающих библейские сцены. Расположенный внутри древнего крепостного комплекса Вышеград. Дизайн, вдохновленный средневековыми европейскими церквями.</p>
 <p class="prose">Построенная в период с 1891 по 1896 год, базилика была спроектирована чешским архитектором Антонином Линхартом, чтобы заменить ранее существовавшую церковь, разрушенную во время Второй мировой войны. Структура сочетает элементы неоготического и романского стилей, демонстрируя сложные резьбы и elaborate decorations, типичные для этих периодов. Этот величественный собор служит как духовным центром для местных жителей, так и туристов, предлагая при этом потрясающие панорамные виды на исторические районы Праги.</p></div>
 </section>
-<section class="place" id="prague_charles_bridge">
-<h3>Карлов мост</h3>
+<section class="place" id="prague_wenceslas_square">
+<div class="place-lead">
+<h3>Вацлавская площадь</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1357</p>
-<figure class="place-fig"><img src="../images/prague_charles_bridge.jpg" alt="Карлов мост"/></figure>
-<div class="place-desc"><p class="prose">Пересекая реку Влтава и соединяя Старый город Праги с районом Замка, Карлов мост является одной из самых знаковых достопримечательностей Европы. Построенный в позднем Средневековье, он изначально назывался Каменным мостом. Мост был освящен 9 июля 1402 года. В начале 20 века он подвергся значительной реставрации после повреждений, полученных в результате бомбардировок Второй мировой войны. Карлов мост вдохновил бесчисленное количество художников, писателей и фотографов благодаря своей живописной красоте и историческому значению. Сегодня это по-прежнему популярное место как для местных жителей, так и для туристов, предлагающее только пешеходный доступ. В 1995 году Карлов мост был включен в список Всемирного наследия ЮНЕСКО.</p>
-<p class="prose">Построенный между 1357 и 1402 годами во время правления короля Карла IV, Карлов мост заменил более ранний деревянный мост, который неоднократно разрушался наводнениями. Задуман как соединение исторических районов Праги, он стал важным транспортным маршрутом и символом процветания города. Мост украшен 30 барочными статуями, каждая из которых представляет святых и библейских персонажей, добавленных на протяжении нескольких столетий. Посещение Карлова моста позволяет путешественникам ощутить богатое архитектурное наследие Праги и насладиться панорамными видами на берегах реки города.</p></div>
+<p class="place-meta">Место: Nové Město, Prague 1</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/prague_wenceslas_square.jpg" alt="Вацлавская площадь" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/prague_wenceslas_square_b.jpg" alt="Вацлавская площадь — вид 2" width="330" height="247" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">В сердце яркого центра Праги находится площадь Вацлава, шумный узел, который на протяжении веков был центральным элементом чешской истории и культуры. Площадь названа в честь святого Вацлава, который правил Богемией в 10 веке. Здесь проходят многочисленные фестивали и концерты в течение всего года, привлекая как местных жителей, так и туристов. Рядом находится Национальный мемориал жертвам коммунизма, посвященный тем, кто погиб под коммунистическим режимом. В последние годы город стал известен своей зоной, предназначенной только для пешеходов, что делает его идеальным местом для неспешных прогулок. Рядом с площадью расположены несколько известных ресторанов и кафе, предлагающих традиционную чешскую кухню.</p>
+<p class="prose">Изначально построенная в конце 14 века как рынок, площадь Вацлава стала политическим и культурным центром во время Габсбургской империи. В начале 20 века она была переименована в честь святого Вацлава, покровителя Богемии. Площадь стала свидетелем значительных событий, таких как демонстрации против нацистской оккупации и антикоммунистические восстания в 1960-х и 1980-х годах. Обязательное место для посещения благодаря своей исторической значимости и живой атмосфере, площадь Вацлава также является домом для знаковых достопримечательностей, таких как Национальный музей и внушительная статуя короля Вацлава.</p></div>
 </section>
-<section class="place" id="prague_infant_jesus_prague_church">
-<h3>Церковь Непорочного Зачатия Пресвятой Девы Марии</h3>
+<section class="place" id="prague_main_railway_station">
+<div class="place-lead">
+<h3>Главный вокзал Праги</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1370–1489</p>
-<figure class="place-fig"><img src="../images/prague_infant_jesus_prague_church.jpg" alt="Церковь Непорочного Зачатия Пресвятой Девы Марии"/></figure>
-<div class="place-desc"><p class="prose">Церковь Девы Марии Виктории, также известная как Церковь Тына, является выдающимся памятником в Старом городе Праги. Ее впечатляющая готическая архитектура и три башни делают ее одной из самых знаковых строений города. Он включает три высокие башни, которые доминируют над горизонтом Староместской площади. Интерьер украшен сложными резьбами и картинами, изображающими библейские сцены. Его алтарь содержит ценные золотые и серебряные артефакты, относящиеся к 15 веку. Церковь претерпела несколько реставраций на протяжении веков, но сохраняет большую часть своего оригинального средневекового характера. Рядом с церковью находятся руины часовни Святого Иакова, которые предоставляют дополнительные сведения о её истории.</p>
-<p class="prose">Церковь, построенная в период с 1370 по 1489 год, была возведена во время правления короля Карла IV. Изначально она должна была стать частью более крупного комплекса, однако строительство было прервано Гуситскими войнами. Позже церковь стала символом религиозной победы после битвы на Белой горе в 1620 году, откуда и произошло её название «Наша Госпожа Победоносная». Посетители приходят сюда ради его потрясающего готического дизайна и исторического значения, особенно впечатляющего алтаря и витражей.</p></div>
-</section>
-<section class="place" id="prague_dancing_house">
-<h3>Танцующий дом</h3>
-
-<p class="place-meta">Период: 1992–1996</p>
-<figure class="place-fig"><img src="../images/prague_dancing_house.jpg" alt="Танцующий дом"/></figure>
-<div class="place-desc"><p class="prose">Танцующий дом (чеш. Tančící dům), также известный как Фред и Джинджер благодаря своему плавному силуэту, является модернистской достопримечательностью, спроектированной Фрэнком Гери и чешским архитектором Пьотром Эштетриком. Завершённый в 1996 году, он выделяется на фоне традиционной архитектуры Праги. Спроектировано канадско-американским архитектором Фрэнком Гери и чешским архитектором Пьетром Эштетриком. Расположен на улице Рейсек рядом с рекой Влтава. Символизирует слияние западно- и восточноевропейской эстетики. Вдохновленный танцевальным партнерством Фреда Астера и Джинджер Роджерс. Признано одним из самых значительных современных сооружений Европы.</p>
-<p class="prose">Построенный в период с 1992 по 1996 год, Танцующий дом был возведен в эпоху политических перемен в Чехословакии после падения коммунизма. Уникальный дизайн здания отражает сотрудничество двух архитекторов: Гери внес свой авангардный стиль, в то время как Эштетрик интегрировал местные архитектурные традиции. Его характерная форма стала знаковым символом города. Посетители приходят, чтобы увидеть инновационную архитектуру и игривую, динамичную форму, которая резко контрастирует с окружающими историческими зданиями.</p></div>
-</section>
-<section class="place" id="prague_kampa_charles_bridge_view">
-<h3>Кампа и Карлов мост</h3>
-
-
-<figure class="place-fig"><img src="../images/prague_kampa_charles_bridge_view.jpg" alt="Кампа и Карлов мост"/></figure>
-<div class="place-desc"><p class="prose">Кампа — это живописный парк на берегу реки Влтава, предлагающий потрясающие виды на исторические достопримечательности Праги, включая Карлов мост. Это мирный оазис, наполненный скульптурами, садами и пешеходными дорожками, который предоставляет спокойное убежище от суеты городской жизни. Расположенный на берегах реки Влтава, Кампа предлагает захватывающие виды на знаковые достопримечательности Праги. Парк включает в себя множество скульптурных инсталляций, созданных современными художниками. Это популярное место для местных жителей и туристов, где можно отдохнуть и поразмышлять на фоне природы. Парк Кампа соединен с Карловым мостом несколькими пешеходными мостами, что делает его легко доступным из различных частей города. В этом парке регулярно проводятся культурные мероприятия, такие как музыкальные фестивали и художественные ярмарки.</p>
-<p class="prose">Изначально болотистая местность, использовавшаяся для рыболовства и сельского хозяйства, Кампа была преобразована в парк в конце 19 века архитектором Йозефом Зитеком. Это место стало известным как сборище художников и интеллектуалов в начале 20 века. Сегодня оно остается ярким культурным центром, известным своими открытыми художественными выставками и очаровательными кафе. Посетите Кампу, чтобы насладиться непревзойденными панорамными видами на Карлов мост и Старый город, погружаясь в расслабляющую атмосферу этого спокойного зеленого пространства.</p></div>
+<p class="place-meta">Адрес: Wilsonova 300/8, Prague 1 | Период: 1871</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/prague_main_railway_station.jpg" alt="Главный вокзал Праги" width="900" height="1600" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/prague_main_railway_station_b.jpg" alt="Главный вокзал Праги — вид 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">В сердце бурной транспортной сети Праги находится величественный вокзал Praha-Hlavní nádraží, обычно известный как Praha Hlavní Nádraží или просто &#x27;Hlavní&#x27;. Этот величественный вокзал с его неоренессансной архитектурой и внушительным фасадом служит центром как для внутреннего, так и для международного железнодорожного сообщения. Открытая в 1871 году, она является одной из старейших действующих железнодорожных станций в Чехии. Его неоренессансный стиль характеризуется богато украшенными фасадами и сложными декоративными элементами. Станция обслуживает миллионы пассажиров ежегодно, являясь важной связующей нитью между Прагой и Европой. За годы оно прошло несколько ремонтов, но сохранило большую часть своего оригинального дизайнерского облика. Расположенный рядом с Вацлавской площадью, он предлагает удобный доступ к центру Праги.</p>
+<p class="prose">Построенный в 1871 году, Прага Главный Вокзал был одной из первых крупных железнодорожных станций в Богемии. Спроектированный архитектором Йозефом Зитеком, он быстро стал символом современной транспортной инфраструктуры в регионе. Станция сыграла ключевую роль во время промышленной революции, способствуя торговле и соединяя Прагу с ключевыми европейскими городами, такими как Берлин, Вена и Дрезден. Посетителям стоит исследовать Прага Главный Вокзал за его историческое значение и архитектурную красоту, которые отражают богатое культурное наследие города.</p></div>
 </section>
 <section class="place" id="prague_kinsky_palace_old_town">
+<div class="place-lead">
 <h3>Дворец Кинских (Площадь Старого города)</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/prague_kinsky_palace_old_town.jpg" alt="Дворец Кинских (Площадь Старого города)"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/prague_kinsky_palace_old_town.jpg" alt="Дворец Кинских (Площадь Старого города)" width="1280" height="960" style="height: 204px; max-height: 204px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/prague_kinsky_palace_old_town_b.jpg" alt="Дворец Кинских (Площадь Старого города) — вид 2" width="330" height="146" style="height: 204px; max-height: 204px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Сидя величественно на краю Староместской площади, дворец Кинских является свидетельством барочной архитектуры и богатого культурного наследия Праги. Построенный во время правления императора Карла VI. Занесен в список Национальных культурных памятников с 1962 года. Ранее принадлежавший видным чешским аристократам. Знаменит своими сложными штукатурными работами и изысканными украшениями. На протяжении своей истории здесь проводились многочисленные королевские и дипломатические собрания.</p>
 <p class="prose">Построенный в начале 18 века архитектором Яном Блахославом для графа Франтишека Кинского, дворец на протяжении многих лет служил как резиденцией, так и местом проведения различных официальных церемоний. Его величественный входной холл и роскошные интерьеры отражают пышность и элегантность, характерные для своей эпохи. Обязательный к посещению для всех, кто интересуется исследованием архитектурных сокровищ Праги и хочет firsthand ощутить историческое величие города.</p></div>
 </section>
-<section class="place" id="prague_lennon_wall">
-<h3>Стенка Леннона</h3>
-
-<p class="place-meta">Период: 1988</p>
-<figure class="place-fig"><img src="../images/prague_lennon_wall.jpg" alt="Стенка Леннона"/></figure>
-<div class="place-desc"><p class="prose">Стена Леннона — это яркое и знаковое место уличного искусства, расположенное на Староместской площади в Праге. Она стала одной из самых популярных достопримечательностей города, привлекая посетителей со всего мира. Это одно из самых известных мест уличного искусства в Европе. Стена служит данью миру и свободе. Художники из разных стран вносят свой вклад в его развивающийся дизайн. Он привлекает тысячи туристов ежегодно. Его первоначальная цель заключалась в выражении протеста против авторитарных режимов.</p>
-<p class="prose">Изначально расписанная местным художником Давидом Черны в 1988 году, стена была названа в честь песни Джона Леннона «Give Peace a Chance». Со временем она стала символом свободы и сопротивления в коммунистическую эпоху Чехословакии. Сегодня стена продолжает эволюционировать, поскольку художники со всего мира добавляют свои уникальные творения, превращая её в динамичное и постоянно меняющееся полотно. Посещение Стены Леннона позволяет путешественникам ощутить слияние искусства, истории и культуры в Праге.</p></div>
-</section>
-<section class="place" id="prague_letna_metronome">
-<h3>Летний метроном</h3>
-
-<p class="place-meta">Период: 2006</p>
-<figure class="place-fig"><img src="../images/prague_letna_metronome.jpg" alt="Летний метроном"/></figure>
-<div class="place-desc"><p class="prose">Сидя на вершине парка Летна, Летний метроном является современным памятником, который стал одной из самых знаковых конструкций Праги с момента его постройки в 2006 году. Спроектированный чешским архитектором Яном Каплицким, он является свидетельством современного архитектурного и инженерного искусства. Он расположен в парке Летна, предлагая захватывающие виды на центр города. Его уникальный дизайн включает светодиоды, которые освещаются ночью, улучшая видимость издалека. Здание вмещает ресторан и смотровую площадку, предлагая посетителям живописные виды. Эффект колебаний создает ощущение движения даже в статичном положении, что добавляет динамичности его привлекательности. Он был признан международным сообществом за свою архитектурную инновационность.</p>
-<p class="prose">Завершенный в 2006 году, Метроном на Летне был построен на месте бывших Летenských Ледовых Арен. Он представляет собой слияние искусства и технологии, демонстрируя инновационные принципы дизайна и материалы. Структура оснащена уникальным колебательным механизмом, вдохновленным движением метрономов, символизирующим ритм и гармонию. Метроном на Летной предлагает панорамные виды на Прагу и является популярной встречной точкой как для местных жителей, так и для туристов.</p></div>
-</section>
-<section class="place" id="prague_letna_park_view">
-<h3>Смотровая площадка парка Летна</h3>
-
-
-<figure class="place-fig"><img src="../images/prague_letna_park_view.JPG" alt="Смотровая площадка парка Летна"/></figure>
-<div class="place-desc"><p class="prose">Расположенный высоко над шумными улицами Праги, Парк Летна предлагает панорамный вид на город, включая знаковый Карлов мост и величественные шпили Староместской ратуши. В ясные дни посетители могут даже увидеть далекие горы на западе. Он расположен на холме с видом на долину реки Влтава. Парк Летна проводит различные культурные мероприятия в течение года, включая кинопоказы и уличные выступления. Посетители также могут наслаждаться неспешными прогулками по извивающимся тропинкам среди зелени парка. Парк украшен несколькими скульптурами и памятниками, посвящёнными историческим личностям и значимым моментам в чешской истории.</p>
-<p class="prose">Изначально разработанный как военный учебный полигон в конце 19 века, Парк Летна с тех пор стал одной из самых популярных рекреационных зон Праги. Он прославился проведением масштабных концертов и фестивалей, таких как ежегодный фестиваль Rockwave, который привлекает тысячи любителей музыки каждый год. Парк славится своими захватывающими видами и является идеальным местом для создания живописных фотографий городского пейзажа.</p></div>
-</section>
 <section class="place" id="prague_klementinum_mirror_chapel">
+<div class="place-lead">
 <h3>Зеркальная капелла (Клементинум)</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Период: 1694–1703</p>
-<figure class="place-fig"><img src="../images/prague_klementinum_mirror_chapel.jpg" alt="Зеркальная капелла (Клементинум)"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/prague_klementinum_mirror_chapel.jpg" alt="Зеркальная капелла (Клементинум)" width="1280" height="960" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/prague_klementinum_mirror_chapel_b.jpg" alt="Зеркальная капелла (Клементинум) — вид 2" width="330" height="440" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Зеркальная капелла, часть комплекса Клементинум, является потрясающим примером барочной архитектуры и искусства. Она была построена в конце 17 века как капелла в бывшем иезуитском колледже. Он расположен в историческом здании Клементинума, в котором находится Национальная библиотека Чехии. Его потолок украшен сложными фресками, написанными мастерами искусства того времени. Зеркала часовни отражают свет, создавая ощущение глубины и пространства. Небольшой орган, расположенный рядом с алтарем, усиливает духовную атмосферу во время богослужений.</p>
 <p class="prose">Построенная между 1694 и 1703 годами итальянским архитектором Джованни Доменико Орси, Зеркальная капелла изначально служила местом для религиозных служб и образования. Ее стены украшены сложными золотыми декорациями, зеркалами и картинами, изображающими святых и библейские сцены. Посетители приходят полюбоваться его изысканным интерьером, который сочетает в себе барочные элементы с отражающими поверхностями, создающими ослепительный эффект.</p></div>
 </section>
-<section class="place" id="prague_municipal_house">
-<h3>Муниципальный дом</h3>
+<section class="place" id="prague_kampa_charles_bridge_view">
+<div class="place-lead">
+<h3>Кампа и Карлов мост</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1911</p>
-<figure class="place-fig"><img src="../images/prague_municipal_house.jpg" alt="Муниципальный дом"/></figure>
+<p class="place-meta">Место: Kampa island, Malá Strana</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/prague_kampa_charles_bridge_view.jpg" alt="Кампа и Карлов мост" width="1280" height="862" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/prague_kampa_charles_bridge_view_b.jpg" alt="Кампа и Карлов мост — вид 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Кампа — это живописный парк на берегу реки Влтава, предлагающий потрясающие виды на исторические достопримечательности Праги, включая Карлов мост. Это мирный оазис, наполненный скульптурами, садами и пешеходными дорожками, который предоставляет спокойное убежище от суеты городской жизни. Расположенный на берегах реки Влтава, Кампа предлагает захватывающие виды на знаковые достопримечательности Праги. Парк включает в себя множество скульптурных инсталляций, созданных современными художниками. Это популярное место для местных жителей и туристов, где можно отдохнуть и поразмышлять на фоне природы. Парк Кампа соединен с Карловым мостом несколькими пешеходными мостами, что делает его легко доступным из различных частей города. В этом парке регулярно проводятся культурные мероприятия, такие как музыкальные фестивали и художественные ярмарки.</p>
+<p class="prose">Изначально болотистая местность, использовавшаяся для рыболовства и сельского хозяйства, Кампа была преобразована в парк в конце 19 века архитектором Йозефом Зитеком. Это место стало известным как сборище художников и интеллектуалов в начале 20 века. Сегодня оно остается ярким культурным центром, известным своими открытыми художественными выставками и очаровательными кафе. Посетите Кампу, чтобы насладиться непревзойденными панорамными видами на Карлов мост и Старый город, погружаясь в расслабляющую атмосферу этого спокойного зеленого пространства.</p></div>
+</section>
+<section class="place" id="prague_charles_bridge">
+<div class="place-lead">
+<h3>Карлов мост</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Место: Between Old Town and Malá Strana over the Vltava | Период: 1357</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/prague_charles_bridge.jpg" alt="Карлов мост" width="1280" height="720" style="height: 259px; max-height: 259px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/prague_charles_bridge_b.jpg" alt="Карлов мост — вид 2" width="330" height="220" style="height: 259px; max-height: 259px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Пересекая реку Влтава и соединяя Старый город Праги с районом Замка, Карлов мост является одной из самых знаковых достопримечательностей Европы. Построенный в позднем Средневековье, он изначально назывался Каменным мостом. Мост был освящен 9 июля 1402 года. В начале 20 века он подвергся значительной реставрации после повреждений, полученных в результате бомбардировок Второй мировой войны. Карлов мост вдохновил бесчисленное количество художников, писателей и фотографов благодаря своей живописной красоте и историческому значению. Сегодня это по-прежнему популярное место как для местных жителей, так и для туристов, предлагающее только пешеходный доступ. В 1995 году Карлов мост был включен в список Всемирного наследия ЮНЕСКО.</p>
+<p class="prose">Построенный между 1357 и 1402 годами во время правления короля Карла IV, Карлов мост заменил более ранний деревянный мост, который неоднократно разрушался наводнениями. Задуман как соединение исторических районов Праги, он стал важным транспортным маршрутом и символом процветания города. Мост украшен 30 барочными статуями, каждая из которых представляет святых и библейских персонажей, добавленных на протяжении нескольких столетий. Посещение Карлова моста позволяет путешественникам ощутить богатое архитектурное наследие Праги и насладиться панорамными видами на берегах реки города.</p></div>
+</section>
+<section class="place" id="prague_st_vitus_cathedral">
+<div class="place-lead">
+<h3>Кафедральный собор Святого Вита</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Prague Castle, third courtyard</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/prague_st_vitus_cathedral.jpg" alt="Кафедральный собор Святого Вита" width="1064" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/prague_st_vitus_cathedral_b.jpg" alt="Кафедральный собор Святого Вита — вид 2" width="330" height="493" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Сидя величественно на вершине Пражского града, собор Святого Вита является духовным сердцем Богемии и свидетельством готической архитектуры. Его высокие шпили устремляются к небу, предлагая панорамные виды на город внизу. Строительство началось в 1344 году во время правления короля Карла IV. Собор остается незавершенным по сей день, символизируя непостоянство жизни. Здесь находятся могилы чешских королей и королев, включая могилы Карла IV и его жены Анны Богемской. Его характерные две башни являются одними из самых узнаваемых достопримечательностей Праги. Здесь проходят регулярные службы, позволяя посетителям ощутить современное поклонение наряду с историческим благоговением.</p>
+<p class="prose">Построенный в период с 1344 по 1929 год, собор Святого Вита претерпел множество реконструкций на протяжении веков. Изначально заказанный королем Карлом IV, он предназначался как королевский мавзолей для его семьи. Строительство собора несколько раз приостанавливалось из-за войн и финансовых трудностей, но каждый раз возобновлялось с новой преданностью. Сегодня его интерьер украшен великолепными витражами и сложной резьбой, которые отражают как средневековое мастерство, так и современные усилия по реставрации. Посетители приезжают сюда, чтобы восхититься его захватывающей архитектурой и оценить богатое историческое значение этого священного места.</p></div>
+</section>
+<section class="place" id="prague_vysehrad_cemetery_slavin">
+<div class="place-lead">
+<h3>Кладбище Вышеград</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Период: 1875</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/prague_vysehrad_cemetery_slavin.jpg" alt="Кладбище Вышеград" width="1200" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/prague_vysehrad_cemetery_slavin_b.jpg" alt="Кладбище Вышеград — вид 2" width="330" height="439" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">На высоком холме над рекой Влтава и историческим центром Праги расположено кладбище Вышеград, мирный оазис спокойствия среди шумного городского пейзажа. Основанное в конце 19 века, оно стало одним из самых известных мест захоронения чешских интеллектуалов, художников, писателей и политиков. Он занимает примерно 46 акров (18 гектаров) земли на холмистом месте. Кладбище включает в себя несколько мавзолеев и часовен с замысловатыми резьбами и скульптурами. Значимые могилы включают в себя захоронения выдающихся чешско-словацких лидеров и культурных икон. Его живописные виды предлагают панорамные перспективы на достопримечательности Праги, такие как Карлов мост и Староместская площадь. Посетители могут исследовать различные разделы, посвященные различным историческим периодам и художественным направлениям.</p>
+<p class="prose">Основанное в 1875 году, кладбище Вышеград было спроектировано архитектором Йозефом Зитеком, чтобы воплотить романтические идеалы эпохи. Оно расположено на месте бывшей крепости Вышеградского замка, который когда-то служил стратегическим опорным пунктом, возвышающимся над рекой. Кладбище известно своим уникальным сочетанием неоготического, ар-нуво и классического стилей, демонстрируя некоторые из лучших примеров погребальной архитектуры в Европе. Посещение этого места позволяет гостям отдать дань уважения многим известным чешским деятелям, которые покоятся на его священной земле, включая авторов Карела Чапека и Божену Немцову, композитора Бедржиха Сметану и политика Томаша Масарика.</p></div>
+</section>
+<section class="place" id="prague_letna_metronome">
+<div class="place-lead">
+<h3>Летний метроном</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Период: 2006</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/prague_letna_metronome.jpg" alt="Летний метроном" width="1280" height="865" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/prague_letna_metronome_b.jpg" alt="Летний метроном — вид 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Сидя на вершине парка Летна, Летний метроном является современным памятником, который стал одной из самых знаковых конструкций Праги с момента его постройки в 2006 году. Спроектированный чешским архитектором Яном Каплицким, он является свидетельством современного архитектурного и инженерного искусства. Он расположен в парке Летна, предлагая захватывающие виды на центр города. Его уникальный дизайн включает светодиоды, которые освещаются ночью, улучшая видимость издалека. Здание вмещает ресторан и смотровую площадку, предлагая посетителям живописные виды. Эффект колебаний создает ощущение движения даже в статичном положении, что добавляет динамичности его привлекательности. Он был признан международным сообществом за свою архитектурную инновационность.</p>
+<p class="prose">Завершенный в 2006 году, Метроном на Летне был построен на месте бывших Летenských Ледовых Арен. Он представляет собой слияние искусства и технологии, демонстрируя инновационные принципы дизайна и материалы. Структура оснащена уникальным колебательным механизмом, вдохновленным движением метрономов, символизирующим ритм и гармонию. Метроном на Летной предлагает панорамные виды на Прагу и является популярной встречной точкой как для местных жителей, так и для туристов.</p></div>
+</section>
+<section class="place" id="prague_municipal_house">
+<div class="place-lead">
+<h3>Муниципальный дом</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Náměstí Republiky 5 | Период: 1911</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/prague_municipal_house.jpg" alt="Муниципальный дом" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--row-sized"><img src="../images/prague_municipal_house_b.jpg" alt="Муниципальный дом — вид 2" width="330" height="529" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Завершенное в 1911 году, Муниципальный дом является величественным памятником стиля ар-нуво, расположенным на Вацлавской площади в Праге. Спроектированное архитектором Йозефом Фантой и украшенное сложными мозаиками, фресками и скульптурами, оно изначально задумывалось как культурный центр для среднего класса города. Он включает в себя величественный зал с купольным потолком и центральным фонтаном. Здание вмещает кафе, ресторан и концертный зал. Его фасад украшен сложными керамическими плитками, изображающими сцены из чешского фольклора. Во время Второй мировой войны он выжил после бомбардировок благодаря своему стратегическому расположению вдали от основных целей. Сегодня он остается одним из самых знаковых символов Праги.</p>
 <p class="prose">Построенный в эпоху Чешского национального возрождения, Муниципальный дом служил местом для концертов, выставок и общественных мероприятий. Его роскошный интерьер отличается изысканными деталями, включая люстры, мраморные полы и витражные окна, демонстрируя яркое творчество дизайна начала 20-го века. Посетители приезжают, чтобы насладиться уникальным архитектурным стилем и ощутить историческую атмосферу культурного сердца Праги.</p></div>
 </section>
-<section class="place" id="prague_national_museum_prague">
-<h3>Национальный музей</h3>
-
-<p class="place-meta">Период: 1818</p>
-<figure class="place-fig"><img src="../images/prague_national_museum_prague.jpg" alt="Национальный музей"/></figure>
-<div class="place-desc"><p class="prose">Национальный музей Чехии является одним из крупнейших и самых значимых учреждений Европы, посвященных науке, искусству и культуре. Основанный в 1818 году как королевский музей, он стал обширной коллекцией, демонстрирующей чешское наследие в различных областях. Он содержит более 14 миллионов предметов в своих обширных коллекциях. Само здание является примечательным примером неоренессансной архитектуры. Экспонаты варьируются от древних ископаемых до современного искусства и исторических артефактов. Одним из его главных достопримечательностей является знаменитый Зал динозавров с моделями в натуральную величину. Регулярные временные выставки представляют передовые исследования и современное искусство.</p>
-<p class="prose">Основанный в 1818 году императором Францем I, Национальный музей изначально назывался Королевским музеем естественной истории и искусств. Со временем он расширил свои коллекции, включив антропологию, археологию, геологию, зоологию и изобразительное искусство. Сегодня в нем хранится более 14 миллионов артефактов, что делает его одним из крупнейших культурных хранилищ страны. Посетители приезжают сюда ради обширных экспозиций, охватывающих естественные науки, искусство, историю и антропологию, которые предоставляют глубокое понимание чешской культуры и наследия.</p></div>
-</section>
-<section class="place" id="prague_national_technical_museum_prague">
-<h3>Национальный технический музей</h3>
-
-<p class="place-meta">Период: 1901</p>
-<figure class="place-fig"><img src="../images/prague_national_technical_museum_prague.jpg" alt="Национальный технический музей"/></figure>
-<div class="place-desc"><p class="prose">Национальный технический музей — это ведущий музей науки и техники, демонстрирующий чешские инновации и инженерные чудеса. Он гордится одной из крупнейших коллекций винтажных автомобилей и самолетов в Европе. Экспонаты включают интерактивные дисплеи, которые позволяют посетителям на собственном опыте узнать, как работают машины. Музей регулярно проводит временные выставки по новым технологиям, таким как искусственный интеллект и возобновляемая энергия. Расположенный в историческом парке Летна, он предлагает панорамные виды на Прагу с террасы на крыше. Его архитектурный стиль отражает влияние ар-нуво с современными акцентами.</p>
-<p class="prose">Основанный в 1901 году, музей с момента своего создания стал центром технологического образования и исследований. Он хранит более 400,000 экспонатов, охватывающих века чешских технических достижений, включая ранние паровые машины, аэрокосмические модели и демонстрации робототехники. Посетители могут исследовать передовые технологии наряду с историческими артефактами, получая представление о чешском гении и инновациях.</p></div>
-</section>
-<section class="place" id="prague_national_theatre_prague">
-<h3>Национальный театр</h3>
-
-<p class="place-meta">Период: 1883</p>
-<figure class="place-fig"><img src="../images/prague_national_theatre_prague.jpg" alt="Национальный театр"/></figure>
-<div class="place-desc"><p class="prose">Национальный театр в Праге — это грандиозный архитектурный шедевр, демонстрирующий чешскую культуру и искусство. Завершенный в 1883 году, он является одним из самых значительных оперных театров Европы. Он был основан под патронажем императора Франца Иосифа I Австро-Венгрии. Его интерьер украшен сложными декорациями и изысканными люстрами, вдохновленными итальянскими ренессансными дворцами. Театр проводит более 300 представлений ежегодно, привлекая зрителей со всего мира. Значимые произведения, исполненные здесь, включают &#x27;Дон Жуана&#x27; Моцарта и &#x27;Травиату&#x27; Верди. В 1992 году здание было внесено в список объектов Всемирного наследия ЮНЕСКО.</p>
-<p class="prose">Построенный в конце 19 века, Национальный театр был спроектирован Йозефом Зитеком, чтобы воплотить культурные устремления чешской нации после десятилетий правления Габсбургов. Он открыл свои двери 4 мая 1883 года с представлениями, которые отмечали чешскую идентичность через музыку и драму. Неоренессансный стиль здания отражает как историческое влияние, так и современные инновации, что делает его символом чешней гордости и художественного самовыражения. Посещение Национального театра позволяет посетителям насладиться оперой, балетом и спектаклями мирового уровня, погружаясь в богатое культурное наследие Богемии.</p></div>
-</section>
-<section class="place" id="prague_pdfband_1_1aaef487">
-<h3>2017 Hatvan</h3>
-
-
-<figure class="place-fig"><img src="../images/prague_pdfband_1_1aaef487.jpg" alt="2017 Hatvan"/></figure>
-</section>
-<section class="place" id="prague_pdfband_2_45de4182">
-<h3>Nizwa 006 (30816611472)</h3>
-
-
-<figure class="place-fig"><img src="../images/prague_pdfband_2_45de4182.jpg" alt="Nizwa 006 (30816611472)"/></figure>
-</section>
 <section class="place" id="prague_naplavka_riverside">
+<div class="place-lead">
 <h3>Нáплавка (Раšinovo nábřeží)</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Период: 1907–1916</p>
-<figure class="place-fig"><img src="../images/prague_naplavka_riverside.jpg" alt="Нáплавка (Раšinovo nábřeží)"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/prague_naplavka_riverside.jpg" alt="Нáплавка (Раšinovo nábřeží)" width="1200" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/prague_naplavka_riverside_b.jpg" alt="Нáплавка (Раšinovo nábřeží) — вид 2" width="330" height="440" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Нáплавка — это уникальная система защиты от наводнений и набережная вдоль реки Влтава в Праге. Она была построена в период с 1907 по 1916 год, чтобы защитить город от наводнений, а также стала популярной зоной отдыха. Построенное из железобетона и камня, сооружение протянулось более чем на 4 километра вдоль реки. Название &#x27;Náplavka&#x27; переводится как &#x27;переполнение&#x27; на английском, что отражает его назначение как механизма защиты от наводнений. В него входят несколько мостов, соединяющих разные части города, что облегчает исследование различных районов. Во время Второй мировой войны Неплавка служила стратегической оборонительной позицией благодаря своему возвышенному расположению и смотровым площадкам. Сегодня это по-прежнему любимое место как для местных жителей, так и для туристов, предлагающее панорамные виды и культурные мероприятия.</p>
 <p class="prose">Построенная в начале 20 века, конструкция Неплавки сочетает в себе как функциональные меры по контролю наводнений, так и эстетические элементы. Спроектированная чешским архитектором Антонином Вихлом, она включает в себя элегантные арки и пешеходные дорожки, которые гармонично вписываются в природный ландшафт береговой линии реки. Обязательное место для посещения благодаря потрясающим видам на реку Влтава и Башню Староместского моста, а также его историческому значению как защитного барьера.</p></div>
 </section>
-<section class="place" id="prague_old_jewish_cemetery">
-<h3>Старое еврейское кладбище</h3>
+<section class="place" id="prague_national_museum_prague">
+<div class="place-lead">
+<h3>Национальный музей</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1439</p>
-<figure class="place-fig"><img src="../images/prague_old_jewish_cemetery.jpg" alt="Старое еврейское кладбище"/></figure>
-<div class="place-desc"><p class="prose">Старое еврейское кладбище — это самое старое и знаменитое еврейское захоронение Праги, датируемое концом 15 века. Здесь находится более 12 000 надгробий, многие из которых имеют столетнюю историю. Он расположен рядом с Карловым мостом и Староместской площадью, что делает его легко доступным пешком. Здесь похоронены многие выдающиеся личности, включая раввина Лева, который, возможно, вдохновил легенду о Големе. Кладбище было объявлено объектом Всемирного наследия ЮНЕСКО в 1992 году. Из-за ограниченного пространства новые захоронения прекратились в начале 18 века. Погребальные слои поднимаются до девяти этажей в высоту.</p>
-<p class="prose">Основанное около 1439 года, это кладбище служило последним пристанищем для поколений евреев, живущих в Праге. Из-за строгих правил использования земли захоронения были расположены слоями, что привело к уникальному «слоистому» виду, который делает его одним из самых необычных кладбищ Европы. Посещение Старого еврейского кладбища дает представление о истории и культуре еврейской общины Праги.</p></div>
+<p class="place-meta">Адрес: Václavské náměstí 68 | Период: 1818</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/prague_national_museum_prague.jpg" alt="Национальный музей" width="1067" height="1600" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/prague_national_museum_prague_b.jpg" alt="Национальный музей — вид 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Национальный музей Чехии является одним из крупнейших и самых значимых учреждений Европы, посвященных науке, искусству и культуре. Основанный в 1818 году как королевский музей, он стал обширной коллекцией, демонстрирующей чешское наследие в различных областях. Он содержит более 14 миллионов предметов в своих обширных коллекциях. Само здание является примечательным примером неоренессансной архитектуры. Экспонаты варьируются от древних ископаемых до современного искусства и исторических артефактов. Одним из его главных достопримечательностей является знаменитый Зал динозавров с моделями в натуральную величину. Регулярные временные выставки представляют передовые исследования и современное искусство.</p>
+<p class="prose">Основанный в 1818 году императором Францем I, Национальный музей изначально назывался Королевским музеем естественной истории и искусств. Со временем он расширил свои коллекции, включив антропологию, археологию, геологию, зоологию и изобразительное искусство. Сегодня в нем хранится более 14 миллионов артефактов, что делает его одним из крупнейших культурных хранилищ страны. Посетители приезжают сюда ради обширных экспозиций, охватывающих естественные науки, искусство, историю и антропологию, которые предоставляют глубокое понимание чешской культуры и наследия.</p></div>
 </section>
-<section class="place" id="prague_old_town_hall">
-<h3>Старая ратуша</h3>
+<section class="place" id="prague_national_theatre_prague">
+<div class="place-lead">
+<h3>Национальный театр</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/prague_old_town_hall.jpg" alt="Старая ратуша"/></figure>
-<div class="place-desc"><p class="prose">Старая ратуша — это величественная достопримечательность, доминирующая над историческим центром Праги, являясь одной из самых знаковых построек города с момента своего строительства в конце 14 века. В нем находятся два известных астрономических часов, каждый из которых имеет уникальные небесные дисплеи. Здание претерпело значительные renovations в начале 20 века, сохранив свою историческую целостность и одновременно внедрив современные элементы. Сегодня он служит музеем, демонстрирующим средневековые артефакты и исторические документы, связанные с управлением городом. Его башня предлагает панорамные виды на Староместскую площадь и окрестности. Зал изначально размещал муниципальные правительственные офисы и суды.</p>
-<p class="prose">Построенная во время правления Карла IV около 1380 года, Старая ратуша на протяжении веков служила различным административным и судебным целям. Она также была домом для астрономических часов, которые стали известны своими сложными механизмами и небесными дисплеями. Архитектура зала отражает готические влияния с последующими ренессансными дополнениями, демонстрируя эволюцию архитектурных стилей в Праге. Посетители приходят сюда, чтобы полюбоваться потрясающим готическим фасадом, исследовать исторические залы заседаний и восхититься intricately decorated interior spaces.</p></div>
+<p class="place-meta">Период: 1883</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/prague_national_theatre_prague.jpg" alt="Национальный театр" width="1280" height="851" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/prague_national_theatre_prague_b.jpg" alt="Национальный театр — вид 2" width="330" height="220" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Национальный театр в Праге — это грандиозный архитектурный шедевр, демонстрирующий чешскую культуру и искусство. Завершенный в 1883 году, он является одним из самых значительных оперных театров Европы. Он был основан под патронажем императора Франца Иосифа I Австро-Венгрии. Его интерьер украшен сложными декорациями и изысканными люстрами, вдохновленными итальянскими ренессансными дворцами. Театр проводит более 300 представлений ежегодно, привлекая зрителей со всего мира. Значимые произведения, исполненные здесь, включают &#x27;Дон Жуана&#x27; Моцарта и &#x27;Травиату&#x27; Верди. В 1992 году здание было внесено в список объектов Всемирного наследия ЮНЕСКО.</p>
+<p class="prose">Построенный в конце 19 века, Национальный театр был спроектирован Йозефом Зитеком, чтобы воплотить культурные устремления чешской нации после десятилетий правления Габсбургов. Он открыл свои двери 4 мая 1883 года с представлениями, которые отмечали чешскую идентичность через музыку и драму. Неоренессансный стиль здания отражает как историческое влияние, так и современные инновации, что делает его символом чешней гордости и художественного самовыражения. Посещение Национального театра позволяет посетителям насладиться оперой, балетом и спектаклями мирового уровня, погружаясь в богатое культурное наследие Богемии.</p></div>
 </section>
-<section class="place" id="prague_old_town_square">
-<h3>Староместская площадь</h3>
+<section class="place" id="prague_national_technical_museum_prague">
+<div class="place-lead">
+<h3>Национальный технический музей</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/prague_old_town_square.jpg" alt="Староместская площадь"/></figure>
-<div class="place-desc"><p class="prose">В сердце Старого города Праги находится его знаковая площадь, свидетельство веков архитектурного и культурного наследия. Улица с брусчаткой окружена средневековыми зданиями, каждое из которых рассказывает историю прошлых империй и королевских дворов. Площадь окружена готическими, ренессансными и барочными зданиями. Каждое лето здесь проходит знаменитый Пражский весенний фестиваль. Астрономические часы, установленные в 1410 году, являются одними из старейших действующих часов в Европе. Соседствующая с площадью церковь Тын была построена между 1380 и 1420 годами. Во время Второй мировой войны площадь служила местом сбора для движений сопротивления.</p>
-<p class="prose">Основанная в начале XIV века королем Вацлавом II, Староместская площадь изначально была спроектирована как рынок для торговцев и ремесленников. Со временем она стала центром политических собраний и фестивалей, принимая значимые события, такие как коронации и религиозные процессии. Сегодня здесь расположены такие достопримечательности, как церковь Святого Николая и Астрономические часы, которые привлекают туристов со всего мира. Посетите Староместскую площадь, чтобы вблизи ощутить богатую историю Праги и восхитительную архитектуру.</p></div>
+<p class="place-meta">Период: 1901</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/prague_national_technical_museum_prague.jpg" alt="Национальный технический музей" width="1068" height="1600" style="height: 287px; max-height: 287px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/prague_national_technical_museum_prague_b.jpg" alt="Национальный технический музей — вид 2" width="330" height="205" style="height: 287px; max-height: 287px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Национальный технический музей — это ведущий музей науки и техники, демонстрирующий чешские инновации и инженерные чудеса. Он гордится одной из крупнейших коллекций винтажных автомобилей и самолетов в Европе. Экспонаты включают интерактивные дисплеи, которые позволяют посетителям на собственном опыте узнать, как работают машины. Музей регулярно проводит временные выставки по новым технологиям, таким как искусственный интеллект и возобновляемая энергия. Расположенный в историческом парке Летна, он предлагает панорамные виды на Прагу с террасы на крыше. Его архитектурный стиль отражает влияние ар-нуво с современными акцентами.</p>
+<p class="prose">Основанный в 1901 году, музей с момента своего создания стал центром технологического образования и исследований. Он хранит более 400,000 экспонатов, охватывающих века чешских технических достижений, включая ранние паровые машины, аэрокосмические модели и демонстрации робототехники. Посетители могут исследовать передовые технологии наряду с историческими артефактами, получая представление о чешском гении и инновациях.</p></div>
 </section>
 <section class="place" id="prague_petrin_tower">
+<div class="place-lead">
 <h3>Петřинская смотровая башня</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1891</p>
-<figure class="place-fig"><img src="../images/prague_petrin_tower.jpg" alt="Петřинская смотровая башня"/></figure>
+<p class="place-meta">Место: Petřín Hill | Период: 1891</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/prague_petrin_tower.jpg" alt="Петřинская смотровая башня" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/prague_petrin_tower_b.jpg" alt="Петřинская смотровая башня — вид 2" width="330" height="220" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Высоко над шумными улицами Праги расположена Петршинская смотровая башня, предлагающая панорамный вид на достопримечательности города и мосты. Построенная в 1891 году в рамках Выставки декоративного искусства, она является свидетельством инженерного и дизайнерского мастерства конца 19 века. Башня высотой 60 метров, построенная в основном из железа и камня. Он предлагает смотровую площадку с видами, простирающимися на 20 километров вокруг города. Небольшой музей в башне демонстрирует исторические артефакты, связанные с Экспозицией. Ночью башня освещена, что делает её впечатляющим зрелищем на фоне вечернего горизонта. В 1945 году, во время Второй мировой войны, башня служила стратегической военной наблюдательной точкой.</p>
 <p class="prose">Завершенная в 1891 году для Чешской выставки декоративных искусств, башня была спроектирована архитектором Йозефом Зитеком. Изначально предназначенная как временная конструкция, ее популярность привела к постоянной установке на холме Петршин. С тех пор она стала одним из самых знаковых символов Праги и популярной смотровой площадкой как для туристов, так и для местных жителей. Посетители приходят сюда, чтобы испытать волнение от взгляда на Староместскую площадь, Карлов мост и реку Влтава с высоты птичьего полета.</p></div>
 </section>
-<section class="place" id="prague_powder_gate">
-<h3>Пудровые ворота</h3>
-
-<p class="place-meta">Период: 1612–1614</p>
-<figure class="place-fig"><img src="../images/prague_powder_gate.jpg" alt="Пудровые ворота"/></figure>
-<div class="place-desc"><p class="prose">Пудровые ворота (Výstavušská brána), величественная достопримечательность Старого города Праги, являются одной из самых знаковых структур города. Изначально построенные во времена правления императора Рудольфа II, они служили оборонительным барьером и входной точкой для королевского замка. Построенные в 1612–1614 годах, ворота являются прекрасным примером позднеготического и ренессансного стилей. Он украшен сложными резьбами и скульптурами, изображающими сцены из мифологии и геральдики. Сегодня Powder Gate является популярной туристической достопримечательностью и входом в очаровательные улицы Старого города. Расположенный рядом с Вацлавской площадью и Карловым мостом, он предлагает панорамные виды на центр города. Несколько раз восстановленные на протяжении веков, ворота сохраняют большую часть своего оригинального очарования.</p>
-<p class="prose">Построенные в начале 17 века при императоре Рудольфе II, Пороховые ворота были созданы для защиты королевского дворца и обеспечения доступа к Староместской площади. Их название происходит от склада пороха, расположенного внутри их стен, который снабжал боеприпасами защиту города. Посетителям стоит увидеть Пудровые ворота за их впечатляющую барочную архитектуру и историческое значение как символа богатого военного наследия Праги.</p></div>
-</section>
 <section class="place" id="prague_astronomical_clock_orloj">
+<div class="place-lead">
 <h3>Пражские астрономические часы</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1410</p>
-<figure class="place-fig"><img src="../images/prague_astronomical_clock_orloj.jpg" alt="Пражские астрономические часы"/></figure>
+<p class="place-meta">Адрес: Old Town Hall, Old Town Square | Период: 1410</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/prague_astronomical_clock_orloj.jpg" alt="Пражские астрономические часы" width="1280" height="963" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/prague_astronomical_clock_orloj_b.jpg" alt="Пражские астрономические часы — вид 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Пражские астрономические часы — это легендарные часы, которые завораживают посетителей на протяжении веков. Высоко над Староместской площадью они являются одним из самых знаковых символов богатого культурного наследия Праги. Он имеет три основных циферблата, показывающих время, положение солнца и луны, а также лунные фазы. Каждый час процессия механических фигур представляет миниатюрное представление. Часы, восстановленные несколько раз за годы, остаются в рабочем состоянии и по сей день. Сконструированный в основном из дерева, латуни и железа, он демонстрирует сложное мастерство. Расположенная в центре Староместской площади, она привлекает миллионы туристов ежегодно.</p>
 <p class="prose">Впервые упомянутые в 1410 году, часы были заказаны Карлом IV и завершены часовщиком Микулашем из Кадани. Они претерпели значительные реставрации в 1490 и 1865 годах, сохранив свой оригинальный дизайн, одновременно модернизировав свои механизмы. Слава часов возросла, когда они начали отображать астрономические явления, такие как знаки зодиака и небесные движения. Обязательная к посещению достопримечательность, Пражские астрономические часы предлагают увлекательный взгляд на средневековую инженерию и искусство.</p></div>
 </section>
 <section class="place" id="prague_troya_botanical_garden">
+<div class="place-lead">
 <h3>Пражский ботанический сад Троя</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Период: 1956</p>
-<figure class="place-fig"><img src="../images/prague_troya_botanical_garden.jpg" alt="Пражский ботанический сад Троя"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/prague_troya_botanical_garden.jpg" alt="Пражский ботанический сад Троя" width="1280" height="960" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/prague_troya_botanical_garden_b.jpg" alt="Пражский ботанический сад Троя — вид 2" width="330" height="250" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Расположенный на окраине Праги, Пражский ботанический сад Троя является спокойным оазисом, предлагающим посетителям умиротворяющее убежище от городской суеты. Основанный в 1956 году, он занимает более 70 гектаров и демонстрирует разнообразную флору со всего мира. Он занимает примерно 70 гектаров земли. Сад включает более 8,000 видов растений со всех континентов. Существует несколько образовательных троп и ботанических выставок, предназначенных для изучения различных типов растительности. В дополнение к флоре, здесь также есть животные места обитания, включая пруды и вольеры. В течение всего года проходят регулярные культурные мероприятия и сезонные выставки цветов.</p>
 <p class="prose">Сад был основан в 1956 году как часть Чешской академии наук, с основной целью научных исследований в области ботаники и биологии растений. Со временем он стал одним из самых популярных зеленых пространств как для местных жителей, так и для туристов, привлекая миллионы посетителей ежегодно благодаря своим уникальным коллекциям и спокойной атмосфере. Посетители приходят сюда, чтобы насладиться красотой природы среди пышной зелени, экзотических растений и живописных дорожек, которые извиваются через различные тематические зоны.</p></div>
 </section>
 <section class="place" id="prague_castle">
+<div class="place-lead">
 <h3>Пражский Град</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/prague_castle.jpg" alt="Пражский Град"/></figure>
+<p class="place-meta">Адрес: Hradčany, Prague 1</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/prague_castle.jpg" alt="Пражский Град" width="1280" height="991" style="height: 315px; max-height: 315px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/prague_castle_b.jpg" alt="Пражский Град — вид 2" width="330" height="225" style="height: 315px; max-height: 315px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Расположенный высоко над рекой Влтава, Пражский град является крупнейшим древним замковым комплексом в Европе и свидетельством многовековой чешской истории. Его величественные башни и фасады — зрелище, которое стоит увидеть. Он занимает площадь примерно 70 000 квадратных метров. Замковый комплекс включает более 2000 комнат. Кафедральный собор Святого Вита был завершен в конце 14 века. Королевские летние апартаменты отличаются изысканными интерьерами в стиле барокко. Золотая улица, узкая улица внутри стен замка, располагает очаровательными магазинами и кафе.</p>
 <p class="prose">Изначально построенный в 9 веке как крепость для богемских королей, Пражский град со временем превратился в грандиозный дворец и центр власти. Он служил королевской резиденцией до начала 20 века и остается одним из самых значительных символов чешского суверенитета. К числу примечательных особенностей относятся собор Святого Вита, Золотая улочка и Королевские летние апартаменты. Историческая резиденция богемских королей и современного президента Чехии; объект Всемирного наследия ЮНЕСКО с сопредельными городскими зонами.</p></div>
 </section>
-<section class="place" id="prague_main_railway_station">
-<h3>Главный вокзал Праги</h3>
+<section class="place" id="prague_powder_gate">
+<div class="place-lead">
+<h3>Пудровые ворота</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<p class="place-meta">Период: 1871</p>
-<figure class="place-fig"><img src="../images/prague_main_railway_station.jpg" alt="Главный вокзал Праги"/></figure>
-<div class="place-desc"><p class="prose">В сердце бурной транспортной сети Праги находится величественный вокзал Praha-Hlavní nádraží, обычно известный как Praha Hlavní Nádraží или просто &#x27;Hlavní&#x27;. Этот величественный вокзал с его неоренессансной архитектурой и внушительным фасадом служит центром как для внутреннего, так и для международного железнодорожного сообщения. Открытая в 1871 году, она является одной из старейших действующих железнодорожных станций в Чехии. Его неоренессансный стиль характеризуется богато украшенными фасадами и сложными декоративными элементами. Станция обслуживает миллионы пассажиров ежегодно, являясь важной связующей нитью между Прагой и Европой. За годы оно прошло несколько ремонтов, но сохранило большую часть своего оригинального дизайнерского облика. Расположенный рядом с Вацлавской площадью, он предлагает удобный доступ к центру Праги.</p>
-<p class="prose">Построенный в 1871 году, Прага Главный Вокзал был одной из первых крупных железнодорожных станций в Богемии. Спроектированный архитектором Йозефом Зитеком, он быстро стал символом современной транспортной инфраструктуры в регионе. Станция сыграла ключевую роль во время промышленной революции, способствуя торговле и соединяя Прагу с ключевыми европейскими городами, такими как Берлин, Вена и Дрезден. Посетителям стоит исследовать Прага Главный Вокзал за его историческое значение и архитектурную красоту, которые отражают богатое культурное наследие города.</p></div>
+<p class="place-meta">Адрес: Náměstí Republiky / Celetná | Период: 1612–1614</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/prague_powder_gate.jpg" alt="Пудровые ворота" width="1200" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--row-sized"><img src="../images/prague_powder_gate_b.jpg" alt="Пудровые ворота — вид 2" width="330" height="541" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Пудровые ворота (Výstavušská brána), величественная достопримечательность Старого города Праги, являются одной из самых знаковых структур города. Изначально построенные во времена правления императора Рудольфа II, они служили оборонительным барьером и входной точкой для королевского замка. Построенные в 1612–1614 годах, ворота являются прекрасным примером позднеготического и ренессансного стилей. Он украшен сложными резьбами и скульптурами, изображающими сцены из мифологии и геральдики. Сегодня Powder Gate является популярной туристической достопримечательностью и входом в очаровательные улицы Старого города. Расположенный рядом с Вацлавской площадью и Карловым мостом, он предлагает панорамные виды на центр города. Несколько раз восстановленные на протяжении веков, ворота сохраняют большую часть своего оригинального очарования.</p>
+<p class="prose">Построенные в начале 17 века при императоре Рудольфе II, Пороховые ворота были созданы для защиты королевского дворца и обеспечения доступа к Староместской площади. Их название происходит от склада пороха, расположенного внутри их стен, который снабжал боеприпасами защиту города. Посетителям стоит увидеть Пудровые ворота за их впечатляющую барочную архитектуру и историческое значение как символа богатого военного наследия Праги.</p></div>
 </section>
-<section class="place" id="prague_pdfband_0_2f02bea1">
-<h3>PragueCathedral03</h3>
+<section class="place" id="prague_wallenstein_garden">
+<div class="place-lead">
+<h3>Сад Вальдштейна</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/prague_pdfband_0_2f02bea1.jpg" alt="PragueCathedral03"/></figure>
+<p class="place-meta">Период: 1620–1624</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/prague_wallenstein_garden.jpg" alt="Сад Вальдштейна" width="1280" height="718" style="height: 259px; max-height: 259px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/prague_wallenstein_garden_b.jpg" alt="Сад Вальдштейна — вид 2" width="330" height="220" style="height: 259px; max-height: 259px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Сад Валленштейна — это спокойный оазис тишины, расположенный в самом сердце Старого города Праги. Спроектированный итальянским архитектором Джованни Антонио де Россой и построенный в начале XVII века под патронажем Альбрехта фон Валленштейна, он сочетает в себе барочную элегантность и тщательное внимание к деталям. Построен в период с 1620 по 1624 год. Спроектировано итальянским архитектором Джованни Антонио де Россі. Особенности включают сложные фонтаны и скульптуры. Символизирует роскошь и влияние Альбрехта фон Валленштейна. Расположен рядом с Карловым мостом.</p>
+<p class="prose">Заказанный Альбрехтом фон Валленштейном, могущественным военным лидером и государственным деятелем, сад был завершен около 1620 года. Он демонстрирует сложные фонтаны, статуи и тщательно подстриженные живые изгороди, расположенные в геометрических узорах, характерных для барочных садов. Сад служил как местом отдыха для своих покровителей, так и символом власти и богатства. Посетители приходят сюда, чтобы оценить изысканную красоту архитектуры и ландшафта сада, которые в значительной степени остались неизменными с момента его создания.</p></div>
 </section>
-<section class="place" id="prague_st_nicholas_mala_strana">
-<h3>Церковь Святого Николая, Малая Страна</h3>
+<section class="place" id="prague_letna_park_view">
+<div class="place-lead">
+<h3>Смотровая площадка парка Летна</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/prague_st_nicholas_mala_strana.jpg" alt="Церковь Святого Николая, Малая Страна"/></figure>
-<div class="place-desc"><p class="prose">Расположенная на холме с видом на реку Влтава, церковь Святого Николая является одной из самых знаковых достопримечательностей Праги, величественно возвышаясь над живописным районом Малая Страна. Церковь была основана королем Вацлавом II в 1349 году. Он имеет характерную шпиль с замысловатыми резьбами и скульптурами. Внутри посетители могут увидеть барочные алтари и фрески известных художников. Его расположение предоставляет отличные возможности для фотографий благодаря своему высокому положению. Интерьер включает крипту, в которой находятся останки некоторых выдающихся личностей.</p>
-<p class="prose">Построенная в позднеготическом стиле в начале XIV века, церковь Святого Николая изначально была возведена как францисканский монастырь и церковь. Со временем она претерпела несколько ремонтов, включая барочные изменения в XVIII веке, которые добавили роскошные интерьеры и декоративные фасады. Колокольня церкви предлагает панорамные виды на городской пейзаж, что делает её популярной смотровой площадкой для туристов. Посетители приезжают, чтобы восхититься его архитектурной красотой, историческим значением и захватывающими видами на реку и окружающие территории.</p></div>
+<figure class="place-fig place-fig--hi-res"><img src="../images/prague_letna_park_view.JPG" alt="Смотровая площадка парка Летна" width="1280" height="848"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Расположенный высоко над шумными улицами Праги, Парк Летна предлагает панорамный вид на город, включая знаковый Карлов мост и величественные шпили Староместской ратуши. В ясные дни посетители могут даже увидеть далекие горы на западе. Он расположен на холме с видом на долину реки Влтава. Парк Летна проводит различные культурные мероприятия в течение года, включая кинопоказы и уличные выступления. Посетители также могут наслаждаться неспешными прогулками по извивающимся тропинкам среди зелени парка. Парк украшен несколькими скульптурами и памятниками, посвящёнными историческим личностям и значимым моментам в чешской истории.</p>
+<p class="prose">Изначально разработанный как военный учебный полигон в конце 19 века, Парк Летна с тех пор стал одной из самых популярных рекреационных зон Праги. Он прославился проведением масштабных концертов и фестивалей, таких как ежегодный фестиваль Rockwave, который привлекает тысячи любителей музыки каждый год. Парк славится своими захватывающими видами и является идеальным местом для создания живописных фотографий городского пейзажа.</p></div>
 </section>
-<section class="place" id="prague_st_vitus_cathedral">
-<h3>Кафедральный собор Святого Вита</h3>
+<section class="place" id="prague_old_town_hall">
+<div class="place-lead">
+<h3>Старая ратуша</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
+<p class="place-meta">Адрес: Staroměstské náměstí 1</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/prague_old_town_hall.jpg" alt="Старая ратуша" width="1200" height="1600" style="height: 288px; max-height: 288px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/prague_old_town_hall_b.jpg" alt="Старая ратуша — вид 2" width="330" height="206" style="height: 288px; max-height: 288px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Старая ратуша — это величественная достопримечательность, доминирующая над историческим центром Праги, являясь одной из самых знаковых построек города с момента своего строительства в конце 14 века. В нем находятся два известных астрономических часов, каждый из которых имеет уникальные небесные дисплеи. Здание претерпело значительные renovations в начале 20 века, сохранив свою историческую целостность и одновременно внедрив современные элементы. Сегодня он служит музеем, демонстрирующим средневековые артефакты и исторические документы, связанные с управлением городом. Его башня предлагает панорамные виды на Староместскую площадь и окрестности. Зал изначально размещал муниципальные правительственные офисы и суды.</p>
+<p class="prose">Построенная во время правления Карла IV около 1380 года, Старая ратуша на протяжении веков служила различным административным и судебным целям. Она также была домом для астрономических часов, которые стали известны своими сложными механизмами и небесными дисплеями. Архитектура зала отражает готические влияния с последующими ренессансными дополнениями, демонстрируя эволюцию архитектурных стилей в Праге. Посетители приходят сюда, чтобы полюбоваться потрясающим готическим фасадом, исследовать исторические залы заседаний и восхититься intricately decorated interior spaces.</p></div>
+</section>
+<section class="place" id="prague_old_jewish_cemetery">
+<div class="place-lead">
+<h3>Старое еврейское кладбище</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-<figure class="place-fig"><img src="../images/prague_st_vitus_cathedral.jpg" alt="Кафедральный собор Святого Вита"/></figure>
-<div class="place-desc"><p class="prose">Сидя величественно на вершине Пражского града, собор Святого Вита является духовным сердцем Богемии и свидетельством готической архитектуры. Его высокие шпили устремляются к небу, предлагая панорамные виды на город внизу. Строительство началось в 1344 году во время правления короля Карла IV. Собор остается незавершенным по сей день, символизируя непостоянство жизни. Здесь находятся могилы чешских королей и королев, включая могилы Карла IV и его жены Анны Богемской. Его характерные две башни являются одними из самых узнаваемых достопримечательностей Праги. Здесь проходят регулярные службы, позволяя посетителям ощутить современное поклонение наряду с историческим благоговением.</p>
-<p class="prose">Построенный в период с 1344 по 1929 год, собор Святого Вита претерпел множество реконструкций на протяжении веков. Изначально заказанный королем Карлом IV, он предназначался как королевский мавзолей для его семьи. Строительство собора несколько раз приостанавливалось из-за войн и финансовых трудностей, но каждый раз возобновлялось с новой преданностью. Сегодня его интерьер украшен великолепными витражами и сложной резьбой, которые отражают как средневековое мастерство, так и современные усилия по реставрации. Посетители приезжают сюда, чтобы восхититься его захватывающей архитектурой и оценить богатое историческое значение этого священного места.</p></div>
+<p class="place-meta">Адрес: Josefov, Old Jewish Cemetery | Период: 1439</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/prague_old_jewish_cemetery.jpg" alt="Старое еврейское кладбище" width="1280" height="439" style="height: 158px; max-height: 158px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/prague_old_jewish_cemetery_b.jpg" alt="Старое еврейское кладбище — вид 2" width="330" height="220" style="height: 158px; max-height: 158px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Старое еврейское кладбище — это самое старое и знаменитое еврейское захоронение Праги, датируемое концом 15 века. Здесь находится более 12 000 надгробий, многие из которых имеют столетнюю историю. Он расположен рядом с Карловым мостом и Староместской площадью, что делает его легко доступным пешком. Здесь похоронены многие выдающиеся личности, включая раввина Лева, который, возможно, вдохновил легенду о Големе. Кладбище было объявлено объектом Всемирного наследия ЮНЕСКО в 1992 году. Из-за ограниченного пространства новые захоронения прекратились в начале 18 века. Погребальные слои поднимаются до девяти этажей в высоту.</p>
+<p class="prose">Основанное около 1439 года, это кладбище служило последним пристанищем для поколений евреев, живущих в Праге. Из-за строгих правил использования земли захоронения были расположены слоями, что привело к уникальному «слоистому» виду, который делает его одним из самых необычных кладбищ Европы. Посещение Старого еврейского кладбища дает представление о истории и культуре еврейской общины Праги.</p></div>
+</section>
+<section class="place" id="prague_old_town_square">
+<div class="place-lead">
+<h3>Староместская площадь</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Место: Staré Město, Prague 1</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/prague_old_town_square.jpg" alt="Староместская площадь" width="1280" height="1236" style="height: 288px; max-height: 288px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/prague_old_town_square_b.jpg" alt="Староместская площадь — вид 2" width="330" height="206" style="height: 288px; max-height: 288px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">В сердце Старого города Праги находится его знаковая площадь, свидетельство веков архитектурного и культурного наследия. Улица с брусчаткой окружена средневековыми зданиями, каждое из которых рассказывает историю прошлых империй и королевских дворов. Площадь окружена готическими, ренессансными и барочными зданиями. Каждое лето здесь проходит знаменитый Пражский весенний фестиваль. Астрономические часы, установленные в 1410 году, являются одними из старейших действующих часов в Европе. Соседствующая с площадью церковь Тын была построена между 1380 и 1420 годами. Во время Второй мировой войны площадь служила местом сбора для движений сопротивления.</p>
+<p class="prose">Основанная в начале XIV века королем Вацлавом II, Староместская площадь изначально была спроектирована как рынок для торговцев и ремесленников. Со временем она стала центром политических собраний и фестивалей, принимая значимые события, такие как коронации и религиозные процессии. Сегодня здесь расположены такие достопримечательности, как церковь Святого Николая и Астрономические часы, которые привлекают туристов со всего мира. Посетите Староместскую площадь, чтобы вблизи ощутить богатую историю Праги и восхитительную архитектуру.</p></div>
+</section>
+<section class="place" id="prague_lennon_wall">
+<div class="place-lead">
+<h3>Стенка Леннона</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Velkopřevorské náměstí, Malá Strana | Период: 1988</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--row-sized"><img src="../images/prague_lennon_wall.jpg" alt="Стенка Леннона" width="1140" height="989" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/prague_lennon_wall_b.jpg" alt="Стенка Леннона — вид 2" width="330" height="247" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Стена Леннона — это яркое и знаковое место уличного искусства, расположенное на Староместской площади в Праге. Она стала одной из самых популярных достопримечательностей города, привлекая посетителей со всего мира. Это одно из самых известных мест уличного искусства в Европе. Стена служит данью миру и свободе. Художники из разных стран вносят свой вклад в его развивающийся дизайн. Он привлекает тысячи туристов ежегодно. Его первоначальная цель заключалась в выражении протеста против авторитарных режимов.</p>
+<p class="prose">Изначально расписанная местным художником Давидом Черны в 1988 году, стена была названа в честь песни Джона Леннона «Give Peace a Chance». Со временем она стала символом свободы и сопротивления в коммунистическую эпоху Чехословакии. Сегодня стена продолжает эволюционировать, поскольку художники со всего мира добавляют свои уникальные творения, превращая её в динамичное и постоянно меняющееся полотно. Посещение Стены Леннона позволяет путешественникам ощутить слияние искусства, истории и культуры в Праге.</p></div>
 </section>
 <section class="place" id="prague_strahov_monastery">
+<div class="place-lead">
 <h3>Страхов монастырь</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/prague_strahov_monastery.jpg" alt="Страхов монастырь"/></figure>
+<p class="place-meta">Адрес: Strahovské nádvoří 1, Hradčany</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/prague_strahov_monastery.jpg" alt="Страхов монастырь" width="1067" height="1600" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/prague_strahov_monastery_b.jpg" alt="Страхов монастырь — вид 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Сидя высоко на холме над Старым городом Праги, Страховский монастырь является одной из самых знаковых достопримечательностей города. Его внушительная барочная архитектура и потрясающие виды делают его обязательным для посещения для всех, кто исследует столицу. Монастырь был основан в 1622 году архиепископом Франтишем Бедржихом из Лобковиц. Он был спроектирован итальянским архитектором Джованни Антонио Де Россі. Королевская библиотека содержит более 200,000 томов, включая редкие иллюминированные манускрипты. Коллекция библиотеки включает произведения, датируемые IX веком. Монастырь непрерывно населён с момента его постройки.</p>
 <p class="prose">Построенный в конце 17 века во время правления императора Леопольда I, Страховский монастырь изначально задумывался как бенедиктинский монастырь. Со временем он стал домом для Королевской библиотеки, в которой хранятся некоторые из самых редких книг и манускриптов Европы. Монастырь также включает две впечатляющие церкви: церковь святого Карла Борромео и меньшую церковь нашей Госпожи Здоровья. Посещение Страховского монастыря позволяет посетителям ощутить как религиозное наследие, так и культурные сокровища в одном месте.</p></div>
 </section>
 <section class="place" id="prague_stromovka_park">
+<div class="place-lead">
 <h3>Стромовка (Королевский охотничий заповедник)</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 
-<figure class="place-fig"><img src="../images/prague_stromovka_park.jpg" alt="Стромовка (Королевский охотничий заповедник)"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/prague_stromovka_park.jpg" alt="Стромовка (Королевский охотничий заповедник)" width="1280" height="844" style="height: 304px; max-height: 304px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/prague_stromovka_park_b.jpg" alt="Стромовка (Королевский охотничий заповедник) — вид 2" width="330" height="247" style="height: 304px; max-height: 304px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Расположенный на окраине Праги, Стромовка — живописный парк, известный своей спокойной атмосферой и природной красотой. Основанный как королевский охотничий заповедник во времена правления императора Карла IV, он предлагает посетителям уникальное сочетание исторической значимости и современного отдыха. Парк занимает более 600 гектаров зелёных лесов и лугов. Здесь множество пешеходных троп, что делает его идеальным для пеших прогулок и велоспорта. Стромовка проводит различные культурные фестивали на протяжении всего года, демонстрируя традиционную чешскую музыку и выступления. Небольшое озеро в парке предоставляет возможности для катания на лодках и рыбалки. Парк также включает несколько исторических зданий, в том числе бывшую охотничью усадьбу.</p>
 <p class="prose">Изначально основанный как королевская охотничья угодья императором Карлом IV в начале XIV века, Стромовка позже превратилась в рекреационную зону, открытую для публики. Со временем она стала популярным местом для прогулок, пикников и культурных мероприятий, отражая богатое наследие Праги и любовь к природе. Посетители приходят в Стромовку, чтобы насладиться её спокойной атмосферой, заняться активными видами отдыха и погрузиться в яркую культуру города.</p></div>
 </section>
-<section class="place" id="prague_troja_castle">
-<h3>Шато Троя</h3>
+<section class="place" id="prague_dancing_house">
+<div class="place-lead">
+<h3>Танцующий дом</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
-
-<figure class="place-fig"><img src="../images/prague_troja_castle.jpg" alt="Шато Троя"/></figure>
-<div class="place-desc"><p class="prose">Высоко над Прагой расположено шато Троя, величественный барочный дворец, который возвышается над рекой Влтава и знаковым горизонтом Праги. Его элегантный фасад и захватывающие виды делают его одним из самых живописных мест города. Он отличается роскошными интерьерами с изысканными украшениями, характерными для эпохи барокко. Территория включает в себяFormal сады и парковые зоны, которые занимают несколько гектаров. Посетители могут наслаждаться экскурсиями, исследуя исторические залы и художественные коллекции. Его расположение на вершине холма предоставляет непревзойденные виды на Пражский замок и Старый город. Сегодня шато проводит культурные мероприятия, выставки и концерты.</p>
-<p class="prose">Построенный в середине XVIII века архитектором Яном Блахой для графа Франтишека Антонина из Моравского Трбоми́ра, шато изначально предназначался как летняя резиденция. Позже он стал военным казармом во время Второй мировой войны, прежде чем быть восстановленным до своего прежнего величия в конце XX века. Шато предлагает потрясающие панорамные виды на Прагу и является свидетельством богатого архитектурного наследия города.</p></div>
-</section>
-<section class="place" id="prague_pdfband_9_08958a66">
-<h3>Vratislavský palác</h3>
-
-
-<figure class="place-fig"><img src="../images/prague_pdfband_9_08958a66.jpg" alt="Vratislavský palác"/></figure>
-</section>
-<section class="place" id="prague_vysehrad_cemetery_slavin">
-<h3>Кладбище Вышеград</h3>
-
-<p class="place-meta">Период: 1875</p>
-<figure class="place-fig"><img src="../images/prague_vysehrad_cemetery_slavin.jpg" alt="Кладбище Вышеград"/></figure>
-<div class="place-desc"><p class="prose">На высоком холме над рекой Влтава и историческим центром Праги расположено кладбище Вышеград, мирный оазис спокойствия среди шумного городского пейзажа. Основанное в конце 19 века, оно стало одним из самых известных мест захоронения чешских интеллектуалов, художников, писателей и политиков. Он занимает примерно 46 акров (18 гектаров) земли на холмистом месте. Кладбище включает в себя несколько мавзолеев и часовен с замысловатыми резьбами и скульптурами. Значимые могилы включают в себя захоронения выдающихся чешско-словацких лидеров и культурных икон. Его живописные виды предлагают панорамные перспективы на достопримечательности Праги, такие как Карлов мост и Староместская площадь. Посетители могут исследовать различные разделы, посвященные различным историческим периодам и художественным направлениям.</p>
-<p class="prose">Основанное в 1875 году, кладбище Вышеград было спроектировано архитектором Йозефом Зитеком, чтобы воплотить романтические идеалы эпохи. Оно расположено на месте бывшей крепости Вышеградского замка, который когда-то служил стратегическим опорным пунктом, возвышающимся над рекой. Кладбище известно своим уникальным сочетанием неоготического, ар-нуво и классического стилей, демонстрируя некоторые из лучших примеров погребальной архитектуры в Европе. Посещение этого места позволяет гостям отдать дань уважения многим известным чешским деятелям, которые покоятся на его священной земле, включая авторов Карела Чапека и Божену Немцову, композитора Бедржиха Сметану и политика Томаша Масарика.</p></div>
-</section>
-<section class="place" id="prague_wallenstein_garden">
-<h3>Сад Вальдштейна</h3>
-
-<p class="place-meta">Период: 1620–1624</p>
-<figure class="place-fig"><img src="../images/prague_wallenstein_garden.jpg" alt="Сад Вальдштейна"/></figure>
-<div class="place-desc"><p class="prose">Сад Валленштейна — это спокойный оазис тишины, расположенный в самом сердце Старого города Праги. Спроектированный итальянским архитектором Джованни Антонио де Россой и построенный в начале XVII века под патронажем Альбрехта фон Валленштейна, он сочетает в себе барочную элегантность и тщательное внимание к деталям. Построен в период с 1620 по 1624 год. Спроектировано итальянским архитектором Джованни Антонио де Россі. Особенности включают сложные фонтаны и скульптуры. Символизирует роскошь и влияние Альбрехта фон Валленштейна. Расположен рядом с Карловым мостом.</p>
-<p class="prose">Заказанный Альбрехтом фон Валленштейном, могущественным военным лидером и государственным деятелем, сад был завершен около 1620 года. Он демонстрирует сложные фонтаны, статуи и тщательно подстриженные живые изгороди, расположенные в геометрических узорах, характерных для барочных садов. Сад служил как местом отдыха для своих покровителей, так и символом власти и богатства. Посетители приходят сюда, чтобы оценить изысканную красоту архитектуры и ландшафта сада, которые в значительной степени остались неизменными с момента его создания.</p></div>
-</section>
-<section class="place" id="prague_wenceslas_square">
-<h3>Вацлавская площадь</h3>
-
-
-<figure class="place-fig"><img src="../images/prague_wenceslas_square.jpg" alt="Вацлавская площадь"/></figure>
-<div class="place-desc"><p class="prose">В сердце яркого центра Праги находится площадь Вацлава, шумный узел, который на протяжении веков был центральным элементом чешской истории и культуры. Площадь названа в честь святого Вацлава, который правил Богемией в 10 веке. Здесь проходят многочисленные фестивали и концерты в течение всего года, привлекая как местных жителей, так и туристов. Рядом находится Национальный мемориал жертвам коммунизма, посвященный тем, кто погиб под коммунистическим режимом. В последние годы город стал известен своей зоной, предназначенной только для пешеходов, что делает его идеальным местом для неспешных прогулок. Рядом с площадью расположены несколько известных ресторанов и кафе, предлагающих традиционную чешскую кухню.</p>
-<p class="prose">Изначально построенная в конце 14 века как рынок, площадь Вацлава стала политическим и культурным центром во время Габсбургской империи. В начале 20 века она была переименована в честь святого Вацлава, покровителя Богемии. Площадь стала свидетелем значительных событий, таких как демонстрации против нацистской оккупации и антикоммунистические восстания в 1960-х и 1980-х годах. Обязательное место для посещения благодаря своей исторической значимости и живой атмосфере, площадь Вацлава также является домом для знаковых достопримечательностей, таких как Национальный музей и внушительная статуя короля Вацлава.</p></div>
+<p class="place-meta">Адрес: Jiráskovo náměstí 1981/6 | Период: 1992–1996</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/prague_dancing_house.jpg" alt="Танцующий дом" width="1280" height="906" style="height: 137px; max-height: 137px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/prague_dancing_house_b.jpg" alt="Танцующий дом — вид 2" width="330" height="98" style="height: 137px; max-height: 137px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Танцующий дом (чеш. Tančící dům), также известный как Фред и Джинджер благодаря своему плавному силуэту, является модернистской достопримечательностью, спроектированной Фрэнком Гери и чешским архитектором Пьотром Эштетриком. Завершённый в 1996 году, он выделяется на фоне традиционной архитектуры Праги. Спроектировано канадско-американским архитектором Фрэнком Гери и чешским архитектором Пьетром Эштетриком. Расположен на улице Рейсек рядом с рекой Влтава. Символизирует слияние западно- и восточноевропейской эстетики. Вдохновленный танцевальным партнерством Фреда Астера и Джинджер Роджерс. Признано одним из самых значительных современных сооружений Европы.</p>
+<p class="prose">Построенный в период с 1992 по 1996 год, Танцующий дом был возведен в эпоху политических перемен в Чехословакии после падения коммунизма. Уникальный дизайн здания отражает сотрудничество двух архитекторов: Гери внес свой авангардный стиль, в то время как Эштетрик интегрировал местные архитектурные традиции. Его характерная форма стала знаковым символом города. Посетители приходят, чтобы увидеть инновационную архитектуру и игривую, динамичную форму, которая резко контрастирует с окружающими историческими зданиями.</p></div>
 </section>
 <section class="place" id="prague_zizkov_tower">
+<div class="place-lead">
 <h3>Телевизионная башня Жижков</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
 
 <p class="place-meta">Период: 1992</p>
-<figure class="place-fig"><img src="../images/prague_zizkov_tower.jpg" alt="Телевизионная башня Жижков"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/prague_zizkov_tower.jpg" alt="Телевизионная башня Жижков" width="1200" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/prague_zizkov_tower_b.jpg" alt="Телевизионная башня Жижков — вид 2" width="330" height="495" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">С доминирующим силуэтом на горизонте Праги с момента своего завершения в 1992 году, Телевизионная башня Жижков является современным чудом, которое считается одной из самых высоких конструкций Европы. Ее характерный дизайн и внушительное присутствие делают ее культовым символом чешской столицы. Высотой 160 метров, это вторая по высоте структура в Праге после Карлова моста. Башня располагает вращающимся рестораном, предлагающим панорамные обеды. Он служит как культурной достопримечательностью, так и функциональным центром вещания. Его необычный дизайн принес ему признание в качестве кандидата на статус объекта Всемирного наследия ЮНЕСКО. Открытый в переходный период после падения коммунизма, он символизирует надежду и прогресс.</p>
 <p class="prose">Построенная в период с 1985 по 1992 год, телевизионная башня Жижков изначально предназначалась для обслуживания чешского телевидения. Спроектированная архитектором Яном Каплицким, она имеет уникальную форму, вдохновленную структурой молекул ДНК. Башня стала известна не только благодаря своей функциональности, но и благодаря своему яркому внешнему виду, который стал синонимом городской среды Праги. Посетители приходят сюда, чтобы насладиться захватывающими видами Праги, включая Староместскую площадь, Карлов мост и реку Влтаву, все это на фоне самой башни.</p></div>
+</section>
+<section class="place" id="prague_infant_jesus_prague_church">
+<div class="place-lead">
+<h3>Церковь Непорочного Зачатия Пресвятой Девы Марии</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Период: 1370–1489</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/prague_infant_jesus_prague_church.jpg" alt="Церковь Непорочного Зачатия Пресвятой Девы Марии" width="1242" height="1600" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/prague_infant_jesus_prague_church_b.jpg" alt="Церковь Непорочного Зачатия Пресвятой Девы Марии — вид 2" width="330" height="247" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Церковь Девы Марии Виктории, также известная как Церковь Тына, является выдающимся памятником в Старом городе Праги. Ее впечатляющая готическая архитектура и три башни делают ее одной из самых знаковых строений города. Он включает три высокие башни, которые доминируют над горизонтом Староместской площади. Интерьер украшен сложными резьбами и картинами, изображающими библейские сцены. Его алтарь содержит ценные золотые и серебряные артефакты, относящиеся к 15 веку. Церковь претерпела несколько реставраций на протяжении веков, но сохраняет большую часть своего оригинального средневекового характера. Рядом с церковью находятся руины часовни Святого Иакова, которые предоставляют дополнительные сведения о её истории.</p>
+<p class="prose">Церковь, построенная в период с 1370 по 1489 год, была возведена во время правления короля Карла IV. Изначально она должна была стать частью более крупного комплекса, однако строительство было прервано Гуситскими войнами. Позже церковь стала символом религиозной победы после битвы на Белой горе в 1620 году, откуда и произошло её название «Наша Госпожа Победоносная». Посетители приходят сюда ради его потрясающего готического дизайна и исторического значения, особенно впечатляющего алтаря и витражей.</p></div>
+</section>
+<section class="place" id="prague_st_nicholas_mala_strana">
+<div class="place-lead">
+<h3>Церковь Святого Николая, Малая Страна</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Malostranské náměstí, Malá Strana</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/prague_st_nicholas_mala_strana.jpg" alt="Церковь Святого Николая, Малая Страна" width="1600" height="1525" style="height: 440px; max-height: 440px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/prague_st_nicholas_mala_strana_b.jpg" alt="Церковь Святого Николая, Малая Страна — вид 2" width="330" height="495" style="height: 440px; max-height: 440px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
+<div class="place-desc"><p class="prose">Расположенная на холме с видом на реку Влтава, церковь Святого Николая является одной из самых знаковых достопримечательностей Праги, величественно возвышаясь над живописным районом Малая Страна. Церковь была основана королем Вацлавом II в 1349 году. Он имеет характерную шпиль с замысловатыми резьбами и скульптурами. Внутри посетители могут увидеть барочные алтари и фрески известных художников. Его расположение предоставляет отличные возможности для фотографий благодаря своему высокому положению. Интерьер включает крипту, в которой находятся останки некоторых выдающихся личностей.</p>
+<p class="prose">Построенная в позднеготическом стиле в начале XIV века, церковь Святого Николая изначально была возведена как францисканский монастырь и церковь. Со временем она претерпела несколько ремонтов, включая барочные изменения в XVIII веке, которые добавили роскошные интерьеры и декоративные фасады. Колокольня церкви предлагает панорамные виды на городской пейзаж, что делает её популярной смотровой площадкой для туристов. Посетители приезжают, чтобы восхититься его архитектурной красотой, историческим значением и захватывающими видами на реку и окружающие территории.</p></div>
+</section>
+<section class="place" id="prague_troja_castle">
+<div class="place-lead">
+<h3>Шато Троя</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: U trojského zámku 1, Prague 7</p>
+<figure class="place-fig place-fig--hi-res"><img src="../images/prague_troja_castle.jpg" alt="Шато Троя" width="1600" height="900"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Высоко над Прагой расположено шато Троя, величественный барочный дворец, который возвышается над рекой Влтава и знаковым горизонтом Праги. Его элегантный фасад и захватывающие виды делают его одним из самых живописных мест города. Он отличается роскошными интерьерами с изысканными украшениями, характерными для эпохи барокко. Территория включает в себяFormal сады и парковые зоны, которые занимают несколько гектаров. Посетители могут наслаждаться экскурсиями, исследуя исторические залы и художественные коллекции. Его расположение на вершине холма предоставляет непревзойденные виды на Пражский замок и Старый город. Сегодня шато проводит культурные мероприятия, выставки и концерты.</p>
+<p class="prose">Построенный в середине XVIII века архитектором Яном Блахой для графа Франтишека Антонина из Моравского Трбоми́ра, шато изначально предназначался как летняя резиденция. Позже он стал военным казармом во время Второй мировой войны, прежде чем быть восстановленным до своего прежнего величия в конце XX века. Шато предлагает потрясающие панорамные виды на Прагу и является свидетельством богатого архитектурного наследия города.</p></div>
 </section>
 </body>
 </html>

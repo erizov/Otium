@@ -113,6 +113,11 @@ _GUIDE_TO_CONFIG: dict[str, tuple[str, str, str]] = {
         "LANDMARK_IMAGE_FALLBACKS",
     ),
     "cafes": ("cafe_image_urls.py", "CAFE_IMAGE_DOWNLOADS", "CAFE_IMAGE_FALLBACKS"),
+    "osobnjaki": (
+        "osobnjaki_image_urls.py",
+        "OSOBNJAKI_IMAGE_DOWNLOADS",
+        "OSOBNJAKI_IMAGE_FALLBACKS",
+    ),
 }
 
 _SKIP_PREFIXES = ("https://example.com/", "http://example.com/")

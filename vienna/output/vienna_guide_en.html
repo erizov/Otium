@@ -13,7 +13,7 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
 .otium-logo { font-family: 'Vollkorn', serif; font-size: 2.15rem;
   font-weight: 600; letter-spacing: 0.18em; margin-bottom: 0.85rem; }
 .otiump { margin: 0.42rem 0; line-height: 1.42; text-align: justify;
-  max-width: 38rem; font-size: 0.95rem; }
+  font-size: 0.95rem; }
 .guide-title { page-break-after: auto; margin-bottom: 0.55rem;
   page-break-inside: avoid; }
 .historical-reference { margin: 0.75rem 0 1.15rem;
@@ -63,22 +63,103 @@ ol.trip-stops a:hover { text-decoration: underline; }
 .heraldry-univ-caption { font-size: 0.52rem; line-height: 1.18;
   margin: 0.12rem 0 0; padding: 0 0.06rem; color: #252525;
   text-align: center; font-weight: 500; }
-.heraldry-motto { text-align: center; max-width: 18rem; margin: 0.18rem auto;
+.heraldry-motto { text-align: center; margin: 0.18rem auto;
   width: 100%; }
 .motto-line { font-family: 'Vollkorn', serif; font-size: 1rem;
   margin: 0; color: #333; line-height: 1.35; }
 .guide-title h1.guide-title-main { font-family: 'Vollkorn', serif;
   font-size: 2.35rem; margin-bottom: 0.5rem; font-weight: 600; }
 .lead { color: #444; font-size: 1.05rem; }
-.guide-toc { margin: 0.85rem 0 1.15rem; page-break-inside: avoid; }
-.guide-toc h2 { font-family: 'Vollkorn', serif; font-size: 1.28rem;
-  font-weight: 600; margin: 0.4rem 0 0.55rem; }
+
+.guide-toc { page-break-before: always; break-before: page;
+  page-break-after: always; break-after: page;
+  margin: 0; padding: 0.2rem 0 0.45rem; page-break-inside: auto; }
+.guide-toc h2 { font-family: 'Vollkorn', serif;
+  font-size: 1.28rem; font-weight: 600; margin: 0.4rem 0 0.55rem; }
 .guide-toc ol { margin: 0.35rem 0 0.65rem 1.25rem; padding: 0;
   columns: 2; column-gap: 1.5rem; }
 .guide-toc li { margin: 0.18rem 0; line-height: 1.35;
   font-size: 0.88rem; break-inside: avoid; }
-.guide-toc a { color: #1a5276; text-decoration: none; }
+.guide-toc a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.guide-toc a:hover { color: #0d3d56; }
 .guide-toc li.toc-item--sub { font-size: 0.82rem; margin-left: 0.35rem; }
+.toc-back { font-size: 0.78rem; margin: 0 0 0.35rem; text-align: right; }
+.toc-back a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.toc-back a:hover { color: #0d3d56; }
+.place, .historical-reference, .guide-primer, .guide-trip-plans {
+  scroll-margin-top: 1.25rem; }
+.historical-reference h2, .guide-primer h2, .guide-trip-plans h2,
+.chapter-head h2, .place-lead h3 { position: relative; }
+.guide-toc + .place, .guide-toc + .chapter-head {
+  page-break-before: avoid; break-before: avoid-page; }
+.place-lead { page-break-inside: avoid; break-inside: avoid-page;
+  page-break-after: auto; }
+.place-lead > h3 { page-break-after: avoid; break-after: avoid-page; }
+.place-lead > .place-meta { page-break-after: avoid; break-after: avoid-page; }
+
+.place-fig { page-break-inside: avoid; break-inside: avoid-page;
+  margin: 0.5rem 0 1rem; }
+.place-fig img {
+  page-break-inside: avoid; break-inside: avoid-page;
+  max-height: 48vh; width: auto; max-width: 100%;
+  object-fit: contain; margin-left: auto; margin-right: auto; }
+.place-fig--hi-res img { max-height: 52vh; }
+.place-fig--lo-res img { max-height: 30vh; }
+.place-pdf-fig-row {
+  display: flex; flex-direction: row; flex-wrap: wrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.45rem 0.55rem; margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row .place-fig {
+  flex: 1 1 30%; margin: 0; min-width: 26%; max-width: 100%; }
+.place-pdf-fig-row .place-fig img {
+  width: auto; max-width: 100%; height: auto; max-height: 44vh;
+  object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--pair {
+  flex-wrap: nowrap; justify-content: space-between;
+  align-items: flex-end; gap: 0.5rem 0.65rem; }
+.place-pdf-fig-row--pair .place-fig {
+  flex: 1 1 47%; min-width: 0; max-width: 50%;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--pair .place-fig img {
+  max-height: 44vh; object-fit: contain; }
+.place-pdf-fig-row--pair .place-fig--hi-res img { max-height: 52vh; }
+.place-pdf-fig-row--pair .place-fig--lo-res img { max-height: 26vh; }
+.place-pdf-fig-row--pair .place-fig--row-sized img,
+.place-pdf-fig-row--triple .place-fig--row-sized img,
+.place-pdf-fig-row--many .place-fig--row-sized img {
+  width: auto; max-width: 100%; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row .place-fig--row-sized.place-fig--hi-res img,
+.place-pdf-fig-row .place-fig--row-sized.place-fig--lo-res img {
+  max-height: unset; }
+.place-pdf-fig-rows-stack {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple {
+  display: flex; flex-direction: row; flex-wrap: nowrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.4rem 0.48rem; margin: 0;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--triple .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--triple .place-fig--hi-res img { max-height: 42vh; }
+.place-pdf-fig-row--triple .place-fig--lo-res img { max-height: 18vh; }
+.place-pdf-fig-row--many {
+  flex-wrap: nowrap; justify-content: center; align-items: flex-end;
+  gap: 0.35rem 0.42rem; }
+.place-pdf-fig-row--many .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--many .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+
+
 .place { margin-bottom: 2.2rem; page-break-inside: auto; }
 h3 { font-family: 'Vollkorn', serif; font-size: 1.22rem; margin: 1.2rem 0 0.35rem;
   font-weight: 600; }
@@ -90,7 +171,6 @@ h4 { font-family: 'Vollkorn', serif; font-size: 0.95rem; text-transform: upperca
   color: #555; font-size: 0.95rem; margin: 0 0 0.5rem; font-style: italic; }
 .place-meta { font-size: 0.92rem; color: #353535; margin: 0 0 0.75rem;
   line-height: 1.4; }
-.place-fig { margin: 0.5rem 0 1rem; }
 img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
 .prose, .place-desc p { margin: 0.45rem 0; line-height: 1.5;
   text-align: justify; }
@@ -109,8 +189,10 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <div class="heraldry-strip heraldry-official">
 <figure class="heraldry-fig heraldry-coat-book" title="City emblem"><img src="../images/guide_coat_of_arms.svg" alt="City emblem"/></figure>
 <figure class="heraldry-fig heraldry-coat-book" title="Flag"><img src="../images/guide_flag.svg" alt="Flag"/></figure>
-</div></div><h1 class="guide-title-main">Vienna</h1><p class="lead">Guide. Places in this edition: 33.</p></header>
+</div></div><h1 class="guide-title-main">Vienna</h1><p class="lead">Guide. Places in this edition: 32.</p></header>
+<nav class="guide-toc" id="guide-toc" aria-label="Contents"><h2>Contents</h2><ol><li class="toc-item"><a href="#guide-trips">Trip ideas</a></li><li class="toc-item"><a href="#vienna_albertina">Albertina</a></li><li class="toc-item"><a href="#vienna_ankeruhr_vienna">Ankeruhr</a></li><li class="toc-item"><a href="#vienna_austrian_parliament">Austrian Parliament</a></li><li class="toc-item"><a href="#vienna_belvedere_vienna">Belvedere</a></li><li class="toc-item"><a href="#vienna_ruprechtskirche_vienna">Church of St. Rupert</a></li><li class="toc-item"><a href="#vienna_donauturm">Danube Tower</a></li><li class="toc-item"><a href="#vienna_hofburg_vienna">Hofburg</a></li><li class="toc-item"><a href="#vienna_haus_der_musik_wien">House of Music Vienna</a></li><li class="toc-item"><a href="#vienna_hundertwasserhaus">Hundertwasserhaus</a></li><li class="toc-item"><a href="#vienna_judenplatz_holocaust_memorial">Judenplatz Holocaust Memorial</a></li><li class="toc-item"><a href="#vienna_karlskirche">Karlskirche</a></li><li class="toc-item"><a href="#vienna_kunsthistorisches_museum">Kunsthistorisches Museum</a></li><li class="toc-item"><a href="#vienna_maria_theresien_denkmal">Maria Theresa Memorial</a></li><li class="toc-item"><a href="#vienna_mozarthaus_vienna">Mozarthaus Vienna</a></li><li class="toc-item"><a href="#vienna_museumsquartier">MuseumsQuartier</a></li><li class="toc-item"><a href="#vienna_naschmarkt">Naschmarkt</a></li><li class="toc-item"><a href="#vienna_naturhistorisches_museum">Natural History Museum</a></li><li class="toc-item"><a href="#vienna_prater_hauptallee">Prater Hauptallee</a></li><li class="toc-item"><a href="#vienna_schoenbrunn_palace">Schönbrunn Palace</a></li><li class="toc-item"><a href="#vienna_tiergarten_schoenbrunn">Schönbrunn Zoo</a></li><li class="toc-item"><a href="#vienna_freud_memorial">Sigmund Freud Memorial</a></li><li class="toc-item"><a href="#vienna_spanish_riding_school">Spanish Riding School</a></li><li class="toc-item"><a href="#vienna_spanische_hofreitschule_facade">Spanish Riding School façade</a></li><li class="toc-item"><a href="#vienna_stephansdom">St. Stephen&#x27;s Cathedral</a></li><li class="toc-item"><a href="#vienna_stadtpark_vienna">Stadtpark</a></li><li class="toc-item"><a href="#vienna_stephansplatz">Stephansplatz</a></li><li class="toc-item"><a href="#vienna_urania_vienna">Urania Observatory</a></li><li class="toc-item"><a href="#vienna_rathaus_vienna">Vienna City Hall</a></li><li class="toc-item"><a href="#vienna_technisches_museum_wien">Vienna Museum of Science and Technology</a></li><li class="toc-item"><a href="#vienna_state_opera">Vienna State Opera</a></li><li class="toc-item"><a href="#vienna_volksgarten_vienna">Volksgarten</a></li><li class="toc-item"><a href="#vienna_prater_riesenrad">Wiener Riesenrad</a></li></ol></nav>
 <section class="guide-trip-plans" id="guide-trips" aria-label="Trip ideas"><h2>Trip ideas</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 <article class="trip-plan" id="trip-1d"><h3>One day</h3>
 <p class="prose">A compact loop linking the strongest cards in this guide, ordered to minimise backtracking on foot.</p>
 <ol class="trip-stops"><li><a href="#vienna_albertina">Albertina</a> (~75min)</li>
@@ -140,266 +222,442 @@ ul.facts li, ul.stories li { margin: 0.25rem 0; line-height: 1.45; }
 <li><a href="#vienna_karlskirche">Karlskirche</a> (~75min)</li>
 <li><a href="#vienna_kunsthistorisches_museum">Kunsthistorisches Museum</a> (~75min)</li>
 <li><a href="#vienna_maria_theresien_denkmal">Maria Theresa Memorial</a> (~75min)</li></ol></article></section>
-<nav class="guide-toc" aria-label="Contents"><h2>Contents</h2><ol><li class="toc-item"><a href="#guide-trips">Trip ideas</a></li><li class="toc-item"><a href="#vienna_albertina">Albertina</a></li><li class="toc-item"><a href="#vienna_ankeruhr_vienna">Ankeruhr</a></li><li class="toc-item"><a href="#vienna_austrian_parliament">Austrian Parliament</a></li><li class="toc-item"><a href="#vienna_belvedere_vienna">Belvedere</a></li><li class="toc-item"><a href="#vienna_ruprechtskirche_vienna">Church of St. Rupert</a></li><li class="toc-item"><a href="#vienna_donauturm">Danube Tower</a></li><li class="toc-item"><a href="#vienna_hofburg_vienna">Hofburg</a></li><li class="toc-item"><a href="#vienna_haus_der_musik_wien">House of Music Vienna</a></li><li class="toc-item"><a href="#vienna_hundertwasserhaus">Hundertwasserhaus</a></li><li class="toc-item"><a href="#vienna_pdfband_2_025b2e6e">Iran nuclear negotiation team at Islamisches Zentrum Imam Ali (04)</a></li><li class="toc-item"><a href="#vienna_judenplatz_holocaust_memorial">Judenplatz Holocaust Memorial</a></li><li class="toc-item"><a href="#vienna_karlskirche">Karlskirche</a></li><li class="toc-item"><a href="#vienna_kunsthistorisches_museum">Kunsthistorisches Museum</a></li><li class="toc-item"><a href="#vienna_maria_theresien_denkmal">Maria Theresa Memorial</a></li><li class="toc-item"><a href="#vienna_mozarthaus_vienna">Mozarthaus Vienna</a></li><li class="toc-item"><a href="#vienna_museumsquartier">MuseumsQuartier</a></li><li class="toc-item"><a href="#vienna_naschmarkt">Naschmarkt</a></li><li class="toc-item"><a href="#vienna_naturhistorisches_museum">Natural History Museum</a></li><li class="toc-item"><a href="#vienna_prater_hauptallee">Prater Hauptallee</a></li><li class="toc-item"><a href="#vienna_schoenbrunn_palace">Schönbrunn Palace</a></li><li class="toc-item"><a href="#vienna_tiergarten_schoenbrunn">Schönbrunn Zoo</a></li><li class="toc-item"><a href="#vienna_freud_memorial">Sigmund Freud Memorial</a></li><li class="toc-item"><a href="#vienna_spanish_riding_school">Spanish Riding School</a></li><li class="toc-item"><a href="#vienna_spanische_hofreitschule_facade">Spanish Riding School façade</a></li><li class="toc-item"><a href="#vienna_stephansdom">St. Stephen&#x27;s Cathedral</a></li><li class="toc-item"><a href="#vienna_stadtpark_vienna">Stadtpark</a></li><li class="toc-item"><a href="#vienna_stephansplatz">Stephansplatz</a></li><li class="toc-item"><a href="#vienna_urania_vienna">Urania Observatory</a></li><li class="toc-item"><a href="#vienna_rathaus_vienna">Vienna City Hall</a></li><li class="toc-item"><a href="#vienna_technisches_museum_wien">Vienna Museum of Science and Technology</a></li><li class="toc-item"><a href="#vienna_state_opera">Vienna State Opera</a></li><li class="toc-item"><a href="#vienna_volksgarten_vienna">Volksgarten</a></li><li class="toc-item"><a href="#vienna_prater_riesenrad">Wiener Riesenrad</a></li></ol></nav>
 <section class="place" id="vienna_albertina">
+<div class="place-lead">
 <h3>Albertina</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Albertinaplatz 1, 1010 Wien | Style: Habsburg palace with modern galleries | Period: 1776</p>
-<figure class="place-fig"><img src="../images/vienna_albertina.jpg" alt="Albertina"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vienna_albertina.jpg" alt="Albertina" width="1280" height="960" style="height: 337px; max-height: 337px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vienna_albertina_b.jpg" alt="Albertina — view 2" width="330" height="241" style="height: 337px; max-height: 337px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Albertina is Vienna&#x27;s renowned museum of graphic arts and prints, showcasing masterpieces by artists such as Rembrandt, Rubens, Dürer, and Picasso. Houses over 65,000 works of art, including prints, drawings, watercolors, and engravings. Features an impressive collection of Old Master prints and drawings, with highlights like Rembrandt&#x27;s etchings and Rubens&#x27; sketches. Exhibits modern and contemporary art alongside historical pieces, showcasing Picasso, Klimt, and others. Regularly hosts temporary exhibitions that explore different periods and themes in art history. Located on the Ringstraße, adjacent to the Hofburg Palace. Print rooms and graphic collections among the world&#x27;s largest. State rooms overlook the opera roofline.</p>
 <p class="prose">Established in 1776 as the Imperial Picture Gallery, the Albertina evolved into a significant art institution during the reigns of Emperor Joseph II and Maria Theresa. It was named after Empress Maria Theresa&#x27;s daughter-in-law, Princess Sophie von Hohenlohe-Langenburg, who donated her extensive collection to the museum. Today it houses one of Europe’s most comprehensive collections of drawings and prints. Named for Duke Albert of Saxe-Teschen; expanded as a public museum. Visit the Albertina for its unparalleled collection of European prints and drawings spanning six centuries. Bridge between imperial residence layers and modern art shows.</p></div>
 </section>
 <section class="place" id="vienna_ankeruhr_vienna">
+<div class="place-lead">
 <h3>Ankeruhr</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Hoher Markt 10–11, 1010 Wien | Style: Jugendstil clock bridge, 1914 | Period: 1844</p>
-<figure class="place-fig"><img src="../images/vienna_ankeruhr_vienna.jpg" alt="Ankeruhr"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vienna_ankeruhr_vienna.jpg" alt="Ankeruhr" width="1200" height="1600" style="height: 462px; max-height: 462px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vienna_ankeruhr_vienna_b.jpg" alt="Ankeruhr — view 2" width="330" height="330" style="height: 462px; max-height: 462px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">It has been delighting visitors with its quaint charm and intricate design since the early 19th century. Constructed by master watchmaker Johann Schrötter in 1844. Features a mechanical anchor escapement mechanism that ensures precise timekeeping. Operates without batteries or electricity, relying solely on gravity and gears. Displays both hours and minutes, along with a small calendar indicating the day of the week. Surrounded by colorful Baroque architecture, making it a picturesque spot for photography. Twelve noon parade of historical figures across the dial. Commissioned by the Anker insurance company.</p>
 <p class="prose">Built in 1844, the Ankeruhr was originally installed to mark time for local residents and travelers. Over the years, it became a beloved landmark, attracting tourists and locals alike with its unique mechanism and meticulous craftsmanship. Franz Matsch design linking two buildings over the market. Visiting the Ankeruhr offers a glimpse into Vienna’s rich cultural heritage and provides a perfect opportunity to appreciate traditional Austrian craftsmanship. Beloved Old Town clock-watching ritual.</p></div>
 </section>
 <section class="place" id="vienna_austrian_parliament">
+<div class="place-lead">
 <h3>Austrian Parliament</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Dr.-Karl-Renner-Ring 3, 1010 Wien | Style: Greek Revival, Theophil Hansen, 1883 | Period: 1874–1904</p>
-<figure class="place-fig"><img src="../images/vienna_austrian_parliament.jpg" alt="Austrian Parliament"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vienna_austrian_parliament.jpg" alt="Austrian Parliament" width="1280" height="437" style="height: 157px; max-height: 157px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vienna_austrian_parliament_b.jpg" alt="Austrian Parliament — view 2" width="330" height="186" style="height: 157px; max-height: 157px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Austrian Parliament building is a majestic neo-Gothic structure located on the Ringstraße in Vienna&#x27;s Inner City. It was constructed between 1874 and 1904 to house the legislative branch of Austria-Hungary’s government. Construction began in 1874 and continued until 1904. It houses two chambers: the House of Representatives and the Federal Council. The building features intricate stone carvings depicting historical figures and scenes from Austrian history. Its interior includes lavishly decorated halls and rooms used for official sessions and ceremonies. The tower offers panoramic views of the city. Athena fountain fronts the ramp to the portico. Seat of the Nationalrat and Bundesrat.</p>
 <p class="prose">Designed by architects Carl von Hasenauer and Theophil Hansen, the parliament building reflects the grandiose aspirations of late-nineteenth-century Viennese architecture. Completed in stages over several decades, it became one of Europe&#x27;s most impressive examples of neo-Gothic design. Its towering spires and elaborate facades make it a symbol of both imperial grandeur and democratic governance. Built to embody democratic ideals of the 1867 constitution era. Visiting the Austrian Parliament allows visitors to witness the seat of power where key decisions affecting the region were made during its heyday as part of the Austro-Hungarian Empire. Political heart of the Republic on the Ringstraße.</p></div>
 </section>
 <section class="place" id="vienna_belvedere_vienna">
+<div class="place-lead">
 <h3>Belvedere</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Prinz-Eugen-Straße 27, 1030 Wien | Style: Baroque palace pair, Lukas von Hildebrandt | Period: 1714–1723</p>
-<figure class="place-fig"><img src="../images/vienna_belvedere_vienna.jpg" alt="Belvedere"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vienna_belvedere_vienna.jpg" alt="Belvedere" width="1280" height="1357" style="height: 203px; max-height: 203px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vienna_belvedere_vienna_b.jpg" alt="Belvedere — view 2" width="330" height="145" style="height: 203px; max-height: 203px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Belvedere Palace complex is one of Vienna&#x27;s most iconic landmarks, showcasing Baroque architecture at its finest. Comprised of two palaces—Upper and Lower Belvedere—they are set amidst extensive gardens and manicured grounds. The Upper Palace was originally designed to be larger but construction halted due to Prince Evgeniy&#x27;s death. The Lower Palace contains the Museum Moderner Kunst Stiftung Ludwig Wien (MUMOK), dedicated to modern and contemporary art. In 1961, the Lower Palace hosted the first solo exhibition of Egon Schiele’s work. Today, it also hosts temporary exhibitions of international art. Both palaces feature grand staircases and elaborate decorations typical of late Baroque style. Upper Belvedere holds Klimt&#x27;s The Kiss and major Austrian collections. Linked by formal cascade gardens.</p>
 <p class="prose">Built between 1714 and 1723 by architect Nicolaus Pacassi for Prince Evgeniy of Savoy, the Upper and Lower Belvedere were intended as summer residences. The Upper Palace features lavish interiors with frescoes by artists like Antonio Verrio, while the Lower Palace houses a renowned art collection that includes works by Klimt, Schiele, and Kokoschka. Built for Prince Eugene of Savoy as a garden villa ensemble. A must-visit for art lovers, the Belvedere showcases masterpieces from Austria’s Golden Age and offers stunning views over the city. Art museum campus and Baroque landmark facing the city center.</p></div>
 </section>
 <section class="place" id="vienna_ruprechtskirche_vienna">
+<div class="place-lead">
 <h3>Church of St. Rupert</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Ruprechtsplatz, 1010 Wien | Style: Romanesque church, 12th–13th c. | Period: 1746–1758</p>
-<figure class="place-fig"><img src="../images/vienna_ruprechtskirche_vienna.jpg" alt="Church of St. Rupert"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vienna_ruprechtskirche_vienna.jpg" alt="Church of St. Rupert" width="1200" height="1600" style="height: 302px; max-height: 302px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vienna_ruprechtskirche_vienna_b.jpg" alt="Church of St. Rupert — view 2" width="330" height="216" style="height: 302px; max-height: 302px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Church of St. Rupert is a Baroque masterpiece located on the outskirts of Vienna&#x27;s inner city, known for its striking white façade and intricate interior decoration. It houses the tomb of Emperor Ferdinand III, who reigned during the Thirty Years&#x27; War. Its interior boasts elaborate frescoes painted by Giovanni Battista Tiepolo, one of Europe’s most celebrated artists at the time. The altar contains sculptures by Franz Anton Maulbertsch, renowned for his work in marble and bronze. The organ was constructed by famous Viennese instrument maker Ignaz Tobias Schreiber. Adjacent to the church stands the historic St. Often cited as Vienna&#x27;s oldest church building fabric. Named for Salzburg&#x27;s patron St.</p>
 <p class="prose">Built between 1746 and 1758 under Empress Maria Theresa, the church was designed by architect Joseph Emanuel Fischer von Erlach to serve as a focal point for religious life in the city&#x27;s northern district. It features an elegant dome and classical columns, showcasing the architectural style of late Rococo with influences from Italian Baroque. Stood near Danube landing before river regulation moved the shore. Visitors come here to admire the exquisite Baroque artistry and to experience the serene atmosphere within its soaring nave. Quiet Romanesque contrast to Baroque domes nearby.</p></div>
 </section>
 <section class="place" id="vienna_donauturm">
+<div class="place-lead">
 <h3>Danube Tower</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
-<p class="place-meta">Address: Donauturmstraße 8, 1220 Wien | Style: Concrete TV tower, 1964 | Period: 2003–2006</p>
-<figure class="place-fig"><img src="../images/vienna_donauturm.jpg" alt="Danube Tower"/></figure>
+<p class="place-meta">Location: Donauturmstraße 8, 1220 Wien | Style: Concrete TV tower, 1964 | Period: 2003–2006</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vienna_donauturm.jpg" alt="Danube Tower" width="1198" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vienna_donauturm_b.jpg" alt="Danube Tower — view 2" width="330" height="495" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Situated on the outskirts of Vienna&#x27;s city centre, Danube Tower offers panoramic views across the Danube River and the surrounding suburbs. Its modern design and glass facade make it a striking addition to the city&#x27;s skyline. The tower stands at 94 meters tall, making it one of the tallest buildings in Vienna. It houses apartments, offices, and retail spaces, catering to various needs within the community. Its transparent glass exterior allows natural light to flood into interior spaces, reducing energy consumption. Guests can enjoy drinks and snacks at the observation deck located near the top floor. Construction began in 2003 and took three years to complete. 252 m height with revolving café and viewing deck. Built for the 1964 international garden show on new Danube islands.</p>
 <p class="prose">Completed in 2006, Danube Tower was designed by Austrian architect Karl Schwanzer as part of the larger development project along the Danube Canal. It serves both residential and commercial purposes, blending contemporary architecture with sustainable features such as solar panels and energy-efficient lighting. Symbol of postwar modern Vienna&#x27;s Danube reclamation projects. Visitors come here for its breathtaking views of the city and river, providing a unique perspective that cannot be experienced elsewhere in Vienna. Panorama over city, river, and hills from the northeast.</p></div>
 </section>
 <section class="place" id="vienna_hofburg_vienna">
+<div class="place-lead">
 <h3>Hofburg</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Michaelerkuppel, 1010 Wien | Style: Medieval to 19th-c. palace wings | Period: 13th century (original construction); expanded and renovated throughout the centuries</p>
-<figure class="place-fig"><img src="../images/vienna_hofburg_vienna.jpg" alt="Hofburg"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vienna_hofburg_vienna.jpg" alt="Hofburg" width="1280" height="395" style="height: 142px; max-height: 142px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vienna_hofburg_vienna_b.jpg" alt="Hofburg — view 2" width="330" height="435" style="height: 142px; max-height: 142px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Hofburg Palace is Vienna&#x27;s grand historical centerpiece, a vast complex of buildings housing the Imperial Apartments and serving as the former residence of Austrian emperors. It was the official home of the Habsburgs for nearly six hundred years. Today, it serves as the headquarters of the Austrian Federal President. The palace includes the Spanish Riding School, famous for its elegant Lipizzaner horse performances. Its extensive gardens are open to the public and offer serene outdoor spaces. The Hofburg Museum displays important works by artists such as Rubens, Van Dyck, and Tiepolo. Seat of Habsburg power for centuries; now president&#x27;s offices and museums. Includes Spanish Riding School stables, chapels, and libraries.</p>
 <p class="prose">Originally built in the 13th century as a fortress, the Hofburg evolved into a royal palace over centuries. It became the primary residence of Habsburg rulers during the Renaissance era and remained so until the end of World War I. Today it houses museums, art collections, and offices, showcasing its rich architectural heritage and cultural significance. Grew from medieval castle into a city-sized palace over dynastic reigns. Visit Hofburg to explore the opulent Imperial Apartments, admire the Kunsthistorizismus style architecture, and immerse yourself in Austria’s imperial past. Geographic and symbolic center of historic Vienna.</p></div>
 </section>
 <section class="place" id="vienna_haus_der_musik_wien">
+<div class="place-lead">
 <h3>House of Music Vienna</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Seilerstätte 30, 1010 Wien | Style: Historic palace with interactive galleries | Period: 2001</p>
-<figure class="place-fig"><img src="../images/vienna_haus_der_musik_wien.jpg" alt="House of Music Vienna"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vienna_haus_der_musik_wien.jpg" alt="House of Music Vienna" width="1200" height="1600" style="height: 203px; max-height: 203px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vienna_haus_der_musik_wien_b.jpg" alt="House of Music Vienna — view 2" width="330" height="145" style="height: 203px; max-height: 203px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The House of Music Vienna is a unique museum dedicated to the art and science of music. Located in the heart of the city, it offers interactive exhibits that explore the history, theory, and technology behind musical instruments and sound. It features over 400 musical instruments from around the world. Interactive exhibits allow visitors to experiment with sound and music production. The museum houses a collection of vintage synthesizers and electronic equipment. Guests can learn about the physics of sound and its relationship to acoustics. Regular concerts and workshops are held throughout the year. Hands-on sound physics and Vienna Philharmonic storylines. Housed in the former Archduke Charles palace.</p>
 <p class="prose">Opened in 2001, the House of Music Vienna was designed by architect Helene Bechthold as part of the city&#x27;s cultural revitalization efforts. It showcases state-of-the-art installations and provides visitors with hands-on experiences, making it both educational and entertaining. Opened 2000 as a high-tech complement to traditional concert life. Visiting the House of Music allows guests to gain insight into how music is created, performed, and perceived through innovative displays and demonstrations. Family-friendly introduction to acoustics and composers.</p></div>
 </section>
 <section class="place" id="vienna_hundertwasserhaus">
+<div class="place-lead">
 <h3>Hundertwasserhaus</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Kegelgasse 34–38, 1030 Wien | Style: Expressionist housing, Hundertwasser, 1985 | Period: 1986</p>
-<figure class="place-fig"><img src="../images/vienna_hundertwasserhaus.jpg" alt="Hundertwasserhaus"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vienna_hundertwasserhaus.jpg" alt="Hundertwasserhaus" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vienna_hundertwasserhaus_b.jpg" alt="Hundertwasserhaus — view 2" width="330" height="495" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Hundertwasserhaus is a vibrant and colorful residential building located in Vienna&#x27;s Alsergrund district. Designed by Austrian artist Friedensreich Hundertwasser, it stands out with its unique architecture featuring undulating walls, organic shapes, and abundant greenery. It features over 200 trees and plants on its roof and exterior walls. Each floor has a different color scheme inspired by Hundertwasser’s artistic vision. The building houses both apartments and commercial spaces. Its sloping walls provide natural insulation against heat and cold. Friedensreich Hundertwasser also designed the interior murals and furniture. Undulating floors, tree tenants, and polychrome façade. Adjacent village has cafés and Hundertwasser exhibits.</p>
 <p class="prose">Completed in 1986, the Hundertwasserhaus was created as a collaborative project between architect Friedensreich Hundertwasser and builder Karl Schärf. The building represents Hundertwasser’s philosophy of harmony between humans, nature, and architecture. Its distinctive design has made it one of Vienna’s most iconic landmarks. Municipal housing project co-designed with architect Josef Krawina as an artistic statement. Visitors come to experience the lively atmosphere and creative design that blend art, architecture, and urban living. Most photographed alternative architecture stop in Vienna.</p></div>
 </section>
-<section class="place" id="vienna_pdfband_2_025b2e6e">
-<h3>Iran nuclear negotiation team at Islamisches Zentrum Imam Ali (04)</h3>
-
-<p class="place-meta">Address: See official visitor information.</p>
-<figure class="place-fig"><img src="../images/vienna_pdfband_2_025b2e6e.jpg" alt="Iran nuclear negotiation team at Islamisches Zentrum Imam Ali (04)"/></figure>
-</section>
 <section class="place" id="vienna_judenplatz_holocaust_memorial">
+<div class="place-lead">
 <h3>Judenplatz Holocaust Memorial</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Judenplatz, 1010 Wien | Style: Rachel Whiteread concrete library, 2000 | Period: 2000</p>
-<figure class="place-fig"><img src="../images/vienna_judenplatz_holocaust_memorial.jpg" alt="Judenplatz Holocaust Memorial"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vienna_judenplatz_holocaust_memorial.jpg" alt="Judenplatz Holocaust Memorial" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vienna_judenplatz_holocaust_memorial_b.jpg" alt="Judenplatz Holocaust Memorial — view 2" width="330" height="220" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Judenplatz Holocaust Memorial is a poignant and reflective space dedicated to the memory of Vienna&#x27;s Jewish community during World War II. Located near the historic Judenplatz, it serves as both a memorial and a reminder of the city&#x27;s tragic past. It is situated at the heart of Vienna’s historical center, close to the famous Stephansdom Cathedral. The memorial was funded through private donations and government support. The design incorporates modernist elements while respecting the surrounding historical architecture. Each block represents one aspect of the Holocaust experience: deportation, persecution, and remembrance. A nearby museum provides additional context and information about the history of Vienna&#x27;s Jewish community. Names of Austrian Holocaust victims inscribed on surrounding walls. Stands over medieval synagogue ruins visible underground.</p>
 <p class="prose">Designed by architect Pyotr Kulka and artist Fritz Wotruba, the memorial was completed in 2000. It consists of three large blocks of concrete arranged in a circle, symbolizing the victims of the Holocaust. The site also includes a square with a bronze plaque that lists the names of Jews deported from Vienna between 1941 and 1945. Commemorates the 1421 Vienna Gesera and 20th-century Shoah. Visiting the Judenplatz Holocaust Memorial allows visitors to reflect on the horrors of the Holocaust and pay tribute to those who suffered and died during this dark chapter in history. Quiet counterpoint to café life on the old Jewish square.</p></div>
 </section>
 <section class="place" id="vienna_karlskirche">
+<div class="place-lead">
 <h3>Karlskirche</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Karlsplatz, 1040 Wien | Style: Baroque church, Fischer von Erlach, 1716+ | Period: 1716–1737</p>
-<figure class="place-fig"><img src="../images/vienna_karlskirche.jpg" alt="Karlskirche"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vienna_karlskirche.jpg" alt="Karlskirche" width="1280" height="1280" style="height: 273px; max-height: 273px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vienna_karlskirche_b.jpg" alt="Karlskirche — view 2" width="330" height="195" style="height: 273px; max-height: 273px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Karlskirche, a baroque masterpiece, rises majestically on Vienna&#x27;s Ringstrasse, dominating the skyline with its dome and twin towers. It is dedicated to Saint Charles Borromeo, who was believed to have interceded during the emperor&#x27;s illness. The church features two distinctive towers topped with domes, symbolizing faith and reason. Inside, the ceiling frescoes depict scenes from the life of Saint Charles Borromeo. Its location on the Ringstrasse makes it easily accessible and offers panoramic views of the city. The interior is known for its intricate stuccowork and gold leaf decoration. Votive church for plague relief; twin columns echo Trajan&#x27;s Column. Lift to dome fresco viewing available seasonally.</p>
 <p class="prose">Built between 1716 and 1737, the Karlskirche was commissioned by Emperor Charles VI to commemorate his recovery from smallpox. Designed by Johann Bernhard Fischer von Erlach, it combines elements of Baroque architecture with classical influences, making it one of Vienna’s most iconic landmarks. Commissioned by Charles VI after the 1713 plague vow; completed by son Joseph. Visit the Karlskirche for its breathtaking interior, ornate stucco work, and stunning views overlooking the city center. Dominant Karlsplatz landmark between Ring and Naschmarkt.</p></div>
 </section>
 <section class="place" id="vienna_kunsthistorisches_museum">
+<div class="place-lead">
 <h3>Kunsthistorisches Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Maria-Theresien-Platz, 1010 Wien | Style: Historicist palace museum, 1891 | Period: 1891</p>
-<figure class="place-fig"><img src="../images/vienna_kunsthistorisches_museum.jpg" alt="Kunsthistorisches Museum"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vienna_kunsthistorisches_museum.jpg" alt="Kunsthistorisches Museum" width="1280" height="825" style="height: 297px; max-height: 297px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--row-sized"><img src="../images/vienna_kunsthistorisches_museum_b.jpg" alt="Kunsthistorisches Museum — view 2" width="330" height="612" style="height: 297px; max-height: 297px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Kunsthistorisches Museum is one of Vienna&#x27;s most iconic cultural institutions, showcasing masterpieces from ancient civilizations to the Baroque era. Opened in 1891 as part of Emperor Franz Joseph I&#x27;s vision to display his family&#x27;s artistic treasures. Houses more than 600,000 objects, including works by Titian, Rembrandt, Rubens, and Van Dyck. The Hall of Monsters and Marvels contains rare natural history specimens and curiosities. Adjacent to the Natural History Museum, both buildings share a common atrium known as the Great Court. Features a stunning central staircase decorated with statues depicting famous artists. Habsburg painting collections including Bruegel masterworks. Grand staircase and dome interiors match the Naturhistorisches twin.</p>
 <p class="prose">Built between 1872 and 1891, the museum was designed by architect Gottfried Semper in a grand Beaux-Arts style. It originally housed the imperial art collections, reflecting Austria-Hungary’s wealth and power during its heyday. The building&#x27;s lavish interiors feature marble floors, intricate stucco work, and ornate chandeliers, making it a testament to late-19th-century opulence. Opened with the twin museum to display imperial art and Wunderkammer legacies. Visit the Kunsthistorisches Museum for its extensive collection of European paintings, sculptures, and decorative arts spanning over two millennia. One of Europe&#x27;s great old-master museums.</p></div>
 </section>
 <section class="place" id="vienna_maria_theresien_denkmal">
+<div class="place-lead">
 <h3>Maria Theresa Memorial</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
-<p class="place-meta">Address: Maria-Theresien-Platz, 1010 Wien | Style: Monumental empress monument, 1888 | Period: 1968</p>
-<figure class="place-fig"><img src="../images/vienna_maria_theresien_denkmal.jpg" alt="Maria Theresa Memorial"/></figure>
+<p class="place-meta">Location: Maria-Theresien-Platz, 1010 Wien | Style: Monumental empress monument, 1888 | Period: 1968</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vienna_maria_theresien_denkmal.jpg" alt="Maria Theresa Memorial" width="1143" height="1600" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vienna_maria_theresien_denkmal_b.jpg" alt="Maria Theresa Memorial — view 2" width="330" height="247" style="height: 345px; max-height: 345px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Located on the bustling Graben shopping street, the Maria Theresa Memorial is a tribute to Austria&#x27;s influential empress and patron of arts. This elegant sculpture captures her regal bearing and dignified presence. The statue was created by Austrian artist Wilhelm von Rübezahl. It depicts Maria Theresa standing with her hands folded gracefully, wearing traditional royal attire. The memorial is situated at the intersection of two major pedestrian streets in downtown Vienna. This sculpture is part of the city&#x27;s extensive collection of historical monuments celebrating its rich heritage. In 1968, it marked the bicentennial anniversary of Maria Theresa&#x27;s death. Honors Maria Theresa surrounded by advisors and children in relief. Frames the twin museum façades photographically.</p>
 <p class="prose">Completed in 1968, the memorial was commissioned by the City of Vienna to honor Empress Maria Theresa, who reigned from 1740 to 1780. It stands as a symbol of her significant contributions to art, culture, and education during her reign. Erected long after her reign as Habsburg nostalgia peaked. Visiting the memorial allows visitors to appreciate the cultural legacy left by one of Austria’s most celebrated monarchs. Central pivot of the Museum Quarter approach from the Ring.</p></div>
 </section>
 <section class="place" id="vienna_mozarthaus_vienna">
+<div class="place-lead">
 <h3>Mozarthaus Vienna</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Domgasse 5, 1010 Wien | Style: Baroque apartment house, 17th c. | Period: around 1740</p>
-<figure class="place-fig"><img src="../images/vienna_mozarthaus_vienna.jpg" alt="Mozarthaus Vienna"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/vienna_mozarthaus_vienna_b.jpg" alt="Mozarthaus Vienna" width="330" height="220"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Step into the world of Mozart at Mozarthaus Vienna, a museum dedicated to the life and works of Wolfgang Amadeus Mozart. Located on Mozartstraße, it offers visitors a glimpse into his childhood home and creative environment. The house is located at Mozartstraße 9, close to the famous Hofburg Palace. It features period furnishings and exhibits related to Mozart’s early years. Visitors can explore the rooms where Mozart lived and studied music. There are regular concerts and educational programs held within the museum. The museum also houses a small library with books and manuscripts. Mozart family lived here 1784–1787 composing The Marriage of Figaro period works. Museum recreates period rooms and listening stations.</p>
 <p class="prose">Built around 1740, Mozarthaus Vienna was originally owned by Leopold Mozart, Wolfgang&#x27;s father. It served as the composer&#x27;s residence until he left for Salzburg in 1773. The building later became a school and then a private residence before being converted into a museum in 1942. Only surviving Mozart residence in Vienna open to the public. Visit Mozarthaus Vienna to experience the atmosphere where Mozart grew up and created some of his earliest compositions. Compact music-history site steps from Stephansdom.</p></div>
 </section>
 <section class="place" id="vienna_museumsquartier">
+<div class="place-lead">
 <h3>MuseumsQuartier</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Museumsplatz 1, 1070 Wien | Style: Baroque stables + modern white cubes | Period: 1904–1913</p>
-<figure class="place-fig"><img src="../images/vienna_museumsquartier.jpg" alt="MuseumsQuartier"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vienna_museumsquartier.jpg" alt="MuseumsQuartier" width="1280" height="435" style="height: 157px; max-height: 157px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vienna_museumsquartier_b.jpg" alt="MuseumsQuartier — view 2" width="330" height="220" style="height: 157px; max-height: 157px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">MuseumsQuartier is Vienna&#x27;s vibrant cultural hub, nestled amidst the city&#x27;s historic heart. It was once a military barracks and stable complex, transformed into one of Europe’s most dynamic art districts. It encompasses over 60,000 square meters of exhibition space. The complex includes the Leopold Museum, the Museum of Applied Arts, and the Austrian Film Museum. Its architecture combines Art Nouveau elements with modern design. Regularly hosts international exhibitions and festivals. Opened to the public in 1998. Leopold Museum, MUMOK, Tanzquartier, and courtyard lounges. Former imperial court stables repurposed as culture campus.</p>
 <p class="prose">Built between 1904 and 1913 as a military installation, MuseumsQuartier underwent extensive renovations in the late 20th century to become a modern cultural center. Today it houses numerous museums, galleries, cinemas, and performance spaces, showcasing contemporary and historical art. Major 1990s–2000s conversion project opening baroque walls to contemporary use. A must-visit for art lovers, MuseumsQuartier offers a unique blend of traditional and avant-garde exhibits. Youthful nightlife and museum block west of the Ring.</p></div>
 </section>
 <section class="place" id="vienna_naschmarkt">
+<div class="place-lead">
 <h3>Naschmarkt</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Linke Wienzeile, 1040 / 1060 Wien | Style: Open-air market along Wienzeile | Period: 1898</p>
-<figure class="place-fig"><img src="../images/vienna_naschmarkt.jpg" alt="Naschmarkt"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vienna_naschmarkt.jpg" alt="Naschmarkt" width="1280" height="960" style="height: 260px; max-height: 260px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vienna_naschmarkt_b.jpg" alt="Naschmarkt — view 2" width="330" height="186" style="height: 260px; max-height: 260px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Naschmarkt is Vienna&#x27;s most famous and vibrant market, a bustling hub of local produce, meats, cheeses, and street food. Located in the heart of the city center, it has been a staple of Viennese life since its establishment. Opened in 1898 as one of Europe’s first covered markets. Features over 140 shops selling everything from fresh fruits and vegetables to handmade crafts. Home to several iconic restaurants serving traditional Viennese dishes like Wiener Schnitzel and Apfelstrudel. Renovated extensively in recent years while maintaining its historic charm. Attracts millions of visitors annually. Over 100 stalls of produce, spices, and street food. Saturday flea market extends west along the channel.</p>
 <p class="prose">Established in 1898, the Naschmarkt was originally designed as a modern marketplace to replace older, less hygienic markets. It quickly became a cultural landmark, attracting locals and tourists alike with its colorful stalls, lively atmosphere, and variety of culinary delights. Grew from 18th-c. milk market into Vienna&#x27;s largest food bazaar. A must-visit for anyone interested in experiencing authentic Austrian cuisine and local culture. Everyday shopping and tourist tasting strip near the center.</p></div>
 </section>
 <section class="place" id="vienna_naturhistorisches_museum">
+<div class="place-lead">
 <h3>Natural History Museum</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Burgring 7, 1010 Wien | Style: Historicist palace museum, 1881–1891 | Period: 1889</p>
-<figure class="place-fig"><img src="../images/vienna_naturhistorisches_museum.jpg" alt="Natural History Museum"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vienna_naturhistorisches_museum.jpg" alt="Natural History Museum" width="1280" height="919" style="height: 331px; max-height: 331px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vienna_naturhistorisches_museum_b.jpg" alt="Natural History Museum — view 2" width="330" height="499" style="height: 331px; max-height: 331px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Natural History Museum of Vienna is one of the most renowned institutions dedicated to natural sciences and anthropology in Europe. Located on the beautiful campus of the University of Vienna, it showcases a vast collection of fossils, minerals, plants, animals, and cultural artifacts. It houses over six million specimens, making it one of the largest natural history collections in the world. Notable exhibits include dinosaur skeletons, ancient Egyptian mummies, and a comprehensive display of tropical butterflies. The museum features state-of-the-art technology for interactive learning experiences. Its architecture reflects the late-19th-century academic style, blending classical elements with modern functionality. Regularly changing temporary exhibitions keep the museum relevant and engaging. Mirror twin across Maria-Theresien-Platz to the art history museum. Famous for meteorites, dinosaurs, and the Venus of Willendorf.</p>
 <p class="prose">Established in 1889, the museum was originally part of the Imperial Museums of Austria-Hungary. It has since grown into a leading center for research and education, attracting scholars and visitors alike with its extensive collections and innovative exhibitions. Built under Franz Joseph to house imperial natural science collections. Visiting the Natural History Museum allows travelers to explore the rich diversity of life forms across time and space, offering insights into evolution, geology, and biodiversity. Grand interior halls make it a destination beyond specimens.</p></div>
 </section>
 <section class="place" id="vienna_prater_hauptallee">
+<div class="place-lead">
 <h3>Prater Hauptallee</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
-<p class="place-meta">Address: Prater, 1020 Wien | Style: Allée landscape, 19th c. | Period: late 19th century</p>
-<figure class="place-fig"><img src="../images/vienna_prater_hauptallee.jpg" alt="Prater Hauptallee"/></figure>
+<p class="place-meta">Location: Prater, 1020 Wien | Style: Allée landscape, 19th c. | Period: late 19th century</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vienna_prater_hauptallee.jpg" alt="Prater Hauptallee" width="1280" height="857" style="height: 309px; max-height: 309px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vienna_prater_hauptallee_b.jpg" alt="Prater Hauptallee — view 2" width="330" height="317" style="height: 309px; max-height: 309px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Prater Hauptallee is Vienna&#x27;s iconic central avenue within the city&#x27;s largest park, stretching for over two kilometers through lush greenery and open spaces. It serves as both a leisurely stroll and a bustling pedestrian zone, lined with cafés, shops, and attractions. It connects the popular amusement park, Prater, with the Museumsquartier district. The Hauptallee hosts various festivals and events throughout the year, including concerts and markets. In summer, visitors can relax on the shady benches under towering trees. At night, the street lights illuminate the pathway, creating a romantic setting for evening walks. It&#x27;s also home to several historical monuments, such as the Riesenrad Ferris wheel. Former imperial hunting ground opened to public in 1766. Six km straight popular with runners and cyclists.</p>
 <p class="prose">Originally designed by landscape architect Karl von Hasenauer in the late 19th century, the Prater was intended to be a modern recreation area for Viennese citizens. The Hauptallee became famous for its grand boulevard style, featuring wide paths, trees, and statues that reflect the city&#x27;s rich cultural heritage. Hauptallee formalized for court rides; fairgrounds grew at the southern end. Visitors come here to enjoy the serene atmosphere of the park while exploring the vibrant street life along the Hauptallee. Green lung and carnival zone east of the inner city.</p></div>
 </section>
 <section class="place" id="vienna_schoenbrunn_palace">
+<div class="place-lead">
 <h3>Schönbrunn Palace</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Schönbrunner Schloßstraße 47, 1130 Wien | Style: Baroque palace and gardens, 18th c. | Period: 1696–1712</p>
-<figure class="place-fig"><img src="../images/vienna_schoenbrunn_palace.jpg" alt="Schönbrunn Palace"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vienna_schoenbrunn_palace.jpg" alt="Schönbrunn Palace" width="1280" height="276" style="height: 99px; max-height: 99px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vienna_schoenbrunn_palace_b.jpg" alt="Schönbrunn Palace — view 2" width="330" height="331" style="height: 99px; max-height: 99px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Schönbrunn Palace is Vienna&#x27;s most iconic palace and one of Austria’s greatest historical landmarks. Built as a summer residence for the Habsburg dynasty, it stands majestically on a hill overlooking the city, showcasing Baroque architecture at its finest. The palace features more than 1,400 rooms spread across four floors. It houses the largest Baroque garden in Europe with intricate fountains and sculptures. Schönbrunn Palace contains the oldest zoo in the world, founded in 1752. Its interior decorations include exquisite stucco work, frescoes, and furniture crafted by renowned artists. In 1996, UNESCO designated Schönbrunn Palace a World Heritage Site. 1,441-room summer residence of the Habsburgs; UNESCO site. Gloriette overlooks formal parterres and the city.</p>
 <p class="prose">Constructed between 1696 and 1712 by Emperor Leopold I, Schönbrunn Palace was originally intended to be a hunting lodge but evolved into a lavish royal residence. It served as the primary summer home for generations of Habsburgs until the end of World War I. Today, visitors can explore its opulent interiors, extensive gardens, and famous menagerie that inspired the creation of modern zoos around the world. Site evolved from hunting lodge to imperial showpiece under Maria Theresa and successors. A must-visit for anyone interested in European royalty and Baroque art, Schönbrunn Palace offers breathtaking views of Vienna and provides insight into the lives of imperial families. Vienna&#x27;s most visited palace complex with zoo and gardens.</p></div>
 </section>
 <section class="place" id="vienna_tiergarten_schoenbrunn">
+<div class="place-lead">
 <h3>Schönbrunn Zoo</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Maxingstraße 13b, 1130 Wien | Style: Zoological garden, 1752 founding | Period: 1752</p>
-<figure class="place-fig"><img src="../images/vienna_tiergarten_schoenbrunn.jpg" alt="Schönbrunn Zoo"/></figure>
+<figure class="place-fig place-fig--lo-res"><img src="../images/vienna_tiergarten_schoenbrunn_b.jpg" alt="Schönbrunn Zoo" width="330" height="225"/></figure>
+</div>
 <div class="place-desc"><p class="prose">Situated on the outskirts of Vienna, Schönbrunn Zoo is one of Europe&#x27;s oldest zoos and a beloved attraction for locals and visitors alike. Established in 1752 by Empress Maria Theresa as a menagerie for royal animals, it later evolved into a public zoo. It is home to over 4,000 animals representing more than 600 different species. The zoo features several iconic exhibits, including the Aquatic World and the Primate House. Schönbrunn Zoo has been recognized as a leading institution for wildlife conservation and breeding programs. Its botanical garden boasts over 8,000 plant species, creating a lush oasis within the grounds. As part of UNESCO’s World Heritage Site, Schönbrunn Zoo preserves its historical architecture and landscaping. World&#x27;s oldest continuously operating zoo in baroque pavilions. Breeding programs for giant pandas and rare species.</p>
 <p class="prose">Originally founded as a private menagerie in 1752 during the reign of Empress Maria Theresa, Schönbrunn Zoo was designed to house exotic animals for the Habsburg dynasty. Over time, it became accessible to the general public, making it both a scientific research facility and a popular recreational destination. Today, its historical significance remains intact alongside modern conservation efforts. Imperial menagerie opened to the public under Franz Stephan and Maria Theresa. Visiting Schönbrunn Zoo allows guests to explore a wide variety of animal species while enjoying the charmingly historic setting of the imperial gardens. Major family day on the Schönbrunn palace grounds.</p></div>
 </section>
 <section class="place" id="vienna_freud_memorial">
+<div class="place-lead">
 <h3>Sigmund Freud Memorial</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
-<p class="place-meta">Address: Berggasse 19, 1090 Wien | Style: Biedermeier apartment house marker | Period: 2006</p>
-<figure class="place-fig"><img src="../images/vienna_freud_memorial.jpg" alt="Sigmund Freud Memorial"/></figure>
+<p class="place-meta">Location: Berggasse 19, 1090 Wien | Style: Biedermeier apartment house marker | Period: 2006</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vienna_freud_memorial.jpg" alt="Sigmund Freud Memorial" width="1067" height="1600" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vienna_freud_memorial_b.jpg" alt="Sigmund Freud Memorial — view 2" width="330" height="440" style="height: 468px; max-height: 468px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Sigmund Freud Memorial is a contemplative sculpture dedicated to the renowned psychoanalyst and founder of modern psychology. Located on the banks of the River Danube, it was unveiled in 2006 as part of Vienna&#x27;s celebration of its rich cultural heritage. It stands on the site where Freud lived during his later years in Vienna. The sculpture was created using traditional bronze casting techniques. Freud moved to London shortly before his death in 1939 but spent much of his formative years in Vienna. Gerhard Marcks also created the nearby Ernst Toller Monument. The memorial is situated within easy walking distance of the famous Prater amusement park. Freud lived and worked here 1891–1938 before exile. Museum in the building interprets psychoanalysis history.</p>
 <p class="prose">Commissioned by the City of Vienna and designed by Austrian artist Gerhard Marcks, the memorial pays homage to Freud&#x27;s pioneering work and influence on global thought. The sculpture consists of two large bronze figures representing Freud and his daughter Anna, symbolizing their profound bond and legacy. Site of the famous consulting room, recreated with original furniture in London but memorialized here. Visiting the Sigmund Freud Memorial allows visitors to reflect on the life and contributions of one of the most influential thinkers of the 20th century. Pilgrimage address for intellectual history tourists.</p></div>
 </section>
 <section class="place" id="vienna_spanish_riding_school">
+<div class="place-lead">
 <h3>Spanish Riding School</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Michaelerplatz 1, 1010 Wien (Hofburg) | Style: Baroque riding hall, 1735 | Period: 1736</p>
-<figure class="place-fig"><img src="../images/vienna_spanish_riding_school.jpg" alt="Spanish Riding School"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vienna_spanish_riding_school.jpg" alt="Spanish Riding School" width="1280" height="838" style="height: 302px; max-height: 302px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vienna_spanish_riding_school_b.jpg" alt="Spanish Riding School — view 2" width="330" height="226" style="height: 302px; max-height: 302px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Spanish Riding School of Vienna is a legendary institution founded in 1573 and formally established in 1736 by Emperor Charles VI. It is renowned for its breathtaking performances showcasing the graceful movements of Lipizzan horses. Established in 1736 during the reign of Emperor Charles VI. World-famous for its traditional white-and-red costumes and elegant horsemanship. Home to the rare breed of Lipizzan horses bred specifically for these performances. Regularly performs at the Hofburg Palace and offers tours and demonstrations year-round. A UNESCO World Heritage Site since 2006. Classical dressage of Lipizzaner stallions. Morning exercises and gala performances by ticket.</p>
 <p class="prose">Founded in 1573 as part of the imperial stables, the school was officially recognized in 1736 under Emperor Charles VI. Over centuries, it has become one of Europe&#x27;s most prestigious riding schools, famous for training Lipizzan stallions and presenting elaborate dressage displays that have captivated audiences worldwide. Habsburg court tradition continuing as a living institution. Visiting the Spanish Riding School allows visitors to witness the majestic artistry of classical dressage performed by expert horsemen on prized Lipizzan horses. Unique blend of equestrian art and palace architecture.</p></div>
 </section>
 <section class="place" id="vienna_spanische_hofreitschule_facade">
+<div class="place-lead">
 <h3>Spanish Riding School façade</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Michaelerplatz, Hofburg, 1010 Wien | Style: Baroque Michaelertrakt courtyard | Period: 1787</p>
-<figure class="place-fig"><img src="../images/vienna_spanische_hofreitschule_facade.jpg" alt="Spanish Riding School façade"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vienna_spanische_hofreitschule_facade.jpg" alt="Spanish Riding School façade" width="1200" height="1600" style="height: 203px; max-height: 203px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vienna_spanische_hofreitschule_facade_b.jpg" alt="Spanish Riding School façade — view 2" width="330" height="145" style="height: 203px; max-height: 203px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Spanish Riding School’s grand façade is a testament to the opulence and tradition of Austria&#x27;s imperial era. Built in 1787 during the reign of Emperor Joseph II, it showcases Baroque architecture at its finest, with ornate details and symmetrical design elements. Constructed in 1787, the façade exemplifies Austrian Baroque style. It houses the famous Lipizzan stallions, bred specifically for classical dressage. The school continues to train riders using traditional methods dating back centuries. Regular performances showcase the elegance and precision of these equine athletes. The interior features intricate decorations and historical artifacts. Ceremonial entry sequence toward the riding hall. Imperial double eagle motifs on gates.</p>
 <p class="prose">Established in 1600 as part of the Hofreitschule, the Spanish Riding School has been home to the renowned Lipizzaner horses since the late 18th century. Its current façade was constructed in 1787 under Emperor Joseph II, reflecting the splendor of Habsburg Vienna. The building served both as a training ground for cavalrymen and as a venue for royal ceremonies. Part of the Hofburg&#x27;s late imperial expansion facing the Michaelerplatz. Visiting the Spanish Riding School allows visitors to witness one of Europe&#x27;s most celebrated horsemanship traditions firsthand. Classic postcard view of court architecture and horses.</p></div>
 </section>
 <section class="place" id="vienna_stephansdom">
+<div class="place-lead">
 <h3>St. Stephen&#x27;s Cathedral</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Stephansplatz 3, 1010 Wien | Style: Gothic cathedral, 14th–16th c. | Period: 1304–1436</p>
-<figure class="place-fig"><img src="../images/vienna_stephansdom.jpg" alt="St. Stephen&#x27;s Cathedral"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vienna_stephansdom.jpg" alt="St. Stephen&#x27;s Cathedral" width="1067" height="1600" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vienna_stephansdom_b.jpg" alt="St. Stephen&#x27;s Cathedral — view 2" width="330" height="220" style="height: 308px; max-height: 308px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Dominating the skyline of Vienna, St. Stephen’s Cathedral is a majestic Gothic structure that stands as one of Europe’s most iconic cathedrals. The cathedral has two towers, each reaching over 340 feet high. It houses the tomb of Emperor Charles VI, who ruled Austria in the early 18th century. St. Its bell tower offers panoramic views of the city, including the Hofburg Palace and the Ringstrasse. Construction began under King Rudolf IV and continued through several centuries. South tower “Steffl” dominates the skyline; tiled roof with Habsburg eagle. Burial place of dukes, bishops, and national heroes.</p>
 <p class="prose">Built between 1304 and 1436, St. Stephen’s Cathedral represents the peak of medieval architecture in Austria. It was originally constructed to serve as the royal chapel for the Habsburg dynasty, later becoming the seat of the Archbishop of Vienna. The cathedral’s towering spires and intricate stonework are emblematic of its significance during the Gothic era. Built on earlier churches; spire and nave completed across late medieval campaigns. Visitors come to admire its breathtaking interior, which showcases exquisite stained glass windows and ornate altars, making it a must-visit for anyone interested in religious art and architecture. Mother church of the Roman Catholic Archdiocese of Vienna.</p></div>
 </section>
 <section class="place" id="vienna_stadtpark_vienna">
+<div class="place-lead">
 <h3>Stadtpark</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
-<p class="place-meta">Address: Parkring, 1010 / 1030 Wien | Style: English landscape park, 1862 | Period: 1864</p>
-<figure class="place-fig"><img src="../images/vienna_stadtpark_vienna.jpg" alt="Stadtpark"/></figure>
+<p class="place-meta">Location: Parkring, 1010 / 1030 Wien | Style: English landscape park, 1862 | Period: 1864</p>
+<figure class="place-fig place-fig--lo-res"><img src="../images/vienna_stadtpark_vienna_b.jpg" alt="Stadtpark" width="330" height="183"/></figure>
+</div>
 <div class="place-desc"><p class="prose">A serene oasis of nature within the bustling heart of Vienna, Stadtpark offers a tranquil retreat for locals and visitors alike. With its manicured lawns, elegant walkways, and picturesque bridges over small streams, it is one of the city&#x27;s most beloved green spaces. It spans approximately 37 hectares and features diverse flora and fauna typical of Central European landscapes. The park includes several historical monuments, including the Memorial to the Unknown Soldier and the former barracks of the Imperial Army. In summer months, outdoor performances and concerts are held regularly on the open-air stage. Stadtpark serves as a hub for various community events, such as flea markets and art exhibitions. Its central location makes it easily accessible via public transport. Gilded Johann Strauss monument is a photo staple. Wien River channelled underground through the park.</p>
 <p class="prose">Originally designed by landscape architect Karl von Hasenauer in the late 19th century, Stadtpark was opened to the public in 1864 as part of Emperor Franz Joseph I&#x27;s vision to create a modern urban park system. The park quickly became a popular gathering spot for Viennese citizens, hosting cultural events, concerts, and festivals throughout the years. Ringstraße-era public park replacing fortifications belt. Visitors come to Stadtpark to enjoy its peaceful atmosphere, take leisurely strolls along its winding paths, and appreciate the stunning views of the cityscape from its elevated locations. Everyday green space between Karlsplatz and the canal.</p></div>
 </section>
 <section class="place" id="vienna_stephansplatz">
+<div class="place-lead">
 <h3>Stephansplatz</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
-<p class="place-meta">Address: 1010 Wien, around Stephansdom | Style: Medieval-to-modern urban square | Period: late 13th century</p>
-<figure class="place-fig"><img src="../images/vienna_stephansplatz.jpg" alt="Stephansplatz"/></figure>
+<p class="place-meta">Location: 1010 Wien, around Stephansdom | Style: Medieval-to-modern urban square | Period: late 13th century</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vienna_stephansplatz.jpg" alt="Stephansplatz" width="330" height="127" style="height: 177px; max-height: 177px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vienna_stephansplatz_b.jpg" alt="Stephansplatz — view 2" width="330" height="220" style="height: 177px; max-height: 177px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">At the heart of Vienna lies Stephansplatz, a vibrant hub where tradition meets modern life. Surrounded by historic buildings and bustling cafes, it is one of the city&#x27;s most iconic squares. The square is named after St. It features several notable landmarks including the Rathaus (City Hall), the Burgtheater, and the Neue Burg Palace. Each year, the Christmas Market transforms the plaza into a festive scene filled with traditional crafts and seasonal treats. Stephansplatz serves as a gathering place for various festivals, concerts, and political demonstrations. During World War II, the square suffered severe damage but was meticulously restored post-war. U-Bahn interchange under the cathedral&#x27;s shadow. Pedestrian shopping radiates along Kärntner Straße and Graben.</p>
 <p class="prose">Founded in the late 13th century as a marketplace, Stephansplatz has been central to Vienna&#x27;s development for centuries. It was later expanded and transformed into a grand square during the Baroque era, becoming a focal point for cultural events and gatherings. Today, it remains a popular spot for locals and tourists alike. Market and execution site in the Middle Ages; rebuilt after WWII. Stephansplatz is significant because it offers a unique blend of historical charm and contemporary atmosphere, making it a must-visit destination for anyone exploring Vienna. Default zero point for visitors orienting in the old town.</p></div>
 </section>
 <section class="place" id="vienna_urania_vienna">
+<div class="place-lead">
 <h3>Urania Observatory</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Uraniastraße 1, 1010 Wien | Style: Art Nouveau observatory and lecture hall | Period: 1894</p>
-<figure class="place-fig"><img src="../images/vienna_urania_vienna.jpg" alt="Urania Observatory"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vienna_urania_vienna.jpg" alt="Urania Observatory" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vienna_urania_vienna_b.jpg" alt="Urania Observatory — view 2" width="330" height="440" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Perched high above the city center on Schottenring, Urania Observatory offers a breathtaking view of Vienna&#x27;s skyline and its famous Hofburg Palace. Built in 1894, it was originally intended as an educational institution to promote astronomy among the general public. It is located on the former site of the Imperial Mint. The building features neo-classical design elements typical of Theophil Hansen’s work. Regular public stargazing sessions are held nightly during clear weather conditions. Urania hosts temporary exhibitions related to space exploration and astronomy. Since 1976, it has been part of the Austrian Museums Association. Public astronomy programs and riverside café terrace. UNIQA Tower neighbors as a glass high-rise foil.</p>
 <p class="prose">Established in 1894 by Emperor Franz Joseph I, Urania Observatory was designed by architect Theophil Hansen. It served as both an observatory for scientific research and an educational facility aimed at fostering interest in astronomy. Over time, it became a symbol of Vienna’s cultural heritage and a popular tourist attraction. Founded as adult education observatory in the early 20th century. Visiting Urania allows visitors to experience the charm of turn-of-the-century architecture while enjoying panoramic views of the city. Canal-side landmark between Schwedenplatz and Julius-Raab-Ufer.</p></div>
 </section>
 <section class="place" id="vienna_rathaus_vienna">
+<div class="place-lead">
 <h3>Vienna City Hall</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Friedrich-Schmidt-Platz 1, 1010 Wien | Style: Neo-Gothic city hall, 1872–1883 | Period: 1872–1883</p>
-<figure class="place-fig"><img src="../images/vienna_rathaus_vienna.jpg" alt="Vienna City Hall"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vienna_rathaus_vienna.jpg" alt="Vienna City Hall" width="1280" height="960" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vienna_rathaus_vienna_b.jpg" alt="Vienna City Hall — view 2" width="330" height="265" style="height: 346px; max-height: 346px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Vienna City Hall is a majestic landmark standing proudly on Friedrich-Schmidt-Platz, symbolizing the heart of Austrian governance and civic pride. Completed between 1872 and 1883, it showcases a blend of historicist styles, including elements of neo-Renaissance and late Gothic architecture. It features impressive facades with ornate details and statues depicting historical figures. Inside, the Council Chamber houses murals commemorating significant moments in Viennese history. The building underwent extensive renovations in the early 20th century to preserve its original splendor. Today, visitors can tour parts of the interior, gaining insight into how municipal government operates. Its location near the Ringstrasse makes it easily accessible for tourists exploring central Vienna. Tower modeled loosely on Flemish cloth halls. Hosts Christkindlmarkt and summer film festival on the front lawn.</p>
 <p class="prose">Built during the reign of Emperor Franz Joseph I, the City Hall was designed by architects Theophil Hansen and Eduard van der Nüll. It served as both a practical administrative center and a cultural icon, representing the aspirations of Vienna&#x27;s growing urban population at the time. Built as Vienna expanded beyond medieval walls; seat of mayor and council. Visiting the City Hall offers a glimpse into Austria’s rich architectural heritage and its vibrant political life. Anchor of the Ringstraße civic ensemble.</p></div>
 </section>
 <section class="place" id="vienna_technisches_museum_wien">
+<div class="place-lead">
 <h3>Vienna Museum of Science and Technology</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Mariaspringergasse 2, 1140 Wien | Style: Modernist museum pavilions, 1918 opening | Period: 1982 (original); 2004 (current building)</p>
-<figure class="place-fig"><img src="../images/vienna_technisches_museum_wien.jpg" alt="Vienna Museum of Science and Technology"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vienna_technisches_museum_wien.jpg" alt="Vienna Museum of Science and Technology" width="1280" height="720" style="height: 259px; max-height: 259px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vienna_technisches_museum_wien_b.jpg" alt="Vienna Museum of Science and Technology — view 2" width="330" height="220" style="height: 259px; max-height: 259px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Vienna Museum of Science and Technology is a vibrant hub showcasing the evolution of technology and engineering through interactive exhibits, hands-on displays, and historical artifacts. Located on the banks of the Danube River, the museum offers panoramic views of the cityscape. Interactive exhibits allow visitors to experiment with principles of physics and engineering. It houses one of Europe’s largest collections of vintage scientific instruments. Regularly hosts temporary exhibitions focusing on specific themes related to innovation and sustainability. The museum collaborates with local universities for research and education initiatives. Heavy industry, transport, and domestic technology exhibits. Hands-on areas for families.</p>
 <p class="prose">Established in 1982, the museum was originally part of the Technical University of Vienna. It moved to its current location in 2004, offering visitors a modern space dedicated to exploring science and technology. Notable features include the reconstruction of early mechanical calculators and models of famous Austrian engineers&#x27; works. Founded to celebrate technical progress in the young republic. Visiting here provides insight into Austria&#x27;s technological heritage while engaging visitors with cutting-edge exhibits and educational programs. Complements fine-art narratives with machines and mobility.</p></div>
 </section>
 <section class="place" id="vienna_state_opera">
+<div class="place-lead">
 <h3>Vienna State Opera</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Opernring 2, 1010 Wien | Style: Neo-Renaissance opera house, 1869 | Period: 1869</p>
-<figure class="place-fig"><img src="../images/vienna_state_opera.JPG" alt="Vienna State Opera"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vienna_state_opera.JPG" alt="Vienna State Opera" width="1280" height="783" style="height: 282px; max-height: 282px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vienna_state_opera_b.jpg" alt="Vienna State Opera — view 2" width="330" height="203" style="height: 282px; max-height: 282px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Vienna State Opera is one of Europe&#x27;s most celebrated opera houses, renowned for its grand architecture and unparalleled performances. It is located on the Ringstraße, a prominent boulevard in central Vienna. Its interior features lavish decorations and intricate details inspired by Italian Renaissance art. Notable composers such as Richard Strauss, Gustav Mahler, and Mozart have conducted here. Each season brings new productions showcasing both traditional classics and contemporary works. The opera house hosts special events like gala concerts and festivals. Rebuilt after WWII bombing with restored historic façade. World-class repertoire and New Year&#x27;s broadcast tradition.</p>
 <p class="prose">Established in 1869, the Vienna State Opera has been a cultural landmark since its opening. Designed by August Sicard von Sicardsburg in the Neo-Renaissance style, it quickly became a symbol of Austria’s artistic prowess. Over the years, the theater has hosted world-renowned performers and premiered countless operatic masterpieces. Opened as Hofoper; renamed after the fall of the monarchy. Visiting the Vienna State Opera offers an opportunity to experience high-quality classical music and stunning architectural design. One of the great opera addresses of Europe on the Ring.</p></div>
 </section>
 <section class="place" id="vienna_volksgarten_vienna">
+<div class="place-lead">
 <h3>Volksgarten</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
-<p class="place-meta">Address: Burgring, 1010 Wien | Style: French formal rose gardens, 1821 | Period: mid-19th century</p>
-<figure class="place-fig"><img src="../images/vienna_volksgarten_vienna.jpg" alt="Volksgarten"/></figure>
+<p class="place-meta">Location: Burgring, 1010 Wien | Style: French formal rose gardens, 1821 | Period: mid-19th century</p>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vienna_volksgarten_vienna.jpg" alt="Volksgarten" width="1280" height="853" style="height: 207px; max-height: 207px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vienna_volksgarten_vienna_b.jpg" alt="Volksgarten — view 2" width="330" height="148" style="height: 207px; max-height: 207px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">Volksgarten is a picturesque urban park nestled within the heart of Vienna&#x27;s inner city, offering a tranquil escape amidst bustling streets and historic architecture. Established as part of the Hofburg Palace complex, it was originally created to serve as a royal garden for Emperor Franz I, later evolving into a public space accessible to all citizens. The park covers approximately 4 hectares and features diverse plant species including trees, flowers, and shrubs. It houses the famous Volksgartentheater, which hosts open-air performances during summer months. Located adjacent to the Hofburg Palace, Volksgarten offers stunning views of the palace and surrounding buildings. During springtime, the park blooms with colorful tulips and other seasonal flowers, attracting visitors from around the world. In addition to being a recreational area, Volksgarten also serves as a venue for various art exhibitions and concerts. Theseus Temple is a Neoclassical folly by Peter Nobile. Rose beds named for varieties and political figures.</p>
 <p class="prose">Originally designed by landscape architect Karl von Hasenauer in the mid-19th century, Volksgarten has undergone several transformations over its history. Initially known as the &#x27;People’s Garden,&#x27; it became a popular gathering place for Viennese residents seeking relaxation and leisure activities. Today, it remains one of the most iconic green spaces in the city, hosting cultural events and festivals throughout the year. Laid on former bastion ground after Napoleonic demolitions. Visitors come to Volksgarten to enjoy its serene atmosphere, beautiful flora, and historical significance, making it a must-see destination for anyone exploring Vienna’s rich culture and heritage. Peaceful Ring park between Parliament and Hofburg gates.</p></div>
 </section>
 <section class="place" id="vienna_prater_riesenrad">
+<div class="place-lead">
 <h3>Wiener Riesenrad</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Contents">↑ Contents</a></p>
 
 <p class="place-meta">Address: Riesenradplatz 1, 1020 Wien | Style: Iron Ferris wheel, 1897 | Period: 1897</p>
-<figure class="place-fig"><img src="../images/vienna_prater_riesenrad.jpg" alt="Wiener Riesenrad"/></figure>
+<div class="place-pdf-fig-row place-pdf-fig-row--pair">
+<figure class="place-fig place-fig--hi-res place-fig--row-sized"><img src="../images/vienna_prater_riesenrad.jpg" alt="Wiener Riesenrad" width="1280" height="853" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+<figure class="place-fig place-fig--lo-res place-fig--row-sized"><img src="../images/vienna_prater_riesenrad_b.jpg" alt="Wiener Riesenrad — view 2" width="330" height="220" style="height: 307px; max-height: 307px; width: auto; max-width: 100%; object-fit: contain;"/></figure>
+</div>
+</div>
 <div class="place-desc"><p class="prose">The Wiener Riesenrad, Vienna&#x27;s iconic Ferris wheel, stands majestically on Praterstern, offering panoramic views of the city. Built in 1897 for the World Exhibition, it has become a symbol of Viennese culture and leisure. It is one of Europe&#x27;s oldest operating Ferris wheels. At 64 meters tall, it offers some of the best vistas in the city. Each cabin can accommodate up to 20 passengers. Its construction used innovative techniques typical of late 19th-century engineering. Restored several times since its inception, it remains a testament to Viennese ingenuity. Surviving wheel from the 1897 World&#x27;s Fair; 65 m diameter. Featured in The Third Man and many films.</p>
 <p class="prose">Constructed in 1897 as part of the World Exposition, the Wiener Riesenrad was originally intended to showcase modern engineering prowess. It quickly became a popular attraction, drawing visitors who flocked to its 60 cabins for breathtaking views of Vienna’s historic center and surrounding parks. Over time, it evolved into a cultural icon, representing both the city&#x27;s past and present. Engineered by British firm; rebuilt after WWII with original cabins. Visiting the Wiener Riesenrad allows travelers to experience the unique charm of Vienna while enjoying unparalleled perspectives of the city’s architectural heritage. Icon of the Prater amusement zone and skyline silhouette.</p></div>
 </section>

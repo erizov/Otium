@@ -3,12 +3,16 @@
 
 from __future__ import annotations
 
+import re
+
 from scripts.city_guide_naming import clean_wikimedia_display_title
 from scripts.city_guide_narrative import (
     GuideNarrativeDeduper,
     clean_pixabay_artifacts,
     group_into_paragraphs,
     is_pixabay_stub,
+    is_reference_boilerplate,
+    is_usable_narrative_text,
     merge_narrative_html,
     narrative_sentence_blocks,
     place_heading_plain,
@@ -284,13 +288,15 @@ def test_dedupe_curated_drops_city_suffix_heading_dupes() -> None:
     assert out[0]["slug"] == "yaroslavl_assumption_cathedral"
 
 
-def test_en_heading_falls_back_to_name_ru() -> None:
+def test_en_heading_does_not_fall_back_to_cyrillic() -> None:
     place = {
         "slug": "moscow_monasteries_0",
         "name_ru": "Спасо-Андроников монастырь",
         "name_en": "",
     }
-    assert place_heading_plain(place, "en") == "Спасо-Андроников монастырь"
+    heading = place_heading_plain(place, "en")
+    assert heading != "Спасо-Андроников монастырь"
+    assert heading == "Monasteries 0"
 
 
 def test_place_heading_from_slug() -> None:
@@ -300,6 +306,80 @@ def test_place_heading_from_slug() -> None:
     place = {"slug": "dubai_gold_souk"}
     assert place_heading_plain(place, "en") == "Dubai Gold Souk"
     assert place_heading_plain(place, "ru") == "Dubai Gold Souk"
+
+
+def test_descriptive_place_slug_from_title() -> None:
+    from scripts.city_guide_naming import descriptive_place_slug
+
+    used: set[str] = {"berlin_brandenburg_gate"}
+    slug = descriptive_place_slug(
+        "berlin",
+        "141227 Berliner Dom.jpg",
+        used,
+    )
+    assert slug == "berlin_berliner_dom"
+    assert "pdfband" not in slug
+    slug2 = descriptive_place_slug("berlin", "Berliner Dom", used | {slug})
+    assert slug2 == "berlin_berliner_dom_2"
+    slug3 = descriptive_place_slug(
+        "dubai",
+        "Dubai (19225459).jpeg",
+        set(),
+    )
+    assert slug3 == "dubai_landmark"
+    assert not re.search(r"\d{7,}", slug3)
+    slug4 = descriptive_place_slug(
+        "dubai",
+        "Downtown Montreal (8392011668).jpg",
+        {slug3},
+    )
+    assert slug4 == "dubai_downtown_montreal"
+    assert not re.search(r"\d{7,}", slug4)
+
+
+def test_clean_place_display_title_strips_asset_ids() -> None:
+    from scripts.city_guide_naming import clean_place_display_title
+
+    assert clean_place_display_title("Dubai (19225459).jpeg") == "Dubai"
+    assert (
+        clean_place_display_title("Downtown Montreal (8392011668).jpg")
+        == "Downtown Montreal"
+    )
+    assert clean_place_display_title("141227 Berliner Dom") == "Berliner Dom"
+
+
+def test_place_meta_line_address_vs_location() -> None:
+    from scripts.city_guide_narrative import place_meta_line
+
+    labels = {"style": "Style:", "period": "Period:"}
+    museum = {
+        "category": "museums",
+        "address": "ул. Волхонка, 12",
+        "visit_hours_ru": "вт–вс 11:00–20:00",
+    }
+    meta = place_meta_line(museum, "ru", labels)
+    assert meta is not None
+    assert "Адрес:" in meta
+    assert "ул. Волхонка, 12" in meta
+    assert "Часы работы:" in meta
+    monument = {
+        "category": "sculptures",
+        "location": "Красная пл.",
+    }
+    meta2 = place_meta_line(monument, "ru", labels)
+    assert meta2 is not None
+    assert "Место:" in meta2
+    assert "Адрес:" not in meta2
+    metro = {
+        "category": "metro",
+        "metro_line": "Замоскворецкая линия (зелёная)",
+        "location": "Триумфальная пл.",
+    }
+    meta3 = place_meta_line(metro, "ru", labels)
+    assert meta3 is not None
+    assert "Линия:" in meta3
+    assert "Место:" in meta3
+    assert "Адрес:" not in meta3
 
 
 def test_pdfband_heading_uses_cleaned_name_not_slug() -> None:
@@ -451,3 +531,40 @@ def test_guide_illustration_meta_cleaning() -> None:
     cleaned_obelisk = clean_pixabay_artifacts(obelisk)
     assert "Commons" not in cleaned_obelisk
     assert cleaned_obelisk.endswith("защитников")
+
+
+def test_reference_boilerplate_detection() -> None:
+    book = (
+        "Елена Юрьевна Крижевская Москва изнутри. "
+        "Серия «Искусство с блогерами» "
+        "Текст предоставлен издательством h p://www.li res.ru/pages/biblio_book/ "
+        "ISBN 978-5-04-108335-9 Аннотация «Москва изнутри» с Еленой Крижевской"
+    )
+    assert is_reference_boilerplate(book)
+    assert not is_usable_narrative_text(book)
+    toc = (
+        "Донской пр-д, д. 9 Центросоюз (Росстат), ул. Мясницкая, д. 39 "
+        "571 Дом Мельникова, Кривоарбатский пер., д. 10 575 Клуб Русакова, "
+        "581 Клуб Зуева, ул. Лесная, д. 18 583 9. Сталинская архитектура "
+        "585 МГУ, ул. Ленинские Горы, д. 1 590 МИД"
+    )
+    assert is_reference_boilerplate(toc)
+    real = (
+        "Дом Пашкова на Воздвиженке — один из лучших образцов "
+        "классицизма в Москве; построен в XVIII веке."
+    )
+    assert not is_reference_boilerplate(real)
+
+
+def test_split_sentences_preserves_initials() -> None:
+    from scripts.city_guide_narrative import split_sentences
+
+    sents = split_sentences("Архитектор — В. И. Баженов.")
+    assert sents == ["Архитектор — В. И. Баженов."]
+    joined = split_sentences(
+        "Архитектор — В. И. Баженов. С 2007 — отдел рукописей РГБ.",
+    )
+    assert joined == [
+        "Архитектор — В. И. Баженов.",
+        "С 2007 — отдел рукописей РГБ.",
+    ]
