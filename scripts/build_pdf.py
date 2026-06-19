@@ -6,11 +6,13 @@
 
 import io
 import json
+import os
 import re
 import shutil
 import socket
 import sys
 import threading
+import time
 import urllib.request
 from pathlib import Path
 from typing import Any, Optional
@@ -26,6 +28,89 @@ from scripts.guide_constants import (
 )
 
 BUILD_CITY = "moscow"
+
+_LAST_PLAYWRIGHT_PDF_ERROR: str | None = None
+_LAST_PLAYWRIGHT_PDF_PATH: Path | None = None
+
+
+def get_last_playwright_pdf_error() -> str | None:
+    """Human-readable reason when ``_pdf_via_playwright`` returned False."""
+    return _LAST_PLAYWRIGHT_PDF_ERROR
+
+
+def get_playwright_pdf_output_path(requested: Path) -> Path:
+    """Path actually written (may differ when the target PDF was locked)."""
+    if (
+        _LAST_PLAYWRIGHT_PDF_PATH is not None
+        and _LAST_PLAYWRIGHT_PDF_PATH.is_file()
+    ):
+        return _LAST_PLAYWRIGHT_PDF_PATH
+    return requested
+
+
+def _is_pdf_target_locked_error(exc: BaseException) -> bool:
+    if isinstance(exc, OSError) and getattr(exc, "errno", None) == 22:
+        return True
+    text = str(exc).lower()
+    return (
+        "invalid argument" in text
+        or "permission denied" in text
+        or "being used by another process" in text
+        or "errno 22" in text
+        or "errno 13" in text
+    )
+
+
+def _commit_playwright_pdf(tmp: Path, dest: Path) -> bool:
+    """Move temp PDF into place; fall back to ``*.new.pdf`` if dest is locked."""
+    global _LAST_PLAYWRIGHT_PDF_ERROR, _LAST_PLAYWRIGHT_PDF_PATH
+    if not tmp.is_file():
+        _LAST_PLAYWRIGHT_PDF_ERROR = "temp PDF missing after Playwright render"
+        _LAST_PLAYWRIGHT_PDF_PATH = None
+        return False
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    last_err: OSError | None = None
+    for attempt in range(3):
+        try:
+            if dest.is_file():
+                dest.unlink()
+            os.replace(tmp, dest)
+            _LAST_PLAYWRIGHT_PDF_PATH = dest
+            return True
+        except OSError as exc:
+            last_err = exc
+            if attempt < 2:
+                time.sleep(0.8)
+    alt = dest.with_name("{}.new.pdf".format(dest.stem))
+    try:
+        if alt.is_file():
+            alt.unlink()
+        os.replace(tmp, alt)
+        _LAST_PLAYWRIGHT_PDF_ERROR = (
+            "target PDF locked ({}); wrote {}".format(dest.name, alt.name)
+        )
+        _LAST_PLAYWRIGHT_PDF_PATH = alt
+        print(
+            "PDF target locked; wrote alternate file: {}".format(alt),
+            file=sys.stderr,
+        )
+        print(
+            "Close any PDF viewer using {} and rename {}.".format(
+                dest.name,
+                alt.name,
+            ),
+            file=sys.stderr,
+        )
+        return True
+    except OSError as exc:
+        last_err = exc
+    _LAST_PLAYWRIGHT_PDF_ERROR = str(last_err or "could not commit PDF")
+    _LAST_PLAYWRIGHT_PDF_PATH = None
+    try:
+        tmp.unlink(missing_ok=True)
+    except OSError:
+        pass
+    return False
 
 
 def _city_root(html_output_dir: Path) -> Path:
@@ -1287,9 +1372,16 @@ def _pdf_via_playwright(
     static_site_root: если задан, HTTP-сервер отдаёт этот каталог, а в URL
     подставляется путь html относительно него (для SPB: output/*.html + ../images).
     """
+    global _LAST_PLAYWRIGHT_PDF_ERROR, _LAST_PLAYWRIGHT_PDF_PATH
+    _LAST_PLAYWRIGHT_PDF_ERROR = None
+    _LAST_PLAYWRIGHT_PDF_PATH = None
     try:
         from playwright.sync_api import sync_playwright
     except ImportError:
+        _LAST_PLAYWRIGHT_PDF_ERROR = (
+            "playwright not installed "
+            "(pip install playwright && playwright install chromium)"
+        )
         return False
 
     output_dir = html_path.parent
@@ -1367,11 +1459,30 @@ def _pdf_via_playwright(
                 pdf_options["footer_template"] = footer_template
                 if header_template is not None:
                     pdf_options["header_template"] = header_template
+            tmp_pdf = pdf_path.with_name(
+                "{}._playwright_build.pdf".format(pdf_path.stem),
+            )
+            try:
+                if tmp_pdf.is_file():
+                    tmp_pdf.unlink()
+            except OSError:
+                pass
+            pdf_options["path"] = str(tmp_pdf)
             page.pdf(**pdf_options)
             browser.close()
+        if not _commit_playwright_pdf(tmp_pdf, pdf_path):
+            return False
         return True
     except Exception as e:
-        print("Playwright PDF failed:", e, file=sys.stderr)
+        _LAST_PLAYWRIGHT_PDF_ERROR = str(e)
+        if _is_pdf_target_locked_error(e):
+            print(
+                "Playwright PDF failed (file may be open in a viewer):",
+                e,
+                file=sys.stderr,
+            )
+        else:
+            print("Playwright PDF failed:", e, file=sys.stderr)
         return False
     finally:
         if server is not None:

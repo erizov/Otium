@@ -102,6 +102,15 @@ def _place_files(data_dir: Path, city_slug: str) -> list[Path]:
     main = data_dir / "{}_places.json".format(city_slug)
     if main.is_file():
         paths.append(main)
+    if city_slug == "spb":
+        for more_name in (
+            "spb_places_more.json",
+            "spb_places_expansion_m2026.json",
+            "spb_places_osobnjaki.json",
+        ):
+            more = data_dir / more_name
+            if more.is_file():
+                paths.append(more)
     paths.extend(pdf_expand_sidecar_paths(data_dir, city_slug))
     return paths
 

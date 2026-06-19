@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import importlib
+import json
 import sys
 import time
 from collections.abc import Callable
@@ -38,6 +39,70 @@ from scripts.city_guide_second_image_sources import discover_extended_second_ima
 from scripts.city_guide_trusted_image_sources import discover_trusted_image_urls
 from scripts.rag.city_map import names_for_slug
 from scripts.verify_city_guide_place_images import _REGISTRY
+
+
+def _load_city_second_image_bundle(
+    city_slug: str,
+) -> tuple[
+    list[dict],
+    Path,
+    Path,
+    Path,
+    Callable[..., bool],
+] | None:
+    """Load places, paths, and whitelist helpers for second-image download."""
+    root = _PROJECT_ROOT / city_slug
+    data_dir = root / "data"
+
+    if city_slug == "moscow":
+        path = data_dir / "moscow_places.json"
+        if not path.is_file():
+            print(city_slug, "skip: no moscow_places.json", file=sys.stderr)
+            return None
+        wl = importlib.import_module("moscow.whitelist")
+        places = merge_second_image_sidecar(
+            [dict(p) for p in json.loads(path.read_text(encoding="utf-8"))],
+            data_dir,
+            city_slug,
+        )
+        return (
+            places,
+            root,
+            data_dir,
+            wl.default_whitelist_path(),
+            wl.url_is_whitelisted,
+        )
+
+    mod_name = "{}.data.places_registry".format(city_slug)
+    wl_mod_name = "{}.whitelist".format(city_slug)
+    try:
+        reg = importlib.import_module(mod_name)
+        wl = importlib.import_module(wl_mod_name)
+    except ModuleNotFoundError as exc:
+        print(city_slug, "skip:", exc, file=sys.stderr)
+        return None
+
+    attr = None
+    for key in dir(reg):
+        if key.endswith("_PLACES") and key.isupper():
+            attr = key
+            break
+    if not attr:
+        print(city_slug, "skip: no *_PLACES", file=sys.stderr)
+        return None
+
+    places = merge_second_image_sidecar(
+        [dict(p) for p in getattr(reg, attr)],
+        data_dir,
+        city_slug,
+    )
+    return (
+        places,
+        root,
+        data_dir,
+        wl.default_whitelist_path(),
+        wl.url_is_whitelisted,
+    )
 
 
 def _place_image_count(root: Path, place: dict) -> int:
@@ -222,34 +287,11 @@ def download_city_second_images(
         print(city_slug, "skip (frozen city)")
         return 0, 0, 0
 
-    mod_name = "{}.data.places_registry".format(city_slug)
-    wl_mod_name = "{}.whitelist".format(city_slug)
-    try:
-        reg = importlib.import_module(mod_name)
-        wl = importlib.import_module(wl_mod_name)
-    except ModuleNotFoundError as exc:
-        print(city_slug, "skip:", exc, file=sys.stderr)
+    bundle = _load_city_second_image_bundle(city_slug)
+    if bundle is None:
         return 0, 0, 0
-
-    attr = None
-    for key in dir(reg):
-        if key.endswith("_PLACES") and key.isupper():
-            attr = key
-            break
-    if not attr:
-        print(city_slug, "skip: no *_PLACES", file=sys.stderr)
-        return 0, 0, 0
-
-    data_dir = _PROJECT_ROOT / city_slug / "data"
-    places = merge_second_image_sidecar(
-        [dict(p) for p in getattr(reg, attr)],
-        data_dir,
-        city_slug,
-    )
-    root = _PROJECT_ROOT / city_slug
+    places, root, data_dir, wpath, whitelist_fn = bundle
     sidecar = load_second_image_sidecar(data_dir, city_slug)
-    wpath = wl.default_whitelist_path()
-    whitelist_fn: Callable[..., bool] = wl.url_is_whitelisted
     thumb_w = snap_commons_thumb_width(thumb_width)
     reject_hashes = _city_reject_hashes(root)
 
@@ -347,6 +389,18 @@ def cities_needing_second(
         else None
     )
     out: list[tuple[str, int]] = []
+    if allowed is None or "moscow" in allowed:
+        if not skip_frozen or "moscow" not in DOWNLOAD_FROZEN_CITY_SLUGS:
+            bundle = _load_city_second_image_bundle("moscow")
+            if bundle is not None:
+                places, root, *_rest = bundle
+                need = sum(
+                    1
+                    for p in places
+                    if _place_image_count(root, p) == 1
+                )
+                if need:
+                    out.append(("moscow", need))
     for slug, mod, attr in _REGISTRY:
         if allowed is not None and slug not in allowed:
             continue
@@ -387,6 +441,11 @@ def main() -> int:
         action="store_true",
         help="Disable person/animal main-subject rejection.",
     )
+    parser.add_argument(
+        "--allow-frozen",
+        action="store_true",
+        help="Allow frozen cities (moscow, spb).",
+    )
     args = parser.parse_args()
     if args.no_subject_filter:
         import os
@@ -398,6 +457,7 @@ def main() -> int:
         thumb_width=args.thumb_width,
         include_yandex_maps=args.yandex_maps,
         max_per_source=max(1, args.max_per_source),
+        allow_frozen=args.allow_frozen,
     )
     return 0
 

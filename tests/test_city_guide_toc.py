@@ -117,8 +117,41 @@ def test_toc_entries_follow_place_list(tmp_path: Path) -> None:
         project_root=None,
         sort_key=lambda p: str(p.get("name_en") or ""),
         has_section=has_section,
+        section_places=places[:1],
     )
     assert [e.label for e in entries2] == ["Alpha"]
+
+
+def test_toc_uses_explicit_section_places(tmp_path: Path) -> None:
+    places = [
+        {
+            "slug": "alpha_place",
+            "name_en": "Alpha",
+            "image_rel_path": "images/alpha.jpg",
+        },
+        {
+            "slug": "beta_place",
+            "name_en": "Beta",
+            "image_rel_path": "images/beta.jpg",
+        },
+    ]
+    images = tmp_path / "images"
+    images.mkdir()
+    (images / "alpha.jpg").write_bytes(b"x" * 600)
+
+    def has_section(root: Path, place: dict) -> bool:
+        return bool(place.get("image_rel_path"))
+
+    entries = toc_entries_for_jerusalem_guide(
+        tmp_path,
+        places,
+        "en",
+        city_slug="sample",
+        project_root=None,
+        has_section=has_section,
+        section_places=[places[0]],
+    )
+    assert [e.anchor for e in entries] == ["alpha_place"]
 
 
 def test_toc_reflects_renamed_place() -> None:

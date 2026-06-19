@@ -26,6 +26,7 @@ if str(_PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(_PROJECT_ROOT))
 
 from scripts.city_guide_core import is_substantive_text
+from scripts.city_guide_registry_common import pdf_expand_sidecar_paths
 from scripts.enrich_places_gigachat_common import (
     discover_cities,
     extract_json,
@@ -244,6 +245,24 @@ def _discover_cities(selected: list[str] | None) -> list[str]:
     return out
 
 
+def _place_json_paths(data_dir: Path, city_slug: str) -> list[Path]:
+    paths: list[Path] = []
+    main = data_dir / "{}_places.json".format(city_slug)
+    if main.is_file():
+        paths.append(main)
+    if city_slug == "spb":
+        for more_name in (
+            "spb_places_more.json",
+            "spb_places_expansion_m2026.json",
+            "spb_places_osobnjaki.json",
+        ):
+            more = data_dir / more_name
+            if more.is_file():
+                paths.append(more)
+    paths.extend(pdf_expand_sidecar_paths(data_dir, city_slug))
+    return paths
+
+
 def _process_city(
     city_slug: str,
     *,
@@ -252,78 +271,96 @@ def _process_city(
     delay: float,
     model: str,
 ) -> tuple[int, int, int]:
-    path = _PROJECT_ROOT / city_slug / "data" / "{}_places.json".format(
-        city_slug,
-    )
-    places: list[dict[str, Any]] = json.loads(
-        path.read_text(encoding="utf-8"),
-    )
+    data_dir = _PROJECT_ROOT / city_slug / "data"
+    paths = _place_json_paths(data_dir, city_slug)
+    if not paths:
+        return 0, 0, 0
+
     details_map = _load_place_details(city_slug)
-    targets = [p for p in places if place_needs_ru_narrative(p)]
-    if limit is not None:
-        targets = targets[:limit]
-
     updated = skipped = errors = 0
-    for place in targets:
-        slug = str(place.get("slug") or "?")
-        name = _place_display_name(place)
-        detail = details_map.get(slug)
-        detail_dict = detail if isinstance(detail, dict) else None
-        prompt = _build_prompt(place, city_slug, detail_dict)
-        if dry_run:
-            print("[dry-run] {} / {} — {}".format(city_slug, slug, name))
-            continue
+    remaining = limit
 
-        raw = ask_gigachat(prompt, model=model, max_tokens=1200)
-        if gigachat_failed(raw):
-            print("{} / {}: {}".format(city_slug, slug, raw), file=sys.stderr)
-            errors += 1
-            if delay > 0:
-                time.sleep(delay)
-            continue
-
-        if gigachat_refusal(raw):
-            print(
-                "{} / {}: skip (GigaChat policy refusal)".format(
-                    city_slug, slug,
-                ),
-            )
-            skipped += 1
-            if delay > 0:
-                time.sleep(delay)
-            continue
-
-        parsed = extract_json(raw)
-        if not parsed:
-            print(
-                "{} / {}: cannot parse JSON".format(city_slug, slug),
-                file=sys.stderr,
-            )
-            errors += 1
-            if delay > 0:
-                time.sleep(delay)
-            continue
-
-        if parsed.get("skip"):
-            reason = str(parsed.get("reason") or "нет данных").strip()
-            print("{} / {}: skip ({})".format(city_slug, slug, reason))
-            skipped += 1
-        elif _apply_enrichment(place, parsed):
-            print("{} / {}: updated".format(city_slug, slug))
-            updated += 1
-        else:
-            print("{} / {}: no changes".format(city_slug, slug))
-            skipped += 1
-
-        if delay > 0:
-            time.sleep(delay)
-
-    if not dry_run and updated:
-        path.write_text(
-            json.dumps(places, ensure_ascii=False, indent=2) + "\n",
-            encoding="utf-8",
+    for path in paths:
+        places: list[dict[str, Any]] = json.loads(
+            path.read_text(encoding="utf-8"),
         )
-        print("Written", path)
+        targets = [p for p in places if place_needs_ru_narrative(p)]
+        if remaining is not None:
+            targets = targets[:remaining]
+            remaining = max(0, (remaining or 0) - len(targets))
+
+        file_updated = 0
+        for place in targets:
+            slug = str(place.get("slug") or "?")
+            name = _place_display_name(place)
+            detail = details_map.get(slug)
+            detail_dict = detail if isinstance(detail, dict) else None
+            prompt = _build_prompt(place, city_slug, detail_dict)
+            if dry_run:
+                print(
+                    "[dry-run] {} / {} — {} ({})".format(
+                        city_slug, slug, name, path.name,
+                    ),
+                )
+                continue
+
+            raw = ask_gigachat(prompt, model=model, max_tokens=1200)
+            if gigachat_failed(raw):
+                print(
+                    "{} / {}: {}".format(city_slug, slug, raw),
+                    file=sys.stderr,
+                )
+                errors += 1
+                if delay > 0:
+                    time.sleep(delay)
+                continue
+
+            if gigachat_refusal(raw):
+                print(
+                    "{} / {}: skip (GigaChat policy refusal)".format(
+                        city_slug, slug,
+                    ),
+                )
+                skipped += 1
+                if delay > 0:
+                    time.sleep(delay)
+                continue
+
+            parsed = extract_json(raw)
+            if not parsed:
+                print(
+                    "{} / {}: cannot parse JSON".format(city_slug, slug),
+                    file=sys.stderr,
+                )
+                errors += 1
+                if delay > 0:
+                    time.sleep(delay)
+                continue
+
+            if parsed.get("skip"):
+                reason = str(parsed.get("reason") or "нет данных").strip()
+                print("{} / {}: skip ({})".format(city_slug, slug, reason))
+                skipped += 1
+            elif _apply_enrichment(place, parsed):
+                print("{} / {}: updated".format(city_slug, slug))
+                updated += 1
+                file_updated += 1
+            else:
+                print("{} / {}: no changes".format(city_slug, slug))
+                skipped += 1
+
+            if delay > 0:
+                time.sleep(delay)
+
+        if not dry_run and file_updated:
+            path.write_text(
+                json.dumps(places, ensure_ascii=False, indent=2) + "\n",
+                encoding="utf-8",
+            )
+            print("Written", path)
+
+        if remaining is not None and remaining <= 0:
+            break
 
     return updated, skipped, errors
 
@@ -367,11 +404,11 @@ def main() -> int:
     total_up = total_sk = total_err = total_targets = 0
 
     for city_slug in cities:
-        path = _PROJECT_ROOT / city_slug / "data" / "{}_places.json".format(
-            city_slug,
-        )
-        places = json.loads(path.read_text(encoding="utf-8"))
-        n = sum(1 for p in places if place_needs_ru_narrative(p))
+        data_dir = _PROJECT_ROOT / city_slug / "data"
+        n = 0
+        for path in _place_json_paths(data_dir, city_slug):
+            places = json.loads(path.read_text(encoding="utf-8"))
+            n += sum(1 for p in places if place_needs_ru_narrative(p))
         if not n:
             continue
         print("\n=== {} ({} sparse) ===".format(city_slug, n))

@@ -222,18 +222,25 @@ def toc_entries_for_jerusalem_guide(
     project_root: Path | None,
     sort_key: Callable[[Mapping[str, Any]], Any] | None = None,
     has_section: Callable[[Path, Mapping[str, Any]], bool],
+    section_places: Sequence[Mapping[str, Any]] | None = None,
 ) -> list[GuideTocEntry]:
     """
     Build TOC for Jerusalem-style guides from the same place filter as HTML.
+
+    Pass ``section_places`` when the caller already computed the rendered
+    place list (single source of truth with body sections).
     """
-    edition_sort = sort_key if sort_key is not None else place_sort_key(edition)
-    pdf_places = places_for_pdf(
-        root,
-        places,
-        city_slug=city_slug,
-        sort_key=edition_sort,
-    )
-    section_places = [p for p in pdf_places if has_section(root, p)]
+    if section_places is None:
+        edition_sort = (
+            sort_key if sort_key is not None else place_sort_key(edition)
+        )
+        pdf_places = places_for_pdf(
+            root,
+            places,
+            city_slug=city_slug,
+            sort_key=edition_sort,
+        )
+        section_places = [p for p in pdf_places if has_section(root, p)]
     entries: list[GuideTocEntry] = []
     hist = _historical_toc_entry(city_slug, edition, project_root)
     if hist:

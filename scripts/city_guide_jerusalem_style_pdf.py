@@ -16,6 +16,8 @@ from scripts.build_pdf import (
     _strip_empty_pdf_pages,
     _strip_pdf_metadata,
     apply_continuous_page_footers,
+    get_last_playwright_pdf_error,
+    get_playwright_pdf_output_path,
 )
 from scripts.city_guide_core import (
     MIN_IMAGE_BYTES,
@@ -379,6 +381,7 @@ def _preamble_blocks(
         project_root=project_root,
         sort_key=place_sort_key(edition),
         has_section=_place_has_section,
+        section_places=section_places,
     )
     toc_html = guide_toc_html(toc_entries, edition)
     if toc_html:
@@ -800,14 +803,29 @@ def run_build_pdf_main(
                 deduper=pdf_deduper,
             )
         if pdf_ok:
-            _strip_empty_pdf_pages(pdf_path)
-            _strip_pdf_metadata(pdf_path)
-            copy_built_guide_pdf_to_final_guides(project_root, pdf_path)
-            print("Written:", pdf_path)
+            written_pdf = get_playwright_pdf_output_path(pdf_path)
+            _strip_empty_pdf_pages(written_pdf)
+            _strip_pdf_metadata(written_pdf)
+            copy_built_guide_pdf_to_final_guides(project_root, written_pdf)
+            print("Written:", written_pdf)
         else:
+            detail = get_last_playwright_pdf_error() or "unknown error"
+            if "playwright not installed" in detail.lower():
+                hint = (
+                    "pip install playwright && playwright install chromium"
+                )
+            elif (
+                "locked" in detail.lower()
+                or "invalid argument" in detail.lower()
+                or "errno 22" in detail.lower()
+            ):
+                hint = (
+                    "close PDF viewers holding the output file, then rebuild"
+                )
+            else:
+                hint = detail
             print(
-                "PDF failed ({}): pip install playwright && "
-                "playwright install chromium".format(edition),
+                "PDF failed ({}): {}".format(edition, hint),
                 file=sys.stderr,
             )
             return 1
