@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8"/>
+<title>Путеводитель · Русская архитектура · OTIUM</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Source+Sans+3:wght@400;600&display=swap"/>
+<style>
+
+body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
+  color: #1a1a1a; font-size: 11pt; }
+.cover-otium { page-break-after: always; min-height: 85vh;
+  padding: 2rem 1rem 3rem; box-sizing: border-box; }
+.otium-logo { font-family: 'Cormorant Garamond', serif; font-size: 3rem;
+  font-weight: 600; letter-spacing: 0.2em; margin-bottom: 2rem; }
+.otiump { margin: 0.9rem 0; line-height: 1.55; text-align: justify; }
+.guide-title { page-break-after: always; margin-bottom: 1rem;
+  page-break-inside: avoid; }
+.historical-reference { margin: 0.75rem 0 1.15rem;
+  page-break-inside: auto; }
+.historical-reference h2 { font-family: 'Cormorant Garamond', serif;
+  font-size: 1.28rem; font-weight: 600; margin: 0.4rem 0 0.55rem; }
+.russian_arhitecture-title-symbols { margin-bottom: 0.45rem; }
+.heraldry-strip { display: flex; flex-wrap: wrap; align-items: center;
+  justify-content: center; gap: 0.35rem 0.55rem; margin: 0.2rem 0 0.45rem; }
+.heraldry-fig img { max-height: 4.2rem; object-fit: contain; display: block;
+  margin: 0 auto; }
+.guide-title h1 { font-family: 'Cormorant Garamond', serif; font-size: 2.4rem;
+  margin-bottom: 0.5rem; }
+.lead { color: #444; font-size: 1.05rem; }
+
+.guide-toc { page-break-before: always; break-before: page;
+  page-break-after: always; break-after: page;
+  margin: 0; padding: 0.2rem 0 0.45rem; page-break-inside: auto; }
+.guide-toc h2 { font-family: 'Cormorant Garamond', serif;
+  font-size: 1.28rem; font-weight: 600; margin: 0.4rem 0 0.55rem; }
+.guide-toc ol { margin: 0.35rem 0 0.65rem 1.25rem; padding: 0;
+  columns: 2; column-gap: 1.5rem; }
+.guide-toc li { margin: 0.18rem 0; line-height: 1.35;
+  font-size: 0.88rem; break-inside: avoid; }
+.guide-toc a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.guide-toc a:hover { color: #0d3d56; }
+.guide-toc li.toc-item--sub { font-size: 0.82rem; margin-left: 0.35rem; }
+.toc-back { font-size: 0.78rem; margin: 0 0 0.35rem; text-align: right; }
+.toc-back a { color: #1a5276; text-decoration: underline;
+  text-underline-offset: 0.12em; cursor: pointer; }
+.toc-back a:hover { color: #0d3d56; }
+.place, .historical-reference, .guide-primer, .guide-trip-plans {
+  scroll-margin-top: 1.25rem; }
+.historical-reference h2, .guide-primer h2, .guide-trip-plans h2,
+.chapter-head h2, .place-lead h3 { position: relative; }
+.guide-toc + .place, .guide-toc + .chapter-head {
+  page-break-before: avoid; break-before: avoid-page; }
+.place-lead { page-break-inside: avoid; break-inside: avoid-page;
+  page-break-after: auto; }
+.place-lead > h3 { page-break-after: avoid; break-after: avoid-page; }
+.place-lead > .place-meta { page-break-after: avoid; break-after: avoid-page; }
+
+.place-fig { page-break-inside: avoid; break-inside: avoid-page;
+  margin: 0.5rem 0 1rem; }
+.place-fig img {
+  page-break-inside: avoid; break-inside: avoid-page;
+  max-height: 48vh; width: auto; max-width: 100%;
+  object-fit: contain; margin-left: auto; margin-right: auto; }
+.place-fig--hi-res img { max-height: 52vh; }
+.place-fig--lo-res img { max-height: 30vh; }
+.place-pdf-fig-row {
+  display: flex; flex-direction: row; flex-wrap: wrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.45rem 0.55rem; margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row .place-fig {
+  flex: 1 1 30%; margin: 0; min-width: 26%; max-width: 100%; }
+.place-pdf-fig-row .place-fig img {
+  width: auto; max-width: 100%; height: auto; max-height: 44vh;
+  object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--pair {
+  flex-wrap: nowrap; justify-content: space-between;
+  align-items: flex-end; gap: 0.5rem 0.65rem; }
+.place-pdf-fig-row--pair .place-fig {
+  flex: 1 1 47%; min-width: 0; max-width: 50%;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--pair .place-fig img {
+  max-height: 44vh; object-fit: contain; }
+.place-pdf-fig-row--pair .place-fig--hi-res img { max-height: 52vh; }
+.place-pdf-fig-row--pair .place-fig--lo-res img { max-height: 26vh; }
+.place-pdf-fig-row--pair .place-fig--row-sized img,
+.place-pdf-fig-row--triple .place-fig--row-sized img,
+.place-pdf-fig-row--many .place-fig--row-sized img {
+  width: auto; max-width: 100%; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row .place-fig--row-sized.place-fig--hi-res img,
+.place-pdf-fig-row .place-fig--row-sized.place-fig--lo-res img {
+  max-height: unset; }
+.place-pdf-fig-rows-stack {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple {
+  display: flex; flex-direction: row; flex-wrap: nowrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.4rem 0.48rem; margin: 0;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--triple .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--triple .place-fig--hi-res img { max-height: 42vh; }
+.place-pdf-fig-row--triple .place-fig--lo-res img { max-height: 18vh; }
+.place-pdf-fig-row--many {
+  flex-wrap: nowrap; justify-content: center; align-items: flex-end;
+  gap: 0.35rem 0.42rem; }
+.place-pdf-fig-row--many .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--many .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+
+
+.chapter-head { margin-top: 2.2rem; border-bottom: 1px solid #bbb;
+  padding-bottom: 0.35rem;
+  page-break-after: avoid; break-after: avoid; }
+.chapter-head + .place { page-break-before: avoid; break-before: avoid; }
+h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.55rem;
+  margin: 0 0 0.25rem; }
+.chapter-count { margin: 0 0 1rem; color: #333; font-size: 1rem; }
+.place { margin-bottom: 2.5rem; page-break-inside: avoid; }
+h3 { font-size: 1.22rem; margin: 1.2rem 0 0.35rem; }
+.sub-en { color: #555; font-size: 0.95rem; margin: 0 0 0.5rem;
+  font-style: italic; }
+.place-meta { font-size: 0.92rem; color: #353535; margin: 0 0 0.75rem;
+  line-height: 1.4; }
+
+.place-fig { page-break-inside: avoid; break-inside: avoid-page;
+  margin: 0.5rem 0 1rem; }
+.place-fig img {
+  page-break-inside: avoid; break-inside: avoid-page;
+  max-height: 48vh; width: auto; max-width: 100%;
+  object-fit: contain; margin-left: auto; margin-right: auto; }
+.place-fig--hi-res img { max-height: 52vh; }
+.place-fig--lo-res img { max-height: 30vh; }
+.place-pdf-fig-row {
+  display: flex; flex-direction: row; flex-wrap: wrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.45rem 0.55rem; margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row .place-fig {
+  flex: 1 1 30%; margin: 0; min-width: 26%; max-width: 100%; }
+.place-pdf-fig-row .place-fig img {
+  width: auto; max-width: 100%; height: auto; max-height: 44vh;
+  object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--pair {
+  flex-wrap: nowrap; justify-content: space-between;
+  align-items: flex-end; gap: 0.5rem 0.65rem; }
+.place-pdf-fig-row--pair .place-fig {
+  flex: 1 1 47%; min-width: 0; max-width: 50%;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--pair .place-fig img {
+  max-height: 44vh; object-fit: contain; }
+.place-pdf-fig-row--pair .place-fig--hi-res img { max-height: 52vh; }
+.place-pdf-fig-row--pair .place-fig--lo-res img { max-height: 26vh; }
+.place-pdf-fig-row--pair .place-fig--row-sized img,
+.place-pdf-fig-row--triple .place-fig--row-sized img,
+.place-pdf-fig-row--many .place-fig--row-sized img {
+  width: auto; max-width: 100%; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row .place-fig--row-sized.place-fig--hi-res img,
+.place-pdf-fig-row .place-fig--row-sized.place-fig--lo-res img {
+  max-height: unset; }
+.place-pdf-fig-rows-stack {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  margin: 0.55rem 0 1.05rem;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple {
+  display: flex; flex-direction: row; flex-wrap: nowrap;
+  align-items: flex-end; justify-content: center;
+  gap: 0.4rem 0.48rem; margin: 0;
+  page-break-inside: avoid; break-inside: avoid-page; }
+.place-pdf-fig-row--triple .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--triple .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+.place-pdf-fig-row--triple .place-fig--hi-res img { max-height: 42vh; }
+.place-pdf-fig-row--triple .place-fig--lo-res img { max-height: 18vh; }
+.place-pdf-fig-row--many {
+  flex-wrap: nowrap; justify-content: center; align-items: flex-end;
+  gap: 0.35rem 0.42rem; }
+.place-pdf-fig-row--many .place-fig {
+  flex: 1 1 0; margin: 0; min-width: 0; max-width: none;
+  display: flex; align-items: flex-end; justify-content: center; }
+.place-pdf-fig-row--many .place-fig img {
+  max-height: 30vh; object-fit: contain; margin: 0 auto; }
+
+img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
+.prose, .place-desc p { margin: 0.45rem 0; line-height: 1.5;
+  text-align: justify; }
+.place-story-block { margin: 0.5rem 0 0.75rem 0; }
+.place-story-block .place-story { font-style: italic; color: #4a5568; }
+ul.facts { margin: 0.3rem 0 0.6rem 1.2rem; padding: 0; }
+ul.facts li { margin: 0.25rem 0; line-height: 1.45; }
+</style>
+</head>
+<body>
+<section class="cover-otium"><h1 class="otium-logo">OTIUM</h1><p class="otiump">OTIUM — это практика осмысленного досуга. В античной традиции otium означало не отдых от труда, а время, в котором человек возвращается к взгляду, памяти и мышлению.</p>
+<p class="otiump">Мы создаём маршруты не для «посещения», а для пребывания — для внимательного присутствия в архитектуре и памяти места.</p>
+<p class="otiump">OTIUM существует для тех, кто хочет смотреть медленно.</p></section>
+<header class="guide-title"><div class="russian_arhitecture-title-symbols heraldry-strip"><figure class="heraldry-fig heraldry-coat-book"><img src="../images/guide_coat_of_arms.svg" alt="City emblem"/></figure>
+<figure class="heraldry-fig heraldry-coat-book"><img src="../images/guide_flag.svg" alt="Flag"/></figure></div><h1>Русская архитектура</h1><p class="lead">Путеводитель. Объектов в этом выпуске: 43.</p></header>
+<section class="historical-reference" id="guide-historical" aria-label="Историческая справка"><h2>Историческая справка</h2>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+<p class="prose">От древнерусских храмов Киевской Руси до стеклянных башен XXI века русская архитектура прошла путь от сакрального образца к имперскому параду, от авангардного эксперимента к типовой панели и обратно — к международному неоэклектизму.</p>
+<p class="prose">Первые каменные соборы — София Киевская, новгородские и псковские храмы — задали крестово-купольную модель. Московское зодчество XV–XVI веков соединило итальянские мотивы с шатровыми экспериментами; узорочье и нарышкинское барокко ознаменовали пышный декор допетровской и ранней петровской эпохи.</p>
+<p class="prose">С основания Санкт-Петербурга архитектура стала языком европейского присутствия: петровское и елизаветинское барокко, классицизм и ампир сформировали парадные ансамбли столицы. В XIX веке Константин Тон утвердил русско-византийский стиль, а эклектика и псевдорусский романтизм наполнили города музеями, вокзалами и торговыми рядами.</p>
+<p class="prose">На рубеже XX века модерн и неорусский стиль дали выразительные силуэты; неоклассицизм сохранял торжественность буржуазного города. После революции конструктивизм искал новую жизнь в стекле и бетоне, но уже в 1930-е годы наступил поворот к монументальному неоклассицизму и «сталинскому ампиру» — высоткам, метро, ВДНХ.</p>
+<p class="prose">Послевоенная массовая застройка принесла серийные панельные микрорайоны и советский модернизм — от Останкино до брутализма. С конца 1980-х постмодернизм иронично цитирует прошлое, а современные проекты — Москва-Сити, Зарядье, Лахта-Центр — вписывают Россию в глобальный архитектурный диалог.</p>
+<p class="prose">Этот путеводитель выстроен по тридцати стилям и направлениям: в каждой главе — два-три знаковых памятника с именами архитекторов и кратким контекстом. Маршрут можно читать хронологически как историю взгляда на форму, пространство и государственный идеал.</p></section>
+<nav class="guide-toc" id="guide-toc" aria-label="Содержание"><h2>Содержание</h2><ol><li class="toc-item"><a href="#guide-historical">Историческая справка</a></li><li class="toc-item"><a href="#cat-ancient-rus">Древнерусское зодчество (X–XVII вв.)</a></li><li class="toc-item toc-item--sub"><a href="#ancient_rus_kyiv_sophia">Софийский собор в Киеве</a></li><li class="toc-item"><a href="#cat-novgorod-school">Новгородская школа (XII–XV вв.)</a></li><li class="toc-item toc-item--sub"><a href="#novgorod_school_novgorod_kremlin">Новгородский кремль (детинец)</a></li><li class="toc-item"><a href="#cat-pskov-school">Псковская школа (XIV–XVI вв.)</a></li><li class="toc-item toc-item--sub"><a href="#pskov_school_pskov_kremlin">Псковский кремль</a></li><li class="toc-item"><a href="#cat-moscow-fifteenth-sixteenth">Московское зодчество (XV–XVI вв.)</a></li><li class="toc-item toc-item--sub"><a href="#moscow_fifteenth_sixteenth_kremlin_archangel">Архангельский собор Московского Кремля</a></li><li class="toc-item toc-item--sub"><a href="#moscow_fifteenth_sixteenth_kremlin_dormition">Успенский собор Московского Кремля</a></li><li class="toc-item"><a href="#cat-tent-roof">Шатровый стиль (XVI в.)</a></li><li class="toc-item toc-item--sub"><a href="#tent_roof_st_basil">Храм Василия Блаженного</a></li><li class="toc-item toc-item--sub"><a href="#tent_roof_ascension_kolomenskoye">Церковь Вознесения в Коломенском</a></li><li class="toc-item toc-item--sub"><a href="#tent_roof_transfiguration_ostro">Церковь Преображения в селе Остров</a></li><li class="toc-item"><a href="#cat-uzorochye">Русское узорочье (XVII в.)</a></li><li class="toc-item toc-item--sub"><a href="#uzorochye_nativity_putinki">Церковь Рождества Богородицы в Путинках</a></li><li class="toc-item toc-item--sub"><a href="#uzorochye_trinity_nikitniki">Церковь Троицы в Никитниках</a></li><li class="toc-item"><a href="#cat-naryshkin-baroque">Нарышкинское барокко (конец XVII в.)</a></li><li class="toc-item toc-item--sub"><a href="#naryshkin_baroque_intercession_fili">Церковь Покрова в Филях</a></li><li class="toc-item"><a href="#cat-petrine-baroque">Петровское барокко (начало XVIII в.)</a></li><li class="toc-item toc-item--sub"><a href="#petrine_baroque_peter_paul_cathedral">Петропавловский собор</a></li><li class="toc-item"><a href="#cat-elizabethan-baroque">Елизаветинское барокко (середина XVIII в.)</a></li><li class="toc-item toc-item--sub"><a href="#elizabethan_baroque_catherine_palace">Большой Екатерининский дворец</a></li><li class="toc-item toc-item--sub"><a href="#elizabethan_baroque_winter_palace">Зимний дворец</a></li><li class="toc-item toc-item--sub"><a href="#elizabethan_baroque_smolny_cathedral">Смольный собор</a></li><li class="toc-item"><a href="#cat-early-classicism">Ранний классицизм (вторая половина XVIII в.)</a></li><li class="toc-item toc-item--sub"><a href="#early_classicism_pashkov_house">Дом Пашкова</a></li><li class="toc-item toc-item--sub"><a href="#early_classicism_marble_palace">Мраморный дворец</a></li><li class="toc-item"><a href="#cat-mature-classicism">Зрелый русский классицизм (конец XVIII — начало XIX вв.)</a></li><li class="toc-item toc-item--sub"><a href="#mature_classicism_admiralty">Главное Адмиралтейство</a></li><li class="toc-item toc-item--sub"><a href="#mature_classicism_kazan_cathedral_spb">Казанский собор</a></li><li class="toc-item toc-item--sub"><a href="#mature_classicism_tauride_palace">Таврический дворец</a></li><li class="toc-item"><a href="#cat-empire">Ампир (первая треть XIX в.)</a></li><li class="toc-item toc-item--sub"><a href="#empire_stock_exchange">Здание Биржи</a></li><li class="toc-item toc-item--sub"><a href="#empire_isaac_cathedral">Исаакиевский собор</a></li><li class="toc-item toc-item--sub"><a href="#empire_triumphal_gate_moscow">Триумфальные ворота</a></li><li class="toc-item"><a href="#cat-russo-byzantine">Русско-византийский стиль (середина XIX в.)</a></li><li class="toc-item toc-item--sub"><a href="#russo_byzantine_grand_kremlin_palace">Большой Кремлёвский дворец</a></li><li class="toc-item toc-item--sub"><a href="#russo_byzantine_christ_savior">Храм Христа Спасителя</a></li><li class="toc-item"><a href="#cat-eclecticism">Эклектика (вторая половина XIX в.)</a></li><li class="toc-item toc-item--sub"><a href="#eclecticism_igumnov_house">Дом Игумнова</a></li><li class="toc-item"><a href="#cat-pseudo-russian">Псевдорусский стиль (вторая половина XIX в.)</a></li><li class="toc-item toc-item--sub"><a href="#pseudo_russian_gum">Верхние торговые ряды (ГУМ)</a></li><li class="toc-item toc-item--sub"><a href="#pseudo_russian_savior_on_blood">Храм Спаса на Крови</a></li><li class="toc-item"><a href="#cat-neo-russian">Неорусский стиль (рубеж XIX–XX вв.)</a></li><li class="toc-item toc-item--sub"><a href="#neo_russian_yaroslavsky_station">Ярославский вокзал</a></li><li class="toc-item"><a href="#cat-art-nouveau">Модерн (ар-нуво, рубеж XIX–XX вв.)</a></li><li class="toc-item toc-item--sub"><a href="#art_nouveau_vitebsky_station">Витебский вокзал</a></li><li class="toc-item toc-item--sub"><a href="#art_nouveau_singer_house">Дом компании «Зингер»</a></li><li class="toc-item"><a href="#cat-neoclassicism-early20">Неоклассицизм (начало XX в.)</a></li><li class="toc-item toc-item--sub"><a href="#neoclassicism_early20_kyivsky_station">Киевский вокзал</a></li><li class="toc-item"><a href="#cat-avant-garde">Авангард / конструктивизм (1920–1930‑е гг.)</a></li><li class="toc-item toc-item--sub"><a href="#avant_garde_narkomfin">Дом Наркомфина</a></li><li class="toc-item"><a href="#cat-stalinist">Сталинская архитектура / «сталинский ампир» (1930–1950‑е)</a></li><li class="toc-item toc-item--sub"><a href="#stalinist_msu_main_building">Главное здание МГУ</a></li><li class="toc-item toc-item--sub"><a href="#stalinist_vdnh_main_pavilion">Главный павильон ВДНХ</a></li><li class="toc-item toc-item--sub"><a href="#stalinist_komsomolskaya_metro">Станция метро «Комсомольская-кольцевая»</a></li><li class="toc-item"><a href="#cat-soviet-modernism">Советский модернизм (1960–1980‑е гг.)</a></li><li class="toc-item toc-item--sub"><a href="#soviet_modernism_ostankino_tower">Останкинская телебашня</a></li><li class="toc-item"><a href="#cat-regional-soviet">Региональное советское зодчество (1960–1980‑е)</a></li><li class="toc-item toc-item--sub"><a href="#regional_soviet_luzhniki_stadium">Стадион «Лужники»</a></li><li class="toc-item toc-item--sub"><a href="#regional_soviet_novosibirsk_opera">Театр оперы и балета (Новосибирск)</a></li><li class="toc-item"><a href="#cat-soviet-neoclassicism-revival">Советский неоклассицизм (возрождение, 1940–1950‑е)</a></li><li class="toc-item toc-item--sub"><a href="#soviet_neoclassicism_revival_nevsky_prospect">Реконструкция Невского проспекта</a></li><li class="toc-item"><a href="#cat-contemporary">Современный российский стиль (2000‑е — н. в.)</a></li><li class="toc-item toc-item--sub"><a href="#contemporary_lakhta_center">Лахта-центр</a></li><li class="toc-item toc-item--sub"><a href="#contemporary_moscow_city">Москва-Сити</a></li><li class="toc-item toc-item--sub"><a href="#contemporary_zaryadye_park">Парк «Зарядье»</a></li></ol></nav>
+<div class="chapter-head" id="cat-ancient-rus"><h2>Древнерусское зодчество (X–XVII вв.)</h2><p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p><p class="chapter-count">1 пример</p></div>
+<section class="place" id="ancient_rus_kyiv_sophia">
+<div class="place-lead">
+<h3>Софийский собор в Киеве</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Киев | Стиль: Древнерусское зодчество (X–XVII вв.) | Период: 1037</p>
+<figure class="place-fig place-fig--hi-res"><img src="../images/styles/ancient_rus_kyiv_sophia.jpg" alt="Софийский собор в Киеве" width="1280" height="873"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Каменное зодчество Киевской Руси: крестово-купольные храмы, мозаики и фрески, компактные притворы и массивные стены. Заложен при Ярославе Мудром; сохранил уникальные мозаики и фрески XI века. Образец византийского влияния на зодчество Киевской Руси. Период: 1037. Город: Киев. Стиль: Древнерусское зодчество (X–XVII вв.).</p></div>
+</section>
+<div class="chapter-head" id="cat-novgorod-school"><h2>Новгородская школа (XII–XV вв.)</h2><p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p><p class="chapter-count">1 пример</p></div>
+<section class="place" id="novgorod_school_novgorod_kremlin">
+<div class="place-lead">
+<h3>Новгородский кремль (детинец)</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Великий Новгород | Стиль: Новгородская школа (XII–XV вв.)</p>
+<figure class="place-fig place-fig--lo-res"><img src="../images/styles/novgorod_school_novgorod_kremlin.jpg" alt="Новгородский кремль (детинец)" width="500" height="375"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Своеобразие новгородских храмов — пониженные купола, асимметричные фасады и декоративная кирпичная кладка. Включает Софийский собор — духовный центр республики. Период: XI–XV вв.. Город: Великий Новгород. Стиль: Новгородская школа (XII–XV вв.).</p></div>
+</section>
+<div class="chapter-head" id="cat-pskov-school"><h2>Псковская школа (XIV–XVI вв.)</h2><p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p><p class="chapter-count">1 пример</p></div>
+<section class="place" id="pskov_school_pskov_kremlin">
+<div class="place-lead">
+<h3>Псковский кремль</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Псков | Стиль: Псковская школа (XIV–XVI вв.)</p>
+<figure class="place-fig place-fig--lo-res"><img src="../images/styles/pskov_school_pskov_kremlin.jpg" alt="Псковский кремль" width="500" height="281"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Псковские мастера сочетали лаконичные объёмы с колокольнями-«восьмёрками» и звонницами у стен. Период: XIV–XV вв.. Город: Псков. Стиль: Псковская школа (XIV–XVI вв.).</p></div>
+</section>
+<div class="chapter-head" id="cat-moscow-fifteenth-sixteenth"><h2>Московское зодчество (XV–XVI вв.)</h2><p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p><p class="chapter-count">2 примера</p></div>
+<section class="place" id="moscow_fifteenth_sixteenth_kremlin_archangel">
+<div class="place-lead">
+<h3>Архангельский собор Московского Кремля</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Москва | Стиль: Алевиз Новый | Период: 1508</p>
+<figure class="place-fig place-fig--hi-res"><img src="../images/styles/moscow_fifteenth_sixteenth_kremlin_archangel.jpg" alt="Архангельский собор Московского Кремля" width="2500" height="1249"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Кремлёвские соборы объединяют итальянские мотивы порталов с русской традицией купольных композиций. Архитектор: Алевиз Новый. Период: 1508. Город: Москва. Стиль: Московское зодчество (XV–XVI вв.).</p></div>
+</section>
+<section class="place" id="moscow_fifteenth_sixteenth_kremlin_dormition">
+<div class="place-lead">
+<h3>Успенский собор Московского Кремля</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Москва | Стиль: Аристотель Фиораванти | Период: 1479</p>
+<figure class="place-fig place-fig--lo-res"><img src="../images/styles/moscow_fifteenth_sixteenth_kremlin_dormition.jpg" alt="Успенский собор Московского Кремля" width="300" height="225"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Архитектор: Аристотель Фиораванти. Период: 1479.</p></div>
+</section>
+<div class="chapter-head" id="cat-tent-roof"><h2>Шатровый стиль (XVI в.)</h2><p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p><p class="chapter-count">3 примера</p></div>
+<section class="place" id="tent_roof_st_basil">
+<div class="place-lead">
+<h3>Храм Василия Блаженного</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Москва | Стиль: Барма и Постник | Период: 1561</p>
+<figure class="place-fig"><img src="../images/styles/tent_roof_st_basil.jpg" alt="Храм Василия Блаженного" width="1024" height="683"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Шатровые храмы без внутренних опор — эксперимент московского зодчества эпохи Ивана Грозного. Архитектор: Барма и Постник. Период: 1561. Стиль: Шатровый стиль (XVI в.).</p></div>
+</section>
+<section class="place" id="tent_roof_ascension_kolomenskoye">
+<div class="place-lead">
+<h3>Церковь Вознесения в Коломенском</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Москва | Стиль: Шатровый стиль (XVI в.) | Период: 1532</p>
+<figure class="place-fig"><img src="../images/styles/tent_roof_ascension_kolomenskoye.jpg" alt="Церковь Вознесения в Коломенском" width="800" height="600"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Период: 1532.</p></div>
+</section>
+<section class="place" id="tent_roof_transfiguration_ostro">
+<div class="place-lead">
+<h3>Церковь Преображения в селе Остров</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Московская область | Стиль: Шатровый стиль (XVI в.)</p>
+<figure class="place-fig place-fig--hi-res"><img src="../images/styles/tent_roof_transfiguration_ostro.jpg" alt="Церковь Преображения в селе Остров" width="1280" height="960"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Период: XVI в.. Город: Московская область.</p></div>
+</section>
+<div class="chapter-head" id="cat-uzorochye"><h2>Русское узорочье (XVII в.)</h2><p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p><p class="chapter-count">2 примера</p></div>
+<section class="place" id="uzorochye_nativity_putinki">
+<div class="place-lead">
+<h3>Церковь Рождества Богородицы в Путинках</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Москва | Стиль: Русское узорочье (XVII в.) | Период: 1652</p>
+<figure class="place-fig"><img src="../images/styles/uzorochye_nativity_putinki.jpg" alt="Церковь Рождества Богородицы в Путинках" width="1024" height="680"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Пышный декор из кокошников, поясков и наличников в эпоху Смуты и первых Романовых. Период: 1652. Стиль: Русское узорочье (XVII в.).</p></div>
+</section>
+<section class="place" id="uzorochye_trinity_nikitniki">
+<div class="place-lead">
+<h3>Церковь Троицы в Никитниках</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Москва | Стиль: Русское узорочье (XVII в.)</p>
+<figure class="place-fig"><img src="../images/styles/uzorochye_trinity_nikitniki.jpg" alt="Церковь Троицы в Никитниках" width="1024" height="705"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Период: XVII в..</p></div>
+</section>
+<div class="chapter-head" id="cat-naryshkin-baroque"><h2>Нарышкинское барокко (конец XVII в.)</h2><p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p><p class="chapter-count">1 пример</p></div>
+<section class="place" id="naryshkin_baroque_intercession_fili">
+<div class="place-lead">
+<h3>Церковь Покрова в Филях</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Москва | Стиль: Нарышкинское барокко (конец XVII в.) | Период: 1693</p>
+<figure class="place-fig place-fig--lo-res"><img src="../images/styles/naryshkin_baroque_intercession_fili.jpg" alt="Церковь Покрова в Филях" width="330" height="440"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Московское «барокко под куполом»: вертикальные ряды кокошников и белокаменная резьба. Период: 1693. Стиль: Нарышкинское барокко (конец XVII в.).</p></div>
+</section>
+<div class="chapter-head" id="cat-petrine-baroque"><h2>Петровское барокко (начало XVIII в.)</h2><p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p><p class="chapter-count">1 пример</p></div>
+<section class="place" id="petrine_baroque_peter_paul_cathedral">
+<div class="place-lead">
+<h3>Петропавловский собор</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Санкт-Петербург | Стиль: Доменико Трезини | Период: 1712–1733</p>
+<figure class="place-fig place-fig--hi-res"><img src="../images/styles/petrine_baroque_peter_paul_cathedral.jpg" alt="Петропавловский собор" width="1280" height="732"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Первые петербургские ансамбли северного барокко и рациональная сетка «регулярного города». Архитектор: Доменико Трезини. Период: 1712–1733. Город: Санкт-Петербург. Стиль: Петровское барокко (начало XVIII в.).</p></div>
+</section>
+<div class="chapter-head" id="cat-elizabethan-baroque"><h2>Елизаветинское барокко (середина XVIII в.)</h2><p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p><p class="chapter-count">3 примера</p></div>
+<section class="place" id="elizabethan_baroque_catherine_palace">
+<div class="place-lead">
+<h3>Большой Екатерининский дворец</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Пушкин | Стиль: Бартоломео Растрелли | Период: 1752–1756</p>
+<figure class="place-fig place-fig--hi-res"><img src="../images/styles/elizabethan_baroque_catherine_palace.jpg" alt="Большой Екатерининский дворец" width="1280" height="853"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Роскошь дворцов Растрелли: изогнутые фасады, золото и праздничная пластика стен. Архитектор: Бартоломео Растрелли. Период: 1752–1756. Город: Пушкин. Стиль: Елизаветинское барокко (середина XVIII в.).</p></div>
+</section>
+<section class="place" id="elizabethan_baroque_winter_palace">
+<div class="place-lead">
+<h3>Зимний дворец</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Санкт-Петербург | Стиль: Бартоломео Растрелли | Период: 1754–1762</p>
+<figure class="place-fig place-fig--hi-res"><img src="../images/styles/elizabethan_baroque_winter_palace.jpg" alt="Зимний дворец" width="1600" height="950"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Период: 1754–1762.</p></div>
+</section>
+<section class="place" id="elizabethan_baroque_smolny_cathedral">
+<div class="place-lead">
+<h3>Смольный собор</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Санкт-Петербург | Стиль: Бартоломео Растрелли | Период: 1748–1764</p>
+<figure class="place-fig place-fig--lo-res"><img src="../images/styles/elizabethan_baroque_smolny_cathedral.jpg" alt="Смольный собор" width="330" height="440"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Период: 1748–1764.</p></div>
+</section>
+<div class="chapter-head" id="cat-early-classicism"><h2>Ранний классицизм (вторая половина XVIII в.)</h2><p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p><p class="chapter-count">2 примера</p></div>
+<section class="place" id="early_classicism_pashkov_house">
+<div class="place-lead">
+<h3>Дом Пашкова</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Москва | Стиль: Василий Баженов | Период: 1784–1786</p>
+<figure class="place-fig place-fig--lo-res"><img src="../images/styles/early_classicism_pashkov_house.jpg" alt="Дом Пашкова" width="500" height="335"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Античные ордера и строгая симметрия в академической архитектуре Екатерининской эпохи. Архитектор: Василий Баженов. Период: 1784–1786. Стиль: Ранний классицизм (вторая половина XVIII в.).</p></div>
+</section>
+<section class="place" id="early_classicism_marble_palace">
+<div class="place-lead">
+<h3>Мраморный дворец</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Санкт-Петербург | Стиль: Антонио Ринальди | Период: 1768–1785</p>
+<figure class="place-fig place-fig--hi-res"><img src="../images/styles/early_classicism_marble_palace.jpg" alt="Мраморный дворец" width="1280" height="629"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Архитектор: Антонио Ринальди. Период: 1768–1785.</p></div>
+</section>
+<div class="chapter-head" id="cat-mature-classicism"><h2>Зрелый русский классицизм (конец XVIII — начало XIX вв.)</h2><p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p><p class="chapter-count">3 примера</p></div>
+<section class="place" id="mature_classicism_admiralty">
+<div class="place-lead">
+<h3>Главное Адмиралтейство</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Санкт-Петербург | Стиль: Андрей Захаров | Период: 1806–1823</p>
+<figure class="place-fig place-fig--lo-res"><img src="../images/styles/mature_classicism_admiralty.jpg" alt="Главное Адмиралтейство" width="330" height="247"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Монументальные ансамбли столицы: адмиралтейская стрела, дворцы и соборы-ротонды. Архитектор: Андрей Захаров. Период: 1806–1823. Стиль: Зрелый русский классицизм (конец XVIII — начало XIX вв.).</p></div>
+</section>
+<section class="place" id="mature_classicism_kazan_cathedral_spb">
+<div class="place-lead">
+<h3>Казанский собор</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Санкт-Петербург | Стиль: Андрей Воронихин | Период: 1801–1811</p>
+<figure class="place-fig place-fig--hi-res"><img src="../images/styles/mature_classicism_kazan_cathedral_spb.jpg" alt="Казанский собор" width="1600" height="1200"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Архитектор: Андрей Воронихин. Период: 1801–1811.</p></div>
+</section>
+<section class="place" id="mature_classicism_tauride_palace">
+<div class="place-lead">
+<h3>Таврический дворец</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Санкт-Петербург | Стиль: Иван Старов | Период: 1783–1789</p>
+<figure class="place-fig place-fig--hi-res"><img src="../images/styles/mature_classicism_tauride_palace.jpg" alt="Таврический дворец" width="1280" height="805"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Архитектор: Иван Старов. Период: 1783–1789.</p></div>
+</section>
+<div class="chapter-head" id="cat-empire"><h2>Ампир (первая треть XIX в.)</h2><p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p><p class="chapter-count">3 примера</p></div>
+<section class="place" id="empire_stock_exchange">
+<div class="place-lead">
+<h3>Здание Биржи</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Санкт-Петербург | Стиль: Жан Тома де Томон | Период: 1805–1816</p>
+<figure class="place-fig place-fig--hi-res"><img src="../images/styles/empire_stock_exchange.jpg" alt="Здание Биржи" width="1280" height="788"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Торжественность империи: колоннады, триумфальные мотивы и парадная градостроительная ось. Архитектор: Жан Тома де Томон. Период: 1805–1816. Стиль: Ампир (первая треть XIX в.).</p></div>
+</section>
+<section class="place" id="empire_isaac_cathedral">
+<div class="place-lead">
+<h3>Исаакиевский собор</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Санкт-Петербург | Стиль: Огюст Монферран | Период: 1818–1858</p>
+<figure class="place-fig place-fig--hi-res"><img src="../images/styles/empire_isaac_cathedral.jpg" alt="Исаакиевский собор" width="1280" height="848"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Архитектор: Огюст Монферран. Период: 1818–1858.</p></div>
+</section>
+<section class="place" id="empire_triumphal_gate_moscow">
+<div class="place-lead">
+<h3>Триумфальные ворота</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Москва | Стиль: Осип Бове | Период: 1829–1834</p>
+<figure class="place-fig place-fig--hi-res"><img src="../images/styles/empire_triumphal_gate_moscow.jpg" alt="Триумфальные ворота" width="1280" height="925"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Архитектор: Осип Бове. Период: 1829–1834.</p></div>
+</section>
+<div class="chapter-head" id="cat-russo-byzantine"><h2>Русско-византийский стиль (середина XIX в.)</h2><p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p><p class="chapter-count">2 примера</p></div>
+<section class="place" id="russo_byzantine_grand_kremlin_palace">
+<div class="place-lead">
+<h3>Большой Кремлёвский дворец</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Москва | Стиль: Константин Тон | Период: 1838–1849</p>
+<figure class="place-fig"><img src="../images/styles/russo_byzantine_grand_kremlin_palace.jpg" alt="Большой Кремлёвский дворец" width="800" height="600"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Константин Тон соединил византийские формы с государственным символизмом православной империи. Архитектор: Константин Тон. Период: 1838–1849. Стиль: Русско-византийский стиль (середина XIX в.).</p></div>
+</section>
+<section class="place" id="russo_byzantine_christ_savior">
+<div class="place-lead">
+<h3>Храм Христа Спасителя</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Москва | Стиль: Константин Тон | Период: 1839–1883</p>
+<figure class="place-fig"><img src="../images/styles/russo_byzantine_christ_savior.jpg" alt="Храм Христа Спасителя" width="1024" height="683"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Период: 1839–1883.</p></div>
+</section>
+<div class="chapter-head" id="cat-eclecticism"><h2>Эклектика (вторая половина XIX в.)</h2><p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p><p class="chapter-count">1 пример</p></div>
+<section class="place" id="eclecticism_igumnov_house">
+<div class="place-lead">
+<h3>Дом Игумнова</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Москва | Стиль: Николай Поздеев | Период: 1888–1895</p>
+<figure class="place-fig place-fig--hi-res"><img src="../images/styles/eclecticism_igumnov_house.jpg" alt="Дом Игумнова" width="3000" height="4000"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Свободное смешение исторических стилей в музеях, вокзалах и городских особняках. Архитектор: Николай Поздеев. Период: 1888–1895. Стиль: Эклектика (вторая половина XIX в.).</p></div>
+</section>
+<div class="chapter-head" id="cat-pseudo-russian"><h2>Псевдорусский стиль (вторая половина XIX в.)</h2><p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p><p class="chapter-count">2 примера</p></div>
+<section class="place" id="pseudo_russian_gum">
+<div class="place-lead">
+<h3>Верхние торговые ряды (ГУМ)</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Москва | Стиль: Александр Померанцев | Период: 1890–1893</p>
+<figure class="place-fig place-fig--lo-res"><img src="../images/styles/pseudo_russian_gum.jpg" alt="Верхние торговые ряды (ГУМ)" width="330" height="487"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Романтическое обращение к допетровской традиции в торговых и общественных зданиях. Архитектор: Александр Померанцев. Период: 1890–1893. Стиль: Псевдорусский стиль (вторая половина XIX в.).</p></div>
+</section>
+<section class="place" id="pseudo_russian_savior_on_blood">
+<div class="place-lead">
+<h3>Храм Спаса на Крови</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Санкт-Петербург | Стиль: Альфред Парланд | Период: 1883–1907</p>
+<figure class="place-fig place-fig--hi-res"><img src="../images/styles/pseudo_russian_savior_on_blood.jpg" alt="Храм Спаса на Крови" width="1280" height="1243"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Архитектор: Альфред Парланд. Период: 1883–1907.</p></div>
+</section>
+<div class="chapter-head" id="cat-neo-russian"><h2>Неорусский стиль (рубеж XIX–XX вв.)</h2><p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p><p class="chapter-count">1 пример</p></div>
+<section class="place" id="neo_russian_yaroslavsky_station">
+<div class="place-lead">
+<h3>Ярославский вокзал</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Москва | Стиль: Фёдор Шехтель | Период: 1902–1904</p>
+<figure class="place-fig place-fig--lo-res"><img src="../images/styles/neo_russian_yaroslavsky_station.jpg" alt="Ярославский вокзал" width="500" height="451"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Национальный модерн: сказочные мотивы, майолика и выразительные силуэты вокзалов и галерей. Архитектор: Фёдор Шехтель. Период: 1902–1904. Стиль: Неорусский стиль (рубеж XIX–XX вв.).</p></div>
+</section>
+<div class="chapter-head" id="cat-art-nouveau"><h2>Модерн (ар-нуво, рубеж XIX–XX вв.)</h2><p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p><p class="chapter-count">2 примера</p></div>
+<section class="place" id="art_nouveau_vitebsky_station">
+<div class="place-lead">
+<h3>Витебский вокзал</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Санкт-Петербург | Стиль: Станислав Бржозовский | Период: 1904</p>
+<figure class="place-fig place-fig--hi-res"><img src="../images/styles/art_nouveau_vitebsky_station.jpg" alt="Витебский вокзал" width="1280" height="786"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Плавные линии, растительный орнамент и новые конструктивные материалы в городской среде. Архитектор: Станислав Бржозовский. Период: 1904. Стиль: Модерн (ар-нуво, рубеж XIX–XX вв.).</p></div>
+</section>
+<section class="place" id="art_nouveau_singer_house">
+<div class="place-lead">
+<h3>Дом компании «Зингер»</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Санкт-Петербург | Стиль: Павел Сюзор | Период: 1902–1904</p>
+<figure class="place-fig place-fig--lo-res"><img src="../images/styles/art_nouveau_singer_house.jpg" alt="Дом компании «Зингер»" width="330" height="220"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Архитектор: Павел Сюзор.</p></div>
+</section>
+<div class="chapter-head" id="cat-neoclassicism-early20"><h2>Неоклассицизм (начало XX в.)</h2><p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p><p class="chapter-count">1 пример</p></div>
+<section class="place" id="neoclassicism_early20_kyivsky_station">
+<div class="place-lead">
+<h3>Киевский вокзал</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Москва | Стиль: Иван Рерберг | Период: 1914–1918</p>
+<figure class="place-fig"><img src="../images/styles/neoclassicism_early20_kyivsky_station.jpg" alt="Киевский вокзал" width="1024" height="768"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Возврат к античным формам в банках, вокзалах и доходных домах Серебряного века. Архитектор: Иван Рерберг. Период: 1914–1918. Стиль: Неоклассицизм (начало XX в.).</p></div>
+</section>
+<div class="chapter-head" id="cat-avant-garde"><h2>Авангард / конструктивизм (1920–1930‑е гг.)</h2><p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p><p class="chapter-count">1 пример</p></div>
+<section class="place" id="avant_garde_narkomfin">
+<div class="place-lead">
+<h3>Дом Наркомфина</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Москва | Стиль: Моисей Гинзбург, Игнатий Милинис | Период: 1928–1930</p>
+<figure class="place-fig"><img src="../images/styles/avant_garde_narkomfin.jpg" alt="Дом Наркомфина" width="608" height="1080"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Функция и конструкция: стекло и бетон, эксперимент жилья и общественных клубов. Архитектор: Моисей Гинзбург, Игнатий Милинис. Период: 1928–1930. Стиль: Авангард / конструктивизм (1920–1930‑е гг.).</p></div>
+</section>
+<div class="chapter-head" id="cat-stalinist"><h2>Сталинская архитектура / «сталинский ампир» (1930–1950‑е)</h2><p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p><p class="chapter-count">3 примера</p></div>
+<section class="place" id="stalinist_msu_main_building">
+<div class="place-lead">
+<h3>Главное здание МГУ</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Москва | Стиль: Лев Руднев | Период: 1949–1953</p>
+<figure class="place-fig"><img src="../images/styles/stalinist_msu_main_building.jpg" alt="Главное здание МГУ" width="1024" height="608"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Монументальные высотки, парадные магистрали и торжественное оформление метро. Архитектор: Лев Руднев. Период: 1949–1953. Стиль: Сталинская архитектура / «сталинский ампир» (1930–1950‑е).</p></div>
+</section>
+<section class="place" id="stalinist_vdnh_main_pavilion">
+<div class="place-lead">
+<h3>Главный павильон ВДНХ</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Москва | Стиль: Георгий Щуко, Евгений Столяров | Период: 1954</p>
+<figure class="place-fig"><img src="../images/styles/stalinist_vdnh_main_pavilion.jpg" alt="Главный павильон ВДНХ" width="500" height="750"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Архитектор: Георгий Щуко, Евгений Столяров. Период: 1954.</p></div>
+</section>
+<section class="place" id="stalinist_komsomolskaya_metro">
+<div class="place-lead">
+<h3>Станция метро «Комсомольская-кольцевая»</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Москва | Стиль: Алексей Щусев и др. | Период: 1952</p>
+<figure class="place-fig place-fig--lo-res"><img src="../images/styles/stalinist_komsomolskaya_metro.jpg" alt="Станция метро «Комсомольская-кольцевая»" width="500" height="333"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Архитектор: Алексей Щусев и др.. Период: 1952.</p></div>
+</section>
+<div class="chapter-head" id="cat-soviet-modernism"><h2>Советский модернизм (1960–1980‑е гг.)</h2><p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p><p class="chapter-count">1 пример</p></div>
+<section class="place" id="soviet_modernism_ostankino_tower">
+<div class="place-lead">
+<h3>Останкинская телебашня</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Москва | Стиль: Николай Никитин | Период: 1963–1967</p>
+<figure class="place-fig place-fig--hi-res"><img src="../images/styles/soviet_modernism_ostankino_tower.jpg" alt="Останкинская телебашня" width="1080" height="1920"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Лаконичные объёмы, инженерные конструкции и функциональные дворцы культуры. Архитектор: Николай Никитин. Период: 1963–1967. Стиль: Советский модернизм (1960–1980‑е гг.).</p></div>
+</section>
+<div class="chapter-head" id="cat-regional-soviet"><h2>Региональное советское зодчество (1960–1980‑е)</h2><p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p><p class="chapter-count">2 примера</p></div>
+<section class="place" id="regional_soviet_luzhniki_stadium">
+<div class="place-lead">
+<h3>Стадион «Лужники»</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Москва | Стиль: Региональное советское зодчество (1960–1980‑е) | Период: 1956</p>
+<figure class="place-fig"><img src="../images/styles/regional_soviet_luzhniki_stadium.jpg" alt="Стадион «Лужники»" width="800" height="600"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Крупные спортивные и культурные комплексы в региональных центрах СССР. Период: 1956. Стиль: Региональное советское зодчество (1960–1980‑е).</p></div>
+</section>
+<section class="place" id="regional_soviet_novosibirsk_opera">
+<div class="place-lead">
+<h3>Театр оперы и балета (Новосибирск)</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Новосибирск | Стиль: Региональное советское зодчество (1960–1980‑е) | Период: 1931–1945</p>
+<figure class="place-fig place-fig--hi-res"><img src="../images/styles/regional_soviet_novosibirsk_opera.jpg" alt="Театр оперы и балета (Новосибирск)" width="1280" height="800"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Период: 1931–1945. Город: Новосибирск.</p></div>
+</section>
+<div class="chapter-head" id="cat-soviet-neoclassicism-revival"><h2>Советский неоклассицизм (возрождение, 1940–1950‑е)</h2><p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p><p class="chapter-count">1 пример</p></div>
+<section class="place" id="soviet_neoclassicism_revival_nevsky_prospect">
+<div class="place-lead">
+<h3>Реконструкция Невского проспекта</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Санкт-Петербург | Стиль: Советский неоклассицизм (возрождение, 1940–1950‑е) | Период: 1940–1950-е</p>
+<figure class="place-fig place-fig--lo-res"><img src="../images/styles/soviet_neoclassicism_revival_nevsky_prospect.jpg" alt="Реконструкция Невского проспекта" width="330" height="174"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Послевоенное восстановление исторических ансамблей и парадная реконструкция магистралей. Период: 1940–1950-е. Стиль: Советский неоклассицизм (возрождение, 1940–1950‑е).</p></div>
+</section>
+<div class="chapter-head" id="cat-contemporary"><h2>Современный российский стиль (2000‑е — н. в.)</h2><p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p><p class="chapter-count">3 примера</p></div>
+<section class="place" id="contemporary_lakhta_center">
+<div class="place-lead">
+<h3>Лахта-центр</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Санкт-Петербург | Стиль: Современный российский стиль (2000‑е — н. в.) | Период: 2018</p>
+<figure class="place-fig place-fig--hi-res"><img src="../images/styles/contemporary_lakhta_center.jpg" alt="Лахта-центр" width="900" height="1600"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Международные стеклянные башни, набережные и ландшафтные общественные пространства. Период: 2018. Стиль: Современный российский стиль (2000‑е — н. в.).</p></div>
+</section>
+<section class="place" id="contemporary_moscow_city">
+<div class="place-lead">
+<h3>Москва-Сити</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Москва | Стиль: Современный российский стиль (2000‑е — н. в.) | Период: 2000–2020-е</p>
+<figure class="place-fig"><img src="../images/styles/contemporary_moscow_city.jpg" alt="Москва-Сити" width="1024" height="768"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Период: 2000–2020-е.</p></div>
+</section>
+<section class="place" id="contemporary_zaryadye_park">
+<div class="place-lead">
+<h3>Парк «Зарядье»</h3>
+<p class="toc-back"><a href="#guide-toc" aria-label="Содержание">↑ Содержание</a></p>
+
+<p class="place-meta">Адрес: Москва | Стиль: Современный российский стиль (2000‑е — н. в.) | Период: 2017</p>
+<figure class="place-fig place-fig--hi-res"><img src="../images/styles/contemporary_zaryadye_park.jpg" alt="Парк «Зарядье»" width="2735" height="2051"/></figure>
+</div>
+<div class="place-desc"><p class="prose">Период: 2017.</p></div>
+</section>
+</body>
+</html>
