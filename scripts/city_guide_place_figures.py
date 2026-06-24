@@ -22,6 +22,7 @@ _ROW_VIEWPORT_W_PX = 1000
 _ROW_BODY_MARGIN_PX = 32
 _ROW_CONTENT_W_PX = _ROW_VIEWPORT_W_PX - 2 * _ROW_BODY_MARGIN_PX
 _ROW_GAP_PX = 12
+_SOLO_MIN_WIDTH_PCT = 70
 _ROW_IMG_STYLE = (
     ' style="height: {0}px; max-height: {0}px; width: auto; '
     'max-width: 100%; object-fit: contain;"'
@@ -65,6 +66,15 @@ def place_figure_layout_css(*, compact: bool = False) -> str:
   object-fit: contain; margin-left: auto; margin-right: auto; }}
 .place-fig--hi-res img {{ max-height: {hi_solo}; }}
 .place-fig--lo-res img {{ max-height: {lo_solo}; }}
+.place-fig--solo {{
+  display: flex; justify-content: center; align-items: flex-end;
+  width: 100%; margin-left: auto; margin-right: auto; }}
+.place-fig--solo img {{
+  width: {solo_min}%; min-width: {solo_min}%; max-width: 100%;
+  height: auto; object-fit: contain;
+  margin-left: auto; margin-right: auto; }}
+.place-fig--solo.place-fig--hi-res img {{ max-height: {hi_solo}; }}
+.place-fig--solo.place-fig--lo-res img {{ max-height: {lo_solo}; }}
 .place-pdf-fig-row {{
   display: flex; flex-direction: row; flex-wrap: wrap;
   align-items: flex-end; justify-content: center;
@@ -126,6 +136,7 @@ def place_figure_layout_css(*, compact: bool = False) -> str:
         lo_solo=lo_solo,
         lo_pair=lo_pair,
         lo_triple=lo_triple,
+        solo_min=_SOLO_MIN_WIDTH_PCT,
     )
 
 
@@ -308,8 +319,11 @@ def _figure_element(
     path: Path | None = None,
     *,
     img_extra: str = "",
+    solo: bool = False,
 ) -> str:
     fig_cls = "place-fig{}".format(_figure_res_class(path))
+    if solo:
+        fig_cls += " place-fig--solo"
     if img_extra.strip():
         fig_cls += " place-fig--row-sized"
     attrs = _figure_img_attrs(path)
@@ -343,7 +357,7 @@ def place_figure_html(
         if index == 0
         else s["img_alt_extra"].format(name_plain, index + 1)
     )
-    return _figure_element(src, alt, image_path)
+    return _figure_element(src, alt, image_path, solo=True)
 
 
 def place_figure_row_html(
@@ -429,6 +443,7 @@ def place_figure_rows_max_three_html(
             src_one,
             alt_one,
             _path_at(image_paths, idx0),
+            solo=True,
         )
     row_chunks: list[str] = []
     i = 0
@@ -510,6 +525,7 @@ def place_figures_layout_html(
                 src_one,
                 alt_one,
                 _path_at(image_paths, idx0),
+                solo=True,
             )
         return place_figure_row_html(
             indexed,

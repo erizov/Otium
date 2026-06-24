@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""30 Russian architectural styles with 2–3 landmark examples each."""
+"""32 Russian architectural styles with curated seed examples."""
 
 from __future__ import annotations
 
@@ -152,8 +152,16 @@ STYLE_META: dict[str, tuple[str, str, str, str]] = {
         "Silver Age apartment buildings.",
     ),
     "avant_garde": (
-        "Авангард / конструктивизм (1920–1930‑е гг.)",
-        "Avant-garde / Constructivism (1920s–1930s)",
+        "Авангард (1920–1930‑е гг.)",
+        "Avant-garde (1920s–1930s)",
+        "Радикальные формы и инженерная смелость: башни, "
+        "павильоны и экспериментальные конструкции.",
+        "Radical forms and engineering daring: towers, "
+        "pavilions and experimental structures.",
+    ),
+    "constructivism": (
+        "Конструктивизм (1920–1930‑е гг.)",
+        "Constructivism (1920s–1930s)",
         "Функция и конструкция: стекло и бетон, эксперимент "
         "жилья и общественных клубов.",
         "Function and structure: glass and concrete, housing "
@@ -239,9 +247,17 @@ STYLE_META: dict[str, tuple[str, str, str, str]] = {
         "Ironic quotation of historical forms in public "
         "and commercial projects.",
     ),
+    "neo_eclectic": (
+        "Неоэклектика (1990‑е — 2010‑е)",
+        "Neo-eclectic architecture (1990s–2010s)",
+        "Свободное цитирование исторических стилей "
+        "в постсоветской застройке и реконструкции.",
+        "Free quotation of historical styles in post-Soviet "
+        "construction and reconstruction.",
+    ),
     "contemporary": (
-        "Современный российский стиль (2000‑е — н. в.)",
-        "Contemporary Russian architecture (2000s–present)",
+        "Контемпорари (2000‑е — н. в.)",
+        "Contemporary architecture (2000s–present)",
         "Международные стеклянные башни, набережные "
         "и ландшафтные общественные пространства.",
         "International glass towers, embankments and "
@@ -287,29 +303,6 @@ def _ex(
 
 STYLE_EXAMPLES: dict[str, list[dict[str, Any]]] = {
     "ancient_rus": [
-        _ex(
-            "kyiv_sophia",
-            "Софийский собор в Киеве",
-            "Saint Sophia Cathedral, Kyiv",
-            year="1037",
-            city_ru="Киев",
-            city_en="Kyiv",
-            history_ru=(
-                "Заложен при Ярославе Мудром; сохранил уникальные "
-                "мозаики и фрески XI века."
-            ),
-            history_en=(
-                "Founded under Yaroslav the Wise; preserves unique "
-                "11th-century mosaics and frescoes."
-            ),
-            significance_ru="Образец византийского влияния на зодчество Киевской Руси.",
-            significance_en="A model of Byzantine influence on Kyivan Rus architecture.",
-            reuse_from="kyiv/images/kyiv_saint_sophia.jpg",
-            commons_url=(
-                "https://upload.wikimedia.org/wikipedia/commons/"
-                "f/fd/Saint_Sophia%27s_Cathedral%2C_Kyiv.jpg"
-            ),
-        ),
         _ex(
             "vladimir_assumption",
             "Успенский собор во Владимире",
@@ -407,7 +400,7 @@ STYLE_EXAMPLES: dict[str, list[dict[str, Any]]] = {
             city_en="Pskov",
             commons_url=(
                 "https://upload.wikimedia.org/wikipedia/commons/"
-                "1/1e/Pskov_Vasily_on_Gorka.jpg"
+                "c/c0/Pskov_ChurchStBasil_Hill1.jpg"
             ),
         ),
         _ex(
@@ -433,10 +426,6 @@ STYLE_EXAMPLES: dict[str, list[dict[str, Any]]] = {
             year="1479",
             city_ru="Москва",
             city_en="Moscow",
-            reuse_from=(
-                "moscow/images/moscow_places_of_worship/"
-                "uspensky_kremlin_1.jpg"
-            ),
             commons_url=(
                 "https://upload.wikimedia.org/wikipedia/commons/"
                 "8/8d/Cathedral_of_the_Dormition_in_the_Moscow_Kremlin.jpg"
@@ -451,9 +440,13 @@ STYLE_EXAMPLES: dict[str, list[dict[str, Any]]] = {
             year="1508",
             city_ru="Москва",
             city_en="Moscow",
+            reuse_from=(
+                "moscow/images/moscow_places_of_worship/"
+                "arkhangelsky_2.jpg"
+            ),
             commons_url=(
                 "https://upload.wikimedia.org/wikipedia/commons/"
-                "4/4e/Moscow_Arkangelsky_Cathedral.jpg"
+                "e/e0/Archangel_Cathedral_in_Kremlin.JPG"
             ),
         ),
         _ex(
@@ -899,20 +892,6 @@ STYLE_EXAMPLES: dict[str, list[dict[str, Any]]] = {
     ],
     "pseudo_russian": [
         _ex(
-            "gum",
-            "Верхние торговые ряды (ГУМ)",
-            "Upper Trading Rows (GUM)",
-            architect_ru="Александр Померанцев",
-            architect_en="Alexander Pomerantsev",
-            year="1890–1893",
-            city_ru="Москва",
-            city_en="Moscow",
-            commons_url=(
-                "https://upload.wikimedia.org/wikipedia/commons/"
-                "0/08/GUM_department_store_Moscow.jpg"
-            ),
-        ),
-        _ex(
             "savior_on_blood",
             "Храм Спаса на Крови",
             "Church of the Savior on Blood",
@@ -1090,6 +1069,23 @@ STYLE_EXAMPLES: dict[str, list[dict[str, Any]]] = {
             ),
         ),
         _ex(
+            "melnikov_house",
+            "Дом Мельникова",
+            "Melnikov House",
+            architect_ru="Константин Мельников",
+            architect_en="Konstantin Melnikov",
+            year="1927–1929",
+            city_ru="Москва",
+            city_en="Moscow",
+            reuse_from="moscow/images/moscow_buildings/melnikov_1.jpg",
+            commons_url=(
+                "https://upload.wikimedia.org/wikipedia/commons/"
+                "8/8e/Melnikov_House.jpg"
+            ),
+        ),
+    ],
+    "constructivism": [
+        _ex(
             "narkomfin",
             "Дом Наркомфина",
             "Narkomfin Building",
@@ -1116,6 +1112,20 @@ STYLE_EXAMPLES: dict[str, list[dict[str, Any]]] = {
             commons_url=(
                 "https://upload.wikimedia.org/wikipedia/commons/"
                 "6/6e/Zuev_Workers%27_Club.jpg"
+            ),
+        ),
+        _ex(
+            "rusakov_club",
+            "ДК имени Русакова",
+            "Rusakov Workers' Club",
+            architect_ru="Константин Мельников",
+            architect_en="Konstantin Melnikov",
+            year="1927–1929",
+            city_ru="Москва",
+            city_en="Moscow",
+            commons_url=(
+                "https://upload.wikimedia.org/wikipedia/commons/"
+                "2/25/Moscow_RusakovWorkersClub_2253.jpg"
             ),
         ),
     ],
@@ -1203,21 +1213,6 @@ STYLE_EXAMPLES: dict[str, list[dict[str, Any]]] = {
     ],
     "soviet_modernism": [
         _ex(
-            "ostankino_tower",
-            "Останкинская телебашня",
-            "Ostankino Tower",
-            architect_ru="Николай Никитин",
-            architect_en="Nikolai Nikitin",
-            year="1963–1967",
-            city_ru="Москва",
-            city_en="Moscow",
-            reuse_from="moscow/images/moscow_places/ostankino_tower_1.jpg",
-            commons_url=(
-                "https://upload.wikimedia.org/wikipedia/commons/"
-                "1/1e/Ostankino_Tower.jpg"
-            ),
-        ),
-        _ex(
             "kremlin_palace",
             "Дворец съездов в Кремле",
             "Kremlin Palace of Congresses",
@@ -1299,20 +1294,6 @@ STYLE_EXAMPLES: dict[str, list[dict[str, Any]]] = {
             commons_url=(
                 "https://upload.wikimedia.org/wikipedia/commons/"
                 "8/8e/Central_Army_Theater.jpg"
-            ),
-        ),
-        _ex(
-            "rodina_cinema",
-            "Кинотеатр «Родина»",
-            "Rodina Cinema",
-            architect_ru="Ярослав Щуко",
-            architect_en="Yaroslav Shchuko",
-            year="1937–1938",
-            city_ru="Москва",
-            city_en="Moscow",
-            commons_url=(
-                "https://upload.wikimedia.org/wikipedia/commons/"
-                "5/5e/Rodina_Cinema_Moscow.jpg"
             ),
         ),
         _ex(
@@ -1527,20 +1508,35 @@ STYLE_EXAMPLES: dict[str, list[dict[str, Any]]] = {
             ),
         ),
     ],
-    "contemporary": [
+    "neo_eclectic": [
         _ex(
-            "moscow_city",
-            "Москва-Сити",
-            "Moscow International Business Center",
-            year="2000–2020-е",
+            "christ_savior_rebuilt",
+            "Храм Христа Спасителя",
+            "Cathedral of Christ the Saviour",
+            architect_ru="Алексей Щусев",
+            architect_en="Alexey Shchusev",
+            year="1990–2000",
             city_ru="Москва",
             city_en="Moscow",
-            reuse_from="moscow/images/moscow_landmarks/moscow_city_2.jpg",
             commons_url=(
                 "https://upload.wikimedia.org/wikipedia/commons/"
-                "5/5e/Moscow_International_Business_Center.jpg"
+                "5/5e/Cathedral_of_Christ_the_Saviour.jpg"
             ),
         ),
+        _ex(
+            "yaroslavsky_station",
+            "Ярославский вокзал",
+            "Yaroslavsky railway station",
+            year="1902–1904",
+            city_ru="Москва",
+            city_en="Moscow",
+            commons_url=(
+                "https://upload.wikimedia.org/wikipedia/commons/"
+                "4/4e/Yaroslavsky_Railway_Terminal.jpg"
+            ),
+        ),
+    ],
+    "contemporary": [
         _ex(
             "zaryadye_park",
             "Парк «Зарядье»",
@@ -1569,4 +1565,46 @@ STYLE_EXAMPLES: dict[str, list[dict[str, Any]]] = {
     ],
 }
 
-STYLE_ORDER: tuple[str, ...] = tuple(STYLE_META.keys())
+# Chronological sequence (period start); dict insertion order is not used.
+STYLE_ORDER: tuple[str, ...] = (
+    "ancient_rus",
+    "novgorod_school",
+    "pskov_school",
+    "moscow_fifteenth_sixteenth",
+    "tent_roof",
+    "uzorochye",
+    "naryshkin_baroque",
+    "petrine_baroque",
+    "elizabethan_baroque",
+    "early_classicism",
+    "mature_classicism",
+    "empire",
+    "russo_byzantine",
+    "eclecticism",
+    "pseudo_russian",
+    "neo_russian",
+    "art_nouveau",
+    "neoclassicism_early20",
+    "avant_garde",
+    "constructivism",
+    "art_deco",
+    "post_constructivism",
+    "stalinist",
+    "stalinist_neoclassicism",
+    "soviet_neoclassicism_revival",
+    "panel_housing",
+    "soviet_modernism",
+    "regional_soviet",
+    "brutalism",
+    "postmodernism",
+    "neo_eclectic",
+    "contemporary",
+)
+
+if set(STYLE_ORDER) != set(STYLE_META):
+    _missing = sorted(set(STYLE_META) - set(STYLE_ORDER))
+    _extra = sorted(set(STYLE_ORDER) - set(STYLE_META))
+    raise RuntimeError(
+        "STYLE_ORDER / STYLE_META mismatch: "
+        "missing={!r}, extra={!r}".format(_missing, _extra),
+    )

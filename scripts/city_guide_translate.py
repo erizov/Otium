@@ -151,7 +151,7 @@ class EditionTranslator:
         dst: str,
         kind: str,
     ) -> str | None:
-        if os.environ.get("OLLAMA_HOST") or os.environ.get("USE_OLLAMA") == "1":
+        if os.environ.get("USE_OLLAMA") == "1":
             try:
                 ollama_out = self._ollama(
                     text,
@@ -301,10 +301,7 @@ class OllamaOnlyEditionTranslator(EditionTranslator):
         dst: str,
         kind: str,
     ) -> str | None:
-        if not (
-            os.environ.get("OLLAMA_HOST")
-            or os.environ.get("USE_OLLAMA") == "1"
-        ):
+        if os.environ.get("USE_OLLAMA") != "1":
             return None
         try:
             return self._ollama(text, src=src, dst=dst, kind=kind)
@@ -323,10 +320,7 @@ def get_ollama_only_translator(
     """Ollama-only translator; None when Ollama is not configured."""
     global _ollama_only_singleton
     _load_dotenv_once()
-    if not (
-        os.environ.get("OLLAMA_HOST")
-        or os.environ.get("USE_OLLAMA") == "1"
-    ):
+    if os.environ.get("USE_OLLAMA") != "1":
         return None
     if _ollama_only_singleton is None:
         _ollama_only_singleton = OllamaOnlyEditionTranslator(

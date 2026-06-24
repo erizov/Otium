@@ -4,6 +4,13 @@
 
 - https://upload.wikimedia.org/
 - https://commons.wikimedia.org/
+- https://live.staticflickr.com/
+- https://um.mos.ru/
+- https://avatars.mds.yandex.net/
+- https://griven-russia.com/
+- https://conceptsandprojects.com/
+- https://mosculture.ru/
+- https://cdnstatic.rg.ru/
 
 ## Facts (editors / RAG fetch_sources allowlist)
 

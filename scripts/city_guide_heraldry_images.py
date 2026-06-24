@@ -35,19 +35,21 @@ def _tuples_from_pdf_module(city_slug: str) -> list[tuple[str, str]]:
     except ImportError:
         return []
     out: list[tuple[str, str]] = []
-    for attr in ("_TITLE_HISTORY_COATS", "_TITLE_SYMBOLS"):
+    for attr in ("_TITLE_HISTORY_COATS", "_HISTORY_COATS", "_TITLE_SYMBOLS"):
         block = getattr(mod, attr, None)
         if isinstance(block, tuple):
             for item in block:
-                if (
-                    isinstance(item, tuple)
-                    and len(item) == 2
-                    and isinstance(item[0], str)
-                ):
+                if not isinstance(item, tuple) or not item:
+                    continue
+                if not isinstance(item[0], str):
+                    continue
+                if len(item) == 2:
                     alt = item[1]
                     if isinstance(alt, tuple):
                         alt = "".join(alt)
                     out.append((item[0], str(alt)))
+                elif len(item) == 3:
+                    out.append((item[0], str(item[2])))
     for coat_attr, flag_attr in (
         ("_HERALD_COAT_REL", "_HERALD_FLAG_REL"),
     ):

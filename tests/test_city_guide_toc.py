@@ -11,6 +11,7 @@ from scripts.city_guide_toc import (
     category_chapter_anchor,
     guide_toc_back_link_html,
     guide_toc_html,
+    guide_toc_html_category_chapters,
     guide_toc_title,
     normalize_title_for_sort,
     place_sort_key,
@@ -63,6 +64,29 @@ def test_guide_toc_html_links_to_anchors() -> None:
     assert 'href="#berlin_gate"' in html
     assert 'href="#berlin_wall"' in html
     assert "toc-item--sub" in html
+
+
+def test_guide_toc_html_category_chapters_nested_examples() -> None:
+    html = guide_toc_html_category_chapters(
+        (
+            GuideTocEntry("guide-historical", "Historical overview"),
+            GuideTocEntry(
+                category_chapter_anchor("empire"),
+                "12. Empire style",
+                level=1,
+            ),
+            GuideTocEntry("empire_isaac", "Saint Isaac's Cathedral", level=2),
+            GuideTocEntry("empire_kazan", "Kazan Cathedral", level=2),
+        ),
+        "en",
+    )
+    assert 'class="toc-chapters"' in html
+    assert 'class="toc-examples"' in html
+    assert "toc-item--example" in html
+    assert "12. Empire style" in html
+    assert 'href="#empire_isaac"' in html
+    assert "Kazan Cathedral" in html
+    assert "toc-item--sub" not in html
 
 
 def test_guide_toc_back_link_points_to_contents() -> None:

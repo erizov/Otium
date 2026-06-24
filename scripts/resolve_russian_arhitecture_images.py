@@ -6,7 +6,6 @@ from __future__ import annotations
 import argparse
 import json
 import re
-import shutil
 import sys
 import time
 from pathlib import Path
@@ -16,41 +15,56 @@ _PROJECT_ROOT = Path(__file__).resolve().parent.parent
 if str(_PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(_PROJECT_ROOT))
 
-from russian_arhitecture.data.style_catalog import (  # noqa: E402
-    STYLE_EXAMPLES,
-    STYLE_ORDER,
-)
 from scripts.city_guide_commons_fetch import (  # noqa: E402
     commons_file_upload_url,
     commons_search_raster_title_for_city,
+    configure_commons_api_throttle,
 )
 from scripts.city_guide_jerusalem_style_images import (  # noqa: E402
     _candidate_urls,
     _download_place_image,
 )
-
-MIN_IMAGE_BYTES = 500
-_CITY_ROOTS = (
-    "moscow",
-    "spb",
-    "kyiv",
-    "novosibirsk",
-    "vladimir",
-    "pskov",
-    "novgorod",
+from scripts.city_guide_second_image_sources import (  # noqa: E402
+    discover_extended_second_image_urls,
+)
+from scripts.city_guide_trusted_image_sources import (  # noqa: E402
+    wikipedia_lead_image_urls,
+)
+from russian_arhitecture.data.city_places_index import (  # noqa: E402
+    load_city_index,
+)
+from russian_arhitecture.data.image_reuse import (  # noqa: E402
+    MIN_IMAGE_BYTES,
+    attach_additional_image_rows,
+    attach_from_city_ref,
+    copy_city_image,
+    extra_image_rel,
+    has_local_image,
+    link_additional_images,
+    prune_missing_additional_images,
+    strip_internal_image_keys,
 )
 
-# (city_folder, place_slug) for reliable reuse
+from russian_arhitecture.data.banned_images import (  # noqa: E402
+    local_rel_is_banned,
+    url_is_banned,
+)
+from russian_arhitecture.data.guide_image_policy import (  # noqa: E402
+    SINGLE_IMAGE_SLUGS,
+    strip_extra_images,
+)
+from russian_arhitecture.data.image_overrides import (  # noqa: E402
+    IMAGE_URL_OVERRIDES,
+    PRIMARY_IMAGE_REUSE,
+    SECOND_IMAGE_REUSE,
+    apply_image_url_overrides,
+)
+from russian_arhitecture.whitelist import (  # noqa: E402
+    default_whitelist_path,
+    url_is_whitelisted,
+)
 _EXPLICIT: dict[str, tuple[str, str]] = {
     "ancient_rus_kyiv_sophia": ("kyiv", "kyiv_saint_sophia"),
-    "moscow_fifteenth_sixteenth_kremlin_dormition": (
-        "moscow",
-        "moscow_places_of_worship_4",
-    ),
-    "moscow_fifteenth_sixteenth_kremlin_archangel": (
-        "moscow",
-        "moscow_places_of_worship_5",
-    ),
     "tent_roof_st_basil": ("moscow", "moscow_places_of_worship_1"),
     "tent_roof_ascension_kolomenskoye": (
         "moscow",
@@ -75,7 +89,6 @@ _EXPLICIT: dict[str, tuple[str, str]] = {
         "spb_feodorovsky_cathedral_spb",
     ),
     "petrine_baroque_peter_paul_cathedral": ("spb", "peter_paul_fortress"),
-    "pseudo_russian_gum": ("moscow", "moscow_buildings_1"),
     "neo_russian_yaroslavsky_station": ("moscow", "moscow_railway_stations_0"),
     "art_nouveau_vitebsky_station": ("spb", "vitebsky_station"),
     "neoclassicism_early20_kyivsky_station": (
@@ -85,12 +98,10 @@ _EXPLICIT: dict[str, tuple[str, str]] = {
     "avant_garde_narkomfin": ("moscow", "moscow_osobnjaki_24"),
     "stalinist_msu_main_building": ("moscow", "moscow_landmarks_2"),
     "stalinist_vdnh_main_pavilion": ("moscow", "moscow_parks_1"),
-    "soviet_modernism_ostankino_tower": ("moscow", "moscow_landmarks_1"),
     "regional_soviet_novosibirsk_opera": (
         "novosibirsk",
         "novosibirsk_opera_ballet",
     ),
-    "contemporary_moscow_city": ("moscow", "moscow_landmarks_0"),
     "contemporary_zaryadye_park": ("moscow", "moscow_landmarks_4"),
     "elizabethan_baroque_smolny_cathedral": ("spb", "smolny_cathedral"),
     "mature_classicism_admiralty": ("spb", "admiralty_spb"),
@@ -105,33 +116,10 @@ def _norm_name(text: str) -> str:
     return re.sub(r"\s+", " ", s).strip()
 
 
-def _load_city_index(project_root: Path) -> dict[str, dict[str, Any]]:
-    index: dict[str, dict[str, Any]] = {}
-    for city in _CITY_ROOTS:
-        data_dir = project_root / city / "data"
-        if not data_dir.is_dir():
-            continue
-        for path in sorted(data_dir.glob("*places*.json")):
-            try:
-                rows = json.loads(path.read_text(encoding="utf-8"))
-            except (json.JSONDecodeError, OSError):
-                continue
-            if not isinstance(rows, list):
-                continue
-            for row in rows:
-                if not isinstance(row, dict):
-                    continue
-                slug = str(row.get("slug") or "").strip()
-                if not slug:
-                    continue
-                index["{}:{}".format(city, slug)] = {
-                    "city": city,
-                    "slug": slug,
-                    "name_ru": str(row.get("name_ru") or ""),
-                    "name_norm": _norm_name(str(row.get("name_ru") or "")),
-                    "image_rel_path": str(row.get("image_rel_path") or ""),
-                    "image_source_url": str(row.get("image_source_url") or ""),
-                }
+def _resolve_index(project_root: Path) -> dict[str, dict[str, Any]]:
+    index = load_city_index(project_root)
+    for row in index.values():
+        row["name_norm"] = _norm_name(str(row.get("name_ru") or ""))
     return index
 
 
@@ -142,22 +130,34 @@ def _wikimedia_url(url: str) -> str:
     return ""
 
 
-def _copy_city_image(
-    project_root: Path,
-    guide_root: Path,
-    city: str,
-    rel: str,
-    dest_rel: str,
-) -> bool:
-    src = project_root / city / rel
-    dest = guide_root / dest_rel
-    if not src.is_file() or src.stat().st_size < MIN_IMAGE_BYTES:
+def _is_usable_url(url: str) -> bool:
+    u = (url or "").strip()
+    if not u.startswith("https://"):
         return False
-    dest.parent.mkdir(parents=True, exist_ok=True)
-    if dest.is_file() and dest.stat().st_size >= MIN_IMAGE_BYTES:
-        return True
-    shutil.copy2(src, dest)
-    return dest.is_file() and dest.stat().st_size >= MIN_IMAGE_BYTES
+    if "%s" in u or u.endswith("%"):
+        return False
+    return True
+
+
+def _city_slug_from_row(row: dict[str, Any]) -> str:
+    city_hint = str(row.get("address_en") or row.get("address") or "")
+    if "Petersburg" in city_hint or "Петербург" in city_hint:
+        return "spb"
+    if "Kyiv" in city_hint or "Киев" in city_hint or "Київ" in city_hint:
+        return "kyiv"
+    if "Novosibirsk" in city_hint or "Новосибирск" in city_hint:
+        return "novosibirsk"
+    if "Vladimir" in city_hint or "Владимир" in city_hint:
+        return "vladimir"
+    if "Pskov" in city_hint or "Псков" in city_hint:
+        return "pskov"
+    if "Novgorod" in city_hint or "Новгород" in city_hint:
+        return "novgorod"
+    return "moscow"
+
+
+def _search_query(row: dict[str, Any]) -> str:
+    return str(row.get("subtitle_en") or row.get("name_ru") or "").strip()
 
 
 def _match_by_name(
@@ -181,24 +181,113 @@ def _match_by_name(
     return best
 
 
+def _clear_banned_dest(guide_root: Path, dest_rel: str) -> bool:
+    """Delete dest when banned. Returns True if a usable file remains."""
+    if not has_local_image(guide_root, dest_rel):
+        return False
+    if not local_rel_is_banned(dest_rel):
+        return True
+    try:
+        (guide_root / dest_rel).unlink(missing_ok=True)
+    except OSError:
+        pass
+    return False
+
+
+def _city_image_usable(city_row: dict[str, Any]) -> bool:
+    url = str(city_row.get("image_source_url") or "")
+    rel = str(city_row.get("image_rel_path") or "")
+    if url_is_banned(url):
+        return False
+    if local_rel_is_banned(rel):
+        return False
+    return True
+
+
 def _download_commons(
     guide_root: Path,
     row: dict[str, Any],
     url: str,
+    *,
+    retries_429: int = 4,
+    pause_429_sec: float = 30.0,
+    thumbs_only: bool = True,
 ) -> bool:
     rel = str(row.get("image_rel_path") or "")
     if not rel or not url:
         return False
     dest = guide_root / rel
-    urls = _candidate_urls(url, 500, thumbs_only=True)
+    urls = _candidate_urls(url, 500, thumbs_only=thumbs_only)
     ok, _err = _download_place_image(
         urls,
         dest,
         timeout_sec=60,
-        retries_429=4,
-        pause_429_sec=30.0,
+        retries_429=retries_429,
+        pause_429_sec=pause_429_sec,
     )
     return ok
+
+
+def _candidate_image_urls(
+    row: dict[str, Any],
+    *,
+    slug_city: str,
+    whitelist_path: Path,
+) -> list[str]:
+    """URLs to try before hitting Commons search API."""
+    seen: set[str] = set()
+    out: list[str] = []
+
+    def _add(url: str) -> None:
+        u = url.strip()
+        if not _is_usable_url(u) or u in seen or url_is_banned(u):
+            return
+        seen.add(u)
+        out.append(u)
+
+    catalog_url = str(row.get("image_source_url") or "").strip()
+    if _is_usable_url(catalog_url):
+        _add(catalog_url)
+
+    query = _search_query(row)
+    if query:
+        for lang in ("en", "ru"):
+            for u in wikipedia_lead_image_urls(query, lang=lang, max_urls=2):
+                _add(u)
+        city_en = slug_city.replace("_", " ").title()
+        for u in discover_extended_second_image_urls(
+            row,
+            slug_city,
+            "{} {}".format(query, city_en).strip(),
+            whitelist_path=whitelist_path,
+            url_is_whitelisted=url_is_whitelisted,
+            exclude_url=catalog_url,
+            max_per_source=2,
+            skip_pixabay=True,
+            skip_pexels=True,
+        ):
+            _add(u)
+    return out
+
+
+def _download_first_url(
+    guide_root: Path,
+    row: dict[str, Any],
+    urls: list[str],
+    *,
+    retries_429: int,
+    pause_429_sec: float,
+) -> str:
+    for url in urls:
+        if _download_commons(
+            guide_root,
+            row,
+            url,
+            retries_429=retries_429,
+            pause_429_sec=pause_429_sec,
+        ):
+            return url
+    return ""
 
 
 def _commons_url_for_query(query: str, city_hint: str) -> str:
@@ -213,111 +302,402 @@ def _commons_url_for_query(query: str, city_hint: str) -> str:
     return url or ""
 
 
+def _download_to_rel(
+    guide_root: Path,
+    dest_rel: str,
+    url: str,
+    *,
+    retries_429: int,
+    pause_429_sec: float,
+    thumbs_only: bool = True,
+) -> bool:
+    return _download_commons(
+        guide_root,
+        {"image_rel_path": dest_rel},
+        url,
+        retries_429=retries_429,
+        pause_429_sec=pause_429_sec,
+        thumbs_only=thumbs_only,
+    )
+
+
+def _resolve_second_image(
+    project_root: Path,
+    guide_root: Path,
+    row: dict[str, Any],
+    index: dict[str, dict[str, Any]],
+    *,
+    copy_only: bool,
+    commons_delay: float,
+    retries_429: int,
+    pause_429_sec: float,
+    whitelist_path: Path,
+    stats: dict[str, int],
+    city_row: dict[str, Any] | None = None,
+) -> None:
+    slug = str(row.get("slug") or "").strip()
+    if not slug:
+        return
+    if slug in SINGLE_IMAGE_SLUGS:
+        row.pop("additional_images", None)
+        return
+    dest_rel = extra_image_rel(slug)
+    if slug in IMAGE_URL_OVERRIDES:
+        override = IMAGE_URL_OVERRIDES[slug][1]
+        if override:
+            if _download_to_rel(
+                guide_root,
+                dest_rel,
+                override,
+                retries_429=retries_429,
+                pause_429_sec=pause_429_sec,
+                thumbs_only=False,
+            ):
+                row["additional_images"] = [{
+                    "image_rel_path": dest_rel,
+                    "image_source_url": override,
+                }]
+                stats["second_downloaded"] += 1
+                return
+            reuse = SECOND_IMAGE_REUSE.get(slug)
+            if reuse:
+                city, rel = reuse
+                if copy_city_image(
+                    project_root,
+                    guide_root,
+                    city,
+                    rel,
+                    dest_rel,
+                ):
+                    row["additional_images"] = [{
+                        "image_rel_path": dest_rel,
+                        "image_source_url": str(
+                            row.get("image_source_url") or "",
+                        ),
+                    }]
+                    stats["second_copied"] += 1
+                    return
+            return
+        row.pop("additional_images", None)
+        return
+    if has_local_image(guide_root, dest_rel):
+        return
+
+    if city_row:
+        attach_additional_image_rows(row, city_row, project_root)
+    else:
+        attach_from_city_ref(row, index, project_root)
+    if link_additional_images(project_root, guide_root, row):
+        stats["second_copied"] += 1
+        return
+
+    if copy_only:
+        return
+
+    primary_url = str(row.get("image_source_url") or "").strip()
+    slug_city = _city_slug_from_row(row)
+    for url in _candidate_image_urls(
+        row,
+        slug_city=slug_city,
+        whitelist_path=whitelist_path,
+    ):
+        if url == primary_url:
+            continue
+        if _download_to_rel(
+            guide_root,
+            dest_rel,
+            url,
+            retries_429=retries_429,
+            pause_429_sec=pause_429_sec,
+        ):
+            row["additional_images"] = [{
+                "image_rel_path": dest_rel,
+                "image_source_url": url,
+            }]
+            stats["second_downloaded"] += 1
+            time.sleep(commons_delay)
+            return
+
+    query = _search_query(row)
+    alt_url = _commons_url_for_query(
+        "{} view".format(query).strip(),
+        slug_city,
+    )
+    if alt_url and alt_url != primary_url and _download_to_rel(
+        guide_root,
+        dest_rel,
+        alt_url,
+        retries_429=retries_429,
+        pause_429_sec=pause_429_sec,
+    ):
+        row["additional_images"] = [{
+            "image_rel_path": dest_rel,
+            "image_source_url": alt_url,
+        }]
+        stats["second_commons"] += 1
+        time.sleep(commons_delay)
+
+
+def _clear_local_images_for_override(
+    guide_root: Path,
+    row: dict[str, Any],
+) -> None:
+    slug = str(row.get("slug") or "")
+    if slug not in IMAGE_URL_OVERRIDES:
+        return
+    rel = str(row.get("image_rel_path") or "")
+    if rel:
+        try:
+            (guide_root / rel).unlink(missing_ok=True)
+        except OSError:
+            pass
+    second = guide_root / extra_image_rel(slug)
+    try:
+        second.unlink(missing_ok=True)
+    except OSError:
+        pass
+
+
+_OVERRIDE_MIN_PX = 1200
+
+
+def _override_primary_too_small(guide_root: Path, dest_rel: str) -> bool:
+    path = guide_root / dest_rel
+    if not path.is_file():
+        return False
+    try:
+        from PIL import Image
+
+        with Image.open(path) as im:
+            w, h = im.size
+        return max(w, h) < _OVERRIDE_MIN_PX
+    except OSError:
+        return False
+
+
 def resolve_images(
     project_root: Path,
     *,
-    commons_delay: float = 1.5,
+    commons_delay: float = 4.0,
     copy_only: bool = False,
+    retries_429: int = 5,
+    pause_429_sec: float = 45.0,
+    commons_api_gap: float = 2.5,
 ) -> tuple[list[dict[str, Any]], dict[str, int]]:
     from scripts.generate_russian_arhitecture_guide import (  # noqa: E402
-        _place_row,
-        _slug,
-        _image_rel,
+        generate_places,
     )
 
+    configure_commons_api_throttle(
+        min_gap_sec=commons_api_gap,
+        retries_429=retries_429,
+        pause_429_sec=pause_429_sec,
+    )
     guide_root = project_root / "russian_arhitecture"
-    index = _load_city_index(project_root)
+    whitelist_path = default_whitelist_path()
+    index = _resolve_index(project_root)
     stats = {
         "copied_city": 0,
+        "catalog_url": 0,
+        "alt_source": 0,
         "commons_ok": 0,
         "already": 0,
         "missing": 0,
+        "second_copied": 0,
+        "second_downloaded": 0,
+        "second_commons": 0,
     }
-    rows: list[dict[str, Any]] = []
+    rows, _gen_stats = generate_places(project_root, link_images=False)
 
-    for style_key in STYLE_ORDER:
-        for ex in STYLE_EXAMPLES.get(style_key, []):
-            row = _place_row(style_key, ex)
-            slug = row["slug"]
-            dest_rel = row["image_rel_path"]
-            dest = guide_root / dest_rel
-            if dest.is_file() and dest.stat().st_size >= MIN_IMAGE_BYTES:
-                stats["already"] += 1
-                rows.append(row)
-                continue
+    for row in rows:
+        row = apply_image_url_overrides(row)
+        slug = str(row.get("slug") or "")
+        if slug in IMAGE_URL_OVERRIDES:
+            _clear_local_images_for_override(guide_root, row)
+        dest_rel = str(row["image_rel_path"])
+        dest = guide_root / dest_rel
+        primary_ok = has_local_image(guide_root, dest_rel)
+        if primary_ok and local_rel_is_banned(dest_rel):
+            try:
+                dest.unlink(missing_ok=True)
+            except OSError:
+                pass
+            primary_ok = False
+        if (
+            slug in IMAGE_URL_OVERRIDES
+            and primary_ok
+            and _override_primary_too_small(guide_root, dest_rel)
+        ):
+            try:
+                dest.unlink(missing_ok=True)
+            except OSError:
+                pass
+            primary_ok = False
+        resolved_url = ""
+        copied = primary_ok
+        city_row: dict[str, Any] | None = None
+        slug = str(row.get("slug") or "")
+        hint = _EXPLICIT.get(slug)
+        city_ref = str(row.get("_city_ref") or "").strip()
+        if city_ref and ":" in city_ref:
+            hint = tuple(city_ref.split(":", 1))  # type: ignore[assignment]
 
-            resolved_url = ""
-            copied = False
-            hint = _EXPLICIT.get(slug)
-            if hint:
-                city, place_slug = hint
-                src_row = index.get("{}:{}".format(city, place_slug))
-                if src_row:
-                    rel = src_row["image_rel_path"]
-                    if rel and _copy_city_image(
+        if primary_ok:
+            stats["already"] += 1
+        else:
+            url_override = slug in IMAGE_URL_OVERRIDES
+            if url_override:
+                reuse = PRIMARY_IMAGE_REUSE.get(slug)
+                if reuse:
+                    city, rel = reuse
+                    if copy_city_image(
                         project_root,
                         guide_root,
                         city,
                         rel,
                         dest_rel,
                     ):
+                        resolved_url = str(row.get("image_source_url") or "")
                         copied = True
                         stats["copied_city"] += 1
-                        resolved_url = _wikimedia_url(src_row["image_source_url"])
-            if not copied:
-                reuse = str(ex.get("reuse_from") or "").strip()
+                if not copied:
+                    catalog_url = str(row.get("image_source_url") or "").strip()
+                    if catalog_url and _download_commons(
+                        guide_root,
+                        row,
+                        catalog_url,
+                        retries_429=retries_429,
+                        pause_429_sec=pause_429_sec,
+                        thumbs_only=False,
+                    ):
+                        resolved_url = catalog_url
+                        copied = True
+                        stats["catalog_url"] += 1
+                        time.sleep(commons_delay)
+            elif hint:
+                city, place_slug = hint
+                city_row = index.get("{}:{}".format(city, place_slug))
+                if city_row and _city_image_usable(city_row):
+                    rel = str(city_row.get("image_rel_path") or "")
+                    if rel and copy_city_image(
+                        project_root,
+                        guide_root,
+                        city,
+                        rel,
+                        dest_rel,
+                    ):
+                        if _clear_banned_dest(guide_root, dest_rel):
+                            copied = True
+                            stats["copied_city"] += 1
+                            resolved_url = _wikimedia_url(
+                                str(city_row.get("image_source_url") or ""),
+                            )
+                        else:
+                            copied = False
+            if not copied and not url_override:
+                reuse = str(row.get("_reuse_from") or "").strip()
                 if reuse and "/" in reuse:
                     city = reuse.split("/", 1)[0]
                     rel = reuse.split("/", 1)[1]
-                    if _copy_city_image(
+                    if copy_city_image(
                         project_root,
                         guide_root,
                         city,
                         rel,
                         dest_rel,
                     ):
-                        copied = True
-                        stats["copied_city"] += 1
-            if not copied:
-                match = _match_by_name(str(ex.get("name_ru") or ""), index)
-                if match and match["image_rel_path"]:
-                    if _copy_city_image(
+                        if _clear_banned_dest(guide_root, dest_rel):
+                            copied = True
+                            stats["copied_city"] += 1
+                        else:
+                            copied = False
+            if not copied and not url_override:
+                match = _match_by_name(str(row.get("name_ru") or ""), index)
+                if match and match.get("image_rel_path") and _city_image_usable(
+                    match,
+                ):
+                    city_row = match
+                    if copy_city_image(
                         project_root,
                         guide_root,
-                        match["city"],
-                        match["image_rel_path"],
+                        str(match["city"]),
+                        str(match["image_rel_path"]),
                         dest_rel,
                     ):
-                        copied = True
-                        stats["copied_city"] += 1
-                        resolved_url = _wikimedia_url(match["image_source_url"])
+                        if _clear_banned_dest(guide_root, dest_rel):
+                            copied = True
+                            stats["copied_city"] += 1
+                            resolved_url = _wikimedia_url(
+                                str(match.get("image_source_url") or ""),
+                            )
+                        else:
+                            copied = False
 
             if not copied and not copy_only:
-                city_hint = str(ex.get("city_en") or ex.get("city_ru") or "")
-                if "Petersburg" in city_hint or "Петербург" in city_hint:
-                    slug_city = "spb"
-                elif "Kyiv" in city_hint or "Киев" in city_hint:
-                    slug_city = "kyiv"
-                elif "Novosibirsk" in city_hint:
-                    slug_city = "novosibirsk"
-                else:
-                    slug_city = "moscow"
-                query = str(ex.get("name_en") or ex.get("name_ru") or "")
-                resolved_url = _commons_url_for_query(query, slug_city)
-                if resolved_url:
-                    row["image_source_url"] = resolved_url
-                    if _download_commons(guide_root, row, resolved_url):
-                        stats["commons_ok"] += 1
+                slug_city = _city_slug_from_row(row)
+                catalog_url = str(row.get("image_source_url") or "").strip()
+                alt_urls = _candidate_image_urls(
+                    row,
+                    slug_city=slug_city,
+                    whitelist_path=whitelist_path,
+                )
+                if alt_urls:
+                    got = _download_first_url(
+                        guide_root,
+                        row,
+                        alt_urls,
+                        retries_429=retries_429,
+                        pause_429_sec=pause_429_sec,
+                    )
+                    if got:
+                        resolved_url = got
                         copied = True
+                        if got == catalog_url:
+                            stats["catalog_url"] += 1
+                        else:
+                            stats["alt_source"] += 1
                     time.sleep(commons_delay)
 
-            if resolved_url:
-                row["image_source_url"] = resolved_url
-            if copied or (dest.is_file() and dest.stat().st_size >= MIN_IMAGE_BYTES):
-                rows.append(row)
-            else:
-                stats["missing"] += 1
-                rows.append(row)
+                if not copied:
+                    query = _search_query(row)
+                    resolved_url = _commons_url_for_query(query, slug_city)
+                    if resolved_url:
+                        row["image_source_url"] = resolved_url
+                        if _download_commons(
+                            guide_root,
+                            row,
+                            resolved_url,
+                            retries_429=retries_429,
+                            pause_429_sec=pause_429_sec,
+                        ):
+                            stats["commons_ok"] += 1
+                            copied = True
+                        time.sleep(commons_delay)
+
+        if resolved_url:
+            row["image_source_url"] = resolved_url
+        if not city_row and hint:
+            city_row = index.get("{}:{}".format(hint[0], hint[1]))
+        if not city_row and city_ref:
+            city_row = index.get(city_ref)
+        _resolve_second_image(
+            project_root,
+            guide_root,
+            row,
+            index,
+            copy_only=copy_only,
+            commons_delay=commons_delay,
+            retries_429=retries_429,
+            pause_429_sec=pause_429_sec,
+            whitelist_path=whitelist_path,
+            stats=stats,
+            city_row=city_row,
+        )
+        prune_missing_additional_images(guide_root, row)
+        row = strip_extra_images(row)
+        strip_internal_image_keys(row)
+        if not has_local_image(guide_root, dest_rel):
+            stats["missing"] += 1
 
     return rows, stats
 
@@ -334,18 +714,40 @@ def main() -> int:
     parser.add_argument(
         "--commons-delay",
         type=float,
-        default=1.5,
+        default=4.0,
+        help="Pause between remote image attempts (default 4.0s).",
+    )
+    parser.add_argument(
+        "--commons-api-gap",
+        type=float,
+        default=2.5,
+        help="Min gap between Commons API calls (default 2.5s).",
+    )
+    parser.add_argument(
+        "--retries-429",
+        type=int,
+        default=5,
+        help="429 retries per download / Commons API call (default 5).",
+    )
+    parser.add_argument(
+        "--pause-429",
+        type=float,
+        default=45.0,
+        help="Base sleep after HTTP 429 (default 45s).",
     )
     parser.add_argument(
         "--copy-only",
         action="store_true",
-        help="Only copy from city guides; skip Commons API",
+        help="Only copy from city guides; skip remote downloads",
     )
     args = parser.parse_args()
     rows, stats = resolve_images(
         args.project_root,
         commons_delay=args.commons_delay,
         copy_only=args.copy_only,
+        retries_429=args.retries_429,
+        pause_429_sec=args.pause_429,
+        commons_api_gap=args.commons_api_gap,
     )
     out = (
         args.project_root
@@ -359,11 +761,18 @@ def main() -> int:
     )
     print("Wrote {} places".format(len(rows)))
     print(
-        "Images: already={}, copied_city={}, commons_ok={}, missing={}".format(
+        "Images: already={}, copied_city={}, catalog_url={}, "
+        "alt_source={}, commons_ok={}, missing={}, "
+        "second_copied={}, second_downloaded={}, second_commons={}".format(
             stats["already"],
             stats["copied_city"],
+            stats["catalog_url"],
+            stats["alt_source"],
             stats["commons_ok"],
             stats["missing"],
+            stats["second_copied"],
+            stats["second_downloaded"],
+            stats["second_commons"],
         ),
     )
     return 0 if stats["missing"] == 0 else 1

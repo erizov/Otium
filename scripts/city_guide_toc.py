@@ -130,6 +130,97 @@ def guide_toc_html(entries: Sequence[GuideTocEntry], edition: str) -> str:
     )
 
 
+def _toc_link(entry: GuideTocEntry, *, li_class: str) -> str:
+    return (
+        '<li class="{}"><a href="#{}">{}</a></li>'.format(
+            li_class,
+            escape(entry.anchor),
+            escape(entry.label),
+        )
+    )
+
+
+def guide_toc_html_category_chapters(
+    entries: Sequence[GuideTocEntry],
+    edition: str,
+) -> str:
+    """TOC with numbered chapter rows and unnumbered nested example links."""
+    if not entries:
+        return ""
+    preamble: list[GuideTocEntry] = []
+    chapters: list[tuple[GuideTocEntry, list[GuideTocEntry]]] = []
+    idx = 0
+    while idx < len(entries):
+        entry = entries[idx]
+        if entry.level == 1 and not entry.anchor.startswith("cat-"):
+            preamble.append(entry)
+            idx += 1
+            continue
+        if entry.level == 1 and entry.anchor.startswith("cat-"):
+            children: list[GuideTocEntry] = []
+            idx += 1
+            while idx < len(entries) and entries[idx].level > 1:
+                children.append(entries[idx])
+                idx += 1
+            chapters.append((entry, children))
+            continue
+        idx += 1
+    body_parts: list[str] = []
+    if preamble:
+        body_parts.append(
+            "<ol class=\"toc-preamble\">{}</ol>".format(
+                "".join(
+                    _toc_link(e, li_class="toc-item")
+                    for e in preamble
+                ),
+            ),
+        )
+    if chapters:
+        chapter_items: list[str] = []
+        for chapter, examples in chapters:
+            inner = (
+                '<a href="#{anchor}">{label}</a>'.format(
+                    anchor=escape(chapter.anchor),
+                    label=escape(chapter.label),
+                )
+            )
+            if examples:
+                inner += (
+                    '<ul class="toc-examples">'
+                    "{}"
+                    "</ul>".format(
+                        "".join(
+                            _toc_link(
+                                ex,
+                                li_class="toc-item toc-item--example",
+                            )
+                            for ex in examples
+                        ),
+                    )
+                )
+            chapter_items.append(
+                '<li class="toc-item toc-item--chapter">{}</li>'.format(
+                    inner,
+                ),
+            )
+        body_parts.append(
+            '<ol class="toc-chapters">{}</ol>'.format(
+                "".join(chapter_items),
+            ),
+        )
+    title = guide_toc_title(edition)
+    return (
+        '<nav class="guide-toc" id="{toc_id}" aria-label="{title}">'
+        "<h2>{title}</h2>"
+        "{body}"
+        "</nav>"
+    ).format(
+        toc_id=GUIDE_TOC_ID,
+        title=escape(title),
+        body="".join(body_parts),
+    )
+
+
 def _historical_toc_entry(
     city_slug: str,
     edition: str,

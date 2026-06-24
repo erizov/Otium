@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import json
 import sys
+import time
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -14,6 +15,24 @@ _API = "https://commons.wikimedia.org/w/api.php"
 _USER_AGENT = (
     "ExcursionGuide/1.0 (Commons API; urllib; contact: project maintainer)"
 )
+
+_LAST_API_CALL = 0.0
+_MIN_API_GAP_SEC = 2.0
+_RETRIES_429 = 5
+_PAUSE_429_SEC = 45.0
+
+
+def configure_commons_api_throttle(
+    *,
+    min_gap_sec: float = 2.0,
+    retries_429: int = 5,
+    pause_429_sec: float = 45.0,
+) -> None:
+    """Tune spacing and 429 backoff for bulk Commons API use."""
+    global _MIN_API_GAP_SEC, _RETRIES_429, _PAUSE_429_SEC
+    _MIN_API_GAP_SEC = max(0.5, float(min_gap_sec))
+    _RETRIES_429 = max(1, int(retries_429))
+    _PAUSE_429_SEC = max(5.0, float(pause_429_sec))
 
 # Historic / alternate spellings for Commons filename + snippet checks.
 _CITY_EXTRA_FILE_TOKENS: dict[str, frozenset[str]] = {
@@ -31,19 +50,39 @@ _CITY_EXTRA_FILE_TOKENS: dict[str, frozenset[str]] = {
 
 
 def _api_get(params: dict[str, str]) -> dict[str, Any] | None:
+    global _LAST_API_CALL
     q = urllib.parse.urlencode(params)
     url = "{}?{}".format(_API, q)
     req = urllib.request.Request(url, headers={"User-Agent": _USER_AGENT})
-    try:
-        with urllib.request.urlopen(req, timeout=45) as resp:
-            raw = resp.read().decode("utf-8", errors="replace")
-    except (urllib.error.URLError, OSError, ValueError) as e:
-        print("Commons API GET failed: {}".format(e), file=sys.stderr)
-        return None
-    try:
-        return json.loads(raw)
-    except json.JSONDecodeError:
-        return None
+    for attempt in range(_RETRIES_429):
+        gap = _MIN_API_GAP_SEC - (time.monotonic() - _LAST_API_CALL)
+        if gap > 0:
+            time.sleep(gap)
+        try:
+            with urllib.request.urlopen(req, timeout=45) as resp:
+                raw = resp.read().decode("utf-8", errors="replace")
+        except urllib.error.HTTPError as e:
+            if e.code == 429 and attempt + 1 < _RETRIES_429:
+                wait = _PAUSE_429_SEC + attempt * 15.0
+                print(
+                    "Commons API 429: sleep {:.0f}s, retry {}/{} ...".format(
+                        wait, attempt + 1, _RETRIES_429,
+                    ),
+                    file=sys.stderr,
+                )
+                time.sleep(wait)
+                continue
+            print("Commons API GET failed: {}".format(e), file=sys.stderr)
+            return None
+        except (urllib.error.URLError, OSError, ValueError) as e:
+            print("Commons API GET failed: {}".format(e), file=sys.stderr)
+            return None
+        _LAST_API_CALL = time.monotonic()
+        try:
+            return json.loads(raw)
+        except json.JSONDecodeError:
+            return None
+    return None
 
 
 def commons_file_upload_url(file_title: str) -> str | None:

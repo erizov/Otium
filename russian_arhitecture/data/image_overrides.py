@@ -1,0 +1,421 @@
+# -*- coding: utf-8 -*-
+"""Explicit Commons URLs for guide places that need better photos."""
+
+from __future__ import annotations
+
+from typing import Any
+
+from russian_arhitecture.data.image_reuse import extra_image_rel
+
+_SOVETSKAYA_HOTEL_URLS: tuple[str, str] = (
+    "https://upload.wikimedia.org/wikipedia/commons/9/95/"
+    "Sovietsky_Hotel.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/1/14/"
+    "Moscow_-_Hotel_Sovietskaya_01.jpg",
+)
+
+_MOSCOW_BUILDINGS_30_SLUGS = frozenset({
+    "stalinist_moscow_buildings_30_2",
+})
+
+_KREMLIN_DORMITION = (
+    "https://upload.wikimedia.org/wikipedia/commons/"
+    "8/8d/Cathedral_of_the_Dormition_in_the_Moscow_Kremlin.jpg"
+)
+_VLADIMIR_ASSUMPTION = (
+    "https://upload.wikimedia.org/wikipedia/commons/e/eb/"
+    "%D0%A3%D1%81%D0%BF%D0%B5%D0%BD%D1%81%D0%BA%D0%B8%D0%B9_%D1%81%D0%BE%D0%B1%D0%BE%D1%80_"
+    "%D0%92%D0%BB%D0%B0%D0%B4%D0%B8%D0%BC%D0%B8%D1%80_3.jpg"
+)
+_KREMLIN_DORMITION_SECOND = (
+    "https://upload.wikimedia.org/wikipedia/commons/1/13/"
+    "Assumption_Cathedral_in_Moscow_01.JPG"
+)
+_HOUSE_ON_EMBANKMENT = (
+    "https://avatars.mds.yandex.net/get-altay/2389272/"
+    "2a000001750218b563de0fcbfa5c4919cf70/XXL"
+)
+_POLITKATORZHAN = (
+    "https://mosculture.ru/wp-content/uploads/2014/09/DSC07806.jpg"
+)
+_STATE_DUMA = (
+    "https://cdnstatic.rg.ru/uploads/images/2025/10/01/"
+    "ria_8184749hr_967.jpg"
+)
+_BELORUSSKY_RAIL = (
+    "https://upload.wikimedia.org/wikipedia/commons/e/e3/"
+    "Belorussky_Rail_Terminal_%28%D0%91%D0%B5%D0%BB%D0%BE%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9_"
+    "%D0%B2%D0%BE%D0%BA%D0%B7%D0%B0%D0%BB%29_%285833421585%29.jpg"
+)
+_BELORUSSKY_RAIL_SECOND = (
+    "https://live.staticflickr.com/3870/"
+    "14284718169_2c3de612d0_b.jpg"
+)
+_PAVELETSKY_RAIL = (
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/"
+    "Paveletsky_railway_station_Moscow_2013.jpg/1280px-"
+    "Paveletsky_railway_station_Moscow_2013.jpg"
+)
+_PROSPEKT_MIRA_METRO = (
+    "https://upload.wikimedia.org/wikipedia/commons/3/3f/"
+    "%D0%9F%D1%80%D0%BE%D1%81%D0%BF%D0%B5%D0%BA%D1%82_%D0%9C%D0%B8%D1%80%D0%B0_"
+    "%D0%BA%D0%BE%D0%BB%D1%8C%D1%86%D0%B5%D0%B2%D0%B0%D1%8F_11.jpg"
+)
+_PROSPEKT_MIRA_METRO_SECOND = (
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/"
+    "Prospekt_Mira_metro_mosaic.jpg/1280px-"
+    "Prospekt_Mira_metro_mosaic.jpg"
+)
+_RGB_LIBRARY = (
+    "https://live.staticflickr.com/4240/"
+    "35255414955_b9a05e8a35_b.jpg"
+)
+_ZARYADYE_VIEWPOINT_URLS: tuple[str, str] = (
+    "https://avatars.mds.yandex.net/get-altay/934739/"
+    "2a0000015eece6b22dded6460617c641affa/orig",
+    "https://conceptsandprojects.com/wp-content/uploads/"
+    "2020/08/40360_Zaryadye-Park_KP1_12-e1600329160360.jpg",
+)
+
+# slug -> (primary_url, secondary_url or None)
+IMAGE_URL_OVERRIDES: dict[str, tuple[str, str | None]] = {
+    "tent_roof_st_basil": (
+        "https://upload.wikimedia.org/wikipedia/commons/"
+        "3/3d/Saint_Basil%27s_Cathedral_-_Moscow_-_Russia_-_01.jpg",
+        None,
+    ),
+    "moscow_fifteenth_sixteenth_kremlin_dormition": (
+        _KREMLIN_DORMITION,
+        _KREMLIN_DORMITION_SECOND,
+    ),
+    "ancient_rus_vladimir_assumption": (
+        _VLADIMIR_ASSUMPTION,
+        None,
+    ),
+    "ancient_rus_moscow_places_of_worship_3_2": (
+        _KREMLIN_DORMITION,
+        _KREMLIN_DORMITION_SECOND,
+    ),
+    "petrine_baroque_peter_paul_cathedral": (
+        "https://upload.wikimedia.org/wikipedia/commons/"
+        "5/5e/Peter_and_Paul_Cathedral_in_Saint_Petersburg.jpg",
+        None,
+    ),
+    "elizabethan_baroque_smolny_cathedral": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/"
+        "e/e3/Smolny_2013_1.jpg/1280px-Smolny_2013_1.jpg",
+        None,
+    ),
+    "uzorochye_trinity_nikitniki": (
+        "https://um.mos.ru/content/house/media/1649/"
+        "163dbeadef408a.jpg",
+        None,
+    ),
+    "uzorochye_moscow_places_of_worship_21_2": (
+        "https://live.staticflickr.com/4086/"
+        "5210982333_2cfbe14e4f_b.jpg",
+        None,
+    ),
+    "novgorod_school_transfiguration_ilyina": (
+        "https://upload.wikimedia.org/wikipedia/commons/"
+        "9/9e/Novgorod_Church_of_Transfiguration_on_Ilyina_Street.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/"
+        "8/8f/Church_of_the_Transfiguration_on_Ilina_Street.jpg",
+    ),
+    "regional_soviet_luzhniki_stadium": (
+        "https://upload.wikimedia.org/wikipedia/commons/"
+        "0/0c/Luzhniki_stadium_Moscow.jpg",
+        None,
+    ),
+    "constructivism_narkomfin": (
+        "https://upload.wikimedia.org/wikipedia/commons/"
+        "9/9a/Narkomfin_%28Moscow%29.jpg",
+        None,
+    ),
+    "russo_byzantine_moscow_places_of_worship_0_2": (
+        "https://upload.wikimedia.org/wikipedia/commons/"
+        "4/4e/Vasilevsky_spusk_and_Cathedral_of_Vasily_the_Blessed.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/"
+        "f/f3/St._Basil%27s.jpg",
+    ),
+    "eclecticism_moscow_osobnjaki_5_2": (
+        "https://upload.wikimedia.org/wikipedia/commons/"
+        "6/68/Rukavishnikov_House%2C_Moscow.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/"
+        "9/9a/Rukavishnikov_mansion_in_Moscow.jpg/"
+        "1280px-Rukavishnikov_mansion_in_Moscow.jpg",
+    ),
+    "art_nouveau_singer_house": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/"
+        "3/3f/Singer_House.jpg/1280px-Singer_House.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/"
+        "9/9e/Singer_House%2C_St._Petersburg.jpg/1280px-"
+        "Singer_House%2C_St._Petersburg.jpg",
+    ),
+    "avant_garde_moscow_buildings_33_2": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/"
+        "%D0%97%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5_%D0%98%D0%B7%D0%B2%D0%B5%D1%81%D1%82%D0%B8%D0%B9._"
+        "%D0%92%D0%B8%D0%B4_%D1%81_%D0%BA%D1%80%D1%8B%D1%88%D0%B8_%D0%BE%D1%82%D0%B5%D0%BB%D1%8F_"
+        "%D0%A1%D1%82%D0%B0%D0%BD%D0%B4%D0%90%D1%80%D1%82.jpg/1280px-"
+        "%D0%97%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5_%D0%98%D0%B7%D0%B2%D0%B5%D1%81%D1%82%D0%B8%D0%B9._"
+        "%D0%92%D0%B8%D0%B4_%D1%81_%D0%BA%D1%80%D1%8B%D1%88%D0%B8_%D0%BE%D1%82%D0%B5%D0%BB%D1%8F_"
+        "%D0%A1%D1%82%D0%B0%D0%BD%D0%B4%D0%90%D1%80%D1%82.jpg",
+        None,
+    ),
+    "avant_garde_moscow_buildings_2_2": (
+        _HOUSE_ON_EMBANKMENT,
+        None,
+    ),
+    "avant_garde_moscow_buildings_29_2": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/"
+        "%D0%97%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5_%D0%A6%D0%B5%D0%BD%D1%82%D1%80%D0%BE%D1%81%D0%BE%D1%8E%D0%B7%D0%B0_"
+        "2011-01_2.jpg/1280px-"
+        "%D0%97%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5_%D0%A6%D0%B5%D0%BD%D1%82%D1%80%D0%BE%D1%81%D0%BE%D1%8E%D0%B7%D0%B0_"
+        "2011-01_2.jpg",
+        None,
+    ),
+    "constructivism_moscow_osobnjaki_25_2": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/"
+        "Moscow%2C_Orlikov_Lane%2C_Central_Agricultural_Library_building_%28"
+        "31154197020%29.jpg/1280px-Moscow%2C_Orlikov_Lane%2C_Central_"
+        "Agricultural_Library_building_%2831154197020%29.jpg",
+        None,
+    ),
+    "stalinist_moscow_railway_stations_4_2": (
+        _BELORUSSKY_RAIL,
+        _BELORUSSKY_RAIL_SECOND,
+    ),
+    "stalinist_moscow_buildings_17_2": (
+        "https://upload.wikimedia.org/wikipedia/commons/b/b8/"
+        "Moscow_-_2024_-_The_Kudrinskaya_high-rise.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/8/8c/"
+        "%D0%92%D1%8B%D1%81%D0%BE%D1%82%D0%BA%D0%B0_%D0%BD%D0%B0_%D0%9A%D1%83%D0%B4%D1%80%D0%B8%D0%BD%D1%81%D0%BA%D0%BE%D0%B9_"
+        "%D0%BF%D0%BB%D0%BE%D1%89%D0%B0%D0%B4%D0%B8_%D0%B2%D0%B5%D1%87%D0%B5%D1%80%D0%BE%D0%BC_-_panoramio.jpg",
+    ),
+    "contemporary_zaryadye_park": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/"
+        "4/4f/Zaryadye_Park_floating_bridge_Moscow.jpg/1280px-"
+        "Zaryadye_Park_floating_bridge_Moscow.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/c/c1/"
+        "%D0%9F%D0%B0%D1%80%D0%BA_%D0%97%D0%B0%D1%80%D1%8F%D0%B4%D1%8C%D0%B5_%D0%B2_%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B5._"
+        "%D0%A4%D0%BE%D1%82%D0%BE_73.jpg",
+    ),
+    "post_constructivism_moscow_buildings_2_2": (
+        _HOUSE_ON_EMBANKMENT,
+        None,
+    ),
+    "post_constructivism_moscow_osobnjaki_20_2": (
+        _POLITKATORZHAN,
+        None,
+    ),
+    "post_constructivism_moscow_osobnjaki_24_2": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/"
+        "Moscow_Narkomfin_6891.jpg/1280px-Moscow_Narkomfin_6891.jpg",
+        None,
+    ),
+    "neoclassicism_early20_moscow_buildings_11_2": (
+        _STATE_DUMA,
+        None,
+    ),
+    "art_deco_moscow_railway_stations_6_2": (
+        _PAVELETSKY_RAIL,
+        None,
+    ),
+    "art_deco_moscow_metro_11_2": (
+        _PROSPEKT_MIRA_METRO,
+        _PROSPEKT_MIRA_METRO_SECOND,
+    ),
+    "stalinist_neoclassicism_moscow_railway_stations_4_2": (
+        _BELORUSSKY_RAIL,
+        _BELORUSSKY_RAIL_SECOND,
+    ),
+    "russo_byzantine_moscow_places_of_worship_3_2": (
+        _KREMLIN_DORMITION,
+        _KREMLIN_DORMITION_SECOND,
+    ),
+    "soviet_modernism_moscow_viewpoints_1_2": _ZARYADYE_VIEWPOINT_URLS,
+    "postmodernism_moscow_viewpoints_1_2": _ZARYADYE_VIEWPOINT_URLS,
+    "contemporary_moscow_viewpoints_1_2": _ZARYADYE_VIEWPOINT_URLS,
+    "pseudo_russian_moscow_palaces_2_2": (
+        "https://upload.wikimedia.org/wikipedia/commons/9/9b/"
+        "Tsaritsino_from_helicopter-1.jpg",
+        "https://avatars.mds.yandex.net/i?id="
+        "1c4579f2690370c21430f17b669292f4_l-4230301-images-thumbs&n=13",
+    ),
+    "neo_eclectic_moscow_palaces_2_2": (
+        "https://upload.wikimedia.org/wikipedia/commons/b/bc/"
+        "%D0%9C%D1%83%D0%B7%D0%B5%D0%B9-%D0%B7%D0%B0%D0%BF%D0%BE%D0%B2%D0%B5%D0%B4%D0%BD%D0%B8%D0%BA_"
+        "%D0%A6%D0%B0%D1%80%D0%B8%D1%86%D1%8B%D0%BD%D0%BE_-_panoramio_%284%29.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/"
+        "5/5e/Tsaritsyno_Moscow_Grand_Palace.jpg/1280px-"
+        "Tsaritsyno_Moscow_Grand_Palace.jpg",
+    ),
+    "post_constructivism_zil_palace": (
+        "https://upload.wikimedia.org/wikipedia/commons/"
+        "6/6e/ZIL_Palace_of_Culture.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/"
+        "f/f0/ZIL_Palace_of_Culture_Moscow.jpg/1280px-"
+        "ZIL_Palace_of_Culture_Moscow.jpg",
+    ),
+    "constructivism_moscow_buildings_2_2": (
+        _HOUSE_ON_EMBANKMENT,
+        None,
+    ),
+    "constructivism_moscow_buildings_29_2": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/"
+        "%D0%97%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5_%D0%A6%D0%B5%D0%BD%D1%82%D1%80%D0%BE%D1%81%D0%BE%D1%8E%D0%B7%D0%B0_"
+        "2011-01_2.jpg/1280px-"
+        "%D0%97%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5_%D0%A6%D0%B5%D0%BD%D1%82%D1%80%D0%BE%D1%81%D0%BE%D1%8E%D0%B7%D0%B0_"
+        "2011-01_2.jpg",
+        None,
+    ),
+    "art_deco_metro_art_deco": (
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/"
+        "e/ef/Vertical_panorama_of_the_Mayakovskaya_Metro_Station.jpg/"
+        "1280px-Vertical_panorama_of_the_Mayakovskaya_Metro_Station.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/"
+        "f/f6/MosMetro_KomsomolskayaKL_img2_asv2018-01.jpg/1280px-"
+        "MosMetro_KomsomolskayaKL_img2_asv2018-01.jpg",
+    ),
+    "neo_russian_moscow_osobnjaki_2_2": (
+        "https://upload.wikimedia.org/wikipedia/commons/b/bf/"
+        "%D0%94%D0%BE%D0%BC-%D0%BC%D1%83%D0%B7%D0%B5%D0%B9_%D0%92._%D0%9C._"
+        "%D0%92%D0%B0%D1%81%D0%BD%D0%B5%D1%86%D0%BE%D0%B2%D0%B0_%28"
+        "%D1%84%D0%BE%D1%82%D0%BE_%D0%B0%D0%B2%D0%B3%D1%83%D1%81%D1%82_2024%29.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/4/4d/"
+        "Vasnetsov_house_in_Moscow_01.jpg",
+    ),
+    "art_nouveau_moscow_osobnjaki_2_2": (
+        "https://upload.wikimedia.org/wikipedia/commons/b/bf/"
+        "%D0%94%D0%BE%D0%BC-%D0%BC%D1%83%D0%B7%D0%B5%D0%B9_%D0%92._%D0%9C._"
+        "%D0%92%D0%B0%D1%81%D0%BD%D0%B5%D1%86%D0%BE%D0%B2%D0%B0_%28"
+        "%D1%84%D0%BE%D1%82%D0%BE_%D0%B0%D0%B2%D0%B3%D1%83%D1%81%D1%82_2024%29.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/4/4d/"
+        "Vasnetsov_house_in_Moscow_01.jpg",
+    ),
+    "uzorochye_terem_palace": (
+        "https://um.mos.ru/content/iblock/d2d/temodvo02.jpg",
+        None,
+    ),
+    "naryshkin_baroque_trinity_lykovo": (
+        "https://avatars.mds.yandex.net/get-altay/14333651/"
+        "2a00000195988c361b1d37d8db94e746e252/XXL_height",
+        None,
+    ),
+    "naryshkin_baroque_intercession_fili": (
+        "https://upload.wikimedia.org/wikipedia/commons/e/eb/"
+        "Moscow_Church_in_Fili.JPG",
+        None,
+    ),
+    "petrine_baroque_twelve_collegia": (
+        "https://upload.wikimedia.org/wikipedia/commons/4/4e/"
+        "Building_of_the_Twelve_Collegia_%28from_the_territory_of_"
+        "St_Petersburg_State_University%29.jpg",
+        None,
+    ),
+    "empire_moscow_libraries_0_2": (_RGB_LIBRARY, None),
+    "stalinist_neoclassicism_moscow_libraries_0_2": (_RGB_LIBRARY, None),
+    "soviet_neoclassicism_revival_moscow_libraries_0_2": (
+        _RGB_LIBRARY,
+        None,
+    ),
+    "soviet_modernism_moscow_buildings_22_2": (
+        "https://griven-russia.com/projects/000020/000020.jpg",
+        None,
+    ),
+}
+
+# slug -> (city, rel_path under city folder) for local copy fallback
+PRIMARY_IMAGE_REUSE: dict[str, tuple[str, str]] = {
+    "eclecticism_moscow_osobnjaki_5_2": (
+        "moscow",
+        "images/moscow_osobnjaki/rukavishnikov_1.jpg",
+    ),
+    "neo_russian_moscow_osobnjaki_2_2": (
+        "moscow",
+        "images/moscow_osobnjaki/vasnetsov_1.jpg",
+    ),
+    "art_nouveau_moscow_osobnjaki_2_2": (
+        "moscow",
+        "images/moscow_osobnjaki/vasnetsov_1.jpg",
+    ),
+}
+for _slug in _MOSCOW_BUILDINGS_30_SLUGS:
+    PRIMARY_IMAGE_REUSE[_slug] = (
+        "moscow",
+        "images/moscow_buildings/sovetskaya_1.jpg",
+    )
+
+PRIMARY_IMAGE_REUSE["moscow_fifteenth_sixteenth_kremlin_dormition"] = (
+    "moscow",
+    "images/moscow_buildings/kremlin_2.jpg",
+)
+PRIMARY_IMAGE_REUSE["ancient_rus_moscow_places_of_worship_3_2"] = (
+    "moscow",
+    "images/moscow_buildings/kremlin_2.jpg",
+)
+PRIMARY_IMAGE_REUSE["neoclassicism_early20_moscow_osobnjaki_38_2"] = (
+    "moscow",
+    "images/moscow_osobnjaki/vtorov_2.jpg",
+)
+PRIMARY_IMAGE_REUSE["uzorochye_moscow_places_of_worship_21_2"] = (
+    "moscow",
+    "images/moscow_places_of_worship/simeon_stolpnik_3.jpg",
+)
+
+SECOND_IMAGE_REUSE: dict[str, tuple[str, str]] = {
+    "eclecticism_moscow_osobnjaki_5_2": (
+        "moscow",
+        "images/moscow_osobnjaki/rukavishnikov_2.jpg",
+    ),
+    "neo_eclectic_moscow_palaces_2_2": (
+        "moscow",
+        "images/moscow_parks/tsaritsyno_3.jpg",
+    ),
+    "russo_byzantine_moscow_places_of_worship_0_2": (
+        "moscow",
+        "images/moscow_places_of_worship/st_basil_1.jpg",
+    ),
+    "neo_russian_moscow_osobnjaki_2_2": (
+        "moscow",
+        "images/moscow_osobnjaki/vasnetsov_2.jpg",
+    ),
+    "art_nouveau_moscow_osobnjaki_2_2": (
+        "moscow",
+        "images/moscow_osobnjaki/vasnetsov_2.jpg",
+    ),
+}
+for _slug in _MOSCOW_BUILDINGS_30_SLUGS:
+    SECOND_IMAGE_REUSE[_slug] = (
+        "moscow",
+        "images/moscow_buildings/sovetskaya_2.jpg",
+    )
+PRIMARY_IMAGE_REUSE["stalinist_moscow_buildings_17_2"] = (
+    "moscow",
+    "images/moscow_buildings/kudrinskaya_3.jpg",
+)
+SECOND_IMAGE_REUSE["stalinist_moscow_buildings_17_2"] = (
+    "moscow",
+    "images/moscow_buildings/kudrinskaya_4.jpg",
+)
+
+
+def apply_image_url_overrides(place: dict[str, Any]) -> dict[str, Any]:
+    """Set primary/secondary image URLs when an override exists."""
+    slug = str(place.get("slug") or "")
+    override = IMAGE_URL_OVERRIDES.get(slug)
+    if not override and slug in _MOSCOW_BUILDINGS_30_SLUGS:
+        override = _SOVETSKAYA_HOTEL_URLS
+    if not override:
+        return place
+    primary, secondary = override
+    merged = dict(place)
+    merged["image_source_url"] = primary
+    if secondary:
+        merged["additional_images"] = [{
+            "image_rel_path": extra_image_rel(slug),
+            "image_source_url": secondary,
+        }]
+    else:
+        merged.pop("additional_images", None)
+    return merged

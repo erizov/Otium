@@ -18,6 +18,7 @@ class CityPlace(TypedDict, total=False):
     subtitle_en: str
     image_rel_path: str
     image_source_url: str
+    additional_images: list[dict[str, str]]
     license_note: str
     attribution: str
     address: str

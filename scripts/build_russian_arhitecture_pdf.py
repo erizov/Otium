@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import re
 import shutil
 import sys
 from html import escape
@@ -22,6 +23,22 @@ from russian_arhitecture.data.style_catalog import (  # noqa: E402
     STYLE_META,
     STYLE_ORDER,
 )
+from russian_arhitecture.data.style_architects import (  # noqa: E402
+    STYLE_ARCHITECTS,
+)
+from russian_arhitecture.data.place_narratives import (  # noqa: E402
+    apply_narrative_overrides,
+    max_sentences_for_slug,
+)
+from russian_arhitecture.data.guide_image_policy import (  # noqa: E402
+    SINGLE_IMAGE_SLUGS,
+)
+from russian_arhitecture.data.style_intros_extended import (  # noqa: E402
+    style_intro_paragraphs,
+)
+from russian_arhitecture.data.history_heraldry import (  # noqa: E402
+    history_coats_for_pdf,
+)
 
 from scripts.build_pdf import (  # noqa: E402
     PDF_FOOTER_EMPTY,
@@ -33,14 +50,17 @@ from scripts.build_pdf import (  # noqa: E402
 )
 from scripts.city_guide_core import (  # noqa: E402
     copy_built_guide_pdf_to_final_guides,
+    drop_excluded_category_places,
     is_substantive_text,
-    places_for_pdf,
+    place_has_pdf_image,
 )
 from scripts.city_guide_jerusalem_style_pdf import PDF_CHUNK_MAX_PLACES  # noqa: E402
 from scripts.city_guide_narrative import (  # noqa: E402
     GuideNarrativeDeduper,
+    _collect_text_field_sentence_pairs,
+    _dedupe_sentence_pairs,
+    _fallback_narrative_paragraph,
     filter_stories,
-    merge_narrative_html,
     place_heading_plain,
     place_meta_line,
     subtitle_html_for_edition,
@@ -62,18 +82,42 @@ from scripts.city_guide_toc import (  # noqa: E402
     GuideTocEntry,
     category_chapter_anchor,
     guide_toc_back_link_html,
-    guide_toc_html,
+    guide_toc_html_category_chapters,
     toc_entries_for_category_guide,
-)
-from scripts.city_guide_title_heraldry_assets import (  # noqa: E402
-    title_symbols_for_slug,
 )
 
 MIN_IMAGE_BYTES = 500
 HTML_NAME = "russian_arhitecture_guide.html"
 PDF_NAME = "russian_arhitecture_guide.pdf"
 _STYLE_INDEX = {k: i for i, k in enumerate(STYLE_ORDER)}
-_TITLE_SYMBOLS = title_symbols_for_slug("russian_arhitecture")
+_HISTORY_COATS: tuple[tuple[str, str, str], ...] = history_coats_for_pdf()
+
+_TITLE_SYMBOLS: tuple[tuple[str, str], ...] = (
+    (
+        "images/guide_coat_of_arms.svg",
+        "Coat of arms of the Russian Federation",
+    ),
+    (
+        "images/guide_flag.svg",
+        "Flag of Russia",
+    ),
+    (
+        "images/guide_coat_imperial.svg",
+        "Coat of arms of the Russian Empire",
+    ),
+    (
+        "images/guide_flag_imperial.svg",
+        "Flag of the Russian Empire (black-yellow-white)",
+    ),
+    (
+        "images/guide_coat_soviet.svg",
+        "Coat of arms of the Soviet Union",
+    ),
+    (
+        "images/guide_flag_soviet.svg",
+        "Flag of the Soviet Union",
+    ),
+)
 
 _OTIUM_PARAS: tuple[str, ...] = (
     "OTIUM — это практика осмысленного досуга. В античной традиции otium "
@@ -90,6 +134,58 @@ _OTIUM_PARAS_EN: tuple[str, ...] = (
     "checklist tourism.",
     "OTIUM is for those who want to look slowly.",
 )
+
+_GENERIC_NARRATIVE_RE = re.compile(
+    r"^(?:пример|an example of|памятник относится к направлению|"
+    r"the monument belongs to the)\b",
+    re.IGNORECASE,
+)
+_STYLE_FALLBACK_RE = re.compile(
+    r"памятник относится к направлению|the monument belongs to the",
+    re.IGNORECASE,
+)
+
+
+def _dedupe_architecture_guide_places(
+    places: list[CityPlace],
+) -> list[CityPlace]:
+    """Drop duplicate headings/images within each style chapter only."""
+    from scripts.city_guide_core import dedupe_pdf_sidecar_places
+
+    by_cat: dict[str, list[CityPlace]] = {}
+    for place in places:
+        cat = str(place.get("category") or "misc")
+        by_cat.setdefault(cat, []).append(place)
+    out: list[CityPlace] = []
+    for cat in STYLE_ORDER:
+        chunk = by_cat.get(cat)
+        if not chunk:
+            continue
+        out.extend(
+            dedupe_pdf_sidecar_places(
+                chunk,
+                city_slug="russian_arhitecture",
+            ),
+        )
+    for cat, chunk in by_cat.items():
+        if cat in _STYLE_INDEX:
+            continue
+        out.extend(
+            dedupe_pdf_sidecar_places(
+                chunk,
+                city_slug="russian_arhitecture",
+            ),
+        )
+    return out
+
+
+def _is_generic_example_sentence(sentence: str) -> bool:
+    s = str(sentence or "").strip()
+    if not s:
+        return True
+    if _GENERIC_NARRATIVE_RE.match(s):
+        return True
+    return bool(_STYLE_FALLBACK_RE.search(s))
 
 
 def _ru_count_phrase(n: int, one: str, few: str, many: str) -> str:
@@ -112,16 +208,111 @@ def _en_count_phrase(n: int, one: str, many: str) -> str:
     return "{} {}".format(n, many)
 
 
-def _chapter_heading(cat: str, count: int, edition: str) -> tuple[str, str]:
-    meta = STYLE_META.get(
-        cat,
-        ("Раздел", "Section", "", ""),
+def _style_chapter_title(cat: str, edition: str) -> str:
+    meta = STYLE_META.get(cat, ("Раздел", "Section", "", ""))
+    base = meta[0] if edition == "ru" else meta[1]
+    order = _STYLE_INDEX.get(cat)
+    if order is None:
+        return base
+    return "{}. {}".format(order + 1, base)
+
+
+def _style_intro_text(cat: str, edition: str) -> str:
+    meta = STYLE_META.get(cat, ("", "", "", ""))
+    return (meta[2] if edition == "ru" else meta[3]).strip()
+
+
+def _style_intro_html(cat: str, edition: str) -> str:
+    paras = style_intro_paragraphs(cat, edition)
+    if not paras:
+        intro = _style_intro_text(cat, edition)
+        if not intro:
+            return ""
+        paras = [intro]
+    return "\n".join(
+        '<p class="chapter-intro">{}</p>'.format(escape(p)) for p in paras
     )
+
+
+def _architecture_narrative_html(
+    place: CityPlace,
+    edition: str,
+    deduper: GuideNarrativeDeduper,
+) -> str:
+    """Place prose: one block, 2–20 sentences, no generic placeholders."""
+    place = apply_narrative_overrides(place)
+    slug = str(place.get("slug") or "")
+    pairs: list[tuple[str, str]] = []
+    pairs.extend(
+        _collect_text_field_sentence_pairs(place, edition, "description"),
+    )
+    pairs.extend(
+        _collect_text_field_sentence_pairs(place, edition, "history"),
+    )
+    pairs.extend(
+        _collect_text_field_sentence_pairs(place, edition, "significance"),
+    )
+    pairs = [
+        (sent, key)
+        for sent, key in pairs
+        if not _is_generic_example_sentence(sent)
+    ]
+    sents = _dedupe_sentence_pairs(pairs, deduper)
+    if len(sents) < 2:
+        fb = _fallback_narrative_paragraph(place, edition)
+        if fb and not _is_generic_example_sentence(fb):
+            sents.append(fb)
+    cap = max_sentences_for_slug(slug) or 20
+    sents = sents[:cap]
+    if not sents:
+        return ""
+    body = " ".join(sents)
+    inner = '<p class="prose">{}</p>'.format(escape(body))
+    return '<div class="place-desc">{}</div>'.format(inner)
+
+
+def _missing_image_places(guide_root: Path) -> list[str]:
+    missing: list[str] = []
+    for place in RUSSIAN_ARHITECTURE_PLACES:
+        slug = str(place.get("slug") or "")
+        srcs, _paths = _image_entries_for_place(guide_root, place)
+        if not srcs:
+            missing.append(slug)
+    return missing
+
+
+def _style_architects_html(cat: str, edition: str) -> str:
+    rows = STYLE_ARCHITECTS.get(cat) or []
+    if not rows:
+        return ""
+    label = (
+        "Главные архитекторы"
+        if edition == "ru"
+        else "Leading architects"
+    )
+    items: list[str] = []
+    for name_ru, name_en, note_ru, note_en in rows:
+        name = name_ru if edition == "ru" else name_en
+        note = note_ru if edition == "ru" else note_en
+        items.append(
+            "<li><strong>{}</strong> — {}</li>".format(
+                escape(name),
+                escape(note),
+            ),
+        )
+    return (
+        '<div class="chapter-architects">'
+        '<p class="chapter-architects-label">{}</p>'
+        '<ul class="chapter-architects-list">{}</ul>'
+        "</div>"
+    ).format(escape(label), "\n".join(items))
+
+
+def _chapter_heading(cat: str, count: int, edition: str) -> tuple[str, str]:
+    h2 = _style_chapter_title(cat, edition)
     if edition == "ru":
-        h2 = meta[0]
         sub = _ru_count_phrase(count, "пример", "примера", "примеров")
     else:
-        h2 = meta[1]
         sub = _en_count_phrase(count, "example", "examples")
     return h2, sub
 
@@ -151,6 +342,8 @@ def _image_entries_for_place(
             srcs.append(_rel_to_src(primary))
             paths.append(path)
     for extra in place.get("additional_images") or []:
+        if str(place.get("slug") or "") in SINGLE_IMAGE_SLUGS:
+            break
         rel = extra.get("image_rel_path")
         if not rel:
             continue
@@ -167,38 +360,89 @@ def _image_srcs_for_place(root: Path, place: CityPlace) -> list[str]:
 
 
 def _places_with_local_images(guide_root: Path) -> list[CityPlace]:
-    return places_for_pdf(
-        guide_root,
-        RUSSIAN_ARHITECTURE_PLACES,
-        city_slug="russian_arhitecture",
-        sort_key=lambda row: (
+    rows = drop_excluded_category_places(list(RUSSIAN_ARHITECTURE_PLACES))
+    rows = _dedupe_architecture_guide_places(rows)
+    out = [p for p in rows if place_has_pdf_image(guide_root, p)]
+    out.sort(
+        key=lambda row: (
             _STYLE_INDEX.get(str(row.get("category") or ""), 999),
             str(row.get("name_ru") or ""),
         ),
     )
+    return out
 
 
 def _heraldry_html(root: Path, edition: str) -> str:
-    figs: list[str] = []
-    for rel, alt in _TITLE_SYMBOLS:
+    hist_figs: list[str] = []
+    for rel, alt_en, alt_ru in _HISTORY_COATS:
         path = root / rel
-        if not path.is_file() or path.stat().st_size < MIN_IMAGE_BYTES:
+        if not path.is_file():
             continue
-        figs.append(
-            '<figure class="heraldry-fig heraldry-coat-book">'
+        alt = alt_ru if edition == "ru" else alt_en
+        hist_figs.append(
+            '<figure class="heraldry-fig heraldry-coat-hist">'
             '<img src="{}" alt="{}"/>'
             "</figure>".format(
                 escape(_rel_to_src(rel)),
                 escape(alt),
             ),
         )
-    if not figs:
+    official_figs: list[str] = []
+    for rel, alt in _TITLE_SYMBOLS:
+        path = root / rel
+        if not path.is_file():
+            continue
+        if path.suffix.lower() != ".svg" and path.stat().st_size < MIN_IMAGE_BYTES:
+            continue
+        cls = (
+            "heraldry-flag-book"
+            if "flag" in rel
+            else "heraldry-coat-book"
+        )
+        official_figs.append(
+            '<figure class="heraldry-fig {}">'
+            '<img src="{}" alt="{}"/>'
+            "</figure>".format(
+                cls,
+                escape(_rel_to_src(rel)),
+                escape(alt),
+            ),
+        )
+    if not hist_figs and not official_figs:
         return ""
-    return (
-        '<div class="russian_arhitecture-title-symbols heraldry-strip">'
-        "{}"
-        "</div>"
-    ).format("\n".join(figs))
+    chunks: list[str] = [
+        '<div class="russian_arhitecture-title-symbols">',
+    ]
+    if hist_figs:
+        hist_label = (
+            "Исторические гербы"
+            if edition == "ru"
+            else "Historical coats of arms"
+        )
+        chunks.append(
+            '<p class="title-strip-label">{}</p>'.format(escape(hist_label)),
+        )
+        chunks.append(
+            '<div class="heraldry-strip heraldry-history">'
+            "{}"
+            "</div>".format("\n".join(hist_figs)),
+        )
+    if official_figs:
+        off_label = (
+            "Современная символика"
+            if edition == "ru"
+            else "Modern symbols"
+        )
+        chunks.append(
+            '<p class="title-strip-label">{}</p>'.format(escape(off_label)),
+        )
+        chunks.append(
+            '<div class="heraldry-strip heraldry-official">'
+            "{}"
+            "</div>".format("\n".join(official_figs)),
+        )
+    chunks.append("</div>")
+    return "\n".join(chunks)
 
 
 def _cover_otium_html(edition: str) -> str:
@@ -251,7 +495,7 @@ def _place_block(
             ),
         )
     chunks.append("</div>")
-    narrative = merge_narrative_html(place, edition, deduper)
+    narrative = _architecture_narrative_html(place, edition, deduper)
     if narrative:
         chunks.append(narrative)
     stories = filter_stories(place, edition)
@@ -281,6 +525,7 @@ def _build_html(
     initial_last_cat: str | None = None,
     category_counts: dict[str, int] | None = None,
     lead_place_count: int | None = None,
+    toc_places: list[CityPlace] | None = None,
 ) -> str:
     narrative_deduper = deduper or GuideNarrativeDeduper()
     font_href = (
@@ -328,21 +573,15 @@ def _build_html(
                 project_root,
             )
             hist_title = HISTORICAL_SECTION_TITLE_EN
-        hist = historical_reference_section_html(
-            hist_body,
-            section_title=hist_title,
-            edition=edition,
-        )
-        if hist:
-            blocks.append(hist)
         toc_entries: list[GuideTocEntry] = []
-        if hist:
+        if hist_body and str(hist_body).strip():
             toc_entries.append(
                 GuideTocEntry("guide-historical", hist_title),
             )
+        toc_source = toc_places if toc_places is not None else places
         toc_entries.extend(
             toc_entries_for_category_guide(
-                places,
+                toc_source,
                 edition,
                 chapter_title=_chapter_heading,
                 counts_by_category=counts,
@@ -351,24 +590,34 @@ def _build_html(
                 ),
             ),
         )
-        toc_html = guide_toc_html(toc_entries, edition)
+        toc_html = guide_toc_html_category_chapters(toc_entries, edition)
         if toc_html:
             blocks.append(toc_html)
+        hist = historical_reference_section_html(
+            hist_body,
+            section_title=hist_title,
+            edition=edition,
+        )
+        if hist:
+            blocks.append(hist)
     last_cat = initial_last_cat
     for place in places:
         cat = str(place.get("category") or "misc")
         if cat != last_cat:
             h2, sub = _chapter_heading(cat, counts.get(cat, 0), edition)
+            intro_html = _style_intro_html(cat, edition)
+            architects_html = _style_architects_html(cat, edition)
             blocks.append(
                 '<div class="chapter-head" id="{}">'
                 "<h2>{}</h2>"
                 "{}"
-                '<p class="chapter-count">{}</p>'
+                "{}{}"
                 "</div>".format(
                     escape(category_chapter_anchor(cat)),
                     escape(h2),
                     guide_toc_back_link_html(edition),
-                    escape(sub),
+                    intro_html,
+                    architects_html,
                 ),
             )
             last_cat = cat
@@ -396,12 +645,18 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
 .guide-title { page-break-after: always; margin-bottom: 1rem;
   page-break-inside: avoid; }
 .historical-reference { margin: 0.75rem 0 1.15rem;
-  page-break-inside: auto; }
+  page-break-inside: auto; page-break-after: auto; break-after: auto; }
+.historical-reference + .chapter-head {
+  page-break-before: avoid; break-before: avoid-page; }
 .historical-reference h2 { font-family: 'Cormorant Garamond', serif;
   font-size: 1.28rem; font-weight: 600; margin: 0.4rem 0 0.55rem; }
 .russian_arhitecture-title-symbols { margin-bottom: 0.45rem; }
+.title-strip-label { font-size: 0.62rem; letter-spacing: 0.06em;
+  text-transform: uppercase; color: #666; text-align: center;
+  margin: 0.35rem 0 0.15rem; }
 .heraldry-strip { display: flex; flex-wrap: wrap; align-items: center;
   justify-content: center; gap: 0.35rem 0.55rem; margin: 0.2rem 0 0.45rem; }
+.heraldry-coat-hist img { max-height: 4.2rem; }
 .heraldry-fig img { max-height: 4.2rem; object-fit: contain; display: block;
   margin: 0 auto; }
 .guide-title h1 { font-family: 'Cormorant Garamond', serif; font-size: 2.4rem;
@@ -414,11 +669,33 @@ body { font-family: 'Source Sans 3', sans-serif; margin: 2rem;
     css += """
 .chapter-head { margin-top: 2.2rem; border-bottom: 1px solid #bbb;
   padding-bottom: 0.35rem;
+  page-break-before: always; break-before: page;
   page-break-after: avoid; break-after: avoid; }
 .chapter-head + .place { page-break-before: avoid; break-before: avoid; }
 h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.55rem;
   margin: 0 0 0.25rem; }
-.chapter-count { margin: 0 0 1rem; color: #333; font-size: 1rem; }
+.chapter-intro { margin: 0.35rem 0 0.45rem; line-height: 1.5;
+  text-align: justify; color: #333; font-size: 1rem; }
+.chapter-architects { margin: 0.2rem 0 0.55rem;
+  page-break-before: avoid; break-before: avoid-page;
+  page-break-inside: avoid; break-inside: avoid-page;
+  page-break-after: avoid; break-after: avoid-page; }
+.chapter-architects-label { margin: 0.35rem 0 0.25rem; font-size: 0.95rem;
+  font-weight: 600; color: #2a2a2a; }
+.chapter-architects-list { margin: 0.15rem 0 0.45rem 1.15rem; padding: 0;
+  font-size: 0.92rem; line-height: 1.45; color: #333; }
+.chapter-architects-list li { margin: 0.22rem 0; }
+.guide-toc ul.toc-examples { list-style: none; margin: 0.15rem 0 0.55rem 1.15rem;
+  padding: 0; }
+.guide-toc ol.toc-chapters { columns: 3; column-gap: 1.1rem; }
+.guide-toc { page-break-after: auto; break-after: auto; }
+.guide-toc li.toc-item--example { font-size: 0.82rem; margin: 0.14rem 0;
+  line-height: 1.35; }
+.guide-toc li.toc-item--chapter { margin-top: 0.32rem; }
+.guide-toc ol.toc-chapters { margin: 0.35rem 0 0.65rem 1.25rem; padding: 0;
+  list-style: none; }
+.guide-toc ol.toc-preamble { margin: 0.35rem 0 0.65rem 1.25rem; padding: 0;
+  list-style: none; }
 .place { margin-bottom: 2.5rem; page-break-inside: avoid; }
 h3 { font-size: 1.22rem; margin: 1.2rem 0 0.35rem; }
 .sub-en { color: #555; font-size: 0.95rem; margin: 0 0 0.5rem;
@@ -499,6 +776,7 @@ def _pdf_via_playwright_chunked(
                     initial_last_cat=last_cat,
                     category_counts=category_counts,
                     lead_place_count=len(places),
+                    toc_places=places,
                 ),
                 encoding="utf-8",
             )
@@ -591,9 +869,20 @@ def main() -> int:
     out_dir.mkdir(parents=True, exist_ok=True)
 
     places = _places_with_local_images(guide_root)
+    missing_slugs = _missing_image_places(guide_root)
+    if missing_slugs:
+        print(
+            "Places missing images ({}): {}".format(
+                len(missing_slugs),
+                ", ".join(missing_slugs),
+            ),
+        )
     skipped = len(RUSSIAN_ARHITECTURE_PLACES) - len(places)
     if skipped:
-        print("Skipped {} place(s) without a local image.".format(skipped))
+        print(
+            "Omitted {} duplicate sidecar place(s) from export "
+            "(images on disk; deduplicated).".format(skipped),
+        )
     if not places:
         print(
             "No places with local images. Run "
