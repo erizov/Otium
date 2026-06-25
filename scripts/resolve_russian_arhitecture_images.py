@@ -212,14 +212,27 @@ def _download_commons(
     retries_429: int = 4,
     pause_429_sec: float = 30.0,
     thumbs_only: bool = True,
+    prefer_width: int | None = None,
 ) -> bool:
     rel = str(row.get("image_rel_path") or "")
     if not rel or not url:
         return False
     dest = guide_root / rel
-    urls = _candidate_urls(url, 500, thumbs_only=thumbs_only)
+    urls: list[str] = []
+    if prefer_width:
+        urls.extend(
+            _candidate_urls(url, prefer_width, thumbs_only=True),
+        )
+    width = 500 if thumbs_only else None
+    urls.extend(_candidate_urls(url, width, thumbs_only=thumbs_only))
+    seen: set[str] = set()
+    ordered: list[str] = []
+    for candidate in urls:
+        if candidate not in seen:
+            seen.add(candidate)
+            ordered.append(candidate)
     ok, _err = _download_place_image(
-        urls,
+        ordered,
         dest,
         timeout_sec=60,
         retries_429=retries_429,
@@ -569,6 +582,7 @@ def resolve_images(
                         retries_429=retries_429,
                         pause_429_sec=pause_429_sec,
                         thumbs_only=False,
+                        prefer_width=1280,
                     ):
                         resolved_url = catalog_url
                         copied = True

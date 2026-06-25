@@ -21,6 +21,9 @@ from russian_arhitecture.data.image_overrides import (  # noqa: E402
 from russian_arhitecture.data.place_narratives import (  # noqa: E402
     apply_narrative_overrides,
 )
+from russian_arhitecture.data.guide_dedupe import (  # noqa: E402
+    dedupe_places_by_ru_title,
+)
 from russian_arhitecture.data.guide_image_policy import (  # noqa: E402
     strip_extra_images,
 )
@@ -261,6 +264,37 @@ def _facts_en(ex: dict[str, Any], style_key: str) -> list[str]:
     return facts
 
 
+def _fill_empty_descriptions(row: dict[str, Any]) -> dict[str, Any]:
+    """Use facts or history when catalog rows lack prose."""
+    out = dict(row)
+
+    def _join_parts(edition: str) -> str:
+        parts: list[str] = []
+        for field in ("history", "significance"):
+            key = "{}_{}".format(field, edition)
+            val = str(out.get(key) or out.get(field) or "").strip()
+            if val:
+                parts.append(val)
+        if not parts:
+            facts_key = "facts_{}".format(edition)
+            for item in out.get(facts_key) or out.get("facts") or []:
+                text = str(item).strip()
+                if text:
+                    parts.append(text)
+        return " ".join(parts)
+
+    if not str(out.get("description_ru") or "").strip():
+        text = _join_parts("ru")
+        if text:
+            out["description_ru"] = text
+            out["description"] = text
+    if not str(out.get("description_en") or "").strip():
+        text = _join_parts("en")
+        if text:
+            out["description_en"] = text
+    return out
+
+
 def _place_row(style_key: str, ex: dict[str, Any]) -> dict[str, Any]:
     slug = _slug(style_key, str(ex["suffix"]))
     if is_slug_excluded(slug):
@@ -315,7 +349,7 @@ def _place_row(style_key: str, ex: dict[str, Any]) -> dict[str, Any]:
     city_ref = str(ex.get("_city_ref") or "").strip()
     if city_ref:
         row["_city_ref"] = city_ref
-    return apply_narrative_overrides(row)
+    return _fill_empty_descriptions(apply_narrative_overrides(row))
 
 
 def _link_image(
@@ -388,7 +422,7 @@ def generate_places(
                 prune_missing_additional_images(guide_root, row)
                 strip_internal_image_keys(row)
             rows.append(strip_extra_images(row))
-    return rows, stats
+    return dedupe_places_by_ru_title(rows), stats
 
 
 def main() -> int:

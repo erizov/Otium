@@ -11,6 +11,7 @@
 - https://conceptsandprojects.com/
 - https://mosculture.ru/
 - https://cdnstatic.rg.ru/
+- https://gazeta-danilovsky-vestnik.ru/
 
 ## Facts (editors / RAG fetch_sources allowlist)
 

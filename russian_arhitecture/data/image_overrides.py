@@ -70,6 +70,55 @@ _RGB_LIBRARY = (
     "https://live.staticflickr.com/4240/"
     "35255414955_b9a05e8a35_b.jpg"
 )
+_YAROSLAVSKY = (
+    "https://upload.wikimedia.org/wikipedia/commons/9/90/"
+    "%D0%AF%D1%80%D0%BE%D1%81%D0%BB%D0%B0%D0%B2%D1%81%D0%BA%D0%B8%D0%B9_%D0%B2%D0%BE%D0%BA%D0%B7%D0%B0%D0%BB_%2820220720135756%29.jpg"
+)
+_VITEBSKY = (
+    "https://upload.wikimedia.org/wikipedia/commons/f/f6/"
+    "Vitebsky_Rail_Terminal_Vestibule_1.jpg"
+)
+_CHRIST_SAVIOR = (
+    "https://upload.wikimedia.org/wikipedia/commons/3/3c/"
+    "Panoramio_-_V%26A_Dudush_-_Moscow._%D0%A5%D1%80%D0%B0%D0%BC_%D0%A5%D1%80%D0%B8%D1%81%D1%82%D0%B0_%D0%A1%D0%BF%D0%B0%D1%81%D0%B8%D1%82%D0%B5%D0%BB%D1%8F._Moscow._The_Cathedral_of_Christ_the_Saviour.jpg"
+)
+_RUKAVISHNIK = (
+    "https://upload.wikimedia.org/wikipedia/commons/9/9a/"
+    "Rukavishnikov_mansion_in_Moscow.jpg"
+)
+_MHAT = (
+    "https://avatars.mds.yandex.net/get-altay/1632633/"
+    "2a0000016995e3a28db47dd6524bfa659240/orig"
+)
+_IGUMNOV = (
+    "https://upload.wikimedia.org/wikipedia/commons/0/0c/"
+    "Moscow._Igumnov_House_P8100250_2800.jpg"
+)
+_MOROZOV = (
+    "https://upload.wikimedia.org/wikipedia/commons/2/26/"
+    "Morozov_Mansion_Vozdvizhenka_str_16_str_1_2016-04-12_2515.jpg"
+)
+_VASNETSOV = (
+    "https://upload.wikimedia.org/wikipedia/commons/b/bf/"
+    "%D0%94%D0%BE%D0%BC-%D0%BC%D1%83%D0%B7%D0%B5%D0%B9_%D0%92._%D0%9C._"
+    "%D0%92%D0%B0%D1%81%D0%BD%D0%B5%D1%86%D0%BE%D0%B2%D0%B0_%28%D1%84%D0%BE%D1%82%D0%BE_%D0%B0%D0%B2%D0%B3%D1%83%D1%81%D1%82_2024%29.jpg"
+)
+_YAROSLAVSKY = (
+    "https://upload.wikimedia.org/wikipedia/commons/9/90/"
+    "%D0%AF%D1%80%D0%BE%D1%81%D0%BB%D0%B0%D0%B2%D1%81%D0%BA%D0%B8%D0%B9_%D0%B2%D0%BE%D0%BA%D0%B7%D0%B0%D0%BB_%2820220720135756%29.jpg"
+)
+_VITEBSKY = (
+    "https://upload.wikimedia.org/wikipedia/commons/f/f6/"
+    "Vitebsky_Rail_Terminal_Vestibule_1.jpg"
+)
+_VTOROV = (
+    "https://avatars.mds.yandex.net/get-altay/11551715/"
+    "2a00000191beae09e8ef80998fcd5798e46d/orig"
+)
+_ZIL = (
+    "https://gazeta-danilovsky-vestnik.ru/wp-content/uploads/"
+    "2022/09/62bb0c1582682c42ddcc5323-scaled.jpg"
+)
 _ZARYADYE_VIEWPOINT_URLS: tuple[str, str] = (
     "https://avatars.mds.yandex.net/get-altay/934739/"
     "2a0000015eece6b22dded6460617c641affa/orig",
@@ -138,13 +187,14 @@ IMAGE_URL_OVERRIDES: dict[str, tuple[str, str | None]] = {
         "https://upload.wikimedia.org/wikipedia/commons/"
         "f/f3/St._Basil%27s.jpg",
     ),
-    "eclecticism_moscow_osobnjaki_5_2": (
-        "https://upload.wikimedia.org/wikipedia/commons/"
-        "6/68/Rukavishnikov_House%2C_Moscow.jpg",
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/"
-        "9/9a/Rukavishnikov_mansion_in_Moscow.jpg/"
-        "1280px-Rukavishnikov_mansion_in_Moscow.jpg",
-    ),
+    "eclecticism_moscow_osobnjaki_5_2": (_RUKAVISHNIK, None),
+    "eclecticism_moscow_osobnjaki_4_2": (_MOROZOV, None),
+    "eclecticism_moscow_osobnjaki_7_2": (_IGUMNOV, None),
+    "eclecticism_moscow_buildings_37_2": (_MHAT, None),
+    "russo_byzantine_christ_savior": (_CHRIST_SAVIOR, None),
+    "neo_russian_yaroslavsky_station": (_YAROSLAVSKY, None),
+    "art_nouveau_vitebsky_station": (_VITEBSKY, None),
+    "neoclassicism_early20_moscow_osobnjaki_38_2": (_VTOROV, None),
     "art_nouveau_singer_house": (
         "https://upload.wikimedia.org/wikipedia/commons/thumb/"
         "3/3f/Singer_House.jpg/1280px-Singer_House.jpg",
@@ -250,13 +300,7 @@ IMAGE_URL_OVERRIDES: dict[str, tuple[str, str | None]] = {
         "5/5e/Tsaritsyno_Moscow_Grand_Palace.jpg/1280px-"
         "Tsaritsyno_Moscow_Grand_Palace.jpg",
     ),
-    "post_constructivism_zil_palace": (
-        "https://upload.wikimedia.org/wikipedia/commons/"
-        "6/6e/ZIL_Palace_of_Culture.jpg",
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/"
-        "f/f0/ZIL_Palace_of_Culture_Moscow.jpg/1280px-"
-        "ZIL_Palace_of_Culture_Moscow.jpg",
-    ),
+    "post_constructivism_zil_palace": (_ZIL, None),
     "constructivism_moscow_buildings_2_2": (
         _HOUSE_ON_EMBANKMENT,
         None,
@@ -277,22 +321,8 @@ IMAGE_URL_OVERRIDES: dict[str, tuple[str, str | None]] = {
         "f/f6/MosMetro_KomsomolskayaKL_img2_asv2018-01.jpg/1280px-"
         "MosMetro_KomsomolskayaKL_img2_asv2018-01.jpg",
     ),
-    "neo_russian_moscow_osobnjaki_2_2": (
-        "https://upload.wikimedia.org/wikipedia/commons/b/bf/"
-        "%D0%94%D0%BE%D0%BC-%D0%BC%D1%83%D0%B7%D0%B5%D0%B9_%D0%92._%D0%9C._"
-        "%D0%92%D0%B0%D1%81%D0%BD%D0%B5%D1%86%D0%BE%D0%B2%D0%B0_%28"
-        "%D1%84%D0%BE%D1%82%D0%BE_%D0%B0%D0%B2%D0%B3%D1%83%D1%81%D1%82_2024%29.jpg",
-        "https://upload.wikimedia.org/wikipedia/commons/4/4d/"
-        "Vasnetsov_house_in_Moscow_01.jpg",
-    ),
-    "art_nouveau_moscow_osobnjaki_2_2": (
-        "https://upload.wikimedia.org/wikipedia/commons/b/bf/"
-        "%D0%94%D0%BE%D0%BC-%D0%BC%D1%83%D0%B7%D0%B5%D0%B9_%D0%92._%D0%9C._"
-        "%D0%92%D0%B0%D1%81%D0%BD%D0%B5%D1%86%D0%BE%D0%B2%D0%B0_%28"
-        "%D1%84%D0%BE%D1%82%D0%BE_%D0%B0%D0%B2%D0%B3%D1%83%D1%81%D1%82_2024%29.jpg",
-        "https://upload.wikimedia.org/wikipedia/commons/4/4d/"
-        "Vasnetsov_house_in_Moscow_01.jpg",
-    ),
+    "neo_russian_moscow_osobnjaki_2_2": (_VASNETSOV, None),
+    "art_nouveau_moscow_osobnjaki_2_2": (_VASNETSOV, None),
     "uzorochye_terem_palace": (
         "https://um.mos.ru/content/iblock/d2d/temodvo02.jpg",
         None,
@@ -329,15 +359,7 @@ IMAGE_URL_OVERRIDES: dict[str, tuple[str, str | None]] = {
 PRIMARY_IMAGE_REUSE: dict[str, tuple[str, str]] = {
     "eclecticism_moscow_osobnjaki_5_2": (
         "moscow",
-        "images/moscow_osobnjaki/rukavishnikov_1.jpg",
-    ),
-    "neo_russian_moscow_osobnjaki_2_2": (
-        "moscow",
-        "images/moscow_osobnjaki/vasnetsov_1.jpg",
-    ),
-    "art_nouveau_moscow_osobnjaki_2_2": (
-        "moscow",
-        "images/moscow_osobnjaki/vasnetsov_1.jpg",
+        "images/moscow_osobnjaki/rukavishnikov_2.jpg",
     ),
 }
 for _slug in _MOSCOW_BUILDINGS_30_SLUGS:
@@ -354,20 +376,12 @@ PRIMARY_IMAGE_REUSE["ancient_rus_moscow_places_of_worship_3_2"] = (
     "moscow",
     "images/moscow_buildings/kremlin_2.jpg",
 )
-PRIMARY_IMAGE_REUSE["neoclassicism_early20_moscow_osobnjaki_38_2"] = (
-    "moscow",
-    "images/moscow_osobnjaki/vtorov_2.jpg",
-)
 PRIMARY_IMAGE_REUSE["uzorochye_moscow_places_of_worship_21_2"] = (
     "moscow",
     "images/moscow_places_of_worship/simeon_stolpnik_3.jpg",
 )
 
 SECOND_IMAGE_REUSE: dict[str, tuple[str, str]] = {
-    "eclecticism_moscow_osobnjaki_5_2": (
-        "moscow",
-        "images/moscow_osobnjaki/rukavishnikov_2.jpg",
-    ),
     "neo_eclectic_moscow_palaces_2_2": (
         "moscow",
         "images/moscow_parks/tsaritsyno_3.jpg",
@@ -375,14 +389,6 @@ SECOND_IMAGE_REUSE: dict[str, tuple[str, str]] = {
     "russo_byzantine_moscow_places_of_worship_0_2": (
         "moscow",
         "images/moscow_places_of_worship/st_basil_1.jpg",
-    ),
-    "neo_russian_moscow_osobnjaki_2_2": (
-        "moscow",
-        "images/moscow_osobnjaki/vasnetsov_2.jpg",
-    ),
-    "art_nouveau_moscow_osobnjaki_2_2": (
-        "moscow",
-        "images/moscow_osobnjaki/vasnetsov_2.jpg",
     ),
 }
 for _slug in _MOSCOW_BUILDINGS_30_SLUGS:

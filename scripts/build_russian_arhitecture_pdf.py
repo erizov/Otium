@@ -26,6 +26,9 @@ from russian_arhitecture.data.style_catalog import (  # noqa: E402
 from russian_arhitecture.data.style_architects import (  # noqa: E402
     STYLE_ARCHITECTS,
 )
+from russian_arhitecture.data.guide_dedupe import (  # noqa: E402
+    dedupe_places_by_ru_title,
+)
 from russian_arhitecture.data.place_narratives import (  # noqa: E402
     apply_narrative_overrides,
     max_sentences_for_slug,
@@ -60,9 +63,12 @@ from scripts.city_guide_narrative import (  # noqa: E402
     _collect_text_field_sentence_pairs,
     _dedupe_sentence_pairs,
     _fallback_narrative_paragraph,
+    dedupe_sentences_within_item,
     filter_stories,
+    normalize_sentence_key,
     place_heading_plain,
     place_meta_line,
+    split_sentences,
     subtitle_html_for_edition,
 )
 from scripts.city_guide_place_figures import (  # noqa: E402
@@ -149,7 +155,7 @@ _STYLE_FALLBACK_RE = re.compile(
 def _dedupe_architecture_guide_places(
     places: list[CityPlace],
 ) -> list[CityPlace]:
-    """Drop duplicate headings/images within each style chapter only."""
+    """Drop duplicate sidecar rows per chapter, then duplicate RU titles."""
     from scripts.city_guide_core import dedupe_pdf_sidecar_places
 
     by_cat: dict[str, list[CityPlace]] = {}
@@ -176,7 +182,7 @@ def _dedupe_architecture_guide_places(
                 city_slug="russian_arhitecture",
             ),
         )
-    return out
+    return dedupe_places_by_ru_title(out)
 
 
 def _is_generic_example_sentence(sentence: str) -> bool:
@@ -257,11 +263,18 @@ def _architecture_narrative_html(
         for sent, key in pairs
         if not _is_generic_example_sentence(sent)
     ]
-    sents = _dedupe_sentence_pairs(pairs, deduper)
+    sents = dedupe_sentences_within_item(
+        _dedupe_sentence_pairs(pairs, deduper),
+    )
     if len(sents) < 2:
         fb = _fallback_narrative_paragraph(place, edition)
         if fb and not _is_generic_example_sentence(fb):
-            sents.append(fb)
+            seen = {normalize_sentence_key(s) for s in sents}
+            extra = dedupe_sentences_within_item(
+                split_sentences(fb),
+                seen=seen,
+            )
+            sents.extend(extra)
     cap = max_sentences_for_slug(slug) or 20
     sents = sents[:cap]
     if not sents:

@@ -32,6 +32,15 @@ SINGLE_IMAGE_SLUGS: frozenset[str] = frozenset({
     "soviet_neoclassicism_revival_moscow_libraries_0_2",
     "soviet_modernism_moscow_buildings_22_2",
     "naryshkin_baroque_trinity_lykovo",
+    "eclecticism_moscow_osobnjaki_5_2",
+    "eclecticism_moscow_osobnjaki_4_2",
+    "eclecticism_moscow_osobnjaki_7_2",
+    "eclecticism_moscow_buildings_37_2",
+    "russo_byzantine_christ_savior",
+    "neo_russian_yaroslavsky_station",
+    "art_nouveau_vitebsky_station",
+    "neo_russian_moscow_osobnjaki_2_2",
+    "post_constructivism_zil_palace",
 })
 
 

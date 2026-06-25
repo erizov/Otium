@@ -27,6 +27,11 @@ _CYRILLIC_RE = re.compile(r"[\u0400-\u04FF]")
 _SENTENCE_SPLIT_RE = re.compile(
     r"(?<=[.!?…])(?<![A-ZА-ЯЁ]\.)\s+(?=[\"«(A-ZА-ЯЁ0-9])",
 )
+_RU_ABBREV_END_RE = re.compile(
+    r"(?:им|ул|пер|пр|бул|г|др|обл|наб|кв|см|респ|млн|"
+    r"св|просп|пл|ш|д|корп|стр)\.\s*$",
+    re.IGNORECASE,
+)
 _NEUTRAL_META_RE = re.compile(r"^[\d\s\u2013\-–—.,/()+]+$")
 _SYNTHETIC_RU_STORY_RE = re.compile(
     r"место, которое стоит увидеть в контексте",
@@ -478,6 +483,25 @@ def _normalize_heading_key(text: str) -> str:
     return normalize_sentence_key(clean_wikimedia_display_title(text))
 
 
+def _rejoin_abbreviation_fragments(sentences: list[str]) -> list[str]:
+    """Merge parts split after RU abbreviations such as «им.» or «ул.»."""
+    if not sentences:
+        return []
+    merged: list[str] = [sentences[0]]
+    for sent in sentences[1:]:
+        prev = merged[-1]
+        nxt = sent.strip()
+        if not nxt:
+            continue
+        if _RU_ABBREV_END_RE.search(prev) or (
+            nxt[0].islower() and len(nxt) < 80
+        ):
+            merged[-1] = prev + " " + nxt
+        else:
+            merged.append(sent)
+    return merged
+
+
 def split_sentences(text: str) -> list[str]:
     text = str(text).strip()
     if not text:
@@ -491,7 +515,7 @@ def split_sentences(text: str) -> list[str]:
         if part[-1] not in ".!?…":
             part = part + "."
         out.append(part)
-    return out
+    return _rejoin_abbreviation_fragments(out)
 
 
 class GuideNarrativeDeduper:
@@ -752,6 +776,40 @@ def _dedupe_sentences(
     return out
 
 
+def dedupe_sentences_within_item(
+    sentences: list[str],
+    *,
+    seen: set[str] | None = None,
+) -> list[str]:
+    """Drop repeated sentences inside one place (exact normalized match)."""
+    local_seen: set[str] = set(seen or ())
+    kept_keys: list[str] = []
+    out: list[str] = []
+    for sentence in sentences:
+        key = normalize_sentence_key(sentence)
+        if not key:
+            continue
+        if key in local_seen:
+            continue
+        redundant = False
+        for prev in kept_keys:
+            if key == prev:
+                redundant = True
+                break
+            shorter, longer = (
+                (key, prev) if len(key) < len(prev) else (prev, key)
+            )
+            if len(shorter) >= 20 and shorter in longer:
+                redundant = True
+                break
+        if redundant:
+            continue
+        local_seen.add(key)
+        kept_keys.append(key)
+        out.append(sentence)
+    return out
+
+
 def group_into_paragraphs(
     overview: list[str],
     context: list[str],
@@ -817,13 +875,25 @@ def merge_narrative_html(
     )
     overview = _dedupe_sentence_pairs(overview_pairs, dedupe)
     context = _dedupe_sentence_pairs(context_pairs, dedupe)
+    overview_seen = {
+        normalize_sentence_key(s) for s in overview
+    }
+    overview = dedupe_sentences_within_item(overview)
+    context = dedupe_sentences_within_item(context, seen=overview_seen)
     paragraphs = group_into_paragraphs(overview, context)
     if not paragraphs:
         if (overview_pairs or context_pairs) and not overview and not context:
             return ""
         fallback = _fallback_narrative_paragraph(place, edition)
         if fallback:
-            paragraphs = [fallback]
+            fb_sents = dedupe_sentences_within_item(
+                split_sentences(fallback),
+                seen=overview_seen | {
+                    normalize_sentence_key(s) for s in context
+                },
+            )
+            if fb_sents:
+                paragraphs = [" ".join(fb_sents)]
     if not paragraphs:
         return ""
     inner = "\n".join(

@@ -460,6 +460,62 @@ _OVERRIDES: dict[str, tuple[str, str, str, str, str, str]] = {
         "веков.",
         "A specimen of theatrical turn-of-the-century architecture.",
     ),
+    "russo_byzantine_christ_savior": (
+        "Храм Христа Спасителя — главный храм Русской "
+        "Православной Церкви на берегу Москвы-реки.",
+        "The Cathedral of Christ the Saviour is the principal "
+        "church of the Russian Orthodox Church on the Moskva "
+        "River embankment.",
+        "Первый храм заложен в 1839 году по проекту "
+        "К. А. Тона в память победы 1812 года; освящён в "
+        "1883 году. В 1931 году собор взорван; на его месте "
+        "планировали Дворец Советов. Восстановлен в 1990–2000 "
+        "годах как точная копия первоначального здания.",
+        "The first cathedral was begun in 1839 to Konstantin "
+        "Thon's design as a memorial to the war of 1812 and "
+        "consecrated in 1883. It was demolished in 1931; a "
+        "Palace of Soviets was planned on the site. Rebuilt "
+        "in 1990–2000 as a close replica of the original.",
+        "Символ духовного возрождения и крупнейший "
+        "православный храм столицы.",
+        "A symbol of spiritual renewal and the capital's "
+        "largest Orthodox church.",
+    ),
+    "eclecticism_moscow_osobnjaki_5_2": (
+        "Дом Рукавишникова на Большой Никитской — "
+        "городская усадьба с парадным фасадом в эклектике.",
+        "The Rukavishnikov House on Bolshaya Nikitskaya is an "
+        "urban mansion with an eclectic parade façade.",
+        "Усадьба известна с XVIII века; каменный особняк "
+        "перестраивался в XIX веке и принадлежал роду "
+        "Рукавишниковых. Сохранились фасад с арочными "
+        "окнами и элементы интерьеров.",
+        "The estate dates to the eighteenth century; the stone "
+        "mansion was rebuilt in the nineteenth century for the "
+        "Rukavishnikov family. An arched façade and interior "
+        "fragments survive.",
+        "Памятник усадебной архитектуры на одной из старинных "
+        "улиц центра.",
+        "A monument of mansion architecture on one of the "
+        "historic streets of the centre.",
+    ),
+    "eclecticism_moscow_osobnjaki_4_2": (
+        "Особняк А. А. Морозова на Воздвиженке — один из "
+        "самых ярких домов московской эклектики.",
+        "Arseny Morozov's mansion on Vozdvizhenka is one of "
+        "Moscow's boldest eclectic town houses.",
+        "Построен в 1895–1899 годах по проекту В. А. "
+        "Каменского. Необычный фасад с башней и розовой "
+        "отделкой; по легенде, императрица запретила строить "
+        "«подобное» в Москве.",
+        "Built in 1895–1899 to Viktor Kamensky's design. An "
+        "unusual towered façade with pink ornament; legend "
+        "claims the empress forbade building anything similar "
+        "in Moscow.",
+        "Символ модерна и эклектики на Воздвиженке.",
+        "A landmark of Art Nouveau and eclecticism on "
+        "Vozdvizhenka.",
+    ),
     "neo_russian_yaroslavsky_station": (
         "Ярославский вокзал на Комсомольской площади — "
         "главный «сибирский» вокзал Москвы в неорусском стиле.",
