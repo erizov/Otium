@@ -5,7 +5,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from russian_arhitecture.data.image_reuse import extra_image_rel
+from russian_architecture.data.image_reuse import extra_image_rel
 
 _SOVETSKAYA_HOTEL_URLS: tuple[str, str] = (
     "https://upload.wikimedia.org/wikipedia/commons/9/95/"
@@ -43,13 +43,22 @@ _STATE_DUMA = (
     "ria_8184749hr_967.jpg"
 )
 _BELORUSSKY_RAIL = (
-    "https://upload.wikimedia.org/wikipedia/commons/e/e3/"
-    "Belorussky_Rail_Terminal_%28%D0%91%D0%B5%D0%BB%D0%BE%D1%80%D1%83%D1%81%D1%81%D0%BA%D0%B8%D0%B9_"
-    "%D0%B2%D0%BE%D0%BA%D0%B7%D0%B0%D0%BB%29_%285833421585%29.jpg"
+    "https://avatars.mds.yandex.net/i?id="
+    "6f9e77b8923cc389aac2922e9fa48e4b_l-5205578-images-thumbs"
+    "&ref=rim&n=13&w=1200&h=776"
 )
 _BELORUSSKY_RAIL_SECOND = (
     "https://live.staticflickr.com/3870/"
     "14284718169_2c3de612d0_b.jpg"
+)
+_KOMSOMOLSKAYA_METRO = (
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/"
+    "MosMetro_KomsomolskayaKL_img2_asv2018-01.jpg/1920px-"
+    "MosMetro_KomsomolskayaKL_img2_asv2018-01.jpg"
+)
+_RED_ARMY_THEATER = (
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/"
+    "Russian_Army_Theatre.jpg/1920px-Russian_Army_Theatre.jpg"
 )
 _PAVELETSKY_RAIL = (
     "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/"
@@ -57,14 +66,37 @@ _PAVELETSKY_RAIL = (
     "Paveletsky_railway_station_Moscow_2013.jpg"
 )
 _PROSPEKT_MIRA_METRO = (
-    "https://upload.wikimedia.org/wikipedia/commons/3/3f/"
-    "%D0%9F%D1%80%D0%BE%D1%81%D0%BF%D0%B5%D0%BA%D1%82_%D0%9C%D0%B8%D1%80%D0%B0_"
-    "%D0%BA%D0%BE%D0%BB%D1%8C%D1%86%D0%B5%D0%B2%D0%B0%D1%8F_11.jpg"
+    "https://avatars.mds.yandex.net/i?id="
+    "b9173812b1cb5b11cf05dad885a7c17f_l-9834718-images-thumbs&n=13"
 )
-_PROSPEKT_MIRA_METRO_SECOND = (
-    "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/"
-    "Prospekt_Mira_metro_mosaic.jpg/1280px-"
-    "Prospekt_Mira_metro_mosaic.jpg"
+_PARK_KULTURY_METRO = (
+    "https://www.m24.ru/b/d/nBkSUhL2h1Ajms6zLr6BrNOp2Z318Ji-mifGnuWR9mOBdDebBizCnTY8"
+    "qdJf6ReJ58vU9meMMok3Ee2nhSR6ISeO9G1N_wjJ=T_DixojC49qmDLl8Gxfmjw.jpg"
+)
+_TASS_BUILDING = (
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/"
+    "Moscow_TASS_3542.JPG/1920px-Moscow_TASS_3542.JPG"
+)
+_HISTORICAL_MUSEUM = (
+    "https://avatars.mds.yandex.net/get-altay/11244149/"
+    "2a0000018c1957b167557229d2e63bd15649/orig"
+)
+_TSARITSYNO_PALACE = (
+    "https://cdn.culture.ru/images/"
+    "7d3568d7-16f3-5c44-a77a-00431eb359ce"
+)
+_NARKOMFIN = (
+    "https://www.mos.ru/upload/newsfeed/newsfeed/"
+    "ac031e59f91440389548f25517d28f57(9).png"
+)
+_ZUEV_CLUB = (
+    "https://i.archi.ru/i/226989.jpg"
+)
+_MARIINSKY_PALACE = (
+    "https://upload.wikimedia.org/wikipedia/commons/e/e9/"
+    "St._Petersburg_-_Mariinsky_Palace_-_"
+    "%D0%9C%D0%B0%D1%80%D0%B8%D0%B8%D0%BDc%D0%BA%D0%B8%D0%B9_%D0%B4%D0%B2%D0%BE%D1%80%D0%B5%D1%86_-_"
+    "panoramio.jpg"
 )
 _RGB_LIBRARY = (
     "https://live.staticflickr.com/4240/"
@@ -177,8 +209,11 @@ IMAGE_URL_OVERRIDES: dict[str, tuple[str, str | None]] = {
         None,
     ),
     "constructivism_narkomfin": (
-        "https://upload.wikimedia.org/wikipedia/commons/"
-        "9/9a/Narkomfin_%28Moscow%29.jpg",
+        _NARKOMFIN,
+        None,
+    ),
+    "constructivism_zuev_club": (
+        _ZUEV_CLUB,
         None,
     ),
     "russo_byzantine_moscow_places_of_worship_0_2": (
@@ -188,6 +223,7 @@ IMAGE_URL_OVERRIDES: dict[str, tuple[str, str | None]] = {
         "f/f3/St._Basil%27s.jpg",
     ),
     "eclecticism_moscow_osobnjaki_5_2": (_RUKAVISHNIK, None),
+    "eclecticism_historical_museum": (_HISTORICAL_MUSEUM, None),
     "eclecticism_moscow_osobnjaki_4_2": (_MOROZOV, None),
     "eclecticism_moscow_osobnjaki_7_2": (_IGUMNOV, None),
     "eclecticism_moscow_buildings_37_2": (_MHAT, None),
@@ -195,6 +231,10 @@ IMAGE_URL_OVERRIDES: dict[str, tuple[str, str | None]] = {
     "neo_russian_yaroslavsky_station": (_YAROSLAVSKY, None),
     "art_nouveau_vitebsky_station": (_VITEBSKY, None),
     "neoclassicism_early20_moscow_osobnjaki_38_2": (_VTOROV, None),
+    "neoclassicism_early20_spb_osobnjaki_5_2": (
+        _MARIINSKY_PALACE,
+        None,
+    ),
     "art_nouveau_singer_house": (
         "https://upload.wikimedia.org/wikipedia/commons/thumb/"
         "3/3f/Singer_House.jpg/1280px-Singer_House.jpg",
@@ -233,7 +273,7 @@ IMAGE_URL_OVERRIDES: dict[str, tuple[str, str | None]] = {
     ),
     "stalinist_moscow_railway_stations_4_2": (
         _BELORUSSKY_RAIL,
-        _BELORUSSKY_RAIL_SECOND,
+        None,
     ),
     "stalinist_moscow_buildings_17_2": (
         "https://upload.wikimedia.org/wikipedia/commons/b/b8/"
@@ -273,11 +313,27 @@ IMAGE_URL_OVERRIDES: dict[str, tuple[str, str | None]] = {
     ),
     "art_deco_moscow_metro_11_2": (
         _PROSPEKT_MIRA_METRO,
-        _PROSPEKT_MIRA_METRO_SECOND,
+        None,
+    ),
+    "art_deco_moscow_metro_15_2": (
+        _PARK_KULTURY_METRO,
+        None,
+    ),
+    "art_deco_red_army_theater": (
+        _RED_ARMY_THEATER,
+        None,
+    ),
+    "stalinist_komsomolskaya_metro": (
+        _KOMSOMOLSKAYA_METRO,
+        None,
+    ),
+    "soviet_modernism_tass_building": (
+        _TASS_BUILDING,
+        None,
     ),
     "stalinist_neoclassicism_moscow_railway_stations_4_2": (
         _BELORUSSKY_RAIL,
-        _BELORUSSKY_RAIL_SECOND,
+        None,
     ),
     "russo_byzantine_moscow_places_of_worship_3_2": (
         _KREMLIN_DORMITION,
@@ -291,6 +347,10 @@ IMAGE_URL_OVERRIDES: dict[str, tuple[str, str | None]] = {
         "Tsaritsino_from_helicopter-1.jpg",
         "https://avatars.mds.yandex.net/i?id="
         "1c4579f2690370c21430f17b669292f4_l-4230301-images-thumbs&n=13",
+    ),
+    "pseudo_russian_moscow_palaces_15_2": (
+        _TSARITSYNO_PALACE,
+        None,
     ),
     "neo_eclectic_moscow_palaces_2_2": (
         "https://upload.wikimedia.org/wikipedia/commons/b/bc/"
@@ -343,8 +403,7 @@ IMAGE_URL_OVERRIDES: dict[str, tuple[str, str | None]] = {
         "St_Petersburg_State_University%29.jpg",
         None,
     ),
-    "empire_moscow_libraries_0_2": (_RGB_LIBRARY, None),
-    "stalinist_neoclassicism_moscow_libraries_0_2": (_RGB_LIBRARY, None),
+    "avant_garde_moscow_libraries_0_2": (_RGB_LIBRARY, None),
     "soviet_neoclassicism_revival_moscow_libraries_0_2": (
         _RGB_LIBRARY,
         None,

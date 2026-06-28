@@ -306,7 +306,7 @@ STYLE_EXAMPLES: dict[str, list[dict[str, Any]]] = {
         _ex(
             "vladimir_assumption",
             "Успенский собор во Владимире",
-            "Dormition Cathedral, Vladimir",
+            "Dormition Cathedral in Vladimir",
             year="1158–1160",
             city_ru="Владимир",
             city_en="Vladimir",
@@ -338,7 +338,7 @@ STYLE_EXAMPLES: dict[str, list[dict[str, Any]]] = {
         _ex(
             "kyiv_sophia",
             "Софийский собор в Киеве",
-            "Saint Sophia Cathedral, Kyiv",
+            "Saint Sophia Cathedral in Kyiv",
             year="1037",
             city_ru="Киев",
             city_en="Kyiv",

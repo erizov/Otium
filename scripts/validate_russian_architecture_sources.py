@@ -11,9 +11,9 @@ _PROJECT_ROOT = Path(__file__).resolve().parent.parent
 if str(_PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(_PROJECT_ROOT))
 
-from russian_arhitecture.data.places_registry import RUSSIAN_ARHITECTURE_PLACES
-from russian_arhitecture.whitelist import default_whitelist_path
-from russian_arhitecture.whitelist import url_is_whitelisted
+from russian_architecture.data.places_registry import RUSSIAN_ARCHITECTURE_PLACES
+from russian_architecture.whitelist import default_whitelist_path
+from russian_architecture.whitelist import url_is_whitelisted
 
 from scripts.city_guide_jerusalem_style_images import (
     validate_jerusalem_style_urls,
@@ -26,7 +26,7 @@ def main() -> int:
     args = parser.parse_args()
     wpath = args.whitelist or default_whitelist_path()
     return validate_jerusalem_style_urls(
-        RUSSIAN_ARHITECTURE_PLACES,
+        RUSSIAN_ARCHITECTURE_PLACES,
         whitelist_path=wpath,
         url_is_whitelisted_fn=url_is_whitelisted,
         city_label="Russian Architecture",

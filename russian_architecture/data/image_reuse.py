@@ -7,7 +7,7 @@ import shutil
 from pathlib import Path
 from typing import Any
 
-from russian_arhitecture.data.guide_image_policy import SINGLE_IMAGE_SLUGS
+from russian_architecture.data.guide_image_policy import SINGLE_IMAGE_SLUGS
 
 MIN_IMAGE_BYTES = 500
 MAX_IMAGES_PER_PLACE = 2
@@ -77,7 +77,7 @@ def attach_additional_image_rows(
     slug = str(row.get("slug") or "").strip()
     if not slug or slug in SINGLE_IMAGE_SLUGS:
         return
-    from russian_arhitecture.data.image_overrides import IMAGE_URL_OVERRIDES
+    from russian_architecture.data.image_overrides import IMAGE_URL_OVERRIDES
 
     if slug in IMAGE_URL_OVERRIDES:
         return

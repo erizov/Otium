@@ -12,9 +12,9 @@ _PROJECT_ROOT = Path(__file__).resolve().parent.parent
 if str(_PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(_PROJECT_ROOT))
 
-from russian_arhitecture.data.history_heraldry import history_heraldry_download_pairs
-from russian_arhitecture.whitelist import default_whitelist_path
-from russian_arhitecture.whitelist import url_is_whitelisted
+from russian_architecture.data.history_heraldry import history_heraldry_download_pairs
+from russian_architecture.whitelist import default_whitelist_path
+from russian_architecture.whitelist import url_is_whitelisted
 
 from scripts.download_spb_images import MIN_IMAGE_BYTES, _download_place_image
 
@@ -75,7 +75,7 @@ def main() -> int:
     parser.add_argument(
         "--guide-root",
         type=Path,
-        default=_PROJECT_ROOT / "russian_arhitecture",
+        default=_PROJECT_ROOT / "russian_architecture",
     )
     parser.add_argument("--force", action="store_true")
     parser.add_argument("--no-whitelist-check", action="store_true")

@@ -35,6 +35,14 @@ def _ui_strings(edition: str) -> dict[str, str]:
     return guide_ui_strings(edition)
 
 
+def _is_landscape(path: Path | None) -> bool:
+    dims = _figure_img_dims(path)
+    if not dims:
+        return False
+    w, h = dims
+    return w > h
+
+
 def place_figure_layout_css(*, compact: bool = False) -> str:
     """Shared CSS for place photo rows (pair / triple / stack)."""
     if compact:
@@ -75,6 +83,14 @@ def place_figure_layout_css(*, compact: bool = False) -> str:
   margin-left: auto; margin-right: auto; }}
 .place-fig--solo.place-fig--hi-res img {{ max-height: {hi_solo}; }}
 .place-fig--solo.place-fig--lo-res img {{ max-height: {lo_solo}; }}
+.place-fig--solo.place-fig--landscape img {{
+  width: 100%; min-width: 100%; max-width: 100%;
+  height: auto; object-fit: contain;
+  margin-left: auto; margin-right: auto; }}
+.place-fig--solo.place-fig--landscape.place-fig--hi-res img {{
+  max-height: {hi_solo}; }}
+.place-fig--solo.place-fig--landscape.place-fig--lo-res img {{
+  max-height: {lo_solo}; }}
 .place-pdf-fig-row {{
   display: flex; flex-direction: row; flex-wrap: wrap;
   align-items: flex-end; justify-content: center;
@@ -324,6 +340,8 @@ def _figure_element(
     fig_cls = "place-fig{}".format(_figure_res_class(path))
     if solo:
         fig_cls += " place-fig--solo"
+        if _is_landscape(path):
+            fig_cls += " place-fig--landscape"
     if img_extra.strip():
         fig_cls += " place-fig--row-sized"
     attrs = _figure_img_attrs(path)

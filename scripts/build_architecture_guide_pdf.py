@@ -757,14 +757,6 @@ h3 { font-size: 1.22rem; margin: 1.2rem 0 0.35rem; }
   line-height: 1.4; }
 """
     css += place_figure_layout_css()
-    if slug == "italian_architecture":
-        css += """
-.place-fig--solo img { width: 88%; min-width: 88%; }
-.place-fig--hi-res img { max-height: 62vh; }
-.place-fig--solo.place-fig--hi-res img { max-height: 62vh; }
-.place-fig--lo-res img { max-height: 38vh; }
-.place-fig--solo.place-fig--lo-res img { max-height: 38vh; }
-"""
     css += """
 img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
 .prose, .place-desc p { margin: 0.45rem 0; line-height: 1.5;

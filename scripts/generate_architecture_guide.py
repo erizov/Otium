@@ -99,10 +99,18 @@ def _ex_from_city(
     suffix: str,
 ) -> dict[str, Any]:
     city = str(city_row["city"])
+    raw_en = str(city_row.get("name_en") or "").strip()
+    name_en = raw_en
+    if not name_en or not name_en.isascii():
+        sub = str(city_row.get("subtitle_en") or "").strip()
+        if sub and sub.isascii():
+            name_en = sub
+        else:
+            name_en = ""
     return {
         "suffix": suffix,
         "name_ru": city_row["name_ru"],
-        "name_en": city_row["name_en"] or city_row["name_ru"],
+        "name_en": name_en,
         "year": city_row.get("year_built") or "",
         "city_ru": city_row.get("address") or city,
         "city_en": city_row.get("address") or city,
@@ -288,6 +296,7 @@ def _place_row(
         "slug": slug,
         "category": style_key,
         "name_ru": ex["name_ru"],
+        "name_en": str(ex.get("name_en") or "").strip(),
         "subtitle_en": ex["name_en"],
         "image_rel_path": rel,
         "image_source_url": ex.get("commons_url", ""),

@@ -34,7 +34,7 @@ class CityPlace(TypedDict, total=False):
 def _load_detail_slugs() -> dict[str, dict]:
     base = Path(__file__).parent
     merged: dict[str, dict] = {}
-    for path in sorted(base.glob("russian_arhitecture_place_details*.json")):
+    for path in sorted(base.glob("russian_architecture_place_details*.json")):
         blob = json.loads(path.read_text(encoding="utf-8"))
         merged.update(blob)
     return merged
@@ -59,12 +59,12 @@ def _merge_details(rows: list[dict]) -> list[dict]:
 
 
 def _load_places() -> list[CityPlace]:
-    path = Path(__file__).with_name("russian_arhitecture_places.json")
+    path = Path(__file__).with_name("russian_architecture_places.json")
     data_dir = Path(__file__).parent
     raw: list[dict] = json.loads(path.read_text(encoding="utf-8"))
-    raw.extend(load_pdf_expand_rows(data_dir, "russian_arhitecture"))
+    raw.extend(load_pdf_expand_rows(data_dir, "russian_architecture"))
     raw = _merge_details(raw)
     return cast(list[CityPlace], raw)
 
 
-RUSSIAN_ARHITECTURE_PLACES: list[CityPlace] = _load_places()
+RUSSIAN_ARCHITECTURE_PLACES: list[CityPlace] = _load_places()

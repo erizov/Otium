@@ -25,8 +25,41 @@ def test_place_figure_layout_css_uses_viewport_caps() -> None:
     assert "50vh" in css or "52vh" in css
     assert "42vh" in css
     assert "place-fig--hi-res" in css
+    assert "place-fig--landscape" in css
     compact = place_figure_layout_css(compact=True)
     assert "34vh" in compact
+
+
+def test_solo_landscape_figure_uses_full_width_class() -> None:
+    from pathlib import Path
+
+    from scripts.city_guide_place_figures import place_figures_layout_html
+
+    root = Path(__file__).resolve().parent
+    wide = root / "solo_wide.png"
+    tall = root / "solo_tall.png"
+    try:
+        from PIL import Image
+
+        Image.new("RGB", (1600, 900), "red").save(wide)
+        Image.new("RGB", (900, 1600), "blue").save(tall)
+        wide_html = place_figures_layout_html(
+            ["wide.jpg"],
+            "Wide Place",
+            "en",
+            image_paths=[wide],
+        )
+        tall_html = place_figures_layout_html(
+            ["tall.jpg"],
+            "Tall Place",
+            "en",
+            image_paths=[tall],
+        )
+        assert "place-fig--landscape" in wide_html
+        assert "place-fig--landscape" not in tall_html
+    finally:
+        wide.unlink(missing_ok=True)
+        tall.unlink(missing_ok=True)
 
 
 def test_pair_row_equal_height_styles() -> None:

@@ -5,6 +5,8 @@ from __future__ import annotations
 
 from typing import Any
 
+from russian_architecture.data.toc_name_overrides import TOC_NAME_OVERRIDES
+
 # slug -> (description_ru, description_en, history_ru, history_en,
 #          significance_ru, significance_en)
 _OVERRIDES: dict[str, tuple[str, str, str, str, str, str]] = {
@@ -222,22 +224,6 @@ _OVERRIDES: dict[str, tuple[str, str, str, str, str, str]] = {
         "Moscow neighbourhoods.",
         "Показатель эволюции типового жилищного строительства СССР.",
         "Shows the evolution of Soviet standard housing construction.",
-    ),
-    "panel_housing_cheremushki": (
-        "Микрорайон Черёмушки — один из первых крупных жилых массивов "
-        "Москвы, заложенный в эпоху массового панельного строительства.",
-        "The Cheryomushki district is one of Moscow's first large "
-        "housing estates of the panel-building era.",
-        "Строительство велось в 1956–1959 годах по генеральному "
-        "плану с квартальной застройкой, школами, магазинами и "
-        "транспортной инфраструктурой. Район стал образцом "
-        "комплексной застройки и символом решения жилищной проблемы "
-        "послевоенной столицы.",
-        "Built in 1956–1959 to a master plan with schools, shops and "
-        "transport links. The estate became a model of comprehensive "
-        "development and a symbol of post-war Moscow's housing drive.",
-        "Ранний эталон советского микрорайона.",
-        "An early model Soviet micro-district.",
     ),
     "post_constructivism_zil_palace": (
         "Дворец культуры ЗИЛ — монумент переходного периода от "
@@ -1187,41 +1173,7 @@ _OVERRIDES: dict[str, tuple[str, str, str, str, str, str]] = {
         "Europe's tallest building and a symbol of contemporary "
         "St Petersburg.",
     ),
-    "empire_moscow_libraries_0_2": (
-        "Российская государственная библиотека — крупнейшее "
-        "книгохранилище страны на Воздвиженке.",
-        "The Russian State Library is the country's largest "
-        "book repository on Vozdvizhenka Street.",
-        "Основана в 1862 году как Румянцевский музей; "
-        "главное здание на Воздвиженке возводилось в "
-        "1928–1958 годах. Фонды насчитывают более 47 млн "
-        "единиц хранения.",
-        "Founded in 1862 as the Rumyantsev Museum; the main "
-        "building on Vozdvizhenka was built between 1928 and "
-        "1958. Its collections hold more than 47 million items.",
-        "Национальное книгохранилище и памятник монументальной "
-        "архитектуры сталинского периода.",
-        "The national library and a monument of Stalin-era "
-        "monumental architecture.",
-    ),
-    "stalinist_neoclassicism_moscow_libraries_0_2": (
-        "Российская государственная библиотека — крупнейшее "
-        "книгохранилище страны на Воздвиженке.",
-        "The Russian State Library is the country's largest "
-        "book repository on Vozdvizhenka Street.",
-        "Основана в 1862 году как Румянцевский музей; "
-        "главное здание на Воздвиженке возводилось в "
-        "1928–1958 годах. Фонды насчитывают более 47 млн "
-        "единиц хранения.",
-        "Founded in 1862 as the Rumyantsev Museum; the main "
-        "building on Vozdvizhenka was built between 1928 and "
-        "1958. Its collections hold more than 47 million items.",
-        "Национальное книгохранилище и памятник монументальной "
-        "архитектуры сталинского периода.",
-        "The national library and a monument of Stalin-era "
-        "monumental architecture.",
-    ),
-    "soviet_neoclassicism_revival_moscow_libraries_0_2": (
+    "avant_garde_moscow_libraries_0_2": (
         "Российская государственная библиотека — крупнейшее "
         "книгохранилище страны на Воздвиженке.",
         "The Russian State Library is the country's largest "
@@ -1240,21 +1192,16 @@ _OVERRIDES: dict[str, tuple[str, str, str, str, str, str]] = {
     ),
 }
 
-_NAME_OVERRIDES: dict[str, tuple[str, str]] = {
-    "constructivism_moscow_buildings_32_2": (
-        "ДК имени Русакова",
-        "Rusakov Workers' Club",
-    ),
-    "avant_garde_moscow_buildings_32_2": (
-        "ДК имени Русакова",
-        "Rusakov Workers' Club",
-    ),
-}
+_NAME_OVERRIDES: dict[str, tuple[str, str]] = dict(TOC_NAME_OVERRIDES)
 
 _ADDRESS_OVERRIDES: dict[str, tuple[str, str]] = {
     "avant_garde_melnikov_house": (
         "ул. Кривоарбатский переулок, 10",
         "10 Krivoarbatsky Lane",
+    ),
+    "avant_garde_moscow_libraries_0_2": (
+        "ул. Воздвиженка, 3/5",
+        "3/5 Vozdvizhenka Street",
     ),
     "petrine_baroque_menshikov_palace_2": (
         "Университетская набережная, 15",
@@ -1307,6 +1254,7 @@ def apply_narrative_overrides(place: dict[str, Any]) -> dict[str, Any]:
     merged = dict(place)
     if name_pair:
         merged["name_ru"] = name_pair[0]
+        merged["name_en"] = name_pair[1]
         merged["subtitle_en"] = name_pair[1]
     if address_pair:
         merged["address"] = address_pair[0]

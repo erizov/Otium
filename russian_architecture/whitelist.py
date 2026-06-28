@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Image source URL checks for russian_arhitecture."""
+"""Image source URL checks for russian_architecture."""
 
 from __future__ import annotations
 

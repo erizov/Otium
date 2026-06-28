@@ -96,7 +96,6 @@ CITY_STYLE_POOL: dict[str, list[tuple[str, str]]] = {
         ("moscow", "moscow_places_of_worship_11"),
         ("moscow", "moscow_palaces_5"),
         ("spb", "mikhailovsky_castle"),
-        ("moscow", "moscow_libraries_0"),
         ("spb", "tauride_palace"),
         ("moscow", "moscow_railway_stations_4"),
     ],
@@ -157,6 +156,7 @@ CITY_STYLE_POOL: dict[str, list[tuple[str, str]]] = {
         ("moscow", "moscow_osobnjaki_20"),
     ],
     "avant_garde": [
+        ("moscow", "moscow_libraries_0"),
         ("moscow", "moscow_buildings_29"),
         ("moscow", "moscow_buildings_33"),
         ("moscow", "moscow_buildings_2"),

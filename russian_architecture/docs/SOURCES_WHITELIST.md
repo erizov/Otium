@@ -1,6 +1,6 @@
 # Allowed sources — Russian Architecture
 
-## Images (validated by validate_russian_arhitecture_sources.py)
+## Images (validated by validate_russian_architecture_sources.py)
 
 - https://upload.wikimedia.org/
 - https://commons.wikimedia.org/

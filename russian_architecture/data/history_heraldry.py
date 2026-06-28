@@ -11,7 +11,7 @@ from __future__ import annotations
 
 from typing import Any
 
-# image rel under russian_arhitecture/, captions, Commons URLs
+# image rel under russian_architecture/, captions, Commons URLs
 HISTORY_HERALDRY: tuple[dict[str, Any], ...] = (
     {
         "image": "images/history_coat_ivan3.png",
@@ -115,7 +115,7 @@ def history_coats_for_pdf() -> tuple[tuple[str, str, str], ...]:
 
 
 def history_heraldry_download_pairs() -> tuple[tuple[str, list[str]], ...]:
-    """(dest rel, source URLs) for ``download_russian_arhitecture_heraldry``."""
+    """(dest rel, source URLs) for ``download_russian_architecture_heraldry``."""
     pairs: list[tuple[str, list[str]]] = []
     for item in HISTORY_HERALDRY:
         image = str(item.get("image") or "").strip()

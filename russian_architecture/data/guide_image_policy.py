@@ -27,7 +27,7 @@ SINGLE_IMAGE_SLUGS: frozenset[str] = frozenset({
     "art_deco_moscow_buildings_30_2",
     "post_constructivism_moscow_buildings_30_2",
     "soviet_neoclassicism_revival_moscow_buildings_30_2",
-    "empire_moscow_libraries_0_2",
+    "avant_garde_moscow_libraries_0_2",
     "stalinist_neoclassicism_moscow_libraries_0_2",
     "soviet_neoclassicism_revival_moscow_libraries_0_2",
     "soviet_modernism_moscow_buildings_22_2",

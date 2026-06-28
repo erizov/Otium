@@ -9,6 +9,8 @@ EXCLUDED_CATALOG_SUFFIXES: frozenset[str] = frozenset({
     "zaryadye_park",
     "vdnh_pavilion_revival",
     "igumnov_house",
+    "postwar_kutuzovsky",
+    "cheremushki",
 })
 
 # Generated slug suffixes skipped after row assembly.
@@ -20,6 +22,9 @@ EXCLUDED_SLUG_SUFFIXES: frozenset[str] = frozenset({
     "eclecticism_igumnov_house",
     "pseudo_russian_moscow_palaces_2_2",
     "neo_eclectic_moscow_palaces_2_2",
+    "postwar_kutuzovsky",
+    "cheremushki",
+    "moscow_landmarks_7_2",
 })
 
 # (style_key, city, place_slug) tuples removed from CITY_STYLE_POOL fill.
@@ -47,6 +52,11 @@ EXCLUDED_POOL_ENTRIES: frozenset[tuple[str, str, str]] = frozenset({
     ("soviet_modernism", "moscow", "moscow_landmarks_4"),
     ("contemporary", "moscow", "moscow_landmarks_4"),
     ("regional_soviet", "novosibirsk", "novosibirsk_business_centre"),
+    ("panel_housing", "moscow", "moscow_landmarks_7"),
+    ("brutalism", "moscow", "moscow_landmarks_7"),
+    ("empire", "moscow", "moscow_libraries_0"),
+    ("stalinist_neoclassicism", "moscow", "moscow_libraries_0"),
+    ("soviet_neoclassicism_revival", "moscow", "moscow_libraries_0"),
 })
 
 
