@@ -25,15 +25,15 @@ BUILDING_IMAGE_DOWNLOADS: dict[str, str] = {
     "cosmos_pavilion_3.jpg": "https://live.staticflickr.com/596/21266564072_1cb721705b_b.jpg",
     "cosmos_pavilion_4.jpg": "https://upload.wikimedia.org/wikipedia/commons/e/e2/%D0%9F%D0%B0%D0%B2%D0%B8%D0%BB%D1%8C%D0%BE%D0%BD_%D0%9A%D0%BE%D1%81%D0%BC%D0%BE%D1%81_%D0%92%D0%94%D0%9D%D0%A5.jpg",
     "dom_nab_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Moscow_HouseOnEmbankment_6495.jpg/500px-Moscow_HouseOnEmbankment_6495.jpg",
-    "dom_nab_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Moscow_HouseOnEmbankment_6495.jpg/500px-Moscow_HouseOnEmbankment_6495.jpg",
+    "dom_nab_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/c/c4/%22%D0%94%D0%BE%D0%BC_%D0%BD%D0%B0_%D0%BD%D0%B0%D0%B1%D0%B5%D1%80%D0%B5%D0%B6%D0%BD%D0%BE%D0%B9%22._Moscow%2C_Russia._-_panoramio.jpg",
     "dom_nab_3.jpg": "https://upload.wikimedia.org/wikipedia/commons/c/c4/%22%D0%94%D0%BE%D0%BC_%D0%BD%D0%B0_%D0%BD%D0%B0%D0%B1%D0%B5%D1%80%D0%B5%D0%B6%D0%BD%D0%BE%D0%B9%22._Moscow%2C_Russia._-_panoramio.jpg",
     "dom_nab_4.jpg": "https://live.staticflickr.com/764/20914191768_0b2f9fea57_b.jpg",
     "dom_soyuzov_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Moscow_-_2025_-_House_of_Unions%2C_side_view.jpg/500px-Moscow_-_2025_-_House_of_Unions%2C_side_view.jpg",
     "dom_soyuzov_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Moscow_-_2025_-_House_of_Unions%2C_side_view.jpg/500px-Moscow_-_2025_-_House_of_Unions%2C_side_view.jpg",
     "dom_soyuzov_3.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Moscow_-_2025_-_House_of_Unions%2C_side_view.jpg/960px-Moscow_-_2025_-_House_of_Unions%2C_side_view.jpg",
     "dom_soyuzov_4.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Moscow_-_2025_-_House_of_Unions%2C_side_view.jpg/1280px-Moscow_-_2025_-_House_of_Unions%2C_side_view.jpg",
-    "duma_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Building_of_Council_of_Labor_and_Defense%2C_Moscow.jpg/500px-Building_of_Council_of_Labor_and_Defense%2C_Moscow.jpg",
-    "duma_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Building_of_Council_of_Labor_and_Defense%2C_Moscow.jpg/500px-Building_of_Council_of_Labor_and_Defense%2C_Moscow.jpg",
+    "duma_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/4/4f/Moscow_-_2025_-_Okhotny_Ryad_Street.jpg",
+    "duma_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/4/40/Building_of_Council_of_Labor_and_Defense%2C_Moscow.jpg",
     "duma_3.jpg": "https://live.staticflickr.com/3013/2983650482_ae7b60f324_b.jpg",
     "duma_4.jpg": "https://upload.wikimedia.org/wikipedia/commons/e/e0/%D0%93%D0%BE%D1%81%D1%83%D0%B4%D0%B0%D1%80%D1%81%D1%82%D0%B2%D0%B5%D0%BD%D0%BD%D0%B0%D1%8F_%D0%B4%D1%83%D0%BC%D0%B0_%D0%A4%D0%B5%D0%B4%D0%B5%D1%80%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%B3%D0%BE_%D0%A1%D0%BE%D0%B1%D1%80%D0%B0%D0%BD%D0%B8%D1%8F_%D0%A0%D0%BE%D1%81%D1%81%D0%B8%D0%B9%D1%81%D0%BA%D0%BE%D0%B9_%D0%A4%D0%B5%D0%B4%D0%B5%D1%80%D0%B0%D1%86%D0%B8%D0%B8_VI_%D1%81%D0%BE%D0%B7%D1%8B%D0%B2%D0%B0.svg",
     "english_court_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Old_English_Court_in_Moscow_1.jpg/500px-Old_English_Court_in_Moscow_1.jpg",
@@ -166,8 +166,14 @@ BUILDING_IMAGE_DOWNLOADS: dict[str, str] = {
     "severny_rechnoy_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Ostankino_Tower.jpg/500px-Ostankino_Tower.jpg",
     "severny_rechnoy_3.jpg": "https://upload.wikimedia.org/wikipedia/commons/7/78/Moscow_North_River_Terminal_%2828-06-2015%29_2.JPG",
     "severny_rechnoy_4.jpg": "https://upload.wikimedia.org/wikipedia/commons/1/13/%D0%A1%D0%B5%D0%B2%D0%B5%D1%80%D0%BD%D1%8B%D0%B9_%D1%80%D0%B5%D1%87%D0%BD%D0%BE%D0%B9_%D0%B2%D0%BE%D0%BA%D0%B7%D0%B0%D0%BB._%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0._%D0%A0%D0%BE%D1%81%D1%81%D0%B8%D1%8F.jpg",
-    "sovetskaya_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Ostankino_Tower.jpg/500px-Ostankino_Tower.jpg",
-    "sovetskaya_2.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Ostankino_Tower.jpg/500px-Ostankino_Tower.jpg",
+    "sovetskaya_1.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/9/95/"
+        "Sovietsky_Hotel.jpg"
+    ),
+    "sovetskaya_2.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/1/14/"
+        "Moscow_-_Hotel_Sovietskaya_01.jpg"
+    ),
     "sovetskaya_3.jpg": "https://upload.wikimedia.org/wikipedia/commons/9/93/%D0%9B%D0%B5%D1%80%D0%BC%D0%BE%D0%BD%D1%82%D0%BE%D0%B2%D1%81%D0%BA%D0%B8%D0%B9_%D0%BF%D1%80%D0%BE%D1%81%D0%BF%D0%B5%D0%BA%D1%82._%D0%91%D1%8B%D0%B2%D1%88%D0%B0%D1%8F_%D0%B3%D0%BE%D1%81%D1%82%D0%B8%D0%BD%D0%B8%D1%86%D0%B0_%22%D0%A1%D0%BE%D0%B2%D0%B5%D1%82%D1%81%D0%BA%D0%B0%D1%8F%22._-_panoramio.jpg",
     "sovetskaya_4.jpg": "https://images.pexels.com/photos/13710654/pexels-photo-13710654.jpeg",
     "spasskaya_1.jpg": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Spasskaya_tower_in_moscow_kremlin_01.jpg/500px-Spasskaya_tower_in_moscow_kremlin_01.jpg",

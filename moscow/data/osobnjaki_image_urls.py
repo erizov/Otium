@@ -53,7 +53,10 @@ OSOBNJAKI_IMAGE_DOWNLOADS: dict[str, str] = {
     ),
     "pashkov_4.jpg": "https://cdn.culture.ru/c/264268.800x600.jpg",
     "vasnetsov_1.jpg": _VASNETSOV,
-    "vasnetsov_2.jpg": _VASNETSOV,
+    "vasnetsov_2.jpg": (
+        "https://upload.wikimedia.org/wikipedia/commons/4/4d/"
+        "Vasnetsov_house_in_Moscow_01.jpg"
+    ),
     "vasnetsov_3.jpg": _VASNETSOV,
     "vasnetsov_4.jpg": _VASNETSOV,
     "chaliapin_1.jpg": (
