@@ -310,8 +310,10 @@ STYLE_EXAMPLES: dict[str, list[dict[str, Any]]] = {
             history_ru="Часть ансамбля EUR.", history_en="Part of EUR ensemble.",
             significance_ru="Классицизм и модерн.", significance_en="Classicism and modernity."),
         _ex("mattatoio", "Бойни", "Mattatoio", year="1890", city_ru="Рим", city_en="Rome",
-            history_ru="Перестроен в культурный центр.", history_en="Converted to cultural centre.",
-            significance_ru="Адаптивное использование.", significance_en="Adaptive reuse."),
+            history_ru="Кирпичные павильоны перестроены под культуру.",
+            history_en="Brick pavilions were converted for culture.",
+            significance_ru="Адаптивное использование индустриального наследия.",
+            significance_en="Adaptive reuse of industrial heritage."),
     ],
     "postwar_modern": [
         _ex("torre_velasca", "Торре Веласка", "Torre Velasca", year="1958", city_ru="Милан", city_en="Milan",

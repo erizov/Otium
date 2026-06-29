@@ -461,12 +461,6 @@ _SUPPLEMENTS: dict[str, tuple[str, str, str, str]] = {
         "Напоминание о политической архитектуре эпохи.",
         "Reminder of the era's political architecture.",
     ),
-    "fascist_rationalism_mattatoio": (
-        "Кирпичные павильоны перестроены под культуру.",
-        "Brick pavilions were converted for culture.",
-        "Адаптивное использование индустриального наследия.",
-        "Adaptive reuse of industrial heritage.",
-    ),
     "postwar_modern_galfa": (
         "Башня доминирует над миланским Corso Como.",
         "The tower dominates Milan's Corso Como.",
@@ -574,12 +568,6 @@ _SUPPLEMENTS: dict[str, tuple[str, str, str, str]] = {
         "Classical motifs are reinterpreted on the façade.",
         "Неоклассический постмодерн Милана.",
         "Milan's neoclassical postmodern turn.",
-    ),
-    "postmodern_tendenza_celtic": (
-        "Павильон демонстрировал кельтское искусство на Биеннале.",
-        "The pavilion presented Celtic art at the Biennale.",
-        "Постмодернистский временный павильон в Гиардини.",
-        "Postmodern temporary pavilion in the Giardini.",
     ),
     "postmodern_tendenza_church_resurrection": (
         "Приходской храм объединяет традицию и новые формы.",

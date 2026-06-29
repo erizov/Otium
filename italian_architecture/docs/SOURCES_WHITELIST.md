@@ -5,6 +5,9 @@
 - https://upload.wikimedia.org/
 - https://commons.wikimedia.org/
 - https://live.staticflickr.com/
+- https://i.pinimg.com/
+- https://avatars.mds.yandex.net/
+- https://www.sardegnaturismo.it/
 
 ## Facts
 

@@ -55,11 +55,6 @@ IMAGE_URL_OVERRIDES: dict[str, tuple[str, str | None]] = {
         "Via_dell%27ariento%2C_mercato_centrale_01.jpg",
         None,
     ),
-    "neoclassicism_florence_piazza_massimo_azeglio_2": (
-        "https://upload.wikimedia.org/wikipedia/commons/6/6c/"
-        "Firenze_-_Florence_-_Piazza_Massimo_d%27Azeglio_-_View_South.jpg",
-        None,
-    ),
     "romantic_eclectic_stazione_milano": (
         "https://upload.wikimedia.org/wikipedia/commons/6/60/"
         "Upper_front_facade_of_Milano_Stazione_Centrale.jpg",
@@ -93,8 +88,8 @@ IMAGE_URL_OVERRIDES: dict[str, tuple[str, str | None]] = {
         None,
     ),
     "fascist_rationalism_mattatoio": (
-        "https://upload.wikimedia.org/wikipedia/commons/0/08/"
-        "Mattatoio_Testaccio_%28Rome%29_10.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/3/38/"
+        "Mattatoio_Testaccio_%28Rome%29_24.jpg",
         None,
     ),
     "fascist_rationalism_eur": (
@@ -113,9 +108,9 @@ IMAGE_URL_OVERRIDES: dict[str, tuple[str, str | None]] = {
         None,
     ),
     "brutalism_university_cagliari": (
-        "https://upload.wikimedia.org/wikipedia/commons/7/7f/"
-        "Biblioteca_Facolt%C3%A0_di_Ingegneria%2C_Universit%C3%A0_"
-        "degli_studi_di_Cagliari.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/1/1f/"
+        "Cagliari%2C_palazzo_dell%27universit%C3%A0%2C_biblioteca%2C_"
+        "sala_settecentesca_03.jpg",
         None,
     ),
     "brutalism_church_longarone": (
@@ -129,8 +124,8 @@ IMAGE_URL_OVERRIDES: dict[str, tuple[str, str | None]] = {
         None,
     ),
     "brutalism_church_autostrada_brut": (
-        "https://upload.wikimedia.org/wikipedia/commons/2/2f/"
-        "Chiesa_dell%27Autostrada_del_Sole%2C_vista_dal_ponte.jpg",
+        "https://avatars.mds.yandex.net/i?id="
+        "b3216ffcad6370b97c8948c2dfca03d1-4011440-images-thumbs&n=13",
         None,
     ),
     "postmodern_tendenza_museum_modena": (
@@ -159,9 +154,14 @@ IMAGE_URL_OVERRIDES: dict[str, tuple[str, str | None]] = {
         "WLM-IT_Monumento_Resistenza%2C_Cuneo.jpg",
         None,
     ),
-    "postmodern_tendenza_celtic": (
-        "https://upload.wikimedia.org/wikipedia/commons/2/27/"
-        "N_cubed%2C_by_Tom_de_Paor.jpg",
+    "rationalism_colonia_montecatini": (
+        "https://i.pinimg.com/originals/b1/e5/a8/"
+        "b1e5a8bc3c345ffc4d8a5220b57f4f07.png",
+        None,
+    ),
+    "rationalism_santelia": (
+        "https://upload.wikimedia.org/wikipedia/commons/3/34/"
+        "Sant%27Elia_Monumento_ai_Caduti.jpg",
         None,
     ),
     "contemporary_snfcc": (

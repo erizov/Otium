@@ -7,6 +7,7 @@ EXCLUDED_CATALOG_SUFFIXES: frozenset[str] = frozenset({
     "bora_bora",
     "stazione_napoli",
     "palazzo_binder",
+    "celtic",
 })
 
 EXCLUDED_SLUG_SUFFIXES: frozenset[str] = frozenset({
@@ -14,10 +15,13 @@ EXCLUDED_SLUG_SUFFIXES: frozenset[str] = frozenset({
     "postmodern_tendenza_bora_bora",
     "liberty_stazione_napoli",
     "mannerism_palazzo_binder",
+    "neoclassicism_florence_piazza_massimo_azeglio_2",
+    "postmodern_tendenza_celtic",
 })
 
 EXCLUDED_POOL_ENTRIES: frozenset[tuple[str, str, str]] = frozenset({
     ("palladian_venetian", "venice", "venice_lido_di_venezia"),
+    ("neoclassicism", "florence", "florence_piazza_massimo_azeglio"),
 })
 
 
