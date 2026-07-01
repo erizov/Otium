@@ -437,12 +437,75 @@ MODULE_KEYWORDS: dict[str, dict[str, tuple[str, ...]]] = {
     "italian_architecture": ITALIAN_KEYWORDS,
     "french_architecture": FRENCH_KEYWORDS,
     "spanish_architecture": SPANISH_KEYWORDS,
+    "german_architecture": {
+        "roman_germania": ("roman", "trier", "nimes", "colonia"),
+        "romanesque": ("romanesque", "speyer", "mainz"),
+        "gothic": ("gothic", "cathedral", "dom"),
+        "renaissance": ("renaissance", "heidelberg"),
+        "baroque": ("baroque", "wurzburg", "schonbrunn"),
+        "rococo": ("rococo", "wieskirche", "zwinger"),
+        "neoclassicism": ("neoclassic", "schinkel", "brandenburg"),
+        "historicism": ("historicist", "neuschwanstein", "reichstag"),
+        "art_nouveau": ("jugendstil", "art nouveau", "secession"),
+        "modernism": ("modernist", "behrens", "gropius"),
+        "bauhaus": ("bauhaus",),
+        "expressionism": ("expressionist", "chilehaus"),
+        "nazi_monumental": ("olympic", "tempelhof", "nuremberg"),
+        "postwar_modern": ("post-war", "scharoun", "hansaviertel"),
+        "brutalism": ("brutalist", "brutalism"),
+        "contemporary": ("contemporary", "libeskind", "elbe"),
+    },
+    "english_architecture": {
+        "roman_britain": ("roman", "bath", "hadrian"),
+        "norman": ("norman", "durham", "tower of london"),
+        "english_gothic": ("gothic", "westminster", "minster"),
+        "tudor": ("tudor", "hampton", "timber"),
+        "elizabethan_jacobean": ("jacobean", "elizabethan", "hatfield"),
+        "palladian_wren": ("wren", "palladian", "st paul"),
+        "georgian": ("georgian", "crescent", "terrace"),
+        "regency": ("regency", "brighton", "nash"),
+        "victorian": ("victorian", "pugin", "barry"),
+        "arts_crafts": ("arts and crafts", "morris", "webb"),
+        "edwardian": ("edwardian",),
+        "art_deco": ("art deco",),
+        "modernism": ("modernist", "festival", "barbican"),
+        "brutalism": ("brutalist", "brutalism", "trellick"),
+        "contemporary": ("contemporary", "foster", "rogers", "shard"),
+    },
+    "american_architecture": {
+        "colonial_americas": ("colonial", "mission", "spanish"),
+        "federal": ("federal", "capitol", "monticello"),
+        "greek_revival": ("greek revival", "doric"),
+        "gothic_revival": ("gothic revival", "neo-gothic"),
+        "victorian_americas": ("victorian", "second empire"),
+        "chicago_school": ("chicago school", "skyscraper", "sullivan"),
+        "beaux_arts": ("beaux-arts", "beaux arts", "grand central"),
+        "prairie_style": ("prairie", "wright", "frank lloyd"),
+        "art_deco_americas": ("art deco", "chrysler", "empire state"),
+        "international_style": ("international style", "mies", "lever house"),
+        "midcentury_modern": ("mid-century", "midcentury", "eames"),
+        "brutalism_americas": ("brutalist", "brutalism", "habitat"),
+        "postmodern": ("postmodern", "graves", "johnson"),
+        "latin_colonial_baroque": ("colonial baroque", "quito", "taxco"),
+        "latin_modernism": ("niemeyer", "barragan", "brasilia"),
+        "contemporary_americas": ("contemporary", "gehry", "calatrava"),
+    },
 }
 
 MODULE_CITIES: dict[str, tuple[str, ...]] = {
     "italian_architecture": ("rome", "florence", "venice"),
     "french_architecture": ("paris",),
     "spanish_architecture": ("madrid", "barcelona", "lisbon"),
+    "german_architecture": ("berlin", "vienna"),
+    "english_architecture": ("london", "boston", "philadelphia"),
+    "american_architecture": (
+        "new_york",
+        "boston",
+        "philadelphia",
+        "los_angeles",
+        "san_francisco",
+        "montreal",
+    ),
 }
 
 
@@ -663,6 +726,24 @@ HISTORICAL_TEXTS: dict[str, tuple[str, str]] = {
         "Bilbao.\n\n"
         "This guide covers Spain and Portugal in chronological chapters "
         "with building examples and brief notes.",
+    ),
+    "german_architecture": (
+        "От римских ворот Трира до Баухауса и Эльбфилармонии — "
+        "хронология немецкой архитектуры в главах по стилям.",
+        "From Trier's Roman gates to the Bauhaus and Elbphilharmonie — "
+        "German architecture in chronological style chapters.",
+    ),
+    "english_architecture": (
+        "От римского Бата до Шарда — английская архитектура "
+        "в хронологических главах с примерами зданий.",
+        "From Roman Bath to the Shard — English architecture in "
+        "chronological chapters with building examples.",
+    ),
+    "american_architecture": (
+        "От колониальных миссий до музеев Гери — архитектура "
+        "Северной и Южной Америки в хронологических главах.",
+        "From colonial missions to Gehry museums — architecture of "
+        "the Americas in chronological chapters.",
     ),
 }
 

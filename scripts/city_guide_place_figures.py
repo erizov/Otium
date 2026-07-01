@@ -22,6 +22,7 @@ _ROW_VIEWPORT_W_PX = 1000
 _ROW_BODY_MARGIN_PX = 32
 _ROW_CONTENT_W_PX = _ROW_VIEWPORT_W_PX - 2 * _ROW_BODY_MARGIN_PX
 _ROW_GAP_PX = 12
+_PAIR_ROW_HEIGHT_SCALE = 1.35
 _SOLO_MIN_WIDTH_PCT = 70
 _ROW_IMG_STYLE = (
     ' style="height: {0}px; max-height: {0}px; width: auto; '
@@ -57,13 +58,13 @@ def place_figure_layout_css(*, compact: bool = False) -> str:
         lo_triple = "14vh"
     else:
         solo = "48vh"
-        pair = "44vh"
+        pair = "54vh"
         triple = "30vh"
         hi_solo = "52vh"
-        hi_pair = "52vh"
+        hi_pair = "62vh"
         hi_triple = "42vh"
         lo_solo = "30vh"
-        lo_pair = "26vh"
+        lo_pair = "32vh"
         lo_triple = "18vh"
     return """
 .place-fig {{ page-break-inside: avoid; break-inside: avoid-page;
@@ -236,11 +237,11 @@ def _row_max_height_px(
     tier_longest = _row_tier_longest(paths)
     if row_kind == "pair":
         if tier_longest >= _HI_RES_MIN_PX:
-            vh = 34.0 if compact else 52.0
+            vh = 34.0 if compact else 62.0
         elif tier_longest > 0 and tier_longest <= _LO_RES_MAX_PX:
-            vh = 18.0 if compact else 26.0
+            vh = 18.0 if compact else 32.0
         else:
-            vh = 30.0 if compact else 46.0
+            vh = 30.0 if compact else 56.0
     else:
         if tier_longest >= _HI_RES_MIN_PX:
             vh = 28.0 if compact else 42.0
@@ -401,13 +402,17 @@ def place_figure_row_html(
             row_path_list.append(_path_at(image_paths, idx0))
     img_extras: list[str]
     if len(img_slice) >= 2:
-        scale = row_height_scale if row_kind in ("triple", "many") else 1.0
-        if row_kind in ("triple", "many"):
+        if row_kind == "pair":
+            scale = _PAIR_ROW_HEIGHT_SCALE
+        elif row_kind in ("triple", "many"):
+            scale = row_height_scale
             from scripts.smolensk_guide_image_layout import (
                 resolve_triple_row_height_scale,
             )
 
             scale = resolve_triple_row_height_scale(scale)
+        else:
+            scale = 1.0
         img_extras = row_equal_img_styles(
             row_path_list,
             row_kind=row_kind,

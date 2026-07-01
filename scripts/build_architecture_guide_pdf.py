@@ -757,6 +757,13 @@ h3 { font-size: 1.22rem; margin: 1.2rem 0 0.35rem; }
   line-height: 1.4; }
 """
     css += place_figure_layout_css()
+    try:
+        gp = importlib.import_module(
+            "{}.data.guide_image_policy".format(ctx.parts.cfg.slug),
+        )
+        css += getattr(gp, "large_solo_image_css", lambda: "")()
+    except ImportError:
+        pass
     css += """
 img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
 .prose, .place-desc p { margin: 0.45rem 0; line-height: 1.5;

@@ -498,12 +498,46 @@ def _override_primary_too_small(
         return False
 
 
+def _commons_only_urls(
+    parts: ArchitectureGuideParts,
+    row: dict[str, Any],
+    slug_city: str,
+) -> list[str]:
+    """Collect only Wikimedia Commons URLs for a place."""
+    seen: set[str] = set()
+    out: list[str] = []
+
+    def _add(url: str) -> None:
+        u = _wikimedia_url(url) or (
+            url.strip()
+            if "upload.wikimedia.org" in url.lower()
+            else ""
+        )
+        if not _is_usable_url(u) or u in seen or parts.url_is_banned(u):
+            return
+        seen.add(u)
+        out.append(u)
+
+    catalog_url = str(row.get("image_source_url") or "").strip()
+    if catalog_url:
+        _add(catalog_url)
+    if out:
+        return out
+    query = _search_query(row)
+    if query:
+        found = _commons_url_for_query(query, slug_city)
+        if found:
+            _add(found)
+    return out
+
+
 def resolve_images(
     project_root: Path,
     parts: ArchitectureGuideParts,
     *,
     commons_delay: float = 4.0,
     copy_only: bool = False,
+    commons_only: bool = False,
     retries_429: int = 5,
     pause_429_sec: float = 45.0,
     commons_api_gap: float = 2.5,
@@ -530,6 +564,8 @@ def resolve_images(
         "second_copied": 0,
         "second_downloaded": 0,
         "second_commons": 0,
+        "commons_attempted": 0,
+        "commons_failed": 0,
     }
     rows, _gen_stats = generate_places(project_root, parts, link_images=False)
 
@@ -616,22 +652,22 @@ def resolve_images(
                 city_row = index.get("{}:{}".format(city, place_slug))
                 if city_row and _city_image_usable(parts, city_row):
                     rel = str(city_row.get("image_rel_path") or "")
-                    if rel and parts.copy_city_image(
-                        project_root,
-                        guide_root,
-                        city,
-                        rel,
-                        dest_rel,
-                    ):
-                        if _clear_banned_dest(parts, guide_root, dest_rel):
-                            copied = True
-                            stats["copied_city"] += 1
-                            resolved_url = _wikimedia_url(
-                                str(city_row.get("image_source_url") or ""),
-                            )
-                        else:
-                            copied = False
-            if not copied and not url_override:
+                    city_url = str(city_row.get("image_source_url") or "")
+                    if not commons_only or _wikimedia_url(city_url):
+                        if rel and parts.copy_city_image(
+                            project_root,
+                            guide_root,
+                            city,
+                            rel,
+                            dest_rel,
+                        ):
+                            if _clear_banned_dest(parts, guide_root, dest_rel):
+                                copied = True
+                                stats["copied_city"] += 1
+                                resolved_url = _wikimedia_url(city_url)
+                            else:
+                                copied = False
+            if not copied and not url_override and not commons_only:
                 reuse = str(row.get("_reuse_from") or "").strip()
                 if reuse and "/" in reuse:
                     city = reuse.split("/", 1)[0]
@@ -650,6 +686,13 @@ def resolve_images(
                             copied = False
             if not copied and not url_override:
                 match = _match_by_name(str(row.get("name_ru") or ""), index)
+                if match and match.get("image_rel_path") and _city_image_usable(
+                    parts,
+                    match,
+                ):
+                    match_url = str(match.get("image_source_url") or "")
+                    if commons_only and not _wikimedia_url(match_url):
+                        match = None
                 if match and match.get("image_rel_path") and _city_image_usable(
                     parts,
                     match,
@@ -673,13 +716,17 @@ def resolve_images(
 
             if not copied and not copy_only:
                 slug_city = _city_slug_from_row(parts, row)
-                catalog_url = str(row.get("image_source_url") or "").strip()
-                alt_urls = _candidate_image_urls(
-                    parts,
-                    row,
-                    slug_city=slug_city,
-                    whitelist_path=whitelist_path,
-                )
+                if commons_only:
+                    alt_urls = _commons_only_urls(parts, row, slug_city)
+                    stats["commons_attempted"] += 1
+                else:
+                    catalog_url = str(row.get("image_source_url") or "").strip()
+                    alt_urls = _candidate_image_urls(
+                        parts,
+                        row,
+                        slug_city=slug_city,
+                        whitelist_path=whitelist_path,
+                    )
                 if alt_urls:
                     got = _download_first_url(
                         parts,
@@ -692,13 +739,17 @@ def resolve_images(
                     if got:
                         resolved_url = got
                         copied = True
-                        if got == catalog_url:
+                        if commons_only:
+                            stats["commons_ok"] += 1
+                        elif got == str(row.get("image_source_url") or "").strip():
                             stats["catalog_url"] += 1
                         else:
                             stats["alt_source"] += 1
+                    elif commons_only:
+                        stats["commons_failed"] += 1
                     time.sleep(commons_delay)
 
-                if not copied:
+                if not copied and not commons_only:
                     query = _search_query(row)
                     resolved_url = _commons_url_for_query(query, slug_city)
                     if resolved_url:
@@ -762,6 +813,7 @@ def _run(
     *,
     commons_delay: float,
     copy_only: bool,
+    commons_only: bool,
     retries_429: int,
     pause_429_sec: float,
     commons_api_gap: float,
@@ -773,6 +825,7 @@ def _run(
         parts,
         commons_delay=commons_delay,
         copy_only=copy_only,
+        commons_only=commons_only,
         retries_429=retries_429,
         pause_429_sec=pause_429_sec,
         commons_api_gap=commons_api_gap,
@@ -792,6 +845,7 @@ def _run(
     print(
         "Images: already={}, copied_city={}, catalog_url={}, "
         "alt_source={}, commons_ok={}, missing={}, "
+        "commons_attempted={}, commons_failed={}, "
         "second_copied={}, second_downloaded={}, second_commons={}".format(
             stats["already"],
             stats["copied_city"],
@@ -799,12 +853,14 @@ def _run(
             stats["alt_source"],
             stats["commons_ok"],
             stats["missing"],
+            stats.get("commons_attempted", 0),
+            stats.get("commons_failed", 0),
             stats["second_copied"],
             stats["second_downloaded"],
             stats["second_commons"],
         ),
     )
-    return 0 if stats["missing"] == 0 else 1
+    return 0 if stats["missing"] == 0 or commons_only else 1
 
 
 def main(module: str | None = None) -> int:
@@ -852,6 +908,11 @@ def main(module: str | None = None) -> int:
         help="Base sleep after HTTP 429 (default 45s).",
     )
     parser.add_argument(
+        "--commons-only",
+        action="store_true",
+        help="Use only Wikimedia Commons URLs (no Wikipedia/Pixabay/etc.)",
+    )
+    parser.add_argument(
         "--copy-only",
         action="store_true",
         help="Only copy from city guides; skip remote downloads",
@@ -867,6 +928,7 @@ def main(module: str | None = None) -> int:
         args.project_root,
         commons_delay=args.commons_delay,
         copy_only=args.copy_only,
+        commons_only=args.commons_only,
         retries_429=args.retries_429,
         pause_429_sec=args.pause_429,
         commons_api_gap=args.commons_api_gap,

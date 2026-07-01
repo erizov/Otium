@@ -66,6 +66,40 @@ MODULES: dict[str, ArchitectureGuideModule] = {
         city_roots=("madrid", "barcelona", "lisbon"),
         single_image_only=True,
     ),
+    "german_architecture": ArchitectureGuideModule(
+        slug="german_architecture",
+        places_json="german_architecture_places.json",
+        places_registry_attr="GERMAN_ARCHITECTURE_PLACES",
+        title_ru="Немецкая архитектура",
+        title_en="German Architecture",
+        city_roots=("berlin", "vienna"),
+        single_image_only=True,
+    ),
+    "english_architecture": ArchitectureGuideModule(
+        slug="english_architecture",
+        places_json="english_architecture_places.json",
+        places_registry_attr="ENGLISH_ARCHITECTURE_PLACES",
+        title_ru="Английская архитектура",
+        title_en="English Architecture",
+        city_roots=("london", "boston", "philadelphia"),
+        single_image_only=True,
+    ),
+    "american_architecture": ArchitectureGuideModule(
+        slug="american_architecture",
+        places_json="american_architecture_places.json",
+        places_registry_attr="AMERICAN_ARCHITECTURE_PLACES",
+        title_ru="Американская архитектура (обе Америки)",
+        title_en="American Architecture (Both Continents)",
+        city_roots=(
+            "new_york",
+            "boston",
+            "philadelphia",
+            "los_angeles",
+            "san_francisco",
+            "montreal",
+        ),
+        single_image_only=True,
+    ),
 }
 
 

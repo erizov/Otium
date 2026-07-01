@@ -1119,7 +1119,7 @@ def place_meta_line(
     location = pick_location_label(dict(place))
     if location:
         parts.append("{} {}".format(meta["location"], location))
-    address = pick_street_address(dict(place))
+    address = pick_street_address(dict(place), edition)
     if address:
         parts.append("{} {}".format(meta["address"], address))
     hours = pick_visit_hours(dict(place), edition)

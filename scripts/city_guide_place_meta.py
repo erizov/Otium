@@ -115,10 +115,20 @@ def pick_visit_hours(place: dict[str, Any], edition: str) -> str:
     return ""
 
 
-def pick_street_address(place: dict[str, Any]) -> str:
+def pick_street_address(
+    place: dict[str, Any],
+    edition: str = "ru",
+) -> str:
     """Street or postal address (not a metro line or monument square label)."""
     cat = place_category(place)
-    addr = str(place.get("address") or "").strip()
+    if edition == "en":
+        addr = str(
+            place.get("address_en") or place.get("address") or "",
+        ).strip()
+    else:
+        addr = str(
+            place.get("address") or place.get("address_en") or "",
+        ).strip()
     if not addr:
         return ""
     if cat == "metro" and _looks_like_metro_line(addr):
