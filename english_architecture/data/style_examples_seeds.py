@@ -102,6 +102,13 @@ STYLE_EXAMPLES: dict[str, list[dict[str, Any]]] = {
         _ex('middlesbrough_town', 'Ратуша Мидлсбро', 'Middlesbrough Town Hall', year='1883–1889', city_ru='Мидлсбро', city_en='Middlesbrough', history_ru='Викторианско-эдвардианская ратуша.', history_en='Victorian-Edwardian town hall.', commons_url=''),
         _ex('lloyds_register', "Lloyd's Register", "Lloyd's Register London", year='1901', city_ru='Лондон', city_en='London', history_ru='Купольный офис на Фенчёрч-стрит.', history_en='Domed office on Fenchurch Street.', commons_url=''),
     ],
+    "art_nouveau": [
+        _ex('queens_cross_church', 'Церковь Куинз-кросс', "Queen's Cross Church", year='1898–1899', city_ru='Глазго', city_en='Glasgow', history_ru='Церковь Чарльза Ренни Макинтоша.', history_en="Charles Rennie Mackintosh's church.", commons_url=''),
+        _ex('royal_arcade_norwich', 'Королевская аркада', 'Royal Arcade', year='1899', city_ru='Норвич', city_en='Norwich', history_ru='Стеклянная крытая галерея Джорджа Скиппера.', history_en="George Skipper's glazed shopping arcade.", commons_url=''),
+        _ex('everards_printing', 'Типография Эверарда', "Everard's Printing Works", year='1900–1901', city_ru='Бристоль', city_en='Bristol', history_ru='Керамический фасад Уильяма Нитби.', history_en="William Neatby's ceramic façade.", commons_url=''),
+        _ex('turkey_cafe', 'Кафе «Индюк»', 'The Turkey Café', year='1901', city_ru='Лестер', city_en='Leicester', history_ru='Декоративный фасад на Гранби-стрит.', history_en='Ornamental façade on Granby Street.', commons_url=''),
+        _ex('harrods_food_hall', 'Продовольственный зал Harrods', 'Harrods Food Hall', year='1901–1902', city_ru='Лондон', city_en='London', history_ru='Ар-нуво интерьер и кафе универмага.', history_en='Art Nouveau tiling in the department store.', commons_url=''),
+    ],
     "art_deco": [
         _ex('hoover', 'Здание Хувера', 'Hoover Building', year='1932–1938', city_ru='Лондон', city_en='London', history_ru='Белый фасад с зелёными деталями.', history_en='White façade with green trim.', commons_url=''),
         _ex('broadcasting_house', 'Broadcasting House', 'Broadcasting House', year='1932', city_ru='Лондон', city_en='London', history_ru='Штаб-квартира Би-би-си.', history_en='BBC headquarters.', commons_url=''),

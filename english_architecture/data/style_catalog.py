@@ -72,6 +72,12 @@ STYLE_META: dict[str, tuple[str, str, str, str]] = {
         "Лёгкая классика и барокко возрождения.",
         "Light classicism and Baroque Revival.",
     ),
+    "art_nouveau": (
+        "Ар-нуво (1890-е — 1914)",
+        "Art Nouveau (1890s–1914)",
+        "Изогнутые линии, цветная керамика и декоративные фасады.",
+        "Curving lines, glazed ceramics and ornamental façades.",
+    ),
     "art_deco": (
         "Ар-деко (1920–1939)",
         "Art Deco (1920–1939)",
@@ -112,6 +118,7 @@ STYLE_ORDER: tuple[str, ...] = (
     "victorian",
     "arts_crafts",
     "edwardian",
+    "art_nouveau",
     "art_deco",
     "modernism",
     "brutalism",

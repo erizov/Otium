@@ -13,6 +13,10 @@ Also allowed (CC / open licenses; subject filter applies):
 - https://geograph.org.uk/
 - https://live.staticflickr.com/
 - https://api.openverse.org/
+- https://wikiway.com/
+- https://www.malls.ru/
+- https://i.ytimg.com/
+- https://i.pinimg.com/
 
 ## Facts
 
